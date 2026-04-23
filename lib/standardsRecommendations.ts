@@ -1,0 +1,3 @@
+export function buildStandardsRecommendations(groups: any[]) {
+  return groups.map((group) => ({ standardCode: group.standardCode, standardLabel: group.standardLabel, title: `${group.standardCode} Intervention Set`, groupSize: group.students.length, focus: group.standardCode.includes("1.2.6.B") ? "Text evidence and inference" : "Central idea and summary", activityType: group.standardCode.includes("1.2.6.B") ? "EBSR + Hot Text" : "Main Idea + Multi-Select", estimatedMinutes: group.standardCode.includes("1.2.6.B") ? 20 : 15, recommendation: `Assign focused practice on ${group.standardCode}.` }));
+}

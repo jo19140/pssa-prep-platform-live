@@ -1,0 +1,3 @@
+export function buildScheduledGrowthEmail(data: any) {
+  return `Class Growth Report: ${data.className}\n\nAverage Growth: ${data.averageGrowth}\nImproved Students: ${data.improvedCount}\nFlat Students: ${data.flatCount}\nDeclined Students: ${data.declinedCount}\n\nTop Growth Students:\n${(data.topGrowthStudents || []).map((s: any) => `- ${s.studentName}: ${s.growthPoints ?? "N/A"}`).join("\n")}\n\nStudents Needing Support:\n${(data.stalledStudents || []).map((s: any) => `- ${s.studentName}: ${s.growthPoints ?? "N/A"}`).join("\n")}\n\nStandards Growth:\n${(data.standardsGrowthSummary || []).map((s: any) => `- ${s.standardCode}: ${s.averageGrowth >= 0 ? "+" : ""}${s.averageGrowth}`).join("\n")}`.trim();
+}

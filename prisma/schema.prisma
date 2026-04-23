@@ -1,0 +1,178 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id              String          @id @default(cuid())
+  email           String          @unique
+  passwordHash    String?
+  name            String
+  role            String
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+
+  teacherProfile  TeacherProfile?
+  studentProfile  StudentProfile?
+  parentProfile   ParentProfile?
+  sessions        TestSession[]
+  reportSchedules ReportSchedule[]
+}
+
+model TeacherProfile {
+  id         String      @id @default(cuid())
+  userId      String      @unique
+  schoolName  String
+  gradeBand   String?
+  user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  classes     ClassRoom[]
+
+  students StudentProfile[] @relation("TeacherStudents")
+}
+
+model StudentProfile {
+  id          String         @id @default(cuid())
+  userId      String         @unique
+  grade       Int
+  schoolName  String
+  teacherId   String?
+  user        User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  teacher     TeacherProfile? @relation("TeacherStudents", fields: [teacherId], references: [id])
+  enrollments Enrollment[]
+  parentLinks ParentStudentLink[]
+}
+
+model ParentProfile {
+  id          String             @id @default(cuid())
+  userId      String             @unique
+  phoneNumber String?
+  user        User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  children    ParentStudentLink[]
+}
+
+model ParentStudentLink {
+  id               String         @id @default(cuid())
+  parentProfileId  String
+  studentProfileId String
+  parentProfile    ParentProfile  @relation(fields: [parentProfileId], references: [id], onDelete: Cascade)
+  studentProfile   StudentProfile @relation(fields: [studentProfileId], references: [id], onDelete: Cascade)
+
+  @@unique([parentProfileId, studentProfileId])
+}
+
+model ClassRoom {
+  id           String       @id @default(cuid())
+  name         String
+  teacherId    String
+  grade        Int
+  createdAt    DateTime     @default(now())
+  teacher      TeacherProfile @relation(fields: [teacherId], references: [id], onDelete: Cascade)
+  enrollments  Enrollment[]
+  assignments  Assignment[]
+  schedules    ReportSchedule[]
+}
+
+model Enrollment {
+  id               String         @id @default(cuid())
+  classRoomId      String
+  studentProfileId String
+  classRoom        ClassRoom      @relation(fields: [classRoomId], references: [id], onDelete: Cascade)
+  studentProfile   StudentProfile @relation(fields: [studentProfileId], references: [id], onDelete: Cascade)
+
+  @@unique([classRoomId, studentProfileId])
+}
+
+model Assessment {
+  id          String        @id @default(cuid())
+  title       String
+  subject     String
+  state       String
+  grade       Int
+  isAdaptive  Boolean       @default(true)
+  createdAt   DateTime      @default(now())
+  assignments Assignment[]
+  sessions    TestSession[]
+}
+
+model Assignment {
+  id             String           @id @default(cuid())
+  assessmentId   String
+  classRoomId    String
+  assignedById   String
+  status         String  @default("DRAFT")
+  dueDate        DateTime?
+  createdAt      DateTime         @default(now())
+  standards      String
+  assignmentType String
+  assessment     Assessment       @relation(fields: [assessmentId], references: [id], onDelete: Cascade)
+  classRoom      ClassRoom        @relation(fields: [classRoomId], references: [id], onDelete: Cascade)
+}
+
+model TestSession {
+  id               String          @id @default(cuid())
+  userId           String
+  assessmentId     String
+  startedAt        DateTime        @default(now())
+  submittedAt      DateTime?
+  currentQuestionNo Int            @default(1)
+  scorePercent     Int?
+  totalPoints      Int?
+  earnedPoints     Int?
+  proficiencyBand  String?
+  user             User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  assessment       Assessment      @relation(fields: [assessmentId], references: [id], onDelete: Cascade)
+  responses        ResponseRecord[]
+  report           ReportSummary?
+}
+
+model ResponseRecord {
+  id               String      @id @default(cuid())
+  sessionId        String
+  questionId       Int
+  skill            String
+  standardCode     String
+  standardLabel    String
+  questionType     String
+  difficulty       Int
+  isCorrect        Boolean
+  scorePointsEarned Int
+  maxPoints        Int
+  errorPattern     String
+  timeSpentSec     Int
+  answerPayload    Json
+  createdAt        DateTime    @default(now())
+  session          TestSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+}
+
+model ReportSummary {
+  id               String      @id @default(cuid())
+  sessionId        String      @unique
+  percentScore     Int
+  performanceBand  String
+  strongestSkill   String?
+  weakestSkill     String?
+  summaryPayload   Json
+  createdAt        DateTime    @default(now())
+  growthFromPrevious Int?
+  previousReportId String?
+  session          TestSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+}
+
+model ReportSchedule {
+  id            String                  @id @default(cuid())
+  teacherUserId String
+  classRoomId   String?
+  frequency     String
+  sendDay       Int?
+  sendHour      Int                     @default(7)
+  isEnabled     Boolean                 @default(true)
+  reportType    String                  @default("GROWTH")
+  createdAt     DateTime                @default(now())
+  updatedAt     DateTime                @updatedAt
+  teacher       User                    @relation(fields: [teacherUserId], references: [id], onDelete: Cascade)
+  classRoom     ClassRoom?              @relation(fields: [classRoomId], references: [id], onDelete: Cascade)
+}

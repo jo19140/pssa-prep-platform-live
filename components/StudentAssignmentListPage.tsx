@@ -1,0 +1,4 @@
+"use client";
+export function StudentAssignmentListPage({ assignments, onOpen }: { assignments: any[]; onOpen: (assessmentId: string) => void; }) {
+  return <div className="rounded-3xl bg-white p-6 shadow"><h2 className="text-2xl font-bold">My Assignments</h2><div className="mt-5 space-y-3">{assignments.map((a) => <div key={a.assignmentId} className="flex items-center justify-between rounded-2xl border border-slate-200 p-4"><div><div className="font-semibold">{a.title}</div><div className="text-sm text-slate-500">{a.statusLabel}</div></div><button onClick={() => onOpen(a.assessmentId)} className="rounded-xl bg-slate-900 px-4 py-2 text-sm font-semibold text-white">{a.statusLabel === "Not Started" ? "Start" : a.statusLabel === "Completed" ? "Review" : "Resume"}</button></div>)}</div></div>;
+}
