@@ -1,7 +1,6 @@
 import "./globals.css";
 import type { ReactNode } from "react";
 import { Providers } from "@/components/Providers";
-import LogoutButton from "@/components/LogoutButton";
 
 export const metadata = {
   title: "PSSA Prep Platform",
@@ -15,7 +14,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <Providers>
           <div className="flex justify-between p-4 bg-gray-100">
             <h1 className="font-bold">PSSA Platform</h1>
-            <LogoutButton />
           </div>
 
           {children}
