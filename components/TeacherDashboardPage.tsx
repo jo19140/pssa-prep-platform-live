@@ -89,8 +89,40 @@ export default function TeacherDashboardPage() {
   const [difficulty, setDifficulty] = useState("On Grade Level");
   const [aiResult, setAIResult] = useState("");
   const [loadingAI, setLoadingAI] = useState(false);
- async function saveTest() {
-    alert("Saving test...");
+  const [savingTest, setSavingTest] = useState(false);
+  const [saveMessage, setSaveMessage] = useState("");
+  const [selectedClassRoomId, setSelectedClassRoomId] = useState("");
+
+  async function saveTest() {
+    if (!aiResult.trim()) {
+      setSaveMessage("Generate a test before saving.");
+      return;
+    }
+
+    setSavingTest(true);
+    setSaveMessage("");
+
+    try {
+      const res = await fetch("/api/teacher/assignments", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          title: `${gradeLevel} PSSA ELA - ${skill || "Practice Test"}`,
+          gradeLevel,
+          classRoomId: selectedClassRoomId || undefined,
+          standards: [standard],
+          assignmentType: "FULL",
+          generatedContent: aiResult,
+        }),
+      });
+      const json = await res.json();
+      if (!res.ok) throw new Error(json.error || "Failed to save test.");
+      setSaveMessage("Test saved and assigned to students.");
+    } catch (err: any) {
+      setSaveMessage(err.message || "Failed to save test.");
+    } finally {
+      setSavingTest(false);
+    }
   }
   const standardsForGrade = elaStandards[gradeLevel] || [];
 
@@ -101,6 +133,7 @@ export default function TeacherDashboardPage() {
         if (!res.ok) throw new Error("Failed to load teacher dashboard");
         const json = await res.json();
         setData(json);
+        setSelectedClassRoomId(json.classes?.[0]?.id || "");
       } catch (err: any) {
         setError(err.message || "Unknown error");
       } finally {
@@ -253,12 +286,36 @@ export default function TeacherDashboardPage() {
 
   {aiResult && (
   <>
+    {data?.classes?.length > 0 && (
+      <div className="mt-4 max-w-md">
+        <label className="block text-sm font-medium">Assign to Class</label>
+        <select
+          className="mt-1 w-full border p-2 rounded"
+          value={selectedClassRoomId}
+          onChange={(e) => setSelectedClassRoomId(e.target.value)}
+        >
+          {data.classes.map((classRoom: any) => (
+            <option key={classRoom.id} value={classRoom.id}>
+              {classRoom.name}
+            </option>
+          ))}
+        </select>
+      </div>
+    )}
+
     <button
       onClick={saveTest}
-      className="bg-green-600 text-white px-4 py-2 rounded mt-4"
+      disabled={savingTest}
+      className="bg-green-600 text-white px-4 py-2 rounded mt-4 disabled:opacity-50"
     >
-      Save Test
+      {savingTest ? "Saving..." : "Save and Assign Test"}
     </button>
+
+    {saveMessage && (
+      <p className={`mt-3 text-sm font-medium ${saveMessage.includes("Failed") || saveMessage.includes("Generate") ? "text-red-600" : "text-green-700"}`}>
+        {saveMessage}
+      </p>
+    )}
 
     <pre className="mt-4 p-4 bg-gray-100 rounded text-sm whitespace-pre-wrap">
       {aiResult}

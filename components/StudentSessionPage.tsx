@@ -21,7 +21,9 @@ export function StudentSessionPage() {
 
   async function loadAssignments() {
     try {
+      setError("");
       const res = await fetch("/api/student/assignments");
+      if (!res.ok) throw new Error("Failed to load assignments.");
       const json = await res.json();
       setAssignments(json.assignments || []);
     } catch (e) {
@@ -31,11 +33,13 @@ export function StudentSessionPage() {
     }
   }
 
-  async function openAssessment(assessmentId: string) {
+  async function openAssignment(assignment: any) {
     setLoading(true);
     try {
-      const res = await fetch(`/api/student/session?assessmentId=${assessmentId}`);
+      setError("");
+      const res = await fetch(`/api/student/session?assessmentId=${assignment.assessmentId}`);
       const json = await res.json();
+      if (!res.ok) throw new Error(json.error || "Failed to open session.");
       setSessionPayload(json);
       setHistory(json.responses || []);
       const currentNo = json.currentQuestionNo || 1;
@@ -46,7 +50,7 @@ export function StudentSessionPage() {
         path[i] = getQuestionForStep(i + 1, previous ? { skill: previous.skill, difficulty: previous.difficulty, isCorrect: previous.isCorrect, questionType: previous.questionType } : null, (json.responses || []).slice(0, i), json.standards || []);
       }
       setQuestionPath(path);
-      setMode(json.submittedAt ? "report" : "test");
+      setMode(json.submittedAt || assignment.statusLabel === "Completed" ? "report" : "test");
     } catch {
       setError("Failed to open session.");
     } finally {
@@ -68,15 +72,21 @@ export function StudentSessionPage() {
       setCurrentQuestionNumber(nextQuestionNo);
     } else {
       await fetch("/api/test/submit", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ sessionId: sessionPayload.sessionId }) });
+      await loadAssignments();
       setMode("report");
     }
   }
 
   const report = useMemo(() => buildDetailedReport(demoStudent, history, questionPath), [history, questionPath]);
+  const backToAssignments = async () => {
+    setMode("list");
+    setLoading(true);
+    await loadAssignments();
+  };
 
   if (loading) return <div className="rounded-3xl bg-white p-6 shadow">Loading...</div>;
   if (error) return <div className="rounded-3xl bg-white p-6 shadow text-rose-600">{error}</div>;
-  if (mode === "list") return <StudentAssignmentListPage assignments={assignments} onOpen={openAssessment} />;
-  if (mode === "report") return <div className="space-y-4"><button onClick={() => setMode("list")} className="rounded-xl bg-slate-200 px-4 py-2">← Back to Assignments</button><StudentReport report={report} /></div>;
-  return <div className="space-y-4"><button onClick={() => setMode("list")} className="rounded-xl bg-slate-200 px-4 py-2">← Back to Assignments</button><StudentTest currentQuestion={questionPath[currentQuestionNumber - 1]} currentQuestionNumber={currentQuestionNumber} totalQuestions={totalSimQuestions} history={history} onSubmitAnswer={onSubmitAnswer} /></div>;
+  if (mode === "list") return <StudentAssignmentListPage assignments={assignments} onOpen={openAssignment} />;
+  if (mode === "report") return <div className="space-y-4"><button onClick={backToAssignments} className="rounded-xl bg-slate-200 px-4 py-2">Back to Assignments</button><StudentReport report={report} /></div>;
+  return <div className="space-y-4"><button onClick={backToAssignments} className="rounded-xl bg-slate-200 px-4 py-2">Back to Assignments</button><StudentTest currentQuestion={questionPath[currentQuestionNumber - 1]} currentQuestionNumber={currentQuestionNumber} totalQuestions={totalSimQuestions} history={history} onSubmitAnswer={onSubmitAnswer} /></div>;
 }
