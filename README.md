@@ -37,3 +37,4 @@ Open http://localhost:3000
 - Email sending falls back to console logs unless `RESEND_API_KEY` is set.
 - Scheduled reports endpoint expects `Authorization: Bearer $CRON_SECRET`.
 - This is a strong MVP starter, but you should expect a few integration/polish steps after first local run.
+- Branch workflow smoke test note.
