@@ -6,17 +6,51 @@ const db = new PrismaClient();
 async function main() {
   const passwordHash = await bcrypt.hash("Password123!", 10);
 
-  const admin = await db.user.upsert({ where: { email: "admin@example.com" }, update: {}, create: { email: "admin@example.com", name: "Demo Admin", role: "ADMIN", passwordHash } });
+  const admin = await db.user.upsert({
+    where: { email: "admin@example.com" },
+    update: { name: "Demo Admin", role: "ADMIN", passwordHash },
+    create: { email: "admin@example.com", name: "Demo Admin", role: "ADMIN", passwordHash }
+  });
 
-  const teacherUser = await db.user.upsert({ where: { email: "teacher@example.com" }, update: {}, create: { email: "teacher@example.com", name: "Demo Teacher", role: "TEACHER", passwordHash, teacherProfile: { create: { schoolName: "Liberty Middle School", gradeBand: "6-8" } } }, include: { teacherProfile: true } });
+  const teacherUserBase = await db.user.upsert({
+    where: { email: "teacher@example.com" },
+    update: { name: "Demo Teacher", role: "TEACHER", passwordHash },
+    create: { email: "teacher@example.com", name: "Demo Teacher", role: "TEACHER", passwordHash }
+  });
+  const teacherProfile = await db.teacherProfile.upsert({
+    where: { userId: teacherUserBase.id },
+    update: { schoolName: "Liberty Middle School", gradeBand: "6-8" },
+    create: { userId: teacherUserBase.id, schoolName: "Liberty Middle School", gradeBand: "6-8" }
+  });
+  const teacherUser = { ...teacherUserBase, teacherProfile };
 
   const studentUsers = [] as any[];
   for (const [email, name] of [["student@example.com", "Demo Student"], ["student2@example.com", "Liam Brooks"], ["student3@example.com", "Sophia Reed"]]) {
-    const student = await db.user.upsert({ where: { email }, update: {}, create: { email, name, role: "STUDENT", passwordHash, studentProfile: { create: { grade: 6, schoolName: "Liberty Middle School", teacherId: teacherUser.teacherProfile!.id } } }, include: { studentProfile: true } });
+    const studentUser = await db.user.upsert({
+      where: { email },
+      update: { name, role: "STUDENT", passwordHash },
+      create: { email, name, role: "STUDENT", passwordHash }
+    });
+    const studentProfile = await db.studentProfile.upsert({
+      where: { userId: studentUser.id },
+      update: { grade: 6, schoolName: "Liberty Middle School", teacherId: teacherUser.teacherProfile!.id },
+      create: { userId: studentUser.id, grade: 6, schoolName: "Liberty Middle School", teacherId: teacherUser.teacherProfile!.id }
+    });
+    const student = { ...studentUser, studentProfile };
     studentUsers.push(student);
   }
 
-  const parentUser = await db.user.upsert({ where: { email: "parent@example.com" }, update: {}, create: { email: "parent@example.com", name: "Demo Parent", role: "PARENT", passwordHash, parentProfile: { create: {} } }, include: { parentProfile: true } });
+  const parentUserBase = await db.user.upsert({
+    where: { email: "parent@example.com" },
+    update: { name: "Demo Parent", role: "PARENT", passwordHash },
+    create: { email: "parent@example.com", name: "Demo Parent", role: "PARENT", passwordHash }
+  });
+  const parentProfile = await db.parentProfile.upsert({
+    where: { userId: parentUserBase.id },
+    update: {},
+    create: { userId: parentUserBase.id }
+  });
+  const parentUser = { ...parentUserBase, parentProfile };
 
   const classRoom = await db.classRoom.upsert({ where: { id: "demo-class-id" }, update: {}, create: { id: "demo-class-id", name: "Period 1 ELA", grade: 6, teacherId: teacherUser.teacherProfile!.id } });
 

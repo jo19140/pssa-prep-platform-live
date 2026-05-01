@@ -38,3 +38,7 @@ Open http://localhost:3000
 - Scheduled reports endpoint expects `Authorization: Bearer $CRON_SECRET`.
 - This is a strong MVP starter, but you should expect a few integration/polish steps after first local run.
 - Branch workflow smoke test note.
+
+
+## Re-create
+See `RECREATE.md` for a clean-environment rebuild checklist and validation flow.
