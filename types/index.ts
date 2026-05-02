@@ -1,4 +1,4 @@
-export type QuestionType = "MCQ" | "EBSR" | "HOT_TEXT" | "MULTI_SELECT" | "DRAG_DROP";
+export type QuestionType = "TDA" | "CONVENTIONS" | "MCQ" | "EBSR" | "MULTI_SELECT" | "HOT_TEXT" | "DRAG_DROP";
 
 export type Student = {
   id: string;
@@ -10,19 +10,29 @@ export type Student = {
 
 export type BaseQuestion = {
   id: number;
+  passageId?: string;
+  passageType?: string;
   skill: string;
   standardCode: string;
   standardLabel: string;
+  gradeLevel?: number;
   difficulty: number;
   type: QuestionType;
   passageTitle: string;
   passage: string;
+  passageMetadata?: Record<string, unknown>;
+  tableData?: {
+    title: string;
+    columns: string[];
+    rows: string[][];
+  };
   explanation: string;
   skillTip: string;
+  correctAnswer?: unknown;
 };
 
 export type McqQuestion = BaseQuestion & {
-  type: "MCQ";
+  type: "MCQ" | "CONVENTIONS";
   question: string;
   choices: string[];
   correctIndex: number;
@@ -64,7 +74,14 @@ export type DragDropQuestion = BaseQuestion & {
   distractorRationale: string;
 };
 
-export type Question = McqQuestion | EbsrQuestion | HotTextQuestion | MultiSelectQuestion | DragDropQuestion;
+export type TdaQuestion = BaseQuestion & {
+  type: "TDA";
+  prompt: string;
+  rubric: string;
+  maxScore: number;
+};
+
+export type Question = McqQuestion | EbsrQuestion | HotTextQuestion | MultiSelectQuestion | DragDropQuestion | TdaQuestion;
 
 export type ResponseRecord = {
   questionId: number;

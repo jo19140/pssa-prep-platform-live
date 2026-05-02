@@ -21,6 +21,10 @@ model User {
   parentProfile   ParentProfile?
   sessions        TestSession[]
   reportSchedules ReportSchedule[]
+  lessonProgress  StudentLessonProgress[]
+  resourceLinks   ResourceLink[]
+  tutorMemory     TutorAgentMemory?
+  tutorMessages   TutorAgentMessage[]
 }
 
 model TeacherProfile {
@@ -96,6 +100,45 @@ model Assessment {
   createdAt   DateTime      @default(now())
   assignments Assignment[]
   sessions    TestSession[]
+  questions   AssessmentQuestion[]
+  passages    AssessmentPassage[]
+}
+
+model AssessmentPassage {
+  id              String     @id @default(cuid())
+  assessmentId    String
+  passageKey      String
+  title           String
+  passageType     String
+  genre           String
+  content         String
+  wordCountTarget Int
+  actualWordCount Int
+  hasTable        Boolean    @default(false)
+  hasSections     Boolean    @default(false)
+  gradeLevel      Int
+  tableData       Json?
+  metadata        Json
+  createdAt       DateTime   @default(now())
+  assessment      Assessment @relation(fields: [assessmentId], references: [id], onDelete: Cascade)
+
+  @@unique([assessmentId, passageKey])
+}
+
+model AssessmentQuestion {
+  id             String     @id @default(cuid())
+  assessmentId   String
+  questionNo     Int
+  standardCode   String
+  standardLabel  String
+  questionType   String
+  skill          String
+  difficulty     Int
+  questionPayload Json
+  createdAt      DateTime   @default(now())
+  assessment     Assessment @relation(fields: [assessmentId], references: [id], onDelete: Cascade)
+
+  @@unique([assessmentId, questionNo])
 }
 
 model Assignment {
@@ -127,6 +170,7 @@ model TestSession {
   assessment       Assessment      @relation(fields: [assessmentId], references: [id], onDelete: Cascade)
   responses        ResponseRecord[]
   report           ReportSummary?
+  learningPath     LearningPath?
 }
 
 model ResponseRecord {
@@ -146,6 +190,29 @@ model ResponseRecord {
   answerPayload    Json
   createdAt        DateTime    @default(now())
   session          TestSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  essayEvaluation  EssayEvaluation?
+}
+
+model EssayEvaluation {
+  id               String         @id @default(cuid())
+  responseRecordId String         @unique
+  score            Int
+  maxScore         Int            @default(4)
+  performanceBand  String
+  strengths        Json
+  areasForGrowth   Json
+  feedback         String
+  nextSteps        Json
+  rubricBreakdown  Json
+  gradingProvider  String
+  teacherScore     Int?
+  teacherFeedback  String?
+  teacherRubricBreakdown Json?
+  reviewedAt       DateTime?
+  reviewedById     String?
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+  responseRecord   ResponseRecord @relation(fields: [responseRecordId], references: [id], onDelete: Cascade)
 }
 
 model ReportSummary {
@@ -160,6 +227,158 @@ model ReportSummary {
   growthFromPrevious Int?
   previousReportId String?
   session          TestSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+}
+
+model LearningPath {
+  id              String             @id @default(cuid())
+  sessionId       String             @unique
+  generatedBy     String             @default("DETERMINISTIC")
+  aiStatus        String             @default("NOT_REQUESTED")
+  aiSummary       String?
+  createdAt       DateTime           @default(now())
+  updatedAt       DateTime           @updatedAt
+  session         TestSession        @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  items           LearningPathItem[]
+  lessons         LearningLesson[]
+}
+
+model LearningPathItem {
+  id               String       @id @default(cuid())
+  learningPathId   String
+  order            Int
+  standardCode     String
+  standardLabel    String
+  skill            String
+  priority         Int
+  title            String
+  recommendation   String
+  activityType     String
+  difficulty       String
+  estimatedMinutes Int
+  rationale        String
+  practicePrompt   String
+  aiExplanation    String?
+  sourcePayload    Json
+  status           String       @default("TODO")
+  createdAt        DateTime     @default(now())
+  updatedAt        DateTime     @updatedAt
+  learningPath     LearningPath @relation(fields: [learningPathId], references: [id], onDelete: Cascade)
+  lesson           LearningLesson?
+
+  @@unique([learningPathId, order])
+}
+
+model LearningLesson {
+  id                   String                  @id @default(cuid())
+  learningPathId       String
+  learningPathItemId   String?                 @unique
+  gradeLevel           Int
+  standardCode         String
+  standardLabel        String
+  skill                String
+  priority             Int
+  title                String
+  whyAssigned          String
+  lessonExplanation    String
+  workedExample        String
+  resourceTitle        String?
+  resourceUrl          String?
+  resourceProvider     String?
+  resourceDescription  String?
+  guidedPractice       Json
+  independentPractice  Json
+  exitTicket           Json
+  masteryCheck         Json
+  retestRecommendation String
+  generatedBy          String                  @default("DETERMINISTIC")
+  aiStatus             String                  @default("NOT_REQUESTED")
+  sourcePayload        Json
+  createdAt            DateTime                @default(now())
+  updatedAt            DateTime                @updatedAt
+  learningPath         LearningPath            @relation(fields: [learningPathId], references: [id], onDelete: Cascade)
+  learningPathItem     LearningPathItem?       @relation(fields: [learningPathItemId], references: [id], onDelete: SetNull)
+  items                LearningLessonItem[]
+  progress             StudentLessonProgress[]
+}
+
+model LearningLessonItem {
+  id        String         @id @default(cuid())
+  lessonId  String
+  itemType  String
+  title     String
+  content   Json
+  order     Int
+  createdAt DateTime       @default(now())
+  lesson    LearningLesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+
+  @@unique([lessonId, order])
+}
+
+model StudentLessonProgress {
+  id                    String         @id @default(cuid())
+  lessonId              String
+  userId                String
+  status                String         @default("NOT_STARTED")
+  guidedResponses       Json?
+  independentResponses  Json?
+  exitTicketResponses   Json?
+  masteryScore          Int?
+  masteryStatus         String         @default("NOT_STARTED")
+  startedAt             DateTime?
+  completedAt           DateTime?
+  masteredAt            DateTime?
+  createdAt             DateTime       @default(now())
+  updatedAt             DateTime       @updatedAt
+  lesson                LearningLesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  user                  User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([lessonId, userId])
+}
+
+model ResourceLink {
+  id           String   @id @default(cuid())
+  gradeLevel   Int?
+  standardCode String
+  skill        String
+  title        String
+  url          String
+  provider     String
+  description  String?
+  createdById  String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  createdBy    User?    @relation(fields: [createdById], references: [id], onDelete: SetNull)
+
+  @@index([gradeLevel, standardCode])
+  @@index([skill])
+}
+
+model TutorAgentMemory {
+  id              String   @id @default(cuid())
+  userId          String   @unique
+  gradeLevel      Int?
+  learnerSummary  String
+  weakStandards   Json
+  masteredSkills  Json
+  preferredSupports Json
+  lastInteractionAt DateTime?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model TutorAgentMessage {
+  id          String   @id @default(cuid())
+  userId      String
+  role        String
+  intent      String
+  message     String
+  response    String
+  artifacts   Json?
+  createdAt   DateTime @default(now())
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, createdAt])
 }
 
 model ReportSchedule {

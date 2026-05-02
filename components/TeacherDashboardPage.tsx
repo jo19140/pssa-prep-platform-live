@@ -1,7 +1,10 @@
 "use client";
 
+import type { ReactNode } from "react";
 import { useEffect, useState } from "react";
 import LogoutButton from "@/components/LogoutButton";
+import TeacherTdaScoringPanel from "@/components/TeacherTdaScoringPanel";
+import { TeacherLearningPathPanel } from "@/components/TeacherLearningPathPanel";
 
 const elaStandards: Record<string, string[]> = {
   "3rd": [
@@ -76,7 +79,7 @@ export default function TeacherDashboardPage() {
   const [gradeLevel, setGradeLevel] = useState("6th");
   const [standard, setStandard] = useState("CC.1.2.6.A - Main Idea");
   const [skill, setSkill] = useState("Main Idea");
-  const [textType, setTextType] = useState("Nonfiction");
+  const [textType, setTextType] = useState("Informational");
   const [genre, setGenre] = useState("Informational");
   const [topic, setTopic] = useState("");
   const [passage, setPassage] = useState("");
@@ -92,6 +95,9 @@ export default function TeacherDashboardPage() {
   const [savingTest, setSavingTest] = useState(false);
   const [saveMessage, setSaveMessage] = useState("");
   const [selectedClassRoomId, setSelectedClassRoomId] = useState("");
+  const [creatingDiagnostic, setCreatingDiagnostic] = useState(false);
+  const [diagnosticMessage, setDiagnosticMessage] = useState("");
+  const [activeTab, setActiveTab] = useState<"overview" | "generator" | "tda" | "learning">("overview");
 
   async function saveTest() {
     if (!aiResult.trim()) {
@@ -125,6 +131,26 @@ export default function TeacherDashboardPage() {
     }
   }
   const standardsForGrade = elaStandards[gradeLevel] || [];
+
+  async function createDiagnosticAssessment() {
+    setCreatingDiagnostic(true);
+    setDiagnosticMessage("");
+
+    try {
+      const res = await fetch("/api/teacher/diagnostic", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ classRoomId: selectedClassRoomId || undefined, gradeLevel }),
+      });
+      const json = await res.json();
+      if (!res.ok) throw new Error(json.error || "Failed to create diagnostic.");
+      setDiagnosticMessage(`Grade ${json.gradeLevel} diagnostic assigned with ${json.questionCount} questions across ${json.standardCount} standards.`);
+    } catch (err: any) {
+      setDiagnosticMessage(err.message || "Failed to create diagnostic.");
+    } finally {
+      setCreatingDiagnostic(false);
+    }
+  }
 
   useEffect(() => {
     async function loadDashboard() {
@@ -194,7 +220,53 @@ export default function TeacherDashboardPage() {
         <LogoutButton />
       </div>
 
+      <div className="flex flex-wrap gap-2 rounded-2xl bg-white p-2 shadow">
+        <TabButton active={activeTab === "overview"} onClick={() => setActiveTab("overview")}>Overview</TabButton>
+        <TabButton active={activeTab === "generator"} onClick={() => setActiveTab("generator")}>Generate Tests</TabButton>
+        <TabButton active={activeTab === "tda"} onClick={() => setActiveTab("tda")}>TDA Scoring</TabButton>
+        <TabButton active={activeTab === "learning"} onClick={() => setActiveTab("learning")}>Learning Paths</TabButton>
+      </div>
+
+      {activeTab === "tda" && <TeacherTdaScoringPanel />}
+      {activeTab === "learning" && <TeacherLearningPathPanel />}
+
+      {activeTab === "generator" && (
       <section className="rounded-3xl bg-white p-6 shadow space-y-6">
+  <div className="rounded-xl border border-blue-100 bg-blue-50 p-4">
+    <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+      <div>
+        <h2 className="text-xl font-bold text-slate-900">Diagnostic Assessment</h2>
+        <p className="mt-1 text-sm text-slate-600">Generate a PSSA-style diagnostic for grades 3-8 with reading, EBSR, technology-enhanced items, TDA, and conventions questions.</p>
+      </div>
+      <div className="min-w-64">
+        <label className="block text-sm font-medium text-slate-700">Assign to Class</label>
+        <select
+          className="mt-1 w-full rounded border border-slate-300 p-2"
+          value={selectedClassRoomId}
+          onChange={(e) => setSelectedClassRoomId(e.target.value)}
+        >
+          {data?.classes?.map((classRoom: any) => (
+            <option key={classRoom.id} value={classRoom.id}>
+              {classRoom.name}
+            </option>
+          ))}
+        </select>
+      </div>
+      <button
+        onClick={createDiagnosticAssessment}
+        disabled={creatingDiagnostic || !selectedClassRoomId}
+        className="rounded bg-blue-600 px-4 py-2 font-semibold text-white disabled:opacity-50"
+      >
+        {creatingDiagnostic ? "Creating..." : "Generate & Assign Diagnostic"}
+      </button>
+    </div>
+    {diagnosticMessage && (
+      <p className={`mt-3 text-sm font-medium ${diagnosticMessage.includes("Failed") ? "text-red-600" : "text-green-700"}`}>
+        {diagnosticMessage}
+      </p>
+    )}
+  </div>
+
   <h2 className="text-xl font-bold">AI PSSA Test Generator</h2>
 
   <div className="rounded-xl border p-4 space-y-3">
@@ -223,8 +295,6 @@ export default function TeacherDashboardPage() {
       ))}
     </select>
 
-    <label className="block text-sm font-medium">Skill</label>
-    <input className="w-full border p-2 rounded bg-gray-50" value={skill} readOnly />
   </div>
 
   <div className="rounded-xl border p-4 space-y-3">
@@ -239,7 +309,7 @@ export default function TeacherDashboardPage() {
 
     <label className="block text-sm font-medium">Text Type</label>
     <select className="w-full border p-2 rounded" value={textType} onChange={(e) => setTextType(e.target.value)}>
-      <option>Nonfiction</option>
+      <option>Informational</option>
       <option>Literature</option>
     </select>
 
@@ -323,10 +393,13 @@ export default function TeacherDashboardPage() {
   </>
 )}
 </section>
+      )}
 
+      {activeTab === "overview" && (
+        <>
       <section className="grid gap-6 lg:grid-cols-3">
         <MetricCard title="Average Score" value={`${data?.overview?.averageScore || 0}%`} />
-        <MetricCard title="Tests Completed" value={`${data?.overview?.testsCompleted || 0}`} />
+        <MetricCard title="Tests Completed" value={`${data?.overview?.completedReportCount || 0}`} />
         <MetricCard title="Students" value={`${data?.overview?.studentCount || 0}`} />
       </section>
 
@@ -346,7 +419,20 @@ export default function TeacherDashboardPage() {
           <p className="text-gray-500 text-sm">Chart area ready. Data points: {data?.studentTrend?.length || 0}</p>
         </div>
       </section>
+        </>
+      )}
     </div>
+  );
+}
+
+function TabButton({ active, onClick, children }: { active: boolean; onClick: () => void; children: ReactNode }) {
+  return (
+    <button
+      onClick={onClick}
+      className={`rounded-xl px-4 py-2 text-sm font-semibold transition ${active ? "bg-slate-900 text-white" : "text-slate-600 hover:bg-slate-100"}`}
+    >
+      {children}
+    </button>
   );
 }
 

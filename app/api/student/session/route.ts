@@ -26,9 +26,43 @@ export async function GET(req: Request) {
 
   if (!assignment || !assessmentId) return NextResponse.json({ error: "Assignment not found" }, { status: 404 });
 
-  let activeSession = await db.testSession.findFirst({ where: { userId: (session.user as any).id, assessmentId, submittedAt: null }, include: { responses: { orderBy: { createdAt: "asc" } }, report: true, assessment: true }, orderBy: { startedAt: "desc" } });
-  if (!activeSession) activeSession = await db.testSession.findFirst({ where: { userId: (session.user as any).id, assessmentId, submittedAt: { not: null } }, include: { responses: { orderBy: { createdAt: "asc" } }, report: true, assessment: true }, orderBy: { submittedAt: "desc" } });
-  if (!activeSession) activeSession = await db.testSession.create({ data: { userId: (session.user as any).id, assessmentId, currentQuestionNo: 1 }, include: { responses: { orderBy: { createdAt: "asc" } }, report: true, assessment: true } });
+  const include = {
+    responses: { include: { essayEvaluation: true }, orderBy: { createdAt: "asc" as const } },
+    report: true,
+    assessment: { include: { questions: { orderBy: { questionNo: "asc" as const } }, passages: true } },
+    learningPath: {
+      include: {
+        items: { orderBy: { order: "asc" as const } },
+        lessons: { orderBy: { priority: "asc" as const }, include: { progress: { where: { userId: (session.user as any).id } }, items: { orderBy: { order: "asc" as const } } } },
+      },
+    },
+  };
+  let activeSession = await db.testSession.findFirst({ where: { userId: (session.user as any).id, assessmentId, submittedAt: null }, include, orderBy: { startedAt: "desc" } });
+  if (!activeSession) activeSession = await db.testSession.findFirst({ where: { userId: (session.user as any).id, assessmentId, submittedAt: { not: null } }, include, orderBy: { submittedAt: "desc" } });
+  if (!activeSession) activeSession = await db.testSession.create({ data: { userId: (session.user as any).id, assessmentId, currentQuestionNo: 1 }, include });
   const standards = assignment.standards ? assignment.standards.split(",").map((item) => item.trim()).filter(Boolean) : [];
-  return NextResponse.json({ sessionId: activeSession.id, assessment: activeSession.assessment, currentQuestionNo: activeSession.currentQuestionNo, submittedAt: activeSession.submittedAt, responses: activeSession.responses, report: activeSession.report, standards, assignmentType: assignment.assignmentType || "FULL" });
+  const hydratedSession = activeSession as any;
+  const passageByKey = new Map<string, any>((hydratedSession.assessment.passages || []).map((passage: any) => [passage.passageKey, passage]));
+  const questions = hydratedSession.assessment.questions.map((question: any) => {
+    const payload = question.questionPayload as any;
+    const passage = payload?.passageId ? passageByKey.get(payload.passageId) : null;
+    if (!passage) return payload;
+    return {
+      ...payload,
+      passageTitle: passage.title,
+      passage: passage.content,
+      tableData: passage.tableData,
+      passageMetadata: {
+        passageType: passage.passageType,
+        genre: passage.genre,
+        wordCountTarget: passage.wordCountTarget,
+        actualWordCount: passage.actualWordCount,
+        hasTable: passage.hasTable,
+        hasSections: passage.hasSections,
+        gradeLevel: passage.gradeLevel,
+        metadata: passage.metadata,
+      },
+    };
+  });
+  return NextResponse.json({ sessionId: activeSession.id, assessment: hydratedSession.assessment, currentQuestionNo: activeSession.currentQuestionNo, submittedAt: activeSession.submittedAt, responses: hydratedSession.responses, report: hydratedSession.report, learningPath: hydratedSession.learningPath, questions, passages: hydratedSession.assessment.passages, standards, assignmentType: assignment.assignmentType || "FULL" });
 }

@@ -1,15 +1,24 @@
 "use client";
 
+import { StudentTutorAgentPanel } from "@/components/StudentTutorAgentPanel";
+
 export function StudentAssignmentListPage({
   assignments,
+  latestLearningPath,
   onOpen,
+  onOpenLearningPath,
 }: {
   assignments: any[];
+  latestLearningPath?: any;
   onOpen: (assignment: any) => void;
+  onOpenLearningPath?: () => void;
 }) {
   const totalAssignments = assignments.length;
   const completedAssignments = assignments.filter((a) => a.statusLabel === "Completed").length;
   const remainingAssignments = totalAssignments - completedAssignments;
+  const baselineDiagnostics = assignments.filter((a) => a.assignmentType === "DIAGNOSTIC");
+  const teacherAssigned = assignments.filter((a) => a.assignmentType !== "DIAGNOSTIC");
+  const pathItems = latestLearningPath?.items || [];
 
   return (
     <div className="space-y-6">
@@ -34,43 +43,140 @@ export function StudentAssignmentListPage({
         </div>
       </section>
 
-      <section className="rounded-3xl bg-white p-6 shadow">
-        <h3 className="text-xl font-bold text-slate-900">My Assignments</h3>
-        <div className="mt-5 space-y-4">
-          {assignments.map((a) => {
-            const isCompleted = a.statusLabel === "Completed";
-            const statusText = isCompleted ? "Completed" : "Pending";
-            const buttonText = a.statusLabel === "Not Started" ? "Start Test" : isCompleted ? "Review Report" : "Resume Test";
+      <StudentTutorAgentPanel />
 
-            return (
-              <div
-                key={a.assignmentId}
-                className="flex flex-col gap-4 rounded-2xl border border-slate-200 bg-slate-50 p-5 shadow-sm sm:flex-row sm:items-center sm:justify-between"
-              >
-                <div>
-                  <p className="text-lg font-semibold text-slate-900">{a.title}</p>
-                  <span
-                    className={`mt-2 inline-flex rounded-full px-3 py-1 text-xs font-semibold ${
-                      isCompleted
-                        ? "bg-emerald-100 text-emerald-700"
-                        : "bg-amber-100 text-amber-700"
-                    }`}
-                  >
-                    {statusText}
+      <section className="rounded-3xl bg-white p-6 shadow">
+        <div className="flex flex-col gap-1">
+          <p className="text-sm font-semibold uppercase tracking-wide text-blue-700">Baseline</p>
+          <h3 className="text-xl font-bold text-slate-900">Baseline Diagnostic</h3>
+          <p className="text-sm text-slate-600">Start here to measure current reading, writing, and conventions skills.</p>
+        </div>
+        <AssignmentGroup assignments={baselineDiagnostics} emptyText="No baseline diagnostic has been assigned yet." onOpen={onOpen} />
+      </section>
+
+      <section className="rounded-3xl bg-white p-6 shadow">
+        <div className="flex flex-col gap-1">
+          <p className="text-sm font-semibold uppercase tracking-wide text-slate-500">Teacher Work</p>
+          <h3 className="text-xl font-bold text-slate-900">Teacher Assigned Lessons</h3>
+          <p className="text-sm text-slate-600">Tests and practice assigned by your teacher appear here.</p>
+        </div>
+        <AssignmentGroup assignments={teacherAssigned} emptyText="No teacher assigned lessons are available right now." onOpen={onOpen} />
+      </section>
+
+      <section className="rounded-3xl bg-white p-6 shadow">
+        <div className="flex flex-col gap-1 sm:flex-row sm:items-start sm:justify-between">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-wide text-emerald-700">Personalized Practice</p>
+            <h3 className="text-xl font-bold text-slate-900">AI Learning Path</h3>
+            <p className="text-sm text-slate-600">
+              {pathItems.length
+                ? `Based on ${latestLearningPath?.session?.assessment?.title || "your latest diagnostic"}.`
+                : "Complete the baseline diagnostic to unlock a personalized learning path."}
+            </p>
+          </div>
+          {pathItems.length ? (
+            <span className="mt-2 inline-flex w-fit rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-600 sm:mt-0">
+              {latestLearningPath.generatedBy === "AI_ENRICHED" ? "AI enriched" : "Deterministic first"}
+            </span>
+          ) : null}
+        </div>
+
+        {pathItems.length ? (
+          <div className="mt-5 space-y-4">
+            <button
+              onClick={onOpenLearningPath}
+              className="inline-flex items-center justify-center rounded-xl bg-emerald-700 px-4 py-2 text-sm font-semibold text-white shadow transition hover:bg-emerald-800 focus:outline-none focus:ring-2 focus:ring-emerald-400"
+            >
+              Open My Learning Path
+            </button>
+            <div className="grid gap-3">
+            {pathItems.slice(0, 4).map((item: any) => (
+              <article key={item.id || item.order} className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+                <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
+                  <div>
+                    <p className="text-xs font-semibold uppercase text-slate-500">Step {item.order} • {item.standardCode}</p>
+                    <h4 className="mt-1 text-base font-bold text-slate-900">{item.title}</h4>
+                    <p className="mt-1 text-sm text-slate-700">{item.recommendation}</p>
+                  </div>
+                  <span className="inline-flex w-fit rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-700">
+                    {item.estimatedMinutes} min
                   </span>
                 </div>
-
-                <button
-                  onClick={() => onOpen(a)}
-                  className="inline-flex items-center justify-center rounded-xl bg-slate-900 px-4 py-2 text-sm font-semibold text-white shadow transition hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-400"
-                >
-                  {buttonText}
-                </button>
-              </div>
-            );
-          })}
-        </div>
+              </article>
+            ))}
+            </div>
+          </div>
+        ) : (
+          <div className="mt-5 rounded-2xl border border-dashed border-slate-300 bg-slate-50 p-5 text-sm text-slate-600">
+            Once a diagnostic is completed, this section will show the student&apos;s priority skills, recommended practice, and next steps.
+          </div>
+        )}
       </section>
+    </div>
+  );
+}
+
+function AssignmentGroup({
+  assignments,
+  emptyText,
+  onOpen,
+}: {
+  assignments: any[];
+  emptyText: string;
+  onOpen: (assignment: any) => void;
+}) {
+  if (!assignments.length) {
+    return <div className="mt-5 rounded-2xl border border-dashed border-slate-300 bg-slate-50 p-5 text-sm text-slate-600">{emptyText}</div>;
+  }
+
+  return (
+    <div className="mt-5 space-y-4">
+      {assignments.map((assignment) => (
+        <AssignmentCard key={assignment.assignmentId} assignment={assignment} onOpen={onOpen} />
+      ))}
+    </div>
+  );
+}
+
+function AssignmentCard({
+  assignment,
+  onOpen,
+}: {
+  assignment: any;
+  onOpen: (assignment: any) => void;
+}) {
+  const isCompleted = assignment.statusLabel === "Completed";
+  const isInProgress = assignment.statusLabel === "In Progress";
+  const statusText = isCompleted ? "Completed" : isInProgress ? "In Progress" : "Not Started";
+  const buttonText = assignment.statusLabel === "Not Started" ? "Start" : isCompleted ? "Review Report" : "Resume";
+  const isDiagnostic = assignment.assignmentType === "DIAGNOSTIC";
+
+  return (
+    <div className="flex flex-col gap-4 rounded-2xl border border-slate-200 bg-slate-50 p-5 shadow-sm sm:flex-row sm:items-center sm:justify-between">
+      <div>
+        <p className="text-lg font-semibold text-slate-900">{assignment.title}</p>
+        <div className="mt-2 flex flex-wrap gap-2">
+          <span
+            className={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ${
+              isCompleted
+                ? "bg-emerald-100 text-emerald-700"
+                : isInProgress
+                  ? "bg-blue-100 text-blue-700"
+                  : "bg-amber-100 text-amber-700"
+            }`}
+          >
+            {statusText}
+          </span>
+          {isDiagnostic ? <span className="inline-flex rounded-full bg-blue-100 px-3 py-1 text-xs font-semibold text-blue-700">Diagnostic</span> : null}
+        </div>
+      </div>
+
+      <button
+        onClick={() => onOpen(assignment)}
+        className="inline-flex items-center justify-center rounded-xl bg-slate-900 px-4 py-2 text-sm font-semibold text-white shadow transition hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-400"
+      >
+        {buttonText}
+      </button>
     </div>
   );
 }
