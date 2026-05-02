@@ -22,17 +22,39 @@ model User {
   sessions        TestSession[]
   reportSchedules ReportSchedule[]
   lessonProgress  StudentLessonProgress[]
+  questAttempts   LearningQuestAttempt[]
+  readingCoachAttempts ReadingCoachAttempt[]
+  readingCoachAssignments ReadingCoachAssignment[] @relation("ReadingCoachAssignedBy")
   resourceLinks   ResourceLink[]
   tutorMemory     TutorAgentMemory?
   tutorMessages   TutorAgentMessage[]
 }
 
+model School {
+  id              String           @id @default(cuid())
+  name            String
+  districtName    String?
+  city            String?
+  state           String           @default("PA")
+  gradeSpan       String?
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  teacherProfiles TeacherProfile[]
+  studentProfiles StudentProfile[]
+  classes         ClassRoom[]
+
+  @@unique([name, districtName])
+  @@index([name])
+}
+
 model TeacherProfile {
   id         String      @id @default(cuid())
   userId      String      @unique
+  schoolId    String?
   schoolName  String
   gradeBand   String?
   user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  school      School?     @relation(fields: [schoolId], references: [id], onDelete: SetNull)
   classes     ClassRoom[]
 
   students StudentProfile[] @relation("TeacherStudents")
@@ -41,13 +63,17 @@ model TeacherProfile {
 model StudentProfile {
   id          String         @id @default(cuid())
   userId      String         @unique
+  schoolId    String?
   grade       Int
   schoolName  String
   teacherId   String?
   user        User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  school      School?        @relation(fields: [schoolId], references: [id], onDelete: SetNull)
   teacher     TeacherProfile? @relation("TeacherStudents", fields: [teacherId], references: [id])
   enrollments Enrollment[]
   parentLinks ParentStudentLink[]
+
+  @@index([schoolId, grade])
 }
 
 model ParentProfile {
@@ -71,13 +97,18 @@ model ParentStudentLink {
 model ClassRoom {
   id           String       @id @default(cuid())
   name         String
+  schoolId     String?
   teacherId    String
   grade        Int
   createdAt    DateTime     @default(now())
+  school       School?       @relation(fields: [schoolId], references: [id], onDelete: SetNull)
   teacher      TeacherProfile @relation(fields: [teacherId], references: [id], onDelete: Cascade)
   enrollments  Enrollment[]
   assignments  Assignment[]
+  readingCoachAssignments ReadingCoachAssignment[]
   schedules    ReportSchedule[]
+
+  @@index([schoolId, grade])
 }
 
 model Enrollment {
@@ -299,6 +330,7 @@ model LearningLesson {
   learningPathItem     LearningPathItem?       @relation(fields: [learningPathItemId], references: [id], onDelete: SetNull)
   items                LearningLessonItem[]
   progress             StudentLessonProgress[]
+  questAttempts        LearningQuestAttempt[]
 }
 
 model LearningLessonItem {
@@ -333,6 +365,74 @@ model StudentLessonProgress {
   user                  User           @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([lessonId, userId])
+}
+
+model LearningQuestAttempt {
+  id              String         @id @default(cuid())
+  lessonId        String
+  userId          String
+  worldKey        String
+  questKey        String
+  skill           String
+  standardCode    String
+  score           Int
+  maxScore        Int
+  xpEarned        Int
+  status          String         @default("COMPLETED")
+  responses       Json
+  feedback        Json
+  createdAt       DateTime       @default(now())
+  lesson          LearningLesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  user            User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, createdAt])
+  @@index([lessonId, userId])
+  @@index([standardCode, skill])
+}
+
+model ReadingCoachAssignment {
+  id            String                @id @default(cuid())
+  classRoomId   String
+  assignedById  String
+  title         String
+  gradeLevel    Int
+  activityType  String                @default("READ_ALOUD")
+  expectedText  String
+  status        String                @default("ASSIGNED")
+  dueDate       DateTime?
+  createdAt     DateTime              @default(now())
+  classRoom     ClassRoom             @relation(fields: [classRoomId], references: [id], onDelete: Cascade)
+  assignedBy    User                  @relation("ReadingCoachAssignedBy", fields: [assignedById], references: [id], onDelete: Cascade)
+  attempts      ReadingCoachAttempt[]
+
+  @@index([classRoomId, status])
+  @@index([assignedById, createdAt])
+}
+
+model ReadingCoachAttempt {
+  id             String   @id @default(cuid())
+  assignmentId   String?
+  userId         String
+  gradeLevel     Int
+  activityType   String
+  expectedText   String
+  transcript     String
+  wordCount      Int
+  correctWords   Int
+  accuracy       Int
+  wordsPerMinute Int?
+  focusAreas     Json
+  miscues         Json
+  feedback        Json
+  provider        String
+  audioSeconds    Int?
+  createdAt       DateTime @default(now())
+  assignment      ReadingCoachAssignment? @relation(fields: [assignmentId], references: [id], onDelete: SetNull)
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([assignmentId])
+  @@index([userId, createdAt])
+  @@index([gradeLevel, activityType])
 }
 
 model ResourceLink {

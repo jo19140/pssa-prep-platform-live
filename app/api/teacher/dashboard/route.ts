@@ -16,7 +16,7 @@ export async function GET(req: Request) {
   const startDate = searchParams.get("startDate");
   const endDate = searchParams.get("endDate");
   const userId = (session.user as any).id;
-  const teacher = await db.teacherProfile.findUnique({ where: { userId }, include: { classes: { include: { enrollments: { include: { studentProfile: { include: { user: true } } } } } } } });
+  const teacher = await db.teacherProfile.findUnique({ where: { userId }, include: { school: true, classes: { include: { school: true, enrollments: { include: { studentProfile: { include: { user: true } } } } } } } });
   if (!teacher) return NextResponse.json({ error: "Teacher profile not found" }, { status: 404 });
   const allowedClasses = classId ? teacher.classes.filter((c) => c.id === classId) : teacher.classes;
   const studentUserIds = allowedClasses.flatMap((c) => c.enrollments.map((e) => e.studentProfile.userId));
@@ -40,5 +40,5 @@ export async function GET(req: Request) {
     groupedByStudent.get(testSession.user.id).trend.push({ dateMs: new Date(testSession.startedAt).getTime(), label: new Date(testSession.startedAt).toLocaleDateString(), score: testSession.report.percentScore });
   }
   const studentTrendLines = Array.from(groupedByStudent.values()).map((row) => ({ ...row, trend: row.trend.sort((a: any,b: any)=>a.dateMs-b.dateMs).map(({ label, score }: any) => ({ label, score })) }));
-  return NextResponse.json({ teacher: { id: teacher.id, schoolName: teacher.schoolName, classCount: teacher.classes.length, studentCount: studentUserIds.length }, classes: teacher.classes.map((c) => ({ id: c.id, name: c.name, grade: c.grade })), overview: { sessionCount: sessions.length, completedReportCount: reports.length, averageScore: avgScore }, students: studentRows, standardGroups, standardRecommendations, classGrowth, standardsGrowthSummary, studentTrendLines });
+  return NextResponse.json({ teacher: { id: teacher.id, schoolId: teacher.schoolId, schoolName: teacher.school?.name || teacher.schoolName, gradeBand: teacher.gradeBand, classCount: teacher.classes.length, studentCount: studentUserIds.length }, classes: teacher.classes.map((c) => ({ id: c.id, name: c.name, grade: c.grade, schoolId: c.schoolId, schoolName: c.school?.name || teacher.schoolName })), overview: { sessionCount: sessions.length, completedReportCount: reports.length, averageScore: avgScore }, students: studentRows, standardGroups, standardRecommendations, classGrowth, standardsGrowthSummary, studentTrendLines });
 }

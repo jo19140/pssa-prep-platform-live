@@ -1,4 +1,4 @@
-export type QuestionType = "TDA" | "CONVENTIONS" | "MCQ" | "EBSR" | "MULTI_SELECT" | "HOT_TEXT" | "DRAG_DROP";
+export type QuestionType = "TDA" | "CONVENTIONS" | "MCQ" | "EBSR" | "MULTI_SELECT" | "HOT_TEXT" | "DRAG_DROP" | "SHORT_RESPONSE";
 
 export type Student = {
   id: string;
@@ -81,7 +81,14 @@ export type TdaQuestion = BaseQuestion & {
   maxScore: number;
 };
 
-export type Question = McqQuestion | EbsrQuestion | HotTextQuestion | MultiSelectQuestion | DragDropQuestion | TdaQuestion;
+export type ShortResponseQuestion = BaseQuestion & {
+  type: "SHORT_RESPONSE";
+  prompt: string;
+  sampleAnswer: string;
+  maxScore: number;
+};
+
+export type Question = McqQuestion | EbsrQuestion | HotTextQuestion | MultiSelectQuestion | DragDropQuestion | TdaQuestion | ShortResponseQuestion;
 
 export type ResponseRecord = {
   questionId: number;

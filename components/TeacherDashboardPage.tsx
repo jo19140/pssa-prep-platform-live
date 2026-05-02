@@ -9,63 +9,81 @@ import { TeacherLearningPathPanel } from "@/components/TeacherLearningPathPanel"
 const elaStandards: Record<string, string[]> = {
   "3rd": [
     "CC.1.2.3.A - Main Idea",
-    "CC.1.2.3.B - Text Evidence",
+    "CC.1.2.3.B / CC.1.3.3.B - Inference",
     "CC.1.2.3.C - Text Structure",
     "CC.1.2.3.D - Vocabulary",
     "CC.1.3.3.A - Theme",
     "CC.1.3.3.B - Text Evidence (Literature)",
     "CC.1.3.3.C - Character / Plot",
-    "CC.1.3.3.D - Vocabulary (Literature)"
+    "CC.1.3.3.D - Vocabulary (Literature)",
+    "CC.1.3.3.C / CC.1.2.3.E - Point of View",
+    "CC.1.3.3.C - Flashback",
+    "CC.1.3.3.F / CC.1.2.3.F - Figurative Language"
   ],
   "4th": [
     "CC.1.2.4.A - Main Idea",
-    "CC.1.2.4.B - Text Evidence",
+    "CC.1.2.4.B / CC.1.3.4.B - Inference",
     "CC.1.2.4.C - Text Structure",
     "CC.1.2.4.D - Vocabulary",
     "CC.1.3.4.A - Theme",
     "CC.1.3.4.B - Text Evidence (Literature)",
     "CC.1.3.4.C - Character / Plot",
-    "CC.1.3.4.D - Vocabulary (Literature)"
+    "CC.1.3.4.D - Vocabulary (Literature)",
+    "CC.1.3.4.C - Point of View",
+    "CC.1.3.4.E - Flashback",
+    "CC.1.3.4.F / CC.1.2.4.F - Figurative Language"
   ],
   "5th": [
     "CC.1.2.5.A - Main Idea",
-    "CC.1.2.5.B - Text Evidence",
+    "CC.1.2.5.B / CC.1.3.5.B - Inference",
     "CC.1.2.5.C - Text Structure",
     "CC.1.2.5.D - Vocabulary",
     "CC.1.3.5.A - Theme",
     "CC.1.3.5.B - Text Evidence (Literature)",
     "CC.1.3.5.C - Character / Plot",
-    "CC.1.3.5.D - Vocabulary (Literature)"
+    "CC.1.3.5.D - Vocabulary (Literature)",
+    "CC.1.3.5.C - Point of View",
+    "CC.1.3.5.E - Flashback",
+    "CC.1.3.5.F / CC.1.2.5.F - Figurative Language"
   ],
   "6th": [
     "CC.1.2.6.A - Main Idea",
-    "CC.1.2.6.B - Text Evidence",
+    "CC.1.2.6.B / CC.1.3.6.B - Inference",
     "CC.1.2.6.C - Text Structure",
     "CC.1.2.6.D - Vocabulary",
     "CC.1.3.6.A - Theme",
     "CC.1.3.6.B - Text Evidence (Literature)",
     "CC.1.3.6.C - Character / Plot",
-    "CC.1.3.6.D - Vocabulary (Literature)"
+    "CC.1.3.6.D - Vocabulary (Literature)",
+    "CC.1.3.6.G - Point of View",
+    "CC.1.3.6.E - Flashback",
+    "CC.1.3.6.F / CC.1.2.6.F - Figurative Language"
   ],
   "7th": [
     "CC.1.2.7.A - Main Idea",
-    "CC.1.2.7.B - Text Evidence",
+    "CC.1.2.7.B / CC.1.3.7.B - Inference",
     "CC.1.2.7.C - Text Structure",
     "CC.1.2.7.D - Vocabulary",
     "CC.1.3.7.A - Theme",
     "CC.1.3.7.B - Text Evidence (Literature)",
     "CC.1.3.7.C - Character / Plot",
-    "CC.1.3.7.D - Vocabulary (Literature)"
+    "CC.1.3.7.D - Vocabulary (Literature)",
+    "CC.1.3.7.G - Point of View",
+    "CC.1.3.7.E - Flashback",
+    "CC.1.3.7.F / CC.1.2.7.F - Figurative Language"
   ],
   "8th": [
     "CC.1.2.8.A - Main Idea",
-    "CC.1.2.8.B - Text Evidence",
+    "CC.1.2.8.B / CC.1.3.8.B - Inference",
     "CC.1.2.8.C - Text Structure",
     "CC.1.2.8.D - Vocabulary",
     "CC.1.3.8.A - Theme",
     "CC.1.3.8.B - Text Evidence (Literature)",
     "CC.1.3.8.C - Character / Plot",
-    "CC.1.3.8.D - Vocabulary (Literature)"
+    "CC.1.3.8.D - Vocabulary (Literature)",
+    "CC.1.3.8.G - Point of View",
+    "CC.1.3.8.E - Flashback",
+    "CC.1.3.8.F / CC.1.2.8.F - Figurative Language"
   ],
 };
 
@@ -97,7 +115,15 @@ export default function TeacherDashboardPage() {
   const [selectedClassRoomId, setSelectedClassRoomId] = useState("");
   const [creatingDiagnostic, setCreatingDiagnostic] = useState(false);
   const [diagnosticMessage, setDiagnosticMessage] = useState("");
-  const [activeTab, setActiveTab] = useState<"overview" | "generator" | "tda" | "learning">("overview");
+  const [activeTab, setActiveTab] = useState<"overview" | "generator" | "tda" | "learning" | "readingCoach">("overview");
+  const [readingCoachAssignments, setReadingCoachAssignments] = useState<any[]>([]);
+  const [readingCoachForm, setReadingCoachForm] = useState({
+    title: "Reading Coach Fluency Practice",
+    gradeLevel: "6",
+    expectedText: "Maya stood at the front of the room and reread the first line of her speech. Her hands shook slightly, so she took a deep breath and looked at the note card again.",
+  });
+  const [assigningReadingCoach, setAssigningReadingCoach] = useState(false);
+  const [readingCoachMessage, setReadingCoachMessage] = useState("");
 
   async function saveTest() {
     if (!aiResult.trim()) {
@@ -152,6 +178,37 @@ export default function TeacherDashboardPage() {
     }
   }
 
+  async function loadReadingCoachAssignments() {
+    const res = await fetch("/api/teacher/reading-coach");
+    const json = await readJson(res);
+    if (res.ok) setReadingCoachAssignments(json.assignments || []);
+  }
+
+  async function assignReadingCoach() {
+    setAssigningReadingCoach(true);
+    setReadingCoachMessage("");
+    try {
+      const res = await fetch("/api/teacher/reading-coach", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          classRoomId: selectedClassRoomId || undefined,
+          title: readingCoachForm.title,
+          gradeLevel: readingCoachForm.gradeLevel,
+          expectedText: readingCoachForm.expectedText,
+        }),
+      });
+      const json = await readJson(res);
+      if (!res.ok) throw new Error(json.error || "Failed to assign Reading Coach practice.");
+      setReadingCoachMessage("Reading Coach practice assigned to the class.");
+      await loadReadingCoachAssignments();
+    } catch (err: any) {
+      setReadingCoachMessage(err.message || "Failed to assign Reading Coach practice.");
+    } finally {
+      setAssigningReadingCoach(false);
+    }
+  }
+
   useEffect(() => {
     async function loadDashboard() {
       try {
@@ -160,6 +217,7 @@ export default function TeacherDashboardPage() {
         const json = await res.json();
         setData(json);
         setSelectedClassRoomId(json.classes?.[0]?.id || "");
+        await loadReadingCoachAssignments();
       } catch (err: any) {
         setError(err.message || "Unknown error");
       } finally {
@@ -223,12 +281,80 @@ export default function TeacherDashboardPage() {
       <div className="flex flex-wrap gap-2 rounded-2xl bg-white p-2 shadow">
         <TabButton active={activeTab === "overview"} onClick={() => setActiveTab("overview")}>Overview</TabButton>
         <TabButton active={activeTab === "generator"} onClick={() => setActiveTab("generator")}>Generate Tests</TabButton>
+        <TabButton active={activeTab === "readingCoach"} onClick={() => setActiveTab("readingCoach")}>Reading Coach</TabButton>
         <TabButton active={activeTab === "tda"} onClick={() => setActiveTab("tda")}>TDA Scoring</TabButton>
         <TabButton active={activeTab === "learning"} onClick={() => setActiveTab("learning")}>Learning Paths</TabButton>
       </div>
 
       {activeTab === "tda" && <TeacherTdaScoringPanel />}
       {activeTab === "learning" && <TeacherLearningPathPanel />}
+      {activeTab === "readingCoach" && (
+        <section className="rounded-3xl bg-white p-6 shadow">
+          <div className="flex flex-col gap-1">
+            <p className="text-sm font-semibold uppercase tracking-wide text-orange-600">Reading Coach</p>
+            <h2 className="text-xl font-bold text-slate-900">Assign Read-Aloud Practice</h2>
+            <p className="text-sm text-slate-600">Students only see Reading Coach when you assign it to their class.</p>
+          </div>
+
+          <div className="mt-5 grid gap-4 md:grid-cols-2">
+            <label className="block">
+              <span className="text-sm font-medium text-slate-700">Assign to Class</span>
+              <select className="mt-1 w-full rounded border border-slate-300 p-2" value={selectedClassRoomId} onChange={(event) => setSelectedClassRoomId(event.target.value)}>
+                {data?.classes?.map((classRoom: any) => (
+                  <option key={classRoom.id} value={classRoom.id}>{classRoom.name}</option>
+                ))}
+              </select>
+            </label>
+            <label className="block">
+              <span className="text-sm font-medium text-slate-700">Grade Level</span>
+              <select className="mt-1 w-full rounded border border-slate-300 p-2" value={readingCoachForm.gradeLevel} onChange={(event) => setReadingCoachForm({ ...readingCoachForm, gradeLevel: event.target.value })}>
+                {[3, 4, 5, 6, 7, 8].map((grade) => <option key={grade} value={grade}>Grade {grade}</option>)}
+              </select>
+            </label>
+            <label className="block md:col-span-2">
+              <span className="text-sm font-medium text-slate-700">Assignment Title</span>
+              <input className="mt-1 w-full rounded border border-slate-300 p-2" value={readingCoachForm.title} onChange={(event) => setReadingCoachForm({ ...readingCoachForm, title: event.target.value })} />
+            </label>
+            <label className="block md:col-span-2">
+              <span className="text-sm font-medium text-slate-700">Read-Aloud Passage</span>
+              <textarea className="mt-1 min-h-36 w-full rounded border border-slate-300 p-3" value={readingCoachForm.expectedText} onChange={(event) => setReadingCoachForm({ ...readingCoachForm, expectedText: event.target.value })} />
+            </label>
+          </div>
+
+          <button onClick={assignReadingCoach} disabled={assigningReadingCoach || !selectedClassRoomId} className="mt-4 rounded-xl bg-orange-600 px-4 py-2 text-sm font-semibold text-white disabled:opacity-50">
+            {assigningReadingCoach ? "Assigning..." : "Assign Reading Coach"}
+          </button>
+          {readingCoachMessage ? <p className={`mt-3 text-sm font-semibold ${readingCoachMessage.includes("Failed") ? "text-red-600" : "text-green-700"}`}>{readingCoachMessage}</p> : null}
+
+          <div className="mt-6 overflow-x-auto">
+            <table className="w-full text-left text-sm">
+              <thead className="text-xs uppercase text-slate-500">
+                <tr>
+                  <th className="py-2 pr-4">Title</th>
+                  <th className="py-2 pr-4">Class</th>
+                  <th className="py-2 pr-4">Grade</th>
+                  <th className="py-2 pr-4">Attempts</th>
+                </tr>
+              </thead>
+              <tbody>
+                {readingCoachAssignments.map((assignment) => (
+                  <tr key={assignment.id} className="border-t border-slate-100">
+                    <td className="py-3 pr-4 font-semibold text-slate-900">{assignment.title}</td>
+                    <td className="py-3 pr-4">{assignment.className}</td>
+                    <td className="py-3 pr-4">Grade {assignment.gradeLevel}</td>
+                    <td className="py-3 pr-4">{assignment.attemptCount}</td>
+                  </tr>
+                ))}
+                {!readingCoachAssignments.length ? (
+                  <tr className="border-t border-slate-100">
+                    <td className="py-3 pr-4 text-slate-500" colSpan={4}>No Reading Coach assignments yet.</td>
+                  </tr>
+                ) : null}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      )}
 
       {activeTab === "generator" && (
       <section className="rounded-3xl bg-white p-6 shadow space-y-6">
@@ -443,4 +569,14 @@ function MetricCard({ title, value }: { title: string; value: string }) {
       <p className="text-2xl mt-2">{value}</p>
     </div>
   );
+}
+
+async function readJson(res: Response) {
+  const text = await res.text();
+  if (!text) return {};
+  try {
+    return JSON.parse(text);
+  } catch {
+    return { error: text };
+  }
 }

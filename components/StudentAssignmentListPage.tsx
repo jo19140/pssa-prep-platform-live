@@ -1,21 +1,27 @@
 "use client";
 
 import { StudentTutorAgentPanel } from "@/components/StudentTutorAgentPanel";
+import { ReadingCoachPanel } from "@/components/ReadingCoachPanel";
 
 export function StudentAssignmentListPage({
   assignments,
+  readingCoachAssignments,
   latestLearningPath,
   onOpen,
   onOpenLearningPath,
+  onReadingCoachComplete,
 }: {
   assignments: any[];
+  readingCoachAssignments?: any[];
   latestLearningPath?: any;
   onOpen: (assignment: any) => void;
   onOpenLearningPath?: () => void;
+  onReadingCoachComplete?: () => void;
 }) {
-  const totalAssignments = assignments.length;
+  const totalAssignments = assignments.length + (readingCoachAssignments?.length || 0);
   const completedAssignments = assignments.filter((a) => a.statusLabel === "Completed").length;
-  const remainingAssignments = totalAssignments - completedAssignments;
+  const completedReadingCoach = (readingCoachAssignments || []).filter((a) => a.statusLabel === "Completed").length;
+  const remainingAssignments = totalAssignments - completedAssignments - completedReadingCoach;
   const baselineDiagnostics = assignments.filter((a) => a.assignmentType === "DIAGNOSTIC");
   const teacherAssigned = assignments.filter((a) => a.assignmentType !== "DIAGNOSTIC");
   const pathItems = latestLearningPath?.items || [];
@@ -35,7 +41,7 @@ export function StudentAssignmentListPage({
         </div>
         <div className="rounded-2xl bg-white p-5 shadow ring-1 ring-slate-100">
           <p className="text-sm font-medium text-slate-500">Completed</p>
-          <p className="mt-2 text-3xl font-bold text-emerald-600">{completedAssignments}</p>
+          <p className="mt-2 text-3xl font-bold text-emerald-600">{completedAssignments + completedReadingCoach}</p>
         </div>
         <div className="rounded-2xl bg-white p-5 shadow ring-1 ring-slate-100">
           <p className="text-sm font-medium text-slate-500">Remaining</p>
@@ -62,6 +68,14 @@ export function StudentAssignmentListPage({
         </div>
         <AssignmentGroup assignments={teacherAssigned} emptyText="No teacher assigned lessons are available right now." onOpen={onOpen} />
       </section>
+
+      {(readingCoachAssignments || []).length ? (
+        <section className="space-y-4">
+          {(readingCoachAssignments || []).map((assignment: any) => (
+            <ReadingCoachPanel key={assignment.assignmentId} assignment={assignment} onComplete={onReadingCoachComplete} />
+          ))}
+        </section>
+      ) : null}
 
       <section className="rounded-3xl bg-white p-6 shadow">
         <div className="flex flex-col gap-1 sm:flex-row sm:items-start sm:justify-between">

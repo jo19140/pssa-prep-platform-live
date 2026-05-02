@@ -18,6 +18,7 @@ export function StudentSessionPage() {
   const [error, setError] = useState("");
   const [mode, setMode] = useState<"list" | "test" | "report" | "learningPath">("list");
   const [assignments, setAssignments] = useState<any[]>([]);
+  const [readingCoachAssignments, setReadingCoachAssignments] = useState<any[]>([]);
   const [questionStartedAt, setQuestionStartedAt] = useState(Date.now());
   const [flaggedQuestionIds, setFlaggedQuestionIds] = useState<number[]>([]);
   const [reviewOpen, setReviewOpen] = useState(false);
@@ -37,6 +38,7 @@ export function StudentSessionPage() {
       if (!res.ok) throw new Error("Failed to load assignments.");
       const json = await res.json();
       setAssignments(json.assignments || []);
+      setReadingCoachAssignments(json.readingCoachAssignments || []);
       setLatestLearningPath(json.latestLearningPath || null);
     } catch (e) {
       setError("Failed to load assignments.");
@@ -138,7 +140,7 @@ export function StudentSessionPage() {
 
   if (loading) return <div className="rounded-3xl bg-white p-6 shadow">Loading...</div>;
   if (error) return <div className="rounded-3xl bg-white p-6 shadow text-rose-600">{error}</div>;
-  if (mode === "list") return <StudentAssignmentListPage assignments={assignments} latestLearningPath={latestLearningPath} onOpen={openAssignment} onOpenLearningPath={() => setMode("learningPath")} />;
+  if (mode === "list") return <StudentAssignmentListPage assignments={assignments} readingCoachAssignments={readingCoachAssignments} latestLearningPath={latestLearningPath} onOpen={openAssignment} onOpenLearningPath={() => setMode("learningPath")} onReadingCoachComplete={loadAssignments} />;
   if (mode === "learningPath") return <StudentLearningPathPage learningPath={latestLearningPath} onBack={backToAssignments} />;
   if (mode === "report") return <div className="space-y-4"><button onClick={backToAssignments} className="rounded-xl bg-slate-200 px-4 py-2">Back to Assignments</button><StudentReport report={report} /><LearningPathPanel learningPath={sessionPayload?.learningPath} /></div>;
   return <div className="space-y-4"><StudentTest currentQuestion={questionPath[currentQuestionNumber - 1]} currentQuestionNumber={currentQuestionNumber} totalQuestions={questionPath.length || totalSimQuestions} history={history} onSubmitAnswer={onSubmitAnswer} onNavigate={goToQuestion} onPause={() => setIsPaused(true)} onReview={() => setReviewOpen(true)} onEndTest={submitTestNow} onToggleFlag={() => toggleFlag(questionPath[currentQuestionNumber - 1].id)} flaggedQuestionIds={flaggedQuestionIds} isPaused={isPaused} onResume={() => setIsPaused(false)} reviewOpen={reviewOpen} onCloseReview={() => setReviewOpen(false)} questionIds={questionPath.map((question) => question.id)} /></div>;

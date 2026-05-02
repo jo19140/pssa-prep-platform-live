@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 const quickPrompts = [
   "Teach me my weakest skill",
   "Create a short practice test",
+  "What is an inference?",
+  "What is point of view?",
   "Explain text evidence",
   "Make a mini lesson for today's learning path",
 ];

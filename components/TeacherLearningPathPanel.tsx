@@ -57,6 +57,74 @@ export function TeacherLearningPathPanel() {
       </section>
 
       <section className="rounded-3xl bg-white p-6 shadow">
+        <h2 className="text-xl font-bold text-slate-900">Learning World Quest Progress</h2>
+        <p className="mt-1 text-sm text-slate-600">Quest attempts show how students are practicing skills inside PSSA Learning World.</p>
+        <div className="mt-4 overflow-x-auto">
+          <table className="w-full text-left text-sm">
+            <thead className="text-xs uppercase text-slate-500">
+              <tr>
+                <th className="py-2 pr-4">Student</th>
+                <th className="py-2 pr-4">Skill</th>
+                <th className="py-2 pr-4">Quest Attempts</th>
+                <th className="py-2 pr-4">Latest Score</th>
+                <th className="py-2 pr-4">XP</th>
+              </tr>
+            </thead>
+            <tbody>
+              {(data.lessons || []).filter((lesson: any) => lesson.questAttempts > 0).map((lesson: any) => (
+                <tr key={`quest-${lesson.id}`} className="border-t border-slate-100">
+                  <td className="py-3 pr-4 font-semibold text-slate-900">{lesson.studentName}</td>
+                  <td className="py-3 pr-4 text-slate-700">{lesson.skill}</td>
+                  <td className="py-3 pr-4">{lesson.questAttempts}</td>
+                  <td className="py-3 pr-4">{lesson.latestQuestScore || "N/A"}</td>
+                  <td className="py-3 pr-4">{lesson.latestQuestXp ?? 0}</td>
+                </tr>
+              ))}
+              {!(data.lessons || []).some((lesson: any) => lesson.questAttempts > 0) ? (
+                <tr className="border-t border-slate-100">
+                  <td className="py-3 pr-4 text-slate-500" colSpan={5}>No quest attempts yet.</td>
+                </tr>
+              ) : null}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section className="rounded-3xl bg-white p-6 shadow">
+        <h2 className="text-xl font-bold text-slate-900">Reading Coach Practice</h2>
+        <p className="mt-1 text-sm text-slate-600">Recent read-aloud attempts show instructional focus areas for phonics, fluency, and accuracy practice.</p>
+        <div className="mt-4 overflow-x-auto">
+          <table className="w-full text-left text-sm">
+            <thead className="text-xs uppercase text-slate-500">
+              <tr>
+                <th className="py-2 pr-4">Student</th>
+                <th className="py-2 pr-4">Grade</th>
+                <th className="py-2 pr-4">Accuracy</th>
+                <th className="py-2 pr-4">WPM</th>
+                <th className="py-2 pr-4">Focus Areas</th>
+              </tr>
+            </thead>
+            <tbody>
+              {(data.readingCoachAttempts || []).map((attempt: any) => (
+                <tr key={attempt.id} className="border-t border-slate-100">
+                  <td className="py-3 pr-4 font-semibold text-slate-900">{attempt.studentName}</td>
+                  <td className="py-3 pr-4">Grade {attempt.gradeLevel}</td>
+                  <td className="py-3 pr-4">{attempt.accuracy}%</td>
+                  <td className="py-3 pr-4">{attempt.wordsPerMinute ?? "N/A"}</td>
+                  <td className="py-3 pr-4 text-slate-700">{formatFocusAreas(attempt.focusAreas)}</td>
+                </tr>
+              ))}
+              {!(data.readingCoachAttempts || []).length ? (
+                <tr className="border-t border-slate-100">
+                  <td className="py-3 pr-4 text-slate-500" colSpan={5}>No Reading Coach attempts yet.</td>
+                </tr>
+              ) : null}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section className="rounded-3xl bg-white p-6 shadow">
         <h2 className="text-xl font-bold text-slate-900">Progress by Standard</h2>
         <div className="mt-4 overflow-x-auto">
           <table className="w-full text-left text-sm">
@@ -95,7 +163,14 @@ export function TeacherLearningPathPanel() {
                   <h3 className="mt-1 text-base font-bold text-slate-900">{lesson.standardCode} - {lesson.skill}</h3>
                   <p className="mt-1 text-sm text-slate-600">{lesson.whyAssigned}</p>
                 </div>
-                <span className="inline-flex w-fit rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-700">{formatStatus(lesson.status)}</span>
+                <div className="flex flex-col gap-2 sm:items-end">
+                  <span className="inline-flex w-fit rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-700">{formatStatus(lesson.status)}</span>
+                  {lesson.questAttempts ? (
+                    <span className="inline-flex w-fit rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-700">
+                      Quest {lesson.latestQuestScore} | {lesson.latestQuestXp} XP
+                    </span>
+                  ) : null}
+                </div>
               </div>
             </article>
           ))}
@@ -141,4 +216,12 @@ function Metric({ title, value }: { title: string; value: number }) {
 
 function formatStatus(status: string) {
   return status.replace(/_/g, " ").toLowerCase().replace(/\b\w/g, (char) => char.toUpperCase());
+}
+
+function formatFocusAreas(focusAreas: unknown) {
+  if (!Array.isArray(focusAreas) || focusAreas.length === 0) return "No focus area yet";
+  return focusAreas
+    .map((area: any) => `${area.label || area.code || "Practice"}${area.description ? `: ${area.description}` : ""}`)
+    .slice(0, 3)
+    .join("; ");
 }

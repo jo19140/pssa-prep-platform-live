@@ -21,10 +21,17 @@ export async function GET() {
     include: {
       learningPath: { include: { session: { include: { user: true, assessment: true } } } },
       progress: true,
+      questAttempts: { orderBy: { createdAt: "desc" } },
     },
     orderBy: [{ priority: "asc" }, { createdAt: "desc" }],
   });
   const resources = await db.resourceLink.findMany({ orderBy: [{ gradeLevel: "asc" }, { standardCode: "asc" }] });
+  const readingCoachAttempts = await db.readingCoachAttempt.findMany({
+    where: { userId: { in: studentUserIds } },
+    include: { user: { select: { name: true } } },
+    orderBy: { createdAt: "desc" },
+    take: 50,
+  });
 
   const standardsMap = new Map<string, { standardCode: string; skill: string; lessonCount: number; completed: number; mastered: number }>();
   lessons.forEach((lesson) => {
@@ -50,8 +57,22 @@ export async function GET() {
       status: lesson.progress[0]?.status || "NOT_STARTED",
       masteryScore: lesson.progress[0]?.masteryScore ?? null,
       masteryStatus: lesson.progress[0]?.masteryStatus || "NOT_STARTED",
+      questAttempts: lesson.questAttempts.length,
+      latestQuestScore: lesson.questAttempts[0] ? `${lesson.questAttempts[0].score}/${lesson.questAttempts[0].maxScore}` : null,
+      latestQuestXp: lesson.questAttempts[0]?.xpEarned ?? null,
     })),
     resources,
+    readingCoachAttempts: readingCoachAttempts.map((attempt) => ({
+      id: attempt.id,
+      studentName: attempt.user.name,
+      gradeLevel: attempt.gradeLevel,
+      activityType: attempt.activityType,
+      accuracy: attempt.accuracy,
+      wordsPerMinute: attempt.wordsPerMinute,
+      focusAreas: attempt.focusAreas,
+      provider: attempt.provider,
+      createdAt: attempt.createdAt,
+    })),
     standardsProgress: Array.from(standardsMap.values()),
   });
 }

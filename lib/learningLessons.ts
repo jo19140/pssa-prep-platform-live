@@ -229,8 +229,35 @@ function buildLessonSections(lesson: Omit<LearningLessonBuild, "items">): Lesson
 
 function explanationForSkill(skill: string, gradeLevel: number) {
   const lower = skill.toLowerCase();
+  if (lower.includes("inference")) {
+    if (gradeLevel <= 3) return `Inference means figuring out something the text does not say directly. In grade ${gradeLevel}, use clues from the text and ask, "What can I figure out from this?"`;
+    if (gradeLevel <= 4) return `Inference means using details and examples to figure out an unstated idea. The text gives clues, and you explain what those clues help you understand.`;
+    if (gradeLevel <= 5) return `Inference means reading between the lines and supporting your thinking with accurate text evidence. A strong inference is not a guess; it is proved by details from the passage.`;
+    if (gradeLevel <= 6) return `Inference is a major PSSA skill. You make an inference, cite textual evidence, and explain how the evidence proves what the text implies but does not state directly.`;
+    return `Advanced inference means analyzing deeper meaning, theme, author message, and multiple layers of evidence. Strong readers connect clues across the text and avoid unsupported guesses.`;
+  }
   if (lower.includes("evidence")) return `Text evidence means using exact details from a passage to prove an answer. In grade ${gradeLevel}, strong readers do not just pick an answer that sounds right. They go back to the passage, find the sentence or detail that supports it, and explain how that evidence proves the idea.`;
   if (lower.includes("theme")) return `Theme is the message or lesson a story suggests. To find it, watch how the character changes, what conflict they face, and what the ending teaches. A theme is usually a complete idea, not one word.`;
+  if (lower.includes("point of view") || lower === "pov") {
+    if (gradeLevel <= 3) return `Point of view means who is telling the story or sharing the information. In grade ${gradeLevel}, look for clues like I, me, my, he, she, or they to decide whether the passage is first person or third person.`;
+    if (gradeLevel <= 4) return `Point of view means the narrator's or author's perspective. In grade ${gradeLevel}, compare first-person and third-person narration by asking who is speaking and what that narrator knows or notices.`;
+    if (gradeLevel <= 6) return `Point of view is how the author or narrator sees the events or topic. In grade ${gradeLevel}, strong readers explain how word choice, details, and what the narrator notices develop that point of view.`;
+    return `Point of view includes perspective, bias, and reliability. In grade ${gradeLevel}, evaluate which details are emphasized, which viewpoints are missing, and whether the narrator or author may be limited or biased.`;
+  }
+  if (lower.includes("figurative")) {
+    if (gradeLevel <= 3) return `Figurative language uses words in a nonliteral way. In grade ${gradeLevel}, start by noticing when a phrase does not mean exactly what it says, such as a simple simile or metaphor.`;
+    if (gradeLevel <= 4) return `Figurative language includes similes, metaphors, and idioms. Use context clues to figure out what the phrase really means instead of taking it literally.`;
+    if (gradeLevel <= 5) return `Figurative language creates meaning beyond the literal words. In grade ${gradeLevel}, explain what the phrase means in context and how it helps the reader understand an idea or feeling.`;
+    if (gradeLevel <= 6) return `Figurative language includes simile, metaphor, personification, hyperbole, and idioms. For PSSA-style questions, identify the type, interpret the meaning, and explain the effect on tone, mood, or meaning.`;
+    return `Advanced figurative language analysis asks how images, symbols, connotation, tone, mood, and author purpose work together to create deeper meaning.`;
+  }
+  if (lower.includes("flashback")) {
+    if (gradeLevel <= 3) return `Flashback connects to sequence. In grade ${gradeLevel}, notice when a story moves from what is happening now to something that happened earlier.`;
+    if (gradeLevel <= 4) return `Flashback is a shift to an earlier event. In grade ${gradeLevel}, look for time clues that show the story has moved from the present to the past.`;
+    if (gradeLevel <= 5) return `Flashback is part of story structure. It helps readers understand a character, conflict, or important earlier event that affects the current story.`;
+    if (gradeLevel <= 6) return `Flashback is a text structure choice. For PSSA-style questions, analyze why the author interrupts the current plot with an earlier event and how that flashback contributes to theme, setting, plot, or character development.`;
+    return `Advanced flashback analysis asks how nonlinear structure affects meaning. Evaluate why the author chose a flashback and how the story would change if events were told only in chronological order.`;
+  }
   if (lower.includes("convention") || lower.includes("grammar") || lower.includes("punctuation")) return `Conventions are the grammar, punctuation, capitalization, and sentence rules that make writing clear. Read the whole sentence first, then check whether the words and punctuation work together correctly.`;
   if (lower.includes("vocab")) return `Vocabulary questions ask you to use context clues. Read before and after the word, look for examples or contrasts, and choose the meaning that best fits the sentence.`;
   if (lower.includes("structure")) return `Text structure is how an author organizes ideas. Look for signal words that show cause and effect, problem and solution, compare and contrast, sequence, or description.`;
@@ -239,8 +266,12 @@ function explanationForSkill(skill: string, gradeLevel: number) {
 
 function workedExampleForSkill(skill: string, gradeLevel: number) {
   const lower = skill.toLowerCase();
+  if (lower.includes("inference")) return `Question: What can be inferred about the character? Worked answer: First find clues in what the character says and does. If the character checks the sky, packs extra supplies, and warns a friend, you can infer the character is cautious. The evidence proves the inference because each action shows planning.`;
   if (lower.includes("evidence")) return `Question: Which sentence best supports the idea that the scientist was careful? Worked answer: Choose the detail that shows careful actions, such as checking notes twice or repeating an experiment. That evidence proves the idea because it shows the scientist did not rush.`;
   if (lower.includes("theme")) return `Question: What theme is shown when a character keeps practicing after failing? Worked answer: A possible theme is, "Perseverance helps people improve." The evidence is the character's repeated practice and the better result at the end.`;
+  if (lower.includes("point of view") || lower === "pov") return `Question: How does the author develop point of view? Worked answer: Look at what the narrator notices and the words used to describe the event. If the narrator calls a task "a chance to prove responsibility," that wording shows the narrator sees the task as important, not annoying.`;
+  if (lower.includes("figurative")) return `Question: What does "the problem sat like a stone in her pocket" suggest? Worked answer: The phrase does not mean there is a real stone. It means the problem feels heavy and hard to ignore. The simile creates a serious tone.`;
+  if (lower.includes("flashback")) return `Question: Why does the author include the flashback? Worked answer: The earlier scene shows that the character once failed while speaking in front of others. That explains the character's fear in the present and helps develop the conflict.`;
   if (lower.includes("convention") || lower.includes("grammar") || lower.includes("punctuation")) return `Question: Which sentence is written correctly? Worked answer: Read each choice aloud and check subject-verb agreement, commas, capitalization, and pronouns. The correct choice is the one that follows all of those rules.`;
   if (lower.includes("vocab")) return `Question: What does "observe" mean in the passage? Worked answer: If nearby sentences say the students watched carefully and wrote notes, then "observe" means to watch closely.`;
   if (lower.includes("structure")) return `Question: Why does the author use headings? Worked answer: Headings divide the text into topics, which helps readers understand how each section adds to the central idea.`;

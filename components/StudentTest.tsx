@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import type { DragDropQuestion, EbsrQuestion, HotTextQuestion, McqQuestion, MultiSelectQuestion, Question, ResponseRecord, TdaQuestion } from "@/types";
+import type { DragDropQuestion, EbsrQuestion, HotTextQuestion, McqQuestion, MultiSelectQuestion, Question, ResponseRecord, ShortResponseQuestion, TdaQuestion } from "@/types";
 
 type SubmitPayload = { isCorrect: boolean; scorePointsEarned: number; maxPoints: number; errorPattern: string; answerPayload: Record<string, unknown>; };
 
@@ -54,6 +54,7 @@ export function StudentTest({
   const [multiIndices, setMultiIndices] = useState<number[]>([]);
   const [dragMapping, setDragMapping] = useState<Record<string, string>>({});
   const [essayResponse, setEssayResponse] = useState("");
+  const [shortResponse, setShortResponse] = useState("");
 
   useEffect(() => {
     const existing = history.find((record) => record.questionId === currentQuestion.id) as any;
@@ -61,6 +62,7 @@ export function StudentTest({
     setPartBIndices(Array.isArray(existing?.partBIndices) ? existing.partBIndices : []);
     setMultiIndices(Array.isArray(existing?.selectedIndices) ? existing.selectedIndices : []);
     setEssayResponse(typeof existing?.essay === "string" ? existing.essay : "");
+    setShortResponse(typeof existing?.shortResponse === "string" ? existing.shortResponse : "");
     if (currentQuestion.type === "DRAG_DROP") {
       const initial = currentQuestion.dragItems.reduce<Record<string, string>>((acc, item) => {
         acc[item.id] = existing?.mapping?.[item.id] || currentQuestion.categories[0];
@@ -163,6 +165,22 @@ export function StudentTest({
     await safeSubmit({ isCorrect: false, scorePointsEarned: 0, maxPoints: q.maxScore || 4, errorPattern: "pending_tda_grading", answerPayload: { essay: essayResponse.trim(), prompt: q.prompt, rubric: q.rubric, gradeLevel: q.gradeLevel || 6 } });
   }
 
+  async function submitShortResponse() {
+    const q = currentQuestion as ShortResponseQuestion;
+    const response = shortResponse.trim();
+    if (response.length < 8) return;
+    const lower = response.toLowerCase();
+    const evidenceWords = ["because", "text", "passage", "paragraph", "author", "shows", "suggests", "implies", "infer", "clue", "evidence"].filter((word) => lower.includes(word)).length;
+    const scorePointsEarned = response.split(/\s+/).length >= 12 && evidenceWords >= 2 ? q.maxScore : evidenceWords >= 1 ? 1 : 0;
+    await safeSubmit({
+      isCorrect: scorePointsEarned >= q.maxScore,
+      scorePointsEarned,
+      maxPoints: q.maxScore,
+      errorPattern: scorePointsEarned >= q.maxScore ? "inference_justified_with_evidence" : "inference_needs_more_text_evidence",
+      answerPayload: { shortResponse: response, sampleAnswer: q.sampleAnswer, prompt: q.prompt },
+    });
+  }
+
   return (
     <div className="min-h-[calc(100vh-7rem)] overflow-hidden rounded-sm border border-slate-300 bg-white shadow">
       <header className="border-b border-slate-300 bg-white">
@@ -254,6 +272,9 @@ export function StudentTest({
               essayResponse={essayResponse}
               setEssayResponse={setEssayResponse}
               submitTda={submitTda}
+              shortResponse={shortResponse}
+              setShortResponse={setShortResponse}
+              submitShortResponse={submitShortResponse}
               submitMcq={submitMcq}
             />
           </div>
@@ -286,6 +307,9 @@ function QuestionPanel({
   essayResponse,
   setEssayResponse,
   submitTda,
+  shortResponse,
+  setShortResponse,
+  submitShortResponse,
   submitMcq,
 }: any) {
   if (currentQuestion.type === "MCQ" || currentQuestion.type === "CONVENTIONS") {
@@ -307,6 +331,10 @@ function QuestionPanel({
   if (currentQuestion.type === "DRAG_DROP") {
     const q = currentQuestion as DragDropQuestion;
     return <div><Prompt>{q.dragDropPrompt}</Prompt><div className="mt-5 space-y-4">{q.dragItems.map((item) => <div key={item.id} className="rounded border-2 border-slate-300 p-3"><div className="leading-6">{item.text}</div><select value={dragMapping[item.id] || q.categories[0]} onChange={(event) => setDragMapping((prev: Record<string, string>) => ({ ...prev, [item.id]: event.target.value }))} className="mt-3 w-full rounded border border-slate-400 px-3 py-2">{q.categories.map((category) => <option key={category} value={category}>{category}</option>)}</select></div>)}</div><button onClick={submitDragDrop} disabled={isSubmitting || !dragReady} className="mt-5 rounded border-2 border-[#0b2a5b] bg-[#0b2a5b] px-5 py-2 font-bold text-white disabled:border-slate-300 disabled:bg-slate-300">Submit Drag-and-Drop Response</button></div>;
+  }
+  if (currentQuestion.type === "SHORT_RESPONSE") {
+    const q = currentQuestion as ShortResponseQuestion;
+    return <div><div className="mb-3 text-sm font-bold uppercase text-slate-600">Justify Your Thinking</div><Prompt>{q.prompt}</Prompt><p className="mt-3 text-sm leading-6 text-slate-700">Use clues from the text and explain what you can infer. Include evidence.</p><textarea value={shortResponse} onChange={(event) => setShortResponse(event.target.value)} className="mt-5 h-44 w-full rounded border-2 border-slate-400 p-4 leading-7" placeholder="Write your inference and support it with text evidence." /><button onClick={submitShortResponse} disabled={isSubmitting || shortResponse.trim().length < 8} className="mt-5 rounded border-2 border-[#0b2a5b] bg-[#0b2a5b] px-5 py-2 font-bold text-white disabled:border-slate-300 disabled:bg-slate-300">Submit Short Response</button></div>;
   }
   const q = currentQuestion as TdaQuestion;
   return <div><div className="mb-3 text-sm font-bold uppercase text-slate-600">Text-Dependent Analysis</div><Prompt>{q.prompt}</Prompt><p className="mt-3 text-sm leading-6 text-slate-700">{q.rubric}</p><textarea value={essayResponse} onChange={(event) => setEssayResponse(event.target.value)} className="mt-5 h-72 w-full rounded border-2 border-slate-400 p-4 leading-7" placeholder="Type your essay response here. Use evidence from the passage and explain your thinking." /><button onClick={submitTda} disabled={isSubmitting || essayResponse.trim().length < 10} className="mt-5 rounded border-2 border-[#0b2a5b] bg-[#0b2a5b] px-5 py-2 font-bold text-white disabled:border-slate-300 disabled:bg-slate-300">Submit TDA Essay</button></div>;
@@ -411,6 +439,7 @@ function buildQuestionReadAloudText(question: Question) {
   if (question.type === "HOT_TEXT") return [question.hotTextPrompt, "Options.", readChoices(question.selectableSpans)].join(" ");
   if (question.type === "MULTI_SELECT" || question.type === "MCQ" || question.type === "CONVENTIONS") return [question.question, readChoices(question.choices)].join(" ");
   if (question.type === "DRAG_DROP") return [question.dragDropPrompt, "Items.", question.dragItems.map((item) => item.text).join(". "), "Categories.", question.categories.join(", ")].join(" ");
+  if (question.type === "SHORT_RESPONSE") return [question.prompt, "Use clues from the text and explain your inference with evidence."].join(" ");
   const tda = question as TdaQuestion;
   return [tda.prompt, tda.rubric].join(" ");
 }

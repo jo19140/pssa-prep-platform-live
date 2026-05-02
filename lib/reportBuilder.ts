@@ -11,7 +11,7 @@ export function buildDetailedReport(student: any, history: any[], path: any[], p
   const score = totalPoints ? Math.round((earnedPoints / totalPoints) * 100) : 0;
   const performance = getPerformanceBand(score);
   const totalTimeSec = history.reduce((sum, h) => sum + (h.timeSpentSec || 0), 0);
-  const skills = ["Inference", "Text Evidence", "Main Idea"].map((skill) => {
+  const skills = ["Inference", "Literary Inference", "Text Evidence", "Main Idea", "Point of View", "Flashback", "Figurative Language"].map((skill) => {
     const items = history.filter((h) => h.skill === skill);
     const correct = items.filter((i) => i.isCorrect).length;
     const accuracy = items.length ? Math.round((correct / items.length) * 100) : 0;
@@ -32,7 +32,7 @@ export function buildDetailedReport(student: any, history: any[], path: any[], p
       isCorrect: entry.isCorrect,
       difficultyLabel: entry.difficulty <= 2 ? "Support" : entry.difficulty >= 4 ? "Challenge" : "On Level",
       question: q?.question || q?.partAQuestion || q?.hotTextPrompt || q?.dragDropPrompt || q?.prompt || "Question",
-      studentAnswerLabel: entry.essay ? "Essay submitted" : entry.chosenIndex != null ? letter(entry.chosenIndex) : entry.selectedIndex != null ? letter(entry.selectedIndex) : entry.partAIndex != null ? `Part A: ${letter(entry.partAIndex)}` : entry.selectedIndices ? entry.selectedIndices.map(letter).join(", ") : entry.scorePointsEarned != null ? `${entry.scorePointsEarned}/${entry.maxPoints}` : "Recorded",
+      studentAnswerLabel: entry.essay ? "Essay submitted" : entry.shortResponse ? "Short response submitted" : entry.chosenIndex != null ? letter(entry.chosenIndex) : entry.selectedIndex != null ? letter(entry.selectedIndex) : entry.partAIndex != null ? `Part A: ${letter(entry.partAIndex)}` : entry.selectedIndices ? entry.selectedIndices.map(letter).join(", ") : entry.scorePointsEarned != null ? `${entry.scorePointsEarned}/${entry.maxPoints}` : "Recorded",
       correctAnswerLabel: q?.type === "TDA" ? "Rubric-scored essay" : q?.correctIndex != null ? letter(q.correctIndex) : q?.partACorrectIndex != null ? `Part A: ${letter(q.partACorrectIndex)}` : q?.correctIndices ? q.correctIndices.map(letter).join(", ") : "See response",
       whyScoredThisWay: entry.errorPattern,
       skillTip: q?.skillTip || ""
