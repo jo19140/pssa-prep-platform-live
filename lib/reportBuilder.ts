@@ -11,7 +11,7 @@ export function buildDetailedReport(student: any, history: any[], path: any[], p
   const score = totalPoints ? Math.round((earnedPoints / totalPoints) * 100) : 0;
   const performance = getPerformanceBand(score);
   const totalTimeSec = history.reduce((sum, h) => sum + (h.timeSpentSec || 0), 0);
-  const skills = ["Inference", "Literary Inference", "Text Evidence", "Main Idea", "Point of View", "Flashback", "Figurative Language"].map((skill) => {
+  const skills = ["Inference", "Literary Inference", "Text Evidence", "Main Idea", "Setting", "Setting Impact", "Setting Analysis", "Plot Development", "Plot Analysis", "Point of View", "Flashback", "Figurative Language"].map((skill) => {
     const items = history.filter((h) => h.skill === skill);
     const correct = items.filter((i) => i.isCorrect).length;
     const accuracy = items.length ? Math.round((correct / items.length) * 100) : 0;

@@ -23,9 +23,10 @@ export async function POST(req: Request) {
   const role = (session.user as any).role;
   if (role !== "STUDENT" && role !== "ADMIN") return NextResponse.json({ error: "Forbidden" }, { status: 403 });
 
-  const { message } = await req.json();
+  const { message, mode } = await req.json();
   const cleanMessage = String(message || "").trim();
   if (cleanMessage.length < 2) return NextResponse.json({ error: "Message is required." }, { status: 400 });
+  const tutorMode = mode === "learning-path" ? "LEARNING_PATH" : "DASHBOARD";
 
   const userId = (session.user as any).id;
   const student = await db.studentProfile.findUnique({ where: { userId }, include: { user: true } });
@@ -74,8 +75,23 @@ export async function POST(req: Request) {
       recentLessons,
       recentReports,
       allowedStandards,
+      tutorMode,
     },
   });
+  const assignedLesson = tutorMode === "DASHBOARD" ? await maybeAssignLibraryLesson({
+    userId,
+    gradeLevel: student?.grade || memory.gradeLevel || 6,
+    message: cleanMessage,
+    allowedStandards,
+    recentLessons,
+  }) : null;
+  if (assignedLesson) {
+    result.response = `${result.response}\n\nI also added a matching lesson to your AI Learning Path: ${assignedLesson.title}.`;
+    result.artifacts.nextSteps = [
+      ...(result.artifacts.nextSteps || []),
+      `Open AI Learning Path and start ${assignedLesson.title}.`,
+    ];
+  }
 
   const updatedMemory = await db.tutorAgentMemory.update({
     where: { userId },
@@ -140,4 +156,38 @@ function deriveMasteredSkills(recentReports: any[], fallback: any[]) {
   const rows = recentReports.flatMap((report) => report.standardsMastery || []);
   const mastered = rows.filter((row) => Number(row.percentScore || 0) >= 85).slice(0, 8);
   return mastered.length ? mastered : fallback || [];
+}
+
+async function maybeAssignLibraryLesson({
+  userId,
+  gradeLevel,
+  message,
+  allowedStandards,
+  recentLessons,
+}: {
+  userId: string;
+  gradeLevel: number;
+  message: string;
+  allowedStandards: string[];
+  recentLessons: any[];
+}) {
+  const lower = message.toLowerCase();
+  const wantsLesson = /\b(assign|add|give|create|make|need|practice|lesson)\b/.test(lower) && /\b(lesson|practice|learning path|work)\b/.test(lower);
+  if (!wantsLesson) return null;
+  const existingLessonKeys = new Set(recentLessons.map((lesson) => `${lesson.standardCode}:${lesson.skill}`));
+  const lesson = await db.learningLesson.findFirst({
+    where: {
+      gradeLevel,
+      standardCode: allowedStandards.length ? { in: allowedStandards } : undefined,
+    },
+    orderBy: [{ createdAt: "desc" }],
+  });
+  if (!lesson) return null;
+  if (existingLessonKeys.has(`${lesson.standardCode}:${lesson.skill}`)) return null;
+  await db.studentLessonProgress.upsert({
+    where: { lessonId_userId: { lessonId: lesson.id, userId } },
+    update: {},
+    create: { lessonId: lesson.id, userId },
+  });
+  return { id: lesson.id, title: lesson.title };
 }

@@ -20,13 +20,15 @@ export async function POST(req: Request) {
   if (!lesson) return NextResponse.json({ error: "Lesson not found." }, { status: 404 });
 
   const responses = normalizeResponses(body.responses);
-  const scored = scoreFindTheEvidenceQuest(responses);
+  const scored = responses.mode === "space-shooter" || responses.mode === "arcade-mini-game"
+    ? scoreArcadeQuest(responses as { score: number; maxScore: number; shots?: unknown[]; answers?: unknown[]; gameType?: string })
+    : scoreFindTheEvidenceQuest(responses);
   const attempt = await db.learningQuestAttempt.create({
     data: {
       lessonId,
       userId: (session.user as any).id,
       worldKey: worldKeyForSkill(lesson.skill),
-      questKey: "find-the-evidence",
+      questKey: responses.mode === "space-shooter" ? "space-shooter" : responses.mode === "arcade-mini-game" ? String(responses.gameType || "arcade-mini-game") : "find-the-evidence",
       skill: lesson.skill,
       standardCode: lesson.standardCode,
       score: scored.score,
@@ -37,18 +39,25 @@ export async function POST(req: Request) {
     },
   });
 
+  const existingProgress = await db.studentLessonProgress.findUnique({
+    where: { lessonId_userId: { lessonId, userId: (session.user as any).id } },
+  });
+  const nextStatus = existingProgress?.status === "MASTERED" || existingProgress?.status === "COMPLETED"
+    ? existingProgress.status
+    : scored.score >= 2
+      ? "IN_PROGRESS"
+      : undefined;
+
   await db.studentLessonProgress.upsert({
     where: { lessonId_userId: { lessonId, userId: (session.user as any).id } },
     update: {
-      status: scored.score >= 2 ? "IN_PROGRESS" : undefined,
-      guidedResponses: responses as Prisma.InputJsonValue,
-      startedAt: new Date(),
+      status: nextStatus,
+      startedAt: existingProgress?.startedAt || new Date(),
     },
     create: {
       lessonId,
       userId: (session.user as any).id,
       status: "IN_PROGRESS",
-      guidedResponses: responses as Prisma.InputJsonValue,
       startedAt: new Date(),
     },
   });
@@ -58,10 +67,52 @@ export async function POST(req: Request) {
 
 function normalizeResponses(value: unknown) {
   const raw = typeof value === "object" && value ? value as Record<string, unknown> : {};
+  if (raw.mode === "space-shooter" || raw.mode === "arcade-mini-game") {
+    return {
+      mode: String(raw.mode || ""),
+      gameType: String(raw.gameType || ""),
+      score: Number(raw.score || 0),
+      maxScore: Number(raw.maxScore || 0),
+      shots: Array.isArray(raw.shots) ? raw.shots : [],
+      answers: Array.isArray(raw.answers) ? raw.answers : [],
+      inference: "",
+      evidence: "",
+      explanation: "",
+    };
+  }
   return {
     inference: String(raw.inference || ""),
     evidence: String(raw.evidence || ""),
     explanation: String(raw.explanation || ""),
+  };
+}
+
+function scoreArcadeQuest(responses: { score: number; maxScore: number; shots?: unknown[]; answers?: unknown[]; gameType?: string }) {
+  const responseCount = responses.shots?.length || responses.answers?.length || 1;
+  const maxScore = Math.max(1, Math.min(10, responses.maxScore || responseCount));
+  const score = Math.max(0, Math.min(maxScore, responses.score || 0));
+  const percent = Math.round((score / maxScore) * 100);
+  const gameType = responses.gameType || "skill";
+  const gameLabel = gameType === "car" ? "car rally" : gameType === "crossing" ? "road crossing" : gameType;
+  const strengths = score >= Math.ceil(maxScore * 0.7)
+    ? [`You chose the correct ${gameLabel} targets most of the time.`]
+    : ["You practiced matching the target skill under game pressure."];
+  const nextSteps = percent >= 80
+    ? ["Try a faster round or a harder target skill next."]
+    : ["Slow down and read every answer choice before choosing.", "Check whether the target asks for an inference, main idea, synonym, antonym, simile, metaphor, or another skill."];
+
+  return {
+    score,
+    maxScore,
+    xpEarned: score * 20,
+    feedback: {
+      performance: percent >= 80 ? "Arcade game mastered" : percent >= 60 ? "Good run" : "Needs another try",
+      strengths,
+      nextSteps,
+      studentMessage: percent >= 80
+        ? "Great work. You chose the correct skill targets while keeping your focus."
+        : "Good practice. Try again and read the mission carefully before each move.",
+    },
   };
 }
 

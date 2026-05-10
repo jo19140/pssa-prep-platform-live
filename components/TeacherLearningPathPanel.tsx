@@ -3,9 +3,15 @@
 import { useEffect, useMemo, useState } from "react";
 
 export function TeacherLearningPathPanel() {
-  const [data, setData] = useState<any>({ lessons: [], resources: [], standardsProgress: [] });
+  const [data, setData] = useState<any>({ lessons: [], resources: [], standardsProgress: [], libraryLessons: [], classes: [] });
   const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState("");
+  const [assignClassRoomId, setAssignClassRoomId] = useState("");
+  const [assigningLessonId, setAssigningLessonId] = useState("");
+  const [buildingLibrary, setBuildingLibrary] = useState(false);
+  const [selectedLessonIds, setSelectedLessonIds] = useState<string[]>([]);
+  const [previewLesson, setPreviewLesson] = useState<any>(null);
+  const [libraryFilters, setLibraryFilters] = useState({ show: "all", search: "", domain: "all", grade: "all" });
   const [form, setForm] = useState({ gradeLevel: "6", standardCode: "", skill: "", title: "", url: "", provider: "", description: "" });
 
   async function loadData() {
@@ -13,6 +19,7 @@ export function TeacherLearningPathPanel() {
     const res = await fetch("/api/teacher/learning-lessons");
     const json = await res.json();
     setData(json);
+    setAssignClassRoomId((current) => current || json.classes?.[0]?.id || "");
     setLoading(false);
   }
 
@@ -35,6 +42,40 @@ export function TeacherLearningPathPanel() {
     await loadData();
   }
 
+  async function assignLibraryLessons(lessonIds: string[]) {
+    if (!lessonIds.length) return;
+    setMessage("");
+    setAssigningLessonId(lessonIds.join(","));
+    const res = await fetch("/api/teacher/learning-lessons", {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ lessonIds, classRoomId: assignClassRoomId }),
+    });
+    const json = await res.json();
+    setAssigningLessonId("");
+    if (!res.ok) {
+      setMessage(json.error || "Failed to assign lesson.");
+      return;
+    }
+    setMessage(`${json.lessonCount || lessonIds.length} lesson${(json.lessonCount || lessonIds.length) === 1 ? "" : "s"} assigned to ${json.assignedCount} student${json.assignedCount === 1 ? "" : "s"}.`);
+    setSelectedLessonIds([]);
+    await loadData();
+  }
+
+  async function buildPrebuiltLibrary() {
+    setMessage("");
+    setBuildingLibrary(true);
+    const res = await fetch("/api/teacher/learning-lessons/prebuilt", { method: "POST" });
+    const json = await res.json();
+    setBuildingLibrary(false);
+    if (!res.ok) {
+      setMessage(json.error || "Failed to build prebuilt lessons.");
+      return;
+    }
+    setMessage(`Prebuilt lesson library ready: ${json.created} created, ${json.existing} already existed.`);
+    await loadData();
+  }
+
   const lessonsByStatus = useMemo(() => {
     const rows = data.lessons || [];
     return {
@@ -44,6 +85,23 @@ export function TeacherLearningPathPanel() {
       mastered: rows.filter((row: any) => row.status === "MASTERED").length,
     };
   }, [data.lessons]);
+
+  const libraryRows = data.libraryLessons || [];
+  const libraryDomains = useMemo<string[]>(() => Array.from(new Set<string>(libraryRows.map((lesson: any) => lessonDomain(lesson)).filter(Boolean))).sort(), [libraryRows]);
+  const libraryGrades = useMemo<string[]>(() => Array.from(new Set<string>(libraryRows.map((lesson: any) => String(lesson.gradeLevel)).filter(Boolean))).sort((a, b) => Number(a) - Number(b)), [libraryRows]);
+  const filteredLibraryLessons = useMemo(() => {
+    const search = libraryFilters.search.trim().toLowerCase();
+    return libraryRows.filter((lesson: any) => {
+      if (libraryFilters.grade !== "all" && String(lesson.gradeLevel) !== libraryFilters.grade) return false;
+      if (libraryFilters.domain !== "all" && lessonDomain(lesson) !== libraryFilters.domain) return false;
+      if (libraryFilters.show === "ai" && lesson.generatedBy !== "AI_ENRICHED") return false;
+      if (libraryFilters.show === "prebuilt" && lesson.generatedBy !== "PREBUILT_AI_LIBRARY") return false;
+      if (libraryFilters.show === "assigned" && !lesson.assignedCount) return false;
+      if (!search) return true;
+      return [lesson.title, lesson.skill, lesson.standardCode, lesson.standardLabel].some((value) => String(value || "").toLowerCase().includes(search));
+    });
+  }, [libraryRows, libraryFilters]);
+  const selectedVisibleCount = filteredLibraryLessons.filter((lesson: any) => selectedLessonIds.includes(lesson.id)).length;
 
   if (loading) return <section className="rounded-3xl bg-white p-6 shadow">Loading learning pathways...</section>;
 
@@ -57,8 +115,177 @@ export function TeacherLearningPathPanel() {
       </section>
 
       <section className="rounded-3xl bg-white p-6 shadow">
+        <div className="flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-wide text-indigo-700">Lesson Creator Agent Library</p>
+            <h2 className="text-xl font-bold text-slate-900">Create Assignments</h2>
+            <p className="mt-1 text-sm text-slate-600">
+              The Lesson Creator Agent saves reusable lessons here. Preview or assign lessons to complement class instruction or target specific skills.
+            </p>
+          </div>
+          <button
+            type="button"
+            onClick={buildPrebuiltLibrary}
+            disabled={buildingLibrary}
+            className="w-fit rounded-xl bg-violet-700 px-4 py-2 text-sm font-bold text-white shadow-sm hover:bg-violet-800 disabled:cursor-not-allowed disabled:bg-slate-300"
+          >
+            {buildingLibrary ? "Building Lessons..." : "Build Prebuilt Lessons"}
+          </button>
+        </div>
+
+        <div className="mt-6 rounded-2xl border border-slate-200 bg-slate-50">
+          <div className="grid gap-4 p-4 lg:grid-cols-[220px_1fr_auto] lg:items-end">
+            <label className="text-sm font-semibold text-slate-700">
+              Filter to show
+              <select
+                value={libraryFilters.show}
+                onChange={(event) => setLibraryFilters((current) => ({ ...current, show: event.target.value }))}
+                className="mt-1 block w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm"
+              >
+                <option value="all">All Lessons</option>
+                <option value="ai">AI Enriched</option>
+                <option value="prebuilt">Prebuilt AI Library</option>
+                <option value="assigned">Already Assigned</option>
+              </select>
+            </label>
+            <p className="text-sm leading-6 text-slate-600">
+              Showing {filteredLibraryLessons.length} of {libraryRows.length}. Select one or more lessons, choose a class, then assign.
+            </p>
+            <div className="flex flex-col gap-2 sm:flex-row">
+              <select
+                value={assignClassRoomId}
+                onChange={(event) => setAssignClassRoomId(event.target.value)}
+                className="rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm font-semibold text-slate-700"
+              >
+                {(data.classes || []).map((classRoom: any) => (
+                  <option key={classRoom.id} value={classRoom.id}>
+                    {classRoom.name} - Grade {classRoom.grade}
+                  </option>
+                ))}
+              </select>
+              <button
+                type="button"
+                onClick={() => assignLibraryLessons(selectedLessonIds)}
+                disabled={!assignClassRoomId || !selectedLessonIds.length || Boolean(assigningLessonId)}
+                className="rounded-xl bg-indigo-700 px-4 py-2 text-sm font-bold text-white shadow-sm hover:bg-indigo-800 disabled:cursor-not-allowed disabled:bg-slate-300"
+              >
+                {assigningLessonId ? "Assigning..." : `Assign Lessons${selectedLessonIds.length ? ` (${selectedLessonIds.length})` : ""}`}
+              </button>
+            </div>
+          </div>
+
+          <div className="grid gap-3 border-t border-slate-200 bg-white p-4 md:grid-cols-[1fr_220px_160px]">
+            <input
+              value={libraryFilters.search}
+              onChange={(event) => setLibraryFilters((current) => ({ ...current, search: event.target.value }))}
+              className="rounded-xl border border-slate-300 px-3 py-2 text-sm"
+              placeholder="Lesson Name"
+            />
+            <select
+              value={libraryFilters.domain}
+              onChange={(event) => setLibraryFilters((current) => ({ ...current, domain: event.target.value }))}
+              className="rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm"
+            >
+              <option value="all">Domain</option>
+              {libraryDomains.map((domain) => <option key={domain} value={domain}>{domain}</option>)}
+            </select>
+            <select
+              value={libraryFilters.grade}
+              onChange={(event) => setLibraryFilters((current) => ({ ...current, grade: event.target.value }))}
+              className="rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm"
+            >
+              <option value="all">Grade</option>
+              {libraryGrades.map((grade) => <option key={grade} value={grade}>Grade {grade}</option>)}
+            </select>
+          </div>
+
+          <div className="overflow-x-auto border-t border-slate-200 bg-white">
+            <table className="w-full min-w-[900px] text-left text-sm">
+              <thead className="bg-slate-50 text-xs uppercase text-slate-500">
+                <tr>
+                  <th className="w-12 px-4 py-3">
+                    <input
+                      type="checkbox"
+                      checked={filteredLibraryLessons.length > 0 && selectedVisibleCount === filteredLibraryLessons.length}
+                      onChange={(event) => {
+                        const visibleIds = filteredLibraryLessons.map((lesson: any) => lesson.id);
+                        setSelectedLessonIds((current) => event.target.checked
+                          ? Array.from(new Set([...current, ...visibleIds]))
+                          : current.filter((id) => !visibleIds.includes(id)));
+                      }}
+                    />
+                  </th>
+                  <th className="px-4 py-3">Lesson Name</th>
+                  <th className="px-4 py-3">Language</th>
+                  <th className="px-4 py-3">Domain</th>
+                  <th className="px-4 py-3">Grade</th>
+                  <th className="px-4 py-3">Assigned</th>
+                  <th className="px-4 py-3">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredLibraryLessons.map((lesson: any) => (
+                  <tr key={lesson.id} className="border-t border-slate-100">
+                    <td className="px-4 py-4 align-top">
+                      <input
+                        type="checkbox"
+                        checked={selectedLessonIds.includes(lesson.id)}
+                        onChange={(event) => setSelectedLessonIds((current) => event.target.checked ? [...current, lesson.id] : current.filter((id) => id !== lesson.id))}
+                      />
+                    </td>
+                    <td className="px-4 py-4 align-top">
+                      <p className="font-bold text-blue-700">{lesson.title}</p>
+                      <p className="mt-1 text-xs text-slate-500">{lesson.standardCode} • {lesson.skill}</p>
+                      <button
+                        type="button"
+                        onClick={() => setPreviewLesson(lesson)}
+                        className="mt-2 text-xs font-bold text-indigo-700 underline"
+                      >
+                        Preview lesson
+                      </button>
+                    </td>
+                    <td className="px-4 py-4 align-top text-slate-700">English</td>
+                    <td className="px-4 py-4 align-top text-slate-700">{lessonDomain(lesson)}</td>
+                    <td className="px-4 py-4 align-top text-slate-700">Grade {lesson.gradeLevel}</td>
+                    <td className="px-4 py-4 align-top text-slate-700">{lesson.assignedCount}</td>
+                    <td className="px-4 py-4 align-top">
+                      <button
+                        type="button"
+                        onClick={() => assignLibraryLessons([lesson.id])}
+                        disabled={!assignClassRoomId || assigningLessonId === lesson.id}
+                        className="rounded-lg bg-slate-900 px-3 py-2 text-xs font-bold text-white hover:bg-slate-800 disabled:cursor-not-allowed disabled:bg-slate-300"
+                      >
+                        {assigningLessonId === lesson.id ? "Assigning..." : "Assign"}
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+                {!filteredLibraryLessons.length ? (
+                  <tr className="border-t border-slate-100">
+                    <td className="px-4 py-5 text-slate-500" colSpan={7}>
+                      No lessons match these filters yet.
+                    </td>
+                  </tr>
+                ) : null}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      {previewLesson ? (
+        <LessonPreviewModal
+          lesson={previewLesson}
+          onClose={() => setPreviewLesson(null)}
+          onAssign={() => assignLibraryLessons([previewLesson.id])}
+          assigning={assigningLessonId === previewLesson.id}
+          canAssign={Boolean(assignClassRoomId)}
+        />
+      ) : null}
+
+      <section className="rounded-3xl bg-white p-6 shadow">
         <h2 className="text-xl font-bold text-slate-900">Learning World Quest Progress</h2>
-        <p className="mt-1 text-sm text-slate-600">Quest attempts show how students are practicing skills inside PSSA Learning World.</p>
+        <p className="mt-1 text-sm text-slate-600">Arcade attempts appear after students pass the mastery check and unlock PSSA Learning World.</p>
         <div className="mt-4 overflow-x-auto">
           <table className="w-full text-left text-sm">
             <thead className="text-xs uppercase text-slate-500">
@@ -162,9 +389,17 @@ export function TeacherLearningPathPanel() {
                   <p className="text-xs font-semibold uppercase text-slate-500">{lesson.studentName} • Grade {lesson.gradeLevel}</p>
                   <h3 className="mt-1 text-base font-bold text-slate-900">{lesson.standardCode} - {lesson.skill}</h3>
                   <p className="mt-1 text-sm text-slate-600">{lesson.whyAssigned}</p>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    <StepPill label="Guided" complete={lesson.guidedComplete} />
+                    <StepPill label="Practice" complete={lesson.independentComplete} />
+                    <StepPill label="Exit" complete={lesson.exitTicketComplete} />
+                    <StepPill label={lesson.masteryScore == null ? "Mastery" : `Mastery ${lesson.masteryScore}%`} complete={lesson.arcadeUnlocked} />
+                    <StepPill label="Arcade" complete={lesson.questAttempts > 0} unlocked={lesson.arcadeUnlocked} />
+                  </div>
                 </div>
                 <div className="flex flex-col gap-2 sm:items-end">
                   <span className="inline-flex w-fit rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-700">{formatStatus(lesson.status)}</span>
+                  <span className="inline-flex w-fit rounded-full bg-blue-100 px-3 py-1 text-xs font-semibold text-blue-700">{lesson.currentStep}</span>
                   {lesson.questAttempts ? (
                     <span className="inline-flex w-fit rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-700">
                       Quest {lesson.latestQuestScore} | {lesson.latestQuestXp} XP
@@ -214,8 +449,156 @@ function Metric({ title, value }: { title: string; value: number }) {
   );
 }
 
+function StepPill({ label, complete, unlocked = true }: { label: string; complete: boolean; unlocked?: boolean }) {
+  return (
+    <span
+      className={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ${
+        complete
+          ? "bg-emerald-100 text-emerald-700"
+          : unlocked
+            ? "bg-white text-slate-600 ring-1 ring-slate-200"
+            : "bg-slate-200 text-slate-500"
+      }`}
+    >
+      {label}
+    </span>
+  );
+}
+
+function LessonPreviewModal({
+  lesson,
+  onClose,
+  onAssign,
+  assigning,
+  canAssign,
+}: {
+  lesson: any;
+  onClose: () => void;
+  onAssign: () => void;
+  assigning: boolean;
+  canAssign: boolean;
+}) {
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/45 p-4">
+      <section className="max-h-[88vh] w-full max-w-5xl overflow-y-auto rounded-2xl bg-white shadow-2xl">
+        <div className="sticky top-0 z-10 flex flex-col gap-3 border-b border-slate-200 bg-white p-5 sm:flex-row sm:items-start sm:justify-between">
+          <div>
+            <p className="text-xs font-bold uppercase tracking-wide text-indigo-700">Lesson Preview</p>
+            <h3 className="mt-1 text-2xl font-black text-slate-950">{lesson.title}</h3>
+            <p className="mt-1 text-sm text-slate-600">
+              Grade {lesson.gradeLevel} • {lessonDomain(lesson)} • {lesson.standardCode} • {lesson.skill}
+            </p>
+          </div>
+          <div className="flex gap-2">
+            <button
+              type="button"
+              onClick={onAssign}
+              disabled={!canAssign || assigning}
+              className="rounded-xl bg-slate-900 px-4 py-2 text-sm font-bold text-white hover:bg-slate-800 disabled:cursor-not-allowed disabled:bg-slate-300"
+            >
+              {assigning ? "Assigning..." : "Assign Lesson"}
+            </button>
+            <button
+              type="button"
+              onClick={onClose}
+              className="rounded-xl border border-slate-300 px-4 py-2 text-sm font-bold text-slate-700 hover:bg-slate-50"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+
+        <div className="grid gap-4 p-5 lg:grid-cols-[1fr_360px]">
+          <div className="space-y-4">
+            <PreviewBlock title="Lesson Explanation">
+              <p>{lesson.lessonExplanation}</p>
+            </PreviewBlock>
+            <PreviewBlock title="Worked Example">
+              <p>{lesson.workedExample}</p>
+            </PreviewBlock>
+            <PreviewPractice title="Guided Practice" questions={lesson.guidedPractice} />
+            <PreviewPractice title="Independent Practice" questions={lesson.independentPractice} />
+          </div>
+          <aside className="space-y-4">
+            <PreviewBlock title="Assignment Note">
+              <p>{lesson.whyAssigned}</p>
+            </PreviewBlock>
+            <PreviewPractice title="Exit Ticket" questions={lesson.exitTicket} compact />
+            <PreviewPractice title="Mastery Check" questions={lesson.masteryCheck} compact />
+            <PreviewBlock title="Retest Recommendation">
+              <p>{lesson.retestRecommendation}</p>
+            </PreviewBlock>
+            {lesson.resourceTitle ? (
+              <PreviewBlock title="Resource">
+                <p className="font-semibold text-slate-900">{lesson.resourceTitle}</p>
+                <p className="mt-1 text-slate-600">{lesson.resourceDescription || lesson.resourceProvider}</p>
+              </PreviewBlock>
+            ) : null}
+          </aside>
+        </div>
+      </section>
+    </div>
+  );
+}
+
+function PreviewBlock({ title, children }: { title: string; children: any }) {
+  return (
+    <section className="rounded-xl border border-slate-200 bg-white p-4 text-sm leading-6 text-slate-700">
+      <h4 className="mb-2 text-base font-black text-slate-950">{title}</h4>
+      {children}
+    </section>
+  );
+}
+
+function PreviewPractice({ title, questions, compact = false }: { title: string; questions: any; compact?: boolean }) {
+  const rows = Array.isArray(questions) ? questions : [];
+  return (
+    <PreviewBlock title={title}>
+      <div className="space-y-3">
+        {rows.slice(0, compact ? 2 : 3).map((question: any, index: number) => (
+          <article key={`${title}-${index}`} className="rounded-lg bg-slate-50 p-3">
+            {question.passage ? <p className="mb-2 text-xs italic text-slate-600">{question.passage}</p> : null}
+            <p className="font-bold text-slate-900">{index + 1}. {question.question}</p>
+            {Array.isArray(question.choices) ? (
+              <ul className="mt-2 space-y-1">
+                {question.choices.map((choice: string) => (
+                  <li
+                    key={choice}
+                    className={`rounded-md border px-2 py-1 text-xs ${
+                      choice === question.correctAnswer
+                        ? "border-emerald-200 bg-emerald-50 text-emerald-800"
+                        : "border-slate-200 bg-white text-slate-600"
+                    }`}
+                  >
+                    {choice}
+                  </li>
+                ))}
+              </ul>
+            ) : null}
+            <p className="mt-2 text-xs text-slate-600"><span className="font-semibold">Teaching note:</span> {question.explanation}</p>
+          </article>
+        ))}
+        {!rows.length ? <p className="text-slate-500">No practice items saved for this section.</p> : null}
+      </div>
+    </PreviewBlock>
+  );
+}
+
 function formatStatus(status: string) {
   return status.replace(/_/g, " ").toLowerCase().replace(/\b\w/g, (char) => char.toUpperCase());
+}
+
+function lessonDomain(lesson: any) {
+  const text = `${lesson.skill || ""} ${lesson.standardLabel || ""} ${lesson.standardCode || ""}`.toLowerCase();
+  const code = String(lesson.standardCode || "");
+  if (code.includes("CC.1.4.") || text.includes("convention") || text.includes("grammar") || text.includes("pronoun")) return "Conventions of Standard English";
+  if (code.includes("CC.1.2.")) return "Informational Text";
+  if (code.includes("CC.1.3.")) return "Literary Text";
+  if (text.includes("tda") || text.includes("writing") || text.includes(".4.")) return "Text-Dependent Analysis";
+  if (text.includes("vocab") || text.includes("word") || text.includes("connotation") || text.includes("figurative")) return "Vocabulary";
+  if (text.includes("theme") || text.includes("plot") || text.includes("character") || text.includes("point of view")) return "Literary Text";
+  if (text.includes("main idea") || text.includes("evidence") || text.includes("inference") || text.includes("informational")) return "Informational Text";
+  return "Reading";
 }
 
 function formatFocusAreas(focusAreas: unknown) {

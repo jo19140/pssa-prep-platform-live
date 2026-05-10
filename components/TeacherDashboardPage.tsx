@@ -14,7 +14,9 @@ const elaStandards: Record<string, string[]> = {
     "CC.1.2.3.D - Vocabulary",
     "CC.1.3.3.A - Theme",
     "CC.1.3.3.B - Text Evidence (Literature)",
-    "CC.1.3.3.C - Character / Plot",
+    "CC.1.3.3.C - Character",
+    "CC.1.3.3.C - Setting",
+    "CC.1.3.3.H - Plot Development",
     "CC.1.3.3.D - Vocabulary (Literature)",
     "CC.1.3.3.C / CC.1.2.3.E - Point of View",
     "CC.1.3.3.C - Flashback",
@@ -27,7 +29,9 @@ const elaStandards: Record<string, string[]> = {
     "CC.1.2.4.D - Vocabulary",
     "CC.1.3.4.A - Theme",
     "CC.1.3.4.B - Text Evidence (Literature)",
-    "CC.1.3.4.C - Character / Plot",
+    "CC.1.3.4.C - Character",
+    "CC.1.3.4.C - Setting",
+    "CC.1.3.4.H - Plot Development",
     "CC.1.3.4.D - Vocabulary (Literature)",
     "CC.1.3.4.C - Point of View",
     "CC.1.3.4.E - Flashback",
@@ -40,7 +44,9 @@ const elaStandards: Record<string, string[]> = {
     "CC.1.2.5.D - Vocabulary",
     "CC.1.3.5.A - Theme",
     "CC.1.3.5.B - Text Evidence (Literature)",
-    "CC.1.3.5.C - Character / Plot",
+    "CC.1.3.5.C - Character",
+    "CC.1.3.5.C - Setting",
+    "CC.1.3.5.H - Plot Development",
     "CC.1.3.5.D - Vocabulary (Literature)",
     "CC.1.3.5.C - Point of View",
     "CC.1.3.5.E - Flashback",
@@ -53,7 +59,8 @@ const elaStandards: Record<string, string[]> = {
     "CC.1.2.6.D - Vocabulary",
     "CC.1.3.6.A - Theme",
     "CC.1.3.6.B - Text Evidence (Literature)",
-    "CC.1.3.6.C - Character / Plot",
+    "CC.1.3.6.C - Setting Impact",
+    "CC.1.3.6.C - Plot Development",
     "CC.1.3.6.D - Vocabulary (Literature)",
     "CC.1.3.6.G - Point of View",
     "CC.1.3.6.E - Flashback",
@@ -66,7 +73,8 @@ const elaStandards: Record<string, string[]> = {
     "CC.1.2.7.D - Vocabulary",
     "CC.1.3.7.A - Theme",
     "CC.1.3.7.B - Text Evidence (Literature)",
-    "CC.1.3.7.C - Character / Plot",
+    "CC.1.3.7.C - Setting Analysis",
+    "CC.1.3.7.C - Plot Analysis",
     "CC.1.3.7.D - Vocabulary (Literature)",
     "CC.1.3.7.G - Point of View",
     "CC.1.3.7.E - Flashback",
@@ -79,7 +87,8 @@ const elaStandards: Record<string, string[]> = {
     "CC.1.2.8.D - Vocabulary",
     "CC.1.3.8.A - Theme",
     "CC.1.3.8.B - Text Evidence (Literature)",
-    "CC.1.3.8.C - Character / Plot",
+    "CC.1.3.8.C - Setting Analysis",
+    "CC.1.3.8.C - Plot Analysis",
     "CC.1.3.8.D - Vocabulary (Literature)",
     "CC.1.3.8.G - Point of View",
     "CC.1.3.8.E - Flashback",
@@ -115,7 +124,11 @@ export default function TeacherDashboardPage() {
   const [selectedClassRoomId, setSelectedClassRoomId] = useState("");
   const [creatingDiagnostic, setCreatingDiagnostic] = useState(false);
   const [diagnosticMessage, setDiagnosticMessage] = useState("");
-  const [activeTab, setActiveTab] = useState<"overview" | "generator" | "tda" | "learning" | "readingCoach">("overview");
+  const [activeTab, setActiveTab] = useState<"overview" | "generator" | "testDesign" | "tda" | "learning" | "readingCoach">("overview");
+  const [testDesignPurpose, setTestDesignPurpose] = useState("BASELINE_DIAGNOSTIC");
+  const [designingTest, setDesigningTest] = useState(false);
+  const [testDesignBlueprint, setTestDesignBlueprint] = useState<any>(null);
+  const [testDesignMessage, setTestDesignMessage] = useState("");
   const [readingCoachAssignments, setReadingCoachAssignments] = useState<any[]>([]);
   const [readingCoachForm, setReadingCoachForm] = useState({
     title: "Reading Coach Fluency Practice",
@@ -173,6 +186,55 @@ export default function TeacherDashboardPage() {
       setDiagnosticMessage(`Grade ${json.gradeLevel} diagnostic assigned with ${json.questionCount} questions across ${json.standardCount} standards.`);
     } catch (err: any) {
       setDiagnosticMessage(err.message || "Failed to create diagnostic.");
+    } finally {
+      setCreatingDiagnostic(false);
+    }
+  }
+
+  async function runTestDesignAgent() {
+    setDesigningTest(true);
+    setTestDesignMessage("");
+    setTestDesignBlueprint(null);
+    try {
+      const res = await fetch("/api/teacher/test-design-agent", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          classRoomId: selectedClassRoomId || undefined,
+          gradeLevel,
+          purpose: testDesignPurpose,
+        }),
+      });
+      const json = await readJson(res);
+      if (!res.ok) throw new Error(json.error || "Failed to design assessment.");
+      setTestDesignBlueprint(json.blueprint);
+      setTestDesignMessage("Test design blueprint ready for review.");
+    } catch (err: any) {
+      setTestDesignMessage(err.message || "Failed to design assessment.");
+    } finally {
+      setDesigningTest(false);
+    }
+  }
+
+  async function assignDesignedDiagnostic() {
+    if (!testDesignBlueprint) return;
+    setCreatingDiagnostic(true);
+    setTestDesignMessage("");
+    try {
+      const res = await fetch("/api/teacher/diagnostic", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          classRoomId: selectedClassRoomId || undefined,
+          gradeLevel: testDesignBlueprint.gradeLevel,
+          title: testDesignBlueprint.title.replace(" Design", ""),
+        }),
+      });
+      const json = await readJson(res);
+      if (!res.ok) throw new Error(json.error || "Failed to assign designed diagnostic.");
+      setTestDesignMessage(`Designed diagnostic assigned with ${json.questionCount} questions across ${json.standardCount} standards.`);
+    } catch (err: any) {
+      setTestDesignMessage(err.message || "Failed to assign designed diagnostic.");
     } finally {
       setCreatingDiagnostic(false);
     }
@@ -281,6 +343,7 @@ export default function TeacherDashboardPage() {
       <div className="flex flex-wrap gap-2 rounded-2xl bg-white p-2 shadow">
         <TabButton active={activeTab === "overview"} onClick={() => setActiveTab("overview")}>Overview</TabButton>
         <TabButton active={activeTab === "generator"} onClick={() => setActiveTab("generator")}>Generate Tests</TabButton>
+        <TabButton active={activeTab === "testDesign"} onClick={() => setActiveTab("testDesign")}>Test Design Agent</TabButton>
         <TabButton active={activeTab === "readingCoach"} onClick={() => setActiveTab("readingCoach")}>Reading Coach</TabButton>
         <TabButton active={activeTab === "tda"} onClick={() => setActiveTab("tda")}>TDA Scoring</TabButton>
         <TabButton active={activeTab === "learning"} onClick={() => setActiveTab("learning")}>Learning Paths</TabButton>
@@ -288,6 +351,52 @@ export default function TeacherDashboardPage() {
 
       {activeTab === "tda" && <TeacherTdaScoringPanel />}
       {activeTab === "learning" && <TeacherLearningPathPanel />}
+      {activeTab === "testDesign" && (
+        <section className="rounded-3xl bg-white p-6 shadow">
+          <div className="flex flex-col gap-1">
+            <p className="text-sm font-semibold uppercase tracking-wide text-indigo-600">Test Design Agent</p>
+            <h2 className="text-xl font-bold text-slate-900">Design a Standards-Balanced Assessment</h2>
+            <p className="text-sm text-slate-600">The agent creates the blueprint first, then assigns through the existing database-backed diagnostic flow.</p>
+          </div>
+
+          <div className="mt-5 grid gap-4 md:grid-cols-3">
+            <label className="block">
+              <span className="text-sm font-medium text-slate-700">Assign to Class</span>
+              <select className="mt-1 w-full rounded border border-slate-300 p-2" value={selectedClassRoomId} onChange={(event) => setSelectedClassRoomId(event.target.value)}>
+                {data?.classes?.map((classRoom: any) => (
+                  <option key={classRoom.id} value={classRoom.id}>{classRoom.name}</option>
+                ))}
+              </select>
+            </label>
+            <label className="block">
+              <span className="text-sm font-medium text-slate-700">Grade Level</span>
+              <select className="mt-1 w-full rounded border border-slate-300 p-2" value={gradeLevel} onChange={(event) => setGradeLevel(event.target.value)}>
+                {Object.keys(elaStandards).map((grade) => <option key={grade} value={grade}>{grade}</option>)}
+              </select>
+            </label>
+            <label className="block">
+              <span className="text-sm font-medium text-slate-700">Assessment Purpose</span>
+              <select className="mt-1 w-full rounded border border-slate-300 p-2" value={testDesignPurpose} onChange={(event) => setTestDesignPurpose(event.target.value)}>
+                <option value="BASELINE_DIAGNOSTIC">Baseline Diagnostic</option>
+                <option value="TARGETED_PRACTICE">Targeted Practice</option>
+                <option value="RETEST">Retest</option>
+              </select>
+            </label>
+          </div>
+
+          <div className="mt-5 flex flex-wrap gap-3">
+            <button onClick={runTestDesignAgent} disabled={designingTest} className="rounded-xl bg-indigo-700 px-4 py-2 text-sm font-semibold text-white disabled:opacity-50">
+              {designingTest ? "Designing..." : "Design Test Blueprint"}
+            </button>
+            <button onClick={assignDesignedDiagnostic} disabled={!testDesignBlueprint || creatingDiagnostic || !selectedClassRoomId} className="rounded-xl bg-emerald-700 px-4 py-2 text-sm font-semibold text-white disabled:opacity-50">
+              {creatingDiagnostic ? "Assigning..." : "Generate and Assign From Blueprint"}
+            </button>
+          </div>
+          {testDesignMessage ? <p className={`mt-3 text-sm font-semibold ${testDesignMessage.includes("Failed") ? "text-red-600" : "text-green-700"}`}>{testDesignMessage}</p> : null}
+
+          {testDesignBlueprint ? <TestDesignBlueprintView blueprint={testDesignBlueprint} /> : null}
+        </section>
+      )}
       {activeTab === "readingCoach" && (
         <section className="rounded-3xl bg-white p-6 shadow">
           <div className="flex flex-col gap-1">
@@ -567,6 +676,214 @@ function MetricCard({ title, value }: { title: string; value: string }) {
     <div className="rounded-3xl bg-white p-6 shadow">
       <h3 className="text-lg font-semibold">{title}</h3>
       <p className="text-2xl mt-2">{value}</p>
+    </div>
+  );
+}
+
+function TestDesignBlueprintView({ blueprint }: { blueprint: any }) {
+  return (
+    <div className="mt-6 space-y-5">
+      <div className="rounded-2xl border border-indigo-100 bg-indigo-50 p-5">
+        <p className="text-sm font-semibold uppercase tracking-wide text-indigo-700">{String(blueprint.purpose || "").split("_").join(" ")}</p>
+        <h3 className="mt-1 text-xl font-bold text-slate-950">{blueprint.title}</h3>
+        <p className="mt-2 text-sm text-slate-700">{blueprint.designSummary}</p>
+        <p className="mt-3 text-sm font-semibold text-indigo-900">{blueprint.recommendation}</p>
+      </div>
+
+      <div className="rounded-2xl border border-slate-200 p-4">
+        <div className="flex flex-col gap-1">
+          <p className="text-sm font-semibold uppercase tracking-wide text-slate-500">Official PSSA Design Target</p>
+          <h4 className="font-bold text-slate-900">{blueprint.sourceAlignment?.sourceName || "PCS PSSA ELA Test Design"}</h4>
+        </div>
+        <div className="mt-4 grid gap-3 md:grid-cols-2 lg:grid-cols-4">
+          <div className="rounded-xl bg-slate-50 p-3">
+            <p className="text-xs font-semibold uppercase text-slate-500">Core Items</p>
+            <p className="mt-1 text-lg font-bold text-slate-950">{blueprint.pssaDesign?.totalCoreItems}</p>
+          </div>
+          <div className="rounded-xl bg-slate-50 p-3">
+            <p className="text-xs font-semibold uppercase text-slate-500">Points</p>
+            <p className="mt-1 text-lg font-bold text-slate-950">{blueprint.pssaDesign?.totalCorePoints} raw / {blueprint.pssaDesign?.weightedCorePoints} weighted</p>
+          </div>
+          <div className="rounded-xl bg-slate-50 p-3">
+            <p className="text-xs font-semibold uppercase text-slate-500">Passage Items</p>
+            <p className="mt-1 text-lg font-bold text-slate-950">{blueprint.pssaDesign?.passageBasedOnePointItems}</p>
+          </div>
+          <div className="rounded-xl bg-slate-50 p-3">
+            <p className="text-xs font-semibold uppercase text-slate-500">Conventions</p>
+            <p className="mt-1 text-lg font-bold text-slate-950">{blueprint.pssaDesign?.standaloneConventionsItems} standalone</p>
+          </div>
+        </div>
+        {blueprint.pssaDesign?.styleReferenceNote ? <p className="mt-4 rounded-xl bg-blue-50 p-3 text-sm font-medium text-blue-900">{blueprint.pssaDesign.styleReferenceNote}</p> : null}
+        {blueprint.sourceAlignment?.authoritySplit ? (
+          <div className="mt-4 grid gap-3 md:grid-cols-2">
+            <div className="rounded-xl bg-emerald-50 p-3 text-sm text-emerald-950">
+              <p className="font-semibold">Counts + Blueprint Authority</p>
+              <p className="mt-1">{blueprint.sourceAlignment.authoritySplit.testCountsAndBlueprint}</p>
+            </div>
+            <div className="rounded-xl bg-blue-50 p-3 text-sm text-blue-950">
+              <p className="font-semibold">Sampler Link Use</p>
+              <p className="mt-1">{blueprint.sourceAlignment.authoritySplit.samplerLinks}</p>
+            </div>
+          </div>
+        ) : null}
+        <div className="mt-4 grid gap-3 md:grid-cols-2">
+          {(blueprint.pssaDesign?.reportingCategoryTargets || []).map((category: any) => (
+            <div key={category.code} className="rounded-xl border border-slate-200 p-3 text-sm">
+              <p className="font-semibold text-slate-900">{category.code}: {category.label}</p>
+              <p className="text-slate-600">{category.percentOfCore} of core • {category.points} points</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="grid gap-4 lg:grid-cols-3">
+        <div className="rounded-2xl border border-slate-200 p-4">
+          <p className="text-sm font-semibold text-slate-500">Generated Questions</p>
+          <p className="mt-1 text-3xl font-bold text-slate-950">{blueprint.itemPlan?.totalQuestions}</p>
+          <div className="mt-3 space-y-1 text-sm text-slate-700">
+            {Object.entries(blueprint.itemPlan?.questionCounts || {}).map(([type, count]) => <p key={type}>{type}: {String(count)}</p>)}
+          </div>
+          {Object.keys(blueprint.itemPlan?.interactionModeCounts || {}).length ? (
+            <div className="mt-4 border-t border-slate-200 pt-3 text-sm text-slate-700">
+              <p className="font-semibold text-slate-900">Generated Interaction Modes</p>
+              {Object.entries(blueprint.itemPlan?.interactionModeCounts || {}).map(([mode, count]) => <p key={mode}>{mode}: {String(count)}</p>)}
+            </div>
+          ) : null}
+        </div>
+        <div className="rounded-2xl border border-slate-200 p-4">
+          <p className="text-sm font-semibold text-slate-500">Standards</p>
+          <p className="mt-1 text-3xl font-bold text-slate-950">{blueprint.standardsPlan?.totalStandards}</p>
+          <div className="mt-3 space-y-1 text-sm text-slate-700">
+            {Object.entries(blueprint.standardsPlan?.strandCoverage || {}).map(([strand, count]) => <p key={strand}>{strand}: {String(count)}</p>)}
+          </div>
+        </div>
+        <div className="rounded-2xl border border-slate-200 p-4">
+          <p className="text-sm font-semibold text-slate-500">Checks</p>
+          <div className="mt-3 space-y-2 text-sm text-slate-700">
+            <p>{blueprint.itemPlan?.includesTda ? "Includes TDA" : "No TDA"}</p>
+            <p>{blueprint.itemPlan?.includesShortAnswer ? "Includes short answer" : "No short answer"}</p>
+            <p>{blueprint.itemPlan?.includesConventions ? "Includes conventions" : "No conventions"}</p>
+            <p>{blueprint.itemPlan?.includesTechnologyEnhanced ? "Includes TE items" : "No TE items"}</p>
+          </div>
+        </div>
+      </div>
+
+      <div className="rounded-2xl border border-slate-200 p-4">
+        <h4 className="font-bold text-slate-900">PSSA Style Analysis</h4>
+        <p className="mt-1 text-sm text-slate-600">The agent reviews the wording of questions, text length, and complexity signals before the test is assigned.</p>
+        {blueprint.samplerPatternProfile ? (
+          <div className="mt-4 rounded-xl bg-blue-50 p-4 text-sm text-blue-950">
+            <p className="font-semibold">Sampler Pattern Source: {blueprint.samplerPatternProfile.sourceName}</p>
+            {blueprint.samplerPatternProfile.intendedUse ? <p className="mt-2 text-blue-900">{blueprint.samplerPatternProfile.intendedUse}</p> : null}
+            <div className="mt-3 grid gap-3 md:grid-cols-2">
+              <div>
+                <p className="font-semibold">Question Language Patterns</p>
+                <ul className="mt-1 list-disc space-y-1 pl-5">
+                  {(blueprint.samplerPatternProfile.questionLanguagePatterns || []).slice(0, 6).map((pattern: string) => <li key={pattern}>{pattern}</li>)}
+                </ul>
+              </div>
+              <div>
+                <p className="font-semibold">Complexity Signals</p>
+                <ul className="mt-1 list-disc space-y-1 pl-5">
+                  {(blueprint.samplerPatternProfile.passageComplexitySignals || []).map((signal: string) => <li key={signal}>{signal}</li>)}
+                </ul>
+              </div>
+            </div>
+            {blueprint.samplerPatternProfile.technologyEnhancedPatterns?.length ? (
+              <div className="mt-4 rounded-lg bg-white/70 p-3">
+                <p className="font-semibold">Technology-Enhanced Patterns</p>
+                <ul className="mt-1 list-disc space-y-1 pl-5">
+                  {blueprint.samplerPatternProfile.technologyEnhancedPatterns.map((pattern: string) => <li key={pattern}>{pattern}</li>)}
+                </ul>
+              </div>
+            ) : null}
+            {blueprint.itemPlan?.learnedInteractionPatterns?.length ? (
+              <div className="mt-4 rounded-lg bg-white/70 p-3">
+                <p className="font-semibold">Learned Release-Item Patterns</p>
+                <ul className="mt-1 list-disc space-y-1 pl-5">
+                  {blueprint.itemPlan.learnedInteractionPatterns.map((pattern: any) => (
+                    <li key={pattern.mode}>
+                      <span className="font-semibold">{pattern.mode}</span>: {pattern.description}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ) : null}
+          </div>
+        ) : null}
+        <div className="mt-4 grid gap-4 lg:grid-cols-3">
+          <div className="rounded-xl bg-slate-50 p-3 text-sm">
+            <p className="font-semibold text-slate-900">Overall</p>
+            <p className="mt-1 text-slate-700">{blueprint.styleAnalysis?.overallRating}</p>
+          </div>
+          <div className="rounded-xl bg-slate-50 p-3 text-sm">
+            <p className="font-semibold text-slate-900">Cognitive Demand</p>
+            <div className="mt-1 space-y-1 text-slate-700">
+              {Object.entries(blueprint.styleAnalysis?.questionLanguage?.demandCounts || {}).map(([label, count]) => <p key={label}>{label}: {String(count)}</p>)}
+            </div>
+          </div>
+          <div className="rounded-xl bg-slate-50 p-3 text-sm">
+            <p className="font-semibold text-slate-900">Language Moves</p>
+            <div className="mt-1 space-y-1 text-slate-700">
+              {Object.entries(blueprint.styleAnalysis?.questionLanguage?.languageMoveCounts || {}).slice(0, 6).map(([label, count]) => <p key={label}>{label}: {String(count)}</p>)}
+            </div>
+          </div>
+        </div>
+        <div className="mt-4 grid gap-3 md:grid-cols-2">
+          {(blueprint.styleAnalysis?.textComplexity?.passages || []).map((passage: any) => (
+            <div key={`style-${passage.title}`} className="rounded-xl border border-slate-200 p-3 text-sm">
+              <p className="font-semibold text-slate-900">{passage.title}</p>
+              <p className="text-slate-600">{passage.actualWordCount}/{passage.wordCountTarget} words • {passage.lengthCheck} • complexity: {passage.complexityRating}</p>
+              <p className="mt-1 text-slate-600">{(passage.complexityFeatures || []).join(", ")}</p>
+            </div>
+          ))}
+        </div>
+        {blueprint.styleAnalysis?.questionLanguage?.flaggedItems?.length ? (
+          <div className="mt-4 rounded-xl bg-amber-50 p-3 text-sm text-amber-950">
+            <p className="font-semibold">Items to Review</p>
+            <ul className="mt-2 list-disc space-y-1 pl-5">
+              {blueprint.styleAnalysis.questionLanguage.flaggedItems.slice(0, 5).map((item: any) => (
+                <li key={item.id}>Q{item.id} ({item.type}, {item.skill}): {item.wordingNotes.join(" ")}</li>
+              ))}
+            </ul>
+          </div>
+        ) : null}
+      </div>
+
+      <div className="rounded-2xl border border-slate-200 p-4">
+        <h4 className="font-bold text-slate-900">Operational Section Plan</h4>
+        <div className="mt-3 grid gap-3 md:grid-cols-3">
+          {(blueprint.pssaDesign?.sections || []).map((section: any) => (
+            <div key={section.section} className="rounded-xl bg-slate-50 p-3 text-sm">
+              <p className="font-semibold text-slate-900">Section {section.section}</p>
+              <p className="mt-1 text-slate-700">{section.emphasis}</p>
+              <p className="mt-2 text-slate-600">Items: {section.itemTypes?.join(", ")}</p>
+              <p className="text-slate-600">Passages: {section.estimatedPassages} • Time: {section.estimatedMinutes} min</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="rounded-2xl border border-slate-200 p-4">
+        <h4 className="font-bold text-slate-900">Passage Plan</h4>
+        <div className="mt-3 grid gap-3 md:grid-cols-2">
+          {(blueprint.passagePlan || []).map((passage: any) => (
+            <div key={passage.title} className="rounded-xl bg-slate-50 p-3 text-sm">
+              <p className="font-semibold text-slate-900">{passage.title}</p>
+              <p className="text-slate-600">{passage.passageType} • {passage.genre}</p>
+              <p className="text-slate-600">Target {passage.wordCountTarget} words • actual {passage.actualWordCount}</p>
+              <p className="text-slate-600">{passage.hasTable ? "Includes table/chart" : "No table"} • {passage.hasSections ? "Has sections/headings" : "Continuous text"}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="rounded-2xl border border-slate-200 p-4">
+        <h4 className="font-bold text-slate-900">Quality Guardrails</h4>
+        <ul className="mt-3 list-disc space-y-1 pl-5 text-sm text-slate-700">
+          {(blueprint.qualityChecks || []).map((check: string) => <li key={check}>{check}</li>)}
+        </ul>
+      </div>
     </div>
   );
 }

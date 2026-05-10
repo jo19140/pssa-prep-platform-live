@@ -16,6 +16,14 @@ export async function GET() {
   if (!teacher) return NextResponse.json({ lessons: [], resources: [], standardsProgress: [] });
 
   const studentUserIds = teacher.classes.flatMap((classRoom) => classRoom.enrollments.map((enrollment) => enrollment.studentProfile.userId));
+  const libraryLessons = await db.learningLesson.findMany({
+    include: {
+      learningPath: { include: { session: { include: { user: true, assessment: true } } } },
+      progress: true,
+      items: { orderBy: { order: "asc" } },
+    },
+    orderBy: [{ gradeLevel: "asc" }, { standardCode: "asc" }, { createdAt: "desc" }],
+  });
   const lessons = await db.learningLesson.findMany({
     where: { learningPath: { session: { userId: { in: studentUserIds } } } },
     include: {
@@ -45,22 +53,80 @@ export async function GET() {
   });
 
   return NextResponse.json({
-    lessons: lessons.map((lesson) => ({
+    classes: teacher.classes.map((classRoom) => ({
+      id: classRoom.id,
+      name: classRoom.name,
+      grade: classRoom.grade,
+      studentCount: classRoom.enrollments.length,
+    })),
+    libraryLessons: dedupeLibraryLessons(libraryLessons).map((lesson) => ({
       id: lesson.id,
-      studentName: lesson.learningPath.session.user.name,
-      assessmentTitle: lesson.learningPath.session.assessment.title,
+      title: lesson.title,
       gradeLevel: lesson.gradeLevel,
       standardCode: lesson.standardCode,
+      standardLabel: lesson.standardLabel,
       skill: lesson.skill,
-      title: lesson.title,
+      generatedBy: lesson.generatedBy,
+      aiStatus: lesson.aiStatus,
+      lessonExplanation: lesson.lessonExplanation,
+      workedExample: lesson.workedExample,
       whyAssigned: lesson.whyAssigned,
-      status: lesson.progress[0]?.status || "NOT_STARTED",
-      masteryScore: lesson.progress[0]?.masteryScore ?? null,
-      masteryStatus: lesson.progress[0]?.masteryStatus || "NOT_STARTED",
-      questAttempts: lesson.questAttempts.length,
-      latestQuestScore: lesson.questAttempts[0] ? `${lesson.questAttempts[0].score}/${lesson.questAttempts[0].maxScore}` : null,
-      latestQuestXp: lesson.questAttempts[0]?.xpEarned ?? null,
+      resourceTitle: lesson.resourceTitle,
+      resourceProvider: lesson.resourceProvider,
+      resourceDescription: lesson.resourceDescription,
+      guidedPractice: lesson.guidedPractice,
+      independentPractice: lesson.independentPractice,
+      exitTicket: lesson.exitTicket,
+      masteryCheck: lesson.masteryCheck,
+      retestRecommendation: lesson.retestRecommendation,
+      items: lesson.items.map((item) => ({
+        id: item.id,
+        itemType: item.itemType,
+        title: item.title,
+        content: item.content,
+        order: item.order,
+      })),
+      sourceAssessment: lesson.learningPath.session.assessment.title,
+      sourceStudent: lesson.learningPath.session.user.name,
+      assignedCount: lesson.progress.length,
+      createdAt: lesson.createdAt,
     })),
+    lessons: lessons.map((lesson) => {
+      const progress = lesson.progress[0];
+      const guidedComplete = isStepComplete(progress?.guidedResponses);
+      const independentComplete = isStepComplete(progress?.independentResponses);
+      const exitTicketComplete = isStepComplete(progress?.exitTicketResponses);
+      const masteryScore = progress?.masteryScore ?? null;
+      const arcadeUnlocked = progress?.status === "MASTERED" || progress?.masteryStatus === "MASTERED" || (masteryScore ?? 0) >= 80;
+      return {
+        id: lesson.id,
+        studentName: lesson.learningPath.session.user.name,
+        assessmentTitle: lesson.learningPath.session.assessment.title,
+        gradeLevel: lesson.gradeLevel,
+        standardCode: lesson.standardCode,
+        skill: lesson.skill,
+        title: lesson.title,
+        whyAssigned: lesson.whyAssigned,
+        status: progress?.status || "NOT_STARTED",
+        masteryScore,
+        masteryStatus: progress?.masteryStatus || "NOT_STARTED",
+        guidedComplete,
+        independentComplete,
+        exitTicketComplete,
+        arcadeUnlocked,
+        currentStep: currentStep({
+          status: progress?.status || "NOT_STARTED",
+          guidedComplete,
+          independentComplete,
+          exitTicketComplete,
+          arcadeUnlocked,
+          hasQuestAttempt: lesson.questAttempts.length > 0,
+        }),
+        questAttempts: lesson.questAttempts.length,
+        latestQuestScore: lesson.questAttempts[0] ? `${lesson.questAttempts[0].score}/${lesson.questAttempts[0].maxScore}` : null,
+        latestQuestXp: lesson.questAttempts[0]?.xpEarned ?? null,
+      };
+    }),
     resources,
     readingCoachAttempts: readingCoachAttempts.map((attempt) => ({
       id: attempt.id,
@@ -75,6 +141,47 @@ export async function GET() {
     })),
     standardsProgress: Array.from(standardsMap.values()),
   });
+}
+
+function isStepComplete(value: unknown) {
+  return Boolean(value && typeof value === "object" && "completed" in value && (value as { completed?: unknown }).completed);
+}
+
+function currentStep({
+  status,
+  guidedComplete,
+  independentComplete,
+  exitTicketComplete,
+  arcadeUnlocked,
+  hasQuestAttempt,
+}: {
+  status: string;
+  guidedComplete: boolean;
+  independentComplete: boolean;
+  exitTicketComplete: boolean;
+  arcadeUnlocked: boolean;
+  hasQuestAttempt: boolean;
+}) {
+  if (hasQuestAttempt) return "Arcade practice";
+  if (arcadeUnlocked) return "Arcade unlocked";
+  if (status === "MASTERED") return "Mastered";
+  if (exitTicketComplete) return "Mastery check";
+  if (independentComplete) return "Exit ticket";
+  if (guidedComplete) return "Independent practice";
+  if (status === "IN_PROGRESS" || status === "COMPLETED") return "Guided practice";
+  return "Not started";
+}
+
+function dedupeLibraryLessons(lessons: any[]) {
+  const seen = new Set<string>();
+  const rows: any[] = [];
+  for (const lesson of lessons) {
+    const key = `${lesson.gradeLevel}:${lesson.standardCode}:${lesson.skill}:${lesson.title}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    rows.push(lesson);
+  }
+  return rows;
 }
 
 export async function POST(req: Request) {
@@ -104,6 +211,49 @@ export async function POST(req: Request) {
     },
   });
   return NextResponse.json({ resource });
+}
+
+export async function PUT(req: Request) {
+  const session = await getServerSession(authOptions);
+  if (!session?.user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  const role = (session.user as any).role;
+  if (role !== "TEACHER" && role !== "ADMIN") return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+
+  const body = await req.json();
+  const lessonIds = Array.isArray(body.lessonIds)
+    ? body.lessonIds.map((id: unknown) => String(id)).filter(Boolean)
+    : [String(body.lessonId || "")].filter(Boolean);
+  const classRoomId = String(body.classRoomId || "");
+  if (!lessonIds.length || !classRoomId) return NextResponse.json({ error: "At least one lesson and a class are required." }, { status: 400 });
+
+  const teacher = await db.teacherProfile.findUnique({
+    where: { userId: (session.user as any).id },
+    include: { classes: { include: { enrollments: { include: { studentProfile: true } } } } },
+  });
+  if (role === "TEACHER" && !teacher) return NextResponse.json({ error: "Teacher profile not found." }, { status: 404 });
+
+  const classRoom = role === "TEACHER"
+    ? teacher?.classes.find((room) => room.id === classRoomId)
+    : await db.classRoom.findUnique({ where: { id: classRoomId }, include: { enrollments: { include: { studentProfile: true } } } });
+  if (!classRoom) return NextResponse.json({ error: "Class not found." }, { status: 404 });
+
+  const lessonCount = await db.learningLesson.count({ where: { id: { in: lessonIds } } });
+  if (lessonCount !== lessonIds.length) return NextResponse.json({ error: "One or more lessons were not found." }, { status: 404 });
+
+  const studentUserIds = classRoom.enrollments.map((enrollment) => enrollment.studentProfile.userId);
+  await db.$transaction(
+    lessonIds.flatMap((lessonId) =>
+      studentUserIds.map((userId) =>
+        db.studentLessonProgress.upsert({
+          where: { lessonId_userId: { lessonId, userId } },
+          update: {},
+          create: { lessonId, userId },
+        }),
+      ),
+    ),
+  );
+
+  return NextResponse.json({ ok: true, assignedCount: studentUserIds.length, lessonCount: lessonIds.length });
 }
 
 export async function PATCH(req: Request) {

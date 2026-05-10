@@ -8,6 +8,7 @@ import { StudentReport } from "@/components/StudentReport";
 import { StudentAssignmentListPage } from "@/components/StudentAssignmentListPage";
 import { LearningPathPanel } from "@/components/LearningPathPanel";
 import { StudentLearningPathPage } from "@/components/StudentLearningPathPage";
+import { StudentTdaPracticePage } from "@/components/StudentTdaPracticePage";
 
 export function StudentSessionPage() {
   const [sessionPayload, setSessionPayload] = useState<any>(null);
@@ -16,7 +17,7 @@ export function StudentSessionPage() {
   const [questionPath, setQuestionPath] = useState([getQuestionForStep(1, null, [])]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const [mode, setMode] = useState<"list" | "test" | "report" | "learningPath">("list");
+  const [mode, setMode] = useState<"list" | "test" | "report" | "learningPath" | "tdaPractice">("list");
   const [assignments, setAssignments] = useState<any[]>([]);
   const [readingCoachAssignments, setReadingCoachAssignments] = useState<any[]>([]);
   const [questionStartedAt, setQuestionStartedAt] = useState(Date.now());
@@ -24,6 +25,7 @@ export function StudentSessionPage() {
   const [reviewOpen, setReviewOpen] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
   const [latestLearningPath, setLatestLearningPath] = useState<any>(null);
+  const [studentGrade, setStudentGrade] = useState<number | null>(null);
 
   useEffect(() => { loadAssignments(); }, []);
 
@@ -40,6 +42,7 @@ export function StudentSessionPage() {
       setAssignments(json.assignments || []);
       setReadingCoachAssignments(json.readingCoachAssignments || []);
       setLatestLearningPath(json.latestLearningPath || null);
+      setStudentGrade(json.studentGrade || null);
     } catch (e) {
       setError("Failed to load assignments.");
     } finally {
@@ -140,10 +143,16 @@ export function StudentSessionPage() {
 
   if (loading) return <div className="rounded-3xl bg-white p-6 shadow">Loading...</div>;
   if (error) return <div className="rounded-3xl bg-white p-6 shadow text-rose-600">{error}</div>;
-  if (mode === "list") return <StudentAssignmentListPage assignments={assignments} readingCoachAssignments={readingCoachAssignments} latestLearningPath={latestLearningPath} onOpen={openAssignment} onOpenLearningPath={() => setMode("learningPath")} onReadingCoachComplete={loadAssignments} />;
+  if (mode === "list") return <StudentAssignmentListPage assignments={assignments} readingCoachAssignments={readingCoachAssignments} latestLearningPath={latestLearningPath} studentGrade={studentGrade} onOpen={openAssignment} onOpenLearningPath={openLearningPathWindow} onOpenTdaPractice={() => setMode("tdaPractice")} onReadingCoachComplete={loadAssignments} />;
   if (mode === "learningPath") return <StudentLearningPathPage learningPath={latestLearningPath} onBack={backToAssignments} />;
+  if (mode === "tdaPractice") return <StudentTdaPracticePage onBack={backToAssignments} />;
   if (mode === "report") return <div className="space-y-4"><button onClick={backToAssignments} className="rounded-xl bg-slate-200 px-4 py-2">Back to Assignments</button><StudentReport report={report} /><LearningPathPanel learningPath={sessionPayload?.learningPath} /></div>;
   return <div className="space-y-4"><StudentTest currentQuestion={questionPath[currentQuestionNumber - 1]} currentQuestionNumber={currentQuestionNumber} totalQuestions={questionPath.length || totalSimQuestions} history={history} onSubmitAnswer={onSubmitAnswer} onNavigate={goToQuestion} onPause={() => setIsPaused(true)} onReview={() => setReviewOpen(true)} onEndTest={submitTestNow} onToggleFlag={() => toggleFlag(questionPath[currentQuestionNumber - 1].id)} flaggedQuestionIds={flaggedQuestionIds} isPaused={isPaused} onResume={() => setIsPaused(false)} reviewOpen={reviewOpen} onCloseReview={() => setReviewOpen(false)} questionIds={questionPath.map((question) => question.id)} /></div>;
+}
+
+function openLearningPathWindow() {
+  const popup = window.open("/student/learning-path", "pssaLearningPath", "popup,width=1280,height=900");
+  if (!popup) window.location.href = "/student/learning-path";
 }
 
 function normalizeResponses(responses: any[]) {

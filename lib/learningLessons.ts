@@ -57,6 +57,8 @@ type PracticeQuestion = {
   choices?: string[];
   correctAnswer: string;
   explanation: string;
+  passage?: string;
+  coachHint?: string;
 };
 
 const RESOURCE_FALLBACK = {
@@ -238,6 +240,21 @@ function explanationForSkill(skill: string, gradeLevel: number) {
   }
   if (lower.includes("evidence")) return `Text evidence means using exact details from a passage to prove an answer. In grade ${gradeLevel}, strong readers do not just pick an answer that sounds right. They go back to the passage, find the sentence or detail that supports it, and explain how that evidence proves the idea.`;
   if (lower.includes("theme")) return `Theme is the message or lesson a story suggests. To find it, watch how the character changes, what conflict they face, and what the ending teaches. A theme is usually a complete idea, not one word.`;
+  if (lower.includes("rising action") || lower.includes("raising action")) return `Rising action is the part of the plot where the conflict grows and events become more complicated before the climax. Track how each event creates tension, causes another event, or pushes the character toward an important decision.`;
+  if (lower.includes("setting")) {
+    if (gradeLevel <= 3) return `Setting is where and when a story happens. In grade ${gradeLevel}, identify the place, time, and important details that help you picture the story.`;
+    if (gradeLevel <= 5) return `Setting includes the time, place, and environment of a story. Strong readers explain how the setting connects to events and how characters respond.`;
+    if (gradeLevel <= 6) return `Setting impact means explaining how the time, place, or environment affects plot events and character choices. On PSSA-style questions, connect setting details to what happens next.`;
+    if (gradeLevel <= 7) return `Setting analysis means explaining how setting, plot, and characters interact. Ask how the place, time, or environment shapes conflict, decisions, mood, and meaning.`;
+    return `Advanced setting analysis asks how environment, historical or cultural context, time shifts, or location changes shape actions, outcomes, theme, and meaning.`;
+  }
+  if (lower.includes("plot")) {
+    if (gradeLevel <= 3) return `Plot is what happens in a story. In grade ${gradeLevel}, focus on the beginning, middle, and end, the main problem, and how the problem gets solved.`;
+    if (gradeLevel <= 5) return `Plot is the sequence of important story events. Strong readers track the conflict, how characters respond to events, and how those choices lead to the resolution.`;
+    if (gradeLevel <= 6) return `Plot development means explaining how a story unfolds through episodes or events. For PSSA-style questions, notice the conflict, cause and effect, and how characters respond or change as the story moves forward.`;
+    if (gradeLevel <= 7) return `Plot analysis means explaining how story elements interact. Ask how the setting, conflict, and character choices affect one another and move the action forward.`;
+    return `Advanced plot analysis asks how specific dialogue or incidents propel the action, reveal character, or cause decisions. Strong answers explain the cause-and-effect chain in the story.`;
+  }
   if (lower.includes("point of view") || lower === "pov") {
     if (gradeLevel <= 3) return `Point of view means who is telling the story or sharing the information. In grade ${gradeLevel}, look for clues like I, me, my, he, she, or they to decide whether the passage is first person or third person.`;
     if (gradeLevel <= 4) return `Point of view means the narrator's or author's perspective. In grade ${gradeLevel}, compare first-person and third-person narration by asking who is speaking and what that narrator knows or notices.`;
@@ -269,6 +286,9 @@ function workedExampleForSkill(skill: string, gradeLevel: number) {
   if (lower.includes("inference")) return `Question: What can be inferred about the character? Worked answer: First find clues in what the character says and does. If the character checks the sky, packs extra supplies, and warns a friend, you can infer the character is cautious. The evidence proves the inference because each action shows planning.`;
   if (lower.includes("evidence")) return `Question: Which sentence best supports the idea that the scientist was careful? Worked answer: Choose the detail that shows careful actions, such as checking notes twice or repeating an experiment. That evidence proves the idea because it shows the scientist did not rush.`;
   if (lower.includes("theme")) return `Question: What theme is shown when a character keeps practicing after failing? Worked answer: A possible theme is, "Perseverance helps people improve." The evidence is the character's repeated practice and the better result at the end.`;
+  if (lower.includes("rising action") || lower.includes("raising action")) return `Question: Which event is part of the rising action? Worked answer: Choose the event that makes the conflict more difficult before the climax. If thunder gets closer and Nora must decide whether to protect the signs or leave, that builds tension and moves the plot toward the big decision.`;
+  if (lower.includes("setting")) return `Question: How does the setting affect the story? Worked answer: First identify the time and place. Then explain the effect. If thunder begins while Nora is outside protecting garden signs, the stormy setting makes the conflict more urgent and pushes Nora to make a brave choice.`;
+  if (lower.includes("plot")) return `Question: How does this event affect the plot? Worked answer: First identify the conflict. Then explain what the event causes next. If Nora decides to protect the garden signs during a storm, that choice moves the story forward because it creates action, reveals her responsibility, and leads toward the resolution.`;
   if (lower.includes("point of view") || lower === "pov") return `Question: How does the author develop point of view? Worked answer: Look at what the narrator notices and the words used to describe the event. If the narrator calls a task "a chance to prove responsibility," that wording shows the narrator sees the task as important, not annoying.`;
   if (lower.includes("figurative")) return `Question: What does "the problem sat like a stone in her pocket" suggest? Worked answer: The phrase does not mean there is a real stone. It means the problem feels heavy and hard to ignore. The simile creates a serious tone.`;
   if (lower.includes("flashback")) return `Question: Why does the author include the flashback? Worked answer: The earlier scene shows that the character once failed while speaking in front of others. That explains the character's fear in the present and helps develop the conflict.`;
@@ -279,20 +299,139 @@ function workedExampleForSkill(skill: string, gradeLevel: number) {
 }
 
 function buildPractice(skill: string, mode: string, gradeLevel: number, count: number): PracticeQuestion[] {
+  const scenarios = practiceScenarios(skill, gradeLevel);
   return Array.from({ length: count }, (_, index) => {
-    const number = index + 1;
+    const scenario = scenarios[index % scenarios.length];
+    const modePrefix = mode === "guided" ? "Use the coach hint, then choose the strongest answer." : mode === "mastery check" ? "Choose independently." : "Choose the best answer.";
     return {
-      question: `${mode === "guided" ? "With help: " : ""}Read a short grade ${gradeLevel} passage section. Which answer best shows ${skill.toLowerCase()}? (${mode} ${number})`,
-      choices: [
-        "A detail that only appears once",
-        `An answer supported by multiple details about ${skill.toLowerCase()}`,
-        "A sentence from a different topic",
-        "An opinion that is not supported by the text",
-      ],
-      correctAnswer: `An answer supported by multiple details about ${skill.toLowerCase()}`,
-      explanation: `The best answer must match the skill and be supported by details from the text.`,
+      passage: scenario.passage,
+      question: `${modePrefix} ${scenario.question}`,
+      choices: scenario.choices,
+      correctAnswer: scenario.correctAnswer,
+      explanation: scenario.explanation,
+      coachHint: scenario.coachHint,
     };
   });
+}
+
+function practiceScenarios(skill: string, gradeLevel: number): PracticeQuestion[] {
+  const lower = skill.toLowerCase();
+  if (lower.includes("evidence") || lower.includes("inference")) {
+    return [
+      {
+        passage: `The robotics team had fifteen minutes left before judging. Lena checked the wire connection, reread the directions, and tested the wheels one more time. When the robot finally rolled across the tape line, she smiled but kept her notebook open.`,
+        question: `Which answer is best supported by the passage?`,
+        choices: [
+          "Lena wants to leave the competition early.",
+          "Lena is careful and wants the robot to work correctly.",
+          "The robot cannot move without help.",
+          "The judges gave Lena extra time.",
+        ],
+        correctAnswer: "Lena is careful and wants the robot to work correctly.",
+        explanation: "Checking the wire, rereading directions, testing again, and keeping notes all support the idea that Lena is careful.",
+        coachHint: "Look for repeated actions. One clue can help, but several clues together make stronger evidence.",
+      },
+      {
+        passage: `After the cafeteria lights flickered, Marcus held up his book light so the table could keep reading the science article. He whispered, "We can still finish the question if everyone finds one detail."`,
+        question: `Which detail best proves Marcus is helping the group stay focused?`,
+        choices: [
+          "The cafeteria lights flickered.",
+          "Marcus held up his book light and told everyone to find one detail.",
+          "The group was sitting at a table.",
+          "The article was about science.",
+        ],
+        correctAnswer: "Marcus held up his book light and told everyone to find one detail.",
+        explanation: "That detail directly shows Marcus taking action and guiding the group back to the reading task.",
+        coachHint: "Pick the evidence that proves the idea, not a detail that only sets the scene.",
+      },
+    ];
+  }
+
+  if (lower.includes("plot") || lower.includes("setting") || lower.includes("flashback")) {
+    return [
+      {
+        passage: `Rain began tapping against the gym roof just as the class lined up for the outdoor relay. Coach Rivera moved the cones inside, and the runners had to shorten their strides around the basketball court.`,
+        question: `How does the setting affect the events?`,
+        choices: [
+          "The rain forces the relay to move indoors and changes how students run.",
+          "The gym roof is louder than the students expected.",
+          "Coach Rivera cancels the relay.",
+          "The basketball court is not part of the school.",
+        ],
+        correctAnswer: "The rain forces the relay to move indoors and changes how students run.",
+        explanation: "The weather and location change the action by moving the relay and affecting the runners' choices.",
+        coachHint: "Setting matters when it changes what characters do next.",
+      },
+      {
+        passage: `Jada stared at the cracked garden sign. Last spring, her brother had shown her how to paint each letter so neighbors could read it from the sidewalk. Remembering his careful brushstrokes, she picked up the paint and began repairing the sign.`,
+        question: `Why does the author include the memory of last spring?`,
+        choices: [
+          "To explain why Jada knows how to fix the sign.",
+          "To show that the garden is closed.",
+          "To describe every plant in the garden.",
+          "To prove Jada dislikes painting.",
+        ],
+        correctAnswer: "To explain why Jada knows how to fix the sign.",
+        explanation: "The flashback gives background that explains Jada's present action.",
+        coachHint: "A flashback usually helps explain a character, conflict, or choice in the present.",
+      },
+    ];
+  }
+
+  if (lower.includes("figurative") || lower.includes("connotation") || lower.includes("vocab")) {
+    return [
+      {
+        passage: `The unfinished essay sat like a boulder in Nia's backpack. Every time she reached for her pencil, the blank conclusion seemed to grow heavier.`,
+        question: `What does the figurative language suggest?`,
+        choices: [
+          "Nia's backpack contains a real rock.",
+          "The essay feels stressful and difficult to finish.",
+          "Nia finished her conclusion quickly.",
+          "The pencil is too heavy to lift.",
+        ],
+        correctAnswer: "The essay feels stressful and difficult to finish.",
+        explanation: "The comparison to a boulder shows the essay feels emotionally heavy, not physically heavy.",
+        coachHint: "Ask what the comparison makes you feel or understand beyond the literal words.",
+      },
+      {
+        passage: `The principal called the cleanup crew's work "meticulous" because every poster was straight, every table was wiped, and even the marker caps were sorted by color.`,
+        question: `What does meticulous mean in the passage?`,
+        choices: ["careless", "very careful", "quick", "surprised"],
+        correctAnswer: "very careful",
+        explanation: "The examples show careful attention to many small details.",
+        coachHint: "Use nearby examples as context clues for unfamiliar words.",
+      },
+    ];
+  }
+
+  return [
+    {
+      passage: `Students at Brook School started a compost bin behind the cafeteria. Each lunch period, volunteers collect fruit peels and vegetable scraps. By spring, the compost is mixed into the garden soil to help new plants grow.`,
+      question: `What is the main idea of the passage?`,
+      choices: [
+        "Brook School students use compost to reduce waste and help the garden.",
+        "Students eat fruit during lunch.",
+        "The cafeteria is behind the school garden.",
+        "Spring is warmer than winter.",
+      ],
+      correctAnswer: "Brook School students use compost to reduce waste and help the garden.",
+      explanation: "This answer covers the whole passage, while the other choices are only small details or unsupported ideas.",
+      coachHint: "A main idea should cover most of the details, not just one sentence.",
+    },
+    {
+      passage: `The article explains that bike lanes give riders a safer place to travel, help drivers predict where cyclists will be, and can reduce traffic near busy schools.`,
+      question: `Which sentence best summarizes the article's central idea?`,
+      choices: [
+        "Bike lanes can make travel safer and more organized for a community.",
+        "Cyclists should never ride near schools.",
+        "Drivers do not need to watch for bicycles.",
+        "Traffic only happens in the morning.",
+      ],
+      correctAnswer: "Bike lanes can make travel safer and more organized for a community.",
+      explanation: "The correct answer combines the key points about safety, predictability, and traffic.",
+      coachHint: "Summaries combine the important points without adding extreme claims.",
+    },
+  ];
 }
 
 function mostCommon(values: string[]) {

@@ -1,5 +1,6 @@
 import "./globals.css";
 import type { ReactNode } from "react";
+import { AppChromeHeader } from "@/components/AppChromeHeader";
 import { Providers } from "@/components/Providers";
 
 export const metadata = {
@@ -12,10 +13,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="en">
       <body>
         <Providers>
-          <div className="flex justify-between p-4 bg-gray-100">
-            <h1 className="font-bold">PSSA Platform</h1>
-          </div>
-
+          <AppChromeHeader />
           {children}
         </Providers>
       </body>

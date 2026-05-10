@@ -12,7 +12,8 @@ export async function GET() {
   if (!student) return NextResponse.json({ assignments: [], latestLearningPath: null });
   const classIds = student.enrollments.map((e) => e.classRoomId);
   if (!classIds.length) return NextResponse.json({ assignments: [], latestLearningPath: null });
-  const assignments = await db.assignment.findMany({ where: { classRoomId: { in: classIds }, status: "ASSIGNED" }, include: { assessment: true }, orderBy: { createdAt: "desc" } });
+  const assignments = (await db.assignment.findMany({ where: { classRoomId: { in: classIds }, status: "ASSIGNED" }, include: { assessment: true }, orderBy: { createdAt: "desc" } }))
+    .filter((assignment) => assignment.assignmentType !== "DIAGNOSTIC" || assignment.assessment.grade === student.grade);
   const readingCoachAssignments = await db.readingCoachAssignment.findMany({
     where: { classRoomId: { in: classIds }, status: "ASSIGNED" },
     include: { attempts: { where: { userId: (session.user as any).id }, orderBy: { createdAt: "desc" }, take: 1 } },
@@ -28,18 +29,88 @@ export async function GET() {
     },
     orderBy: { createdAt: "desc" },
   });
+  const assignedLessonProgress = await db.studentLessonProgress.findMany({
+    where: { userId: (session.user as any).id },
+    include: {
+      lesson: {
+        include: {
+          progress: { where: { userId: (session.user as any).id } },
+          questAttempts: { where: { userId: (session.user as any).id }, orderBy: { createdAt: "desc" }, take: 3 },
+          items: { orderBy: { order: "asc" } },
+          learningPath: { select: { session: { select: { userId: true } } } },
+        },
+      },
+    },
+    orderBy: { createdAt: "desc" },
+  });
+  const libraryLessons = assignedLessonProgress
+    .map((progress) => progress.lesson)
+    .filter((lesson) => lesson.learningPath.session.userId !== (session.user as any).id);
+  const mergedLearningPath = latestLearningPath
+    ? {
+        ...latestLearningPath,
+        lessons: mergeLessons(latestLearningPath.lessons, libraryLessons),
+      }
+    : libraryLessons.length
+      ? {
+          id: "assigned-library-lessons",
+          items: [],
+          lessons: libraryLessons,
+          generatedBy: "LESSON_LIBRARY",
+          aiStatus: "COMPLETED",
+          aiSummary: "Teacher-assigned lesson library items.",
+          session: null,
+        }
+      : null;
   return NextResponse.json({
-    assignments: assignments.map((a) => { const existing = sessions.find((s) => s.assessmentId === a.assessmentId); const statusLabel = existing?.submittedAt ? "Completed" : existing ? "In Progress" : "Not Started"; return { assignmentId: a.id, assessmentId: a.assessmentId, title: a.assessment.title, assignmentType: a.assignmentType, statusLabel, dueDate: a.dueDate, submittedAt: existing?.submittedAt ?? null, sessionId: existing?.id ?? null }; }),
+    studentGrade: student.grade,
+    assignments: assignments.map((a) => {
+      const existing = sessions.find((s) => s.assessmentId === a.assessmentId);
+      const statusLabel = existing?.submittedAt ? "Completed" : existing ? "In Progress" : "Not Started";
+      return {
+        assignmentId: a.id,
+        assessmentId: a.assessmentId,
+        title: a.assessment.title,
+        assignmentType: a.assignmentType,
+        gradeLevel: a.assessment.grade,
+        studentGrade: student.grade,
+        isCurrentGrade: a.assessment.grade === student.grade,
+        statusLabel,
+        assignedAt: a.createdAt,
+        dueDate: a.dueDate,
+        submittedAt: existing?.submittedAt ?? null,
+        scorePercent: existing?.scorePercent ?? null,
+        earnedPoints: existing?.earnedPoints ?? null,
+        totalPoints: existing?.totalPoints ?? null,
+        proficiencyBand: existing?.proficiencyBand ?? null,
+        sessionId: existing?.id ?? null,
+      };
+    }),
     readingCoachAssignments: readingCoachAssignments.map((assignment) => ({
       assignmentId: assignment.id,
       title: assignment.title,
       gradeLevel: assignment.gradeLevel,
       activityType: assignment.activityType,
       expectedText: assignment.expectedText,
+      assignedAt: assignment.createdAt,
       dueDate: assignment.dueDate,
       statusLabel: assignment.attempts.length ? "Completed" : "Not Started",
+      scorePercent: assignment.attempts[0]?.accuracy ?? null,
+      submittedAt: assignment.attempts[0]?.createdAt ?? null,
       latestAttempt: assignment.attempts[0] || null,
     })),
-    latestLearningPath,
+    latestLearningPath: mergedLearningPath,
   });
+}
+
+function mergeLessons(primaryLessons: any[], libraryLessons: any[]) {
+  const seen = new Set(primaryLessons.map((lesson) => lesson.id));
+  return [
+    ...primaryLessons,
+    ...libraryLessons.filter((lesson) => {
+      if (seen.has(lesson.id)) return false;
+      seen.add(lesson.id);
+      return true;
+    }),
+  ];
 }

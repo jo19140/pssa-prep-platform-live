@@ -21,6 +21,9 @@ export type BaseQuestion = {
   passageTitle: string;
   passage: string;
   passageMetadata?: Record<string, unknown>;
+  interactionMode?: "INLINE_DROPDOWN" | "SENTENCE_HIGHLIGHT" | "CHECK_TABLE" | "SENTENCE_BLANK" | "SELECT_TO_RESPOND" | "MATCH_LINES" | "SUMMARY_HIGHLIGHT";
+  clozeParts?: string[];
+  categories?: string[];
   tableData?: {
     title: string;
     columns: string[];

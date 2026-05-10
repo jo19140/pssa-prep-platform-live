@@ -47,6 +47,7 @@ const SUPPORT_BY_STANDARD: Record<string, { focus: string; activityType: string 
   "CC.1.2.6.A": { focus: "central idea and summary", activityType: "Main Idea + Multi-Select" },
   "CC.1.2.6.B": { focus: "informational inference with text evidence", activityType: "Inference MCQ + EBSR" },
   "CC.1.3.6.B": { focus: "literary inference with text evidence", activityType: "Literary Inference EBSR" },
+  "CC.1.3.6.C": { focus: "plot development, conflict, and character change", activityType: "Plot development MCQ + cause/effect practice" },
   "CC.1.3.6.F / CC.1.2.6.F": { focus: "figurative language, connotation, and tone", activityType: "Figurative Language MCQ practice" },
   "CC.1.3.6.E": { focus: "flashback and literary structure", activityType: "Flashback structure analysis practice" },
   "CC.1.3.6.G": { focus: "point of view development", activityType: "POV analysis practice" },
@@ -117,6 +118,8 @@ function supportFor(standardCode: string, commonSkill: string, commonFormat: str
   if (standardCode.includes(".S")) return { focus: "text-dependent analysis writing", activityType: "TDA revision + evidence planning" };
   if (standardCode.includes("1.4")) return { focus: commonSkill.toLowerCase(), activityType: "Conventions editing practice" };
   if (standardCode.includes(".E") || commonSkill.toLowerCase().includes("flashback")) return { focus: "flashback and literary structure", activityType: "Flashback structure analysis practice" };
+  if (commonSkill.toLowerCase().includes("setting")) return { focus: "setting impact on plot, character, mood, and theme", activityType: "Setting analysis + evidence practice" };
+  if (standardCode.includes(".C") && (commonSkill.toLowerCase().includes("plot") || standardCode.includes("1.3"))) return { focus: "plot development, conflict, cause and effect, and character change", activityType: "Plot analysis + evidence practice" };
   if (standardCode.includes(".G") || commonSkill.toLowerCase().includes("point of view")) return { focus: "point of view development", activityType: "POV analysis practice" };
   if (standardCode.includes(".F") || commonSkill.toLowerCase().includes("figurative")) return { focus: "figurative language, connotation, and tone", activityType: "Figurative Language MCQ practice" };
   if (standardCode.includes(".B") || commonSkill.toLowerCase().includes("inference")) return { focus: commonSkill.toLowerCase().includes("literary") ? "literary inference with text evidence" : "inference with text evidence", activityType: "Inference MCQ + EBSR + justify your thinking" };
@@ -191,6 +194,7 @@ function fallbackSkill(standardCode: string) {
   if (standardCode.includes("1.2.6.A")) return "Main Idea";
   if (standardCode.includes("1.2.6.B")) return "Inference";
   if (standardCode.includes("1.3.6.B")) return "Literary Inference";
+  if (standardCode.includes("1.3.6.C")) return "Plot Development";
   if (standardCode.includes("1.3.6.F") || standardCode.includes("1.2.6.F")) return "Figurative Language";
   if (standardCode.includes("1.3.6.E")) return "Flashback";
   if (standardCode.includes("1.3.6.G")) return "Point of View";
