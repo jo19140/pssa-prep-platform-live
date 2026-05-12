@@ -29,6 +29,7 @@ export function StudentSessionPage() {
   const [jobStatus, setJobStatus] = useState<any>(null);
   const [jobPollingTimedOut, setJobPollingTimedOut] = useState(false);
   const lastLessonsEnrichedCount = useRef<number | null>(null);
+  const finalizingSubmitRef = useRef(false);
   const report = useMemo(() => buildDetailedReport(demoStudent, history, questionPath), [history, questionPath]);
 
   useEffect(() => { loadAssignments(); }, []);
@@ -135,12 +136,20 @@ export function StudentSessionPage() {
 
   async function onSubmitAnswer(payload: any) {
     if (!sessionPayload) return;
+    if (finalizingSubmitRef.current) return;
     const currentQuestion = questionPath[currentQuestionNumber - 1];
     const elapsedSeconds = Math.max(1, Math.round((Date.now() - questionStartedAt) / 1000));
     const answerPayload = { ...payload.answerPayload, passageId: currentQuestion.passageId, passageType: currentQuestion.passageType };
     const nextRecord = { questionId: currentQuestion.id, skill: currentQuestion.skill, standardCode: currentQuestion.standardCode, standardLabel: currentQuestion.standardLabel, questionType: currentQuestion.type, difficulty: currentQuestion.difficulty, isCorrect: payload.isCorrect, scorePointsEarned: payload.scorePointsEarned, maxPoints: payload.maxPoints, errorPattern: payload.errorPattern, timeSpentSec: elapsedSeconds, ...answerPayload };
     const answerRes = await fetch("/api/test/answer", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ sessionId: sessionPayload.sessionId, questionId: nextRecord.questionId, skill: nextRecord.skill, standardCode: nextRecord.standardCode, standardLabel: nextRecord.standardLabel, questionType: nextRecord.questionType, difficulty: nextRecord.difficulty, isCorrect: nextRecord.isCorrect, scorePointsEarned: nextRecord.scorePointsEarned, maxPoints: nextRecord.maxPoints, errorPattern: nextRecord.errorPattern, timeSpentSec: nextRecord.timeSpentSec, answerPayload, currentQuestionNo: currentQuestionNumber }) });
     if (!answerRes.ok) {
+      if (answerRes.status === 409) {
+        await refreshCurrentSession();
+        setReviewOpen(false);
+        setIsPaused(false);
+        setMode("report");
+        return;
+      }
       setError("Failed to save answer.");
       return;
     }
@@ -173,21 +182,28 @@ export function StudentSessionPage() {
 
   async function submitTestNow() {
     if (!sessionPayload) return;
-    const submitRes = await fetch("/api/test/submit", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ sessionId: sessionPayload.sessionId }) });
-    if (!submitRes.ok) {
-      setError("Failed to submit test.");
-      return;
+    if (finalizingSubmitRef.current) return;
+    finalizingSubmitRef.current = true;
+    try {
+      setError("");
+      const submitRes = await fetch("/api/test/submit", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ sessionId: sessionPayload.sessionId }) });
+      if (!submitRes.ok) {
+        setError("Failed to submit test.");
+        return;
+      }
+      const submitJson = await submitRes.json();
+      if (submitJson.responses) setHistory(normalizeResponses(submitJson.responses));
+      setSessionPayload((prev: any) => ({ ...prev, learningPath: submitJson.learningPath, jobs: submitJson.jobs }));
+      setJobStatus(null);
+      setJobPollingTimedOut(false);
+      lastLessonsEnrichedCount.current = null;
+      await loadAssignments();
+      setReviewOpen(false);
+      setIsPaused(false);
+      setMode("report");
+    } finally {
+      finalizingSubmitRef.current = false;
     }
-    const submitJson = await submitRes.json();
-    if (submitJson.responses) setHistory(normalizeResponses(submitJson.responses));
-    setSessionPayload((prev: any) => ({ ...prev, learningPath: submitJson.learningPath, jobs: submitJson.jobs }));
-    setJobStatus(null);
-    setJobPollingTimedOut(false);
-    lastLessonsEnrichedCount.current = null;
-    await loadAssignments();
-    setReviewOpen(false);
-    setIsPaused(false);
-    setMode("report");
   }
 
   async function refreshCurrentSession() {
