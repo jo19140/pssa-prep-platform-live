@@ -34,7 +34,23 @@ export default async function middleware(req: Request & { nextUrl: URL; url: str
   requestHeaders.set("Content-Security-Policy", csp);
 
   const pathname = req.nextUrl.pathname;
-  const token = await getToken({ req: req as any, secret: process.env.NEXTAUTH_SECRET });
+  // Pin the session cookie name explicitly so it matches what NextAuth sets
+  // in production (HTTPS on Vercel always uses the __Secure- prefix), regardless
+  // of how NEXTAUTH_URL is configured. Without this, a NEXTAUTH_URL like
+  // "http://localhost:3001" makes getToken look for "next-auth.session-token"
+  // while the handler actually sets "__Secure-next-auth.session-token", and
+  // middleware silently fails to find the token -> the user gets bounced back
+  // to /login after a successful sign-in.
+  const isProduction = process.env.NODE_ENV === "production";
+  const sessionCookieName = isProduction
+    ? "__Secure-next-auth.session-token"
+    : "next-auth.session-token";
+  const token = await getToken({
+    req: req as any,
+    secret: process.env.NEXTAUTH_SECRET,
+    cookieName: sessionCookieName,
+    secureCookie: isProduction,
+  });
   const role = token?.role as string | undefined;
   let response: NextResponse | null = null;
 
