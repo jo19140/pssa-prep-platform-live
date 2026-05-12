@@ -30,7 +30,7 @@ export function LoginForm() {
       return;
     }
 
-    const session = await getSession();
+    const session = await waitForSession();
     const role = (session?.user as any)?.role;
 
     if (role === "ADMIN") {
@@ -50,7 +50,7 @@ export function LoginForm() {
       return;
     }
 
-    router.push("/");
+    router.push(fallbackRouteForEmail(email));
   }
 
   async function handleStudentRegister(e: React.FormEvent) {
@@ -145,6 +145,23 @@ export function LoginForm() {
       ) : null}
     </div>
   );
+}
+
+async function waitForSession() {
+  for (let attempt = 0; attempt < 5; attempt++) {
+    const session = await getSession();
+    if ((session?.user as any)?.role) return session;
+    await new Promise((resolve) => setTimeout(resolve, 250));
+  }
+  return getSession();
+}
+
+function fallbackRouteForEmail(email: string) {
+  const normalized = email.trim().toLowerCase();
+  if (normalized.includes("admin")) return "/admin";
+  if (normalized.includes("teacher")) return "/teacher";
+  if (normalized.includes("parent")) return "/parent";
+  return "/student";
 }
 
 async function readJson(res: Response) {
