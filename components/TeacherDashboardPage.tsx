@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import LogoutButton from "@/components/LogoutButton";
 import TeacherTdaScoringPanel from "@/components/TeacherTdaScoringPanel";
 import { TeacherLearningPathPanel } from "@/components/TeacherLearningPathPanel";
+import { TeacherClassesPanel } from "@/components/TeacherClassesPanel";
 
 const elaStandards: Record<string, string[]> = {
   "3rd": [
@@ -124,7 +125,11 @@ export default function TeacherDashboardPage() {
   const [selectedClassRoomId, setSelectedClassRoomId] = useState("");
   const [creatingDiagnostic, setCreatingDiagnostic] = useState(false);
   const [diagnosticMessage, setDiagnosticMessage] = useState("");
-  const [activeTab, setActiveTab] = useState<"overview" | "generator" | "testDesign" | "tda" | "learning" | "readingCoach">("overview");
+  const [activeTab, setActiveTab] = useState<"overview" | "generator" | "testDesign" | "tda" | "learning" | "readingCoach" | "import" | "classes">(() => {
+    if (typeof window === "undefined") return "overview";
+    const tab = new URLSearchParams(window.location.search).get("tab");
+    return tab === "import" || tab === "classes" ? tab : "overview";
+  });
   const [testDesignPurpose, setTestDesignPurpose] = useState("BASELINE_DIAGNOSTIC");
   const [designingTest, setDesigningTest] = useState(false);
   const [testDesignBlueprint, setTestDesignBlueprint] = useState<any>(null);
@@ -344,6 +349,8 @@ export default function TeacherDashboardPage() {
         <TabButton active={activeTab === "overview"} onClick={() => setActiveTab("overview")}>Overview</TabButton>
         <TabButton active={activeTab === "generator"} onClick={() => setActiveTab("generator")}>Generate Tests</TabButton>
         <TabButton active={activeTab === "testDesign"} onClick={() => setActiveTab("testDesign")}>Test Design Agent</TabButton>
+        <TabButton active={activeTab === "classes"} onClick={() => setActiveTab("classes")}>Classes & Codes</TabButton>
+        <TabButton active={activeTab === "import"} onClick={() => setActiveTab("import")}>Import Students</TabButton>
         <TabButton active={activeTab === "readingCoach"} onClick={() => setActiveTab("readingCoach")}>Reading Coach</TabButton>
         <TabButton active={activeTab === "tda"} onClick={() => setActiveTab("tda")}>TDA Scoring</TabButton>
         <TabButton active={activeTab === "learning"} onClick={() => setActiveTab("learning")}>Learning Paths</TabButton>
@@ -351,6 +358,8 @@ export default function TeacherDashboardPage() {
 
       {activeTab === "tda" && <TeacherTdaScoringPanel />}
       {activeTab === "learning" && <TeacherLearningPathPanel />}
+      {activeTab === "classes" && <TeacherClassesPanel />}
+      {activeTab === "import" && <TeacherImportStudentsPanel classes={data?.classes || []} />}
       {activeTab === "testDesign" && (
         <section className="rounded-3xl bg-white p-6 shadow">
           <div className="flex flex-col gap-1">
@@ -632,28 +641,39 @@ export default function TeacherDashboardPage() {
 
       {activeTab === "overview" && (
         <>
-      <section className="grid gap-6 lg:grid-cols-3">
-        <MetricCard title="Average Score" value={`${data?.overview?.averageScore || 0}%`} />
-        <MetricCard title="Tests Completed" value={`${data?.overview?.completedReportCount || 0}`} />
-        <MetricCard title="Students" value={`${data?.overview?.studentCount || 0}`} />
-      </section>
+          <section className="grid gap-6 lg:grid-cols-4">
+            <MetricCard
+              title="Diagnostic Average"
+              value={formatScoreMetric(data?.overview?.diagnosticAverageScore, data?.overview?.diagnosticCompletedReportCount)}
+              subtitle={`${data?.overview?.diagnosticCompletedReportCount || 0} completed current ${pluralize(data?.overview?.diagnosticCompletedReportCount || 0, "diagnostic")}`}
+            />
+            <MetricCard
+              title="Practice Average"
+              value={formatScoreMetric(data?.overview?.practiceAverageScore, data?.overview?.practiceCompletedReportCount)}
+              subtitle={`${data?.overview?.practiceCompletedReportCount || 0} completed current ${pluralize(data?.overview?.practiceCompletedReportCount || 0, "practice test")}`}
+            />
+            <MetricCard
+              title="Active Sessions"
+              value={`${data?.overview?.sessionCount || 0}`}
+              subtitle={`${data?.overview?.completedReportCount || 0} latest completed ${pluralize(data?.overview?.completedReportCount || 0, "report")}`}
+            />
+            <MetricCard title="Students" value={`${data?.overview?.studentCount || 0}`} subtitle={`${data?.teacher?.classCount || 0} class${data?.teacher?.classCount === 1 ? "" : "es"}`} />
+          </section>
 
-      <section className="grid gap-6">
-        <div className="rounded-3xl bg-white p-6 shadow">
-          <h2 className="text-xl font-bold mb-2">Class Growth</h2>
-          <p className="text-gray-500 text-sm">Chart area ready. Data points: {data?.classGrowth?.length || 0}</p>
-        </div>
+          <ScoreSourcesPanel sources={data?.overview?.scoreSources} />
 
-        <div className="rounded-3xl bg-white p-6 shadow">
-          <h2 className="text-xl font-bold mb-2">Standards Growth</h2>
-          <p className="text-gray-500 text-sm">Chart area ready. Data points: {data?.standardsGrowth?.length || 0}</p>
-        </div>
+          <TeacherLaunchPad
+            classCount={data?.teacher?.classCount || data?.classes?.length || 0}
+            studentCount={data?.overview?.studentCount || 0}
+            onOpenImport={() => setActiveTab("import")}
+            onOpenLearning={() => setActiveTab("learning")}
+            onOpenTestDesign={() => setActiveTab("testDesign")}
+            onOpenGenerator={() => setActiveTab("generator")}
+            onOpenReadingCoach={() => setActiveTab("readingCoach")}
+            onOpenTda={() => setActiveTab("tda")}
+          />
 
-        <div className="rounded-3xl bg-white p-6 shadow">
-          <h2 className="text-xl font-bold mb-2">Student Trend</h2>
-          <p className="text-gray-500 text-sm">Chart area ready. Data points: {data?.studentTrend?.length || 0}</p>
-        </div>
-      </section>
+          <TeacherActionOverview insights={data?.actionInsights} onOpenLearning={() => setActiveTab("learning")} />
         </>
       )}
     </div>
@@ -671,13 +691,587 @@ function TabButton({ active, onClick, children }: { active: boolean; onClick: ()
   );
 }
 
-function MetricCard({ title, value }: { title: string; value: string }) {
+function MetricCard({ title, value, subtitle }: { title: string; value: string; subtitle?: string }) {
   return (
     <div className="rounded-3xl bg-white p-6 shadow">
-      <h3 className="text-lg font-semibold">{title}</h3>
-      <p className="text-2xl mt-2">{value}</p>
+      <h3 className="text-sm font-bold uppercase tracking-wide text-slate-500">{title}</h3>
+      <p className="mt-2 text-3xl font-black text-slate-950">{value}</p>
+      {subtitle ? <p className="mt-1 text-sm text-slate-500">{subtitle}</p> : null}
     </div>
   );
+}
+
+function formatScoreMetric(score: number | undefined, count: number | undefined) {
+  return count ? `${score || 0}%` : "No scores";
+}
+
+function pluralize(count: number, word: string) {
+  return count === 1 ? word : `${word}s`;
+}
+
+function ScoreSourcesPanel({ sources }: { sources?: { diagnostics?: any[]; practice?: any[] } }) {
+  const diagnosticRows = sources?.diagnostics || [];
+  const practiceRows = sources?.practice || [];
+  return (
+    <section className="rounded-3xl bg-white p-6 shadow">
+      <div className="flex flex-col gap-1">
+        <p className="text-sm font-bold uppercase tracking-wide text-slate-500">Score Sources</p>
+        <h2 className="text-xl font-black text-slate-950">What These Averages Are Based On</h2>
+        <p className="text-sm text-slate-600">
+          These are the latest completed reports for each active student assignment, so repeat attempts do not inflate the totals.
+        </p>
+      </div>
+      <div className="mt-5 grid gap-5 xl:grid-cols-2">
+        <ScoreSourceTable title="Diagnostics" rows={diagnosticRows} emptyText="No current diagnostic scores after the reset." />
+        <ScoreSourceTable title="Practice Tests" rows={practiceRows} emptyText="No current practice scores yet." />
+      </div>
+    </section>
+  );
+}
+
+function ScoreSourceTable({ title, rows, emptyText }: { title: string; rows: any[]; emptyText: string }) {
+  return (
+    <div className="overflow-hidden rounded-2xl border border-slate-200">
+      <div className="flex items-center justify-between bg-slate-50 px-4 py-3">
+        <h3 className="font-black text-slate-950">{title}</h3>
+        <span className="rounded-full bg-white px-3 py-1 text-xs font-black text-slate-600 ring-1 ring-slate-200">{rows.length}</span>
+      </div>
+      {rows.length ? (
+        <div className="divide-y divide-slate-100">
+          {rows.map((row) => (
+            <div key={row.sessionId} className="grid gap-2 px-4 py-3 text-sm md:grid-cols-[1fr_auto]">
+              <div>
+                <p className="font-bold text-slate-950">{row.studentName}</p>
+                <p className="text-slate-600">{row.assessmentTitle}</p>
+                <p className="text-xs font-semibold text-slate-400">{row.className || "No class"} • {formatShortDate(row.submittedAt)}</p>
+              </div>
+              <p className="text-lg font-black text-slate-950">{row.scorePercent}%</p>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className="p-4">
+          <EmptyAction text={emptyText} />
+        </div>
+      )}
+    </div>
+  );
+}
+
+function TeacherLaunchPad({
+  classCount,
+  studentCount,
+  onOpenImport,
+  onOpenLearning,
+  onOpenTestDesign,
+  onOpenGenerator,
+  onOpenReadingCoach,
+  onOpenTda,
+}: {
+  classCount: number;
+  studentCount: number;
+  onOpenImport: () => void;
+  onOpenLearning: () => void;
+  onOpenTestDesign: () => void;
+  onOpenGenerator: () => void;
+  onOpenReadingCoach: () => void;
+  onOpenTda: () => void;
+}) {
+  const tools: Array<{
+    title: string;
+    description: string;
+    action: string;
+    onClick: () => void;
+    tone: "blue" | "emerald" | "indigo" | "amber";
+  }> = [
+    {
+      title: "Build the roster",
+      description: classCount ? `${classCount} class${classCount === 1 ? "" : "es"} ready. Import or update students before assigning work.` : "Create classes and import students before assigning work.",
+      action: "Import Students",
+      onClick: onOpenImport,
+      tone: "blue",
+    },
+    {
+      title: "Assign skill lessons",
+      description: "Preview grade-level lessons, choose targeted practice, and assign individual skills.",
+      action: "Open Lesson Library",
+      onClick: onOpenLearning,
+      tone: "emerald",
+    },
+    {
+      title: "Create a diagnostic",
+      description: "Use the PSSA test design agent to build a standards-balanced assessment blueprint.",
+      action: "Design Assessment",
+      onClick: onOpenTestDesign,
+      tone: "indigo",
+    },
+    {
+      title: "Make practice work",
+      description: "Generate original PSSA-style passages, questions, and follow-up assignments.",
+      action: "Generate Practice",
+      onClick: onOpenGenerator,
+      tone: "amber",
+    },
+  ];
+
+  return (
+    <section className="rounded-3xl bg-white p-6 shadow">
+      <div className="flex flex-col gap-2 lg:flex-row lg:items-end lg:justify-between">
+        <div>
+          <p className="text-sm font-bold uppercase tracking-wide text-blue-700">Teacher Tools</p>
+          <h2 className="mt-1 text-2xl font-black text-slate-950">Plan, assign, and follow up</h2>
+          <p className="mt-1 max-w-3xl text-sm text-slate-600">
+            Start with the roster, assign targeted lessons, then use diagnostics and teacher-guided practice to decide the next instructional move.
+          </p>
+        </div>
+        <div className="rounded-2xl bg-slate-50 px-4 py-3 text-sm font-semibold text-slate-700">
+          {studentCount} student{studentCount === 1 ? "" : "s"} on the dashboard
+        </div>
+      </div>
+
+      <div className="mt-5 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+        {tools.map((tool) => <TeacherToolCard key={tool.title} {...tool} />)}
+      </div>
+
+      <div className="mt-5 grid gap-4 lg:grid-cols-3">
+        <TeacherResourceButton
+          title="Reading Coach"
+          description="Assign short read-aloud fluency checks when students need oral reading practice."
+          onClick={onOpenReadingCoach}
+        />
+        <TeacherResourceButton
+          title="TDA Writing Support"
+          description="Review student writing with rubric-aligned strengths and next steps."
+          onClick={onOpenTda}
+        />
+        <TeacherResourceButton
+          title="PSSA Workflow"
+          description="Use diagnostics, lesson paths, mastery checks, and reteaching groups as one cycle."
+          onClick={onOpenLearning}
+        />
+      </div>
+    </section>
+  );
+}
+
+function TeacherToolCard({
+  title,
+  description,
+  action,
+  onClick,
+  tone,
+}: {
+  title: string;
+  description: string;
+  action: string;
+  onClick: () => void;
+  tone: "blue" | "emerald" | "indigo" | "amber";
+}) {
+  const toneClasses = {
+    blue: "bg-blue-50 text-blue-800 ring-blue-100",
+    emerald: "bg-emerald-50 text-emerald-800 ring-emerald-100",
+    indigo: "bg-indigo-50 text-indigo-800 ring-indigo-100",
+    amber: "bg-amber-50 text-amber-900 ring-amber-100",
+  };
+  return (
+    <div className={`rounded-2xl p-5 ring-1 ${toneClasses[tone]}`}>
+      <h3 className="font-black text-slate-950">{title}</h3>
+      <p className="mt-2 min-h-16 text-sm text-slate-600">{description}</p>
+      <button
+        type="button"
+        onClick={onClick}
+        className="mt-4 rounded-xl bg-slate-950 px-4 py-2 text-sm font-bold text-white shadow-sm hover:bg-slate-800"
+      >
+        {action}
+      </button>
+    </div>
+  );
+}
+
+function TeacherResourceButton({ title, description, onClick }: { title: string; description: string; onClick: () => void }) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className="rounded-2xl border border-slate-200 bg-slate-50 p-4 text-left transition hover:border-slate-300 hover:bg-white hover:shadow-sm"
+    >
+      <span className="font-black text-slate-950">{title}</span>
+      <span className="mt-1 block text-sm text-slate-600">{description}</span>
+    </button>
+  );
+}
+
+function TeacherImportStudentsPanel({ classes }: { classes: any[] }) {
+  const [status, setStatus] = useState<any>(null);
+  const [courses, setCourses] = useState<any[]>([]);
+  const [selectedCourseId, setSelectedCourseId] = useState("");
+  const [classRoomId, setClassRoomId] = useState(classes[0]?.id || "");
+  const [temporaryPassword, setTemporaryPassword] = useState("Password123!");
+  const [loadingStatus, setLoadingStatus] = useState(true);
+  const [loadingCourses, setLoadingCourses] = useState(false);
+  const [importing, setImporting] = useState(false);
+  const [message, setMessage] = useState("");
+
+  useEffect(() => {
+    async function loadStatus() {
+      setLoadingStatus(true);
+      try {
+        const res = await fetch("/api/teacher/google-classroom/status");
+        const json = await readJson(res);
+        setStatus(json);
+        if (json.connected) await loadCourses();
+      } catch {
+        setMessage("Could not check Google Classroom connection.");
+      } finally {
+        setLoadingStatus(false);
+      }
+    }
+    loadStatus();
+  }, []);
+
+  useEffect(() => {
+    if (!classRoomId && classes[0]?.id) {
+      setClassRoomId(classes[0].id);
+    }
+  }, [classes, classRoomId]);
+
+  async function loadCourses() {
+    setLoadingCourses(true);
+    setMessage("");
+    try {
+      const res = await fetch("/api/teacher/google-classroom/courses");
+      const json = await readJson(res);
+      if (!res.ok) throw new Error(json.error || "Failed to load Google Classroom courses.");
+      setCourses(json.courses || []);
+      setSelectedCourseId(json.courses?.[0]?.id || "");
+    } catch (err: any) {
+      setMessage(err.message || "Failed to load Google Classroom courses.");
+    } finally {
+      setLoadingCourses(false);
+    }
+  }
+
+  async function importRoster() {
+    if (!selectedCourseId || !classRoomId) {
+      setMessage("Choose a Google course and destination class.");
+      return;
+    }
+    setImporting(true);
+    setMessage("");
+    try {
+      const res = await fetch("/api/teacher/google-classroom/import", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ googleCourseId: selectedCourseId, classRoomId, temporaryPassword }),
+      });
+      const json = await readJson(res);
+      if (!res.ok) throw new Error(json.error || "Import failed.");
+      setMessage(`Imported ${json.enrolled} students. Created ${json.created}, updated ${json.updated}, skipped ${json.skipped}.`);
+    } catch (err: any) {
+      setMessage(err.message || "Import failed.");
+    } finally {
+      setImporting(false);
+    }
+  }
+
+  const configured = status?.configured;
+  const connected = status?.connected;
+
+  return (
+    <section className="rounded-3xl bg-white p-6 shadow">
+      <div className="flex flex-col gap-1">
+        <p className="text-sm font-semibold uppercase tracking-wide text-blue-700">Student Import</p>
+        <h2 className="text-xl font-bold text-slate-900">Import Students From Google Classroom</h2>
+        <p className="text-sm text-slate-600">
+          Connect a teacher Google Classroom account, choose a Google course, then enroll that roster into one of your PSSA Platform classes.
+        </p>
+      </div>
+
+      <div className="mt-5 grid gap-4 lg:grid-cols-[1fr_1.3fr]">
+        <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+          <h3 className="font-bold text-slate-950">Connection</h3>
+          {loadingStatus ? (
+            <p className="mt-2 text-sm text-slate-500">Checking Google Classroom setup...</p>
+          ) : configured ? (
+            <div className="mt-3 space-y-3">
+              <span className={`inline-flex rounded-full px-3 py-1 text-xs font-black ${connected ? "bg-emerald-100 text-emerald-700" : "bg-amber-100 text-amber-700"}`}>
+                {connected ? "Connected" : "Not connected"}
+              </span>
+              <div>
+                <a
+                  href="/api/teacher/google-classroom/connect"
+                  className="inline-flex rounded-xl bg-blue-700 px-4 py-2 text-sm font-bold text-white shadow-sm hover:bg-blue-800"
+                >
+                  {connected ? "Reconnect Google Classroom" : "Connect Google Classroom"}
+                </a>
+              </div>
+              {connected ? (
+                <button
+                  type="button"
+                  onClick={loadCourses}
+                  disabled={loadingCourses}
+                  className="rounded-xl bg-white px-4 py-2 text-sm font-bold text-slate-700 ring-1 ring-slate-200 hover:bg-slate-100 disabled:opacity-60"
+                >
+                  {loadingCourses ? "Loading courses..." : "Refresh Courses"}
+                </button>
+              ) : null}
+            </div>
+          ) : (
+            <div className="mt-3 rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-950">
+              <p className="font-bold">Google Classroom is not configured yet.</p>
+              <p className="mt-2">Add these environment variables, then restart the app:</p>
+              <ul className="mt-2 list-disc pl-5">
+                {(status?.missing || ["GOOGLE_CLASSROOM_CLIENT_ID", "GOOGLE_CLASSROOM_CLIENT_SECRET"]).map((item: string) => <li key={item}>{item}</li>)}
+                <li>Optional: GOOGLE_CLASSROOM_REDIRECT_URI</li>
+              </ul>
+              <p className="mt-2">The redirect URI should point to <span className="font-mono">/api/teacher/google-classroom/callback</span>.</p>
+            </div>
+          )}
+        </div>
+
+        <div className="rounded-2xl border border-slate-200 p-5">
+          <h3 className="font-bold text-slate-950">Roster Import</h3>
+          <div className="mt-4 grid gap-4 md:grid-cols-2">
+            <label className="block">
+              <span className="text-sm font-medium text-slate-700">Google Classroom Course</span>
+              <select
+                className="mt-1 w-full rounded border border-slate-300 p-2"
+                value={selectedCourseId}
+                onChange={(event) => setSelectedCourseId(event.target.value)}
+                disabled={!connected || !courses.length}
+              >
+                {!courses.length ? <option value="">No courses loaded</option> : null}
+                {courses.map((course) => (
+                  <option key={course.id} value={course.id}>
+                    {course.name}{course.section ? ` - ${course.section}` : ""}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label className="block">
+              <span className="text-sm font-medium text-slate-700">Import Into PSSA Class</span>
+              <select className="mt-1 w-full rounded border border-slate-300 p-2" value={classRoomId} onChange={(event) => setClassRoomId(event.target.value)}>
+                {classes.map((classRoom) => (
+                  <option key={classRoom.id} value={classRoom.id}>{classRoom.name} - Grade {classRoom.grade}</option>
+                ))}
+              </select>
+            </label>
+            <label className="block md:col-span-2">
+              <span className="text-sm font-medium text-slate-700">Temporary Student Password</span>
+              <input
+                className="mt-1 w-full rounded border border-slate-300 p-2"
+                value={temporaryPassword}
+                onChange={(event) => setTemporaryPassword(event.target.value)}
+                placeholder="At least 8 characters"
+              />
+              <span className="mt-1 block text-xs text-slate-500">
+                Imported students can use this password until a real password setup flow is added.
+              </span>
+            </label>
+          </div>
+
+          <button
+            type="button"
+            onClick={importRoster}
+            disabled={!connected || !selectedCourseId || !classRoomId || importing}
+            className="mt-4 rounded-xl bg-slate-950 px-4 py-2 text-sm font-bold text-white shadow-sm hover:bg-slate-800 disabled:opacity-50"
+          >
+            {importing ? "Importing..." : "Import Selected Roster"}
+          </button>
+
+          {message ? (
+            <p className={`mt-3 text-sm font-semibold ${message.toLowerCase().includes("failed") || message.toLowerCase().includes("could not") ? "text-red-600" : "text-emerald-700"}`}>
+              {message}
+            </p>
+          ) : null}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function TeacherActionOverview({ insights, onOpenLearning }: { insights: any; onOpenLearning: () => void }) {
+  const notStarted = insights?.notStarted?.students || [];
+  const stuck = insights?.stuck?.students || [];
+  const reteachGroups = insights?.reteaching?.groups || [];
+  const nextLesson = insights?.nextLesson || null;
+
+  return (
+    <section className="space-y-6">
+      <div className="rounded-3xl bg-slate-950 p-6 text-white shadow">
+        <p className="text-sm font-bold uppercase tracking-wide text-cyan-200">Next Instructional Moves</p>
+        <div className="mt-3 grid gap-4 md:grid-cols-4">
+          <ActionStat label="Not Started" value={insights?.summary?.notStartedCount || 0} tone="amber" />
+          <ActionStat label="May Be Stuck" value={insights?.summary?.stuckCount || 0} tone="rose" />
+          <ActionStat label="Reteach Groups" value={reteachGroups.length} tone="blue" />
+          <ActionStat label="Next Lesson" value={nextLesson ? "Ready" : "None"} tone="emerald" />
+        </div>
+      </div>
+
+      <div className="grid gap-6 xl:grid-cols-[1.25fr_1fr]">
+        <div className="space-y-6">
+          <ActionListCard
+            title="Who Has Not Started"
+            description="Start here for quick reminders or attendance follow-up."
+            emptyText="Everyone has started their assigned work."
+            rows={notStarted}
+            rowRenderer={(row: any) => (
+              <>
+                <div>
+                  <p className="font-bold text-slate-950">{row.studentName}</p>
+                  <p className="text-sm text-slate-500">{row.assignmentTitle}</p>
+                </div>
+                <div className="text-right text-xs font-semibold text-slate-500">
+                  <p>{row.className}</p>
+                  <p>{formatShortDate(row.assignedAt)}</p>
+                </div>
+              </>
+            )}
+          />
+
+          <ActionListCard
+            title="Who May Be Stuck"
+            description="Students with unfinished tests or in-progress lessons."
+            emptyText="No students are currently stuck in an active activity."
+            rows={stuck}
+            rowRenderer={(row: any) => (
+              <>
+                <div>
+                  <p className="font-bold text-slate-950">{row.studentName}</p>
+                  <p className="text-sm text-slate-500">{row.activityTitle}</p>
+                </div>
+                <div className="text-right text-xs font-semibold text-slate-500">
+                  <p>{row.detail}</p>
+                  <p>Started {formatShortDate(row.startedAt)}</p>
+                </div>
+              </>
+            )}
+          />
+        </div>
+
+        <div className="space-y-6">
+          <NextLessonCard lesson={nextLesson} onOpenLearning={onOpenLearning} />
+          <div className="rounded-3xl bg-white p-6 shadow">
+            <div>
+              <p className="text-sm font-bold uppercase tracking-wide text-blue-700">Needs Reteaching</p>
+              <h2 className="mt-1 text-xl font-black text-slate-950">Small Groups by Standard</h2>
+              <p className="mt-1 text-sm text-slate-500">Use these groups for a mini-lesson, conference, or targeted assignment.</p>
+            </div>
+            <div className="mt-4 space-y-3">
+              {reteachGroups.length ? reteachGroups.map((group: any) => <ReteachGroupCard key={group.standardCode} group={group} />) : (
+                <EmptyAction text="No reteaching groups yet. Completed diagnostics will populate this section." />
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ActionStat({ label, value, tone }: { label: string; value: string | number; tone: "amber" | "rose" | "blue" | "emerald" }) {
+  const toneClasses = {
+    amber: "bg-amber-400/15 text-amber-100 ring-amber-300/30",
+    rose: "bg-rose-400/15 text-rose-100 ring-rose-300/30",
+    blue: "bg-blue-400/15 text-blue-100 ring-blue-300/30",
+    emerald: "bg-emerald-400/15 text-emerald-100 ring-emerald-300/30",
+  };
+  return (
+    <div className={`rounded-2xl p-4 ring-1 ${toneClasses[tone]}`}>
+      <p className="text-xs font-bold uppercase tracking-wide opacity-80">{label}</p>
+      <p className="mt-2 text-2xl font-black">{value}</p>
+    </div>
+  );
+}
+
+function ActionListCard({
+  title,
+  description,
+  emptyText,
+  rows,
+  rowRenderer,
+}: {
+  title: string;
+  description: string;
+  emptyText: string;
+  rows: any[];
+  rowRenderer: (row: any) => ReactNode;
+}) {
+  return (
+    <div className="rounded-3xl bg-white p-6 shadow">
+      <div className="flex items-start justify-between gap-4">
+        <div>
+          <h2 className="text-xl font-black text-slate-950">{title}</h2>
+          <p className="mt-1 text-sm text-slate-500">{description}</p>
+        </div>
+        <span className="rounded-full bg-slate-100 px-3 py-1 text-sm font-black text-slate-700">{rows.length}</span>
+      </div>
+      <div className="mt-4 divide-y divide-slate-100">
+        {rows.length ? rows.map((row) => (
+          <div key={`${title}-${row.studentId}-${row.assignmentTitle || row.activityTitle}`} className="flex items-center justify-between gap-4 py-3">
+            {rowRenderer(row)}
+          </div>
+        )) : <EmptyAction text={emptyText} />}
+      </div>
+    </div>
+  );
+}
+
+function NextLessonCard({ lesson, onOpenLearning }: { lesson: any; onOpenLearning: () => void }) {
+  return (
+    <div className="rounded-3xl bg-white p-6 shadow">
+      <p className="text-sm font-bold uppercase tracking-wide text-emerald-700">What To Assign Next</p>
+      {lesson ? (
+        <>
+          <h2 className="mt-1 text-xl font-black text-slate-950">{lesson.focus}</h2>
+          <p className="mt-2 text-sm text-slate-600">{lesson.recommendation}</p>
+          <div className="mt-4 rounded-2xl bg-emerald-50 p-4 text-sm text-emerald-950">
+            <p className="font-bold">{lesson.standardCode}</p>
+            <p>{lesson.activityType} • {lesson.estimatedMinutes} min</p>
+            <p className="mt-2">{lesson.students?.length || lesson.groupSize || 0} student{(lesson.students?.length || lesson.groupSize || 0) === 1 ? "" : "s"} in the first group</p>
+          </div>
+          <button
+            type="button"
+            onClick={onOpenLearning}
+            className="mt-4 rounded-xl bg-emerald-700 px-4 py-2 text-sm font-bold text-white shadow-sm hover:bg-emerald-800"
+          >
+            Open Lesson Library
+          </button>
+        </>
+      ) : (
+        <EmptyAction text="No lesson recommendation yet. Complete or assign a diagnostic to generate one." />
+      )}
+    </div>
+  );
+}
+
+function ReteachGroupCard({ group }: { group: any }) {
+  return (
+    <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+      <div className="flex items-start justify-between gap-3">
+        <div>
+          <p className="text-sm font-black text-slate-950">{group.standardCode}</p>
+          <p className="mt-1 text-sm text-slate-600">{group.standardLabel}</p>
+        </div>
+        <span className="rounded-full bg-blue-100 px-3 py-1 text-xs font-black text-blue-700">{group.studentCount}</span>
+      </div>
+      <p className="mt-3 text-xs font-bold uppercase tracking-wide text-slate-500">Students</p>
+      <p className="mt-1 text-sm text-slate-700">
+        {(group.students || []).map((student: any) => `${student.studentName} (${student.percentScore}%)`).join(", ")}
+      </p>
+    </div>
+  );
+}
+
+function EmptyAction({ text }: { text: string }) {
+  return <div className="rounded-2xl border border-dashed border-slate-200 bg-slate-50 p-4 text-sm text-slate-500">{text}</div>;
+}
+
+function formatShortDate(value: string | Date | null | undefined) {
+  if (!value) return "No date";
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return "No date";
+  return date.toLocaleDateString(undefined, { month: "short", day: "numeric" });
 }
 
 function TestDesignBlueprintView({ blueprint }: { blueprint: any }) {

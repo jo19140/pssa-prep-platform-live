@@ -79,6 +79,9 @@ export async function GET() {
       exitTicket: lesson.exitTicket,
       masteryCheck: lesson.masteryCheck,
       retestRecommendation: lesson.retestRecommendation,
+      sourcePayload: lesson.sourcePayload,
+      qualityBlueprint: getSourceField(lesson.sourcePayload, "qualityBlueprint"),
+      qualityReview: getSourceField(lesson.sourcePayload, "qualityReview"),
       items: lesson.items.map((item) => ({
         id: item.id,
         itemType: item.itemType,
@@ -182,6 +185,11 @@ function dedupeLibraryLessons(lessons: any[]) {
     rows.push(lesson);
   }
   return rows;
+}
+
+function getSourceField(sourcePayload: unknown, key: string) {
+  if (!sourcePayload || typeof sourcePayload !== "object") return null;
+  return (sourcePayload as Record<string, unknown>)[key] || null;
 }
 
 export async function POST(req: Request) {

@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import { StudentTutorAgentHelpButton } from "@/components/StudentTutorAgentPanel";
 import { ReadingCoachPanel } from "@/components/ReadingCoachPanel";
+import { StudentJoinClassPanel } from "@/components/StudentJoinClassPanel";
 
 export function StudentAssignmentListPage({
   assignments,
@@ -13,6 +14,7 @@ export function StudentAssignmentListPage({
   onOpenLearningPath,
   onOpenTdaPractice,
   onReadingCoachComplete,
+  onJoinClass,
 }: {
   assignments: any[];
   readingCoachAssignments?: any[];
@@ -22,6 +24,7 @@ export function StudentAssignmentListPage({
   onOpenLearningPath?: () => void;
   onOpenTdaPractice?: () => void;
   onReadingCoachComplete?: () => void;
+  onJoinClass?: () => void;
 }) {
   const [detailFilter, setDetailFilter] = useState<"total" | "completed" | "remaining" | null>(null);
   const currentGradeAssignments = assignments.filter((assignment) => assignment.isCurrentGrade !== false);
@@ -58,6 +61,8 @@ export function StudentAssignmentListPage({
         <SummaryCard label="Completed" value={completedTotal} colorClass="text-emerald-600" onClick={() => setDetailFilter("completed")} />
         <SummaryCard label="Remaining" value={remainingAssignments} colorClass="text-amber-600" onClick={() => setDetailFilter("remaining")} />
       </section>
+
+      <StudentJoinClassPanel onJoined={onJoinClass || (() => {})} />
 
       <section className="rounded-3xl bg-white p-6 shadow">
         <div className="flex flex-col gap-1 sm:flex-row sm:items-start sm:justify-between">

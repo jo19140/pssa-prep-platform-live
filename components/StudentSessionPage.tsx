@@ -143,7 +143,7 @@ export function StudentSessionPage() {
 
   if (loading) return <div className="rounded-3xl bg-white p-6 shadow">Loading...</div>;
   if (error) return <div className="rounded-3xl bg-white p-6 shadow text-rose-600">{error}</div>;
-  if (mode === "list") return <StudentAssignmentListPage assignments={assignments} readingCoachAssignments={readingCoachAssignments} latestLearningPath={latestLearningPath} studentGrade={studentGrade} onOpen={openAssignment} onOpenLearningPath={openLearningPathWindow} onOpenTdaPractice={() => setMode("tdaPractice")} onReadingCoachComplete={loadAssignments} />;
+  if (mode === "list") return <StudentAssignmentListPage assignments={assignments} readingCoachAssignments={readingCoachAssignments} latestLearningPath={latestLearningPath} studentGrade={studentGrade} onOpen={openAssignment} onOpenLearningPath={openLearningPathWindow} onOpenTdaPractice={() => setMode("tdaPractice")} onReadingCoachComplete={loadAssignments} onJoinClass={loadAssignments} />;
   if (mode === "learningPath") return <StudentLearningPathPage learningPath={latestLearningPath} onBack={backToAssignments} />;
   if (mode === "tdaPractice") return <StudentTdaPracticePage onBack={backToAssignments} />;
   if (mode === "report") return <div className="space-y-4"><button onClick={backToAssignments} className="rounded-xl bg-slate-200 px-4 py-2">Back to Assignments</button><StudentReport report={report} /><LearningPathPanel learningPath={sessionPayload?.learningPath} /></div>;

@@ -1,5 +1,7 @@
 import type { Prisma, PrismaClient } from "@prisma/client";
 import { getSkillProgression } from "./gradeSkillProgression";
+import { evaluateLessonQuality, getLessonQualityBlueprint } from "./lessonQualityBlueprint";
+import { buildLessonVisualMetadata } from "./lessonVisuals";
 
 type PracticeQuestion = {
   question: string;
@@ -8,6 +10,7 @@ type PracticeQuestion = {
   explanation: string;
   passage?: string;
   coachHint?: string;
+  interactionType?: string;
 };
 
 type LessonSeed = {
@@ -261,10 +264,12 @@ export async function seedPrebuiltLessonLibrary(db: PrismaClient) {
       select: { id: true },
     });
     if (duplicate) {
+      await updatePrebuiltLesson(db, duplicate.id, seed);
       existing += 1;
       continue;
     }
 
+    const qualitySourcePayload = sourcePayloadForSeed(seed);
     await db.learningLesson.create({
       data: {
         learningPathId: libraryPath.id,
@@ -280,21 +285,14 @@ export async function seedPrebuiltLessonLibrary(db: PrismaClient) {
         resourceTitle: "Teacher-created support recommended",
         resourceProvider: "Lesson Creator Agent",
         resourceDescription: "Reusable AI lesson library item with guided practice, independent practice, and mastery check.",
-        guidedPractice: seed.guidedPractice as Prisma.InputJsonValue,
-        independentPractice: seed.independentPractice as Prisma.InputJsonValue,
+        guidedPractice: expandPracticeQuestions(seed.guidedPractice, "guided", seed.gradeLevel, 4) as Prisma.InputJsonValue,
+        independentPractice: expandPracticeQuestions(seed.independentPractice, "independent", seed.gradeLevel, 5) as Prisma.InputJsonValue,
         exitTicket: seed.exitTicket as Prisma.InputJsonValue,
-        masteryCheck: seed.masteryCheck as Prisma.InputJsonValue,
+        masteryCheck: expandPracticeQuestions(seed.masteryCheck, "mastery", seed.gradeLevel, seed.gradeLevel >= 6 ? 3 : 2) as Prisma.InputJsonValue,
         retestRecommendation: seed.retestRecommendation,
         generatedBy: "PREBUILT_AI_LIBRARY",
         aiStatus: "COMPLETED",
-        sourcePayload: {
-          source: "prebuilt_lesson_creator_agent",
-          progressionTarget: getSkillProgression(seed.skill, seed.gradeLevel),
-          domain: seed.domain,
-          gradeLevel: seed.gradeLevel,
-          standardCode: seed.standardCode,
-          skill: seed.skill,
-        },
+        sourcePayload: qualitySourcePayload as Prisma.InputJsonValue,
         items: {
           create: buildLessonItems(seed).map((item) => ({
             ...item,
@@ -351,19 +349,12 @@ export async function repairPrebuiltLessonContent(db: PrismaClient) {
           standardLabel: seed.standardLabel,
           lessonExplanation: seed.lessonExplanation,
           workedExample: seed.workedExample,
-          guidedPractice: seed.guidedPractice as Prisma.InputJsonValue,
-          independentPractice: seed.independentPractice as Prisma.InputJsonValue,
+          guidedPractice: expandPracticeQuestions(seed.guidedPractice, "guided", seed.gradeLevel, 4) as Prisma.InputJsonValue,
+          independentPractice: expandPracticeQuestions(seed.independentPractice, "independent", seed.gradeLevel, 5) as Prisma.InputJsonValue,
           exitTicket: seed.exitTicket as Prisma.InputJsonValue,
-          masteryCheck: seed.masteryCheck as Prisma.InputJsonValue,
+          masteryCheck: expandPracticeQuestions(seed.masteryCheck, "mastery", seed.gradeLevel, seed.gradeLevel >= 6 ? 3 : 2) as Prisma.InputJsonValue,
           retestRecommendation: seed.retestRecommendation,
-          sourcePayload: {
-            source: "prebuilt_lesson_creator_agent",
-            progressionTarget: getSkillProgression(seed.skill, seed.gradeLevel),
-            domain: seed.domain,
-            gradeLevel: seed.gradeLevel,
-            standardCode: seed.standardCode,
-            skill: seed.skill,
-          },
+          sourcePayload: sourcePayloadForSeed(seed) as Prisma.InputJsonValue,
         },
       });
       await db.learningLessonItem.deleteMany({ where: { lessonId: lesson.id } });
@@ -380,6 +371,34 @@ export async function repairPrebuiltLessonContent(db: PrismaClient) {
     }
   }
   return { updated };
+}
+
+async function updatePrebuiltLesson(db: PrismaClient, lessonId: string, seed: LessonSeed) {
+  await db.learningLesson.update({
+    where: { id: lessonId },
+    data: {
+      standardCode: seed.standardCode,
+      standardLabel: seed.standardLabel,
+      lessonExplanation: seed.lessonExplanation,
+      workedExample: seed.workedExample,
+      guidedPractice: expandPracticeQuestions(seed.guidedPractice, "guided", seed.gradeLevel, 4) as Prisma.InputJsonValue,
+      independentPractice: expandPracticeQuestions(seed.independentPractice, "independent", seed.gradeLevel, 5) as Prisma.InputJsonValue,
+      exitTicket: seed.exitTicket as Prisma.InputJsonValue,
+      masteryCheck: expandPracticeQuestions(seed.masteryCheck, "mastery", seed.gradeLevel, seed.gradeLevel >= 6 ? 3 : 2) as Prisma.InputJsonValue,
+      retestRecommendation: seed.retestRecommendation,
+      sourcePayload: sourcePayloadForSeed(seed) as Prisma.InputJsonValue,
+    },
+  });
+  await db.learningLessonItem.deleteMany({ where: { lessonId } });
+  await db.learningLessonItem.createMany({
+    data: buildLessonItems(seed).map((item) => ({
+      lessonId,
+      itemType: item.itemType,
+      title: item.title,
+      content: item.content as Prisma.InputJsonValue,
+      order: item.order,
+    })),
+  });
 }
 
 async function getOrCreateLibraryPath(db: PrismaClient) {
@@ -438,7 +457,7 @@ async function getOrCreateLibraryPath(db: PrismaClient) {
   });
 }
 
-function buildPrebuiltLessonSeeds(): LessonSeed[] {
+export function buildPrebuiltLessonSeeds(): LessonSeed[] {
   const grades = [3, 4, 5, 6, 7, 8];
   const coreLessons = grades.flatMap((gradeLevel) => [
     readingLesson(gradeLevel, "Main Idea", "informational"),
@@ -1331,18 +1350,7 @@ function gradeSixScopeSequenceLessons(): LessonSeed[] {
       correctAnswer: "After the committee reviewed the data, it changed the schedule.",
       explanationDetail: "The revision combines ideas clearly and varies the sentence opening.",
     }),
-    scopeLesson({
-      gradeLevel: 6,
-      skill: "Argument Essay Evidence",
-      domain: "Writing Strategies",
-      standardDomain: "tda",
-      explanation: "A Grade 6 argument states a clear claim, supports it with reasons, and uses evidence that is relevant and explained.",
-      workedExample: "Claim: The school should keep the library open after school. Evidence should show a benefit, such as increased access to research materials.",
-      task: "Which evidence best supports the claim that students need more independent reading time?",
-      choices: ["Students who read independently each day completed more books and wrote stronger reading responses.", "The classroom bookshelf is brown.", "Some books have pictures.", "The schedule is printed near the door."],
-      correctAnswer: "Students who read independently each day completed more books and wrote stronger reading responses.",
-      explanationDetail: "This evidence directly supports the claim and can be explained.",
-    }),
+    gradeSixArgumentEssayEvidenceLesson(),
     scopeLesson({
       gradeLevel: 6,
       skill: "Informative Essay Organization",
@@ -1368,6 +1376,277 @@ function gradeSixScopeSequenceLessons(): LessonSeed[] {
       explanationDetail: "This sentence combines source information and explains why it matters.",
     }),
   ];
+}
+
+function gradeSixArgumentEssayEvidenceLesson(): LessonSeed {
+  const skill = "Argument Essay Evidence";
+  const gradeLevel = 6;
+  const domain = "Writing Strategies";
+  const standard = standardForSkill(gradeLevel, skill, "tda", domain);
+  const libraryPassage =
+    "The student council is debating whether the school library should stay open two afternoons each week. A recent student survey showed that 64 percent of sixth graders do not have a quiet place to work immediately after school. The librarian also reported that research books and laptops are checked out most often during the final fifteen minutes before the building closes. Some students said they would use the extra time to finish group projects before sports or sibling-care responsibilities begin.";
+  const gardenPassage =
+    "A class committee wrote an argument about adding a small native-plant garden near the playground. Their notes show that the garden club already has donated seeds, two science classes can collect growth data, and the custodian identified a safe corner away from bus traffic. One concern is that the garden would need watering during dry weeks, so the committee suggested assigning rotating teams.";
+  const breakfastPassage =
+    "Sixth graders are writing to the principal about adding a grab-and-go breakfast cart near the main entrance. Attendance records show that students who arrive just before homeroom often skip breakfast because the cafeteria line is long. The nurse reported that several students visit before lunch with headaches or stomachaches. A pilot cart used during testing week served 118 students in three mornings without delaying first period.";
+  const lessonExplanation =
+    "Argument essay evidence is proof that helps a reader believe your claim. In Grade 6, strong evidence does three jobs: it connects directly to the claim, it gives a specific fact or detail from the text, and it can be explained in your own words. Weak evidence may be true, but it is too general, off-topic, or impossible to connect to the reason you are trying to prove.";
+  const workedExample =
+    "Claim: The library should stay open after school. Strong evidence: the survey showed that many sixth graders do not have a quiet place to work right after school. Why it works: the evidence directly supports the reason that students need a supervised place to read, research, and finish assignments.";
+
+  const guidedPractice: PracticeQuestion[] = [
+    {
+      interactionType: "sentence-select",
+      passage: libraryPassage,
+      question: "Which sentence gives the strongest evidence for the claim that students need an after-school study space?",
+      choices: [
+        "A recent student survey showed that 64 percent of sixth graders do not have a quiet place to work immediately after school.",
+        "The school library has research books and laptops.",
+        "Some students play sports after school.",
+        "The student council is debating the library schedule.",
+      ],
+      correctAnswer: "A recent student survey showed that 64 percent of sixth graders do not have a quiet place to work immediately after school.",
+      explanation: "The survey detail is specific and directly supports the claim that students need a quiet study space.",
+      coachHint: "Ask, 'Does this detail prove the reason, or is it just related to the topic?'",
+    },
+    {
+      interactionType: "inline-cloze",
+      passage: "A strong argument uses evidence that is relevant to the claim and specific enough to explain.",
+      question: "Choose the word that tells what evidence must be to support an argument.",
+      choices: ["relevant", "decorative", "repeated", "surprising"],
+      correctAnswer: "relevant",
+      explanation: "Relevant evidence connects to the claim instead of drifting to another topic.",
+      coachHint: "The best word describes evidence that actually fits the claim.",
+    },
+    {
+      interactionType: "evidence-match",
+      passage: libraryPassage,
+      question: "Which detail is strong support for the reason that more library time would help students complete schoolwork?",
+      choices: [
+        "Research books and laptops are checked out most often right before the building closes.",
+        "The library is part of the school building.",
+        "The debate is happening in student council.",
+        "Some students walk past the library each day.",
+      ],
+      correctAnswer: "Research books and laptops are checked out most often right before the building closes.",
+      explanation: "Checkout demand right before closing proves students are trying to use library resources and may need more time.",
+      coachHint: "Strong support usually includes a concrete fact, number, action, or result.",
+    },
+    {
+      interactionType: "evidence-sort",
+      passage: gardenPassage,
+      question: "Which evidence best supports the claim that the native-plant garden is realistic for the school to start?",
+      choices: [
+        "The garden club already has donated seeds and science classes can collect growth data.",
+        "The playground is used during recess.",
+        "Native plants can be different colors.",
+        "Some students have seen gardens before.",
+      ],
+      correctAnswer: "The garden club already has donated seeds and science classes can collect growth data.",
+      explanation: "This evidence shows the school has resources and an academic purpose, so it supports feasibility.",
+      coachHint: "For an argument about whether a plan can work, choose evidence about resources, safety, time, or results.",
+    },
+    {
+      interactionType: "short-response",
+      passage: gardenPassage,
+      question: "Explain why the safe corner away from bus traffic is useful evidence for the garden argument.",
+      choices: ["safe corner away from bus traffic", "donated seeds", "dry weeks", "playground"],
+      correctAnswer: "safe corner away from bus traffic",
+      explanation: "A useful explanation should connect the safe location to the claim that the plan is practical and responsible.",
+      coachHint: "Use because: 'This supports the claim because...'",
+    },
+    {
+      interactionType: "multiple-choice",
+      passage: breakfastPassage,
+      question: "Which evidence best supports the claim that a breakfast cart could help students without making them late?",
+      choices: [
+        "A pilot cart served 118 students in three mornings without delaying first period.",
+        "The main entrance is near the hallway.",
+        "Some students skip breakfast.",
+        "The cafeteria line can be long.",
+      ],
+      correctAnswer: "A pilot cart served 118 students in three mornings without delaying first period.",
+      explanation: "This detail includes a result from a trial and addresses both student need and the concern about being late.",
+      coachHint: "The strongest evidence often answers the concern someone might raise against the claim.",
+    },
+  ];
+
+  const independentPractice: PracticeQuestion[] = [
+    {
+      interactionType: "evidence-match",
+      passage: breakfastPassage,
+      question: "Which detail strongly supports the reason that some students need faster breakfast access?",
+      choices: [
+        "Students who arrive just before homeroom often skip breakfast because the cafeteria line is long.",
+        "The nurse has an office near the cafeteria.",
+        "Breakfast carts can have wheels.",
+        "The main entrance opens in the morning.",
+      ],
+      correctAnswer: "Students who arrive just before homeroom often skip breakfast because the cafeteria line is long.",
+      explanation: "This evidence explains the problem the proposed cart is meant to solve.",
+      coachHint: "Match evidence to the exact reason, not just the general topic.",
+    },
+    {
+      interactionType: "inline-cloze",
+      passage: "Evidence is strongest when the writer explains how the detail supports the claim.",
+      question: "Choose the phrase that shows what a writer must do after giving evidence.",
+      choices: ["explains how", "copies without", "changes why", "ignores how"],
+      correctAnswer: "explains how",
+      explanation: "Argument writing should not drop in evidence and move on. The writer must explain the connection.",
+      coachHint: "After evidence, ask, 'So what does this prove?'",
+    },
+    {
+      interactionType: "sentence-select",
+      passage: breakfastPassage,
+      question: "Which sentence best proves that the problem affects student well-being, not just convenience?",
+      choices: [
+        "The nurse reported that several students visit before lunch with headaches or stomachaches.",
+        "The cart would be near the entrance.",
+        "The cafeteria line is long.",
+        "The pilot lasted three mornings.",
+      ],
+      correctAnswer: "The nurse reported that several students visit before lunch with headaches or stomachaches.",
+      explanation: "The nurse's report shows a possible health effect connected to skipped breakfast.",
+      coachHint: "Look for evidence that matches the exact phrase in the question.",
+    },
+    {
+      interactionType: "evidence-sort",
+      passage: libraryPassage,
+      question: "Which evidence would be weak or off-topic for an essay arguing that library hours should be extended?",
+      choices: [
+        "The library walls were painted blue last summer.",
+        "A survey showed many students lack a quiet place after school.",
+        "Research books and laptops are checked out near closing time.",
+        "Some students would use extra time before responsibilities begin.",
+      ],
+      correctAnswer: "A survey showed many students lack a quiet place after school.",
+      explanation: "The wall color is off-topic; the other details can support the argument.",
+      coachHint: "A weak detail may be true but does not help prove the claim.",
+    },
+    {
+      interactionType: "short-response",
+      passage: libraryPassage,
+      question: "Write two sentences explaining how one detail from the passage supports keeping the library open after school.",
+      choices: ["quiet place", "checked out", "student council", "fifteen minutes"],
+      correctAnswer: "quiet place",
+      explanation: "A strong response names one text detail and explains how it proves the claim.",
+      coachHint: "Use this frame: 'The detail ___ supports the claim because ___.'",
+    },
+  ];
+
+  const exitTicket: PracticeQuestion[] = [
+    {
+      interactionType: "multiple-choice",
+      passage: "A class wants to argue that the school should add recycling bins near the gym. Custodians counted 47 empty plastic bottles in gym trash cans during one week, and the environmental club offered to make reminder signs.",
+      question: "Which evidence best supports the recycling-bin claim?",
+      choices: [
+        "Custodians counted 47 empty plastic bottles in gym trash cans during one week.",
+        "The gym floor is shiny.",
+        "Some signs are colorful.",
+        "The environmental club meets after school.",
+      ],
+      correctAnswer: "Custodians counted 47 empty plastic bottles in gym trash cans during one week.",
+      explanation: "The counted bottles prove there is recyclable material being thrown away near the gym.",
+      coachHint: "Specific data is often stronger than a vague observation.",
+    },
+    {
+      interactionType: "short-response",
+      passage: "A class wants to argue that the school should add recycling bins near the gym. Custodians counted 47 empty plastic bottles in gym trash cans during one week, and the environmental club offered to make reminder signs.",
+      question: "Explain how the number 47 helps the argument.",
+      choices: ["47 bottles", "gym floor", "after school", "signs"],
+      correctAnswer: "47 bottles",
+      explanation: "The number makes the problem measurable, which makes the argument stronger.",
+      coachHint: "Explain why a specific number is stronger than saying 'many.'",
+    },
+    {
+      interactionType: "inline-cloze",
+      passage: "Evidence should be specific, relevant, and explained.",
+      question: "Choose the word that means the evidence fits the claim.",
+      choices: ["relevant", "random", "decorative", "repeated"],
+      correctAnswer: "relevant",
+      explanation: "Relevant evidence fits the claim and reason.",
+      coachHint: "Think: does this proof belong with this claim?",
+    },
+  ];
+
+  const masteryCheck: PracticeQuestion[] = [
+    {
+      interactionType: "multiple-choice",
+      passage: "Students are arguing that the school should create a homework help room twice a week. A teacher survey showed that six teachers are willing to volunteer once a month, and last quarter 38 students requested extra help after missing assignments.",
+      question: "Which evidence best supports the claim that a homework help room is needed and possible?",
+      choices: [
+        "Six teachers are willing to volunteer, and 38 students requested extra help.",
+        "The room would need chairs.",
+        "Homework is sometimes difficult.",
+        "The survey was printed on paper.",
+      ],
+      correctAnswer: "Six teachers are willing to volunteer, and 38 students requested extra help.",
+      explanation: "This evidence proves both student need and available support.",
+      coachHint: "The best evidence can sometimes support more than one part of the claim.",
+    },
+    {
+      interactionType: "sentence-select",
+      passage: "The drama club asked for permission to perform a short play during family night. Last year, more than 120 families attended the event, but most activities ended after fifteen minutes. The club's sponsor wrote that the play would last twelve minutes and would use props already stored in the auditorium. Students also said the performance would give families a reason to stay for the full evening.",
+      question: "Which sentence best supports the claim that the drama club's plan is practical?",
+      choices: [
+        "The club's sponsor wrote that the play would last twelve minutes and would use props already stored in the auditorium.",
+        "Family night happened last year.",
+        "Students like to perform.",
+        "The auditorium has a stage.",
+      ],
+      correctAnswer: "The club's sponsor wrote that the play would last twelve minutes and would use props already stored in the auditorium.",
+      explanation: "The sentence addresses time and materials, which are practical concerns.",
+      coachHint: "Practical evidence often shows a plan can work with available time or resources.",
+    },
+    {
+      interactionType: "evidence-match",
+      passage: "A student argues that every homeroom should have a small set of shared headphones for listening activities. The technology teacher reported that students forgot headphones 92 times during the first quarter, and teachers lost class time finding replacements.",
+      question: "Which detail is strong support for the shared-headphones claim?",
+      choices: [
+        "Students forgot headphones 92 times during the first quarter.",
+        "Headphones can be different colors.",
+        "The technology teacher has a classroom.",
+        "Listening activities use sound.",
+      ],
+      correctAnswer: "Students forgot headphones 92 times during the first quarter.",
+      explanation: "The number shows the problem happens often enough to justify a solution.",
+      coachHint: "Look for evidence that proves the problem is real.",
+    },
+    {
+      interactionType: "short-response",
+      passage: "A student argues that every homeroom should have a small set of shared headphones for listening activities. The technology teacher reported that students forgot headphones 92 times during the first quarter, and teachers lost class time finding replacements.",
+      question: "Explain how the detail about lost class time supports the claim.",
+      choices: ["lost class time", "different colors", "technology teacher", "sound"],
+      correctAnswer: "lost class time",
+      explanation: "The detail shows the problem affects instruction, so shared headphones could solve more than a small inconvenience.",
+      coachHint: "Connect the evidence to the reason the change matters.",
+    },
+    {
+      interactionType: "inline-cloze",
+      passage: "The strongest argument evidence is specific enough to prove the claim.",
+      question: "Choose the phrase that explains why strong evidence works.",
+      choices: ["prove the claim", "decorate the paragraph", "change the topic", "repeat the title"],
+      correctAnswer: "prove the claim",
+      explanation: "Evidence belongs in an argument because it proves the claim and gives the writer something to explain.",
+      coachHint: "Evidence is proof, not decoration.",
+    },
+  ];
+
+  return {
+    gradeLevel,
+    standardCode: standard.code,
+    standardLabel: standard.label,
+    skill,
+    title: `Grade ${gradeLevel} ${skill} Lesson`,
+    domain,
+    lessonExplanation,
+    workedExample,
+    guidedPractice,
+    independentPractice,
+    exitTicket,
+    masteryCheck,
+    retestRecommendation: "After this lesson, assign a short argument paragraph where students underline one claim, one reason, and the evidence that best proves it.",
+  };
 }
 
 function gradeSevenScopeSequenceLessons(): LessonSeed[] {
@@ -1998,15 +2277,68 @@ function standardForSkill(
 }
 
 function buildLessonItems(seed: LessonSeed) {
+  const guidedPractice = expandPracticeQuestions(seed.guidedPractice, "guided", seed.gradeLevel, 4);
+  const independentPractice = expandPracticeQuestions(seed.independentPractice, "independent", seed.gradeLevel, 5);
+  const masteryCheck = expandPracticeQuestions(seed.masteryCheck, "mastery", seed.gradeLevel, seed.gradeLevel >= 6 ? 3 : 2);
   return [
     { order: 1, itemType: "LESSON", title: "Lesson Explanation", content: { text: seed.lessonExplanation } },
     { order: 2, itemType: "WORKED_EXAMPLE", title: "Worked Example", content: { text: seed.workedExample } },
-    { order: 3, itemType: "GUIDED_PRACTICE", title: "Guided Practice", content: { questions: seed.guidedPractice } },
-    { order: 4, itemType: "INDEPENDENT_PRACTICE", title: "Independent Practice", content: { questions: seed.independentPractice } },
+    { order: 3, itemType: "GUIDED_PRACTICE", title: "Guided Practice", content: { questions: guidedPractice } },
+    { order: 4, itemType: "INDEPENDENT_PRACTICE", title: "Independent Practice", content: { questions: independentPractice } },
     { order: 5, itemType: "EXIT_TICKET", title: "Exit Ticket", content: { questions: seed.exitTicket } },
-    { order: 6, itemType: "MASTERY_CHECK", title: "Mastery Check", content: { questions: seed.masteryCheck } },
+    { order: 6, itemType: "MASTERY_CHECK", title: "Mastery Check", content: { questions: masteryCheck } },
     { order: 7, itemType: "RETEST", title: "Retest Recommendation", content: { text: seed.retestRecommendation } },
   ];
+}
+
+function sourcePayloadForSeed(seed: LessonSeed) {
+  const lessonForReview = {
+    ...seed,
+    guidedPractice: expandPracticeQuestions(seed.guidedPractice, "guided", seed.gradeLevel, 4),
+    independentPractice: expandPracticeQuestions(seed.independentPractice, "independent", seed.gradeLevel, 5),
+    masteryCheck: expandPracticeQuestions(seed.masteryCheck, "mastery", seed.gradeLevel, seed.gradeLevel >= 6 ? 3 : 2),
+  };
+  const visual = buildLessonVisualMetadata({
+    title: seed.title,
+    text: `${seed.lessonExplanation} ${seed.workedExample}`,
+    skill: seed.skill,
+    gradeLevel: seed.gradeLevel,
+  });
+  return {
+    source: "prebuilt_lesson_creator_agent",
+    progressionTarget: getSkillProgression(seed.skill, seed.gradeLevel),
+    domain: seed.domain,
+    gradeLevel: seed.gradeLevel,
+    standardCode: seed.standardCode,
+    skill: seed.skill,
+    visualStandard: {
+      version: 1,
+      style: "rich-color-instructional",
+      imagePolicy: "original-or-licensed-student-safe",
+    },
+    visual,
+    imagePrompt: visual.imagePrompt,
+    qualityBlueprint: getLessonQualityBlueprint({ gradeLevel: seed.gradeLevel, skill: seed.skill, domain: seed.domain }),
+    qualityReview: evaluateLessonQuality(lessonForReview),
+  };
+}
+
+function expandPracticeQuestions(questions: PracticeQuestion[], phase: string, gradeLevel: number, minimum: number) {
+  if (questions.length >= minimum) return questions;
+  const expanded = [...questions];
+  let index = 0;
+  while (expanded.length < minimum && questions.length) {
+    const base = questions[index % questions.length];
+    const itemNumber = expanded.length + 1;
+    expanded.push({
+      ...base,
+      question: `${phaseLabel(`${phase} ${itemNumber}`)}: ${base.question.replace(/^(Guided|Guided Check|Independent|Independent Check|Independent Transfer|Mastery|Mastery Check):\s*/i, "")}`,
+      coachHint: base.coachHint || `Use the Grade ${gradeLevel} target: choose the answer that fits the whole text and evidence.`,
+      explanation: `${base.explanation} This item adds another chance to apply the same skill with the Grade ${gradeLevel} evidence expectation.`,
+    });
+    index += 1;
+  }
+  return expanded;
 }
 
 function explanationForSkill(skill: string, gradeLevel: number) {

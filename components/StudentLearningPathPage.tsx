@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { Fragment, useEffect, useMemo, useRef, useState } from "react";
 import { StudentTutorAgentHelpButton } from "@/components/StudentTutorAgentPanel";
+import { buildLessonVisualMetadata, sceneForLessonSkill } from "@/lib/lessonVisuals";
 
 export function StudentLearningPathPage({
   learningPath,
@@ -181,6 +182,8 @@ function DedicatedLessonStage({
   onBackToMap,
   onOpenExtraWork,
   onBackToDashboard,
+  dashboardLabel = "Dashboard",
+  showTutor = true,
 }: {
   lesson: any;
   lessons: any[];
@@ -192,6 +195,8 @@ function DedicatedLessonStage({
   onBackToMap: () => void;
   onOpenExtraWork: () => void;
   onBackToDashboard: () => void;
+  dashboardLabel?: string;
+  showTutor?: boolean;
 }) {
   return (
     <div className="min-h-screen bg-[#030816] text-white">
@@ -220,7 +225,7 @@ function DedicatedLessonStage({
               Extra Work
             </button>
             <button type="button" onClick={onBackToDashboard} className="rounded-xl bg-slate-200 px-4 py-2 text-sm font-black text-slate-900 hover:bg-white">
-              Dashboard
+              {dashboardLabel}
             </button>
           </div>
         </div>
@@ -237,7 +242,118 @@ function DedicatedLessonStage({
           immersive
         />
       </div>
-      <StudentTutorAgentHelpButton />
+      {showTutor ? <StudentTutorAgentHelpButton /> : null}
+    </div>
+  );
+}
+
+export function StudentLessonPreviewStage({
+  lesson,
+  lessons,
+  onClose,
+  onAssign,
+  assigning = false,
+  canAssign = false,
+}: {
+  lesson: any;
+  lessons?: any[];
+  onClose: () => void;
+  onAssign?: () => void;
+  assigning?: boolean;
+  canAssign?: boolean;
+}) {
+  const lessonList = lessons?.length ? lessons : [lesson];
+  const [selectedLessonId, setSelectedLessonId] = useState(lesson.id);
+  const selectedLesson = lessonList.find((item: any) => item.id === selectedLessonId) || lesson;
+  const [mode, setMode] = useState<"player" | "map" | "extra">("player");
+
+  useEffect(() => {
+    setSelectedLessonId(lesson.id);
+    setMode("player");
+  }, [lesson.id]);
+
+  const previewProgress = useMemo(
+    () => ({
+      status: "TEACHER_PREVIEW",
+      guidedResponses: { completed: true },
+      independentResponses: { completed: true },
+      exitTicketResponses: { completed: true },
+      masteryStatus: "NOT_STARTED",
+    }),
+    [selectedLesson.id],
+  );
+
+  function openPreviewLesson(lessonId: string) {
+    setSelectedLessonId(lessonId);
+    setMode("player");
+  }
+
+  function openPreviewExtraWork(lessonId: string) {
+    setSelectedLessonId(lessonId);
+    setMode("extra");
+  }
+
+  return (
+    <div className="relative min-h-screen bg-[#030816]">
+      <div className="fixed right-4 top-4 z-50 flex max-w-[calc(100vw-2rem)] flex-wrap items-center gap-2 rounded-2xl border border-white/15 bg-slate-950/90 p-2 shadow-2xl backdrop-blur">
+        <span className="px-2 text-xs font-black uppercase tracking-wide text-cyan-200">Teacher Preview</span>
+        {onAssign ? (
+          <button
+            type="button"
+            onClick={onAssign}
+            disabled={!canAssign || assigning}
+            className="rounded-xl bg-amber-300 px-4 py-2 text-sm font-black text-slate-950 hover:bg-amber-200 disabled:cursor-not-allowed disabled:bg-slate-500 disabled:text-slate-300"
+          >
+            {assigning ? "Assigning..." : "Assign Lesson"}
+          </button>
+        ) : null}
+        <button
+          type="button"
+          onClick={onClose}
+          className="rounded-xl bg-white px-4 py-2 text-sm font-black text-slate-950 hover:bg-slate-100"
+        >
+          Close
+        </button>
+      </div>
+
+      {mode === "map" ? (
+        <div className="mx-auto w-full max-w-[1600px] px-3 py-24 md:px-6">
+          <LearningPathMap
+            lessons={lessonList}
+            selectedLessonId={selectedLesson.id}
+            localProgress={Object.fromEntries(lessonList.map((item: any) => [item.id, previewProgress]))}
+            onOpenLesson={openPreviewLesson}
+            onOpenExtraWork={openPreviewExtraWork}
+          />
+        </div>
+      ) : mode === "extra" ? (
+        <div className="mx-auto w-full max-w-[1600px] px-3 py-24 md:px-6">
+          <div className="mb-4 flex flex-wrap gap-2">
+            <button type="button" onClick={() => setMode("player")} className="rounded-xl bg-white/10 px-4 py-2 text-sm font-black text-white ring-1 ring-white/15 hover:bg-white/15">
+              Guided Player
+            </button>
+            <button type="button" onClick={() => setMode("map")} className="rounded-xl bg-white/10 px-4 py-2 text-sm font-black text-white ring-1 ring-white/15 hover:bg-white/15">
+              Lesson Map
+            </button>
+          </div>
+          <StaticLessonWorkbook lesson={selectedLesson} />
+        </div>
+      ) : (
+        <DedicatedLessonStage
+          lesson={selectedLesson}
+          lessons={lessonList}
+          progress={previewProgress}
+          questAttempts={[]}
+          onSelectLesson={setSelectedLessonId}
+          onQuestSaved={() => {}}
+          onUpdateProgress={() => {}}
+          onBackToMap={() => setMode("map")}
+          onOpenExtraWork={() => setMode("extra")}
+          onBackToDashboard={onClose}
+          dashboardLabel="Close Preview"
+          showTutor={false}
+        />
+      )}
     </div>
   );
 }
@@ -357,7 +473,14 @@ function LearningPathMap({
   );
 }
 
+function getLessonImageUrl(lesson: any) {
+  const sourcePayload = lesson?.sourcePayload && typeof lesson.sourcePayload === "object" ? lesson.sourcePayload : {};
+  const visual = (sourcePayload as any)?.visual && typeof (sourcePayload as any).visual === "object" ? (sourcePayload as any).visual : {};
+  return String(lesson?.imageUrl || (sourcePayload as any)?.imageUrl || visual?.imageUrl || "");
+}
+
 function StaticLessonWorkbook({ lesson }: { lesson: any }) {
+  const lessonImageUrl = getLessonImageUrl(lesson);
   return (
     <section className="overflow-hidden rounded-3xl bg-white shadow">
       <div className="bg-slate-950 p-6 text-white">
@@ -381,6 +504,11 @@ function StaticLessonWorkbook({ lesson }: { lesson: any }) {
               className="w-fit rounded-xl bg-amber-100 px-4 py-2 text-sm font-black text-amber-900 hover:bg-amber-200"
             />
           </div>
+          {lessonImageUrl ? (
+            <figure className="mt-4 overflow-hidden rounded-2xl border border-slate-200 bg-slate-100">
+              <img src={lessonImageUrl} alt={`Lesson visual for ${lesson.title}`} className="h-72 w-full object-cover" />
+            </figure>
+          ) : null}
           <div className="mt-4 grid gap-4 lg:grid-cols-2">
             <div className="rounded-2xl bg-slate-50 p-4 ring-1 ring-slate-200">
               <p className="text-xs font-black uppercase tracking-wide text-slate-500">Teach</p>
@@ -393,10 +521,10 @@ function StaticLessonWorkbook({ lesson }: { lesson: any }) {
           </div>
         </article>
 
-        <ExtraWorkPracticeList title="Guided Practice Review" questions={lesson.guidedPractice} />
-        <ExtraWorkPracticeList title="Independent Extra Practice" questions={lesson.independentPractice} />
-        <ExtraWorkPracticeList title="Exit Ticket Review" questions={lesson.exitTicket} compact />
-        <ExtraWorkPracticeList title="Mastery Check Preview" questions={lesson.masteryCheck} compact />
+        <ExtraWorkPracticeList title="Guided Practice Review" questions={lesson.guidedPractice} lessonImageUrl={lessonImageUrl} />
+        <ExtraWorkPracticeList title="Independent Extra Practice" questions={lesson.independentPractice} lessonImageUrl={lessonImageUrl} />
+        <ExtraWorkPracticeList title="Exit Ticket Review" questions={lesson.exitTicket} compact lessonImageUrl={lessonImageUrl} />
+        <ExtraWorkPracticeList title="Mastery Check Preview" questions={lesson.masteryCheck} compact lessonImageUrl={lessonImageUrl} />
 
         <article className="rounded-2xl border border-amber-200 bg-amber-50 p-5">
           <p className="text-xs font-black uppercase tracking-wide text-amber-700">Teacher / Tutor Follow-Up</p>
@@ -407,7 +535,7 @@ function StaticLessonWorkbook({ lesson }: { lesson: any }) {
   );
 }
 
-function ExtraWorkPracticeList({ title, questions, compact = false }: { title: string; questions?: any[]; compact?: boolean }) {
+function ExtraWorkPracticeList({ title, questions, compact = false, lessonImageUrl = "" }: { title: string; questions?: any[]; compact?: boolean; lessonImageUrl?: string }) {
   const safeQuestions = Array.isArray(questions) ? questions : [];
   if (!safeQuestions.length) return null;
   return (
@@ -430,6 +558,11 @@ function ExtraWorkPracticeList({ title, questions, compact = false }: { title: s
                 className="shrink-0 rounded-lg bg-white px-2 py-1 text-xs font-black text-slate-700 ring-1 ring-slate-200 hover:bg-slate-100"
               />
             </div>
+            {index === 0 && lessonImageUrl ? (
+              <figure className="mt-3 overflow-hidden rounded-xl border border-slate-200 bg-white">
+                <img src={question.imageUrl || question.visual?.imageUrl || lessonImageUrl} alt={`Lesson visual for ${title}`} className="h-44 w-full object-cover" />
+              </figure>
+            ) : null}
             {question.passage ? <p className="mt-3 text-sm leading-7 text-slate-700">{question.passage}</p> : null}
             {question.coachHint ? (
               <p className="mt-3 rounded-xl bg-white p-3 text-xs font-bold leading-5 text-slate-600 ring-1 ring-slate-200">Hint: {question.coachHint}</p>
@@ -505,19 +638,19 @@ function LessonDetail({
     setActiveStep("guided");
   }
 
-  function completePractice(stepId: string, answers: Record<string, string>, score?: number) {
+  function completePractice(stepId: string, answers: Record<string, any>, score?: number, results?: any[]) {
     if (stepId === "guided") {
-      onUpdateProgress(lesson.id, "IN_PROGRESS", undefined, { guidedResponses: buildPracticePayload(answers, lesson.guidedPractice, `${lesson.skill} Guided Practice`) });
+      onUpdateProgress(lesson.id, "IN_PROGRESS", undefined, { guidedResponses: buildPracticePayload(answers, lesson.guidedPractice, `${lesson.skill} Guided Practice`, results) });
       setActiveStep("independent");
       return;
     }
     if (stepId === "independent") {
-      onUpdateProgress(lesson.id, "IN_PROGRESS", undefined, { independentResponses: buildPracticePayload(answers, lesson.independentPractice, `${lesson.skill} Independent Practice`) });
+      onUpdateProgress(lesson.id, "IN_PROGRESS", undefined, { independentResponses: buildPracticePayload(answers, lesson.independentPractice, `${lesson.skill} Independent Practice`, results) });
       setActiveStep("exit");
       return;
     }
     if (stepId === "exit") {
-      onUpdateProgress(lesson.id, "IN_PROGRESS", undefined, { exitTicketResponses: buildPracticePayload(answers, lesson.exitTicket, `${lesson.skill} Exit Ticket`) });
+      onUpdateProgress(lesson.id, "IN_PROGRESS", undefined, { exitTicketResponses: buildPracticePayload(answers, lesson.exitTicket, `${lesson.skill} Exit Ticket`, results) });
       setActiveStep("mastery");
       return;
     }
@@ -576,12 +709,12 @@ function LessonDetail({
           <InstructionPlayer lesson={lesson} onContinue={completeLessonStep} immersive={immersive} />
         )}
 
-        {activeStep === "guided" && <PracticeBlock title="Guided Practice" skill={lesson.skill} questions={lesson.guidedPractice} savedResponses={progress.guidedResponses} onComplete={(answers) => completePractice("guided", answers)} />}
-        {activeStep === "independent" && <PracticeBlock title="Independent Practice" skill={lesson.skill} questions={lesson.independentPractice} savedResponses={progress.independentResponses} onComplete={(answers) => completePractice("independent", answers)} />}
-        {activeStep === "exit" && <PracticeBlock title="Exit Ticket" skill={lesson.skill} questions={lesson.exitTicket} savedResponses={progress.exitTicketResponses} onComplete={(answers) => completePractice("exit", answers)} />}
+        {activeStep === "guided" && <PracticeBlock title="Guided Practice" skill={lesson.skill} questions={lesson.guidedPractice} lessonImageUrl={getLessonImageUrl(lesson)} savedResponses={progress.guidedResponses} onComplete={(answers) => completePractice("guided", answers)} />}
+        {activeStep === "independent" && <PracticeBlock title="Independent Practice" skill={lesson.skill} questions={lesson.independentPractice} lessonImageUrl={getLessonImageUrl(lesson)} savedResponses={progress.independentResponses} onComplete={(answers) => completePractice("independent", answers)} />}
+        {activeStep === "exit" && <PracticeBlock title="Exit Ticket" skill={lesson.skill} questions={lesson.exitTicket} lessonImageUrl={getLessonImageUrl(lesson)} savedResponses={progress.exitTicketResponses} onComplete={(answers) => completePractice("exit", answers)} />}
         {activeStep === "mastery" && (
           <div className="grid gap-4">
-            <PracticeBlock title="Mastery Check" skill={lesson.skill} questions={lesson.masteryCheck} masteryMode onComplete={(answers, score) => completePractice("mastery", answers, score)} />
+            <PracticeBlock title="Mastery Check" skill={lesson.skill} questions={lesson.masteryCheck} lessonImageUrl={getLessonImageUrl(lesson)} masteryMode onComplete={(answers, score) => completePractice("mastery", answers, score)} />
             {masteryAttempted ? (
               <LessonBlock title="Mastery Result">
                 {masteryPassed
@@ -2073,6 +2206,7 @@ function KeyIdeasBox({ ideas }: { ideas?: string[] }) {
 
 function InstructionPlayer({ lesson, onContinue, immersive = false }: { lesson: any; onContinue: () => void; immersive?: boolean }) {
   const deck = useMemo(() => instructionDeckForLesson(lesson), [lesson]);
+  const lessonImageUrl = getLessonImageUrl(lesson);
   const [screenIndex, setScreenIndex] = useState(0);
   const [selectedWord, setSelectedWord] = useState("");
   const [selectedPhrase, setSelectedPhrase] = useState("");
@@ -2146,6 +2280,14 @@ function InstructionPlayer({ lesson, onContinue, immersive = false }: { lesson: 
                 />
               </div>
               <h5 className="mt-2 text-xl font-black text-slate-950">{deck.passageTitle}</h5>
+              <LessonVisualPanel
+                title={deck.passageTitle}
+                text={`${deck.passageBefore} ${deck.focusWord} ${deck.passageAfter}`}
+                skill={lesson.skill}
+                gradeLevel={lesson.gradeLevel}
+                imageUrl={lessonImageUrl}
+                className="mt-4"
+              />
               <p className={`mt-4 text-slate-800 ${immersive ? "text-lg leading-9" : "text-base leading-8"}`}>
                 {deck.passageBefore}{" "}
                 <span className="rounded bg-yellow-200 px-1 font-bold text-slate-950">{deck.focusWord}</span>{" "}
@@ -2181,11 +2323,11 @@ function InstructionPlayer({ lesson, onContinue, immersive = false }: { lesson: 
                   <div className="mt-5 rounded-xl bg-purple-700 p-4 text-white">
                     <p className="text-sm font-bold">Complete the sentence with a word from the same word family.</p>
                     <p className="mt-4 text-lg font-black leading-8">
-                      The students used details from the passage to{" "}
+                      {screen.sentenceBefore || "The students used details from the passage to"}{" "}
                       <span className="inline-block min-w-32 rounded-lg border-2 border-dashed border-white bg-white/20 px-4 py-2 text-center">
                         {selectedWord || ""}
                       </span>{" "}
-                      their answer.
+                      {screen.sentenceAfter || "their answer."}
                     </p>
                   </div>
                   <div className="mt-4 flex flex-wrap gap-3">
@@ -2391,6 +2533,7 @@ function PracticeBlock({
   title,
   skill = "",
   questions,
+  lessonImageUrl = "",
   savedResponses,
   masteryMode = false,
   onComplete,
@@ -2398,21 +2541,27 @@ function PracticeBlock({
   title: string;
   skill?: string;
   questions: any[];
+  lessonImageUrl?: string;
   savedResponses?: any;
   masteryMode?: boolean;
-  onComplete: (answers: Record<string, string>, score?: number) => void;
+  onComplete: (answers: Record<string, any>, score?: number, results?: any[]) => void;
 }) {
   const safeQuestions = useMemo(() => hydratedPracticeQuestions(Array.isArray(questions) ? questions : [], title, skill), [questions, title, skill]);
-  const [answers, setAnswers] = useState<Record<string, string>>(() => savedAnswers(savedResponses, safeQuestions));
+  const activities = useMemo(
+    () => safeQuestions.map((question, index) => buildPracticeActivity(question, index, title, skill, masteryMode)),
+    [safeQuestions, title, skill, masteryMode],
+  );
+  const [answers, setAnswers] = useState<Record<string, any>>(() => savedAnswers(savedResponses, safeQuestions));
   const [submitted, setSubmitted] = useState(Boolean(savedResponses?.completed) && Object.keys(savedAnswers(savedResponses, safeQuestions)).length === safeQuestions.length);
-  const answeredCount = safeQuestions.filter((_, index) => answers[String(index)]).length;
+  const answeredCount = activities.filter((activity, index) => isActivityAnswered(activity, answers[String(index)])).length;
   const ready = safeQuestions.length > 0 && answeredCount === safeQuestions.length;
-  const score = safeQuestions.length ? Math.round((safeQuestions.filter((question, index) => isCorrectAnswer(question, answers[String(index)])).length / safeQuestions.length) * 100) : 0;
+  const results = activities.map((activity, index) => scorePracticeActivity(activity, answers[String(index)]));
+  const score = results.length ? Math.round((results.filter((result) => result.correct).length / results.length) * 100) : 0;
 
   function submitPractice() {
     if (!ready) return;
     setSubmitted(true);
-    onComplete(answers, masteryMode ? score : undefined);
+    onComplete(answers, masteryMode ? score : undefined, results);
   }
 
   return (
@@ -2430,91 +2579,23 @@ function PracticeBlock({
         <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-200">
           {masteryMode
             ? "Prove the skill independently. A score of 80% or higher opens the arcade."
-            : "Read the short passage, use the hint, and choose the answer that is best supported by the text."}
+            : "Read, select, sort, match, and explain. Each activity checks a different part of the skill."}
         </p>
       </div>
       <div className="space-y-5 bg-slate-50 p-5">
-        {safeQuestions.map((question, index) => (
-          <div key={`${title}-${index}`} className="overflow-hidden rounded-2xl bg-white ring-1 ring-slate-200">
-            <div className="grid gap-0 lg:grid-cols-[0.85fr_1.15fr]">
-              <div className="border-b border-slate-200 bg-amber-50 p-5 lg:border-b-0 lg:border-r">
-                <div className="flex items-center justify-between gap-3">
-                  <p className="text-xs font-black uppercase tracking-wide text-amber-700">Passage Card</p>
-                  <ReadAloudButton
-                    text={`${question.passage || ""} ${question.coachHint ? `Coach hint: ${question.coachHint}` : ""}`}
-                    label="Listen"
-                    className="rounded-lg bg-white px-3 py-2 text-xs font-black text-amber-800 ring-1 ring-amber-200 hover:bg-amber-100"
-                  />
-                </div>
-                <p className="mt-3 text-base leading-8 text-slate-900">{question.passage}</p>
-                {question.coachHint ? (
-                  <div className="mt-4 rounded-xl bg-white p-3 text-sm font-semibold leading-6 text-slate-700 ring-1 ring-amber-200">
-                    Coach hint: {question.coachHint}
-                  </div>
-                ) : null}
-              </div>
-              <div className="p-5">
-                <div className="flex items-center justify-between gap-3">
-                  <p className="text-xs font-black uppercase tracking-wide text-emerald-700">Question {index + 1}</p>
-                  <ReadAloudButton
-                    text={`${cleanQuestionText(question.question)} ${Array.isArray(question.choices) ? question.choices.map((choice: string, choiceIndex: number) => `${String.fromCharCode(65 + choiceIndex)}. ${choice}`).join(". ") : ""}`}
-                    label="Listen"
-                    className="rounded-lg bg-emerald-100 px-3 py-2 text-xs font-black text-emerald-800 hover:bg-emerald-200"
-                  />
-                </div>
-                <p className="mt-2 text-lg font-black leading-7 text-slate-950">{cleanQuestionText(question.question)}</p>
-                {Array.isArray(question.choices) ? (
-                  <div className="mt-4 grid gap-3">
-                    {question.choices.map((choice: string, choiceIndex: number) => {
-                      const selected = answers[String(index)] === choice;
-                      const correct = isCorrectAnswer(question, choice);
-                      return (
-                        <button
-                          key={choice}
-                          onClick={() => {
-                            if (!submitted || masteryMode) setAnswers((previous) => ({ ...previous, [String(index)]: choice }));
-                            if (submitted && masteryMode) setSubmitted(false);
-                          }}
-                          disabled={submitted && !masteryMode}
-                          className={`group flex min-h-16 items-center gap-3 rounded-xl border p-3 text-left text-sm font-bold transition disabled:cursor-not-allowed ${
-                            submitted && correct
-                              ? "border-emerald-300 bg-emerald-50 text-emerald-950"
-                              : submitted && selected && !correct
-                                ? "border-rose-300 bg-rose-50 text-rose-950"
-                                : selected
-                                  ? "border-blue-300 bg-blue-50 text-blue-950"
-                                  : "border-slate-200 bg-white text-slate-700 hover:border-slate-300 hover:bg-slate-50"
-                          }`}
-                        >
-                          <span className={`grid h-9 w-9 shrink-0 place-items-center rounded-lg text-xs font-black ${
-                            submitted && correct
-                              ? "bg-emerald-600 text-white"
-                              : submitted && selected && !correct
-                                ? "bg-rose-600 text-white"
-                                : selected
-                                  ? "bg-blue-600 text-white"
-                                  : "bg-slate-100 text-slate-600 group-hover:bg-slate-200"
-                          }`}>
-                            {String.fromCharCode(65 + choiceIndex)}
-                          </span>
-                          <span className="leading-6">{choice}</span>
-                        </button>
-                      );
-                    })}
-                  </div>
-                ) : null}
-                {submitted ? (
-                  <div className="mt-4 rounded-xl bg-slate-100 p-4 text-sm leading-6 text-slate-700">
-                    <p className="font-black text-slate-950">Why this works</p>
-                    <p className="mt-1">
-                      <span className="font-semibold">Answer:</span> {question.correctAnswer}
-                    </p>
-                    <p className="mt-1">{question.explanation}</p>
-                  </div>
-                ) : null}
-              </div>
-            </div>
-          </div>
+        {activities.map((activity, index) => (
+          <PracticeActivityCard
+            key={`${title}-${index}`}
+            activity={activity}
+            lessonImageUrl={lessonImageUrl}
+            answer={answers[String(index)]}
+            submitted={submitted}
+            masteryMode={masteryMode}
+            onAnswer={(value) => {
+              if (!submitted || masteryMode) setAnswers((previous) => ({ ...previous, [String(index)]: value }));
+              if (submitted && masteryMode) setSubmitted(false);
+            }}
+          />
         ))}
         <div className="flex flex-col gap-3 rounded-2xl bg-white p-4 ring-1 ring-slate-200 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-sm font-semibold text-slate-600">
@@ -2537,6 +2618,929 @@ function PracticeBlock({
       </div>
     </article>
   );
+}
+
+function LessonVisualPanel({
+  title,
+  text,
+  skill,
+  gradeLevel,
+  imageUrl,
+  visualMetadata,
+  className = "",
+}: {
+  title: string;
+  text: string;
+  skill?: string;
+  gradeLevel?: number;
+  imageUrl?: string;
+  visualMetadata?: any;
+  className?: string;
+}) {
+  const visual = buildLessonVisual({ title, text, skill, gradeLevel, visualMetadata });
+
+  if (imageUrl) {
+    return (
+      <figure className={`overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm ${className}`}>
+        <img src={imageUrl} alt={visual.alt} className="h-56 w-full object-cover" />
+        <figcaption className="bg-slate-50 px-4 py-3 text-sm font-semibold leading-6 text-slate-700">{visual.caption}</figcaption>
+      </figure>
+    );
+  }
+
+  return (
+    <figure className={`overflow-hidden rounded-2xl border border-white/70 bg-white shadow-sm ring-1 ring-slate-200 ${className}`}>
+      <div className={`relative min-h-56 ${visual.backgroundClass}`}>
+        <div className="absolute inset-0 opacity-45" style={visual.patternStyle} />
+        <div className="absolute inset-x-5 top-5 flex items-start justify-between gap-4">
+          <div className="rounded-2xl bg-white/90 px-4 py-3 shadow-sm backdrop-blur">
+            <p className={`text-xs font-black uppercase tracking-wide ${visual.accentTextClass}`}>Level {gradeLevel || "ELA"} Visual</p>
+            <h5 className="mt-1 max-w-sm text-2xl font-black leading-7 text-slate-950">{visual.headline}</h5>
+          </div>
+          <div className={`hidden h-16 w-16 rounded-full border-4 border-white shadow-lg sm:block ${visual.badgeClass}`} />
+        </div>
+        <div className="absolute bottom-5 left-5 right-5 grid gap-3 md:grid-cols-[1fr_0.8fr]">
+          <div className="rounded-2xl bg-white/92 p-4 shadow-sm backdrop-blur">
+            <p className="text-sm font-semibold leading-6 text-slate-800">{visual.caption}</p>
+          </div>
+          <div className="relative min-h-28 overflow-hidden rounded-2xl bg-white/35 ring-1 ring-white/60">
+            {visual.scene === "sequence" ? (
+              <SequenceVisual />
+            ) : visual.scene === "argument" ? (
+              <ArgumentVisual />
+            ) : visual.scene === "conventions" ? (
+              <ConventionsVisual />
+            ) : visual.scene === "evidence" ? (
+              <EvidenceVisual />
+            ) : visual.scene === "literature" ? (
+              <LiteratureVisual />
+            ) : visual.scene === "visual-text" ? (
+              <VisualTextVisual />
+            ) : visual.scene === "vocabulary" ? (
+              <VocabularyVisual />
+            ) : visual.scene === "compare" ? (
+              <CompareVisual />
+            ) : visual.scene === "word-parts" ? (
+              <WordPartsVisual />
+            ) : visual.scene === "summary" ? (
+              <SummaryVisual />
+            ) : (
+              <ReadingVisual />
+            )}
+          </div>
+        </div>
+      </div>
+    </figure>
+  );
+}
+
+function SequenceVisual() {
+  return (
+    <div className="absolute inset-0 flex items-center justify-center gap-3 p-4">
+      {[0, 1, 2].map((index) => (
+        <div key={index} className="flex items-center gap-3">
+          <div className="grid h-14 w-14 place-items-center rounded-xl bg-white text-lg font-black text-slate-950 shadow-sm ring-1 ring-slate-200">
+            {index + 1}
+          </div>
+          {index < 2 ? <div className="h-1 w-7 rounded-full bg-white/80" /> : null}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function EvidenceVisual() {
+  return (
+    <div className="absolute inset-0 p-4">
+      <div className="h-full rounded-2xl bg-white/90 p-4 shadow-sm">
+        <div className="h-3 w-1/2 rounded-full bg-yellow-300" />
+        <div className="mt-3 h-3 w-4/5 rounded-full bg-slate-300" />
+        <div className="mt-3 h-3 w-3/5 rounded-full bg-slate-300" />
+        <div className="absolute bottom-5 right-5 h-10 w-10 rounded-full border-4 border-slate-900 bg-emerald-300" />
+      </div>
+    </div>
+  );
+}
+
+function CompareVisual() {
+  return (
+    <div className="absolute inset-0 grid grid-cols-2 gap-3 p-4">
+      <div className="rounded-2xl bg-white/90 p-3 shadow-sm">
+        <div className="h-3 w-2/3 rounded-full bg-indigo-300" />
+        <div className="mt-3 h-16 rounded-xl bg-indigo-100" />
+      </div>
+      <div className="rounded-2xl bg-white/90 p-3 shadow-sm">
+        <div className="h-3 w-2/3 rounded-full bg-emerald-300" />
+        <div className="mt-3 h-16 rounded-xl bg-emerald-100" />
+      </div>
+    </div>
+  );
+}
+
+function ArgumentVisual() {
+  return (
+    <div className="absolute inset-0 grid grid-cols-[0.9fr_1fr] gap-3 p-4">
+      <div className="rounded-2xl bg-white/90 p-3 shadow-sm">
+        <div className="text-xs font-black uppercase tracking-wide text-emerald-700">Claim</div>
+        <div className="mt-3 h-3 w-4/5 rounded-full bg-slate-800" />
+        <div className="mt-3 h-2 rounded-full bg-slate-300" />
+      </div>
+      <div className="grid gap-2">
+        <div className="rounded-xl bg-white/90 p-3 shadow-sm">
+          <div className="h-3 w-2/3 rounded-full bg-yellow-300" />
+          <div className="mt-2 h-2 rounded-full bg-slate-300" />
+        </div>
+        <div className="rounded-xl bg-white/90 p-3 shadow-sm">
+          <div className="h-3 w-1/2 rounded-full bg-emerald-300" />
+          <div className="mt-2 h-2 w-4/5 rounded-full bg-slate-300" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ConventionsVisual() {
+  return (
+    <div className="absolute inset-0 p-4">
+      <div className="h-full rounded-2xl bg-white/92 p-4 shadow-sm">
+        <div className="mb-3 flex gap-2">
+          {["U", "<", ">"].map((tool) => (
+            <span key={tool} className="grid h-6 w-8 place-items-center rounded-md bg-slate-200 text-xs font-black text-slate-800">
+              {tool}
+            </span>
+          ))}
+        </div>
+        <div className="space-y-3">
+          <div className="h-3 w-11/12 rounded-full bg-slate-300" />
+          <div className="h-3 w-4/5 rounded-full bg-yellow-300" />
+          <div className="h-3 w-2/3 rounded-full bg-slate-300" />
+        </div>
+        <div className="absolute bottom-6 right-6 h-8 w-14 rounded-lg border-2 border-slate-900 bg-white" />
+      </div>
+    </div>
+  );
+}
+
+function LiteratureVisual() {
+  return (
+    <div className="absolute inset-0 grid grid-cols-[0.8fr_1fr] gap-3 p-4">
+      <div className="rounded-2xl bg-white/90 p-3 shadow-sm">
+        <div className="mx-auto h-10 w-10 rounded-full bg-violet-300" />
+        <div className="mt-3 h-3 rounded-full bg-slate-800" />
+        <div className="mt-2 h-2 rounded-full bg-slate-300" />
+      </div>
+      <div className="rounded-2xl bg-white/90 p-3 shadow-sm">
+        <div className="h-3 w-2/3 rounded-full bg-rose-300" />
+        <div className="mt-3 h-10 rounded-xl bg-violet-100" />
+        <div className="mt-3 h-3 w-3/4 rounded-full bg-emerald-300" />
+      </div>
+    </div>
+  );
+}
+
+function VisualTextVisual() {
+  return (
+    <div className="absolute inset-0 grid grid-cols-[0.9fr_1fr] gap-3 p-4">
+      <div className="rounded-2xl bg-white/92 p-3 shadow-sm">
+        <div className="h-3 w-2/3 rounded-full bg-slate-800" />
+        <div className="mt-3 grid grid-cols-3 gap-1">
+          {Array.from({ length: 9 }).map((_, index) => (
+            <span key={index} className={`h-6 rounded ${index % 2 ? "bg-cyan-100" : "bg-emerald-100"}`} />
+          ))}
+        </div>
+      </div>
+      <div className="rounded-2xl bg-white/92 p-3 shadow-sm">
+        <div className="h-16 rounded-xl bg-sky-100" />
+        <div className="mt-3 h-3 w-4/5 rounded-full bg-yellow-300" />
+        <div className="mt-2 h-2 rounded-full bg-slate-300" />
+      </div>
+    </div>
+  );
+}
+
+function VocabularyVisual() {
+  return (
+    <div className="absolute inset-0 p-4">
+      <div className="grid h-full grid-rows-[auto_1fr] gap-3 rounded-2xl bg-white/90 p-4 shadow-sm">
+        <div className="flex items-center gap-3">
+          <div className="h-10 w-10 rounded-full border-4 border-slate-900 bg-yellow-200" />
+          <div className="h-4 flex-1 rounded-full bg-slate-800" />
+        </div>
+        <div className="grid grid-cols-2 gap-2">
+          <div className="rounded-xl bg-indigo-100 p-2">
+            <div className="h-3 rounded-full bg-indigo-300" />
+            <div className="mt-2 h-2 rounded-full bg-slate-300" />
+          </div>
+          <div className="rounded-xl bg-emerald-100 p-2">
+            <div className="h-3 rounded-full bg-emerald-300" />
+            <div className="mt-2 h-2 rounded-full bg-slate-300" />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ReadingVisual() {
+  return (
+    <div className="absolute inset-0 p-4">
+      <div className="mx-auto h-full max-w-44 rounded-2xl bg-white/90 p-4 shadow-sm">
+        <div className="h-4 w-1/2 rounded-full bg-slate-800" />
+        <div className="mt-5 space-y-2">
+          <div className="h-2 rounded-full bg-slate-300" />
+          <div className="h-2 rounded-full bg-slate-300" />
+          <div className="h-2 w-2/3 rounded-full bg-yellow-300" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function WordPartsVisual() {
+  return (
+    <div className="absolute inset-0 flex items-center justify-center p-4">
+      <div className="grid w-full max-w-60 gap-3">
+        <div className="grid grid-cols-[1fr_auto_1fr_auto_1fr] items-center gap-2">
+          {["care", "ful", "ly"].map((part, index) => (
+            <Fragment key={part}>
+              <div className="rounded-xl bg-white/95 px-3 py-2 text-center text-sm font-black text-slate-950 shadow-sm ring-1 ring-white/70">
+                {part}
+              </div>
+              {index < 2 ? <div className="h-1 w-4 rounded-full bg-white/80" /> : null}
+            </Fragment>
+          ))}
+        </div>
+        <div className="rounded-2xl bg-white/85 p-3 shadow-sm ring-1 ring-white/70">
+          <div className="h-3 w-24 rounded-full bg-emerald-300" />
+          <div className="mt-2 h-2 rounded-full bg-slate-300" />
+          <div className="mt-2 h-2 w-4/5 rounded-full bg-slate-300" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function SummaryVisual() {
+  return (
+    <div className="absolute inset-0 grid grid-cols-[1fr_auto_0.9fr] items-center gap-3 p-4">
+      <div className="rounded-2xl bg-white/90 p-3 shadow-sm">
+        <div className="h-3 w-2/3 rounded-full bg-slate-800" />
+        <div className="mt-3 space-y-2">
+          <div className="h-2 rounded-full bg-slate-300" />
+          <div className="h-2 rounded-full bg-slate-300" />
+          <div className="h-2 rounded-full bg-slate-300" />
+          <div className="h-2 w-4/5 rounded-full bg-slate-300" />
+        </div>
+      </div>
+      <div className="text-2xl font-black text-white">→</div>
+      <div className="rounded-2xl bg-white/95 p-3 shadow-sm">
+        <div className="h-3 w-3/4 rounded-full bg-emerald-400" />
+        <div className="mt-3 h-2 rounded-full bg-slate-300" />
+        <div className="mt-2 h-2 w-5/6 rounded-full bg-slate-300" />
+        <div className="mt-3 h-2 w-1/2 rounded-full bg-rose-300 line-through opacity-70" />
+      </div>
+    </div>
+  );
+}
+
+function buildLessonVisual({
+  title,
+  text,
+  skill,
+  gradeLevel,
+  visualMetadata,
+}: {
+  title: string;
+  text: string;
+  skill?: string;
+  gradeLevel?: number;
+  visualMetadata?: any;
+}) {
+  const skillScene = sceneForLessonSkill(skill);
+  const metadataScene = typeof visualMetadata?.scene === "string" ? visualMetadata.scene : "";
+  const shouldOverrideMetadata = skillScene !== "reading" && metadataScene !== skillScene;
+  const metadata = !shouldOverrideMetadata && visualMetadata && typeof visualMetadata === "object"
+    ? visualMetadata
+    : buildLessonVisualMetadata({ title, text, skill, gradeLevel });
+  const scene = metadata.scene || "reading";
+  const visualFocus = metadata.headline || skill || title || "Reading Skill";
+  const backgroundClass = scene === "compare"
+    ? "bg-gradient-to-br from-indigo-500 via-violet-500 to-fuchsia-500"
+    : scene === "argument"
+      ? "bg-gradient-to-br from-emerald-400 via-teal-500 to-cyan-600"
+    : scene === "conventions"
+      ? "bg-gradient-to-br from-amber-300 via-orange-400 to-rose-500"
+    : scene === "sequence"
+      ? "bg-gradient-to-br from-amber-300 via-orange-400 to-rose-500"
+    : scene === "literature"
+      ? "bg-gradient-to-br from-indigo-500 via-violet-500 to-fuchsia-500"
+    : scene === "visual-text"
+      ? "bg-gradient-to-br from-cyan-300 via-emerald-400 to-teal-600"
+    : scene === "vocabulary"
+      ? "bg-gradient-to-br from-violet-400 via-fuchsia-500 to-rose-500"
+      : scene === "word-parts"
+        ? "bg-gradient-to-br from-teal-300 via-emerald-400 to-cyan-600"
+      : scene === "summary"
+        ? "bg-gradient-to-br from-cyan-300 via-sky-400 to-indigo-500"
+      : scene === "evidence"
+        ? "bg-gradient-to-br from-emerald-400 via-teal-500 to-cyan-600"
+        : "bg-gradient-to-br from-sky-400 via-blue-500 to-indigo-600";
+  const accentTextClass = scene === "sequence" || scene === "conventions" ? "text-orange-700" : scene === "compare" || scene === "literature" || scene === "vocabulary" ? "text-indigo-700" : scene === "evidence" || scene === "word-parts" || scene === "argument" || scene === "visual-text" ? "text-emerald-700" : "text-blue-700";
+  const badgeClass = scene === "sequence" || scene === "conventions" ? "bg-yellow-300" : scene === "compare" || scene === "literature" || scene === "vocabulary" ? "bg-fuchsia-300" : scene === "evidence" || scene === "word-parts" || scene === "argument" || scene === "visual-text" ? "bg-emerald-300" : "bg-sky-300";
+
+  return {
+    scene,
+    headline: visualFocus,
+    caption: metadata.caption || captionForVisual(scene, visualFocus),
+    alt: metadata.alt || `Illustration for ${visualFocus}`,
+    backgroundClass,
+    accentTextClass,
+    badgeClass,
+    imagePrompt: metadata.imagePrompt,
+    patternStyle: {
+      backgroundImage: "radial-gradient(circle at 16px 16px, rgba(255,255,255,0.55) 2px, transparent 2px)",
+      backgroundSize: "32px 32px",
+    },
+  };
+}
+
+function captionForVisual(scene: string, visualFocus: string) {
+  if (scene === "argument") return `${visualFocus}: connect claim, reason, and evidence without drifting from the point.`;
+  if (scene === "compare") return `${visualFocus}: look for how two ideas are alike, different, or organized.`;
+  if (scene === "conventions") return `${visualFocus}: inspect the sentence, choose the correct form, and keep the style consistent.`;
+  if (scene === "sequence") return `${visualFocus}: track what happens first, next, and as a result.`;
+  if (scene === "evidence") return `${visualFocus}: connect the highlighted clue to the answer.`;
+  if (scene === "literature") return `${visualFocus}: track characters, choices, conflict, and message across the text.`;
+  if (scene === "summary") return `${visualFocus}: keep the central idea and key details, and leave out opinions.`;
+  if (scene === "visual-text") return `${visualFocus}: use titles, labels, rows, columns, or images to support the text.`;
+  if (scene === "vocabulary") return `${visualFocus}: use context and word parts to determine the precise meaning.`;
+  if (scene === "word-parts") return `${visualFocus}: break the long word into meaningful parts, then blend the parts back together.`;
+  return `${visualFocus}: use the image to preview the topic before reading.`;
+}
+
+type PracticeActivityType = "multiple-choice" | "sentence-select" | "evidence-match" | "evidence-sort" | "word-cloze" | "inline-cloze" | "short-response";
+
+function PracticeActivityCard({
+  activity,
+  lessonImageUrl = "",
+  answer,
+  submitted,
+  masteryMode,
+  onAnswer,
+}: {
+  activity: any;
+  lessonImageUrl?: string;
+  answer: any;
+  submitted: boolean;
+  masteryMode: boolean;
+  onAnswer: (value: any) => void;
+}) {
+  const question = activity.questionData;
+  const result = submitted ? scorePracticeActivity(activity, answer) : null;
+  const locked = submitted && !masteryMode;
+
+  return (
+    <div className="overflow-hidden rounded-2xl bg-white ring-1 ring-slate-200">
+      <div className="grid gap-0 lg:grid-cols-[0.85fr_1.15fr]">
+        <div className="border-b border-slate-200 bg-amber-50 p-5 lg:border-b-0 lg:border-r">
+          <div className="flex items-center justify-between gap-3">
+            <p className="text-xs font-black uppercase tracking-wide text-amber-700">Passage Card</p>
+            <ReadAloudButton
+              text={`${question.passage || ""} ${question.coachHint ? `Coach hint: ${question.coachHint}` : ""}`}
+              label="Listen"
+              className="rounded-lg bg-white px-3 py-2 text-xs font-black text-amber-800 ring-1 ring-amber-200 hover:bg-amber-100"
+            />
+          </div>
+          <LessonVisualPanel
+            title={question.visualTitle || activity.skill || "Reading Scene"}
+            text={question.passage || activity.prompt}
+            skill={activity.skill}
+            gradeLevel={question.gradeLevel}
+            imageUrl={question.imageUrl || question.visual?.imageUrl || lessonImageUrl}
+            visualMetadata={question.visual}
+            className="mt-4"
+          />
+          <p className="mt-3 text-base leading-8 text-slate-900">{question.passage}</p>
+          {question.coachHint ? (
+            <div className="mt-4 rounded-xl bg-white p-3 text-sm font-semibold leading-6 text-slate-700 ring-1 ring-amber-200">
+              Coach hint: {question.coachHint}
+            </div>
+          ) : null}
+        </div>
+        <div className="p-5">
+          <div className="flex items-center justify-between gap-3">
+            <div>
+              <p className="text-xs font-black uppercase tracking-wide text-emerald-700">Activity {activity.index + 1}</p>
+              <p className="mt-1 text-xs font-black uppercase tracking-wide text-slate-500">{activity.label}</p>
+            </div>
+            <ReadAloudButton
+              text={activity.listenText}
+              label="Listen"
+              className="rounded-lg bg-emerald-100 px-3 py-2 text-xs font-black text-emerald-800 hover:bg-emerald-200"
+            />
+          </div>
+          <p className="mt-3 text-lg font-black leading-7 text-slate-950">{activity.prompt}</p>
+
+          {activity.type === "multiple-choice" ? (
+            <MultipleChoiceActivity activity={activity} answer={answer} submitted={submitted} locked={locked} onAnswer={onAnswer} />
+          ) : activity.type === "sentence-select" ? (
+            <SentenceSelectActivity activity={activity} answer={answer} submitted={submitted} locked={locked} onAnswer={onAnswer} />
+          ) : activity.type === "evidence-match" ? (
+            <EvidenceMatchActivity activity={activity} answer={answer || {}} submitted={submitted} locked={locked} onAnswer={onAnswer} />
+          ) : activity.type === "evidence-sort" ? (
+            <EvidenceSortActivity activity={activity} answer={answer || {}} submitted={submitted} locked={locked} onAnswer={onAnswer} />
+          ) : activity.type === "word-cloze" ? (
+            <WordClozeActivity activity={activity} answer={answer} submitted={submitted} locked={locked} onAnswer={onAnswer} />
+          ) : activity.type === "inline-cloze" ? (
+            <InlineClozeActivity activity={activity} answer={answer} submitted={submitted} locked={locked} onAnswer={onAnswer} />
+          ) : (
+            <ShortResponseActivity activity={activity} answer={String(answer || "")} submitted={submitted} locked={locked} onAnswer={onAnswer} />
+          )}
+
+          {result ? (
+            <div className={`mt-4 rounded-xl p-4 text-sm leading-6 ring-1 ${
+              result.correct ? "bg-emerald-50 text-emerald-950 ring-emerald-200" : "bg-amber-50 text-amber-950 ring-amber-200"
+            }`}>
+              <p className="font-black">{result.correct ? "Good thinking" : "Review the teaching point"}</p>
+              <p className="mt-1">{feedbackForActivity(activity)}</p>
+              {question.explanation ? <p className="mt-2 text-slate-700">{question.explanation}</p> : null}
+            </div>
+          ) : null}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function MultipleChoiceActivity({ activity, answer, submitted, locked, onAnswer }: { activity: any; answer: any; submitted: boolean; locked: boolean; onAnswer: (value: any) => void }) {
+  const question = activity.questionData;
+  return (
+    <div className="mt-4 grid gap-3">
+      {question.choices.map((choice: string, choiceIndex: number) => {
+        const selected = answer === choice;
+        const correct = isCorrectAnswer(question, choice);
+        return (
+          <button
+            type="button"
+            key={choice}
+            onClick={() => onAnswer(choice)}
+            disabled={locked}
+            className={`group flex min-h-16 items-center gap-3 rounded-xl border p-3 text-left text-sm font-bold transition disabled:cursor-not-allowed ${
+              submitted && correct
+                ? "border-emerald-300 bg-emerald-50 text-emerald-950"
+                : submitted && selected && !correct
+                  ? "border-rose-300 bg-rose-50 text-rose-950"
+                  : selected
+                    ? "border-blue-300 bg-blue-50 text-blue-950"
+                    : "border-slate-200 bg-white text-slate-700 hover:border-slate-300 hover:bg-slate-50"
+            }`}
+          >
+            <span className={`grid h-9 w-9 shrink-0 place-items-center rounded-lg text-xs font-black ${
+              submitted && correct
+                ? "bg-emerald-600 text-white"
+                : submitted && selected && !correct
+                  ? "bg-rose-600 text-white"
+                  : selected
+                    ? "bg-blue-600 text-white"
+                    : "bg-slate-100 text-slate-600 group-hover:bg-slate-200"
+            }`}>
+              {String.fromCharCode(65 + choiceIndex)}
+            </span>
+            <span className="leading-6">{choice}</span>
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
+function SentenceSelectActivity({ activity, answer, submitted, locked, onAnswer }: { activity: any; answer: any; submitted: boolean; locked: boolean; onAnswer: (value: any) => void }) {
+  return (
+    <div className="mt-4 rounded-2xl border border-slate-200 bg-slate-50 p-4">
+      <p className="text-sm font-bold text-slate-700">Select the sentence that gives the strongest evidence.</p>
+      <div className="mt-3 grid gap-2">
+        {activity.sentences.map((sentence: string, sentenceIndex: number) => {
+          const selected = Number(answer) === sentenceIndex;
+          const correct = sentenceIndex === activity.targetSentenceIndex;
+          return (
+            <button
+              type="button"
+              key={`${sentenceIndex}-${sentence}`}
+              onClick={() => onAnswer(sentenceIndex)}
+              disabled={locked}
+              className={`rounded-xl border p-3 text-left text-sm font-bold leading-6 transition disabled:cursor-not-allowed ${
+                submitted && correct
+                  ? "border-emerald-300 bg-emerald-100 text-emerald-950"
+                  : submitted && selected && !correct
+                    ? "border-rose-300 bg-rose-50 text-rose-950"
+                    : selected
+                      ? "border-blue-300 bg-blue-50 text-blue-950"
+                      : "border-slate-200 bg-white text-slate-800 hover:border-blue-200 hover:bg-blue-50"
+              }`}
+            >
+              <span className="mr-2 text-xs font-black uppercase text-slate-500">S{sentenceIndex + 1}</span>
+              {sentence}
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+function EvidenceMatchActivity({ activity, answer, submitted, locked, onAnswer }: { activity: any; answer: Record<string, string>; submitted: boolean; locked: boolean; onAnswer: (value: any) => void }) {
+  return (
+    <div className="mt-4 grid gap-3">
+      {activity.cards.map((card: any) => (
+        <div key={card.id} className="rounded-xl border border-fuchsia-200 bg-fuchsia-50 p-4">
+          <p className="text-sm font-black leading-6 text-slate-900">{card.text}</p>
+          <div className="mt-3 grid gap-2 sm:grid-cols-2">
+            {activity.labels.map((label: string) => {
+              const selected = answer[card.id] === label;
+              const correct = card.answer === label;
+              return (
+                <button
+                  type="button"
+                  key={label}
+                  onClick={() => onAnswer({ ...answer, [card.id]: label })}
+                  disabled={locked}
+                  className={`rounded-lg px-3 py-2 text-left text-xs font-black leading-5 ring-1 transition disabled:cursor-not-allowed ${
+                    submitted && correct
+                      ? "bg-emerald-600 text-white ring-emerald-600"
+                      : submitted && selected && !correct
+                        ? "bg-rose-600 text-white ring-rose-600"
+                        : selected
+                          ? "bg-fuchsia-700 text-white ring-fuchsia-700"
+                          : "bg-white text-slate-700 ring-slate-200 hover:bg-fuchsia-100"
+                  }`}
+                >
+                  {label}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function EvidenceSortActivity({ activity, answer, submitted, locked, onAnswer }: { activity: any; answer: Record<string, string>; submitted: boolean; locked: boolean; onAnswer: (value: any) => void }) {
+  return (
+    <div className="mt-4">
+      <div className="grid gap-3 md:grid-cols-2">
+        {activity.labels.map((label: string) => (
+          <div key={label} className="rounded-xl bg-slate-100 p-3 text-center text-xs font-black uppercase tracking-wide text-slate-600">
+            {label}
+          </div>
+        ))}
+      </div>
+      <div className="mt-3 grid gap-3">
+        {activity.cards.map((card: any) => (
+          <div key={card.id} className="rounded-xl border border-orange-200 bg-orange-50 p-4">
+            <p className="text-sm font-bold leading-6 text-slate-900">{card.text}</p>
+            <div className="mt-3 flex flex-wrap gap-2">
+              {activity.labels.map((label: string) => {
+                const selected = answer[card.id] === label;
+                const correct = card.answer === label;
+                return (
+                  <button
+                    type="button"
+                    key={label}
+                    onClick={() => onAnswer({ ...answer, [card.id]: label })}
+                    disabled={locked}
+                    className={`rounded-lg px-3 py-2 text-xs font-black ring-1 transition disabled:cursor-not-allowed ${
+                      submitted && correct
+                        ? "bg-emerald-600 text-white ring-emerald-600"
+                        : submitted && selected && !correct
+                          ? "bg-rose-600 text-white ring-rose-600"
+                          : selected
+                            ? "bg-orange-700 text-white ring-orange-700"
+                            : "bg-white text-slate-700 ring-slate-200 hover:bg-orange-100"
+                    }`}
+                  >
+                    {label}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function WordClozeActivity({ activity, answer, submitted, locked, onAnswer }: { activity: any; answer: any; submitted: boolean; locked: boolean; onAnswer: (value: any) => void }) {
+  return (
+    <div className="mt-4 rounded-2xl bg-purple-700 p-4 text-white">
+      <p className="text-sm font-bold">Complete the sentence with the word that best describes strong reading work.</p>
+      <p className="mt-4 text-lg font-black leading-8">
+        A strong answer is{" "}
+        <span className="inline-block min-w-32 rounded-lg border-2 border-dashed border-white bg-white/20 px-4 py-2 text-center">
+          {answer || ""}
+        </span>{" "}
+        by details from the passage.
+      </p>
+      <div className="mt-4 grid gap-2 sm:grid-cols-2">
+        {activity.choices.map((choice: string) => {
+          const selected = answer === choice;
+          const correct = choice === activity.correctWord;
+          return (
+            <button
+              type="button"
+              key={choice}
+              onClick={() => onAnswer(choice)}
+              disabled={locked}
+              className={`rounded-xl border px-4 py-3 text-left text-sm font-black shadow-sm transition disabled:cursor-not-allowed ${
+                submitted && correct
+                  ? "border-white bg-emerald-200 text-emerald-950"
+                  : submitted && selected && !correct
+                    ? "border-white bg-rose-200 text-rose-950"
+                    : selected
+                      ? "border-white bg-white text-purple-950"
+                      : "border-white/30 bg-white/10 text-white hover:bg-white/20"
+              }`}
+            >
+              {choice}
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+function InlineClozeActivity({ activity, answer, submitted, locked, onAnswer }: { activity: any; answer: any; submitted: boolean; locked: boolean; onAnswer: (value: any) => void }) {
+  const cloze = activity.inlineCloze;
+  return (
+    <div className="mt-4 overflow-hidden rounded-2xl border border-slate-200 bg-slate-50">
+      <div className="border-b border-slate-200 bg-white p-4">
+        <p className="text-sm font-bold text-slate-700">Choose the word or phrase that best completes the passage.</p>
+      </div>
+      <div className="grid gap-0 xl:grid-cols-[1fr_0.7fr]">
+        <div className="min-h-72 bg-white p-5">
+          <p className="text-lg font-semibold leading-10 text-slate-950">
+            {cloze.before}
+            <span className="mx-2 inline-flex min-w-36 flex-col align-middle">
+              <span className={`rounded-xl border-2 border-dashed px-4 py-2 text-center text-base font-black ${
+                answer
+                  ? submitted && answer === cloze.answer
+                    ? "border-emerald-400 bg-emerald-50 text-emerald-900"
+                    : submitted
+                      ? "border-amber-400 bg-amber-50 text-amber-950"
+                      : "border-blue-300 bg-blue-50 text-blue-950"
+                  : "border-slate-300 bg-slate-50 text-slate-400"
+              }`}>
+                {answer || "Choose..."}
+              </span>
+            </span>
+            {cloze.after}
+          </p>
+        </div>
+        <div className="border-t border-slate-200 bg-slate-100 p-5 xl:border-l xl:border-t-0">
+          <p className="text-xs font-black uppercase tracking-wide text-slate-500">Answer Choices</p>
+          <div className="mt-3 grid gap-3">
+            {cloze.choices.map((choice: string) => {
+              const selected = answer === choice;
+              const correct = choice === cloze.answer;
+              return (
+                <button
+                  type="button"
+                  key={choice}
+                  onClick={() => onAnswer(choice)}
+                  disabled={locked}
+                  className={`rounded-xl border p-3 text-left text-sm font-black leading-6 transition disabled:cursor-not-allowed ${
+                    submitted && correct
+                      ? "border-emerald-300 bg-emerald-100 text-emerald-950"
+                      : submitted && selected && !correct
+                        ? "border-rose-300 bg-rose-50 text-rose-950"
+                        : selected
+                          ? "border-blue-300 bg-blue-50 text-blue-950"
+                          : "border-slate-200 bg-white text-slate-800 hover:border-blue-200 hover:bg-blue-50"
+                  }`}
+                >
+                  {choice}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ShortResponseActivity({ activity, answer, submitted, locked, onAnswer }: { activity: any; answer: string; submitted: boolean; locked: boolean; onAnswer: (value: any) => void }) {
+  const wordCount = countWords(answer);
+  return (
+    <div className="mt-4">
+      <textarea
+        value={answer}
+        onChange={(event) => onAnswer(event.target.value)}
+        disabled={locked}
+        className="min-h-36 w-full rounded-2xl border border-slate-300 bg-white p-4 text-sm font-semibold leading-6 text-slate-900 placeholder:text-slate-400 focus:border-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-100 disabled:cursor-not-allowed disabled:bg-slate-100"
+        placeholder="Explain how the text detail supports your answer. Use your own words."
+      />
+      <div className="mt-2 flex flex-col gap-2 text-xs font-bold text-slate-600 sm:flex-row sm:items-center sm:justify-between">
+        <span>{wordCount} words</span>
+        <span>Goal: at least 8 words and one clear text detail.</span>
+      </div>
+    </div>
+  );
+}
+
+function buildPracticeActivity(question: any, index: number, title: string, skill: string, masteryMode: boolean) {
+  const titleText = title.toLowerCase();
+  const pattern: PracticeActivityType[] = masteryMode
+    ? ["multiple-choice", "sentence-select", "inline-cloze", "evidence-sort", "short-response"]
+    : titleText.includes("guided")
+      ? ["sentence-select", "inline-cloze", "evidence-match", "evidence-sort", "word-cloze", "short-response"]
+      : titleText.includes("independent")
+        ? ["evidence-match", "inline-cloze", "sentence-select", "evidence-sort", "short-response"]
+        : ["short-response", "inline-cloze", "sentence-select"];
+  const explicit = normalizeActivityType(question?.interactionType || question?.activityType || question?.type);
+  const type = explicit || pattern[index % pattern.length];
+  const prompt = promptForActivity(type, question, skill);
+  const sentences = splitSentences(question?.passage || "");
+  const targetSentenceIndex = bestEvidenceSentenceIndex(question, sentences);
+  const choices = Array.isArray(question?.choices) ? question.choices.filter(Boolean).map(String) : [];
+  const cards = choices.length ? choices.slice(0, 4).map((choice: string, choiceIndex: number) => ({
+    id: `choice-${choiceIndex}`,
+    text: choice,
+    answer: isCorrectAnswer(question, choice) ? "Strong support" : "Weak or off-topic",
+  })) : [
+    { id: "best", text: question?.correctAnswer || "The answer uses several text details.", answer: "Strong support" },
+    { id: "weak", text: "A detail that does not connect to the question.", answer: "Weak or off-topic" },
+  ];
+
+  return {
+    type,
+    index,
+    skill,
+    questionData: question,
+    prompt,
+    label: labelForActivity(type),
+    listenText: `${prompt}. ${question?.passage || ""}`,
+    sentences,
+    targetSentenceIndex,
+    labels: type === "evidence-match" ? ["Strong support", "Weak or off-topic"] : ["Strong support", "Weak or off-topic"],
+    cards,
+    choices: wordClozeChoices(skill),
+    correctWord: "supported",
+    inlineCloze: buildInlineCloze(question),
+  };
+}
+
+function normalizeActivityType(value: string): PracticeActivityType | "" {
+  const text = String(value || "").toLowerCase().replace(/_/g, "-");
+  if (["multiple-choice", "sentence-select", "evidence-match", "evidence-sort", "word-cloze", "inline-cloze", "short-response"].includes(text)) {
+    return text as PracticeActivityType;
+  }
+  return "";
+}
+
+function promptForActivity(type: PracticeActivityType, question: any, skill: string) {
+  const questionText = cleanQuestionText(question?.question || "");
+  const taskSuffix = questionText ? `: ${questionText}` : ".";
+  if (type === "sentence-select") return `Select the sentence that gives the strongest evidence for this question${taskSuffix}`;
+  if (type === "evidence-match") return `Mark each answer as strong support or weak/off-topic for this question${taskSuffix}`;
+  if (type === "evidence-sort") return `Sort each statement by whether it strongly supports this question${taskSuffix}`;
+  if (type === "word-cloze") return "Complete the sentence about how a strong answer works.";
+  if (type === "inline-cloze") return `Read the passage and choose the word or phrase that best fits in the blank${taskSuffix}`;
+  if (type === "short-response") return `Explain your thinking about ${skill || "the skill"} in your own words.`;
+  return cleanQuestionText(question?.question || "Choose the best answer.");
+}
+
+function labelForActivity(type: PracticeActivityType) {
+  if (type === "sentence-select") return "Select Evidence";
+  if (type === "evidence-match") return "Match Support";
+  if (type === "evidence-sort") return "Sort Evidence";
+  if (type === "word-cloze") return "Complete the Skill Sentence";
+  if (type === "inline-cloze") return "Inline Passage Choice";
+  if (type === "short-response") return "Explain Your Thinking";
+  return "PSSA Choice";
+}
+
+function wordClozeChoices(skill: string) {
+  const lower = String(skill || "").toLowerCase();
+  if (lower.includes("connotation") || lower.includes("context") || lower.includes("vocab")) {
+    return ["supported", "guessed", "ignored", "copied"];
+  }
+  return ["supported", "random", "unrelated", "copied"];
+}
+
+function isActivityAnswered(activity: any, answer: any) {
+  if (activity.type === "evidence-match" || activity.type === "evidence-sort") {
+    return activity.cards.every((card: any) => Boolean(answer?.[card.id]));
+  }
+  if (activity.type === "short-response") return countWords(String(answer || "")) >= 8;
+  if (activity.type === "sentence-select") return answer !== undefined && answer !== null && answer !== "";
+  return Boolean(answer);
+}
+
+function scorePracticeActivity(activity: any, answer: any) {
+  let correct = false;
+  if (activity.type === "multiple-choice") {
+    correct = isCorrectAnswer(activity.questionData, String(answer || ""));
+  } else if (activity.type === "sentence-select") {
+    correct = Number(answer) === Number(activity.targetSentenceIndex);
+  } else if (activity.type === "evidence-match" || activity.type === "evidence-sort") {
+    correct = activity.cards.every((card: any) => answer?.[card.id] === card.answer);
+  } else if (activity.type === "word-cloze") {
+    correct = String(answer || "").trim().toLowerCase() === activity.correctWord;
+  } else if (activity.type === "inline-cloze") {
+    correct = normalizeAnswer(answer) === normalizeAnswer(activity.inlineCloze.answer);
+  } else if (activity.type === "short-response") {
+    correct = countWords(String(answer || "")) >= 8;
+  }
+
+  return {
+    activityType: activity.type,
+    question: activity.prompt,
+    selected: answer ?? "",
+    correctAnswer: correctAnswerForActivity(activity),
+    correct,
+  };
+}
+
+function correctAnswerForActivity(activity: any) {
+  if (activity.type === "sentence-select") return activity.sentences[activity.targetSentenceIndex] || "";
+  if (activity.type === "evidence-match" || activity.type === "evidence-sort") {
+    return Object.fromEntries(activity.cards.map((card: any) => [card.id, card.answer]));
+  }
+  if (activity.type === "word-cloze") return activity.correctWord;
+  if (activity.type === "inline-cloze") return activity.inlineCloze.answer;
+  if (activity.type === "short-response") return "A clear explanation using at least one text detail.";
+  return activity.questionData?.correctAnswer || "";
+}
+
+function feedbackForActivity(activity: any) {
+  if (activity.type === "sentence-select") return "Strong evidence comes from the sentence that most directly proves the answer.";
+  if (activity.type === "evidence-match") return "A strong answer is supported by the passage. A weak answer is too narrow, off-topic, or not proven.";
+  if (activity.type === "evidence-sort") return "Sorting evidence helps you separate proof from details that do not answer the question.";
+  if (activity.type === "word-cloze") return "A reading answer should be supported by details from the text.";
+  if (activity.type === "inline-cloze") return "The best word or phrase must fit both the grammar of the sentence and the meaning of the passage.";
+  if (activity.type === "short-response") return "Your explanation should connect a text detail to the answer in your own words.";
+  return "The best answer matches the skill and is supported by the passage.";
+}
+
+function splitSentences(text: string) {
+  const sentences = String(text || "").match(/[^.!?]+[.!?]+|[^.!?]+$/g)?.map((sentence) => sentence.trim()).filter(Boolean) || [];
+  return sentences.length ? sentences : [String(text || "Reread the passage and choose the detail that best supports the answer.").trim()];
+}
+
+function bestEvidenceSentenceIndex(question: any, sentences: string[]) {
+  const keywords = keywordSet(`${question?.correctAnswer || ""} ${question?.explanation || ""} ${question?.question || ""}`);
+  let bestIndex = 0;
+  let bestScore = -1;
+  sentences.forEach((sentence, index) => {
+    const sentenceKeywords = keywordSet(sentence);
+    const score = [...keywords].filter((keyword) => sentenceKeywords.has(keyword)).length;
+    if (score > bestScore) {
+      bestScore = score;
+      bestIndex = index;
+    }
+  });
+  return bestIndex;
+}
+
+function keywordSet(text: string) {
+  const stopWords = new Set(["the", "and", "that", "this", "with", "from", "into", "they", "their", "there", "because", "about", "which", "what", "when", "where", "while", "should", "would", "could", "answer", "passage", "question"]);
+  return new Set(String(text || "").toLowerCase().replace(/[^a-z0-9\s]/g, " ").split(/\s+/).filter((word) => word.length > 3 && !stopWords.has(word)));
+}
+
+function countWords(text: string) {
+  return String(text || "").trim().split(/\s+/).filter(Boolean).length;
+}
+
+function normalizeAnswer(value: any) {
+  return String(value || "").trim().toLowerCase();
+}
+
+function buildInlineCloze(question: any) {
+  const passage = String(question?.passage || "");
+  const answer = String(question?.correctAnswer || "").trim();
+  const choices = Array.isArray(question?.choices) && question.choices.length
+    ? question.choices.map(String).slice(0, 4)
+    : [answer, "a detail from another topic", "an unsupported idea", "a repeated sentence"].filter(Boolean);
+  const exactIndex = answer ? passage.toLowerCase().indexOf(answer.toLowerCase()) : -1;
+  if (passage && exactIndex >= 0 && answer.length <= 90) {
+    return {
+      before: passage.slice(0, exactIndex),
+      after: passage.slice(exactIndex + answer.length),
+      answer,
+      choices,
+    };
+  }
+
+  const sentence = "A strong answer is supported by details from the passage and explains why those details matter.";
+  return {
+    before: sentence.slice(0, "A strong answer is ".length),
+    after: sentence.slice("A strong answer is supported".length),
+    answer: "supported",
+    choices: ["supported", "guessed", "copied", "unrelated"],
+  };
 }
 
 function hydratedPracticeQuestions(questions: any[], title: string, skill = "") {
@@ -2783,12 +3787,18 @@ function cleanQuestionText(text: string) {
 function instructionDeckForLesson(lesson: any) {
   const skill = String(lesson?.skill || "text evidence");
   const lower = skill.toLowerCase();
-  const isVocab = lower.includes("vocab") || lower.includes("connotation") || lower.includes("word") || lower.includes("figurative");
+  const isWordParts = isWordPartsSkill(skill);
+  const isSummary = isSummarySkill(skill);
+  const isVocab = lower.includes("vocab") || lower.includes("connotation") || lower.includes("figurative") || lower.includes("context");
   const isTheme = lower.includes("theme") || lower.includes("main idea");
-  const focusWord = isVocab ? focusWordForSkill(skill) : isTheme ? "central idea" : "evidence";
+  const focusWord = isWordParts ? "carefully" : isSummary ? "objective summary" : isVocab ? focusWordForSkill(skill) : isTheme ? "central idea" : "evidence";
   const wordChoices = wordFamilyChoices(focusWord);
   const answer = wordChoices[0];
-  const phraseAnswer = isTheme
+  const phraseAnswer = isWordParts
+    ? "It helps the reader break a long word into meaningful parts."
+    : isSummary
+      ? "It gives the central idea and key details without personal opinion."
+    : isTheme
     ? "It tells what the whole paragraph is mostly about."
     : isVocab
       ? "It tells what the highlighted word means in this passage."
@@ -2797,17 +3807,29 @@ function instructionDeckForLesson(lesson: any) {
     "During the first month of spring, the school garden was not being used well. Several plant labels were missing, weeds covered the walking path, and the watering schedule changed so often that some seedlings dried out. A sixth-grade science group studied the problem before proposing changes. They divided the garden into sections, created a weekly care chart, and wrote short labels that explained how each plant supported pollinators. By open house night, visitors could follow the path, read the labels, and understand the";
   const mainIdeaPassageAfter =
     "that careful planning helped students turn an overlooked garden into a useful outdoor classroom.";
+  const summaryPassageBefore =
+    "Each spring, students at Riverbend Middle School test the water in a stream behind the playground. This year, the science club noticed that the water looked cloudy after heavy rain. Instead of guessing at the cause, students collected samples from three places along the stream and compared the results with data from previous years. They found that loose soil from a nearby construction area was washing into the water. The club presented the data to the town council and recommended temporary barriers to hold soil in place. Two weeks later, workers installed the barriers, and the next round of tests showed clearer water. A strong";
+  const summaryPassageAfter =
+    "would explain that students used data to identify a source of stream pollution and recommend a solution, while leaving out personal opinions about the project.";
 
   return {
     title: `${skill} Instruction`,
-    passageTitle: isVocab ? "Making a Difference" : isTheme ? "A Better School Garden" : "The Class Mural",
+    passageTitle: isWordParts ? "Breaking a Long Word" : isSummary ? "Testing the Stream" : isVocab ? "Making a Difference" : isTheme ? "A Better School Garden" : "The Class Mural",
     focusWord,
-    passageBefore: isVocab
+    passageBefore: isWordParts
+      ? "When Maya saw the word"
+      : isSummary
+        ? summaryPassageBefore
+      : isVocab
       ? "Students studied how one word can change meaning in a sentence. They used context clues to understand"
       : isTheme
         ? mainIdeaPassageBefore
         : "Before choosing an answer, students returned to the paragraph and found",
-    passageAfter: isVocab
+    passageAfter: isWordParts
+      ? "in a science article, she did not guess. She covered the ending, read care, then added ful and ly. Breaking the word into parts helped her understand that the scientist handled the glass with care."
+      : isSummary
+        ? summaryPassageAfter
+      : isVocab
       ? "without guessing from only the first sentence."
       : isTheme
         ? mainIdeaPassageAfter
@@ -2825,55 +3847,143 @@ function instructionDeckForLesson(lesson: any) {
       {
         id: "match-meaning",
         kind: "question-match" as const,
-        prompt: "Match each question to the kind of answer a strong reader should give.",
-        question: "What is each question really asking you to prove?",
-        answerBank: [
-          "Main idea",
-          "Text evidence",
-          "Too narrow",
-        ],
-        rows: [
-          {
-            id: "whole",
-            prompt: "A question asks what the entire passage is mostly about.",
-            answer: "Main idea",
-          },
-          {
-            id: "proof",
-            prompt: "A question asks which sentence or detail proves the answer.",
-            answer: "Text evidence",
-          },
-          {
-            id: "narrow",
-            prompt: "An answer mentions only one small fact and misses the larger point.",
-            answer: "Too narrow",
-          },
-        ],
-        keyIdeas: [
-          "A good answer should fit the whole passage or the exact question.",
-          "Evidence is stronger when more than one detail points to the same idea.",
-        ],
+        prompt: isWordParts
+          ? "Match each part of the long word to the job it does."
+          : isSummary
+            ? "Match each summary decision to the reason a strong reader would make it."
+          : "Match each question to the kind of answer a strong reader should give.",
+        question: isWordParts ? "How do the parts of carefully work together?" : isSummary ? "What belongs in an objective summary?" : "What is each question really asking you to prove?",
+        answerBank: isWordParts
+          ? ["base word", "suffix meaning full of", "suffix meaning in a way"]
+          : isSummary
+            ? ["central idea", "key detail", "opinion to leave out"]
+          : [
+              "Main idea",
+              "Text evidence",
+              "Too narrow",
+            ],
+        rows: isWordParts
+          ? [
+              {
+                id: "base",
+                prompt: "care is the main word. It tells the idea of careful attention.",
+                answer: "base word",
+              },
+              {
+                id: "ful",
+                prompt: "-ful changes care into careful, meaning full of care.",
+                answer: "suffix meaning full of",
+              },
+              {
+                id: "ly",
+                prompt: "-ly changes careful into carefully, meaning in a careful way.",
+                answer: "suffix meaning in a way",
+              },
+            ]
+          : isSummary
+          ? [
+              {
+                id: "central",
+                prompt: "Students used data to find a stream problem and recommend a solution.",
+                answer: "central idea",
+              },
+              {
+                id: "detail",
+                prompt: "Samples showed soil from a construction area was washing into the stream.",
+                answer: "key detail",
+              },
+              {
+                id: "opinion",
+                prompt: "The science club did an amazing job and should win an award.",
+                answer: "opinion to leave out",
+              },
+            ]
+          : [
+              {
+                id: "whole",
+                prompt: "A question asks what the entire passage is mostly about.",
+                answer: "Main idea",
+              },
+              {
+                id: "proof",
+                prompt: "A question asks which sentence or detail proves the answer.",
+                answer: "Text evidence",
+              },
+              {
+                id: "narrow",
+                prompt: "An answer mentions only one small fact and misses the larger point.",
+                answer: "Too narrow",
+              },
+            ],
+        keyIdeas: isWordParts
+          ? [
+              "A long word is easier to read when you cover endings and read one part at a time.",
+              "Meaningful parts help with both pronunciation and meaning.",
+            ]
+          : isSummary
+            ? [
+                "An objective summary tells the central idea and the most important supporting details.",
+                "Leave out opinions, tiny details, and repeated information.",
+              ]
+          : [
+              "A good answer should fit the whole passage or the exact question.",
+              "Evidence is stronger when more than one detail points to the same idea.",
+            ],
       },
       {
         id: "break",
         kind: "sentence-break" as const,
-        prompt: "Reread one sentence from the passage, then break the sentence into separate ideas.",
-        question: "Break the model passage into the problem, the response, and the result.",
-        answerBank: [
-          "the garden was disorganized and not useful",
-          "students made a plan and divided the work",
-          "visitors understood the garden as an outdoor classroom",
-          "one plant label was missing",
-        ],
-        parts: [
-          { id: "problem", before: "Problem in the passage", answer: "the garden was disorganized and not useful", after: "" },
-          { id: "response", before: "Student response", answer: "students made a plan and divided the work", after: "" },
-          { id: "result", before: "Result that supports the central idea", answer: "visitors understood the garden as an outdoor classroom", after: "" },
-        ],
-        keyIdeas: [
-          "A strong main idea often connects a problem, actions, and a result.",
-          "One small fact can support the main idea, but it usually should not be the main idea by itself.",
-        ],
+        prompt: isWordParts
+          ? "Break the long word into parts before reading it as one word."
+          : isSummary
+            ? "Build a short objective summary by choosing the central idea and key details."
+          : "Reread one sentence from the passage, then break the sentence into separate ideas.",
+        question: isWordParts ? "Which split shows helpful word parts?" : isSummary ? "Which ideas should appear in the summary?" : "Break the model passage into the problem, the response, and the result.",
+        answerBank: isWordParts
+          ? ["care / ful / ly", "ca / ref / ully", "caref / ul / ly", "carefu / lly"]
+          : isSummary
+            ? [
+                "students tested the stream and found soil runoff",
+                "students recommended barriers based on data",
+                "the water was cloudy after heavy rain",
+                "the club was the best group in school",
+              ]
+          : [
+              "the garden was disorganized and not useful",
+              "students made a plan and divided the work",
+              "visitors understood the garden as an outdoor classroom",
+              "one plant label was missing",
+            ],
+        parts: isWordParts
+          ? [
+              { id: "split", before: "Best way to divide carefully", answer: "care / ful / ly", after: "" },
+              { id: "bad-split", before: "Split that breaks the base word in the wrong place", answer: "ca / ref / ully", after: "" },
+            ]
+          : isSummary
+          ? [
+              { id: "central", before: "Central idea", answer: "students tested the stream and found soil runoff", after: "" },
+              { id: "support", before: "Important supporting detail", answer: "students recommended barriers based on data", after: "" },
+              { id: "minor", before: "Useful but smaller detail", answer: "the water was cloudy after heavy rain", after: "" },
+            ]
+          : [
+              { id: "problem", before: "Problem in the passage", answer: "the garden was disorganized and not useful", after: "" },
+              { id: "response", before: "Student response", answer: "students made a plan and divided the work", after: "" },
+              { id: "result", before: "Result that supports the central idea", answer: "visitors understood the garden as an outdoor classroom", after: "" },
+            ],
+        keyIdeas: isWordParts
+          ? [
+              "Keep the base word together when you can.",
+              "Suffixes such as -ful and -ly often appear at the end of a word.",
+            ]
+          : isSummary
+            ? [
+                "A Grade 6 summary may combine information from several sentences.",
+                "Do not include praise, blame, or personal reactions in an objective summary.",
+              ]
+          : [
+              "A strong main idea often connects a problem, actions, and a result.",
+              "One small fact can support the main idea, but it usually should not be the main idea by itself.",
+            ],
       },
       {
         id: "word",
@@ -2881,36 +3991,88 @@ function instructionDeckForLesson(lesson: any) {
         prompt: "Complete the sentence by choosing the strongest word from the same skill family.",
         answer,
         choices: wordChoices,
+        sentenceBefore: isWordParts ? "Maya read the glass label" : isSummary ? "A strong summary explains the passage" : "The students used details from the passage to",
+        sentenceAfter: isWordParts ? "before moving the beaker." : isSummary ? "and without opinion." : "their answer.",
       },
       {
         id: "sort",
         kind: "evidence-sort" as const,
-        prompt: "Sort each statement. Decide whether it is the main idea or a supporting detail.",
-        question: "Which statements are big ideas, and which are details?",
-        labels: ["Main idea", "Supporting detail"],
-        cards: [
-          {
-            id: "big",
-            text: isTheme
-              ? "A careful student plan turned the garden into a useful outdoor classroom."
-              : "The answer is supported because several details point to the same conclusion.",
-            answer: "Main idea",
-          },
-          {
-            id: "detail-1",
-            text: "Students divided the garden into sections and created a weekly care chart.",
-            answer: "Supporting detail",
-          },
-          {
-            id: "detail-2",
-            text: "Visitors could follow the path and read labels during open house.",
-            answer: "Supporting detail",
-          },
-        ],
-        keyIdeas: [
-          "A main idea is broad enough to hold the details together.",
-          "A supporting detail is smaller. It proves or explains the bigger idea.",
-        ],
+        prompt: isWordParts
+          ? "Sort each word. Decide whether the word is split into helpful parts."
+          : isSummary
+            ? "Sort each statement. Decide whether it belongs in an objective summary."
+          : "Sort each statement. Decide whether it is the main idea or a supporting detail.",
+        question: isWordParts ? "Which splits help a reader read and understand the word?" : isSummary ? "Which statements should a summary keep or leave out?" : "Which statements are big ideas, and which are details?",
+        labels: isWordParts ? ["Helpful split", "Unhelpful split"] : isSummary ? ["Keep in summary", "Leave out"] : ["Main idea", "Supporting detail"],
+        cards: isWordParts
+          ? [
+              {
+                id: "carefully",
+                text: "care / ful / ly",
+                answer: "Helpful split",
+              },
+              {
+                id: "helpful",
+                text: "help / ful",
+                answer: "Helpful split",
+              },
+              {
+                id: "cover",
+                text: "co / ver",
+                answer: "Unhelpful split",
+              },
+            ]
+          : isSummary
+            ? [
+                {
+                  id: "keep-central",
+                  text: "Students tested a cloudy stream, found soil runoff, and recommended barriers.",
+                  answer: "Keep in summary",
+                },
+                {
+                  id: "leave-opinion",
+                  text: "The town council was probably embarrassed by the students' discovery.",
+                  answer: "Leave out",
+                },
+                {
+                  id: "keep-result",
+                  text: "After barriers were installed, later tests showed clearer water.",
+                  answer: "Keep in summary",
+                },
+              ]
+          : [
+              {
+                id: "big",
+                text: isTheme
+                  ? "A careful student plan turned the garden into a useful outdoor classroom."
+                  : "The answer is supported because several details point to the same conclusion.",
+                answer: "Main idea",
+              },
+              {
+                id: "detail-1",
+                text: "Students divided the garden into sections and created a weekly care chart.",
+                answer: "Supporting detail",
+              },
+              {
+                id: "detail-2",
+                text: "Visitors could follow the path and read labels during open house.",
+                answer: "Supporting detail",
+              },
+            ],
+        keyIdeas: isWordParts
+          ? [
+              "A helpful split keeps meaningful parts together.",
+              "A split is less useful when it separates letters in a way that does not help you read or understand the word.",
+            ]
+          : isSummary
+            ? [
+                "Keep details that explain the central idea or show a major result.",
+                "Leave out opinions, guesses about feelings, and details that do not change the meaning.",
+              ]
+          : [
+              "A main idea is broad enough to hold the details together.",
+              "A supporting detail is smaller. It proves or explains the bigger idea.",
+            ],
       },
       {
         id: "phrase",
@@ -2934,6 +4096,8 @@ function instructionDeckForLesson(lesson: any) {
 
 function focusWordForSkill(skill: string) {
   const lower = skill.toLowerCase();
+  if (isWordPartsSkill(skill)) return "carefully";
+  if (isSummarySkill(skill)) return "objective summary";
   if (lower.includes("connotation")) return "connotation";
   if (lower.includes("figurative")) return "figurative language";
   if (lower.includes("context")) return "context";
@@ -2944,7 +4108,26 @@ function focusWordForSkill(skill: string) {
   return "evidence";
 }
 
+function isWordPartsSkill(skill: string) {
+  const lower = skill.toLowerCase();
+  return (
+    lower.includes("multisyllable") ||
+    lower.includes("syllable") ||
+    lower.includes("vowel") ||
+    lower.includes("prefix") ||
+    lower.includes("suffix") ||
+    lower.includes("word part")
+  );
+}
+
+function isSummarySkill(skill: string) {
+  const lower = skill.toLowerCase();
+  return lower.includes("objective summary") || lower.includes("summar");
+}
+
 function wordFamilyChoices(focusWord: string) {
+  if (focusWord === "carefully") return ["carefully", "careful", "care"];
+  if (focusWord === "objective summary") return ["objectively", "objective", "object"];
   if (focusWord === "infer") return ["support", "supported", "supporting"];
   if (focusWord === "theme") return ["explain", "explained", "explanation"];
   if (focusWord === "main idea") return ["summarize", "summary", "summarized"];
@@ -2957,6 +4140,8 @@ function wordFamilyChoices(focusWord: string) {
 
 function glossaryDefinitionForSkill(skill: string, focusWord: string) {
   const lower = skill.toLowerCase();
+  if (isWordPartsSkill(skill)) return "A multisyllable word has more than one syllable. Break it into a base word, syllables, prefixes, or suffixes to read it accurately.";
+  if (isSummarySkill(skill)) return "An objective summary briefly tells the central idea and key details without personal opinions or extra minor details.";
   if (lower.includes("inference")) return "An inference is an idea you figure out from clues and evidence in the text.";
   if (lower.includes("theme")) return "Theme is the message or lesson a story suggests through characters, conflict, and ending.";
   if (lower.includes("main idea")) return "Main idea is what a whole paragraph or passage is mostly about.";
@@ -2967,29 +4152,21 @@ function glossaryDefinitionForSkill(skill: string, focusWord: string) {
   return `${focusWord} means using a text detail to prove or explain an answer.`;
 }
 
-function buildPracticePayload(answers: Record<string, string>, questions: any[], title = "Practice") {
+function buildPracticePayload(answers: Record<string, any>, questions: any[], title = "Practice", providedResults?: any[]) {
   const safeQuestions = hydratedPracticeQuestions(Array.isArray(questions) ? questions : [], title);
-  const score = safeQuestions.length ? Math.round((safeQuestions.filter((question, index) => isCorrectAnswer(question, answers[String(index)])).length / safeQuestions.length) * 100) : 0;
+  const activities = safeQuestions.map((question, index) => buildPracticeActivity(question, index, title, "", false));
+  const results = Array.isArray(providedResults) && providedResults.length ? providedResults : activities.map((activity, index) => scorePracticeActivity(activity, answers[String(index)]));
+  const score = results.length ? Math.round((results.filter((result) => result.correct).length / results.length) * 100) : 0;
   return {
     completed: true,
     score,
-    answers: safeQuestions.map((question, index) => ({
-      question: question.question,
-      selected: answers[String(index)] || "",
-      correctAnswer: question.correctAnswer,
-      correct: isCorrectAnswer(question, answers[String(index)]),
-    })),
+    answers: results,
   };
 }
 
 function savedAnswers(savedResponses: any, questions: any[] = []) {
   if (!savedResponses || !Array.isArray(savedResponses.answers)) return {};
-  return Object.fromEntries(savedResponses.answers
-    .map((answer: any, index: number) => [String(index), String(answer.selected || "")])
-    .filter(([index, selected]) => {
-      const choices = questions[Number(index)]?.choices;
-      return !Array.isArray(choices) || choices.includes(selected);
-    }));
+  return Object.fromEntries(savedResponses.answers.map((answer: any, index: number) => [String(index), answer.selected ?? ""]));
 }
 
 function isPracticeComplete(savedResponses: any) {

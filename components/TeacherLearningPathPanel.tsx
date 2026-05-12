@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { StudentLessonPreviewStage } from "@/components/StudentLearningPathPage";
 
 export function TeacherLearningPathPanel() {
   const [data, setData] = useState<any>({ lessons: [], resources: [], standardsProgress: [], libraryLessons: [], classes: [] });
@@ -219,6 +220,7 @@ export function TeacherLearningPathPanel() {
                   <th className="px-4 py-3">Language</th>
                   <th className="px-4 py-3">Domain</th>
                   <th className="px-4 py-3">Grade</th>
+                  <th className="px-4 py-3">Quality</th>
                   <th className="px-4 py-3">Assigned</th>
                   <th className="px-4 py-3">Action</th>
                 </tr>
@@ -247,6 +249,9 @@ export function TeacherLearningPathPanel() {
                     <td className="px-4 py-4 align-top text-slate-700">English</td>
                     <td className="px-4 py-4 align-top text-slate-700">{lessonDomain(lesson)}</td>
                     <td className="px-4 py-4 align-top text-slate-700">Grade {lesson.gradeLevel}</td>
+                    <td className="px-4 py-4 align-top">
+                      <QualityBadge review={lesson.qualityReview} />
+                    </td>
                     <td className="px-4 py-4 align-top text-slate-700">{lesson.assignedCount}</td>
                     <td className="px-4 py-4 align-top">
                       <button
@@ -262,7 +267,7 @@ export function TeacherLearningPathPanel() {
                 ))}
                 {!filteredLibraryLessons.length ? (
                   <tr className="border-t border-slate-100">
-                    <td className="px-4 py-5 text-slate-500" colSpan={7}>
+                    <td className="px-4 py-5 text-slate-500" colSpan={8}>
                       No lessons match these filters yet.
                     </td>
                   </tr>
@@ -276,6 +281,7 @@ export function TeacherLearningPathPanel() {
       {previewLesson ? (
         <LessonPreviewModal
           lesson={previewLesson}
+          lessons={filteredLibraryLessons}
           onClose={() => setPreviewLesson(null)}
           onAssign={() => assignLibraryLessons([previewLesson.id])}
           assigning={assigningLessonId === previewLesson.id}
@@ -467,77 +473,85 @@ function StepPill({ label, complete, unlocked = true }: { label: string; complet
 
 function LessonPreviewModal({
   lesson,
+  lessons,
   onClose,
   onAssign,
   assigning,
   canAssign,
 }: {
   lesson: any;
+  lessons: any[];
   onClose: () => void;
   onAssign: () => void;
   assigning: boolean;
   canAssign: boolean;
 }) {
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/45 p-4">
-      <section className="max-h-[88vh] w-full max-w-5xl overflow-y-auto rounded-2xl bg-white shadow-2xl">
-        <div className="sticky top-0 z-10 flex flex-col gap-3 border-b border-slate-200 bg-white p-5 sm:flex-row sm:items-start sm:justify-between">
-          <div>
-            <p className="text-xs font-bold uppercase tracking-wide text-indigo-700">Lesson Preview</p>
-            <h3 className="mt-1 text-2xl font-black text-slate-950">{lesson.title}</h3>
-            <p className="mt-1 text-sm text-slate-600">
-              Grade {lesson.gradeLevel} • {lessonDomain(lesson)} • {lesson.standardCode} • {lesson.skill}
-            </p>
-          </div>
-          <div className="flex gap-2">
-            <button
-              type="button"
-              onClick={onAssign}
-              disabled={!canAssign || assigning}
-              className="rounded-xl bg-slate-900 px-4 py-2 text-sm font-bold text-white hover:bg-slate-800 disabled:cursor-not-allowed disabled:bg-slate-300"
-            >
-              {assigning ? "Assigning..." : "Assign Lesson"}
-            </button>
-            <button
-              type="button"
-              onClick={onClose}
-              className="rounded-xl border border-slate-300 px-4 py-2 text-sm font-bold text-slate-700 hover:bg-slate-50"
-            >
-              Close
-            </button>
-          </div>
-        </div>
-
-        <div className="grid gap-4 p-5 lg:grid-cols-[1fr_360px]">
-          <div className="space-y-4">
-            <PreviewBlock title="Lesson Explanation">
-              <p>{lesson.lessonExplanation}</p>
-            </PreviewBlock>
-            <PreviewBlock title="Worked Example">
-              <p>{lesson.workedExample}</p>
-            </PreviewBlock>
-            <PreviewPractice title="Guided Practice" questions={lesson.guidedPractice} />
-            <PreviewPractice title="Independent Practice" questions={lesson.independentPractice} />
-          </div>
-          <aside className="space-y-4">
-            <PreviewBlock title="Assignment Note">
-              <p>{lesson.whyAssigned}</p>
-            </PreviewBlock>
-            <PreviewPractice title="Exit Ticket" questions={lesson.exitTicket} compact />
-            <PreviewPractice title="Mastery Check" questions={lesson.masteryCheck} compact />
-            <PreviewBlock title="Retest Recommendation">
-              <p>{lesson.retestRecommendation}</p>
-            </PreviewBlock>
-            {lesson.resourceTitle ? (
-              <PreviewBlock title="Resource">
-                <p className="font-semibold text-slate-900">{lesson.resourceTitle}</p>
-                <p className="mt-1 text-slate-600">{lesson.resourceDescription || lesson.resourceProvider}</p>
-              </PreviewBlock>
-            ) : null}
-          </aside>
-        </div>
-      </section>
+    <div className="fixed inset-0 z-50 overflow-y-auto bg-[#030816]">
+      <StudentLessonPreviewStage
+        lesson={lesson}
+        lessons={lessons}
+        onClose={onClose}
+        onAssign={onAssign}
+        assigning={assigning}
+        canAssign={canAssign}
+      />
     </div>
+  );
+}
+
+function QualityBadge({ review }: { review: any }) {
+  const status = review?.status || "Not reviewed";
+  const score = typeof review?.score === "number" ? review.score : null;
+  const ready = status === "Ready";
+  const className = ready
+    ? "bg-emerald-100 text-emerald-800"
+    : status === "Needs revision"
+      ? "bg-amber-100 text-amber-800"
+      : "bg-rose-100 text-rose-800";
+  return (
+    <span className={`inline-flex rounded-full px-3 py-1 text-xs font-black ${className}`}>
+      {score == null ? status : `${score}% ${status}`}
+    </span>
+  );
+}
+
+function PreviewQuality({ lesson }: { lesson: any }) {
+  const blueprint = lesson.qualityBlueprint;
+  const review = lesson.qualityReview;
+  return (
+    <PreviewBlock title="Quality Blueprint">
+      <div className="space-y-3">
+        <QualityBadge review={review} />
+        {blueprint?.gradeSpecificDemands ? (
+          <div className="space-y-2 text-xs text-slate-700">
+            <p><span className="font-bold text-slate-950">Text complexity:</span> {blueprint.gradeSpecificDemands.textComplexity}</p>
+            <p><span className="font-bold text-slate-950">Evidence:</span> {blueprint.gradeSpecificDemands.evidenceDemand}</p>
+            <p><span className="font-bold text-slate-950">Reasoning:</span> {blueprint.gradeSpecificDemands.reasoningDepth}</p>
+          </div>
+        ) : (
+          <p className="text-xs text-slate-500">This lesson has not been reviewed against the new blueprint yet. Rebuild the prebuilt library to refresh it.</p>
+        )}
+        {Array.isArray(review?.needsWork) && review.needsWork.length ? (
+          <div>
+            <p className="text-xs font-black uppercase text-amber-700">Needs Work</p>
+            <ul className="mt-1 list-disc space-y-1 pl-4 text-xs text-slate-700">
+              {review.needsWork.slice(0, 5).map((item: string) => <li key={item}>{item}</li>)}
+            </ul>
+          </div>
+        ) : null}
+        {Array.isArray(blueprint?.interactionMix) ? (
+          <div>
+            <p className="text-xs font-black uppercase text-indigo-700">Expected Activities</p>
+            <div className="mt-2 flex flex-wrap gap-2">
+              {blueprint.interactionMix.map((item: string) => (
+                <span key={item} className="rounded-full bg-indigo-50 px-2 py-1 text-xs font-semibold text-indigo-700">{item}</span>
+              ))}
+            </div>
+          </div>
+        ) : null}
+      </div>
+    </PreviewBlock>
   );
 }
 

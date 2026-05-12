@@ -1,5 +1,8 @@
 import OpenAI from "openai";
 import type { LearningPathItemInput } from "@/lib/learningPath";
+import { attachGeneratedImagesToLessons } from "@/lib/lessonImageGeneration";
+import { evaluateLessonQuality, getLessonQualityBlueprint } from "@/lib/lessonQualityBlueprint";
+import { buildLessonVisualMetadata } from "@/lib/lessonVisuals";
 
 type ResourceLike = {
   title: string;
@@ -91,7 +94,7 @@ export async function buildLearningLessons({
   });
 
   if (!process.env.OPENAI_API_KEY || !deterministic.length) {
-    return deterministic.map((lesson) => ({ ...lesson, aiStatus: "SKIPPED" as const }));
+    return attachGeneratedImagesToLessons(deterministic.map((lesson) => ({ ...lesson, aiStatus: "SKIPPED" as const })));
   }
 
   try {
@@ -109,16 +112,17 @@ export async function buildLearningLessons({
           content: JSON.stringify({
             task: "Improve these deterministic lessons for a Pennsylvania PSSA prep app. Keep standards, skill, priority, resource fields, and question answer keys. Adjust reading level for the grade.",
             gradeLevel,
+            qualityBlueprint: "Every lesson must teach before practice, use original text, include scaffolded feedback, increase text complexity/evidence demand by grade, and move from guided practice to independent mastery.",
             schema: {
               lessons: [
                 {
                   learningPathItemOrder: "number",
                   lessonExplanation: "string",
                   workedExample: "string",
-                  guidedPractice: "array of 2 practice questions with choices, correctAnswer, explanation",
-                  independentPractice: "array of 3 practice questions with choices, correctAnswer, explanation",
+                  guidedPractice: "array of 4 scaffolded practice questions with passage, coachHint, choices, correctAnswer, explanation",
+                  independentPractice: "array of 5 practice questions with fresh passage or sentence context, choices, correctAnswer, explanation",
                   exitTicket: "array of 1 practice question",
-                  masteryCheck: "array of 2 practice questions",
+                  masteryCheck: "array of 3 PSSA-style mastery questions with passage, choices, correctAnswer, explanation",
                   retestRecommendation: "string",
                 },
               ],
@@ -133,7 +137,7 @@ export async function buildLearningLessons({
     const parsed = JSON.parse(raw) as { lessons?: Partial<LearningLessonBuild>[] };
     const byOrder = new Map((parsed.lessons || []).map((lesson) => [lesson.learningPathItemOrder, lesson]));
 
-    return deterministic.map((lesson) => {
+    const lessons = deterministic.map((lesson) => {
       const aiLesson = byOrder.get(lesson.learningPathItemOrder);
       if (!aiLesson) return { ...lesson, aiStatus: "FAILED" as const };
       const merged = {
@@ -148,11 +152,12 @@ export async function buildLearningLessons({
         generatedBy: "AI_ENRICHED" as const,
         aiStatus: "COMPLETED" as const,
       };
-      return { ...merged, items: buildLessonSections(merged) };
+      return withQualityPayload({ ...merged, items: buildLessonSections(merged) });
     });
+    return attachGeneratedImagesToLessons(lessons);
   } catch (error) {
     console.error("Learning lesson AI generation failed:", error);
-    return deterministic.map((lesson) => ({ ...lesson, aiStatus: "FAILED" as const }));
+    return attachGeneratedImagesToLessons(deterministic.map((lesson) => ({ ...lesson, aiStatus: "FAILED" as const })));
   }
 }
 
@@ -177,10 +182,10 @@ function buildFallbackLesson({
   const whyAssigned = `This lesson was assigned because your score showed that ${item.skill} needs more practice for ${item.standardCode}.`;
   const lessonExplanation = explanationForSkill(item.skill, gradeLevel);
   const workedExample = workedExampleForSkill(item.skill, gradeLevel);
-  const guidedPractice = buildPractice(item.skill, "guided", gradeLevel, 2);
-  const independentPractice = buildPractice(item.skill, "independent", gradeLevel, 3);
+  const guidedPractice = buildPractice(item.skill, "guided", gradeLevel, gradeLevel >= 6 ? 4 : 3);
+  const independentPractice = buildPractice(item.skill, "independent", gradeLevel, gradeLevel >= 6 ? 5 : 4);
   const exitTicket = buildPractice(item.skill, "exit ticket", gradeLevel, 1);
-  const masteryCheck = buildPractice(item.skill, "mastery check", gradeLevel, 2);
+  const masteryCheck = buildPractice(item.skill, "mastery check", gradeLevel, gradeLevel >= 6 ? 3 : 2);
   const retestRecommendation = `After completing this lesson and scoring at least 80% on the mastery check, retake a short ${item.standardCode} practice set with ${weakFormat} items.`;
   const lesson = {
     learningPathItemOrder: item.order,
@@ -213,7 +218,37 @@ function buildFallbackLesson({
       weakFormat,
     },
   };
-  return { ...lesson, items: buildLessonSections(lesson) };
+  return withQualityPayload({ ...lesson, items: buildLessonSections(lesson) });
+}
+
+function withQualityPayload<T extends LearningLessonBuild>(lesson: T): T {
+  const qualityBlueprint = getLessonQualityBlueprint({
+    gradeLevel: lesson.gradeLevel,
+    skill: lesson.skill,
+    domain: domainFromStandard(lesson.standardCode),
+  });
+  const qualityReview = evaluateLessonQuality(lesson);
+  const visual = buildLessonVisualMetadata({
+    title: lesson.title,
+    text: `${lesson.lessonExplanation} ${lesson.workedExample}`,
+    skill: lesson.skill,
+    gradeLevel: lesson.gradeLevel,
+  });
+  return {
+    ...lesson,
+    sourcePayload: {
+      ...lesson.sourcePayload,
+      visualStandard: {
+        version: 1,
+        style: "rich-color-instructional",
+        imagePolicy: "original-or-licensed-student-safe",
+      },
+      visual,
+      imagePrompt: visual.imagePrompt,
+      qualityBlueprint,
+      qualityReview,
+    },
+  };
 }
 
 function buildLessonSections(lesson: Omit<LearningLessonBuild, "items">): LessonSectionBuild[] {
@@ -453,5 +488,14 @@ function safePractice(value: unknown, fallback: PracticeQuestion[]) {
       choices: Array.isArray(item.choices) ? item.choices.map(String) : undefined,
       correctAnswer: String(item.correctAnswer),
       explanation: typeof item.explanation === "string" ? item.explanation : "Review the explanation and cite evidence from the text.",
+      passage: typeof item.passage === "string" ? item.passage : undefined,
+      coachHint: typeof item.coachHint === "string" ? item.coachHint : undefined,
     }));
+}
+
+function domainFromStandard(standardCode: string) {
+  if (standardCode.includes("CC.1.4.")) return "Writing and Conventions";
+  if (standardCode.includes("CC.1.3.")) return "Literary Text";
+  if (standardCode.includes("CC.1.2.")) return "Informational Text";
+  return "Reading";
 }
