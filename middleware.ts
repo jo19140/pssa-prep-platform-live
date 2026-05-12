@@ -5,13 +5,25 @@ const protectedPrefixes = ["/admin", "/teacher", "/student", "/parent"];
 
 export default async function middleware(req: Request & { nextUrl: URL; url: string }) {
   const nonce = btoa(crypto.randomUUID());
+  const isDev = process.env.NODE_ENV !== "production";
+  const scriptSrc = [`'self'`, `'nonce-${nonce}'`, "'strict-dynamic'", ...(isDev ? ["'unsafe-eval'"] : [])].join(" ");
+  const connectSrc = [
+    "'self'",
+    "https://api.openai.com",
+    "https://api.resend.com",
+    "https://accounts.google.com",
+    "https://oauth2.googleapis.com",
+    "https://classroom.googleapis.com",
+    "https://www.googleapis.com",
+    ...(isDev ? ["ws://localhost:*", "ws://127.0.0.1:*"] : []),
+  ].join(" ");
   const csp = [
     "default-src 'self'",
-    `script-src 'self' 'nonce-${nonce}' 'strict-dynamic'`,
+    `script-src ${scriptSrc}`,
     "style-src 'self' 'unsafe-inline'",
     "img-src 'self' data: blob:",
     "font-src 'self' data:",
-    "connect-src 'self' https://api.openai.com https://api.resend.com https://accounts.google.com https://oauth2.googleapis.com https://classroom.googleapis.com https://www.googleapis.com",
+    `connect-src ${connectSrc}`,
     "media-src 'self' blob:",
     "frame-ancestors 'none'",
     "base-uri 'self'",
