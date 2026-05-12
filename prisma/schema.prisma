@@ -13,6 +13,7 @@ model User {
   passwordHash    String?
   name            String
   role            String
+  emailVerifiedAt DateTime?
   createdAt       DateTime        @default(now())
   updatedAt       DateTime        @updatedAt
 
@@ -28,6 +29,32 @@ model User {
   resourceLinks   ResourceLink[]
   tutorMemory     TutorAgentMemory?
   tutorMessages   TutorAgentMessage[]
+  passwordResetTokens PasswordResetToken[]
+  verificationTokens VerificationToken[]
+}
+
+model PasswordResetToken {
+  id        String   @id @default(cuid())
+  userId    String
+  tokenHash String   @unique
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model VerificationToken {
+  id        String   @id @default(cuid())
+  userId    String
+  tokenHash String   @unique
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
 }
 
 model School {

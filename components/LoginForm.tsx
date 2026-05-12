@@ -1,5 +1,6 @@
 "use client";
 import { getSession, signIn } from "next-auth/react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -136,6 +137,12 @@ export function LoginForm() {
           </button>
         </div>
       </form>
+      {!isRegistering ? (
+        <div className="mt-4 flex flex-wrap items-center justify-between gap-2 text-sm">
+          <Link href="/forgot-password" className="font-semibold text-slate-700">Forgot password?</Link>
+          <Link href="/teacher/signup" className="font-semibold text-slate-700">Teacher signup</Link>
+        </div>
+      ) : null}
     </div>
   );
 }

@@ -1,50 +1,62 @@
-import { withAuth } from "next-auth/middleware";
 import { NextResponse } from "next/server";
+import { getToken } from "next-auth/jwt";
 
-export default withAuth(
-  function middleware(req) {
-    const nonce = btoa(crypto.randomUUID());
-    const csp = [
-      "default-src 'self'",
-      `script-src 'self' 'nonce-${nonce}'`,
-      "style-src 'self' 'unsafe-inline'",
-      "img-src 'self' data: blob:",
-      "font-src 'self' data:",
-      "connect-src 'self' https://api.openai.com https://api.resend.com https://accounts.google.com https://oauth2.googleapis.com https://classroom.googleapis.com https://www.googleapis.com",
-      "media-src 'self' blob:",
-      "frame-ancestors 'none'",
-      "base-uri 'self'",
-      "form-action 'self'",
-    ].join("; ");
-    const requestHeaders = new Headers(req.headers);
-    requestHeaders.set("x-nonce", nonce);
-    requestHeaders.set("Content-Security-Policy", csp);
+const protectedPrefixes = ["/admin", "/teacher", "/student", "/parent"];
 
-    const token = req.nextauth.token;
-    const pathname = req.nextUrl.pathname;
-    if (!token) return NextResponse.redirect(new URL("/login", req.url));
-    const role = token.role as string | undefined;
+export default async function middleware(req: Request & { nextUrl: URL; url: string }) {
+  const nonce = btoa(crypto.randomUUID());
+  const csp = [
+    "default-src 'self'",
+    `script-src 'self' 'nonce-${nonce}' 'strict-dynamic'`,
+    "style-src 'self' 'unsafe-inline'",
+    "img-src 'self' data: blob:",
+    "font-src 'self' data:",
+    "connect-src 'self' https://api.openai.com https://api.resend.com https://accounts.google.com https://oauth2.googleapis.com https://classroom.googleapis.com https://www.googleapis.com",
+    "media-src 'self' blob:",
+    "frame-ancestors 'none'",
+    "base-uri 'self'",
+    "form-action 'self'",
+  ].join("; ");
+  const requestHeaders = new Headers(req.headers);
+  requestHeaders.set("x-nonce", nonce);
+  requestHeaders.set("Content-Security-Policy", csp);
 
-    if (pathname.startsWith("/admin") && role !== "ADMIN") return NextResponse.redirect(new URL("/login", req.url));
-    if (pathname.startsWith("/teacher") && role !== "TEACHER" && role !== "ADMIN") return NextResponse.redirect(new URL(role === "STUDENT" ? "/student" : "/login", req.url));
-    if (pathname.startsWith("/student") && role !== "STUDENT" && role !== "ADMIN") return NextResponse.redirect(new URL(role === "TEACHER" ? "/teacher" : "/login", req.url));
-    if (pathname.startsWith("/parent") && role !== "PARENT" && role !== "ADMIN") return NextResponse.redirect(new URL("/login", req.url));
+  const pathname = req.nextUrl.pathname;
+  const token = await getToken({ req: req as any, secret: process.env.NEXTAUTH_SECRET });
+  const role = token?.role as string | undefined;
+  let response: NextResponse | null = null;
 
-    if (pathname === "/dashboard") {
-      if (role === "ADMIN") return NextResponse.redirect(new URL("/admin", req.url));
-      if (role === "TEACHER") return NextResponse.redirect(new URL("/teacher", req.url));
-      if (role === "STUDENT") return NextResponse.redirect(new URL("/student", req.url));
-      if (role === "PARENT") return NextResponse.redirect(new URL("/parent", req.url));
-    }
-    const response = NextResponse.next({
+  if (isProtectedPath(pathname) && !token) {
+    response = NextResponse.redirect(new URL("/login", req.url));
+  } else if (pathname.startsWith("/admin") && role !== "ADMIN") {
+    response = NextResponse.redirect(new URL("/login", req.url));
+  } else if (pathname.startsWith("/teacher") && role !== "TEACHER" && role !== "ADMIN") {
+    response = NextResponse.redirect(new URL(role === "STUDENT" ? "/student" : "/login", req.url));
+  } else if (pathname.startsWith("/student") && role !== "STUDENT" && role !== "ADMIN") {
+    response = NextResponse.redirect(new URL(role === "TEACHER" ? "/teacher" : "/login", req.url));
+  } else if (pathname.startsWith("/parent") && role !== "PARENT" && role !== "ADMIN") {
+    response = NextResponse.redirect(new URL("/login", req.url));
+  } else if (pathname === "/dashboard") {
+    if (role === "ADMIN") response = NextResponse.redirect(new URL("/admin", req.url));
+    else if (role === "TEACHER") response = NextResponse.redirect(new URL("/teacher", req.url));
+    else if (role === "STUDENT") response = NextResponse.redirect(new URL("/student", req.url));
+    else if (role === "PARENT") response = NextResponse.redirect(new URL("/parent", req.url));
+    else response = NextResponse.redirect(new URL("/login", req.url));
+  }
+
+  if (!response) {
+    response = NextResponse.next({
       request: {
         headers: requestHeaders,
       },
     });
-    response.headers.set("Content-Security-Policy", csp);
-    return response;
-  },
-  { callbacks: { authorized: ({ token }) => !!token } }
-);
+  }
+  response.headers.set("Content-Security-Policy", csp);
+  return response;
+}
 
-export const config = { matcher: ["/admin/:path*", "/teacher/:path*", "/student/:path*", "/parent/:path*", "/dashboard"] };
+function isProtectedPath(pathname: string) {
+  return pathname === "/dashboard" || protectedPrefixes.some((prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`));
+}
+
+export const config = { matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"] };

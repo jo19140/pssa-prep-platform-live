@@ -10,11 +10,13 @@ export const authOptions: NextAuthOptions = {
     CredentialsProvider({
       name: "Credentials",
       credentials: { email: { label: "Email", type: "email" }, password: { label: "Password", type: "password" } },
-      async authorize(credentials) {
+      async authorize(credentials, req) {
         if (!credentials?.email || !credentials?.password) return null;
         const email = credentials.email.trim().toLowerCase();
-        const emailLimit = await consumeRateLimit({ key: `signin:email:${email}`, capacity: 10, refillIntervalMs: 60 * 60 * 1000 });
-        if (!emailLimit.allowed) return null;
+        const ip = clientIpFromNextAuthRequest(req);
+        const emailLimit = await consumeRateLimit({ key: `login:email:${email}`, capacity: 5, refillIntervalMs: 15 * 60 * 1000 });
+        const ipLimit = await consumeRateLimit({ key: `login:ip:${ip}`, capacity: 20, refillIntervalMs: 15 * 60 * 1000 });
+        if (!emailLimit.allowed || !ipLimit.allowed) return null;
         const user = await db.user.findUnique({ where: { email } });
         if (!user?.passwordHash) return null;
         const valid = await bcrypt.compare(credentials.password, user.passwordHash);
@@ -41,3 +43,11 @@ export const authOptions: NextAuthOptions = {
   },
   pages: { signIn: "/login" }
 };
+
+function clientIpFromNextAuthRequest(req: unknown) {
+  const headers = (req as { headers?: Record<string, string | string[] | undefined> })?.headers || {};
+  const forwarded = headers["x-forwarded-for"];
+  const realIp = headers["x-real-ip"];
+  const value = Array.isArray(forwarded) ? forwarded[0] : forwarded || (Array.isArray(realIp) ? realIp[0] : realIp);
+  return String(value || "unknown").split(",")[0].trim() || "unknown";
+}

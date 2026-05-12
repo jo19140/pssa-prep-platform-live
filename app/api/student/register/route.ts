@@ -4,6 +4,7 @@ import { z } from "zod";
 import { db } from "@/lib/db";
 import { normalizeJoinCode } from "@/lib/classCodes";
 import { consumeRateLimit, getClientIp } from "@/lib/rateLimit";
+import { createVerificationToken, sendVerificationEmail } from "@/lib/accountTokens";
 
 const studentRegisterSchema = z.object({
   name: z.string().trim().min(1).max(120),
@@ -65,6 +66,9 @@ export async function POST(req: Request) {
     update: {},
     create: { classRoomId: classRoom.id, studentProfileId: studentProfile.id },
   });
+
+  const verificationToken = await createVerificationToken(user.id);
+  await sendVerificationEmail({ email: user.email, name: user.name, token: verificationToken });
 
   return NextResponse.json({
     student: { id: user.id, name: user.name, email: user.email },
