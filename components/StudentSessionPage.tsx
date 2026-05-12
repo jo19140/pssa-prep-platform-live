@@ -93,13 +93,15 @@ export function StudentSessionPage() {
       setError("Failed to save answer.");
       return;
     }
-    const updatedHistory = upsertHistory(history, nextRecord);
+    const answerJson = await answerRes.json();
+    const serverScoredRecord = answerJson.scored ? { ...nextRecord, ...answerJson.scored } : nextRecord;
+    const updatedHistory = upsertHistory(history, serverScoredRecord);
     setHistory(updatedHistory);
     const nextQuestionNo = Math.min((questionPath.length || totalSimQuestions), currentQuestionNumber + 1);
     const totalQuestions = questionPath.length || totalSimQuestions;
     if (currentQuestionNumber < totalQuestions) {
       if (!sessionPayload.questions?.length) {
-        const nextQuestion = getQuestionForStep(nextQuestionNo, { skill: currentQuestion.skill, difficulty: currentQuestion.difficulty, isCorrect: payload.isCorrect, questionType: currentQuestion.type }, updatedHistory, sessionPayload.standards || []);
+        const nextQuestion = getQuestionForStep(nextQuestionNo, { skill: currentQuestion.skill, difficulty: currentQuestion.difficulty, isCorrect: serverScoredRecord.isCorrect, questionType: currentQuestion.type }, updatedHistory, sessionPayload.standards || []);
         setQuestionPath((prev) => { const copy = [...prev]; copy[currentQuestionNumber] = nextQuestion; return copy; });
       }
       setCurrentQuestionNumber(nextQuestionNo);

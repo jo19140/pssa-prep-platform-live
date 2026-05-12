@@ -1,8 +1,15 @@
 import { NextResponse } from "next/server";
 import { Prisma } from "@prisma/client";
 import { getServerSession } from "next-auth";
+import { z } from "zod";
 import { authOptions } from "@/lib/auth";
 import { db } from "@/lib/db";
+import { scoreArcadeResponses } from "@/lib/serverScoring";
+
+const questAttemptSchema = z.object({
+  lessonId: z.string().min(1),
+  responses: z.record(z.unknown()).default({}),
+});
 
 export async function POST(req: Request) {
   const session = await getServerSession(authOptions);
@@ -10,12 +17,14 @@ export async function POST(req: Request) {
   const role = (session.user as any).role;
   if (role !== "STUDENT" && role !== "ADMIN") return NextResponse.json({ error: "Forbidden" }, { status: 403 });
 
-  const body = await req.json();
-  const lessonId = String(body.lessonId || "");
-  if (!lessonId) return NextResponse.json({ error: "Missing lessonId." }, { status: 400 });
+  const parsed = questAttemptSchema.safeParse(await req.json());
+  if (!parsed.success) {
+    return NextResponse.json({ error: "Invalid request body", issues: parsed.error.flatten().fieldErrors }, { status: 400 });
+  }
+  const body = parsed.data;
 
   const lesson = await db.learningLesson.findFirst({
-    where: { id: lessonId, learningPath: { session: { userId: (session.user as any).id } } },
+    where: { id: body.lessonId, learningPath: { session: { userId: (session.user as any).id } } },
   });
   if (!lesson) return NextResponse.json({ error: "Lesson not found." }, { status: 404 });
 
@@ -25,7 +34,7 @@ export async function POST(req: Request) {
     : scoreFindTheEvidenceQuest(responses);
   const attempt = await db.learningQuestAttempt.create({
     data: {
-      lessonId,
+      lessonId: body.lessonId,
       userId: (session.user as any).id,
       worldKey: worldKeyForSkill(lesson.skill),
       questKey: responses.mode === "space-shooter" ? "space-shooter" : responses.mode === "arcade-mini-game" ? String(responses.gameType || "arcade-mini-game") : "find-the-evidence",
@@ -40,7 +49,7 @@ export async function POST(req: Request) {
   });
 
   const existingProgress = await db.studentLessonProgress.findUnique({
-    where: { lessonId_userId: { lessonId, userId: (session.user as any).id } },
+    where: { lessonId_userId: { lessonId: body.lessonId, userId: (session.user as any).id } },
   });
   const nextStatus = existingProgress?.status === "MASTERED" || existingProgress?.status === "COMPLETED"
     ? existingProgress.status
@@ -49,13 +58,13 @@ export async function POST(req: Request) {
       : undefined;
 
   await db.studentLessonProgress.upsert({
-    where: { lessonId_userId: { lessonId, userId: (session.user as any).id } },
+    where: { lessonId_userId: { lessonId: body.lessonId, userId: (session.user as any).id } },
     update: {
       status: nextStatus,
       startedAt: existingProgress?.startedAt || new Date(),
     },
     create: {
-      lessonId,
+      lessonId: body.lessonId,
       userId: (session.user as any).id,
       status: "IN_PROGRESS",
       startedAt: new Date(),
@@ -88,9 +97,10 @@ function normalizeResponses(value: unknown) {
 }
 
 function scoreArcadeQuest(responses: { score: number; maxScore: number; shots?: unknown[]; answers?: unknown[]; gameType?: string }) {
+  const serverScore = scoreArcadeResponses(responses as unknown as Record<string, any>);
   const responseCount = responses.shots?.length || responses.answers?.length || 1;
-  const maxScore = Math.max(1, Math.min(10, responses.maxScore || responseCount));
-  const score = Math.max(0, Math.min(maxScore, responses.score || 0));
+  const maxScore = serverScore.maxScore || Math.max(1, Math.min(10, responseCount));
+  const score = serverScore.score;
   const percent = Math.round((score / maxScore) * 100);
   const gameType = responses.gameType || "skill";
   const gameLabel = gameType === "car" ? "car rally" : gameType === "crossing" ? "road crossing" : gameType;

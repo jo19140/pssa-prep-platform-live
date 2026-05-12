@@ -655,8 +655,9 @@ function LessonDetail({
       return;
     }
     if (stepId === "mastery") {
-      const masteryScore = score ?? 0;
-      onUpdateProgress(lesson.id, masteryScore >= 80 ? "MASTERED" : "COMPLETED", masteryScore);
+      const masteryResponses = buildPracticePayload(answers, lesson.masteryCheck, `${lesson.skill} Mastery Check`, results);
+      const masteryScore = score ?? masteryResponses.score ?? 0;
+      onUpdateProgress(lesson.id, masteryScore >= 80 ? "MASTERED" : "COMPLETED", masteryScore, { masteryResponses });
       if (masteryScore >= 80) setActiveStep("world");
     }
   }
