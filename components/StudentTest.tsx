@@ -388,7 +388,8 @@ function QuestionPanel({
   const conventionPanel = currentQuestion.passageType === "CONVENTIONS";
   if (currentQuestion.type === "MCQ" || currentQuestion.type === "CONVENTIONS") {
     const q = currentQuestion as McqQuestion;
-    return <div className={conventionPanel ? "max-w-5xl text-[17px]" : ""}>{conventionPanel ? <PssaPracticeHint>Use the Pointer tool to select your answer.</PssaPracticeHint> : null}<Prompt>{q.question}</Prompt><ChoiceList choices={q.choices} selectedIndex={selectedIndex} onChoose={submitMcq} disabled={isSubmitting} /></div>;
+    const conventionsStimulus = conventionPanel ? getConventionsStimulus(q) : "";
+    return <div className={conventionPanel ? "max-w-5xl text-[17px]" : ""}>{conventionPanel ? <PssaPracticeHint>Use the Pointer tool to select your answer.</PssaPracticeHint> : null}{conventionsStimulus ? <ConventionsStimulus text={conventionsStimulus} /> : null}<Prompt>{q.question}</Prompt><ChoiceList choices={q.choices} selectedIndex={selectedIndex} onChoose={submitMcq} disabled={isSubmitting} /></div>;
   }
   if (currentQuestion.type === "EBSR") {
     const q = currentQuestion as EbsrQuestion;
@@ -666,6 +667,48 @@ function ChoiceList({ choices, onChoose, disabled, selectedIndex, selectedIndice
 
 function Prompt({ children }: { children: React.ReactNode }) {
   return <h3 className="text-xl font-bold leading-7 text-slate-950">{children}</h3>;
+}
+
+function ConventionsStimulus({ text }: { text: string }) {
+  const paragraphs = text.split(/\n{2,}/).map((paragraph) => paragraph.trim()).filter(Boolean);
+  return (
+    <div className="mb-6 mt-5 rounded-sm border-2 border-[#0b2a5b] bg-slate-50 p-4 text-base leading-8 text-slate-950 md:text-lg">
+      {paragraphs.map((paragraph, index) => <p key={index} className={index ? "mt-3" : ""}>{paragraph}</p>)}
+    </div>
+  );
+}
+
+function getConventionsStimulus(question: McqQuestion) {
+  const genericPassage = "choose the answer that follows the conventions of standard english.";
+  const normalizedPassage = normalizeConventionsText(question.passage || "");
+  if (normalizedPassage && normalizedPassage !== genericPassage) {
+    return question.passage.trim();
+  }
+
+  const normalizedPrompt = normalizeConventionsText(question.question);
+  if (normalizedPrompt.includes("which revision would most improve the paragraph")) {
+    return "The school garden gives students a useful way to learn science outside the classroom. Students measure plant growth each week and compare the results in their notebooks. They also observe how sunlight and water affect different vegetables. The garden has tomatoes, peppers, and beans.";
+  }
+  if (normalizedPrompt.includes("which revision provides the most specific information")) {
+    return "The students did some things with the garden.";
+  }
+  if (normalizedPrompt.includes("inappropriate shift in pronoun person")) {
+    return "When students revise, they should check whether their evidence supports the claim. A writer should reread the draft because you may notice missing details. The class discussed its ideas before writing. Readers can follow an essay when its organization is clear.";
+  }
+  if (normalizedPrompt.includes("which sentence has a vague pronoun")) {
+    return "Maya gave Lena the notes after she finished the summary. Maya finished the summary before lunch. Lena read the notes carefully. The summary included evidence from the passage.";
+  }
+  if (normalizedPrompt.includes("inappropriate shift in verb tense")) {
+    return "Watching her brother play with clay, Nadine realized that she missed being creative. She decided to start activities that required imagination. She begins by keeping a journal filled with story ideas and sketches. She also volunteered to help construct a model for the school play.";
+  }
+  if (normalizedPrompt.includes("maintaining the style of the paragraph")) {
+    return "The team's presentation explained how the river cleanup would protect wildlife and improve the park. Members shared data from water samples, photographs of the shoreline, and a schedule for volunteers. The committee reviewed the plan carefully before deciding what to do next.";
+  }
+  return "";
+}
+
+function normalizeConventionsText(value: string) {
+  return value.trim().toLowerCase().replace(/\s+/g, " ");
 }
 
 function PssaPracticeHint({ children }: { children: React.ReactNode }) {

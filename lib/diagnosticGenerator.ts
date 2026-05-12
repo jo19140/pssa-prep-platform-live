@@ -1442,13 +1442,16 @@ function buildConventionsQuestion({ grade, skill, index, id }: { grade: number; 
     return buildConventionsTechnologyEnhancedQuestion({ base, type: "DRAG_DROP", grade, skill });
   }
 
-  const gradeFiveExamples: Record<number, { question: string; choices: string[]; correctIndex: number }> = {
+  type ConventionExample = { question: string; choices: string[]; correctIndex: number; passage?: string };
+
+  const gradeFiveExamples: Record<number, ConventionExample> = {
     0: { question: "Which sentence correctly uses italics or quotation marks to indicate a title?", choices: ["The novel River Bridge should be italicized.", "The poem River Bridge should be italicized.", "The chapter River Bridge should be italicized.", "The article River Bridge should be italicized."], correctIndex: 0 },
     1: { question: "Which conjunction should fill in the blank to correctly complete the sentence? Neither the teacher _________ the students forgot the final draft.", choices: ["or", "nor", "because", "whether"], correctIndex: 1 },
     2: { question: "Which sentence uses the underlined word correctly?", choices: ["The actor had a powerful presence on stage.", "The captain was a kernel in the army.", "She packed a fishing poll for the trip.", "The jeans were too big in the waste."], correctIndex: 0 },
   };
-  const gradeSixExamples: Record<number, { question: string; choices: string[]; correctIndex: number }> = {
+  const gradeSixExamples: Record<number, ConventionExample> = {
     0: {
+      passage: "The school garden gives students a useful way to learn science outside the classroom. Students measure plant growth each week and compare the results in their notebooks. They also observe how sunlight and water affect different vegetables. The garden has tomatoes, peppers, and beans.",
       question: "Read the paragraph. Which revision would most improve the paragraph?",
       choices: [
         "Add a sentence that explains how the final detail connects to the main idea.",
@@ -1459,6 +1462,7 @@ function buildConventionsQuestion({ grade, skill, index, id }: { grade: number; 
       correctIndex: 0,
     },
     1: {
+      passage: "The students did some things with the garden.",
       question: "Read the sentence. Which revision provides the most specific information?",
       choices: [
         "The students measured the garden's growth every Friday and recorded the height of each plant.",
@@ -1469,6 +1473,7 @@ function buildConventionsQuestion({ grade, skill, index, id }: { grade: number; 
       correctIndex: 0,
     },
     2: {
+      passage: "When students revise, they should check whether their evidence supports the claim. A writer should reread the draft because you may notice missing details. The class discussed its ideas before writing. Readers can follow an essay when its organization is clear.",
       question: "Read the paragraph. Which sentence contains an inappropriate shift in pronoun person?",
       choices: [
         "When students revise, they should check whether their evidence supports the claim.",
@@ -1479,6 +1484,7 @@ function buildConventionsQuestion({ grade, skill, index, id }: { grade: number; 
       correctIndex: 1,
     },
     3: {
+      passage: "Maya gave Lena the notes after she finished the summary. Maya finished the summary before lunch. Lena read the notes carefully. The summary included evidence from the passage.",
       question: "Read the paragraph. Which sentence has a vague pronoun?",
       choices: [
         "Maya gave Lena the notes after she finished the summary.",
@@ -1489,7 +1495,7 @@ function buildConventionsQuestion({ grade, skill, index, id }: { grade: number; 
       correctIndex: 0,
     },
   };
-  const gradeSevenExamples: Record<number, { question: string; choices: string[]; correctIndex: number }> = {
+  const gradeSevenExamples: Record<number, ConventionExample> = {
     0: {
       question: "Which sentence is punctuated correctly?",
       choices: [
@@ -1511,6 +1517,7 @@ function buildConventionsQuestion({ grade, skill, index, id }: { grade: number; 
       correctIndex: 0,
     },
     2: {
+      passage: "Watching her brother play with clay, Nadine realized that she missed being creative. She decided to start activities that required imagination. She begins by keeping a journal filled with story ideas and sketches. She also volunteered to help construct a model for the school play.",
       question: "Read the paragraph. Which sentence contains an inappropriate shift in verb tense?",
       choices: [
         "Watching her brother play with clay, Nadine realized that she missed being creative.",
@@ -1521,8 +1528,9 @@ function buildConventionsQuestion({ grade, skill, index, id }: { grade: number; 
       correctIndex: 2,
     },
   };
-  const gradeEightExamples: Record<number, { question: string; choices: string[]; correctIndex: number }> = {
+  const gradeEightExamples: Record<number, ConventionExample> = {
     0: {
+      passage: "The team's presentation explained how the river cleanup would protect wildlife and improve the park. Members shared data from water samples, photographs of the shoreline, and a schedule for volunteers. The committee reviewed the plan carefully before deciding what to do next.",
       question: "Maintaining the style of the paragraph, which revision most improves the meaning of the sentence?",
       choices: [
         "Impressed with the team's careful evidence, the committee requested a second presentation.",
@@ -1548,7 +1556,7 @@ function buildConventionsQuestion({ grade, skill, index, id }: { grade: number; 
       correctIndex: 0,
     },
   };
-  const examples: Record<string, { question: string; choices: string[]; correctIndex: number }> = {
+  const examples: Record<string, ConventionExample> = {
     Grammar: { question: "Which sentence is written correctly?", choices: ["The students was ready.", "The students were ready.", "The student were ready.", "The students is ready."], correctIndex: 1 },
     Punctuation: { question: "Which sentence uses punctuation correctly?", choices: ["After lunch we read quietly.", "After lunch, we read quietly.", "After, lunch we read quietly.", "After lunch we, read quietly."], correctIndex: 1 },
     Capitalization: { question: "Which sentence uses capitalization correctly?", choices: ["We visited harrisburg in april.", "We visited Harrisburg in april.", "We visited Harrisburg in April.", "we visited Harrisburg in April."], correctIndex: 2 },
