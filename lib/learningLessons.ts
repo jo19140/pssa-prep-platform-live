@@ -48,7 +48,7 @@ export type LearningLessonBuild = {
   masteryCheck: PracticeQuestion[];
   retestRecommendation: string;
   generatedBy: "DETERMINISTIC" | "AI_ENRICHED";
-  aiStatus: "NOT_REQUESTED" | "SKIPPED" | "COMPLETED" | "FAILED";
+  aiStatus: "NOT_REQUESTED" | "PENDING" | "SKIPPED" | "COMPLETED" | "FAILED";
   sourcePayload: Record<string, unknown>;
   items: LessonSectionBuild[];
 };
@@ -87,16 +87,7 @@ export async function buildLearningLessons({
   responses: ResponseLike[];
   resourcesByStandard: Map<string, ResourceLike>;
 }) {
-  const deterministic = pathItems.map((item) => {
-    const relatedResponses = responses.filter((response) => response.standardCode === item.standardCode);
-    const missedResponses = relatedResponses.filter((response) => !response.isCorrect);
-    const resource =
-      resourcesByStandard.get(resourceKey(gradeLevel, item.standardCode, item.skill)) ||
-      resourcesByStandard.get(resourceKey(gradeLevel, item.standardCode, "")) ||
-      resourcesByStandard.get(resourceKey(0, item.standardCode, item.skill)) ||
-      resourcesByStandard.get(resourceKey(0, item.standardCode, ""));
-    return buildFallbackLesson({ gradeLevel, item, relatedResponses, missedResponses, resource });
-  });
+  const deterministic = buildDeterministicLearningLessons({ gradeLevel, pathItems, responses, resourcesByStandard });
 
   if (!deterministic.length) return attachGeneratedImagesToLessons(deterministic);
 
@@ -180,6 +171,29 @@ export async function buildLearningLessons({
     const lessons = deterministic.map((lesson) => cacheHits.get(lesson.learningPathItemOrder) || { ...lesson, aiStatus: "FAILED" as const });
     return attachGeneratedImagesToLessons(lessons);
   }
+}
+
+export function buildDeterministicLearningLessons({
+  gradeLevel,
+  pathItems,
+  responses,
+  resourcesByStandard,
+}: {
+  gradeLevel: number;
+  pathItems: LearningPathItemInput[];
+  responses: ResponseLike[];
+  resourcesByStandard: Map<string, ResourceLike>;
+}) {
+  return pathItems.map((item) => {
+    const relatedResponses = responses.filter((response) => response.standardCode === item.standardCode);
+    const missedResponses = relatedResponses.filter((response) => !response.isCorrect);
+    const resource =
+      resourcesByStandard.get(resourceKey(gradeLevel, item.standardCode, item.skill)) ||
+      resourcesByStandard.get(resourceKey(gradeLevel, item.standardCode, "")) ||
+      resourcesByStandard.get(resourceKey(0, item.standardCode, item.skill)) ||
+      resourcesByStandard.get(resourceKey(0, item.standardCode, ""));
+    return buildFallbackLesson({ gradeLevel, item, relatedResponses, missedResponses, resource });
+  });
 }
 
 export function resourceKey(gradeLevel: number, standardCode: string, skill: string) {

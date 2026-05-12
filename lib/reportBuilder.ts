@@ -35,10 +35,12 @@ export function buildDetailedReport(student: any, history: any[], path: any[], p
       studentAnswerLabel: entry.essay ? "Essay submitted" : entry.shortResponse ? "Short response submitted" : entry.chosenIndex != null ? letter(entry.chosenIndex) : entry.selectedIndex != null ? letter(entry.selectedIndex) : entry.partAIndex != null ? `Part A: ${letter(entry.partAIndex)}` : entry.selectedIndices ? entry.selectedIndices.map(letter).join(", ") : entry.scorePointsEarned != null ? `${entry.scorePointsEarned}/${entry.maxPoints}` : "Recorded",
       correctAnswerLabel: q?.type === "TDA" ? "Rubric-scored essay" : q?.correctIndex != null ? letter(q.correctIndex) : q?.partACorrectIndex != null ? `Part A: ${letter(q.partACorrectIndex)}` : q?.correctIndices ? q.correctIndices.map(letter).join(", ") : "See response",
       whyScoredThisWay: entry.errorPattern,
+      gradingPending: entry.questionType === "TDA" && !entry.essayEvaluation,
       skillTip: q?.skillTip || ""
     };
   });
   const essayEvaluations = history.filter((entry) => entry.essayEvaluation).map((entry) => entry.essayEvaluation);
+  const essayGradingPending = history.some((entry) => entry.questionType === "TDA" && !entry.essayEvaluation);
   const conventionsItems = history.filter((entry) => entry.questionType === "CONVENTIONS");
   const conventionsEarned = conventionsItems.reduce((sum, entry) => sum + (entry.scorePointsEarned || 0), 0);
   const conventionsTotal = conventionsItems.reduce((sum, entry) => sum + (entry.maxPoints || 0), 0);
@@ -56,6 +58,7 @@ export function buildDetailedReport(student: any, history: any[], path: any[], p
     errorPatterns: [],
     questionReview,
     essayEvaluations,
+    essayGradingPending,
     conventionsPerformance: conventionsItems.length ? { earnedPoints: conventionsEarned, totalPoints: conventionsTotal, questionCount: conventionsItems.length, percentScore: conventionsTotal ? Math.round((conventionsEarned / conventionsTotal) * 100) : 0, performanceBand: getPerformanceBand(conventionsTotal ? Math.round((conventionsEarned / conventionsTotal) * 100) : 0) } : null,
     diagnosticPerformance,
     growth: previousReport?.summary?.score != null ? { previousScore: previousReport.summary.score, currentScore: score, growthPoints: score - previousReport.summary.score, previousBand: previousReport.summary.performance, currentBand: performance } : { previousScore: null, currentScore: score, growthPoints: null, previousBand: null, currentBand: performance }

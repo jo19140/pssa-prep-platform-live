@@ -234,8 +234,28 @@ model TestSession {
   responses        ResponseRecord[]
   report           ReportSummary?
   learningPath     LearningPath?
+  aiJobs           AiJob[]
 
   @@index([userId, assessmentId, submittedAt])
+}
+
+model AiJob {
+  id          String      @id @default(cuid())
+  sessionId   String
+  jobType     String
+  targetId    String?
+  status      String      @default("PENDING")
+  attempts    Int         @default(0)
+  lastError   String?
+  startedAt   DateTime?
+  completedAt DateTime?
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  session     TestSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+
+  @@unique([sessionId, jobType, targetId])
+  @@index([status, createdAt])
+  @@index([sessionId])
 }
 
 model ResponseRecord {
@@ -359,6 +379,11 @@ model LearningLesson {
   retestRecommendation String
   generatedBy          String                  @default("DETERMINISTIC")
   aiStatus             String                  @default("NOT_REQUESTED")
+  reviewStatus         String                  @default("APPROVED")
+  approvedAt           DateTime?
+  approvedById         String?
+  rejectedAt           DateTime?
+  rejectedById         String?
   sourcePayload        Json
   createdAt            DateTime                @default(now())
   updatedAt            DateTime                @updatedAt
@@ -379,6 +404,11 @@ model LessonCache {
   payload      Json
   generatedBy  String
   modelHint    String?
+  reviewStatus String   @default("APPROVED")
+  approvedAt   DateTime?
+  approvedById String?
+  rejectedAt   DateTime?
+  rejectedById String?
   createdAt    DateTime @default(now())
   hitCount     Int      @default(0)
   lastUsedAt   DateTime @default(now())

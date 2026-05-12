@@ -2,6 +2,7 @@
 
 export function LearningPathPanel({ learningPath }: { learningPath: any }) {
   const items = learningPath?.items || [];
+  const lessons = learningPath?.lessons || [];
 
   if (!items.length) {
     return (
@@ -26,7 +27,7 @@ export function LearningPathPanel({ learningPath }: { learningPath: any }) {
 
       <div className="mt-5 grid gap-4">
         {items.map((item: any) => (
-          <article key={item.id || item.order} className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+          <article key={item.id || item.order} className="rounded-2xl border border-slate-200 bg-slate-50 p-5 transition-colors duration-700">
             <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
               <div>
                 <p className="text-xs font-semibold uppercase text-slate-500">Step {item.order} • {item.standardCode}</p>
@@ -37,6 +38,7 @@ export function LearningPathPanel({ learningPath }: { learningPath: any }) {
                 <span className="rounded-full bg-blue-100 px-3 py-1 text-blue-700">{item.activityType}</span>
                 <span className="rounded-full bg-emerald-100 px-3 py-1 text-emerald-700">{item.estimatedMinutes} min</span>
                 <span className="rounded-full bg-amber-100 px-3 py-1 text-amber-700">{item.difficulty.replace("_", " ")}</span>
+                {lessonForItem(lessons, item)?.aiStatus !== "COMPLETED" ? <span className="rounded-full bg-violet-100 px-3 py-1 text-violet-700">Crafting your personalized lessons...</span> : null}
               </div>
             </div>
             <p className="mt-3 text-sm text-slate-600">{item.rationale}</p>
@@ -49,4 +51,8 @@ export function LearningPathPanel({ learningPath }: { learningPath: any }) {
       </div>
     </section>
   );
+}
+
+function lessonForItem(lessons: any[], item: any) {
+  return lessons.find((lesson) => lesson.learningPathItemId === item.id || lesson.priority === item.priority || lesson.priority === item.order);
 }

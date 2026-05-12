@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { getQuestionForStep } from "@/lib/adaptiveEngine";
 import { buildDetailedReport } from "@/lib/reportBuilder";
 import { demoStudent, totalSimQuestions } from "@/lib/mockData";
@@ -26,12 +26,63 @@ export function StudentSessionPage() {
   const [isPaused, setIsPaused] = useState(false);
   const [latestLearningPath, setLatestLearningPath] = useState<any>(null);
   const [studentGrade, setStudentGrade] = useState<number | null>(null);
+  const [jobStatus, setJobStatus] = useState<any>(null);
+  const [jobPollingTimedOut, setJobPollingTimedOut] = useState(false);
+  const lastLessonsEnrichedCount = useRef<number | null>(null);
+  const report = useMemo(() => buildDetailedReport(demoStudent, history, questionPath), [history, questionPath]);
 
   useEffect(() => { loadAssignments(); }, []);
 
   useEffect(() => {
     if (mode === "test") setQuestionStartedAt(Date.now());
   }, [mode, currentQuestionNumber]);
+
+  useEffect(() => {
+    if (mode !== "report" || !sessionPayload?.sessionId) return;
+    let stopped = false;
+    let timeoutId: ReturnType<typeof setTimeout> | null = null;
+    const startedAt = Date.now();
+
+    async function poll() {
+      if (stopped) return;
+      if (document.visibilityState === "hidden") {
+        schedule();
+        return;
+      }
+      try {
+        const res = await fetch(`/api/student/job-status?sessionId=${sessionPayload.sessionId}`);
+        if (res.ok) {
+          const json = await res.json();
+          setJobStatus(json);
+          const previousLessons = lastLessonsEnrichedCount.current;
+          if (previousLessons !== null && json.lessonsEnrichedCount !== previousLessons) await refreshCurrentSession();
+          lastLessonsEnrichedCount.current = json.lessonsEnrichedCount;
+          if (json.essayGradingPending === false && report.essayGradingPending) await refreshCurrentSession();
+          const allDone = (json.jobs || []).length > 0 && (json.jobs || []).every((job: any) => job.status === "COMPLETED");
+          if (allDone) return;
+        }
+      } catch {
+        // Keep polling; transient status failures should not interrupt the report view.
+      }
+      if (Date.now() - startedAt > 5 * 60 * 1000) {
+        setJobPollingTimedOut(true);
+        return;
+      }
+      schedule();
+    }
+
+    function schedule() {
+      const elapsed = Date.now() - startedAt;
+      const delay = elapsed > 60_000 ? 10_000 : elapsed > 30_000 ? 5_000 : 3_000;
+      timeoutId = setTimeout(poll, delay);
+    }
+
+    poll();
+    return () => {
+      stopped = true;
+      if (timeoutId) clearTimeout(timeoutId);
+    };
+  }, [mode, sessionPayload?.sessionId, report.essayGradingPending]);
 
   async function loadAssignments() {
     try {
@@ -129,14 +180,24 @@ export function StudentSessionPage() {
     }
     const submitJson = await submitRes.json();
     if (submitJson.responses) setHistory(normalizeResponses(submitJson.responses));
-    setSessionPayload((prev: any) => ({ ...prev, learningPath: submitJson.learningPath }));
+    setSessionPayload((prev: any) => ({ ...prev, learningPath: submitJson.learningPath, jobs: submitJson.jobs }));
+    setJobStatus(null);
+    setJobPollingTimedOut(false);
+    lastLessonsEnrichedCount.current = null;
     await loadAssignments();
     setReviewOpen(false);
     setIsPaused(false);
     setMode("report");
   }
 
-  const report = useMemo(() => buildDetailedReport(demoStudent, history, questionPath), [history, questionPath]);
+  async function refreshCurrentSession() {
+    if (!sessionPayload?.assessment?.id) return;
+    const res = await fetch(`/api/student/session?assessmentId=${sessionPayload.assessment.id}`);
+    if (!res.ok) return;
+    const json = await res.json();
+    setSessionPayload((prev: any) => ({ ...prev, ...json }));
+    setHistory(normalizeResponses(json.responses || []));
+  }
   const backToAssignments = async () => {
     setMode("list");
     setLoading(true);
@@ -148,7 +209,7 @@ export function StudentSessionPage() {
   if (mode === "list") return <StudentAssignmentListPage assignments={assignments} readingCoachAssignments={readingCoachAssignments} latestLearningPath={latestLearningPath} studentGrade={studentGrade} onOpen={openAssignment} onOpenLearningPath={openLearningPathWindow} onOpenTdaPractice={() => setMode("tdaPractice")} onReadingCoachComplete={loadAssignments} onJoinClass={loadAssignments} />;
   if (mode === "learningPath") return <StudentLearningPathPage learningPath={latestLearningPath} onBack={backToAssignments} />;
   if (mode === "tdaPractice") return <StudentTdaPracticePage onBack={backToAssignments} />;
-  if (mode === "report") return <div className="space-y-4"><button onClick={backToAssignments} className="rounded-xl bg-slate-200 px-4 py-2">Back to Assignments</button><StudentReport report={report} /><LearningPathPanel learningPath={sessionPayload?.learningPath} /></div>;
+  if (mode === "report") return <div className="space-y-4"><button onClick={backToAssignments} className="rounded-xl bg-slate-200 px-4 py-2">Back to Assignments</button>{jobPollingTimedOut ? <div className="rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm font-semibold text-amber-800">Some content is still being prepared. Please refresh later.</div> : jobStatus?.jobs?.some((job: any) => job.status !== "COMPLETED") ? <div className="rounded-2xl border border-blue-100 bg-blue-50 p-4 text-sm font-semibold text-blue-800">Crafting your personalized lessons...</div> : null}<StudentReport report={report} /><LearningPathPanel learningPath={sessionPayload?.learningPath} /></div>;
   return <div className="space-y-4"><StudentTest currentQuestion={questionPath[currentQuestionNumber - 1]} currentQuestionNumber={currentQuestionNumber} totalQuestions={questionPath.length || totalSimQuestions} history={history} onSubmitAnswer={onSubmitAnswer} onNavigate={goToQuestion} onPause={() => setIsPaused(true)} onReview={() => setReviewOpen(true)} onEndTest={submitTestNow} onToggleFlag={() => toggleFlag(questionPath[currentQuestionNumber - 1].id)} flaggedQuestionIds={flaggedQuestionIds} isPaused={isPaused} onResume={() => setIsPaused(false)} reviewOpen={reviewOpen} onCloseReview={() => setReviewOpen(false)} questionIds={questionPath.map((question) => question.id)} /></div>;
 }
 
