@@ -1,4 +1,5 @@
 import { Client, Receiver } from "@upstash/qstash";
+import { logAiFailure } from "@/lib/aiTelemetry";
 import { db } from "@/lib/db";
 
 export type AiJobType = "ESSAY_GRADING" | "LESSON_ENRICHMENT" | "LEARNING_PATH_ENRICHMENT";
@@ -19,19 +20,29 @@ export async function enqueueAiJob({
       data: { sessionId, jobType, targetId },
     }));
 
-  if (!process.env.QSTASH_TOKEN) {
-    const { processAiJob } = await import("@/lib/aiJobProcessor");
-    await processAiJob(job.id);
-    return job;
-  }
+  if (!process.env.QSTASH_TOKEN) return processInline(job.id);
 
   const client = new Client({ token: process.env.QSTASH_TOKEN });
-  await client.publishJSON({
-    url: `${baseUrl()}/api/jobs/process-ai`,
-    body: { jobId: job.id },
-    deduplicationId: job.id,
-  });
-  return job;
+  try {
+    await client.publishJSON({
+      url: `${baseUrl()}/api/jobs/process-ai`,
+      body: { jobId: job.id },
+      deduplicationId: job.id,
+    });
+    return job;
+  } catch (error) {
+    logAiFailure({
+      scope: "qstash.enqueue",
+      error,
+      context: { jobId: job.id, sessionId, jobType, targetId },
+    });
+    return processInline(job.id);
+  }
+}
+
+async function processInline(jobId: string) {
+  const { processAiJob } = await import("@/lib/aiJobProcessor");
+  return processAiJob(jobId);
 }
 
 export async function verifyQstashSignature(req: Request, rawBody: string) {
