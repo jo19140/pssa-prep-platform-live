@@ -2,6 +2,7 @@ import type { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 import { db } from "@/lib/db";
+import { consumeRateLimit } from "@/lib/rateLimit";
 
 export const authOptions: NextAuthOptions = {
   session: { strategy: "jwt" },
@@ -12,6 +13,8 @@ export const authOptions: NextAuthOptions = {
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) return null;
         const email = credentials.email.trim().toLowerCase();
+        const emailLimit = await consumeRateLimit({ key: `signin:email:${email}`, capacity: 10, refillIntervalMs: 60 * 60 * 1000 });
+        if (!emailLimit.allowed) return null;
         const user = await db.user.findUnique({ where: { email } });
         if (!user?.passwordHash) return null;
         const valid = await bcrypt.compare(credentials.password, user.passwordHash);

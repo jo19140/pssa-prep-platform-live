@@ -1,8 +1,19 @@
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
+import { z } from "zod";
 import { authOptions } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { createUniqueClassJoinCode, ensureClassJoinCode } from "@/lib/classCodes";
+
+const createClassSchema = z.object({
+  name: z.string().trim().min(1).max(120),
+  grade: z.coerce.number().int().min(3).max(8),
+});
+
+const updateClassCodeSchema = z.object({
+  classRoomId: z.string().min(1).max(128),
+  action: z.enum(["regenerate", "enable", "disable"]),
+});
 
 export async function GET() {
   const session = await getServerSession(authOptions);
@@ -37,11 +48,9 @@ export async function POST(req: Request) {
   const role = (session.user as any).role;
   if (role !== "TEACHER" && role !== "ADMIN") return NextResponse.json({ error: "Forbidden" }, { status: 403 });
 
-  const body = await req.json().catch(() => ({}));
-  const name = String(body.name || "").trim();
-  const grade = Number(body.grade);
-  if (!name) return NextResponse.json({ error: "Class name is required." }, { status: 400 });
-  if (!Number.isInteger(grade) || grade < 3 || grade > 8) return NextResponse.json({ error: "Choose a grade from 3 to 8." }, { status: 400 });
+  const parsed = createClassSchema.safeParse(await req.json().catch(() => ({})));
+  if (!parsed.success) return NextResponse.json({ error: "Invalid request body", issues: parsed.error.flatten().fieldErrors }, { status: 400 });
+  const { name, grade } = parsed.data;
 
   const teacher = await db.teacherProfile.findUnique({ where: { userId: (session.user as any).id } });
   if (!teacher) return NextResponse.json({ error: "Teacher profile not found" }, { status: 404 });
@@ -67,10 +76,9 @@ export async function PATCH(req: Request) {
   const role = (session.user as any).role;
   if (role !== "TEACHER" && role !== "ADMIN") return NextResponse.json({ error: "Forbidden" }, { status: 403 });
 
-  const body = await req.json().catch(() => ({}));
-  const classRoomId = String(body.classRoomId || "");
-  const action = String(body.action || "");
-  if (!classRoomId) return NextResponse.json({ error: "Class id is required." }, { status: 400 });
+  const parsed = updateClassCodeSchema.safeParse(await req.json().catch(() => ({})));
+  if (!parsed.success) return NextResponse.json({ error: "Invalid request body", issues: parsed.error.flatten().fieldErrors }, { status: 400 });
+  const { classRoomId, action } = parsed.data;
 
   const teacher = await db.teacherProfile.findUnique({ where: { userId: (session.user as any).id } });
   if (!teacher) return NextResponse.json({ error: "Teacher profile not found" }, { status: 404 });

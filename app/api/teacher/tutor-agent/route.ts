@@ -1,10 +1,18 @@
 import { NextResponse } from "next/server";
 import { Prisma } from "@prisma/client";
 import { getServerSession } from "next-auth";
+import { z } from "zod";
 import { authOptions } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { gradeTdaEssay } from "@/lib/essayGrader";
 import { buildLearnerSummaryFromData, runTutorAgent } from "@/lib/tutorAgent";
+import { consumeRateLimit, getClientIp } from "@/lib/rateLimit";
+
+const teacherTutorSchema = z.object({
+  message: z.string().trim().min(2).max(8000),
+  prompt: z.string().trim().max(2000).optional(),
+  gradeLevel: z.coerce.number().int().min(3).max(8).optional(),
+});
 
 export async function GET() {
   const session = await getServerSession(authOptions);
@@ -24,11 +32,18 @@ export async function POST(req: Request) {
   const role = (session.user as any).role;
   if (role !== "TEACHER" && role !== "ADMIN") return NextResponse.json({ error: "Forbidden" }, { status: 403 });
 
-  const { message, prompt, gradeLevel } = await req.json();
-  const cleanMessage = String(message || "").trim();
-  if (cleanMessage.length < 2) return NextResponse.json({ error: "Message or essay text is required." }, { status: 400 });
-
   const userId = (session.user as any).id;
+  const userLimit = await consumeRateLimit({ key: `teacher-tutor:user:${userId}`, capacity: 30, refillIntervalMs: 60 * 60 * 1000 });
+  const ipLimit = await consumeRateLimit({ key: `teacher-tutor:ip:${getClientIp(req)}`, capacity: 90, refillIntervalMs: 60 * 60 * 1000 });
+  if (!userLimit.allowed || !ipLimit.allowed) {
+    return NextResponse.json({ error: "Too many teacher tutor requests. Please try again later." }, { status: 429, headers: { "Retry-After": String(Math.max(userLimit.retryAfterSec, ipLimit.retryAfterSec)) } });
+  }
+
+  const parsed = teacherTutorSchema.safeParse(await req.json());
+  if (!parsed.success) return NextResponse.json({ error: "Invalid request body", issues: parsed.error.flatten().fieldErrors }, { status: 400 });
+  const { message, prompt, gradeLevel } = parsed.data;
+  const cleanMessage = message;
+
   const memory = await getOrCreateTeacherMemory(userId);
   const teacher = await db.teacherProfile.findUnique({ where: { userId }, include: { user: true, classes: true } });
   const standards = await db.assessmentQuestion.findMany({

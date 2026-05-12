@@ -1,7 +1,21 @@
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
+import { z } from "zod";
 import { authOptions } from "@/lib/auth";
 import { db } from "@/lib/db";
+
+const createTestSchema = z.object({
+  classRoomId: z.string().max(128).optional().nullable(),
+  grade: z.coerce.number().int().min(3).max(8).optional(),
+  gradeLevel: z.coerce.number().int().min(3).max(8).optional(),
+  standards: z.union([z.array(z.string().trim().max(80)).max(40), z.string().trim().max(4000)]).optional(),
+  title: z.string().trim().max(160).optional(),
+  subject: z.string().trim().max(40).optional(),
+  state: z.string().trim().max(20).optional(),
+  dueDate: z.string().trim().max(80).optional().nullable(),
+  assignmentType: z.string().trim().max(40).optional(),
+  isAdaptive: z.boolean().optional(),
+});
 
 export async function POST(req: Request) {
   try {
@@ -10,7 +24,9 @@ export async function POST(req: Request) {
     const role = (session.user as any).role;
     if (role !== "TEACHER" && role !== "ADMIN") return NextResponse.json({ error: "Forbidden" }, { status: 403 });
 
-    const body = await req.json();
+    const parsed = createTestSchema.safeParse(await req.json());
+    if (!parsed.success) return NextResponse.json({ error: "Invalid request body", issues: parsed.error.flatten().fieldErrors }, { status: 400 });
+    const body = parsed.data;
     const teacher = await db.teacherProfile.findUnique({
       where: { userId: (session.user as any).id },
       include: { classes: true },

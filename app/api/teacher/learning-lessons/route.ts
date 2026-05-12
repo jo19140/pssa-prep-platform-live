@@ -1,7 +1,29 @@
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
+import { z } from "zod";
 import { authOptions } from "@/lib/auth";
 import { db } from "@/lib/db";
+import { consumeRateLimit, getClientIp } from "@/lib/rateLimit";
+
+const resourceLinkSchema = z.object({
+  gradeLevel: z.union([z.coerce.number().int().min(3).max(8), z.literal(""), z.null()]).optional(),
+  standardCode: z.string().trim().min(1).max(80),
+  skill: z.string().trim().min(1).max(80),
+  title: z.string().trim().min(1).max(160),
+  url: z.string().trim().url().max(2048),
+  provider: z.string().trim().max(120).optional().default("Curated resource"),
+  description: z.string().trim().max(1000).optional().nullable(),
+});
+
+const assignLessonsSchema = z.object({
+  lessonId: z.string().max(128).optional(),
+  lessonIds: z.array(z.string().min(1).max(128)).max(100).optional(),
+  classRoomId: z.string().min(1).max(128),
+});
+
+const updateResourceSchema = resourceLinkSchema.partial().extend({
+  id: z.string().min(1).max(128),
+});
 
 export async function GET() {
   const session = await getServerSession(authOptions);
@@ -198,23 +220,26 @@ export async function POST(req: Request) {
   const role = (session.user as any).role;
   if (role !== "TEACHER" && role !== "ADMIN") return NextResponse.json({ error: "Forbidden" }, { status: 403 });
 
-  const body = await req.json();
-  const standardCode = String(body.standardCode || "").trim();
-  const skill = String(body.skill || "").trim();
-  const title = String(body.title || "").trim();
-  const url = String(body.url || "").trim();
-  const provider = String(body.provider || "Curated resource").trim();
-  if (!standardCode || !skill || !title || !url) return NextResponse.json({ error: "Standard, skill, title, and URL are required." }, { status: 400 });
+  const userId = String((session.user as any).id || "unknown");
+  const userLimit = await consumeRateLimit({ key: `teacher-learning-lessons:user:${userId}`, capacity: 30, refillIntervalMs: 60 * 60 * 1000 });
+  const ipLimit = await consumeRateLimit({ key: `teacher-learning-lessons:ip:${getClientIp(req)}`, capacity: 90, refillIntervalMs: 60 * 60 * 1000 });
+  if (!userLimit.allowed || !ipLimit.allowed) {
+    return NextResponse.json({ error: "Too many learning-lesson requests. Please try again later." }, { status: 429, headers: { "Retry-After": String(Math.max(userLimit.retryAfterSec, ipLimit.retryAfterSec)) } });
+  }
+
+  const parsed = resourceLinkSchema.safeParse(await req.json());
+  if (!parsed.success) return NextResponse.json({ error: "Invalid request body", issues: parsed.error.flatten().fieldErrors }, { status: 400 });
+  const body = parsed.data;
 
   const resource = await db.resourceLink.create({
     data: {
       gradeLevel: body.gradeLevel ? Number(body.gradeLevel) : null,
-      standardCode,
-      skill,
-      title,
-      url,
-      provider,
-      description: body.description ? String(body.description) : null,
+      standardCode: body.standardCode,
+      skill: body.skill,
+      title: body.title,
+      url: body.url,
+      provider: body.provider,
+      description: body.description || null,
       createdById: (session.user as any).id,
     },
   });
@@ -227,11 +252,11 @@ export async function PUT(req: Request) {
   const role = (session.user as any).role;
   if (role !== "TEACHER" && role !== "ADMIN") return NextResponse.json({ error: "Forbidden" }, { status: 403 });
 
-  const body = await req.json();
-  const lessonIds = Array.isArray(body.lessonIds)
-    ? body.lessonIds.map((id: unknown) => String(id)).filter(Boolean)
-    : [String(body.lessonId || "")].filter(Boolean);
-  const classRoomId = String(body.classRoomId || "");
+  const parsed = assignLessonsSchema.safeParse(await req.json());
+  if (!parsed.success) return NextResponse.json({ error: "Invalid request body", issues: parsed.error.flatten().fieldErrors }, { status: 400 });
+  const body = parsed.data;
+  const lessonIds = body.lessonIds?.length ? body.lessonIds : [body.lessonId || ""].filter(Boolean);
+  const classRoomId = body.classRoomId;
   if (!lessonIds.length || !classRoomId) return NextResponse.json({ error: "At least one lesson and a class are required." }, { status: 400 });
 
   const teacher = await db.teacherProfile.findUnique({
@@ -270,12 +295,12 @@ export async function PATCH(req: Request) {
   const role = (session.user as any).role;
   if (role !== "TEACHER" && role !== "ADMIN") return NextResponse.json({ error: "Forbidden" }, { status: 403 });
 
-  const body = await req.json();
-  const id = String(body.id || "");
-  if (!id) return NextResponse.json({ error: "Resource id is required." }, { status: 400 });
+  const parsed = updateResourceSchema.safeParse(await req.json());
+  if (!parsed.success) return NextResponse.json({ error: "Invalid request body", issues: parsed.error.flatten().fieldErrors }, { status: 400 });
+  const body = parsed.data;
 
   const resource = await db.resourceLink.update({
-    where: { id },
+    where: { id: body.id },
     data: {
       gradeLevel: body.gradeLevel === "" ? null : body.gradeLevel === undefined ? undefined : Number(body.gradeLevel),
       standardCode: body.standardCode === undefined ? undefined : String(body.standardCode),

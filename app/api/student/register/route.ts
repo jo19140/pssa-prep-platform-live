@@ -1,18 +1,30 @@
 import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
+import { z } from "zod";
 import { db } from "@/lib/db";
 import { normalizeJoinCode } from "@/lib/classCodes";
+import { consumeRateLimit, getClientIp } from "@/lib/rateLimit";
+
+const studentRegisterSchema = z.object({
+  name: z.string().trim().min(1).max(120),
+  email: z.string().trim().email().max(254),
+  password: z.string().min(8).max(128),
+  joinCode: z.string().trim().min(1).max(32),
+});
 
 export async function POST(req: Request) {
-  const body = await req.json().catch(() => ({}));
-  const name = String(body.name || "").trim();
-  const email = String(body.email || "").trim().toLowerCase();
-  const password = String(body.password || "");
-  const joinCode = normalizeJoinCode(String(body.joinCode || ""));
+  const ipLimit = await consumeRateLimit({ key: `student-register:ip:${getClientIp(req)}`, capacity: 20, refillIntervalMs: 60 * 60 * 1000 });
+  if (!ipLimit.allowed) {
+    return NextResponse.json({ error: "Too many registration attempts. Please try again later." }, { status: 429, headers: { "Retry-After": String(ipLimit.retryAfterSec) } });
+  }
 
-  if (!name) return NextResponse.json({ error: "Student name is required." }, { status: 400 });
-  if (!email || !email.includes("@")) return NextResponse.json({ error: "A valid student email is required." }, { status: 400 });
-  if (password.length < 8) return NextResponse.json({ error: "Password must be at least 8 characters." }, { status: 400 });
+  const parsed = studentRegisterSchema.safeParse(await req.json().catch(() => ({})));
+  if (!parsed.success) return NextResponse.json({ error: "Invalid request body", issues: parsed.error.flatten().fieldErrors }, { status: 400 });
+  const name = parsed.data.name;
+  const email = parsed.data.email.toLowerCase();
+  const password = parsed.data.password;
+  const joinCode = normalizeJoinCode(parsed.data.joinCode);
+
   if (!joinCode) return NextResponse.json({ error: "Class code is required." }, { status: 400 });
 
   const classRoom = await db.classRoom.findUnique({

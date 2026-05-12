@@ -1,9 +1,19 @@
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
+import { z } from "zod";
 import { authOptions } from "@/lib/auth";
 import { db } from "@/lib/db";
 
 const DEFAULT_READING_TEXT = "Maya stood at the front of the room and reread the first line of her speech. Her hands shook slightly, so she took a deep breath and looked at the note card again.";
+
+const assignReadingCoachSchema = z.object({
+  classRoomId: z.string().min(1).max(128),
+  title: z.string().trim().min(1).max(160).optional().default("Reading Coach Fluency Practice"),
+  expectedText: z.string().trim().min(1).max(8000).optional().default(DEFAULT_READING_TEXT),
+  activityType: z.string().trim().max(40).optional().default("READ_ALOUD"),
+  gradeLevel: z.coerce.number().int().min(3).max(8).optional().default(6),
+  dueDate: z.string().trim().max(80).optional().nullable(),
+});
 
 export async function GET() {
   try {
@@ -53,15 +63,9 @@ export async function POST(req: Request) {
     const role = (session.user as any).role;
     if (role !== "TEACHER" && role !== "ADMIN") return NextResponse.json({ error: "Forbidden" }, { status: 403 });
 
-    const body = await req.json();
-    const classRoomId = String(body.classRoomId || "");
-    const title = String(body.title || "Reading Coach Fluency Practice").trim();
-    const expectedText = String(body.expectedText || DEFAULT_READING_TEXT).trim();
-    const activityType = String(body.activityType || "READ_ALOUD").trim();
-    const gradeLevel = Number.parseInt(String(body.gradeLevel || "6"), 10) || 6;
-
-    if (!classRoomId) return NextResponse.json({ error: "Class is required." }, { status: 400 });
-    if (!expectedText) return NextResponse.json({ error: "Reading passage is required." }, { status: 400 });
+    const parsed = assignReadingCoachSchema.safeParse(await req.json());
+    if (!parsed.success) return NextResponse.json({ error: "Invalid request body", issues: parsed.error.flatten().fieldErrors }, { status: 400 });
+    const { classRoomId, title, expectedText, activityType, gradeLevel, dueDate } = parsed.data;
 
     const classRoom = await db.classRoom.findFirst({
       where: { id: classRoomId, teacher: { userId: (session.user as any).id } },
@@ -78,7 +82,7 @@ export async function POST(req: Request) {
         activityType,
         expectedText,
         status: "ASSIGNED",
-        dueDate: body.dueDate ? new Date(body.dueDate) : null,
+        dueDate: dueDate ? new Date(dueDate) : null,
       },
     });
 

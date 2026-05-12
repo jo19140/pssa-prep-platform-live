@@ -35,8 +35,8 @@ export async function POST(req: Request) {
 
     const ip = getClientIp(req);
     const userId = String((session.user as any).id || "unknown");
-    const userLimit = consumeRateLimit({ key: `generate-test:user:${userId}`, capacity: 10, refillIntervalMs: 60 * 60 * 1000 });
-    const ipLimit = consumeRateLimit({ key: `generate-test:ip:${ip}`, capacity: 30, refillIntervalMs: 60 * 60 * 1000 });
+    const userLimit = await consumeRateLimit({ key: `generate-test:user:${userId}`, capacity: 10, refillIntervalMs: 60 * 60 * 1000 });
+    const ipLimit = await consumeRateLimit({ key: `generate-test:ip:${ip}`, capacity: 30, refillIntervalMs: 60 * 60 * 1000 });
     if (!userLimit.allowed || !ipLimit.allowed) {
       return NextResponse.json(
         { error: "Too many generated-test requests. Please try again later." },

@@ -2,10 +2,18 @@ import OpenAI from "openai";
 import { NextResponse } from "next/server";
 import { Prisma } from "@prisma/client";
 import { getServerSession } from "next-auth";
+import { z } from "zod";
 import { authOptions } from "@/lib/auth";
 import { db } from "@/lib/db";
+import { consumeRateLimit, getClientIp } from "@/lib/rateLimit";
 
 export const runtime = "nodejs";
+
+const readingCoachSchema = z.object({
+  assignmentId: z.string().min(1).max(128),
+  manualTranscript: z.string().trim().max(8000).optional().default(""),
+  audioSeconds: z.coerce.number().int().min(0).max(3600).nullable().optional(),
+});
 
 export async function POST(req: Request) {
   const session = await getServerSession(authOptions);
@@ -13,16 +21,31 @@ export async function POST(req: Request) {
   const role = (session.user as any).role;
   if (role !== "STUDENT" && role !== "ADMIN") return NextResponse.json({ error: "Forbidden" }, { status: 403 });
 
+  const userId = String((session.user as any).id || "unknown");
+  const userLimit = await consumeRateLimit({ key: `reading-coach:user:${userId}`, capacity: 20, refillIntervalMs: 60 * 60 * 1000 });
+  const ipLimit = await consumeRateLimit({ key: `reading-coach:ip:${getClientIp(req)}`, capacity: 60, refillIntervalMs: 60 * 60 * 1000 });
+  if (!userLimit.allowed || !ipLimit.allowed) {
+    return NextResponse.json({ error: "Too many Reading Coach attempts. Please try again later." }, { status: 429, headers: { "Retry-After": String(Math.max(userLimit.retryAfterSec, ipLimit.retryAfterSec)) } });
+  }
+
   const formData = await req.formData();
-  const assignmentId = String(formData.get("assignmentId") || "").trim();
-  const manualTranscript = String(formData.get("manualTranscript") || "").trim();
-  const audioSeconds = Number.parseInt(String(formData.get("audioSeconds") || "0"), 10) || null;
+  const parsed = readingCoachSchema.safeParse({
+    assignmentId: formData.get("assignmentId"),
+    manualTranscript: formData.get("manualTranscript") || "",
+    audioSeconds: formData.get("audioSeconds") || null,
+  });
+  if (!parsed.success) return NextResponse.json({ error: "Invalid request body", issues: parsed.error.flatten().fieldErrors }, { status: 400 });
+  const { assignmentId, manualTranscript } = parsed.data;
+  const audioSeconds = parsed.data.audioSeconds || null;
   const audio = formData.get("audio");
+  if (audio instanceof File && audio.size > 20 * 1024 * 1024) {
+    return NextResponse.json({ error: "Audio file is too large." }, { status: 400 });
+  }
 
   if (!assignmentId) return NextResponse.json({ error: "Reading Coach assignment is required." }, { status: 400 });
 
   const student = await db.studentProfile.findUnique({
-    where: { userId: (session.user as any).id },
+    where: { userId },
     include: { enrollments: true },
   });
   if (!student) return NextResponse.json({ error: "Student profile not found." }, { status: 404 });
@@ -59,7 +82,7 @@ export async function POST(req: Request) {
   const attempt = await db.readingCoachAttempt.create({
     data: {
       assignmentId: assignment.id,
-      userId: (session.user as any).id,
+      userId,
       gradeLevel,
       activityType,
       expectedText,

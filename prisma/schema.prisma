@@ -121,6 +121,7 @@ model Enrollment {
   studentProfile   StudentProfile @relation(fields: [studentProfileId], references: [id], onDelete: Cascade)
 
   @@unique([classRoomId, studentProfileId])
+  @@index([studentProfileId])
 }
 
 model Assessment {
@@ -186,6 +187,8 @@ model Assignment {
   assignmentType String
   assessment     Assessment       @relation(fields: [assessmentId], references: [id], onDelete: Cascade)
   classRoom      ClassRoom        @relation(fields: [classRoomId], references: [id], onDelete: Cascade)
+
+  @@index([classRoomId, status])
 }
 
 model TestSession {
@@ -204,6 +207,8 @@ model TestSession {
   responses        ResponseRecord[]
   report           ReportSummary?
   learningPath     LearningPath?
+
+  @@index([userId, assessmentId, submittedAt])
 }
 
 model ResponseRecord {
@@ -224,6 +229,8 @@ model ResponseRecord {
   createdAt        DateTime    @default(now())
   session          TestSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
   essayEvaluation  EssayEvaluation?
+
+  @@index([sessionId])
 }
 
 model EssayEvaluation {
@@ -367,6 +374,7 @@ model StudentLessonProgress {
   user                  User           @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([lessonId, userId])
+  @@index([userId])
 }
 
 model LearningQuestAttempt {

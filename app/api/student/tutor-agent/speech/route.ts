@@ -1,6 +1,13 @@
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
+import { z } from "zod";
 import { authOptions } from "@/lib/auth";
+import { consumeRateLimit, getClientIp } from "@/lib/rateLimit";
+
+const speechSchema = z.object({
+  text: z.string().trim().min(1).max(4000),
+  voice: z.enum(["alloy", "ash", "coral", "echo", "fable", "nova", "onyx", "sage", "shimmer"]).optional().default("nova"),
+});
 
 export async function POST(req: Request) {
   const session = await getServerSession(authOptions);
@@ -8,12 +15,17 @@ export async function POST(req: Request) {
   const role = (session.user as any).role;
   if (role !== "STUDENT" && role !== "ADMIN") return NextResponse.json({ error: "Forbidden" }, { status: 403 });
 
-  const { text, voice } = await req.json();
-  const cleanText = String(text || "").replace(/\s+/g, " ").trim().slice(0, 4000);
-  if (!cleanText) return NextResponse.json({ error: "Text is required." }, { status: 400 });
-  const selectedVoice = ["alloy", "ash", "coral", "echo", "fable", "nova", "onyx", "sage", "shimmer"].includes(String(voice || ""))
-    ? String(voice)
-    : "nova";
+  const userId = String((session.user as any).id || "unknown");
+  const userLimit = await consumeRateLimit({ key: `student-speech:user:${userId}`, capacity: 30, refillIntervalMs: 60 * 60 * 1000 });
+  const ipLimit = await consumeRateLimit({ key: `student-speech:ip:${getClientIp(req)}`, capacity: 90, refillIntervalMs: 60 * 60 * 1000 });
+  if (!userLimit.allowed || !ipLimit.allowed) {
+    return NextResponse.json({ error: "Too many speech requests. Please try again later." }, { status: 429, headers: { "Retry-After": String(Math.max(userLimit.retryAfterSec, ipLimit.retryAfterSec)) } });
+  }
+
+  const parsed = speechSchema.safeParse(await req.json());
+  if (!parsed.success) return NextResponse.json({ error: "Invalid request body", issues: parsed.error.flatten().fieldErrors }, { status: 400 });
+  const cleanText = parsed.data.text.replace(/\s+/g, " ").trim();
+  const selectedVoice = parsed.data.voice;
 
   try {
     const apiKey = process.env.OPENAI_API_KEY?.trim().replace(/^['"]|['"]$/g, "");

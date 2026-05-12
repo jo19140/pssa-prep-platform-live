@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { Prisma } from "@prisma/client";
 import { getServerSession } from "next-auth";
+import { z } from "zod";
 import { authOptions } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { buildStandardsMastery } from "@/lib/standards";
@@ -10,6 +11,11 @@ import { buildStandardsGrowth } from "@/lib/standardsGrowth";
 import { buildDeterministicLearningPath, enrichLearningPathWithAi } from "@/lib/learningPath";
 import { buildLearningLessons, resourceKey } from "@/lib/learningLessons";
 import { gradeTdaEssay } from "@/lib/essayGrader";
+import { consumeRateLimit, getClientIp } from "@/lib/rateLimit";
+
+const submitTestSchema = z.object({
+  sessionId: z.string().min(1).max(128),
+});
 
 export async function POST(req: Request) {
   const session = await getServerSession(authOptions);
@@ -17,7 +23,19 @@ export async function POST(req: Request) {
   const role = (session.user as any).role;
   if (role !== "STUDENT" && role !== "ADMIN") return NextResponse.json({ error: "Forbidden" }, { status: 403 });
 
-  const { sessionId } = await req.json();
+  const parsed = submitTestSchema.safeParse(await req.json());
+  if (!parsed.success) return NextResponse.json({ error: "Invalid request body", issues: parsed.error.flatten().fieldErrors }, { status: 400 });
+  const { sessionId } = parsed.data;
+  const userId = String((session.user as any).id || "unknown");
+  const ip = getClientIp(req);
+  const userLimit = await consumeRateLimit({ key: `test-submit:user:${userId}`, capacity: 5, refillIntervalMs: 60 * 60 * 1000 });
+  const ipLimit = await consumeRateLimit({ key: `test-submit:ip:${ip}`, capacity: 20, refillIntervalMs: 60 * 60 * 1000 });
+  if (!userLimit.allowed || !ipLimit.allowed) {
+    return NextResponse.json(
+      { error: "Too many test submissions. Please try again later." },
+      { status: 429, headers: { "Retry-After": String(Math.max(userLimit.retryAfterSec, ipLimit.retryAfterSec)) } },
+    );
+  }
   const currentSession = await db.testSession.findUnique({ where: { id: sessionId }, include: { assessment: true, user: true } });
   if (!currentSession) return NextResponse.json({ error: "Session not found" }, { status: 404 });
   if (role !== "ADMIN" && currentSession.userId !== (session.user as any).id) return NextResponse.json({ error: "Forbidden" }, { status: 403 });

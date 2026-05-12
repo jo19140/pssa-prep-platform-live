@@ -1,9 +1,16 @@
 import { NextResponse } from "next/server";
 import { Prisma } from "@prisma/client";
 import { getServerSession } from "next-auth";
+import { z } from "zod";
 import { authOptions } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { buildLearnerSummaryFromData, runTutorAgent } from "@/lib/tutorAgent";
+import { consumeRateLimit, getClientIp } from "@/lib/rateLimit";
+
+const studentTutorSchema = z.object({
+  message: z.string().trim().min(2).max(2000),
+  mode: z.enum(["learning-path", "dashboard"]).optional(),
+});
 
 export async function GET() {
   const session = await getServerSession(authOptions);
@@ -23,12 +30,19 @@ export async function POST(req: Request) {
   const role = (session.user as any).role;
   if (role !== "STUDENT" && role !== "ADMIN") return NextResponse.json({ error: "Forbidden" }, { status: 403 });
 
-  const { message, mode } = await req.json();
-  const cleanMessage = String(message || "").trim();
-  if (cleanMessage.length < 2) return NextResponse.json({ error: "Message is required." }, { status: 400 });
-  const tutorMode = mode === "learning-path" ? "LEARNING_PATH" : "DASHBOARD";
-
   const userId = (session.user as any).id;
+  const ip = getClientIp(req);
+  const userLimit = await consumeRateLimit({ key: `student-tutor:user:${userId}`, capacity: 30, refillIntervalMs: 60 * 60 * 1000 });
+  const ipLimit = await consumeRateLimit({ key: `student-tutor:ip:${ip}`, capacity: 90, refillIntervalMs: 60 * 60 * 1000 });
+  if (!userLimit.allowed || !ipLimit.allowed) {
+    return NextResponse.json({ error: "Too many tutor requests. Please try again later." }, { status: 429, headers: { "Retry-After": String(Math.max(userLimit.retryAfterSec, ipLimit.retryAfterSec)) } });
+  }
+
+  const parsed = studentTutorSchema.safeParse(await req.json());
+  if (!parsed.success) return NextResponse.json({ error: "Invalid request body", issues: parsed.error.flatten().fieldErrors }, { status: 400 });
+  const cleanMessage = parsed.data.message;
+  const tutorMode = parsed.data.mode === "learning-path" ? "LEARNING_PATH" : "DASHBOARD";
+
   const student = await db.studentProfile.findUnique({ where: { userId }, include: { user: true } });
   const memory = await getOrCreateMemory(userId);
   const sessions = await db.testSession.findMany({

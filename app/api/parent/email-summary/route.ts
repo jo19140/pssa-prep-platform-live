@@ -1,16 +1,23 @@
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
+import { z } from "zod";
 import { authOptions } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { sendEmail } from "@/lib/email";
 import { buildParentEmailSummary } from "@/lib/parentEmails";
+
+const parentEmailSummarySchema = z.object({
+  studentId: z.string().min(1).max(128),
+});
 
 export async function POST(req: Request) {
   const session = await getServerSession(authOptions);
   if (!session?.user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   const role = (session.user as any).role;
   if (role !== "PARENT" && role !== "ADMIN") return NextResponse.json({ error: "Forbidden" }, { status: 403 });
-  const { studentId } = await req.json();
+  const parsed = parentEmailSummarySchema.safeParse(await req.json());
+  if (!parsed.success) return NextResponse.json({ error: "Invalid request body", issues: parsed.error.flatten().fieldErrors }, { status: 400 });
+  const { studentId } = parsed.data;
   const parent = await db.parentProfile.findUnique({ where: { userId: (session.user as any).id }, include: { user: true, children: { include: { studentProfile: { include: { user: true } } } } } });
   if (!parent) return NextResponse.json({ error: "Parent profile not found" }, { status: 404 });
   const allowed = parent.children.map((c) => c.studentProfile.userId);

@@ -1,7 +1,12 @@
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
+import { z } from "zod";
 import { authOptions } from "@/lib/auth";
 import { db } from "@/lib/db";
+
+const sessionQuerySchema = z.object({
+  assessmentId: z.string().min(1).max(128).nullable(),
+});
 
 export async function GET(req: Request) {
   const session = await getServerSession(authOptions);
@@ -9,7 +14,9 @@ export async function GET(req: Request) {
   const role = (session.user as any).role;
   if (role !== "STUDENT" && role !== "ADMIN") return NextResponse.json({ error: "Forbidden" }, { status: 403 });
   const { searchParams } = new URL(req.url);
-  let assessmentId = searchParams.get("assessmentId");
+  const parsed = sessionQuerySchema.safeParse({ assessmentId: searchParams.get("assessmentId") });
+  if (!parsed.success) return NextResponse.json({ error: "Invalid request query", issues: parsed.error.flatten().fieldErrors }, { status: 400 });
+  let assessmentId = parsed.data.assessmentId;
   const student = await db.studentProfile.findUnique({ where: { userId: (session.user as any).id }, include: { enrollments: true } });
   if (!student) return NextResponse.json({ error: "Student profile not found" }, { status: 404 });
   const classIds = student.enrollments.map((e) => e.classRoomId);

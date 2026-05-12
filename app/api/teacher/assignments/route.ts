@@ -1,14 +1,27 @@
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
+import { z } from "zod";
 import { authOptions } from "@/lib/auth";
 import { db } from "@/lib/db";
+
+const teacherAssignmentSchema = z.object({
+  classRoomId: z.string().max(128).optional(),
+  grade: z.coerce.number().int().min(3).max(8).optional(),
+  gradeLevel: z.coerce.number().int().min(3).max(8).optional(),
+  standards: z.union([z.array(z.string().trim().max(80)).max(40), z.string().trim().max(4000)]).optional(),
+  title: z.string().trim().max(160).optional(),
+  dueDate: z.string().trim().max(80).optional().nullable(),
+  assignmentType: z.string().trim().max(40).optional(),
+});
 
 export async function POST(req: Request) {
   const session = await getServerSession(authOptions);
   if (!session?.user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   const role = (session.user as any).role;
   if (role !== "TEACHER" && role !== "ADMIN") return NextResponse.json({ error: "Forbidden" }, { status: 403 });
-  const body = await req.json();
+  const parsed = teacherAssignmentSchema.safeParse(await req.json());
+  if (!parsed.success) return NextResponse.json({ error: "Invalid request body", issues: parsed.error.flatten().fieldErrors }, { status: 400 });
+  const body = parsed.data;
 
   const teacher = await db.teacherProfile.findUnique({
     where: { userId: (session.user as any).id },
