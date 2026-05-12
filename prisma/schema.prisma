@@ -369,6 +369,23 @@ model LearningLesson {
   questAttempts        LearningQuestAttempt[]
 }
 
+model LessonCache {
+  id           String   @id @default(cuid())
+  cacheKey     String   @unique
+  gradeLevel   Int
+  standardCode String
+  skill        String
+  commonError  String
+  payload      Json
+  generatedBy  String
+  modelHint    String?
+  createdAt    DateTime @default(now())
+  hitCount     Int      @default(0)
+  lastUsedAt   DateTime @default(now())
+
+  @@index([gradeLevel, standardCode, skill])
+}
+
 model LearningLessonItem {
   id        String         @id @default(cuid())
   lessonId  String

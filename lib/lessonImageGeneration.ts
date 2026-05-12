@@ -1,7 +1,7 @@
 import { createHash } from "crypto";
-import { mkdir, writeFile } from "fs/promises";
-import path from "path";
 import OpenAI from "openai";
+import { put } from "@vercel/blob";
+import { logAiFailure } from "@/lib/aiTelemetry";
 
 type LessonImageInput = {
   title: string;
@@ -44,9 +44,9 @@ export async function generateLessonImageForPayload(input: LessonImageInput): Pr
   const slug = slugify(`${input.gradeLevel}-${input.skill}-${input.title}`);
   const digest = createHash("sha256").update(imagePrompt).digest("hex").slice(0, 10);
   const filename = `${slug}-${digest}.png`;
-  const publicPath = path.join(process.cwd(), "public", "generated", "lesson-images");
-  const filePath = path.join(publicPath, filename);
-  const imageUrl = `/generated/lesson-images/${filename}`;
+  if (!process.env.BLOB_READ_WRITE_TOKEN) {
+    return withImageStatus(sourcePayload, { status: "SKIPPED", reason: "BLOB_READ_WRITE_TOKEN not configured" });
+  }
 
   try {
     const openai = new OpenAI({ apiKey });
@@ -61,8 +61,8 @@ export async function generateLessonImageForPayload(input: LessonImageInput): Pr
     const bytes = await imageBytes(image);
     if (!bytes) throw new Error("Image API returned no usable image bytes.");
 
-    await mkdir(publicPath, { recursive: true });
-    await writeFile(filePath, bytes);
+    const blob = await put(filename, bytes, { access: "public", addRandomSuffix: false });
+    const imageUrl = blob.url;
 
     const nextPayload = mergeImagePayload(sourcePayload, {
       imageUrl,
@@ -72,7 +72,11 @@ export async function generateLessonImageForPayload(input: LessonImageInput): Pr
     });
     return { sourcePayload: nextPayload, imageUrl, generated: true };
   } catch (error) {
-    console.error("Lesson image generation failed:", error);
+    logAiFailure({
+      scope: "lessonImageGeneration.generateLessonImageForPayload",
+      error,
+      context: { gradeLevel: input.gradeLevel, skill: input.skill, title: input.title },
+    });
     return withImageStatus(sourcePayload, {
       status: "FAILED",
       reason: error instanceof Error ? error.message : "Unknown image generation error",

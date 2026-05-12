@@ -1,8 +1,13 @@
+import { createHash } from "crypto";
 import OpenAI from "openai";
+import type { Prisma } from "@prisma/client";
 import type { LearningPathItemInput } from "@/lib/learningPath";
+import { logAiFailure } from "@/lib/aiTelemetry";
+import { db } from "@/lib/db";
 import { attachGeneratedImagesToLessons } from "@/lib/lessonImageGeneration";
 import { evaluateLessonQuality, getLessonQualityBlueprint } from "@/lib/lessonQualityBlueprint";
 import { buildLessonVisualMetadata } from "@/lib/lessonVisuals";
+import { buildPrebuiltLessonSeeds } from "@/lib/prebuiltLessonLibrary";
 
 type ResourceLike = {
   title: string;
@@ -55,7 +60,7 @@ type LessonSectionBuild = {
   order: number;
 };
 
-type PracticeQuestion = {
+export type PracticeQuestion = {
   question: string;
   choices?: string[];
   correctAnswer: string;
@@ -93,8 +98,14 @@ export async function buildLearningLessons({
     return buildFallbackLesson({ gradeLevel, item, relatedResponses, missedResponses, resource });
   });
 
-  if (!process.env.OPENAI_API_KEY || !deterministic.length) {
-    return attachGeneratedImagesToLessons(deterministic.map((lesson) => ({ ...lesson, aiStatus: "SKIPPED" as const })));
+  if (!deterministic.length) return attachGeneratedImagesToLessons(deterministic);
+
+  const cacheHits = await readCachedLessons(deterministic);
+  const lessonsNeedingAi = deterministic.filter((lesson) => !cacheHits.has(lesson.learningPathItemOrder));
+
+  if (!process.env.OPENAI_API_KEY || !lessonsNeedingAi.length) {
+    const lessons = deterministic.map((lesson) => cacheHits.get(lesson.learningPathItemOrder) || { ...lesson, aiStatus: "SKIPPED" as const });
+    return attachGeneratedImagesToLessons(lessons);
   }
 
   try {
@@ -127,7 +138,7 @@ export async function buildLearningLessons({
                 },
               ],
             },
-            lessons: deterministic,
+            lessons: lessonsNeedingAi,
           }),
         },
       ],
@@ -137,32 +148,183 @@ export async function buildLearningLessons({
     const parsed = JSON.parse(raw) as { lessons?: Partial<LearningLessonBuild>[] };
     const byOrder = new Map((parsed.lessons || []).map((lesson) => [lesson.learningPathItemOrder, lesson]));
 
-    const lessons = deterministic.map((lesson) => {
+    const enrichedLessons = await Promise.all(lessonsNeedingAi.map(async (lesson) => {
       const aiLesson = byOrder.get(lesson.learningPathItemOrder);
       if (!aiLesson) return { ...lesson, aiStatus: "FAILED" as const };
       const merged = {
         ...lesson,
         lessonExplanation: safeString(aiLesson.lessonExplanation, lesson.lessonExplanation),
         workedExample: safeString(aiLesson.workedExample, lesson.workedExample),
-        guidedPractice: safePractice(aiLesson.guidedPractice, lesson.guidedPractice),
-        independentPractice: safePractice(aiLesson.independentPractice, lesson.independentPractice),
-        exitTicket: safePractice(aiLesson.exitTicket, lesson.exitTicket),
-        masteryCheck: safePractice(aiLesson.masteryCheck, lesson.masteryCheck),
+        guidedPractice: safePractice(aiLesson.guidedPractice, lesson.guidedPractice, lesson),
+        independentPractice: safePractice(aiLesson.independentPractice, lesson.independentPractice, lesson),
+        exitTicket: safePractice(aiLesson.exitTicket, lesson.exitTicket, lesson),
+        masteryCheck: safePractice(aiLesson.masteryCheck, lesson.masteryCheck, lesson),
         retestRecommendation: safeString(aiLesson.retestRecommendation, lesson.retestRecommendation),
         generatedBy: "AI_ENRICHED" as const,
         aiStatus: "COMPLETED" as const,
       };
-      return withQualityPayload({ ...merged, items: buildLessonSections(merged) });
-    });
+      const withQuality = withQualityPayload({ ...merged, items: buildLessonSections(merged) });
+      const moderated = await moderateLessonContent(openai, withQuality, lesson);
+      await persistLessonCache(moderated);
+      return moderated;
+    }));
+    const byOrderEnriched = new Map(enrichedLessons.map((lesson) => [lesson.learningPathItemOrder, lesson]));
+    const lessons = deterministic.map((lesson) => cacheHits.get(lesson.learningPathItemOrder) || byOrderEnriched.get(lesson.learningPathItemOrder) || { ...lesson, aiStatus: "FAILED" as const });
     return attachGeneratedImagesToLessons(lessons);
   } catch (error) {
-    console.error("Learning lesson AI generation failed:", error);
-    return attachGeneratedImagesToLessons(deterministic.map((lesson) => ({ ...lesson, aiStatus: "FAILED" as const })));
+    logAiFailure({
+      scope: "learningLessons.buildLearningLessons",
+      error,
+      context: { gradeLevel, lessonCount: deterministic.length },
+    });
+    const lessons = deterministic.map((lesson) => cacheHits.get(lesson.learningPathItemOrder) || { ...lesson, aiStatus: "FAILED" as const });
+    return attachGeneratedImagesToLessons(lessons);
   }
 }
 
 export function resourceKey(gradeLevel: number, standardCode: string, skill: string) {
   return `${gradeLevel || 0}:${standardCode}:${skill.toLowerCase()}`;
+}
+
+export function lessonCacheKey(lesson: Pick<LearningLessonBuild, "gradeLevel" | "standardCode" | "skill" | "sourcePayload">) {
+  const commonError = typeof lesson.sourcePayload.commonError === "string" ? lesson.sourcePayload.commonError : "unknown";
+  const librarySource = lesson.sourcePayload.librarySource === true ? "library" : "canned";
+  return createHash("sha256")
+    .update(`gradeLevel:${lesson.gradeLevel}:standardCode:${lesson.standardCode}:skill:${lesson.skill}:commonError:${commonError}:librarySource:${librarySource}`)
+    .digest("hex");
+}
+
+async function readCachedLessons(lessons: LearningLessonBuild[]) {
+  const hits = new Map<number, LearningLessonBuild>();
+  if (process.env.LESSON_CACHE_DISABLED === "true") return hits;
+
+  await Promise.all(
+    lessons.map(async (lesson) => {
+      try {
+        const cacheKey = lessonCacheKey(lesson);
+        const cached = await db.lessonCache.findUnique({ where: { cacheKey } });
+        if (!cached) return;
+
+        const payload = cached.payload as unknown as LearningLessonBuild;
+        hits.set(lesson.learningPathItemOrder, { ...payload, aiStatus: "COMPLETED" });
+        void db.lessonCache
+          .update({
+            where: { cacheKey },
+            data: { hitCount: { increment: 1 }, lastUsedAt: new Date() },
+          })
+          .catch((error) =>
+            logAiFailure({
+              scope: "learningLessons.cacheHitUpdate",
+              error,
+              context: { cacheKey, standardCode: lesson.standardCode, skill: lesson.skill },
+            }),
+          );
+      } catch (error) {
+        logAiFailure({
+          scope: "learningLessons.cacheRead",
+          error,
+          context: { standardCode: lesson.standardCode, skill: lesson.skill },
+        });
+      }
+    }),
+  );
+
+  return hits;
+}
+
+async function persistLessonCache(lesson: LearningLessonBuild) {
+  if (process.env.LESSON_CACHE_DISABLED === "true" || lesson.aiStatus !== "COMPLETED") return;
+
+  const cacheKey = lessonCacheKey(lesson);
+  const commonError = typeof lesson.sourcePayload.commonError === "string" ? lesson.sourcePayload.commonError : "unknown";
+
+  try {
+    await db.lessonCache.upsert({
+      where: { cacheKey },
+      create: {
+        cacheKey,
+        gradeLevel: lesson.gradeLevel,
+        standardCode: lesson.standardCode,
+        skill: lesson.skill,
+        commonError,
+        payload: lesson as unknown as Prisma.InputJsonValue,
+        generatedBy: lesson.generatedBy,
+        modelHint: process.env.OPENAI_LESSON_MODEL || process.env.OPENAI_LEARNING_PATH_MODEL || "gpt-4o-mini",
+      },
+      update: {
+        payload: lesson as unknown as Prisma.InputJsonValue,
+        generatedBy: lesson.generatedBy,
+        modelHint: process.env.OPENAI_LESSON_MODEL || process.env.OPENAI_LEARNING_PATH_MODEL || "gpt-4o-mini",
+        lastUsedAt: new Date(),
+      },
+    });
+  } catch (error) {
+    logAiFailure({
+      scope: "learningLessons.cacheWrite",
+      error,
+      context: { cacheKey, standardCode: lesson.standardCode, skill: lesson.skill },
+    });
+  }
+}
+
+async function moderateLessonContent(openai: OpenAI, lesson: LearningLessonBuild, deterministic: LearningLessonBuild): Promise<LearningLessonBuild> {
+  try {
+    const practiceTexts = [...lesson.guidedPractice, ...lesson.independentPractice, ...lesson.exitTicket, ...lesson.masteryCheck].flatMap((practice) =>
+      [practice.passage, practice.question, practice.explanation].filter(Boolean),
+    );
+    const response = await openai.moderations.create({
+      input: [lesson.lessonExplanation, lesson.workedExample, ...practiceTexts],
+    });
+    if (response.results.some((result) => result.flagged)) {
+      console.warn("AI lesson moderation flagged content", {
+        standardCode: lesson.standardCode,
+        skill: lesson.skill,
+        learningPathItemOrder: lesson.learningPathItemOrder,
+      });
+      return withQualityPayload({
+        ...deterministic,
+        generatedBy: "DETERMINISTIC",
+        aiStatus: "FAILED",
+        items: buildLessonSections(deterministic),
+      });
+    }
+    return lesson;
+  } catch (error) {
+    logAiFailure({
+      scope: "learningLessons.moderation",
+      error,
+      context: { standardCode: lesson.standardCode, skill: lesson.skill },
+    });
+    return withQualityPayload({
+      ...deterministic,
+      generatedBy: "DETERMINISTIC",
+      aiStatus: "FAILED",
+      items: buildLessonSections(deterministic),
+    });
+  }
+}
+
+export function findLibraryScenariosFor({
+  gradeLevel,
+  standardCode,
+  skill,
+}: {
+  gradeLevel: number;
+  standardCode: string;
+  skill: string;
+}): PracticeQuestion[] {
+  const normalizedSkill = normalizeKey(skill);
+  return buildPrebuiltLessonSeeds()
+    .filter((seed) => seed.gradeLevel === gradeLevel && seed.standardCode === standardCode && normalizeKey(seed.skill) === normalizedSkill)
+    .flatMap((seed) => [...seed.guidedPractice, ...seed.independentPractice, ...seed.exitTicket, ...seed.masteryCheck])
+    .map((question) => ({
+      passage: question.passage,
+      question: question.question,
+      choices: question.choices,
+      correctAnswer: question.correctAnswer,
+      explanation: question.explanation,
+      coachHint: question.coachHint,
+    }));
 }
 
 function buildFallbackLesson({
@@ -182,10 +344,12 @@ function buildFallbackLesson({
   const whyAssigned = `This lesson was assigned because your score showed that ${item.skill} needs more practice for ${item.standardCode}.`;
   const lessonExplanation = explanationForSkill(item.skill, gradeLevel);
   const workedExample = workedExampleForSkill(item.skill, gradeLevel);
-  const guidedPractice = buildPractice(item.skill, "guided", gradeLevel, gradeLevel >= 6 ? 4 : 3);
-  const independentPractice = buildPractice(item.skill, "independent", gradeLevel, gradeLevel >= 6 ? 5 : 4);
-  const exitTicket = buildPractice(item.skill, "exit ticket", gradeLevel, 1);
-  const masteryCheck = buildPractice(item.skill, "mastery check", gradeLevel, gradeLevel >= 6 ? 3 : 2);
+  const libraryScenarios = findLibraryScenariosFor({ gradeLevel, standardCode: item.standardCode, skill: item.skill });
+  const librarySource = libraryScenarios.length > 0;
+  const guidedPractice = buildPractice(item.skill, "guided", gradeLevel, gradeLevel >= 6 ? 4 : 3, libraryScenarios);
+  const independentPractice = buildPractice(item.skill, "independent", gradeLevel, gradeLevel >= 6 ? 5 : 4, libraryScenarios);
+  const exitTicket = buildPractice(item.skill, "exit ticket", gradeLevel, 1, libraryScenarios);
+  const masteryCheck = buildPractice(item.skill, "mastery check", gradeLevel, gradeLevel >= 6 ? 3 : 2, libraryScenarios);
   const retestRecommendation = `After completing this lesson and scoring at least 80% on the mastery check, retake a short ${item.standardCode} practice set with ${weakFormat} items.`;
   const lesson = {
     learningPathItemOrder: item.order,
@@ -216,6 +380,8 @@ function buildFallbackLesson({
       relatedQuestionCount: relatedResponses.length,
       missedQuestionCount: missedResponses.length,
       weakFormat,
+      commonError: item.sourcePayload.commonError,
+      librarySource,
     },
   };
   return withQualityPayload({ ...lesson, items: buildLessonSections(lesson) });
@@ -333,10 +499,12 @@ function workedExampleForSkill(skill: string, gradeLevel: number) {
   return `Question: What is the main idea of the section? Worked answer: First ask, "What are most sentences about?" Then choose the answer that covers all key details, not just one fact.`;
 }
 
-function buildPractice(skill: string, mode: string, gradeLevel: number, count: number): PracticeQuestion[] {
-  const scenarios = practiceScenarios(skill, gradeLevel);
+function buildPractice(skill: string, mode: string, gradeLevel: number, count: number, libraryScenarios: PracticeQuestion[] = []): PracticeQuestion[] {
+  const cannedScenarios = practiceScenarios(skill, gradeLevel);
+  const librarySample = sampleWithoutReplacement(libraryScenarios, count, `${gradeLevel}:${skill}:${mode}`);
+  const scenarios = [...librarySample, ...repeatToCount(cannedScenarios, Math.max(0, count - librarySample.length))];
   return Array.from({ length: count }, (_, index) => {
-    const scenario = scenarios[index % scenarios.length];
+    const scenario = scenarios[index] || cannedScenarios[index % cannedScenarios.length];
     const modePrefix = mode === "guided" ? "Use the coach hint, then choose the strongest answer." : mode === "mastery check" ? "Choose independently." : "Choose the best answer.";
     return {
       passage: scenario.passage,
@@ -347,6 +515,17 @@ function buildPractice(skill: string, mode: string, gradeLevel: number, count: n
       coachHint: scenario.coachHint,
     };
   });
+}
+
+function sampleWithoutReplacement<T>(items: T[], count: number, seed: string): T[] {
+  if (!items.length || count <= 0) return [];
+  const offset = parseInt(createHash("sha256").update(seed).digest("hex").slice(0, 8), 16) % items.length;
+  return [...items.slice(offset), ...items.slice(0, offset)].slice(0, count);
+}
+
+function repeatToCount<T>(items: T[], count: number): T[] {
+  if (!items.length || count <= 0) return [];
+  return Array.from({ length: count }, (_, index) => items[index % items.length]);
 }
 
 function practiceScenarios(skill: string, gradeLevel: number): PracticeQuestion[] {
@@ -479,18 +658,40 @@ function safeString(value: unknown, fallback: string) {
   return typeof value === "string" && value.trim().length > 20 ? value : fallback;
 }
 
-function safePractice(value: unknown, fallback: PracticeQuestion[]) {
+function safePractice(value: unknown, fallback: PracticeQuestion[], context: { standardCode: string; skill: string }) {
   if (!Array.isArray(value) || !value.length) return fallback;
-  return value
+  const filtered = value
     .filter((item) => item && typeof item.question === "string" && typeof item.correctAnswer === "string")
-    .map((item) => ({
-      question: String(item.question),
-      choices: Array.isArray(item.choices) ? item.choices.map(String) : undefined,
-      correctAnswer: String(item.correctAnswer),
-      explanation: typeof item.explanation === "string" ? item.explanation : "Review the explanation and cite evidence from the text.",
-      passage: typeof item.passage === "string" ? item.passage : undefined,
-      coachHint: typeof item.coachHint === "string" ? item.coachHint : undefined,
-    }));
+    .map((item) => {
+      const choices = Array.isArray(item.choices) ? item.choices.map(String) : [];
+      return {
+        question: String(item.question),
+        choices,
+        correctAnswer: String(item.correctAnswer),
+        explanation: typeof item.explanation === "string" ? item.explanation : "Review the explanation and cite evidence from the text.",
+        passage: typeof item.passage === "string" ? item.passage : undefined,
+        coachHint: typeof item.coachHint === "string" ? item.coachHint : undefined,
+      };
+    })
+    .filter((item) => {
+      const normalizedAnswer = normalizeKey(item.correctAnswer);
+      const valid =
+        item.question.trim().length >= 10 &&
+        item.explanation.trim().length >= 20 &&
+        item.choices.length >= 2 &&
+        item.choices.some((choice) => normalizeKey(choice) === normalizedAnswer);
+      if (!valid) {
+        console.warn("Dropped invalid AI practice question", {
+          standardCode: context.standardCode,
+          skill: context.skill,
+          questionLength: item.question.trim().length,
+          explanationLength: item.explanation.trim().length,
+          choiceCount: item.choices.length,
+        });
+      }
+      return valid;
+    });
+  return filtered.length ? filtered : fallback;
 }
 
 function domainFromStandard(standardCode: string) {
@@ -498,4 +699,8 @@ function domainFromStandard(standardCode: string) {
   if (standardCode.includes("CC.1.3.")) return "Literary Text";
   if (standardCode.includes("CC.1.2.")) return "Informational Text";
   return "Reading";
+}
+
+function normalizeKey(value: string) {
+  return value.trim().toLowerCase();
 }

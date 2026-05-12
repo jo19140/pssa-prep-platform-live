@@ -1,4 +1,5 @@
 import OpenAI from "openai";
+import { logAiFailure } from "@/lib/aiTelemetry";
 import { getPerformanceBand } from "@/lib/performance";
 
 export type EssayGradeResult = {
@@ -50,7 +51,7 @@ export async function gradeTdaEssay({
     });
     const parsed = JSON.parse(response.choices[0]?.message?.content || "{}");
     const score = clampScore(parsed.score);
-    return {
+    const result: EssayGradeResult = {
       score,
       maxScore: 4,
       performanceBand: normalizePerformanceLevel(parsed.performance_level || parsed.performanceBand || parsed.performanceLevel, score),
@@ -61,8 +62,20 @@ export async function gradeTdaEssay({
       rubricBreakdown: typeof parsed.rubricBreakdown === "object" && parsed.rubricBreakdown ? parsed.rubricBreakdown : fallbackRubric(score),
       gradingProvider: "OPENAI",
     };
+    const moderation = await openai.moderations.create({
+      input: [result.feedback, ...result.nextSteps],
+    });
+    if (moderation.results.some((item) => item.flagged)) {
+      console.warn("TDA essay grading moderation flagged AI feedback", { gradeLevel });
+      return gradeTdaEssayDeterministically({ essay, prompt, gradeLevel, rubric });
+    }
+    return result;
   } catch (error) {
-    console.error("TDA essay grading failed:", error);
+    logAiFailure({
+      scope: "essayGrader.gradeTdaEssay",
+      error,
+      context: { gradeLevel, essayLength: essay.length, promptLength: prompt.length },
+    });
     return gradeTdaEssayDeterministically({ essay, prompt, gradeLevel, rubric });
   }
 }

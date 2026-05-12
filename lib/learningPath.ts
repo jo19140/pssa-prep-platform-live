@@ -1,4 +1,5 @@
 import OpenAI from "openai";
+import { logAiFailure } from "@/lib/aiTelemetry";
 
 type MasteryRow = {
   standardCode: string;
@@ -179,7 +180,11 @@ export async function enrichLearningPathWithAi({
       })),
     };
   } catch (error) {
-    console.error("Learning path AI enrichment failed:", error);
+    logAiFailure({
+      scope: "learningPath.enrichLearningPathWithAi",
+      error,
+      context: { studentName, assessmentTitle, itemCount: deterministicPath.items.length },
+    });
     return { ...deterministicPath, aiStatus: "FAILED" };
   }
 }
