@@ -108,11 +108,22 @@ function TeacherArtifacts({ artifacts }: { artifacts: any }) {
   );
 }
 
-function List({ title, items }: { title: string; items: string[] }) {
+function List({ title, items }: { title: string; items: any[] }) {
   return (
     <div>
       <p className="text-sm font-semibold text-slate-900">{title}</p>
-      <ul className="mt-1 list-disc pl-5 text-sm text-slate-700">{items.map((item) => <li key={item}>{item}</li>)}</ul>
+      <ul className="mt-1 list-disc pl-5 text-sm text-slate-700">{items.map((item, index) => <li key={feedbackKey(item, index)}>{formatFeedbackItem(item)}</li>)}</ul>
     </div>
   );
+}
+
+function formatFeedbackItem(item: any) {
+  if (typeof item === "string") return item;
+  if (item?.claim) return item.evidence_quote ? `${item.claim} Quote: "${item.evidence_quote}"` : item.claim;
+  return String(item || "");
+}
+
+function feedbackKey(item: any, index: number) {
+  if (typeof item === "string") return item;
+  return `${item?.claim || "feedback"}-${index}`;
 }

@@ -183,7 +183,7 @@ export function StudentTest({
   async function submitTda() {
     const q = currentQuestion as TdaQuestion;
     if (essayResponse.trim().length < 10) return;
-    await safeSubmit({ isCorrect: false, scorePointsEarned: 0, maxPoints: q.maxScore || 4, errorPattern: "pending_tda_grading", answerPayload: { essay: essayResponse.trim(), prompt: q.prompt, rubric: q.rubric, gradeLevel: q.gradeLevel || 6 } });
+    await safeSubmit({ isCorrect: false, scorePointsEarned: 0, maxPoints: q.maxScore || 4, errorPattern: "pending_tda_grading", answerPayload: { essay: essayResponse.trim(), prompt: q.prompt, passage: q.passage || "", rubric: q.rubric, gradeLevel: q.gradeLevel || 6 } });
   }
 
   async function submitShortResponse() {

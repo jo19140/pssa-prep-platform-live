@@ -182,7 +182,14 @@ function hasWeakEvidence(evaluation: any, essay: string) {
 }
 
 function asStringArray(value: unknown) {
-  return Array.isArray(value) ? value.filter((item) => typeof item === "string") : [];
+  if (!Array.isArray(value)) return [];
+  return value
+    .map((item) => {
+      if (typeof item === "string") return item;
+      if (item && typeof item === "object" && typeof (item as any).claim === "string") return (item as any).claim;
+      return "";
+    })
+    .filter(Boolean);
 }
 
 function scoreToBand(score: number) {

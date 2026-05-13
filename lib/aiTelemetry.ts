@@ -9,6 +9,14 @@ type AiFailureLog = {
 const counters = new Map<string, number>();
 const lastFailures: AiFailureLog[] = [];
 const MAX_FAILURES = 50;
+const globalTelemetry = globalThis as typeof globalThis & {
+  __aiFailureCounters?: Map<string, number>;
+  __aiLastFailures?: AiFailureLog[];
+};
+const sharedCounters = globalTelemetry.__aiFailureCounters || counters;
+const sharedLastFailures = globalTelemetry.__aiLastFailures || lastFailures;
+globalTelemetry.__aiFailureCounters = sharedCounters;
+globalTelemetry.__aiLastFailures = sharedLastFailures;
 
 export function logAiFailure({
   scope,
@@ -28,17 +36,17 @@ export function logAiFailure({
     timestamp: new Date().toISOString(),
   };
 
-  counters.set(scope, (counters.get(scope) || 0) + 1);
-  lastFailures.unshift(entry);
-  if (lastFailures.length > MAX_FAILURES) lastFailures.length = MAX_FAILURES;
+  sharedCounters.set(scope, (sharedCounters.get(scope) || 0) + 1);
+  sharedLastFailures.unshift(entry);
+  if (sharedLastFailures.length > MAX_FAILURES) sharedLastFailures.length = MAX_FAILURES;
 
   console.error(JSON.stringify(entry));
 }
 
 export function getAiFailureCounters() {
-  return Object.fromEntries(counters.entries());
+  return Object.fromEntries(sharedCounters.entries());
 }
 
 export function getLastAiFailures() {
-  return [...lastFailures];
+  return [...sharedLastFailures];
 }

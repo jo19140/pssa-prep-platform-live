@@ -1,31 +1,56 @@
 import OpenAI from "openai";
 import { logAiFailure } from "@/lib/aiTelemetry";
 import { getPerformanceBand } from "@/lib/performance";
+import { pssaTdaExemplars } from "@/lib/pssaTdaExemplars";
+
+export type EssayFeedbackItem = {
+  claim: string;
+  evidence_quote: string;
+};
+
+export type EssayValidity =
+  | { valid: true }
+  | { valid: false; reason: "TOO_SHORT" | "BLANK_OR_PLACEHOLDER" | "MOSTLY_COPIED" | "OFF_TOPIC"; deterministicScore: 1 };
 
 export type EssayGradeResult = {
   score: number;
   maxScore: number;
   performanceBand: string;
-  strengths: string[];
-  areasForGrowth: string[];
+  scoringRationale: string;
+  strengths: EssayFeedbackItem[];
+  areasForGrowth: EssayFeedbackItem[];
   feedback: string;
   nextSteps: string[];
-  rubricBreakdown: Record<string, number | string>;
-  gradingProvider: "OPENAI" | "DETERMINISTIC";
+  rubricBreakdown: Record<string, unknown>;
+  gradingProvider: "OPENAI" | "DETERMINISTIC" | "VALIDITY_GATE";
+  validity?: EssayValidity;
 };
+
+const PLACEHOLDERS = new Set(["test", "asdf", "n/a", "na", "none", "nothing", "idk", "i don't know", "dont know", "no answer", "blank"]);
+const STOPWORDS = new Set([
+  "a", "an", "and", "are", "as", "at", "be", "because", "but", "by", "can", "did", "do", "does", "for", "from", "had", "has", "have", "he", "her", "his", "how", "i", "in", "is", "it", "its", "of", "on", "or", "she", "so", "that", "the", "their", "them", "then", "there", "they", "this", "to", "use", "was", "were", "what", "when", "where", "which", "who", "why", "with", "write", "you", "your",
+]);
 
 export async function gradeTdaEssay({
   essay,
   prompt,
   gradeLevel,
   rubric,
+  passage = "",
 }: {
   essay: string;
   prompt: string;
   gradeLevel: number;
   rubric: string;
+  passage?: string;
 }): Promise<EssayGradeResult> {
-  if (!process.env.OPENAI_API_KEY) return gradeTdaEssayDeterministically({ essay, prompt, gradeLevel, rubric });
+  const validity = assessEssayValidity({ essay, prompt, passage });
+  if (validity.valid === false) return validityGateResult({ essay, prompt, gradeLevel, rubric, validity });
+
+  if (!process.env.OPENAI_API_KEY) {
+    logAiFailure({ scope: "essayGrader.missing_api_key", error: new Error("OPENAI_API_KEY is not configured"), context: { gradeLevel, essayLength: essay.length } });
+    return gradeTdaEssayDeterministically({ essay, prompt, gradeLevel, rubric });
+  }
 
   try {
     const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
@@ -33,20 +58,12 @@ export async function gradeTdaEssay({
       model: process.env.OPENAI_LEARNING_PATH_MODEL || "gpt-4o-mini",
       response_format: { type: "json_object" },
       messages: [
-        {
-          role: "system",
-          content: [
-            "You are grading a Pennsylvania PSSA Text-Dependent Analysis essay.",
-            "Grade the student response using a PSSA-style 1-4 TDA rubric.",
-            "Evaluate analysis of the text, use of evidence, explanation of evidence, organization, and language/conventions.",
-            "Return only valid JSON in this exact shape:",
-            '{"score":1,"performance_level":"Below Basic | Basic | Proficient | Advanced","strengths":["..."],"areas_for_growth":["..."],"feedback":"student-friendly paragraph","next_steps":["specific actionable steps"]}',
-          ].join(" "),
-        },
-        {
-          role: "user",
-          content: JSON.stringify({ student_response: essay, tda_prompt: prompt, grade_level: gradeLevel, rubric, score_scale: "1-4" }),
-        },
+        { role: "system", content: buildSystemPrompt() },
+        ...pssaTdaExemplars.flatMap((example) => [
+          { role: "user" as const, content: JSON.stringify({ student_response: example.essay, tda_prompt: example.prompt, passage: example.passage, grade_level: 6 }) },
+          { role: "assistant" as const, content: JSON.stringify(example.expectedOutput) },
+        ]),
+        { role: "user", content: JSON.stringify({ student_response: essay, tda_prompt: prompt, passage, grade_level: gradeLevel, score_scale: "1-4" }) },
       ],
     });
     const parsed = JSON.parse(response.choices[0]?.message?.content || "{}");
@@ -55,15 +72,17 @@ export async function gradeTdaEssay({
       score,
       maxScore: 4,
       performanceBand: normalizePerformanceLevel(parsed.performance_level || parsed.performanceBand || parsed.performanceLevel, score),
-      strengths: normalizeStringArray(parsed.strengths, ["The response addresses the prompt."]),
-      areasForGrowth: normalizeStringArray(parsed.areas_for_growth || parsed.areasForGrowth, ["Add more text evidence and explanation."]),
+      scoringRationale: typeof parsed.scoring_rationale === "string" ? parsed.scoring_rationale : "The score is based on PSSA TDA analysis, evidence, explanation, organization, and conventions.",
+      strengths: normalizeFeedbackItems(parsed.strengths, [], essay, "strength"),
+      areasForGrowth: normalizeFeedbackItems(parsed.areas_for_growth || parsed.areasForGrowth, [{ claim: "Add more text evidence and explanation.", evidence_quote: "" }], essay, "growth"),
       feedback: typeof parsed.feedback === "string" ? parsed.feedback : "Your response was reviewed for analysis, evidence, organization, and conventions.",
       nextSteps: normalizeStringArray(parsed.next_steps || parsed.nextSteps, ["Revise by adding one quoted or paraphrased detail from the passage."]),
       rubricBreakdown: typeof parsed.rubricBreakdown === "object" && parsed.rubricBreakdown ? parsed.rubricBreakdown : fallbackRubric(score),
       gradingProvider: "OPENAI",
+      validity,
     };
     const moderation = await openai.moderations.create({
-      input: [result.feedback, ...result.nextSteps],
+      input: [result.feedback, result.scoringRationale, ...result.nextSteps],
     });
     if (moderation.results.some((item) => item.flagged)) {
       console.warn("TDA essay grading moderation flagged AI feedback", { gradeLevel });
@@ -78,6 +97,25 @@ export async function gradeTdaEssay({
     });
     return gradeTdaEssayDeterministically({ essay, prompt, gradeLevel, rubric });
   }
+}
+
+export function assessEssayValidity({ essay, prompt, passage }: { essay: string; prompt: string; passage?: string }): EssayValidity {
+  const trimmed = essay.trim();
+  const normalized = normalizeWhitespace(trimmed).toLowerCase();
+  if (!trimmed || PLACEHOLDERS.has(normalized)) return { valid: false, reason: "BLANK_OR_PLACEHOLDER", deterministicScore: 1 };
+
+  const words = tokenizeWords(trimmed);
+  if (words.length < 30) return { valid: false, reason: "TOO_SHORT", deterministicScore: 1 };
+
+  if (passage && isMostlyCopied(words, tokenizeWords(passage))) return { valid: false, reason: "MOSTLY_COPIED", deterministicScore: 1 };
+
+  const essayContentWords = new Set(contentWords(trimmed));
+  const sourceContentWords = new Set([...contentWords(prompt), ...contentWords(passage || "")]);
+  let overlap = 0;
+  for (const word of essayContentWords) if (sourceContentWords.has(word)) overlap++;
+  if (overlap < 3 && words.length < 80) return { valid: false, reason: "OFF_TOPIC", deterministicScore: 1 };
+
+  return { valid: true };
 }
 
 export function gradeTdaEssayDeterministically({
@@ -104,13 +142,108 @@ export function gradeTdaEssayDeterministically({
     score,
     maxScore: 4,
     performanceBand: getPerformanceBand(scoreToPercent(score)),
-    strengths: score >= 2 ? ["The response gives a complete answer to the prompt.", "The writing includes some evidence-focused language."] : ["The response begins to address the prompt."],
-    areasForGrowth: score >= 3 ? ["Explain how each piece of evidence proves the claim."] : ["Add more passage evidence.", "Organize the response with a clear beginning, middle, and ending."],
+    scoringRationale: "This fallback score is based on response length, evidence language, organization markers, and answer completeness.",
+    strengths: score >= 2 ? [{ claim: "The response gives a complete answer to the prompt.", evidence_quote: "" }, { claim: "The writing includes some evidence-focused language.", evidence_quote: "" }] : [{ claim: "The response begins to address the prompt.", evidence_quote: "" }],
+    areasForGrowth: score >= 3 ? [{ claim: "Explain how each piece of evidence proves the claim.", evidence_quote: "" }] : [{ claim: "Add more passage evidence.", evidence_quote: "" }, { claim: "Organize the response with a clear beginning, middle, and ending.", evidence_quote: "" }],
     feedback: "This fallback score is based on response length, evidence language, organization markers, and answer completeness.",
     nextSteps: ["Add one clear claim sentence.", "Use at least two details from the passage.", "Explain how each detail supports the claim."],
     rubricBreakdown: fallbackRubric(score),
     gradingProvider: "DETERMINISTIC",
   };
+}
+
+function validityGateResult({ essay, prompt, gradeLevel, rubric, validity }: { essay: string; prompt: string; gradeLevel: number; rubric: string; validity: Exclude<EssayValidity, { valid: true }> }): EssayGradeResult {
+  logAiFailure({ scope: `essayGrader.validity_gate_${validity.reason}`, error: new Error(`Essay rejected by validity gate: ${validity.reason}`), context: { gradeLevel, essayLength: essay.length, promptLength: prompt.length } });
+  const reasonText = validity.reason === "TOO_SHORT"
+    ? "too short"
+    : validity.reason === "BLANK_OR_PLACEHOLDER"
+      ? "blank or a placeholder"
+      : validity.reason === "MOSTLY_COPIED"
+        ? "mostly copied from the passage"
+        : "off-topic";
+  const feedback = `Your response was ${reasonText}. A strong PSSA TDA essay analyzes the text in your own words, cites at least two specific pieces of evidence, and explains how that evidence supports your claim.`;
+  return {
+    score: validity.deterministicScore,
+    maxScore: 4,
+    performanceBand: getPerformanceBand(scoreToPercent(validity.deterministicScore)),
+    scoringRationale: `The response was scored 1 because it was ${reasonText} and did not meet the basic requirements for analytical TDA writing.`,
+    strengths: [],
+    areasForGrowth: [{ claim: feedback, evidence_quote: "" }],
+    feedback,
+    nextSteps: ["Write a clear claim that answers the prompt.", "Use your own words instead of copying the passage.", "Add at least two text details and explain how they support the claim."],
+    rubricBreakdown: fallbackRubric(validity.deterministicScore),
+    gradingProvider: "VALIDITY_GATE",
+    validity,
+  };
+}
+
+function buildSystemPrompt() {
+  return [
+    "You are grading a Pennsylvania PSSA Text-Dependent Analysis essay. Return only valid JSON.",
+    "PSSA rubric criteria inline:",
+    "Score 4: Effectively addresses all parts of the task, demonstrates thorough analysis of explicit and implicit meanings from the text, uses substantial relevant text evidence, skillfully explains how evidence supports ideas, and is well organized with clear language and command of conventions.",
+    "Score 3: Adequately addresses the task, demonstrates clear analysis of explicit or implicit meanings, uses relevant text evidence, explains evidence, and is organized with generally clear language and adequate command of conventions.",
+    "Score 2: Partially addresses the task, demonstrates inconsistent or limited analysis, uses some evidence that may be vague or weakly connected, gives limited explanation, and has uneven organization or language control.",
+    "Score 1: Minimally addresses the task or shows little/no analysis, uses minimal, copied, or irrelevant evidence, provides little explanation, and may have weak organization or language control.",
+    "Anti-hallucination clause: You must only cite strengths and weaknesses that are directly demonstrated in the student's response. For every strength and every area of growth, you must quote the exact phrase from the student's essay that supports it. If you cannot find a quote that demonstrates the claim, do not include the item. Never invent analysis the student did not write. Generic feedback unsupported by quoted evidence will be discarded.",
+    "Validity recheck: Before scoring, verify the response is a genuine attempt at analytical writing. If the response is mostly copied passage text, restates the prompt without analysis, or fails to make an argument about the text, assign a score of 1 and explicitly name the missing requirement. Do not score generously to be encouraging; a fair low score is more useful to the student than an inflated one.",
+    "Score calibration: 1 = limited or no analysis, 2 = emerging analysis with little or unconnected evidence, 3 = clear analysis supported by evidence and explanation, 4 = insightful analysis with thorough explanation and strong organization.",
+    'Return JSON in this shape: {"score":1,"scoring_rationale":"1-2 sentences tying the score to specific rubric criteria","performance_level":"Below Basic | Basic | Proficient | Advanced","strengths":[{"claim":"...","evidence_quote":"exact verbatim quote from student essay"}],"areas_for_growth":[{"claim":"...","evidence_quote":"exact quote from student essay, or empty string if structurally absent"}],"feedback":"warm student-friendly paragraph","next_steps":["specific actionable steps"]}',
+  ].join("\n\n");
+}
+
+function isMostlyCopied(essayWords: string[], passageWords: string[]) {
+  if (essayWords.length < 5 || passageWords.length < 5) return false;
+  const passageNgrams = new Set<string>();
+  for (let index = 0; index <= passageWords.length - 5; index++) {
+    passageNgrams.add(passageWords.slice(index, index + 5).join(" "));
+  }
+  const copiedPositions = new Set<number>();
+  for (let index = 0; index <= essayWords.length - 5; index++) {
+    if (passageNgrams.has(essayWords.slice(index, index + 5).join(" "))) {
+      for (let offset = 0; offset < 5; offset++) copiedPositions.add(index + offset);
+    }
+  }
+  return copiedPositions.size / Math.max(1, essayWords.length) >= 0.7;
+}
+
+function quoteAppearsInEssay(quote: string, essay: string) {
+  return normalizeWhitespace(essay).toLowerCase().includes(normalizeWhitespace(quote).toLowerCase());
+}
+
+function normalizeFeedbackItems(value: unknown, fallback: EssayFeedbackItem[], essay: string, kind: "strength" | "growth") {
+  if (!Array.isArray(value)) return fallback;
+  const items: EssayFeedbackItem[] = [];
+  for (const item of value.slice(0, 4)) {
+    const normalized = typeof item === "string"
+      ? { claim: item, evidence_quote: "" }
+      : item && typeof item === "object"
+        ? { claim: String((item as any).claim || ""), evidence_quote: String((item as any).evidence_quote || (item as any).evidenceQuote || "") }
+        : null;
+    if (!normalized?.claim) continue;
+    if (normalized.evidence_quote && !quoteAppearsInEssay(normalized.evidence_quote, essay)) {
+      logAiFailure({ scope: "essayGrader.hallucination_dropped", error: new Error("Quote not found in essay"), context: { claim: normalized.claim, quote: normalized.evidence_quote, kind } });
+      continue;
+    }
+    items.push(normalized);
+  }
+  return items.length ? items : fallback;
+}
+
+function normalizeStringArray(value: unknown, fallback: string[]) {
+  return Array.isArray(value) ? value.filter((item) => typeof item === "string").slice(0, 4) : fallback;
+}
+
+function contentWords(value: string) {
+  return tokenizeWords(value).filter((word) => word.length > 2 && !STOPWORDS.has(word));
+}
+
+function tokenizeWords(value: string) {
+  return value.toLowerCase().match(/[a-z0-9']+/g) || [];
+}
+
+function normalizeWhitespace(value: string) {
+  return value.trim().replace(/\s+/g, " ");
 }
 
 function scoreToPercent(score: number) {
@@ -125,10 +258,6 @@ function normalizePerformanceLevel(value: unknown, score: number) {
   const text = typeof value === "string" ? value : "";
   if (["Below Basic", "Basic", "Proficient", "Advanced"].includes(text)) return text;
   return getPerformanceBand(scoreToPercent(score));
-}
-
-function normalizeStringArray(value: unknown, fallback: string[]) {
-  return Array.isArray(value) ? value.filter((item) => typeof item === "string").slice(0, 4) : fallback;
 }
 
 function fallbackRubric(score: number) {

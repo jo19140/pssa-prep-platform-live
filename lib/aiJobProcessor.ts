@@ -60,6 +60,7 @@ async function processEssayGradingJob(sessionId: string, responseRecordId: strin
   const essayGrade = await gradeTdaEssay({
     essay: String(payload?.essay || ""),
     prompt: String(payload?.prompt || ""),
+    passage: String(payload?.passage || ""),
     gradeLevel: Number(payload?.gradeLevel || response.session.assessment.grade || 6),
     rubric: String(payload?.rubric || ""),
   });
@@ -182,7 +183,7 @@ function essayEvaluationData(essayGrade: Awaited<ReturnType<typeof gradeTdaEssay
     areasForGrowth: essayGrade.areasForGrowth as Prisma.InputJsonValue,
     feedback: essayGrade.feedback,
     nextSteps: essayGrade.nextSteps as Prisma.InputJsonValue,
-    rubricBreakdown: essayGrade.rubricBreakdown as Prisma.InputJsonValue,
+    rubricBreakdown: { ...essayGrade.rubricBreakdown, scoringRationale: essayGrade.scoringRationale } as Prisma.InputJsonValue,
     gradingProvider: essayGrade.gradingProvider,
   };
 }

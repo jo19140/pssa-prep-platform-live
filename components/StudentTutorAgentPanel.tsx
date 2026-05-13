@@ -480,11 +480,11 @@ function TutorArtifacts({ artifacts, latestIntent, latestMessage }: { artifacts:
           <div className="mt-3 grid gap-3 md:grid-cols-2">
             <div>
               <p className="text-sm font-semibold text-slate-900">Strengths</p>
-              <ul className="mt-1 list-disc pl-5 text-sm text-slate-700">{(tdaFeedback.strengths || []).map((item: string) => <li key={item}>{item}</li>)}</ul>
+              <ul className="mt-1 list-disc pl-5 text-sm text-slate-700">{(tdaFeedback.strengths || []).map((item: any, index: number) => <li key={feedbackKey(item, index)}>{formatFeedbackItem(item)}</li>)}</ul>
             </div>
             <div>
               <p className="text-sm font-semibold text-slate-900">Areas for Growth</p>
-              <ul className="mt-1 list-disc pl-5 text-sm text-slate-700">{(tdaFeedback.areasForGrowth || []).map((item: string) => <li key={item}>{item}</li>)}</ul>
+              <ul className="mt-1 list-disc pl-5 text-sm text-slate-700">{(tdaFeedback.areasForGrowth || []).map((item: any, index: number) => <li key={feedbackKey(item, index)}>{formatFeedbackItem(item)}</li>)}</ul>
             </div>
           </div>
         </article>
@@ -524,4 +524,15 @@ function TutorArtifacts({ artifacts, latestIntent, latestMessage }: { artifacts:
       ) : null}
     </div>
   );
+}
+
+function formatFeedbackItem(item: any) {
+  if (typeof item === "string") return item;
+  if (item?.claim) return item.evidence_quote ? `${item.claim} Quote: "${item.evidence_quote}"` : item.claim;
+  return String(item || "");
+}
+
+function feedbackKey(item: any, index: number) {
+  if (typeof item === "string") return item;
+  return `${item?.claim || "feedback"}-${index}`;
 }

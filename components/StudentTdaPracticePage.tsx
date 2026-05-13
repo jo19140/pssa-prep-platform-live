@@ -164,17 +164,28 @@ export function StudentTdaPracticePage({ onBack }: { onBack: () => void }) {
   );
 }
 
-function FeedbackList({ title, items }: { title: string; items: string[] }) {
+function FeedbackList({ title, items }: { title: string; items: any[] }) {
   return (
     <article className="rounded-2xl bg-slate-50 p-4 ring-1 ring-slate-200">
       <h4 className="font-bold text-slate-900">{title}</h4>
       {items.length ? (
         <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-slate-700">
-          {items.map((item) => <li key={item}>{item}</li>)}
+          {items.map((item, index) => <li key={feedbackKey(item, index)}>{formatFeedbackItem(item)}</li>)}
         </ul>
       ) : (
         <p className="mt-2 text-sm text-slate-600">The coach will add notes here after reading your draft.</p>
       )}
     </article>
   );
+}
+
+function formatFeedbackItem(item: any) {
+  if (typeof item === "string") return item;
+  if (item?.claim) return item.evidence_quote ? `${item.claim} Quote: "${item.evidence_quote}"` : item.claim;
+  return String(item || "");
+}
+
+function feedbackKey(item: any, index: number) {
+  if (typeof item === "string") return item;
+  return `${item?.claim || "feedback"}-${index}`;
 }
