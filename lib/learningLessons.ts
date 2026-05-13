@@ -218,6 +218,7 @@ async function readCachedLessons(lessons: LearningLessonBuild[]) {
         const cacheKey = lessonCacheKey(lesson);
         const cached = await db.lessonCache.findUnique({ where: { cacheKey } });
         if (!cached) return;
+        if (cached.reviewStatus !== "APPROVED") return;
 
         const payload = cached.payload as unknown as LearningLessonBuild;
         hits.set(lesson.learningPathItemOrder, { ...payload, aiStatus: "COMPLETED" });
@@ -253,7 +254,7 @@ async function persistLessonCache(lesson: LearningLessonBuild) {
   const commonError = typeof lesson.sourcePayload.commonError === "string" ? lesson.sourcePayload.commonError : "unknown";
 
   try {
-    await db.lessonCache.upsert({
+    const cached = await db.lessonCache.upsert({
       where: { cacheKey },
       create: {
         cacheKey,
@@ -272,6 +273,27 @@ async function persistLessonCache(lesson: LearningLessonBuild) {
         lastUsedAt: new Date(),
       },
     });
+    if (cached.reviewStatus === "PENDING_REVIEW") {
+      const existingReview = await db.lessonReview.findFirst({ where: { lessonCacheId: cached.id, status: "PENDING" }, select: { id: true } });
+      if (existingReview) {
+        await db.lessonReview.update({
+          where: { id: existingReview.id },
+          data: {
+            aiOriginalContent: lesson as unknown as Prisma.InputJsonValue,
+            currentContent: lesson as unknown as Prisma.InputJsonValue,
+          },
+        });
+      } else {
+        await db.lessonReview.create({
+          data: {
+            lessonCacheId: cached.id,
+            status: "PENDING",
+            aiOriginalContent: lesson as unknown as Prisma.InputJsonValue,
+            currentContent: lesson as unknown as Prisma.InputJsonValue,
+          },
+        });
+      }
+    }
   } catch (error) {
     logAiFailure({
       scope: "learningLessons.cacheWrite",
@@ -341,7 +363,7 @@ export function findLibraryScenariosFor({
     }));
 }
 
-function buildFallbackLesson({
+export function buildFallbackLesson({
   gradeLevel,
   item,
   relatedResponses,

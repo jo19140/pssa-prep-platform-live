@@ -1,6 +1,6 @@
 import { Prisma } from "@prisma/client";
 import type { LearningPathItemInput } from "@/lib/learningPath";
-import type { LearningLessonBuild } from "@/lib/learningLessons";
+import { buildDeterministicLearningLessons, lessonCacheKey, type LearningLessonBuild } from "@/lib/learningLessons";
 import { db } from "@/lib/db";
 import { resourceKey } from "@/lib/learningLessons";
 
@@ -117,6 +117,30 @@ export async function updateLearningLessonFromBuild({
   });
 }
 
+export async function applyStudentLessonReviewGate(learningPath: any, userId?: string) {
+  if (!learningPath?.lessons?.length) return learningPath;
+  const needsFallback = learningPath.lessons.some((lesson: any) => lesson.generatedBy === "AI_ENRICHED" && lesson.reviewStatus !== "APPROVED");
+  if (!needsFallback) return learningPath;
+
+  const gradeLevel = learningPath.session?.assessment?.grade || learningPath.lessons[0]?.gradeLevel || 6;
+  const pathItems = learningPath.items || [];
+  const responses = learningPath.session?.responses || [];
+  const resourcesByStandard = await loadResourcesByStandard(gradeLevel, pathItems);
+  const deterministic = buildDeterministicLearningLessons({ gradeLevel, pathItems, responses, resourcesByStandard });
+  const deterministicByOrder = new Map(deterministic.map((lesson) => [lesson.learningPathItemOrder, lesson]));
+
+  return {
+    ...learningPath,
+    lessons: learningPath.lessons.map((lesson: any) => {
+      if (lesson.generatedBy !== "AI_ENRICHED" || lesson.reviewStatus === "APPROVED") return lesson;
+      const pathItem = pathItems.find((item: any) => item.id === lesson.learningPathItemId || item.order === lesson.priority);
+      const fallback = deterministicByOrder.get(pathItem?.order || lesson.priority);
+      if (!fallback) return { ...lesson, aiStatus: "PENDING", generatedBy: "DETERMINISTIC" };
+      return lessonFromBuild(lesson, fallback, userId);
+    }),
+  };
+}
+
 function learningLessonCreateData({
   learningPathId,
   learningPathItemId,
@@ -158,5 +182,44 @@ function learningLessonCreateData({
         order: item.order,
       })),
     },
+  };
+}
+
+function lessonFromBuild(existing: any, lessonBuild: LearningLessonBuild, userId?: string) {
+  return {
+    ...existing,
+    gradeLevel: lessonBuild.gradeLevel,
+    standardCode: lessonBuild.standardCode,
+    standardLabel: lessonBuild.standardLabel,
+    skill: lessonBuild.skill,
+    priority: lessonBuild.priority,
+    title: lessonBuild.title,
+    whyAssigned: lessonBuild.whyAssigned,
+    lessonExplanation: lessonBuild.lessonExplanation,
+    workedExample: lessonBuild.workedExample,
+    resourceTitle: lessonBuild.resourceTitle,
+    resourceUrl: lessonBuild.resourceUrl,
+    resourceProvider: lessonBuild.resourceProvider,
+    resourceDescription: lessonBuild.resourceDescription,
+    guidedPractice: lessonBuild.guidedPractice,
+    independentPractice: lessonBuild.independentPractice,
+    exitTicket: lessonBuild.exitTicket,
+    masteryCheck: lessonBuild.masteryCheck,
+    retestRecommendation: lessonBuild.retestRecommendation,
+    generatedBy: "DETERMINISTIC",
+    aiStatus: "PENDING",
+    sourcePayload: {
+      ...lessonBuild.sourcePayload,
+      reviewFallbackForCacheKey: lessonCacheKey(lessonBuild),
+    },
+    progress: userId ? existing.progress : existing.progress,
+    items: lessonBuild.items.map((item) => ({
+      id: `${existing.id}-${item.order}-fallback`,
+      lessonId: existing.id,
+      itemType: item.itemType,
+      title: item.title,
+      content: item.content,
+      order: item.order,
+    })),
   };
 }

@@ -2,7 +2,7 @@ import { Prisma } from "@prisma/client";
 import { logAiFailure } from "@/lib/aiTelemetry";
 import { db } from "@/lib/db";
 import { gradeTdaEssay } from "@/lib/essayGrader";
-import { buildLearningLessons } from "@/lib/learningLessons";
+import { buildLearningLessons, lessonCacheKey } from "@/lib/learningLessons";
 import { buildDeterministicLearningPath, enrichLearningPathWithAi, type LearningPathBuild } from "@/lib/learningPath";
 import { loadResourcesByStandard, updateLearningLessonFromBuild } from "@/lib/learningLessonPersistence";
 import { recomputeReportForSession } from "@/lib/reportSummaryBuilder";
@@ -114,10 +114,24 @@ async function processLessonEnrichmentJob(sessionId: string) {
   const resourcesByStandard = await loadResourcesByStandard(gradeLevel, pathItems);
   const lessonBuilds = await buildLearningLessons({ gradeLevel, pathItems, responses, resourcesByStandard });
   for (const lessonBuild of lessonBuilds) {
-    await updateLearningLessonFromBuild({
+    const updatedLesson = await updateLearningLessonFromBuild({
       learningPathId: learningPath.id,
       lessonBuild: { ...lessonBuild, generatedBy: "AI_ENRICHED", aiStatus: "COMPLETED" },
     });
+    if (updatedLesson && lessonBuild.generatedBy === "AI_ENRICHED" && lessonBuild.aiStatus === "COMPLETED") {
+      const cacheKey = lessonCacheKey(lessonBuild);
+      const cache = await db.lessonCache.findUnique({ where: { cacheKey } });
+      if (cache) {
+        await db.learningLesson.update({
+          where: { id: updatedLesson.id },
+          data: { reviewStatus: cache.reviewStatus },
+        });
+        await db.lessonReview.updateMany({
+          where: { lessonCacheId: cache.id, status: "PENDING", lessonId: null },
+          data: { lessonId: updatedLesson.id },
+        });
+      }
+    }
   }
 }
 

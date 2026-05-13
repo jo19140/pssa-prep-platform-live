@@ -31,6 +31,7 @@ model User {
   tutorMessages   TutorAgentMessage[]
   passwordResetTokens PasswordResetToken[]
   verificationTokens VerificationToken[]
+  lessonReviews   LessonReview[]
 }
 
 model PasswordResetToken {
@@ -379,11 +380,12 @@ model LearningLesson {
   retestRecommendation String
   generatedBy          String                  @default("DETERMINISTIC")
   aiStatus             String                  @default("NOT_REQUESTED")
-  reviewStatus         String                  @default("APPROVED")
+  reviewStatus         String                  @default("PENDING_REVIEW")
   approvedAt           DateTime?
   approvedById         String?
   rejectedAt           DateTime?
   rejectedById         String?
+  reviews              LessonReview[]
   sourcePayload        Json
   createdAt            DateTime                @default(now())
   updatedAt            DateTime                @updatedAt
@@ -404,16 +406,55 @@ model LessonCache {
   payload      Json
   generatedBy  String
   modelHint    String?
-  reviewStatus String   @default("APPROVED")
+  reviewStatus String   @default("PENDING_REVIEW")
   approvedAt   DateTime?
   approvedById String?
   rejectedAt   DateTime?
   rejectedById String?
+  doNotRetryUntil DateTime?
   createdAt    DateTime @default(now())
   hitCount     Int      @default(0)
   lastUsedAt   DateTime @default(now())
+  reviews      LessonReview[]
 
   @@index([gradeLevel, standardCode, skill])
+}
+
+model LessonReview {
+  id                String              @id @default(cuid())
+  lessonCacheId     String?
+  lessonId          String?
+  status            String              @default("PENDING")
+  reviewedById      String?
+  reviewedAt        DateTime?
+  reviewerNotes     String?
+  aiOriginalContent Json?
+  currentContent    Json?
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @updatedAt
+  lessonCache       LessonCache?        @relation(fields: [lessonCacheId], references: [id], onDelete: Cascade)
+  lesson            LearningLesson?     @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  reviewedBy        User?               @relation(fields: [reviewedById], references: [id], onDelete: SetNull)
+  editInstructions  AiEditInstruction[]
+
+  @@index([status, createdAt])
+  @@index([lessonCacheId])
+  @@index([reviewedById])
+}
+
+model AiEditInstruction {
+  id              String       @id @default(cuid())
+  lessonReviewId  String
+  sectionType     String
+  sectionIndex    Int?
+  instructionText String
+  originalContent Json
+  revisedContent  Json
+  accepted        Boolean      @default(false)
+  createdAt       DateTime     @default(now())
+  lessonReview    LessonReview @relation(fields: [lessonReviewId], references: [id], onDelete: Cascade)
+
+  @@index([sectionType])
 }
 
 model LearningLessonItem {

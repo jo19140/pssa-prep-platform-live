@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth";
 import { z } from "zod";
 import { authOptions } from "@/lib/auth";
 import { db } from "@/lib/db";
+import { applyStudentLessonReviewGate } from "@/lib/learningLessonPersistence";
 
 const sessionQuerySchema = z.object({
   assessmentId: z.string().min(1).max(128).nullable(),
@@ -41,6 +42,7 @@ export async function GET(req: Request) {
       include: {
         items: { orderBy: { order: "asc" as const } },
         lessons: { orderBy: { priority: "asc" as const }, include: { progress: { where: { userId: (session.user as any).id } }, items: { orderBy: { order: "asc" as const } } } },
+        session: { include: { responses: true, assessment: true } },
       },
     },
   };
@@ -71,5 +73,8 @@ export async function GET(req: Request) {
       },
     };
   });
-  return NextResponse.json({ sessionId: activeSession.id, assessment: hydratedSession.assessment, currentQuestionNo: activeSession.currentQuestionNo, submittedAt: activeSession.submittedAt, responses: hydratedSession.responses, report: hydratedSession.report, learningPath: hydratedSession.learningPath, questions, passages: hydratedSession.assessment.passages, standards, assignmentType: assignment.assignmentType || "FULL" });
+  const learningPath = hydratedSession.learningPath
+    ? await applyStudentLessonReviewGate(hydratedSession.learningPath, (session.user as any).id)
+    : null;
+  return NextResponse.json({ sessionId: activeSession.id, assessment: hydratedSession.assessment, currentQuestionNo: activeSession.currentQuestionNo, submittedAt: activeSession.submittedAt, responses: hydratedSession.responses, report: hydratedSession.report, learningPath, questions, passages: hydratedSession.assessment.passages, standards, assignmentType: assignment.assignmentType || "FULL" });
 }

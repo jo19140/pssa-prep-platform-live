@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { db } from "@/lib/db";
+import { applyStudentLessonReviewGate } from "@/lib/learningLessonPersistence";
 
 export async function GET() {
   const session = await getServerSession(authOptions);
@@ -25,7 +26,7 @@ export async function GET() {
     include: {
       items: { orderBy: { order: "asc" } },
       lessons: { orderBy: { priority: "asc" }, include: { progress: { where: { userId: (session.user as any).id } }, questAttempts: { where: { userId: (session.user as any).id }, orderBy: { createdAt: "desc" }, take: 3 }, items: { orderBy: { order: "asc" } } } },
-      session: { select: { assessment: { select: { title: true, grade: true } }, submittedAt: true, scorePercent: true } },
+      session: { include: { assessment: { select: { title: true, grade: true } }, responses: true } },
     },
     orderBy: { createdAt: "desc" },
   });
@@ -46,10 +47,11 @@ export async function GET() {
   const libraryLessons = assignedLessonProgress
     .map((progress) => progress.lesson)
     .filter((lesson) => lesson.learningPath.session.userId !== (session.user as any).id);
-  const mergedLearningPath = latestLearningPath
+  const safeLatestLearningPath = latestLearningPath ? await applyStudentLessonReviewGate(latestLearningPath, (session.user as any).id) : null;
+  const mergedLearningPath = safeLatestLearningPath
     ? {
-        ...latestLearningPath,
-        lessons: mergeLessons(latestLearningPath.lessons, libraryLessons),
+        ...safeLatestLearningPath,
+        lessons: mergeLessons(safeLatestLearningPath.lessons, libraryLessons),
       }
     : libraryLessons.length
       ? {
