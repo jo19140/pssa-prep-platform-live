@@ -595,10 +595,10 @@ export function buildFallbackLesson({
   const workedExample = workedExampleForSkill(item.skill, gradeLevel);
   const libraryScenarios = findLibraryScenariosFor({ gradeLevel, standardCode: item.standardCode, skill: item.skill });
   const librarySource = libraryScenarios.length > 0;
-  const guidedPractice = buildPractice(item.skill, "guided", gradeLevel, gradeLevel >= 6 ? 4 : 3, libraryScenarios);
-  const independentPractice = buildPractice(item.skill, "independent", gradeLevel, gradeLevel >= 6 ? 5 : 4, libraryScenarios);
-  const exitTicket = buildPractice(item.skill, "exit ticket", gradeLevel, 1, libraryScenarios);
-  const masteryCheck = buildPractice(item.skill, "mastery check", gradeLevel, gradeLevel >= 6 ? 3 : 2, libraryScenarios);
+  const guidedPractice = buildPractice(item.skill, "guided", gradeLevel, gradeLevel >= 6 ? 4 : 3, libraryScenarios, item.standardCode);
+  const independentPractice = buildPractice(item.skill, "independent", gradeLevel, gradeLevel >= 6 ? 5 : 4, libraryScenarios, item.standardCode);
+  const exitTicket = buildPractice(item.skill, "exit ticket", gradeLevel, 1, libraryScenarios, item.standardCode);
+  const masteryCheck = buildPractice(item.skill, "mastery check", gradeLevel, gradeLevel >= 6 ? 3 : 2, libraryScenarios, item.standardCode);
   const retestRecommendation = `After completing this lesson and scoring at least 80% on the mastery check, retake a short ${item.standardCode} practice set with ${weakFormat} items.`;
   const lesson = {
     learningPathItemOrder: item.order,
@@ -684,6 +684,21 @@ function buildLessonSections(lesson: Omit<LearningLessonBuild, "items">): Lesson
 
 function explanationForSkill(skill: string, gradeLevel: number) {
   const lower = skill.toLowerCase();
+  if (isConventionsSkill(lower)) {
+    if (lower.includes("subject") && lower.includes("verb")) {
+      return `Rule: the verb must match the subject in number, even when other words come between them. For example, "The box of pencils sits on the shelf" is correct because box is singular, so the verb is sits. A common error is "The box of pencils sit," where pencils tricks the writer into choosing the plural verb.`;
+    }
+    if (lower.includes("pronoun")) {
+      return `Rule: a pronoun must match the noun it replaces and fit its job in the sentence. For example, "Maya and I presented the project" is correct because I is part of the subject. A common error is "Maya and me presented," because me is not the subject form.`;
+    }
+    if (lower.includes("comma") || lower.includes("dash") || lower.includes("parentheses") || lower.includes("punctuation")) {
+      return `Rule: punctuation should make the sentence easier to read by showing pauses, lists, or extra information. For example, "The rain barrel, an inexpensive tool, collected runoff" uses commas to set off extra information. A common error is placing commas where they split the subject from its verb.`;
+    }
+    if (lower.includes("sentence") || lower.includes("pattern") || lower.includes("combining")) {
+      return `Rule: sentence patterns should make ideas clear and varied without changing the meaning. For example, "After testing the bridge, the team recorded data" combines two related actions smoothly. A common error is combining ideas so awkwardly that the subject, verb, or sequence becomes unclear.`;
+    }
+    return `Rule: conventions are specific grammar, punctuation, capitalization, and sentence choices that make writing clear. For example, "The pages are torn" works because the plural subject pages matches are. A common error is choosing a verb or punctuation mark because a nearby word looks right instead of checking the sentence structure.`;
+  }
   if (lower.includes("inference")) {
     if (gradeLevel <= 3) return `Inference means figuring out something the text does not say directly. In grade ${gradeLevel}, use clues from the text and ask, "What can I figure out from this?"`;
     if (gradeLevel <= 4) return `Inference means using details and examples to figure out an unstated idea. The text gives clues, and you explain what those clues help you understand.`;
@@ -728,14 +743,28 @@ function explanationForSkill(skill: string, gradeLevel: number) {
     if (gradeLevel <= 6) return `Flashback is a text structure choice. For PSSA-style questions, analyze why the author interrupts the current plot with an earlier event and how that flashback contributes to theme, setting, plot, or character development.`;
     return `Advanced flashback analysis asks how nonlinear structure affects meaning. Evaluate why the author chose a flashback and how the story would change if events were told only in chronological order.`;
   }
-  if (lower.includes("convention") || lower.includes("grammar") || lower.includes("punctuation")) return `Conventions are the grammar, punctuation, capitalization, and sentence rules that make writing clear. Read the whole sentence first, then check whether the words and punctuation work together correctly.`;
   if (lower.includes("vocab")) return `Vocabulary questions ask you to use context clues. Read before and after the word, look for examples or contrasts, and choose the meaning that best fits the sentence.`;
   if (lower.includes("structure")) return `Text structure is how an author organizes ideas. Look for signal words that show cause and effect, problem and solution, compare and contrast, sequence, or description.`;
-  return `Main idea is what a passage or section is mostly about. A strong main idea covers the whole section, not just one interesting detail. Details should support the main idea.`;
+  return `Main idea is the complete point a passage or section makes about a topic. For example, "school gardens help students learn science and reduce waste" is a main idea, while "school gardens" is only a topic. Strong details should prove the full idea, not just mention something interesting.`;
 }
 
 function workedExampleForSkill(skill: string, gradeLevel: number) {
   const lower = skill.toLowerCase();
+  if (isConventionsSkill(lower)) {
+    if (lower.includes("subject") && lower.includes("verb")) {
+      return `Question: Which sentence uses correct subject-verb agreement? Worked answer: In "The stack of notebooks is on the cart," the subject is stack, not notebooks. Stack is singular, so is agrees. The nearby plural word notebooks is only part of a phrase and should not control the verb.`;
+    }
+    if (lower.includes("pronoun")) {
+      return `Question: Which pronoun is correct in the sentence? Worked answer: In "The teacher gave Carlos and me feedback," me is correct because the pronoun is receiving the action after gave. Use I for subjects, but use me for objects.`;
+    }
+    if (lower.includes("comma") || lower.includes("dash") || lower.includes("parentheses") || lower.includes("punctuation")) {
+      return `Question: Which sentence punctuates extra information correctly? Worked answer: "The model, which used recycled cardboard, held the most weight" is correct because the commas set off information that adds detail but is not needed to identify the model.`;
+    }
+    if (lower.includes("sentence") || lower.includes("pattern") || lower.includes("combining")) {
+      return `Question: Which revision improves sentence variety? Worked answer: "After the class collected data, they revised the graph" is stronger than two choppy sentences because it connects the time relationship clearly while keeping the subject and verb easy to follow.`;
+    }
+    return `Question: Which sentence follows standard English conventions? Worked answer: First find the subject and verb, then check punctuation. In "The pages in the notebook are wrinkled, but the cover is clean," pages agrees with are, cover agrees with is, and the comma before but joins two complete ideas.`;
+  }
   if (lower.includes("inference")) return `Question: What can be inferred about the character? Worked answer: First find clues in what the character says and does. If the character checks the sky, packs extra supplies, and warns a friend, you can infer the character is cautious. The evidence proves the inference because each action shows planning.`;
   if (lower.includes("evidence")) return `Question: Which sentence best supports the idea that the scientist was careful? Worked answer: Choose the detail that shows careful actions, such as checking notes twice or repeating an experiment. That evidence proves the idea because it shows the scientist did not rush.`;
   if (lower.includes("theme")) return `Question: What theme is shown when a character keeps practicing after failing? Worked answer: A possible theme is, "Perseverance helps people improve." The evidence is the character's repeated practice and the better result at the end.`;
@@ -745,14 +774,13 @@ function workedExampleForSkill(skill: string, gradeLevel: number) {
   if (lower.includes("point of view") || lower === "pov") return `Question: How does the author develop point of view? Worked answer: Look at what the narrator notices and the words used to describe the event. If the narrator calls a task "a chance to prove responsibility," that wording shows the narrator sees the task as important, not annoying.`;
   if (lower.includes("figurative")) return `Question: What does "the problem sat like a stone in her pocket" suggest? Worked answer: The phrase does not mean there is a real stone. It means the problem feels heavy and hard to ignore. The simile creates a serious tone.`;
   if (lower.includes("flashback")) return `Question: Why does the author include the flashback? Worked answer: The earlier scene shows that the character once failed while speaking in front of others. That explains the character's fear in the present and helps develop the conflict.`;
-  if (lower.includes("convention") || lower.includes("grammar") || lower.includes("punctuation")) return `Question: Which sentence is written correctly? Worked answer: Read each choice aloud and check subject-verb agreement, commas, capitalization, and pronouns. The correct choice is the one that follows all of those rules.`;
   if (lower.includes("vocab")) return `Question: What does "observe" mean in the passage? Worked answer: If nearby sentences say the students watched carefully and wrote notes, then "observe" means to watch closely.`;
   if (lower.includes("structure")) return `Question: Why does the author use headings? Worked answer: Headings divide the text into topics, which helps readers understand how each section adds to the central idea.`;
   return `Question: What is the main idea of the section? Worked answer: First ask, "What are most sentences about?" Then choose the answer that covers all key details, not just one fact.`;
 }
 
-function buildPractice(skill: string, mode: string, gradeLevel: number, count: number, libraryScenarios: PracticeQuestion[] = []): PracticeQuestion[] {
-  const cannedScenarios = practiceScenarios(skill, gradeLevel);
+function buildPractice(skill: string, mode: string, gradeLevel: number, count: number, libraryScenarios: PracticeQuestion[] = [], standardCode = ""): PracticeQuestion[] {
+  const cannedScenarios = practiceScenarios(skill, gradeLevel, standardCode);
   const librarySample = sampleWithoutReplacement(libraryScenarios, count, `${gradeLevel}:${skill}:${mode}`);
   const scenarios = [...librarySample, ...repeatToCount(cannedScenarios, Math.max(0, count - librarySample.length))];
   return Array.from({ length: count }, (_, index) => {
@@ -780,8 +808,11 @@ function repeatToCount<T>(items: T[], count: number): T[] {
   return Array.from({ length: count }, (_, index) => items[index % items.length]);
 }
 
-function practiceScenarios(skill: string, gradeLevel: number): PracticeQuestion[] {
+function practiceScenarios(skill: string, gradeLevel: number, standardCode = ""): PracticeQuestion[] {
   const lower = skill.toLowerCase();
+  if (standardCode.startsWith("CC.1.4.") || isConventionsSkill(lower)) {
+    return conventionsPracticeScenarios(skill);
+  }
   if (lower.includes("evidence") || lower.includes("inference")) {
     return [
       {
@@ -896,6 +927,89 @@ function practiceScenarios(skill: string, gradeLevel: number): PracticeQuestion[
       correctAnswer: "Bike lanes can make travel safer and more organized for a community.",
       explanation: "The correct answer combines the key points about safety, predictability, and traffic.",
       coachHint: "Summaries combine the important points without adding extreme claims.",
+    },
+  ];
+}
+
+function conventionsPracticeScenarios(skill: string): PracticeQuestion[] {
+  const lower = skill.toLowerCase();
+  if (lower.includes("pronoun")) {
+    return [
+      {
+        passage: `The robotics team revised its presentation before the showcase. Maya and Devon practiced the opening, and their coach gave Maya and Devon feedback after each run.`,
+        question: `Which revision uses pronouns correctly?`,
+        choices: [
+          "The coach gave Maya and them feedback after each run.",
+          "The coach gave Maya and they feedback after each run.",
+          "The coach gave she and Devon feedback after each run.",
+          "The coach gave Maya and he feedback after each run.",
+        ],
+        correctAnswer: "The coach gave Maya and them feedback after each run.",
+        explanation: "Them is the correct object pronoun after gave. The other choices use subject pronouns where object pronouns are needed.",
+        coachHint: "Ask whether the pronoun is doing the action or receiving the action.",
+      },
+    ];
+  }
+  if (lower.includes("comma") || lower.includes("dash") || lower.includes("parentheses") || lower.includes("punctuation")) {
+    return [
+      {
+        passage: `The student council planned a cleanup day. The park behind the library needed new signs, fresh mulch, and repaired benches.`,
+        question: `Which sentence uses punctuation correctly to set off extra information?`,
+        choices: [
+          "The park, behind the library, needed new signs, fresh mulch, and repaired benches.",
+          "The park behind, the library needed new signs fresh mulch and repaired benches.",
+          "The park behind the library needed, new signs, fresh mulch, and repaired benches.",
+          "The park behind the library, needed new signs fresh mulch, and repaired benches.",
+        ],
+        correctAnswer: "The park, behind the library, needed new signs, fresh mulch, and repaired benches.",
+        explanation: "The commas set off the extra location phrase and separate items in a series.",
+        coachHint: "Check whether commas make the sentence easier to read without breaking the main subject and verb.",
+      },
+    ];
+  }
+  if (lower.includes("sentence") || lower.includes("pattern") || lower.includes("combining")) {
+    return [
+      {
+        passage: `The class tested a paper bridge. The class measured the weight it held. The class recorded the results in a chart.`,
+        question: `Which revision combines ideas clearly and varies the sentence pattern?`,
+        choices: [
+          "After testing the paper bridge, the class measured the weight it held and recorded the results in a chart.",
+          "The class tested. The class measured. The class recorded.",
+          "Testing bridge class, measured chart and weight results.",
+          "The chart recorded the class because the bridge tested weight.",
+        ],
+        correctAnswer: "After testing the paper bridge, the class measured the weight it held and recorded the results in a chart.",
+        explanation: "The revision combines related actions in a clear order while keeping the subject and verbs correct.",
+        coachHint: "The best revision should sound natural and keep the original meaning.",
+      },
+    ];
+  }
+  return [
+    {
+      passage: `The stack of permission slips sat on the teacher's desk. Several students checked the list before leaving for the museum trip.`,
+      question: `Which sentence uses correct subject-verb agreement?`,
+      choices: [
+        "The stack of permission slips sits on the teacher's desk.",
+        "The stack of permission slips sit on the teacher's desk.",
+        "Several students checks the list before leaving.",
+        "The students was ready for the museum trip.",
+      ],
+      correctAnswer: "The stack of permission slips sits on the teacher's desk.",
+      explanation: "The subject is stack, which is singular, so the verb sits agrees with it. Permission slips is a nearby phrase, not the subject.",
+      coachHint: "Find the subject before choosing the verb. Do not let nearby plural words trick you.",
+    },
+    {
+      passage: `The pages in the science notebook were wrinkled after the rain drill. The cover, however, was still clean.`,
+      question: `Which choice explains why the verbs are correct?`,
+      choices: [
+        "Pages is plural, so were agrees; cover is singular, so was agrees.",
+        "Notebook is singular, so were agrees.",
+        "Rain is the subject of both sentences.",
+        "Clean is a verb, so it controls the sentence.",
+      ],
+      correctAnswer: "Pages is plural, so were agrees; cover is singular, so was agrees.",
+      explanation: "Each verb must match its own subject: pages were and cover was.",
+      coachHint: "Longer sentences may have more than one subject-verb pair.",
     },
   ];
 }
@@ -1031,20 +1145,21 @@ function buildDeterministicSteps({
   lessonExplanation: string;
   workedExample: string;
 }): LessonStepBuild[] {
+  const titles = deterministicStepTitles(skill);
   return [
     {
       order: 1,
       stepType: "INTRO",
-      title: `Start ${skill}`.slice(0, 100),
-      bodyText: `This lesson focuses on ${skill}. You will learn a simple way to notice the key details, explain your thinking, and get ready for targeted practice.`,
-      narrationScript: `Let's start with ${skill}. I will show you what to look for, then you will try a quick check and practice on your own.`,
-      imagePrompt: `A student-friendly scene showing grade ${gradeLevel} learners using reading clues for ${skill}, no text in image`,
+      title: titles.intro,
+      bodyText: deterministicIntroForSkill(skill, gradeLevel),
+      narrationScript: `This lesson zooms in on ${skill}. Watch for the exact clue, rule, or pattern that makes the answer work, then use that same move in practice.`,
+      imagePrompt: `A student-friendly scene showing grade ${gradeLevel} learners applying ${skill}, no text in image`,
       checkQuestion: null,
     },
     {
       order: 2,
       stepType: "EXPLANATION",
-      title: "Learn The Skill",
+      title: titles.explanation,
       bodyText: lessonExplanation,
       narrationScript: lessonExplanation.slice(0, 280),
       imagePrompt: null,
@@ -1053,13 +1168,68 @@ function buildDeterministicSteps({
     {
       order: 3,
       stepType: "WORKED_EXAMPLE",
-      title: "Watch One Example",
+      title: titles.workedExample,
       bodyText: workedExample,
       narrationScript: workedExample.slice(0, 280),
-      imagePrompt: `A clear classroom reading moment that supports ${skill}, no words or labels in the image`,
+      imagePrompt: `A clear classroom learning moment that supports ${skill}, no words or labels in the image`,
       checkQuestion: null,
     },
   ];
+}
+
+function deterministicStepTitles(skill: string) {
+  const lower = skill.toLowerCase();
+  if (isConventionsSkill(lower)) {
+    if (lower.includes("subject") && lower.includes("verb")) {
+      return {
+        intro: "Finding The Sentence Subject",
+        explanation: "Subject-Verb Agreement Rule",
+        workedExample: "Avoiding Nearby Noun Traps",
+      };
+    }
+    if (lower.includes("pronoun")) {
+      return {
+        intro: "Tracking Pronoun Jobs",
+        explanation: "Pronoun Case And Agreement",
+        workedExample: "Choosing Subject Or Object Pronouns",
+      };
+    }
+    if (lower.includes("punctuation") || lower.includes("comma") || lower.includes("dash") || lower.includes("parentheses")) {
+      return {
+        intro: "Reading Punctuation Signals",
+        explanation: "Punctuation That Clarifies Meaning",
+        workedExample: "Setting Off Extra Information",
+      };
+    }
+    return {
+      intro: "Checking Sentence Structure",
+      explanation: "Grammar Pattern And Example",
+      workedExample: "Testing The Correct Revision",
+    };
+  }
+  if (lower.includes("inference")) return { intro: "Connecting Clues To Ideas", explanation: "Inference Plus Evidence", workedExample: "Proving An Inference" };
+  if (lower.includes("evidence")) return { intro: "Choosing Proof From Text", explanation: "Evidence That Supports A Claim", workedExample: "Linking Evidence To Reasoning" };
+  if (lower.includes("theme")) return { intro: "Finding The Story Message", explanation: "Theme As A Complete Idea", workedExample: "Tracing Theme Through Events" };
+  if (lower.includes("figurative")) return { intro: "Interpreting Nonliteral Language", explanation: "Figurative Meaning In Context", workedExample: "Explaining The Phrase Effect" };
+  if (lower.includes("main") || lower.includes("central")) return { intro: "Topic Versus Main Idea", explanation: "Central Idea And Details", workedExample: "Testing Details Against The Idea" };
+  return { intro: `Noticing ${skill}`.slice(0, 100), explanation: `${skill} Pattern And Example`.slice(0, 100), workedExample: `${skill} Reasoning In Action`.slice(0, 100) };
+}
+
+function deterministicIntroForSkill(skill: string, gradeLevel: number) {
+  const lower = skill.toLowerCase();
+  if (isConventionsSkill(lower)) {
+    return `Imagine rereading a sentence and hearing that one part sounds off. In grade ${gradeLevel}, strong writers slow down and check the sentence structure. For example, in "The stack of books is heavy," stack is the subject, so the singular verb is is correct.`;
+  }
+  if (lower.includes("main") || lower.includes("central")) {
+    return `A topic names what a text is about, but a main idea says the full point. For example, "school gardens" is a topic, while "school gardens help students learn science and reduce waste" is a main idea with a clear claim.`;
+  }
+  if (lower.includes("inference") || lower.includes("evidence")) {
+    return `A strong reading answer connects a clue to a reasonable idea. For example, if a character checks the clock three times and taps a pencil, those actions can support the inference that the character feels impatient.`;
+  }
+  if (lower.includes("figurative")) {
+    return `Figurative language asks you to read beyond the literal words. For example, "the question followed him home" does not mean a question walked; it means he kept thinking about the problem.`;
+  }
+  return `This ${skill} lesson begins with a concrete example, then shows the reasoning move that makes the answer work. For example, a strong response names the clue, applies the rule or pattern, and explains why that clue matters.`;
 }
 
 function normalizeStepType(value: unknown): LessonStepBuild["stepType"] | null {
@@ -1127,6 +1297,21 @@ function domainFromStandard(standardCode: string) {
   if (standardCode.includes("CC.1.3.")) return "Literary Text";
   if (standardCode.includes("CC.1.2.")) return "Informational Text";
   return "Reading";
+}
+
+function isConventionsSkill(lowerSkill: string) {
+  return (
+    lowerSkill.includes("convention") ||
+    lowerSkill.includes("grammar") ||
+    lowerSkill.includes("punctuation") ||
+    lowerSkill.includes("subject-verb") ||
+    lowerSkill.includes("verb tense") ||
+    lowerSkill.includes("pronoun") ||
+    lowerSkill.includes("comma") ||
+    lowerSkill.includes("capitalization") ||
+    lowerSkill.includes("sentence pattern") ||
+    lowerSkill.includes("sentence structure")
+  );
 }
 
 function normalizeKey(value: string) {
