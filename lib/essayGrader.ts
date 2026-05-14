@@ -10,7 +10,7 @@ export type EssayFeedbackItem = {
 
 export type EssayValidity =
   | { valid: true }
-  | { valid: false; reason: "TOO_SHORT" | "BLANK_OR_PLACEHOLDER" | "MOSTLY_COPIED" | "OFF_TOPIC"; deterministicScore: 1 };
+  | { valid: false; reason: "TOO_SHORT" | "BLANK_OR_PLACEHOLDER" | "MATCHES_PROMPT" | "MOSTLY_COPIED" | "OFF_TOPIC"; deterministicScore: 1 };
 
 export type EssayGradeResult = {
   score: number;
@@ -44,7 +44,7 @@ export async function gradeTdaEssay({
   rubric: string;
   passage?: string;
 }): Promise<EssayGradeResult> {
-  const validity = assessEssayValidity({ essay, prompt, passage });
+  const validity = assessEssayValidity({ essay, prompt, passage, rubric });
   if (validity.valid === false) return validityGateResult({ essay, prompt, gradeLevel, rubric, validity });
 
   if (!process.env.OPENAI_API_KEY) {
@@ -99,7 +99,7 @@ export async function gradeTdaEssay({
   }
 }
 
-export function assessEssayValidity({ essay, prompt, passage }: { essay: string; prompt: string; passage?: string }): EssayValidity {
+export function assessEssayValidity({ essay, prompt, passage, rubric = "" }: { essay: string; prompt: string; passage?: string; rubric?: string }): EssayValidity {
   const trimmed = essay.trim();
   const normalized = normalizeWhitespace(trimmed).toLowerCase();
   if (!trimmed || PLACEHOLDERS.has(normalized)) return { valid: false, reason: "BLANK_OR_PLACEHOLDER", deterministicScore: 1 };
@@ -107,6 +107,7 @@ export function assessEssayValidity({ essay, prompt, passage }: { essay: string;
   const words = tokenizeWords(trimmed);
   if (words.length < 30) return { valid: false, reason: "TOO_SHORT", deterministicScore: 1 };
 
+  if ((prompt || rubric) && isMostlyCopied(words, tokenizeWords(`${prompt} ${rubric}`))) return { valid: false, reason: "MATCHES_PROMPT", deterministicScore: 1 };
   if (passage && isMostlyCopied(words, tokenizeWords(passage))) return { valid: false, reason: "MOSTLY_COPIED", deterministicScore: 1 };
 
   const essayContentWords = new Set(contentWords(trimmed));
@@ -160,8 +161,12 @@ function validityGateResult({ essay, prompt, gradeLevel, rubric, validity }: { e
       ? "blank or a placeholder"
       : validity.reason === "MOSTLY_COPIED"
         ? "mostly copied from the passage"
+        : validity.reason === "MATCHES_PROMPT"
+          ? "a restatement of the prompt or rubric"
         : "off-topic";
-  const feedback = `Your response was ${reasonText}. A strong PSSA TDA essay analyzes the text in your own words, cites at least two specific pieces of evidence, and explains how that evidence supports your claim.`;
+  const feedback = validity.reason === "MATCHES_PROMPT"
+    ? "Your response restated the prompt or rubric instead of attempting the analytical response. A strong PSSA TDA essay makes your own claim, cites at least two specific pieces of evidence, and explains how that evidence supports your claim."
+    : `Your response was ${reasonText}. A strong PSSA TDA essay analyzes the text in your own words, cites at least two specific pieces of evidence, and explains how that evidence supports your claim.`;
   return {
     score: validity.deterministicScore,
     maxScore: 4,
@@ -187,6 +192,7 @@ function buildSystemPrompt() {
     "Score 1: Minimally addresses the task or shows little/no analysis, uses minimal, copied, or irrelevant evidence, provides little explanation, and may have weak organization or language control.",
     "Anti-hallucination clause: You must only cite strengths and weaknesses that are directly demonstrated in the student's response. For every strength and every area of growth, you must quote the exact phrase from the student's essay that supports it. If you cannot find a quote that demonstrates the claim, do not include the item. Never invent analysis the student did not write. Generic feedback unsupported by quoted evidence will be discarded.",
     "Validity recheck: Before scoring, verify the response is a genuine attempt at analytical writing. If the response is mostly copied passage text, restates the prompt without analysis, or fails to make an argument about the text, assign a score of 1 and explicitly name the missing requirement. Do not score generously to be encouraging; a fair low score is more useful to the student than an inflated one.",
+    "If the student response is essentially a restatement of the prompt or rubric, with no original analytical writing, the score must be 1, the strengths array must be empty (not contain fabricated entries), the feedback must explicitly state that the student did not attempt the analytical response, and the next_steps must guide them to write an actual claim. Do not invent strengths to soften the message; students learn nothing from inflated feedback. An empty strengths array is the honest signal that there was no analytical writing to praise.",
     "Score calibration: 1 = limited or no analysis, 2 = emerging analysis with little or unconnected evidence, 3 = clear analysis supported by evidence and explanation, 4 = insightful analysis with thorough explanation and strong organization.",
     'Return JSON in this shape: {"score":1,"scoring_rationale":"1-2 sentences tying the score to specific rubric criteria","performance_level":"Below Basic | Basic | Proficient | Advanced","strengths":[{"claim":"...","evidence_quote":"exact verbatim quote from student essay"}],"areas_for_growth":[{"claim":"...","evidence_quote":"exact quote from student essay, or empty string if structurally absent"}],"feedback":"warm student-friendly paragraph","next_steps":["specific actionable steps"]}',
   ].join("\n\n");

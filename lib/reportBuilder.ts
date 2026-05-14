@@ -33,7 +33,7 @@ export function buildDetailedReport(student: any, history: any[], path: any[], p
       difficultyLabel: entry.difficulty <= 2 ? "Support" : entry.difficulty >= 4 ? "Challenge" : "On Level",
       question: q?.question || q?.partAQuestion || q?.hotTextPrompt || q?.dragDropPrompt || q?.prompt || "Question",
       studentAnswerLabel: entry.essay ? "Essay submitted" : entry.shortResponse ? "Short response submitted" : entry.chosenIndex != null ? letter(entry.chosenIndex) : entry.selectedIndex != null ? letter(entry.selectedIndex) : entry.partAIndex != null ? `Part A: ${letter(entry.partAIndex)}` : entry.selectedIndices ? entry.selectedIndices.map(letter).join(", ") : entry.scorePointsEarned != null ? `${entry.scorePointsEarned}/${entry.maxPoints}` : "Recorded",
-      correctAnswerLabel: q?.type === "TDA" ? "Rubric-scored essay" : q?.correctIndex != null ? letter(q.correctIndex) : q?.partACorrectIndex != null ? `Part A: ${letter(q.partACorrectIndex)}` : q?.correctIndices ? q.correctIndices.map(letter).join(", ") : "See response",
+      correctAnswerLabel: correctAnswerLabel(q),
       whyScoredThisWay: entry.errorPattern,
       gradingPending: entry.questionType === "TDA" && !entry.essayEvaluation,
       skillTip: q?.skillTip || ""
@@ -63,6 +63,58 @@ export function buildDetailedReport(student: any, history: any[], path: any[], p
     diagnosticPerformance,
     growth: previousReport?.summary?.score != null ? { previousScore: previousReport.summary.score, currentScore: score, growthPoints: score - previousReport.summary.score, previousBand: previousReport.summary.performance, currentBand: performance } : { previousScore: null, currentScore: score, growthPoints: null, previousBand: null, currentBand: performance }
   };
+}
+
+function correctAnswerLabel(q: any) {
+  if (!q) return "See response";
+  if (q.type === "TDA") return "Rubric-scored essay";
+  if (q.type === "DRAG_DROP" && q.correctMapping) return formatCorrectMapping(q.correctMapping);
+  if (q.type === "HOT_TEXT") return formatHotTextAnswer(q);
+  if (q.type === "MULTI_SELECT" && Array.isArray(q.correctIndices)) return q.correctIndices.map(letter).join(", ");
+  if (q.type === "EBSR") return formatEbsrAnswer(q);
+  if (q.type === "SHORT_RESPONSE") return formatShortResponseAnswer(q);
+  if (q.correctIndex != null) return letter(q.correctIndex);
+  if (q.partACorrectIndex != null) return `Part A: ${letter(q.partACorrectIndex)}`;
+  if (q.correctIndices) return q.correctIndices.map(letter).join(", ");
+  return "See response";
+}
+
+function formatCorrectMapping(mapping: any) {
+  if (Array.isArray(mapping)) {
+    return mapping.map((item) => `${item.item || item.source || item.label} → ${item.category || item.target || item.answer}`).join("; ");
+  }
+  if (mapping && typeof mapping === "object") {
+    return Object.entries(mapping).map(([item, category]) => `${item} → ${String(category)}`).join("; ");
+  }
+  return "See response";
+}
+
+function formatHotTextAnswer(q: any) {
+  const sentences = q.sentences || q.options || q.hotTextOptions || [];
+  const indices = q.correctSentenceIndices || q.correctIndices || [];
+  if (Array.isArray(q.correctSentences) && q.correctSentences.length) return q.correctSentences.join("; ");
+  if (Array.isArray(sentences) && Array.isArray(indices) && indices.length) {
+    return indices.map((index: number) => typeof sentences[index] === "string" ? sentences[index] : sentences[index]?.text).filter(Boolean).join("; ");
+  }
+  return "See response";
+}
+
+function formatEbsrAnswer(q: any) {
+  const partA = q.partACorrectIndex != null ? letter(q.partACorrectIndex) : q.partACorrectAnswer || "See response";
+  const partB = Array.isArray(q.partBCorrectIndices)
+    ? q.partBCorrectIndices.map(letter).join(", ")
+    : q.partBCorrectIndex != null
+      ? letter(q.partBCorrectIndex)
+      : q.partBCorrectAnswer || "See response";
+  return `Part A: ${partA}\nPart B: ${partB}`;
+}
+
+function formatShortResponseAnswer(q: any) {
+  if (typeof q.sampleResponse === "string") return q.sampleResponse;
+  if (typeof q.expectedResponse === "string") return q.expectedResponse;
+  if (Array.isArray(q.expectedEvidenceMarkers)) return q.expectedEvidenceMarkers.join("; ");
+  if (Array.isArray(q.evidenceMarkers)) return q.evidenceMarkers.join("; ");
+  return "Use a claim with accurate evidence from the passage.";
 }
 
 function aggregateAccuracy(history: any[], labelFn: (item: any) => string) {

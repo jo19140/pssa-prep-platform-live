@@ -8,6 +8,7 @@ import { attachGeneratedImagesToLessons } from "@/lib/lessonImageGeneration";
 import { evaluateLessonQuality, getLessonQualityBlueprint } from "@/lib/lessonQualityBlueprint";
 import { buildLessonVisualMetadata } from "@/lib/lessonVisuals";
 import { buildPrebuiltLessonSeeds } from "@/lib/prebuiltLessonLibrary";
+import { pssaLessonExemplars } from "@/lib/pssaLessonExemplars";
 
 type ResourceLike = {
   title: string;
@@ -105,6 +106,20 @@ const RESOURCE_FALLBACK = {
   description: "No curated video or resource has been added for this standard yet.",
 };
 
+const FORBIDDEN_LESSON_PHRASES = [
+  "start ",
+  "learn the skill",
+  "get ready for",
+  "you will learn",
+  "watch one example",
+  "welcome to",
+];
+const EXAMPLE_MARKERS = ["for example", "such as", "like when", "imagine", "consider", "? \""];
+const CONVENTIONS_MISMATCH_TERMS = ["main idea", "inference", "evidence from the passage", "central idea"];
+const CONVENTIONS_TERMS = ["grammar", "punctuation", "sentence", "verb", "subject", "agreement", "comma", "capitalization", "pronoun", "convention"];
+const READING_TERMS = ["passage", "text", "author", "character", "paragraph", "detail", "theme", "inference", "main idea", "central idea", "figurative", "evidence"];
+const GRAMMAR_TERMS = ["subject-verb", "verb", "punctuation", "comma", "grammar", "capitalization", "pronoun", "sentence structure"];
+
 export async function buildLearningLessons({
   gradeLevel,
   pathItems,
@@ -130,15 +145,33 @@ export async function buildLearningLessons({
 
   try {
     const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+    const generationStartedAt = Date.now();
     const response = await openai.chat.completions.create({
       model: process.env.OPENAI_LESSON_MODEL || process.env.OPENAI_LEARNING_PATH_MODEL || "gpt-4o-mini",
       response_format: { type: "json_object" },
       messages: [
         {
           role: "system",
-          content:
-            "You design concise, student-friendly ELA mini-lessons. Return only JSON. Keep validated scoring decisions out of the content. Each lesson must include a 4-6 step teaching sequence that sounds like a warm teacher, not formal prose.",
+          content: buildLessonSystemPrompt(),
         },
+        ...pssaLessonExemplars.flatMap((example) => [
+          {
+            role: "user" as const,
+            content: JSON.stringify({
+              gradeLevel: example.gradeLevel,
+              standardCode: example.standardCode,
+              strand: standardStrand(example.standardCode),
+              skill: example.skill,
+              deterministicLesson: {
+                learningPathItemOrder: example.learningPathItemOrder,
+                standardCode: example.standardCode,
+                skill: example.skill,
+                title: example.title,
+              },
+            }),
+          },
+          { role: "assistant" as const, content: JSON.stringify({ lessons: [example] }) },
+        ]),
         {
           role: "user",
           content: JSON.stringify({
@@ -148,6 +181,12 @@ export async function buildLearningLessons({
               "Create a 4-6 step teaching sequence following this pattern: (1) Hook/intro with a relatable scenario. (2) Explanation in student-friendly language. (3) Model with think-aloud reasoning. (4) Check question MCQ. (5) Worked example with explicit reasoning. (6) Transition into practice. Grade 3 should be shorter and simpler; grade 8 can be more abstract. Narration scripts should sound like a warm teacher speaking.",
             qualityBlueprint:
               "Every lesson must teach before practice, use original text, include scaffolded feedback, increase text complexity/evidence demand by grade, and move from guided practice to independent mastery.",
+            standardStrands: lessonsNeedingAi.map((lesson) => ({
+              learningPathItemOrder: lesson.learningPathItemOrder,
+              standardCode: lesson.standardCode,
+              strand: standardStrand(lesson.standardCode),
+              skill: lesson.skill,
+            })),
             schema: {
               lessons: [
                 {
@@ -211,7 +250,7 @@ export async function buildLearningLessons({
           }),
         },
       ],
-    });
+    }, { timeout: 60_000 });
 
     const raw = response.choices[0]?.message?.content || "{}";
     const parsed = JSON.parse(raw) as { lessons?: Partial<LearningLessonBuild>[] };
@@ -233,12 +272,13 @@ export async function buildLearningLessons({
         generatedBy: "AI_ENRICHED" as const,
         aiStatus: "COMPLETED" as const,
       };
+      const critiqued = await selfCritiqueLesson(openai, merged, lesson, generationStartedAt);
       const heroResource = await findHeroResourceForLesson(lesson);
       const withQuality = withQualityPayload({
-        ...merged,
+        ...critiqued,
         heroResourceLinkId: heroResource?.id || null,
         heroResource: heroResource ? resourceFromDb(heroResource) : null,
-        items: buildLessonSections(merged),
+        items: buildLessonSections(critiqued),
       });
       const moderated = await moderateLessonContent(openai, withQuality, lesson);
       await persistLessonCache(moderated);
@@ -322,6 +362,62 @@ export function lessonCacheKey(lesson: Pick<LearningLessonBuild, "gradeLevel" | 
   return createHash("sha256")
     .update(`gradeLevel:${lesson.gradeLevel}:standardCode:${lesson.standardCode}:skill:${lesson.skill}:commonError:${commonError}:librarySource:${librarySource}`)
     .digest("hex");
+}
+
+function buildLessonSystemPrompt() {
+  return [
+    "You design concise, student-friendly ELA mini-lessons for a Pennsylvania PSSA ELA module. Return only JSON. Keep validated scoring decisions out of the content.",
+    "Forbidden phrases: The following phrases are forbidden in step titles and body text: 'Start [skill]', 'Learn the skill', 'Get ready for', 'You will learn', 'Watch one example', 'Welcome to'. These are placeholder phrases that do not teach. Step titles must name the specific concept being taught, such as 'Identifying Subject-Verb Agreement Errors,' not 'Start Grammar.' Step body text must include at least one concrete example of the skill in action, not just an announcement that the skill will be taught.",
+    "Step depth requirements: Each EXPLANATION step must include a one-sentence rule, at least one positive example, and at least one common-error example. Each MODEL or WORKED_EXAMPLE step must walk through specific reasoning, not just state an answer. CHECK_QUESTION steps must have all four answer choices that are plausible distractors, not throwaway options like 'I do not know.'",
+    "Standard-strand alignment requirement: Each lesson includes a standardCode and strand. All practice content must use vocabulary appropriate to this strand. A conventions lesson (CC.1.4.x.y) must use grammar, punctuation, usage, or sentence-structure vocabulary, not main idea or inference vocabulary. Literary text lessons (CC.1.3.x.y) and informational text lessons (CC.1.2.x.y) must reference passage analysis, meaning, evidence, structure, vocabulary, or central ideas as appropriate. Cross-strand practice content will be rejected.",
+    "The teaching sequence must follow this pattern: INTRO, EXPLANATION, MODEL, CHECK_QUESTION, WORKED_EXAMPLE, and optional TRANSITION. Narration scripts should sound like a warm teacher speaking.",
+  ].join("\n\n");
+}
+
+async function selfCritiqueLesson(openai: OpenAI, lesson: LearningLessonBuild, deterministic: LearningLessonBuild, generationStartedAt: number): Promise<LearningLessonBuild> {
+  if (!lesson.steps?.length || Date.now() - generationStartedAt > 50_000) return lesson;
+  try {
+    const response = await openai.chat.completions.create({
+      model: process.env.OPENAI_LESSON_MODEL || process.env.OPENAI_LEARNING_PATH_MODEL || "gpt-4o-mini",
+      response_format: { type: "json_object" },
+      messages: [
+        {
+          role: "system",
+          content:
+            'You generated this lesson. Audit it against these criteria: (a) Does step 2 define the skill with a one-sentence rule plus at least one example? (b) Does any step use forbidden placeholder phrases like "Start X" or "Learn the skill"? (c) Does the practice content match the lesson standard strand? (d) Would a struggling student actually understand the worked example, or is it vague? For each failing criterion, return a revised version of that step only. If all criteria pass, return {"status":"approved"}. Return JSON only.',
+        },
+        {
+          role: "user",
+          content: JSON.stringify({
+            standardCode: lesson.standardCode,
+            strand: standardStrand(lesson.standardCode),
+            skill: lesson.skill,
+            steps: lesson.steps,
+            practice: {
+              guidedPractice: lesson.guidedPractice,
+              independentPractice: lesson.independentPractice,
+              exitTicket: lesson.exitTicket,
+              masteryCheck: lesson.masteryCheck,
+            },
+          }),
+        },
+      ],
+    }, { timeout: Math.max(5_000, 60_000 - (Date.now() - generationStartedAt)) });
+    const parsed = JSON.parse(response.choices[0]?.message?.content || "{}");
+    if (parsed.status === "approved") return lesson;
+    const revisions = Array.isArray(parsed.revisions) ? parsed.revisions : Array.isArray(parsed.steps) ? parsed.steps : [];
+    if (!revisions.length) return lesson;
+    const byOrder = new Map<number, Record<string, unknown>>(revisions.map((step: any) => [Number(step.order), step && typeof step === "object" ? step : {}]));
+    const revisedSteps = (lesson.steps || []).map((step) => ({ ...step, ...(byOrder.get(step.order) || {}) }));
+    return { ...lesson, steps: safeSteps(revisedSteps, deterministic) };
+  } catch (error) {
+    logAiFailure({
+      scope: "learningLessons.self_critique",
+      error,
+      context: { standardCode: lesson.standardCode, skill: lesson.skill },
+    });
+    return lesson;
+  }
 }
 
 async function readCachedLessons(lessons: LearningLessonBuild[]) {
@@ -858,6 +954,15 @@ function normalizeStep(raw: unknown, fallbackOrder: number, context: { standardC
     });
     return null;
   }
+  const qualityFailure = stepQualityFailure({ stepType, title, bodyText, narrationScript, standardCode: context.standardCode, skill: context.skill });
+  if (qualityFailure) {
+    logAiFailure({
+      scope: qualityFailure.scope,
+      error: new Error(qualityFailure.reason),
+      context: { standardCode: context.standardCode, skill: context.skill, stepType, title },
+    });
+    return null;
+  }
 
   return {
     order: Number(source.order) > 0 ? Number(source.order) : fallbackOrder,
@@ -868,6 +973,51 @@ function normalizeStep(raw: unknown, fallbackOrder: number, context: { standardC
     imagePrompt: typeof source.imagePrompt === "string" && source.imagePrompt.trim() ? source.imagePrompt.trim().slice(0, 800) : null,
     checkQuestion,
   };
+}
+
+function stepQualityFailure({
+  stepType,
+  title,
+  bodyText,
+  narrationScript,
+  standardCode,
+}: {
+  stepType: LessonStepBuild["stepType"];
+  title: string;
+  bodyText: string;
+  narrationScript: string;
+  standardCode: string;
+  skill: string;
+}) {
+  const titleBody = `${title} ${bodyText}`.toLowerCase();
+  const spoken = narrationScript.toLowerCase();
+  const forbidden = FORBIDDEN_LESSON_PHRASES.find((phrase) => titleBody.includes(phrase) || spoken.includes(phrase));
+  if (forbidden) return { scope: "learningLessons.forbidden_phrase", reason: `Forbidden lesson phrase: ${forbidden}` };
+  if (bodyText.length < 80 || !hasConcreteExample(bodyText)) return { scope: "learningLessons.invalid_step_dropped", reason: "Step body is too thin or lacks a concrete example marker." };
+
+  const isConventions = standardCode.startsWith("CC.1.4.");
+  const isReading = standardCode.startsWith("CC.1.2.") || standardCode.startsWith("CC.1.3.");
+  const hasConventionsMismatch = CONVENTIONS_MISMATCH_TERMS.some((term) => titleBody.includes(term));
+  const hasConventionsTerm = CONVENTIONS_TERMS.some((term) => titleBody.includes(term));
+  const hasGrammarTerm = GRAMMAR_TERMS.some((term) => titleBody.includes(term));
+  const hasReadingTerm = READING_TERMS.some((term) => titleBody.includes(term));
+
+  if (isConventions && hasConventionsMismatch && !hasConventionsTerm) return { scope: "learningLessons.strand_mismatch", reason: "Conventions step used reading-analysis vocabulary without conventions terminology." };
+  if (isReading && hasGrammarTerm && !hasReadingTerm) return { scope: "learningLessons.strand_mismatch", reason: "Reading step used grammar vocabulary without passage-analysis terminology." };
+  if (stepType === "EXPLANATION" && !hasConcreteExample(bodyText)) return { scope: "learningLessons.invalid_step_dropped", reason: "Explanation step lacks positive/common-error examples." };
+  return null;
+}
+
+function hasConcreteExample(text: string) {
+  const lower = text.toLowerCase();
+  return EXAMPLE_MARKERS.some((marker) => lower.includes(marker)) || /"[^"]{3,}"/.test(text);
+}
+
+function standardStrand(standardCode: string) {
+  if (standardCode.startsWith("CC.1.4.")) return "Conventions and Writing";
+  if (standardCode.startsWith("CC.1.3.")) return "Literary Text";
+  if (standardCode.startsWith("CC.1.2.")) return "Informational Text";
+  return "ELA";
 }
 
 function buildDeterministicSteps({

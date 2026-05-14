@@ -28,7 +28,9 @@ export function StudentSessionPage() {
   const [studentGrade, setStudentGrade] = useState<number | null>(null);
   const [jobStatus, setJobStatus] = useState<any>(null);
   const [jobPollingTimedOut, setJobPollingTimedOut] = useState(false);
+  const [showLessonsReadyCta, setShowLessonsReadyCta] = useState(false);
   const lastLessonsEnrichedCount = useRef<number | null>(null);
+  const lessonsReadySince = useRef<number | null>(null);
   const finalizingSubmitRef = useRef(false);
   const report = useMemo(() => buildDetailedReport(demoStudent, history, questionPath), [history, questionPath]);
 
@@ -55,6 +57,16 @@ export function StudentSessionPage() {
         if (res.ok) {
           const json = await res.json();
           setJobStatus(json);
+          const lessonsReady = json.totalLessons > 0 && json.lessonsEnrichedCount === json.totalLessons && json.pathEnriched;
+          if (lessonsReady) {
+            if (lessonsReadySince.current === null) lessonsReadySince.current = Date.now();
+            const elapsedReady = Date.now() - lessonsReadySince.current;
+            if (elapsedReady >= 2_000) setShowLessonsReadyCta(true);
+            else setTimeout(() => setShowLessonsReadyCta(true), 2_000 - elapsedReady);
+          } else {
+            lessonsReadySince.current = null;
+            setShowLessonsReadyCta(false);
+          }
           const previousLessons = lastLessonsEnrichedCount.current;
           if (previousLessons !== null && json.lessonsEnrichedCount !== previousLessons) await refreshCurrentSession();
           lastLessonsEnrichedCount.current = json.lessonsEnrichedCount;
@@ -196,6 +208,8 @@ export function StudentSessionPage() {
       setSessionPayload((prev: any) => ({ ...prev, learningPath: submitJson.learningPath, jobs: submitJson.jobs }));
       setJobStatus(null);
       setJobPollingTimedOut(false);
+      setShowLessonsReadyCta(false);
+      lessonsReadySince.current = null;
       lastLessonsEnrichedCount.current = null;
       await loadAssignments();
       setReviewOpen(false);
@@ -225,7 +239,7 @@ export function StudentSessionPage() {
   if (mode === "list") return <StudentAssignmentListPage assignments={assignments} readingCoachAssignments={readingCoachAssignments} latestLearningPath={latestLearningPath} studentGrade={studentGrade} onOpen={openAssignment} onOpenLearningPath={openLearningPathWindow} onOpenTdaPractice={() => setMode("tdaPractice")} onReadingCoachComplete={loadAssignments} onJoinClass={loadAssignments} />;
   if (mode === "learningPath") return <StudentLearningPathPage learningPath={latestLearningPath} onBack={backToAssignments} />;
   if (mode === "tdaPractice") return <StudentTdaPracticePage onBack={backToAssignments} />;
-  if (mode === "report") return <div className="space-y-4"><button onClick={backToAssignments} className="rounded-xl bg-slate-200 px-4 py-2">Back to Assignments</button>{jobPollingTimedOut ? <div className="rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm font-semibold text-amber-800">Some content is still being prepared. Please refresh later.</div> : jobStatus?.jobs?.some((job: any) => job.status !== "COMPLETED") ? <div className="rounded-2xl border border-blue-100 bg-blue-50 p-4 text-sm font-semibold text-blue-800">Crafting your personalized lessons...</div> : null}<StudentReport report={report} /><LearningPathPanel learningPath={sessionPayload?.learningPath} /></div>;
+  if (mode === "report") return <div className="space-y-4"><button onClick={backToAssignments} className="rounded-xl bg-slate-200 px-4 py-2">Back to Assignments</button>{jobPollingTimedOut ? <div className="rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm font-semibold text-amber-800">Some content is still being prepared. Please refresh later.</div> : showLessonsReadyCta ? <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-sm font-semibold text-emerald-900"><div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between"><div><p className="text-base font-black">Your personalized lessons are ready</p><p className="mt-1 text-sm text-emerald-800">Your learning path has been enriched and is ready to start.</p></div><a href="/student/learning-path" className="w-fit rounded-xl bg-emerald-700 px-4 py-2 text-sm font-black text-white hover:bg-emerald-800">Start learning →</a></div></div> : jobStatus?.jobs?.some((job: any) => job.status !== "COMPLETED") ? <div className="rounded-2xl border border-blue-100 bg-blue-50 p-4 text-sm font-semibold text-blue-800">Crafting your personalized lessons...</div> : null}<StudentReport report={report} /><LearningPathPanel learningPath={sessionPayload?.learningPath} /></div>;
   return <div className="space-y-4"><StudentTest currentQuestion={questionPath[currentQuestionNumber - 1]} currentQuestionNumber={currentQuestionNumber} totalQuestions={questionPath.length || totalSimQuestions} history={history} onSubmitAnswer={onSubmitAnswer} onNavigate={goToQuestion} onPause={() => setIsPaused(true)} onReview={() => setReviewOpen(true)} onEndTest={submitTestNow} onToggleFlag={() => toggleFlag(questionPath[currentQuestionNumber - 1].id)} flaggedQuestionIds={flaggedQuestionIds} isPaused={isPaused} onResume={() => setIsPaused(false)} reviewOpen={reviewOpen} onCloseReview={() => setReviewOpen(false)} questionIds={questionPath.map((question) => question.id)} /></div>;
 }
 

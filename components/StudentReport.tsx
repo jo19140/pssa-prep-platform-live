@@ -53,8 +53,12 @@ export function StudentReport({ report }: { report: any }) {
                 <p className="mt-2 text-sm text-slate-700">{essay.feedback}</p>
                 <FeedbackList title="Strengths" items={essay.strengths || []} />
                 <FeedbackList title="Areas for Growth" items={essay.areasForGrowth || []} />
-                <p className="mt-3 text-sm font-semibold text-slate-900">Next Steps</p>
-                <ul className="mt-1 list-disc pl-5 text-sm text-slate-700">{(essay.nextSteps || []).map((item: string) => <li key={item}>{item}</li>)}</ul>
+                {(essay.nextSteps || []).length ? (
+                  <>
+                    <p className="mt-3 text-sm font-semibold text-slate-900">Next Steps</p>
+                    <ul className="mt-1 list-disc pl-5 text-sm text-slate-700">{(essay.nextSteps || []).map((item: string) => <li key={item}>{item}</li>)}</ul>
+                  </>
+                ) : null}
               </div>
             ))}
           </div>
@@ -103,7 +107,7 @@ export function StudentReport({ report }: { report: any }) {
               <p className="mt-2 font-semibold">{item.question}</p>
               {item.gradingPending ? <p className="mt-2 text-sm font-semibold text-amber-700">Essay grading in progress</p> : <p className={`mt-2 text-sm font-semibold ${item.isCorrect ? "text-emerald-700" : "text-rose-700"}`}>{item.isCorrect ? "Correct" : "Incorrect"}</p>}
               <p className="mt-1 text-sm text-slate-600">Your answer: {item.studentAnswerLabel}</p>
-              <p className="mt-1 text-sm text-slate-600">Correct answer: {item.gradingPending ? "Essay grading in progress" : item.correctAnswerLabel}</p>
+              <p className="mt-1 whitespace-pre-line text-sm text-slate-600">Correct answer: {item.gradingPending ? "Essay grading in progress" : item.correctAnswerLabel}</p>
             </div>
           ))}
         </div>
@@ -117,11 +121,13 @@ function Metric({ title, value }: { title: string; value: string }) {
 }
 
 function FeedbackList({ title, items }: { title: string; items: any[] }) {
+  const visibleItems = (items || []).filter(Boolean);
+  if (!visibleItems.length) return null;
   return (
     <>
       <p className="mt-3 text-sm font-semibold text-slate-900">{title}</p>
       <ul className="mt-1 list-disc pl-5 text-sm text-slate-700">
-        {items.map((item, index) => <li key={feedbackKey(item, index)}>{formatFeedbackItem(item)}</li>)}
+        {visibleItems.map((item, index) => <li key={feedbackKey(item, index)}>{formatFeedbackItem(item)}</li>)}
       </ul>
     </>
   );
