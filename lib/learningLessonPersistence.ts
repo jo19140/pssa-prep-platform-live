@@ -97,6 +97,7 @@ export async function updateLearningLessonFromBuild({
       resourceUrl: lessonBuild.resourceUrl,
       resourceProvider: lessonBuild.resourceProvider,
       resourceDescription: lessonBuild.resourceDescription,
+      heroResourceLink: lessonBuild.heroResourceLinkId ? { connect: { id: lessonBuild.heroResourceLinkId } } : { disconnect: true },
       guidedPractice: lessonBuild.guidedPractice as Prisma.InputJsonValue,
       independentPractice: lessonBuild.independentPractice as Prisma.InputJsonValue,
       exitTicket: lessonBuild.exitTicket as Prisma.InputJsonValue,
@@ -105,6 +106,10 @@ export async function updateLearningLessonFromBuild({
       generatedBy: lessonBuild.generatedBy,
       aiStatus: lessonBuild.aiStatus,
       sourcePayload: lessonBuild.sourcePayload as Prisma.InputJsonValue,
+      steps: {
+        deleteMany: {},
+        create: lessonStepCreateData(lessonBuild),
+      },
       items: {
         create: lessonBuild.items.map((item) => ({
           itemType: item.itemType,
@@ -166,6 +171,7 @@ function learningLessonCreateData({
     resourceUrl: lessonBuild.resourceUrl,
     resourceProvider: lessonBuild.resourceProvider,
     resourceDescription: lessonBuild.resourceDescription,
+    heroResourceLink: lessonBuild.heroResourceLinkId ? { connect: { id: lessonBuild.heroResourceLinkId } } : undefined,
     guidedPractice: lessonBuild.guidedPractice as Prisma.InputJsonValue,
     independentPractice: lessonBuild.independentPractice as Prisma.InputJsonValue,
     exitTicket: lessonBuild.exitTicket as Prisma.InputJsonValue,
@@ -174,6 +180,9 @@ function learningLessonCreateData({
     generatedBy: lessonBuild.generatedBy,
     aiStatus: lessonBuild.aiStatus,
     sourcePayload: lessonBuild.sourcePayload as Prisma.InputJsonValue,
+    steps: {
+      create: lessonStepCreateData(lessonBuild),
+    },
     items: {
       create: lessonBuild.items.map((item) => ({
         itemType: item.itemType,
@@ -201,6 +210,13 @@ function lessonFromBuild(existing: any, lessonBuild: LearningLessonBuild, userId
     resourceUrl: lessonBuild.resourceUrl,
     resourceProvider: lessonBuild.resourceProvider,
     resourceDescription: lessonBuild.resourceDescription,
+    heroResourceLinkId: lessonBuild.heroResourceLinkId || null,
+    heroResourceLink: lessonBuild.heroResource || existing.heroResourceLink,
+    steps: (lessonBuild.steps || []).map((step) => ({
+      id: `${existing.id}-step-${step.order}-fallback`,
+      lessonId: existing.id,
+      ...step,
+    })),
     guidedPractice: lessonBuild.guidedPractice,
     independentPractice: lessonBuild.independentPractice,
     exitTicket: lessonBuild.exitTicket,
@@ -222,4 +238,18 @@ function lessonFromBuild(existing: any, lessonBuild: LearningLessonBuild, userId
       order: item.order,
     })),
   };
+}
+
+function lessonStepCreateData(lessonBuild: LearningLessonBuild) {
+  return (lessonBuild.steps || []).map((step) => ({
+    order: step.order,
+    stepType: step.stepType,
+    title: step.title,
+    bodyText: step.bodyText,
+    narrationScript: step.narrationScript,
+    audioUrl: step.audioUrl || null,
+    imageUrl: step.imageUrl || null,
+    imagePrompt: step.imagePrompt || null,
+    checkQuestion: step.checkQuestion ? (step.checkQuestion as Prisma.InputJsonValue) : Prisma.JsonNull,
+  }));
 }

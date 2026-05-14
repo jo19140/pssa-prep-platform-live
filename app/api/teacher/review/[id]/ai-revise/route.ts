@@ -5,7 +5,7 @@ import { getServerSession } from "next-auth";
 import { z } from "zod";
 import { authOptions } from "@/lib/auth";
 import { db } from "@/lib/db";
-import { getSection, normalizeReviewContent, TEXT_SECTION_TYPES, validateSectionContent } from "@/lib/lessonReview";
+import { getSection, normalizeReviewContent, STEP_SECTION_TYPES, TEXT_SECTION_TYPES, validateSectionContent } from "@/lib/lessonReview";
 
 const schema = z.object({
   sectionType: z.string().trim().max(80),
@@ -33,7 +33,11 @@ export async function POST(req: Request, { params }: { params: Promise<{ id: str
       model: process.env.OPENAI_LESSON_MODEL || process.env.OPENAI_LEARNING_PATH_MODEL || "gpt-4o-mini",
       response_format: { type: "json_object" },
       messages: [
-        { role: "system", content: "You revise one section of an ELA lesson. Return only JSON with a revised field in the same JSON shape as the original section. Do not change other sections." },
+        {
+          role: "system",
+          content:
+            "You revise one section of an ELA lesson. Return only JSON with a revised field in the same JSON shape as the original section. For step fields, revise only that field and preserve its purpose. Do not change other sections.",
+        },
         { role: "user", content: JSON.stringify({ teacherInstruction: parsed.data.instructionText, originalSection: original }) },
       ],
     });
@@ -59,6 +63,17 @@ export async function POST(req: Request, { params }: { params: Promise<{ id: str
 }
 
 function normalizeAiRevisionCandidate(sectionType: string, candidate: unknown) {
+  if (STEP_SECTION_TYPES.has(sectionType)) {
+    if (sectionType === "STEP_CHECK_QUESTION") return candidate;
+    if (typeof candidate === "string") return candidate;
+    if (candidate && typeof candidate === "object") {
+      const source = candidate as Record<string, any>;
+      if (sectionType === "STEP_TITLE") return source.title || source.text || JSON.stringify(candidate);
+      if (sectionType === "STEP_BODY") return source.bodyText || source.text || source.content || JSON.stringify(candidate);
+      if (sectionType === "STEP_NARRATION") return source.narrationScript || source.text || source.script || JSON.stringify(candidate);
+    }
+    return candidate;
+  }
   if (!TEXT_SECTION_TYPES.has(sectionType)) return candidate;
   if (typeof candidate === "string") return candidate;
   if (candidate && typeof candidate === "object") {

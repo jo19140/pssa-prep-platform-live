@@ -16,6 +16,13 @@ type ResourceLike = {
   description?: string | null;
 };
 
+type ResourceMatch = ResourceLike & {
+  id: string;
+  gradeLevel?: number | null;
+  standardCode: string;
+  skill: string;
+};
+
 type ResponseLike = {
   standardCode: string;
   standardLabel: string;
@@ -42,6 +49,9 @@ export type LearningLessonBuild = {
   resourceUrl?: string | null;
   resourceProvider?: string | null;
   resourceDescription?: string | null;
+  heroResourceLinkId?: string | null;
+  heroResource?: ResourceLike | null;
+  steps?: LessonStepBuild[];
   guidedPractice: PracticeQuestion[];
   independentPractice: PracticeQuestion[];
   exitTicket: PracticeQuestion[];
@@ -58,6 +68,25 @@ type LessonSectionBuild = {
   title: string;
   content: Record<string, unknown>;
   order: number;
+};
+
+export type LessonStepBuild = {
+  order: number;
+  stepType: "INTRO" | "EXPLANATION" | "MODEL" | "CHECK_QUESTION" | "WORKED_EXAMPLE" | "TRANSITION";
+  title: string;
+  bodyText: string;
+  narrationScript: string;
+  audioUrl?: string | null;
+  imageUrl?: string | null;
+  imagePrompt?: string | null;
+  checkQuestion?: StepCheckQuestion | null;
+};
+
+export type StepCheckQuestion = {
+  question: string;
+  choices: string[];
+  correctIndex: number;
+  explanation: string;
 };
 
 export type PracticeQuestion = {
@@ -107,25 +136,74 @@ export async function buildLearningLessons({
       messages: [
         {
           role: "system",
-          content: "You write short, student-friendly ELA tutoring lessons. Return only JSON. Keep mastery/scoring decisions out of the content.",
+          content:
+            "You design concise, student-friendly ELA mini-lessons. Return only JSON. Keep validated scoring decisions out of the content. Each lesson must include a 4-6 step teaching sequence that sounds like a warm teacher, not formal prose.",
         },
         {
           role: "user",
           content: JSON.stringify({
-            task: "Improve these deterministic lessons for a Pennsylvania PSSA prep app. Keep standards, skill, priority, resource fields, and question answer keys. Adjust reading level for the grade.",
+            task: "Improve these deterministic lessons for a Pennsylvania PSSA ELA module. Keep standards, skill, priority, resource fields, and question answer keys. Adjust reading level for the grade.",
             gradeLevel,
-            qualityBlueprint: "Every lesson must teach before practice, use original text, include scaffolded feedback, increase text complexity/evidence demand by grade, and move from guided practice to independent mastery.",
+            pedagogy:
+              "Create a 4-6 step teaching sequence following this pattern: (1) Hook/intro with a relatable scenario. (2) Explanation in student-friendly language. (3) Model with think-aloud reasoning. (4) Check question MCQ. (5) Worked example with explicit reasoning. (6) Transition into practice. Grade 3 should be shorter and simpler; grade 8 can be more abstract. Narration scripts should sound like a warm teacher speaking.",
+            qualityBlueprint:
+              "Every lesson must teach before practice, use original text, include scaffolded feedback, increase text complexity/evidence demand by grade, and move from guided practice to independent mastery.",
             schema: {
               lessons: [
                 {
                   learningPathItemOrder: "number",
-                  lessonExplanation: "string",
-                  workedExample: "string",
+                  steps: [
+                    {
+                      order: "number, 1-indexed",
+                      stepType: "INTRO | EXPLANATION | MODEL | CHECK_QUESTION | WORKED_EXAMPLE | TRANSITION",
+                      title: "string, 4-8 words",
+                      bodyText: "string, 50-120 words, what the student reads",
+                      narrationScript: "string, 30-80 words, warm teacher voice",
+                      imagePrompt: "string or null; only for intro/model/worked example when a visual helps",
+                      checkQuestion: {
+                        question: "string",
+                        choices: ["four answer choices"],
+                        correctIndex: "number from 0-3",
+                        explanation: "string",
+                      },
+                    },
+                  ],
                   guidedPractice: "array of 4 scaffolded practice questions with passage, coachHint, choices, correctAnswer, explanation",
                   independentPractice: "array of 5 practice questions with fresh passage or sentence context, choices, correctAnswer, explanation",
                   exitTicket: "array of 1 practice question",
                   masteryCheck: "array of 3 PSSA-style mastery questions with passage, choices, correctAnswer, explanation",
                   retestRecommendation: "string",
+                },
+              ],
+            },
+            exemplar: {
+              learningPathItemOrder: 1,
+              steps: [
+                {
+                  order: 1,
+                  stepType: "INTRO",
+                  title: "Why Evidence Matters",
+                  bodyText:
+                    "Imagine two friends disagree about what happened in a story. The stronger answer is not the louder one. It is the answer that points back to the text and explains why the detail matters.",
+                  narrationScript:
+                    "Today we are going to practice proving an answer with the text. Strong readers do not just guess. They show exactly where their thinking comes from.",
+                  imagePrompt: "A student comparing two highlighted sentences in a colorful reading notebook, no text in image",
+                  checkQuestion: null,
+                },
+                {
+                  order: 2,
+                  stepType: "CHECK_QUESTION",
+                  title: "Quick Evidence Check",
+                  bodyText:
+                    "Before you practice, check the main idea: evidence should prove the answer, not just mention the same topic. Choose the detail that directly supports the claim.",
+                  narrationScript: "Let us pause for one quick check. Which answer gives proof, not just a related detail?",
+                  imagePrompt: null,
+                  checkQuestion: {
+                    question: "Which detail is strongest evidence that Maya is prepared?",
+                    choices: ["Maya brought extra pencils.", "The room was quiet.", "The test was on Friday.", "Maya likes reading."],
+                    correctIndex: 0,
+                    explanation: "Bringing extra pencils directly shows preparation.",
+                  },
                 },
               ],
             },
@@ -144,8 +222,9 @@ export async function buildLearningLessons({
       if (!aiLesson) return { ...lesson, aiStatus: "FAILED" as const };
       const merged = {
         ...lesson,
-        lessonExplanation: safeString(aiLesson.lessonExplanation, lesson.lessonExplanation),
-        workedExample: safeString(aiLesson.workedExample, lesson.workedExample),
+        lessonExplanation: "",
+        workedExample: "",
+        steps: safeSteps(aiLesson.steps, lesson),
         guidedPractice: safePractice(aiLesson.guidedPractice, lesson.guidedPractice, lesson),
         independentPractice: safePractice(aiLesson.independentPractice, lesson.independentPractice, lesson),
         exitTicket: safePractice(aiLesson.exitTicket, lesson.exitTicket, lesson),
@@ -154,7 +233,13 @@ export async function buildLearningLessons({
         generatedBy: "AI_ENRICHED" as const,
         aiStatus: "COMPLETED" as const,
       };
-      const withQuality = withQualityPayload({ ...merged, items: buildLessonSections(merged) });
+      const heroResource = await findHeroResourceForLesson(lesson);
+      const withQuality = withQualityPayload({
+        ...merged,
+        heroResourceLinkId: heroResource?.id || null,
+        heroResource: heroResource ? resourceFromDb(heroResource) : null,
+        items: buildLessonSections(merged),
+      });
       const moderated = await moderateLessonContent(openai, withQuality, lesson);
       await persistLessonCache(moderated);
       return moderated;
@@ -198,6 +283,37 @@ export function buildDeterministicLearningLessons({
 
 export function resourceKey(gradeLevel: number, standardCode: string, skill: string) {
   return `${gradeLevel || 0}:${standardCode}:${skill.toLowerCase()}`;
+}
+
+async function findHeroResourceForLesson(lesson: Pick<LearningLessonBuild, "gradeLevel" | "standardCode" | "skill">): Promise<ResourceMatch | null> {
+  const normalizedSkill = lesson.skill.trim();
+  const candidates = await db.resourceLink.findMany({
+    where: { standardCode: lesson.standardCode },
+    orderBy: [{ gradeLevel: "desc" }, { updatedAt: "desc" }],
+    take: 50,
+  });
+  const exact = candidates.find((resource) => resource.gradeLevel === lesson.gradeLevel && normalizeKey(resource.skill) === normalizeKey(normalizedSkill));
+  const gradeStandard = candidates.find((resource) => resource.gradeLevel === lesson.gradeLevel);
+  const skillStandard = candidates.find((resource) => normalizeKey(resource.skill) === normalizeKey(normalizedSkill));
+  const match = exact || gradeStandard || skillStandard || candidates[0] || null;
+  if (!match) {
+    logAiFailure({
+      scope: "learningLessons.no_resource_link",
+      error: new Error("No ResourceLink matched lesson hero video criteria."),
+      context: { gradeLevel: lesson.gradeLevel, standardCode: lesson.standardCode, skill: lesson.skill },
+    });
+    return null;
+  }
+  return match;
+}
+
+function resourceFromDb(resource: ResourceMatch): ResourceLike {
+  return {
+    title: resource.title,
+    url: resource.url,
+    provider: resource.provider,
+    description: resource.description,
+  };
 }
 
 export function lessonCacheKey(lesson: Pick<LearningLessonBuild, "gradeLevel" | "standardCode" | "skill" | "sourcePayload">) {
@@ -308,8 +424,9 @@ async function moderateLessonContent(openai: OpenAI, lesson: LearningLessonBuild
     const practiceTexts = [...lesson.guidedPractice, ...lesson.independentPractice, ...lesson.exitTicket, ...lesson.masteryCheck].flatMap((practice) =>
       [practice.passage, practice.question, practice.explanation].filter(Boolean),
     );
+    const stepTexts = (lesson.steps || []).flatMap((step) => [step.title, step.bodyText, step.narrationScript, step.checkQuestion?.question, step.checkQuestion?.explanation].filter(Boolean));
     const response = await openai.moderations.create({
-      input: [lesson.lessonExplanation, lesson.workedExample, ...practiceTexts],
+      input: [lesson.lessonExplanation, lesson.workedExample, ...stepTexts, ...practiceTexts],
     });
     if (response.results.some((result) => result.flagged)) {
       console.warn("AI lesson moderation flagged content", {
@@ -402,6 +519,9 @@ export function buildFallbackLesson({
     resourceUrl: resource?.url || RESOURCE_FALLBACK.url,
     resourceProvider: resource?.provider || RESOURCE_FALLBACK.provider,
     resourceDescription: resource?.description || RESOURCE_FALLBACK.description,
+    heroResourceLinkId: null,
+    heroResource: null,
+    steps: buildDeterministicSteps({ skill: item.skill, gradeLevel, lessonExplanation, workedExample }),
     guidedPractice,
     independentPractice,
     exitTicket,
@@ -692,6 +812,128 @@ function mostCommon(values: string[]) {
 
 function safeString(value: unknown, fallback: string) {
   return typeof value === "string" && value.trim().length > 20 ? value : fallback;
+}
+
+function safeSteps(value: unknown, fallback: LearningLessonBuild): LessonStepBuild[] {
+  const deterministic = buildDeterministicSteps({
+    skill: fallback.skill,
+    gradeLevel: fallback.gradeLevel,
+    lessonExplanation: fallback.lessonExplanation,
+    workedExample: fallback.workedExample,
+  });
+  if (!Array.isArray(value)) return deterministic;
+
+  const steps = value
+    .map((raw, index) => normalizeStep(raw, index + 1, fallback))
+    .filter((step): step is LessonStepBuild => Boolean(step))
+    .sort((a, b) => a.order - b.order)
+    .map((step, index) => ({ ...step, order: index + 1 }));
+
+  if (steps.length < 3) {
+    logAiFailure({
+      scope: "learningLessons.invalid_step_dropped",
+      error: new Error("Fewer than three valid lesson steps remained after validation."),
+      context: { standardCode: fallback.standardCode, skill: fallback.skill, validStepCount: steps.length },
+    });
+    return deterministic;
+  }
+
+  return steps.slice(0, 6);
+}
+
+function normalizeStep(raw: unknown, fallbackOrder: number, context: { standardCode: string; skill: string }): LessonStepBuild | null {
+  if (!raw || typeof raw !== "object" || Array.isArray(raw)) return null;
+  const source = raw as Record<string, unknown>;
+  const stepType = normalizeStepType(source.stepType);
+  const title = stringInRange(source.title, 5, 100);
+  const bodyText = stringInRange(source.bodyText, 50, 500);
+  const narrationScript = stringInRange(source.narrationScript, 30, 300);
+  const checkQuestion = stepType === "CHECK_QUESTION" ? normalizeCheckQuestion(source.checkQuestion) : null;
+
+  if (!stepType || !title || !bodyText || !narrationScript || (stepType === "CHECK_QUESTION" && !checkQuestion)) {
+    logAiFailure({
+      scope: "learningLessons.invalid_step_dropped",
+      error: new Error("Malformed AI lesson step."),
+      context: { standardCode: context.standardCode, skill: context.skill, stepType: String(source.stepType || ""), fallbackOrder },
+    });
+    return null;
+  }
+
+  return {
+    order: Number(source.order) > 0 ? Number(source.order) : fallbackOrder,
+    stepType,
+    title,
+    bodyText,
+    narrationScript,
+    imagePrompt: typeof source.imagePrompt === "string" && source.imagePrompt.trim() ? source.imagePrompt.trim().slice(0, 800) : null,
+    checkQuestion,
+  };
+}
+
+function buildDeterministicSteps({
+  skill,
+  gradeLevel,
+  lessonExplanation,
+  workedExample,
+}: {
+  skill: string;
+  gradeLevel: number;
+  lessonExplanation: string;
+  workedExample: string;
+}): LessonStepBuild[] {
+  return [
+    {
+      order: 1,
+      stepType: "INTRO",
+      title: `Start ${skill}`.slice(0, 100),
+      bodyText: `This lesson focuses on ${skill}. You will learn a simple way to notice the key details, explain your thinking, and get ready for targeted practice.`,
+      narrationScript: `Let's start with ${skill}. I will show you what to look for, then you will try a quick check and practice on your own.`,
+      imagePrompt: `A student-friendly scene showing grade ${gradeLevel} learners using reading clues for ${skill}, no text in image`,
+      checkQuestion: null,
+    },
+    {
+      order: 2,
+      stepType: "EXPLANATION",
+      title: "Learn The Skill",
+      bodyText: lessonExplanation,
+      narrationScript: lessonExplanation.slice(0, 280),
+      imagePrompt: null,
+      checkQuestion: null,
+    },
+    {
+      order: 3,
+      stepType: "WORKED_EXAMPLE",
+      title: "Watch One Example",
+      bodyText: workedExample,
+      narrationScript: workedExample.slice(0, 280),
+      imagePrompt: `A clear classroom reading moment that supports ${skill}, no words or labels in the image`,
+      checkQuestion: null,
+    },
+  ];
+}
+
+function normalizeStepType(value: unknown): LessonStepBuild["stepType"] | null {
+  const text = typeof value === "string" ? value.trim().toUpperCase() : "";
+  if (["INTRO", "EXPLANATION", "MODEL", "CHECK_QUESTION", "WORKED_EXAMPLE", "TRANSITION"].includes(text)) return text as LessonStepBuild["stepType"];
+  return null;
+}
+
+function normalizeCheckQuestion(value: unknown): StepCheckQuestion | null {
+  if (!value || typeof value !== "object" || Array.isArray(value)) return null;
+  const source = value as Record<string, unknown>;
+  const question = stringInRange(source.question, 10, 500);
+  const explanation = stringInRange(source.explanation, 20, 800);
+  const choices = Array.isArray(source.choices) ? source.choices.map((choice) => String(choice).trim()).filter(Boolean).slice(0, 4) : [];
+  const correctIndex = Number(source.correctIndex);
+  if (!question || !explanation || choices.length !== 4 || !Number.isInteger(correctIndex) || correctIndex < 0 || correctIndex >= choices.length) return null;
+  return { question, choices, correctIndex, explanation };
+}
+
+function stringInRange(value: unknown, min: number, max: number) {
+  if (typeof value !== "string") return "";
+  const text = value.trim();
+  if (text.length < min || text.length > max) return "";
+  return text;
 }
 
 function safePractice(value: unknown, fallback: PracticeQuestion[], context: { standardCode: string; skill: string }) {

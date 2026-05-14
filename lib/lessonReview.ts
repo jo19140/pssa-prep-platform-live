@@ -1,8 +1,9 @@
 import { Prisma } from "@prisma/client";
-import type { LearningLessonBuild, PracticeQuestion } from "@/lib/learningLessons";
+import type { LearningLessonBuild, LessonStepBuild, PracticeQuestion } from "@/lib/learningLessons";
 
 export const TEXT_SECTION_TYPES = new Set(["LESSON_EXPLANATION", "WORKED_EXAMPLE", "RETEST_RECOMMENDATION"]);
 export const QUESTION_SECTION_TYPES = new Set(["GUIDED_PRACTICE_ITEM", "INDEPENDENT_PRACTICE_ITEM", "EXIT_TICKET_ITEM", "MASTERY_CHECK_ITEM"]);
+export const STEP_SECTION_TYPES = new Set(["STEP_TITLE", "STEP_BODY", "STEP_NARRATION", "STEP_CHECK_QUESTION"]);
 
 export type ReviewContent = LearningLessonBuild;
 
@@ -26,6 +27,27 @@ export function lessonToReviewContent(lesson: any): ReviewContent {
     resourceUrl: lesson.resourceUrl,
     resourceProvider: lesson.resourceProvider,
     resourceDescription: lesson.resourceDescription,
+    heroResourceLinkId: lesson.heroResourceLinkId || null,
+    heroResource: lesson.heroResourceLink
+      ? {
+          title: lesson.heroResourceLink.title,
+          url: lesson.heroResourceLink.url,
+          provider: lesson.heroResourceLink.provider,
+          description: lesson.heroResourceLink.description,
+        }
+      : null,
+    steps: (lesson.steps || []).map((step: any) => ({
+      id: step.id,
+      order: step.order,
+      stepType: step.stepType as LessonStepBuild["stepType"],
+      title: step.title,
+      bodyText: step.bodyText,
+      narrationScript: step.narrationScript,
+      audioUrl: step.audioUrl,
+      imageUrl: step.imageUrl,
+      imagePrompt: step.imagePrompt,
+      checkQuestion: step.checkQuestion,
+    })),
     guidedPractice: lesson.guidedPractice || [],
     independentPractice: lesson.independentPractice || [],
     exitTicket: lesson.exitTicket || [],
@@ -46,6 +68,7 @@ export function getSection(content: ReviewContent, sectionType: string, sectionI
   if (sectionType === "INDEPENDENT_PRACTICE_ITEM") return content.independentPractice[sectionIndex ?? -1];
   if (sectionType === "EXIT_TICKET_ITEM") return content.exitTicket[sectionIndex ?? -1];
   if (sectionType === "MASTERY_CHECK_ITEM") return content.masteryCheck[sectionIndex ?? -1];
+  if (STEP_SECTION_TYPES.has(sectionType)) return getStepSection(content, sectionType, sectionIndex);
   return undefined;
 }
 
@@ -58,6 +81,7 @@ export function updateSection(content: ReviewContent, sectionType: string, secti
   else if (sectionType === "INDEPENDENT_PRACTICE_ITEM") next.independentPractice = updateQuestionArray(next.independentPractice, sectionIndex, newContent);
   else if (sectionType === "EXIT_TICKET_ITEM") next.exitTicket = updateQuestionArray(next.exitTicket, sectionIndex, newContent);
   else if (sectionType === "MASTERY_CHECK_ITEM") next.masteryCheck = updateQuestionArray(next.masteryCheck, sectionIndex, newContent);
+  else if (STEP_SECTION_TYPES.has(sectionType)) next.steps = updateStepArray(next.steps || [], sectionType, sectionIndex, newContent);
   else if (sectionType === "NEW_PRACTICE_QUESTION") {
     const payload = newContent as { practiceSection?: string; question?: unknown };
     const question = validatePracticeQuestion(payload.question);
@@ -83,6 +107,7 @@ export function learningLessonUpdateDataFromContent(content: ReviewContent) {
     resourceUrl: content.resourceUrl,
     resourceProvider: content.resourceProvider,
     resourceDescription: content.resourceDescription,
+    heroResourceLink: content.heroResourceLinkId ? { connect: { id: content.heroResourceLinkId } } : { disconnect: true },
     guidedPractice: content.guidedPractice as unknown as Prisma.InputJsonValue,
     independentPractice: content.independentPractice as unknown as Prisma.InputJsonValue,
     exitTicket: content.exitTicket as unknown as Prisma.InputJsonValue,
@@ -91,6 +116,20 @@ export function learningLessonUpdateDataFromContent(content: ReviewContent) {
     generatedBy: content.generatedBy,
     aiStatus: content.aiStatus,
     sourcePayload: content.sourcePayload as Prisma.InputJsonValue,
+    steps: {
+      deleteMany: {},
+      create: (content.steps || []).map((step) => ({
+        order: step.order,
+        stepType: step.stepType,
+        title: step.title,
+        bodyText: step.bodyText,
+        narrationScript: step.narrationScript,
+        audioUrl: step.audioUrl || null,
+        imageUrl: step.imageUrl || null,
+        imagePrompt: step.imagePrompt || null,
+        checkQuestion: step.checkQuestion ? (step.checkQuestion as unknown as Prisma.InputJsonValue) : Prisma.JsonNull,
+      })),
+    },
     items: {
       deleteMany: {},
       create: buildLessonSections(content).map((item) => ({
@@ -106,6 +145,7 @@ export function learningLessonUpdateDataFromContent(content: ReviewContent) {
 export function validateSectionContent(sectionType: string, newContent: unknown) {
   if (TEXT_SECTION_TYPES.has(sectionType)) return validateTextContent(newContent);
   if (QUESTION_SECTION_TYPES.has(sectionType)) return validatePracticeQuestion(newContent);
+  if (STEP_SECTION_TYPES.has(sectionType)) return validateStepSection(sectionType, newContent);
   throw new Error("Unsupported section type.");
 }
 
@@ -133,6 +173,14 @@ export function validatePracticeQuestion(value: unknown): PracticeQuestion {
   };
 }
 
+export function validateStepSection(sectionType: string, value: unknown) {
+  if (sectionType === "STEP_TITLE") return stringField(value, "title", 5, 100);
+  if (sectionType === "STEP_BODY") return stringField(value, "bodyText", 50, 500);
+  if (sectionType === "STEP_NARRATION") return stringField(value, "narrationScript", 30, 300);
+  if (sectionType === "STEP_CHECK_QUESTION") return validateStepCheckQuestion(value);
+  throw new Error("Unsupported step section.");
+}
+
 export function practiceSectionToSectionType(practiceSection: string) {
   if (practiceSection === "GUIDED") return "GUIDED_PRACTICE_ITEM";
   if (practiceSection === "INDEPENDENT") return "INDEPENDENT_PRACTICE_ITEM";
@@ -150,6 +198,42 @@ function updateQuestionArray(items: PracticeQuestion[], sectionIndex: number | n
     next[sectionIndex] = question;
   }
   return next;
+}
+
+function getStepSection(content: ReviewContent, sectionType: string, sectionIndex?: number | null) {
+  const step = content.steps?.[sectionIndex ?? -1];
+  if (!step) return undefined;
+  if (sectionType === "STEP_TITLE") return step.title;
+  if (sectionType === "STEP_BODY") return step.bodyText;
+  if (sectionType === "STEP_NARRATION") return step.narrationScript;
+  if (sectionType === "STEP_CHECK_QUESTION") return step.checkQuestion;
+  return undefined;
+}
+
+function updateStepArray(items: LessonStepBuild[], sectionType: string, sectionIndex: number | null | undefined, value: unknown) {
+  const index = sectionIndex ?? -1;
+  if (index < 0 || index >= items.length) throw new Error("Invalid step index.");
+  const next = [...items];
+  const step = { ...next[index] };
+  if (sectionType === "STEP_TITLE") step.title = validateStepSection(sectionType, value) as string;
+  else if (sectionType === "STEP_BODY") step.bodyText = validateStepSection(sectionType, value) as string;
+  else if (sectionType === "STEP_NARRATION") step.narrationScript = validateStepSection(sectionType, value) as string;
+  else if (sectionType === "STEP_CHECK_QUESTION") step.checkQuestion = validateStepSection(sectionType, value) as LessonStepBuild["checkQuestion"];
+  else throw new Error("Unsupported step section.");
+  next[index] = step;
+  return next;
+}
+
+function validateStepCheckQuestion(value: unknown) {
+  if (!value || typeof value !== "object" || Array.isArray(value)) throw new Error("Check question must be an object.");
+  const source = value as Record<string, unknown>;
+  const question = stringField(source.question, "question", 10, 500);
+  const explanation = stringField(source.explanation, "explanation", 20, 800);
+  const choices = Array.isArray(source.choices) ? source.choices.map((choice) => String(choice).trim()).filter(Boolean).slice(0, 4) : [];
+  const correctIndex = Number(source.correctIndex);
+  if (choices.length !== 4) throw new Error("Check question must include exactly 4 choices.");
+  if (!Number.isInteger(correctIndex) || correctIndex < 0 || correctIndex >= choices.length) throw new Error("correctIndex must point to a valid choice.");
+  return { question, choices, correctIndex, explanation };
 }
 
 function buildLessonSections(lesson: Omit<LearningLessonBuild, "items">) {

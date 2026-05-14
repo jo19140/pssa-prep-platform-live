@@ -373,6 +373,7 @@ model LearningLesson {
   resourceUrl          String?
   resourceProvider     String?
   resourceDescription  String?
+  heroResourceLinkId   String?
   guidedPractice       Json
   independentPractice  Json
   exitTicket           Json
@@ -391,9 +392,31 @@ model LearningLesson {
   updatedAt            DateTime                @updatedAt
   learningPath         LearningPath            @relation(fields: [learningPathId], references: [id], onDelete: Cascade)
   learningPathItem     LearningPathItem?       @relation(fields: [learningPathItemId], references: [id], onDelete: SetNull)
+  heroResourceLink     ResourceLink?           @relation(fields: [heroResourceLinkId], references: [id], onDelete: SetNull)
   items                LearningLessonItem[]
+  steps                LessonStep[]
   progress             StudentLessonProgress[]
   questAttempts        LearningQuestAttempt[]
+}
+
+model LessonStep {
+  id              String         @id @default(cuid())
+  lessonId        String
+  order           Int
+  stepType        String
+  title           String
+  bodyText        String
+  narrationScript String
+  audioUrl        String?
+  imageUrl        String?
+  imagePrompt     String?
+  checkQuestion   Json?
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+  lesson          LearningLesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+
+  @@unique([lessonId, order])
+  @@index([lessonId])
 }
 
 model LessonCache {
@@ -573,6 +596,7 @@ model ResourceLink {
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
   createdBy    User?    @relation(fields: [createdById], references: [id], onDelete: SetNull)
+  heroLessons  LearningLesson[]
 
   @@index([gradeLevel, standardCode])
   @@index([skill])

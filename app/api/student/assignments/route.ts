@@ -25,7 +25,16 @@ export async function GET() {
     where: { session: { is: { userId: (session.user as any).id, submittedAt: { not: null } } } },
     include: {
       items: { orderBy: { order: "asc" } },
-      lessons: { orderBy: { priority: "asc" }, include: { progress: { where: { userId: (session.user as any).id } }, questAttempts: { where: { userId: (session.user as any).id }, orderBy: { createdAt: "desc" }, take: 3 }, items: { orderBy: { order: "asc" } } } },
+      lessons: {
+        orderBy: { priority: "asc" },
+        include: {
+          progress: { where: { userId: (session.user as any).id } },
+          questAttempts: { where: { userId: (session.user as any).id }, orderBy: { createdAt: "desc" }, take: 3 },
+          items: { orderBy: { order: "asc" } },
+          steps: { orderBy: { order: "asc" } },
+          heroResourceLink: { select: { title: true, url: true, provider: true, description: true } },
+        },
+      },
       session: { include: { assessment: { select: { title: true, grade: true } }, responses: true } },
     },
     orderBy: { createdAt: "desc" },
@@ -38,6 +47,8 @@ export async function GET() {
           progress: { where: { userId: (session.user as any).id } },
           questAttempts: { where: { userId: (session.user as any).id }, orderBy: { createdAt: "desc" }, take: 3 },
           items: { orderBy: { order: "asc" } },
+          steps: { orderBy: { order: "asc" } },
+          heroResourceLink: { select: { title: true, url: true, provider: true, description: true } },
           learningPath: { select: { session: { select: { userId: true } } } },
         },
       },

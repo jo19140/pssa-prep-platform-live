@@ -16,7 +16,13 @@ export async function GET(_req: Request, { params }: { params: Promise<{ id: str
     where: { id },
     include: {
       lessonCache: true,
-      lesson: { include: { learningPath: { include: { items: true, session: { include: { assessment: true, responses: true } } } } } },
+      lesson: {
+        include: {
+          steps: { orderBy: { order: "asc" } },
+          heroResourceLink: { select: { title: true, url: true, provider: true, description: true } },
+          learningPath: { include: { items: true, session: { include: { assessment: true, responses: true } } } },
+        },
+      },
       editInstructions: { orderBy: { createdAt: "desc" } },
     },
   });
@@ -34,8 +40,26 @@ export async function GET(_req: Request, { params }: { params: Promise<{ id: str
     }).find((lesson) => lesson.standardCode === review.lessonCache?.standardCode && lesson.skill === review.lessonCache?.skill) || null;
   }
 
+  const hydratedReview = review.lesson?.steps?.length ? hydrateStepIds(review) : review;
+
   return NextResponse.json({
-    review,
+    review: hydratedReview,
     deterministicFallback,
   });
+}
+
+function hydrateStepIds(review: any) {
+  const stepsByOrder = new Map<number, any>((review.lesson.steps || []).map((step: any) => [step.order, step]));
+  const hydrate = (content: any) => {
+    if (!content?.steps?.length) return content;
+    return {
+      ...content,
+      steps: content.steps.map((step: any) => ({ ...step, id: step.id || stepsByOrder.get(step.order)?.id || null })),
+    };
+  };
+  return {
+    ...review,
+    aiOriginalContent: hydrate(review.aiOriginalContent),
+    currentContent: hydrate(review.currentContent),
+  };
 }

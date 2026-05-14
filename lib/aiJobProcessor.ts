@@ -3,6 +3,8 @@ import { logAiFailure } from "@/lib/aiTelemetry";
 import { db } from "@/lib/db";
 import { gradeTdaEssay } from "@/lib/essayGrader";
 import { buildLearningLessons, lessonCacheKey } from "@/lib/learningLessons";
+import { generateLessonImageForPayload, lessonImageGenerationEnabled } from "@/lib/lessonImageGeneration";
+import { generateStepAudio } from "@/lib/lessonStepAudio";
 import { buildDeterministicLearningPath, enrichLearningPathWithAi, type LearningPathBuild } from "@/lib/learningPath";
 import { loadResourcesByStandard, updateLearningLessonFromBuild } from "@/lib/learningLessonPersistence";
 import { recomputeReportForSession } from "@/lib/reportSummaryBuilder";
@@ -119,6 +121,7 @@ async function processLessonEnrichmentJob(sessionId: string) {
       lessonBuild: { ...lessonBuild, generatedBy: "AI_ENRICHED", aiStatus: "COMPLETED" },
     });
     if (updatedLesson && lessonBuild.generatedBy === "AI_ENRICHED" && lessonBuild.aiStatus === "COMPLETED") {
+      await generateStepAssets(updatedLesson.id);
       const cacheKey = lessonCacheKey(lessonBuild);
       const cache = await db.lessonCache.findUnique({ where: { cacheKey } });
       if (cache) {
@@ -133,6 +136,44 @@ async function processLessonEnrichmentJob(sessionId: string) {
       }
     }
   }
+}
+
+async function generateStepAssets(lessonId: string) {
+  const lesson = await db.learningLesson.findUnique({ where: { id: lessonId }, include: { steps: { orderBy: { order: "asc" } } } });
+  if (!lesson?.steps.length) return;
+
+  const imageSteps = lesson.steps.filter((step) => step.imagePrompt).slice(0, 2);
+  const audioResults = await Promise.allSettled(
+    lesson.steps.map(async (step) => {
+      const audioUrl = await generateStepAudio({ stepId: step.id, narrationScript: step.narrationScript });
+      if (audioUrl) await db.lessonStep.update({ where: { id: step.id }, data: { audioUrl } });
+    }),
+  );
+  audioResults.forEach((result, index) => {
+    if (result.status === "rejected") {
+      logAiFailure({
+        scope: "lessonStepAudio.promise",
+        error: result.reason,
+        context: { lessonId, stepId: lesson.steps[index]?.id },
+      });
+    }
+  });
+
+  if (!lessonImageGenerationEnabled()) return;
+  await Promise.allSettled(
+    imageSteps.map(async (step) => {
+      const result = await generateLessonImageForPayload({
+        title: step.title,
+        skill: lesson.skill,
+        gradeLevel: lesson.gradeLevel,
+        lessonExplanation: step.bodyText,
+        workedExample: step.narrationScript,
+        sourcePayload: { imagePrompt: step.imagePrompt },
+        force: true,
+      });
+      if (result.imageUrl) await db.lessonStep.update({ where: { id: step.id }, data: { imageUrl: result.imageUrl } });
+    }),
+  );
 }
 
 async function processLearningPathEnrichmentJob(sessionId: string) {

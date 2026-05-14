@@ -1,6 +1,7 @@
 import { Prisma } from "@prisma/client";
 import { db } from "@/lib/db";
 import { lessonCacheKey } from "@/lib/learningLessons";
+import { generateStepAudio } from "@/lib/lessonStepAudio";
 import { learningLessonUpdateDataFromContent, lessonToReviewContent, normalizeReviewContent } from "@/lib/lessonReview";
 
 export async function approveLessonReview(reviewId: string, userId: string) {
@@ -75,16 +76,26 @@ export async function rejectLessonReview(reviewId: string, userId: string, revie
 async function updateLessonsForCache(cacheKey: string, content: ReturnType<typeof normalizeReviewContent>, statusData: Record<string, unknown>) {
   const candidates = await db.learningLesson.findMany({
     where: { gradeLevel: content.gradeLevel, standardCode: content.standardCode, skill: content.skill },
-    include: { learningPathItem: true, items: true },
+    include: { learningPathItem: true, items: true, steps: { orderBy: { order: "asc" } }, heroResourceLink: true },
   });
   for (const lesson of candidates) {
     if (lessonCacheKey(lessonToReviewContent(lesson)) !== cacheKey) continue;
-    await db.learningLesson.update({
+    const previousNarration = new Map((lesson.steps || []).map((step) => [step.order, step.narrationScript]));
+    const updatedLesson = await db.learningLesson.update({
       where: { id: lesson.id },
       data: {
         ...learningLessonUpdateDataFromContent(content),
         ...statusData,
       },
+      include: { steps: { orderBy: { order: "asc" } } },
     });
+    await Promise.allSettled(
+      updatedLesson.steps
+        .filter((step) => previousNarration.get(step.order) && previousNarration.get(step.order) !== step.narrationScript)
+        .map(async (step) => {
+          const audioUrl = await generateStepAudio({ stepId: step.id, narrationScript: step.narrationScript });
+          if (audioUrl) await db.lessonStep.update({ where: { id: step.id }, data: { audioUrl } });
+        }),
+    );
   }
 }

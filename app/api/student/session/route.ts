@@ -41,7 +41,15 @@ export async function GET(req: Request) {
     learningPath: {
       include: {
         items: { orderBy: { order: "asc" as const } },
-        lessons: { orderBy: { priority: "asc" as const }, include: { progress: { where: { userId: (session.user as any).id } }, items: { orderBy: { order: "asc" as const } } } },
+        lessons: {
+          orderBy: { priority: "asc" as const },
+          include: {
+            progress: { where: { userId: (session.user as any).id } },
+            items: { orderBy: { order: "asc" as const } },
+            steps: { orderBy: { order: "asc" as const } },
+            heroResourceLink: { select: { title: true, url: true, provider: true, description: true } },
+          },
+        },
         session: { include: { responses: true, assessment: true } },
       },
     },

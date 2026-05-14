@@ -1,6 +1,7 @@
 "use client";
 
 import { Fragment, useEffect, useMemo, useRef, useState } from "react";
+import { LessonStepPlayer } from "@/components/LessonStepPlayer";
 import { StudentTutorAgentHelpButton } from "@/components/StudentTutorAgentPanel";
 import { buildLessonVisualMetadata, sceneForLessonSkill } from "@/lib/lessonVisuals";
 
@@ -707,7 +708,20 @@ function LessonDetail({
 
       <div className="p-6">
         {activeStep === "lesson" && (
-          <InstructionPlayer lesson={lesson} onContinue={completeLessonStep} immersive={immersive} />
+          Array.isArray(lesson.steps) && lesson.steps.length ? (
+            <div className="grid gap-5">
+              <LessonStepPlayer
+                steps={lesson.steps}
+                heroResource={lesson.heroResourceLink || lesson.heroResource || null}
+                lessonMetadata={{ grade: lesson.gradeLevel, standardCode: lesson.standardCode, skill: lesson.skill, title: lesson.title }}
+                onStartPractice={completeLessonStep}
+              />
+              <div className="h-px bg-slate-200" />
+              <p className="text-sm font-black uppercase tracking-wide text-slate-500">Practice begins next</p>
+            </div>
+          ) : (
+            <InstructionPlayer lesson={lesson} onContinue={completeLessonStep} immersive={immersive} />
+          )
         )}
 
         {activeStep === "guided" && <PracticeBlock title="Guided Practice" skill={lesson.skill} questions={lesson.guidedPractice} lessonImageUrl={getLessonImageUrl(lesson)} savedResponses={progress.guidedResponses} onComplete={(answers) => completePractice("guided", answers)} />}
