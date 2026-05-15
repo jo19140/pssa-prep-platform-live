@@ -34,6 +34,7 @@ export async function GET() {
     stepsGeneratedToday,
     stepAudioGenerationFailures: Object.entries(getAiFailureCounters()).reduce((sum, [scope, count]) => sum + (scope.startsWith("lessonStepAudio.") ? count : 0), 0),
     lessonsWithoutHeroResource,
+    lessonsWithoutConfidentHero: getAiFailureCounters()["learningLessons.no_confident_hero"] || 0,
     reviewQueue: {
       pendingReviewCount,
       approvedTodayCount,

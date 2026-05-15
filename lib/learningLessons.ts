@@ -327,25 +327,74 @@ export function resourceKey(gradeLevel: number, standardCode: string, skill: str
 }
 
 async function findHeroResourceForLesson(lesson: Pick<LearningLessonBuild, "gradeLevel" | "standardCode" | "skill">): Promise<ResourceMatch | null> {
-  const normalizedSkill = lesson.skill.trim();
+  const skillTokens = skillKeywordTokens(lesson.skill);
   const candidates = await db.resourceLink.findMany({
     where: { standardCode: lesson.standardCode },
     orderBy: [{ gradeLevel: "desc" }, { updatedAt: "desc" }],
     take: 50,
   });
-  const exact = candidates.find((resource) => resource.gradeLevel === lesson.gradeLevel && normalizeKey(resource.skill) === normalizeKey(normalizedSkill));
-  const gradeStandard = candidates.find((resource) => resource.gradeLevel === lesson.gradeLevel);
-  const skillStandard = candidates.find((resource) => normalizeKey(resource.skill) === normalizeKey(normalizedSkill));
-  const match = exact || gradeStandard || skillStandard || candidates[0] || null;
+  const exact = candidates.find((resource) => resource.gradeLevel === lesson.gradeLevel && hasSkillKeywordOverlap(resource.skill, skillTokens));
+  const standardFallback = candidates.find((resource) => hasSkillKeywordOverlap(resource.skill, skillTokens));
+  const skillCandidates = skillTokens.length
+    ? await db.resourceLink.findMany({
+        where: {
+          gradeLevel: lesson.gradeLevel,
+          OR: skillTokens.map((token) => ({ skill: { contains: token, mode: "insensitive" as const } })),
+        },
+        orderBy: [{ updatedAt: "desc" }],
+        take: 25,
+      })
+    : [];
+  const skillFallback = skillCandidates.find((resource) => hasSkillKeywordOverlap(resource.skill, skillTokens));
+  const match = exact || standardFallback || skillFallback || null;
   if (!match) {
+    const scope = candidates.length || skillCandidates.length ? "learningLessons.no_confident_hero" : "learningLessons.no_resource_link";
     logAiFailure({
-      scope: "learningLessons.no_resource_link",
-      error: new Error("No ResourceLink matched lesson hero video criteria."),
+      scope,
+      error: new Error(candidates.length || skillCandidates.length ? "ResourceLink candidates existed, but none matched the lesson skill confidently." : "No ResourceLink matched lesson hero video criteria."),
       context: { gradeLevel: lesson.gradeLevel, standardCode: lesson.standardCode, skill: lesson.skill },
     });
     return null;
   }
   return match;
+}
+
+const HERO_SKILL_STOPWORDS = new Set([
+  "a",
+  "an",
+  "and",
+  "as",
+  "at",
+  "by",
+  "for",
+  "from",
+  "in",
+  "of",
+  "on",
+  "or",
+  "the",
+  "to",
+  "with",
+  "skill",
+  "skills",
+  "text",
+  "reading",
+  "literary",
+  "informational",
+]);
+
+function skillKeywordTokens(skill: string) {
+  return skill
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, " ")
+    .split(/[\s-]+/)
+    .map((token) => token.trim())
+    .filter((token) => token.length >= 3 && !HERO_SKILL_STOPWORDS.has(token));
+}
+
+function hasSkillKeywordOverlap(resourceSkill: string, lessonSkillTokens: string[]) {
+  const haystack = resourceSkill.toLowerCase();
+  return lessonSkillTokens.some((token) => haystack.includes(token));
 }
 
 function resourceFromDb(resource: ResourceMatch): ResourceLike {
