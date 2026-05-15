@@ -596,7 +596,13 @@ export function buildFallbackLesson({
   const workedExample = workedExampleForSkill(item.skill, gradeLevel);
   const libraryScenarios = findLibraryScenariosFor({ gradeLevel, standardCode: item.standardCode, skill: item.skill });
   const librarySource = libraryScenarios.length > 0;
-  const isSixActivityLesson = item.standardCode.startsWith("CC.1.4.") || item.standardCode.startsWith("CC.1.3.") || isConventionsSkill(item.skill.toLowerCase()) || isLiterarySkill(item.skill.toLowerCase());
+  const isSixActivityLesson =
+    item.standardCode.startsWith("CC.1.4.") ||
+    item.standardCode.startsWith("CC.1.3.") ||
+    item.standardCode.startsWith("CC.1.2.") ||
+    isConventionsSkill(item.skill.toLowerCase()) ||
+    isLiterarySkill(item.skill.toLowerCase()) ||
+    isInformationalSkill(item.skill.toLowerCase());
   const guidedPractice = buildPractice(item.skill, "guided", gradeLevel, isSixActivityLesson ? 6 : gradeLevel >= 6 ? 4 : 3, libraryScenarios, item.standardCode);
   const independentPractice = buildPractice(item.skill, "independent", gradeLevel, isSixActivityLesson ? 6 : gradeLevel >= 6 ? 5 : 4, libraryScenarios, item.standardCode);
   const exitTicket = buildPractice(item.skill, "exit ticket", gradeLevel, 1, libraryScenarios, item.standardCode);
@@ -784,7 +790,10 @@ function workedExampleForSkill(skill: string, gradeLevel: number) {
 function buildPractice(skill: string, mode: string, gradeLevel: number, count: number, libraryScenarios: PracticeQuestion[] = [], standardCode = ""): PracticeQuestion[] {
   const cannedScenarios = practiceScenarios(skill, gradeLevel, standardCode);
   const librarySample = sampleWithoutReplacement(libraryScenarios, count, `${gradeLevel}:${skill}:${mode}`);
-  const scenarios = [...librarySample, ...repeatToCount(cannedScenarios, Math.max(0, count - librarySample.length))];
+  const preferCanned = standardCode.startsWith("CC.1.2.");
+  const scenarios = preferCanned
+    ? [...cannedScenarios.slice(0, count), ...librarySample].slice(0, count)
+    : [...librarySample, ...repeatToCount(cannedScenarios, Math.max(0, count - librarySample.length))];
   return Array.from({ length: count }, (_, index) => {
     const scenario = scenarios[index] || cannedScenarios[index % cannedScenarios.length];
     const modePrefix = mode === "guided" ? "Use the coach hint, then choose the strongest answer." : mode === "mastery check" ? "Choose independently." : "Choose the best answer.";
@@ -815,6 +824,9 @@ function practiceScenarios(skill: string, gradeLevel: number, standardCode = "")
   const lower = skill.toLowerCase();
   if (standardCode.startsWith("CC.1.4.") || isConventionsSkill(lower)) {
     return conventionsPracticeScenarios(skill);
+  }
+  if (standardCode.startsWith("CC.1.2.") || isInformationalSkill(lower)) {
+    return informationalPracticeScenarios(skill);
   }
   if (standardCode.startsWith("CC.1.3.") || isLiterarySkill(lower)) {
     return literaryPracticeScenarios(skill, standardCode);
@@ -907,34 +919,7 @@ function practiceScenarios(skill: string, gradeLevel: number, standardCode = "")
     ];
   }
 
-  return [
-    {
-      passage: `Students at Brook School started a compost bin behind the cafeteria. Each lunch period, volunteers collect fruit peels and vegetable scraps. By spring, the compost is mixed into the garden soil to help new plants grow.`,
-      question: `What is the main idea of the passage?`,
-      choices: [
-        "Brook School students use compost to reduce waste and help the garden.",
-        "Students eat fruit during lunch.",
-        "The cafeteria is behind the school garden.",
-        "Spring is warmer than winter.",
-      ],
-      correctAnswer: "Brook School students use compost to reduce waste and help the garden.",
-      explanation: "This answer covers the whole passage, while the other choices are only small details or unsupported ideas.",
-      coachHint: "A main idea should cover most of the details, not just one sentence.",
-    },
-    {
-      passage: `The article explains that bike lanes give riders a safer place to travel, help drivers predict where cyclists will be, and can reduce traffic near busy schools.`,
-      question: `Which sentence best summarizes the article's central idea?`,
-      choices: [
-        "Bike lanes can make travel safer and more organized for a community.",
-        "Cyclists should never ride near schools.",
-        "Drivers do not need to watch for bicycles.",
-        "Traffic only happens in the morning.",
-      ],
-      correctAnswer: "Bike lanes can make travel safer and more organized for a community.",
-      explanation: "The correct answer combines the key points about safety, predictability, and traffic.",
-      coachHint: "Summaries combine the important points without adding extreme claims.",
-    },
-  ];
+  return informationalPracticeScenarios("informational reading");
 }
 
 type LiteraryScenarioConfig = {
@@ -952,6 +937,187 @@ type LiteraryScenarioConfig = {
   coachHint: string;
   explainPrompt: string;
 };
+
+function informationalPracticeScenarios(skill: string): PracticeQuestion[] {
+  const lower = skill.toLowerCase();
+  if (lower.includes("main idea") || lower.includes("central idea")) {
+    return readingScenarioSet({
+      skillName: "central idea",
+      passageType: "informational",
+      clozeSentence: "A main idea covers ___ of the passage's details, not just one fact.",
+      clozeChoices: ["most", "one", "none", "the title"],
+      clozeAnswer: "most",
+      passage: `Students at Brook School started a compost bin behind the cafeteria. Each lunch period, volunteers collect fruit peels and vegetable scraps instead of throwing them away. By spring, the compost is mixed into the garden soil, and the science club tracks how the richer soil helps new plants grow.`,
+      question: "Which sentence best summarizes the central idea?",
+      answerChoices: [
+        "Brook School students use compost to reduce waste and support the school garden.",
+        "Students collect fruit peels during lunch.",
+        "The compost bin is located behind the cafeteria.",
+        "Spring weather helps every garden grow faster.",
+      ],
+      correctAnswer: "Brook School students use compost to reduce waste and support the school garden.",
+      strongEvidence: ["Strong support: Volunteers collect fruit peels and vegetable scraps instead of throwing them away.", "Strong support: The compost is mixed into garden soil to help new plants grow."],
+      weakEvidence: ["Weak or off-topic: The bin is behind the cafeteria.", "Weak or off-topic: The science club tracks the garden."],
+      explanation: "The central idea includes both reducing waste and helping the garden, which are supported by several details.",
+      coachHint: "A central idea should cover most of the important details, not just one sentence.",
+      explainPrompt: "What is the central idea of this passage? Explain how at least one supporting detail connects to it.",
+    });
+  }
+  if (lower.includes("evidence") || lower.includes("cite")) {
+    return readingScenarioSet({
+      skillName: "informational evidence",
+      passageType: "informational",
+      clozeSentence: "Strong evidence from an informational text is ___ and directly supports the claim.",
+      clozeChoices: ["specific", "general", "loud", "colorful"],
+      clozeAnswer: "specific",
+      passage: `The school garden became a busy outdoor classroom. In a spring survey, 82 percent of students said science felt easier to understand after planting seeds, measuring growth, and recording soil temperature. Teachers also reported that students asked more questions during garden lessons than during textbook-only lessons.`,
+      question: "Which sentence best supports the claim that school gardens improve student engagement?",
+      answerChoices: [
+        "Teachers reported that students asked more questions during garden lessons.",
+        "The school garden was busy in the spring.",
+        "Students planted seeds in soil.",
+        "The survey was given during science class.",
+      ],
+      correctAnswer: "Teachers reported that students asked more questions during garden lessons.",
+      strongEvidence: ["Strong support: 82 percent of students said science felt easier to understand after garden activities.", "Strong support: Teachers reported that students asked more questions during garden lessons."],
+      weakEvidence: ["Weak or off-topic: The garden was busy in the spring.", "Weak or off-topic: Students recorded soil temperature."],
+      explanation: "The teacher report directly supports the engagement claim because asking more questions shows active participation.",
+      coachHint: "Strong evidence should prove the claim, not just mention the same topic.",
+      explainPrompt: "Which sentence in this passage best supports the author's main claim? Explain why it is the strongest evidence.",
+    });
+  }
+  if (lower.includes("author's purpose") || lower.includes("purpose")) {
+    return readingScenarioSet({
+      skillName: "author's purpose",
+      passageType: "informational",
+      clozeSentence: "Authors of informational texts usually write to inform, explain, persuade, or ___.",
+      clozeChoices: ["describe", "rhyme", "act", "decorate"],
+      clozeAnswer: "describe",
+      passage: `A rain barrel collects water from a roof and stores it for later use. The barrel connects to a downspout, and a screen keeps leaves out of the water. Many gardeners use the stored water during dry weeks instead of turning on a hose.`,
+      question: "What is the author's main purpose?",
+      answerChoices: [
+        "To explain how a rain barrel works.",
+        "To entertain readers with a funny story.",
+        "To persuade readers that hoses should be banned.",
+        "To describe a character's problem.",
+      ],
+      correctAnswer: "To explain how a rain barrel works.",
+      strongEvidence: ["Strong support: The passage explains that a barrel connects to a downspout.", "Strong support: The passage describes how a screen keeps leaves out of the water."],
+      weakEvidence: ["Weak or off-topic: Gardeners may use water during dry weeks.", "Weak or off-topic: The passage mentions roofs."],
+      explanation: "The author explains the parts and function of a rain barrel, so the purpose is to explain.",
+      coachHint: "Look at whether the text mostly teaches, explains, persuades, describes, or entertains.",
+      explainPrompt: "What is this author's purpose? Explain using two specific words or phrases from the text that show that purpose.",
+    });
+  }
+  if (lower.includes("structure") || lower.includes("cause") || lower.includes("sequence") || lower.includes("compare")) {
+    return readingScenarioSet({
+      skillName: "text structure",
+      passageType: "informational",
+      clozeSentence: "Cause-and-effect text structure uses signal words like 'because,' 'so,' and ___.",
+      clozeChoices: ["therefore", "however", "first", "meanwhile"],
+      clozeAnswer: "therefore",
+      passage: `Because the city added bike lanes near two schools, riders had a marked place to travel. Drivers could predict where cyclists would be, so traffic moved more smoothly during arrival time. Therefore, the morning commute became safer and more organized.`,
+      question: "Which text structure does the author use?",
+      answerChoices: ["Cause and effect", "Compare and contrast", "Sequence", "Problem and solution"],
+      correctAnswer: "Cause and effect",
+      strongEvidence: ["Strong support: The passage uses the signal word because to show why bike lanes changed traffic.", "Strong support: The passage uses so and therefore to show effects."],
+      weakEvidence: ["Weak or off-topic: The bike lanes are near schools.", "Weak or off-topic: The passage mentions morning arrival time."],
+      explanation: "The passage explains causes and effects using signal words such as because, so, and therefore.",
+      coachHint: "Signal words can reveal how an informational text is organized.",
+      explainPrompt: "What text structure does this passage use? Identify one signal word and explain how it shows the structure.",
+    });
+  }
+  if (lower.includes("point of view")) {
+    return readingScenarioSet({
+      skillName: "author's point of view",
+      passageType: "informational",
+      clozeSentence: "An author's point of view in informational text is shown through word choice, examples, and ___.",
+      clozeChoices: ["tone", "font", "length", "title"],
+      clozeAnswer: "tone",
+      passage: `The new weekend bus route is a practical improvement for families. Instead of waiting for rides or paying for extra gas, students can reach the library, recreation center, and tutoring program with one low-cost pass.`,
+      question: "What is the author's point of view on this topic?",
+      answerChoices: [
+        "The author supports the weekend bus route.",
+        "The author believes buses are too noisy.",
+        "The author thinks libraries should close on weekends.",
+        "The author is unsure whether students need transportation.",
+      ],
+      correctAnswer: "The author supports the weekend bus route.",
+      strongEvidence: ["Strong support: The author calls the route a practical improvement.", "Strong support: The author lists helpful places students can reach with one pass."],
+      weakEvidence: ["Weak or off-topic: The route runs on weekends.", "Weak or off-topic: The passage mentions a library."],
+      explanation: "Positive word choice and helpful examples show the author's supportive point of view.",
+      coachHint: "Author point of view is often shown by loaded words, examples, and tone.",
+      explainPrompt: "What is the author's point of view? Explain using one specific word choice or phrase from the text.",
+    });
+  }
+  if (lower.includes("argument") || lower.includes("evaluate") || lower.includes("claim")) {
+    return readingScenarioSet({
+      skillName: "argument evaluation",
+      passageType: "informational",
+      clozeSentence: "A strong argument uses ___ that come from reliable sources, not just opinions.",
+      clozeChoices: ["evidence", "feelings", "rumors", "slogans"],
+      clozeAnswer: "evidence",
+      passage: `The student council argues that water-bottle filling stations should replace two older fountains. Their survey found that 76 percent of students would refill bottles more often if stations were available, and the nurse reported fewer disposable bottles in schools that already added stations.`,
+      question: "Which reason most strengthens the author's argument?",
+      answerChoices: [
+        "A survey found that 76 percent of students would refill bottles more often.",
+        "Some students like the color of the new stations.",
+        "The fountains are located in a hallway.",
+        "A few students think disposable bottles look better.",
+      ],
+      correctAnswer: "A survey found that 76 percent of students would refill bottles more often.",
+      strongEvidence: ["Strong support: The survey found that 76 percent of students would refill bottles more often.", "Strong support: The nurse reported fewer disposable bottles in schools with stations."],
+      weakEvidence: ["Weak or off-topic: Some students like the color of the stations.", "Weak or off-topic: The fountains are in a hallway."],
+      explanation: "The survey data strengthens the argument because it is specific evidence tied to student behavior.",
+      coachHint: "A strong argument needs relevant evidence from reliable sources.",
+      explainPrompt: "Is the author's argument strong or weak? Explain using one specific piece of evidence or lack of evidence from the passage.",
+    });
+  }
+  if (lower.includes("summary") || lower.includes("summarize") || lower.includes("summariz")) {
+    return readingScenarioSet({
+      skillName: "summarizing informational text",
+      passageType: "informational",
+      clozeSentence: "A summary includes the most important ___ from the passage in your own words.",
+      clozeChoices: ["ideas", "examples", "quotations", "opinions"],
+      clozeAnswer: "ideas",
+      passage: `The community center began lending tool kits to neighborhood volunteers. Each kit includes gloves, trash bags, small shovels, and safety vests. Volunteers use the kits to clean vacant lots and plant flowers near bus stops. Since the program began, twelve blocks have held cleanup days.`,
+      question: "Which sentence is the best summary?",
+      answerChoices: [
+        "A community tool-kit program helps volunteers clean and improve neighborhood spaces.",
+        "Each kit includes gloves and trash bags.",
+        "The passage is about tools.",
+        "The community center stopped all volunteer projects.",
+      ],
+      correctAnswer: "A community tool-kit program helps volunteers clean and improve neighborhood spaces.",
+      strongEvidence: ["Strong support: Volunteers use the kits to clean vacant lots and plant flowers.", "Strong support: Twelve blocks have held cleanup days since the program began."],
+      weakEvidence: ["Weak or off-topic: Each kit includes gloves.", "Weak or off-topic: Bus stops are mentioned in the passage."],
+      explanation: "The best summary includes the program and its main effect, not just one detail.",
+      coachHint: "A summary should include the central idea and key support without copying every detail.",
+      explainPrompt: "Write a one-sentence summary of this passage. Include the main idea and one key supporting detail in your own words.",
+    });
+  }
+  return readingScenarioSet({
+    skillName: "informational reading",
+    passageType: "informational",
+    clozeSentence: "A strong informational answer connects the central idea to ___ from the passage.",
+    clozeChoices: ["supporting details", "story characters", "guesses", "dialogue"],
+    clozeAnswer: "supporting details",
+    passage: `A neighborhood repair cafe opens once a month at the library. Volunteers help visitors fix torn clothing, wobbly chairs, and small appliances. The program keeps useful items out of landfills and teaches residents simple repair skills.`,
+    question: "Which sentence best states the central idea?",
+    answerChoices: [
+      "The repair cafe helps people fix items while reducing waste.",
+      "The repair cafe opens at the library.",
+      "Some chairs become wobbly over time.",
+      "Libraries should only lend books.",
+    ],
+    correctAnswer: "The repair cafe helps people fix items while reducing waste.",
+    strongEvidence: ["Strong support: Volunteers help visitors fix torn clothing, chairs, and appliances.", "Strong support: The program keeps useful items out of landfills."],
+    weakEvidence: ["Weak or off-topic: The cafe opens once a month.", "Weak or off-topic: The library hosts the program."],
+    explanation: "The central idea is that the repair cafe teaches repair and reduces waste.",
+    coachHint: "Connect a broad informational claim to the details that prove it.",
+    explainPrompt: "What is the central idea of this informational passage? Explain using one supporting detail.",
+  });
+}
 
 function literaryPracticeScenarios(skill: string, standardCode = ""): PracticeQuestion[] {
   const lower = skill.toLowerCase();
@@ -1139,7 +1305,12 @@ function literaryPracticeScenarios(skill: string, standardCode = ""): PracticeQu
 }
 
 function literaryScenarioSet(config: LiteraryScenarioConfig): PracticeQuestion[] {
+  return readingScenarioSet({ ...config, passageType: "literary" });
+}
+
+function readingScenarioSet(config: LiteraryScenarioConfig & { passageType?: "literary" | "informational" }): PracticeQuestion[] {
   const evidenceChoices = [...config.strongEvidence, ...config.weakEvidence].slice(0, 4);
+  const sourceLabel = config.passageType === "informational" ? "passage" : "story";
   return [
     {
       passage: config.passage,
@@ -1173,7 +1344,7 @@ function literaryScenarioSet(config: LiteraryScenarioConfig): PracticeQuestion[]
       question: `Sort the evidence by whether it supports the ${config.skillName} claim.`,
       choices: evidenceChoices,
       correctAnswer: config.strongEvidence[0],
-      explanation: "Sort details by whether they directly support the literary claim.",
+      explanation: `Sort details by whether they directly support the ${sourceLabel} claim.`,
       coachHint: config.coachHint,
       interactionType: "evidence-sort",
     },
@@ -1271,12 +1442,12 @@ function conventionScenarioSet(skillName: string, clozeSentence: string, clozeCh
 }
 
 function isGenericTemplateLeak(question: PracticeQuestion, standardCode: string) {
-  const isCheckedStrand = standardCode.startsWith("CC.1.4.") || standardCode.startsWith("CC.1.3.");
+  const isCheckedStrand = standardCode.startsWith("CC.1.4.") || standardCode.startsWith("CC.1.3.") || standardCode.startsWith("CC.1.2.");
   if (!isCheckedStrand) return false;
   const choices = new Set((question.choices || []).map((choice) => choice.trim().toLowerCase()));
   const genericReadingLeak = ["supported", "guessed", "copied", "unrelated"].every((choice) => choices.has(choice));
   const conventionsLabelLeak =
-    standardCode.startsWith("CC.1.3.") &&
+    (standardCode.startsWith("CC.1.3.") || standardCode.startsWith("CC.1.2.")) &&
     (Array.from(choices).some((choice) => choice.includes("correctly punctuated")) ||
       Array.from(choices).some((choice) => choice.includes("needs fixing")));
   const leaked = genericReadingLeak || conventionsLabelLeak;
@@ -1613,6 +1784,27 @@ function isLiterarySkill(lowerSkill: string) {
     lowerSkill.includes("metaphor") ||
     lowerSkill.includes("personification") ||
     lowerSkill.includes("flashback")
+  );
+}
+
+function isInformationalSkill(lowerSkill: string) {
+  return (
+    lowerSkill.includes("main idea") ||
+    lowerSkill.includes("central idea") ||
+    lowerSkill.includes("evidence") ||
+    lowerSkill.includes("cite") ||
+    lowerSkill.includes("author's purpose") ||
+    lowerSkill.includes("purpose") ||
+    lowerSkill.includes("structure") ||
+    lowerSkill.includes("cause") ||
+    lowerSkill.includes("sequence") ||
+    lowerSkill.includes("compare") ||
+    lowerSkill.includes("point of view") ||
+    lowerSkill.includes("argument") ||
+    lowerSkill.includes("evaluate") ||
+    lowerSkill.includes("claim") ||
+    lowerSkill.includes("summary") ||
+    lowerSkill.includes("summarize")
   );
 }
 
