@@ -3250,16 +3250,16 @@ function EvidenceSortActivity({ activity, answer, submitted, locked, onAnswer }:
 
 function WordClozeActivity({ activity, answer, submitted, locked, onAnswer }: { activity: any; answer: any; submitted: boolean; locked: boolean; onAnswer: (value: any) => void }) {
   const isConventions = Boolean(activity.isConventions);
-  const cloze = isConventions ? activity.inlineCloze : null;
+  const cloze = isConventions || activity.useQuestionCloze ? activity.inlineCloze : null;
   return (
     <div className="mt-4 rounded-2xl bg-purple-700 p-4 text-white">
-      <p className="text-sm font-bold">{isConventions ? "Complete the sentence with the conventions word that makes the rule true." : "Complete the sentence with the word that best describes strong reading work."}</p>
+      <p className="text-sm font-bold">{isConventions ? "Complete the sentence with the conventions word that makes the rule true." : activity.useQuestionCloze ? "Complete the skill sentence with the word that makes the rule true." : "Complete the sentence with the word that best describes strong reading work."}</p>
       <p className="mt-4 text-lg font-black leading-8">
-        {isConventions ? cloze?.before : "A strong answer is"}{" "}
+        {cloze ? cloze.before : "A strong answer is"}{" "}
         <span className="inline-block min-w-32 rounded-lg border-2 border-dashed border-white bg-white/20 px-4 py-2 text-center">
           {answer || ""}
         </span>{" "}
-        {isConventions ? cloze?.after : "by details from the passage."}
+        {cloze ? cloze.after : "by details from the passage."}
       </p>
       <div className="mt-4 grid gap-2 sm:grid-cols-2">
         {activity.choices.map((choice: string) => {
@@ -3393,7 +3393,7 @@ function buildPracticeActivity(question: any, index: number, title: string, skil
       ? isCorrectAnswer(question, choice) || choice.toLowerCase().startsWith("correct:")
         ? (type === "evidence-match" ? "Correctly punctuated" : "Correct")
         : (type === "evidence-match" ? "Needs fixing" : "Edit needed")
-      : isCorrectAnswer(question, choice) ? "Strong support" : "Weak or off-topic",
+      : isCorrectAnswer(question, choice) || choice.toLowerCase().startsWith("strong support:") ? "Strong support" : "Weak or off-topic",
   })) : [
     { id: "best", text: question?.correctAnswer || "The answer uses several text details.", answer: isConventions ? (type === "evidence-match" ? "Correctly punctuated" : "Correct") : "Strong support" },
     { id: "weak", text: "A detail that does not connect to the question.", answer: isConventions ? (type === "evidence-match" ? "Needs fixing" : "Edit needed") : "Weak or off-topic" },
@@ -3402,6 +3402,7 @@ function buildPracticeActivity(question: any, index: number, title: string, skil
     ? type === "evidence-match" ? ["Correctly punctuated", "Needs fixing"] : ["Correct", "Edit needed"]
     : ["Strong support", "Weak or off-topic"];
   const inlineCloze = buildInlineCloze(question, { isConventions });
+  const useQuestionCloze = type === "word-cloze" && choices.length > 0 && String(question?.question || "").includes("___");
 
   return {
     type,
@@ -3418,8 +3419,9 @@ function buildPracticeActivity(question: any, index: number, title: string, skil
     isVocabulary,
     labels,
     cards,
-    choices: isConventions ? inlineCloze.choices : wordClozeChoices(skill, { isConventions }),
-    correctWord: isConventions ? inlineCloze.answer : "supported",
+    useQuestionCloze,
+    choices: isConventions || useQuestionCloze ? inlineCloze.choices : wordClozeChoices(skill, { isConventions }),
+    correctWord: isConventions || useQuestionCloze ? inlineCloze.answer : "supported",
     inlineCloze,
     shortResponsePlaceholder: shortResponsePlaceholderForStandard(standardCode),
   };
@@ -3571,6 +3573,16 @@ function buildInlineCloze(question: any, options: { isConventions?: boolean } = 
   const choices = Array.isArray(question?.choices) && question.choices.length
     ? question.choices.map(String).slice(0, 4)
     : [answer, "a detail from another topic", "an unsupported idea", "a repeated sentence"].filter(Boolean);
+  const questionText = String(question?.question || "");
+  const questionBlankIndex = questionText.indexOf("___");
+  if (questionBlankIndex >= 0) {
+    return {
+      before: questionText.slice(0, questionBlankIndex),
+      after: questionText.slice(questionBlankIndex + 3),
+      answer,
+      choices,
+    };
+  }
   const exactIndex = answer ? passage.toLowerCase().indexOf(answer.toLowerCase()) : -1;
   if (passage && exactIndex >= 0 && answer.length <= 90) {
     return {

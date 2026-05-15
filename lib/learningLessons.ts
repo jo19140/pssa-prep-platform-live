@@ -596,9 +596,9 @@ export function buildFallbackLesson({
   const workedExample = workedExampleForSkill(item.skill, gradeLevel);
   const libraryScenarios = findLibraryScenariosFor({ gradeLevel, standardCode: item.standardCode, skill: item.skill });
   const librarySource = libraryScenarios.length > 0;
-  const isConventionsLesson = item.standardCode.startsWith("CC.1.4.") || isConventionsSkill(item.skill.toLowerCase());
-  const guidedPractice = buildPractice(item.skill, "guided", gradeLevel, isConventionsLesson ? 6 : gradeLevel >= 6 ? 4 : 3, libraryScenarios, item.standardCode);
-  const independentPractice = buildPractice(item.skill, "independent", gradeLevel, isConventionsLesson ? 6 : gradeLevel >= 6 ? 5 : 4, libraryScenarios, item.standardCode);
+  const isSixActivityLesson = item.standardCode.startsWith("CC.1.4.") || item.standardCode.startsWith("CC.1.3.") || isConventionsSkill(item.skill.toLowerCase()) || isLiterarySkill(item.skill.toLowerCase());
+  const guidedPractice = buildPractice(item.skill, "guided", gradeLevel, isSixActivityLesson ? 6 : gradeLevel >= 6 ? 4 : 3, libraryScenarios, item.standardCode);
+  const independentPractice = buildPractice(item.skill, "independent", gradeLevel, isSixActivityLesson ? 6 : gradeLevel >= 6 ? 5 : 4, libraryScenarios, item.standardCode);
   const exitTicket = buildPractice(item.skill, "exit ticket", gradeLevel, 1, libraryScenarios, item.standardCode);
   const masteryCheck = buildPractice(item.skill, "mastery check", gradeLevel, gradeLevel >= 6 ? 3 : 2, libraryScenarios, item.standardCode);
   const retestRecommendation = `After completing this lesson and scoring at least 80% on the mastery check, retake a short ${item.standardCode} practice set with ${weakFormat} items.`;
@@ -816,6 +816,9 @@ function practiceScenarios(skill: string, gradeLevel: number, standardCode = "")
   if (standardCode.startsWith("CC.1.4.") || isConventionsSkill(lower)) {
     return conventionsPracticeScenarios(skill);
   }
+  if (standardCode.startsWith("CC.1.3.") || isLiterarySkill(lower)) {
+    return literaryPracticeScenarios(skill, standardCode);
+  }
   if (lower.includes("evidence") || lower.includes("inference")) {
     return [
       {
@@ -934,6 +937,267 @@ function practiceScenarios(skill: string, gradeLevel: number, standardCode = "")
   ];
 }
 
+type LiteraryScenarioConfig = {
+  skillName: string;
+  clozeSentence: string;
+  clozeChoices: string[];
+  clozeAnswer: string;
+  passage: string;
+  question: string;
+  answerChoices: string[];
+  correctAnswer: string;
+  strongEvidence: string[];
+  weakEvidence: string[];
+  explanation: string;
+  coachHint: string;
+  explainPrompt: string;
+};
+
+function literaryPracticeScenarios(skill: string, standardCode = ""): PracticeQuestion[] {
+  const lower = skill.toLowerCase();
+  if (lower.includes("inference") || (lower.includes("evidence") && !lower.includes("conventions"))) {
+    return literaryScenarioSet({
+      skillName: "inference and evidence",
+      clozeSentence: "A strong inference uses ___ from the passage.",
+      clozeChoices: ["text evidence", "opinions", "guesses", "summaries"],
+      clozeAnswer: "text evidence",
+      passage: `Mara erased the answer she had written, checked the chart one more time, and whispered the steps under her breath. When the teacher walked by, Mara covered her paper with one hand but kept working.`,
+      question: "What can you infer about Mara?",
+      answerChoices: [
+        "Mara wants to be careful because she is unsure about her answer.",
+        "Mara is trying to make another student laugh.",
+        "Mara already knows every answer on the page.",
+        "Mara wants to leave the room immediately.",
+      ],
+      correctAnswer: "Mara wants to be careful because she is unsure about her answer.",
+      strongEvidence: ["Strong support: Mara erased her answer and checked the chart again.", "Strong support: Mara whispered the steps under her breath while she kept working."],
+      weakEvidence: ["Weak or off-topic: The teacher walked by Mara's desk.", "Weak or off-topic: Mara used one hand to cover her paper."],
+      explanation: "Rechecking the chart and whispering the steps show that Mara is uncertain but trying to be careful.",
+      coachHint: "An inference must connect a character's actions to a reasonable idea about feelings or traits.",
+      explainPrompt: "Read this passage carefully. What can you infer about Mara's feelings? Explain using one specific detail from the text.",
+    });
+  }
+  if (lower.includes("theme") || lower.includes("central message")) {
+    return literaryScenarioSet({
+      skillName: "theme",
+      clozeSentence: "A theme is the ___ a story suggests, not just the topic.",
+      clozeChoices: ["message", "setting", "narrator", "title"],
+      clozeAnswer: "message",
+      passage: `Eli's first model bridge collapsed before the class could test it. He wanted to toss the pieces away, but he reread his notes, noticed where the supports had bent, and rebuilt the center with shorter strips. The second bridge held twice as much weight.`,
+      question: "Which theme does this story develop?",
+      answerChoices: [
+        "Learning from mistakes can lead to improvement.",
+        "Eli's bridge is made from short strips.",
+        "The class tested a model bridge.",
+        "Science class should always happen outside.",
+      ],
+      correctAnswer: "Learning from mistakes can lead to improvement.",
+      strongEvidence: ["Strong support: Eli reread his notes after the first bridge collapsed.", "Strong support: The second bridge held twice as much weight after Eli rebuilt it."],
+      weakEvidence: ["Weak or off-topic: The bridge was tested by the class.", "Weak or off-topic: Eli used shorter strips in the center."],
+      explanation: "The story shows Eli improving because he studies the failure and tries again.",
+      coachHint: "A theme should be a general message that fits the whole story, not just one plot detail.",
+      explainPrompt: "Identify a theme from this passage and explain how a specific character action develops it.",
+    });
+  }
+  if (lower.includes("character") && !lower.includes("setting")) {
+    return literaryScenarioSet({
+      skillName: "character analysis",
+      clozeSentence: "A character's traits are revealed through their ___, words, and decisions.",
+      clozeChoices: ["actions", "clothing", "name", "setting"],
+      clozeAnswer: "actions",
+      passage: `When Andre noticed that Lila had no colored pencils, he quietly slid half of his set across the table. Later, he stayed during recess to help her label the map even though his own project was finished.`,
+      question: "What trait does Andre show?",
+      answerChoices: ["Andre is considerate.", "Andre is impatient.", "Andre is careless.", "Andre is confused by maps."],
+      correctAnswer: "Andre is considerate.",
+      strongEvidence: ["Strong support: Andre quietly shared half of his colored pencils.", "Strong support: Andre stayed during recess to help Lila label the map."],
+      weakEvidence: ["Weak or off-topic: Andre's own project was finished.", "Weak or off-topic: The students were labeling a map."],
+      explanation: "Andre's actions show that he notices another student's need and chooses to help.",
+      coachHint: "Character traits are proved by what the character does and says.",
+      explainPrompt: "What character trait does Andre show? Explain using one specific action from the passage.",
+    });
+  }
+  if (lower.includes("plot") || lower.includes("rising action") || lower.includes("conflict")) {
+    return literaryScenarioSet({
+      skillName: "plot development",
+      clozeSentence: "Rising action is the part of the plot where the ___ grows toward a climax.",
+      clozeChoices: ["conflict", "setting", "narrator", "title"],
+      clozeAnswer: "conflict",
+      passage: `The debate timer showed two minutes left when Nia realized her final evidence card was missing. Her partner searched the folder while the other team finished its argument. Nia took a breath and reached for the notes she had written in the margin.`,
+      question: "Which event is part of the rising action?",
+      answerChoices: [
+        "Nia realizes her final evidence card is missing with two minutes left.",
+        "The debate eventually ends after both teams speak.",
+        "The classroom has a timer near the front.",
+        "Nia wrote notes in the margin earlier.",
+      ],
+      correctAnswer: "Nia realizes her final evidence card is missing with two minutes left.",
+      strongEvidence: ["Strong support: The timer showed two minutes left when Nia noticed the missing card.", "Strong support: Her partner searched while the other team finished its argument."],
+      weakEvidence: ["Weak or off-topic: Nia had written notes in the margin.", "Weak or off-topic: The debate was held in a classroom."],
+      explanation: "The missing card increases pressure and makes the conflict harder before Nia responds.",
+      coachHint: "Rising action makes the problem more difficult before the climax or turning point.",
+      explainPrompt: "Which event in this story builds the conflict? Explain why it moves the plot toward the climax.",
+    });
+  }
+  if (lower.includes("setting")) {
+    return literaryScenarioSet({
+      skillName: "setting impact",
+      clozeSentence: "Setting affects events when the time or place changes what characters ___.",
+      clozeChoices: ["do", "look like", "name", "quote"],
+      clozeAnswer: "do",
+      passage: `The trail grew slick as freezing rain tapped against the leaves. Coach Rivera pointed to the darkening sky and turned the hiking group toward the visitor center instead of the overlook.`,
+      question: "How does the setting affect the story?",
+      answerChoices: [
+        "The icy weather makes Coach Rivera change the group's plan.",
+        "The visitor center is near the trail.",
+        "The leaves are part of the forest setting.",
+        "The hikers wanted to see an overlook.",
+      ],
+      correctAnswer: "The icy weather makes Coach Rivera change the group's plan.",
+      strongEvidence: ["Strong support: Freezing rain made the trail slick.", "Strong support: Coach Rivera turned the group toward the visitor center."],
+      weakEvidence: ["Weak or off-topic: The story mentions leaves on the trail.", "Weak or off-topic: The overlook is a place the group might have visited."],
+      explanation: "The weather and trail conditions directly change what the characters decide to do.",
+      coachHint: "Setting matters when it affects choices, conflict, mood, or events.",
+      explainPrompt: "How does this setting change what happens in the story? Use one specific detail about the time or place.",
+    });
+  }
+  if (lower.includes("point of view") || lower === "pov") {
+    return literaryScenarioSet({
+      skillName: "point of view",
+      clozeSentence: "First-person point of view uses pronouns like ___ and 'my' to show the narrator's experience.",
+      clozeChoices: ["I", "she", "they", "it"],
+      clozeAnswer: "I",
+      passage: `I tightened the ribbon on my science fair display and tried not to look at the judges. My hands shook, but I reminded myself that I knew every part of the experiment.`,
+      question: "What is the point of view of this passage?",
+      answerChoices: ["First person", "Third person limited", "Third person omniscient", "Second person"],
+      correctAnswer: "First person",
+      strongEvidence: ["Strong support: The narrator says, \"I tightened the ribbon.\"", "Strong support: The narrator uses the phrase \"my science fair display.\""],
+      weakEvidence: ["Weak or off-topic: The passage mentions science fair judges.", "Weak or off-topic: The narrator knows the experiment."],
+      explanation: "The narrator uses I and my, so the passage is told from first-person point of view.",
+      coachHint: "Point of view clues often appear in pronouns and what the narrator can know.",
+      explainPrompt: "What is the point of view in this passage? Explain how you know using a specific word or phrase from the text.",
+    });
+  }
+  if (lower.includes("figurative") || lower.includes("simile") || lower.includes("metaphor") || lower.includes("personification") || lower.includes("connotation") || lower.includes("vocab")) {
+    return literaryScenarioSet({
+      skillName: "figurative language",
+      clozeSentence: "A simile compares two unlike things using the word 'like' or ___.",
+      clozeChoices: ["as", "the", "because", "however"],
+      clozeAnswer: "as",
+      passage: `Before the solo, Jonah's courage was a small flame cupped in his hands. Each friendly nod from the choir made it burn a little brighter.`,
+      question: "What does the figurative language suggest?",
+      answerChoices: [
+        "Jonah's confidence is fragile but growing.",
+        "Jonah is holding an actual flame.",
+        "The choir is standing outside near a fire.",
+        "Jonah forgot the words to the song.",
+      ],
+      correctAnswer: "Jonah's confidence is fragile but growing.",
+      strongEvidence: ["Strong support: Jonah's courage is compared to a small flame.", "Strong support: Friendly nods make the flame burn brighter."],
+      weakEvidence: ["Weak or off-topic: Jonah is singing a solo.", "Weak or off-topic: The choir gives friendly nods."],
+      explanation: "The metaphor shows Jonah's courage as small but becoming stronger with support.",
+      coachHint: "Interpret what the comparison suggests beyond the literal meaning.",
+      explainPrompt: "What does the figurative phrase \"a small flame cupped in his hands\" suggest about Jonah? Explain the meaning beyond the literal words.",
+    });
+  }
+  if (lower.includes("flashback") || (lower.includes("structure") && standardCode.startsWith("CC.1.3."))) {
+    return literaryScenarioSet({
+      skillName: "flashback and story structure",
+      clozeSentence: "A flashback shows an event from the character's ___.",
+      clozeChoices: ["past", "future", "imagination", "dreams"],
+      clozeAnswer: "past",
+      passage: `At the edge of the pool, Tessa froze. She remembered last summer, when she had slipped from the diving board and swallowed a mouthful of water. Now her coach waited quietly until Tessa nodded and stepped forward.`,
+      question: "Why does the author include the flashback?",
+      answerChoices: [
+        "To explain why Tessa feels nervous before stepping forward.",
+        "To describe every rule at the pool.",
+        "To show that Tessa never learned to swim.",
+        "To explain why the coach leaves the pool.",
+      ],
+      correctAnswer: "To explain why Tessa feels nervous before stepping forward.",
+      strongEvidence: ["Strong support: Tessa remembers slipping from the diving board last summer.", "Strong support: Tessa freezes at the edge of the pool before stepping forward."],
+      weakEvidence: ["Weak or off-topic: The coach waits quietly.", "Weak or off-topic: The story happens at a pool."],
+      explanation: "The earlier memory explains Tessa's current hesitation and makes her choice more meaningful.",
+      coachHint: "A flashback should help explain a present feeling, choice, or conflict.",
+      explainPrompt: "Why does the author include this flashback? Explain how the earlier scene helps the reader understand a present-day choice or feeling.",
+    });
+  }
+  return literaryScenarioSet({
+    skillName: "literary reading",
+    clozeSentence: "A strong literary answer connects a claim to ___ from the story.",
+    clozeChoices: ["evidence", "opinions", "titles", "guesses"],
+    clozeAnswer: "evidence",
+    passage: `Sofia wanted to quit after the first rehearsal, but she stayed to help fold the curtains and listened while the director explained the scene again. By Friday, she knew everyone's entrance cues.`,
+    question: "What does Sofia's behavior show?",
+    answerChoices: ["Sofia becomes more committed through practice.", "Sofia dislikes every person in the play.", "Sofia wants the director to cancel rehearsal.", "Sofia already knows every scene at the start."],
+    correctAnswer: "Sofia becomes more committed through practice.",
+    strongEvidence: ["Strong support: Sofia stays after rehearsal to help fold the curtains.", "Strong support: By Friday, Sofia knows everyone's entrance cues."],
+    weakEvidence: ["Weak or off-topic: The director explains a scene.", "Weak or off-topic: The play has curtains."],
+    explanation: "Sofia's actions show growing commitment because she keeps helping and learning.",
+    coachHint: "Use story details to support a claim about character, theme, plot, or meaning.",
+    explainPrompt: "Make a claim about this literary passage and explain it using one specific detail from the story.",
+  });
+}
+
+function literaryScenarioSet(config: LiteraryScenarioConfig): PracticeQuestion[] {
+  const evidenceChoices = [...config.strongEvidence, ...config.weakEvidence].slice(0, 4);
+  return [
+    {
+      passage: config.passage,
+      question: config.question,
+      choices: config.answerChoices,
+      correctAnswer: config.correctAnswer,
+      explanation: config.explanation,
+      coachHint: config.coachHint,
+      interactionType: "sentence-select",
+    },
+    {
+      passage: `${config.clozeSentence} ${config.passage}`,
+      question: config.clozeSentence,
+      choices: config.clozeChoices,
+      correctAnswer: config.clozeAnswer,
+      explanation: `The word "${config.clozeAnswer}" correctly completes the ${config.skillName} rule.`,
+      coachHint: config.coachHint,
+      interactionType: "inline-cloze",
+    },
+    {
+      passage: config.passage,
+      question: `Which details strongly support the ${config.skillName} answer?`,
+      choices: evidenceChoices,
+      correctAnswer: config.strongEvidence[0],
+      explanation: "Strong support is a detail that directly proves the answer; weak support is unrelated or too general.",
+      coachHint: config.coachHint,
+      interactionType: "evidence-match",
+    },
+    {
+      passage: config.passage,
+      question: `Sort the evidence by whether it supports the ${config.skillName} claim.`,
+      choices: evidenceChoices,
+      correctAnswer: config.strongEvidence[0],
+      explanation: "Sort details by whether they directly support the literary claim.",
+      coachHint: config.coachHint,
+      interactionType: "evidence-sort",
+    },
+    {
+      passage: config.clozeSentence,
+      question: config.clozeSentence,
+      choices: config.clozeChoices,
+      correctAnswer: config.clozeAnswer,
+      explanation: `This rule explains how to answer ${config.skillName} questions with precise evidence.`,
+      coachHint: config.coachHint,
+      interactionType: "word-cloze",
+    },
+    {
+      passage: config.passage,
+      question: config.explainPrompt,
+      choices: [config.correctAnswer, config.strongEvidence[0]],
+      correctAnswer: config.correctAnswer,
+      explanation: config.explanation,
+      coachHint: "Use your own words and include one exact detail from the passage.",
+      interactionType: "short-response",
+    },
+  ];
+}
+
 function conventionsPracticeScenarios(skill: string): PracticeQuestion[] {
   const lower = skill.toLowerCase();
   if (lower.includes("pronoun")) return conventionScenarioSet("pronouns", "Use a ___ pronoun after a verb that takes an object.", ["subject", "object", "possessive", "reflexive"], "object", "The coach gave Maya and them feedback after practice.", "The coach gave Maya and they feedback after practice.", "Them is correct because it receives the action after gave.", "Ask whether the pronoun is doing the action or receiving it.");
@@ -1007,13 +1271,19 @@ function conventionScenarioSet(skillName: string, clozeSentence: string, clozeCh
 }
 
 function isGenericTemplateLeak(question: PracticeQuestion, standardCode: string) {
-  if (!standardCode.startsWith("CC.1.4.")) return false;
+  const isCheckedStrand = standardCode.startsWith("CC.1.4.") || standardCode.startsWith("CC.1.3.");
+  if (!isCheckedStrand) return false;
   const choices = new Set((question.choices || []).map((choice) => choice.trim().toLowerCase()));
-  const leaked = ["supported", "guessed", "copied", "unrelated"].every((choice) => choices.has(choice));
+  const genericReadingLeak = ["supported", "guessed", "copied", "unrelated"].every((choice) => choices.has(choice));
+  const conventionsLabelLeak =
+    standardCode.startsWith("CC.1.3.") &&
+    (Array.from(choices).some((choice) => choice.includes("correctly punctuated")) ||
+      Array.from(choices).some((choice) => choice.includes("needs fixing")));
+  const leaked = genericReadingLeak || conventionsLabelLeak;
   if (leaked) {
     logAiFailure({
       scope: "learningLessons.generic_template_leak",
-      error: new Error("Generic reading-strategy answer set leaked into conventions practice."),
+      error: new Error(genericReadingLeak ? "Generic reading-strategy answer set leaked into strand-specific practice." : "Conventions label set leaked into literary practice."),
       context: { standardCode, question: question.question },
     });
   }
@@ -1322,6 +1592,27 @@ function isConventionsSkill(lowerSkill: string) {
     lowerSkill.includes("combining") ||
     lowerSkill.includes("sentence pattern") ||
     lowerSkill.includes("sentence structure")
+  );
+}
+
+function isLiterarySkill(lowerSkill: string) {
+  return (
+    lowerSkill.includes("inference") ||
+    lowerSkill.includes("evidence") ||
+    lowerSkill.includes("theme") ||
+    lowerSkill.includes("central message") ||
+    lowerSkill.includes("character") ||
+    lowerSkill.includes("plot") ||
+    lowerSkill.includes("rising action") ||
+    lowerSkill.includes("conflict") ||
+    lowerSkill.includes("setting") ||
+    lowerSkill.includes("point of view") ||
+    lowerSkill === "pov" ||
+    lowerSkill.includes("figurative") ||
+    lowerSkill.includes("simile") ||
+    lowerSkill.includes("metaphor") ||
+    lowerSkill.includes("personification") ||
+    lowerSkill.includes("flashback")
   );
 }
 
