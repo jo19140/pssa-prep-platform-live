@@ -5,12 +5,17 @@ import { db } from "@/lib/db";
 import { normalizeJoinCode } from "@/lib/classCodes";
 import { consumeRateLimit, getClientIp } from "@/lib/rateLimit";
 import { createVerificationToken, sendVerificationEmail } from "@/lib/accountTokens";
+import { consentVersion, createComplianceToken, currentConsentText, isUnder13, sendParentConsentEmail } from "@/lib/compliance";
 
 const studentRegisterSchema = z.object({
   name: z.string().trim().min(1).max(120),
   email: z.string().trim().email().max(254),
   password: z.string().min(8).max(128),
   joinCode: z.string().trim().min(1).max(32),
+  dateOfBirth: z.string().trim().min(8).max(20),
+  parentName: z.string().trim().max(120).optional(),
+  parentEmail: z.string().trim().email().max(254).optional(),
+  parentPhone: z.string().trim().max(40).optional(),
 });
 
 export async function POST(req: Request) {
@@ -25,6 +30,8 @@ export async function POST(req: Request) {
   const email = parsed.data.email.toLowerCase();
   const password = parsed.data.password;
   const joinCode = normalizeJoinCode(parsed.data.joinCode);
+  const dateOfBirth = new Date(parsed.data.dateOfBirth);
+  if (Number.isNaN(dateOfBirth.getTime())) return NextResponse.json({ error: "A valid date of birth is required." }, { status: 400 });
 
   if (!joinCode) return NextResponse.json({ error: "Class code is required." }, { status: 400 });
 
@@ -42,7 +49,38 @@ export async function POST(req: Request) {
   }
 
   const passwordHash = await bcrypt.hash(password, 10);
-  const user = await db.user.create({ data: { email, name, passwordHash, role: "STUDENT" } });
+  if (isUnder13(dateOfBirth)) {
+    if (!parsed.data.parentName || !parsed.data.parentEmail) {
+      return NextResponse.json({ error: "Parent name and parent email are required for students under 13." }, { status: 400 });
+    }
+    const token = createComplianceToken();
+    await db.pendingStudentSignup.deleteMany({ where: { email } });
+    await db.pendingStudentSignup.create({
+      data: {
+        name,
+        email,
+        passwordHash,
+        joinCode,
+        dateOfBirth,
+        parentName: parsed.data.parentName,
+        parentEmail: parsed.data.parentEmail.toLowerCase(),
+        parentPhone: parsed.data.parentPhone || null,
+        consentVersion: consentVersion(),
+        consentText: currentConsentText(),
+        verificationToken: token,
+        expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+      },
+    });
+    await sendParentConsentEmail({
+      parentEmail: parsed.data.parentEmail.toLowerCase(),
+      parentName: parsed.data.parentName,
+      studentName: name,
+      token,
+    });
+    return NextResponse.json({ pendingConsent: true });
+  }
+
+  const user = await db.user.create({ data: { email, name, passwordHash, role: "STUDENT", dateOfBirth, parentalConsentRequired: false } });
 
   const studentProfile = await db.studentProfile.upsert({
     where: { userId: user.id },

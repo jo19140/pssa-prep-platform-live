@@ -11,6 +11,11 @@ export function LoginForm() {
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [joinCode, setJoinCode] = useState("");
+  const [dateOfBirth, setDateOfBirth] = useState("");
+  const [parentName, setParentName] = useState("");
+  const [parentEmail, setParentEmail] = useState("");
+  const [parentPhone, setParentPhone] = useState("");
+  const [acceptedTerms, setAcceptedTerms] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -61,10 +66,14 @@ export function LoginForm() {
       const res = await fetch("/api/student/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, password, joinCode }),
+        body: JSON.stringify({ name, email, password, joinCode, dateOfBirth, parentName, parentEmail, parentPhone }),
       });
       const json = await readJson(res);
       if (!res.ok) throw new Error(json.error || "Could not create student account.");
+      if (json.pendingConsent) {
+        router.push("/student/awaiting-consent");
+        return;
+      }
       const result = await signIn("credentials", { email, password, redirect: false });
       if (!result || result.error) throw new Error("Account created, but sign in failed. Try signing in.");
       router.push("/student");
@@ -75,6 +84,7 @@ export function LoginForm() {
   }
 
   const isRegistering = mode === "studentRegister";
+  const under13 = isUnder13Input(dateOfBirth);
 
   return (
     <div className="rounded-3xl bg-white p-6 shadow">
@@ -102,12 +112,21 @@ export function LoginForm() {
         </p>
         <div className="mt-4 space-y-4">
           {isRegistering ? (
-            <input
-              value={name}
-              onChange={(event) => setName(event.target.value)}
-              placeholder="Full name"
-              className="w-full rounded-2xl border border-slate-300 px-4 py-3"
-            />
+            <>
+              <input
+                value={name}
+                onChange={(event) => setName(event.target.value)}
+                placeholder="Full name"
+                className="w-full rounded-2xl border border-slate-300 px-4 py-3"
+              />
+              <input
+                type="date"
+                value={dateOfBirth}
+                onChange={(event) => setDateOfBirth(event.target.value)}
+                aria-label="Date of birth"
+                className="w-full rounded-2xl border border-slate-300 px-4 py-3"
+              />
+            </>
           ) : null}
           <input
             type="email"
@@ -131,8 +150,29 @@ export function LoginForm() {
               className="w-full rounded-2xl border border-slate-300 px-4 py-3 font-mono uppercase tracking-wide"
             />
           ) : null}
+          {isRegistering && under13 ? (
+            <div className="rounded-2xl border border-amber-200 bg-amber-50 p-3">
+              <p className="text-sm font-semibold text-amber-900">You're under 13, so we need a parent or guardian to give permission before we create your account.</p>
+              <div className="mt-3 space-y-3">
+                <input value={parentName} onChange={(event) => setParentName(event.target.value)} placeholder="Parent or guardian name" className="w-full rounded-2xl border border-amber-200 px-4 py-3" />
+                <input type="email" value={parentEmail} onChange={(event) => setParentEmail(event.target.value)} placeholder="Parent or guardian email" className="w-full rounded-2xl border border-amber-200 px-4 py-3" />
+                <input value={parentPhone} onChange={(event) => setParentPhone(event.target.value)} placeholder="Parent phone (optional)" className="w-full rounded-2xl border border-amber-200 px-4 py-3" />
+              </div>
+            </div>
+          ) : null}
+          {isRegistering ? (
+            <label className="flex gap-3 text-sm font-semibold text-slate-700">
+              <input type="checkbox" checked={acceptedTerms} onChange={(event) => setAcceptedTerms(event.target.checked)} />
+              <span>
+                I have read and agree to the{" "}
+                <Link href="/legal/privacy" target="_blank" className="underline">Privacy Policy</Link>{" "}
+                and{" "}
+                <Link href="/legal/terms" target="_blank" className="underline">Terms of Service</Link>.
+              </span>
+            </label>
+          ) : null}
           {error ? <p className="text-sm text-rose-600">{error}</p> : null}
-          <button disabled={loading} className="w-full rounded-2xl bg-slate-900 px-4 py-3 font-semibold text-white disabled:opacity-50">
+          <button disabled={loading || (isRegistering && !acceptedTerms)} className="w-full rounded-2xl bg-slate-900 px-4 py-3 font-semibold text-white disabled:opacity-50">
             {loading ? "Working..." : isRegistering ? "Create Student Account" : "Sign In"}
           </button>
         </div>
@@ -145,6 +185,17 @@ export function LoginForm() {
       ) : null}
     </div>
   );
+}
+
+function isUnder13Input(value: string) {
+  if (!value) return false;
+  const dob = new Date(value);
+  if (Number.isNaN(dob.getTime())) return false;
+  const now = new Date();
+  let age = now.getFullYear() - dob.getFullYear();
+  const month = now.getMonth() - dob.getMonth();
+  if (month < 0 || (month === 0 && now.getDate() < dob.getDate())) age -= 1;
+  return age < 13;
 }
 
 async function waitForSession() {

@@ -2,6 +2,7 @@ import "./globals.css";
 import type { ReactNode } from "react";
 import { headers } from "next/headers";
 import { AppChromeHeader } from "@/components/AppChromeHeader";
+import { LegalFooter } from "@/components/LegalFooter";
 import { Providers } from "@/components/Providers";
 
 export const metadata = {
@@ -28,6 +29,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
         <Providers>
           <AppChromeHeader />
           {children}
+          <LegalFooter />
         </Providers>
       </body>
     </html>

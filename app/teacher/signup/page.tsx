@@ -10,6 +10,7 @@ export default function TeacherSignupPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [schoolName, setSchoolName] = useState("");
+  const [acceptedTerms, setAcceptedTerms] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -42,7 +43,16 @@ export default function TeacherSignupPage() {
           <input type="password" value={password} onChange={(event) => setPassword(event.target.value)} placeholder="Password" className="w-full rounded-2xl border border-slate-300 px-4 py-3" />
           <input value={schoolName} onChange={(event) => setSchoolName(event.target.value)} placeholder="School name" className="w-full rounded-2xl border border-slate-300 px-4 py-3" />
           {error ? <p className="text-sm text-rose-600">{error}</p> : null}
-          <button disabled={loading} className="w-full rounded-2xl bg-slate-900 px-4 py-3 font-semibold text-white disabled:opacity-50">{loading ? "Creating..." : "Create Teacher Account"}</button>
+          <label className="flex gap-3 text-sm font-semibold text-slate-700">
+            <input type="checkbox" checked={acceptedTerms} onChange={(event) => setAcceptedTerms(event.target.checked)} />
+            <span>
+              I have read and agree to the{" "}
+              <Link href="/legal/privacy" target="_blank" className="underline">Privacy Policy</Link>{" "}
+              and{" "}
+              <Link href="/legal/terms" target="_blank" className="underline">Terms of Service</Link>.
+            </span>
+          </label>
+          <button disabled={loading || !acceptedTerms} className="w-full rounded-2xl bg-slate-900 px-4 py-3 font-semibold text-white disabled:opacity-50">{loading ? "Creating..." : "Create Teacher Account"}</button>
         </form>
         <Link href="/login" className="mt-4 block text-sm font-semibold text-slate-700">Back to login</Link>
       </div>

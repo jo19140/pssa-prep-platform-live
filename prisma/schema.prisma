@@ -14,6 +14,10 @@ model User {
   name            String
   role            String
   emailVerifiedAt DateTime?
+  dateOfBirth     DateTime?
+  parentalConsentRequired Boolean @default(false)
+  parentalConsentAt DateTime?
+  accountDeletedAt DateTime?
   createdAt       DateTime        @default(now())
   updatedAt       DateTime        @updatedAt
 
@@ -32,6 +36,70 @@ model User {
   passwordResetTokens PasswordResetToken[]
   verificationTokens VerificationToken[]
   lessonReviews   LessonReview[]
+  parentalConsent ParentalConsent?
+  dataSubjectRequests DataSubjectRequest[] @relation("DSRRequester")
+  processedDataSubjectRequests DataSubjectRequest[] @relation("DSRProcessor")
+}
+
+model PendingStudentSignup {
+  id                String   @id @default(cuid())
+  name              String
+  email             String
+  passwordHash      String
+  joinCode          String
+  dateOfBirth       DateTime
+  parentName        String
+  parentEmail       String
+  parentPhone       String?
+  consentVersion    String
+  consentText       String   @db.Text
+  verificationToken String   @unique
+  expiresAt         DateTime
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  @@index([email])
+  @@index([parentEmail])
+}
+
+model ParentalConsent {
+  id                String   @id @default(cuid())
+  studentUserId     String   @unique
+  parentName        String
+  parentEmail       String
+  parentPhone       String?
+  consentVersion    String
+  consentText       String   @db.Text
+  consentedAt       DateTime?
+  ipAddress         String?
+  verificationToken String?  @unique
+  verifiedAt        DateTime?
+  revokedAt         DateTime?
+  revokedReason     String?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  student           User     @relation(fields: [studentUserId], references: [id], onDelete: Cascade)
+
+  @@index([parentEmail])
+}
+
+model DataSubjectRequest {
+  id            String   @id @default(cuid())
+  userId        String
+  requestType   String
+  status        String   @default("PENDING")
+  reasonNotes   String?
+  payloadUrl    String?
+  completedAt   DateTime?
+  expiresAt     DateTime?
+  processedById String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  user          User     @relation("DSRRequester", fields: [userId], references: [id], onDelete: Cascade)
+  processedBy   User?    @relation("DSRProcessor", fields: [processedById], references: [id], onDelete: SetNull)
+
+  @@index([userId, requestType])
+  @@index([status, createdAt])
 }
 
 model PasswordResetToken {
