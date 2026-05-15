@@ -161,7 +161,6 @@ function buildDescription(video: VideoRow): string {
   if (video.duration_seconds) parts.push(`Duration: ${formatDuration(Number(video.duration_seconds))}`);
   if (video.tier) parts.push(`Tier: ${video.tier}`);
   if (video.collection_id) parts.push(`Collection: ${video.collection_id}`);
-  if (video.status && video.status !== "APPROVED") parts.push(`Status: ${video.status}`);
   return parts.join(" · ");
 }
 
