@@ -1,7 +1,7 @@
 import OpenAI from "openai";
 import { logAiFailure } from "@/lib/aiTelemetry";
 import { getPerformanceBand } from "@/lib/performance";
-import { pssaTdaExemplars } from "@/lib/pssaTdaExemplars";
+import { pssaTdaExemplarsForGrade } from "@/lib/pssaTdaExemplars";
 
 export type EssayFeedbackItem = {
   claim: string;
@@ -54,13 +54,14 @@ export async function gradeTdaEssay({
 
   try {
     const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+    const gradeAnchors = pssaTdaExemplarsForGrade(gradeLevel);
     const response = await openai.chat.completions.create({
       model: process.env.OPENAI_LEARNING_PATH_MODEL || "gpt-4o-mini",
       response_format: { type: "json_object" },
       messages: [
         { role: "system", content: buildSystemPrompt() },
-        ...pssaTdaExemplars.flatMap((example) => [
-          { role: "user" as const, content: JSON.stringify({ student_response: example.essay, tda_prompt: example.prompt, passage: example.passage, grade_level: 6 }) },
+        ...gradeAnchors.flatMap((example) => [
+          { role: "user" as const, content: JSON.stringify({ student_response: example.essay, tda_prompt: example.prompt, passage: example.passage, grade_level: example.gradeLevel }) },
           { role: "assistant" as const, content: JSON.stringify(example.expectedOutput) },
         ]),
         { role: "user", content: JSON.stringify({ student_response: essay, tda_prompt: prompt, passage, grade_level: gradeLevel, score_scale: "1-4" }) },

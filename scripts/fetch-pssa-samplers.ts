@@ -10,7 +10,7 @@ const SAMPLERS = [
   { grade: 8, url: "https://www.pa.gov/content/dam/copapwp-pagov/en/education/documents/instruction/assessment-and-accountability/pssa/item-and-scoring-samples/2024-pssa-ela-grade-8-item-sampler.pdf" },
 ];
 
-const OUTPUT_DIR = path.join(process.cwd(), "reference", "pssa-released-items");
+const OUTPUT_DIR = path.join(process.cwd(), "reference", "pssa-released-items", "raw");
 
 async function fetchSampler(grade: number, url: string) {
   const filename = `2024-pssa-ela-grade-${grade}-item-sampler.pdf`;

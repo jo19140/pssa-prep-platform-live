@@ -278,10 +278,10 @@ function constructedResponsePassageForSection(grade: number, section: number, pa
 }
 
 function tdaFocusForSection(section: number, passage: DiagnosticPassage) {
-  if (passage.id === "table") return "how the author uses information from the passage and table to develop the idea that evidence helps students choose an effective water-saving design";
-  if (passage.id === "paired") return "how evidence from both texts develops the idea that planning and cooperation can improve a shared space";
-  if (section === 2) return `how the author develops an important idea in ${passage.title}`;
-  return "how the author's description of Nora's decisions develops a theme about responsibility";
+  if (passage.id === "table") return "the author uses information from the passage and table to develop the idea that evidence helps students choose an effective water-saving design";
+  if (passage.id === "paired") return "evidence from both texts develops the idea that planning and cooperation can improve a shared space";
+  if (section === 2) return `the author develops an important idea in ${passage.title}`;
+  return "Nora's decisions develop a theme about responsibility";
 }
 
 function buildPassages(grade: number): DiagnosticPassage[] {
@@ -1691,7 +1691,11 @@ function buildConventionsTechnologyEnhancedQuestion({
 
 function buildTdaQuestion({ grade, passage, id, promptFocus }: { grade: number; passage: DiagnosticPassage; id: number; promptFocus?: string }): Question {
   const samplerPrompt = samplerStemForGrade({ gradeLevel: grade, type: "TDA", skill: "TDA Writing", passageTitle: passage.title, passageType: passage.passageType, itemIndex: 0 });
-  return { id, gradeLevel: grade, passageId: passage.id, passageType: passage.passageType, skill: "TDA Writing", standardCode: `CC.1.4.${grade}.S`, standardLabel: "Text-dependent analysis essay", difficulty: 4, type: "TDA", passageTitle: passage.title, passage: passage.content, passageMetadata: passage, tableData: passage.tableData, explanation: "This item asks students to write an evidence-based analysis.", skillTip: "Use a clear claim, evidence from the passage, and explanation.", prompt: promptFocus ? `Write an essay analyzing ${promptFocus}. Use evidence from ${passage.title} to support your response.` : typeof samplerPrompt === "string" ? samplerPrompt : `Write an essay analyzing how the author develops an important idea across ${passage.title}. Use evidence from the text to support your response.`, rubric: "4: clear analysis with relevant evidence and strong organization; 3: adequate analysis with evidence; 2: partial analysis or limited evidence; 1: minimal response.", maxScore: 4, correctAnswer: "Rubric-scored essay" };
+  return { id, gradeLevel: grade, passageId: passage.id, passageType: passage.passageType, skill: "TDA Writing", standardCode: `CC.1.4.${grade}.S`, standardLabel: "Text-dependent analysis essay", difficulty: 4, type: "TDA", passageTitle: passage.title, passage: passage.content, passageMetadata: passage, tableData: passage.tableData, explanation: "This item asks students to write an evidence-based analysis.", skillTip: "Use a clear claim, evidence from the passage, and explanation.", prompt: promptFocus ? buildPssaStyleTdaPrompt(promptFocus) : typeof samplerPrompt === "string" ? samplerPrompt : buildPssaStyleTdaPrompt(`the author develops an important idea across ${passage.title}`), rubric: "4: clear analysis with relevant evidence and strong organization; 3: adequate analysis with evidence; 2: partial analysis or limited evidence; 1: minimal response.", maxScore: 4, correctAnswer: "Rubric-scored essay" };
+}
+
+function buildPssaStyleTdaPrompt(promptFocus: string) {
+  return `Write an essay analyzing how ${promptFocus}. Use evidence from the passage to support your response.`;
 }
 
 function buildGrade3ShortAnswerQuestion({ grade, passage, id }: { grade: number; passage: DiagnosticPassage; id: number }): Question {

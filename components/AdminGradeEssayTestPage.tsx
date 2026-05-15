@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 
-const defaultPrompt = "Write an essay analyzing how the character changes over the course of the passage. Use evidence from the passage to support your response.";
-const defaultPassage = "Mira did not want to help at the community garden because she thought the work would be boring. At first, she dragged the watering can behind her and watched the older neighbors pull weeds. Then she noticed Mrs. Alvarez saving a row of wilted tomato plants by loosening the dry soil around their roots. Mira tried the same careful motion on a pepper plant. By the end of the morning, she saw that each small task helped the garden survive the heat. When a younger child asked why the plants mattered, Mira explained that the garden gave families fresh food and gave neighbors a place to work together.";
+const defaultPrompt = "A theme in \"The Portal\" is that self-discovery can be a difficult process. Write an essay analyzing how the narrator demonstrates this theme in the passage. Use evidence from the passage to support your response.";
+const defaultPassage = "In \"The Portal,\" Bea runs to a stone wall in the woods after embarrassing herself in class. She asks, \"Why, why, WHY do I always have to be so . . . me.\" Bea calms herself by writing a haiku in invisible ink, but the thought of invisible words makes \"a little sting\" in her heart because no one is there to make her words visible. At the end, Bea tucks the haiku and matches into the Portal because \"even invisible things deserve to have a little hope.\"";
 
 export default function AdminGradeEssayTestPage() {
   const [essay, setEssay] = useState("");

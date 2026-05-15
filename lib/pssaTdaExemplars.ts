@@ -1,7 +1,14 @@
+import grade6ReleasedTda from "@/reference/pssa-released-items/extracted/grade-6/tda-rubric-exemplars.json";
+import grade7ReleasedTda from "@/reference/pssa-released-items/extracted/grade-7/tda-rubric-exemplars.json";
+
 export type PssaTdaExemplar = {
+  gradeLevel: number;
+  source: string;
+  passageTitle: string;
   passage: string;
   prompt: string;
   essay: string;
+  officialRationale: string;
   expectedOutput: {
     score: number;
     scoring_rationale: string;
@@ -13,67 +20,108 @@ export type PssaTdaExemplar = {
   };
 };
 
-const sharedPassage = `The community center's garden had been quiet for years. Weeds covered the beds, and the old sign near the gate leaned toward the sidewalk. When Mira's class visited, she noticed that the soil was dry but still dark underneath. Her teacher explained that neighbors once grew tomatoes, peppers, and herbs there for families who needed fresh food. Mira wondered why people had stopped caring for it.
+type ReleasedTdaSet = {
+  grade: number;
+  source: string;
+  passage: { title: string; content: string };
+  prompt: string;
+  exemplars: { score: number; response: string; rationale: string }[];
+};
 
-The next Saturday, Mira returned with her grandfather and three classmates. At first, the work felt too large. They pulled weeds, carried cracked pots away, and wrote down which tools were missing. By noon, two neighbors had stopped to tell stories about summer meals made from the garden. One neighbor brought a box of seeds. Another promised to repair the sign. Mira realized the garden was not only a place for plants. It was a place where people remembered how to help each other.`;
+const releasedTdaSets = [grade6ReleasedTda, grade7ReleasedTda] as unknown as ReleasedTdaSet[];
 
-const prompt = "Write an essay analyzing how Mira's understanding of the garden changes. Use evidence from the passage to support your response.";
+export const pssaTdaExemplars: PssaTdaExemplar[] = releasedTdaSets.flatMap((set) =>
+  set.exemplars.map((exemplar) => ({
+    gradeLevel: set.grade,
+    source: set.source,
+    passageTitle: set.passage.title,
+    passage: set.passage.content,
+    prompt: set.prompt,
+    essay: exemplar.response,
+    officialRationale: exemplar.rationale,
+    expectedOutput: buildExpectedOutput(set.grade, exemplar.score, exemplar.response, exemplar.rationale),
+  })),
+);
 
-export const pssaTdaExemplars: PssaTdaExemplar[] = [
-  {
-    passage: sharedPassage,
-    prompt,
-    essay: "The community center's garden had been quiet for years. Weeds covered the beds, and the old sign near the gate leaned toward the sidewalk. When Mira's class visited, she noticed that the soil was dry but still dark underneath. Her teacher explained that neighbors once grew tomatoes, peppers, and herbs there for families who needed fresh food.",
-    expectedOutput: {
-      score: 1,
-      scoring_rationale: "The response mostly copies passage language and does not analyze how Mira's understanding changes. It provides little original explanation connected to the TDA prompt.",
-      performance_level: "Below Basic",
-      strengths: [],
-      areas_for_growth: [{ claim: "The response needs an original claim about Mira's change in understanding.", evidence_quote: "" }],
-      feedback: "Your response uses words from the passage, but it does not yet explain your own thinking about Mira. A stronger TDA essay makes a claim, uses evidence, and explains how that evidence proves the claim.",
-      next_steps: ["Write one claim that answers how Mira changes.", "Use evidence in your own sentence instead of copying a long section.", "Explain why the evidence matters."],
-    },
-  },
-  {
-    passage: sharedPassage,
-    prompt,
-    essay: "Mira changes because she likes the garden more. At first the garden is messy and has weeds. The passage says, \"Weeds covered the beds,\" so it was not a very good place. Later people come to help. A neighbor brings seeds and another person says they will fix the sign. This shows the garden is important. Mira understands that people can work together. The garden is not only about plants because people used it before. This is why her idea changes by the end.",
-    expectedOutput: {
-      score: 2,
-      scoring_rationale: "The response gives an emerging claim and some relevant evidence, but the explanation is general and only partly connected to Mira's deeper realization. Organization and analysis are developing.",
-      performance_level: "Basic",
-      strengths: [{ claim: "The response identifies a change in Mira's thinking.", evidence_quote: "Mira understands that people can work together." }],
-      areas_for_growth: [{ claim: "Evidence needs more explanation about how it proves Mira's deeper understanding.", evidence_quote: "A neighbor brings seeds and another person says they will fix the sign." }],
-      feedback: "You have a basic claim and you use details from the passage. To improve, explain how each detail proves that Mira learns the garden connects people, not just that people helped.",
-      next_steps: ["Add a clearer claim about Mira's realization.", "After each quote or detail, explain what Mira learns.", "Use a closing sentence that connects back to the prompt."],
-    },
-  },
-  {
-    passage: sharedPassage,
-    prompt,
-    essay: "Mira's understanding changes from seeing the garden as an abandoned place to seeing it as a place that can bring the community together. At first, the garden looks forgotten because \"Weeds covered the beds\" and the sign is leaning by the sidewalk. These details show why Mira wonders why people stopped caring for it. When she returns to work, she sees neighbors respond. One neighbor \"brought a box of seeds,\" and another \"promised to repair the sign.\" These actions help Mira understand that the garden still matters to people. By the end, she realizes it is \"not only a place for plants\" because it helps neighbors remember how to support each other. This shows that Mira learns the garden's real value is community.",
-    expectedOutput: {
-      score: 3,
-      scoring_rationale: "The response presents clear analysis of Mira's changed understanding and supports it with relevant evidence. Explanation connects the evidence to the claim, though the insight is more clear than thorough.",
-      performance_level: "Proficient",
-      strengths: [{ claim: "The response states a clear analytical claim.", evidence_quote: "Mira's understanding changes from seeing the garden as an abandoned place to seeing it as a place that can bring the community together." }],
-      areas_for_growth: [{ claim: "The response could further explain why the neighbors' memories deepen Mira's understanding.", evidence_quote: "These actions help Mira understand that the garden still matters to people." }],
-      feedback: "Your essay clearly answers the prompt and uses specific evidence. Your explanations show how Mira's view changes, and adding one more sentence about the neighbors' memories would make the analysis even stronger.",
-      next_steps: ["Explain the importance of the neighbors' stories.", "Connect the final sentence directly to Mira's changed understanding.", "Check that each paragraph has claim, evidence, and explanation."],
-    },
-  },
-  {
-    passage: sharedPassage,
-    prompt,
-    essay: "Mira's understanding of the garden changes because she learns that a neglected place can still hold a community's shared responsibility. At the beginning, she sees only damage: \"Weeds covered the beds,\" and the sign \"leaned toward the sidewalk.\" Those images make the garden seem forgotten, so Mira wonders why people stopped caring. Her thinking changes when the cleanup brings neighbors back into the story of the garden. The detail that one neighbor \"brought a box of seeds\" shows that people are willing to invest in its future, while another neighbor's promise to repair the sign shows pride returning to the space. Most importantly, Mira realizes the garden was \"not only a place for plants.\" That line proves she now understands the garden as a symbol of people helping one another. Her change is not just from dislike to like; it is from seeing an empty lot to recognizing a community connection.",
-    expectedOutput: {
-      score: 4,
-      scoring_rationale: "The response offers insightful analysis of Mira's changed understanding, uses multiple precise pieces of evidence, and thoroughly explains how each supports the claim. Organization and language are strong.",
-      performance_level: "Advanced",
-      strengths: [{ claim: "The response gives an insightful interpretation of Mira's change.", evidence_quote: "Her change is not just from dislike to like; it is from seeing an empty lot to recognizing a community connection." }],
-      areas_for_growth: [],
-      feedback: "Your response gives a thoughtful claim, uses strong evidence, and explains how the details build Mira's new understanding. The analysis goes beyond retelling by explaining the garden as a symbol of community responsibility.",
-      next_steps: ["Keep using precise embedded quotes.", "Maintain this claim-evidence-explanation pattern.", "Proofread for small convention errors before submitting."],
-    },
-  },
-];
+export function pssaTdaExemplarsForGrade(gradeLevel: number) {
+  const exact = pssaTdaExemplars.filter((example) => example.gradeLevel === gradeLevel);
+  if (exact.length > 0) return exact;
+
+  // The pilot currently has real released anchors for grades 6 and 7 only.
+  // Use the nearest anchor set if another grade routes through this grader.
+  const fallbackGrade = gradeLevel < 7 ? 6 : 7;
+  return pssaTdaExemplars.filter((example) => example.gradeLevel === fallbackGrade);
+}
+
+function buildExpectedOutput(gradeLevel: number, score: number, essay: string, officialRationale: string): PssaTdaExemplar["expectedOutput"] {
+  const quote = exemplarQuote(gradeLevel, score, essay);
+  return {
+    score,
+    scoring_rationale: officialRationale,
+    performance_level: performanceLevel(score),
+    strengths: strengthsFor(score, quote),
+    areas_for_growth: growthFor(score, quote),
+    feedback: feedbackFor(score),
+    next_steps: nextStepsFor(score),
+  };
+}
+
+function performanceLevel(score: number): PssaTdaExemplar["expectedOutput"]["performance_level"] {
+  if (score >= 4) return "Advanced";
+  if (score === 3) return "Proficient";
+  if (score === 2) return "Basic";
+  return "Below Basic";
+}
+
+function strengthsFor(score: number, quote: string) {
+  if (score >= 4) {
+    return [{ claim: "The response provides thorough analysis supported by well-chosen text evidence.", evidence_quote: quote }];
+  }
+  if (score === 3) {
+    return [{ claim: "The response gives clear analysis and uses relevant evidence from the passage.", evidence_quote: quote }];
+  }
+  if (score === 2) {
+    return [{ claim: "The response attempts an inference connected to the passage, but the analysis is only partly developed.", evidence_quote: quote }];
+  }
+  return [];
+}
+
+function growthFor(score: number, quote: string) {
+  if (score >= 4) return [];
+  if (score === 3) {
+    return [{ claim: "Extend the explanation so each piece of evidence is tied more thoroughly to the theme or central idea.", evidence_quote: quote }];
+  }
+  if (score === 2) {
+    return [{ claim: "Develop the claim with more accurate, specific evidence and explain how the evidence proves the analysis.", evidence_quote: quote }];
+  }
+  return [{ claim: "Add an analytical claim and specific text evidence rather than giving a vague or minimal summary.", evidence_quote: quote }];
+}
+
+function feedbackFor(score: number) {
+  if (score >= 4) return "This response shows in-depth analytic understanding, relevant text evidence, strong organization, and language that supports the writer's purpose.";
+  if (score === 3) return "This response shows sufficient analytic understanding and relevant evidence. To move higher, make the explanation more thorough and consistently connected to the claim.";
+  if (score === 2) return "This response shows partial analytic understanding, but the evidence and explanation need to be more specific and more clearly connected to the task.";
+  return "This response minimally addresses the task. A stronger TDA essay needs an analytical claim, specific evidence from the passage, and explanation of how that evidence supports the claim.";
+}
+
+function nextStepsFor(score: number) {
+  if (score >= 4) return ["Maintain the clear claim-evidence-explanation pattern.", "Keep selecting precise text references.", "Proofread for small convention errors before submitting."];
+  if (score === 3) return ["Add one more sentence of explanation after each quote.", "Make the conclusion do more than repeat the prompt.", "Check that each paragraph connects back to the controlling idea."];
+  if (score === 2) return ["Write a clear claim that directly answers the prompt.", "Use at least two accurate text references.", "Explain how each text reference proves your claim."];
+  return ["Write one claim that answers the prompt.", "Add one specific detail or quote from the passage.", "Explain the connection between the evidence and your claim."];
+}
+
+function exemplarQuote(gradeLevel: number, score: number, essay: string) {
+  const quotes: Record<string, string> = {
+    "6-4": "This shows that her friendship still has hope and though self\ndiscovery is diﬃcult there is still hope for herself.",
+    "6-3": "It was hard for her to ﬁnd the portal on her own.",
+    "6-2": "Bea (the narrotor) is having\ntroluble f inding herself.",
+    "6-1": "heS\nruning from something",
+    "7-4": "Wanting but not having an answer to Zephyr’s question gave Nimbus\nmotivation to keep learning",
+    "7-3": "the quote relates to the theme by asking a question that would start the action",
+    "7-2": "Zephyr’s question relates to a theme by showing how each finch thinks.",
+    "7-1": "they all live in a cage",
+  };
+  const candidate = quotes[`${gradeLevel}-${score}`];
+  return candidate && essay.includes(candidate) ? candidate : "";
+}
