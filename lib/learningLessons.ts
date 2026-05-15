@@ -601,6 +601,7 @@ export function buildFallbackLesson({
     item.standardCode.startsWith("CC.1.3.") ||
     item.standardCode.startsWith("CC.1.2.") ||
     isConventionsSkill(item.skill.toLowerCase()) ||
+    isVocabularySkill(item.skill.toLowerCase()) ||
     isLiterarySkill(item.skill.toLowerCase()) ||
     isInformationalSkill(item.skill.toLowerCase());
   const guidedPractice = buildPractice(item.skill, "guided", gradeLevel, isSixActivityLesson ? 6 : gradeLevel >= 6 ? 4 : 3, libraryScenarios, item.standardCode);
@@ -790,7 +791,7 @@ function workedExampleForSkill(skill: string, gradeLevel: number) {
 function buildPractice(skill: string, mode: string, gradeLevel: number, count: number, libraryScenarios: PracticeQuestion[] = [], standardCode = ""): PracticeQuestion[] {
   const cannedScenarios = practiceScenarios(skill, gradeLevel, standardCode);
   const librarySample = sampleWithoutReplacement(libraryScenarios, count, `${gradeLevel}:${skill}:${mode}`);
-  const preferCanned = standardCode.startsWith("CC.1.2.");
+  const preferCanned = standardCode.startsWith("CC.1.2.") || isVocabularySkill(skill.toLowerCase());
   const scenarios = preferCanned
     ? [...cannedScenarios.slice(0, count), ...librarySample].slice(0, count)
     : [...librarySample, ...repeatToCount(cannedScenarios, Math.max(0, count - librarySample.length))];
@@ -806,7 +807,7 @@ function buildPractice(skill: string, mode: string, gradeLevel: number, count: n
       coachHint: scenario.coachHint,
       interactionType: scenario.interactionType,
     };
-  }).filter((question) => !isGenericTemplateLeak(question, standardCode));
+  }).filter((question) => !isGenericTemplateLeak(question, standardCode, skill));
 }
 
 function sampleWithoutReplacement<T>(items: T[], count: number, seed: string): T[] {
@@ -824,6 +825,9 @@ function practiceScenarios(skill: string, gradeLevel: number, standardCode = "")
   const lower = skill.toLowerCase();
   if (standardCode.startsWith("CC.1.4.") || isConventionsSkill(lower)) {
     return conventionsPracticeScenarios(skill);
+  }
+  if (isVocabularySkill(lower)) {
+    return vocabularyPracticeScenarios(skill);
   }
   if (standardCode.startsWith("CC.1.2.") || isInformationalSkill(lower)) {
     return informationalPracticeScenarios(skill);
@@ -937,6 +941,152 @@ type LiteraryScenarioConfig = {
   coachHint: string;
   explainPrompt: string;
 };
+
+function vocabularyPracticeScenarios(skill: string): PracticeQuestion[] {
+  const lower = skill.toLowerCase();
+  if (lower.includes("context clue") || (lower.includes("context") && !lower.includes("figurative"))) {
+    return readingScenarioSet({
+      skillName: "context clues",
+      passageType: "informational",
+      clozeSentence: "Use words and ___ around an unknown word to figure out its meaning.",
+      clozeChoices: ["phrases", "letters", "pages", "pictures"],
+      clozeAnswer: "phrases",
+      passage: `The art club was meticulous while painting the mural. Students measured every stripe, wiped away tiny smudges, and checked each color label twice before opening a new jar.`,
+      question: "What does 'meticulous' mean in the passage?",
+      answerChoices: ["very careful", "quick and careless", "brightly colored", "too expensive"],
+      correctAnswer: "very careful",
+      strongEvidence: ["Strong support: Students measured every stripe.", "Strong support: Students checked each color label twice."],
+      weakEvidence: ["Weak or off-topic: The art club painted a mural.", "Weak or off-topic: Students opened a new jar."],
+      explanation: "The surrounding details show careful actions, so meticulous means very careful.",
+      coachHint: "Use nearby words and phrases that explain, describe, or give examples of the unknown word.",
+      explainPrompt: "What does 'meticulous' mean in this passage? Identify one specific context clue that helped you decide.",
+    });
+  }
+  if (lower.includes("root") || lower.includes("greek") || lower.includes("latin")) {
+    return readingScenarioSet({
+      skillName: "Greek and Latin roots",
+      passageType: "informational",
+      clozeSentence: "The root 'spect' means 'to look,' so 'inspector' is someone who ___.",
+      clozeChoices: ["looks closely", "runs fast", "speaks loudly", "writes letters"],
+      clozeAnswer: "looks closely",
+      passage: `Before the exhibit opened, the inspector reviewed each display case. Visitors later became spectators, stopping to inspect the fossils and read the labels carefully.`,
+      question: "Which word shares the same root as 'inspect'?",
+      answerChoices: ["spectator", "special", "spoonful", "section"],
+      correctAnswer: "spectator",
+      strongEvidence: ["Strong support: Inspector, spectators, and inspect all include the root spect.", "Strong support: The passage connects the root to looking at displays and fossils."],
+      weakEvidence: ["Weak or off-topic: The exhibit opened before visitors arrived.", "Weak or off-topic: Visitors read labels carefully."],
+      explanation: "Spectator shares the root spect, which has to do with looking.",
+      coachHint: "Look for the shared root and test whether the meanings are connected.",
+      explainPrompt: "What does the root in 'inspect' help you figure out about its meaning? Explain using another word that shares the same root.",
+    });
+  }
+  if (lower.includes("prefix") || lower.includes("suffix") || lower.includes("affix")) {
+    return readingScenarioSet({
+      skillName: "prefixes and suffixes",
+      passageType: "informational",
+      clozeSentence: "The prefix 'un-' usually means ___, which changes a word's meaning to its opposite.",
+      clozeChoices: ["not", "again", "before", "under"],
+      clozeAnswer: "not",
+      passage: `The first design was unsafe because the ramp wobbled. After the team rebuilt it with stronger supports, the ramp became usable for the final test.`,
+      question: "What does the prefix 'un-' add to the meaning of 'unsafe'?",
+      answerChoices: ["not safe", "safe again", "before safe", "very safe"],
+      correctAnswer: "not safe",
+      strongEvidence: ["Strong support: The ramp wobbled, so it was not safe.", "Strong support: Rebuilt shows the team built the ramp again."],
+      weakEvidence: ["Weak or off-topic: The team used stronger supports.", "Weak or off-topic: The final test happened later."],
+      explanation: "The prefix un- means not, so unsafe means not safe.",
+      coachHint: "Separate the prefix or suffix from the base word, then combine their meanings.",
+      explainPrompt: "How does the prefix or suffix in 'unsafe' change its meaning? Use the word in a sentence to show the change.",
+    });
+  }
+  if (lower.includes("synonym") || lower.includes("antonym") || lower.includes("word relationship")) {
+    return readingScenarioSet({
+      skillName: "word relationships",
+      passageType: "informational",
+      clozeSentence: "Synonyms have ___ meanings, while antonyms have opposite meanings.",
+      clozeChoices: ["similar", "opposite", "funny", "loud"],
+      clozeAnswer: "similar",
+      passage: `The hallway was silent during the reading challenge. Even when the bell rang, the students stayed quiet so the final reader could finish the page.`,
+      question: "Which word is a synonym for 'silent'?",
+      answerChoices: ["quiet", "noisy", "careful", "crowded"],
+      correctAnswer: "quiet",
+      strongEvidence: ["Strong support: The passage says students stayed quiet.", "Strong support: Silent and quiet both describe little or no sound."],
+      weakEvidence: ["Weak or off-topic: The bell rang.", "Weak or off-topic: The final reader finished a page."],
+      explanation: "Quiet has nearly the same meaning as silent in this passage.",
+      coachHint: "Check whether the word means nearly the same thing or the opposite in context.",
+      explainPrompt: "Find a word in the passage that has nearly the same meaning as 'silent'. Explain why you chose it.",
+    });
+  }
+  if (lower.includes("connotation") || lower.includes("denotation") || lower.includes("nuance")) {
+    return readingScenarioSet({
+      skillName: "connotation and denotation",
+      passageType: "informational",
+      clozeSentence: "A word's ___ is the feeling or attitude it suggests beyond its dictionary meaning.",
+      clozeChoices: ["connotation", "denotation", "definition", "synonym"],
+      clozeAnswer: "connotation",
+      passage: `The fundraiser chair called Malik thrifty because he reused decorations and found free supplies. Another student said the plan was cheap, but Malik's careful choices helped the club save money.`,
+      question: "Which word has a more negative connotation?",
+      answerChoices: ["cheap", "thrifty", "careful", "helpful"],
+      correctAnswer: "cheap",
+      strongEvidence: ["Strong support: Cheap sounds more negative than thrifty even though both involve spending little.", "Strong support: Thrifty is connected to careful choices that saved money."],
+      weakEvidence: ["Weak or off-topic: Malik reused decorations.", "Weak or off-topic: The club held a fundraiser."],
+      explanation: "Cheap suggests an unpleasant or low-quality choice, while thrifty suggests wise saving.",
+      coachHint: "Compare the feeling of near-synonyms, not just their dictionary meanings.",
+      explainPrompt: "What feeling does 'cheap' add to the sentence compared to 'thrifty'? Explain how the connotation changes the meaning.",
+    });
+  }
+  if (lower.includes("multiple-meaning") || lower.includes("multiple meaning") || lower.includes("multiple meanings")) {
+    return readingScenarioSet({
+      skillName: "multiple-meaning words",
+      passageType: "informational",
+      clozeSentence: "When a word has more than one meaning, use ___ to pick the right one.",
+      clozeChoices: ["context", "the title", "your guess", "a dictionary picture"],
+      clozeAnswer: "context",
+      passage: `After the class measured the stream, they sat on the bank to record the water level. The teacher reminded them not to step too close to the muddy edge.`,
+      question: "What does 'bank' mean in this sentence?",
+      answerChoices: ["the land beside water", "a place that keeps money", "to turn an airplane", "to depend on something"],
+      correctAnswer: "the land beside water",
+      strongEvidence: ["Strong support: The class measured the stream.", "Strong support: The teacher warned them about the muddy edge."],
+      weakEvidence: ["Weak or off-topic: The class recorded the water level.", "Weak or off-topic: The teacher gave a reminder."],
+      explanation: "Stream and muddy edge show that bank means the land beside water.",
+      coachHint: "Use the sentence situation to choose which meaning of the word fits.",
+      explainPrompt: "What does 'bank' mean in this sentence? Explain which clue from the passage helped you choose between its meanings.",
+    });
+  }
+  if (lower.includes("academic vocab") || lower.includes("tier 2") || lower.includes("tier two")) {
+    return readingScenarioSet({
+      skillName: "academic vocabulary",
+      passageType: "informational",
+      clozeSentence: "Tier 2 academic words like 'analyze' or 'evaluate' show up across ___ subjects, not just one.",
+      clozeChoices: ["many", "no", "silly", "one"],
+      clozeAnswer: "many",
+      passage: `For the lab report, students had to analyze the results instead of simply listing numbers. They compared the trial data and explained what the pattern showed about plant growth.`,
+      question: "What does 'analyze' mean as it is used here?",
+      answerChoices: ["study closely to understand", "copy without thinking", "erase completely", "decorate neatly"],
+      correctAnswer: "study closely to understand",
+      strongEvidence: ["Strong support: Students compared the trial data.", "Strong support: Students explained what the pattern showed."],
+      weakEvidence: ["Weak or off-topic: The report was for a lab.", "Weak or off-topic: Plants grew during the experiment."],
+      explanation: "Analyze means to study closely and explain meaning, which matches comparing data and explaining a pattern.",
+      coachHint: "Academic vocabulary often names the kind of thinking a task requires.",
+      explainPrompt: "What does 'analyze' mean in this passage? Explain why this academic word fits the context.",
+    });
+  }
+  return readingScenarioSet({
+    skillName: "vocabulary",
+    passageType: "informational",
+    clozeSentence: "Use context clues to connect an unknown word to nearby ___ in the passage.",
+    clozeChoices: ["details", "page numbers", "pictures only", "titles only"],
+    clozeAnswer: "details",
+    passage: `The maze looked intricate, with twisting paths, hidden turns, and tiny bridges crossing over one another. It took visitors several minutes to trace a route from the entrance to the center.`,
+    question: "What does 'intricate' mean in the passage?",
+    answerChoices: ["complicated and detailed", "plain and empty", "quick to finish", "brightly colored"],
+    correctAnswer: "complicated and detailed",
+    strongEvidence: ["Strong support: The maze has twisting paths and hidden turns.", "Strong support: Tiny bridges cross over one another."],
+    weakEvidence: ["Weak or off-topic: Visitors entered the maze.", "Weak or off-topic: The center is part of the maze."],
+    explanation: "The details about twisting paths, hidden turns, and tiny bridges show that intricate means complicated and detailed.",
+    coachHint: "A useful context clue explains or shows what the unknown word means.",
+    explainPrompt: "What does 'intricate' mean in this passage? Identify one context clue that helped you decide.",
+  });
+}
 
 function informationalPracticeScenarios(skill: string): PracticeQuestion[] {
   const lower = skill.toLowerCase();
@@ -1441,8 +1591,12 @@ function conventionScenarioSet(skillName: string, clozeSentence: string, clozeCh
   ];
 }
 
-function isGenericTemplateLeak(question: PracticeQuestion, standardCode: string) {
-  const isCheckedStrand = standardCode.startsWith("CC.1.4.") || standardCode.startsWith("CC.1.3.") || standardCode.startsWith("CC.1.2.");
+function isGenericTemplateLeak(question: PracticeQuestion, standardCode: string, skill = "") {
+  const isCheckedStrand =
+    standardCode.startsWith("CC.1.4.") ||
+    standardCode.startsWith("CC.1.3.") ||
+    standardCode.startsWith("CC.1.2.") ||
+    isVocabularySkill(skill.toLowerCase());
   if (!isCheckedStrand) return false;
   const choices = new Set((question.choices || []).map((choice) => choice.trim().toLowerCase()));
   const genericReadingLeak = ["supported", "guessed", "copied", "unrelated"].every((choice) => choices.has(choice));
@@ -1784,6 +1938,29 @@ function isLiterarySkill(lowerSkill: string) {
     lowerSkill.includes("metaphor") ||
     lowerSkill.includes("personification") ||
     lowerSkill.includes("flashback")
+  );
+}
+
+function isVocabularySkill(lowerSkill: string) {
+  return (
+    !lowerSkill.includes("figurative") &&
+    (lowerSkill.includes("prefix") ||
+      lowerSkill.includes("suffix") ||
+      lowerSkill.includes("root") ||
+      lowerSkill.includes("synonym") ||
+      lowerSkill.includes("antonym") ||
+      lowerSkill.includes("connotation") ||
+      lowerSkill.includes("denotation") ||
+      lowerSkill.includes("multiple-meaning") ||
+      lowerSkill.includes("multiple meaning") ||
+      lowerSkill.includes("context clue") ||
+      lowerSkill.includes("academic vocab") ||
+      lowerSkill.includes("academic vocabulary") ||
+      lowerSkill.includes("word relationship") ||
+      lowerSkill.includes("word meaning") ||
+      lowerSkill.includes("nuance") ||
+      lowerSkill.includes("tier 2") ||
+      lowerSkill.includes("tier two"))
   );
 }
 
