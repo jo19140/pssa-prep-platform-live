@@ -97,6 +97,7 @@ export type PracticeQuestion = {
   explanation: string;
   passage?: string;
   coachHint?: string;
+  interactionType?: string;
 };
 
 const RESOURCE_FALLBACK = {
@@ -595,8 +596,9 @@ export function buildFallbackLesson({
   const workedExample = workedExampleForSkill(item.skill, gradeLevel);
   const libraryScenarios = findLibraryScenariosFor({ gradeLevel, standardCode: item.standardCode, skill: item.skill });
   const librarySource = libraryScenarios.length > 0;
-  const guidedPractice = buildPractice(item.skill, "guided", gradeLevel, gradeLevel >= 6 ? 4 : 3, libraryScenarios, item.standardCode);
-  const independentPractice = buildPractice(item.skill, "independent", gradeLevel, gradeLevel >= 6 ? 5 : 4, libraryScenarios, item.standardCode);
+  const isConventionsLesson = item.standardCode.startsWith("CC.1.4.") || isConventionsSkill(item.skill.toLowerCase());
+  const guidedPractice = buildPractice(item.skill, "guided", gradeLevel, isConventionsLesson ? 6 : gradeLevel >= 6 ? 4 : 3, libraryScenarios, item.standardCode);
+  const independentPractice = buildPractice(item.skill, "independent", gradeLevel, isConventionsLesson ? 6 : gradeLevel >= 6 ? 5 : 4, libraryScenarios, item.standardCode);
   const exitTicket = buildPractice(item.skill, "exit ticket", gradeLevel, 1, libraryScenarios, item.standardCode);
   const masteryCheck = buildPractice(item.skill, "mastery check", gradeLevel, gradeLevel >= 6 ? 3 : 2, libraryScenarios, item.standardCode);
   const retestRecommendation = `After completing this lesson and scoring at least 80% on the mastery check, retake a short ${item.standardCode} practice set with ${weakFormat} items.`;
@@ -793,8 +795,9 @@ function buildPractice(skill: string, mode: string, gradeLevel: number, count: n
       correctAnswer: scenario.correctAnswer,
       explanation: scenario.explanation,
       coachHint: scenario.coachHint,
+      interactionType: scenario.interactionType,
     };
-  });
+  }).filter((question) => !isGenericTemplateLeak(question, standardCode));
 }
 
 function sampleWithoutReplacement<T>(items: T[], count: number, seed: string): T[] {
@@ -933,85 +936,88 @@ function practiceScenarios(skill: string, gradeLevel: number, standardCode = "")
 
 function conventionsPracticeScenarios(skill: string): PracticeQuestion[] {
   const lower = skill.toLowerCase();
-  if (lower.includes("pronoun")) {
-    return [
-      {
-        passage: `The robotics team revised its presentation before the showcase. Maya and Devon practiced the opening, and their coach gave Maya and Devon feedback after each run.`,
-        question: `Which revision uses pronouns correctly?`,
-        choices: [
-          "The coach gave Maya and them feedback after each run.",
-          "The coach gave Maya and they feedback after each run.",
-          "The coach gave she and Devon feedback after each run.",
-          "The coach gave Maya and he feedback after each run.",
-        ],
-        correctAnswer: "The coach gave Maya and them feedback after each run.",
-        explanation: "Them is the correct object pronoun after gave. The other choices use subject pronouns where object pronouns are needed.",
-        coachHint: "Ask whether the pronoun is doing the action or receiving the action.",
-      },
-    ];
-  }
-  if (lower.includes("comma") || lower.includes("dash") || lower.includes("parentheses") || lower.includes("punctuation")) {
-    return [
-      {
-        passage: `The student council planned a cleanup day. The park behind the library needed new signs, fresh mulch, and repaired benches.`,
-        question: `Which sentence uses punctuation correctly to set off extra information?`,
-        choices: [
-          "The park, behind the library, needed new signs, fresh mulch, and repaired benches.",
-          "The park behind, the library needed new signs fresh mulch and repaired benches.",
-          "The park behind the library needed, new signs, fresh mulch, and repaired benches.",
-          "The park behind the library, needed new signs fresh mulch, and repaired benches.",
-        ],
-        correctAnswer: "The park, behind the library, needed new signs, fresh mulch, and repaired benches.",
-        explanation: "The commas set off the extra location phrase and separate items in a series.",
-        coachHint: "Check whether commas make the sentence easier to read without breaking the main subject and verb.",
-      },
-    ];
-  }
-  if (lower.includes("sentence") || lower.includes("pattern") || lower.includes("combining")) {
-    return [
-      {
-        passage: `The class tested a paper bridge. The class measured the weight it held. The class recorded the results in a chart.`,
-        question: `Which revision combines ideas clearly and varies the sentence pattern?`,
-        choices: [
-          "After testing the paper bridge, the class measured the weight it held and recorded the results in a chart.",
-          "The class tested. The class measured. The class recorded.",
-          "Testing bridge class, measured chart and weight results.",
-          "The chart recorded the class because the bridge tested weight.",
-        ],
-        correctAnswer: "After testing the paper bridge, the class measured the weight it held and recorded the results in a chart.",
-        explanation: "The revision combines related actions in a clear order while keeping the subject and verbs correct.",
-        coachHint: "The best revision should sound natural and keep the original meaning.",
-      },
-    ];
-  }
+  if (lower.includes("pronoun")) return conventionScenarioSet("pronouns", "Use a ___ pronoun after a verb that takes an object.", ["subject", "object", "possessive", "reflexive"], "object", "The coach gave Maya and them feedback after practice.", "The coach gave Maya and they feedback after practice.", "Them is correct because it receives the action after gave.", "Ask whether the pronoun is doing the action or receiving it.");
+  if (lower.includes("comma") || lower.includes("dash") || lower.includes("parentheses") || lower.includes("punctuation")) return conventionScenarioSet("commas", "Use commas to set off ___ information.", ["extra", "essential", "main", "missing"], "extra", "The book, which I borrowed from the library, was overdue.", "The book which I borrowed from the library was overdue.", "The commas set off extra information that is not needed to identify the book.", "Check whether commas clarify extra information without splitting the subject from the verb.");
+  if (lower.includes("capital")) return conventionScenarioSet("capitalization", "Capitalize ___ nouns and important words in titles.", ["proper", "common", "plural", "action"], "proper", "On Tuesday, Maya visited the Franklin Institute.", "On tuesday, Maya visited the franklin institute.", "Tuesday and Franklin Institute are proper nouns, so they need capital letters.", "Look for names of days, people, places, organizations, and titles.");
+  if (lower.includes("verb tense") || lower.includes("tense")) return conventionScenarioSet("verb tense", "Keep verb tense ___ unless the time clearly changes.", ["consistent", "plural", "possessive", "capitalized"], "consistent", "Yesterday, the team tested the bridge and recorded the results.", "Yesterday, the team tests the bridge and recorded the results.", "Tested and recorded are both past tense, so the time stays consistent.", "Use the time clue to decide whether the verbs should stay in past, present, or future tense.");
+  if (lower.includes("apostrophe") || lower.includes("possessive")) return conventionScenarioSet("apostrophes", "Use an apostrophe to show ___ or to form a contraction.", ["possession", "comparison", "capitalization", "sequence"], "possession", "The student's notebook was full of careful observations.", "The students notebook was full of careful observations.", "Student's shows that the notebook belongs to one student.", "Ask who owns the item, then place the apostrophe correctly.");
+  if (lower.includes("sentence") || lower.includes("pattern") || lower.includes("combining") || lower.includes("structure")) return conventionScenarioSet("sentence combining", "Combine related ideas when the new sentence stays ___ and complete.", ["clear", "louder", "shorter", "capital"], "clear", "After testing the paper bridge, the class recorded the results in a chart.", "Testing bridge class, recorded chart and results.", "The correct sentence combines related actions while keeping the meaning clear.", "The best revision should sound natural and keep the original meaning.");
+  return conventionScenarioSet("subject-verb agreement", "A singular subject takes a ___ verb.", ["singular", "plural", "compound", "possessive"], "singular", "The stack of permission slips sits on the teacher's desk.", "The stack of permission slips sit on the teacher's desk.", "Stack is singular, so the verb sits agrees with it.", "Find the subject before choosing the verb. Do not let nearby plural words trick you.");
+}
+
+function conventionScenarioSet(skillName: string, clozeSentence: string, clozeChoices: string[], clozeAnswer: string, correctSentence: string, incorrectSentence: string, explanation: string, coachHint: string): PracticeQuestion[] {
+  const needsFixing = `Needs fixing: ${incorrectSentence}`;
+  const correctLabel = `Correct: ${correctSentence}`;
   return [
     {
-      passage: `The stack of permission slips sat on the teacher's desk. Several students checked the list before leaving for the museum trip.`,
-      question: `Which sentence uses correct subject-verb agreement?`,
-      choices: [
-        "The stack of permission slips sits on the teacher's desk.",
-        "The stack of permission slips sit on the teacher's desk.",
-        "Several students checks the list before leaving.",
-        "The students was ready for the museum trip.",
-      ],
-      correctAnswer: "The stack of permission slips sits on the teacher's desk.",
-      explanation: "The subject is stack, which is singular, so the verb sits agrees with it. Permission slips is a nearby phrase, not the subject.",
-      coachHint: "Find the subject before choosing the verb. Do not let nearby plural words trick you.",
+      passage: `${correctSentence} ${incorrectSentence} Read each version and check the ${skillName} rule.`,
+      question: `Which sentence uses ${skillName} correctly?`,
+      choices: [correctSentence, incorrectSentence, incorrectSentence.replace(/\.$/, ",."), correctSentence.replace(/\.$/, "")],
+      correctAnswer: correctSentence,
+      explanation,
+      coachHint,
+      interactionType: "multiple-choice",
     },
     {
-      passage: `The pages in the science notebook were wrinkled after the rain drill. The cover, however, was still clean.`,
-      question: `Which choice explains why the verbs are correct?`,
-      choices: [
-        "Pages is plural, so were agrees; cover is singular, so was agrees.",
-        "Notebook is singular, so were agrees.",
-        "Rain is the subject of both sentences.",
-        "Clean is a verb, so it controls the sentence.",
-      ],
-      correctAnswer: "Pages is plural, so were agrees; cover is singular, so was agrees.",
-      explanation: "Each verb must match its own subject: pages were and cover was.",
-      coachHint: "Longer sentences may have more than one subject-verb pair.",
+      passage: `${clozeSentence} The rule helps writers make sentence meaning clear.`,
+      question: clozeSentence,
+      choices: clozeChoices,
+      correctAnswer: clozeAnswer,
+      explanation: `The word "${clozeAnswer}" correctly completes the ${skillName} rule.`,
+      coachHint,
+      interactionType: "inline-cloze",
+    },
+    {
+      passage: `${correctLabel}. ${needsFixing}. Correct: ${correctSentence.replace("The", "A")}. Needs fixing: ${incorrectSentence.replace("The", "A")}.`,
+      question: `Classify each sentence as correctly written or needing a ${skillName} edit.`,
+      choices: [correctLabel, needsFixing, `Correct: ${correctSentence.replace("The", "A")}`, `Needs fixing: ${incorrectSentence.replace("The", "A")}`],
+      correctAnswer: correctLabel,
+      explanation: `Correct sentences follow the ${skillName} rule; sentences marked needs fixing break that rule.`,
+      coachHint,
+      interactionType: "evidence-match",
+    },
+    {
+      passage: `${correctSentence} ${incorrectSentence} ${correctSentence.replace(/\.$/, " today.")} ${incorrectSentence.replace(/\.$/, " today.")}`,
+      question: `Sort the sentences by whether the ${skillName} choice is correct.`,
+      choices: [correctSentence, incorrectSentence, correctSentence.replace(/\.$/, " today."), incorrectSentence.replace(/\.$/, " today.")],
+      correctAnswer: correctSentence,
+      explanation: `The correct examples follow the ${skillName} rule. The others need editing.`,
+      coachHint,
+      interactionType: "evidence-sort",
+    },
+    {
+      passage: clozeSentence,
+      question: clozeSentence,
+      choices: clozeChoices,
+      correctAnswer: clozeAnswer,
+      explanation: `This cloze states the ${skillName} rule students should apply while editing.`,
+      coachHint,
+      interactionType: "word-cloze",
+    },
+    {
+      passage: `Look at this sentence: "${correctSentence}" Compare it with this incorrect version: "${incorrectSentence}"`,
+      question: `In your own words, explain why "${correctSentence}" is the correct ${skillName} choice.`,
+      choices: [correctSentence, incorrectSentence],
+      correctAnswer: correctSentence,
+      explanation,
+      coachHint: `Explain what the ${skillName} choice does and why it is needed.`,
+      interactionType: "short-response",
     },
   ];
+}
+
+function isGenericTemplateLeak(question: PracticeQuestion, standardCode: string) {
+  if (!standardCode.startsWith("CC.1.4.")) return false;
+  const choices = new Set((question.choices || []).map((choice) => choice.trim().toLowerCase()));
+  const leaked = ["supported", "guessed", "copied", "unrelated"].every((choice) => choices.has(choice));
+  if (leaked) {
+    logAiFailure({
+      scope: "learningLessons.generic_template_leak",
+      error: new Error("Generic reading-strategy answer set leaked into conventions practice."),
+      context: { standardCode, question: question.question },
+    });
+  }
+  return leaked;
 }
 
 function mostCommon(values: string[]) {
@@ -1305,10 +1311,15 @@ function isConventionsSkill(lowerSkill: string) {
     lowerSkill.includes("grammar") ||
     lowerSkill.includes("punctuation") ||
     lowerSkill.includes("subject-verb") ||
+    lowerSkill.includes("agreement") ||
     lowerSkill.includes("verb tense") ||
+    lowerSkill.includes("tense") ||
     lowerSkill.includes("pronoun") ||
     lowerSkill.includes("comma") ||
-    lowerSkill.includes("capitalization") ||
+    lowerSkill.includes("apostrophe") ||
+    lowerSkill.includes("possessive") ||
+    lowerSkill.includes("capital") ||
+    lowerSkill.includes("combining") ||
     lowerSkill.includes("sentence pattern") ||
     lowerSkill.includes("sentence structure")
   );

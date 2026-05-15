@@ -724,12 +724,12 @@ function LessonDetail({
           )
         )}
 
-        {activeStep === "guided" && <PracticeBlock title="Guided Practice" skill={lesson.skill} questions={lesson.guidedPractice} lessonImageUrl={getLessonImageUrl(lesson)} savedResponses={progress.guidedResponses} onComplete={(answers) => completePractice("guided", answers)} />}
-        {activeStep === "independent" && <PracticeBlock title="Independent Practice" skill={lesson.skill} questions={lesson.independentPractice} lessonImageUrl={getLessonImageUrl(lesson)} savedResponses={progress.independentResponses} onComplete={(answers) => completePractice("independent", answers)} />}
-        {activeStep === "exit" && <PracticeBlock title="Exit Ticket" skill={lesson.skill} questions={lesson.exitTicket} lessonImageUrl={getLessonImageUrl(lesson)} savedResponses={progress.exitTicketResponses} onComplete={(answers) => completePractice("exit", answers)} />}
+        {activeStep === "guided" && <PracticeBlock title="Guided Practice" skill={lesson.skill} standardCode={lesson.standardCode} questions={lesson.guidedPractice} lessonImageUrl={getLessonImageUrl(lesson)} savedResponses={progress.guidedResponses} onComplete={(answers) => completePractice("guided", answers)} />}
+        {activeStep === "independent" && <PracticeBlock title="Independent Practice" skill={lesson.skill} standardCode={lesson.standardCode} questions={lesson.independentPractice} lessonImageUrl={getLessonImageUrl(lesson)} savedResponses={progress.independentResponses} onComplete={(answers) => completePractice("independent", answers)} />}
+        {activeStep === "exit" && <PracticeBlock title="Exit Ticket" skill={lesson.skill} standardCode={lesson.standardCode} questions={lesson.exitTicket} lessonImageUrl={getLessonImageUrl(lesson)} savedResponses={progress.exitTicketResponses} onComplete={(answers) => completePractice("exit", answers)} />}
         {activeStep === "mastery" && (
           <div className="grid gap-4">
-            <PracticeBlock title="Mastery Check" skill={lesson.skill} questions={lesson.masteryCheck} lessonImageUrl={getLessonImageUrl(lesson)} masteryMode onComplete={(answers, score) => completePractice("mastery", answers, score)} />
+            <PracticeBlock title="Mastery Check" skill={lesson.skill} standardCode={lesson.standardCode} questions={lesson.masteryCheck} lessonImageUrl={getLessonImageUrl(lesson)} masteryMode onComplete={(answers, score) => completePractice("mastery", answers, score)} />
             {masteryAttempted ? (
               <LessonBlock title="Mastery Result">
                 {masteryPassed
@@ -2547,6 +2547,7 @@ function InstructionPlayer({ lesson, onContinue, immersive = false }: { lesson: 
 function PracticeBlock({
   title,
   skill = "",
+  standardCode = "",
   questions,
   lessonImageUrl = "",
   savedResponses,
@@ -2555,6 +2556,7 @@ function PracticeBlock({
 }: {
   title: string;
   skill?: string;
+  standardCode?: string;
   questions: any[];
   lessonImageUrl?: string;
   savedResponses?: any;
@@ -2563,8 +2565,8 @@ function PracticeBlock({
 }) {
   const safeQuestions = useMemo(() => hydratedPracticeQuestions(Array.isArray(questions) ? questions : [], title, skill), [questions, title, skill]);
   const activities = useMemo(
-    () => safeQuestions.map((question, index) => buildPracticeActivity(question, index, title, skill, masteryMode)),
-    [safeQuestions, title, skill, masteryMode],
+    () => safeQuestions.map((question, index) => buildPracticeActivity(question, index, title, skill, masteryMode, standardCode)),
+    [safeQuestions, title, skill, masteryMode, standardCode],
   );
   const [answers, setAnswers] = useState<Record<string, any>>(() => savedAnswers(savedResponses, safeQuestions));
   const [submitted, setSubmitted] = useState(Boolean(savedResponses?.completed) && Object.keys(savedAnswers(savedResponses, safeQuestions)).length === safeQuestions.length);
@@ -3247,15 +3249,17 @@ function EvidenceSortActivity({ activity, answer, submitted, locked, onAnswer }:
 }
 
 function WordClozeActivity({ activity, answer, submitted, locked, onAnswer }: { activity: any; answer: any; submitted: boolean; locked: boolean; onAnswer: (value: any) => void }) {
+  const isConventions = Boolean(activity.isConventions);
+  const cloze = isConventions ? activity.inlineCloze : null;
   return (
     <div className="mt-4 rounded-2xl bg-purple-700 p-4 text-white">
-      <p className="text-sm font-bold">Complete the sentence with the word that best describes strong reading work.</p>
+      <p className="text-sm font-bold">{isConventions ? "Complete the sentence with the conventions word that makes the rule true." : "Complete the sentence with the word that best describes strong reading work."}</p>
       <p className="mt-4 text-lg font-black leading-8">
-        A strong answer is{" "}
+        {isConventions ? cloze?.before : "A strong answer is"}{" "}
         <span className="inline-block min-w-32 rounded-lg border-2 border-dashed border-white bg-white/20 px-4 py-2 text-center">
           {answer || ""}
         </span>{" "}
-        by details from the passage.
+        {isConventions ? cloze?.after : "by details from the passage."}
       </p>
       <div className="mt-4 grid gap-2 sm:grid-cols-2">
         {activity.choices.map((choice: string) => {
@@ -3355,7 +3359,7 @@ function ShortResponseActivity({ activity, answer, submitted, locked, onAnswer }
         onChange={(event) => onAnswer(event.target.value)}
         disabled={locked}
         className="min-h-36 w-full rounded-2xl border border-slate-300 bg-white p-4 text-sm font-semibold leading-6 text-slate-900 placeholder:text-slate-400 focus:border-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-100 disabled:cursor-not-allowed disabled:bg-slate-100"
-        placeholder="Explain how the text detail supports your answer. Use your own words."
+        placeholder={activity.shortResponsePlaceholder || "Explain how the text detail supports your answer. Use your own words."}
       />
       <div className="mt-2 flex flex-col gap-2 text-xs font-bold text-slate-600 sm:flex-row sm:items-center sm:justify-between">
         <span>{wordCount} words</span>
@@ -3365,8 +3369,10 @@ function ShortResponseActivity({ activity, answer, submitted, locked, onAnswer }
   );
 }
 
-function buildPracticeActivity(question: any, index: number, title: string, skill: string, masteryMode: boolean) {
+function buildPracticeActivity(question: any, index: number, title: string, skill: string, masteryMode: boolean, standardCode = "") {
   const titleText = title.toLowerCase();
+  const isConventions = standardCode.startsWith("CC.1.4.");
+  const isVocabulary = /CC\.1\.[23]\.\d+\.F/.test(standardCode);
   const pattern: PracticeActivityType[] = masteryMode
     ? ["multiple-choice", "sentence-select", "inline-cloze", "evidence-sort", "short-response"]
     : titleText.includes("guided")
@@ -3376,18 +3382,26 @@ function buildPracticeActivity(question: any, index: number, title: string, skil
         : ["short-response", "inline-cloze", "sentence-select"];
   const explicit = normalizeActivityType(question?.interactionType || question?.activityType || question?.type);
   const type = explicit || pattern[index % pattern.length];
-  const prompt = promptForActivity(type, question, skill);
+  const prompt = promptForActivity(type, question, skill, { isConventions });
   const sentences = splitSentences(question?.passage || "");
   const targetSentenceIndex = bestEvidenceSentenceIndex(question, sentences);
   const choices = Array.isArray(question?.choices) ? question.choices.filter(Boolean).map(String) : [];
   const cards = choices.length ? choices.slice(0, 4).map((choice: string, choiceIndex: number) => ({
     id: `choice-${choiceIndex}`,
     text: choice,
-    answer: isCorrectAnswer(question, choice) ? "Strong support" : "Weak or off-topic",
+    answer: isConventions
+      ? isCorrectAnswer(question, choice) || choice.toLowerCase().startsWith("correct:")
+        ? (type === "evidence-match" ? "Correctly punctuated" : "Correct")
+        : (type === "evidence-match" ? "Needs fixing" : "Edit needed")
+      : isCorrectAnswer(question, choice) ? "Strong support" : "Weak or off-topic",
   })) : [
-    { id: "best", text: question?.correctAnswer || "The answer uses several text details.", answer: "Strong support" },
-    { id: "weak", text: "A detail that does not connect to the question.", answer: "Weak or off-topic" },
+    { id: "best", text: question?.correctAnswer || "The answer uses several text details.", answer: isConventions ? (type === "evidence-match" ? "Correctly punctuated" : "Correct") : "Strong support" },
+    { id: "weak", text: "A detail that does not connect to the question.", answer: isConventions ? (type === "evidence-match" ? "Needs fixing" : "Edit needed") : "Weak or off-topic" },
   ];
+  const labels = isConventions
+    ? type === "evidence-match" ? ["Correctly punctuated", "Needs fixing"] : ["Correct", "Edit needed"]
+    : ["Strong support", "Weak or off-topic"];
+  const inlineCloze = buildInlineCloze(question, { isConventions });
 
   return {
     type,
@@ -3395,15 +3409,19 @@ function buildPracticeActivity(question: any, index: number, title: string, skil
     skill,
     questionData: question,
     prompt,
-    label: labelForActivity(type),
+    label: isConventions && type === "multiple-choice" ? "Select Evidence" : labelForActivity(type),
     listenText: `${prompt}. ${question?.passage || ""}`,
     sentences,
     targetSentenceIndex,
-    labels: type === "evidence-match" ? ["Strong support", "Weak or off-topic"] : ["Strong support", "Weak or off-topic"],
+    standardCode,
+    isConventions,
+    isVocabulary,
+    labels,
     cards,
-    choices: wordClozeChoices(skill),
-    correctWord: "supported",
-    inlineCloze: buildInlineCloze(question),
+    choices: isConventions ? inlineCloze.choices : wordClozeChoices(skill, { isConventions }),
+    correctWord: isConventions ? inlineCloze.answer : "supported",
+    inlineCloze,
+    shortResponsePlaceholder: shortResponsePlaceholderForStandard(standardCode),
   };
 }
 
@@ -3415,9 +3433,16 @@ function normalizeActivityType(value: string): PracticeActivityType | "" {
   return "";
 }
 
-function promptForActivity(type: PracticeActivityType, question: any, skill: string) {
+function promptForActivity(type: PracticeActivityType, question: any, skill: string, options: { isConventions?: boolean } = {}) {
   const questionText = cleanQuestionText(question?.question || "");
   const taskSuffix = questionText ? `: ${questionText}` : ".";
+  if (options.isConventions) {
+    if (type === "sentence-select") return `Select the sentence that is written correctly${taskSuffix}`;
+    if (type === "evidence-match") return `Mark each sentence as correctly punctuated or needing a fix${taskSuffix}`;
+    if (type === "evidence-sort") return `Sort each sentence by whether it is correct or needs editing${taskSuffix}`;
+    if (type === "word-cloze") return "Complete the conventions rule sentence.";
+    if (type === "short-response") return `Explain the ${skill || "conventions"} choice in your own words.`;
+  }
   if (type === "sentence-select") return `Select the sentence that gives the strongest evidence for this question${taskSuffix}`;
   if (type === "evidence-match") return `Mark each answer as strong support or weak/off-topic for this question${taskSuffix}`;
   if (type === "evidence-sort") return `Sort each statement by whether it strongly supports this question${taskSuffix}`;
@@ -3437,12 +3462,19 @@ function labelForActivity(type: PracticeActivityType) {
   return "PSSA Choice";
 }
 
-function wordClozeChoices(skill: string) {
+function wordClozeChoices(skill: string, options: { isConventions?: boolean } = {}) {
+  if (options.isConventions) return [];
   const lower = String(skill || "").toLowerCase();
   if (lower.includes("connotation") || lower.includes("context") || lower.includes("vocab")) {
     return ["supported", "guessed", "ignored", "copied"];
   }
   return ["supported", "random", "unrelated", "copied"];
+}
+
+function shortResponsePlaceholderForStandard(standardCode: string) {
+  if (standardCode.startsWith("CC.1.4.")) return "Explain what the punctuation/grammar choice does and why it is needed.";
+  if (/CC\.1\.[23]\.\d+\.F/.test(standardCode)) return "Explain what the word means here and what context clue helped you decide.";
+  return "Explain how the text detail supports your answer. Use your own words.";
 }
 
 function isActivityAnswered(activity: any, answer: any) {
@@ -3533,7 +3565,7 @@ function normalizeAnswer(value: any) {
   return String(value || "").trim().toLowerCase();
 }
 
-function buildInlineCloze(question: any) {
+function buildInlineCloze(question: any, options: { isConventions?: boolean } = {}) {
   const passage = String(question?.passage || "");
   const answer = String(question?.correctAnswer || "").trim();
   const choices = Array.isArray(question?.choices) && question.choices.length
@@ -3545,6 +3577,26 @@ function buildInlineCloze(question: any) {
       before: passage.slice(0, exactIndex),
       after: passage.slice(exactIndex + answer.length),
       answer,
+      choices,
+    };
+  }
+
+  if (options.isConventions) {
+    const sentence = String(question?.question || "A conventions rule needs a precise grammar or punctuation choice.");
+    const firstChoice = choices[0] || answer || "clear";
+    const blankIndex = sentence.indexOf("___");
+    if (blankIndex >= 0) {
+      return {
+        before: sentence.slice(0, blankIndex),
+        after: sentence.slice(blankIndex + 3),
+        answer,
+        choices,
+      };
+    }
+    return {
+      before: "A correct conventions choice makes the sentence ",
+      after: ".",
+      answer: firstChoice,
       choices,
     };
   }
