@@ -31,6 +31,8 @@ model User {
   readingCoachAttempts ReadingCoachAttempt[]
   readingCoachAssignments ReadingCoachAssignment[] @relation("ReadingCoachAssignedBy")
   resourceLinks   ResourceLink[]
+  resourceSuggestions ResourceSuggestion[] @relation("ResourceSuggester")
+  reviewedResourceSuggestions ResourceSuggestion[] @relation("ResourceReviewer")
   tutorMemory     TutorAgentMemory?
   tutorMessages   TutorAgentMessage[]
   passwordResetTokens PasswordResetToken[]
@@ -665,9 +667,36 @@ model ResourceLink {
   updatedAt    DateTime @updatedAt
   createdBy    User?    @relation(fields: [createdById], references: [id], onDelete: SetNull)
   heroLessons  LearningLesson[]
+  suggestions  ResourceSuggestion[]
 
   @@index([gradeLevel, standardCode])
   @@index([skill])
+}
+
+model ResourceSuggestion {
+  id             String   @id @default(cuid())
+  teacherUserId  String
+  url            String
+  title          String
+  provider       String
+  gradeLevel     Int?
+  standardCode   String?
+  skill          String?
+  description    String?
+  rationale      String?
+  status         String   @default("PENDING")
+  reviewedById   String?
+  reviewedAt     DateTime?
+  reviewerNotes  String?
+  resourceLinkId String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  teacher        User     @relation("ResourceSuggester", fields: [teacherUserId], references: [id], onDelete: Cascade)
+  reviewedBy     User?    @relation("ResourceReviewer", fields: [reviewedById], references: [id], onDelete: SetNull)
+  resourceLink   ResourceLink? @relation(fields: [resourceLinkId], references: [id], onDelete: SetNull)
+
+  @@index([status, createdAt])
+  @@index([teacherUserId])
 }
 
 model TutorAgentMemory {

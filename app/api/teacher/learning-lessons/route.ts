@@ -55,7 +55,14 @@ export async function GET() {
     },
     orderBy: [{ priority: "asc" }, { createdAt: "desc" }],
   });
-  const resources = await db.resourceLink.findMany({ orderBy: [{ gradeLevel: "asc" }, { standardCode: "asc" }] });
+  const teacherGrades = Array.from(new Set(teacher.classes.map((classRoom) => classRoom.grade))).sort((a, b) => a - b);
+  const resourcesRaw = await db.resourceLink.findMany({ orderBy: [{ gradeLevel: "asc" }, { standardCode: "asc" }, { title: "asc" }] });
+  const resources = resourcesRaw.sort((a, b) => {
+    const aMatch = a.gradeLevel != null && teacherGrades.includes(a.gradeLevel) ? 0 : 1;
+    const bMatch = b.gradeLevel != null && teacherGrades.includes(b.gradeLevel) ? 0 : 1;
+    if (aMatch !== bMatch) return aMatch - bMatch;
+    return (a.gradeLevel || 99) - (b.gradeLevel || 99) || a.standardCode.localeCompare(b.standardCode) || a.title.localeCompare(b.title);
+  });
   const readingCoachAttempts = await db.readingCoachAttempt.findMany({
     where: { userId: { in: studentUserIds } },
     include: { user: { select: { name: true } } },
@@ -81,6 +88,7 @@ export async function GET() {
       grade: classRoom.grade,
       studentCount: classRoom.enrollments.length,
     })),
+    teacherGrades,
     libraryLessons: dedupeLibraryLessons(libraryLessons).map((lesson) => ({
       id: lesson.id,
       title: lesson.title,
@@ -218,7 +226,7 @@ export async function POST(req: Request) {
   const session = await getServerSession(authOptions);
   if (!session?.user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   const role = (session.user as any).role;
-  if (role !== "TEACHER" && role !== "ADMIN") return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+  if (role !== "ADMIN") return NextResponse.json({ error: "Forbidden" }, { status: 403 });
 
   const userId = String((session.user as any).id || "unknown");
   const userLimit = await consumeRateLimit({ key: `teacher-learning-lessons:user:${userId}`, capacity: 30, refillIntervalMs: 60 * 60 * 1000 });
@@ -293,7 +301,7 @@ export async function PATCH(req: Request) {
   const session = await getServerSession(authOptions);
   if (!session?.user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   const role = (session.user as any).role;
-  if (role !== "TEACHER" && role !== "ADMIN") return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+  if (role !== "ADMIN") return NextResponse.json({ error: "Forbidden" }, { status: 403 });
 
   const parsed = updateResourceSchema.safeParse(await req.json());
   if (!parsed.success) return NextResponse.json({ error: "Invalid request body", issues: parsed.error.flatten().fieldErrors }, { status: 400 });

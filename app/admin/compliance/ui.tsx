@@ -31,3 +31,46 @@ export function ComplianceOverrideForm() {
     </form>
   );
 }
+
+export function ResourceSuggestionActions({ id }: { id: string }) {
+  const [notes, setNotes] = useState("");
+  const [message, setMessage] = useState("");
+  const [busy, setBusy] = useState("");
+
+  async function approve() {
+    setBusy("approve");
+    setMessage("");
+    const res = await fetch(`/api/admin/resources/suggestions/${id}/approve`, { method: "POST" });
+    const json = await res.json().catch(() => ({}));
+    setBusy("");
+    setMessage(res.ok ? "Approved. Refresh to update the queue." : json.error || "Approve failed.");
+  }
+
+  async function reject() {
+    setBusy("reject");
+    setMessage("");
+    const res = await fetch(`/api/admin/resources/suggestions/${id}/reject`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ reviewerNotes: notes }),
+    });
+    const json = await res.json().catch(() => ({}));
+    setBusy("");
+    setMessage(res.ok ? "Rejected. Refresh to update the queue." : json.error || "Reject failed.");
+  }
+
+  return (
+    <div className="space-y-2">
+      <div className="flex flex-wrap gap-2">
+        <button onClick={approve} disabled={Boolean(busy)} className="rounded-xl bg-emerald-700 px-3 py-2 text-xs font-bold text-white disabled:opacity-60">
+          {busy === "approve" ? "Approving..." : "Approve"}
+        </button>
+        <button onClick={reject} disabled={Boolean(busy) || notes.trim().length < 20} className="rounded-xl bg-rose-700 px-3 py-2 text-xs font-bold text-white disabled:opacity-60">
+          {busy === "reject" ? "Rejecting..." : "Reject"}
+        </button>
+      </div>
+      <textarea value={notes} onChange={(event) => setNotes(event.target.value)} placeholder="Reviewer notes for rejection (20+ chars)" className="min-h-20 w-full rounded-xl border border-slate-300 p-2 text-xs" />
+      {message ? <p className="text-xs font-semibold text-slate-700">{message}</p> : null}
+    </div>
+  );
+}

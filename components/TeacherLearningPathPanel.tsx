@@ -13,7 +13,6 @@ export function TeacherLearningPathPanel() {
   const [selectedLessonIds, setSelectedLessonIds] = useState<string[]>([]);
   const [previewLesson, setPreviewLesson] = useState<any>(null);
   const [libraryFilters, setLibraryFilters] = useState({ show: "all", search: "", domain: "all", grade: "all" });
-  const [form, setForm] = useState({ gradeLevel: "6", standardCode: "", skill: "", title: "", url: "", provider: "", description: "" });
 
   async function loadData() {
     setLoading(true);
@@ -25,23 +24,6 @@ export function TeacherLearningPathPanel() {
   }
 
   useEffect(() => { loadData(); }, []);
-
-  async function saveResource() {
-    setMessage("");
-    const res = await fetch("/api/teacher/learning-lessons", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(form),
-    });
-    const json = await res.json();
-    if (!res.ok) {
-      setMessage(json.error || "Failed to save resource.");
-      return;
-    }
-    setMessage("Resource saved.");
-    setForm({ gradeLevel: "6", standardCode: "", skill: "", title: "", url: "", provider: "", description: "" });
-    await loadData();
-  }
 
   async function assignLibraryLessons(lessonIds: string[]) {
     if (!lessonIds.length) return;
@@ -418,30 +400,6 @@ export function TeacherLearningPathPanel() {
         </div>
       </section>
 
-      <section className="rounded-3xl bg-white p-6 shadow">
-        <h2 className="text-xl font-bold text-slate-900">Curated Resource Links</h2>
-        <div className="mt-4 grid gap-3 md:grid-cols-2">
-          <input className="rounded-xl border border-slate-300 p-3" placeholder="Grade level" value={form.gradeLevel} onChange={(e) => setForm({ ...form, gradeLevel: e.target.value })} />
-          <input className="rounded-xl border border-slate-300 p-3" placeholder="Standard code" value={form.standardCode} onChange={(e) => setForm({ ...form, standardCode: e.target.value })} />
-          <input className="rounded-xl border border-slate-300 p-3" placeholder="Skill" value={form.skill} onChange={(e) => setForm({ ...form, skill: e.target.value })} />
-          <input className="rounded-xl border border-slate-300 p-3" placeholder="Resource title" value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} />
-          <input className="rounded-xl border border-slate-300 p-3" placeholder="URL" value={form.url} onChange={(e) => setForm({ ...form, url: e.target.value })} />
-          <input className="rounded-xl border border-slate-300 p-3" placeholder="Provider" value={form.provider} onChange={(e) => setForm({ ...form, provider: e.target.value })} />
-          <textarea className="rounded-xl border border-slate-300 p-3 md:col-span-2" placeholder="Description" value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} />
-        </div>
-        <button onClick={saveResource} className="mt-4 rounded-xl bg-slate-900 px-4 py-2 text-sm font-semibold text-white">Add Resource</button>
-        {message ? <p className="mt-3 text-sm font-semibold text-slate-700">{message}</p> : null}
-
-        <div className="mt-5 grid gap-3">
-          {(data.resources || []).map((resource: any) => (
-            <article key={resource.id} className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
-              <p className="text-xs font-semibold uppercase text-slate-500">Grade {resource.gradeLevel || "Any"} • {resource.standardCode} • {resource.skill}</p>
-              <a className="mt-1 block font-bold text-blue-700 underline" href={resource.url} target="_blank" rel="noreferrer">{resource.title}</a>
-              <p className="mt-1 text-sm text-slate-600">{resource.description}</p>
-            </article>
-          ))}
-        </div>
-      </section>
     </div>
   );
 }

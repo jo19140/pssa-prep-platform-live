@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import LogoutButton from "@/components/LogoutButton";
 import TeacherTdaScoringPanel from "@/components/TeacherTdaScoringPanel";
 import { TeacherLearningPathPanel } from "@/components/TeacherLearningPathPanel";
+import { TeacherResourcesPanel } from "@/components/TeacherResourcesPanel";
 import { TeacherClassesPanel } from "@/components/TeacherClassesPanel";
 
 const elaStandards: Record<string, string[]> = {
@@ -125,10 +126,10 @@ export default function TeacherDashboardPage() {
   const [selectedClassRoomId, setSelectedClassRoomId] = useState("");
   const [creatingDiagnostic, setCreatingDiagnostic] = useState(false);
   const [diagnosticMessage, setDiagnosticMessage] = useState("");
-  const [activeTab, setActiveTab] = useState<"overview" | "generator" | "testDesign" | "tda" | "learning" | "readingCoach" | "import" | "classes">(() => {
-    if (typeof window === "undefined") return "overview";
+  const [activeTab, setActiveTab] = useState<"classes" | "reports" | "resources" | "overview" | "generator" | "testDesign" | "tda" | "learning" | "readingCoach" | "import">(() => {
+    if (typeof window === "undefined") return "classes";
     const tab = new URLSearchParams(window.location.search).get("tab");
-    return tab === "import" || tab === "classes" ? tab : "overview";
+    return tab === "reports" || tab === "resources" ? tab : "classes";
   });
   const [testDesignPurpose, setTestDesignPurpose] = useState("BASELINE_DIAGNOSTIC");
   const [designingTest, setDesigningTest] = useState(false);
@@ -346,16 +347,18 @@ export default function TeacherDashboardPage() {
       </div>
 
       <div className="flex flex-wrap gap-2 rounded-2xl bg-white p-2 shadow">
-        <TabButton active={activeTab === "overview"} onClick={() => setActiveTab("overview")}>Overview</TabButton>
-        <TabButton active={activeTab === "generator"} onClick={() => setActiveTab("generator")}>Generate Tests</TabButton>
-        <TabButton active={activeTab === "testDesign"} onClick={() => setActiveTab("testDesign")}>Test Design Agent</TabButton>
-        <TabButton active={activeTab === "classes"} onClick={() => setActiveTab("classes")}>Classes & Codes</TabButton>
-        <TabButton active={activeTab === "import"} onClick={() => setActiveTab("import")}>Import Students</TabButton>
-        <TabButton active={activeTab === "readingCoach"} onClick={() => setActiveTab("readingCoach")}>Reading Coach</TabButton>
-        <TabButton active={activeTab === "tda"} onClick={() => setActiveTab("tda")}>TDA Scoring</TabButton>
-        <TabButton active={activeTab === "learning"} onClick={() => setActiveTab("learning")}>Learning Paths</TabButton>
+        <TabButton active={activeTab === "classes"} onClick={() => setActiveTab("classes")}>Classes</TabButton>
+        <TabButton active={activeTab === "reports"} onClick={() => setActiveTab("reports")}>Reports</TabButton>
+        <TabButton active={activeTab === "resources"} onClick={() => setActiveTab("resources")}>Resources</TabButton>
       </div>
 
+      {activeTab === "reports" && (
+        <div className="space-y-6">
+          <TeacherLearningPathPanel />
+          <TeacherTdaScoringPanel />
+        </div>
+      )}
+      {activeTab === "resources" && <TeacherResourcesPanel />}
       {activeTab === "tda" && <TeacherTdaScoringPanel />}
       {activeTab === "learning" && <TeacherLearningPathPanel />}
       {activeTab === "classes" && <TeacherClassesPanel />}
