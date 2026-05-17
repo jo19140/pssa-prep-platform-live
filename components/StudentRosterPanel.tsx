@@ -4,8 +4,19 @@ import { Fragment, useEffect, useMemo, useRef, useState } from "react";
 
 type SortKey = "className" | "studentName" | "total" | "notStarted" | "inProgress" | "completed" | "mastered";
 
-export function StudentRosterPanel({ lessons, role, focusedStudentName }: { lessons: any[]; role?: string; focusedStudentName?: string | null }) {
-  const [classFilter, setClassFilter] = useState("all");
+export function StudentRosterPanel({
+  lessons,
+  role,
+  focusedStudentName,
+  classFilter,
+  selectedClassName,
+}: {
+  lessons: any[];
+  role?: string;
+  focusedStudentName?: string | null;
+  classFilter: string;
+  selectedClassName: string;
+}) {
   const [search, setSearch] = useState("");
   const [showDemoAccounts, setShowDemoAccounts] = useState(role === "ADMIN");
   const [sortKey, setSortKey] = useState<SortKey>("className");
@@ -40,16 +51,21 @@ export function StudentRosterPanel({ lessons, role, focusedStudentName }: { less
     return Array.from(byStudent.values());
   }, [lessons]);
 
-  const classOptions = useMemo(() => Array.from(new Set(roster.map((row) => row.className))).sort(), [roster]);
+  const studentCountByClass = useMemo(() => {
+    const counts = new Map<string, number>();
+    for (const row of roster.filter((item) => showDemoAccounts || !isDemoStudent(item))) {
+      counts.set(row.className, (counts.get(row.className) || 0) + 1);
+    }
+    return counts;
+  }, [roster, showDemoAccounts]);
 
   const filteredRoster = useMemo(() => {
     const needle = search.trim().toLowerCase();
     return roster
       .filter((row) => showDemoAccounts || !isDemoStudent(row))
-      .filter((row) => classFilter === "all" || row.className === classFilter)
       .filter((row) => !needle || row.studentName.toLowerCase().includes(needle))
       .sort((a, b) => compareRosterRows(a, b, sortKey, sortDirection));
-  }, [classFilter, roster, search, showDemoAccounts, sortDirection, sortKey]);
+  }, [roster, search, showDemoAccounts, sortDirection, sortKey]);
 
   useEffect(() => {
     if (!focusedStudentName) return;
@@ -74,13 +90,13 @@ export function StudentRosterPanel({ lessons, role, focusedStudentName }: { less
         <div>
           <p className="text-sm font-semibold uppercase tracking-wide text-blue-700">Student Roster</p>
           <h2 className="text-xl font-bold text-slate-900">Assigned Lesson Progress</h2>
-          <p className="mt-1 text-sm text-slate-600">One row per student, with drill-down into the lessons they are working through.</p>
+          <p className="mt-1 text-sm text-slate-600">
+            {classFilter === "all"
+              ? "All sections - one row per student, with drill-down into assigned lessons."
+              : `${selectedClassName} - one row per student, with drill-down into assigned lessons.`}
+          </p>
         </div>
-        <div className="grid gap-3 sm:grid-cols-[180px_220px_auto]">
-          <select value={classFilter} onChange={(event) => setClassFilter(event.target.value)} className="rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm">
-            <option value="all">All classes</option>
-            {classOptions.map((className) => <option key={className} value={className}>{className}</option>)}
-          </select>
+        <div className="grid gap-3 sm:grid-cols-[220px_auto]">
           <input value={search} onChange={(event) => setSearch(event.target.value)} className="rounded-xl border border-slate-300 px-3 py-2 text-sm" placeholder="Search student" />
           <label className="inline-flex items-center gap-2 rounded-xl bg-slate-50 px-3 py-2 text-sm font-semibold text-slate-700">
             <input type="checkbox" checked={showDemoAccounts} onChange={(event) => setShowDemoAccounts(event.target.checked)} />
@@ -103,8 +119,18 @@ export function StudentRosterPanel({ lessons, role, focusedStudentName }: { less
             </tr>
           </thead>
           <tbody>
-            {filteredRoster.map((student) => (
+            {filteredRoster.map((student, index) => {
+              const previous = filteredRoster[index - 1];
+              const showHeader = classFilter === "all" && (!previous || previous.className !== student.className);
+              return (
               <Fragment key={student.key}>
+                {showHeader ? (
+                  <tr className="bg-slate-100">
+                    <td colSpan={7} className="px-4 py-2 text-xs font-black uppercase tracking-wide text-slate-700">
+                      {student.className} - {studentCountByClass.get(student.className) || 0} students
+                    </td>
+                  </tr>
+                ) : null}
                 <tr
                   ref={(node) => { rowRefs.current[student.key] = node; }}
                   onClick={() => setExpandedStudent((current) => current === student.key ? null : student.key)}
@@ -128,7 +154,8 @@ export function StudentRosterPanel({ lessons, role, focusedStudentName }: { less
                   </tr>
                 ) : null}
               </Fragment>
-            ))}
+              );
+            })}
             {!filteredRoster.length ? (
               <tr className="border-t border-slate-100">
                 <td className="py-5 text-slate-500" colSpan={7}>No students match these filters.</td>

@@ -15,6 +15,7 @@ export function TeacherLearningPathPanel({ mode = "assignments", role }: { mode?
   const [selectedLessonIds, setSelectedLessonIds] = useState<string[]>([]);
   const [previewLesson, setPreviewLesson] = useState<any>(null);
   const [focusedStudentName, setFocusedStudentName] = useState<string | null>(null);
+  const [classFilter, setClassFilter] = useState<string>("all");
   const [libraryFilters, setLibraryFilters] = useState({ show: "all", search: "", domain: "all", grade: "all" });
 
   async function loadData() {
@@ -62,15 +63,44 @@ export function TeacherLearningPathPanel({ mode = "assignments", role }: { mode?
     await loadData();
   }
 
+  const defaultClassId = useMemo(() => {
+    const lessons = data.lessons || [];
+    if (!lessons.length) return "all";
+    const latestByClass = new Map<string, number>();
+    for (const lesson of lessons) {
+      if (!lesson.classId) continue;
+      const ts = new Date(lesson.updatedAt || lesson.createdAt || 0).getTime();
+      const current = latestByClass.get(lesson.classId) || 0;
+      if (ts > current) latestByClass.set(lesson.classId, ts);
+    }
+    if (!latestByClass.size) return "all";
+    return Array.from(latestByClass.entries()).sort((a, b) => b[1] - a[1])[0][0];
+  }, [data.lessons]);
+
+  useEffect(() => {
+    setClassFilter(defaultClassId);
+  }, [defaultClassId]);
+
+  const filteredLessons = useMemo(() => {
+    const lessons = data.lessons || [];
+    if (classFilter === "all") return lessons;
+    return lessons.filter((lesson: any) => lesson.classId === classFilter);
+  }, [classFilter, data.lessons]);
+
+  const selectedClassName = useMemo(() => {
+    if (classFilter === "all") return "All classes";
+    return data.classes?.find((classRoom: any) => classRoom.id === classFilter)?.name || "Selected class";
+  }, [classFilter, data.classes]);
+
   const lessonsByStatus = useMemo(() => {
-    const rows = data.lessons || [];
+    const rows = filteredLessons;
     return {
       notStarted: rows.filter((row: any) => row.status === "NOT_STARTED").length,
       inProgress: rows.filter((row: any) => row.status === "IN_PROGRESS").length,
       completed: rows.filter((row: any) => row.status === "COMPLETED").length,
       mastered: rows.filter((row: any) => row.status === "MASTERED").length,
     };
-  }, [data.lessons]);
+  }, [filteredLessons]);
 
   const libraryRows = data.libraryLessons || [];
   const libraryDomains = useMemo<string[]>(() => Array.from(new Set<string>(libraryRows.map((lesson: any) => lessonDomain(lesson)).filter(Boolean))).sort(), [libraryRows]);
@@ -102,13 +132,38 @@ export function TeacherLearningPathPanel({ mode = "assignments", role }: { mode?
             <Metric title="Mastered" value={lessonsByStatus.mastered} />
           </section>
 
+          <section className="rounded-3xl bg-white p-5 shadow">
+            <label className="block max-w-sm text-sm font-semibold text-slate-700">
+              Section
+              <select
+                value={classFilter}
+                onChange={(event) => setClassFilter(event.target.value)}
+                className="mt-2 w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm"
+              >
+                <option value="all">All classes</option>
+                {(data.classes || []).map((classRoom: any) => (
+                  <option key={classRoom.id} value={classRoom.id}>
+                    {classRoom.name} - Grade {classRoom.grade}
+                  </option>
+                ))}
+              </select>
+            </label>
+          </section>
+
           <StandardsProgressPanel
-            standardsProgress={data.standardsProgress || []}
-            lessons={data.lessons || []}
+            classFilter={classFilter}
+            lessons={filteredLessons}
+            selectedClassName={selectedClassName}
             onStudentSelect={setFocusedStudentName}
           />
 
-          <StudentRosterPanel lessons={data.lessons || []} role={role} focusedStudentName={focusedStudentName} />
+          <StudentRosterPanel
+            classFilter={classFilter}
+            lessons={filteredLessons}
+            role={role}
+            focusedStudentName={focusedStudentName}
+            selectedClassName={selectedClassName}
+          />
 
           <section className="rounded-3xl bg-white p-6 shadow">
             <h2 className="text-xl font-bold text-slate-900">Reading Coach Practice</h2>

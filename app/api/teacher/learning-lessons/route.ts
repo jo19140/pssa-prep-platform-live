@@ -169,6 +169,8 @@ export async function GET() {
         questAttempts: lesson.questAttempts.length,
         latestQuestScore: lesson.questAttempts[0] ? `${lesson.questAttempts[0].score}/${lesson.questAttempts[0].maxScore}` : null,
         latestQuestXp: lesson.questAttempts[0]?.xpEarned ?? null,
+        createdAt: lesson.createdAt,
+        updatedAt: lesson.updatedAt,
       };
     }),
     resources,

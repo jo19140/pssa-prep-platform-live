@@ -6,16 +6,33 @@ const STRAND_ORDER = ["Conventions and Writing", "Literary Reading", "Informatio
 const STATUS_GROUPS = ["NOT_STARTED", "IN_PROGRESS", "COMPLETED", "MASTERED"];
 
 export function StandardsProgressPanel({
-  standardsProgress,
   lessons,
   onStudentSelect,
+  classFilter,
+  selectedClassName,
 }: {
-  standardsProgress: any[];
   lessons: any[];
   onStudentSelect: (studentName: string) => void;
+  classFilter: string;
+  selectedClassName: string;
 }) {
   const [collapsed, setCollapsed] = useState<Record<string, boolean>>({});
   const [selectedStandardKey, setSelectedStandardKey] = useState<string | null>(null);
+
+  const derivedStandardsProgress = useMemo(() => {
+    const byKey = new Map<string, { standardCode: string; skill: string; lessonCount: number; completed: number; mastered: number }>();
+    for (const lesson of lessons || []) {
+      const key = standardKey(lesson.standardCode, lesson.skill);
+      if (!byKey.has(key)) {
+        byKey.set(key, { standardCode: lesson.standardCode, skill: lesson.skill, lessonCount: 0, completed: 0, mastered: 0 });
+      }
+      const row = byKey.get(key)!;
+      row.lessonCount += 1;
+      if (lesson.status === "COMPLETED" || lesson.status === "MASTERED") row.completed += 1;
+      if (lesson.status === "MASTERED") row.mastered += 1;
+    }
+    return Array.from(byKey.values());
+  }, [lessons]);
 
   const groups = useMemo(() => {
     const lessonsByStandard = new Map<string, any[]>();
@@ -25,7 +42,7 @@ export function StandardsProgressPanel({
       lessonsByStandard.get(key)!.push(lesson);
     }
 
-    const rows = (standardsProgress || []).map((row) => ({
+    const rows = derivedStandardsProgress.map((row) => ({
       ...row,
       key: standardKey(row.standardCode, row.skill),
       strand: strandForStandard(row.standardCode),
@@ -42,7 +59,7 @@ export function StandardsProgressPanel({
     return STRAND_ORDER
       .map((strand) => ({ strand, rows: (grouped.get(strand) || []).sort((a, b) => a.standardCode.localeCompare(b.standardCode) || a.skill.localeCompare(b.skill)) }))
       .filter((group) => group.rows.length);
-  }, [lessons, standardsProgress]);
+  }, [derivedStandardsProgress, lessons]);
 
   const selectedRow = groups.flatMap((group) => group.rows).find((row) => row.key === selectedStandardKey);
 
@@ -51,7 +68,11 @@ export function StandardsProgressPanel({
       <div>
         <p className="text-sm font-semibold uppercase tracking-wide text-indigo-700">Standards Progress</p>
         <h2 className="text-xl font-bold text-slate-900">Strand-Grouped Mastery Dashboard</h2>
-        <p className="mt-1 text-sm text-slate-600">Completion and mastery percentages make it easier to spot standards that need follow-up.</p>
+        <p className="mt-1 text-sm text-slate-600">
+          {classFilter === "all"
+            ? "All sections - completion and mastery percentages across every class."
+            : `${selectedClassName} - click a standard to see which students need help.`}
+        </p>
       </div>
 
       <div className="mt-5 space-y-4">
