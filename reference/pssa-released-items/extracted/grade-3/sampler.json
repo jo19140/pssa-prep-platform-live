@@ -1,0 +1,186 @@
+{
+  "grade": 3,
+  "source": "2024 PSSA ELA Grade 3 Item Sampler",
+  "passages": [
+    {
+      "id": "g3-p1",
+      "title": "Building a World with Toothpicks",
+      "genre": "informational",
+      "wordCount": 594,
+      "text": "Stan Munro has made a career out of something he learned in elementary school. Building a World with Toothpicks by Linda Haas Manley Could something made of toothpicks hold up your desk? “Yes, indeed!” says Stan Munro. Stan is a “toothpick engineer.” His job is to build structures out of toothpicks. Stan was first inspired to build things out of toothpicks after a teacher challenged Stan’s class to build a toothpick structure that would hold an egg. “Mine held my desk, and everyone cheered,” says Stan. Stan has been creating buildings out of toothpicks ever since. In fact, he created a whole city. Toothpick City: History of Skyscrapers is currently on display at Ripley’s Believe It or Not! in Baltimore, Maryland. The exhibit contains more than 50 famous structures from around the world, and they are all made out of toothpicks. The only materials Stan uses are toothpicks and glue. After he finished Toothpick City I, Stan built Toothpick City II: Temples and Towers. And then he built Toothpick World. His model of the skyscraper Burj Khalifa, a part of Toothpick World, is in Guinness World Records 2015 for the Tallest Toothpick Sculpture. Burj Khalifa is in Dubai, United Arab Emirates, and it is the world’s tallest building. Stan’s toothpick version is more than 16 feet tall! In an interview, Stan talked about math, shoelaces, and Yankee Stadium. Q: What is your real job? A: This IS my real job. I used to be a reporter, which is a fine profession, but I think this is more fun. I’ve learned history, art, science, and culture from doing this work. I love this job! Q: What kind of toothpicks do you use? A: Round, square-centered toothpicks. I never use colored ones. Q: How long does it take to build one of these structures? A: It varies by size and detail. The Washington Monument was built in one day. Yankee Stadium took a month. The Vatican took two months. The Chrysler Building took six months. Q: Has a tower ever fallen over after you built it? A: Do we really have to talk about that? Q: Ha ha! What happened? A: When I built the Taj Mahal for my first city, I dropped the top of it. It sounded like a light bulb shattering when it hit the floor. Now when I move my work, I do it very carefully. Tons of bubble wrap; tuck in your shirt and your shoelaces so you don’t trip. One wrong move and it’s over. The really big structures are built in pieces to assemble on-site, but still—very, very carefully. Q: I understand that your towers are built to scale. In other words, you make the buildings smaller than the actual structures, but all the parts are in the same proportion to their true size. How do you figure this out? A: There is a bit of math involved to figure out the dimensions of the towers. I use algebra quite a bit. Q: In addition to math, do you use any science or engineering in your work? A: The model for Burj Khalifa was built with a triangle design technology often used in the building of churches. The triangle is considered the strongest architectural structure. Q: What’s your favorite building? A: The next one. Q: Do you have any advice for our readers? A: If you set out to do something, you should do it—even if it’s really hard. Did You Know? Stan Munro used gallons and gallons of glue to build more than 60 buildings for Toothpick World.",
+      "sourceAttribution": "\"Building a World with Toothpicks\" by Linda Haas Manley from Highlights for Children, Oct 2015. Copyright © Highlights for Children, Inc., Columbus, Ohio. All rights reserved."
+    }
+  ],
+  "multipleChoiceItems": [
+    {
+      "id": "g3-mc-1",
+      "passageId": "g3-p1",
+      "standardCode": "CC.1.2.3.B",
+      "standardLabel": "Key Ideas and Details",
+      "question": "What is the most likely reason the author includes the example of Stan Munro’s toothpick structure holding up a desk?",
+      "choices": {
+        "A": "to show that toothpick structures can be beautiful",
+        "B": "to show that toothpick structures can be tiny",
+        "C": "to show that toothpick structures can be dangerous",
+        "D": "to show that toothpick structures can be strong"
+      },
+      "correctAnswer": "D",
+      "rationale": "The student is asked to determine why the author includes a sample of Stan Munro’s toothpick structure holding up a desk. Option D is the correct answer since it shows that his construction was very strong. Option A is incorrect; although Munro’s structures may be beautiful, there is no evidence to support that this is why he includes the fact about the desk. Option B is incorrect; although some structures may be tiny, Munro’s structures are actually quite large. Option C is incorrect; although transporting the structures may be dangerous, there is no evidence that toothpick structures themselves are dangerous.",
+      "depthOfKnowledge": 2
+    },
+    {
+      "id": "g3-mc-2",
+      "passageId": "g3-p1",
+      "standardCode": "CC.1.2.3.C",
+      "standardLabel": "Key Ideas and Details",
+      "question": "How did dropping part of a completed structure affect Munro’s process?",
+      "choices": {
+        "A": "Munro chose to use smaller scales for his models.",
+        "B": "Munro took extra steps to reduce the chances of breaking his work.",
+        "C": "Munro increased the strength of his models by using certain designs.",
+        "D": "Munro made changes to the materials he uses for construction."
+      },
+      "correctAnswer": "B",
+      "rationale": "The student is asked to determine how dropping part of a completed structure affected Munro’s process. Option B is the correct answer since Munro implemented changes to avoid breaking another one of his structures. Option A is incorrect; although Munro builds his structures to be smaller than the original structures on which they are based, there is no evidence that his dropping part of a completed structure caused him to use smaller scales. Option C is incorrect; although Munro uses a specific design for each structure, there is no evidence that he increased the strength of his models as a result of his dropping part of his buildings. Option D is incorrect; there is no evidence to support the idea that Munro changed the materials he uses in his constructions.",
+      "depthOfKnowledge": 3
+    },
+    {
+      "id": "g3-mc-3",
+      "passageId": "g3-p1",
+      "standardCode": "CC.1.2.3.F",
+      "standardLabel": "Vocabulary Acquisition and Use",
+      "question": "What does the word profession mean as used in the passage?",
+      "choices": {
+        "A": "career",
+        "B": "idea",
+        "C": "sport",
+        "D": "talent"
+      },
+      "correctAnswer": "A",
+      "rationale": "The student is asked to determine the meaning of a word from the passage. Option A is the correct answer since the word “profession” means “career.” The phrase “used to be a reporter” provides context for the correct answer. Options B, C, and D do not convey the meaning of the word “profession.”",
+      "depthOfKnowledge": 2
+    },
+    {
+      "id": "g3-mc-4",
+      "passageId": "g3-p1",
+      "standardCode": "CC.1.2.3.C",
+      "standardLabel": "Key Ideas and Details",
+      "question": "What does Stan Munro’s answer show about him?",
+      "choices": {
+        "A": "that he does not like any of his buildings",
+        "B": "that he wants to end the interview",
+        "C": "that he likes creating new buildings",
+        "D": "that he wants a different interview question"
+      },
+      "correctAnswer": "C",
+      "rationale": "The student is asked to determine what a given sentence from the passage shows about Munro. Option C is the correct answer since it shows Munro’s attitude of being enthusiastic for future projects. Option A is incorrect since Munro states, “I love this job!” Option B is incorrect; there is no textual evidence that Munro wants to end the interview. Option D is incorrect; there is no textual evidence to support that Munro wants a different interview question.",
+      "depthOfKnowledge": 2
+    },
+    {
+      "id": "g3-mc-5",
+      "passageId": "g3-p1",
+      "standardCode": "CC.1.2.3.D",
+      "standardLabel": "Craft and Structure",
+      "question": "From whose point of view is the passage written?",
+      "choices": {
+        "A": "someone who interviewed Stan Munro",
+        "B": "someone who works for Stan Munro",
+        "C": "Stan Munro’s teacher",
+        "D": "Stan Munro"
+      },
+      "correctAnswer": "A",
+      "rationale": "The student is asked to determine the point of view used in the passage. Option A is the correct answer since the passage is an interview; questions from an interviewer and answers from Munro are provided. Option B is incorrect since there is no evidence that the interviewer works for Munro. Option C is incorrect; although Munro’s teacher is mentioned in the passage, the interviewer is not Munro’s teacher. Option D is incorrect; the passage is an interview in which someone asks questions and then Munro answers them.",
+      "depthOfKnowledge": 2
+    },
+    {
+      "id": "g3-mc-6",
+      "standardCode": "CC.1.4.3.L",
+      "standardLabel": "Conventions of Standard English",
+      "question": "Which revision of the sentence uses the most descriptive details?",
+      "choices": {
+        "A": "The pretty horse went across the large field.",
+        "B": "The horse quickly moved farther away in the field.",
+        "C": "The beautiful brown horse raced across the grassy field.",
+        "D": "The horse jogged quickly to a different part of the big field."
+      },
+      "correctAnswer": "C",
+      "rationale": "The student is asked to identify the revision of the sentence that uses the most descriptive details. Option C is the correct answer since the words “beautiful,” “brown,” “raced,” and “grassy” provide descriptive details that evoke visual imagery for the reader. Option A is incorrect since the words “pretty” and “went” are not as descriptive as the words used in the key. Option B is incorrect since the words “moved farther away” are not as descriptive as the words used in the key. Option D is incorrect since the words “jogged quickly” are not as descriptive as the words used in the key.",
+      "depthOfKnowledge": 2
+    },
+    {
+      "id": "g3-mc-7",
+      "standardCode": "CC.1.4.3.K",
+      "standardLabel": "Conventions of Standard English",
+      "question": "Which word correctly completes the sentence?",
+      "choices": {
+        "A": "loafs",
+        "B": "loafes",
+        "C": "loavs",
+        "D": "loaves"
+      },
+      "correctAnswer": "D",
+      "rationale": "The student is asked to identify the word that uses the correct spelling rule to pluralize the word “loaf.” Option D is the correct answer since it applies the rule of changing the “f” in nouns ending in “f” to “ves” to create the plural form. Options A, B, and C are incorrect since they incorrectly use the spelling rule to create the plural form.",
+      "depthOfKnowledge": 3
+    },
+    {
+      "id": "g3-mc-8",
+      "standardCode": "CC.1.4.3.K",
+      "standardLabel": "Conventions of Standard English",
+      "question": "Choose the best way to write the sentences as a complex sentence without changing the meaning.",
+      "choices": {
+        "A": "Tess helped her mom plant flowers, which looked beautiful in the garden.",
+        "B": "Since Tess helped her mom plant flowers, they looked beautiful in the garden.",
+        "C": "When the flowers in the garden looked beautiful, Tess helped her mom plant them.",
+        "D": "Although the flowers looked beautiful in the garden, Tess helped her mom plant them."
+      },
+      "correctAnswer": "A",
+      "rationale": "The student is asked to identify the best way to write the given sentences as a complex sentence without changing the original meaning. Option A is the correct answer since it creates a complex sentence without changing the meaning of the two original sentences. Options B and C are incorrect; the use of the words “since” and “when” indicate a conditional relationship that is not present in the original sentences. Option D is incorrect; the word “although” indicates an oppositional relationship that is not present in the original sentences.",
+      "depthOfKnowledge": 3
+    },
+    {
+      "id": "g3-mc-9",
+      "standardCode": "CC.1.4.3.K",
+      "standardLabel": "Conventions of Standard English",
+      "question": "Which underlined word is spelled incorrectly?",
+      "choices": {
+        "A": "I visit my grandpa whenever I can.",
+        "B": "It was finally time to decorate the cake.",
+        "C": "The cat leeped over the tall wooden fence.",
+        "D": "My brother and I enjoy going on adventures together."
+      },
+      "correctAnswer": "C",
+      "rationale": "The student is asked to identify the underlined word in given sentences that is spelled incorrectly. Option C is the correct answer since “leeped” should be spelled as “leaped.” Options A, B, and D are incorrect since they are spelled correctly.",
+      "depthOfKnowledge": 2
+    }
+  ],
+  "tdaPrompts": [
+    {
+      "id": "g3-tda-1",
+      "passageId": "g3-p1",
+      "prompt": "Based on the passage, what should be considered when designing a toothpick structure? Use information from the passage to support your answer.",
+      "rubricVersion": "PSSA 1-4 TDA",
+      "scoredExemplars": [
+        {
+          "score": 3,
+          "response": "I thinck that two thing’s That shud de considered well macking toothpick’s bilding’s you shued allwes do the math dfore you start and you shued fined out haw you are going to move it wene you are finisde. in the story it sey’s thar is adit of math involved to figure out the dimension’s of the towers. I use algeebra quit a dit. And the secint wun seys When I built the TaJ Mahal for my ferst city I dropped the top of it. It sounded like a ligh bulb Shattering when it het the floor. now When I move my Work I do it very cafly.",
+          "rationale": "The response is a clear, complete, and accurate answer of what should be considered when designing a toothpick structure and includes relevant and specific information from the passage."
+        },
+        {
+          "score": 2,
+          "response": "Things that should be considerd when designing a tooth pick structures are you should always sketch an Idea befor you do it. you should also be very careful wile making it and moving itso it doesn’t brake. Aways make sure to put anuff glue so it sticks but don’t put too munch glue.",
+          "rationale": "The response is a partial answer of what should be considered when designing a toothpick structure. The response includes limited information from the passage and may include inaccuracies."
+        },
+        {
+          "score": 1,
+          "response": "To never give uP even if It’s really hard. To Keep learning.",
+          "rationale": "The response is a minimal answer of what should be considered when designing a toothpick structure. The response includes little information from the passage and may include inaccuracies."
+        },
+        {
+          "score": 1,
+          "response": "what will i do with a toothpick i will use in for my tooth.",
+          "rationale": "The response is totally irrelevant and contains insufficient information to demonstrate comprehension."
+        }
+      ]
+    }
+  ]
+}
