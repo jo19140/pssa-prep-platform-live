@@ -2,6 +2,8 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { StudentLessonPreviewStage } from "@/components/StudentLearningPathPage";
+import { StandardsProgressPanel } from "@/components/StandardsProgressPanel";
+import { StudentRosterPanel } from "@/components/StudentRosterPanel";
 
 export function TeacherLearningPathPanel({ mode = "assignments", role }: { mode?: "assignments" | "reports"; role?: string }) {
   const [data, setData] = useState<any>({ lessons: [], resources: [], standardsProgress: [], libraryLessons: [], classes: [] });
@@ -12,6 +14,7 @@ export function TeacherLearningPathPanel({ mode = "assignments", role }: { mode?
   const [buildingLibrary, setBuildingLibrary] = useState(false);
   const [selectedLessonIds, setSelectedLessonIds] = useState<string[]>([]);
   const [previewLesson, setPreviewLesson] = useState<any>(null);
+  const [focusedStudentName, setFocusedStudentName] = useState<string | null>(null);
   const [libraryFilters, setLibraryFilters] = useState({ show: "all", search: "", domain: "all", grade: "all" });
 
   async function loadData() {
@@ -99,6 +102,14 @@ export function TeacherLearningPathPanel({ mode = "assignments", role }: { mode?
             <Metric title="Mastered" value={lessonsByStatus.mastered} />
           </section>
 
+          <StandardsProgressPanel
+            standardsProgress={data.standardsProgress || []}
+            lessons={data.lessons || []}
+            onStudentSelect={setFocusedStudentName}
+          />
+
+          <StudentRosterPanel lessons={data.lessons || []} role={role} focusedStudentName={focusedStudentName} />
+
           <section className="rounded-3xl bg-white p-6 shadow">
             <h2 className="text-xl font-bold text-slate-900">Reading Coach Practice</h2>
             <p className="mt-1 text-sm text-slate-600">Recent read-aloud attempts show instructional focus areas for phonics, fluency, and accuracy practice.</p>
@@ -133,33 +144,6 @@ export function TeacherLearningPathPanel({ mode = "assignments", role }: { mode?
             </div>
           </section>
 
-          <section className="rounded-3xl bg-white p-6 shadow">
-            <h2 className="text-xl font-bold text-slate-900">Progress by Standard</h2>
-            <div className="mt-4 overflow-x-auto">
-              <table className="w-full text-left text-sm">
-                <thead className="text-xs uppercase text-slate-500">
-                  <tr>
-                    <th className="py-2 pr-4">Standard</th>
-                    <th className="py-2 pr-4">Skill</th>
-                    <th className="py-2 pr-4">Lessons</th>
-                    <th className="py-2 pr-4">Completed</th>
-                    <th className="py-2 pr-4">Mastered</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {(data.standardsProgress || []).map((row: any) => (
-                    <tr key={`${row.standardCode}-${row.skill}`} className="border-t border-slate-100">
-                      <td className="py-3 pr-4 font-semibold text-slate-900">{row.standardCode}</td>
-                      <td className="py-3 pr-4 text-slate-700">{row.skill}</td>
-                      <td className="py-3 pr-4">{row.lessonCount}</td>
-                      <td className="py-3 pr-4">{row.completed}</td>
-                      <td className="py-3 pr-4">{row.mastered}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </section>
         </>
       ) : (
         <>
@@ -340,39 +324,6 @@ export function TeacherLearningPathPanel({ mode = "assignments", role }: { mode?
         />
       ) : null}
 
-      <section className="rounded-3xl bg-white p-6 shadow">
-        <h2 className="text-xl font-bold text-slate-900">Student Assigned Lessons</h2>
-        <div className="mt-4 grid gap-3">
-          {(data.lessons || []).map((lesson: any) => (
-            <article key={lesson.id} className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
-              <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
-                <div>
-                  <p className="text-xs font-semibold uppercase text-slate-500">{lesson.studentName} • Grade {lesson.gradeLevel}</p>
-                  <h3 className="mt-1 text-base font-bold text-slate-900">{lesson.standardCode} - {lesson.skill}</h3>
-                  <p className="mt-1 text-sm text-slate-600">{lesson.whyAssigned}</p>
-                  <div className="mt-3 flex flex-wrap gap-2">
-                    <StepPill label="Guided" complete={lesson.guidedComplete} />
-                    <StepPill label="Practice" complete={lesson.independentComplete} />
-                    <StepPill label="Exit" complete={lesson.exitTicketComplete} />
-                    <StepPill label={lesson.masteryScore == null ? "Mastery" : `Mastery ${lesson.masteryScore}%`} complete={lesson.arcadeUnlocked} />
-                    <StepPill label="Arcade" complete={lesson.questAttempts > 0} unlocked={lesson.arcadeUnlocked} />
-                  </div>
-                </div>
-                <div className="flex flex-col gap-2 sm:items-end">
-                  <span className="inline-flex w-fit rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-700">{formatStatus(lesson.status)}</span>
-                  <span className="inline-flex w-fit rounded-full bg-blue-100 px-3 py-1 text-xs font-semibold text-blue-700">{lesson.currentStep}</span>
-                  {lesson.questAttempts ? (
-                    <span className="inline-flex w-fit rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-700">
-                      Quest {lesson.latestQuestScore} | {lesson.latestQuestXp} XP
-                    </span>
-                  ) : null}
-                </div>
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
-
         </>
       )}
 
@@ -386,22 +337,6 @@ function Metric({ title, value }: { title: string; value: number }) {
       <p className="text-sm font-semibold text-slate-500">{title}</p>
       <p className="mt-2 text-3xl font-bold text-slate-900">{value}</p>
     </div>
-  );
-}
-
-function StepPill({ label, complete, unlocked = true }: { label: string; complete: boolean; unlocked?: boolean }) {
-  return (
-    <span
-      className={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ${
-        complete
-          ? "bg-emerald-100 text-emerald-700"
-          : unlocked
-            ? "bg-white text-slate-600 ring-1 ring-slate-200"
-            : "bg-slate-200 text-slate-500"
-      }`}
-    >
-      {label}
-    </span>
   );
 }
 
@@ -530,10 +465,6 @@ function PreviewPractice({ title, questions, compact = false }: { title: string;
       </div>
     </PreviewBlock>
   );
-}
-
-function formatStatus(status: string) {
-  return status.replace(/_/g, " ").toLowerCase().replace(/\b\w/g, (char) => char.toUpperCase());
 }
 
 function lessonDomain(lesson: any) {

@@ -38,6 +38,14 @@ export async function GET() {
   if (!teacher) return NextResponse.json({ lessons: [], resources: [], standardsProgress: [] });
 
   const studentUserIds = teacher.classes.flatMap((classRoom) => classRoom.enrollments.map((enrollment) => enrollment.studentProfile.userId));
+  const studentClassByUserId = new Map<string, { className: string; classId: string }>();
+  for (const classRoom of teacher.classes) {
+    for (const enrollment of classRoom.enrollments) {
+      if (!studentClassByUserId.has(enrollment.studentProfile.userId)) {
+        studentClassByUserId.set(enrollment.studentProfile.userId, { className: classRoom.name, classId: classRoom.id });
+      }
+    }
+  }
   const libraryLessons = await db.learningLesson.findMany({
     include: {
       learningPath: { include: { session: { include: { user: true, assessment: true } } } },
@@ -134,6 +142,9 @@ export async function GET() {
       return {
         id: lesson.id,
         studentName: lesson.learningPath.session.user.name,
+        studentEmail: lesson.learningPath.session.user.email,
+        className: studentClassByUserId.get(lesson.learningPath.session.userId)?.className || null,
+        classId: studentClassByUserId.get(lesson.learningPath.session.userId)?.classId || null,
         assessmentTitle: lesson.learningPath.session.assessment.title,
         gradeLevel: lesson.gradeLevel,
         standardCode: lesson.standardCode,
