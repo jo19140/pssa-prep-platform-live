@@ -107,7 +107,7 @@ async function processVideo(video: VideoRow): Promise<{ created: number; updated
   if (!url) return { created: 0, updated: 0, skipped: true, skipReason: "missing_url" };
 
   const gradeLevel = Number(video.grade_level);
-  if (!Number.isInteger(gradeLevel) || gradeLevel < 3 || gradeLevel > 8) {
+  if (!Number.isInteger(gradeLevel) || gradeLevel < 1 || gradeLevel > 8) {
     return { created: 0, updated: 0, skipped: true, skipReason: "invalid_grade_level" };
   }
 

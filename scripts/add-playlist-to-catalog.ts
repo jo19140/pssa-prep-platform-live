@@ -18,8 +18,8 @@ if (!playlistUrl || !gradeArg) {
 }
 
 const gradeLevel = parseInt(gradeArg, 10);
-if (!Number.isInteger(gradeLevel) || gradeLevel < 3 || gradeLevel > 8) {
-  console.error("grade_level must be 3-8");
+if (!Number.isInteger(gradeLevel) || gradeLevel < 1 || gradeLevel > 8) {
+  console.error("grade_level must be 1-8");
   process.exit(1);
 }
 
@@ -30,6 +30,7 @@ function extractPlaylistId(input: string): string {
 
 const playlistId = extractPlaylistId(playlistUrl);
 const collectionId = collectionIdArg || `miacademy_level_${"abcdefgh"[gradeLevel - 1]}`;
+const tier = /level_[abc]/i.test(collectionId) ? "foundational" : "on_grade";
 
 async function fetchPlaylistItems(id: string) {
   const items: any[] = [];
@@ -177,7 +178,7 @@ async function main() {
       grade_level: gradeLevel,
       grade_range_min: gradeLevel,
       grade_range_max: gradeLevel,
-      tier: "on_grade",
+      tier,
       subject: "ELA",
       video_count: items.length,
       discovered_at: new Date().toISOString().slice(0, 10),
@@ -234,7 +235,7 @@ async function main() {
       grade_level: gradeLevel,
       grade_range_min: gradeLevel,
       grade_range_max: gradeLevel,
-      tier: "on_grade",
+      tier,
       subject: "ELA",
       collection_id: collectionId,
       sequence_order: i + 1,
