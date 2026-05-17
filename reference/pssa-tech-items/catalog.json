@@ -1,0 +1,1111 @@
+{
+  "source": "DRC INSIGHT Online Tools Training (OTT) — 2026",
+  "generated_at": "2026-05-17T13:07:21.901Z",
+  "items": [
+    {
+      "id": "g3-tei-1",
+      "screenshotFile": "Screenshot 2026-05-06 at 2.37.50 PM.png",
+      "grade": 3,
+      "questionNumber": 6,
+      "itemType": "inline-dropdown",
+      "standardCategory": "conventions",
+      "instructions": "Read the sentence. Select the verb or verb phrase from the drop-down list to complete the sentence.",
+      "practiceHint": "Use the Pointer tool to open the drop-down list and select your answer.",
+      "content": {
+        "sentence": "The sun [ ] very bright to us yesterday because there were no clouds in the sky.",
+        "dropdownOptions": [
+          "was",
+          "is",
+          "will be"
+        ]
+      },
+      "notes": ""
+    },
+    {
+      "id": "g3-tei-2",
+      "screenshotFile": "Screenshot 2026-05-06 at 2.38.17 PM.png",
+      "grade": 3,
+      "questionNumber": 7,
+      "itemType": "hot-text-word",
+      "standardCategory": "conventions",
+      "instructions": "Read the sentences. Select a word from each underlined pair that is spelled correctly.",
+      "practiceHint": "when you select a word in the brackets below, it will become highlighted. Use the Clear All button if you want to remove the highlighting.",
+      "content": {
+        "sentence": "Mr. Long [ bought / boght ] some carrots at the market. The carrots cost [ fourty / forty ] cents. He used some of the carrots to make soup and saved the [ rest / wrest ] to eat later.",
+        "bracketPairs": [
+          [
+            "bought",
+            "boght"
+          ],
+          [
+            "fourty",
+            "forty"
+          ],
+          [
+            "rest",
+            "wrest"
+          ]
+        ]
+      },
+      "notes": ""
+    },
+    {
+      "id": "g3-tei-3",
+      "screenshotFile": "Screenshot 2026-05-06 at 2.38.29 PM.png",
+      "grade": 3,
+      "questionNumber": 8,
+      "itemType": "drag-drop-order",
+      "standardCategory": "comprehension",
+      "standardCode": "CC.1.3.3.B",
+      "instructions": "Read the sentences. Move the most descriptive phrase onto the line to complete sentence 3.",
+      "practiceHint": "Select the correct phrase and move it onto the blank line. To change your answer, either drag another phrase onto the line or select the Clear All button.",
+      "content": {
+        "passage": "(1) On a warm summer’s day, Mark went with his family to pick strawberries. (2) He was given his very own box to fill. (3) In less than an hour, his box _____________.",
+        "sources": [
+          "had more than enough strawberries in it",
+          "had plenty of good strawberries in it",
+          "was packed full of juicy strawberries",
+          "was filled with wonderful strawberries"
+        ],
+        "targetLabel": "blank line"
+      },
+      "notes": ""
+    },
+    {
+      "id": "g3-tei-4",
+      "screenshotFile": "Screenshot 2026-05-06 at 2.38.38 PM.png",
+      "grade": 3,
+      "questionNumber": 9,
+      "itemType": "inline-dropdown",
+      "standardCategory": "conventions",
+      "instructions": "Use the drop-down lists to select the correct ending to make each word plural.",
+      "practiceHint": "Use the Pointer tool to open each drop-down list and select your answers.",
+      "content": {},
+      "notes": ""
+    },
+    {
+      "id": "g3-tei-5",
+      "screenshotFile": "Screenshot 2026-05-06 at 2.38.52 PM.png",
+      "grade": 3,
+      "questionNumber": 14,
+      "itemType": "inline-dropdown",
+      "standardCategory": "comprehension",
+      "standardCode": "CC.1.3.3.C",
+      "instructions": "Select a phrase from each drop-down list that shows the relationship between events in the passage.",
+      "practiceHint": "Use the Line Guide tool to help guide your progress through the passage.",
+      "content": {
+        "passage": "As the school bus rumbled toward home, Marisa thought about the reasons she didn’t want to go to Penmark School. First of all, she’d had to leave all her friends in California to come to Maine. Second, her family needed to move two weeks after the school year started so that Mom could start her new job at the medical center. And third? Well, Marisa couldn’t think of a third, but she figured those two were enough for her first day. Marisa stared out at the fields rolling by. She sighed and reached into her backpack. At least she had a good mystery to read. But she hadn’t",
+        "dropdownOptions": [
+          "Option 1",
+          "Option 2",
+          "Option 3"
+        ]
+      },
+      "notes": ""
+    },
+    {
+      "id": "g3-tei-6",
+      "screenshotFile": "Screenshot 2026-05-06 at 2.39.09 PM.png",
+      "grade": 3,
+      "questionNumber": 18,
+      "itemType": "hot-text-phrase",
+      "standardCategory": "comprehension",
+      "standardCode": "CC.1.3.3.B",
+      "instructions": "Read the paragraph. Select the two phrases that help you understand the meaning of “don’t rush.”",
+      "practiceHint": "Use the Highlighter tool to highlight important parts of the passage.",
+      "content": {
+        "passage": "Finally, you’re ready to take a hike. What will you see? Whether you hike in the forest, the desert, or near a swamp, you’re sure to see many wonders of nature. As you go on your first hike, don’t rush. Walk at a leisurely pace. You’ll soon fall into a comfortable stride. This first hike might be just to observe. Take in the sights, sounds, and smells of the area. What do you see? At each place you hike, you will see different things. Watch for bird nests, snake skins, feathers, nursery logs, mushrooms, fish, animal tracks. Soon you’ll realize that much of the fun of hiking is in",
+        "sentence": "As you go on your first hike, don’t rush. Walk at a leisurely pace. You’ll soon fall into a comfortable stride. This first hike might be just to observe. Take in the sights, sounds, and smells of the area. What do you see? At each place you hike, you will see different things.",
+        "bracketPairs": [
+          [
+            "leisurely pace",
+            "leisurely pace"
+          ],
+          [
+            "soon fall into a comfortable stride",
+            "soon fall into a comfortable stride"
+          ],
+          [
+            "observe",
+            "observe"
+          ],
+          [
+            "Take in the sights, sounds, and smells",
+            "Take in the sights, sounds, and smells"
+          ],
+          [
+            "you will see different things",
+            "you will see different things"
+          ]
+        ]
+      },
+      "notes": ""
+    },
+    {
+      "id": "g3-tei-7",
+      "screenshotFile": "Screenshot 2026-05-06 at 2.39.50 PM.png",
+      "grade": 3,
+      "questionNumber": 20,
+      "itemType": "other",
+      "standardCategory": "comprehension",
+      "standardCode": "CC.1.3.3.B",
+      "instructions": "How does the author of “The Eagles are Back!” support the point “by the mid-1960s many biologists feared our national bird would disappear forever”?",
+      "practiceHint": "(Practice Hint: Select to Enlarge to make the answer options larger.)",
+      "content": {
+        "passage": "The Eagles Are Back! by Dorothy Hinshaw Patent In his 1999 Fourth of July celebration speech, President Bill Clinton declared that our national symbol, the bald eagle, was no longer endangered. This welcome news for wildlife wasn’t just the result of good luck. For more than twenty years, scientists and volunteers across the country have worked to help the bald eagle.",
+        "choices": [
+          "Option A",
+          "Option B",
+          "Option C",
+          "Option D"
+        ]
+      },
+      "notes": ""
+    },
+    {
+      "id": "g3-tei-8",
+      "screenshotFile": "Screenshot 2026-05-06 at 2.41.36 PM.png",
+      "grade": 3,
+      "questionNumber": 23,
+      "itemType": "drag-drop-table",
+      "standardCategory": "comprehension",
+      "standardCode": "CC.1.2.3.B",
+      "instructions": "Select a box in each row to show whether each statement is supported by the information in “The Eagles Are Back!,” “Bald eagles make a comeback in Chicago” or both passages. Each column will be used only once.",
+      "practiceHint": "Select the boxes in the table to add check marks. To remove a check mark, select it again. To clear the table, Select Clear All.",
+      "content": {
+        "passage": "The Eagles Are Back!",
+        "sources": [
+          "Today, there are more than 9,000 bald eagles.",
+          "DDT was a threat to the bald eagle population.",
+          "The Endangered Species Act was passed by congress."
+        ],
+        "targetLabel": "Select to Respond"
+      },
+      "notes": ""
+    },
+    {
+      "id": "g4-tei-1",
+      "screenshotFile": "Screenshot 2026-05-06 at 5.21.42 PM.png",
+      "grade": 4,
+      "questionNumber": 5,
+      "itemType": "inline-dropdown",
+      "standardCategory": "vocabulary",
+      "standardCode": "CC.1.3.4.F",
+      "instructions": "Read the sentences. Select the word from the drop-down list that best completes the second sentence.",
+      "practiceHint": "Use the Pointer tool to open the drop-down list and select your answer.",
+      "content": {
+        "sentence": "The writer has an interesting way of telling a story. Most readers like her ___ of writing.",
+        "dropdownOptions": [
+          "style",
+          "surprise",
+          "wisdom",
+          "gladness"
+        ]
+      },
+      "correctAnswer": {},
+      "notes": ""
+    },
+    {
+      "id": "g4-tei-2",
+      "screenshotFile": "Screenshot 2026-05-06 at 5.21.55 PM.png",
+      "grade": 4,
+      "questionNumber": 6,
+      "itemType": "hot-text-word",
+      "standardCategory": "conventions",
+      "instructions": "Read the sentence. Select the underlined word that has a mistake in capitalization.",
+      "practiceHint": "When you select a word below, it will become highlighted. Use the Clear All button if you want to remove the highlighting.",
+      "content": {
+        "sentence": "The Howard County library has a book club on Mondays.",
+        "bracketPairs": [
+          [
+            "Howard",
+            "library"
+          ]
+        ]
+      },
+      "correctAnswer": "library",
+      "notes": ""
+    },
+    {
+      "id": "g4-tei-3",
+      "screenshotFile": "Screenshot 2026-05-06 at 5.22.11 PM.png",
+      "grade": 4,
+      "questionNumber": 7,
+      "itemType": "drag-drop-table",
+      "standardCategory": "writing",
+      "standardCode": "CC.1.4.4.X",
+      "instructions": "Read the paragraph. Move the sentence into the table that is the best revision of sentence 2.",
+      "practiceHint": "Move your answer into the table. To change your answer, either move a new answer into the table or select the Clear All button.",
+      "content": {
+        "paragraph": "(1) Molly and her sister were washing the car as their dog, Max, watched. (2) Suddenly Max came up and made a big mess. (3) Molly and her sister had to wash the car all over again. They had to give Max a bath too.",
+        "sources": [
+          "Suddenly Max raced up, knocked over a bucket of water, and splashed in the mud.",
+          "Max suddenly came over and got water and mud everywhere.",
+          "Max suddenly arrived and made an awful mess with a bucket of water and mud.",
+          "Suddenly Max showed up and made a huge mess of everything."
+        ]
+      },
+      "notes": ""
+    },
+    {
+      "id": "g4-tei-4",
+      "screenshotFile": "Screenshot 2026-05-06 at 5.22.34 PM.png",
+      "grade": 4,
+      "questionNumber": 11,
+      "itemType": "inline-dropdown",
+      "standardCategory": "comprehension",
+      "standardCode": "CC.1.3.4.C",
+      "instructions": "Read the sentences. Select a phrase from each drop-down list that shows the relationship between events in the passage.",
+      "practiceHint": "(Practice Hint: Use the Pointer tool to open each drop-down list and select your answers.)",
+      "content": {
+        "passage": "As the school bus rumbled toward home, Marisa thought about the reasons she didn’t want to go to Penmark School. First of all, she’d had to leave all her friends in California to come to Maine. Second, her family needed to move two weeks after the school year started so that Mom could start her new job at the medical center. And third? Well, Marisa couldn’t think of a third, but she figured those two were enough for her first day. Marisa stared out at the fields rolling by. She sighed and reached into her backpack. At least she had a good mystery to read. But she hadn’t even read a whole sentence from her book before a voice next to her made her jump. “Hey, I’ve read that one. It’s great.” Marisa turned to see a girl in a fuzzy purple sweater. “I’m Shelly,” said the girl, and she grinned so hard her gums showed. Marisa felt herself smiling back. “I’m Marisa,” she said. “We have the same homeroom, right?” Shelly nodded. Then she pointed to the book Marisa held. “I have to tell you—,” she began. “No!” Marisa covered her ears with her hands. “Don’t tell me.”",
+        "sentence": "As Marissa rides the bus home, she first [dropdown]. Then, Marissa [dropdown]. At school the next day, Marissa [dropdown].",
+        "dropdownOptions": [
+          "joins a school club",
+          "draws with a red crayon",
+          "loses her history book"
+        ]
+      },
+      "notes": ""
+    },
+    {
+      "id": "g4-tei-5",
+      "screenshotFile": "Screenshot 2026-05-06 at 5.22.59 PM.png",
+      "grade": 4,
+      "questionNumber": 16,
+      "itemType": "hot-text-phrase",
+      "standardCategory": "comprehension",
+      "standardCode": "CC.1.3.4.B",
+      "instructions": "Read the paragraph. Select the two phrases that help you understand the meaning of “don’t rush.”",
+      "practiceHint": "(Practice Hint: When you select a phrase below, it will become highlighted. Use the Clear All button if you want to remove the highlighting.)",
+      "content": {
+        "passage": "Finally, you’re ready to take a hike. What will you see? Whether you hike in the forest, the desert, or near a swamp, you’re sure to see many wonders of nature. As you go on your first hike, don’t rush. Walk at a leisurely pace. You’ll soon fall into a comfortable stride. This first hike might be just to observe. Take in the sights, sounds, and smells of the area. What do you see? At each place you hike, you will see different things. Watch for bird nests, snake skins, feathers, nursery logs, mushrooms, fish, animal tracks. Soon you’ll realize that much of the fun of hiking is in studying nature and much of the fun of studying nature is in the detective work. Who made these tracks? What kind of bird dropped this feather? Every good detective takes notes. How about making a hiking journal for your trek? You can include notes on the date of the hike, weather conditions, where you are going, and a diagram of the landscape. Sketch the animal tracks you see along the creek, add a feather you found, draw the tadpole you saw in the big puddle. Maybe later you can find out how long it will be before the tadpole becomes a frog. You can also add photographs from your hike—like the chipmunk that chattered at you while you ate lunch, and your family members when they jumped into the creek.",
+        "sentence": "As you go on your first hike, don’t rush. Walk at a leisurely pace. You’ll soon fall into a comfortable stride. This first hike might be just to observe. Take in the sights, sounds, and smells of the area. What do you see? At each place you hike, you will see different things."
+      },
+      "notes": ""
+    },
+    {
+      "id": "g4-tei-6",
+      "screenshotFile": "Screenshot 2026-05-06 at 5.23.59 PM.png",
+      "grade": 4,
+      "questionNumber": 19,
+      "itemType": "other",
+      "standardCategory": "comprehension",
+      "standardCode": "CC.1.2.4.D",
+      "instructions": "Which statement best describes the difference in the point of view of “The Eagles Are Back!” and “Bald eagles make a comeback in Chicago”?",
+      "practiceHint": "(Practice Hint: Select to Enlarge to make the answer options larger.)",
+      "content": {
+        "passage": "The Eagles Are Back!",
+        "choices": [
+          "A. “The Eagles Are Back!” is written from the point of view of a scientist interested in explaining the problems faced by bald eagles, while “Bald eagles make a comeback in Chicago” is written from the point of view of a biologist and a politician studying the effects of pesticides on bald eagles.",
+          "B. “The Eagles Are Back!” is written from the point of view of a student researching bald eagles, while “Bald eagles make a comeback in Chicago” is written from the point of view of a park ranger who discusses how parks have brought back bald eagles.",
+          "C. “The Eagles Are Back!” is written from the point of view of an individual providing a general history of bald eagles throughout the country, while “Bald eagles make a comeback in Chicago” is written from the point of view of a reporter who discusses sightings of bald eagles in a particular area of the country.",
+          "D. “The Eagles Are Back!” is written from the point of view of a resident who has sighted bald eagles, while “Bald eagles make a comeback in Chicago” is written from the point of view of a historian who describes where bald eagles used to live."
+        ]
+      },
+      "notes": ""
+    },
+    {
+      "id": "g4-tei-7",
+      "screenshotFile": "Screenshot 2026-05-06 at 5.24.09 PM.png",
+      "grade": 4,
+      "questionNumber": 20,
+      "itemType": "evidence-mapping",
+      "standardCategory": "comprehension",
+      "standardCode": "CC.1.2.4.B",
+      "instructions": "Select a box in each row to show whether each statement is supported by the information in “The Eagles Are Back!,” “Bald eagles make a comeback in Chicago” or both passages. Each column will be only used once.",
+      "practiceHint": "(Practice Hint: Select the boxes in the table to add check marks. To remove a check mark, select it again. To clear the table, select Clear All.)",
+      "content": {
+        "passage": "The Eagles Are Back!",
+        "sources": [
+          "Today, there are more than 9,000 bald eagles.",
+          "DDT was a threat to the bald eagle population.",
+          "The Endangered Species Act was passed by congress."
+        ],
+        "targetLabel": "\"The Eagles Are Back!\"",
+        "choices": [
+          "\"The Eagles Are Back!\"",
+          "Bald eagles make a comeback in Chicago",
+          "Both"
+        ]
+      },
+      "notes": ""
+    },
+    {
+      "id": "g5-tei-1",
+      "screenshotFile": "Screenshot 2026-05-06 at 5.31.00 PM.png",
+      "grade": 5,
+      "questionNumber": 4,
+      "itemType": "inline-dropdown",
+      "standardCategory": "comprehension",
+      "standardCode": "CC.1.2.5.G",
+      "instructions": "Read the paragraph. Select the word from each drop-down list that best completes each sentence.",
+      "practiceHint": "Use the Pointer tool to open each drop-down list and select your answers.",
+      "content": {
+        "paragraph": "A walrus uses its long teeth, or tusks, in many different ways. Scientists [dropdown] that a walrus uses its tusks to climb out of the water. The animal may also [dropdown] its tusks to dig holes in the ice and protect itself from predators.",
+        "dropdownOptions": [
+          "believe",
+          "use",
+          "think",
+          "know"
+        ]
+      },
+      "notes": ""
+    },
+    {
+      "id": "g3-tei-9",
+      "screenshotFile": "Screenshot 2026-05-06 at 5.31.15 PM.png",
+      "grade": 3,
+      "itemType": "other",
+      "standardCategory": "unknown",
+      "instructions": "Instructions not visible in screenshot.",
+      "practiceHint": "",
+      "content": {},
+      "notes": ""
+    },
+    {
+      "id": "g5-tei-2",
+      "screenshotFile": "Screenshot 2026-05-06 at 5.31.34 PM.png",
+      "grade": 5,
+      "questionNumber": 6,
+      "itemType": "drag-drop-order",
+      "standardCategory": "conventions",
+      "standardCode": "CC.1.4.5.F",
+      "instructions": "Move the two commas onto the lines to correctly punctuate the sentence.",
+      "practiceHint": "(Practice Hint: Move your answers onto the blank lines. To change your answers, either move a new answer onto the line or select the Clear All button.)",
+      "content": {
+        "sentence": "Pennsylvania has many__historic bridges__built for train, automobile__or foot__traffic__across the state’s __many rivers__streams, and__valleys.",
+        "sources": [
+          ",",
+          ","
+        ]
+      },
+      "notes": ""
+    },
+    {
+      "id": "g5-tei-3",
+      "screenshotFile": "Screenshot 2026-05-06 at 5.31.46 PM.png",
+      "grade": 5,
+      "questionNumber": 7,
+      "itemType": "drag-drop-table",
+      "standardCategory": "conventions",
+      "standardCode": "CC.1.4.5.F",
+      "instructions": "Read the descriptions of sources used in the classroom. Move the two correctly written sources into the table.",
+      "practiceHint": "Move your answers into the table. To change your answers, either move new answers into the table or select the Clear All button.",
+      "content": {
+        "sources": [
+          "a newspaper article titled “Art in the 1920s”",
+          "a book titled “The Habitat of Turtles”",
+          "a book titled How to Fix a Bicycle",
+          "a newspaper article titled Amazing Leonardo da Vinci"
+        ],
+        "targetLabel": "Correctly Written Descriptions"
+      },
+      "notes": ""
+    },
+    {
+      "id": "g5-tei-4",
+      "screenshotFile": "Screenshot 2026-05-06 at 5.31.57 PM.png",
+      "grade": 5,
+      "questionNumber": 11,
+      "itemType": "inline-dropdown",
+      "standardCategory": "comprehension",
+      "standardCode": "CC.1.3.5.C",
+      "instructions": "Read the sentences. Select a phrase from each drop-down list that shows the relationship between events in the passage.",
+      "practiceHint": "Use the Pointer tool to open each drop-down list and select your answers.",
+      "content": {
+        "passage": "Mystery Club by Maurissa Guibord As the school bus rumbled toward home, Marisa thought about the reasons she didn’t want to go to Penmark School. First of all, she’d had to leave all her friends in California to come to Maine. Second, her family needed to move two weeks after the school year started so that Mom could start her new job at the medical center. And third? Well, Marisa couldn’t think of a third, but she figured those two were enough for her first day. Marisa stared out at the fields rolling by. She sighed and reached into her backpack. At least she had a good mystery to read. But she hadn’t even read a whole sentence from her book before a voice next to her made her jump. “Hey, I’ve read that one. It’s great.” Marisa turned to see a girl in a fuzzy purple sweater. “I’m Shelly,” said the girl, and she grinned so hard her gums showed. Marisa felt herself smiling back. “I’m Marisa,” she said. “We have the same homeroom, right?” Shelly nodded. Then she pointed to the book Marisa held. “I have to tell you—,” she began. “No!” Marisa covered her ears with her hands. “Don’t tell me how it ends!”",
+        "sentence": "As Marissa rides the bus home, she first [ ] . Then, Marissa [ ] . At school the next day, Marissa [ ] .",
+        "dropdownOptions": [
+          "sighs and reaches into her backpack",
+          "turns to see a girl in a fuzzy purple sweater",
+          "covers her ears with her hands"
+        ]
+      },
+      "notes": ""
+    },
+    {
+      "id": "g5-tei-5",
+      "screenshotFile": "Screenshot 2026-05-06 at 5.32.18 PM.png",
+      "grade": 5,
+      "questionNumber": 16,
+      "itemType": "hot-text-phrase",
+      "standardCategory": "comprehension",
+      "standardCode": "CC.1.3.5.B",
+      "instructions": "Read the paragraph. Select the two phrases that help you understand the meaning of “don’t rush.”",
+      "practiceHint": "(Practice Hint: When you select a phrase below, it will become highlighted. Use the Clear All button if you want to remove the highlighting.)",
+      "content": {
+        "passage": "Read the following passage about taking a hike. Trekking the Trail by Linda White Finally, you’re ready to take a hike. What will you see? Whether you hike in the forest, the desert, or near a swamp, you’re sure to see many wonders of nature. As you go on your first hike, don’t rush. Walk at a leisurely pace. You’ll soon fall into a comfortable stride. This first hike might be just to observe. Take in the sights, sounds, and smells of the area. What do you see? At each place you hike, you will see different things. Watch for bird nests, snake skins, feathers, nursery logs, mushrooms, fish, animal tracks. Soon you’ll realize that much of the fun of hiking is in studying nature and much of the fun of studying nature is in the detective work. Who made these tracks? What kind of bird dropped this feather? Every good detective takes notes. How about making a hiking journal for your trek? You can include notes on the date of the hike, weather conditions, where you are going, and a diagram of the landscape. Sketch the animal tracks you see along the creek, add a feather you found, draw the tadpole you saw in the big puddle. Maybe later you can find out how long it will be before the tadpole becomes a frog. You can also add photographs from your hike—like the chipmunk that chattered at you along the trail, and your family members when they reached the top of the hill.",
+        "sentence": "As you go on your first hike, don’t rush. Walk at a leisurely pace. You’ll soon fall into a comfortable stride. This first hike might be just to observe. Take in the sights, sounds, and smells of the area. What do you see? At each place you hike, you will see different things."
+      },
+      "notes": ""
+    },
+    {
+      "id": "g5-tei-6",
+      "screenshotFile": "Screenshot 2026-05-06 at 5.32.31 PM.png",
+      "grade": 5,
+      "questionNumber": 20,
+      "itemType": "evidence-mapping",
+      "standardCategory": "comprehension",
+      "standardCode": "CC.1.2.5.B",
+      "instructions": "Select a box in each row to show whether each statement is supported by the information in “The Eagles Are Back!,” “Bald eagles make a comeback in Chicago” or both passages. Each column will be only used once.",
+      "practiceHint": "(Practice Hint: Select the boxes in the table to add check marks. To remove a check mark, select it again. To clear the table, select Clear All.)",
+      "content": {
+        "passage": "The Eagles Are Back!",
+        "sources": [
+          "Today, there are more than 9,000 bald eagles.",
+          "DDT was a threat to the bald eagle population.",
+          "The Endangered Species Act was passed by congress."
+        ],
+        "targetLabel": "\"The Eagles Are Back!\"",
+        "choices": [
+          "\"The Eagles Are Back!\"",
+          "Bald eagles make a comeback in Chicago",
+          "Both"
+        ]
+      },
+      "notes": ""
+    },
+    {
+      "id": "g6-tei-1",
+      "screenshotFile": "Screenshot 2026-05-06 at 5.38.03 PM.png",
+      "grade": 6,
+      "questionNumber": 6,
+      "itemType": "inline-dropdown",
+      "standardCategory": "comprehension",
+      "standardCode": "CC.1.2.6.G",
+      "instructions": "Read the paragraph. Select the word from each drop-down list that best completes each sentence.",
+      "practiceHint": "(Practice Hint: Use the Pointer tool to open each drop-down list and select your answers.)",
+      "content": {
+        "paragraph": "(1) Monarch butterflies, like many other animals, [ ] south for the winter. (2) Butterfly lovers travel to Michoacán, Mexico, every year to see the millions of monarchs that spend the winter there. (3) These monarchs hatched somewhere in the north the previous spring. (4) Because monarch butterflies have short life spans, no single monarch [ ] long enough to make the return trip. (5) That task is left to their offspring, who somehow find their way north.",
+        "dropdownOptions": [
+          "migrate",
+          "hibernates",
+          "survives"
+        ]
+      },
+      "notes": ""
+    },
+    {
+      "id": "g6-tei-2",
+      "screenshotFile": "Screenshot 2026-05-06 at 5.38.14 PM.png",
+      "grade": 6,
+      "questionNumber": 7,
+      "itemType": "hot-text-sentence",
+      "standardCategory": "writing",
+      "standardCode": "CC.1.4.6.X",
+      "instructions": "Read the paragraph. Then select the sentence that should be revised to maintain the style of the paragraph.",
+      "practiceHint": "(Practice Hint: When you select a sentence below, it will become highlighted. Use the Clear All button if you want to remove the highlighting.)",
+      "content": {
+        "paragraph": "(1) In many areas around the world, highways pass directly through the habitats of many animals. (2) Crossing the roads got really, really hard for some animals. (3) As a result, people have designed and built special bridges and tunnels just for wildlife. (4) These new wildlife crossings allow animals to move over or under the highway safely."
+      },
+      "notes": ""
+    },
+    {
+      "id": "g6-tei-3",
+      "screenshotFile": "Screenshot 2026-05-06 at 5.38.30 PM.png",
+      "grade": 6,
+      "questionNumber": 8,
+      "itemType": "drag-drop-order",
+      "standardCategory": "comprehension",
+      "instructions": "Read the first sentence of a newspaper article. Move a sentence from below onto the blank line that best fits the style of the article.",
+      "practiceHint": "Move your answer onto the blank line. To change your answer, either move a new answer onto the line or select the Clear All button.",
+      "content": {
+        "sentence": "The sixth-grade basketball team lost the district championship game at the last second. _____________________________.",
+        "sources": [
+          "The players felt down in the dumps afterward.",
+          "Later on, the kids were all totally unhappy.",
+          "The team members were greatly disappointed."
+        ]
+      },
+      "notes": ""
+    },
+    {
+      "id": "g6-tei-4",
+      "screenshotFile": "Screenshot 2026-05-06 at 5.38.49 PM.png",
+      "grade": 6,
+      "questionNumber": 11,
+      "itemType": "drag-drop-order",
+      "standardCategory": "comprehension",
+      "standardCode": "CC.1.3.6.A",
+      "instructions": "Move sentences from the event options onto the blank lines to provide the best summary of the passage. You will not use all of the sentences.",
+      "practiceHint": "(Practice Hint: Select the image below to view the question. Move your answers into the empty boxes. To change your answers, either move a new answer onto the box or select the Clear All button.)",
+      "content": {
+        "passage": "Nail Soup a folktale from Sweden There was once a man who went plodding his way through a forest. The distance between the houses was so great that he had little hope of finding a shelter before the night set in. But all of a sudden he saw some lights between the trees. He then discovered a cottage, where there was a fire burning on the hearth. How nice it would be to roast one’s self before that fire, and to get a bite of something, he thought, and so he dragged himself towards the cottage. Just then a woman came toward him. “Good evening, and well met!” said the man. “Good evening,” said the woman. “Where do you come from?” “South of the sun and east of the moon,” said the man, “and now I am on the way home again, for I have been all over the world with the exception of this parish,” he said. “You must be a great traveler then,” said the woman. “What may be your business here?”",
+        "sources": [
+          "A hungry and tired man was wandering through the forest.",
+          "The man kindly suggested a way to provide them both with a meal.",
+          "The man was determined, so woman finally allowed him to sleep on the floor.",
+          "The woman was in a good mood after learning something useful from the man.",
+          "Some ingredients were provided and added to the pot after each discussion.",
+          "She brought out her food from her cupboard and set the table fit for a king.",
+          "He encountered a woman who was greedy and always complaining.",
+          "The man left after the woman provided him with breakfast, money, and thanks."
+        ],
+        "targetLabel": "Order"
+      },
+      "notes": ""
+    },
+    {
+      "id": "g6-tei-5",
+      "screenshotFile": "Screenshot 2026-05-06 at 5.38.59 PM.png",
+      "grade": 6,
+      "questionNumber": 14,
+      "itemType": "drag-drop-table",
+      "standardCategory": "comprehension",
+      "standardCode": "CC.1.3.6.A",
+      "instructions": "Select a box in each row to show whether the sentence describes “Nail Soup,” “The Poem of Stone Soup,” or both. Each column will be used only once.",
+      "practiceHint": "(Practice Hint: Select the boxes in the table to add check marks. To remove a check mark, select it again. To clear the table, select Clear All.)",
+      "content": {
+        "passage": "Nail Soup a folktale from Sweden There was once a man who went plodding his way through a forest. The distance between the houses was so great that he had little hope of finding a shelter before the night set in. But all of a sudden he saw some lights between the trees. He then discovered a cottage, where there was a fire burning on the hearth. How nice it would be to roast one’s self before that fire, and to get a bite of something, he thought, and so he dragged himself towards the cottage. Just then a woman came toward him. “Good evening, and well met!” said the man. “Good evening,” said the woman. “Where do you come from?” “South of the sun and east of the moon,” said the man, “and now I am on the way home again, for I have been all over the world with the exception of this parish,” he said. “You must be a great traveler, then,” said the woman. “What may be your business here?”",
+        "sources": [
+          "Ingredients are easily offered up to make soup.",
+          "Stinginess and greed are present at times.",
+          "Soup is made by the use of an unusual ingredient."
+        ],
+        "targetLabel": "“Nail Soup” | “The Poem of Stone Soup” | Both"
+      },
+      "notes": ""
+    },
+    {
+      "id": "g6-tei-6",
+      "screenshotFile": "Screenshot 2026-05-06 at 5.39.17 PM.png",
+      "grade": 6,
+      "questionNumber": 16,
+      "itemType": "other",
+      "standardCategory": "comprehension",
+      "standardCode": "CC.1.2.6.G",
+      "instructions": "Read paragraph 3. How does the first sentence in paragraph 3 connect to the other details provided in the paragraph?",
+      "practiceHint": "Select to Enlarge to make the answer options larger.",
+      "content": {
+        "passage": "Editorial: Teens are going to extremes with texting The Jersey Journal The national obsession with instantaneous communication is taking a toll on teens so severe that some experts are calling it a crisis. It’s not the phenomenon of cell-phoning or messaging while driving—both are illegal in New Jersey—but all-night texting that is leaving too many teens too tired for school. One 14-year-old New Jerseyan featured in a recent Star-Ledger story receives up to 10,000—10,000!—text messages a month. To accomplish that astounding yet not unusual feat, daily activities like bathing and sleeping are interrupted, thumbs pumping, to read and respond to an avalanche of messages. Doctors are beginning to recognize such obsession as addiction that is robbing children of sleep at the very time in their lives when they need it the most.",
+        "choices": [
+          "Option A",
+          "Option B",
+          "Option C",
+          "Option D"
+        ]
+      },
+      "notes": ""
+    },
+    {
+      "id": "g6-tei-7",
+      "screenshotFile": "Screenshot 2026-05-06 at 5.39.30 PM.png",
+      "grade": 6,
+      "questionNumber": 20,
+      "itemType": "evidence-mapping",
+      "standardCategory": "comprehension",
+      "standardCode": "CC.1.2.6.B",
+      "instructions": "Move two pieces of evidence from the passage that best support the claim that many teens who text are too tired for school.",
+      "practiceHint": "(Practice Hint: Move your answers into the empty box. To change your answers, select the Clear All button.)",
+      "content": {
+        "passage": "Editorial: Teens are going to extremes with texting The Jersey Journal The national obsession with instantaneous communication is taking a toll on teens so severe that some experts are calling it a crisis. It’s not the phenomenon of cell-phoning or messaging while driving—both are illegal in New Jersey—but all-night texting that is leaving too many teens too tired for school. One 14-year-old New Jerseyan featured in a recent Star-Ledger story receives up to 10,000—10,000!—text messages a month. To accomplish that astounding yet not unusual feat, daily activities like bathing and sleeping are interrupted, thumbs pumping, to read and respond to an avalanche of messages. Doctors are beginning to recognize such obsession as addiction that is robbing children of sleep at the very time in their lives when they need it the most. A well-publicized study recently found that early high school start times deprive adolescents of sleep and force students to perform academically in the early morning, a time of day when they are at their worst. Many teens are making a tough situation worse by shortchanging themselves of the time they do have to sleep. The inevitable results are poor performance, a sort of sleepwalking through classes and the day in a fog.",
+        "sources": [
+          "\"To accomplish that astounding yet not unusual feat, daily activities like bathing and sleeping are interrupted...\"",
+          "\"...early high school start times deprive adolescents of sleep and force students to perform academically in the early morning, a time of day when they are at their worst...\"",
+          "\"The inevitable results are poor performance, a sort of sleepwalking through classes and the day in a fog...\"",
+          "\"...these kids are among the first to have this amazing, and lengthy, technology grafted at their fingertips; it’s not likely they will limit it for themselves...\"",
+          "\"A great many adults are also addicted to devices of the new technology...\""
+        ],
+        "targetLabel": "Evidence to Support Claim"
+      },
+      "notes": ""
+    },
+    {
+      "id": "g7-tei-1",
+      "screenshotFile": "Screenshot 2026-05-06 at 5.46.40 PM.png",
+      "grade": 7,
+      "questionNumber": 5,
+      "itemType": "inline-dropdown",
+      "standardCategory": "conventions",
+      "standardCode": "CC.1.4.7.F",
+      "instructions": "Read the paragraph. Select the word from each drop-down list that best completes each sentence.",
+      "practiceHint": "Use the Pointer tool to open each drop-down list and select your answers.",
+      "content": {
+        "paragraph": "(1) Everybody (this includes sixth, seventh, and eighth graders) [ ] going to hear Professor McGregor speak about his research. (2) Facts about Science for Non-Scientists is the book that he wrote. (3) Neither the science teachers [ ] their students have read the book yet. (4) By next week, someone from each of the three grades [ ] to be prepared to ask an interesting question about the topic.",
+        "dropdownOptions": [
+          "is, are",
+          "nor, or",
+          "need, needs"
+        ]
+      },
+      "notes": ""
+    },
+    {
+      "id": "g7-tei-2",
+      "screenshotFile": "Screenshot 2026-05-06 at 5.46.51 PM.png",
+      "grade": 7,
+      "questionNumber": 6,
+      "itemType": "hot-text-sentence",
+      "standardCategory": "writing",
+      "standardCode": "CC.1.4.7.E",
+      "instructions": "Read the paragraph. Then select the sentence that has a formal style.",
+      "practiceHint": "(Practice Hint: When you select a sentence below, it will become highlighted. Use the Clear All button if you want to remove the highlighting.)",
+      "content": {
+        "paragraph": "(1) In the central area of Chile is a long river valley. (2) People who visit there are just really amazed by the really pretty views. (3) Some people stop by the lakes to kick back or relax. (4) Others hang out in the amazing forests."
+      },
+      "notes": ""
+    },
+    {
+      "id": "g7-tei-3",
+      "screenshotFile": "Screenshot 2026-05-06 at 5.47.00 PM.png",
+      "grade": 7,
+      "questionNumber": 7,
+      "itemType": "drag-drop-table",
+      "standardCategory": "writing",
+      "standardCode": "CC.1.4.7.X",
+      "instructions": "Read the sentence from a student’s story. The student decided to add the phrase “following the recipe” to the sentence. Move the best updated version of the sentence into the table.",
+      "practiceHint": "Move your answer into the table. To change your answer, either move a new answer into the table or select the Clear All button.",
+      "content": {
+        "sources": [
+          "The kitchen began to smell good as Joe, following the recipe, steamed rice and tossed cut-up vegetables into a frying pan.",
+          "The kitchen began to smell good as Joe steamed rice and tossed cut-up vegetables into a frying pan, following the recipe.",
+          "Following the recipe, the kitchen began to smell good as Joe steamed rice and tossed cut-up vegetables into a frying pan.",
+          "The kitchen, following the recipe, began to smell good as Joe steamed rice and tossed cut-up vegetables into a frying pan."
+        ],
+        "targetLabel": "Revised Sentence"
+      },
+      "notes": ""
+    },
+    {
+      "id": "g7-tei-4",
+      "screenshotFile": "Screenshot 2026-05-06 at 5.47.07 PM.png",
+      "grade": 7,
+      "questionNumber": 8,
+      "itemType": "drag-drop-order",
+      "standardCategory": "conventions",
+      "standardCode": "CC.1.4.7.F",
+      "instructions": "Move each em dash onto the lines to correctly set off nonrestrictive elements.",
+      "practiceHint": "Move each em dash onto the lines. To change your answers either move the em dashes onto different lines or select the Clear All button.",
+      "content": {
+        "sentence": "My three favorite___classes___Math, Science, and Art___are located___in the same part___of the school building.",
+        "sources": [
+          "—",
+          "—"
+        ]
+      },
+      "notes": ""
+    },
+    {
+      "id": "g7-tei-5",
+      "screenshotFile": "Screenshot 2026-05-06 at 5.47.26 PM.png",
+      "grade": 7,
+      "questionNumber": 11,
+      "itemType": "drag-drop-order",
+      "standardCategory": "comprehension",
+      "standardCode": "CC.1.3.7.B",
+      "instructions": "Move sentences from the event options onto the blank lines to provide the best summary of the passage. You will not use all of the sentences.",
+      "practiceHint": "(Practice Hint: Select the image below to view the question. Move your answers into the empty boxes. To change your answers, either move a new answer onto the box or select the Clear All button.)",
+      "content": {
+        "passage": "Nail Soup a folktale from Sweden There was once a man who went plodding his way through a forest. The distance between the houses was so great that he had little hope of finding a shelter before the night set in. But all of a sudden he saw some lights between the trees. He then discovered a cottage, where there was a fire burning on the hearth. How nice it would be to roast one’s self before that fire, and to get a bite of something, he thought, and so he dragged himself towards the cottage. Just then a woman came toward him. “Good evening, and well met!” said the man. “Good evening,” said the woman. “Where do you come from?” “South of the sun and east of the moon,” said the man, “and now I am on the way home again, for I have been all over the world with the exception of this parish,” he said.",
+        "sources": [
+          "A hungry and tired man was wandering through the forest.",
+          "The man kindly suggested a way to provide them both with a meal.",
+          "The man was determined, so woman finally allowed him to sleep on the floor.",
+          "The woman was in a good mood after learning something useful from the man.",
+          "Some ingredients were provided and added to the pot after each discussion.",
+          "She brought out her food from her cupboard and set the table fit for a king.",
+          "He encountered a woman who was greedy and always complaining."
+        ],
+        "targetLabel": "Order"
+      },
+      "notes": ""
+    },
+    {
+      "id": "g7-tei-6",
+      "screenshotFile": "Screenshot 2026-05-06 at 5.47.37 PM.png",
+      "grade": 7,
+      "questionNumber": 14,
+      "itemType": "drag-drop-table",
+      "standardCategory": "comprehension",
+      "standardCode": "CC.1.3.7.A",
+      "instructions": "Select a box in each row to show whether the sentence describes “Nail Soup,” “The Poem of Stone Soup,” or both. Each column will be used only once.",
+      "practiceHint": "(Practice Hint: Select the boxes in the table to add check marks. To remove a check mark, select it again. To clear the table, select Clear All.)",
+      "content": {
+        "passage": "Nail Soup a folktale from Sweden There was once a man who went plodding his way through a forest. The distance between the houses was so great that he had little hope of finding a shelter before the night set in. But all of a sudden he saw some lights between the trees. He then discovered a cottage, where there was a fire burning on the hearth. How nice it would be to roast one’s self before that fire, and to get a bite of something, he thought, and so he dragged himself towards the cottage. Just then a woman came toward him. “Good evening, and well met!” said the man. “Good evening,” said the woman. “Where do you come from?” “South of the sun and east of the moon,” said the man, “and now I am on the way home again, for I have been all over the world with the exception of this parish,” he said. “You must be a great traveler, then,” said the woman. “What may be your business here?”",
+        "sources": [
+          "Ingredients are easily offered up to make soup.",
+          "Stinginess and greed are present at times.",
+          "Soup is made by the use of an unusual ingredient."
+        ],
+        "targetLabel": "“Nail Soup”",
+        "choices": [
+          "“The Poem of Stone Soup”",
+          "Both"
+        ]
+      },
+      "notes": ""
+    },
+    {
+      "id": "g7-tei-7",
+      "screenshotFile": "Screenshot 2026-05-06 at 5.47.53 PM.png",
+      "grade": 7,
+      "questionNumber": 16,
+      "itemType": "other",
+      "standardCategory": "comprehension",
+      "standardCode": "CC.1.2.7.B",
+      "instructions": "Read paragraph 3. How does the first sentence in paragraph 3 connect to the other details provided in the paragraph?",
+      "practiceHint": "Select to Enlarge to make the answer options larger.",
+      "content": {
+        "passage": "Editorial: Teens are going to extremes with texting The Jersey Journal The national obsession with instantaneous communication is taking a toll on teens so severe that some experts are calling it a crisis. It’s not the phenomenon of cell-phoning or messaging while driving—both are illegal in New Jersey—but all-night texting that is leaving too many teens too tired for school. One 14-year-old New Jerseyan featured in a recent Star-Ledger story receives up to 10,000—10,000!—text messages a month. To accomplish that astounding yet not unusual feat, daily activities like bathing and sleeping are interrupted, thumbs pumping, to read and respond to an avalanche of messages. Doctors are beginning to recognize such obsession as addiction that is robbing children of sleep at the very time in their lives when they need it the most. A well-publicized study recently found that early high school start times deprive adolescents of sleep and force students to perform academically in the early morning, a time of day when they are at their worst. Many teens are making a tough situation worse by shortchanging themselves of the time they do have to sleep. The impact on results are poor performance.",
+        "choices": [
+          "Option A",
+          "Option B",
+          "Option C",
+          "Option D"
+        ]
+      },
+      "notes": ""
+    },
+    {
+      "id": "g7-tei-8",
+      "screenshotFile": "Screenshot 2026-05-06 at 5.48.09 PM.png",
+      "grade": 7,
+      "questionNumber": 20,
+      "itemType": "evidence-mapping",
+      "standardCategory": "comprehension",
+      "standardCode": "CC.1.3.7.B",
+      "instructions": "Move two pieces of evidence from the passage that best support the claim that many teens who text are too tired for school.",
+      "practiceHint": "Move your answers into the empty box. To change your answers, select the Clear All button.",
+      "content": {
+        "passage": "Editorial: Teens are going to extremes with texting The Jersey Journal The national obsession with instantaneous communication is taking a toll on teens so severe that some experts are calling it a crisis. It’s not the phenomenon of cell-phoning or messaging while driving—both are illegal in New Jersey—but all-night texting that is leaving too many teens too tired for school. One 14-year-old New Jerseyan featured in a recent Star-Ledger story receives up to 10,000—10,000!—text messages a month. To accomplish that astounding yet not unusual feat, daily activities like bathing and sleeping are interrupted, thumbs pumping, to read and respond to an avalanche of messages. Doctors are beginning to recognize such obsession as addiction that is robbing children of sleep at the very time in their lives when they need it the most. A well-publicized study recently found that early high school start times deprive adolescents of sleep and force students to perform academically in the early morning, a time of day when they are at their worst. Many teens are making a tough situation worse by shortchanging themselves of the time they do have to sleep. The inevitable results are poor performance, a sort of sleepwalking through classes and the day in a fog.",
+        "sources": [
+          "\"To accomplish that astounding yet not unusual feat, daily activities like bathing and sleeping are interrupted...\"",
+          "\"...early high school start times deprive adolescents of sleep and force students to perform academically in the early morning, a time of day when they are at their worst.\"",
+          "\"The inevitable results are poor performance, a sort of sleepwalking through classes and the day in a fog.\"",
+          "\"...teens who are among the first to have this amazing, and tempting, technology that is their fingertips; it’s not likely they will text less for themselves.\"",
+          "\"A great many adults are also addicted to devices of the new technology.\""
+        ],
+        "targetLabel": "Evidence to Support Claim"
+      },
+      "notes": ""
+    },
+    {
+      "id": "g6-tei-8",
+      "screenshotFile": "Screenshot 2026-05-06 at 6.00.00 PM.png",
+      "grade": 6,
+      "questionNumber": 6,
+      "itemType": "hot-text-sentence",
+      "standardCategory": "comprehension",
+      "standardCode": "CC.1.2.6.G",
+      "instructions": "Read the paragraph. Select the sentence that is not complete.",
+      "practiceHint": "When you select a sentence below, it will become highlighted. Use the Clear All button if you want to remove the highlighting.",
+      "content": {
+        "paragraph": "(1) Collecting rocks has been one of my hobbies since I was very young. (2) Of the three types of rock, my favorite is igneous rock, which is formed as lava cools and changes from a liquid to a solid. (3) Unlike sedimentary rock, which forms when a layer of small fragments, or sediment, are packed together by pressure.(4) Sedimentary rocks often have interesting layers, or bands, that form patterns throughout the rock.(5) Still, I prefer the glossy quality that many igneous rocks have."
+      },
+      "notes": ""
+    },
+    {
+      "id": "g7-tei-9",
+      "screenshotFile": "Screenshot 2026-05-06 at 6.00.07 PM.png",
+      "grade": 7,
+      "questionNumber": 7,
+      "itemType": "drag-drop-order",
+      "standardCategory": "conventions",
+      "standardCode": "CC.1.4.7.F",
+      "instructions": "Read the sentence. Move the correct punctuation marks onto the two blank lines in the sentence to correctly indicate a pause or a break.",
+      "practiceHint": "Move your choices onto the lines. To change just one answer, move the answer off the line, and then move a new answer onto the line. To change all of your answers and start again, select the Clear All button.",
+      "content": {
+        "sentence": "“Let me begin by saying that _____ and if you have any questions _____ please don’t hesitate to ask—I was inspired by a poem I had read a couple of years before.”",
+        "sources": [
+          ",",
+          "—",
+          "..."
+        ]
+      },
+      "notes": ""
+    },
+    {
+      "id": "g8-tei-1",
+      "screenshotFile": "Screenshot 2026-05-06 at 6.00.16 PM.png",
+      "grade": 8,
+      "questionNumber": 8,
+      "itemType": "inline-dropdown",
+      "standardCategory": "comprehension",
+      "standardCode": "CC.1.2.8.G",
+      "instructions": "Read the paragraph. Select the word from each drop-down list that best completes each sentence.",
+      "practiceHint": "Use the Pointer tool to open each drop-down list and select your answers.",
+      "content": {
+        "paragraph": "(1) The student council itself, concerned that older students hardly know the younger students in the school, [ ] to start a program called Reading Buddies. (2) Once a week, the students in the seventh and eighth grades [ ] an opportunity to spend time reading with a kindergartner or first grader. (3) Members of the student council [ ] that the program will promote a stronger school community. (4) No one has to be a Reading Buddy, but the program will be more successful if the majority of students participate.",
+        "dropdownOptions": [
+          "decided",
+          "decides",
+          "deciding",
+          "are given",
+          "is given",
+          "give",
+          "believe",
+          "believes",
+          "believing"
+        ]
+      },
+      "notes": ""
+    },
+    {
+      "id": "g3-tei-10",
+      "screenshotFile": "Screenshot 2026-05-06 at 6.06.49 PM.png",
+      "grade": 3,
+      "questionNumber": 5,
+      "itemType": "multi-select",
+      "standardCategory": "comprehension",
+      "standardCode": "CC.1.2.3.G",
+      "instructions": "Put a check mark on the blank line next to the three notes that best support the topic of the student’s paragraph.",
+      "practiceHint": "(Practice Hint: Use the Pointer tool to make a check mark next to each note you wish to select.)",
+      "content": {
+        "choices": [
+          "tastes good",
+          "has vitamin C",
+          "need a pitcher",
+          "use cold water",
+          "stir with a spoon",
+          "made from citrus fruit"
+        ]
+      },
+      "notes": ""
+    },
+    {
+      "id": "g6-tei-9",
+      "screenshotFile": "Screenshot 2026-05-06 at 6.06.59 PM.png",
+      "grade": 6,
+      "questionNumber": 6,
+      "itemType": "inline-dropdown",
+      "standardCategory": "conventions",
+      "instructions": "Use the drop-down menus to choose the correct spelling of the words needed to complete the sentence.",
+      "practiceHint": "Use the Pointer tool to open each drop-down menu and select your answers from the options presented.",
+      "content": {
+        "sentence": "When we ___ at the field, we were ___ by the rest of the team."
+      },
+      "notes": ""
+    },
+    {
+      "id": "g5-tei-7",
+      "screenshotFile": "Screenshot 2026-05-06 at 6.07.50 PM.png",
+      "grade": 5,
+      "questionNumber": 11,
+      "itemType": "drag-drop-table",
+      "standardCategory": "comprehension",
+      "standardCode": "CC.1.3.5.B",
+      "instructions": "Select the check marks in the table to show whether an event is in “Imagine That,” “Meet My Friends,” or both.",
+      "practiceHint": "Use the Master Pointer tool to select the boxes you want to place check marks in. To erase a check mark once it is placed, click on it.",
+      "content": {
+        "passage": "Imagine That Eagerly, Jack helped his big sister set up their tent in the campground. It was Jack’s first camping adventure. Once the tent was proudly standing, they headed to the playground. Then they walked through the woods to the lake. Jack and his sister waded in the water and sailed some sticks. Finally, they returned to their tent. Everyone was tired. Dad got some sandwiches, and they ate from their car. “Why don’t we put our food in the tent?” asked Jack. “It might attract animals,” Dad said. They sat on a blanket to eat.",
+        "sources": [
+          "Someone must overcome a fear.",
+          "Someone tries to hide when afraid.",
+          "A brother and sister help each other.",
+          "A brother and sister go on an outdoor adventure.",
+          "A brother and sister spend time with some friends."
+        ],
+        "targetLabel": "Select to Respond"
+      },
+      "notes": ""
+    },
+    {
+      "id": "g3-tei-11",
+      "screenshotFile": "Screenshot 2026-05-06 at 6.08.40 PM.png",
+      "grade": 3,
+      "questionNumber": 13,
+      "itemType": "hot-text-sentence",
+      "standardCategory": "comprehension",
+      "standardCode": "CC.1.3.3.A",
+      "instructions": "Read the paragraphs from “The Legend of the Black Fish.” Then, choose two sentences that show a central message of the passage.",
+      "practiceHint": "Use the Masking tool to cover some of the information on the screen.",
+      "content": {
+        "passage": "Long ago, a young man named Natsilane lived on the Pacific Northwest Coast. Natsilane had many talents, including woodcarving. Some people were jealous of Natsilane’s talents because they thought he would be chosen as the next chief. Natsilane could carve just about anything out of any type of material including rock and wood. His favorite material to work with was wood, and his wood carvings were of people, plants, and animals. Animals were his favorite to carve. He often went into the forest to observe animals so his carvings would be as realistic and lifelike as possible.",
+        "sources": [
+          "Natsilane healed the sea lion’s flipper, and the sea lion safely returned Natsilane home, just as promised.",
+          "After he returned home, Natsilane began carving a large black fish from wood. After he finished the carving, Natsilane released it into the water, wishing that it would always be helpful and friendly to people just as the sea lion had been to him. To Natsilane’s surprise, his carved black fish came to life!"
+        ]
+      },
+      "notes": ""
+    },
+    {
+      "id": "g3-tei-12",
+      "screenshotFile": "Screenshot 2026-05-06 at 6.10.04 PM.png",
+      "grade": 3,
+      "questionNumber": 13,
+      "itemType": "hot-text-sentence",
+      "standardCategory": "comprehension",
+      "standardCode": "CC.1.3.3.A",
+      "instructions": "Read the paragraphs from “The Legend of the Black Fish.” Then, choose two sentences that show a central message of the passage.",
+      "practiceHint": "(Practice Hint: Use the Pointer tool to choose two sentences from the paragraphs. When you choose a sentence, it will become highlighted. To change only one answer, choose it again, and the highlighting will disappear. To remove the highlighting from all of your answers, use the Clear All button.)",
+      "content": {
+        "passage": "Long ago, a young man named Natsilane lived on the Pacific Northwest Coast. Natsilane had many talents, including woodcarving. Some people were jealous of Natsilane’s talents because they thought he would be chosen as the next chief. Natsilane could carve just about anything out of any type of material including rock and wood. His favorite material to work with was wood, and his wood carvings were of people, plants, and animals. Animals were his favorite to carve. He often went into the forest to observe animals so his carvings would be as realistic and lifelike as possible.",
+        "sources": [
+          "Natsilane healed the sea lion’s flipper, and the sea lion safely returned Natsilane home, just as promised.",
+          "After he returned home, Natsilane began carving a large black fish from wood."
+        ]
+      },
+      "notes": ""
+    },
+    {
+      "id": "g7-tei-10",
+      "screenshotFile": "Screenshot 2026-05-06 at 6.12.28 PM.png",
+      "grade": 7,
+      "questionNumber": 5,
+      "itemType": "drag-drop-table",
+      "standardCategory": "comprehension",
+      "standardCode": "CC.1.2.7.B",
+      "instructions": "Jared is writing a report about how to choose a pet cat. Read the information he found on a reliable website. Then complete the table by putting check marks in the appropriate boxes to match each type of cat with its characteristics.",
+      "practiceHint": "(Practice Hint: To place a check mark, select a blank box in the table. Select all appropriate boxes in each column. To erase a check mark you have placed, select it. To erase all check marks and start again, select the Clear All button.)",
+      "content": {
+        "passage": "Sphynx cats are an interesting breed. They look friendly and are quite curious and playful. They have huge ears and almost no hair, which makes the wrinkled skin on their heads and necks quite visible. Cornish rex cats also have an unusual appearance. Their heads are egg-shaped, and they have long legs and large ears. They have soft, wavy hair which they shed less than one might expect. These cats are extremely active, especially at their owners’ dinner time. Another breed of cat is the Devon rex. This is a fairly new breed and is good for busy families, since they are active, affectionate, and attentive, yet behave when their owners are away. These cats do not shed much of their wavy hair. They have very large ears and eyes.",
+        "sources": [
+          "Wrinkled skin",
+          "Wavy hair",
+          "Large ears"
+        ],
+        "targetLabel": "Sphynx, Cornish Rex, Devon Rex"
+      },
+      "notes": ""
+    },
+    {
+      "id": "g5-tei-8",
+      "screenshotFile": "Screenshot 2026-05-06 at 6.12.44 PM.png",
+      "grade": 5,
+      "questionNumber": 5,
+      "itemType": "drag-drop-table",
+      "standardCategory": "comprehension",
+      "standardCode": "CC.1.2.5.B",
+      "instructions": "Jared is writing a report about how to choose a pet cat. Read the information he found on a reliable website. Then complete the table by putting check marks in the appropriate boxes to match each type of cat with its characteristics.",
+      "practiceHint": "(Practice Hint: To place a check mark, select a blank box in the table. Select all appropriate boxes in each column. To erase a check mark you have placed, select it. To erase all check marks and start again, select the Clear All button.)",
+      "content": {
+        "passage": "Sphynx cats are an interesting breed. They look friendly and are quite curious and playful. They have huge ears and almost no hair, which makes the wrinkled skin on their heads and necks quite visible. Cornish rex cats also have an unusual appearance. Their heads are egg-shaped, and they have long legs and large ears. They have soft, wavy hair which they shed less than one might expect. These cats are extremely active, especially at their owners’ dinner time. Another breed of cat is the Devon rex. This is a fairly new breed and is good for busy families, since they are active, affectionate, and attentive, yet behave when their owners are away. These cats do not shed much of their wavy hair. They have very large ears and eyes.",
+        "sources": [
+          "Wrinkled skin",
+          "Wavy hair",
+          "Large ears"
+        ],
+        "targetLabel": "Sphynx, Cornish Rex, Devon Rex"
+      },
+      "notes": ""
+    },
+    {
+      "id": "g7-tei-11",
+      "screenshotFile": "Screenshot 2026-05-06 at 6.13.39 PM.png",
+      "grade": 7,
+      "questionNumber": 10,
+      "itemType": "drag-drop-order",
+      "standardCategory": "comprehension",
+      "standardCode": "CC.1.3.7.B",
+      "instructions": "Select two sentences from “An Amazing Day at the Aquarium” that show how the trip to the aquarium was educational for the narrator in some way. Drag and drop the answers.",
+      "practiceHint": "(Practice Hint: Select the image below to view the answer choices. Then select-and-drag your responses into the box. To change just one answer, select-and-drag the answer out of the box. To change both answers and start again, select the Clear All button.)",
+      "content": {
+        "passage": "An Amazing Day at the Aquarium I couldn’t believe what I was hearing: our class was going on a field trip to the City Aquarium! I had always wanted to visit a giant aquarium. Ever since I was little, I was interested in all things aquatic. I wanted to be a marine biologist, and since I had watched a documentary about how life in our oceans is in danger, I was even more interested. When the day of the field trip finally arrived, we all climbed aboard buses to ride downtown. After 30 minutes, the bus pulled up to a building and parked. I was so excited to learn more about the marine life. Once inside the aquarium, I found it to be even more fascinating than I had ever imagined. The first exhibit we went to featured sea life from the reefs in the Caribbean Sea. There were turtles, eels, and many other creatures were amazing, and the fish were so colorful. Then, we were off to see the glowing jellyfish. There were thousands of them. Some were tiny and others were huge. I learned that they aren’t really fish. I also found out that I never wanted to get stung by one. There were other exhibits too. The reptile exhibit had alligators and giant snakes. I thought they were very interesting, especially their scaly skins. Then, we finally went to the mammal exhibit to see the whales, dolphins, sea otters, and sea lions.",
+        "sources": [
+          "“I had always wanted to visit a giant aquarium.”",
+          "“The first exhibit we went to featured sea life from the reefs in the Caribbean Sea.”",
+          "“I learned that they aren’t really fish.”",
+          "“I learned so much more about marine life at the aquarium.”",
+          "“I also found out that I never wanted to get stung by one.”"
+        ],
+        "targetLabel": "Select to Respond"
+      },
+      "notes": ""
+    },
+    {
+      "id": "g7-tei-12",
+      "screenshotFile": "Screenshot 2026-05-06 at 6.13.48 PM.png",
+      "grade": 7,
+      "questionNumber": 11,
+      "itemType": "hot-text-sentence",
+      "standardCategory": "comprehension",
+      "standardCode": "CC.1.2.7.B",
+      "instructions": "Read the summary of “An Amazing Day at the Aquarium.” Then select the one sentence that needs to be added to make the summary complete.",
+      "practiceHint": "(Practice Hint: When you select a sentence below, the sentence will become highlighted. To change your answer, select the Clear All button or select a different sentence.)",
+      "content": {
+        "passage": "An Amazing Day at the Aquarium I couldn’t believe what I was hearing: our class was going on a field trip to the City Aquarium! I had always wanted to visit a giant aquarium. Even when I was little, I was interested in all things aquatic. I had dreamed of being a marine biologist, and since I had watched a show on how the sea life in our oceans is in danger, I was even more interested. When the day of the field trip finally arrived, our class climbed aboard buses to ride downtown. After 30 minutes, the bus pulled up to a building and parked. I was so excited. I couldn’t wait to see the marine life. Once inside the aquarium, I found it was more fascinating than I had ever imagined. The first exhibit we went to featured sea life from the reefs in the Caribbean Sea. There were turtles, eels, and even parrot fish. The creatures were amazing, and the fish were vibrant! Then, we were off to see the glowing jellyfish. There were thousands of them. Some were tiny and others gigantic. I learned that they aren’t really fish. I also found out that I never wanted to get stung by one. There were other exhibits too. The reptile exhibit included alligators and giant snakes. I thought they were very interesting because of their scaly skins. Then, we finally went to see my favorite exhibit: the whales, dolphins, sea otters, and sea lions.",
+        "sources": [
+          "There are many jellyfish to see at the aquarium.",
+          "The class visits many of the exhibits, and the narrator sees some interesting marine animals.",
+          "The narrator watches a show that describes why some of the wildlife found in the oceans are in danger.",
+          "The jellyfish at the aquarium are very pretty."
+        ]
+      },
+      "notes": ""
+    },
+    {
+      "id": "g4-tei-8",
+      "screenshotFile": "Screenshot 2026-05-06 at 6.23.26 PM.png",
+      "grade": 4,
+      "questionNumber": 5,
+      "itemType": "drag-drop-order",
+      "standardCategory": "writing",
+      "standardCode": "CC.1.4.4.S",
+      "instructions": "A student wrote a draft of a story. Arrange the events in the story in the sequence that makes the most sense.",
+      "practiceHint": "Read all the events first. To move an event, use the Pointer tool to select-and-drag it to the correct position in the sequence.",
+      "content": {
+        "sources": [
+          "That is when a great idea came to me, so I immediately squeezed globs of different shades of green onto my tray.",
+          "After dinner, I went to my room, where my art notebook was open to a page with a few rough, black lines.",
+          "For the third night in a row, I sat down in front of the mostly blank piece of paper and searched my mind for creative ideas.",
+          "Feeling confident and excited, I dabbed my brush into the paint and, along the dark lines, started making broad strokes in the shape of a pine tree.",
+          "I leaned forward and put my head in my hands, and the green carpet caught my attention."
+        ]
+      },
+      "notes": ""
+    },
+    {
+      "id": "g4-tei-9",
+      "screenshotFile": "Screenshot 2026-05-06 at 6.23.42 PM.png",
+      "grade": 4,
+      "questionNumber": 6,
+      "itemType": "drag-drop-table",
+      "standardCategory": "writing",
+      "standardCode": "CC.1.4.4.Q",
+      "instructions": "A student is writing a report about the papermaking process. Complete the table by putting a check mark next to each sentence to show whether the style of the sentence is formal or informal.",
+      "practiceHint": "To place a check mark, use the Pointer tool to select an empty box in the table. To erase a check mark you have placed, select it. To erase all the check marks you have placed and start again, select the Clear All button.",
+      "content": {
+        "sources": [
+          "It is kind of wild that a thin, weak piece of paper comes from really, really big, strong trees.",
+          "To be made into paper, wood must be changed into a liquid substance called pulp.",
+          "Pulp is created by grinding wood chips or using chemicals to break wood into tiny pieces.",
+          "When pulp is spread out super thin, all the water gets kind of pressed out until you’ve got paper."
+        ],
+        "targetLabel": "Formal Style, Informal Style"
+      },
+      "notes": ""
+    },
+    {
+      "id": "g4-tei-10",
+      "screenshotFile": "Screenshot 2026-05-06 at 6.23.49 PM.png",
+      "grade": 4,
+      "questionNumber": 6,
+      "itemType": "drag-drop-table",
+      "standardCategory": "writing",
+      "standardCode": "CC.1.4.4.Q",
+      "instructions": "A student is writing a report about the papermaking process. Complete the table by putting a check mark next to each sentence to show whether the style of the sentence is formal or informal.",
+      "practiceHint": "To place a check mark, use the Pointer tool to select an empty box in the table. To erase a check mark you have placed, select it. To erase all the check marks you have placed and start again, select the Clear All button.",
+      "content": {
+        "sources": [
+          "It is kind of wild that a thin, weak piece of paper comes from really, really big, strong trees.",
+          "To be made into paper, wood must be changed into a liquid substance called pulp.",
+          "Pulp is created by grinding wood chips or using chemicals to break wood into tiny pieces.",
+          "When pulp is spread out super thin, all the water gets kind of pressed out until you’ve got paper."
+        ],
+        "targetLabel": "Formal Style / Informal Style"
+      },
+      "correctAnswer": {},
+      "notes": ""
+    },
+    {
+      "id": "g4-tei-11",
+      "screenshotFile": "Screenshot 2026-05-06 at 6.24.02 PM.png",
+      "grade": 4,
+      "questionNumber": 7,
+      "itemType": "inline-dropdown",
+      "standardCategory": "conventions",
+      "standardCode": "CC.1.4.4.F",
+      "instructions": "Read the sentence. Choose the correct conjunctions from the drop-down menus.",
+      "practiceHint": "Use the Pointer tool to select each drop-down menu and to choose your answers from the options presented.",
+      "content": {
+        "sentence": "While I like playing the guitar for my friends, I like [either] taking lessons on Saturday mornings when all my friends are still sleeping [but also] practicing for a half hour every single day of the week.",
+        "dropdownOptions": [
+          "either",
+          "but also"
+        ]
+      },
+      "notes": ""
+    }
+  ]
+}
