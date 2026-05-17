@@ -9,6 +9,9 @@ type ResourceLike = {
   url: string;
   provider: string;
   description?: string | null;
+  tier?: string | null;
+  belowGradeLevel?: boolean;
+  aboveGradeLevel?: boolean;
 };
 
 export async function loadResourcesByStandard(gradeLevel: number, items: Pick<LearningPathItemInput, "standardCode">[]) {
@@ -212,6 +215,8 @@ function lessonFromBuild(existing: any, lessonBuild: LearningLessonBuild, userId
     resourceDescription: lessonBuild.resourceDescription,
     heroResourceLinkId: lessonBuild.heroResourceLinkId || null,
     heroResourceLink: lessonBuild.heroResource || existing.heroResourceLink,
+    scaffoldResources: lessonBuild.scaffoldResources || [],
+    stretchResources: lessonBuild.stretchResources || [],
     steps: (lessonBuild.steps || []).map((step) => ({
       id: `${existing.id}-step-${step.order}-fallback`,
       lessonId: existing.id,

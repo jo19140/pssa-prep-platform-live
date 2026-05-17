@@ -32,7 +32,7 @@ export async function GET() {
           questAttempts: { where: { userId: (session.user as any).id }, orderBy: { createdAt: "desc" }, take: 3 },
           items: { orderBy: { order: "asc" } },
           steps: { orderBy: { order: "asc" } },
-          heroResourceLink: { select: { title: true, url: true, provider: true, description: true } },
+          heroResourceLink: { select: { title: true, url: true, provider: true, description: true, tier: true, belowGradeLevel: true, aboveGradeLevel: true } },
         },
       },
       session: { include: { assessment: { select: { title: true, grade: true } }, responses: true } },
@@ -48,7 +48,7 @@ export async function GET() {
           questAttempts: { where: { userId: (session.user as any).id }, orderBy: { createdAt: "desc" }, take: 3 },
           items: { orderBy: { order: "asc" } },
           steps: { orderBy: { order: "asc" } },
-          heroResourceLink: { select: { title: true, url: true, provider: true, description: true } },
+          heroResourceLink: { select: { title: true, url: true, provider: true, description: true, tier: true, belowGradeLevel: true, aboveGradeLevel: true } },
           learningPath: { select: { session: { select: { userId: true } } } },
         },
       },
@@ -112,8 +112,26 @@ export async function GET() {
       submittedAt: assignment.attempts[0]?.createdAt ?? null,
       latestAttempt: assignment.attempts[0] || null,
     })),
-    latestLearningPath: mergedLearningPath,
+    latestLearningPath: withCrossGradeResources(mergedLearningPath),
   });
+}
+
+function withCrossGradeResources(learningPath: any) {
+  if (!learningPath?.lessons?.length) return learningPath;
+  return {
+    ...learningPath,
+    lessons: learningPath.lessons.map((lesson: any) => {
+      const sourcePayload = lesson.sourcePayload && typeof lesson.sourcePayload === "object" ? lesson.sourcePayload : {};
+      const crossGradeResources = (sourcePayload as any).crossGradeResources && typeof (sourcePayload as any).crossGradeResources === "object"
+        ? (sourcePayload as any).crossGradeResources
+        : {};
+      return {
+        ...lesson,
+        scaffoldResources: lesson.scaffoldResources || crossGradeResources.scaffold || [],
+        stretchResources: lesson.stretchResources || crossGradeResources.stretch || [],
+      };
+    }),
+  };
 }
 
 function mergeLessons(primaryLessons: any[], libraryLessons: any[]) {

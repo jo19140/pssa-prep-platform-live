@@ -47,7 +47,7 @@ export async function GET(req: Request) {
             progress: { where: { userId: (session.user as any).id } },
             items: { orderBy: { order: "asc" as const } },
             steps: { orderBy: { order: "asc" as const } },
-            heroResourceLink: { select: { title: true, url: true, provider: true, description: true } },
+            heroResourceLink: { select: { title: true, url: true, provider: true, description: true, tier: true, belowGradeLevel: true, aboveGradeLevel: true } },
           },
         },
         session: { include: { responses: true, assessment: true } },
@@ -84,5 +84,23 @@ export async function GET(req: Request) {
   const learningPath = hydratedSession.learningPath
     ? await applyStudentLessonReviewGate(hydratedSession.learningPath, (session.user as any).id)
     : null;
-  return NextResponse.json({ sessionId: activeSession.id, assessment: hydratedSession.assessment, currentQuestionNo: activeSession.currentQuestionNo, submittedAt: activeSession.submittedAt, responses: hydratedSession.responses, report: hydratedSession.report, learningPath, questions, passages: hydratedSession.assessment.passages, standards, assignmentType: assignment.assignmentType || "FULL" });
+  return NextResponse.json({ sessionId: activeSession.id, assessment: hydratedSession.assessment, currentQuestionNo: activeSession.currentQuestionNo, submittedAt: activeSession.submittedAt, responses: hydratedSession.responses, report: hydratedSession.report, learningPath: withCrossGradeResources(learningPath), questions, passages: hydratedSession.assessment.passages, standards, assignmentType: assignment.assignmentType || "FULL" });
+}
+
+function withCrossGradeResources(learningPath: any) {
+  if (!learningPath?.lessons?.length) return learningPath;
+  return {
+    ...learningPath,
+    lessons: learningPath.lessons.map((lesson: any) => {
+      const sourcePayload = lesson.sourcePayload && typeof lesson.sourcePayload === "object" ? lesson.sourcePayload : {};
+      const crossGradeResources = (sourcePayload as any).crossGradeResources && typeof (sourcePayload as any).crossGradeResources === "object"
+        ? (sourcePayload as any).crossGradeResources
+        : {};
+      return {
+        ...lesson,
+        scaffoldResources: lesson.scaffoldResources || crossGradeResources.scaffold || [],
+        stretchResources: lesson.stretchResources || crossGradeResources.stretch || [],
+      };
+    }),
+  };
 }

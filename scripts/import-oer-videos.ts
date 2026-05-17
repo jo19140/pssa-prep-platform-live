@@ -122,6 +122,9 @@ async function processVideo(video: VideoRow): Promise<{ created: number; updated
   const provider = (video.channel_name || video.platform || "YouTube").trim();
   const skill = (video.skill_name || video.skill_id || "").trim() || "General";
   const description = buildDescription(video);
+  const tier = typeof video.tier === "string" && video.tier.trim() ? video.tier.trim() : null;
+  const belowGradeLevel = tier === "foundational";
+  const aboveGradeLevel = tier === "advanced";
 
   let created = 0;
   let updated = 0;
@@ -133,12 +136,12 @@ async function processVideo(video: VideoRow): Promise<{ created: number; updated
     if (existing) {
       await db.resourceLink.update({
         where: { id: existing.id },
-        data: { skill, title, provider, description },
+        data: { skill, title, provider, description, tier, belowGradeLevel, aboveGradeLevel },
       });
       updated += 1;
     } else {
       await db.resourceLink.create({
-        data: { gradeLevel, standardCode, skill, title, url, provider, description },
+        data: { gradeLevel, standardCode, skill, title, url, provider, description, tier, belowGradeLevel, aboveGradeLevel },
       });
       created += 1;
     }

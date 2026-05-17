@@ -15,6 +15,9 @@ type ResourceLike = {
   url: string;
   provider: string;
   description?: string | null;
+  tier?: string | null;
+  belowGradeLevel?: boolean;
+  aboveGradeLevel?: boolean;
 };
 
 type ResourceMatch = ResourceLike & {
@@ -52,6 +55,8 @@ export type LearningLessonBuild = {
   resourceDescription?: string | null;
   heroResourceLinkId?: string | null;
   heroResource?: ResourceLike | null;
+  scaffoldResources?: ResourceLike[];
+  stretchResources?: ResourceLike[];
   steps?: LessonStepBuild[];
   guidedPractice: PracticeQuestion[];
   independentPractice: PracticeQuestion[];
@@ -274,11 +279,26 @@ export async function buildLearningLessons({
         aiStatus: "COMPLETED" as const,
       };
       const critiqued = await selfCritiqueLesson(openai, merged, lesson, generationStartedAt);
-      const heroResource = await findHeroResourceForLesson(lesson);
+      const [heroResource, scaffoldResources, stretchResources] = await Promise.all([
+        findHeroResourceForLesson(lesson),
+        findScaffoldResourcesForLesson(lesson),
+        findStretchResourcesForLesson(lesson),
+      ]);
+      const scaffoldPayload = scaffoldResources.map(resourceFromDb);
+      const stretchPayload = stretchResources.map(resourceFromDb);
       const withQuality = withQualityPayload({
         ...critiqued,
         heroResourceLinkId: heroResource?.id || null,
         heroResource: heroResource ? resourceFromDb(heroResource) : null,
+        scaffoldResources: scaffoldPayload,
+        stretchResources: stretchPayload,
+        sourcePayload: {
+          ...critiqued.sourcePayload,
+          crossGradeResources: {
+            scaffold: scaffoldPayload,
+            stretch: stretchPayload,
+          },
+        },
         items: buildLessonSections(critiqued),
       });
       const moderated = await moderateLessonContent(openai, withQuality, lesson);
@@ -329,7 +349,7 @@ export function resourceKey(gradeLevel: number, standardCode: string, skill: str
 async function findHeroResourceForLesson(lesson: Pick<LearningLessonBuild, "gradeLevel" | "standardCode" | "skill">): Promise<ResourceMatch | null> {
   const skillTokens = skillKeywordTokens(lesson.skill);
   const candidates = await db.resourceLink.findMany({
-    where: { standardCode: lesson.standardCode },
+    where: { standardCode: lesson.standardCode, belowGradeLevel: false, aboveGradeLevel: false },
     orderBy: [{ gradeLevel: "desc" }, { updatedAt: "desc" }],
     take: 50,
   });
@@ -339,6 +359,8 @@ async function findHeroResourceForLesson(lesson: Pick<LearningLessonBuild, "grad
     ? await db.resourceLink.findMany({
         where: {
           gradeLevel: lesson.gradeLevel,
+          belowGradeLevel: false,
+          aboveGradeLevel: false,
           OR: skillTokens.map((token) => ({ skill: { contains: token, mode: "insensitive" as const } })),
         },
         orderBy: [{ updatedAt: "desc" }],
@@ -357,6 +379,43 @@ async function findHeroResourceForLesson(lesson: Pick<LearningLessonBuild, "grad
     return null;
   }
   return match;
+}
+
+export async function findScaffoldResourcesForLesson(
+  lesson: Pick<LearningLessonBuild, "gradeLevel" | "standardCode" | "skill">,
+  limit = 3,
+): Promise<ResourceMatch[]> {
+  return findOutOfGradeResources(lesson, "below", limit);
+}
+
+export async function findStretchResourcesForLesson(
+  lesson: Pick<LearningLessonBuild, "gradeLevel" | "standardCode" | "skill">,
+  limit = 3,
+): Promise<ResourceMatch[]> {
+  return findOutOfGradeResources(lesson, "above", limit);
+}
+
+async function findOutOfGradeResources(
+  lesson: Pick<LearningLessonBuild, "gradeLevel" | "standardCode" | "skill">,
+  direction: "below" | "above",
+  limit: number,
+): Promise<ResourceMatch[]> {
+  const skillTokens = skillKeywordTokens(lesson.skill);
+  if (!skillTokens.length) return [];
+  const resources = await db.resourceLink.findMany({
+    where: {
+      belowGradeLevel: direction === "below",
+      aboveGradeLevel: direction === "above",
+      gradeLevel: direction === "below" ? { lt: lesson.gradeLevel } : { gt: lesson.gradeLevel },
+      OR: [
+        { standardCode: lesson.standardCode },
+        ...skillTokens.map((token) => ({ skill: { contains: token, mode: "insensitive" as const } })),
+      ],
+    },
+    orderBy: [{ gradeLevel: direction === "below" ? "desc" : "asc" }, { updatedAt: "desc" }],
+    take: Math.max(limit * 3, limit),
+  });
+  return resources.filter((resource) => hasSkillKeywordOverlap(resource.skill, skillTokens)).slice(0, limit);
 }
 
 const HERO_SKILL_STOPWORDS = new Set([
@@ -403,6 +462,9 @@ function resourceFromDb(resource: ResourceMatch): ResourceLike {
     url: resource.url,
     provider: resource.provider,
     description: resource.description,
+    tier: resource.tier,
+    belowGradeLevel: resource.belowGradeLevel,
+    aboveGradeLevel: resource.aboveGradeLevel,
   };
 }
 
@@ -675,6 +737,8 @@ export function buildFallbackLesson({
     resourceDescription: resource?.description || RESOURCE_FALLBACK.description,
     heroResourceLinkId: null,
     heroResource: null,
+    scaffoldResources: [],
+    stretchResources: [],
     steps: buildDeterministicSteps({ skill: item.skill, gradeLevel, lessonExplanation, workedExample }),
     guidedPractice,
     independentPractice,
@@ -692,6 +756,10 @@ export function buildFallbackLesson({
       weakFormat,
       commonError: item.sourcePayload.commonError,
       librarySource,
+      crossGradeResources: {
+        scaffold: [],
+        stretch: [],
+      },
     },
   };
   return withQualityPayload({ ...lesson, items: buildLessonSections(lesson) });

@@ -662,6 +662,9 @@ model ResourceLink {
   url          String
   provider     String
   description  String?
+  tier         String?
+  belowGradeLevel Boolean @default(false)
+  aboveGradeLevel Boolean @default(false)
   createdById  String?
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
@@ -670,6 +673,8 @@ model ResourceLink {
   suggestions  ResourceSuggestion[]
 
   @@index([gradeLevel, standardCode])
+  @@index([belowGradeLevel, standardCode])
+  @@index([aboveGradeLevel, standardCode])
   @@index([skill])
 }
 

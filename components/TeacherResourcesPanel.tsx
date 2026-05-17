@@ -20,6 +20,7 @@ export function TeacherResourcesPanel() {
   const [form, setForm] = useState(initialForm);
   const [message, setMessage] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const [tierFilter, setTierFilter] = useState<"all" | "on_grade" | "below" | "above">("all");
 
   async function loadData() {
     setLoading(true);
@@ -33,13 +34,18 @@ export function TeacherResourcesPanel() {
 
   const resources = useMemo(() => {
     const teacherGrades = new Set((data.teacherGrades || []).map(Number));
-    return [...(data.resources || [])].sort((a: any, b: any) => {
+    return [...(data.resources || [])].filter((resource: any) => {
+      if (tierFilter === "below") return resource.belowGradeLevel;
+      if (tierFilter === "above") return resource.aboveGradeLevel;
+      if (tierFilter === "on_grade") return !resource.belowGradeLevel && !resource.aboveGradeLevel;
+      return true;
+    }).sort((a: any, b: any) => {
       const aMatch = a.gradeLevel != null && teacherGrades.has(Number(a.gradeLevel)) ? 0 : 1;
       const bMatch = b.gradeLevel != null && teacherGrades.has(Number(b.gradeLevel)) ? 0 : 1;
       if (aMatch !== bMatch) return aMatch - bMatch;
       return (a.gradeLevel || 99) - (b.gradeLevel || 99) || String(a.standardCode || "").localeCompare(String(b.standardCode || "")) || String(a.title || "").localeCompare(String(b.title || ""));
     });
-  }, [data.resources, data.teacherGrades]);
+  }, [data.resources, data.teacherGrades, tierFilter]);
 
   async function submitSuggestion(event: React.FormEvent) {
     event.preventDefault();
@@ -80,10 +86,33 @@ export function TeacherResourcesPanel() {
 
       {message ? <p className="mt-4 rounded-2xl bg-emerald-50 px-4 py-3 text-sm font-semibold text-emerald-800">{message}</p> : null}
 
+      <div className="mt-5 flex flex-wrap gap-2">
+        {[
+          { id: "all", label: "All" },
+          { id: "on_grade", label: "On-grade" },
+          { id: "below", label: "Below-grade scaffold" },
+          { id: "above", label: "Above-grade stretch" },
+        ].map((filter) => (
+          <button
+            key={filter.id}
+            type="button"
+            onClick={() => setTierFilter(filter.id as typeof tierFilter)}
+            className={`rounded-full px-3 py-1.5 text-xs font-black uppercase tracking-wide transition ${
+              tierFilter === filter.id ? "bg-slate-950 text-white" : "bg-slate-100 text-slate-700 hover:bg-slate-200"
+            }`}
+          >
+            {filter.label}
+          </button>
+        ))}
+      </div>
+
       <div className="mt-5 grid gap-3">
         {resources.map((resource: any) => (
           <article key={resource.id} className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
-            <p className="text-xs font-semibold uppercase text-slate-500">Grade {resource.gradeLevel || "Any"} • {resource.standardCode} • {resource.skill}</p>
+            <div className="flex flex-wrap items-center gap-2">
+              <p className="text-xs font-semibold uppercase text-slate-500">Grade {resource.gradeLevel || "Any"} • {resource.standardCode} • {resource.skill}</p>
+              <ResourceTierBadge resource={resource} />
+            </div>
             <a className="mt-1 block font-bold text-blue-700 underline" href={resource.url} target="_blank" rel="noreferrer">{resource.title}</a>
             <p className="mt-1 text-sm font-semibold text-slate-700">{resource.provider}</p>
             {resource.description ? <p className="mt-1 text-sm text-slate-600">{resource.description}</p> : null}
@@ -125,6 +154,16 @@ export function TeacherResourcesPanel() {
       ) : null}
     </section>
   );
+}
+
+function ResourceTierBadge({ resource }: { resource: any }) {
+  if (resource.belowGradeLevel) {
+    return <span className="rounded-full bg-orange-100 px-2 py-0.5 text-[10px] font-black uppercase tracking-wide text-orange-700">Below-grade scaffold</span>;
+  }
+  if (resource.aboveGradeLevel) {
+    return <span className="rounded-full bg-purple-100 px-2 py-0.5 text-[10px] font-black uppercase tracking-wide text-purple-700">Above-grade stretch</span>;
+  }
+  return <span className="rounded-full bg-emerald-100 px-2 py-0.5 text-[10px] font-black uppercase tracking-wide text-emerald-700">On-grade</span>;
 }
 
 function Input({ label, value, onChange, required = false, maxLength }: { label: string; value: string; onChange: (value: string) => void; required?: boolean; maxLength?: number }) {
