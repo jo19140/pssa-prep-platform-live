@@ -346,7 +346,7 @@ export function resourceKey(gradeLevel: number, standardCode: string, skill: str
   return `${gradeLevel || 0}:${standardCode}:${skill.toLowerCase()}`;
 }
 
-async function findHeroResourceForLesson(lesson: Pick<LearningLessonBuild, "gradeLevel" | "standardCode" | "skill">): Promise<ResourceMatch | null> {
+export async function findHeroResourceForLesson(lesson: Pick<LearningLessonBuild, "gradeLevel" | "standardCode" | "skill">): Promise<ResourceMatch | null> {
   const skillTokens = skillKeywordTokens(lesson.skill);
   const candidates = await db.resourceLink.findMany({
     where: { standardCode: lesson.standardCode, belowGradeLevel: false, aboveGradeLevel: false },

@@ -452,6 +452,11 @@ model LearningLesson {
   generatedBy          String                  @default("DETERMINISTIC")
   aiStatus             String                  @default("NOT_REQUESTED")
   reviewStatus         String                  @default("PENDING_REVIEW")
+  generatorVersion     String                  @default("V1")
+  qualityScore         Int?
+  qualityIssues        Json?
+  exemplarsUsed        String[]
+  teiTypesUsed         String[]
   approvedAt           DateTime?
   approvedById         String?
   rejectedAt           DateTime?
