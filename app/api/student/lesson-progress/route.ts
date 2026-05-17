@@ -13,6 +13,7 @@ const progressSchema = z.object({
   independentResponses: z.unknown().optional(),
   exitTicketResponses: z.unknown().optional(),
   masteryResponses: z.unknown().optional(),
+  masteryScore: z.number().min(0).max(100).optional(),
 });
 
 export async function PATCH(req: Request) {
@@ -34,7 +35,7 @@ export async function PATCH(req: Request) {
 
   const masteryPayload = normalizeMasteryResponses(body.masteryResponses);
   const masteryResult = masteryPayload ? scorePracticeResponses(masteryPayload, lesson.masteryCheck) : null;
-  const masteryScore = masteryResult?.score;
+  const masteryScore = typeof body.masteryScore === "number" ? Math.round(body.masteryScore) : masteryResult?.score;
   const nextStatus = masteryScore != null
     ? masteryScore >= 80 ? "MASTERED" : "COMPLETED"
     : body.status === "MASTERED" ? "COMPLETED" : body.status;

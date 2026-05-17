@@ -3,7 +3,9 @@
 import { Fragment, useEffect, useMemo, useRef, useState } from "react";
 import { LessonStepPlayer } from "@/components/LessonStepPlayer";
 import { StudentTutorAgentHelpButton } from "@/components/StudentTutorAgentPanel";
+import { TEIItemRenderer } from "@/components/tei/TEIItemRenderer";
 import { buildLessonVisualMetadata, sceneForLessonSkill } from "@/lib/lessonVisuals";
+import { type StudentResponse, itemKey } from "@/lib/teiScoring";
 
 export function StudentLearningPathPage({
   learningPath,
@@ -2563,22 +2565,43 @@ function PracticeBlock({
   masteryMode?: boolean;
   onComplete: (answers: Record<string, any>, score?: number, results?: any[]) => void;
 }) {
-  const safeQuestions = useMemo(() => hydratedPracticeQuestions(Array.isArray(questions) ? questions : [], title, skill), [questions, title, skill]);
+  const rawQuestions = useMemo(() => Array.isArray(questions) ? questions : [], [questions]);
+  const isTeiPractice = rawQuestions.some((question) => typeof question?.type === "string");
+  const safeQuestions = useMemo(
+    () => isTeiPractice ? rawQuestions : hydratedPracticeQuestions(rawQuestions, title, skill),
+    [isTeiPractice, rawQuestions, title, skill],
+  );
+  const [teiResponses, setTeiResponses] = useState<Record<string, StudentResponse>>(() => savedTeiResponses(savedResponses));
   const activities = useMemo(
-    () => safeQuestions.map((question, index) => buildPracticeActivity(question, index, title, skill, masteryMode, standardCode)),
-    [safeQuestions, title, skill, masteryMode, standardCode],
+    () => isTeiPractice ? [] : safeQuestions.map((question, index) => buildPracticeActivity(question, index, title, skill, masteryMode, standardCode)),
+    [isTeiPractice, safeQuestions, title, skill, masteryMode, standardCode],
   );
   const [answers, setAnswers] = useState<Record<string, any>>(() => savedAnswers(savedResponses, safeQuestions));
-  const [submitted, setSubmitted] = useState(Boolean(savedResponses?.completed) && Object.keys(savedAnswers(savedResponses, safeQuestions)).length === safeQuestions.length);
-  const answeredCount = activities.filter((activity, index) => isActivityAnswered(activity, answers[String(index)])).length;
+  const [submitted, setSubmitted] = useState(() => {
+    if (!savedResponses?.completed) return false;
+    if (isTeiPractice) return Object.keys(savedTeiResponses(savedResponses)).length === safeQuestions.length;
+    return Object.keys(savedAnswers(savedResponses, safeQuestions)).length === safeQuestions.length;
+  });
+  const answeredCount = isTeiPractice
+    ? safeQuestions.filter((question, index) => teiResponses[itemKey(question, index)]).length
+    : activities.filter((activity, index) => isActivityAnswered(activity, answers[String(index)])).length;
   const ready = safeQuestions.length > 0 && answeredCount === safeQuestions.length;
-  const results = activities.map((activity, index) => scorePracticeActivity(activity, answers[String(index)]));
-  const score = results.length ? Math.round((results.filter((result) => result.correct).length / results.length) * 100) : 0;
+  const results = isTeiPractice ? Object.values(teiResponses) : activities.map((activity, index) => scorePracticeActivity(activity, answers[String(index)]));
+  const score = results.length
+    ? Math.round((results.reduce((sum: number, result: any) => sum + (typeof result.partialCreditEarned === "number" ? result.partialCreditEarned : result.correct ? 1 : 0), 0) / results.length) * 100)
+    : 0;
 
   function submitPractice() {
     if (!ready) return;
     setSubmitted(true);
-    onComplete(answers, masteryMode ? score : undefined, results);
+    const teiAnswers = Object.fromEntries(Object.entries(teiResponses).map(([key, response]) => [key, response.rawResponse]));
+    onComplete(isTeiPractice ? teiAnswers : answers, masteryMode ? score : undefined, results);
+  }
+
+  function recordTeiResponse(response: StudentResponse) {
+    if (submitted && !masteryMode) return;
+    setTeiResponses((previous) => ({ ...previous, [response.itemId]: response }));
+    if (submitted && masteryMode) setSubmitted(false);
   }
 
   return (
@@ -2600,20 +2623,33 @@ function PracticeBlock({
         </p>
       </div>
       <div className="space-y-5 bg-slate-50 p-5">
-        {activities.map((activity, index) => (
-          <PracticeActivityCard
-            key={`${title}-${index}`}
-            activity={activity}
-            lessonImageUrl={lessonImageUrl}
-            answer={answers[String(index)]}
-            submitted={submitted}
-            masteryMode={masteryMode}
-            onAnswer={(value) => {
-              if (!submitted || masteryMode) setAnswers((previous) => ({ ...previous, [String(index)]: value }));
-              if (submitted && masteryMode) setSubmitted(false);
-            }}
-          />
-        ))}
+        {isTeiPractice
+          ? safeQuestions.map((question, index) => {
+              const key = itemKey(question, index);
+              return (
+                <TEIItemRenderer
+                  key={key}
+                  item={question}
+                  index={index}
+                  disabled={Boolean(teiResponses[key]) && (!masteryMode || submitted)}
+                  onSubmit={recordTeiResponse}
+                />
+              );
+            })
+          : activities.map((activity, index) => (
+              <PracticeActivityCard
+                key={`${title}-${index}`}
+                activity={activity}
+                lessonImageUrl={lessonImageUrl}
+                answer={answers[String(index)]}
+                submitted={submitted}
+                masteryMode={masteryMode}
+                onAnswer={(value) => {
+                  if (!submitted || masteryMode) setAnswers((previous) => ({ ...previous, [String(index)]: value }));
+                  if (submitted && masteryMode) setSubmitted(false);
+                }}
+              />
+            ))}
         <div className="flex flex-col gap-3 rounded-2xl bg-white p-4 ring-1 ring-slate-200 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-sm font-semibold text-slate-600">
             {submitted
@@ -4232,6 +4268,16 @@ function glossaryDefinitionForSkill(skill: string, focusWord: string) {
 }
 
 function buildPracticePayload(answers: Record<string, any>, questions: any[], title = "Practice", providedResults?: any[]) {
+  if (Array.isArray(providedResults) && providedResults.some((result) => typeof result?.partialCreditEarned === "number")) {
+    const score = providedResults.length
+      ? Math.round((providedResults.reduce((sum, result) => sum + Number(result.partialCreditEarned || 0), 0) / providedResults.length) * 100)
+      : 0;
+    return {
+      completed: true,
+      score,
+      answers: providedResults,
+    };
+  }
   const safeQuestions = hydratedPracticeQuestions(Array.isArray(questions) ? questions : [], title);
   const activities = safeQuestions.map((question, index) => buildPracticeActivity(question, index, title, "", false));
   const results = Array.isArray(providedResults) && providedResults.length ? providedResults : activities.map((activity, index) => scorePracticeActivity(activity, answers[String(index)]));
@@ -4246,6 +4292,15 @@ function buildPracticePayload(answers: Record<string, any>, questions: any[], ti
 function savedAnswers(savedResponses: any, questions: any[] = []) {
   if (!savedResponses || !Array.isArray(savedResponses.answers)) return {};
   return Object.fromEntries(savedResponses.answers.map((answer: any, index: number) => [String(index), answer.selected ?? ""]));
+}
+
+function savedTeiResponses(savedResponses: any) {
+  if (!savedResponses || !Array.isArray(savedResponses.answers)) return {};
+  return Object.fromEntries(
+    savedResponses.answers
+      .filter((answer: any) => answer?.itemId)
+      .map((answer: StudentResponse) => [answer.itemId, answer]),
+  );
 }
 
 function isPracticeComplete(savedResponses: any) {

@@ -1,6 +1,8 @@
 "use client";
 
 import { useMemo, useRef, useState } from "react";
+import { TEIItemRenderer } from "@/components/tei/TEIItemRenderer";
+import { type StudentResponse, itemKey } from "@/lib/teiScoring";
 
 type Step = {
   id?: string;
@@ -17,6 +19,7 @@ type Step = {
     correctIndex: number;
     explanation: string;
   } | null;
+  questions?: any[];
 };
 
 type HeroResource = {
@@ -41,11 +44,14 @@ export function LessonStepPlayer({
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedChoice, setSelectedChoice] = useState<number | null>(null);
   const [submitted, setSubmitted] = useState(false);
+  const [submittedResponses, setSubmittedResponses] = useState<Record<string, StudentResponse>>({});
   const [viewedSteps, setViewedSteps] = useState(() => new Set<number>([0]));
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const currentStep = orderedSteps[currentIndex] || orderedSteps[0];
   const isCheck = currentStep?.stepType === "CHECK_QUESTION" && currentStep.checkQuestion;
-  const canAdvance = !isCheck || submitted;
+  const stepQuestions = Array.isArray(currentStep?.questions) ? currentStep.questions : [];
+  const questionsComplete = stepQuestions.every((question, index) => submittedResponses[itemKey(question, index)]);
+  const canAdvance = (!isCheck || submitted) && (!stepQuestions.length || questionsComplete);
   const progress = orderedSteps.length ? Math.round(((currentIndex + 1) / orderedSteps.length) * 100) : 0;
   const embedUrl = heroResource?.url ? youtubeEmbedUrl(heroResource.url) : "";
 
@@ -56,6 +62,10 @@ export function LessonStepPlayer({
     setSubmitted(false);
     setViewedSteps((previous) => new Set([...previous, bounded]));
     audioRef.current?.pause();
+  }
+
+  function handleResponseSubmit(response: StudentResponse) {
+    setSubmittedResponses((previous) => ({ ...previous, [response.itemId]: response }));
   }
 
   if (!currentStep) return null;
@@ -160,6 +170,23 @@ export function LessonStepPlayer({
                   {currentStep.checkQuestion?.explanation}
                 </p>
               )}
+            </div>
+          ) : null}
+
+          {stepQuestions.length ? (
+            <div className="mt-5 grid gap-4">
+              {stepQuestions.map((question, index) => {
+                const key = itemKey(question, index);
+                return (
+                  <TEIItemRenderer
+                    key={key}
+                    item={question}
+                    index={index}
+                    disabled={Boolean(submittedResponses[key])}
+                    onSubmit={handleResponseSubmit}
+                  />
+                );
+              })}
             </div>
           ) : null}
         </div>
