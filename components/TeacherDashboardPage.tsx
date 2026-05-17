@@ -126,10 +126,10 @@ export default function TeacherDashboardPage() {
   const [selectedClassRoomId, setSelectedClassRoomId] = useState("");
   const [creatingDiagnostic, setCreatingDiagnostic] = useState(false);
   const [diagnosticMessage, setDiagnosticMessage] = useState("");
-  const [activeTab, setActiveTab] = useState<"classes" | "reports" | "resources" | "overview" | "generator" | "testDesign" | "tda" | "learning" | "readingCoach" | "import">(() => {
+  const [activeTab, setActiveTab] = useState<"classes" | "assignments" | "reports" | "grading" | "resources" | "overview" | "generator" | "testDesign" | "tda" | "learning" | "readingCoach" | "import">(() => {
     if (typeof window === "undefined") return "classes";
     const tab = new URLSearchParams(window.location.search).get("tab");
-    return tab === "reports" || tab === "resources" ? tab : "classes";
+    return tab === "assignments" || tab === "reports" || tab === "grading" || tab === "resources" ? tab : "classes";
   });
   const [testDesignPurpose, setTestDesignPurpose] = useState("BASELINE_DIAGNOSTIC");
   const [designingTest, setDesigningTest] = useState(false);
@@ -331,6 +331,14 @@ export default function TeacherDashboardPage() {
     setLoadingAI(false);
   }
 
+  function setDashboardTab(tab: typeof activeTab) {
+    setActiveTab(tab);
+    if (typeof window === "undefined") return;
+    const url = new URL(window.location.href);
+    url.searchParams.set("tab", tab);
+    window.history.replaceState(null, "", `${url.pathname}?${url.searchParams.toString()}`);
+  }
+
   if (loading) {
     return <div className="rounded-3xl bg-white p-6 shadow">Loading teacher dashboard...</div>;
   }
@@ -347,20 +355,23 @@ export default function TeacherDashboardPage() {
       </div>
 
       <div className="flex flex-wrap gap-2 rounded-2xl bg-white p-2 shadow">
-        <TabButton active={activeTab === "classes"} onClick={() => setActiveTab("classes")}>Classes</TabButton>
-        <TabButton active={activeTab === "reports"} onClick={() => setActiveTab("reports")}>Reports</TabButton>
-        <TabButton active={activeTab === "resources"} onClick={() => setActiveTab("resources")}>Resources</TabButton>
+        <TabButton active={activeTab === "classes"} onClick={() => setDashboardTab("classes")}>Classes</TabButton>
+        <TabButton active={activeTab === "assignments"} onClick={() => setDashboardTab("assignments")}>Assignments</TabButton>
+        <TabButton active={activeTab === "reports"} onClick={() => setDashboardTab("reports")}>Reports</TabButton>
+        <TabButton active={activeTab === "grading"} onClick={() => setDashboardTab("grading")}>Grading</TabButton>
+        <TabButton active={activeTab === "resources"} onClick={() => setDashboardTab("resources")}>Resources</TabButton>
       </div>
 
+      {activeTab === "assignments" && <TeacherLearningPathPanel mode="assignments" role={data?.teacher?.role} />}
       {activeTab === "reports" && (
         <div className="space-y-6">
-          <TeacherLearningPathPanel />
-          <TeacherTdaScoringPanel />
+          <TeacherLearningPathPanel mode="reports" role={data?.teacher?.role} />
         </div>
       )}
+      {activeTab === "grading" && <TeacherTdaScoringPanel />}
       {activeTab === "resources" && <TeacherResourcesPanel />}
       {activeTab === "tda" && <TeacherTdaScoringPanel />}
-      {activeTab === "learning" && <TeacherLearningPathPanel />}
+      {activeTab === "learning" && <TeacherLearningPathPanel mode="assignments" role={data?.teacher?.role} />}
       {activeTab === "classes" && <TeacherClassesPanel />}
       {activeTab === "import" && <TeacherImportStudentsPanel classes={data?.classes || []} />}
       {activeTab === "testDesign" && (

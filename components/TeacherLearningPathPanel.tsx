@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { StudentLessonPreviewStage } from "@/components/StudentLearningPathPage";
 
-export function TeacherLearningPathPanel() {
+export function TeacherLearningPathPanel({ mode = "assignments", role }: { mode?: "assignments" | "reports"; role?: string }) {
   const [data, setData] = useState<any>({ lessons: [], resources: [], standardsProgress: [], libraryLessons: [], classes: [] });
   const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState("");
@@ -90,12 +90,79 @@ export function TeacherLearningPathPanel() {
 
   return (
     <div className="space-y-6">
-      <section className="grid gap-4 sm:grid-cols-4">
-        <Metric title="Not Started" value={lessonsByStatus.notStarted} />
-        <Metric title="In Progress" value={lessonsByStatus.inProgress} />
-        <Metric title="Completed" value={lessonsByStatus.completed} />
-        <Metric title="Mastered" value={lessonsByStatus.mastered} />
-      </section>
+      {mode === "reports" ? (
+        <>
+          <section className="grid gap-4 sm:grid-cols-4">
+            <Metric title="Not Started" value={lessonsByStatus.notStarted} />
+            <Metric title="In Progress" value={lessonsByStatus.inProgress} />
+            <Metric title="Completed" value={lessonsByStatus.completed} />
+            <Metric title="Mastered" value={lessonsByStatus.mastered} />
+          </section>
+
+          <section className="rounded-3xl bg-white p-6 shadow">
+            <h2 className="text-xl font-bold text-slate-900">Reading Coach Practice</h2>
+            <p className="mt-1 text-sm text-slate-600">Recent read-aloud attempts show instructional focus areas for phonics, fluency, and accuracy practice.</p>
+            <div className="mt-4 overflow-x-auto">
+              <table className="w-full text-left text-sm">
+                <thead className="text-xs uppercase text-slate-500">
+                  <tr>
+                    <th className="py-2 pr-4">Student</th>
+                    <th className="py-2 pr-4">Grade</th>
+                    <th className="py-2 pr-4">Accuracy</th>
+                    <th className="py-2 pr-4">WPM</th>
+                    <th className="py-2 pr-4">Focus Areas</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {(data.readingCoachAttempts || []).map((attempt: any) => (
+                    <tr key={attempt.id} className="border-t border-slate-100">
+                      <td className="py-3 pr-4 font-semibold text-slate-900">{attempt.studentName}</td>
+                      <td className="py-3 pr-4">Grade {attempt.gradeLevel}</td>
+                      <td className="py-3 pr-4">{attempt.accuracy}%</td>
+                      <td className="py-3 pr-4">{attempt.wordsPerMinute ?? "N/A"}</td>
+                      <td className="py-3 pr-4 text-slate-700">{formatFocusAreas(attempt.focusAreas)}</td>
+                    </tr>
+                  ))}
+                  {!(data.readingCoachAttempts || []).length ? (
+                    <tr className="border-t border-slate-100">
+                      <td className="py-3 pr-4 text-slate-500" colSpan={5}>No Reading Coach attempts yet.</td>
+                    </tr>
+                  ) : null}
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section className="rounded-3xl bg-white p-6 shadow">
+            <h2 className="text-xl font-bold text-slate-900">Progress by Standard</h2>
+            <div className="mt-4 overflow-x-auto">
+              <table className="w-full text-left text-sm">
+                <thead className="text-xs uppercase text-slate-500">
+                  <tr>
+                    <th className="py-2 pr-4">Standard</th>
+                    <th className="py-2 pr-4">Skill</th>
+                    <th className="py-2 pr-4">Lessons</th>
+                    <th className="py-2 pr-4">Completed</th>
+                    <th className="py-2 pr-4">Mastered</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {(data.standardsProgress || []).map((row: any) => (
+                    <tr key={`${row.standardCode}-${row.skill}`} className="border-t border-slate-100">
+                      <td className="py-3 pr-4 font-semibold text-slate-900">{row.standardCode}</td>
+                      <td className="py-3 pr-4 text-slate-700">{row.skill}</td>
+                      <td className="py-3 pr-4">{row.lessonCount}</td>
+                      <td className="py-3 pr-4">{row.completed}</td>
+                      <td className="py-3 pr-4">{row.mastered}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </>
+      ) : (
+        <>
 
       <section className="rounded-3xl bg-white p-6 shadow">
         <div className="flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between">
@@ -106,14 +173,16 @@ export function TeacherLearningPathPanel() {
               The Lesson Creator Agent saves reusable lessons here. Preview or assign lessons to complement class instruction or target specific skills.
             </p>
           </div>
-          <button
-            type="button"
-            onClick={buildPrebuiltLibrary}
-            disabled={buildingLibrary}
-            className="w-fit rounded-xl bg-violet-700 px-4 py-2 text-sm font-bold text-white shadow-sm hover:bg-violet-800 disabled:cursor-not-allowed disabled:bg-slate-300"
-          >
-            {buildingLibrary ? "Building Lessons..." : "Build Prebuilt Lessons"}
-          </button>
+          {role === "ADMIN" ? (
+            <button
+              type="button"
+              onClick={buildPrebuiltLibrary}
+              disabled={buildingLibrary}
+              className="w-fit rounded-xl bg-violet-700 px-4 py-2 text-sm font-bold text-white shadow-sm hover:bg-violet-800 disabled:cursor-not-allowed disabled:bg-slate-300"
+            >
+              {buildingLibrary ? "Building Lessons..." : "Build Prebuilt Lessons"}
+            </button>
+          ) : null}
         </div>
 
         <div className="mt-6 rounded-2xl border border-slate-200 bg-slate-50">
@@ -272,102 +341,6 @@ export function TeacherLearningPathPanel() {
       ) : null}
 
       <section className="rounded-3xl bg-white p-6 shadow">
-        <h2 className="text-xl font-bold text-slate-900">Learning World Quest Progress</h2>
-        <p className="mt-1 text-sm text-slate-600">Arcade attempts appear after students pass the mastery check and unlock PSSA Learning World.</p>
-        <div className="mt-4 overflow-x-auto">
-          <table className="w-full text-left text-sm">
-            <thead className="text-xs uppercase text-slate-500">
-              <tr>
-                <th className="py-2 pr-4">Student</th>
-                <th className="py-2 pr-4">Skill</th>
-                <th className="py-2 pr-4">Quest Attempts</th>
-                <th className="py-2 pr-4">Latest Score</th>
-                <th className="py-2 pr-4">XP</th>
-              </tr>
-            </thead>
-            <tbody>
-              {(data.lessons || []).filter((lesson: any) => lesson.questAttempts > 0).map((lesson: any) => (
-                <tr key={`quest-${lesson.id}`} className="border-t border-slate-100">
-                  <td className="py-3 pr-4 font-semibold text-slate-900">{lesson.studentName}</td>
-                  <td className="py-3 pr-4 text-slate-700">{lesson.skill}</td>
-                  <td className="py-3 pr-4">{lesson.questAttempts}</td>
-                  <td className="py-3 pr-4">{lesson.latestQuestScore || "N/A"}</td>
-                  <td className="py-3 pr-4">{lesson.latestQuestXp ?? 0}</td>
-                </tr>
-              ))}
-              {!(data.lessons || []).some((lesson: any) => lesson.questAttempts > 0) ? (
-                <tr className="border-t border-slate-100">
-                  <td className="py-3 pr-4 text-slate-500" colSpan={5}>No quest attempts yet.</td>
-                </tr>
-              ) : null}
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      <section className="rounded-3xl bg-white p-6 shadow">
-        <h2 className="text-xl font-bold text-slate-900">Reading Coach Practice</h2>
-        <p className="mt-1 text-sm text-slate-600">Recent read-aloud attempts show instructional focus areas for phonics, fluency, and accuracy practice.</p>
-        <div className="mt-4 overflow-x-auto">
-          <table className="w-full text-left text-sm">
-            <thead className="text-xs uppercase text-slate-500">
-              <tr>
-                <th className="py-2 pr-4">Student</th>
-                <th className="py-2 pr-4">Grade</th>
-                <th className="py-2 pr-4">Accuracy</th>
-                <th className="py-2 pr-4">WPM</th>
-                <th className="py-2 pr-4">Focus Areas</th>
-              </tr>
-            </thead>
-            <tbody>
-              {(data.readingCoachAttempts || []).map((attempt: any) => (
-                <tr key={attempt.id} className="border-t border-slate-100">
-                  <td className="py-3 pr-4 font-semibold text-slate-900">{attempt.studentName}</td>
-                  <td className="py-3 pr-4">Grade {attempt.gradeLevel}</td>
-                  <td className="py-3 pr-4">{attempt.accuracy}%</td>
-                  <td className="py-3 pr-4">{attempt.wordsPerMinute ?? "N/A"}</td>
-                  <td className="py-3 pr-4 text-slate-700">{formatFocusAreas(attempt.focusAreas)}</td>
-                </tr>
-              ))}
-              {!(data.readingCoachAttempts || []).length ? (
-                <tr className="border-t border-slate-100">
-                  <td className="py-3 pr-4 text-slate-500" colSpan={5}>No Reading Coach attempts yet.</td>
-                </tr>
-              ) : null}
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      <section className="rounded-3xl bg-white p-6 shadow">
-        <h2 className="text-xl font-bold text-slate-900">Progress by Standard</h2>
-        <div className="mt-4 overflow-x-auto">
-          <table className="w-full text-left text-sm">
-            <thead className="text-xs uppercase text-slate-500">
-              <tr>
-                <th className="py-2 pr-4">Standard</th>
-                <th className="py-2 pr-4">Skill</th>
-                <th className="py-2 pr-4">Lessons</th>
-                <th className="py-2 pr-4">Completed</th>
-                <th className="py-2 pr-4">Mastered</th>
-              </tr>
-            </thead>
-            <tbody>
-              {(data.standardsProgress || []).map((row: any) => (
-                <tr key={`${row.standardCode}-${row.skill}`} className="border-t border-slate-100">
-                  <td className="py-3 pr-4 font-semibold text-slate-900">{row.standardCode}</td>
-                  <td className="py-3 pr-4 text-slate-700">{row.skill}</td>
-                  <td className="py-3 pr-4">{row.lessonCount}</td>
-                  <td className="py-3 pr-4">{row.completed}</td>
-                  <td className="py-3 pr-4">{row.mastered}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      <section className="rounded-3xl bg-white p-6 shadow">
         <h2 className="text-xl font-bold text-slate-900">Student Assigned Lessons</h2>
         <div className="mt-4 grid gap-3">
           {(data.lessons || []).map((lesson: any) => (
@@ -399,6 +372,9 @@ export function TeacherLearningPathPanel() {
           ))}
         </div>
       </section>
+
+        </>
+      )}
 
     </div>
   );

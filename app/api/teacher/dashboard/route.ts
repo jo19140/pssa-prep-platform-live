@@ -84,7 +84,7 @@ export async function GET(req: Request) {
     studentUserIds,
   });
   return NextResponse.json({
-    teacher: { id: teacher.id, schoolId: teacher.schoolId, schoolName: teacher.school?.name || teacher.schoolName, gradeBand: teacher.gradeBand, classCount: teacher.classes.length, studentCount: studentUserIds.length },
+    teacher: { id: teacher.id, role, schoolId: teacher.schoolId, schoolName: teacher.school?.name || teacher.schoolName, gradeBand: teacher.gradeBand, classCount: teacher.classes.length, studentCount: studentUserIds.length },
     classes: teacher.classes.map((c) => ({ id: c.id, name: c.name, grade: c.grade, schoolId: c.schoolId, schoolName: c.school?.name || teacher.schoolName })),
     overview: {
       sessionCount: latestActiveSessions.length,
