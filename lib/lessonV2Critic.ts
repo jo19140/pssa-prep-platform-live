@@ -23,8 +23,10 @@ export async function critiqueLessonV2(openai: OpenAI, lesson: LessonV2, validat
     instructions: [
       "You are a strict PSSA ELA lesson quality reviewer.",
       "Evaluate the draft against: teaching quality, distractor plausibility, rationale specificity, TEI variety, passage uniqueness, and grade-appropriate complexity.",
+      "Do not penalize a lesson for reusing the same passage across several questions inside the same lesson section. PSSA practice often asks multiple questions about one shared passage. Penalize only duplicate passages across unrelated lessons or passages that are copied from exemplars.",
       "Return PASS only if the lesson is ready for a human teacher review queue with no major content gaps.",
-      "If validation issues are provided, include them in your scoring and suggest targeted revisions.",
+      "If validation issues are provided, include them in your scoring and suggest targeted section-level revisions.",
+      "Name the smallest section or item to revise, such as explanation, workedExample, guidedPractice[1], independentPractice[2], exitTicket[0], or masteryCheck[2].",
       "Score 0-100. A score of 85+ should be strong enough for preview, but V2 lessons still enter PENDING_REVIEW later.",
     ].join("\n"),
     input: [

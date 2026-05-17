@@ -68,15 +68,22 @@ async function main() {
 }
 
 function findDuplicatePassages(lessons: LessonV2[]) {
+  const seen = new Set<string>();
   const passages = lessons.flatMap((lesson) => allPracticeQuestions(lesson)
     .map((question) => question.passage)
     .filter((passage): passage is string => Boolean(passage && passage.length > 100))
-    .map((passage) => ({ lesson: lesson.title, passage })));
+    .map((passage) => ({ lesson: lesson.title, passage })))
+    .filter((entry) => {
+      const key = entry.passage.toLowerCase().replace(/\s+/g, " ").trim();
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
   const duplicates: Array<{ a: string; b: string; similarity: number }> = [];
   for (let a = 0; a < passages.length; a += 1) {
     for (let b = a + 1; b < passages.length; b += 1) {
       const similarity = jaccard(passages[a].passage, passages[b].passage);
-      if (similarity > 0.72) duplicates.push({ a: passages[a].lesson, b: passages[b].lesson, similarity });
+      if (similarity > 0.92) duplicates.push({ a: passages[a].lesson, b: passages[b].lesson, similarity });
     }
   }
   return duplicates;

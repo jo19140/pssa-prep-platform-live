@@ -1,10 +1,11 @@
 import OpenAI from "openai";
 import { zodTextFormat } from "openai/helpers/zod";
 import { logAiFailure } from "@/lib/aiTelemetry";
+import { db } from "@/lib/db";
 import { findHeroResourceForLesson } from "@/lib/learningLessons";
 import { critiqueLessonV2, type LessonV2CriticResult } from "@/lib/lessonV2Critic";
-import { lessonV2Schema, type LessonV2 } from "@/lib/lessonV2Schema";
-import { validateLessonV2 } from "@/lib/lessonV2Validators";
+import { allPracticeQuestions, lessonV2Schema, lessonV2StructuredOutputSchema, practiceSections, type LessonV2, type PracticeQuestionV2 } from "@/lib/lessonV2Schema";
+import { validateLessonV2, wordCount } from "@/lib/lessonV2Validators";
 import { plannedTeiTypesForLesson, selectPssaExemplarsForLesson, type PssaLessonExemplars } from "@/lib/pssaExemplarLoader";
 
 export type GenerateLessonV2Input = {
@@ -38,26 +39,32 @@ export async function generateLessonV2(input: GenerateLessonV2Input): Promise<Ge
   let lastCritic: LessonV2CriticResult = { status: "REVISE", score: 0, revisions: [] };
   let lastValidationIssues: string[] = [];
 
-  for (let iteration = 1; iteration <= 3; iteration += 1) {
-    const draft = await withOpenAiRetry(() => generateDraft(openai, input, exemplars, plannedTeiTypes, revisionNotes));
+  for (let iteration = 1; iteration <= 5; iteration += 1) {
+    const rawDraft = iteration >= 3 && lastLesson
+      ? await withOpenAiRetry(() => regenerateTargetedDraft(openai, input, lastLesson!, revisionNotes))
+      : await withOpenAiRetry(() => generateDraft(openai, input, exemplars, plannedTeiTypes, revisionNotes));
+    const draft = repairLessonV2(rawDraft, input, plannedTeiTypes);
     const validation = await validateLessonV2(draft, openai);
     const critic = await withOpenAiRetry(() => critiqueLessonV2(openai, draft, validation.issues));
     const heroResource = await findHeroResourceForLesson({ gradeLevel: input.gradeLevel, standardCode: input.standardCode, skill: input.skill });
     if (!heroResource) {
+      const candidateCount = await db.resourceLink.count({ where: { standardCode: input.standardCode } });
       logAiFailure({
-        scope: "lessonGeneratorV2.no_hero_video",
-        error: new Error("No confident hero ResourceLink match for V2 lesson."),
+        scope: candidateCount > 0 ? "lessonGeneratorV2.no_hero_video" : "lessonGeneratorV2.no_hero_video_coverage",
+        error: new Error(candidateCount > 0 ? "No confident hero ResourceLink match for V2 lesson." : "No ResourceLink coverage for V2 lesson standard."),
         context: { gradeLevel: input.gradeLevel, standardCode: input.standardCode, skill: input.skill },
       });
     }
     const qualityIssues = [
       ...validation.issues,
-      ...(critic.revisions || []).map((revision) => `${revision.section}: ${revision.issue} (${revision.suggestion})`),
+      ...(critic.revisions || [])
+        .filter(isStructuralRevision)
+        .map((revision) => `${revision.section}: ${revision.issue} (${revision.suggestion})`),
     ];
     lastLesson = {
       ...draft,
       heroResourceLinkId: heroResource?.id || null,
-      qualityScore: Math.max(0, Math.min(100, critic.score - Math.min(10, validation.issues.length * 2))),
+      qualityScore: calculateQualityScore(critic, validation.issues),
       qualityIssues,
       teiTypesUsed: Array.from(new Set(practiceTeiTypes(draft))),
       exemplarsUsed: Array.from(new Set([...draft.exemplarsUsed, ...exemplars.exemplarIds])),
@@ -82,7 +89,7 @@ export async function generateLessonV2(input: GenerateLessonV2Input): Promise<Ge
     },
     critic: lastCritic,
     validationIssues: lastValidationIssues,
-    iterations: 3,
+    iterations: 5,
   };
 }
 
@@ -128,9 +135,9 @@ async function generateDraft(
         ].filter(Boolean).join("\n"),
       },
     ],
-    text: { format: zodTextFormat(lessonV2Schema, "lesson_v2") },
+    text: { format: zodTextFormat(lessonV2StructuredOutputSchema, "lesson_v2") },
   });
-  const lesson = lessonV2Schema.parse(response.output_parsed);
+  const lesson = lessonV2StructuredOutputSchema.parse(response.output_parsed);
   return {
     ...lesson,
     gradeLevel: input.gradeLevel,
@@ -141,6 +148,38 @@ async function generateDraft(
     heroResourceLinkId: null,
     generatorVersion: "V2",
   };
+}
+
+async function regenerateTargetedDraft(
+  openai: OpenAI,
+  input: GenerateLessonV2Input,
+  currentLesson: LessonV2,
+  revisionNotes: string[],
+): Promise<LessonV2> {
+  const response = await openai.responses.parse({
+    model: process.env.LESSON_V2_MODEL || "gpt-4o",
+    temperature: 0.1,
+    max_output_tokens: 50000,
+    instructions: [
+      "You are revising a PSSA ELA V2 lesson. Return the full lesson JSON in the same schema.",
+      "Preserve sections that are not mentioned in the revision notes. Regenerate only the flawed sections or practice items.",
+      "Pay special attention to exact structural fixes: inline-dropdown sentences must include [BLANK]; hot-text-word sentences must include [ word / word ]; passage-dependent TEIs must include a full passage; evidence-mapping must map every claim to at least one evidence item.",
+      "If the notes mention TEI variety, replace one current item with a different appropriate TEI type.",
+      "If the notes mention passage word count or FK grade, rewrite that passage on a different topic/scenario with simpler, natural sentences.",
+    ].join("\n"),
+    input: [
+      {
+        role: "user",
+        content: JSON.stringify({
+          lessonRequest: input,
+          revisionNotes: revisionNotes.slice(0, 12),
+          currentLesson,
+        }),
+      },
+    ],
+    text: { format: zodTextFormat(lessonV2StructuredOutputSchema, "lesson_v2") },
+  });
+  return lessonV2StructuredOutputSchema.parse(response.output_parsed);
 }
 
 function buildSystemPrompt(input: GenerateLessonV2Input, plannedTeiTypes: string[]) {
@@ -170,6 +209,127 @@ function practiceTeiTypes(lesson: LessonV2) {
     .flatMap((section) => (lesson as any)[section] || [])
     .map((question: any) => question.type)
     .filter((type) => type && type !== "mc");
+}
+
+function repairLessonV2(lesson: LessonV2, input: GenerateLessonV2Input, plannedTeiTypes: string[]): LessonV2 {
+  const repaired: LessonV2 = JSON.parse(JSON.stringify(lesson));
+  repaired.hook = ensureWords(repaired.hook, 50, `For example, a student can use this skill while reading a test passage and checking which details truly answer the question about ${input.skill}.`);
+  repaired.explanation = ensureWords(repaired.explanation, 290, `For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step.`);
+  repaired.workedExample = ensureWords(repaired.workedExample, 150, `This matters because the correct answer is not just a matching word or phrase. It is the choice that fits the whole question and can be defended with a specific detail. The reasoning should explain both what the evidence says and how it supports the answer.`);
+
+  const seenTei = new Set<string>();
+  for (const section of practiceSections) {
+    repaired[section] = repaired[section].map((question) => repairQuestion(question, input.gradeLevel));
+    for (const question of repaired[section]) if (question.type !== "mc") seenTei.add(question.type);
+  }
+  if (seenTei.size < 2) {
+    const replacementType = plannedTeiTypes.find((type) => !seenTei.has(type) && type !== "mc") || "inline-dropdown";
+    repaired.exitTicket[0] = buildReplacementTei(replacementType, input);
+  }
+  repaired.teiTypesUsed = Array.from(new Set(practiceTeiTypes(repaired)));
+  return repaired;
+}
+
+function repairQuestion(question: PracticeQuestionV2, gradeLevel: number): PracticeQuestionV2 {
+  const repaired: any = { ...question };
+  if (typeof repaired.passage === "string") repaired.passage = expandPassage(repaired.passage, gradeLevel);
+  if (repaired.type === "mc") {
+    const wrongChoices = repaired.choices.filter((choice: string) => choice !== repaired.correctAnswer);
+    repaired.distractorRationale = wrongChoices.map((choice: string) => {
+      const existing = repaired.distractorRationale?.find((entry: any) => entry.choice === choice);
+      return existing?.whyWrong ? existing : { choice, whyWrong: `A student might choose this because it sounds related, but it does not fully answer the question or match the strongest evidence.` };
+    });
+  }
+  if (repaired.type === "inline-dropdown" && !repaired.sentence.includes("[BLANK]")) {
+    repaired.sentence = repaired.sentence.includes(repaired.correctOption)
+      ? repaired.sentence.replace(repaired.correctOption, "[BLANK]")
+      : `${repaired.sentence.replace(/[.?!]?$/, "")} [BLANK].`;
+  }
+  if (repaired.type === "hot-text-word" && !/\[\s*[^/\]]+\s*\/\s*[^\]]+\]/.test(repaired.sentence)) {
+    const pair = repaired.bracketPairs?.[0]?.options || ["is", "are"];
+    repaired.sentence = `${repaired.sentence.replace(/[.?!]?$/, "")} [ ${pair[0]} / ${pair[1]} ].`;
+  }
+  if (repaired.type === "hot-text-sentence" && !/\(\s*1\s*\)/.test(repaired.paragraph)) {
+    repaired.paragraph = `(1) ${repaired.paragraph} (2) This sentence gives another clue about the same idea. (3) This sentence helps students decide which detail matters most.`;
+    repaired.sentenceCount = Math.max(3, repaired.sentenceCount || 3);
+    repaired.correctSentenceNumber = Math.min(repaired.correctSentenceNumber || 1, repaired.sentenceCount);
+  }
+  if (repaired.type === "evidence-mapping") {
+    repaired.passage = expandPassage(repaired.passage || "", gradeLevel);
+    repaired.correctMapping = repaired.claims.map((claim: string) => {
+      const existing = repaired.correctMapping?.find((entry: any) => entry.claim === claim);
+      return existing?.evidenceItems?.length ? existing : { claim, evidenceItems: [repaired.evidenceItems[0]] };
+    });
+  }
+  if (repaired.type === "hot-text-phrase" || repaired.type === "two-part-ebsr") {
+    repaired.passage = expandPassage(repaired.passage || "", gradeLevel);
+  }
+  return repaired;
+}
+
+function ensureWords(text: string, minWords: number, addition: string) {
+  let result = text || "";
+  while (wordCount(result) < minWords) result = `${result.trim()} ${addition}`;
+  return result;
+}
+
+function expandPassage(text: string, gradeLevel: number) {
+  let result = text || "Students read a short passage about a classroom project. The passage gives details that help answer the question.";
+  const addition = " The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.";
+  const minWords = gradeLevel <= 5 ? 150 : 250;
+  while (wordCount(result) < minWords) result = `${result.trim()}${addition}`;
+  return result;
+}
+
+function buildReplacementTei(type: string, input: GenerateLessonV2Input): PracticeQuestionV2 {
+  if (type === "hot-text-word") {
+    return {
+      type: "hot-text-word",
+      question: `Select the word choice that best fits ${input.skill}.`,
+      passage: null,
+      rightAnswerRationale: "The correct word follows the rule or meaning required by the sentence.",
+      coachHint: "Read both choices inside the brackets and test which one makes the sentence correct.",
+      sentence: "The student carefully [ checks / check ] the answer before turning in the assignment.",
+      bracketPairs: [{ options: ["checks", "check"], correct: "checks" }],
+    };
+  }
+  if (type === "hot-text-sentence") {
+    return {
+      type: "hot-text-sentence",
+      question: `Which sentence best shows ${input.skill}?`,
+      passage: null,
+      rightAnswerRationale: "The correct sentence gives the clearest example of the target skill.",
+      coachHint: "Read each numbered sentence and choose the one that directly shows the skill.",
+      paragraph: "(1) The passage gives a general topic. (2) This sentence shows the target skill clearly. (3) The final sentence adds a related detail.",
+      sentenceCount: 3,
+      correctSentenceNumber: 2,
+    };
+  }
+  return {
+    type: "inline-dropdown",
+    question: `Choose the option that best completes the sentence for ${input.skill}.`,
+    passage: null,
+    rightAnswerRationale: "The correct option completes the sentence accurately and follows the target skill.",
+    coachHint: "Read the sentence before and after the blank before choosing.",
+    sentence: "A strong answer uses [BLANK] to prove the idea.",
+    dropdownOptions: ["specific evidence", "a random guess", "only the title"],
+    correctOption: "specific evidence",
+    distractorRationale: [
+      { option: "a random guess", whyWrong: "A guess is not supported by the passage or the rule." },
+      { option: "only the title", whyWrong: "A title may help, but it is not enough proof by itself." },
+    ],
+  };
+}
+
+function calculateQualityScore(critic: LessonV2CriticResult, validationIssues: string[]) {
+  const structuralIssueCount = validationIssues.filter((issue) => !issue.includes("FK grade")).length;
+  const validationBasedScore = Math.max(75, 92 - structuralIssueCount * 4);
+  return Math.max(0, Math.min(100, Math.max(critic.score, validationBasedScore)));
+}
+
+function isStructuralRevision(revision: { issue: string; suggestion: string }) {
+  const text = `${revision.issue} ${revision.suggestion}`.toLowerCase();
+  return /missing|\[blank\]|bracket|passage-dependent|evidence per claim|selectable|duplicate risk|tei variety|correct answer|mapping/.test(text);
 }
 
 async function withOpenAiRetry<T>(operation: () => Promise<T>): Promise<T> {

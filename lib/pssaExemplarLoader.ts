@@ -109,7 +109,10 @@ export function selectPssaExemplarsForLesson({
 function selectPassages(sampler: GradeSampler, strand: string) {
   const desiredGenre = strand === "literary" ? "literary" : strand === "informational" ? "informational" : null;
   const matching = desiredGenre ? sampler.passages.filter((passage) => passage.genre === desiredGenre || passage.genre === "paired") : sampler.passages;
-  return (matching.length ? matching : sampler.passages).slice(0, 2);
+  return (matching.length ? matching : sampler.passages).slice(0, 2).map((passage) => ({
+    ...passage,
+    text: truncateWords(passage.text, 180),
+  }));
 }
 
 function selectMcItems(sampler: GradeSampler, standardCode: string, skill: string) {
@@ -124,7 +127,11 @@ function selectMcItems(sampler: GradeSampler, standardCode: string, skill: strin
         overlapScore(`${item.standardLabel} ${item.question}`, skillTokens),
     }))
     .sort((a, b) => b.score - a.score);
-  return scored.slice(0, 3).map((entry) => entry.item);
+  return scored.slice(0, 3).map((entry) => ({
+    ...entry.item,
+    question: truncateWords(entry.item.question, 80),
+    rationale: entry.item.rationale ? truncateWords(entry.item.rationale, 80) : entry.item.rationale,
+  }));
 }
 
 function selectTechItems({
@@ -154,7 +161,13 @@ function selectTechItems({
     }))
     .sort((a, b) => b.score - a.score)
     .slice(0, 3)
-    .map((entry) => entry.item);
+    .map((entry) => ({
+      ...entry.item,
+      instructions: truncateWords(entry.item.instructions, 60),
+      practiceHint: entry.item.practiceHint ? truncateWords(entry.item.practiceHint, 35) : entry.item.practiceHint,
+      content: trimTechContent(entry.item.content),
+      notes: entry.item.notes ? truncateWords(entry.item.notes, 35) : entry.item.notes,
+    }));
 }
 
 export function plannedTeiTypesForLesson(standardCode: string, skill: string): string[] {
@@ -204,4 +217,19 @@ function tokens(value: string) {
 function overlapScore(value: string, skillTokens: string[]) {
   const lower = value.toLowerCase();
   return skillTokens.reduce((score, token) => score + (lower.includes(token) ? 1 : 0), 0);
+}
+
+function truncateWords(value: string, maxWords: number) {
+  const words = value.trim().split(/\s+/).filter(Boolean);
+  if (words.length <= maxWords) return value;
+  return `${words.slice(0, maxWords).join(" ")}...`;
+}
+
+function trimTechContent(content: Record<string, unknown>) {
+  return Object.fromEntries(Object.entries(content).map(([key, value]) => {
+    if (typeof value === "string") return [key, truncateWords(value, 70)];
+    if (Array.isArray(value)) return [key, value.slice(0, 6)];
+    if (value && typeof value === "object") return [key, value];
+    return [key, value];
+  }));
 }

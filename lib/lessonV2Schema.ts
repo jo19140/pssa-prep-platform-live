@@ -112,7 +112,7 @@ export const twoPartEbsrItemSchema = baseItemSchema.extend({
   scoringRule: z.enum(["B-counts-only-if-A-correct", "independent"]),
 });
 
-export const practiceQuestionSchema = z.discriminatedUnion("type", [
+export const practiceQuestionStructuredOutputSchema = z.discriminatedUnion("type", [
   multipleChoiceItemSchema,
   inlineDropdownItemSchema,
   hotTextWordItemSchema,
@@ -125,7 +125,38 @@ export const practiceQuestionSchema = z.discriminatedUnion("type", [
   twoPartEbsrItemSchema,
 ]);
 
-export const lessonV2Schema = z.object({
+export const practiceQuestionSchema = practiceQuestionStructuredOutputSchema.superRefine((item, ctx) => {
+  if (item.type === "mc") {
+    const wrongChoices = item.choices.filter((choice) => choice !== item.correctAnswer);
+    for (const choice of wrongChoices) {
+      const rationale = item.distractorRationale.find((entry) => entry.choice === choice);
+      if (!rationale?.whyWrong?.trim()) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: `multiple-choice distractorRationale must include choice and whyWrong for "${choice}"`,
+          path: ["distractorRationale"],
+        });
+      }
+    }
+  }
+  if (item.type === "inline-dropdown" && !item.sentence.includes("[BLANK]")) {
+    ctx.addIssue({ code: z.ZodIssueCode.custom, message: "inline-dropdown sentence must contain [BLANK] placeholder", path: ["sentence"] });
+  }
+  if (item.type === "hot-text-word" && (item.bracketPairs.length < 1 || !/\[\s*[^/\]]+\s*\/\s*[^\]]+\]/.test(item.sentence))) {
+    ctx.addIssue({ code: z.ZodIssueCode.custom, message: "hot-text-word requires bracket pairs and matching sentence syntax", path: ["sentence"] });
+  }
+  if (item.type === "hot-text-phrase" && !item.passage) {
+    ctx.addIssue({ code: z.ZodIssueCode.custom, message: "hot-text-phrase requires a passage", path: ["passage"] });
+  }
+  if (item.type === "evidence-mapping" && (!item.passage || item.correctMapping.some((entry) => entry.evidenceItems.length < 1))) {
+    ctx.addIssue({ code: z.ZodIssueCode.custom, message: "evidence-mapping requires passage and at least 1 evidence per claim", path: ["correctMapping"] });
+  }
+  if (item.type === "hot-text-sentence" && (!item.paragraph || item.sentenceCount < 3 || !/\(\s*1\s*\)/.test(item.paragraph))) {
+    ctx.addIssue({ code: z.ZodIssueCode.custom, message: "hot-text-sentence requires a paragraph with >=3 numbered sentences", path: ["paragraph"] });
+  }
+});
+
+const lessonV2Shape = {
   gradeLevel: z.number().int().min(3).max(8),
   standardCode: z.string().regex(/^CC\.1\.[1-4]\.[3-8]\.[A-Z][A-Z0-9]?$/),
   standardLabel: shortText,
@@ -138,16 +169,25 @@ export const lessonV2Schema = z.object({
   commonErrors: z.array(mediumText).min(3).max(5),
   sentenceFrames: z.array(mediumText).min(3).max(5),
   successCriteria: z.array(mediumText).min(3).max(5),
-  guidedPractice: z.array(practiceQuestionSchema).length(3),
-  independentPractice: z.array(practiceQuestionSchema).length(4),
-  exitTicket: z.array(practiceQuestionSchema).length(2),
-  masteryCheck: z.array(practiceQuestionSchema).length(3),
+  guidedPractice: z.array(practiceQuestionStructuredOutputSchema).length(3),
+  independentPractice: z.array(practiceQuestionStructuredOutputSchema).length(4),
+  exitTicket: z.array(practiceQuestionStructuredOutputSchema).length(2),
+  masteryCheck: z.array(practiceQuestionStructuredOutputSchema).length(3),
   heroResourceLinkId: z.string().nullable(),
   exemplarsUsed: z.array(shortText),
   teiTypesUsed: z.array(shortText),
   generatorVersion: z.literal("V2"),
   qualityScore: z.number().int().min(0).max(100),
   qualityIssues: z.array(z.string()),
+};
+
+export const lessonV2StructuredOutputSchema = z.object(lessonV2Shape);
+
+export const lessonV2Schema = lessonV2StructuredOutputSchema.extend({
+  guidedPractice: z.array(practiceQuestionSchema).length(3),
+  independentPractice: z.array(practiceQuestionSchema).length(4),
+  exitTicket: z.array(practiceQuestionSchema).length(2),
+  masteryCheck: z.array(practiceQuestionSchema).length(3),
 });
 
 export type PracticeQuestionV2 = z.infer<typeof practiceQuestionSchema>;

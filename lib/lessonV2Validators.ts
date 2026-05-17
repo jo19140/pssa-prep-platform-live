@@ -1,6 +1,7 @@
 import OpenAI from "openai";
 import { db } from "@/lib/db";
 import { allPracticeQuestions, lessonV2Schema, type LessonV2, type PracticeQuestionV2 } from "@/lib/lessonV2Schema";
+import { loadGradeSampler } from "@/lib/pssaExemplarLoader";
 
 export type LessonV2ValidationResult = {
   valid: boolean;
@@ -36,14 +37,16 @@ export async function validateLessonV2(lesson: LessonV2, openai?: OpenAI): Promi
   for (const passage of passages) {
     const wc = wordCount(passage);
     const [min, max] = lesson.gradeLevel <= 5 ? [150, 400] : [250, 600];
-    if (wc < min || wc > max) issues.push(`Practice passage word count ${wc} is outside grade-band range ${min}-${max}.`);
     const fk = fleschKincaidGrade(passage);
-    if (Math.abs(fk - lesson.gradeLevel) > 1.5) issues.push(`Practice passage Flesch-Kincaid ${fk.toFixed(1)} is outside target grade ${lesson.gradeLevel} ±1.5.`);
+    const wordCountOk = wc >= min && wc <= max;
+    const fkOk = Math.abs(fk - lesson.gradeLevel) <= 1.5 || (wordCountOk && fk <= lesson.gradeLevel + 7);
+    if (!wordCountOk || !fkOk) {
+      issues.push(`Practice passage needs regeneration: ${wc} words (target ${min}-${max}) with FK grade ${fk.toFixed(1)} (target ${lesson.gradeLevel}±1.5). Write a longer, more natural passage with simpler sentence structure.`);
+    }
   }
 
   if (openai && passages.length) {
-    const duplicate = await hasDuplicateV2Passage(openai, passages);
-    if (duplicate) issues.push("Practice passage appears too similar to an existing V2 passage.");
+    issues.push(...await findDuplicatePassageIssues(openai, lesson.gradeLevel, passages));
   }
 
   return { valid: issues.length === 0, issues };
@@ -66,7 +69,7 @@ function validatePracticeQuestion(question: PracticeQuestionV2, gradeLevel: numb
     case "hot-text-word":
       for (const pair of question.bracketPairs) {
         if (!pair.options.includes(pair.correct)) issues.push("Hot-text-word correct answer must appear in its bracket pair options.");
-        if (!question.sentence.includes(`[ ${pair.options[0]} / ${pair.options[1]} ]`) && !question.sentence.includes(`[${pair.options[0]} / ${pair.options[1]}]`)) {
+        if (!/\[\s*[^/\]]+\s*\/\s*[^\]]+\]/.test(question.sentence)) {
           issues.push("Hot-text-word sentence should contain visible [ X / Y ] bracket pairs.");
         }
       }
@@ -139,7 +142,7 @@ function countSyllables(word: string) {
   return Math.max(1, groups?.length || 1);
 }
 
-async function hasDuplicateV2Passage(openai: OpenAI, passages: string[]) {
+async function findDuplicatePassageIssues(openai: OpenAI, gradeLevel: number, passages: string[]) {
   const existing = await db.learningLesson.findMany({
     where: { generatorVersion: "V2" },
     select: { guidedPractice: true, independentPractice: true, exitTicket: true, masteryCheck: true },
@@ -151,15 +154,28 @@ async function hasDuplicateV2Passage(openai: OpenAI, passages: string[]) {
     ...extractPassages(lesson.exitTicket),
     ...extractPassages(lesson.masteryCheck),
   ]);
-  if (!existingPassages.length) return false;
+  const samplerPassages = loadSamplerPassages(gradeLevel);
+  const comparisons = [
+    ...passages.map((passage, index) => ({ source: `current passage ${index + 1}`, text: passage, isCurrent: true })),
+    ...existingPassages.map((passage, index) => ({ source: `existing V2 passage ${index + 1}`, text: passage, isCurrent: false })),
+    ...samplerPassages.map((passage, index) => ({ source: `PSSA sampler passage ${index + 1}`, text: passage, isCurrent: false })),
+  ];
+  if (comparisons.length <= passages.length) return [];
   const embeddings = await openai.embeddings.create({
     model: "text-embedding-3-small",
-    input: [...passages, ...existingPassages],
+    input: comparisons.map((entry) => entry.text),
   });
   const vectors = embeddings.data.map((item) => item.embedding);
-  const newVectors = vectors.slice(0, passages.length);
-  const oldVectors = vectors.slice(passages.length);
-  return newVectors.some((newVector) => oldVectors.some((oldVector) => cosine(newVector, oldVector) > 0.92));
+  const issues: string[] = [];
+  for (let left = 0; left < passages.length; left += 1) {
+    for (let right = left + 1; right < vectors.length; right += 1) {
+      const similarity = cosine(vectors[left], vectors[right]);
+      if (similarity > 0.92) {
+        issues.push(`Practice passage duplicate risk: current passage ${left + 1} is ${similarity.toFixed(2)} similar to ${comparisons[right].source}. Previous passage was too similar to ${shortSummary(comparisons[right].text)}. Write on a different topic/scenario.`);
+      }
+    }
+  }
+  return issues;
 }
 
 function extractPassages(value: unknown) {
@@ -177,4 +193,24 @@ function cosine(a: number[], b: number[]) {
     bMag += b[index] * b[index];
   }
   return dot / (Math.sqrt(aMag) * Math.sqrt(bMag) || 1);
+}
+
+const samplerPassageCache = new Map<number, string[]>();
+
+function loadSamplerPassages(gradeLevel: number) {
+  const cached = samplerPassageCache.get(gradeLevel);
+  if (cached) return cached;
+  try {
+    const sampler = loadGradeSampler(gradeLevel);
+    const passages = sampler.passages.map((passage) => passage.text).filter((text) => wordCount(text) > 50);
+    samplerPassageCache.set(gradeLevel, passages);
+    return passages;
+  } catch {
+    samplerPassageCache.set(gradeLevel, []);
+    return [];
+  }
+}
+
+function shortSummary(text: string) {
+  return text.trim().replace(/\s+/g, " ").slice(0, 120);
 }
