@@ -17,8 +17,13 @@ export async function validateLessonV2(lesson: LessonV2, openai?: OpenAI): Promi
   assertWordCount("workedExample", lesson.workedExample, 140, 300, issues);
 
   const questions = allPracticeQuestions(lesson);
-  if ((lesson.standardCode.startsWith("CC.1.2.") || lesson.standardCode.startsWith("CC.1.3.")) && questions.some((question) => requiresPassage(question) && !question.passage)) {
-    issues.push("Reading-strand practice questions must include passages when the item type depends on passage evidence.");
+  const isReadingStrand = lesson.standardCode.startsWith("CC.1.2.") || lesson.standardCode.startsWith("CC.1.3.");
+  const passages = uniquePassages(questions);
+  if (isReadingStrand && passages.length < 2) {
+    issues.push("Reading-strand lessons must include at least two full practice passages across the lesson.");
+  }
+  if (questions.some((question) => requiresPassage(question) && !question.passage)) {
+    issues.push("Passage-dependent TEI questions must include a passage.");
   }
 
   for (const question of questions) {
@@ -28,7 +33,6 @@ export async function validateLessonV2(lesson: LessonV2, openai?: OpenAI): Promi
   const teiTypes = new Set(questions.filter((question) => question.type !== "mc").map((question) => question.type));
   if (teiTypes.size < 2) issues.push(`Expected at least 2 distinct TEI types; found ${teiTypes.size}.`);
 
-  const passages = uniquePassages(questions);
   for (const passage of passages) {
     const wc = wordCount(passage);
     const [min, max] = lesson.gradeLevel <= 5 ? [150, 400] : [250, 600];
@@ -104,7 +108,7 @@ function validatePracticeQuestion(question: PracticeQuestionV2, gradeLevel: numb
 }
 
 function requiresPassage(question: PracticeQuestionV2) {
-  return ["mc", "hot-text-phrase", "evidence-mapping", "two-part-ebsr", "multi-select"].includes(question.type);
+  return ["hot-text-phrase", "evidence-mapping", "two-part-ebsr"].includes(question.type);
 }
 
 function assertWordCount(label: string, text: string, min: number, max: number, issues: string[]) {

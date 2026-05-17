@@ -96,7 +96,7 @@ async function generateDraft(
   const response = await openai.responses.parse({
     model: process.env.LESSON_V2_MODEL || "gpt-4o",
     temperature: 0.2,
-    max_output_tokens: 28000,
+    max_output_tokens: 50000,
     instructions: buildSystemPrompt(input, plannedTeiTypes),
     input: [
       {
@@ -153,7 +153,8 @@ function buildSystemPrompt(input: GenerateLessonV2Input, plannedTeiTypes: string
     `Required TEI variety: include at least two of these non-MC item types in the lesson: ${plannedTeiTypes.slice(0, 3).join(", ")}. Use each selected TEI type at least twice across the practice sections.`,
     "Wrong-answer design: Each wrong answer must be a plausible misreading a real student would make, not an obviously absurd option.",
     "Rationales: For each wrong answer, explain why a student might pick it and why it is wrong. For reading items, cite the passage.",
-    "Reading passages must be original, grade appropriate, and complete. Any item with a passage field must include a full standalone passage: 170-400 words for grades 3-5 or 275-600 words for grades 6-8. Use short, clear sentences for the grade level. Do not use 2-4 sentence mini-passages in passage fields.",
+    "Passage budget: include full passage text on only 2-3 practice questions total. For all other practice questions, set passage to null and make the item test the same skill without another full passage. Passage-dependent TEI types (hot-text-phrase, evidence-mapping, two-part-ebsr) must include a passage.",
+    "Reading passages must be original, grade appropriate, and complete. Any item with a passage field must include a full standalone passage: 170-240 words for grades 3-5 or 275-360 words for grades 6-8. Use short, clear sentences for the grade level. Keep passages near the lower end of the range so the JSON response remains complete. Do not use 2-4 sentence mini-passages in passage fields.",
     "Mapping formats: for drag-drop-table, correctMapping is an array of { item, column } entries. For evidence-mapping, correctMapping is an array of { claim, evidenceItems } entries. Include one mapping entry for every draggable item or claim.",
     "TEI selection guidance:",
     "Conventions (CC.1.4.x.F/G): subject-verb agreement and verb tense -> inline-dropdown; spelling and word choice -> hot-text-word; sentence structure and fragments -> hot-text-sentence; capitalization and punctuation -> inline-dropdown or hot-text-word.",
