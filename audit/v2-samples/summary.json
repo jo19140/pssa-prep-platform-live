@@ -1,0 +1,173 @@
+{
+  "generatedAt": "2026-05-17T16:19:35.020Z",
+  "lessonCount": 10,
+  "averageQuality": 90.8,
+  "teiTypes": [
+    "drag-drop-order",
+    "drag-drop-table",
+    "evidence-mapping",
+    "hot-text-phrase",
+    "hot-text-sentence",
+    "hot-text-word",
+    "inline-dropdown",
+    "multi-select",
+    "two-part-ebsr"
+  ],
+  "duplicatePairs": [],
+  "lessons": [
+    {
+      "title": "Understanding Main Ideas and Supporting Details",
+      "gradeLevel": 3,
+      "standardCode": "CC.1.2.3.A",
+      "skill": "Main Idea and Supporting Details",
+      "qualityScore": 92,
+      "qualityIssues": [
+        "Practice passage needs regeneration: 169 words (target 150-400) with FK grade 10.4 (target 3±1.5). Write a longer, more natural passage with simpler sentence structure."
+      ],
+      "teiTypesUsed": [
+        "drag-drop-table",
+        "two-part-ebsr"
+      ],
+      "heroResourceLinkId": "cmp4fw1pv001dg3sai6y6sy8a"
+    },
+    {
+      "title": "Understanding Verb Tenses",
+      "gradeLevel": 3,
+      "standardCode": "CC.1.4.3.F",
+      "skill": "Verb Tense",
+      "qualityScore": 92,
+      "qualityIssues": [
+        "guidedPractice[0]: Distractor plausibility could be improved. (Ensure that distractors are more plausible by using verbs that are closer in meaning or form to the correct answer, making the choice more challenging.)",
+        "exitTicket[0]: Limited TEI variety. (Incorporate a different TEI type, such as drag-and-drop or matching, to increase engagement and assess understanding in varied ways.)"
+      ],
+      "teiTypesUsed": [
+        "inline-dropdown",
+        "hot-text-word",
+        "drag-drop-table"
+      ],
+      "heroResourceLinkId": "cmp4fw3vi002eg3sa2b9ofx4h"
+    },
+    {
+      "title": "Understanding Characters Through Actions and Words",
+      "gradeLevel": 4,
+      "standardCode": "CC.1.3.4.C",
+      "skill": "Character Analysis",
+      "qualityScore": 80,
+      "qualityIssues": [
+        "Practice passage duplicate risk: current passage 1 is 0.93 similar to current passage 2. Previous passage was too similar to Jake was known for his adventurous spirit. One day, he found a lost puppy in the forest and decided to help it find its . Write on a different topic/scenario.",
+        "Practice passage duplicate risk: current passage 3 is 0.96 similar to current passage 4. Previous passage was too similar to Lila was always willing to help others. One day, she stayed late at the library to assist a friend with studying. Despit. Write on a different topic/scenario.",
+        "Practice passage duplicate risk: current passage 6 is 0.96 similar to current passage 7. Previous passage was too similar to Tom was known for his helpfulness. One day, he noticed his neighbor struggling with groceries and offered to help. He ca. Write on a different topic/scenario.",
+        "guidedPractice[0]: Passage duplicate risk with other sections. (Create a new passage with a different scenario or character to avoid duplication.)",
+        "independentPractice[0]: Passage duplicate risk with other sections. (Develop a unique passage focusing on a different character or setting to ensure variety.)",
+        "masteryCheck[0]: Passage duplicate risk with other sections. (Introduce a new character or situation to differentiate from other passages.)"
+      ],
+      "teiTypesUsed": [
+        "hot-text-sentence",
+        "two-part-ebsr"
+      ],
+      "heroResourceLinkId": null
+    },
+    {
+      "title": "Mastering Transitions in Writing",
+      "gradeLevel": 4,
+      "standardCode": "CC.1.4.4.C",
+      "skill": "Organizing Ideas with Transitions",
+      "qualityScore": 92,
+      "qualityIssues": [
+        "Critic requested revision after 3 iterations."
+      ],
+      "teiTypesUsed": [
+        "drag-drop-order",
+        "multi-select",
+        "evidence-mapping"
+      ],
+      "heroResourceLinkId": null
+    },
+    {
+      "title": "Understanding Vocabulary in Context",
+      "gradeLevel": 5,
+      "standardCode": "CC.1.2.5.F",
+      "skill": "Vocabulary in Context",
+      "qualityScore": 92,
+      "qualityIssues": [],
+      "teiTypesUsed": [
+        "inline-dropdown",
+        "hot-text-phrase"
+      ],
+      "heroResourceLinkId": "cmp4fwb27005vg3sa2v7w64uo"
+    },
+    {
+      "title": "Understanding Text Structure and Signal Words",
+      "gradeLevel": 5,
+      "standardCode": "CC.1.2.5.E",
+      "skill": "Text Structure and Signal Words",
+      "qualityScore": 92,
+      "qualityIssues": [],
+      "teiTypesUsed": [
+        "inline-dropdown",
+        "hot-text-sentence",
+        "multi-select"
+      ],
+      "heroResourceLinkId": "cmp4fwawl005sg3sa3hku5sxm"
+    },
+    {
+      "title": "Mastering Inference and Text Evidence",
+      "gradeLevel": 6,
+      "standardCode": "CC.1.3.6.B",
+      "skill": "Inference and Text Evidence",
+      "qualityScore": 92,
+      "qualityIssues": [],
+      "teiTypesUsed": [
+        "hot-text-phrase",
+        "evidence-mapping"
+      ],
+      "heroResourceLinkId": "cmp4fw5vj003bg3sadfdnqkel"
+    },
+    {
+      "title": "Mastering Subject-Verb Agreement",
+      "gradeLevel": 6,
+      "standardCode": "CC.1.4.6.F",
+      "skill": "Subject-Verb Agreement",
+      "qualityScore": 92,
+      "qualityIssues": [
+        "Critic requested revision after 3 iterations."
+      ],
+      "teiTypesUsed": [
+        "inline-dropdown",
+        "hot-text-sentence"
+      ],
+      "heroResourceLinkId": null
+    },
+    {
+      "title": "Mastering Evidence Selection",
+      "gradeLevel": 7,
+      "standardCode": "CC.1.2.7.B",
+      "skill": "Evidence Selection",
+      "qualityScore": 92,
+      "qualityIssues": [],
+      "teiTypesUsed": [
+        "evidence-mapping",
+        "hot-text-phrase",
+        "two-part-ebsr",
+        "multi-select",
+        "hot-text-word"
+      ],
+      "heroResourceLinkId": null
+    },
+    {
+      "title": "Exploring Theme Development in Literature",
+      "gradeLevel": 8,
+      "standardCode": "CC.1.3.8.A",
+      "skill": "Theme Development",
+      "qualityScore": 92,
+      "qualityIssues": [
+        "Critic requested revision after 3 iterations."
+      ],
+      "teiTypesUsed": [
+        "hot-text-sentence",
+        "evidence-mapping"
+      ],
+      "heroResourceLinkId": "cmp4fw9kb0054g3sa7gtfqnpx"
+    }
+  ]
+}

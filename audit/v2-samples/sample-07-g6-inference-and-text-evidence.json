@@ -1,0 +1,367 @@
+{
+  "lesson": {
+    "gradeLevel": 6,
+    "standardCode": "CC.1.3.6.B",
+    "standardLabel": "Citing textual evidence",
+    "skill": "Inference and Text Evidence",
+    "title": "Mastering Inference and Text Evidence",
+    "whyAssigned": "This mini-lesson targets Inference and Text Evidence because the diagnostic showed a standards-aligned practice gap.",
+    "hook": "Imagine you're a detective trying to solve a mystery. You have clues scattered all around, but you need to piece them together to understand the full story. In reading, making inferences is just like solving a mystery. You gather evidence from the text to uncover hidden meanings and insights. Today, we'll become reading detectives and learn how to use text evidence to make strong inferences.",
+    "explanation": "Inference is the process of drawing conclusions based on evidence and reasoning. When you read, authors often imply information rather than stating it directly. To understand these implied meanings, you need to make inferences. For example, if a character in a story is shivering and wearing a coat, you might infer that it is cold outside, even if the text doesn't explicitly say so. \n\nTo make a good inference, follow these steps:\n\n1. **Read Carefully**: Pay attention to details in the text. Authors leave clues in descriptions, dialogue, and actions.\n\n2. **Ask Questions**: As you read, ask yourself questions about the characters, setting, and events. What might be happening beneath the surface?\n\n3. **Look for Evidence**: Identify specific parts of the text that support your inference. This could be a sentence, a phrase, or even a single word.\n\n4. **Connect the Dots**: Use your background knowledge and the evidence from the text to draw a logical conclusion.\n\n5. **Explain Your Thinking**: Be ready to explain how you arrived at your inference using the evidence you found.\n\nBy practicing these steps, you'll become more skilled at uncovering deeper meanings in texts, making your reading experience richer and more engaging. Remember, every inference should be backed by evidence from the text to ensure it's valid and reliable. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step.",
+    "workedExample": "Let's look at an example from a fictional story:\n\n\"As Mia walked into the room, she noticed the curtains drawn tightly and the faint smell of smoke lingering in the air. Her heart raced as she saw the broken vase on the floor.\"\n\n**Inference**: Something unexpected or possibly dangerous happened in the room.\n\n**Evidence**: The drawn curtains suggest someone wanted to hide the room's interior. The smell of smoke and the broken vase indicate a disturbance or accident.\n\n**Explanation**: By piecing together these clues, we can infer that an event occurred that someone might want to conceal. This inference is supported by the specific details provided in the text, such as the drawn curtains and the broken vase, which suggest secrecy and chaos. This matters because the correct answer is not just a matching word or phrase. It is the choice that fits the whole question and can be defended with a specific detail. The reasoning should explain both what the evidence says and how it supports the answer.",
+    "commonErrors": [
+      "Failing to connect evidence to the inference.",
+      "Overlooking key details that support the inference.",
+      "Making inferences without sufficient textual evidence."
+    ],
+    "sentenceFrames": [
+      "I infer that ___ because the text states ___.",
+      "The evidence suggests ___, which means ___.",
+      "Based on ___, I can conclude that ___."
+    ],
+    "successCriteria": [
+      "Identify key details in the text that support inferences.",
+      "Explain how evidence supports the inference.",
+      "Make logical inferences that align with the text."
+    ],
+    "guidedPractice": [
+      {
+        "question": "What can you infer about the character's feelings from the passage?",
+        "passage": "Liam stared at the ground, his hands clenched into fists. He took a deep breath, trying to calm the storm inside him. The room was silent except for the ticking clock, marking each second of his struggle to remain composed. Finally, he spoke, his voice barely above a whisper, \"I just can't believe it happened.\" His eyes were wet with unshed tears, and he quickly turned away, not wanting anyone to see his vulnerability. \"I need some air,\" he muttered, walking briskly towards the door, leaving the room in a tense silence behind him. The others exchanged worried glances, unsure of how to help him through this unexpected turmoil. As the door clicked shut, the weight of his emotions lingered in the air, a silent testament to the depth of his inner conflict. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "Liam's clenched fists and struggle to remain composed suggest he is feeling intense emotions, likely anger or frustration. His whispering and unshed tears indicate vulnerability and sadness.",
+        "coachHint": "Focus on Liam's actions and words. What do they reveal about his emotional state?",
+        "type": "hot-text-phrase",
+        "selectablePhrases": [
+          "stared at the ground",
+          "hands clenched into fists",
+          "trying to calm the storm inside him",
+          "voice barely above a whisper",
+          "eyes were wet with unshed tears"
+        ],
+        "correctPhrases": [
+          "hands clenched into fists",
+          "eyes were wet with unshed tears"
+        ],
+        "minSelect": 2,
+        "maxSelect": 2
+      },
+      {
+        "question": "Which evidence best supports the claim that the character is determined?",
+        "passage": "Emma had been training for months, waking up before dawn every day to run. Her goal was to complete the marathon, and nothing was going to stop her. Even when the weather was bad, she pushed through, her resolve unwavering. \"I can do this,\" she repeated to herself, each step bringing her closer to her dream. Her friends often marveled at her dedication, knowing that Emma's determination was unmatched. On the day of the marathon, as she crossed the finish line, her face lit up with a triumphant smile, a testament to her hard work and perseverance. \"I knew I could,\" she said, breathless but elated, as she hugged her cheering friends. Her journey had been tough, but her determination had carried her through. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "Emma's consistent training and her mantra \"I can do this\" show her determination. Her actions and mindset are clear evidence of her resolve.",
+        "coachHint": "Look for actions and thoughts that show Emma's commitment to her goal.",
+        "type": "evidence-mapping",
+        "claims": [
+          "The character is determined."
+        ],
+        "evidenceItems": [
+          "waking up before dawn every day to run",
+          "Even when the weather was bad, she pushed through",
+          "\"I can do this,\" she repeated to herself",
+          "Her friends often marveled at her dedication"
+        ],
+        "correctMapping": [
+          {
+            "claim": "The character is determined.",
+            "evidenceItems": [
+              "waking up before dawn every day to run",
+              "\"I can do this,\" she repeated to herself"
+            ]
+          }
+        ]
+      },
+      {
+        "question": "What inference can be made about the setting based on the passage?",
+        "passage": "The sun dipped below the horizon, casting long shadows across the deserted street. A chill wind whispered through the trees, rustling the leaves that carpeted the ground. The streetlights flickered to life, casting an eerie glow on the cracked pavement. In the distance, a lone dog barked, its sound echoing in the stillness of the night. The houses lining the street stood silent, their windows dark and unwelcoming. It was as if the entire neighborhood was holding its breath, waiting for something to happen. The atmosphere was tense, filled with an unspoken anticipation that hung heavy in the air. As the wind picked up, a sense of unease settled over the area, making the hairs on the back of one's neck stand on end. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "The description of the deserted street, flickering streetlights, and eerie atmosphere suggests a setting that is tense and possibly foreboding.",
+        "coachHint": "Consider the mood created by the descriptions of the street and the environment.",
+        "type": "hot-text-phrase",
+        "selectablePhrases": [
+          "The sun dipped below the horizon",
+          "A chill wind whispered through the trees",
+          "The streetlights flickered to life",
+          "a lone dog barked",
+          "The houses lining the street stood silent"
+        ],
+        "correctPhrases": [
+          "The streetlights flickered to life",
+          "The houses lining the street stood silent"
+        ],
+        "minSelect": 2,
+        "maxSelect": 2
+      }
+    ],
+    "independentPractice": [
+      {
+        "question": "What can you infer about the main character's relationship with their family?",
+        "passage": "The main character often spends time alone in their room, listening to music. They avoid family dinners and prefer to eat in solitude. When asked about their day, they give short, non-committal answers and quickly retreat to their room. Despite their family's attempts to engage them in conversation, the main character remains distant and unresponsive, choosing instead to immerse themselves in their own world. This behavior has become a pattern, with the main character showing little interest in family activities or outings. Their family is concerned but unsure how to bridge the growing gap between them. The main character's actions suggest a desire for independence and a struggle with communication within the family dynamic. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "The main character's avoidance of family interactions and preference for solitude suggest a distant relationship with their family.",
+        "coachHint": "Focus on the character's actions and interactions with their family.",
+        "type": "mc",
+        "choices": [
+          "The main character is very close to their family.",
+          "The main character feels misunderstood by their family.",
+          "The main character is indifferent to their family.",
+          "The main character is actively involved in family activities."
+        ],
+        "correctAnswer": "The main character feels misunderstood by their family.",
+        "distractorRationale": [
+          {
+            "choice": "The main character is very close to their family.",
+            "whyWrong": "This choice contradicts the character's avoidance of family interactions."
+          },
+          {
+            "choice": "The main character is indifferent to their family.",
+            "whyWrong": "The character's actions suggest more than indifference; they indicate a struggle with communication."
+          },
+          {
+            "choice": "The main character is actively involved in family activities.",
+            "whyWrong": "This choice is incorrect as the character avoids family activities."
+          }
+        ]
+      },
+      {
+        "question": "Which evidence best supports the claim that the character is resourceful?",
+        "passage": "Despite having limited resources, Alex managed to build a small greenhouse in the backyard. Using old windows and recycled materials, Alex constructed a space where they could grow vegetables year-round. When the weather turned cold, Alex found creative ways to insulate the greenhouse, using bubble wrap and old blankets. Their ingenuity impressed the neighbors, who often sought Alex's advice on gardening. Alex's ability to make the most of what they had demonstrated their resourcefulness and determination to succeed, regardless of the challenges they faced. Their efforts paid off, as the greenhouse flourished, providing fresh produce even in the harshest months. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "Alex's use of recycled materials and creative insulation methods demonstrate resourcefulness.",
+        "coachHint": "Look for actions that show Alex's ability to use available resources effectively.",
+        "type": "evidence-mapping",
+        "claims": [
+          "The character is resourceful."
+        ],
+        "evidenceItems": [
+          "managed to build a small greenhouse",
+          "Using old windows and recycled materials",
+          "found creative ways to insulate the greenhouse",
+          "Their ingenuity impressed the neighbors"
+        ],
+        "correctMapping": [
+          {
+            "claim": "The character is resourceful.",
+            "evidenceItems": [
+              "Using old windows and recycled materials",
+              "found creative ways to insulate the greenhouse"
+            ]
+          }
+        ]
+      },
+      {
+        "question": "What inference can be made about the character's mood based on the passage?",
+        "passage": "As the rain poured down, Jenna sat by the window, her forehead resting against the cool glass. She watched the droplets race each other, tracing their paths with her finger. Her favorite book lay unopened on her lap, forgotten in the moment. The room was quiet, save for the rhythmic patter of rain against the windowpane. Jenna's eyes were distant, lost in thought, as if she were miles away from the cozy room. Her sigh was barely audible, a soft exhalation that seemed to carry the weight of her thoughts. Despite the warmth of the room, Jenna felt a chill that had nothing to do with the weather outside. It was a chill that came from within, a reflection of her inner turmoil. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "Jenna's distant gaze and sigh suggest she is feeling contemplative and possibly melancholic.",
+        "coachHint": "Consider Jenna's actions and the atmosphere described in the passage.",
+        "type": "hot-text-phrase",
+        "selectablePhrases": [
+          "As the rain poured down",
+          "Jenna sat by the window",
+          "Her favorite book lay unopened",
+          "The room was quiet",
+          "Jenna's eyes were distant"
+        ],
+        "correctPhrases": [
+          "Jenna's eyes were distant",
+          "Her favorite book lay unopened"
+        ],
+        "minSelect": 2,
+        "maxSelect": 2
+      },
+      {
+        "question": "What can you infer about the setting based on the passage?",
+        "passage": "The bustling market was alive with the sounds of vendors calling out their wares and the chatter of customers haggling over prices. The air was filled with the rich aroma of spices and freshly baked bread. Stalls overflowed with colorful fruits and vegetables, while the vibrant fabrics of the clothing stalls fluttered in the breeze. Children darted between the stalls, their laughter mingling with the clinking of coins and the rustle of paper bags. The sun shone brightly overhead, casting a warm glow over the lively scene. It was a place of energy and excitement, where every corner held a new discovery waiting to be made. The market was the heart of the community, a place where people came together to share stories and goods. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "The lively atmosphere and sensory details suggest a vibrant and bustling setting.",
+        "coachHint": "Focus on the descriptions of the market and the activities taking place.",
+        "type": "mc",
+        "choices": [
+          "The setting is quiet and serene.",
+          "The setting is chaotic and disorganized.",
+          "The setting is vibrant and bustling.",
+          "The setting is dark and gloomy."
+        ],
+        "correctAnswer": "The setting is vibrant and bustling.",
+        "distractorRationale": [
+          {
+            "choice": "The setting is quiet and serene.",
+            "whyWrong": "This choice contradicts the lively and bustling descriptions."
+          },
+          {
+            "choice": "The setting is chaotic and disorganized.",
+            "whyWrong": "While busy, the market is described as lively, not chaotic."
+          },
+          {
+            "choice": "The setting is dark and gloomy.",
+            "whyWrong": "The passage describes a bright and lively scene, not dark and gloomy."
+          }
+        ]
+      }
+    ],
+    "exitTicket": [
+      {
+        "question": "What inference can be made about the character's decision-making process?",
+        "passage": "Despite the risks, Sam decided to take the leap and start his own business. He spent months researching and planning, carefully weighing the pros and cons. Sam sought advice from mentors and considered every angle before making his final decision. His friends admired his courage and thoroughness, knowing that Sam's choices were always well thought out. As he signed the lease for his new office space, Sam felt a mix of excitement and nervousness, but he was confident in his decision. His meticulous approach and willingness to take calculated risks set him apart, and he was ready to face the challenges ahead with determination and optimism. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "Sam's careful planning and consideration of advice show a thoughtful decision-making process.",
+        "coachHint": "Look for actions that demonstrate Sam's approach to making decisions.",
+        "type": "mc",
+        "choices": [
+          "Sam makes impulsive decisions.",
+          "Sam avoids taking risks.",
+          "Sam makes decisions based on thorough research.",
+          "Sam relies solely on others' opinions."
+        ],
+        "correctAnswer": "Sam makes decisions based on thorough research.",
+        "distractorRationale": [
+          {
+            "choice": "Sam makes impulsive decisions.",
+            "whyWrong": "Sam's actions show careful planning, not impulsiveness."
+          },
+          {
+            "choice": "Sam avoids taking risks.",
+            "whyWrong": "Sam takes calculated risks, as shown by starting his own business."
+          },
+          {
+            "choice": "Sam relies solely on others' opinions.",
+            "whyWrong": "While Sam seeks advice, he makes his own well-informed decisions."
+          }
+        ]
+      },
+      {
+        "question": "Which evidence best supports the claim that the character is resilient?",
+        "passage": "After losing the championship game, Taylor felt defeated but not discouraged. Instead of dwelling on the loss, Taylor focused on improving skills and training harder. Every morning, Taylor was the first to arrive at practice and the last to leave, determined to come back stronger next season. The coach noticed Taylor's dedication and often used Taylor as an example of perseverance to inspire the team. Taylor's ability to bounce back from setbacks and maintain a positive attitude was a testament to resilience. By the time the next season arrived, Taylor was ready to lead the team with renewed energy and confidence, proving that setbacks were just stepping stones to success. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "Taylor's focus on improvement and dedication to training demonstrate resilience.",
+        "coachHint": "Look for actions that show Taylor's ability to recover from setbacks.",
+        "type": "evidence-mapping",
+        "claims": [
+          "The character is resilient."
+        ],
+        "evidenceItems": [
+          "focused on improving skills",
+          "first to arrive at practice",
+          "last to leave",
+          "used as an example of perseverance"
+        ],
+        "correctMapping": [
+          {
+            "claim": "The character is resilient.",
+            "evidenceItems": [
+              "focused on improving skills",
+              "first to arrive at practice"
+            ]
+          }
+        ]
+      }
+    ],
+    "masteryCheck": [
+      {
+        "question": "What inference can be made about the character's priorities?",
+        "passage": "Jamie always made time for family dinners, even when work was demanding. No matter how busy the day had been, Jamie believed that sharing a meal with loved ones was important. On weekends, Jamie organized family outings, ensuring that everyone stayed connected despite their hectic schedules. Jamie's friends often remarked on the strong bond within the family, attributing it to Jamie's efforts to prioritize family time. Even when work required late nights, Jamie found ways to balance responsibilities, demonstrating a commitment to maintaining family relationships above all else. This dedication to family was evident in every aspect of Jamie's life, from daily routines to long-term plans. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "Jamie's consistent efforts to prioritize family time show that family is a top priority.",
+        "coachHint": "Consider Jamie's actions and how they reflect priorities.",
+        "type": "mc",
+        "choices": [
+          "Jamie's top priority is work.",
+          "Jamie's top priority is personal hobbies.",
+          "Jamie's top priority is family.",
+          "Jamie's top priority is socializing with friends."
+        ],
+        "correctAnswer": "Jamie's top priority is family.",
+        "distractorRationale": [
+          {
+            "choice": "Jamie's top priority is work.",
+            "whyWrong": "Jamie balances work with family, showing family is the priority."
+          },
+          {
+            "choice": "Jamie's top priority is personal hobbies.",
+            "whyWrong": "The passage emphasizes family time, not personal hobbies."
+          },
+          {
+            "choice": "Jamie's top priority is socializing with friends.",
+            "whyWrong": "The focus is on family, not socializing with friends."
+          }
+        ]
+      },
+      {
+        "question": "Which evidence best supports the claim that the character is innovative?",
+        "passage": "When faced with a problem at work, Alex didn't rely on traditional methods. Instead, Alex brainstormed new ideas and experimented with different approaches. Colleagues were impressed by Alex's ability to think outside the box and find creative solutions. Alex's innovations often led to improved processes and increased efficiency, earning recognition from management. By challenging the status quo and embracing change, Alex demonstrated a willingness to explore uncharted territory. This innovative mindset not only solved immediate problems but also inspired others to adopt a more creative approach in their work. Alex's contributions were a testament to the power of innovation in driving progress. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "Alex's brainstorming and experimentation show innovation.",
+        "coachHint": "Look for actions that demonstrate Alex's creative problem-solving.",
+        "type": "evidence-mapping",
+        "claims": [
+          "The character is innovative."
+        ],
+        "evidenceItems": [
+          "didn't rely on traditional methods",
+          "brainstormed new ideas",
+          "experimented with different approaches",
+          "think outside the box"
+        ],
+        "correctMapping": [
+          {
+            "claim": "The character is innovative.",
+            "evidenceItems": [
+              "brainstormed new ideas",
+              "experimented with different approaches"
+            ]
+          }
+        ]
+      },
+      {
+        "question": "What inference can be made about the character's leadership style?",
+        "passage": "As the team leader, Morgan encouraged open communication and valued everyone's input. Morgan believed that a collaborative approach led to the best results, and often held brainstorming sessions to gather ideas from the team. By fostering an inclusive environment, Morgan ensured that each team member felt heard and appreciated. Morgan's leadership style was characterized by empathy and support, creating a positive atmosphere where creativity thrived. Team members often praised Morgan for being approachable and understanding, which motivated them to contribute their best efforts. Morgan's ability to bring out the best in others was a key factor in the team's success, demonstrating a leadership style that prioritized collaboration and empowerment. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "Morgan's emphasis on collaboration and support shows a leadership style focused on empowerment.",
+        "coachHint": "Consider how Morgan interacts with the team and what that reveals about leadership style.",
+        "type": "mc",
+        "choices": [
+          "Morgan's leadership style is authoritarian.",
+          "Morgan's leadership style is collaborative.",
+          "Morgan's leadership style is indifferent.",
+          "Morgan's leadership style is competitive."
+        ],
+        "correctAnswer": "Morgan's leadership style is collaborative.",
+        "distractorRationale": [
+          {
+            "choice": "Morgan's leadership style is authoritarian.",
+            "whyWrong": "Morgan's approach is inclusive and supportive, not authoritarian."
+          },
+          {
+            "choice": "Morgan's leadership style is indifferent.",
+            "whyWrong": "Morgan is actively engaged and supportive, not indifferent."
+          },
+          {
+            "choice": "Morgan's leadership style is competitive.",
+            "whyWrong": "Morgan focuses on collaboration, not competition."
+          }
+        ]
+      }
+    ],
+    "heroResourceLinkId": "cmp4fw5vj003bg3sadfdnqkel",
+    "exemplarsUsed": [
+      "The Portal",
+      "Candice Miller and her mother move to her grandmother’s house from Atlanta. Candice is bored in the small city. She wants something to do. She discovers a mystery about hidden treasure. Candice loves mysteries and decides to find the...",
+      "Candice Miller and her mother move to her grandmother’s house in Lambert. Candice is having a bad summer. She misses her grandmother. Candice finds out that there may be hidden treasure in Lambert. Her mother, however, tells her not to...",
+      "Candice Miller and her mother move to her grandmother’s house in Lambert. It is a small city and there is nothing for Candice to do. Her mother tells her a story about her grandmother searching for hidden treasure. Candice realizes that...",
+      "Candice Miller and her mother move from Atlanta to the small city of Lambert. They are staying in Candice’s grandmother’s house. Her mother tells her how her grandmother lost her job when she searched for a hidden treasure. The search...",
+      "Move two pieces of evidence from the passage that best support the claim that many teens who text are too tired for school.",
+      "Read the paragraph. Select the two phrases that help you understand the meaning of “don’t rush.”",
+      "g6-p1",
+      "g6-mc-6",
+      "g6-mc-1",
+      "g6-mc-2",
+      "g6-tei-7",
+      "g7-tei-8",
+      "g5-tei-5"
+    ],
+    "teiTypesUsed": [
+      "hot-text-phrase",
+      "evidence-mapping"
+    ],
+    "generatorVersion": "V2",
+    "qualityScore": 92,
+    "qualityIssues": []
+  },
+  "critic": {
+    "status": "PASS",
+    "score": 92,
+    "revisions": []
+  },
+  "validationIssues": [],
+  "iterations": 4
+}

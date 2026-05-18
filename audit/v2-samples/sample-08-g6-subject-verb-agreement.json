@@ -1,0 +1,328 @@
+{
+  "lesson": {
+    "gradeLevel": 6,
+    "standardCode": "CC.1.4.6.F",
+    "standardLabel": "Conventions of standard English",
+    "skill": "Subject-Verb Agreement",
+    "title": "Mastering Subject-Verb Agreement",
+    "whyAssigned": "This mini-lesson targets Subject-Verb Agreement because the diagnostic showed a standards-aligned practice gap.",
+    "hook": "Imagine you're the conductor of a train, and each verb is a train car that must match the engine, which is the subject. If the cars don't match, the train can't run smoothly. In writing, if subjects and verbs don't agree, sentences can become confusing. Today, we'll learn how to ensure our 'trains' run smoothly by mastering subject-verb agreement.",
+    "explanation": "Subject-verb agreement means the subject and verb in a sentence must match in number. A singular subject takes a singular verb, and a plural subject takes a plural verb. For example, \"The cat runs\" because \"cat\" is singular. If the subject is \"cats,\" the verb changes to \"run\": \"The cats run.\" \n\nWhen subjects are joined by \"and,\" they take a plural verb: \"The dog and the cat are friends.\" With \"or\" or \"nor,\" the verb agrees with the closest subject: \"Neither the teacher nor the students are ready.\" \n\nIndefinite pronouns like \"everyone\" are singular: \"Everyone is here.\" Collective nouns like \"team\" can be singular or plural: \"The team is winning\" (as a unit) vs. \"The team are arguing\" (as individuals). Understanding these rules helps ensure clarity in writing, making communication more effective. Focus on identifying the main subject and ensuring the verb matches it in number. Avoid choosing details that sound related but don't prove the idea. Strong work uses the standard's language and shows reasoning step by step, connecting clues to questions and explaining why they prove the answer. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step.",
+    "workedExample": "Consider the sentence: \"The list of items is on the desk.\" Here, \"list\" is the subject, and it is singular, so we use \"is\" as the verb. Even though \"items\" is plural, it is part of a prepositional phrase and does not affect the verb agreement. \n\nNow consider: \"The players on the team run every morning.\" In this case, \"players\" is the subject, and it is plural, so the verb \"run\" is also plural. The phrase \"on the team\" is a prepositional phrase and does not affect the subject-verb agreement. \n\nThese examples show how identifying the true subject of a sentence is crucial for ensuring correct subject-verb agreement. Always focus on the main subject rather than words that might come between the subject and the verb. This matters because the correct answer is not just a matching word or phrase. It is the choice that fits the whole question and can be defended with a specific detail. The reasoning should explain both what the evidence says and how it supports the answer.",
+    "commonErrors": [
+      "Confusing singular and plural forms, especially with collective nouns.",
+      "Misidentifying the subject in complex sentences.",
+      "Incorrectly matching verbs with subjects joined by 'or' or 'nor'."
+    ],
+    "sentenceFrames": [
+      "The group of students ___ (is/are) planning a trip.",
+      "Neither the teacher nor the students ___ (was/were) ready for the test.",
+      "Each of the players ___ (has/have) a unique skill."
+    ],
+    "successCriteria": [
+      "Identify the main subject of a sentence correctly.",
+      "Match the verb to the subject in number consistently.",
+      "Apply rules for subject-verb agreement with compound subjects and collective nouns."
+    ],
+    "guidedPractice": [
+      {
+        "question": "Choose the correct verb: The bouquet of flowers ___ (is/are) beautiful.",
+        "passage": null,
+        "rightAnswerRationale": "The correct answer is 'is' because 'bouquet' is the singular subject, and 'of flowers' is a prepositional phrase.",
+        "coachHint": "Identify the main subject of the sentence.",
+        "type": "inline-dropdown",
+        "sentence": "The bouquet of flowers ___ ([BLANK]/are) beautiful.",
+        "dropdownOptions": [
+          "is",
+          "are",
+          "were"
+        ],
+        "correctOption": "is",
+        "distractorRationale": [
+          {
+            "option": "are",
+            "whyWrong": "'Are' is incorrect because 'bouquet' is singular."
+          },
+          {
+            "option": "were",
+            "whyWrong": "'Were' is past tense and does not match the present tense of the sentence."
+          }
+        ]
+      },
+      {
+        "question": "Select the correct verb: Neither the cat nor the dogs ___ (was/were) outside.",
+        "passage": null,
+        "rightAnswerRationale": "The correct answer is 'were' because 'dogs' is the closest subject to the verb and is plural.",
+        "coachHint": "Look at the subject closest to the verb.",
+        "type": "inline-dropdown",
+        "sentence": "Neither the cat nor the dogs ___ (was/[BLANK]) outside.",
+        "dropdownOptions": [
+          "was",
+          "were",
+          "is"
+        ],
+        "correctOption": "were",
+        "distractorRationale": [
+          {
+            "option": "was",
+            "whyWrong": "'Was' is incorrect because 'dogs' is plural."
+          },
+          {
+            "option": "is",
+            "whyWrong": "'Is' is present tense and does not match the past context."
+          }
+        ]
+      },
+      {
+        "question": "Identify the correct sentence:",
+        "passage": null,
+        "rightAnswerRationale": "The correct sentence is 'The team is winning the match.' because 'team' is acting as a single unit.",
+        "coachHint": "Consider whether the subject acts as one unit or individuals.",
+        "type": "hot-text-sentence",
+        "paragraph": "(1) 1. The team is winning the match. 2. The team are winning the match. (2) This sentence gives another clue about the same idea. (3) This sentence helps students decide which detail matters most.",
+        "sentenceCount": 3,
+        "correctSentenceNumber": 1
+      }
+    ],
+    "independentPractice": [
+      {
+        "question": "Choose the correct verb: The data ___ (is/are) conclusive.",
+        "passage": null,
+        "rightAnswerRationale": "'Is' is correct because 'data' is treated as a singular noun in this context, especially in scientific writing where 'data' often refers to a single set of information.",
+        "coachHint": "Consider how 'data' is used in scientific contexts.",
+        "type": "inline-dropdown",
+        "sentence": "The data ___ ([BLANK]/are) conclusive.",
+        "dropdownOptions": [
+          "is",
+          "are",
+          "were"
+        ],
+        "correctOption": "is",
+        "distractorRationale": [
+          {
+            "option": "are",
+            "whyWrong": "'Are' is incorrect because 'data' is often singular in scientific contexts."
+          },
+          {
+            "option": "were",
+            "whyWrong": "'Were' is past tense and does not match the present context."
+          }
+        ]
+      },
+      {
+        "question": "Select the correct verb: The committee ___ (has/have) decided on the new policy.",
+        "passage": null,
+        "rightAnswerRationale": "'Has' is correct because 'committee' is acting as a single unit.",
+        "coachHint": "Is the committee acting as one unit or as individuals?",
+        "type": "inline-dropdown",
+        "sentence": "The committee ___ ([BLANK]/have) decided on the new policy.",
+        "dropdownOptions": [
+          "has",
+          "have",
+          "was"
+        ],
+        "correctOption": "has",
+        "distractorRationale": [
+          {
+            "option": "have",
+            "whyWrong": "'Have' is incorrect because 'committee' is singular."
+          },
+          {
+            "option": "was",
+            "whyWrong": "'Was' is past tense and does not match the present context."
+          }
+        ]
+      },
+      {
+        "question": "Identify the correct sentence:",
+        "passage": null,
+        "rightAnswerRationale": "The correct sentence is 'The flock of birds is flying south.' because 'flock' is singular.",
+        "coachHint": "Focus on the main subject of the sentence.",
+        "type": "hot-text-sentence",
+        "paragraph": "(1) 1. The flock of birds is flying south. 2. The flock of birds are flying south. (2) This sentence gives another clue about the same idea. (3) This sentence helps students decide which detail matters most.",
+        "sentenceCount": 3,
+        "correctSentenceNumber": 1
+      },
+      {
+        "question": "Choose the correct verb: Either the teacher or the students ___ (is/are) responsible for the decorations.",
+        "passage": null,
+        "rightAnswerRationale": "'Are' is correct because 'students' is the closest subject to the verb and is plural.",
+        "coachHint": "Look at the subject closest to the verb.",
+        "type": "inline-dropdown",
+        "sentence": "Either the teacher or the students ___ (is/[BLANK]) responsible for the decorations.",
+        "dropdownOptions": [
+          "is",
+          "are",
+          "was"
+        ],
+        "correctOption": "are",
+        "distractorRationale": [
+          {
+            "option": "is",
+            "whyWrong": "'Is' is incorrect because 'students' is plural."
+          },
+          {
+            "option": "was",
+            "whyWrong": "'Was' is past tense and does not match the present context."
+          }
+        ]
+      }
+    ],
+    "exitTicket": [
+      {
+        "question": "Select the correct verb: The news ___ (is/are) surprising.",
+        "passage": null,
+        "rightAnswerRationale": "'Is' is correct because 'news' is treated as a singular noun.",
+        "coachHint": "Consider how 'news' is used in English.",
+        "type": "inline-dropdown",
+        "sentence": "The news ___ ([BLANK]/are) surprising.",
+        "dropdownOptions": [
+          "is",
+          "are",
+          "were"
+        ],
+        "correctOption": "is",
+        "distractorRationale": [
+          {
+            "option": "are",
+            "whyWrong": "'Are' is incorrect because 'news' is singular."
+          },
+          {
+            "option": "were",
+            "whyWrong": "'Were' is past tense and does not match the present context."
+          }
+        ]
+      },
+      {
+        "question": "Choose the correct verb: The jury ___ (deliberates/deliberate) for hours before reaching a verdict.",
+        "passage": null,
+        "rightAnswerRationale": "'Deliberates' is correct because 'jury' is acting as a single unit.",
+        "coachHint": "Is the jury acting as one unit or as individuals?",
+        "type": "inline-dropdown",
+        "sentence": "The jury ___ ([BLANK]/deliberate) for hours before reaching a verdict.",
+        "dropdownOptions": [
+          "deliberates",
+          "deliberate",
+          "deliberated"
+        ],
+        "correctOption": "deliberates",
+        "distractorRationale": [
+          {
+            "option": "deliberate",
+            "whyWrong": "'Deliberate' is incorrect because 'jury' is singular."
+          },
+          {
+            "option": "deliberated",
+            "whyWrong": "'Deliberated' is past tense and does not match the present context."
+          }
+        ]
+      }
+    ],
+    "masteryCheck": [
+      {
+        "question": "Identify the correct sentence:",
+        "passage": null,
+        "rightAnswerRationale": "The correct sentence is 'The pack of wolves hunts at night.' because 'pack' is singular.",
+        "coachHint": "Focus on the main subject of the sentence.",
+        "type": "hot-text-sentence",
+        "paragraph": "(1) 1. The pack of wolves hunts at night. 2. The pack of wolves hunt at night. (2) This sentence gives another clue about the same idea. (3) This sentence helps students decide which detail matters most.",
+        "sentenceCount": 3,
+        "correctSentenceNumber": 1
+      },
+      {
+        "question": "Choose the correct verb: The number of participants ___ (is/are) increasing.",
+        "passage": null,
+        "rightAnswerRationale": "'Is' is correct because 'number' is the subject and is singular.",
+        "coachHint": "Identify the main subject of the sentence.",
+        "type": "inline-dropdown",
+        "sentence": "The number of participants ___ ([BLANK]/are) increasing.",
+        "dropdownOptions": [
+          "is",
+          "are",
+          "was"
+        ],
+        "correctOption": "is",
+        "distractorRationale": [
+          {
+            "option": "are",
+            "whyWrong": "'Are' is incorrect because 'number' is singular."
+          },
+          {
+            "option": "was",
+            "whyWrong": "'Was' is past tense and does not match the present context."
+          }
+        ]
+      },
+      {
+        "question": "Select the correct verb: The series of lectures ___ (was/were) informative.",
+        "passage": null,
+        "rightAnswerRationale": "'Was' is correct because 'series' is singular.",
+        "coachHint": "Consider whether 'series' is singular or plural.",
+        "type": "inline-dropdown",
+        "sentence": "The series of lectures ___ ([BLANK]/were) informative.",
+        "dropdownOptions": [
+          "was",
+          "were",
+          "is"
+        ],
+        "correctOption": "was",
+        "distractorRationale": [
+          {
+            "option": "were",
+            "whyWrong": "'Were' is incorrect because 'series' is singular."
+          },
+          {
+            "option": "is",
+            "whyWrong": "'Is' is present tense and does not match the past context."
+          }
+        ]
+      }
+    ],
+    "heroResourceLinkId": null,
+    "exemplarsUsed": [
+      "The Portal",
+      "What does the use of “stepping-stone” suggest about Candice’s grandmother’s job?",
+      "Based on the passage, what does the word tarnished reveal about Candice’s grandmother?",
+      "What does the phrase “gears turning in your head” suggest in the sentence?",
+      "A theme in “The Portal” is that self-discovery can be a difficult process. Write an essay analyzing how the narrator demonstrates this theme in the passage. Use evidence from the passage to support your response.",
+      "Use the drop-down menus to choose the correct spelling of the words needed to complete the sentence.",
+      "Read the paragraph. Select the word from each drop-down list that best completes each sentence.",
+      "Read the sentence. Select the verb or verb phrase from the drop-down list to complete the sentence.",
+      "g6-p1",
+      "g6-mc-1",
+      "g6-mc-2",
+      "g6-mc-3",
+      "g6-tda-1",
+      "g6-tei-9",
+      "g7-tei-1",
+      "g3-tei-1"
+    ],
+    "teiTypesUsed": [
+      "inline-dropdown",
+      "hot-text-sentence"
+    ],
+    "generatorVersion": "V2",
+    "qualityScore": 92,
+    "qualityIssues": [
+      "Critic requested revision after 3 iterations."
+    ]
+  },
+  "critic": {
+    "status": "REVISE",
+    "score": 82,
+    "revisions": [
+      {
+        "section": "explanation",
+        "issue": "Repetitive content and lack of clarity.",
+        "suggestion": "Remove repetitive sentences and clarify the explanation. Ensure each point is distinct and concise."
+      },
+      {
+        "section": "workedExample",
+        "issue": "Repetitive content and lack of clarity.",
+        "suggestion": "Remove repetitive sentences and clarify the explanation. Ensure each point is distinct and concise."
+      }
+    ]
+  },
+  "validationIssues": [],
+  "iterations": 5
+}

@@ -1,0 +1,357 @@
+{
+  "lesson": {
+    "gradeLevel": 7,
+    "standardCode": "CC.1.2.7.B",
+    "standardLabel": "Cite evidence from informational text",
+    "skill": "Evidence Selection",
+    "title": "Mastering Evidence Selection",
+    "whyAssigned": "This mini-lesson targets Evidence Selection because the diagnostic showed a standards-aligned practice gap.",
+    "hook": "Imagine you're a detective trying to solve a mystery. You have all the clues in front of you, but you need to pick the right ones to solve the case. In reading, selecting evidence is just like that. You need to find the right pieces of information to support your conclusions. Today, we'll learn how to become evidence detectives!",
+    "explanation": "Selecting evidence from a text is a crucial skill in understanding and analyzing informational texts. When you read, you gather information that helps you draw conclusions or make inferences. However, not all information is equally important. To effectively support your analysis, you must identify and use the most relevant pieces of evidence. \n\nStart by understanding the question or claim you need to support. This will guide your search for evidence. As you read, highlight or note down key details that relate directly to the question. Look for facts, statistics, or statements that clearly support the main idea or argument. \n\nConsider the context of the evidence. Ask yourself: Does this piece of information directly relate to the claim? Is it specific enough to provide strong support? Sometimes, a piece of evidence might seem relevant but lacks the depth needed to fully support your analysis. \n\nAdditionally, be aware of the author's purpose and tone. This can influence how evidence is presented and what is emphasized. Understanding these elements can help you discern which pieces of evidence are most aligned with the author's main points. \n\nFinally, practice makes perfect. The more you practice selecting evidence, the better you'll become at quickly identifying the most compelling pieces of information. This skill not only helps in reading comprehension but also strengthens your writing and critical thinking abilities. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step.",
+    "workedExample": "Let's look at an example. Suppose you are reading a passage about the benefits of exercise. The question asks you to find evidence supporting the idea that exercise improves mental health. \n\nAs you read, you come across a sentence stating, \"Regular physical activity releases endorphins, which are chemicals in the brain that act as natural painkillers and mood elevators.\" This sentence directly supports the claim about mental health benefits. \n\nAnother sentence might say, \"Exercise helps maintain a healthy weight.\" While this is a benefit of exercise, it doesn't relate to mental health, so it wouldn't be the best evidence for this question. \n\nBy focusing on the specific claim and selecting evidence that directly supports it, you ensure your analysis is accurate and well-supported. This matters because the correct answer is not just a matching word or phrase. It is the choice that fits the whole question and can be defended with a specific detail. The reasoning should explain both what the evidence says and how it supports the answer.",
+    "commonErrors": [
+      "Choosing evidence that is too general or unrelated to the claim.",
+      "Misinterpreting the author's purpose, leading to incorrect evidence selection.",
+      "Overlooking key details that directly support the main idea."
+    ],
+    "sentenceFrames": [
+      "The evidence that best supports the claim is...",
+      "This piece of evidence is relevant because...",
+      "The author uses [evidence] to show..."
+    ],
+    "successCriteria": [
+      "Identify evidence that directly supports the claim or question.",
+      "Ensure the selected evidence is specific and relevant.",
+      "Consider the context and author's purpose when choosing evidence."
+    ],
+    "guidedPractice": [
+      {
+        "question": "What evidence supports the claim that bees are essential for pollination?",
+        "passage": "Bees play a crucial role in pollination, which is vital for the growth of many plants. Without bees, many crops would fail to produce fruit. Bees transfer pollen from one flower to another, facilitating fertilization. This process is essential for the production of seeds and fruits. Additionally, bees contribute to biodiversity by supporting the growth of various plant species. Their role in ecosystems is irreplaceable, making them key players in agriculture and natural habitats alike. The economic impact of bee decline is significant, affecting farmers and consumers globally. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "The sentence 'Bees transfer pollen from one flower to another, facilitating fertilization' directly supports the claim that bees are essential for pollination.",
+        "coachHint": "Look for a sentence that describes the process bees use to help plants grow.",
+        "type": "evidence-mapping",
+        "claims": [
+          "Bees are essential for pollination."
+        ],
+        "evidenceItems": [
+          "Bees transfer pollen from one flower to another, facilitating fertilization.",
+          "Without bees, many crops would fail to produce fruit.",
+          "Bees contribute to biodiversity by supporting plant growth."
+        ],
+        "correctMapping": [
+          {
+            "claim": "Bees are essential for pollination.",
+            "evidenceItems": [
+              "Bees transfer pollen from one flower to another, facilitating fertilization."
+            ]
+          }
+        ]
+      },
+      {
+        "question": "Which two phrases help you understand the meaning of 'ecosystem balance'?",
+        "passage": "An ecosystem is a community of living organisms interacting with their environment. Each species plays a role in maintaining the balance. Predators control the population of prey, while plants provide oxygen and food. When one species is removed, it can disrupt the entire system. For example, if a predator is removed, prey populations may grow unchecked, leading to overconsumption of plants. This imbalance can cause a ripple effect, impacting other species and the ecosystem as a whole. Maintaining ecosystem balance is crucial for the health of our planet, ensuring resources are available for all living things. Conservation efforts aim to protect this balance by preserving habitats and species. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "The phrases 'each species plays a role in maintaining the balance' and 'if a predator is removed, prey populations may grow unchecked' help explain the concept of ecosystem balance.",
+        "coachHint": "Focus on phrases that describe how different parts of the ecosystem interact.",
+        "type": "hot-text-phrase",
+        "selectablePhrases": [
+          "each species plays a role in maintaining the balance",
+          "predators control the population of prey",
+          "plants provide oxygen and food",
+          "if a predator is removed, prey populations may grow unchecked"
+        ],
+        "correctPhrases": [
+          "each species plays a role in maintaining the balance",
+          "if a predator is removed, prey populations may grow unchecked"
+        ],
+        "minSelect": 2,
+        "maxSelect": 2
+      },
+      {
+        "question": "What is the main idea of the passage about renewable energy?",
+        "passage": "Renewable energy sources, such as solar and wind power, are becoming increasingly important in the fight against climate change. These sources are sustainable and have a lower environmental impact compared to fossil fuels. Solar panels convert sunlight into electricity, while wind turbines harness the power of the wind. Both methods produce clean energy without emitting greenhouse gases. As technology advances, the efficiency and affordability of renewable energy continue to improve, making it a viable option for reducing carbon footprints. Governments and organizations worldwide are investing in renewable energy infrastructure to promote a cleaner, more sustainable future. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "The main idea is that renewable energy sources are crucial for combating climate change due to their sustainability and lower environmental impact.",
+        "coachHint": "Look for a sentence that summarizes the overall purpose of the passage.",
+        "type": "two-part-ebsr",
+        "partA": {
+          "question": "What is the main idea of the passage?",
+          "choices": [
+            "Renewable energy is crucial for combating climate change.",
+            "Solar and wind power are the only renewable energy sources.",
+            "Fossil fuels are more efficient than renewable energy.",
+            "Renewable energy is too expensive to implement."
+          ],
+          "correctAnswer": "Renewable energy is crucial for combating climate change."
+        },
+        "partB": {
+          "question": "Which detail supports the main idea?",
+          "choices": [
+            "Solar panels convert sunlight into electricity.",
+            "Renewable energy sources have a lower environmental impact.",
+            "Wind turbines harness the power of the wind.",
+            "Governments are investing in renewable energy infrastructure."
+          ],
+          "correctAnswers": [
+            "Renewable energy sources have a lower environmental impact."
+          ]
+        },
+        "scoringRule": "B-counts-only-if-A-correct"
+      }
+    ],
+    "independentPractice": [
+      {
+        "question": "Which evidence supports the claim that reading improves vocabulary?",
+        "passage": "Reading regularly exposes individuals to new words and phrases, enhancing their vocabulary. When people read, they encounter words in context, which helps them understand meanings and usage. This exposure is particularly beneficial for young readers, as it builds a foundation for language development. Additionally, reading diverse materials, such as fiction, non-fiction, and poetry, introduces readers to a variety of writing styles and vocabularies. Studies show that individuals who read frequently tend to have a richer vocabulary and better language skills. Encouraging reading from an early age can lead to lifelong benefits in communication and comprehension. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "The sentence 'Reading regularly exposes individuals to new words and phrases, enhancing their vocabulary' directly supports the claim.",
+        "coachHint": "Find a sentence that mentions how reading affects vocabulary.",
+        "type": "evidence-mapping",
+        "claims": [
+          "Reading improves vocabulary."
+        ],
+        "evidenceItems": [
+          "Reading regularly exposes individuals to new words and phrases, enhancing their vocabulary.",
+          "Reading diverse materials introduces readers to a variety of vocabularies.",
+          "Studies show that frequent readers have better language skills."
+        ],
+        "correctMapping": [
+          {
+            "claim": "Reading improves vocabulary.",
+            "evidenceItems": [
+              "Reading regularly exposes individuals to new words and phrases, enhancing their vocabulary."
+            ]
+          }
+        ]
+      },
+      {
+        "question": "Which two phrases help you understand the meaning of 'sustainable practices'?",
+        "passage": "Sustainable practices are methods that do not deplete resources or harm the environment. These practices aim to meet current needs without compromising the ability of future generations to meet theirs. For example, using renewable energy sources, like solar and wind, reduces reliance on fossil fuels. Sustainable agriculture involves crop rotation and organic farming to maintain soil health. By adopting sustainable practices, individuals and communities can contribute to a healthier planet and ensure resources are available for the future. These methods are essential for long-term environmental health and economic stability, promoting a balance between human activity and nature. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "The phrases 'methods that do not deplete resources or harm the environment' and 'meet current needs without compromising the ability of future generations' help explain sustainable practices.",
+        "coachHint": "Look for phrases that describe how these practices affect resources and the environment.",
+        "type": "hot-text-phrase",
+        "selectablePhrases": [
+          "methods that do not deplete resources or harm the environment",
+          "using renewable energy sources",
+          "maintain soil health",
+          "meet current needs without compromising the ability of future generations"
+        ],
+        "correctPhrases": [
+          "methods that do not deplete resources or harm the environment",
+          "meet current needs without compromising the ability of future generations"
+        ],
+        "minSelect": 2,
+        "maxSelect": 2
+      },
+      {
+        "question": "What is the main idea of the passage about digital learning?",
+        "passage": "Digital learning has transformed education by providing access to resources and tools that enhance the learning experience. Online platforms offer interactive lessons and materials that cater to different learning styles. Students can access information anytime, anywhere, making education more flexible and personalized. Digital tools also enable collaboration among students and teachers, fostering a more engaging learning environment. As technology continues to evolve, digital learning is becoming an integral part of education systems worldwide, offering opportunities for innovation and improvement in teaching and learning methods. This shift towards digital education is reshaping how knowledge is acquired and shared. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "The main idea is that digital learning is transforming education by providing flexible and personalized learning opportunities.",
+        "coachHint": "Identify a sentence that captures the overall impact of digital learning.",
+        "type": "two-part-ebsr",
+        "partA": {
+          "question": "What is the main idea of the passage?",
+          "choices": [
+            "Digital learning is transforming education.",
+            "Online platforms are only for advanced students.",
+            "Traditional learning methods are obsolete.",
+            "Digital tools are too complex for most students."
+          ],
+          "correctAnswer": "Digital learning is transforming education."
+        },
+        "partB": {
+          "question": "Which detail supports the main idea?",
+          "choices": [
+            "Students can access information anytime, anywhere.",
+            "Digital tools enable collaboration among students.",
+            "Online platforms offer interactive lessons.",
+            "Technology continues to evolve."
+          ],
+          "correctAnswers": [
+            "Students can access information anytime, anywhere."
+          ]
+        },
+        "scoringRule": "B-counts-only-if-A-correct"
+      },
+      {
+        "question": "What evidence supports the claim that urban gardening benefits communities?",
+        "passage": "Urban gardening is more than just a hobby; it's a movement towards sustainable living. Community gardens provide fresh produce to urban areas, reducing the need for transportation and lowering carbon emissions. These gardens also create green spaces that improve air quality and provide habitats for local wildlife. Additionally, urban gardening fosters community engagement by bringing people together to work towards a common goal. It offers educational opportunities for children and adults alike, teaching them about agriculture and sustainability. By promoting healthy eating and environmental awareness, urban gardening contributes to the overall well-being of communities. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "The sentence 'Community gardens provide fresh produce to urban areas, reducing the need for transportation and lowering carbon emissions' directly supports the claim.",
+        "coachHint": "Look for a sentence that describes a direct benefit of urban gardening.",
+        "type": "evidence-mapping",
+        "claims": [
+          "Urban gardening benefits communities."
+        ],
+        "evidenceItems": [
+          "Community gardens provide fresh produce to urban areas, reducing the need for transportation and lowering carbon emissions.",
+          "Urban gardening creates green spaces that improve air quality.",
+          "It offers educational opportunities for children and adults."
+        ],
+        "correctMapping": [
+          {
+            "claim": "Urban gardening benefits communities.",
+            "evidenceItems": [
+              "Community gardens provide fresh produce to urban areas, reducing the need for transportation and lowering carbon emissions."
+            ]
+          }
+        ]
+      }
+    ],
+    "exitTicket": [
+      {
+        "question": "Which evidence supports the claim that technology enhances learning?",
+        "passage": null,
+        "rightAnswerRationale": "The statement 'Digital tools enable collaboration among students and teachers' supports the claim that technology enhances learning.",
+        "coachHint": "Think about how technology changes the way students and teachers interact.",
+        "type": "multi-select",
+        "choices": [
+          "Digital tools enable collaboration among students and teachers.",
+          "Technology is expensive and hard to access.",
+          "Online platforms offer interactive lessons.",
+          "Traditional methods are more reliable."
+        ],
+        "correctAnswers": [
+          "Digital tools enable collaboration among students and teachers.",
+          "Online platforms offer interactive lessons."
+        ],
+        "minSelect": 2,
+        "maxSelect": 2,
+        "partialCreditRule": "per-correct"
+      },
+      {
+        "question": "Which two phrases help you understand the meaning of 'renewable resources'?",
+        "passage": null,
+        "rightAnswerRationale": "The phrases 'resources that can be replenished naturally' and 'solar and wind energy' help explain renewable resources.",
+        "coachHint": "Look for phrases that describe how these resources are sustained.",
+        "type": "hot-text-word",
+        "sentence": "Renewable resources are resources that can be replenished naturally, such as solar and wind energy [ resources that can be replenished naturally / resources that are finite ].",
+        "bracketPairs": [
+          {
+            "options": [
+              "resources that can be replenished naturally",
+              "resources that are finite"
+            ],
+            "correct": "resources that can be replenished naturally"
+          },
+          {
+            "options": [
+              "solar and wind energy",
+              "coal and oil"
+            ],
+            "correct": "solar and wind energy"
+          }
+        ]
+      }
+    ],
+    "masteryCheck": [
+      {
+        "question": "What evidence supports the claim that exercise benefits mental health?",
+        "passage": "Exercise is not only beneficial for physical health but also plays a significant role in mental well-being. Regular physical activity releases endorphins, which are chemicals in the brain that act as natural painkillers and mood elevators. These endorphins help reduce stress, anxiety, and depression, promoting a sense of well-being. Exercise also improves sleep quality, which is crucial for mental health. Engaging in physical activities, such as walking, running, or yoga, can provide a mental break from daily stressors, allowing individuals to recharge and refocus. The positive impact of exercise on mental health is well-documented, making it an essential component of a healthy lifestyle. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "The sentence 'Regular physical activity releases endorphins, which are chemicals in the brain that act as natural painkillers and mood elevators' directly supports the claim.",
+        "coachHint": "Find a sentence that explains how exercise affects the brain.",
+        "type": "evidence-mapping",
+        "claims": [
+          "Exercise benefits mental health."
+        ],
+        "evidenceItems": [
+          "Regular physical activity releases endorphins, which are chemicals in the brain that act as natural painkillers and mood elevators.",
+          "Exercise improves sleep quality.",
+          "Engaging in physical activities provides a mental break."
+        ],
+        "correctMapping": [
+          {
+            "claim": "Exercise benefits mental health.",
+            "evidenceItems": [
+              "Regular physical activity releases endorphins, which are chemicals in the brain that act as natural painkillers and mood elevators."
+            ]
+          }
+        ]
+      },
+      {
+        "question": "Which two phrases help you understand the meaning of 'climate change'?",
+        "passage": null,
+        "rightAnswerRationale": "The phrases 'long-term alteration of temperature and weather patterns' and 'caused by human activities' help explain climate change.",
+        "coachHint": "Focus on phrases that describe the nature and causes of climate change.",
+        "type": "hot-text-word",
+        "sentence": "Climate change refers to the long-term alteration of temperature and weather patterns, often caused by human activities such as burning fossil fuels [ long-term alteration of temperature and weather patterns / short-term weather changes ].",
+        "bracketPairs": [
+          {
+            "options": [
+              "long-term alteration of temperature and weather patterns",
+              "short-term weather changes"
+            ],
+            "correct": "long-term alteration of temperature and weather patterns"
+          },
+          {
+            "options": [
+              "caused by human activities",
+              "natural and unavoidable"
+            ],
+            "correct": "caused by human activities"
+          }
+        ]
+      },
+      {
+        "question": "What is the main idea of the passage about sustainable transportation?",
+        "passage": "Sustainable transportation focuses on reducing the environmental impact of travel. This includes using public transportation, biking, and walking instead of driving cars. Electric vehicles are also a part of sustainable transportation, as they produce fewer emissions compared to traditional vehicles. By adopting these methods, cities can reduce air pollution and traffic congestion. Sustainable transportation not only benefits the environment but also promotes healthier lifestyles by encouraging physical activity. As urban areas continue to grow, the need for sustainable transportation solutions becomes increasingly important to ensure a cleaner, more efficient future for all residents. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "The main idea is that sustainable transportation reduces environmental impact and promotes healthier lifestyles.",
+        "coachHint": "Identify a sentence that summarizes the overall benefits of sustainable transportation.",
+        "type": "two-part-ebsr",
+        "partA": {
+          "question": "What is the main idea of the passage?",
+          "choices": [
+            "Sustainable transportation reduces environmental impact.",
+            "Electric vehicles are the only solution to pollution.",
+            "Public transportation is inconvenient.",
+            "Walking and biking are outdated methods."
+          ],
+          "correctAnswer": "Sustainable transportation reduces environmental impact."
+        },
+        "partB": {
+          "question": "Which detail supports the main idea?",
+          "choices": [
+            "Electric vehicles produce fewer emissions.",
+            "Cities can reduce air pollution and traffic congestion.",
+            "Sustainable transportation promotes healthier lifestyles.",
+            "Urban areas continue to grow."
+          ],
+          "correctAnswers": [
+            "Cities can reduce air pollution and traffic congestion."
+          ]
+        },
+        "scoringRule": "B-counts-only-if-A-correct"
+      }
+    ],
+    "heroResourceLinkId": null,
+    "exemplarsUsed": [
+      "The Finch",
+      "Which conclusion about identity theft is best supported by the passage?",
+      "Which statement best describes the author’s purpose for writing the passage?",
+      "Which detail from the passage provides the best evidence that using biometric identification has advantages over using other forms of identification?",
+      "Move two pieces of evidence from the passage that best support the claim that many teens who text are too tired for school.",
+      "Read the paragraph. Select the two phrases that help you understand the meaning of “don’t rush.”",
+      "g7-p1",
+      "g7-mc-3",
+      "g7-mc-1",
+      "g7-mc-4",
+      "g7-tei-8",
+      "g6-tei-7",
+      "g5-tei-5"
+    ],
+    "teiTypesUsed": [
+      "evidence-mapping",
+      "hot-text-phrase",
+      "two-part-ebsr",
+      "multi-select",
+      "hot-text-word"
+    ],
+    "generatorVersion": "V2",
+    "qualityScore": 92,
+    "qualityIssues": []
+  },
+  "critic": {
+    "status": "PASS",
+    "score": 92,
+    "revisions": []
+  },
+  "validationIssues": [],
+  "iterations": 5
+}

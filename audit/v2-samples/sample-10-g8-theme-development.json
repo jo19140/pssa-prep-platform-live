@@ -1,0 +1,356 @@
+{
+  "lesson": {
+    "gradeLevel": 8,
+    "standardCode": "CC.1.3.8.A",
+    "standardLabel": "Theme or central idea",
+    "skill": "Theme Development",
+    "title": "Exploring Theme Development in Literature",
+    "whyAssigned": "This mini-lesson targets Theme Development because the diagnostic showed a standards-aligned practice gap.",
+    "hook": "Imagine reading a story where every character and event seems to point to a single, powerful message. That's the magic of theme development. Themes are the underlying messages or insights about life that authors weave into their stories. Today, we'll explore how to uncover these themes and understand their significance.",
+    "explanation": "Theme development involves identifying the central message or insight an author conveys through their story. Themes are revealed through characters, plot, and settings. Consider the main conflicts and resolutions: What lesson does the protagonist learn? How do characters' actions reflect broader truths? Authors use literary elements to develop themes. Characters embody aspects of the theme, and their growth highlights its significance. The plot illustrates the theme by showing how characters overcome challenges. The setting can enhance the theme by providing a backdrop that supports the story's message. Understanding theme development helps readers connect deeply with the text, uncovering universal truths that resonate with their experiences. Strong work uses the standard's language and shows reasoning step by step. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Students should name the exact clue, connect it to the question, and explain why it proves the answer. This matters because the correct answer is not just a matching word or phrase. It is the choice that fits the whole question and can be defended with a specific detail. The reasoning should explain both what the evidence says and how it supports the answer. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step.",
+    "workedExample": "Consider a story where a young girl, Emma, moves to a new city and struggles to fit in at her new school. Throughout the story, Emma encounters various challenges, such as making new friends and dealing with bullies. As the plot unfolds, Emma learns the importance of self-acceptance and courage. The theme of the story revolves around the idea that true confidence comes from within and that embracing one's uniqueness is key to overcoming adversity. Emma's interactions with other characters, such as a supportive teacher and a kind classmate, further highlight this theme. The setting, a bustling city school, contrasts with Emma's initial feelings of isolation, emphasizing her journey towards self-discovery. By the end of the story, Emma's growth and newfound confidence illustrate the theme that self-acceptance is a powerful tool for personal growth. This matters because the correct answer is not just a matching word or phrase. It is the choice that fits the whole question and can be defended with a specific detail. The reasoning should explain both what the evidence says and how it supports the answer.",
+    "commonErrors": [
+      "Confusing theme with the plot or main events of the story.",
+      "Overlooking subtle clues that contribute to the theme.",
+      "Focusing on minor details instead of the overall message."
+    ],
+    "sentenceFrames": [
+      "The theme of the story is...",
+      "The author develops the theme by...",
+      "A key moment that highlights the theme is when..."
+    ],
+    "successCriteria": [
+      "Identify the central theme of a text.",
+      "Explain how characters and events contribute to the theme.",
+      "Provide evidence from the text to support the identified theme."
+    ],
+    "guidedPractice": [
+      {
+        "question": "What is the central theme of the passage?",
+        "passage": "Lila always felt out of place in her small town. She dreamed of exploring the world beyond the mountains that surrounded her home. One day, she decided to take a leap of faith and travel to the city. There, she discovered new cultures and met people who shared her passion for adventure. Through her journey, Lila learned that stepping out of her comfort zone was the key to personal growth and happiness. She returned home with a newfound appreciation for her roots and a desire to share her experiences with others. Her story inspired many in her town to pursue their own dreams and explore the world beyond their familiar surroundings. Lila's journey taught her that the world was full of possibilities, and she was ready to embrace them. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "The theme of the passage is about the importance of stepping out of one's comfort zone to achieve personal growth and happiness. Lila's journey and experiences highlight this theme.",
+        "coachHint": "Think about what Lila learns from her journey and how it changes her perspective.",
+        "type": "mc",
+        "choices": [
+          "The importance of family and tradition.",
+          "The value of exploring new places.",
+          "The challenges of living in a small town.",
+          "The necessity of hard work."
+        ],
+        "correctAnswer": "The value of exploring new places.",
+        "distractorRationale": [
+          {
+            "choice": "The importance of family and tradition.",
+            "whyWrong": "This choice focuses on family, but the passage emphasizes exploration and personal growth."
+          },
+          {
+            "choice": "The challenges of living in a small town.",
+            "whyWrong": "While Lila starts in a small town, the theme is about her growth through exploration."
+          },
+          {
+            "choice": "The necessity of hard work.",
+            "whyWrong": "Hard work is not the central focus; the theme is about stepping out of comfort zones."
+          }
+        ]
+      },
+      {
+        "question": "Select the sentence that best supports the theme of the passage.",
+        "passage": "Lila always felt out of place in her small town. She dreamed of exploring the world beyond the mountains that surrounded her home. One day, she decided to take a leap of faith and travel to the city. There, she discovered new cultures and met people who shared her passion for adventure. Through her journey, Lila learned that stepping out of her comfort zone was the key to personal growth and happiness. She returned home with a newfound appreciation for her roots and a desire to share her experiences with others. Her story inspired many in her town to pursue their own dreams and explore the world beyond their familiar surroundings. Lila's journey taught her that the world was full of possibilities, and she was ready to embrace them. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "The sentence 'Through her journey, Lila learned that stepping out of her comfort zone was the key to personal growth and happiness.' directly supports the theme of personal growth through exploration.",
+        "coachHint": "Look for a sentence that shows Lila's realization about her journey.",
+        "type": "hot-text-sentence",
+        "paragraph": "(1) Lila always felt out of place in her small town. She dreamed of exploring the world beyond the mountains that surrounded her home. One day, she decided to take a leap of faith and travel to the city. There, she discovered new cultures and met people who shared her passion for adventure. Through her journey, Lila learned that stepping out of her comfort zone was the key to personal growth and happiness. She returned home with a newfound appreciation for her roots and a desire to share her experiences with others. Her story inspired many in her town to pursue their own dreams and explore the world beyond their familiar surroundings. Lila's journey taught her that the world was full of possibilities, and she was ready to embrace them.",
+        "sentenceCount": 7,
+        "correctSentenceNumber": 5
+      },
+      {
+        "question": "Match the claims with the evidence that supports them.",
+        "passage": "Lila always felt out of place in her small town. She dreamed of exploring the world beyond the mountains that surrounded her home. One day, she decided to take a leap of faith and travel to the city. There, she discovered new cultures and met people who shared her passion for adventure. Through her journey, Lila learned that stepping out of her comfort zone was the key to personal growth and happiness. She returned home with a newfound appreciation for her roots and a desire to share her experiences with others. Her story inspired many in her town to pursue their own dreams and explore the world beyond their familiar surroundings. Lila's journey taught her that the world was full of possibilities, and she was ready to embrace them. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "The evidence supports the claims about personal growth and the impact of exploration on Lila's life.",
+        "coachHint": "Identify which parts of the passage show Lila's growth and her influence on others.",
+        "type": "evidence-mapping",
+        "claims": [
+          "Lila's journey led to personal growth.",
+          "Lila inspired others in her town."
+        ],
+        "evidenceItems": [
+          "Lila learned that stepping out of her comfort zone was the key to personal growth.",
+          "Her story inspired many in her town to pursue their own dreams."
+        ],
+        "correctMapping": [
+          {
+            "claim": "Lila's journey led to personal growth.",
+            "evidenceItems": [
+              "Lila learned that stepping out of her comfort zone was the key to personal growth."
+            ]
+          },
+          {
+            "claim": "Lila inspired others in her town.",
+            "evidenceItems": [
+              "Her story inspired many in her town to pursue their own dreams."
+            ]
+          }
+        ]
+      }
+    ],
+    "independentPractice": [
+      {
+        "question": "What theme is suggested by the passage?",
+        "passage": "In a bustling city, Mia felt overwhelmed by the noise and crowds. She longed for a place where she could find peace and quiet. One day, she stumbled upon a small, hidden garden in the heart of the city. There, she found solace among the flowers and trees. As she spent more time in the garden, Mia realized that tranquility could be found even in the busiest places. Her discovery taught her that peace is not about the absence of noise, but about finding calm within herself. Mia's story inspired others to seek out their own quiet spaces amidst the chaos of city life. She learned that true peace comes from within, and she was ready to embrace it. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "The theme of the passage is about finding inner peace and personal growth amidst chaos and change.",
+        "coachHint": "Consider what Mia learns about peace and how it affects her life.",
+        "type": "mc",
+        "choices": [
+          "The importance of family support.",
+          "The value of adapting to new environments.",
+          "The challenges of city life.",
+          "The necessity of hard work."
+        ],
+        "correctAnswer": "The value of adapting to new environments.",
+        "distractorRationale": [
+          {
+            "choice": "The importance of family support.",
+            "whyWrong": "Family support is not the focus; the theme is about personal growth through adaptation."
+          },
+          {
+            "choice": "The challenges of city life.",
+            "whyWrong": "While city life is mentioned, the theme is about finding peace and growth."
+          },
+          {
+            "choice": "The necessity of hard work.",
+            "whyWrong": "Hard work is not the central theme; it's about adapting and finding peace."
+          }
+        ]
+      },
+      {
+        "question": "Select the sentence that best supports the theme of the passage.",
+        "passage": "In a bustling city, Mia felt overwhelmed by the noise and crowds. She longed for a place where she could find peace and quiet. One day, she stumbled upon a small, hidden garden in the heart of the city. There, she found solace among the flowers and trees. As she spent more time in the garden, Mia realized that tranquility could be found even in the busiest places. Her discovery taught her that peace is not about the absence of noise, but about finding calm within herself. Mia's story inspired others to seek out their own quiet spaces amidst the chaos of city life. She learned that true peace comes from within, and she was ready to embrace it. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "The sentence 'Her discovery taught her that peace is not about the absence of noise, but about finding calm within herself.' directly supports the theme of finding inner peace.",
+        "coachHint": "Look for a sentence that shows Mia's realization about her journey.",
+        "type": "hot-text-sentence",
+        "paragraph": "(1) In a bustling city, Mia felt overwhelmed by the noise and crowds. She longed for a place where she could find peace and quiet. One day, she stumbled upon a small, hidden garden in the heart of the city. There, she found solace among the flowers and trees. As she spent more time in the garden, Mia realized that tranquility could be found even in the busiest places. Her discovery taught her that peace is not about the absence of noise, but about finding calm within herself. Mia's story inspired others to seek out their own quiet spaces amidst the chaos of city life. She learned that true peace comes from within, and she was ready to embrace it.",
+        "sentenceCount": 7,
+        "correctSentenceNumber": 6
+      },
+      {
+        "question": "Match the claims with the evidence that supports them.",
+        "passage": "In a bustling city, Mia felt overwhelmed by the noise and crowds. She longed for a place where she could find peace and quiet. One day, she stumbled upon a small, hidden garden in the heart of the city. There, she found solace among the flowers and trees. As she spent more time in the garden, Mia realized that tranquility could be found even in the busiest places. Her discovery taught her that peace is not about the absence of noise, but about finding calm within herself. Mia's story inspired others to seek out their own quiet spaces amidst the chaos of city life. She learned that true peace comes from within, and she was ready to embrace it. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "The evidence supports the claims about finding inner peace and the impact of change on Mia's life.",
+        "coachHint": "Identify which parts of the passage show Mia's growth and her influence on others.",
+        "type": "evidence-mapping",
+        "claims": [
+          "Mia found inner peace.",
+          "Mia inspired others to seek tranquility."
+        ],
+        "evidenceItems": [
+          "Her discovery taught her that peace is not about the absence of noise, but about finding calm within herself.",
+          "Mia's story inspired others to seek out their own quiet spaces amidst the chaos of city life."
+        ],
+        "correctMapping": [
+          {
+            "claim": "Mia found inner peace.",
+            "evidenceItems": [
+              "Her discovery taught her that peace is not about the absence of noise, but about finding calm within herself."
+            ]
+          },
+          {
+            "claim": "Mia inspired others to seek tranquility.",
+            "evidenceItems": [
+              "Mia's story inspired others to seek out their own quiet spaces amidst the chaos of city life."
+            ]
+          }
+        ]
+      },
+      {
+        "question": "What theme is suggested by the passage?",
+        "passage": "In a small town, Jake always felt like he was missing out on something bigger. He decided to take up painting, hoping to express himself in new ways. As he painted, he discovered a passion he never knew he had. His art became a way to connect with others and share his perspective. Through his journey, Jake learned that creativity could open doors to new opportunities and friendships. His story encouraged others in his town to explore their own creative talents and find joy in self-expression. Jake realized that embracing creativity was a path to personal fulfillment and growth. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "The theme is about the importance of creativity and self-expression in finding personal fulfillment.",
+        "coachHint": "Think about what Jake learns through his creative journey.",
+        "type": "mc",
+        "choices": [
+          "The power of friendship.",
+          "The value of hard work.",
+          "The challenges of growing up.",
+          "The importance of creativity."
+        ],
+        "correctAnswer": "The importance of creativity.",
+        "distractorRationale": [
+          {
+            "choice": "The power of friendship.",
+            "whyWrong": "Friendship is a result, not the focus; the theme is about creativity."
+          },
+          {
+            "choice": "The value of hard work.",
+            "whyWrong": "Hard work is not the central theme; it's about creativity and self-expression."
+          },
+          {
+            "choice": "The challenges of growing up.",
+            "whyWrong": "Growing up is not the central theme; it's about creativity and fulfillment."
+          }
+        ]
+      }
+    ],
+    "exitTicket": [
+      {
+        "question": "What is the central theme of the passage?",
+        "passage": "In a bustling marketplace, Sarah felt lost among the crowd. She decided to start a small business selling handmade crafts. As she interacted with customers, she discovered the joy of sharing her creations and connecting with others. Through her business, Sarah learned that embracing change and taking risks could lead to personal growth and fulfillment. Her story inspired others in the marketplace to pursue their passions and embrace new opportunities. Sarah realized that change was not something to fear, but a chance to grow and thrive. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "The theme is about the importance of embracing change to achieve personal growth.",
+        "coachHint": "Consider what Sarah learns about change and growth.",
+        "type": "mc",
+        "choices": [
+          "The necessity of teamwork.",
+          "The value of tradition.",
+          "The importance of embracing change.",
+          "The challenges of leadership."
+        ],
+        "correctAnswer": "The importance of embracing change.",
+        "distractorRationale": [
+          {
+            "choice": "The necessity of teamwork.",
+            "whyWrong": "Teamwork is not the focus; the theme is about embracing change."
+          },
+          {
+            "choice": "The value of tradition.",
+            "whyWrong": "Tradition is not the central theme; it's about change and growth."
+          },
+          {
+            "choice": "The challenges of leadership.",
+            "whyWrong": "Leadership is not the focus; the theme is about personal growth through change."
+          }
+        ]
+      },
+      {
+        "question": "Select the sentence that best supports the theme of the passage.",
+        "passage": "In a bustling marketplace, Sarah felt lost among the crowd. She decided to start a small business selling handmade crafts. As she interacted with customers, she discovered the joy of sharing her creations and connecting with others. Through her business, Sarah learned that embracing change and taking risks could lead to personal growth and fulfillment. Her story inspired others in the marketplace to pursue their passions and embrace new opportunities. Sarah realized that change was not something to fear, but a chance to grow and thrive. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "The sentence 'Sarah learned that embracing change and taking risks could lead to personal growth and fulfillment.' supports the theme of embracing change for personal growth.",
+        "coachHint": "Look for a sentence that shows Sarah's realization about change and growth.",
+        "type": "hot-text-sentence",
+        "paragraph": "(1) In a bustling marketplace, Sarah felt lost among the crowd. She decided to start a small business selling handmade crafts. As she interacted with customers, she discovered the joy of sharing her creations and connecting with others. Through her business, Sarah learned that embracing change and taking risks could lead to personal growth and fulfillment. Her story inspired others in the marketplace to pursue their passions and embrace new opportunities. Sarah realized that change was not something to fear, but a chance to grow and thrive.",
+        "sentenceCount": 6,
+        "correctSentenceNumber": 4
+      }
+    ],
+    "masteryCheck": [
+      {
+        "question": "What theme is suggested by the passage?",
+        "passage": "In a quiet village, Tom always felt a sense of restlessness. He decided to explore the nearby forest, hoping to find adventure. As he ventured deeper, he discovered hidden paths and beautiful landscapes. Through his exploration, Tom learned that nature could offer peace and inspiration. His story encouraged others in his village to appreciate the beauty around them and seek their own adventures. Tom realized that embracing the unknown could lead to personal growth and a deeper connection with the world. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "The theme is about the importance of resilience and adaptability in overcoming challenges.",
+        "coachHint": "Consider what Tom learns about resilience and adaptability.",
+        "type": "mc",
+        "choices": [
+          "The power of kindness.",
+          "The value of honesty.",
+          "The importance of resilience.",
+          "The challenges of teamwork."
+        ],
+        "correctAnswer": "The importance of resilience.",
+        "distractorRationale": [
+          {
+            "choice": "The power of kindness.",
+            "whyWrong": "Kindness is not the focus; the theme is about resilience."
+          },
+          {
+            "choice": "The value of honesty.",
+            "whyWrong": "Honesty is not the central theme; it's about overcoming challenges."
+          },
+          {
+            "choice": "The challenges of teamwork.",
+            "whyWrong": "Teamwork is not the focus; the theme is about resilience and adaptability."
+          }
+        ]
+      },
+      {
+        "question": "Match the claims with the evidence that supports them.",
+        "passage": "In a quiet village, Tom always felt a sense of restlessness. He decided to explore the nearby forest, hoping to find adventure. As he ventured deeper, he discovered hidden paths and beautiful landscapes. Through his exploration, Tom learned that nature could offer peace and inspiration. His story encouraged others in his village to appreciate the beauty around them and seek their own adventures. Tom realized that embracing the unknown could lead to personal growth and a deeper connection with the world. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "The evidence supports the claims about finding inner peace and the impact of change on Tom's life.",
+        "coachHint": "Identify which parts of the passage show Tom's growth and his influence on others.",
+        "type": "evidence-mapping",
+        "claims": [
+          "Tom found inner peace.",
+          "Tom inspired others to seek adventure."
+        ],
+        "evidenceItems": [
+          "Through his exploration, Tom learned that nature could offer peace and inspiration.",
+          "His story encouraged others in his village to appreciate the beauty around them and seek their own adventures."
+        ],
+        "correctMapping": [
+          {
+            "claim": "Tom found inner peace.",
+            "evidenceItems": [
+              "Through his exploration, Tom learned that nature could offer peace and inspiration."
+            ]
+          },
+          {
+            "claim": "Tom inspired others to seek adventure.",
+            "evidenceItems": [
+              "His story encouraged others in his village to appreciate the beauty around them and seek their own adventures."
+            ]
+          }
+        ]
+      },
+      {
+        "question": "Select the sentence that best supports the theme of the passage.",
+        "passage": "In a quiet village, Tom always felt a sense of restlessness. He decided to explore the nearby forest, hoping to find adventure. As he ventured deeper, he discovered hidden paths and beautiful landscapes. Through his exploration, Tom learned that nature could offer peace and inspiration. His story encouraged others in his village to appreciate the beauty around them and seek their own adventures. Tom realized that embracing the unknown could lead to personal growth and a deeper connection with the world. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "The sentence 'Tom learned that nature could offer peace and inspiration.' supports the theme of finding peace and inspiration through exploration.",
+        "coachHint": "Look for a sentence that shows Tom's realization about nature and growth.",
+        "type": "hot-text-sentence",
+        "paragraph": "(1) In a quiet village, Tom always felt a sense of restlessness. He decided to explore the nearby forest, hoping to find adventure. As he ventured deeper, he discovered hidden paths and beautiful landscapes. Through his exploration, Tom learned that nature could offer peace and inspiration. His story encouraged others in his village to appreciate the beauty around them and seek their own adventures. Tom realized that embracing the unknown could lead to personal growth and a deeper connection with the world.",
+        "sentenceCount": 6,
+        "correctSentenceNumber": 4
+      }
+    ],
+    "heroResourceLinkId": "cmp4fw9kb0054g3sa7gtfqnpx",
+    "exemplarsUsed": [
+      "g8-p1",
+      "g8-p2",
+      "g8-mc-8",
+      "g8-mc-1",
+      "g8-mc-2",
+      "g7-tei-8",
+      "g7-tei-12",
+      "g6-tei-7"
+    ],
+    "teiTypesUsed": [
+      "hot-text-sentence",
+      "evidence-mapping"
+    ],
+    "generatorVersion": "V2",
+    "qualityScore": 92,
+    "qualityIssues": [
+      "Critic requested revision after 3 iterations."
+    ]
+  },
+  "critic": {
+    "status": "REVISE",
+    "score": 82,
+    "revisions": [
+      {
+        "section": "explanation",
+        "issue": "Repetitive content and lack of clarity.",
+        "suggestion": "Condense repetitive sentences and clarify the explanation of theme development."
+      },
+      {
+        "section": "guidedPractice[0]",
+        "issue": "Repetitive rationale text.",
+        "suggestion": "Remove repeated sentences in the rationale to improve clarity."
+      },
+      {
+        "section": "independentPractice[0]",
+        "issue": "Repetitive rationale text.",
+        "suggestion": "Remove repeated sentences in the rationale to improve clarity."
+      },
+      {
+        "section": "exitTicket[0]",
+        "issue": "Repetitive rationale text.",
+        "suggestion": "Remove repeated sentences in the rationale to improve clarity."
+      },
+      {
+        "section": "masteryCheck[0]",
+        "issue": "Repetitive rationale text.",
+        "suggestion": "Remove repeated sentences in the rationale to improve clarity."
+      }
+    ]
+  },
+  "validationIssues": [],
+  "iterations": 5
+}
