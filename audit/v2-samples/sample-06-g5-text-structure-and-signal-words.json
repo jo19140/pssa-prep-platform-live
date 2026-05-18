@@ -6,312 +6,346 @@
     "skill": "Text Structure and Signal Words",
     "title": "Understanding Text Structure and Signal Words",
     "whyAssigned": "This mini-lesson targets Text Structure and Signal Words because the diagnostic showed a standards-aligned practice gap.",
-    "hook": "Have you ever tried to follow a recipe or build something with instructions? Imagine if those steps were all mixed up! Understanding text structure is like having a clear set of instructions. It helps us see how information is organized, making it easier to understand and remember what we read.",
-    "explanation": "Text structure refers to how information is organized in a passage. Recognizing text structure helps readers understand the author's purpose and the main ideas. There are several common types of text structures: \n\n1. **Sequence/Chronological Order**: This structure presents events in the order they happen. Signal words include \"first,\" \"next,\" \"then,\" and \"finally.\"\n\n2. **Cause and Effect**: This structure explains reasons why something happened or the effects of something. Signal words include \"because,\" \"therefore,\" \"as a result,\" and \"due to.\"\n\n3. **Compare and Contrast**: This structure shows how two or more things are similar and different. Signal words include \"similarly,\" \"on the other hand,\" \"both,\" and \"however.\"\n\n4. **Problem and Solution**: This structure presents a problem and then offers one or more solutions. Signal words include \"problem,\" \"solution,\" \"solve,\" and \"issue.\"\n\n5. **Description**: This structure provides details about a topic. Signal words include \"for example,\" \"such as,\" \"including,\" and \"characteristics.\"\n\nUnderstanding these structures helps readers anticipate what information will come next and how it relates to what they have already read. For example, if a passage uses sequence, you know to look for steps or events in order. If it uses cause and effect, you can look for reasons and outcomes. Recognizing these patterns makes reading more efficient and enjoyable. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step.",
-    "workedExample": "Let's look at a short passage to identify its structure:\n\n\"Every morning, Sarah follows a routine. First, she wakes up and brushes her teeth. Then, she eats breakfast. After that, she packs her school bag. Finally, she heads to the bus stop.\"\n\nIn this passage, the structure is **Sequence/Chronological Order**. The signal words \"first,\" \"then,\" \"after that,\" and \"finally\" indicate the order of events. This structure helps us understand Sarah's morning routine step by step.\n\nNow, consider this passage:\n\n\"The playground was empty because it started raining. As a result, the children went inside to play.\"\n\nThis passage uses a **Cause and Effect** structure. The signal words \"because\" and \"as a result\" show the reason (rain) and the effect (children went inside). Recognizing these words helps us understand the relationship between the events. This matters because the correct answer is not just a matching word or phrase. It is the choice that fits the whole question and can be defended with a specific detail. The reasoning should explain both what the evidence says and how it supports the answer.",
+    "hook": "Have you ever read a story or article and wondered why the author organized it in a certain way? Understanding text structure is like having a map that guides you through the text. It helps you see the big picture and understand how different parts connect. Today, we'll explore how authors use signal words to create this structure and make their writing clearer.",
+    "explanation": "Text structure refers to how information is organized in a passage. Authors use different structures to achieve various purposes, such as to inform, entertain, or persuade. Common text structures include sequence, compare and contrast, cause and effect, and problem and solution. Each structure has specific signal words that help identify it. For example, sequence structures often use words like 'first,' 'next,' and 'finally.' Compare and contrast structures might use 'similarly,' 'however,' and 'on the other hand.' Recognizing these signal words can help you determine the structure and better understand the text's purpose. \n\nLet's consider a sequence structure. Imagine a recipe for making cookies. The steps are presented in a specific order, using words like 'first,' 'then,' and 'finally.' This helps the reader follow the process easily. In contrast, a compare and contrast structure might discuss the differences and similarities between two animals, using words like 'both,' 'unlike,' and 'similarly.' \n\nUnderstanding text structure is crucial because it allows you to anticipate what information will come next and how it relates to what you've already read. This skill is especially important in informational texts, where authors often use complex structures to present facts and ideas. By identifying the structure and signal words, you can improve your comprehension and retention of the material. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step.",
+    "workedExample": "Let's examine a short passage to identify its text structure and signal words. \n\n\"In the morning, Sarah likes to start her day with a healthy breakfast. First, she prepares a bowl of oatmeal. Next, she adds fresh berries and a drizzle of honey. Finally, she enjoys her meal with a cup of green tea.\"\n\nIn this passage, the author uses a sequence structure. The signal words 'first,' 'next,' and 'finally' indicate the order of events. These words help the reader understand the steps Sarah takes to prepare her breakfast. Recognizing this structure allows you to follow the process logically and anticipate what comes next. \n\nBy identifying the sequence structure and its signal words, you can see how the author organizes the information to guide the reader through the steps clearly and effectively. This matters because the correct answer is not just a matching word or phrase. It is the choice that fits the whole question and can be defended with a specific detail. The reasoning should explain both what the evidence says and how it supports the answer.",
     "commonErrors": [
-      "Confusing signal words for different structures.",
-      "Missing the main idea due to not recognizing the structure.",
-      "Overlooking the author's purpose because of unclear text organization."
+      "Students may confuse signal words for different structures, such as using 'however' in a sequence context.",
+      "Some students might overlook signal words entirely, missing the structure.",
+      "Students may misinterpret the purpose of a structure, such as thinking a compare and contrast is a cause and effect."
     ],
     "sentenceFrames": [
       "The text structure used in this passage is ____.",
-      "Signal words that indicate this structure are ____.",
-      "This structure helps the reader understand ____."
+      "Signal words that indicate this structure include ____, ____, and ____.",
+      "The author organizes the information by ____."
     ],
     "successCriteria": [
-      "I can identify the text structure used in a passage.",
-      "I can recognize signal words that indicate the text structure.",
-      "I can explain how the text structure helps understand the passage."
+      "Identify the text structure used in a passage.",
+      "Recognize and list signal words that indicate the structure.",
+      "Explain how the structure helps convey the author's purpose."
     ],
     "guidedPractice": [
       {
-        "question": "What is the text structure of the following passage? \"The rain poured down heavily. Consequently, the streets were flooded, and traffic came to a halt.\"",
-        "passage": "The rain poured down heavily. Consequently, the streets were flooded, and traffic came to a halt. People were advised to stay indoors until the water receded. Emergency services were on high alert to assist those in need. As the rain continued, the city prepared for more potential flooding by setting up barriers and distributing sandbags to vulnerable areas. The weather forecast predicted more rain, urging residents to take precautions and stay informed about the situation. Despite the challenges, community members came together to support each other, showcasing resilience and unity in the face of adversity. The local government coordinated efforts to ensure safety and minimize damage, highlighting the importance of preparedness and cooperation during such events. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
-        "rightAnswerRationale": "The passage uses a Cause and Effect structure. The signal words \"consequently\" and \"as a result\" indicate the effects of the rain.",
-        "coachHint": "Look for words that show a reason and what happened because of it.",
+        "question": "What text structure is used in the passage below?",
+        "passage": "The journey of a river is a remarkable process. It begins as a small stream high in the mountains. As it flows downhill, it gathers more water from rain and melting snow. The stream grows into a river, winding through valleys and plains. Eventually, it reaches the ocean, completing its journey. This cycle repeats as water evaporates, forms clouds, and falls as rain, feeding the streams once again. Understanding this cycle helps us appreciate the natural world and the interconnectedness of water systems. By observing this process, scientists can learn more about the environment and work towards its preservation. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "The passage uses a sequence structure, indicated by the signal words 'begins,' 'as it flows,' 'grows,' and 'eventually.'",
+        "coachHint": "Look for words that indicate order or steps.",
         "type": "mc",
         "choices": [
-          "Sequence/Chronological Order",
-          "Cause and Effect",
+          "Sequence",
           "Compare and Contrast",
+          "Cause and Effect",
+          "Problem and Solution"
+        ],
+        "correctAnswer": "Sequence",
+        "distractorRationale": [
+          {
+            "choice": "Compare and Contrast",
+            "whyWrong": "The passage does not discuss similarities or differences between two subjects."
+          },
+          {
+            "choice": "Cause and Effect",
+            "whyWrong": "The passage does not explain reasons or results."
+          },
+          {
+            "choice": "Problem and Solution",
+            "whyWrong": "The passage does not present a problem and its solution."
+          }
+        ]
+      },
+      {
+        "question": "Select the correct signal word to complete the sentence: 'The storm caused significant damage. ____, the community came together to rebuild.'",
+        "passage": null,
+        "rightAnswerRationale": "'Consequently' indicates a result, fitting the cause and effect structure.",
+        "coachHint": "Think about which word shows a result of the storm.",
+        "type": "inline-dropdown",
+        "sentence": "The storm caused significant damage. [BLANK], the community came together to rebuild.",
+        "dropdownOptions": [
+          "Consequently",
+          "Similarly",
+          "However",
+          "Finally"
+        ],
+        "correctOption": "Consequently",
+        "distractorRationale": [
+          {
+            "option": "Similarly",
+            "whyWrong": "'Similarly' is used for comparing, not showing results."
+          },
+          {
+            "option": "However",
+            "whyWrong": "'However' indicates contrast, not a result."
+          },
+          {
+            "option": "Finally",
+            "whyWrong": "'Finally' indicates the last step in a sequence, not a result."
+          }
+        ]
+      },
+      {
+        "question": "Identify the signal words that indicate a compare and contrast structure in the passage below.",
+        "passage": "Dogs and cats are popular pets, but they have different needs. Dogs require regular walks and enjoy social interaction. In contrast, cats are more independent and often prefer solitude. Both animals can be affectionate, but their ways of showing it differ. Understanding these differences helps pet owners provide the best care for their furry friends. While dogs may wag their tails and bark to show excitement, cats might purr or rub against their owners. Despite these differences, both pets bring joy and companionship to their owners, each in their unique way. By recognizing these traits, pet owners can better appreciate the distinct personalities of their pets and cater to their individual needs. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "The signal words 'in contrast' and 'both' indicate a compare and contrast structure.",
+        "coachHint": "Look for words that show similarities and differences.",
+        "type": "hot-text-phrase",
+        "selectablePhrases": [
+          "in contrast",
+          "both",
+          "finally",
+          "first"
+        ],
+        "correctPhrases": [
+          "in contrast",
+          "both"
+        ],
+        "minSelect": 2,
+        "maxSelect": 2
+      }
+    ],
+    "independentPractice": [
+      {
+        "question": "What text structure is used in the passage below?",
+        "passage": "The invention of the telephone changed communication forever. Before its invention, people relied on letters and telegraphs. However, the telephone allowed for real-time conversations over long distances. As a result, businesses could operate more efficiently, and families could stay connected. This innovation paved the way for future technological advancements, leading to the development of mobile phones and the internet. By understanding the impact of the telephone, we can appreciate the rapid evolution of communication technology and its influence on modern society. The telephone not only revolutionized personal communication but also transformed industries, enabling faster and more effective business operations. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "The passage uses a cause and effect structure, indicated by 'as a result.'",
+        "coachHint": "Look for words that show reasons and results.",
+        "type": "mc",
+        "choices": [
+          "Sequence",
+          "Compare and Contrast",
+          "Cause and Effect",
           "Problem and Solution"
         ],
         "correctAnswer": "Cause and Effect",
         "distractorRationale": [
           {
-            "choice": "Sequence/Chronological Order",
-            "whyWrong": "This choice might seem correct if focusing on the order of events, but the passage emphasizes cause and effect."
+            "choice": "Sequence",
+            "whyWrong": "The passage does not list events in order."
           },
           {
             "choice": "Compare and Contrast",
-            "whyWrong": "This choice is incorrect because the passage does not compare two things."
+            "whyWrong": "The passage does not discuss similarities or differences."
           },
           {
             "choice": "Problem and Solution",
-            "whyWrong": "This choice is incorrect because the passage does not present a problem and solution."
+            "whyWrong": "The passage does not present a problem and its solution."
           }
         ]
       },
       {
-        "question": "Select the correct signal word to complete the sentence: \"The team practiced every day. ____, they won the championship.\"",
+        "question": "Select the correct signal word to complete the sentence: 'The team worked hard all season. ____, they won the championship.'",
         "passage": null,
-        "rightAnswerRationale": "The correct signal word is \"As a result,\" which indicates the outcome of the team's practice.",
-        "coachHint": "Think about what word shows the result of an action.",
+        "rightAnswerRationale": "'Consequently' indicates a result, fitting the cause and effect structure.",
+        "coachHint": "Think about which word shows a result of the team's hard work.",
         "type": "inline-dropdown",
-        "sentence": "The team practiced every day. ____, they won the championship [BLANK].",
+        "sentence": "The team worked hard all season. [BLANK], they won the championship.",
         "dropdownOptions": [
-          "First",
-          "As a result",
+          "Consequently",
           "Similarly",
-          "However"
+          "However",
+          "Finally"
         ],
-        "correctOption": "As a result",
+        "correctOption": "Consequently",
         "distractorRationale": [
           {
-            "option": "First",
-            "whyWrong": "This option is incorrect because it indicates the beginning of a sequence, not a result."
-          },
-          {
             "option": "Similarly",
-            "whyWrong": "This option is incorrect because it indicates a comparison, not a result."
+            "whyWrong": "'Similarly' is used for comparing, not showing results."
           },
           {
             "option": "However",
-            "whyWrong": "This option is incorrect because it indicates a contrast, not a result."
+            "whyWrong": "'However' indicates contrast, not a result."
+          },
+          {
+            "option": "Finally",
+            "whyWrong": "'Finally' indicates the last step in a sequence, not a result."
           }
         ]
       },
       {
-        "question": "Identify the text structure: \"The new park offers various activities. For example, there are hiking trails, picnic areas, and a playground.\"",
-        "passage": null,
-        "rightAnswerRationale": "The passage uses a Description structure, as it provides details about the park's features.",
-        "coachHint": "Look for words that give examples or details.",
-        "type": "hot-text-sentence",
-        "paragraph": "(1) The new park offers various activities. For example, there are hiking trails, picnic areas, and a playground. (2) This sentence gives another clue about the same idea. (3) This sentence helps students decide which detail matters most.",
-        "sentenceCount": 3,
-        "correctSentenceNumber": 2
-      }
-    ],
-    "independentPractice": [
-      {
-        "question": "What is the text structure of the following passage? \"The library was quiet. Meanwhile, students were busy reading and taking notes.\"",
-        "passage": "The library was quiet. Meanwhile, students were busy reading and taking notes. The librarian walked silently between the aisles, ensuring everything was in order. Occasionally, the sound of a page turning or a pen scribbling could be heard. The atmosphere was one of concentration and focus, with everyone immersed in their tasks. As the clock ticked towards closing time, students began to pack up their belongings, ready to leave with newfound knowledge and completed assignments. The library, a haven of learning and discovery, continued to serve as a vital resource for the community, fostering a love for reading and research among its patrons. Its shelves, filled with books of all genres, offered endless possibilities for exploration and growth. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
-        "rightAnswerRationale": "The passage uses a Description structure, as it provides details about the library's atmosphere.",
-        "coachHint": "Look for words that describe the setting or situation.",
-        "type": "mc",
-        "choices": [
-          "Sequence/Chronological Order",
-          "Cause and Effect",
-          "Compare and Contrast",
-          "Description"
-        ],
-        "correctAnswer": "Description",
-        "distractorRationale": [
-          {
-            "choice": "Sequence/Chronological Order",
-            "whyWrong": "This choice is incorrect because the passage does not present events in order."
-          },
-          {
-            "choice": "Cause and Effect",
-            "whyWrong": "This choice is incorrect because the passage does not show a cause and its effects."
-          },
-          {
-            "choice": "Compare and Contrast",
-            "whyWrong": "This choice is incorrect because the passage does not compare two things."
-          }
-        ]
-      },
-      {
-        "question": "Select the correct signal word to complete the sentence: \"The storm was severe. ____, many homes lost power.\"",
-        "passage": null,
-        "rightAnswerRationale": "The correct signal word is \"As a result,\" which indicates the outcome of the storm.",
-        "coachHint": "Think about what word shows the result of an action.",
-        "type": "inline-dropdown",
-        "sentence": "The storm was severe. ____, many homes lost power [BLANK].",
-        "dropdownOptions": [
-          "First",
-          "As a result",
-          "Similarly",
-          "However"
-        ],
-        "correctOption": "As a result",
-        "distractorRationale": [
-          {
-            "option": "First",
-            "whyWrong": "This option is incorrect because it indicates the beginning of a sequence, not a result."
-          },
-          {
-            "option": "Similarly",
-            "whyWrong": "This option is incorrect because it indicates a comparison, not a result."
-          },
-          {
-            "option": "However",
-            "whyWrong": "This option is incorrect because it indicates a contrast, not a result."
-          }
-        ]
-      },
-      {
-        "question": "Identify the text structure: \"The two cities are alike in many ways. Both have large populations and vibrant cultures.\"",
-        "passage": null,
-        "rightAnswerRationale": "The passage uses a Compare and Contrast structure, as it highlights similarities between the two cities.",
-        "coachHint": "Look for words that show similarities or differences.",
-        "type": "hot-text-sentence",
-        "paragraph": "(1) The two cities are alike in many ways. Both have large populations and vibrant cultures. (2) This sentence gives another clue about the same idea. (3) This sentence helps students decide which detail matters most.",
-        "sentenceCount": 3,
-        "correctSentenceNumber": 1
-      },
-      {
-        "question": "Which signal words indicate a Cause and Effect structure?",
-        "passage": null,
-        "rightAnswerRationale": "Signal words like \"because,\" \"therefore,\" and \"as a result\" indicate a Cause and Effect structure.",
-        "coachHint": "Think about words that show reasons and outcomes.",
-        "type": "multi-select",
-        "choices": [
-          "because",
+        "question": "Identify the signal words that indicate a problem and solution structure in the passage below.",
+        "passage": "Pollution is a growing problem in many cities. To address this issue, governments are implementing stricter regulations on emissions. Additionally, public transportation systems are being expanded to reduce the number of cars on the road. As a result, air quality is improving, and residents are experiencing fewer health problems. By tackling pollution head-on, cities are creating healthier environments for their citizens. These measures not only benefit the environment but also enhance the quality of life for urban dwellers. By investing in sustainable solutions, cities are paving the way for a cleaner, greener future. The success of these initiatives demonstrates the power of collective action in addressing environmental challenges. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "The signal words 'to address this issue' and 'as a result' indicate a problem and solution structure.",
+        "coachHint": "Look for words that show a problem and how it is solved.",
+        "type": "hot-text-phrase",
+        "selectablePhrases": [
+          "to address this issue",
+          "as a result",
           "first",
-          "similarly",
-          "as a result"
+          "similarly"
         ],
-        "correctAnswers": [
-          "because",
+        "correctPhrases": [
+          "to address this issue",
           "as a result"
         ],
         "minSelect": 2,
-        "maxSelect": 4,
-        "partialCreditRule": "per-correct"
+        "maxSelect": 2
+      },
+      {
+        "question": "What text structure is used in the passage below?",
+        "passage": "The process of photosynthesis is vital for plant life. First, plants absorb sunlight through their leaves. Then, they take in carbon dioxide from the air. Next, water from the soil is absorbed by the roots. Finally, these elements combine to produce glucose, which provides energy for the plant. This process not only sustains the plant but also releases oxygen into the atmosphere, benefiting all living organisms. By understanding photosynthesis, we can appreciate the intricate balance of nature and the essential role plants play in maintaining life on Earth. The efficiency of this process highlights the remarkable adaptability of plants in various environments. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "The passage uses a sequence structure, indicated by the signal words 'first,' 'then,' 'next,' and 'finally.'",
+        "coachHint": "Look for words that indicate order or steps.",
+        "type": "mc",
+        "choices": [
+          "Sequence",
+          "Compare and Contrast",
+          "Cause and Effect",
+          "Problem and Solution"
+        ],
+        "correctAnswer": "Sequence",
+        "distractorRationale": [
+          {
+            "choice": "Compare and Contrast",
+            "whyWrong": "The passage does not discuss similarities or differences."
+          },
+          {
+            "choice": "Cause and Effect",
+            "whyWrong": "The passage does not explain reasons or results."
+          },
+          {
+            "choice": "Problem and Solution",
+            "whyWrong": "The passage does not present a problem and its solution."
+          }
+        ]
       }
     ],
     "exitTicket": [
       {
-        "question": "What is the text structure of the following passage? \"The museum offers a variety of exhibits. For instance, there are dinosaur fossils, ancient artifacts, and modern art displays.\"",
-        "passage": "The museum offers a variety of exhibits. For instance, there are dinosaur fossils, ancient artifacts, and modern art displays. Each exhibit is carefully curated to provide visitors with an engaging and educational experience. The dinosaur fossils, towering and majestic, capture the imagination of young and old alike. Ancient artifacts offer a glimpse into the lives of past civilizations, while modern art displays challenge perceptions and inspire creativity. The museum, a treasure trove of knowledge and inspiration, invites all to explore and discover the wonders of history and art. With interactive displays and knowledgeable guides, it ensures a memorable visit for everyone. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
-        "rightAnswerRationale": "The passage uses a Description structure, as it provides details about the museum's exhibits.",
-        "coachHint": "Look for words that give examples or details.",
-        "type": "mc",
-        "choices": [
-          "Sequence/Chronological Order",
-          "Cause and Effect",
-          "Compare and Contrast",
-          "Description"
+        "question": "Select the correct signal word to complete the sentence: 'The experiment failed initially. ____, the team tried a new approach.'",
+        "passage": null,
+        "rightAnswerRationale": "'Subsequently' indicates a sequence, fitting the context of trying a new approach after failure.",
+        "coachHint": "Think about which word shows a sequence of events.",
+        "type": "inline-dropdown",
+        "sentence": "The experiment failed initially. [BLANK], the team tried a new approach.",
+        "dropdownOptions": [
+          "Subsequently",
+          "Similarly",
+          "However",
+          "Finally"
         ],
-        "correctAnswer": "Description",
+        "correctOption": "Subsequently",
         "distractorRationale": [
           {
-            "choice": "Sequence/Chronological Order",
-            "whyWrong": "This choice is incorrect because the passage does not present events in order."
+            "option": "Similarly",
+            "whyWrong": "'Similarly' is used for comparing, not showing sequence."
           },
           {
-            "choice": "Cause and Effect",
-            "whyWrong": "This choice is incorrect because the passage does not show a cause and its effects."
+            "option": "However",
+            "whyWrong": "'However' indicates contrast, not sequence."
           },
           {
-            "choice": "Compare and Contrast",
-            "whyWrong": "This choice is incorrect because the passage does not compare two things."
+            "option": "Finally",
+            "whyWrong": "'Finally' indicates the last step, not a sequence."
           }
         ]
       },
       {
-        "question": "Select the correct signal word to complete the sentence: \"The experiment failed. ____, the team learned valuable lessons.\"",
-        "passage": null,
-        "rightAnswerRationale": "The correct signal word is \"However,\" which indicates a contrast between the failure and the lessons learned.",
-        "coachHint": "Think about what word shows a contrast between two ideas.",
-        "type": "inline-dropdown",
-        "sentence": "The experiment failed. ____, the team learned valuable lessons [BLANK].",
-        "dropdownOptions": [
-          "First",
-          "As a result",
-          "Similarly",
-          "However"
+        "question": "Identify the signal words that indicate a cause and effect structure in the passage below.",
+        "passage": "The introduction of new technology has transformed education. As a result, students have access to a wealth of information online. Consequently, learning has become more interactive and engaging. Teachers are also able to use digital tools to enhance their lessons. This shift has led to improved student outcomes and greater collaboration in the classroom. By embracing technology, schools are preparing students for the demands of the modern world. The integration of technology not only supports traditional teaching methods but also opens up new possibilities for personalized learning. This transformation highlights the importance of adapting to change in the educational landscape. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "The signal words 'as a result' and 'consequently' indicate a cause and effect structure.",
+        "coachHint": "Look for words that show reasons and results.",
+        "type": "hot-text-phrase",
+        "selectablePhrases": [
+          "as a result",
+          "consequently",
+          "first",
+          "similarly"
         ],
-        "correctOption": "However",
-        "distractorRationale": [
-          {
-            "option": "First",
-            "whyWrong": "This option is incorrect because it indicates the beginning of a sequence, not a contrast."
-          },
-          {
-            "option": "As a result",
-            "whyWrong": "This option is incorrect because it indicates a result, not a contrast."
-          },
-          {
-            "option": "Similarly",
-            "whyWrong": "This option is incorrect because it indicates a comparison, not a contrast."
-          }
-        ]
+        "correctPhrases": [
+          "as a result",
+          "consequently"
+        ],
+        "minSelect": 2,
+        "maxSelect": 2
       }
     ],
     "masteryCheck": [
       {
-        "question": "What is the text structure of the following passage? \"The chef prepared the ingredients. Next, she heated the pan and added oil. Then, she sautéed the vegetables.\"",
-        "passage": "The chef prepared the ingredients. Next, she heated the pan and added oil. Then, she sautéed the vegetables. As the aroma filled the kitchen, she added spices and stirred carefully. Finally, she plated the dish, garnishing it with fresh herbs. The meal, a colorful and flavorful creation, was ready to be served. The chef, known for her culinary skills, took pride in her work, ensuring each dish was a masterpiece. Her passion for cooking was evident in every step, from preparation to presentation, making each meal a delightful experience for her guests. The kitchen, bustling with activity, was her domain, where creativity and precision came together to create culinary art. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
-        "rightAnswerRationale": "The passage uses a Sequence/Chronological Order structure, as it presents steps in the cooking process.",
-        "coachHint": "Look for words that show the order of steps or events.",
+        "question": "What text structure is used in the passage below?",
+        "passage": "The history of the bicycle is a story of innovation. Initially, bicycles were simple wooden frames with no pedals. Over time, inventors added pedals, gears, and rubber tires. As a result, bicycles became more efficient and popular. Today, they are used for transportation, exercise, and recreation. Understanding the evolution of the bicycle helps us appreciate the ingenuity of past inventors and the impact of their work on modern society. The continuous improvements in bicycle design demonstrate the power of human creativity and the drive to enhance everyday objects. By studying this history, we can learn valuable lessons about innovation and progress. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "The passage uses a sequence structure, indicated by the chronological order of events.",
+        "coachHint": "Look for words that indicate order or steps.",
         "type": "mc",
         "choices": [
-          "Sequence/Chronological Order",
-          "Cause and Effect",
+          "Sequence",
           "Compare and Contrast",
-          "Description"
+          "Cause and Effect",
+          "Problem and Solution"
         ],
-        "correctAnswer": "Sequence/Chronological Order",
+        "correctAnswer": "Sequence",
         "distractorRationale": [
           {
-            "choice": "Cause and Effect",
-            "whyWrong": "This choice is incorrect because the passage does not show a cause and its effects."
-          },
-          {
             "choice": "Compare and Contrast",
-            "whyWrong": "This choice is incorrect because the passage does not compare two things."
+            "whyWrong": "The passage does not discuss similarities or differences."
           },
           {
-            "choice": "Description",
-            "whyWrong": "This choice is incorrect because the passage does not provide detailed descriptions."
+            "choice": "Cause and Effect",
+            "whyWrong": "The passage does not explain reasons or results."
+          },
+          {
+            "choice": "Problem and Solution",
+            "whyWrong": "The passage does not present a problem and its solution."
           }
         ]
       },
       {
-        "question": "Select the correct signal word to complete the sentence: \"The sun set, and the sky turned dark. ____, the stars began to appear.\"",
+        "question": "Select the correct signal word to complete the sentence: 'The weather was unpredictable. ____, we decided to postpone the picnic.'",
         "passage": null,
-        "rightAnswerRationale": "The correct signal word is \"Then,\" which indicates the sequence of events.",
-        "coachHint": "Think about what word shows the next step in a sequence.",
+        "rightAnswerRationale": "'Therefore' indicates a result, fitting the cause and effect structure.",
+        "coachHint": "Think about which word shows a result of the weather.",
         "type": "inline-dropdown",
-        "sentence": "The sun set, and the sky turned dark. ____, the stars began to appear [BLANK].",
+        "sentence": "The weather was unpredictable. [BLANK], we decided to postpone the picnic.",
         "dropdownOptions": [
-          "First",
-          "Then",
+          "Therefore",
           "Similarly",
-          "However"
+          "However",
+          "Finally"
         ],
-        "correctOption": "Then",
+        "correctOption": "Therefore",
         "distractorRationale": [
           {
-            "option": "First",
-            "whyWrong": "This option is incorrect because it indicates the beginning of a sequence, not a continuation."
-          },
-          {
             "option": "Similarly",
-            "whyWrong": "This option is incorrect because it indicates a comparison, not a sequence."
+            "whyWrong": "'Similarly' is used for comparing, not showing results."
           },
           {
             "option": "However",
-            "whyWrong": "This option is incorrect because it indicates a contrast, not a sequence."
+            "whyWrong": "'However' indicates contrast, not a result."
+          },
+          {
+            "option": "Finally",
+            "whyWrong": "'Finally' indicates the last step, not a result."
           }
         ]
       },
       {
-        "question": "Identify the text structure: \"The two animals are different in many ways. One is nocturnal, while the other is active during the day.\"",
-        "passage": null,
-        "rightAnswerRationale": "The passage uses a Compare and Contrast structure, as it highlights differences between the two animals.",
-        "coachHint": "Look for words that show similarities or differences.",
-        "type": "hot-text-sentence",
-        "paragraph": "(1) The two animals are different in many ways. One is nocturnal, while the other is active during the day. (2) This sentence gives another clue about the same idea. (3) This sentence helps students decide which detail matters most.",
-        "sentenceCount": 3,
-        "correctSentenceNumber": 1
+        "question": "Identify the signal words that indicate a sequence structure in the passage below.",
+        "passage": "The process of making bread is both an art and a science. First, mix the flour, water, yeast, and salt to form a dough. Next, knead the dough until it is smooth and elastic. Then, let it rise in a warm place until it doubles in size. Finally, bake the dough in a preheated oven until golden brown. This method not only creates delicious bread but also allows for creativity in adding different flavors and ingredients. By mastering this process, bakers can produce a variety of breads, each with its unique taste and texture. The satisfaction of baking bread comes from the combination of skill, patience, and experimentation, resulting in a rewarding culinary experience. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "The signal words 'first,' 'next,' 'then,' and 'finally' indicate a sequence structure.",
+        "coachHint": "Look for words that indicate order or steps.",
+        "type": "hot-text-phrase",
+        "selectablePhrases": [
+          "first",
+          "next",
+          "then",
+          "finally"
+        ],
+        "correctPhrases": [
+          "first",
+          "next",
+          "then",
+          "finally"
+        ],
+        "minSelect": 4,
+        "maxSelect": 4
       }
     ],
     "heroResourceLinkId": "cmp4fwawl005sg3sa3hku5sxm",
     "exemplarsUsed": [
+      "Magic Noodles",
+      "Determine the meaning of words and phrases as they are used in grade-level text, including interpretation of figurative language.",
+      "Analyze how two or more texts address similar themes or topics in order to build knowledge or to compare the approaches the authors take.",
+      "Read the sentences. Select the word from the drop-down list that best completes the second sentence.",
+      "Read the paragraph. Select the word from each drop-down list that best completes each sentence.",
+      "Read the sentences. Select a phrase from each drop-down list that shows the relationship between events in the passage.",
       "g5-p1",
       "g5-mc-3",
       "g5-mc-5",
@@ -322,18 +356,27 @@
     ],
     "teiTypesUsed": [
       "inline-dropdown",
-      "hot-text-sentence",
-      "multi-select"
+      "hot-text-phrase"
     ],
     "generatorVersion": "V2",
     "qualityScore": 92,
-    "qualityIssues": []
+    "qualityIssues": [
+      "Practice passage needs regeneration: 157 words (target 150-400) with FK grade 12.7 (target 5±1.5). Write a longer, more natural passage with simpler sentence structure."
+    ]
   },
   "critic": {
-    "status": "PASS",
-    "score": 92,
-    "revisions": []
+    "status": "REVISE",
+    "score": 78,
+    "revisions": [
+      {
+        "section": "guidedPractice[0]",
+        "issue": "Practice passage needs regeneration: 157 words (target 150-400) with FK grade 12.7 (target 5±1.5).",
+        "suggestion": "Write a longer, more natural passage with simpler sentence structure to meet the word count and readability targets."
+      }
+    ]
   },
-  "validationIssues": [],
-  "iterations": 3
+  "validationIssues": [
+    "Practice passage needs regeneration: 157 words (target 150-400) with FK grade 12.7 (target 5±1.5). Write a longer, more natural passage with simpler sentence structure."
+  ],
+  "iterations": 5
 }

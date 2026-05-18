@@ -1,6 +1,6 @@
 import OpenAI from "openai";
 import { db } from "@/lib/db";
-import { allPracticeQuestions, lessonV2Schema, type LessonV2, type PracticeQuestionV2 } from "@/lib/lessonV2Schema";
+import { allPracticeQuestions, lessonV2Schema, parseHotTextWordBrackets, type LessonV2, type PracticeQuestionV2 } from "@/lib/lessonV2Schema";
 import { loadGradeSampler } from "@/lib/pssaExemplarLoader";
 
 export type LessonV2ValidationResult = {
@@ -63,17 +63,32 @@ function validatePracticeQuestion(question: PracticeQuestionV2, gradeLevel: numb
       break;
     }
     case "inline-dropdown":
-      if (!question.sentence.includes("[BLANK]")) issues.push("Inline-dropdown sentence must include [BLANK].");
+      if ((question.sentence.match(/\[BLANK\]/g)?.length || 0) !== 1) issues.push("Inline-dropdown sentence must include exactly one [BLANK].");
+      if (/\[\s*\]/.test(question.sentence)) issues.push("Inline-dropdown sentence must not contain empty [ ] placeholders; move [BLANK] to the blank location.");
+      if (question.dropdownOptions.length < 2) issues.push("Inline-dropdown must include at least 2 dropdownOptions.");
       if (!question.dropdownOptions.includes(question.correctOption)) issues.push("Inline-dropdown correctOption must appear in dropdownOptions.");
       break;
-    case "hot-text-word":
+    case "hot-text-word": {
+      const parsedBrackets = parseHotTextWordBrackets(question.sentence);
+      const bracketBlockCount = question.sentence.match(/\[[^\]]+\]/g)?.length || 0;
+      if (bracketBlockCount !== parsedBrackets.length) {
+        issues.push(`Previous item had a bracket with more or fewer than 2 options, but hot-text-word requires exactly 2. Either reduce to 2 options or change item type to inline-dropdown.`);
+      }
+      if (parsedBrackets.length !== question.bracketPairs.length) {
+        issues.push(`Previous item had ${parsedBrackets.length} valid [ X / Y ] bracket(s) but ${question.bracketPairs.length} bracketPairs; hot-text-word requires one bracketPairs entry per sentence bracket. Either fix the pairs or change item type to inline-dropdown.`);
+      }
+      parsedBrackets.forEach((bracket, index) => {
+        const pair = question.bracketPairs[index];
+        if (!pair) return;
+        if (!sameText(pair.options[0], bracket.options[0]) || !sameText(pair.options[1], bracket.options[1])) {
+          issues.push(`Hot-text-word bracketPairs[${index}] options must match the sentence bracket "${bracket.raw}".`);
+        }
+      });
       for (const pair of question.bracketPairs) {
         if (!pair.options.includes(pair.correct)) issues.push("Hot-text-word correct answer must appear in its bracket pair options.");
-        if (!/\[\s*[^/\]]+\s*\/\s*[^\]]+\]/.test(question.sentence)) {
-          issues.push("Hot-text-word sentence should contain visible [ X / Y ] bracket pairs.");
-        }
       }
       break;
+    }
     case "hot-text-phrase":
       if (question.correctPhrases.some((phrase) => !question.selectablePhrases.includes(phrase))) issues.push("Hot-text-phrase correctPhrases must be selectable.");
       if (question.minSelect > question.maxSelect) issues.push("Hot-text-phrase minSelect cannot exceed maxSelect.");
@@ -87,6 +102,9 @@ function validatePracticeQuestion(question: PracticeQuestionV2, gradeLevel: numb
         if (!mapping) issues.push(`Drag-drop-table item "${item}" has no mapping.`);
         if (mapping && !question.columns.includes(mapping.column)) issues.push(`Drag-drop-table item "${item}" maps to an unknown column.`);
       }
+      for (const mapping of question.correctMapping) {
+        if (!question.draggableItems.includes(mapping.item)) issues.push(`Drag-drop-table mapping item "${mapping.item}" is not in draggableItems.`);
+      }
       break;
     case "drag-drop-order":
       if (question.correctOrder.length !== question.draggableItems.length) issues.push("Drag-drop-order correctOrder must include every draggable item.");
@@ -94,6 +112,12 @@ function validatePracticeQuestion(question: PracticeQuestionV2, gradeLevel: numb
     case "evidence-mapping":
       for (const claim of question.claims) {
         if (!question.correctMapping.find((entry) => entry.claim === claim)?.evidenceItems.length) issues.push(`Evidence-mapping claim "${claim}" has no mapped evidence.`);
+      }
+      for (const mapping of question.correctMapping) {
+        if (!question.claims.includes(mapping.claim)) issues.push(`Evidence-mapping mapped claim "${mapping.claim}" is not in claims.`);
+        for (const evidence of mapping.evidenceItems) {
+          if (!question.evidenceItems.includes(evidence)) issues.push(`Evidence-mapping evidence "${evidence}" is not in evidenceItems.`);
+        }
       }
       break;
     case "multi-select":
@@ -108,6 +132,10 @@ function validatePracticeQuestion(question: PracticeQuestionV2, gradeLevel: numb
   for (const passage of [question.passage, question.type === "hot-text-phrase" || question.type === "evidence-mapping" ? question.passage : undefined]) {
     if (passage && wordCount(passage) < (gradeLevel <= 5 ? 120 : 200)) issues.push("A practice passage is likely too short for the target grade.");
   }
+}
+
+function sameText(a: string, b: string) {
+  return a.trim().replace(/\s+/g, " ").toLowerCase() === b.trim().replace(/\s+/g, " ").toLowerCase();
 }
 
 function requiresPassage(question: PracticeQuestionV2) {

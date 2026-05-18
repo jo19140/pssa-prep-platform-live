@@ -118,6 +118,9 @@ async function generateDraft(
           "<example_tei_items>",
           JSON.stringify(exemplars.techItems, null, 2),
           "</example_tei_items>",
+          "<tei_shape_examples>",
+          JSON.stringify(teiShapeExamples(), null, 2),
+          "</tei_shape_examples>",
           exemplars.tdaPrompts.length ? `<example_tda>${JSON.stringify(exemplars.tdaPrompts, null, 2)}</example_tda>` : "",
           revisionNotes.length ? `<revision_notes>${revisionNotes.join("\n")}</revision_notes>` : "",
           "<lesson_request>",
@@ -164,6 +167,8 @@ async function regenerateTargetedDraft(
       "You are revising a PSSA ELA V2 lesson. Return the full lesson JSON in the same schema.",
       "Preserve sections that are not mentioned in the revision notes. Regenerate only the flawed sections or practice items.",
       "Pay special attention to exact structural fixes: inline-dropdown sentences must include [BLANK]; hot-text-word sentences must include [ word / word ]; passage-dependent TEIs must include a full passage; evidence-mapping must map every claim to at least one evidence item.",
+      "inline-dropdown sentences must contain exactly one [BLANK] at the blank location and must not contain empty [ ] placeholders.",
+      "hot-text-word is only for exactly two choices in each bracket. If a blank needs 3 or more options, change that item to inline-dropdown. Each hot-text-word bracket must contain exactly two options separated by a single /, and bracketPairs.length must equal the number of brackets in the sentence.",
       "If the notes mention TEI variety, replace one current item with a different appropriate TEI type.",
       "If the notes mention passage word count or FK grade, rewrite that passage on a different topic/scenario with simpler, natural sentences.",
     ].join("\n"),
@@ -195,13 +200,42 @@ function buildSystemPrompt(input: GenerateLessonV2Input, plannedTeiTypes: string
     "Passage budget: include full passage text on only 2-3 practice questions total. For all other practice questions, set passage to null and make the item test the same skill without another full passage. Passage-dependent TEI types (hot-text-phrase, evidence-mapping, two-part-ebsr) must include a passage.",
     "Reading passages must be original, grade appropriate, and complete. Any item with a passage field must include a full standalone passage: 170-240 words for grades 3-5 or 275-360 words for grades 6-8. Use short, clear sentences for the grade level. Keep passages near the lower end of the range so the JSON response remains complete. Do not use 2-4 sentence mini-passages in passage fields.",
     "Mapping formats: for drag-drop-table, correctMapping is an array of { item, column } entries. For evidence-mapping, correctMapping is an array of { claim, evidenceItems } entries. Include one mapping entry for every draggable item or claim.",
+    "TEI shape rule: inline-dropdown sentences must contain exactly one [BLANK] at the blank location and no empty [ ] placeholders. hot-text-word is ONLY for a bracket with exactly 2 choices, formatted like [ walks / walk ]. Each bracket must contain exactly two options separated by a single forward slash, and bracketPairs must have one entry per bracket. For blanks with 3 or more choices, use inline-dropdown instead. 3+ options -> inline-dropdown always.",
     "TEI selection guidance:",
-    "Conventions (CC.1.4.x.F/G): subject-verb agreement and verb tense -> inline-dropdown; spelling and word choice -> hot-text-word; sentence structure and fragments -> hot-text-sentence; capitalization and punctuation -> inline-dropdown or hot-text-word.",
+    "Conventions (CC.1.4.x.F/G): subject-verb agreement and verb tense -> inline-dropdown when choosing among 3+ verb forms, hot-text-word only for a 2-choice pair; spelling and word choice -> hot-text-word only for 2-choice pairs, inline-dropdown for 3+ options; sentence structure and fragments -> hot-text-sentence; capitalization and punctuation -> inline-dropdown or 2-choice hot-text-word.",
     "Comprehension (CC.1.2.x, CC.1.3.x): main/central idea -> evidence-mapping or drag-drop-table; theme/character -> MC or two-part-ebsr; author purpose/craft -> MC or hot-text-sentence; compare/contrast -> drag-drop-table; inference/evidence -> two-part-ebsr or evidence-mapping; vocabulary in context -> hot-text-phrase; plot sequencing -> drag-drop-order.",
     "Writing (CC.1.4.x): organization/transitions -> drag-drop-order; style/formality -> hot-text-sentence; supporting evidence -> multi-select or evidence-mapping; TDA prompts remain outside this practice generator.",
     `For this lesson, strongly consider these TEI types: ${plannedTeiTypes.join(", ")}.`,
     `Target: grade ${input.gradeLevel}, ${input.standardCode}, ${input.skill}.`,
   ].join("\n");
+}
+
+function teiShapeExamples() {
+  return {
+    hotTextWordTwoOptionOnly: {
+      type: "hot-text-word",
+      question: "Choose the verb that agrees with the subject.",
+      passage: null,
+      sentence: "The students [ walk / walks ] to the library after lunch.",
+      bracketPairs: [{ options: ["walk", "walks"], correct: "walk" }],
+      rightAnswerRationale: "Students is plural, so the verb should be walk.",
+      coachHint: "Use hot-text-word only when each bracket has exactly two choices.",
+    },
+    inlineDropdownForThreeOrMoreOptions: {
+      type: "inline-dropdown",
+      question: "Choose the verb tense that best completes the sentence.",
+      passage: null,
+      sentence: "Yesterday, Maya [BLANK] her paragraph before turning it in.",
+      dropdownOptions: ["revised", "revises", "will revise"],
+      correctOption: "revised",
+      distractorRationale: [
+        { option: "revises", whyWrong: "Revises is present tense, but yesterday signals past tense." },
+        { option: "will revise", whyWrong: "Will revise is future tense, but the sentence describes yesterday." },
+      ],
+      rightAnswerRationale: "Yesterday signals past tense, so revised is correct.",
+      coachHint: "Use inline-dropdown for blanks with three or more choices.",
+    },
+  };
 }
 
 function practiceTeiTypes(lesson: LessonV2) {
@@ -232,7 +266,7 @@ function repairLessonV2(lesson: LessonV2, input: GenerateLessonV2Input, plannedT
 
 function repairQuestion(question: PracticeQuestionV2, gradeLevel: number): PracticeQuestionV2 {
   const repaired: any = { ...question };
-  if (typeof repaired.passage === "string") repaired.passage = expandPassage(repaired.passage, gradeLevel);
+  if (typeof repaired.passage === "string") repaired.passage = fitPassageToSchema(expandPassage(repaired.passage, gradeLevel));
   if (repaired.type === "mc") {
     const wrongChoices = repaired.choices.filter((choice: string) => choice !== repaired.correctAnswer);
     repaired.distractorRationale = wrongChoices.map((choice: string) => {
@@ -244,6 +278,9 @@ function repairQuestion(question: PracticeQuestionV2, gradeLevel: number): Pract
     repaired.sentence = repaired.sentence.includes(repaired.correctOption)
       ? repaired.sentence.replace(repaired.correctOption, "[BLANK]")
       : `${repaired.sentence.replace(/[.?!]?$/, "")} [BLANK].`;
+  }
+  if (repaired.type === "inline-dropdown") {
+    repaired.sentence = normalizeInlineDropdownSentence(repaired.sentence, repaired.correctOption);
   }
   if (repaired.type === "hot-text-word" && !/\[\s*[^/\]]+\s*\/\s*[^\]]+\]/.test(repaired.sentence)) {
     const pair = repaired.bracketPairs?.[0]?.options || ["is", "are"];
@@ -278,7 +315,33 @@ function expandPassage(text: string, gradeLevel: number) {
   const addition = " The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.";
   const minWords = gradeLevel <= 5 ? 150 : 250;
   while (wordCount(result) < minWords) result = `${result.trim()}${addition}`;
+  return fitPassageToSchema(result);
+}
+
+function normalizeInlineDropdownSentence(sentence: string, correctOption: string) {
+  let result = sentence.trim();
+  if (/\[\s*\]/.test(result)) {
+    result = result.replace(/\[\s*\]/, "[BLANK]").replace(/\s*\[BLANK\](?=[.?!]?$)/, "");
+  }
+  const blanks = result.match(/\[BLANK\]/g)?.length || 0;
+  if (blanks === 0 && result.includes(correctOption)) {
+    result = result.replace(correctOption, "[BLANK]");
+  } else if (blanks > 1) {
+    let seen = 0;
+    result = result.replace(/\[BLANK\]/g, () => {
+      seen += 1;
+      return seen === 1 ? "[BLANK]" : "";
+    }).replace(/\s+([.?!])/g, "$1").replace(/\s{2,}/g, " ");
+  }
   return result;
+}
+
+function fitPassageToSchema(text: string) {
+  const compact = text.trim().replace(/\s+/g, " ");
+  if (compact.length <= 2200) return compact;
+  const clipped = compact.slice(0, 2180);
+  const lastSentenceEnd = Math.max(clipped.lastIndexOf("."), clipped.lastIndexOf("!"), clipped.lastIndexOf("?"));
+  return `${clipped.slice(0, lastSentenceEnd > 650 ? lastSentenceEnd + 1 : 2180).trim()}`;
 }
 
 function buildReplacementTei(type: string, input: GenerateLessonV2Input): PracticeQuestionV2 {

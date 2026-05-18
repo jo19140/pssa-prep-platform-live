@@ -6,17 +6,17 @@
     "skill": "Main Idea and Supporting Details",
     "title": "Understanding Main Ideas and Supporting Details",
     "whyAssigned": "This mini-lesson targets Main Idea and Supporting Details because the diagnostic showed a standards-aligned practice gap.",
-    "hook": "Imagine you're a detective trying to solve a mystery. Each story or article is like a case, and the main idea is the big clue that helps you understand what it's all about. Just like a detective gathers evidence, you'll find supporting details that help explain the main idea. Today, we'll learn how to uncover these clues in any text!",
-    "explanation": "The main idea of a text is the central point or the most important thing the author wants you to know. Think of it as the heart of the story or article. Supporting details are the pieces of information that help explain or prove the main idea. They are like the branches that grow from the main idea, providing more information and context.\n\nTo find the main idea, ask yourself, \"What is this text mostly about?\" Look for repeated ideas or themes. Sometimes, the main idea is stated directly, often in the first or last sentence of a paragraph. Other times, you need to infer it by considering all the details together.\n\nSupporting details can be facts, examples, or descriptions that help you understand the main idea better. They answer questions like \"Who? What? When? Where? Why? and How?\" These details are crucial because they give you the evidence you need to understand and explain the main idea.\n\nFor example, if you're reading a passage about how bees make honey, the main idea might be \"Bees play an essential role in producing honey.\" Supporting details could include descriptions of how bees collect nectar, the process of turning nectar into honey, and the importance of honey in ecosystems.\n\nBy identifying the main idea and supporting details, you can better understand and remember what you read. This skill is essential for reading comprehension and will help you in all subjects. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step.",
-    "workedExample": "Let's look at a short passage:\n\n\"Dogs are known as man's best friend for many reasons. They are loyal and protective, often guarding their owners and homes. Dogs also provide companionship and can be trained to perform various tasks, such as fetching items or guiding the visually impaired.\"\n\nFirst, identify the main idea. Ask yourself, \"What is this passage mostly about?\" The main idea here is that dogs are valuable companions to humans.\n\nNext, find the supporting details. These are the facts and examples that explain why dogs are considered man's best friend. In this passage, the supporting details include:\n- Dogs are loyal and protective.\n- They guard their owners and homes.\n- They provide companionship.\n- They can be trained to perform tasks.\n\nBy connecting these details to the main idea, you can see how they support the central point of the passage. This process helps you understand the text more deeply and remember the information.",
+    "hook": "Imagine you are a detective trying to solve a mystery. To find the solution, you need to gather clues. In reading, the main idea is like the solution to a mystery, and the supporting details are the clues that help you find it. Today, we will learn how to identify the main idea and the supporting details in a text, just like a detective solves a case.",
+    "explanation": "The main idea of a text is the central point or the most important message the author wants to convey. It is what the text is mostly about. Supporting details are pieces of information that explain, prove, or enhance the main idea. They are like the clues that help you understand the main idea better. \n\nTo find the main idea, first, look at the title and headings. They often give hints about the main topic. Next, read the first and last sentences of the paragraphs, as they often contain the main idea. Sometimes, the main idea is not directly stated, so you need to infer it by considering what all the details have in common.\n\nSupporting details can be facts, examples, descriptions, or explanations that help clarify the main idea. They answer questions like who, what, when, where, why, and how. When you read, ask yourself: What is the author trying to tell me? What details support this message?\n\nFor example, if you read a passage about how bees make honey, the main idea might be \"Bees are essential for honey production.\" Supporting details could include descriptions of how bees collect nectar, the process of turning nectar into honey, and the importance of bees in pollination. By identifying these details, you can better understand the main idea and the author's purpose. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step.",
+    "workedExample": "Let's look at a short passage:\n\n\"Many people enjoy visiting the zoo. Zoos are places where people can see animals from all over the world. They provide a safe environment for animals and help educate the public about wildlife conservation. Zoos also participate in breeding programs to help endangered species.\"\n\nTo find the main idea, we start by looking at the first sentence: \"Many people enjoy visiting the zoo.\" This gives us a hint that the passage is about zoos. The supporting details tell us why zoos are important: they allow people to see animals, provide safety for animals, educate the public, and help endangered species.\n\nThe main idea of this passage is that zoos play an important role in conservation and education. The supporting details explain how zoos achieve this role. By identifying these elements, we can understand the author's message more clearly. This matters because the correct answer is not just a matching word or phrase. It is the choice that fits the whole question and can be defended with a specific detail. The reasoning should explain both what the evidence says and how it supports the answer.",
     "commonErrors": [
       "Confusing supporting details with the main idea.",
-      "Overlooking the main idea when it's not directly stated.",
-      "Focusing on minor details instead of key points."
+      "Focusing on minor details instead of the central message.",
+      "Missing the main idea when it is implied rather than stated."
     ],
     "sentenceFrames": [
       "The main idea of the passage is ____.",
-      "A supporting detail that explains the main idea is ____.",
+      "One supporting detail is ____.",
       "This detail supports the main idea because ____."
     ],
     "successCriteria": [
@@ -26,90 +26,89 @@
     ],
     "guidedPractice": [
       {
-        "question": "What is the main idea of the passage about the forest?",
-        "passage": "Forests are important for many reasons. They provide homes for animals and help clean the air. Trees in forests give us oxygen and help control the climate. People also use forests for recreation and resources like wood and fruits. Protecting forests is crucial for keeping our planet healthy and balanced. By learning about forests, we can understand why they are so important and how we can help them thrive. Forests are truly vital to our world, and their protection is essential for a sustainable future. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
-        "rightAnswerRationale": "The main idea is that forests are essential for the environment and human life.",
+        "question": "What is the main idea of the passage about the zoo?",
+        "passage": "Zoos are places where people can see animals from all over the world. They provide a safe environment for animals and help educate the public about wildlife conservation. Zoos also participate in breeding programs to help endangered species. Visiting a zoo can be a fun and educational experience for families and individuals of all ages. By learning about animals and their habitats, visitors gain a greater appreciation for wildlife and the need to protect it. Zoos also contribute to scientific research and conservation efforts, helping to preserve endangered species and their natural environments. Overall, zoos play an important role in conservation and education, making them valuable to both animals and people alike. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "The main idea is that zoos play an important role in conservation and education.",
         "coachHint": "Look for what the passage is mostly about.",
         "type": "mc",
         "choices": [
-          "Forests provide homes for animals.",
-          "Forests are essential for the environment.",
-          "Forests give us wood.",
-          "Forests are places for recreation."
+          "Zoos are fun places to visit.",
+          "Zoos help in conservation and education.",
+          "Zoos have animals from all over the world.",
+          "Zoos are only for children."
         ],
-        "correctAnswer": "Forests are essential for the environment.",
+        "correctAnswer": "Zoos help in conservation and education.",
         "distractorRationale": [
           {
-            "choice": "Forests provide homes for animals.",
+            "choice": "Zoos are fun places to visit.",
+            "whyWrong": "This is a detail, not the main idea."
+          },
+          {
+            "choice": "Zoos have animals from all over the world.",
             "whyWrong": "This is a supporting detail, not the main idea."
           },
           {
-            "choice": "Forests give us wood.",
-            "whyWrong": "This is a supporting detail, not the main idea."
-          },
-          {
-            "choice": "Forests are places for recreation.",
-            "whyWrong": "This is a supporting detail, not the main idea."
+            "choice": "Zoos are only for children.",
+            "whyWrong": "This is incorrect; the passage mentions all ages."
           }
         ]
       },
       {
-        "question": "Match each supporting detail to the correct main idea.",
+        "question": "Match each statement with the correct category: Main Idea or Supporting Detail.",
         "passage": null,
-        "rightAnswerRationale": "Each detail supports the main idea it is matched with.",
-        "coachHint": "Think about what each detail explains or supports.",
+        "rightAnswerRationale": "The main idea is the central message, while supporting details provide evidence or examples.",
+        "coachHint": "Think about what the passage is mostly about and what details support it.",
         "type": "drag-drop-table",
         "draggableItems": [
-          "Forests provide oxygen.",
-          "Forests offer recreation.",
-          "Forests are home to animals."
+          "Zoos help in conservation.",
+          "Zoos have animals from all over the world.",
+          "Zoos educate the public."
         ],
         "columns": [
-          "Main Idea: Forests are essential for the environment.",
-          "Main Idea: Forests provide resources."
+          "Main Idea",
+          "Supporting Detail"
         ],
         "correctMapping": [
           {
-            "item": "Forests provide oxygen.",
-            "column": "Main Idea: Forests are essential for the environment."
+            "item": "Zoos help in conservation.",
+            "column": "Main Idea"
           },
           {
-            "item": "Forests offer recreation.",
-            "column": "Main Idea: Forests provide resources."
+            "item": "Zoos have animals from all over the world.",
+            "column": "Supporting Detail"
           },
           {
-            "item": "Forests are home to animals.",
-            "column": "Main Idea: Forests are essential for the environment."
+            "item": "Zoos educate the public.",
+            "column": "Supporting Detail"
           }
         ]
       },
       {
-        "question": "What is the main idea of the passage about the importance of trees?",
-        "passage": "Trees are vital to our planet. They provide oxygen, which is essential for life. Trees also offer shelter and food for many animals. Additionally, trees help prevent soil erosion and can reduce the effects of climate change by absorbing carbon dioxide. Protecting trees is crucial for maintaining a healthy environment and ensuring the survival of many species. By understanding the importance of trees, we can take steps to protect them and ensure the health of our planet's ecosystems for future generations. Trees are truly vital to our world, and their protection is essential for a sustainable future. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
-        "rightAnswerRationale": "The main idea is that trees are vital to our planet and environment.",
-        "coachHint": "Look for what the passage is mostly about.",
+        "question": "What is the main idea of the passage about bees?",
+        "passage": "Bees are small but mighty creatures that are essential to our world. They help plants grow by moving pollen from one flower to another, which is called pollination. This process is crucial for the production of fruits and vegetables. Bees also make honey, which many people enjoy as a sweet treat. Without bees, many of the foods we love would not be available. Protecting bees and their habitats is important to ensure they can continue their vital work. By planting flowers and avoiding harmful chemicals, we can help bees thrive and support our ecosystem. Understanding the role of bees helps us appreciate their importance and encourages us to protect them. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "The main idea is that bees are crucial for pollination and our food supply.",
+        "coachHint": "Look for the sentence that tells what the passage is mostly about.",
         "type": "two-part-ebsr",
         "partA": {
           "question": "What is the main idea of the passage?",
           "choices": [
-            "Trees provide oxygen.",
-            "Trees are vital to our planet.",
-            "Trees help prevent soil erosion.",
-            "Trees offer shelter to animals."
+            "Bees make honey.",
+            "Bees are crucial for pollination and our food supply.",
+            "Bees are fascinating creatures.",
+            "Bees are in danger."
           ],
-          "correctAnswer": "Trees are vital to our planet."
+          "correctAnswer": "Bees are crucial for pollination and our food supply."
         },
         "partB": {
           "question": "Which details support the main idea?",
           "choices": [
-            "Trees provide oxygen.",
-            "Trees offer shelter and food for animals.",
-            "Trees help prevent soil erosion."
+            "Bees collect nectar from flowers.",
+            "Bees help in the reproduction of plants.",
+            "Bees are responsible for pollinating plants."
           ],
           "correctAnswers": [
-            "Trees provide oxygen.",
-            "Trees offer shelter and food for animals.",
-            "Trees help prevent soil erosion."
+            "Bees help in the reproduction of plants.",
+            "Bees are responsible for pollinating plants."
           ]
         },
         "scoringRule": "B-counts-only-if-A-correct"
@@ -118,20 +117,20 @@
     "independentPractice": [
       {
         "question": "What is the main idea of the passage about rainforests?",
-        "passage": "Rainforests are incredibly important to the Earth's ecosystem. They are home to a vast number of plant and animal species, many of which cannot be found anywhere else. Rainforests also play a crucial role in regulating the Earth's climate by absorbing carbon dioxide and producing oxygen. Additionally, they provide resources such as food, medicine, and raw materials. Protecting rainforests is essential for maintaining biodiversity and ensuring the health of our planet. By understanding the importance of rainforests, we can take steps to protect them and ensure the health of our planet's ecosystems for future generations. Rainforests are truly vital to our world, and their protection is essential for a sustainable future. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
-        "rightAnswerRationale": "The main idea is that rainforests are crucial to the Earth's ecosystem and climate.",
-        "coachHint": "Look for what the passage is mostly about.",
+        "passage": "Rainforests are vital to the health of our planet. They produce oxygen, store carbon dioxide, and are home to countless species of plants and animals. Rainforests help regulate the Earth's climate and provide resources such as medicine and food. Despite their importance, rainforests are being destroyed at an alarming rate. Deforestation leads to loss of biodiversity and contributes to climate change. Protecting rainforests is crucial for maintaining the balance of our ecosystem and ensuring a healthy planet for future generations. By raising awareness and taking action, we can help preserve these vital ecosystems for years to come. Rainforests are not only important for the environment but also for the cultural heritage of indigenous peoples who have lived there for centuries. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "The main idea is that rainforests are vital for the planet's health and need protection.",
+        "coachHint": "Look for the sentence that tells what the passage is mostly about.",
         "type": "mc",
         "choices": [
-          "Rainforests are home to many species.",
-          "Rainforests are important to the Earth's ecosystem.",
+          "Rainforests are home to many animals.",
+          "Rainforests are vital for the planet's health and need protection.",
           "Rainforests produce oxygen.",
-          "Rainforests provide resources."
+          "Rainforests are being destroyed."
         ],
-        "correctAnswer": "Rainforests are important to the Earth's ecosystem.",
+        "correctAnswer": "Rainforests are vital for the planet's health and need protection.",
         "distractorRationale": [
           {
-            "choice": "Rainforests are home to many species.",
+            "choice": "Rainforests are home to many animals.",
             "whyWrong": "This is a supporting detail, not the main idea."
           },
           {
@@ -139,256 +138,260 @@
             "whyWrong": "This is a supporting detail, not the main idea."
           },
           {
-            "choice": "Rainforests provide resources.",
-            "whyWrong": "This is a supporting detail, not the main idea."
+            "choice": "Rainforests are being destroyed.",
+            "whyWrong": "This is a problem mentioned, not the main idea."
           }
         ]
       },
       {
-        "question": "Match each supporting detail to the correct main idea.",
+        "question": "Identify the main idea and supporting details from the passage about recycling.",
         "passage": null,
-        "rightAnswerRationale": "Each detail supports the main idea it is matched with.",
-        "coachHint": "Think about what each detail explains or supports.",
+        "rightAnswerRationale": "The main idea is the central point, while supporting details provide evidence or examples.",
+        "coachHint": "Think about what the passage is mostly about and what details support it.",
         "type": "drag-drop-table",
         "draggableItems": [
-          "Rainforests absorb carbon dioxide.",
-          "Rainforests provide medicine.",
-          "Rainforests are home to unique species."
+          "Recycling reduces waste.",
+          "Recycling saves energy.",
+          "Recycling is important for the environment."
         ],
         "columns": [
-          "Main Idea: Rainforests regulate the Earth's climate.",
-          "Main Idea: Rainforests provide resources."
+          "Main Idea",
+          "Supporting Detail"
         ],
         "correctMapping": [
           {
-            "item": "Rainforests absorb carbon dioxide.",
-            "column": "Main Idea: Rainforests regulate the Earth's climate."
+            "item": "Recycling is important for the environment.",
+            "column": "Main Idea"
           },
           {
-            "item": "Rainforests provide medicine.",
-            "column": "Main Idea: Rainforests provide resources."
+            "item": "Recycling reduces waste.",
+            "column": "Supporting Detail"
           },
           {
-            "item": "Rainforests are home to unique species.",
-            "column": "Main Idea: Rainforests provide resources."
+            "item": "Recycling saves energy.",
+            "column": "Supporting Detail"
           }
         ]
       },
       {
-        "question": "What is the main idea of the passage about oceans?",
-        "passage": "Oceans cover more than 70% of the Earth's surface and are vital to life on our planet. They regulate the climate by absorbing heat and carbon dioxide. Oceans are also home to a diverse range of marine life, providing food and resources for humans. Additionally, oceans play a crucial role in the water cycle, helping to distribute fresh water around the globe. Protecting oceans is essential for maintaining biodiversity and ensuring the health of our planet. By understanding the importance of oceans, we can take steps to protect them and ensure the health of our planet's ecosystems for future generations. Oceans are truly vital to our world, and their protection is essential for a sustainable future. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
-        "rightAnswerRationale": "The main idea is that oceans are vital to life on Earth and the environment.",
-        "coachHint": "Look for what the passage is mostly about.",
+        "question": "What is the main idea of the passage about the water cycle?",
+        "passage": "The water cycle is a continuous process that moves water around our planet. It involves evaporation, condensation, and precipitation. The sun heats up water in rivers, lakes, and oceans, causing it to evaporate into the air. This water vapor cools and condenses into clouds. Eventually, the water falls back to Earth as rain, snow, or hail. The water cycle is essential for replenishing our water supply and supporting life on Earth. It ensures that plants, animals, and humans have the water they need to survive. Understanding the water cycle helps us appreciate the importance of conserving water and protecting our natural resources. By learning about this cycle, we can make informed decisions about water usage and conservation. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "The main idea is that the water cycle is essential for supporting life on Earth.",
+        "coachHint": "Look for the sentence that tells what the passage is mostly about.",
         "type": "two-part-ebsr",
         "partA": {
           "question": "What is the main idea of the passage?",
           "choices": [
-            "Oceans cover most of the Earth's surface.",
-            "Oceans are vital to life on Earth.",
-            "Oceans regulate the climate.",
-            "Oceans provide food."
+            "The water cycle involves evaporation and condensation.",
+            "The water cycle is essential for supporting life on Earth.",
+            "The water cycle includes precipitation.",
+            "The water cycle is a continuous process."
           ],
-          "correctAnswer": "Oceans are vital to life on Earth."
+          "correctAnswer": "The water cycle is essential for supporting life on Earth."
         },
         "partB": {
           "question": "Which details support the main idea?",
           "choices": [
-            "Oceans regulate the climate.",
-            "Oceans are home to marine life.",
-            "Oceans play a role in the water cycle."
+            "The water cycle involves evaporation.",
+            "The water cycle replenishes our water supply.",
+            "The water cycle supports life on Earth."
           ],
           "correctAnswers": [
-            "Oceans regulate the climate.",
-            "Oceans are home to marine life.",
-            "Oceans play a role in the water cycle."
+            "The water cycle replenishes our water supply.",
+            "The water cycle supports life on Earth."
           ]
         },
         "scoringRule": "B-counts-only-if-A-correct"
       },
       {
-        "question": "Match each supporting detail to the correct main idea.",
+        "question": "Match each statement with the correct category: Main Idea or Supporting Detail.",
         "passage": null,
-        "rightAnswerRationale": "Each detail supports the main idea it is matched with.",
-        "coachHint": "Think about what each detail explains or supports.",
+        "rightAnswerRationale": "The main idea is the central message, while supporting details provide evidence or examples.",
+        "coachHint": "Think about what the passage is mostly about and what details support it.",
         "type": "drag-drop-table",
         "draggableItems": [
-          "Oceans absorb heat.",
-          "Oceans provide food.",
-          "Oceans help distribute fresh water."
+          "The sun heats up water.",
+          "The water cycle is essential for life.",
+          "Water falls back to Earth as rain."
         ],
         "columns": [
-          "Main Idea: Oceans regulate the climate.",
-          "Main Idea: Oceans provide resources."
+          "Main Idea",
+          "Supporting Detail"
         ],
         "correctMapping": [
           {
-            "item": "Oceans absorb heat.",
-            "column": "Main Idea: Oceans regulate the climate."
+            "item": "The water cycle is essential for life.",
+            "column": "Main Idea"
           },
           {
-            "item": "Oceans provide food.",
-            "column": "Main Idea: Oceans provide resources."
+            "item": "The sun heats up water.",
+            "column": "Supporting Detail"
           },
           {
-            "item": "Oceans help distribute fresh water.",
-            "column": "Main Idea: Oceans regulate the climate."
+            "item": "Water falls back to Earth as rain.",
+            "column": "Supporting Detail"
           }
         ]
       }
     ],
     "exitTicket": [
       {
-        "question": "What is the main idea of the passage about the importance of rivers?",
-        "passage": "Rivers are essential to both nature and people. They provide fresh water for drinking and farming. Rivers also support wildlife by offering habitats and food sources. Additionally, rivers help transport goods and people, making them vital for trade and travel. Protecting rivers is crucial for maintaining a healthy environment and supporting human activities. By understanding the importance of rivers, we can take steps to protect them and ensure the health of our planet's ecosystems for future generations. Rivers are truly vital to our world, and their protection is essential for a sustainable future. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
-        "rightAnswerRationale": "The main idea is that rivers are essential to nature and human activities.",
-        "coachHint": "Look for what the passage is mostly about.",
+        "question": "What is the main idea of the passage about the seasons?",
+        "passage": "The changing seasons bring different weather patterns and temperatures. In spring, flowers bloom and animals come out of hibernation. Summer is warm and sunny, perfect for outdoor activities. Fall brings cooler temperatures and colorful leaves. Winter is cold and often snowy, with many animals hibernating or migrating. Each season has its own unique characteristics and plays a role in the cycle of life. Understanding the seasons helps us prepare for changes in weather and plan activities accordingly. By observing the seasons, we can appreciate the beauty and diversity of our natural world. The seasons remind us of the Earth's constant changes and the importance of adapting to them. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "The main idea is that each season has unique characteristics and plays a role in the cycle of life.",
+        "coachHint": "Look for the sentence that tells what the passage is mostly about.",
         "type": "mc",
         "choices": [
-          "Rivers provide fresh water.",
-          "Rivers are essential to nature and people.",
-          "Rivers support wildlife.",
-          "Rivers help transport goods."
+          "Spring is the best season.",
+          "Each season has unique characteristics and plays a role in the cycle of life.",
+          "Winter is cold and snowy.",
+          "Summer is perfect for outdoor activities."
         ],
-        "correctAnswer": "Rivers are essential to nature and people.",
+        "correctAnswer": "Each season has unique characteristics and plays a role in the cycle of life.",
         "distractorRationale": [
           {
-            "choice": "Rivers provide fresh water.",
-            "whyWrong": "This is a supporting detail, not the main idea."
+            "choice": "Spring is the best season.",
+            "whyWrong": "This is an opinion, not the main idea."
           },
           {
-            "choice": "Rivers support wildlife.",
-            "whyWrong": "This is a supporting detail, not the main idea."
+            "choice": "Winter is cold and snowy.",
+            "whyWrong": "This is a detail about one season, not the main idea."
           },
           {
-            "choice": "Rivers help transport goods.",
-            "whyWrong": "This is a supporting detail, not the main idea."
+            "choice": "Summer is perfect for outdoor activities.",
+            "whyWrong": "This is a detail about one season, not the main idea."
           }
         ]
       },
       {
-        "question": "Match each supporting detail to the correct main idea.",
+        "question": "Identify the main idea and supporting details from the passage about the solar system.",
         "passage": null,
-        "rightAnswerRationale": "Each detail supports the main idea it is matched with.",
-        "coachHint": "Think about what each detail explains or supports.",
+        "rightAnswerRationale": "The main idea is the central point, while supporting details provide evidence or examples.",
+        "coachHint": "Think about what the passage is mostly about and what details support it.",
         "type": "drag-drop-table",
         "draggableItems": [
-          "Rivers provide fresh water.",
-          "Rivers support wildlife.",
-          "Rivers help transport goods."
+          "The solar system includes planets.",
+          "The solar system is vast and complex.",
+          "The solar system has moons and asteroids."
         ],
         "columns": [
-          "Main Idea: Rivers are essential to nature.",
-          "Main Idea: Rivers support human activities."
+          "Main Idea",
+          "Supporting Detail"
         ],
         "correctMapping": [
           {
-            "item": "Rivers provide fresh water.",
-            "column": "Main Idea: Rivers are essential to nature."
+            "item": "The solar system is vast and complex.",
+            "column": "Main Idea"
           },
           {
-            "item": "Rivers support wildlife.",
-            "column": "Main Idea: Rivers are essential to nature."
+            "item": "The solar system includes planets.",
+            "column": "Supporting Detail"
           },
           {
-            "item": "Rivers help transport goods.",
-            "column": "Main Idea: Rivers support human activities."
+            "item": "The solar system has moons and asteroids.",
+            "column": "Supporting Detail"
           }
         ]
       }
     ],
     "masteryCheck": [
       {
-        "question": "What is the main idea of the passage about rainforests?",
-        "passage": "Rainforests are incredibly important to the Earth's ecosystem. They are home to a vast number of plant and animal species, many of which cannot be found anywhere else. Rainforests also play a crucial role in regulating the Earth's climate by absorbing carbon dioxide and producing oxygen. Additionally, they provide resources such as food, medicine, and raw materials. Protecting rainforests is essential for maintaining biodiversity and ensuring the health of our planet. By understanding the importance of rainforests, we can take steps to protect them and ensure the health of our planet's ecosystems for future generations. Rainforests are truly vital to our world, and their protection is essential for a sustainable future. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
-        "rightAnswerRationale": "The main idea is that rainforests are crucial to the Earth's ecosystem and climate.",
-        "coachHint": "Look for what the passage is mostly about.",
+        "question": "What is the main idea of the passage about butterflies?",
+        "passage": "Butterflies are beautiful insects that undergo a fascinating transformation. They start as eggs, hatch into caterpillars, and then form a chrysalis. Inside the chrysalis, they transform into butterflies. This process is called metamorphosis. Butterflies play an important role in pollination, helping flowers reproduce. They are also a food source for other animals. Protecting butterfly habitats is important for maintaining biodiversity. By planting flowers and avoiding pesticides, we can help butterflies thrive. Understanding the life cycle of butterflies helps us appreciate their beauty and importance in the ecosystem. Butterflies remind us of the wonders of nature and the importance of conservation. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "The main idea is that butterflies undergo metamorphosis and play an important role in the ecosystem.",
+        "coachHint": "Look for the sentence that tells what the passage is mostly about.",
         "type": "mc",
         "choices": [
-          "Rainforests are home to many species.",
-          "Rainforests are important to the Earth's ecosystem.",
-          "Rainforests produce oxygen.",
-          "Rainforests provide resources."
+          "Butterflies are beautiful insects.",
+          "Butterflies undergo metamorphosis and play an important role in the ecosystem.",
+          "Butterflies start as eggs.",
+          "Butterflies are a food source for other animals."
         ],
-        "correctAnswer": "Rainforests are important to the Earth's ecosystem.",
+        "correctAnswer": "Butterflies undergo metamorphosis and play an important role in the ecosystem.",
         "distractorRationale": [
           {
-            "choice": "Rainforests are home to many species.",
-            "whyWrong": "This is a supporting detail, not the main idea."
+            "choice": "Butterflies are beautiful insects.",
+            "whyWrong": "This is a detail, not the main idea."
           },
           {
-            "choice": "Rainforests produce oxygen.",
-            "whyWrong": "This is a supporting detail, not the main idea."
+            "choice": "Butterflies start as eggs.",
+            "whyWrong": "This is a detail about their life cycle, not the main idea."
           },
           {
-            "choice": "Rainforests provide resources.",
+            "choice": "Butterflies are a food source for other animals.",
             "whyWrong": "This is a supporting detail, not the main idea."
           }
         ]
       },
       {
-        "question": "What is the main idea of the passage about oceans?",
-        "passage": "Oceans cover more than 70% of the Earth's surface and are vital to life on our planet. They regulate the climate by absorbing heat and carbon dioxide. Oceans are also home to a diverse range of marine life, providing food and resources for humans. Additionally, oceans play a crucial role in the water cycle, helping to distribute fresh water around the globe. Protecting oceans is essential for maintaining biodiversity and ensuring the health of our planet. By understanding the importance of oceans, we can take steps to protect them and ensure the health of our planet's ecosystems for future generations. Oceans are truly vital to our world, and their protection is essential for a sustainable future. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
-        "rightAnswerRationale": "The main idea is that oceans are vital to life on Earth and the environment.",
-        "coachHint": "Look for what the passage is mostly about.",
+        "question": "Match each statement with the correct category: Main Idea or Supporting Detail.",
+        "passage": null,
+        "rightAnswerRationale": "The main idea is the central message, while supporting details provide evidence or examples.",
+        "coachHint": "Think about what the passage is mostly about and what details support it.",
+        "type": "drag-drop-table",
+        "draggableItems": [
+          "Butterflies undergo metamorphosis.",
+          "Butterflies help in pollination.",
+          "Butterflies are a food source."
+        ],
+        "columns": [
+          "Main Idea",
+          "Supporting Detail"
+        ],
+        "correctMapping": [
+          {
+            "item": "Butterflies undergo metamorphosis.",
+            "column": "Main Idea"
+          },
+          {
+            "item": "Butterflies help in pollination.",
+            "column": "Supporting Detail"
+          },
+          {
+            "item": "Butterflies are a food source.",
+            "column": "Supporting Detail"
+          }
+        ]
+      },
+      {
+        "question": "What is the main idea of the passage about the ocean?",
+        "passage": "The ocean is a vast and mysterious place that covers more than 70% of the Earth's surface. It is home to a diverse range of marine life, from tiny plankton to giant whales. The ocean plays a crucial role in regulating the Earth's climate by absorbing carbon dioxide and heat. It also provides resources such as food, medicine, and energy. Despite its importance, the ocean faces threats from pollution, overfishing, and climate change. Protecting the ocean is essential for maintaining the health of our planet. By reducing pollution and supporting sustainable fishing practices, we can help preserve the ocean for future generations. Understanding the ocean's role in our ecosystem helps us appreciate its beauty and importance. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "The main idea is that the ocean is crucial for the Earth's climate and needs protection.",
+        "coachHint": "Look for the sentence that tells what the passage is mostly about.",
         "type": "two-part-ebsr",
         "partA": {
           "question": "What is the main idea of the passage?",
           "choices": [
-            "Oceans cover most of the Earth's surface.",
-            "Oceans are vital to life on Earth.",
-            "Oceans regulate the climate.",
-            "Oceans provide food."
+            "The ocean is home to marine life.",
+            "The ocean is crucial for the Earth's climate and needs protection.",
+            "The ocean covers 70% of the Earth's surface.",
+            "The ocean provides resources."
           ],
-          "correctAnswer": "Oceans are vital to life on Earth."
+          "correctAnswer": "The ocean is crucial for the Earth's climate and needs protection."
         },
         "partB": {
           "question": "Which details support the main idea?",
           "choices": [
-            "Oceans regulate the climate.",
-            "Oceans are home to marine life.",
-            "Oceans play a role in the water cycle."
+            "The ocean absorbs carbon dioxide.",
+            "The ocean provides food and medicine.",
+            "The ocean faces threats from pollution."
           ],
           "correctAnswers": [
-            "Oceans regulate the climate.",
-            "Oceans are home to marine life.",
-            "Oceans play a role in the water cycle."
+            "The ocean absorbs carbon dioxide.",
+            "The ocean faces threats from pollution."
           ]
         },
         "scoringRule": "B-counts-only-if-A-correct"
-      },
-      {
-        "question": "Match each supporting detail to the correct main idea.",
-        "passage": null,
-        "rightAnswerRationale": "Each detail supports the main idea it is matched with.",
-        "coachHint": "Think about what each detail explains or supports.",
-        "type": "drag-drop-table",
-        "draggableItems": [
-          "Oceans absorb heat.",
-          "Oceans provide food.",
-          "Oceans help distribute fresh water."
-        ],
-        "columns": [
-          "Main Idea: Oceans regulate the climate.",
-          "Main Idea: Oceans provide resources."
-        ],
-        "correctMapping": [
-          {
-            "item": "Oceans absorb heat.",
-            "column": "Main Idea: Oceans regulate the climate."
-          },
-          {
-            "item": "Oceans provide food.",
-            "column": "Main Idea: Oceans provide resources."
-          },
-          {
-            "item": "Oceans help distribute fresh water.",
-            "column": "Main Idea: Oceans regulate the climate."
-          }
-        ]
       }
     ],
     "heroResourceLinkId": "cmp4fw1pv001dg3sai6y6sy8a",
     "exemplarsUsed": [
+      "Building a World with Toothpicks",
+      "What is the most likely reason the author includes the example of Stan Munro’s toothpick structure holding up a desk?",
+      "How did dropping part of a completed structure affect Munro’s process?",
+      "What does Stan Munro’s answer show about him?",
+      "Select a box in each row to show whether each statement is supported by the information in “The Eagles Are Back!,” “Bald eagles make a comeback in Chicago” or both passages. Each column will be used only once.",
+      "Select a box in each row to show whether each statement is supported by the information in “The Eagles Are Back!,” “Bald eagles make a comeback in Chicago” or both passages. Each column will be only used once.",
       "g3-p1",
       "g3-mc-1",
       "g3-mc-2",
@@ -404,32 +407,29 @@
     "generatorVersion": "V2",
     "qualityScore": 92,
     "qualityIssues": [
-      "Practice passage needs regeneration: 169 words (target 150-400) with FK grade 10.4 (target 3±1.5). Write a longer, more natural passage with simpler sentence structure."
+      "Practice passage needs regeneration: 170 words (target 150-400) with FK grade 10.7 (target 3±1.5). Write a longer, more natural passage with simpler sentence structure.",
+      "Practice passage needs regeneration: 178 words (target 150-400) with FK grade 10.1 (target 3±1.5). Write a longer, more natural passage with simpler sentence structure."
     ]
   },
   "critic": {
     "status": "REVISE",
-    "score": 78,
+    "score": 82,
     "revisions": [
       {
         "section": "guidedPractice[0]",
-        "issue": "Passage is too short and complex for grade level.",
-        "suggestion": "Rewrite the passage to be longer (150-400 words) and simpler, targeting a Flesch-Kincaid grade level of 3±1.5."
+        "issue": "Practice passage needs regeneration: 170 words (target 150-400) with FK grade 10.7 (target 3±1.5).",
+        "suggestion": "Rewrite the passage to be longer and use simpler sentence structures to lower the reading level."
       },
       {
-        "section": "independentPractice[0]",
-        "issue": "Passage is too similar to other passages and too complex.",
-        "suggestion": "Create a new passage on a different topic with simpler sentence structure and appropriate length."
-      },
-      {
-        "section": "masteryCheck[0]",
-        "issue": "Passage is too similar to other passages and too complex.",
-        "suggestion": "Develop a unique passage with a different scenario, ensuring it meets the length and complexity requirements."
+        "section": "guidedPractice[2]",
+        "issue": "Practice passage needs regeneration: 178 words (target 150-400) with FK grade 10.1 (target 3±1.5).",
+        "suggestion": "Rewrite the passage to be longer and use simpler sentence structures to lower the reading level."
       }
     ]
   },
   "validationIssues": [
-    "Practice passage needs regeneration: 169 words (target 150-400) with FK grade 10.4 (target 3±1.5). Write a longer, more natural passage with simpler sentence structure."
+    "Practice passage needs regeneration: 170 words (target 150-400) with FK grade 10.7 (target 3±1.5). Write a longer, more natural passage with simpler sentence structure.",
+    "Practice passage needs regeneration: 178 words (target 150-400) with FK grade 10.1 (target 3±1.5). Write a longer, more natural passage with simpler sentence structure."
   ],
   "iterations": 5
 }

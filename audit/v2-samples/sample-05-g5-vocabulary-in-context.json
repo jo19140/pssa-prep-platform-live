@@ -6,360 +6,334 @@
     "skill": "Vocabulary in Context",
     "title": "Understanding Vocabulary in Context",
     "whyAssigned": "This mini-lesson targets Vocabulary in Context because the diagnostic showed a standards-aligned practice gap.",
-    "hook": "Have you ever read a story and stumbled upon a word that made you pause? Understanding vocabulary in context is like being a detective. You use clues from the surrounding words to uncover the meaning. Today, we'll explore how to become experts at this skill, making reading smoother and more enjoyable.",
-    "explanation": "Vocabulary in context involves using the surrounding text to determine the meaning of unfamiliar words. This skill is crucial because it helps readers understand the text without stopping to look up every unknown word. Context clues can come in various forms, such as definitions, examples, synonyms, antonyms, or general sense of the passage. For instance, if you read, \"The arid desert was vast and dry,\" the word \"arid\" might be unfamiliar. However, the words \"vast\" and \"dry\" provide clues that \"arid\" means dry. \n\nA synonym clue might be: \"The jubilant crowd cheered loudly,\" where \"jubilant\" means happy or joyful. Antonyms help too: \"Unlike the vibrant flowers, the wilted ones looked lifeless,\" suggesting \"wilted\" means lacking energy. \n\nSometimes, explanations or examples are in the text: \"The arboreal creatures, such as monkeys and sloths, live in trees.\" Here, \"such as monkeys and sloths\" helps you understand \"arboreal\" relates to living in trees. Practicing these strategies enhances reading comprehension and enjoyment. Strong work uses the standard's language and shows reasoning step by step. Avoid choosing details that sound related but don't prove the idea. Name the exact clue, connect it to the question, and explain why it proves the answer. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step.",
-    "workedExample": "Let's look at an example. Consider the sentence: \"The ancient ruins were a testament to the civilization's ingenuity, showcasing their architectural prowess.\" If \"ingenuity\" is unfamiliar, look at the surrounding words. \"Testament\" and \"showcasing\" suggest something positive about the civilization. \"Architectural prowess\" implies skill and creativity. Thus, \"ingenuity\" likely means cleverness or creativity.\n\nNow, let's apply this to a short passage: \"The explorer marveled at the bioluminescent creatures in the ocean. These glowing organisms lit up the water like stars in the night sky.\" If \"bioluminescent\" is new, the phrase \"glowing organisms\" provides a clue. Since \"glowing\" is similar to \"lit up,\" you can infer that \"bioluminescent\" means capable of emitting light. This method of using context clues helps decode complex vocabulary efficiently. This matters because the correct answer is not just a matching word or phrase. It is the choice that fits the whole question and can be defended with a specific detail. The reasoning should explain both what the evidence says and how it supports the answer.",
+    "hook": "Imagine reading a story where every word paints a vivid picture in your mind. Words are powerful tools that help us understand and visualize the world around us. Today, we will explore how to unlock the meaning of words using context clues. By the end of this lesson, you'll be able to determine the meaning of unfamiliar words just by looking at the sentences around them.",
+    "explanation": "Understanding vocabulary in context is an essential skill that helps readers comprehend texts more effectively. When you encounter an unfamiliar word, the sentences around it often provide clues about its meaning. These clues can be definitions, examples, or descriptions that help you infer what the word means without needing a dictionary. \n\nFor example, if you read a sentence like, \"The arid desert was vast and dry,\" and you don't know what \"arid\" means, you can look at the words \"vast\" and \"dry\" to infer that \"arid\" likely means something similar to dry or barren. \n\nContext clues can be categorized into several types: \n1. **Definition Clues**: Sometimes, the word is directly defined in the sentence. For instance, \"The arboreal creature, which lives in trees, was hard to spot.\"\n2. **Synonym Clues**: A synonym or similar word is used in the sentence. For example, \"The jubilant crowd cheered, celebrating with joy.\"\n3. **Antonym Clues**: An opposite word is used to contrast the meaning. For example, \"Unlike the arid desert, the oasis was lush and green.\"\n4. **Example Clues**: Examples are provided to illustrate the word. For instance, \"The fruit was exotic, like mangoes and papayas.\"\n\nBy practicing these strategies, you can become more adept at understanding and interpreting the meaning of words in any text you read. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step.",
+    "workedExample": "Let's look at an example to see how context clues work. Consider the sentence: \"The ancient ruins were a testament to the civilization's ingenuity, showcasing their advanced architecture and engineering skills.\"\n\nHere, the word \"ingenuity\" might be unfamiliar. However, the context provides clues. The sentence mentions \"advanced architecture and engineering skills,\" suggesting that \"ingenuity\" relates to creativity or cleverness in design and construction.\n\nBy identifying these context clues, you can infer that \"ingenuity\" means the ability to invent or create with skill and imagination. This method allows you to understand new vocabulary without needing to look up every word. This matters because the correct answer is not just a matching word or phrase. It is the choice that fits the whole question and can be defended with a specific detail. The reasoning should explain both what the evidence says and how it supports the answer. This matters because the correct answer is not just a matching word or phrase. It is the choice that fits the whole question and can be defended with a specific detail. The reasoning should explain both what the evidence says and how it supports the answer.",
     "commonErrors": [
-      "Misinterpreting context clues by focusing on unrelated words.",
-      "Ignoring punctuation that can provide hints about word meaning.",
-      "Confusing synonyms and antonyms when determining word meaning."
+      "Misinterpreting context clues as unrelated details.",
+      "Confusing synonyms and antonyms when using context clues.",
+      "Overlooking examples that clarify word meanings."
     ],
     "sentenceFrames": [
       "The word ___ in the sentence means ___.",
       "Based on the context, ___ is similar to ___.",
-      "The phrase ___ helps me understand that ___ means ___."
+      "The sentence suggests that ___ means ___ because ___."
     ],
     "successCriteria": [
-      "I can identify context clues in a sentence or passage.",
+      "I can identify context clues in a sentence.",
       "I can use context clues to determine the meaning of unfamiliar words.",
-      "I can explain how the context supports my understanding of a word."
+      "I can explain how context clues help me understand vocabulary."
     ],
     "guidedPractice": [
       {
-        "question": "What does the word 'serene' mean in the sentence: 'The serene lake reflected the clear blue sky, creating a peaceful scene'?",
-        "passage": null,
-        "rightAnswerRationale": "The word 'serene' is supported by the context of 'peaceful scene,' indicating calmness.",
-        "coachHint": "Look at the words 'peaceful scene' to help determine the meaning of 'serene.'",
+        "question": "What does the word \"resilient\" mean in the sentence: \"Despite the harsh conditions, the resilient plant continued to thrive.\"",
+        "passage": "In the dry, rocky terrain, only the most resilient plants survived. These plants had adapted to the lack of water and extreme temperatures, making them tough and enduring. Despite the harsh conditions, the resilient plant continued to thrive, showcasing its ability to withstand adversity and flourish where others could not. The plant's resilience was a testament to its strength and adaptability in the face of challenges. This resilience allowed it to grow and spread, even in the most inhospitable environments, proving that with the right adaptations, survival was possible even in the harshest climates. The plant's success was a reminder of the power of resilience and the ability to overcome obstacles. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "The word \"resilient\" means able to withstand or recover quickly from difficult conditions. The passage describes the plant thriving despite harsh conditions, indicating resilience.",
+        "coachHint": "Look for words that describe how the plant behaves in difficult conditions.",
         "type": "mc",
         "choices": [
-          "noisy",
-          "calm",
-          "stormy",
-          "busy"
+          "fragile",
+          "resilient",
+          "delicate",
+          "weak"
         ],
-        "correctAnswer": "calm",
+        "correctAnswer": "resilient",
         "distractorRationale": [
           {
-            "choice": "noisy",
-            "whyWrong": "'Noisy' is the opposite of 'peaceful,' which doesn't fit the context."
+            "choice": "fragile",
+            "whyWrong": "Fragile means easily broken, which is the opposite of resilient."
           },
           {
-            "choice": "stormy",
-            "whyWrong": "'Stormy' suggests disturbance, unlike 'peaceful.'"
+            "choice": "delicate",
+            "whyWrong": "Delicate suggests weakness, not the ability to thrive in harsh conditions."
           },
           {
-            "choice": "busy",
-            "whyWrong": "'Busy' implies activity, not calmness."
+            "choice": "weak",
+            "whyWrong": "Weak is the opposite of resilient, which means strong and enduring."
           }
         ]
       },
       {
-        "question": "Select the word that best completes the sentence: 'The artist's ___ use of color made the painting stand out.'",
+        "question": "Select the word from the drop-down list that best completes the sentence: \"The scientist was ___ by the unexpected results of the experiment.\"",
         "passage": null,
-        "rightAnswerRationale": "'Vivid' fits as it suggests bright and striking use of color.",
-        "coachHint": "Think about what makes a painting stand out visually.",
+        "rightAnswerRationale": "The word \"intrigued\" fits best as it means being interested or curious about something unexpected.",
+        "coachHint": "Think about how someone might feel when they encounter something surprising.",
         "type": "inline-dropdown",
-        "sentence": "The artist's [BLANK] use of color made the painting stand out.",
+        "sentence": "The scientist was [BLANK] by the unexpected results of the experiment.",
         "dropdownOptions": [
-          "vivid",
-          "dull",
-          "monotonous",
-          "subtle"
+          "intrigued",
+          "confused",
+          "bored",
+          "annoyed"
         ],
-        "correctOption": "vivid",
+        "correctOption": "intrigued",
         "distractorRationale": [
           {
-            "option": "dull",
-            "whyWrong": "'Dull' is the opposite of what makes something stand out."
+            "option": "confused",
+            "whyWrong": "Confused suggests a lack of understanding, not necessarily interest."
           },
           {
-            "option": "monotonous",
-            "whyWrong": "'Monotonous' suggests lack of variety, not standout."
+            "option": "bored",
+            "whyWrong": "Bored is the opposite of intrigued, which implies interest."
           },
           {
-            "option": "subtle",
-            "whyWrong": "'Subtle' implies understated, not standout."
+            "option": "annoyed",
+            "whyWrong": "Annoyed suggests irritation, not curiosity or interest."
           }
         ]
       },
       {
-        "question": "In the passage, which phrase best describes the meaning of 'resilient'?",
-        "passage": "The young tree was resilient, bending with the strong winds but never breaking. It stood tall through the storm, its branches swaying but holding firm. When the sun shone again, the tree's leaves glistened with dew, a testament to its strength and flexibility. This resilience was admired by all who saw it, a symbol of nature's ability to endure and thrive despite challenges. The tree's ability to recover and flourish was truly remarkable, inspiring those who witnessed its journey from storm to calm. It was a lesson in perseverance, showing that even in the toughest conditions, life finds a way to continue. The tree's resilience was a reminder that strength often lies in the ability to adapt and bounce back from adversity. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
-        "rightAnswerRationale": "'Bending with the strong winds but never breaking' shows resilience as it indicates flexibility and endurance.",
-        "coachHint": "Look for phrases that indicate the tree's ability to withstand and recover from the storm.",
+        "question": "Which phrase best describes the meaning of \"a sanctuary of quiet and reflection\" in the passage?",
+        "passage": "The library was a sanctuary of quiet and reflection. Students often came here to escape the noise of the outside world. Within its walls, they found peace and a place to think deeply. The rows of books offered endless opportunities for learning and exploration, making it a haven for those seeking knowledge and solitude. The library's atmosphere encouraged contemplation and study, providing a perfect environment for those who needed a break from the hustle and bustle of daily life. It was a place where time seemed to slow down, allowing visitors to immerse themselves in their thoughts and the written word. The library truly was a sanctuary of quiet and reflection, cherished by all who entered. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "The phrase \"a sanctuary of quiet and reflection\" means a peaceful place where one can think deeply and escape noise.",
+        "coachHint": "Consider what kind of place a library is and what activities it supports.",
         "type": "hot-text-phrase",
         "selectablePhrases": [
-          "bending with the strong winds",
-          "never breaking",
-          "stood tall through the storm",
-          "its branches swaying",
-          "a testament to its strength",
-          "a symbol of nature's ability"
+          "a noisy and chaotic space",
+          "a place for loud discussions",
+          "a sanctuary of quiet and reflection",
+          "a hub of constant activity"
         ],
         "correctPhrases": [
-          "bending with the strong winds",
-          "never breaking"
+          "a sanctuary of quiet and reflection"
         ],
-        "minSelect": 2,
-        "maxSelect": 2
+        "minSelect": 1,
+        "maxSelect": 1
       }
     ],
     "independentPractice": [
       {
-        "question": "What does the word 'elated' mean in the sentence: 'She was elated when she heard the good news about her promotion'?",
+        "question": "What does the word \"meticulous\" mean in the sentence: \"The artist was meticulous in her work, ensuring every detail was perfect.\"",
         "passage": null,
-        "rightAnswerRationale": "'Elated' is supported by the context of 'good news,' indicating happiness.",
-        "coachHint": "Consider how someone might feel after receiving good news.",
+        "rightAnswerRationale": "Meticulous means showing great attention to detail. The sentence indicates the artist ensures every detail is perfect.",
+        "coachHint": "Think about what it means to pay close attention to details.",
         "type": "mc",
         "choices": [
-          "sad",
-          "happy",
-          "angry",
-          "confused"
+          "careless",
+          "meticulous",
+          "hasty",
+          "sloppy"
         ],
-        "correctAnswer": "happy",
+        "correctAnswer": "meticulous",
         "distractorRationale": [
           {
-            "choice": "sad",
-            "whyWrong": "'Sad' is the opposite of the positive context of 'good news.'"
+            "choice": "careless",
+            "whyWrong": "Careless is the opposite of meticulous, which means careful and precise."
           },
           {
-            "choice": "angry",
-            "whyWrong": "'Angry' doesn't fit the positive context of 'good news.'"
+            "choice": "hasty",
+            "whyWrong": "Hasty suggests rushing, not paying attention to detail."
           },
           {
-            "choice": "confused",
-            "whyWrong": "'Confused' doesn't align with the clarity of 'good news.'"
+            "choice": "sloppy",
+            "whyWrong": "Sloppy is the opposite of meticulous, which means careful and precise."
           }
         ]
       },
       {
-        "question": "Select the word that best completes the sentence: 'The ___ sunset painted the sky with brilliant hues of orange and pink.'",
+        "question": "Select the word from the drop-down list that best completes the sentence: \"The explorer was ___ by the vastness of the uncharted territory.\"",
         "passage": null,
-        "rightAnswerRationale": "'Radiant' fits as it suggests bright and colorful.",
-        "coachHint": "Think about what makes a sunset visually striking.",
+        "rightAnswerRationale": "The word \"awed\" fits best as it means being filled with wonder or amazement.",
+        "coachHint": "Consider how someone might feel when seeing something vast and unknown.",
         "type": "inline-dropdown",
-        "sentence": "The [BLANK] sunset painted the sky with brilliant hues of orange and pink.",
+        "sentence": "The explorer was [BLANK] by the vastness of the uncharted territory.",
         "dropdownOptions": [
-          "radiant",
-          "gloomy",
-          "faint",
-          "dull"
-        ],
-        "correctOption": "radiant",
-        "distractorRationale": [
-          {
-            "option": "gloomy",
-            "whyWrong": "'Gloomy' suggests darkness, not brightness."
-          },
-          {
-            "option": "faint",
-            "whyWrong": "'Faint' implies lack of intensity, not brilliance."
-          },
-          {
-            "option": "dull",
-            "whyWrong": "'Dull' is the opposite of 'brilliant.'"
-          }
-        ]
-      },
-      {
-        "question": "Which word is a synonym for 'perplexed' in the sentence: 'He was perplexed by the complex puzzle'?",
-        "passage": null,
-        "rightAnswerRationale": "'Confused' is a synonym for 'perplexed,' indicating difficulty in understanding.",
-        "coachHint": "Think about how someone feels when they can't solve a puzzle.",
-        "type": "mc",
-        "choices": [
-          "confused",
-          "certain",
+          "awed",
+          "frightened",
           "bored",
-          "excited"
+          "indifferent"
         ],
-        "correctAnswer": "confused",
+        "correctOption": "awed",
         "distractorRationale": [
           {
-            "choice": "certain",
-            "whyWrong": "'Certain' is the opposite of 'perplexed.'"
+            "option": "frightened",
+            "whyWrong": "Frightened suggests fear, not wonder or amazement."
           },
           {
-            "choice": "bored",
-            "whyWrong": "'Bored' doesn't relate to the challenge of a puzzle."
+            "option": "bored",
+            "whyWrong": "Bored is the opposite of being filled with wonder."
           },
           {
-            "choice": "excited",
-            "whyWrong": "'Excited' doesn't fit the context of confusion."
+            "option": "indifferent",
+            "whyWrong": "Indifferent suggests a lack of interest, not amazement."
           }
         ]
       },
       {
-        "question": "In the passage, which phrase best describes the meaning of 'tenacious'?",
-        "passage": "The climber was tenacious, refusing to give up despite the steep and rocky path. Each step was a challenge, but he persevered, driven by determination and a will to succeed. His tenacity was evident as he reached the summit, a testament to his unwavering resolve. The climb was difficult, yet his spirit remained unbroken, inspiring others to push beyond their limits and achieve their goals. His tenacious nature was a beacon of strength, showing that with persistence, any obstacle could be overcome. The climber's journey was a powerful reminder of the power of perseverance and the importance of never giving up, no matter how tough the journey may be. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
-        "rightAnswerRationale": "'Refusing to give up despite the steep and rocky path' shows tenacity as it indicates persistence and determination.",
-        "coachHint": "Look for phrases that indicate persistence and determination.",
+        "question": "Which phrase best describes the meaning of \"a hub of constant activity\" in the passage?",
+        "passage": "The city center was a hub of constant activity. People rushed from one place to another, cars honked, and street vendors called out to passersby. The energy was palpable, with everyone moving quickly to their destinations. It was a place where business thrived, and the hustle and bustle never seemed to stop. The city center was alive with the sounds and sights of a busy metropolis, making it an exciting and dynamic place to be. This hub of constant activity was the heart of the city, drawing people from all walks of life to its vibrant streets. Whether day or night, the city center was always buzzing with life and energy, a true hub of constant activity. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "The phrase \"a hub of constant activity\" means a busy and lively place with continuous movement and energy.",
+        "coachHint": "Think about what kind of place a city center is and what activities it supports.",
         "type": "hot-text-phrase",
         "selectablePhrases": [
-          "refusing to give up",
-          "despite the steep and rocky path",
-          "driven by determination",
-          "unwavering resolve",
-          "spirit remained unbroken",
-          "a beacon of strength"
+          "a quiet and peaceful area",
+          "a hub of constant activity",
+          "a place for solitude",
+          "a deserted and empty space"
         ],
         "correctPhrases": [
-          "refusing to give up",
-          "despite the steep and rocky path"
+          "a hub of constant activity"
         ],
-        "minSelect": 2,
-        "maxSelect": 2
+        "minSelect": 1,
+        "maxSelect": 1
+      },
+      {
+        "question": "What does the word \"innovative\" mean in the sentence: \"The company's innovative approach led to groundbreaking products.\"",
+        "passage": null,
+        "rightAnswerRationale": "Innovative means introducing new ideas or methods. The sentence suggests the company's approach led to new products.",
+        "coachHint": "Consider what it means to introduce new ideas or methods.",
+        "type": "mc",
+        "choices": [
+          "traditional",
+          "innovative",
+          "conventional",
+          "old-fashioned"
+        ],
+        "correctAnswer": "innovative",
+        "distractorRationale": [
+          {
+            "choice": "traditional",
+            "whyWrong": "Traditional means following long-established practices, not introducing new ideas."
+          },
+          {
+            "choice": "conventional",
+            "whyWrong": "Conventional means typical or usual, not new or creative."
+          },
+          {
+            "choice": "old-fashioned",
+            "whyWrong": "Old-fashioned means outdated, not new or creative."
+          }
+        ]
       }
     ],
     "exitTicket": [
       {
-        "question": "What does the word 'melancholy' mean in the sentence: 'The melancholy tune of the violin filled the room with a somber mood'?",
+        "question": "Select the word from the drop-down list that best completes the sentence: \"The teacher was ___ by the students' enthusiasm for learning.\"",
         "passage": null,
-        "rightAnswerRationale": "'Melancholy' is supported by the context of 'somber mood,' indicating sadness.",
-        "coachHint": "Consider the mood created by the tune of the violin.",
-        "type": "mc",
-        "choices": [
-          "joyful",
-          "sad",
-          "angry",
-          "excited"
+        "rightAnswerRationale": "The word \"inspired\" fits best as it means being motivated or encouraged by something positive.",
+        "coachHint": "Think about how someone might feel when they see enthusiasm.",
+        "type": "inline-dropdown",
+        "sentence": "The teacher was [BLANK] by the students' enthusiasm for learning.",
+        "dropdownOptions": [
+          "inspired",
+          "discouraged",
+          "bored",
+          "irritated"
         ],
-        "correctAnswer": "sad",
+        "correctOption": "inspired",
         "distractorRationale": [
           {
-            "choice": "joyful",
-            "whyWrong": "'Joyful' is the opposite of 'somber mood.'"
+            "option": "discouraged",
+            "whyWrong": "Discouraged suggests a loss of motivation, not being uplifted."
           },
           {
-            "choice": "angry",
-            "whyWrong": "'Angry' doesn't fit the context of 'somber mood.'"
+            "option": "bored",
+            "whyWrong": "Bored is the opposite of being motivated or encouraged."
           },
           {
-            "choice": "excited",
-            "whyWrong": "'Excited' doesn't align with 'somber mood.'"
+            "option": "irritated",
+            "whyWrong": "Irritated suggests annoyance, not encouragement."
           }
         ]
       },
       {
-        "question": "Select the word that best completes the sentence: 'The ___ forest was alive with the sounds of chirping birds and rustling leaves.'",
-        "passage": null,
-        "rightAnswerRationale": "'Lush' fits as it suggests a rich and vibrant environment.",
-        "coachHint": "Think about what makes a forest full of life.",
-        "type": "inline-dropdown",
-        "sentence": "The [BLANK] forest was alive with the sounds of chirping birds and rustling leaves.",
-        "dropdownOptions": [
-          "lush",
-          "barren",
-          "silent",
-          "dry"
+        "question": "Which phrase best describes the meaning of \"a place for solitude\" in the passage?",
+        "passage": "The garden was a place for solitude. Surrounded by tall trees and blooming flowers, it offered a peaceful retreat from the noise of the city. Visitors often came here to relax and reflect, enjoying the tranquility and beauty of nature. The gentle rustle of leaves and the chirping of birds created a soothing atmosphere, making it an ideal spot for meditation and contemplation. In this serene environment, people could escape the hustle and bustle of daily life and find a moment of peace. The garden truly was a place for solitude, cherished by those seeking a quiet escape from the world. It was a sanctuary where one could be alone with their thoughts, away from the distractions of modern life. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "The phrase \"a place for solitude\" means a quiet and peaceful place where one can be alone.",
+        "coachHint": "Consider what kind of place a garden is and what activities it supports.",
+        "type": "hot-text-phrase",
+        "selectablePhrases": [
+          "a noisy and crowded area",
+          "a place for solitude",
+          "a hub of constant activity",
+          "a bustling marketplace"
         ],
-        "correctOption": "lush",
-        "distractorRationale": [
-          {
-            "option": "barren",
-            "whyWrong": "'Barren' suggests emptiness, not life."
-          },
-          {
-            "option": "silent",
-            "whyWrong": "'Silent' contradicts 'alive with sounds.'"
-          },
-          {
-            "option": "dry",
-            "whyWrong": "'Dry' doesn't fit the vibrant context."
-          }
-        ]
+        "correctPhrases": [
+          "a place for solitude"
+        ],
+        "minSelect": 1,
+        "maxSelect": 1
       }
     ],
     "masteryCheck": [
       {
-        "question": "What does the word 'frigid' mean in the sentence: 'The frigid air made everyone shiver and bundle up in warm coats'?",
+        "question": "What does the word \"perseverance\" mean in the sentence: \"Her perseverance in the face of challenges was admirable.\"",
         "passage": null,
-        "rightAnswerRationale": "'Frigid' is supported by the context of 'shiver' and 'warm coats,' indicating coldness.",
-        "coachHint": "Consider how people react to very cold air.",
+        "rightAnswerRationale": "Perseverance means continued effort to do or achieve something despite difficulties.",
+        "coachHint": "Think about what it means to keep going despite challenges.",
         "type": "mc",
         "choices": [
-          "hot",
-          "cold",
-          "humid",
-          "mild"
+          "laziness",
+          "perseverance",
+          "indifference",
+          "hesitation"
         ],
-        "correctAnswer": "cold",
+        "correctAnswer": "perseverance",
         "distractorRationale": [
           {
-            "choice": "hot",
-            "whyWrong": "'Hot' is the opposite of 'frigid.'"
+            "choice": "laziness",
+            "whyWrong": "Laziness is the opposite of perseverance, which means persistent effort."
           },
           {
-            "choice": "humid",
-            "whyWrong": "'Humid' relates to moisture, not temperature."
+            "choice": "indifference",
+            "whyWrong": "Indifference suggests a lack of interest, not persistent effort."
           },
           {
-            "choice": "mild",
-            "whyWrong": "'Mild' suggests moderate, not extreme cold."
+            "choice": "hesitation",
+            "whyWrong": "Hesitation suggests uncertainty, not persistent effort."
           }
         ]
       },
       {
-        "question": "Select the word that best completes the sentence: 'The ___ ocean waves crashed against the shore, creating a dramatic scene.'",
+        "question": "Select the word from the drop-down list that best completes the sentence: \"The author was ___ by the positive reviews of her book.\"",
         "passage": null,
-        "rightAnswerRationale": "'Turbulent' fits as it suggests strong and chaotic waves.",
-        "coachHint": "Think about what makes ocean waves dramatic.",
+        "rightAnswerRationale": "The word \"encouraged\" fits best as it means being motivated or given confidence by something positive.",
+        "coachHint": "Think about how someone might feel when they receive positive feedback.",
         "type": "inline-dropdown",
-        "sentence": "The [BLANK] ocean waves crashed against the shore, creating a dramatic scene.",
+        "sentence": "The author was [BLANK] by the positive reviews of her book.",
         "dropdownOptions": [
-          "turbulent",
-          "calm",
-          "gentle",
-          "still"
+          "encouraged",
+          "disappointed",
+          "bored",
+          "annoyed"
         ],
-        "correctOption": "turbulent",
+        "correctOption": "encouraged",
         "distractorRationale": [
           {
-            "option": "calm",
-            "whyWrong": "'Calm' is the opposite of 'crashed.'"
+            "option": "disappointed",
+            "whyWrong": "Disappointed suggests a negative feeling, not motivation."
           },
           {
-            "option": "gentle",
-            "whyWrong": "'Gentle' doesn't fit the dramatic context."
+            "option": "bored",
+            "whyWrong": "Bored is the opposite of being motivated or uplifted."
           },
           {
-            "option": "still",
-            "whyWrong": "'Still' contradicts 'crashed.'"
+            "option": "annoyed",
+            "whyWrong": "Annoyed suggests irritation, not encouragement."
           }
         ]
       },
       {
-        "question": "In the passage, which phrase best describes the meaning of 'resilient'?",
-        "passage": "The young tree was resilient, bending with the strong winds but never breaking. It stood tall through the storm, its branches swaying but holding firm. When the sun shone again, the tree's leaves glistened with dew, a testament to its strength and flexibility. This resilience was admired by all who saw it, a symbol of nature's ability to endure and thrive despite challenges. The tree's ability to recover and flourish was truly remarkable, inspiring those who witnessed its journey from storm to calm. It was a lesson in perseverance, showing that even in the toughest conditions, life finds a way to continue. The tree's resilience was a reminder that strength often lies in the ability to adapt and bounce back from adversity. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
-        "rightAnswerRationale": "'Bending with the strong winds but never breaking' shows resilience as it indicates flexibility and endurance.",
-        "coachHint": "Look for phrases that indicate the tree's ability to withstand and recover from the storm.",
+        "question": "Which phrase best describes the meaning of \"a sanctuary of quiet and reflection\" in the passage?",
+        "passage": "The library was a sanctuary of quiet and reflection. Students often came here to escape the noise of the outside world. Within its walls, they found peace and a place to think deeply. The rows of books offered endless opportunities for learning and exploration, making it a haven for those seeking knowledge and solitude. The library's atmosphere encouraged contemplation and study, providing a perfect environment for those who needed a break from the hustle and bustle of daily life. It was a place where time seemed to slow down, allowing visitors to immerse themselves in their thoughts and the written word. The library truly was a sanctuary of quiet and reflection, cherished by all who entered. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "The phrase \"a sanctuary of quiet and reflection\" means a peaceful place where one can think deeply and escape noise.",
+        "coachHint": "Consider what kind of place a library is and what activities it supports.",
         "type": "hot-text-phrase",
         "selectablePhrases": [
-          "bending with the strong winds",
-          "never breaking",
-          "stood tall through the storm",
-          "its branches swaying",
-          "a testament to its strength",
-          "a symbol of nature's ability"
+          "a noisy and chaotic space",
+          "a place for loud discussions",
+          "a sanctuary of quiet and reflection",
+          "a hub of constant activity"
         ],
         "correctPhrases": [
-          "bending with the strong winds",
-          "never breaking"
+          "a sanctuary of quiet and reflection"
         ],
-        "minSelect": 2,
-        "maxSelect": 2
+        "minSelect": 1,
+        "maxSelect": 1
       }
     ],
     "heroResourceLinkId": "cmp4fwb27005vg3sa2v7w64uo",
     "exemplarsUsed": [
-      "Magic Noodles",
-      "What does the word sparked mean as used in the passage?",
-      "Which word is a synonym for the word estimated as used in the passage?",
-      "Which phrase best describes the purpose of the text box at the beginning of the passage?",
-      "Read the sentences. Select the word from the drop-down list that best completes the second sentence.",
-      "Read the paragraph. Select the word from each drop-down list that best completes each sentence.",
-      "Read the sentences. Select a phrase from each drop-down list that shows the relationship between events in the passage.",
       "g5-p1",
       "g5-mc-3",
       "g5-mc-5",

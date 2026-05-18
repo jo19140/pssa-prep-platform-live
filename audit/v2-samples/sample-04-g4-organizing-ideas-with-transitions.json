@@ -4,92 +4,91 @@
     "standardCode": "CC.1.4.4.C",
     "standardLabel": "Organization and transitions",
     "skill": "Organizing Ideas with Transitions",
-    "title": "Mastering Transitions in Writing",
+    "title": "Using Transitions to Organize Ideas",
     "whyAssigned": "This mini-lesson targets Organizing Ideas with Transitions because the diagnostic showed a standards-aligned practice gap.",
-    "hook": "Imagine trying to tell a story where each sentence is a separate island, with no bridges connecting them. It would be confusing, right? Transitions are like those bridges, helping ideas flow smoothly from one to the next. Today, we'll learn how to use transitions to make our writing clear and connected.",
-    "explanation": "Transitions are essential tools in writing that connect ideas and guide the reader through the text. They show relationships between ideas, such as sequence, contrast, or cause and effect. For example, 'first,' 'next,' and 'finally' help organize events in order. Words like 'however' or 'on the other hand' show contrast, while 'because' and 'therefore' indicate cause and effect. Using a variety of transitions makes writing coherent and engaging. Consider a paragraph about a day at the beach: 'We arrived at the beach. We set up our chairs. We went swimming. We had lunch.' Adding transitions: 'First, we arrived at the beach. After setting up our chairs, we went swimming. Later, we had lunch.' This helps the reader follow the sequence of events. Practice using different transitions to improve your writing skills and ensure clarity and flow in your paragraphs. Avoid repetitive use of the same transition, as it can make writing monotonous. Instead, choose transitions that best fit the context and purpose of your writing, enhancing the reader's understanding and engagement with the text. Strong writing uses transitions effectively to connect ideas and guide the reader smoothly from one point to the next, ensuring clarity and coherence throughout the text. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step.",
-    "workedExample": "Let's look at an example of using transitions in a paragraph. Suppose you're writing about your favorite hobby, gardening. Without transitions, it might read: 'I love gardening. It is relaxing. I grow vegetables. I enjoy cooking with them.' This is a list of statements without clear connections.\n\nNow, let's add transitions: 'I love gardening because it is relaxing. Additionally, I grow vegetables, which I enjoy cooking with. As a result, gardening not only provides me with fresh produce but also a sense of accomplishment.'\n\nIn this revised paragraph, 'because' explains why gardening is loved, 'additionally' adds information about growing vegetables, and 'as a result' shows the outcome of gardening. These transitions help the reader follow the writer's thoughts more easily. This matters because the correct answer is not just a matching word or phrase. It is the choice that fits the whole question and can be defended with a specific detail. The reasoning should explain both what the evidence says and how it supports the answer.",
+    "hook": "Imagine trying to tell a story without using words like 'first,' 'next,' or 'finally.' It would be like trying to build a house without nails! Transitions are the tools that hold our ideas together, making our writing clear and easy to follow. Today, we'll explore how these small words can make a big difference in organizing our thoughts.",
+    "explanation": "Transitions are words or phrases that connect ideas, sentences, or paragraphs. They help guide readers through a text, showing how ideas relate to each other. For example, words like 'first,' 'next,' and 'finally' indicate the order of events. Other transitions, such as 'however,' 'therefore,' and 'in addition,' show relationships like contrast, cause and effect, or addition. Using transitions effectively can improve the flow and clarity of your writing.\n\nWhen writing a story or an essay, transitions help readers understand the sequence of events or the progression of ideas. For instance, in a narrative, you might use 'after that' to show what happens next in a story. In an informational text, 'for example' can introduce supporting details. Without transitions, writing can feel choppy and disconnected, making it difficult for readers to follow your train of thought.\n\nTo use transitions effectively, consider the relationship between the ideas you want to connect. Ask yourself: Are you adding information, showing a contrast, or indicating a sequence? Choose transitions that clearly convey these relationships. Practice using different types of transitions to see how they affect the flow of your writing. Remember, the goal is to make your writing smooth and coherent, guiding your reader from one idea to the next seamlessly. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step.",
+    "workedExample": "Let's look at an example of how transitions can improve writing. Consider these sentences: 'I woke up late. I missed the bus. I was late for school.' Without transitions, the sentences are disconnected. Now, let's add transitions: 'First, I woke up late. As a result, I missed the bus. Consequently, I was late for school.'\n\nNotice how the transitions 'first,' 'as a result,' and 'consequently' clarify the sequence and cause-and-effect relationship between the events. These transitions help the reader understand not only what happened but also why it happened. By using transitions, the writer creates a logical flow that guides the reader through the series of events. This makes the writing more engaging and easier to follow. This matters because the correct answer is not just a matching word or phrase. It is the choice that fits the whole question and can be defended with a specific detail. The reasoning should explain both what the evidence says and how it supports the answer.",
     "commonErrors": [
-      "Students often use the same transition repeatedly, making writing monotonous.",
-      "Some students forget to use transitions, resulting in choppy writing.",
-      "Others may use inappropriate transitions that confuse the reader."
+      "Students often use transitions incorrectly, leading to confusion about the sequence or relationship between ideas.",
+      "Some students may overuse transitions, making the writing feel forced or unnatural.",
+      "Others might neglect transitions altogether, resulting in choppy and disjointed writing."
     ],
     "sentenceFrames": [
-      "First, I decided to...",
-      "In addition, I noticed that...",
-      "As a result, we were able to..."
+      "First, I [action], then I [action].",
+      "As a result of [event], [outcome].",
+      "In addition to [idea], [additional idea]."
     ],
     "successCriteria": [
-      "I can identify different types of transitions in a text.",
-      "I can use a variety of transitions to connect ideas in my writing.",
-      "I can explain how transitions improve the flow of a paragraph."
+      "I can identify transitions in a text and explain their purpose.",
+      "I can use transitions to connect ideas in my writing effectively.",
+      "I can choose appropriate transitions based on the relationship between ideas."
     ],
     "guidedPractice": [
       {
-        "question": "Arrange the events in the story in the sequence that makes the most sense.",
+        "question": "Arrange the events in the correct order using transitions.",
         "passage": null,
-        "rightAnswerRationale": "The correct sequence shows logical progression from idea to idea, enhancing clarity.",
-        "coachHint": "Read all the events first. Use the Pointer tool to select-and-drag events into the correct order.",
+        "rightAnswerRationale": "The correct order is logical and uses transitions to show sequence.",
+        "coachHint": "Think about what happens first, next, and last.",
         "type": "drag-drop-order",
         "draggableItems": [
-          "I woke up early.",
-          "I had breakfast.",
-          "I went to school.",
-          "I did my homework."
+          "First, I brushed my teeth.",
+          "Next, I ate breakfast.",
+          "Finally, I went to school."
         ],
         "correctOrder": [
-          "I woke up early.",
-          "I had breakfast.",
-          "I went to school.",
-          "I did my homework."
+          "First, I brushed my teeth.",
+          "Next, I ate breakfast.",
+          "Finally, I went to school."
         ]
       },
       {
-        "question": "Which transitions best connect the ideas in the paragraph?",
+        "question": "Which transitions best connect these ideas?",
         "passage": null,
-        "rightAnswerRationale": "The correct transitions clearly show the relationship between ideas, such as cause and effect or sequence.",
-        "coachHint": "Think about how each sentence relates to the next.",
+        "rightAnswerRationale": "'However' shows contrast, and 'therefore' shows cause and effect.",
+        "coachHint": "Consider the relationship between the ideas.",
         "type": "multi-select",
         "choices": [
-          "First",
           "However",
-          "In addition",
-          "Finally"
+          "Therefore",
+          "Meanwhile",
+          "In addition"
         ],
         "correctAnswers": [
-          "First",
-          "In addition",
-          "Finally"
+          "However",
+          "Therefore"
         ],
         "minSelect": 2,
-        "maxSelect": 3,
+        "maxSelect": 2,
         "partialCreditRule": "per-correct"
       },
       {
-        "question": "Match each claim with the evidence that supports it.",
-        "passage": "The school fair was a lively event. Students ran from booth to booth, trying out games and winning prizes. Teachers and parents volunteered to help, ensuring everything ran smoothly. The smell of popcorn and cotton candy filled the air, adding to the festive atmosphere. It was a day where the school community came together to celebrate and have fun. The fair was more than just games; it was a chance for everyone to connect and enjoy each other's company. The laughter and excitement were infectious, creating memories that would last a lifetime. The school fair was a testament to the spirit of community and the joy of shared experiences. It was a place where everyone could relax and enjoy themselves, if only for a day. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
-        "rightAnswerRationale": "The correct mapping shows how each piece of evidence supports the corresponding claim.",
+        "question": "Match each claim with the supporting evidence.",
+        "passage": "The sun is a star that provides light and heat to Earth. Without it, life would not exist. Plants use sunlight to make food through photosynthesis. Animals depend on plants for food and oxygen. The sun's energy also drives weather patterns and ocean currents, making it essential for Earth's climate system. Understanding the sun's role helps us appreciate its importance in our daily lives and the planet's ecosystem as a whole. Scientists study the sun to learn more about its effects on Earth and to predict solar events that might impact technology and communication systems. By observing the sun, we gain insights into the universe and our place within it. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "Each claim is supported by specific evidence from the passage.",
         "coachHint": "Look for sentences that directly support each claim.",
         "type": "evidence-mapping",
         "claims": [
-          "The school fair was a community event.",
-          "The school fair was a joyful occasion."
+          "The sun is essential for life on Earth.",
+          "The sun affects Earth's climate."
         ],
         "evidenceItems": [
-          "Teachers and parents volunteered to help, ensuring everything ran smoothly.",
-          "The laughter and excitement were infectious, creating memories that would last a lifetime."
+          "The sun provides light and heat to Earth.",
+          "Plants use sunlight for photosynthesis.",
+          "The sun's energy drives weather patterns."
         ],
         "correctMapping": [
           {
-            "claim": "The school fair was a community event.",
+            "claim": "The sun is essential for life on Earth.",
             "evidenceItems": [
-              "Teachers and parents volunteered to help, ensuring everything ran smoothly."
+              "The sun provides light and heat to Earth.",
+              "Plants use sunlight for photosynthesis."
             ]
           },
           {
-            "claim": "The school fair was a joyful occasion.",
+            "claim": "The sun affects Earth's climate.",
             "evidenceItems": [
-              "The laughter and excitement were infectious, creating memories that would last a lifetime."
+              "The sun's energy drives weather patterns."
             ]
           }
         ]
@@ -97,214 +96,209 @@
     ],
     "independentPractice": [
       {
-        "question": "Arrange the steps for making a sandwich in the correct order.",
-        "passage": null,
-        "rightAnswerRationale": "The correct order reflects a logical sequence of actions needed to make a sandwich.",
-        "coachHint": "Think about what you need to do first, next, and last.",
-        "type": "drag-drop-order",
-        "draggableItems": [
-          "Spread the butter.",
-          "Add the filling.",
-          "Place the bread slices together.",
-          "Cut the sandwich."
-        ],
-        "correctOrder": [
-          "Spread the butter.",
-          "Add the filling.",
-          "Place the bread slices together.",
-          "Cut the sandwich."
-        ]
-      },
-      {
-        "question": "Select all the transitions that would improve the flow of this paragraph.",
-        "passage": null,
-        "rightAnswerRationale": "The correct transitions help the reader understand the sequence and relationship between ideas.",
-        "coachHint": "Consider how each sentence connects to the next.",
-        "type": "multi-select",
-        "choices": [
-          "Next",
-          "For example",
-          "Therefore",
-          "Meanwhile"
-        ],
-        "correctAnswers": [
-          "Next",
-          "For example",
-          "Therefore"
-        ],
-        "minSelect": 2,
-        "maxSelect": 3,
-        "partialCreditRule": "per-correct"
-      },
-      {
-        "question": "Match each claim with the evidence that supports it.",
-        "passage": "The park was a peaceful retreat. Families gathered for picnics under the shade of tall trees. Children played on the grass, their laughter echoing through the air. A small pond glistened in the sunlight, attracting ducks and other wildlife. It was a place where people could unwind and enjoy nature. The park was a testament to the beauty of the outdoors and the joy it brought to visitors. Every visit was a chance to relax and recharge, surrounded by the sights and sounds of nature. It was a sanctuary from the hustle and bustle of city life, offering a moment of tranquility and peace. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
-        "rightAnswerRationale": "The correct mapping shows how each piece of evidence supports the corresponding claim.",
-        "coachHint": "Identify sentences that directly support each claim.",
+        "question": "Identify the transitions in this paragraph.",
+        "passage": "Last Saturday, my family and I decided to have a fun day at the beach. First, we packed our bags with towels, sunscreen, and snacks. Then, we drove to the beach, enjoying the sunny weather along the way. After arriving, we set up our spot near the water. Next, we played in the waves and built sandcastles. Finally, as the sun began to set, we packed up and headed home, feeling happy and relaxed from our day by the sea. It was a wonderful experience!\"','rightAnswerRationale\":\"The transitions 'first,' 'then,' 'after,' 'next,' and 'finally' show the sequence of events.\",\"coachHint\":\"Look for words that indicate the order of events.\",\"type\":\"multi-select\",\"choices\":[\"First\",\"Then\",\"After\",\"Next\",\"Finally\",\"Wonderful\"],\"correctAnswers\":[\"First\",\"Then\",\"After\",\"Next\",\"Finally\"],\"minSelect\":5,\"maxSelect\":5,\"partialCreditRule\":\"per-correct\"},{\"question\":\"Choose the best transition to complete the sentence.\",\"passage\":null,\"rightAnswerRationale\":\"'Therefore' is correct because it shows cause and effect.\",\"coachHint\":\"Think about the relationship between the ideas.\",\"type\":\"inline-dropdown\",\"sentence\":\"I forgot my umbrella, [BLANK] I got wet.\",\"dropdownOptions\":[\"however\",\"therefore\",\"meanwhile\"],\"correctOption\":\"therefore\",\"distractorRationale\":[{\"option\":\"however\",\"whyWrong\":\"'However' shows contrast, not cause and effect.\"},{\"option\":\"meanwhile\",\"whyWrong\":\"'Meanwhile' indicates simultaneous actions, not cause and effect.\"}]},{\"question\":\"Arrange the steps in the correct order.\",\"passage\":null,\"rightAnswerRationale\":\"The correct order follows a logical sequence of events.\",\"coachHint\":\"Think about what happens first, next, and last.\",\"type\":\"drag-drop-order\",\"draggableItems\":[\"First, gather your ingredients.\",\"Next, mix the ingredients together.\",\"Finally, bake the mixture in the oven.\"],\"correctOrder\":[\"First, gather your ingredients.\",\"Next, mix the ingredients together.\",\"Finally, bake the mixture in the oven.\"]},{\"question\":\"Match each claim with the supporting evidence.\",\"passage\":\"null\",\"rightAnswerRationale\":\"Each claim is supported by specific evidence from the passage.\",\"coachHint\":\"Look for sentences that directly support each claim.\",\"type\":\"evidence-mapping\"",
+        "rightAnswerRationale": "Each claim is supported by specific evidence from the passage.",
+        "coachHint": "Look for sentences that directly support each claim.",
         "type": "evidence-mapping",
         "claims": [
-          "The park was a peaceful retreat.",
-          "The park was well-loved by visitors."
+          "Exercise improves health.",
+          "Reading enhances vocabulary."
         ],
         "evidenceItems": [
-          "Families gathered for picnics under the shade of tall trees.",
-          "The park was a testament to the beauty of the outdoors and the joy it brought to visitors."
+          "Exercise strengthens muscles.",
+          "Reading exposes you to new words."
         ],
         "correctMapping": [
           {
-            "claim": "The park was a peaceful retreat.",
+            "claim": "Exercise improves health.",
             "evidenceItems": [
-              "Families gathered for picnics under the shade of tall trees."
+              "Exercise strengthens muscles."
             ]
           },
           {
-            "claim": "The park was well-loved by visitors.",
+            "claim": "Reading enhances vocabulary.",
             "evidenceItems": [
-              "The park was a testament to the beauty of the outdoors and the joy it brought to visitors."
+              "Reading exposes you to new words."
             ]
           }
         ]
       },
       {
-        "question": "Which transitions best connect the ideas in the paragraph?",
+        "question": "Choose the best transition to complete the sentence.",
         "passage": null,
-        "rightAnswerRationale": "The correct transitions clearly show the relationship between ideas, such as cause and effect or sequence.",
-        "coachHint": "Think about how each sentence relates to the next.",
+        "rightAnswerRationale": "'Therefore' is correct because it shows cause and effect.",
+        "coachHint": "Think about the relationship between the ideas.",
+        "type": "inline-dropdown",
+        "sentence": "I forgot my umbrella, [BLANK] I got wet.",
+        "dropdownOptions": [
+          "however",
+          "therefore",
+          "meanwhile"
+        ],
+        "correctOption": "therefore",
+        "distractorRationale": [
+          {
+            "option": "however",
+            "whyWrong": "'However' shows contrast, not cause and effect."
+          },
+          {
+            "option": "meanwhile",
+            "whyWrong": "'Meanwhile' indicates simultaneous actions, not cause and effect."
+          }
+        ]
+      },
+      {
+        "question": "Arrange the steps in the correct order.",
+        "passage": null,
+        "rightAnswerRationale": "The correct order follows a logical sequence of events.",
+        "coachHint": "Think about what happens first, next, and last.",
+        "type": "drag-drop-order",
+        "draggableItems": [
+          "First, gather your ingredients.",
+          "Next, mix the ingredients together.",
+          "Finally, bake the mixture in the oven."
+        ],
+        "correctOrder": [
+          "First, gather your ingredients.",
+          "Next, mix the ingredients together.",
+          "Finally, bake the mixture in the oven."
+        ]
+      },
+      {
+        "question": "Identify the transitions in this paragraph.",
+        "passage": "Last Saturday, my family and I decided to have a fun day at the beach. First, we packed our bags with towels, sunscreen, and snacks. Then, we drove to the beach, enjoying the sunny weather along the way. After arriving, we set up our spot near the water. Next, we played in the waves and built sandcastles. Finally, as the sun began to set, we packed up and headed home, feeling happy and relaxed from our day by the sea. It was a wonderful experience!\"','rightAnswerRationale\":\"The transitions 'first,' 'then,' 'after,' 'next,' and 'finally' show the sequence of events.\",\"coachHint\":\"Look for words that indicate the order of events.\",\"type\":\"multi-select\",\"choices\":[\"First\",\"Then\",\"After\",\"Next\",\"Finally\",\"Wonderful\"],\"correctAnswers\":[\"First\",\"Then\",\"After\",\"Next\",\"Finally\"],\"minSelect\":5,\"maxSelect\":5,\"partialCreditRule\":\"per-correct\"}],\"exitTicket\":[{\"question\":\"Choose the best transition to complete the sentence.\",\"passage\":null,\"rightAnswerRationale\":\"'Therefore' is correct because it shows cause and effect.\",\"coachHint\":\"Think about the relationship between the ideas.\",\"type\":\"inline-dropdown\",\"sentence\":\"I forgot my umbrella, [BLANK] I got wet.\",\"dropdownOptions\":[\"however\",\"therefore\",\"meanwhile\"],\"correctOption\":\"therefore\",\"distractorRationale\":[{\"option\":\"however\",\"whyWrong\":\"'However' shows contrast, not cause and effect.\"},{\"option\":\"meanwhile\",\"whyWrong\":\"'Meanwhile' indicates simultaneous actions, not cause and effect.\"}]},{\"question\":\"Arrange the steps in the correct order.\",\"passage\":null,\"rightAnswerRationale\":\"The correct order follows a logical sequence of events.\",\"coachHint\":\"Think about what happens first, next, and last.\",\"type\":\"drag-drop-order\",\"draggableItems\":[\"First, gather your ingredients.\",\"Next, mix the ingredients together.\",\"Finally, bake the mixture in the oven.\"],\"correctOrder\":[\"First, gather your ingredients.\",\"Next, mix the ingredients together.\",\"Finally, bake the mixture in the oven.\"]}],\"masteryCheck\":[{\"question\":\"Identify the transitions in this paragraph.\",\"passage\":\"Last Saturday, my family and I decided to have a fun day at the beach. First, we packed our bags with towels, sunscreen, and snacks. Then, we drove to the be",
+        "rightAnswerRationale": "The transitions 'first,' 'then,' 'after,' 'next,' and 'finally' show the sequence of events.",
+        "coachHint": "Look for words that indicate the order of events.",
         "type": "multi-select",
         "choices": [
-          "Firstly",
-          "On the other hand",
-          "Additionally",
-          "Consequently"
+          "First",
+          "Then",
+          "After",
+          "Next",
+          "Finally",
+          "Wonderful"
         ],
         "correctAnswers": [
-          "Firstly",
-          "Additionally",
-          "Consequently"
+          "First",
+          "Then",
+          "After",
+          "Next",
+          "Finally"
         ],
-        "minSelect": 2,
-        "maxSelect": 3,
+        "minSelect": 5,
+        "maxSelect": 5,
         "partialCreditRule": "per-correct"
       }
     ],
     "exitTicket": [
       {
-        "question": "Arrange the events in the story in the sequence that makes the most sense.",
+        "question": "Choose the best transition to complete the sentence.",
         "passage": null,
-        "rightAnswerRationale": "The correct sequence shows logical progression from idea to idea, enhancing clarity.",
-        "coachHint": "Read all the events first. Use the Pointer tool to select-and-drag events into the correct order.",
-        "type": "drag-drop-order",
-        "draggableItems": [
-          "I packed my bag.",
-          "I went to the bus stop.",
-          "I arrived at school.",
-          "I attended my first class."
+        "rightAnswerRationale": "Therefore' is correct because it shows cause and effect.",
+        "coachHint": "Think about the relationship between the ideas.",
+        "type": "inline-dropdown",
+        "sentence": "I forgot my umbrella, [BLANK] I got wet.",
+        "dropdownOptions": [
+          "however",
+          "therefore",
+          "meanwhile"
         ],
-        "correctOrder": [
-          "I packed my bag.",
-          "I went to the bus stop.",
-          "I arrived at school.",
-          "I attended my first class."
+        "correctOption": "therefore",
+        "distractorRationale": [
+          {
+            "option": "however",
+            "whyWrong": "'However' shows contrast, not cause and effect."
+          },
+          {
+            "option": "meanwhile",
+            "whyWrong": "'Meanwhile' indicates simultaneous actions, not cause and effect."
+          }
         ]
       },
       {
-        "question": "Match each claim with the evidence that supports it.",
-        "passage": "The library was a quiet place, filled with rows of books. Students sat at tables, reading and taking notes. The librarian moved silently between the shelves, helping those in need. Sunlight streamed through the windows, creating a warm and inviting atmosphere. It was a place of learning and discovery, where knowledge was at everyone's fingertips. The library was more than just a room; it was a gateway to new worlds and ideas. Every visit promised a new adventure, and every book was a treasure waiting to be discovered. It was a sanctuary for those seeking knowledge and a refuge from the outside world. The library was a testament to the power of books and the joy of reading. It was a place where dreams could take flight, and imagination knew no bounds. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
-        "rightAnswerRationale": "The correct mapping shows how each piece of evidence supports the corresponding claim.",
-        "coachHint": "Identify sentences that directly support each claim.",
-        "type": "evidence-mapping",
-        "claims": [
-          "The library was a place of learning.",
-          "The library was inviting."
+        "question": "Arrange the steps in the correct order.",
+        "passage": null,
+        "rightAnswerRationale": "The correct order follows a logical sequence of events.",
+        "coachHint": "Think about what happens first, next, and last.",
+        "type": "drag-drop-order",
+        "draggableItems": [
+          "First, gather your ingredients.",
+          "Next, mix the ingredients together.",
+          "Finally, bake the mixture in the oven."
         ],
-        "evidenceItems": [
-          "Students sat at tables, reading and taking notes.",
-          "Sunlight streamed through the windows, creating a warm and inviting atmosphere."
-        ],
-        "correctMapping": [
-          {
-            "claim": "The library was a place of learning.",
-            "evidenceItems": [
-              "Students sat at tables, reading and taking notes."
-            ]
-          },
-          {
-            "claim": "The library was inviting.",
-            "evidenceItems": [
-              "Sunlight streamed through the windows, creating a warm and inviting atmosphere."
-            ]
-          }
+        "correctOrder": [
+          "First, gather your ingredients.",
+          "Next, mix the ingredients together.",
+          "Finally, bake the mixture in the oven."
         ]
       }
     ],
     "masteryCheck": [
       {
-        "question": "Select all the transitions that would improve the flow of this paragraph.",
-        "passage": null,
-        "rightAnswerRationale": "The correct transitions help the reader understand the sequence and relationship between ideas.",
-        "coachHint": "Consider how each sentence connects to the next.",
+        "question": "Identify the transitions in this paragraph.",
+        "passage": "Last Saturday, my family and I decided to have a fun day at the beach. First, we packed our bags with towels, sunscreen, and snacks. Then, we drove to the beach, enjoying the sunny weather along the way. After arriving, we set up our spot near the water. Next, we played in the waves and built sandcastles. Finally, as the sun began to set, we packed up and headed home, feeling happy and relaxed from our day by the sea. It was a wonderful experience!\"','rightAnswerRationale\":\"The transitions 'first,' 'then,' 'after,' 'next,' and 'finally' show the sequence of events.\",\"coachHint\":\"Look for words that indicate the order of events.\",\"type\":\"multi-select\",\"choices\":[\"First\",\"Then\",\"After\",\"Next\",\"Finally\",\"Wonderful\"],\"correctAnswers\":[\"First\",\"Then\",\"After\",\"Next\",\"Finally\"],\"minSelect\":5,\"maxSelect\":5,\"partialCreditRule\":\"per-correct\"},{\"question\":\"Choose the best transition to complete the sentence.\",\"passage\":null,\"rightAnswerRationale\":\"'Therefore' is correct because it shows cause and effect.\",\"coachHint\":\"Think about the relationship between the ideas.\",\"type\":\"inline-dropdown\",\"sentence\":\"I forgot my umbrella, [BLANK] I got wet.\",\"dropdownOptions\":[\"however\",\"therefore\",\"meanwhile\"],\"correctOption\":\"therefore\",\"distractorRationale\":[{\"option\":\"however\",\"whyWrong\":\"'However' shows contrast, not cause and effect.\"},{\"option\":\"meanwhile\",\"whyWrong\":\"'Meanwhile' indicates simultaneous actions, not cause and effect.\"}]},{\"question\":\"Arrange the steps in the correct order.\",\"passage\":null,\"rightAnswerRationale\":\"The correct order follows a logical sequence of events.\",\"coachHint\":\"Think about what happens first, next, and last.\",\"type\":\"drag-drop-order\",\"draggableItems\":[\"First, gather your ingredients.\",\"Next, mix the ingredients together.\",\"Finally, bake the mixture in the oven.\"],\"correctOrder\":[\"First, gather your ingredients.\",\"Next, mix the ingredients together.\",\"Finally, bake the mixture in the oven.\"]}],\"heroResourceLinkId\":null,\"exemplarsUsed\":[\"g4-p1\",\"g4-mc-9\",\"g4-mc-1\",\"g4-mc-2\",\"g4-tda-1\",\"g4-tei-8\",\"g4-tei-7\",\"g4-tei-3\"],\"teiTypesUsed\":[\"drag-drop-order\",\"multi-select\",\"evidence-mapping\",\"inline-dropdown\"],\"generatorVersion\":\"V2\",\"qualityScore\":88,\"",
+        "rightAnswerRationale": "The transitions 'first,' 'then,' 'after,' 'next,' and 'finally' show the sequence of events.",
+        "coachHint": "Look for words that indicate the order of events.",
         "type": "multi-select",
         "choices": [
           "First",
-          "Similarly",
-          "As a result",
-          "Meanwhile"
+          "Then",
+          "After",
+          "Next",
+          "Finally",
+          "Wonderful"
         ],
         "correctAnswers": [
           "First",
-          "Similarly",
-          "As a result"
+          "Then",
+          "After",
+          "Next",
+          "Finally"
         ],
-        "minSelect": 2,
-        "maxSelect": 3,
+        "minSelect": 5,
+        "maxSelect": 5,
         "partialCreditRule": "per-correct"
       },
       {
-        "question": "Arrange the steps for planting a seed in the correct order.",
+        "question": "Choose the best transition to complete the sentence.",
         "passage": null,
-        "rightAnswerRationale": "The correct order reflects a logical sequence of actions needed to plant a seed.",
-        "coachHint": "Think about what you need to do first, next, and last.",
-        "type": "drag-drop-order",
-        "draggableItems": [
-          "Dig a hole.",
-          "Place the seed in the hole.",
-          "Cover the seed with soil.",
-          "Water the seed."
+        "rightAnswerRationale": "Therefore' is correct because it shows cause and effect.",
+        "coachHint": "Think about the relationship between the ideas.",
+        "type": "inline-dropdown",
+        "sentence": "I forgot my umbrella, [BLANK] I got wet.",
+        "dropdownOptions": [
+          "however",
+          "therefore",
+          "meanwhile"
         ],
-        "correctOrder": [
-          "Dig a hole.",
-          "Place the seed in the hole.",
-          "Cover the seed with soil.",
-          "Water the seed."
+        "correctOption": "therefore",
+        "distractorRationale": [
+          {
+            "option": "however",
+            "whyWrong": "'However' shows contrast, not cause and effect."
+          },
+          {
+            "option": "meanwhile",
+            "whyWrong": "'Meanwhile' indicates simultaneous actions, not cause and effect."
+          }
         ]
       },
       {
-        "question": "Match each claim with the evidence that supports it.",
-        "passage": "The museum was a treasure trove of history. Visitors marveled at the ancient artifacts and detailed exhibits. The curator guided groups through the halls, sharing stories and insights. Natural light illuminated the displays, enhancing their beauty. It was a place where the past came alive, offering a glimpse into different eras. The museum was more than just a collection; it was an educational journey. Every exhibit told a story, and every artifact had a history. It was a place of wonder and learning, where curiosity was encouraged. The museum was a testament to the importance of preserving history and the joy of discovery. It was a place where knowledge was celebrated, and imagination was sparked. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
-        "rightAnswerRationale": "The correct mapping shows how each piece of evidence supports the corresponding claim.",
-        "coachHint": "Identify sentences that directly support each claim.",
-        "type": "evidence-mapping",
-        "claims": [
-          "The museum was a place of learning.",
-          "The museum was a place of wonder."
+        "question": "Arrange the steps in the correct order.",
+        "passage": null,
+        "rightAnswerRationale": "The correct order follows a logical sequence of events.",
+        "coachHint": "Think about what happens first, next, and last.",
+        "type": "drag-drop-order",
+        "draggableItems": [
+          "First, gather your ingredients.",
+          "Next, mix the ingredients together.",
+          "Finally, bake the mixture in the oven."
         ],
-        "evidenceItems": [
-          "The curator guided groups through the halls, sharing stories and insights.",
-          "Visitors marveled at the ancient artifacts and detailed exhibits."
-        ],
-        "correctMapping": [
-          {
-            "claim": "The museum was a place of learning.",
-            "evidenceItems": [
-              "The curator guided groups through the halls, sharing stories and insights."
-            ]
-          },
-          {
-            "claim": "The museum was a place of wonder.",
-            "evidenceItems": [
-              "Visitors marveled at the ancient artifacts and detailed exhibits."
-            ]
-          }
+        "correctOrder": [
+          "First, gather your ingredients.",
+          "Next, mix the ingredients together.",
+          "Finally, bake the mixture in the oven."
         ]
       }
     ],
@@ -322,40 +316,53 @@
     "teiTypesUsed": [
       "drag-drop-order",
       "multi-select",
-      "evidence-mapping"
+      "evidence-mapping",
+      "inline-dropdown"
     ],
     "generatorVersion": "V2",
-    "qualityScore": 92,
+    "qualityScore": 80,
     "qualityIssues": [
-      "Critic requested revision after 3 iterations."
+      "Practice passage needs regeneration: 215 words (target 150-400) with FK grade 16.6 (target 4±1.5). Write a longer, more natural passage with simpler sentence structure.",
+      "Practice passage needs regeneration: 228 words (target 150-400) with FK grade 15.2 (target 4±1.5). Write a longer, more natural passage with simpler sentence structure.",
+      "Practice passage needs regeneration: 193 words (target 150-400) with FK grade 19.2 (target 4±1.5). Write a longer, more natural passage with simpler sentence structure.",
+      "Practice passage duplicate risk: current passage 2 is 0.93 similar to current passage 3. Previous passage was too similar to Last Saturday, my family and I decided to have a fun day at the beach. First, we packed our bags with towels, sunscreen,. Write on a different topic/scenario.",
+      "Practice passage duplicate risk: current passage 2 is 0.95 similar to current passage 4. Previous passage was too similar to Last Saturday, my family and I decided to have a fun day at the beach. First, we packed our bags with towels, sunscreen,. Write on a different topic/scenario.",
+      "Practice passage duplicate risk: current passage 3 is 0.95 similar to current passage 4. Previous passage was too similar to Last Saturday, my family and I decided to have a fun day at the beach. First, we packed our bags with towels, sunscreen,. Write on a different topic/scenario."
     ]
   },
   "critic": {
     "status": "REVISE",
-    "score": 82,
+    "score": 70,
     "revisions": [
       {
-        "section": "explanation",
-        "issue": "Repetitive content and lack of clarity.",
-        "suggestion": "Remove repetitive sentences and clarify the explanation of how transitions connect ideas. Ensure the explanation is concise and focused on the main points."
+        "section": "guidedPractice[2]",
+        "issue": "Passage is too complex and short with high FK grade level.",
+        "suggestion": "Rewrite the passage to be longer and simpler, targeting a 4th-grade reading level with a more engaging topic."
       },
       {
-        "section": "workedExample",
-        "issue": "Repetitive content and lack of clarity.",
-        "suggestion": "Remove repetitive sentences and clarify the explanation of how transitions connect ideas. Ensure the explanation is concise and focused on the main points."
+        "section": "independentPractice[0]",
+        "issue": "Passage is too complex and short with high FK grade level.",
+        "suggestion": "Create a new passage that is longer and uses simpler sentence structures, ensuring it is suitable for 4th-grade students."
       },
       {
-        "section": "guidedPractice[1]",
-        "issue": "Lack of passage for context.",
-        "suggestion": "Provide a short passage for students to apply transitions, enhancing the context and understanding of the exercise."
+        "section": "independentPractice[3]",
+        "issue": "Passage is too complex and short with high FK grade level.",
+        "suggestion": "Develop a new passage that is longer and more accessible, focusing on a different topic to avoid duplication."
       },
       {
-        "section": "independentPractice[1]",
-        "issue": "Lack of passage for context.",
-        "suggestion": "Provide a short passage for students to apply transitions, enhancing the context and understanding of the exercise."
+        "section": "masteryCheck[0]",
+        "issue": "Passage is too complex and short with high FK grade level.",
+        "suggestion": "Generate a new passage that is longer and simpler, ensuring it is distinct from other passages and appropriate for the grade level."
       }
     ]
   },
-  "validationIssues": [],
+  "validationIssues": [
+    "Practice passage needs regeneration: 215 words (target 150-400) with FK grade 16.6 (target 4±1.5). Write a longer, more natural passage with simpler sentence structure.",
+    "Practice passage needs regeneration: 228 words (target 150-400) with FK grade 15.2 (target 4±1.5). Write a longer, more natural passage with simpler sentence structure.",
+    "Practice passage needs regeneration: 193 words (target 150-400) with FK grade 19.2 (target 4±1.5). Write a longer, more natural passage with simpler sentence structure.",
+    "Practice passage duplicate risk: current passage 2 is 0.93 similar to current passage 3. Previous passage was too similar to Last Saturday, my family and I decided to have a fun day at the beach. First, we packed our bags with towels, sunscreen,. Write on a different topic/scenario.",
+    "Practice passage duplicate risk: current passage 2 is 0.95 similar to current passage 4. Previous passage was too similar to Last Saturday, my family and I decided to have a fun day at the beach. First, we packed our bags with towels, sunscreen,. Write on a different topic/scenario.",
+    "Practice passage duplicate risk: current passage 3 is 0.95 similar to current passage 4. Previous passage was too similar to Last Saturday, my family and I decided to have a fun day at the beach. First, we packed our bags with towels, sunscreen,. Write on a different topic/scenario."
+  ],
   "iterations": 5
 }

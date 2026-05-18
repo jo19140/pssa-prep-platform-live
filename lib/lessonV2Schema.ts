@@ -14,6 +14,23 @@ const optionRationaleSchema = z.object({
   whyWrong: mediumText,
 });
 
+export const hotTextWordBracketPattern = /\[\s*([^/\]]+)\s*\/\s*([^/\]]+)\s*\]/g;
+
+export function parseHotTextWordBrackets(sentence: string) {
+  return Array.from(sentence.matchAll(hotTextWordBracketPattern)).map((match) => ({
+    raw: match[0],
+    options: [match[1].trim(), match[2].trim()] as [string, string],
+  }));
+}
+
+function normalized(value: string) {
+  return value.trim().replace(/\s+/g, " ").toLowerCase();
+}
+
+function sameText(a: string, b: string) {
+  return normalized(a) === normalized(b);
+}
+
 const baseItemSchema = z.object({
   question: mediumText,
   passage: passageText.nullable(),
@@ -31,7 +48,7 @@ export const multipleChoiceItemSchema = baseItemSchema.extend({
 export const inlineDropdownItemSchema = baseItemSchema.extend({
   type: z.literal("inline-dropdown"),
   sentence: mediumText,
-  dropdownOptions: z.array(shortText).min(3).max(4),
+  dropdownOptions: z.array(shortText).min(2).max(4),
   correctOption: shortText,
   distractorRationale: z.array(optionRationaleSchema).min(2),
 });
@@ -139,20 +156,116 @@ export const practiceQuestionSchema = practiceQuestionStructuredOutputSchema.sup
       }
     }
   }
-  if (item.type === "inline-dropdown" && !item.sentence.includes("[BLANK]")) {
-    ctx.addIssue({ code: z.ZodIssueCode.custom, message: "inline-dropdown sentence must contain [BLANK] placeholder", path: ["sentence"] });
+  if (item.type === "inline-dropdown") {
+    const blankCount = item.sentence.match(/\[BLANK\]/g)?.length || 0;
+    if (blankCount !== 1) {
+      ctx.addIssue({ code: z.ZodIssueCode.custom, message: "inline-dropdown sentence must contain exactly one [BLANK] placeholder", path: ["sentence"] });
+    }
+    if (/\[\s*\]/.test(item.sentence)) {
+      ctx.addIssue({ code: z.ZodIssueCode.custom, message: "inline-dropdown sentence must not contain empty [ ] placeholders; use [BLANK] at the blank location", path: ["sentence"] });
+    }
+    if (!item.dropdownOptions.some((option) => sameText(option, item.correctOption))) {
+      ctx.addIssue({ code: z.ZodIssueCode.custom, message: "inline-dropdown correctOption must appear in dropdownOptions", path: ["correctOption"] });
+    }
+    for (const option of item.dropdownOptions.filter((option) => !sameText(option, item.correctOption))) {
+      const rationale = item.distractorRationale.find((entry) => sameText(entry.option, option));
+      if (!rationale?.whyWrong?.trim()) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: `inline-dropdown distractorRationale must include option and whyWrong for "${option}"`,
+          path: ["distractorRationale"],
+        });
+      }
+    }
   }
-  if (item.type === "hot-text-word" && (item.bracketPairs.length < 1 || !/\[\s*[^/\]]+\s*\/\s*[^\]]+\]/.test(item.sentence))) {
-    ctx.addIssue({ code: z.ZodIssueCode.custom, message: "hot-text-word requires bracket pairs and matching sentence syntax", path: ["sentence"] });
+  if (item.type === "hot-text-word") {
+    const parsedBrackets = parseHotTextWordBrackets(item.sentence);
+    const bracketBlockCount = item.sentence.match(/\[[^\]]+\]/g)?.length || 0;
+    if (bracketBlockCount !== parsedBrackets.length) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "hot-text-word brackets must each contain exactly 2 options separated by a single /",
+        path: ["sentence"],
+      });
+    }
+    if (parsedBrackets.length < 1 || parsedBrackets.length !== item.bracketPairs.length) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "hot-text-word bracketPairs length must equal the number of [ X / Y ] brackets in sentence",
+        path: ["bracketPairs"],
+      });
+    }
+    parsedBrackets.forEach((bracket, index) => {
+      const pair = item.bracketPairs[index];
+      if (!pair) return;
+      const pairOptions = pair.options.map(normalized);
+      const bracketOptions = bracket.options.map(normalized);
+      if (pairOptions.length !== 2 || pairOptions[0] !== bracketOptions[0] || pairOptions[1] !== bracketOptions[1]) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: `hot-text-word bracketPairs[${index}].options must match sentence bracket ${bracket.raw}`,
+          path: ["bracketPairs", index, "options"],
+        });
+      }
+      if (!pair.options.some((option) => sameText(option, pair.correct))) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: `hot-text-word bracketPairs[${index}].correct must be one of its two options`,
+          path: ["bracketPairs", index, "correct"],
+        });
+      }
+    });
   }
-  if (item.type === "hot-text-phrase" && !item.passage) {
-    ctx.addIssue({ code: z.ZodIssueCode.custom, message: "hot-text-phrase requires a passage", path: ["passage"] });
+  if (item.type === "hot-text-phrase") {
+    if (!item.passage) {
+      ctx.addIssue({ code: z.ZodIssueCode.custom, message: "hot-text-phrase requires a passage", path: ["passage"] });
+    }
+    for (const phrase of item.correctPhrases) {
+      if (!item.selectablePhrases.some((selectable) => sameText(selectable, phrase))) {
+        ctx.addIssue({ code: z.ZodIssueCode.custom, message: `hot-text-phrase correct phrase "${phrase}" must appear in selectablePhrases`, path: ["correctPhrases"] });
+      }
+    }
+    if (item.minSelect > item.maxSelect || item.maxSelect > item.selectablePhrases.length) {
+      ctx.addIssue({ code: z.ZodIssueCode.custom, message: "hot-text-phrase selection bounds must fit selectablePhrases", path: ["maxSelect"] });
+    }
   }
-  if (item.type === "evidence-mapping" && (!item.passage || item.correctMapping.some((entry) => entry.evidenceItems.length < 1))) {
-    ctx.addIssue({ code: z.ZodIssueCode.custom, message: "evidence-mapping requires passage and at least 1 evidence per claim", path: ["correctMapping"] });
+  if (item.type === "evidence-mapping") {
+    if (!item.passage || item.correctMapping.some((entry) => entry.evidenceItems.length < 1)) {
+      ctx.addIssue({ code: z.ZodIssueCode.custom, message: "evidence-mapping requires passage and at least 1 evidence per claim", path: ["correctMapping"] });
+    }
+    for (const entry of item.correctMapping) {
+      if (!item.claims.some((claim) => sameText(claim, entry.claim))) {
+        ctx.addIssue({ code: z.ZodIssueCode.custom, message: `evidence-mapping correctMapping claim "${entry.claim}" must exist in claims`, path: ["correctMapping"] });
+      }
+      for (const evidence of entry.evidenceItems) {
+        if (!item.evidenceItems.some((candidate) => sameText(candidate, evidence))) {
+          ctx.addIssue({ code: z.ZodIssueCode.custom, message: `evidence-mapping evidence "${evidence}" must exist in evidenceItems`, path: ["correctMapping"] });
+        }
+      }
+    }
   }
-  if (item.type === "hot-text-sentence" && (!item.paragraph || item.sentenceCount < 3 || !/\(\s*1\s*\)/.test(item.paragraph))) {
-    ctx.addIssue({ code: z.ZodIssueCode.custom, message: "hot-text-sentence requires a paragraph with >=3 numbered sentences", path: ["paragraph"] });
+  if (item.type === "hot-text-sentence") {
+    if (!item.paragraph || item.sentenceCount < 3 || !/\(\s*1\s*\)/.test(item.paragraph)) {
+      ctx.addIssue({ code: z.ZodIssueCode.custom, message: "hot-text-sentence requires a paragraph with >=3 numbered sentences", path: ["paragraph"] });
+    }
+    if (item.correctSentenceNumber < 1 || item.correctSentenceNumber > item.sentenceCount) {
+      ctx.addIssue({ code: z.ZodIssueCode.custom, message: "hot-text-sentence correctSentenceNumber must be between 1 and sentenceCount", path: ["correctSentenceNumber"] });
+    }
+  }
+  if (item.type === "drag-drop-table") {
+    for (const draggable of item.draggableItems) {
+      const mapping = item.correctMapping.find((entry) => sameText(entry.item, draggable));
+      if (!mapping) {
+        ctx.addIssue({ code: z.ZodIssueCode.custom, message: `drag-drop-table item "${draggable}" must have a correctMapping entry`, path: ["correctMapping"] });
+      } else if (!item.columns.some((column) => sameText(column, mapping.column))) {
+        ctx.addIssue({ code: z.ZodIssueCode.custom, message: `drag-drop-table mapping for "${draggable}" must use an existing column`, path: ["correctMapping"] });
+      }
+    }
+    for (const mapping of item.correctMapping) {
+      if (!item.draggableItems.some((draggable) => sameText(draggable, mapping.item))) {
+        ctx.addIssue({ code: z.ZodIssueCode.custom, message: `drag-drop-table mapped item "${mapping.item}" must exist in draggableItems`, path: ["correctMapping"] });
+      }
+    }
   }
 });
 

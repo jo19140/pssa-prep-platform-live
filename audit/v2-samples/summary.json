@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-05-17T16:19:35.020Z",
+  "generatedAt": "2026-05-18T18:35:24.527Z",
   "lessonCount": 10,
-  "averageQuality": 90.8,
+  "averageQuality": 90.4,
   "teiTypes": [
     "drag-drop-order",
     "drag-drop-table",
@@ -22,7 +22,8 @@
       "skill": "Main Idea and Supporting Details",
       "qualityScore": 92,
       "qualityIssues": [
-        "Practice passage needs regeneration: 169 words (target 150-400) with FK grade 10.4 (target 3±1.5). Write a longer, more natural passage with simpler sentence structure."
+        "Practice passage needs regeneration: 170 words (target 150-400) with FK grade 10.7 (target 3±1.5). Write a longer, more natural passage with simpler sentence structure.",
+        "Practice passage needs regeneration: 178 words (target 150-400) with FK grade 10.1 (target 3±1.5). Write a longer, more natural passage with simpler sentence structure."
       ],
       "teiTypesUsed": [
         "drag-drop-table",
@@ -31,35 +32,26 @@
       "heroResourceLinkId": "cmp4fw1pv001dg3sai6y6sy8a"
     },
     {
-      "title": "Understanding Verb Tenses",
+      "title": "Understanding Verb Tense",
       "gradeLevel": 3,
       "standardCode": "CC.1.4.3.F",
       "skill": "Verb Tense",
       "qualityScore": 92,
-      "qualityIssues": [
-        "guidedPractice[0]: Distractor plausibility could be improved. (Ensure that distractors are more plausible by using verbs that are closer in meaning or form to the correct answer, making the choice more challenging.)",
-        "exitTicket[0]: Limited TEI variety. (Incorporate a different TEI type, such as drag-and-drop or matching, to increase engagement and assess understanding in varied ways.)"
-      ],
+      "qualityIssues": [],
       "teiTypesUsed": [
         "inline-dropdown",
-        "hot-text-word",
-        "drag-drop-table"
+        "hot-text-word"
       ],
       "heroResourceLinkId": "cmp4fw3vi002eg3sa2b9ofx4h"
     },
     {
-      "title": "Understanding Characters Through Actions and Words",
+      "title": "Understanding Characters in Stories",
       "gradeLevel": 4,
       "standardCode": "CC.1.3.4.C",
       "skill": "Character Analysis",
-      "qualityScore": 80,
+      "qualityScore": 92,
       "qualityIssues": [
-        "Practice passage duplicate risk: current passage 1 is 0.93 similar to current passage 2. Previous passage was too similar to Jake was known for his adventurous spirit. One day, he found a lost puppy in the forest and decided to help it find its . Write on a different topic/scenario.",
-        "Practice passage duplicate risk: current passage 3 is 0.96 similar to current passage 4. Previous passage was too similar to Lila was always willing to help others. One day, she stayed late at the library to assist a friend with studying. Despit. Write on a different topic/scenario.",
-        "Practice passage duplicate risk: current passage 6 is 0.96 similar to current passage 7. Previous passage was too similar to Tom was known for his helpfulness. One day, he noticed his neighbor struggling with groceries and offered to help. He ca. Write on a different topic/scenario.",
-        "guidedPractice[0]: Passage duplicate risk with other sections. (Create a new passage with a different scenario or character to avoid duplication.)",
-        "independentPractice[0]: Passage duplicate risk with other sections. (Develop a unique passage focusing on a different character or setting to ensure variety.)",
-        "masteryCheck[0]: Passage duplicate risk with other sections. (Introduce a new character or situation to differentiate from other passages.)"
+        "Critic requested revision after 3 iterations."
       ],
       "teiTypesUsed": [
         "hot-text-sentence",
@@ -68,18 +60,24 @@
       "heroResourceLinkId": null
     },
     {
-      "title": "Mastering Transitions in Writing",
+      "title": "Using Transitions to Organize Ideas",
       "gradeLevel": 4,
       "standardCode": "CC.1.4.4.C",
       "skill": "Organizing Ideas with Transitions",
-      "qualityScore": 92,
+      "qualityScore": 80,
       "qualityIssues": [
-        "Critic requested revision after 3 iterations."
+        "Practice passage needs regeneration: 215 words (target 150-400) with FK grade 16.6 (target 4±1.5). Write a longer, more natural passage with simpler sentence structure.",
+        "Practice passage needs regeneration: 228 words (target 150-400) with FK grade 15.2 (target 4±1.5). Write a longer, more natural passage with simpler sentence structure.",
+        "Practice passage needs regeneration: 193 words (target 150-400) with FK grade 19.2 (target 4±1.5). Write a longer, more natural passage with simpler sentence structure.",
+        "Practice passage duplicate risk: current passage 2 is 0.93 similar to current passage 3. Previous passage was too similar to Last Saturday, my family and I decided to have a fun day at the beach. First, we packed our bags with towels, sunscreen,. Write on a different topic/scenario.",
+        "Practice passage duplicate risk: current passage 2 is 0.95 similar to current passage 4. Previous passage was too similar to Last Saturday, my family and I decided to have a fun day at the beach. First, we packed our bags with towels, sunscreen,. Write on a different topic/scenario.",
+        "Practice passage duplicate risk: current passage 3 is 0.95 similar to current passage 4. Previous passage was too similar to Last Saturday, my family and I decided to have a fun day at the beach. First, we packed our bags with towels, sunscreen,. Write on a different topic/scenario."
       ],
       "teiTypesUsed": [
         "drag-drop-order",
         "multi-select",
-        "evidence-mapping"
+        "evidence-mapping",
+        "inline-dropdown"
       ],
       "heroResourceLinkId": null
     },
@@ -102,11 +100,12 @@
       "standardCode": "CC.1.2.5.E",
       "skill": "Text Structure and Signal Words",
       "qualityScore": 92,
-      "qualityIssues": [],
+      "qualityIssues": [
+        "Practice passage needs regeneration: 157 words (target 150-400) with FK grade 12.7 (target 5±1.5). Write a longer, more natural passage with simpler sentence structure."
+      ],
       "teiTypesUsed": [
         "inline-dropdown",
-        "hot-text-sentence",
-        "multi-select"
+        "hot-text-phrase"
       ],
       "heroResourceLinkId": "cmp4fwawl005sg3sa3hku5sxm"
     },
@@ -115,9 +114,15 @@
       "gradeLevel": 6,
       "standardCode": "CC.1.3.6.B",
       "skill": "Inference and Text Evidence",
-      "qualityScore": 92,
-      "qualityIssues": [],
+      "qualityScore": 88,
+      "qualityIssues": [
+        "Practice passage duplicate risk: current passage 3 is 0.94 similar to current passage 7. Previous passage was too similar to Despite the setbacks, she refused to give up. Each challenge was met with a renewed effort, and her resolve only grew st. Write on a different topic/scenario.",
+        "Practice passage: Duplicate risk with passage 3 and 7. (Write on a different topic or scenario to ensure passage uniqueness.)",
+        "masteryCheck[1]: Correct phrase not included in selectable phrases. (Add 'streets bustling with people' to the selectable phrases.)",
+        "guidedPractice[1]: Incorrect evidence mapping for the second claim. (Ensure evidence items correctly support the claim that the setting is lively and bustling.)"
+      ],
       "teiTypesUsed": [
+        "two-part-ebsr",
         "hot-text-phrase",
         "evidence-mapping"
       ],
@@ -129,28 +134,25 @@
       "standardCode": "CC.1.4.6.F",
       "skill": "Subject-Verb Agreement",
       "qualityScore": 92,
-      "qualityIssues": [
-        "Critic requested revision after 3 iterations."
-      ],
+      "qualityIssues": [],
       "teiTypesUsed": [
-        "inline-dropdown",
-        "hot-text-sentence"
+        "hot-text-word",
+        "inline-dropdown"
       ],
       "heroResourceLinkId": null
     },
     {
-      "title": "Mastering Evidence Selection",
+      "title": "Mastering Evidence Selection in Informational Texts",
       "gradeLevel": 7,
       "standardCode": "CC.1.2.7.B",
       "skill": "Evidence Selection",
       "qualityScore": 92,
-      "qualityIssues": [],
+      "qualityIssues": [
+        "Critic requested revision after 3 iterations."
+      ],
       "teiTypesUsed": [
         "evidence-mapping",
-        "hot-text-phrase",
-        "two-part-ebsr",
-        "multi-select",
-        "hot-text-word"
+        "hot-text-phrase"
       ],
       "heroResourceLinkId": null
     },
@@ -165,7 +167,8 @@
       ],
       "teiTypesUsed": [
         "hot-text-sentence",
-        "evidence-mapping"
+        "evidence-mapping",
+        "two-part-ebsr"
       ],
       "heroResourceLinkId": "cmp4fw9kb0054g3sa7gtfqnpx"
     }
