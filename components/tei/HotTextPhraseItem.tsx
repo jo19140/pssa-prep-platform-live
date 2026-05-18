@@ -23,7 +23,7 @@ export function HotTextPhraseItem({ item, itemId, disabled, onSubmit }: TEIItemC
 
   function submit() {
     if (selectedPhrases.length < minSelect || locked) return;
-    setResponse(submitResponse(item, itemId, { selectedPhrases }, onSubmit));
+    setResponse(submitResponse(item, itemId, { selectedPhrases: selectedPhrases.map(phraseFromOccurrenceKey) }, onSubmit));
   }
 
   return (
@@ -37,30 +37,74 @@ export function HotTextPhraseItem({ item, itemId, disabled, onSubmit }: TEIItemC
 }
 
 function renderSelectablePassage(passage: string, phrases: string[], selected: string[], correctPhrases: string[], locked: boolean, submitted: boolean, toggle: (phrase: string) => void) {
-  let remaining = String(passage || "");
+  const text = String(passage || "");
+  const matches = findPhraseMatches(text, phrases);
+  const matchedPhrases = new Set(matches.map((match) => normalizeText(match.phrase)));
+  phrases.forEach((phrase) => {
+    if (!matchedPhrases.has(normalizeText(phrase))) {
+      console.warn("HotTextPhraseItem selectable phrase was not found in passage", { phrase });
+    }
+  });
+  if (!matches.length) return passage;
+
   const nodes: React.ReactNode[] = [];
-  phrases.forEach((phrase, index) => {
-    const position = remaining.toLowerCase().indexOf(String(phrase).toLowerCase());
-    if (position === -1) return;
-    const before = remaining.slice(0, position);
-    const match = remaining.slice(position, position + phrase.length);
-    if (before) nodes.push(<span key={`text-${index}`}>{before}</span>);
-    const isSelected = selected.includes(phrase);
-    const correct = submitted && correctPhrases.some((correctPhrase) => normalizeText(correctPhrase) === normalizeText(phrase));
+  let cursor = 0;
+  matches.forEach((match, index) => {
+    if (match.start > cursor) nodes.push(<span key={`text-${index}`}>{text.slice(cursor, match.start)}</span>);
+    const selectedKey = occurrenceKey(match.phrase, match.start);
+    const isSelected = selected.includes(selectedKey);
+    const correct = submitted && correctPhrases.some((correctPhrase) => normalizeText(correctPhrase) === normalizeText(match.phrase));
     const wrong = submitted && isSelected && !correct;
     nodes.push(
       <button
-        key={`phrase-${phrase}-${index}`}
+        key={`phrase-${match.phrase}-${match.start}`}
         type="button"
         disabled={locked}
-        onClick={() => toggle(phrase)}
+        onClick={() => toggle(selectedKey)}
         className={`mx-1 rounded-lg border px-2 py-1 text-sm font-black ${optionButtonClass(isSelected, locked, correct, wrong)}`}
       >
-        {match}
+        {match.text}
       </button>,
     );
-    remaining = remaining.slice(position + phrase.length);
+    cursor = match.end;
   });
-  if (remaining) nodes.push(<span key="tail">{remaining}</span>);
+  if (cursor < text.length) nodes.push(<span key="tail">{text.slice(cursor)}</span>);
   return nodes.length ? nodes : passage;
+}
+
+function findPhraseMatches(passage: string, phrases: string[]) {
+  const matches: Array<{ phrase: string; text: string; start: number; end: number }> = [];
+  const sortedPhrases = [...phrases].sort((a, b) => String(b).length - String(a).length);
+
+  sortedPhrases.forEach((phrase) => {
+    const matcher = phraseMatcher(phrase);
+    let match: RegExpExecArray | null;
+    while ((match = matcher.exec(passage))) {
+      const start = match.index;
+      const end = matcher.lastIndex;
+      const overlaps = matches.some((existing) => start < existing.end && end > existing.start);
+      if (!overlaps) matches.push({ phrase, text: passage.slice(start, end), start, end });
+      if (matcher.lastIndex === match.index) matcher.lastIndex += 1;
+    }
+  });
+
+  return matches.sort((a, b) => a.start - b.start);
+}
+
+function phraseMatcher(phrase: string) {
+  const tokens = String(phrase || "").trim().split(/\s+/).filter(Boolean).map(escapeRegExp);
+  const pattern = tokens.join("[\\s\\p{P}\\p{S}]+");
+  return new RegExp(`(?<![\\p{L}\\p{N}])${pattern}(?![\\p{L}\\p{N}])`, "giu");
+}
+
+function occurrenceKey(phrase: string, start: number) {
+  return `${normalizeText(phrase)}@@${start}`;
+}
+
+function phraseFromOccurrenceKey(key: string) {
+  return key.split("@@")[0] || key;
+}
+
+function escapeRegExp(value: string) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
