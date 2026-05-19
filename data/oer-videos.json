@@ -10,8 +10,8 @@
     "CCSS",
     "PA Core"
   ],
-  "total_videos": 655,
-  "total_collections": 21,
+  "total_videos": 656,
+  "total_collections": 22,
   "total_skills": 104,
   "collections": [
     {
@@ -681,6 +681,23 @@
       "video_count": 15,
       "discovered_at": "2026-05-19",
       "status": "PENDING_EXPANSION"
+    },
+    {
+      "collection_id": "teacher_curated",
+      "collection_name": "Teacher Curated Resources",
+      "provider": "Twinkl Teaching Resources - United States",
+      "channel_name": "Twinkl Teaching Resources - United States",
+      "channel_id": "UCc3LFn1fUFHxR5HQBUrbwJg",
+      "platform": "youtube",
+      "kind": "curated",
+      "grade_level": 3,
+      "grade_range_min": 3,
+      "grade_range_max": 3,
+      "tier": "on_grade",
+      "subject": "ELA",
+      "video_count": 1,
+      "discovered_at": "2026-05-19",
+      "status": "CURATED"
     }
   ],
   "skill_library": [
@@ -24089,6 +24106,40 @@
       "is_placeholder": false,
       "discovered_at": "2026-05-19",
       "source": "khan_7_vocabulary",
+      "classification_confidence": 5
+    },
+    {
+      "candidate_id": 664,
+      "video_id": "X_B9wwxl9No",
+      "video_title": "Verb Tenses for Kids! | What are Verb Tenses? | All About Verbs | Verb Tenses Quiz | Twinkl USA",
+      "channel_name": "Twinkl Teaching Resources - United States",
+      "platform": "youtube",
+      "watch_url": "https://www.youtube.com/watch?v=X_B9wwxl9No",
+      "embed_url": "https://www.youtube.com/embed/X_B9wwxl9No",
+      "thumbnail_url": "https://i.ytimg.com/vi/X_B9wwxl9No/hqdefault.jpg",
+      "thumbnail_hd_url": "https://i.ytimg.com/vi/X_B9wwxl9No/maxresdefault.jpg",
+      "duration_seconds": 428,
+      "skill_id": "verb_tense",
+      "skill_name": "Verb Tense",
+      "strand": "W",
+      "text_type": "conventions",
+      "ccss_tags": [],
+      "pa_core_tags": [
+        "CC.1.4.3.F"
+      ],
+      "grade_level": 3,
+      "grade_range_min": 3,
+      "grade_range_max": 3,
+      "tier": "on_grade",
+      "subject": "ELA",
+      "collection_id": "teacher_curated",
+      "sequence_order": 1,
+      "status": "CURATED",
+      "is_placeholder": false,
+      "is_curated": true,
+      "discovered_at": "2026-05-19",
+      "source": "teacher_curated",
+      "confidence": "high",
       "classification_confidence": 5
     }
   ]

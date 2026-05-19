@@ -31,21 +31,22 @@
       "resourceProvider": "Miacademy & MiaPrep Learning Channel"
     },
     {
-      "title": "Mastering Verb Tenses",
+      "title": "Understanding Verb Tense",
       "gradeLevel": 3,
       "standardCode": "CC.1.4.3.F",
       "skill": "Verb Tense",
       "qualityScore": 92,
-      "qualityIssues": [],
+      "qualityIssues": [
+        "Critic requested revision after 3 iterations."
+      ],
       "teiTypesUsed": [
         "inline-dropdown",
-        "hot-text-word",
-        "drag-drop-order"
+        "hot-text-word"
       ],
-      "heroResourceLinkId": null,
-      "resourceTitle": null,
-      "resourceUrl": null,
-      "resourceProvider": null
+      "heroResourceLinkId": "cmpcznu1b0000oeo7w5q3z9u8",
+      "resourceTitle": "Verb Tenses for Kids! | What are Verb Tenses? | All About Verbs | Verb Tenses Quiz | Twinkl USA",
+      "resourceUrl": "https://www.youtube.com/watch?v=X_B9wwxl9No",
+      "resourceProvider": "Twinkl Teaching Resources - United States"
     }
   ]
 }

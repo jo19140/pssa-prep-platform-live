@@ -21,17 +21,23 @@ const lessonRequests: GenerateLessonV2Input[] = [
 async function main() {
   if (!process.env.OPENAI_API_KEY) throw new Error("OPENAI_API_KEY is required for V2 sample generation.");
   const limit = readLimitArg();
+  const filter = readFilterArg();
   const outputDir = readOutputDirArg();
-  const requests = limit ? lessonRequests.slice(0, limit) : lessonRequests;
+  const indexedRequests = lessonRequests.map((request, index) => ({ request, originalIndex: index }));
+  const filteredRequests = filter
+    ? indexedRequests.filter(({ request }) => `${request.gradeLevel} ${request.standardCode} ${request.standardLabel} ${request.skill}`.toLowerCase().includes(filter))
+    : indexedRequests;
+  const requests = limit ? filteredRequests.slice(0, limit) : filteredRequests;
+  if (!requests.length) throw new Error(`No sample lessons matched filter: ${filter}`);
   mkdirSync(outputDir, { recursive: true });
   const lessons: LessonV2[] = [];
-  for (const [index, request] of requests.entries()) {
+  for (const [index, { request, originalIndex }] of requests.entries()) {
     console.log(`\nGenerating V2 sample ${index + 1}/${requests.length}: grade ${request.gradeLevel} ${request.standardCode} ${request.skill}`);
     const result = await generateLessonV2({
       ...request,
       commonError: "Students need targeted practice with PSSA-style reasoning, evidence use, and technology-enhanced item formats.",
     });
-    const filename = `sample-${String(index + 1).padStart(2, "0")}-g${request.gradeLevel}-${slug(request.skill)}.json`;
+    const filename = `sample-${String(originalIndex + 1).padStart(2, "0")}-g${request.gradeLevel}-${slug(request.skill)}.json`;
     writeFileSync(path.join(outputDir, filename), `${JSON.stringify(result, null, 2)}\n`);
     lessons.push(result.lesson);
     console.log(`  quality=${result.lesson.qualityScore} iterations=${result.iterations} tei=${result.lesson.teiTypesUsed.join(", ") || "none"} issues=${result.lesson.qualityIssues.length}`);
@@ -69,7 +75,7 @@ async function main() {
   console.log(`Distinct TEI types (${teiTypes.length}): ${teiTypes.join(", ")}`);
   console.log(`Duplicate passage pairs: ${duplicatePairs.length}`);
   if (averageQuality < 85) throw new Error(`Average qualityScore ${averageQuality.toFixed(1)} is below 85.`);
-  if (!limit && teiTypes.length < 6) throw new Error(`Expected at least 6 TEI types across samples, found ${teiTypes.length}.`);
+  if (!limit && !filter && teiTypes.length < 6) throw new Error(`Expected at least 6 TEI types across samples, found ${teiTypes.length}.`);
   if (duplicatePairs.length) throw new Error("Duplicate passages detected across generated samples.");
 }
 
@@ -79,6 +85,12 @@ function readLimitArg() {
   const value = Number(arg.split("=")[1]);
   if (!Number.isInteger(value) || value < 1) throw new Error("--limit must be a positive integer.");
   return Math.min(value, lessonRequests.length);
+}
+
+function readFilterArg() {
+  const arg = process.argv.find((value) => value.startsWith("--filter="));
+  if (!arg) return null;
+  return arg.split("=").slice(1).join("=").trim().toLowerCase();
 }
 
 function readOutputDirArg() {
