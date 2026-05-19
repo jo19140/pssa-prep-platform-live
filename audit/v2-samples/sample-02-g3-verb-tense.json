@@ -4,56 +4,56 @@
     "standardCode": "CC.1.4.3.F",
     "standardLabel": "Conventions of standard English",
     "skill": "Verb Tense",
-    "title": "Understanding Verb Tense",
+    "title": "Mastering Verb Tenses",
     "whyAssigned": "This mini-lesson targets Verb Tense because the diagnostic showed a standards-aligned practice gap.",
-    "hook": "Imagine telling a story about your weekend, but you mix up when things happened. You might say, \"I will go to the park yesterday,\" which sounds confusing! Understanding verb tense helps us communicate clearly about when actions happen. Let's explore how verb tense works and why it's important. For example, a student can use this skill while reading a test passage and checking which details truly answer the question about Verb Tense.",
-    "explanation": "Verb tense tells us when an action takes place: in the past, present, or future. Using the correct verb tense helps make our writing clear and accurate.\n\n**Past Tense** describes actions that have already happened. For example, \"Yesterday, I walked to the store.\" The word \"walked\" shows that the action is complete.\n\n**Present Tense** describes actions happening right now or regularly. For example, \"I walk to school every day.\" Here, \"walk\" indicates a routine or current action.\n\n**Future Tense** describes actions that will happen. For example, \"I will walk to the park tomorrow.\" The phrase \"will walk\" shows that the action is planned for the future.\n\nChoosing the correct verb tense depends on the time frame of the action. Consider the context: Is it happening now, has it already happened, or will it happen later? Using clues like \"yesterday,\" \"now,\" or \"tomorrow\" can help determine the right tense. Practicing with different sentences will help you become more comfortable with identifying and using verb tenses correctly in your writing and speaking. Let's practice identifying and using verb tenses in sentences! This will help us communicate our ideas clearly and effectively, whether we're telling a story, writing a report, or just chatting with friends. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step.",
-    "workedExample": "Let's look at a sentence: \"Tomorrow, I [ ] to the library.\" We need to choose the correct verb tense. The word \"tomorrow\" indicates a future action, so we should use the future tense. The correct sentence is \"Tomorrow, I will go to the library.\"\n\nNow, consider this sentence: \"Yesterday, she [ ] a book.\" The word \"yesterday\" tells us the action happened in the past. Therefore, we use the past tense: \"Yesterday, she read a book.\"\n\nFinally, let's try: \"Every day, he [ ] his homework.\" The phrase \"every day\" suggests a routine, so we use the present tense: \"Every day, he does his homework.\"\n\nBy identifying time clues like \"tomorrow,\" \"yesterday,\" and \"every day,\" we can select the correct verb tense to match the action's timing. This practice helps ensure our sentences are clear and convey the right meaning. This matters because the correct answer is not just a matching word or phrase. It is the choice that fits the whole question and can be defended with a specific detail. The reasoning should explain both what the evidence says and how it supports the answer.",
+    "hook": "Imagine telling a story about your weekend, but you accidentally mix up when things happened. You might say, \"I will go to the park yesterday,\" which sounds confusing! Understanding verb tenses helps us clearly communicate when actions occur. Today, we'll explore how to choose the right verb tense to make our writing clear and accurate.",
+    "explanation": "Verb tenses indicate when an action takes place: past, present, or future. The past tense describes actions that have already happened, like \"walked\" or \"played.\" The present tense describes actions happening now, such as \"walk\" or \"play.\" The future tense describes actions that will happen, using words like \"will walk\" or \"will play.\" Choosing the correct verb tense depends on the context. For example, \"Yesterday, I walked to the store\" uses the past tense because it describes a past action. \"I walk to the store every day\" uses the present tense for a routine. \"Tomorrow, I will walk to the store\" uses the future tense for a planned action. Identifying time clues in sentences helps us select the correct verb tense, ensuring our writing is clear and precise. Let's practice identifying and using the correct verb tense in different contexts! This will help us become more effective communicators by ensuring our sentences accurately reflect the timing of actions. Strong work uses the standard's language and shows the reasoning step by step. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step.",
+    "workedExample": "Let's look at an example sentence: \"Last week, Sarah [BLANK] her favorite book.\" To complete this sentence, we need to choose the correct verb tense. Since the sentence starts with \"Last week,\" it indicates a past action. Therefore, we should use the past tense of the verb \"read,\" which is \"read\" (pronounced as \"red\"). The completed sentence is: \"Last week, Sarah read her favorite book.\" If the sentence were \"Next week, Sarah [BLANK] her favorite book,\" we would use the future tense \"will read\" because \"Next week\" indicates a future action. Understanding these cues helps us select the appropriate verb tense, ensuring our sentences accurately reflect the timing of actions. This matters because the correct answer is not just a matching word or phrase. It is the choice that fits the whole question and can be defended with a specific detail. The reasoning should explain both what the evidence says and how it supports the answer.",
     "commonErrors": [
-      "Students often confuse past and present tense, especially with irregular verbs.",
-      "Students may use future tense incorrectly when describing past events.",
-      "Students sometimes forget to change the verb tense when the time frame changes in a story."
+      "Mixing up past, present, and future tenses in a sentence.",
+      "Using present tense when past tense is needed, e.g., 'Yesterday, I walk to school.'",
+      "Using future tense for past actions, e.g., 'I will eat breakfast yesterday.'"
     ],
     "sentenceFrames": [
-      "Yesterday, I [ ] to the store.",
-      "Today, she [ ] her homework.",
-      "Tomorrow, we [ ] to the park."
+      "Yesterday, I [BLANK] to the park.",
+      "Today, I [BLANK] my homework.",
+      "Tomorrow, I [BLANK] to the store."
     ],
     "successCriteria": [
-      "I can identify the correct verb tense based on time clues in a sentence.",
-      "I can choose the correct verb tense to match the action's timing.",
+      "I can identify the correct verb tense based on time indicators in a sentence.",
+      "I can choose the correct verb tense to complete a sentence accurately.",
       "I can explain why a particular verb tense is used in a sentence."
     ],
     "guidedPractice": [
       {
-        "question": "Choose the correct verb to complete the sentence: \"Yesterday, the cat [ ] on the couch.\"",
+        "question": "Choose the correct verb to complete the sentence: \"Yesterday, the cat [BLANK] on the windowsill.\"",
         "passage": null,
-        "rightAnswerRationale": "\"Slept\" is the correct past tense verb because \"yesterday\" indicates a past action.",
-        "coachHint": "Look for time clues like \"yesterday\" to determine the tense.",
+        "rightAnswerRationale": "The sentence uses 'Yesterday,' indicating past tense, so 'sat' is correct.",
+        "coachHint": "Look for time clues like 'Yesterday' to decide the tense.",
         "type": "inline-dropdown",
-        "sentence": "Yesterday, the cat [BLANK] on the couch.",
+        "sentence": "Yesterday, the cat [BLANK] on the windowsill.",
         "dropdownOptions": [
-          "sleeps",
-          "slept",
-          "will sleep"
+          "sits",
+          "sat",
+          "will sit"
         ],
-        "correctOption": "slept",
+        "correctOption": "sat",
         "distractorRationale": [
           {
-            "option": "sleeps",
-            "whyWrong": "\"Sleeps\" is present tense, but \"yesterday\" indicates past tense."
+            "option": "sits",
+            "whyWrong": "Sits is present tense, but 'Yesterday' indicates past."
           },
           {
-            "option": "will sleep",
-            "whyWrong": "\"Will sleep\" is future tense, but \"yesterday\" indicates past tense."
+            "option": "will sit",
+            "whyWrong": "Will sit is future tense, but 'Yesterday' indicates past."
           }
         ]
       },
       {
-        "question": "Select the correct verb to complete the sentence: \"Tomorrow, we [ ] a picnic.\"",
+        "question": "Select the correct verb: \"Tomorrow, we [BLANK] a picnic.\"",
         "passage": null,
-        "rightAnswerRationale": "\"Will have\" is the correct future tense verb because \"tomorrow\" indicates a future action.",
-        "coachHint": "Identify the time frame indicated by \"tomorrow.\"",
+        "rightAnswerRationale": "'Tomorrow' indicates future tense, so 'will have' is correct.",
+        "coachHint": "'Tomorrow' suggests a future action.",
         "type": "inline-dropdown",
         "sentence": "Tomorrow, we [BLANK] a picnic.",
         "dropdownOptions": [
@@ -65,70 +65,40 @@
         "distractorRationale": [
           {
             "option": "have",
-            "whyWrong": "\"Have\" is present tense, but \"tomorrow\" indicates future tense."
+            "whyWrong": "Have is present tense, but 'Tomorrow' indicates future."
           },
           {
             "option": "had",
-            "whyWrong": "\"Had\" is past tense, but \"tomorrow\" indicates future tense."
+            "whyWrong": "Had is past tense, but 'Tomorrow' indicates future."
           }
         ]
       },
       {
-        "question": "Choose the correct verb to complete the sentence: \"The students [ ] to the library every day.\"",
+        "question": "Choose the correct verb: \"The students [ walk / walks ] to the library after lunch.\"",
         "passage": null,
-        "rightAnswerRationale": "\"Walk\" is correct because \"students\" is plural, requiring the base form of the verb.",
-        "coachHint": "Check if the subject is singular or plural.",
-        "type": "inline-dropdown",
-        "sentence": "The students [BLANK] to the library every day.",
-        "dropdownOptions": [
-          "walk",
-          "walks"
-        ],
-        "correctOption": "walk",
-        "distractorRationale": [
+        "rightAnswerRationale": "Students is plural, so the verb should be 'walk.'",
+        "coachHint": "Match the verb to the subject's number.",
+        "type": "hot-text-word",
+        "sentence": "The students [ walk / walks ] to the library after lunch.",
+        "bracketPairs": [
           {
-            "option": "walks",
-            "whyWrong": "\"Walks\" is for singular subjects, but \"students\" is plural."
-          },
-          {
-            "option": "walk",
-            "whyWrong": "\"Walk\" is correct for plural subjects."
+            "options": [
+              "walk",
+              "walks"
+            ],
+            "correct": "walk"
           }
         ]
       }
     ],
     "independentPractice": [
       {
-        "question": "Select the correct verb to complete the sentence: \"Every morning, she [ ] breakfast.\"",
+        "question": "Complete the sentence: \"Last night, I [BLANK] a movie.\"",
         "passage": null,
-        "rightAnswerRationale": "\"Eats\" is correct because it is present tense, matching the routine action described.",
-        "coachHint": "Look for clues about routine actions.",
+        "rightAnswerRationale": "'Last night' indicates past tense, so 'watched' is correct.",
+        "coachHint": "Identify the time clue to choose the tense.",
         "type": "inline-dropdown",
-        "sentence": "Every morning, she [BLANK] breakfast.",
-        "dropdownOptions": [
-          "eat",
-          "eats",
-          "ate"
-        ],
-        "correctOption": "eats",
-        "distractorRationale": [
-          {
-            "option": "eat",
-            "whyWrong": "\"Eat\" is not the correct form for a singular subject in present tense."
-          },
-          {
-            "option": "ate",
-            "whyWrong": "\"Ate\" is past tense, but the sentence describes a routine."
-          }
-        ]
-      },
-      {
-        "question": "Choose the correct verb to complete the sentence: \"Last night, they [ ] a movie.\"",
-        "passage": null,
-        "rightAnswerRationale": "\"Watched\" is correct because \"last night\" indicates a past action.",
-        "coachHint": "Identify the time frame indicated by \"last night.\"",
-        "type": "inline-dropdown",
-        "sentence": "Last night, they [BLANK] a movie.",
+        "sentence": "Last night, I [BLANK] a movie.",
         "dropdownOptions": [
           "watch",
           "watched",
@@ -138,137 +108,62 @@
         "distractorRationale": [
           {
             "option": "watch",
-            "whyWrong": "\"Watch\" is present tense, but \"last night\" indicates past tense."
+            "whyWrong": "Watch is present tense, but 'Last night' indicates past."
           },
           {
             "option": "will watch",
-            "whyWrong": "\"Will watch\" is future tense, but \"last night\" indicates past tense."
+            "whyWrong": "Will watch is future tense, but 'Last night' indicates past."
           }
         ]
       },
       {
-        "question": "Select the correct verb to complete the sentence: \"Next week, we [ ] to the zoo.\"",
+        "question": "Select the correct verb: \"Next year, she [BLANK] to a new school.\"",
         "passage": null,
-        "rightAnswerRationale": "\"Will go\" is correct because \"next week\" indicates a future action.",
-        "coachHint": "Identify the time frame indicated by \"next week.\"",
+        "rightAnswerRationale": "'Next year' indicates future tense, so 'will move' is correct.",
+        "coachHint": "'Next year' suggests a future action.",
         "type": "inline-dropdown",
-        "sentence": "Next week, we [BLANK] to the zoo.",
+        "sentence": "Next year, she [BLANK] to a new school.",
         "dropdownOptions": [
-          "go",
-          "went",
-          "will go"
+          "moves",
+          "moved",
+          "will move"
         ],
-        "correctOption": "will go",
+        "correctOption": "will move",
         "distractorRationale": [
           {
-            "option": "go",
-            "whyWrong": "\"Go\" is present tense, but \"next week\" indicates future tense."
+            "option": "moves",
+            "whyWrong": "Moves is present tense, but 'Next year' indicates future."
           },
           {
-            "option": "went",
-            "whyWrong": "\"Went\" is past tense, but \"next week\" indicates future tense."
+            "option": "moved",
+            "whyWrong": "Moved is past tense, but 'Next year' indicates future."
           }
         ]
       },
       {
-        "question": "Choose the correct verb to complete the sentence: \"The dog [ ] loudly every night.\"",
+        "question": "Choose the correct verb: \"The dog [ barks / barked ] loudly every morning.\"",
         "passage": null,
-        "rightAnswerRationale": "\"Barks\" is correct because it describes a routine action in present tense.",
-        "coachHint": "Consider if the action is a routine or a one-time event.",
-        "type": "inline-dropdown",
-        "sentence": "The dog [BLANK] loudly every night.",
-        "dropdownOptions": [
-          "barks",
-          "barked"
-        ],
-        "correctOption": "barks",
-        "distractorRationale": [
-          {
-            "option": "barked",
-            "whyWrong": "\"Barked\" is past tense, but the sentence describes a routine."
-          },
-          {
-            "option": "barks",
-            "whyWrong": "\"Barks\" is correct for present tense routines."
-          }
-        ]
-      }
-    ],
-    "exitTicket": [
-      {
-        "question": "Select the word choice that best fits Verb Tense.",
-        "passage": null,
-        "rightAnswerRationale": "The correct word follows the rule or meaning required by the sentence.",
-        "coachHint": "Read both choices inside the brackets and test which one makes the sentence correct.",
+        "rightAnswerRationale": "Every morning indicates a routine, so 'barks' is correct.",
+        "coachHint": "Consider if the action is a routine or past event.",
         "type": "hot-text-word",
-        "sentence": "The student carefully [ checks / check ] the answer before turning in the assignment.",
+        "sentence": "The dog [ barks / barked ] loudly every morning.",
         "bracketPairs": [
           {
             "options": [
-              "checks",
-              "check"
+              "barks",
+              "barked"
             ],
-            "correct": "checks"
+            "correct": "barks"
           }
         ]
       },
       {
-        "question": "Choose the correct verb to complete the sentence: \"Tomorrow, she [ ] her project.\"",
+        "question": "Select the correct verb: \"Last summer, we [BLANK] to the beach every weekend.\"",
         "passage": null,
-        "rightAnswerRationale": "\"Will finish\" is correct because \"tomorrow\" indicates a future action.",
-        "coachHint": "Identify the time frame indicated by \"tomorrow.\"",
+        "rightAnswerRationale": "'Last summer' indicates past tense, so 'went' is correct.",
+        "coachHint": "Look for past time indicators.",
         "type": "inline-dropdown",
-        "sentence": "Tomorrow, she [BLANK] her project.",
-        "dropdownOptions": [
-          "finishes",
-          "finished",
-          "will finish"
-        ],
-        "correctOption": "will finish",
-        "distractorRationale": [
-          {
-            "option": "finishes",
-            "whyWrong": "\"Finishes\" is present tense, but \"tomorrow\" indicates future tense."
-          },
-          {
-            "option": "finished",
-            "whyWrong": "\"Finished\" is past tense, but \"tomorrow\" indicates future tense."
-          }
-        ]
-      }
-    ],
-    "masteryCheck": [
-      {
-        "question": "Select the correct verb to complete the sentence: \"Today, he [ ] his room.\"",
-        "passage": null,
-        "rightAnswerRationale": "\"Cleans\" is correct because \"today\" indicates a present action.",
-        "coachHint": "Identify the time frame indicated by \"today.\"",
-        "type": "inline-dropdown",
-        "sentence": "Today, he [BLANK] his room.",
-        "dropdownOptions": [
-          "clean",
-          "cleans",
-          "cleaned"
-        ],
-        "correctOption": "cleans",
-        "distractorRationale": [
-          {
-            "option": "clean",
-            "whyWrong": "\"Clean\" is not the correct form for a singular subject in present tense."
-          },
-          {
-            "option": "cleaned",
-            "whyWrong": "\"Cleaned\" is past tense, but \"today\" indicates present tense."
-          }
-        ]
-      },
-      {
-        "question": "Choose the correct verb to complete the sentence: \"Last week, they [ ] to the museum.\"",
-        "passage": null,
-        "rightAnswerRationale": "\"Went\" is correct because \"last week\" indicates a past action.",
-        "coachHint": "Identify the time frame indicated by \"last week.\"",
-        "type": "inline-dropdown",
-        "sentence": "Last week, they [BLANK] to the museum.",
+        "sentence": "Last summer, we [BLANK] to the beach every weekend.",
         "dropdownOptions": [
           "go",
           "went",
@@ -278,40 +173,137 @@
         "distractorRationale": [
           {
             "option": "go",
-            "whyWrong": "\"Go\" is present tense, but \"last week\" indicates past tense."
+            "whyWrong": "Go is present tense, but 'Last summer' indicates past."
           },
           {
             "option": "will go",
-            "whyWrong": "\"Will go\" is future tense, but \"last week\" indicates past tense."
-          }
-        ]
-      },
-      {
-        "question": "Select the correct verb to complete the sentence: \"Next month, we [ ] a new book.\"",
-        "passage": null,
-        "rightAnswerRationale": "\"Will read\" is correct because \"next month\" indicates a future action.",
-        "coachHint": "Identify the time frame indicated by \"next month.\"",
-        "type": "inline-dropdown",
-        "sentence": "Next month, we [BLANK] a new book.",
-        "dropdownOptions": [
-          "read",
-          "reads",
-          "will read"
-        ],
-        "correctOption": "will read",
-        "distractorRationale": [
-          {
-            "option": "read",
-            "whyWrong": "\"Read\" is present tense, but \"next month\" indicates future tense."
-          },
-          {
-            "option": "reads",
-            "whyWrong": "\"Reads\" is present tense, but \"next month\" indicates future tense."
+            "whyWrong": "Will go is future tense, but 'Last summer' indicates past."
           }
         ]
       }
     ],
-    "heroResourceLinkId": "cmp4fw3vi002eg3sa2b9ofx4h",
+    "exitTicket": [
+      {
+        "question": "Choose the correct verb: \"Yesterday, the bird [BLANK] in the tree.\"",
+        "passage": null,
+        "rightAnswerRationale": "'Yesterday' indicates past tense, so 'sang' is correct.",
+        "coachHint": "Identify the time clue to choose the tense.",
+        "type": "inline-dropdown",
+        "sentence": "Yesterday, the bird [BLANK] in the tree.",
+        "dropdownOptions": [
+          "sings",
+          "sang",
+          "will sing"
+        ],
+        "correctOption": "sang",
+        "distractorRationale": [
+          {
+            "option": "sings",
+            "whyWrong": "Sings is present tense, but 'Yesterday' indicates past."
+          },
+          {
+            "option": "will sing",
+            "whyWrong": "Will sing is future tense, but 'Yesterday' indicates past."
+          }
+        ]
+      },
+      {
+        "question": "Select the correct verb: \"Tomorrow, the sun [BLANK] brightly.\"",
+        "passage": null,
+        "rightAnswerRationale": "'Tomorrow' indicates future tense, so 'will shine' is correct.",
+        "coachHint": "'Tomorrow' suggests a future action.",
+        "type": "inline-dropdown",
+        "sentence": "Tomorrow, the sun [BLANK] brightly.",
+        "dropdownOptions": [
+          "shines",
+          "shone",
+          "will shine"
+        ],
+        "correctOption": "will shine",
+        "distractorRationale": [
+          {
+            "option": "shines",
+            "whyWrong": "Shines is present tense, but 'Tomorrow' indicates future."
+          },
+          {
+            "option": "shone",
+            "whyWrong": "Shone is past tense, but 'Tomorrow' indicates future."
+          }
+        ]
+      }
+    ],
+    "masteryCheck": [
+      {
+        "question": "Complete the sentence: \"Last week, they [BLANK] a new game.\"",
+        "passage": null,
+        "rightAnswerRationale": "'Last week' indicates past tense, so 'played' is correct.",
+        "coachHint": "Identify the time clue to choose the tense.",
+        "type": "inline-dropdown",
+        "sentence": "Last week, they [BLANK] a new game.",
+        "dropdownOptions": [
+          "play",
+          "played",
+          "will play"
+        ],
+        "correctOption": "played",
+        "distractorRationale": [
+          {
+            "option": "play",
+            "whyWrong": "Play is present tense, but 'Last week' indicates past."
+          },
+          {
+            "option": "will play",
+            "whyWrong": "Will play is future tense, but 'Last week' indicates past."
+          }
+        ]
+      },
+      {
+        "question": "Choose the correct verb: \"The flowers [ bloom / bloomed ] every spring.\"",
+        "passage": null,
+        "rightAnswerRationale": "Every spring indicates a routine, so 'bloom' is correct.",
+        "coachHint": "Consider if the action is a routine or past event.",
+        "type": "hot-text-word",
+        "sentence": "The flowers [ bloom / bloomed ] every spring.",
+        "bracketPairs": [
+          {
+            "options": [
+              "bloom",
+              "bloomed"
+            ],
+            "correct": "bloom"
+          }
+        ]
+      },
+      {
+        "question": "Select the correct verb: \"Next month, we [BLANK] a party.\"",
+        "passage": null,
+        "rightAnswerRationale": "'Next month' indicates future tense, so 'will have' is correct.",
+        "coachHint": "'Next month' suggests a future action.",
+        "type": "inline-dropdown",
+        "sentence": "Next month, we [BLANK] a party.",
+        "dropdownOptions": [
+          "have",
+          "had",
+          "will have"
+        ],
+        "correctOption": "will have",
+        "distractorRationale": [
+          {
+            "option": "have",
+            "whyWrong": "Have is present tense, but 'Next month' indicates future."
+          },
+          {
+            "option": "had",
+            "whyWrong": "Had is past tense, but 'Next month' indicates future."
+          }
+        ]
+      }
+    ],
+    "heroResourceLinkId": "cmp5ki6le00106hernjvvevoi",
+    "resourceTitle": "Time Travel with Tenses: How To Identify and Use Verb Tenses",
+    "resourceUrl": "https://www.youtube.com/watch?v=4iKwSYA3YeQ",
+    "resourceProvider": "Miacademy & MiaPrep Learning Channel",
+    "resourceDescription": "Strand: L · Text type: conventions · Duration: 12m 28s · Tier: on_grade · Collection: miacademy_level_h",
     "exemplarsUsed": [
       "g3-p1",
       "g3-mc-1",
@@ -328,17 +320,31 @@
     ],
     "generatorVersion": "V2",
     "qualityScore": 92,
-    "qualityIssues": [],
-    "resourceTitle": "Adjectives - Learn to Read for Kids!",
-    "resourceUrl": "https://www.youtube.com/watch?v=wLn-h1bGDOc",
-    "resourceProvider": "Miacademy & MiaPrep Learning Channel",
-    "resourceDescription": "Strand: L · Duration: 2m 56s · Tier: scaffold · Collection: miacademy_level_d_edition_1"
+    "qualityIssues": [
+      "Critic requested revision after 3 iterations."
+    ]
   },
   "critic": {
-    "status": "PASS",
-    "score": 92,
-    "revisions": []
+    "status": "REVISE",
+    "score": 82,
+    "revisions": [
+      {
+        "section": "explanation",
+        "issue": "Repetitive content and lack of clarity.",
+        "suggestion": "Condense the explanation to avoid repetition and enhance clarity. Focus on key points about verb tenses without repeating the same sentences."
+      },
+      {
+        "section": "guidedPractice[2]",
+        "issue": "Lack of variety in question types.",
+        "suggestion": "Introduce a different TEI type, such as drag-and-drop, to increase engagement and variety."
+      },
+      {
+        "section": "independentPractice[3]",
+        "issue": "Repetitive question format.",
+        "suggestion": "Vary the question format by including a short passage where students identify multiple verb tenses."
+      }
+    ]
   },
   "validationIssues": [],
-  "iterations": 4
+  "iterations": 5
 }

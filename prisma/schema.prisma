@@ -683,6 +683,21 @@ model ResourceLink {
   @@index([skill])
 }
 
+model HeroMatchCache {
+  id                 String   @id @default(cuid())
+  lessonSkill        String
+  lessonStandardCode String?
+  candidateUrl       String
+  matches            Boolean
+  confidence         String?
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+  expiresAt          DateTime
+
+  @@unique([lessonSkill, candidateUrl])
+  @@index([expiresAt])
+}
+
 model ResourceSuggestion {
   id             String   @id @default(cuid())
   teacherUserId  String

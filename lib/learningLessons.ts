@@ -27,6 +27,8 @@ type ResourceMatch = ResourceLike & {
   skill: string;
 };
 
+type HeroMatchConfidence = "high" | "medium" | "low";
+
 type ResponseLike = {
   standardCode: string;
   standardLabel: string;
@@ -353,8 +355,6 @@ export async function findHeroResourceForLesson(lesson: Pick<LearningLessonBuild
     orderBy: [{ gradeLevel: "desc" }, { updatedAt: "desc" }],
     take: 50,
   });
-  const exact = candidates.find((resource) => resource.gradeLevel === lesson.gradeLevel && hasSkillKeywordOverlap(resource.skill, skillTokens));
-  const standardFallback = candidates.find((resource) => hasSkillKeywordOverlap(resource.skill, skillTokens));
   const skillCandidates = skillTokens.length
     ? await db.resourceLink.findMany({
         where: {
@@ -367,18 +367,171 @@ export async function findHeroResourceForLesson(lesson: Pick<LearningLessonBuild
         take: 25,
       })
     : [];
-  const skillFallback = skillCandidates.find((resource) => hasSkillKeywordOverlap(resource.skill, skillTokens));
-  const match = exact || standardFallback || skillFallback || null;
+  const rankedCandidates = uniqueResourceCandidates([
+    ...candidates.filter((resource) => resource.gradeLevel === lesson.gradeLevel && hasSkillKeywordOverlap(resource.skill, skillTokens)),
+    ...candidates.filter((resource) => hasSkillKeywordOverlap(resource.skill, skillTokens)),
+    ...skillCandidates.filter((resource) => hasSkillKeywordOverlap(resource.skill, skillTokens)),
+  ]).slice(0, 5);
+  const match = await aiVerifyHeroMatch(lesson.skill, lesson.standardCode, rankedCandidates);
   if (!match) {
     const scope = candidates.length || skillCandidates.length ? "learningLessons.no_confident_hero" : "learningLessons.no_resource_link";
     logAiFailure({
       scope,
-      error: new Error(candidates.length || skillCandidates.length ? "ResourceLink candidates existed, but none matched the lesson skill confidently." : "No ResourceLink matched lesson hero video criteria."),
-      context: { gradeLevel: lesson.gradeLevel, standardCode: lesson.standardCode, skill: lesson.skill },
+      error: new Error(candidates.length || skillCandidates.length ? "ResourceLink candidates existed, but none matched the lesson skill confidently after AI verification." : "No ResourceLink matched lesson hero video criteria."),
+      context: {
+        gradeLevel: lesson.gradeLevel,
+        standardCode: lesson.standardCode,
+        skill: lesson.skill,
+        candidateTitles: rankedCandidates.map((candidate) => candidate.title),
+      },
     });
     return null;
   }
   return match;
+}
+
+function uniqueResourceCandidates(resources: ResourceMatch[]) {
+  const seen = new Set<string>();
+  return resources.filter((resource) => {
+    const key = resource.id || resource.url;
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
+
+async function aiVerifyHeroMatch(
+  lessonSkill: string,
+  lessonStandardCode: string,
+  candidates: ResourceMatch[],
+): Promise<ResourceMatch | null> {
+  if (!candidates.length) return null;
+  const cached = await readHeroMatchCache(lessonSkill, candidates);
+  if (cached.allCached) {
+    return cached.results.find((result) => result.matches && result.confidence !== "low")?.candidate || null;
+  }
+
+  const apiKey = process.env.OPENAI_API_KEY;
+  if (!apiKey) {
+    logAiFailure({
+      scope: "learningLessons.hero_match_verifier_missing_api_key",
+      error: new Error("OPENAI_API_KEY is not configured for hero video verification."),
+      context: { lessonSkill, lessonStandardCode, candidateTitles: candidates.map((candidate) => candidate.title) },
+    });
+    return null;
+  }
+
+  try {
+    const openai = new OpenAI({ apiKey });
+    const response = await openai.chat.completions.create({
+      model: "gpt-4o-mini",
+      temperature: 0,
+      response_format: { type: "json_object" },
+      messages: [
+        {
+          role: "system",
+          content:
+            candidates.length === 1
+              ? "Does this video teach the given skill? Return JSON: { \"matches\": true | false, \"confidence\": \"high\" | \"medium\" | \"low\" }. Be strict. The video title must align with the lesson skill; a verb tense lesson should not match an adjectives video just because both relate to grammar."
+              : "You are matching educational videos to lesson skills for a Pennsylvania PSSA ELA module. Given a lesson skill and 3-5 candidate video titles, identify the best match. Return JSON: { \"bestIndex\": number, \"confidence\": \"high\" | \"medium\" | \"low\" }. If no candidate truly matches the skill, return { \"bestIndex\": -1, \"confidence\": \"low\" }. Be strict. A verb tense lesson should NOT match an adjectives video even if both relate to grammar.",
+        },
+        {
+          role: "user",
+          content: JSON.stringify({
+            lessonSkill,
+            lessonStandardCode,
+            candidates: candidates.map((candidate, index) => ({
+              index,
+              title: candidate.title,
+              skillTag: candidate.skill,
+              provider: candidate.provider,
+            })),
+          }),
+        },
+      ],
+    });
+    const result = parseHeroVerifierResult(response.choices[0].message.content || "{}", candidates.length);
+    await writeHeroMatchCache(lessonSkill, lessonStandardCode, candidates, result);
+    if (result.bestIndex < 0 || result.bestIndex >= candidates.length || result.confidence === "low") return null;
+    return candidates[result.bestIndex];
+  } catch (error) {
+    logAiFailure({
+      scope: "learningLessons.hero_match_verifier_failed",
+      error: error instanceof Error ? error : new Error(String(error)),
+      context: { lessonSkill, lessonStandardCode, candidateTitles: candidates.map((candidate) => candidate.title) },
+    });
+    return null;
+  }
+}
+
+async function readHeroMatchCache(lessonSkill: string, candidates: ResourceMatch[]) {
+  const now = new Date();
+  const normalizedSkill = normalizeHeroCacheSkill(lessonSkill);
+  const cachedRows = await db.heroMatchCache.findMany({
+    where: {
+      lessonSkill: normalizedSkill,
+      candidateUrl: { in: candidates.map((candidate) => candidate.url) },
+      expiresAt: { gt: now },
+    },
+  });
+  const byUrl = new Map(cachedRows.map((row) => [row.candidateUrl, row]));
+  const results = candidates.map((candidate) => {
+    const cached = byUrl.get(candidate.url);
+    return {
+      candidate,
+      matches: cached?.matches === true,
+      confidence: cached?.confidence || null,
+      cached: Boolean(cached),
+    };
+  });
+  return { allCached: results.every((result) => result.cached), results };
+}
+
+function parseHeroVerifierResult(content: string, candidateCount: number): { bestIndex: number; confidence: HeroMatchConfidence } {
+  const parsed = JSON.parse(content) as { bestIndex?: unknown; confidence?: unknown; matches?: unknown };
+  const confidence = parsed.confidence === "high" || parsed.confidence === "medium" || parsed.confidence === "low" ? parsed.confidence : "low";
+  if (candidateCount === 1 && typeof parsed.matches === "boolean") {
+    return { bestIndex: parsed.matches ? 0 : -1, confidence };
+  }
+  return {
+    bestIndex: typeof parsed.bestIndex === "number" ? parsed.bestIndex : -1,
+    confidence,
+  };
+}
+
+async function writeHeroMatchCache(
+  lessonSkill: string,
+  lessonStandardCode: string,
+  candidates: ResourceMatch[],
+  result: { bestIndex: number; confidence: HeroMatchConfidence },
+) {
+  const normalizedSkill = normalizeHeroCacheSkill(lessonSkill);
+  const expiresAt = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000);
+  await Promise.all(
+    candidates.map((candidate, index) =>
+      db.heroMatchCache.upsert({
+        where: { lessonSkill_candidateUrl: { lessonSkill: normalizedSkill, candidateUrl: candidate.url } },
+        create: {
+          lessonSkill: normalizedSkill,
+          lessonStandardCode,
+          candidateUrl: candidate.url,
+          matches: index === result.bestIndex && result.confidence !== "low",
+          confidence: index === result.bestIndex ? result.confidence : "low",
+          expiresAt,
+        },
+        update: {
+          lessonStandardCode,
+          matches: index === result.bestIndex && result.confidence !== "low",
+          confidence: index === result.bestIndex ? result.confidence : "low",
+          expiresAt,
+        },
+      }),
+    ),
+  );
+}
+
+function normalizeHeroCacheSkill(skill: string) {
+  return skill.trim().toLowerCase().replace(/\s+/g, " ");
 }
 
 export async function findScaffoldResourcesForLesson(

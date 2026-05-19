@@ -4,20 +4,20 @@
     "standardCode": "CC.1.2.3.A",
     "standardLabel": "Main idea and supporting details",
     "skill": "Main Idea and Supporting Details",
-    "title": "Understanding Main Ideas and Supporting Details",
+    "title": "Understanding Main Idea and Supporting Details",
     "whyAssigned": "This mini-lesson targets Main Idea and Supporting Details because the diagnostic showed a standards-aligned practice gap.",
-    "hook": "Imagine you are a detective trying to solve a mystery. To find the solution, you need to gather clues. In reading, the main idea is like the solution to a mystery, and the supporting details are the clues that help you find it. Today, we will learn how to identify the main idea and the supporting details in a text, just like a detective solves a case.",
-    "explanation": "The main idea of a text is the central point or the most important message the author wants to convey. It is what the text is mostly about. Supporting details are pieces of information that explain, prove, or enhance the main idea. They are like the clues that help you understand the main idea better. \n\nTo find the main idea, first, look at the title and headings. They often give hints about the main topic. Next, read the first and last sentences of the paragraphs, as they often contain the main idea. Sometimes, the main idea is not directly stated, so you need to infer it by considering what all the details have in common.\n\nSupporting details can be facts, examples, descriptions, or explanations that help clarify the main idea. They answer questions like who, what, when, where, why, and how. When you read, ask yourself: What is the author trying to tell me? What details support this message?\n\nFor example, if you read a passage about how bees make honey, the main idea might be \"Bees are essential for honey production.\" Supporting details could include descriptions of how bees collect nectar, the process of turning nectar into honey, and the importance of bees in pollination. By identifying these details, you can better understand the main idea and the author's purpose. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step.",
-    "workedExample": "Let's look at a short passage:\n\n\"Many people enjoy visiting the zoo. Zoos are places where people can see animals from all over the world. They provide a safe environment for animals and help educate the public about wildlife conservation. Zoos also participate in breeding programs to help endangered species.\"\n\nTo find the main idea, we start by looking at the first sentence: \"Many people enjoy visiting the zoo.\" This gives us a hint that the passage is about zoos. The supporting details tell us why zoos are important: they allow people to see animals, provide safety for animals, educate the public, and help endangered species.\n\nThe main idea of this passage is that zoos play an important role in conservation and education. The supporting details explain how zoos achieve this role. By identifying these elements, we can understand the author's message more clearly. This matters because the correct answer is not just a matching word or phrase. It is the choice that fits the whole question and can be defended with a specific detail. The reasoning should explain both what the evidence says and how it supports the answer.",
+    "hook": "Imagine you're a detective trying to solve a mystery. The main idea is like the big clue that helps you understand the whole story. Supporting details are the smaller clues that help you see the big picture. Today, we'll become detectives and learn how to find these clues in what we read!",
+    "explanation": "The main idea is the central point or the most important thing the author wants you to know. Think of it as the heart of the story or article. Supporting details are pieces of information that explain or enhance the main idea. They can be facts, examples, or descriptions.\n\nTo find the main idea, ask: What is the text mostly about? Look for repeated ideas or themes. Sometimes, the main idea is stated directly, often at the beginning or end of a paragraph. Other times, you infer it by looking at the details.\n\nSupporting details are like building blocks that hold up the main idea. They answer questions like who, what, when, where, why, and how. For example, if you're reading about how plants grow, the main idea might be that plants need sunlight, water, and soil. Supporting details would include facts about how sunlight helps plants make food, how water is absorbed by roots, and how soil provides nutrients. By identifying these details, you can see how they connect to the main idea. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step.",
+    "workedExample": "Let's look at an example. Suppose we have a short paragraph about a dog named Max who loves to play fetch. The paragraph describes how Max runs fast, catches the ball, and brings it back to his owner.\n\nThe main idea here is that Max loves to play fetch. How do we know? The paragraph focuses on Max's actions related to playing fetch. The supporting details are the descriptions of Max running fast, catching the ball, and bringing it back. These details support the main idea by showing how much Max enjoys the game.\n\nWhen you read, try to identify the main idea first. Then, look for supporting details that explain or illustrate that idea. This will help you understand the text better and remember important information. This matters because the correct answer is not just a matching word or phrase. It is the choice that fits the whole question and can be defended with a specific detail. The reasoning should explain both what the evidence says and how it supports the answer.",
     "commonErrors": [
       "Confusing supporting details with the main idea.",
-      "Focusing on minor details instead of the central message.",
-      "Missing the main idea when it is implied rather than stated."
+      "Overlooking the main idea by focusing too much on minor details.",
+      "Misinterpreting details that don't directly support the main idea."
     ],
     "sentenceFrames": [
       "The main idea of the passage is ____.",
-      "One supporting detail is ____.",
-      "This detail supports the main idea because ____."
+      "A supporting detail that explains the main idea is ____.",
+      "The text is mostly about ____."
     ],
     "successCriteria": [
       "I can identify the main idea of a passage.",
@@ -26,372 +26,328 @@
     ],
     "guidedPractice": [
       {
-        "question": "What is the main idea of the passage about the zoo?",
-        "passage": "Zoos are places where people can see animals from all over the world. They provide a safe environment for animals and help educate the public about wildlife conservation. Zoos also participate in breeding programs to help endangered species. Visiting a zoo can be a fun and educational experience for families and individuals of all ages. By learning about animals and their habitats, visitors gain a greater appreciation for wildlife and the need to protect it. Zoos also contribute to scientific research and conservation efforts, helping to preserve endangered species and their natural environments. Overall, zoos play an important role in conservation and education, making them valuable to both animals and people alike. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
-        "rightAnswerRationale": "The main idea is that zoos play an important role in conservation and education.",
-        "coachHint": "Look for what the passage is mostly about.",
+        "question": "What is the main idea of the passage about the history of bicycles?",
+        "passage": "Bicycles have been around for over 200 years. They started as simple wooden machines and have evolved into the modern bikes we see today. Early bicycles had no pedals, and riders had to push themselves along with their feet. Over time, pedals and chains were added, making bicycles faster and easier to ride. Today, bicycles are used for transportation, exercise, and fun all around the world. They are an important part of many people's lives and continue to change with new technology and designs. From wooden frames to high-tech materials, bicycles have come a long way since their invention in the early 1800s. They remain a popular and eco-friendly mode of transportation. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "The main idea is that bicycles have evolved over time and are important today. The passage describes the history and development of bicycles, showing their significance.",
+        "coachHint": "Look for what the passage is mostly about. What is the big idea that all the details support?",
         "type": "mc",
         "choices": [
-          "Zoos are fun places to visit.",
-          "Zoos help in conservation and education.",
-          "Zoos have animals from all over the world.",
-          "Zoos are only for children."
+          "The history and evolution of bicycles.",
+          "How to ride a bicycle safely.",
+          "The best materials for making bicycles.",
+          "Famous bicycle races."
         ],
-        "correctAnswer": "Zoos help in conservation and education.",
+        "correctAnswer": "The history and evolution of bicycles.",
         "distractorRationale": [
           {
-            "choice": "Zoos are fun places to visit.",
-            "whyWrong": "This is a detail, not the main idea."
+            "choice": "How to ride a bicycle safely.",
+            "whyWrong": "This is a specific detail, not the main idea."
           },
           {
-            "choice": "Zoos have animals from all over the world.",
-            "whyWrong": "This is a supporting detail, not the main idea."
+            "choice": "The best materials for making bicycles.",
+            "whyWrong": "This is a detail mentioned but not the main focus."
           },
           {
-            "choice": "Zoos are only for children.",
-            "whyWrong": "This is incorrect; the passage mentions all ages."
+            "choice": "Famous bicycle races.",
+            "whyWrong": "This is not discussed in the passage."
           }
         ]
       },
       {
-        "question": "Match each statement with the correct category: Main Idea or Supporting Detail.",
+        "question": "Which detail supports the main idea that bicycles have changed over time?",
         "passage": null,
-        "rightAnswerRationale": "The main idea is the central message, while supporting details provide evidence or examples.",
-        "coachHint": "Think about what the passage is mostly about and what details support it.",
+        "rightAnswerRationale": "The detail about adding pedals and chains shows how bicycles have evolved.",
+        "coachHint": "Think about how bicycles have changed from the past to now.",
+        "type": "multi-select",
+        "choices": [
+          "Bicycles started as wooden machines.",
+          "Pedals and chains were added to bicycles.",
+          "Bicycles are used for exercise.",
+          "Bicycles are eco-friendly."
+        ],
+        "correctAnswers": [
+          "Bicycles started as wooden machines.",
+          "Pedals and chains were added to bicycles."
+        ],
+        "minSelect": 1,
+        "maxSelect": 2,
+        "partialCreditRule": "per-correct"
+      },
+      {
+        "question": "Match each statement with the correct category.",
+        "passage": null,
+        "rightAnswerRationale": "The statements about wooden machines and pedals show changes over time, while the statement about eco-friendliness shows current importance.",
+        "coachHint": "Think about whether the statement is about the past or present.",
         "type": "drag-drop-table",
         "draggableItems": [
-          "Zoos help in conservation.",
-          "Zoos have animals from all over the world.",
-          "Zoos educate the public."
+          "Bicycles started as wooden machines.",
+          "Pedals and chains were added.",
+          "Bicycles are eco-friendly."
         ],
         "columns": [
-          "Main Idea",
-          "Supporting Detail"
+          "Changes Over Time",
+          "Current Importance"
         ],
         "correctMapping": [
           {
-            "item": "Zoos help in conservation.",
-            "column": "Main Idea"
+            "item": "Bicycles started as wooden machines.",
+            "column": "Changes Over Time"
           },
           {
-            "item": "Zoos have animals from all over the world.",
-            "column": "Supporting Detail"
+            "item": "Pedals and chains were added.",
+            "column": "Changes Over Time"
           },
           {
-            "item": "Zoos educate the public.",
-            "column": "Supporting Detail"
+            "item": "Bicycles are eco-friendly.",
+            "column": "Current Importance"
           }
         ]
-      },
-      {
-        "question": "What is the main idea of the passage about bees?",
-        "passage": "Bees are small but mighty creatures that are essential to our world. They help plants grow by moving pollen from one flower to another, which is called pollination. This process is crucial for the production of fruits and vegetables. Bees also make honey, which many people enjoy as a sweet treat. Without bees, many of the foods we love would not be available. Protecting bees and their habitats is important to ensure they can continue their vital work. By planting flowers and avoiding harmful chemicals, we can help bees thrive and support our ecosystem. Understanding the role of bees helps us appreciate their importance and encourages us to protect them. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
-        "rightAnswerRationale": "The main idea is that bees are crucial for pollination and our food supply.",
-        "coachHint": "Look for the sentence that tells what the passage is mostly about.",
-        "type": "two-part-ebsr",
-        "partA": {
-          "question": "What is the main idea of the passage?",
-          "choices": [
-            "Bees make honey.",
-            "Bees are crucial for pollination and our food supply.",
-            "Bees are fascinating creatures.",
-            "Bees are in danger."
-          ],
-          "correctAnswer": "Bees are crucial for pollination and our food supply."
-        },
-        "partB": {
-          "question": "Which details support the main idea?",
-          "choices": [
-            "Bees collect nectar from flowers.",
-            "Bees help in the reproduction of plants.",
-            "Bees are responsible for pollinating plants."
-          ],
-          "correctAnswers": [
-            "Bees help in the reproduction of plants.",
-            "Bees are responsible for pollinating plants."
-          ]
-        },
-        "scoringRule": "B-counts-only-if-A-correct"
       }
     ],
     "independentPractice": [
       {
-        "question": "What is the main idea of the passage about rainforests?",
-        "passage": "Rainforests are vital to the health of our planet. They produce oxygen, store carbon dioxide, and are home to countless species of plants and animals. Rainforests help regulate the Earth's climate and provide resources such as medicine and food. Despite their importance, rainforests are being destroyed at an alarming rate. Deforestation leads to loss of biodiversity and contributes to climate change. Protecting rainforests is crucial for maintaining the balance of our ecosystem and ensuring a healthy planet for future generations. By raising awareness and taking action, we can help preserve these vital ecosystems for years to come. Rainforests are not only important for the environment but also for the cultural heritage of indigenous peoples who have lived there for centuries. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
-        "rightAnswerRationale": "The main idea is that rainforests are vital for the planet's health and need protection.",
-        "coachHint": "Look for the sentence that tells what the passage is mostly about.",
+        "question": "What is the main idea of the passage about honeybees?",
+        "passage": "Honeybees are essential to our environment. They pollinate flowers, which helps plants grow. Without bees, many plants would not be able to produce fruit or seeds. Honeybees also produce honey, which is a sweet treat for humans and animals. Beekeepers raise honeybees to help with pollination and to collect honey. Protecting honeybees is important because they play a crucial role in our ecosystem. Efforts to save bees include planting bee-friendly flowers and reducing pesticide use. By supporting honeybees, we help maintain a healthy environment for all living things. Honeybees are more than just insects; they are vital to our world’s health and food supply. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "The main idea is that honeybees are essential to the environment and our food supply.",
+        "coachHint": "Look for what the passage is mostly about. What is the big idea that all the details support?",
         "type": "mc",
         "choices": [
-          "Rainforests are home to many animals.",
-          "Rainforests are vital for the planet's health and need protection.",
-          "Rainforests produce oxygen.",
-          "Rainforests are being destroyed."
+          "Honeybees are essential to the environment.",
+          "How honey is made by bees.",
+          "The life cycle of a honeybee.",
+          "Different types of bees."
         ],
-        "correctAnswer": "Rainforests are vital for the planet's health and need protection.",
+        "correctAnswer": "Honeybees are essential to the environment.",
         "distractorRationale": [
           {
-            "choice": "Rainforests are home to many animals.",
-            "whyWrong": "This is a supporting detail, not the main idea."
+            "choice": "How honey is made by bees.",
+            "whyWrong": "This is a detail, not the main idea."
           },
           {
-            "choice": "Rainforests produce oxygen.",
-            "whyWrong": "This is a supporting detail, not the main idea."
+            "choice": "The life cycle of a honeybee.",
+            "whyWrong": "This is not the focus of the passage."
           },
           {
-            "choice": "Rainforests are being destroyed.",
-            "whyWrong": "This is a problem mentioned, not the main idea."
+            "choice": "Different types of bees.",
+            "whyWrong": "This is not discussed in the passage."
           }
         ]
       },
       {
-        "question": "Identify the main idea and supporting details from the passage about recycling.",
+        "question": "Which detail supports the main idea that honeybees are important to the environment?",
         "passage": null,
-        "rightAnswerRationale": "The main idea is the central point, while supporting details provide evidence or examples.",
-        "coachHint": "Think about what the passage is mostly about and what details support it.",
+        "rightAnswerRationale": "The detail about pollination shows the importance of honeybees to plant growth.",
+        "coachHint": "Think about what honeybees do that helps the environment.",
+        "type": "multi-select",
+        "choices": [
+          "Honeybees pollinate flowers.",
+          "Honeybees produce honey.",
+          "Beekeepers raise honeybees.",
+          "Honeybees are insects."
+        ],
+        "correctAnswers": [
+          "Honeybees pollinate flowers.",
+          "Honeybees produce honey."
+        ],
+        "minSelect": 1,
+        "maxSelect": 2,
+        "partialCreditRule": "per-correct"
+      },
+      {
+        "question": "Match each statement with the correct category.",
+        "passage": null,
+        "rightAnswerRationale": "The statements about pollination and honey production show importance, while the statement about being insects is a fact.",
+        "coachHint": "Think about whether the statement shows importance or is just a fact.",
         "type": "drag-drop-table",
         "draggableItems": [
-          "Recycling reduces waste.",
-          "Recycling saves energy.",
-          "Recycling is important for the environment."
+          "Honeybees pollinate flowers.",
+          "Honeybees produce honey.",
+          "Honeybees are insects."
         ],
         "columns": [
-          "Main Idea",
-          "Supporting Detail"
+          "Importance",
+          "Fact"
         ],
         "correctMapping": [
           {
-            "item": "Recycling is important for the environment.",
-            "column": "Main Idea"
+            "item": "Honeybees pollinate flowers.",
+            "column": "Importance"
           },
           {
-            "item": "Recycling reduces waste.",
-            "column": "Supporting Detail"
+            "item": "Honeybees produce honey.",
+            "column": "Importance"
           },
           {
-            "item": "Recycling saves energy.",
-            "column": "Supporting Detail"
+            "item": "Honeybees are insects.",
+            "column": "Fact"
           }
         ]
       },
       {
-        "question": "What is the main idea of the passage about the water cycle?",
-        "passage": "The water cycle is a continuous process that moves water around our planet. It involves evaporation, condensation, and precipitation. The sun heats up water in rivers, lakes, and oceans, causing it to evaporate into the air. This water vapor cools and condenses into clouds. Eventually, the water falls back to Earth as rain, snow, or hail. The water cycle is essential for replenishing our water supply and supporting life on Earth. It ensures that plants, animals, and humans have the water they need to survive. Understanding the water cycle helps us appreciate the importance of conserving water and protecting our natural resources. By learning about this cycle, we can make informed decisions about water usage and conservation. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
-        "rightAnswerRationale": "The main idea is that the water cycle is essential for supporting life on Earth.",
-        "coachHint": "Look for the sentence that tells what the passage is mostly about.",
-        "type": "two-part-ebsr",
-        "partA": {
-          "question": "What is the main idea of the passage?",
-          "choices": [
-            "The water cycle involves evaporation and condensation.",
-            "The water cycle is essential for supporting life on Earth.",
-            "The water cycle includes precipitation.",
-            "The water cycle is a continuous process."
-          ],
-          "correctAnswer": "The water cycle is essential for supporting life on Earth."
-        },
-        "partB": {
-          "question": "Which details support the main idea?",
-          "choices": [
-            "The water cycle involves evaporation.",
-            "The water cycle replenishes our water supply.",
-            "The water cycle supports life on Earth."
-          ],
-          "correctAnswers": [
-            "The water cycle replenishes our water supply.",
-            "The water cycle supports life on Earth."
-          ]
-        },
-        "scoringRule": "B-counts-only-if-A-correct"
-      },
-      {
-        "question": "Match each statement with the correct category: Main Idea or Supporting Detail.",
-        "passage": null,
-        "rightAnswerRationale": "The main idea is the central message, while supporting details provide evidence or examples.",
-        "coachHint": "Think about what the passage is mostly about and what details support it.",
-        "type": "drag-drop-table",
-        "draggableItems": [
-          "The sun heats up water.",
-          "The water cycle is essential for life.",
-          "Water falls back to Earth as rain."
+        "question": "What is the main idea of the passage about rainforests?",
+        "passage": "Rainforests are vital to the health of our planet. They produce oxygen, which we need to breathe. Rainforests are home to a vast number of plants and animals, many of which are not found anywhere else. These forests help regulate the Earth's climate by absorbing carbon dioxide. Unfortunately, rainforests are being destroyed at an alarming rate due to logging and farming. Protecting rainforests is crucial for maintaining biodiversity and ensuring a healthy environment for future generations. Efforts to save rainforests include creating protected areas and promoting sustainable practices. Rainforests are more than just beautiful places; they are essential to our planet's health and survival. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "The main idea is that rainforests are essential to the planet's health and survival.",
+        "coachHint": "Look for what the passage is mostly about. What is the big idea that all the details support?",
+        "type": "mc",
+        "choices": [
+          "Rainforests are essential to the planet's health.",
+          "How rainforests produce oxygen.",
+          "The animals that live in rainforests.",
+          "The dangers of logging."
         ],
-        "columns": [
-          "Main Idea",
-          "Supporting Detail"
-        ],
-        "correctMapping": [
+        "correctAnswer": "Rainforests are essential to the planet's health.",
+        "distractorRationale": [
           {
-            "item": "The water cycle is essential for life.",
-            "column": "Main Idea"
+            "choice": "How rainforests produce oxygen.",
+            "whyWrong": "This is a detail, not the main idea."
           },
           {
-            "item": "The sun heats up water.",
-            "column": "Supporting Detail"
+            "choice": "The animals that live in rainforests.",
+            "whyWrong": "This is not the focus of the passage."
           },
           {
-            "item": "Water falls back to Earth as rain.",
-            "column": "Supporting Detail"
+            "choice": "The dangers of logging.",
+            "whyWrong": "This is a detail, not the main idea."
           }
         ]
       }
     ],
     "exitTicket": [
       {
-        "question": "What is the main idea of the passage about the seasons?",
-        "passage": "The changing seasons bring different weather patterns and temperatures. In spring, flowers bloom and animals come out of hibernation. Summer is warm and sunny, perfect for outdoor activities. Fall brings cooler temperatures and colorful leaves. Winter is cold and often snowy, with many animals hibernating or migrating. Each season has its own unique characteristics and plays a role in the cycle of life. Understanding the seasons helps us prepare for changes in weather and plan activities accordingly. By observing the seasons, we can appreciate the beauty and diversity of our natural world. The seasons remind us of the Earth's constant changes and the importance of adapting to them. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
-        "rightAnswerRationale": "The main idea is that each season has unique characteristics and plays a role in the cycle of life.",
-        "coachHint": "Look for the sentence that tells what the passage is mostly about.",
+        "question": "What is the main idea of the passage about recycling?",
+        "passage": "Recycling is an important way to help the environment. By recycling, we reduce the amount of waste that goes into landfills. This helps conserve natural resources and reduces pollution. Recycling also saves energy because it takes less energy to make products from recycled materials than from new materials. Many communities have recycling programs that make it easy for people to recycle paper, plastic, glass, and metal. By participating in these programs, we can all do our part to protect the planet. Recycling is more than just a good habit; it's a crucial step in preserving our environment for future generations. By understanding the importance of recycling, we can make a positive impact on the world around us. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "The main idea is that recycling is important for helping the environment.",
+        "coachHint": "Look for what the passage is mostly about. What is the big idea that all the details support?",
         "type": "mc",
         "choices": [
-          "Spring is the best season.",
-          "Each season has unique characteristics and plays a role in the cycle of life.",
-          "Winter is cold and snowy.",
-          "Summer is perfect for outdoor activities."
+          "Recycling is important for the environment.",
+          "How to recycle different materials.",
+          "The history of recycling.",
+          "The benefits of recycling."
         ],
-        "correctAnswer": "Each season has unique characteristics and plays a role in the cycle of life.",
+        "correctAnswer": "Recycling is important for the environment.",
         "distractorRationale": [
           {
-            "choice": "Spring is the best season.",
-            "whyWrong": "This is an opinion, not the main idea."
+            "choice": "How to recycle different materials.",
+            "whyWrong": "This is a detail, not the main idea."
           },
           {
-            "choice": "Winter is cold and snowy.",
-            "whyWrong": "This is a detail about one season, not the main idea."
+            "choice": "The history of recycling.",
+            "whyWrong": "This is not discussed in the passage."
           },
           {
-            "choice": "Summer is perfect for outdoor activities.",
-            "whyWrong": "This is a detail about one season, not the main idea."
+            "choice": "The benefits of recycling.",
+            "whyWrong": "This is a detail, not the main idea."
           }
         ]
       },
       {
-        "question": "Identify the main idea and supporting details from the passage about the solar system.",
+        "question": "Which detail supports the main idea that recycling helps the environment?",
         "passage": null,
-        "rightAnswerRationale": "The main idea is the central point, while supporting details provide evidence or examples.",
-        "coachHint": "Think about what the passage is mostly about and what details support it.",
-        "type": "drag-drop-table",
-        "draggableItems": [
-          "The solar system includes planets.",
-          "The solar system is vast and complex.",
-          "The solar system has moons and asteroids."
+        "rightAnswerRationale": "The detail about reducing waste in landfills shows how recycling helps the environment.",
+        "coachHint": "Think about what recycling does to help the environment.",
+        "type": "multi-select",
+        "choices": [
+          "Recycling reduces waste in landfills.",
+          "Recycling saves energy.",
+          "Recycling is a good habit.",
+          "Recycling is easy."
         ],
-        "columns": [
-          "Main Idea",
-          "Supporting Detail"
+        "correctAnswers": [
+          "Recycling reduces waste in landfills.",
+          "Recycling saves energy."
         ],
-        "correctMapping": [
-          {
-            "item": "The solar system is vast and complex.",
-            "column": "Main Idea"
-          },
-          {
-            "item": "The solar system includes planets.",
-            "column": "Supporting Detail"
-          },
-          {
-            "item": "The solar system has moons and asteroids.",
-            "column": "Supporting Detail"
-          }
-        ]
+        "minSelect": 1,
+        "maxSelect": 2,
+        "partialCreditRule": "per-correct"
       }
     ],
     "masteryCheck": [
       {
-        "question": "What is the main idea of the passage about butterflies?",
-        "passage": "Butterflies are beautiful insects that undergo a fascinating transformation. They start as eggs, hatch into caterpillars, and then form a chrysalis. Inside the chrysalis, they transform into butterflies. This process is called metamorphosis. Butterflies play an important role in pollination, helping flowers reproduce. They are also a food source for other animals. Protecting butterfly habitats is important for maintaining biodiversity. By planting flowers and avoiding pesticides, we can help butterflies thrive. Understanding the life cycle of butterflies helps us appreciate their beauty and importance in the ecosystem. Butterflies remind us of the wonders of nature and the importance of conservation. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
-        "rightAnswerRationale": "The main idea is that butterflies undergo metamorphosis and play an important role in the ecosystem.",
-        "coachHint": "Look for the sentence that tells what the passage is mostly about.",
+        "question": "What is the main idea of the passage about the water cycle?",
+        "passage": "The water cycle is a continuous process that moves water around the Earth. It starts with evaporation, where water from oceans, lakes, and rivers turns into vapor and rises into the air. This vapor cools and forms clouds through condensation. When the clouds become heavy, they release water as precipitation, such as rain or snow. This water returns to the Earth's surface, where it collects in bodies of water and the cycle begins again. The water cycle is essential for providing fresh water to plants, animals, and humans. It also helps regulate the Earth's climate by distributing heat and moisture around the planet. Understanding the water cycle is important for managing water resources and protecting the environment. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "The main idea is that the water cycle is a continuous process essential for life on Earth.",
+        "coachHint": "Look for what the passage is mostly about. What is the big idea that all the details support?",
         "type": "mc",
         "choices": [
-          "Butterflies are beautiful insects.",
-          "Butterflies undergo metamorphosis and play an important role in the ecosystem.",
-          "Butterflies start as eggs.",
-          "Butterflies are a food source for other animals."
+          "The water cycle is essential for life on Earth.",
+          "How clouds form in the water cycle.",
+          "The different types of precipitation.",
+          "The importance of evaporation."
         ],
-        "correctAnswer": "Butterflies undergo metamorphosis and play an important role in the ecosystem.",
+        "correctAnswer": "The water cycle is essential for life on Earth.",
         "distractorRationale": [
           {
-            "choice": "Butterflies are beautiful insects.",
+            "choice": "How clouds form in the water cycle.",
             "whyWrong": "This is a detail, not the main idea."
           },
           {
-            "choice": "Butterflies start as eggs.",
-            "whyWrong": "This is a detail about their life cycle, not the main idea."
+            "choice": "The different types of precipitation.",
+            "whyWrong": "This is not the focus of the passage."
           },
           {
-            "choice": "Butterflies are a food source for other animals.",
-            "whyWrong": "This is a supporting detail, not the main idea."
+            "choice": "The importance of evaporation.",
+            "whyWrong": "This is a detail, not the main idea."
           }
         ]
       },
       {
-        "question": "Match each statement with the correct category: Main Idea or Supporting Detail.",
+        "question": "Which detail supports the main idea that the water cycle is essential for life?",
         "passage": null,
-        "rightAnswerRationale": "The main idea is the central message, while supporting details provide evidence or examples.",
-        "coachHint": "Think about what the passage is mostly about and what details support it.",
+        "rightAnswerRationale": "The detail about providing fresh water shows the importance of the water cycle.",
+        "coachHint": "Think about what the water cycle does to support life.",
+        "type": "multi-select",
+        "choices": [
+          "The water cycle provides fresh water.",
+          "The water cycle helps regulate climate.",
+          "The water cycle involves evaporation.",
+          "The water cycle is continuous."
+        ],
+        "correctAnswers": [
+          "The water cycle provides fresh water.",
+          "The water cycle helps regulate climate."
+        ],
+        "minSelect": 1,
+        "maxSelect": 2,
+        "partialCreditRule": "per-correct"
+      },
+      {
+        "question": "Match each statement with the correct category.",
+        "passage": null,
+        "rightAnswerRationale": "The statements about providing fresh water and regulating climate show importance, while the statement about evaporation is a fact.",
+        "coachHint": "Think about whether the statement shows importance or is just a fact.",
         "type": "drag-drop-table",
         "draggableItems": [
-          "Butterflies undergo metamorphosis.",
-          "Butterflies help in pollination.",
-          "Butterflies are a food source."
+          "The water cycle provides fresh water.",
+          "The water cycle helps regulate climate.",
+          "The water cycle involves evaporation."
         ],
         "columns": [
-          "Main Idea",
-          "Supporting Detail"
+          "Importance",
+          "Fact"
         ],
         "correctMapping": [
           {
-            "item": "Butterflies undergo metamorphosis.",
-            "column": "Main Idea"
+            "item": "The water cycle provides fresh water.",
+            "column": "Importance"
           },
           {
-            "item": "Butterflies help in pollination.",
-            "column": "Supporting Detail"
+            "item": "The water cycle helps regulate climate.",
+            "column": "Importance"
           },
           {
-            "item": "Butterflies are a food source.",
-            "column": "Supporting Detail"
+            "item": "The water cycle involves evaporation.",
+            "column": "Fact"
           }
         ]
-      },
-      {
-        "question": "What is the main idea of the passage about the ocean?",
-        "passage": "The ocean is a vast and mysterious place that covers more than 70% of the Earth's surface. It is home to a diverse range of marine life, from tiny plankton to giant whales. The ocean plays a crucial role in regulating the Earth's climate by absorbing carbon dioxide and heat. It also provides resources such as food, medicine, and energy. Despite its importance, the ocean faces threats from pollution, overfishing, and climate change. Protecting the ocean is essential for maintaining the health of our planet. By reducing pollution and supporting sustainable fishing practices, we can help preserve the ocean for future generations. Understanding the ocean's role in our ecosystem helps us appreciate its beauty and importance. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
-        "rightAnswerRationale": "The main idea is that the ocean is crucial for the Earth's climate and needs protection.",
-        "coachHint": "Look for the sentence that tells what the passage is mostly about.",
-        "type": "two-part-ebsr",
-        "partA": {
-          "question": "What is the main idea of the passage?",
-          "choices": [
-            "The ocean is home to marine life.",
-            "The ocean is crucial for the Earth's climate and needs protection.",
-            "The ocean covers 70% of the Earth's surface.",
-            "The ocean provides resources."
-          ],
-          "correctAnswer": "The ocean is crucial for the Earth's climate and needs protection."
-        },
-        "partB": {
-          "question": "Which details support the main idea?",
-          "choices": [
-            "The ocean absorbs carbon dioxide.",
-            "The ocean provides food and medicine.",
-            "The ocean faces threats from pollution."
-          ],
-          "correctAnswers": [
-            "The ocean absorbs carbon dioxide.",
-            "The ocean faces threats from pollution."
-          ]
-        },
-        "scoringRule": "B-counts-only-if-A-correct"
       }
     ],
-    "heroResourceLinkId": "cmp4fw1pv001dg3sai6y6sy8a",
+    "heroResourceLinkId": "cmp4fw1o3001cg3sa2vzq0goy",
+    "resourceTitle": "Summarizing Stories - How To Use the “Somebody-Wanted-But-So-Then” Method",
+    "resourceUrl": "https://www.youtube.com/watch?v=a3TuoupWJdo",
+    "resourceProvider": "Miacademy & MiaPrep Learning Channel",
+    "resourceDescription": "Strand: RL/RI · Duration: 8m 59s · Tier: on_grade · Collection: miacademy_level_d_revised_2025",
     "exemplarsUsed": [
-      "Building a World with Toothpicks",
-      "What is the most likely reason the author includes the example of Stan Munro’s toothpick structure holding up a desk?",
-      "How did dropping part of a completed structure affect Munro’s process?",
-      "What does Stan Munro’s answer show about him?",
-      "Select a box in each row to show whether each statement is supported by the information in “The Eagles Are Back!,” “Bald eagles make a comeback in Chicago” or both passages. Each column will be used only once.",
-      "Select a box in each row to show whether each statement is supported by the information in “The Eagles Are Back!,” “Bald eagles make a comeback in Chicago” or both passages. Each column will be only used once.",
       "g3-p1",
       "g3-mc-1",
       "g3-mc-2",
@@ -401,39 +357,41 @@
       "g5-tei-6"
     ],
     "teiTypesUsed": [
-      "drag-drop-table",
-      "two-part-ebsr"
+      "multi-select",
+      "drag-drop-table"
     ],
     "generatorVersion": "V2",
     "qualityScore": 92,
     "qualityIssues": [
-      "Practice passage needs regeneration: 170 words (target 150-400) with FK grade 10.7 (target 3±1.5). Write a longer, more natural passage with simpler sentence structure.",
-      "Practice passage needs regeneration: 178 words (target 150-400) with FK grade 10.1 (target 3±1.5). Write a longer, more natural passage with simpler sentence structure."
-    ],
-    "resourceTitle": "Using Text and Visual Features To Answer Questions",
-    "resourceUrl": "https://www.youtube.com/watch?v=aorxZeBgjUQ",
-    "resourceProvider": "Miacademy & MiaPrep Learning Channel",
-    "resourceDescription": "Strand: RI · Duration: 7m 59s · Tier: on_grade · Collection: miacademy_level_d_revised_2025"
+      "Critic requested revision after 3 iterations."
+    ]
   },
   "critic": {
     "status": "REVISE",
     "score": 82,
     "revisions": [
       {
-        "section": "guidedPractice[0]",
-        "issue": "Practice passage needs regeneration: 170 words (target 150-400) with FK grade 10.7 (target 3±1.5).",
-        "suggestion": "Rewrite the passage to be longer and use simpler sentence structures to lower the reading level."
+        "section": "explanation",
+        "issue": "Repetitive content and lack of clarity.",
+        "suggestion": "Remove repetitive sentences and clarify the explanation of how to identify the main idea and supporting details."
       },
       {
-        "section": "guidedPractice[2]",
-        "issue": "Practice passage needs regeneration: 178 words (target 150-400) with FK grade 10.1 (target 3±1.5).",
-        "suggestion": "Rewrite the passage to be longer and use simpler sentence structures to lower the reading level."
+        "section": "guidedPractice[0]",
+        "issue": "Repetitive rationale text.",
+        "suggestion": "Remove duplicate sentences in the rationale to improve clarity and focus."
+      },
+      {
+        "section": "independentPractice[0]",
+        "issue": "Repetitive rationale text.",
+        "suggestion": "Remove duplicate sentences in the rationale to improve clarity and focus."
+      },
+      {
+        "section": "exitTicket[0]",
+        "issue": "Repetitive rationale text.",
+        "suggestion": "Remove duplicate sentences in the rationale to improve clarity and focus."
       }
     ]
   },
-  "validationIssues": [
-    "Practice passage needs regeneration: 170 words (target 150-400) with FK grade 10.7 (target 3±1.5). Write a longer, more natural passage with simpler sentence structure.",
-    "Practice passage needs regeneration: 178 words (target 150-400) with FK grade 10.1 (target 3±1.5). Write a longer, more natural passage with simpler sentence structure."
-  ],
+  "validationIssues": [],
   "iterations": 5
 }

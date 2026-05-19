@@ -1,176 +1,50 @@
 {
-  "generatedAt": "2026-05-18T18:35:24.527Z",
-  "lessonCount": 10,
-  "averageQuality": 90.4,
+  "generatedAt": "2026-05-19T16:36:13.343Z",
+  "lessonCount": 2,
+  "averageQuality": 92,
   "teiTypes": [
-    "drag-drop-order",
     "drag-drop-table",
-    "evidence-mapping",
-    "hot-text-phrase",
-    "hot-text-sentence",
     "hot-text-word",
     "inline-dropdown",
-    "multi-select",
-    "two-part-ebsr"
+    "multi-select"
   ],
   "duplicatePairs": [],
   "lessons": [
     {
-      "title": "Understanding Main Ideas and Supporting Details",
+      "title": "Understanding Main Idea and Supporting Details",
       "gradeLevel": 3,
       "standardCode": "CC.1.2.3.A",
       "skill": "Main Idea and Supporting Details",
       "qualityScore": 92,
       "qualityIssues": [
-        "Practice passage needs regeneration: 170 words (target 150-400) with FK grade 10.7 (target 3±1.5). Write a longer, more natural passage with simpler sentence structure.",
-        "Practice passage needs regeneration: 178 words (target 150-400) with FK grade 10.1 (target 3±1.5). Write a longer, more natural passage with simpler sentence structure."
+        "Critic requested revision after 3 iterations."
       ],
       "teiTypesUsed": [
-        "drag-drop-table",
-        "two-part-ebsr"
+        "multi-select",
+        "drag-drop-table"
       ],
-      "heroResourceLinkId": "cmp4fw1pv001dg3sai6y6sy8a"
+      "heroResourceLinkId": "cmp4fw1o3001cg3sa2vzq0goy",
+      "resourceTitle": "Summarizing Stories - How To Use the “Somebody-Wanted-But-So-Then” Method",
+      "resourceUrl": "https://www.youtube.com/watch?v=a3TuoupWJdo",
+      "resourceProvider": "Miacademy & MiaPrep Learning Channel"
     },
     {
-      "title": "Understanding Verb Tense",
+      "title": "Mastering Verb Tenses",
       "gradeLevel": 3,
       "standardCode": "CC.1.4.3.F",
       "skill": "Verb Tense",
       "qualityScore": 92,
-      "qualityIssues": [],
+      "qualityIssues": [
+        "Critic requested revision after 3 iterations."
+      ],
       "teiTypesUsed": [
         "inline-dropdown",
         "hot-text-word"
       ],
-      "heroResourceLinkId": "cmp4fw3vi002eg3sa2b9ofx4h"
-    },
-    {
-      "title": "Understanding Characters in Stories",
-      "gradeLevel": 4,
-      "standardCode": "CC.1.3.4.C",
-      "skill": "Character Analysis",
-      "qualityScore": 92,
-      "qualityIssues": [
-        "Critic requested revision after 3 iterations."
-      ],
-      "teiTypesUsed": [
-        "hot-text-sentence",
-        "two-part-ebsr"
-      ],
-      "heroResourceLinkId": null
-    },
-    {
-      "title": "Using Transitions to Organize Ideas",
-      "gradeLevel": 4,
-      "standardCode": "CC.1.4.4.C",
-      "skill": "Organizing Ideas with Transitions",
-      "qualityScore": 80,
-      "qualityIssues": [
-        "Practice passage needs regeneration: 215 words (target 150-400) with FK grade 16.6 (target 4±1.5). Write a longer, more natural passage with simpler sentence structure.",
-        "Practice passage needs regeneration: 228 words (target 150-400) with FK grade 15.2 (target 4±1.5). Write a longer, more natural passage with simpler sentence structure.",
-        "Practice passage needs regeneration: 193 words (target 150-400) with FK grade 19.2 (target 4±1.5). Write a longer, more natural passage with simpler sentence structure.",
-        "Practice passage duplicate risk: current passage 2 is 0.93 similar to current passage 3. Previous passage was too similar to Last Saturday, my family and I decided to have a fun day at the beach. First, we packed our bags with towels, sunscreen,. Write on a different topic/scenario.",
-        "Practice passage duplicate risk: current passage 2 is 0.95 similar to current passage 4. Previous passage was too similar to Last Saturday, my family and I decided to have a fun day at the beach. First, we packed our bags with towels, sunscreen,. Write on a different topic/scenario.",
-        "Practice passage duplicate risk: current passage 3 is 0.95 similar to current passage 4. Previous passage was too similar to Last Saturday, my family and I decided to have a fun day at the beach. First, we packed our bags with towels, sunscreen,. Write on a different topic/scenario."
-      ],
-      "teiTypesUsed": [
-        "drag-drop-order",
-        "multi-select",
-        "evidence-mapping",
-        "inline-dropdown"
-      ],
-      "heroResourceLinkId": null
-    },
-    {
-      "title": "Understanding Vocabulary in Context",
-      "gradeLevel": 5,
-      "standardCode": "CC.1.2.5.F",
-      "skill": "Vocabulary in Context",
-      "qualityScore": 92,
-      "qualityIssues": [],
-      "teiTypesUsed": [
-        "inline-dropdown",
-        "hot-text-phrase"
-      ],
-      "heroResourceLinkId": "cmp4fwb27005vg3sa2v7w64uo"
-    },
-    {
-      "title": "Understanding Text Structure and Signal Words",
-      "gradeLevel": 5,
-      "standardCode": "CC.1.2.5.E",
-      "skill": "Text Structure and Signal Words",
-      "qualityScore": 92,
-      "qualityIssues": [
-        "Practice passage needs regeneration: 157 words (target 150-400) with FK grade 12.7 (target 5±1.5). Write a longer, more natural passage with simpler sentence structure."
-      ],
-      "teiTypesUsed": [
-        "inline-dropdown",
-        "hot-text-phrase"
-      ],
-      "heroResourceLinkId": "cmp4fwawl005sg3sa3hku5sxm"
-    },
-    {
-      "title": "Mastering Inference and Text Evidence",
-      "gradeLevel": 6,
-      "standardCode": "CC.1.3.6.B",
-      "skill": "Inference and Text Evidence",
-      "qualityScore": 88,
-      "qualityIssues": [
-        "Practice passage duplicate risk: current passage 3 is 0.94 similar to current passage 7. Previous passage was too similar to Despite the setbacks, she refused to give up. Each challenge was met with a renewed effort, and her resolve only grew st. Write on a different topic/scenario.",
-        "Practice passage: Duplicate risk with passage 3 and 7. (Write on a different topic or scenario to ensure passage uniqueness.)",
-        "masteryCheck[1]: Correct phrase not included in selectable phrases. (Add 'streets bustling with people' to the selectable phrases.)",
-        "guidedPractice[1]: Incorrect evidence mapping for the second claim. (Ensure evidence items correctly support the claim that the setting is lively and bustling.)"
-      ],
-      "teiTypesUsed": [
-        "two-part-ebsr",
-        "hot-text-phrase",
-        "evidence-mapping"
-      ],
-      "heroResourceLinkId": "cmp4fw5vj003bg3sadfdnqkel"
-    },
-    {
-      "title": "Mastering Subject-Verb Agreement",
-      "gradeLevel": 6,
-      "standardCode": "CC.1.4.6.F",
-      "skill": "Subject-Verb Agreement",
-      "qualityScore": 92,
-      "qualityIssues": [],
-      "teiTypesUsed": [
-        "hot-text-word",
-        "inline-dropdown"
-      ],
-      "heroResourceLinkId": null
-    },
-    {
-      "title": "Mastering Evidence Selection in Informational Texts",
-      "gradeLevel": 7,
-      "standardCode": "CC.1.2.7.B",
-      "skill": "Evidence Selection",
-      "qualityScore": 92,
-      "qualityIssues": [
-        "Critic requested revision after 3 iterations."
-      ],
-      "teiTypesUsed": [
-        "evidence-mapping",
-        "hot-text-phrase"
-      ],
-      "heroResourceLinkId": null
-    },
-    {
-      "title": "Exploring Theme Development in Literature",
-      "gradeLevel": 8,
-      "standardCode": "CC.1.3.8.A",
-      "skill": "Theme Development",
-      "qualityScore": 92,
-      "qualityIssues": [
-        "Critic requested revision after 3 iterations."
-      ],
-      "teiTypesUsed": [
-        "hot-text-sentence",
-        "evidence-mapping",
-        "two-part-ebsr"
-      ],
-      "heroResourceLinkId": "cmp4fw9kb0054g3sa7gtfqnpx"
+      "heroResourceLinkId": "cmp5ki6le00106hernjvvevoi",
+      "resourceTitle": "Time Travel with Tenses: How To Identify and Use Verb Tenses",
+      "resourceUrl": "https://www.youtube.com/watch?v=4iKwSYA3YeQ",
+      "resourceProvider": "Miacademy & MiaPrep Learning Channel"
     }
   ]
 }
