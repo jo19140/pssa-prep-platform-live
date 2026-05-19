@@ -251,8 +251,14 @@ export function LessonStepPlayer({
 function youtubeEmbedUrl(url: string) {
   try {
     const parsed = new URL(url);
-    const id = parsed.hostname.includes("youtu.be") ? parsed.pathname.slice(1) : parsed.searchParams.get("v");
-    return id ? `https://www.youtube.com/embed/${id}` : "";
+    const id = parsed.hostname.includes("youtu.be")
+      ? parsed.pathname.slice(1)
+      : parsed.pathname.startsWith("/embed/")
+        ? parsed.pathname.split("/embed/")[1]?.split("/")[0]
+        : parsed.searchParams.get("v");
+    if (!id) return "";
+    // Privacy-Enhanced Mode reduces tracking cookies; params reduce recommendations, branding, and overlays.
+    return `https://www.youtube-nocookie.com/embed/${id}?rel=0&modestbranding=1&iv_load_policy=3`;
   } catch {
     return "";
   }
