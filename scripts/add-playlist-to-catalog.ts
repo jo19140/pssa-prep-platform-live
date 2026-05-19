@@ -102,6 +102,16 @@ function slugify(value: string): string {
   return value.toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, "").slice(0, 60);
 }
 
+function normalizeTagsForGrade(tags: string[], gradeLevel: number) {
+  return tags.map((tag) => {
+    const paMatch = tag.match(/^CC\.1\.(1|2|3|4)\.\d+\.([A-Z0-9]+)$/);
+    if (paMatch) return `CC.1.${paMatch[1]}.${gradeLevel}.${paMatch[2]}`;
+    const ccssMatch = tag.match(/^(RL|RI|L|W|SL)\.\d+\.(.+)$/);
+    if (ccssMatch) return `${ccssMatch[1]}.${gradeLevel}.${ccssMatch[2]}`;
+    return tag;
+  });
+}
+
 async function classifyVideo(title: string, description: string, gradeLevel: number, skillLibrary: any[]) {
   const skillHints = skillLibrary
     .map((s) => `${s.skill_id}: ${s.skill_name} [strand: ${s.strand}, pa: ${(s.pa_core || []).join(", ")}]`)
@@ -137,8 +147,8 @@ Return only valid JSON.`;
       skill_name: String(parsed.skill_name || "General"),
       strand: String(parsed.strand || "RL/RI"),
       text_type: String(parsed.text_type || "general"),
-      ccss_tags: Array.isArray(parsed.ccss_tags) ? parsed.ccss_tags.map(String) : [],
-      pa_core_tags: Array.isArray(parsed.pa_core_tags) ? parsed.pa_core_tags.map(String) : [],
+      ccss_tags: normalizeTagsForGrade(Array.isArray(parsed.ccss_tags) ? parsed.ccss_tags.map(String) : [], gradeLevel),
+      pa_core_tags: normalizeTagsForGrade(Array.isArray(parsed.pa_core_tags) ? parsed.pa_core_tags.map(String) : [], gradeLevel),
       confidence: Number(parsed.confidence) || 1,
     };
   } catch {
