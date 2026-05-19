@@ -326,7 +326,11 @@
     "qualityScore": 92,
     "qualityIssues": [
       "Critic requested revision after 3 iterations."
-    ]
+    ],
+    "resourceTitle": "How POV affects readers | Reading | Khan Academy",
+    "resourceUrl": "https://www.youtube.com/watch?v=XIfYK4tpl2Y",
+    "resourceProvider": "Miacademy & MiaPrep Learning Channel",
+    "resourceDescription": "Strand: RL · Duration: 5m 14s · Tier: on_grade · Collection: khan_8_reading_vocab"
   },
   "critic": {
     "status": "REVISE",

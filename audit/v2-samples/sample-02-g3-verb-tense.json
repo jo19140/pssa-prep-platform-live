@@ -328,7 +328,11 @@
     ],
     "generatorVersion": "V2",
     "qualityScore": 92,
-    "qualityIssues": []
+    "qualityIssues": [],
+    "resourceTitle": "Adjectives - Learn to Read for Kids!",
+    "resourceUrl": "https://www.youtube.com/watch?v=wLn-h1bGDOc",
+    "resourceProvider": "Miacademy & MiaPrep Learning Channel",
+    "resourceDescription": "Strand: L · Duration: 2m 56s · Tier: scaffold · Collection: miacademy_level_d_edition_1"
   },
   "critic": {
     "status": "PASS",

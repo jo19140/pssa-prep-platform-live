@@ -328,7 +328,11 @@
       "Practice passage duplicate risk: current passage 2 is 0.93 similar to current passage 3. Previous passage was too similar to Last Saturday, my family and I decided to have a fun day at the beach. First, we packed our bags with towels, sunscreen,. Write on a different topic/scenario.",
       "Practice passage duplicate risk: current passage 2 is 0.95 similar to current passage 4. Previous passage was too similar to Last Saturday, my family and I decided to have a fun day at the beach. First, we packed our bags with towels, sunscreen,. Write on a different topic/scenario.",
       "Practice passage duplicate risk: current passage 3 is 0.95 similar to current passage 4. Previous passage was too similar to Last Saturday, my family and I decided to have a fun day at the beach. First, we packed our bags with towels, sunscreen,. Write on a different topic/scenario."
-    ]
+    ],
+    "resourceTitle": null,
+    "resourceUrl": null,
+    "resourceProvider": null,
+    "resourceDescription": null
   },
   "critic": {
     "status": "REVISE",

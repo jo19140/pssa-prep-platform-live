@@ -33,6 +33,10 @@ type PreviewLesson = {
   exitTicket?: any[];
   masteryCheck?: any[];
   heroResourceLinkId?: string | null;
+  resourceTitle?: string | null;
+  resourceUrl?: string | null;
+  resourceProvider?: string | null;
+  resourceDescription?: string | null;
   exemplarsUsed?: string[];
   teiTypesUsed?: string[];
   generatorVersion?: string;
@@ -91,7 +95,8 @@ export function LessonPreviewClient({
   }
 
   const lesson = selectedSample.lesson;
-  const previewSteps = buildPreviewSteps(lesson);
+  const heroResource = heroResourceFromLesson(lesson);
+  const previewSteps = buildPreviewSteps(lesson, heroResource);
 
   return (
     <div key={`${selectedSample.filename}-${resetVersion}`} className="mx-auto max-w-6xl px-4 py-6 sm:px-6 lg:px-8">
@@ -244,19 +249,30 @@ function Badge({ children }: { children: ReactNode }) {
   );
 }
 
-function buildPreviewSteps(lesson: PreviewLesson) {
+function buildPreviewSteps(lesson: PreviewLesson, heroResource: PreviewHeroResource) {
   const steps: Array<{
     order: number;
     stepType: string;
     title: string;
     bodyText: string;
     narrationScript: string;
+    heroResource?: PreviewHeroResource;
     questions?: any[];
   }> = [];
 
   addTextStep(steps, "INTRO", "Hook", lesson.hook);
   addTextStep(steps, "EXPLANATION", "Explanation", lesson.explanation);
   addTextStep(steps, "WORKED_EXAMPLE", "Worked Example", lesson.workedExample);
+  if (heroResource?.url) {
+    steps.push({
+      order: steps.length + 1,
+      stepType: "TRANSITION",
+      title: "Hero Video",
+      bodyText: "Watch this short resource before practice. Use it to hear the skill explained another way, then try the guided questions.",
+      narrationScript: "Watch this short resource before practice, then try the guided questions.",
+      heroResource,
+    });
+  }
 
   for (const section of practiceSections) {
     const items = Array.isArray(lesson[section.key]) ? lesson[section.key] : [];
@@ -275,7 +291,7 @@ function buildPreviewSteps(lesson: PreviewLesson) {
 }
 
 function addTextStep(
-  steps: Array<{ order: number; stepType: string; title: string; bodyText: string; narrationScript: string; questions?: any[] }>,
+  steps: Array<{ order: number; stepType: string; title: string; bodyText: string; narrationScript: string; heroResource?: PreviewHeroResource; questions?: any[] }>,
   stepType: string,
   title: string,
   bodyText?: string,
@@ -288,6 +304,23 @@ function addTextStep(
     bodyText,
     narrationScript: bodyText.slice(0, 280),
   });
+}
+
+type PreviewHeroResource = {
+  title: string;
+  url: string;
+  provider: string;
+  description?: string | null;
+} | null;
+
+function heroResourceFromLesson(lesson: PreviewLesson): PreviewHeroResource {
+  if (!lesson.resourceUrl) return null;
+  return {
+    title: lesson.resourceTitle || "Lesson video",
+    url: lesson.resourceUrl,
+    provider: lesson.resourceProvider || "Resource",
+    description: lesson.resourceDescription || null,
+  };
 }
 
 function countPracticeItems(lesson: PreviewLesson) {

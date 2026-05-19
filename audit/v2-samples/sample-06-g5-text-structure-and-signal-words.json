@@ -362,7 +362,11 @@
     "qualityScore": 92,
     "qualityIssues": [
       "Practice passage needs regeneration: 157 words (target 150-400) with FK grade 12.7 (target 5±1.5). Write a longer, more natural passage with simpler sentence structure."
-    ]
+    ],
+    "resourceTitle": "Comparing two accounts of the same topic | Reading | Khan Academy",
+    "resourceUrl": "https://www.youtube.com/watch?v=JdGA0Fexab8",
+    "resourceProvider": "Miacademy & MiaPrep Learning Channel",
+    "resourceDescription": "Strand: RL/RI · Duration: 4m 14s · Tier: on_grade · Collection: khan_5_ela"
   },
   "critic": {
     "status": "REVISE",

@@ -3,7 +3,7 @@ import path from "path";
 import { generateLessonV2, type GenerateLessonV2Input } from "@/lib/lessonGeneratorV2";
 import { allPracticeQuestions, type LessonV2 } from "@/lib/lessonV2Schema";
 
-const OUTPUT_DIR = path.join(process.cwd(), "audit", "v2-samples");
+const DEFAULT_OUTPUT_DIR = path.join(process.cwd(), "audit", "v2-samples");
 
 const lessonRequests: GenerateLessonV2Input[] = [
   { gradeLevel: 3, standardCode: "CC.1.2.3.A", standardLabel: "Main idea and supporting details", skill: "Main Idea and Supporting Details" },
@@ -20,19 +20,22 @@ const lessonRequests: GenerateLessonV2Input[] = [
 
 async function main() {
   if (!process.env.OPENAI_API_KEY) throw new Error("OPENAI_API_KEY is required for V2 sample generation.");
-  mkdirSync(OUTPUT_DIR, { recursive: true });
+  const limit = readLimitArg();
+  const outputDir = readOutputDirArg();
+  const requests = limit ? lessonRequests.slice(0, limit) : lessonRequests;
+  mkdirSync(outputDir, { recursive: true });
   const lessons: LessonV2[] = [];
-  for (const [index, request] of lessonRequests.entries()) {
-    console.log(`\nGenerating V2 sample ${index + 1}/${lessonRequests.length}: grade ${request.gradeLevel} ${request.standardCode} ${request.skill}`);
+  for (const [index, request] of requests.entries()) {
+    console.log(`\nGenerating V2 sample ${index + 1}/${requests.length}: grade ${request.gradeLevel} ${request.standardCode} ${request.skill}`);
     const result = await generateLessonV2({
       ...request,
       commonError: "Students need targeted practice with PSSA-style reasoning, evidence use, and technology-enhanced item formats.",
     });
     const filename = `sample-${String(index + 1).padStart(2, "0")}-g${request.gradeLevel}-${slug(request.skill)}.json`;
-    writeFileSync(path.join(OUTPUT_DIR, filename), `${JSON.stringify(result, null, 2)}\n`);
+    writeFileSync(path.join(outputDir, filename), `${JSON.stringify(result, null, 2)}\n`);
     lessons.push(result.lesson);
     console.log(`  quality=${result.lesson.qualityScore} iterations=${result.iterations} tei=${result.lesson.teiTypesUsed.join(", ") || "none"} issues=${result.lesson.qualityIssues.length}`);
-    if (index < lessonRequests.length - 1) await sleep(8000);
+    if (index < requests.length - 1) await sleep(8000);
   }
 
   const averageQuality = lessons.reduce((sum, lesson) => sum + lesson.qualityScore, 0) / lessons.length;
@@ -53,9 +56,12 @@ async function main() {
       qualityIssues: lesson.qualityIssues,
       teiTypesUsed: lesson.teiTypesUsed,
       heroResourceLinkId: lesson.heroResourceLinkId,
+      resourceTitle: lesson.resourceTitle,
+      resourceUrl: lesson.resourceUrl,
+      resourceProvider: lesson.resourceProvider,
     })),
   };
-  writeFileSync(path.join(OUTPUT_DIR, "summary.json"), `${JSON.stringify(summary, null, 2)}\n`);
+  writeFileSync(path.join(outputDir, "summary.json"), `${JSON.stringify(summary, null, 2)}\n`);
 
   console.log("\n=== V2 sample summary ===");
   console.log(`Lessons generated: ${lessons.length}`);
@@ -63,8 +69,22 @@ async function main() {
   console.log(`Distinct TEI types (${teiTypes.length}): ${teiTypes.join(", ")}`);
   console.log(`Duplicate passage pairs: ${duplicatePairs.length}`);
   if (averageQuality < 85) throw new Error(`Average qualityScore ${averageQuality.toFixed(1)} is below 85.`);
-  if (teiTypes.length < 6) throw new Error(`Expected at least 6 TEI types across samples, found ${teiTypes.length}.`);
+  if (!limit && teiTypes.length < 6) throw new Error(`Expected at least 6 TEI types across samples, found ${teiTypes.length}.`);
   if (duplicatePairs.length) throw new Error("Duplicate passages detected across generated samples.");
+}
+
+function readLimitArg() {
+  const arg = process.argv.find((value) => value.startsWith("--limit="));
+  if (!arg) return null;
+  const value = Number(arg.split("=")[1]);
+  if (!Number.isInteger(value) || value < 1) throw new Error("--limit must be a positive integer.");
+  return Math.min(value, lessonRequests.length);
+}
+
+function readOutputDirArg() {
+  const arg = process.argv.find((value) => value.startsWith("--output-dir="));
+  if (!arg) return DEFAULT_OUTPUT_DIR;
+  return path.resolve(arg.split("=")[1]);
 }
 
 function findDuplicatePassages(lessons: LessonV2[]) {

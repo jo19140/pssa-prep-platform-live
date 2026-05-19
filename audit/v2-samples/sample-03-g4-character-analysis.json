@@ -309,7 +309,11 @@
     "qualityScore": 92,
     "qualityIssues": [
       "Critic requested revision after 3 iterations."
-    ]
+    ],
+    "resourceTitle": null,
+    "resourceUrl": null,
+    "resourceProvider": null,
+    "resourceDescription": null
   },
   "critic": {
     "status": "REVISE",

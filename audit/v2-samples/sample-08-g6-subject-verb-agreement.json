@@ -285,7 +285,11 @@
     ],
     "generatorVersion": "V2",
     "qualityScore": 92,
-    "qualityIssues": []
+    "qualityIssues": [],
+    "resourceTitle": null,
+    "resourceUrl": null,
+    "resourceProvider": null,
+    "resourceDescription": null
   },
   "critic": {
     "status": "PASS",

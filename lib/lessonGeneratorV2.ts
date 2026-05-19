@@ -64,6 +64,10 @@ export async function generateLessonV2(input: GenerateLessonV2Input): Promise<Ge
     lastLesson = {
       ...draft,
       heroResourceLinkId: heroResource?.id || null,
+      resourceTitle: heroResource?.title || null,
+      resourceUrl: heroResource?.url || null,
+      resourceProvider: heroResource?.provider || null,
+      resourceDescription: heroResource?.description || null,
       qualityScore: calculateQualityScore(critic, validation.issues),
       qualityIssues,
       teiTypesUsed: Array.from(new Set(practiceTeiTypes(draft))),
@@ -149,6 +153,10 @@ async function generateDraft(
     skill: input.skill,
     whyAssigned: input.whyAssigned || lesson.whyAssigned,
     heroResourceLinkId: null,
+    resourceTitle: null,
+    resourceUrl: null,
+    resourceProvider: null,
+    resourceDescription: null,
     generatorVersion: "V2",
   };
 }
@@ -191,7 +199,7 @@ function buildSystemPrompt(input: GenerateLessonV2Input, plannedTeiTypes: string
   return [
     "You are building a high-quality PSSA ELA V2 mini-lesson for standards-based mastery and intervention.",
     "Generate original lesson content grounded in the provided released-item and DRC INSIGHT TEI examples. Do not copy passages verbatim except for short quoted evidence inside rationales.",
-    "The lesson must match the schema exactly. Use generatorVersion V2. Set heroResourceLinkId to null; the server attaches it after validation.",
+    "The lesson must match the schema exactly. Use generatorVersion V2. Set heroResourceLinkId, resourceTitle, resourceUrl, resourceProvider, and resourceDescription to null; the server attaches hero video fields after validation.",
     "Teaching section requirements: hook 50-100 words, explanation 320-500 words, workedExample 160-250 words. Include concrete examples, not placeholder announcements. Count conservatively and write enough detail to exceed the minimum.",
     "Practice mix requirements: guidedPractice has 3 items, independentPractice 4, exitTicket 2, masteryCheck 3. Every lesson must use at least 2 distinct non-MC TEI types across practice. Do not count mc as a TEI type. Do not generate all-MC lessons.",
     `Required TEI variety: include at least two of these non-MC item types in the lesson: ${plannedTeiTypes.slice(0, 3).join(", ")}. Use each selected TEI type at least twice across the practice sections.`,

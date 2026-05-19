@@ -348,7 +348,11 @@
     ],
     "generatorVersion": "V2",
     "qualityScore": 92,
-    "qualityIssues": []
+    "qualityIssues": [],
+    "resourceTitle": "Supporting a main idea with key details | Reading | Khan Academy",
+    "resourceUrl": "https://www.youtube.com/watch?v=lGJw0QS1Y9w",
+    "resourceProvider": "Miacademy & MiaPrep Learning Channel",
+    "resourceDescription": "Strand: L/RI · Duration: 3m 58s · Tier: on_grade · Collection: khan_5_ela"
   },
   "critic": {
     "status": "PASS",

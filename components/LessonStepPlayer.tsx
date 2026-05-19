@@ -13,6 +13,7 @@ type Step = {
   narrationScript: string;
   audioUrl?: string | null;
   imageUrl?: string | null;
+  heroResource?: HeroResource;
   checkQuestion?: {
     question: string;
     choices: string[];
@@ -119,6 +120,26 @@ export function LessonStepPlayer({
             <img src={currentStep.imageUrl} alt="" className="mt-4 aspect-video w-full rounded-2xl object-cover ring-1 ring-slate-200" />
           ) : null}
           <p className="mt-4 text-lg leading-8 text-slate-800">{currentStep.bodyText}</p>
+
+          {currentStep.heroResource?.url ? (
+            <div className="mt-5 rounded-2xl bg-white p-4 ring-1 ring-slate-200">
+              <p className="text-xs font-black uppercase tracking-wide text-blue-700">Hero Video</p>
+              <h6 className="mt-1 text-lg font-black text-slate-950">{currentStep.heroResource.title}</h6>
+              <p className="mt-1 text-sm font-semibold text-slate-600">{currentStep.heroResource.provider}</p>
+              <div className="mt-3 aspect-video overflow-hidden rounded-xl bg-slate-950">
+                <iframe
+                  src={youtubeEmbedUrl(currentStep.heroResource.url)}
+                  title={currentStep.heroResource.title}
+                  className="h-full w-full"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              </div>
+              {currentStep.heroResource.description ? (
+                <p className="mt-2 text-xs font-semibold text-slate-500">{currentStep.heroResource.description}</p>
+              ) : null}
+            </div>
+          ) : null}
 
           {currentStep.audioUrl ? (
             <div className="mt-5 rounded-2xl bg-cyan-50 p-4 ring-1 ring-cyan-100">
