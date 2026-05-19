@@ -28,6 +28,7 @@ type ResourceMatch = ResourceLike & {
 };
 
 type HeroMatchConfidence = "high" | "medium" | "low";
+const HERO_MATCH_VERIFIER_VERSION = "grade_fit_v2";
 
 type ResponseLike = {
   standardCode: string;
@@ -372,7 +373,7 @@ export async function findHeroResourceForLesson(lesson: Pick<LearningLessonBuild
     ...candidates.filter((resource) => hasSkillKeywordOverlap(resource.skill, skillTokens)),
     ...skillCandidates.filter((resource) => hasSkillKeywordOverlap(resource.skill, skillTokens)),
   ]).slice(0, 5);
-  const match = await aiVerifyHeroMatch(lesson.skill, lesson.standardCode, rankedCandidates);
+  const match = await aiVerifyHeroMatch(lesson.skill, lesson.standardCode, lesson.gradeLevel, rankedCandidates);
   if (!match) {
     const scope = candidates.length || skillCandidates.length ? "learningLessons.no_confident_hero" : "learningLessons.no_resource_link";
     logAiFailure({
@@ -403,10 +404,11 @@ function uniqueResourceCandidates(resources: ResourceMatch[]) {
 async function aiVerifyHeroMatch(
   lessonSkill: string,
   lessonStandardCode: string,
+  lessonGradeLevel: number,
   candidates: ResourceMatch[],
 ): Promise<ResourceMatch | null> {
   if (!candidates.length) return null;
-  const cached = await readHeroMatchCache(lessonSkill, candidates);
+  const cached = await readHeroMatchCache(lessonSkill, lessonGradeLevel, candidates);
   if (cached.allCached) {
     return cached.results.find((result) => result.matches && result.confidence !== "low")?.candidate || null;
   }
@@ -416,7 +418,7 @@ async function aiVerifyHeroMatch(
     logAiFailure({
       scope: "learningLessons.hero_match_verifier_missing_api_key",
       error: new Error("OPENAI_API_KEY is not configured for hero video verification."),
-      context: { lessonSkill, lessonStandardCode, candidateTitles: candidates.map((candidate) => candidate.title) },
+      context: { lessonSkill, lessonStandardCode, lessonGradeLevel, candidateTitles: candidates.map((candidate) => candidate.title) },
     });
     return null;
   }
@@ -432,44 +434,48 @@ async function aiVerifyHeroMatch(
           role: "system",
           content:
             candidates.length === 1
-              ? "Does this video teach the given skill? Return JSON: { \"matches\": true | false, \"confidence\": \"high\" | \"medium\" | \"low\" }. Be strict. The video title must align with the lesson skill; a verb tense lesson should not match an adjectives video just because both relate to grammar."
-              : "You are matching educational videos to lesson skills for a Pennsylvania PSSA ELA module. Given a lesson skill and 3-5 candidate video titles, identify the best match. Return JSON: { \"bestIndex\": number, \"confidence\": \"high\" | \"medium\" | \"low\" }. If no candidate truly matches the skill, return { \"bestIndex\": -1, \"confidence\": \"low\" }. Be strict. A verb tense lesson should NOT match an adjectives video even if both relate to grammar.",
+              ? "Does this video teach the given skill at an appropriate grade level for the lesson? Return JSON: { \"matches\": true | false, \"confidence\": \"high\" | \"medium\" | \"low\" }. Reject videos that do not teach the skill, that target a significantly different grade band than the lesson (more than 2 grades off), or that are framed as remedial/foundational content for an on-grade lesson or advanced content for a struggling-grade lesson. A grade 7 video should NOT match a grade 3 lesson even if the skill aligns; a grade 4 video can reasonably match a grade 3 lesson."
+              : "You are matching educational videos to lesson skills for a Pennsylvania PSSA ELA module. Given a lesson skill, lesson grade level, and 3-5 candidate videos, identify the best match. Reject candidates that do not actually teach the lesson skill, target a significantly different grade band than the lesson (more than 2 grades off), or are framed as remedial/foundational content for an on-grade lesson or advanced content for a struggling-grade lesson. A verb tense lesson should NOT match an adjectives video even if both relate to grammar. A video labeled grade 7 should NOT match a grade 3 lesson even if the skill aligns. A video labeled grade 4 can reasonably match a grade 3 lesson. Return JSON: { \"bestIndex\": number, \"confidence\": \"high\" | \"medium\" | \"low\" }. If no candidate matches both skill AND grade band, return { \"bestIndex\": -1, \"confidence\": \"low\" }.",
         },
         {
           role: "user",
           content: JSON.stringify({
             lessonSkill,
             lessonStandardCode,
+            lessonGradeLevel,
             candidates: candidates.map((candidate, index) => ({
               index,
               title: candidate.title,
               skillTag: candidate.skill,
               provider: candidate.provider,
+              contentGradeLevel: candidate.gradeLevel,
             })),
           }),
         },
       ],
     });
     const result = parseHeroVerifierResult(response.choices[0].message.content || "{}", candidates.length);
-    await writeHeroMatchCache(lessonSkill, lessonStandardCode, candidates, result);
+    await writeHeroMatchCache(lessonSkill, lessonStandardCode, lessonGradeLevel, candidates, result);
     if (result.bestIndex < 0 || result.bestIndex >= candidates.length || result.confidence === "low") return null;
     return candidates[result.bestIndex];
   } catch (error) {
     logAiFailure({
       scope: "learningLessons.hero_match_verifier_failed",
       error: error instanceof Error ? error : new Error(String(error)),
-      context: { lessonSkill, lessonStandardCode, candidateTitles: candidates.map((candidate) => candidate.title) },
+      context: { lessonSkill, lessonStandardCode, lessonGradeLevel, candidateTitles: candidates.map((candidate) => candidate.title) },
     });
     return null;
   }
 }
 
-async function readHeroMatchCache(lessonSkill: string, candidates: ResourceMatch[]) {
+async function readHeroMatchCache(lessonSkill: string, lessonGradeLevel: number, candidates: ResourceMatch[]) {
   const now = new Date();
   const normalizedSkill = normalizeHeroCacheSkill(lessonSkill);
   const cachedRows = await db.heroMatchCache.findMany({
     where: {
       lessonSkill: normalizedSkill,
+      lessonGradeLevel,
+      verifierVersion: HERO_MATCH_VERIFIER_VERSION,
       candidateUrl: { in: candidates.map((candidate) => candidate.url) },
       expiresAt: { gt: now },
     },
@@ -502,6 +508,7 @@ function parseHeroVerifierResult(content: string, candidateCount: number): { bes
 async function writeHeroMatchCache(
   lessonSkill: string,
   lessonStandardCode: string,
+  lessonGradeLevel: number,
   candidates: ResourceMatch[],
   result: { bestIndex: number; confidence: HeroMatchConfidence },
 ) {
@@ -510,17 +517,28 @@ async function writeHeroMatchCache(
   await Promise.all(
     candidates.map((candidate, index) =>
       db.heroMatchCache.upsert({
-        where: { lessonSkill_candidateUrl: { lessonSkill: normalizedSkill, candidateUrl: candidate.url } },
+        where: {
+          lessonSkill_lessonGradeLevel_candidateUrl_verifierVersion: {
+            lessonSkill: normalizedSkill,
+            lessonGradeLevel,
+            candidateUrl: candidate.url,
+            verifierVersion: HERO_MATCH_VERIFIER_VERSION,
+          },
+        },
         create: {
           lessonSkill: normalizedSkill,
+          lessonGradeLevel,
           lessonStandardCode,
           candidateUrl: candidate.url,
+          verifierVersion: HERO_MATCH_VERIFIER_VERSION,
           matches: index === result.bestIndex && result.confidence !== "low",
           confidence: index === result.bestIndex ? result.confidence : "low",
           expiresAt,
         },
         update: {
+          lessonGradeLevel,
           lessonStandardCode,
+          verifierVersion: HERO_MATCH_VERIFIER_VERSION,
           matches: index === result.bestIndex && result.confidence !== "low",
           confidence: index === result.bestIndex ? result.confidence : "low",
           expiresAt,

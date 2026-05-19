@@ -4,340 +4,344 @@
     "standardCode": "CC.1.2.3.A",
     "standardLabel": "Main idea and supporting details",
     "skill": "Main Idea and Supporting Details",
-    "title": "Understanding Main Idea and Supporting Details",
+    "title": "Understanding Main Ideas and Supporting Details",
     "whyAssigned": "This mini-lesson targets Main Idea and Supporting Details because the diagnostic showed a standards-aligned practice gap.",
-    "hook": "Imagine you're a detective trying to solve a mystery. The main idea is like the big clue that helps you understand the whole story. Supporting details are the smaller clues that help you see the big picture. Today, we'll become detectives and learn how to find these clues in what we read!",
-    "explanation": "The main idea is the central point or the most important thing the author wants you to know. Think of it as the heart of the story or article. Supporting details are pieces of information that explain or enhance the main idea. They can be facts, examples, or descriptions.\n\nTo find the main idea, ask: What is the text mostly about? Look for repeated ideas or themes. Sometimes, the main idea is stated directly, often at the beginning or end of a paragraph. Other times, you infer it by looking at the details.\n\nSupporting details are like building blocks that hold up the main idea. They answer questions like who, what, when, where, why, and how. For example, if you're reading about how plants grow, the main idea might be that plants need sunlight, water, and soil. Supporting details would include facts about how sunlight helps plants make food, how water is absorbed by roots, and how soil provides nutrients. By identifying these details, you can see how they connect to the main idea. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step.",
-    "workedExample": "Let's look at an example. Suppose we have a short paragraph about a dog named Max who loves to play fetch. The paragraph describes how Max runs fast, catches the ball, and brings it back to his owner.\n\nThe main idea here is that Max loves to play fetch. How do we know? The paragraph focuses on Max's actions related to playing fetch. The supporting details are the descriptions of Max running fast, catching the ball, and bringing it back. These details support the main idea by showing how much Max enjoys the game.\n\nWhen you read, try to identify the main idea first. Then, look for supporting details that explain or illustrate that idea. This will help you understand the text better and remember important information. This matters because the correct answer is not just a matching word or phrase. It is the choice that fits the whole question and can be defended with a specific detail. The reasoning should explain both what the evidence says and how it supports the answer.",
+    "hook": "Imagine you're a detective trying to solve a mystery. Each clue you find helps you understand the big picture. In reading, finding the main idea is like solving a mystery. The main idea is the big picture, and the details are the clues that help you understand it. Today, we'll learn how to find these clues and piece them together to uncover the main idea of a text.",
+    "explanation": "The main idea of a text is the central point or the most important message the author wants to convey. Supporting details are pieces of information that explain or enhance the main idea. To find the main idea, look at the title and headings, read the first and last sentences of paragraphs, and ask yourself: What is the author mostly talking about? Supporting details can be facts, examples, or descriptions that help explain the main idea. Practice finding the main idea and supporting details by summarizing paragraphs in your own words. This will help you focus on the most important information and see how the details connect to the main idea. Remember, the main idea is like the heart of the text, and the supporting details are the veins that carry the information to help it beat. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. This matters because the correct answer is not just a matching word or phrase. It is the choice that fits the whole question and can be defended with a specific detail. The reasoning should explain both what the evidence says and how it supports the answer. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step.",
+    "workedExample": "Let's look at a short passage: \"Dogs are popular pets because they are loyal and friendly. They can be trained to do tricks and follow commands. Many people enjoy taking their dogs for walks and playing with them in the park.\" The main idea here is that dogs are popular pets. The supporting details include reasons why they are popular: they are loyal, friendly, can be trained, and people enjoy activities with them. Notice how the details support the main idea by explaining why dogs are popular. When you identify the main idea, think about what the author wants you to understand most. Then, look for details that explain or give examples of that main idea. This practice will help you become a better reader and understand texts more deeply. This matters because the correct answer is not just a matching word or phrase. It is the choice that fits the whole question and can be defended with a specific detail. The reasoning should explain both what the evidence says and how it supports the answer.",
     "commonErrors": [
-      "Confusing supporting details with the main idea.",
-      "Overlooking the main idea by focusing too much on minor details.",
-      "Misinterpreting details that don't directly support the main idea."
+      "Students may confuse supporting details with the main idea, thinking that a specific detail is the main point.",
+      "Some students might focus on minor details instead of identifying the central message of the text.",
+      "Students might overlook the importance of the title and headings in identifying the main idea."
     ],
     "sentenceFrames": [
       "The main idea of the passage is ____.",
       "A supporting detail that explains the main idea is ____.",
-      "The text is mostly about ____."
+      "The author wants us to understand that ____."
     ],
     "successCriteria": [
       "I can identify the main idea of a passage.",
       "I can find supporting details that explain the main idea.",
-      "I can explain how the details support the main idea."
+      "I can summarize the main idea and supporting details in my own words."
     ],
     "guidedPractice": [
       {
-        "question": "What is the main idea of the passage about the history of bicycles?",
-        "passage": "Bicycles have been around for over 200 years. They started as simple wooden machines and have evolved into the modern bikes we see today. Early bicycles had no pedals, and riders had to push themselves along with their feet. Over time, pedals and chains were added, making bicycles faster and easier to ride. Today, bicycles are used for transportation, exercise, and fun all around the world. They are an important part of many people's lives and continue to change with new technology and designs. From wooden frames to high-tech materials, bicycles have come a long way since their invention in the early 1800s. They remain a popular and eco-friendly mode of transportation. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
-        "rightAnswerRationale": "The main idea is that bicycles have evolved over time and are important today. The passage describes the history and development of bicycles, showing their significance.",
-        "coachHint": "Look for what the passage is mostly about. What is the big idea that all the details support?",
+        "question": "What is the main idea of the passage about the garden?",
+        "passage": "In the community garden, people grow vegetables and flowers. They share the work and the harvest. The garden brings people together and helps them learn about plants. It is a place where everyone can enjoy nature and fresh food. The garden is important to the community because it provides fresh produce and a place to connect with others. Many people visit the garden to relax and enjoy the beauty of the plants and flowers. It is a special place for everyone in the neighborhood to gather and share experiences. The community garden is a source of pride for everyone involved, and it continues to grow each year with more plants and participants joining in. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "The main idea is that the community garden is important because it provides fresh produce and a place for people to connect.",
+        "coachHint": "Look for what the passage says about the importance of the garden.",
         "type": "mc",
         "choices": [
-          "The history and evolution of bicycles.",
-          "How to ride a bicycle safely.",
-          "The best materials for making bicycles.",
-          "Famous bicycle races."
+          "The community garden is a place to grow vegetables.",
+          "The community garden is important for fresh produce and connection.",
+          "The community garden is a place to relax.",
+          "The community garden is a source of pride."
         ],
-        "correctAnswer": "The history and evolution of bicycles.",
+        "correctAnswer": "The community garden is important for fresh produce and connection.",
         "distractorRationale": [
           {
-            "choice": "How to ride a bicycle safely.",
-            "whyWrong": "This is a specific detail, not the main idea."
+            "choice": "The community garden is a place to grow vegetables.",
+            "whyWrong": "This is a detail, not the main idea."
           },
           {
-            "choice": "The best materials for making bicycles.",
-            "whyWrong": "This is a detail mentioned but not the main focus."
+            "choice": "The community garden is a place to relax.",
+            "whyWrong": "This is a supporting detail, not the main idea."
           },
           {
-            "choice": "Famous bicycle races.",
-            "whyWrong": "This is not discussed in the passage."
+            "choice": "The community garden is a source of pride.",
+            "whyWrong": "This is a supporting detail, not the main idea."
           }
         ]
       },
       {
-        "question": "Which detail supports the main idea that bicycles have changed over time?",
+        "question": "Which detail supports the main idea that the community garden is important?",
         "passage": null,
-        "rightAnswerRationale": "The detail about adding pedals and chains shows how bicycles have evolved.",
-        "coachHint": "Think about how bicycles have changed from the past to now.",
-        "type": "multi-select",
-        "choices": [
-          "Bicycles started as wooden machines.",
-          "Pedals and chains were added to bicycles.",
-          "Bicycles are used for exercise.",
-          "Bicycles are eco-friendly."
+        "rightAnswerRationale": "The detail about providing fresh produce supports the main idea of the garden's importance.",
+        "coachHint": "Think about what makes the garden important to the community.",
+        "type": "inline-dropdown",
+        "sentence": "The community garden is important because it [BLANK] fresh produce and a place to connect.",
+        "dropdownOptions": [
+          "provides",
+          "destroys",
+          "ignores"
         ],
-        "correctAnswers": [
-          "Bicycles started as wooden machines.",
-          "Pedals and chains were added to bicycles."
+        "correctOption": "provides",
+        "distractorRationale": [
+          {
+            "option": "destroys",
+            "whyWrong": "This is the opposite of what the garden does."
+          },
+          {
+            "option": "ignores",
+            "whyWrong": "This does not relate to the garden's purpose."
+          }
+        ]
+      },
+      {
+        "question": "Select the phrase that supports the main idea of the passage.",
+        "passage": "In the community garden, people grow vegetables and flowers. They share the work and the harvest. The garden brings people together and helps them learn about plants. It is a place where everyone can enjoy nature and fresh food. The garden is important to the community because it provides fresh produce and a place to connect with others. Many people visit the garden to relax and enjoy the beauty of the plants and flowers. It is a special place for everyone in the neighborhood to gather and share experiences. The community garden is a source of pride for everyone involved, and it continues to grow each year with more plants and participants joining in. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "The phrase 'provides fresh produce and a place to connect' supports the main idea of the garden's importance.",
+        "coachHint": "Look for a phrase that explains why the garden is important.",
+        "type": "hot-text-phrase",
+        "selectablePhrases": [
+          "grow vegetables and flowers",
+          "share the work and the harvest",
+          "provides fresh produce and a place to connect",
+          "relax and enjoy the beauty"
+        ],
+        "correctPhrases": [
+          "provides fresh produce and a place to connect"
         ],
         "minSelect": 1,
-        "maxSelect": 2,
-        "partialCreditRule": "per-correct"
-      },
-      {
-        "question": "Match each statement with the correct category.",
-        "passage": null,
-        "rightAnswerRationale": "The statements about wooden machines and pedals show changes over time, while the statement about eco-friendliness shows current importance.",
-        "coachHint": "Think about whether the statement is about the past or present.",
-        "type": "drag-drop-table",
-        "draggableItems": [
-          "Bicycles started as wooden machines.",
-          "Pedals and chains were added.",
-          "Bicycles are eco-friendly."
-        ],
-        "columns": [
-          "Changes Over Time",
-          "Current Importance"
-        ],
-        "correctMapping": [
-          {
-            "item": "Bicycles started as wooden machines.",
-            "column": "Changes Over Time"
-          },
-          {
-            "item": "Pedals and chains were added.",
-            "column": "Changes Over Time"
-          },
-          {
-            "item": "Bicycles are eco-friendly.",
-            "column": "Current Importance"
-          }
-        ]
+        "maxSelect": 1
       }
     ],
     "independentPractice": [
       {
-        "question": "What is the main idea of the passage about honeybees?",
-        "passage": "Honeybees are essential to our environment. They pollinate flowers, which helps plants grow. Without bees, many plants would not be able to produce fruit or seeds. Honeybees also produce honey, which is a sweet treat for humans and animals. Beekeepers raise honeybees to help with pollination and to collect honey. Protecting honeybees is important because they play a crucial role in our ecosystem. Efforts to save bees include planting bee-friendly flowers and reducing pesticide use. By supporting honeybees, we help maintain a healthy environment for all living things. Honeybees are more than just insects; they are vital to our world’s health and food supply. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
-        "rightAnswerRationale": "The main idea is that honeybees are essential to the environment and our food supply.",
-        "coachHint": "Look for what the passage is mostly about. What is the big idea that all the details support?",
+        "question": "What is the main idea of the passage about the library?",
+        "passage": "The local library is a hub of activity in the community. It offers books, computers, and classes for all ages. People come to the library to read, learn, and meet others. The library hosts events and workshops that bring people together. It is a place where everyone can find something of interest. The library is important because it provides resources and a space for community engagement. Many people visit regularly to take advantage of the services offered. The library is a vital part of the community, offering opportunities for learning and connection for everyone involved. It continues to grow and adapt to meet the needs of its visitors, making it a beloved institution. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "The main idea is that the library is important because it provides resources and a space for community engagement.",
+        "coachHint": "Consider what the passage emphasizes about the library's role.",
         "type": "mc",
         "choices": [
-          "Honeybees are essential to the environment.",
-          "How honey is made by bees.",
-          "The life cycle of a honeybee.",
-          "Different types of bees."
+          "The library offers books and computers.",
+          "The library is important for resources and community engagement.",
+          "The library hosts events and workshops.",
+          "The library is a place to meet others."
         ],
-        "correctAnswer": "Honeybees are essential to the environment.",
+        "correctAnswer": "The library is important for resources and community engagement.",
         "distractorRationale": [
           {
-            "choice": "How honey is made by bees.",
+            "choice": "The library offers books and computers.",
             "whyWrong": "This is a detail, not the main idea."
           },
           {
-            "choice": "The life cycle of a honeybee.",
-            "whyWrong": "This is not the focus of the passage."
+            "choice": "The library hosts events and workshops.",
+            "whyWrong": "This is a supporting detail, not the main idea."
           },
           {
-            "choice": "Different types of bees.",
-            "whyWrong": "This is not discussed in the passage."
+            "choice": "The library is a place to meet others.",
+            "whyWrong": "This is a supporting detail, not the main idea."
           }
         ]
       },
       {
-        "question": "Which detail supports the main idea that honeybees are important to the environment?",
+        "question": "Which detail supports the main idea that the library is a vital part of the community?",
         "passage": null,
-        "rightAnswerRationale": "The detail about pollination shows the importance of honeybees to plant growth.",
-        "coachHint": "Think about what honeybees do that helps the environment.",
-        "type": "multi-select",
-        "choices": [
-          "Honeybees pollinate flowers.",
-          "Honeybees produce honey.",
-          "Beekeepers raise honeybees.",
-          "Honeybees are insects."
+        "rightAnswerRationale": "The detail about providing resources supports the main idea of the library's importance.",
+        "coachHint": "Think about what makes the library important to the community.",
+        "type": "inline-dropdown",
+        "sentence": "The library is vital because it [BLANK] resources and a space for engagement.",
+        "dropdownOptions": [
+          "provides",
+          "removes",
+          "ignores"
         ],
-        "correctAnswers": [
-          "Honeybees pollinate flowers.",
-          "Honeybees produce honey."
-        ],
-        "minSelect": 1,
-        "maxSelect": 2,
-        "partialCreditRule": "per-correct"
+        "correctOption": "provides",
+        "distractorRationale": [
+          {
+            "option": "removes",
+            "whyWrong": "This is the opposite of what the library does."
+          },
+          {
+            "option": "ignores",
+            "whyWrong": "This does not relate to the library's purpose."
+          }
+        ]
       },
       {
-        "question": "Match each statement with the correct category.",
-        "passage": null,
-        "rightAnswerRationale": "The statements about pollination and honey production show importance, while the statement about being insects is a fact.",
-        "coachHint": "Think about whether the statement shows importance or is just a fact.",
+        "question": "Match the supporting details to the main idea of the passage.",
+        "passage": "The local library is a hub of activity in the community. It offers books, computers, and classes for all ages. People come to the library to read, learn, and meet others. The library hosts events and workshops that bring people together. It is a place where everyone can find something of interest. The library is important because it provides resources and a space for community engagement. Many people visit regularly to take advantage of the services offered. The library is a vital part of the community, offering opportunities for learning and connection for everyone involved. It continues to grow and adapt to meet the needs of its visitors, making it a beloved institution. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "The details about offering books and hosting events support the main idea of community engagement.",
+        "coachHint": "Look for details that explain why the library is important.",
         "type": "drag-drop-table",
         "draggableItems": [
-          "Honeybees pollinate flowers.",
-          "Honeybees produce honey.",
-          "Honeybees are insects."
+          "Offering books and computers",
+          "Hosting events and workshops",
+          "Providing a space for learning"
         ],
         "columns": [
-          "Importance",
-          "Fact"
+          "Supports the main idea",
+          "Does not support the main idea"
         ],
         "correctMapping": [
           {
-            "item": "Honeybees pollinate flowers.",
-            "column": "Importance"
+            "item": "Offering books and computers",
+            "column": "Supports the main idea"
           },
           {
-            "item": "Honeybees produce honey.",
-            "column": "Importance"
+            "item": "Hosting events and workshops",
+            "column": "Supports the main idea"
           },
           {
-            "item": "Honeybees are insects.",
-            "column": "Fact"
+            "item": "Providing a space for learning",
+            "column": "Supports the main idea"
           }
         ]
       },
       {
-        "question": "What is the main idea of the passage about rainforests?",
-        "passage": "Rainforests are vital to the health of our planet. They produce oxygen, which we need to breathe. Rainforests are home to a vast number of plants and animals, many of which are not found anywhere else. These forests help regulate the Earth's climate by absorbing carbon dioxide. Unfortunately, rainforests are being destroyed at an alarming rate due to logging and farming. Protecting rainforests is crucial for maintaining biodiversity and ensuring a healthy environment for future generations. Efforts to save rainforests include creating protected areas and promoting sustainable practices. Rainforests are more than just beautiful places; they are essential to our planet's health and survival. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
-        "rightAnswerRationale": "The main idea is that rainforests are essential to the planet's health and survival.",
-        "coachHint": "Look for what the passage is mostly about. What is the big idea that all the details support?",
+        "question": "What is the main idea of the passage about the park?",
+        "passage": "The city park is a favorite spot for families and friends. It has playgrounds, picnic areas, and walking trails. People come to the park to relax, exercise, and enjoy nature. The park hosts community events and festivals throughout the year. It is a place where everyone can find something fun to do. The park is important because it offers a space for recreation and community gatherings. Many people visit the park regularly to take advantage of its amenities. The park is a cherished part of the community, providing a place for enjoyment and connection for all ages. It continues to be a popular destination for both residents and visitors alike. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "The main idea is that the park is important because it offers a space for recreation and community gatherings.",
+        "coachHint": "Consider what the passage emphasizes about the park's role.",
         "type": "mc",
         "choices": [
-          "Rainforests are essential to the planet's health.",
-          "How rainforests produce oxygen.",
-          "The animals that live in rainforests.",
-          "The dangers of logging."
+          "The park has playgrounds and picnic areas.",
+          "The park is important for recreation and community gatherings.",
+          "The park hosts community events and festivals.",
+          "The park is a place to relax."
         ],
-        "correctAnswer": "Rainforests are essential to the planet's health.",
+        "correctAnswer": "The park is important for recreation and community gatherings.",
         "distractorRationale": [
           {
-            "choice": "How rainforests produce oxygen.",
+            "choice": "The park has playgrounds and picnic areas.",
             "whyWrong": "This is a detail, not the main idea."
           },
           {
-            "choice": "The animals that live in rainforests.",
-            "whyWrong": "This is not the focus of the passage."
+            "choice": "The park hosts community events and festivals.",
+            "whyWrong": "This is a supporting detail, not the main idea."
           },
           {
-            "choice": "The dangers of logging.",
-            "whyWrong": "This is a detail, not the main idea."
+            "choice": "The park is a place to relax.",
+            "whyWrong": "This is a supporting detail, not the main idea."
           }
         ]
       }
     ],
     "exitTicket": [
       {
-        "question": "What is the main idea of the passage about recycling?",
-        "passage": "Recycling is an important way to help the environment. By recycling, we reduce the amount of waste that goes into landfills. This helps conserve natural resources and reduces pollution. Recycling also saves energy because it takes less energy to make products from recycled materials than from new materials. Many communities have recycling programs that make it easy for people to recycle paper, plastic, glass, and metal. By participating in these programs, we can all do our part to protect the planet. Recycling is more than just a good habit; it's a crucial step in preserving our environment for future generations. By understanding the importance of recycling, we can make a positive impact on the world around us. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
-        "rightAnswerRationale": "The main idea is that recycling is important for helping the environment.",
-        "coachHint": "Look for what the passage is mostly about. What is the big idea that all the details support?",
+        "question": "What is the main idea of the passage about the beach?",
+        "passage": "The beach is a popular destination for tourists and locals. It offers sandy shores, clear waters, and beautiful sunsets. People visit the beach to swim, sunbathe, and build sandcastles. The beach is a place where families and friends can enjoy time together. It is important because it provides a space for relaxation and fun activities. Many people come to the beach to escape the hustle and bustle of daily life. The beach is a cherished spot for creating memories and enjoying nature's beauty. It continues to attract visitors with its natural charm and recreational opportunities, making it a beloved location for all ages to enjoy and explore together. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "The main idea is that the beach is important because it provides a space for relaxation and fun activities.",
+        "coachHint": "Consider what the passage emphasizes about the beach's role.",
         "type": "mc",
         "choices": [
-          "Recycling is important for the environment.",
-          "How to recycle different materials.",
-          "The history of recycling.",
-          "The benefits of recycling."
+          "The beach offers sandy shores and clear waters.",
+          "The beach is important for relaxation and fun activities.",
+          "The beach is a place to swim and sunbathe.",
+          "The beach is a spot for creating memories."
         ],
-        "correctAnswer": "Recycling is important for the environment.",
+        "correctAnswer": "The beach is important for relaxation and fun activities.",
         "distractorRationale": [
           {
-            "choice": "How to recycle different materials.",
+            "choice": "The beach offers sandy shores and clear waters.",
             "whyWrong": "This is a detail, not the main idea."
           },
           {
-            "choice": "The history of recycling.",
-            "whyWrong": "This is not discussed in the passage."
+            "choice": "The beach is a place to swim and sunbathe.",
+            "whyWrong": "This is a supporting detail, not the main idea."
           },
           {
-            "choice": "The benefits of recycling.",
-            "whyWrong": "This is a detail, not the main idea."
+            "choice": "The beach is a spot for creating memories.",
+            "whyWrong": "This is a supporting detail, not the main idea."
           }
         ]
       },
       {
-        "question": "Which detail supports the main idea that recycling helps the environment?",
+        "question": "Which detail supports the main idea that the beach is a cherished spot?",
         "passage": null,
-        "rightAnswerRationale": "The detail about reducing waste in landfills shows how recycling helps the environment.",
-        "coachHint": "Think about what recycling does to help the environment.",
-        "type": "multi-select",
-        "choices": [
-          "Recycling reduces waste in landfills.",
-          "Recycling saves energy.",
-          "Recycling is a good habit.",
-          "Recycling is easy."
+        "rightAnswerRationale": "The detail about providing a space for relaxation supports the main idea of the beach's importance.",
+        "coachHint": "Think about what makes the beach important to visitors.",
+        "type": "inline-dropdown",
+        "sentence": "The beach is cherished because it [BLANK] a space for relaxation and fun.",
+        "dropdownOptions": [
+          "provides",
+          "destroys",
+          "ignores"
         ],
-        "correctAnswers": [
-          "Recycling reduces waste in landfills.",
-          "Recycling saves energy."
-        ],
-        "minSelect": 1,
-        "maxSelect": 2,
-        "partialCreditRule": "per-correct"
+        "correctOption": "provides",
+        "distractorRationale": [
+          {
+            "option": "destroys",
+            "whyWrong": "This is the opposite of what the beach does."
+          },
+          {
+            "option": "ignores",
+            "whyWrong": "This does not relate to the beach's purpose."
+          }
+        ]
       }
     ],
     "masteryCheck": [
       {
-        "question": "What is the main idea of the passage about the water cycle?",
-        "passage": "The water cycle is a continuous process that moves water around the Earth. It starts with evaporation, where water from oceans, lakes, and rivers turns into vapor and rises into the air. This vapor cools and forms clouds through condensation. When the clouds become heavy, they release water as precipitation, such as rain or snow. This water returns to the Earth's surface, where it collects in bodies of water and the cycle begins again. The water cycle is essential for providing fresh water to plants, animals, and humans. It also helps regulate the Earth's climate by distributing heat and moisture around the planet. Understanding the water cycle is important for managing water resources and protecting the environment. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
-        "rightAnswerRationale": "The main idea is that the water cycle is a continuous process essential for life on Earth.",
-        "coachHint": "Look for what the passage is mostly about. What is the big idea that all the details support?",
+        "question": "What is the main idea of the passage about the zoo?",
+        "passage": "The zoo is a place where people can see animals from around the world. It offers educational programs and fun activities for visitors. People come to the zoo to learn about wildlife and conservation. The zoo hosts special events and exhibits that attract families and school groups. It is important because it provides a space for learning and enjoyment. Many people visit the zoo to experience the wonders of the animal kingdom. The zoo is a vital part of the community, offering opportunities for education and entertainment. It continues to inspire visitors with its diverse collection of animals and engaging programs, making it a beloved destination for all ages. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "The main idea is that the zoo is important because it provides a space for learning and enjoyment.",
+        "coachHint": "Consider what the passage emphasizes about the zoo's role.",
         "type": "mc",
         "choices": [
-          "The water cycle is essential for life on Earth.",
-          "How clouds form in the water cycle.",
-          "The different types of precipitation.",
-          "The importance of evaporation."
+          "The zoo offers educational programs and activities.",
+          "The zoo is important for learning and enjoyment.",
+          "The zoo hosts special events and exhibits.",
+          "The zoo is a place to see animals."
         ],
-        "correctAnswer": "The water cycle is essential for life on Earth.",
+        "correctAnswer": "The zoo is important for learning and enjoyment.",
         "distractorRationale": [
           {
-            "choice": "How clouds form in the water cycle.",
+            "choice": "The zoo offers educational programs and activities.",
             "whyWrong": "This is a detail, not the main idea."
           },
           {
-            "choice": "The different types of precipitation.",
-            "whyWrong": "This is not the focus of the passage."
+            "choice": "The zoo hosts special events and exhibits.",
+            "whyWrong": "This is a supporting detail, not the main idea."
           },
           {
-            "choice": "The importance of evaporation.",
-            "whyWrong": "This is a detail, not the main idea."
+            "choice": "The zoo is a place to see animals.",
+            "whyWrong": "This is a supporting detail, not the main idea."
           }
         ]
       },
       {
-        "question": "Which detail supports the main idea that the water cycle is essential for life?",
+        "question": "Which detail supports the main idea that the zoo is a vital part of the community?",
         "passage": null,
-        "rightAnswerRationale": "The detail about providing fresh water shows the importance of the water cycle.",
-        "coachHint": "Think about what the water cycle does to support life.",
-        "type": "multi-select",
-        "choices": [
-          "The water cycle provides fresh water.",
-          "The water cycle helps regulate climate.",
-          "The water cycle involves evaporation.",
-          "The water cycle is continuous."
+        "rightAnswerRationale": "The detail about providing opportunities for education supports the main idea of the zoo's importance.",
+        "coachHint": "Think about what makes the zoo important to the community.",
+        "type": "inline-dropdown",
+        "sentence": "The zoo is vital because it [BLANK] opportunities for education and entertainment.",
+        "dropdownOptions": [
+          "provides",
+          "removes",
+          "ignores"
         ],
-        "correctAnswers": [
-          "The water cycle provides fresh water.",
-          "The water cycle helps regulate climate."
-        ],
-        "minSelect": 1,
-        "maxSelect": 2,
-        "partialCreditRule": "per-correct"
+        "correctOption": "provides",
+        "distractorRationale": [
+          {
+            "option": "removes",
+            "whyWrong": "This is the opposite of what the zoo does."
+          },
+          {
+            "option": "ignores",
+            "whyWrong": "This does not relate to the zoo's purpose."
+          }
+        ]
       },
       {
-        "question": "Match each statement with the correct category.",
-        "passage": null,
-        "rightAnswerRationale": "The statements about providing fresh water and regulating climate show importance, while the statement about evaporation is a fact.",
-        "coachHint": "Think about whether the statement shows importance or is just a fact.",
+        "question": "Match the supporting details to the main idea of the passage.",
+        "passage": "The zoo is a place where people can see animals from around the world. It offers educational programs and fun activities for visitors. People come to the zoo to learn about wildlife and conservation. The zoo hosts special events and exhibits that attract families and school groups. It is important because it provides a space for learning and enjoyment. Many people visit the zoo to experience the wonders of the animal kingdom. The zoo is a vital part of the community, offering opportunities for education and entertainment. It continues to inspire visitors with its diverse collection of animals and engaging programs, making it a beloved destination for all ages. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "The details about educational programs and special events support the main idea of learning and enjoyment.",
+        "coachHint": "Look for details that explain why the zoo is important.",
         "type": "drag-drop-table",
         "draggableItems": [
-          "The water cycle provides fresh water.",
-          "The water cycle helps regulate climate.",
-          "The water cycle involves evaporation."
+          "Educational programs and activities",
+          "Special events and exhibits",
+          "Opportunities for learning"
         ],
         "columns": [
-          "Importance",
-          "Fact"
+          "Supports the main idea",
+          "Does not support the main idea"
         ],
         "correctMapping": [
           {
-            "item": "The water cycle provides fresh water.",
-            "column": "Importance"
+            "item": "Educational programs and activities",
+            "column": "Supports the main idea"
           },
           {
-            "item": "The water cycle helps regulate climate.",
-            "column": "Importance"
+            "item": "Special events and exhibits",
+            "column": "Supports the main idea"
           },
           {
-            "item": "The water cycle involves evaporation.",
-            "column": "Fact"
+            "item": "Opportunities for learning",
+            "column": "Supports the main idea"
           }
         ]
       }
@@ -357,7 +361,8 @@
       "g5-tei-6"
     ],
     "teiTypesUsed": [
-      "multi-select",
+      "inline-dropdown",
+      "hot-text-phrase",
       "drag-drop-table"
     ],
     "generatorVersion": "V2",
@@ -373,22 +378,22 @@
       {
         "section": "explanation",
         "issue": "Repetitive content and lack of clarity.",
-        "suggestion": "Remove repetitive sentences and clarify the explanation of how to identify the main idea and supporting details."
+        "suggestion": "Streamline the explanation to avoid repetition and enhance clarity. Focus on defining the main idea and supporting details without repeating the same points multiple times."
       },
       {
         "section": "guidedPractice[0]",
         "issue": "Repetitive rationale text.",
-        "suggestion": "Remove duplicate sentences in the rationale to improve clarity and focus."
+        "suggestion": "Remove the repeated sentence about using details to check the answer. Ensure each rationale is unique and specific to the question."
       },
       {
         "section": "independentPractice[0]",
         "issue": "Repetitive rationale text.",
-        "suggestion": "Remove duplicate sentences in the rationale to improve clarity and focus."
+        "suggestion": "Remove the repeated sentence about using details to check the answer. Ensure each rationale is unique and specific to the question."
       },
       {
-        "section": "exitTicket[0]",
+        "section": "masteryCheck[0]",
         "issue": "Repetitive rationale text.",
-        "suggestion": "Remove duplicate sentences in the rationale to improve clarity and focus."
+        "suggestion": "Remove the repeated sentence about using details to check the answer. Ensure each rationale is unique and specific to the question."
       }
     ]
   },

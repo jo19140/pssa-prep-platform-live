@@ -1,17 +1,18 @@
 {
-  "generatedAt": "2026-05-19T16:36:13.343Z",
+  "generatedAt": "2026-05-19T17:01:40.752Z",
   "lessonCount": 2,
   "averageQuality": 92,
   "teiTypes": [
+    "drag-drop-order",
     "drag-drop-table",
+    "hot-text-phrase",
     "hot-text-word",
-    "inline-dropdown",
-    "multi-select"
+    "inline-dropdown"
   ],
   "duplicatePairs": [],
   "lessons": [
     {
-      "title": "Understanding Main Idea and Supporting Details",
+      "title": "Understanding Main Ideas and Supporting Details",
       "gradeLevel": 3,
       "standardCode": "CC.1.2.3.A",
       "skill": "Main Idea and Supporting Details",
@@ -20,7 +21,8 @@
         "Critic requested revision after 3 iterations."
       ],
       "teiTypesUsed": [
-        "multi-select",
+        "inline-dropdown",
+        "hot-text-phrase",
         "drag-drop-table"
       ],
       "heroResourceLinkId": "cmp4fw1o3001cg3sa2vzq0goy",
@@ -34,17 +36,16 @@
       "standardCode": "CC.1.4.3.F",
       "skill": "Verb Tense",
       "qualityScore": 92,
-      "qualityIssues": [
-        "Critic requested revision after 3 iterations."
-      ],
+      "qualityIssues": [],
       "teiTypesUsed": [
         "inline-dropdown",
-        "hot-text-word"
+        "hot-text-word",
+        "drag-drop-order"
       ],
-      "heroResourceLinkId": "cmp5ki6le00106hernjvvevoi",
-      "resourceTitle": "Time Travel with Tenses: How To Identify and Use Verb Tenses",
-      "resourceUrl": "https://www.youtube.com/watch?v=4iKwSYA3YeQ",
-      "resourceProvider": "Miacademy & MiaPrep Learning Channel"
+      "heroResourceLinkId": null,
+      "resourceTitle": null,
+      "resourceUrl": null,
+      "resourceProvider": null
     }
   ]
 }

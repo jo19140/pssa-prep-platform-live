@@ -686,15 +686,17 @@ model ResourceLink {
 model HeroMatchCache {
   id                 String   @id @default(cuid())
   lessonSkill        String
+  lessonGradeLevel   Int      @default(0)
   lessonStandardCode String?
   candidateUrl       String
+  verifierVersion    String   @default("skill_only_v1")
   matches            Boolean
   confidence         String?
   createdAt          DateTime @default(now())
   updatedAt          DateTime @updatedAt
   expiresAt          DateTime
 
-  @@unique([lessonSkill, candidateUrl])
+  @@unique([lessonSkill, lessonGradeLevel, candidateUrl, verifierVersion])
   @@index([expiresAt])
 }
 
