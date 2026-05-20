@@ -1,0 +1,400 @@
+{
+  "lesson": {
+    "hook": "Have you ever wondered why some stories keep you hooked from start to finish while others lose your interest? The secret often lies in how the author organizes the text. Understanding text structure can help you see the big picture and appreciate the author's craft. Let's dive into how authors use structure to guide readers through their ideas.",
+    "skill": "Text Structure and Author Organization",
+    "title": "Understanding Text Structure and Author Organization",
+    "exitTicket": [
+      {
+        "type": "evidence-mapping",
+        "claims": [
+          "Pollution harms marine life.",
+          "Plastic waste endangers sea creatures."
+        ],
+        "passage": "Pollution poses a significant threat to marine life. Chemicals from industrial waste and agricultural runoff contaminate oceans, harming fish and coral reefs. Plastic waste, such as bottles and bags, endangers sea creatures that mistake it for food. Oil spills coat marine animals in toxic substances, affecting their ability to survive. The cumulative effects of pollution disrupt marine ecosystems, leading to a decline in biodiversity. To protect marine life, it is crucial to reduce pollution and promote sustainable practices. By addressing these issues, we can preserve the health of our oceans and the diverse life they support. The impact of pollution is severe, but with concerted efforts, it can be mitigated. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "question": "How does the author organize the passage about the impact of pollution on marine life?",
+        "coachHint": "Identify the relationship between pollution and its effects on marine ecosystems.",
+        "evidenceItems": [
+          "Chemicals from industrial waste contaminate oceans.",
+          "Plastic waste endangers sea creatures.",
+          "Oil spills coat marine animals in toxic substances.",
+          "The cumulative effects of pollution disrupt marine ecosystems."
+        ],
+        "correctMapping": [
+          {
+            "claim": "Pollution harms marine life.",
+            "evidenceItems": [
+              "Chemicals from industrial waste contaminate oceans.",
+              "Oil spills coat marine animals in toxic substances."
+            ]
+          },
+          {
+            "claim": "Plastic waste endangers sea creatures.",
+            "evidenceItems": [
+              "Plastic waste endangers sea creatures."
+            ]
+          }
+        ],
+        "rightAnswerRationale": "The passage uses a cause and effect structure to explain how pollution affects marine life."
+      },
+      {
+        "type": "hot-text-phrase",
+        "passage": "Exercise is crucial for maintaining a healthy lifestyle. It helps control weight, reduces the risk of chronic diseases, and improves mental health. Regular physical activity, such as walking or cycling, boosts cardiovascular health and strengthens muscles. Exercise also releases endorphins, which enhance mood and reduce stress. By incorporating exercise into daily routines, individuals can enjoy a healthier and happier life. The benefits of exercise are numerous and well-documented, making it an essential component of overall well-being. Whether it's a brisk walk or a gym session, staying active is key to a fulfilling life. The importance of exercise cannot be overstated, as it is vital for physical and mental health. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "question": "Select the phrases that help you understand the author's purpose in the passage about the importance of exercise.",
+        "coachHint": "Look for phrases that stress the necessity of exercise.",
+        "maxSelect": 2,
+        "minSelect": 2,
+        "correctPhrases": [
+          "Exercise is crucial for maintaining a healthy lifestyle.",
+          "The importance of exercise cannot be overstated."
+        ],
+        "selectablePhrases": [
+          "Exercise is crucial for maintaining a healthy lifestyle.",
+          "Regular physical activity boosts cardiovascular health.",
+          "Exercise releases endorphins, which enhance mood.",
+          "The importance of exercise cannot be overstated."
+        ],
+        "rightAnswerRationale": "The phrases 'Exercise is crucial for maintaining a healthy lifestyle' and 'The importance of exercise cannot be overstated' emphasize the author's purpose to highlight the significance of exercise."
+      }
+    ],
+    "gradeLevel": 6,
+    "explanation": "Text structure refers to how information is organized in a passage. Authors use different structures to achieve various purposes, such as to inform, entertain, or persuade. Common text structures include chronological order, cause and effect, problem and solution, and compare and contrast. Recognizing these structures helps readers understand the author's intent and the main ideas of the text.\n\nChronological order presents events in the sequence they occur, often used in narratives and historical texts. Cause and effect explain why something happens, showing the relationship between events. Problem and solution identify an issue and propose ways to solve it, commonly found in persuasive texts. Compare and contrast highlight similarities and differences between two or more subjects, often used in analytical writing.\n\nAuthors choose a structure based on their purpose and the message they want to convey. For example, a biography might use chronological order to show the progression of a person's life, while a scientific article might use cause and effect to explain a phenomenon.\n\nUnderstanding text structure not only aids comprehension but also enhances critical thinking. By analyzing how ideas are organized, readers can evaluate the effectiveness of the author's argument and the clarity of the information presented. This skill is crucial for academic success and informed decision-making. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step.",
+    "resourceUrl": "https://www.youtube.com/watch?v=S1KQ4-VrUFE",
+    "whyAssigned": "This mini-lesson targets Text Structure and Author Organization because the diagnostic showed a standards-aligned practice gap.",
+    "commonErrors": [
+      "Confusing different text structures, such as mixing up cause and effect with problem and solution.",
+      "Failing to recognize the author's purpose, leading to misunderstandings of the text's main ideas.",
+      "Overlooking transitional words that signal changes in structure, such as 'however,' 'therefore,' or 'similarly.'"
+    ],
+    "masteryCheck": [
+      {
+        "type": "evidence-mapping",
+        "claims": [
+          "Renewable energy is better for the environment.",
+          "Fossil fuels are harmful to the planet."
+        ],
+        "passage": "Renewable energy sources, such as solar and wind power, are becoming increasingly popular. These sources are sustainable and have a lower environmental impact compared to fossil fuels. Solar panels convert sunlight into electricity, while wind turbines use wind to generate power. Unlike coal and oil, which release harmful emissions, renewable energy is clean and abundant. As technology advances, the efficiency and affordability of renewable energy continue to improve, making it a viable alternative for the future. Transitioning to renewable energy can reduce our carbon footprint and combat climate change, ensuring a healthier planet for future generations. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "question": "How does the author structure the passage about the benefits of renewable energy?",
+        "coachHint": "Look for words that signal comparison, such as 'unlike' and 'while.'",
+        "evidenceItems": [
+          "Solar panels convert sunlight into electricity.",
+          "Unlike coal and oil, which release harmful emissions.",
+          "Renewable energy is clean and abundant.",
+          "Transitioning to renewable energy can reduce our carbon footprint."
+        ],
+        "correctMapping": [
+          {
+            "claim": "Renewable energy is better for the environment.",
+            "evidenceItems": [
+              "Renewable energy is clean and abundant.",
+              "Transitioning to renewable energy can reduce our carbon footprint."
+            ]
+          },
+          {
+            "claim": "Fossil fuels are harmful to the planet.",
+            "evidenceItems": [
+              "Unlike coal and oil, which release harmful emissions."
+            ]
+          }
+        ],
+        "rightAnswerRationale": "The passage uses a compare and contrast structure to highlight the differences between renewable energy and fossil fuels."
+      },
+      {
+        "type": "two-part-ebsr",
+        "partA": {
+          "choices": [
+            "Chronological order",
+            "Cause and effect",
+            "Problem and solution",
+            "Compare and contrast"
+          ],
+          "question": "What structure does the author use to organize the passage?",
+          "correctAnswer": "Chronological order"
+        },
+        "partB": {
+          "choices": [
+            "From the invention of the printing press to the rise of the internet, technology has continuously reshaped society.",
+            "The printing press made information accessible, sparking the spread of knowledge.",
+            "The internet revolutionized communication, connecting people globally.",
+            "Smartphones have further transformed daily life, providing instant access to information."
+          ],
+          "question": "Which sentence supports the identified structure?",
+          "correctAnswers": [
+            "From the invention of the printing press to the rise of the internet, technology has continuously reshaped society."
+          ]
+        },
+        "passage": "From the invention of the printing press to the rise of the internet, technology has continuously reshaped society. The printing press made information accessible, sparking the spread of knowledge. The internet revolutionized communication, connecting people globally. Smartphones have further transformed daily life, providing instant access to information. In workplaces, automation and artificial intelligence have increased efficiency. These advancements present new challenges, such as data privacy concerns and the need for digital literacy. Embracing technology allows society to progress and address these challenges effectively. The impact of technology is profound, shaping the future and offering opportunities for growth and innovation. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "question": "What is the main structure used in the passage about the evolution of technology?",
+        "coachHint": "Identify the sequence of events described in the passage.",
+        "scoringRule": "B-counts-only-if-A-correct",
+        "rightAnswerRationale": "The passage uses a chronological order structure to show the progression of technology over time."
+      },
+      {
+        "type": "hot-text-phrase",
+        "passage": "Reading is a fundamental skill that offers numerous benefits. It enhances vocabulary, improves concentration, and stimulates the imagination. Reading fiction allows individuals to explore different worlds and perspectives, fostering empathy and understanding. Non-fiction reading provides knowledge and insights into various subjects, from science to history. Regular reading also strengthens cognitive abilities, such as critical thinking and problem-solving. By making reading a daily habit, individuals can enjoy a richer and more informed life. The advantages of reading are vast, making it an essential activity for personal growth and development. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "question": "Select the phrases that help you understand the author's purpose in the passage about the benefits of reading.",
+        "coachHint": "Look for phrases that stress the importance of reading.",
+        "maxSelect": 2,
+        "minSelect": 2,
+        "correctPhrases": [
+          "Reading is a fundamental skill that offers numerous benefits.",
+          "The advantages of reading are vast."
+        ],
+        "selectablePhrases": [
+          "Reading is a fundamental skill that offers numerous benefits.",
+          "Reading fiction allows individuals to explore different worlds.",
+          "Non-fiction reading provides knowledge and insights.",
+          "The advantages of reading are vast."
+        ],
+        "rightAnswerRationale": "The phrases 'Reading is a fundamental skill that offers numerous benefits' and 'The advantages of reading are vast' emphasize the author's purpose to highlight the significance of reading."
+      }
+    ],
+    "qualityScore": 75,
+    "standardCode": "CC.1.2.6.E",
+    "teiTypesUsed": [
+      "evidence-mapping",
+      "two-part-ebsr",
+      "hot-text-phrase",
+      "hot-text-word"
+    ],
+    "exemplarsUsed": [
+      "g6-p1",
+      "g6-mc-1",
+      "g6-mc-4",
+      "g6-mc-2",
+      "g6-tei-7",
+      "g7-tei-8",
+      "g5-tei-5"
+    ],
+    "qualityIssues": [
+      "Practice passage duplicate risk: current passage 2 is 0.94 similar to current passage 8. Previous passage was too similar to Exercise is crucial for maintaining a healthy lifestyle. It helps control weight, reduces the risk of chronic diseases, . Write on a different topic/scenario.",
+      "Practice passage duplicate risk: current passage 2 is 0.92 similar to existing V2 passage 627. Previous passage was too similar to Exercise is essential for maintaining good health. It helps control weight, improves mood, and boosts energy. Regular ph. Write on a different topic/scenario.",
+      "Practice passage duplicate risk: current passage 3 is 0.93 similar to existing V2 passage 634. Previous passage was too similar to Sleep is vital for maintaining good health and well-being. It allows the body to repair and rejuvenate, supporting physi. Write on a different topic/scenario.",
+      "Practice passage duplicate risk: current passage 4 is 0.93 similar to existing V2 passage 632. Previous passage was too similar to Transportation has evolved dramatically over the centuries. In ancient times, people relied on walking and animal-drawn . Write on a different topic/scenario.",
+      "Practice passage duplicate risk: current passage 5 is 0.95 similar to current passage 10. Previous passage was too similar to Reading is a fundamental skill that offers numerous benefits. It enhances vocabulary, improves concentration, and stimul. Write on a different topic/scenario.",
+      "Practice passage duplicate risk: current passage 8 is 0.93 similar to existing V2 passage 627. Previous passage was too similar to Exercise is essential for maintaining good health. It helps control weight, improves mood, and boosts energy. Regular ph. Write on a different topic/scenario.",
+      "Practice passage duplicate risk: current passage 10 is 0.93 similar to existing V2 passage 630. Previous passage was too similar to Reading is a valuable activity that offers numerous benefits. It enhances vocabulary, improves focus and concentration, . Write on a different topic/scenario.",
+      "guidedPractice[1]: Passage duplicate risk with existing V2 passages. (Replace the passage with a unique scenario that still illustrates the benefits of exercise, ensuring it aligns with the lesson's focus on text structure.)",
+      "independentPractice[0]: Passage duplicate risk with existing V2 passages. (Create a new passage about transportation history that offers a fresh perspective or additional details not covered in existing materials.)",
+      "independentPractice[1]: Passage duplicate risk with existing V2 passages. (Develop a new passage about the benefits of reading, focusing on a unique angle or additional benefits not previously discussed.)",
+      "masteryCheck[1]: Passage duplicate risk with existing V2 passages. (Introduce a new passage about technological evolution that provides a different viewpoint or additional technological advancements.)"
+    ],
+    "resourceTitle": "Analyzing Text Structure - Literary Analysis for Teens!",
+    "standardLabel": "Analyze how structure organizes ideas",
+    "workedExample": "Consider a passage about climate change. The author begins by describing the current state of the environment, followed by the causes of climate change, such as greenhouse gas emissions. Next, the author discusses the effects, including rising temperatures and sea levels. Finally, the passage offers solutions, like reducing carbon footprints and using renewable energy.\n\nIn this example, the author uses a cause and effect structure to explain the issue of climate change. By organizing the text this way, the author helps readers understand the problem's complexity and the importance of taking action. Recognizing this structure allows readers to follow the author's argument logically and see how each part contributes to the overall message. This matters because the correct answer is not just a matching word or phrase. It is the choice that fits the whole question and can be defended with a specific detail. The reasoning should explain both what the evidence says and how it supports the answer.",
+    "guidedPractice": [
+      {
+        "type": "evidence-mapping",
+        "claims": [
+          "Renewable energy is better for the environment.",
+          "Fossil fuels are harmful to the planet."
+        ],
+        "passage": "Renewable energy sources, such as solar and wind power, are becoming increasingly popular. These sources are sustainable and have a lower environmental impact compared to fossil fuels. Solar panels convert sunlight into electricity, while wind turbines use wind to generate power. Unlike coal and oil, which release harmful emissions, renewable energy is clean and abundant. As technology advances, the efficiency and affordability of renewable energy continue to improve, making it a viable alternative for the future. Transitioning to renewable energy can reduce our carbon footprint and combat climate change, ensuring a healthier planet for future generations. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "question": "How does the author organize the information in the passage about renewable energy?",
+        "coachHint": "Look for words that signal comparison, such as 'unlike' and 'while.'",
+        "evidenceItems": [
+          "Solar panels convert sunlight into electricity.",
+          "Unlike coal and oil, which release harmful emissions.",
+          "Renewable energy is clean and abundant.",
+          "Transitioning to renewable energy can reduce our carbon footprint."
+        ],
+        "correctMapping": [
+          {
+            "claim": "Renewable energy is better for the environment.",
+            "evidenceItems": [
+              "Renewable energy is clean and abundant.",
+              "Transitioning to renewable energy can reduce our carbon footprint."
+            ]
+          },
+          {
+            "claim": "Fossil fuels are harmful to the planet.",
+            "evidenceItems": [
+              "Unlike coal and oil, which release harmful emissions."
+            ]
+          }
+        ],
+        "rightAnswerRationale": "The passage uses a compare and contrast structure to highlight the differences between renewable energy and fossil fuels."
+      },
+      {
+        "type": "two-part-ebsr",
+        "partA": {
+          "choices": [
+            "Chronological order",
+            "Cause and effect",
+            "Problem and solution",
+            "Compare and contrast"
+          ],
+          "question": "What structure does the author use to organize the passage?",
+          "correctAnswer": "Cause and effect"
+        },
+        "partB": {
+          "choices": [
+            "Exercise is a journey towards better health.",
+            "Aerobic activities such as cycling and jogging enhance cardiovascular health.",
+            "By making exercise a part of daily life, individuals can lead healthier and more fulfilling lives.",
+            "The numerous benefits of exercise make it an indispensable part of a healthy lifestyle."
+          ],
+          "question": "Which sentence supports the identified structure?",
+          "correctAnswers": [
+            "Aerobic activities such as cycling and jogging enhance cardiovascular health."
+          ]
+        },
+        "passage": "Exercise is a journey towards better health. It not only helps maintain a healthy weight but also reduces the risk of chronic diseases. For instance, aerobic activities such as cycling and jogging enhance cardiovascular health, while strength training boosts muscle and bone density. Moreover, exercise releases endorphins, which improve mood and alleviate stress. By making exercise a part of daily life, individuals can lead healthier and more fulfilling lives. The numerous benefits of exercise make it an indispensable part of a healthy lifestyle. Whether it's a brisk walk or a gym session, staying active is essential for overall well-being. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "question": "What is the main structure used in the passage about the benefits of exercise?",
+        "coachHint": "Identify the relationship between exercise and its effects on health.",
+        "scoringRule": "B-counts-only-if-A-correct",
+        "rightAnswerRationale": "The passage uses a cause and effect structure to explain how exercise leads to various health benefits."
+      },
+      {
+        "type": "hot-text-phrase",
+        "passage": "Sleep is a vital component of overall health and well-being. It allows the body to repair itself and the brain to process information. Lack of sleep can lead to a range of health issues, including weakened immunity, weight gain, and impaired cognitive function. To promote better sleep, individuals should establish a regular sleep schedule, create a restful environment, and limit screen time before bed. By prioritizing sleep, people can improve their physical and mental health, leading to a more productive and fulfilling life. The importance of sleep cannot be overstated, as it is crucial for maintaining a healthy lifestyle and preventing chronic conditions. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "question": "Select the phrases that help you understand the author's purpose in the passage about the importance of sleep.",
+        "coachHint": "Look for phrases that stress the necessity of sleep.",
+        "maxSelect": 2,
+        "minSelect": 2,
+        "correctPhrases": [
+          "Sleep is a vital component of overall health.",
+          "The importance of sleep cannot be overstated."
+        ],
+        "selectablePhrases": [
+          "Sleep is a vital component of overall health.",
+          "Lack of sleep can lead to a range of health issues.",
+          "To promote better sleep, individuals should establish a regular sleep schedule.",
+          "The importance of sleep cannot be overstated."
+        ],
+        "rightAnswerRationale": "The phrases 'Sleep is a vital component of overall health' and 'The importance of sleep cannot be overstated' emphasize the author's purpose to highlight the significance of sleep."
+      }
+    ],
+    "sentenceFrames": [
+      "The author organizes the text by using a [structure] to show...",
+      "In the passage, the structure helps the reader understand...",
+      "The use of [structure] allows the author to..."
+    ],
+    "successCriteria": [
+      "I can identify the text structure used in a passage.",
+      "I can explain how the structure helps organize the author's ideas.",
+      "I can use text structure to better understand the author's purpose."
+    ],
+    "generatorVersion": "V2",
+    "resourceProvider": "Miacademy & MiaPrep Learning Channel",
+    "heroResourceLinkId": "cmpcxj4h7005te859cgoge0k1",
+    "independentPractice": [
+      {
+        "type": "two-part-ebsr",
+        "partA": {
+          "choices": [
+            "Chronological order",
+            "Cause and effect",
+            "Problem and solution",
+            "Compare and contrast"
+          ],
+          "question": "What structure does the author use to organize the passage?",
+          "correctAnswer": "Chronological order"
+        },
+        "partB": {
+          "choices": [
+            "Transportation has evolved significantly over the centuries.",
+            "The invention of the wheel revolutionized land travel.",
+            "The Industrial Revolution introduced steam engines and railways.",
+            "Today, electric vehicles and high-speed trains are paving the way for sustainable transportation."
+          ],
+          "question": "Which sentence supports the identified structure?",
+          "correctAnswers": [
+            "Transportation has evolved significantly over the centuries."
+          ]
+        },
+        "passage": "Transportation has evolved significantly over the centuries. In ancient times, people relied on walking and simple rafts to move across land and water. The invention of the wheel revolutionized land travel, leading to the development of carts and chariots. The Industrial Revolution introduced steam engines and railways, transforming the speed and scale of travel. The 20th century saw the rise of automobiles and airplanes, making long-distance travel accessible to many. Today, electric vehicles and high-speed trains are paving the way for sustainable transportation. Each advancement builds on the last, showcasing humanity's relentless pursuit of progress. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "question": "How does the author structure the passage about the history of transportation?",
+        "coachHint": "Identify the sequence of events described in the passage.",
+        "scoringRule": "B-counts-only-if-A-correct",
+        "rightAnswerRationale": "The passage uses a chronological order structure to show the progression of transportation over time."
+      },
+      {
+        "type": "evidence-mapping",
+        "claims": [
+          "Reading enhances vocabulary and concentration.",
+          "Reading stimulates the imagination and fosters empathy."
+        ],
+        "passage": "Reading is a gateway to endless possibilities. It not only enhances vocabulary and concentration but also stimulates the imagination. Through fiction, readers can explore diverse worlds and perspectives, fostering empathy and understanding. Non-fiction provides insights into various subjects, from science to history, enriching knowledge. Regular reading strengthens cognitive abilities, such as critical thinking and problem-solving. By making reading a daily habit, individuals can lead richer and more informed lives. The advantages of reading are vast, making it an essential activity for personal growth and development. This passage highlights the transformative power of reading and its role in personal enrichment. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "question": "What is the main structure used in the passage about the benefits of reading?",
+        "coachHint": "Identify the relationship between reading and its effects on individuals.",
+        "evidenceItems": [
+          "Reading is a gateway to endless possibilities.",
+          "Through fiction, readers can explore diverse worlds and perspectives.",
+          "Non-fiction provides insights into various subjects.",
+          "Regular reading strengthens cognitive abilities."
+        ],
+        "correctMapping": [
+          {
+            "claim": "Reading enhances vocabulary and concentration.",
+            "evidenceItems": [
+              "Reading is a gateway to endless possibilities."
+            ]
+          },
+          {
+            "claim": "Reading stimulates the imagination and fosters empathy.",
+            "evidenceItems": [
+              "Through fiction, readers can explore diverse worlds and perspectives."
+            ]
+          }
+        ],
+        "rightAnswerRationale": "The passage uses a cause and effect structure to explain how reading leads to various benefits."
+      },
+      {
+        "type": "hot-text-word",
+        "passage": null,
+        "question": "Choose the verb that agrees with the subject in the sentence.",
+        "sentence": "The students [ walk / walks ] to the library after lunch.",
+        "coachHint": "Identify whether the subject is singular or plural.",
+        "bracketPairs": [
+          {
+            "correct": "walk",
+            "options": [
+              "walk",
+              "walks"
+            ]
+          }
+        ],
+        "rightAnswerRationale": "The subject 'students' is plural, so the verb should be 'walk.'"
+      },
+      {
+        "type": "hot-text-phrase",
+        "passage": "Technological advancements have reshaped our daily lives. Innovations in communication, such as smartphones and the internet, have made global connectivity seamless. In workplaces, automation and artificial intelligence have boosted efficiency and productivity. However, these advancements also bring challenges like data privacy concerns and the need for digital literacy. Embracing technology allows society to progress and tackle these challenges effectively. The impact of technology is profound, offering opportunities for growth and innovation. Understanding these changes is crucial for navigating the modern world and harnessing the potential of technology for future advancements. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "question": "Select the phrases that help you understand the author's purpose in the passage about technological advancements.",
+        "coachHint": "Look for phrases that stress the importance of technology.",
+        "maxSelect": 2,
+        "minSelect": 2,
+        "correctPhrases": [
+          "Technological advancements have reshaped our daily lives.",
+          "The impact of technology is profound."
+        ],
+        "selectablePhrases": [
+          "Technological advancements have reshaped our daily lives.",
+          "Innovations in communication have made global connectivity seamless.",
+          "Automation and artificial intelligence have boosted efficiency.",
+          "The impact of technology is profound."
+        ],
+        "rightAnswerRationale": "The phrases 'Technological advancements have reshaped our daily lives' and 'The impact of technology is profound' emphasize the author's purpose to highlight the significance of technology."
+      }
+    ],
+    "resourceDescription": "Strand: RI · Text type: informational · Duration: 5m 45s · Tier: on_grade · Collection: miacademy_literary_analysis"
+  },
+  "critic": {
+    "score": 75,
+    "status": "PASS",
+    "revisions": []
+  },
+  "validationIssues": [
+    "Practice passage duplicate risk: current passage 2 is 0.94 similar to current passage 8. Previous passage was too similar to Exercise is crucial for maintaining a healthy lifestyle. It helps control weight, reduces the risk of chronic diseases, . Write on a different topic/scenario.",
+    "Practice passage duplicate risk: current passage 2 is 0.92 similar to existing V2 passage 627. Previous passage was too similar to Exercise is essential for maintaining good health. It helps control weight, improves mood, and boosts energy. Regular ph. Write on a different topic/scenario.",
+    "Practice passage duplicate risk: current passage 3 is 0.93 similar to existing V2 passage 634. Previous passage was too similar to Sleep is vital for maintaining good health and well-being. It allows the body to repair and rejuvenate, supporting physi. Write on a different topic/scenario.",
+    "Practice passage duplicate risk: current passage 4 is 0.93 similar to existing V2 passage 632. Previous passage was too similar to Transportation has evolved dramatically over the centuries. In ancient times, people relied on walking and animal-drawn . Write on a different topic/scenario.",
+    "Practice passage duplicate risk: current passage 5 is 0.95 similar to current passage 10. Previous passage was too similar to Reading is a fundamental skill that offers numerous benefits. It enhances vocabulary, improves concentration, and stimul. Write on a different topic/scenario.",
+    "Practice passage duplicate risk: current passage 8 is 0.93 similar to existing V2 passage 627. Previous passage was too similar to Exercise is essential for maintaining good health. It helps control weight, improves mood, and boosts energy. Regular ph. Write on a different topic/scenario.",
+    "Practice passage duplicate risk: current passage 10 is 0.93 similar to existing V2 passage 630. Previous passage was too similar to Reading is a valuable activity that offers numerous benefits. It enhances vocabulary, improves focus and concentration, . Write on a different topic/scenario.",
+    "guidedPractice[1]: Passage duplicate risk with existing V2 passages. (Replace the passage with a unique scenario that still illustrates the benefits of exercise, ensuring it aligns with the lesson's focus on text structure.)",
+    "independentPractice[0]: Passage duplicate risk with existing V2 passages. (Create a new passage about transportation history that offers a fresh perspective or additional details not covered in existing materials.)",
+    "independentPractice[1]: Passage duplicate risk with existing V2 passages. (Develop a new passage about the benefits of reading, focusing on a unique angle or additional benefits not previously discussed.)",
+    "masteryCheck[1]: Passage duplicate risk with existing V2 passages. (Introduce a new passage about technological evolution that provides a different viewpoint or additional technological advancements.)"
+  ],
+  "iterations": 0
+}

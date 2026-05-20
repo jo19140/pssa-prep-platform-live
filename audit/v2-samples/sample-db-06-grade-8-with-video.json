@@ -1,0 +1,369 @@
+{
+  "lesson": {
+    "hook": "Have you ever noticed how some words just feel different, even if they mean the same thing? Think about the difference between \"slim\" and \"skinny.\" Both describe someone who is not overweight, but they evoke different feelings. This is the power of connotation, and understanding it can change how you interpret and use language.",
+    "skill": "Connotation Through Word Structure",
+    "title": "Understanding Connotation Through Word Structure",
+    "exitTicket": [
+      {
+        "type": "inline-dropdown",
+        "passage": null,
+        "question": "Select the word that best completes the sentence based on its connotation.",
+        "sentence": "The dancer's movements were [BLANK], captivating the audience with her grace.",
+        "coachHint": "Consider the connotation of each option and how it fits the sentence.",
+        "correctOption": "elegant",
+        "dropdownOptions": [
+          "elegant",
+          "awkward",
+          "clumsy",
+          "rigid"
+        ],
+        "distractorRationale": [
+          {
+            "option": "awkward",
+            "whyWrong": "This has a negative connotation, suggesting a lack of grace."
+          },
+          {
+            "option": "clumsy",
+            "whyWrong": "This implies a lack of coordination."
+          },
+          {
+            "option": "rigid",
+            "whyWrong": "This suggests stiffness, not grace."
+          }
+        ],
+        "rightAnswerRationale": "\"Elegant\" has a positive connotation, suggesting grace and sophistication."
+      },
+      {
+        "type": "hot-text-phrase",
+        "passage": "The new manager's approach was met with skepticism by the team. His decisions were often seen as arbitrary and lacking in transparency. The staff felt that their input was undervalued, leading to a sense of frustration and discontent. Despite his efforts to improve efficiency, the atmosphere in the office remained tense. Many employees were concerned about the lack of communication and the top-down management style. The changes implemented were not well-received, and morale was low. The manager's intentions may have been good, but the execution left much to be desired, resulting in a challenging work environment for all involved. The staff hoped for a more inclusive approach in the future. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "question": "Identify the phrase with a negative connotation.",
+        "coachHint": "Look for phrases that imply something negative or unfair.",
+        "maxSelect": 1,
+        "minSelect": 1,
+        "correctPhrases": [
+          "arbitrary and lacking in transparency"
+        ],
+        "selectablePhrases": [
+          "met with skepticism",
+          "arbitrary and lacking in transparency",
+          "improve efficiency",
+          "challenging work environment"
+        ],
+        "rightAnswerRationale": "\"Arbitrary and lacking in transparency\" has a negative connotation, suggesting unfairness and secrecy."
+      }
+    ],
+    "gradeLevel": 8,
+    "explanation": "Connotation refers to the emotional or cultural associations that a word carries beyond its literal meaning. For example, the words \"childlike\" and \"childish\" both relate to children, but \"childlike\" often has positive connotations of innocence, while \"childish\" can imply immaturity. Understanding connotation is crucial for interpreting texts and choosing the right words in writing.\n\nWord structure plays a significant role in connotation. Prefixes, suffixes, and root words can alter a word's meaning and its connotation. For instance, consider the root word \"form.\" Adding the prefix \"trans-\" creates \"transform,\" suggesting change or improvement, while \"deform\" implies damage or distortion. Similarly, suffixes like \"-ish\" can add a negative connotation, as seen in \"foolish.\"\n\nRecognizing these subtle differences helps in understanding the author's intent and the text's tone. When reading, pay attention to the context in which words are used. Authors often choose words deliberately to convey specific emotions or attitudes. By analyzing word structure and connotation, you can gain deeper insights into the text and improve your own writing by selecting words that precisely convey your intended message.\n\nLet's practice identifying connotations and understanding how word structure affects meaning. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step.",
+    "resourceUrl": "https://www.youtube.com/watch?v=v4HhzvSgUpU",
+    "whyAssigned": "This mini-lesson targets Connotation Through Word Structure because the diagnostic showed a standards-aligned practice gap.",
+    "commonErrors": [
+      "Confusing denotation with connotation, leading to misinterpretation of the text.",
+      "Ignoring prefixes and suffixes that change the connotation of a word.",
+      "Overlooking context clues that help determine the connotation of a word."
+    ],
+    "masteryCheck": [
+      {
+        "type": "mc",
+        "choices": [
+          "Optimistic",
+          "Pessimistic",
+          "Skeptical",
+          "Cynical"
+        ],
+        "passage": null,
+        "question": "Which word has a more positive connotation?",
+        "coachHint": "Think about the feelings each word evokes.",
+        "correctAnswer": "Optimistic",
+        "distractorRationale": [
+          {
+            "choice": "Pessimistic",
+            "whyWrong": "This has a negative connotation, suggesting a lack of hope."
+          },
+          {
+            "choice": "Skeptical",
+            "whyWrong": "This implies doubt or questioning."
+          },
+          {
+            "choice": "Cynical",
+            "whyWrong": "This suggests distrust or negativity."
+          }
+        ],
+        "rightAnswerRationale": "\"Optimistic\" has a positive connotation, suggesting hopefulness."
+      },
+      {
+        "type": "inline-dropdown",
+        "passage": null,
+        "question": "Select the word that best completes the sentence based on its connotation.",
+        "sentence": "The company's [BLANK] approach to technology set it apart from its competitors.",
+        "coachHint": "Consider the connotation of each option and how it fits the sentence.",
+        "correctOption": "innovative",
+        "dropdownOptions": [
+          "innovative",
+          "conventional",
+          "outdated",
+          "predictable"
+        ],
+        "distractorRationale": [
+          {
+            "option": "conventional",
+            "whyWrong": "This suggests a lack of new ideas."
+          },
+          {
+            "option": "outdated",
+            "whyWrong": "This implies being behind the times."
+          },
+          {
+            "option": "predictable",
+            "whyWrong": "This suggests a lack of originality."
+          }
+        ],
+        "rightAnswerRationale": "\"Innovative\" has a positive connotation, suggesting creativity and new ideas."
+      },
+      {
+        "type": "hot-text-phrase",
+        "passage": "The volunteers worked tirelessly to organize the charity event, ensuring everything was perfect for the big day. Their efforts were driven by a genuine desire to make a difference in the community. The event was a resounding success, with attendees praising the organizers for their dedication and hard work. The atmosphere was filled with joy and gratitude, as people came together to support a worthy cause. The volunteers' commitment was evident in every detail, from the beautifully decorated venue to the carefully planned activities. It was a day to remember, marked by a spirit of generosity and kindness that left a lasting impression on everyone involved. The community was grateful for the volunteers' selfless contributions, which made the event a highlight of the year. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "question": "Identify the phrase with a positive connotation.",
+        "coachHint": "Look for phrases that imply something positive or uplifting.",
+        "maxSelect": 1,
+        "minSelect": 1,
+        "correctPhrases": [
+          "spirit of generosity and kindness"
+        ],
+        "selectablePhrases": [
+          "worked tirelessly",
+          "genuine desire",
+          "spirit of generosity and kindness",
+          "lasting impression"
+        ],
+        "rightAnswerRationale": "\"Spirit of generosity and kindness\" has a positive connotation, suggesting goodwill and compassion."
+      }
+    ],
+    "qualityScore": 92,
+    "standardCode": "CC.1.1.8.E",
+    "teiTypesUsed": [
+      "inline-dropdown",
+      "hot-text-phrase"
+    ],
+    "exemplarsUsed": [
+      "g8-p1",
+      "g8-p2",
+      "g8-mc-2",
+      "g8-mc-9",
+      "g8-mc-12",
+      "g8-tei-1",
+      "g4-tei-1",
+      "g7-tei-1"
+    ],
+    "qualityIssues": [
+      "Critic requested revision after 3 iterations."
+    ],
+    "resourceTitle": "Evaluating a source’s reasoning and evidence | Reading | Khan Academy",
+    "standardLabel": "Foundational Skills - connotation through word structure",
+    "workedExample": "Consider the sentence: \"The politician's speech was eloquent, but his promises seemed hollow.\" Here, \"eloquent\" has a positive connotation, suggesting the politician spoke well and persuasively. However, \"hollow\" implies that the promises lack substance or sincerity, carrying a negative connotation.\n\nNow, let's analyze the word \"hollow.\" The root \"hollow\" suggests emptiness. If we add the prefix \"un-\" to create \"unhollow,\" it would imply filling or solidifying, changing the connotation to something more positive or neutral.\n\nUnderstanding these nuances helps you interpret the text more accurately. In this case, the contrast between \"eloquent\" and \"hollow\" highlights a discrepancy between the politician's speaking skills and the sincerity of his promises. This analysis shows how connotation and word structure work together to convey deeper meanings. This matters because the correct answer is not just a matching word or phrase. It is the choice that fits the whole question and can be defended with a specific detail. The reasoning should explain both what the evidence says and how it supports the answer.",
+    "guidedPractice": [
+      {
+        "type": "mc",
+        "choices": [
+          "A pleasant smell",
+          "A strong odor",
+          "A chemical scent",
+          "A neutral smell"
+        ],
+        "passage": "The garden was filled with the fragrance of blooming flowers, creating a serene and inviting atmosphere. The scent was not overpowering but rather a gentle reminder of spring's arrival, making everyone feel at ease and relaxed as they walked through the garden paths. It was a place where worries seemed to melt away, replaced by the simple joy of nature's beauty. The fragrance was a subtle yet powerful presence, enhancing the garden's charm and allure. Visitors often commented on how the fragrance lingered in their minds long after they had left, a pleasant memory of their time spent in the garden's embrace. The fragrance was more than just a smell; it was an experience that touched the soul. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "question": "What is the connotation of the word \"fragrance\" in the passage?",
+        "coachHint": "Think about how the word makes you feel and what it suggests about the garden.",
+        "correctAnswer": "A pleasant smell",
+        "distractorRationale": [
+          {
+            "choice": "A strong odor",
+            "whyWrong": "This suggests something overpowering, which is not supported by the passage."
+          },
+          {
+            "choice": "A chemical scent",
+            "whyWrong": "The passage describes a natural, pleasant scent, not a chemical one."
+          },
+          {
+            "choice": "A neutral smell",
+            "whyWrong": "The passage emphasizes the positive impact of the fragrance, not neutrality."
+          }
+        ],
+        "rightAnswerRationale": "The word \"fragrance\" has a positive connotation, suggesting a pleasant and appealing scent that enhances the garden's atmosphere."
+      },
+      {
+        "type": "inline-dropdown",
+        "passage": null,
+        "question": "Select the word that best completes the sentence based on its connotation.",
+        "sentence": "The artist was known for her [BLANK] attention to detail, which made her paintings stand out.",
+        "coachHint": "Consider the connotation of each option and how it fits the sentence.",
+        "correctOption": "meticulous",
+        "dropdownOptions": [
+          "meticulous",
+          "obsessive",
+          "careless",
+          "hasty"
+        ],
+        "distractorRationale": [
+          {
+            "option": "obsessive",
+            "whyWrong": "This has a negative connotation, suggesting an unhealthy focus."
+          },
+          {
+            "option": "careless",
+            "whyWrong": "This contradicts the idea of attention to detail."
+          },
+          {
+            "option": "hasty",
+            "whyWrong": "This implies rushing, not careful attention."
+          }
+        ],
+        "rightAnswerRationale": "The word \"meticulous\" has a positive connotation, suggesting careful attention to detail."
+      },
+      {
+        "type": "hot-text-phrase",
+        "passage": "The new policy was introduced with much fanfare, but many employees felt it was a thinly veiled attempt to cut costs. The management's decision was seen as a cost-saving measure rather than a genuine effort to improve working conditions. Employees were skeptical, viewing the policy as a facade to mask deeper issues within the company. The announcement was met with mixed reactions, with some praising the initiative while others questioned its true intent. The atmosphere in the office was tense, as rumors circulated about potential layoffs and budget cuts. Despite the official narrative, the underlying sentiment was one of distrust and uncertainty. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "question": "Identify the phrase with a negative connotation.",
+        "coachHint": "Look for phrases that imply something negative or deceptive.",
+        "maxSelect": 1,
+        "minSelect": 1,
+        "correctPhrases": [
+          "thinly veiled attempt"
+        ],
+        "selectablePhrases": [
+          "much fanfare",
+          "thinly veiled attempt",
+          "cost-saving measure",
+          "genuine effort"
+        ],
+        "rightAnswerRationale": "\"Thinly veiled attempt\" has a negative connotation, suggesting deceit or insincerity."
+      }
+    ],
+    "sentenceFrames": [
+      "The word [BLANK] has a positive connotation because...",
+      "When the prefix [BLANK] is added to the root word, it changes the connotation by...",
+      "The connotation of the word [BLANK] suggests..."
+    ],
+    "successCriteria": [
+      "Identify the connotation of words in a passage.",
+      "Explain how prefixes and suffixes alter word connotation.",
+      "Use context to determine the connotation of unfamiliar words."
+    ],
+    "generatorVersion": "V2",
+    "resourceProvider": "Miacademy & MiaPrep Learning Channel",
+    "heroResourceLinkId": "cmp4fwa5n005fg3sabbgwqfqq",
+    "independentPractice": [
+      {
+        "type": "mc",
+        "choices": [
+          "Youthful",
+          "Childish",
+          "Immature",
+          "Naive"
+        ],
+        "passage": null,
+        "question": "Which word has a more positive connotation?",
+        "coachHint": "Think about the feelings each word evokes.",
+        "correctAnswer": "Youthful",
+        "distractorRationale": [
+          {
+            "choice": "Childish",
+            "whyWrong": "This often implies immaturity, which is negative."
+          },
+          {
+            "choice": "Immature",
+            "whyWrong": "This suggests a lack of development or growth."
+          },
+          {
+            "choice": "Naive",
+            "whyWrong": "This implies a lack of experience or sophistication."
+          }
+        ],
+        "rightAnswerRationale": "\"Youthful\" has a positive connotation, suggesting energy and vitality."
+      },
+      {
+        "type": "inline-dropdown",
+        "passage": null,
+        "question": "Select the word that best completes the sentence based on its connotation.",
+        "sentence": "The scientist was [BLANK] in her approach, ensuring all variables were accounted for.",
+        "coachHint": "Consider the connotation of each option and how it fits the sentence.",
+        "correctOption": "cautious",
+        "dropdownOptions": [
+          "cautious",
+          "reckless",
+          "indifferent",
+          "hasty"
+        ],
+        "distractorRationale": [
+          {
+            "option": "reckless",
+            "whyWrong": "This has a negative connotation, suggesting a lack of care."
+          },
+          {
+            "option": "indifferent",
+            "whyWrong": "This implies a lack of concern or interest."
+          },
+          {
+            "option": "hasty",
+            "whyWrong": "This suggests rushing without careful thought."
+          }
+        ],
+        "rightAnswerRationale": "\"Cautious\" has a positive connotation, suggesting careful consideration."
+      },
+      {
+        "type": "hot-text-phrase",
+        "passage": "The team worked tirelessly to complete the project, often staying late into the night. Their dedication was evident in the quality of their work, which was praised by the client. The project manager commended the team for their perseverance and commitment, noting that their efforts had exceeded expectations. The atmosphere in the office was one of camaraderie and mutual support, with everyone pulling together to achieve a common goal. The successful completion of the project was a testament to the team's hard work and determination, and it was celebrated with a small gathering in the office. The sense of accomplishment was palpable, as everyone shared in the joy of a job well done. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "question": "Identify the phrase with a positive connotation.",
+        "coachHint": "Look for phrases that imply something positive or supportive.",
+        "maxSelect": 1,
+        "minSelect": 1,
+        "correctPhrases": [
+          "camaraderie and mutual support"
+        ],
+        "selectablePhrases": [
+          "worked tirelessly",
+          "dedication was evident",
+          "camaraderie and mutual support",
+          "exceeded expectations"
+        ],
+        "rightAnswerRationale": "\"Camaraderie and mutual support\" has a positive connotation, suggesting teamwork and cooperation."
+      },
+      {
+        "type": "mc",
+        "choices": [
+          "Determined",
+          "Stubborn",
+          "Persistent",
+          "Resolute"
+        ],
+        "passage": null,
+        "question": "Which word has a more negative connotation?",
+        "coachHint": "Think about the feelings each word evokes.",
+        "correctAnswer": "Stubborn",
+        "distractorRationale": [
+          {
+            "choice": "Determined",
+            "whyWrong": "This has a positive connotation, suggesting perseverance."
+          },
+          {
+            "choice": "Persistent",
+            "whyWrong": "This implies continued effort in a positive way."
+          },
+          {
+            "choice": "Resolute",
+            "whyWrong": "This suggests firmness and determination."
+          }
+        ],
+        "rightAnswerRationale": "\"Stubborn\" has a negative connotation, suggesting inflexibility."
+      }
+    ],
+    "resourceDescription": "Strand: L · Duration: 7m 22s · Tier: on_grade · Collection: khan_8_reading_vocab"
+  },
+  "critic": {
+    "score": 92,
+    "status": "PASS",
+    "revisions": []
+  },
+  "validationIssues": [
+    "Critic requested revision after 3 iterations."
+  ],
+  "iterations": 0
+}

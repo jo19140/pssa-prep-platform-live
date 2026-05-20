@@ -1,0 +1,375 @@
+{
+  "lesson": {
+    "hook": "Imagine you are a detective, and your mission is to uncover the secret patterns in words. These patterns help us read and spell new words. Just like a detective uses clues to solve a mystery, we use phonics patterns to understand how words work. Let's dive into the world of phonics and discover these hidden patterns together!",
+    "skill": "Phonics Patterns",
+    "title": "Exploring Phonics Patterns",
+    "exitTicket": [
+      {
+        "type": "mc",
+        "choices": [
+          "ch",
+          "ee",
+          "se",
+          "he"
+        ],
+        "passage": null,
+        "question": "What is the phonics pattern in the word 'cheese'?",
+        "coachHint": "Look for a vowel team in the middle of the word.",
+        "correctAnswer": "ee",
+        "distractorRationale": [
+          {
+            "choice": "ch",
+            "whyWrong": "'Ch' is a consonant blend, not a vowel team."
+          },
+          {
+            "choice": "se",
+            "whyWrong": "'Se' is not a phonics pattern; focus on the vowel sound."
+          },
+          {
+            "choice": "he",
+            "whyWrong": "'He' is not a common phonics pattern."
+          }
+        ],
+        "rightAnswerRationale": "The 'ee' in 'cheese' is a vowel team that makes a long 'e' sound."
+      },
+      {
+        "type": "hot-text-phrase",
+        "passage": "The rain fell, making puddles on the ground. A snail moved slowly, leaving a trail. A train passed by, its whistle loud. The sky was gray, stretching far. Kids played, splashing in puddles. The rain made the air fresh and clean. As time went on, the rain stopped, and the sun came out, warming everything. It was a day of simple fun, showing the beauty in small things. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "question": "Read the passage and select the phrases that show the phonics pattern 'ai'.",
+        "coachHint": "Look for words with 'ai' in the middle.",
+        "maxSelect": 2,
+        "minSelect": 2,
+        "correctPhrases": [
+          "rain fell",
+          "train passed"
+        ],
+        "selectablePhrases": [
+          "rain fell",
+          "snail moved",
+          "train passed",
+          "sky was gray",
+          "kids played"
+        ],
+        "rightAnswerRationale": "The phrases 'rain fell' and 'train passed' contain the 'ai' phonics pattern."
+      }
+    ],
+    "gradeLevel": 3,
+    "explanation": "Phonics patterns are like the building blocks of words. They help us understand how letters come together to make sounds. For example, the letters 'ch' in 'chicken' make a unique sound. Recognizing these patterns helps us read new words more easily. There are many common phonics patterns, such as 'sh' in 'ship' or 'th' in 'thumb.' These patterns often appear in the middle or at the end of words. By learning these patterns, you can quickly figure out how to pronounce unfamiliar words.\n\nAnother important pattern is the 'silent e' at the end of words. This 'e' can change the sound of the vowel before it. For instance, in 'cap,' the 'a' is short, but in 'cape,' the 'e' makes the 'a' long. Understanding these patterns helps us become better readers and spellers.\n\nLet's also look at vowel teams, like 'ea' in 'beach' or 'oa' in 'boat.' These teams work together to make a single sound. By practicing these patterns, you'll be able to read more fluently and with confidence. Remember, phonics patterns are your tools for unlocking the mysteries of words! Keep practicing, and you'll become a word detective in no time! Now, let's explore some examples and practice identifying these patterns in words you encounter every day. This will help you become more familiar with how these patterns work in different contexts. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step.",
+    "resourceUrl": null,
+    "whyAssigned": "This mini-lesson targets Phonics Patterns because the diagnostic showed a standards-aligned practice gap.",
+    "commonErrors": [
+      "Confusing similar phonics patterns, such as 'ch' and 'sh'.",
+      "Forgetting the silent 'e' changes the vowel sound.",
+      "Mixing up vowel teams like 'ea' and 'ee'."
+    ],
+    "masteryCheck": [
+      {
+        "type": "mc",
+        "choices": [
+          "ni",
+          "igh",
+          "ght",
+          "ht"
+        ],
+        "passage": null,
+        "question": "What is the phonics pattern in the word 'night'?",
+        "coachHint": "Look for a vowel pattern in the middle of the word.",
+        "correctAnswer": "igh",
+        "distractorRationale": [
+          {
+            "choice": "ni",
+            "whyWrong": "'Ni' is not a common phonics pattern."
+          },
+          {
+            "choice": "ght",
+            "whyWrong": "'Ght' is not a phonics pattern; focus on the vowel sound."
+          },
+          {
+            "choice": "ht",
+            "whyWrong": "'Ht' is not a common phonics pattern."
+          }
+        ],
+        "rightAnswerRationale": "The 'igh' in 'night' is a common phonics pattern that makes a long 'i' sound."
+      },
+      {
+        "type": "inline-dropdown",
+        "passage": null,
+        "question": "Choose the correct phonics pattern in the word 'leaf'.",
+        "sentence": "The word 'leaf' contains the vowel team [BLANK].",
+        "coachHint": "Look for a vowel team in the middle of the word.",
+        "correctOption": "ea",
+        "dropdownOptions": [
+          "ea",
+          "le",
+          "af",
+          "ef"
+        ],
+        "distractorRationale": [
+          {
+            "option": "le",
+            "whyWrong": "'Le' is not a vowel team."
+          },
+          {
+            "option": "af",
+            "whyWrong": "'Af' is not a phonics pattern."
+          },
+          {
+            "option": "ef",
+            "whyWrong": "'Ef' is not a phonics pattern."
+          }
+        ],
+        "rightAnswerRationale": "The 'ea' in 'leaf' is a vowel team that makes a long 'e' sound."
+      },
+      {
+        "type": "hot-text-phrase",
+        "passage": "The green grass moved in the wind. A deer ate quietly, its ears moving. A creek flowed softly, its water shining. The trees stood tall, their leaves moving. It was a calm moment, with nature all around. The sweet smell of flowers filled the air. As the sun set, the sky turned orange, lighting up the land. It was a perfect end to a perfect day, showing the simple joys in life. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "question": "Read the passage and select the phrases that show the phonics pattern 'ee'.",
+        "coachHint": "Look for words with 'ee' in the middle.",
+        "maxSelect": 2,
+        "minSelect": 2,
+        "correctPhrases": [
+          "green grass",
+          "deer ate"
+        ],
+        "selectablePhrases": [
+          "green grass",
+          "deer ate",
+          "creek flowed",
+          "trees stood",
+          "sweet smell"
+        ],
+        "rightAnswerRationale": "The phrases 'green grass' and 'deer ate' contain the 'ee' phonics pattern."
+      }
+    ],
+    "qualityScore": 92,
+    "standardCode": "CC.1.1.3.D",
+    "teiTypesUsed": [
+      "inline-dropdown",
+      "hot-text-phrase"
+    ],
+    "exemplarsUsed": [
+      "g3-p1",
+      "g3-mc-1",
+      "g3-mc-2",
+      "g3-mc-3",
+      "g3-tei-6",
+      "g4-tei-5",
+      "g4-tei-7"
+    ],
+    "qualityIssues": [
+      "Critic requested revision after 3 iterations."
+    ],
+    "resourceTitle": null,
+    "standardLabel": "Foundational Skills - phonics patterns",
+    "workedExample": "Let's look at the word 'cake.' Notice the 'c' at the beginning, which makes a 'k' sound. The 'a' is followed by a 'k,' and then there's a silent 'e' at the end. This silent 'e' changes the 'a' from a short sound, like in 'cat,' to a long sound, like in 'cake.' This is an example of the silent 'e' pattern.\n\nNow, consider the word 'ship.' The 'sh' at the beginning is a phonics pattern that makes a unique sound. Instead of saying 's' and 'h' separately, they come together to make the 'sh' sound. Recognizing this pattern helps you read the word correctly.\n\nBy identifying these patterns, you can read new words more easily. Practice finding these patterns in other words you read. Look for silent 'e's, vowel teams, and consonant blends like 'sh' or 'ch.' With practice, you'll become more confident in your reading skills. This matters because the correct answer is not just a matching word or phrase. It is the choice that fits the whole question and can be defended with a specific detail. The reasoning should explain both what the evidence says and how it supports the answer.",
+    "guidedPractice": [
+      {
+        "type": "mc",
+        "choices": [
+          "br",
+          "sh",
+          "ush",
+          "ru"
+        ],
+        "passage": null,
+        "question": "What is the phonics pattern in the word 'brush'?",
+        "coachHint": "Look at the end of the word for a familiar pattern.",
+        "correctAnswer": "sh",
+        "distractorRationale": [
+          {
+            "choice": "br",
+            "whyWrong": "'Br' is a blend but not the main pattern in 'brush'."
+          },
+          {
+            "choice": "ush",
+            "whyWrong": "'Ush' is not a phonics pattern; focus on the ending sound."
+          },
+          {
+            "choice": "ru",
+            "whyWrong": "'Ru' is not a common phonics pattern."
+          }
+        ],
+        "rightAnswerRationale": "The 'sh' at the end of 'brush' is a common phonics pattern that makes a unique sound."
+      },
+      {
+        "type": "inline-dropdown",
+        "passage": null,
+        "question": "Select the correct phonics pattern in the word 'train'.",
+        "sentence": "The word 'train' contains the vowel team [BLANK].",
+        "coachHint": "Look for a vowel team in the middle of the word.",
+        "correctOption": "ai",
+        "dropdownOptions": [
+          "ai",
+          "tr",
+          "in",
+          "ra"
+        ],
+        "distractorRationale": [
+          {
+            "option": "tr",
+            "whyWrong": "'Tr' is a consonant blend, not a vowel team."
+          },
+          {
+            "option": "in",
+            "whyWrong": "'In' is not a vowel team in this context."
+          },
+          {
+            "option": "ra",
+            "whyWrong": "'Ra' is not a phonics pattern."
+          }
+        ],
+        "rightAnswerRationale": "The 'tr' at the beginning is a blend, and 'ai' is a vowel team making a single sound."
+      },
+      {
+        "type": "hot-text-phrase",
+        "passage": "The sun was bright, and the sky was clear. A seal swam near the shore, and a team of birds flew by. It was a calm day, perfect for a walk on the beach. The waves gently touched the sand, making a soft sound. Nearby, a teacher picked up shells for her class. Each moment felt special, a reminder of nature's beauty. The clear sky and warm sun made it a great day to be outside. The sea breeze carried the smell of salt, inviting everyone to explore. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "question": "Read the passage and select the phrases that show the phonics pattern 'ea'.",
+        "coachHint": "Look for words with 'ea' in the middle.",
+        "maxSelect": 2,
+        "minSelect": 2,
+        "correctPhrases": [
+          "seal swam",
+          "walk on the beach"
+        ],
+        "selectablePhrases": [
+          "sun was bright",
+          "seal swam",
+          "team of birds",
+          "calm day",
+          "walk on the beach"
+        ],
+        "rightAnswerRationale": "The phrases 'seal swam' and 'beach' contain the 'ea' phonics pattern."
+      }
+    ],
+    "sentenceFrames": [
+      "The letters 'ch' in 'chicken' make the sound ______.",
+      "In the word 'cake', the silent 'e' makes the 'a' sound like ______.",
+      "The vowel team 'oa' in 'boat' sounds like ______."
+    ],
+    "successCriteria": [
+      "Identify common phonics patterns in words.",
+      "Apply phonics patterns to read new words.",
+      "Recognize the effect of silent 'e' on vowel sounds."
+    ],
+    "generatorVersion": "V2",
+    "resourceProvider": null,
+    "heroResourceLinkId": null,
+    "independentPractice": [
+      {
+        "type": "mc",
+        "choices": [
+          "fl",
+          "igh",
+          "ght",
+          "li"
+        ],
+        "passage": null,
+        "question": "What is the phonics pattern in the word 'flight'?",
+        "coachHint": "Look for a vowel pattern in the middle of the word.",
+        "correctAnswer": "igh",
+        "distractorRationale": [
+          {
+            "choice": "fl",
+            "whyWrong": "'Fl' is a blend but not the main pattern in 'flight'."
+          },
+          {
+            "choice": "ght",
+            "whyWrong": "'Ght' is not a phonics pattern; focus on the vowel sound."
+          },
+          {
+            "choice": "li",
+            "whyWrong": "'Li' is not a common phonics pattern."
+          }
+        ],
+        "rightAnswerRationale": "The 'igh' in 'flight' is a common phonics pattern that makes a long 'i' sound."
+      },
+      {
+        "type": "inline-dropdown",
+        "passage": null,
+        "question": "Choose the correct phonics pattern in the word 'dream'.",
+        "sentence": "The word 'dream' contains the vowel team [BLANK].",
+        "coachHint": "Look for a vowel team in the middle of the word.",
+        "correctOption": "ea",
+        "dropdownOptions": [
+          "ea",
+          "dr",
+          "eam",
+          "re"
+        ],
+        "distractorRationale": [
+          {
+            "option": "dr",
+            "whyWrong": "'Dr' is a consonant blend, not a vowel team."
+          },
+          {
+            "option": "eam",
+            "whyWrong": "'Eam' is not a vowel team in this context."
+          },
+          {
+            "option": "re",
+            "whyWrong": "'Re' is not a phonics pattern."
+          }
+        ],
+        "rightAnswerRationale": "The 'ea' in 'dream' is a vowel team that makes a long 'e' sound."
+      },
+      {
+        "type": "hot-text-phrase",
+        "passage": "The stars twinkled in the night sky. A raccoon ran across the road, looking for food. In the cool air, an owl hooted softly. It was a quiet night, with the moon shining bright. The sound of a stream added to the calm. Nearby, friends sat by a campfire, telling stories. The warmth of the fire made the night feel cozy. As time passed, the moon moved across the sky, watching over everything. The breeze carried the smell of pine, inviting everyone to enjoy the night. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "question": "Read the passage and select the phrases that show the phonics pattern 'oo'.",
+        "coachHint": "Look for words with 'oo' in the middle.",
+        "maxSelect": 2,
+        "minSelect": 2,
+        "correctPhrases": [
+          "cool air",
+          "moon shining"
+        ],
+        "selectablePhrases": [
+          "stars twinkled",
+          "raccoon ran",
+          "cool air",
+          "owl hooted",
+          "moon shining"
+        ],
+        "rightAnswerRationale": "The phrases 'moon shining' and 'cool air' contain the 'oo' phonics pattern."
+      },
+      {
+        "type": "mc",
+        "choices": [
+          "br",
+          "igh",
+          "ght",
+          "ri"
+        ],
+        "passage": null,
+        "question": "Which phonics pattern is in the word 'bright'?",
+        "coachHint": "Look for a vowel pattern in the middle of the word.",
+        "correctAnswer": "igh",
+        "distractorRationale": [
+          {
+            "choice": "br",
+            "whyWrong": "'Br' is a blend but not the main pattern in 'bright'."
+          },
+          {
+            "choice": "ght",
+            "whyWrong": "'Ght' is not a phonics pattern; focus on the vowel sound."
+          },
+          {
+            "choice": "ri",
+            "whyWrong": "'Ri' is not a common phonics pattern."
+          }
+        ],
+        "rightAnswerRationale": "The 'igh' in 'bright' is a common phonics pattern that makes a long 'i' sound."
+      }
+    ],
+    "resourceDescription": null
+  },
+  "critic": {
+    "score": 92,
+    "status": "PASS",
+    "revisions": []
+  },
+  "validationIssues": [
+    "Critic requested revision after 3 iterations."
+  ],
+  "iterations": 0
+}

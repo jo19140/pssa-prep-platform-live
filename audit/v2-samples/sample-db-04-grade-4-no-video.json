@@ -1,0 +1,378 @@
+{
+  "lesson": {
+    "hook": "Have you ever noticed how some poems have a musical quality? This is often due to their rhyme schemes and other structural elements. Understanding these can make reading poetry more enjoyable and meaningful. Today, we'll explore how poets use rhyme and structure to create rhythm and enhance their messages. For example, a student can use this skill while reading a test passage and checking which details truly answer the question about Rhyme Scheme and Poetry Elements.",
+    "skill": "Rhyme Scheme and Poetry Elements",
+    "title": "Understanding Rhyme Schemes and Poetry Elements",
+    "exitTicket": [
+      {
+        "type": "hot-text-phrase",
+        "passage": "The night sky sparkles with stars, A blanket of diamonds above, The moon glows softly, casting light, A scene of peace and love. Select the two phrases that create imagery in the poem. Imagery involves vivid descriptions that appeal to the senses. Look for phrases that help you visualize the scene or evoke a sensory experience. The correct phrases are 'A blanket of diamonds above' and 'The moon glows softly, casting light' because they create vivid images of the scene. 'The night sky sparkles with stars' is incorrect because it describes the action but doesn't create a strong visual image. 'A scene of peace and love' is incorrect because it describes the scene but doesn't evoke a sensory experience. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "question": "Select the phrases that create imagery in the poem.",
+        "coachHint": "Look for phrases that help you visualize the scene.",
+        "maxSelect": 2,
+        "minSelect": 2,
+        "correctPhrases": [
+          "A blanket of diamonds above",
+          "The moon glows softly, casting light"
+        ],
+        "selectablePhrases": [
+          "The night sky sparkles with stars",
+          "A blanket of diamonds above",
+          "The moon glows softly, casting light",
+          "A scene of peace and love"
+        ],
+        "rightAnswerRationale": "The phrases 'A blanket of diamonds above' and 'The moon glows softly, casting light' create vivid images."
+      },
+      {
+        "type": "inline-dropdown",
+        "passage": "The gentle rain taps on the window, A soft lullaby to the night, The wind whispers through the trees, A calming, peaceful sight. How does the meter affect the poem's rhythm? Choose the correct option from the dropdown. The meter is the pattern of stressed and unstressed syllables in a line. It affects how the poem sounds when read aloud. The correct option is 'creates a calming rhythm' because the consistent meter gives the poem a soothing, gentle flow. 'Creates a jarring rhythm' is incorrect because the meter is consistent and smooth. 'Creates an erratic rhythm' is incorrect because the meter is not irregular. 'Creates a fast-paced rhythm' is incorrect because the poem's flow is gentle, not fast. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "question": "How does the meter affect the poem's rhythm?",
+        "sentence": "The meter [BLANK] the poem's rhythm.",
+        "coachHint": "Consider how the poem sounds when read aloud.",
+        "correctOption": "creates a calming rhythm",
+        "dropdownOptions": [
+          "creates a calming rhythm",
+          "creates a jarring rhythm",
+          "creates an erratic rhythm",
+          "creates a fast-paced rhythm"
+        ],
+        "distractorRationale": [
+          {
+            "option": "creates a jarring rhythm",
+            "whyWrong": "The meter is consistent and smooth."
+          },
+          {
+            "option": "creates an erratic rhythm",
+            "whyWrong": "The meter is not irregular."
+          },
+          {
+            "option": "creates a fast-paced rhythm",
+            "whyWrong": "The poem's flow is gentle, not fast."
+          }
+        ],
+        "rightAnswerRationale": "The consistent meter creates a calming rhythm."
+      }
+    ],
+    "gradeLevel": 4,
+    "explanation": "Poetry is a unique form of writing that uses various structural elements to convey emotions and ideas. One of the most important elements is the rhyme scheme, which is the pattern of rhymes at the end of each line. Rhyme schemes are often described using letters to indicate which lines rhyme. For example, in an ABAB rhyme scheme, the first and third lines rhyme with each other, and the second and fourth lines rhyme with each other. This pattern creates a musical rhythm that can enhance the poem's mood or theme.\n\nAnother key element is meter, which refers to the rhythmic structure of a poem. Meter is determined by the number of syllables in a line and the pattern of stressed and unstressed syllables. Common meters include iambic pentameter, which has five pairs of syllables per line, with the second syllable in each pair being stressed.\n\nImagery is also crucial in poetry. Poets use vivid descriptions to create pictures in the reader's mind, helping to convey emotions and themes more effectively. Imagery can involve any of the five senses, making the poem more engaging and relatable.\n\nUnderstanding these elements can help you appreciate the depth and creativity involved in poetry. As you read poems, try to identify the rhyme scheme, meter, and imagery. This will enhance your understanding and enjoyment of the poem. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step.",
+    "resourceUrl": null,
+    "whyAssigned": "This mini-lesson targets Rhyme Scheme and Poetry Elements because the diagnostic showed a standards-aligned practice gap.",
+    "commonErrors": [
+      "Confusing rhyme scheme with meter.",
+      "Overlooking imagery and its impact on the poem's meaning.",
+      "Misidentifying the rhyme scheme due to similar-sounding words."
+    ],
+    "masteryCheck": [
+      {
+        "type": "mc",
+        "choices": [
+          "ABAB",
+          "AABB",
+          "ABCB",
+          "ABBA"
+        ],
+        "passage": "The ocean waves crash on the shore, A rhythmic dance forevermore, The seagulls soar above the sea, A scene of wild serenity. Identify the rhyme scheme of the poem above. Choose the correct pattern from the options below: ABAB, AABB, ABCB, or ABBA. The rhyme scheme is the pattern of rhymes at the end of each line. Look for which lines rhyme with each other to determine the pattern. The correct answer is ABAB because the first and third lines rhyme, and the second and fourth lines rhyme. AABB is incorrect because it suggests the first two lines rhyme with each other, which they do not. ABCB is incorrect because it suggests the second and fourth lines rhyme, but they do not. ABBA is incorrect because it suggests the first and fourth lines rhyme, which they do not. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "question": "What is the rhyme scheme of the following poem?",
+        "coachHint": "Look at the end of each line to see which ones rhyme.",
+        "correctAnswer": "ABAB",
+        "distractorRationale": [
+          {
+            "choice": "AABB",
+            "whyWrong": "This suggests the first two lines rhyme, which they do not."
+          },
+          {
+            "choice": "ABCB",
+            "whyWrong": "This suggests the second and fourth lines rhyme, but they do not."
+          },
+          {
+            "choice": "ABBA",
+            "whyWrong": "This suggests the first and fourth lines rhyme, which they do not."
+          }
+        ],
+        "rightAnswerRationale": "The rhyme scheme is ABAB because the first and third lines rhyme, and the second and fourth lines rhyme."
+      },
+      {
+        "type": "hot-text-phrase",
+        "passage": "The morning sun peeks over the hills, Bathing the world in golden light, The dew glistens on the grass, A sparkling, beautiful sight. Select the two phrases that create imagery in the poem. Imagery involves vivid descriptions that appeal to the senses. Look for phrases that help you visualize the scene or evoke a sensory experience. The correct phrases are 'Bathing the world in golden light' and 'The dew glistens on the grass' because they create vivid images of the scene. 'The morning sun peeks over the hills' is incorrect because it describes the action but doesn't create a strong visual image. 'A sparkling, beautiful sight' is incorrect because it describes the scene but doesn't evoke a sensory experience. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "question": "Select the phrases that create imagery in the poem.",
+        "coachHint": "Look for phrases that help you visualize the scene.",
+        "maxSelect": 2,
+        "minSelect": 2,
+        "correctPhrases": [
+          "Bathing the world in golden light",
+          "The dew glistens on the grass"
+        ],
+        "selectablePhrases": [
+          "The morning sun peeks over the hills",
+          "Bathing the world in golden light",
+          "The dew glistens on the grass",
+          "A sparkling, beautiful sight"
+        ],
+        "rightAnswerRationale": "The phrases 'Bathing the world in golden light' and 'The dew glistens on the grass' create vivid images."
+      },
+      {
+        "type": "inline-dropdown",
+        "passage": "The gentle stream flows through the meadow, A quiet song of peace, The birds chirp softly in the trees, A melody that will not cease. How does the meter affect the poem's rhythm? Choose the correct option from the dropdown. The meter is the pattern of stressed and unstressed syllables in a line. It affects how the poem sounds when read aloud. The correct option is 'creates a peaceful rhythm' because the consistent meter gives the poem a soothing, gentle flow. 'Creates a harsh rhythm' is incorrect because the meter is smooth and gentle. 'Creates a chaotic rhythm' is incorrect because the meter is not irregular. 'Creates a fast-paced rhythm' is incorrect because the poem's flow is gentle, not fast. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "question": "How does the meter affect the poem's rhythm?",
+        "sentence": "The meter [BLANK] the poem's rhythm.",
+        "coachHint": "Consider how the poem sounds when read aloud.",
+        "correctOption": "creates a peaceful rhythm",
+        "dropdownOptions": [
+          "creates a peaceful rhythm",
+          "creates a harsh rhythm",
+          "creates a chaotic rhythm",
+          "creates a fast-paced rhythm"
+        ],
+        "distractorRationale": [
+          {
+            "option": "creates a harsh rhythm",
+            "whyWrong": "The meter is smooth and gentle."
+          },
+          {
+            "option": "creates a chaotic rhythm",
+            "whyWrong": "The meter is not irregular."
+          },
+          {
+            "option": "creates a fast-paced rhythm",
+            "whyWrong": "The poem's flow is gentle, not fast."
+          }
+        ],
+        "rightAnswerRationale": "The consistent meter creates a peaceful rhythm."
+      }
+    ],
+    "qualityScore": 80,
+    "standardCode": "CC.1.3.4.E",
+    "teiTypesUsed": [
+      "hot-text-phrase",
+      "inline-dropdown"
+    ],
+    "exemplarsUsed": [
+      "g4-p1",
+      "g4-mc-1",
+      "g4-mc-2",
+      "g4-mc-3",
+      "g4-tei-5",
+      "g4-tei-7",
+      "g3-tei-6"
+    ],
+    "qualityIssues": [
+      "Practice passage duplicate risk: current passage 3 is 0.97 similar to current passage 9. Previous passage was too similar to The gentle rain taps on the window, A soft lullaby to the night, The wind whispers through the trees, A calming, peacefu. Write on a different topic/scenario.",
+      "Practice passage duplicate risk: current passage 3 is 0.94 similar to current passage 12. Previous passage was too similar to The gentle stream flows through the meadow, A quiet song of peace, The birds chirp softly in the trees, A melody that wi. Write on a different topic/scenario.",
+      "Practice passage duplicate risk: current passage 9 is 0.94 similar to current passage 12. Previous passage was too similar to The gentle stream flows through the meadow, A quiet song of peace, The birds chirp softly in the trees, A melody that wi. Write on a different topic/scenario.",
+      "Practice Passages: Duplicate risk with high similarity between passages. (Revise passages 3, 9, and 12 to ensure unique content and avoid repetition. Focus on different topics or scenarios to maintain variety and engagement.)"
+    ],
+    "resourceTitle": null,
+    "standardLabel": "Explain structural elements of poems",
+    "workedExample": "Let's look at a simple poem to identify its rhyme scheme and other elements:\n\nRoses are red,  \nViolets are blue,  \nSugar is sweet,  \nAnd so are you.\n\nIn this poem, the rhyme scheme is ABCB. The second and fourth lines rhyme, creating a pleasant rhythm. The poem uses simple imagery, comparing roses and violets to convey affection. The meter is straightforward, with each line having a similar number of syllables, contributing to the poem's sing-song quality.\n\nBy analyzing these elements, we can see how the poet uses structure to enhance the poem's message of love and admiration. This approach can be applied to more complex poems, helping you uncover deeper meanings and appreciate the poet's craft. This matters because the correct answer is not just a matching word or phrase. It is the choice that fits the whole question and can be defended with a specific detail. The reasoning should explain both what the evidence says and how it supports the answer.",
+    "guidedPractice": [
+      {
+        "type": "mc",
+        "choices": [
+          "ABAB",
+          "AABB",
+          "ABCB",
+          "ABBA"
+        ],
+        "passage": "The sun is bright, The sky is blue, The birds sing light, And so do you. Identify the rhyme scheme of the poem above. Choose the correct pattern from the options below: ABAB, AABB, ABCB, or ABBA. The rhyme scheme is the pattern of rhymes at the end of each line. Look for which lines rhyme with each other to determine the pattern. The correct answer is ABAB because the first and third lines rhyme, and the second and fourth lines rhyme. AABB is incorrect because it suggests the first two lines rhyme with each other, which they do not. ABCB is incorrect because it suggests the second and fourth lines rhyme, but they do not. ABBA is incorrect because it suggests the first and fourth lines rhyme, which they do not. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "question": "What is the rhyme scheme of the following poem?",
+        "coachHint": "Look at the end of each line to see which ones rhyme.",
+        "correctAnswer": "ABAB",
+        "distractorRationale": [
+          {
+            "choice": "AABB",
+            "whyWrong": "This suggests the first two lines rhyme, which they do not."
+          },
+          {
+            "choice": "ABCB",
+            "whyWrong": "This suggests the second and fourth lines rhyme, but they do not."
+          },
+          {
+            "choice": "ABBA",
+            "whyWrong": "This suggests the first and fourth lines rhyme, which they do not."
+          }
+        ],
+        "rightAnswerRationale": "The rhyme scheme is ABAB because the first and third lines rhyme, and the second and fourth lines rhyme."
+      },
+      {
+        "type": "hot-text-phrase",
+        "passage": "The moonlight danced on the waves, A silver path across the sea, The stars twinkled like diamonds, In the vast, endless sky. Select the two phrases that create imagery in the poem. Imagery involves vivid descriptions that appeal to the senses. Look for phrases that help you visualize the scene or evoke a sensory experience. The correct phrases are 'moonlight danced on the waves' and 'stars twinkled like diamonds' because they create vivid images of the scene. 'A silver path across the sea' is incorrect because it describes the moonlight's effect but doesn't create a strong visual image. 'In the vast, endless sky' is incorrect because it describes the sky but doesn't evoke a sensory experience. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "question": "Select the phrases that create imagery in the poem.",
+        "coachHint": "Look for phrases that help you visualize the scene.",
+        "maxSelect": 2,
+        "minSelect": 2,
+        "correctPhrases": [
+          "moonlight danced on the waves",
+          "stars twinkled like diamonds"
+        ],
+        "selectablePhrases": [
+          "moonlight danced on the waves",
+          "A silver path across the sea",
+          "stars twinkled like diamonds",
+          "In the vast, endless sky"
+        ],
+        "rightAnswerRationale": "The phrases 'moonlight danced on the waves' and 'stars twinkled like diamonds' create vivid images."
+      },
+      {
+        "type": "inline-dropdown",
+        "passage": "The gentle breeze whispers through the trees, A lullaby sung by the night, The leaves rustle softly in the breeze, A soothing, calming sight. How does the meter affect the poem's rhythm? Choose the correct option from the dropdown. The meter is the pattern of stressed and unstressed syllables in a line. It affects how the poem sounds when read aloud. The correct option is 'creates a soothing rhythm' because the consistent meter gives the poem a gentle, calming flow. 'Creates a jarring rhythm' is incorrect because the meter is consistent and smooth. 'Creates an erratic rhythm' is incorrect because the meter is not irregular. 'Creates a fast-paced rhythm' is incorrect because the poem's flow is gentle, not fast. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "question": "How does the meter affect the poem's rhythm?",
+        "sentence": "The meter [BLANK] the poem's rhythm.",
+        "coachHint": "Consider how the poem sounds when read aloud.",
+        "correctOption": "creates a soothing rhythm",
+        "dropdownOptions": [
+          "creates a soothing rhythm",
+          "creates a jarring rhythm",
+          "creates an erratic rhythm",
+          "creates a fast-paced rhythm"
+        ],
+        "distractorRationale": [
+          {
+            "option": "creates a jarring rhythm",
+            "whyWrong": "The meter is consistent and smooth."
+          },
+          {
+            "option": "creates an erratic rhythm",
+            "whyWrong": "The meter is not irregular."
+          },
+          {
+            "option": "creates a fast-paced rhythm",
+            "whyWrong": "The poem's flow is gentle, not fast."
+          }
+        ],
+        "rightAnswerRationale": "The consistent meter creates a soothing rhythm."
+      }
+    ],
+    "sentenceFrames": [
+      "The rhyme scheme of this poem is [BLANK].",
+      "The imagery in the poem helps convey [BLANK].",
+      "The meter of the poem creates a [BLANK] rhythm."
+    ],
+    "successCriteria": [
+      "Identify the rhyme scheme of a given poem.",
+      "Explain how imagery enhances the poem's theme.",
+      "Recognize the meter and its effect on the poem's rhythm."
+    ],
+    "generatorVersion": "V2",
+    "resourceProvider": null,
+    "heroResourceLinkId": null,
+    "independentPractice": [
+      {
+        "type": "mc",
+        "choices": [
+          "AABB",
+          "ABAB",
+          "ABCB",
+          "ABBA"
+        ],
+        "passage": "The cat sat on the mat, It wore a funny hat, The dog barked at the cat, And that was that. Identify the rhyme scheme of the poem above. Choose the correct pattern from the options below: AABB, ABAB, ABCB, or ABBA. The rhyme scheme is the pattern of rhymes at the end of each line. Look for which lines rhyme with each other to determine the pattern. The correct answer is AABB because the first two lines rhyme with each other, and the last two lines rhyme with each other. ABAB is incorrect because it suggests alternating rhymes, which is not the case. ABCB is incorrect because it suggests the second and fourth lines rhyme, but they do not. ABBA is incorrect because it suggests the first and fourth lines rhyme, which they do not. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "question": "Identify the rhyme scheme of the following poem.",
+        "coachHint": "Look at the end of each line to see which ones rhyme.",
+        "correctAnswer": "AABB",
+        "distractorRationale": [
+          {
+            "choice": "ABAB",
+            "whyWrong": "This suggests alternating rhymes, which is not the case."
+          },
+          {
+            "choice": "ABCB",
+            "whyWrong": "This suggests the second and fourth lines rhyme, but they do not."
+          },
+          {
+            "choice": "ABBA",
+            "whyWrong": "This suggests the first and fourth lines rhyme, which they do not."
+          }
+        ],
+        "rightAnswerRationale": "The rhyme scheme is AABB because the first two lines rhyme, and the last two lines rhyme."
+      },
+      {
+        "type": "hot-text-phrase",
+        "passage": "The sun sets behind the hills, Painting the sky with hues of gold, The river reflects the colors bright, A masterpiece to behold. Select the two phrases that create imagery in the poem. Imagery involves vivid descriptions that appeal to the senses. Look for phrases that help you visualize the scene or evoke a sensory experience. The correct phrases are 'Painting the sky with hues of gold' and 'The river reflects the colors bright' because they create vivid images of the scene. 'The sun sets behind the hills' is incorrect because it describes the action but doesn't create a strong visual image. 'A masterpiece to behold' is incorrect because it describes the scene but doesn't evoke a sensory experience. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "question": "Select the phrases that create imagery in the poem.",
+        "coachHint": "Look for phrases that help you visualize the scene.",
+        "maxSelect": 2,
+        "minSelect": 2,
+        "correctPhrases": [
+          "Painting the sky with hues of gold",
+          "The river reflects the colors bright"
+        ],
+        "selectablePhrases": [
+          "The sun sets behind the hills",
+          "Painting the sky with hues of gold",
+          "The river reflects the colors bright",
+          "A masterpiece to behold"
+        ],
+        "rightAnswerRationale": "The phrases 'Painting the sky with hues of gold' and 'The river reflects the colors bright' create vivid images."
+      },
+      {
+        "type": "inline-dropdown",
+        "passage": "The waves crash gently on the shore, A melody of the ocean's roar, The seagulls call above the sea, A symphony of nature's glee. How does the meter affect the poem's rhythm? Choose the correct option from the dropdown. The meter is the pattern of stressed and unstressed syllables in a line. It affects how the poem sounds when read aloud. The correct option is 'creates a melodic rhythm' because the consistent meter gives the poem a musical, flowing quality. 'Creates a harsh rhythm' is incorrect because the meter is smooth and gentle. 'Creates a chaotic rhythm' is incorrect because the meter is not irregular. 'Creates a slow rhythm' is incorrect because the poem's flow is more musical than slow. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "question": "How does the meter affect the poem's rhythm?",
+        "sentence": "The meter [BLANK] the poem's rhythm.",
+        "coachHint": "Consider how the poem sounds when read aloud.",
+        "correctOption": "creates a melodic rhythm",
+        "dropdownOptions": [
+          "creates a melodic rhythm",
+          "creates a harsh rhythm",
+          "creates a chaotic rhythm",
+          "creates a slow rhythm"
+        ],
+        "distractorRationale": [
+          {
+            "option": "creates a harsh rhythm",
+            "whyWrong": "The meter is smooth and gentle."
+          },
+          {
+            "option": "creates a chaotic rhythm",
+            "whyWrong": "The meter is not irregular."
+          },
+          {
+            "option": "creates a slow rhythm",
+            "whyWrong": "The poem's flow is more musical than slow."
+          }
+        ],
+        "rightAnswerRationale": "The consistent meter creates a melodic rhythm."
+      },
+      {
+        "type": "mc",
+        "choices": [
+          "AABB",
+          "ABAB",
+          "ABCB",
+          "ABBA"
+        ],
+        "passage": "The forest whispers secrets old, As leaves of green turn into gold, The river sings a gentle tune, Beneath the watchful eyes of the moon. Identify the rhyme scheme of the poem above. Choose the correct pattern from the options below: AABB, ABAB, ABCB, or ABBA. The rhyme scheme is the pattern of rhymes at the end of each line. Look for which lines rhyme with each other to determine the pattern. The correct answer is AABB because the first two lines rhyme with each other, and the last two lines rhyme with each other. ABAB is incorrect because it suggests alternating rhymes, which is not the case. ABCB is incorrect because it suggests the second and fourth lines rhyme, but they do not. ABBA is incorrect because it suggests the first and fourth lines rhyme, which they do not. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "question": "What is the rhyme scheme of the following poem?",
+        "coachHint": "Look at the end of each line to see which ones rhyme.",
+        "correctAnswer": "AABB",
+        "distractorRationale": [
+          {
+            "choice": "ABAB",
+            "whyWrong": "This suggests alternating rhymes, which is not the case."
+          },
+          {
+            "choice": "ABCB",
+            "whyWrong": "This suggests the second and fourth lines rhyme, but they do not."
+          },
+          {
+            "choice": "ABBA",
+            "whyWrong": "This suggests the first and fourth lines rhyme, which they do not."
+          }
+        ],
+        "rightAnswerRationale": "The rhyme scheme is AABB because the first two lines rhyme, and the last two lines rhyme."
+      }
+    ],
+    "resourceDescription": null
+  },
+  "critic": {
+    "score": 80,
+    "status": "PASS",
+    "revisions": []
+  },
+  "validationIssues": [
+    "Practice passage duplicate risk: current passage 3 is 0.97 similar to current passage 9. Previous passage was too similar to The gentle rain taps on the window, A soft lullaby to the night, The wind whispers through the trees, A calming, peacefu. Write on a different topic/scenario.",
+    "Practice passage duplicate risk: current passage 3 is 0.94 similar to current passage 12. Previous passage was too similar to The gentle stream flows through the meadow, A quiet song of peace, The birds chirp softly in the trees, A melody that wi. Write on a different topic/scenario.",
+    "Practice passage duplicate risk: current passage 9 is 0.94 similar to current passage 12. Previous passage was too similar to The gentle stream flows through the meadow, A quiet song of peace, The birds chirp softly in the trees, A melody that wi. Write on a different topic/scenario.",
+    "Practice Passages: Duplicate risk with high similarity between passages. (Revise passages 3, 9, and 12 to ensure unique content and avoid repetition. Focus on different topics or scenarios to maintain variety and engagement.)"
+  ],
+  "iterations": 0
+}

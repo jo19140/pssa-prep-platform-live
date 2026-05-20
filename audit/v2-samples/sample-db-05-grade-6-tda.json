@@ -1,0 +1,362 @@
+{
+  "lesson": {
+    "hook": "Imagine you're a detective solving a mystery. To crack the case, you need to gather clues and piece them together. In writing, evidence from the text is like those clues. It helps you build a strong argument and uncover deeper meanings. Today, we'll learn how to use evidence effectively to support our ideas in writing.",
+    "skill": "TDA Evidence and Explanation",
+    "title": "Mastering Text-Dependent Analysis with Evidence",
+    "exitTicket": [
+      {
+        "type": "multi-select",
+        "choices": [
+          "Teamwork helps overcome challenges.",
+          "Gardening is a fun summer activity.",
+          "Friendship grows through shared experiences.",
+          "Rare flowers are difficult to find."
+        ],
+        "passage": "In a small village, a group of children discovers an old library filled with forgotten books. They spend their afternoons reading and sharing stories. As they explore the library, they learn the value of knowledge and imagination. One day, they find a rare book and decide to restore it together, which strengthens their friendship. By the end of the summer, they have not only learned about literature but also about the importance of collaboration and creativity. The library becomes a symbol of their growing friendship and shared adventures, teaching them lessons that extend beyond the pages of the books they read together. Their bond deepens as they uncover new stories and ideas, illustrating the power of teamwork and shared experiences. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "question": "What is the main idea of the passage?",
+        "coachHint": "Think about what the characters learn by the end of the passage.",
+        "maxSelect": 2,
+        "minSelect": 2,
+        "correctAnswers": [
+          "Teamwork helps overcome challenges.",
+          "Friendship grows through shared experiences."
+        ],
+        "partialCreditRule": "per-correct",
+        "rightAnswerRationale": "The main idea is that teamwork and friendship are important for overcoming challenges."
+      },
+      {
+        "type": "two-part-ebsr",
+        "partA": {
+          "choices": [
+            "Through the students' shared experiences.",
+            "By describing the mural's beauty.",
+            "Through the students' individual achievements."
+          ],
+          "question": "What is the main way the author shows teamwork?",
+          "correctAnswer": "Through the students' shared experiences."
+        },
+        "partB": {
+          "choices": [
+            "They brainstorm ideas and assign roles.",
+            "They paint the mural individually.",
+            "The mural becomes a vibrant display of their collaboration."
+          ],
+          "question": "Which evidence supports this?",
+          "correctAnswers": [
+            "They brainstorm ideas and assign roles."
+          ]
+        },
+        "passage": "In a busy school, students are tasked with creating a mural for the hallway. They brainstorm ideas and assign roles based on each person's strengths. As they paint, they learn to communicate and compromise, ensuring everyone's vision is included. The mural becomes a vibrant display of their collaboration and creativity. By the end of the project, the students have not only created a beautiful piece of art but also strengthened their teamwork skills. The mural stands as a testament to their ability to work together and achieve a common goal, illustrating the power of cooperation and shared effort in achieving success. Their teamwork transforms the hallway into a colorful expression of unity and creativity. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "question": "How does the author show the importance of teamwork in the passage?",
+        "coachHint": "Look for actions the characters take together.",
+        "scoringRule": "B-counts-only-if-A-correct",
+        "rightAnswerRationale": "The author shows the importance of teamwork by describing how the students work together to create the mural, which strengthens their collaboration skills."
+      }
+    ],
+    "gradeLevel": 6,
+    "explanation": "Text-Dependent Analysis (TDA) requires you to dig deep into a text to find evidence that supports your ideas. When you write a TDA response, you are like a detective, gathering clues from the text to support your analysis. The first step is to understand the prompt. What is it asking you to do? Identify the key question or task. Next, read the text carefully. Look for details, quotes, or examples that relate to the prompt. These are your pieces of evidence. \n\nOnce you have your evidence, think about how it supports your response. This is your analysis. Explain why the evidence is important and how it connects to your main idea. For example, if the prompt asks about a character's motivation, find quotes that show their thoughts or actions. Then, explain how these quotes reveal their motivation.\n\nIt's important to use evidence accurately. Misinterpreting a quote can weaken your argument. Always check that your evidence directly supports your point. Also, make sure to explain your evidence clearly. Don't assume the reader knows why it's relevant. Your analysis should make the connection obvious.\n\nFinally, organize your response logically. Start with an introduction that states your main idea. Use body paragraphs to present evidence and analysis. Conclude by summarizing your main points and restating how the evidence supports your analysis. With practice, you'll become skilled at using evidence to create strong, convincing arguments in your writing. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step.",
+    "resourceUrl": "https://www.youtube.com/watch?v=Z8Qm87wtfJ0",
+    "whyAssigned": "This mini-lesson targets TDA Evidence and Explanation because the diagnostic showed a standards-aligned practice gap.",
+    "commonErrors": [
+      "Students may choose evidence that is not directly related to the prompt.",
+      "Some students might summarize the text instead of analyzing it.",
+      "Students often forget to explain how their evidence supports their point."
+    ],
+    "masteryCheck": [
+      {
+        "type": "multi-select",
+        "choices": [
+          "Art is about technique.",
+          "Art is about expressing emotions.",
+          "Art connects people.",
+          "Art is only for professionals."
+        ],
+        "passage": null,
+        "question": "What lesson does Leo learn from the painter?",
+        "coachHint": "Think about how Leo's perspective on art changes.",
+        "maxSelect": 2,
+        "minSelect": 2,
+        "correctAnswers": [
+          "Art is about expressing emotions.",
+          "Art connects people."
+        ],
+        "partialCreditRule": "per-correct",
+        "rightAnswerRationale": "Leo learns that art is about expressing emotions and connecting with others."
+      },
+      {
+        "type": "two-part-ebsr",
+        "partA": {
+          "choices": [
+            "Through the painter's guidance.",
+            "By describing Leo's struggles.",
+            "Through Leo's individual achievements."
+          ],
+          "question": "What is the main way the author shows mentorship?",
+          "correctAnswer": "Through the painter's guidance."
+        },
+        "partB": {
+          "choices": [
+            "The painter teaches Leo to see beauty in everyday life.",
+            "Leo struggles to find inspiration.",
+            "The city feels like a canvas full of possibilities."
+          ],
+          "question": "Which evidence supports this?",
+          "correctAnswers": [
+            "The painter teaches Leo to see beauty in everyday life."
+          ]
+        },
+        "passage": "In a bustling city, a young artist named Leo struggles to find inspiration. One day, he meets an elderly painter who teaches him to see beauty in everyday life. As they paint together, Leo learns that art is not just about technique but about expressing emotions and connecting with others. The painter's wisdom helps Leo find his unique style, and he realizes that inspiration can be found in the most unexpected places. By the end of their time together, Leo has not only improved his art but also gained a mentor and friend. The city, once overwhelming, now feels like a canvas full of possibilities, and Leo is eager to explore it with newfound confidence. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "question": "How does the author convey the theme of mentorship in the passage?",
+        "coachHint": "Look for interactions between Leo and the painter.",
+        "scoringRule": "B-counts-only-if-A-correct",
+        "rightAnswerRationale": "The author conveys the theme of mentorship by showing how the painter's guidance helps Leo find his unique style and confidence."
+      },
+      {
+        "type": "multi-select",
+        "choices": [
+          "Mentorship leads to personal growth.",
+          "Inspiration is unnecessary for artists.",
+          "Confidence comes from within.",
+          "Personal growth requires solitude."
+        ],
+        "passage": null,
+        "question": "What does Leo's transformation reveal about the theme of the passage?",
+        "coachHint": "Consider how Leo changes from the beginning to the end of the passage.",
+        "maxSelect": 2,
+        "minSelect": 2,
+        "correctAnswers": [
+          "Mentorship leads to personal growth.",
+          "Confidence comes from within."
+        ],
+        "partialCreditRule": "per-correct",
+        "rightAnswerRationale": "Leo's transformation reveals that mentorship and inspiration can lead to personal growth and confidence."
+      }
+    ],
+    "qualityScore": 92,
+    "standardCode": "CC.1.4.6.S",
+    "teiTypesUsed": [
+      "evidence-mapping",
+      "multi-select",
+      "two-part-ebsr"
+    ],
+    "exemplarsUsed": [
+      "g6-p1",
+      "g6-mc-6",
+      "g6-mc-1",
+      "g6-mc-2",
+      "g6-tda-1",
+      "g6-tei-7",
+      "g6-tei-2",
+      "g7-tei-8"
+    ],
+    "qualityIssues": [
+      "Critic requested revision after 3 iterations."
+    ],
+    "resourceTitle": "Citing Textual Evidence - Literary Analysis for Teens",
+    "standardLabel": "Use evidence and analysis in text-dependent writing",
+    "workedExample": "Let's look at an example. Suppose the prompt asks: \"How does the author show the theme of friendship in the story?\" First, identify parts of the text where friendship is evident. You might find a scene where characters help each other or share secrets.\n\nFor instance, if a character says, \"I couldn't have done it without you,\" this quote shows reliance and support, key aspects of friendship. In your response, you would write: \"The author demonstrates the theme of friendship through the characters' reliance on each other. When the protagonist says, 'I couldn't have done it without you,' it highlights the supportive nature of their relationship. This quote shows that the characters value and depend on each other, which is a central element of friendship.\"\n\nNotice how the evidence is directly quoted and followed by an explanation. This analysis connects the evidence to the theme, making the argument clear and convincing.",
+    "guidedPractice": [
+      {
+        "type": "evidence-mapping",
+        "claims": [
+          "The theme is friendship.",
+          "The theme is teamwork."
+        ],
+        "passage": "In a small village, a group of children discovers an old library filled with forgotten books. They spend their afternoons reading and sharing stories. As they explore the library, they learn the value of knowledge and imagination. One day, they find a rare book and decide to restore it together, which strengthens their friendship. By the end of the summer, they have not only learned about literature but also about the importance of collaboration and creativity. The library becomes a symbol of their growing friendship and shared adventures, teaching them lessons that extend beyond the pages of the books they read together. Their bond deepens as they uncover new stories and ideas, illustrating the power of teamwork and shared experiences. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "question": "What is the main theme of the passage?",
+        "coachHint": "Look for parts of the passage where the characters interact and support each other.",
+        "evidenceItems": [
+          "The children discover an old library together.",
+          "They decide to restore a rare book.",
+          "Their friendship grows through shared adventures."
+        ],
+        "correctMapping": [
+          {
+            "claim": "The theme is friendship.",
+            "evidenceItems": [
+              "Their friendship grows through shared adventures."
+            ]
+          },
+          {
+            "claim": "The theme is teamwork.",
+            "evidenceItems": [
+              "They decide to restore a rare book."
+            ]
+          }
+        ],
+        "rightAnswerRationale": "The theme of the passage is friendship and teamwork. The children's experiences in the library highlight how working together strengthens their bond."
+      },
+      {
+        "type": "multi-select",
+        "choices": [
+          "Teamwork helps overcome challenges.",
+          "Gardening is a fun summer activity.",
+          "Friendship grows through shared experiences.",
+          "Rare flowers are difficult to find."
+        ],
+        "passage": null,
+        "question": "What is the main idea of the passage?",
+        "coachHint": "Think about what the characters learn by the end of the passage.",
+        "maxSelect": 2,
+        "minSelect": 2,
+        "correctAnswers": [
+          "Teamwork helps overcome challenges.",
+          "Friendship grows through shared experiences."
+        ],
+        "partialCreditRule": "per-correct",
+        "rightAnswerRationale": "The main idea is that teamwork and friendship are important for overcoming challenges."
+      },
+      {
+        "type": "two-part-ebsr",
+        "partA": {
+          "choices": [
+            "Through the characters' shared experiences.",
+            "By describing the library's atmosphere.",
+            "Through the characters' individual achievements."
+          ],
+          "question": "What is the main way the author shows teamwork?",
+          "correctAnswer": "Through the characters' shared experiences."
+        },
+        "partB": {
+          "choices": [
+            "They find a rare book and decide to restore it together.",
+            "They spend their afternoons reading.",
+            "The library becomes a symbol of their friendship."
+          ],
+          "question": "Which evidence supports this?",
+          "correctAnswers": [
+            "They find a rare book and decide to restore it together."
+          ]
+        },
+        "passage": "In a small village, a group of children discovers an old library filled with forgotten books. They spend their afternoons reading and sharing stories. As they explore the library, they learn the value of knowledge and imagination. One day, they find a rare book and decide to restore it together, which strengthens their friendship. By the end of the summer, they have not only learned about literature but also about the importance of collaboration and creativity. The library becomes a symbol of their growing friendship and shared adventures, teaching them lessons that extend beyond the pages of the books they read together. Their bond deepens as they uncover new stories and ideas, illustrating the power of teamwork and shared experiences. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "question": "How does the author show the importance of teamwork in the passage?",
+        "coachHint": "Look for actions the characters take together.",
+        "scoringRule": "B-counts-only-if-A-correct",
+        "rightAnswerRationale": "The author shows the importance of teamwork by describing how the children work together to restore the rare book, which strengthens their friendship."
+      }
+    ],
+    "sentenceFrames": [
+      "The evidence that supports my point is...",
+      "This quote shows... because...",
+      "The author uses... to demonstrate..."
+    ],
+    "successCriteria": [
+      "Identify relevant evidence from the text.",
+      "Explain how the evidence supports your analysis.",
+      "Organize your response with a clear introduction, body, and conclusion."
+    ],
+    "generatorVersion": "V2",
+    "resourceProvider": "Miacademy & MiaPrep Learning Channel",
+    "heroResourceLinkId": "cmpcxj50q006fe8594gosxm75",
+    "independentPractice": [
+      {
+        "type": "evidence-mapping",
+        "claims": [
+          "The theme is finding inspiration.",
+          "The theme is mentorship."
+        ],
+        "passage": "In a bustling city, a young artist named Leo struggles to find inspiration. One day, he meets an elderly painter who teaches him to see beauty in everyday life. As they paint together, Leo learns that art is not just about technique but about expressing emotions and connecting with others. The painter's wisdom helps Leo find his unique style, and he realizes that inspiration can be found in the most unexpected places. By the end of their time together, Leo has not only improved his art but also gained a mentor and friend. The city, once overwhelming, now feels like a canvas full of possibilities, and Leo is eager to explore it with newfound confidence. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "question": "What is the central theme of the passage?",
+        "coachHint": "Consider what Leo learns from the elderly painter.",
+        "evidenceItems": [
+          "Leo learns to see beauty in everyday life.",
+          "The painter's wisdom helps Leo find his style.",
+          "Leo gains a mentor and friend."
+        ],
+        "correctMapping": [
+          {
+            "claim": "The theme is finding inspiration.",
+            "evidenceItems": [
+              "Leo learns to see beauty in everyday life."
+            ]
+          },
+          {
+            "claim": "The theme is mentorship.",
+            "evidenceItems": [
+              "Leo gains a mentor and friend."
+            ]
+          }
+        ],
+        "rightAnswerRationale": "The central theme is finding inspiration and mentorship in unexpected places."
+      },
+      {
+        "type": "multi-select",
+        "choices": [
+          "Art is about technique.",
+          "Art is about expressing emotions.",
+          "Art connects people.",
+          "Art is only for professionals."
+        ],
+        "passage": null,
+        "question": "What lesson does Leo learn from the painter?",
+        "coachHint": "Think about how Leo's perspective on art changes.",
+        "maxSelect": 2,
+        "minSelect": 2,
+        "correctAnswers": [
+          "Art is about expressing emotions.",
+          "Art connects people."
+        ],
+        "partialCreditRule": "per-correct",
+        "rightAnswerRationale": "Leo learns that art is about expressing emotions and connecting with others."
+      },
+      {
+        "type": "two-part-ebsr",
+        "partA": {
+          "choices": [
+            "Through the painter's guidance.",
+            "By describing Leo's struggles.",
+            "Through Leo's individual achievements."
+          ],
+          "question": "What is the main way the author shows mentorship?",
+          "correctAnswer": "Through the painter's guidance."
+        },
+        "partB": {
+          "choices": [
+            "The painter teaches Leo to see beauty in everyday life.",
+            "Leo struggles to find inspiration.",
+            "The city feels like a canvas full of possibilities."
+          ],
+          "question": "Which evidence supports this?",
+          "correctAnswers": [
+            "The painter teaches Leo to see beauty in everyday life."
+          ]
+        },
+        "passage": "In a bustling city, a young artist named Leo struggles to find inspiration. One day, he meets an elderly painter who teaches him to see beauty in everyday life. As they paint together, Leo learns that art is not just about technique but about expressing emotions and connecting with others. The painter's wisdom helps Leo find his unique style, and he realizes that inspiration can be found in the most unexpected places. By the end of their time together, Leo has not only improved his art but also gained a mentor and friend. The city, once overwhelming, now feels like a canvas full of possibilities, and Leo is eager to explore it with newfound confidence. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "question": "How does the author convey the theme of mentorship in the passage?",
+        "coachHint": "Look for interactions between Leo and the painter.",
+        "scoringRule": "B-counts-only-if-A-correct",
+        "rightAnswerRationale": "The author conveys the theme of mentorship by showing how the painter's guidance helps Leo find his unique style and confidence."
+      },
+      {
+        "type": "multi-select",
+        "choices": [
+          "Mentorship leads to personal growth.",
+          "Inspiration is unnecessary for artists.",
+          "Confidence comes from within.",
+          "Personal growth requires solitude."
+        ],
+        "passage": null,
+        "question": "What does Leo's transformation reveal about the theme of the passage?",
+        "coachHint": "Consider how Leo changes from the beginning to the end of the passage.",
+        "maxSelect": 2,
+        "minSelect": 2,
+        "correctAnswers": [
+          "Mentorship leads to personal growth.",
+          "Confidence comes from within."
+        ],
+        "partialCreditRule": "per-correct",
+        "rightAnswerRationale": "Leo's transformation reveals that mentorship and inspiration can lead to personal growth and confidence."
+      }
+    ],
+    "resourceDescription": "Strand: RL/RI · Duration: 1m 31s · Tier: on_grade · Collection: miacademy_literary_analysis"
+  },
+  "critic": {
+    "score": 92,
+    "status": "PASS",
+    "revisions": []
+  },
+  "validationIssues": [
+    "Critic requested revision after 3 iterations."
+  ],
+  "iterations": 0
+}
