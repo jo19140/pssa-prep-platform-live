@@ -67,7 +67,25 @@ export type PssaLessonExemplars = {
 
 export function loadGradeSampler(gradeLevel: number): GradeSampler {
   const samplerPath = path.join(EXTRACTED_DIR, `grade-${gradeLevel}`, "sampler.json");
-  return JSON.parse(readFileSync(samplerPath, "utf8")) as GradeSampler;
+  const sampler = JSON.parse(readFileSync(samplerPath, "utf8")) as GradeSampler;
+  return {
+    ...sampler,
+    passages: sampler.passages.map((passage) => {
+      const text = truncateAtSentenceBoundary(passage.text, 800);
+      return {
+        ...passage,
+        text,
+        wordCount: wordCount(text),
+      };
+    }),
+    tdaPrompts: sampler.tdaPrompts.map((prompt) => ({
+      ...prompt,
+      scoredExemplars: prompt.scoredExemplars.map((exemplar) => ({
+        ...exemplar,
+        response: truncateAtSentenceBoundary(exemplar.response, 500),
+      })),
+    })),
+  };
 }
 
 export function loadTechCatalog(): { source: string; generated_at: string; items: TechItemExample[] } {
@@ -223,6 +241,23 @@ function truncateWords(value: string, maxWords: number) {
   const words = value.trim().split(/\s+/).filter(Boolean);
   if (words.length <= maxWords) return value;
   return `${words.slice(0, maxWords).join(" ")}...`;
+}
+
+function truncateAtSentenceBoundary(value: string, maxWords: number) {
+  const words = value.trim().split(/\s+/).filter(Boolean);
+  if (words.length <= maxWords) return value;
+  const truncated = words.slice(0, maxWords).join(" ");
+  const boundary = Math.max(
+    truncated.lastIndexOf("."),
+    truncated.lastIndexOf("?"),
+    truncated.lastIndexOf("!"),
+  );
+  if (boundary > Math.floor(truncated.length * 0.65)) return `${truncated.slice(0, boundary + 1)} ...`;
+  return `${truncated} ...`;
+}
+
+function wordCount(value: string) {
+  return value.trim().split(/\s+/).filter(Boolean).length;
 }
 
 function trimTechContent(content: Record<string, unknown>) {

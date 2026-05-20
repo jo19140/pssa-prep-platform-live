@@ -8,6 +8,9 @@ import { allPracticeQuestions, lessonV2Schema, lessonV2StructuredOutputSchema, p
 import { validateLessonV2, wordCount } from "@/lib/lessonV2Validators";
 import { plannedTeiTypesForLesson, selectPssaExemplarsForLesson, type PssaLessonExemplars } from "@/lib/pssaExemplarLoader";
 
+const PROMPT_TOKEN_BUDGET = 90_000;
+const LESSON_V2_MAX_OUTPUT_TOKENS = 8_000;
+
 export type GenerateLessonV2Input = {
   gradeLevel: number;
   standardCode: string;
@@ -22,6 +25,16 @@ export type GenerateLessonV2Result = {
   critic: LessonV2CriticResult;
   validationIssues: string[];
   iterations: number;
+};
+
+type PromptBudgetBreakdown = {
+  exemplarTokens: number;
+  schemaTokens: number;
+  instructionsTokens: number;
+  criticHistoryTokens: number;
+  requestTokens: number;
+  totalPromptTokens: number;
+  leanMode: boolean;
 };
 
 export async function generateLessonV2(input: GenerateLessonV2Input): Promise<GenerateLessonV2Result> {
@@ -104,45 +117,25 @@ async function generateDraft(
   plannedTeiTypes: string[],
   revisionNotes: string[],
 ): Promise<LessonV2> {
+  const textFormat = zodTextFormat(lessonV2StructuredOutputSchema, "lesson_v2");
+  let prompt = buildDraftPrompt(input, exemplars, plannedTeiTypes, revisionNotes, false, textFormat);
+  if (prompt.breakdown.totalPromptTokens > PROMPT_TOKEN_BUDGET) {
+    console.warn(`[lessonV2] prompt budget ${prompt.breakdown.totalPromptTokens} tokens exceeds ${PROMPT_TOKEN_BUDGET}; switching to lean prompt for ${input.gradeLevel} ${input.standardCode} ${input.skill}`);
+    prompt = buildDraftPrompt(input, exemplars, plannedTeiTypes, revisionNotes, true, textFormat);
+  }
+  logPromptBudget("initial", input, prompt.breakdown);
   const response = await openai.responses.parse({
     model: process.env.LESSON_V2_MODEL || "gpt-4o",
     temperature: 0.2,
-    max_output_tokens: 50000,
-    instructions: buildSystemPrompt(input, plannedTeiTypes),
+    max_output_tokens: LESSON_V2_MAX_OUTPUT_TOKENS,
+    instructions: prompt.instructions,
     input: [
       {
         role: "user",
-        content: [
-          "<example_passages>",
-          JSON.stringify(exemplars.passages, null, 2),
-          "</example_passages>",
-          "<example_mc_items>",
-          JSON.stringify(exemplars.mcItems, null, 2),
-          "</example_mc_items>",
-          "<example_tei_items>",
-          JSON.stringify(exemplars.techItems, null, 2),
-          "</example_tei_items>",
-          "<tei_shape_examples>",
-          JSON.stringify(teiShapeExamples(), null, 2),
-          "</tei_shape_examples>",
-          exemplars.tdaPrompts.length ? `<example_tda>${JSON.stringify(exemplars.tdaPrompts, null, 2)}</example_tda>` : "",
-          revisionNotes.length ? `<revision_notes>${revisionNotes.join("\n")}</revision_notes>` : "",
-          "<lesson_request>",
-          JSON.stringify({
-            gradeLevel: input.gradeLevel,
-            standardCode: input.standardCode,
-            standardLabel: input.standardLabel,
-            skill: input.skill,
-            commonError: input.commonError || "Students need more precise analysis and practice with the target standard.",
-            whyAssigned: input.whyAssigned || `This mini-lesson targets ${input.skill} because the diagnostic showed a standards-aligned practice gap.`,
-            plannedTeiTypes,
-            exemplarIds: exemplars.exemplarIds,
-          }, null, 2),
-          "</lesson_request>",
-        ].filter(Boolean).join("\n"),
+        content: prompt.content,
       },
     ],
-    text: { format: zodTextFormat(lessonV2StructuredOutputSchema, "lesson_v2") },
+    text: { format: textFormat },
   });
   const lesson = lessonV2StructuredOutputSchema.parse(response.output_parsed);
   return {
@@ -167,37 +160,156 @@ async function regenerateTargetedDraft(
   currentLesson: LessonV2,
   revisionNotes: string[],
 ): Promise<LessonV2> {
+  const textFormat = zodTextFormat(lessonV2StructuredOutputSchema, "lesson_v2");
+  const prompt = buildTargetedRevisionPrompt(input, currentLesson, revisionNotes, textFormat);
+  logPromptBudget("targeted", input, prompt.breakdown);
   const response = await openai.responses.parse({
     model: process.env.LESSON_V2_MODEL || "gpt-4o",
     temperature: 0.1,
-    max_output_tokens: 50000,
-    instructions: [
-      "You are revising a PSSA ELA V2 lesson. Return the full lesson JSON in the same schema.",
-      "Preserve sections that are not mentioned in the revision notes. Regenerate only the flawed sections or practice items.",
-      "Pay special attention to exact structural fixes: inline-dropdown sentences must include [BLANK]; hot-text-word sentences must include [ word / word ]; passage-dependent TEIs must include a full passage; evidence-mapping must map every claim to at least one evidence item.",
-      "inline-dropdown sentences must contain exactly one [BLANK] at the blank location and must not contain empty [ ] placeholders.",
-      "hot-text-word is only for exactly two choices in each bracket. If a blank needs 3 or more options, change that item to inline-dropdown. Each hot-text-word bracket must contain exactly two options separated by a single /, and bracketPairs.length must equal the number of brackets in the sentence.",
-      "If the notes mention TEI variety, replace one current item with a different appropriate TEI type.",
-      "If the notes mention passage word count or FK grade, rewrite that passage on a different topic/scenario with simpler, natural sentences.",
-    ].join("\n"),
+    max_output_tokens: LESSON_V2_MAX_OUTPUT_TOKENS,
+    instructions: prompt.instructions,
     input: [
       {
         role: "user",
-        content: JSON.stringify({
-          lessonRequest: input,
-          revisionNotes: revisionNotes.slice(0, 12),
-          currentLesson,
-        }),
+        content: prompt.content,
       },
     ],
-    text: { format: zodTextFormat(lessonV2StructuredOutputSchema, "lesson_v2") },
+    text: { format: textFormat },
   });
   return lessonV2StructuredOutputSchema.parse(response.output_parsed);
 }
 
-function buildSystemPrompt(input: GenerateLessonV2Input, plannedTeiTypes: string[]) {
+export function buildLessonV2PromptBudget(input: GenerateLessonV2Input) {
+  const plannedTeiTypes = plannedTeiTypesForLesson(input.standardCode, input.skill);
+  const exemplars = selectPssaExemplarsForLesson({
+    gradeLevel: input.gradeLevel,
+    standardCode: input.standardCode,
+    skill: input.skill,
+    plannedTeiTypes,
+  });
+  const textFormat = zodTextFormat(lessonV2StructuredOutputSchema, "lesson_v2");
+  const normal = buildDraftPrompt(input, exemplars, plannedTeiTypes, [], false, textFormat).breakdown;
+  const lean = buildDraftPrompt(input, exemplars, plannedTeiTypes, [], true, textFormat).breakdown;
+  return {
+    plannedTeiTypes,
+    normal,
+    lean,
+    effective: normal.totalPromptTokens > PROMPT_TOKEN_BUDGET ? lean : normal,
+  };
+}
+
+function buildDraftPrompt(
+  input: GenerateLessonV2Input,
+  exemplars: PssaLessonExemplars,
+  plannedTeiTypes: string[],
+  revisionNotes: string[],
+  leanMode: boolean,
+  textFormat: unknown,
+) {
+  const selectedExemplars = leanMode ? leanExemplars(input, exemplars) : exemplars;
+  const instructions = buildSystemPrompt(input, plannedTeiTypes, leanMode);
+  const exemplarPassages = [
+    "<example_passages>",
+    JSON.stringify(selectedExemplars.passages, null, 2),
+    "</example_passages>",
+  ].join("\n");
+  const exemplarMcItems = [
+    "<example_mc_items>",
+    JSON.stringify(selectedExemplars.mcItems, null, 2),
+    "</example_mc_items>",
+  ].join("\n");
+  const exemplarTeiItems = [
+    "<example_tei_items>",
+    JSON.stringify(selectedExemplars.techItems, null, 2),
+    "</example_tei_items>",
+  ].join("\n");
+  const shapeExamples = [
+    "<tei_shape_examples>",
+    JSON.stringify(teiShapeExamples(), null, 2),
+    "</tei_shape_examples>",
+  ].join("\n");
+  const exemplarTda = selectedExemplars.tdaPrompts.length ? `<example_tda>${JSON.stringify(selectedExemplars.tdaPrompts, null, 2)}</example_tda>` : "";
+  const revisionHistory = revisionNotes.length ? `<revision_notes>${revisionNotes.slice(0, 8).join("\n")}</revision_notes>` : "";
+  const request = [
+    "<lesson_request>",
+    JSON.stringify({
+      gradeLevel: input.gradeLevel,
+      standardCode: input.standardCode,
+      standardLabel: input.standardLabel,
+      skill: input.skill,
+      commonError: input.commonError || "Students need more precise analysis and practice with the target standard.",
+      whyAssigned: input.whyAssigned || `This mini-lesson targets ${input.skill} because the diagnostic showed a standards-aligned practice gap.`,
+      plannedTeiTypes,
+      exemplarIds: selectedExemplars.exemplarIds,
+      leanPromptMode: leanMode,
+    }, null, 2),
+    "</lesson_request>",
+  ].join("\n");
+  const content = [
+    exemplarPassages,
+    exemplarMcItems,
+    exemplarTeiItems,
+    shapeExamples,
+    exemplarTda,
+    revisionHistory,
+    request,
+  ].filter(Boolean).join("\n");
+  return {
+    instructions,
+    content,
+    breakdown: promptBudgetBreakdown({
+      instructions,
+      exemplarSections: [exemplarPassages, exemplarMcItems, exemplarTeiItems, shapeExamples, exemplarTda],
+      schema: JSON.stringify(textFormat),
+      revisionHistory,
+      request,
+      total: `${instructions}\n${content}\n${JSON.stringify(textFormat)}`,
+      leanMode,
+    }),
+  };
+}
+
+function buildTargetedRevisionPrompt(
+  input: GenerateLessonV2Input,
+  currentLesson: LessonV2,
+  revisionNotes: string[],
+  textFormat: unknown,
+) {
+  const instructions = [
+    "You are revising a PSSA ELA V2 lesson. Return the full lesson JSON in the same schema.",
+    "Preserve sections that are not mentioned in the revision notes. Regenerate only the flawed sections or practice items.",
+    "Use only the most recent draft and the structured revision notes below; do not infer or recreate any earlier critic history.",
+    "Pay special attention to exact structural fixes: inline-dropdown sentences must include [BLANK]; hot-text-word sentences must include [ word / word ]; passage-dependent TEIs must include a full passage; evidence-mapping must map every claim to at least one evidence item.",
+    "inline-dropdown sentences must contain exactly one [BLANK] at the blank location and must not contain empty [ ] placeholders.",
+    "hot-text-word is only for exactly two choices in each bracket. If a blank needs 3 or more options, change that item to inline-dropdown. Each hot-text-word bracket must contain exactly two options separated by a single /, and bracketPairs.length must equal the number of brackets in the sentence.",
+    "If the notes mention TEI variety, replace one current item with a different appropriate TEI type.",
+    "If the notes mention passage word count or FK grade, rewrite that passage on a different topic/scenario with simpler, natural sentences.",
+  ].join("\n");
+  const revisionHistory = JSON.stringify(revisionNotes.slice(0, 8));
+  const request = JSON.stringify({
+    lessonRequest: input,
+    revisionNotes: revisionNotes.slice(0, 8),
+    currentLesson,
+  });
+  return {
+    instructions,
+    content: request,
+    breakdown: promptBudgetBreakdown({
+      instructions,
+      exemplarSections: [],
+      schema: JSON.stringify(textFormat),
+      revisionHistory,
+      request,
+      total: `${instructions}\n${request}\n${JSON.stringify(textFormat)}`,
+      leanMode: false,
+    }),
+  };
+}
+
+function buildSystemPrompt(input: GenerateLessonV2Input, plannedTeiTypes: string[], leanMode = false) {
   return [
     "You are building a high-quality PSSA ELA V2 mini-lesson for standards-based mastery and intervention.",
+    leanMode ? "LEAN PROMPT MODE: use the smaller exemplar set provided here and keep each generated passage near the lower end of the required word range." : "",
     "Generate original lesson content grounded in the provided released-item and DRC INSIGHT TEI examples. Do not copy passages verbatim except for short quoted evidence inside rationales.",
     "The lesson must match the schema exactly. Use generatorVersion V2. Set heroResourceLinkId, resourceTitle, resourceUrl, resourceProvider, and resourceDescription to null; the server attaches hero video fields after validation.",
     "Teaching section requirements: hook 50-100 words, explanation 320-500 words, workedExample 160-250 words. Include concrete examples, not placeholder announcements. Count conservatively and write enough detail to exceed the minimum.",
@@ -215,7 +327,65 @@ function buildSystemPrompt(input: GenerateLessonV2Input, plannedTeiTypes: string
     "Writing (CC.1.4.x): organization/transitions -> drag-drop-order; style/formality -> hot-text-sentence; supporting evidence -> multi-select or evidence-mapping; TDA prompts remain outside this practice generator.",
     `For this lesson, strongly consider these TEI types: ${plannedTeiTypes.join(", ")}.`,
     `Target: grade ${input.gradeLevel}, ${input.standardCode}, ${input.skill}.`,
-  ].join("\n");
+  ].filter(Boolean).join("\n");
+}
+
+function leanExemplars(input: GenerateLessonV2Input, exemplars: PssaLessonExemplars): PssaLessonExemplars {
+  const tdaPrompts = isTdaLesson(input) ? exemplars.tdaPrompts.slice(0, 1) : [];
+  return {
+    ...exemplars,
+    passages: exemplars.passages.slice(0, 1),
+    mcItems: exemplars.mcItems.slice(0, 2),
+    tdaPrompts,
+    techItems: exemplars.techItems.slice(0, 2),
+    exemplarIds: [
+      ...exemplars.passages.slice(0, 1).map((passage) => passage.id),
+      ...exemplars.mcItems.slice(0, 2).map((item) => item.id),
+      ...tdaPrompts.map((prompt) => prompt.id),
+      ...exemplars.techItems.slice(0, 2).map((item) => item.id),
+    ],
+  };
+}
+
+function isTdaLesson(input: GenerateLessonV2Input) {
+  return input.standardCode.startsWith("CC.1.4.") && /tda|text[-\s]?dependent/i.test(`${input.standardLabel} ${input.skill}`);
+}
+
+function promptBudgetBreakdown({
+  instructions,
+  exemplarSections,
+  schema,
+  revisionHistory,
+  request,
+  total,
+  leanMode,
+}: {
+  instructions: string;
+  exemplarSections: string[];
+  schema: string;
+  revisionHistory: string;
+  request: string;
+  total: string;
+  leanMode: boolean;
+}): PromptBudgetBreakdown {
+  return {
+    exemplarTokens: estimateTokens(exemplarSections.join("\n")),
+    schemaTokens: estimateTokens(schema),
+    instructionsTokens: estimateTokens(instructions),
+    criticHistoryTokens: estimateTokens(revisionHistory),
+    requestTokens: estimateTokens(request),
+    totalPromptTokens: estimateTokens(total),
+    leanMode,
+  };
+}
+
+function estimateTokens(value: string) {
+  return Math.ceil(value.length / 4);
+}
+
+function logPromptBudget(stage: string, input: GenerateLessonV2Input, breakdown: PromptBudgetBreakdown) {
+  if (process.env.LESSON_V2_TOKEN_DEBUG !== "1") return;
+  console.log(`[lessonV2:${stage}:tokens] ${input.gradeLevel} ${input.standardCode} ${input.skill} ${JSON.stringify(breakdown)}`);
 }
 
 function teiShapeExamples() {

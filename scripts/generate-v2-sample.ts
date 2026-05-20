@@ -23,7 +23,8 @@ async function main() {
   const limit = readLimitArg();
   const filter = readFilterArg();
   const outputDir = readOutputDirArg();
-  const indexedRequests = lessonRequests.map((request, index) => ({ request, originalIndex: index }));
+  const customRequest = readCustomRequestArg();
+  const indexedRequests = (customRequest ? [customRequest] : lessonRequests).map((request, index) => ({ request, originalIndex: customRequest ? lessonRequests.length + index : index }));
   const filteredRequests = filter
     ? indexedRequests.filter(({ request }) => `${request.gradeLevel} ${request.standardCode} ${request.standardLabel} ${request.skill}`.toLowerCase().includes(filter))
     : indexedRequests;
@@ -75,7 +76,7 @@ async function main() {
   console.log(`Distinct TEI types (${teiTypes.length}): ${teiTypes.join(", ")}`);
   console.log(`Duplicate passage pairs: ${duplicatePairs.length}`);
   if (averageQuality < 85) throw new Error(`Average qualityScore ${averageQuality.toFixed(1)} is below 85.`);
-  if (!limit && !filter && teiTypes.length < 6) throw new Error(`Expected at least 6 TEI types across samples, found ${teiTypes.length}.`);
+  if (!limit && !filter && !customRequest && teiTypes.length < 6) throw new Error(`Expected at least 6 TEI types across samples, found ${teiTypes.length}.`);
   if (duplicatePairs.length) throw new Error("Duplicate passages detected across generated samples.");
 }
 
@@ -97,6 +98,34 @@ function readOutputDirArg() {
   const arg = process.argv.find((value) => value.startsWith("--output-dir="));
   if (!arg) return DEFAULT_OUTPUT_DIR;
   return path.resolve(arg.split("=")[1]);
+}
+
+function readCustomRequestArg(): GenerateLessonV2Input | null {
+  const grade = readArgNumber("grade");
+  const standardCode = readArgString("standard");
+  const skill = readArgString("skill");
+  if (!grade && !standardCode && !skill) return null;
+  if (!grade || !standardCode || !skill) throw new Error("--grade, --standard, and --skill are required together for a custom sample.");
+  return {
+    gradeLevel: grade,
+    standardCode,
+    standardLabel: readArgString("label") || `Custom sample for ${standardCode}`,
+    skill,
+  };
+}
+
+function readArgString(name: string) {
+  const arg = process.argv.find((value) => value.startsWith(`--${name}=`));
+  if (!arg) return null;
+  return arg.split("=").slice(1).join("=").trim();
+}
+
+function readArgNumber(name: string) {
+  const value = readArgString(name);
+  if (!value) return null;
+  const parsed = Number(value);
+  if (!Number.isInteger(parsed)) throw new Error(`--${name} must be an integer.`);
+  return parsed;
 }
 
 function findDuplicatePassages(lessons: LessonV2[]) {

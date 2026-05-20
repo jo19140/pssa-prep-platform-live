@@ -1,2295 +1,70 @@
 {
-  "generatedAt": "2026-05-20T06:16:28.961Z",
+  "generatedAt": "2026-05-20T09:07:47.917Z",
   "totalTargets": 182,
-  "successfulGenerations": 137,
-  "failedGenerations": 45,
-  "failures": [
-    {
-      "gradeLevel": 3,
-      "standardCode": "CC.1.3.3.F",
-      "standardLabel": "Determine literal and nonliteral meanings",
-      "skill": "Connotation and Figurative Language",
-      "source": "existing-v1-db,prebuilt-seed-library",
-      "error": "Unterminated string in JSON at position 41430 (line 1 column 41431)"
-    },
+  "successfulGenerations": 45,
+  "failedGenerations": 0,
+  "failures": [],
+  "qualityScoreDistribution": {
+    "min": 75,
+    "max": 92,
+    "mean": 90.73,
+    "median": 92
+  },
+  "teiTypeDistribution": {
+    "hot-text-phrase": 17,
+    "inline-dropdown": 22,
+    "two-part-ebsr": 14,
+    "drag-drop-order": 3,
+    "hot-text-sentence": 19,
+    "evidence-mapping": 19,
+    "hot-text-word": 12,
+    "multi-select": 8,
+    "drag-drop-table": 3
+  },
+  "heroVideoCoveragePercentage": 35.56,
+  "totalCost": {
+    "estimatedUsdLow": 24.75,
+    "estimatedUsdHigh": 56.25,
+    "note": "OpenAI Responses API usage headers are not exposed by the SDK here; this is a rough per-lesson estimate."
+  },
+  "runtimeDurationMinutes": 97.3,
+  "successes": [
     {
       "gradeLevel": 5,
       "standardCode": "CC.1.3.5.F",
-      "standardLabel": "Interpret figurative language and word meaning",
       "skill": "Connotation and Figurative Language",
-      "source": "existing-v1-db,prebuilt-seed-library",
-      "error": "Expected ',' or ']' after array element in JSON at position 63004 (line 1 column 63005)"
+      "qualityScore": 92,
+      "teiTypesUsed": [
+        "hot-text-phrase",
+        "inline-dropdown",
+        "two-part-ebsr",
+        "drag-drop-order"
+      ],
+      "heroResourceLinkId": null,
+      "iterations": 5,
+      "validationIssues": []
+    },
+    {
+      "gradeLevel": 3,
+      "standardCode": "CC.1.3.3.F",
+      "skill": "Connotation and Figurative Language",
+      "qualityScore": 92,
+      "teiTypesUsed": [
+        "hot-text-phrase",
+        "inline-dropdown"
+      ],
+      "heroResourceLinkId": "cmp4fw31j0020g3sa0mef1zh9",
+      "iterations": 5,
+      "validationIssues": []
     },
     {
       "gradeLevel": 7,
       "standardCode": "CC.1.3.7.A",
-      "standardLabel": "Analyze theme development and provide summary",
-      "skill": "Theme",
-      "source": "existing-v1-db,prebuilt-seed-library",
-      "error": "400 Requested 301824 tokens, max 300000 tokens per request"
-    },
-    {
-      "gradeLevel": 7,
-      "standardCode": "CC.1.3.7.C",
-      "standardLabel": "Analyze interaction of story elements",
-      "skill": "Plot Lines and Conflict Development",
-      "source": "existing-v1-db,prebuilt-seed-library",
-      "error": "400 Requested 301797 tokens, max 300000 tokens per request"
-    },
-    {
-      "gradeLevel": 7,
-      "standardCode": "CC.1.3.7.E",
-      "standardLabel": "Analyze how structure contributes to meaning",
-      "skill": "Poetry Structure and Meaning",
-      "source": "existing-v1-db,prebuilt-seed-library",
-      "error": "400 Requested 306462 tokens, max 300000 tokens per request"
-    },
-    {
-      "gradeLevel": 7,
-      "standardCode": "CC.1.3.7.F",
-      "standardLabel": "Analyze figurative, connotative, and technical meanings",
-      "skill": "Connotation and Figurative Language",
-      "source": "existing-v1-db,prebuilt-seed-library",
-      "error": "400 Requested 305594 tokens, max 300000 tokens per request"
-    },
-    {
-      "gradeLevel": 7,
-      "standardCode": "CC.1.4.7.A",
-      "standardLabel": "Write informative texts with clear organization",
-      "skill": "Informative Writing with Transitions",
-      "source": "existing-v1-db,prebuilt-seed-library",
-      "error": "400 Requested 307518 tokens, max 300000 tokens per request"
-    },
-    {
-      "gradeLevel": 7,
-      "standardCode": "CC.1.3.7.F",
-      "standardLabel": "Analyze how word choice affects meaning and tone",
-      "skill": "Mood, Tone, and Word Choice",
-      "source": "existing-v1-db,prebuilt-seed-library",
-      "error": "400 Requested 307636 tokens, max 300000 tokens per request"
-    },
-    {
-      "gradeLevel": 7,
-      "standardCode": "CC.1.4.7.F",
-      "standardLabel": "Apply grade-level punctuation conventions",
-      "skill": "Comma Use with Coordinate Adjectives",
-      "source": "existing-v1-db,prebuilt-seed-library",
-      "error": "400 Requested 306040 tokens, max 300000 tokens per request"
-    },
-    {
-      "gradeLevel": 7,
-      "standardCode": "CC.1.4.7.F",
-      "standardLabel": "Maintain formal style and precise language",
-      "skill": "Formal Style and Precise Language",
-      "source": "existing-v1-db,prebuilt-seed-library",
-      "error": "400 Requested 305655 tokens, max 300000 tokens per request"
-    },
-    {
-      "gradeLevel": 7,
-      "standardCode": "CC.1.4.7.F",
-      "standardLabel": "Use modifiers clearly and correctly",
-      "skill": "Misplaced and Dangling Modifiers",
-      "source": "existing-v1-db,prebuilt-seed-library",
-      "error": "400 Requested 304848 tokens, max 300000 tokens per request"
-    },
-    {
-      "gradeLevel": 7,
-      "standardCode": "CC.1.4.7.F",
-      "standardLabel": "Conventions of Standard English - Formal and Informal Style",
-      "skill": "Formal and Informal Style",
-      "source": "existing-v1-db,prebuilt-seed-library",
-      "error": "400 Requested 305550 tokens, max 300000 tokens per request"
-    },
-    {
-      "gradeLevel": 7,
-      "standardCode": "CC.1.4.7.F",
-      "standardLabel": "Conventions of Standard English - Pronoun Agreement and Shifts",
-      "skill": "Pronoun Agreement and Shifts",
-      "source": "existing-v1-db,prebuilt-seed-library",
-      "error": "400 Requested 306493 tokens, max 300000 tokens per request"
-    },
-    {
-      "gradeLevel": 7,
-      "standardCode": "CC.1.4.7.G",
-      "standardLabel": "Write arguments with claims, reasons, and counterclaims",
-      "skill": "Argument Counterclaim Response",
-      "source": "existing-v1-db,prebuilt-seed-library",
-      "error": "400 Requested 306176 tokens, max 300000 tokens per request"
-    },
-    {
-      "gradeLevel": 7,
-      "standardCode": "CC.1.4.7.V",
-      "standardLabel": "Conduct short research and gather relevant information",
-      "skill": "Research Questions and Source Notes",
-      "source": "existing-v1-db,prebuilt-seed-library",
-      "error": "400 Requested 304847 tokens, max 300000 tokens per request"
-    },
-    {
-      "gradeLevel": 7,
-      "standardCode": "CC.1.4.7.S",
-      "standardLabel": "Use evidence and analysis in text-dependent writing",
-      "skill": "TDA Evidence and Explanation",
-      "source": "existing-v1-db,prebuilt-seed-library",
-      "error": "400 Requested 304856 tokens, max 300000 tokens per request"
-    },
-    {
-      "gradeLevel": 8,
-      "standardCode": "CC.1.1.8.E",
-      "standardLabel": "Foundational Skills - connotation through word structure",
-      "skill": "Connotation Through Word Structure",
-      "source": "new-foundational-targets",
-      "error": "400 Requested 306107 tokens, max 300000 tokens per request"
-    },
-    {
-      "gradeLevel": 8,
-      "standardCode": "CC.1.1.8.E",
-      "standardLabel": "Foundational Skills - advanced word analysis",
-      "skill": "Advanced Word Analysis",
-      "source": "new-foundational-targets",
-      "error": "400 Requested 304515 tokens, max 300000 tokens per request"
-    },
-    {
-      "gradeLevel": 8,
-      "standardCode": "CC.1.2.8.A",
-      "standardLabel": "Analyze multiple central ideas and their development",
-      "skill": "Multiple Central Ideas",
-      "source": "existing-v1-db,prebuilt-seed-library",
-      "error": "400 Requested 309288 tokens, max 300000 tokens per request"
-    },
-    {
-      "gradeLevel": 8,
-      "standardCode": "CC.1.2.8.A",
-      "standardLabel": "Analyze central idea development and objective summary",
-      "skill": "Main Idea",
-      "source": "existing-v1-db,prebuilt-seed-library",
-      "error": "400 Requested 305833 tokens, max 300000 tokens per request"
-    },
-    {
-      "gradeLevel": 8,
-      "standardCode": "CC.1.2.8.B",
-      "standardLabel": "Draw inferences supported by strong textual evidence",
-      "skill": "Inference",
-      "source": "existing-v1-db,prebuilt-seed-library",
-      "error": "400 Requested 306510 tokens, max 300000 tokens per request"
-    },
-    {
-      "gradeLevel": 8,
-      "standardCode": "CC.1.2.8.B",
-      "standardLabel": "Cite the strongest textual evidence to support analysis",
-      "skill": "Text Evidence",
-      "source": "existing-v1-db,prebuilt-seed-library",
-      "error": "400 Requested 307993 tokens, max 300000 tokens per request"
-    },
-    {
-      "gradeLevel": 8,
-      "standardCode": "CC.1.2.8.E",
-      "standardLabel": "Analyze and compare text structures",
-      "skill": "Compare Text Structures",
-      "source": "existing-v1-db,prebuilt-seed-library",
-      "error": "400 Requested 304845 tokens, max 300000 tokens per request"
-    },
-    {
-      "gradeLevel": 8,
-      "standardCode": "CC.1.2.8.E",
-      "standardLabel": "Analyze visual and quantitative information",
-      "skill": "Visual and Quantitative Evidence",
-      "source": "existing-v1-db,prebuilt-seed-library",
-      "error": "400 Requested 307035 tokens, max 300000 tokens per request"
-    },
-    {
-      "gradeLevel": 8,
-      "standardCode": "CC.1.2.8.D",
-      "standardLabel": "Analyze author's point of view and bias",
-      "skill": "Author Perspective and Bias",
-      "source": "existing-v1-db,prebuilt-seed-library",
-      "error": "400 Requested 308864 tokens, max 300000 tokens per request"
-    },
-    {
-      "gradeLevel": 8,
-      "standardCode": "CC.1.2.8.G",
-      "standardLabel": "Evaluate reasoning, appeals, and fallacies",
-      "skill": "Logical Fallacies and Appeals",
-      "source": "existing-v1-db,prebuilt-seed-library",
-      "error": "400 Requested 305732 tokens, max 300000 tokens per request"
-    },
-    {
-      "gradeLevel": 8,
-      "standardCode": "CC.1.2.8.G",
-      "standardLabel": "Trace and evaluate argument and evidence",
-      "skill": "Trace and Evaluate Arguments",
-      "source": "existing-v1-db,prebuilt-seed-library",
-      "error": "400 Requested 305808 tokens, max 300000 tokens per request"
-    },
-    {
-      "gradeLevel": 8,
-      "standardCode": "CC.1.2.8.I",
-      "standardLabel": "Analyze conflicting information across texts",
-      "skill": "Conflicting Information Across Texts",
-      "source": "existing-v1-db,prebuilt-seed-library",
-      "error": "400 Requested 304515 tokens, max 300000 tokens per request"
-    },
-    {
-      "gradeLevel": 8,
-      "standardCode": "CC.1.3.8.A",
-      "standardLabel": "Analyze multiple themes and their development",
-      "skill": "Multiple Themes in Literature",
-      "source": "existing-v1-db,prebuilt-seed-library",
-      "error": "400 Requested 309006 tokens, max 300000 tokens per request"
-    },
-    {
-      "gradeLevel": 8,
-      "standardCode": "CC.1.3.8.C",
-      "standardLabel": "Analyze dialogue and incidents that reveal character",
-      "skill": "Dialogue and Characterization",
-      "source": "existing-v1-db,prebuilt-seed-library",
-      "error": "400 Requested 306832 tokens, max 300000 tokens per request"
-    },
-    {
-      "gradeLevel": 8,
-      "standardCode": "CC.1.3.8.A",
-      "standardLabel": "Analyze theme development and relationships",
-      "skill": "Theme",
-      "source": "existing-v1-db,prebuilt-seed-library",
-      "error": "400 Requested 308941 tokens, max 300000 tokens per request"
-    },
-    {
-      "gradeLevel": 8,
-      "standardCode": "CC.1.3.8.C",
-      "standardLabel": "Analyze literary elements and plot effects",
-      "skill": "Dramatic Irony and Suspense",
-      "source": "existing-v1-db,prebuilt-seed-library",
-      "error": "400 Requested 307238 tokens, max 300000 tokens per request"
-    },
-    {
-      "gradeLevel": 8,
-      "standardCode": "CC.1.3.8.D",
-      "standardLabel": "Analyze how point of view creates effects",
-      "skill": "Point of View",
-      "source": "existing-v1-db,prebuilt-seed-library",
-      "error": "400 Requested 305206 tokens, max 300000 tokens per request"
-    },
-    {
-      "gradeLevel": 8,
-      "standardCode": "CC.1.3.8.F",
-      "standardLabel": "Analyze figurative, connotative, and technical meanings",
-      "skill": "Connotation and Figurative Language",
-      "source": "existing-v1-db,prebuilt-seed-library",
-      "error": "400 Requested 304456 tokens, max 300000 tokens per request"
-    },
-    {
-      "gradeLevel": 8,
-      "standardCode": "CC.1.3.8.F",
-      "standardLabel": "Analyze the effect of figurative language",
-      "skill": "Figurative Language Effect",
-      "source": "existing-v1-db,prebuilt-seed-library",
-      "error": "400 Requested 305630 tokens, max 300000 tokens per request"
-    },
-    {
-      "gradeLevel": 8,
-      "standardCode": "CC.1.4.8.A",
-      "standardLabel": "Write informative texts that synthesize ideas",
-      "skill": "Informative Synthesis Writing",
-      "source": "existing-v1-db,prebuilt-seed-library",
-      "error": "400 Requested 304498 tokens, max 300000 tokens per request"
-    },
-    {
-      "gradeLevel": 8,
-      "standardCode": "CC.1.3.8.H",
-      "standardLabel": "Compare texts across genres on themes and patterns",
-      "skill": "Compare Genres on Similar Themes",
-      "source": "existing-v1-db,prebuilt-seed-library",
-      "error": "400 Requested 307392 tokens, max 300000 tokens per request"
-    },
-    {
-      "gradeLevel": 8,
-      "standardCode": "CC.1.4.8.F",
-      "standardLabel": "Apply punctuation for clarity and effect",
-      "skill": "Ellipses, Dashes, and Punctuation Effects",
-      "source": "existing-v1-db,prebuilt-seed-library",
-      "error": "400 Requested 305278 tokens, max 300000 tokens per request"
-    },
-    {
-      "gradeLevel": 8,
-      "standardCode": "CC.1.4.8.F",
-      "standardLabel": "Maintain formal academic style and precise language",
-      "skill": "Formal Academic Style",
-      "source": "existing-v1-db,prebuilt-seed-library",
-      "error": "400 Requested 305790 tokens, max 300000 tokens per request"
-    },
-    {
-      "gradeLevel": 8,
-      "standardCode": "CC.1.4.8.F",
-      "standardLabel": "Conventions of Standard English - Formal and Informal Style",
-      "skill": "Formal and Informal Style",
-      "source": "existing-v1-db,prebuilt-seed-library",
-      "error": "400 Requested 306281 tokens, max 300000 tokens per request"
-    },
-    {
-      "gradeLevel": 8,
-      "standardCode": "CC.1.4.8.F",
-      "standardLabel": "Conventions of Standard English - Pronoun Agreement and Shifts",
-      "skill": "Pronoun Agreement and Shifts",
-      "source": "existing-v1-db,prebuilt-seed-library",
-      "error": "400 Requested 305031 tokens, max 300000 tokens per request"
-    },
-    {
-      "gradeLevel": 8,
-      "standardCode": "CC.1.4.8.F",
-      "standardLabel": "Use verbs in active/passive voice and mood",
-      "skill": "Verb Moods and Voice",
-      "source": "existing-v1-db,prebuilt-seed-library",
-      "error": "400 Requested 305315 tokens, max 300000 tokens per request"
-    },
-    {
-      "gradeLevel": 8,
-      "standardCode": "CC.1.4.8.G",
-      "standardLabel": "Write arguments with claims, counterclaims, and evidence",
-      "skill": "Argument with Counterclaims and Evidence",
-      "source": "existing-v1-db,prebuilt-seed-library",
-      "error": "400 Requested 305405 tokens, max 300000 tokens per request"
-    },
-    {
-      "gradeLevel": 8,
-      "standardCode": "CC.1.4.8.V",
-      "standardLabel": "Assess source credibility and integrate research",
-      "skill": "Research Source Credibility",
-      "source": "existing-v1-db,prebuilt-seed-library",
-      "error": "400 Requested 305749 tokens, max 300000 tokens per request"
-    },
-    {
-      "gradeLevel": 8,
-      "standardCode": "CC.1.4.8.S",
-      "standardLabel": "Use strong evidence and analysis in text-dependent writing",
-      "skill": "TDA Evidence and Explanation",
-      "source": "existing-v1-db,prebuilt-seed-library",
-      "error": "400 Requested 309004 tokens, max 300000 tokens per request"
-    }
-  ],
-  "qualityScoreDistribution": {
-    "min": 75,
-    "max": 92,
-    "mean": 90.81,
-    "median": 92
-  },
-  "teiTypeDistribution": {
-    "inline-dropdown": 76,
-    "hot-text-phrase": 68,
-    "multi-select": 22,
-    "two-part-ebsr": 43,
-    "hot-text-word": 29,
-    "evidence-mapping": 50,
-    "drag-drop-table": 12,
-    "drag-drop-order": 13,
-    "hot-text-sentence": 43
-  },
-  "heroVideoCoveragePercentage": 47.45,
-  "totalCost": {
-    "estimatedUsdLow": 75.35,
-    "estimatedUsdHigh": 171.25,
-    "note": "OpenAI Responses API usage headers are not exposed by the SDK here; this is a rough per-lesson estimate."
-  },
-  "runtimeDurationMinutes": 242.5,
-  "successes": [
-    {
-      "gradeLevel": 3,
-      "standardCode": "CC.1.1.3.D",
-      "skill": "Multisyllable Word Parts",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "inline-dropdown",
-        "hot-text-phrase"
-      ],
-      "heroResourceLinkId": null,
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 3,
-      "standardCode": "CC.1.1.3.D",
-      "skill": "Phonics Patterns",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "inline-dropdown",
-        "hot-text-phrase"
-      ],
-      "heroResourceLinkId": null,
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 3,
-      "standardCode": "CC.1.1.3.D",
-      "skill": "Short and Long Vowel Patterns",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "hot-text-phrase",
-        "inline-dropdown"
-      ],
-      "heroResourceLinkId": null,
-      "iterations": 3,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 3,
-      "standardCode": "CC.1.1.3.E",
-      "skill": "Multisyllabic Words",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "hot-text-phrase",
-        "multi-select",
-        "inline-dropdown"
-      ],
-      "heroResourceLinkId": null,
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 3,
-      "standardCode": "CC.1.1.3.E",
-      "skill": "Common Affixes",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "two-part-ebsr",
-        "hot-text-phrase",
-        "inline-dropdown",
-        "hot-text-word"
-      ],
-      "heroResourceLinkId": null,
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 3,
-      "standardCode": "CC.1.2.3.B",
-      "skill": "Inference",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "two-part-ebsr",
-        "evidence-mapping",
-        "hot-text-word",
-        "hot-text-phrase"
-      ],
-      "heroResourceLinkId": "cmp4fw268001lg3sa5shrsos0",
-      "iterations": 3,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 3,
-      "standardCode": "CC.1.2.3.A",
-      "skill": "Main Idea",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "drag-drop-table",
-        "inline-dropdown"
-      ],
-      "heroResourceLinkId": "cmp4dxmjl0003q9husk5l5mtj",
-      "iterations": 3,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 3,
-      "standardCode": "CC.1.2.3.B",
-      "skill": "Text Evidence",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "hot-text-phrase",
-        "two-part-ebsr"
-      ],
-      "heroResourceLinkId": null,
-      "iterations": 4,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 3,
-      "standardCode": "CC.1.2.3.C",
-      "skill": "Cause and Effect",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "inline-dropdown",
-        "hot-text-phrase"
-      ],
-      "heroResourceLinkId": "cmp4fw2qz001vg3sa8j4rq5mr",
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 3,
-      "standardCode": "CC.1.2.3.E",
-      "skill": "Text Features",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "hot-text-phrase",
-        "evidence-mapping"
-      ],
-      "heroResourceLinkId": "cmp4dxpa80018q9huuubaswt7",
-      "iterations": 5,
-      "validationIssues": [
-        "Practice passage needs regeneration: 162 words (target 150-400) with FK grade 10.3 (target 3±1.5). Write a longer, more natural passage with simpler sentence structure."
-      ]
-    },
-    {
-      "gradeLevel": 3,
-      "standardCode": "CC.1.2.3.E",
-      "skill": "Author's Purpose",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "two-part-ebsr",
-        "multi-select"
-      ],
-      "heroResourceLinkId": "cmp4fw2sz001wg3sai6qb0t50",
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 3,
-      "standardCode": "CC.1.2.3.F",
-      "skill": "Prefixes and Suffixes",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "hot-text-phrase",
-        "inline-dropdown"
-      ],
-      "heroResourceLinkId": "cmp4fw5b10031g3sar73r69po",
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 3,
-      "standardCode": "CC.1.2.3.F",
-      "skill": "Context Clues",
-      "qualityScore": 88,
-      "teiTypesUsed": [
-        "inline-dropdown",
-        "hot-text-phrase"
-      ],
-      "heroResourceLinkId": "cmp4dxqc0001rq9hus4s0rng1",
-      "iterations": 5,
-      "validationIssues": [
-        "explanation: String must contain at most 2600 character(s)"
-      ]
-    },
-    {
-      "gradeLevel": 3,
-      "standardCode": "CC.1.2.3.F",
-      "skill": "Synonyms and Antonyms",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "hot-text-phrase",
-        "inline-dropdown"
-      ],
-      "heroResourceLinkId": "cmp4fw50g002wg3saz9emq7qj",
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 3,
-      "standardCode": "CC.1.2.3.I",
-      "skill": "Compare and Contrast",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "multi-select",
-        "evidence-mapping"
-      ],
-      "heroResourceLinkId": "cmp4fw2qz001vg3sa8j4rq5mr",
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 3,
-      "standardCode": "CC.1.3.3.A",
-      "skill": "Theme",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "drag-drop-order",
-        "hot-text-sentence",
-        "evidence-mapping",
-        "multi-select",
-        "two-part-ebsr"
-      ],
-      "heroResourceLinkId": "cmp4dxnws000kq9hual8bfap5",
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 3,
-      "standardCode": "CC.1.3.3.C",
-      "skill": "Character Traits and Actions",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "hot-text-sentence",
-        "evidence-mapping"
-      ],
-      "heroResourceLinkId": "cmp4fw2an001ng3sa0e7ekvke",
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 3,
-      "standardCode": "CC.1.3.3.C",
-      "skill": "Sequence of Events",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "drag-drop-order",
-        "hot-text-sentence",
-        "two-part-ebsr",
-        "hot-text-word"
-      ],
-      "heroResourceLinkId": "cmp4fw2qz001vg3sa8j4rq5mr",
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 3,
-      "standardCode": "CC.1.3.3.C",
-      "skill": "Story Elements",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "inline-dropdown",
-        "hot-text-phrase",
-        "hot-text-word"
-      ],
-      "heroResourceLinkId": "cmp4fw2ek001pg3sauoieq4cv",
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 3,
-      "standardCode": "CC.1.3.3.D",
-      "skill": "Point of View",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "hot-text-phrase",
-        "inline-dropdown"
-      ],
-      "heroResourceLinkId": "cmp4fw2j0001rg3saq5eq4w5z",
-      "iterations": 3,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 3,
-      "standardCode": "CC.1.3.3.E",
-      "skill": "Poetry Lines and Stanzas",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "hot-text-phrase",
-        "inline-dropdown"
-      ],
-      "heroResourceLinkId": null,
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 3,
-      "standardCode": "CC.1.4.3.C",
-      "skill": "Paragraph Organization",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "drag-drop-order",
-        "multi-select",
-        "evidence-mapping"
-      ],
-      "heroResourceLinkId": null,
-      "iterations": 5,
-      "validationIssues": [
-        "Practice passage needs regeneration: 152 words (target 150-400) with FK grade 10.6 (target 3±1.5). Write a longer, more natural passage with simpler sentence structure."
-      ]
-    },
-    {
-      "gradeLevel": 3,
-      "standardCode": "CC.1.4.3.F",
-      "skill": "Capitalization and Titles",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "hot-text-word",
-        "inline-dropdown",
-        "hot-text-sentence"
-      ],
-      "heroResourceLinkId": "cmp4fw0mt000ug3sa7vsuft95",
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 3,
-      "standardCode": "CC.1.4.3.F",
-      "skill": "Commas in a Series",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "hot-text-sentence",
-        "inline-dropdown"
-      ],
-      "heroResourceLinkId": "cmp4fw46g002jg3sampkd9syb",
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 3,
-      "standardCode": "CC.1.4.3.F",
-      "skill": "Complete Sentences",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "inline-dropdown",
-        "hot-text-sentence"
-      ],
-      "heroResourceLinkId": "cmp4fw58s0030g3sa5dd3d63b",
-      "iterations": 3,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 3,
-      "standardCode": "CC.1.4.3.F",
-      "skill": "Pronoun Agreement and Shifts",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "inline-dropdown",
-        "hot-text-word"
-      ],
-      "heroResourceLinkId": "cmp4fw3zt002gg3sa6hmn3lti",
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 3,
-      "standardCode": "CC.1.4.3.F",
-      "skill": "Formal and Informal Style",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "inline-dropdown",
-        "hot-text-sentence",
-        "hot-text-word"
-      ],
-      "heroResourceLinkId": null,
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 3,
-      "standardCode": "CC.1.4.3.G",
-      "skill": "Opinion Reasons",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "inline-dropdown",
-        "hot-text-word"
-      ],
-      "heroResourceLinkId": "cmp4fw2v8001xg3sazvmp0g9e",
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 3,
-      "standardCode": "CC.1.4.3.S",
-      "skill": "TDA Evidence and Explanation",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "multi-select",
-        "two-part-ebsr"
-      ],
-      "heroResourceLinkId": null,
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 4,
-      "standardCode": "CC.1.1.4.D",
-      "skill": "Affixes and Roots",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "inline-dropdown",
-        "hot-text-phrase"
-      ],
-      "heroResourceLinkId": null,
-      "iterations": 4,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 4,
-      "standardCode": "CC.1.1.4.E",
-      "skill": "Decoding Multisyllabic Words",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "inline-dropdown",
-        "hot-text-phrase"
-      ],
-      "heroResourceLinkId": null,
-      "iterations": 3,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 4,
-      "standardCode": "CC.1.1.4.E",
-      "skill": "Fluency Strategies",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "hot-text-phrase",
-        "inline-dropdown"
-      ],
-      "heroResourceLinkId": null,
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 4,
-      "standardCode": "CC.1.2.4.A",
-      "skill": "Combine Main Ideas Across Texts",
-      "qualityScore": 84,
-      "teiTypesUsed": [
-        "two-part-ebsr",
-        "evidence-mapping",
-        "drag-drop-table"
-      ],
-      "heroResourceLinkId": "cmpcylwj50006fi7urdxabtjo",
-      "iterations": 5,
-      "validationIssues": [
-        "Practice passage needs regeneration: 170 words (target 150-400) with FK grade 11.3 (target 4±1.5). Write a longer, more natural passage with simpler sentence structure.",
-        "Practice passage needs regeneration: 156 words (target 150-400) with FK grade 11.9 (target 4±1.5). Write a longer, more natural passage with simpler sentence structure.",
-        "Practice passage needs regeneration: 154 words (target 150-400) with FK grade 11.6 (target 4±1.5). Write a longer, more natural passage with simpler sentence structure.",
-        "Practice passage needs regeneration: 157 words (target 150-400) with FK grade 11.7 (target 4±1.5). Write a longer, more natural passage with simpler sentence structure.",
-        "Practice passage needs regeneration: 151 words (target 150-400) with FK grade 11.2 (target 4±1.5). Write a longer, more natural passage with simpler sentence structure.",
-        "Practice passage duplicate risk: current passage 1 is 0.92 similar to current passage 3. Previous passage was too similar to Recycling helps reduce pollution by decreasing the need for new raw materials. It also conserves energy, as producing ne. Write on a different topic/scenario.",
-        "Practice passage duplicate risk: current passage 9 is 0.95 similar to current passage 11. Previous passage was too similar to Technology in education provides students with access to a wide range of information and resources. It allows for person. Write on a different topic/scenario."
-      ]
-    },
-    {
-      "gradeLevel": 4,
-      "standardCode": "CC.1.2.4.A",
-      "skill": "Main Idea",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "multi-select",
-        "drag-drop-table"
-      ],
-      "heroResourceLinkId": "cmpcylwj50006fi7urdxabtjo",
-      "iterations": 3,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 4,
-      "standardCode": "CC.1.2.4.B",
-      "skill": "Inference",
-      "qualityScore": 88,
-      "teiTypesUsed": [
-        "evidence-mapping",
-        "hot-text-phrase"
-      ],
-      "heroResourceLinkId": null,
-      "iterations": 5,
-      "validationIssues": [
-        "Practice passage duplicate risk: current passage 1 is 0.95 similar to current passage 5. Previous passage was too similar to The sun was setting over the small village, casting long shadows. Mia sat on the porch, clutching a letter from her frie. Write on a different topic/scenario."
-      ]
-    },
-    {
-      "gradeLevel": 4,
-      "standardCode": "CC.1.2.4.B",
-      "skill": "Inference with Supporting Details",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "two-part-ebsr",
-        "evidence-mapping",
-        "hot-text-phrase"
-      ],
-      "heroResourceLinkId": "cmpcylweo0001fi7ushlw25ye",
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 4,
-      "standardCode": "CC.1.2.4.B",
-      "skill": "Text Evidence",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "hot-text-phrase",
-        "hot-text-sentence",
-        "two-part-ebsr",
-        "evidence-mapping"
-      ],
-      "heroResourceLinkId": "cmpcylwky0008fi7unl5zsfag",
-      "iterations": 4,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 4,
-      "standardCode": "CC.1.2.4.D",
-      "skill": "Author's Purpose and Message",
-      "qualityScore": 88,
-      "teiTypesUsed": [
-        "two-part-ebsr",
-        "hot-text-sentence"
-      ],
-      "heroResourceLinkId": "cmp4dxtng003eq9huhrsvkxxj",
-      "iterations": 5,
-      "validationIssues": [
-        "Practice passage duplicate risk: current passage 5 is 1.00 similar to existing V2 passage 217. Previous passage was too similar to Leaves crunched underfoot as Devin jogged down the long, grassy hill. The air was dry and cool, and the blister on his b. Write on a different topic/scenario."
-      ]
-    },
-    {
-      "gradeLevel": 4,
-      "standardCode": "CC.1.2.4.E",
-      "skill": "Graphic Organizers",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "hot-text-phrase",
-        "inline-dropdown"
-      ],
-      "heroResourceLinkId": null,
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 4,
-      "standardCode": "CC.1.2.4.E",
-      "skill": "Problem and Solution Text Structure",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "hot-text-phrase",
-        "inline-dropdown"
-      ],
-      "heroResourceLinkId": "cmp4dxu16003lq9hu408n3zt0",
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 4,
-      "standardCode": "CC.1.2.4.F",
-      "skill": "Dictionary and Thesaurus Skills",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "two-part-ebsr",
-        "hot-text-phrase"
-      ],
-      "heroResourceLinkId": "cmpcxizoy000fe8593ub07u47",
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 4,
-      "standardCode": "CC.1.2.4.F",
-      "skill": "Homophones and Multiple-Meaning Words",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "inline-dropdown",
-        "hot-text-phrase"
-      ],
-      "heroResourceLinkId": null,
-      "iterations": 3,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 4,
-      "standardCode": "CC.1.2.4.F",
-      "skill": "Greek and Latin Roots",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "inline-dropdown",
-        "hot-text-phrase"
-      ],
-      "heroResourceLinkId": null,
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 4,
-      "standardCode": "CC.1.3.4.A",
       "skill": "Theme",
       "qualityScore": 92,
       "teiTypesUsed": [
         "hot-text-sentence",
         "evidence-mapping"
-      ],
-      "heroResourceLinkId": "cmpcylwfl0002fi7u902eprmw",
-      "iterations": 3,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 4,
-      "standardCode": "CC.1.2.4.G",
-      "skill": "Argumentative Text Clues",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "hot-text-phrase",
-        "evidence-mapping"
-      ],
-      "heroResourceLinkId": null,
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 4,
-      "standardCode": "CC.1.3.4.C",
-      "skill": "Compare Characters",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "two-part-ebsr",
-        "hot-text-sentence",
-        "evidence-mapping"
-      ],
-      "heroResourceLinkId": "cmp4dxtzo003kq9huxmpc4nwz",
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 4,
-      "standardCode": "CC.1.3.4.C",
-      "skill": "Plot Elements",
-      "qualityScore": 88,
-      "teiTypesUsed": [
-        "hot-text-sentence",
-        "drag-drop-order"
-      ],
-      "heroResourceLinkId": null,
-      "iterations": 5,
-      "validationIssues": [
-        "Reading-strand lessons must include at least two full practice passages across the lesson."
-      ]
-    },
-    {
-      "gradeLevel": 4,
-      "standardCode": "CC.1.3.4.D",
-      "skill": "Point of View",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "inline-dropdown",
-        "hot-text-phrase",
-        "evidence-mapping"
-      ],
-      "heroResourceLinkId": null,
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 4,
-      "standardCode": "CC.1.3.4.E",
-      "skill": "Rhyme Scheme and Poetry Elements",
-      "qualityScore": 80,
-      "teiTypesUsed": [
-        "hot-text-phrase",
-        "inline-dropdown"
-      ],
-      "heroResourceLinkId": null,
-      "iterations": 5,
-      "validationIssues": [
-        "Practice passage duplicate risk: current passage 3 is 0.97 similar to current passage 9. Previous passage was too similar to The gentle rain taps on the window, A soft lullaby to the night, The wind whispers through the trees, A calming, peacefu. Write on a different topic/scenario.",
-        "Practice passage duplicate risk: current passage 3 is 0.94 similar to current passage 12. Previous passage was too similar to The gentle stream flows through the meadow, A quiet song of peace, The birds chirp softly in the trees, A melody that wi. Write on a different topic/scenario.",
-        "Practice passage duplicate risk: current passage 9 is 0.94 similar to current passage 12. Previous passage was too similar to The gentle stream flows through the meadow, A quiet song of peace, The birds chirp softly in the trees, A melody that wi. Write on a different topic/scenario."
-      ]
-    },
-    {
-      "gradeLevel": 4,
-      "standardCode": "CC.1.3.4.F",
-      "skill": "Allusion Meaning",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "hot-text-phrase",
-        "two-part-ebsr",
-        "inline-dropdown",
-        "evidence-mapping"
-      ],
-      "heroResourceLinkId": null,
-      "iterations": 5,
-      "validationIssues": [
-        "Practice passage needs regeneration: 153 words (target 150-400) with FK grade 11.4 (target 4±1.5). Write a longer, more natural passage with simpler sentence structure.",
-        "Practice passage needs regeneration: 169 words (target 150-400) with FK grade 11.3 (target 4±1.5). Write a longer, more natural passage with simpler sentence structure."
-      ]
-    },
-    {
-      "gradeLevel": 4,
-      "standardCode": "CC.1.3.4.F",
-      "skill": "Connotation and Figurative Language",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "hot-text-phrase",
-        "inline-dropdown"
-      ],
-      "heroResourceLinkId": null,
-      "iterations": 3,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 4,
-      "standardCode": "CC.1.3.4.F",
-      "skill": "Similes and Metaphors",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "hot-text-phrase",
-        "inline-dropdown"
-      ],
-      "heroResourceLinkId": null,
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 4,
-      "standardCode": "CC.1.3.4.F",
-      "skill": "Sensory Details",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "hot-text-phrase",
-        "two-part-ebsr",
-        "evidence-mapping"
-      ],
-      "heroResourceLinkId": null,
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 4,
-      "standardCode": "CC.1.4.4.A",
-      "skill": "Summarizing Stories",
-      "qualityScore": 88,
-      "teiTypesUsed": [
-        "inline-dropdown",
-        "hot-text-word",
-        "hot-text-sentence"
-      ],
-      "heroResourceLinkId": null,
-      "iterations": 5,
-      "validationIssues": [
-        "Practice passage duplicate risk: current passage 1 is 0.96 similar to current passage 2. Previous passage was too similar to Lily loved painting and wanted to win her school's art contest. She faced many challenges, like running out of paint and. Write on a different topic/scenario."
-      ]
-    },
-    {
-      "gradeLevel": 4,
-      "standardCode": "CC.1.4.4.F",
-      "skill": "Formal and Informal Style",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "drag-drop-table",
-        "inline-dropdown",
-        "hot-text-sentence"
-      ],
-      "heroResourceLinkId": null,
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 4,
-      "standardCode": "CC.1.4.4.C",
-      "skill": "Transitions and Linking Words",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "inline-dropdown",
-        "drag-drop-order",
-        "multi-select",
-        "hot-text-sentence"
-      ],
-      "heroResourceLinkId": null,
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 4,
-      "standardCode": "CC.1.4.4.F",
-      "skill": "Spelling with Affixes",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "inline-dropdown",
-        "hot-text-word"
-      ],
-      "heroResourceLinkId": null,
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 4,
-      "standardCode": "CC.1.4.4.F",
-      "skill": "Pronoun Agreement and Shifts",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "inline-dropdown",
-        "hot-text-word"
-      ],
-      "heroResourceLinkId": "cmpcxizfu0005e859si0ry07a",
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 4,
-      "standardCode": "CC.1.4.4.G",
-      "skill": "Supporting Reasons",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "hot-text-word",
-        "hot-text-sentence",
-        "inline-dropdown"
-      ],
-      "heroResourceLinkId": null,
-      "iterations": 3,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 4,
-      "standardCode": "CC.1.4.4.I",
-      "skill": "Facts and Opinions",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "inline-dropdown",
-        "hot-text-word"
-      ],
-      "heroResourceLinkId": null,
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 4,
-      "standardCode": "CC.1.4.4.S",
-      "skill": "TDA Evidence and Explanation",
-      "qualityScore": 88,
-      "teiTypesUsed": [
-        "multi-select",
-        "inline-dropdown",
-        "two-part-ebsr"
-      ],
-      "heroResourceLinkId": "cmpcylwky0008fi7unl5zsfag",
-      "iterations": 5,
-      "validationIssues": [
-        "Practice passage duplicate risk: current passage 3 is 0.96 similar to current passage 4. Previous passage was too similar to Mia discovered a hidden talent for painting. She spent hours in her attic, transforming blank canvases into vibrant land. Write on a different topic/scenario."
-      ]
-    },
-    {
-      "gradeLevel": 5,
-      "standardCode": "CC.1.1.5.D",
-      "skill": "Greek and Latin Roots",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "hot-text-phrase",
-        "inline-dropdown"
-      ],
-      "heroResourceLinkId": null,
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 5,
-      "standardCode": "CC.1.1.5.E",
-      "skill": "Affixes in Academic Vocabulary",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "inline-dropdown",
-        "hot-text-phrase"
-      ],
-      "heroResourceLinkId": null,
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 5,
-      "standardCode": "CC.1.1.5.E",
-      "skill": "Fluency for Comprehension",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "two-part-ebsr",
-        "hot-text-phrase",
-        "hot-text-word",
-        "inline-dropdown"
-      ],
-      "heroResourceLinkId": null,
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 5,
-      "standardCode": "CC.1.2.5.A",
-      "skill": "Main Idea",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "evidence-mapping",
-        "drag-drop-table",
-        "two-part-ebsr"
-      ],
-      "heroResourceLinkId": "cmpcxj2bm003de859aed6chbd",
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 5,
-      "standardCode": "CC.1.2.5.B",
-      "skill": "Inference",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "hot-text-phrase",
-        "evidence-mapping",
-        "two-part-ebsr"
-      ],
-      "heroResourceLinkId": "cmpcxj2aq003ce859zsv3g0no",
-      "iterations": 4,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 5,
-      "standardCode": "CC.1.2.5.D",
-      "skill": "Multiple Accounts of the Same Event",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "hot-text-phrase",
-        "inline-dropdown"
-      ],
-      "heroResourceLinkId": "cmp4fwaqj005pg3sa4nqumgwq",
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 5,
-      "standardCode": "CC.1.2.5.B",
-      "skill": "Text Evidence",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "evidence-mapping",
-        "hot-text-phrase"
-      ],
-      "heroResourceLinkId": null,
-      "iterations": 5,
-      "validationIssues": [
-        "Practice passage needs regeneration: 153 words (target 150-400) with FK grade 12.2 (target 5±1.5). Write a longer, more natural passage with simpler sentence structure.",
-        "Practice passage needs regeneration: 167 words (target 150-400) with FK grade 12.3 (target 5±1.5). Write a longer, more natural passage with simpler sentence structure."
-      ]
-    },
-    {
-      "gradeLevel": 5,
-      "standardCode": "CC.1.2.5.F",
-      "skill": "Academic and Domain-Specific Vocabulary",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "inline-dropdown",
-        "hot-text-phrase"
-      ],
-      "heroResourceLinkId": null,
-      "iterations": 5,
-      "validationIssues": [
-        "Practice passage needs regeneration: 170 words (target 150-400) with FK grade 12.8 (target 5±1.5). Write a longer, more natural passage with simpler sentence structure."
-      ]
-    },
-    {
-      "gradeLevel": 5,
-      "standardCode": "CC.1.2.5.E",
-      "skill": "Chronology and Sequence Text Structure",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "drag-drop-order",
-        "two-part-ebsr",
-        "hot-text-sentence"
-      ],
-      "heroResourceLinkId": "cmpcxj1of002ne859xmzstf6c",
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 5,
-      "standardCode": "CC.1.2.5.F",
-      "skill": "Greek and Latin Affixes and Roots",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "hot-text-phrase",
-        "inline-dropdown"
-      ],
-      "heroResourceLinkId": null,
-      "iterations": 3,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 5,
-      "standardCode": "CC.1.2.5.F",
-      "skill": "Analogies and Word Relationships",
-      "qualityScore": 88,
-      "teiTypesUsed": [
-        "inline-dropdown"
-      ],
-      "heroResourceLinkId": null,
-      "iterations": 5,
-      "validationIssues": [
-        "Expected at least 2 distinct TEI types; found 1.",
-        "Practice passage needs regeneration: 166 words (target 150-400) with FK grade 12.0 (target 5±1.5). Write a longer, more natural passage with simpler sentence structure."
-      ]
-    },
-    {
-      "gradeLevel": 5,
-      "standardCode": "CC.1.2.5.G",
-      "skill": "Reasons and Evidence in Arguments",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "hot-text-phrase",
-        "two-part-ebsr",
-        "drag-drop-table"
-      ],
-      "heroResourceLinkId": null,
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 5,
-      "standardCode": "CC.1.2.5.I",
-      "skill": "Integrating Information from Sources",
-      "qualityScore": 88,
-      "teiTypesUsed": [
-        "hot-text-phrase",
-        "evidence-mapping",
-        "two-part-ebsr",
-        "hot-text-word"
-      ],
-      "heroResourceLinkId": null,
-      "iterations": 5,
-      "validationIssues": [
-        "Practice passage needs regeneration: 154 words (target 150-400) with FK grade 12.2 (target 5±1.5). Write a longer, more natural passage with simpler sentence structure.",
-        "Practice passage duplicate risk: current passage 9 is 0.94 similar to existing V2 passage 476. Previous passage was too similar to Biodiversity refers to the variety of life in a particular habitat or ecosystem. It includes the different species of pl. Write on a different topic/scenario."
-      ]
-    },
-    {
-      "gradeLevel": 5,
-      "standardCode": "CC.1.3.5.A",
-      "skill": "Theme",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "two-part-ebsr",
-        "hot-text-sentence",
-        "evidence-mapping",
-        "hot-text-word"
-      ],
-      "heroResourceLinkId": "cmpcxj0sl001ne859hmezhkgw",
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 5,
-      "standardCode": "CC.1.3.5.C",
-      "skill": "Character Response and Plot",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "two-part-ebsr",
-        "hot-text-sentence",
-        "evidence-mapping"
-      ],
-      "heroResourceLinkId": "cmpcxj0xu001te8595tdafw6l",
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 5,
-      "standardCode": "CC.1.3.5.D",
-      "skill": "Point of View",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "inline-dropdown",
-        "hot-text-phrase",
-        "two-part-ebsr"
-      ],
-      "heroResourceLinkId": "cmpcxj1wj002we85990xwnds1",
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 5,
-      "standardCode": "CC.1.3.5.E",
-      "skill": "Story Structure and Chapters",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "two-part-ebsr",
-        "hot-text-phrase"
-      ],
-      "heroResourceLinkId": "cmpcxj0te001oe859fl06ocvq",
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 5,
-      "standardCode": "CC.1.3.5.F",
-      "skill": "Poetry Speaker and Tone",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "inline-dropdown",
-        "hot-text-phrase",
-        "evidence-mapping",
-        "drag-drop-order"
-      ],
-      "heroResourceLinkId": "cmpcxj0uz001qe8591d891p03",
-      "iterations": 3,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 5,
-      "standardCode": "CC.1.4.5.A",
-      "skill": "Informative Essay Development",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "hot-text-sentence",
-        "inline-dropdown"
-      ],
-      "heroResourceLinkId": "cmpcxj2of003se859yagg3rzl",
-      "iterations": 4,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 5,
-      "standardCode": "CC.1.3.5.H",
-      "skill": "Compare Themes Across Stories",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "hot-text-sentence",
-        "two-part-ebsr"
-      ],
-      "heroResourceLinkId": "cmpcxj1pb002oe8599ez8xx7z",
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 5,
-      "standardCode": "CC.1.4.5.F",
-      "skill": "Combining Sentences",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "inline-dropdown",
-        "hot-text-sentence"
-      ],
-      "heroResourceLinkId": null,
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 5,
-      "standardCode": "CC.1.4.5.F",
-      "skill": "Commas and Introductory Elements",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "hot-text-sentence",
-        "inline-dropdown",
-        "drag-drop-order"
-      ],
-      "heroResourceLinkId": null,
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 5,
-      "standardCode": "CC.1.4.5.F",
-      "skill": "Formal and Informal Style",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "hot-text-sentence",
-        "inline-dropdown"
-      ],
-      "heroResourceLinkId": null,
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 5,
-      "standardCode": "CC.1.4.5.F",
-      "skill": "Pronoun Agreement and Shifts",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "inline-dropdown",
-        "hot-text-word"
-      ],
-      "heroResourceLinkId": null,
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 5,
-      "standardCode": "CC.1.4.5.F",
-      "skill": "Verb Tense Consistency",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "inline-dropdown",
-        "hot-text-word",
-        "hot-text-sentence"
-      ],
-      "heroResourceLinkId": null,
-      "iterations": 4,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 5,
-      "standardCode": "CC.1.4.5.G",
-      "skill": "Opinion Essay Organization",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "drag-drop-order",
-        "multi-select",
-        "evidence-mapping"
-      ],
-      "heroResourceLinkId": null,
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 5,
-      "standardCode": "CC.1.4.5.M",
-      "skill": "Narrative Techniques",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "inline-dropdown",
-        "hot-text-sentence",
-        "hot-text-word"
-      ],
-      "heroResourceLinkId": "cmpcxj1ba0028e859udbs6u1p",
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 6,
-      "standardCode": "CC.1.1.6.E",
-      "skill": "Morphological Analysis",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "hot-text-phrase",
-        "inline-dropdown"
-      ],
-      "heroResourceLinkId": null,
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 5,
-      "standardCode": "CC.1.4.5.S",
-      "skill": "TDA Evidence and Explanation",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "evidence-mapping",
-        "multi-select"
-      ],
-      "heroResourceLinkId": "cmpcxj29u003be859ija3ezan",
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 6,
-      "standardCode": "CC.1.1.6.E",
-      "skill": "Reading Fluency",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "evidence-mapping",
-        "hot-text-phrase",
-        "inline-dropdown"
-      ],
-      "heroResourceLinkId": null,
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 6,
-      "standardCode": "CC.1.1.6.E",
-      "skill": "Word Origins",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "inline-dropdown",
-        "hot-text-phrase"
-      ],
-      "heroResourceLinkId": null,
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 6,
-      "standardCode": "CC.1.2.6.A",
-      "skill": "Central Idea Development",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "evidence-mapping",
-        "drag-drop-table"
-      ],
-      "heroResourceLinkId": null,
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 6,
-      "standardCode": "CC.1.2.6.A",
-      "skill": "Main Idea",
-      "qualityScore": 80,
-      "teiTypesUsed": [
-        "evidence-mapping",
-        "two-part-ebsr"
-      ],
-      "heroResourceLinkId": null,
-      "iterations": 5,
-      "validationIssues": [
-        "Practice passage duplicate risk: current passage 2 is 0.93 similar to existing V2 passage 616. Previous passage was too similar to Recycling is a crucial practice that helps protect the environment. By recycling materials like paper, plastic, and glas. Write on a different topic/scenario.",
-        "Practice passage duplicate risk: current passage 10 is 0.92 similar to existing V2 passage 212. Previous passage was too similar to Volunteering is a rewarding experience that benefits both the volunteer and the community. By giving their time and skil. Write on a different topic/scenario.",
-        "Practice passage duplicate risk: current passage 11 is 0.95 similar to existing V2 passage 618. Previous passage was too similar to Technology has transformed education by making learning more accessible and engaging. With online resources, students ca. Write on a different topic/scenario."
-      ]
-    },
-    {
-      "gradeLevel": 6,
-      "standardCode": "CC.1.2.6.A",
-      "skill": "Objective Summary",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "hot-text-phrase",
-        "evidence-mapping"
-      ],
-      "heroResourceLinkId": null,
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 6,
-      "standardCode": "CC.1.2.6.B",
-      "skill": "Inference",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "evidence-mapping",
-        "hot-text-phrase",
-        "multi-select"
-      ],
-      "heroResourceLinkId": "cmpcxj4oa0061e859s2q5otp5",
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 6,
-      "standardCode": "CC.1.2.6.B",
-      "skill": "Text Evidence",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "hot-text-phrase",
-        "evidence-mapping",
-        "hot-text-sentence",
-        "two-part-ebsr"
-      ],
-      "heroResourceLinkId": "cmpcxj50q006fe8594gosxm75",
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 6,
-      "standardCode": "CC.1.2.6.D",
-      "skill": "Author's Purpose and Point of View",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "hot-text-sentence",
-        "inline-dropdown",
-        "multi-select"
-      ],
-      "heroResourceLinkId": "cmpcxj4tr0067e859kbcaglnj",
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 6,
-      "standardCode": "CC.1.2.6.E",
-      "skill": "Text Structure and Author Organization",
-      "qualityScore": 75,
-      "teiTypesUsed": [
-        "evidence-mapping",
-        "two-part-ebsr",
-        "hot-text-phrase",
-        "hot-text-word"
-      ],
-      "heroResourceLinkId": "cmpcxj4h7005te859cgoge0k1",
-      "iterations": 5,
-      "validationIssues": [
-        "Practice passage duplicate risk: current passage 2 is 0.94 similar to current passage 8. Previous passage was too similar to Exercise is crucial for maintaining a healthy lifestyle. It helps control weight, reduces the risk of chronic diseases, . Write on a different topic/scenario.",
-        "Practice passage duplicate risk: current passage 2 is 0.92 similar to existing V2 passage 627. Previous passage was too similar to Exercise is essential for maintaining good health. It helps control weight, improves mood, and boosts energy. Regular ph. Write on a different topic/scenario.",
-        "Practice passage duplicate risk: current passage 3 is 0.93 similar to existing V2 passage 634. Previous passage was too similar to Sleep is vital for maintaining good health and well-being. It allows the body to repair and rejuvenate, supporting physi. Write on a different topic/scenario.",
-        "Practice passage duplicate risk: current passage 4 is 0.93 similar to existing V2 passage 632. Previous passage was too similar to Transportation has evolved dramatically over the centuries. In ancient times, people relied on walking and animal-drawn . Write on a different topic/scenario.",
-        "Practice passage duplicate risk: current passage 5 is 0.95 similar to current passage 10. Previous passage was too similar to Reading is a fundamental skill that offers numerous benefits. It enhances vocabulary, improves concentration, and stimul. Write on a different topic/scenario.",
-        "Practice passage duplicate risk: current passage 8 is 0.93 similar to existing V2 passage 627. Previous passage was too similar to Exercise is essential for maintaining good health. It helps control weight, improves mood, and boosts energy. Regular ph. Write on a different topic/scenario.",
-        "Practice passage duplicate risk: current passage 10 is 0.93 similar to existing V2 passage 630. Previous passage was too similar to Reading is a valuable activity that offers numerous benefits. It enhances vocabulary, improves focus and concentration, . Write on a different topic/scenario."
-      ]
-    },
-    {
-      "gradeLevel": 6,
-      "standardCode": "CC.1.2.6.F",
-      "skill": "Technical Vocabulary in Context",
-      "qualityScore": 88,
-      "teiTypesUsed": [
-        "inline-dropdown",
-        "hot-text-phrase",
-        "multi-select"
-      ],
-      "heroResourceLinkId": "cmpcyly8p0022fi7u02ca86yz",
-      "iterations": 5,
-      "validationIssues": [
-        "Practice passage duplicate risk: current passage 2 is 0.93 similar to existing V2 passage 474. Previous passage was too similar to An ecosystem is a community of living organisms interacting with each other and their physical environment. It includes . Write on a different topic/scenario."
-      ]
-    },
-    {
-      "gradeLevel": 6,
-      "standardCode": "CC.1.2.6.F",
-      "skill": "Tone and Connotation",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "hot-text-phrase",
-        "inline-dropdown"
-      ],
-      "heroResourceLinkId": null,
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 6,
-      "standardCode": "CC.1.2.6.G",
-      "skill": "Claims, Reasons, and Evidence",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "evidence-mapping",
-        "hot-text-phrase",
-        "inline-dropdown"
-      ],
-      "heroResourceLinkId": null,
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 6,
-      "standardCode": "CC.1.2.6.I",
-      "skill": "Compare Text Presentations",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "evidence-mapping",
-        "drag-drop-table",
-        "multi-select"
-      ],
-      "heroResourceLinkId": "cmpcxj4h7005te859cgoge0k1",
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 6,
-      "standardCode": "CC.1.3.6.A",
-      "skill": "Theme",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "hot-text-sentence",
-        "evidence-mapping"
-      ],
-      "heroResourceLinkId": "cmpcxj4um0068e8595v7p1d6g",
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 6,
-      "standardCode": "CC.1.3.6.A",
-      "skill": "Theme Development",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "two-part-ebsr",
-        "hot-text-sentence",
-        "evidence-mapping"
-      ],
-      "heroResourceLinkId": "cmpcxj4um0068e8595v7p1d6g",
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 6,
-      "standardCode": "CC.1.3.6.C",
-      "skill": "Character Change and Conflict",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "hot-text-sentence",
-        "evidence-mapping",
-        "two-part-ebsr"
-      ],
-      "heroResourceLinkId": "cmp4fw6k1003ng3sawrmmz7g6",
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 6,
-      "standardCode": "CC.1.3.6.D",
-      "skill": "Point of View",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "hot-text-sentence",
-        "hot-text-phrase",
-        "evidence-mapping"
-      ],
-      "heroResourceLinkId": "cmpcxj4tr0067e859kbcaglnj",
-      "iterations": 3,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 6,
-      "standardCode": "CC.1.3.6.C",
-      "skill": "Plot Development in Episodes",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "two-part-ebsr",
-        "hot-text-sentence",
-        "drag-drop-order"
-      ],
-      "heroResourceLinkId": "cmp4fw6k1003ng3sawrmmz7g6",
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 6,
-      "standardCode": "CC.1.3.6.E",
-      "skill": "Story Structure and Flashback",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "evidence-mapping",
-        "hot-text-phrase",
-        "two-part-ebsr",
-        "hot-text-word"
-      ],
-      "heroResourceLinkId": "cmpcxj4h7005te859cgoge0k1",
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 6,
-      "standardCode": "CC.1.3.6.F",
-      "skill": "Connotation and Figurative Language",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "hot-text-phrase",
-        "drag-drop-table"
-      ],
-      "heroResourceLinkId": "cmpcxj4qz0064e859komzsnsy",
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 6,
-      "standardCode": "CC.1.4.6.A",
-      "skill": "Informative Essay Organization",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "drag-drop-order",
-        "evidence-mapping",
-        "multi-select"
-      ],
-      "heroResourceLinkId": null,
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 6,
-      "standardCode": "CC.1.4.6.F",
-      "skill": "Commas, Parentheses, and Dashes",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "inline-dropdown",
-        "hot-text-sentence"
-      ],
-      "heroResourceLinkId": null,
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 6,
-      "standardCode": "CC.1.4.6.F",
-      "skill": "Formal and Informal Style",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "inline-dropdown",
-        "hot-text-sentence"
-      ],
-      "heroResourceLinkId": null,
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 6,
-      "standardCode": "CC.1.4.6.F",
-      "skill": "Pronoun Agreement and Shifts",
-      "qualityScore": 80,
-      "teiTypesUsed": [
-        "inline-dropdown",
-        "hot-text-word",
-        "hot-text-sentence"
-      ],
-      "heroResourceLinkId": null,
-      "iterations": 5,
-      "validationIssues": [
-        "Practice passage duplicate risk: current passage 1 is 0.92 similar to current passage 2. Previous passage was too similar to (1) The gardener waters the plants, and she trims them carefully. (2) When a guest arrives, he or she should be greeted . Write on a different topic/scenario.",
-        "Practice passage duplicate risk: current passage 1 is 0.95 similar to current passage 3. Previous passage was too similar to (1) The chef prepared the meal, and he served it with care. (2) When a visitor arrives, he or she should be welcomed. (3. Write on a different topic/scenario.",
-        "Practice passage duplicate risk: current passage 2 is 0.94 similar to current passage 3. Previous passage was too similar to (1) The chef prepared the meal, and he served it with care. (2) When a visitor arrives, he or she should be welcomed. (3. Write on a different topic/scenario."
-      ]
-    },
-    {
-      "gradeLevel": 6,
-      "standardCode": "CC.1.4.6.F",
-      "skill": "Pronoun Case and Agreement",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "inline-dropdown",
-        "hot-text-word",
-        "hot-text-sentence"
-      ],
-      "heroResourceLinkId": null,
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 6,
-      "standardCode": "CC.1.4.6.F",
-      "skill": "Shifts in Pronoun Person and Number",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "inline-dropdown",
-        "hot-text-word"
-      ],
-      "heroResourceLinkId": null,
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 6,
-      "standardCode": "CC.1.4.6.F",
-      "skill": "Varying Sentence Patterns",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "inline-dropdown",
-        "drag-drop-order"
-      ],
-      "heroResourceLinkId": null,
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 6,
-      "standardCode": "CC.1.4.6.G",
-      "skill": "Argument Essay Evidence",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "evidence-mapping",
-        "multi-select",
-        "two-part-ebsr"
-      ],
-      "heroResourceLinkId": "cmpcxj4q30063e859xts6l8tf",
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 6,
-      "standardCode": "CC.1.4.6.S",
-      "skill": "TDA Evidence and Explanation",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "evidence-mapping",
-        "multi-select",
-        "two-part-ebsr"
-      ],
-      "heroResourceLinkId": "cmpcxj50q006fe8594gosxm75",
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 7,
-      "standardCode": "CC.1.1.7.E",
-      "skill": "Domain-Specific Vocabulary Morphology",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "inline-dropdown",
-        "hot-text-phrase"
-      ],
-      "heroResourceLinkId": null,
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 6,
-      "standardCode": "CC.1.4.6.V",
-      "skill": "Research Source Integration",
-      "qualityScore": 76,
-      "teiTypesUsed": [
-        "inline-dropdown",
-        "hot-text-word",
-        "hot-text-sentence"
-      ],
-      "heroResourceLinkId": null,
-      "iterations": 5,
-      "validationIssues": [
-        "A practice passage is likely too short for the target grade.",
-        "A practice passage is likely too short for the target grade.",
-        "A practice passage is likely too short for the target grade.",
-        "A practice passage is likely too short for the target grade.",
-        "Practice passage needs regeneration: 90 words (target 250-600) with FK grade 9.4 (target 6±1.5). Write a longer, more natural passage with simpler sentence structure.",
-        "Practice passage needs regeneration: 90 words (target 250-600) with FK grade 12.1 (target 6±1.5). Write a longer, more natural passage with simpler sentence structure."
-      ]
-    },
-    {
-      "gradeLevel": 7,
-      "standardCode": "CC.1.1.7.E",
-      "skill": "Etymology and Word Study",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "inline-dropdown",
-        "hot-text-phrase"
-      ],
-      "heroResourceLinkId": null,
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 7,
-      "standardCode": "CC.1.2.7.A",
-      "skill": "Main Idea",
-      "qualityScore": 75,
-      "teiTypesUsed": [
-        "drag-drop-table",
-        "two-part-ebsr",
-        "multi-select"
-      ],
-      "heroResourceLinkId": "cmp5ki5fq000i6her3w6sh71t",
-      "iterations": 5,
-      "validationIssues": [
-        "Practice passage duplicate risk: current passage 4 is 0.94 similar to existing V2 passage 620. Previous passage was too similar to Climate change is a pressing global issue that affects the environment and human life. Rising temperatures lead to more . Write on a different topic/scenario.",
-        "Practice passage duplicate risk: current passage 5 is 0.94 similar to current passage 6. Previous passage was too similar to Technology is transforming education by providing new opportunities for learning. Online courses and digital resources m. Write on a different topic/scenario.",
-        "Practice passage duplicate risk: current passage 5 is 0.93 similar to existing V2 passage 618. Previous passage was too similar to Technology has transformed education by making learning more accessible and engaging. With online resources, students ca. Write on a different topic/scenario.",
-        "Practice passage duplicate risk: current passage 5 is 0.93 similar to existing V2 passage 803. Previous passage was too similar to In recent years, many schools have started to incorporate more technology into their classrooms. This shift has been dri. Write on a different topic/scenario.",
-        "Practice passage duplicate risk: current passage 5 is 0.93 similar to existing V2 passage 804. Previous passage was too similar to In recent years, many schools have started to incorporate more technology into their classrooms. This shift has been dri. Write on a different topic/scenario.",
-        "Practice passage duplicate risk: current passage 6 is 0.95 similar to existing V2 passage 618. Previous passage was too similar to Technology has transformed education by making learning more accessible and engaging. With online resources, students ca. Write on a different topic/scenario.",
-        "Practice passage duplicate risk: current passage 6 is 0.93 similar to existing V2 passage 637. Previous passage was too similar to Technology has transformed education, making it more accessible and engaging. Online learning platforms provide students. Write on a different topic/scenario."
-      ]
-    },
-    {
-      "gradeLevel": 7,
-      "standardCode": "CC.1.2.7.A",
-      "skill": "Central Idea Across Sections",
-      "qualityScore": 75,
-      "teiTypesUsed": [
-        "drag-drop-table",
-        "evidence-mapping"
-      ],
-      "heroResourceLinkId": "cmp5ki5fq000i6her3w6sh71t",
-      "iterations": 5,
-      "validationIssues": [
-        "Practice passage duplicate risk: current passage 1 is 0.94 similar to existing V2 passage 603. Previous passage was too similar to In team sports, cooperation and communication are key to success. Each player has a specific role, and working together . Write on a different topic/scenario.",
-        "Practice passage duplicate risk: current passage 1 is 0.94 similar to existing V2 passage 605. Previous passage was too similar to In team sports, cooperation and communication are key to success. Each player has a specific role, and working together . Write on a different topic/scenario.",
-        "Practice passage duplicate risk: current passage 1 is 0.94 similar to existing V2 passage 607. Previous passage was too similar to In team sports, cooperation and communication are key to success. Each player has a specific role, and working together . Write on a different topic/scenario.",
-        "Practice passage duplicate risk: current passage 1 is 0.92 similar to existing V2 passage 633. Previous passage was too similar to Teamwork is a crucial element in sports. It allows players to work together towards a common goal, enhancing their chanc. Write on a different topic/scenario.",
-        "Practice passage duplicate risk: current passage 2 is 0.93 similar to existing V2 passage 618. Previous passage was too similar to Technology has transformed education by making learning more accessible and engaging. With online resources, students ca. Write on a different topic/scenario.",
-        "Practice passage duplicate risk: current passage 2 is 0.93 similar to existing V2 passage 836. Previous passage was too similar to The integration of technology in education is transforming how students learn and teachers instruct. Digital tools and o. Write on a different topic/scenario.",
-        "Practice passage duplicate risk: current passage 2 is 0.94 similar to existing V2 passage 837. Previous passage was too similar to Technology is transforming education by providing new opportunities for learning. Online courses and digital resources m. Write on a different topic/scenario.",
-        "Practice passage duplicate risk: current passage 3 is 0.93 similar to existing V2 passage 833. Previous passage was too similar to The shift towards renewable energy is reshaping the global energy landscape. Countries are investing in solar, wind, and. Write on a different topic/scenario.",
-        "Practice passage duplicate risk: current passage 4 is 0.93 similar to existing V2 passage 834. Previous passage was too similar to Reading is a powerful tool for mental growth. It enhances vocabulary, improves focus, and stimulates imagination. By eng. Write on a different topic/scenario.",
-        "Practice passage duplicate risk: current passage 5 is 0.94 similar to existing V2 passage 831. Previous passage was too similar to Urban gardening is becoming popular in cities. People are using rooftops and balconies to grow plants. These gardens pro. Write on a different topic/scenario.",
-        "Practice passage duplicate risk: current passage 5 is 0.94 similar to existing V2 passage 832. Previous passage was too similar to Urban gardening is becoming popular in cities. People are using rooftops and balconies to grow plants. These gardens pro. Write on a different topic/scenario.",
-        "Practice passage duplicate risk: current passage 8 is 0.92 similar to existing V2 passage 623. Previous passage was too similar to Volunteer work plays a significant role in building strong communities and fostering a sense of belonging. By volunteeri. Write on a different topic/scenario.",
-        "Practice passage duplicate risk: current passage 8 is 0.92 similar to existing V2 passage 636. Previous passage was too similar to Volunteering is a wonderful way to give back to the community and gain personal growth. By helping others, volunteers ca. Write on a different topic/scenario.",
-        "Practice passage duplicate risk: current passage 9 is 0.93 similar to existing V2 passage 618. Previous passage was too similar to Technology has transformed education by making learning more accessible and engaging. With online resources, students ca. Write on a different topic/scenario.",
-        "Practice passage duplicate risk: current passage 10 is 0.95 similar to existing V2 passage 626. Previous passage was too similar to Biodiversity is vital for maintaining healthy ecosystems and supporting life on Earth. A diverse range of species ensure. Write on a different topic/scenario.",
-        "Practice passage duplicate risk: current passage 11 is 0.96 similar to existing V2 passage 625. Previous passage was too similar to Art education plays a crucial role in fostering creativity and critical thinking in students. By engaging in artistic ac. Write on a different topic/scenario."
-      ]
-    },
-    {
-      "gradeLevel": 7,
-      "standardCode": "CC.1.2.7.B",
-      "skill": "Text Evidence",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "evidence-mapping",
-        "two-part-ebsr",
-        "hot-text-word"
-      ],
-      "heroResourceLinkId": null,
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 7,
-      "standardCode": "CC.1.2.7.B",
-      "skill": "Inference",
-      "qualityScore": 88,
-      "teiTypesUsed": [
-        "two-part-ebsr",
-        "evidence-mapping",
-        "hot-text-phrase"
-      ],
-      "heroResourceLinkId": null,
-      "iterations": 5,
-      "validationIssues": [
-        "Practice passage duplicate risk: current passage 8 is 0.92 similar to existing V2 passage 838. Previous passage was too similar to In sports, teamwork is crucial for success. Each player has a role that contributes to the overall performance. For exam. Write on a different topic/scenario."
-      ]
-    },
-    {
-      "gradeLevel": 7,
-      "standardCode": "CC.1.2.7.D",
-      "skill": "Author Purpose and Rhetorical Choices",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "hot-text-sentence",
-        "multi-select"
-      ],
-      "heroResourceLinkId": "cmp5ki9so002b6herrcatfpz4",
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 7,
-      "standardCode": "CC.1.2.7.E",
-      "skill": "Data and Visual Information",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "evidence-mapping",
-        "hot-text-phrase",
-        "two-part-ebsr",
-        "inline-dropdown",
-        "hot-text-word"
-      ],
-      "heroResourceLinkId": null,
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 7,
-      "standardCode": "CC.1.2.7.E",
-      "skill": "Text Structure Effects",
-      "qualityScore": 88,
-      "teiTypesUsed": [
-        "two-part-ebsr",
-        "hot-text-phrase"
-      ],
-      "heroResourceLinkId": "cmp5ki4et00026hero1c9na33",
-      "iterations": 5,
-      "validationIssues": [
-        "Practice passage duplicate risk: current passage 6 is 0.93 similar to existing V2 passage 684. Previous passage was too similar to Exercise is crucial for maintaining a healthy lifestyle. It helps control weight, reduces the risk of chronic diseases, . Write on a different topic/scenario."
-      ]
-    },
-    {
-      "gradeLevel": 7,
-      "standardCode": "CC.1.2.7.F",
-      "skill": "Precise Academic Vocabulary",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "inline-dropdown",
-        "hot-text-phrase",
-        "multi-select"
-      ],
-      "heroResourceLinkId": null,
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 7,
-      "standardCode": "CC.1.2.7.I",
-      "skill": "Compare Authors on the Same Topic",
-      "qualityScore": 84,
-      "teiTypesUsed": [
-        "drag-drop-table",
-        "evidence-mapping",
-        "multi-select"
-      ],
-      "heroResourceLinkId": null,
-      "iterations": 5,
-      "validationIssues": [
-        "Practice passage duplicate risk: current passage 1 is 0.92 similar to current passage 9. Previous passage was too similar to Author A, an engineer, writes a technical article on renewable energy, focusing on the mechanics of solar panels and win. Write on a different topic/scenario.",
-        "Practice passage duplicate risk: current passage 2 is 0.95 similar to current passage 8. Previous passage was too similar to Technology has revolutionized education by providing new tools and resources for learning. Author A, an educational rese. Write on a different topic/scenario."
-      ]
-    },
-    {
-      "gradeLevel": 7,
-      "standardCode": "CC.1.2.7.G",
-      "skill": "Argument Claim Strength",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "evidence-mapping",
-        "hot-text-phrase"
-      ],
-      "heroResourceLinkId": null,
-      "iterations": 5,
-      "validationIssues": []
-    },
-    {
-      "gradeLevel": 7,
-      "standardCode": "CC.1.3.7.C",
-      "skill": "Character Motivation and Theme",
-      "qualityScore": 92,
-      "teiTypesUsed": [
-        "hot-text-sentence",
-        "evidence-mapping",
-        "two-part-ebsr"
       ],
       "heroResourceLinkId": "cmp5ki4xf000a6heryd4o5k5i",
       "iterations": 5,
@@ -2297,27 +72,107 @@
     },
     {
       "gradeLevel": 7,
-      "standardCode": "CC.1.3.7.D",
-      "skill": "Point of View",
+      "standardCode": "CC.1.3.7.C",
+      "skill": "Plot Lines and Conflict Development",
       "qualityScore": 92,
       "teiTypesUsed": [
         "hot-text-sentence",
-        "hot-text-phrase",
-        "inline-dropdown"
+        "two-part-ebsr",
+        "drag-drop-order"
       ],
-      "heroResourceLinkId": "cmp5ki5b0000g6herugxfofld",
-      "iterations": 3,
+      "heroResourceLinkId": "cmp5ki543000d6hery5ntrigm",
+      "iterations": 5,
       "validationIssues": []
     },
     {
       "gradeLevel": 7,
-      "standardCode": "CC.1.3.7.D",
-      "skill": "Narrator Reliability and Perspective",
+      "standardCode": "CC.1.3.7.E",
+      "skill": "Poetry Structure and Meaning",
       "qualityScore": 92,
       "teiTypesUsed": [
         "evidence-mapping",
         "hot-text-phrase",
-        "two-part-ebsr",
+        "hot-text-word"
+      ],
+      "heroResourceLinkId": "cmp5ki9ej00256herve751uw8",
+      "iterations": 5,
+      "validationIssues": []
+    },
+    {
+      "gradeLevel": 7,
+      "standardCode": "CC.1.3.7.F",
+      "skill": "Connotation and Figurative Language",
+      "qualityScore": 92,
+      "teiTypesUsed": [
+        "hot-text-phrase",
+        "evidence-mapping"
+      ],
+      "heroResourceLinkId": "cmp5ki76800186herxkfi9imk",
+      "iterations": 5,
+      "validationIssues": []
+    },
+    {
+      "gradeLevel": 7,
+      "standardCode": "CC.1.3.7.F",
+      "skill": "Mood, Tone, and Word Choice",
+      "qualityScore": 92,
+      "teiTypesUsed": [
+        "inline-dropdown",
+        "hot-text-phrase"
+      ],
+      "heroResourceLinkId": null,
+      "iterations": 5,
+      "validationIssues": []
+    },
+    {
+      "gradeLevel": 7,
+      "standardCode": "CC.1.4.7.A",
+      "skill": "Informative Writing with Transitions",
+      "qualityScore": 92,
+      "teiTypesUsed": [
+        "inline-dropdown",
+        "drag-drop-order",
+        "multi-select",
+        "evidence-mapping"
+      ],
+      "heroResourceLinkId": "cmp5ki96s00226her8swwyrzr",
+      "iterations": 5,
+      "validationIssues": []
+    },
+    {
+      "gradeLevel": 7,
+      "standardCode": "CC.1.4.7.F",
+      "skill": "Comma Use with Coordinate Adjectives",
+      "qualityScore": 92,
+      "teiTypesUsed": [
+        "inline-dropdown",
+        "hot-text-sentence"
+      ],
+      "heroResourceLinkId": "cmp5ki6j6000z6herm3027cmi",
+      "iterations": 4,
+      "validationIssues": []
+    },
+    {
+      "gradeLevel": 7,
+      "standardCode": "CC.1.4.7.F",
+      "skill": "Formal and Informal Style",
+      "qualityScore": 92,
+      "teiTypesUsed": [
+        "hot-text-sentence",
+        "inline-dropdown"
+      ],
+      "heroResourceLinkId": null,
+      "iterations": 5,
+      "validationIssues": []
+    },
+    {
+      "gradeLevel": 7,
+      "standardCode": "CC.1.4.7.F",
+      "skill": "Formal Style and Precise Language",
+      "qualityScore": 92,
+      "teiTypesUsed": [
+        "hot-text-sentence",
+        "inline-dropdown",
         "hot-text-word"
       ],
       "heroResourceLinkId": null,
@@ -2327,11 +182,381 @@
     {
       "gradeLevel": 7,
       "standardCode": "CC.1.4.7.F",
-      "skill": "Phrases and Clauses",
+      "skill": "Pronoun Agreement and Shifts",
       "qualityScore": 92,
       "teiTypesUsed": [
         "inline-dropdown",
+        "hot-text-word"
+      ],
+      "heroResourceLinkId": null,
+      "iterations": 3,
+      "validationIssues": []
+    },
+    {
+      "gradeLevel": 7,
+      "standardCode": "CC.1.4.7.F",
+      "skill": "Misplaced and Dangling Modifiers",
+      "qualityScore": 92,
+      "teiTypesUsed": [
+        "hot-text-word",
+        "hot-text-sentence"
+      ],
+      "heroResourceLinkId": null,
+      "iterations": 5,
+      "validationIssues": []
+    },
+    {
+      "gradeLevel": 7,
+      "standardCode": "CC.1.4.7.G",
+      "skill": "Argument Counterclaim Response",
+      "qualityScore": 92,
+      "teiTypesUsed": [
+        "inline-dropdown",
+        "hot-text-sentence"
+      ],
+      "heroResourceLinkId": null,
+      "iterations": 5,
+      "validationIssues": []
+    },
+    {
+      "gradeLevel": 7,
+      "standardCode": "CC.1.4.7.V",
+      "skill": "Research Questions and Source Notes",
+      "qualityScore": 92,
+      "teiTypesUsed": [
+        "inline-dropdown",
+        "hot-text-sentence"
+      ],
+      "heroResourceLinkId": null,
+      "iterations": 3,
+      "validationIssues": []
+    },
+    {
+      "gradeLevel": 7,
+      "standardCode": "CC.1.4.7.S",
+      "skill": "TDA Evidence and Explanation",
+      "qualityScore": 92,
+      "teiTypesUsed": [
+        "evidence-mapping",
+        "multi-select"
+      ],
+      "heroResourceLinkId": null,
+      "iterations": 5,
+      "validationIssues": []
+    },
+    {
+      "gradeLevel": 8,
+      "standardCode": "CC.1.1.8.E",
+      "skill": "Advanced Word Analysis",
+      "qualityScore": 88,
+      "teiTypesUsed": [
+        "inline-dropdown",
+        "hot-text-phrase"
+      ],
+      "heroResourceLinkId": null,
+      "iterations": 5,
+      "validationIssues": [
+        "Practice passage duplicate risk: current passage 3 is 0.93 similar to current passage 5. Previous passage was too similar to The mountain trail was serene, with birds chirping and a gentle breeze rustling the leaves. Suddenly, dark clouds rolled. Write on a different topic/scenario."
+      ]
+    },
+    {
+      "gradeLevel": 8,
+      "standardCode": "CC.1.1.8.E",
+      "skill": "Connotation Through Word Structure",
+      "qualityScore": 92,
+      "teiTypesUsed": [
+        "inline-dropdown",
+        "hot-text-phrase"
+      ],
+      "heroResourceLinkId": "cmp4fwa5n005fg3sabbgwqfqq",
+      "iterations": 5,
+      "validationIssues": []
+    },
+    {
+      "gradeLevel": 8,
+      "standardCode": "CC.1.2.8.A",
+      "skill": "Multiple Central Ideas",
+      "qualityScore": 92,
+      "teiTypesUsed": [
+        "evidence-mapping",
+        "drag-drop-table"
+      ],
+      "heroResourceLinkId": "cmpcxj3m6004ue8593snom9nw",
+      "iterations": 5,
+      "validationIssues": []
+    },
+    {
+      "gradeLevel": 8,
+      "standardCode": "CC.1.2.8.A",
+      "skill": "Main Idea",
+      "qualityScore": 88,
+      "teiTypesUsed": [
+        "drag-drop-table",
+        "two-part-ebsr"
+      ],
+      "heroResourceLinkId": "cmpcxj3ca004je859chrzk4pv",
+      "iterations": 5,
+      "validationIssues": [
+        "Practice passage duplicate risk: current passage 5 is 0.93 similar to existing V2 passage 645. Previous passage was too similar to A new community center opened in the neighborhood, offering various activities for residents. The center includes a gym,. Write on a different topic/scenario."
+      ]
+    },
+    {
+      "gradeLevel": 8,
+      "standardCode": "CC.1.2.8.B",
+      "skill": "Inference",
+      "qualityScore": 88,
+      "teiTypesUsed": [
+        "two-part-ebsr",
+        "evidence-mapping",
+        "hot-text-phrase",
+        "inline-dropdown",
+        "hot-text-word"
+      ],
+      "heroResourceLinkId": null,
+      "iterations": 5,
+      "validationIssues": [
+        "Practice passage duplicate risk: current passage 7 is 0.93 similar to existing V2 passage 697. Previous passage was too similar to The bustling city was alive with energy, the streets filled with people hurrying to their destinations. The air was thic. Write on a different topic/scenario."
+      ]
+    },
+    {
+      "gradeLevel": 8,
+      "standardCode": "CC.1.2.8.B",
+      "skill": "Text Evidence",
+      "qualityScore": 92,
+      "teiTypesUsed": [
+        "hot-text-phrase",
+        "two-part-ebsr",
+        "evidence-mapping"
+      ],
+      "heroResourceLinkId": null,
+      "iterations": 5,
+      "validationIssues": []
+    },
+    {
+      "gradeLevel": 8,
+      "standardCode": "CC.1.2.8.E",
+      "skill": "Compare Text Structures",
+      "qualityScore": 75,
+      "teiTypesUsed": [
+        "drag-drop-table",
+        "multi-select"
+      ],
+      "heroResourceLinkId": null,
+      "iterations": 5,
+      "validationIssues": [
+        "Practice passage duplicate risk: current passage 5 is 0.94 similar to existing V2 passage 618. Previous passage was too similar to Technology has transformed education by making learning more accessible and engaging. With online resources, students ca. Write on a different topic/scenario.",
+        "Practice passage duplicate risk: current passage 5 is 0.93 similar to existing V2 passage 637. Previous passage was too similar to Technology has transformed education, making it more accessible and engaging. Online learning platforms provide students. Write on a different topic/scenario.",
+        "Practice passage duplicate risk: current passage 5 is 0.94 similar to existing V2 passage 836. Previous passage was too similar to The integration of technology in education is transforming how students learn and teachers instruct. Digital tools and o. Write on a different topic/scenario.",
+        "Practice passage duplicate risk: current passage 5 is 0.94 similar to existing V2 passage 837. Previous passage was too similar to Technology is transforming education by providing new opportunities for learning. Online courses and digital resources m. Write on a different topic/scenario.",
+        "Practice passage duplicate risk: current passage 5 is 0.94 similar to existing V2 passage 839. Previous passage was too similar to Technology has revolutionized education in many ways. In classrooms, interactive whiteboards and tablets have replaced t. Write on a different topic/scenario."
+      ]
+    },
+    {
+      "gradeLevel": 8,
+      "standardCode": "CC.1.2.8.D",
+      "skill": "Author Perspective and Bias",
+      "qualityScore": 84,
+      "teiTypesUsed": [
+        "hot-text-phrase",
+        "two-part-ebsr"
+      ],
+      "heroResourceLinkId": "cmpcxj3d6004ke859n67l6c0a",
+      "iterations": 5,
+      "validationIssues": [
+        "Practice passage duplicate risk: current passage 3 is 0.93 similar to existing V2 passage 803. Previous passage was too similar to In recent years, many schools have started to incorporate more technology into their classrooms. This shift has been dri. Write on a different topic/scenario.",
+        "Practice passage duplicate risk: current passage 3 is 0.93 similar to existing V2 passage 804. Previous passage was too similar to In recent years, many schools have started to incorporate more technology into their classrooms. This shift has been dri. Write on a different topic/scenario."
+      ]
+    },
+    {
+      "gradeLevel": 8,
+      "standardCode": "CC.1.2.8.E",
+      "skill": "Visual and Quantitative Evidence",
+      "qualityScore": 88,
+      "teiTypesUsed": [
+        "evidence-mapping",
+        "hot-text-phrase",
+        "two-part-ebsr",
+        "hot-text-sentence"
+      ],
+      "heroResourceLinkId": "cmpcxj3ta0052e859ht65zwqs",
+      "iterations": 5,
+      "validationIssues": [
+        "Practice passage duplicate risk: current passage 7 is 0.93 similar to existing V2 passage 883. Previous passage was too similar to The passage discusses the increase in renewable energy usage over the past decade. A graph shows a steady rise in solar . Write on a different topic/scenario."
+      ]
+    },
+    {
+      "gradeLevel": 8,
+      "standardCode": "CC.1.2.8.G",
+      "skill": "Logical Fallacies and Appeals",
+      "qualityScore": 92,
+      "teiTypesUsed": [
+        "hot-text-phrase",
+        "multi-select"
+      ],
+      "heroResourceLinkId": null,
+      "iterations": 5,
+      "validationIssues": []
+    },
+    {
+      "gradeLevel": 8,
+      "standardCode": "CC.1.2.8.I",
+      "skill": "Conflicting Information Across Texts",
+      "qualityScore": 92,
+      "teiTypesUsed": [
+        "hot-text-word",
+        "inline-dropdown"
+      ],
+      "heroResourceLinkId": null,
+      "iterations": 5,
+      "validationIssues": []
+    },
+    {
+      "gradeLevel": 8,
+      "standardCode": "CC.1.2.8.G",
+      "skill": "Trace and Evaluate Arguments",
+      "qualityScore": 92,
+      "teiTypesUsed": [
+        "hot-text-phrase",
+        "inline-dropdown"
+      ],
+      "heroResourceLinkId": null,
+      "iterations": 5,
+      "validationIssues": []
+    },
+    {
+      "gradeLevel": 8,
+      "standardCode": "CC.1.3.8.A",
+      "skill": "Multiple Themes in Literature",
+      "qualityScore": 92,
+      "teiTypesUsed": [
+        "evidence-mapping",
+        "hot-text-sentence"
+      ],
+      "heroResourceLinkId": null,
+      "iterations": 5,
+      "validationIssues": []
+    },
+    {
+      "gradeLevel": 8,
+      "standardCode": "CC.1.3.8.A",
+      "skill": "Theme",
+      "qualityScore": 92,
+      "teiTypesUsed": [
         "hot-text-sentence",
+        "evidence-mapping",
+        "two-part-ebsr"
+      ],
+      "heroResourceLinkId": "cmpcxj37v004ee85978rbncz0",
+      "iterations": 5,
+      "validationIssues": []
+    },
+    {
+      "gradeLevel": 8,
+      "standardCode": "CC.1.3.8.C",
+      "skill": "Dramatic Irony and Suspense",
+      "qualityScore": 92,
+      "teiTypesUsed": [
+        "evidence-mapping",
+        "hot-text-phrase"
+      ],
+      "heroResourceLinkId": null,
+      "iterations": 5,
+      "validationIssues": []
+    },
+    {
+      "gradeLevel": 8,
+      "standardCode": "CC.1.3.8.C",
+      "skill": "Dialogue and Characterization",
+      "qualityScore": 92,
+      "teiTypesUsed": [
+        "hot-text-sentence",
+        "evidence-mapping",
+        "two-part-ebsr"
+      ],
+      "heroResourceLinkId": "cmp4fw9lz0055g3sa49outb16",
+      "iterations": 5,
+      "validationIssues": []
+    },
+    {
+      "gradeLevel": 8,
+      "standardCode": "CC.1.3.8.F",
+      "skill": "Connotation and Figurative Language",
+      "qualityScore": 92,
+      "teiTypesUsed": [
+        "hot-text-phrase",
+        "evidence-mapping"
+      ],
+      "heroResourceLinkId": "cmp4fwa5n005fg3sabbgwqfqq",
+      "iterations": 5,
+      "validationIssues": []
+    },
+    {
+      "gradeLevel": 8,
+      "standardCode": "CC.1.3.8.D",
+      "skill": "Point of View",
+      "qualityScore": 92,
+      "teiTypesUsed": [
+        "hot-text-phrase",
+        "evidence-mapping",
+        "two-part-ebsr"
+      ],
+      "heroResourceLinkId": "cmpcxj36y004de85900w2zavt",
+      "iterations": 5,
+      "validationIssues": []
+    },
+    {
+      "gradeLevel": 8,
+      "standardCode": "CC.1.3.8.F",
+      "skill": "Figurative Language Effect",
+      "qualityScore": 92,
+      "teiTypesUsed": [
+        "hot-text-phrase",
+        "two-part-ebsr",
+        "evidence-mapping"
+      ],
+      "heroResourceLinkId": null,
+      "iterations": 5,
+      "validationIssues": []
+    },
+    {
+      "gradeLevel": 8,
+      "standardCode": "CC.1.3.8.H",
+      "skill": "Compare Genres on Similar Themes",
+      "qualityScore": 84,
+      "teiTypesUsed": [
+        "evidence-mapping",
+        "hot-text-sentence",
+        "two-part-ebsr"
+      ],
+      "heroResourceLinkId": null,
+      "iterations": 5,
+      "validationIssues": [
+        "Practice passage duplicate risk: current passage 4 is 0.93 similar to current passage 5. Previous passage was too similar to In the legal thriller, the theme of justice is central to the plot, as the protagonist, a determined lawyer, fights agai. Write on a different topic/scenario.",
+        "Practice passage duplicate risk: current passage 7 is 0.93 similar to current passage 8. Previous passage was too similar to In the crime novel, redemption is depicted through the protagonist's efforts to leave behind a life of crime and seek fo. Write on a different topic/scenario."
+      ]
+    },
+    {
+      "gradeLevel": 8,
+      "standardCode": "CC.1.4.8.A",
+      "skill": "Informative Synthesis Writing",
+      "qualityScore": 92,
+      "teiTypesUsed": [
+        "hot-text-sentence",
+        "inline-dropdown",
+        "hot-text-word",
+        "multi-select"
+      ],
+      "heroResourceLinkId": null,
+      "iterations": 5,
+      "validationIssues": []
+    },
+    {
+      "gradeLevel": 8,
+      "standardCode": "CC.1.4.8.F",
+      "skill": "Ellipses, Dashes, and Punctuation Effects",
+      "qualityScore": 92,
+      "teiTypesUsed": [
+        "inline-dropdown",
         "hot-text-word"
       ],
       "heroResourceLinkId": null,
@@ -2341,14 +566,102 @@
     {
       "gradeLevel": 8,
       "standardCode": "CC.1.4.8.F",
-      "skill": "Parallel Structure",
+      "skill": "Formal Academic Style",
       "qualityScore": 92,
+      "teiTypesUsed": [
+        "hot-text-word",
+        "hot-text-sentence",
+        "inline-dropdown"
+      ],
+      "heroResourceLinkId": null,
+      "iterations": 5,
+      "validationIssues": []
+    },
+    {
+      "gradeLevel": 8,
+      "standardCode": "CC.1.4.8.F",
+      "skill": "Pronoun Agreement and Shifts",
+      "qualityScore": 92,
+      "teiTypesUsed": [
+        "inline-dropdown",
+        "hot-text-sentence"
+      ],
+      "heroResourceLinkId": null,
+      "iterations": 3,
+      "validationIssues": []
+    },
+    {
+      "gradeLevel": 8,
+      "standardCode": "CC.1.4.8.F",
+      "skill": "Formal and Informal Style",
+      "qualityScore": 88,
       "teiTypesUsed": [
         "hot-text-sentence",
         "inline-dropdown",
-        "drag-drop-order"
+        "hot-text-word"
       ],
-      "heroResourceLinkId": "cmp4fw8tn004rg3sasjrcqewa",
+      "heroResourceLinkId": null,
+      "iterations": 5,
+      "validationIssues": [
+        "Practice passage duplicate risk: current passage 3 is 0.96 similar to current passage 6. Previous passage was too similar to (1) The project was completed on schedule. (2) It was totally awesome! (3) The team worked diligently to meet the deadli. Write on a different topic/scenario."
+      ]
+    },
+    {
+      "gradeLevel": 8,
+      "standardCode": "CC.1.4.8.F",
+      "skill": "Verb Moods and Voice",
+      "qualityScore": 92,
+      "teiTypesUsed": [
+        "inline-dropdown",
+        "multi-select",
+        "hot-text-word",
+        "hot-text-sentence"
+      ],
+      "heroResourceLinkId": null,
+      "iterations": 5,
+      "validationIssues": []
+    },
+    {
+      "gradeLevel": 8,
+      "standardCode": "CC.1.4.8.G",
+      "skill": "Argument with Counterclaims and Evidence",
+      "qualityScore": 88,
+      "teiTypesUsed": [
+        "evidence-mapping",
+        "multi-select",
+        "two-part-ebsr"
+      ],
+      "heroResourceLinkId": null,
+      "iterations": 5,
+      "validationIssues": [
+        "Practice passage duplicate risk: current passage 7 is 0.93 similar to existing V2 passage 1219. Previous passage was too similar to The development of artificial intelligence (AI) is rapidly changing industries worldwide. AI technologies are being inte. Write on a different topic/scenario."
+      ]
+    },
+    {
+      "gradeLevel": 8,
+      "standardCode": "CC.1.4.8.S",
+      "skill": "TDA Evidence and Explanation",
+      "qualityScore": 92,
+      "teiTypesUsed": [
+        "two-part-ebsr",
+        "evidence-mapping",
+        "multi-select"
+      ],
+      "heroResourceLinkId": null,
+      "iterations": 5,
+      "validationIssues": []
+    },
+    {
+      "gradeLevel": 8,
+      "standardCode": "CC.1.4.8.V",
+      "skill": "Research Source Credibility",
+      "qualityScore": 92,
+      "teiTypesUsed": [
+        "inline-dropdown",
+        "hot-text-sentence",
+        "hot-text-word"
+      ],
+      "heroResourceLinkId": null,
       "iterations": 5,
       "validationIssues": []
     }

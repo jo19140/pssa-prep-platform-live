@@ -3,6 +3,9 @@ import { db } from "@/lib/db";
 import { allPracticeQuestions, lessonV2Schema, parseHotTextWordBrackets, type LessonV2, type PracticeQuestionV2 } from "@/lib/lessonV2Schema";
 import { loadGradeSampler } from "@/lib/pssaExemplarLoader";
 
+const EMBEDDING_BATCH_TOKEN_BUDGET = 120_000;
+const EMBEDDING_BATCH_ITEM_LIMIT = 96;
+
 export type LessonV2ValidationResult = {
   valid: boolean;
   issues: string[];
@@ -189,11 +192,7 @@ async function findDuplicatePassageIssues(openai: OpenAI, gradeLevel: number, pa
     ...samplerPassages.map((passage, index) => ({ source: `PSSA sampler passage ${index + 1}`, text: passage, isCurrent: false })),
   ];
   if (comparisons.length <= passages.length) return [];
-  const embeddings = await openai.embeddings.create({
-    model: "text-embedding-3-small",
-    input: comparisons.map((entry) => entry.text),
-  });
-  const vectors = embeddings.data.map((item) => item.embedding);
+  const vectors = await createEmbeddingsInBatches(openai, comparisons.map((entry) => entry.text));
   const issues: string[] = [];
   for (let left = 0; left < passages.length; left += 1) {
     for (let right = left + 1; right < vectors.length; right += 1) {
@@ -204,6 +203,38 @@ async function findDuplicatePassageIssues(openai: OpenAI, gradeLevel: number, pa
     }
   }
   return issues;
+}
+
+async function createEmbeddingsInBatches(openai: OpenAI, texts: string[]) {
+  const vectors: number[][] = [];
+  let batch: string[] = [];
+  let batchTokens = 0;
+
+  async function flush() {
+    if (!batch.length) return;
+    const response = await openai.embeddings.create({
+      model: "text-embedding-3-small",
+      input: batch,
+    });
+    vectors.push(...response.data.map((item) => item.embedding));
+    batch = [];
+    batchTokens = 0;
+  }
+
+  for (const text of texts) {
+    const estimatedTokens = estimateTokens(text);
+    if (batch.length && (batch.length >= EMBEDDING_BATCH_ITEM_LIMIT || batchTokens + estimatedTokens > EMBEDDING_BATCH_TOKEN_BUDGET)) {
+      await flush();
+    }
+    batch.push(text);
+    batchTokens += estimatedTokens;
+  }
+  await flush();
+  return vectors;
+}
+
+function estimateTokens(value: string) {
+  return Math.ceil(value.length / 4);
 }
 
 function extractPassages(value: unknown) {
