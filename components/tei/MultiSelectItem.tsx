@@ -1,16 +1,21 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { normalizeText } from "@/lib/teiScoring";
 import { FeedbackPanel, ItemShell, SubmitButton, submitResponse, type TEIItemComponentProps } from "./types";
 import type { StudentResponse } from "@/lib/teiScoring";
 
-export function MultiSelectItem({ item, itemId, disabled, onSubmit }: TEIItemComponentProps) {
-  const [selectedAnswers, setSelectedAnswers] = useState<string[]>([]);
-  const [response, setResponse] = useState<StudentResponse | null>(null);
+export function MultiSelectItem({ item, itemId, disabled, initialResponse, onSubmit }: TEIItemComponentProps) {
+  const [selectedAnswers, setSelectedAnswers] = useState<string[]>(() => initialResponse?.rawResponse?.selectedAnswers || []);
+  const [response, setResponse] = useState<StudentResponse | null>(initialResponse || null);
   const locked = disabled || Boolean(response);
   const minSelect = Number(item.minSelect || 1);
   const maxSelect = Number(item.maxSelect || item.correctAnswers?.length || 1);
+
+  useEffect(() => {
+    setResponse(initialResponse || null);
+    setSelectedAnswers(initialResponse?.rawResponse?.selectedAnswers || []);
+  }, [initialResponse]);
 
   function toggle(choice: string) {
     if (locked) return;

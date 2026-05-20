@@ -7,6 +7,7 @@ export type TEIItemComponentProps = {
   item: any;
   itemId: string;
   disabled?: boolean;
+  initialResponse?: StudentResponse | null;
   onSubmit: (response: StudentResponse) => void;
 };
 

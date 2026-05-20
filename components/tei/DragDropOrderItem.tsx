@@ -8,15 +8,20 @@ import { normalizeText } from "@/lib/teiScoring";
 import { FeedbackPanel, ItemShell, SubmitButton, submitResponse, type TEIItemComponentProps } from "./types";
 import type { StudentResponse } from "@/lib/teiScoring";
 
-export function DragDropOrderItem({ item, itemId, disabled, onSubmit }: TEIItemComponentProps) {
-  const [order, setOrder] = useState<string[]>(() => item.draggableItems || []);
+export function DragDropOrderItem({ item, itemId, disabled, initialResponse, onSubmit }: TEIItemComponentProps) {
+  const [order, setOrder] = useState<string[]>(() => initialResponse?.rawResponse?.order || item.draggableItems || []);
   const [isTouch, setIsTouch] = useState(false);
-  const [response, setResponse] = useState<StudentResponse | null>(null);
+  const [response, setResponse] = useState<StudentResponse | null>(initialResponse || null);
   const locked = disabled || Boolean(response);
 
   useEffect(() => {
     setIsTouch(typeof window !== "undefined" && "ontouchstart" in window);
   }, []);
+
+  useEffect(() => {
+    setResponse(initialResponse || null);
+    setOrder(initialResponse?.rawResponse?.order || item.draggableItems || []);
+  }, [initialResponse, item.draggableItems]);
 
   function handleDragEnd(event: DragEndEvent) {
     if (locked) return;

@@ -4,7 +4,7 @@ import { Prisma, type LearningLesson, type ResourceLink } from "@prisma/client";
 import { db } from "@/lib/db";
 import { generateLessonV2 } from "@/lib/lessonGeneratorV2";
 import { allPracticeQuestions, practiceSections, type LessonV2 } from "@/lib/lessonV2Schema";
-import { validatePassageContent, wordCount } from "@/lib/lessonV2Validators";
+import { validatePassageContent } from "@/lib/lessonV2Validators";
 
 const GENERATED_BY = "PREBUILT_AI_LIBRARY";
 const GENERATOR_VERSION = "V2";
@@ -39,7 +39,7 @@ type RegenerationFailure = {
 
 async function main() {
   const dryRun = process.argv.includes("--dry-run");
-  const fullRegenerate = process.argv.includes("--full-regenerate");
+  const deterministicRepair = process.argv.includes("--deterministic-repair");
   const concurrency = readConcurrency();
   const lessons = await db.learningLesson.findMany({
     where: { generatedBy: GENERATED_BY, generatorVersion: GENERATOR_VERSION },
@@ -70,7 +70,7 @@ async function main() {
     console.log("DRY RUN ONLY: no generator calls and no DB writes were performed.");
     return;
   }
-  if (!fullRegenerate) {
+  if (deterministicRepair) {
     const repaired: RegenerationSuccess[] = [];
     const repairFailures: RegenerationFailure[] = [];
     for (const { lesson } of affected) {
@@ -101,7 +101,7 @@ async function main() {
     }
     const summary = {
       generatedAt: new Date().toISOString(),
-      mode: "deterministic-repair",
+      mode: "deterministic-cleanup-no-padding",
       scannedLessons: lessons.length,
       affectedLessons: affected.length,
       successfulRegenerations: repaired.length,
@@ -132,6 +132,7 @@ async function main() {
           skill: lesson.skill,
           whyAssigned: lesson.whyAssigned,
           commonError: `Regenerate because validation found: ${issues.slice(0, 4).join("; ")}`,
+          excludeLessonId: lesson.id,
         });
         const postIssues = findRegenerationIssues(result.lesson);
         if (postIssues.length) {
@@ -194,42 +195,36 @@ function repairExistingLesson(lesson: LessonV2, dbLesson: LessonWithResource): L
   return repaired;
 }
 
-function expandCleanPassage(passage: string, lesson: LessonV2) {
-  let result = passage
+function expandCleanPassage(passage: string, _lesson: LessonV2) {
+  const cleaned = passage
     .replace(/The passage gives another clear detail in simple language\.?/gi, "")
     .replace(/Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another\.?/gi, "")
+    .replace(/Researchers observed the area over several weeks and recorded changes in water level, plant growth, and foot traffic\.?/gi, "")
+    .replace(/Their notes showed that a small change in one part of the environment could affect the whole (trail system|system)\.?/gi, "")
+    .replace(/The (town|community) used the information to plan (repairs|improvements) that protected both (visitors|people) and the natural habitat\.?/gi, "")
+    .replace(/The scene grows quieter as the character notices small sounds and gestures that reveal (how nervous she feels|an important feeling)\.?/gi, "")
+    .replace(/A memory from earlier in the week explains why the moment matters and why the decision feels difficult\.?/gi, "")
+    .replace(/A later moment explains why the decision matters and how the character responds to pressure\.?/gi, "")
+    .replace(/By the end, the character acts with more confidence, showing a change (that the reader can trace through her choices|the reader can trace through specific choices)\.?/gi, "")
+    .replace(/The writers compare two versions of the same sentence and choose the one that sounds clearer and more precise\.?/gi, "")
+    .replace(/They revise the draft again, paying attention to word choice, sentence flow, and the way each detail supports the purpose\.?/gi, "")
+    .replace(/The final version keeps a consistent tone and gives readers enough information to understand the message\.?/gi, "")
     .replace(/\s+/g, " ")
     .trim();
-  const minWords = lesson.gradeLevel <= 5 ? 150 : 250;
-  const additions = authenticPassageExtensions(lesson);
-  let index = 0;
-  while (wordCount(result) < minWords) {
-    result = `${result.trim()}${additions[index % additions.length]}`;
-    index += 1;
-  }
-  return result;
+  return removeRepeatedSentences(cleaned);
 }
 
-function authenticPassageExtensions(lesson: LessonV2) {
-  if (lesson.standardCode.startsWith("CC.1.3.")) {
-    return [
-      " The scene grows quieter as the character notices small sounds and gestures that reveal an important feeling.",
-      " A later moment explains why the decision matters and how the character responds to pressure.",
-      " By the end, the character acts with more confidence, showing a change the reader can trace through specific choices.",
-    ];
+function removeRepeatedSentences(passage: string) {
+  const sentences = passage.split(/(?<=[.!?])\s+/).map((sentence) => sentence.trim()).filter(Boolean);
+  const seen = new Set<string>();
+  const kept: string[] = [];
+  for (const sentence of sentences) {
+    const key = normalizedPhrase(sentence);
+    if (key.split(/\s+/).length >= 8 && seen.has(key)) continue;
+    seen.add(key);
+    kept.push(sentence);
   }
-  if (lesson.standardCode.startsWith("CC.1.4.")) {
-    return [
-      " The writers compare two versions of the same sentence and choose the one that sounds clearer and more precise.",
-      " They revise the draft again, paying attention to word choice, sentence flow, and the way each detail supports the purpose.",
-      " The final version keeps a consistent tone and gives readers enough information to understand the message.",
-    ];
-  }
-  return [
-    " Researchers observed the area over several weeks and recorded changes in water level, plant growth, and foot traffic.",
-    " Their notes showed that a small change in one part of the environment could affect the whole system.",
-    " The community used the information to plan improvements that protected both people and the natural habitat.",
-  ];
+  return kept.join(" ");
 }
 
 function repairHotTextPhrase(question: any) {

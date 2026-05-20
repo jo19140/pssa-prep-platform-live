@@ -1,158 +1,168 @@
 {
   "lesson": {
-    "hook": "Imagine you're a detective trying to solve a mystery. You have clues, but not the whole story. Making inferences in reading is like solving that mystery. You use clues from the text to understand what’s not directly stated. Today, we'll become reading detectives and learn how to make inferences using evidence from the text.",
+    "hook": "Have you ever played detective, trying to figure out what happened in a story? Making inferences is just like that! It's about reading between the lines and using clues from the text to understand more than what's directly stated. Today, we'll become inference detectives and uncover hidden meanings in stories.",
     "skill": "Inference",
-    "title": "Understanding Inferences with Text Evidence",
+    "title": "Making Inferences from Text",
     "exitTicket": [
       {
-        "type": "mc",
-        "choices": [
-          "Mia is excited about the evening.",
-          "Mia feels lonely and misses her friend.",
-          "Mia is angry at her friend.",
-          "Mia is eager to join the village square."
-        ],
-        "passage": "The sun was setting over the small village, casting long shadows. Mia sat on the porch, clutching a letter from her friend who had moved away. The distant laughter from the village square reached her, but she remained on the porch, lost in thought. She missed her friend terribly and felt a pang of loneliness every time she thought about their adventures together. She knew she should join the others, but her heart wasn't in it tonight. Instead, she stayed on the porch, letting the cool evening air wash over her, feeling the weight of the letter in her hand as a reminder of her friend's absence. The village was alive with activity, but Mia felt disconnected, her thoughts elsewhere. Researchers observed the area over several weeks and recorded changes in water level, plant growth, and foot traffic. Their notes showed that a small change in one part of the environment could affect the whole system.",
-        "question": "What can you infer about the character's feelings in the passage?",
-        "coachHint": "Look at Mia's actions and the setting to understand her emotions.",
-        "correctAnswer": "Mia feels lonely and misses her friend.",
-        "distractorRationale": [
-          {
-            "choice": "Mia is excited about the evening.",
-            "whyWrong": "The passage describes Mia as lost in thought and sighing, which suggests sadness, not excitement."
-          },
-          {
-            "choice": "Mia is angry at her friend.",
-            "whyWrong": "There is no indication of anger; the focus is on her missing her friend."
-          },
-          {
-            "choice": "Mia is eager to join the village square.",
-            "whyWrong": "Mia chooses to stay on the porch, indicating she is not eager to join the others."
-          }
-        ],
-        "rightAnswerRationale": "Mia's deep sigh and her decision to stay on the porch suggest she feels lonely and misses her friend."
-      },
-      {
         "type": "hot-text-phrase",
-        "passage": "The sun was setting over the small village, casting long shadows. Mia sat on the porch, clutching a letter from her friend who had moved away. The distant laughter from the village square reached her, but she remained on the porch, lost in thought. She missed her friend terribly and felt a pang of loneliness every time she thought about their adventures together. She knew she should join the others, but her heart wasn't in it tonight. Instead, she stayed on the porch, letting the cool evening air wash over her, feeling the weight of the letter in her hand as a reminder of her friend's absence. The village was alive with activity, but Mia felt disconnected, her thoughts elsewhere. Researchers observed the area over several weeks and recorded changes in water level, plant growth, and foot traffic. Their notes showed that a small change in one part of the environment could affect the whole system.",
-        "question": "Select the two phrases that help you understand Mia's feelings.",
-        "coachHint": "Look for phrases that describe Mia's emotions and actions.",
+        "passage": "The sun was setting, casting a warm glow over the park. Sarah sat on the bench, watching the children play. Her eyes followed a little girl chasing a butterfly, her laughter ringing through the air. Sarah smiled softly, her heart feeling light and content. The gentle breeze ruffled her hair, and she closed her eyes, savoring the moment. It was a peaceful evening, and Sarah felt grateful for the simple joys around her. As the sky turned shades of pink and orange, she took a deep breath, feeling at ease with the world. The day had been long, but this moment made it all worthwhile. She opened her eyes, watching the last rays of sunlight dance across the grass.",
+        "question": "What can we infer about the character's mood based on their actions?",
+        "coachHint": "Consider how the setting and Sarah's actions contribute to her mood.",
         "maxSelect": 2,
         "minSelect": 2,
         "correctPhrases": [
-          "clutching a letter from her friend",
-          "felt a pang of loneliness"
+          "her heart feeling light",
+          "savoring the moment"
         ],
         "selectablePhrases": [
-          "clutching a letter from her friend",
-          "distant laughter from the village square",
-          "felt a pang of loneliness",
-          "letting the cool evening air wash over her"
+          "warm glow over the park",
+          "Sarah sat on the bench",
+          "her heart feeling light",
+          "savoring the moment"
         ],
-        "rightAnswerRationale": "The phrases 'clutching a letter from her friend' and 'felt a pang of loneliness' highlight Mia's feelings of missing her friend and loneliness."
+        "rightAnswerRationale": "Sarah's actions and the setting suggest she is content and at peace."
+      },
+      {
+        "type": "mc",
+        "choices": [
+          "The character is avoiding going home.",
+          "The character is committed to their job.",
+          "The character is procrastinating.",
+          "The character is unsure of their work."
+        ],
+        "passage": "The office was quiet as the clock ticked past seven. Most of the staff had left for the day, but Mark remained at his desk, focused on the project in front of him. The glow of the computer screen illuminated his determined expression. He knew the deadline was approaching, and he wanted to ensure everything was perfect. Mark's dedication to his work was evident in the way he meticulously reviewed each detail, making sure nothing was overlooked. As the hours passed, he felt a sense of accomplishment, knowing that his hard work would pay off. Staying late was a choice he made willingly, driven by his commitment to excellence and his desire to succeed.",
+        "question": "What can we infer about the character's decision to stay late at work?",
+        "coachHint": "Think about what staying late at work indicates about someone's priorities.",
+        "correctAnswer": "The character is committed to their job.",
+        "distractorRationale": [
+          {
+            "choice": "The character is avoiding going home.",
+            "whyWrong": "There is no indication of avoidance."
+          },
+          {
+            "choice": "The character is procrastinating.",
+            "whyWrong": "Staying late suggests dedication, not procrastination."
+          },
+          {
+            "choice": "The character is unsure of their work.",
+            "whyWrong": "The passage suggests commitment, not uncertainty."
+          }
+        ],
+        "rightAnswerRationale": "The character's decision suggests a strong commitment to their job."
       }
     ],
     "gradeLevel": 4,
-    "explanation": "Making inferences is a critical reading skill that involves using clues from the text to understand deeper meanings or what is not directly stated. When authors write, they often leave out certain details, expecting readers to fill in the gaps. This is where inference comes in. For example, if a story describes a character shivering and pulling their coat tighter, you might infer that it is cold outside, even if the text doesn't explicitly say so. \n\nTo make an inference, follow these steps: \n1. **Read Carefully**: Pay attention to details in the text. Authors often provide subtle hints or clues about what they mean. \n2. **Think About What You Know**: Use your own experiences and knowledge to interpret these clues. \n3. **Combine Clues and Knowledge**: Put together the text clues and your background knowledge to make a logical guess about what the author is implying.\n\nFor instance, if a passage describes a character with a frown and crossed arms, you might infer that the character is upset or angry. The text doesn't say it directly, but the clues lead you to that conclusion. Inferences can be about characters, settings, or events, and they help you understand the text more deeply. \n\nRemember, good inferences are supported by evidence from the text. Always ask yourself, \"What in the text makes me think this?\" This practice will help you become a more thoughtful and analytical reader. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step.",
+    "explanation": "Inference is a critical reading skill that allows us to understand deeper meanings in a text. When authors write, they often leave hints and clues instead of stating everything directly. As readers, we use these clues, along with our own knowledge, to make educated guesses about what is happening or what characters are feeling. For example, if a character is described as shivering and pulling their coat tighter, we might infer that it's cold outside, even if the text doesn't say so directly. To make an inference, follow these steps: 1. **Read Carefully:** Pay attention to details in the text. Authors often use descriptive language to provide clues. 2. **Use Prior Knowledge:** Think about what you already know about similar situations or experiences. 3. **Look for Patterns:** Notice if there are repeated ideas or themes that suggest a deeper meaning. 4. **Ask Questions:** Consider what the author might be implying. Why did they choose certain words or phrases? Let's practice with an example. Imagine a story where a character named Alex is pacing back and forth, glancing at the clock, and biting their nails. What can we infer about Alex's feelings? These actions suggest that Alex might be nervous or anxious, perhaps waiting for something important to happen. By combining the text's clues with our understanding of human behavior, we can make a strong inference about Alex's emotional state. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step.",
     "resourceUrl": null,
     "whyAssigned": "This mini-lesson targets Inference because the diagnostic showed a standards-aligned practice gap.",
     "commonErrors": [
-      "Students may rely too heavily on personal experiences without enough text evidence.",
-      "Some students might misinterpret clues, leading to incorrect inferences.",
-      "Students may overlook subtle clues that are crucial for making accurate inferences."
+      "Students might focus only on explicit details and miss implied meanings.",
+      "Some might rely too heavily on prior knowledge without enough textual evidence.",
+      "Others may misinterpret clues due to lack of context or understanding of the text."
     ],
     "masteryCheck": [
       {
-        "type": "mc",
-        "choices": [
-          "Lisa plans to avoid helping others.",
-          "Lisa is eager to help others again.",
-          "Lisa is unsure about her abilities.",
-          "Lisa wants to change her responsibilities."
-        ],
-        "passage": "The library was quiet, with only the sound of pages turning. Lisa sat at a table, surrounded by books. She had promised to help her friend study for the upcoming history test. As the afternoon sun streamed through the windows, Lisa explained the key events of the Civil War. Her friend listened carefully, taking notes. Lisa felt a sense of satisfaction, knowing she was helping someone else succeed. When they finished, her friend thanked her, and Lisa smiled, feeling proud of her efforts. Researchers observed the area over several weeks and recorded changes in water level, plant growth, and foot traffic. Their notes showed that a small change in one part of the environment could affect the whole system. The community used the information to plan improvements that protected both people and the natural habitat. Researchers observed the area over several weeks and recorded changes in water level, plant growth, and foot traffic.",
-        "question": "What can you infer about the character's decision?",
-        "coachHint": "Consider how Lisa's feelings at the end of the passage indicate her future plans.",
-        "correctAnswer": "Lisa is eager to help others again.",
-        "distractorRationale": [
-          {
-            "choice": "Lisa plans to avoid helping others.",
-            "whyWrong": "Lisa feels proud and satisfied, indicating she will continue."
-          },
-          {
-            "choice": "Lisa is unsure about her abilities.",
-            "whyWrong": "Lisa's pride and sense of satisfaction suggest she is confident in her role."
-          },
-          {
-            "choice": "Lisa wants to change her responsibilities.",
-            "whyWrong": "There is no indication that Lisa wants to change her responsibilities."
-          }
-        ],
-        "rightAnswerRationale": "Lisa's sense of satisfaction and pride suggest she will continue to help others in the future."
-      },
-      {
         "type": "evidence-mapping",
         "claims": [
-          "Lisa feels satisfied for helping her friend.",
-          "Lisa is annoyed with her friend.",
-          "Lisa is unsure about the history test."
+          "Tom feels indifferent towards Jake.",
+          "Tom values his friendship with Jake.",
+          "Tom is annoyed by Jake's requests."
         ],
-        "passage": "The library was quiet, with only the sound of pages turning. Lisa sat at a table, surrounded by books. She had promised to help her friend study for the upcoming history test. As the afternoon sun streamed through the windows, Lisa explained the key events of the Civil War. Her friend listened carefully, taking notes. Lisa felt a sense of satisfaction, knowing she was helping someone else succeed. When they finished, her friend thanked her, and Lisa smiled, feeling proud of her efforts. Researchers observed the area over several weeks and recorded changes in water level, plant growth, and foot traffic. Their notes showed that a small change in one part of the environment could affect the whole system. The community used the information to plan improvements that protected both people and the natural habitat. Researchers observed the area over several weeks and recorded changes in water level, plant growth, and foot traffic.",
-        "question": "Which statement is supported by the passage?",
-        "coachHint": "Focus on Lisa's actions and feelings described in the passage.",
+        "passage": "Tom watched as his friend, Jake, struggled with the heavy boxes. Without a word, Tom walked over and grabbed one of the boxes, helping Jake carry them to the car. Jake smiled gratefully, and Tom felt a sense of satisfaction. They had been friends for years, always there for each other in times of need. As they loaded the last box, Jake clapped Tom on the back, thanking him for his help. Tom shrugged it off, saying it was nothing, but inside, he felt a warm glow of friendship. Helping Jake was second nature to him, and he knew Jake would do the same for him. Their friendship was built on mutual support and understanding, and Tom cherished it deeply.",
+        "question": "What can we infer about the character's feelings towards their friend?",
+        "coachHint": "Consider how Tom's actions reflect his feelings.",
         "evidenceItems": [
-          "Lisa sat at a table, surrounded by books.",
-          "Lisa explained the key events of the Civil War.",
-          "Lisa felt a sense of satisfaction, knowing she was helping someone else succeed."
+          "Tom helped Jake carry boxes.",
+          "Jake smiled gratefully.",
+          "Tom felt a warm glow of friendship."
         ],
         "correctMapping": [
           {
-            "claim": "Lisa feels satisfied for helping her friend.",
+            "claim": "Tom feels indifferent towards Jake.",
             "evidenceItems": [
-              "Lisa felt a sense of satisfaction, knowing she was helping someone else succeed.",
-              "Lisa explained the key events of the Civil War."
+              "Tom helped Jake carry boxes."
             ]
           },
           {
-            "claim": "Lisa is annoyed with her friend.",
+            "claim": "Tom values his friendship with Jake.",
             "evidenceItems": [
-              "Lisa sat at a table, surrounded by books."
+              "Tom helped Jake carry boxes.",
+              "Tom felt a warm glow of friendship."
             ]
           },
           {
-            "claim": "Lisa is unsure about the history test.",
+            "claim": "Tom is annoyed by Jake's requests.",
             "evidenceItems": [
-              "Lisa sat at a table, surrounded by books."
+              "Tom helped Jake carry boxes."
             ]
           }
         ],
-        "rightAnswerRationale": "The passage supports that Lisa feels satisfied and proud for helping her friend study."
+        "rightAnswerRationale": "Tom's actions and feelings suggest he values and cherishes his friendship with Jake."
       },
       {
-        "type": "hot-text-phrase",
-        "passage": "The library was quiet, with only the sound of pages turning. Lisa sat at a table, surrounded by books. She had promised to help her friend study for the upcoming history test. As the afternoon sun streamed through the windows, Lisa explained the key events of the Civil War. Her friend listened carefully, taking notes. Lisa felt a sense of satisfaction, knowing she was helping someone else succeed. When they finished, her friend thanked her, and Lisa smiled, feeling proud of her efforts. Researchers observed the area over several weeks and recorded changes in water level, plant growth, and foot traffic. Their notes showed that a small change in one part of the environment could affect the whole system. The community used the information to plan improvements that protected both people and the natural habitat. Researchers observed the area over several weeks and recorded changes in water level, plant growth, and foot traffic.",
-        "question": "Select the two phrases that help you understand Lisa's feelings.",
-        "coachHint": "Look for phrases that describe Lisa's emotions and actions.",
-        "maxSelect": 2,
-        "minSelect": 2,
-        "correctPhrases": [
-          "felt a sense of satisfaction",
-          "feeling proud of her efforts"
+        "type": "mc",
+        "choices": [
+          "The character is disappointed.",
+          "The character is surprised.",
+          "The character is indifferent.",
+          "The character is confused."
         ],
-        "selectablePhrases": [
-          "surrounded by books",
-          "explained the key events of the Civil War",
-          "felt a sense of satisfaction",
-          "feeling proud of her efforts"
+        "passage": "When the letter arrived, Emily's hands trembled as she opened it. Her eyes widened as she read the words, and a smile spread across her face. She couldn't believe it—she had been accepted into the art program she had dreamed of for years. The excitement bubbled up inside her, and she let out a joyful laugh, unable to contain her happiness. Emily's heart raced with anticipation, thinking about the new opportunities that awaited her. She immediately called her family to share the good news, her voice filled with enthusiasm. This was the moment she had been waiting for, and it felt like a dream come true. Emily knew that this was just the beginning of an incredible journey.",
+        "question": "What can we infer about the character's reaction to the news?",
+        "coachHint": "Think about how people typically react to unexpected news.",
+        "correctAnswer": "The character is surprised.",
+        "distractorRationale": [
+          {
+            "choice": "The character is disappointed.",
+            "whyWrong": "The passage suggests a positive reaction."
+          },
+          {
+            "choice": "The character is indifferent.",
+            "whyWrong": "The passage suggests an emotional response."
+          },
+          {
+            "choice": "The character is confused.",
+            "whyWrong": "The passage suggests clarity, not confusion."
+          }
         ],
-        "rightAnswerRationale": "The phrases 'felt a sense of satisfaction' and 'feeling proud of her efforts' highlight Lisa's feelings of satisfaction and pride."
+        "rightAnswerRationale": "The character's reaction suggests surprise and excitement."
+      },
+      {
+        "type": "mc",
+        "choices": [
+          "The character is running away from problems.",
+          "The character is seeking new opportunities.",
+          "The character is forced to move.",
+          "The character is unhappy with their current life."
+        ],
+        "passage": "After months of planning, David finally stood in his new apartment, surrounded by boxes. The city outside buzzed with energy, a stark contrast to the quiet town he had left behind. David felt a mix of excitement and nervousness as he looked out the window at the bustling streets below. This move was a chance for a fresh start, a new chapter in his life. He was eager to explore the opportunities that awaited him, to meet new people and experience new things. As he unpacked, David felt a sense of freedom, knowing that he had taken a bold step towards his future. The decision to move had been difficult, but he knew it was the right one. This city was full of possibilities, and David was ready to embrace them all.",
+        "question": "What can we infer about the character's decision to move to a new city?",
+        "coachHint": "Consider what moving to a new city often represents for people.",
+        "correctAnswer": "The character is seeking new opportunities.",
+        "distractorRationale": [
+          {
+            "choice": "The character is running away from problems.",
+            "whyWrong": "There is no indication of avoidance."
+          },
+          {
+            "choice": "The character is forced to move.",
+            "whyWrong": "The passage suggests a voluntary decision."
+          },
+          {
+            "choice": "The character is unhappy with their current life.",
+            "whyWrong": "The passage suggests a positive outlook on the move."
+          }
+        ],
+        "rightAnswerRationale": "The character's decision suggests a desire for change and new opportunities."
       }
     ],
-    "qualityScore": 88,
+    "qualityScore": 60,
     "standardCode": "CC.1.2.4.B",
     "teiTypesUsed": [
+      "hot-text-phrase",
       "evidence-mapping",
-      "hot-text-phrase"
+      "two-part-ebsr"
     ],
     "exemplarsUsed": [
       "g4-p1",
@@ -164,244 +174,289 @@
       "g3-tei-6"
     ],
     "qualityIssues": [
-      "guidedPractice[1]: Incorrect evidence mapping for claims. (Ensure evidence items correctly support each claim. Adjust the evidence mapping to accurately reflect the claims.)",
-      "independentPractice[0]: Passage is missing, making it impossible to evaluate inference. (Provide a complete passage for students to read and analyze.)",
-      "independentPractice[2]: Passage is missing, making it impossible to evaluate inference. (Provide a complete passage for students to read and analyze.)",
-      "masteryCheck[1]: Passage is missing, making it impossible to evaluate inference. (Provide a complete passage for students to read and analyze.)",
-      "masteryCheck[2]: Passage is missing, making it impossible to evaluate inference. (Provide a complete passage for students to read and analyze.)"
+      "A practice passage is likely too short for the target grade.",
+      "A practice passage is likely too short for the target grade.",
+      "A practice passage is likely too short for the target grade.",
+      "A practice passage is likely too short for the target grade.",
+      "A practice passage is likely too short for the target grade.",
+      "A practice passage is likely too short for the target grade.",
+      "A practice passage is likely too short for the target grade.",
+      "A practice passage is likely too short for the target grade.",
+      "A practice passage is likely too short for the target grade.",
+      "Practice passage needs regeneration: 120 words (target 150-400) with FK grade 7.4 (target 4±1.5). Write a longer, more natural passage with simpler sentence structure.",
+      "Practice passage needs regeneration: 112 words (target 150-400) with FK grade 7.4 (target 4±1.5). Write a longer, more natural passage with simpler sentence structure.",
+      "Practice passage needs regeneration: 116 words (target 150-400) with FK grade 6.5 (target 4±1.5). Write a longer, more natural passage with simpler sentence structure.",
+      "Practice passage needs regeneration: 118 words (target 150-400) with FK grade 5.9 (target 4±1.5). Write a longer, more natural passage with simpler sentence structure.",
+      "Practice passage needs regeneration: 117 words (target 150-400) with FK grade 6.7 (target 4±1.5). Write a longer, more natural passage with simpler sentence structure.",
+      "Practice passage needs regeneration: 126 words (target 150-400) with FK grade 8.0 (target 4±1.5). Write a longer, more natural passage with simpler sentence structure.",
+      "Practice passage needs regeneration: 119 words (target 150-400) with FK grade 5.5 (target 4±1.5). Write a longer, more natural passage with simpler sentence structure.",
+      "Practice passage needs regeneration: 114 words (target 150-400) with FK grade 8.7 (target 4±1.5). Write a longer, more natural passage with simpler sentence structure.",
+      "Practice passage needs regeneration: 120 words (target 150-400) with FK grade 6.0 (target 4±1.5). Write a longer, more natural passage with simpler sentence structure.",
+      "Practice passage needs regeneration: 118 words (target 150-400) with FK grade 8.1 (target 4±1.5). Write a longer, more natural passage with simpler sentence structure.",
+      "Practice passage needs regeneration: 132 words (target 150-400) with FK grade 7.8 (target 4±1.5). Write a longer, more natural passage with simpler sentence structure.",
+      "guidedPractice[1]: Passage is missing. (Provide a passage that aligns with the question and is appropriate for the grade level.)",
+      "independentPractice[1]: Passage is missing. (Include a passage that supports the question and is suitable for the target grade.)",
+      "independentPractice[2]: Passage is missing. (Add a passage that fits the question and is appropriate for the grade level.)",
+      "independentPractice[3]: Passage is missing. (Create a passage that aligns with the question and is suitable for the target grade.)",
+      "exitTicket[1]: Passage is missing. (Include a passage that supports the question and is appropriate for the grade level.)",
+      "masteryCheck[1]: Passage is missing. (Provide a passage that aligns with the question and is suitable for the target grade.)",
+      "masteryCheck[2]: Passage is missing. (Add a passage that fits the question and is appropriate for the grade level.)"
     ],
     "resourceTitle": null,
     "standardLabel": "Make inferences using text evidence",
-    "workedExample": "Let's look at an example. Suppose you read a passage where a character named Sarah is described as sitting alone at lunch, staring at her food, while her friends are laughing at another table. The text doesn't say Sarah is sad, but you might infer that she feels left out or lonely. \n\nHere's how you make that inference:\n- **Text Clue**: Sarah is sitting alone, staring at her food.\n- **Background Knowledge**: People often feel sad or left out when they are alone while others are having fun.\n- **Inference**: Sarah might be feeling lonely or excluded.\n\nThis inference is logical because it is based on the clues given in the text and your understanding of social situations. Practicing this skill will help you understand characters' emotions and motivations, even when they are not directly stated. This matters because the correct answer is not just a matching word or phrase. It is the choice that fits the whole question and can be defended with a specific detail. The reasoning should explain both what the evidence says and how it supports the answer.",
+    "workedExample": "Consider this passage: \"Lila stared out the window, watching the rain pour down. Her unfinished homework lay scattered across the table, untouched. She sighed deeply and turned away.\" Let's make an inference. What can we tell about Lila's mood? The clues here are the rain, the untouched homework, and her deep sigh. These details suggest that Lila might be feeling overwhelmed or unmotivated. The rain could symbolize her gloomy mood, and the fact that her homework is untouched indicates she might be avoiding it due to stress or lack of interest. By piecing together these clues, we infer that Lila is likely feeling down or discouraged. This inference helps us understand her character better and adds depth to the story. Remember, making inferences is about connecting the dots between what is written and what is implied. This matters because the correct answer is not just a matching word or phrase. It is the choice that fits the whole question and can be defended with a specific detail. The reasoning should explain both what the evidence says and how it supports the answer.",
     "guidedPractice": [
+      {
+        "type": "hot-text-phrase",
+        "passage": "The room was silent after Jamie slammed the door. His footsteps echoed down the hallway as he stomped away, leaving everyone in shock. Jamie's face had been red with anger, and his fists were clenched tightly at his sides. It was clear that something had upset him deeply, but no one knew what it was yet. The tension in the room was palpable, and everyone exchanged worried glances, unsure of what to do next. Jamie's sudden outburst had caught them all off guard, and they were left wondering what could have caused such a reaction from him. As the sound of his footsteps faded, the silence in the room grew heavier, and the air seemed to thicken with unspoken questions.",
+        "question": "What can we infer about the character's feelings when they slam the door and stomp away?",
+        "coachHint": "Think about what slamming a door usually indicates about someone's mood.",
+        "maxSelect": 2,
+        "minSelect": 2,
+        "correctPhrases": [
+          "slammed the door",
+          "red with anger"
+        ],
+        "selectablePhrases": [
+          "slammed the door",
+          "stomped away",
+          "red with anger",
+          "fists were clenched"
+        ],
+        "rightAnswerRationale": "The character's actions of slamming the door and stomping away suggest anger or frustration. The description of his red face and clenched fists supports this inference."
+      },
       {
         "type": "mc",
         "choices": [
-          "Mia is excited about the evening.",
-          "Mia feels lonely and misses her friend.",
-          "Mia is angry at her friend.",
-          "Mia is eager to join the village square."
+          "The character is happy.",
+          "The character is upset.",
+          "The character is confused.",
+          "The character is excited."
         ],
-        "passage": "As the sun set over the small village, Mia sat on the porch, watching the shadows grow longer. Her eyes followed the path leading away from her home, and she sighed deeply, clutching the letter in her hand. The distant sound of laughter from the village square reached her ears, but she remained still, lost in thought. The letter was from her best friend, who had moved to the city last month. Mia missed her terribly and felt a pang of loneliness every time she thought about their adventures together. She knew she should join the others in the square, but her heart wasn't in it tonight. Instead, she stayed on the porch, letting the cool evening air wash over her. Researchers observed the area over several weeks and recorded changes in water level, plant growth, and foot traffic. Their notes showed that a small change in one part of the environment could affect the whole system.",
-        "question": "What can you infer about the character's feelings in the passage?",
-        "coachHint": "Look at Mia's actions and the setting to understand her emotions.",
-        "correctAnswer": "Mia feels lonely and misses her friend.",
+        "passage": "The room was silent after Jamie slammed the door. His footsteps echoed down the hallway as he stomped away, leaving everyone in shock. Jamie's face had been red with anger, and his fists were clenched tightly at his sides. It was clear that something had upset him deeply, but no one knew what it was yet. The tension in the room was palpable, and everyone exchanged worried glances, unsure of what to do next. Jamie's sudden outburst had caught them all off guard, and they were left wondering what could have caused such a reaction from him. As the sound of his footsteps faded, the silence in the room grew heavier, and the air seemed to thicken with unspoken questions.",
+        "question": "What is the main idea of the paragraph?",
+        "coachHint": "Focus on the actions and emotions described.",
+        "correctAnswer": "The character is upset.",
         "distractorRationale": [
           {
-            "choice": "Mia is excited about the evening.",
-            "whyWrong": "The passage describes Mia as lost in thought and sighing, which suggests sadness, not excitement."
+            "choice": "The character is happy.",
+            "whyWrong": "The actions described do not indicate happiness."
           },
           {
-            "choice": "Mia is angry at her friend.",
-            "whyWrong": "There is no indication of anger; the focus is on her missing her friend."
+            "choice": "The character is confused.",
+            "whyWrong": "There is no mention of confusion in the actions."
           },
           {
-            "choice": "Mia is eager to join the village square.",
-            "whyWrong": "Mia chooses to stay on the porch, indicating she is not eager to join the others."
+            "choice": "The character is excited.",
+            "whyWrong": "The actions suggest anger, not excitement."
           }
         ],
-        "rightAnswerRationale": "Mia's deep sigh and her decision to stay on the porch suggest she feels lonely and misses her friend."
+        "rightAnswerRationale": "The main idea is that the character is upset, as shown by their actions and the description of their emotions."
       },
       {
         "type": "evidence-mapping",
         "claims": [
-          "Jake was nervous during the test.",
-          "Jake finished the test early.",
-          "Jake didn't know the last problem."
+          "The setting is warm and sunny.",
+          "The setting is cold and windy.",
+          "The setting is rainy and stormy."
         ],
-        "passage": "The classroom was filled with the sound of pencils scratching on paper. Jake sat at his desk, glancing at the clock every few minutes. His math test was almost over, and he was stuck on the last problem. He tapped his pencil nervously, trying to remember the formula. Around him, other students were already turning in their papers. Jake took a deep breath, closed his eyes for a moment, and then suddenly remembered the steps. He quickly wrote down the solution and handed in his test just as the bell rang. Researchers observed the area over several weeks and recorded changes in water level, plant growth, and foot traffic. Their notes showed that a small change in one part of the environment could affect the whole system. The community used the information to plan improvements that protected both people and the natural habitat. Researchers observed the area over several weeks and recorded changes in water level, plant growth, and foot traffic.",
-        "question": "Which statement is supported by the passage?",
-        "coachHint": "Focus on Jake's actions and feelings described in the passage.",
+        "passage": "The sky was overcast, and a cold wind swept through the streets, carrying with it the scent of rain. People hurried along the sidewalks, clutching their coats tightly around them. The trees swayed, their leaves rustling loudly in the gusts. It was a typical autumn day, with the promise of a storm looming on the horizon. The atmosphere was tense, as if the city itself was holding its breath, waiting for the first drops to fall. Streetlights flickered on early, casting a warm glow against the gray backdrop of the sky. The city seemed to brace itself for the impending weather, with shopkeepers pulling in their displays and pedestrians quickening their pace.",
+        "question": "What can we infer about the setting based on the description of the weather?",
+        "coachHint": "Consider how the weather affects the mood and actions of people.",
         "evidenceItems": [
-          "Jake sat at his desk, glancing at the clock.",
-          "He tapped his pencil nervously.",
-          "He quickly wrote down the solution and handed in his test just as the bell rang.",
-          "He was stuck on the last problem."
+          "The sky was overcast.",
+          "A cold wind swept through the streets.",
+          "The scent of rain was in the air."
         ],
         "correctMapping": [
           {
-            "claim": "Jake was nervous during the test.",
+            "claim": "The setting is warm and sunny.",
             "evidenceItems": [
-              "He tapped his pencil nervously.",
-              "Jake sat at his desk, glancing at the clock."
+              "The sky was overcast."
             ]
           },
           {
-            "claim": "Jake finished the test early.",
+            "claim": "The setting is cold and windy.",
             "evidenceItems": [
-              "He quickly wrote down the solution and handed in his test just as the bell rang."
+              "The sky was overcast.",
+              "A cold wind swept through the streets."
             ]
           },
           {
-            "claim": "Jake didn't know the last problem.",
+            "claim": "The setting is rainy and stormy.",
             "evidenceItems": [
-              "He was stuck on the last problem."
+              "The sky was overcast."
             ]
           }
         ],
-        "rightAnswerRationale": "The passage supports that Jake was nervous but managed to complete his test in time."
-      },
-      {
-        "type": "hot-text-phrase",
-        "passage": "The classroom was filled with the sound of pencils scratching on paper. Jake sat at his desk, glancing at the clock every few minutes. His math test was almost over, and he was stuck on the last problem. He tapped his pencil nervously, trying to remember the formula. Around him, other students were already turning in their papers. Jake took a deep breath, closed his eyes for a moment, and then suddenly remembered the steps. He quickly wrote down the solution and handed in his test just as the bell rang. Researchers observed the area over several weeks and recorded changes in water level, plant growth, and foot traffic. Their notes showed that a small change in one part of the environment could affect the whole system. The community used the information to plan improvements that protected both people and the natural habitat. Researchers observed the area over several weeks and recorded changes in water level, plant growth, and foot traffic.",
-        "question": "Select the two phrases that help you understand Jake's feelings.",
-        "coachHint": "Look for phrases that describe Jake's emotions and actions.",
-        "maxSelect": 2,
-        "minSelect": 2,
-        "correctPhrases": [
-          "glancing at the clock every few minutes",
-          "tapped his pencil nervously"
-        ],
-        "selectablePhrases": [
-          "glancing at the clock every few minutes",
-          "tapped his pencil nervously",
-          "closed his eyes for a moment",
-          "quickly wrote down the solution"
-        ],
-        "rightAnswerRationale": "The phrases 'glancing at the clock every few minutes' and 'tapped his pencil nervously' highlight Jake's anxiety during the test."
+        "rightAnswerRationale": "The description of the overcast sky and cold wind suggests a chilly, autumn setting with an impending storm."
       }
     ],
     "sentenceFrames": [
-      "The text says ____, which makes me think ____ because ____.",
-      "Based on ____, I can infer that ____ because ____.",
-      "I believe ____ because the text states ____ and I know ____."
+      "The text says ____, which suggests that ____.",
+      "Based on ____, I can infer that ____.",
+      "The author describes ____, so I think ____."
     ],
     "successCriteria": [
-      "I can identify clues in the text that help me make an inference.",
-      "I can combine text evidence with my own knowledge to make a logical inference.",
-      "I can explain my inference using specific evidence from the text."
+      "I can identify clues in the text that suggest deeper meanings.",
+      "I can use my background knowledge to make logical inferences.",
+      "I can explain my inferences using evidence from the text."
     ],
     "generatorVersion": "V2",
     "resourceProvider": null,
     "heroResourceLinkId": null,
     "independentPractice": [
       {
-        "type": "mc",
-        "choices": [
-          "Emily is disappointed with her project.",
-          "Emily is nervous about her next project.",
-          "Emily is proud of her work and eager to continue.",
-          "Emily is unsure about her presentation."
-        ],
-        "passage": "The classroom was buzzing with excitement as the students prepared for the science fair. Emily stood by her project, a model of the solar system, feeling a mix of pride and nervousness. She had worked hard on it for weeks, and now it was time to present. Her teacher approached with a smile, and Emily took a deep breath, ready to explain her project. As she spoke, she noticed her classmates gathering around, listening intently. Emily's confidence grew with each word, and by the end of her presentation, she was beaming with pride. Her teacher gave her a thumbs up, and Emily knew her hard work had paid off. She felt a sense of accomplishment and was already thinking about her next project. Researchers observed the area over several weeks and recorded changes in water level, plant growth, and foot traffic. Their notes showed that a small change in one part of the environment could affect the whole system.",
-        "question": "What can you infer about the character's decision?",
-        "coachHint": "Consider how Emily's feelings change throughout the passage.",
-        "correctAnswer": "Emily is proud of her work and eager to continue.",
-        "distractorRationale": [
-          {
-            "choice": "Emily is disappointed with her project.",
-            "whyWrong": "The passage describes Emily as feeling pride and accomplishment."
-          },
-          {
-            "choice": "Emily is nervous about her next project.",
-            "whyWrong": "Emily is thinking about her next project with excitement, not nervousness."
-          },
-          {
-            "choice": "Emily is unsure about her presentation.",
-            "whyWrong": "Emily's confidence grows during her presentation, indicating she is not unsure."
-          }
-        ],
-        "rightAnswerRationale": "Emily's growing confidence and sense of accomplishment suggest she is proud of her work and eager to continue learning."
-      },
-      {
-        "type": "evidence-mapping",
-        "claims": [
-          "Lisa feels satisfied for helping her friend.",
-          "Lisa is annoyed with her friend.",
-          "Lisa is unsure about the history test."
-        ],
-        "passage": "The library was quiet, with only the sound of pages turning. Lisa sat at a table, surrounded by books. She had promised to help her friend study for the upcoming history test. As the afternoon sun streamed through the windows, Lisa explained the key events of the Civil War. Her friend listened carefully, taking notes. Lisa felt a sense of satisfaction, knowing she was helping someone else succeed. When they finished, her friend thanked her, and Lisa smiled, feeling proud of her efforts. Researchers observed the area over several weeks and recorded changes in water level, plant growth, and foot traffic. Their notes showed that a small change in one part of the environment could affect the whole system. The community used the information to plan improvements that protected both people and the natural habitat. Researchers observed the area over several weeks and recorded changes in water level, plant growth, and foot traffic.",
-        "question": "Which statement is supported by the passage?",
-        "coachHint": "Focus on Lisa's actions and feelings described in the passage.",
-        "evidenceItems": [
-          "Lisa sat at a table, surrounded by books.",
-          "Lisa explained the key events of the Civil War.",
-          "Lisa felt a sense of satisfaction, knowing she was helping someone else succeed."
-        ],
-        "correctMapping": [
-          {
-            "claim": "Lisa feels satisfied for helping her friend.",
-            "evidenceItems": [
-              "Lisa felt a sense of satisfaction, knowing she was helping someone else succeed.",
-              "Lisa explained the key events of the Civil War."
-            ]
-          },
-          {
-            "claim": "Lisa is annoyed with her friend.",
-            "evidenceItems": [
-              "Lisa sat at a table, surrounded by books."
-            ]
-          },
-          {
-            "claim": "Lisa is unsure about the history test.",
-            "evidenceItems": [
-              "Lisa sat at a table, surrounded by books."
-            ]
-          }
-        ],
-        "rightAnswerRationale": "The passage supports that Lisa feels satisfied and proud for helping her friend study."
-      },
-      {
-        "type": "hot-text-phrase",
-        "passage": "The library was quiet, with only the sound of pages turning. Lisa sat at a table, surrounded by books. She had promised to help her friend study for the upcoming history test. As the afternoon sun streamed through the windows, Lisa explained the key events of the Civil War. Her friend listened carefully, taking notes. Lisa felt a sense of satisfaction, knowing she was helping someone else succeed. When they finished, her friend thanked her, and Lisa smiled, feeling proud of her efforts. Researchers observed the area over several weeks and recorded changes in water level, plant growth, and foot traffic. Their notes showed that a small change in one part of the environment could affect the whole system. The community used the information to plan improvements that protected both people and the natural habitat. Researchers observed the area over several weeks and recorded changes in water level, plant growth, and foot traffic.",
-        "question": "Select the two phrases that help you understand Lisa's feelings.",
-        "coachHint": "Look for phrases that describe Lisa's emotions and actions.",
-        "maxSelect": 2,
-        "minSelect": 2,
-        "correctPhrases": [
-          "felt a sense of satisfaction",
-          "feeling proud of her efforts"
-        ],
-        "selectablePhrases": [
-          "surrounded by books",
-          "explained the key events of the Civil War",
-          "felt a sense of satisfaction",
-          "feeling proud of her efforts"
-        ],
-        "rightAnswerRationale": "The phrases 'felt a sense of satisfaction' and 'feeling proud of her efforts' highlight Lisa's feelings of satisfaction and pride."
+        "type": "two-part-ebsr",
+        "partA": {
+          "choices": [
+            "She is cautious.",
+            "She is adventurous.",
+            "She is indecisive.",
+            "She is fearful."
+          ],
+          "question": "What does Emma's choice of path suggest about her character?",
+          "correctAnswer": "She is adventurous."
+        },
+        "partB": {
+          "choices": [
+            "She stood at the crossroads.",
+            "The left path was well-trodden.",
+            "She stepped onto the right path.",
+            "Her heart pounded with thrill."
+          ],
+          "question": "Which evidence supports your answer in Part A?",
+          "correctAnswers": [
+            "She stepped onto the right path.",
+            "Her heart pounded with thrill."
+          ]
+        },
+        "passage": "Emma stood at the crossroads, her mind racing with possibilities. She glanced down each path, weighing the options. The left path was well-trodden, familiar and safe. The right path was overgrown, mysterious, and unknown. Emma hesitated, her heart pounding with the thrill of adventure. She took a deep breath, her decision made. With a determined nod, she stepped onto the right path, ready to embrace whatever lay ahead. Her choice was clear, driven by a desire for discovery and new experiences. As she walked, the sounds of the forest enveloped her, and she felt a sense of freedom she hadn't known before. Emma's journey had begun, and she was eager to see where it would lead.",
+        "question": "What can we infer about the character's decision-making process?",
+        "coachHint": "Think about what choosing the unknown path says about Emma's character.",
+        "scoringRule": "B-counts-only-if-A-correct",
+        "rightAnswerRationale": "Emma's decision to choose the unknown path suggests she values adventure and discovery over safety."
       },
       {
         "type": "mc",
         "choices": [
-          "Lisa plans to avoid helping others.",
-          "Lisa is eager to help others again.",
-          "Lisa is unsure about her abilities.",
-          "Lisa wants to change her responsibilities."
+          "The character dislikes their pet.",
+          "The character is indifferent to their pet.",
+          "The character has a close bond with their pet.",
+          "The character is afraid of their pet."
         ],
-        "passage": "The library was quiet, with only the sound of pages turning. Lisa sat at a table, surrounded by books. She had promised to help her friend study for the upcoming history test. As the afternoon sun streamed through the windows, Lisa explained the key events of the Civil War. Her friend listened carefully, taking notes. Lisa felt a sense of satisfaction, knowing she was helping someone else succeed. When they finished, her friend thanked her, and Lisa smiled, feeling proud of her efforts. Researchers observed the area over several weeks and recorded changes in water level, plant growth, and foot traffic. Their notes showed that a small change in one part of the environment could affect the whole system. The community used the information to plan improvements that protected both people and the natural habitat. Researchers observed the area over several weeks and recorded changes in water level, plant growth, and foot traffic.",
-        "question": "What can you infer about the character's future plans?",
-        "coachHint": "Consider how Lisa's feelings at the end of the passage indicate her future plans.",
-        "correctAnswer": "Lisa is eager to help others again.",
+        "passage": "Every morning, Mia would wake up to find her cat, Whiskers, curled up at the foot of her bed. As soon as she stirred, Whiskers would stretch and nuzzle against her hand, purring softly. Mia would smile, feeling a warmth spread through her chest. She loved these quiet moments with Whiskers, who seemed to understand her better than anyone else. They had a routine, a bond that was comforting and familiar. Whiskers would follow Mia around the house, always nearby, always watching. It was as if they shared a secret language, one that needed no words. Mia knew that Whiskers was more than just a pet; he was a friend, a confidant, and a source of endless joy.",
+        "question": "What can we infer about the character's relationship with their pet?",
+        "coachHint": "Consider how the character interacts with their pet.",
+        "correctAnswer": "The character has a close bond with their pet.",
         "distractorRationale": [
           {
-            "choice": "Lisa plans to avoid helping others.",
-            "whyWrong": "Lisa feels proud and satisfied, indicating she will continue."
+            "choice": "The character dislikes their pet.",
+            "whyWrong": "The passage suggests positive interactions."
           },
           {
-            "choice": "Lisa is unsure about her abilities.",
-            "whyWrong": "Lisa's pride and sense of satisfaction suggest she is confident in her role."
+            "choice": "The character is indifferent to their pet.",
+            "whyWrong": "The passage suggests emotional involvement."
           },
           {
-            "choice": "Lisa wants to change her responsibilities.",
-            "whyWrong": "There is no indication that Lisa wants to change her responsibilities."
+            "choice": "The character is afraid of their pet.",
+            "whyWrong": "There is no indication of fear."
           }
         ],
-        "rightAnswerRationale": "Lisa's sense of satisfaction and pride suggest she will continue to help others in the future."
+        "rightAnswerRationale": "The character's actions and emotions suggest a close bond with their pet."
+      },
+      {
+        "type": "mc",
+        "choices": [
+          "The character is bored.",
+          "The character is curious.",
+          "The character is anxious.",
+          "The character is indifferent."
+        ],
+        "passage": "As soon as Liam stepped off the bus, he was greeted by the bustling sounds of the city. The streets were alive with people, each one moving with purpose. Tall buildings towered above him, their windows reflecting the bright afternoon sun. Liam felt a thrill of excitement as he took in the sights and sounds. Everything was new and different, a stark contrast to the quiet town he had left behind. He wandered through the streets, eager to explore every corner. The aroma of street food filled the air, and he couldn't resist stopping to try something new. With each step, Liam felt more at home, his curiosity leading him deeper into the heart of the city.",
+        "question": "What can we infer about the character's feelings towards their new environment?",
+        "coachHint": "Think about how the character reacts to new surroundings.",
+        "correctAnswer": "The character is curious.",
+        "distractorRationale": [
+          {
+            "choice": "The character is bored.",
+            "whyWrong": "The passage suggests engagement and interest."
+          },
+          {
+            "choice": "The character is anxious.",
+            "whyWrong": "There is no indication of anxiety."
+          },
+          {
+            "choice": "The character is indifferent.",
+            "whyWrong": "The passage suggests active interest."
+          }
+        ],
+        "rightAnswerRationale": "The character's actions and observations suggest curiosity and excitement about the new environment."
+      },
+      {
+        "type": "mc",
+        "choices": [
+          "The character prioritizes work over family.",
+          "The character prioritizes family over work.",
+          "The character prioritizes leisure over responsibilities.",
+          "The character prioritizes friends over family."
+        ],
+        "passage": "After a long day at work, Alex rushed home, eager to spend time with his family. As he walked through the door, he was greeted by the laughter of his children and the warm embrace of his partner. Dinner was already on the table, and the smell of home-cooked food filled the air. Alex felt a sense of peace as he sat down with his family, listening to their stories and sharing his own. Despite the demands of his job, he always made sure to prioritize these moments, knowing that they were what truly mattered. Work could wait, but the time spent with his loved ones was precious and irreplaceable. Alex cherished these evenings, where the world seemed to slow down, and everything felt just right.",
+        "question": "What can we infer about the character's priorities based on their actions?",
+        "coachHint": "Consider what the character chooses to focus on.",
+        "correctAnswer": "The character prioritizes family over work.",
+        "distractorRationale": [
+          {
+            "choice": "The character prioritizes work over family.",
+            "whyWrong": "The passage suggests the opposite."
+          },
+          {
+            "choice": "The character prioritizes leisure over responsibilities.",
+            "whyWrong": "The passage suggests a focus on family."
+          },
+          {
+            "choice": "The character prioritizes friends over family.",
+            "whyWrong": "The passage suggests a focus on family."
+          }
+        ],
+        "rightAnswerRationale": "The character's actions suggest they prioritize family over work."
       }
     ],
     "resourceDescription": null
   },
   "critic": {
-    "score": 88,
+    "score": 60,
     "status": "PASS",
     "revisions": []
   },
   "validationIssues": [
-    "guidedPractice[1]: Incorrect evidence mapping for claims. (Ensure evidence items correctly support each claim. Adjust the evidence mapping to accurately reflect the claims.)",
-    "independentPractice[0]: Passage is missing, making it impossible to evaluate inference. (Provide a complete passage for students to read and analyze.)",
-    "independentPractice[2]: Passage is missing, making it impossible to evaluate inference. (Provide a complete passage for students to read and analyze.)",
-    "masteryCheck[1]: Passage is missing, making it impossible to evaluate inference. (Provide a complete passage for students to read and analyze.)",
-    "masteryCheck[2]: Passage is missing, making it impossible to evaluate inference. (Provide a complete passage for students to read and analyze.)"
+    "A practice passage is likely too short for the target grade.",
+    "A practice passage is likely too short for the target grade.",
+    "A practice passage is likely too short for the target grade.",
+    "A practice passage is likely too short for the target grade.",
+    "A practice passage is likely too short for the target grade.",
+    "A practice passage is likely too short for the target grade.",
+    "A practice passage is likely too short for the target grade.",
+    "A practice passage is likely too short for the target grade.",
+    "A practice passage is likely too short for the target grade.",
+    "Practice passage needs regeneration: 120 words (target 150-400) with FK grade 7.4 (target 4±1.5). Write a longer, more natural passage with simpler sentence structure.",
+    "Practice passage needs regeneration: 112 words (target 150-400) with FK grade 7.4 (target 4±1.5). Write a longer, more natural passage with simpler sentence structure.",
+    "Practice passage needs regeneration: 116 words (target 150-400) with FK grade 6.5 (target 4±1.5). Write a longer, more natural passage with simpler sentence structure.",
+    "Practice passage needs regeneration: 118 words (target 150-400) with FK grade 5.9 (target 4±1.5). Write a longer, more natural passage with simpler sentence structure.",
+    "Practice passage needs regeneration: 117 words (target 150-400) with FK grade 6.7 (target 4±1.5). Write a longer, more natural passage with simpler sentence structure.",
+    "Practice passage needs regeneration: 126 words (target 150-400) with FK grade 8.0 (target 4±1.5). Write a longer, more natural passage with simpler sentence structure.",
+    "Practice passage needs regeneration: 119 words (target 150-400) with FK grade 5.5 (target 4±1.5). Write a longer, more natural passage with simpler sentence structure.",
+    "Practice passage needs regeneration: 114 words (target 150-400) with FK grade 8.7 (target 4±1.5). Write a longer, more natural passage with simpler sentence structure.",
+    "Practice passage needs regeneration: 120 words (target 150-400) with FK grade 6.0 (target 4±1.5). Write a longer, more natural passage with simpler sentence structure.",
+    "Practice passage needs regeneration: 118 words (target 150-400) with FK grade 8.1 (target 4±1.5). Write a longer, more natural passage with simpler sentence structure.",
+    "Practice passage needs regeneration: 132 words (target 150-400) with FK grade 7.8 (target 4±1.5). Write a longer, more natural passage with simpler sentence structure.",
+    "guidedPractice[1]: Passage is missing. (Provide a passage that aligns with the question and is appropriate for the grade level.)",
+    "independentPractice[1]: Passage is missing. (Include a passage that supports the question and is suitable for the target grade.)",
+    "independentPractice[2]: Passage is missing. (Add a passage that fits the question and is appropriate for the grade level.)",
+    "independentPractice[3]: Passage is missing. (Create a passage that aligns with the question and is suitable for the target grade.)",
+    "exitTicket[1]: Passage is missing. (Include a passage that supports the question and is appropriate for the grade level.)",
+    "masteryCheck[1]: Passage is missing. (Provide a passage that aligns with the question and is suitable for the target grade.)",
+    "masteryCheck[2]: Passage is missing. (Add a passage that fits the question and is appropriate for the grade level.)"
   ],
   "iterations": 0
 }

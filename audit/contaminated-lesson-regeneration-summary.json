@@ -1,11 +1,147 @@
 {
-  "generatedAt": "2026-05-20T16:12:29.246Z",
-  "mode": "deterministic-repair",
+  "generatedAt": "2026-05-20T19:27:51.543Z",
+  "mode": "deterministic-cleanup-no-padding",
   "scannedLessons": 182,
-  "affectedLessons": 143,
-  "successfulRegenerations": 143,
+  "affectedLessons": 122,
+  "successfulRegenerations": 122,
   "failedRegenerations": 0,
   "successes": [
+    {
+      "id": "cmpdfkjg10007evu9n99td6m5",
+      "gradeLevel": 3,
+      "standardCode": "CC.1.1.3.D",
+      "skill": "Multisyllable Word Parts",
+      "qualityScore": 78,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdfllov000fevu97xukjt9t",
+      "gradeLevel": 3,
+      "standardCode": "CC.1.1.3.D",
+      "skill": "Phonics Patterns",
+      "qualityScore": 75,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdfmzxq000sevu9v6rfh6gf",
+      "gradeLevel": 3,
+      "standardCode": "CC.1.1.3.D",
+      "skill": "Short and Long Vowel Patterns",
+      "qualityScore": 78,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdfpwdp001devu9m22ak7yq",
+      "gradeLevel": 3,
+      "standardCode": "CC.1.1.3.E",
+      "skill": "Common Affixes",
+      "qualityScore": 78,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdfprp00015evu9t95bnlth",
+      "gradeLevel": 3,
+      "standardCode": "CC.1.1.3.E",
+      "skill": "Multisyllabic Words",
+      "qualityScore": 75,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdfsse80023evu9p3ru6hyw",
+      "gradeLevel": 3,
+      "standardCode": "CC.1.2.3.A",
+      "skill": "Main Idea",
+      "qualityScore": 75,
+      "heroResourceLinkId": "cmp4dxmjl0003q9husk5l5mtj"
+    },
+    {
+      "id": "cmpdfsjgm001vevu9ftccbyhm",
+      "gradeLevel": 3,
+      "standardCode": "CC.1.2.3.B",
+      "skill": "Inference",
+      "qualityScore": 78,
+      "heroResourceLinkId": "cmp4fw268001lg3sa5shrsos0"
+    },
+    {
+      "id": "cmpdfvzjb002gevu9myf1nvdt",
+      "gradeLevel": 3,
+      "standardCode": "CC.1.2.3.B",
+      "skill": "Text Evidence",
+      "qualityScore": 78,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdfxnn7002tevu993vrd9h7",
+      "gradeLevel": 3,
+      "standardCode": "CC.1.2.3.C",
+      "skill": "Cause and Effect",
+      "qualityScore": 75,
+      "heroResourceLinkId": "cmp4fw2qz001vg3sa8j4rq5mr"
+    },
+    {
+      "id": "cmpdg1f67003eevu9q8cyr7oa",
+      "gradeLevel": 3,
+      "standardCode": "CC.1.2.3.E",
+      "skill": "Author's Purpose",
+      "qualityScore": 75,
+      "heroResourceLinkId": "cmp4fw2sz001wg3sai6qb0t50"
+    },
+    {
+      "id": "cmpdg77dl0048evu9yx51bo8o",
+      "gradeLevel": 3,
+      "standardCode": "CC.1.2.3.F",
+      "skill": "Context Clues",
+      "qualityScore": 75,
+      "heroResourceLinkId": "cmp4dxqc0001rq9hus4s0rng1"
+    },
+    {
+      "id": "cmpdg5iim003wevu9kuk3b0bf",
+      "gradeLevel": 3,
+      "standardCode": "CC.1.2.3.F",
+      "skill": "Prefixes and Suffixes",
+      "qualityScore": 82,
+      "heroResourceLinkId": "cmp4fw5b10031g3sar73r69po"
+    },
+    {
+      "id": "cmpdg94wd004levu9htte4cct",
+      "gradeLevel": 3,
+      "standardCode": "CC.1.2.3.F",
+      "skill": "Synonyms and Antonyms",
+      "qualityScore": 78,
+      "heroResourceLinkId": "cmp4fw50g002wg3saz9emq7qj"
+    },
+    {
+      "id": "cmpdgccj1004yevu9ezvs5f22",
+      "gradeLevel": 3,
+      "standardCode": "CC.1.2.3.I",
+      "skill": "Compare and Contrast",
+      "qualityScore": 75,
+      "heroResourceLinkId": "cmp4fw2qz001vg3sa8j4rq5mr"
+    },
+    {
+      "id": "cmpdge47w005bevu9y1vtuc9k",
+      "gradeLevel": 3,
+      "standardCode": "CC.1.3.3.A",
+      "skill": "Theme",
+      "qualityScore": 78,
+      "heroResourceLinkId": "cmp4dxnws000kq9hual8bfap5"
+    },
+    {
+      "id": "cmpdggth4005oevu9zrifadqq",
+      "gradeLevel": 3,
+      "standardCode": "CC.1.3.3.C",
+      "skill": "Character Traits and Actions",
+      "qualityScore": 78,
+      "heroResourceLinkId": "cmp4fw2an001ng3sa0e7ekvke"
+    },
+    {
+      "id": "cmpdgj3z00061evu9osxvuo1u",
+      "gradeLevel": 3,
+      "standardCode": "CC.1.3.3.C",
+      "skill": "Sequence of Events",
+      "qualityScore": 78,
+      "heroResourceLinkId": "cmp4fw2qz001vg3sa8j4rq5mr"
+    },
     {
       "id": "cmpdgkud3006eevu9jb8e6dht",
       "gradeLevel": 3,
@@ -13,14 +149,6 @@
       "skill": "Story Elements",
       "qualityScore": 92,
       "heroResourceLinkId": "cmp4fw2ek001pg3sauoieq4cv"
-    },
-    {
-      "id": "cmpdgm4f3006mevu91x36jxg8",
-      "gradeLevel": 3,
-      "standardCode": "CC.1.3.3.D",
-      "skill": "Point of View",
-      "qualityScore": 92,
-      "heroResourceLinkId": "cmp4fw2j0001rg3saq5eq4w5z"
     },
     {
       "id": "cmpdgpv0n006zevu9ueolu61j",
@@ -39,14 +167,6 @@
       "heroResourceLinkId": "cmp4fw31j0020g3sa0mef1zh9"
     },
     {
-      "id": "cmpdgspjc007devu9e4f0jqfu",
-      "gradeLevel": 3,
-      "standardCode": "CC.1.4.3.C",
-      "skill": "Paragraph Organization",
-      "qualityScore": 92,
-      "heroResourceLinkId": null
-    },
-    {
       "id": "cmpdgte5s007levu96qndx56t",
       "gradeLevel": 3,
       "standardCode": "CC.1.4.3.F",
@@ -61,14 +181,6 @@
       "skill": "Complete Sentences",
       "qualityScore": 92,
       "heroResourceLinkId": "cmp4fw58s0030g3sa5dd3d63b"
-    },
-    {
-      "id": "cmpdgyw0h008vevu9kb541y7f",
-      "gradeLevel": 3,
-      "standardCode": "CC.1.4.3.F",
-      "skill": "Formal and Informal Style",
-      "qualityScore": 92,
-      "heroResourceLinkId": null
     },
     {
       "id": "cmpdh2xsi0098evu9zawl135n",
@@ -87,22 +199,6 @@
       "heroResourceLinkId": null
     },
     {
-      "id": "cmpdh5m7u009qevu9b6sq9ivk",
-      "gradeLevel": 4,
-      "standardCode": "CC.1.1.4.D",
-      "skill": "Affixes and Roots",
-      "qualityScore": 92,
-      "heroResourceLinkId": null
-    },
-    {
-      "id": "cmpdh63tp009yevu9abub6l5w",
-      "gradeLevel": 4,
-      "standardCode": "CC.1.1.4.E",
-      "skill": "Decoding Multisyllabic Words",
-      "qualityScore": 92,
-      "heroResourceLinkId": null
-    },
-    {
       "id": "cmpdha1hu00abevu9csx08m68",
       "gradeLevel": 4,
       "standardCode": "CC.1.1.4.E",
@@ -111,28 +207,12 @@
       "heroResourceLinkId": null
     },
     {
-      "id": "cmpdhas9n00ajevu9teh71x9k",
-      "gradeLevel": 4,
-      "standardCode": "CC.1.2.4.A",
-      "skill": "Combine Main Ideas Across Texts",
-      "qualityScore": 84,
-      "heroResourceLinkId": "cmpcylwj50006fi7urdxabtjo"
-    },
-    {
       "id": "cmpdhcgsm00awevu9rk3hmgr4",
       "gradeLevel": 4,
       "standardCode": "CC.1.2.4.A",
       "skill": "Main Idea",
       "qualityScore": 92,
       "heroResourceLinkId": "cmpcylwj50006fi7urdxabtjo"
-    },
-    {
-      "id": "cmpdhgonw00b9evu9g6u9w9jt",
-      "gradeLevel": 4,
-      "standardCode": "CC.1.2.4.B",
-      "skill": "Inference",
-      "qualityScore": 88,
-      "heroResourceLinkId": null
     },
     {
       "id": "cmpdhhzd600bjevu9362t3f0f",
@@ -157,14 +237,6 @@
       "skill": "Author's Purpose and Message",
       "qualityScore": 88,
       "heroResourceLinkId": "cmp4dxtng003eq9huhrsvkxxj"
-    },
-    {
-      "id": "cmpdhp9cf00cfevu9521zskko",
-      "gradeLevel": 4,
-      "standardCode": "CC.1.2.4.E",
-      "skill": "Graphic Organizers",
-      "qualityScore": 92,
-      "heroResourceLinkId": null
     },
     {
       "id": "cmpdhrlfc00cqevu9gdjhv6if",
@@ -215,22 +287,6 @@
       "heroResourceLinkId": "cmpcylwfl0002fi7u902eprmw"
     },
     {
-      "id": "cmpdi436p00edevu9qj8qbl4v",
-      "gradeLevel": 4,
-      "standardCode": "CC.1.3.4.C",
-      "skill": "Compare Characters",
-      "qualityScore": 92,
-      "heroResourceLinkId": "cmp4dxtzo003kq9huxmpc4nwz"
-    },
-    {
-      "id": "cmpdi5a0y00elevu98ni5vpa6",
-      "gradeLevel": 4,
-      "standardCode": "CC.1.3.4.C",
-      "skill": "Plot Elements",
-      "qualityScore": 88,
-      "heroResourceLinkId": null
-    },
-    {
       "id": "cmpdi8kps00etevu9e5xap1kx",
       "gradeLevel": 4,
       "standardCode": "CC.1.3.4.D",
@@ -263,22 +319,6 @@
       "heroResourceLinkId": null
     },
     {
-      "id": "cmpdijwpx00gaevu9kg2tawq6",
-      "gradeLevel": 4,
-      "standardCode": "CC.1.3.4.F",
-      "skill": "Sensory Details",
-      "qualityScore": 92,
-      "heroResourceLinkId": null
-    },
-    {
-      "id": "cmpdii6m500g2evu9v5z7faq3",
-      "gradeLevel": 4,
-      "standardCode": "CC.1.3.4.F",
-      "skill": "Similes and Metaphors",
-      "qualityScore": 92,
-      "heroResourceLinkId": null
-    },
-    {
       "id": "cmpdillv200gkevu9hbeud3qu",
       "gradeLevel": 4,
       "standardCode": "CC.1.4.4.A",
@@ -303,14 +343,6 @@
       "heroResourceLinkId": null
     },
     {
-      "id": "cmpdix3ca00ieevu93foszdc7",
-      "gradeLevel": 4,
-      "standardCode": "CC.1.4.4.S",
-      "skill": "TDA Evidence and Explanation",
-      "qualityScore": 88,
-      "heroResourceLinkId": "cmpcylwky0008fi7unl5zsfag"
-    },
-    {
       "id": "cmpdixewz00imevu9suq29iqw",
       "gradeLevel": 5,
       "standardCode": "CC.1.1.5.D",
@@ -319,52 +351,12 @@
       "heroResourceLinkId": null
     },
     {
-      "id": "cmpdj01xo00iuevu9izx8k7y1",
-      "gradeLevel": 5,
-      "standardCode": "CC.1.1.5.E",
-      "skill": "Affixes in Academic Vocabulary",
-      "qualityScore": 92,
-      "heroResourceLinkId": null
-    },
-    {
-      "id": "cmpdj1ix500j7evu9zr5yunga",
-      "gradeLevel": 5,
-      "standardCode": "CC.1.1.5.E",
-      "skill": "Fluency for Comprehension",
-      "qualityScore": 92,
-      "heroResourceLinkId": null
-    },
-    {
-      "id": "cmpdj50cw00jievu9ntghh2es",
-      "gradeLevel": 5,
-      "standardCode": "CC.1.2.5.A",
-      "skill": "Main Idea",
-      "qualityScore": 92,
-      "heroResourceLinkId": "cmpcxj2bm003de859aed6chbd"
-    },
-    {
-      "id": "cmpdj5q6m00jqevu9qdtztwdw",
-      "gradeLevel": 5,
-      "standardCode": "CC.1.2.5.B",
-      "skill": "Inference",
-      "qualityScore": 92,
-      "heroResourceLinkId": "cmpcxj2aq003ce859zsv3g0no"
-    },
-    {
       "id": "cmpdja62n00kcevu95i3mk73e",
       "gradeLevel": 5,
       "standardCode": "CC.1.2.5.B",
       "skill": "Text Evidence",
       "qualityScore": 92,
       "heroResourceLinkId": null
-    },
-    {
-      "id": "cmpdj9vr600k4evu9dq98qlfl",
-      "gradeLevel": 5,
-      "standardCode": "CC.1.2.5.D",
-      "skill": "Multiple Accounts of the Same Event",
-      "qualityScore": 92,
-      "heroResourceLinkId": "cmp4fwaqj005pg3sa4nqumgwq"
     },
     {
       "id": "cmpdjhkxi00l2evu94t0y8mor",
@@ -380,14 +372,6 @@
       "standardCode": "CC.1.2.5.F",
       "skill": "Academic and Domain-Specific Vocabulary",
       "qualityScore": 92,
-      "heroResourceLinkId": null
-    },
-    {
-      "id": "cmpdjkgeo00lievu9ok63uz47",
-      "gradeLevel": 5,
-      "standardCode": "CC.1.2.5.F",
-      "skill": "Analogies and Word Relationships",
-      "qualityScore": 88,
       "heroResourceLinkId": null
     },
     {
@@ -413,22 +397,6 @@
       "skill": "Integrating Information from Sources",
       "qualityScore": 88,
       "heroResourceLinkId": null
-    },
-    {
-      "id": "cmpdjtbbo00mlevu9enr8byga",
-      "gradeLevel": 5,
-      "standardCode": "CC.1.3.5.A",
-      "skill": "Theme",
-      "qualityScore": 92,
-      "heroResourceLinkId": "cmpcxj0sl001ne859hmezhkgw"
-    },
-    {
-      "id": "cmpdjtj3o00mtevu9o263edmr",
-      "gradeLevel": 5,
-      "standardCode": "CC.1.3.5.C",
-      "skill": "Character Response and Plot",
-      "qualityScore": 92,
-      "heroResourceLinkId": "cmpcxj0xu001te8595tdafw6l"
     },
     {
       "id": "cmpdjy2zi00naevu9av8fdpd2",
@@ -463,26 +431,10 @@
       "heroResourceLinkId": "cmpcxj0uz001qe8591d891p03"
     },
     {
-      "id": "cmpdk5iju00ojevu943zwy1tm",
-      "gradeLevel": 5,
-      "standardCode": "CC.1.3.5.H",
-      "skill": "Compare Themes Across Stories",
-      "qualityScore": 92,
-      "heroResourceLinkId": "cmpcxj1pb002oe8599ez8xx7z"
-    },
-    {
       "id": "cmpdkbsrq00pcevu9o175yfc5",
       "gradeLevel": 5,
       "standardCode": "CC.1.4.5.F",
       "skill": "Formal and Informal Style",
-      "qualityScore": 92,
-      "heroResourceLinkId": null
-    },
-    {
-      "id": "cmpdkhiww00qaevu93zt0u0s8",
-      "gradeLevel": 5,
-      "standardCode": "CC.1.4.5.G",
-      "skill": "Opinion Essay Organization",
       "qualityScore": 92,
       "heroResourceLinkId": null
     },
@@ -495,30 +447,6 @@
       "heroResourceLinkId": "cmpcxj29u003be859ija3ezan"
     },
     {
-      "id": "cmpdklgau00qvevu9onhou89r",
-      "gradeLevel": 6,
-      "standardCode": "CC.1.1.6.E",
-      "skill": "Morphological Analysis",
-      "qualityScore": 92,
-      "heroResourceLinkId": null
-    },
-    {
-      "id": "cmpdkpqwp00rgevu9x5qf3daw",
-      "gradeLevel": 6,
-      "standardCode": "CC.1.1.6.E",
-      "skill": "Reading Fluency",
-      "qualityScore": 92,
-      "heroResourceLinkId": null
-    },
-    {
-      "id": "cmpdkq71z00roevu90islneyp",
-      "gradeLevel": 6,
-      "standardCode": "CC.1.1.6.E",
-      "skill": "Word Origins",
-      "qualityScore": 92,
-      "heroResourceLinkId": null
-    },
-    {
       "id": "cmpdkug6d00s6evu96gaij95v",
       "gradeLevel": 6,
       "standardCode": "CC.1.2.6.A",
@@ -527,108 +455,12 @@
       "heroResourceLinkId": null
     },
     {
-      "id": "cmpdkvdwd00seevu9uhnbiq9v",
-      "gradeLevel": 6,
-      "standardCode": "CC.1.2.6.A",
-      "skill": "Main Idea",
-      "qualityScore": 88,
-      "heroResourceLinkId": null
-    },
-    {
-      "id": "cmpdkyfnl00spevu98inu218g",
-      "gradeLevel": 6,
-      "standardCode": "CC.1.2.6.A",
-      "skill": "Objective Summary",
-      "qualityScore": 92,
-      "heroResourceLinkId": null
-    },
-    {
-      "id": "cmpdkztnq00t2evu911zhtoy9",
-      "gradeLevel": 6,
-      "standardCode": "CC.1.2.6.B",
-      "skill": "Inference",
-      "qualityScore": 92,
-      "heroResourceLinkId": "cmpcxj4oa0061e859s2q5otp5"
-    },
-    {
-      "id": "cmpdl2lpd00tcevu9k8pq4w4i",
-      "gradeLevel": 6,
-      "standardCode": "CC.1.2.6.B",
-      "skill": "Text Evidence",
-      "qualityScore": 92,
-      "heroResourceLinkId": "cmpcxj50q006fe8594gosxm75"
-    },
-    {
-      "id": "cmpdl4tel00tlevu9cl8zx5pw",
-      "gradeLevel": 6,
-      "standardCode": "CC.1.2.6.D",
-      "skill": "Author's Purpose and Point of View",
-      "qualityScore": 92,
-      "heroResourceLinkId": "cmpcxj4tr0067e859kbcaglnj"
-    },
-    {
       "id": "cmpdl7ca100tyevu935r71png",
       "gradeLevel": 6,
       "standardCode": "CC.1.2.6.E",
       "skill": "Text Structure and Author Organization",
       "qualityScore": 88,
       "heroResourceLinkId": "cmpcxj4h7005te859cgoge0k1"
-    },
-    {
-      "id": "cmpdl8ydo00u6evu9etp7qt32",
-      "gradeLevel": 6,
-      "standardCode": "CC.1.2.6.F",
-      "skill": "Technical Vocabulary in Context",
-      "qualityScore": 88,
-      "heroResourceLinkId": "cmpcyly8p0022fi7u02ca86yz"
-    },
-    {
-      "id": "cmpdlbjuf00ujevu9v3rwynp1",
-      "gradeLevel": 6,
-      "standardCode": "CC.1.2.6.F",
-      "skill": "Tone and Connotation",
-      "qualityScore": 92,
-      "heroResourceLinkId": null
-    },
-    {
-      "id": "cmpdldlmy00usevu9olw2a5s9",
-      "gradeLevel": 6,
-      "standardCode": "CC.1.2.6.G",
-      "skill": "Claims, Reasons, and Evidence",
-      "qualityScore": 92,
-      "heroResourceLinkId": null
-    },
-    {
-      "id": "cmpdlho4i00v2evu9xsy6kkqv",
-      "gradeLevel": 6,
-      "standardCode": "CC.1.2.6.I",
-      "skill": "Compare Text Presentations",
-      "qualityScore": 92,
-      "heroResourceLinkId": "cmpcxj4h7005te859cgoge0k1"
-    },
-    {
-      "id": "cmpdlkb9w00vcevu95d033ehp",
-      "gradeLevel": 6,
-      "standardCode": "CC.1.3.6.A",
-      "skill": "Theme",
-      "qualityScore": 92,
-      "heroResourceLinkId": "cmpcxj4um0068e8595v7p1d6g"
-    },
-    {
-      "id": "cmpdlpsjw00vlevu9e9fvdv3y",
-      "gradeLevel": 6,
-      "standardCode": "CC.1.3.6.A",
-      "skill": "Theme Development",
-      "qualityScore": 92,
-      "heroResourceLinkId": "cmpcxj4um0068e8595v7p1d6g"
-    },
-    {
-      "id": "cmpdlq62v00vtevu9szk9s8yr",
-      "gradeLevel": 6,
-      "standardCode": "CC.1.3.6.C",
-      "skill": "Character Change and Conflict",
-      "qualityScore": 92,
-      "heroResourceLinkId": "cmp4fw6k1003ng3sawrmmz7g6"
     },
     {
       "id": "cmpdlulcl00wdevu9b1iewyb7",

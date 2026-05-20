@@ -1,14 +1,19 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { FeedbackPanel, ItemShell, SubmitButton, optionButtonClass, submitResponse, type TEIItemComponentProps } from "./types";
 import type { StudentResponse } from "@/lib/teiScoring";
 
-export function HotTextSentenceItem({ item, itemId, disabled, onSubmit }: TEIItemComponentProps) {
+export function HotTextSentenceItem({ item, itemId, disabled, initialResponse, onSubmit }: TEIItemComponentProps) {
   const sentences = useMemo(() => parseNumberedSentences(item.paragraph), [item.paragraph]);
-  const [selectedSentenceNumber, setSelectedSentenceNumber] = useState<number | null>(null);
-  const [response, setResponse] = useState<StudentResponse | null>(null);
+  const [selectedSentenceNumber, setSelectedSentenceNumber] = useState<number | null>(() => initialResponse?.rawResponse?.selectedSentenceNumber || null);
+  const [response, setResponse] = useState<StudentResponse | null>(initialResponse || null);
   const locked = disabled || Boolean(response);
+
+  useEffect(() => {
+    setResponse(initialResponse || null);
+    setSelectedSentenceNumber(initialResponse?.rawResponse?.selectedSentenceNumber || null);
+  }, [initialResponse]);
 
   function submit() {
     if (!selectedSentenceNumber || locked) return;

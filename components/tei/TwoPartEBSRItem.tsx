@@ -1,16 +1,23 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { normalizeText } from "@/lib/teiScoring";
 import { FeedbackPanel, ItemShell, SubmitButton, optionButtonClass, submitResponse, type TEIItemComponentProps } from "./types";
 import type { StudentResponse } from "@/lib/teiScoring";
 
-export function TwoPartEBSRItem({ item, itemId, disabled, onSubmit }: TEIItemComponentProps) {
-  const [partA, setPartA] = useState("");
-  const [partB, setPartB] = useState<string[]>([]);
-  const [partAConfirmed, setPartAConfirmed] = useState(false);
-  const [response, setResponse] = useState<StudentResponse | null>(null);
+export function TwoPartEBSRItem({ item, itemId, disabled, initialResponse, onSubmit }: TEIItemComponentProps) {
+  const [partA, setPartA] = useState(() => initialResponse?.rawResponse?.partA || "");
+  const [partB, setPartB] = useState<string[]>(() => initialResponse?.rawResponse?.partB || []);
+  const [partAConfirmed, setPartAConfirmed] = useState(() => Boolean(initialResponse?.rawResponse?.partA));
+  const [response, setResponse] = useState<StudentResponse | null>(initialResponse || null);
   const locked = disabled || Boolean(response);
+
+  useEffect(() => {
+    setResponse(initialResponse || null);
+    setPartA(initialResponse?.rawResponse?.partA || "");
+    setPartB(initialResponse?.rawResponse?.partB || []);
+    setPartAConfirmed(Boolean(initialResponse?.rawResponse?.partA));
+  }, [initialResponse]);
 
   function toggleEvidence(choice: string) {
     if (locked) return;
@@ -39,7 +46,7 @@ export function TwoPartEBSRItem({ item, itemId, disabled, onSubmit }: TEIItemCom
           })}
         </div>
         {!partAConfirmed ? (
-          <button type="button" disabled={!partA || disabled} onClick={() => setPartAConfirmed(true)} className="mt-3 rounded-xl bg-slate-950 px-4 py-2 text-sm font-black text-white disabled:opacity-50">
+          <button type="button" disabled={!partA || locked} onClick={() => setPartAConfirmed(true)} className="mt-3 rounded-xl bg-slate-950 px-4 py-2 text-sm font-black text-white disabled:opacity-50">
             Continue to Part B
           </button>
         ) : null}

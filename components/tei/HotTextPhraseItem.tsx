@@ -1,16 +1,22 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { normalizeText } from "@/lib/teiScoring";
 import { FeedbackPanel, ItemShell, SubmitButton, optionButtonClass, submitResponse, type TEIItemComponentProps } from "./types";
 import type { StudentResponse } from "@/lib/teiScoring";
 
-export function HotTextPhraseItem({ item, itemId, disabled, onSubmit }: TEIItemComponentProps) {
-  const [selectedPhrases, setSelectedPhrases] = useState<string[]>([]);
-  const [response, setResponse] = useState<StudentResponse | null>(null);
+export function HotTextPhraseItem({ item, itemId, disabled, initialResponse, onSubmit }: TEIItemComponentProps) {
+  const initialSelection = () => hydrateSelectedPhrases(item.passage, item.selectablePhrases || [], initialResponse?.rawResponse?.selectedPhrases || []);
+  const [selectedPhrases, setSelectedPhrases] = useState<string[]>(initialSelection);
+  const [response, setResponse] = useState<StudentResponse | null>(initialResponse || null);
   const locked = disabled || Boolean(response);
   const maxSelect = Number(item.maxSelect || item.correctPhrases?.length || 1);
   const minSelect = Number(item.minSelect || 1);
+
+  useEffect(() => {
+    setResponse(initialResponse || null);
+    setSelectedPhrases(hydrateSelectedPhrases(item.passage, item.selectablePhrases || [], initialResponse?.rawResponse?.selectedPhrases || []));
+  }, [initialResponse, item.passage, item.selectablePhrases]);
 
   function toggle(phrase: string) {
     if (locked) return;
@@ -103,6 +109,19 @@ function occurrenceKey(phrase: string, start: number) {
 
 function phraseFromOccurrenceKey(key: string) {
   return key.split("@@")[0] || key;
+}
+
+function hydrateSelectedPhrases(passage: string, selectablePhrases: string[], savedPhrases: string[]) {
+  const remaining = [...savedPhrases];
+  const keys: string[] = [];
+  for (const match of findPhraseMatches(String(passage || ""), selectablePhrases)) {
+    const index = remaining.findIndex((phrase) => normalizeText(phrase) === normalizeText(match.phrase));
+    if (index >= 0) {
+      keys.push(occurrenceKey(match.phrase, match.start));
+      remaining.splice(index, 1);
+    }
+  }
+  return keys;
 }
 
 function escapeRegExp(value: string) {

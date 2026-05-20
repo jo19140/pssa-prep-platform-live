@@ -18,6 +18,7 @@ export type GenerateLessonV2Input = {
   skill: string;
   commonError?: string;
   whyAssigned?: string;
+  excludeLessonId?: string;
 };
 
 export type GenerateLessonV2Result = {
@@ -57,7 +58,7 @@ export async function generateLessonV2(input: GenerateLessonV2Input): Promise<Ge
       ? await withOpenAiRetry(() => regenerateTargetedDraft(openai, input, lastLesson!, revisionNotes))
       : await withOpenAiRetry(() => generateDraft(openai, input, exemplars, plannedTeiTypes, revisionNotes));
     const draft = repairLessonV2(rawDraft, input, plannedTeiTypes);
-    const validation = await validateLessonV2(draft, openai);
+    const validation = await validateLessonV2(draft, openai, { excludeLessonId: input.excludeLessonId });
     const critic = await withOpenAiRetry(() => critiqueLessonV2(openai, draft, validation.issues));
     const heroResource = await findHeroResourceForLesson({ gradeLevel: input.gradeLevel, standardCode: input.standardCode, skill: input.skill });
     if (!heroResource) {
@@ -323,7 +324,7 @@ function buildSystemPrompt(input: GenerateLessonV2Input, plannedTeiTypes: string
     "Rationales: For each wrong answer, explain why a student might pick it and why it is wrong. For reading items, cite the passage.",
     "Passage budget: include full passage text on only 2-3 practice questions total. For all other practice questions, set passage to null and make the item test the same skill without another full passage. Passage-dependent TEI types (hot-text-phrase, evidence-mapping, two-part-ebsr) must include a passage.",
     "CRITICAL: Practice passages must read like authentic encyclopedic, narrative, or expository prose. NEVER include meta-pedagogical phrases like 'this passage gives another clear detail,' 'students can use this detail,' 'compare choices,' 'explain why one choice is stronger,' or any other rubric/critic language. Passages are for students to read, not for teachers. If you find yourself writing about the lesson, stop and write only about the topic itself.",
-    "Reading passages must be original, grade appropriate, and complete. Any item with a passage field must include a full standalone passage: 170-240 words for grades 3-5 or 275-360 words for grades 6-8. Use short, clear sentences for the grade level. Keep passages near the lower end of the range so the JSON response remains complete. Do not use 2-4 sentence mini-passages in passage fields.",
+    "Reading passages must be original, grade appropriate, and complete. Any item with a passage field must include a full standalone passage: 170-240 words for grades 3-5 or 275-360 words for grades 6-8. Use short, clear sentences for the grade level. Keep passages near the lower end of the range so the JSON response remains complete. Do not use 2-4 sentence mini-passages in passage fields. Never repeat the same sentence or near-identical sentence to meet word count; write genuinely new content instead.",
     "Mapping formats: for drag-drop-table, correctMapping is an array of { item, column } entries. For evidence-mapping, correctMapping is an array of { claim, evidenceItems } entries. Include one mapping entry for every draggable item or claim.",
     "TEI shape rule: inline-dropdown sentences must contain exactly one [BLANK] at the blank location and no empty [ ] placeholders. hot-text-word is ONLY for a bracket with exactly 2 choices, formatted like [ walks / walk ]. Each bracket must contain exactly two options separated by a single forward slash, and bracketPairs must have one entry per bracket. For blanks with 3 or more choices, use inline-dropdown instead. 3+ options -> inline-dropdown always.",
     "Hot-text-phrase integrity: every selectablePhrases entry must appear in the passage text after normal punctuation is removed. Do not invent labels, summaries, or paraphrases as selectable phrases. Use exact short phrases copied from the passage.",
@@ -437,7 +438,7 @@ function repairLessonV2(lesson: LessonV2, input: GenerateLessonV2Input, plannedT
 
   const seenTei = new Set<string>();
   for (const section of practiceSections) {
-    repaired[section] = repaired[section].map((question) => repairQuestion(question, input));
+    repaired[section] = repaired[section].map((question) => repairQuestion(question));
     for (const question of repaired[section]) if (question.type !== "mc") seenTei.add(question.type);
   }
   if (seenTei.size < 2) {
@@ -448,9 +449,9 @@ function repairLessonV2(lesson: LessonV2, input: GenerateLessonV2Input, plannedT
   return repaired;
 }
 
-function repairQuestion(question: PracticeQuestionV2, input: GenerateLessonV2Input): PracticeQuestionV2 {
+function repairQuestion(question: PracticeQuestionV2): PracticeQuestionV2 {
   const repaired: any = { ...question };
-  if (typeof repaired.passage === "string") repaired.passage = fitPassageToSchema(expandPassage(repaired.passage, input));
+  if (typeof repaired.passage === "string") repaired.passage = fitPassageToSchema(cleanPassageText(repaired.passage));
   if (repaired.type === "mc") {
     const wrongChoices = repaired.choices.filter((choice: string) => choice !== repaired.correctAnswer);
     repaired.distractorRationale = wrongChoices.map((choice: string) => {
@@ -476,14 +477,14 @@ function repairQuestion(question: PracticeQuestionV2, input: GenerateLessonV2Inp
     repaired.correctSentenceNumber = Math.min(repaired.correctSentenceNumber || 1, repaired.sentenceCount);
   }
   if (repaired.type === "evidence-mapping") {
-    repaired.passage = expandPassage(repaired.passage || "", input);
+    repaired.passage = fitPassageToSchema(cleanPassageText(repaired.passage || ""));
     repaired.correctMapping = repaired.claims.map((claim: string) => {
       const existing = repaired.correctMapping?.find((entry: any) => entry.claim === claim);
       return existing?.evidenceItems?.length ? existing : { claim, evidenceItems: [repaired.evidenceItems[0]] };
     });
   }
   if (repaired.type === "hot-text-phrase" || repaired.type === "two-part-ebsr") {
-    repaired.passage = expandPassage(repaired.passage || "", input);
+    repaired.passage = fitPassageToSchema(cleanPassageText(repaired.passage || ""));
   }
   if (repaired.type === "hot-text-phrase") {
     repairHotTextPhrase(repaired);
@@ -497,56 +498,12 @@ function ensureWords(text: string, minWords: number, addition: string) {
   return result;
 }
 
-function expandPassage(text: string, input: GenerateLessonV2Input) {
-  let result = cleanPassageText(text || fallbackPassage(input));
-  const additions = authenticPassageExtensions(input);
-  const minWords = input.gradeLevel <= 5 ? 150 : 250;
-  let index = 0;
-  while (wordCount(result) < minWords) {
-    result = `${result.trim()}${additions[index % additions.length]}`;
-    index += 1;
-  }
-  return fitPassageToSchema(result);
-}
-
 function cleanPassageText(text: string) {
   return text
     .replace(/The passage gives another clear detail in simple language\.?/gi, "")
     .replace(/Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another\.?/gi, "")
     .replace(/\s+/g, " ")
     .trim();
-}
-
-function fallbackPassage(input: GenerateLessonV2Input) {
-  if (input.standardCode.startsWith("CC.1.3.")) {
-    return "Maya paused at the edge of the stage while the curtains trembled behind her. The auditorium lights made the first row look distant, but she could still see her brother holding up a small paper star. She remembered the afternoon when she almost quit rehearsals after forgetting every line. Her teacher had asked her to read one sentence at a time until the scene felt familiar. Now Maya breathed slowly, stepped forward, and began with a clear voice.";
-  }
-  if (input.standardCode.startsWith("CC.1.4.")) {
-    return "The school garden committee met after lunch to revise a short announcement for families. Their first draft sounded rushed, so Jalen read each sentence aloud and marked places where the wording was unclear. The group changed weak verbs, added precise details about the planting schedule, and checked that each sentence followed the same formal style. By the end of the meeting, the announcement sounded organized and ready to send.";
-  }
-  return "A coastal town installed new signs along the marsh trail after a spring storm washed sand over the boardwalk. The signs explain how marsh grass holds soil in place, slows floodwater, and gives small animals a protected place to nest. Volunteers also marked safe walking areas so visitors would not damage the roots. Within a year, the trail was easier to follow and the marsh looked healthier.";
-}
-
-function authenticPassageExtensions(input: GenerateLessonV2Input) {
-  if (input.standardCode.startsWith("CC.1.3.")) {
-    return [
-      " The scene grows quieter as the character notices small sounds and gestures that reveal how nervous she feels.",
-      " A memory from earlier in the week explains why the moment matters and why the decision feels difficult.",
-      " By the end, the character acts with more confidence, showing a change that the reader can trace through her choices.",
-    ];
-  }
-  if (input.standardCode.startsWith("CC.1.4.")) {
-    return [
-      " The writers compare two versions of the same sentence and choose the one that sounds clearer and more precise.",
-      " They revise the draft again, paying attention to word choice, sentence flow, and the way each detail supports the purpose.",
-      " The final version keeps a consistent tone and gives readers enough information to understand the message.",
-    ];
-  }
-  return [
-    " Researchers observed the area over several weeks and recorded changes in water level, plant growth, and foot traffic.",
-    " Their notes showed that a small change in one part of the environment could affect the whole trail system.",
-    " The town used the information to plan repairs that protected both visitors and the natural habitat.",
-  ];
 }
 
 function repairHotTextPhrase(question: any) {

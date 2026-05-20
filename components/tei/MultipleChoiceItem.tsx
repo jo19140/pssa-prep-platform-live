@@ -1,14 +1,19 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { normalizeText } from "@/lib/teiScoring";
 import { FeedbackPanel, ItemShell, SubmitButton, optionButtonClass, submitResponse, type TEIItemComponentProps } from "./types";
 import type { StudentResponse } from "@/lib/teiScoring";
 
-export function MultipleChoiceItem({ item, itemId, disabled, onSubmit }: TEIItemComponentProps) {
-  const [selected, setSelected] = useState("");
-  const [response, setResponse] = useState<StudentResponse | null>(null);
+export function MultipleChoiceItem({ item, itemId, disabled, initialResponse, onSubmit }: TEIItemComponentProps) {
+  const [selected, setSelected] = useState(() => initialResponse?.rawResponse?.selected || "");
+  const [response, setResponse] = useState<StudentResponse | null>(initialResponse || null);
   const locked = disabled || Boolean(response);
+
+  useEffect(() => {
+    setResponse(initialResponse || null);
+    setSelected(initialResponse?.rawResponse?.selected || "");
+  }, [initialResponse]);
 
   function submit() {
     if (!selected || locked) return;

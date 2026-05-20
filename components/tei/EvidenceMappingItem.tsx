@@ -1,15 +1,20 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { evidenceMappingRecord, normalizeText } from "@/lib/teiScoring";
 import { FeedbackPanel, ItemShell, SubmitButton, submitResponse, type TEIItemComponentProps } from "./types";
 import type { StudentResponse } from "@/lib/teiScoring";
 
-export function EvidenceMappingItem({ item, itemId, disabled, onSubmit }: TEIItemComponentProps) {
-  const [mapping, setMapping] = useState<Record<string, string[]>>({});
-  const [response, setResponse] = useState<StudentResponse | null>(null);
+export function EvidenceMappingItem({ item, itemId, disabled, initialResponse, onSubmit }: TEIItemComponentProps) {
+  const [mapping, setMapping] = useState<Record<string, string[]>>(() => initialResponse?.rawResponse?.mapping || {});
+  const [response, setResponse] = useState<StudentResponse | null>(initialResponse || null);
   const locked = disabled || Boolean(response);
   const expected = evidenceMappingRecord(item.correctMapping);
+
+  useEffect(() => {
+    setResponse(initialResponse || null);
+    setMapping(initialResponse?.rawResponse?.mapping || {});
+  }, [initialResponse]);
 
   function toggle(claim: string, evidence: string) {
     if (locked) return;

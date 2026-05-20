@@ -18,23 +18,26 @@ export function TEIItemRenderer({
   index = 0,
   onSubmit,
   disabled = false,
+  initialResponse = null,
 }: {
   item: any;
   index?: number;
   onSubmit: (response: StudentResponse) => void;
   disabled?: boolean;
+  initialResponse?: StudentResponse | null;
 }) {
   const itemId = itemKey(item, index);
-  if (item?.type === "mc" || !item?.type) return <MultipleChoiceItem item={item} itemId={itemId} onSubmit={onSubmit} disabled={disabled} />;
-  if (item.type === "inline-dropdown") return <InlineDropdownItem item={item} itemId={itemId} onSubmit={onSubmit} disabled={disabled} />;
-  if (item.type === "hot-text-word") return <HotTextWordItem item={item} itemId={itemId} onSubmit={onSubmit} disabled={disabled} />;
-  if (item.type === "hot-text-phrase") return <HotTextPhraseItem item={item} itemId={itemId} onSubmit={onSubmit} disabled={disabled} />;
-  if (item.type === "hot-text-sentence") return <HotTextSentenceItem item={item} itemId={itemId} onSubmit={onSubmit} disabled={disabled} />;
-  if (item.type === "drag-drop-table") return <DragDropTableItem item={item} itemId={itemId} onSubmit={onSubmit} disabled={disabled} />;
-  if (item.type === "drag-drop-order") return <DragDropOrderItem item={item} itemId={itemId} onSubmit={onSubmit} disabled={disabled} />;
-  if (item.type === "evidence-mapping") return <EvidenceMappingItem item={item} itemId={itemId} onSubmit={onSubmit} disabled={disabled} />;
-  if (item.type === "multi-select") return <MultiSelectItem item={item} itemId={itemId} onSubmit={onSubmit} disabled={disabled} />;
-  if (item.type === "two-part-ebsr") return <TwoPartEBSRItem item={item} itemId={itemId} onSubmit={onSubmit} disabled={disabled} />;
+  const props = { item, itemId, onSubmit, disabled, initialResponse };
+  if (item?.type === "mc" || !item?.type) return <MultipleChoiceItem {...props} />;
+  if (item.type === "inline-dropdown") return <InlineDropdownItem {...props} />;
+  if (item.type === "hot-text-word") return <HotTextWordItem {...props} />;
+  if (item.type === "hot-text-phrase") return <HotTextPhraseItem {...props} />;
+  if (item.type === "hot-text-sentence") return <HotTextSentenceItem {...props} />;
+  if (item.type === "drag-drop-table") return <DragDropTableItem {...props} />;
+  if (item.type === "drag-drop-order") return <DragDropOrderItem {...props} />;
+  if (item.type === "evidence-mapping") return <EvidenceMappingItem {...props} />;
+  if (item.type === "multi-select") return <MultiSelectItem {...props} />;
+  if (item.type === "two-part-ebsr") return <TwoPartEBSRItem {...props} />;
 
   return (
     <div className="rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm font-semibold text-amber-950">

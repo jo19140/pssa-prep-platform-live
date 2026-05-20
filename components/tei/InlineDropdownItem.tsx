@@ -1,15 +1,20 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { normalizeText } from "@/lib/teiScoring";
 import { FeedbackPanel, ItemShell, SubmitButton, submitResponse, type TEIItemComponentProps } from "./types";
 import type { StudentResponse } from "@/lib/teiScoring";
 
-export function InlineDropdownItem({ item, itemId, disabled, onSubmit }: TEIItemComponentProps) {
-  const [selectedOption, setSelectedOption] = useState("");
-  const [response, setResponse] = useState<StudentResponse | null>(null);
+export function InlineDropdownItem({ item, itemId, disabled, initialResponse, onSubmit }: TEIItemComponentProps) {
+  const [selectedOption, setSelectedOption] = useState(() => initialResponse?.rawResponse?.selectedOption || "");
+  const [response, setResponse] = useState<StudentResponse | null>(initialResponse || null);
   const locked = disabled || Boolean(response);
   const [before, after] = String(item.sentence || "").split("[BLANK]");
+
+  useEffect(() => {
+    setResponse(initialResponse || null);
+    setSelectedOption(initialResponse?.rawResponse?.selectedOption || "");
+  }, [initialResponse]);
 
   function submit() {
     if (!selectedOption || locked) return;

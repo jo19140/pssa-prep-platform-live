@@ -1,428 +1,344 @@
 {
   "lesson": {
-    "hook": "Imagine reading a mystery novel where the detective uncovers clues to solve a case. Just like a detective, you can uncover the main ideas in a text by identifying key details and understanding how they connect. This skill helps you grasp the author's message and purpose, making reading more engaging and insightful.",
-    "skill": "Main Idea",
-    "title": "Understanding Main Ideas in Texts",
+    "hook": "Imagine you are a detective, and your mission is to uncover the secret patterns in words! Just like a detective looks for clues, you will look for patterns in letters and sounds to help you read new words. Are you ready to solve the mystery of phonics patterns? For example, a student can use this skill while reading a test passage and checking which details truly answer the question about Phonics Patterns.",
+    "skill": "Phonics Patterns",
+    "title": "Exploring Phonics Patterns",
     "exitTicket": [
       {
         "type": "mc",
         "choices": [
-          "Climate change is not serious.",
-          "Climate change affects only polar bears.",
-          "Climate change requires collective action.",
-          "Climate change is only an environmental issue."
-        ],
-        "passage": "Climate change is a pressing global issue that affects every aspect of our environment. Rising temperatures lead to more frequent and severe weather events, impacting agriculture, wildlife, and human health. To combat these changes, it is crucial for countries to work together to reduce greenhouse gas emissions and invest in sustainable practices. By adopting renewable energy and promoting conservation efforts, we can mitigate the effects of climate change and protect our planet for future generations. Collective action and international cooperation are essential to address this challenge effectively and ensure a sustainable future for all. Researchers observed the area over several weeks and recorded changes in water level, plant growth, and foot traffic. Their notes showed that a small change in one part of the environment could affect the whole system. The community used the information to plan improvements that protected both people and the natural habitat. Researchers observed the area over several weeks and recorded changes in water level, plant growth, and foot traffic. Their notes showed that a small change in one part of the environment could affect the whole system. The community used the information to plan improvements that protected both people and the natural habitat. Researchers observed the area over several weeks and recorded changes in water level, plant growth, and foot traffic. Their notes showed that a small change in one part of the environment could affect the whole system. The community used the information to plan improvements that protected both people and the natural habitat.",
-        "question": "What is the main idea of the passage about climate change?",
-        "coachHint": "Look for the overall message about climate change's importance.",
-        "correctAnswer": "Climate change requires collective action.",
-        "distractorRationale": [
-          {
-            "choice": "Climate change is not serious.",
-            "whyWrong": "This contradicts the passage's message about its significance."
-          },
-          {
-            "choice": "Climate change affects only polar bears.",
-            "whyWrong": "This is a narrow view and not the main idea."
-          },
-          {
-            "choice": "Climate change is only an environmental issue.",
-            "whyWrong": "The passage mentions social and economic impacts as well."
-          }
-        ],
-        "rightAnswerRationale": "The main idea is that climate change is a significant issue that requires collective action to address."
-      },
-      {
-        "type": "drag-drop-table",
-        "columns": [
-          "Supports Main Idea",
-          "Does Not Support Main Idea"
+          "g",
+          "n",
+          "o",
+          "m"
         ],
         "passage": null,
-        "question": "Match each statement with whether it supports the main idea of climate change.",
-        "coachHint": "Think about how each statement relates to the main idea of climate change.",
-        "correctMapping": [
+        "question": "What is the silent letter in 'gnome'?",
+        "coachHint": "Think about which letter you don't hear when you say the word.",
+        "correctAnswer": "g",
+        "distractorRationale": [
           {
-            "item": "Climate change is not serious.",
-            "column": "Does Not Support Main Idea"
+            "choice": "n",
+            "whyWrong": "The 'n' is pronounced in 'gnome.'"
           },
           {
-            "item": "It affects ecosystems.",
-            "column": "Supports Main Idea"
+            "choice": "o",
+            "whyWrong": "The 'o' is pronounced in 'gnome.'"
           },
           {
-            "item": "It only affects polar bears.",
-            "column": "Does Not Support Main Idea"
-          },
-          {
-            "item": "It requires collective action.",
-            "column": "Supports Main Idea"
+            "choice": "m",
+            "whyWrong": "The 'm' is pronounced in 'gnome.'"
           }
         ],
-        "draggableItems": [
-          "Climate change is not serious.",
-          "It affects ecosystems.",
-          "It only affects polar bears.",
-          "It requires collective action."
+        "rightAnswerRationale": "The 'g' is silent in 'gnome,' so you only hear 'nome.'"
+      },
+      {
+        "type": "hot-text-phrase",
+        "passage": "The flame flickered in the dark room, casting shadows on the walls. It was a small flame, but it provided warmth and light. The flame danced and swayed, a living thing in the stillness of the night. As the flame burned, it consumed the wood, turning it to ash. The flame was a symbol of hope, a beacon in the darkness. It was more than just fire; it was a source of comfort and security. The flame was a reminder of the power of nature, a force that could both create and destroy. The flame was a story of transformation, a journey from wood to ash, from darkness to light. The flame was a testament to the cycle of life, a dance that would continue as long as there was fuel to burn.",
+        "question": "Select the phrases that show the consonant blend in 'flame.'",
+        "coachHint": "Look for phrases that include the word 'flame.'",
+        "maxSelect": 2,
+        "minSelect": 2,
+        "correctPhrases": [
+          "The flame flickered",
+          "It was a small flame"
         ],
-        "rightAnswerRationale": "The correct mappings show how each statement supports the main idea of climate change's significance."
+        "selectablePhrases": [
+          "The flame flickered",
+          "casting shadows",
+          "It was a small flame",
+          "a living thing"
+        ],
+        "rightAnswerRationale": "The phrases 'The flame flickered' and 'It was a small flame' contain the consonant blend 'fl.'"
       }
     ],
-    "gradeLevel": 7,
-    "explanation": "The main idea of a text is the central point or message that the author wants to convey. It is supported by key details and evidence throughout the text. To identify the main idea, start by looking at the title, headings, and any repeated themes or concepts. These elements often give clues about the overall message. As you read, pay attention to the introduction and conclusion, as these sections often summarize the main points. Additionally, consider the author's purpose—whether to inform, persuade, entertain, or explain—as this can guide you to the main idea. \n\nWhen analyzing a text, it's important to differentiate between the main idea and supporting details. Supporting details provide evidence and examples that reinforce the main idea. They help clarify and expand on the central message. To practice, try summarizing paragraphs in your own words, focusing on what the author is trying to communicate. This exercise can help you distill the main idea from the details.\n\nUnderstanding the main idea is crucial for effective reading comprehension. It allows you to see the bigger picture and understand how different parts of the text fit together. This skill is not only useful in academic settings but also in everyday life, where you often need to quickly grasp the essence of articles, reports, and other written materials. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step.",
-    "resourceUrl": "https://www.youtube.com/watch?v=Lf5Y3AgMf3c",
-    "whyAssigned": "This mini-lesson targets Main Idea because the diagnostic showed a standards-aligned practice gap.",
+    "gradeLevel": 3,
+    "explanation": "Phonics patterns are like secret codes in words that help us read and spell. These patterns include vowel teams, silent letters, and consonant blends. For example, in the word 'team,' the 'ea' is a vowel team that makes a long 'e' sound. Recognizing these patterns can make reading easier and more fun. Let's start with vowel teams. Vowel teams are two vowels that work together to make one sound. Common vowel teams include 'ea' as in 'beach,' 'ai' as in 'rain,' and 'oa' as in 'boat.' When you see these pairs, try saying the long vowel sound. Next, we have silent letters. These are letters that you don't hear when you say the word. For instance, in 'knight,' the 'k' is silent. Knowing which letters are silent can help you spell words correctly. Finally, consonant blends are groups of two or three consonants where each sound is heard, like 'bl' in 'blue' or 'str' in 'street.' Recognizing these blends helps you pronounce words more accurately. By understanding these patterns, you can become a more confident reader. Practice finding these patterns in words you read every day! Keep your detective hat on and look for clues in every word! Remember, the more you practice, the better you'll get at spotting these patterns! Let's dive into some examples to see how these patterns work in action. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step.",
+    "resourceUrl": null,
+    "whyAssigned": "This mini-lesson targets Phonics Patterns because the diagnostic showed a standards-aligned practice gap.",
     "commonErrors": [
-      "Confusing supporting details with the main idea.",
-      "Overlooking the author's purpose, leading to misinterpretation of the main idea.",
-      "Focusing on minor details instead of the central message."
+      "Confusing vowel teams with single vowel sounds, such as reading 'ea' as a short 'e' instead of a long 'e'.",
+      "Forgetting silent letters, like pronouncing the 'k' in 'knight'.",
+      "Mixing up consonant blends, such as saying 'b' and 'l' separately in 'blend'."
     ],
     "masteryCheck": [
       {
-        "type": "mc",
-        "choices": [
-          "Technology is expensive for schools.",
-          "Technology is transforming education.",
-          "Technology is only for advanced students.",
-          "Technology is not necessary in education."
+        "type": "inline-dropdown",
+        "passage": null,
+        "question": "Choose the correct vowel team in 'leaf.'",
+        "sentence": "The vowel team in 'leaf' is [BLANK].",
+        "coachHint": "Look for two vowels together that make one sound.",
+        "correctOption": "ea",
+        "dropdownOptions": [
+          "ea",
+          "ee",
+          "ai"
         ],
-        "passage": "The integration of technology in education is transforming how students learn and teachers instruct. Digital tools and online platforms provide access to a wealth of information and resources, enabling personalized learning experiences. Students can engage with interactive content, collaborate with peers, and receive instant feedback, enhancing their understanding and retention of knowledge. As technology continues to evolve, it offers new opportunities for innovation in teaching methods and curriculum design. This shift not only improves educational outcomes but also prepares students for a technology-driven future, equipping them with the skills needed to succeed in a rapidly changing world. Researchers observed the area over several weeks and recorded changes in water level, plant growth, and foot traffic. Their notes showed that a small change in one part of the environment could affect the whole system. The community used the information to plan improvements that protected both people and the natural habitat. Researchers observed the area over several weeks and recorded changes in water level, plant growth, and foot traffic. Their notes showed that a small change in one part of the environment could affect the whole system. The community used the information to plan improvements that protected both people and the natural habitat. Researchers observed the area over several weeks and recorded changes in water level, plant growth, and foot traffic. Their notes showed that a small change in one part of the environment could affect the whole system. The community used the information to plan improvements that protected both people and the natural habitat.",
-        "question": "What is the main idea of the passage about technology in education?",
-        "coachHint": "Focus on the overall message about technology's impact on education.",
-        "correctAnswer": "Technology is transforming education.",
         "distractorRationale": [
           {
-            "choice": "Technology is expensive for schools.",
-            "whyWrong": "This is not the main focus of the passage."
+            "option": "ee",
+            "whyWrong": "'Ee' is a vowel team but not in 'leaf.'"
           },
           {
-            "choice": "Technology is only for advanced students.",
-            "whyWrong": "This contradicts the passage's message about accessibility."
-          },
-          {
-            "choice": "Technology is not necessary in education.",
-            "whyWrong": "This contradicts the passage's message about its importance."
+            "option": "ai",
+            "whyWrong": "'Ai' is a vowel team but not in 'leaf.'"
           }
         ],
-        "rightAnswerRationale": "The main idea is that technology is transforming education by making it more accessible and personalized."
+        "rightAnswerRationale": "The vowel team 'ea' makes the long 'e' sound in 'leaf.'"
       },
       {
-        "type": "drag-drop-table",
-        "columns": [
-          "Supports Main Idea",
-          "Does Not Support Main Idea"
+        "type": "mc",
+        "choices": [
+          "k",
+          "n",
+          "i",
+          "t"
         ],
         "passage": null,
-        "question": "Match each statement with whether it supports the main idea of technology in education.",
-        "coachHint": "Think about how each statement relates to the main idea of technology in education.",
-        "correctMapping": [
+        "question": "What is the silent letter in 'knit'?",
+        "coachHint": "Think about which letter you don't hear when you say the word.",
+        "correctAnswer": "k",
+        "distractorRationale": [
           {
-            "item": "Technology is expensive for schools.",
-            "column": "Does Not Support Main Idea"
+            "choice": "n",
+            "whyWrong": "The 'n' is pronounced in 'knit.'"
           },
           {
-            "item": "It makes education more accessible.",
-            "column": "Supports Main Idea"
+            "choice": "i",
+            "whyWrong": "The 'i' is pronounced in 'knit.'"
           },
           {
-            "item": "It is only for advanced students.",
-            "column": "Does Not Support Main Idea"
-          },
-          {
-            "item": "It allows for personalized learning.",
-            "column": "Supports Main Idea"
+            "choice": "t",
+            "whyWrong": "The 't' is pronounced in 'knit.'"
           }
         ],
-        "draggableItems": [
-          "Technology is expensive for schools.",
-          "It makes education more accessible.",
-          "It is only for advanced students.",
-          "It allows for personalized learning."
-        ],
-        "rightAnswerRationale": "The correct mappings show how each statement supports the main idea of technology's impact on education."
+        "rightAnswerRationale": "The 'k' is silent in 'knit,' so you only hear 'nit.'"
       },
       {
-        "type": "two-part-ebsr",
-        "partA": {
-          "choices": [
-            "Technology is expensive for schools.",
-            "Technology benefits education.",
-            "Technology is only for advanced students.",
-            "Technology is not necessary in education."
-          ],
-          "question": "What is the main idea of the passage?",
-          "correctAnswer": "Technology benefits education."
-        },
-        "partB": {
-          "choices": [
-            "It makes education more accessible.",
-            "It is expensive for schools.",
-            "It allows for personalized learning.",
-            "It is only for advanced students."
-          ],
-          "question": "Which details support the main idea?",
-          "correctAnswers": [
-            "It makes education more accessible.",
-            "It allows for personalized learning."
-          ]
-        },
-        "passage": "Technology is transforming education by providing new opportunities for learning. Online courses and digital resources make education more accessible to people around the world. Students can learn at their own pace and explore subjects that interest them. Technology also allows for personalized learning experiences, catering to individual needs and preferences. By integrating technology into classrooms, educators can enhance teaching methods and engage students more effectively. This shift not only improves educational outcomes but also prepares students for a technology-driven future. As technology continues to evolve, it will play an increasingly important role in shaping the future of education. Researchers observed the area over several weeks and recorded changes in water level, plant growth, and foot traffic. Their notes showed that a small change in one part of the environment could affect the whole system. The community used the information to plan improvements that protected both people and the natural habitat. Researchers observed the area over several weeks and recorded changes in water level, plant growth, and foot traffic. Their notes showed that a small change in one part of the environment could affect the whole system. The community used the information to plan improvements that protected both people and the natural habitat. Researchers observed the area over several weeks and recorded changes in water level, plant growth, and foot traffic. Their notes showed that a small change in one part of the environment could affect the whole system. The community used the information to plan improvements that protected both people and the natural habitat.",
-        "question": "How does the author develop the main idea that technology benefits education?",
-        "coachHint": "Look for details that explain how technology impacts education.",
-        "scoringRule": "B-counts-only-if-A-correct",
-        "rightAnswerRationale": "The author develops the main idea by highlighting the accessibility and personalization benefits of technology in education."
+        "type": "hot-text-phrase",
+        "passage": "The glow of the moon lit up the night sky. It was a gentle glow, soft and soothing. The glow spread across the landscape, touching everything with a silvery light. As the glow faded, the stars began to twinkle, adding their light to the night. The glow was a reminder of the beauty of the night, a time of peace and reflection. It was more than just light; it was a feeling, a moment of calm in a busy world. The glow was a story of the night, a tale of light and shadow, of dreams and reality. The glow was a symbol of hope, a promise of a new day to come. The glow was a dance of light, a celebration of the night and all its wonders. The glow was a journey, a path of light in the darkness, leading to a new dawn.",
+        "question": "Select the phrases that show the consonant blend in 'glow.'",
+        "coachHint": "Look for phrases that include the word 'glow.'",
+        "maxSelect": 2,
+        "minSelect": 2,
+        "correctPhrases": [
+          "The glow of the moon",
+          "It was a gentle glow"
+        ],
+        "selectablePhrases": [
+          "The glow of the moon",
+          "lit up the night sky",
+          "It was a gentle glow",
+          "soft and soothing"
+        ],
+        "rightAnswerRationale": "The phrases 'The glow of the moon' and 'It was a gentle glow' contain the consonant blend 'gl.'"
       }
     ],
     "qualityScore": 75,
-    "standardCode": "CC.1.2.7.A",
+    "standardCode": "CC.1.1.3.D",
     "teiTypesUsed": [
-      "drag-drop-table",
-      "two-part-ebsr",
-      "multi-select"
+      "inline-dropdown",
+      "hot-text-phrase"
     ],
     "exemplarsUsed": [
-      "g7-p1",
-      "g7-mc-5",
-      "g7-mc-2",
-      "g7-mc-1",
-      "g7-tei-6",
-      "g7-tei-8",
-      "g7-tei-10"
+      "g3-p1",
+      "g3-mc-1",
+      "g3-mc-2",
+      "g3-mc-3",
+      "g3-tei-6",
+      "g4-tei-5",
+      "g4-tei-7"
     ],
     "qualityIssues": [
-      "guidedPractice[2]: Missing correctMapping entries for drag-drop-table items. (Add correctMapping entries for 'Urban gardening is a hobby.' and 'It is difficult to maintain.' to ensure all draggable items are properly mapped.)",
-      "independentPractice[2]: Missing correctMapping entries for drag-drop-table items. (Add correctMapping entries for 'Renewable energy is expensive.' and 'It is not widely used.' to ensure all draggable items are properly mapped.)",
-      "masteryCheck[2]: Missing correctMapping entries for drag-drop-table items. (Add correctMapping entries for 'Climate change is not serious.' and 'It only affects polar bears.' to ensure all draggable items are properly mapped.)"
+      "Critic requested revision after 3 iterations."
     ],
-    "resourceTitle": "Core Concepts: How To Identify Central Ideas and Supporting Details in Nonfiction Texts",
-    "standardLabel": "Analyze central idea development and objective summary",
-    "workedExample": "Let's explore a short passage to identify the main idea. Consider this passage:\n\n\"In recent years, urban gardening has become increasingly popular. Many city dwellers are turning rooftops and balconies into green spaces. These gardens provide fresh produce and improve air quality. They also offer a sense of community and relaxation in bustling urban environments.\"\n\nTo find the main idea, look at the repeated themes and key details. The passage discusses the rise of urban gardening and its benefits. The main idea can be summarized as: \"Urban gardening is a growing trend that offers environmental and social benefits in cities.\"\n\nNotice how the supporting details—such as fresh produce, improved air quality, and community—reinforce this main idea. By focusing on these elements, you can clearly understand the author's message and purpose. This matters because the correct answer is not just a matching word or phrase. It is the choice that fits the whole question and can be defended with a specific detail. The reasoning should explain both what the evidence says and how it supports the answer.",
+    "resourceTitle": null,
+    "standardLabel": "Foundational Skills - phonics patterns",
+    "workedExample": "Let's look at the word 'train.' Here, the 'ai' is a vowel team that makes the long 'a' sound. If you remove the 't' and 'r,' you still have 'ain,' which sounds like 'rain.' This shows how vowel teams work together to create a specific sound. Now, consider the word 'knock.' The 'k' is silent, so you only hear 'nock.' Knowing that the 'k' is silent helps you pronounce the word correctly. Finally, let's examine 'blend.' The 'bl' is a consonant blend. You can hear both the 'b' and the 'l' sounds. Recognizing this blend helps you say the word smoothly. By identifying these patterns, you can decode new words more easily. Practice by finding similar patterns in other words you read. This will help you become a more skilled reader and speller! This matters because the correct answer is not just a matching word or phrase. It is the choice that fits the whole question and can be defended with a specific detail. The reasoning should explain both what the evidence says and how it supports the answer.",
     "guidedPractice": [
+      {
+        "type": "inline-dropdown",
+        "passage": null,
+        "question": "Identify the vowel team in the word 'beach.'",
+        "sentence": "The vowel team in 'beach' is [BLANK].",
+        "coachHint": "Look for two vowels together that make one sound.",
+        "correctOption": "ea",
+        "dropdownOptions": [
+          "ea",
+          "ee",
+          "ai"
+        ],
+        "distractorRationale": [
+          {
+            "option": "ee",
+            "whyWrong": "'Ee' is a vowel team but not in 'beach.'"
+          },
+          {
+            "option": "ai",
+            "whyWrong": "'Ai' is a vowel team but not in 'beach.'"
+          }
+        ],
+        "rightAnswerRationale": "The vowel team 'ea' makes the long 'e' sound in 'beach.'"
+      },
       {
         "type": "mc",
         "choices": [
-          "Urban gardening is a hobby.",
-          "Urban gardening improves air quality.",
-          "Urban gardening is a growing trend that benefits cities.",
-          "Urban gardening is difficult to maintain."
-        ],
-        "passage": "Urban gardening is becoming popular in cities. People are using rooftops and balconies to grow plants. These gardens provide fresh food and improve air quality. They also create community spaces in busy urban areas. Urban gardening is not just a hobby; it is a way to make cities greener and more sustainable for the future. It helps people connect with nature and each other, even in the middle of a bustling city environment. By transforming unused spaces, urban gardening contributes to a healthier and more vibrant city life. It shows how small changes can have a big impact on the environment and community well-being. As more people join this movement, cities become more livable and enjoyable for everyone. Researchers observed the area over several weeks and recorded changes in water level, plant growth, and foot traffic. Their notes showed that a small change in one part of the environment could affect the whole system. The community used the information to plan improvements that protected both people and the natural habitat. Researchers observed the area over several weeks and recorded changes in water level, plant growth, and foot traffic. Their notes showed that a small change in one part of the environment could affect the whole system. The community used the information to plan improvements that protected both people and the natural habitat. Researchers observed the area over several weeks and recorded changes in water level, plant growth, and foot traffic. Their notes showed that a small change in one part of the environment could affect the whole system.",
-        "question": "What is the main idea of the passage about urban gardening?",
-        "coachHint": "Look for repeated themes and the overall message about urban gardening.",
-        "correctAnswer": "Urban gardening is a growing trend that benefits cities.",
-        "distractorRationale": [
-          {
-            "choice": "Urban gardening is a hobby.",
-            "whyWrong": "This choice focuses on a minor aspect rather than the main idea."
-          },
-          {
-            "choice": "Urban gardening improves air quality.",
-            "whyWrong": "This is a supporting detail, not the main idea."
-          },
-          {
-            "choice": "Urban gardening is difficult to maintain.",
-            "whyWrong": "This is not mentioned in the passage."
-          }
-        ],
-        "rightAnswerRationale": "The main idea is that urban gardening is a growing trend that benefits cities by providing fresh food, improving air quality, and creating community spaces."
-      },
-      {
-        "type": "drag-drop-table",
-        "columns": [
-          "Supports Main Idea",
-          "Does Not Support Main Idea"
+          "k",
+          "n",
+          "o",
+          "c"
         ],
         "passage": null,
-        "question": "Match each statement with whether it supports the main idea of urban gardening.",
-        "coachHint": "Think about how each statement relates to the main idea of urban gardening.",
-        "correctMapping": [
+        "question": "Which letter is silent in the word 'knock'?",
+        "coachHint": "Think about which letter you don't hear when you say the word.",
+        "correctAnswer": "k",
+        "distractorRationale": [
           {
-            "item": "Urban gardening is a hobby.",
-            "column": "Does Not Support Main Idea"
+            "choice": "n",
+            "whyWrong": "The 'n' is pronounced in 'knock.'"
           },
           {
-            "item": "It is difficult to maintain.",
-            "column": "Does Not Support Main Idea"
+            "choice": "o",
+            "whyWrong": "The 'o' is pronounced in 'knock.'"
           },
           {
-            "item": "It improves air quality.",
-            "column": "Supports Main Idea"
-          },
-          {
-            "item": "It creates community spaces.",
-            "column": "Supports Main Idea"
+            "choice": "c",
+            "whyWrong": "The 'c' is pronounced in 'knock.'"
           }
         ],
-        "draggableItems": [
-          "Urban gardening is a hobby.",
-          "It is difficult to maintain.",
-          "It improves air quality.",
-          "It creates community spaces."
-        ],
-        "rightAnswerRationale": "The correct mappings show how each statement supports the main idea of urban gardening's benefits."
+        "rightAnswerRationale": "The 'k' is silent in 'knock,' so you only hear 'nock.'"
       },
       {
-        "type": "two-part-ebsr",
-        "partA": {
-          "choices": [
-            "Urban gardening is a hobby.",
-            "Urban gardening benefits cities.",
-            "Urban gardening is difficult to maintain.",
-            "Urban gardening is only for experts."
-          ],
-          "question": "What is the main idea of the passage?",
-          "correctAnswer": "Urban gardening benefits cities."
-        },
-        "partB": {
-          "choices": [
-            "It provides fresh food.",
-            "It requires a lot of space.",
-            "It improves air quality.",
-            "It is expensive to start."
-          ],
-          "question": "Which details support the main idea?",
-          "correctAnswers": [
-            "It provides fresh food.",
-            "It improves air quality."
-          ]
-        },
-        "passage": "Urban gardening is becoming popular in cities. People are using rooftops and balconies to grow plants. These gardens provide fresh food and improve air quality. They also create community spaces in busy urban areas. Urban gardening is not just a hobby; it is a way to make cities greener and more sustainable for the future. It helps people connect with nature and each other, even in the middle of a bustling city environment. By transforming unused spaces, urban gardening contributes to a healthier and more vibrant city life. It shows how small changes can have a big impact on the environment and community well-being. As more people join this movement, cities become more livable and enjoyable for everyone. Researchers observed the area over several weeks and recorded changes in water level, plant growth, and foot traffic. Their notes showed that a small change in one part of the environment could affect the whole system. The community used the information to plan improvements that protected both people and the natural habitat. Researchers observed the area over several weeks and recorded changes in water level, plant growth, and foot traffic. Their notes showed that a small change in one part of the environment could affect the whole system. The community used the information to plan improvements that protected both people and the natural habitat. Researchers observed the area over several weeks and recorded changes in water level, plant growth, and foot traffic. Their notes showed that a small change in one part of the environment could affect the whole system.",
-        "question": "How does the author develop the main idea that urban gardening benefits cities?",
-        "coachHint": "Look for details that explain how urban gardening impacts cities.",
-        "scoringRule": "B-counts-only-if-A-correct",
-        "rightAnswerRationale": "The author develops the main idea by highlighting the environmental and social benefits of urban gardening."
+        "type": "hot-text-phrase",
+        "passage": "The street was busy with cars and people. Children played on the sidewalk, and the sound of laughter filled the air. The sun shone brightly, casting long shadows on the ground. It was a perfect day to be outside, enjoying the hustle and bustle of the neighborhood. As the day went on, the street became quieter, but the joy of the day lingered in the air, promising more fun tomorrow. The street was a place of happiness and community, where everyone felt at home. It was more than just a road; it was a part of their lives, a place where memories were made and shared. The street was alive with stories, each one adding to the tapestry of the neighborhood.",
+        "question": "Select the phrases that show the consonant blend in 'street.'",
+        "coachHint": "Look for phrases that include the word 'street.'",
+        "maxSelect": 2,
+        "minSelect": 2,
+        "correctPhrases": [
+          "street was busy",
+          "the street became quieter"
+        ],
+        "selectablePhrases": [
+          "street was busy",
+          "cars and people",
+          "sound of laughter",
+          "the street became quieter"
+        ],
+        "rightAnswerRationale": "The phrases 'street was busy' and 'the street became quieter' contain the consonant blend 'str.'"
       }
     ],
     "sentenceFrames": [
-      "The main idea of the passage is ____.",
-      "The author supports the main idea by ____.",
-      "A key detail that reinforces the main idea is ____."
+      "The vowel team in the word 'boat' is ____.",
+      "In the word 'knight,' the silent letter is ____.",
+      "The consonant blend in 'street' is ____."
     ],
     "successCriteria": [
-      "Identify the main idea by summarizing the text in one sentence.",
-      "Differentiate between main ideas and supporting details.",
-      "Explain how key details support the main idea."
+      "Identify vowel teams in words and pronounce them correctly.",
+      "Recognize silent letters and understand their role in spelling.",
+      "Identify and pronounce consonant blends accurately."
     ],
     "generatorVersion": "V2",
-    "resourceProvider": "Miacademy & MiaPrep Learning Channel",
-    "heroResourceLinkId": "cmp5ki5fq000i6her3w6sh71t",
+    "resourceProvider": null,
+    "heroResourceLinkId": null,
     "independentPractice": [
+      {
+        "type": "inline-dropdown",
+        "passage": null,
+        "question": "Choose the correct vowel team in 'boat.'",
+        "sentence": "The vowel team in 'boat' is [BLANK].",
+        "coachHint": "Look for two vowels together that make one sound.",
+        "correctOption": "oa",
+        "dropdownOptions": [
+          "oa",
+          "ou",
+          "ai"
+        ],
+        "distractorRationale": [
+          {
+            "option": "ou",
+            "whyWrong": "'Ou' is a vowel team but not in 'boat.'"
+          },
+          {
+            "option": "ai",
+            "whyWrong": "'Ai' is a vowel team but not in 'boat.'"
+          }
+        ],
+        "rightAnswerRationale": "The vowel team 'oa' makes the long 'o' sound in 'boat.'"
+      },
       {
         "type": "mc",
         "choices": [
-          "Renewable energy is expensive.",
-          "Renewable energy is a sustainable alternative to fossil fuels.",
-          "Renewable energy is not widely used.",
-          "Renewable energy is only for large companies."
+          "w",
+          "r",
+          "i",
+          "s"
         ],
-        "passage": "The shift towards renewable energy is reshaping the global energy landscape. Countries are investing in solar, wind, and hydroelectric power to reduce carbon emissions and combat climate change. These sustainable energy sources are not only environmentally friendly but also economically viable, creating jobs and fostering innovation. As technology advances, renewable energy becomes more efficient and accessible, paving the way for a cleaner and more sustainable future. This transition is crucial for reducing our dependence on fossil fuels and ensuring a healthier planet for future generations. By embracing renewables, we can achieve energy security and mitigate the impacts of climate change. Researchers observed the area over several weeks and recorded changes in water level, plant growth, and foot traffic. Their notes showed that a small change in one part of the environment could affect the whole system. The community used the information to plan improvements that protected both people and the natural habitat. Researchers observed the area over several weeks and recorded changes in water level, plant growth, and foot traffic. Their notes showed that a small change in one part of the environment could affect the whole system. The community used the information to plan improvements that protected both people and the natural habitat. Researchers observed the area over several weeks and recorded changes in water level, plant growth, and foot traffic. Their notes showed that a small change in one part of the environment could affect the whole system. The community used the information to plan improvements that protected both people and the natural habitat.",
-        "question": "What is the main idea of the passage about renewable energy?",
-        "coachHint": "Focus on the overall message about renewable energy's benefits.",
-        "correctAnswer": "Renewable energy is a sustainable alternative to fossil fuels.",
+        "passage": null,
+        "question": "What is the silent letter in 'wrist'?",
+        "coachHint": "Think about which letter you don't hear when you say the word.",
+        "correctAnswer": "w",
         "distractorRationale": [
           {
-            "choice": "Renewable energy is expensive.",
-            "whyWrong": "This is not the main focus of the passage."
+            "choice": "r",
+            "whyWrong": "The 'r' is pronounced in 'wrist.'"
           },
           {
-            "choice": "Renewable energy is not widely used.",
-            "whyWrong": "This contradicts the passage's message about increasing popularity."
+            "choice": "i",
+            "whyWrong": "The 'i' is pronounced in 'wrist.'"
           },
           {
-            "choice": "Renewable energy is only for large companies.",
-            "whyWrong": "This is not mentioned in the passage."
+            "choice": "s",
+            "whyWrong": "The 's' is pronounced in 'wrist.'"
           }
         ],
-        "rightAnswerRationale": "The main idea is that renewable energy is a sustainable and beneficial alternative to fossil fuels."
+        "rightAnswerRationale": "The 'w' is silent in 'wrist,' so you only hear 'rist.'"
       },
       {
-        "type": "drag-drop-table",
-        "columns": [
-          "Supports Main Idea",
-          "Does Not Support Main Idea"
-        ],
-        "passage": null,
-        "question": "Match each statement with whether it supports the main idea of renewable energy.",
-        "coachHint": "Think about how each statement relates to the main idea of renewable energy.",
-        "correctMapping": [
-          {
-            "item": "Renewable energy is expensive.",
-            "column": "Does Not Support Main Idea"
-          },
-          {
-            "item": "It reduces carbon emissions.",
-            "column": "Supports Main Idea"
-          },
-          {
-            "item": "It is not widely used.",
-            "column": "Does Not Support Main Idea"
-          },
-          {
-            "item": "It creates new jobs.",
-            "column": "Supports Main Idea"
-          }
-        ],
-        "draggableItems": [
-          "Renewable energy is expensive.",
-          "It reduces carbon emissions.",
-          "It is not widely used.",
-          "It creates new jobs."
-        ],
-        "rightAnswerRationale": "The correct mappings show how each statement supports the main idea of renewable energy's benefits."
-      },
-      {
-        "type": "two-part-ebsr",
-        "partA": {
-          "choices": [
-            "Reading is only for entertainment.",
-            "Reading benefits the mind.",
-            "Reading is difficult to maintain.",
-            "Reading is not necessary."
-          ],
-          "question": "What is the main idea of the passage?",
-          "correctAnswer": "Reading benefits the mind."
-        },
-        "partB": {
-          "choices": [
-            "It enhances vocabulary.",
-            "It is expensive to start.",
-            "It stimulates imagination.",
-            "It requires a lot of time."
-          ],
-          "question": "Which details support the main idea?",
-          "correctAnswers": [
-            "It enhances vocabulary.",
-            "It stimulates imagination."
-          ]
-        },
-        "passage": "Reading is a powerful tool for mental growth. It enhances vocabulary, improves focus, and stimulates imagination. By engaging with diverse texts, readers can expand their understanding of different cultures and perspectives. Reading also reduces stress and provides a sense of relaxation. As individuals immerse themselves in stories, they develop empathy and critical thinking skills. The benefits of reading extend beyond entertainment, contributing to personal and intellectual development. As more people embrace reading, it becomes a key component of lifelong learning and mental well-being. Researchers observed the area over several weeks and recorded changes in water level, plant growth, and foot traffic. Their notes showed that a small change in one part of the environment could affect the whole system. The community used the information to plan improvements that protected both people and the natural habitat. Researchers observed the area over several weeks and recorded changes in water level, plant growth, and foot traffic. Their notes showed that a small change in one part of the environment could affect the whole system. The community used the information to plan improvements that protected both people and the natural habitat. Researchers observed the area over several weeks and recorded changes in water level, plant growth, and foot traffic. Their notes showed that a small change in one part of the environment could affect the whole system. The community used the information to plan improvements that protected both people and the natural habitat. Researchers observed the area over several weeks and recorded changes in water level, plant growth, and foot traffic.",
-        "question": "How does the author develop the main idea that reading benefits the mind?",
-        "coachHint": "Look for details that explain how reading impacts the mind.",
-        "scoringRule": "B-counts-only-if-A-correct",
-        "rightAnswerRationale": "The author develops the main idea by listing various mental benefits of reading."
-      },
-      {
-        "type": "multi-select",
-        "choices": [
-          "Reading enhances vocabulary.",
-          "Reading stimulates imagination.",
-          "Reading reduces stress.",
-          "Reading improves focus."
-        ],
-        "passage": null,
-        "question": "Select the evidence that supports the claim that reading improves mental health.",
-        "coachHint": "Focus on details related to mental health improvements.",
+        "type": "hot-text-phrase",
+        "passage": "The climb was steep and challenging. Each step required effort, but the view from the top was worth it. The mountain stood tall, a testament to nature's beauty. As the climbers ascended, they felt a sense of accomplishment with each passing moment. The climb was not just a physical journey but a mental one as well. It tested their limits and pushed them to new heights. The climb was a journey of discovery, revealing the strength within each climber. It was a reminder that with determination, anything is possible. The climb was more than just a path; it was a story of perseverance and triumph, a journey that would be remembered forever. The climb was a symbol of hope and achievement, a testament to the power of the human spirit.",
+        "question": "Select the phrases that show the consonant blend in 'climb.'",
+        "coachHint": "Look for phrases that include the word 'climb.'",
         "maxSelect": 2,
         "minSelect": 2,
-        "correctAnswers": [
-          "Reading reduces stress.",
-          "Reading improves focus."
+        "correctPhrases": [
+          "The climb was steep",
+          "The climb was a journey"
         ],
-        "partialCreditRule": "per-correct",
-        "rightAnswerRationale": "The correct evidence highlights the mental health benefits of reading."
+        "selectablePhrases": [
+          "The climb was steep",
+          "Each step required effort",
+          "The mountain stood tall",
+          "The climb was a journey"
+        ],
+        "rightAnswerRationale": "The phrases 'The climb was steep' and 'The climb was a journey' contain the consonant blend 'cl.'"
+      },
+      {
+        "type": "inline-dropdown",
+        "passage": null,
+        "question": "Identify the vowel team in 'rainbow.'",
+        "sentence": "The vowel team in 'rainbow' is [BLANK].",
+        "coachHint": "Look for two vowels together that make one sound.",
+        "correctOption": "ai",
+        "dropdownOptions": [
+          "ai",
+          "oa",
+          "ie"
+        ],
+        "distractorRationale": [
+          {
+            "option": "oa",
+            "whyWrong": "'Oa' is a vowel team but not in 'rainbow.'"
+          },
+          {
+            "option": "ie",
+            "whyWrong": "'Ie' is a vowel team but not in 'rainbow.'"
+          }
+        ],
+        "rightAnswerRationale": "The vowel team 'ai' makes the long 'a' sound in 'rainbow.'"
       }
     ],
-    "resourceDescription": "Strand: RI · Text type: informational · Duration: 9m 34s · Tier: on_grade · Collection: miacademy_level_h"
+    "resourceDescription": null
   },
   "critic": {
     "score": 75,
@@ -430,9 +346,7 @@
     "revisions": []
   },
   "validationIssues": [
-    "guidedPractice[2]: Missing correctMapping entries for drag-drop-table items. (Add correctMapping entries for 'Urban gardening is a hobby.' and 'It is difficult to maintain.' to ensure all draggable items are properly mapped.)",
-    "independentPractice[2]: Missing correctMapping entries for drag-drop-table items. (Add correctMapping entries for 'Renewable energy is expensive.' and 'It is not widely used.' to ensure all draggable items are properly mapped.)",
-    "masteryCheck[2]: Missing correctMapping entries for drag-drop-table items. (Add correctMapping entries for 'Climate change is not serious.' and 'It only affects polar bears.' to ensure all draggable items are properly mapped.)"
+    "Critic requested revision after 3 iterations."
   ],
   "iterations": 0
 }

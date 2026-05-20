@@ -203,6 +203,7 @@ export function LessonStepPlayer({
                     key={key}
                     item={question}
                     index={index}
+                    initialResponse={submittedResponses[key] || null}
                     disabled={Boolean(submittedResponses[key])}
                     onSubmit={handleResponseSubmit}
                   />

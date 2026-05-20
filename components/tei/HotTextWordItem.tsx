@@ -1,16 +1,21 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { normalizeText } from "@/lib/teiScoring";
 import { FeedbackPanel, ItemShell, SubmitButton, optionButtonClass, submitResponse, type TEIItemComponentProps } from "./types";
 import type { StudentResponse } from "@/lib/teiScoring";
 
-export function HotTextWordItem({ item, itemId, disabled, onSubmit }: TEIItemComponentProps) {
+export function HotTextWordItem({ item, itemId, disabled, initialResponse, onSubmit }: TEIItemComponentProps) {
   const pairs = item.bracketPairs || [];
-  const [selections, setSelections] = useState<string[]>(() => pairs.map(() => ""));
-  const [response, setResponse] = useState<StudentResponse | null>(null);
+  const [selections, setSelections] = useState<string[]>(() => initialResponse?.rawResponse?.selections || pairs.map(() => ""));
+  const [response, setResponse] = useState<StudentResponse | null>(initialResponse || null);
   const locked = disabled || Boolean(response);
   const chunks = useMemo(() => splitBracketSentence(item.sentence), [item.sentence]);
+
+  useEffect(() => {
+    setResponse(initialResponse || null);
+    setSelections(initialResponse?.rawResponse?.selections || pairs.map(() => ""));
+  }, [initialResponse, pairs]);
 
   function submit() {
     if (selections.some((selection) => !selection) || locked) return;

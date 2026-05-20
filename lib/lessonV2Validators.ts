@@ -20,6 +20,16 @@ export const FORBIDDEN_PASSAGE_PHRASES = [
   /students can use this detail to check/i,
   /compare choices,? and explain why one choice/i,
   /one choice is stronger than another/i,
+  /researchers observed the area over several weeks/i,
+  /their notes showed that a small change in one part of the environment/i,
+  /the (town|community) used the information to plan/i,
+  /the scene grows quieter as the character notices small sounds/i,
+  /a memory from earlier in the week explains why the moment matters/i,
+  /a later moment explains why the decision matters/i,
+  /by the end, the character acts with more confidence/i,
+  /the writers compare two versions of the same sentence/i,
+  /they revise the draft again, paying attention to word choice/i,
+  /the final version keeps a consistent tone/i,
 ];
 
 export async function validateLessonV2(lesson: LessonV2, openai?: OpenAI, options: LessonV2ValidationOptions = {}): Promise<LessonV2ValidationResult> {
@@ -164,7 +174,41 @@ export function validatePassageContent(passage: string): string[] {
       issues.push(`Passage contains forbidden pedagogical meta-language: ${pattern}`);
     }
   }
+  issues.push(...validatePassageRepetition(passage));
   return issues;
+}
+
+export function validatePassageRepetition(passage: string): string[] {
+  const issues: string[] = [];
+  const seen = new Map<string, string>();
+  for (const sentence of splitSentences(passage)) {
+    const normalized = normalizeRepeatedSentence(sentence);
+    if (wordCount(normalized) < 8) continue;
+    const first = seen.get(normalized);
+    if (first) {
+      issues.push(`Passage contains repeated sentence: "${first.slice(0, 140)}"`);
+    } else {
+      seen.set(normalized, sentence.trim());
+    }
+  }
+  return issues;
+}
+
+function splitSentences(text: string) {
+  return String(text || "")
+    .split(/(?<=[.!?])\s+/)
+    .map((sentence) => sentence.trim())
+    .filter(Boolean);
+}
+
+function normalizeRepeatedSentence(sentence: string) {
+  return sentence
+    .toLowerCase()
+    .replace(/[\u2018\u2019]/g, "'")
+    .replace(/[\u201c\u201d]/g, "\"")
+    .replace(/[^a-z0-9\s]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
 }
 
 function sameText(a: string, b: string) {
