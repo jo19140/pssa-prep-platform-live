@@ -1,0 +1,1155 @@
+{
+  "generatedAt": "2026-05-20T16:12:29.246Z",
+  "mode": "deterministic-repair",
+  "scannedLessons": 182,
+  "affectedLessons": 143,
+  "successfulRegenerations": 143,
+  "failedRegenerations": 0,
+  "successes": [
+    {
+      "id": "cmpdgkud3006eevu9jb8e6dht",
+      "gradeLevel": 3,
+      "standardCode": "CC.1.3.3.C",
+      "skill": "Story Elements",
+      "qualityScore": 92,
+      "heroResourceLinkId": "cmp4fw2ek001pg3sauoieq4cv"
+    },
+    {
+      "id": "cmpdgm4f3006mevu91x36jxg8",
+      "gradeLevel": 3,
+      "standardCode": "CC.1.3.3.D",
+      "skill": "Point of View",
+      "qualityScore": 92,
+      "heroResourceLinkId": "cmp4fw2j0001rg3saq5eq4w5z"
+    },
+    {
+      "id": "cmpdgpv0n006zevu9ueolu61j",
+      "gradeLevel": 3,
+      "standardCode": "CC.1.3.3.E",
+      "skill": "Poetry Lines and Stanzas",
+      "qualityScore": 92,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdqz49f000aes458ungmt69",
+      "gradeLevel": 3,
+      "standardCode": "CC.1.3.3.F",
+      "skill": "Connotation and Figurative Language",
+      "qualityScore": 92,
+      "heroResourceLinkId": "cmp4fw31j0020g3sa0mef1zh9"
+    },
+    {
+      "id": "cmpdgspjc007devu9e4f0jqfu",
+      "gradeLevel": 3,
+      "standardCode": "CC.1.4.3.C",
+      "skill": "Paragraph Organization",
+      "qualityScore": 92,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdgte5s007levu96qndx56t",
+      "gradeLevel": 3,
+      "standardCode": "CC.1.4.3.F",
+      "skill": "Capitalization and Titles",
+      "qualityScore": 92,
+      "heroResourceLinkId": "cmp4fw0mt000ug3sa7vsuft95"
+    },
+    {
+      "id": "cmpdgvnv5008aevu90h6ug77j",
+      "gradeLevel": 3,
+      "standardCode": "CC.1.4.3.F",
+      "skill": "Complete Sentences",
+      "qualityScore": 92,
+      "heroResourceLinkId": "cmp4fw58s0030g3sa5dd3d63b"
+    },
+    {
+      "id": "cmpdgyw0h008vevu9kb541y7f",
+      "gradeLevel": 3,
+      "standardCode": "CC.1.4.3.F",
+      "skill": "Formal and Informal Style",
+      "qualityScore": 92,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdh2xsi0098evu9zawl135n",
+      "gradeLevel": 3,
+      "standardCode": "CC.1.4.3.G",
+      "skill": "Opinion Reasons",
+      "qualityScore": 92,
+      "heroResourceLinkId": "cmp4fw2v8001xg3sazvmp0g9e"
+    },
+    {
+      "id": "cmpdh3j20009gevu9lc0iynfk",
+      "gradeLevel": 3,
+      "standardCode": "CC.1.4.3.S",
+      "skill": "TDA Evidence and Explanation",
+      "qualityScore": 92,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdh5m7u009qevu9b6sq9ivk",
+      "gradeLevel": 4,
+      "standardCode": "CC.1.1.4.D",
+      "skill": "Affixes and Roots",
+      "qualityScore": 92,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdh63tp009yevu9abub6l5w",
+      "gradeLevel": 4,
+      "standardCode": "CC.1.1.4.E",
+      "skill": "Decoding Multisyllabic Words",
+      "qualityScore": 92,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdha1hu00abevu9csx08m68",
+      "gradeLevel": 4,
+      "standardCode": "CC.1.1.4.E",
+      "skill": "Fluency Strategies",
+      "qualityScore": 92,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdhas9n00ajevu9teh71x9k",
+      "gradeLevel": 4,
+      "standardCode": "CC.1.2.4.A",
+      "skill": "Combine Main Ideas Across Texts",
+      "qualityScore": 84,
+      "heroResourceLinkId": "cmpcylwj50006fi7urdxabtjo"
+    },
+    {
+      "id": "cmpdhcgsm00awevu9rk3hmgr4",
+      "gradeLevel": 4,
+      "standardCode": "CC.1.2.4.A",
+      "skill": "Main Idea",
+      "qualityScore": 92,
+      "heroResourceLinkId": "cmpcylwj50006fi7urdxabtjo"
+    },
+    {
+      "id": "cmpdhgonw00b9evu9g6u9w9jt",
+      "gradeLevel": 4,
+      "standardCode": "CC.1.2.4.B",
+      "skill": "Inference",
+      "qualityScore": 88,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdhhzd600bjevu9362t3f0f",
+      "gradeLevel": 4,
+      "standardCode": "CC.1.2.4.B",
+      "skill": "Inference with Supporting Details",
+      "qualityScore": 92,
+      "heroResourceLinkId": "cmpcylweo0001fi7ushlw25ye"
+    },
+    {
+      "id": "cmpdhlfoh00buevu902sxjmck",
+      "gradeLevel": 4,
+      "standardCode": "CC.1.2.4.B",
+      "skill": "Text Evidence",
+      "qualityScore": 92,
+      "heroResourceLinkId": "cmpcylwky0008fi7unl5zsfag"
+    },
+    {
+      "id": "cmpdhn7na00c2evu91o7fjgaw",
+      "gradeLevel": 4,
+      "standardCode": "CC.1.2.4.D",
+      "skill": "Author's Purpose and Message",
+      "qualityScore": 88,
+      "heroResourceLinkId": "cmp4dxtng003eq9huhrsvkxxj"
+    },
+    {
+      "id": "cmpdhp9cf00cfevu9521zskko",
+      "gradeLevel": 4,
+      "standardCode": "CC.1.2.4.E",
+      "skill": "Graphic Organizers",
+      "qualityScore": 92,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdhrlfc00cqevu9gdjhv6if",
+      "gradeLevel": 4,
+      "standardCode": "CC.1.2.4.E",
+      "skill": "Problem and Solution Text Structure",
+      "qualityScore": 92,
+      "heroResourceLinkId": "cmp4dxu16003lq9hu408n3zt0"
+    },
+    {
+      "id": "cmpdht2ut00cyevu96difvrzn",
+      "gradeLevel": 4,
+      "standardCode": "CC.1.2.4.F",
+      "skill": "Dictionary and Thesaurus Skills",
+      "qualityScore": 92,
+      "heroResourceLinkId": "cmpcxizoy000fe8593ub07u47"
+    },
+    {
+      "id": "cmpdhwrjk00dievu9tdtn7as2",
+      "gradeLevel": 4,
+      "standardCode": "CC.1.2.4.F",
+      "skill": "Greek and Latin Roots",
+      "qualityScore": 92,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdhvyp400d8evu9dt50rod2",
+      "gradeLevel": 4,
+      "standardCode": "CC.1.2.4.F",
+      "skill": "Homophones and Multiple-Meaning Words",
+      "qualityScore": 92,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdi049g00e0evu9i4lhqmdd",
+      "gradeLevel": 4,
+      "standardCode": "CC.1.2.4.G",
+      "skill": "Argumentative Text Clues",
+      "qualityScore": 92,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdhzp7s00dsevu91d5ngbrd",
+      "gradeLevel": 4,
+      "standardCode": "CC.1.3.4.A",
+      "skill": "Theme",
+      "qualityScore": 92,
+      "heroResourceLinkId": "cmpcylwfl0002fi7u902eprmw"
+    },
+    {
+      "id": "cmpdi436p00edevu9qj8qbl4v",
+      "gradeLevel": 4,
+      "standardCode": "CC.1.3.4.C",
+      "skill": "Compare Characters",
+      "qualityScore": 92,
+      "heroResourceLinkId": "cmp4dxtzo003kq9huxmpc4nwz"
+    },
+    {
+      "id": "cmpdi5a0y00elevu98ni5vpa6",
+      "gradeLevel": 4,
+      "standardCode": "CC.1.3.4.C",
+      "skill": "Plot Elements",
+      "qualityScore": 88,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdi8kps00etevu9e5xap1kx",
+      "gradeLevel": 4,
+      "standardCode": "CC.1.3.4.D",
+      "skill": "Point of View",
+      "qualityScore": 92,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdibiyu00f1evu9w0ber6ec",
+      "gradeLevel": 4,
+      "standardCode": "CC.1.3.4.E",
+      "skill": "Rhyme Scheme and Poetry Elements",
+      "qualityScore": 88,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdid0ed00fdevu9ztkt8ejr",
+      "gradeLevel": 4,
+      "standardCode": "CC.1.3.4.F",
+      "skill": "Allusion Meaning",
+      "qualityScore": 92,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdie6nd00fqevu9h7ooi2ft",
+      "gradeLevel": 4,
+      "standardCode": "CC.1.3.4.F",
+      "skill": "Connotation and Figurative Language",
+      "qualityScore": 92,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdijwpx00gaevu9kg2tawq6",
+      "gradeLevel": 4,
+      "standardCode": "CC.1.3.4.F",
+      "skill": "Sensory Details",
+      "qualityScore": 92,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdii6m500g2evu9v5z7faq3",
+      "gradeLevel": 4,
+      "standardCode": "CC.1.3.4.F",
+      "skill": "Similes and Metaphors",
+      "qualityScore": 92,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdillv200gkevu9hbeud3qu",
+      "gradeLevel": 4,
+      "standardCode": "CC.1.4.4.A",
+      "skill": "Summarizing Stories",
+      "qualityScore": 88,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdio2v800h0evu9lu9ndp41",
+      "gradeLevel": 4,
+      "standardCode": "CC.1.4.4.C",
+      "skill": "Transitions and Linking Words",
+      "qualityScore": 92,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdiswsi00hwevu91ig9arf8",
+      "gradeLevel": 4,
+      "standardCode": "CC.1.4.4.G",
+      "skill": "Supporting Reasons",
+      "qualityScore": 92,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdix3ca00ieevu93foszdc7",
+      "gradeLevel": 4,
+      "standardCode": "CC.1.4.4.S",
+      "skill": "TDA Evidence and Explanation",
+      "qualityScore": 88,
+      "heroResourceLinkId": "cmpcylwky0008fi7unl5zsfag"
+    },
+    {
+      "id": "cmpdixewz00imevu9suq29iqw",
+      "gradeLevel": 5,
+      "standardCode": "CC.1.1.5.D",
+      "skill": "Greek and Latin Roots",
+      "qualityScore": 92,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdj01xo00iuevu9izx8k7y1",
+      "gradeLevel": 5,
+      "standardCode": "CC.1.1.5.E",
+      "skill": "Affixes in Academic Vocabulary",
+      "qualityScore": 92,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdj1ix500j7evu9zr5yunga",
+      "gradeLevel": 5,
+      "standardCode": "CC.1.1.5.E",
+      "skill": "Fluency for Comprehension",
+      "qualityScore": 92,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdj50cw00jievu9ntghh2es",
+      "gradeLevel": 5,
+      "standardCode": "CC.1.2.5.A",
+      "skill": "Main Idea",
+      "qualityScore": 92,
+      "heroResourceLinkId": "cmpcxj2bm003de859aed6chbd"
+    },
+    {
+      "id": "cmpdj5q6m00jqevu9qdtztwdw",
+      "gradeLevel": 5,
+      "standardCode": "CC.1.2.5.B",
+      "skill": "Inference",
+      "qualityScore": 92,
+      "heroResourceLinkId": "cmpcxj2aq003ce859zsv3g0no"
+    },
+    {
+      "id": "cmpdja62n00kcevu95i3mk73e",
+      "gradeLevel": 5,
+      "standardCode": "CC.1.2.5.B",
+      "skill": "Text Evidence",
+      "qualityScore": 92,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdj9vr600k4evu9dq98qlfl",
+      "gradeLevel": 5,
+      "standardCode": "CC.1.2.5.D",
+      "skill": "Multiple Accounts of the Same Event",
+      "qualityScore": 92,
+      "heroResourceLinkId": "cmp4fwaqj005pg3sa4nqumgwq"
+    },
+    {
+      "id": "cmpdjhkxi00l2evu94t0y8mor",
+      "gradeLevel": 5,
+      "standardCode": "CC.1.2.5.E",
+      "skill": "Chronology and Sequence Text Structure",
+      "qualityScore": 92,
+      "heroResourceLinkId": "cmpcxj1of002ne859xmzstf6c"
+    },
+    {
+      "id": "cmpdjez5k00kpevu91xq22rwd",
+      "gradeLevel": 5,
+      "standardCode": "CC.1.2.5.F",
+      "skill": "Academic and Domain-Specific Vocabulary",
+      "qualityScore": 92,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdjkgeo00lievu9ok63uz47",
+      "gradeLevel": 5,
+      "standardCode": "CC.1.2.5.F",
+      "skill": "Analogies and Word Relationships",
+      "qualityScore": 88,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdjk9h000laevu9jego1yoz",
+      "gradeLevel": 5,
+      "standardCode": "CC.1.2.5.F",
+      "skill": "Greek and Latin Affixes and Roots",
+      "qualityScore": 92,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdjovhx00lvevu9o9spwc6q",
+      "gradeLevel": 5,
+      "standardCode": "CC.1.2.5.G",
+      "skill": "Reasons and Evidence in Arguments",
+      "qualityScore": 92,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdjp0sg00m3evu9tkxbxwug",
+      "gradeLevel": 5,
+      "standardCode": "CC.1.2.5.I",
+      "skill": "Integrating Information from Sources",
+      "qualityScore": 88,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdjtbbo00mlevu9enr8byga",
+      "gradeLevel": 5,
+      "standardCode": "CC.1.3.5.A",
+      "skill": "Theme",
+      "qualityScore": 92,
+      "heroResourceLinkId": "cmpcxj0sl001ne859hmezhkgw"
+    },
+    {
+      "id": "cmpdjtj3o00mtevu9o263edmr",
+      "gradeLevel": 5,
+      "standardCode": "CC.1.3.5.C",
+      "skill": "Character Response and Plot",
+      "qualityScore": 92,
+      "heroResourceLinkId": "cmpcxj0xu001te8595tdafw6l"
+    },
+    {
+      "id": "cmpdjy2zi00naevu9av8fdpd2",
+      "gradeLevel": 5,
+      "standardCode": "CC.1.3.5.D",
+      "skill": "Point of View",
+      "qualityScore": 92,
+      "heroResourceLinkId": "cmpcxj1wj002we85990xwnds1"
+    },
+    {
+      "id": "cmpdjyhek00nievu9j1rvl9io",
+      "gradeLevel": 5,
+      "standardCode": "CC.1.3.5.E",
+      "skill": "Story Structure and Chapters",
+      "qualityScore": 92,
+      "heroResourceLinkId": "cmpcxj0te001oe859fl06ocvq"
+    },
+    {
+      "id": "cmpdqxir80002es45p4gcsqlk",
+      "gradeLevel": 5,
+      "standardCode": "CC.1.3.5.F",
+      "skill": "Connotation and Figurative Language",
+      "qualityScore": 92,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdk17vx00nwevu9n6g3b65k",
+      "gradeLevel": 5,
+      "standardCode": "CC.1.3.5.F",
+      "skill": "Poetry Speaker and Tone",
+      "qualityScore": 92,
+      "heroResourceLinkId": "cmpcxj0uz001qe8591d891p03"
+    },
+    {
+      "id": "cmpdk5iju00ojevu943zwy1tm",
+      "gradeLevel": 5,
+      "standardCode": "CC.1.3.5.H",
+      "skill": "Compare Themes Across Stories",
+      "qualityScore": 92,
+      "heroResourceLinkId": "cmpcxj1pb002oe8599ez8xx7z"
+    },
+    {
+      "id": "cmpdkbsrq00pcevu9o175yfc5",
+      "gradeLevel": 5,
+      "standardCode": "CC.1.4.5.F",
+      "skill": "Formal and Informal Style",
+      "qualityScore": 92,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdkhiww00qaevu93zt0u0s8",
+      "gradeLevel": 5,
+      "standardCode": "CC.1.4.5.G",
+      "skill": "Opinion Essay Organization",
+      "qualityScore": 92,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdkmxrk00r3evu9iafs2oto",
+      "gradeLevel": 5,
+      "standardCode": "CC.1.4.5.S",
+      "skill": "TDA Evidence and Explanation",
+      "qualityScore": 92,
+      "heroResourceLinkId": "cmpcxj29u003be859ija3ezan"
+    },
+    {
+      "id": "cmpdklgau00qvevu9onhou89r",
+      "gradeLevel": 6,
+      "standardCode": "CC.1.1.6.E",
+      "skill": "Morphological Analysis",
+      "qualityScore": 92,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdkpqwp00rgevu9x5qf3daw",
+      "gradeLevel": 6,
+      "standardCode": "CC.1.1.6.E",
+      "skill": "Reading Fluency",
+      "qualityScore": 92,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdkq71z00roevu90islneyp",
+      "gradeLevel": 6,
+      "standardCode": "CC.1.1.6.E",
+      "skill": "Word Origins",
+      "qualityScore": 92,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdkug6d00s6evu96gaij95v",
+      "gradeLevel": 6,
+      "standardCode": "CC.1.2.6.A",
+      "skill": "Central Idea Development",
+      "qualityScore": 92,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdkvdwd00seevu9uhnbiq9v",
+      "gradeLevel": 6,
+      "standardCode": "CC.1.2.6.A",
+      "skill": "Main Idea",
+      "qualityScore": 88,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdkyfnl00spevu98inu218g",
+      "gradeLevel": 6,
+      "standardCode": "CC.1.2.6.A",
+      "skill": "Objective Summary",
+      "qualityScore": 92,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdkztnq00t2evu911zhtoy9",
+      "gradeLevel": 6,
+      "standardCode": "CC.1.2.6.B",
+      "skill": "Inference",
+      "qualityScore": 92,
+      "heroResourceLinkId": "cmpcxj4oa0061e859s2q5otp5"
+    },
+    {
+      "id": "cmpdl2lpd00tcevu9k8pq4w4i",
+      "gradeLevel": 6,
+      "standardCode": "CC.1.2.6.B",
+      "skill": "Text Evidence",
+      "qualityScore": 92,
+      "heroResourceLinkId": "cmpcxj50q006fe8594gosxm75"
+    },
+    {
+      "id": "cmpdl4tel00tlevu9cl8zx5pw",
+      "gradeLevel": 6,
+      "standardCode": "CC.1.2.6.D",
+      "skill": "Author's Purpose and Point of View",
+      "qualityScore": 92,
+      "heroResourceLinkId": "cmpcxj4tr0067e859kbcaglnj"
+    },
+    {
+      "id": "cmpdl7ca100tyevu935r71png",
+      "gradeLevel": 6,
+      "standardCode": "CC.1.2.6.E",
+      "skill": "Text Structure and Author Organization",
+      "qualityScore": 88,
+      "heroResourceLinkId": "cmpcxj4h7005te859cgoge0k1"
+    },
+    {
+      "id": "cmpdl8ydo00u6evu9etp7qt32",
+      "gradeLevel": 6,
+      "standardCode": "CC.1.2.6.F",
+      "skill": "Technical Vocabulary in Context",
+      "qualityScore": 88,
+      "heroResourceLinkId": "cmpcyly8p0022fi7u02ca86yz"
+    },
+    {
+      "id": "cmpdlbjuf00ujevu9v3rwynp1",
+      "gradeLevel": 6,
+      "standardCode": "CC.1.2.6.F",
+      "skill": "Tone and Connotation",
+      "qualityScore": 92,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdldlmy00usevu9olw2a5s9",
+      "gradeLevel": 6,
+      "standardCode": "CC.1.2.6.G",
+      "skill": "Claims, Reasons, and Evidence",
+      "qualityScore": 92,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdlho4i00v2evu9xsy6kkqv",
+      "gradeLevel": 6,
+      "standardCode": "CC.1.2.6.I",
+      "skill": "Compare Text Presentations",
+      "qualityScore": 92,
+      "heroResourceLinkId": "cmpcxj4h7005te859cgoge0k1"
+    },
+    {
+      "id": "cmpdlkb9w00vcevu95d033ehp",
+      "gradeLevel": 6,
+      "standardCode": "CC.1.3.6.A",
+      "skill": "Theme",
+      "qualityScore": 92,
+      "heroResourceLinkId": "cmpcxj4um0068e8595v7p1d6g"
+    },
+    {
+      "id": "cmpdlpsjw00vlevu9e9fvdv3y",
+      "gradeLevel": 6,
+      "standardCode": "CC.1.3.6.A",
+      "skill": "Theme Development",
+      "qualityScore": 92,
+      "heroResourceLinkId": "cmpcxj4um0068e8595v7p1d6g"
+    },
+    {
+      "id": "cmpdlq62v00vtevu9szk9s8yr",
+      "gradeLevel": 6,
+      "standardCode": "CC.1.3.6.C",
+      "skill": "Character Change and Conflict",
+      "qualityScore": 92,
+      "heroResourceLinkId": "cmp4fw6k1003ng3sawrmmz7g6"
+    },
+    {
+      "id": "cmpdlulcl00wdevu9b1iewyb7",
+      "gradeLevel": 6,
+      "standardCode": "CC.1.3.6.C",
+      "skill": "Plot Development in Episodes",
+      "qualityScore": 92,
+      "heroResourceLinkId": "cmp4fw6k1003ng3sawrmmz7g6"
+    },
+    {
+      "id": "cmpdlsfwi00w4evu9g1q6o1a2",
+      "gradeLevel": 6,
+      "standardCode": "CC.1.3.6.D",
+      "skill": "Point of View",
+      "qualityScore": 92,
+      "heroResourceLinkId": "cmpcxj4tr0067e859kbcaglnj"
+    },
+    {
+      "id": "cmpdlxlnf00wpevu9g67bl85d",
+      "gradeLevel": 6,
+      "standardCode": "CC.1.3.6.E",
+      "skill": "Story Structure and Flashback",
+      "qualityScore": 92,
+      "heroResourceLinkId": "cmpcxj4h7005te859cgoge0k1"
+    },
+    {
+      "id": "cmpdlz5ik00wxevu9l87lwmwy",
+      "gradeLevel": 6,
+      "standardCode": "CC.1.3.6.F",
+      "skill": "Connotation and Figurative Language",
+      "qualityScore": 92,
+      "heroResourceLinkId": "cmpcxj4qz0064e859komzsnsy"
+    },
+    {
+      "id": "cmpdm0xwm00x5evu9wld8xp8n",
+      "gradeLevel": 6,
+      "standardCode": "CC.1.4.6.A",
+      "skill": "Informative Essay Organization",
+      "qualityScore": 92,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdm229u00xdevu9u7dmxptz",
+      "gradeLevel": 6,
+      "standardCode": "CC.1.4.6.F",
+      "skill": "Commas, Parentheses, and Dashes",
+      "qualityScore": 92,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdm5xsa00xtevu9tno0pj6v",
+      "gradeLevel": 6,
+      "standardCode": "CC.1.4.6.F",
+      "skill": "Pronoun Agreement and Shifts",
+      "qualityScore": 88,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdm7hfs00y1evu98f3efqpo",
+      "gradeLevel": 6,
+      "standardCode": "CC.1.4.6.F",
+      "skill": "Pronoun Case and Agreement",
+      "qualityScore": 92,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdm9r6u00y9evu91a1pnqzz",
+      "gradeLevel": 6,
+      "standardCode": "CC.1.4.6.F",
+      "skill": "Shifts in Pronoun Person and Number",
+      "qualityScore": 92,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdmaj1f00yievu9ui4dxure",
+      "gradeLevel": 6,
+      "standardCode": "CC.1.4.6.F",
+      "skill": "Varying Sentence Patterns",
+      "qualityScore": 92,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdmdumb00yzevu9rvm0arnd",
+      "gradeLevel": 6,
+      "standardCode": "CC.1.4.6.G",
+      "skill": "Argument Essay Evidence",
+      "qualityScore": 92,
+      "heroResourceLinkId": "cmpcxj4q30063e859xts6l8tf"
+    },
+    {
+      "id": "cmpdmeaxw00z7evu9n5yzuzdh",
+      "gradeLevel": 6,
+      "standardCode": "CC.1.4.6.S",
+      "skill": "TDA Evidence and Explanation",
+      "qualityScore": 92,
+      "heroResourceLinkId": "cmpcxj50q006fe8594gosxm75"
+    },
+    {
+      "id": "cmpdmhj0500zgevu9bu6ocm3k",
+      "gradeLevel": 7,
+      "standardCode": "CC.1.1.7.E",
+      "skill": "Domain-Specific Vocabulary Morphology",
+      "qualityScore": 92,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdmlk6r0101evu9x7yib8oo",
+      "gradeLevel": 7,
+      "standardCode": "CC.1.1.7.E",
+      "skill": "Etymology and Word Study",
+      "qualityScore": 92,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdmqdnz010pevu94j9g8iu1",
+      "gradeLevel": 7,
+      "standardCode": "CC.1.2.7.A",
+      "skill": "Central Idea Across Sections",
+      "qualityScore": 88,
+      "heroResourceLinkId": "cmp5ki5fq000i6her3w6sh71t"
+    },
+    {
+      "id": "cmpdmq10y010hevu9spinmfoh",
+      "gradeLevel": 7,
+      "standardCode": "CC.1.2.7.A",
+      "skill": "Main Idea",
+      "qualityScore": 75,
+      "heroResourceLinkId": "cmp5ki5fq000i6her3w6sh71t"
+    },
+    {
+      "id": "cmpdmurek0118evu9j5ct4z2y",
+      "gradeLevel": 7,
+      "standardCode": "CC.1.2.7.B",
+      "skill": "Inference",
+      "qualityScore": 88,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdmtkel010xevu9h5hnqy7c",
+      "gradeLevel": 7,
+      "standardCode": "CC.1.2.7.B",
+      "skill": "Text Evidence",
+      "qualityScore": 92,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdmxkrt011gevu9lgkrwzj8",
+      "gradeLevel": 7,
+      "standardCode": "CC.1.2.7.D",
+      "skill": "Author Purpose and Rhetorical Choices",
+      "qualityScore": 92,
+      "heroResourceLinkId": "cmp5ki9so002b6herrcatfpz4"
+    },
+    {
+      "id": "cmpdmyk49011sevu9shm2qp3s",
+      "gradeLevel": 7,
+      "standardCode": "CC.1.2.7.E",
+      "skill": "Data and Visual Information",
+      "qualityScore": 92,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdn2k4r0120evu9e0u3rx6y",
+      "gradeLevel": 7,
+      "standardCode": "CC.1.2.7.E",
+      "skill": "Text Structure Effects",
+      "qualityScore": 88,
+      "heroResourceLinkId": "cmp5ki4et00026hero1c9na33"
+    },
+    {
+      "id": "cmpdn2wdv0128evu985jqquxc",
+      "gradeLevel": 7,
+      "standardCode": "CC.1.2.7.F",
+      "skill": "Precise Academic Vocabulary",
+      "qualityScore": 92,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdn756z012oevu91hvv2l0h",
+      "gradeLevel": 7,
+      "standardCode": "CC.1.2.7.G",
+      "skill": "Argument Claim Strength",
+      "qualityScore": 92,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdn6y8o012gevu928lq7woo",
+      "gradeLevel": 7,
+      "standardCode": "CC.1.2.7.I",
+      "skill": "Compare Authors on the Same Topic",
+      "qualityScore": 88,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdr5mjm000ies455h6l2m6y",
+      "gradeLevel": 7,
+      "standardCode": "CC.1.3.7.A",
+      "skill": "Theme",
+      "qualityScore": 92,
+      "heroResourceLinkId": "cmp5ki4xf000a6heryd4o5k5i"
+    },
+    {
+      "id": "cmpdnawxp0132evu9421t2kdi",
+      "gradeLevel": 7,
+      "standardCode": "CC.1.3.7.C",
+      "skill": "Character Motivation and Theme",
+      "qualityScore": 92,
+      "heroResourceLinkId": "cmp5ki4xf000a6heryd4o5k5i"
+    },
+    {
+      "id": "cmpdr7uap000ves45o6w35qba",
+      "gradeLevel": 7,
+      "standardCode": "CC.1.3.7.C",
+      "skill": "Plot Lines and Conflict Development",
+      "qualityScore": 92,
+      "heroResourceLinkId": "cmp5ki543000d6hery5ntrigm"
+    },
+    {
+      "id": "cmpdnfrkl013kevu9alffqe61",
+      "gradeLevel": 7,
+      "standardCode": "CC.1.3.7.D",
+      "skill": "Narrator Reliability and Perspective",
+      "qualityScore": 92,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdnfohx013cevu9qi18uk0t",
+      "gradeLevel": 7,
+      "standardCode": "CC.1.3.7.D",
+      "skill": "Point of View",
+      "qualityScore": 92,
+      "heroResourceLinkId": "cmp5ki5b0000g6herugxfofld"
+    },
+    {
+      "id": "cmpdraxs00018es456aypnpx3",
+      "gradeLevel": 7,
+      "standardCode": "CC.1.3.7.E",
+      "skill": "Poetry Structure and Meaning",
+      "qualityScore": 92,
+      "heroResourceLinkId": "cmp5ki9ej00256herve751uw8"
+    },
+    {
+      "id": "cmpdrcx02001les451zrqsm0o",
+      "gradeLevel": 7,
+      "standardCode": "CC.1.3.7.F",
+      "skill": "Connotation and Figurative Language",
+      "qualityScore": 92,
+      "heroResourceLinkId": "cmp5ki76800186herxkfi9imk"
+    },
+    {
+      "id": "cmpdrg64e001yes45nah75zki",
+      "gradeLevel": 7,
+      "standardCode": "CC.1.3.7.F",
+      "skill": "Mood, Tone, and Word Choice",
+      "qualityScore": 92,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdrgnnq0026es45b2sfw0z9",
+      "gradeLevel": 7,
+      "standardCode": "CC.1.4.7.A",
+      "skill": "Informative Writing with Transitions",
+      "qualityScore": 92,
+      "heroResourceLinkId": "cmp5ki96s00226her8swwyrzr"
+    },
+    {
+      "id": "cmpdrmsl00031es45m2wz2v99",
+      "gradeLevel": 7,
+      "standardCode": "CC.1.4.7.F",
+      "skill": "Formal Style and Precise Language",
+      "qualityScore": 92,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdrm51w002tes45uqe05i0h",
+      "gradeLevel": 7,
+      "standardCode": "CC.1.4.7.F",
+      "skill": "Formal and Informal Style",
+      "qualityScore": 92,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdrqfxf003hes45dl70s9qu",
+      "gradeLevel": 7,
+      "standardCode": "CC.1.4.7.F",
+      "skill": "Misplaced and Dangling Modifiers",
+      "qualityScore": 92,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdrt2ns003pes45axpwxi5b",
+      "gradeLevel": 7,
+      "standardCode": "CC.1.4.7.G",
+      "skill": "Argument Counterclaim Response",
+      "qualityScore": 92,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdrxi4u004des45g4827yja",
+      "gradeLevel": 7,
+      "standardCode": "CC.1.4.7.S",
+      "skill": "TDA Evidence and Explanation",
+      "qualityScore": 92,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpds1rq1004qes458ueo06yl",
+      "gradeLevel": 8,
+      "standardCode": "CC.1.1.8.E",
+      "skill": "Advanced Word Analysis",
+      "qualityScore": 88,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpds2q7q004yes458pm7m1ob",
+      "gradeLevel": 8,
+      "standardCode": "CC.1.1.8.E",
+      "skill": "Connotation Through Word Structure",
+      "qualityScore": 92,
+      "heroResourceLinkId": "cmp4fwa5n005fg3sabbgwqfqq"
+    },
+    {
+      "id": "cmpds9vvd005jes453b6w2xcy",
+      "gradeLevel": 8,
+      "standardCode": "CC.1.2.8.A",
+      "skill": "Main Idea",
+      "qualityScore": 88,
+      "heroResourceLinkId": "cmpcxj3ca004je859chrzk4pv"
+    },
+    {
+      "id": "cmpds8ny0005bes45uzecfgra",
+      "gradeLevel": 8,
+      "standardCode": "CC.1.2.8.A",
+      "skill": "Multiple Central Ideas",
+      "qualityScore": 92,
+      "heroResourceLinkId": "cmpcxj3m6004ue8593snom9nw"
+    },
+    {
+      "id": "cmpdsezgq005wes45e60xpxwf",
+      "gradeLevel": 8,
+      "standardCode": "CC.1.2.8.B",
+      "skill": "Inference",
+      "qualityScore": 88,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdsfj5z0064es45riauv7ez",
+      "gradeLevel": 8,
+      "standardCode": "CC.1.2.8.B",
+      "skill": "Text Evidence",
+      "qualityScore": 92,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdsm05h006les45dbx0miny",
+      "gradeLevel": 8,
+      "standardCode": "CC.1.2.8.D",
+      "skill": "Author Perspective and Bias",
+      "qualityScore": 88,
+      "heroResourceLinkId": "cmpcxj3d6004ke859n67l6c0a"
+    },
+    {
+      "id": "cmpdsl5ti006des459upxtlim",
+      "gradeLevel": 8,
+      "standardCode": "CC.1.2.8.E",
+      "skill": "Compare Text Structures",
+      "qualityScore": 88,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdsqtg0006yes45f93a94ql",
+      "gradeLevel": 8,
+      "standardCode": "CC.1.2.8.E",
+      "skill": "Visual and Quantitative Evidence",
+      "qualityScore": 88,
+      "heroResourceLinkId": "cmpcxj3ta0052e859ht65zwqs"
+    },
+    {
+      "id": "cmpdsr0gj0076es45ogfn7m4a",
+      "gradeLevel": 8,
+      "standardCode": "CC.1.2.8.G",
+      "skill": "Logical Fallacies and Appeals",
+      "qualityScore": 92,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdsxgll007mes45pd6col7t",
+      "gradeLevel": 8,
+      "standardCode": "CC.1.2.8.G",
+      "skill": "Trace and Evaluate Arguments",
+      "qualityScore": 92,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdsvcwm007ees456x3aqfcu",
+      "gradeLevel": 8,
+      "standardCode": "CC.1.2.8.I",
+      "skill": "Conflicting Information Across Texts",
+      "qualityScore": 92,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdt2374007yes45do5jjccj",
+      "gradeLevel": 8,
+      "standardCode": "CC.1.3.8.A",
+      "skill": "Multiple Themes in Literature",
+      "qualityScore": 92,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdt33r40086es45i2hx9gz5",
+      "gradeLevel": 8,
+      "standardCode": "CC.1.3.8.A",
+      "skill": "Theme",
+      "qualityScore": 92,
+      "heroResourceLinkId": "cmpcxj37v004ee85978rbncz0"
+    },
+    {
+      "id": "cmpdt9xt5008oes45lld5j8ib",
+      "gradeLevel": 8,
+      "standardCode": "CC.1.3.8.C",
+      "skill": "Dialogue and Characterization",
+      "qualityScore": 92,
+      "heroResourceLinkId": "cmp4fw9lz0055g3sa49outb16"
+    },
+    {
+      "id": "cmpdt9btz008ges45o0h9shfu",
+      "gradeLevel": 8,
+      "standardCode": "CC.1.3.8.C",
+      "skill": "Dramatic Irony and Suspense",
+      "qualityScore": 92,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdtgt4j009ces45flvdiw7p",
+      "gradeLevel": 8,
+      "standardCode": "CC.1.3.8.D",
+      "skill": "Point of View",
+      "qualityScore": 92,
+      "heroResourceLinkId": "cmpcxj36y004de85900w2zavt"
+    },
+    {
+      "id": "cmpdtfb640094es459thxsnzj",
+      "gradeLevel": 8,
+      "standardCode": "CC.1.3.8.F",
+      "skill": "Connotation and Figurative Language",
+      "qualityScore": 92,
+      "heroResourceLinkId": "cmp4fwa5n005fg3sabbgwqfqq"
+    },
+    {
+      "id": "cmpdtnbsf009nes45u4w4vz7z",
+      "gradeLevel": 8,
+      "standardCode": "CC.1.3.8.F",
+      "skill": "Figurative Language Effect",
+      "qualityScore": 92,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdtpwmz00a0es45czh5rfgk",
+      "gradeLevel": 8,
+      "standardCode": "CC.1.3.8.H",
+      "skill": "Compare Genres on Similar Themes",
+      "qualityScore": 88,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdtri4z00a8es450ep4u8gq",
+      "gradeLevel": 8,
+      "standardCode": "CC.1.4.8.A",
+      "skill": "Informative Synthesis Writing",
+      "qualityScore": 92,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdtw12r00aoes45flc1te0a",
+      "gradeLevel": 8,
+      "standardCode": "CC.1.4.8.F",
+      "skill": "Formal Academic Style",
+      "qualityScore": 92,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdtyiwy00b4es45hy6zgpak",
+      "gradeLevel": 8,
+      "standardCode": "CC.1.4.8.F",
+      "skill": "Formal and Informal Style",
+      "qualityScore": 88,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdu0yst00bhes45jqiyjonu",
+      "gradeLevel": 8,
+      "standardCode": "CC.1.4.8.F",
+      "skill": "Verb Moods and Voice",
+      "qualityScore": 92,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdu4xtv00bues4512yda0la",
+      "gradeLevel": 8,
+      "standardCode": "CC.1.4.8.G",
+      "skill": "Argument with Counterclaims and Evidence",
+      "qualityScore": 88,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdu85qu00c7es45er2w1r62",
+      "gradeLevel": 8,
+      "standardCode": "CC.1.4.8.S",
+      "skill": "TDA Evidence and Explanation",
+      "qualityScore": 92,
+      "heroResourceLinkId": null
+    },
+    {
+      "id": "cmpdu9nlm00cfes45m3bscx8k",
+      "gradeLevel": 8,
+      "standardCode": "CC.1.4.8.V",
+      "skill": "Research Source Credibility",
+      "qualityScore": 92,
+      "heroResourceLinkId": null
+    }
+  ],
+  "failures": []
+}

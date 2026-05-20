@@ -99,6 +99,10 @@ export async function generateLessonV2(input: GenerateLessonV2Input): Promise<Ge
   }
 
   if (!lastLesson) throw new Error("Lesson V2 generation failed before producing a draft.");
+  const hardIssues = lastValidationIssues.filter(isHardValidationIssue);
+  if (hardIssues.length) {
+    throw new Error(`Lesson V2 generation failed strict validation after 5 iterations: ${hardIssues.slice(0, 5).join("; ")}`);
+  }
   return {
     lesson: {
       ...lastLesson,
@@ -318,9 +322,11 @@ function buildSystemPrompt(input: GenerateLessonV2Input, plannedTeiTypes: string
     "Wrong-answer design: Each wrong answer must be a plausible misreading a real student would make, not an obviously absurd option.",
     "Rationales: For each wrong answer, explain why a student might pick it and why it is wrong. For reading items, cite the passage.",
     "Passage budget: include full passage text on only 2-3 practice questions total. For all other practice questions, set passage to null and make the item test the same skill without another full passage. Passage-dependent TEI types (hot-text-phrase, evidence-mapping, two-part-ebsr) must include a passage.",
+    "CRITICAL: Practice passages must read like authentic encyclopedic, narrative, or expository prose. NEVER include meta-pedagogical phrases like 'this passage gives another clear detail,' 'students can use this detail,' 'compare choices,' 'explain why one choice is stronger,' or any other rubric/critic language. Passages are for students to read, not for teachers. If you find yourself writing about the lesson, stop and write only about the topic itself.",
     "Reading passages must be original, grade appropriate, and complete. Any item with a passage field must include a full standalone passage: 170-240 words for grades 3-5 or 275-360 words for grades 6-8. Use short, clear sentences for the grade level. Keep passages near the lower end of the range so the JSON response remains complete. Do not use 2-4 sentence mini-passages in passage fields.",
     "Mapping formats: for drag-drop-table, correctMapping is an array of { item, column } entries. For evidence-mapping, correctMapping is an array of { claim, evidenceItems } entries. Include one mapping entry for every draggable item or claim.",
     "TEI shape rule: inline-dropdown sentences must contain exactly one [BLANK] at the blank location and no empty [ ] placeholders. hot-text-word is ONLY for a bracket with exactly 2 choices, formatted like [ walks / walk ]. Each bracket must contain exactly two options separated by a single forward slash, and bracketPairs must have one entry per bracket. For blanks with 3 or more choices, use inline-dropdown instead. 3+ options -> inline-dropdown always.",
+    "Hot-text-phrase integrity: every selectablePhrases entry must appear in the passage text after normal punctuation is removed. Do not invent labels, summaries, or paraphrases as selectable phrases. Use exact short phrases copied from the passage.",
     "TEI selection guidance:",
     "Conventions (CC.1.4.x.F/G): subject-verb agreement and verb tense -> inline-dropdown when choosing among 3+ verb forms, hot-text-word only for a 2-choice pair; spelling and word choice -> hot-text-word only for 2-choice pairs, inline-dropdown for 3+ options; sentence structure and fragments -> hot-text-sentence; capitalization and punctuation -> inline-dropdown or 2-choice hot-text-word.",
     "Comprehension (CC.1.2.x, CC.1.3.x): main/central idea -> evidence-mapping or drag-drop-table; theme/character -> MC or two-part-ebsr; author purpose/craft -> MC or hot-text-sentence; compare/contrast -> drag-drop-table; inference/evidence -> two-part-ebsr or evidence-mapping; vocabulary in context -> hot-text-phrase; plot sequencing -> drag-drop-order.",
@@ -431,7 +437,7 @@ function repairLessonV2(lesson: LessonV2, input: GenerateLessonV2Input, plannedT
 
   const seenTei = new Set<string>();
   for (const section of practiceSections) {
-    repaired[section] = repaired[section].map((question) => repairQuestion(question, input.gradeLevel));
+    repaired[section] = repaired[section].map((question) => repairQuestion(question, input));
     for (const question of repaired[section]) if (question.type !== "mc") seenTei.add(question.type);
   }
   if (seenTei.size < 2) {
@@ -442,9 +448,9 @@ function repairLessonV2(lesson: LessonV2, input: GenerateLessonV2Input, plannedT
   return repaired;
 }
 
-function repairQuestion(question: PracticeQuestionV2, gradeLevel: number): PracticeQuestionV2 {
+function repairQuestion(question: PracticeQuestionV2, input: GenerateLessonV2Input): PracticeQuestionV2 {
   const repaired: any = { ...question };
-  if (typeof repaired.passage === "string") repaired.passage = fitPassageToSchema(expandPassage(repaired.passage, gradeLevel));
+  if (typeof repaired.passage === "string") repaired.passage = fitPassageToSchema(expandPassage(repaired.passage, input));
   if (repaired.type === "mc") {
     const wrongChoices = repaired.choices.filter((choice: string) => choice !== repaired.correctAnswer);
     repaired.distractorRationale = wrongChoices.map((choice: string) => {
@@ -465,19 +471,22 @@ function repairQuestion(question: PracticeQuestionV2, gradeLevel: number): Pract
     repaired.sentence = `${repaired.sentence.replace(/[.?!]?$/, "")} [ ${pair[0]} / ${pair[1]} ].`;
   }
   if (repaired.type === "hot-text-sentence" && !/\(\s*1\s*\)/.test(repaired.paragraph)) {
-    repaired.paragraph = `(1) ${repaired.paragraph} (2) This sentence gives another clue about the same idea. (3) This sentence helps students decide which detail matters most.`;
+    repaired.paragraph = `(1) ${repaired.paragraph} (2) A later sentence adds a concrete example connected to the same idea. (3) The final sentence shows how the idea changes the topic or character.`;
     repaired.sentenceCount = Math.max(3, repaired.sentenceCount || 3);
     repaired.correctSentenceNumber = Math.min(repaired.correctSentenceNumber || 1, repaired.sentenceCount);
   }
   if (repaired.type === "evidence-mapping") {
-    repaired.passage = expandPassage(repaired.passage || "", gradeLevel);
+    repaired.passage = expandPassage(repaired.passage || "", input);
     repaired.correctMapping = repaired.claims.map((claim: string) => {
       const existing = repaired.correctMapping?.find((entry: any) => entry.claim === claim);
       return existing?.evidenceItems?.length ? existing : { claim, evidenceItems: [repaired.evidenceItems[0]] };
     });
   }
   if (repaired.type === "hot-text-phrase" || repaired.type === "two-part-ebsr") {
-    repaired.passage = expandPassage(repaired.passage || "", gradeLevel);
+    repaired.passage = expandPassage(repaired.passage || "", input);
+  }
+  if (repaired.type === "hot-text-phrase") {
+    repairHotTextPhrase(repaired);
   }
   return repaired;
 }
@@ -488,12 +497,102 @@ function ensureWords(text: string, minWords: number, addition: string) {
   return result;
 }
 
-function expandPassage(text: string, gradeLevel: number) {
-  let result = text || "Students read a short passage about a classroom project. The passage gives details that help answer the question.";
-  const addition = " The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.";
-  const minWords = gradeLevel <= 5 ? 150 : 250;
-  while (wordCount(result) < minWords) result = `${result.trim()}${addition}`;
+function expandPassage(text: string, input: GenerateLessonV2Input) {
+  let result = cleanPassageText(text || fallbackPassage(input));
+  const additions = authenticPassageExtensions(input);
+  const minWords = input.gradeLevel <= 5 ? 150 : 250;
+  let index = 0;
+  while (wordCount(result) < minWords) {
+    result = `${result.trim()}${additions[index % additions.length]}`;
+    index += 1;
+  }
   return fitPassageToSchema(result);
+}
+
+function cleanPassageText(text: string) {
+  return text
+    .replace(/The passage gives another clear detail in simple language\.?/gi, "")
+    .replace(/Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another\.?/gi, "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function fallbackPassage(input: GenerateLessonV2Input) {
+  if (input.standardCode.startsWith("CC.1.3.")) {
+    return "Maya paused at the edge of the stage while the curtains trembled behind her. The auditorium lights made the first row look distant, but she could still see her brother holding up a small paper star. She remembered the afternoon when she almost quit rehearsals after forgetting every line. Her teacher had asked her to read one sentence at a time until the scene felt familiar. Now Maya breathed slowly, stepped forward, and began with a clear voice.";
+  }
+  if (input.standardCode.startsWith("CC.1.4.")) {
+    return "The school garden committee met after lunch to revise a short announcement for families. Their first draft sounded rushed, so Jalen read each sentence aloud and marked places where the wording was unclear. The group changed weak verbs, added precise details about the planting schedule, and checked that each sentence followed the same formal style. By the end of the meeting, the announcement sounded organized and ready to send.";
+  }
+  return "A coastal town installed new signs along the marsh trail after a spring storm washed sand over the boardwalk. The signs explain how marsh grass holds soil in place, slows floodwater, and gives small animals a protected place to nest. Volunteers also marked safe walking areas so visitors would not damage the roots. Within a year, the trail was easier to follow and the marsh looked healthier.";
+}
+
+function authenticPassageExtensions(input: GenerateLessonV2Input) {
+  if (input.standardCode.startsWith("CC.1.3.")) {
+    return [
+      " The scene grows quieter as the character notices small sounds and gestures that reveal how nervous she feels.",
+      " A memory from earlier in the week explains why the moment matters and why the decision feels difficult.",
+      " By the end, the character acts with more confidence, showing a change that the reader can trace through her choices.",
+    ];
+  }
+  if (input.standardCode.startsWith("CC.1.4.")) {
+    return [
+      " The writers compare two versions of the same sentence and choose the one that sounds clearer and more precise.",
+      " They revise the draft again, paying attention to word choice, sentence flow, and the way each detail supports the purpose.",
+      " The final version keeps a consistent tone and gives readers enough information to understand the message.",
+    ];
+  }
+  return [
+    " Researchers observed the area over several weeks and recorded changes in water level, plant growth, and foot traffic.",
+    " Their notes showed that a small change in one part of the environment could affect the whole trail system.",
+    " The town used the information to plan repairs that protected both visitors and the natural habitat.",
+  ];
+}
+
+function repairHotTextPhrase(question: any) {
+  const passage = question.passage || "";
+  const desiredCount = Math.max(4, question.selectablePhrases?.length || 4);
+  const candidates = extractPassagePhrases(passage, desiredCount + 3);
+  const repairedSelectable: string[] = [];
+  for (const phrase of question.selectablePhrases || []) {
+    if (normalizedPhrase(passage).includes(normalizedPhrase(phrase))) repairedSelectable.push(phrase);
+  }
+  for (const phrase of candidates) {
+    if (repairedSelectable.length >= desiredCount) break;
+    if (!repairedSelectable.some((existing) => normalizedPhrase(existing) === normalizedPhrase(phrase))) {
+      repairedSelectable.push(phrase);
+    }
+  }
+  question.selectablePhrases = repairedSelectable.slice(0, desiredCount);
+  const existingCorrect = (question.correctPhrases || []).filter((phrase: string) =>
+    question.selectablePhrases.some((selectable: string) => normalizedPhrase(selectable) === normalizedPhrase(phrase)),
+  );
+  const correctCount = Math.max(1, Math.min(question.maxSelect || 2, question.selectablePhrases.length, existingCorrect.length || 2));
+  question.correctPhrases = (existingCorrect.length ? existingCorrect : question.selectablePhrases).slice(0, correctCount);
+  question.minSelect = Math.max(1, Math.min(question.minSelect || correctCount, question.correctPhrases.length));
+  question.maxSelect = Math.max(question.minSelect, Math.min(question.maxSelect || question.correctPhrases.length, question.selectablePhrases.length));
+}
+
+function extractPassagePhrases(passage: string, limit: number) {
+  const words = passage
+    .replace(/[“”]/g, "\"")
+    .replace(/[‘’]/g, "'")
+    .split(/\s+/)
+    .map((word) => word.replace(/^[^A-Za-z0-9]+|[^A-Za-z0-9]+$/g, ""))
+    .filter((word) => word.length > 0);
+  const phrases: string[] = [];
+  for (let index = 0; index < words.length - 2 && phrases.length < limit; index += 3) {
+    const phrase = words.slice(index, index + 3).join(" ");
+    const normalized = normalizedPhrase(phrase);
+    if (phrase.length >= 8 && normalizedPhrase(passage).includes(normalized) && !phrases.some((existing) => normalizedPhrase(existing) === normalized)) {
+      phrases.push(phrase);
+    }
+  }
+  return phrases;
+}
+
+function normalizedPhrase(value: string) {
+  return value.toLowerCase().replace(/[^a-z0-9]+/g, " ").replace(/\s+/g, " ").trim();
 }
 
 function normalizeInlineDropdownSentence(sentence: string, correctOption: string) {
@@ -565,12 +664,17 @@ function buildReplacementTei(type: string, input: GenerateLessonV2Input): Practi
 function calculateQualityScore(critic: LessonV2CriticResult, validationIssues: string[]) {
   const structuralIssueCount = validationIssues.filter((issue) => !issue.includes("FK grade")).length;
   const validationBasedScore = Math.max(75, 92 - structuralIssueCount * 4);
-  return Math.max(0, Math.min(100, Math.max(critic.score, validationBasedScore)));
+  const score = validationIssues.length ? Math.min(critic.score, validationBasedScore) : critic.score;
+  return Math.max(0, Math.min(100, score));
 }
 
 function isStructuralRevision(revision: { issue: string; suggestion: string }) {
   const text = `${revision.issue} ${revision.suggestion}`.toLowerCase();
   return /missing|\[blank\]|bracket|passage-dependent|evidence per claim|selectable|duplicate risk|tei variety|correct answer|mapping/.test(text);
+}
+
+function isHardValidationIssue(issue: string) {
+  return /forbidden pedagogical meta-language|hot-text-phrase selectable phrase|duplicate risk/i.test(issue);
 }
 
 async function withOpenAiRetry<T>(operation: () => Promise<T>): Promise<T> {

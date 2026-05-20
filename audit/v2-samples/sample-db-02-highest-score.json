@@ -1,248 +1,247 @@
 {
   "lesson": {
-    "hook": "Have you ever come across a long word and felt stuck? Imagine trying to read a word like 'unbelievable' for the first time. It seems tricky, but breaking it down into smaller parts can make it much easier. Today, we'll learn how to tackle big words by understanding their parts. This skill will help you read faster and understand more.",
-    "skill": "Multisyllable Word Parts",
-    "title": "Decoding Multisyllable Words",
+    "hook": "Imagine a poem as a puzzle. Each line is a piece, and when you put them together, they create a beautiful picture. Just like a puzzle, each piece has its place and purpose. Today, we’re going to explore how poets use lines and stanzas to build their poetic masterpieces. Let's dive into the world of poetry and discover the magic behind these building blocks!",
+    "skill": "Poetry Lines and Stanzas",
+    "title": "Understanding Poetry: Lines and Stanzas",
     "exitTicket": [
       {
         "type": "inline-dropdown",
         "passage": null,
-        "question": "Choose the correct prefix to complete the word: [BLANK]possible.",
-        "sentence": "[BLANK]possible",
-        "coachHint": "Think about what prefix makes the word mean 'not possible.'",
-        "correctOption": "im",
+        "question": "Choose the option that best completes the sentence for Poetry Lines and Stanzas.",
+        "sentence": "A strong answer uses [BLANK] to prove the idea.",
+        "coachHint": "Read the sentence before and after the blank before choosing.",
+        "correctOption": "specific evidence",
         "dropdownOptions": [
-          "im",
-          "re",
-          "pre",
-          "mis"
+          "specific evidence",
+          "a random guess",
+          "only the title"
         ],
         "distractorRationale": [
           {
-            "option": "re",
-            "whyWrong": "'Re' means 'again,' which doesn't fit the context."
+            "option": "a random guess",
+            "whyWrong": "A guess is not supported by the passage or the rule."
           },
           {
-            "option": "pre",
-            "whyWrong": "'Pre' means 'before,' which doesn't fit the context."
-          },
-          {
-            "option": "mis",
-            "whyWrong": "'Mis' means 'wrongly,' which doesn't fit the context."
+            "option": "only the title",
+            "whyWrong": "A title may help, but it is not enough proof by itself."
           }
         ],
-        "rightAnswerRationale": "The prefix 'im-' means 'not,' making 'impossible' mean 'not possible.'"
+        "rightAnswerRationale": "The correct option completes the sentence accurately and follows the target skill."
       },
       {
         "type": "hot-text-phrase",
-        "passage": "The task seemed impossible at first. No one believed it could be done. The mountain was too high, and the path was too dangerous. Many had tried and failed before. However, with determination and teamwork, the group decided to attempt the climb. They trained for months, preparing for every challenge. On the day of the climb, they faced harsh weather and steep cliffs. Despite the odds, they persevered and reached the summit. What once seemed impossible became a reality, proving that with effort and belief, anything is achievable. Their success inspired others to pursue their dreams, no matter how difficult they seemed. The story of their climb became a symbol of hope and determination. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
-        "question": "Select the phrase that shows the meaning of 'impossible.'",
-        "coachHint": "Look for a phrase that means something cannot be done.",
-        "maxSelect": 1,
-        "minSelect": 1,
+        "passage": "In the heart of the forest, where the trees stand tall, a gentle breeze whispers secrets to all. Leaves rustle softly, sharing tales of old, as sunlight dances, turning green to gold. The brook babbles on, with stories to share, of creatures that wander, and the crisp, fresh air. Flowers bloom brightly, in colors so bold, painting the forest with hues to behold. As the day fades away, and the stars start to gleam, the forest dreams on, in a peaceful, quiet theme. The woods hold a magic, both ancient and new, a place of wonder, where dreams can come true. The poem captures the essence of nature's embrace, a reminder of beauty, in this tranquil space. The scene grows quieter as the character notices small sounds and gestures that reveal an important feeling. A later moment explains why the decision matters and how the character responds to pressure. By the end, the character acts with more confidence, showing a change the reader can trace through specific choices.",
+        "question": "Select the two phrases that best describe the mood of the poem.",
+        "coachHint": "Look for phrases that make you feel calm or enchanted.",
+        "maxSelect": 2,
+        "minSelect": 2,
         "correctPhrases": [
-          "not able to be done"
+          "Gentle breeze whispers",
+          "Peaceful, quiet theme"
         ],
         "selectablePhrases": [
-          "not able to be done",
-          "easy to do",
-          "somewhat difficult",
-          "very possible"
+          "Gentle breeze whispers",
+          "Peaceful, quiet theme",
+          "Colors so bold",
+          "Crisp, fresh air",
+          "Stars start to gleam"
         ],
-        "rightAnswerRationale": "The phrase 'not able to be done' correctly reflects the meaning of 'impossible.'"
+        "rightAnswerRationale": "\"Gentle breeze whispers\" and \"Peaceful, quiet theme\" both convey a serene and magical mood."
       }
     ],
     "gradeLevel": 3,
-    "explanation": "Decoding multisyllable words involves breaking down longer words into smaller, manageable parts. This process can make reading complex words easier and improve comprehension. Let's explore some strategies to help you decode these words effectively.\n\n1. **Identify Prefixes and Suffixes:** Many long words have prefixes (beginning parts) and suffixes (ending parts). For example, in the word 'unhappily,' 'un-' is a prefix meaning 'not,' and '-ly' is a suffix indicating 'in a certain way.' Recognizing these can help you understand the word's meaning.\n\n2. **Look for Root Words:** The root is the main part of the word that holds the core meaning. In 'unhappily,' the root word is 'happy.' Knowing the root can give you clues about the word's overall meaning.\n\n3. **Break Words into Syllables:** Divide the word into syllables, or sound units. For instance, 'un-hap-pi-ly' has four syllables. Saying each part separately can help you pronounce the word correctly.\n\n4. **Use Context Clues:** Sometimes, the surrounding text can provide hints about the word's meaning. If you're unsure about a word, read the sentences around it to gather more information.\n\nBy practicing these strategies, you'll become more confident in reading and understanding multisyllable words. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step.",
+    "explanation": "Poetry is a unique form of writing that uses lines and stanzas to create rhythm, meaning, and emotion. A line in a poem is similar to a sentence in a story. It can be short or long, and it often ends with a pause or a rhyme. Lines are grouped together into stanzas, which are like paragraphs in prose. Stanzas help organize ideas and give the poem structure. \n\nWhen reading a poem, pay attention to how the lines are arranged. Notice if they rhyme or if they have a specific rhythm. This can help you understand the poem's mood and message. Stanzas can vary in length; some poems have stanzas with the same number of lines, while others mix different lengths. This variation can create different effects, such as emphasizing certain ideas or creating a particular flow.\n\nFor example, in a poem about a rainy day, short lines might mimic the quick, light drops of rain, while longer lines could reflect the steady, continuous downpour. By examining the lines and stanzas, you can uncover deeper meanings and appreciate the poet's craft.\n\nUnderstanding lines and stanzas is essential for interpreting poetry. It allows you to see how poets convey emotions and ideas, making the reading experience more enriching and enjoyable. As you practice, try to identify the purpose of each line and stanza in the poems you read. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step.",
     "resourceUrl": null,
-    "whyAssigned": "This mini-lesson targets Multisyllable Word Parts because the diagnostic showed a standards-aligned practice gap.",
+    "whyAssigned": "This mini-lesson targets Poetry Lines and Stanzas because the diagnostic showed a standards-aligned practice gap.",
     "commonErrors": [
-      "Students may confuse prefixes and suffixes, leading to incorrect word meanings.",
-      "Some students might skip breaking words into syllables, making pronunciation difficult.",
-      "Relying too heavily on context clues without analyzing word parts can lead to misunderstandings."
+      "Students may confuse lines with sentences, not recognizing the poetic structure.",
+      "Some students might overlook the significance of stanza breaks, missing shifts in tone or topic.",
+      "Students might struggle to identify the purpose of different stanza lengths."
     ],
     "masteryCheck": [
       {
         "type": "mc",
         "choices": [
-          "happy",
-          "un",
-          "ness",
-          "happiness"
+          "The beauty and tranquility of the forest.",
+          "The busy life of forest animals.",
+          "The changing seasons in the forest.",
+          "The dangers lurking in the woods."
         ],
-        "passage": null,
-        "question": "What is the root word in 'unhappiness'?",
-        "coachHint": "Look for the main part of the word that holds the core meaning.",
-        "correctAnswer": "happy",
+        "passage": "In the heart of the forest, where the trees stand tall, a gentle breeze whispers secrets to all. Leaves rustle softly, sharing tales of old, as sunlight dances, turning green to gold. The brook babbles on, with stories to share, of creatures that wander, and the crisp, fresh air. Flowers bloom brightly, in colors so bold, painting the forest with hues to behold. As the day fades away, and the stars start to gleam, the forest dreams on, in a peaceful, quiet theme. The woods hold a magic, both ancient and new, a place of wonder, where dreams can come true. The poem captures the essence of nature's embrace, a reminder of beauty, in this tranquil space. The scene grows quieter as the character notices small sounds and gestures that reveal an important feeling. A later moment explains why the decision matters and how the character responds to pressure. By the end, the character acts with more confidence, showing a change the reader can trace through specific choices.",
+        "question": "What is the main idea of the poem \"The Whispering Woods\"?",
+        "coachHint": "Think about what the poem describes overall.",
+        "correctAnswer": "The beauty and tranquility of the forest.",
         "distractorRationale": [
           {
-            "choice": "un",
-            "whyWrong": "'Un' is a prefix meaning 'not,' not the root word."
+            "choice": "The busy life of forest animals.",
+            "whyWrong": "The poem focuses more on the forest itself than the animals."
           },
           {
-            "choice": "ness",
-            "whyWrong": "'Ness' is a suffix forming nouns, not the root word."
+            "choice": "The changing seasons in the forest.",
+            "whyWrong": "The poem does not focus on seasonal changes."
           },
           {
-            "choice": "happiness",
-            "whyWrong": "'Happiness' is the whole word, not the root."
+            "choice": "The dangers lurking in the woods.",
+            "whyWrong": "The poem highlights the beauty and tranquility, not dangers."
           }
         ],
-        "rightAnswerRationale": "The root word is 'happy,' which is the main part of the word."
-      },
-      {
-        "type": "inline-dropdown",
-        "passage": null,
-        "question": "Choose the correct suffix to complete the word: joy[BLANK].",
-        "sentence": "joy[BLANK]",
-        "coachHint": "Think about what suffix makes the word mean 'full of joy.'",
-        "correctOption": "ful",
-        "dropdownOptions": [
-          "ful",
-          "less",
-          "ness",
-          "ly"
-        ],
-        "distractorRationale": [
-          {
-            "option": "less",
-            "whyWrong": "'Less' means 'without,' which doesn't fit the context."
-          },
-          {
-            "option": "ness",
-            "whyWrong": "'Ness' forms nouns, which doesn't fit here."
-          },
-          {
-            "option": "ly",
-            "whyWrong": "'Ly' forms adverbs, which doesn't fit here."
-          }
-        ],
-        "rightAnswerRationale": "The suffix '-ful' means 'full of,' making 'joyful' mean 'full of joy.'"
+        "rightAnswerRationale": "The poem celebrates the beauty and tranquility of the forest."
       },
       {
         "type": "hot-text-phrase",
-        "passage": "The children were joyful as they played in the park. Their laughter filled the air, and their smiles were bright. They ran around, playing games and enjoying the sunny day. The swings and slides were their favorite, and they took turns with excitement. Parents watched happily, glad to see their children having such a good time. The joy was contagious, and everyone felt uplifted by the cheerful atmosphere. It was a perfect day, full of fun and happiness. The children's joyful spirits made the park a lively and delightful place to be. Everyone left with happy memories and plans to return soon for more fun and laughter. The day was a reminder of the simple joys in life. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
-        "question": "Select the phrase that shows the meaning of 'joyful.'",
-        "coachHint": "Look for a phrase that means being very happy.",
-        "maxSelect": 1,
-        "minSelect": 1,
+        "passage": "In the heart of the forest, where the trees stand tall, a gentle breeze whispers secrets to all. Leaves rustle softly, sharing tales of old, as sunlight dances, turning green to gold. The brook babbles on, with stories to share, of creatures that wander, and the crisp, fresh air. Flowers bloom brightly, in colors so bold, painting the forest with hues to behold. As the day fades away, and the stars start to gleam, the forest dreams on, in a peaceful, quiet theme. The woods hold a magic, both ancient and new, a place of wonder, where dreams can come true. The poem captures the essence of nature's embrace, a reminder of beauty, in this tranquil space. The scene grows quieter as the character notices small sounds and gestures that reveal an important feeling. A later moment explains why the decision matters and how the character responds to pressure. By the end, the character acts with more confidence, showing a change the reader can trace through specific choices.",
+        "question": "Select the two phrases that best describe the theme of the poem.",
+        "coachHint": "Look for phrases that capture the overall message of the poem.",
+        "maxSelect": 2,
+        "minSelect": 2,
         "correctPhrases": [
-          "full of happiness"
+          "Nature's embrace",
+          "A place of wonder"
         ],
         "selectablePhrases": [
-          "full of happiness",
-          "somewhat sad",
-          "not happy",
-          "very serious"
+          "Nature's embrace",
+          "A place of wonder",
+          "Crisp, fresh air",
+          "Colors so bold",
+          "Stars start to gleam"
         ],
-        "rightAnswerRationale": "The phrase 'full of happiness' correctly reflects the meaning of 'joyful.'"
+        "rightAnswerRationale": "\"Nature's embrace\" and \"A place of wonder\" highlight the theme of beauty and magic in the forest."
+      },
+      {
+        "type": "mc",
+        "choices": [
+          "They each describe a different time of day.",
+          "They highlight different aspects of the forest's beauty.",
+          "They describe different weather conditions.",
+          "They each tell a separate story."
+        ],
+        "passage": null,
+        "question": "How do the stanzas in the poem \"The Whispering Woods\" help convey its theme?",
+        "coachHint": "Think about what each stanza focuses on and how they connect to the theme.",
+        "correctAnswer": "They highlight different aspects of the forest's beauty.",
+        "distractorRationale": [
+          {
+            "choice": "They each describe a different time of day.",
+            "whyWrong": "The poem focuses on the forest, not different times of day."
+          },
+          {
+            "choice": "They describe different weather conditions.",
+            "whyWrong": "The poem does not focus on weather changes."
+          },
+          {
+            "choice": "They each tell a separate story.",
+            "whyWrong": "The stanzas are connected and describe the same theme."
+          }
+        ],
+        "rightAnswerRationale": "The stanzas each highlight different aspects of the forest's beauty, reinforcing the theme of tranquility and wonder."
       }
     ],
     "qualityScore": 92,
-    "standardCode": "CC.1.1.3.D",
+    "standardCode": "CC.1.3.3.E",
     "teiTypesUsed": [
-      "inline-dropdown",
-      "hot-text-phrase"
+      "hot-text-phrase",
+      "inline-dropdown"
     ],
     "exemplarsUsed": [
       "g3-p1",
+      "g3-mc-1",
+      "g3-mc-2",
       "g3-mc-3",
-      "g3-mc-7",
-      "g3-mc-9",
-      "g4-tei-1",
-      "g3-tei-4",
-      "g3-tei-1"
+      "g3-tei-6",
+      "g4-tei-5",
+      "g4-tei-7"
     ],
     "qualityIssues": [],
     "resourceTitle": null,
-    "standardLabel": "Decode multisyllable words using word parts",
-    "workedExample": "Let's take the word 'unbelievable' and break it down using our strategies.\n\n1. **Identify Prefixes and Suffixes:** The prefix 'un-' means 'not,' and the suffix '-able' means 'capable of.'\n\n2. **Look for Root Words:** The root word here is 'believe.'\n\n3. **Break Words into Syllables:** Divide the word into syllables: 'un-be-liev-a-ble.' This helps in pronouncing the word correctly.\n\n4. **Use Context Clues:** If you see this word in a sentence like, \"The magician's trick was unbelievable,\" you can infer that the trick was so amazing it was hard to believe.\n\nBy applying these steps, you can decode 'unbelievable' as meaning 'not capable of being believed.' This method can be applied to many other multisyllable words, making reading easier and more enjoyable. This matters because the correct answer is not just a matching word or phrase. It is the choice that fits the whole question and can be defended with a specific detail. The reasoning should explain both what the evidence says and how it supports the answer.",
+    "standardLabel": "Refer to parts of stories, poems, and dramas",
+    "workedExample": "Let's look at a short poem to see how lines and stanzas work together:\n\n\"The Morning Sun\"\n\nThe sun peeks over the hill,  \nIts rays dance on the dew,  \nA new day begins.  \n\nBirds sing a cheerful tune,  \nWelcoming the light,  \nNature awakens.  \n\nIn this poem, notice how the first stanza describes the sun rising and the beginning of a new day. Each line contributes to this image, creating a sense of freshness and renewal. The second stanza shifts focus to the birds and nature, continuing the theme of awakening. The stanzas work together to paint a complete picture of a morning scene.\n\nBy examining the lines and stanzas, we can see how the poet uses structure to convey the beauty and tranquility of a morning. This understanding enhances our appreciation of the poem and its message. This matters because the correct answer is not just a matching word or phrase. It is the choice that fits the whole question and can be defended with a specific detail. The reasoning should explain both what the evidence says and how it supports the answer.",
     "guidedPractice": [
       {
         "type": "mc",
         "choices": [
-          "respect",
-          "dis",
-          "ful",
-          "spect"
+          "The sun rising and a new day beginning.",
+          "Farmers working in the fields.",
+          "Children playing in the village.",
+          "The sun setting at the end of the day."
         ],
-        "passage": null,
-        "question": "What is the root word in 'disrespectful'?",
-        "coachHint": "Look for the main part of the word that holds the core meaning.",
-        "correctAnswer": "respect",
+        "passage": "In a quiet village, the rooster crows, signaling the start of a new day. The sun rises slowly, casting a warm glow over the fields. Farmers begin their work, tending to the crops with care. Children laugh and play, their voices echoing through the air. The village comes alive, bustling with energy and life. As the day unfolds, the sun climbs higher, watching over the busy scene. The poem captures the essence of a morning in the village, filled with hope and promise. The poet's words paint a picture of a community united by the rhythm of daily life. The poem is a celebration of the simple joys found in everyday moments, reminding us of the beauty in routine and the connections we share. The scene grows quieter as the character notices small sounds and gestures that reveal an important feeling. A later moment explains why the decision matters and how the character responds to pressure.",
+        "question": "What is the main idea of the first stanza in the poem \"The Morning Sun\"?",
+        "coachHint": "Look at the first three lines and think about what they describe.",
+        "correctAnswer": "The sun rising and a new day beginning.",
         "distractorRationale": [
           {
-            "choice": "dis",
-            "whyWrong": "'Dis' is a prefix meaning 'not,' not the root word."
+            "choice": "Farmers working in the fields.",
+            "whyWrong": "This describes a later part of the poem, not the first stanza."
           },
           {
-            "choice": "ful",
-            "whyWrong": "'Ful' is a suffix meaning 'full of,' not the root word."
+            "choice": "Children playing in the village.",
+            "whyWrong": "This is from a later stanza, not the first."
           },
           {
-            "choice": "spect",
-            "whyWrong": "'Spect' is not a standalone root in this context."
+            "choice": "The sun setting at the end of the day.",
+            "whyWrong": "This is not part of the first stanza."
           }
         ],
-        "rightAnswerRationale": "The root word is 'respect,' which is the main part of the word."
-      },
-      {
-        "type": "inline-dropdown",
-        "passage": null,
-        "question": "Choose the correct prefix to complete the word: [BLANK]believable.",
-        "sentence": "[BLANK]believable",
-        "coachHint": "Think about what prefix makes the word mean 'not believable.'",
-        "correctOption": "un",
-        "dropdownOptions": [
-          "un",
-          "re",
-          "pre",
-          "mis"
-        ],
-        "distractorRationale": [
-          {
-            "option": "re",
-            "whyWrong": "'Re' means 'again,' which doesn't fit the context."
-          },
-          {
-            "option": "pre",
-            "whyWrong": "'Pre' means 'before,' which doesn't fit the context."
-          },
-          {
-            "option": "mis",
-            "whyWrong": "'Mis' means 'wrongly,' which doesn't fit the context."
-          }
-        ],
-        "rightAnswerRationale": "The prefix 'un-' means 'not,' making 'unbelievable' mean 'not believable.'"
+        "rightAnswerRationale": "The first stanza describes the sun rising and the beginning of a new day, setting the scene for the poem."
       },
       {
         "type": "hot-text-phrase",
-        "passage": "The child walked away unhappily after losing the game. She didn't smile or laugh, showing she was not happy about the result. Her friends tried to cheer her up, but she remained unhappy for a while. Eventually, she joined them in playing another game, and her mood improved. She realized that winning wasn't everything, and having fun was more important than winning every time. Her friends were glad to see her smile again, and they all enjoyed the rest of the day together, playing and laughing in the park. It was a day to remember, full of lessons about friendship and joy beyond competition. The child learned that happiness can be found in the simplest moments, surrounded by friends who care. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
-        "question": "Select the phrase that shows the meaning of 'unhappily.'",
-        "coachHint": "Look for a phrase that means the opposite of 'happy.'",
-        "maxSelect": 1,
-        "minSelect": 1,
+        "passage": "In a quiet village, the rooster crows, signaling the start of a new day. The sun rises slowly, casting a warm glow over the fields. Farmers begin their work, tending to the crops with care. Children laugh and play, their voices echoing through the air. The village comes alive, bustling with energy and life. As the day unfolds, the sun climbs higher, watching over the busy scene. The poem captures the essence of a morning in the village, filled with hope and promise. The poet's words paint a picture of a community united by the rhythm of daily life. The poem is a celebration of the simple joys found in everyday moments, reminding us of the beauty in routine and the connections we share. The scene grows quieter as the character notices small sounds and gestures that reveal an important feeling. A later moment explains why the decision matters and how the character responds to pressure.",
+        "question": "Select the two phrases that describe the mood of the poem.",
+        "coachHint": "Look for phrases that make you feel happy or hopeful.",
+        "maxSelect": 2,
+        "minSelect": 2,
         "correctPhrases": [
-          "not happy"
+          "Filled with hope and promise",
+          "Simple joys found in everyday moments"
         ],
         "selectablePhrases": [
-          "not happy",
-          "very happy",
-          "somewhat happy",
-          "extremely happy"
+          "Filled with hope and promise",
+          "Simple joys found in everyday moments",
+          "Bustling with energy and life",
+          "Casting a warm glow",
+          "Watching over the busy scene"
         ],
-        "rightAnswerRationale": "The phrase 'not happy' correctly reflects the meaning of 'unhappily.'"
+        "rightAnswerRationale": "\"Filled with hope and promise\" and \"Simple joys found in everyday moments\" both convey a positive and uplifting mood."
+      },
+      {
+        "type": "mc",
+        "choices": [
+          "They each describe a different time of day.",
+          "They focus on different parts of nature in the morning.",
+          "They describe different weather conditions.",
+          "They each tell a separate story."
+        ],
+        "passage": null,
+        "question": "How do the stanzas in the poem \"The Morning Sun\" contribute to its overall meaning?",
+        "coachHint": "Think about what each stanza describes and how they connect.",
+        "correctAnswer": "They focus on different parts of nature in the morning.",
+        "distractorRationale": [
+          {
+            "choice": "They each describe a different time of day.",
+            "whyWrong": "The poem focuses on the morning, not different times of day."
+          },
+          {
+            "choice": "They describe different weather conditions.",
+            "whyWrong": "The poem does not focus on weather conditions."
+          },
+          {
+            "choice": "They each tell a separate story.",
+            "whyWrong": "The stanzas are connected and describe the same theme."
+          }
+        ],
+        "rightAnswerRationale": "Each stanza focuses on a different aspect of the morning, creating a complete picture of the start of a day."
       }
     ],
     "sentenceFrames": [
-      "The prefix 'un-' means ____, so 'unhappy' means ____.",
-      "The root word in 'unbelievable' is ____, which means ____.",
-      "When I break 'unbelievable' into syllables, it sounds like ____."
+      "The stanza in this poem describes...",
+      "The lines in this stanza help create a feeling of...",
+      "This line is important because..."
     ],
     "successCriteria": [
-      "I can identify prefixes and suffixes in multisyllable words.",
-      "I can find the root word to understand the meaning of a longer word.",
-      "I can break down a word into syllables to help with pronunciation."
+      "I can identify lines and stanzas in a poem.",
+      "I can explain how lines and stanzas contribute to a poem's meaning.",
+      "I can analyze the effect of stanza breaks in a poem."
     ],
     "generatorVersion": "V2",
     "resourceProvider": null,
@@ -251,105 +250,98 @@
       {
         "type": "mc",
         "choices": [
-          "care",
-          "ful",
-          "ly",
-          "full"
+          "The beauty and tranquility of the forest.",
+          "The busy life of forest animals.",
+          "The changing seasons in the forest.",
+          "The dangers lurking in the woods."
         ],
-        "passage": null,
-        "question": "What is the suffix in 'carefully'?",
-        "coachHint": "Look for the ending part of the word that changes its meaning.",
-        "correctAnswer": "ly",
+        "passage": "In the heart of the forest, where the trees stand tall, a gentle breeze whispers secrets to all. Leaves rustle softly, sharing tales of old, as sunlight dances, turning green to gold. The brook babbles on, with stories to share, of creatures that wander, and the crisp, fresh air. Flowers bloom brightly, in colors so bold, painting the forest with hues to behold. As the day fades away, and the stars start to gleam, the forest dreams on, in a peaceful, quiet theme. The woods hold a magic, both ancient and new, a place of wonder, where dreams can come true. The poem captures the essence of nature's embrace, a reminder of beauty, in this tranquil space. The scene grows quieter as the character notices small sounds and gestures that reveal an important feeling. A later moment explains why the decision matters and how the character responds to pressure. By the end, the character acts with more confidence, showing a change the reader can trace through specific choices.",
+        "question": "What is the main idea of the poem \"The Whispering Woods\"?",
+        "coachHint": "Think about what the poem describes overall.",
+        "correctAnswer": "The beauty and tranquility of the forest.",
         "distractorRationale": [
           {
-            "choice": "care",
-            "whyWrong": "'Care' is the root word, not the suffix."
+            "choice": "The busy life of forest animals.",
+            "whyWrong": "The poem focuses more on the forest itself than the animals."
           },
           {
-            "choice": "ful",
-            "whyWrong": "'Ful' is part of the root word 'careful,' not the suffix."
+            "choice": "The changing seasons in the forest.",
+            "whyWrong": "The poem does not focus on seasonal changes."
           },
           {
-            "choice": "full",
-            "whyWrong": "'Full' is a homophone but not the correct suffix here."
+            "choice": "The dangers lurking in the woods.",
+            "whyWrong": "The poem highlights the beauty and tranquility, not dangers."
           }
         ],
-        "rightAnswerRationale": "The suffix '-ly' indicates how something is done."
-      },
-      {
-        "type": "inline-dropdown",
-        "passage": null,
-        "question": "Choose the correct suffix to complete the word: hope[BLANK].",
-        "sentence": "hope[BLANK]",
-        "coachHint": "Think about what suffix makes the word mean 'full of hope.'",
-        "correctOption": "ful",
-        "dropdownOptions": [
-          "ful",
-          "less",
-          "ness",
-          "ly"
-        ],
-        "distractorRationale": [
-          {
-            "option": "less",
-            "whyWrong": "'Less' means 'without,' which doesn't fit the context."
-          },
-          {
-            "option": "ness",
-            "whyWrong": "'Ness' forms nouns, which doesn't fit here."
-          },
-          {
-            "option": "ly",
-            "whyWrong": "'Ly' forms adverbs, which doesn't fit here."
-          }
-        ],
-        "rightAnswerRationale": "The suffix '-ful' means 'full of,' making 'hopeful' mean 'full of hope.'"
+        "rightAnswerRationale": "The poem celebrates the beauty and tranquility of the forest."
       },
       {
         "type": "hot-text-phrase",
-        "passage": "The artist painted the picture carefully, making sure every detail was perfect. She took her time, using small brushes to add intricate designs. Her focus was intense, and she didn't rush any part of the process. The result was a beautiful painting that everyone admired. People could see the effort and precision in her work, and they appreciated the time she spent on each detail. The artist felt proud of her creation, knowing she had done her best. Her careful approach paid off, and the painting was a success. It was displayed in the gallery, where visitors marveled at its beauty and craftsmanship. The artist's dedication and careful attention to detail made her work stand out. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
-        "question": "Select the phrase that shows the meaning of 'carefully.'",
-        "coachHint": "Look for a phrase that means doing something with attention and precision.",
-        "maxSelect": 1,
-        "minSelect": 1,
+        "passage": "In the heart of the forest, where the trees stand tall, a gentle breeze whispers secrets to all. Leaves rustle softly, sharing tales of old, as sunlight dances, turning green to gold. The brook babbles on, with stories to share, of creatures that wander, and the crisp, fresh air. Flowers bloom brightly, in colors so bold, painting the forest with hues to behold. As the day fades away, and the stars start to gleam, the forest dreams on, in a peaceful, quiet theme. The woods hold a magic, both ancient and new, a place of wonder, where dreams can come true. The poem captures the essence of nature's embrace, a reminder of beauty, in this tranquil space. The scene grows quieter as the character notices small sounds and gestures that reveal an important feeling. A later moment explains why the decision matters and how the character responds to pressure. By the end, the character acts with more confidence, showing a change the reader can trace through specific choices.",
+        "question": "Select the two phrases that best describe the theme of the poem.",
+        "coachHint": "Look for phrases that capture the overall message of the poem.",
+        "maxSelect": 2,
+        "minSelect": 2,
         "correctPhrases": [
-          "with great attention"
+          "Nature's embrace",
+          "A place of wonder"
         ],
         "selectablePhrases": [
-          "with great attention",
-          "quickly",
-          "without care",
-          "hastily"
+          "Nature's embrace",
+          "A place of wonder",
+          "Crisp, fresh air",
+          "Colors so bold",
+          "Stars start to gleam"
         ],
-        "rightAnswerRationale": "The phrase 'with great attention' correctly reflects the meaning of 'carefully.'"
+        "rightAnswerRationale": "\"Nature's embrace\" and \"A place of wonder\" highlight the theme of beauty and magic in the forest."
       },
       {
         "type": "mc",
         "choices": [
-          "understand",
-          "mis",
-          "stand",
-          "under"
+          "They each describe a different time of day.",
+          "They highlight different aspects of the forest's beauty.",
+          "They describe different weather conditions.",
+          "They each tell a separate story."
         ],
         "passage": null,
-        "question": "What is the prefix in 'misunderstand'?",
-        "coachHint": "Look for the beginning part of the word that changes its meaning.",
-        "correctAnswer": "mis",
+        "question": "How do the stanzas in the poem \"The Whispering Woods\" help convey its theme?",
+        "coachHint": "Think about what each stanza focuses on and how they connect to the theme.",
+        "correctAnswer": "They highlight different aspects of the forest's beauty.",
         "distractorRationale": [
           {
-            "choice": "understand",
-            "whyWrong": "'Understand' is the root word, not the prefix."
+            "choice": "They each describe a different time of day.",
+            "whyWrong": "The poem focuses on the forest, not different times of day."
           },
           {
-            "choice": "stand",
-            "whyWrong": "'Stand' is part of the root word, not the prefix."
+            "choice": "They describe different weather conditions.",
+            "whyWrong": "The poem does not focus on weather changes."
           },
           {
-            "choice": "under",
-            "whyWrong": "'Under' is part of the root word, not the prefix."
+            "choice": "They each tell a separate story.",
+            "whyWrong": "The stanzas are connected and describe the same theme."
           }
         ],
-        "rightAnswerRationale": "The prefix 'mis-' means 'wrongly,' indicating a misunderstanding."
+        "rightAnswerRationale": "The stanzas each highlight different aspects of the forest's beauty, reinforcing the theme of tranquility and wonder."
+      },
+      {
+        "type": "hot-text-phrase",
+        "passage": "In the heart of the forest, where the trees stand tall, a gentle breeze whispers secrets to all. Leaves rustle softly, sharing tales of old, as sunlight dances, turning green to gold. The brook babbles on, with stories to share, of creatures that wander, and the crisp, fresh air. Flowers bloom brightly, in colors so bold, painting the forest with hues to behold. As the day fades away, and the stars start to gleam, the forest dreams on, in a peaceful, quiet theme. The woods hold a magic, both ancient and new, a place of wonder, where dreams can come true. The poem captures the essence of nature's embrace, a reminder of beauty, in this tranquil space. The scene grows quieter as the character notices small sounds and gestures that reveal an important feeling. A later moment explains why the decision matters and how the character responds to pressure. By the end, the character acts with more confidence, showing a change the reader can trace through specific choices.",
+        "question": "Select the two phrases that best capture the mood of the poem.",
+        "coachHint": "Look for phrases that make you feel calm or enchanted.",
+        "maxSelect": 2,
+        "minSelect": 2,
+        "correctPhrases": [
+          "Gentle breeze whispers",
+          "Peaceful, quiet theme"
+        ],
+        "selectablePhrases": [
+          "Gentle breeze whispers",
+          "Peaceful, quiet theme",
+          "Colors so bold",
+          "Crisp, fresh air",
+          "Stars start to gleam"
+        ],
+        "rightAnswerRationale": "\"Gentle breeze whispers\" and \"Peaceful, quiet theme\" both convey a serene and magical mood."
       }
     ],
     "resourceDescription": null

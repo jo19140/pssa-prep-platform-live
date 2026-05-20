@@ -11,7 +11,18 @@ export type LessonV2ValidationResult = {
   issues: string[];
 };
 
-export async function validateLessonV2(lesson: LessonV2, openai?: OpenAI): Promise<LessonV2ValidationResult> {
+export type LessonV2ValidationOptions = {
+  excludeLessonId?: string;
+};
+
+export const FORBIDDEN_PASSAGE_PHRASES = [
+  /the passage gives another clear detail/i,
+  /students can use this detail to check/i,
+  /compare choices,? and explain why one choice/i,
+  /one choice is stronger than another/i,
+];
+
+export async function validateLessonV2(lesson: LessonV2, openai?: OpenAI, options: LessonV2ValidationOptions = {}): Promise<LessonV2ValidationResult> {
   const issues: string[] = [];
   const parsed = lessonV2Schema.safeParse(lesson);
   if (!parsed.success) issues.push(...parsed.error.issues.map((issue) => `${issue.path.join(".")}: ${issue.message}`));
@@ -38,6 +49,7 @@ export async function validateLessonV2(lesson: LessonV2, openai?: OpenAI): Promi
   if (teiTypes.size < 2) issues.push(`Expected at least 2 distinct TEI types; found ${teiTypes.size}.`);
 
   for (const passage of passages) {
+    issues.push(...validatePassageContent(passage));
     const wc = wordCount(passage);
     const [min, max] = lesson.gradeLevel <= 5 ? [150, 400] : [250, 600];
     const fk = fleschKincaidGrade(passage);
@@ -49,7 +61,7 @@ export async function validateLessonV2(lesson: LessonV2, openai?: OpenAI): Promi
   }
 
   if (openai && passages.length) {
-    issues.push(...await findDuplicatePassageIssues(openai, lesson.gradeLevel, passages));
+    issues.push(...await findDuplicatePassageIssues(openai, lesson.gradeLevel, passages, options.excludeLessonId));
   }
 
   return { valid: issues.length === 0, issues };
@@ -95,6 +107,13 @@ function validatePracticeQuestion(question: PracticeQuestionV2, gradeLevel: numb
     case "hot-text-phrase":
       if (question.correctPhrases.some((phrase) => !question.selectablePhrases.includes(phrase))) issues.push("Hot-text-phrase correctPhrases must be selectable.");
       if (question.minSelect > question.maxSelect) issues.push("Hot-text-phrase minSelect cannot exceed maxSelect.");
+      if (question.passage) {
+        for (const phrase of question.selectablePhrases) {
+          if (!normalizedPhrase(question.passage).includes(normalizedPhrase(phrase))) {
+            issues.push(`Hot-text-phrase selectable phrase "${phrase}" must appear in the passage after punctuation normalization.`);
+          }
+        }
+      }
       break;
     case "hot-text-sentence":
       if (question.correctSentenceNumber > question.sentenceCount) issues.push("Hot-text-sentence correctSentenceNumber exceeds sentenceCount.");
@@ -134,11 +153,32 @@ function validatePracticeQuestion(question: PracticeQuestionV2, gradeLevel: numb
   }
   for (const passage of [question.passage, question.type === "hot-text-phrase" || question.type === "evidence-mapping" ? question.passage : undefined]) {
     if (passage && wordCount(passage) < (gradeLevel <= 5 ? 120 : 200)) issues.push("A practice passage is likely too short for the target grade.");
+    if (passage) issues.push(...validatePassageContent(passage));
   }
+}
+
+export function validatePassageContent(passage: string): string[] {
+  const issues: string[] = [];
+  for (const pattern of FORBIDDEN_PASSAGE_PHRASES) {
+    if (pattern.test(passage)) {
+      issues.push(`Passage contains forbidden pedagogical meta-language: ${pattern}`);
+    }
+  }
+  return issues;
 }
 
 function sameText(a: string, b: string) {
   return a.trim().replace(/\s+/g, " ").toLowerCase() === b.trim().replace(/\s+/g, " ").toLowerCase();
+}
+
+function normalizedPhrase(value: string) {
+  return value
+    .toLowerCase()
+    .replace(/[\u2018\u2019]/g, "'")
+    .replace(/[\u201c\u201d]/g, "\"")
+    .replace(/[^a-z0-9]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
 }
 
 function requiresPassage(question: PracticeQuestionV2) {
@@ -173,9 +213,9 @@ function countSyllables(word: string) {
   return Math.max(1, groups?.length || 1);
 }
 
-async function findDuplicatePassageIssues(openai: OpenAI, gradeLevel: number, passages: string[]) {
+async function findDuplicatePassageIssues(openai: OpenAI, gradeLevel: number, passages: string[], excludeLessonId?: string) {
   const existing = await db.learningLesson.findMany({
-    where: { generatorVersion: "V2" },
+    where: { generatorVersion: "V2", id: excludeLessonId ? { not: excludeLessonId } : undefined },
     select: { guidedPractice: true, independentPractice: true, exitTicket: true, masteryCheck: true },
     take: 500,
   });

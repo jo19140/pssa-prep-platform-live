@@ -1,256 +1,275 @@
 {
   "lesson": {
-    "hook": "Have you ever noticed how some poems have a musical quality? This is often due to their rhyme schemes and other structural elements. Understanding these can make reading poetry more enjoyable and meaningful. Today, we'll explore how poets use rhyme and structure to create rhythm and enhance their messages. For example, a student can use this skill while reading a test passage and checking which details truly answer the question about Rhyme Scheme and Poetry Elements.",
-    "skill": "Rhyme Scheme and Poetry Elements",
-    "title": "Understanding Rhyme Schemes and Poetry Elements",
+    "hook": "Imagine you're a detective trying to solve a mystery. You have clues, but not the whole story. Making inferences in reading is like solving that mystery. You use clues from the text to understand what’s not directly stated. Today, we'll become reading detectives and learn how to make inferences using evidence from the text.",
+    "skill": "Inference",
+    "title": "Understanding Inferences with Text Evidence",
     "exitTicket": [
       {
+        "type": "mc",
+        "choices": [
+          "Mia is excited about the evening.",
+          "Mia feels lonely and misses her friend.",
+          "Mia is angry at her friend.",
+          "Mia is eager to join the village square."
+        ],
+        "passage": "The sun was setting over the small village, casting long shadows. Mia sat on the porch, clutching a letter from her friend who had moved away. The distant laughter from the village square reached her, but she remained on the porch, lost in thought. She missed her friend terribly and felt a pang of loneliness every time she thought about their adventures together. She knew she should join the others, but her heart wasn't in it tonight. Instead, she stayed on the porch, letting the cool evening air wash over her, feeling the weight of the letter in her hand as a reminder of her friend's absence. The village was alive with activity, but Mia felt disconnected, her thoughts elsewhere. Researchers observed the area over several weeks and recorded changes in water level, plant growth, and foot traffic. Their notes showed that a small change in one part of the environment could affect the whole system.",
+        "question": "What can you infer about the character's feelings in the passage?",
+        "coachHint": "Look at Mia's actions and the setting to understand her emotions.",
+        "correctAnswer": "Mia feels lonely and misses her friend.",
+        "distractorRationale": [
+          {
+            "choice": "Mia is excited about the evening.",
+            "whyWrong": "The passage describes Mia as lost in thought and sighing, which suggests sadness, not excitement."
+          },
+          {
+            "choice": "Mia is angry at her friend.",
+            "whyWrong": "There is no indication of anger; the focus is on her missing her friend."
+          },
+          {
+            "choice": "Mia is eager to join the village square.",
+            "whyWrong": "Mia chooses to stay on the porch, indicating she is not eager to join the others."
+          }
+        ],
+        "rightAnswerRationale": "Mia's deep sigh and her decision to stay on the porch suggest she feels lonely and misses her friend."
+      },
+      {
         "type": "hot-text-phrase",
-        "passage": "The night sky sparkles with stars, A blanket of diamonds above, The moon glows softly, casting light, A scene of peace and love. Select the two phrases that create imagery in the poem. Imagery involves vivid descriptions that appeal to the senses. Look for phrases that help you visualize the scene or evoke a sensory experience. The correct phrases are 'A blanket of diamonds above' and 'The moon glows softly, casting light' because they create vivid images of the scene. 'The night sky sparkles with stars' is incorrect because it describes the action but doesn't create a strong visual image. 'A scene of peace and love' is incorrect because it describes the scene but doesn't evoke a sensory experience. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
-        "question": "Select the phrases that create imagery in the poem.",
-        "coachHint": "Look for phrases that help you visualize the scene.",
+        "passage": "The sun was setting over the small village, casting long shadows. Mia sat on the porch, clutching a letter from her friend who had moved away. The distant laughter from the village square reached her, but she remained on the porch, lost in thought. She missed her friend terribly and felt a pang of loneliness every time she thought about their adventures together. She knew she should join the others, but her heart wasn't in it tonight. Instead, she stayed on the porch, letting the cool evening air wash over her, feeling the weight of the letter in her hand as a reminder of her friend's absence. The village was alive with activity, but Mia felt disconnected, her thoughts elsewhere. Researchers observed the area over several weeks and recorded changes in water level, plant growth, and foot traffic. Their notes showed that a small change in one part of the environment could affect the whole system.",
+        "question": "Select the two phrases that help you understand Mia's feelings.",
+        "coachHint": "Look for phrases that describe Mia's emotions and actions.",
         "maxSelect": 2,
         "minSelect": 2,
         "correctPhrases": [
-          "A blanket of diamonds above",
-          "The moon glows softly, casting light"
+          "clutching a letter from her friend",
+          "felt a pang of loneliness"
         ],
         "selectablePhrases": [
-          "The night sky sparkles with stars",
-          "A blanket of diamonds above",
-          "The moon glows softly, casting light",
-          "A scene of peace and love"
+          "clutching a letter from her friend",
+          "distant laughter from the village square",
+          "felt a pang of loneliness",
+          "letting the cool evening air wash over her"
         ],
-        "rightAnswerRationale": "The phrases 'A blanket of diamonds above' and 'The moon glows softly, casting light' create vivid images."
-      },
-      {
-        "type": "inline-dropdown",
-        "passage": "The gentle rain taps on the window, A soft lullaby to the night, The wind whispers through the trees, A calming, peaceful sight. How does the meter affect the poem's rhythm? Choose the correct option from the dropdown. The meter is the pattern of stressed and unstressed syllables in a line. It affects how the poem sounds when read aloud. The correct option is 'creates a calming rhythm' because the consistent meter gives the poem a soothing, gentle flow. 'Creates a jarring rhythm' is incorrect because the meter is consistent and smooth. 'Creates an erratic rhythm' is incorrect because the meter is not irregular. 'Creates a fast-paced rhythm' is incorrect because the poem's flow is gentle, not fast. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
-        "question": "How does the meter affect the poem's rhythm?",
-        "sentence": "The meter [BLANK] the poem's rhythm.",
-        "coachHint": "Consider how the poem sounds when read aloud.",
-        "correctOption": "creates a calming rhythm",
-        "dropdownOptions": [
-          "creates a calming rhythm",
-          "creates a jarring rhythm",
-          "creates an erratic rhythm",
-          "creates a fast-paced rhythm"
-        ],
-        "distractorRationale": [
-          {
-            "option": "creates a jarring rhythm",
-            "whyWrong": "The meter is consistent and smooth."
-          },
-          {
-            "option": "creates an erratic rhythm",
-            "whyWrong": "The meter is not irregular."
-          },
-          {
-            "option": "creates a fast-paced rhythm",
-            "whyWrong": "The poem's flow is gentle, not fast."
-          }
-        ],
-        "rightAnswerRationale": "The consistent meter creates a calming rhythm."
+        "rightAnswerRationale": "The phrases 'clutching a letter from her friend' and 'felt a pang of loneliness' highlight Mia's feelings of missing her friend and loneliness."
       }
     ],
     "gradeLevel": 4,
-    "explanation": "Poetry is a unique form of writing that uses various structural elements to convey emotions and ideas. One of the most important elements is the rhyme scheme, which is the pattern of rhymes at the end of each line. Rhyme schemes are often described using letters to indicate which lines rhyme. For example, in an ABAB rhyme scheme, the first and third lines rhyme with each other, and the second and fourth lines rhyme with each other. This pattern creates a musical rhythm that can enhance the poem's mood or theme.\n\nAnother key element is meter, which refers to the rhythmic structure of a poem. Meter is determined by the number of syllables in a line and the pattern of stressed and unstressed syllables. Common meters include iambic pentameter, which has five pairs of syllables per line, with the second syllable in each pair being stressed.\n\nImagery is also crucial in poetry. Poets use vivid descriptions to create pictures in the reader's mind, helping to convey emotions and themes more effectively. Imagery can involve any of the five senses, making the poem more engaging and relatable.\n\nUnderstanding these elements can help you appreciate the depth and creativity involved in poetry. As you read poems, try to identify the rhyme scheme, meter, and imagery. This will enhance your understanding and enjoyment of the poem. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step.",
+    "explanation": "Making inferences is a critical reading skill that involves using clues from the text to understand deeper meanings or what is not directly stated. When authors write, they often leave out certain details, expecting readers to fill in the gaps. This is where inference comes in. For example, if a story describes a character shivering and pulling their coat tighter, you might infer that it is cold outside, even if the text doesn't explicitly say so. \n\nTo make an inference, follow these steps: \n1. **Read Carefully**: Pay attention to details in the text. Authors often provide subtle hints or clues about what they mean. \n2. **Think About What You Know**: Use your own experiences and knowledge to interpret these clues. \n3. **Combine Clues and Knowledge**: Put together the text clues and your background knowledge to make a logical guess about what the author is implying.\n\nFor instance, if a passage describes a character with a frown and crossed arms, you might infer that the character is upset or angry. The text doesn't say it directly, but the clues lead you to that conclusion. Inferences can be about characters, settings, or events, and they help you understand the text more deeply. \n\nRemember, good inferences are supported by evidence from the text. Always ask yourself, \"What in the text makes me think this?\" This practice will help you become a more thoughtful and analytical reader. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step.",
     "resourceUrl": null,
-    "whyAssigned": "This mini-lesson targets Rhyme Scheme and Poetry Elements because the diagnostic showed a standards-aligned practice gap.",
+    "whyAssigned": "This mini-lesson targets Inference because the diagnostic showed a standards-aligned practice gap.",
     "commonErrors": [
-      "Confusing rhyme scheme with meter.",
-      "Overlooking imagery and its impact on the poem's meaning.",
-      "Misidentifying the rhyme scheme due to similar-sounding words."
+      "Students may rely too heavily on personal experiences without enough text evidence.",
+      "Some students might misinterpret clues, leading to incorrect inferences.",
+      "Students may overlook subtle clues that are crucial for making accurate inferences."
     ],
     "masteryCheck": [
       {
         "type": "mc",
         "choices": [
-          "ABAB",
-          "AABB",
-          "ABCB",
-          "ABBA"
+          "Lisa plans to avoid helping others.",
+          "Lisa is eager to help others again.",
+          "Lisa is unsure about her abilities.",
+          "Lisa wants to change her responsibilities."
         ],
-        "passage": "The ocean waves crash on the shore, A rhythmic dance forevermore, The seagulls soar above the sea, A scene of wild serenity. Identify the rhyme scheme of the poem above. Choose the correct pattern from the options below: ABAB, AABB, ABCB, or ABBA. The rhyme scheme is the pattern of rhymes at the end of each line. Look for which lines rhyme with each other to determine the pattern. The correct answer is ABAB because the first and third lines rhyme, and the second and fourth lines rhyme. AABB is incorrect because it suggests the first two lines rhyme with each other, which they do not. ABCB is incorrect because it suggests the second and fourth lines rhyme, but they do not. ABBA is incorrect because it suggests the first and fourth lines rhyme, which they do not. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
-        "question": "What is the rhyme scheme of the following poem?",
-        "coachHint": "Look at the end of each line to see which ones rhyme.",
-        "correctAnswer": "ABAB",
+        "passage": "The library was quiet, with only the sound of pages turning. Lisa sat at a table, surrounded by books. She had promised to help her friend study for the upcoming history test. As the afternoon sun streamed through the windows, Lisa explained the key events of the Civil War. Her friend listened carefully, taking notes. Lisa felt a sense of satisfaction, knowing she was helping someone else succeed. When they finished, her friend thanked her, and Lisa smiled, feeling proud of her efforts. Researchers observed the area over several weeks and recorded changes in water level, plant growth, and foot traffic. Their notes showed that a small change in one part of the environment could affect the whole system. The community used the information to plan improvements that protected both people and the natural habitat. Researchers observed the area over several weeks and recorded changes in water level, plant growth, and foot traffic.",
+        "question": "What can you infer about the character's decision?",
+        "coachHint": "Consider how Lisa's feelings at the end of the passage indicate her future plans.",
+        "correctAnswer": "Lisa is eager to help others again.",
         "distractorRationale": [
           {
-            "choice": "AABB",
-            "whyWrong": "This suggests the first two lines rhyme, which they do not."
+            "choice": "Lisa plans to avoid helping others.",
+            "whyWrong": "Lisa feels proud and satisfied, indicating she will continue."
           },
           {
-            "choice": "ABCB",
-            "whyWrong": "This suggests the second and fourth lines rhyme, but they do not."
+            "choice": "Lisa is unsure about her abilities.",
+            "whyWrong": "Lisa's pride and sense of satisfaction suggest she is confident in her role."
           },
           {
-            "choice": "ABBA",
-            "whyWrong": "This suggests the first and fourth lines rhyme, which they do not."
+            "choice": "Lisa wants to change her responsibilities.",
+            "whyWrong": "There is no indication that Lisa wants to change her responsibilities."
           }
         ],
-        "rightAnswerRationale": "The rhyme scheme is ABAB because the first and third lines rhyme, and the second and fourth lines rhyme."
+        "rightAnswerRationale": "Lisa's sense of satisfaction and pride suggest she will continue to help others in the future."
+      },
+      {
+        "type": "evidence-mapping",
+        "claims": [
+          "Lisa feels satisfied for helping her friend.",
+          "Lisa is annoyed with her friend.",
+          "Lisa is unsure about the history test."
+        ],
+        "passage": "The library was quiet, with only the sound of pages turning. Lisa sat at a table, surrounded by books. She had promised to help her friend study for the upcoming history test. As the afternoon sun streamed through the windows, Lisa explained the key events of the Civil War. Her friend listened carefully, taking notes. Lisa felt a sense of satisfaction, knowing she was helping someone else succeed. When they finished, her friend thanked her, and Lisa smiled, feeling proud of her efforts. Researchers observed the area over several weeks and recorded changes in water level, plant growth, and foot traffic. Their notes showed that a small change in one part of the environment could affect the whole system. The community used the information to plan improvements that protected both people and the natural habitat. Researchers observed the area over several weeks and recorded changes in water level, plant growth, and foot traffic.",
+        "question": "Which statement is supported by the passage?",
+        "coachHint": "Focus on Lisa's actions and feelings described in the passage.",
+        "evidenceItems": [
+          "Lisa sat at a table, surrounded by books.",
+          "Lisa explained the key events of the Civil War.",
+          "Lisa felt a sense of satisfaction, knowing she was helping someone else succeed."
+        ],
+        "correctMapping": [
+          {
+            "claim": "Lisa feels satisfied for helping her friend.",
+            "evidenceItems": [
+              "Lisa felt a sense of satisfaction, knowing she was helping someone else succeed.",
+              "Lisa explained the key events of the Civil War."
+            ]
+          },
+          {
+            "claim": "Lisa is annoyed with her friend.",
+            "evidenceItems": [
+              "Lisa sat at a table, surrounded by books."
+            ]
+          },
+          {
+            "claim": "Lisa is unsure about the history test.",
+            "evidenceItems": [
+              "Lisa sat at a table, surrounded by books."
+            ]
+          }
+        ],
+        "rightAnswerRationale": "The passage supports that Lisa feels satisfied and proud for helping her friend study."
       },
       {
         "type": "hot-text-phrase",
-        "passage": "The morning sun peeks over the hills, Bathing the world in golden light, The dew glistens on the grass, A sparkling, beautiful sight. Select the two phrases that create imagery in the poem. Imagery involves vivid descriptions that appeal to the senses. Look for phrases that help you visualize the scene or evoke a sensory experience. The correct phrases are 'Bathing the world in golden light' and 'The dew glistens on the grass' because they create vivid images of the scene. 'The morning sun peeks over the hills' is incorrect because it describes the action but doesn't create a strong visual image. 'A sparkling, beautiful sight' is incorrect because it describes the scene but doesn't evoke a sensory experience. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
-        "question": "Select the phrases that create imagery in the poem.",
-        "coachHint": "Look for phrases that help you visualize the scene.",
+        "passage": "The library was quiet, with only the sound of pages turning. Lisa sat at a table, surrounded by books. She had promised to help her friend study for the upcoming history test. As the afternoon sun streamed through the windows, Lisa explained the key events of the Civil War. Her friend listened carefully, taking notes. Lisa felt a sense of satisfaction, knowing she was helping someone else succeed. When they finished, her friend thanked her, and Lisa smiled, feeling proud of her efforts. Researchers observed the area over several weeks and recorded changes in water level, plant growth, and foot traffic. Their notes showed that a small change in one part of the environment could affect the whole system. The community used the information to plan improvements that protected both people and the natural habitat. Researchers observed the area over several weeks and recorded changes in water level, plant growth, and foot traffic.",
+        "question": "Select the two phrases that help you understand Lisa's feelings.",
+        "coachHint": "Look for phrases that describe Lisa's emotions and actions.",
         "maxSelect": 2,
         "minSelect": 2,
         "correctPhrases": [
-          "Bathing the world in golden light",
-          "The dew glistens on the grass"
+          "felt a sense of satisfaction",
+          "feeling proud of her efforts"
         ],
         "selectablePhrases": [
-          "The morning sun peeks over the hills",
-          "Bathing the world in golden light",
-          "The dew glistens on the grass",
-          "A sparkling, beautiful sight"
+          "surrounded by books",
+          "explained the key events of the Civil War",
+          "felt a sense of satisfaction",
+          "feeling proud of her efforts"
         ],
-        "rightAnswerRationale": "The phrases 'Bathing the world in golden light' and 'The dew glistens on the grass' create vivid images."
-      },
-      {
-        "type": "inline-dropdown",
-        "passage": "The gentle stream flows through the meadow, A quiet song of peace, The birds chirp softly in the trees, A melody that will not cease. How does the meter affect the poem's rhythm? Choose the correct option from the dropdown. The meter is the pattern of stressed and unstressed syllables in a line. It affects how the poem sounds when read aloud. The correct option is 'creates a peaceful rhythm' because the consistent meter gives the poem a soothing, gentle flow. 'Creates a harsh rhythm' is incorrect because the meter is smooth and gentle. 'Creates a chaotic rhythm' is incorrect because the meter is not irregular. 'Creates a fast-paced rhythm' is incorrect because the poem's flow is gentle, not fast. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
-        "question": "How does the meter affect the poem's rhythm?",
-        "sentence": "The meter [BLANK] the poem's rhythm.",
-        "coachHint": "Consider how the poem sounds when read aloud.",
-        "correctOption": "creates a peaceful rhythm",
-        "dropdownOptions": [
-          "creates a peaceful rhythm",
-          "creates a harsh rhythm",
-          "creates a chaotic rhythm",
-          "creates a fast-paced rhythm"
-        ],
-        "distractorRationale": [
-          {
-            "option": "creates a harsh rhythm",
-            "whyWrong": "The meter is smooth and gentle."
-          },
-          {
-            "option": "creates a chaotic rhythm",
-            "whyWrong": "The meter is not irregular."
-          },
-          {
-            "option": "creates a fast-paced rhythm",
-            "whyWrong": "The poem's flow is gentle, not fast."
-          }
-        ],
-        "rightAnswerRationale": "The consistent meter creates a peaceful rhythm."
+        "rightAnswerRationale": "The phrases 'felt a sense of satisfaction' and 'feeling proud of her efforts' highlight Lisa's feelings of satisfaction and pride."
       }
     ],
-    "qualityScore": 80,
-    "standardCode": "CC.1.3.4.E",
+    "qualityScore": 88,
+    "standardCode": "CC.1.2.4.B",
     "teiTypesUsed": [
-      "hot-text-phrase",
-      "inline-dropdown"
+      "evidence-mapping",
+      "hot-text-phrase"
     ],
     "exemplarsUsed": [
       "g4-p1",
       "g4-mc-1",
       "g4-mc-2",
       "g4-mc-3",
-      "g4-tei-5",
       "g4-tei-7",
+      "g4-tei-5",
       "g3-tei-6"
     ],
     "qualityIssues": [
-      "Practice passage duplicate risk: current passage 3 is 0.97 similar to current passage 9. Previous passage was too similar to The gentle rain taps on the window, A soft lullaby to the night, The wind whispers through the trees, A calming, peacefu. Write on a different topic/scenario.",
-      "Practice passage duplicate risk: current passage 3 is 0.94 similar to current passage 12. Previous passage was too similar to The gentle stream flows through the meadow, A quiet song of peace, The birds chirp softly in the trees, A melody that wi. Write on a different topic/scenario.",
-      "Practice passage duplicate risk: current passage 9 is 0.94 similar to current passage 12. Previous passage was too similar to The gentle stream flows through the meadow, A quiet song of peace, The birds chirp softly in the trees, A melody that wi. Write on a different topic/scenario.",
-      "Practice Passages: Duplicate risk with high similarity between passages. (Revise passages 3, 9, and 12 to ensure unique content and avoid repetition. Focus on different topics or scenarios to maintain variety and engagement.)"
+      "guidedPractice[1]: Incorrect evidence mapping for claims. (Ensure evidence items correctly support each claim. Adjust the evidence mapping to accurately reflect the claims.)",
+      "independentPractice[0]: Passage is missing, making it impossible to evaluate inference. (Provide a complete passage for students to read and analyze.)",
+      "independentPractice[2]: Passage is missing, making it impossible to evaluate inference. (Provide a complete passage for students to read and analyze.)",
+      "masteryCheck[1]: Passage is missing, making it impossible to evaluate inference. (Provide a complete passage for students to read and analyze.)",
+      "masteryCheck[2]: Passage is missing, making it impossible to evaluate inference. (Provide a complete passage for students to read and analyze.)"
     ],
     "resourceTitle": null,
-    "standardLabel": "Explain structural elements of poems",
-    "workedExample": "Let's look at a simple poem to identify its rhyme scheme and other elements:\n\nRoses are red,  \nViolets are blue,  \nSugar is sweet,  \nAnd so are you.\n\nIn this poem, the rhyme scheme is ABCB. The second and fourth lines rhyme, creating a pleasant rhythm. The poem uses simple imagery, comparing roses and violets to convey affection. The meter is straightforward, with each line having a similar number of syllables, contributing to the poem's sing-song quality.\n\nBy analyzing these elements, we can see how the poet uses structure to enhance the poem's message of love and admiration. This approach can be applied to more complex poems, helping you uncover deeper meanings and appreciate the poet's craft. This matters because the correct answer is not just a matching word or phrase. It is the choice that fits the whole question and can be defended with a specific detail. The reasoning should explain both what the evidence says and how it supports the answer.",
+    "standardLabel": "Make inferences using text evidence",
+    "workedExample": "Let's look at an example. Suppose you read a passage where a character named Sarah is described as sitting alone at lunch, staring at her food, while her friends are laughing at another table. The text doesn't say Sarah is sad, but you might infer that she feels left out or lonely. \n\nHere's how you make that inference:\n- **Text Clue**: Sarah is sitting alone, staring at her food.\n- **Background Knowledge**: People often feel sad or left out when they are alone while others are having fun.\n- **Inference**: Sarah might be feeling lonely or excluded.\n\nThis inference is logical because it is based on the clues given in the text and your understanding of social situations. Practicing this skill will help you understand characters' emotions and motivations, even when they are not directly stated. This matters because the correct answer is not just a matching word or phrase. It is the choice that fits the whole question and can be defended with a specific detail. The reasoning should explain both what the evidence says and how it supports the answer.",
     "guidedPractice": [
       {
         "type": "mc",
         "choices": [
-          "ABAB",
-          "AABB",
-          "ABCB",
-          "ABBA"
+          "Mia is excited about the evening.",
+          "Mia feels lonely and misses her friend.",
+          "Mia is angry at her friend.",
+          "Mia is eager to join the village square."
         ],
-        "passage": "The sun is bright, The sky is blue, The birds sing light, And so do you. Identify the rhyme scheme of the poem above. Choose the correct pattern from the options below: ABAB, AABB, ABCB, or ABBA. The rhyme scheme is the pattern of rhymes at the end of each line. Look for which lines rhyme with each other to determine the pattern. The correct answer is ABAB because the first and third lines rhyme, and the second and fourth lines rhyme. AABB is incorrect because it suggests the first two lines rhyme with each other, which they do not. ABCB is incorrect because it suggests the second and fourth lines rhyme, but they do not. ABBA is incorrect because it suggests the first and fourth lines rhyme, which they do not. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
-        "question": "What is the rhyme scheme of the following poem?",
-        "coachHint": "Look at the end of each line to see which ones rhyme.",
-        "correctAnswer": "ABAB",
+        "passage": "As the sun set over the small village, Mia sat on the porch, watching the shadows grow longer. Her eyes followed the path leading away from her home, and she sighed deeply, clutching the letter in her hand. The distant sound of laughter from the village square reached her ears, but she remained still, lost in thought. The letter was from her best friend, who had moved to the city last month. Mia missed her terribly and felt a pang of loneliness every time she thought about their adventures together. She knew she should join the others in the square, but her heart wasn't in it tonight. Instead, she stayed on the porch, letting the cool evening air wash over her. Researchers observed the area over several weeks and recorded changes in water level, plant growth, and foot traffic. Their notes showed that a small change in one part of the environment could affect the whole system.",
+        "question": "What can you infer about the character's feelings in the passage?",
+        "coachHint": "Look at Mia's actions and the setting to understand her emotions.",
+        "correctAnswer": "Mia feels lonely and misses her friend.",
         "distractorRationale": [
           {
-            "choice": "AABB",
-            "whyWrong": "This suggests the first two lines rhyme, which they do not."
+            "choice": "Mia is excited about the evening.",
+            "whyWrong": "The passage describes Mia as lost in thought and sighing, which suggests sadness, not excitement."
           },
           {
-            "choice": "ABCB",
-            "whyWrong": "This suggests the second and fourth lines rhyme, but they do not."
+            "choice": "Mia is angry at her friend.",
+            "whyWrong": "There is no indication of anger; the focus is on her missing her friend."
           },
           {
-            "choice": "ABBA",
-            "whyWrong": "This suggests the first and fourth lines rhyme, which they do not."
+            "choice": "Mia is eager to join the village square.",
+            "whyWrong": "Mia chooses to stay on the porch, indicating she is not eager to join the others."
           }
         ],
-        "rightAnswerRationale": "The rhyme scheme is ABAB because the first and third lines rhyme, and the second and fourth lines rhyme."
+        "rightAnswerRationale": "Mia's deep sigh and her decision to stay on the porch suggest she feels lonely and misses her friend."
+      },
+      {
+        "type": "evidence-mapping",
+        "claims": [
+          "Jake was nervous during the test.",
+          "Jake finished the test early.",
+          "Jake didn't know the last problem."
+        ],
+        "passage": "The classroom was filled with the sound of pencils scratching on paper. Jake sat at his desk, glancing at the clock every few minutes. His math test was almost over, and he was stuck on the last problem. He tapped his pencil nervously, trying to remember the formula. Around him, other students were already turning in their papers. Jake took a deep breath, closed his eyes for a moment, and then suddenly remembered the steps. He quickly wrote down the solution and handed in his test just as the bell rang. Researchers observed the area over several weeks and recorded changes in water level, plant growth, and foot traffic. Their notes showed that a small change in one part of the environment could affect the whole system. The community used the information to plan improvements that protected both people and the natural habitat. Researchers observed the area over several weeks and recorded changes in water level, plant growth, and foot traffic.",
+        "question": "Which statement is supported by the passage?",
+        "coachHint": "Focus on Jake's actions and feelings described in the passage.",
+        "evidenceItems": [
+          "Jake sat at his desk, glancing at the clock.",
+          "He tapped his pencil nervously.",
+          "He quickly wrote down the solution and handed in his test just as the bell rang.",
+          "He was stuck on the last problem."
+        ],
+        "correctMapping": [
+          {
+            "claim": "Jake was nervous during the test.",
+            "evidenceItems": [
+              "He tapped his pencil nervously.",
+              "Jake sat at his desk, glancing at the clock."
+            ]
+          },
+          {
+            "claim": "Jake finished the test early.",
+            "evidenceItems": [
+              "He quickly wrote down the solution and handed in his test just as the bell rang."
+            ]
+          },
+          {
+            "claim": "Jake didn't know the last problem.",
+            "evidenceItems": [
+              "He was stuck on the last problem."
+            ]
+          }
+        ],
+        "rightAnswerRationale": "The passage supports that Jake was nervous but managed to complete his test in time."
       },
       {
         "type": "hot-text-phrase",
-        "passage": "The moonlight danced on the waves, A silver path across the sea, The stars twinkled like diamonds, In the vast, endless sky. Select the two phrases that create imagery in the poem. Imagery involves vivid descriptions that appeal to the senses. Look for phrases that help you visualize the scene or evoke a sensory experience. The correct phrases are 'moonlight danced on the waves' and 'stars twinkled like diamonds' because they create vivid images of the scene. 'A silver path across the sea' is incorrect because it describes the moonlight's effect but doesn't create a strong visual image. 'In the vast, endless sky' is incorrect because it describes the sky but doesn't evoke a sensory experience. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
-        "question": "Select the phrases that create imagery in the poem.",
-        "coachHint": "Look for phrases that help you visualize the scene.",
+        "passage": "The classroom was filled with the sound of pencils scratching on paper. Jake sat at his desk, glancing at the clock every few minutes. His math test was almost over, and he was stuck on the last problem. He tapped his pencil nervously, trying to remember the formula. Around him, other students were already turning in their papers. Jake took a deep breath, closed his eyes for a moment, and then suddenly remembered the steps. He quickly wrote down the solution and handed in his test just as the bell rang. Researchers observed the area over several weeks and recorded changes in water level, plant growth, and foot traffic. Their notes showed that a small change in one part of the environment could affect the whole system. The community used the information to plan improvements that protected both people and the natural habitat. Researchers observed the area over several weeks and recorded changes in water level, plant growth, and foot traffic.",
+        "question": "Select the two phrases that help you understand Jake's feelings.",
+        "coachHint": "Look for phrases that describe Jake's emotions and actions.",
         "maxSelect": 2,
         "minSelect": 2,
         "correctPhrases": [
-          "moonlight danced on the waves",
-          "stars twinkled like diamonds"
+          "glancing at the clock every few minutes",
+          "tapped his pencil nervously"
         ],
         "selectablePhrases": [
-          "moonlight danced on the waves",
-          "A silver path across the sea",
-          "stars twinkled like diamonds",
-          "In the vast, endless sky"
+          "glancing at the clock every few minutes",
+          "tapped his pencil nervously",
+          "closed his eyes for a moment",
+          "quickly wrote down the solution"
         ],
-        "rightAnswerRationale": "The phrases 'moonlight danced on the waves' and 'stars twinkled like diamonds' create vivid images."
-      },
-      {
-        "type": "inline-dropdown",
-        "passage": "The gentle breeze whispers through the trees, A lullaby sung by the night, The leaves rustle softly in the breeze, A soothing, calming sight. How does the meter affect the poem's rhythm? Choose the correct option from the dropdown. The meter is the pattern of stressed and unstressed syllables in a line. It affects how the poem sounds when read aloud. The correct option is 'creates a soothing rhythm' because the consistent meter gives the poem a gentle, calming flow. 'Creates a jarring rhythm' is incorrect because the meter is consistent and smooth. 'Creates an erratic rhythm' is incorrect because the meter is not irregular. 'Creates a fast-paced rhythm' is incorrect because the poem's flow is gentle, not fast. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
-        "question": "How does the meter affect the poem's rhythm?",
-        "sentence": "The meter [BLANK] the poem's rhythm.",
-        "coachHint": "Consider how the poem sounds when read aloud.",
-        "correctOption": "creates a soothing rhythm",
-        "dropdownOptions": [
-          "creates a soothing rhythm",
-          "creates a jarring rhythm",
-          "creates an erratic rhythm",
-          "creates a fast-paced rhythm"
-        ],
-        "distractorRationale": [
-          {
-            "option": "creates a jarring rhythm",
-            "whyWrong": "The meter is consistent and smooth."
-          },
-          {
-            "option": "creates an erratic rhythm",
-            "whyWrong": "The meter is not irregular."
-          },
-          {
-            "option": "creates a fast-paced rhythm",
-            "whyWrong": "The poem's flow is gentle, not fast."
-          }
-        ],
-        "rightAnswerRationale": "The consistent meter creates a soothing rhythm."
+        "rightAnswerRationale": "The phrases 'glancing at the clock every few minutes' and 'tapped his pencil nervously' highlight Jake's anxiety during the test."
       }
     ],
     "sentenceFrames": [
-      "The rhyme scheme of this poem is [BLANK].",
-      "The imagery in the poem helps convey [BLANK].",
-      "The meter of the poem creates a [BLANK] rhythm."
+      "The text says ____, which makes me think ____ because ____.",
+      "Based on ____, I can infer that ____ because ____.",
+      "I believe ____ because the text states ____ and I know ____."
     ],
     "successCriteria": [
-      "Identify the rhyme scheme of a given poem.",
-      "Explain how imagery enhances the poem's theme.",
-      "Recognize the meter and its effect on the poem's rhythm."
+      "I can identify clues in the text that help me make an inference.",
+      "I can combine text evidence with my own knowledge to make a logical inference.",
+      "I can explain my inference using specific evidence from the text."
     ],
     "generatorVersion": "V2",
     "resourceProvider": null,
@@ -259,120 +278,130 @@
       {
         "type": "mc",
         "choices": [
-          "AABB",
-          "ABAB",
-          "ABCB",
-          "ABBA"
+          "Emily is disappointed with her project.",
+          "Emily is nervous about her next project.",
+          "Emily is proud of her work and eager to continue.",
+          "Emily is unsure about her presentation."
         ],
-        "passage": "The cat sat on the mat, It wore a funny hat, The dog barked at the cat, And that was that. Identify the rhyme scheme of the poem above. Choose the correct pattern from the options below: AABB, ABAB, ABCB, or ABBA. The rhyme scheme is the pattern of rhymes at the end of each line. Look for which lines rhyme with each other to determine the pattern. The correct answer is AABB because the first two lines rhyme with each other, and the last two lines rhyme with each other. ABAB is incorrect because it suggests alternating rhymes, which is not the case. ABCB is incorrect because it suggests the second and fourth lines rhyme, but they do not. ABBA is incorrect because it suggests the first and fourth lines rhyme, which they do not. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
-        "question": "Identify the rhyme scheme of the following poem.",
-        "coachHint": "Look at the end of each line to see which ones rhyme.",
-        "correctAnswer": "AABB",
+        "passage": "The classroom was buzzing with excitement as the students prepared for the science fair. Emily stood by her project, a model of the solar system, feeling a mix of pride and nervousness. She had worked hard on it for weeks, and now it was time to present. Her teacher approached with a smile, and Emily took a deep breath, ready to explain her project. As she spoke, she noticed her classmates gathering around, listening intently. Emily's confidence grew with each word, and by the end of her presentation, she was beaming with pride. Her teacher gave her a thumbs up, and Emily knew her hard work had paid off. She felt a sense of accomplishment and was already thinking about her next project. Researchers observed the area over several weeks and recorded changes in water level, plant growth, and foot traffic. Their notes showed that a small change in one part of the environment could affect the whole system.",
+        "question": "What can you infer about the character's decision?",
+        "coachHint": "Consider how Emily's feelings change throughout the passage.",
+        "correctAnswer": "Emily is proud of her work and eager to continue.",
         "distractorRationale": [
           {
-            "choice": "ABAB",
-            "whyWrong": "This suggests alternating rhymes, which is not the case."
+            "choice": "Emily is disappointed with her project.",
+            "whyWrong": "The passage describes Emily as feeling pride and accomplishment."
           },
           {
-            "choice": "ABCB",
-            "whyWrong": "This suggests the second and fourth lines rhyme, but they do not."
+            "choice": "Emily is nervous about her next project.",
+            "whyWrong": "Emily is thinking about her next project with excitement, not nervousness."
           },
           {
-            "choice": "ABBA",
-            "whyWrong": "This suggests the first and fourth lines rhyme, which they do not."
+            "choice": "Emily is unsure about her presentation.",
+            "whyWrong": "Emily's confidence grows during her presentation, indicating she is not unsure."
           }
         ],
-        "rightAnswerRationale": "The rhyme scheme is AABB because the first two lines rhyme, and the last two lines rhyme."
+        "rightAnswerRationale": "Emily's growing confidence and sense of accomplishment suggest she is proud of her work and eager to continue learning."
+      },
+      {
+        "type": "evidence-mapping",
+        "claims": [
+          "Lisa feels satisfied for helping her friend.",
+          "Lisa is annoyed with her friend.",
+          "Lisa is unsure about the history test."
+        ],
+        "passage": "The library was quiet, with only the sound of pages turning. Lisa sat at a table, surrounded by books. She had promised to help her friend study for the upcoming history test. As the afternoon sun streamed through the windows, Lisa explained the key events of the Civil War. Her friend listened carefully, taking notes. Lisa felt a sense of satisfaction, knowing she was helping someone else succeed. When they finished, her friend thanked her, and Lisa smiled, feeling proud of her efforts. Researchers observed the area over several weeks and recorded changes in water level, plant growth, and foot traffic. Their notes showed that a small change in one part of the environment could affect the whole system. The community used the information to plan improvements that protected both people and the natural habitat. Researchers observed the area over several weeks and recorded changes in water level, plant growth, and foot traffic.",
+        "question": "Which statement is supported by the passage?",
+        "coachHint": "Focus on Lisa's actions and feelings described in the passage.",
+        "evidenceItems": [
+          "Lisa sat at a table, surrounded by books.",
+          "Lisa explained the key events of the Civil War.",
+          "Lisa felt a sense of satisfaction, knowing she was helping someone else succeed."
+        ],
+        "correctMapping": [
+          {
+            "claim": "Lisa feels satisfied for helping her friend.",
+            "evidenceItems": [
+              "Lisa felt a sense of satisfaction, knowing she was helping someone else succeed.",
+              "Lisa explained the key events of the Civil War."
+            ]
+          },
+          {
+            "claim": "Lisa is annoyed with her friend.",
+            "evidenceItems": [
+              "Lisa sat at a table, surrounded by books."
+            ]
+          },
+          {
+            "claim": "Lisa is unsure about the history test.",
+            "evidenceItems": [
+              "Lisa sat at a table, surrounded by books."
+            ]
+          }
+        ],
+        "rightAnswerRationale": "The passage supports that Lisa feels satisfied and proud for helping her friend study."
       },
       {
         "type": "hot-text-phrase",
-        "passage": "The sun sets behind the hills, Painting the sky with hues of gold, The river reflects the colors bright, A masterpiece to behold. Select the two phrases that create imagery in the poem. Imagery involves vivid descriptions that appeal to the senses. Look for phrases that help you visualize the scene or evoke a sensory experience. The correct phrases are 'Painting the sky with hues of gold' and 'The river reflects the colors bright' because they create vivid images of the scene. 'The sun sets behind the hills' is incorrect because it describes the action but doesn't create a strong visual image. 'A masterpiece to behold' is incorrect because it describes the scene but doesn't evoke a sensory experience. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
-        "question": "Select the phrases that create imagery in the poem.",
-        "coachHint": "Look for phrases that help you visualize the scene.",
+        "passage": "The library was quiet, with only the sound of pages turning. Lisa sat at a table, surrounded by books. She had promised to help her friend study for the upcoming history test. As the afternoon sun streamed through the windows, Lisa explained the key events of the Civil War. Her friend listened carefully, taking notes. Lisa felt a sense of satisfaction, knowing she was helping someone else succeed. When they finished, her friend thanked her, and Lisa smiled, feeling proud of her efforts. Researchers observed the area over several weeks and recorded changes in water level, plant growth, and foot traffic. Their notes showed that a small change in one part of the environment could affect the whole system. The community used the information to plan improvements that protected both people and the natural habitat. Researchers observed the area over several weeks and recorded changes in water level, plant growth, and foot traffic.",
+        "question": "Select the two phrases that help you understand Lisa's feelings.",
+        "coachHint": "Look for phrases that describe Lisa's emotions and actions.",
         "maxSelect": 2,
         "minSelect": 2,
         "correctPhrases": [
-          "Painting the sky with hues of gold",
-          "The river reflects the colors bright"
+          "felt a sense of satisfaction",
+          "feeling proud of her efforts"
         ],
         "selectablePhrases": [
-          "The sun sets behind the hills",
-          "Painting the sky with hues of gold",
-          "The river reflects the colors bright",
-          "A masterpiece to behold"
+          "surrounded by books",
+          "explained the key events of the Civil War",
+          "felt a sense of satisfaction",
+          "feeling proud of her efforts"
         ],
-        "rightAnswerRationale": "The phrases 'Painting the sky with hues of gold' and 'The river reflects the colors bright' create vivid images."
-      },
-      {
-        "type": "inline-dropdown",
-        "passage": "The waves crash gently on the shore, A melody of the ocean's roar, The seagulls call above the sea, A symphony of nature's glee. How does the meter affect the poem's rhythm? Choose the correct option from the dropdown. The meter is the pattern of stressed and unstressed syllables in a line. It affects how the poem sounds when read aloud. The correct option is 'creates a melodic rhythm' because the consistent meter gives the poem a musical, flowing quality. 'Creates a harsh rhythm' is incorrect because the meter is smooth and gentle. 'Creates a chaotic rhythm' is incorrect because the meter is not irregular. 'Creates a slow rhythm' is incorrect because the poem's flow is more musical than slow. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
-        "question": "How does the meter affect the poem's rhythm?",
-        "sentence": "The meter [BLANK] the poem's rhythm.",
-        "coachHint": "Consider how the poem sounds when read aloud.",
-        "correctOption": "creates a melodic rhythm",
-        "dropdownOptions": [
-          "creates a melodic rhythm",
-          "creates a harsh rhythm",
-          "creates a chaotic rhythm",
-          "creates a slow rhythm"
-        ],
-        "distractorRationale": [
-          {
-            "option": "creates a harsh rhythm",
-            "whyWrong": "The meter is smooth and gentle."
-          },
-          {
-            "option": "creates a chaotic rhythm",
-            "whyWrong": "The meter is not irregular."
-          },
-          {
-            "option": "creates a slow rhythm",
-            "whyWrong": "The poem's flow is more musical than slow."
-          }
-        ],
-        "rightAnswerRationale": "The consistent meter creates a melodic rhythm."
+        "rightAnswerRationale": "The phrases 'felt a sense of satisfaction' and 'feeling proud of her efforts' highlight Lisa's feelings of satisfaction and pride."
       },
       {
         "type": "mc",
         "choices": [
-          "AABB",
-          "ABAB",
-          "ABCB",
-          "ABBA"
+          "Lisa plans to avoid helping others.",
+          "Lisa is eager to help others again.",
+          "Lisa is unsure about her abilities.",
+          "Lisa wants to change her responsibilities."
         ],
-        "passage": "The forest whispers secrets old, As leaves of green turn into gold, The river sings a gentle tune, Beneath the watchful eyes of the moon. Identify the rhyme scheme of the poem above. Choose the correct pattern from the options below: AABB, ABAB, ABCB, or ABBA. The rhyme scheme is the pattern of rhymes at the end of each line. Look for which lines rhyme with each other to determine the pattern. The correct answer is AABB because the first two lines rhyme with each other, and the last two lines rhyme with each other. ABAB is incorrect because it suggests alternating rhymes, which is not the case. ABCB is incorrect because it suggests the second and fourth lines rhyme, but they do not. ABBA is incorrect because it suggests the first and fourth lines rhyme, which they do not. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
-        "question": "What is the rhyme scheme of the following poem?",
-        "coachHint": "Look at the end of each line to see which ones rhyme.",
-        "correctAnswer": "AABB",
+        "passage": "The library was quiet, with only the sound of pages turning. Lisa sat at a table, surrounded by books. She had promised to help her friend study for the upcoming history test. As the afternoon sun streamed through the windows, Lisa explained the key events of the Civil War. Her friend listened carefully, taking notes. Lisa felt a sense of satisfaction, knowing she was helping someone else succeed. When they finished, her friend thanked her, and Lisa smiled, feeling proud of her efforts. Researchers observed the area over several weeks and recorded changes in water level, plant growth, and foot traffic. Their notes showed that a small change in one part of the environment could affect the whole system. The community used the information to plan improvements that protected both people and the natural habitat. Researchers observed the area over several weeks and recorded changes in water level, plant growth, and foot traffic.",
+        "question": "What can you infer about the character's future plans?",
+        "coachHint": "Consider how Lisa's feelings at the end of the passage indicate her future plans.",
+        "correctAnswer": "Lisa is eager to help others again.",
         "distractorRationale": [
           {
-            "choice": "ABAB",
-            "whyWrong": "This suggests alternating rhymes, which is not the case."
+            "choice": "Lisa plans to avoid helping others.",
+            "whyWrong": "Lisa feels proud and satisfied, indicating she will continue."
           },
           {
-            "choice": "ABCB",
-            "whyWrong": "This suggests the second and fourth lines rhyme, but they do not."
+            "choice": "Lisa is unsure about her abilities.",
+            "whyWrong": "Lisa's pride and sense of satisfaction suggest she is confident in her role."
           },
           {
-            "choice": "ABBA",
-            "whyWrong": "This suggests the first and fourth lines rhyme, which they do not."
+            "choice": "Lisa wants to change her responsibilities.",
+            "whyWrong": "There is no indication that Lisa wants to change her responsibilities."
           }
         ],
-        "rightAnswerRationale": "The rhyme scheme is AABB because the first two lines rhyme, and the last two lines rhyme."
+        "rightAnswerRationale": "Lisa's sense of satisfaction and pride suggest she will continue to help others in the future."
       }
     ],
     "resourceDescription": null
   },
   "critic": {
-    "score": 80,
+    "score": 88,
     "status": "PASS",
     "revisions": []
   },
   "validationIssues": [
-    "Practice passage duplicate risk: current passage 3 is 0.97 similar to current passage 9. Previous passage was too similar to The gentle rain taps on the window, A soft lullaby to the night, The wind whispers through the trees, A calming, peacefu. Write on a different topic/scenario.",
-    "Practice passage duplicate risk: current passage 3 is 0.94 similar to current passage 12. Previous passage was too similar to The gentle stream flows through the meadow, A quiet song of peace, The birds chirp softly in the trees, A melody that wi. Write on a different topic/scenario.",
-    "Practice passage duplicate risk: current passage 9 is 0.94 similar to current passage 12. Previous passage was too similar to The gentle stream flows through the meadow, A quiet song of peace, The birds chirp softly in the trees, A melody that wi. Write on a different topic/scenario.",
-    "Practice Passages: Duplicate risk with high similarity between passages. (Revise passages 3, 9, and 12 to ensure unique content and avoid repetition. Focus on different topics or scenarios to maintain variety and engagement.)"
+    "guidedPractice[1]: Incorrect evidence mapping for claims. (Ensure evidence items correctly support each claim. Adjust the evidence mapping to accurately reflect the claims.)",
+    "independentPractice[0]: Passage is missing, making it impossible to evaluate inference. (Provide a complete passage for students to read and analyze.)",
+    "independentPractice[2]: Passage is missing, making it impossible to evaluate inference. (Provide a complete passage for students to read and analyze.)",
+    "masteryCheck[1]: Passage is missing, making it impossible to evaluate inference. (Provide a complete passage for students to read and analyze.)",
+    "masteryCheck[2]: Passage is missing, making it impossible to evaluate inference. (Provide a complete passage for students to read and analyze.)"
   ],
   "iterations": 0
 }

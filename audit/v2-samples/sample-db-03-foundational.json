@@ -1,255 +1,262 @@
 {
   "lesson": {
-    "hook": "Imagine you are a detective, and your mission is to uncover the secret patterns in words. These patterns help us read and spell new words. Just like a detective uses clues to solve a mystery, we use phonics patterns to understand how words work. Let's dive into the world of phonics and discover these hidden patterns together!",
-    "skill": "Phonics Patterns",
-    "title": "Exploring Phonics Patterns",
+    "hook": "Have you ever wondered how you can read long words like 'unbelievable' or 'transportation'? These words might seem tricky at first, but they become much easier when you break them down into smaller parts. Today, we'll learn how to decode multisyllable words by looking at their parts. This skill will help you read faster and understand more words!",
+    "skill": "Multisyllable Word Parts",
+    "title": "Decoding Multisyllable Words",
     "exitTicket": [
       {
         "type": "mc",
         "choices": [
-          "ch",
-          "ee",
-          "se",
-          "he"
+          "un",
+          "happy",
+          "ness",
+          "happiness"
         ],
         "passage": null,
-        "question": "What is the phonics pattern in the word 'cheese'?",
-        "coachHint": "Look for a vowel team in the middle of the word.",
-        "correctAnswer": "ee",
+        "question": "What is the prefix in 'unhappiness'?",
+        "coachHint": "Look at the beginning of the word for the prefix.",
+        "correctAnswer": "un",
         "distractorRationale": [
           {
-            "choice": "ch",
-            "whyWrong": "'Ch' is a consonant blend, not a vowel team."
+            "choice": "happy",
+            "whyWrong": "'Happy' is the root word, not a prefix."
           },
           {
-            "choice": "se",
-            "whyWrong": "'Se' is not a phonics pattern; focus on the vowel sound."
+            "choice": "ness",
+            "whyWrong": "'-ness' is a suffix, not a prefix."
           },
           {
-            "choice": "he",
-            "whyWrong": "'He' is not a common phonics pattern."
+            "choice": "happiness",
+            "whyWrong": "This is the whole word, not just the prefix."
           }
         ],
-        "rightAnswerRationale": "The 'ee' in 'cheese' is a vowel team that makes a long 'e' sound."
+        "rightAnswerRationale": "The prefix 'un-' means 'not,' changing the meaning of the root word 'happy.'"
       },
       {
-        "type": "hot-text-phrase",
-        "passage": "The rain fell, making puddles on the ground. A snail moved slowly, leaving a trail. A train passed by, its whistle loud. The sky was gray, stretching far. Kids played, splashing in puddles. The rain made the air fresh and clean. As time went on, the rain stopped, and the sun came out, warming everything. It was a day of simple fun, showing the beauty in small things. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
-        "question": "Read the passage and select the phrases that show the phonics pattern 'ai'.",
-        "coachHint": "Look for words with 'ai' in the middle.",
-        "maxSelect": 2,
-        "minSelect": 2,
-        "correctPhrases": [
-          "rain fell",
-          "train passed"
+        "type": "inline-dropdown",
+        "passage": null,
+        "question": "Select the correct suffix to complete the word: hope[BLANK].",
+        "sentence": "hope[BLANK]",
+        "coachHint": "Think about what makes 'hope' into an adjective.",
+        "correctOption": "ful",
+        "dropdownOptions": [
+          "ful",
+          "less",
+          "ing",
+          "ed"
         ],
-        "selectablePhrases": [
-          "rain fell",
-          "snail moved",
-          "train passed",
-          "sky was gray",
-          "kids played"
+        "distractorRationale": [
+          {
+            "option": "less",
+            "whyWrong": "'-less' means without, which doesn't fit the context."
+          },
+          {
+            "option": "ing",
+            "whyWrong": "'-ing' is used for verbs, not adjectives."
+          },
+          {
+            "option": "ed",
+            "whyWrong": "'-ed' is used for past tense verbs, not adjectives."
+          }
         ],
-        "rightAnswerRationale": "The phrases 'rain fell' and 'train passed' contain the 'ai' phonics pattern."
+        "rightAnswerRationale": "The suffix '-ful' turns 'hope' into an adjective meaning full of hope."
       }
     ],
     "gradeLevel": 3,
-    "explanation": "Phonics patterns are like the building blocks of words. They help us understand how letters come together to make sounds. For example, the letters 'ch' in 'chicken' make a unique sound. Recognizing these patterns helps us read new words more easily. There are many common phonics patterns, such as 'sh' in 'ship' or 'th' in 'thumb.' These patterns often appear in the middle or at the end of words. By learning these patterns, you can quickly figure out how to pronounce unfamiliar words.\n\nAnother important pattern is the 'silent e' at the end of words. This 'e' can change the sound of the vowel before it. For instance, in 'cap,' the 'a' is short, but in 'cape,' the 'e' makes the 'a' long. Understanding these patterns helps us become better readers and spellers.\n\nLet's also look at vowel teams, like 'ea' in 'beach' or 'oa' in 'boat.' These teams work together to make a single sound. By practicing these patterns, you'll be able to read more fluently and with confidence. Remember, phonics patterns are your tools for unlocking the mysteries of words! Keep practicing, and you'll become a word detective in no time! Now, let's explore some examples and practice identifying these patterns in words you encounter every day. This will help you become more familiar with how these patterns work in different contexts. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step.",
+    "explanation": "Decoding multisyllable words involves breaking them down into smaller, more manageable parts. These parts can include prefixes, suffixes, and root words. For example, in the word 'unbelievable,' 'un-' is a prefix that means 'not,' 'believe' is the root word, and '-able' is a suffix meaning 'capable of.' By understanding these parts, you can piece together the meaning of the whole word.\n\nLet's look at another example: 'transportation.' This word can be broken down into 'trans-' (a prefix meaning 'across'), 'port' (a root word meaning 'carry'), and '-ation' (a suffix that turns a verb into a noun). When you combine these parts, you understand that 'transportation' refers to the act of carrying something across a distance.\n\nTo decode multisyllable words, follow these steps:\n1. **Identify the root word**: Look for the main part of the word that carries the core meaning.\n2. **Look for prefixes**: These are added to the beginning of a word to change its meaning.\n3. **Look for suffixes**: These are added to the end of a word to alter its form or meaning.\n4. **Sound out each part**: Break the word into syllables and pronounce each one.\n\nBy practicing these steps, you'll become more confident in reading and understanding longer words. Each part of a word can give you clues about its overall meaning. Avoid choosing details that sound related but do not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step.",
     "resourceUrl": null,
-    "whyAssigned": "This mini-lesson targets Phonics Patterns because the diagnostic showed a standards-aligned practice gap.",
+    "whyAssigned": "This mini-lesson targets Multisyllable Word Parts because the diagnostic showed a standards-aligned practice gap.",
     "commonErrors": [
-      "Confusing similar phonics patterns, such as 'ch' and 'sh'.",
-      "Forgetting the silent 'e' changes the vowel sound.",
-      "Mixing up vowel teams like 'ea' and 'ee'."
+      "Students might confuse prefixes and suffixes, leading to incorrect word meanings.",
+      "Some may overlook the root word, focusing only on prefixes or suffixes.",
+      "Mispronouncing syllables can lead to misunderstanding the word."
     ],
     "masteryCheck": [
       {
         "type": "mc",
         "choices": [
-          "ni",
-          "igh",
-          "ght",
-          "ht"
+          "trans",
+          "port",
+          "ation",
+          "transport"
         ],
         "passage": null,
-        "question": "What is the phonics pattern in the word 'night'?",
-        "coachHint": "Look for a vowel pattern in the middle of the word.",
-        "correctAnswer": "igh",
+        "question": "What is the root word in 'transportation'?",
+        "coachHint": "Look for the main part of the word that carries the core meaning.",
+        "correctAnswer": "port",
         "distractorRationale": [
           {
-            "choice": "ni",
-            "whyWrong": "'Ni' is not a common phonics pattern."
+            "choice": "trans",
+            "whyWrong": "'Trans-' is a prefix, not the root word."
           },
           {
-            "choice": "ght",
-            "whyWrong": "'Ght' is not a phonics pattern; focus on the vowel sound."
+            "choice": "ation",
+            "whyWrong": "'-ation' is a suffix, not the root word."
           },
           {
-            "choice": "ht",
-            "whyWrong": "'Ht' is not a common phonics pattern."
+            "choice": "transport",
+            "whyWrong": "This is the whole word, not just the root."
           }
         ],
-        "rightAnswerRationale": "The 'igh' in 'night' is a common phonics pattern that makes a long 'i' sound."
+        "rightAnswerRationale": "The root word is 'transport,' which means to carry."
+      },
+      {
+        "type": "hot-text-phrase",
+        "passage": "Stan Munro is a toothpick engineer who builds structures using only toothpicks and glue. His creations include famous buildings from around the world. Stan started building with toothpicks after a class project in school. His work is displayed in museums and admired by many for its detail and creativity. Stan's structures are known for their precision and strength, despite being made from such simple materials. He often spends months on a single project, ensuring every detail is perfect before completion. His dedication and skill have made him famous in his field, inspiring others to explore creative engineering with everyday materials like toothpicks. Researchers observed the area over several weeks and recorded changes in water level, plant growth, and foot traffic. Their notes showed that a small change in one part of the environment could affect the whole trail system. The town used the information to plan repairs that protected both visitors and the natural habitat.",
+        "question": "Read the passage and select the phrases that describe Stan's dedication to his work.",
+        "coachHint": "Focus on how much time and effort Stan puts into his work.",
+        "maxSelect": 2,
+        "minSelect": 2,
+        "correctPhrases": [
+          "months on a single project",
+          "every detail is perfect"
+        ],
+        "selectablePhrases": [
+          "toothpicks and glue",
+          "famous buildings",
+          "class project",
+          "months on a single project",
+          "every detail is perfect"
+        ],
+        "rightAnswerRationale": "The correct phrases describe Stan's dedication and the time he spends on each project."
       },
       {
         "type": "inline-dropdown",
         "passage": null,
-        "question": "Choose the correct phonics pattern in the word 'leaf'.",
-        "sentence": "The word 'leaf' contains the vowel team [BLANK].",
-        "coachHint": "Look for a vowel team in the middle of the word.",
-        "correctOption": "ea",
+        "question": "Select the correct prefix to complete the word: [BLANK]active.",
+        "sentence": "[BLANK]active",
+        "coachHint": "Think about what makes something not active.",
+        "correctOption": "in",
         "dropdownOptions": [
-          "ea",
-          "le",
-          "af",
-          "ef"
+          "in",
+          "re",
+          "dis",
+          "pre"
         ],
         "distractorRationale": [
           {
-            "option": "le",
-            "whyWrong": "'Le' is not a vowel team."
+            "option": "re",
+            "whyWrong": "'Re-' means again, which doesn't fit the context."
           },
           {
-            "option": "af",
-            "whyWrong": "'Af' is not a phonics pattern."
+            "option": "dis",
+            "whyWrong": "'Dis-' can mean not, but 'in-' is more commonly used with 'active.'"
           },
           {
-            "option": "ef",
-            "whyWrong": "'Ef' is not a phonics pattern."
+            "option": "pre",
+            "whyWrong": "'Pre-' means before, which doesn't fit the context."
           }
         ],
-        "rightAnswerRationale": "The 'ea' in 'leaf' is a vowel team that makes a long 'e' sound."
-      },
-      {
-        "type": "hot-text-phrase",
-        "passage": "The green grass moved in the wind. A deer ate quietly, its ears moving. A creek flowed softly, its water shining. The trees stood tall, their leaves moving. It was a calm moment, with nature all around. The sweet smell of flowers filled the air. As the sun set, the sky turned orange, lighting up the land. It was a perfect end to a perfect day, showing the simple joys in life. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
-        "question": "Read the passage and select the phrases that show the phonics pattern 'ee'.",
-        "coachHint": "Look for words with 'ee' in the middle.",
-        "maxSelect": 2,
-        "minSelect": 2,
-        "correctPhrases": [
-          "green grass",
-          "deer ate"
-        ],
-        "selectablePhrases": [
-          "green grass",
-          "deer ate",
-          "creek flowed",
-          "trees stood",
-          "sweet smell"
-        ],
-        "rightAnswerRationale": "The phrases 'green grass' and 'deer ate' contain the 'ee' phonics pattern."
+        "rightAnswerRationale": "The prefix 'in-' means 'not,' making 'inactive' mean 'not active.'"
       }
     ],
-    "qualityScore": 92,
+    "qualityScore": 78,
     "standardCode": "CC.1.1.3.D",
     "teiTypesUsed": [
       "inline-dropdown",
+      "drag-drop-order",
       "hot-text-phrase"
     ],
     "exemplarsUsed": [
       "g3-p1",
-      "g3-mc-1",
-      "g3-mc-2",
       "g3-mc-3",
-      "g3-tei-6",
-      "g4-tei-5",
-      "g4-tei-7"
+      "g3-mc-7",
+      "g3-mc-9",
+      "g4-tei-1",
+      "g3-tei-4",
+      "g3-tei-1"
     ],
     "qualityIssues": [
       "Critic requested revision after 3 iterations."
     ],
     "resourceTitle": null,
-    "standardLabel": "Foundational Skills - phonics patterns",
-    "workedExample": "Let's look at the word 'cake.' Notice the 'c' at the beginning, which makes a 'k' sound. The 'a' is followed by a 'k,' and then there's a silent 'e' at the end. This silent 'e' changes the 'a' from a short sound, like in 'cat,' to a long sound, like in 'cake.' This is an example of the silent 'e' pattern.\n\nNow, consider the word 'ship.' The 'sh' at the beginning is a phonics pattern that makes a unique sound. Instead of saying 's' and 'h' separately, they come together to make the 'sh' sound. Recognizing this pattern helps you read the word correctly.\n\nBy identifying these patterns, you can read new words more easily. Practice finding these patterns in other words you read. Look for silent 'e's, vowel teams, and consonant blends like 'sh' or 'ch.' With practice, you'll become more confident in your reading skills. This matters because the correct answer is not just a matching word or phrase. It is the choice that fits the whole question and can be defended with a specific detail. The reasoning should explain both what the evidence says and how it supports the answer.",
+    "standardLabel": "Decode multisyllable words using word parts",
+    "workedExample": "Let's decode the word 'unhappiness.'\n\n1. **Identify the root word**: The root word here is 'happy.'\n2. **Look for prefixes**: The prefix 'un-' means 'not.'\n3. **Look for suffixes**: The suffix '-ness' turns an adjective into a noun, indicating a state or quality.\n4. **Combine the meanings**: 'Un-' (not) + 'happy' (feeling joy) + '-ness' (state of) = 'the state of not feeling joy.'\n\nBy breaking down 'unhappiness' into its parts, we understand it means the state of not being happy. This method helps you tackle even the longest words by focusing on smaller, familiar parts. Practice this with different words to improve your reading skills. This matters because the correct answer is not just a matching word or phrase. It is the choice that fits the whole question and can be defended with a specific detail. The reasoning should explain both what the evidence says and how it supports the answer.",
     "guidedPractice": [
       {
         "type": "mc",
         "choices": [
-          "br",
-          "sh",
-          "ush",
-          "ru"
+          "happy",
+          "un",
+          "ness",
+          "happiness"
         ],
         "passage": null,
-        "question": "What is the phonics pattern in the word 'brush'?",
-        "coachHint": "Look at the end of the word for a familiar pattern.",
-        "correctAnswer": "sh",
+        "question": "What is the root word in 'unhappiness'?",
+        "coachHint": "Look for the part of the word that carries the main meaning.",
+        "correctAnswer": "happy",
         "distractorRationale": [
           {
-            "choice": "br",
-            "whyWrong": "'Br' is a blend but not the main pattern in 'brush'."
+            "choice": "un",
+            "whyWrong": "'Un-' is a prefix, not the root word."
           },
           {
-            "choice": "ush",
-            "whyWrong": "'Ush' is not a phonics pattern; focus on the ending sound."
+            "choice": "ness",
+            "whyWrong": "'-ness' is a suffix, not the root word."
           },
           {
-            "choice": "ru",
-            "whyWrong": "'Ru' is not a common phonics pattern."
+            "choice": "happiness",
+            "whyWrong": "'Happiness' is a form of the root word but not the root itself."
           }
         ],
-        "rightAnswerRationale": "The 'sh' at the end of 'brush' is a common phonics pattern that makes a unique sound."
+        "rightAnswerRationale": "The root word is 'happy,' which is the main part of the word."
       },
       {
         "type": "inline-dropdown",
         "passage": null,
-        "question": "Select the correct phonics pattern in the word 'train'.",
-        "sentence": "The word 'train' contains the vowel team [BLANK].",
-        "coachHint": "Look for a vowel team in the middle of the word.",
-        "correctOption": "ai",
+        "question": "Select the correct prefix to complete the word: [BLANK]believable.",
+        "sentence": "[BLANK]believable",
+        "coachHint": "Think about what makes something not believable.",
+        "correctOption": "un",
         "dropdownOptions": [
-          "ai",
-          "tr",
-          "in",
-          "ra"
+          "un",
+          "re",
+          "dis",
+          "pre"
         ],
         "distractorRationale": [
           {
-            "option": "tr",
-            "whyWrong": "'Tr' is a consonant blend, not a vowel team."
+            "option": "re",
+            "whyWrong": "'Re-' means again, which doesn't fit the context."
           },
           {
-            "option": "in",
-            "whyWrong": "'In' is not a vowel team in this context."
+            "option": "dis",
+            "whyWrong": "'Dis-' can mean not, but 'un-' is more commonly used with 'believable.'"
           },
           {
-            "option": "ra",
-            "whyWrong": "'Ra' is not a phonics pattern."
+            "option": "pre",
+            "whyWrong": "'Pre-' means before, which doesn't fit the context."
           }
         ],
-        "rightAnswerRationale": "The 'tr' at the beginning is a blend, and 'ai' is a vowel team making a single sound."
+        "rightAnswerRationale": "The prefix 'un-' means 'not,' making 'unbelievable' mean 'not believable.'"
       },
       {
-        "type": "hot-text-phrase",
-        "passage": "The sun was bright, and the sky was clear. A seal swam near the shore, and a team of birds flew by. It was a calm day, perfect for a walk on the beach. The waves gently touched the sand, making a soft sound. Nearby, a teacher picked up shells for her class. Each moment felt special, a reminder of nature's beauty. The clear sky and warm sun made it a great day to be outside. The sea breeze carried the smell of salt, inviting everyone to explore. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
-        "question": "Read the passage and select the phrases that show the phonics pattern 'ea'.",
-        "coachHint": "Look for words with 'ea' in the middle.",
-        "maxSelect": 2,
-        "minSelect": 2,
-        "correctPhrases": [
-          "seal swam",
-          "walk on the beach"
+        "type": "drag-drop-order",
+        "passage": null,
+        "question": "Drag the word parts to form the word 'unbelievable.'",
+        "coachHint": "Think about the order of prefix, root, and suffix.",
+        "correctOrder": [
+          "un-",
+          "believe",
+          "-able"
         ],
-        "selectablePhrases": [
-          "sun was bright",
-          "seal swam",
-          "team of birds",
-          "calm day",
-          "walk on the beach"
+        "draggableItems": [
+          "un-",
+          "believe",
+          "-able"
         ],
-        "rightAnswerRationale": "The phrases 'seal swam' and 'beach' contain the 'ea' phonics pattern."
+        "rightAnswerRationale": "The correct order is 'un-' + 'believe' + '-able,' forming 'unbelievable.'"
       }
     ],
     "sentenceFrames": [
-      "The letters 'ch' in 'chicken' make the sound ______.",
-      "In the word 'cake', the silent 'e' makes the 'a' sound like ______.",
-      "The vowel team 'oa' in 'boat' sounds like ______."
+      "The prefix [BLANK] means...",
+      "The root word [BLANK] gives the word its main meaning.",
+      "The suffix [BLANK] changes the word to mean..."
     ],
     "successCriteria": [
-      "Identify common phonics patterns in words.",
-      "Apply phonics patterns to read new words.",
-      "Recognize the effect of silent 'e' on vowel sounds."
+      "I can identify the root word in a multisyllable word.",
+      "I can recognize and understand common prefixes and suffixes.",
+      "I can combine the meanings of word parts to understand the whole word."
     ],
     "generatorVersion": "V2",
     "resourceProvider": null,
@@ -258,113 +265,122 @@
       {
         "type": "mc",
         "choices": [
-          "fl",
-          "igh",
-          "ght",
-          "li"
+          "trans",
+          "port",
+          "ation",
+          "transport"
         ],
         "passage": null,
-        "question": "What is the phonics pattern in the word 'flight'?",
-        "coachHint": "Look for a vowel pattern in the middle of the word.",
-        "correctAnswer": "igh",
+        "question": "What is the suffix in 'transportation'?",
+        "coachHint": "Look at the end of the word for the suffix.",
+        "correctAnswer": "ation",
         "distractorRationale": [
           {
-            "choice": "fl",
-            "whyWrong": "'Fl' is a blend but not the main pattern in 'flight'."
+            "choice": "trans",
+            "whyWrong": "'Trans-' is a prefix, not a suffix."
           },
           {
-            "choice": "ght",
-            "whyWrong": "'Ght' is not a phonics pattern; focus on the vowel sound."
+            "choice": "port",
+            "whyWrong": "'Port' is the root word, not a suffix."
           },
           {
-            "choice": "li",
-            "whyWrong": "'Li' is not a common phonics pattern."
+            "choice": "transport",
+            "whyWrong": "This is the whole word, not just the suffix."
           }
         ],
-        "rightAnswerRationale": "The 'igh' in 'flight' is a common phonics pattern that makes a long 'i' sound."
+        "rightAnswerRationale": "The suffix '-ation' turns the verb 'transport' into a noun."
       },
       {
         "type": "inline-dropdown",
         "passage": null,
-        "question": "Choose the correct phonics pattern in the word 'dream'.",
-        "sentence": "The word 'dream' contains the vowel team [BLANK].",
-        "coachHint": "Look for a vowel team in the middle of the word.",
-        "correctOption": "ea",
+        "question": "Choose the correct word to complete the sentence: The [BLANK] of the story was exciting.",
+        "sentence": "The [BLANK] of the story was exciting.",
+        "coachHint": "Think about what part of a story can be exciting.",
+        "correctOption": "ending",
         "dropdownOptions": [
-          "ea",
-          "dr",
-          "eam",
-          "re"
+          "beginning",
+          "middle",
+          "ending",
+          "title"
         ],
         "distractorRationale": [
           {
-            "option": "dr",
-            "whyWrong": "'Dr' is a consonant blend, not a vowel team."
+            "option": "beginning",
+            "whyWrong": "The beginning is not typically referred to as exciting in this context."
           },
           {
-            "option": "eam",
-            "whyWrong": "'Eam' is not a vowel team in this context."
+            "option": "middle",
+            "whyWrong": "The middle is not typically referred to as exciting in this context."
           },
           {
-            "option": "re",
-            "whyWrong": "'Re' is not a phonics pattern."
+            "option": "title",
+            "whyWrong": "The title is not a part of the story that can be exciting."
           }
         ],
-        "rightAnswerRationale": "The 'ea' in 'dream' is a vowel team that makes a long 'e' sound."
-      },
-      {
-        "type": "hot-text-phrase",
-        "passage": "The stars twinkled in the night sky. A raccoon ran across the road, looking for food. In the cool air, an owl hooted softly. It was a quiet night, with the moon shining bright. The sound of a stream added to the calm. Nearby, friends sat by a campfire, telling stories. The warmth of the fire made the night feel cozy. As time passed, the moon moved across the sky, watching over everything. The breeze carried the smell of pine, inviting everyone to enjoy the night. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
-        "question": "Read the passage and select the phrases that show the phonics pattern 'oo'.",
-        "coachHint": "Look for words with 'oo' in the middle.",
-        "maxSelect": 2,
-        "minSelect": 2,
-        "correctPhrases": [
-          "cool air",
-          "moon shining"
-        ],
-        "selectablePhrases": [
-          "stars twinkled",
-          "raccoon ran",
-          "cool air",
-          "owl hooted",
-          "moon shining"
-        ],
-        "rightAnswerRationale": "The phrases 'moon shining' and 'cool air' contain the 'oo' phonics pattern."
+        "rightAnswerRationale": "The word 'ending' fits the context of the sentence."
       },
       {
         "type": "mc",
         "choices": [
-          "br",
-          "igh",
-          "ght",
-          "ri"
+          "unbelievable",
+          "believe",
+          "believing",
+          "believed"
         ],
         "passage": null,
-        "question": "Which phonics pattern is in the word 'bright'?",
-        "coachHint": "Look for a vowel pattern in the middle of the word.",
-        "correctAnswer": "igh",
+        "question": "Which word is a root word?",
+        "coachHint": "Look for the main part of the word that carries the core meaning.",
+        "correctAnswer": "believe",
         "distractorRationale": [
           {
-            "choice": "br",
-            "whyWrong": "'Br' is a blend but not the main pattern in 'bright'."
+            "choice": "unbelievable",
+            "whyWrong": "This word includes a prefix and a suffix."
           },
           {
-            "choice": "ght",
-            "whyWrong": "'Ght' is not a phonics pattern; focus on the vowel sound."
+            "choice": "believing",
+            "whyWrong": "This word includes a suffix."
           },
           {
-            "choice": "ri",
-            "whyWrong": "'Ri' is not a common phonics pattern."
+            "choice": "believed",
+            "whyWrong": "This word includes a suffix."
           }
         ],
-        "rightAnswerRationale": "The 'igh' in 'bright' is a common phonics pattern that makes a long 'i' sound."
+        "rightAnswerRationale": "'Believe' is a root word that can have prefixes and suffixes added."
+      },
+      {
+        "type": "inline-dropdown",
+        "passage": null,
+        "question": "Select the correct prefix to complete the word: [BLANK]active.",
+        "sentence": "[BLANK]active",
+        "coachHint": "Think about what makes something not active.",
+        "correctOption": "in",
+        "dropdownOptions": [
+          "in",
+          "re",
+          "dis",
+          "pre"
+        ],
+        "distractorRationale": [
+          {
+            "option": "re",
+            "whyWrong": "'Re-' means again, which doesn't fit the context."
+          },
+          {
+            "option": "dis",
+            "whyWrong": "'Dis-' can mean not, but 'in-' is more commonly used with 'active.'"
+          },
+          {
+            "option": "pre",
+            "whyWrong": "'Pre-' means before, which doesn't fit the context."
+          }
+        ],
+        "rightAnswerRationale": "The prefix 'in-' means 'not,' making 'inactive' mean 'not active.'"
       }
     ],
     "resourceDescription": null
   },
   "critic": {
-    "score": 92,
+    "score": 78,
     "status": "PASS",
     "revisions": []
   },

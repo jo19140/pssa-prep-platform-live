@@ -31,6 +31,16 @@ function sameText(a: string, b: string) {
   return normalized(a) === normalized(b);
 }
 
+function normalizedPhrase(value: string) {
+  return value
+    .toLowerCase()
+    .replace(/[\u2018\u2019]/g, "'")
+    .replace(/[\u201c\u201d]/g, "\"")
+    .replace(/[^a-z0-9]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
 const baseItemSchema = z.object({
   question: mediumText,
   passage: passageText.nullable(),
@@ -219,6 +229,16 @@ export const practiceQuestionSchema = practiceQuestionStructuredOutputSchema.sup
   if (item.type === "hot-text-phrase") {
     if (!item.passage) {
       ctx.addIssue({ code: z.ZodIssueCode.custom, message: "hot-text-phrase requires a passage", path: ["passage"] });
+    }
+    const normalizedPassage = normalizedPhrase(item.passage || "");
+    for (const phrase of item.selectablePhrases) {
+      if (!normalizedPassage.includes(normalizedPhrase(phrase))) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: `hot-text-phrase selectable phrase "${phrase}" must appear in the passage after punctuation normalization`,
+          path: ["selectablePhrases"],
+        });
+      }
     }
     for (const phrase of item.correctPhrases) {
       if (!item.selectablePhrases.some((selectable) => sameText(selectable, phrase))) {
