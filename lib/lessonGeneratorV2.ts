@@ -322,7 +322,8 @@ function buildSystemPrompt(input: GenerateLessonV2Input, plannedTeiTypes: string
     `Required TEI variety: include at least two of these non-MC item types in the lesson: ${plannedTeiTypes.slice(0, 3).join(", ")}. Use each selected TEI type at least twice across the practice sections.`,
     "Wrong-answer design: Each wrong answer must be a plausible misreading a real student would make, not an obviously absurd option.",
     "Rationales: For each wrong answer, explain why a student might pick it and why it is wrong. For reading items, cite the passage.",
-    "Passage budget: include full passage text on only 2-3 practice questions total. For all other practice questions, set passage to null and make the item test the same skill without another full passage. Passage-dependent TEI types (hot-text-phrase, evidence-mapping, two-part-ebsr) must include a passage.",
+    "Practice topic variety: across the 12 practice items, use at least 6 distinct topics or scenarios. Spread topics across domains such as informational science, history/social studies, literary narrative, biographical, process/how-to, and paired-text comparison. Do not make six items about the same poem, animal, classroom task, or single scenario. If one item uses a topic, later passage items should move to a clearly different topic and content domain.",
+    "Passage budget: include full passage text on at least 6 practice questions total so the lesson exposes students to varied authentic reading contexts. Passage-dependent TEI types (hot-text-phrase, evidence-mapping, two-part-ebsr) must include a passage. For non-passage items, use sentence or paragraph contexts on different topics from the full passages.",
     "CRITICAL: Practice passages must read like authentic encyclopedic, narrative, or expository prose. NEVER include meta-pedagogical phrases like 'this passage gives another clear detail,' 'students can use this detail,' 'compare choices,' 'explain why one choice is stronger,' or any other rubric/critic language. Passages are for students to read, not for teachers. If you find yourself writing about the lesson, stop and write only about the topic itself.",
     "Reading passages must be original, grade appropriate, and complete. Any item with a passage field must include a full standalone passage: 170-240 words for grades 3-5 or 275-360 words for grades 6-8. Use short, clear sentences for the grade level. Keep passages near the lower end of the range so the JSON response remains complete. Do not use 2-4 sentence mini-passages in passage fields. Never repeat the same sentence or near-identical sentence to meet word count; write genuinely new content instead.",
     "Mapping formats: for drag-drop-table, correctMapping is an array of { item, column } entries. For evidence-mapping, correctMapping is an array of { claim, evidenceItems } entries. Include one mapping entry for every draggable item or claim.",
@@ -472,7 +473,7 @@ function repairQuestion(question: PracticeQuestionV2): PracticeQuestionV2 {
     repaired.sentence = `${repaired.sentence.replace(/[.?!]?$/, "")} [ ${pair[0]} / ${pair[1]} ].`;
   }
   if (repaired.type === "hot-text-sentence" && !/\(\s*1\s*\)/.test(repaired.paragraph)) {
-    repaired.paragraph = `(1) ${repaired.paragraph} (2) A later sentence adds a concrete example connected to the same idea. (3) The final sentence shows how the idea changes the topic or character.`;
+    repaired.paragraph = `(1) ${repaired.paragraph} (2) Rain clouds gathered above the school garden before the volunteers finished planting. (3) The sudden weather change forced the group to move their seed trays inside.`;
     repaired.sentenceCount = Math.max(3, repaired.sentenceCount || 3);
     repaired.correctSentenceNumber = Math.min(repaired.correctSentenceNumber || 1, repaired.sentenceCount);
   }
@@ -597,7 +598,7 @@ function buildReplacementTei(type: string, input: GenerateLessonV2Input): Practi
       passage: null,
       rightAnswerRationale: "The correct sentence gives the clearest example of the target skill.",
       coachHint: "Read each numbered sentence and choose the one that directly shows the skill.",
-      paragraph: "(1) The passage gives a general topic. (2) This sentence shows the target skill clearly. (3) The final sentence adds a related detail.",
+      paragraph: "(1) The trail map showed three possible routes around the lake. (2) The ranger chose the shortest path because dark clouds were forming. (3) By sunset, the hikers had returned safely to the visitor center.",
       sentenceCount: 3,
       correctSentenceNumber: 2,
     };

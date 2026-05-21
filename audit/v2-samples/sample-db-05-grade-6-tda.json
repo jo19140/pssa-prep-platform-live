@@ -7,50 +7,50 @@
       {
         "type": "multi-select",
         "choices": [
-          "Teamwork helps overcome challenges.",
-          "Gardening is a fun summer activity.",
-          "Friendship grows through shared experiences.",
-          "Rare flowers are difficult to find."
+          "The invention of the printing press revolutionized communication.",
+          "Exploration of new lands expanded trade routes.",
+          "The Renaissance was a period of great artistic achievement.",
+          "Scientific discoveries challenged traditional beliefs."
         ],
-        "passage": "In a small village, a group of children discovers an old library filled with forgotten books. They spend their afternoons reading and sharing stories. As they explore the library, they learn the value of knowledge and imagination. One day, they find a rare book and decide to restore it together, which strengthens their friendship. By the end of the summer, they have not only learned about literature but also about the importance of collaboration and creativity. The library becomes a symbol of their growing friendship and shared adventures, teaching them lessons that extend beyond the pages of the books they read together. Their bond deepens as they uncover new stories and ideas, illustrating the power of teamwork and shared experiences.",
-        "question": "What is the main idea of the passage?",
-        "coachHint": "Think about what the characters learn by the end of the passage.",
+        "passage": "During the Renaissance, which spanned from the 14th to the 17th century, Europe experienced a period of remarkable cultural, artistic, and intellectual growth. This era saw the rise of influential figures such as Leonardo da Vinci, Michelangelo, and Galileo Galilei, who made significant contributions to art and science. The invention of the printing press by Johannes Gutenberg around 1440 played a crucial role in disseminating new ideas, making books more accessible, and promoting literacy among the general population. This technological advancement allowed for the rapid spread of knowledge and facilitated the exchange of ideas across different regions. \n\nExploration also played a significant role during this time. Explorers like Christopher Columbus and Vasco da Gama embarked on voyages that led to the discovery of new lands and the establishment of new trade routes. These explorations expanded the horizons of European society and brought about an exchange of goods, cultures, and ideas. \n\nThe Renaissance was not only a time of artistic and scientific achievements but also a period of questioning and challenging traditional beliefs. Scientists like Copernicus and Galileo proposed theories that contradicted the long-held views of the universe, leading to significant advancements in understanding the natural world. \n\nOverall, the Renaissance was a transformative period that laid the foundation for modern Western thought, characterized by a renewed interest in learning, exploration, and innovation.",
+        "question": "What are two main ideas of the passage?",
+        "coachHint": "Consider the key developments and their impacts during the Renaissance.",
         "maxSelect": 2,
         "minSelect": 2,
         "correctAnswers": [
-          "Teamwork helps overcome challenges.",
-          "Friendship grows through shared experiences."
+          "The invention of the printing press revolutionized communication.",
+          "Exploration of new lands expanded trade routes."
         ],
         "partialCreditRule": "per-correct",
-        "rightAnswerRationale": "The main idea is that teamwork and friendship are important for overcoming challenges."
+        "rightAnswerRationale": "The passage highlights the impact of the printing press on communication and the role of exploration in expanding trade routes during the Renaissance."
       },
       {
         "type": "two-part-ebsr",
         "partA": {
           "choices": [
-            "Through the students' shared experiences.",
-            "By describing the mural's beauty.",
-            "Through the students' individual achievements."
+            "Through the characters' shared journey.",
+            "By highlighting the protagonist's inner thoughts.",
+            "Through the interactions with the wise old man."
           ],
-          "question": "What is the main way the author shows teamwork?",
-          "correctAnswer": "Through the students' shared experiences."
+          "question": "What is the main way the author shows the theme of wisdom?",
+          "correctAnswer": "Through the characters' shared journey."
         },
         "partB": {
           "choices": [
-            "They brainstorm ideas and assign roles.",
-            "They paint the mural individually.",
-            "The mural becomes a vibrant display of their collaboration."
+            "They encounter challenges and learn from them together.",
+            "The protagonist frequently reflects on his thoughts.",
+            "The old man gives them advice at the end."
           ],
           "question": "Which evidence supports this?",
           "correctAnswers": [
-            "They brainstorm ideas and assign roles."
+            "They encounter challenges and learn from them together."
           ]
         },
-        "passage": "In a busy school, students are tasked with creating a mural for the hallway. They brainstorm ideas and assign roles based on each person's strengths. As they paint, they learn to communicate and compromise, ensuring everyone's vision is included. The mural becomes a vibrant display of their collaboration and creativity. By the end of the project, the students have not only created a beautiful piece of art but also strengthened their teamwork skills. The mural stands as a testament to their ability to work together and achieve a common goal, illustrating the power of cooperation and shared effort in achieving success. Their teamwork transforms the hallway into a colorful expression of unity and creativity.",
-        "question": "How does the author show the importance of teamwork in the passage?",
-        "coachHint": "Look for actions the characters take together.",
+        "passage": "In a small village nestled between rolling hills, two friends, Leo and Mira, set out on a journey to find the legendary Tree of Knowledge. The villagers spoke of its ancient wisdom, claiming it held the secrets to understanding life. As they ventured through dense forests and across roaring rivers, they faced numerous challenges. At one point, a fierce storm forced them to take shelter in a cave, where they spent the night discussing their fears and dreams. Each challenge they overcame taught them valuable lessons about trust, perseverance, and the importance of listening to one another.\n\nOne day, they met an old man on the road who spoke in riddles and shared stories of his own adventures. Though his words were cryptic, Leo and Mira pondered them deeply, finding meaning in his tales. As they continued their journey, they realized that the wisdom they sought was not just at the journey's end but in the experiences they shared along the way.\n\nFinally, after many days, they reached the Tree of Knowledge. Sitting beneath its sprawling branches, they understood that the true wisdom lay in their journey together—the bonds they had strengthened and the insights they had gained. The journey had transformed them, revealing that the path to wisdom is often found in the shared experiences and the growth that comes from overcoming obstacles together.",
+        "question": "How does the author show the theme of wisdom in the passage?",
+        "coachHint": "Look for how the characters grow and learn from their journey.",
         "scoringRule": "B-counts-only-if-A-correct",
-        "rightAnswerRationale": "The author shows the importance of teamwork by describing how the students work together to create the mural, which strengthens their collaboration skills."
+        "rightAnswerRationale": "The author shows the theme of wisdom through the characters' shared journey, highlighting how their experiences and challenges teach them valuable lessons."
       }
     ],
     "gradeLevel": 6,
@@ -87,29 +87,29 @@
         "type": "two-part-ebsr",
         "partA": {
           "choices": [
-            "Through the painter's guidance.",
-            "By describing Leo's struggles.",
-            "Through Leo's individual achievements."
+            "Through the chef's detailed instructions.",
+            "By describing Mia's initial failures.",
+            "Through Mia's culinary achievements."
           ],
           "question": "What is the main way the author shows mentorship?",
-          "correctAnswer": "Through the painter's guidance."
+          "correctAnswer": "Through the chef's detailed instructions."
         },
         "partB": {
           "choices": [
-            "The painter teaches Leo to see beauty in everyday life.",
-            "Leo struggles to find inspiration.",
-            "The city feels like a canvas full of possibilities."
+            "The chef teaches Mia to appreciate the balance of flavors.",
+            "Mia struggles to perfect her dish.",
+            "The kitchen feels like a world of endless possibilities."
           ],
           "question": "Which evidence supports this?",
           "correctAnswers": [
-            "The painter teaches Leo to see beauty in everyday life."
+            "The chef teaches Mia to appreciate the balance of flavors."
           ]
         },
-        "passage": "In a bustling city, a young artist named Leo struggles to find inspiration. One day, he meets an elderly painter who teaches him to see beauty in everyday life. As they paint together, Leo learns that art is not just about technique but about expressing emotions and connecting with others. The painter's wisdom helps Leo find his unique style, and he realizes that inspiration can be found in the most unexpected places. By the end of their time together, Leo has not only improved his art but also gained a mentor and friend. The city, once overwhelming, now feels like a canvas full of possibilities, and Leo is eager to explore it with newfound confidence.",
+        "passage": "Mia had always been fascinated by cooking shows, dreaming of creating culinary masterpieces. When she finally got the chance to work in a renowned restaurant, she was both excited and nervous. Her mentor, Chef Anton, was known for his exacting standards and exquisite taste. On her first day, Mia was tasked with preparing a simple dish, but she quickly realized that even the simplest recipes required precision and care.\n\nChef Anton guided Mia through each step, emphasizing the importance of fresh ingredients and the balance of flavors. \"Cooking is not just about following a recipe,\" he explained. \"It's about understanding how each component contributes to the whole.\" Under his watchful eye, Mia learned to appreciate the subtlety of seasoning and the art of presentation.\n\nDespite a few initial setbacks, Mia's skills improved rapidly. She began experimenting with new ingredients and techniques, always eager to learn more. Chef Anton encouraged her creativity, reminding her that mistakes were part of the learning process. \"Every great chef has burned a dish or two,\" he would say with a wink.\n\nAs the weeks passed, Mia's confidence grew. The kitchen, once intimidating, now felt like a world of endless possibilities. She realized that with dedication and guidance, she could transform her passion into a career. By the end of her apprenticeship, Mia had not only honed her culinary skills but also found a mentor who inspired her to pursue her dreams.",
         "question": "How does the author convey the theme of mentorship in the passage?",
-        "coachHint": "Look for interactions between Leo and the painter.",
+        "coachHint": "Look for interactions between Mia and Chef Anton.",
         "scoringRule": "B-counts-only-if-A-correct",
-        "rightAnswerRationale": "The author conveys the theme of mentorship by showing how the painter's guidance helps Leo find his unique style and confidence."
+        "rightAnswerRationale": "The author conveys the theme of mentorship by showing how Chef Anton's detailed instructions help Mia appreciate the balance of flavors and grow as a chef."
       },
       {
         "type": "multi-select",
@@ -159,32 +159,32 @@
       {
         "type": "evidence-mapping",
         "claims": [
-          "The theme is friendship.",
-          "The theme is teamwork."
+          "The theme is adaptation.",
+          "The theme is cooperation."
         ],
-        "passage": "In a small village, a group of children discovers an old library filled with forgotten books. They spend their afternoons reading and sharing stories. As they explore the library, they learn the value of knowledge and imagination. One day, they find a rare book and decide to restore it together, which strengthens their friendship. By the end of the summer, they have not only learned about literature but also about the importance of collaboration and creativity. The library becomes a symbol of their growing friendship and shared adventures, teaching them lessons that extend beyond the pages of the books they read together. Their bond deepens as they uncover new stories and ideas, illustrating the power of teamwork and shared experiences.",
+        "passage": "In the heart of a dense forest, a group of animals faced an unexpected challenge: a severe drought that dried up their usual water sources. The forest, once lush and vibrant, now seemed quiet and parched. The animals, including a wise old owl, a clever fox, and a resourceful rabbit, knew they had to adapt to survive. The owl suggested they explore the forest to find hidden water reserves. The fox, known for its cunning, proposed a plan to dig deeper into the ground near the riverbed. Meanwhile, the rabbit, quick and agile, volunteered to scout for any signs of moisture in the surrounding areas. Each animal contributed their unique skills to the effort. After days of hard work and cooperation, they discovered a small underground spring. The animals took turns digging and carrying water back to the rest of the forest inhabitants. Their combined efforts ensured that everyone had enough water to survive the drought. Through this experience, the animals learned the importance of adaptation and cooperation. They realized that by working together and using their individual strengths, they could overcome even the toughest challenges nature presented. The forest slowly revived, and the animals celebrated their success, knowing their unity had saved them.",
         "question": "What is the main theme of the passage?",
-        "coachHint": "Look for parts of the passage where the characters interact and support each other.",
+        "coachHint": "Consider how the animals work together and adapt to their environment.",
         "evidenceItems": [
-          "The children discover an old library together.",
-          "They decide to restore a rare book.",
-          "Their friendship grows through shared adventures."
+          "The owl suggested exploring the forest for water.",
+          "The fox proposed digging near the riverbed.",
+          "The animals discovered an underground spring."
         ],
         "correctMapping": [
           {
-            "claim": "The theme is friendship.",
+            "claim": "The theme is adaptation.",
             "evidenceItems": [
-              "Their friendship grows through shared adventures."
+              "The animals discovered an underground spring."
             ]
           },
           {
-            "claim": "The theme is teamwork.",
+            "claim": "The theme is cooperation.",
             "evidenceItems": [
-              "They decide to restore a rare book."
+              "The fox proposed digging near the riverbed."
             ]
           }
         ],
-        "rightAnswerRationale": "The theme of the passage is friendship and teamwork. The children's experiences in the library highlight how working together strengthens their bond."
+        "rightAnswerRationale": "The theme of the passage is adaptation and cooperation. The animals' efforts to find water during the drought highlight the necessity of working together and adapting to new circumstances."
       },
       {
         "type": "multi-select",
@@ -210,29 +210,29 @@
         "type": "two-part-ebsr",
         "partA": {
           "choices": [
-            "Through the characters' shared experiences.",
-            "By describing the library's atmosphere.",
-            "Through the characters' individual achievements."
+            "Through the characters' shared journey.",
+            "By highlighting the harsh environment.",
+            "Through the characters' individual skills."
           ],
           "question": "What is the main way the author shows teamwork?",
-          "correctAnswer": "Through the characters' shared experiences."
+          "correctAnswer": "Through the characters' shared journey."
         },
         "partB": {
           "choices": [
-            "They find a rare book and decide to restore it together.",
-            "They spend their afternoons reading.",
-            "The library becomes a symbol of their friendship."
+            "They face a storm together and find shelter.",
+            "They each try to solve problems on their own.",
+            "The journey becomes a test of their friendship."
           ],
           "question": "Which evidence supports this?",
           "correctAnswers": [
-            "They find a rare book and decide to restore it together."
+            "They face a storm together and find shelter."
           ]
         },
-        "passage": "In a small village, a group of children discovers an old library filled with forgotten books. They spend their afternoons reading and sharing stories. As they explore the library, they learn the value of knowledge and imagination. One day, they find a rare book and decide to restore it together, which strengthens their friendship. By the end of the summer, they have not only learned about literature but also about the importance of collaboration and creativity. The library becomes a symbol of their growing friendship and shared adventures, teaching them lessons that extend beyond the pages of the books they read together. Their bond deepens as they uncover new stories and ideas, illustrating the power of teamwork and shared experiences.",
+        "passage": "On a remote island, three close friends, Alex, Ben, and Clara, embarked on an exhilarating adventure to uncover a hidden treasure rumored to be buried deep within the heart of the jungle. The island was notorious for its unpredictable weather and challenging terrain, but the friends were determined to succeed, driven by stories of the treasure that had captivated their imaginations for years. As they navigated through the dense foliage, where vines hung like curtains and the air was thick with the scent of exotic flowers, they relied heavily on each other's strengths. Alex, with his keen sense of direction, led the way through the labyrinth of trees. Ben, known for his strength, helped the group cross rocky streams, lifting heavy branches out of their path. Clara, with her sharp eyes, spotted hidden dangers and pointed out the safest routes.\n\nOne afternoon, as they trekked deeper into the jungle, a sudden storm swept across the island. The sky darkened, and rain poured down in torrents, forcing them to seek immediate shelter. Working together, they quickly constructed a makeshift tent using large leaves and fallen branches, their hands moving in unison as they built their refuge. Huddled together under their leafy canopy, they shared stories and laughter, which lifted their spirits despite the harsh conditions outside. As the storm raged on, they realized that their friendship was the true treasure they had discovered. The journey tested their patience and resilience, but it also deepened their bond in ways they had never anticipated.\n\nBy the time the storm passed, they had not only survived the island's challenges but had also learned the invaluable importance of unity and cooperation. Their shared journey through the island became a testament to the power of teamwork and friendship, leaving them with memories that would last a lifetime. The treasure they sought was no longer gold or jewels, but the enduring connection they had forged through their shared adventure.",
         "question": "How does the author show the importance of teamwork in the passage?",
         "coachHint": "Look for actions the characters take together.",
         "scoringRule": "B-counts-only-if-A-correct",
-        "rightAnswerRationale": "The author shows the importance of teamwork by describing how the children work together to restore the rare book, which strengthens their friendship."
+        "rightAnswerRationale": "The author shows the importance of teamwork by describing how the friends face the storm together and find shelter, which strengthens their friendship."
       }
     ],
     "sentenceFrames": [
@@ -252,32 +252,32 @@
       {
         "type": "evidence-mapping",
         "claims": [
-          "The theme is finding inspiration.",
-          "The theme is mentorship."
+          "The theme is perseverance.",
+          "The theme is the impact of a mentor."
         ],
-        "passage": "In a bustling city, a young artist named Leo struggles to find inspiration. One day, he meets an elderly painter who teaches him to see beauty in everyday life. As they paint together, Leo learns that art is not just about technique but about expressing emotions and connecting with others. The painter's wisdom helps Leo find his unique style, and he realizes that inspiration can be found in the most unexpected places. By the end of their time together, Leo has not only improved his art but also gained a mentor and friend. The city, once overwhelming, now feels like a canvas full of possibilities, and Leo is eager to explore it with newfound confidence.",
+        "passage": "Marie Curie, born in Warsaw, Poland, in 1867, faced numerous obstacles on her path to becoming a renowned scientist. Growing up in a time when educational opportunities for women were severely limited, Marie was undeterred by the societal barriers that stood in her way. Her father, a teacher, instilled in her a love for learning, which fueled her passion for discovery and science. Despite these challenges, Marie was determined to pursue her education and contribute to the world of science.\n\nIn pursuit of her dreams, Marie moved to Paris to study at the Sorbonne, one of the few places where women could receive a higher education in science. There, she met Pierre Curie, a fellow scientist who shared her passion for research. Pierre became not only her mentor but also her partner in life and work. Together, they conducted groundbreaking research on radioactivity, a term that Marie herself coined. Their collaborative work led to significant advancements in the understanding of radioactive elements.\n\nPierre's encouragement and unwavering belief in Marie's abilities were instrumental in her success. He supported her at every step, helping her navigate the male-dominated world of science. Tragically, Pierre's life was cut short in an accident, but Marie's resolve only strengthened. She continued their work with determination and focus, ultimately becoming the first woman to win a Nobel Prize. Remarkably, she remains the only person to have won Nobel Prizes in two different sciences: Physics and Chemistry.\n\nMarie Curie's story is a testament to the power of perseverance and the profound impact a mentor can have on one's life and career. Her determination and Pierre's mentorship not only advanced scientific knowledge but also paved the way for future generations of women in science. Her legacy continues to inspire countless individuals to pursue their passions, regardless of the obstacles they may face.",
         "question": "What is the central theme of the passage?",
-        "coachHint": "Consider what Leo learns from the elderly painter.",
+        "coachHint": "Think about the challenges Marie Curie faced and the role of Pierre Curie in her life.",
         "evidenceItems": [
-          "Leo learns to see beauty in everyday life.",
-          "The painter's wisdom helps Leo find his style.",
-          "Leo gains a mentor and friend."
+          "Marie persevered despite societal barriers.",
+          "Pierre's encouragement was instrumental in Marie's success.",
+          "Marie became the first woman to win a Nobel Prize."
         ],
         "correctMapping": [
           {
-            "claim": "The theme is finding inspiration.",
+            "claim": "The theme is perseverance.",
             "evidenceItems": [
-              "Leo learns to see beauty in everyday life."
+              "Marie persevered despite societal barriers."
             ]
           },
           {
-            "claim": "The theme is mentorship.",
+            "claim": "The theme is the impact of a mentor.",
             "evidenceItems": [
-              "Leo gains a mentor and friend."
+              "Pierre's encouragement was instrumental in Marie's success."
             ]
           }
         ],
-        "rightAnswerRationale": "The central theme is finding inspiration and mentorship in unexpected places."
+        "rightAnswerRationale": "The central theme is perseverance and the impact of mentorship in overcoming challenges."
       },
       {
         "type": "multi-select",
@@ -303,29 +303,29 @@
         "type": "two-part-ebsr",
         "partA": {
           "choices": [
-            "Through the painter's guidance.",
-            "By describing Leo's struggles.",
-            "Through Leo's individual achievements."
+            "By showing how both characters learn from each other.",
+            "Through the exchange of letters between the two.",
+            "By depicting their shared experiences and growth."
           ],
-          "question": "What is the main way the author shows mentorship?",
-          "correctAnswer": "Through the painter's guidance."
+          "question": "What is the main way the author shows the development of the friendship?",
+          "correctAnswer": "By depicting their shared experiences and growth."
         },
         "partB": {
           "choices": [
-            "The painter teaches Leo to see beauty in everyday life.",
-            "Leo struggles to find inspiration.",
-            "The city feels like a canvas full of possibilities."
+            "They explore new places together, learning and growing.",
+            "Their letters reveal deep insights into each other's lives.",
+            "They both change their perspectives after meeting."
           ],
           "question": "Which evidence supports this?",
           "correctAnswers": [
-            "The painter teaches Leo to see beauty in everyday life."
+            "They explore new places together, learning and growing."
           ]
         },
-        "passage": "In a bustling city, a young artist named Leo struggles to find inspiration. One day, he meets an elderly painter who teaches him to see beauty in everyday life. As they paint together, Leo learns that art is not just about technique but about expressing emotions and connecting with others. The painter's wisdom helps Leo find his unique style, and he realizes that inspiration can be found in the most unexpected places. By the end of their time together, Leo has not only improved his art but also gained a mentor and friend. The city, once overwhelming, now feels like a canvas full of possibilities, and Leo is eager to explore it with newfound confidence.",
-        "question": "How does the author convey the theme of mentorship in the passage?",
-        "coachHint": "Look for interactions between Leo and the painter.",
+        "passage": "In a quaint little town nestled amidst rolling hills and lush greenery, two unlikely companions, Emma and Jake, embark on a journey that forever alters their lives. Emma, a bookish girl with an insatiable appetite for stories and a vivid imagination, often found solace in the pages of her favorite novels. Jake, on the other hand, was an adventurous spirit, always seeking the thrill of exploration and the unknown. Their paths crossed one sunny afternoon at the local library, a place where Emma spent countless hours lost in her beloved books, and where Jake had come to find a map for his next adventure.\n\nDespite their apparent differences, Emma and Jake quickly discovered a shared curiosity about the world around them. This common interest sparked an unexpected friendship, one that would lead them on numerous escapades through the hidden trails and forgotten paths that wound around their town. Every weekend, with backpacks filled with snacks and a sense of wonder, they set off to explore. They uncovered secret gardens where wildflowers bloomed in a riot of colors, stood in awe before ancient trees that whispered stories of the past, and even stumbled upon a hidden waterfall that cascaded down rocks, its sound a soothing melody.\n\nAs they wandered through these magical landscapes, Emma and Jake shared their dreams and fears, opening up to each other in ways they never had before. Emma, with her love for literature, recounted tales from her favorite books, weaving stories that captivated Jake's imagination. In return, Jake shared his daring escapades, tales of climbing the tallest trees and venturing into the mysterious caves that dotted the hills.\n\nThrough these shared experiences, both friends grew in unexpected ways. Emma found herself becoming more adventurous, stepping out of her comfort zone and embracing the thrill of the unknown. Jake, meanwhile, developed a newfound appreciation for the power of stories and the worlds they could unlock. Their friendship blossomed, each helping the other to see the world through a different lens.\n\nBy the end of the summer, Emma and Jake had not only uncovered the secrets of their town but had also discovered the profound depth of their friendship. The hills, once merely a picturesque backdrop to their everyday lives, now held cherished memories of laughter, discovery, and personal growth. Their bond, forged through shared adventures and mutual understanding, stood as a testament to the transformative power of friendship.",
+        "question": "How does the author convey the theme of friendship in the passage?",
+        "coachHint": "Consider how Emma and Jake's interactions highlight their growing bond.",
         "scoringRule": "B-counts-only-if-A-correct",
-        "rightAnswerRationale": "The author conveys the theme of mentorship by showing how the painter's guidance helps Leo find his unique style and confidence."
+        "rightAnswerRationale": "The author conveys the theme of friendship by showing how Emma and Jake's shared experiences lead to personal growth and a deeper connection."
       },
       {
         "type": "multi-select",

@@ -1,386 +1,340 @@
 {
   "lesson": {
-    "hook": "Have you ever wondered how you can read long words like 'unbelievable' or 'transportation'? These words might seem tricky at first, but they become much easier when you break them down into smaller parts. Today, we'll learn how to decode multisyllable words by looking at their parts. This skill will help you read faster and understand more words!",
-    "skill": "Multisyllable Word Parts",
-    "title": "Decoding Multisyllable Words",
+    "hook": "Have you ever wondered how some words can be so long and tricky to read? Words like 'elephant' or 'butterfly' have multiple parts, or syllables, that we need to understand. Today, we'll explore how to break down these big words into smaller, manageable parts. This skill will help you read more confidently and understand new words you encounter.",
+    "skill": "Multisyllabic Words",
+    "title": "Mastering Multisyllabic Words",
     "exitTicket": [
       {
-        "type": "mc",
-        "choices": [
-          "un",
-          "happy",
-          "ness",
-          "happiness"
-        ],
+        "type": "inline-dropdown",
         "passage": null,
-        "question": "What is the prefix in 'unhappiness'?",
-        "coachHint": "Look at the beginning of the word for the prefix.",
-        "correctAnswer": "un",
+        "question": "Identify the number of syllables in the word 'giraffe.'",
+        "sentence": "The word 'giraffe' has [BLANK] syllables.",
+        "coachHint": "Listen for the vowel sounds in 'giraffe.'",
+        "correctOption": "two",
+        "dropdownOptions": [
+          "two",
+          "three",
+          "four"
+        ],
         "distractorRationale": [
           {
-            "choice": "happy",
-            "whyWrong": "'Happy' is the root word, not a prefix."
+            "option": "three",
+            "whyWrong": "'Giraffe' does not have three distinct vowel sounds."
           },
           {
-            "choice": "ness",
-            "whyWrong": "'-ness' is a suffix, not a prefix."
-          },
-          {
-            "choice": "happiness",
-            "whyWrong": "This is the whole word, not just the prefix."
+            "option": "four",
+            "whyWrong": "'Giraffe' does not have four distinct vowel sounds."
           }
         ],
-        "rightAnswerRationale": "The prefix 'un-' means 'not,' changing the meaning of the root word 'happy.'"
+        "rightAnswerRationale": "The word 'giraffe' has two syllables: 'gi-raffe.'"
       },
       {
         "type": "inline-dropdown",
         "passage": null,
-        "question": "Select the correct suffix to complete the word: hope[BLANK].",
-        "sentence": "hope[BLANK]",
-        "coachHint": "Think about what makes 'hope' into an adjective.",
-        "correctOption": "ful",
+        "question": "Select the correct syllable breakdown for 'crocodile.'",
+        "sentence": "The word 'crocodile' is broken down as [BLANK].",
+        "coachHint": "Listen for the vowel sounds in 'crocodile.'",
+        "correctOption": "cro-co-dile",
         "dropdownOptions": [
-          "ful",
-          "less",
-          "ing",
-          "ed"
+          "cro-co-dile",
+          "croc-od-ile",
+          "cro-cod-ile"
         ],
         "distractorRationale": [
           {
-            "option": "less",
-            "whyWrong": "'-less' means without, which doesn't fit the context."
+            "option": "croc-od-ile",
+            "whyWrong": "This option incorrectly divides the first syllable."
           },
           {
-            "option": "ing",
-            "whyWrong": "'-ing' is used for verbs, not adjectives."
-          },
-          {
-            "option": "ed",
-            "whyWrong": "'-ed' is used for past tense verbs, not adjectives."
+            "option": "cro-cod-ile",
+            "whyWrong": "This option incorrectly divides the second syllable."
           }
         ],
-        "rightAnswerRationale": "The suffix '-ful' turns 'hope' into an adjective meaning full of hope."
+        "rightAnswerRationale": "'Crocodile' is divided into three syllables: 'cro-co-dile.'"
       }
     ],
     "gradeLevel": 3,
-    "explanation": "Decoding multisyllable words involves breaking them down into smaller, more manageable parts. These parts can include prefixes, suffixes, and root words. For example, in the word 'unbelievable,' 'un-' is a prefix that means 'not,' 'believe' is the root word, and '-able' is a suffix meaning 'capable of.' By understanding these parts, you can piece together the meaning of the whole word. Let's look at another example: 'transportation.' This word can be broken down into 'trans-' (a prefix meaning 'across'), 'port' (a root word meaning 'carry'), and '-ation' (a suffix that turns a verb into a noun). When you combine these parts, you understand that 'transportation' refers to the act of carrying something across a distance. To decode multisyllable words, follow these steps: 1. **Identify the root word**: Look for the main part of the word that carries the core meaning. 2. **Look for prefixes**: These are added to the beginning of a word to change its meaning. 3. **Look for suffixes**: These are added to the end of a word to alter its form or meaning. 4. **Sound out each part**: Break the word into syllables and pronounce each one. By practicing these steps, you'll become more confident in reading and understanding longer words. Each part of a word can give you clues about its overall meaning. Avoid choosing details that sound related but do not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step.",
+    "explanation": "Multisyllabic words are words with more than one syllable. Each syllable is a unit of sound that typically contains a vowel sound. Understanding how to break down these words into syllables can make reading easier. For example, the word 'elephant' has three syllables: 'el-e-phant.' By clapping your hands or tapping your fingers for each syllable, you can hear and feel the rhythm of the word. This technique helps in recognizing patterns in words, making it easier to decode them.\n\nWhen you encounter a long word, try to identify familiar parts or chunks. Many multisyllabic words are made up of smaller words or prefixes and suffixes. For instance, 'unhappily' can be broken down into 'un-hap-pi-ly.' Recognizing these parts can help you understand the meaning of the word.\n\nAdditionally, pay attention to vowel sounds and consonant clusters. Vowels often determine where a word is divided into syllables. For example, in 'butterfly,' the vowels 'u,' 'e,' and 'y' help us divide the word into 'but-ter-fly.' Practicing these strategies will improve your reading fluency and comprehension, allowing you to tackle more complex texts with ease. Remember, practice makes perfect, so keep trying with different words! Let's dive into some examples and practice exercises to strengthen your skills. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step.",
     "resourceUrl": null,
-    "whyAssigned": "This mini-lesson targets Multisyllable Word Parts because the diagnostic showed a standards-aligned practice gap.",
+    "whyAssigned": "This mini-lesson targets Multisyllabic Words because the diagnostic showed a standards-aligned practice gap.",
     "commonErrors": [
-      "Students might confuse prefixes and suffixes, leading to incorrect word meanings.",
-      "Some may overlook the root word, focusing only on prefixes or suffixes.",
-      "Mispronouncing syllables can lead to misunderstanding the word."
+      "Students may try to pronounce all syllables at once, leading to confusion.",
+      "Some might not recognize vowel sounds as indicators for syllable division.",
+      "Others may overlook familiar word parts, making decoding harder."
     ],
     "masteryCheck": [
       {
-        "type": "mc",
-        "choices": [
-          "trans",
-          "port",
-          "ation",
-          "transport"
-        ],
+        "type": "inline-dropdown",
         "passage": null,
-        "question": "What is the root word in 'transportation'?",
-        "coachHint": "Look for the main part of the word that carries the core meaning.",
-        "correctAnswer": "port",
+        "question": "How many syllables are in the word 'hippopotamus'?",
+        "sentence": "The word 'hippopotamus' has [BLANK] syllables.",
+        "coachHint": "Count the vowel sounds in 'hippopotamus.'",
+        "correctOption": "five",
+        "dropdownOptions": [
+          "four",
+          "five",
+          "six"
+        ],
         "distractorRationale": [
           {
-            "choice": "trans",
-            "whyWrong": "'Trans-' is a prefix, not the root word."
+            "option": "four",
+            "whyWrong": "'Hippopotamus' has more than four vowel sounds."
           },
           {
-            "choice": "ation",
-            "whyWrong": "'-ation' is a suffix, not the root word."
-          },
-          {
-            "choice": "transport",
-            "whyWrong": "This is the whole word, not just the root."
+            "option": "six",
+            "whyWrong": "'Hippopotamus' does not have six distinct vowel sounds."
           }
         ],
-        "rightAnswerRationale": "The root word is 'transport,' which means to carry."
-      },
-      {
-        "type": "hot-text-phrase",
-        "passage": "Stan Munro is a toothpick engineer who builds structures using only toothpicks and glue. His creations include famous buildings from around the world. Stan started building with toothpicks after a class project in school. His work is displayed in museums and admired by many for its detail and creativity. Stan's structures are known for their precision and strength, despite being made from such simple materials. He often spends months on a single project, ensuring every detail is perfect before completion. His dedication and skill have made him famous in his field, inspiring others to explore creative engineering with everyday materials like toothpicks.",
-        "question": "Read the passage and select the phrases that describe Stan's dedication to his work.",
-        "coachHint": "Focus on how much time and effort Stan puts into his work.",
-        "maxSelect": 2,
-        "minSelect": 2,
-        "correctPhrases": [
-          "months on a single project",
-          "every detail is perfect"
-        ],
-        "selectablePhrases": [
-          "toothpicks and glue",
-          "famous buildings",
-          "class project",
-          "months on a single project",
-          "every detail is perfect"
-        ],
-        "rightAnswerRationale": "The correct phrases describe Stan's dedication and the time he spends on each project."
+        "rightAnswerRationale": "The word 'hippopotamus' has five syllables: 'hip-po-pot-a-mus.'"
       },
       {
         "type": "inline-dropdown",
         "passage": null,
-        "question": "Select the correct prefix to complete the word: [BLANK]active.",
-        "sentence": "[BLANK]active",
-        "coachHint": "Think about what makes something not active.",
-        "correctOption": "in",
+        "question": "Break down the word 'television' into syllables.",
+        "sentence": "The word 'television' is divided as [BLANK].",
+        "coachHint": "Listen for the vowel sounds in 'television.'",
+        "correctOption": "tel-e-vi-sion",
         "dropdownOptions": [
-          "in",
-          "re",
-          "dis",
-          "pre"
+          "tel-e-vi-sion",
+          "tele-vis-ion",
+          "tel-evis-ion"
         ],
         "distractorRationale": [
           {
-            "option": "re",
-            "whyWrong": "'Re-' means again, which doesn't fit the context."
+            "option": "tele-vis-ion",
+            "whyWrong": "This option incorrectly divides the first syllable."
           },
           {
-            "option": "dis",
-            "whyWrong": "'Dis-' can mean not, but 'in-' is more commonly used with 'active.'"
-          },
-          {
-            "option": "pre",
-            "whyWrong": "'Pre-' means before, which doesn't fit the context."
+            "option": "tel-evis-ion",
+            "whyWrong": "This option incorrectly divides the second syllable."
           }
         ],
-        "rightAnswerRationale": "The prefix 'in-' means 'not,' making 'inactive' mean 'not active.'"
+        "rightAnswerRationale": "The word 'television' is divided into four syllables: 'tel-e-vi-sion.'"
+      },
+      {
+        "type": "inline-dropdown",
+        "passage": null,
+        "question": "Select the correct syllable breakdown for 'microscope.'",
+        "sentence": "The word 'microscope' is broken down as [BLANK].",
+        "coachHint": "Focus on the vowel sounds in 'microscope.'",
+        "correctOption": "mi-cro-scope",
+        "dropdownOptions": [
+          "mi-cro-scope",
+          "mic-ros-cope",
+          "mic-ro-scope"
+        ],
+        "distractorRationale": [
+          {
+            "option": "mic-ros-cope",
+            "whyWrong": "This option incorrectly divides the first syllable."
+          },
+          {
+            "option": "mic-ro-scope",
+            "whyWrong": "This option incorrectly divides the second syllable."
+          }
+        ],
+        "rightAnswerRationale": "'Microscope' is divided into three syllables: 'mi-cro-scope.'"
       }
     ],
-    "qualityScore": 78,
-    "standardCode": "CC.1.1.3.D",
+    "qualityScore": 82,
+    "standardCode": "CC.1.1.3.E",
     "teiTypesUsed": [
-      "inline-dropdown",
       "drag-drop-order",
-      "hot-text-phrase"
+      "inline-dropdown",
+      "hot-text-word"
     ],
     "exemplarsUsed": [
       "g3-p1",
+      "g3-mc-1",
+      "g3-mc-2",
       "g3-mc-3",
-      "g3-mc-7",
-      "g3-mc-9",
       "g4-tei-1",
-      "g3-tei-4",
-      "g3-tei-1"
+      "g3-tei-1",
+      "g3-tei-4"
     ],
     "qualityIssues": [
       "Critic requested revision after 3 iterations."
     ],
     "resourceTitle": null,
-    "standardLabel": "Decode multisyllable words using word parts",
-    "workedExample": "Let's decode the word 'unhappiness.' 1. **Identify the root word**: The root word here is 'happy.' 2. **Look for prefixes**: The prefix 'un-' means 'not.' 3. **Look for suffixes**: The suffix '-ness' turns an adjective into a noun, indicating a state or quality. 4. **Combine the meanings**: 'Un-' (not) + 'happy' (feeling joy) + '-ness' (state of) = 'the state of not feeling joy.' By breaking down 'unhappiness' into its parts, we understand it means the state of not being happy. This method helps you tackle even the longest words by focusing on smaller, familiar parts. Practice this with different words to improve your reading skills. This matters because the correct answer is not just a matching word or phrase. It is the choice that fits the whole question and can be defended with a specific detail. The reasoning should explain both what the evidence says and how it supports the answer.",
+    "standardLabel": "Foundational Skills - multisyllabic word reading",
+    "workedExample": "Let's take the word 'caterpillar' as an example. First, say the word slowly: 'cat-er-pil-lar.' Notice how your mouth moves and the sounds you make. Each time your mouth opens to make a vowel sound, that's a new syllable.\n\nNow, let's break it down:\n- 'cat' is the first syllable.\n- 'er' is the second syllable.\n- 'pil' is the third syllable.\n- 'lar' is the fourth syllable.\n\nBy identifying each syllable, you can pronounce the word more easily. Try clapping your hands as you say each syllable: clap for 'cat,' clap for 'er,' clap for 'pil,' and clap for 'lar.' This physical action helps reinforce the division of syllables in your mind. Now, try it with another word, like 'umbrella.' Break it down into 'um-brel-la.' Practicing with different words will help you become more comfortable with multisyllabic words. Remember, each syllable usually has one vowel sound, and recognizing these can guide you in dividing the word correctly.",
     "guidedPractice": [
       {
-        "type": "mc",
-        "choices": [
-          "happy",
-          "un",
-          "ness",
-          "happiness"
-        ],
+        "type": "drag-drop-order",
         "passage": null,
-        "question": "What is the root word in 'unhappiness'?",
-        "coachHint": "Look for the part of the word that carries the main meaning.",
-        "correctAnswer": "happy",
-        "distractorRationale": [
-          {
-            "choice": "un",
-            "whyWrong": "'Un-' is a prefix, not the root word."
-          },
-          {
-            "choice": "ness",
-            "whyWrong": "'-ness' is a suffix, not the root word."
-          },
-          {
-            "choice": "happiness",
-            "whyWrong": "'Happiness' is a form of the root word but not the root itself."
-          }
+        "question": "Break down the word 'alligator' into syllables.",
+        "coachHint": "Say the word slowly and listen for the vowel sounds.",
+        "correctOrder": [
+          "al",
+          "li",
+          "ga",
+          "tor"
         ],
-        "rightAnswerRationale": "The root word is 'happy,' which is the main part of the word."
+        "draggableItems": [
+          "al",
+          "li",
+          "ga",
+          "tor"
+        ],
+        "rightAnswerRationale": "The word 'alligator' is divided into four syllables: 'al-li-ga-tor.' Each syllable has a vowel sound."
       },
       {
         "type": "inline-dropdown",
         "passage": null,
-        "question": "Select the correct prefix to complete the word: [BLANK]believable.",
-        "sentence": "[BLANK]believable",
-        "coachHint": "Think about what makes something not believable.",
-        "correctOption": "un",
+        "question": "Select the correct syllable breakdown for 'banana.'",
+        "sentence": "The word 'banana' is broken down as [BLANK].",
+        "coachHint": "Listen for the vowel sounds in 'banana.'",
+        "correctOption": "ba-na-na",
         "dropdownOptions": [
-          "un",
-          "re",
-          "dis",
-          "pre"
+          "ba-na-na",
+          "ban-ana",
+          "ban-an-a"
         ],
         "distractorRationale": [
           {
-            "option": "re",
-            "whyWrong": "'Re-' means again, which doesn't fit the context."
+            "option": "ban-ana",
+            "whyWrong": "This option misses the middle syllable."
           },
           {
-            "option": "dis",
-            "whyWrong": "'Dis-' can mean not, but 'un-' is more commonly used with 'believable.'"
-          },
-          {
-            "option": "pre",
-            "whyWrong": "'Pre-' means before, which doesn't fit the context."
+            "option": "ban-an-a",
+            "whyWrong": "This option incorrectly divides the first syllable."
           }
         ],
-        "rightAnswerRationale": "The prefix 'un-' means 'not,' making 'unbelievable' mean 'not believable.'"
+        "rightAnswerRationale": "'Banana' is divided into three syllables: 'ba-na-na.'"
       },
       {
-        "type": "drag-drop-order",
+        "type": "inline-dropdown",
         "passage": null,
-        "question": "Drag the word parts to form the word 'unbelievable.'",
-        "coachHint": "Think about the order of prefix, root, and suffix.",
-        "correctOrder": [
-          "un-",
-          "believe",
-          "-able"
+        "question": "Identify the correct syllable division for 'computer.'",
+        "sentence": "The word 'computer' is divided as [BLANK].",
+        "coachHint": "Focus on the vowel sounds in 'computer.'",
+        "correctOption": "com-pu-ter",
+        "dropdownOptions": [
+          "com-pu-ter",
+          "comp-ut-er",
+          "com-put-er"
         ],
-        "draggableItems": [
-          "un-",
-          "believe",
-          "-able"
+        "distractorRationale": [
+          {
+            "option": "comp-ut-er",
+            "whyWrong": "This option incorrectly divides the first syllable."
+          },
+          {
+            "option": "com-put-er",
+            "whyWrong": "This option incorrectly divides the second syllable."
+          }
         ],
-        "rightAnswerRationale": "The correct order is 'un-' + 'believe' + '-able,' forming 'unbelievable.'"
+        "rightAnswerRationale": "'Computer' is divided into three syllables: 'com-pu-ter.'"
       }
     ],
     "sentenceFrames": [
-      "The prefix [BLANK] means...",
-      "The root word [BLANK] gives the word its main meaning.",
-      "The suffix [BLANK] changes the word to mean..."
+      "The word [BLANK] has [BLANK] syllables.",
+      "I can break down the word [BLANK] into [BLANK].",
+      "When I see a long word, I look for [BLANK] to help me read it."
     ],
     "successCriteria": [
-      "I can identify the root word in a multisyllable word.",
-      "I can recognize and understand common prefixes and suffixes.",
-      "I can combine the meanings of word parts to understand the whole word."
+      "I can identify and count the syllables in a word.",
+      "I can break down a multisyllabic word into its syllables.",
+      "I can use syllable division to help me read and understand new words."
     ],
     "generatorVersion": "V2",
     "resourceProvider": null,
     "heroResourceLinkId": null,
     "independentPractice": [
       {
-        "type": "mc",
-        "choices": [
-          "trans",
-          "port",
-          "ation",
-          "transport"
-        ],
+        "type": "hot-text-word",
         "passage": null,
-        "question": "What is the suffix in 'transportation'?",
-        "coachHint": "Look at the end of the word for the suffix.",
-        "correctAnswer": "ation",
-        "distractorRationale": [
+        "question": "How many syllables are in the word 'dinosaur'?",
+        "sentence": "The word 'dinosaur' has [ two / three ] syllables.",
+        "coachHint": "Count the vowel sounds in 'dinosaur.'",
+        "bracketPairs": [
           {
-            "choice": "trans",
-            "whyWrong": "'Trans-' is a prefix, not a suffix."
-          },
-          {
-            "choice": "port",
-            "whyWrong": "'Port' is the root word, not a suffix."
-          },
-          {
-            "choice": "transport",
-            "whyWrong": "This is the whole word, not just the suffix."
+            "correct": "three",
+            "options": [
+              "two",
+              "three"
+            ]
           }
         ],
-        "rightAnswerRationale": "The suffix '-ation' turns the verb 'transport' into a noun."
+        "rightAnswerRationale": "The word 'dinosaur' has three syllables: 'di-no-saur.'"
       },
       {
         "type": "inline-dropdown",
         "passage": null,
-        "question": "Choose the correct word to complete the sentence: The [BLANK] of the story was exciting.",
-        "sentence": "The [BLANK] of the story was exciting.",
-        "coachHint": "Think about what part of a story can be exciting.",
-        "correctOption": "ending",
+        "question": "Break down the word 'elephant' into syllables.",
+        "sentence": "The word 'elephant' is divided as [BLANK].",
+        "coachHint": "Listen for the vowel sounds in 'elephant.'",
+        "correctOption": "el-e-phant",
         "dropdownOptions": [
-          "beginning",
-          "middle",
-          "ending",
-          "title"
+          "el-e-phant",
+          "ele-ph-ant",
+          "el-eph-ant"
         ],
         "distractorRationale": [
           {
-            "option": "beginning",
-            "whyWrong": "The beginning is not typically referred to as exciting in this context."
+            "option": "ele-ph-ant",
+            "whyWrong": "This option incorrectly divides the first syllable."
           },
           {
-            "option": "middle",
-            "whyWrong": "The middle is not typically referred to as exciting in this context."
-          },
-          {
-            "option": "title",
-            "whyWrong": "The title is not a part of the story that can be exciting."
+            "option": "el-eph-ant",
+            "whyWrong": "This option incorrectly divides the second syllable."
           }
         ],
-        "rightAnswerRationale": "The word 'ending' fits the context of the sentence."
-      },
-      {
-        "type": "mc",
-        "choices": [
-          "unbelievable",
-          "believe",
-          "believing",
-          "believed"
-        ],
-        "passage": null,
-        "question": "Which word is a root word?",
-        "coachHint": "Look for the main part of the word that carries the core meaning.",
-        "correctAnswer": "believe",
-        "distractorRationale": [
-          {
-            "choice": "unbelievable",
-            "whyWrong": "This word includes a prefix and a suffix."
-          },
-          {
-            "choice": "believing",
-            "whyWrong": "This word includes a suffix."
-          },
-          {
-            "choice": "believed",
-            "whyWrong": "This word includes a suffix."
-          }
-        ],
-        "rightAnswerRationale": "'Believe' is a root word that can have prefixes and suffixes added."
+        "rightAnswerRationale": "The word 'elephant' is divided into three syllables: 'el-e-phant.'"
       },
       {
         "type": "inline-dropdown",
         "passage": null,
-        "question": "Select the correct prefix to complete the word: [BLANK]active.",
-        "sentence": "[BLANK]active",
-        "coachHint": "Think about what makes something not active.",
-        "correctOption": "in",
+        "question": "Select the correct syllable breakdown for 'butterfly.'",
+        "sentence": "The word 'butterfly' is broken down as [BLANK].",
+        "coachHint": "Focus on the vowel sounds in 'butterfly.'",
+        "correctOption": "but-ter-fly",
         "dropdownOptions": [
-          "in",
-          "re",
-          "dis",
-          "pre"
+          "but-ter-fly",
+          "butt-er-fly",
+          "but-terf-ly"
         ],
         "distractorRationale": [
           {
-            "option": "re",
-            "whyWrong": "'Re-' means again, which doesn't fit the context."
+            "option": "butt-er-fly",
+            "whyWrong": "This option incorrectly divides the first syllable."
           },
           {
-            "option": "dis",
-            "whyWrong": "'Dis-' can mean not, but 'in-' is more commonly used with 'active.'"
-          },
-          {
-            "option": "pre",
-            "whyWrong": "'Pre-' means before, which doesn't fit the context."
+            "option": "but-terf-ly",
+            "whyWrong": "This option incorrectly divides the second syllable."
           }
         ],
-        "rightAnswerRationale": "The prefix 'in-' means 'not,' making 'inactive' mean 'not active.'"
+        "rightAnswerRationale": "'Butterfly' is divided into three syllables: 'but-ter-fly.'"
+      },
+      {
+        "type": "inline-dropdown",
+        "passage": null,
+        "question": "How many syllables are in the word 'umbrella'?",
+        "sentence": "The word 'umbrella' has [BLANK] syllables.",
+        "coachHint": "Count the vowel sounds in 'umbrella.'",
+        "correctOption": "three",
+        "dropdownOptions": [
+          "two",
+          "three",
+          "four"
+        ],
+        "distractorRationale": [
+          {
+            "option": "two",
+            "whyWrong": "'Umbrella' has more than two vowel sounds."
+          },
+          {
+            "option": "four",
+            "whyWrong": "'Umbrella' does not have four distinct vowel sounds."
+          }
+        ],
+        "rightAnswerRationale": "The word 'umbrella' has three syllables: 'um-brel-la.'"
       }
     ],
     "resourceDescription": null
   },
   "critic": {
-    "score": 78,
+    "score": 82,
     "status": "PASS",
     "revisions": []
   },

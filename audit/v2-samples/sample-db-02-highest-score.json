@@ -30,23 +30,23 @@
       },
       {
         "type": "hot-text-phrase",
-        "passage": "In the heart of the forest, where the trees stand tall, a gentle breeze whispers secrets to all. Leaves rustle softly, sharing tales of old, as sunlight dances, turning green to gold. The brook babbles on, with stories to share, of creatures that wander, and the crisp, fresh air. Flowers bloom brightly, in colors so bold, painting the forest with hues to behold. As the day fades away, and the stars start to gleam, the forest dreams on, in a peaceful, quiet theme. The woods hold a magic, both ancient and new, a place of wonder, where dreams can come true. The poem captures the essence of nature's embrace, a reminder of beauty, in this tranquil space.",
+        "passage": "In a small, bustling town, the clock tower chimes, marking the rhythm of the townspeople's times. Children laugh and play in the sunlit square, while vendors call out, selling their wares. The baker's shop fills the air with the scent of fresh bread, and the cobbler works on shoes, his hands moving with skill and stead. As the day unfolds, the market comes alive, with colors and sounds that make the town thrive. The tailor stitches fabric with threads of bright hues, creating garments that tell stories of old and new. As evening descends, the streetlights glow, casting a warm light on the paths below. The town rests in a gentle embrace, a place where dreams and reality interlace. The poem paints a picture of a lively, yet comforting scene, capturing the essence of community in this vibrant routine.",
         "question": "Select the two phrases that best describe the mood of the poem.",
-        "coachHint": "Look for phrases that make you feel calm or enchanted.",
+        "coachHint": "Look for phrases that evoke a sense of community or warmth.",
         "maxSelect": 2,
         "minSelect": 2,
         "correctPhrases": [
-          "Gentle breeze whispers",
-          "Peaceful, quiet theme"
+          "Clock tower chimes",
+          "Warm light on the paths"
         ],
         "selectablePhrases": [
-          "Gentle breeze whispers",
-          "Peaceful, quiet theme",
-          "Colors so bold",
-          "Crisp, fresh air",
-          "Stars start to gleam"
+          "Clock tower chimes",
+          "Warm light on the paths",
+          "Children laugh and play",
+          "Colors and sounds",
+          "Threads of bright hues"
         ],
-        "rightAnswerRationale": "\"Gentle breeze whispers\" and \"Peaceful, quiet theme\" both convey a serene and magical mood."
+        "rightAnswerRationale": "\"Clock tower chimes\" and \"Warm light on the paths\" both convey a sense of community and warmth."
       }
     ],
     "gradeLevel": 3,
@@ -62,50 +62,50 @@
       {
         "type": "mc",
         "choices": [
-          "The beauty and tranquility of the forest.",
-          "The busy life of forest animals.",
-          "The changing seasons in the forest.",
-          "The dangers lurking in the woods."
+          "The perseverance and hope of Harriet Tubman.",
+          "The challenges faced by Harriet Tubman on her journey.",
+          "The impact of Harriet Tubman's actions on others.",
+          "The secretive nature of Harriet Tubman's missions."
         ],
-        "passage": "In the heart of the forest, where the trees stand tall, a gentle breeze whispers secrets to all. Leaves rustle softly, sharing tales of old, as sunlight dances, turning green to gold. The brook babbles on, with stories to share, of creatures that wander, and the crisp, fresh air. Flowers bloom brightly, in colors so bold, painting the forest with hues to behold. As the day fades away, and the stars start to gleam, the forest dreams on, in a peaceful, quiet theme. The woods hold a magic, both ancient and new, a place of wonder, where dreams can come true. The poem captures the essence of nature's embrace, a reminder of beauty, in this tranquil space.",
-        "question": "What is the main idea of the poem \"The Whispering Woods\"?",
+        "passage": "In the quiet of night, beneath the moon's glow, Harriet Tubman would silently go. Through the woods and the fields, with courage so bright, she led the way, guided by starlight. Her heart was steadfast, her spirit so bold, a beacon of hope, a story untold. She whispered of freedom in the soft, gentle breeze, a promise of safety among the tall trees. Each step she took was a step toward the light, a journey of strength, through the dark of night. She carried the dreams of those who were bound, leading them forward, where hope could be found. The poem speaks of her courage and grace, a testament to her unwavering pace. Harriet's tale is one of resolve and might, a symbol of freedom, a guiding light.",
+        "question": "What is the main idea of the poem \"Harriet's Journey\"?",
         "coachHint": "Think about what the poem describes overall.",
-        "correctAnswer": "The beauty and tranquility of the forest.",
+        "correctAnswer": "The perseverance and hope of Harriet Tubman.",
         "distractorRationale": [
           {
-            "choice": "The busy life of forest animals.",
-            "whyWrong": "The poem focuses more on the forest itself than the animals."
+            "choice": "The challenges faced by Harriet Tubman on her journey.",
+            "whyWrong": "While challenges are implied, the focus is on her perseverance and hope."
           },
           {
-            "choice": "The changing seasons in the forest.",
-            "whyWrong": "The poem does not focus on seasonal changes."
+            "choice": "The impact of Harriet Tubman's actions on others.",
+            "whyWrong": "The poem highlights her perseverance and hope rather than the impact on others."
           },
           {
-            "choice": "The dangers lurking in the woods.",
-            "whyWrong": "The poem highlights the beauty and tranquility, not dangers."
+            "choice": "The secretive nature of Harriet Tubman's missions.",
+            "whyWrong": "The poem emphasizes her courage and hope, not secrecy."
           }
         ],
-        "rightAnswerRationale": "The poem celebrates the beauty and tranquility of the forest."
+        "rightAnswerRationale": "The poem highlights the perseverance and hope that Harriet Tubman embodied on her journey."
       },
       {
         "type": "hot-text-phrase",
-        "passage": "In the heart of the forest, where the trees stand tall, a gentle breeze whispers secrets to all. Leaves rustle softly, sharing tales of old, as sunlight dances, turning green to gold. The brook babbles on, with stories to share, of creatures that wander, and the crisp, fresh air. Flowers bloom brightly, in colors so bold, painting the forest with hues to behold. As the day fades away, and the stars start to gleam, the forest dreams on, in a peaceful, quiet theme. The woods hold a magic, both ancient and new, a place of wonder, where dreams can come true. The poem captures the essence of nature's embrace, a reminder of beauty, in this tranquil space.",
+        "passage": "In a bustling kitchen, where flavors come alive, the chef moves swiftly, with a gleam in his eye. Ingredients are gathered, each with a role, to create a dish that will warm the soul. The onions are diced, releasing their scent, as garlic is crushed, its aroma is sent. The pot simmers gently, with spices and herbs, creating a melody, without spoken words. The chef stirs with care, tasting and tweaking, ensuring the flavors are perfectly speaking. As the dish is plated, with colors so bright, it's a feast for the senses, a culinary delight. The kitchen is a stage, where creativity flows, a place where the art of cooking truly shows. The poem captures the essence of the cooking process, highlighting the magic and creativity involved in crafting a meal.",
         "question": "Select the two phrases that best describe the theme of the poem.",
         "coachHint": "Look for phrases that capture the overall message of the poem.",
         "maxSelect": 2,
         "minSelect": 2,
         "correctPhrases": [
-          "Nature's embrace",
-          "A place of wonder"
+          "A culinary delight",
+          "Creativity flows"
         ],
         "selectablePhrases": [
-          "Nature's embrace",
-          "A place of wonder",
-          "Crisp, fresh air",
-          "Colors so bold",
-          "Stars start to gleam"
+          "A culinary delight",
+          "Creativity flows",
+          "Flavors come alive",
+          "Onions are diced",
+          "Spices and herbs"
         ],
-        "rightAnswerRationale": "\"Nature's embrace\" and \"A place of wonder\" highlight the theme of beauty and magic in the forest."
+        "rightAnswerRationale": "\"A culinary delight\" and \"Creativity flows\" highlight the theme of creativity and artistry in cooking."
       },
       {
         "type": "mc",
@@ -186,23 +186,23 @@
       },
       {
         "type": "hot-text-phrase",
-        "passage": "In a quiet village, the rooster crows, signaling the start of a new day. The sun rises slowly, casting a warm glow over the fields. Farmers begin their work, tending to the crops with care. Children laugh and play, their voices echoing through the air. The village comes alive, bustling with energy and life. As the day unfolds, the sun climbs higher, watching over the busy scene. The poem captures the essence of a morning in the village, filled with hope and promise. The poet's words paint a picture of a community united by the rhythm of daily life. The poem is a celebration of the simple joys found in everyday moments, reminding us of the beauty in routine and the connections we share.",
+        "passage": "In the heart of a bustling city, a statue stands tall, a reminder of the past. Streets echo with the footsteps of people hurrying by, each with their own story to tell. The old clock tower chimes, marking the passage of time. Beneath its shadow, a street musician plays a soulful tune, filling the air with melody. The poem captures the essence of urban life, where history and modernity intertwine. The poet's words paint a picture of a city alive with dreams and aspirations. As the sun sets, the city lights flicker on, illuminating the paths of those who wander. The poem is a tribute to the resilience and spirit of the people who call the city home, celebrating the diversity and vibrancy found in every corner.",
         "question": "Select the two phrases that describe the mood of the poem.",
-        "coachHint": "Look for phrases that make you feel happy or hopeful.",
+        "coachHint": "Look for phrases that convey a sense of vibrancy and resilience.",
         "maxSelect": 2,
         "minSelect": 2,
         "correctPhrases": [
-          "Filled with hope and promise",
-          "Simple joys found in everyday moments"
+          "Alive with dreams and aspirations",
+          "Resilience and spirit of the people"
         ],
         "selectablePhrases": [
-          "Filled with hope and promise",
-          "Simple joys found in everyday moments",
-          "Bustling with energy and life",
-          "Casting a warm glow",
-          "Watching over the busy scene"
+          "Alive with dreams and aspirations",
+          "Resilience and spirit of the people",
+          "Old clock tower chimes",
+          "Filling the air with melody",
+          "Illuminating the paths"
         ],
-        "rightAnswerRationale": "\"Filled with hope and promise\" and \"Simple joys found in everyday moments\" both convey a positive and uplifting mood."
+        "rightAnswerRationale": "\"Alive with dreams and aspirations\" and \"Resilience and spirit of the people\" both convey a vibrant and resilient mood."
       },
       {
         "type": "mc",
@@ -250,50 +250,50 @@
       {
         "type": "mc",
         "choices": [
-          "The beauty and tranquility of the forest.",
-          "The busy life of forest animals.",
-          "The changing seasons in the forest.",
-          "The dangers lurking in the woods."
+          "The determination and resilience of Harriet Tubman.",
+          "The daily life of Harriet Tubman as a child.",
+          "The struggles Harriet Tubman faced as an adult.",
+          "The historical events Harriet Tubman witnessed."
         ],
-        "passage": "In the heart of the forest, where the trees stand tall, a gentle breeze whispers secrets to all. Leaves rustle softly, sharing tales of old, as sunlight dances, turning green to gold. The brook babbles on, with stories to share, of creatures that wander, and the crisp, fresh air. Flowers bloom brightly, in colors so bold, painting the forest with hues to behold. As the day fades away, and the stars start to gleam, the forest dreams on, in a peaceful, quiet theme. The woods hold a magic, both ancient and new, a place of wonder, where dreams can come true. The poem captures the essence of nature's embrace, a reminder of beauty, in this tranquil space.",
-        "question": "What is the main idea of the poem \"The Whispering Woods\"?",
+        "passage": "In the quiet fields of Maryland, a young girl named Harriet Tubman dreamed of freedom. She listened to the whispers of the wind, carrying tales of distant lands where chains did not bind. The sun rose each day, casting light on her path, as she worked tirelessly in the fields, her spirit unbroken. Harriet's heart was filled with courage, a fire that could not be quenched. She learned to read the stars, guiding her thoughts to a future where she could be free. As the moon shone brightly, Harriet imagined a world where all people walked hand in hand, free from the shackles of oppression. Her dreams were woven into the fabric of the night, a tapestry of hope and strength. The poem captures the essence of Harriet's unwavering spirit, a beacon of hope for those who dared to dream of freedom. Her legacy is a testament to the power of determination, a reminder that even in the darkest times, light can shine through.",
+        "question": "What is the main idea of the poem \"Harriet's Dream\"?",
         "coachHint": "Think about what the poem describes overall.",
-        "correctAnswer": "The beauty and tranquility of the forest.",
+        "correctAnswer": "The determination and resilience of Harriet Tubman.",
         "distractorRationale": [
           {
-            "choice": "The busy life of forest animals.",
-            "whyWrong": "The poem focuses more on the forest itself than the animals."
+            "choice": "The daily life of Harriet Tubman as a child.",
+            "whyWrong": "The poem highlights her dreams and spirit, not daily life details."
           },
           {
-            "choice": "The changing seasons in the forest.",
-            "whyWrong": "The poem does not focus on seasonal changes."
+            "choice": "The struggles Harriet Tubman faced as an adult.",
+            "whyWrong": "The poem focuses on her determination, not specific struggles."
           },
           {
-            "choice": "The dangers lurking in the woods.",
-            "whyWrong": "The poem highlights the beauty and tranquility, not dangers."
+            "choice": "The historical events Harriet Tubman witnessed.",
+            "whyWrong": "The poem emphasizes her spirit and dreams, not specific events."
           }
         ],
-        "rightAnswerRationale": "The poem celebrates the beauty and tranquility of the forest."
+        "rightAnswerRationale": "The poem celebrates Harriet Tubman's determination and resilience."
       },
       {
         "type": "hot-text-phrase",
-        "passage": "In the heart of the forest, where the trees stand tall, a gentle breeze whispers secrets to all. Leaves rustle softly, sharing tales of old, as sunlight dances, turning green to gold. The brook babbles on, with stories to share, of creatures that wander, and the crisp, fresh air. Flowers bloom brightly, in colors so bold, painting the forest with hues to behold. As the day fades away, and the stars start to gleam, the forest dreams on, in a peaceful, quiet theme. The woods hold a magic, both ancient and new, a place of wonder, where dreams can come true. The poem captures the essence of nature's embrace, a reminder of beauty, in this tranquil space.",
+        "passage": "In the kitchen, where aromas swirl and rise, a dance of flavors begins to materialize. The chef, with steady hands, prepares the meal, slicing and dicing with skill and zeal. Ingredients are chosen with care and thought, each one adding to the dish, never forgot. The pot simmers gently, releasing its steam, as spices blend together, like a culinary dream. The oven hums softly, baking bread to a crust, a golden brown hue, a baker's trust. As the clock ticks on, the meal nears its end, a symphony of tastes, ready to transcend. The kitchen, a place of creation and art, where every dish tells a story, from the heart. The poem captures the essence of this culinary space, a reminder of the joy found in every taste.",
         "question": "Select the two phrases that best describe the theme of the poem.",
         "coachHint": "Look for phrases that capture the overall message of the poem.",
         "maxSelect": 2,
         "minSelect": 2,
         "correctPhrases": [
-          "Nature's embrace",
-          "A place of wonder"
+          "Culinary dream",
+          "Place of creation"
         ],
         "selectablePhrases": [
-          "Nature's embrace",
-          "A place of wonder",
-          "Crisp, fresh air",
-          "Colors so bold",
-          "Stars start to gleam"
+          "Culinary dream",
+          "Place of creation",
+          "Golden brown hue",
+          "Dance of flavors",
+          "Clock ticks on"
         ],
-        "rightAnswerRationale": "\"Nature's embrace\" and \"A place of wonder\" highlight the theme of beauty and magic in the forest."
+        "rightAnswerRationale": "\"Culinary dream\" and \"Place of creation\" highlight the theme of creativity and artistry in cooking."
       },
       {
         "type": "mc",
@@ -325,23 +325,23 @@
       },
       {
         "type": "hot-text-phrase",
-        "passage": "In the heart of the forest, where the trees stand tall, a gentle breeze whispers secrets to all. Leaves rustle softly, sharing tales of old, as sunlight dances, turning green to gold. The brook babbles on, with stories to share, of creatures that wander, and the crisp, fresh air. Flowers bloom brightly, in colors so bold, painting the forest with hues to behold. As the day fades away, and the stars start to gleam, the forest dreams on, in a peaceful, quiet theme. The woods hold a magic, both ancient and new, a place of wonder, where dreams can come true. The poem captures the essence of nature's embrace, a reminder of beauty, in this tranquil space.",
+        "passage": "In the vast ocean depths, where sunlight fades away, mysterious creatures glide silently through the water. The gentle sway of the seaweed creates a rhythmic dance, while schools of fish shimmer like silver clouds. A lone turtle swims gracefully, its shell a mosaic of colors, as it explores the coral reefs below. The ocean sings a lullaby, with waves that rise and fall, echoing the heartbeat of the earth. Hidden beneath the surface, the sea holds secrets untold, a world of wonder waiting to unfold. As the moon casts its glow, the ocean becomes a mirror, reflecting the stars above in a celestial dance. This underwater realm is a place of tranquility and awe, where the beauty of the deep sea enchants all who venture near.",
         "question": "Select the two phrases that best capture the mood of the poem.",
         "coachHint": "Look for phrases that make you feel calm or enchanted.",
         "maxSelect": 2,
         "minSelect": 2,
         "correctPhrases": [
-          "Gentle breeze whispers",
-          "Peaceful, quiet theme"
+          "Ocean sings a lullaby",
+          "Place of tranquility and awe"
         ],
         "selectablePhrases": [
-          "Gentle breeze whispers",
-          "Peaceful, quiet theme",
-          "Colors so bold",
-          "Crisp, fresh air",
-          "Stars start to gleam"
+          "Ocean sings a lullaby",
+          "Place of tranquility and awe",
+          "Schools of fish shimmer",
+          "Rhythmic dance",
+          "Moon casts its glow"
         ],
-        "rightAnswerRationale": "\"Gentle breeze whispers\" and \"Peaceful, quiet theme\" both convey a serene and magical mood."
+        "rightAnswerRationale": "\"Ocean sings a lullaby\" and \"Place of tranquility and awe\" both convey a serene and magical mood."
       }
     ],
     "resourceDescription": null

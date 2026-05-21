@@ -1,0 +1,19 @@
+{
+  "generatedAt": "2026-05-21T01:29:16.070Z",
+  "mode": "targeted-practice-item-llm-repair",
+  "scannedLessons": 182,
+  "initialDryRunAffectedLessons": 154,
+  "finalDryRunAffectedLessons": 0,
+  "finalChecks": {
+    "topicVarietyOrLengthFailures": 0,
+    "samplePassagesNowTooShort": 0,
+    "sampleIntraLessonDuplicateClusters": 0,
+    "sampleLegacyFillerRemoved": 0
+  },
+  "notes": [
+    "The first full-lesson regeneration attempt was stopped because it converged too slowly and repeatedly missed word-count checks.",
+    "The final repair path regenerated only affected practice items/passages with GPT-4o, preserving clean lesson structure while requiring new topics/domains and longer passages.",
+    "The final dry run of scripts/regenerate-topic-variety-lessons.ts found zero remaining V2 lessons needing topic-variety or passage-length regeneration.",
+    "The final dry run of scripts/cleanup-v2-samples-local.py found zero short sample passages and zero intra-lesson duplicate clusters."
+  ]
+}

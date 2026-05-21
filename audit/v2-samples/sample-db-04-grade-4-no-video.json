@@ -1,462 +1,381 @@
 {
   "lesson": {
-    "hook": "Have you ever played detective, trying to figure out what happened in a story? Making inferences is just like that! It's about reading between the lines and using clues from the text to understand more than what's directly stated. Today, we'll become inference detectives and uncover hidden meanings in stories.",
-    "skill": "Inference",
-    "title": "Making Inferences from Text",
+    "hook": "Imagine you find a mysterious word in a book. You don't know what it means, but you notice part of it looks familiar. That's because many words are like puzzles, made up of smaller pieces called roots and affixes. These pieces can help you unlock the meaning of new words!",
+    "skill": "Affixes and Roots",
+    "title": "Understanding Affixes and Roots",
     "exitTicket": [
-      {
-        "type": "hot-text-phrase",
-        "passage": "The sun was setting, casting a warm glow over the park. Sarah sat on the bench, watching the children play. Her eyes followed a little girl chasing a butterfly, her laughter ringing through the air. Sarah smiled softly, her heart feeling light and content. The gentle breeze ruffled her hair, and she closed her eyes, savoring the moment. It was a peaceful evening, and Sarah felt grateful for the simple joys around her. As the sky turned shades of pink and orange, she took a deep breath, feeling at ease with the world. The day had been long, but this moment made it all worthwhile. She opened her eyes, watching the last rays of sunlight dance across the grass.",
-        "question": "What can we infer about the character's mood based on their actions?",
-        "coachHint": "Consider how the setting and Sarah's actions contribute to her mood.",
-        "maxSelect": 2,
-        "minSelect": 2,
-        "correctPhrases": [
-          "her heart feeling light",
-          "savoring the moment"
-        ],
-        "selectablePhrases": [
-          "warm glow over the park",
-          "Sarah sat on the bench",
-          "her heart feeling light",
-          "savoring the moment"
-        ],
-        "rightAnswerRationale": "Sarah's actions and the setting suggest she is content and at peace."
-      },
       {
         "type": "mc",
         "choices": [
-          "The character is avoiding going home.",
-          "The character is committed to their job.",
-          "The character is procrastinating.",
-          "The character is unsure of their work."
+          "To write for the first time",
+          "To write again",
+          "To stop writing",
+          "To write quickly"
         ],
-        "passage": "The office was quiet as the clock ticked past seven. Most of the staff had left for the day, but Mark remained at his desk, focused on the project in front of him. The glow of the computer screen illuminated his determined expression. He knew the deadline was approaching, and he wanted to ensure everything was perfect. Mark's dedication to his work was evident in the way he meticulously reviewed each detail, making sure nothing was overlooked. As the hours passed, he felt a sense of accomplishment, knowing that his hard work would pay off. Staying late was a choice he made willingly, driven by his commitment to excellence and his desire to succeed.",
-        "question": "What can we infer about the character's decision to stay late at work?",
-        "coachHint": "Think about what staying late at work indicates about someone's priorities.",
-        "correctAnswer": "The character is committed to their job.",
+        "passage": null,
+        "question": "What does the word 'rewrite' mean?",
+        "coachHint": "Think about what 're-' means when added to a word.",
+        "correctAnswer": "To write again",
         "distractorRationale": [
           {
-            "choice": "The character is avoiding going home.",
-            "whyWrong": "There is no indication of avoidance."
+            "choice": "To write for the first time",
+            "whyWrong": "'Re-' means 'again,' not 'first time.'"
           },
           {
-            "choice": "The character is procrastinating.",
-            "whyWrong": "Staying late suggests dedication, not procrastination."
+            "choice": "To stop writing",
+            "whyWrong": "'Re-' suggests doing something again, not stopping."
           },
           {
-            "choice": "The character is unsure of their work.",
-            "whyWrong": "The passage suggests commitment, not uncertainty."
+            "choice": "To write quickly",
+            "whyWrong": "'Re-' does not relate to speed."
           }
         ],
-        "rightAnswerRationale": "The character's decision suggests a strong commitment to their job."
+        "rightAnswerRationale": "The prefix 're-' means 'again,' so 'rewrite' means 'to write again.'"
+      },
+      {
+        "type": "inline-dropdown",
+        "passage": null,
+        "question": "Select the correct meaning of 'unhelpful.'",
+        "sentence": "The word 'unhelpful' means [BLANK].",
+        "coachHint": "Break down the word into 'un-' and 'helpful.'",
+        "correctOption": "not providing help",
+        "dropdownOptions": [
+          "not providing help",
+          "providing help",
+          "helpful again",
+          "helpful before"
+        ],
+        "distractorRationale": [
+          {
+            "option": "providing help",
+            "whyWrong": "'Un-' means 'not,' so 'unhelpful' means 'not providing help.'"
+          },
+          {
+            "option": "helpful again",
+            "whyWrong": "'Un-' does not mean 'again.'"
+          },
+          {
+            "option": "helpful before",
+            "whyWrong": "'Un-' does not mean 'before.'"
+          }
+        ],
+        "rightAnswerRationale": "'Unhelpful' means 'not providing help,' combining 'un-' (not) and 'helpful.'"
       }
     ],
     "gradeLevel": 4,
-    "explanation": "Inference is a critical reading skill that allows us to understand deeper meanings in a text. When authors write, they often leave hints and clues instead of stating everything directly. As readers, we use these clues, along with our own knowledge, to make educated guesses about what is happening or what characters are feeling. For example, if a character is described as shivering and pulling their coat tighter, we might infer that it's cold outside, even if the text doesn't say so directly. To make an inference, follow these steps: 1. **Read Carefully:** Pay attention to details in the text. Authors often use descriptive language to provide clues. 2. **Use Prior Knowledge:** Think about what you already know about similar situations or experiences. 3. **Look for Patterns:** Notice if there are repeated ideas or themes that suggest a deeper meaning. 4. **Ask Questions:** Consider what the author might be implying. Why did they choose certain words or phrases? Let's practice with an example. Imagine a story where a character named Alex is pacing back and forth, glancing at the clock, and biting their nails. What can we infer about Alex's feelings? These actions suggest that Alex might be nervous or anxious, perhaps waiting for something important to happen. By combining the text's clues with our understanding of human behavior, we can make a strong inference about Alex's emotional state. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step.",
+    "explanation": "Affixes and roots are essential parts of many words in the English language. A root is the basic part of a word that carries the main meaning. For example, the root 'spect' means 'to look.' When you add affixes, which are prefixes or suffixes, you change the word's meaning. A prefix is added to the beginning of a word, while a suffix is added to the end. For instance, adding the prefix 'in-' to 'spect' forms 'inspect,' meaning 'to look into.' Similarly, adding the suffix '-or' creates 'inspector,' someone who looks into things. Understanding these components can help you figure out unfamiliar words. Let's consider another example: the root 'port,' which means 'to carry.' By adding the prefix 'trans-' (meaning 'across'), we get 'transport,' which means 'to carry across.' Adding the suffix '-able' to 'port' gives us 'portable,' meaning 'able to be carried.' Recognizing these parts can significantly enhance your vocabulary and comprehension skills. By learning common roots and affixes, you can become a word detective, deciphering meanings and expanding your language skills effortlessly. This knowledge is like having a key to unlock the meanings of countless words you encounter in reading and writing. Let's practice identifying and using affixes and roots to deepen our understanding. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step.",
     "resourceUrl": null,
-    "whyAssigned": "This mini-lesson targets Inference because the diagnostic showed a standards-aligned practice gap.",
+    "whyAssigned": "This mini-lesson targets Affixes and Roots because the diagnostic showed a standards-aligned practice gap.",
     "commonErrors": [
-      "Students might focus only on explicit details and miss implied meanings.",
-      "Some might rely too heavily on prior knowledge without enough textual evidence.",
-      "Others may misinterpret clues due to lack of context or understanding of the text."
+      "Confusing prefixes and suffixes.",
+      "Misidentifying the root of a word.",
+      "Overlooking the meaning of an affix."
     ],
     "masteryCheck": [
       {
-        "type": "evidence-mapping",
-        "claims": [
-          "Tom feels indifferent towards Jake.",
-          "Tom values his friendship with Jake.",
-          "Tom is annoyed by Jake's requests."
+        "type": "mc",
+        "choices": [
+          "To appear suddenly",
+          "To go away from view",
+          "To stay visible",
+          "To appear slowly"
         ],
-        "passage": "Tom watched as his friend, Jake, struggled with the heavy boxes. Without a word, Tom walked over and grabbed one of the boxes, helping Jake carry them to the car. Jake smiled gratefully, and Tom felt a sense of satisfaction. They had been friends for years, always there for each other in times of need. As they loaded the last box, Jake clapped Tom on the back, thanking him for his help. Tom shrugged it off, saying it was nothing, but inside, he felt a warm glow of friendship. Helping Jake was second nature to him, and he knew Jake would do the same for him. Their friendship was built on mutual support and understanding, and Tom cherished it deeply.",
-        "question": "What can we infer about the character's feelings towards their friend?",
-        "coachHint": "Consider how Tom's actions reflect his feelings.",
-        "evidenceItems": [
-          "Tom helped Jake carry boxes.",
-          "Jake smiled gratefully.",
-          "Tom felt a warm glow of friendship."
+        "passage": null,
+        "question": "What does the word 'disappear' mean?",
+        "coachHint": "Consider what 'dis-' means when added to a word.",
+        "correctAnswer": "To go away from view",
+        "distractorRationale": [
+          {
+            "choice": "To appear suddenly",
+            "whyWrong": "'Dis-' means 'not' or 'away,' not 'suddenly.'"
+          },
+          {
+            "choice": "To stay visible",
+            "whyWrong": "'Dis-' suggests going away, not staying."
+          },
+          {
+            "choice": "To appear slowly",
+            "whyWrong": "'Dis-' does not relate to speed."
+          }
         ],
+        "rightAnswerRationale": "The prefix 'dis-' means 'not' or 'away,' so 'disappear' means 'to go away from view.'"
+      },
+      {
+        "type": "hot-text-phrase",
+        "passage": "Baking a cake is a process that requires careful attention to detail. First, gather all the ingredients and preheat the oven. Next, mix the dry ingredients in one bowl and the wet ingredients in another. Combine them gradually, stirring until smooth. Pour the batter into a greased pan. Place the pan in the oven and set a timer. As the cake bakes, the kitchen fills with a delightful aroma. Once the timer rings, check the cake by inserting a toothpick into the center. If it comes out clean, the cake is ready. Allow it to cool before decorating. Each step is crucial to ensure the cake turns out perfectly. Skipping a step or rushing the process can lead to unexpected results. Baking requires patience and precision, but the reward is a delicious homemade treat.",
+        "question": "Which phrases help you understand the importance of following a process?",
+        "coachHint": "Look for phrases that emphasize the need for careful steps.",
+        "maxSelect": 2,
+        "minSelect": 2,
+        "correctPhrases": [
+          "careful attention to detail",
+          "each step is crucial"
+        ],
+        "selectablePhrases": [
+          "careful attention to detail",
+          "each step is crucial",
+          "delightful aroma",
+          "unexpected results"
+        ],
+        "rightAnswerRationale": "The phrases 'careful attention to detail' and 'each step is crucial' highlight the importance of following a process."
+      },
+      {
+        "type": "drag-drop-table",
+        "columns": [
+          "Not kind",
+          "Do again",
+          "Place wrongly"
+        ],
+        "passage": null,
+        "question": "Match each word with its meaning.",
+        "coachHint": "Think about the prefixes 'un-,' 're-,' and 'mis-.'",
         "correctMapping": [
           {
-            "claim": "Tom feels indifferent towards Jake.",
-            "evidenceItems": [
-              "Tom helped Jake carry boxes."
-            ]
+            "item": "Unkind",
+            "column": "Not kind"
           },
           {
-            "claim": "Tom values his friendship with Jake.",
-            "evidenceItems": [
-              "Tom helped Jake carry boxes.",
-              "Tom felt a warm glow of friendship."
-            ]
+            "item": "Redo",
+            "column": "Do again"
           },
           {
-            "claim": "Tom is annoyed by Jake's requests.",
-            "evidenceItems": [
-              "Tom helped Jake carry boxes."
-            ]
+            "item": "Misplace",
+            "column": "Place wrongly"
           }
         ],
-        "rightAnswerRationale": "Tom's actions and feelings suggest he values and cherishes his friendship with Jake."
-      },
-      {
-        "type": "mc",
-        "choices": [
-          "The character is disappointed.",
-          "The character is surprised.",
-          "The character is indifferent.",
-          "The character is confused."
+        "draggableItems": [
+          "Unkind",
+          "Redo",
+          "Misplace"
         ],
-        "passage": "When the letter arrived, Emily's hands trembled as she opened it. Her eyes widened as she read the words, and a smile spread across her face. She couldn't believe it—she had been accepted into the art program she had dreamed of for years. The excitement bubbled up inside her, and she let out a joyful laugh, unable to contain her happiness. Emily's heart raced with anticipation, thinking about the new opportunities that awaited her. She immediately called her family to share the good news, her voice filled with enthusiasm. This was the moment she had been waiting for, and it felt like a dream come true. Emily knew that this was just the beginning of an incredible journey.",
-        "question": "What can we infer about the character's reaction to the news?",
-        "coachHint": "Think about how people typically react to unexpected news.",
-        "correctAnswer": "The character is surprised.",
-        "distractorRationale": [
-          {
-            "choice": "The character is disappointed.",
-            "whyWrong": "The passage suggests a positive reaction."
-          },
-          {
-            "choice": "The character is indifferent.",
-            "whyWrong": "The passage suggests an emotional response."
-          },
-          {
-            "choice": "The character is confused.",
-            "whyWrong": "The passage suggests clarity, not confusion."
-          }
-        ],
-        "rightAnswerRationale": "The character's reaction suggests surprise and excitement."
-      },
-      {
-        "type": "mc",
-        "choices": [
-          "The character is running away from problems.",
-          "The character is seeking new opportunities.",
-          "The character is forced to move.",
-          "The character is unhappy with their current life."
-        ],
-        "passage": "After months of planning, David finally stood in his new apartment, surrounded by boxes. The city outside buzzed with energy, a stark contrast to the quiet town he had left behind. David felt a mix of excitement and nervousness as he looked out the window at the bustling streets below. This move was a chance for a fresh start, a new chapter in his life. He was eager to explore the opportunities that awaited him, to meet new people and experience new things. As he unpacked, David felt a sense of freedom, knowing that he had taken a bold step towards his future. The decision to move had been difficult, but he knew it was the right one. This city was full of possibilities, and David was ready to embrace them all.",
-        "question": "What can we infer about the character's decision to move to a new city?",
-        "coachHint": "Consider what moving to a new city often represents for people.",
-        "correctAnswer": "The character is seeking new opportunities.",
-        "distractorRationale": [
-          {
-            "choice": "The character is running away from problems.",
-            "whyWrong": "There is no indication of avoidance."
-          },
-          {
-            "choice": "The character is forced to move.",
-            "whyWrong": "The passage suggests a voluntary decision."
-          },
-          {
-            "choice": "The character is unhappy with their current life.",
-            "whyWrong": "The passage suggests a positive outlook on the move."
-          }
-        ],
-        "rightAnswerRationale": "The character's decision suggests a desire for change and new opportunities."
+        "rightAnswerRationale": "'Unkind' means 'not kind,' 'redo' means 'do again,' and 'misplace' means 'place wrongly.'"
       }
     ],
-    "qualityScore": 60,
-    "standardCode": "CC.1.2.4.B",
+    "qualityScore": 88,
+    "standardCode": "CC.1.1.4.D",
     "teiTypesUsed": [
+      "inline-dropdown",
       "hot-text-phrase",
-      "evidence-mapping",
-      "two-part-ebsr"
+      "drag-drop-table"
     ],
     "exemplarsUsed": [
       "g4-p1",
       "g4-mc-1",
       "g4-mc-2",
       "g4-mc-3",
-      "g4-tei-7",
       "g4-tei-5",
-      "g3-tei-6"
+      "g4-tei-7",
+      "g4-tei-1"
     ],
-    "qualityIssues": [
-      "A practice passage is likely too short for the target grade.",
-      "A practice passage is likely too short for the target grade.",
-      "A practice passage is likely too short for the target grade.",
-      "A practice passage is likely too short for the target grade.",
-      "A practice passage is likely too short for the target grade.",
-      "A practice passage is likely too short for the target grade.",
-      "A practice passage is likely too short for the target grade.",
-      "A practice passage is likely too short for the target grade.",
-      "A practice passage is likely too short for the target grade.",
-      "Practice passage needs regeneration: 120 words (target 150-400) with FK grade 7.4 (target 4±1.5). Write a longer, more natural passage with simpler sentence structure.",
-      "Practice passage needs regeneration: 112 words (target 150-400) with FK grade 7.4 (target 4±1.5). Write a longer, more natural passage with simpler sentence structure.",
-      "Practice passage needs regeneration: 116 words (target 150-400) with FK grade 6.5 (target 4±1.5). Write a longer, more natural passage with simpler sentence structure.",
-      "Practice passage needs regeneration: 118 words (target 150-400) with FK grade 5.9 (target 4±1.5). Write a longer, more natural passage with simpler sentence structure.",
-      "Practice passage needs regeneration: 117 words (target 150-400) with FK grade 6.7 (target 4±1.5). Write a longer, more natural passage with simpler sentence structure.",
-      "Practice passage needs regeneration: 126 words (target 150-400) with FK grade 8.0 (target 4±1.5). Write a longer, more natural passage with simpler sentence structure.",
-      "Practice passage needs regeneration: 119 words (target 150-400) with FK grade 5.5 (target 4±1.5). Write a longer, more natural passage with simpler sentence structure.",
-      "Practice passage needs regeneration: 114 words (target 150-400) with FK grade 8.7 (target 4±1.5). Write a longer, more natural passage with simpler sentence structure.",
-      "Practice passage needs regeneration: 120 words (target 150-400) with FK grade 6.0 (target 4±1.5). Write a longer, more natural passage with simpler sentence structure.",
-      "Practice passage needs regeneration: 118 words (target 150-400) with FK grade 8.1 (target 4±1.5). Write a longer, more natural passage with simpler sentence structure.",
-      "Practice passage needs regeneration: 132 words (target 150-400) with FK grade 7.8 (target 4±1.5). Write a longer, more natural passage with simpler sentence structure.",
-      "guidedPractice[1]: Passage is missing. (Provide a passage that aligns with the question and is appropriate for the grade level.)",
-      "independentPractice[1]: Passage is missing. (Include a passage that supports the question and is suitable for the target grade.)",
-      "independentPractice[2]: Passage is missing. (Add a passage that fits the question and is appropriate for the grade level.)",
-      "independentPractice[3]: Passage is missing. (Create a passage that aligns with the question and is suitable for the target grade.)",
-      "exitTicket[1]: Passage is missing. (Include a passage that supports the question and is appropriate for the grade level.)",
-      "masteryCheck[1]: Passage is missing. (Provide a passage that aligns with the question and is suitable for the target grade.)",
-      "masteryCheck[2]: Passage is missing. (Add a passage that fits the question and is appropriate for the grade level.)"
-    ],
+    "qualityIssues": [],
     "resourceTitle": null,
-    "standardLabel": "Make inferences using text evidence",
-    "workedExample": "Consider this passage: \"Lila stared out the window, watching the rain pour down. Her unfinished homework lay scattered across the table, untouched. She sighed deeply and turned away.\" Let's make an inference. What can we tell about Lila's mood? The clues here are the rain, the untouched homework, and her deep sigh. These details suggest that Lila might be feeling overwhelmed or unmotivated. The rain could symbolize her gloomy mood, and the fact that her homework is untouched indicates she might be avoiding it due to stress or lack of interest. By piecing together these clues, we infer that Lila is likely feeling down or discouraged. This inference helps us understand her character better and adds depth to the story. Remember, making inferences is about connecting the dots between what is written and what is implied. This matters because the correct answer is not just a matching word or phrase. It is the choice that fits the whole question and can be defended with a specific detail. The reasoning should explain both what the evidence says and how it supports the answer.",
+    "standardLabel": "Foundational Skills - affixes and roots",
+    "workedExample": "Let's explore the word 'unbelievable.' The root here is 'believe,' which means 'to accept as true.' The prefix 'un-' means 'not,' and the suffix '-able' means 'capable of.' When combined, 'unbelievable' means 'not capable of being believed.' By breaking down the word into its parts, we can understand its meaning even if we've never seen it before. Another example is 'predictable.' The root 'dict' means 'to say.' Adding the prefix 'pre-' (meaning 'before') and the suffix '-able' (meaning 'capable of') forms 'predictable,' meaning 'capable of being said before,' or something that can be anticipated. These examples show how understanding roots and affixes can help you deduce the meanings of complex words. Practice identifying these parts in words you encounter to improve your vocabulary skills. This matters because the correct answer is not just a matching word or phrase. It is the choice that fits the whole question and can be defended with a specific detail. The reasoning should explain both what the evidence says and how it supports the answer.",
     "guidedPractice": [
-      {
-        "type": "hot-text-phrase",
-        "passage": "The room was silent after Jamie slammed the door. His footsteps echoed down the hallway as he stomped away, leaving everyone in shock. Jamie's face had been red with anger, and his fists were clenched tightly at his sides. It was clear that something had upset him deeply, but no one knew what it was yet. The tension in the room was palpable, and everyone exchanged worried glances, unsure of what to do next. Jamie's sudden outburst had caught them all off guard, and they were left wondering what could have caused such a reaction from him. As the sound of his footsteps faded, the silence in the room grew heavier, and the air seemed to thicken with unspoken questions.",
-        "question": "What can we infer about the character's feelings when they slam the door and stomp away?",
-        "coachHint": "Think about what slamming a door usually indicates about someone's mood.",
-        "maxSelect": 2,
-        "minSelect": 2,
-        "correctPhrases": [
-          "slammed the door",
-          "red with anger"
-        ],
-        "selectablePhrases": [
-          "slammed the door",
-          "stomped away",
-          "red with anger",
-          "fists were clenched"
-        ],
-        "rightAnswerRationale": "The character's actions of slamming the door and stomping away suggest anger or frustration. The description of his red face and clenched fists supports this inference."
-      },
       {
         "type": "mc",
         "choices": [
-          "The character is happy.",
-          "The character is upset.",
-          "The character is confused.",
-          "The character is excited."
+          "To play for the first time",
+          "To play again",
+          "To stop playing",
+          "To play loudly"
         ],
-        "passage": "The room was silent after Jamie slammed the door. His footsteps echoed down the hallway as he stomped away, leaving everyone in shock. Jamie's face had been red with anger, and his fists were clenched tightly at his sides. It was clear that something had upset him deeply, but no one knew what it was yet. The tension in the room was palpable, and everyone exchanged worried glances, unsure of what to do next. Jamie's sudden outburst had caught them all off guard, and they were left wondering what could have caused such a reaction from him. As the sound of his footsteps faded, the silence in the room grew heavier, and the air seemed to thicken with unspoken questions.",
-        "question": "What is the main idea of the paragraph?",
-        "coachHint": "Focus on the actions and emotions described.",
-        "correctAnswer": "The character is upset.",
+        "passage": null,
+        "question": "What does the word 'replay' mean?",
+        "coachHint": "Think about what 're-' means when added to a word.",
+        "correctAnswer": "To play again",
         "distractorRationale": [
           {
-            "choice": "The character is happy.",
-            "whyWrong": "The actions described do not indicate happiness."
+            "choice": "To play for the first time",
+            "whyWrong": "'Re-' means 'again,' not 'first time.'"
           },
           {
-            "choice": "The character is confused.",
-            "whyWrong": "There is no mention of confusion in the actions."
+            "choice": "To stop playing",
+            "whyWrong": "'Re-' suggests doing something again, not stopping."
           },
           {
-            "choice": "The character is excited.",
-            "whyWrong": "The actions suggest anger, not excitement."
+            "choice": "To play loudly",
+            "whyWrong": "'Re-' does not relate to volume."
           }
         ],
-        "rightAnswerRationale": "The main idea is that the character is upset, as shown by their actions and the description of their emotions."
+        "rightAnswerRationale": "The prefix 're-' means 'again,' so 'replay' means 'to play again.'"
       },
       {
-        "type": "evidence-mapping",
-        "claims": [
-          "The setting is warm and sunny.",
-          "The setting is cold and windy.",
-          "The setting is rainy and stormy."
+        "type": "inline-dropdown",
+        "passage": null,
+        "question": "Select the correct meaning of 'transportable.'",
+        "sentence": "The word 'transportable' means [BLANK].",
+        "coachHint": "Break down the word into 'trans-' and '-able.'",
+        "correctOption": "able to be carried across",
+        "dropdownOptions": [
+          "able to be carried across",
+          "not able to be carried",
+          "carried quickly",
+          "carried slowly"
         ],
-        "passage": "The sky was overcast, and a cold wind swept through the streets, carrying with it the scent of rain. People hurried along the sidewalks, clutching their coats tightly around them. The trees swayed, their leaves rustling loudly in the gusts. It was a typical autumn day, with the promise of a storm looming on the horizon. The atmosphere was tense, as if the city itself was holding its breath, waiting for the first drops to fall. Streetlights flickered on early, casting a warm glow against the gray backdrop of the sky. The city seemed to brace itself for the impending weather, with shopkeepers pulling in their displays and pedestrians quickening their pace.",
-        "question": "What can we infer about the setting based on the description of the weather?",
-        "coachHint": "Consider how the weather affects the mood and actions of people.",
-        "evidenceItems": [
-          "The sky was overcast.",
-          "A cold wind swept through the streets.",
-          "The scent of rain was in the air."
-        ],
-        "correctMapping": [
+        "distractorRationale": [
           {
-            "claim": "The setting is warm and sunny.",
-            "evidenceItems": [
-              "The sky was overcast."
-            ]
+            "option": "not able to be carried",
+            "whyWrong": "'-able' means 'capable of,' not 'not able.'"
           },
           {
-            "claim": "The setting is cold and windy.",
-            "evidenceItems": [
-              "The sky was overcast.",
-              "A cold wind swept through the streets."
-            ]
+            "option": "carried quickly",
+            "whyWrong": "The word does not specify speed."
           },
           {
-            "claim": "The setting is rainy and stormy.",
-            "evidenceItems": [
-              "The sky was overcast."
-            ]
+            "option": "carried slowly",
+            "whyWrong": "The word does not specify speed."
           }
         ],
-        "rightAnswerRationale": "The description of the overcast sky and cold wind suggests a chilly, autumn setting with an impending storm."
+        "rightAnswerRationale": "'Transportable' means 'able to be carried across,' combining 'trans-' (across) and '-able' (capable of)."
+      },
+      {
+        "type": "hot-text-phrase",
+        "passage": "In the heart of the forest, a young girl named Elara discovered an ancient book. The book was covered in intricate designs, and it seemed to glow with a mysterious light. As Elara opened it, she was transported to a world of wonder. The pages were filled with stories of mythical creatures and enchanted lands, each more fascinating than the last. Elara couldn't believe what she was seeing; it was as if the book was alive, whispering secrets from a time long past. She read about dragons soaring through the skies and forests that could speak. The stories were so captivating that Elara lost track of time, completely absorbed in the magical tales. It was an experience unlike any other, one that left her yearning for more. She knew she had stumbled upon something extraordinary, something that would change her life forever. The book was not just a collection of stories; it was a gateway to a world beyond imagination.",
+        "question": "Which phrases help you understand the meaning of 'extraordinary'?",
+        "coachHint": "Look for phrases that show something is beyond the ordinary or usual.",
+        "maxSelect": 2,
+        "minSelect": 2,
+        "correctPhrases": [
+          "a world of wonder",
+          "beyond imagination"
+        ],
+        "selectablePhrases": [
+          "a world of wonder",
+          "couldn't believe what she was seeing",
+          "completely absorbed",
+          "beyond imagination"
+        ],
+        "rightAnswerRationale": "The phrases 'a world of wonder' and 'beyond imagination' highlight the meaning of 'extraordinary.'"
       }
     ],
     "sentenceFrames": [
-      "The text says ____, which suggests that ____.",
-      "Based on ____, I can infer that ____.",
-      "The author describes ____, so I think ____."
+      "The prefix 'un-' means ____, so 'unhappy' means ____.",
+      "The root 'port' means ____, so 'transport' means ____.",
+      "Adding '-able' to 'believe' makes it mean ____."
     ],
     "successCriteria": [
-      "I can identify clues in the text that suggest deeper meanings.",
-      "I can use my background knowledge to make logical inferences.",
-      "I can explain my inferences using evidence from the text."
+      "I can identify the root of a word.",
+      "I can explain the meaning of common prefixes and suffixes.",
+      "I can use affixes and roots to determine the meaning of unfamiliar words."
     ],
     "generatorVersion": "V2",
     "resourceProvider": null,
     "heroResourceLinkId": null,
     "independentPractice": [
       {
-        "type": "two-part-ebsr",
-        "partA": {
-          "choices": [
-            "She is cautious.",
-            "She is adventurous.",
-            "She is indecisive.",
-            "She is fearful."
-          ],
-          "question": "What does Emma's choice of path suggest about her character?",
-          "correctAnswer": "She is adventurous."
-        },
-        "partB": {
-          "choices": [
-            "She stood at the crossroads.",
-            "The left path was well-trodden.",
-            "She stepped onto the right path.",
-            "Her heart pounded with thrill."
-          ],
-          "question": "Which evidence supports your answer in Part A?",
-          "correctAnswers": [
-            "She stepped onto the right path.",
-            "Her heart pounded with thrill."
-          ]
-        },
-        "passage": "Emma stood at the crossroads, her mind racing with possibilities. She glanced down each path, weighing the options. The left path was well-trodden, familiar and safe. The right path was overgrown, mysterious, and unknown. Emma hesitated, her heart pounding with the thrill of adventure. She took a deep breath, her decision made. With a determined nod, she stepped onto the right path, ready to embrace whatever lay ahead. Her choice was clear, driven by a desire for discovery and new experiences. As she walked, the sounds of the forest enveloped her, and she felt a sense of freedom she hadn't known before. Emma's journey had begun, and she was eager to see where it would lead.",
-        "question": "What can we infer about the character's decision-making process?",
-        "coachHint": "Think about what choosing the unknown path says about Emma's character.",
-        "scoringRule": "B-counts-only-if-A-correct",
-        "rightAnswerRationale": "Emma's decision to choose the unknown path suggests she values adventure and discovery over safety."
-      },
-      {
         "type": "mc",
         "choices": [
-          "The character dislikes their pet.",
-          "The character is indifferent to their pet.",
-          "The character has a close bond with their pet.",
-          "The character is afraid of their pet."
+          "To view after",
+          "To view before",
+          "To view during",
+          "To view quickly"
         ],
-        "passage": "Every morning, Mia would wake up to find her cat, Whiskers, curled up at the foot of her bed. As soon as she stirred, Whiskers would stretch and nuzzle against her hand, purring softly. Mia would smile, feeling a warmth spread through her chest. She loved these quiet moments with Whiskers, who seemed to understand her better than anyone else. They had a routine, a bond that was comforting and familiar. Whiskers would follow Mia around the house, always nearby, always watching. It was as if they shared a secret language, one that needed no words. Mia knew that Whiskers was more than just a pet; he was a friend, a confidant, and a source of endless joy.",
-        "question": "What can we infer about the character's relationship with their pet?",
-        "coachHint": "Consider how the character interacts with their pet.",
-        "correctAnswer": "The character has a close bond with their pet.",
+        "passage": null,
+        "question": "What does the word 'preview' mean?",
+        "coachHint": "Consider what 'pre-' means when added to a word.",
+        "correctAnswer": "To view before",
         "distractorRationale": [
           {
-            "choice": "The character dislikes their pet.",
-            "whyWrong": "The passage suggests positive interactions."
+            "choice": "To view after",
+            "whyWrong": "'Pre-' means 'before,' not 'after.'"
           },
           {
-            "choice": "The character is indifferent to their pet.",
-            "whyWrong": "The passage suggests emotional involvement."
+            "choice": "To view during",
+            "whyWrong": "'Pre-' means 'before,' not 'during.'"
           },
           {
-            "choice": "The character is afraid of their pet.",
-            "whyWrong": "There is no indication of fear."
+            "choice": "To view quickly",
+            "whyWrong": "'Pre-' does not relate to speed."
           }
         ],
-        "rightAnswerRationale": "The character's actions and emotions suggest a close bond with their pet."
+        "rightAnswerRationale": "The prefix 'pre-' means 'before,' so 'preview' means 'to view before.'"
       },
       {
-        "type": "mc",
-        "choices": [
-          "The character is bored.",
-          "The character is curious.",
-          "The character is anxious.",
-          "The character is indifferent."
+        "type": "inline-dropdown",
+        "passage": null,
+        "question": "Which word means 'able to be seen'?",
+        "sentence": "The word that means 'able to be seen' is [BLANK].",
+        "coachHint": "Think about the root 'vis-' and the suffix '-ible.'",
+        "correctOption": "visible",
+        "dropdownOptions": [
+          "visible",
+          "invisible",
+          "vision",
+          "visit"
         ],
-        "passage": "As soon as Liam stepped off the bus, he was greeted by the bustling sounds of the city. The streets were alive with people, each one moving with purpose. Tall buildings towered above him, their windows reflecting the bright afternoon sun. Liam felt a thrill of excitement as he took in the sights and sounds. Everything was new and different, a stark contrast to the quiet town he had left behind. He wandered through the streets, eager to explore every corner. The aroma of street food filled the air, and he couldn't resist stopping to try something new. With each step, Liam felt more at home, his curiosity leading him deeper into the heart of the city.",
-        "question": "What can we infer about the character's feelings towards their new environment?",
-        "coachHint": "Think about how the character reacts to new surroundings.",
-        "correctAnswer": "The character is curious.",
         "distractorRationale": [
           {
-            "choice": "The character is bored.",
-            "whyWrong": "The passage suggests engagement and interest."
+            "option": "invisible",
+            "whyWrong": "'In-' means 'not,' so 'invisible' means 'not able to be seen.'"
           },
           {
-            "choice": "The character is anxious.",
-            "whyWrong": "There is no indication of anxiety."
+            "option": "vision",
+            "whyWrong": "'Vision' refers to the ability to see, not the state of being seen."
           },
           {
-            "choice": "The character is indifferent.",
-            "whyWrong": "The passage suggests active interest."
+            "option": "visit",
+            "whyWrong": "'Visit' means to go see someone, not the state of being seen."
           }
         ],
-        "rightAnswerRationale": "The character's actions and observations suggest curiosity and excitement about the new environment."
+        "rightAnswerRationale": "'Visible' means 'able to be seen,' combining 'vis-' (see) and '-ible' (able to)."
       },
       {
-        "type": "mc",
-        "choices": [
-          "The character prioritizes work over family.",
-          "The character prioritizes family over work.",
-          "The character prioritizes leisure over responsibilities.",
-          "The character prioritizes friends over family."
+        "type": "inline-dropdown",
+        "passage": null,
+        "question": "Select the correct meaning of 'predictable.'",
+        "sentence": "The word 'predictable' means [BLANK].",
+        "coachHint": "Break down the word into 'pre-' and '-able.'",
+        "correctOption": "able to be said before",
+        "dropdownOptions": [
+          "able to be said before",
+          "not able to be said",
+          "said quickly",
+          "said slowly"
         ],
-        "passage": "After a long day at work, Alex rushed home, eager to spend time with his family. As he walked through the door, he was greeted by the laughter of his children and the warm embrace of his partner. Dinner was already on the table, and the smell of home-cooked food filled the air. Alex felt a sense of peace as he sat down with his family, listening to their stories and sharing his own. Despite the demands of his job, he always made sure to prioritize these moments, knowing that they were what truly mattered. Work could wait, but the time spent with his loved ones was precious and irreplaceable. Alex cherished these evenings, where the world seemed to slow down, and everything felt just right.",
-        "question": "What can we infer about the character's priorities based on their actions?",
-        "coachHint": "Consider what the character chooses to focus on.",
-        "correctAnswer": "The character prioritizes family over work.",
         "distractorRationale": [
           {
-            "choice": "The character prioritizes work over family.",
-            "whyWrong": "The passage suggests the opposite."
+            "option": "not able to be said",
+            "whyWrong": "'-able' means 'capable of,' not 'not able.'"
           },
           {
-            "choice": "The character prioritizes leisure over responsibilities.",
-            "whyWrong": "The passage suggests a focus on family."
+            "option": "said quickly",
+            "whyWrong": "The word does not specify speed."
           },
           {
-            "choice": "The character prioritizes friends over family.",
-            "whyWrong": "The passage suggests a focus on family."
+            "option": "said slowly",
+            "whyWrong": "The word does not specify speed."
           }
         ],
-        "rightAnswerRationale": "The character's actions suggest they prioritize family over work."
+        "rightAnswerRationale": "'Predictable' means 'able to be said before,' combining 'pre-' (before) and '-able' (capable of)."
+      },
+      {
+        "type": "hot-text-phrase",
+        "passage": "The octopus is a fascinating marine animal known for its intelligence and unique abilities. One of its most remarkable skills is its capacity to change color and texture to blend in with its surroundings. This ability allows the octopus to become nearly invisible in the ocean, a vital adaptation for both hunting and evading predators. The octopus can mimic the appearance of rocks, coral, or sand, making it difficult for other creatures to spot it. This camouflage is not just for defense; it also helps the octopus sneak up on prey. By altering its skin to match the environment, the octopus can move undetected. Scientists continue to study this amazing creature to understand how it achieves such perfect disguise. The octopus's ability to become unseen is a testament to the wonders of the natural world.",
+        "question": "Which phrases help you understand the meaning of 'invisible'?",
+        "coachHint": "Look for phrases that show something cannot be seen.",
+        "maxSelect": 2,
+        "minSelect": 2,
+        "correctPhrases": [
+          "nearly invisible in the ocean",
+          "difficult for other creatures to spot it"
+        ],
+        "selectablePhrases": [
+          "nearly invisible in the ocean",
+          "evading predators",
+          "difficult for other creatures to spot it",
+          "move undetected"
+        ],
+        "rightAnswerRationale": "The phrases 'nearly invisible in the ocean' and 'difficult for other creatures to spot it' highlight the meaning of 'invisible.'"
       }
     ],
     "resourceDescription": null
   },
   "critic": {
-    "score": 60,
+    "score": 88,
     "status": "PASS",
     "revisions": []
   },
-  "validationIssues": [
-    "A practice passage is likely too short for the target grade.",
-    "A practice passage is likely too short for the target grade.",
-    "A practice passage is likely too short for the target grade.",
-    "A practice passage is likely too short for the target grade.",
-    "A practice passage is likely too short for the target grade.",
-    "A practice passage is likely too short for the target grade.",
-    "A practice passage is likely too short for the target grade.",
-    "A practice passage is likely too short for the target grade.",
-    "A practice passage is likely too short for the target grade.",
-    "Practice passage needs regeneration: 120 words (target 150-400) with FK grade 7.4 (target 4±1.5). Write a longer, more natural passage with simpler sentence structure.",
-    "Practice passage needs regeneration: 112 words (target 150-400) with FK grade 7.4 (target 4±1.5). Write a longer, more natural passage with simpler sentence structure.",
-    "Practice passage needs regeneration: 116 words (target 150-400) with FK grade 6.5 (target 4±1.5). Write a longer, more natural passage with simpler sentence structure.",
-    "Practice passage needs regeneration: 118 words (target 150-400) with FK grade 5.9 (target 4±1.5). Write a longer, more natural passage with simpler sentence structure.",
-    "Practice passage needs regeneration: 117 words (target 150-400) with FK grade 6.7 (target 4±1.5). Write a longer, more natural passage with simpler sentence structure.",
-    "Practice passage needs regeneration: 126 words (target 150-400) with FK grade 8.0 (target 4±1.5). Write a longer, more natural passage with simpler sentence structure.",
-    "Practice passage needs regeneration: 119 words (target 150-400) with FK grade 5.5 (target 4±1.5). Write a longer, more natural passage with simpler sentence structure.",
-    "Practice passage needs regeneration: 114 words (target 150-400) with FK grade 8.7 (target 4±1.5). Write a longer, more natural passage with simpler sentence structure.",
-    "Practice passage needs regeneration: 120 words (target 150-400) with FK grade 6.0 (target 4±1.5). Write a longer, more natural passage with simpler sentence structure.",
-    "Practice passage needs regeneration: 118 words (target 150-400) with FK grade 8.1 (target 4±1.5). Write a longer, more natural passage with simpler sentence structure.",
-    "Practice passage needs regeneration: 132 words (target 150-400) with FK grade 7.8 (target 4±1.5). Write a longer, more natural passage with simpler sentence structure.",
-    "guidedPractice[1]: Passage is missing. (Provide a passage that aligns with the question and is appropriate for the grade level.)",
-    "independentPractice[1]: Passage is missing. (Include a passage that supports the question and is suitable for the target grade.)",
-    "independentPractice[2]: Passage is missing. (Add a passage that fits the question and is appropriate for the grade level.)",
-    "independentPractice[3]: Passage is missing. (Create a passage that aligns with the question and is suitable for the target grade.)",
-    "exitTicket[1]: Passage is missing. (Include a passage that supports the question and is appropriate for the grade level.)",
-    "masteryCheck[1]: Passage is missing. (Provide a passage that aligns with the question and is suitable for the target grade.)",
-    "masteryCheck[2]: Passage is missing. (Add a passage that fits the question and is appropriate for the grade level.)"
-  ],
+  "validationIssues": [],
   "iterations": 0
 }

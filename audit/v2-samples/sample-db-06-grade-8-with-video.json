@@ -35,21 +35,31 @@
       },
       {
         "type": "hot-text-phrase",
-        "passage": "The new manager's approach was met with skepticism by the team. His decisions were often seen as arbitrary and lacking in transparency. The staff felt that their input was undervalued, leading to a sense of frustration and discontent. Despite his efforts to improve efficiency, the atmosphere in the office remained tense. Many employees were concerned about the lack of communication and the top-down management style. The changes implemented were not well-received, and morale was low. The manager's intentions may have been good, but the execution left much to be desired, resulting in a challenging work environment for all involved. The staff hoped for a more inclusive approach in the future.",
+        "passage": "In the small village of Eldergrove, tales of the mysterious forest that bordered the town were passed down through generations. The forest was said to be enchanted, filled with ancient trees that whispered secrets to those who dared to listen. Villagers spoke of the eerie glow that sometimes emanated from the heart of the woods on moonlit nights. Despite its beauty, the forest had a reputation for being treacherous. Many who ventured too deep returned with stories of disorienting paths and unsettling sounds that seemed to follow them. Some claimed to have seen shadowy figures darting between the trees, while others reported feeling an inexplicable chill that seeped into their bones. The village elders warned of the forest's capricious nature, advising caution to those who sought to explore its depths. Yet, the allure of the unknown continued to draw the curious and the brave. The villagers' relationship with the forest was one of awe and respect, acknowledging its power and mystery. Though the forest was a source of wonder, it also served as a reminder of nature's unpredictable and sometimes perilous side. The tales of Eldergrove's enchanted forest were a testament to the enduring fascination with the unknown, a place where beauty and danger coexisted in a delicate balance.",
         "question": "Identify the phrase with a negative connotation.",
-        "coachHint": "Look for phrases that imply something negative or unfair.",
+        "coachHint": "Look for phrases that imply something unsettling or dangerous.",
         "maxSelect": 1,
         "minSelect": 1,
         "correctPhrases": [
-          "arbitrary and lacking in transparency"
+          "treacherous",
+          "disorienting paths",
+          "unsettling sounds",
+          "shadowy figures",
+          "inexplicable chill",
+          "capricious nature"
         ],
         "selectablePhrases": [
-          "met with skepticism",
-          "arbitrary and lacking in transparency",
-          "improve efficiency",
-          "challenging work environment"
+          "enchanted",
+          "eerie glow",
+          "treacherous",
+          "disorienting paths",
+          "unsettling sounds",
+          "shadowy figures",
+          "inexplicable chill",
+          "capricious nature",
+          "awe and respect"
         ],
-        "rightAnswerRationale": "\"Arbitrary and lacking in transparency\" has a negative connotation, suggesting unfairness and secrecy."
+        "rightAnswerRationale": "Phrases like \"treacherous,\" \"disorienting paths,\" \"unsettling sounds,\" \"shadowy figures,\" \"inexplicable chill,\" and \"capricious nature\" carry negative connotations, suggesting danger and unpredictability."
       }
     ],
     "gradeLevel": 8,
@@ -121,21 +131,21 @@
       },
       {
         "type": "hot-text-phrase",
-        "passage": "The volunteers worked tirelessly to organize the charity event, ensuring everything was perfect for the big day. Their efforts were driven by a genuine desire to make a difference in the community. The event was a resounding success, with attendees praising the organizers for their dedication and hard work. The atmosphere was filled with joy and gratitude, as people came together to support a worthy cause. The volunteers' commitment was evident in every detail, from the beautifully decorated venue to the carefully planned activities. It was a day to remember, marked by a spirit of generosity and kindness that left a lasting impression on everyone involved. The community was grateful for the volunteers' selfless contributions, which made the event a highlight of the year.",
+        "passage": "In the bustling city of New York, two restaurants stood side by side, each offering its own unique appeal to the diverse population of the city. The first, 'The Golden Fork,' was renowned for its luxurious ambiance and exquisite cuisine, drawing in patrons who sought a sophisticated dining experience. The restaurant's elegant decor, with its crystal chandeliers and plush velvet seating, created an atmosphere of opulence and refinement. Guests at 'The Golden Fork' could indulge in gourmet dishes prepared by a chef whose culinary skills were nothing short of masterful. The menu boasted an array of delicacies, paired perfectly with a selection of fine wines, making it a favorite among those who appreciated the finer things in life.\n\nIn stark contrast, 'The Cozy Corner' offered a different kind of charm. This beloved eatery was famous for its warm atmosphere and hearty meals that evoked the comforting feeling of home-cooked food. Regulars at 'The Cozy Corner' cherished the welcoming environment and the inviting charm that seemed to envelop them as soon as they walked through the door. The friendly staff knew many of the patrons by name, fostering a sense of community that was both genuine and heartfelt. Diners could enjoy generous portions of classic comfort foods, served with a smile, making it a haven for those seeking familiarity and warmth.\n\nDespite their differences, both restaurants thrived, each catering to the distinct tastes and preferences of their patrons. 'The Golden Fork' was a place where elegance and luxury reigned supreme, while 'The Cozy Corner' celebrated the joys of simplicity and connection. The contrast between the two establishments highlighted the diverse culinary landscape of New York City, demonstrating how different styles could coexist harmoniously in such a vibrant urban environment. Both had their own loyal following, drawn to the unique experiences they provided, showcasing the rich tapestry of tastes that defined the city's dining scene.",
         "question": "Identify the phrase with a positive connotation.",
         "coachHint": "Look for phrases that imply something positive or uplifting.",
         "maxSelect": 1,
         "minSelect": 1,
         "correctPhrases": [
-          "spirit of generosity and kindness"
+          "welcoming environment"
         ],
         "selectablePhrases": [
-          "worked tirelessly",
-          "genuine desire",
-          "spirit of generosity and kindness",
-          "lasting impression"
+          "luxurious ambiance",
+          "elegant decor",
+          "welcoming environment",
+          "sense of community"
         ],
-        "rightAnswerRationale": "\"Spirit of generosity and kindness\" has a positive connotation, suggesting goodwill and compassion."
+        "rightAnswerRationale": "\"Welcoming environment\" has a positive connotation, suggesting warmth and friendliness."
       }
     ],
     "qualityScore": 92,
@@ -164,30 +174,30 @@
       {
         "type": "mc",
         "choices": [
-          "A pleasant smell",
-          "A strong odor",
-          "A chemical scent",
-          "A neutral smell"
+          "A positive impact",
+          "A negative effect",
+          "A neutral change",
+          "A confusing outcome"
         ],
-        "passage": "The garden was filled with the fragrance of blooming flowers, creating a serene and inviting atmosphere. The scent was not overpowering but rather a gentle reminder of spring's arrival, making everyone feel at ease and relaxed as they walked through the garden paths. It was a place where worries seemed to melt away, replaced by the simple joy of nature's beauty. The fragrance was a subtle yet powerful presence, enhancing the garden's charm and allure. Visitors often commented on how the fragrance lingered in their minds long after they had left, a pleasant memory of their time spent in the garden's embrace. The fragrance was more than just a smell; it was an experience that touched the soul.",
-        "question": "What is the connotation of the word \"fragrance\" in the passage?",
-        "coachHint": "Think about how the word makes you feel and what it suggests about the garden.",
-        "correctAnswer": "A pleasant smell",
+        "passage": "In recent years, scientists have been studying the effects of urban green spaces on mental health. These areas, which include parks, gardens, and other natural environments, are increasingly recognized for their ability to improve the well-being of city dwellers. Research shows that spending time in these green spaces can reduce stress, enhance mood, and even improve cognitive function. The presence of trees and plants provides a soothing backdrop that contrasts sharply with the hustle and bustle of urban life. People who regularly visit these areas often report feeling more relaxed and rejuvenated. Moreover, the natural surroundings encourage physical activity, which further contributes to mental health benefits. The positive effects of urban green spaces are not just limited to individuals; they can also foster a sense of community and social interaction, as people gather for recreational activities or simply to enjoy the outdoors together. As cities continue to grow, the importance of maintaining and expanding these green spaces becomes increasingly clear. They offer a refuge from the concrete jungle, providing a vital connection to nature that is essential for both physical and mental health. The impact of urban green spaces is overwhelmingly positive, highlighting the need for urban planners to prioritize these areas in city development.",
+        "question": "What is the connotation of the phrase \"urban green spaces\" in the passage?",
+        "coachHint": "Consider what the phrase suggests about the environment and its effects on people.",
+        "correctAnswer": "A positive impact",
         "distractorRationale": [
           {
-            "choice": "A strong odor",
-            "whyWrong": "This suggests something overpowering, which is not supported by the passage."
+            "choice": "A negative effect",
+            "whyWrong": "The passage emphasizes the benefits of green spaces, not negative effects."
           },
           {
-            "choice": "A chemical scent",
-            "whyWrong": "The passage describes a natural, pleasant scent, not a chemical one."
+            "choice": "A neutral change",
+            "whyWrong": "The passage highlights significant positive impacts, not neutrality."
           },
           {
-            "choice": "A neutral smell",
-            "whyWrong": "The passage emphasizes the positive impact of the fragrance, not neutrality."
+            "choice": "A confusing outcome",
+            "whyWrong": "The passage clearly describes the positive outcomes of green spaces."
           }
         ],
-        "rightAnswerRationale": "The word \"fragrance\" has a positive connotation, suggesting a pleasant and appealing scent that enhances the garden's atmosphere."
+        "rightAnswerRationale": "The phrase \"urban green spaces\" has a positive connotation, suggesting beneficial effects on mental health and community well-being."
       },
       {
         "type": "inline-dropdown",
@@ -220,21 +230,21 @@
       },
       {
         "type": "hot-text-phrase",
-        "passage": "The new policy was introduced with much fanfare, but many employees felt it was a thinly veiled attempt to cut costs. The management's decision was seen as a cost-saving measure rather than a genuine effort to improve working conditions. Employees were skeptical, viewing the policy as a facade to mask deeper issues within the company. The announcement was met with mixed reactions, with some praising the initiative while others questioned its true intent. The atmosphere in the office was tense, as rumors circulated about potential layoffs and budget cuts. Despite the official narrative, the underlying sentiment was one of distrust and uncertainty.",
+        "passage": "In the heart of the forest, there was a village where the people lived in harmony with nature. They cherished the towering trees and the gentle streams that flowed through their land. However, a shadow loomed over this peaceful existence. A group of outsiders arrived, claiming to bring progress and development. They spoke of building roads and factories, promising prosperity and jobs. But the villagers were wary, sensing an ulterior motive behind the outsiders' promises. The outsiders' words were sweet, but their eyes betrayed a hunger for the untouched resources of the forest. The villagers feared that the outsiders' version of progress would lead to the destruction of their beloved home. As the days passed, tensions rose, and the villagers held secret meetings to discuss how to protect their way of life. They knew that the outsiders' promises of prosperity came at a price, one that they were not willing to pay. The elders of the village, wise and cautious, warned the younger generation about the consequences of blind trust. They reminded everyone of the importance of preserving their heritage and protecting the natural world that had sustained them for generations. The villagers stood united, determined to defend their home from those who saw it as nothing more than a resource to be exploited.",
         "question": "Identify the phrase with a negative connotation.",
         "coachHint": "Look for phrases that imply something negative or deceptive.",
         "maxSelect": 1,
         "minSelect": 1,
         "correctPhrases": [
-          "thinly veiled attempt"
+          "ulterior motive"
         ],
         "selectablePhrases": [
-          "much fanfare",
-          "thinly veiled attempt",
-          "cost-saving measure",
-          "genuine effort"
+          "lived in harmony",
+          "ulterior motive",
+          "promising prosperity",
+          "wise and cautious"
         ],
-        "rightAnswerRationale": "\"Thinly veiled attempt\" has a negative connotation, suggesting deceit or insincerity."
+        "rightAnswerRationale": "\"Ulterior motive\" has a negative connotation, suggesting deceit or hidden intentions."
       }
     ],
     "sentenceFrames": [
@@ -310,21 +320,21 @@
       },
       {
         "type": "hot-text-phrase",
-        "passage": "The team worked tirelessly to complete the project, often staying late into the night. Their dedication was evident in the quality of their work, which was praised by the client. The project manager commended the team for their perseverance and commitment, noting that their efforts had exceeded expectations. The atmosphere in the office was one of camaraderie and mutual support, with everyone pulling together to achieve a common goal. The successful completion of the project was a testament to the team's hard work and determination, and it was celebrated with a small gathering in the office. The sense of accomplishment was palpable, as everyone shared in the joy of a job well done.",
+        "passage": "In a small coastal town, two rival bakeries vied for the affection of the community. The first bakery, Sweet Delights, was known for its traditional recipes passed down through generations. The aroma of freshly baked bread and pastries wafted through the streets each morning, drawing loyal customers who cherished the comforting flavors. Across the street, Modern Bites offered a different experience, with its innovative and trendy creations. The bakery's sleek design and vibrant atmosphere attracted a younger crowd eager to try the latest culinary trends. Despite their differences, both bakeries shared a friendly rivalry, often participating in local events to showcase their skills. During the annual bake-off, the town buzzed with excitement as residents gathered to sample the best of both worlds. Sweet Delights presented a classic apple pie, its crust golden and flaky, while Modern Bites surprised everyone with a matcha-infused cake, its bright green hue a testament to its creativity. In the end, it was the sense of community and shared passion for baking that truly won the day, as both bakeries celebrated their unique contributions to the town's culinary scene. The event ended with laughter and applause, as everyone enjoyed the delicious offerings and the spirit of friendly competition.",
         "question": "Identify the phrase with a positive connotation.",
         "coachHint": "Look for phrases that imply something positive or supportive.",
         "maxSelect": 1,
         "minSelect": 1,
         "correctPhrases": [
-          "camaraderie and mutual support"
+          "sense of community and shared passion"
         ],
         "selectablePhrases": [
-          "worked tirelessly",
-          "dedication was evident",
-          "camaraderie and mutual support",
-          "exceeded expectations"
+          "traditional recipes passed down",
+          "vibrant atmosphere",
+          "sense of community and shared passion",
+          "spirit of friendly competition"
         ],
-        "rightAnswerRationale": "\"Camaraderie and mutual support\" has a positive connotation, suggesting teamwork and cooperation."
+        "rightAnswerRationale": "\"Sense of community and shared passion\" has a positive connotation, suggesting unity and collective enthusiasm."
       },
       {
         "type": "mc",

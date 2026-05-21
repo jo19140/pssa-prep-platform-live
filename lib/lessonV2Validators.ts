@@ -58,6 +58,11 @@ export async function validateLessonV2(lesson: LessonV2, openai?: OpenAI, option
   const teiTypes = new Set(questions.filter((question) => question.type !== "mc").map((question) => question.type));
   if (teiTypes.size < 2) issues.push(`Expected at least 2 distinct TEI types; found ${teiTypes.size}.`);
 
+  const topicCount = distinctPracticeTopicCount(lesson);
+  if (topicCount < 6) {
+    issues.push(`Expected at least 6 distinct practice topics across the lesson; found ${topicCount}. Write new practice items on different domains such as science, history/social studies, literary narrative, biography, process/how-to, and paired-text comparison.`);
+  }
+
   for (const passage of passages) {
     issues.push(...validatePassageContent(passage));
     const wc = wordCount(passage);
@@ -357,3 +362,46 @@ function loadSamplerPassages(gradeLevel: number) {
 function shortSummary(text: string) {
   return text.trim().replace(/\s+/g, " ").slice(0, 120);
 }
+
+function distinctPracticeTopicCount(lesson: LessonV2) {
+  const skillWords = new Set(tokenizeForTopic(lesson.skill));
+  const topics = allPracticeQuestions(lesson)
+    .map((question) => topicSignature(question, skillWords))
+    .filter(Boolean);
+  return new Set(topics).size;
+}
+
+function topicSignature(question: PracticeQuestionV2, skillWords: Set<string>) {
+  const anyQuestion = question as any;
+  const text = [
+    question.passage,
+    anyQuestion.paragraph,
+    anyQuestion.sentence,
+    question.question,
+    Array.isArray(anyQuestion.choices) ? anyQuestion.choices.join(" ") : "",
+    Array.isArray(anyQuestion.draggableItems) ? anyQuestion.draggableItems.join(" ") : "",
+  ].filter(Boolean).join(" ");
+  const counts = new Map<string, number>();
+  for (const token of tokenizeForTopic(text)) {
+    if (TOPIC_STOPWORDS.has(token) || skillWords.has(token) || token.length <= 3) continue;
+    counts.set(token, (counts.get(token) || 0) + 1);
+  }
+  return Array.from(counts.entries())
+    .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+    .slice(0, 4)
+    .map(([token]) => token)
+    .join(" ");
+}
+
+function tokenizeForTopic(text: string) {
+  return text.toLowerCase().replace(/[^a-z0-9\s]/g, " ").split(/\s+/).filter(Boolean);
+}
+
+const TOPIC_STOPWORDS = new Set([
+  "about", "above", "after", "again", "against", "also", "because", "before", "between", "could", "every",
+  "from", "have", "into", "more", "most", "only", "other", "over", "same", "should", "some", "than",
+  "that", "their", "there", "these", "they", "this", "through", "under", "when", "where", "which",
+  "while", "with", "would", "answer", "choice", "choices", "correct", "detail", "details", "evidence",
+  "explain", "passage", "question", "student", "students", "support", "supports", "sentence", "sentences",
+  "paragraph", "author", "reader", "text", "shows", "using", "write", "read", "skill", "lesson",
+]);
