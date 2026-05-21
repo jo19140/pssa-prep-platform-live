@@ -1,173 +1,57 @@
 {
-  "generatedAt": "2026-05-21T14:31:27.290Z",
+  "generatedAt": "2026-05-21T15:08:57.338Z",
   "totalLessonsScanned": 182,
-  "lessonsWithAtLeastOneDistractorIssue": 37,
-  "totalDistractorIssues": 96,
+  "lessonsWithAtLeastOneDistractorIssue": 5,
+  "totalDistractorIssues": 5,
   "perGradeBreakdown": [
     {
       "gradeLevel": 3,
       "scanned": 30,
-      "lessonsWithIssues": 7,
-      "totalIssues": 21
+      "lessonsWithIssues": 0,
+      "totalIssues": 0
     },
     {
       "gradeLevel": 4,
       "scanned": 32,
-      "lessonsWithIssues": 6,
-      "totalIssues": 10
+      "lessonsWithIssues": 0,
+      "totalIssues": 0
     },
     {
       "gradeLevel": 5,
       "scanned": 29,
-      "lessonsWithIssues": 5,
-      "totalIssues": 14
+      "lessonsWithIssues": 0,
+      "totalIssues": 0
     },
     {
       "gradeLevel": 6,
       "scanned": 31,
-      "lessonsWithIssues": 9,
-      "totalIssues": 16
+      "lessonsWithIssues": 2,
+      "totalIssues": 2
     },
     {
       "gradeLevel": 7,
       "scanned": 30,
-      "lessonsWithIssues": 6,
-      "totalIssues": 20
+      "lessonsWithIssues": 3,
+      "totalIssues": 3
     },
     {
       "gradeLevel": 8,
       "scanned": 30,
-      "lessonsWithIssues": 4,
-      "totalIssues": 15
+      "lessonsWithIssues": 0,
+      "totalIssues": 0
     }
   ],
   "worstOffenders": [
-    {
-      "lessonId": "cmpdgm4f3006mevu91x36jxg8",
-      "gradeLevel": 3,
-      "standardCode": "CC.1.3.3.D",
-      "skill": "Point of View",
-      "title": "Understanding Point of View",
-      "qualityScore": 88,
-      "issueCount": 7,
-      "issues": [
-        "guidedPractice[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate.",
-        "guidedPractice[1]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate.",
-        "independentPractice[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate.",
-        "independentPractice[1]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate.",
-        "independentPractice[3]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate.",
-        "masteryCheck[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate.",
-        "masteryCheck[2]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate."
-      ]
-    },
-    {
-      "lessonId": "cmpdsl5ti006des459upxtlim",
-      "gradeLevel": 8,
-      "standardCode": "CC.1.2.8.E",
-      "skill": "Compare Text Structures",
-      "title": "Understanding and Comparing Text Structures",
-      "qualityScore": 88,
-      "issueCount": 7,
-      "issues": [
-        "guidedPractice[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate.",
-        "guidedPractice[1]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate.",
-        "independentPractice[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate.",
-        "independentPractice[1]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate.",
-        "exitTicket[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate.",
-        "masteryCheck[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate.",
-        "masteryCheck[1]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate."
-      ]
-    },
-    {
-      "lessonId": "cmpdk5iju00ojevu943zwy1tm",
-      "gradeLevel": 5,
-      "standardCode": "CC.1.3.5.H",
-      "skill": "Compare Themes Across Stories",
-      "title": "Exploring Themes Across Stories",
-      "qualityScore": 88,
-      "issueCount": 5,
-      "issues": [
-        "guidedPractice[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate.",
-        "independentPractice[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate.",
-        "independentPractice[2]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate.",
-        "exitTicket[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate.",
-        "masteryCheck[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate."
-      ]
-    },
-    {
-      "lessonId": "cmpdn2k4r0120evu9e0u3rx6y",
-      "gradeLevel": 7,
-      "standardCode": "CC.1.2.7.E",
-      "skill": "Text Structure Effects",
-      "title": "Understanding Text Structure Effects",
-      "qualityScore": 88,
-      "issueCount": 5,
-      "issues": [
-        "guidedPractice[2]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate.",
-        "independentPractice[2]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate.",
-        "exitTicket[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate.",
-        "masteryCheck[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate.",
-        "masteryCheck[2]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate."
-      ]
-    },
-    {
-      "lessonId": "cmpdg1f67003eevu9q8cyr7oa",
-      "gradeLevel": 3,
-      "standardCode": "CC.1.2.3.E",
-      "skill": "Author's Purpose",
-      "title": "Understanding Author's Purpose",
-      "qualityScore": 88,
-      "issueCount": 4,
-      "issues": [
-        "guidedPractice[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate.",
-        "guidedPractice[1]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate.",
-        "independentPractice[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate.",
-        "masteryCheck[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate."
-      ]
-    },
-    {
-      "lessonId": "cmpdi8kps00etevu9e5xap1kx",
-      "gradeLevel": 4,
-      "standardCode": "CC.1.3.4.D",
-      "skill": "Point of View",
-      "title": "Understanding Point of View in Stories",
-      "qualityScore": 92,
-      "issueCount": 4,
-      "issues": [
-        "guidedPractice[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate.",
-        "independentPractice[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate.",
-        "exitTicket[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate.",
-        "masteryCheck[2]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate."
-      ]
-    },
-    {
-      "lessonId": "cmpdjy2zi00naevu9av8fdpd2",
-      "gradeLevel": 5,
-      "standardCode": "CC.1.3.5.D",
-      "skill": "Point of View",
-      "title": "Understanding Point of View in Texts",
-      "qualityScore": 92,
-      "issueCount": 4,
-      "issues": [
-        "guidedPractice[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate.",
-        "independentPractice[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate.",
-        "exitTicket[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate.",
-        "masteryCheck[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate."
-      ]
-    },
     {
       "lessonId": "cmpdlpsjw00vlevu9e9fvdv3y",
       "gradeLevel": 6,
       "standardCode": "CC.1.3.6.A",
       "skill": "Theme Development",
       "title": "Understanding Theme Development",
-      "qualityScore": 88,
-      "issueCount": 4,
+      "qualityScore": 75,
+      "issueCount": 1,
       "issues": [
-        "guidedPractice[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate.",
-        "independentPractice[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate.",
-        "exitTicket[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate.",
-        "masteryCheck[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate."
+        "guidedPractice[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate."
       ]
     },
     {
@@ -176,13 +60,10 @@
       "standardCode": "CC.1.2.6.F",
       "skill": "Tone and Connotation",
       "title": "Understanding Tone and Connotation",
-      "qualityScore": 88,
-      "issueCount": 4,
+      "qualityScore": 75,
+      "issueCount": 1,
       "issues": [
-        "guidedPractice[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate.",
-        "independentPractice[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate.",
-        "independentPractice[3]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate.",
-        "masteryCheck[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate."
+        "guidedPractice[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate."
       ]
     },
     {
@@ -191,304 +72,39 @@
       "standardCode": "CC.1.3.7.F",
       "skill": "Mood, Tone, and Word Choice",
       "title": "Exploring Mood, Tone, and Word Choice",
-      "qualityScore": 92,
-      "issueCount": 4,
-      "issues": [
-        "guidedPractice[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate.",
-        "independentPractice[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate.",
-        "exitTicket[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate.",
-        "masteryCheck[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate."
-      ]
-    },
-    {
-      "lessonId": "cmpdnfrkl013kevu9alffqe61",
-      "gradeLevel": 7,
-      "standardCode": "CC.1.3.7.D",
-      "skill": "Narrator Reliability and Perspective",
-      "title": "Understanding Narrator Reliability and Perspective",
-      "qualityScore": 92,
-      "issueCount": 4,
-      "issues": [
-        "guidedPractice[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate.",
-        "independentPractice[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate.",
-        "independentPractice[2]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate.",
-        "exitTicket[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate."
-      ]
-    },
-    {
-      "lessonId": "cmpdnfohx013cevu9qi18uk0t",
-      "gradeLevel": 7,
-      "standardCode": "CC.1.3.7.D",
-      "skill": "Point of View",
-      "title": "Understanding Point of View in Texts",
-      "qualityScore": 92,
-      "issueCount": 4,
-      "issues": [
-        "guidedPractice[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate.",
-        "independentPractice[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate.",
-        "exitTicket[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate.",
-        "masteryCheck[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate."
-      ]
-    },
-    {
-      "lessonId": "cmpdsm05h006les45dbx0miny",
-      "gradeLevel": 8,
-      "standardCode": "CC.1.2.8.D",
-      "skill": "Author Perspective and Bias",
-      "title": "Understanding Author Perspective and Bias",
-      "qualityScore": 88,
-      "issueCount": 4,
-      "issues": [
-        "guidedPractice[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate.",
-        "independentPractice[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate.",
-        "exitTicket[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate.",
-        "masteryCheck[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate."
-      ]
-    },
-    {
-      "lessonId": "cmpdfxnn7002tevu993vrd9h7",
-      "gradeLevel": 3,
-      "standardCode": "CC.1.2.3.C",
-      "skill": "Cause and Effect",
-      "title": "Understanding Cause and Effect",
       "qualityScore": 75,
-      "issueCount": 3,
+      "issueCount": 1,
       "issues": [
-        "guidedPractice[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate.",
-        "independentPractice[2]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate.",
-        "masteryCheck[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate."
-      ]
-    },
-    {
-      "lessonId": "cmpdg77dl0048evu9yx51bo8o",
-      "gradeLevel": 3,
-      "standardCode": "CC.1.2.3.F",
-      "skill": "Context Clues",
-      "title": "Using Context Clues to Understand Words",
-      "qualityScore": 88,
-      "issueCount": 3,
-      "issues": [
-        "independentPractice[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate.",
-        "exitTicket[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate.",
-        "masteryCheck[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate."
-      ]
-    },
-    {
-      "lessonId": "cmpds1rq1004qes458ueo06yl",
-      "gradeLevel": 8,
-      "standardCode": "CC.1.1.8.E",
-      "skill": "Advanced Word Analysis",
-      "title": "Mastering Advanced Word Analysis",
-      "qualityScore": 88,
-      "issueCount": 3,
-      "issues": [
-        "guidedPractice[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate.",
-        "independentPractice[1]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate.",
-        "exitTicket[1]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate."
-      ]
-    },
-    {
-      "lessonId": "cmpdggth4005oevu9zrifadqq",
-      "gradeLevel": 3,
-      "standardCode": "CC.1.3.3.C",
-      "skill": "Character Traits and Actions",
-      "title": "Understanding Character Traits and Actions",
-      "qualityScore": 78,
-      "issueCount": 2,
-      "issues": [
-        "guidedPractice[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate.",
         "independentPractice[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate."
       ]
     },
     {
-      "lessonId": "cmpdhvyp400d8evu9dt50rod2",
-      "gradeLevel": 4,
-      "standardCode": "CC.1.2.4.F",
-      "skill": "Homophones and Multiple-Meaning Words",
-      "title": "Mastering Homophones and Multiple-Meaning Words",
-      "qualityScore": 92,
-      "issueCount": 2,
+      "lessonId": "cmpdn2k4r0120evu9e0u3rx6y",
+      "gradeLevel": 7,
+      "standardCode": "CC.1.2.7.E",
+      "skill": "Text Structure Effects",
+      "title": "Understanding Text Structure Effects",
+      "qualityScore": 75,
+      "issueCount": 1,
       "issues": [
-        "guidedPractice[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate.",
-        "independentPractice[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate."
+        "independentPractice[2]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate."
       ]
     },
     {
-      "lessonId": "cmpdjez5k00kpevu91xq22rwd",
-      "gradeLevel": 5,
-      "standardCode": "CC.1.2.5.F",
-      "skill": "Academic and Domain-Specific Vocabulary",
-      "title": "Understanding Academic and Domain-Specific Vocabulary",
-      "qualityScore": 92,
-      "issueCount": 2,
+      "lessonId": "cmpdr5mjm000ies455h6l2m6y",
+      "gradeLevel": 7,
+      "standardCode": "CC.1.3.7.A",
+      "skill": "Theme",
+      "title": "Exploring Theme in Literary Texts",
+      "qualityScore": 75,
+      "issueCount": 1,
       "issues": [
-        "independentPractice[3]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate.",
-        "masteryCheck[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate."
-      ]
-    },
-    {
-      "lessonId": "cmpdk17vx00nwevu9n6g3b65k",
-      "gradeLevel": 5,
-      "standardCode": "CC.1.3.5.F",
-      "skill": "Poetry Speaker and Tone",
-      "title": "Understanding Poetry: Speaker and Tone",
-      "qualityScore": 92,
-      "issueCount": 2,
-      "issues": [
-        "guidedPractice[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate.",
-        "independentPractice[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate."
+        "exitTicket[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate."
       ]
     }
   ],
   "examples": [
     {
-      "lessonId": "cmpdgm4f3006mevu91x36jxg8",
-      "gradeLevel": 3,
-      "standardCode": "CC.1.3.3.D",
-      "skill": "Point of View",
-      "issue": "guidedPractice[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate."
-    },
-    {
-      "lessonId": "cmpdgm4f3006mevu91x36jxg8",
-      "gradeLevel": 3,
-      "standardCode": "CC.1.3.3.D",
-      "skill": "Point of View",
-      "issue": "guidedPractice[1]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate."
-    },
-    {
-      "lessonId": "cmpdgm4f3006mevu91x36jxg8",
-      "gradeLevel": 3,
-      "standardCode": "CC.1.3.3.D",
-      "skill": "Point of View",
-      "issue": "independentPractice[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate."
-    },
-    {
-      "lessonId": "cmpdsl5ti006des459upxtlim",
-      "gradeLevel": 8,
-      "standardCode": "CC.1.2.8.E",
-      "skill": "Compare Text Structures",
-      "issue": "guidedPractice[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate."
-    },
-    {
-      "lessonId": "cmpdsl5ti006des459upxtlim",
-      "gradeLevel": 8,
-      "standardCode": "CC.1.2.8.E",
-      "skill": "Compare Text Structures",
-      "issue": "guidedPractice[1]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate."
-    },
-    {
-      "lessonId": "cmpdsl5ti006des459upxtlim",
-      "gradeLevel": 8,
-      "standardCode": "CC.1.2.8.E",
-      "skill": "Compare Text Structures",
-      "issue": "independentPractice[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate."
-    },
-    {
-      "lessonId": "cmpdk5iju00ojevu943zwy1tm",
-      "gradeLevel": 5,
-      "standardCode": "CC.1.3.5.H",
-      "skill": "Compare Themes Across Stories",
-      "issue": "guidedPractice[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate."
-    },
-    {
-      "lessonId": "cmpdk5iju00ojevu943zwy1tm",
-      "gradeLevel": 5,
-      "standardCode": "CC.1.3.5.H",
-      "skill": "Compare Themes Across Stories",
-      "issue": "independentPractice[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate."
-    },
-    {
-      "lessonId": "cmpdk5iju00ojevu943zwy1tm",
-      "gradeLevel": 5,
-      "standardCode": "CC.1.3.5.H",
-      "skill": "Compare Themes Across Stories",
-      "issue": "independentPractice[2]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate."
-    },
-    {
-      "lessonId": "cmpdn2k4r0120evu9e0u3rx6y",
-      "gradeLevel": 7,
-      "standardCode": "CC.1.2.7.E",
-      "skill": "Text Structure Effects",
-      "issue": "guidedPractice[2]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate."
-    },
-    {
-      "lessonId": "cmpdn2k4r0120evu9e0u3rx6y",
-      "gradeLevel": 7,
-      "standardCode": "CC.1.2.7.E",
-      "skill": "Text Structure Effects",
-      "issue": "independentPractice[2]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate."
-    },
-    {
-      "lessonId": "cmpdn2k4r0120evu9e0u3rx6y",
-      "gradeLevel": 7,
-      "standardCode": "CC.1.2.7.E",
-      "skill": "Text Structure Effects",
-      "issue": "exitTicket[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate."
-    },
-    {
-      "lessonId": "cmpdg1f67003eevu9q8cyr7oa",
-      "gradeLevel": 3,
-      "standardCode": "CC.1.2.3.E",
-      "skill": "Author's Purpose",
-      "issue": "guidedPractice[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate."
-    },
-    {
-      "lessonId": "cmpdg1f67003eevu9q8cyr7oa",
-      "gradeLevel": 3,
-      "standardCode": "CC.1.2.3.E",
-      "skill": "Author's Purpose",
-      "issue": "guidedPractice[1]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate."
-    },
-    {
-      "lessonId": "cmpdg1f67003eevu9q8cyr7oa",
-      "gradeLevel": 3,
-      "standardCode": "CC.1.2.3.E",
-      "skill": "Author's Purpose",
-      "issue": "independentPractice[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate."
-    },
-    {
-      "lessonId": "cmpdi8kps00etevu9e5xap1kx",
-      "gradeLevel": 4,
-      "standardCode": "CC.1.3.4.D",
-      "skill": "Point of View",
-      "issue": "guidedPractice[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate."
-    },
-    {
-      "lessonId": "cmpdi8kps00etevu9e5xap1kx",
-      "gradeLevel": 4,
-      "standardCode": "CC.1.3.4.D",
-      "skill": "Point of View",
-      "issue": "independentPractice[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate."
-    },
-    {
-      "lessonId": "cmpdi8kps00etevu9e5xap1kx",
-      "gradeLevel": 4,
-      "standardCode": "CC.1.3.4.D",
-      "skill": "Point of View",
-      "issue": "exitTicket[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate."
-    },
-    {
-      "lessonId": "cmpdjy2zi00naevu9av8fdpd2",
-      "gradeLevel": 5,
-      "standardCode": "CC.1.3.5.D",
-      "skill": "Point of View",
-      "issue": "guidedPractice[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate."
-    },
-    {
-      "lessonId": "cmpdjy2zi00naevu9av8fdpd2",
-      "gradeLevel": 5,
-      "standardCode": "CC.1.3.5.D",
-      "skill": "Point of View",
-      "issue": "independentPractice[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate."
-    },
-    {
-      "lessonId": "cmpdjy2zi00naevu9av8fdpd2",
-      "gradeLevel": 5,
-      "standardCode": "CC.1.3.5.D",
-      "skill": "Point of View",
-      "issue": "exitTicket[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate."
-    },
-    {
       "lessonId": "cmpdlpsjw00vlevu9e9fvdv3y",
       "gradeLevel": 6,
       "standardCode": "CC.1.3.6.A",
@@ -496,45 +112,10 @@
       "issue": "guidedPractice[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate."
     },
     {
-      "lessonId": "cmpdlpsjw00vlevu9e9fvdv3y",
-      "gradeLevel": 6,
-      "standardCode": "CC.1.3.6.A",
-      "skill": "Theme Development",
-      "issue": "independentPractice[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate."
-    },
-    {
-      "lessonId": "cmpdlpsjw00vlevu9e9fvdv3y",
-      "gradeLevel": 6,
-      "standardCode": "CC.1.3.6.A",
-      "skill": "Theme Development",
-      "issue": "exitTicket[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate."
-    },
-    {
       "lessonId": "cmpdlbjuf00ujevu9v3rwynp1",
       "gradeLevel": 6,
       "standardCode": "CC.1.2.6.F",
       "skill": "Tone and Connotation",
-      "issue": "guidedPractice[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate."
-    },
-    {
-      "lessonId": "cmpdlbjuf00ujevu9v3rwynp1",
-      "gradeLevel": 6,
-      "standardCode": "CC.1.2.6.F",
-      "skill": "Tone and Connotation",
-      "issue": "independentPractice[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate."
-    },
-    {
-      "lessonId": "cmpdlbjuf00ujevu9v3rwynp1",
-      "gradeLevel": 6,
-      "standardCode": "CC.1.2.6.F",
-      "skill": "Tone and Connotation",
-      "issue": "independentPractice[3]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate."
-    },
-    {
-      "lessonId": "cmpdrg64e001yes45nah75zki",
-      "gradeLevel": 7,
-      "standardCode": "CC.1.3.7.F",
-      "skill": "Mood, Tone, and Word Choice",
       "issue": "guidedPractice[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate."
     },
     {
@@ -545,81 +126,18 @@
       "issue": "independentPractice[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate."
     },
     {
-      "lessonId": "cmpdrg64e001yes45nah75zki",
+      "lessonId": "cmpdn2k4r0120evu9e0u3rx6y",
       "gradeLevel": 7,
-      "standardCode": "CC.1.3.7.F",
-      "skill": "Mood, Tone, and Word Choice",
-      "issue": "exitTicket[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate."
-    },
-    {
-      "lessonId": "cmpdnfrkl013kevu9alffqe61",
-      "gradeLevel": 7,
-      "standardCode": "CC.1.3.7.D",
-      "skill": "Narrator Reliability and Perspective",
-      "issue": "guidedPractice[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate."
-    },
-    {
-      "lessonId": "cmpdnfrkl013kevu9alffqe61",
-      "gradeLevel": 7,
-      "standardCode": "CC.1.3.7.D",
-      "skill": "Narrator Reliability and Perspective",
-      "issue": "independentPractice[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate."
-    },
-    {
-      "lessonId": "cmpdnfrkl013kevu9alffqe61",
-      "gradeLevel": 7,
-      "standardCode": "CC.1.3.7.D",
-      "skill": "Narrator Reliability and Perspective",
+      "standardCode": "CC.1.2.7.E",
+      "skill": "Text Structure Effects",
       "issue": "independentPractice[2]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate."
     },
     {
-      "lessonId": "cmpdnfohx013cevu9qi18uk0t",
+      "lessonId": "cmpdr5mjm000ies455h6l2m6y",
       "gradeLevel": 7,
-      "standardCode": "CC.1.3.7.D",
-      "skill": "Point of View",
-      "issue": "guidedPractice[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate."
-    },
-    {
-      "lessonId": "cmpdnfohx013cevu9qi18uk0t",
-      "gradeLevel": 7,
-      "standardCode": "CC.1.3.7.D",
-      "skill": "Point of View",
-      "issue": "independentPractice[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate."
-    },
-    {
-      "lessonId": "cmpdnfohx013cevu9qi18uk0t",
-      "gradeLevel": 7,
-      "standardCode": "CC.1.3.7.D",
-      "skill": "Point of View",
+      "standardCode": "CC.1.3.7.A",
+      "skill": "Theme",
       "issue": "exitTicket[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate."
-    },
-    {
-      "lessonId": "cmpdsm05h006les45dbx0miny",
-      "gradeLevel": 8,
-      "standardCode": "CC.1.2.8.D",
-      "skill": "Author Perspective and Bias",
-      "issue": "guidedPractice[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate."
-    },
-    {
-      "lessonId": "cmpdsm05h006les45dbx0miny",
-      "gradeLevel": 8,
-      "standardCode": "CC.1.2.8.D",
-      "skill": "Author Perspective and Bias",
-      "issue": "independentPractice[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate."
-    },
-    {
-      "lessonId": "cmpdsm05h006les45dbx0miny",
-      "gradeLevel": 8,
-      "standardCode": "CC.1.2.8.D",
-      "skill": "Author Perspective and Bias",
-      "issue": "exitTicket[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate."
-    },
-    {
-      "lessonId": "cmpdfxnn7002tevu993vrd9h7",
-      "gradeLevel": 3,
-      "standardCode": "CC.1.2.3.C",
-      "skill": "Cause and Effect",
-      "issue": "guidedPractice[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate."
     }
   ]
 }

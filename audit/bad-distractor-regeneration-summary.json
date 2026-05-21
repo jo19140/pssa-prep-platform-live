@@ -1,0 +1,264 @@
+{
+  "generatedAt": "2026-05-21T15:08:45.687Z",
+  "inProgress": false,
+  "scannedLessons": 182,
+  "targetedLessons": 31,
+  "targetedItems": 86,
+  "successfulLessons": 26,
+  "lessonsMarkedNeedsRevision": 5,
+  "regeneratedItems": 67,
+  "tokensUsed": 89685,
+  "roughEstimatedCostUsd": 0.67,
+  "successes": [
+    {
+      "lessonId": "cmpdg1f67003eevu9q8cyr7oa",
+      "gradeLevel": 3,
+      "standardCode": "CC.1.2.3.E",
+      "skill": "Author's Purpose",
+      "regeneratedItems": 3,
+      "tokensUsed": 3545
+    },
+    {
+      "lessonId": "cmpdg77dl0048evu9yx51bo8o",
+      "gradeLevel": 3,
+      "standardCode": "CC.1.2.3.F",
+      "skill": "Context Clues",
+      "regeneratedItems": 3,
+      "tokensUsed": 3604
+    },
+    {
+      "lessonId": "cmpdggth4005oevu9zrifadqq",
+      "gradeLevel": 3,
+      "standardCode": "CC.1.3.3.C",
+      "skill": "Character Traits and Actions",
+      "regeneratedItems": 2,
+      "tokensUsed": 2339
+    },
+    {
+      "lessonId": "cmpdgm4f3006mevu91x36jxg8",
+      "gradeLevel": 3,
+      "standardCode": "CC.1.3.3.D",
+      "skill": "Point of View",
+      "regeneratedItems": 7,
+      "tokensUsed": 8146
+    },
+    {
+      "lessonId": "cmpdhn7na00c2evu91o7fjgaw",
+      "gradeLevel": 4,
+      "standardCode": "CC.1.2.4.D",
+      "skill": "Author's Purpose and Message",
+      "regeneratedItems": 1,
+      "tokensUsed": 1267
+    },
+    {
+      "lessonId": "cmpdi8kps00etevu9e5xap1kx",
+      "gradeLevel": 4,
+      "standardCode": "CC.1.3.4.D",
+      "skill": "Point of View",
+      "regeneratedItems": 4,
+      "tokensUsed": 4963
+    },
+    {
+      "lessonId": "cmpdillv200gkevu9hbeud3qu",
+      "gradeLevel": 4,
+      "standardCode": "CC.1.4.4.A",
+      "skill": "Summarizing Stories",
+      "regeneratedItems": 1,
+      "tokensUsed": 1198
+    },
+    {
+      "lessonId": "cmpdjez5k00kpevu91xq22rwd",
+      "gradeLevel": 5,
+      "standardCode": "CC.1.2.5.F",
+      "skill": "Academic and Domain-Specific Vocabulary",
+      "regeneratedItems": 2,
+      "tokensUsed": 2503
+    },
+    {
+      "lessonId": "cmpdjy2zi00naevu9av8fdpd2",
+      "gradeLevel": 5,
+      "standardCode": "CC.1.3.5.D",
+      "skill": "Point of View",
+      "regeneratedItems": 4,
+      "tokensUsed": 4967
+    },
+    {
+      "lessonId": "cmpdjyhek00nievu9j1rvl9io",
+      "gradeLevel": 5,
+      "standardCode": "CC.1.3.5.E",
+      "skill": "Story Structure and Chapters",
+      "regeneratedItems": 1,
+      "tokensUsed": 1222
+    },
+    {
+      "lessonId": "cmpdk17vx00nwevu9n6g3b65k",
+      "gradeLevel": 5,
+      "standardCode": "CC.1.3.5.F",
+      "skill": "Poetry Speaker and Tone",
+      "regeneratedItems": 2,
+      "tokensUsed": 2270
+    },
+    {
+      "lessonId": "cmpdk5iju00ojevu943zwy1tm",
+      "gradeLevel": 5,
+      "standardCode": "CC.1.3.5.H",
+      "skill": "Compare Themes Across Stories",
+      "regeneratedItems": 5,
+      "tokensUsed": 5826
+    },
+    {
+      "lessonId": "cmpdkztnq00t2evu911zhtoy9",
+      "gradeLevel": 6,
+      "standardCode": "CC.1.2.6.B",
+      "skill": "Inference",
+      "regeneratedItems": 1,
+      "tokensUsed": 1467
+    },
+    {
+      "lessonId": "cmpdl8ydo00u6evu9etp7qt32",
+      "gradeLevel": 6,
+      "standardCode": "CC.1.2.6.F",
+      "skill": "Technical Vocabulary in Context",
+      "regeneratedItems": 2,
+      "tokensUsed": 3196
+    },
+    {
+      "lessonId": "cmpdldlmy00usevu9olw2a5s9",
+      "gradeLevel": 6,
+      "standardCode": "CC.1.2.6.G",
+      "skill": "Claims, Reasons, and Evidence",
+      "regeneratedItems": 1,
+      "tokensUsed": 1542
+    },
+    {
+      "lessonId": "cmpdlq62v00vtevu9szk9s8yr",
+      "gradeLevel": 6,
+      "standardCode": "CC.1.3.6.C",
+      "skill": "Character Change and Conflict",
+      "regeneratedItems": 1,
+      "tokensUsed": 1394
+    },
+    {
+      "lessonId": "cmpdlsfwi00w4evu9g1q6o1a2",
+      "gradeLevel": 6,
+      "standardCode": "CC.1.3.6.D",
+      "skill": "Point of View",
+      "regeneratedItems": 1,
+      "tokensUsed": 1651
+    },
+    {
+      "lessonId": "cmpdlz5ik00wxevu9l87lwmwy",
+      "gradeLevel": 6,
+      "standardCode": "CC.1.3.6.F",
+      "skill": "Connotation and Figurative Language",
+      "regeneratedItems": 1,
+      "tokensUsed": 1399
+    },
+    {
+      "lessonId": "cmpdm9r6u00y9evu91a1pnqzz",
+      "gradeLevel": 6,
+      "standardCode": "CC.1.4.6.F",
+      "skill": "Shifts in Pronoun Person and Number",
+      "regeneratedItems": 1,
+      "tokensUsed": 1704
+    },
+    {
+      "lessonId": "cmpdmtkel010xevu9h5hnqy7c",
+      "gradeLevel": 7,
+      "standardCode": "CC.1.2.7.B",
+      "skill": "Text Evidence",
+      "regeneratedItems": 1,
+      "tokensUsed": 1543
+    },
+    {
+      "lessonId": "cmpdnfrkl013kevu9alffqe61",
+      "gradeLevel": 7,
+      "standardCode": "CC.1.3.7.D",
+      "skill": "Narrator Reliability and Perspective",
+      "regeneratedItems": 4,
+      "tokensUsed": 5743
+    },
+    {
+      "lessonId": "cmpdnfohx013cevu9qi18uk0t",
+      "gradeLevel": 7,
+      "standardCode": "CC.1.3.7.D",
+      "skill": "Point of View",
+      "regeneratedItems": 4,
+      "tokensUsed": 5754
+    },
+    {
+      "lessonId": "cmpds1rq1004qes458ueo06yl",
+      "gradeLevel": 8,
+      "standardCode": "CC.1.1.8.E",
+      "skill": "Advanced Word Analysis",
+      "regeneratedItems": 3,
+      "tokensUsed": 4201
+    },
+    {
+      "lessonId": "cmpds2q7q004yes458pm7m1ob",
+      "gradeLevel": 8,
+      "standardCode": "CC.1.1.8.E",
+      "skill": "Connotation Through Word Structure",
+      "regeneratedItems": 1,
+      "tokensUsed": 1341
+    },
+    {
+      "lessonId": "cmpdsm05h006les45dbx0miny",
+      "gradeLevel": 8,
+      "standardCode": "CC.1.2.8.D",
+      "skill": "Author Perspective and Bias",
+      "regeneratedItems": 4,
+      "tokensUsed": 6007
+    },
+    {
+      "lessonId": "cmpdsl5ti006des459upxtlim",
+      "gradeLevel": 8,
+      "standardCode": "CC.1.2.8.E",
+      "skill": "Compare Text Structures",
+      "regeneratedItems": 7,
+      "tokensUsed": 10893
+    }
+  ],
+  "failures": [
+    {
+      "lessonId": "cmpdlbjuf00ujevu9v3rwynp1",
+      "gradeLevel": 6,
+      "standardCode": "CC.1.2.6.F",
+      "skill": "Tone and Connotation",
+      "failedItems": 2,
+      "error": "guidedPractice[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate.; guidedPractice[0]: Could not regenerate guidedPractice[0]: passage: String must contain at most 2200 character(s)"
+    },
+    {
+      "lessonId": "cmpdlpsjw00vlevu9e9fvdv3y",
+      "gradeLevel": 6,
+      "standardCode": "CC.1.3.6.A",
+      "skill": "Theme Development",
+      "failedItems": 2,
+      "error": "guidedPractice[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate.; guidedPractice[0]: Could not regenerate guidedPractice[0]: passage: String must contain at most 2200 character(s)"
+    },
+    {
+      "lessonId": "cmpdn2k4r0120evu9e0u3rx6y",
+      "gradeLevel": 7,
+      "standardCode": "CC.1.2.7.E",
+      "skill": "Text Structure Effects",
+      "failedItems": 2,
+      "error": "independentPractice[2]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate.; independentPractice[2]: Could not regenerate independentPractice[2]: passage: String must contain at most 2200 character(s)"
+    },
+    {
+      "lessonId": "cmpdr5mjm000ies455h6l2m6y",
+      "gradeLevel": 7,
+      "standardCode": "CC.1.3.7.A",
+      "skill": "Theme",
+      "failedItems": 2,
+      "error": "exitTicket[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate.; exitTicket[0]: Could not regenerate exitTicket[0]: passage: String must contain at most 2200 character(s)"
+    },
+    {
+      "lessonId": "cmpdrg64e001yes45nah75zki",
+      "gradeLevel": 7,
+      "standardCode": "CC.1.3.7.F",
+      "skill": "Mood, Tone, and Word Choice",
+      "failedItems": 2,
+      "error": "independentPractice[0]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate.; independentPractice[0]: Could not regenerate independentPractice[0]: passage: String must contain at most 2200 character(s)"
+    }
+  ]
+}

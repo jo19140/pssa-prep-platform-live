@@ -177,7 +177,7 @@
           "A positive impact",
           "A negative effect",
           "A neutral change",
-          "A confusing outcome"
+          "A sense of isolation"
         ],
         "passage": "In recent years, scientists have been studying the effects of urban green spaces on mental health. These areas, which include parks, gardens, and other natural environments, are increasingly recognized for their ability to improve the well-being of city dwellers. Research shows that spending time in these green spaces can reduce stress, enhance mood, and even improve cognitive function. The presence of trees and plants provides a soothing backdrop that contrasts sharply with the hustle and bustle of urban life. People who regularly visit these areas often report feeling more relaxed and rejuvenated. Moreover, the natural surroundings encourage physical activity, which further contributes to mental health benefits. The positive effects of urban green spaces are not just limited to individuals; they can also foster a sense of community and social interaction, as people gather for recreational activities or simply to enjoy the outdoors together. As cities continue to grow, the importance of maintaining and expanding these green spaces becomes increasingly clear. They offer a refuge from the concrete jungle, providing a vital connection to nature that is essential for both physical and mental health. The impact of urban green spaces is overwhelmingly positive, highlighting the need for urban planners to prioritize these areas in city development.",
         "question": "What is the connotation of the phrase \"urban green spaces\" in the passage?",
@@ -186,15 +186,15 @@
         "distractorRationale": [
           {
             "choice": "A negative effect",
-            "whyWrong": "The passage emphasizes the benefits of green spaces, not negative effects."
+            "whyWrong": "The passage emphasizes the benefits of green spaces, such as reducing stress and enhancing mood, not negative effects."
           },
           {
             "choice": "A neutral change",
-            "whyWrong": "The passage highlights significant positive impacts, not neutrality."
+            "whyWrong": "The passage highlights significant positive impacts like improving cognitive function and fostering community, not neutrality."
           },
           {
-            "choice": "A confusing outcome",
-            "whyWrong": "The passage clearly describes the positive outcomes of green spaces."
+            "choice": "A sense of isolation",
+            "whyWrong": "The passage describes how green spaces foster community and social interaction, not isolation."
           }
         ],
         "rightAnswerRationale": "The phrase \"urban green spaces\" has a positive connotation, suggesting beneficial effects on mental health and community well-being."
