@@ -232,6 +232,14 @@ export function LessonStepPlayer({
         </aside>
       </section>
 
+      {!canAdvance && stepQuestions.length ? (
+        <div className="border-t border-amber-200 bg-amber-50 px-5 py-3 text-sm font-bold text-amber-900">
+          {(() => {
+            const remaining = stepQuestions.filter((question, index) => !submittedResponses[itemKey(question, index)]).length;
+            return `Submit ${remaining} more ${remaining === 1 ? "question" : "questions"} on this step before continuing.`;
+          })()}
+        </div>
+      ) : null}
       <footer className="flex flex-col gap-3 border-t border-slate-200 p-5 sm:flex-row sm:items-center sm:justify-between">
         <button type="button" onClick={() => go(currentIndex - 1)} disabled={currentIndex === 0} className="rounded-xl bg-slate-100 px-4 py-3 text-sm font-black text-slate-700 disabled:opacity-40">
           Previous

@@ -67,9 +67,11 @@ function renderSelectablePassage(passage: string, phrases: string[], selected: s
         type="button"
         disabled={locked}
         onClick={() => toggle(selectedKey)}
-        className={`mx-1 rounded-lg border px-2 py-1 text-sm font-black ${optionButtonClass(isSelected, locked, correct, wrong)}`}
+        aria-pressed={isSelected}
+        className={`mx-1 inline-flex items-center gap-1 rounded-lg border-2 px-2 py-1 text-sm font-black ${optionButtonClass(isSelected, locked, correct, wrong)} ${isSelected && !submitted ? "ring-2 ring-offset-1 ring-blue-400" : ""}`}
       >
-        {match.text}
+        {isSelected && !submitted ? <span aria-hidden="true">✓</span> : null}
+        <span>{match.text}</span>
       </button>,
     );
     cursor = match.end;
