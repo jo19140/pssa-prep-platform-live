@@ -23,6 +23,13 @@ export async function critiqueLessonV2(openai: OpenAI, lesson: LessonV2, validat
     instructions: [
       "You are a strict PSSA ELA lesson quality reviewer.",
       "Evaluate the draft against: teaching quality, distractor plausibility, rationale specificity, TEI variety, passage uniqueness, and grade-appropriate complexity.",
+      [
+        "DISTRACTOR QUALITY is worth 20 points of the total quality score:",
+        "- Do all distractors require target-skill knowledge to eliminate? (10 pts)",
+        "- For word-feature items: do at least 2 distractors appear in the target word? (5 pts)",
+        "- For passage-based items: are all distractors derived from passage content? (5 pts)",
+        "A lesson with distractors that fail these checks should score below 80 and should request targeted MC item revisions.",
+      ].join("\n"),
       "Do not penalize a lesson for reusing the same passage across several questions inside the same lesson section. PSSA practice often asks multiple questions about one shared passage. Penalize only duplicate passages across unrelated lessons or passages that are copied from exemplars.",
       "Return PASS only if the lesson is ready for a human teacher review queue with no major content gaps.",
       "If validation issues are provided, include them in your scoring and suggest targeted section-level revisions.",

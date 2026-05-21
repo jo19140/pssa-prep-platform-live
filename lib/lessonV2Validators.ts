@@ -57,6 +57,7 @@ export async function validateLessonV2(lesson: LessonV2, openai?: OpenAI, option
 
   const teiTypes = new Set(questions.filter((question) => question.type !== "mc").map((question) => question.type));
   if (teiTypes.size < 2) issues.push(`Expected at least 2 distinct TEI types; found ${teiTypes.size}.`);
+  issues.push(...validateDistractorPedagogy(lesson));
 
   const topicCount = distinctPracticeTopicCount(lesson);
   if (topicCount < 6) {
@@ -80,6 +81,46 @@ export async function validateLessonV2(lesson: LessonV2, openai?: OpenAI, option
   }
 
   return { valid: issues.length === 0, issues };
+}
+
+export function validateDistractorPedagogy(lesson: LessonV2): string[] {
+  const issues: string[] = [];
+  const skill = (lesson.skill || "").toLowerCase();
+  const isWordFeatureSkill = /\b(phonics|vowel|consonant|syllable|blend|digraph|prefix|suffix|root)\b/.test(skill);
+
+  for (const section of ["guidedPractice", "independentPractice", "exitTicket", "masteryCheck"] as const) {
+    for (const [idx, item] of (lesson[section] || []).entries()) {
+      if (item.type !== "mc") continue;
+      const question = String(item.question || "");
+      const wordMatch = question.match(/['"]([a-zA-Z]+)['"]/);
+      const targetWord = wordMatch?.[1]?.toLowerCase();
+      const wrongChoices = (item.choices || []).filter((choice: string) => choice !== item.correctAnswer);
+
+      if (isWordFeatureSkill && targetWord) {
+        const distractorsInWord = wrongChoices.filter((choice: string) =>
+          targetWord.includes(choice.toLowerCase()),
+        ).length;
+        if (distractorsInWord < 1) {
+          issues.push(`${section}[${idx}]: word-feature MC item has no distractors that appear in target word "${targetWord}". Distractors: ${wrongChoices.join(", ")}. Likely surface-eliminable.`);
+        }
+      }
+
+      const passage = String(item.passage || "");
+      if (passage.length > 100 && wrongChoices.length) {
+        const normPassage = normalizeForDistractorAudit(passage);
+        const distractorWords = wrongChoices.map((choice: string) =>
+          normalizeForDistractorAudit(choice).split(" ").filter((word) => word.length > 3),
+        );
+        const distractorsGroundedInPassage = distractorWords.filter((words: string[]) =>
+          words.some((word) => normPassage.includes(word)),
+        ).length;
+        if (distractorsGroundedInPassage < wrongChoices.length * 0.5) {
+          issues.push(`${section}[${idx}]: passage-based MC item has distractors not grounded in passage content. May be unfairly easy to eliminate.`);
+        }
+      }
+    }
+  }
+  return issues;
 }
 
 function validatePracticeQuestion(question: PracticeQuestionV2, gradeLevel: number, issues: string[]) {
@@ -228,6 +269,10 @@ function normalizedPhrase(value: string) {
     .replace(/[^a-z0-9]+/g, " ")
     .replace(/\s+/g, " ")
     .trim();
+}
+
+function normalizeForDistractorAudit(value: string) {
+  return value.toLowerCase().replace(/[^a-z0-9 ]/g, " ").replace(/\s+/g, " ").trim();
 }
 
 function requiresPassage(question: PracticeQuestionV2) {
