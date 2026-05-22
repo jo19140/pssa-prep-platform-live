@@ -42,6 +42,17 @@ type PreviewLesson = {
   generatorVersion?: string;
   qualityScore?: number;
   qualityIssues?: string[];
+  steps?: Array<{
+    order: number;
+    stepType: string;
+    title: string;
+    bodyText: string;
+    narrationScript: string;
+    audioUrl?: string | null;
+    imageUrl?: string | null;
+    imagePrompt?: string | null;
+    checkQuestion?: any;
+  }>;
 };
 
 const practiceSections = [
@@ -260,6 +271,22 @@ function buildPreviewSteps(lesson: PreviewLesson, heroResource: PreviewHeroResou
     questions?: any[];
   }> = [];
 
+  if (Array.isArray(lesson.steps) && lesson.steps.length) {
+    return lesson.steps.map((step) => ({
+      order: step.order,
+      stepType: step.stepType,
+      title: step.title,
+      bodyText: step.bodyText,
+      narrationScript: step.narrationScript,
+      audioUrl: step.audioUrl || null,
+      imageUrl: step.imageUrl || null,
+      imagePrompt: step.imagePrompt || null,
+      checkQuestion: step.checkQuestion || null,
+      heroResource: step.title === "Hero Video" ? heroResource || undefined : undefined,
+      questions: questionsForStepTitle(lesson, step.title),
+    }));
+  }
+
   addTextStep(steps, "INTRO", "Hook", lesson.hook);
   addTextStep(steps, "EXPLANATION", "Explanation", lesson.explanation);
   addTextStep(steps, "WORKED_EXAMPLE", "Worked Example", lesson.workedExample);
@@ -288,6 +315,14 @@ function buildPreviewSteps(lesson: PreviewLesson, heroResource: PreviewHeroResou
   }
 
   return steps;
+}
+
+function questionsForStepTitle(lesson: PreviewLesson, title: string) {
+  if (title === "Guided Practice") return lesson.guidedPractice || [];
+  if (title === "Independent Practice") return lesson.independentPractice || [];
+  if (title === "Exit Ticket") return lesson.exitTicket || [];
+  if (title === "Mastery Check") return lesson.masteryCheck || [];
+  return undefined;
 }
 
 function addTextStep(

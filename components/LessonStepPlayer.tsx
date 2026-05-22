@@ -142,10 +142,7 @@ export function LessonStepPlayer({
           ) : null}
 
           {currentStep.audioUrl ? (
-            <div className="mt-5 rounded-2xl bg-cyan-50 p-4 ring-1 ring-cyan-100">
-              <p className="mb-2 text-xs font-black uppercase tracking-wide text-cyan-800">Narration</p>
-              <audio ref={audioRef} controls preload="metadata" src={currentStep.audioUrl} className="w-full" />
-            </div>
+            <NarrationPlayer audioRef={audioRef} src={currentStep.audioUrl} />
           ) : null}
 
           {isCheck ? (
@@ -254,6 +251,86 @@ export function LessonStepPlayer({
         </button>
       </footer>
     </article>
+  );
+}
+
+function NarrationPlayer({ audioRef, src }: { audioRef: React.RefObject<HTMLAudioElement | null>; src: string }) {
+  const [playing, setPlaying] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const [currentTime, setCurrentTime] = useState(0);
+
+  function toggle() {
+    const audio = audioRef.current;
+    if (!audio) return;
+    if (audio.paused) {
+      audio.play();
+      setPlaying(true);
+    } else {
+      audio.pause();
+      setPlaying(false);
+    }
+  }
+
+  function onTimeUpdate(event: React.SyntheticEvent<HTMLAudioElement>) {
+    const audio = event.currentTarget;
+    setCurrentTime(audio.currentTime);
+    setProgress(audio.duration ? (audio.currentTime / audio.duration) * 100 : 0);
+  }
+
+  function onLoadedMetadata(event: React.SyntheticEvent<HTMLAudioElement>) {
+    setDuration(event.currentTarget.duration);
+  }
+
+  function onScrub(event: React.MouseEvent<HTMLDivElement>) {
+    const audio = audioRef.current;
+    if (!audio || !duration) return;
+    const rect = event.currentTarget.getBoundingClientRect();
+    const ratio = Math.max(0, Math.min(1, (event.clientX - rect.left) / rect.width));
+    audio.currentTime = ratio * duration;
+  }
+
+  function format(seconds: number) {
+    if (!Number.isFinite(seconds)) return "0:00";
+    const m = Math.floor(seconds / 60);
+    const s = Math.floor(seconds % 60).toString().padStart(2, "0");
+    return `${m}:${s}`;
+  }
+
+  return (
+    <div className="mt-4 inline-flex items-center gap-3 rounded-full bg-cyan-50 px-3 py-1.5 ring-1 ring-cyan-200">
+      <audio
+        ref={audioRef}
+        src={src}
+        preload="metadata"
+        onTimeUpdate={onTimeUpdate}
+        onLoadedMetadata={onLoadedMetadata}
+        onEnded={() => setPlaying(false)}
+        onPause={() => setPlaying(false)}
+        onPlay={() => setPlaying(true)}
+        className="hidden"
+      />
+      <button
+        type="button"
+        onClick={toggle}
+        aria-label={playing ? "Pause narration" : "Play narration"}
+        className="flex h-7 w-7 items-center justify-center rounded-full bg-cyan-700 text-white text-sm font-black hover:bg-cyan-800"
+      >
+        {playing ? "❚❚" : "▶"}
+      </button>
+      <span className="text-xs font-black uppercase tracking-wide text-cyan-800">Narration</span>
+      <div
+        onClick={onScrub}
+        className="h-1.5 w-32 cursor-pointer overflow-hidden rounded-full bg-cyan-200"
+        role="progressbar"
+        aria-valuemin={0}
+        aria-valuemax={100}
+        aria-valuenow={Math.round(progress)}
+      >
+        <div className="h-full rounded-full bg-cyan-700 transition-[width] duration-100" style={{ width: `${progress}%` }} />
+      </div>
+      <span className="text-xs font-bold tabular-nums text-cyan-800">{format(currentTime)} / {format(duration)}</span>
+    </div>
   );
 }
 

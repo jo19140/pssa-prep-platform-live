@@ -10,6 +10,17 @@ const GENERATOR_VERSION = "V2";
 
 type LessonWithResource = LearningLesson & {
   heroResourceLink: ResourceLink | null;
+  steps?: Array<{
+    order: number;
+    stepType: string;
+    title: string;
+    bodyText: string;
+    narrationScript: string;
+    audioUrl: string | null;
+    imageUrl: string | null;
+    imagePrompt: string | null;
+    checkQuestion: unknown;
+  }>;
 };
 
 type Profile = {
@@ -142,7 +153,7 @@ async function findLesson({
       id: excludeIds.size ? { notIn: Array.from(excludeIds) } : undefined,
       ...where,
     },
-    include: { heroResourceLink: true },
+    include: { heroResourceLink: true, steps: { orderBy: { order: "asc" } } },
     orderBy,
   }) as Promise<LessonWithResource | null>;
 }
@@ -174,6 +185,17 @@ function toPreviewLesson(lesson: LessonWithResource): LessonV2 {
     generatorVersion: "V2",
     qualityScore: lesson.qualityScore || fullLesson.qualityScore || 0,
     qualityIssues: Array.isArray(lesson.qualityIssues) ? lesson.qualityIssues as string[] : fullLesson.qualityIssues || [],
+    steps: lesson.steps?.map((step) => ({
+      order: step.order,
+      stepType: step.stepType,
+      title: step.title,
+      bodyText: step.bodyText,
+      narrationScript: step.narrationScript,
+      audioUrl: step.audioUrl,
+      imageUrl: step.imageUrl,
+      imagePrompt: step.imagePrompt,
+      checkQuestion: step.checkQuestion,
+    })) as any,
   } as LessonV2;
 }
 

@@ -331,7 +331,86 @@
         "rightAnswerRationale": "The word 'umbrella' has three syllables: 'um-brel-la.'"
       }
     ],
-    "resourceDescription": null
+    "resourceDescription": null,
+    "steps": [
+      {
+        "order": 1,
+        "stepType": "INTRO",
+        "title": "Hook",
+        "bodyText": "Have you ever wondered how some words can be so long and tricky to read? Words like 'elephant' or 'butterfly' have multiple parts, or syllables, that we need to understand. Today, we'll explore how to break down these big words into smaller, manageable parts. This skill will help you read more confidently and understand new words you encounter.",
+        "narrationScript": "Have you ever wondered how some words can be so long and tricky to read? Words like 'elephant' or 'butterfly' have multiple parts, or syllables, that we need to understand. Today, we'll explore how to break down these big words into smaller, manageable parts. This skill will help you read more confidently and understand new words you encounter.",
+        "audioUrl": "https://r7wi7nxnvjabs6gu.public.blob.vercel-storage.com/lesson-audio/cmpdfprp00015evu9t95bnlth/cmpfoxoeb000srb3ku3chmxdc.mp3",
+        "imageUrl": null,
+        "imagePrompt": null,
+        "checkQuestion": null
+      },
+      {
+        "order": 2,
+        "stepType": "EXPLANATION",
+        "title": "Explanation",
+        "bodyText": "Multisyllabic words are words with more than one syllable. Each syllable is a unit of sound that typically contains a vowel sound. Understanding how to break down these words into syllables can make reading easier. For example, the word 'elephant' has three syllables: 'el-e-phant.' By clapping your hands or tapping your fingers for each syllable, you can hear and feel the rhythm of the word. This technique helps in recognizing patterns in words, making it easier to decode them.\n\nWhen you encounter a long word, try to identify familiar parts or chunks. Many multisyllabic words are made up of smaller words or prefixes and suffixes. For instance, 'unhappily' can be broken down into 'un-hap-pi-ly.' Recognizing these parts can help you understand the meaning of the word.\n\nAdditionally, pay attention to vowel sounds and consonant clusters. Vowels often determine where a word is divided into syllables. For example, in 'butterfly,' the vowels 'u,' 'e,' and 'y' help us divide the word into 'but-ter-fly.' Practicing these strategies will improve your reading fluency and comprehension, allowing you to tackle more complex texts with ease. Remember, practice makes perfect, so keep trying with different words! Let's dive into some examples and practice exercises to strengthen your skills. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step.",
+        "narrationScript": "Multisyllabic words are words with more than one syllable. Each syllable is a unit of sound that typically contains a vowel sound. Understanding how to break down these words into syllables can make reading easier. For example, the word 'elephant' has three syllables: 'el-e-phant.' By clapping your hands or tapping your fingers for each syllable, you can hear and feel the rhythm of the word. This technique helps in recognizing patterns in words, making it easier to decode them.\n\nWhen you encounter a long word, try to identify familiar parts or chunks. Many multisyllabic words are made up of smaller words or prefixes and suffixes. For instance, 'unhappily' can be broken down into 'un-hap-pi-ly.' Recognizing these parts can help you understand the meaning of the word.\n\nAdditionally, pay attention to vowel sounds and consonant clusters. Vowels often determine where a word is divided into syllables. For example, in 'butterfly,' the vowels 'u,' 'e,' and 'y' help us divide the word into 'but-ter-fly.' Practicing these strategies will improve your reading fluency and comprehension, allowing you to tackle more complex texts with ease. Remember, practice makes perfect, so keep trying with different words! Let's dive into some examples and practice exercises to strengthen your skills. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step.",
+        "audioUrl": "https://r7wi7nxnvjabs6gu.public.blob.vercel-storage.com/lesson-audio/cmpdfprp00015evu9t95bnlth/cmpfoxoeb000trb3kknxehsou.mp3",
+        "imageUrl": null,
+        "imagePrompt": null,
+        "checkQuestion": null
+      },
+      {
+        "order": 3,
+        "stepType": "WORKED_EXAMPLE",
+        "title": "Worked Example",
+        "bodyText": "Let's take the word 'caterpillar' as an example. First, say the word slowly: 'cat-er-pil-lar.' Notice how your mouth moves and the sounds you make. Each time your mouth opens to make a vowel sound, that's a new syllable.\n\nNow, let's break it down:\n- 'cat' is the first syllable.\n- 'er' is the second syllable.\n- 'pil' is the third syllable.\n- 'lar' is the fourth syllable.\n\nBy identifying each syllable, you can pronounce the word more easily. Try clapping your hands as you say each syllable: clap for 'cat,' clap for 'er,' clap for 'pil,' and clap for 'lar.' This physical action helps reinforce the division of syllables in your mind. Now, try it with another word, like 'umbrella.' Break it down into 'um-brel-la.' Practicing with different words will help you become more comfortable with multisyllabic words. Remember, each syllable usually has one vowel sound, and recognizing these can guide you in dividing the word correctly.",
+        "narrationScript": "Let's take the word 'caterpillar' as an example. First, say the word slowly: 'cat-er-pil-lar.' Notice how your mouth moves and the sounds you make. Each time your mouth opens to make a vowel sound, that's a new syllable.\n\nNow, let's break it down:\n- 'cat' is the first syllable.\n- 'er' is the second syllable.\n- 'pil' is the third syllable.\n- 'lar' is the fourth syllable.\n\nBy identifying each syllable, you can pronounce the word more easily. Try clapping your hands as you say each syllable: clap for 'cat,' clap for 'er,' clap for 'pil,' and clap for 'lar.' This physical action helps reinforce the division of syllables in your mind. Now, try it with another word, like 'umbrella.' Break it down into 'um-brel-la.' Practicing with different words will help you become more comfortable with multisyllabic words. Remember, each syllable usually has one vowel sound, and recognizing these can guide you in dividing the word correctly.",
+        "audioUrl": "https://r7wi7nxnvjabs6gu.public.blob.vercel-storage.com/lesson-audio/cmpdfprp00015evu9t95bnlth/cmpfoxoeb000urb3kjlxb3fac.mp3",
+        "imageUrl": null,
+        "imagePrompt": null,
+        "checkQuestion": null
+      },
+      {
+        "order": 4,
+        "stepType": "CHECK_QUESTION",
+        "title": "Guided Practice",
+        "bodyText": "Try these with the lesson ideas close at hand. Submit each item to see scoring and feedback.",
+        "narrationScript": "Try these with the lesson ideas close at hand. Submit each item to see scoring and feedback.",
+        "audioUrl": "https://r7wi7nxnvjabs6gu.public.blob.vercel-storage.com/lesson-audio/cmpdfprp00015evu9t95bnlth/cmpfoxoeb000vrb3kllwh9zvc.mp3",
+        "imageUrl": null,
+        "imagePrompt": null,
+        "checkQuestion": null
+      },
+      {
+        "order": 5,
+        "stepType": "CHECK_QUESTION",
+        "title": "Independent Practice",
+        "bodyText": "Apply the skill with less support. Submit each item to see scoring and feedback.",
+        "narrationScript": "Apply the skill with less support. Submit each item to see scoring and feedback.",
+        "audioUrl": "https://r7wi7nxnvjabs6gu.public.blob.vercel-storage.com/lesson-audio/cmpdfprp00015evu9t95bnlth/cmpfoxoeb000wrb3k616ol66z.mp3",
+        "imageUrl": null,
+        "imagePrompt": null,
+        "checkQuestion": null
+      },
+      {
+        "order": 6,
+        "stepType": "CHECK_QUESTION",
+        "title": "Exit Ticket",
+        "bodyText": "Check the key takeaway before moving on. Submit the exit ticket to see feedback.",
+        "narrationScript": "Check the key takeaway before moving on. Submit the exit ticket to see feedback.",
+        "audioUrl": "https://r7wi7nxnvjabs6gu.public.blob.vercel-storage.com/lesson-audio/cmpdfprp00015evu9t95bnlth/cmpfoxoeb000xrb3k3mzuyt7r.mp3",
+        "imageUrl": null,
+        "imagePrompt": null,
+        "checkQuestion": null
+      },
+      {
+        "order": 7,
+        "stepType": "CHECK_QUESTION",
+        "title": "Mastery Check",
+        "bodyText": "Show that the skill is ready for mixed practice. Submit each item to see feedback.",
+        "narrationScript": "Show that the skill is ready for mixed practice. Submit each item to see feedback.",
+        "audioUrl": "https://r7wi7nxnvjabs6gu.public.blob.vercel-storage.com/lesson-audio/cmpdfprp00015evu9t95bnlth/cmpfoxoeb000yrb3kb0e4eyrw.mp3",
+        "imageUrl": null,
+        "imagePrompt": null,
+        "checkQuestion": null
+      }
+    ]
   },
   "critic": {
     "score": 82,

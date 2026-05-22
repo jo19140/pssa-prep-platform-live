@@ -344,7 +344,86 @@
         "rightAnswerRationale": "\"Ocean sings a lullaby\" and \"Place of tranquility and awe\" both convey a serene and magical mood."
       }
     ],
-    "resourceDescription": null
+    "resourceDescription": null,
+    "steps": [
+      {
+        "order": 1,
+        "stepType": "INTRO",
+        "title": "Hook",
+        "bodyText": "Imagine a poem as a puzzle. Each line is a piece, and when you put them together, they create a beautiful picture. Just like a puzzle, each piece has its place and purpose. Today, we’re going to explore how poets use lines and stanzas to build their poetic masterpieces. Let's dive into the world of poetry and discover the magic behind these building blocks!",
+        "narrationScript": "Imagine a poem as a puzzle. Each line is a piece, and when you put them together, they create a beautiful picture. Just like a puzzle, each piece has its place and purpose. Today, we’re going to explore how poets use lines and stanzas to build their poetic masterpieces. Let's dive into the world of poetry and discover the magic behind these building blocks!",
+        "audioUrl": "https://r7wi7nxnvjabs6gu.public.blob.vercel-storage.com/lesson-audio/cmpdgpv0n006zevu9ueolu61j/cmpg5x0z5003b12gh8zom6i1t.mp3",
+        "imageUrl": null,
+        "imagePrompt": null,
+        "checkQuestion": null
+      },
+      {
+        "order": 2,
+        "stepType": "EXPLANATION",
+        "title": "Explanation",
+        "bodyText": "Poetry is a unique form of writing that uses lines and stanzas to create rhythm, meaning, and emotion. A line in a poem is similar to a sentence in a story. It can be short or long, and it often ends with a pause or a rhyme. Lines are grouped together into stanzas, which are like paragraphs in prose. Stanzas help organize ideas and give the poem structure. When reading a poem, pay attention to how the lines are arranged. Notice if they rhyme or if they have a specific rhythm. This can help you understand the poem's mood and message. Stanzas can vary in length; some poems have stanzas with the same number of lines, while others mix different lengths. This variation can create different effects, such as emphasizing certain ideas or creating a particular flow. For example, in a poem about a rainy day, short lines might mimic the quick, light drops of rain, while longer lines could reflect the steady, continuous downpour. By examining the lines and stanzas, you can uncover deeper meanings and appreciate the poet's craft. Understanding lines and stanzas is essential for interpreting poetry. It allows you to see how poets convey emotions and ideas, making the reading experience more enriching and enjoyable. As you practice, try to identify the purpose of each line and stanza in the poems you read. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step.",
+        "narrationScript": "Poetry is a unique form of writing that uses lines and stanzas to create rhythm, meaning, and emotion. A line in a poem is similar to a sentence in a story. It can be short or long, and it often ends with a pause or a rhyme. Lines are grouped together into stanzas, which are like paragraphs in prose. Stanzas help organize ideas and give the poem structure. When reading a poem, pay attention to how the lines are arranged. Notice if they rhyme or if they have a specific rhythm. This can help you understand the poem's mood and message. Stanzas can vary in length; some poems have stanzas with the same number of lines, while others mix different lengths. This variation can create different effects, such as emphasizing certain ideas or creating a particular flow. For example, in a poem about a rainy day, short lines might mimic the quick, light drops of rain, while longer lines could reflect the steady, continuous downpour. By examining the lines and stanzas, you can uncover deeper meanings and appreciate the poet's craft. Understanding lines and stanzas is essential for interpreting poetry. It allows you to see how poets convey emotions and ideas, making the reading experience more enriching and enjoyable. As you practice, try to identify the purpose of each line and stanza in the poems you read. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step.",
+        "audioUrl": "https://r7wi7nxnvjabs6gu.public.blob.vercel-storage.com/lesson-audio/cmpdgpv0n006zevu9ueolu61j/cmpg5x0z5003c12ghmphcvxvy.mp3",
+        "imageUrl": null,
+        "imagePrompt": null,
+        "checkQuestion": null
+      },
+      {
+        "order": 3,
+        "stepType": "WORKED_EXAMPLE",
+        "title": "Worked Example",
+        "bodyText": "Let's look at a short poem to see how lines and stanzas work together: \"The Morning Sun\" The sun peeks over the hill, Its rays dance on the dew, A new day begins. Birds sing a cheerful tune, Welcoming the light, Nature awakens. In this poem, notice how the first stanza describes the sun rising and the beginning of a new day. Each line contributes to this image, creating a sense of freshness and renewal. The second stanza shifts focus to the birds and nature, continuing the theme of awakening. The stanzas work together to paint a complete picture of a morning scene. By examining the lines and stanzas, we can see how the poet uses structure to convey the beauty and tranquility of a morning. This understanding enhances our appreciation of the poem and its message. This matters because the correct answer is not just a matching word or phrase. It is the choice that fits the whole question and can be defended with a specific detail. The reasoning should explain both what the evidence says and how it supports the answer.",
+        "narrationScript": "Let's look at a short poem to see how lines and stanzas work together: \"The Morning Sun\" The sun peeks over the hill, Its rays dance on the dew, A new day begins. Birds sing a cheerful tune, Welcoming the light, Nature awakens. In this poem, notice how the first stanza describes the sun rising and the beginning of a new day. Each line contributes to this image, creating a sense of freshness and renewal. The second stanza shifts focus to the birds and nature, continuing the theme of awakening. The stanzas work together to paint a complete picture of a morning scene. By examining the lines and stanzas, we can see how the poet uses structure to convey the beauty and tranquility of a morning. This understanding enhances our appreciation of the poem and its message. This matters because the correct answer is not just a matching word or phrase. It is the choice that fits the whole question and can be defended with a specific detail. The reasoning should explain both what the evidence says and how it supports the answer.",
+        "audioUrl": "https://r7wi7nxnvjabs6gu.public.blob.vercel-storage.com/lesson-audio/cmpdgpv0n006zevu9ueolu61j/cmpg5x0z5003d12gh8auszdy8.mp3",
+        "imageUrl": null,
+        "imagePrompt": null,
+        "checkQuestion": null
+      },
+      {
+        "order": 4,
+        "stepType": "CHECK_QUESTION",
+        "title": "Guided Practice",
+        "bodyText": "Try these with the lesson ideas close at hand. Submit each item to see scoring and feedback.",
+        "narrationScript": "Try these with the lesson ideas close at hand. Submit each item to see scoring and feedback.",
+        "audioUrl": "https://r7wi7nxnvjabs6gu.public.blob.vercel-storage.com/lesson-audio/cmpdgpv0n006zevu9ueolu61j/cmpg5x0z5003e12ghbj3dtawb.mp3",
+        "imageUrl": null,
+        "imagePrompt": null,
+        "checkQuestion": null
+      },
+      {
+        "order": 5,
+        "stepType": "CHECK_QUESTION",
+        "title": "Independent Practice",
+        "bodyText": "Apply the skill with less support. Submit each item to see scoring and feedback.",
+        "narrationScript": "Apply the skill with less support. Submit each item to see scoring and feedback.",
+        "audioUrl": "https://r7wi7nxnvjabs6gu.public.blob.vercel-storage.com/lesson-audio/cmpdgpv0n006zevu9ueolu61j/cmpg5x0z5003f12gh7h54pzja.mp3",
+        "imageUrl": null,
+        "imagePrompt": null,
+        "checkQuestion": null
+      },
+      {
+        "order": 6,
+        "stepType": "CHECK_QUESTION",
+        "title": "Exit Ticket",
+        "bodyText": "Check the key takeaway before moving on. Submit the exit ticket to see feedback.",
+        "narrationScript": "Check the key takeaway before moving on. Submit the exit ticket to see feedback.",
+        "audioUrl": "https://r7wi7nxnvjabs6gu.public.blob.vercel-storage.com/lesson-audio/cmpdgpv0n006zevu9ueolu61j/cmpg5x0z5003g12gha62u21kz.mp3",
+        "imageUrl": null,
+        "imagePrompt": null,
+        "checkQuestion": null
+      },
+      {
+        "order": 7,
+        "stepType": "CHECK_QUESTION",
+        "title": "Mastery Check",
+        "bodyText": "Show that the skill is ready for mixed practice. Submit each item to see feedback.",
+        "narrationScript": "Show that the skill is ready for mixed practice. Submit each item to see feedback.",
+        "audioUrl": "https://r7wi7nxnvjabs6gu.public.blob.vercel-storage.com/lesson-audio/cmpdgpv0n006zevu9ueolu61j/cmpg5x0z5003h12ghydla7x0r.mp3",
+        "imageUrl": null,
+        "imagePrompt": null,
+        "checkQuestion": null
+      }
+    ]
   },
   "critic": {
     "score": 92,

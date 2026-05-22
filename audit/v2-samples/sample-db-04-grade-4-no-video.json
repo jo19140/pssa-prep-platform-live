@@ -369,7 +369,86 @@
         "rightAnswerRationale": "The phrases 'nearly invisible in the ocean' and 'difficult for other creatures to spot it' highlight the meaning of 'invisible.'"
       }
     ],
-    "resourceDescription": null
+    "resourceDescription": null,
+    "steps": [
+      {
+        "order": 1,
+        "stepType": "INTRO",
+        "title": "Hook",
+        "bodyText": "Imagine you find a mysterious word in a book. You don't know what it means, but you notice part of it looks familiar. That's because many words are like puzzles, made up of smaller pieces called roots and affixes. These pieces can help you unlock the meaning of new words!",
+        "narrationScript": "Imagine you find a mysterious word in a book. You don't know what it means, but you notice part of it looks familiar. That's because many words are like puzzles, made up of smaller pieces called roots and affixes. These pieces can help you unlock the meaning of new words!",
+        "audioUrl": "https://r7wi7nxnvjabs6gu.public.blob.vercel-storage.com/lesson-audio/cmpdh5m7u009qevu9b6sq9ivk/cmpg5x1ny005f12ghxqt8ax8g.mp3",
+        "imageUrl": null,
+        "imagePrompt": null,
+        "checkQuestion": null
+      },
+      {
+        "order": 2,
+        "stepType": "EXPLANATION",
+        "title": "Explanation",
+        "bodyText": "Affixes and roots are essential parts of many words in the English language. A root is the basic part of a word that carries the main meaning. For example, the root 'spect' means 'to look.' When you add affixes, which are prefixes or suffixes, you change the word's meaning. A prefix is added to the beginning of a word, while a suffix is added to the end. For instance, adding the prefix 'in-' to 'spect' forms 'inspect,' meaning 'to look into.' Similarly, adding the suffix '-or' creates 'inspector,' someone who looks into things. Understanding these components can help you figure out unfamiliar words. Let's consider another example: the root 'port,' which means 'to carry.' By adding the prefix 'trans-' (meaning 'across'), we get 'transport,' which means 'to carry across.' Adding the suffix '-able' to 'port' gives us 'portable,' meaning 'able to be carried.' Recognizing these parts can significantly enhance your vocabulary and comprehension skills. By learning common roots and affixes, you can become a word detective, deciphering meanings and expanding your language skills effortlessly. This knowledge is like having a key to unlock the meanings of countless words you encounter in reading and writing. Let's practice identifying and using affixes and roots to deepen our understanding. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step.",
+        "narrationScript": "Affixes and roots are essential parts of many words in the English language. A root is the basic part of a word that carries the main meaning. For example, the root 'spect' means 'to look.' When you add affixes, which are prefixes or suffixes, you change the word's meaning. A prefix is added to the beginning of a word, while a suffix is added to the end. For instance, adding the prefix 'in-' to 'spect' forms 'inspect,' meaning 'to look into.' Similarly, adding the suffix '-or' creates 'inspector,' someone who looks into things. Understanding these components can help you figure out unfamiliar words. Let's consider another example: the root 'port,' which means 'to carry.' By adding the prefix 'trans-' (meaning 'across'), we get 'transport,' which means 'to carry across.' Adding the suffix '-able' to 'port' gives us 'portable,' meaning 'able to be carried.' Recognizing these parts can significantly enhance your vocabulary and comprehension skills. By learning common roots and affixes, you can become a word detective, deciphering meanings and expanding your language skills effortlessly. This knowledge is like having a key to unlock the meanings of countless words you encounter in reading and writing. Let's practice identifying and using affixes and roots to deepen our understanding. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step.",
+        "audioUrl": "https://r7wi7nxnvjabs6gu.public.blob.vercel-storage.com/lesson-audio/cmpdh5m7u009qevu9b6sq9ivk/cmpg5x1ny005g12ghgns7s3tv.mp3",
+        "imageUrl": null,
+        "imagePrompt": null,
+        "checkQuestion": null
+      },
+      {
+        "order": 3,
+        "stepType": "WORKED_EXAMPLE",
+        "title": "Worked Example",
+        "bodyText": "Let's explore the word 'unbelievable.' The root here is 'believe,' which means 'to accept as true.' The prefix 'un-' means 'not,' and the suffix '-able' means 'capable of.' When combined, 'unbelievable' means 'not capable of being believed.' By breaking down the word into its parts, we can understand its meaning even if we've never seen it before. Another example is 'predictable.' The root 'dict' means 'to say.' Adding the prefix 'pre-' (meaning 'before') and the suffix '-able' (meaning 'capable of') forms 'predictable,' meaning 'capable of being said before,' or something that can be anticipated. These examples show how understanding roots and affixes can help you deduce the meanings of complex words. Practice identifying these parts in words you encounter to improve your vocabulary skills. This matters because the correct answer is not just a matching word or phrase. It is the choice that fits the whole question and can be defended with a specific detail. The reasoning should explain both what the evidence says and how it supports the answer.",
+        "narrationScript": "Let's explore the word 'unbelievable.' The root here is 'believe,' which means 'to accept as true.' The prefix 'un-' means 'not,' and the suffix '-able' means 'capable of.' When combined, 'unbelievable' means 'not capable of being believed.' By breaking down the word into its parts, we can understand its meaning even if we've never seen it before. Another example is 'predictable.' The root 'dict' means 'to say.' Adding the prefix 'pre-' (meaning 'before') and the suffix '-able' (meaning 'capable of') forms 'predictable,' meaning 'capable of being said before,' or something that can be anticipated. These examples show how understanding roots and affixes can help you deduce the meanings of complex words. Practice identifying these parts in words you encounter to improve your vocabulary skills. This matters because the correct answer is not just a matching word or phrase. It is the choice that fits the whole question and can be defended with a specific detail. The reasoning should explain both what the evidence says and how it supports the answer.",
+        "audioUrl": "https://r7wi7nxnvjabs6gu.public.blob.vercel-storage.com/lesson-audio/cmpdh5m7u009qevu9b6sq9ivk/cmpg5x1ny005h12ghnnlfuu2y.mp3",
+        "imageUrl": null,
+        "imagePrompt": null,
+        "checkQuestion": null
+      },
+      {
+        "order": 4,
+        "stepType": "CHECK_QUESTION",
+        "title": "Guided Practice",
+        "bodyText": "Try these with the lesson ideas close at hand. Submit each item to see scoring and feedback.",
+        "narrationScript": "Try these with the lesson ideas close at hand. Submit each item to see scoring and feedback.",
+        "audioUrl": "https://r7wi7nxnvjabs6gu.public.blob.vercel-storage.com/lesson-audio/cmpdh5m7u009qevu9b6sq9ivk/cmpg5x1ny005i12gh00np0y3d.mp3",
+        "imageUrl": null,
+        "imagePrompt": null,
+        "checkQuestion": null
+      },
+      {
+        "order": 5,
+        "stepType": "CHECK_QUESTION",
+        "title": "Independent Practice",
+        "bodyText": "Apply the skill with less support. Submit each item to see scoring and feedback.",
+        "narrationScript": "Apply the skill with less support. Submit each item to see scoring and feedback.",
+        "audioUrl": "https://r7wi7nxnvjabs6gu.public.blob.vercel-storage.com/lesson-audio/cmpdh5m7u009qevu9b6sq9ivk/cmpg5x1ny005j12ghz6666h24.mp3",
+        "imageUrl": null,
+        "imagePrompt": null,
+        "checkQuestion": null
+      },
+      {
+        "order": 6,
+        "stepType": "CHECK_QUESTION",
+        "title": "Exit Ticket",
+        "bodyText": "Check the key takeaway before moving on. Submit the exit ticket to see feedback.",
+        "narrationScript": "Check the key takeaway before moving on. Submit the exit ticket to see feedback.",
+        "audioUrl": "https://r7wi7nxnvjabs6gu.public.blob.vercel-storage.com/lesson-audio/cmpdh5m7u009qevu9b6sq9ivk/cmpg5x1ny005k12ghqct6zxbp.mp3",
+        "imageUrl": null,
+        "imagePrompt": null,
+        "checkQuestion": null
+      },
+      {
+        "order": 7,
+        "stepType": "CHECK_QUESTION",
+        "title": "Mastery Check",
+        "bodyText": "Show that the skill is ready for mixed practice. Submit each item to see feedback.",
+        "narrationScript": "Show that the skill is ready for mixed practice. Submit each item to see feedback.",
+        "audioUrl": "https://r7wi7nxnvjabs6gu.public.blob.vercel-storage.com/lesson-audio/cmpdh5m7u009qevu9b6sq9ivk/cmpg5x1ny005l12ghcolcol72.mp3",
+        "imageUrl": null,
+        "imagePrompt": null,
+        "checkQuestion": null
+      }
+    ]
   },
   "critic": {
     "score": 88,

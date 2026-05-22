@@ -348,7 +348,97 @@
         "rightAnswerRationale": "Leo's transformation reveals that mentorship and inspiration can lead to personal growth and confidence."
       }
     ],
-    "resourceDescription": "Strand: RL/RI · Duration: 1m 31s · Tier: on_grade · Collection: miacademy_literary_analysis"
+    "resourceDescription": "Strand: RL/RI · Duration: 1m 31s · Tier: on_grade · Collection: miacademy_literary_analysis",
+    "steps": [
+      {
+        "order": 1,
+        "stepType": "INTRO",
+        "title": "Hook",
+        "bodyText": "Imagine you're a detective solving a mystery. To crack the case, you need to gather clues and piece them together. In writing, evidence from the text is like those clues. It helps you build a strong argument and uncover deeper meanings. Today, we'll learn how to use evidence effectively to support our ideas in writing.",
+        "narrationScript": "Imagine you're a detective solving a mystery. To crack the case, you need to gather clues and piece them together. In writing, evidence from the text is like those clues. It helps you build a strong argument and uncover deeper meanings. Today, we'll learn how to use evidence effectively to support our ideas in writing.",
+        "audioUrl": "https://r7wi7nxnvjabs6gu.public.blob.vercel-storage.com/lesson-audio/cmpdmeaxw00z7evu9n5yzuzdh/cmpg5x7pu00nk12gholwo6er6.mp3",
+        "imageUrl": null,
+        "imagePrompt": null,
+        "checkQuestion": null
+      },
+      {
+        "order": 2,
+        "stepType": "EXPLANATION",
+        "title": "Explanation",
+        "bodyText": "Text-Dependent Analysis (TDA) requires you to dig deep into a text to find evidence that supports your ideas. When you write a TDA response, you are like a detective, gathering clues from the text to support your analysis. The first step is to understand the prompt. What is it asking you to do? Identify the key question or task. Next, read the text carefully. Look for details, quotes, or examples that relate to the prompt. These are your pieces of evidence. Once you have your evidence, think about how it supports your response. This is your analysis. Explain why the evidence is important and how it connects to your main idea. For example, if the prompt asks about a character's motivation, find quotes that show their thoughts or actions. Then, explain how these quotes reveal their motivation. It's important to use evidence accurately. Misinterpreting a quote can weaken your argument. Always check that your evidence directly supports your point. Also, make sure to explain your evidence clearly. Don't assume the reader knows why it's relevant. Your analysis should make the connection obvious. Finally, organize your response logically. Start with an introduction that states your main idea. Use body paragraphs to present evidence and analysis. Conclude by summarizing your main points and restating how the evidence supports your analysis. With practice, you'll become skilled at using evidence to create strong, convincing arguments in your writing. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step.",
+        "narrationScript": "Text-Dependent Analysis (TDA) requires you to dig deep into a text to find evidence that supports your ideas. When you write a TDA response, you are like a detective, gathering clues from the text to support your analysis. The first step is to understand the prompt. What is it asking you to do? Identify the key question or task. Next, read the text carefully. Look for details, quotes, or examples that relate to the prompt. These are your pieces of evidence. Once you have your evidence, think about how it supports your response. This is your analysis. Explain why the evidence is important and how it connects to your main idea. For example, if the prompt asks about a character's motivation, find quotes that show their thoughts or actions. Then, explain how these quotes reveal their motivation. It's important to use evidence accurately. Misinterpreting a quote can weaken your argument. Always check that your evidence directly supports your point. Also, make sure to explain your evidence clearly. Don't assume the reader knows why it's relevant. Your analysis should make the connection obvious. Finally, organize your response logically. Start with an introduction that states your main idea. Use body paragraphs to present evidence and analysis. Conclude by summarizing your main points and restating how the evidence supports your analysis. With practice, you'll become skilled at using evidence to create strong, convincing arguments in your writing. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step.",
+        "audioUrl": "https://r7wi7nxnvjabs6gu.public.blob.vercel-storage.com/lesson-audio/cmpdmeaxw00z7evu9n5yzuzdh/cmpg5x7pu00nl12ghflt60yfu.mp3",
+        "imageUrl": null,
+        "imagePrompt": null,
+        "checkQuestion": null
+      },
+      {
+        "order": 3,
+        "stepType": "WORKED_EXAMPLE",
+        "title": "Worked Example",
+        "bodyText": "Let's look at an example. Suppose the prompt asks: \"How does the author show the theme of friendship in the story?\" First, identify parts of the text where friendship is evident. You might find a scene where characters help each other or share secrets. For instance, if a character says, \"I couldn't have done it without you,\" this quote shows reliance and support, key aspects of friendship. In your response, you would write: \"The author demonstrates the theme of friendship through the characters' reliance on each other. When the protagonist says, 'I couldn't have done it without you,' it highlights the supportive nature of their relationship. This quote shows that the characters value and depend on each other, which is a central element of friendship.\" Notice how the evidence is directly quoted and followed by an explanation. This analysis connects the evidence to the theme, making the argument clear and convincing.",
+        "narrationScript": "Let's look at an example. Suppose the prompt asks: \"How does the author show the theme of friendship in the story?\" First, identify parts of the text where friendship is evident. You might find a scene where characters help each other or share secrets. For instance, if a character says, \"I couldn't have done it without you,\" this quote shows reliance and support, key aspects of friendship. In your response, you would write: \"The author demonstrates the theme of friendship through the characters' reliance on each other. When the protagonist says, 'I couldn't have done it without you,' it highlights the supportive nature of their relationship. This quote shows that the characters value and depend on each other, which is a central element of friendship.\" Notice how the evidence is directly quoted and followed by an explanation. This analysis connects the evidence to the theme, making the argument clear and convincing.",
+        "audioUrl": "https://r7wi7nxnvjabs6gu.public.blob.vercel-storage.com/lesson-audio/cmpdmeaxw00z7evu9n5yzuzdh/cmpg5x7pu00nm12ghakdxsvog.mp3",
+        "imageUrl": null,
+        "imagePrompt": null,
+        "checkQuestion": null
+      },
+      {
+        "order": 4,
+        "stepType": "TRANSITION",
+        "title": "Hero Video",
+        "bodyText": "Watch this short resource before practice. Use it to hear the skill explained another way, then try the guided questions.",
+        "narrationScript": "Watch this short resource before practice, then try the guided questions.",
+        "audioUrl": "https://r7wi7nxnvjabs6gu.public.blob.vercel-storage.com/lesson-audio/cmpdmeaxw00z7evu9n5yzuzdh/cmpg5x7pu00nn12gh4xqd3z5s.mp3",
+        "imageUrl": null,
+        "imagePrompt": null,
+        "checkQuestion": null
+      },
+      {
+        "order": 5,
+        "stepType": "CHECK_QUESTION",
+        "title": "Guided Practice",
+        "bodyText": "Try these with the lesson ideas close at hand. Submit each item to see scoring and feedback.",
+        "narrationScript": "Try these with the lesson ideas close at hand. Submit each item to see scoring and feedback.",
+        "audioUrl": "https://r7wi7nxnvjabs6gu.public.blob.vercel-storage.com/lesson-audio/cmpdmeaxw00z7evu9n5yzuzdh/cmpg5x7pu00no12gh3jzxhlpk.mp3",
+        "imageUrl": null,
+        "imagePrompt": null,
+        "checkQuestion": null
+      },
+      {
+        "order": 6,
+        "stepType": "CHECK_QUESTION",
+        "title": "Independent Practice",
+        "bodyText": "Apply the skill with less support. Submit each item to see scoring and feedback.",
+        "narrationScript": "Apply the skill with less support. Submit each item to see scoring and feedback.",
+        "audioUrl": "https://r7wi7nxnvjabs6gu.public.blob.vercel-storage.com/lesson-audio/cmpdmeaxw00z7evu9n5yzuzdh/cmpg5x7pu00np12gh0yu959fg.mp3",
+        "imageUrl": null,
+        "imagePrompt": null,
+        "checkQuestion": null
+      },
+      {
+        "order": 7,
+        "stepType": "CHECK_QUESTION",
+        "title": "Exit Ticket",
+        "bodyText": "Check the key takeaway before moving on. Submit the exit ticket to see feedback.",
+        "narrationScript": "Check the key takeaway before moving on. Submit the exit ticket to see feedback.",
+        "audioUrl": "https://r7wi7nxnvjabs6gu.public.blob.vercel-storage.com/lesson-audio/cmpdmeaxw00z7evu9n5yzuzdh/cmpg5x7pu00nq12gh775jd0rg.mp3",
+        "imageUrl": null,
+        "imagePrompt": null,
+        "checkQuestion": null
+      },
+      {
+        "order": 8,
+        "stepType": "CHECK_QUESTION",
+        "title": "Mastery Check",
+        "bodyText": "Show that the skill is ready for mixed practice. Submit each item to see feedback.",
+        "narrationScript": "Show that the skill is ready for mixed practice. Submit each item to see feedback.",
+        "audioUrl": "https://r7wi7nxnvjabs6gu.public.blob.vercel-storage.com/lesson-audio/cmpdmeaxw00z7evu9n5yzuzdh/cmpg5x7pu00nr12ghax8b95q0.mp3",
+        "imageUrl": null,
+        "imagePrompt": null,
+        "checkQuestion": null
+      }
+    ]
   },
   "critic": {
     "score": 92,

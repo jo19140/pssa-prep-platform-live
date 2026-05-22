@@ -338,7 +338,86 @@
         "rightAnswerRationale": "The vowel team 'ai' makes the long 'a' sound in 'rainbow.'"
       }
     ],
-    "resourceDescription": null
+    "resourceDescription": null,
+    "steps": [
+      {
+        "order": 1,
+        "stepType": "INTRO",
+        "title": "Hook",
+        "bodyText": "Imagine you are a detective, and your mission is to uncover the secret patterns in words! Just like a detective looks for clues, you will look for patterns in letters and sounds to help you read new words. Are you ready to solve the mystery of phonics patterns? For example, a student can use this skill while reading a test passage and checking which details truly answer the question about Phonics Patterns.",
+        "narrationScript": "Imagine you are a detective, and your mission is to uncover the secret patterns in words! Just like a detective looks for clues, you will look for patterns in letters and sounds to help you read new words. Are you ready to solve the mystery of phonics patterns? For example, a student can use this skill while reading a test passage and checking which details truly answer the question about Phonics Patterns.",
+        "audioUrl": "https://r7wi7nxnvjabs6gu.public.blob.vercel-storage.com/lesson-audio/cmpdfllov000fevu97xukjt9t/cmpfoxnwk0007rb3kt7j3b715.mp3",
+        "imageUrl": null,
+        "imagePrompt": null,
+        "checkQuestion": null
+      },
+      {
+        "order": 2,
+        "stepType": "EXPLANATION",
+        "title": "Explanation",
+        "bodyText": "Phonics patterns are like secret codes in words that help us read and spell. These patterns include vowel teams, silent letters, and consonant blends. For example, in the word 'team,' the 'ea' is a vowel team that makes a long 'e' sound. Recognizing these patterns can make reading easier and more fun. Let's start with vowel teams. Vowel teams are two vowels that work together to make one sound. Common vowel teams include 'ea' as in 'beach,' 'ai' as in 'rain,' and 'oa' as in 'boat.' When you see these pairs, try saying the long vowel sound. Next, we have silent letters. These are letters that you don't hear when you say the word. For instance, in 'knight,' the 'k' is silent. Knowing which letters are silent can help you spell words correctly. Finally, consonant blends are groups of two or three consonants where each sound is heard, like 'bl' in 'blue' or 'str' in 'street.' Recognizing these blends helps you pronounce words more accurately. By understanding these patterns, you can become a more confident reader. Practice finding these patterns in words you read every day! Keep your detective hat on and look for clues in every word! Remember, the more you practice, the better you'll get at spotting these patterns! Let's dive into some examples to see how these patterns work in action. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step.",
+        "narrationScript": "Phonics patterns are like secret codes in words that help us read and spell. These patterns include vowel teams, silent letters, and consonant blends. For example, in the word 'team,' the 'ea' is a vowel team that makes a long 'e' sound. Recognizing these patterns can make reading easier and more fun. Let's start with vowel teams. Vowel teams are two vowels that work together to make one sound. Common vowel teams include 'ea' as in 'beach,' 'ai' as in 'rain,' and 'oa' as in 'boat.' When you see these pairs, try saying the long vowel sound. Next, we have silent letters. These are letters that you don't hear when you say the word. For instance, in 'knight,' the 'k' is silent. Knowing which letters are silent can help you spell words correctly. Finally, consonant blends are groups of two or three consonants where each sound is heard, like 'bl' in 'blue' or 'str' in 'street.' Recognizing these blends helps you pronounce words more accurately. By understanding these patterns, you can become a more confident reader. Practice finding these patterns in words you read every day! Keep your detective hat on and look for clues in every word! Remember, the more you practice, the better you'll get at spotting these patterns! Let's dive into some examples to see how these patterns work in action. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step.",
+        "audioUrl": "https://r7wi7nxnvjabs6gu.public.blob.vercel-storage.com/lesson-audio/cmpdfllov000fevu97xukjt9t/cmpfoxnwk0008rb3kkpogdmva.mp3",
+        "imageUrl": null,
+        "imagePrompt": null,
+        "checkQuestion": null
+      },
+      {
+        "order": 3,
+        "stepType": "WORKED_EXAMPLE",
+        "title": "Worked Example",
+        "bodyText": "Let's look at the word 'train.' Here, the 'ai' is a vowel team that makes the long 'a' sound. If you remove the 't' and 'r,' you still have 'ain,' which sounds like 'rain.' This shows how vowel teams work together to create a specific sound. Now, consider the word 'knock.' The 'k' is silent, so you only hear 'nock.' Knowing that the 'k' is silent helps you pronounce the word correctly. Finally, let's examine 'blend.' The 'bl' is a consonant blend. You can hear both the 'b' and the 'l' sounds. Recognizing this blend helps you say the word smoothly. By identifying these patterns, you can decode new words more easily. Practice by finding similar patterns in other words you read. This will help you become a more skilled reader and speller! This matters because the correct answer is not just a matching word or phrase. It is the choice that fits the whole question and can be defended with a specific detail. The reasoning should explain both what the evidence says and how it supports the answer.",
+        "narrationScript": "Let's look at the word 'train.' Here, the 'ai' is a vowel team that makes the long 'a' sound. If you remove the 't' and 'r,' you still have 'ain,' which sounds like 'rain.' This shows how vowel teams work together to create a specific sound. Now, consider the word 'knock.' The 'k' is silent, so you only hear 'nock.' Knowing that the 'k' is silent helps you pronounce the word correctly. Finally, let's examine 'blend.' The 'bl' is a consonant blend. You can hear both the 'b' and the 'l' sounds. Recognizing this blend helps you say the word smoothly. By identifying these patterns, you can decode new words more easily. Practice by finding similar patterns in other words you read. This will help you become a more skilled reader and speller! This matters because the correct answer is not just a matching word or phrase. It is the choice that fits the whole question and can be defended with a specific detail. The reasoning should explain both what the evidence says and how it supports the answer.",
+        "audioUrl": "https://r7wi7nxnvjabs6gu.public.blob.vercel-storage.com/lesson-audio/cmpdfllov000fevu97xukjt9t/cmpfoxnwk0009rb3k79lo0zqw.mp3",
+        "imageUrl": null,
+        "imagePrompt": null,
+        "checkQuestion": null
+      },
+      {
+        "order": 4,
+        "stepType": "CHECK_QUESTION",
+        "title": "Guided Practice",
+        "bodyText": "Try these with the lesson ideas close at hand. Submit each item to see scoring and feedback.",
+        "narrationScript": "Try these with the lesson ideas close at hand. Submit each item to see scoring and feedback.",
+        "audioUrl": "https://r7wi7nxnvjabs6gu.public.blob.vercel-storage.com/lesson-audio/cmpdfllov000fevu97xukjt9t/cmpfoxnwk000arb3kr2pe77re.mp3",
+        "imageUrl": null,
+        "imagePrompt": null,
+        "checkQuestion": null
+      },
+      {
+        "order": 5,
+        "stepType": "CHECK_QUESTION",
+        "title": "Independent Practice",
+        "bodyText": "Apply the skill with less support. Submit each item to see scoring and feedback.",
+        "narrationScript": "Apply the skill with less support. Submit each item to see scoring and feedback.",
+        "audioUrl": "https://r7wi7nxnvjabs6gu.public.blob.vercel-storage.com/lesson-audio/cmpdfllov000fevu97xukjt9t/cmpfoxnwk000brb3kj1lw2r46.mp3",
+        "imageUrl": null,
+        "imagePrompt": null,
+        "checkQuestion": null
+      },
+      {
+        "order": 6,
+        "stepType": "CHECK_QUESTION",
+        "title": "Exit Ticket",
+        "bodyText": "Check the key takeaway before moving on. Submit the exit ticket to see feedback.",
+        "narrationScript": "Check the key takeaway before moving on. Submit the exit ticket to see feedback.",
+        "audioUrl": "https://r7wi7nxnvjabs6gu.public.blob.vercel-storage.com/lesson-audio/cmpdfllov000fevu97xukjt9t/cmpfoxnwk000crb3kl5rummw8.mp3",
+        "imageUrl": null,
+        "imagePrompt": null,
+        "checkQuestion": null
+      },
+      {
+        "order": 7,
+        "stepType": "CHECK_QUESTION",
+        "title": "Mastery Check",
+        "bodyText": "Show that the skill is ready for mixed practice. Submit each item to see feedback.",
+        "narrationScript": "Show that the skill is ready for mixed practice. Submit each item to see feedback.",
+        "audioUrl": "https://r7wi7nxnvjabs6gu.public.blob.vercel-storage.com/lesson-audio/cmpdfllov000fevu97xukjt9t/cmpfoxnwk000drb3kycirg32u.mp3",
+        "imageUrl": null,
+        "imagePrompt": null,
+        "checkQuestion": null
+      }
+    ]
   },
   "critic": {
     "score": 75,

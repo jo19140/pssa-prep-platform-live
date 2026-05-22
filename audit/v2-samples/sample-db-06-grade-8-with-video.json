@@ -365,7 +365,97 @@
         "rightAnswerRationale": "\"Stubborn\" has a negative connotation, suggesting inflexibility."
       }
     ],
-    "resourceDescription": "Strand: L · Duration: 7m 22s · Tier: on_grade · Collection: khan_8_reading_vocab"
+    "resourceDescription": "Strand: L · Duration: 7m 22s · Tier: on_grade · Collection: khan_8_reading_vocab",
+    "steps": [
+      {
+        "order": 1,
+        "stepType": "INTRO",
+        "title": "Hook",
+        "bodyText": "Have you ever noticed how some words just feel different, even if they mean the same thing? Think about the difference between \"slim\" and \"skinny.\" Both describe someone who is not overweight, but they evoke different feelings. This is the power of connotation, and understanding it can change how you interpret and use language.",
+        "narrationScript": "Have you ever noticed how some words just feel different, even if they mean the same thing? Think about the difference between \"slim\" and \"skinny.\" Both describe someone who is not overweight, but they evoke different feelings. This is the power of connotation, and understanding it can change how you interpret and use language.",
+        "audioUrl": "https://r7wi7nxnvjabs6gu.public.blob.vercel-storage.com/lesson-audio/cmpds2q7q004yes458pm7m1ob/cmpg5x9ra00tp12ghsij0xpaq.mp3",
+        "imageUrl": null,
+        "imagePrompt": null,
+        "checkQuestion": null
+      },
+      {
+        "order": 2,
+        "stepType": "EXPLANATION",
+        "title": "Explanation",
+        "bodyText": "Connotation refers to the emotional or cultural associations that a word carries beyond its literal meaning. For example, the words \"childlike\" and \"childish\" both relate to children, but \"childlike\" often has positive connotations of innocence, while \"childish\" can imply immaturity. Understanding connotation is crucial for interpreting texts and choosing the right words in writing. Word structure plays a significant role in connotation. Prefixes, suffixes, and root words can alter a word's meaning and its connotation. For instance, consider the root word \"form.\" Adding the prefix \"trans-\" creates \"transform,\" suggesting change or improvement, while \"deform\" implies damage or distortion. Similarly, suffixes like \"-ish\" can add a negative connotation, as seen in \"foolish.\" Recognizing these subtle differences helps in understanding the author's intent and the text's tone. When reading, pay attention to the context in which words are used. Authors often choose words deliberately to convey specific emotions or attitudes. By analyzing word structure and connotation, you can gain deeper insights into the text and improve your own writing by selecting words that precisely convey your intended message. Let's practice identifying connotations and understanding how word structure affects meaning. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step.",
+        "narrationScript": "Connotation refers to the emotional or cultural associations that a word carries beyond its literal meaning. For example, the words \"childlike\" and \"childish\" both relate to children, but \"childlike\" often has positive connotations of innocence, while \"childish\" can imply immaturity. Understanding connotation is crucial for interpreting texts and choosing the right words in writing. Word structure plays a significant role in connotation. Prefixes, suffixes, and root words can alter a word's meaning and its connotation. For instance, consider the root word \"form.\" Adding the prefix \"trans-\" creates \"transform,\" suggesting change or improvement, while \"deform\" implies damage or distortion. Similarly, suffixes like \"-ish\" can add a negative connotation, as seen in \"foolish.\" Recognizing these subtle differences helps in understanding the author's intent and the text's tone. When reading, pay attention to the context in which words are used. Authors often choose words deliberately to convey specific emotions or attitudes. By analyzing word structure and connotation, you can gain deeper insights into the text and improve your own writing by selecting words that precisely convey your intended message. Let's practice identifying connotations and understanding how word structure affects meaning. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step.",
+        "audioUrl": "https://r7wi7nxnvjabs6gu.public.blob.vercel-storage.com/lesson-audio/cmpds2q7q004yes458pm7m1ob/cmpg5x9ra00tq12ghsnr8cs0v.mp3",
+        "imageUrl": null,
+        "imagePrompt": null,
+        "checkQuestion": null
+      },
+      {
+        "order": 3,
+        "stepType": "WORKED_EXAMPLE",
+        "title": "Worked Example",
+        "bodyText": "Consider the sentence: \"The politician's speech was eloquent, but his promises seemed hollow.\" Here, \"eloquent\" has a positive connotation, suggesting the politician spoke well and persuasively. However, \"hollow\" implies that the promises lack substance or sincerity, carrying a negative connotation. Now, let's analyze the word \"hollow.\" The root \"hollow\" suggests emptiness. If we add the prefix \"un-\" to create \"unhollow,\" it would imply filling or solidifying, changing the connotation to something more positive or neutral. Understanding these nuances helps you interpret the text more accurately. In this case, the contrast between \"eloquent\" and \"hollow\" highlights a discrepancy between the politician's speaking skills and the sincerity of his promises. This analysis shows how connotation and word structure work together to convey deeper meanings. This matters because the correct answer is not just a matching word or phrase. It is the choice that fits the whole question and can be defended with a specific detail. The reasoning should explain both what the evidence says and how it supports the answer.",
+        "narrationScript": "Consider the sentence: \"The politician's speech was eloquent, but his promises seemed hollow.\" Here, \"eloquent\" has a positive connotation, suggesting the politician spoke well and persuasively. However, \"hollow\" implies that the promises lack substance or sincerity, carrying a negative connotation. Now, let's analyze the word \"hollow.\" The root \"hollow\" suggests emptiness. If we add the prefix \"un-\" to create \"unhollow,\" it would imply filling or solidifying, changing the connotation to something more positive or neutral. Understanding these nuances helps you interpret the text more accurately. In this case, the contrast between \"eloquent\" and \"hollow\" highlights a discrepancy between the politician's speaking skills and the sincerity of his promises. This analysis shows how connotation and word structure work together to convey deeper meanings. This matters because the correct answer is not just a matching word or phrase. It is the choice that fits the whole question and can be defended with a specific detail. The reasoning should explain both what the evidence says and how it supports the answer.",
+        "audioUrl": "https://r7wi7nxnvjabs6gu.public.blob.vercel-storage.com/lesson-audio/cmpds2q7q004yes458pm7m1ob/cmpg5x9ra00tr12gh0bije912.mp3",
+        "imageUrl": null,
+        "imagePrompt": null,
+        "checkQuestion": null
+      },
+      {
+        "order": 4,
+        "stepType": "TRANSITION",
+        "title": "Hero Video",
+        "bodyText": "Watch this short resource before practice. Use it to hear the skill explained another way, then try the guided questions.",
+        "narrationScript": "Watch this short resource before practice, then try the guided questions.",
+        "audioUrl": "https://r7wi7nxnvjabs6gu.public.blob.vercel-storage.com/lesson-audio/cmpds2q7q004yes458pm7m1ob/cmpg5x9ra00ts12ghhr1nqnc4.mp3",
+        "imageUrl": null,
+        "imagePrompt": null,
+        "checkQuestion": null
+      },
+      {
+        "order": 5,
+        "stepType": "CHECK_QUESTION",
+        "title": "Guided Practice",
+        "bodyText": "Try these with the lesson ideas close at hand. Submit each item to see scoring and feedback.",
+        "narrationScript": "Try these with the lesson ideas close at hand. Submit each item to see scoring and feedback.",
+        "audioUrl": "https://r7wi7nxnvjabs6gu.public.blob.vercel-storage.com/lesson-audio/cmpds2q7q004yes458pm7m1ob/cmpg5x9ra00tt12gh78l3n91g.mp3",
+        "imageUrl": null,
+        "imagePrompt": null,
+        "checkQuestion": null
+      },
+      {
+        "order": 6,
+        "stepType": "CHECK_QUESTION",
+        "title": "Independent Practice",
+        "bodyText": "Apply the skill with less support. Submit each item to see scoring and feedback.",
+        "narrationScript": "Apply the skill with less support. Submit each item to see scoring and feedback.",
+        "audioUrl": "https://r7wi7nxnvjabs6gu.public.blob.vercel-storage.com/lesson-audio/cmpds2q7q004yes458pm7m1ob/cmpg5x9ra00tu12ghpk2tp5wg.mp3",
+        "imageUrl": null,
+        "imagePrompt": null,
+        "checkQuestion": null
+      },
+      {
+        "order": 7,
+        "stepType": "CHECK_QUESTION",
+        "title": "Exit Ticket",
+        "bodyText": "Check the key takeaway before moving on. Submit the exit ticket to see feedback.",
+        "narrationScript": "Check the key takeaway before moving on. Submit the exit ticket to see feedback.",
+        "audioUrl": "https://r7wi7nxnvjabs6gu.public.blob.vercel-storage.com/lesson-audio/cmpds2q7q004yes458pm7m1ob/cmpg5x9ra00tv12gh8tkrennw.mp3",
+        "imageUrl": null,
+        "imagePrompt": null,
+        "checkQuestion": null
+      },
+      {
+        "order": 8,
+        "stepType": "CHECK_QUESTION",
+        "title": "Mastery Check",
+        "bodyText": "Show that the skill is ready for mixed practice. Submit each item to see feedback.",
+        "narrationScript": "Show that the skill is ready for mixed practice. Submit each item to see feedback.",
+        "audioUrl": "https://r7wi7nxnvjabs6gu.public.blob.vercel-storage.com/lesson-audio/cmpds2q7q004yes458pm7m1ob/cmpg5x9ra00tw12ghps5o9fvg.mp3",
+        "imageUrl": null,
+        "imagePrompt": null,
+        "checkQuestion": null
+      }
+    ]
   },
   "critic": {
     "score": 92,
