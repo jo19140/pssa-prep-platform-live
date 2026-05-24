@@ -1,13 +1,19 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BuddyCharacter } from "@/components/literacy/BuddyCharacter";
 import { EhriPhaseBadge } from "@/components/literacy/EhriPhaseBadge";
 import { LITERACY_STRANDS, PLACEHOLDER_PASSAGE, STRAND_LABELS } from "@/lib/literacy/constants";
+import { getTtsProvider } from "@/lib/voice/tts";
 
 export function StudentDiagnosticFlow({ voice = false }: { voice?: boolean }) {
   const [result, setResult] = useState<any>(null);
   const [saving, setSaving] = useState(false);
+
+  useEffect(() => {
+    if (!voice) return;
+    void getTtsProvider().speak("Your Reading Buddy diagnostic is ready. Content will come from the content pipeline.");
+  }, [voice]);
 
   async function completeDiagnostic() {
     setSaving(true);

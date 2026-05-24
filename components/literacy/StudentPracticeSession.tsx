@@ -3,14 +3,14 @@
 import { useState } from "react";
 import { BuddyCharacter } from "@/components/literacy/BuddyCharacter";
 import { PLACEHOLDER_PASSAGE } from "@/lib/literacy/constants";
-import { browserTts } from "@/lib/voice/tts";
+import { getTtsProvider } from "@/lib/voice/tts";
 
 export function StudentPracticeSession({ voice = false }: { voice?: boolean }) {
   const [state, setState] = useState<"idle" | "listening" | "speaking" | "confused">("idle");
   async function speak() {
     setState("speaking");
     try {
-      await browserTts.speak("Today's Reading Buddy practice is ready. Content will come from the content pipeline.");
+      await getTtsProvider().speak("Today's Reading Buddy practice is ready. Content will come from the content pipeline.");
     } finally {
       setState("idle");
     }

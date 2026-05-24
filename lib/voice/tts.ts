@@ -1,5 +1,7 @@
 "use client";
 
+import { OpenAiTtsProvider } from "@/lib/voice/providers/openai-tts";
+
 export interface TTSProvider {
   speak(text: string, options?: { rate?: number; voice?: string }): Promise<void>;
   cancel(): void;
@@ -36,3 +38,9 @@ export class BrowserSpeechSynthesisProvider implements TTSProvider {
 }
 
 export const browserTts = new BrowserSpeechSynthesisProvider();
+
+export function getTtsProvider(): TTSProvider {
+  const provider = (process.env.NEXT_PUBLIC_TTS_PROVIDER || process.env.TTS_PROVIDER || "OPENAI").toUpperCase();
+  if (provider === "OPENAI") return new OpenAiTtsProvider();
+  return new BrowserSpeechSynthesisProvider();
+}
