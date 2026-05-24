@@ -8,6 +8,9 @@
     "start": "next start",
     "lint": "next lint",
     "test:reading-buddy": "tsx scripts/test-reading-buddy-v1.ts",
+    "test:voice-flywheel": "tsx scripts/test-voice-data-flywheel.ts",
+    "voice:enforce-retention": "tsx scripts/voice/enforce-retention.ts",
+    "voice:purge-training-opt-outs": "tsx scripts/voice/purge-training-opt-outs.ts",
     "db:generate": "prisma generate",
     "db:push": "prisma db push",
     "db:seed": "tsx prisma/seed.ts"

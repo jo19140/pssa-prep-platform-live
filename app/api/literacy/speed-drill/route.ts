@@ -3,7 +3,7 @@ import { z } from "zod";
 import { db } from "@/lib/db";
 import { requireUser } from "@/lib/authz";
 import { ensureLiteracyProfile, json } from "@/lib/literacy/profile";
-import { defaultRetention } from "@/lib/voice/retention";
+import { retentionForVoiceSession } from "@/lib/voice/consent";
 
 const schema = z.object({
   startedAt: z.coerce.date().optional(),
@@ -21,6 +21,7 @@ export async function POST(req: Request) {
   if (!parsed.success) return NextResponse.json({ error: "Invalid request body" }, { status: 400 });
   const startedAt = parsed.data.startedAt || new Date();
   const profile = await ensureLiteracyProfile(auth.user!.id);
+  const retention = await retentionForVoiceSession(auth.user!.id, startedAt);
   const wpm = Math.round((parsed.data.wordsRead / parsed.data.durationSeconds) * 60);
   const voiceSession = await db.voiceSession.create({
     data: {
@@ -34,7 +35,7 @@ export async function POST(req: Request) {
       wordsMissed: parsed.data.wordsMissed,
       wpm,
       transcriptJson: json({ mode: "speed-drill", content: "TODO: from content pipeline" }),
-      ...defaultRetention(startedAt),
+      ...retention,
     },
   });
   return NextResponse.json({ voiceSession });

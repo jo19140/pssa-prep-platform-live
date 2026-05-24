@@ -6,6 +6,7 @@ import { normalizeJoinCode } from "@/lib/classCodes";
 import { consumeRateLimit, getClientIp } from "@/lib/rateLimit";
 import { createVerificationToken, sendVerificationEmail } from "@/lib/accountTokens";
 import { consentVersion, createComplianceToken, currentConsentText, isUnder13, sendParentConsentEmail } from "@/lib/compliance";
+import { ensureVoiceConsent } from "@/lib/voice/consent";
 
 const studentRegisterSchema = z.object({
   name: z.string().trim().min(1).max(120),
@@ -81,6 +82,7 @@ export async function POST(req: Request) {
   }
 
   const user = await db.user.create({ data: { email, name, passwordHash, role: "STUDENT", dateOfBirth, parentalConsentRequired: false } });
+  await ensureVoiceConsent(user.id, { id: user.id, role: "STUDENT" });
 
   const studentProfile = await db.studentProfile.upsert({
     where: { userId: user.id },

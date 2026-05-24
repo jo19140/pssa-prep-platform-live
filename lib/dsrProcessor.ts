@@ -2,6 +2,7 @@ import { put } from "@vercel/blob";
 import { db } from "@/lib/db";
 import { eraseUserData, escapeHtml } from "@/lib/compliance";
 import { sendEmail } from "@/lib/email";
+import { purgeAudioForStudent } from "@/lib/voice/storage";
 
 export async function processDsrExport(requestId: string) {
   const request = await db.dataSubjectRequest.findUnique({ where: { id: requestId }, include: { user: true } });
@@ -41,6 +42,8 @@ export async function processDsrDelete(requestId: string) {
   await db.dataSubjectRequest.update({ where: { id: requestId }, data: { status: "PROCESSING" } });
   const email = request.user.email;
   const name = request.user.name;
+  const studentProfile = await db.studentProfile.findUnique({ where: { userId: request.userId } });
+  if (studentProfile) await purgeAudioForStudent(request.userId, "DSR_REQUEST", request.userId);
   await eraseUserData(request.userId);
   const completed = await db.dataSubjectRequest.update({
     where: { id: requestId },
@@ -67,6 +70,9 @@ export async function collectUserExport(userId: string) {
     tutorMessages,
     tutorMemory,
     parentalConsent,
+    voiceConsent,
+    voiceSessions,
+    labeledVoiceSegments,
     dataSubjectRequests,
   ] = await Promise.all([
     db.user.findUnique({ where: { id: userId } }),
@@ -87,6 +93,9 @@ export async function collectUserExport(userId: string) {
     db.tutorAgentMessage.findMany({ where: { userId } }),
     db.tutorAgentMemory.findUnique({ where: { userId } }),
     db.parentalConsent.findUnique({ where: { studentUserId: userId } }),
+    db.voiceConsent.findUnique({ where: { studentUserId: userId }, include: { decisionLog: true } }),
+    db.voiceSession.findMany({ where: { literacyProfile: { studentUserId: userId } } }),
+    db.labeledVoiceSegment.findMany({ where: { voiceSession: { literacyProfile: { studentUserId: userId } } } }),
     db.dataSubjectRequest.findMany({ where: { userId } }),
   ]);
   return {
@@ -101,6 +110,9 @@ export async function collectUserExport(userId: string) {
     tutorMessages,
     tutorMemory,
     parentalConsent,
+    voiceConsent,
+    voiceSessions,
+    labeledVoiceSegments,
     dataSubjectRequests,
   };
 }

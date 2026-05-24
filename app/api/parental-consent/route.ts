@@ -4,6 +4,7 @@ import { db } from "@/lib/db";
 import { normalizeJoinCode } from "@/lib/classCodes";
 import { getClientIp } from "@/lib/rateLimit";
 import { sendStudentConsentCompleteEmail } from "@/lib/compliance";
+import { ensureVoiceConsent } from "@/lib/voice/consent";
 
 const consentSchema = z.object({
   token: z.string().min(20).max(256),
@@ -58,6 +59,7 @@ export async function POST(req: Request) {
       ipAddress: getClientIp(req),
     },
   });
+  await ensureVoiceConsent(user.id, { id: user.id, role: "STUDENT" });
   await db.pendingStudentSignup.delete({ where: { id: pending.id } });
   await sendStudentConsentCompleteEmail({ email: user.email, name: user.name });
   return NextResponse.json({ ok: true });

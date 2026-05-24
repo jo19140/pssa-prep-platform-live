@@ -30,6 +30,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
     "/student/speed-drill",
     "/teacher/literacy",
     "/parent/literacy",
+    "/parent/settings/voice",
     "/onboarding/listening",
   ].some((prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`));
   return (
