@@ -7,6 +7,53 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum EhriPhase {
+  PRE_ALPHABETIC
+  PARTIAL_ALPHABETIC
+  FULL_ALPHABETIC
+  CONSOLIDATED_ALPHABETIC
+}
+
+enum SynesisProgram {
+  VENUS
+  MERCURY
+  MARS
+  EARTH
+}
+
+enum TestPrepModule {
+  PSSA
+  STAAR
+  FSA
+  MCAS
+}
+
+enum LiteracyStrand {
+  PHONEMIC_AWARENESS
+  DECODING
+  MORPHOLOGY
+  FLUENCY
+  VOCABULARY
+  COMPREHENSION
+}
+
+enum SyllableType {
+  CLOSED
+  OPEN
+  VCE
+  VOWEL_TEAM
+  R_CONTROLLED
+  CONSONANT_LE
+}
+
+enum MasteryLevel {
+  UNTESTED
+  NOT_YET
+  DEVELOPING
+  SOLID
+  MASTERED
+}
+
 model User {
   id              String          @id @default(cuid())
   email           String          @unique
@@ -18,6 +65,9 @@ model User {
   parentalConsentRequired Boolean @default(false)
   parentalConsentAt DateTime?
   accountDeletedAt DateTime?
+  enrolledPrograms SynesisProgram[] @default([VENUS])
+  enrolledTestPrep TestPrepModule[] @default([PSSA])
+  synesisMigrationBannerDismissedAt DateTime?
   createdAt       DateTime        @default(now())
   updatedAt       DateTime        @updatedAt
 
@@ -41,6 +91,8 @@ model User {
   parentalConsent ParentalConsent?
   dataSubjectRequests DataSubjectRequest[] @relation("DSRRequester")
   processedDataSubjectRequests DataSubjectRequest[] @relation("DSRProcessor")
+  literacyProfile LiteracyProfile?
+  stateRequests StateRequests[]
 }
 
 model PendingStudentSignup {
@@ -229,6 +281,8 @@ model Assessment {
   state       String
   grade       Int
   isAdaptive  Boolean       @default(true)
+  ehriPhaseAtTime EhriPhase?
+  lexileBand  Int?
   createdAt   DateTime      @default(now())
   assignments Assignment[]
   sessions    TestSession[]
@@ -653,6 +707,115 @@ model ReadingCoachAttempt {
   @@index([gradeLevel, activityType])
 }
 
+model LiteracyProfile {
+  id                    String                 @id @default(cuid())
+  studentUserId         String                 @unique
+  ehriPhase             EhriPhase              @default(PRE_ALPHABETIC)
+  ehriPhaseConfidence   Float                  @default(0)
+  lexileEstimate        Int?
+  gradeEquivalent       Float?
+  lastDiagnosticAt      DateTime?
+  createdAt             DateTime               @default(now())
+  updatedAt             DateTime               @updatedAt
+  student               User                   @relation(fields: [studentUserId], references: [id], onDelete: Cascade)
+  strandScores          StrandScore[]
+  phonogramMastery      PhonogramMastery[]
+  syllableTypeMastery   SyllableTypeMastery[]
+  dialectSettings       DialectSettings?
+  autopilotDecisions    AutopilotDecision[]
+  voiceSessions         VoiceSession[]
+
+  @@index([ehriPhase])
+}
+
+model StrandScore {
+  id                String          @id @default(cuid())
+  literacyProfileId String
+  strand            LiteracyStrand
+  score             Float
+  level             MasteryLevel
+  priorityRank      Int?
+  evidenceCount     Int             @default(0)
+  lastUpdatedAt     DateTime        @default(now())
+  literacyProfile   LiteracyProfile @relation(fields: [literacyProfileId], references: [id], onDelete: Cascade)
+
+  @@unique([literacyProfileId, strand])
+}
+
+model PhonogramMastery {
+  id                String           @id @default(cuid())
+  literacyProfileId String
+  phonogramFamilyId String
+  level             MasteryLevel      @default(UNTESTED)
+  correctAttempts   Int               @default(0)
+  totalAttempts     Int               @default(0)
+  lastSeenAt        DateTime?
+  literacyProfile   LiteracyProfile   @relation(fields: [literacyProfileId], references: [id], onDelete: Cascade)
+  phonogramFamily   PhonogramFamily   @relation(fields: [phonogramFamilyId], references: [id])
+
+  @@unique([literacyProfileId, phonogramFamilyId])
+}
+
+model SyllableTypeMastery {
+  id                String          @id @default(cuid())
+  literacyProfileId String
+  syllableType      SyllableType
+  level             MasteryLevel     @default(UNTESTED)
+  correctAttempts   Int              @default(0)
+  totalAttempts     Int              @default(0)
+  literacyProfile   LiteracyProfile  @relation(fields: [literacyProfileId], references: [id], onDelete: Cascade)
+
+  @@unique([literacyProfileId, syllableType])
+}
+
+model DialectSettings {
+  id                String          @id @default(cuid())
+  literacyProfileId String          @unique
+  homeLanguages     String[]
+  regionalDialects  String[]
+  optedInAt         DateTime?
+  skippedAt         DateTime?
+  lastUpdatedAt     DateTime        @updatedAt
+  literacyProfile   LiteracyProfile @relation(fields: [literacyProfileId], references: [id], onDelete: Cascade)
+}
+
+model AutopilotDecision {
+  id                 String          @id @default(cuid())
+  literacyProfileId  String
+  decisionType       String
+  summary            String
+  reasoning          String          @db.Text
+  appliedAt          DateTime        @default(now())
+  overriddenAt       DateTime?
+  overriddenByUserId String?
+  literacyProfile    LiteracyProfile @relation(fields: [literacyProfileId], references: [id], onDelete: Cascade)
+
+  @@index([literacyProfileId, appliedAt])
+}
+
+model VoiceSession {
+  id                  String          @id @default(cuid())
+  literacyProfileId   String
+  sessionType         String
+  startedAt           DateTime        @default(now())
+  endedAt             DateTime?
+  durationSeconds     Int?
+  audioStorageKey     String?
+  transcriptJson      Json?
+  wordsRead           Int?
+  wordsCorrect        Int?
+  wordsSelfCorrected  Int?
+  wordsMissed         Int?
+  wpm                 Int?
+  retentionTier       String          @default("SERVICE")
+  deleteAfterDate     DateTime?
+  literacyProfile     LiteracyProfile @relation(fields: [literacyProfileId], references: [id], onDelete: Cascade)
+
+  @@index([literacyProfileId, startedAt])
+  @@index([sessionType, startedAt])
+  @@index([deleteAfterDate])
+}
+
 model ResourceLink {
   id           String   @id @default(cuid())
   gradeLevel   Int?
@@ -676,6 +839,18 @@ model ResourceLink {
   @@index([belowGradeLevel, standardCode])
   @@index([aboveGradeLevel, standardCode])
   @@index([skill])
+}
+
+model StateRequests {
+  id           String   @id @default(cuid())
+  userId       String?
+  email        String?
+  stateCode    String
+  requestNotes String?  @db.Text
+  createdAt    DateTime @default(now())
+  user         User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([stateCode, createdAt])
 }
 
 model ResourceSuggestion {
@@ -756,6 +931,7 @@ model PhonogramFamily {
   introductionOrder Int
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt
+  masteryRecords    PhonogramMastery[]
 
   @@index([category, introductionOrder])
 }

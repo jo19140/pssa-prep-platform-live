@@ -7,6 +7,7 @@
     "build": "prisma generate && next build",
     "start": "next start",
     "lint": "next lint",
+    "test:reading-buddy": "tsx scripts/test-reading-buddy-v1.ts",
     "db:generate": "prisma generate",
     "db:push": "prisma db push",
     "db:seed": "tsx prisma/seed.ts"

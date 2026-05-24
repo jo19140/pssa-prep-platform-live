@@ -22,12 +22,21 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
   // Reading headers() also marks this route segment as dynamic and, in Next 15,
   // causes Next.js to pick up the nonce from the request's Content-Security-Policy
   // header and attach it to every framework <script> tag it emits.
-  await headers();
+  const requestHeaders = await headers();
+  const pathname = requestHeaders.get("x-pathname") || "";
+  const isSynesisRoute = [
+    "/student/diagnostic",
+    "/student/practice",
+    "/student/speed-drill",
+    "/teacher/literacy",
+    "/parent/literacy",
+    "/onboarding/listening",
+  ].some((prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`));
   return (
     <html lang="en">
       <body>
         <Providers>
-          <AppChromeHeader />
+          {!isSynesisRoute ? <AppChromeHeader /> : null}
           {children}
           <LegalFooter />
         </Providers>
