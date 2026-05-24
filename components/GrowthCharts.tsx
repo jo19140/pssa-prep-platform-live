@@ -14,3 +14,22 @@ export function StandardsGrowthBarChart({ rows }: { rows: any[] }) {
 export function StudentTrendLineChart({ title, points }: { title: string; points: { label: string; score: number }[]; }) {
   return <div className="rounded-3xl bg-white p-6 shadow"><h3 className="text-xl font-bold">{title}</h3><div className="mt-4 h-72"><ResponsiveContainer width="100%" height="100%"><LineChart data={points}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="label" /><YAxis domain={[0,100]} /><Tooltip /><Legend /><Line type="monotone" dataKey="score" strokeWidth={3} /></LineChart></ResponsiveContainer></div></div>;
 }
+
+export function LiteracyTrendChart({ points }: { points: { label: string; phaseValue: number }[] }) {
+  return (
+    <div className="rounded-md bg-white p-6 shadow-sm">
+      <h3 className="text-xl font-bold">Ehri phase trend</h3>
+      <div className="mt-4 h-72">
+        <ResponsiveContainer width="100%" height="100%">
+          <LineChart data={points}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="label" />
+            <YAxis domain={[0, 3]} ticks={[0, 1, 2, 3]} tickFormatter={(value) => ["Pre", "Partial", "Full", "Consolidated"][Number(value)] || ""} />
+            <Tooltip />
+            <Line type="monotone" dataKey="phaseValue" strokeWidth={3} />
+          </LineChart>
+        </ResponsiveContainer>
+      </div>
+    </div>
+  );
+}
