@@ -1,9 +1,7 @@
 import OpenAI from "openai";
 import { logAiFailure } from "@/lib/aiTelemetry";
-import { DECISION_TYPES } from "@/lib/decisions/decisionTypes";
-import { recordModelDecision } from "@/lib/decisions/withModelDecisionLogging";
+import { recordTdaScoringDecision } from "@/lib/decisions/instrumentedCallLogging";
 import { getPerformanceBand } from "@/lib/performance";
-import { PROMPT_KEYS } from "@/lib/prompts/registry";
 import { pssaTdaExemplarsForGrade } from "@/lib/pssaTdaExemplars";
 
 export type EssayFeedbackItem = {
@@ -59,22 +57,14 @@ export async function gradeTdaEssay({
     const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
     const gradeAnchors = pssaTdaExemplarsForGrade(gradeLevel);
     const modelName = process.env.OPENAI_LEARNING_PATH_MODEL || "gpt-4o-mini";
-    const response = await recordModelDecision(
-      {
-        decisionType: DECISION_TYPES.TDA_SCORING,
-        modelProvider: "OPENAI",
-        modelName,
-        promptKey: PROMPT_KEYS.TDA_SCORING_V1,
-        inputContext: {
-          gradeLevel,
-          essayWordCount: tokenizeWords(essay).length,
-          promptLength: prompt.length,
-          passageLength: passage.length,
-          rubricKey: "pssa-tda-4point",
-          exemplarGrade: gradeLevel,
-        },
-      },
-      async () => {
+    const response = await recordTdaScoringDecision({
+      modelName,
+      gradeLevel,
+      essayWordCount: tokenizeWords(essay).length,
+      promptLength: prompt.length,
+      passageLength: passage.length,
+      exemplarGrade: gradeLevel,
+      run: async () => {
         const started = Date.now();
         const completion = await openai.chat.completions.create({
           model: modelName,
@@ -99,7 +89,7 @@ export async function gradeTdaEssay({
           },
         };
       },
-    );
+    });
     const parsed = JSON.parse(response.choices[0]?.message?.content || "{}");
     const score = clampScore(parsed.score);
     const result: EssayGradeResult = {

@@ -4,13 +4,15 @@ import type { Prisma } from "@prisma/client";
 import type { LearningPathItemInput } from "@/lib/learningPath";
 import { logAiFailure } from "@/lib/aiTelemetry";
 import { db } from "@/lib/db";
-import { DECISION_TYPES } from "@/lib/decisions/decisionTypes";
-import { persistModelDecision, recordModelDecision } from "@/lib/decisions/withModelDecisionLogging";
+import {
+  captureDistractorGenerationDecision,
+  captureHeroVideoMatchDecision,
+  recordDistractorCriticDecision,
+} from "@/lib/decisions/instrumentedCallLogging";
 import { attachGeneratedImagesToLessons } from "@/lib/lessonImageGeneration";
 import { evaluateLessonQuality, getLessonQualityBlueprint } from "@/lib/lessonQualityBlueprint";
 import { buildLessonVisualMetadata } from "@/lib/lessonVisuals";
 import { buildPrebuiltLessonSeeds } from "@/lib/prebuiltLessonLibrary";
-import { PROMPT_KEYS } from "@/lib/prompts/registry";
 import { pssaLessonExemplars } from "@/lib/pssaLessonExemplars";
 
 type ResourceLike = {
@@ -261,27 +263,21 @@ export async function buildLearningLessons({
         },
       ],
     }, { timeout: 60_000 });
-    const generationDecisionId = await persistModelDecision(
-      {
-        decisionType: DECISION_TYPES.DISTRACTOR_GENERATION,
-        modelProvider: "OPENAI",
-        modelName,
-        promptKey: PROMPT_KEYS.LESSON_DISTRACTOR_GENERATION_V1,
-        inputContext: {
-          gradeLevel,
-          lessonCount: lessonsNeedingAi.length,
-          standardCodes: lessonsNeedingAi.map((lesson) => lesson.standardCode),
-          skills: lessonsNeedingAi.map((lesson) => lesson.skill),
-        },
-      },
-      response,
-      {
+    const generationCapture = await captureDistractorGenerationDecision({
+      modelName,
+      gradeLevel,
+      lessonCount: lessonsNeedingAi.length,
+      standardCodes: lessonsNeedingAi.map((lesson) => lesson.standardCode),
+      skills: lessonsNeedingAi.map((lesson) => lesson.skill),
+      output: response,
+      metadata: {
         inferenceMs: Date.now() - generationStartedAt,
         inputTokens: response.usage?.prompt_tokens,
         outputTokens: response.usage?.completion_tokens,
         costUsd: estimateOpenAiCost(modelName, response.usage?.prompt_tokens || 0, response.usage?.completion_tokens || 0),
       },
-    );
+    });
+    const generationDecisionId = generationCapture.decisionId;
 
     const raw = response.choices[0]?.message?.content || "{}";
     const parsed = JSON.parse(raw) as { lessons?: Partial<LearningLessonBuild>[] };
@@ -394,27 +390,18 @@ async function findHeroResourceForLesson(lesson: Pick<LearningLessonBuild, "grad
     : [];
   const skillFallback = skillCandidates.find((resource) => hasSkillKeywordOverlap(resource.skill, skillTokens));
   const match = exact || standardFallback || skillFallback || null;
-  void persistModelDecision(
-    {
-      decisionType: DECISION_TYPES.HERO_VIDEO_MATCH,
-      modelProvider: "HEURISTIC",
-      modelName: "resource-link-token-overlap-v1",
-      promptKey: PROMPT_KEYS.HERO_VIDEO_MATCH_HEURISTIC_V1,
-      inputContext: {
-        gradeLevel: lesson.gradeLevel,
-        standardCode: lesson.standardCode,
-        skill: lesson.skill,
-        candidateCount: candidates.length + skillCandidates.length,
-      },
-    },
-    {
+  void captureHeroVideoMatchDecision({
+    gradeLevel: lesson.gradeLevel,
+    standardCode: lesson.standardCode,
+    skill: lesson.skill,
+    candidateCount: candidates.length + skillCandidates.length,
+    output: {
       matched: Boolean(match),
       resourceLinkId: match?.id || null,
       provider: match?.provider || null,
       tier: match?.tier || null,
     },
-    { inferenceMs: 0, costUsd: 0 },
-  );
+  });
   if (!match) {
     const scope = candidates.length || skillCandidates.length ? "learningLessons.no_confident_hero" : "learningLessons.no_resource_link";
     logAiFailure({
@@ -536,27 +523,20 @@ async function selfCritiqueLesson(openai: OpenAI, lesson: LearningLessonBuild, d
   if (!lesson.steps?.length || Date.now() - generationStartedAt > 50_000) return lesson;
   try {
     const modelName = process.env.OPENAI_LESSON_MODEL || process.env.OPENAI_LEARNING_PATH_MODEL || "gpt-4o-mini";
-    const response = await recordModelDecision(
-      {
-        decisionType: DECISION_TYPES.DISTRACTOR_CRITIC,
-        modelProvider: "OPENAI",
-        modelName,
-        promptKey: PROMPT_KEYS.LESSON_DISTRACTOR_CRITIC_V1,
-        parentDecisionId,
-        inputContext: {
-          gradeLevel: lesson.gradeLevel,
-          standardCode: lesson.standardCode,
-          skill: lesson.skill,
-          stepCount: lesson.steps?.length || 0,
-          practiceCounts: {
-            guided: lesson.guidedPractice.length,
-            independent: lesson.independentPractice.length,
-            exit: lesson.exitTicket.length,
-            mastery: lesson.masteryCheck.length,
-          },
-        },
+    const response = await recordDistractorCriticDecision({
+      modelName,
+      parentDecisionId,
+      gradeLevel: lesson.gradeLevel,
+      standardCode: lesson.standardCode,
+      skill: lesson.skill,
+      stepCount: lesson.steps?.length || 0,
+      practiceCounts: {
+        guided: lesson.guidedPractice.length,
+        independent: lesson.independentPractice.length,
+        exit: lesson.exitTicket.length,
+        mastery: lesson.masteryCheck.length,
       },
-      async () => {
+      run: async () => {
         const started = Date.now();
         const completion = await openai.chat.completions.create({
           model: modelName,
@@ -594,7 +574,7 @@ async function selfCritiqueLesson(openai: OpenAI, lesson: LearningLessonBuild, d
           },
         };
       },
-    );
+    });
     const parsed = JSON.parse(response.choices[0]?.message?.content || "{}");
     if (parsed.status === "approved") return lesson;
     const revisions = Array.isArray(parsed.revisions) ? parsed.revisions : Array.isArray(parsed.steps) ? parsed.steps : [];
