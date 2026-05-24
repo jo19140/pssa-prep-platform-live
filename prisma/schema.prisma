@@ -93,6 +93,7 @@ model User {
   processedDataSubjectRequests DataSubjectRequest[] @relation("DSRProcessor")
   literacyProfile LiteracyProfile?
   stateRequests StateRequests[]
+  voiceConsent VoiceConsent? @relation("StudentConsent")
 }
 
 model PendingStudentSignup {
@@ -809,11 +810,131 @@ model VoiceSession {
   wpm                 Int?
   retentionTier       String          @default("SERVICE")
   deleteAfterDate     DateTime?
+  audioDeletedAt      DateTime?
+  asrVendor           String?
+  asrModelVersion     String?
+  asrConfidenceMean   Float?
   literacyProfile     LiteracyProfile @relation(fields: [literacyProfileId], references: [id], onDelete: Cascade)
+  labeledSegments     LabeledVoiceSegment[]
 
   @@index([literacyProfileId, startedAt])
   @@index([sessionType, startedAt])
   @@index([deleteAfterDate])
+  @@index([audioDeletedAt])
+}
+
+model VoiceConsent {
+  id                            String                 @id @default(cuid())
+  studentUserId                 String                 @unique
+  serviceAudioRetained          Boolean                @default(true)
+  serviceAudioRetentionDays     Int                    @default(90)
+  trainingCorpusOptedIn         Boolean                @default(false)
+  trainingCorpusOptedInAt       DateTime?
+  trainingCorpusOptedOutAt      DateTime?
+  researchPublicationOptedIn    Boolean                @default(false)
+  researchPublicationOptedInAt  DateTime?
+  consentTextVersion            String
+  consentLastUpdatedAt          DateTime               @default(now())
+  consentLastUpdatedByUserId    String?
+  trainingPurgeRequestedAt      DateTime?
+  trainingPurgeExpectedBy       DateTime?
+  createdAt                     DateTime               @default(now())
+  student                       User                   @relation("StudentConsent", fields: [studentUserId], references: [id], onDelete: Cascade)
+  decisionLog                   VoiceConsentDecision[]
+
+  @@index([trainingCorpusOptedIn])
+}
+
+model VoiceConsentDecision {
+  id                 String       @id @default(cuid())
+  voiceConsentId     String
+  changeType         String
+  previousValue      Json?
+  newValue           Json
+  consentTextVersion String
+  ipAddress          String?
+  userAgent          String?
+  changedByUserId    String?
+  createdAt          DateTime     @default(now())
+  voiceConsent       VoiceConsent @relation(fields: [voiceConsentId], references: [id], onDelete: Cascade)
+
+  @@index([voiceConsentId, createdAt])
+}
+
+model LabeledVoiceSegment {
+  id                 String       @id @default(cuid())
+  voiceSessionId     String
+  segmentStartMs     Int
+  segmentEndMs       Int
+  segmentAudioKey    String?
+  expectedText       String       @db.Text
+  asrTranscript      String       @db.Text
+  humanTranscript    String?      @db.Text
+  miscueType         String?
+  phonogramCode      String?
+  syllableType       SyllableType?
+  dialectTransferTag String?
+  uncertaintyScore   Float?
+  routedFromQueue    Boolean      @default(false)
+  skippedAt          DateTime?
+  skippedByUserId    String?
+  skipReason         String?      @db.Text
+  labeledByUserId    String?
+  labeledAt          DateTime?
+  labelerNotes       String?      @db.Text
+  isEvalSet          Boolean      @default(false)
+  qaParentSegmentId  String?
+  createdAt          DateTime     @default(now())
+  voiceSession       VoiceSession @relation(fields: [voiceSessionId], references: [id], onDelete: Cascade)
+
+  @@index([voiceSessionId, segmentStartMs])
+  @@index([labeledAt])
+  @@index([miscueType])
+  @@index([isEvalSet])
+  @@index([uncertaintyScore])
+}
+
+model TrainingCorpusBatch {
+  id                    String   @id @default(cuid())
+  batchName             String   @unique
+  exportPurpose         String
+  segmentCount          Int
+  totalDurationMs       Int
+  manifestStorageKey    String
+  exportedAt            DateTime @default(now())
+  exportedByUserId      String
+  minimumConsentVersion String
+  excludedSegmentCount  Int      @default(0)
+  manifestJsonl         String   @db.Text
+  notes                 String?  @db.Text
+
+  @@index([exportPurpose, exportedAt])
+}
+
+model VoiceAudioDeletionLog {
+  id                String   @id @default(cuid())
+  voiceSessionId    String?
+  studentUserId     String?
+  audioStorageKey   String
+  deletionReason    String
+  triggeredByUserId String?
+  deletedAt         DateTime @default(now())
+
+  @@index([studentUserId, deletedAt])
+  @@index([deletedAt])
+}
+
+model VoiceAudioAccessLog {
+  id              String   @id @default(cuid())
+  voiceSessionId  String?
+  segmentId       String?
+  accessedById    String
+  accessPurpose   String
+  createdAt       DateTime @default(now())
+
+  @@index([voiceSessionId, createdAt])
+  @@index([segmentId, createdAt])
+  @@index([accessedById, createdAt])
 }
 
 model ResourceLink {

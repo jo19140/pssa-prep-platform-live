@@ -60,6 +60,8 @@ export default async function middleware(req: Request & { nextUrl: URL; url: str
     response = NextResponse.redirect(new URL("/login", req.url));
   } else if (awaitingConsent && pathname.startsWith("/student") && pathname !== "/student/awaiting-consent") {
     response = NextResponse.redirect(new URL("/student/awaiting-consent", req.url));
+  } else if (pathname.startsWith("/admin/voice/labeling") && role !== "ADMIN" && role !== "VOICE_ANNOTATOR") {
+    response = NextResponse.redirect(new URL("/login", req.url));
   } else if (pathname.startsWith("/admin") && role !== "ADMIN") {
     response = NextResponse.redirect(new URL("/login", req.url));
   } else if (pathname.startsWith("/teacher") && role !== "TEACHER" && role !== "ADMIN") {
