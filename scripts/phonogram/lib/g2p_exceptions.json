@@ -1,0 +1,56 @@
+[
+  {
+    "word": "colonel",
+    "phonemes_arpabet": ["K", "ER1", "N", "AH0", "L"],
+    "alignment": [
+      {"graphemes": "col", "phonemes_arpabet": ["K", "ER1"], "phonemes_ipa": ["k", "ɝː"]},
+      {"graphemes": "on", "phonemes_arpabet": ["N"], "phonemes_ipa": ["n"]},
+      {"graphemes": "el", "phonemes_arpabet": ["AH0", "L"], "phonemes_ipa": ["ə", "l"]}
+    ]
+  },
+  {
+    "word": "one",
+    "phonemes_arpabet": ["W", "AH1", "N"],
+    "alignment": [
+      {"graphemes": "o", "phonemes_arpabet": ["W", "AH1"], "phonemes_ipa": ["w", "ʌ"]},
+      {"graphemes": "ne", "phonemes_arpabet": ["N"], "phonemes_ipa": ["n"]}
+    ]
+  },
+  {
+    "word": "two",
+    "phonemes_arpabet": ["T", "UW1"],
+    "alignment": [
+      {"graphemes": "t", "phonemes_arpabet": ["T"], "phonemes_ipa": ["t"]},
+      {"graphemes": "wo", "phonemes_arpabet": ["UW1"], "phonemes_ipa": ["uː"]}
+    ]
+  },
+  {
+    "word": "women",
+    "phonemes_arpabet": ["W", "IH1", "M", "AH0", "N"],
+    "alignment": [
+      {"graphemes": "wo", "phonemes_arpabet": ["W", "IH1"], "phonemes_ipa": ["w", "ɪ"]},
+      {"graphemes": "m", "phonemes_arpabet": ["M"], "phonemes_ipa": ["m"]},
+      {"graphemes": "en", "phonemes_arpabet": ["AH0", "N"], "phonemes_ipa": ["ə", "n"]}
+    ]
+  },
+  {
+    "word": "said",
+    "phonemes_arpabet": ["S", "EH1", "D"],
+    "alignment": [
+      {"graphemes": "s", "phonemes_arpabet": ["S"], "phonemes_ipa": ["s"]},
+      {"graphemes": "ai", "phonemes_arpabet": ["EH1"], "phonemes_ipa": ["ɛ"]},
+      {"graphemes": "d", "phonemes_arpabet": ["D"], "phonemes_ipa": ["d"]}
+    ]
+  },
+  {
+    "word": "island",
+    "phonemes_arpabet": ["AY1", "L", "AH0", "N", "D"],
+    "alignment": [
+      {"graphemes": "i", "phonemes_arpabet": ["AY1"], "phonemes_ipa": ["aɪ"]},
+      {"graphemes": "s", "phonemes_arpabet": [], "phonemes_ipa": []},
+      {"graphemes": "l", "phonemes_arpabet": ["L"], "phonemes_ipa": ["l"]},
+      {"graphemes": "a", "phonemes_arpabet": ["AH0"], "phonemes_ipa": ["ə"]},
+      {"graphemes": "nd", "phonemes_arpabet": ["N", "D"], "phonemes_ipa": ["n", "d"]}
+    ]
+  }
+]

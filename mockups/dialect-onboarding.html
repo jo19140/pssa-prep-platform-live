@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Onboarding · home language + dialect</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', system-ui, -apple-system, Arial, sans-serif; }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 min-h-screen">
+
+  <header class="border-b border-slate-200 bg-white">
+    <div class="max-w-4xl mx-auto px-6 py-3 flex items-center justify-between">
+      <a href="index.html" class="text-sm text-slate-500 hover:text-slate-900">← All mockups</a>
+      <div class="text-sm font-semibold">Onboarding · dialect / L1 awareness</div>
+      <span class="text-xs px-2 py-1 rounded-full bg-amber-100 text-amber-800 font-medium">Mockup</span>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-6 py-8 space-y-8">
+
+    <div class="bg-white border border-slate-200 rounded-2xl p-5">
+      <h2 class="font-bold text-lg mb-1">Dialect &amp; home-language onboarding · the sensitive UX</h2>
+      <p class="text-sm text-slate-600">
+        Powered by the cross-language sound-spelling transfer charts and AAE linguistic differences guide in your uploaded references. The product purpose: when a kid pronounces "tooth" as "toof" (AAE) or "sheep" as "cheep" (Spanish-influenced phonology), the diagnostic should <strong>not</strong> count that as a decoding error. Most reading platforms either ignore dialect entirely or try to "correct" it. We do neither — we listen the right way.
+      </p>
+      <p class="text-xs text-slate-500 mt-2 italic">Every step below is skip-able. Default state if the family skips everything: the program assumes mainstream-American English phonology and notes when a session has many systematic pronunciations that suggest a dialect, prompting the family to come back here.</p>
+    </div>
+
+    <!-- STEP 1: WHY WE ASK -->
+    <section class="bg-white border border-slate-200 rounded-2xl overflow-hidden">
+      <div class="bg-indigo-700 text-white px-6 py-2 text-xs font-semibold tracking-wide uppercase">Step 1 of 4 · why we're asking</div>
+      <div class="p-8 md:p-10">
+        <div class="grid md:grid-cols-5 gap-6 items-center">
+          <div class="md:col-span-3">
+            <div class="text-3xl mb-3">👂</div>
+            <h2 class="text-2xl font-bold mb-3">Help us listen the right way</h2>
+            <p class="text-slate-700 leading-relaxed mb-4">
+              When the program listens to your child read, the way certain sounds get pronounced depends on the languages and dialects spoken at home. We want to know about those so we don't accidentally mark something as a "mistake" when it's actually a perfectly correct sound from your family's way of speaking.
+            </p>
+            <p class="text-slate-700 leading-relaxed">
+              You can skip any of this. If you do, we'll just listen with standard American English ears, and you can come back anytime.
+            </p>
+          </div>
+          <div class="md:col-span-2 bg-emerald-50 border border-emerald-200 rounded-2xl p-5 text-sm">
+            <div class="text-xs font-semibold text-emerald-700 uppercase mb-2">Example</div>
+            <p class="text-emerald-900">If your child says <strong>"toof"</strong> for <em>tooth</em>, that's a perfectly normal sound in African American English. We'd notice the systematic pattern and not count it against their decoding.</p>
+            <p class="text-emerald-900 mt-3">If your child says <strong>"cheep"</strong> for <em>sheep</em>, that's expected when Spanish is the home language. Same idea.</p>
+          </div>
+        </div>
+        <div class="mt-8 flex items-center justify-between">
+          <button class="text-sm text-slate-500 hover:text-slate-900">Skip all of this — listen with default ears</button>
+          <div class="flex gap-2">
+            <button class="bg-white border border-slate-200 hover:border-slate-400 px-4 py-2 rounded-lg text-sm">Maybe later</button>
+            <button class="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2 rounded-lg text-sm font-semibold">Continue →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STEP 2: HOME LANGUAGES -->
+    <section class="bg-white border border-slate-200 rounded-2xl overflow-hidden">
+      <div class="bg-indigo-700 text-white px-6 py-2 text-xs font-semibold tracking-wide uppercase">Step 2 of 4 · languages spoken at home</div>
+      <div class="p-8 md:p-10">
+        <h2 class="text-xl font-bold mb-1">Which languages do you speak at home?</h2>
+        <p class="text-sm text-slate-500 mb-5">Pick all that apply. There's no wrong answer.</p>
+
+        <div class="grid md:grid-cols-3 gap-3">
+          <button class="border-2 border-indigo-500 bg-indigo-50 rounded-xl p-4 text-left">
+            <div class="flex items-center justify-between">
+              <div class="font-semibold">English</div>
+              <span class="w-5 h-5 bg-indigo-600 text-white rounded text-xs flex items-center justify-center">✓</span>
+            </div>
+            <div class="text-xs text-slate-500 mt-1">Selected by default</div>
+          </button>
+          <button class="border-2 border-indigo-500 bg-indigo-50 rounded-xl p-4 text-left">
+            <div class="flex items-center justify-between">
+              <div class="font-semibold">Spanish · Español</div>
+              <span class="w-5 h-5 bg-indigo-600 text-white rounded text-xs flex items-center justify-center">✓</span>
+            </div>
+            <div class="text-xs text-slate-500 mt-1">Sound transfer ready</div>
+          </button>
+          <button class="border-2 border-slate-200 hover:border-indigo-300 rounded-xl p-4 text-left">
+            <div class="font-semibold">Vietnamese · Tiếng Việt</div>
+            <div class="text-xs text-slate-500 mt-1">Sound transfer ready</div>
+          </button>
+          <button class="border-2 border-slate-200 hover:border-indigo-300 rounded-xl p-4 text-left">
+            <div class="font-semibold">Hmong</div>
+            <div class="text-xs text-slate-500 mt-1">Sound transfer ready</div>
+          </button>
+          <button class="border-2 border-slate-200 hover:border-indigo-300 rounded-xl p-4 text-left">
+            <div class="font-semibold">Cantonese · 廣東話</div>
+            <div class="text-xs text-slate-500 mt-1">Sound transfer ready</div>
+          </button>
+          <button class="border-2 border-slate-200 hover:border-indigo-300 rounded-xl p-4 text-left">
+            <div class="font-semibold">Mandarin · 普通話</div>
+            <div class="text-xs text-slate-500 mt-1">Sound transfer ready</div>
+          </button>
+          <button class="border-2 border-slate-200 hover:border-indigo-300 rounded-xl p-4 text-left">
+            <div class="font-semibold">Arabic · العربية</div>
+            <div class="text-xs text-slate-500 mt-1">Sound transfer ready</div>
+          </button>
+          <button class="border-2 border-slate-200 hover:border-indigo-300 rounded-xl p-4 text-left">
+            <div class="font-semibold">Tagalog · Filipino</div>
+            <div class="text-xs text-slate-500 mt-1">Sound transfer ready</div>
+          </button>
+          <button class="border-2 border-slate-200 hover:border-indigo-300 rounded-xl p-4 text-left">
+            <div class="font-semibold">Another language</div>
+            <div class="text-xs text-slate-500 mt-1">Tell us in your own words</div>
+          </button>
+        </div>
+
+        <details class="mt-6">
+          <summary class="text-sm text-slate-500 cursor-pointer hover:text-slate-900">What does "Sound transfer ready" mean?</summary>
+          <p class="mt-2 text-sm text-slate-600 max-w-3xl">
+            For these languages, we have a published reference chart that tells us which English sounds typically transfer from the home language and which need extra practice. We use that chart to listen more accurately during your child's reading sessions. Languages not listed will fall back to default English ears — you can still pick them, we just won't have the same custom listening.
+          </p>
+        </details>
+
+        <div class="mt-8 flex items-center justify-between">
+          <button class="text-sm text-slate-500 hover:text-slate-900">← Back</button>
+          <div class="flex gap-2">
+            <button class="text-sm text-slate-500 hover:text-slate-900 px-3 py-2">Skip this step</button>
+            <button class="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2 rounded-lg text-sm font-semibold">Continue →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STEP 3: REGIONAL/DIALECT FEATURES -->
+    <section class="bg-white border border-slate-200 rounded-2xl overflow-hidden">
+      <div class="bg-indigo-700 text-white px-6 py-2 text-xs font-semibold tracking-wide uppercase">Step 3 of 4 · how your family talks</div>
+      <div class="p-8 md:p-10">
+        <h2 class="text-xl font-bold mb-1">Anything else we should know about how you talk?</h2>
+        <p class="text-sm text-slate-500 mb-5">This is optional. We ask because regional and community ways of speaking are real and beautiful — and we want to recognize them, not flatten them.</p>
+
+        <div class="grid md:grid-cols-2 gap-3">
+          <button class="border-2 border-slate-200 hover:border-indigo-300 rounded-xl p-5 text-left">
+            <div class="font-semibold">African American English</div>
+            <div class="text-xs text-slate-500 mt-1">Sometimes called AAE or AAVE. Patterns like "wif" for <em>with</em>, "axe" for <em>ask</em>, dropping <em>is</em> in "she my sister."</div>
+            <div class="mt-3 text-xs text-emerald-700 font-semibold">Listening pattern available</div>
+          </button>
+          <button class="border-2 border-slate-200 hover:border-indigo-300 rounded-xl p-5 text-left">
+            <div class="font-semibold">Southern American English</div>
+            <div class="text-xs text-slate-500 mt-1">Vowel shifts, "y'all," and other Southern features.</div>
+            <div class="mt-3 text-xs text-emerald-700 font-semibold">Listening pattern available</div>
+          </button>
+          <button class="border-2 border-slate-200 hover:border-indigo-300 rounded-xl p-5 text-left">
+            <div class="font-semibold">Chicano / Mexican-American English</div>
+            <div class="text-xs text-slate-500 mt-1">English influenced by Mexican-American Spanish, especially in the Southwest.</div>
+            <div class="mt-3 text-xs text-emerald-700 font-semibold">Listening pattern available</div>
+          </button>
+          <button class="border-2 border-slate-200 hover:border-indigo-300 rounded-xl p-5 text-left">
+            <div class="font-semibold">Caribbean English</div>
+            <div class="text-xs text-slate-500 mt-1">Jamaican, Haitian, Trinidadian, or other Caribbean-influenced English.</div>
+            <div class="mt-3 text-xs text-emerald-700 font-semibold">Listening pattern available</div>
+          </button>
+          <button class="border-2 border-slate-200 hover:border-indigo-300 rounded-xl p-5 text-left">
+            <div class="font-semibold">Something else</div>
+            <div class="text-xs text-slate-500 mt-1">Tell us about a regional, community, or family way of speaking we haven't listed.</div>
+            <div class="mt-3 text-xs text-slate-500 italic">We'll learn from what you share.</div>
+          </button>
+          <button class="border-2 border-slate-200 hover:border-indigo-300 rounded-xl p-5 text-left">
+            <div class="font-semibold">No, just standard American English</div>
+            <div class="text-xs text-slate-500 mt-1">That's fine — most families pick this.</div>
+          </button>
+        </div>
+
+        <div class="mt-6 bg-amber-50 border border-amber-200 rounded-xl p-4 text-sm">
+          <div class="font-semibold text-amber-900 mb-1">What we're <em>not</em> doing</div>
+          <ul class="text-amber-900 space-y-1 list-disc pl-5">
+            <li>We're not asking about your race or ethnicity. This is only about how you talk at home.</li>
+            <li>We're not going to teach your child their way of talking is wrong. It isn't.</li>
+            <li>We <em>will</em> teach them how mainstream-school English works, because that's what tests are written in — but as an addition, not a replacement.</li>
+          </ul>
+        </div>
+
+        <div class="mt-8 flex items-center justify-between">
+          <button class="text-sm text-slate-500 hover:text-slate-900">← Back</button>
+          <div class="flex gap-2">
+            <button class="text-sm text-slate-500 hover:text-slate-900 px-3 py-2">Skip this step</button>
+            <button class="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2 rounded-lg text-sm font-semibold">Continue →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STEP 4: CONFIRMATION -->
+    <section class="bg-white border border-slate-200 rounded-2xl overflow-hidden">
+      <div class="bg-emerald-600 text-white px-6 py-2 text-xs font-semibold tracking-wide uppercase">Step 4 of 4 · here's what we'll do with this</div>
+      <div class="p-8 md:p-10">
+        <div class="text-3xl mb-3">✅</div>
+        <h2 class="text-2xl font-bold mb-3">Got it. Here's how the program will listen for Maya.</h2>
+
+        <div class="bg-slate-50 rounded-2xl p-5 mb-6">
+          <div class="text-xs font-semibold text-slate-500 uppercase mb-3">Listening settings · Maya</div>
+          <ul class="space-y-2 text-sm">
+            <li class="flex items-start gap-3">
+              <span class="text-emerald-600">✓</span>
+              <div><strong>Home languages:</strong> English, Spanish · the program will recognize Spanish-influenced English pronunciation as expected, not as decoding errors.</div>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-emerald-600">✓</span>
+              <div><strong>Regional/community speech:</strong> none specified · default American English listening.</div>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-emerald-600">✓</span>
+              <div><strong>What we'll teach:</strong> all 6 literacy strands · plus explicit instruction on the mainstream-school sounds that don't transfer from Spanish (like /sh/, /v/, short-i), so Maya knows them when she sees them on tests.</div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-sm text-indigo-900 mb-6">
+          <strong>You can change this anytime.</strong> Settings → Listening settings. If we notice Maya consistently produces a sound pattern that suggests a dialect we didn't know about, we'll quietly ask you about it — never assume.
+        </div>
+
+        <div class="flex items-center justify-between">
+          <button class="text-sm text-slate-500 hover:text-slate-900">← Back to edit</button>
+          <button class="bg-emerald-600 hover:bg-emerald-700 text-white px-7 py-3 rounded-2xl font-semibold">Start Maya's reading →</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- NOTES -->
+    <section class="bg-slate-900 text-slate-100 rounded-2xl p-6">
+      <h3 class="font-semibold mb-3 text-base">Design notes · the high-risk UX</h3>
+      <ul class="text-sm text-slate-300 space-y-2 list-disc pl-5">
+        <li><strong class="text-white">Why this matters commercially.</strong> Most reading platforms silently mismark dialect-using kids and quietly inflate their "decoding gap." A platform that does this right is rare in this market. It is a major B2B-to-urban-districts differentiator AND an emotional differentiator with parents of color who have watched their kids be misdiagnosed for years.</li>
+        <li><strong class="text-white">Why this is dangerous if done wrong.</strong> The wrong copy here looks like the product is asking about race or treating non-mainstream English as a deficiency to correct. The Step 3 amber box ("what we're NOT doing") is non-negotiable — it answers the worry before it forms.</li>
+        <li><strong class="text-white">Skip is a first-class option at every step.</strong> Buttons: "Skip all of this," "Maybe later," "Skip this step." A family that doesn't want to answer never has to. The product still works.</li>
+        <li><strong class="text-white">"Sound transfer ready" badge.</strong> Honest about which languages we have research-backed listening patterns for vs. which fall back to defaults. The four uploaded reference languages (Spanish, Vietnamese, Hmong, Cantonese) plus expansion list — we don't claim coverage we don't have.</li>
+        <li><strong class="text-white">No race or ethnicity questions, ever.</strong> The product asks about <em>how you talk</em>, not <em>who you are</em>. AAE is a linguistic category, not a racial one — there are speakers from many backgrounds. Step 3's prompt language is deliberate.</li>
+        <li><strong class="text-white">"We will teach mainstream-school English."</strong> Step 3's amber box names the asymmetry: the product respects the home dialect, AND teaches the school dialect explicitly because tests are written in it. This is the only honest position; pretending tests don't exist is a disservice.</li>
+        <li><strong class="text-white">Quiet pattern-detection backstop.</strong> Step 4's last paragraph promises: if the program notices systematic dialect features the family didn't disclose, it asks gently. Never auto-applies a dialect setting based on inference — that crosses a line.</li>
+        <li><strong class="text-white">School deployment behavior.</strong> When a school administers the product, the dialect onboarding should appear in the parent-facing app, not the school-admin app. Teachers should not be setting dialect for students — only families should.</li>
+        <li><strong class="text-white">Inspired directly by the uploaded SEL glossary PDF.</strong> The cross-language sound-spelling transfer charts (English ↔ Spanish/Vietnamese/Hmong/Cantonese) and the AAE linguistic differences guide are the substantive backing for the listening patterns this flow enables.</li>
+      </ul>
+    </section>
+
+    <div class="flex justify-between pt-2">
+      <a href="speed-drill.html" class="text-sm text-slate-500 hover:text-slate-900">← Speed drill</a>
+      <a href="index.html" class="text-sm text-indigo-700 hover:text-indigo-900 font-semibold">All mockups</a>
+    </div>
+  </main>
+</body>
+</html>

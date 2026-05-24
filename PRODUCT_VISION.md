@@ -1,101 +1,140 @@
 # Product Vision
 
-## Direction
+## Company
 
-This product is becoming an AI-powered mastery and intervention platform for grades 3-8. Its core job is to diagnose what a student understands, identify priority gaps and misconceptions, generate a personalized standards-based learning path, and help an adult guide the next intervention.
+**Sýnesis Learning** (display: **Sýnesis**, pronounced "SIN-eh-sis", tagline "Learning Woven Together") is an AI-powered literacy intervention and mastery platform for grades K-8. The company's flagship product is **Reading Buddy**, a voice-first reading intervention program. Pennsylvania PSSA test prep — the work this codebase originally shipped — continues as one **Test Prep** module under the Sýnesis umbrella.
 
-The existing Pennsylvania PSSA work remains valuable. It should be treated as the first state-specific standards and assessment implementation, not as the whole product identity.
+The repository folder is still named `pssa-prep-platform-live` for legacy reasons. The product identity is Sýnesis. The product name on new surfaces is Sýnesis; the program name on the literacy surfaces is Reading Buddy. PSSA prep is a sibling module to Reading Buddy, not the parent.
 
-## Positioning
+## Product Family
 
-The product should be positioned as a standards-based mastery platform for tutors, reading interventionists, learning centers, and families. It uses diagnostics, adaptive practice, AI-generated lessons, progress checks, and clear adult-facing recommendations to move students from gap identification to targeted growth.
+Sýnesis is organized as a family of subject programs under a planetary metaphor:
 
-Avoid presenting the product as only a Pennsylvania PSSA test-prep tool. PSSA language is appropriate inside the Pennsylvania module, PSSA-aligned assessment experiences, rubric references, and state-specific teacher workflows.
+- **Reading Buddy** on **Venus** — literacy intervention. Flagship and the only built program in v1.
+- **Math Buddy** on **Mercury** — math intervention. Future.
+- **Science Buddy** on **Mars** — science. Future.
+- **History/Social Studies Buddy** on **Earth** — future.
+
+Test prep is a separate sibling surface (not a planet), exposed as a dropdown in the global chrome:
+
+- **PSSA** (Pennsylvania) — only currently built module.
+- **STAAR** (Texas), **FSA** (Florida), **MCAS** (Massachusetts) — planned. A "Request your state" lead-capture form writes to `StateRequests` so we learn which states have demand before we build them.
 
 ## Core Product Loop
 
-1. A student takes a standards-aligned diagnostic.
-2. The system identifies mastery, gaps, misconceptions, and priority standards.
-3. AI generates a personalized learning path.
-4. The student receives targeted practice, mini-lessons, explanations, and progress checks.
-5. A teacher, tutor, interventionist, or parent sees growth, mastery, and recommended next interventions.
+1. A student takes a standards-aligned diagnostic, optionally voice-first.
+2. The system places the student on Ehri's four-phase model and produces a 6-strand literacy profile plus a phonogram and syllable-type mastery grid.
+3. An autopilot engine generates a personalized intervention plan and logs every plan change with adult-facing reasoning.
+4. The student practices through reading sessions, speed drills, and voice activities; transcripts and audio are stored with parent visibility and authenticated access.
+5. The teacher, tutor, interventionist, or parent sees growth, autopilot decisions, and what the program will do next, in plain-English copy.
+
+## Pedagogy
+
+Sýnesis's literacy work is grounded in a specific framework (see `memory/reference_phonogram_methodology.md`):
+
+- **Ehri's four phases** of word reading (pre-alphabetic → consolidated alphabetic).
+- **Six syllable types**: closed, open, VCe, vowel team, r-controlled, consonant + le.
+- **Phonogram-by-analogy** decoding.
+- **The 6-strand literacy model**: Phonemic Awareness, Decoding, Morphology, Fluency, Vocabulary, Comprehension.
+
+Adult-facing surfaces lead with Ehri phase placement; Lexile is a supporting tag. Copy uses **"striving readers"**, never "struggling."
+
+## Differentiators
+
+- **Voice-first.** TTS and STT are first-class. v1 uses browser `SpeechSynthesis` and Whisper-backed STT; an interface seam (`lib/voice/tts.ts`) lets us swap to ElevenLabs or similar later without touching components.
+- **Dialect-aware.** Families can opt in to home-language and regional-dialect settings (e.g., AAE, Southern, Chicano, Caribbean). Expected dialect transfers are not counted as reading errors. Dialect is **never auto-detected**, and the product **never collects or infers race or ethnicity**.
+- **Autopilot.** Plan generation and adjustment runs automatically with every decision logged in adult-readable language ("switched to morphology focus because comprehension stalled 3 weeks"). Teachers and parents can see and override.
+- **Buddy character.** A reusable animated companion (`BuddyCharacter` component) with idle/listening/speaking/confused states lives inside the voice surfaces.
+- **PSSA-grade rigor.** The PSSA module — exemplar-grounded items, TEI support, TDA scoring, PA Core mappings — is a credibility anchor and the proof of standards rigor in PA. It is preserved and continues to evolve as a Test Prep module.
+
+## Go-to-Market
+
+Per the trademark filing intake (`branding/trademark-attorney-email.md`):
+
+- **Initial deployment is direct-to-family parent-pay** subscription.
+- **School and district licensing** follows once the product is proven with families.
+- **Pennsylvania customers retain PSSA test-prep functionality** through the transition; the PSSA module is the local distribution hook in PA.
+- **National expansion** as a general literacy product, with additional state test-prep modules added in response to demand signals from `StateRequests`.
+
+This is a different go-to-market than the old PSSA-platform thesis (which was teacher- and classroom-led). Tutors, interventionists, and small learning centers remain a relevant secondary buyer, especially in PA, but the primary commercial wedge is families.
 
 ## Primary Users
 
-The first commercial focus is tutors, reading interventionists, and small learning centers. These users need fast diagnostics, small-group visibility, assignable intervention lessons, evidence of growth, and parent-friendly reporting.
-
-Parents are the second priority. Parent workflows should make student progress understandable, concrete, and actionable without requiring school-system vocabulary.
-
-Schools and districts are a later expansion path. The current classroom, teacher dashboard, roster, scheduled report, and Google Classroom work can support this path, but district procurement should not drive the near-term product shape.
-
-## Product Principles
-
-- Diagnose first, then teach. The platform should always connect instruction and practice to observed evidence from diagnostic performance.
-- Standards are the organizing layer. Assessments, lessons, reports, recommendations, and progress checks should all map back to a standards catalog.
-- PSSA is a module. Pennsylvania PSSA ELA remains the first supported implementation and proof point.
-- Intervention is the product outcome. Dashboards should answer: what does this student need next, why, and how urgent is it?
-- AI should accelerate expert workflows. AI can draft lessons, explanations, practice, and recommendations, but deterministic scoring, answer keys, and audit trails must stay reliable.
-- Adult-facing language should be clear. Tutor, interventionist, and parent views should translate standards data into practical next steps.
+- **Parents (primary).** Subscribed family. The parent surfaces (parent dashboard, parent voice sessions) lead with warm, plain-English summaries and the ability to listen to and delete sessions.
+- **Students (primary).** K-8 readers. Voice and text both supported; the kid does the work.
+- **Teachers and interventionists (secondary).** The literacy monitor and student profile surfaces support school-affiliated adults and tutoring relationships, especially the PA cohort that arrived through PSSA.
+- **Admins.** Existing admin surfaces unchanged.
 
 ## Architecture Direction
 
-Generalize from hardcoded PSSA behavior toward explicit standards and assessment modules:
+The schema already supports the new direction (see `prisma/schema.prisma`). New first-class concepts (per the v1 spec):
 
-- Standards catalogs: define state, subject, grade, standard code, label, domain/strand, skill, prerequisite links, mastery expectations, and parent-friendly explanations.
-- Assessment modules: define blueprint, item types, scoring rules, rubric references, passage rules, timing, style guidance, and released-item references for a specific assessment or state implementation.
-- Diagnostic engine: generate or select items from a requested state, subject, grade, assessment module, and purpose.
-- Mastery model: track mastery, partial mastery, misconceptions, confidence, recency, growth, and intervention priority per standard.
-- Learning path engine: create sequenced lessons, practice, checks, and retests from mastery evidence rather than from a single test identity.
-- Role workflows: support tutor/interventionist caseloads first, then parent-pay flows, then district-scale administration.
+- `LiteracyProfile`, `StrandScore`, `PhonogramFamily`, `PhonogramMastery`, `SyllableTypeMastery`, `DialectSettings`, `VoiceSession`, `AutopilotDecision`.
+- `SynesisProgram` enum (Venus/Mercury/Mars/Earth) and `TestPrepModule` enum (PSSA/STAAR/FSA/MCAS) for module-aware enrollment.
+- `StateRequests` for demand capture on un-built modules.
+- Sýnesis brand chrome (`SynesisHeader`, `ProgramSwitcher`, `TestPrepDropdown`, `MigrationBanner`, `ProgramBreadcrumb`) lives alongside the legacy `AppChromeHeader` — they coexist by route during the soft rebrand.
 
-## Phased Implementation Plan
+The existing PSSA work — `lib/diagnosticGenerator.ts`, `lib/testDesignAgent.ts`, `lib/pssaSamplerPatterns.ts`, `lib/essayGrader.ts`, `lib/pssaTdaExemplars.ts`, `lib/lessonGeneratorV2.ts` and friends, the V2 lesson pipeline with TEI/audio/exemplar grounding — is the PSSA module. It is preserved and continues to evolve. State-specific code should be wrapped in module-aware naming over time, not deleted.
 
-### Phase 1: Keep PSSA, Rename And Reposition
+## Phasing — Where We Actually Are
 
-Rebrand product-level copy away from PSSA-only language while retaining PSSA-specific labels where the user is explicitly creating or taking a Pennsylvania PSSA-aligned assessment. Add neutral product language around standards-based diagnostics, mastery, intervention, learning paths, and growth.
+### Phase 0 — DONE
+- Brand decision: Sýnesis Learning, planetary product family, "Learning Woven Together," domain `synesislearning.com` being secured, trademark clearance in motion.
+- V2 lesson pipeline shipped: PSSA exemplar grounding, TEI items (hot-text, drag-drop, EBSR), self-critique, distractor pedagogy rules, TTS audio, hero video matching, OER catalog.
+- 13 approved mockup screens covering student diagnostic + practice, voice diagnostic + practice, speed drill, dialect onboarding, teacher caseload, teacher student detail, parent dashboard, parent voice sessions, navigation IA.
+- v1 Codex implementation spec drafted: `specs/reading-buddy-v1-codex-spec.md`.
+- v2 content pipeline spec drafted: `specs/v2-content-pipeline-codex-spec.md`.
+- Phonogram pipeline scaffolded under `scripts/phonogram/`.
 
-Recommended work:
+### Phase 1 — IN FLIGHT
+**Reading Buddy v1 chassis** (per `specs/reading-buddy-v1-codex-spec.md`).
+- Schema migrations for literacy models, enums, `StateRequests`, migration-banner flag.
+- Sýnesis global chrome on new routes; legacy PSSA chrome preserved on legacy routes.
+- Voice infrastructure (`lib/voice/tts.ts`, extracted `lib/voice/audioCapture.ts`).
+- The ten new literacy routes wired to placeholder content.
+- Autopilot decision engine skeleton + decision feed.
+- Dialect onboarding flow (skip-at-every-step UX).
+- Parent dashboard + parent voice sessions.
 
-- Rename global metadata, header copy, login copy, README copy, admin headlines, and generic dashboard language.
-- Keep assessment titles like "Grade 6 PSSA ELA Diagnostic" only inside Pennsylvania assessment flows.
-- Add a small concept of the active assessment module, initially `PA_PSSA_ELA`.
-- Audit prompts so product identity says mastery/intervention platform while module prompts can still say PSSA.
+Content generation is explicitly out of scope for v1 — that is the v2 content pipeline.
 
-### Phase 2: Generalize Standards And Diagnostics
+### Phase 2 — NEXT
+**v2 content pipeline** (per `specs/v2-content-pipeline-codex-spec.md`).
+- Phonogram inventory, AWL, SUBTLEX, CMUdict alignment.
+- `PhonogramFamily` seed data generated from pipeline output (not from copyrighted reference PDFs).
+- Literacy-specific quality rubric extension.
 
-Move standards and assessment design out of PA/PSSA-specific generator code into registries or database-backed catalogs. The current `Assessment.state`, `Assessment.subject`, grade, question standards, and learning path fields are a useful start, but the system needs first-class module metadata.
+### Phase 3
+**v3 literacy content generation spec** (TBW).
+- Passage strategy decision (licensed vs. generated vs. hybrid).
+- Tier 2 vocab inventory generation.
+- Decoding items, comprehension probes, phonogram practice item generation.
 
-Recommended work:
+### Phase 4
+**National expansion + product growth.**
+- Parent-pay billing and subscription flows.
+- Full app-wide rebrand from "PSSA Platform" → Sýnesis (separate spec, hard rebrand pass).
+- Additional Test Prep modules driven by `StateRequests` demand (STAAR likely first based on market size).
+- ElevenLabs or comparable production TTS swap.
+- Tier 2+ add-ons in the spec backlog: personalized AI stories, daily SMS to parents, "Read together" parent mode.
 
-- Introduce `StandardsFramework`, `Standard`, and `AssessmentModule` concepts.
-- Replace comma-delimited assignment standards with structured standard references.
-- Split generic diagnostic generation from PSSA-specific blueprint and sampler logic.
-- Support multiple subjects and state frameworks without duplicating learning path logic.
-- Store module provenance on generated assessments, reports, lessons, and rubrics.
+### Phase 5+
+**Additional planets.**
+- Math Buddy / Mercury.
+- Science Buddy / Mars.
+- History / Earth.
 
-### Phase 3: Add Tutor And Interventionist Workflows
+## What Should Not Change
 
-Design the primary workflow around small caseloads and targeted intervention rather than traditional whole-class test prep.
+Do not delete or flatten PSSA-specific work. The PSSA module is a strategic asset: it is the most pedagogically rigorous standards implementation in the codebase, the proof point for state-test rigor, and the PA distribution hook. Reframe and wrap PSSA assets as `TestPrepModule.PSSA`-scoped over time, but treat them as durable.
 
-Recommended work:
+Do not modify the existing `AppChromeHeader.tsx` or the legacy PSSA routes during the soft rebrand. They render on legacy paths; Sýnesis chrome renders on new paths. The two coexist until the dedicated hard-rebrand spec lands.
 
-- Add tutor/interventionist caseload views across students, groups, standards, urgency, and next recommended action.
-- Add intervention planning tools: assign mini-lessons, regroup students by gap, schedule progress checks, and produce parent updates.
-- Add intake diagnostics and retest cycles built for weekly tutoring or intervention sessions.
-- Improve adult-facing explanations of misconceptions, readiness, and intervention priority.
+## Sources of Truth
 
-### Phase 4: Expand To Parent-Pay And Other States
-
-Use the generalized standards and module architecture to add parent subscriptions and additional state implementations.
-
-Recommended work:
-
-- Add parent onboarding, child setup, payment/subscription gates, and home practice flows.
-- Add other state modules by supplying standards catalogs, assessment blueprints, rubric rules, and style references.
-- Add cross-state product reporting that still preserves state-specific assessment language.
-- Build packaging for tutors, learning centers, and families before district-scale procurement.
-
-## What Should Not Change Yet
-
-Do not delete or flatten PSSA-specific work. Files such as PSSA sampler patterns, PSSA ELA design rules, TDA rubric logic, PA Core standard mappings, and existing PSSA demo data are current assets. They should be renamed or wrapped only when the architecture is ready to support multiple modules cleanly.
-
+- **Brand:** `memory/project_synesis_brand_decision.md`, `branding/`, `branding/trademark-attorney-email.md`.
+- **Pedagogy:** `memory/reference_phonogram_methodology.md`.
+- **Design:** `mockups/index.html` and the linked screens (the dark "Design notes for review" panels are spec material, not flavor text).
+- **v1 implementation:** `specs/reading-buddy-v1-codex-spec.md`.
+- **v2 content pipeline:** `specs/v2-content-pipeline-codex-spec.md`.
+- **Agent rules:** `AGENTS.md`.
