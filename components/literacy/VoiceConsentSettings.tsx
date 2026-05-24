@@ -16,16 +16,16 @@ export function VoiceConsentSettings({ studentUserId, consent }: { studentUserId
     const payload = await response.json();
     if (response.ok) {
       setState(payload.consent);
-      setMessage("Voice settings saved.");
+      setMessage("Data settings saved.");
     } else {
-      setMessage(payload.error || "Could not save voice settings.");
+      setMessage(payload.error || "Could not save data settings.");
     }
   }
   return (
     <main className="mx-auto max-w-4xl space-y-6 px-4 py-8">
       <div>
         <p className="text-sm font-bold uppercase tracking-wide text-emerald-700">Reading Buddy on Venus</p>
-        <h1 className="mt-2 text-3xl font-black text-slate-950">Voice settings</h1>
+        <h1 className="mt-2 text-3xl font-black text-slate-950">Data settings</h1>
       </div>
       <VoiceConsentExplainerCard />
       <section className="space-y-4 rounded-md border border-slate-200 bg-white p-5">
@@ -49,9 +49,30 @@ export function VoiceConsentSettings({ studentUserId, consent }: { studentUserId
           </div>
         </div>
       </section>
+      <section className="space-y-4 rounded-md border border-slate-200 bg-white p-5">
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <h2 className="font-black text-slate-950">Keep learning events for service use</h2>
+            <p className="mt-1 text-sm text-slate-600">Default on. This keeps answer, lesson, and progress signals briefly so the platform can support mastery and growth.</p>
+          </div>
+          <button onClick={() => save({ generalDataRetained: !state.generalDataRetained })} className="rounded-md bg-slate-950 px-4 py-2 text-sm font-bold text-white">
+            {state.generalDataRetained ? "On" : "Off"}
+          </button>
+        </div>
+        <div>
+          <p className="text-sm font-bold text-slate-700">Retention</p>
+          <div className="mt-2 flex gap-2">
+            {[30, 60, 90].map((days) => (
+              <button key={days} onClick={() => save({ generalDataRetentionDays: days })} className={`rounded-md px-3 py-2 text-sm font-bold ${state.generalDataRetentionDays === days ? "bg-emerald-600 text-white" : "border border-slate-200 text-slate-800"}`}>
+                {days} days
+              </button>
+            ))}
+          </div>
+        </div>
+      </section>
       <section className="space-y-3 rounded-md border border-slate-200 bg-white p-5">
-        <h2 className="font-black text-slate-950">Help Reading Buddy get better at listening to kids like yours.</h2>
-        <p className="text-sm text-slate-600">With your permission, we will keep recordings longer than 90 days and use them to improve how the program listens to kids. This is off by default.</p>
+        <h2 className="font-black text-slate-950">Help Sýnesis improve future learning support.</h2>
+        <p className="text-sm text-slate-600">With your permission, we will keep eligible data longer than the service window and use it to improve the platform. This is off by default.</p>
         <button onClick={() => save({ trainingCorpusOptedIn: !state.trainingCorpusOptedIn })} className="rounded-md bg-slate-950 px-4 py-2 text-sm font-bold text-white">
           {state.trainingCorpusOptedIn ? "Training use opted in" : "Opt in to training use"}
         </button>

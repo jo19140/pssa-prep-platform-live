@@ -10,6 +10,8 @@ type Actor = { id: string; role: string };
 export function consentSnapshot(consent: {
   serviceAudioRetained: boolean;
   serviceAudioRetentionDays: number;
+  generalDataRetained: boolean;
+  generalDataRetentionDays: number;
   trainingCorpusOptedIn: boolean;
   researchPublicationOptedIn: boolean;
   consentTextVersion: string;
@@ -17,6 +19,8 @@ export function consentSnapshot(consent: {
   return {
     serviceAudioRetained: consent.serviceAudioRetained,
     serviceAudioRetentionDays: consent.serviceAudioRetentionDays,
+    generalDataRetained: consent.generalDataRetained,
+    generalDataRetentionDays: consent.generalDataRetentionDays,
     trainingCorpusOptedIn: consent.trainingCorpusOptedIn,
     researchPublicationOptedIn: consent.researchPublicationOptedIn,
     consentTextVersion: consent.consentTextVersion,
@@ -34,6 +38,8 @@ export async function ensureVoiceConsent(studentUserId: string, actor?: Actor) {
       studentUserId,
       serviceAudioRetained: true,
       serviceAudioRetentionDays: DEFAULT_SERVICE_RETENTION_DAYS,
+      generalDataRetained: true,
+      generalDataRetentionDays: DEFAULT_SERVICE_RETENTION_DAYS,
       trainingCorpusOptedIn: false,
       researchPublicationOptedIn: false,
       consentTextVersion: CURRENT_VOICE_CONSENT_VERSION,
@@ -61,6 +67,8 @@ export async function updateVoiceConsent(input: {
   actor: Actor;
   serviceAudioRetained?: boolean;
   serviceAudioRetentionDays?: number;
+  generalDataRetained?: boolean;
+  generalDataRetentionDays?: number;
   trainingCorpusOptedIn?: boolean;
   researchPublicationOptedIn?: boolean;
   ipAddress?: string | null;
@@ -70,6 +78,7 @@ export async function updateVoiceConsent(input: {
   const previous = consentSnapshot(prior);
   const now = new Date();
   const serviceRetention = input.serviceAudioRetentionDays ?? prior.serviceAudioRetentionDays;
+  const generalDataRetention = input.generalDataRetentionDays ?? prior.generalDataRetentionDays;
   const nextTrainingOptedIn = input.trainingCorpusOptedIn ?? prior.trainingCorpusOptedIn;
   const nextResearchOptedIn = input.researchPublicationOptedIn ?? prior.researchPublicationOptedIn;
   const trainingOptedOut = prior.trainingCorpusOptedIn && nextTrainingOptedIn === false;
@@ -78,6 +87,8 @@ export async function updateVoiceConsent(input: {
     data: {
       serviceAudioRetained: input.serviceAudioRetained ?? prior.serviceAudioRetained,
       serviceAudioRetentionDays: serviceRetention,
+      generalDataRetained: input.generalDataRetained ?? prior.generalDataRetained,
+      generalDataRetentionDays: generalDataRetention,
       trainingCorpusOptedIn: nextTrainingOptedIn,
       trainingCorpusOptedInAt: nextTrainingOptedIn && !prior.trainingCorpusOptedIn ? now : prior.trainingCorpusOptedInAt,
       trainingCorpusOptedOutAt: trainingOptedOut ? now : prior.trainingCorpusOptedOutAt,
@@ -132,5 +143,7 @@ function changeTypeFor(previous: ReturnType<typeof consentSnapshot>, next: Retur
   if (previous.researchPublicationOptedIn && !next.researchPublicationOptedIn) return "RESEARCH_OPT_OUT";
   if (previous.serviceAudioRetained && !next.serviceAudioRetained) return "SERVICE_DISABLED";
   if (!previous.serviceAudioRetained && next.serviceAudioRetained) return "SERVICE_ENABLED";
+  if (previous.generalDataRetained && !next.generalDataRetained) return "GENERAL_DATA_DISABLED";
+  if (!previous.generalDataRetained && next.generalDataRetained) return "GENERAL_DATA_ENABLED";
   return "RETENTION_CHANGED";
 }

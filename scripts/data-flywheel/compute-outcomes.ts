@@ -1,9 +1,9 @@
 import { db } from "@/lib/db";
-import { enforceDataFlywheelRetention } from "@/lib/dataflywheel/retention";
+import { computeDataFlywheelOutcomes } from "@/lib/dataflywheel/outcomes";
 
 async function main() {
-  const result = await enforceDataFlywheelRetention();
-  console.log(`Retention result: ${JSON.stringify(result)}`);
+  const result = await computeDataFlywheelOutcomes();
+  console.log(`Computed outcomes: ${JSON.stringify(result)}`);
 }
 
 main()

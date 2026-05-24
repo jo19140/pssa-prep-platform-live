@@ -39,6 +39,15 @@ When touching assessment, standards, diagnostic, scoring, reporting, learning pa
 - Keep deterministic scoring, answer keys, and audit trails reliable.
 - Let AI generate explanations, lessons, recommendations, and practice drafts, but do not let AI silently replace validated scoring logic.
 
+## LLM Instrumentation Guidance
+
+When wrapping any LLM, model, heuristic, or AI-adjacent call for logging, tracing, telemetry, evaluation, or data-flywheel capture:
+
+- Preserve behavior exactly. The wrapped function's returned output must be equal to the unwrapped output for the same input.
+- Keep capture best-effort and non-blocking; logging failures must not break user-facing flows.
+- Do not store filled prompts or free-text student PII in instrumentation payloads. Use stable prompt keys, IDs, counts, and metadata.
+- Add a wrapped-vs-unwrapped equality fixture by default. The fixture should run the wrapped path and equivalent unwrapped path with deterministic/fake model output and assert deep equality, including when capture persistence fails.
+
 ## PSSA Handling
 
 Do not delete PSSA-related code, prompts, seed data, samplers, rubrics, or PA Core mappings. Reframe or wrap them as Pennsylvania PSSA ELA module assets.
@@ -77,4 +86,3 @@ The schema already has useful foundations: `Assessment.state`, `Assessment.subje
 Known areas that still contain PSSA-only assumptions include product copy, demo titles, generated assessment titles, PSSA sampler imports, PSSA ELA design rules, TDA rubric prompts, lesson-generation prompts, tutor-agent guardrails, and default assignment/test names.
 
 When changing these areas, keep behavior stable and make the smallest useful move toward module-aware naming.
-

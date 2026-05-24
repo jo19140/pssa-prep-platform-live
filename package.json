@@ -9,8 +9,11 @@
     "lint": "next lint",
     "test:reading-buddy": "tsx scripts/test-reading-buddy-v1.ts",
     "test:voice-flywheel": "tsx scripts/test-voice-data-flywheel.ts",
+    "test:data-flywheel": "tsx scripts/test-data-flywheel-foundation.ts",
     "voice:enforce-retention": "tsx scripts/voice/enforce-retention.ts",
     "voice:purge-training-opt-outs": "tsx scripts/voice/purge-training-opt-outs.ts",
+    "data-flywheel:compute-outcomes": "tsx scripts/data-flywheel/compute-outcomes.ts",
+    "data-flywheel:enforce-retention": "tsx scripts/data-flywheel/enforce-retention.ts",
     "db:generate": "prisma generate",
     "db:push": "prisma db push",
     "db:seed": "tsx prisma/seed.ts"
