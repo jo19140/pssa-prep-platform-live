@@ -5,3 +5,12 @@ node_modules/
 prisma/dev.db
 tsconfig.tsbuildinfo
 .vercel
+.env*
+# Regenerable v2 content pipeline build artifacts.
+# Produced by scripts/phonogram/ and can run to many tens of MB.
+# Re-generate locally with: python -m scripts.phonogram.build_*
+.cache/phonogram/
+data/phonogram/*.json
+data/phonogram/*.csv
+data/phonogram/*.sqlite
+data/phonogram/*.md

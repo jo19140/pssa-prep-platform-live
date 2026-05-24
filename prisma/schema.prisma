@@ -746,3 +746,16 @@ model ReportSchedule {
   teacher       User                    @relation(fields: [teacherUserId], references: [id], onDelete: Cascade)
   classRoom     ClassRoom?              @relation(fields: [classRoomId], references: [id], onDelete: Cascade)
 }
+
+model PhonogramFamily {
+  id                String   @id @default(cuid())
+  code              String   @unique
+  category          String
+  syllableType      String
+  exampleWords      Json
+  introductionOrder Int
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  @@index([category, introductionOrder])
+}
