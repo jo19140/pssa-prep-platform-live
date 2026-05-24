@@ -4,11 +4,9 @@ import { Prisma } from "@prisma/client";
 import { z } from "zod";
 import { authOptions } from "@/lib/auth";
 import { db } from "@/lib/db";
-import { DECISION_TYPES } from "@/lib/decisions/decisionTypes";
-import { persistModelDecision } from "@/lib/decisions/withModelDecisionLogging";
+import { captureGistGradingDecision } from "@/lib/decisions/instrumentedCallLogging";
 import { EVENT_TYPES } from "@/lib/events/eventTypes";
 import { recordStudentEvent } from "@/lib/events/recordStudentEvent";
-import { PROMPT_KEYS } from "@/lib/prompts/registry";
 import { scoreAssessmentQuestion } from "@/lib/serverScoring";
 
 const answerSchema = z.object({
@@ -91,27 +89,18 @@ export async function POST(req: Request) {
     immediateOutcome: scored.isCorrect ? "CORRECT" : scored.scorePointsEarned > 0 ? "PARTIAL" : "INCORRECT",
   });
   if (typeof body.answerPayload.shortResponse === "string") {
-    void persistModelDecision(
-      {
-        decisionType: DECISION_TYPES.GIST_GRADING,
-        modelProvider: "HEURISTIC",
-        modelName: "server-short-response-gist-v1",
-        promptKey: PROMPT_KEYS.GIST_GRADING_HEURISTIC_V1,
-        studentEventId: event?.id,
-        studentUserId: testSession.userId,
-        inputContext: {
-          assessmentId: testSession.assessmentId,
-          responseRecordId: response.id,
-          questionId: canonicalQuestionId,
-          standardCode: canonicalQuestion.standardCode,
-          questionType: canonicalQuestion.questionType,
-          responseWordCount: String(body.answerPayload.shortResponse).trim().split(/\s+/).filter(Boolean).length,
-          hasSampleAnswer: typeof body.answerPayload.sampleAnswer === "string",
-        },
-      },
-      scored,
-      { inferenceMs: 0, costUsd: 0 },
-    );
+    void captureGistGradingDecision({
+      studentEventId: event?.id,
+      studentUserId: testSession.userId,
+      assessmentId: testSession.assessmentId,
+      responseRecordId: response.id,
+      questionId: canonicalQuestionId,
+      standardCode: canonicalQuestion.standardCode,
+      questionType: canonicalQuestion.questionType,
+      responseWordCount: String(body.answerPayload.shortResponse).trim().split(/\s+/).filter(Boolean).length,
+      hasSampleAnswer: typeof body.answerPayload.sampleAnswer === "string",
+      output: scored,
+    });
   }
 
   return NextResponse.json({ ok: true, responseId: response.id, scored });
