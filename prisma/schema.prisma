@@ -94,6 +94,7 @@ model User {
   literacyProfile LiteracyProfile?
   stateRequests StateRequests[]
   voiceConsent VoiceConsent? @relation("StudentConsent")
+  studentEvents StudentEvent[] @relation("StudentEvents")
 }
 
 model PendingStudentSignup {
@@ -828,6 +829,8 @@ model VoiceConsent {
   studentUserId                 String                 @unique
   serviceAudioRetained          Boolean                @default(true)
   serviceAudioRetentionDays     Int                    @default(90)
+  generalDataRetained           Boolean                @default(true)
+  generalDataRetentionDays      Int                    @default(90)
   trainingCorpusOptedIn         Boolean                @default(false)
   trainingCorpusOptedInAt       DateTime?
   trainingCorpusOptedOutAt      DateTime?
@@ -843,6 +846,125 @@ model VoiceConsent {
   decisionLog                   VoiceConsentDecision[]
 
   @@index([trainingCorpusOptedIn])
+}
+
+model StudentEvent {
+  id               String                @id @default(cuid())
+  studentUserId    String
+  sessionId        String?
+  eventType        String
+  occurredAt       DateTime              @default(now())
+  contextJson      Json
+  responseJson     Json?
+  durationMs       Int?
+  immediateOutcome String?
+  clientPlatform   String?
+  appVersion       String?
+  retentionTier    String                @default("SERVICE")
+  deleteAfterDate  DateTime?
+  student          User                  @relation("StudentEvents", fields: [studentUserId], references: [id], onDelete: Cascade)
+  outcomes         StudentEventOutcome[]
+  modelDecisions   ModelDecision[]
+
+  @@index([studentUserId, occurredAt])
+  @@index([eventType, occurredAt])
+  @@index([sessionId])
+  @@index([deleteAfterDate])
+}
+
+model StudentEventOutcome {
+  id             String       @id @default(cuid())
+  studentEventId String
+  outcomeType    String
+  measuredAt     DateTime     @default(now())
+  outcomeScore   Float?
+  outcomeLabel   String?
+  metricJson     Json?
+  studentEvent   StudentEvent @relation(fields: [studentEventId], references: [id], onDelete: Cascade)
+
+  @@unique([studentEventId, outcomeType])
+  @@index([outcomeType, measuredAt])
+}
+
+model ModelDecision {
+  id               String                 @id @default(cuid())
+  decisionType     String
+  modelProvider    String
+  modelName        String
+  modelVersion     String?
+  inputContextJson Json
+  inputHash        String
+  promptKey        String?
+  decisionJson     Json
+  outputHash       String?
+  inferenceMs      Int?
+  inputTokens      Int?
+  outputTokens     Int?
+  costUsd          Float?
+  studentEventId   String?
+  parentDecisionId String?
+  retentionTier    String                 @default("SERVICE")
+  deleteAfterDate  DateTime?
+  occurredAt       DateTime               @default(now())
+  studentEvent     StudentEvent?          @relation(fields: [studentEventId], references: [id], onDelete: SetNull)
+  parentDecision   ModelDecision?         @relation("DecisionChain", fields: [parentDecisionId], references: [id], onDelete: SetNull)
+  childDecisions   ModelDecision[]        @relation("DecisionChain")
+  outcomes         ModelDecisionOutcome[]
+
+  @@index([decisionType, occurredAt])
+  @@index([modelProvider, modelName, occurredAt])
+  @@index([inputHash])
+  @@index([studentEventId])
+  @@index([deleteAfterDate])
+}
+
+model ModelDecisionOutcome {
+  id              String        @id @default(cuid())
+  modelDecisionId String
+  outcomeType     String
+  outcomeScore    Float?
+  outcomeLabel    String?
+  metricJson      Json?
+  measuredAt      DateTime      @default(now())
+  modelDecision   ModelDecision @relation(fields: [modelDecisionId], references: [id], onDelete: Cascade)
+
+  @@unique([modelDecisionId, outcomeType])
+  @@index([outcomeType, measuredAt])
+}
+
+model EventExportBatch {
+  id                 String   @id @default(cuid())
+  batchName          String   @unique
+  exportPurpose      String
+  eventCount         Int
+  decisionCount      Int
+  eventTypeFilter    String[]
+  decisionTypeFilter String[]
+  dateRangeStart     DateTime?
+  dateRangeEnd       DateTime?
+  consentTierMinimum String
+  excludedRecordCount Int     @default(0)
+  manifestStorageKey String
+  manifestJsonl      String   @db.Text
+  exportedByUserId   String
+  exportedAt         DateTime @default(now())
+  notes              String?  @db.Text
+
+  @@index([exportPurpose, exportedAt])
+}
+
+model DataDeletionLog {
+  id              String   @id @default(cuid())
+  studentUserId   String?
+  recordType      String
+  recordId        String?
+  deletionReason  String
+  deletedByUserId String?
+  deletedAt       DateTime @default(now())
+  metadataJson    Json?
+
+  @@index([studentUserId, deletedAt])
+  @@index([recordType, deletedAt])
 }
 
 model VoiceConsentDecision {

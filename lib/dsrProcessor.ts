@@ -44,6 +44,23 @@ export async function processDsrDelete(requestId: string) {
   const name = request.user.name;
   const studentProfile = await db.studentProfile.findUnique({ where: { userId: request.userId } });
   if (studentProfile) await purgeAudioForStudent(request.userId, "DSR_REQUEST", request.userId);
+  if (studentProfile) {
+    const [eventCount, decisionCount] = await Promise.all([
+      db.studentEvent.count({ where: { studentUserId: request.userId } }),
+      db.modelDecision.count({ where: { studentEvent: { studentUserId: request.userId } } }),
+    ]);
+    await db.dataDeletionLog.create({
+      data: {
+        studentUserId: request.userId,
+        recordType: "DATA_SUBJECT_ACCOUNT",
+        deletionReason: "DSR_REQUEST",
+        deletedByUserId: request.userId,
+        metadataJson: { studentEventCount: eventCount, modelDecisionCount: decisionCount },
+      },
+    });
+    await db.modelDecision.deleteMany({ where: { studentEvent: { studentUserId: request.userId } } });
+    await db.studentEvent.deleteMany({ where: { studentUserId: request.userId } });
+  }
   await eraseUserData(request.userId);
   const completed = await db.dataSubjectRequest.update({
     where: { id: requestId },
@@ -73,6 +90,8 @@ export async function collectUserExport(userId: string) {
     voiceConsent,
     voiceSessions,
     labeledVoiceSegments,
+    studentEvents,
+    modelDecisions,
     dataSubjectRequests,
   ] = await Promise.all([
     db.user.findUnique({ where: { id: userId } }),
@@ -96,6 +115,8 @@ export async function collectUserExport(userId: string) {
     db.voiceConsent.findUnique({ where: { studentUserId: userId }, include: { decisionLog: true } }),
     db.voiceSession.findMany({ where: { literacyProfile: { studentUserId: userId } } }),
     db.labeledVoiceSegment.findMany({ where: { voiceSession: { literacyProfile: { studentUserId: userId } } } }),
+    db.studentEvent.findMany({ where: { studentUserId: userId }, include: { outcomes: true, modelDecisions: { include: { outcomes: true } } } }),
+    db.modelDecision.findMany({ where: { studentEvent: { studentUserId: userId } }, include: { outcomes: true } }),
     db.dataSubjectRequest.findMany({ where: { userId } }),
   ]);
   return {
@@ -113,6 +134,8 @@ export async function collectUserExport(userId: string) {
     voiceConsent,
     voiceSessions,
     labeledVoiceSegments,
+    studentEvents,
+    modelDecisions,
     dataSubjectRequests,
   };
 }

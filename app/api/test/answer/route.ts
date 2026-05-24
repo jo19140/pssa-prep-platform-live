@@ -4,6 +4,11 @@ import { Prisma } from "@prisma/client";
 import { z } from "zod";
 import { authOptions } from "@/lib/auth";
 import { db } from "@/lib/db";
+import { DECISION_TYPES } from "@/lib/decisions/decisionTypes";
+import { persistModelDecision } from "@/lib/decisions/withModelDecisionLogging";
+import { EVENT_TYPES } from "@/lib/events/eventTypes";
+import { recordStudentEvent } from "@/lib/events/recordStudentEvent";
+import { PROMPT_KEYS } from "@/lib/prompts/registry";
 import { scoreAssessmentQuestion } from "@/lib/serverScoring";
 
 const answerSchema = z.object({
@@ -67,6 +72,58 @@ export async function POST(req: Request) {
     await tx.testSession.update({ where: { id: body.sessionId }, data: { currentQuestionNo: body.currentQuestionNo || testSession.currentQuestionNo || 1 } });
     return saved;
   });
+  const event = await recordStudentEvent({
+    studentUserId: testSession.userId,
+    eventType: EVENT_TYPES.ITEM_ANSWER_SUBMITTED,
+    sessionId: body.sessionId,
+    context: {
+      assessmentId: testSession.assessmentId,
+      testSessionId: body.sessionId,
+      responseRecordId: response.id,
+      questionId: canonicalQuestionId,
+      questionType: canonicalQuestion.questionType,
+      standardCode: canonicalQuestion.standardCode,
+      skill: canonicalQuestion.skill,
+      difficulty: canonicalQuestion.difficulty,
+    },
+    response: sanitizedAnswerResponse(body.answerPayload),
+    durationMs: body.timeSpentSec * 1000,
+    immediateOutcome: scored.isCorrect ? "CORRECT" : scored.scorePointsEarned > 0 ? "PARTIAL" : "INCORRECT",
+  });
+  if (typeof body.answerPayload.shortResponse === "string") {
+    void persistModelDecision(
+      {
+        decisionType: DECISION_TYPES.GIST_GRADING,
+        modelProvider: "HEURISTIC",
+        modelName: "server-short-response-gist-v1",
+        promptKey: PROMPT_KEYS.GIST_GRADING_HEURISTIC_V1,
+        studentEventId: event?.id,
+        studentUserId: testSession.userId,
+        inputContext: {
+          assessmentId: testSession.assessmentId,
+          responseRecordId: response.id,
+          questionId: canonicalQuestionId,
+          standardCode: canonicalQuestion.standardCode,
+          questionType: canonicalQuestion.questionType,
+          responseWordCount: String(body.answerPayload.shortResponse).trim().split(/\s+/).filter(Boolean).length,
+          hasSampleAnswer: typeof body.answerPayload.sampleAnswer === "string",
+        },
+      },
+      scored,
+      { inferenceMs: 0, costUsd: 0 },
+    );
+  }
 
   return NextResponse.json({ ok: true, responseId: response.id, scored });
+}
+
+function sanitizedAnswerResponse(answerPayload: Record<string, unknown>) {
+  const response: Record<string, unknown> = {};
+  for (const key of ["selectedIndex", "selectedIndices", "partAIndex", "partBIndices", "selectedSpanIndex", "mapping"]) {
+    if (answerPayload[key] !== undefined) response[key] = answerPayload[key];
+  }
+  if (typeof answerPayload.shortResponse === "string") {
+    response.shortResponseWordCount = answerPayload.shortResponse.trim().split(/\s+/).filter(Boolean).length;
+  }
+  return response;
 }

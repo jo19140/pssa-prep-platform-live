@@ -4,10 +4,13 @@ import type { Prisma } from "@prisma/client";
 import type { LearningPathItemInput } from "@/lib/learningPath";
 import { logAiFailure } from "@/lib/aiTelemetry";
 import { db } from "@/lib/db";
+import { DECISION_TYPES } from "@/lib/decisions/decisionTypes";
+import { persistModelDecision, recordModelDecision } from "@/lib/decisions/withModelDecisionLogging";
 import { attachGeneratedImagesToLessons } from "@/lib/lessonImageGeneration";
 import { evaluateLessonQuality, getLessonQualityBlueprint } from "@/lib/lessonQualityBlueprint";
 import { buildLessonVisualMetadata } from "@/lib/lessonVisuals";
 import { buildPrebuiltLessonSeeds } from "@/lib/prebuiltLessonLibrary";
+import { PROMPT_KEYS } from "@/lib/prompts/registry";
 import { pssaLessonExemplars } from "@/lib/pssaLessonExemplars";
 
 type ResourceLike = {
@@ -152,8 +155,9 @@ export async function buildLearningLessons({
   try {
     const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
     const generationStartedAt = Date.now();
+    const modelName = process.env.OPENAI_LESSON_MODEL || process.env.OPENAI_LEARNING_PATH_MODEL || "gpt-4o-mini";
     const response = await openai.chat.completions.create({
-      model: process.env.OPENAI_LESSON_MODEL || process.env.OPENAI_LEARNING_PATH_MODEL || "gpt-4o-mini",
+      model: modelName,
       response_format: { type: "json_object" },
       messages: [
         {
@@ -257,6 +261,27 @@ export async function buildLearningLessons({
         },
       ],
     }, { timeout: 60_000 });
+    const generationDecisionId = await persistModelDecision(
+      {
+        decisionType: DECISION_TYPES.DISTRACTOR_GENERATION,
+        modelProvider: "OPENAI",
+        modelName,
+        promptKey: PROMPT_KEYS.LESSON_DISTRACTOR_GENERATION_V1,
+        inputContext: {
+          gradeLevel,
+          lessonCount: lessonsNeedingAi.length,
+          standardCodes: lessonsNeedingAi.map((lesson) => lesson.standardCode),
+          skills: lessonsNeedingAi.map((lesson) => lesson.skill),
+        },
+      },
+      response,
+      {
+        inferenceMs: Date.now() - generationStartedAt,
+        inputTokens: response.usage?.prompt_tokens,
+        outputTokens: response.usage?.completion_tokens,
+        costUsd: estimateOpenAiCost(modelName, response.usage?.prompt_tokens || 0, response.usage?.completion_tokens || 0),
+      },
+    );
 
     const raw = response.choices[0]?.message?.content || "{}";
     const parsed = JSON.parse(raw) as { lessons?: Partial<LearningLessonBuild>[] };
@@ -278,7 +303,7 @@ export async function buildLearningLessons({
         generatedBy: "AI_ENRICHED" as const,
         aiStatus: "COMPLETED" as const,
       };
-      const critiqued = await selfCritiqueLesson(openai, merged, lesson, generationStartedAt);
+      const critiqued = await selfCritiqueLesson(openai, merged, lesson, generationStartedAt, generationDecisionId || undefined);
       const [heroResource, scaffoldResources, stretchResources] = await Promise.all([
         findHeroResourceForLesson(lesson),
         findScaffoldResourcesForLesson(lesson),
@@ -369,6 +394,27 @@ async function findHeroResourceForLesson(lesson: Pick<LearningLessonBuild, "grad
     : [];
   const skillFallback = skillCandidates.find((resource) => hasSkillKeywordOverlap(resource.skill, skillTokens));
   const match = exact || standardFallback || skillFallback || null;
+  void persistModelDecision(
+    {
+      decisionType: DECISION_TYPES.HERO_VIDEO_MATCH,
+      modelProvider: "HEURISTIC",
+      modelName: "resource-link-token-overlap-v1",
+      promptKey: PROMPT_KEYS.HERO_VIDEO_MATCH_HEURISTIC_V1,
+      inputContext: {
+        gradeLevel: lesson.gradeLevel,
+        standardCode: lesson.standardCode,
+        skill: lesson.skill,
+        candidateCount: candidates.length + skillCandidates.length,
+      },
+    },
+    {
+      matched: Boolean(match),
+      resourceLinkId: match?.id || null,
+      provider: match?.provider || null,
+      tier: match?.tier || null,
+    },
+    { inferenceMs: 0, costUsd: 0 },
+  );
   if (!match) {
     const scope = candidates.length || skillCandidates.length ? "learningLessons.no_confident_hero" : "learningLessons.no_resource_link";
     logAiFailure({
@@ -486,35 +532,69 @@ function buildLessonSystemPrompt() {
   ].join("\n\n");
 }
 
-async function selfCritiqueLesson(openai: OpenAI, lesson: LearningLessonBuild, deterministic: LearningLessonBuild, generationStartedAt: number): Promise<LearningLessonBuild> {
+async function selfCritiqueLesson(openai: OpenAI, lesson: LearningLessonBuild, deterministic: LearningLessonBuild, generationStartedAt: number, parentDecisionId?: string): Promise<LearningLessonBuild> {
   if (!lesson.steps?.length || Date.now() - generationStartedAt > 50_000) return lesson;
   try {
-    const response = await openai.chat.completions.create({
-      model: process.env.OPENAI_LESSON_MODEL || process.env.OPENAI_LEARNING_PATH_MODEL || "gpt-4o-mini",
-      response_format: { type: "json_object" },
-      messages: [
-        {
-          role: "system",
-          content:
-            'You generated this lesson. Audit it against these criteria: (a) Does step 2 define the skill with a one-sentence rule plus at least one example? (b) Does any step use forbidden placeholder phrases like "Start X" or "Learn the skill"? (c) Does the practice content match the lesson standard strand? (d) Would a struggling student actually understand the worked example, or is it vague? For each failing criterion, return a revised version of that step only. If all criteria pass, return {"status":"approved"}. Return JSON only.',
+    const modelName = process.env.OPENAI_LESSON_MODEL || process.env.OPENAI_LEARNING_PATH_MODEL || "gpt-4o-mini";
+    const response = await recordModelDecision(
+      {
+        decisionType: DECISION_TYPES.DISTRACTOR_CRITIC,
+        modelProvider: "OPENAI",
+        modelName,
+        promptKey: PROMPT_KEYS.LESSON_DISTRACTOR_CRITIC_V1,
+        parentDecisionId,
+        inputContext: {
+          gradeLevel: lesson.gradeLevel,
+          standardCode: lesson.standardCode,
+          skill: lesson.skill,
+          stepCount: lesson.steps?.length || 0,
+          practiceCounts: {
+            guided: lesson.guidedPractice.length,
+            independent: lesson.independentPractice.length,
+            exit: lesson.exitTicket.length,
+            mastery: lesson.masteryCheck.length,
+          },
         },
-        {
-          role: "user",
-          content: JSON.stringify({
-            standardCode: lesson.standardCode,
-            strand: standardStrand(lesson.standardCode),
-            skill: lesson.skill,
-            steps: lesson.steps,
-            practice: {
-              guidedPractice: lesson.guidedPractice,
-              independentPractice: lesson.independentPractice,
-              exitTicket: lesson.exitTicket,
-              masteryCheck: lesson.masteryCheck,
+      },
+      async () => {
+        const started = Date.now();
+        const completion = await openai.chat.completions.create({
+          model: modelName,
+          response_format: { type: "json_object" },
+          messages: [
+            {
+              role: "system",
+              content:
+                'You generated this lesson. Audit it against these criteria: (a) Does step 2 define the skill with a one-sentence rule plus at least one example? (b) Does any step use forbidden placeholder phrases like "Start X" or "Learn the skill"? (c) Does the practice content match the lesson standard strand? (d) Would a struggling student actually understand the worked example, or is it vague? For each failing criterion, return a revised version of that step only. If all criteria pass, return {"status":"approved"}. Return JSON only.',
             },
-          }),
-        },
-      ],
-    }, { timeout: Math.max(5_000, 60_000 - (Date.now() - generationStartedAt)) });
+            {
+              role: "user",
+              content: JSON.stringify({
+                standardCode: lesson.standardCode,
+                strand: standardStrand(lesson.standardCode),
+                skill: lesson.skill,
+                steps: lesson.steps,
+                practice: {
+                  guidedPractice: lesson.guidedPractice,
+                  independentPractice: lesson.independentPractice,
+                  exitTicket: lesson.exitTicket,
+                  masteryCheck: lesson.masteryCheck,
+                },
+              }),
+            },
+          ],
+        }, { timeout: Math.max(5_000, 60_000 - (Date.now() - generationStartedAt)) });
+        return {
+          output: completion,
+          metadata: {
+            inferenceMs: Date.now() - started,
+            inputTokens: completion.usage?.prompt_tokens,
+            outputTokens: completion.usage?.completion_tokens,
+            costUsd: estimateOpenAiCost(modelName, completion.usage?.prompt_tokens || 0, completion.usage?.completion_tokens || 0),
+          },
+        };
+      },
+    );
     const parsed = JSON.parse(response.choices[0]?.message?.content || "{}");
     if (parsed.status === "approved") return lesson;
     const revisions = Array.isArray(parsed.revisions) ? parsed.revisions : Array.isArray(parsed.steps) ? parsed.steps : [];
@@ -2104,4 +2184,11 @@ function isInformationalSkill(lowerSkill: string) {
 
 function normalizeKey(value: string) {
   return value.trim().toLowerCase();
+}
+
+function estimateOpenAiCost(modelName: string, inputTokens: number, outputTokens: number) {
+  const lower = modelName.toLowerCase();
+  const inputPerMillion = lower.includes("gpt-4o-mini") ? 0.15 : lower.includes("gpt-4o") ? 2.5 : 0;
+  const outputPerMillion = lower.includes("gpt-4o-mini") ? 0.6 : lower.includes("gpt-4o") ? 10 : 0;
+  return (inputTokens / 1_000_000) * inputPerMillion + (outputTokens / 1_000_000) * outputPerMillion;
 }

@@ -8,6 +8,8 @@ import { db } from "@/lib/db";
 const schema = z.object({
   serviceAudioRetained: z.boolean().optional(),
   serviceAudioRetentionDays: z.union([z.literal(30), z.literal(60), z.literal(90)]).optional(),
+  generalDataRetained: z.boolean().optional(),
+  generalDataRetentionDays: z.union([z.literal(30), z.literal(60), z.literal(90)]).optional(),
   trainingCorpusOptedIn: z.boolean().optional(),
   researchPublicationOptedIn: z.boolean().optional(),
 });
