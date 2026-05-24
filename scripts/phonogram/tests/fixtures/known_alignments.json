@@ -1,0 +1,6207 @@
+[
+  {
+    "word": "cat",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "c",
+        "phonemes_arpabet": [
+          "K"
+        ],
+        "phonemes_ipa": [
+          "k"
+        ]
+      },
+      {
+        "graphemes": "a",
+        "phonemes_arpabet": [
+          "AE1"
+        ],
+        "phonemes_ipa": [
+          "æ"
+        ]
+      },
+      {
+        "graphemes": "t",
+        "phonemes_arpabet": [
+          "T"
+        ],
+        "phonemes_ipa": [
+          "t"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "dog",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "d",
+        "phonemes_arpabet": [
+          "D"
+        ],
+        "phonemes_ipa": [
+          "d"
+        ]
+      },
+      {
+        "graphemes": "o",
+        "phonemes_arpabet": [
+          "AO1"
+        ],
+        "phonemes_ipa": [
+          "ɔː"
+        ]
+      },
+      {
+        "graphemes": "g",
+        "phonemes_arpabet": [
+          "G"
+        ],
+        "phonemes_ipa": [
+          "ɡ"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "mat",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "m",
+        "phonemes_arpabet": [
+          "M"
+        ],
+        "phonemes_ipa": [
+          "m"
+        ]
+      },
+      {
+        "graphemes": "a",
+        "phonemes_arpabet": [
+          "AE1"
+        ],
+        "phonemes_ipa": [
+          "æ"
+        ]
+      },
+      {
+        "graphemes": "t",
+        "phonemes_arpabet": [
+          "T"
+        ],
+        "phonemes_ipa": [
+          "t"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "sit",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "s",
+        "phonemes_arpabet": [
+          "S"
+        ],
+        "phonemes_ipa": [
+          "s"
+        ]
+      },
+      {
+        "graphemes": "i",
+        "phonemes_arpabet": [
+          "IH1"
+        ],
+        "phonemes_ipa": [
+          "ɪ"
+        ]
+      },
+      {
+        "graphemes": "t",
+        "phonemes_arpabet": [
+          "T"
+        ],
+        "phonemes_ipa": [
+          "t"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "sun",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "s",
+        "phonemes_arpabet": [
+          "S"
+        ],
+        "phonemes_ipa": [
+          "s"
+        ]
+      },
+      {
+        "graphemes": "u",
+        "phonemes_arpabet": [
+          "AH1"
+        ],
+        "phonemes_ipa": [
+          "ʌ"
+        ]
+      },
+      {
+        "graphemes": "n",
+        "phonemes_arpabet": [
+          "N"
+        ],
+        "phonemes_ipa": [
+          "n"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "cup",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "c",
+        "phonemes_arpabet": [
+          "K"
+        ],
+        "phonemes_ipa": [
+          "k"
+        ]
+      },
+      {
+        "graphemes": "u",
+        "phonemes_arpabet": [
+          "AH1"
+        ],
+        "phonemes_ipa": [
+          "ʌ"
+        ]
+      },
+      {
+        "graphemes": "p",
+        "phonemes_arpabet": [
+          "P"
+        ],
+        "phonemes_ipa": [
+          "p"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "bed",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "b",
+        "phonemes_arpabet": [
+          "B"
+        ],
+        "phonemes_ipa": [
+          "b"
+        ]
+      },
+      {
+        "graphemes": "e",
+        "phonemes_arpabet": [
+          "EH1"
+        ],
+        "phonemes_ipa": [
+          "ɛ"
+        ]
+      },
+      {
+        "graphemes": "d",
+        "phonemes_arpabet": [
+          "D"
+        ],
+        "phonemes_ipa": [
+          "d"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "fish",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "f",
+        "phonemes_arpabet": [
+          "F"
+        ],
+        "phonemes_ipa": [
+          "f"
+        ]
+      },
+      {
+        "graphemes": "i",
+        "phonemes_arpabet": [
+          "IH1"
+        ],
+        "phonemes_ipa": [
+          "ɪ"
+        ]
+      },
+      {
+        "graphemes": "sh",
+        "phonemes_arpabet": [
+          "SH"
+        ],
+        "phonemes_ipa": [
+          "ʃ"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "ship",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "sh",
+        "phonemes_arpabet": [
+          "SH"
+        ],
+        "phonemes_ipa": [
+          "ʃ"
+        ]
+      },
+      {
+        "graphemes": "i",
+        "phonemes_arpabet": [
+          "IH1"
+        ],
+        "phonemes_ipa": [
+          "ɪ"
+        ]
+      },
+      {
+        "graphemes": "p",
+        "phonemes_arpabet": [
+          "P"
+        ],
+        "phonemes_ipa": [
+          "p"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "thin",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "th",
+        "phonemes_arpabet": [
+          "TH"
+        ],
+        "phonemes_ipa": [
+          "θ"
+        ]
+      },
+      {
+        "graphemes": "i",
+        "phonemes_arpabet": [
+          "IH1"
+        ],
+        "phonemes_ipa": [
+          "ɪ"
+        ]
+      },
+      {
+        "graphemes": "n",
+        "phonemes_arpabet": [
+          "N"
+        ],
+        "phonemes_ipa": [
+          "n"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "then",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "th",
+        "phonemes_arpabet": [
+          "DH"
+        ],
+        "phonemes_ipa": [
+          "ð"
+        ]
+      },
+      {
+        "graphemes": "e",
+        "phonemes_arpabet": [
+          "EH1"
+        ],
+        "phonemes_ipa": [
+          "ɛ"
+        ]
+      },
+      {
+        "graphemes": "n",
+        "phonemes_arpabet": [
+          "N"
+        ],
+        "phonemes_ipa": [
+          "n"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "chat",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "ch",
+        "phonemes_arpabet": [
+          "CH"
+        ],
+        "phonemes_ipa": [
+          "tʃ"
+        ]
+      },
+      {
+        "graphemes": "a",
+        "phonemes_arpabet": [
+          "AE1"
+        ],
+        "phonemes_ipa": [
+          "æ"
+        ]
+      },
+      {
+        "graphemes": "t",
+        "phonemes_arpabet": [
+          "T"
+        ],
+        "phonemes_ipa": [
+          "t"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "chip",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "ch",
+        "phonemes_arpabet": [
+          "CH"
+        ],
+        "phonemes_ipa": [
+          "tʃ"
+        ]
+      },
+      {
+        "graphemes": "i",
+        "phonemes_arpabet": [
+          "IH1"
+        ],
+        "phonemes_ipa": [
+          "ɪ"
+        ]
+      },
+      {
+        "graphemes": "p",
+        "phonemes_arpabet": [
+          "P"
+        ],
+        "phonemes_ipa": [
+          "p"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "shop",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "sh",
+        "phonemes_arpabet": [
+          "SH"
+        ],
+        "phonemes_ipa": [
+          "ʃ"
+        ]
+      },
+      {
+        "graphemes": "o",
+        "phonemes_arpabet": [
+          "AA1"
+        ],
+        "phonemes_ipa": [
+          "ɑː"
+        ]
+      },
+      {
+        "graphemes": "p",
+        "phonemes_arpabet": [
+          "P"
+        ],
+        "phonemes_ipa": [
+          "p"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "ring",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "r",
+        "phonemes_arpabet": [
+          "R"
+        ],
+        "phonemes_ipa": [
+          "ɹ"
+        ]
+      },
+      {
+        "graphemes": "i",
+        "phonemes_arpabet": [
+          "IH1"
+        ],
+        "phonemes_ipa": [
+          "ɪ"
+        ]
+      },
+      {
+        "graphemes": "ng",
+        "phonemes_arpabet": [
+          "NG"
+        ],
+        "phonemes_ipa": [
+          "ŋ"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "song",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "s",
+        "phonemes_arpabet": [
+          "S"
+        ],
+        "phonemes_ipa": [
+          "s"
+        ]
+      },
+      {
+        "graphemes": "o",
+        "phonemes_arpabet": [
+          "AO1"
+        ],
+        "phonemes_ipa": [
+          "ɔː"
+        ]
+      },
+      {
+        "graphemes": "ng",
+        "phonemes_arpabet": [
+          "NG"
+        ],
+        "phonemes_ipa": [
+          "ŋ"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "back",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "b",
+        "phonemes_arpabet": [
+          "B"
+        ],
+        "phonemes_ipa": [
+          "b"
+        ]
+      },
+      {
+        "graphemes": "a",
+        "phonemes_arpabet": [
+          "AE1"
+        ],
+        "phonemes_ipa": [
+          "æ"
+        ]
+      },
+      {
+        "graphemes": "ck",
+        "phonemes_arpabet": [
+          "K"
+        ],
+        "phonemes_ipa": [
+          "k"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "duck",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "d",
+        "phonemes_arpabet": [
+          "D"
+        ],
+        "phonemes_ipa": [
+          "d"
+        ]
+      },
+      {
+        "graphemes": "u",
+        "phonemes_arpabet": [
+          "AH1"
+        ],
+        "phonemes_ipa": [
+          "ʌ"
+        ]
+      },
+      {
+        "graphemes": "ck",
+        "phonemes_arpabet": [
+          "K"
+        ],
+        "phonemes_ipa": [
+          "k"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "quick",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "q",
+        "phonemes_arpabet": [
+          "K"
+        ],
+        "phonemes_ipa": [
+          "k"
+        ]
+      },
+      {
+        "graphemes": "u",
+        "phonemes_arpabet": [
+          "W"
+        ],
+        "phonemes_ipa": [
+          "w"
+        ]
+      },
+      {
+        "graphemes": "i",
+        "phonemes_arpabet": [
+          "IH1"
+        ],
+        "phonemes_ipa": [
+          "ɪ"
+        ]
+      },
+      {
+        "graphemes": "ck",
+        "phonemes_arpabet": [
+          "K"
+        ],
+        "phonemes_ipa": [
+          "k"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "when",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "w",
+        "phonemes_arpabet": [
+          "W"
+        ],
+        "phonemes_ipa": [
+          "w"
+        ]
+      },
+      {
+        "graphemes": "h",
+        "phonemes_arpabet": [],
+        "phonemes_ipa": []
+      },
+      {
+        "graphemes": "e",
+        "phonemes_arpabet": [
+          "EH1"
+        ],
+        "phonemes_ipa": [
+          "ɛ"
+        ]
+      },
+      {
+        "graphemes": "n",
+        "phonemes_arpabet": [
+          "N"
+        ],
+        "phonemes_ipa": [
+          "n"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "whip",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "w",
+        "phonemes_arpabet": [
+          "W"
+        ],
+        "phonemes_ipa": [
+          "w"
+        ]
+      },
+      {
+        "graphemes": "h",
+        "phonemes_arpabet": [],
+        "phonemes_ipa": []
+      },
+      {
+        "graphemes": "i",
+        "phonemes_arpabet": [
+          "IH1"
+        ],
+        "phonemes_ipa": [
+          "ɪ"
+        ]
+      },
+      {
+        "graphemes": "p",
+        "phonemes_arpabet": [
+          "P"
+        ],
+        "phonemes_ipa": [
+          "p"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "phone",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "ph",
+        "phonemes_arpabet": [
+          "F"
+        ],
+        "phonemes_ipa": [
+          "f"
+        ]
+      },
+      {
+        "graphemes": "o",
+        "phonemes_arpabet": [
+          "OW1"
+        ],
+        "phonemes_ipa": [
+          "oʊ"
+        ]
+      },
+      {
+        "graphemes": "n",
+        "phonemes_arpabet": [
+          "N"
+        ],
+        "phonemes_ipa": [
+          "n"
+        ]
+      },
+      {
+        "graphemes": "e",
+        "phonemes_arpabet": [],
+        "phonemes_ipa": []
+      }
+    ]
+  },
+  {
+    "word": "photo",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "ph",
+        "phonemes_arpabet": [
+          "F"
+        ],
+        "phonemes_ipa": [
+          "f"
+        ]
+      },
+      {
+        "graphemes": "o",
+        "phonemes_arpabet": [
+          "OW1"
+        ],
+        "phonemes_ipa": [
+          "oʊ"
+        ]
+      },
+      {
+        "graphemes": "t",
+        "phonemes_arpabet": [
+          "T"
+        ],
+        "phonemes_ipa": [
+          "t"
+        ]
+      },
+      {
+        "graphemes": "o",
+        "phonemes_arpabet": [
+          "OW2"
+        ],
+        "phonemes_ipa": [
+          "oʊ"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "graph",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "g",
+        "phonemes_arpabet": [
+          "G"
+        ],
+        "phonemes_ipa": [
+          "ɡ"
+        ]
+      },
+      {
+        "graphemes": "r",
+        "phonemes_arpabet": [
+          "R"
+        ],
+        "phonemes_ipa": [
+          "ɹ"
+        ]
+      },
+      {
+        "graphemes": "a",
+        "phonemes_arpabet": [
+          "AE1"
+        ],
+        "phonemes_ipa": [
+          "æ"
+        ]
+      },
+      {
+        "graphemes": "ph",
+        "phonemes_arpabet": [
+          "F"
+        ],
+        "phonemes_ipa": [
+          "f"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "path",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "p",
+        "phonemes_arpabet": [
+          "P"
+        ],
+        "phonemes_ipa": [
+          "p"
+        ]
+      },
+      {
+        "graphemes": "a",
+        "phonemes_arpabet": [
+          "AE1"
+        ],
+        "phonemes_ipa": [
+          "æ"
+        ]
+      },
+      {
+        "graphemes": "th",
+        "phonemes_arpabet": [
+          "TH"
+        ],
+        "phonemes_ipa": [
+          "θ"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "bath",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "b",
+        "phonemes_arpabet": [
+          "B"
+        ],
+        "phonemes_ipa": [
+          "b"
+        ]
+      },
+      {
+        "graphemes": "a",
+        "phonemes_arpabet": [
+          "AE1"
+        ],
+        "phonemes_ipa": [
+          "æ"
+        ]
+      },
+      {
+        "graphemes": "th",
+        "phonemes_arpabet": [
+          "TH"
+        ],
+        "phonemes_ipa": [
+          "θ"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "make",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "m",
+        "phonemes_arpabet": [
+          "M"
+        ],
+        "phonemes_ipa": [
+          "m"
+        ]
+      },
+      {
+        "graphemes": "a",
+        "phonemes_arpabet": [
+          "EY1"
+        ],
+        "phonemes_ipa": [
+          "eɪ"
+        ]
+      },
+      {
+        "graphemes": "k",
+        "phonemes_arpabet": [
+          "K"
+        ],
+        "phonemes_ipa": [
+          "k"
+        ]
+      },
+      {
+        "graphemes": "e",
+        "phonemes_arpabet": [],
+        "phonemes_ipa": []
+      }
+    ]
+  },
+  {
+    "word": "take",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "t",
+        "phonemes_arpabet": [
+          "T"
+        ],
+        "phonemes_ipa": [
+          "t"
+        ]
+      },
+      {
+        "graphemes": "a",
+        "phonemes_arpabet": [
+          "EY1"
+        ],
+        "phonemes_ipa": [
+          "eɪ"
+        ]
+      },
+      {
+        "graphemes": "k",
+        "phonemes_arpabet": [
+          "K"
+        ],
+        "phonemes_ipa": [
+          "k"
+        ]
+      },
+      {
+        "graphemes": "e",
+        "phonemes_arpabet": [],
+        "phonemes_ipa": []
+      }
+    ]
+  },
+  {
+    "word": "cake",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "c",
+        "phonemes_arpabet": [
+          "K"
+        ],
+        "phonemes_ipa": [
+          "k"
+        ]
+      },
+      {
+        "graphemes": "a",
+        "phonemes_arpabet": [
+          "EY1"
+        ],
+        "phonemes_ipa": [
+          "eɪ"
+        ]
+      },
+      {
+        "graphemes": "k",
+        "phonemes_arpabet": [
+          "K"
+        ],
+        "phonemes_ipa": [
+          "k"
+        ]
+      },
+      {
+        "graphemes": "e",
+        "phonemes_arpabet": [],
+        "phonemes_ipa": []
+      }
+    ]
+  },
+  {
+    "word": "bike",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "b",
+        "phonemes_arpabet": [
+          "B"
+        ],
+        "phonemes_ipa": [
+          "b"
+        ]
+      },
+      {
+        "graphemes": "i",
+        "phonemes_arpabet": [
+          "AY1"
+        ],
+        "phonemes_ipa": [
+          "aɪ"
+        ]
+      },
+      {
+        "graphemes": "k",
+        "phonemes_arpabet": [
+          "K"
+        ],
+        "phonemes_ipa": [
+          "k"
+        ]
+      },
+      {
+        "graphemes": "e",
+        "phonemes_arpabet": [],
+        "phonemes_ipa": []
+      }
+    ]
+  },
+  {
+    "word": "like",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "l",
+        "phonemes_arpabet": [
+          "L"
+        ],
+        "phonemes_ipa": [
+          "l"
+        ]
+      },
+      {
+        "graphemes": "i",
+        "phonemes_arpabet": [
+          "AY1"
+        ],
+        "phonemes_ipa": [
+          "aɪ"
+        ]
+      },
+      {
+        "graphemes": "k",
+        "phonemes_arpabet": [
+          "K"
+        ],
+        "phonemes_ipa": [
+          "k"
+        ]
+      },
+      {
+        "graphemes": "e",
+        "phonemes_arpabet": [],
+        "phonemes_ipa": []
+      }
+    ]
+  },
+  {
+    "word": "time",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "t",
+        "phonemes_arpabet": [
+          "T"
+        ],
+        "phonemes_ipa": [
+          "t"
+        ]
+      },
+      {
+        "graphemes": "i",
+        "phonemes_arpabet": [
+          "AY1"
+        ],
+        "phonemes_ipa": [
+          "aɪ"
+        ]
+      },
+      {
+        "graphemes": "m",
+        "phonemes_arpabet": [
+          "M"
+        ],
+        "phonemes_ipa": [
+          "m"
+        ]
+      },
+      {
+        "graphemes": "e",
+        "phonemes_arpabet": [],
+        "phonemes_ipa": []
+      }
+    ]
+  },
+  {
+    "word": "home",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "h",
+        "phonemes_arpabet": [
+          "HH"
+        ],
+        "phonemes_ipa": [
+          "h"
+        ]
+      },
+      {
+        "graphemes": "o",
+        "phonemes_arpabet": [
+          "OW1"
+        ],
+        "phonemes_ipa": [
+          "oʊ"
+        ]
+      },
+      {
+        "graphemes": "m",
+        "phonemes_arpabet": [
+          "M"
+        ],
+        "phonemes_ipa": [
+          "m"
+        ]
+      },
+      {
+        "graphemes": "e",
+        "phonemes_arpabet": [],
+        "phonemes_ipa": []
+      }
+    ]
+  },
+  {
+    "word": "hope",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "h",
+        "phonemes_arpabet": [
+          "HH"
+        ],
+        "phonemes_ipa": [
+          "h"
+        ]
+      },
+      {
+        "graphemes": "o",
+        "phonemes_arpabet": [
+          "OW1"
+        ],
+        "phonemes_ipa": [
+          "oʊ"
+        ]
+      },
+      {
+        "graphemes": "p",
+        "phonemes_arpabet": [
+          "P"
+        ],
+        "phonemes_ipa": [
+          "p"
+        ]
+      },
+      {
+        "graphemes": "e",
+        "phonemes_arpabet": [],
+        "phonemes_ipa": []
+      }
+    ]
+  },
+  {
+    "word": "cute",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "c",
+        "phonemes_arpabet": [
+          "K"
+        ],
+        "phonemes_ipa": [
+          "k"
+        ]
+      },
+      {
+        "graphemes": "u",
+        "phonemes_arpabet": [
+          "Y",
+          "UW1"
+        ],
+        "phonemes_ipa": [
+          "j",
+          "uː"
+        ]
+      },
+      {
+        "graphemes": "t",
+        "phonemes_arpabet": [
+          "T"
+        ],
+        "phonemes_ipa": [
+          "t"
+        ]
+      },
+      {
+        "graphemes": "e",
+        "phonemes_arpabet": [],
+        "phonemes_ipa": []
+      }
+    ]
+  },
+  {
+    "word": "use",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "u",
+        "phonemes_arpabet": [
+          "Y",
+          "UW1"
+        ],
+        "phonemes_ipa": [
+          "j",
+          "uː"
+        ]
+      },
+      {
+        "graphemes": "s",
+        "phonemes_arpabet": [
+          "S"
+        ],
+        "phonemes_ipa": [
+          "s"
+        ]
+      },
+      {
+        "graphemes": "e",
+        "phonemes_arpabet": [],
+        "phonemes_ipa": []
+      }
+    ]
+  },
+  {
+    "word": "rain",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "r",
+        "phonemes_arpabet": [
+          "R"
+        ],
+        "phonemes_ipa": [
+          "ɹ"
+        ]
+      },
+      {
+        "graphemes": "ai",
+        "phonemes_arpabet": [
+          "EY1"
+        ],
+        "phonemes_ipa": [
+          "eɪ"
+        ]
+      },
+      {
+        "graphemes": "n",
+        "phonemes_arpabet": [
+          "N"
+        ],
+        "phonemes_ipa": [
+          "n"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "train",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "t",
+        "phonemes_arpabet": [
+          "T"
+        ],
+        "phonemes_ipa": [
+          "t"
+        ]
+      },
+      {
+        "graphemes": "r",
+        "phonemes_arpabet": [
+          "R"
+        ],
+        "phonemes_ipa": [
+          "ɹ"
+        ]
+      },
+      {
+        "graphemes": "ai",
+        "phonemes_arpabet": [
+          "EY1"
+        ],
+        "phonemes_ipa": [
+          "eɪ"
+        ]
+      },
+      {
+        "graphemes": "n",
+        "phonemes_arpabet": [
+          "N"
+        ],
+        "phonemes_ipa": [
+          "n"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "mail",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "m",
+        "phonemes_arpabet": [
+          "M"
+        ],
+        "phonemes_ipa": [
+          "m"
+        ]
+      },
+      {
+        "graphemes": "ai",
+        "phonemes_arpabet": [
+          "EY1"
+        ],
+        "phonemes_ipa": [
+          "eɪ"
+        ]
+      },
+      {
+        "graphemes": "l",
+        "phonemes_arpabet": [
+          "L"
+        ],
+        "phonemes_ipa": [
+          "l"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "day",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "d",
+        "phonemes_arpabet": [
+          "D"
+        ],
+        "phonemes_ipa": [
+          "d"
+        ]
+      },
+      {
+        "graphemes": "ay",
+        "phonemes_arpabet": [
+          "EY1"
+        ],
+        "phonemes_ipa": [
+          "eɪ"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "play",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "p",
+        "phonemes_arpabet": [
+          "P"
+        ],
+        "phonemes_ipa": [
+          "p"
+        ]
+      },
+      {
+        "graphemes": "l",
+        "phonemes_arpabet": [
+          "L"
+        ],
+        "phonemes_ipa": [
+          "l"
+        ]
+      },
+      {
+        "graphemes": "ay",
+        "phonemes_arpabet": [
+          "EY1"
+        ],
+        "phonemes_ipa": [
+          "eɪ"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "boat",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "b",
+        "phonemes_arpabet": [
+          "B"
+        ],
+        "phonemes_ipa": [
+          "b"
+        ]
+      },
+      {
+        "graphemes": "o",
+        "phonemes_arpabet": [
+          "OW1"
+        ],
+        "phonemes_ipa": [
+          "oʊ"
+        ]
+      },
+      {
+        "graphemes": "a",
+        "phonemes_arpabet": [],
+        "phonemes_ipa": []
+      },
+      {
+        "graphemes": "t",
+        "phonemes_arpabet": [
+          "T"
+        ],
+        "phonemes_ipa": [
+          "t"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "coat",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "c",
+        "phonemes_arpabet": [
+          "K"
+        ],
+        "phonemes_ipa": [
+          "k"
+        ]
+      },
+      {
+        "graphemes": "o",
+        "phonemes_arpabet": [
+          "OW1"
+        ],
+        "phonemes_ipa": [
+          "oʊ"
+        ]
+      },
+      {
+        "graphemes": "a",
+        "phonemes_arpabet": [],
+        "phonemes_ipa": []
+      },
+      {
+        "graphemes": "t",
+        "phonemes_arpabet": [
+          "T"
+        ],
+        "phonemes_ipa": [
+          "t"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "road",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "r",
+        "phonemes_arpabet": [
+          "R"
+        ],
+        "phonemes_ipa": [
+          "ɹ"
+        ]
+      },
+      {
+        "graphemes": "o",
+        "phonemes_arpabet": [
+          "OW1"
+        ],
+        "phonemes_ipa": [
+          "oʊ"
+        ]
+      },
+      {
+        "graphemes": "a",
+        "phonemes_arpabet": [],
+        "phonemes_ipa": []
+      },
+      {
+        "graphemes": "d",
+        "phonemes_arpabet": [
+          "D"
+        ],
+        "phonemes_ipa": [
+          "d"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "team",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "t",
+        "phonemes_arpabet": [
+          "T"
+        ],
+        "phonemes_ipa": [
+          "t"
+        ]
+      },
+      {
+        "graphemes": "ea",
+        "phonemes_arpabet": [
+          "IY1"
+        ],
+        "phonemes_ipa": [
+          "iː"
+        ]
+      },
+      {
+        "graphemes": "m",
+        "phonemes_arpabet": [
+          "M"
+        ],
+        "phonemes_ipa": [
+          "m"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "seat",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "s",
+        "phonemes_arpabet": [
+          "S"
+        ],
+        "phonemes_ipa": [
+          "s"
+        ]
+      },
+      {
+        "graphemes": "ea",
+        "phonemes_arpabet": [
+          "IY1"
+        ],
+        "phonemes_ipa": [
+          "iː"
+        ]
+      },
+      {
+        "graphemes": "t",
+        "phonemes_arpabet": [
+          "T"
+        ],
+        "phonemes_ipa": [
+          "t"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "green",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "g",
+        "phonemes_arpabet": [
+          "G"
+        ],
+        "phonemes_ipa": [
+          "ɡ"
+        ]
+      },
+      {
+        "graphemes": "r",
+        "phonemes_arpabet": [
+          "R"
+        ],
+        "phonemes_ipa": [
+          "ɹ"
+        ]
+      },
+      {
+        "graphemes": "e",
+        "phonemes_arpabet": [
+          "IY1"
+        ],
+        "phonemes_ipa": [
+          "iː"
+        ]
+      },
+      {
+        "graphemes": "e",
+        "phonemes_arpabet": [],
+        "phonemes_ipa": []
+      },
+      {
+        "graphemes": "n",
+        "phonemes_arpabet": [
+          "N"
+        ],
+        "phonemes_ipa": [
+          "n"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "book",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "b",
+        "phonemes_arpabet": [
+          "B"
+        ],
+        "phonemes_ipa": [
+          "b"
+        ]
+      },
+      {
+        "graphemes": "oo",
+        "phonemes_arpabet": [
+          "UH1"
+        ],
+        "phonemes_ipa": [
+          "ʊ"
+        ]
+      },
+      {
+        "graphemes": "k",
+        "phonemes_arpabet": [
+          "K"
+        ],
+        "phonemes_ipa": [
+          "k"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "look",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "l",
+        "phonemes_arpabet": [
+          "L"
+        ],
+        "phonemes_ipa": [
+          "l"
+        ]
+      },
+      {
+        "graphemes": "oo",
+        "phonemes_arpabet": [
+          "UH1"
+        ],
+        "phonemes_ipa": [
+          "ʊ"
+        ]
+      },
+      {
+        "graphemes": "k",
+        "phonemes_arpabet": [
+          "K"
+        ],
+        "phonemes_ipa": [
+          "k"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "moon",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "m",
+        "phonemes_arpabet": [
+          "M"
+        ],
+        "phonemes_ipa": [
+          "m"
+        ]
+      },
+      {
+        "graphemes": "oo",
+        "phonemes_arpabet": [
+          "UW1"
+        ],
+        "phonemes_ipa": [
+          "uː"
+        ]
+      },
+      {
+        "graphemes": "n",
+        "phonemes_arpabet": [
+          "N"
+        ],
+        "phonemes_ipa": [
+          "n"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "food",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "f",
+        "phonemes_arpabet": [
+          "F"
+        ],
+        "phonemes_ipa": [
+          "f"
+        ]
+      },
+      {
+        "graphemes": "oo",
+        "phonemes_arpabet": [
+          "UW1"
+        ],
+        "phonemes_ipa": [
+          "uː"
+        ]
+      },
+      {
+        "graphemes": "d",
+        "phonemes_arpabet": [
+          "D"
+        ],
+        "phonemes_ipa": [
+          "d"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "coin",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "c",
+        "phonemes_arpabet": [
+          "K"
+        ],
+        "phonemes_ipa": [
+          "k"
+        ]
+      },
+      {
+        "graphemes": "oi",
+        "phonemes_arpabet": [
+          "OY1"
+        ],
+        "phonemes_ipa": [
+          "ɔɪ"
+        ]
+      },
+      {
+        "graphemes": "n",
+        "phonemes_arpabet": [
+          "N"
+        ],
+        "phonemes_ipa": [
+          "n"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "boy",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "b",
+        "phonemes_arpabet": [
+          "B"
+        ],
+        "phonemes_ipa": [
+          "b"
+        ]
+      },
+      {
+        "graphemes": "oy",
+        "phonemes_arpabet": [
+          "OY1"
+        ],
+        "phonemes_ipa": [
+          "ɔɪ"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "cow",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "c",
+        "phonemes_arpabet": [
+          "K"
+        ],
+        "phonemes_ipa": [
+          "k"
+        ]
+      },
+      {
+        "graphemes": "ow",
+        "phonemes_arpabet": [
+          "AW1"
+        ],
+        "phonemes_ipa": [
+          "aʊ"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "now",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "n",
+        "phonemes_arpabet": [
+          "N"
+        ],
+        "phonemes_ipa": [
+          "n"
+        ]
+      },
+      {
+        "graphemes": "ow",
+        "phonemes_arpabet": [
+          "AW1"
+        ],
+        "phonemes_ipa": [
+          "aʊ"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "light",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "l",
+        "phonemes_arpabet": [
+          "L"
+        ],
+        "phonemes_ipa": [
+          "l"
+        ]
+      },
+      {
+        "graphemes": "i",
+        "phonemes_arpabet": [
+          "AY1"
+        ],
+        "phonemes_ipa": [
+          "aɪ"
+        ]
+      },
+      {
+        "graphemes": "gh",
+        "phonemes_arpabet": [],
+        "phonemes_ipa": []
+      },
+      {
+        "graphemes": "t",
+        "phonemes_arpabet": [
+          "T"
+        ],
+        "phonemes_ipa": [
+          "t"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "eight",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "ei",
+        "phonemes_arpabet": [
+          "EY1"
+        ],
+        "phonemes_ipa": [
+          "eɪ"
+        ]
+      },
+      {
+        "graphemes": "gh",
+        "phonemes_arpabet": [],
+        "phonemes_ipa": []
+      },
+      {
+        "graphemes": "t",
+        "phonemes_arpabet": [
+          "T"
+        ],
+        "phonemes_ipa": [
+          "t"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "night",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "n",
+        "phonemes_arpabet": [
+          "N"
+        ],
+        "phonemes_ipa": [
+          "n"
+        ]
+      },
+      {
+        "graphemes": "i",
+        "phonemes_arpabet": [
+          "AY1"
+        ],
+        "phonemes_ipa": [
+          "aɪ"
+        ]
+      },
+      {
+        "graphemes": "gh",
+        "phonemes_arpabet": [],
+        "phonemes_ipa": []
+      },
+      {
+        "graphemes": "t",
+        "phonemes_arpabet": [
+          "T"
+        ],
+        "phonemes_ipa": [
+          "t"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "rough",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "r",
+        "phonemes_arpabet": [
+          "R"
+        ],
+        "phonemes_ipa": [
+          "ɹ"
+        ]
+      },
+      {
+        "graphemes": "o",
+        "phonemes_arpabet": [],
+        "phonemes_ipa": []
+      },
+      {
+        "graphemes": "u",
+        "phonemes_arpabet": [
+          "AH1"
+        ],
+        "phonemes_ipa": [
+          "ʌ"
+        ]
+      },
+      {
+        "graphemes": "gh",
+        "phonemes_arpabet": [
+          "F"
+        ],
+        "phonemes_ipa": [
+          "f"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "laugh",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "l",
+        "phonemes_arpabet": [
+          "L"
+        ],
+        "phonemes_ipa": [
+          "l"
+        ]
+      },
+      {
+        "graphemes": "a",
+        "phonemes_arpabet": [
+          "AE1"
+        ],
+        "phonemes_ipa": [
+          "æ"
+        ]
+      },
+      {
+        "graphemes": "u",
+        "phonemes_arpabet": [],
+        "phonemes_ipa": []
+      },
+      {
+        "graphemes": "gh",
+        "phonemes_arpabet": [
+          "F"
+        ],
+        "phonemes_ipa": [
+          "f"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "thought",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "th",
+        "phonemes_arpabet": [
+          "TH"
+        ],
+        "phonemes_ipa": [
+          "θ"
+        ]
+      },
+      {
+        "graphemes": "ou",
+        "phonemes_arpabet": [
+          "AO1"
+        ],
+        "phonemes_ipa": [
+          "ɔː"
+        ]
+      },
+      {
+        "graphemes": "gh",
+        "phonemes_arpabet": [],
+        "phonemes_ipa": []
+      },
+      {
+        "graphemes": "t",
+        "phonemes_arpabet": [
+          "T"
+        ],
+        "phonemes_ipa": [
+          "t"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "through",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "th",
+        "phonemes_arpabet": [
+          "TH"
+        ],
+        "phonemes_ipa": [
+          "θ"
+        ]
+      },
+      {
+        "graphemes": "r",
+        "phonemes_arpabet": [
+          "R"
+        ],
+        "phonemes_ipa": [
+          "ɹ"
+        ]
+      },
+      {
+        "graphemes": "ou",
+        "phonemes_arpabet": [
+          "UW1"
+        ],
+        "phonemes_ipa": [
+          "uː"
+        ]
+      },
+      {
+        "graphemes": "gh",
+        "phonemes_arpabet": [],
+        "phonemes_ipa": []
+      }
+    ]
+  },
+  {
+    "word": "could",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "c",
+        "phonemes_arpabet": [
+          "K"
+        ],
+        "phonemes_ipa": [
+          "k"
+        ]
+      },
+      {
+        "graphemes": "o",
+        "phonemes_arpabet": [],
+        "phonemes_ipa": []
+      },
+      {
+        "graphemes": "ul",
+        "phonemes_arpabet": [
+          "UH1"
+        ],
+        "phonemes_ipa": [
+          "ʊ"
+        ]
+      },
+      {
+        "graphemes": "d",
+        "phonemes_arpabet": [
+          "D"
+        ],
+        "phonemes_ipa": [
+          "d"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "would",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "w",
+        "phonemes_arpabet": [
+          "W"
+        ],
+        "phonemes_ipa": [
+          "w"
+        ]
+      },
+      {
+        "graphemes": "o",
+        "phonemes_arpabet": [],
+        "phonemes_ipa": []
+      },
+      {
+        "graphemes": "ul",
+        "phonemes_arpabet": [
+          "UH1"
+        ],
+        "phonemes_ipa": [
+          "ʊ"
+        ]
+      },
+      {
+        "graphemes": "d",
+        "phonemes_arpabet": [
+          "D"
+        ],
+        "phonemes_ipa": [
+          "d"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "should",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "sh",
+        "phonemes_arpabet": [
+          "SH"
+        ],
+        "phonemes_ipa": [
+          "ʃ"
+        ]
+      },
+      {
+        "graphemes": "o",
+        "phonemes_arpabet": [],
+        "phonemes_ipa": []
+      },
+      {
+        "graphemes": "ul",
+        "phonemes_arpabet": [
+          "UH1"
+        ],
+        "phonemes_ipa": [
+          "ʊ"
+        ]
+      },
+      {
+        "graphemes": "d",
+        "phonemes_arpabet": [
+          "D"
+        ],
+        "phonemes_ipa": [
+          "d"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "bread",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "b",
+        "phonemes_arpabet": [
+          "B"
+        ],
+        "phonemes_ipa": [
+          "b"
+        ]
+      },
+      {
+        "graphemes": "r",
+        "phonemes_arpabet": [
+          "R"
+        ],
+        "phonemes_ipa": [
+          "ɹ"
+        ]
+      },
+      {
+        "graphemes": "e",
+        "phonemes_arpabet": [],
+        "phonemes_ipa": []
+      },
+      {
+        "graphemes": "a",
+        "phonemes_arpabet": [
+          "EH1"
+        ],
+        "phonemes_ipa": [
+          "ɛ"
+        ]
+      },
+      {
+        "graphemes": "d",
+        "phonemes_arpabet": [
+          "D"
+        ],
+        "phonemes_ipa": [
+          "d"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "head",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "h",
+        "phonemes_arpabet": [
+          "HH"
+        ],
+        "phonemes_ipa": [
+          "h"
+        ]
+      },
+      {
+        "graphemes": "e",
+        "phonemes_arpabet": [],
+        "phonemes_ipa": []
+      },
+      {
+        "graphemes": "a",
+        "phonemes_arpabet": [
+          "EH1"
+        ],
+        "phonemes_ipa": [
+          "ɛ"
+        ]
+      },
+      {
+        "graphemes": "d",
+        "phonemes_arpabet": [
+          "D"
+        ],
+        "phonemes_ipa": [
+          "d"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "friend",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "f",
+        "phonemes_arpabet": [
+          "F"
+        ],
+        "phonemes_ipa": [
+          "f"
+        ]
+      },
+      {
+        "graphemes": "r",
+        "phonemes_arpabet": [
+          "R"
+        ],
+        "phonemes_ipa": [
+          "ɹ"
+        ]
+      },
+      {
+        "graphemes": "i",
+        "phonemes_arpabet": [],
+        "phonemes_ipa": []
+      },
+      {
+        "graphemes": "e",
+        "phonemes_arpabet": [
+          "EH1"
+        ],
+        "phonemes_ipa": [
+          "ɛ"
+        ]
+      },
+      {
+        "graphemes": "n",
+        "phonemes_arpabet": [
+          "N"
+        ],
+        "phonemes_ipa": [
+          "n"
+        ]
+      },
+      {
+        "graphemes": "d",
+        "phonemes_arpabet": [
+          "D"
+        ],
+        "phonemes_ipa": [
+          "d"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "field",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "f",
+        "phonemes_arpabet": [
+          "F"
+        ],
+        "phonemes_ipa": [
+          "f"
+        ]
+      },
+      {
+        "graphemes": "i",
+        "phonemes_arpabet": [
+          "IY1"
+        ],
+        "phonemes_ipa": [
+          "iː"
+        ]
+      },
+      {
+        "graphemes": "e",
+        "phonemes_arpabet": [],
+        "phonemes_ipa": []
+      },
+      {
+        "graphemes": "l",
+        "phonemes_arpabet": [
+          "L"
+        ],
+        "phonemes_ipa": [
+          "l"
+        ]
+      },
+      {
+        "graphemes": "d",
+        "phonemes_arpabet": [
+          "D"
+        ],
+        "phonemes_ipa": [
+          "d"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "chief",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "ch",
+        "phonemes_arpabet": [
+          "CH"
+        ],
+        "phonemes_ipa": [
+          "tʃ"
+        ]
+      },
+      {
+        "graphemes": "i",
+        "phonemes_arpabet": [
+          "IY1"
+        ],
+        "phonemes_ipa": [
+          "iː"
+        ]
+      },
+      {
+        "graphemes": "e",
+        "phonemes_arpabet": [],
+        "phonemes_ipa": []
+      },
+      {
+        "graphemes": "f",
+        "phonemes_arpabet": [
+          "F"
+        ],
+        "phonemes_ipa": [
+          "f"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "receive",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "r",
+        "phonemes_arpabet": [
+          "R"
+        ],
+        "phonemes_ipa": [
+          "ɹ"
+        ]
+      },
+      {
+        "graphemes": "e",
+        "phonemes_arpabet": [
+          "AH0"
+        ],
+        "phonemes_ipa": [
+          "ə"
+        ]
+      },
+      {
+        "graphemes": "c",
+        "phonemes_arpabet": [
+          "S"
+        ],
+        "phonemes_ipa": [
+          "s"
+        ]
+      },
+      {
+        "graphemes": "e",
+        "phonemes_arpabet": [],
+        "phonemes_ipa": []
+      },
+      {
+        "graphemes": "i",
+        "phonemes_arpabet": [
+          "IY1"
+        ],
+        "phonemes_ipa": [
+          "iː"
+        ]
+      },
+      {
+        "graphemes": "v",
+        "phonemes_arpabet": [
+          "V"
+        ],
+        "phonemes_ipa": [
+          "v"
+        ]
+      },
+      {
+        "graphemes": "e",
+        "phonemes_arpabet": [],
+        "phonemes_ipa": []
+      }
+    ]
+  },
+  {
+    "word": "one",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "o",
+        "phonemes_arpabet": [
+          "W",
+          "AH1"
+        ],
+        "phonemes_ipa": [
+          "w",
+          "ʌ"
+        ]
+      },
+      {
+        "graphemes": "ne",
+        "phonemes_arpabet": [
+          "N"
+        ],
+        "phonemes_ipa": [
+          "n"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "two",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "t",
+        "phonemes_arpabet": [
+          "T"
+        ],
+        "phonemes_ipa": [
+          "t"
+        ]
+      },
+      {
+        "graphemes": "wo",
+        "phonemes_arpabet": [
+          "UW1"
+        ],
+        "phonemes_ipa": [
+          "uː"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "said",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "s",
+        "phonemes_arpabet": [
+          "S"
+        ],
+        "phonemes_ipa": [
+          "s"
+        ]
+      },
+      {
+        "graphemes": "ai",
+        "phonemes_arpabet": [
+          "EH1"
+        ],
+        "phonemes_ipa": [
+          "ɛ"
+        ]
+      },
+      {
+        "graphemes": "d",
+        "phonemes_arpabet": [
+          "D"
+        ],
+        "phonemes_ipa": [
+          "d"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "says",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "s",
+        "phonemes_arpabet": [
+          "S"
+        ],
+        "phonemes_ipa": [
+          "s"
+        ]
+      },
+      {
+        "graphemes": "ay",
+        "phonemes_arpabet": [
+          "EH1"
+        ],
+        "phonemes_ipa": [
+          "ɛ"
+        ]
+      },
+      {
+        "graphemes": "s",
+        "phonemes_arpabet": [
+          "Z"
+        ],
+        "phonemes_ipa": [
+          "z"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "does",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "d",
+        "phonemes_arpabet": [
+          "D"
+        ],
+        "phonemes_ipa": [
+          "d"
+        ]
+      },
+      {
+        "graphemes": "o",
+        "phonemes_arpabet": [
+          "AH1"
+        ],
+        "phonemes_ipa": [
+          "ʌ"
+        ]
+      },
+      {
+        "graphemes": "e",
+        "phonemes_arpabet": [],
+        "phonemes_ipa": []
+      },
+      {
+        "graphemes": "s",
+        "phonemes_arpabet": [
+          "Z"
+        ],
+        "phonemes_ipa": [
+          "z"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "gone",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "g",
+        "phonemes_arpabet": [
+          "G"
+        ],
+        "phonemes_ipa": [
+          "ɡ"
+        ]
+      },
+      {
+        "graphemes": "o",
+        "phonemes_arpabet": [
+          "AO1"
+        ],
+        "phonemes_ipa": [
+          "ɔː"
+        ]
+      },
+      {
+        "graphemes": "n",
+        "phonemes_arpabet": [
+          "N"
+        ],
+        "phonemes_ipa": [
+          "n"
+        ]
+      },
+      {
+        "graphemes": "e",
+        "phonemes_arpabet": [],
+        "phonemes_ipa": []
+      }
+    ]
+  },
+  {
+    "word": "women",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "wo",
+        "phonemes_arpabet": [
+          "W",
+          "IH1"
+        ],
+        "phonemes_ipa": [
+          "w",
+          "ɪ"
+        ]
+      },
+      {
+        "graphemes": "m",
+        "phonemes_arpabet": [
+          "M"
+        ],
+        "phonemes_ipa": [
+          "m"
+        ]
+      },
+      {
+        "graphemes": "en",
+        "phonemes_arpabet": [
+          "AH0",
+          "N"
+        ],
+        "phonemes_ipa": [
+          "ə",
+          "n"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "colonel",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "col",
+        "phonemes_arpabet": [
+          "K",
+          "ER1"
+        ],
+        "phonemes_ipa": [
+          "k",
+          "ɝː"
+        ]
+      },
+      {
+        "graphemes": "on",
+        "phonemes_arpabet": [
+          "N"
+        ],
+        "phonemes_ipa": [
+          "n"
+        ]
+      },
+      {
+        "graphemes": "el",
+        "phonemes_arpabet": [
+          "AH0",
+          "L"
+        ],
+        "phonemes_ipa": [
+          "ə",
+          "l"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "choir",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "c",
+        "phonemes_arpabet": [
+          "K"
+        ],
+        "phonemes_ipa": [
+          "k"
+        ]
+      },
+      {
+        "graphemes": "h",
+        "phonemes_arpabet": [],
+        "phonemes_ipa": []
+      },
+      {
+        "graphemes": "o",
+        "phonemes_arpabet": [
+          "W"
+        ],
+        "phonemes_ipa": [
+          "w"
+        ]
+      },
+      {
+        "graphemes": "i",
+        "phonemes_arpabet": [
+          "AY1"
+        ],
+        "phonemes_ipa": [
+          "aɪ"
+        ]
+      },
+      {
+        "graphemes": "r",
+        "phonemes_arpabet": [
+          "ER0"
+        ],
+        "phonemes_ipa": [
+          "ɝː"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "island",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "i",
+        "phonemes_arpabet": [
+          "AY1"
+        ],
+        "phonemes_ipa": [
+          "aɪ"
+        ]
+      },
+      {
+        "graphemes": "s",
+        "phonemes_arpabet": [],
+        "phonemes_ipa": []
+      },
+      {
+        "graphemes": "l",
+        "phonemes_arpabet": [
+          "L"
+        ],
+        "phonemes_ipa": [
+          "l"
+        ]
+      },
+      {
+        "graphemes": "a",
+        "phonemes_arpabet": [
+          "AH0"
+        ],
+        "phonemes_ipa": [
+          "ə"
+        ]
+      },
+      {
+        "graphemes": "nd",
+        "phonemes_arpabet": [
+          "N",
+          "D"
+        ],
+        "phonemes_ipa": [
+          "n",
+          "d"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "subtle",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "s",
+        "phonemes_arpabet": [
+          "S"
+        ],
+        "phonemes_ipa": [
+          "s"
+        ]
+      },
+      {
+        "graphemes": "ub",
+        "phonemes_arpabet": [
+          "AH1"
+        ],
+        "phonemes_ipa": [
+          "ʌ"
+        ]
+      },
+      {
+        "graphemes": "t",
+        "phonemes_arpabet": [
+          "T"
+        ],
+        "phonemes_ipa": [
+          "t"
+        ]
+      },
+      {
+        "graphemes": "l",
+        "phonemes_arpabet": [
+          "AH0",
+          "L"
+        ],
+        "phonemes_ipa": [
+          "ə",
+          "l"
+        ]
+      },
+      {
+        "graphemes": "e",
+        "phonemes_arpabet": [],
+        "phonemes_ipa": []
+      }
+    ]
+  },
+  {
+    "word": "debt",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "d",
+        "phonemes_arpabet": [
+          "D"
+        ],
+        "phonemes_ipa": [
+          "d"
+        ]
+      },
+      {
+        "graphemes": "e",
+        "phonemes_arpabet": [
+          "EH1"
+        ],
+        "phonemes_ipa": [
+          "ɛ"
+        ]
+      },
+      {
+        "graphemes": "bt",
+        "phonemes_arpabet": [
+          "T"
+        ],
+        "phonemes_ipa": [
+          "t"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "castle",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "c",
+        "phonemes_arpabet": [
+          "K"
+        ],
+        "phonemes_ipa": [
+          "k"
+        ]
+      },
+      {
+        "graphemes": "a",
+        "phonemes_arpabet": [
+          "AE1"
+        ],
+        "phonemes_ipa": [
+          "æ"
+        ]
+      },
+      {
+        "graphemes": "s",
+        "phonemes_arpabet": [
+          "S"
+        ],
+        "phonemes_ipa": [
+          "s"
+        ]
+      },
+      {
+        "graphemes": "t",
+        "phonemes_arpabet": [
+          "AH0"
+        ],
+        "phonemes_ipa": [
+          "ə"
+        ]
+      },
+      {
+        "graphemes": "l",
+        "phonemes_arpabet": [
+          "L"
+        ],
+        "phonemes_ipa": [
+          "l"
+        ]
+      },
+      {
+        "graphemes": "e",
+        "phonemes_arpabet": [],
+        "phonemes_ipa": []
+      }
+    ]
+  },
+  {
+    "word": "often",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "o",
+        "phonemes_arpabet": [
+          "AO1"
+        ],
+        "phonemes_ipa": [
+          "ɔː"
+        ]
+      },
+      {
+        "graphemes": "f",
+        "phonemes_arpabet": [
+          "F"
+        ],
+        "phonemes_ipa": [
+          "f"
+        ]
+      },
+      {
+        "graphemes": "t",
+        "phonemes_arpabet": [],
+        "phonemes_ipa": []
+      },
+      {
+        "graphemes": "e",
+        "phonemes_arpabet": [
+          "AH0"
+        ],
+        "phonemes_ipa": [
+          "ə"
+        ]
+      },
+      {
+        "graphemes": "n",
+        "phonemes_arpabet": [
+          "N"
+        ],
+        "phonemes_ipa": [
+          "n"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "salmon",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "s",
+        "phonemes_arpabet": [
+          "S"
+        ],
+        "phonemes_ipa": [
+          "s"
+        ]
+      },
+      {
+        "graphemes": "al",
+        "phonemes_arpabet": [
+          "AE1"
+        ],
+        "phonemes_ipa": [
+          "æ"
+        ]
+      },
+      {
+        "graphemes": "m",
+        "phonemes_arpabet": [
+          "M"
+        ],
+        "phonemes_ipa": [
+          "m"
+        ]
+      },
+      {
+        "graphemes": "o",
+        "phonemes_arpabet": [
+          "AH0"
+        ],
+        "phonemes_ipa": [
+          "ə"
+        ]
+      },
+      {
+        "graphemes": "n",
+        "phonemes_arpabet": [
+          "N"
+        ],
+        "phonemes_ipa": [
+          "n"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "aisle",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "a",
+        "phonemes_arpabet": [],
+        "phonemes_ipa": []
+      },
+      {
+        "graphemes": "i",
+        "phonemes_arpabet": [
+          "AY1"
+        ],
+        "phonemes_ipa": [
+          "aɪ"
+        ]
+      },
+      {
+        "graphemes": "s",
+        "phonemes_arpabet": [],
+        "phonemes_ipa": []
+      },
+      {
+        "graphemes": "l",
+        "phonemes_arpabet": [
+          "L"
+        ],
+        "phonemes_ipa": [
+          "l"
+        ]
+      },
+      {
+        "graphemes": "e",
+        "phonemes_arpabet": [],
+        "phonemes_ipa": []
+      }
+    ]
+  },
+  {
+    "word": "wednesday",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "w",
+        "phonemes_arpabet": [
+          "W"
+        ],
+        "phonemes_ipa": [
+          "w"
+        ]
+      },
+      {
+        "graphemes": "e",
+        "phonemes_arpabet": [
+          "EH1"
+        ],
+        "phonemes_ipa": [
+          "ɛ"
+        ]
+      },
+      {
+        "graphemes": "d",
+        "phonemes_arpabet": [],
+        "phonemes_ipa": []
+      },
+      {
+        "graphemes": "n",
+        "phonemes_arpabet": [
+          "N"
+        ],
+        "phonemes_ipa": [
+          "n"
+        ]
+      },
+      {
+        "graphemes": "e",
+        "phonemes_arpabet": [],
+        "phonemes_ipa": []
+      },
+      {
+        "graphemes": "s",
+        "phonemes_arpabet": [
+          "Z"
+        ],
+        "phonemes_ipa": [
+          "z"
+        ]
+      },
+      {
+        "graphemes": "d",
+        "phonemes_arpabet": [
+          "D"
+        ],
+        "phonemes_ipa": [
+          "d"
+        ]
+      },
+      {
+        "graphemes": "a",
+        "phonemes_arpabet": [],
+        "phonemes_ipa": []
+      },
+      {
+        "graphemes": "y",
+        "phonemes_arpabet": [
+          "IY0"
+        ],
+        "phonemes_ipa": [
+          "i"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "iron",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "i",
+        "phonemes_arpabet": [
+          "AY1"
+        ],
+        "phonemes_ipa": [
+          "aɪ"
+        ]
+      },
+      {
+        "graphemes": "r",
+        "phonemes_arpabet": [
+          "ER0"
+        ],
+        "phonemes_ipa": [
+          "ɝː"
+        ]
+      },
+      {
+        "graphemes": "o",
+        "phonemes_arpabet": [],
+        "phonemes_ipa": []
+      },
+      {
+        "graphemes": "n",
+        "phonemes_arpabet": [
+          "N"
+        ],
+        "phonemes_ipa": [
+          "n"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "yacht",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "y",
+        "phonemes_arpabet": [
+          "Y"
+        ],
+        "phonemes_ipa": [
+          "j"
+        ]
+      },
+      {
+        "graphemes": "a",
+        "phonemes_arpabet": [
+          "AA1"
+        ],
+        "phonemes_ipa": [
+          "ɑː"
+        ]
+      },
+      {
+        "graphemes": "ch",
+        "phonemes_arpabet": [],
+        "phonemes_ipa": []
+      },
+      {
+        "graphemes": "t",
+        "phonemes_arpabet": [
+          "T"
+        ],
+        "phonemes_ipa": [
+          "t"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "answer",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "a",
+        "phonemes_arpabet": [
+          "AE1"
+        ],
+        "phonemes_ipa": [
+          "æ"
+        ]
+      },
+      {
+        "graphemes": "n",
+        "phonemes_arpabet": [
+          "N"
+        ],
+        "phonemes_ipa": [
+          "n"
+        ]
+      },
+      {
+        "graphemes": "s",
+        "phonemes_arpabet": [
+          "S"
+        ],
+        "phonemes_ipa": [
+          "s"
+        ]
+      },
+      {
+        "graphemes": "w",
+        "phonemes_arpabet": [],
+        "phonemes_ipa": []
+      },
+      {
+        "graphemes": "er",
+        "phonemes_arpabet": [
+          "ER0"
+        ],
+        "phonemes_ipa": [
+          "ɝː"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "sword",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "s",
+        "phonemes_arpabet": [
+          "S"
+        ],
+        "phonemes_ipa": [
+          "s"
+        ]
+      },
+      {
+        "graphemes": "w",
+        "phonemes_arpabet": [],
+        "phonemes_ipa": []
+      },
+      {
+        "graphemes": "o",
+        "phonemes_arpabet": [
+          "AO1"
+        ],
+        "phonemes_ipa": [
+          "ɔː"
+        ]
+      },
+      {
+        "graphemes": "r",
+        "phonemes_arpabet": [
+          "R"
+        ],
+        "phonemes_ipa": [
+          "ɹ"
+        ]
+      },
+      {
+        "graphemes": "d",
+        "phonemes_arpabet": [
+          "D"
+        ],
+        "phonemes_ipa": [
+          "d"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "thumb",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "th",
+        "phonemes_arpabet": [
+          "TH"
+        ],
+        "phonemes_ipa": [
+          "θ"
+        ]
+      },
+      {
+        "graphemes": "u",
+        "phonemes_arpabet": [
+          "AH1"
+        ],
+        "phonemes_ipa": [
+          "ʌ"
+        ]
+      },
+      {
+        "graphemes": "mb",
+        "phonemes_arpabet": [
+          "M"
+        ],
+        "phonemes_ipa": [
+          "m"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "knight",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "kn",
+        "phonemes_arpabet": [
+          "N"
+        ],
+        "phonemes_ipa": [
+          "n"
+        ]
+      },
+      {
+        "graphemes": "i",
+        "phonemes_arpabet": [
+          "AY1"
+        ],
+        "phonemes_ipa": [
+          "aɪ"
+        ]
+      },
+      {
+        "graphemes": "gh",
+        "phonemes_arpabet": [],
+        "phonemes_ipa": []
+      },
+      {
+        "graphemes": "t",
+        "phonemes_arpabet": [
+          "T"
+        ],
+        "phonemes_ipa": [
+          "t"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "write",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "wr",
+        "phonemes_arpabet": [
+          "R"
+        ],
+        "phonemes_ipa": [
+          "ɹ"
+        ]
+      },
+      {
+        "graphemes": "i",
+        "phonemes_arpabet": [
+          "AY1"
+        ],
+        "phonemes_ipa": [
+          "aɪ"
+        ]
+      },
+      {
+        "graphemes": "t",
+        "phonemes_arpabet": [
+          "T"
+        ],
+        "phonemes_ipa": [
+          "t"
+        ]
+      },
+      {
+        "graphemes": "e",
+        "phonemes_arpabet": [],
+        "phonemes_ipa": []
+      }
+    ]
+  },
+  {
+    "word": "wrong",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "wr",
+        "phonemes_arpabet": [
+          "R"
+        ],
+        "phonemes_ipa": [
+          "ɹ"
+        ]
+      },
+      {
+        "graphemes": "o",
+        "phonemes_arpabet": [
+          "AO1"
+        ],
+        "phonemes_ipa": [
+          "ɔː"
+        ]
+      },
+      {
+        "graphemes": "ng",
+        "phonemes_arpabet": [
+          "NG"
+        ],
+        "phonemes_ipa": [
+          "ŋ"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "gnome",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "g",
+        "phonemes_arpabet": [],
+        "phonemes_ipa": []
+      },
+      {
+        "graphemes": "n",
+        "phonemes_arpabet": [
+          "N"
+        ],
+        "phonemes_ipa": [
+          "n"
+        ]
+      },
+      {
+        "graphemes": "o",
+        "phonemes_arpabet": [
+          "OW1"
+        ],
+        "phonemes_ipa": [
+          "oʊ"
+        ]
+      },
+      {
+        "graphemes": "m",
+        "phonemes_arpabet": [
+          "M"
+        ],
+        "phonemes_ipa": [
+          "m"
+        ]
+      },
+      {
+        "graphemes": "e",
+        "phonemes_arpabet": [],
+        "phonemes_ipa": []
+      }
+    ]
+  },
+  {
+    "word": "sign",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "s",
+        "phonemes_arpabet": [
+          "S"
+        ],
+        "phonemes_ipa": [
+          "s"
+        ]
+      },
+      {
+        "graphemes": "i",
+        "phonemes_arpabet": [
+          "AY1"
+        ],
+        "phonemes_ipa": [
+          "aɪ"
+        ]
+      },
+      {
+        "graphemes": "g",
+        "phonemes_arpabet": [],
+        "phonemes_ipa": []
+      },
+      {
+        "graphemes": "n",
+        "phonemes_arpabet": [
+          "N"
+        ],
+        "phonemes_ipa": [
+          "n"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "comb",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "c",
+        "phonemes_arpabet": [
+          "K"
+        ],
+        "phonemes_ipa": [
+          "k"
+        ]
+      },
+      {
+        "graphemes": "o",
+        "phonemes_arpabet": [
+          "OW1"
+        ],
+        "phonemes_ipa": [
+          "oʊ"
+        ]
+      },
+      {
+        "graphemes": "mb",
+        "phonemes_arpabet": [
+          "M"
+        ],
+        "phonemes_ipa": [
+          "m"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "lamb",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "l",
+        "phonemes_arpabet": [
+          "L"
+        ],
+        "phonemes_ipa": [
+          "l"
+        ]
+      },
+      {
+        "graphemes": "a",
+        "phonemes_arpabet": [
+          "AE1"
+        ],
+        "phonemes_ipa": [
+          "æ"
+        ]
+      },
+      {
+        "graphemes": "mb",
+        "phonemes_arpabet": [
+          "M"
+        ],
+        "phonemes_ipa": [
+          "m"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "about",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "a",
+        "phonemes_arpabet": [
+          "AH0"
+        ],
+        "phonemes_ipa": [
+          "ə"
+        ]
+      },
+      {
+        "graphemes": "b",
+        "phonemes_arpabet": [
+          "B"
+        ],
+        "phonemes_ipa": [
+          "b"
+        ]
+      },
+      {
+        "graphemes": "ou",
+        "phonemes_arpabet": [
+          "AW1"
+        ],
+        "phonemes_ipa": [
+          "aʊ"
+        ]
+      },
+      {
+        "graphemes": "t",
+        "phonemes_arpabet": [
+          "T"
+        ],
+        "phonemes_ipa": [
+          "t"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "again",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "a",
+        "phonemes_arpabet": [
+          "AH0"
+        ],
+        "phonemes_ipa": [
+          "ə"
+        ]
+      },
+      {
+        "graphemes": "g",
+        "phonemes_arpabet": [
+          "G"
+        ],
+        "phonemes_ipa": [
+          "ɡ"
+        ]
+      },
+      {
+        "graphemes": "ai",
+        "phonemes_arpabet": [
+          "EH1"
+        ],
+        "phonemes_ipa": [
+          "ɛ"
+        ]
+      },
+      {
+        "graphemes": "n",
+        "phonemes_arpabet": [
+          "N"
+        ],
+        "phonemes_ipa": [
+          "n"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "animal",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "a",
+        "phonemes_arpabet": [
+          "AE1"
+        ],
+        "phonemes_ipa": [
+          "æ"
+        ]
+      },
+      {
+        "graphemes": "n",
+        "phonemes_arpabet": [
+          "N"
+        ],
+        "phonemes_ipa": [
+          "n"
+        ]
+      },
+      {
+        "graphemes": "i",
+        "phonemes_arpabet": [
+          "AH0"
+        ],
+        "phonemes_ipa": [
+          "ə"
+        ]
+      },
+      {
+        "graphemes": "m",
+        "phonemes_arpabet": [
+          "M"
+        ],
+        "phonemes_ipa": [
+          "m"
+        ]
+      },
+      {
+        "graphemes": "a",
+        "phonemes_arpabet": [
+          "AH0"
+        ],
+        "phonemes_ipa": [
+          "ə"
+        ]
+      },
+      {
+        "graphemes": "l",
+        "phonemes_arpabet": [
+          "L"
+        ],
+        "phonemes_ipa": [
+          "l"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "banana",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "b",
+        "phonemes_arpabet": [
+          "B"
+        ],
+        "phonemes_ipa": [
+          "b"
+        ]
+      },
+      {
+        "graphemes": "a",
+        "phonemes_arpabet": [
+          "AH0"
+        ],
+        "phonemes_ipa": [
+          "ə"
+        ]
+      },
+      {
+        "graphemes": "n",
+        "phonemes_arpabet": [
+          "N"
+        ],
+        "phonemes_ipa": [
+          "n"
+        ]
+      },
+      {
+        "graphemes": "a",
+        "phonemes_arpabet": [
+          "AE1"
+        ],
+        "phonemes_ipa": [
+          "æ"
+        ]
+      },
+      {
+        "graphemes": "n",
+        "phonemes_arpabet": [
+          "N"
+        ],
+        "phonemes_ipa": [
+          "n"
+        ]
+      },
+      {
+        "graphemes": "a",
+        "phonemes_arpabet": [
+          "AH0"
+        ],
+        "phonemes_ipa": [
+          "ə"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "camera",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "c",
+        "phonemes_arpabet": [
+          "K"
+        ],
+        "phonemes_ipa": [
+          "k"
+        ]
+      },
+      {
+        "graphemes": "a",
+        "phonemes_arpabet": [
+          "AE1"
+        ],
+        "phonemes_ipa": [
+          "æ"
+        ]
+      },
+      {
+        "graphemes": "m",
+        "phonemes_arpabet": [
+          "M"
+        ],
+        "phonemes_ipa": [
+          "m"
+        ]
+      },
+      {
+        "graphemes": "er",
+        "phonemes_arpabet": [
+          "ER0"
+        ],
+        "phonemes_ipa": [
+          "ɝː"
+        ]
+      },
+      {
+        "graphemes": "a",
+        "phonemes_arpabet": [
+          "AH0"
+        ],
+        "phonemes_ipa": [
+          "ə"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "family",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "f",
+        "phonemes_arpabet": [
+          "F"
+        ],
+        "phonemes_ipa": [
+          "f"
+        ]
+      },
+      {
+        "graphemes": "a",
+        "phonemes_arpabet": [
+          "AE1"
+        ],
+        "phonemes_ipa": [
+          "æ"
+        ]
+      },
+      {
+        "graphemes": "m",
+        "phonemes_arpabet": [
+          "M"
+        ],
+        "phonemes_ipa": [
+          "m"
+        ]
+      },
+      {
+        "graphemes": "i",
+        "phonemes_arpabet": [
+          "AH0"
+        ],
+        "phonemes_ipa": [
+          "ə"
+        ]
+      },
+      {
+        "graphemes": "l",
+        "phonemes_arpabet": [
+          "L"
+        ],
+        "phonemes_ipa": [
+          "l"
+        ]
+      },
+      {
+        "graphemes": "y",
+        "phonemes_arpabet": [
+          "IY0"
+        ],
+        "phonemes_ipa": [
+          "i"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "problem",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "p",
+        "phonemes_arpabet": [
+          "P"
+        ],
+        "phonemes_ipa": [
+          "p"
+        ]
+      },
+      {
+        "graphemes": "r",
+        "phonemes_arpabet": [
+          "R"
+        ],
+        "phonemes_ipa": [
+          "ɹ"
+        ]
+      },
+      {
+        "graphemes": "o",
+        "phonemes_arpabet": [
+          "AA1"
+        ],
+        "phonemes_ipa": [
+          "ɑː"
+        ]
+      },
+      {
+        "graphemes": "b",
+        "phonemes_arpabet": [
+          "B"
+        ],
+        "phonemes_ipa": [
+          "b"
+        ]
+      },
+      {
+        "graphemes": "l",
+        "phonemes_arpabet": [
+          "L"
+        ],
+        "phonemes_ipa": [
+          "l"
+        ]
+      },
+      {
+        "graphemes": "e",
+        "phonemes_arpabet": [
+          "AH0"
+        ],
+        "phonemes_ipa": [
+          "ə"
+        ]
+      },
+      {
+        "graphemes": "m",
+        "phonemes_arpabet": [
+          "M"
+        ],
+        "phonemes_ipa": [
+          "m"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "support",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "s",
+        "phonemes_arpabet": [
+          "S"
+        ],
+        "phonemes_ipa": [
+          "s"
+        ]
+      },
+      {
+        "graphemes": "u",
+        "phonemes_arpabet": [
+          "AH0"
+        ],
+        "phonemes_ipa": [
+          "ə"
+        ]
+      },
+      {
+        "graphemes": "pp",
+        "phonemes_arpabet": [
+          "P"
+        ],
+        "phonemes_ipa": [
+          "p"
+        ]
+      },
+      {
+        "graphemes": "o",
+        "phonemes_arpabet": [
+          "AO1"
+        ],
+        "phonemes_ipa": [
+          "ɔː"
+        ]
+      },
+      {
+        "graphemes": "r",
+        "phonemes_arpabet": [
+          "R"
+        ],
+        "phonemes_ipa": [
+          "ɹ"
+        ]
+      },
+      {
+        "graphemes": "t",
+        "phonemes_arpabet": [
+          "T"
+        ],
+        "phonemes_ipa": [
+          "t"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "today",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "t",
+        "phonemes_arpabet": [
+          "T"
+        ],
+        "phonemes_ipa": [
+          "t"
+        ]
+      },
+      {
+        "graphemes": "o",
+        "phonemes_arpabet": [
+          "AH0"
+        ],
+        "phonemes_ipa": [
+          "ə"
+        ]
+      },
+      {
+        "graphemes": "d",
+        "phonemes_arpabet": [
+          "D"
+        ],
+        "phonemes_ipa": [
+          "d"
+        ]
+      },
+      {
+        "graphemes": "ay",
+        "phonemes_arpabet": [
+          "EY1"
+        ],
+        "phonemes_ipa": [
+          "eɪ"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "lesson",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "l",
+        "phonemes_arpabet": [
+          "L"
+        ],
+        "phonemes_ipa": [
+          "l"
+        ]
+      },
+      {
+        "graphemes": "e",
+        "phonemes_arpabet": [
+          "EH1"
+        ],
+        "phonemes_ipa": [
+          "ɛ"
+        ]
+      },
+      {
+        "graphemes": "ss",
+        "phonemes_arpabet": [
+          "S"
+        ],
+        "phonemes_ipa": [
+          "s"
+        ]
+      },
+      {
+        "graphemes": "o",
+        "phonemes_arpabet": [
+          "AH0"
+        ],
+        "phonemes_ipa": [
+          "ə"
+        ]
+      },
+      {
+        "graphemes": "n",
+        "phonemes_arpabet": [
+          "N"
+        ],
+        "phonemes_ipa": [
+          "n"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "student",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "s",
+        "phonemes_arpabet": [
+          "S"
+        ],
+        "phonemes_ipa": [
+          "s"
+        ]
+      },
+      {
+        "graphemes": "t",
+        "phonemes_arpabet": [
+          "T"
+        ],
+        "phonemes_ipa": [
+          "t"
+        ]
+      },
+      {
+        "graphemes": "u",
+        "phonemes_arpabet": [
+          "UW1"
+        ],
+        "phonemes_ipa": [
+          "uː"
+        ]
+      },
+      {
+        "graphemes": "d",
+        "phonemes_arpabet": [
+          "D"
+        ],
+        "phonemes_ipa": [
+          "d"
+        ]
+      },
+      {
+        "graphemes": "e",
+        "phonemes_arpabet": [
+          "AH0"
+        ],
+        "phonemes_ipa": [
+          "ə"
+        ]
+      },
+      {
+        "graphemes": "n",
+        "phonemes_arpabet": [
+          "N"
+        ],
+        "phonemes_ipa": [
+          "n"
+        ]
+      },
+      {
+        "graphemes": "t",
+        "phonemes_arpabet": [
+          "T"
+        ],
+        "phonemes_ipa": [
+          "t"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "teacher",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "t",
+        "phonemes_arpabet": [
+          "T"
+        ],
+        "phonemes_ipa": [
+          "t"
+        ]
+      },
+      {
+        "graphemes": "ea",
+        "phonemes_arpabet": [
+          "IY1"
+        ],
+        "phonemes_ipa": [
+          "iː"
+        ]
+      },
+      {
+        "graphemes": "ch",
+        "phonemes_arpabet": [
+          "CH"
+        ],
+        "phonemes_ipa": [
+          "tʃ"
+        ]
+      },
+      {
+        "graphemes": "er",
+        "phonemes_arpabet": [
+          "ER0"
+        ],
+        "phonemes_ipa": [
+          "ɝː"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "reading",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "r",
+        "phonemes_arpabet": [
+          "R"
+        ],
+        "phonemes_ipa": [
+          "ɹ"
+        ]
+      },
+      {
+        "graphemes": "ea",
+        "phonemes_arpabet": [
+          "IY1"
+        ],
+        "phonemes_ipa": [
+          "iː"
+        ]
+      },
+      {
+        "graphemes": "d",
+        "phonemes_arpabet": [
+          "D"
+        ],
+        "phonemes_ipa": [
+          "d"
+        ]
+      },
+      {
+        "graphemes": "i",
+        "phonemes_arpabet": [
+          "IH0"
+        ],
+        "phonemes_ipa": [
+          "ɪ"
+        ]
+      },
+      {
+        "graphemes": "ng",
+        "phonemes_arpabet": [
+          "NG"
+        ],
+        "phonemes_ipa": [
+          "ŋ"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "phonics",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "ph",
+        "phonemes_arpabet": [
+          "F"
+        ],
+        "phonemes_ipa": [
+          "f"
+        ]
+      },
+      {
+        "graphemes": "o",
+        "phonemes_arpabet": [
+          "AA1"
+        ],
+        "phonemes_ipa": [
+          "ɑː"
+        ]
+      },
+      {
+        "graphemes": "n",
+        "phonemes_arpabet": [
+          "N"
+        ],
+        "phonemes_ipa": [
+          "n"
+        ]
+      },
+      {
+        "graphemes": "i",
+        "phonemes_arpabet": [
+          "IH0"
+        ],
+        "phonemes_ipa": [
+          "ɪ"
+        ]
+      },
+      {
+        "graphemes": "c",
+        "phonemes_arpabet": [
+          "K"
+        ],
+        "phonemes_ipa": [
+          "k"
+        ]
+      },
+      {
+        "graphemes": "s",
+        "phonemes_arpabet": [
+          "S"
+        ],
+        "phonemes_ipa": [
+          "s"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "because",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "b",
+        "phonemes_arpabet": [
+          "B"
+        ],
+        "phonemes_ipa": [
+          "b"
+        ]
+      },
+      {
+        "graphemes": "e",
+        "phonemes_arpabet": [
+          "IH0"
+        ],
+        "phonemes_ipa": [
+          "ɪ"
+        ]
+      },
+      {
+        "graphemes": "c",
+        "phonemes_arpabet": [
+          "K"
+        ],
+        "phonemes_ipa": [
+          "k"
+        ]
+      },
+      {
+        "graphemes": "au",
+        "phonemes_arpabet": [
+          "AO1"
+        ],
+        "phonemes_ipa": [
+          "ɔː"
+        ]
+      },
+      {
+        "graphemes": "s",
+        "phonemes_arpabet": [
+          "Z"
+        ],
+        "phonemes_ipa": [
+          "z"
+        ]
+      },
+      {
+        "graphemes": "e",
+        "phonemes_arpabet": [],
+        "phonemes_ipa": []
+      }
+    ]
+  },
+  {
+    "word": "before",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "b",
+        "phonemes_arpabet": [
+          "B"
+        ],
+        "phonemes_ipa": [
+          "b"
+        ]
+      },
+      {
+        "graphemes": "e",
+        "phonemes_arpabet": [
+          "IH0"
+        ],
+        "phonemes_ipa": [
+          "ɪ"
+        ]
+      },
+      {
+        "graphemes": "f",
+        "phonemes_arpabet": [
+          "F"
+        ],
+        "phonemes_ipa": [
+          "f"
+        ]
+      },
+      {
+        "graphemes": "o",
+        "phonemes_arpabet": [
+          "AO1"
+        ],
+        "phonemes_ipa": [
+          "ɔː"
+        ]
+      },
+      {
+        "graphemes": "r",
+        "phonemes_arpabet": [
+          "R"
+        ],
+        "phonemes_ipa": [
+          "ɹ"
+        ]
+      },
+      {
+        "graphemes": "e",
+        "phonemes_arpabet": [],
+        "phonemes_ipa": []
+      }
+    ]
+  },
+  {
+    "word": "between",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "b",
+        "phonemes_arpabet": [
+          "B"
+        ],
+        "phonemes_ipa": [
+          "b"
+        ]
+      },
+      {
+        "graphemes": "e",
+        "phonemes_arpabet": [
+          "IH0"
+        ],
+        "phonemes_ipa": [
+          "ɪ"
+        ]
+      },
+      {
+        "graphemes": "t",
+        "phonemes_arpabet": [
+          "T"
+        ],
+        "phonemes_ipa": [
+          "t"
+        ]
+      },
+      {
+        "graphemes": "w",
+        "phonemes_arpabet": [
+          "W"
+        ],
+        "phonemes_ipa": [
+          "w"
+        ]
+      },
+      {
+        "graphemes": "e",
+        "phonemes_arpabet": [
+          "IY1"
+        ],
+        "phonemes_ipa": [
+          "iː"
+        ]
+      },
+      {
+        "graphemes": "e",
+        "phonemes_arpabet": [],
+        "phonemes_ipa": []
+      },
+      {
+        "graphemes": "n",
+        "phonemes_arpabet": [
+          "N"
+        ],
+        "phonemes_ipa": [
+          "n"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "different",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "d",
+        "phonemes_arpabet": [
+          "D"
+        ],
+        "phonemes_ipa": [
+          "d"
+        ]
+      },
+      {
+        "graphemes": "i",
+        "phonemes_arpabet": [
+          "IH1"
+        ],
+        "phonemes_ipa": [
+          "ɪ"
+        ]
+      },
+      {
+        "graphemes": "ff",
+        "phonemes_arpabet": [
+          "F"
+        ],
+        "phonemes_ipa": [
+          "f"
+        ]
+      },
+      {
+        "graphemes": "er",
+        "phonemes_arpabet": [
+          "ER0"
+        ],
+        "phonemes_ipa": [
+          "ɝː"
+        ]
+      },
+      {
+        "graphemes": "e",
+        "phonemes_arpabet": [
+          "AH0"
+        ],
+        "phonemes_ipa": [
+          "ə"
+        ]
+      },
+      {
+        "graphemes": "n",
+        "phonemes_arpabet": [
+          "N"
+        ],
+        "phonemes_ipa": [
+          "n"
+        ]
+      },
+      {
+        "graphemes": "t",
+        "phonemes_arpabet": [
+          "T"
+        ],
+        "phonemes_ipa": [
+          "t"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "important",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "i",
+        "phonemes_arpabet": [
+          "IH2"
+        ],
+        "phonemes_ipa": [
+          "ɪ"
+        ]
+      },
+      {
+        "graphemes": "m",
+        "phonemes_arpabet": [
+          "M"
+        ],
+        "phonemes_ipa": [
+          "m"
+        ]
+      },
+      {
+        "graphemes": "p",
+        "phonemes_arpabet": [
+          "P"
+        ],
+        "phonemes_ipa": [
+          "p"
+        ]
+      },
+      {
+        "graphemes": "o",
+        "phonemes_arpabet": [
+          "AO1"
+        ],
+        "phonemes_ipa": [
+          "ɔː"
+        ]
+      },
+      {
+        "graphemes": "r",
+        "phonemes_arpabet": [
+          "R"
+        ],
+        "phonemes_ipa": [
+          "ɹ"
+        ]
+      },
+      {
+        "graphemes": "t",
+        "phonemes_arpabet": [
+          "T"
+        ],
+        "phonemes_ipa": [
+          "t"
+        ]
+      },
+      {
+        "graphemes": "a",
+        "phonemes_arpabet": [
+          "AH0"
+        ],
+        "phonemes_ipa": [
+          "ə"
+        ]
+      },
+      {
+        "graphemes": "n",
+        "phonemes_arpabet": [
+          "N"
+        ],
+        "phonemes_ipa": [
+          "n"
+        ]
+      },
+      {
+        "graphemes": "t",
+        "phonemes_arpabet": [
+          "T"
+        ],
+        "phonemes_ipa": [
+          "t"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "remember",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "r",
+        "phonemes_arpabet": [
+          "R"
+        ],
+        "phonemes_ipa": [
+          "ɹ"
+        ]
+      },
+      {
+        "graphemes": "e",
+        "phonemes_arpabet": [
+          "IH0"
+        ],
+        "phonemes_ipa": [
+          "ɪ"
+        ]
+      },
+      {
+        "graphemes": "m",
+        "phonemes_arpabet": [
+          "M"
+        ],
+        "phonemes_ipa": [
+          "m"
+        ]
+      },
+      {
+        "graphemes": "e",
+        "phonemes_arpabet": [
+          "EH1"
+        ],
+        "phonemes_ipa": [
+          "ɛ"
+        ]
+      },
+      {
+        "graphemes": "m",
+        "phonemes_arpabet": [
+          "M"
+        ],
+        "phonemes_ipa": [
+          "m"
+        ]
+      },
+      {
+        "graphemes": "b",
+        "phonemes_arpabet": [
+          "B"
+        ],
+        "phonemes_ipa": [
+          "b"
+        ]
+      },
+      {
+        "graphemes": "er",
+        "phonemes_arpabet": [
+          "ER0"
+        ],
+        "phonemes_ipa": [
+          "ɝː"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "together",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "t",
+        "phonemes_arpabet": [
+          "T"
+        ],
+        "phonemes_ipa": [
+          "t"
+        ]
+      },
+      {
+        "graphemes": "o",
+        "phonemes_arpabet": [
+          "AH0"
+        ],
+        "phonemes_ipa": [
+          "ə"
+        ]
+      },
+      {
+        "graphemes": "g",
+        "phonemes_arpabet": [
+          "G"
+        ],
+        "phonemes_ipa": [
+          "ɡ"
+        ]
+      },
+      {
+        "graphemes": "e",
+        "phonemes_arpabet": [
+          "EH1"
+        ],
+        "phonemes_ipa": [
+          "ɛ"
+        ]
+      },
+      {
+        "graphemes": "th",
+        "phonemes_arpabet": [
+          "DH"
+        ],
+        "phonemes_ipa": [
+          "ð"
+        ]
+      },
+      {
+        "graphemes": "er",
+        "phonemes_arpabet": [
+          "ER0"
+        ],
+        "phonemes_ipa": [
+          "ɝː"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "another",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "a",
+        "phonemes_arpabet": [
+          "AH0"
+        ],
+        "phonemes_ipa": [
+          "ə"
+        ]
+      },
+      {
+        "graphemes": "n",
+        "phonemes_arpabet": [
+          "N"
+        ],
+        "phonemes_ipa": [
+          "n"
+        ]
+      },
+      {
+        "graphemes": "o",
+        "phonemes_arpabet": [
+          "AH1"
+        ],
+        "phonemes_ipa": [
+          "ʌ"
+        ]
+      },
+      {
+        "graphemes": "th",
+        "phonemes_arpabet": [
+          "DH"
+        ],
+        "phonemes_ipa": [
+          "ð"
+        ]
+      },
+      {
+        "graphemes": "er",
+        "phonemes_arpabet": [
+          "ER0"
+        ],
+        "phonemes_ipa": [
+          "ɝː"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "children",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "ch",
+        "phonemes_arpabet": [
+          "CH"
+        ],
+        "phonemes_ipa": [
+          "tʃ"
+        ]
+      },
+      {
+        "graphemes": "i",
+        "phonemes_arpabet": [
+          "IH1"
+        ],
+        "phonemes_ipa": [
+          "ɪ"
+        ]
+      },
+      {
+        "graphemes": "l",
+        "phonemes_arpabet": [
+          "L"
+        ],
+        "phonemes_ipa": [
+          "l"
+        ]
+      },
+      {
+        "graphemes": "d",
+        "phonemes_arpabet": [
+          "D"
+        ],
+        "phonemes_ipa": [
+          "d"
+        ]
+      },
+      {
+        "graphemes": "r",
+        "phonemes_arpabet": [
+          "R"
+        ],
+        "phonemes_ipa": [
+          "ɹ"
+        ]
+      },
+      {
+        "graphemes": "e",
+        "phonemes_arpabet": [
+          "AH0"
+        ],
+        "phonemes_ipa": [
+          "ə"
+        ]
+      },
+      {
+        "graphemes": "n",
+        "phonemes_arpabet": [
+          "N"
+        ],
+        "phonemes_ipa": [
+          "n"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "general",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "g",
+        "phonemes_arpabet": [
+          "JH"
+        ],
+        "phonemes_ipa": [
+          "dʒ"
+        ]
+      },
+      {
+        "graphemes": "e",
+        "phonemes_arpabet": [
+          "EH1"
+        ],
+        "phonemes_ipa": [
+          "ɛ"
+        ]
+      },
+      {
+        "graphemes": "n",
+        "phonemes_arpabet": [
+          "N"
+        ],
+        "phonemes_ipa": [
+          "n"
+        ]
+      },
+      {
+        "graphemes": "er",
+        "phonemes_arpabet": [
+          "ER0"
+        ],
+        "phonemes_ipa": [
+          "ɝː"
+        ]
+      },
+      {
+        "graphemes": "a",
+        "phonemes_arpabet": [
+          "AH0"
+        ],
+        "phonemes_ipa": [
+          "ə"
+        ]
+      },
+      {
+        "graphemes": "l",
+        "phonemes_arpabet": [
+          "L"
+        ],
+        "phonemes_ipa": [
+          "l"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "possible",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "p",
+        "phonemes_arpabet": [
+          "P"
+        ],
+        "phonemes_ipa": [
+          "p"
+        ]
+      },
+      {
+        "graphemes": "o",
+        "phonemes_arpabet": [
+          "AA1"
+        ],
+        "phonemes_ipa": [
+          "ɑː"
+        ]
+      },
+      {
+        "graphemes": "ss",
+        "phonemes_arpabet": [
+          "S"
+        ],
+        "phonemes_ipa": [
+          "s"
+        ]
+      },
+      {
+        "graphemes": "i",
+        "phonemes_arpabet": [
+          "AH0"
+        ],
+        "phonemes_ipa": [
+          "ə"
+        ]
+      },
+      {
+        "graphemes": "b",
+        "phonemes_arpabet": [
+          "B"
+        ],
+        "phonemes_ipa": [
+          "b"
+        ]
+      },
+      {
+        "graphemes": "l",
+        "phonemes_arpabet": [
+          "AH0",
+          "L"
+        ],
+        "phonemes_ipa": [
+          "ə",
+          "l"
+        ]
+      },
+      {
+        "graphemes": "e",
+        "phonemes_arpabet": [],
+        "phonemes_ipa": []
+      }
+    ]
+  },
+  {
+    "word": "sentence",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "s",
+        "phonemes_arpabet": [
+          "S"
+        ],
+        "phonemes_ipa": [
+          "s"
+        ]
+      },
+      {
+        "graphemes": "e",
+        "phonemes_arpabet": [
+          "EH1"
+        ],
+        "phonemes_ipa": [
+          "ɛ"
+        ]
+      },
+      {
+        "graphemes": "n",
+        "phonemes_arpabet": [
+          "N"
+        ],
+        "phonemes_ipa": [
+          "n"
+        ]
+      },
+      {
+        "graphemes": "t",
+        "phonemes_arpabet": [
+          "T"
+        ],
+        "phonemes_ipa": [
+          "t"
+        ]
+      },
+      {
+        "graphemes": "e",
+        "phonemes_arpabet": [
+          "AH0"
+        ],
+        "phonemes_ipa": [
+          "ə"
+        ]
+      },
+      {
+        "graphemes": "n",
+        "phonemes_arpabet": [
+          "N"
+        ],
+        "phonemes_ipa": [
+          "n"
+        ]
+      },
+      {
+        "graphemes": "c",
+        "phonemes_arpabet": [
+          "S"
+        ],
+        "phonemes_ipa": [
+          "s"
+        ]
+      },
+      {
+        "graphemes": "e",
+        "phonemes_arpabet": [],
+        "phonemes_ipa": []
+      }
+    ]
+  },
+  {
+    "word": "example",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "e",
+        "phonemes_arpabet": [
+          "IH0"
+        ],
+        "phonemes_ipa": [
+          "ɪ"
+        ]
+      },
+      {
+        "graphemes": "x",
+        "phonemes_arpabet": [
+          "G",
+          "Z"
+        ],
+        "phonemes_ipa": [
+          "ɡ",
+          "z"
+        ]
+      },
+      {
+        "graphemes": "a",
+        "phonemes_arpabet": [
+          "AE1"
+        ],
+        "phonemes_ipa": [
+          "æ"
+        ]
+      },
+      {
+        "graphemes": "m",
+        "phonemes_arpabet": [
+          "M"
+        ],
+        "phonemes_ipa": [
+          "m"
+        ]
+      },
+      {
+        "graphemes": "p",
+        "phonemes_arpabet": [
+          "P"
+        ],
+        "phonemes_ipa": [
+          "p"
+        ]
+      },
+      {
+        "graphemes": "l",
+        "phonemes_arpabet": [
+          "AH0",
+          "L"
+        ],
+        "phonemes_ipa": [
+          "ə",
+          "l"
+        ]
+      },
+      {
+        "graphemes": "e",
+        "phonemes_arpabet": [],
+        "phonemes_ipa": []
+      }
+    ]
+  },
+  {
+    "word": "practice",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "p",
+        "phonemes_arpabet": [
+          "P"
+        ],
+        "phonemes_ipa": [
+          "p"
+        ]
+      },
+      {
+        "graphemes": "r",
+        "phonemes_arpabet": [
+          "R"
+        ],
+        "phonemes_ipa": [
+          "ɹ"
+        ]
+      },
+      {
+        "graphemes": "a",
+        "phonemes_arpabet": [
+          "AE1"
+        ],
+        "phonemes_ipa": [
+          "æ"
+        ]
+      },
+      {
+        "graphemes": "c",
+        "phonemes_arpabet": [
+          "K"
+        ],
+        "phonemes_ipa": [
+          "k"
+        ]
+      },
+      {
+        "graphemes": "t",
+        "phonemes_arpabet": [
+          "T"
+        ],
+        "phonemes_ipa": [
+          "t"
+        ]
+      },
+      {
+        "graphemes": "i",
+        "phonemes_arpabet": [
+          "AH0"
+        ],
+        "phonemes_ipa": [
+          "ə"
+        ]
+      },
+      {
+        "graphemes": "c",
+        "phonemes_arpabet": [
+          "S"
+        ],
+        "phonemes_ipa": [
+          "s"
+        ]
+      },
+      {
+        "graphemes": "e",
+        "phonemes_arpabet": [],
+        "phonemes_ipa": []
+      }
+    ]
+  },
+  {
+    "word": "question",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "q",
+        "phonemes_arpabet": [
+          "K"
+        ],
+        "phonemes_ipa": [
+          "k"
+        ]
+      },
+      {
+        "graphemes": "u",
+        "phonemes_arpabet": [
+          "W"
+        ],
+        "phonemes_ipa": [
+          "w"
+        ]
+      },
+      {
+        "graphemes": "e",
+        "phonemes_arpabet": [
+          "EH1"
+        ],
+        "phonemes_ipa": [
+          "ɛ"
+        ]
+      },
+      {
+        "graphemes": "s",
+        "phonemes_arpabet": [
+          "S"
+        ],
+        "phonemes_ipa": [
+          "s"
+        ]
+      },
+      {
+        "graphemes": "ti",
+        "phonemes_arpabet": [
+          "CH"
+        ],
+        "phonemes_ipa": [
+          "tʃ"
+        ]
+      },
+      {
+        "graphemes": "o",
+        "phonemes_arpabet": [
+          "AH0"
+        ],
+        "phonemes_ipa": [
+          "ə"
+        ]
+      },
+      {
+        "graphemes": "n",
+        "phonemes_arpabet": [
+          "N"
+        ],
+        "phonemes_ipa": [
+          "n"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "answering",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "a",
+        "phonemes_arpabet": [
+          "AE1"
+        ],
+        "phonemes_ipa": [
+          "æ"
+        ]
+      },
+      {
+        "graphemes": "n",
+        "phonemes_arpabet": [
+          "N"
+        ],
+        "phonemes_ipa": [
+          "n"
+        ]
+      },
+      {
+        "graphemes": "s",
+        "phonemes_arpabet": [
+          "S"
+        ],
+        "phonemes_ipa": [
+          "s"
+        ]
+      },
+      {
+        "graphemes": "w",
+        "phonemes_arpabet": [],
+        "phonemes_ipa": []
+      },
+      {
+        "graphemes": "er",
+        "phonemes_arpabet": [
+          "ER0"
+        ],
+        "phonemes_ipa": [
+          "ɝː"
+        ]
+      },
+      {
+        "graphemes": "i",
+        "phonemes_arpabet": [
+          "IH0"
+        ],
+        "phonemes_ipa": [
+          "ɪ"
+        ]
+      },
+      {
+        "graphemes": "ng",
+        "phonemes_arpabet": [
+          "NG"
+        ],
+        "phonemes_ipa": [
+          "ŋ"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "apple",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "a",
+        "phonemes_arpabet": [
+          "AE1"
+        ],
+        "phonemes_ipa": [
+          "æ"
+        ]
+      },
+      {
+        "graphemes": "pp",
+        "phonemes_arpabet": [
+          "P"
+        ],
+        "phonemes_ipa": [
+          "p"
+        ]
+      },
+      {
+        "graphemes": "l",
+        "phonemes_arpabet": [
+          "AH0",
+          "L"
+        ],
+        "phonemes_ipa": [
+          "ə",
+          "l"
+        ]
+      },
+      {
+        "graphemes": "e",
+        "phonemes_arpabet": [],
+        "phonemes_ipa": []
+      }
+    ]
+  },
+  {
+    "word": "rabbit",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "r",
+        "phonemes_arpabet": [
+          "R"
+        ],
+        "phonemes_ipa": [
+          "ɹ"
+        ]
+      },
+      {
+        "graphemes": "a",
+        "phonemes_arpabet": [
+          "AE1"
+        ],
+        "phonemes_ipa": [
+          "æ"
+        ]
+      },
+      {
+        "graphemes": "bb",
+        "phonemes_arpabet": [
+          "B"
+        ],
+        "phonemes_ipa": [
+          "b"
+        ]
+      },
+      {
+        "graphemes": "i",
+        "phonemes_arpabet": [
+          "AH0"
+        ],
+        "phonemes_ipa": [
+          "ə"
+        ]
+      },
+      {
+        "graphemes": "t",
+        "phonemes_arpabet": [
+          "T"
+        ],
+        "phonemes_ipa": [
+          "t"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "letter",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "l",
+        "phonemes_arpabet": [
+          "L"
+        ],
+        "phonemes_ipa": [
+          "l"
+        ]
+      },
+      {
+        "graphemes": "e",
+        "phonemes_arpabet": [
+          "EH1"
+        ],
+        "phonemes_ipa": [
+          "ɛ"
+        ]
+      },
+      {
+        "graphemes": "tt",
+        "phonemes_arpabet": [
+          "T"
+        ],
+        "phonemes_ipa": [
+          "t"
+        ]
+      },
+      {
+        "graphemes": "er",
+        "phonemes_arpabet": [
+          "ER0"
+        ],
+        "phonemes_ipa": [
+          "ɝː"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "little",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "l",
+        "phonemes_arpabet": [
+          "L"
+        ],
+        "phonemes_ipa": [
+          "l"
+        ]
+      },
+      {
+        "graphemes": "i",
+        "phonemes_arpabet": [
+          "IH1"
+        ],
+        "phonemes_ipa": [
+          "ɪ"
+        ]
+      },
+      {
+        "graphemes": "t",
+        "phonemes_arpabet": [
+          "T"
+        ],
+        "phonemes_ipa": [
+          "t"
+        ]
+      },
+      {
+        "graphemes": "t",
+        "phonemes_arpabet": [
+          "AH0"
+        ],
+        "phonemes_ipa": [
+          "ə"
+        ]
+      },
+      {
+        "graphemes": "l",
+        "phonemes_arpabet": [
+          "L"
+        ],
+        "phonemes_ipa": [
+          "l"
+        ]
+      },
+      {
+        "graphemes": "e",
+        "phonemes_arpabet": [],
+        "phonemes_ipa": []
+      }
+    ]
+  },
+  {
+    "word": "happy",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "h",
+        "phonemes_arpabet": [
+          "HH"
+        ],
+        "phonemes_ipa": [
+          "h"
+        ]
+      },
+      {
+        "graphemes": "a",
+        "phonemes_arpabet": [
+          "AE1"
+        ],
+        "phonemes_ipa": [
+          "æ"
+        ]
+      },
+      {
+        "graphemes": "pp",
+        "phonemes_arpabet": [
+          "P"
+        ],
+        "phonemes_ipa": [
+          "p"
+        ]
+      },
+      {
+        "graphemes": "y",
+        "phonemes_arpabet": [
+          "IY0"
+        ],
+        "phonemes_ipa": [
+          "i"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "summer",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "s",
+        "phonemes_arpabet": [
+          "S"
+        ],
+        "phonemes_ipa": [
+          "s"
+        ]
+      },
+      {
+        "graphemes": "u",
+        "phonemes_arpabet": [
+          "AH1"
+        ],
+        "phonemes_ipa": [
+          "ʌ"
+        ]
+      },
+      {
+        "graphemes": "mm",
+        "phonemes_arpabet": [
+          "M"
+        ],
+        "phonemes_ipa": [
+          "m"
+        ]
+      },
+      {
+        "graphemes": "er",
+        "phonemes_arpabet": [
+          "ER0"
+        ],
+        "phonemes_ipa": [
+          "ɝː"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "dinner",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "d",
+        "phonemes_arpabet": [
+          "D"
+        ],
+        "phonemes_ipa": [
+          "d"
+        ]
+      },
+      {
+        "graphemes": "i",
+        "phonemes_arpabet": [
+          "IH1"
+        ],
+        "phonemes_ipa": [
+          "ɪ"
+        ]
+      },
+      {
+        "graphemes": "nn",
+        "phonemes_arpabet": [
+          "N"
+        ],
+        "phonemes_ipa": [
+          "n"
+        ]
+      },
+      {
+        "graphemes": "er",
+        "phonemes_arpabet": [
+          "ER0"
+        ],
+        "phonemes_ipa": [
+          "ɝː"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "butter",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "b",
+        "phonemes_arpabet": [
+          "B"
+        ],
+        "phonemes_ipa": [
+          "b"
+        ]
+      },
+      {
+        "graphemes": "u",
+        "phonemes_arpabet": [
+          "AH1"
+        ],
+        "phonemes_ipa": [
+          "ʌ"
+        ]
+      },
+      {
+        "graphemes": "tt",
+        "phonemes_arpabet": [
+          "T"
+        ],
+        "phonemes_ipa": [
+          "t"
+        ]
+      },
+      {
+        "graphemes": "er",
+        "phonemes_arpabet": [
+          "ER0"
+        ],
+        "phonemes_ipa": [
+          "ɝː"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "better",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "b",
+        "phonemes_arpabet": [
+          "B"
+        ],
+        "phonemes_ipa": [
+          "b"
+        ]
+      },
+      {
+        "graphemes": "e",
+        "phonemes_arpabet": [
+          "EH1"
+        ],
+        "phonemes_ipa": [
+          "ɛ"
+        ]
+      },
+      {
+        "graphemes": "tt",
+        "phonemes_arpabet": [
+          "T"
+        ],
+        "phonemes_ipa": [
+          "t"
+        ]
+      },
+      {
+        "graphemes": "er",
+        "phonemes_arpabet": [
+          "ER0"
+        ],
+        "phonemes_ipa": [
+          "ɝː"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "middle",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "m",
+        "phonemes_arpabet": [
+          "M"
+        ],
+        "phonemes_ipa": [
+          "m"
+        ]
+      },
+      {
+        "graphemes": "i",
+        "phonemes_arpabet": [
+          "IH1"
+        ],
+        "phonemes_ipa": [
+          "ɪ"
+        ]
+      },
+      {
+        "graphemes": "d",
+        "phonemes_arpabet": [
+          "D"
+        ],
+        "phonemes_ipa": [
+          "d"
+        ]
+      },
+      {
+        "graphemes": "d",
+        "phonemes_arpabet": [
+          "AH0"
+        ],
+        "phonemes_ipa": [
+          "ə"
+        ]
+      },
+      {
+        "graphemes": "l",
+        "phonemes_arpabet": [
+          "L"
+        ],
+        "phonemes_ipa": [
+          "l"
+        ]
+      },
+      {
+        "graphemes": "e",
+        "phonemes_arpabet": [],
+        "phonemes_ipa": []
+      }
+    ]
+  },
+  {
+    "word": "puzzle",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "p",
+        "phonemes_arpabet": [
+          "P"
+        ],
+        "phonemes_ipa": [
+          "p"
+        ]
+      },
+      {
+        "graphemes": "u",
+        "phonemes_arpabet": [
+          "AH1"
+        ],
+        "phonemes_ipa": [
+          "ʌ"
+        ]
+      },
+      {
+        "graphemes": "zz",
+        "phonemes_arpabet": [
+          "Z"
+        ],
+        "phonemes_ipa": [
+          "z"
+        ]
+      },
+      {
+        "graphemes": "l",
+        "phonemes_arpabet": [
+          "AH0",
+          "L"
+        ],
+        "phonemes_ipa": [
+          "ə",
+          "l"
+        ]
+      },
+      {
+        "graphemes": "e",
+        "phonemes_arpabet": [],
+        "phonemes_ipa": []
+      }
+    ]
+  },
+  {
+    "word": "bottle",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "b",
+        "phonemes_arpabet": [
+          "B"
+        ],
+        "phonemes_ipa": [
+          "b"
+        ]
+      },
+      {
+        "graphemes": "o",
+        "phonemes_arpabet": [
+          "AA1"
+        ],
+        "phonemes_ipa": [
+          "ɑː"
+        ]
+      },
+      {
+        "graphemes": "t",
+        "phonemes_arpabet": [
+          "T"
+        ],
+        "phonemes_ipa": [
+          "t"
+        ]
+      },
+      {
+        "graphemes": "t",
+        "phonemes_arpabet": [
+          "AH0"
+        ],
+        "phonemes_ipa": [
+          "ə"
+        ]
+      },
+      {
+        "graphemes": "l",
+        "phonemes_arpabet": [
+          "L"
+        ],
+        "phonemes_ipa": [
+          "l"
+        ]
+      },
+      {
+        "graphemes": "e",
+        "phonemes_arpabet": [],
+        "phonemes_ipa": []
+      }
+    ]
+  },
+  {
+    "word": "kitten",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "k",
+        "phonemes_arpabet": [
+          "K"
+        ],
+        "phonemes_ipa": [
+          "k"
+        ]
+      },
+      {
+        "graphemes": "i",
+        "phonemes_arpabet": [
+          "IH1"
+        ],
+        "phonemes_ipa": [
+          "ɪ"
+        ]
+      },
+      {
+        "graphemes": "tt",
+        "phonemes_arpabet": [
+          "T"
+        ],
+        "phonemes_ipa": [
+          "t"
+        ]
+      },
+      {
+        "graphemes": "e",
+        "phonemes_arpabet": [
+          "AH0"
+        ],
+        "phonemes_ipa": [
+          "ə"
+        ]
+      },
+      {
+        "graphemes": "n",
+        "phonemes_arpabet": [
+          "N"
+        ],
+        "phonemes_ipa": [
+          "n"
+        ]
+      }
+    ]
+  },
+  {
+    "word": "puppy",
+    "variant": 0,
+    "alignment": [
+      {
+        "graphemes": "p",
+        "phonemes_arpabet": [
+          "P"
+        ],
+        "phonemes_ipa": [
+          "p"
+        ]
+      },
+      {
+        "graphemes": "u",
+        "phonemes_arpabet": [
+          "AH1"
+        ],
+        "phonemes_ipa": [
+          "ʌ"
+        ]
+      },
+      {
+        "graphemes": "pp",
+        "phonemes_arpabet": [
+          "P"
+        ],
+        "phonemes_ipa": [
+          "p"
+        ]
+      },
+      {
+        "graphemes": "y",
+        "phonemes_arpabet": [
+          "IY0"
+        ],
+        "phonemes_ipa": [
+          "i"
+        ]
+      }
+    ]
+  }
+]
