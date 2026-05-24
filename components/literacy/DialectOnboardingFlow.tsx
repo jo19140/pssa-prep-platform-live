@@ -37,7 +37,7 @@ export function DialectOnboardingFlow() {
           <p className="font-bold text-slate-900">Home languages</p>
           <div className="mt-3 flex flex-wrap gap-2">
             {languages.map((language) => (
-              <button key={language} onClick={() => toggle(homeLanguages, language, setHomeLanguages)}><DialectChip label={language} selected={homeLanguages.includes(language)} /></button>
+              <button key={language} type="button" aria-pressed={homeLanguages.includes(language)} onClick={() => toggle(homeLanguages, language, setHomeLanguages)}><DialectChip label={language} selected={homeLanguages.includes(language)} /></button>
             ))}
           </div>
         </div>
@@ -45,7 +45,7 @@ export function DialectOnboardingFlow() {
           <p className="font-bold text-slate-900">Regional sound patterns</p>
           <div className="mt-3 flex flex-wrap gap-2">
             {dialects.map((dialect) => (
-              <button key={dialect} onClick={() => toggle(regionalDialects, dialect, setRegionalDialects)}><DialectChip label={dialect} selected={regionalDialects.includes(dialect)} /></button>
+              <button key={dialect} type="button" aria-pressed={regionalDialects.includes(dialect)} onClick={() => toggle(regionalDialects, dialect, setRegionalDialects)}><DialectChip label={dialect} selected={regionalDialects.includes(dialect)} /></button>
             ))}
           </div>
         </div>
