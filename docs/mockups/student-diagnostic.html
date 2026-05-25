@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Student · Literacy Diagnostic</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', system-ui, -apple-system, Arial, sans-serif; }
+    .kid-font { font-size: 1.125rem; line-height: 1.6; }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 min-h-screen">
+  <header class="border-b border-slate-200 bg-white">
+    <div class="max-w-5xl mx-auto px-6 py-3 flex items-center justify-between">
+      <a href="index.html" class="text-sm text-slate-500 hover:text-slate-900">← All mockups</a>
+      <div class="text-sm font-semibold">Student · Literacy Diagnostic</div>
+      <span class="text-xs px-2 py-1 rounded-full bg-amber-100 text-amber-800 font-medium">Mockup</span>
+    </div>
+  </header>
+
+  <main class="max-w-5xl mx-auto px-6 py-8 space-y-10">
+
+    <!-- SCREEN 1: WELCOME -->
+    <section class="bg-white border border-slate-200 rounded-2xl overflow-hidden">
+      <div class="bg-indigo-600 text-white px-6 py-2 text-xs font-semibold tracking-wide uppercase">Screen 1 · Welcome</div>
+      <div class="p-8 md:p-12 text-center">
+        <div class="text-6xl mb-4">📖</div>
+        <h1 class="text-3xl font-bold mb-3">Hi Maya! Let's see how you read.</h1>
+        <p class="kid-font text-slate-600 max-w-xl mx-auto">
+          This isn't a test you can fail. We just want to find out what you already know so we can pick the right things to work on together.
+        </p>
+        <div class="mt-6 grid grid-cols-3 gap-3 max-w-md mx-auto text-left">
+          <div class="bg-slate-50 rounded-xl p-3"><div class="text-2xl">⏱️</div><div class="text-xs font-semibold mt-1">About 15 min</div></div>
+          <div class="bg-slate-50 rounded-xl p-3"><div class="text-2xl">🎧</div><div class="text-xs font-semibold mt-1">Headphones on</div></div>
+          <div class="bg-slate-50 rounded-xl p-3"><div class="text-2xl">🪑</div><div class="text-xs font-semibold mt-1">Quiet spot</div></div>
+        </div>
+        <button class="mt-8 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-8 py-3 rounded-xl text-lg">Start →</button>
+        <div class="mt-4 text-xs text-slate-500">Need help reading instructions? <button class="underline">Turn on read-aloud</button></div>
+      </div>
+    </section>
+
+    <!-- SCREEN 2: WORD RECOGNITION -->
+    <section class="bg-white border border-slate-200 rounded-2xl overflow-hidden">
+      <div class="bg-indigo-600 text-white px-6 py-2 text-xs font-semibold tracking-wide uppercase flex items-center justify-between">
+        <span>Screen 2 · Word recognition (sight words)</span>
+        <span>Part 1 of 5 · Item 3 of 12</span>
+      </div>
+      <div class="p-8 md:p-12">
+        <div class="text-sm text-slate-500 mb-2">Tap the word you hear.</div>
+        <button class="text-indigo-600 text-sm font-semibold mb-6 flex items-center gap-2">🔊 Play word</button>
+
+        <div class="grid grid-cols-2 gap-4 max-w-2xl">
+          <button class="border-2 border-slate-200 hover:border-indigo-400 rounded-xl p-6 text-2xl font-semibold">though</button>
+          <button class="border-2 border-indigo-500 bg-indigo-50 rounded-xl p-6 text-2xl font-semibold">through</button>
+          <button class="border-2 border-slate-200 hover:border-indigo-400 rounded-xl p-6 text-2xl font-semibold">thought</button>
+          <button class="border-2 border-slate-200 hover:border-indigo-400 rounded-xl p-6 text-2xl font-semibold">thorough</button>
+        </div>
+
+        <div class="mt-8 flex items-center justify-between">
+          <div class="flex items-center gap-2 text-sm text-slate-500">
+            <span>🟢🟢🟢⚪⚪⚪⚪⚪⚪⚪⚪⚪</span>
+          </div>
+          <button class="bg-indigo-600 text-white font-semibold px-6 py-2 rounded-lg">Next →</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCREEN 3: DECODING NONSENSE WORDS -->
+    <section class="bg-white border border-slate-200 rounded-2xl overflow-hidden">
+      <div class="bg-indigo-600 text-white px-6 py-2 text-xs font-semibold tracking-wide uppercase flex items-center justify-between">
+        <span>Screen 3 · Decoding · nonsense words</span>
+        <span>Part 2 of 5</span>
+      </div>
+      <div class="p-8 md:p-12">
+        <div class="text-sm text-slate-500 mb-2">Read each made-up word out loud. Tap the mic to record.</div>
+        <p class="text-xs text-slate-500 mb-6">Made-up words tell us whether you're using the rules of reading rather than recognizing words you've memorized.</p>
+
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+          <div class="border border-slate-200 rounded-xl p-5 text-center">
+            <div class="text-3xl font-semibold">flomp</div>
+            <button class="mt-3 text-xs text-emerald-700 bg-emerald-50 rounded-full px-3 py-1">✓ Recorded</button>
+          </div>
+          <div class="border border-slate-200 rounded-xl p-5 text-center">
+            <div class="text-3xl font-semibold">streck</div>
+            <button class="mt-3 text-xs text-emerald-700 bg-emerald-50 rounded-full px-3 py-1">✓ Recorded</button>
+          </div>
+          <div class="border-2 border-indigo-500 bg-indigo-50 rounded-xl p-5 text-center">
+            <div class="text-3xl font-semibold">brimble</div>
+            <button class="mt-3 text-xs bg-indigo-600 text-white rounded-full px-3 py-1">🎤 Recording…</button>
+          </div>
+          <div class="border border-slate-200 rounded-xl p-5 text-center opacity-50">
+            <div class="text-3xl font-semibold">phange</div>
+            <button class="mt-3 text-xs text-slate-500 bg-slate-100 rounded-full px-3 py-1">Up next</button>
+          </div>
+          <div class="border border-slate-200 rounded-xl p-5 text-center opacity-50">
+            <div class="text-3xl font-semibold">crundict</div>
+            <button class="mt-3 text-xs text-slate-500 bg-slate-100 rounded-full px-3 py-1">—</button>
+          </div>
+          <div class="border border-slate-200 rounded-xl p-5 text-center opacity-50">
+            <div class="text-3xl font-semibold">spleeted</div>
+            <button class="mt-3 text-xs text-slate-500 bg-slate-100 rounded-full px-3 py-1">—</button>
+          </div>
+        </div>
+        <div class="mt-6 text-xs text-slate-500">Recordings are analyzed for accuracy of letter-sound mapping, blending, and multi-syllable handling. <span class="italic">(Adult review available.)</span></div>
+      </div>
+    </section>
+
+    <!-- SCREEN 4: VOCAB IN CONTEXT -->
+    <section class="bg-white border border-slate-200 rounded-2xl overflow-hidden">
+      <div class="bg-indigo-600 text-white px-6 py-2 text-xs font-semibold tracking-wide uppercase flex items-center justify-between">
+        <span>Screen 4 · Vocabulary in context</span>
+        <span>Part 3 of 5</span>
+      </div>
+      <div class="p-8 md:p-12">
+        <div class="text-sm text-slate-500 mb-3">Read the sentence. What does the underlined word mean?</div>
+        <p class="kid-font text-xl bg-slate-50 border-l-4 border-indigo-500 px-5 py-4 rounded-r-lg mb-6">
+          The hikers were <span class="underline decoration-indigo-500 decoration-2 underline-offset-4 font-semibold">reluctant</span> to cross the rickety bridge, but the trail on the other side was the only way home.
+        </p>
+        <div class="space-y-3 max-w-xl">
+          <button class="w-full text-left border-2 border-slate-200 hover:border-indigo-400 rounded-xl p-4 flex items-center gap-3">
+            <span class="font-bold text-slate-400 w-6">A</span>
+            <span>excited and eager</span>
+          </button>
+          <button class="w-full text-left border-2 border-indigo-500 bg-indigo-50 rounded-xl p-4 flex items-center gap-3">
+            <span class="font-bold text-indigo-700 w-6">B</span>
+            <span>hesitant or unwilling</span>
+          </button>
+          <button class="w-full text-left border-2 border-slate-200 hover:border-indigo-400 rounded-xl p-4 flex items-center gap-3">
+            <span class="font-bold text-slate-400 w-6">C</span>
+            <span>tired from walking</span>
+          </button>
+          <button class="w-full text-left border-2 border-slate-200 hover:border-indigo-400 rounded-xl p-4 flex items-center gap-3">
+            <span class="font-bold text-slate-400 w-6">D</span>
+            <span>angry at each other</span>
+          </button>
+        </div>
+        <details class="mt-6 text-sm">
+          <summary class="text-slate-500 cursor-pointer">Why this item type matters →</summary>
+          <p class="mt-2 text-slate-600 max-w-2xl">
+            Vocab-in-context items measure depth (does the student infer meaning from surrounding text?) rather than memorized definitions.
+            Tier 2 words like <em>reluctant</em>, <em>persuade</em>, <em>linger</em> are the highest-leverage targets for striving readers — common in academic text, rare in conversation.
+          </p>
+        </details>
+      </div>
+    </section>
+
+    <!-- SCREEN 5: PASSAGE + COMPREHENSION -->
+    <section class="bg-white border border-slate-200 rounded-2xl overflow-hidden">
+      <div class="bg-indigo-600 text-white px-6 py-2 text-xs font-semibold tracking-wide uppercase flex items-center justify-between">
+        <span>Screen 5 · Passage + comprehension</span>
+        <span>Part 4 of 5</span>
+      </div>
+      <div class="grid md:grid-cols-2 gap-0 divide-x divide-slate-200">
+        <div class="p-6">
+          <div class="flex items-center justify-between mb-3 text-xs text-slate-500">
+            <span class="font-semibold">"The Storm Window"</span>
+            <span>Lexile ~720L · Grade 4 band</span>
+          </div>
+          <button class="text-xs text-indigo-700 bg-indigo-50 px-2 py-1 rounded mb-3 flex items-center gap-1">🔊 Read along</button>
+          <div class="kid-font text-slate-800 space-y-3">
+            <p>Mara pressed her nose to the cold glass. Outside, the sky had turned the color of an old bruise, and the wind was already <span class="bg-amber-100 px-1 rounded cursor-help" title="tap to look up">rattling</span> the shutters next door.</p>
+            <p>"It's just rain," her grandmother said, but Mara noticed she did not look up from her sewing. Her stitches had become small and careful, the way they always did when something was wrong.</p>
+            <p>The lights flickered once, then twice. Mara counted her breaths. Her grandmother set the needle down.</p>
+            <p>"Get the flashlight," she said. "And the radio. The one with the hand crank."</p>
+          </div>
+        </div>
+        <div class="p-6 bg-slate-50">
+          <div class="text-xs font-semibold text-slate-500 mb-3">Question 1 of 4</div>
+          <p class="font-medium mb-4">What does the grandmother's behavior tell you that her words don't?</p>
+          <div class="space-y-2">
+            <button class="w-full text-left border-2 border-slate-200 bg-white hover:border-indigo-400 rounded-xl p-3 text-sm">A. She is enjoying the rain.</button>
+            <button class="w-full text-left border-2 border-indigo-500 bg-indigo-50 rounded-xl p-3 text-sm">B. She is more worried than she's saying.</button>
+            <button class="w-full text-left border-2 border-slate-200 bg-white hover:border-indigo-400 rounded-xl p-3 text-sm">C. She is angry with Mara.</button>
+            <button class="w-full text-left border-2 border-slate-200 bg-white hover:border-indigo-400 rounded-xl p-3 text-sm">D. She wants to go outside.</button>
+          </div>
+          <div class="mt-5 text-xs text-slate-500 italic">Measures: inference, character motivation, evidence-text alignment.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCREEN 6: RESULTS REVEAL -->
+    <section class="bg-white border border-slate-200 rounded-2xl overflow-hidden">
+      <div class="bg-emerald-600 text-white px-6 py-2 text-xs font-semibold tracking-wide uppercase">Screen 6 · Results · kid-facing</div>
+      <div class="p-8 md:p-12">
+        <div class="text-center mb-8">
+          <div class="text-5xl mb-2">🌱</div>
+          <h2 class="text-2xl font-bold">Nice work, Maya!</h2>
+          <p class="text-slate-600 mt-1">Here's what we found out together.</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-4 max-w-3xl mx-auto">
+          <div class="border border-emerald-200 bg-emerald-50 rounded-xl p-5">
+            <div class="text-xs font-semibold text-emerald-700 mb-1">YOU'RE STRONG AT</div>
+            <ul class="space-y-2 text-sm">
+              <li>✅ Sounding out new words</li>
+              <li>✅ Reading sight words</li>
+              <li>✅ Following the story</li>
+            </ul>
+          </div>
+          <div class="border border-amber-200 bg-amber-50 rounded-xl p-5">
+            <div class="text-xs font-semibold text-amber-700 mb-1">WE'LL WORK ON</div>
+            <ul class="space-y-2 text-sm">
+              <li>🎯 Tricky words you don't know yet</li>
+              <li>🎯 Figuring out what the author <em>means</em>, not just what they say</li>
+              <li>🎯 Longer sentences and harder passages</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="mt-8 text-center">
+          <div class="inline-flex items-center gap-2 bg-indigo-50 border border-indigo-200 rounded-full px-4 py-2 text-sm">
+            <span>📚</span>
+            <span>Your first practice session is ready — about 15 minutes.</span>
+          </div>
+          <div class="mt-5">
+            <a href="student-practice.html" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-8 py-3 rounded-xl inline-block">See today's practice →</a>
+          </div>
+        </div>
+
+        <div class="mt-8 text-xs text-slate-500 text-center max-w-xl mx-auto">
+          A grown-up will get a more detailed report. The kid view stays positive, concrete, and never assigns a "level number" to the child.
+        </div>
+      </div>
+    </section>
+
+    <!-- SCREEN 7: ADULT-FACING RESULTS · EHRI PHASE HEADLINE -->
+    <section class="bg-white border border-slate-200 rounded-2xl overflow-hidden">
+      <div class="bg-indigo-700 text-white px-6 py-2 text-xs font-semibold tracking-wide uppercase">Screen 7 · Adult report · pedagogical headline</div>
+      <div class="p-8 md:p-12">
+        <div class="grid md:grid-cols-3 gap-6">
+          <div class="md:col-span-2">
+            <div class="text-xs text-indigo-700 font-semibold uppercase tracking-wide mb-1">Where Maya reads</div>
+            <h2 class="text-2xl font-bold mb-2">Late Full Alphabetic phase, transitioning to Consolidated</h2>
+            <p class="text-slate-700 leading-relaxed">
+              Maya analyzes most words letter-by-letter accurately but hasn't yet automatized chunking by spelling pattern. This is the most common stall point for striving readers — and where targeted phonogram + syllable-type work has the highest payoff.
+            </p>
+            <div class="mt-4 flex flex-wrap gap-2 text-xs">
+              <span class="bg-slate-100 text-slate-700 px-2 py-1 rounded-full">Lexile ≈ 650L (supporting signal)</span>
+              <span class="bg-slate-100 text-slate-700 px-2 py-1 rounded-full">Grade equivalent ≈ 3.2</span>
+              <span class="bg-emerald-100 text-emerald-800 px-2 py-1 rounded-full">✓ decoding solid</span>
+              <span class="bg-amber-100 text-amber-800 px-2 py-1 rounded-full">⚑ vocab + morphology priority</span>
+            </div>
+          </div>
+          <aside class="bg-slate-50 rounded-2xl p-4 text-xs space-y-2">
+            <div class="font-semibold text-slate-700 uppercase">Ehri's four phases</div>
+            <ol class="space-y-1.5 text-slate-700">
+              <li>1 · Pre-alphabetic (visual)</li>
+              <li>2 · Partial alphabetic</li>
+              <li class="text-indigo-700 font-semibold">3 · Full alphabetic ← Maya</li>
+              <li>4 · Consolidated alphabetic</li>
+            </ol>
+            <div class="pt-2 text-slate-500 italic">Goal: get to phase 4, where decoding is automatic.</div>
+          </aside>
+        </div>
+
+        <div class="mt-6 pt-6 border-t border-slate-200 grid md:grid-cols-6 gap-3">
+          <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-3 text-xs">
+            <div class="font-semibold text-emerald-800">Phonemic awareness</div>
+            <div class="text-emerald-700 mt-1">✓ Strong</div>
+          </div>
+          <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-3 text-xs">
+            <div class="font-semibold text-emerald-800">Decoding</div>
+            <div class="text-emerald-700 mt-1">✓ Solid</div>
+          </div>
+          <div class="bg-rose-50 border border-rose-200 rounded-xl p-3 text-xs">
+            <div class="font-semibold text-rose-800">Morphology</div>
+            <div class="text-rose-700 mt-1">⚑ Gap</div>
+          </div>
+          <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-3 text-xs">
+            <div class="font-semibold text-emerald-800">Fluency</div>
+            <div class="text-emerald-700 mt-1">✓ Solid</div>
+          </div>
+          <div class="bg-rose-50 border border-rose-200 rounded-xl p-3 text-xs">
+            <div class="font-semibold text-rose-800">Vocabulary</div>
+            <div class="text-rose-700 mt-1">⚑ Critical</div>
+          </div>
+          <div class="bg-amber-50 border border-amber-200 rounded-xl p-3 text-xs">
+            <div class="font-semibold text-amber-800">Comprehension</div>
+            <div class="text-amber-700 mt-1">… Developing</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NOTES FOR REVIEWER -->
+    <section class="bg-slate-900 text-slate-100 rounded-2xl p-6">
+      <h3 class="font-semibold mb-3 text-base">Design notes for review</h3>
+      <ul class="text-sm text-slate-300 space-y-2 list-disc pl-5">
+        <li><strong class="text-white">Modality coverage:</strong> the diagnostic samples each strand of the Simple View of Reading + Scarborough's Rope — word recognition, decoding, vocab, language comprehension. PSSA item types are <em>not</em> required here; this is a literacy screener.</li>
+        <li><strong class="text-white">Audio + recording:</strong> read-aloud on every screen and voice capture on decoding items are non-negotiable for kids who can't yet read instructions on their own. This is the part that opens the market outside PA.</li>
+        <li><strong class="text-white">No level numbers to the kid.</strong> Grade equivalents, Lexile bands, etc. live on the adult dashboard. The kid sees strengths and goals in plain language.</li>
+        <li><strong class="text-white">Adaptive sequencing:</strong> the screener should branch — if a student fails 3 of 5 nonsense words, drop to single-syllable decoding before continuing. (Not visualized; behavior note.)</li>
+      </ul>
+    </section>
+
+    <div class="flex justify-between pt-2">
+      <a href="index.html" class="text-sm text-slate-500 hover:text-slate-900">← All mockups</a>
+      <a href="student-practice.html" class="text-sm text-indigo-700 hover:text-indigo-900 font-semibold">Next: daily practice session →</a>
+    </div>
+  </main>
+</body>
+</html>

@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Voice-first diagnostic</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', system-ui, -apple-system, Arial, sans-serif; }
+    .voice-bg { background: linear-gradient(135deg, #fef3f2 0%, #fef7f0 50%, #f5f3ff 100%); }
+    .buddy-grad { background: linear-gradient(140deg, #a78bfa 0%, #f0abfc 60%, #fda4af 100%); }
+    .buddy-grad-listening { background: linear-gradient(140deg, #34d399 0%, #a7f3d0 60%, #fde68a 100%); }
+    .buddy-grad-speaking { background: linear-gradient(140deg, #818cf8 0%, #c4b5fd 60%, #fbcfe8 100%); }
+    .kid-big { font-size: 1.5rem; line-height: 1.4; font-weight: 600; }
+    .pulse-ring { animation: pulse 2s infinite; }
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(52,211,153,0.5); }
+      50% { box-shadow: 0 0 0 24px rgba(52,211,153,0); }
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 min-h-screen">
+  <header class="border-b border-slate-200 bg-white">
+    <div class="max-w-5xl mx-auto px-6 py-3 flex items-center justify-between">
+      <a href="index.html" class="text-sm text-slate-500 hover:text-slate-900">← All mockups</a>
+      <div class="text-sm font-semibold">Student · Voice-first diagnostic</div>
+      <span class="text-xs px-2 py-1 rounded-full bg-amber-100 text-amber-800 font-medium">Mockup</span>
+    </div>
+  </header>
+
+  <main class="max-w-5xl mx-auto px-6 py-8 space-y-10">
+
+    <div class="bg-white border border-slate-200 rounded-2xl p-5">
+      <h2 class="font-bold text-lg mb-1">Voice-first mode · for kids who can't read instructions yet</h2>
+      <p class="text-sm text-slate-600">The whole diagnostic happens out loud. The kid never has to read a screen to know what to do. The screens below are what they'd see during a session.</p>
+    </div>
+
+    <!-- SCREEN 1: MEET YOUR READING BUDDY -->
+    <section class="rounded-3xl overflow-hidden border border-slate-200 voice-bg">
+      <div class="bg-purple-700 text-white px-6 py-2 text-xs font-semibold tracking-wide uppercase">Screen 1 · Meet your reading buddy</div>
+      <div class="p-10 md:p-14 text-center">
+        <!-- Character -->
+        <div class="relative inline-block mb-6">
+          <div class="w-40 h-40 rounded-full buddy-grad shadow-lg flex items-center justify-center relative">
+            <!-- Eyes -->
+            <div class="absolute top-14 left-9 w-6 h-6 bg-white rounded-full"></div>
+            <div class="absolute top-14 right-9 w-6 h-6 bg-white rounded-full"></div>
+            <div class="absolute top-16 left-11 w-3 h-3 bg-slate-900 rounded-full"></div>
+            <div class="absolute top-16 right-11 w-3 h-3 bg-slate-900 rounded-full"></div>
+            <!-- Smile -->
+            <svg class="absolute bottom-10" width="40" height="20" viewBox="0 0 40 20">
+              <path d="M5 5 Q 20 18 35 5" stroke="white" stroke-width="3" fill="none" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <!-- Speech bubble -->
+          <div class="absolute -right-4 top-2 bg-white rounded-2xl px-4 py-2 shadow-md border border-slate-200">
+            <div class="text-xs text-slate-500 mb-0.5">🔊 speaking</div>
+            <div class="flex items-center gap-0.5">
+              <span class="w-1 h-3 bg-purple-400 rounded animate-pulse"></span>
+              <span class="w-1 h-5 bg-purple-500 rounded"></span>
+              <span class="w-1 h-2 bg-purple-400 rounded"></span>
+              <span class="w-1 h-4 bg-purple-500 rounded"></span>
+              <span class="w-1 h-3 bg-purple-400 rounded"></span>
+            </div>
+          </div>
+        </div>
+
+        <p class="kid-big max-w-xl mx-auto">"Hi! I'm here to help you read. Let's get to know each other. Can you tell me your name?"</p>
+
+        <div class="mt-10 flex items-center justify-center gap-6">
+          <!-- Tap-to-talk button -->
+          <button class="w-24 h-24 rounded-full bg-emerald-500 hover:bg-emerald-600 shadow-lg flex items-center justify-center text-white pulse-ring">
+            <svg viewBox="0 0 24 24" fill="none" class="w-10 h-10"><path d="M12 2a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Zm-7 9a7 7 0 0 0 14 0M12 18v3" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
+          </button>
+          <div class="text-left">
+            <div class="font-bold text-slate-900">Tap to talk</div>
+            <div class="text-sm text-slate-500">or just start talking</div>
+          </div>
+        </div>
+
+        <div class="mt-8 inline-flex items-center gap-2 text-sm text-slate-500 bg-white/70 backdrop-blur px-3 py-1.5 rounded-full">
+          🔊 Volume on · 🎧 Headphones recommended
+        </div>
+      </div>
+    </section>
+
+    <!-- SCREEN 2: HEARING YOU -->
+    <section class="rounded-3xl overflow-hidden border border-slate-200 voice-bg">
+      <div class="bg-purple-700 text-white px-6 py-2 text-xs font-semibold tracking-wide uppercase">Screen 2 · I hear you</div>
+      <div class="p-10 md:p-14 text-center">
+        <div class="relative inline-block mb-6">
+          <div class="w-40 h-40 rounded-full buddy-grad-listening shadow-lg flex items-center justify-center relative pulse-ring">
+            <div class="absolute top-14 left-9 w-6 h-6 bg-white rounded-full"></div>
+            <div class="absolute top-14 right-9 w-6 h-6 bg-white rounded-full"></div>
+            <div class="absolute top-16 left-11 w-3 h-3 bg-slate-900 rounded-full"></div>
+            <div class="absolute top-16 right-11 w-3 h-3 bg-slate-900 rounded-full"></div>
+            <svg class="absolute bottom-11" width="30" height="10" viewBox="0 0 30 10">
+              <ellipse cx="15" cy="5" rx="10" ry="4" stroke="white" stroke-width="2.5" fill="rgba(0,0,0,0.15)"/>
+            </svg>
+          </div>
+        </div>
+
+        <div class="mb-2 text-sm font-semibold text-emerald-700 uppercase tracking-wide">Listening…</div>
+        <div class="flex items-center justify-center gap-1 h-12">
+          <span class="w-2 h-5 bg-emerald-400 rounded"></span>
+          <span class="w-2 h-10 bg-emerald-500 rounded"></span>
+          <span class="w-2 h-7 bg-emerald-400 rounded"></span>
+          <span class="w-2 h-12 bg-emerald-600 rounded"></span>
+          <span class="w-2 h-9 bg-emerald-500 rounded"></span>
+          <span class="w-2 h-6 bg-emerald-400 rounded"></span>
+          <span class="w-2 h-11 bg-emerald-500 rounded"></span>
+          <span class="w-2 h-4 bg-emerald-300 rounded"></span>
+        </div>
+
+        <div class="mt-6 inline-block bg-white rounded-2xl px-5 py-3 shadow border border-slate-200 max-w-md">
+          <div class="text-xs text-slate-400 mb-1">I heard you say…</div>
+          <div class="font-semibold text-lg text-slate-900">"My name is Maya"</div>
+          <div class="mt-2 text-xs text-emerald-700">✓ got it</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCREEN 3: WORD REPEAT TASK -->
+    <section class="rounded-3xl overflow-hidden border border-slate-200 voice-bg">
+      <div class="bg-purple-700 text-white px-6 py-2 text-xs font-semibold tracking-wide uppercase flex items-center justify-between">
+        <span>Screen 3 · Listen and say it back</span>
+        <span>Part 1 of 5 · word 2 of 8</span>
+      </div>
+      <div class="p-10 md:p-14">
+        <div class="flex flex-col md:flex-row items-center gap-8">
+          <div class="w-32 h-32 rounded-full buddy-grad-speaking shadow-lg flex items-center justify-center relative flex-shrink-0">
+            <div class="absolute top-11 left-7 w-5 h-5 bg-white rounded-full"></div>
+            <div class="absolute top-11 right-7 w-5 h-5 bg-white rounded-full"></div>
+            <div class="absolute top-12 left-9 w-2.5 h-2.5 bg-slate-900 rounded-full"></div>
+            <div class="absolute top-12 right-9 w-2.5 h-2.5 bg-slate-900 rounded-full"></div>
+            <svg class="absolute bottom-9" width="30" height="14" viewBox="0 0 30 14">
+              <ellipse cx="15" cy="7" rx="9" ry="5" stroke="white" stroke-width="2.5" fill="rgba(0,0,0,0.15)"/>
+            </svg>
+          </div>
+          <div class="flex-1 text-center md:text-left">
+            <div class="text-sm font-semibold text-purple-700 uppercase tracking-wide mb-2">Buddy says</div>
+            <p class="kid-big mb-3">"Listen carefully. The word is…"</p>
+            <div class="inline-flex items-center gap-3 bg-white rounded-2xl px-5 py-3 shadow border border-slate-200">
+              <button class="w-12 h-12 rounded-full bg-purple-100 text-purple-700 flex items-center justify-center">
+                <svg viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6"><path d="M8 5v14l11-7z"/></svg>
+              </button>
+              <div>
+                <div class="text-xs text-slate-500">Tap to hear again</div>
+                <div class="text-2xl font-bold">through</div>
+              </div>
+            </div>
+            <p class="mt-4 text-slate-600">Now say it back when you're ready.</p>
+          </div>
+        </div>
+
+        <div class="mt-10 flex items-center justify-between flex-wrap gap-3">
+          <button class="text-sm text-slate-500 hover:text-slate-900 flex items-center gap-2">
+            <span class="w-10 h-10 bg-white border border-slate-200 rounded-full flex items-center justify-center">←</span>
+            Go back
+          </button>
+          <div class="flex items-center gap-4">
+            <button class="w-20 h-20 rounded-full bg-emerald-500 hover:bg-emerald-600 shadow-md flex items-center justify-center text-white">
+              <svg viewBox="0 0 24 24" fill="none" class="w-8 h-8"><path d="M12 2a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Zm-7 9a7 7 0 0 0 14 0M12 18v3" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
+            </button>
+            <span class="text-sm text-slate-500">hold to talk</span>
+          </div>
+          <button class="text-sm text-slate-500 hover:text-slate-900 flex items-center gap-2">
+            Need help?
+            <span class="w-10 h-10 bg-white border border-slate-200 rounded-full flex items-center justify-center">?</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCREEN 4: DECODING WITH PICTURE PROMPT -->
+    <section class="rounded-3xl overflow-hidden border border-slate-200 voice-bg">
+      <div class="bg-purple-700 text-white px-6 py-2 text-xs font-semibold tracking-wide uppercase flex items-center justify-between">
+        <span>Screen 4 · Read this word out loud</span>
+        <span>Part 2 of 5 · decoding</span>
+      </div>
+      <div class="p-10 md:p-14 text-center">
+        <p class="kid-big mb-1">"Try to read this word out loud."</p>
+        <p class="text-slate-600 mb-8">It's okay if you guess.</p>
+
+        <div class="inline-block bg-white rounded-3xl p-12 shadow border border-slate-200 mb-8">
+          <div class="text-7xl font-bold tracking-wide">brimble</div>
+        </div>
+
+        <div class="flex items-center justify-center gap-4">
+          <button class="w-16 h-16 rounded-full bg-white border-2 border-slate-200 hover:border-purple-400 flex items-center justify-center" title="Hear an example">
+            <svg viewBox="0 0 24 24" fill="none" class="w-7 h-7"><path d="M11 5L6 9H2v6h4l5 4V5Z" stroke="#7e22ce" stroke-width="2" stroke-linejoin="round"/><path d="M15.5 8.5a5 5 0 0 1 0 7" stroke="#7e22ce" stroke-width="2" stroke-linecap="round"/></svg>
+          </button>
+          <button class="w-24 h-24 rounded-full bg-emerald-500 hover:bg-emerald-600 shadow-lg flex items-center justify-center text-white pulse-ring">
+            <svg viewBox="0 0 24 24" fill="none" class="w-10 h-10"><path d="M12 2a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Zm-7 9a7 7 0 0 0 14 0M12 18v3" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
+          </button>
+          <button class="w-16 h-16 rounded-full bg-white border-2 border-slate-200 hover:border-purple-400 flex items-center justify-center" title="Skip">
+            <span class="text-xl">→</span>
+          </button>
+        </div>
+        <p class="mt-3 text-xs text-slate-500">Hold the green button while you say it. Tap the speaker to hear what it might sound like.</p>
+      </div>
+    </section>
+
+    <!-- SCREEN 5: AUDIO VOCAB WITH PICTURE CHOICES -->
+    <section class="rounded-3xl overflow-hidden border border-slate-200 voice-bg">
+      <div class="bg-purple-700 text-white px-6 py-2 text-xs font-semibold tracking-wide uppercase flex items-center justify-between">
+        <span>Screen 5 · Picture answers · no reading required</span>
+        <span>Part 3 of 5 · vocab</span>
+      </div>
+      <div class="p-10 md:p-14">
+        <div class="text-center mb-8">
+          <p class="kid-big mb-3">"The dog was <span class="text-purple-700 underline decoration-purple-400 decoration-2 underline-offset-4">reluctant</span> to step in the bath. Which picture shows reluctant?"</p>
+          <button class="inline-flex items-center gap-2 text-sm bg-white border border-slate-200 hover:border-purple-400 px-4 py-2 rounded-full">
+            🔊 Hear it again
+          </button>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <button class="bg-white rounded-2xl p-5 border-2 border-slate-200 hover:border-purple-400 transition flex flex-col items-center gap-3">
+            <div class="w-24 h-24 bg-emerald-50 rounded-2xl flex items-center justify-center text-5xl">😄</div>
+            <div class="text-sm font-semibold text-slate-700">happy &amp; eager</div>
+          </button>
+          <button class="bg-purple-50 rounded-2xl p-5 border-2 border-purple-500 transition flex flex-col items-center gap-3 relative">
+            <div class="absolute top-2 right-2 w-6 h-6 bg-purple-600 text-white rounded-full flex items-center justify-center text-xs">✓</div>
+            <div class="w-24 h-24 bg-amber-50 rounded-2xl flex items-center justify-center text-5xl">😟</div>
+            <div class="text-sm font-semibold text-slate-700">doesn't want to</div>
+          </button>
+          <button class="bg-white rounded-2xl p-5 border-2 border-slate-200 hover:border-purple-400 transition flex flex-col items-center gap-3">
+            <div class="w-24 h-24 bg-rose-50 rounded-2xl flex items-center justify-center text-5xl">😴</div>
+            <div class="text-sm font-semibold text-slate-700">tired</div>
+          </button>
+          <button class="bg-white rounded-2xl p-5 border-2 border-slate-200 hover:border-purple-400 transition flex flex-col items-center gap-3">
+            <div class="w-24 h-24 bg-rose-50 rounded-2xl flex items-center justify-center text-5xl">😠</div>
+            <div class="text-sm font-semibold text-slate-700">angry</div>
+          </button>
+        </div>
+
+        <p class="mt-6 text-center text-xs text-slate-500">Or just say the answer out loud — "the second one," "doesn't want to," etc. The buddy will know what you mean.</p>
+      </div>
+    </section>
+
+    <!-- SCREEN 6: PASSAGE — BUDDY READS, KID ANSWERS BY VOICE -->
+    <section class="rounded-3xl overflow-hidden border border-slate-200 voice-bg">
+      <div class="bg-purple-700 text-white px-6 py-2 text-xs font-semibold tracking-wide uppercase flex items-center justify-between">
+        <span>Screen 6 · Story time · buddy reads, kid answers</span>
+        <span>Part 4 of 5</span>
+      </div>
+      <div class="grid md:grid-cols-2 gap-0 divide-y md:divide-y-0 md:divide-x divide-slate-200">
+        <div class="p-8">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-12 h-12 rounded-full buddy-grad-speaking flex items-center justify-center relative">
+              <div class="absolute top-3 left-2 w-2 h-2 bg-white rounded-full"></div>
+              <div class="absolute top-3 right-2 w-2 h-2 bg-white rounded-full"></div>
+            </div>
+            <div>
+              <div class="text-xs text-purple-700 font-semibold uppercase">Buddy is reading</div>
+              <div class="text-sm font-semibold">"The Storm Window"</div>
+            </div>
+          </div>
+          <!-- Karaoke-style highlight on current word -->
+          <p class="kid-big text-slate-800 leading-relaxed">
+            Mara pressed her nose to the cold glass. Outside, the sky had turned the color of an <span class="bg-purple-200">old</span> bruise, and the wind was already rattling the shutters next door.
+          </p>
+          <div class="mt-4 flex items-center gap-3">
+            <button class="bg-white border border-slate-200 hover:border-purple-400 rounded-full px-3 py-1.5 text-sm flex items-center gap-2">⏸ Pause</button>
+            <button class="bg-white border border-slate-200 hover:border-purple-400 rounded-full px-3 py-1.5 text-sm flex items-center gap-2">🐢 Slower</button>
+            <button class="bg-white border border-slate-200 hover:border-purple-400 rounded-full px-3 py-1.5 text-sm flex items-center gap-2">↻ From the top</button>
+          </div>
+        </div>
+        <div class="p-8 bg-white/60 backdrop-blur">
+          <div class="text-xs text-purple-700 font-semibold uppercase mb-3">Buddy asks</div>
+          <p class="kid-big mb-4">"What's the weather like in the story?"</p>
+
+          <div class="flex items-center gap-4">
+            <button class="w-20 h-20 rounded-full bg-emerald-500 hover:bg-emerald-600 shadow-lg flex items-center justify-center text-white pulse-ring">
+              <svg viewBox="0 0 24 24" fill="none" class="w-8 h-8"><path d="M12 2a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Zm-7 9a7 7 0 0 0 14 0M12 18v3" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
+            </button>
+            <div>
+              <div class="font-semibold text-slate-900">Hold to answer</div>
+              <div class="text-xs text-slate-500">say it however you want</div>
+            </div>
+          </div>
+
+          <div class="mt-6 bg-emerald-50 border border-emerald-200 rounded-xl p-3 text-sm">
+            <div class="text-xs text-emerald-700 font-semibold mb-1">Examples of okay answers</div>
+            <ul class="text-emerald-900 space-y-1">
+              <li>· "Stormy"</li>
+              <li>· "Like a storm coming"</li>
+              <li>· "Dark and windy"</li>
+            </ul>
+            <div class="mt-2 text-xs text-emerald-700 italic">The buddy doesn't need exact words. It listens for the idea.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCREEN 7: GENTLE RE-PROMPT (error case) -->
+    <section class="rounded-3xl overflow-hidden border border-slate-200 voice-bg">
+      <div class="bg-amber-600 text-white px-6 py-2 text-xs font-semibold tracking-wide uppercase">Screen 7 · When the buddy didn't catch it · friendly retry</div>
+      <div class="p-10 md:p-14 text-center">
+        <div class="relative inline-block mb-6">
+          <div class="w-32 h-32 rounded-full buddy-grad shadow-md flex items-center justify-center relative">
+            <div class="absolute top-11 left-7 w-5 h-5 bg-white rounded-full"></div>
+            <div class="absolute top-11 right-7 w-5 h-5 bg-white rounded-full"></div>
+            <div class="absolute top-12 left-9 w-2.5 h-2.5 bg-slate-900 rounded-full"></div>
+            <div class="absolute top-12 right-9 w-2.5 h-2.5 bg-slate-900 rounded-full"></div>
+            <svg class="absolute bottom-10" width="30" height="6" viewBox="0 0 30 6">
+              <path d="M5 3 Q 15 0 25 3" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="absolute -top-2 -right-2 w-10 h-10 bg-amber-100 border-2 border-amber-300 rounded-full flex items-center justify-center text-xl">🤔</div>
+        </div>
+        <p class="kid-big max-w-xl mx-auto">"Hmm, I didn't quite hear that. Try again — louder or slower is fine!"</p>
+        <div class="mt-6 flex justify-center gap-3 text-sm text-slate-600 flex-wrap">
+          <span class="bg-white border border-slate-200 rounded-full px-3 py-1.5">😌 No score is being taken — just try again</span>
+        </div>
+        <button class="mt-8 w-24 h-24 rounded-full bg-emerald-500 hover:bg-emerald-600 shadow-lg inline-flex items-center justify-center text-white pulse-ring">
+          <svg viewBox="0 0 24 24" fill="none" class="w-10 h-10"><path d="M12 2a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Zm-7 9a7 7 0 0 0 14 0M12 18v3" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+    </section>
+
+    <!-- SCREEN 8: DONE -->
+    <section class="rounded-3xl overflow-hidden border border-slate-200 voice-bg">
+      <div class="bg-emerald-600 text-white px-6 py-2 text-xs font-semibold tracking-wide uppercase">Screen 8 · All done · kid-facing celebration</div>
+      <div class="p-10 md:p-14 text-center">
+        <div class="text-6xl mb-3">🎉</div>
+        <div class="relative inline-block mb-3">
+          <div class="w-28 h-28 rounded-full buddy-grad shadow-md flex items-center justify-center relative">
+            <div class="absolute top-9 left-7 w-4 h-4 bg-white rounded-full"></div>
+            <div class="absolute top-9 right-7 w-4 h-4 bg-white rounded-full"></div>
+            <div class="absolute top-10 left-9 w-2 h-2 bg-slate-900 rounded-full"></div>
+            <div class="absolute top-10 right-9 w-2 h-2 bg-slate-900 rounded-full"></div>
+            <svg class="absolute bottom-7" width="36" height="14" viewBox="0 0 36 14">
+              <path d="M4 4 Q 18 16 32 4" stroke="white" stroke-width="3" fill="none" stroke-linecap="round"/>
+            </svg>
+          </div>
+        </div>
+        <p class="kid-big">"Awesome, Maya! That helped me know how to help you. Want to try a story together?"</p>
+        <button class="mt-8 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-8 py-4 rounded-2xl text-lg shadow-md">Yes! Let's go →</button>
+        <div class="mt-3 text-sm text-slate-500">You can also just say "yes" to start.</div>
+      </div>
+    </section>
+
+    <!-- NOTES -->
+    <section class="bg-slate-900 text-slate-100 rounded-2xl p-6">
+      <h3 class="font-semibold mb-3 text-base">Design notes · voice-first diagnostic</h3>
+      <ul class="text-sm text-slate-300 space-y-2 list-disc pl-5">
+        <li><strong class="text-white">No screen requires reading to operate.</strong> The buddy speaks every instruction. The text shown is illustrative — a kid who can't read can still complete every task by listening + speaking + tapping pictures.</li>
+        <li><strong class="text-white">Character with named states.</strong> Idle (warm gradient), listening (emerald + pulse ring), speaking (purple + voice waves), confused (amber + thinking face). These states are the visual grammar of the whole voice mode and should be reused identically in voice-practice.</li>
+        <li><strong class="text-white">Push-to-talk by default, always-listening optional.</strong> Hold-to-talk gives kids control over when the program is listening; reduces accidental capture. An accessibility toggle for hands-free mode would unlock it for kids with motor difficulties.</li>
+        <li><strong class="text-white">"I heard you say…" feedback.</strong> Critical for trust. Kid sees what the program transcribed so they can correct if it misheard. Also doubles as a literacy artifact — they see their own speech rendered as text.</li>
+        <li><strong class="text-white">Picture-based answer choices.</strong> When a multiple choice can be answered visually (emotions, scenes, simple concepts), use emojis or images instead of text. Kid who can't read can still answer.</li>
+        <li><strong class="text-white">"No score is being taken — just try again."</strong> Voice mistakes (mishears, mumbles, stage fright) must not affect scores. Diagnostic results should be based on what the kid clearly demonstrated, not on speech-recognition failures.</li>
+        <li><strong class="text-white">Karaoke-highlight on the read-aloud passage.</strong> As the buddy reads, the current word highlights. This is foundational for emergent readers — they see word-sound mapping in real time, building decoding without realizing they're being taught.</li>
+        <li><strong class="text-white">Existing infra:</strong> ReadingCoachPanel.tsx already has MediaRecorder + voice capture. Voice-first mode extends this with TTS (browser SpeechSynthesis API is the cheap MVP; ElevenLabs or similar for a friendlier voice in production) and intent recognition on the kid's responses.</li>
+      </ul>
+    </section>
+
+    <div class="flex justify-between pt-2">
+      <a href="index.html" class="text-sm text-slate-500 hover:text-slate-900">← All mockups</a>
+      <a href="voice-practice.html" class="text-sm text-indigo-700 hover:text-indigo-900 font-semibold">Next: talk-to-the-program practice →</a>
+    </div>
+  </main>
+</body>
+</html>

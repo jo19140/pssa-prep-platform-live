@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Voice practice · talk to the program</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', system-ui, -apple-system, Arial, sans-serif; }
+    .voice-bg { background: linear-gradient(135deg, #fef3f2 0%, #fef7f0 50%, #f5f3ff 100%); }
+    .buddy-grad { background: linear-gradient(140deg, #a78bfa 0%, #f0abfc 60%, #fda4af 100%); }
+    .buddy-grad-listening { background: linear-gradient(140deg, #34d399 0%, #a7f3d0 60%, #fde68a 100%); }
+    .buddy-grad-speaking { background: linear-gradient(140deg, #818cf8 0%, #c4b5fd 60%, #fbcfe8 100%); }
+    .kid-big { font-size: 1.5rem; line-height: 1.4; font-weight: 600; }
+    .pulse-ring { animation: pulse 2s infinite; }
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(52,211,153,0.5); }
+      50% { box-shadow: 0 0 0 24px rgba(52,211,153,0); }
+    }
+    .face-eyes::before, .face-eyes::after { content: ''; position: absolute; background: white; border-radius: 9999px; }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 min-h-screen">
+  <header class="border-b border-slate-200 bg-white">
+    <div class="max-w-5xl mx-auto px-6 py-3 flex items-center justify-between">
+      <a href="index.html" class="text-sm text-slate-500 hover:text-slate-900">← All mockups</a>
+      <div class="text-sm font-semibold">Student · Talk to the program</div>
+      <span class="text-xs px-2 py-1 rounded-full bg-amber-100 text-amber-800 font-medium">Mockup</span>
+    </div>
+  </header>
+
+  <main class="max-w-5xl mx-auto px-6 py-8 space-y-10">
+
+    <div class="bg-white border border-slate-200 rounded-2xl p-5">
+      <h2 class="font-bold text-lg mb-1">Conversational practice · the kid actually talks to the program</h2>
+      <p class="text-sm text-slate-600">These screens show a single 15-minute session as a back-and-forth conversation. The kid can interrupt, ask questions, ask for the buddy to repeat, and say their answers out loud. The visual is calm — most of the experience is audio.</p>
+    </div>
+
+    <!-- SCREEN 1: CHECK-IN -->
+    <section class="rounded-3xl overflow-hidden border border-slate-200 voice-bg">
+      <div class="bg-purple-700 text-white px-6 py-2 text-xs font-semibold tracking-wide uppercase">Screen 1 · Daily check-in · the conversation starts</div>
+      <div class="p-10 md:p-14">
+        <div class="grid md:grid-cols-2 gap-8 items-center">
+          <div class="text-center">
+            <div class="relative inline-block">
+              <div class="w-44 h-44 rounded-full buddy-grad-speaking shadow-lg flex items-center justify-center relative">
+                <div class="absolute top-16 left-10 w-7 h-7 bg-white rounded-full"></div>
+                <div class="absolute top-16 right-10 w-7 h-7 bg-white rounded-full"></div>
+                <div class="absolute top-18 left-12 w-3.5 h-3.5 bg-slate-900 rounded-full" style="top: 4.5rem;"></div>
+                <div class="absolute top-18 right-12 w-3.5 h-3.5 bg-slate-900 rounded-full" style="top: 4.5rem;"></div>
+                <svg class="absolute bottom-12" width="40" height="18" viewBox="0 0 40 18">
+                  <ellipse cx="20" cy="9" rx="12" ry="6" stroke="white" stroke-width="3" fill="rgba(0,0,0,0.15)"/>
+                </svg>
+              </div>
+              <div class="absolute -top-3 -right-3 bg-white rounded-full px-3 py-1.5 shadow text-xs font-semibold text-purple-700 border border-slate-200">🔊 speaking</div>
+            </div>
+          </div>
+          <div>
+            <div class="text-xs font-semibold text-purple-700 uppercase mb-2">Buddy</div>
+            <p class="kid-big mb-5">"Hi Maya! Welcome back. I saved a story I think you'll like today. Ready to start, or do you want to talk first?"</p>
+            <div class="flex gap-3">
+              <button class="bg-emerald-500 hover:bg-emerald-600 text-white font-semibold px-5 py-3 rounded-2xl flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-white"></span>
+                Just talk back
+              </button>
+              <button class="bg-white border border-slate-200 hover:border-purple-400 px-4 py-3 rounded-2xl text-sm">📖 Start story</button>
+              <button class="bg-white border border-slate-200 hover:border-purple-400 px-4 py-3 rounded-2xl text-sm">⏭ Skip ahead</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-10 max-w-md mx-auto md:mx-0 md:ml-[calc(50%+1rem)] bg-white border border-slate-200 rounded-2xl p-4 shadow-sm">
+          <div class="text-xs text-slate-400 mb-1">Maya said</div>
+          <div class="font-semibold text-slate-900">"Can I see the story first?"</div>
+          <div class="mt-2 flex items-center gap-2 text-xs text-emerald-700">
+            <span>✓ heard</span>
+            <span class="text-slate-400">·</span>
+            <button class="underline">that's not what I said</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCREEN 2: KID INTERRUPTS TO ASK ABOUT A WORD -->
+    <section class="rounded-3xl overflow-hidden border border-slate-200 voice-bg">
+      <div class="bg-purple-700 text-white px-6 py-2 text-xs font-semibold tracking-wide uppercase flex items-center justify-between">
+        <span>Screen 2 · Mid-passage · kid interrupts to ask about a word</span>
+        <span>The differentiator — this can't happen in a text-only product</span>
+      </div>
+      <div class="grid md:grid-cols-5 gap-0 divide-y md:divide-y-0 md:divide-x divide-slate-200">
+
+        <!-- Passage column -->
+        <div class="p-8 md:col-span-3">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-full buddy-grad-speaking flex items-center justify-center relative flex-shrink-0">
+              <div class="absolute top-2.5 left-2 w-1.5 h-1.5 bg-white rounded-full"></div>
+              <div class="absolute top-2.5 right-2 w-1.5 h-1.5 bg-white rounded-full"></div>
+            </div>
+            <div>
+              <div class="text-xs text-purple-700 font-semibold uppercase">Buddy was reading</div>
+              <div class="text-sm font-semibold">"Why the Wolves Came Back"</div>
+            </div>
+            <span class="ml-auto text-xs bg-amber-100 text-amber-800 px-2 py-1 rounded-full">⏸ paused</span>
+          </div>
+          <p class="kid-big text-slate-800 leading-relaxed">
+            For seventy years, there were no wolves in Yellowstone National Park. People who lived nearby had been <span class="bg-purple-200 rounded px-1">reluctant</span> to share the land with them, so the wolves were hunted until none were left.
+          </p>
+          <div class="mt-4 flex items-center gap-2 text-xs text-slate-500">
+            <span class="bg-emerald-100 text-emerald-800 px-2 py-1 rounded-full font-medium">+ Tier 2 vocab found</span>
+            <span>The buddy noticed Maya paused on "reluctant"</span>
+          </div>
+        </div>
+
+        <!-- Conversation column -->
+        <div class="md:col-span-2 bg-white/60 backdrop-blur p-6">
+          <div class="text-xs font-semibold text-purple-700 uppercase mb-3">Conversation</div>
+
+          <!-- Kid bubble -->
+          <div class="flex gap-2 mb-4 justify-end">
+            <div class="bg-purple-600 text-white rounded-2xl rounded-tr-sm px-4 py-2 max-w-[80%] text-sm">
+              "What does reluctant mean?"
+            </div>
+            <div class="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center text-xs font-bold flex-shrink-0">M</div>
+          </div>
+
+          <!-- Buddy bubble -->
+          <div class="flex gap-2 mb-4">
+            <div class="w-8 h-8 rounded-full buddy-grad-speaking flex items-center justify-center flex-shrink-0">
+              <div class="w-1 h-1 bg-white rounded-full mr-1"></div>
+              <div class="w-1 h-1 bg-white rounded-full"></div>
+            </div>
+            <div class="bg-white border border-slate-200 rounded-2xl rounded-tl-sm px-4 py-3 max-w-[85%] text-sm">
+              <div class="font-semibold mb-1">"Reluctant means you don't really want to do something."</div>
+              <div class="text-slate-700">"Like when you don't want to get out of bed, but you do. Want me to give you another example?"</div>
+              <div class="mt-2 flex gap-2 flex-wrap">
+                <button class="bg-purple-50 text-purple-700 text-xs px-2 py-1 rounded-full border border-purple-200">🔊 hear again</button>
+                <button class="bg-emerald-50 text-emerald-700 text-xs px-2 py-1 rounded-full border border-emerald-200">+ add to my words</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Kid bubble -->
+          <div class="flex gap-2 mb-4 justify-end">
+            <div class="bg-purple-600 text-white rounded-2xl rounded-tr-sm px-4 py-2 max-w-[80%] text-sm">
+              "Yes please"
+            </div>
+            <div class="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center text-xs font-bold flex-shrink-0">M</div>
+          </div>
+
+          <!-- Buddy bubble (speaking now) -->
+          <div class="flex gap-2">
+            <div class="w-8 h-8 rounded-full buddy-grad-speaking flex items-center justify-center flex-shrink-0 pulse-ring"></div>
+            <div class="bg-white border border-purple-300 rounded-2xl rounded-tl-sm px-4 py-3 max-w-[85%] text-sm">
+              <div class="text-xs text-purple-700 mb-1">speaking…</div>
+              <div class="flex items-center gap-0.5">
+                <span class="w-1 h-3 bg-purple-400 rounded"></span>
+                <span class="w-1 h-5 bg-purple-500 rounded"></span>
+                <span class="w-1 h-2 bg-purple-400 rounded"></span>
+                <span class="w-1 h-4 bg-purple-500 rounded"></span>
+                <span class="w-1 h-3 bg-purple-400 rounded"></span>
+                <span class="w-1 h-6 bg-purple-500 rounded"></span>
+                <span class="w-1 h-3 bg-purple-400 rounded"></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-6 pt-4 border-t border-slate-200 flex items-center gap-3">
+            <button class="w-12 h-12 rounded-full bg-emerald-500 text-white flex items-center justify-center pulse-ring">
+              <svg viewBox="0 0 24 24" fill="none" class="w-6 h-6"><path d="M12 2a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Zm-7 9a7 7 0 0 0 14 0M12 18v3" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
+            </button>
+            <span class="text-xs text-slate-500">Hold to interrupt &amp; talk</span>
+            <button class="ml-auto text-xs text-slate-500 hover:text-slate-900 underline">show transcript</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCREEN 3: KID READS, BUDDY LISTENS -->
+    <section class="rounded-3xl overflow-hidden border border-slate-200 voice-bg">
+      <div class="bg-emerald-600 text-white px-6 py-2 text-xs font-semibold tracking-wide uppercase">Screen 3 · Your turn to read · buddy listens</div>
+      <div class="p-10 md:p-14">
+        <div class="grid md:grid-cols-2 gap-8 items-center">
+          <div class="text-center">
+            <div class="relative inline-block">
+              <div class="w-40 h-40 rounded-full buddy-grad-listening shadow-lg flex items-center justify-center relative pulse-ring">
+                <div class="absolute top-14 left-9 w-6 h-6 bg-white rounded-full"></div>
+                <div class="absolute top-14 right-9 w-6 h-6 bg-white rounded-full"></div>
+                <div class="absolute top-16 left-11 w-3 h-3 bg-slate-900 rounded-full"></div>
+                <div class="absolute top-16 right-11 w-3 h-3 bg-slate-900 rounded-full"></div>
+                <svg class="absolute bottom-11" width="30" height="10" viewBox="0 0 30 10">
+                  <ellipse cx="15" cy="5" rx="10" ry="4" stroke="white" stroke-width="2.5" fill="rgba(0,0,0,0.15)"/>
+                </svg>
+              </div>
+            </div>
+            <div class="mt-4 text-emerald-700 font-semibold text-sm uppercase tracking-wide">Listening to you read</div>
+          </div>
+          <div>
+            <div class="bg-white border border-slate-200 rounded-2xl p-5">
+              <div class="text-xs text-slate-500 mb-1">Read this sentence out loud</div>
+              <p class="text-xl font-semibold leading-relaxed">
+                <span class="bg-emerald-100">The</span> <span class="bg-emerald-100">wolves</span> <span class="bg-amber-100 underline decoration-amber-500 decoration-2">disappeared</span> into the forest.
+              </p>
+              <div class="mt-3 text-xs text-slate-500 flex items-center gap-2 flex-wrap">
+                <span class="bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded">read clearly</span>
+                <span class="bg-amber-100 text-amber-800 px-2 py-0.5 rounded">attempting…</span>
+              </div>
+            </div>
+            <div class="mt-4 bg-white border border-purple-200 rounded-2xl p-4 text-sm">
+              <div class="text-xs font-semibold text-purple-700 mb-1">Buddy is being patient</div>
+              <div>Wait silently · gentle nudge after 6 seconds: <em>"Take your time — try sounding it out."</em></div>
+            </div>
+          </div>
+        </div>
+        <div class="mt-6 text-center text-xs text-slate-500">
+          Buddy never says "wrong" while a kid is mid-attempt. It only intervenes with help, never correction.
+        </div>
+      </div>
+    </section>
+
+    <!-- SCREEN 4: BUDDY OFFERS HELP -->
+    <section class="rounded-3xl overflow-hidden border border-slate-200 voice-bg">
+      <div class="bg-purple-700 text-white px-6 py-2 text-xs font-semibold tracking-wide uppercase">Screen 4 · Stuck on a word · buddy offers help</div>
+      <div class="p-10 md:p-14">
+        <div class="grid md:grid-cols-2 gap-8 items-center">
+          <div>
+            <div class="bg-white rounded-2xl border border-slate-200 p-5 mb-4">
+              <p class="kid-big">The wolves <span class="bg-rose-100 underline decoration-rose-400 decoration-2">disappeared</span> into the forest.</p>
+            </div>
+            <div class="text-sm text-slate-600 italic">Maya tried "dis-" and stopped.</div>
+          </div>
+          <div>
+            <div class="text-xs font-semibold text-purple-700 uppercase mb-2">Buddy</div>
+            <p class="kid-big mb-2">"That's a tricky one. Let's break it into parts you already know."</p>
+            <div class="bg-white rounded-xl border border-slate-200 p-4 mb-3">
+              <div class="text-xs font-semibold text-slate-500 uppercase mb-2">dis · ap · peared</div>
+              <div class="flex items-center gap-2 text-2xl font-bold">
+                <span class="bg-slate-100 text-slate-700 px-3 py-1 rounded-lg">dis</span>
+                <span class="text-slate-400">·</span>
+                <span class="bg-slate-100 text-slate-700 px-3 py-1 rounded-lg">ap</span>
+                <span class="text-slate-400">·</span>
+                <span class="bg-emerald-100 text-emerald-800 px-3 py-1 rounded-lg relative">
+                  peared
+                  <span class="absolute -top-2 -right-2 text-xs bg-emerald-600 text-white px-1.5 py-0.5 rounded-full">✓ you know</span>
+                </span>
+              </div>
+              <div class="mt-3 text-xs text-slate-600">Two closed syllables you've decoded before + an <code class="bg-slate-100 px-1 rounded">-eared</code> phonogram you mastered last week.</div>
+            </div>
+            <div class="flex gap-3">
+              <button class="bg-emerald-500 hover:bg-emerald-600 text-white px-5 py-3 rounded-2xl font-semibold flex items-center gap-2">
+                <svg viewBox="0 0 24 24" fill="none" class="w-5 h-5"><path d="M12 2a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Zm-7 9a7 7 0 0 0 14 0M12 18v3" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
+                Try again
+              </button>
+              <button class="bg-white border border-slate-200 hover:border-purple-400 px-5 py-3 rounded-2xl text-sm">Hear the whole word</button>
+              <button class="bg-white border border-slate-200 hover:border-purple-400 px-5 py-3 rounded-2xl text-sm">Move on</button>
+            </div>
+            <div class="mt-4 bg-amber-50 border border-amber-200 rounded-xl p-3 text-xs text-amber-900">
+              <strong>Scaffolding is phonogram-aware.</strong> The split isn't arbitrary syllables — it's the six syllable types (here: closed + closed + vowel-team) with known phonograms highlighted as anchors. Kid is implicitly building consolidated-alphabetic decoding every time they read a multisyllabic word this way.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCREEN 5: VOICE COMPREHENSION ANSWER -->
+    <section class="rounded-3xl overflow-hidden border border-slate-200 voice-bg">
+      <div class="bg-purple-700 text-white px-6 py-2 text-xs font-semibold tracking-wide uppercase">Screen 5 · Comprehension by voice · open-ended answer</div>
+      <div class="p-10 md:p-14">
+        <div class="grid md:grid-cols-2 gap-8">
+          <div>
+            <div class="text-xs font-semibold text-purple-700 uppercase mb-2">Buddy asks</div>
+            <p class="kid-big mb-4">"Why did the wolves come back to Yellowstone?"</p>
+            <div class="bg-white border border-slate-200 rounded-2xl p-4 text-sm">
+              <div class="text-xs text-slate-400 mb-1">Maya's answer</div>
+              <div class="font-medium text-slate-900 mb-2">"Because… because without them the elk ate the trees and then the beavers couldn't… have homes."</div>
+              <div class="flex flex-wrap gap-2 text-xs">
+                <span class="bg-emerald-100 text-emerald-800 px-2 py-1 rounded-full">✓ caught the cause-effect chain</span>
+                <span class="bg-emerald-100 text-emerald-800 px-2 py-1 rounded-full">✓ used "beavers" correctly</span>
+                <span class="bg-amber-100 text-amber-800 px-2 py-1 rounded-full">⚑ paused on "couldn't have homes"</span>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="bg-purple-50 border border-purple-200 rounded-2xl p-5">
+              <div class="text-xs font-semibold text-purple-700 uppercase mb-3">Buddy responds (TTS)</div>
+              <p class="text-slate-800">"That's exactly right, Maya! You explained the whole chain. The wolves came back so the elk would move, so the trees could grow, so the beavers would have what they needed."</p>
+              <div class="mt-3 text-xs text-slate-500">
+                <strong>Behind the scenes:</strong> the kid's spoken answer is scored by an LLM that evaluates whether the gist is correct — not by exact-string matching. This is what makes voice answers viable for comprehension.
+              </div>
+            </div>
+            <div class="mt-4 bg-white border border-slate-200 rounded-2xl p-4 text-sm">
+              <div class="text-xs text-slate-500 mb-1">Detected misconception (logged silently)</div>
+              <div class="text-slate-700">Maya conflated "couldn't survive without trees" with "couldn't have homes." Minor — buddy will reinforce in next session without flagging it to the kid.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCREEN 6: SESSION END SOFT GOODBYE -->
+    <section class="rounded-3xl overflow-hidden border border-slate-200 voice-bg">
+      <div class="bg-emerald-600 text-white px-6 py-2 text-xs font-semibold tracking-wide uppercase">Screen 6 · Saying goodbye · the warm wrap</div>
+      <div class="p-10 md:p-14 text-center">
+        <div class="relative inline-block mb-4">
+          <div class="w-32 h-32 rounded-full buddy-grad shadow-md flex items-center justify-center relative">
+            <div class="absolute top-11 left-7 w-5 h-5 bg-white rounded-full"></div>
+            <div class="absolute top-11 right-7 w-5 h-5 bg-white rounded-full"></div>
+            <div class="absolute top-12 left-9 w-2.5 h-2.5 bg-slate-900 rounded-full"></div>
+            <div class="absolute top-12 right-9 w-2.5 h-2.5 bg-slate-900 rounded-full"></div>
+            <svg class="absolute bottom-9" width="36" height="14" viewBox="0 0 36 14">
+              <path d="M4 4 Q 18 16 32 4" stroke="white" stroke-width="3" fill="none" stroke-linecap="round"/>
+            </svg>
+          </div>
+        </div>
+        <p class="kid-big max-w-xl mx-auto">"Great reading today, Maya. You worked through 'disappeared' all by yourself — that was hard and you did it. Same time tomorrow?"</p>
+        <div class="mt-8 flex items-center justify-center gap-3">
+          <button class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-6 py-3 rounded-2xl">Yes 👋</button>
+          <button class="bg-white border border-slate-200 hover:border-purple-400 px-5 py-3 rounded-2xl text-sm">Different time</button>
+        </div>
+        <div class="mt-3 text-xs text-slate-500">Or just say "bye!"</div>
+      </div>
+    </section>
+
+    <!-- NOTES -->
+    <section class="bg-slate-900 text-slate-100 rounded-2xl p-6">
+      <h3 class="font-semibold mb-3 text-base">Design notes · voice conversation during practice</h3>
+      <ul class="text-sm text-slate-300 space-y-2 list-disc pl-5">
+        <li><strong class="text-white">The kid can interrupt the program at any point.</strong> Screen 2 is the heart of this mockup — mid-passage, the kid asks "what does reluctant mean?" out loud and gets an answer in context. Reading-coach products that aren't conversational can't do this. It's the difference between "the program helps you read" and "the program IS the teacher."</li>
+        <li><strong class="text-white">Scaffolding before correction, always.</strong> Screen 4 — "try it in two parts" comes first, "here's how it sounds" only after attempts. Mirrors how a good human tutor works. Never say "wrong" mid-attempt.</li>
+        <li><strong class="text-white">Comprehension answers are LLM-graded for gist.</strong> Screen 5 — Maya gave a slightly garbled but correct answer. Old MCQ-only systems mark it wrong; an LLM rubric catches that she understood. This is why voice + AI together unlock comprehension assessment for kids who can't write yet.</li>
+        <li><strong class="text-white">"That's not what I said" override.</strong> Always available. Speech recognition isn't perfect, especially for kids' voices, accents, and dysfluent speech. Kid (or adult nearby) can correct what the buddy heard.</li>
+        <li><strong class="text-white">Silent logging of misconceptions.</strong> The buddy doesn't tell the kid "you confused homes with survival." It logs the pattern and addresses it indirectly in future sessions. Preserves dignity.</li>
+        <li><strong class="text-white">Chat-bubble transcript is hideable.</strong> Adult-facing view by default; can be toggled on or off. For kids who get distracted by their own speech transcribed, hide it.</li>
+        <li><strong class="text-white">"Same time tomorrow?"</strong> Closes the session with a habit-building question, not a metric. This is how the program builds the streak naturally — by asking, not by displaying.</li>
+        <li><strong class="text-white">Dialect-aware decoding evaluation (behavior note).</strong> When a family has opted in via dialect onboarding, expected phonological transfers do NOT count as decoding errors. A kid pronouncing "tooth" as "toof" while speaking AAE, or "sheep" as "cheep" with Spanish phonology, is decoding correctly within their home dialect. Engine logs the systematic pattern but doesn't deduct. See [dialect-onboarding.html].</li>
+      </ul>
+    </section>
+
+    <div class="flex justify-between pt-2">
+      <a href="voice-diagnostic.html" class="text-sm text-slate-500 hover:text-slate-900">← Voice diagnostic</a>
+      <a href="parent-voice-sessions.html" class="text-sm text-indigo-700 hover:text-indigo-900 font-semibold">Next: parent visibility →</a>
+    </div>
+  </main>
+</body>
+</html>
