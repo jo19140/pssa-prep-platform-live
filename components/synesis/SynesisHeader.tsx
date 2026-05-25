@@ -24,15 +24,7 @@ export function SynesisHeader({
             alt="Sý Learning"
             width={196}
             height={52}
-            className="hidden h-11 w-auto sm:block"
-            priority
-          />
-          <Image
-            src="/branding/sy-learning-icon-v6.png"
-            alt="Sý Learning"
-            width={44}
-            height={44}
-            className="h-11 w-11 rounded-xl sm:hidden"
+            className="h-12 w-auto"
             priority
           />
           <span className="sr-only">Sý Learning</span>
