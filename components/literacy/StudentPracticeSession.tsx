@@ -10,7 +10,7 @@ export function StudentPracticeSession({ voice = false }: { voice?: boolean }) {
   async function speak() {
     setState("speaking");
     try {
-      await browserTts.speak("Today's Reading Buddy practice is ready. Content will come from the content pipeline.");
+      await browserTts.speak("Buddy is getting today's practice ready. Check back soon for a passage picked just for you.");
     } finally {
       setState("idle");
     }
@@ -28,8 +28,16 @@ export function StudentPracticeSession({ voice = false }: { voice?: boolean }) {
         <section className="space-y-4">
           <h1 className="text-3xl font-black text-slate-950">{voice ? "Voice practice" : "Daily practice"}</h1>
           <div className="rounded-md border border-dashed border-slate-300 bg-white p-5">
-            <p className="font-semibold text-slate-700">{PLACEHOLDER_PASSAGE}</p>
-            <p className="mt-4 text-sm text-slate-500">Word-splitting scaffolds will use sourced `PhonogramFamily` records after the content pipeline seed runs.</p>
+            <p className="font-semibold text-slate-700">Buddy is getting today's practice ready</p>
+            <p className="mt-2 text-sm text-slate-500">
+              Check back soon - your Reading Buddy will have a passage picked just for you.
+            </p>
+            {process.env.NODE_ENV === "development" ? (
+              <div className="mt-4 space-y-2 border-t border-slate-200 pt-4 text-sm text-slate-500">
+                <p>{PLACEHOLDER_PASSAGE}</p>
+                <p>Word-splitting scaffolds will use sourced `PhonogramFamily` records after the content pipeline seed runs.</p>
+              </div>
+            ) : null}
           </div>
         </section>
       </div>

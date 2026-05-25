@@ -35,10 +35,7 @@ export function SynesisHeader({
             className="h-11 w-11 rounded-xl sm:hidden"
             priority
           />
-          <div>
-            <div className="sr-only">Sý Learning</div>
-            <div className="text-xs font-semibold uppercase tracking-wide text-slate-500">Learning Woven Together</div>
-          </div>
+          <span className="sr-only">Sý Learning</span>
         </a>
         <ProgramSwitcher enrolledPrograms={enrolledPrograms} />
         <div className="flex items-center gap-3">
