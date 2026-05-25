@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
+import { SynesisAuthShell } from "@/components/synesis/SynesisAuthShell";
 
 export default function ParentConsentTokenPage() {
   const params = useParams<{ token: string }>();
@@ -33,8 +34,8 @@ export default function ParentConsentTokenPage() {
   }
 
   return (
-    <main className="mx-auto max-w-2xl px-6 py-10">
-      <div className="rounded-3xl bg-white p-6 shadow">
+    <SynesisAuthShell maxWidth="max-w-2xl">
+      <div className="rounded-3xl border border-synesis-border bg-white/95 p-6 shadow-xl shadow-indigo-100/50">
         <h1 className="text-2xl font-black text-slate-950">Give Parent Permission</h1>
         <p className="mt-3 text-sm leading-6 text-slate-700">
           Please review the consent notice and confirm each statement. This creates the student's account only after permission is verified.
@@ -53,12 +54,12 @@ export default function ParentConsentTokenPage() {
           <Check checked={consent} onChange={setConsent} label="I consent to data collection and use as described." />
           <input value={signature} onChange={(event) => setSignature(event.target.value)} placeholder="Type your full name as e-signature" className="w-full rounded-2xl border border-slate-300 px-4 py-3" />
           {error ? <p className="text-sm font-semibold text-rose-600">{error}</p> : null}
-          <button disabled={loading || !guardian || !adult || !consent || signature.trim().length < 2} className="w-full rounded-2xl bg-slate-900 px-4 py-3 font-bold text-white disabled:opacity-50">
+          <button disabled={loading || !guardian || !adult || !consent || signature.trim().length < 2} className="w-full rounded-2xl bg-synesis-primary px-4 py-3 font-bold text-white shadow-lg shadow-indigo-200 transition hover:bg-synesis-primaryDark disabled:opacity-50">
             {loading ? "Confirming..." : "Confirm Consent"}
           </button>
         </form>
       </div>
-    </main>
+    </SynesisAuthShell>
   );
 }
 

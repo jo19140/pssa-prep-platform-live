@@ -1,4 +1,5 @@
 import type { SynesisProgram, TestPrepModule } from "@prisma/client";
+import Image from "next/image";
 import LogoutButton from "@/components/LogoutButton";
 import { MigrationBanner } from "@/components/synesis/MigrationBanner";
 import { ProgramSwitcher } from "@/components/synesis/ProgramSwitcher";
@@ -18,9 +19,24 @@ export function SynesisHeader({
       {showMigrationBanner ? <MigrationBanner /> : null}
       <div className="mx-auto flex max-w-7xl flex-col gap-4 px-4 py-4 lg:flex-row lg:items-center lg:justify-between">
         <a href="/student/practice" className="flex items-center gap-3">
-          <div className="grid h-10 w-10 place-items-center rounded-md bg-amber-400 font-black text-slate-950">S</div>
+          <Image
+            src="/branding/sy-learning-logo-v6.png"
+            alt="Sý Learning"
+            width={196}
+            height={52}
+            className="hidden h-11 w-auto sm:block"
+            priority
+          />
+          <Image
+            src="/branding/sy-learning-icon-v6.png"
+            alt="Sý Learning"
+            width={44}
+            height={44}
+            className="h-11 w-11 rounded-xl sm:hidden"
+            priority
+          />
           <div>
-            <div className="text-xl font-black text-slate-950">Sýnesis</div>
+            <div className="sr-only">Sý Learning</div>
             <div className="text-xs font-semibold uppercase tracking-wide text-slate-500">Learning Woven Together</div>
           </div>
         </a>

@@ -11,7 +11,7 @@ export function LegalFooter() {
         Terms of Service
       </Link>
       <span aria-hidden="true">·</span>
-      <a href="mailto:privacy@[domain]" className="hover:text-slate-900">
+      <a href="mailto:privacy@sylearning.com" className="hover:text-slate-900">
         Contact
       </a>
     </footer>

@@ -24,5 +24,5 @@ export function renderMarkdownLite(markdown: string) {
 export function parentalConsentText() {
   return `${PRIVACY_VERSION}
 
-I consent to creation of my child's account and to collection and use of account information, learning data, assessment responses, lesson progress, tutor messages, and reading-coach transcripts as described in the Privacy Policy. I understand that AI subprocessors may process limited data to provide scoring, tutoring, lesson generation, and reading feedback. I understand that I may request review, export, correction, deletion, or consent withdrawal by contacting privacy@[domain].`;
+I consent to creation of my child's account and to collection and use of account information, learning data, assessment responses, lesson progress, tutor messages, and reading-coach transcripts as described in the Privacy Policy. I understand that AI subprocessors may process limited data to provide scoring, tutoring, lesson generation, and reading feedback. I understand that I may request review, export, correction, deletion, or consent withdrawal by contacting privacy@sylearning.com.`;
 }

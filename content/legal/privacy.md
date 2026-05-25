@@ -36,7 +36,7 @@ We retain account and learning data while the account is active. Accounts with n
 
 For students under 13, parental consent is required before account creation. Parents and legal guardians may review their child's data, request corrections, request deletion, or withdraw consent. Consent withdrawal may limit or end the student's access because the service cannot operate without processing learning data.
 
-Parents can contact privacy@[domain] to ask questions or submit a request.
+Parents can contact privacy@sylearning.com to ask questions or submit a request.
 
 ## FERPA Notice
 
@@ -56,4 +56,4 @@ We may update this Privacy Policy as the product changes. If we make material ch
 
 ## Contact
 
-Questions about privacy, data export, deletion, parental consent, or school data processing can be sent to privacy@[domain].
+Questions about privacy, data export, deletion, parental consent, or school data processing can be sent to privacy@sylearning.com.
