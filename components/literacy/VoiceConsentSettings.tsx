@@ -71,7 +71,7 @@ export function VoiceConsentSettings({ studentUserId, consent }: { studentUserId
         </div>
       </section>
       <section className="space-y-3 rounded-md border border-slate-200 bg-white p-5">
-        <h2 className="font-black text-slate-950">Help Sýnesis improve future learning support.</h2>
+        <h2 className="font-black text-slate-950">Help Sý Learning improve future learning support.</h2>
         <p className="text-sm text-slate-600">With your permission, we will keep eligible data longer than the service window and use it to improve the platform. This is off by default.</p>
         <button onClick={() => save({ trainingCorpusOptedIn: !state.trainingCorpusOptedIn })} className="rounded-md bg-slate-950 px-4 py-2 text-sm font-bold text-white">
           {state.trainingCorpusOptedIn ? "Training use opted in" : "Opt in to training use"}

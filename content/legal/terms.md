@@ -46,4 +46,4 @@ We may update these Terms as the product changes. Material changes will be refle
 
 ## Contact
 
-Questions about these Terms can be sent to privacy@[domain].
+Questions about these Terms can be sent to privacy@sylearning.com.

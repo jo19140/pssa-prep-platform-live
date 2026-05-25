@@ -1,9 +1,10 @@
 import { LoginForm } from "@/components/LoginForm";
+import { SynesisAuthShell } from "@/components/synesis/SynesisAuthShell";
 
 export default function LoginPage() {
   return (
-    <main className="mx-auto max-w-md p-6">
+    <SynesisAuthShell>
       <LoginForm />
-    </main>
+    </SynesisAuthShell>
   );
 }

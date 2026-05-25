@@ -2,6 +2,7 @@
 
 import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
+import { SynesisAuthShell } from "@/components/synesis/SynesisAuthShell";
 
 export default function ConfirmDeletePage() {
   const params = useParams<{ token: string }>();
@@ -28,8 +29,8 @@ export default function ConfirmDeletePage() {
   }
 
   return (
-    <main className="mx-auto max-w-lg px-6 py-10">
-      <div className="rounded-3xl bg-white p-6 shadow">
+    <SynesisAuthShell maxWidth="max-w-lg">
+      <div className="rounded-3xl border border-synesis-border bg-white/95 p-6 shadow-xl shadow-indigo-100/50">
         <h1 className="text-2xl font-black text-slate-950">Confirm Account Deletion</h1>
         <p className="mt-3 text-sm leading-6 text-slate-700">Type the account email to permanently delete the account's child records and de-identify the user row.</p>
         <form onSubmit={submit} className="mt-5 space-y-4">
@@ -40,6 +41,6 @@ export default function ConfirmDeletePage() {
           </button>
         </form>
       </div>
-    </main>
+    </SynesisAuthShell>
   );
 }

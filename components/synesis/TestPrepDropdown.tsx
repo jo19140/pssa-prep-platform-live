@@ -13,7 +13,7 @@ export function TestPrepDropdown({ enrolledTestPrep = ["PSSA"] }: { enrolledTest
     await fetch("/api/synesis/state-request", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ stateCode, requestNotes: "Requested from Sýnesis test prep dropdown." }),
+      body: JSON.stringify({ stateCode, requestNotes: "Requested from Sý Learning test prep dropdown." }),
     });
     setSubmitted(true);
   }

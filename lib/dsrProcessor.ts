@@ -31,7 +31,7 @@ export async function processDsrExport(requestId: string) {
   await sendEmail({
     to: request.user.email,
     subject: "Your data export is ready",
-    html: `<p>Hi ${escapeHtml(request.user.name)},</p><p>Your data export request is complete.</p>${payloadUrl ? `<p><a href="${payloadUrl}">Download JSON export</a></p>` : "<p>The export was generated, but file storage is not configured. Contact privacy@[domain].</p>"}`,
+    html: `<p>Hi ${escapeHtml(request.user.name)},</p><p>Your data export request is complete.</p>${payloadUrl ? `<p><a href="${payloadUrl}">Download JSON export</a></p>` : "<p>The export was generated, but file storage is not configured. Contact privacy@sylearning.com.</p>"}`,
   });
   return completed;
 }
