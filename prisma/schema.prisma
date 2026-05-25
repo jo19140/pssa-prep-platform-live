@@ -65,6 +65,7 @@ model User {
   parentalConsentRequired Boolean @default(false)
   parentalConsentAt DateTime?
   accountDeletedAt DateTime?
+  isPlaceholderSmokeTest Boolean @default(false)
   enrolledPrograms SynesisProgram[] @default([VENUS])
   enrolledTestPrep TestPrepModule[] @default([PSSA])
   synesisMigrationBannerDismissedAt DateTime?
@@ -205,6 +206,7 @@ model TeacherProfile {
   schoolId    String?
   schoolName  String
   gradeBand   String?
+  isPlaceholderSmokeTest Boolean @default(false)
   user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
   school      School?     @relation(fields: [schoolId], references: [id], onDelete: SetNull)
   classes     ClassRoom[]
@@ -219,6 +221,7 @@ model StudentProfile {
   grade       Int
   schoolName  String
   teacherId   String?
+  isPlaceholderSmokeTest Boolean @default(false)
   user        User           @relation(fields: [userId], references: [id], onDelete: Cascade)
   school      School?        @relation(fields: [schoolId], references: [id], onDelete: SetNull)
   teacher     TeacherProfile? @relation("TeacherStudents", fields: [teacherId], references: [id])
@@ -232,6 +235,7 @@ model ParentProfile {
   id          String             @id @default(cuid())
   userId      String             @unique
   phoneNumber String?
+  isPlaceholderSmokeTest Boolean @default(false)
   user        User               @relation(fields: [userId], references: [id], onDelete: Cascade)
   children    ParentStudentLink[]
 }
@@ -240,6 +244,7 @@ model ParentStudentLink {
   id               String         @id @default(cuid())
   parentProfileId  String
   studentProfileId String
+  isPlaceholderSmokeTest Boolean @default(false)
   parentProfile    ParentProfile  @relation(fields: [parentProfileId], references: [id], onDelete: Cascade)
   studentProfile   StudentProfile @relation(fields: [studentProfileId], references: [id], onDelete: Cascade)
 
@@ -283,6 +288,7 @@ model Assessment {
   state       String
   grade       Int
   isAdaptive  Boolean       @default(true)
+  isPlaceholderSmokeTest Boolean @default(false)
   ehriPhaseAtTime EhriPhase?
   lexileBand  Int?
   createdAt   DateTime      @default(now())
@@ -307,6 +313,7 @@ model AssessmentPassage {
   gradeLevel      Int
   tableData       Json?
   metadata        Json
+  isPlaceholderSmokeTest Boolean  @default(false)
   createdAt       DateTime   @default(now())
   assessment      Assessment @relation(fields: [assessmentId], references: [id], onDelete: Cascade)
 
@@ -323,6 +330,7 @@ model AssessmentQuestion {
   skill          String
   difficulty     Int
   questionPayload Json
+  isPlaceholderSmokeTest Boolean @default(false)
   createdAt      DateTime   @default(now())
   assessment     Assessment @relation(fields: [assessmentId], references: [id], onDelete: Cascade)
 
@@ -1172,6 +1180,7 @@ model PhonogramFamily {
   syllableType      String
   exampleWords      Json
   introductionOrder Int
+  isPlaceholderSmokeTest Boolean @default(false)
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt
   masteryRecords    PhonogramMastery[]

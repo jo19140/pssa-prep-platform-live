@@ -14,7 +14,13 @@ async function ParentLiteracyData() {
   });
   const studentUserId = parent?.children[0]?.studentProfile.userId;
   const profile = studentUserId ? await getFullLiteracyProfile(studentUserId) : null;
-  return <ParentLiteracyDashboard profile={profile} />;
+  const latestOutcome = studentUserId
+    ? await db.studentEventOutcome.findFirst({
+        where: { studentEvent: { studentUserId } },
+        orderBy: { measuredAt: "desc" },
+      })
+    : null;
+  return <ParentLiteracyDashboard profile={profile} latestOutcome={latestOutcome} />;
 }
 
 export default function ParentLiteracyPage() {

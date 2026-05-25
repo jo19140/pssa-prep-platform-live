@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 import { requireUser } from "@/lib/authz";
 import { getClientIp, consumeRateLimit } from "@/lib/rateLimit";
-import { checkTtsDailyCostCap } from "@/lib/voice/tts-cost-cap";
+import { checkTtsDailyPlayCap } from "@/lib/voice/tts-play-cap";
 import { getCachedTtsAudio, setCachedTtsAudio, ttsCacheKey } from "@/lib/voice/tts-cache";
 import { DEFAULT_OPENAI_TTS_MODEL, DEFAULT_OPENAI_TTS_VOICE, generateOpenAiTtsWithDecisionLogging } from "@/lib/voice/openaiTtsGeneration";
 
@@ -35,9 +35,9 @@ export async function POST(req: Request) {
   const cached = getCachedTtsAudio(cacheKey);
   if (cached) return audioResponse(cached.bytes, cached.contentType, "HIT");
 
-  const cap = await checkTtsDailyCostCap(auth.user!.id);
+  const cap = await checkTtsDailyPlayCap(auth.user!.id);
   if (!cap.allowed) {
-    return NextResponse.json({ error: "tts_cap_reached", capUsed: cap.used, capTotal: cap.cap }, { status: 429 });
+    return NextResponse.json({ error: "tts_play_cap_reached", playsUsed: cap.used, playCap: cap.cap }, { status: 429 });
   }
 
   try {

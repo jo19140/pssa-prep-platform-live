@@ -2,10 +2,10 @@ import { Prisma } from "@prisma/client";
 import { DECISION_TYPES } from "@/lib/decisions/decisionTypes";
 import { db } from "@/lib/db";
 
-const DEFAULT_DAILY_CAP = 100;
+const DEFAULT_DAILY_PLAY_CAP = 100;
 
-export async function checkTtsDailyCostCap(studentUserId: string, now = new Date()) {
-  const cap = Number(process.env.TTS_PER_STUDENT_DAILY_CAP || DEFAULT_DAILY_CAP);
+export async function checkTtsDailyPlayCap(studentUserId: string, now = new Date()) {
+  const cap = Number(process.env.TTS_PER_STUDENT_DAILY_PLAY_CAP || DEFAULT_DAILY_PLAY_CAP);
   const used = await db.modelDecision.count({
     where: {
       decisionType: DECISION_TYPES.TTS_GENERATION,
