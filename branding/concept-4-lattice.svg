@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 200" role="img">
+<title>Sýnesis · Lattice mark</title>
+<desc>Woven diamond lattice in indigo and amber, paired with the Sýnesis wordmark.</desc>
+<g transform="translate(130, 100)">
+  <line x1="-24" y1="0" x2="0" y2="-24" stroke="#1e1b4b" stroke-width="3" stroke-linecap="round"/>
+  <line x1="0" y1="-24" x2="24" y2="0" stroke="#1e1b4b" stroke-width="3" stroke-linecap="round"/>
+  <line x1="24" y1="0" x2="0" y2="24" stroke="#1e1b4b" stroke-width="3" stroke-linecap="round"/>
+  <line x1="0" y1="24" x2="-24" y2="0" stroke="#1e1b4b" stroke-width="3" stroke-linecap="round"/>
+  <line x1="-12" y1="-12" x2="12" y2="12" stroke="#f59e0b" stroke-width="3" stroke-linecap="round"/>
+  <line x1="12" y1="-12" x2="-12" y2="12" stroke="#f59e0b" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="0" cy="0" r="3" fill="#1e1b4b"/>
+</g>
+<text x="210" y="114" font-family="Georgia, 'Cormorant Garamond', serif" font-weight="600" font-size="48" fill="#1e1b4b">Sýnesis</text>
+<circle cx="236" cy="72" r="3" fill="#f59e0b"/>
+</svg>
