@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "tsx scripts/dev/check-env.ts && next dev",
     "build": "prisma generate && next build",
     "start": "next start",
     "lint": "next lint",
@@ -11,6 +11,7 @@
     "test:voice-flywheel": "tsx scripts/test-voice-data-flywheel.ts",
     "test:data-flywheel": "tsx scripts/test-data-flywheel-foundation.ts",
     "test:voice-tts-upgrade": "tsx lib/voice/providers/openai-tts.equality.test.ts",
+    "dev:reset": "tsx scripts/dev/reset.ts",
     "voice:enforce-retention": "tsx scripts/voice/enforce-retention.ts",
     "voice:purge-training-opt-outs": "tsx scripts/voice/purge-training-opt-outs.ts",
     "data-flywheel:compute-outcomes": "tsx scripts/data-flywheel/compute-outcomes.ts",

@@ -4,6 +4,8 @@ import { db } from "@/lib/db";
 import { requireUser } from "@/lib/authz";
 import { ensureLiteracyProfile, json } from "@/lib/literacy/profile";
 import { retentionForVoiceSession } from "@/lib/voice/consent";
+import { EVENT_TYPES } from "@/lib/events/eventTypes";
+import { recordStudentEvent } from "@/lib/events/recordStudentEvent";
 
 const schema = z.object({
   startedAt: z.coerce.date().optional(),
@@ -37,6 +39,26 @@ export async function POST(req: Request) {
       transcriptJson: json({ mode: "speed-drill", content: "TODO: from content pipeline" }),
       ...retention,
     },
+  });
+  await recordStudentEvent({
+    studentUserId: auth.user!.id,
+    eventType: EVENT_TYPES.ITEM_ANSWER_SUBMITTED,
+    context: {
+      surface: "reading_buddy_speed_drill",
+      itemId: voiceSession.id,
+      itemType: "speed_drill_summary_placeholder",
+      contentSource: "TODO_FROM_CONTENT_PIPELINE",
+    },
+    response: {
+      wordsRead: parsed.data.wordsRead,
+      wordsCorrect: parsed.data.wordsCorrect,
+      wordsSelfCorrected: parsed.data.wordsSelfCorrected,
+      wordsMissed: parsed.data.wordsMissed,
+      wpm,
+    },
+    durationMs: parsed.data.durationSeconds * 1000,
+    immediateOutcome: parsed.data.wordsMissed === 0 ? "CORRECT" : "PARTIAL",
+    sessionId: voiceSession.id,
   });
   return NextResponse.json({ voiceSession });
 }
