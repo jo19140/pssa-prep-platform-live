@@ -87,7 +87,7 @@ export function LoginForm() {
   const under13 = isUnder13Input(dateOfBirth);
 
   return (
-    <div className="rounded-3xl border border-synesis-border bg-white/95 p-6 shadow-xl shadow-indigo-100/50">
+    <div className="rounded-2xl border border-white bg-white p-6 shadow-2xl shadow-indigo-950/10">
       <div className="flex rounded-2xl bg-slate-100 p-1">
         <button
           type="button"
@@ -106,7 +106,7 @@ export function LoginForm() {
       </div>
 
       <form onSubmit={isRegistering ? handleStudentRegister : handleSubmit} className="mt-5">
-        <h1 className="font-display text-2xl font-extrabold tracking-tight text-synesis-ink">{isRegistering ? "Join Your Class" : "Login"}</h1>
+        <h2 className="font-display text-2xl font-extrabold tracking-tight text-synesis-ink">{isRegistering ? "Join Your Class" : "Login"}</h2>
         <p className="mt-1 text-sm text-slate-600">
           {isRegistering ? "Use the class code from your teacher to create your student account." : "Sign in with your Sý Learning account."}
         </p>
