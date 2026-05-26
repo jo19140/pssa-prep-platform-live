@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { LoginForm } from "@/components/LoginForm";
 
@@ -10,27 +9,26 @@ const differentiators = [
 
 export default function LoginPage() {
   return (
-    <div className="min-h-screen overflow-x-hidden bg-[linear-gradient(180deg,_#00001b_0%,_#0b0638_24%,_#5b21b6_44%,_#d8ccff_70%,_#f7f2ff_86%,_#fffdf7_100%)] text-synesis-ink">
-      <header className="sy-login-fade-in h-[118px] w-full overflow-hidden bg-[#00001b] sm:h-[150px] lg:h-[220px]">
-        <Image
-          src="/branding/sy-learning-header-center-locked-2048.png"
-          alt="Sý Learning"
-          width={2048}
-          height={512}
-          className="h-full w-full scale-[1.08] object-cover"
-          priority
-        />
-      </header>
+    <div
+      className="min-h-screen overflow-x-hidden text-synesis-ink"
+      style={{
+        backgroundImage: "url('/branding/sy-learning-login-background-v1.png'), linear-gradient(180deg, #00001b 0%, #0b0638 24%, #5b21b6 44%, #d8ccff 70%, #f7f2ff 86%, #fffdf7 100%)",
+        backgroundPosition: "top center, center",
+        backgroundRepeat: "no-repeat, no-repeat",
+        backgroundSize: "100% auto, 100% 100%",
+      }}
+    >
+      <header className="sy-login-fade-in h-6 w-full sm:h-8 lg:h-10" aria-hidden="true" />
 
-      <main className="mx-auto flex w-full max-w-5xl flex-col items-center px-4 pb-10 pt-8 sm:px-6 lg:pt-10">
+      <main className="mx-auto flex w-full max-w-5xl flex-col items-center px-4 pb-10 pt-4 sm:px-6 lg:pt-6">
         <section className="sy-login-fade-in max-w-4xl text-center">
-          <h1 className="font-display text-4xl font-black tracking-normal text-white sm:text-5xl">
+          <h1 className="font-display text-4xl font-black tracking-normal text-white drop-shadow-[0_4px_18px_rgba(0,0,27,0.65)] sm:text-5xl">
             Reading practice that listens.
           </h1>
-          <p className="mx-auto mt-4 max-w-3xl text-base font-medium leading-7 text-indigo-100 sm:text-xl">
+          <p className="mx-auto mt-5 max-w-3xl text-base font-medium leading-7 text-indigo-100 drop-shadow-[0_2px_10px_rgba(0,0,27,0.55)] sm:text-xl">
             AI reading practice that meets every child where they are - built for striving readers in grades 3-8.
           </p>
-          <div className="mt-8 grid gap-3 text-left md:grid-cols-3">
+          <div className="mt-12 grid gap-4 text-left md:grid-cols-3">
             {differentiators.map((item) => (
               <div key={item} className="flex items-start gap-3 rounded-2xl border border-white/60 bg-white/75 p-4 shadow-lg shadow-indigo-950/10 backdrop-blur-md">
                 <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-synesis-warmth text-white">
@@ -40,12 +38,9 @@ export default function LoginPage() {
               </div>
             ))}
           </div>
-          <p className="mt-8 text-sm font-bold text-indigo-950/80">
-            COPPA-compliant. Built for Pennsylvania teachers and tutors.
-          </p>
         </section>
 
-        <section className="mt-9 w-full max-w-[440px]" aria-label="Account access">
+        <section className="mt-10 w-full max-w-[440px]" aria-label="Account access">
           <LoginForm />
         </section>
       </main>
