@@ -61,13 +61,22 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
     "/data-request",
     "/legal",
   ].some((prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`));
+  const isMarketingRoute = [
+    "/",
+    "/for-teachers",
+    "/for-parents",
+    "/for-schools",
+    "/about",
+    "/contact",
+    "/faq",
+  ].some((prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`));
   return (
     <html lang="en">
       <body className="font-sans">
         <Providers>
-          {!isSynesisRoute && !isAuthSurface ? <AppChromeHeader /> : null}
+          {!isSynesisRoute && !isAuthSurface && !isMarketingRoute ? <AppChromeHeader /> : null}
           {children}
-          {!isAuthSurface ? <LegalFooter /> : null}
+          {!isAuthSurface && !isMarketingRoute ? <LegalFooter /> : null}
         </Providers>
       </body>
     </html>
