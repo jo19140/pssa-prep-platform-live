@@ -9,14 +9,14 @@ const programs: Array<{ code: SynesisProgram; label: string; planet: string; hre
 
 export function ProgramSwitcher({ enrolledPrograms = ["VENUS"] }: { enrolledPrograms?: SynesisProgram[] }) {
   return (
-    <div className="flex flex-wrap gap-2">
+    <>
       {programs.map((program) => {
         const enabled = enrolledPrograms.includes(program.code);
         return (
           <a
             key={program.code}
             href={enabled ? program.href : "#"}
-            className={`rounded-md border px-3 py-2 text-sm transition ${
+            className={`min-w-[128px] rounded-md border px-3 py-2 text-sm transition ${
               enabled
                 ? "border-amber-300 bg-amber-50 text-amber-950 hover:bg-amber-100"
                 : "border-slate-200 bg-slate-50 text-slate-400"
@@ -28,6 +28,6 @@ export function ProgramSwitcher({ enrolledPrograms = ["VENUS"] }: { enrolledProg
           </a>
         );
       })}
-    </div>
+    </>
   );
 }
