@@ -69,7 +69,7 @@ export function HeroSection() {
         className="absolute inset-0 -z-10 bg-no-repeat opacity-100"
         style={{
           backgroundImage: "url('/branding/sy-learning-header-extended-tall.png')",
-          backgroundPosition: "center -150px",
+          backgroundPosition: "center -52px",
           backgroundSize: "calc(100% + 180px) auto",
         }}
       />
@@ -78,13 +78,11 @@ export function HeroSection() {
 
       <div className="mx-auto grid min-h-[720px] max-w-7xl items-center gap-10 px-4 py-16 sm:px-6 lg:grid-cols-[1.2fr_0.8fr] lg:px-8 lg:py-20">
         <div className="relative max-w-3xl">
-          <div className="pointer-events-none absolute -left-2 top-16 -z-0 font-display text-[6.5rem] font-black leading-none text-white opacity-[0.17] blur-[0.2px] sm:text-[8.5rem] lg:-left-8 lg:top-14 lg:text-[10rem]" aria-hidden="true">
-            Sý
-            <span className="block -mt-6 text-[0.38em]">Learning</span>
+          <div className="relative z-10 mb-5 flex max-w-2xl justify-center">
+            <p className="inline-flex rounded-full border border-white/25 bg-white/[0.15] px-4 py-2 text-sm font-bold text-white shadow-lg shadow-black/10 backdrop-blur">
+              Voice-first reading support for grades 3-8
+            </p>
           </div>
-          <p className="relative z-10 mb-5 inline-flex rounded-full border border-white/25 bg-white/[0.15] px-4 py-2 text-sm font-bold text-white shadow-lg shadow-black/10 backdrop-blur">
-            Voice-first reading support for grades 3-8
-          </p>
           <h1 className="relative z-10 font-display text-5xl font-black tracking-normal text-white drop-shadow-[0_4px_18px_rgba(0,0,27,0.75)] sm:text-6xl lg:text-7xl">
             Reading practice that listens.
           </h1>
