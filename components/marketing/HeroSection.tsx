@@ -4,19 +4,14 @@ export function HeroSection() {
   return (
     <section className="relative isolate overflow-hidden bg-[#00001b] text-white">
       <div
+        className="absolute inset-0 z-0 bg-cover bg-center"
+        style={{ backgroundImage: "url('/branding/sy-learning-hero-waves-v2.png')" }}
         aria-hidden="true"
-        className="absolute inset-0 -z-10 bg-no-repeat opacity-100"
-        style={{
-          backgroundImage: "url('/branding/sy-learning-header-extended-tall.png')",
-          backgroundPosition: "center -52px",
-          backgroundSize: "calc(100% + 180px) auto",
-        }}
       />
-      <div className="absolute inset-0 -z-10 bg-gradient-to-r from-[#00001b]/90 via-[#060336]/76 to-[#00001b]/25" aria-hidden="true" />
-      <div className="absolute inset-x-0 bottom-0 -z-10 h-40 bg-gradient-to-b from-transparent to-[#f7f2ff]" aria-hidden="true" />
+      <div className="absolute inset-x-0 bottom-0 z-[4] h-40 bg-gradient-to-b from-transparent to-[#f7f2ff]" aria-hidden="true" />
 
-      <div className="mx-auto flex min-h-[720px] max-w-7xl items-center px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
-        <div className="relative max-w-3xl">
+      <div className="relative z-10 mx-auto flex min-h-[720px] max-w-7xl items-center px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
+        <div className="relative max-w-3xl lg:pl-24 lg:pt-12">
           <h1 className="relative z-10 font-display text-5xl font-black tracking-normal text-white drop-shadow-[0_4px_18px_rgba(0,0,27,0.75)] sm:text-6xl lg:text-7xl">
             Reading practice that listens.
           </h1>
