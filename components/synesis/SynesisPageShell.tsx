@@ -21,7 +21,6 @@ export async function SynesisPageShell({
     select: {
       enrolledPrograms: true,
       enrolledTestPrep: true,
-      synesisMigrationBannerDismissedAt: true,
       createdAt: true,
     },
   });
@@ -30,7 +29,6 @@ export async function SynesisPageShell({
       <SynesisHeader
         enrolledPrograms={user?.enrolledPrograms}
         enrolledTestPrep={user?.enrolledTestPrep}
-        showMigrationBanner={!user?.synesisMigrationBannerDismissedAt}
       />
       {children}
     </div>
