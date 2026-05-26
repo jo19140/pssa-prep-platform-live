@@ -13,14 +13,14 @@ export function SynesisHeader({
 }) {
   return (
     <header className="border-b border-slate-200 bg-white">
-      <div className="mx-auto flex max-w-7xl flex-col gap-4 px-4 py-4 lg:flex-row lg:items-center lg:justify-between">
+      <div className="flex w-full flex-col gap-4 px-4 py-4 lg:flex-row lg:items-center lg:justify-between">
         <a href="/student/practice" className="flex items-center gap-3">
           <Image
-            src="/branding/sy-learning-logo-v6.png"
+            src="/branding/sy-learning-header-left-slim-locked-2048.png"
             alt="Sý Learning"
-            width={196}
-            height={52}
-            className="h-12 w-auto"
+            width={2048}
+            height={446}
+            className="h-12 w-auto sm:h-14"
             priority
           />
           <span className="sr-only">Sý Learning</span>
