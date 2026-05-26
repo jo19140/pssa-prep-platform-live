@@ -22,9 +22,20 @@ export function MarketingHeader() {
   return (
     <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/95 text-synesis-ink shadow-sm shadow-slate-200/60 backdrop-blur">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-4 py-3 sm:px-6 lg:px-8">
-        <Link href="/" className="flex items-center gap-3" aria-label="Sý Learning home">
-          <Image src="/branding/sy-learning-icon-v6.png" alt="" width={40} height={40} className="h-10 w-10 rounded-xl" priority />
-          <span className="font-display text-xl font-black tracking-normal text-synesis-ink">Sý Learning</span>
+        <Link href="/" className="flex shrink-0 items-center gap-3" aria-label="Sý Learning home">
+          <Image
+            src="/branding/sy-learning-square-logo-v1.png"
+            alt=""
+            width={56}
+            height={56}
+            className="h-12 w-12 rounded-2xl object-cover shadow-sm sm:h-14 sm:w-14"
+            priority
+          />
+          <span className="flex flex-col leading-none text-synesis-ink">
+            <span className="font-display text-[1.9rem] font-black tracking-normal sm:text-[2.2rem]">Sý</span>
+            <span className="-mt-1 font-display text-lg font-black tracking-normal sm:text-xl">Learning</span>
+            <span className="mt-1 text-[0.42rem] font-black uppercase tracking-[0.28em] sm:text-[0.48rem]">Together We Learn</span>
+          </span>
         </Link>
 
         <nav className="hidden items-center gap-7 text-sm font-bold text-synesis-body lg:flex" aria-label="Main navigation">
