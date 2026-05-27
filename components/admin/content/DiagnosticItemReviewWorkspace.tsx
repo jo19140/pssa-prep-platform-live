@@ -167,7 +167,7 @@ export function DiagnosticItemReviewWorkspace({ item }: { item: any }) {
               </button>
               <button
                 onClick={() => submit("EDIT")}
-                disabled={!canReview || !hasFirstLookDecision || submitting || !hasEdits}
+                disabled={!canReview || !hasFirstLookDecision || submitting}
                 className="rounded-md bg-indigo-700 px-4 py-3 text-sm font-black text-white disabled:cursor-not-allowed disabled:opacity-40"
               >
                 Save edit decision
