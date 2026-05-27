@@ -292,6 +292,10 @@ export default function AdminDashboardPage() {
                 <p className="text-sm font-bold text-slate-900">AI Tutoring Content</p>
                 <p className="mt-1 text-sm text-slate-600">Standards, skills, and generated test data feed the student learning pathway.</p>
               </div>
+              <a href="/admin/content/diagnostic-items/queue" className="block rounded-lg border border-indigo-200 bg-indigo-50 p-4 transition hover:border-indigo-300 hover:bg-indigo-100">
+                <p className="text-sm font-bold text-indigo-950">Diagnostic Item Review</p>
+                <p className="mt-1 text-sm text-indigo-900/75">Approve, reject, or edit Content v3 diagnostic candidates before they reach students.</p>
+              </a>
             </div>
           </div>
 

@@ -1,0 +1,196 @@
+import { Prisma } from "@prisma/client";
+import { db } from "@/lib/db";
+
+export const STUDENT_READY_DIAGNOSTIC_ITEM_WHERE = {
+  reviewStatus: "APPROVED",
+  retiredAt: null,
+} satisfies Prisma.DiagnosticItemWhereInput;
+
+export const DIAGNOSTIC_ITEM_REVIEW_OUTCOME_TYPE = "CONTENT_V3_DIAGNOSTIC_ITEM_HUMAN_REVIEW";
+
+const FIRST_LOOK_RECOMMENDATION_ORDER: Record<string, number> = {
+  REJECT: 0,
+  FLAG_FOR_HUMAN: 1,
+  APPROVE: 2,
+};
+
+const diagnosticItemInclude = {
+  phasePosition: true,
+  dailyTarget: true,
+  firstLookReviewModelDecision: {
+    include: {
+      outcomes: {
+        where: { outcomeType: DIAGNOSTIC_ITEM_REVIEW_OUTCOME_TYPE },
+        orderBy: { measuredAt: "desc" as const },
+      },
+    },
+  },
+} satisfies Prisma.DiagnosticItemInclude;
+
+export async function getStudentReadyDiagnosticItems(args: Omit<Prisma.DiagnosticItemFindManyArgs, "where"> = {}) {
+  return db.diagnosticItem.findMany({
+    ...args,
+    where: STUDENT_READY_DIAGNOSTIC_ITEM_WHERE,
+  });
+}
+
+export async function countStudentReadyDiagnosticItems() {
+  return db.diagnosticItem.count({ where: STUDENT_READY_DIAGNOSTIC_ITEM_WHERE });
+}
+
+export async function getPendingDiagnosticItemReviewQueue() {
+  const items = await db.diagnosticItem.findMany({
+    where: {
+      reviewStatus: "PENDING",
+      retiredAt: null,
+    },
+    include: diagnosticItemInclude,
+    orderBy: [{ createdAt: "asc" }, { strand: "asc" }],
+    take: 200,
+  });
+
+  return items.sort((a, b) => {
+    const aRecommendation = firstLookRecommendation(a.firstLookReviewModelDecision?.decisionJson);
+    const bRecommendation = firstLookRecommendation(b.firstLookReviewModelDecision?.decisionJson);
+    return (
+      (FIRST_LOOK_RECOMMENDATION_ORDER[aRecommendation] ?? 99) -
+        (FIRST_LOOK_RECOMMENDATION_ORDER[bRecommendation] ?? 99) ||
+      a.createdAt.getTime() - b.createdAt.getTime()
+    );
+  });
+}
+
+export async function getDiagnosticItemReviewDetail(id: string) {
+  return db.diagnosticItem.findFirst({
+    where: {
+      id,
+      retiredAt: null,
+    },
+    include: diagnosticItemInclude,
+  });
+}
+
+export type DiagnosticItemReviewAction = "APPROVE" | "REJECT" | "EDIT";
+
+export type DiagnosticItemReviewInput = {
+  action: DiagnosticItemReviewAction;
+  reviewerUserId: string;
+  reviewNotes?: string | null;
+  promptJson?: Prisma.InputJsonValue;
+  scoringRubricJson?: Prisma.InputJsonValue | null;
+  correctAnswer?: string | null;
+};
+
+export async function reviewDiagnosticItem(id: string, input: DiagnosticItemReviewInput) {
+  const item = await db.diagnosticItem.findFirst({
+    where: { id, retiredAt: null },
+    select: {
+      id: true,
+      reviewStatus: true,
+      promptJson: true,
+      correctAnswer: true,
+      scoringRubricJson: true,
+      firstLookReviewModelDecisionId: true,
+      firstLookReviewModelDecision: {
+        select: {
+          id: true,
+          decisionJson: true,
+          outcomes: { where: { outcomeType: DIAGNOSTIC_ITEM_REVIEW_OUTCOME_TYPE }, select: { id: true } },
+        },
+      },
+    },
+  });
+
+  if (!item) {
+    return { ok: false as const, status: 404, error: "Diagnostic item not found." };
+  }
+
+  if (item.reviewStatus !== "PENDING") {
+    return { ok: false as const, status: 409, error: `Diagnostic item is already ${item.reviewStatus}.` };
+  }
+
+  if (!item.firstLookReviewModelDecisionId || !item.firstLookReviewModelDecision) {
+    return { ok: false as const, status: 409, error: "Diagnostic item is missing its AI first-look ModelDecision." };
+  }
+
+  if (item.firstLookReviewModelDecision.outcomes.length > 0) {
+    return { ok: false as const, status: 409, error: "This AI first-look decision already has a human review outcome." };
+  }
+
+  const reviewStatus = input.action === "APPROVE" ? "APPROVED" : input.action === "REJECT" ? "REJECTED" : "EDITED";
+  const now = new Date();
+  const updateData: Prisma.DiagnosticItemUpdateInput = {
+    reviewStatus,
+    reviewedAt: now,
+    reviewedByUserId: input.reviewerUserId,
+    reviewNotes: input.reviewNotes?.trim() || null,
+  };
+
+  if (input.action === "EDIT") {
+    if (input.promptJson !== undefined) updateData.promptJson = input.promptJson;
+    if (input.scoringRubricJson !== undefined) updateData.scoringRubricJson = input.scoringRubricJson;
+    if (input.correctAnswer !== undefined) updateData.correctAnswer = input.correctAnswer?.trim() || null;
+  }
+
+  const result = await db.$transaction(async (tx) => {
+    const updated = await tx.diagnosticItem.update({
+      where: { id: item.id },
+      data: updateData,
+      include: diagnosticItemInclude,
+    });
+
+    const outcome = await tx.modelDecisionOutcome.create({
+      data: {
+        modelDecisionId: item.firstLookReviewModelDecisionId!,
+        outcomeType: DIAGNOSTIC_ITEM_REVIEW_OUTCOME_TYPE,
+        outcomeLabel: reviewStatus,
+        outcomeScore: reviewStatus === "APPROVED" ? 1 : reviewStatus === "REJECTED" ? 0 : 0.5,
+        metricJson: {
+          artifactType: "DIAGNOSTIC_ITEM",
+          artifactId: item.id,
+          reviewerUserId: input.reviewerUserId,
+          action: input.action,
+          finalReviewStatus: reviewStatus,
+          reviewNotes: input.reviewNotes?.trim() || null,
+          aiFirstLookRecommendation: firstLookRecommendation(item.firstLookReviewModelDecision?.decisionJson),
+          editedFields:
+            input.action === "EDIT"
+              ? {
+                  promptJson: input.promptJson !== undefined,
+                  scoringRubricJson: input.scoringRubricJson !== undefined,
+                  correctAnswer: input.correctAnswer !== undefined,
+                }
+              : {},
+        },
+        measuredAt: now,
+      },
+    });
+
+    return { updated, outcome };
+  });
+
+  return { ok: true as const, ...result };
+}
+
+export function firstLookRecommendation(decisionJson: unknown) {
+  const recommendation = readDecisionString(decisionJson, "recommendation");
+  if (recommendation === "APPROVE" || recommendation === "FLAG_FOR_HUMAN" || recommendation === "REJECT") return recommendation;
+  return "FLAG_FOR_HUMAN";
+}
+
+export function firstLookConfidence(decisionJson: unknown) {
+  const confidence = readDecisionNumber(decisionJson, "confidence");
+  return confidence == null ? 0 : Math.max(0, Math.min(1, confidence));
+}
+
+function readDecisionString(decisionJson: unknown, key: string) {
+  if (!decisionJson || typeof decisionJson !== "object") return null;
+  const value = (decisionJson as Record<string, unknown>)[key];
+  return typeof value === "string" ? value : null;
+}
+
+function readDecisionNumber(decisionJson: unknown, key: string) {
+  if (!decisionJson || typeof decisionJson !== "object") return null;
+  const value = (decisionJson as Record<string, unknown>)[key];
+  return typeof value === "number" ? value : Number.isFinite(Number(value)) ? Number(value) : null;
+}
