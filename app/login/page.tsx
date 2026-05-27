@@ -10,7 +10,7 @@ const differentiators = [
 export default function LoginPage() {
   return (
     <div
-      className="min-h-screen overflow-x-hidden text-synesis-ink"
+      className="relative min-h-screen overflow-x-hidden text-synesis-ink"
       style={{
         backgroundImage: "url('/branding/sy-learning-login-background-v1.png'), linear-gradient(180deg, #00001b 0%, #0b0638 24%, #5b21b6 44%, #d8ccff 70%, #f7f2ff 86%, #fffdf7 100%)",
         backgroundPosition: "top center, center",
@@ -18,6 +18,12 @@ export default function LoginPage() {
         backgroundSize: "100% auto, 100% 100%",
       }}
     >
+      <Link
+        href="/"
+        className="absolute left-4 top-4 z-10 rounded-full border border-white/50 bg-white/75 px-4 py-2 text-sm font-bold text-synesis-ink shadow-lg shadow-indigo-950/10 backdrop-blur-md transition hover:bg-white sm:left-6 sm:top-6"
+      >
+        Back home
+      </Link>
       <header className="sy-login-fade-in h-6 w-full sm:h-8 lg:h-10" aria-hidden="true" />
 
       <main className="mx-auto flex w-full max-w-5xl flex-col items-center px-4 pb-10 pt-4 sm:px-6 lg:pt-6">
