@@ -25,9 +25,11 @@ export function SynesisHeader({
           />
           <span className="sr-only">Sý Learning</span>
         </a>
-        <ProgramSwitcher enrolledPrograms={enrolledPrograms} />
-        <div className="flex items-center gap-3">
+        <div className="flex flex-wrap gap-2">
+          <ProgramSwitcher enrolledPrograms={enrolledPrograms} />
           <TestPrepDropdown enrolledTestPrep={enrolledTestPrep} />
+        </div>
+        <div className="flex items-center gap-3">
           <LogoutButton />
         </div>
       </div>
