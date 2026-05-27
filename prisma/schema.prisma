@@ -717,9 +717,15 @@ model LiteracyProfile {
   lexileEstimate        Int?
   gradeEquivalent       Float?
   lastDiagnosticAt      DateTime?
+  currentDailyTargetId  String?
+  phasePositionId       String?
+  diagnosticConfidence  Float?
+  diagnosticEvidenceJson Json?
   createdAt             DateTime               @default(now())
   updatedAt             DateTime               @updatedAt
   student               User                   @relation(fields: [studentUserId], references: [id], onDelete: Cascade)
+  currentDailyTarget    DailyTarget?           @relation(fields: [currentDailyTargetId], references: [id], onDelete: SetNull)
+  phasePosition         PhasePosition?         @relation(fields: [phasePositionId], references: [id], onDelete: SetNull)
   strandScores          StrandScore[]
   phonogramMastery      PhonogramMastery[]
   syllableTypeMastery   SyllableTypeMastery[]
@@ -738,10 +744,330 @@ model StrandScore {
   level             MasteryLevel
   priorityRank      Int?
   evidenceCount     Int             @default(0)
+  statusLabel       String?
   lastUpdatedAt     DateTime        @default(now())
   literacyProfile   LiteracyProfile @relation(fields: [literacyProfileId], references: [id], onDelete: Cascade)
 
   @@unique([literacyProfileId, strand])
+}
+
+model PhasePosition {
+  id              String   @id @default(cuid())
+  phaseNumber     Int
+  subPosition     String
+  label           String
+  phonicsTrack    String   @db.Text
+  morphologyTrack String   @db.Text
+  prerequisites   String[]
+  createdAt       DateTime @default(now())
+
+  lessons         Lesson[]
+  diagnosticItems DiagnosticItem[]
+  dailyTargets    DailyTarget[]
+  literacyProfiles LiteracyProfile[]
+
+  @@unique([phaseNumber, subPosition])
+}
+
+model DailyTarget {
+  id                  String   @id @default(cuid())
+  phasePositionId     String
+  code                String   @unique
+  kidVisibleLabel     String
+  tutorLabel          String
+  description         String   @db.Text
+  introductionOrder   Int
+  targetPatternsJson  Json
+  allowedPatternCodes String[]
+  blockedPatternCodes String[]
+  exampleWords        String[]
+  exampleNonwords     String[]
+  reviewStatus        String   @default("PENDING")
+  reviewedAt          DateTime?
+  reviewedByUserId    String?
+  reviewNotes         String?  @db.Text
+  version             Int      @default(1)
+  effectiveFrom       DateTime @default(now())
+  retiredAt           DateTime?
+  createdAt           DateTime @default(now())
+
+  phasePosition   PhasePosition @relation(fields: [phasePositionId], references: [id])
+  lessons         Lesson[]
+  diagnosticItems DiagnosticItem[]
+  mastery         DailyTargetMastery[]
+  literacyProfiles LiteracyProfile[]
+
+  @@index([phasePositionId, introductionOrder])
+  @@index([reviewStatus])
+}
+
+model DiagnosticItem {
+  id                             String   @id @default(cuid())
+  strand                         String
+  phasePositionId                String?
+  dailyTargetId                  String?
+  itemType                       String
+  promptJson                     Json
+  correctAnswer                  String?
+  scoringRubricJson              Json?
+  difficultyBand                 Int
+  isPracticeItem                 Boolean  @default(false)
+  reviewStatus                   String   @default("PENDING")
+  reviewedAt                     DateTime?
+  reviewedByUserId               String?
+  reviewNotes                    String?  @db.Text
+  firstLookReviewModelDecisionId String?
+  version                        Int      @default(1)
+  effectiveFrom                  DateTime @default(now())
+  retiredAt                      DateTime?
+  createdAt                      DateTime @default(now())
+
+  phasePosition PhasePosition? @relation(fields: [phasePositionId], references: [id])
+  dailyTarget   DailyTarget?   @relation(fields: [dailyTargetId], references: [id])
+  firstLookReviewModelDecision ModelDecision? @relation("DiagnosticItemFirstLookReview", fields: [firstLookReviewModelDecisionId], references: [id], onDelete: SetNull)
+  attempts      DiagnosticItemAttempt[]
+
+  @@index([strand, difficultyBand])
+  @@index([reviewStatus])
+  @@index([firstLookReviewModelDecisionId])
+  @@index([phasePositionId, dailyTargetId])
+}
+
+model DiagnosticItemAttempt {
+  id                  String   @id @default(cuid())
+  studentUserId       String
+  diagnosticItemId    String
+  diagnosticSessionId String
+  responseJson        Json?
+  scored              Boolean
+  correct             Boolean?
+  responseTimeMs      Int?
+  audioConfidence     Float?
+  scoreContext        String?
+  attemptedAt         DateTime @default(now())
+
+  diagnosticItem    DiagnosticItem    @relation(fields: [diagnosticItemId], references: [id])
+  diagnosticSession DiagnosticSession @relation(fields: [diagnosticSessionId], references: [id], onDelete: Cascade)
+
+  @@index([studentUserId, diagnosticSessionId])
+  @@index([diagnosticItemId])
+}
+
+model DiagnosticSession {
+  id                    String   @id @default(cuid())
+  studentUserId         String
+  startedAt             DateTime @default(now())
+  completedAt           DateTime?
+  resultJson            Json?
+  confidenceScore       Float?
+  confidenceExplanation String?  @db.Text
+  totalScoredItems      Int      @default(0)
+  audioClearItems       Int      @default(0)
+
+  attempts DiagnosticItemAttempt[]
+
+  @@index([studentUserId, startedAt])
+}
+
+model Lesson {
+  id               String   @id @default(cuid())
+  phasePositionId  String
+  dailyTargetId    String
+  passageId        String?
+  reviewStatus     String   @default("PENDING")
+  reviewedAt       DateTime?
+  reviewedByUserId String?
+  reviewNotes      String?  @db.Text
+  version          Int      @default(1)
+  effectiveFrom    DateTime @default(now())
+  retiredAt        DateTime?
+  createdAt        DateTime @default(now())
+
+  parts         LessonPart[]
+  passage       Passage?      @relation(fields: [passageId], references: [id])
+  phasePosition PhasePosition @relation(fields: [phasePositionId], references: [id])
+  dailyTarget   DailyTarget   @relation(fields: [dailyTargetId], references: [id])
+  sessions      LessonSession[]
+
+  @@index([phasePositionId, dailyTargetId])
+  @@index([reviewStatus])
+}
+
+model LessonPart {
+  id                             String   @id @default(cuid())
+  lessonId                       String
+  partNumber                     Int
+  partLabel                      String
+  kidVisibleCopy                 Json
+  tutorVisibleCopy               Json?
+  contentJson                    Json
+  designNotes                    String?  @db.Text
+  reviewStatus                   String   @default("PENDING")
+  reviewedAt                     DateTime?
+  reviewedByUserId               String?
+  reviewNotes                    String?  @db.Text
+  firstLookReviewModelDecisionId String?
+  version                        Int      @default(1)
+  effectiveFrom                  DateTime @default(now())
+  retiredAt                      DateTime?
+
+  lesson Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  firstLookReviewModelDecision ModelDecision? @relation("LessonPartFirstLookReview", fields: [firstLookReviewModelDecisionId], references: [id], onDelete: SetNull)
+
+  @@unique([lessonId, partNumber])
+  @@index([reviewStatus])
+  @@index([firstLookReviewModelDecisionId])
+}
+
+model Passage {
+  id                             String   @id @default(cuid())
+  source                         String
+  sourceMetadataJson             Json?
+  wordCount                      Int
+  phasePositionId                String
+  text                           String   @db.Text
+  contentAuditJson               Json
+  decodabilityScore              Float
+  reviewStatus                   String   @default("PENDING")
+  reviewedAt                     DateTime?
+  reviewedByUserId               String?
+  reviewNotes                    String?  @db.Text
+  firstLookReviewModelDecisionId String?
+  version                        Int      @default(1)
+  effectiveFrom                  DateTime @default(now())
+  retiredAt                      DateTime?
+  sourceAttributionCode          String?
+  createdAt                      DateTime @default(now())
+
+  lessons          Lesson[]
+  passageReviewLog PassageReviewLog[]
+  firstLookReviewModelDecision ModelDecision? @relation("PassageFirstLookReview", fields: [firstLookReviewModelDecisionId], references: [id], onDelete: SetNull)
+
+  @@index([phasePositionId, reviewStatus])
+  @@index([firstLookReviewModelDecisionId])
+}
+
+model PassageReviewLog {
+  id             String   @id @default(cuid())
+  passageId      String
+  action         String
+  reviewerUserId String
+  notes          String?  @db.Text
+  editDiffJson   Json?
+  createdAt      DateTime @default(now())
+
+  passage Passage @relation(fields: [passageId], references: [id], onDelete: Cascade)
+}
+
+model HighFrequencyWord {
+  id                String   @id @default(cuid())
+  lemma             String   @unique
+  forms             String[]
+  isRegular         Boolean
+  ndlRank           Int?
+  subtlexRank       Int?
+  introducedAtPhase Int
+  createdAt         DateTime @default(now())
+
+  studentMastery HfwMastery[]
+}
+
+model HfwMastery {
+  id            String   @id @default(cuid())
+  studentUserId String
+  hfwId         String
+  level         String   @default("INTRODUCED")
+  reviewCount   Int      @default(0)
+  lastSeenAt    DateTime?
+
+  hfw HighFrequencyWord @relation(fields: [hfwId], references: [id])
+
+  @@unique([studentUserId, hfwId])
+}
+
+model DailyTargetMastery {
+  id                        String   @id @default(cuid())
+  studentUserId             String
+  dailyTargetId             String
+  decodingStatus            String   @default("NOT_STARTED")
+  encodingStatus            String   @default("NOT_STARTED")
+  connectedTextStatus       String   @default("NOT_STARTED")
+  lastDecodingAccuracy      Float?
+  lastEncodingAccuracy      Float?
+  lastConnectedTextAccuracy Float?
+  evidenceJson              Json?
+  lastPracticedAt           DateTime?
+  createdAt                 DateTime @default(now())
+  updatedAt                 DateTime @updatedAt
+
+  dailyTarget DailyTarget @relation(fields: [dailyTargetId], references: [id])
+
+  @@unique([studentUserId, dailyTargetId])
+  @@index([studentUserId])
+}
+
+model LicenseAttribution {
+  id                   String   @id @default(cuid())
+  sourceCode           String   @unique
+  sourceName           String
+  licenseCode          String
+  attributionText      String   @db.Text
+  sourceUrl            String?
+  commercialUseAllowed Boolean
+  shareAlikeRequired   Boolean
+  notes                String?  @db.Text
+  createdAt            DateTime @default(now())
+}
+
+model Morpheme {
+  id                    String   @id @default(cuid())
+  text                  String
+  morphemeType          String
+  meaning               String?  @db.Text
+  frequencyRank         Int?
+  decompositionJson     Json?
+  productivityScore     Float?
+  allomorphs            String[]
+  sourceAttributionCode String?
+  notes                 String?  @db.Text
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+
+  @@unique([text, morphemeType])
+  @@index([morphemeType])
+  @@index([sourceAttributionCode])
+}
+
+model LessonSession {
+  id                String   @id @default(cuid())
+  studentUserId     String
+  lessonId          String
+  startedAt         DateTime @default(now())
+  completedAt       DateTime?
+  partResultsJson   Json
+  reteachLogJson    Json
+  connectedTextMode String?
+  masteryConfidence Float?
+  durationSeconds   Int?
+
+  lesson        Lesson         @relation(fields: [lessonId], references: [id])
+  reteachEvents ReteachEvent[]
+
+  @@index([studentUserId, startedAt])
+}
+
+model ReteachEvent {
+  id              String   @id @default(cuid())
+  lessonSessionId String
+  triggeredAtPart Int
+  triggerType     String
+  targetConcept   String
+  outcomeJson     Json?
+  occurredAt      DateTime @default(now())
+
+  lessonSession LessonSession @relation(fields: [lessonSessionId], references: [id], onDelete: Cascade)
+
+  @@index([lessonSessionId])
 }
 
 model PhonogramMastery {
@@ -910,6 +1236,9 @@ model ModelDecision {
   parentDecision   ModelDecision?         @relation("DecisionChain", fields: [parentDecisionId], references: [id], onDelete: SetNull)
   childDecisions   ModelDecision[]        @relation("DecisionChain")
   outcomes         ModelDecisionOutcome[]
+  diagnosticItemFirstLookReviews DiagnosticItem[] @relation("DiagnosticItemFirstLookReview")
+  lessonPartFirstLookReviews     LessonPart[]     @relation("LessonPartFirstLookReview")
+  passageFirstLookReviews        Passage[]        @relation("PassageFirstLookReview")
 
   @@index([decisionType, occurredAt])
   @@index([modelProvider, modelName, occurredAt])

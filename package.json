@@ -10,6 +10,7 @@
     "test:reading-buddy": "tsx scripts/test-reading-buddy-v1.ts",
     "test:voice-flywheel": "tsx scripts/test-voice-data-flywheel.ts",
     "test:data-flywheel": "tsx scripts/test-data-flywheel-foundation.ts",
+    "test:content-v3": "tsx scripts/test-content-v3-first-look.ts",
     "voice:enforce-retention": "tsx scripts/voice/enforce-retention.ts",
     "voice:purge-training-opt-outs": "tsx scripts/voice/purge-training-opt-outs.ts",
     "data-flywheel:compute-outcomes": "tsx scripts/data-flywheel/compute-outcomes.ts",
