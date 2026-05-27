@@ -19,11 +19,16 @@ export function DiagnosticItemReviewWorkspace({ item }: { item: any }) {
   const adminReviewChanged = adminReviewJson !== formatJson(item.adminReviewJson);
   const hasEdits = studentPromptChanged || stimulusChanged || expectedResponseChanged || rubricChanged || adminReviewChanged;
   const recommendation = normalizeRecommendation(firstLook.recommendation);
-  const issues = Array.isArray(firstLook.specificIssues) ? firstLook.specificIssues : [];
   const checks = normalizeChecks(firstLook);
-  const checksPassed = checks.filter((check) => check.result === "PASS");
-  const checksFailed = checks.filter((check) => check.result === "FAIL");
+  const passedChecks = checks.filter((check) => check.result === "PASS");
+  const failedChecks = checks.filter((check) => check.result === "FAIL");
   const checksNa = checks.filter((check) => check.result === "NA");
+  const failedBlocker = failedChecks.some((check) => check.severity === "BLOCKER");
+  const specificIssues = failedChecks.map((check) => ({
+    severity: check.severity === "BLOCKER" ? "major" : check.severity === "WARNING" ? "moderate" : "minor",
+    location: check.requirementId,
+    description: check.evidence,
+  }));
   const kidViewLintViolations = Array.isArray(firstLook.kidViewLintViolations) ? firstLook.kidViewLintViolations : [];
   const canReview = item.reviewStatus === "PENDING";
   const hasFirstLookDecision = Boolean(item.firstLookReviewModelDecisionId);
@@ -80,7 +85,7 @@ export function DiagnosticItemReviewWorkspace({ item }: { item: any }) {
           <div className="flex flex-wrap items-center gap-2">
             <span className={recommendationPillClass(recommendation)}>{recommendation.replace(/_/g, " ")}</span>
             <span className="rounded-full bg-slate-100 px-3 py-1.5 text-xs font-bold text-slate-700">
-              {Math.round(confidence(firstLook.confidence) * 100)}% confidence
+              {recommendation === "APPROVE" ? "Auto-approval candidate" : "Human review required"}
             </span>
           </div>
         </div>
@@ -110,27 +115,28 @@ export function DiagnosticItemReviewWorkspace({ item }: { item: any }) {
           <section className="rounded-md border border-slate-200 bg-white p-5">
             <h2 className="text-lg font-black text-slate-950">AI first-look review</h2>
             <div className="mt-4 grid gap-4 lg:grid-cols-2">
-              <Checklist title="Checks passed" items={checksPassed} tone="emerald" />
-              <Checklist title="Checks failed" items={checksFailed} tone="rose" />
+              <Checklist title="Checks passed" items={passedChecks} tone="emerald" />
+              <Checklist title="Checks failed" items={failedChecks} tone="rose" />
             </div>
             <Checklist title="Checks not applicable / not assessed" items={checksNa} tone="slate" />
 
-            <div className="mt-4 rounded-md border border-slate-200 bg-slate-50 p-4">
-              <h3 className="font-black text-slate-950">Specific issues</h3>
-              {!issues.length ? <p className="mt-2 text-sm text-slate-500">No specific issues reported.</p> : null}
-              <div className="mt-3 space-y-3">
-                {issues.map((issue: any, index: number) => (
-                  <article key={`${issue.location}-${index}`} className="rounded-md bg-white p-3 text-sm">
-                    <div className="flex flex-wrap items-center gap-2">
-                      <span className="rounded-full bg-slate-100 px-2 py-1 text-xs font-black uppercase text-slate-700">{issue.severity || "moderate"}</span>
-                      <span className="font-bold text-slate-950">{issue.location || "artifact"}</span>
-                    </div>
-                    <p className="mt-2 text-slate-700">{issue.description || "Review issue needs human inspection."}</p>
-                    {issue.suggestedFix ? <p className="mt-2 text-slate-600">Suggested fix: {issue.suggestedFix}</p> : null}
-                  </article>
-                ))}
+            {specificIssues.length ? (
+              <div className="mt-4 rounded-md border border-slate-200 bg-slate-50 p-4">
+                <h3 className="font-black text-slate-950">Specific issues</h3>
+                <div className="mt-3 space-y-3">
+                  {specificIssues.map((issue: any, index: number) => (
+                    <article key={`${issue.location}-${index}`} className="rounded-md bg-white p-3 text-sm">
+                      <div className="flex flex-wrap items-center gap-2">
+                        <span className="rounded-full bg-slate-100 px-2 py-1 text-xs font-black uppercase text-slate-700">{issue.severity || "moderate"}</span>
+                        <span className="font-bold text-slate-950">{issue.location || "artifact"}</span>
+                      </div>
+                      <p className="mt-2 text-slate-700">{issue.description || "Review issue needs human inspection."}</p>
+                      {issue.suggestedFix ? <p className="mt-2 text-slate-600">Suggested fix: {issue.suggestedFix}</p> : null}
+                    </article>
+                  ))}
+                </div>
               </div>
-            </div>
+            ) : null}
 
             <Checklist title="Kid-view lint violations" items={kidViewLintViolations} tone="amber" />
           </section>
@@ -153,7 +159,8 @@ export function DiagnosticItemReviewWorkspace({ item }: { item: any }) {
             <div className="mt-5 grid gap-2">
               <button
                 onClick={() => submit("APPROVE")}
-                disabled={!canReview || !hasFirstLookDecision || submitting || hasEdits}
+                disabled={!canReview || !hasFirstLookDecision || submitting || hasEdits || failedBlocker}
+                title={failedBlocker ? "Blocker present — use Save edit or Reject." : undefined}
                 className="rounded-md bg-emerald-700 px-4 py-3 text-sm font-black text-white disabled:cursor-not-allowed disabled:opacity-40"
               >
                 Approve as-is
@@ -174,6 +181,7 @@ export function DiagnosticItemReviewWorkspace({ item }: { item: any }) {
               </button>
             </div>
             {hasEdits ? <p className="mt-3 text-xs font-semibold text-slate-500">Unsaved edits detected. Approve as-is is disabled until you save or revert them.</p> : null}
+            {failedBlocker ? <p className="mt-3 text-xs font-semibold text-rose-700">Blocker present — use Save edit or Reject.</p> : null}
           </section>
 
           <section className="rounded-md border border-slate-200 bg-white p-5">
@@ -271,11 +279,6 @@ function normalizeRecommendation(value: unknown) {
   return value === "APPROVE" || value === "REJECT" || value === "FLAG_FOR_HUMAN" ? value : "FLAG_FOR_HUMAN";
 }
 
-function confidence(value: unknown) {
-  const number = typeof value === "number" ? value : Number(value);
-  return Number.isFinite(number) ? Math.max(0, Math.min(1, number)) : 0;
-}
-
 function normalizeChecks(firstLook: Record<string, unknown>): DisplayCheck[] {
   if (Array.isArray(firstLook.checks)) {
     return firstLook.checks
@@ -288,12 +291,7 @@ function normalizeChecks(firstLook: Record<string, unknown>): DisplayCheck[] {
       }));
   }
 
-  const legacyPassed = Array.isArray(firstLook.checksPassed) ? firstLook.checksPassed : [];
-  const legacyFailed = Array.isArray(firstLook.checksFailed) ? firstLook.checksFailed : [];
-  return [
-    ...legacyPassed.filter((item): item is string => typeof item === "string").map((evidence) => ({ requirementId: "LEGACY_CHECK", result: "PASS" as const, severity: "INFO" as const, evidence })),
-    ...legacyFailed.filter((item): item is string => typeof item === "string").map((evidence) => ({ requirementId: "LEGACY_CHECK", result: "FAIL" as const, severity: "WARNING" as const, evidence })),
-  ];
+  return [];
 }
 
 function recommendationPillClass(recommendation: string) {

@@ -148,6 +148,8 @@ async function openAiFirstLookReview({
           "Return only JSON matching this shape: recommendation, confidence, checks, specificIssues, kidViewLintViolations.",
           "Each checks entry must have requirementId, result (PASS, FAIL, or NA), severity (BLOCKER, WARNING, or INFO), and evidence.",
           "Every checklist requirementId must appear at most once in checks. A requirement cannot both pass and fail.",
+          "Evaluate each requirement independently. Do not cite aggregate compliance issues, other blockers, or other check results as evidence.",
+          "For kid-view discipline checks, read only studentPromptJson and stimulusJson. Do not use expectedResponseJson, scoringRubricJson, or adminReviewJson when deciding those checks.",
           "The AI recommendation is advisory only; humans make the final approve/reject decision.",
           "Reject or flag kid-facing phoneme notation, phase codes, item counters, correctness feedback in diagnostics, and curriculum metadata.",
         ].join("\n"),
@@ -177,7 +179,7 @@ async function openAiFirstLookReview({
       artifactId: artifact.artifactId,
       recommendation: normalizeRecommendation(parsed.recommendation),
       confidence: clampConfidence(parsed.confidence),
-      checks: normalizeChecks(parsed.checks, checklist, parsed),
+      checks: normalizeChecks(parsed.checks, checklist),
       specificIssues: normalizeIssues(parsed.specificIssues),
       kidViewLintViolations: stringArray(parsed.kidViewLintViolations),
     },
@@ -185,13 +187,18 @@ async function openAiFirstLookReview({
 }
 
 function normalizeReview(review: Omit<AIFirstLookReview, "modelDecisionId">, artifact: FirstLookArtifact): Omit<AIFirstLookReview, "modelDecisionId"> {
+  const checklist = checklistForArtifact(artifact);
+  const checks = enforceDiagnosticCheckBoundaries(
+    normalizeChecks((review as unknown as Record<string, unknown>).checks, checklist),
+    artifact,
+  );
   return {
     artifactType: artifact.artifactType,
     artifactId: artifact.artifactId,
-    recommendation: normalizeRecommendation(review.recommendation),
+    recommendation: recommendationFromChecks(checks, normalizeRecommendation(review.recommendation)),
     confidence: clampConfidence(review.confidence),
-    checks: normalizeChecks((review as unknown as Record<string, unknown>).checks, checklistForArtifact(artifact), review),
-    specificIssues: normalizeIssues(review.specificIssues),
+    checks,
+    specificIssues: normalizeIssues(review.specificIssues, checks),
     kidViewLintViolations: stringArray(review.kidViewLintViolations),
   };
 }
@@ -227,7 +234,7 @@ function stringArray(value: unknown): string[] {
   return value.filter((entry): entry is string => typeof entry === "string");
 }
 
-function normalizeChecks(value: unknown, checklist: ReturnType<typeof checklistForArtifact>, legacySource?: unknown): CheckResult[] {
+function normalizeChecks(value: unknown, checklist: ReturnType<typeof checklistForArtifact>): CheckResult[] {
   const byRequirement = new Map(checklist.items.map((item) => [item.requirementId, item]));
   const normalized = new Map<string, CheckResult>();
 
@@ -249,23 +256,6 @@ function normalizeChecks(value: unknown, checklist: ReturnType<typeof checklistF
     }
   }
 
-  if (normalized.size === 0 && legacySource && typeof legacySource === "object") {
-    const source = legacySource as Record<string, unknown>;
-    const legacyPassed = new Set(stringArray(source.checksPassed));
-    const legacyFailed = new Set(stringArray(source.checksFailed));
-    for (const definition of checklist.items) {
-      const passed = legacyPassed.has(definition.requirement);
-      const failed = legacyFailed.has(definition.requirement);
-      if (!passed && !failed) continue;
-      normalized.set(definition.requirementId, {
-        requirementId: definition.requirementId,
-        result: failed ? "FAIL" : "PASS",
-        severity: definition.severity,
-        evidence: definition.requirement,
-      });
-    }
-  }
-
   for (const definition of checklist.items) {
     if (normalized.has(definition.requirementId)) continue;
     normalized.set(definition.requirementId, {
@@ -279,9 +269,106 @@ function normalizeChecks(value: unknown, checklist: ReturnType<typeof checklistF
   return Array.from(normalized.values());
 }
 
-function normalizeIssues(value: unknown): AIFirstLookReview["specificIssues"] {
-  if (!Array.isArray(value)) return [];
-  return value.map((issue) => {
+function enforceDiagnosticCheckBoundaries(checks: CheckResult[], artifact: FirstLookArtifact) {
+  if (artifact.artifactType !== "DIAGNOSTIC_ITEM") return checks;
+  const content = asRecord(artifact.contentForReview);
+  const strand = String(artifact.metadata.strand || content.strand || "").toUpperCase();
+  const studentPrompt = asRecord(content.studentPromptJson);
+  const stimulus = asRecord(content.stimulusJson);
+  const expected = asRecord(content.expectedResponseJson);
+  const scoring = asRecord(content.scoringRubricJson);
+  const kidViewText = `${JSON.stringify(studentPrompt)} ${JSON.stringify(stimulus)}`;
+
+  return checks.map((check) => {
+    if (isKidViewDisciplineCheck(check.requirementId)) {
+      return evaluateKidViewCheck(check, studentPrompt, stimulus, kidViewText, strand);
+    }
+    if (check.requirementId === "PA_REQUIRES_AUDIO_DELIVERY") {
+      const hasAudio = typeof stimulus.audioScript === "string" && stimulus.audioScript.trim().length > 0;
+      return {
+        ...check,
+        result: hasAudio ? "PASS" as const : "FAIL" as const,
+        evidence: hasAudio ? "PASS: PA item has an oral/audio stimulus for delivery." : "FAIL: PA item is missing an oral/audio stimulus.",
+      };
+    }
+    if (check.requirementId === "PA_SCORING_SPEECH_RESPONSE") {
+      const scoringMode = typeof scoring.scoring === "string" ? scoring.scoring : "";
+      return {
+        ...check,
+        result: scoringMode === "speech_response" ? "PASS" as const : "FAIL" as const,
+        evidence: scoringMode === "speech_response" ? "PASS: PA scoring mode is speech_response." : `FAIL: PA scoring mode is ${scoringMode || "missing"}; PA items require speech_response.`,
+      };
+    }
+    if (check.requirementId === "PA_UNAMBIGUOUS_CORRECT_ANSWER") {
+      const canonical = typeof expected.canonical === "string" ? expected.canonical : "";
+      return {
+        ...check,
+        result: canonical.trim() ? "PASS" as const : "FAIL" as const,
+        evidence: canonical.trim() ? "PASS: expectedResponseJson has a canonical semantic answer." : "FAIL: expectedResponseJson is missing a canonical semantic answer.",
+      };
+    }
+    if (check.evidence.toLowerCase().includes("other stated blockers") || check.evidence.toLowerCase().includes("compliance issues with other")) {
+      return { ...check, evidence: "Evidence reset: each check must evaluate only its own requirement." };
+    }
+    return check;
+  });
+}
+
+function evaluateKidViewCheck(check: CheckResult, studentPrompt: Record<string, unknown>, stimulus: Record<string, unknown>, kidViewText: string, strand: string): CheckResult {
+  if (check.requirementId === "PA_NO_VISIBLE_PRINTED_CHOICES") {
+    const hasVisibleChoices = Array.isArray(studentPrompt.choices) && studentPrompt.choices.length > 0;
+    return {
+      ...check,
+      result: hasVisibleChoices ? "FAIL" : "PASS",
+      evidence: hasVisibleChoices ? "FAIL: studentPromptJson exposes printed choices on an oral PA item." : "PASS: studentPromptJson exposes no printed choices.",
+    };
+  }
+
+  const hasMetadataLeak = /phase\s*\d|phasePosition|dailyTarget|reviewStatus|difficultyBand|item\s*\d|correct\s*answer|scoring|rubric|\/[a-z]+\/|[āēīōūăĕĭŏŭ]/i.test(kidViewText);
+  if (isNoKidMetadataCheck(check.requirementId)) {
+    return {
+      ...check,
+      result: hasMetadataLeak ? "FAIL" : "PASS",
+      evidence: hasMetadataLeak ? "FAIL: studentPromptJson/stimulusJson contain kid-view metadata or phoneme notation." : "PASS: studentPromptJson/stimulusJson contain no metadata, timer/counter, scoring copy, or phoneme notation.",
+    };
+  }
+
+  if (check.requirementId === "DECODING_NO_VISIBLE_TIMER") {
+    const hasTimer = /timer|countdown|seconds|responseTime|latency/i.test(kidViewText);
+    return {
+      ...check,
+      result: hasTimer ? "FAIL" : "PASS",
+      evidence: hasTimer ? "FAIL: studentPromptJson/stimulusJson expose timer or latency wording." : "PASS: no timer, item counter, phase label, or placement metadata is visible.",
+    };
+  }
+
+  if (check.requirementId === "COMP_AUDIO_PROMPT_CLEAN" || check.requirementId === "DECODING_AUDIO_PROMPT_CLEAN") {
+    const clean = !/\/[a-z]+\/|[āēīōūăĕĭŏŭ]/i.test(kidViewText);
+    return {
+      ...check,
+      result: clean ? "PASS" : "FAIL",
+      evidence: clean ? "PASS: kid-facing audio/prompt text is phoneme-notation-free." : "FAIL: kid-facing audio/prompt text contains phoneme notation.",
+    };
+  }
+
+  return check;
+}
+
+function isKidViewDisciplineCheck(requirementId: string) {
+  return requirementId === "PA_NO_VISIBLE_PRINTED_CHOICES" || isNoKidMetadataCheck(requirementId) || requirementId === "DECODING_NO_VISIBLE_TIMER" || requirementId === "COMP_AUDIO_PROMPT_CLEAN" || requirementId === "DECODING_AUDIO_PROMPT_CLEAN";
+}
+
+function isNoKidMetadataCheck(requirementId: string) {
+  return requirementId === "NO_KID_METADATA" || requirementId.endsWith("_NO_KID_METADATA") || requirementId === "DECODING_NO_PHONEME_NOTATION";
+}
+
+function asRecord(value: unknown): Record<string, unknown> {
+  return value && typeof value === "object" && !Array.isArray(value) ? value as Record<string, unknown> : {};
+}
+
+function normalizeIssues(value: unknown, checks: CheckResult[] = []): AIFirstLookReview["specificIssues"] {
+  const modelIssues = Array.isArray(value) ? value : [];
+  const normalizedIssues = modelIssues.map((issue) => {
     const record = (issue || {}) as Record<string, unknown>;
     const severity = record.severity === "major" || record.severity === "moderate" || record.severity === "minor" ? record.severity : "moderate";
     const normalized: AIFirstLookReview["specificIssues"][number] = {
@@ -292,6 +379,24 @@ function normalizeIssues(value: unknown): AIFirstLookReview["specificIssues"] {
     if (typeof record.suggestedFix === "string") normalized.suggestedFix = record.suggestedFix;
     return normalized;
   });
+
+  const concreteIssues = normalizedIssues.filter((issue) => issue.description !== "Review issue needs human inspection.");
+  if (concreteIssues.length) return concreteIssues;
+  return checks
+    .filter((check) => check.result === "FAIL")
+    .map((check) => ({
+      severity: check.severity === "BLOCKER" ? "major" as const : check.severity === "WARNING" ? "moderate" as const : "minor" as const,
+      location: check.requirementId,
+      description: check.evidence,
+    }));
+}
+
+function recommendationFromChecks(checks: CheckResult[], fallback: AIFirstLookReview["recommendation"]): AIFirstLookReview["recommendation"] {
+  if (!checks.length) return fallback;
+  if (checks.some((check) => check.result === "FAIL" && check.severity === "BLOCKER")) return "REJECT";
+  if (checks.some((check) => check.result === "FAIL")) return "FLAG_FOR_HUMAN";
+  if (checks.some((check) => check.result === "NA")) return fallback === "APPROVE" ? "FLAG_FOR_HUMAN" : fallback;
+  return "APPROVE";
 }
 
 export function firstLookReviewToJson(review: AIFirstLookReview): Prisma.InputJsonValue {

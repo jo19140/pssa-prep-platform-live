@@ -27,8 +27,8 @@ export function buildPhase3EntryDiagnosticItems(): DiagnosticItemSeed[] {
       stimulusJson: {
         audioScript: "sun, seal, map",
       },
-      expectedResponseJson: { correctAnswer: "sun and seal", choices: ["sun and seal", "sun and map", "seal and map"], acceptedResponses: ["sun and seal"] },
-      scoringRubricJson: { scoring: "selected_choice", evidence: "initial sound matching" },
+      expectedResponseJson: response("sun and seal", ["sun and map", "seal and map"], ["sun seal", "sun and seals"]),
+      scoringRubricJson: { scoring: "speech_response", evidence: "initial sound matching" },
       adminReviewJson: { note: "Choices are reviewer/scoring context; PA kid view should stay audio-first." },
       difficultyBand: 3,
     },
@@ -41,8 +41,8 @@ export function buildPhase3EntryDiagnosticItems(): DiagnosticItemSeed[] {
       stimulusJson: {
         audioScript: "m ... ake",
       },
-      expectedResponseJson: { correctAnswer: "make", acceptedResponses: ["make"] },
-      scoringRubricJson: { scoring: "speech_match", acceptedResponses: ["make"] },
+      expectedResponseJson: response("make", [], ["mayk"]),
+      scoringRubricJson: { scoring: "speech_response", evidence: "oral word blend" },
       difficultyBand: 3,
     },
     {
@@ -52,7 +52,7 @@ export function buildPhase3EntryDiagnosticItems(): DiagnosticItemSeed[] {
         kidPrompt: "Which word is the base word in playful?",
         choices: ["play", "ful", "playful"],
       },
-      expectedResponseJson: { correctAnswer: "play", choices: ["play", "ful", "playful"], acceptedResponses: ["play"] },
+      expectedResponseJson: response("play", ["ful", "playful"]),
       scoringRubricJson: { scoring: "selected_choice", evidence: "base word recognition" },
       difficultyBand: 3,
     },
@@ -63,7 +63,7 @@ export function buildPhase3EntryDiagnosticItems(): DiagnosticItemSeed[] {
         kidPrompt: "In this sentence, what does brave mean? The brave kid tried again after the tower fell.",
         choices: ["not afraid to try", "very sleepy", "made of stone"],
       },
-      expectedResponseJson: { correctAnswer: "not afraid to try", choices: ["not afraid to try", "very sleepy", "made of stone"], acceptedResponses: ["not afraid to try"] },
+      expectedResponseJson: response("not afraid to try", ["very sleepy", "made of stone"]),
       scoringRubricJson: { scoring: "selected_choice", evidence: "context meaning" },
       difficultyBand: 3,
     },
@@ -77,7 +77,7 @@ export function buildPhase3EntryDiagnosticItems(): DiagnosticItemSeed[] {
       stimulusJson: {
         audioScript: "Mia and Ben built a small bridge from sticks. The first bridge fell. They tried a wider base, and the bridge held.",
       },
-      expectedResponseJson: { correctAnswer: "friends solving a building problem", choices: ["friends solving a building problem", "a bridge over a city river", "a race across a field"], acceptedResponses: ["friends solving a building problem"] },
+      expectedResponseJson: response("friends solving a building problem", ["a bridge over a city river", "a race across a field"]),
       scoringRubricJson: { scoring: "selected_choice", evidence: "main idea from listening" },
       difficultyBand: 3,
     },
@@ -96,8 +96,8 @@ export function buildPhase3EntryDiagnosticItems(): DiagnosticItemSeed[] {
           displayText: realWordA,
           noVisibleTimer: true,
         },
-        expectedResponseJson: { correctAnswer: realWordA, acceptedResponses: [realWordA] },
-        scoringRubricJson: { scoring: "speech_match", acceptedResponses: [realWordA], latencyFeeds: "FLUENCY" },
+        expectedResponseJson: response(realWordA),
+        scoringRubricJson: { scoring: "speech_match", latencyFeeds: "FLUENCY" },
         adminReviewJson: { latencyRules: { delayedAfterMs: 5000, noAttemptAfterMs: 10000, placementUsesAccuracyOnly: true } },
         difficultyBand: 3,
       },
@@ -110,8 +110,8 @@ export function buildPhase3EntryDiagnosticItems(): DiagnosticItemSeed[] {
           displayText: nonwordA,
           noVisibleTimer: true,
         },
-        expectedResponseJson: { correctAnswer: nonwordA, acceptedResponses: [nonwordA] },
-        scoringRubricJson: { scoring: "speech_match", acceptedResponses: [nonwordA], latencyFeeds: "FLUENCY" },
+        expectedResponseJson: response(nonwordA),
+        scoringRubricJson: { scoring: "speech_match", latencyFeeds: "FLUENCY" },
         adminReviewJson: { latencyRules: { delayedAfterMs: 5000, noAttemptAfterMs: 10000, placementUsesAccuracyOnly: true } },
         difficultyBand: 3,
       },
@@ -124,7 +124,7 @@ export function buildPhase3EntryDiagnosticItems(): DiagnosticItemSeed[] {
           displayText: `${realWordB} and ${CLOSED_REVIEW_WORDS[target.introductionOrder - 1]}`,
           noVisibleTimer: true,
         },
-        expectedResponseJson: { correctAnswer: `${realWordB} and ${CLOSED_REVIEW_WORDS[target.introductionOrder - 1]}`, acceptedResponses: [`${realWordB} and ${CLOSED_REVIEW_WORDS[target.introductionOrder - 1]}`] },
+        expectedResponseJson: response(`${realWordB} and ${CLOSED_REVIEW_WORDS[target.introductionOrder - 1]}`),
         scoringRubricJson: { scoring: "speech_accuracy_plus_latency", delayedAfterMs: 5000, noAttemptAfterMs: 10000 },
         difficultyBand: 3,
       },
@@ -132,4 +132,13 @@ export function buildPhase3EntryDiagnosticItems(): DiagnosticItemSeed[] {
   }
 
   return items;
+}
+
+function response(canonical: string, rejectedResponses: string[] = [], speechTranscriptAliases: string[] = []): Prisma.InputJsonValue {
+  return {
+    canonical,
+    acceptedSemanticResponses: [canonical],
+    speechTranscriptAliases,
+    rejectedResponses,
+  };
 }
