@@ -4,20 +4,26 @@ import { useMemo, useState } from "react";
 
 export function DiagnosticItemReviewWorkspace({ item }: { item: any }) {
   const firstLook = item.firstLookReviewModelDecision?.decisionJson || {};
-  const [promptJson, setPromptJson] = useState(formatJson(item.promptJson));
+  const [studentPromptJson, setStudentPromptJson] = useState(formatJson(item.studentPromptJson));
+  const [stimulusJson, setStimulusJson] = useState(formatJson(item.stimulusJson));
+  const [expectedResponseJson, setExpectedResponseJson] = useState(formatJson(item.expectedResponseJson));
   const [scoringRubricJson, setScoringRubricJson] = useState(formatJson(item.scoringRubricJson));
-  const [correctAnswer, setCorrectAnswer] = useState(item.correctAnswer || "");
+  const [adminReviewJson, setAdminReviewJson] = useState(formatJson(item.adminReviewJson));
   const [reviewNotes, setReviewNotes] = useState("");
   const [message, setMessage] = useState("");
   const [submitting, setSubmitting] = useState(false);
-  const promptChanged = promptJson !== formatJson(item.promptJson);
+  const studentPromptChanged = studentPromptJson !== formatJson(item.studentPromptJson);
+  const stimulusChanged = stimulusJson !== formatJson(item.stimulusJson);
+  const expectedResponseChanged = expectedResponseJson !== formatJson(item.expectedResponseJson);
   const rubricChanged = scoringRubricJson !== formatJson(item.scoringRubricJson);
-  const answerChanged = correctAnswer !== (item.correctAnswer || "");
-  const hasEdits = promptChanged || rubricChanged || answerChanged;
+  const adminReviewChanged = adminReviewJson !== formatJson(item.adminReviewJson);
+  const hasEdits = studentPromptChanged || stimulusChanged || expectedResponseChanged || rubricChanged || adminReviewChanged;
   const recommendation = normalizeRecommendation(firstLook.recommendation);
   const issues = Array.isArray(firstLook.specificIssues) ? firstLook.specificIssues : [];
-  const checksPassed = Array.isArray(firstLook.checksPassed) ? firstLook.checksPassed : [];
-  const checksFailed = Array.isArray(firstLook.checksFailed) ? firstLook.checksFailed : [];
+  const checks = normalizeChecks(firstLook);
+  const checksPassed = checks.filter((check) => check.result === "PASS");
+  const checksFailed = checks.filter((check) => check.result === "FAIL");
+  const checksNa = checks.filter((check) => check.result === "NA");
   const kidViewLintViolations = Array.isArray(firstLook.kidViewLintViolations) ? firstLook.kidViewLintViolations : [];
   const canReview = item.reviewStatus === "PENDING";
   const hasFirstLookDecision = Boolean(item.firstLookReviewModelDecisionId);
@@ -33,9 +39,11 @@ export function DiagnosticItemReviewWorkspace({ item }: { item: any }) {
     setSubmitting(true);
     const body: Record<string, unknown> = { action, reviewNotes };
     if (action === "EDIT") {
-      body.promptJson = promptJson;
+      body.studentPromptJson = studentPromptJson;
+      body.stimulusJson = stimulusJson;
+      body.expectedResponseJson = expectedResponseJson;
       body.scoringRubricJson = scoringRubricJson || null;
-      body.correctAnswer = correctAnswer || null;
+      body.adminReviewJson = adminReviewJson;
     }
     const response = await fetch(`/api/admin/content/diagnostic-items/${item.id}/review`, {
       method: "POST",
@@ -83,11 +91,20 @@ export function DiagnosticItemReviewWorkspace({ item }: { item: any }) {
           <section className="rounded-md border border-slate-200 bg-white p-5">
             <h2 className="text-lg font-black text-slate-950">Candidate item</h2>
             <div className="mt-4 grid gap-4 md:grid-cols-2">
-              <TextField label="Correct answer" value={correctAnswer} onChange={setCorrectAnswer} />
+              <Readonly label="Item type" value={item.itemType} />
               <Readonly label="Phase position" value={item.phasePosition?.name || "None"} />
             </div>
-            <JsonEditor label="Prompt JSON" value={promptJson} onChange={setPromptJson} />
+            <JsonEditor label="Student prompt JSON (kid-visible)" value={studentPromptJson} onChange={setStudentPromptJson} />
+            <JsonEditor label="Stimulus JSON (kid-visible/heard)" value={stimulusJson} onChange={setStimulusJson} />
+            <JsonEditor label="Expected response JSON (backend only)" value={expectedResponseJson} onChange={setExpectedResponseJson} />
             <JsonEditor label="Scoring rubric JSON" value={scoringRubricJson} onChange={setScoringRubricJson} />
+            <JsonEditor label="Admin review JSON (reviewer only)" value={adminReviewJson} onChange={setAdminReviewJson} />
+          </section>
+
+          <section className="rounded-md border border-slate-200 bg-white p-5">
+            <h2 className="text-lg font-black text-slate-950">Student preview</h2>
+            <p className="mt-1 text-sm text-slate-600">Rendered from studentPromptJson and stimulusJson only.</p>
+            <StudentPreview studentPrompt={item.studentPromptJson} stimulus={item.stimulusJson} />
           </section>
 
           <section className="rounded-md border border-slate-200 bg-white p-5">
@@ -96,6 +113,7 @@ export function DiagnosticItemReviewWorkspace({ item }: { item: any }) {
               <Checklist title="Checks passed" items={checksPassed} tone="emerald" />
               <Checklist title="Checks failed" items={checksFailed} tone="rose" />
             </div>
+            <Checklist title="Checks not applicable / not assessed" items={checksNa} tone="slate" />
 
             <div className="mt-4 rounded-md border border-slate-200 bg-slate-50 p-4">
               <h3 className="font-black text-slate-950">Specific issues</h3>
@@ -177,15 +195,6 @@ function JsonEditor({ label, value, onChange }: { label: string; value: string; 
   );
 }
 
-function TextField({ label, value, onChange }: { label: string; value: string; onChange: (value: string) => void }) {
-  return (
-    <label className="block text-sm font-bold text-slate-700">
-      {label}
-      <input value={value} onChange={(event) => onChange(event.target.value)} className="mt-2 w-full rounded-md border border-slate-300 px-3 py-2 text-sm" />
-    </label>
-  );
-}
-
 function Readonly({ label, value }: { label: string; value: string }) {
   return (
     <div>
@@ -195,18 +204,62 @@ function Readonly({ label, value }: { label: string; value: string }) {
   );
 }
 
-function Checklist({ title, items, tone }: { title: string; items: string[]; tone: "emerald" | "rose" | "amber" }) {
-  const toneClass = tone === "emerald" ? "border-emerald-200 bg-emerald-50" : tone === "rose" ? "border-rose-200 bg-rose-50" : "border-amber-200 bg-amber-50";
+type DisplayCheck = {
+  requirementId: string;
+  result: "PASS" | "FAIL" | "NA";
+  severity: "BLOCKER" | "WARNING" | "INFO";
+  evidence: string;
+};
+
+function Checklist({ title, items, tone }: { title: string; items: Array<string | DisplayCheck>; tone: "emerald" | "rose" | "amber" | "slate" }) {
+  const toneClass = tone === "emerald" ? "border-emerald-200 bg-emerald-50" : tone === "rose" ? "border-rose-200 bg-rose-50" : tone === "amber" ? "border-amber-200 bg-amber-50" : "border-slate-200 bg-slate-50";
   return (
     <section className={`mt-4 rounded-md border p-4 ${toneClass}`}>
       <h3 className="font-black text-slate-950">{title}</h3>
       {!items.length ? <p className="mt-2 text-sm text-slate-500">None reported.</p> : null}
       <ul className="mt-2 space-y-2 text-sm text-slate-700">
         {items.map((item, index) => (
-          <li key={`${title}-${index}`}>{item}</li>
+          <li key={`${title}-${index}`}>
+            {typeof item === "string" ? item : (
+              <div>
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="font-mono text-xs font-black text-slate-900">{item.requirementId}</span>
+                  <span className="rounded-full bg-white/70 px-2 py-0.5 text-[10px] font-black text-slate-700">{item.severity}</span>
+                </div>
+                <p className="mt-1">{item.evidence}</p>
+              </div>
+            )}
+          </li>
         ))}
       </ul>
     </section>
+  );
+}
+
+function StudentPreview({ studentPrompt, stimulus }: { studentPrompt: any; stimulus: any }) {
+  const prompt = studentPrompt && typeof studentPrompt === "object" ? studentPrompt : {};
+  const stim = stimulus && typeof stimulus === "object" ? stimulus : {};
+  const choices = Array.isArray(prompt.choices) ? prompt.choices : [];
+  return (
+    <div className="mt-4 rounded-2xl border border-indigo-100 bg-indigo-50 p-5">
+      <p className="text-sm font-black uppercase tracking-wide text-indigo-700">Reading Buddy</p>
+      {prompt.kidPrompt ? <p className="mt-3 text-xl font-black text-slate-950">{String(prompt.kidPrompt)}</p> : null}
+      {prompt.displayText ? <div className="mt-4 rounded-xl bg-white p-5 text-center text-4xl font-black text-slate-950 shadow-sm">{String(prompt.displayText)}</div> : null}
+      {stim.audioScript ? (
+        <div className="mt-4 rounded-xl border border-indigo-200 bg-white p-3 text-sm text-slate-700">
+          <span className="font-bold text-indigo-700">Audio/TTS stimulus:</span> {String(stim.audioScript)}
+        </div>
+      ) : null}
+      {choices.length ? (
+        <div className="mt-4 grid gap-2">
+          {choices.map((choice: unknown, index: number) => (
+            <div key={`${String(choice)}-${index}`} className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-800">
+              {String(choice)}
+            </div>
+          ))}
+        </div>
+      ) : null}
+    </div>
   );
 }
 
@@ -221,6 +274,26 @@ function normalizeRecommendation(value: unknown) {
 function confidence(value: unknown) {
   const number = typeof value === "number" ? value : Number(value);
   return Number.isFinite(number) ? Math.max(0, Math.min(1, number)) : 0;
+}
+
+function normalizeChecks(firstLook: Record<string, unknown>): DisplayCheck[] {
+  if (Array.isArray(firstLook.checks)) {
+    return firstLook.checks
+      .filter((entry): entry is Record<string, unknown> => Boolean(entry) && typeof entry === "object")
+      .map((entry) => ({
+        requirementId: typeof entry.requirementId === "string" ? entry.requirementId : "UNKNOWN_CHECK",
+        result: entry.result === "PASS" || entry.result === "FAIL" || entry.result === "NA" ? entry.result : "NA",
+        severity: entry.severity === "BLOCKER" || entry.severity === "WARNING" || entry.severity === "INFO" ? entry.severity : "WARNING",
+        evidence: typeof entry.evidence === "string" ? entry.evidence : "No evidence provided.",
+      }));
+  }
+
+  const legacyPassed = Array.isArray(firstLook.checksPassed) ? firstLook.checksPassed : [];
+  const legacyFailed = Array.isArray(firstLook.checksFailed) ? firstLook.checksFailed : [];
+  return [
+    ...legacyPassed.filter((item): item is string => typeof item === "string").map((evidence) => ({ requirementId: "LEGACY_CHECK", result: "PASS" as const, severity: "INFO" as const, evidence })),
+    ...legacyFailed.filter((item): item is string => typeof item === "string").map((evidence) => ({ requirementId: "LEGACY_CHECK", result: "FAIL" as const, severity: "WARNING" as const, evidence })),
+  ];
 }
 
 function recommendationPillClass(recommendation: string) {

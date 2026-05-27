@@ -807,9 +807,11 @@ model DiagnosticItem {
   phasePositionId                String?
   dailyTargetId                  String?
   itemType                       String
-  promptJson                     Json
-  correctAnswer                  String?
-  scoringRubricJson              Json?
+  studentPromptJson              Json
+  stimulusJson                   Json?
+  expectedResponseJson           Json
+  scoringRubricJson              Json
+  adminReviewJson                Json?
   difficultyBand                 Int
   isPracticeItem                 Boolean  @default(false)
   reviewStatus                   String   @default("PENDING")

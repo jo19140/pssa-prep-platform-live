@@ -36,9 +36,11 @@ export async function generatePhase3EntryDiagnosticItems({ runFirstLook = true }
         phasePositionId: phasePosition.id,
         dailyTargetId: dailyTarget?.id,
         itemType: seed.itemType,
-        promptJson: seed.promptJson,
-        correctAnswer: seed.correctAnswer,
+        studentPromptJson: seed.studentPromptJson,
+        stimulusJson: seed.stimulusJson,
+        expectedResponseJson: seed.expectedResponseJson,
         scoringRubricJson: seed.scoringRubricJson,
+        adminReviewJson: seed.adminReviewJson,
         difficultyBand: seed.difficultyBand,
         isPracticeItem: seed.isPracticeItem ?? false,
         reviewStatus: "PENDING",
@@ -59,9 +61,11 @@ export async function generatePhase3EntryDiagnosticItems({ runFirstLook = true }
         contentForReview: {
           strand: item.strand,
           itemType: item.itemType,
-          promptJson: item.promptJson,
-          correctAnswer: item.correctAnswer,
+          studentPromptJson: item.studentPromptJson,
+          stimulusJson: item.stimulusJson,
+          expectedResponseJson: item.expectedResponseJson,
           scoringRubricJson: item.scoringRubricJson,
+          adminReviewJson: item.adminReviewJson,
         },
       });
     }

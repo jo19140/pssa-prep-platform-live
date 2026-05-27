@@ -3,7 +3,14 @@ import { Prisma } from "@prisma/client";
 import { db } from "@/lib/db";
 import { DECISION_TYPES } from "@/lib/decisions/decisionTypes";
 import { persistModelDecision, type ModelDecisionContext, type ModelDecisionMetadata } from "@/lib/decisions/withModelDecisionLogging";
-import { checklistForArtifact, type FirstLookArtifactType } from "./firstLookChecklists";
+import { checklistForArtifact, type CheckSeverity, type FirstLookArtifactType } from "./firstLookChecklists";
+
+export type CheckResult = {
+  requirementId: string;
+  result: "PASS" | "FAIL" | "NA";
+  severity: CheckSeverity;
+  evidence: string;
+};
 
 export type AIFirstLookReview = {
   modelDecisionId: string | null;
@@ -11,8 +18,7 @@ export type AIFirstLookReview = {
   artifactId: string;
   recommendation: "APPROVE" | "FLAG_FOR_HUMAN" | "REJECT";
   confidence: number;
-  checksPassed: string[];
-  checksFailed: string[];
+  checks: CheckResult[];
   specificIssues: Array<{
     severity: "minor" | "moderate" | "major";
     location: string;
@@ -52,7 +58,7 @@ export async function runAIFirstLookReview(artifact: FirstLookArtifact, modelRun
   const modelRunner = options.modelRunner || openAiFirstLookReview;
   const persistDecision = options.persistDecision || persistModelDecision;
   const attachDecision = options.attachDecision || attachFirstLookDecision;
-  const checklist = checklistForArtifact(artifact.artifactType);
+  const checklist = checklistForArtifact(artifact);
   const started = Date.now();
   const modelResult = await modelRunner({ artifact, checklist });
   const reviewWithoutId = normalizeReview(modelResult.review, artifact);
@@ -110,8 +116,12 @@ async function openAiFirstLookReview({
         artifactId: artifact.artifactId,
         recommendation: "FLAG_FOR_HUMAN",
         confidence: 0,
-        checksPassed: [],
-        checksFailed: ["OPENAI_API_KEY is not configured; human review required before approval."],
+        checks: checklist.items.map((item) => ({
+          requirementId: item.requirementId,
+          result: "NA",
+          severity: item.severity,
+          evidence: "OPENAI_API_KEY is not configured; human review required before approval.",
+        })),
         specificIssues: [
           {
             severity: "moderate",
@@ -135,7 +145,9 @@ async function openAiFirstLookReview({
         role: "system",
         content: [
           "You are the AI first-look reviewer for Sý Learning Reading Buddy content.",
-          "Return only JSON matching this shape: recommendation, confidence, checksPassed, checksFailed, specificIssues, kidViewLintViolations.",
+          "Return only JSON matching this shape: recommendation, confidence, checks, specificIssues, kidViewLintViolations.",
+          "Each checks entry must have requirementId, result (PASS, FAIL, or NA), severity (BLOCKER, WARNING, or INFO), and evidence.",
+          "Every checklist requirementId must appear at most once in checks. A requirement cannot both pass and fail.",
           "The AI recommendation is advisory only; humans make the final approve/reject decision.",
           "Reject or flag kid-facing phoneme notation, phase codes, item counters, correctness feedback in diagnostics, and curriculum metadata.",
         ].join("\n"),
@@ -165,8 +177,7 @@ async function openAiFirstLookReview({
       artifactId: artifact.artifactId,
       recommendation: normalizeRecommendation(parsed.recommendation),
       confidence: clampConfidence(parsed.confidence),
-      checksPassed: stringArray(parsed.checksPassed),
-      checksFailed: stringArray(parsed.checksFailed),
+      checks: normalizeChecks(parsed.checks, checklist, parsed),
       specificIssues: normalizeIssues(parsed.specificIssues),
       kidViewLintViolations: stringArray(parsed.kidViewLintViolations),
     },
@@ -179,8 +190,7 @@ function normalizeReview(review: Omit<AIFirstLookReview, "modelDecisionId">, art
     artifactId: artifact.artifactId,
     recommendation: normalizeRecommendation(review.recommendation),
     confidence: clampConfidence(review.confidence),
-    checksPassed: stringArray(review.checksPassed),
-    checksFailed: stringArray(review.checksFailed),
+    checks: normalizeChecks((review as unknown as Record<string, unknown>).checks, checklistForArtifact(artifact), review),
     specificIssues: normalizeIssues(review.specificIssues),
     kidViewLintViolations: stringArray(review.kidViewLintViolations),
   };
@@ -215,6 +225,58 @@ function clampConfidence(value: unknown) {
 function stringArray(value: unknown): string[] {
   if (!Array.isArray(value)) return [];
   return value.filter((entry): entry is string => typeof entry === "string");
+}
+
+function normalizeChecks(value: unknown, checklist: ReturnType<typeof checklistForArtifact>, legacySource?: unknown): CheckResult[] {
+  const byRequirement = new Map(checklist.items.map((item) => [item.requirementId, item]));
+  const normalized = new Map<string, CheckResult>();
+
+  if (Array.isArray(value)) {
+    for (const entry of value) {
+      if (!entry || typeof entry !== "object") continue;
+      const record = entry as Record<string, unknown>;
+      const requirementId = typeof record.requirementId === "string" ? record.requirementId : "";
+      const definition = byRequirement.get(requirementId);
+      if (!definition) continue;
+      const result = record.result === "PASS" || record.result === "FAIL" || record.result === "NA" ? record.result : "NA";
+      const severity = record.severity === "BLOCKER" || record.severity === "WARNING" || record.severity === "INFO" ? record.severity : definition.severity;
+      normalized.set(requirementId, {
+        requirementId,
+        result,
+        severity,
+        evidence: typeof record.evidence === "string" && record.evidence.trim() ? record.evidence : definition.requirement,
+      });
+    }
+  }
+
+  if (normalized.size === 0 && legacySource && typeof legacySource === "object") {
+    const source = legacySource as Record<string, unknown>;
+    const legacyPassed = new Set(stringArray(source.checksPassed));
+    const legacyFailed = new Set(stringArray(source.checksFailed));
+    for (const definition of checklist.items) {
+      const passed = legacyPassed.has(definition.requirement);
+      const failed = legacyFailed.has(definition.requirement);
+      if (!passed && !failed) continue;
+      normalized.set(definition.requirementId, {
+        requirementId: definition.requirementId,
+        result: failed ? "FAIL" : "PASS",
+        severity: definition.severity,
+        evidence: definition.requirement,
+      });
+    }
+  }
+
+  for (const definition of checklist.items) {
+    if (normalized.has(definition.requirementId)) continue;
+    normalized.set(definition.requirementId, {
+      requirementId: definition.requirementId,
+      result: "NA",
+      severity: definition.severity,
+      evidence: "Reviewer did not return a result for this requirement.",
+    });
+  }
+
+  return Array.from(normalized.values());
 }
 
 function normalizeIssues(value: unknown): AIFirstLookReview["specificIssues"] {

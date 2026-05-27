@@ -76,9 +76,11 @@ export type DiagnosticItemReviewInput = {
   action: DiagnosticItemReviewAction;
   reviewerUserId: string;
   reviewNotes?: string | null;
-  promptJson?: Prisma.InputJsonValue;
-  scoringRubricJson?: Prisma.InputJsonValue | null;
-  correctAnswer?: string | null;
+  studentPromptJson?: Prisma.InputJsonValue;
+  stimulusJson?: Prisma.InputJsonValue | null;
+  expectedResponseJson?: Prisma.InputJsonValue;
+  scoringRubricJson?: Prisma.InputJsonValue;
+  adminReviewJson?: Prisma.InputJsonValue | null;
 };
 
 export async function reviewDiagnosticItem(id: string, input: DiagnosticItemReviewInput) {
@@ -87,9 +89,11 @@ export async function reviewDiagnosticItem(id: string, input: DiagnosticItemRevi
     select: {
       id: true,
       reviewStatus: true,
-      promptJson: true,
-      correctAnswer: true,
+      studentPromptJson: true,
+      stimulusJson: true,
+      expectedResponseJson: true,
       scoringRubricJson: true,
+      adminReviewJson: true,
       firstLookReviewModelDecisionId: true,
       firstLookReviewModelDecision: {
         select: {
@@ -127,9 +131,11 @@ export async function reviewDiagnosticItem(id: string, input: DiagnosticItemRevi
   };
 
   if (input.action === "EDIT") {
-    if (input.promptJson !== undefined) updateData.promptJson = input.promptJson;
+    if (input.studentPromptJson !== undefined) updateData.studentPromptJson = input.studentPromptJson;
+    if (input.stimulusJson !== undefined) updateData.stimulusJson = input.stimulusJson;
+    if (input.expectedResponseJson !== undefined) updateData.expectedResponseJson = input.expectedResponseJson;
     if (input.scoringRubricJson !== undefined) updateData.scoringRubricJson = input.scoringRubricJson;
-    if (input.correctAnswer !== undefined) updateData.correctAnswer = input.correctAnswer?.trim() || null;
+    if (input.adminReviewJson !== undefined) updateData.adminReviewJson = input.adminReviewJson;
   }
 
   const result = await db.$transaction(async (tx) => {
@@ -156,9 +162,11 @@ export async function reviewDiagnosticItem(id: string, input: DiagnosticItemRevi
           editedFields:
             input.action === "EDIT"
               ? {
-                  promptJson: input.promptJson !== undefined,
+                  studentPromptJson: input.studentPromptJson !== undefined,
+                  stimulusJson: input.stimulusJson !== undefined,
+                  expectedResponseJson: input.expectedResponseJson !== undefined,
                   scoringRubricJson: input.scoringRubricJson !== undefined,
-                  correctAnswer: input.correctAnswer !== undefined,
+                  adminReviewJson: input.adminReviewJson !== undefined,
                 }
               : {},
         },
