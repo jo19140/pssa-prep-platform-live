@@ -41,6 +41,10 @@ export async function generatePhase3EntryDiagnosticItems({ runFirstLook = true }
         expectedResponseJson: seed.expectedResponseJson,
         scoringRubricJson: seed.scoringRubricJson,
         adminReviewJson: seed.adminReviewJson,
+        phaseBand: seed.phaseBand,
+        morphologyWave: seed.morphologyWave,
+        targetMorpheme: seed.targetMorpheme,
+        skill: seed.skill,
         difficultyBand: seed.difficultyBand,
         isPracticeItem: seed.isPracticeItem ?? false,
         reviewStatus: "PENDING",
@@ -57,6 +61,10 @@ export async function generatePhase3EntryDiagnosticItems({ runFirstLook = true }
           difficultyBand: item.difficultyBand,
           phasePositionId: item.phasePositionId,
           dailyTargetCode: seed.dailyTargetCode ?? null,
+          phaseBand: item.phaseBand,
+          morphologyWave: item.morphologyWave,
+          targetMorpheme: item.targetMorpheme,
+          skill: item.skill,
         },
         contentForReview: {
           strand: item.strand,
@@ -66,6 +74,10 @@ export async function generatePhase3EntryDiagnosticItems({ runFirstLook = true }
           expectedResponseJson: item.expectedResponseJson,
           scoringRubricJson: item.scoringRubricJson,
           adminReviewJson: item.adminReviewJson,
+          phaseBand: item.phaseBand,
+          morphologyWave: item.morphologyWave,
+          targetMorpheme: item.targetMorpheme,
+          skill: item.skill,
         },
       });
     }

@@ -150,6 +150,9 @@ async function openAiFirstLookReview({
           "Every checklist requirementId must appear at most once in checks. A requirement cannot both pass and fail.",
           "Evaluate each requirement independently. Do not cite aggregate compliance issues, other blockers, or other check results as evidence.",
           "For kid-view discipline checks, read only studentPromptJson and stimulusJson. Do not use expectedResponseJson, scoringRubricJson, or adminReviewJson when deciding those checks.",
+          "Recommendation thresholds: REJECT is only for fundamentally wrong strand, broken JSON structure, off-scope content, unsafe content, or irreparable pedagogical violations.",
+          "Use FLAG_FOR_HUMAN for fixable blockers, wording issues, missing metadata, ambiguity an edit could resolve, or any case where you lack confidence to approve.",
+          "Use APPROVE only when all checks pass with no blockers and no unassessed required checks.",
           "The AI recommendation is advisory only; humans make the final approve/reject decision.",
           "Reject or flag kid-facing phoneme notation, phase codes, item counters, correctness feedback in diagnostics, and curriculum metadata.",
         ].join("\n"),
@@ -277,7 +280,7 @@ function enforceDiagnosticCheckBoundaries(checks: CheckResult[], artifact: First
   const stimulus = asRecord(content.stimulusJson);
   const expected = asRecord(content.expectedResponseJson);
   const scoring = asRecord(content.scoringRubricJson);
-  const kidViewText = `${JSON.stringify(studentPrompt)} ${JSON.stringify(stimulus)}`;
+  const kidViewText = `${visibleTextFromKidJson(studentPrompt)} ${visibleTextFromKidJson(stimulus)}`;
 
   return checks.map((check) => {
     if (isKidViewDisciplineCheck(check.requirementId)) {
@@ -306,6 +309,21 @@ function enforceDiagnosticCheckBoundaries(checks: CheckResult[], artifact: First
         result: canonical.trim() ? "PASS" as const : "FAIL" as const,
         evidence: canonical.trim() ? "PASS: expectedResponseJson has a canonical semantic answer." : "FAIL: expectedResponseJson is missing a canonical semantic answer.",
       };
+    }
+    if (check.requirementId === "MORPH_UNAMBIGUOUS_BASE_AFFIX_ROOT") {
+      return evaluateMorphologyUnambiguousCheck(check, content, expected);
+    }
+    if (check.requirementId === "MORPH_TRANSPARENT_BAND_APPROPRIATE") {
+      return evaluateMorphologyBandCheck(check, content);
+    }
+    if (check.requirementId === "DECODING_ONE_CARD_NO_CONTEXT") {
+      return evaluateDecodingOneCardCheck(check, studentPrompt);
+    }
+    if (check.requirementId === "DECODING_TARGET_PATTERN_ONLY") {
+      return evaluateDecodingTargetPatternCheck(check, studentPrompt, artifact.metadata);
+    }
+    if (check.requirementId === "DECODING_PSEUDOWORD_NOT_MISSPELLING") {
+      return evaluateDecodingPseudowordCheck(check, studentPrompt, content);
     }
     if (check.evidence.toLowerCase().includes("other stated blockers") || check.evidence.toLowerCase().includes("compliance issues with other")) {
       return { ...check, evidence: "Evidence reset: each check must evaluate only its own requirement." };
@@ -354,6 +372,106 @@ function evaluateKidViewCheck(check: CheckResult, studentPrompt: Record<string, 
   return check;
 }
 
+function evaluateMorphologyUnambiguousCheck(check: CheckResult, content: Record<string, unknown>, expected: Record<string, unknown>): CheckResult {
+  const word = studentWord(content);
+  const canonical = typeof expected.canonical === "string" ? expected.canonical : "";
+  const targetMorpheme = stringFrom(content.targetMorpheme) || stringFrom(asRecord(content.adminReviewJson).targetMorpheme);
+  const skill = stringFrom(content.skill) || stringFrom(asRecord(content.adminReviewJson).skill);
+  const theoryDependent = /unhappiness|unlockable|reorganization|disagreeable/i.test(word);
+  const transparentSingleAffix = Boolean(
+    canonical.trim() &&
+      targetMorpheme &&
+      skill === "base_word_identification" &&
+      word.toLowerCase().includes(canonical.toLowerCase()) &&
+      (targetMorpheme.startsWith("-") || targetMorpheme.endsWith("-")),
+  );
+
+  if (theoryDependent) {
+    return {
+      ...check,
+      result: "FAIL",
+      evidence: "FAIL: decomposition may be theory-dependent or have multiple defensible parses.",
+    };
+  }
+  if (transparentSingleAffix) {
+    return {
+      ...check,
+      result: "PASS",
+      evidence: "PASS: transparent single-base plus single-affix morphology has one defensible base-word answer.",
+    };
+  }
+  return check;
+}
+
+function evaluateMorphologyBandCheck(check: CheckResult, content: Record<string, unknown>): CheckResult {
+  const wave = stringFrom(content.morphologyWave) || stringFrom(asRecord(content.adminReviewJson).morphologyWave);
+  const text = `${visibleTextFromKidJson(asRecord(content.studentPromptJson))} ${visibleTextFromKidJson(asRecord(content.adminReviewJson))}`;
+  const requiresEtymology = wave === "bound_roots" || /latin|greek|old english|etymolog|root origin|word origin|historical|cross-linguistic/i.test(text);
+  if (requiresEtymology) {
+    return {
+      ...check,
+      result: "FAIL",
+      evidence: "FAIL: item appears to require historical, etymological, Latin/Greek, or cross-linguistic knowledge.",
+    };
+  }
+  if (wave === "transparent_suffixes" || wave === "transparent_prefixes" || wave === "inflectional") {
+    return {
+      ...check,
+      result: "PASS",
+      evidence: "PASS: item uses transparent derivational or inflectional morphology appropriate for Phase 3 screening.",
+    };
+  }
+  return check;
+}
+
+function evaluateDecodingOneCardCheck(check: CheckResult, studentPrompt: Record<string, unknown>): CheckResult {
+  const hasDisplayWord = typeof studentPrompt.displayText === "string" && studentPrompt.displayText.trim().length > 0;
+  const hasChoices = Array.isArray(studentPrompt.choices) && studentPrompt.choices.length > 0;
+  const promptText = visibleTextFromKidJson(studentPrompt);
+  const hasSentenceContext = /\b(sentence|story|paragraph|context)\b/i.test(promptText);
+  return {
+    ...check,
+    result: hasDisplayWord && !hasChoices && !hasSentenceContext ? "PASS" : "FAIL",
+    evidence: hasDisplayWord && !hasChoices && !hasSentenceContext
+      ? "PASS: kid view presents one word or pseudoword card with no choices or sentence context."
+      : "FAIL: decoding item should present one word or pseudoword card without choices or sentence context.",
+  };
+}
+
+function evaluateDecodingTargetPatternCheck(check: CheckResult, studentPrompt: Record<string, unknown>, metadata: Record<string, unknown>): CheckResult {
+  const displayText = typeof studentPrompt.displayText === "string" ? studentPrompt.displayText.toLowerCase() : "";
+  const dailyTargetCode = typeof metadata.dailyTargetCode === "string" ? metadata.dailyTargetCode : "";
+  if (!displayText || !dailyTargetCode) return check;
+  const targetRegex = patternRegex(dailyTargetCode);
+  return {
+    ...check,
+    result: targetRegex.test(displayText) ? "PASS" : "FAIL",
+    evidence: targetRegex.test(displayText)
+      ? `PASS: displayed card matches the ${dailyTargetCode} daily target pattern.`
+      : `FAIL: displayed card does not match the ${dailyTargetCode} daily target pattern.`,
+  };
+}
+
+function evaluateDecodingPseudowordCheck(check: CheckResult, studentPrompt: Record<string, unknown>, content: Record<string, unknown>): CheckResult {
+  const itemType = stringFrom(content.itemType).toUpperCase();
+  const displayText = stringFrom(studentPrompt.displayText).toLowerCase();
+  if (!itemType.includes("PSEUDOWORD")) {
+    return {
+      ...check,
+      result: "NA",
+      evidence: "NA: real-word decoding item has no pseudoword to audit.",
+    };
+  }
+  const obviousRealWordMisspellings = new Set(["maik", "mayk", "caik", "cayk", "bote", "boet", "lite", "lyt", "cute", "kyute"]);
+  return {
+    ...check,
+    result: obviousRealWordMisspellings.has(displayText) ? "FAIL" : "PASS",
+    evidence: obviousRealWordMisspellings.has(displayText)
+      ? "FAIL: pseudoword resembles a common real-word misspelling."
+      : "PASS: pseudoword does not match the explicit real-word-misspelling blocklist.",
+  };
+}
+
 function isKidViewDisciplineCheck(requirementId: string) {
   return requirementId === "PA_NO_VISIBLE_PRINTED_CHOICES" || isNoKidMetadataCheck(requirementId) || requirementId === "DECODING_NO_VISIBLE_TIMER" || requirementId === "COMP_AUDIO_PROMPT_CLEAN" || requirementId === "DECODING_AUDIO_PROMPT_CLEAN";
 }
@@ -364,6 +482,32 @@ function isNoKidMetadataCheck(requirementId: string) {
 
 function asRecord(value: unknown): Record<string, unknown> {
   return value && typeof value === "object" && !Array.isArray(value) ? value as Record<string, unknown> : {};
+}
+
+function visibleTextFromKidJson(value: unknown): string {
+  if (typeof value === "string") return value;
+  if (Array.isArray(value)) return value.map(visibleTextFromKidJson).join(" ");
+  if (!value || typeof value !== "object") return "";
+  return Object.values(value as Record<string, unknown>).map(visibleTextFromKidJson).join(" ");
+}
+
+function stringFrom(value: unknown): string {
+  return typeof value === "string" ? value : "";
+}
+
+function studentWord(content: Record<string, unknown>) {
+  const studentPrompt = asRecord(content.studentPromptJson);
+  const displayText = stringFrom(studentPrompt.displayText);
+  if (displayText) return displayText;
+  const prompt = stringFrom(studentPrompt.kidPrompt);
+  const match = prompt.match(/\bin\s+([A-Za-z-]+)\??/i);
+  return match?.[1] || "";
+}
+
+function patternRegex(patternCode: string) {
+  const match = patternCode.match(/^([aeiou])_e$/);
+  if (!match) return /[\s\S]/;
+  return new RegExp(`${match[1]}[a-z]+e$`, "i");
 }
 
 function normalizeIssues(value: unknown, checks: CheckResult[] = []): AIFirstLookReview["specificIssues"] {
@@ -393,10 +537,22 @@ function normalizeIssues(value: unknown, checks: CheckResult[] = []): AIFirstLoo
 
 function recommendationFromChecks(checks: CheckResult[], fallback: AIFirstLookReview["recommendation"]): AIFirstLookReview["recommendation"] {
   if (!checks.length) return fallback;
-  if (checks.some((check) => check.result === "FAIL" && check.severity === "BLOCKER")) return "REJECT";
+  if (checks.some((check) => check.result === "FAIL" && check.severity === "BLOCKER" && isHardRejectCheck(check))) return "REJECT";
   if (checks.some((check) => check.result === "FAIL")) return "FLAG_FOR_HUMAN";
-  if (checks.some((check) => check.result === "NA")) return fallback === "APPROVE" ? "FLAG_FOR_HUMAN" : fallback;
+  if (checks.some((check) => check.result === "NA")) return "FLAG_FOR_HUMAN";
   return "APPROVE";
+}
+
+function isHardRejectCheck(check: CheckResult) {
+  const evidence = check.evidence.toLowerCase();
+  return (
+    evidence.includes("wrong strand") ||
+    evidence.includes("broken json") ||
+    evidence.includes("off-scope") ||
+    evidence.includes("unsafe") ||
+    evidence.includes("irreparable") ||
+    evidence.includes("offensive")
+  );
 }
 
 export function firstLookReviewToJson(review: AIFirstLookReview): Prisma.InputJsonValue {

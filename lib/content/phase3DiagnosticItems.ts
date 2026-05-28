@@ -10,6 +10,10 @@ type DiagnosticItemSeed = {
   expectedResponseJson: Prisma.InputJsonValue;
   scoringRubricJson: Prisma.InputJsonValue;
   adminReviewJson?: Prisma.InputJsonValue;
+  phaseBand?: number;
+  morphologyWave?: string;
+  targetMorpheme?: string;
+  skill?: string;
   difficultyBand: number;
   isPracticeItem?: boolean;
 };
@@ -48,12 +52,17 @@ export function buildPhase3EntryDiagnosticItems(): DiagnosticItemSeed[] {
     {
       strand: "MORPHOLOGY",
       itemType: "BASE_WORD_ID",
-      studentPromptJson: {
-        kidPrompt: "Which word is the base word in playful?",
-        choices: ["play", "ful", "playful"],
-      },
-      expectedResponseJson: response("play", ["ful", "playful"]),
+      ...baseWordIdItem({
+        word: "playful",
+        baseWord: "play",
+        boundMorpheme: "-ful",
+        morphologyWave: "transparent_suffixes",
+      }),
       scoringRubricJson: { scoring: "selected_choice", evidence: "base word recognition" },
+      phaseBand: 3,
+      morphologyWave: "transparent_suffixes",
+      targetMorpheme: "-ful",
+      skill: "base_word_identification",
       difficultyBand: 3,
     },
     {
@@ -140,5 +149,33 @@ function response(canonical: string, rejectedResponses: string[] = [], speechTra
     acceptedSemanticResponses: [canonical],
     speechTranscriptAliases,
     rejectedResponses,
+  };
+}
+
+function baseWordIdItem({
+  word,
+  baseWord,
+  boundMorpheme,
+  morphologyWave,
+}: {
+  word: string;
+  baseWord: string;
+  boundMorpheme: string;
+  morphologyWave: string;
+}): Pick<DiagnosticItemSeed, "studentPromptJson" | "expectedResponseJson" | "adminReviewJson"> {
+  const choices = [baseWord, boundMorpheme, word];
+  const hasBoundMorpheme = choices.some((choice) => choice.startsWith("-") || choice.endsWith("-"));
+  return {
+    studentPromptJson: {
+      kidPrompt: hasBoundMorpheme ? `Which part is the base word in ${word}?` : `Which word is the base word in ${word}?`,
+      choices,
+    },
+    expectedResponseJson: response(baseWord, choices.filter((choice) => choice !== baseWord)),
+    adminReviewJson: {
+      morphologyWave,
+      targetMorpheme: boundMorpheme,
+      skill: "base_word_identification",
+      note: "Bound morpheme choices include boundary markers for reviewer and student clarity.",
+    },
   };
 }

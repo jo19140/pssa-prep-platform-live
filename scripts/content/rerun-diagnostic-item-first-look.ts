@@ -5,6 +5,7 @@ import { DIAGNOSTIC_ITEM_REVIEW_OUTCOME_TYPE } from "../../lib/content/diagnosti
 const db = new PrismaClient();
 
 export async function rerunDiagnosticItemFirstLook() {
+  const includeReviewed = process.argv.includes("--include-reviewed") || process.argv.includes("--all");
   const items = await db.diagnosticItem.findMany({
     where: { retiredAt: null },
     include: {
@@ -22,7 +23,7 @@ export async function rerunDiagnosticItemFirstLook() {
   let skippedWithHumanOutcome = 0;
 
   for (const item of items) {
-    if (item.firstLookReviewModelDecision?.outcomes.length) {
+    if (!includeReviewed && item.firstLookReviewModelDecision?.outcomes.length) {
       skippedWithHumanOutcome += 1;
       continue;
     }
@@ -36,6 +37,10 @@ export async function rerunDiagnosticItemFirstLook() {
         difficultyBand: item.difficultyBand,
         phasePositionId: item.phasePositionId,
         dailyTargetCode: item.dailyTarget?.code ?? null,
+        phaseBand: item.phaseBand,
+        morphologyWave: item.morphologyWave,
+        targetMorpheme: item.targetMorpheme,
+        skill: item.skill,
       },
       contentForReview: {
         strand: item.strand,
@@ -45,6 +50,10 @@ export async function rerunDiagnosticItemFirstLook() {
         expectedResponseJson: item.expectedResponseJson,
         scoringRubricJson: item.scoringRubricJson,
         adminReviewJson: item.adminReviewJson,
+        phaseBand: item.phaseBand,
+        morphologyWave: item.morphologyWave,
+        targetMorpheme: item.targetMorpheme,
+        skill: item.skill,
       },
     });
     rerun += 1;
