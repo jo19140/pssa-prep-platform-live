@@ -38,18 +38,25 @@ export async function countStudentReadyDiagnosticItems() {
   return db.diagnosticItem.count({ where: STUDENT_READY_DIAGNOSTIC_ITEM_WHERE });
 }
 
-export async function getPendingDiagnosticItemReviewQueue() {
+export type DiagnosticItemQueueFilter =
+  | { kind: "status"; status: "PENDING" | "EDITED" | "APPROVED" | "REJECTED" }
+  | { kind: "recommendation"; recommendation: "REJECT" | "FLAG_FOR_HUMAN" };
+
+export async function getDiagnosticItemReviewQueue(filter: DiagnosticItemQueueFilter = { kind: "status", status: "PENDING" }) {
   const items = await db.diagnosticItem.findMany({
-    where: {
-      reviewStatus: "PENDING",
-      retiredAt: null,
-    },
+    where: filter.kind === "status"
+      ? { reviewStatus: filter.status, retiredAt: null }
+      : { retiredAt: null },
     include: diagnosticItemInclude,
     orderBy: [{ createdAt: "asc" }, { strand: "asc" }],
-    take: 200,
+    take: 500,
   });
 
-  return items.sort((a, b) => {
+  const filteredItems = filter.kind === "recommendation"
+    ? items.filter((item) => firstLookRecommendation(item.firstLookReviewModelDecision?.decisionJson) === filter.recommendation)
+    : items;
+
+  return filteredItems.sort((a, b) => {
     const aRecommendation = firstLookRecommendation(a.firstLookReviewModelDecision?.decisionJson);
     const bRecommendation = firstLookRecommendation(b.firstLookReviewModelDecision?.decisionJson);
     return (
@@ -58,6 +65,29 @@ export async function getPendingDiagnosticItemReviewQueue() {
       a.createdAt.getTime() - b.createdAt.getTime()
     );
   });
+}
+
+export async function getPendingDiagnosticItemReviewQueue() {
+  return getDiagnosticItemReviewQueue({ kind: "status", status: "PENDING" });
+}
+
+export async function getDiagnosticItemReviewQueueCounts() {
+  const items = await db.diagnosticItem.findMany({
+    where: { retiredAt: null },
+    select: {
+      reviewStatus: true,
+      firstLookReviewModelDecision: { select: { decisionJson: true } },
+    },
+  });
+
+  return {
+    pending: items.filter((item) => item.reviewStatus === "PENDING").length,
+    edited: items.filter((item) => item.reviewStatus === "EDITED").length,
+    approvedProductionPool: items.filter((item) => item.reviewStatus === "APPROVED").length,
+    rejected: items.filter((item) => item.reviewStatus === "REJECTED").length,
+    aiRejectHints: items.filter((item) => firstLookRecommendation(item.firstLookReviewModelDecision?.decisionJson) === "REJECT").length,
+    needsHumanEye: items.filter((item) => firstLookRecommendation(item.firstLookReviewModelDecision?.decisionJson) === "FLAG_FOR_HUMAN").length,
+  };
 }
 
 export async function getDiagnosticItemReviewDetail(id: string) {
@@ -109,7 +139,7 @@ export async function reviewDiagnosticItem(id: string, input: DiagnosticItemRevi
     return { ok: false as const, status: 404, error: "Diagnostic item not found." };
   }
 
-  if (item.reviewStatus !== "PENDING") {
+  if (item.reviewStatus !== "PENDING" && item.reviewStatus !== "EDITED") {
     return { ok: false as const, status: 409, error: `Diagnostic item is already ${item.reviewStatus}.` };
   }
 

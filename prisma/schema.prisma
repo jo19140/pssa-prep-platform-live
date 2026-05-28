@@ -812,6 +812,10 @@ model DiagnosticItem {
   expectedResponseJson           Json
   scoringRubricJson              Json
   adminReviewJson                Json?
+  phaseBand                      Int?
+  morphologyWave                 String?
+  targetMorpheme                 String?
+  skill                          String?
   difficultyBand                 Int
   isPracticeItem                 Boolean  @default(false)
   reviewStatus                   String   @default("PENDING")
@@ -833,6 +837,7 @@ model DiagnosticItem {
   @@index([reviewStatus])
   @@index([firstLookReviewModelDecisionId])
   @@index([phasePositionId, dailyTargetId])
+  @@index([strand, phaseBand, morphologyWave, skill])
 }
 
 model DiagnosticItemAttempt {
