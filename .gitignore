@@ -14,3 +14,9 @@ data/phonogram/*.json
 data/phonogram/*.csv
 data/phonogram/*.sqlite
 data/phonogram/*.md
+
+# v1.4 diagnostic bank import staging — content lives in DB after import
+content/reading-buddy-phase1-3-v1.4-fast-track/
+
+# Local session audit outputs — regenerable via scripts/content/audit-*
+audit/passage_audit_report.*
