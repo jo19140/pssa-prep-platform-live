@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reading Buddy Lesson V6 — a_e</title>
+  <style>
+    :root {
+      --bg: #f6f3ea;
+      --card: #fff3df;
+      --card-2: #fff8ed;
+      --ink: #3f2410;
+      --muted: #7b5a37;
+      --orange: #be7412;
+      --orange-2: #f0a43a;
+      --line: #f0b65f;
+      --white: #ffffff;
+      --green: #6fa645;
+      --green-bg: #dcf0c8;
+      --blue: #1e5e9b;
+      --blue-bg: #e6f2fd;
+      --red: #b23d3d;
+      --pink-bg: #f5c1d7;
+      --shadow: 0 1px 1px rgba(0,0,0,.04);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.35;
+    }
+    .page {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      align-items: flex-start;
+      margin-bottom: 16px;
+    }
+    h1 { font-size: 24px; margin: 0 0 4px; }
+    .subtitle { font-size: 14px; color: var(--muted); }
+    .time { font-size: 13px; color: var(--muted); white-space: nowrap; margin-top: 6px; }
+    .lesson-card {
+      background: var(--card);
+      border: 1.5px solid var(--line);
+      border-radius: 12px;
+      padding: 18px 20px;
+      margin: 14px 0;
+      box-shadow: var(--shadow);
+    }
+    .adult-card {
+      background: white;
+      border: 1px solid #ddd8ca;
+      border-radius: 12px;
+      padding: 20px;
+      margin: 22px 0 0;
+      box-shadow: var(--shadow);
+    }
+    .label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      color: #a06d2d;
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+    .label.blue { color: var(--blue); }
+    h2 { font-size: 18px; margin: 0 0 12px; }
+    .row { display: flex; gap: 14px; align-items: flex-start; }
+    .buddy {
+      flex: 0 0 auto;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--orange);
+      position: relative;
+      margin-top: 2px;
+    }
+    .buddy:before, .buddy:after {
+      content: "";
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: #fff7e6;
+      border-radius: 50%;
+      top: 14px;
+    }
+    .buddy:before { left: 12px; }
+    .buddy:after { right: 12px; }
+    .bubble { font-size: 14px; color: var(--ink); }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+    .chip {
+      padding: 7px 12px;
+      border-radius: 7px;
+      border: 1px solid #9abf70;
+      background: var(--green-bg);
+      color: #244d0e;
+      min-width: 42px;
+      text-align: center;
+      font-weight: 650;
+      font-size: 15px;
+    }
+    .chip.review { background: #ffdca3; border-color: #e8a246; color: #6b3d0a; }
+    .note { font-size: 12px; color: var(--muted); margin-top: 9px; }
+    .concept {
+      background: white;
+      border-radius: 8px;
+      padding: 24px 18px 18px;
+      text-align: center;
+      margin-top: 10px;
+    }
+    .word-large { font-size: 42px; font-weight: 750; letter-spacing: .02em; }
+    .highlight { background: #ffd27d; padding: 0 4px; border-radius: 3px; }
+    .silent { color: #8c8a83; text-decoration: line-through; }
+    .word-lines { display: grid; gap: 7px; }
+    .line-card {
+      display: grid;
+      grid-template-columns: 74px 1fr;
+      align-items: center;
+      background: white;
+      border-radius: 8px;
+      padding: 9px 12px;
+      font-size: 16px;
+    }
+    .line-label { color: #a06d2d; font-size: 12px; }
+    .word-list { word-spacing: 7px; }
+    .button-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    button, .btn {
+      border: 1px solid var(--orange);
+      background: white;
+      color: var(--ink);
+      border-radius: 8px;
+      padding: 10px 16px;
+      font-weight: 650;
+      font-size: 14px;
+      display: inline-flex;
+      gap: 6px;
+      align-items: center;
+      justify-content: center;
+    }
+    .btn.primary { background: var(--orange); color: white; }
+    .btn-stack { display: flex; flex-direction: column; gap: 2px; align-items: center; }
+    .btn-sub { font-size: 11px; font-weight: 500; color: var(--muted); }
+    .reteach {
+      background: #fff9ef;
+      border: 1.5px dashed #d79132;
+    }
+    .reteach h2 { margin-bottom: 10px; }
+    .mini-concept {
+      background: white;
+      border-radius: 8px;
+      padding: 18px;
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      text-align: center;
+    }
+    .word-cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+    .small-card {
+      background: white;
+      border-radius: 8px;
+      padding: 12px;
+      min-height: 74px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .small-card strong { font-size: 16px; }
+    .tag {
+      display: inline-block;
+      align-self: flex-start;
+      border-radius: 999px;
+      padding: 3px 9px;
+      font-size: 11px;
+      font-weight: 700;
+      background: #d8eafb;
+      color: #1e5e9b;
+    }
+    .tag.heart { background: var(--pink-bg); color: #7e2447; }
+    .sentences { display: grid; gap: 8px; }
+    .sentence {
+      background: white;
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 16px;
+    }
+    .spelling-box {
+      background: white;
+      border-radius: 8px;
+      padding: 14px;
+    }
+    .spelling-top { display: flex; gap: 10px; align-items: center; margin-bottom: 12px; }
+    .progress-row { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; margin: 8px 0 12px; }
+    .pill {
+      background: #f1eee5;
+      border-radius: 8px;
+      padding: 8px 10px;
+      font-size: 12px;
+      color: #5c503f;
+    }
+    .answer {
+      border: 2px solid #d8882a;
+      border-radius: 8px;
+      padding: 10px 12px;
+      text-align: center;
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+    .hint {
+      background: #ffd27d;
+      border-radius: 8px;
+      padding: 9px 12px;
+      text-align: center;
+      font-size: 13px;
+      color: #5c3108;
+      margin-bottom: 10px;
+    }
+    .story {
+      background: white;
+      border-radius: 8px;
+      padding: 16px;
+      font-size: 17px;
+      line-height: 1.8;
+      margin: 12px 0 8px;
+    }
+    .questions { display: grid; gap: 8px; }
+    .question {
+      background: white;
+      border-radius: 8px;
+      padding: 12px 14px;
+      font-size: 15px;
+    }
+    .complete {
+      text-align: center;
+      padding: 30px 20px;
+    }
+    .dots { letter-spacing: 5px; color: var(--green); font-size: 18px; margin-bottom: 8px; }
+    .metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 12px; }
+    .metric {
+      background: #f3f0e7;
+      border-radius: 9px;
+      padding: 13px;
+      min-height: 78px;
+    }
+    .metric-label { font-size: 12px; color: var(--muted); }
+    .metric-value { font-size: 22px; color: #326d18; font-weight: 800; line-height: 1.1; }
+    .metric-value.warning { color: #a4620e; }
+    .audit { background: #f3f0e7; border-radius: 9px; padding: 13px; margin-top: 10px; }
+    .audit-row { display: grid; grid-template-columns: 140px 1fr; gap: 8px; align-items: center; margin: 7px 0; font-size: 13px; }
+    .audit-bar { background: white; border-radius: 999px; min-height: 24px; padding: 4px 8px; }
+    .audit .target { background: #dff0cd; color: #244d0e; }
+    .audit .review { background: #e8edf7; color: #30415f; }
+    .audit .heartbar { background: #f7d3e2; color: #7e2447; }
+    .recommendation { background: var(--blue-bg); color: #0b477f; border-radius: 9px; padding: 14px; margin-top: 12px; font-size: 14px; }
+    .parent { background: #f3f0e7; border-radius: 9px; padding: 14px; margin-top: 12px; font-size: 14px; }
+    .adult-meta { background: #fbf6ea; border: 1px dashed #c9a25f; border-radius: 8px; padding: 10px 12px; margin-top: 10px; font-size: 12px; color: #6b4a1e; }
+    @media (max-width: 760px) {
+      .page { padding: 14px; }
+      .topbar { flex-direction: column; gap: 2px; }
+      .time { white-space: normal; }
+      .word-cards { grid-template-columns: 1fr 1fr; }
+      .metrics { grid-template-columns: 1fr 1fr; }
+      .line-card { grid-template-columns: 58px 1fr; }
+      .progress-row { grid-template-columns: 1fr 1fr 1fr; }
+      .audit-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="topbar">
+      <div>
+        <h1>Today’s lesson · Maya</h1>
+        <div class="subtitle">Today: <strong>a_e words</strong></div>
+      </div>
+      <div class="time">About 45 minutes · breaks anytime</div>
+    </header>
+
+    <section class="lesson-card">
+      <div class="label">Part 1 of 8 · Warm-up</div>
+      <h2>Quick warm-up with sounds you already know</h2>
+      <div class="row">
+        <div class="buddy" aria-hidden="true"></div>
+        <div class="bubble">Say each sound out loud as it lights up.</div>
+      </div>
+      <div class="chips" aria-label="review sound cards">
+        <span class="chip">sh</span>
+        <span class="chip">ch</span>
+        <span class="chip">ck</span>
+        <span class="chip">-s</span>
+        <span class="chip">-es</span>
+        <span class="chip review">ng</span>
+        <span class="chip review">ink</span>
+      </div>
+      <div class="note">Green = you’ve got it. Yellow = let’s review.</div>
+    </section>
+
+    <section class="lesson-card">
+      <div class="label">Part 2 of 8 · New thing to learn</div>
+      <h2>Today we’re learning the <u>a_e</u> pattern</h2>
+      <div class="concept">
+        <div class="word-large">m<span class="highlight">a</span>k<span class="silent">e</span></div>
+        <p class="note" style="max-width: 620px; margin: 8px auto 0; color: var(--ink);">In this pattern, the <strong>e</strong> at the end is silent. It helps the <strong>a</strong> say its name.</p>
+      </div>
+      <div class="button-row">
+        <span class="btn primary">▶ Hear it</span>
+        <span class="btn">Show another example</span>
+      </div>
+    </section>
+
+    <section class="lesson-card">
+      <div class="label">Part 3 of 8 · Reading a_e words</div>
+      <h2>Read each line out loud</h2>
+      <div class="word-lines">
+        <div class="line-card"><span class="line-label">Line 1</span><span class="word-list">make · cake · lake · take · bake</span></div>
+        <div class="line-card"><span class="line-label">Line 2</span><span class="word-list">cap · cape · tap · tape · mat · mate</span></div>
+        <div class="line-card"><span class="line-label">Line 3</span><span class="word-list">ran · cane · Sam · same · mad · made</span></div>
+        <div class="line-card"><span class="line-label">Line 4</span><span class="word-list">mave · lape · nake · zame · vade · tave</span></div>
+      </div>
+    </section>
+
+    <section class="lesson-card reteach">
+      <div class="label">Let’s slow down</div>
+      <h2>Let’s try that one again</h2>
+      <div class="mini-concept">
+        <div class="buddy" aria-hidden="true"></div>
+        <div style="max-width: 560px; text-align: left;">You said <strong>“cack.”</strong> Look — in <strong>a_e</strong> words, the silent <strong>e</strong> helps the <strong>a</strong> say its name.</div>
+        <div class="word-large">c<span class="highlight">a</span>k<span class="silent">e</span></div>
+      </div>
+      <div class="button-row"><span class="btn primary">Try again</span></div>
+    </section>
+
+    <section class="lesson-card">
+      <div class="label">Part 4 of 8 · Story words to preview</div>
+      <h2>Heart words and one meaning word</h2>
+      <div class="word-cards">
+        <div class="small-card"><strong>he</strong><span class="note" style="margin: 0;">review heart word</span><span class="tag heart">heart</span></div>
+        <div class="small-card"><strong>to</strong><span class="note" style="margin: 0;">review heart word</span><span class="tag heart">heart</span></div>
+        <div class="small-card"><strong>the / a</strong><span class="note" style="margin: 0;">story words to know</span><span class="tag heart">heart</span></div>
+        <div class="small-card"><strong>lake</strong><span class="note" style="margin: 0;">a big body of water</span><span class="tag">vocabulary</span></div>
+      </div>
+    </section>
+
+    <section class="lesson-card">
+      <div class="label">Part 5 of 8 · Reading sentences</div>
+      <h2>Read each one out loud</h2>
+      <div class="sentences">
+        <div class="sentence">Jake will make a cake.</div>
+        <div class="sentence">Kate sat at the lake.</div>
+        <div class="sentence">Dad ate the cake.</div>
+        <div class="sentence">Jake and Kate had fun at the lake.</div>
+      </div>
+    </section>
+
+    <section class="lesson-card">
+      <div class="label">Part 6 of 8 · Spelling</div>
+      <h2>Spell what you hear</h2>
+      <div class="spelling-box">
+        <div class="spelling-top"><span class="btn primary">▶ Play word</span><span class="note" style="margin:0;">Word 4 of 6 · you can replay once</span></div>
+        <div class="progress-row">
+          <div class="pill">1. cake ✓</div><div class="pill">2. tape ✓</div><div class="pill">3. lake ✓</div><div class="pill">4. make □</div><div class="pill">5. take □</div><div class="pill">6. made □</div>
+        </div>
+        <div class="answer">cak</div>
+        <div class="hint">Almost. What makes the <strong>a</strong> say its name?</div>
+        <div style="text-align:center;"><span class="btn">Try again</span></div>
+      </div>
+    </section>
+
+    <section class="lesson-card">
+      <div class="label">Part 7 of 8 · Reading a story</div>
+      <h2>Read the story out loud</h2>
+      <div class="button-row">
+        <span class="btn btn-stack">Listen first<span class="btn-sub">Buddy reads it to you</span></span>
+        <span class="btn btn-stack">Read on my own<span class="btn-sub">You read it out loud</span></span>
+      </div>
+      <div class="story">
+        <span class="highlight">Jake</span> will <span class="highlight">make</span> a <span class="highlight">cake</span>.<br />
+        He will <span class="highlight">take</span> it to the <span class="highlight">lake</span>.<br />
+        <span class="highlight">Kate</span> sat on a rock with <span class="highlight">Jake</span>.<br />
+        Dad <span class="highlight">ate</span> the <span class="highlight">cake</span> at the <span class="highlight">lake</span>.<br />
+        <span class="highlight">Kate</span> had fun!
+      </div>
+    </section>
+
+    <section class="lesson-card">
+      <div class="label">Part 8 of 8 · Talking about the story</div>
+      <h2>Let’s talk about what you read</h2>
+      <div class="questions">
+        <div class="question">Where did Jake and Kate go?</div>
+        <div class="question">What did Jake bring with him?</div>
+        <div class="question">Tell me about a time you went somewhere fun.</div>
+      </div>
+      <div class="note">You can talk or type — whichever feels easier today.</div>
+    </section>
+
+    <section class="lesson-card complete">
+      <div class="label">Lesson complete</div>
+      <div class="dots">● ● ● ● ● ● ● ●</div>
+      <h2>Nice work today, Maya!</h2>
+      <p>You read <strong>18 out of 20</strong> a_e words and finished the whole story on your own. Your <strong>cake</strong>, <strong>lake</strong>, and <strong>tape</strong> words were your strongest. See you tomorrow!</p>
+    </section>
+
+    <section class="adult-card">
+      <div class="label blue">After the lesson · tutor / parent view</div>
+      <h2 style="margin-bottom: 2px;">Maya · Phase 3 · a_e silent-e lesson</h2>
+      <div class="subtitle">Today’s evidence on this lesson</div>
+
+      <div class="metrics">
+        <div class="metric"><div class="metric-label">a_e word decoding</div><div class="metric-value">18 of 20</div><div class="note" style="margin: 2px 0 0;">2 re-teach moments triggered</div></div>
+        <div class="metric"><div class="metric-label">a_e spelling</div><div class="metric-value warning">4 of 6</div><div class="note" style="margin: 2px 0 0;">+ 1 of 2 sentences</div></div>
+        <div class="metric"><div class="metric-label">Connected text</div><div class="metric-value">91%</div><div class="note" style="margin: 2px 0 0;">independent accuracy (scored read-on-own)</div></div>
+        <div class="metric"><div class="metric-label">Time on task</div><div class="metric-value" style="color:#3d362d;">42 min</div><div class="note" style="margin: 2px 0 0;">No break taken</div></div>
+      </div>
+
+      <div class="audit">
+        <div class="label" style="color:#7b5a37; margin-bottom: 8px;">Story content audit</div>
+        <div class="audit-row"><strong>Target a_e words</strong><div class="audit-bar target">Jake, make, cake, take, lake, Kate, ate</div></div>
+        <div class="audit-row"><strong>Review words</strong><div class="audit-bar review">will, it, sat, on, rock, with, Dad, had, fun</div></div>
+        <div class="audit-row"><strong>Previewed heart words</strong><div class="audit-bar heartbar">he, to, the, a</div></div>
+        <div class="audit-row"><strong>Unpreviewed words</strong><div class="audit-bar">0</div></div>
+      </div>
+
+      <div class="adult-meta">
+        <strong>Design notes (adult-only).</strong> Phase 3 a_e target. Pseudowords in Part 3 Line 4 use a_e only and avoid real-word misspellings. Re-teach card is adaptive — it fires inline only on repeated pattern error in word reading, spelling, or story reading. Yellow highlights in the story mark today’s target pattern. Independent accuracy in the Connected text metric is scored only when the student chose “Read on my own.”
+      </div>
+
+      <div class="recommendation">
+        <strong>Autopilot recommendation</strong><br />
+        Maya is reading a_e words well, including in independent connected text. Spelling is still developing: she omitted silent-e on 3 total dictation attempts across words and sentences. Recommend one more a_e lesson focused on encoding before introducing i_e.
+      </div>
+
+      <div class="parent">
+        <strong>For the parent update</strong><br />
+        Maya read 18 a_e words today and finished a short story on her own. She is learning to remember silent-e when she spells. We’ll do one more a_e lesson before moving to a new pattern.
+      </div>
+    </section>
+  </main>
+</body>
+</html>
