@@ -1,6 +1,7 @@
 import assert from "assert/strict";
 import { runAIFirstLookReview, type FirstLookModelRunner } from "../lib/content/aiFirstLookReviewer";
 import { checklistForArtifact } from "../lib/content/firstLookChecklists";
+import { buildPhase3EntryDiagnosticItems } from "../lib/content/phase3DiagnosticItems";
 
 function deterministicReviewFor(
   checklist: ReturnType<typeof checklistForArtifact>,
@@ -179,7 +180,133 @@ async function main() {
   } as const;
   assert.equal((decodingArtifact.contentForReview.scoringRubricJson as { scoring: string }).scoring, "speech_match");
 
-  console.log("Content v3 first-look wrapper preserves model output exactly, including deterministic persistence failure, dispatches diagnostic checks by strand, enforces kid-view audience boundaries, isolates per-check evidence, and preserves strand scoring modes.");
+  const morphologyTransparentArtifact = {
+    artifactType: "DIAGNOSTIC_ITEM",
+    artifactId: "fixture-morph-transparent",
+    metadata: {
+      strand: "MORPHOLOGY",
+      itemType: "BASE_WORD_ID",
+      phaseBand: 3,
+      morphologyWave: "transparent_suffixes",
+      targetMorpheme: "-ful",
+      skill: "base_word_identification",
+    },
+    contentForReview: {
+      strand: "MORPHOLOGY",
+      itemType: "BASE_WORD_ID",
+      studentPromptJson: { kidPrompt: "Which part is the base word in playful?", choices: ["play", "-ful", "playful"] },
+      expectedResponseJson: {
+        canonical: "play",
+        acceptedSemanticResponses: ["play"],
+        speechTranscriptAliases: [],
+        rejectedResponses: ["-ful", "playful"],
+      },
+      scoringRubricJson: { scoring: "selected_choice" },
+      phaseBand: 3,
+      morphologyWave: "transparent_suffixes",
+      targetMorpheme: "-ful",
+      skill: "base_word_identification",
+    },
+  } as const;
+  const morphologyTransparentWrapped = await runAIFirstLookReview(morphologyTransparentArtifact, {
+    modelRunner: async ({ checklist }) => ({
+      modelName: "fixture-model",
+      metadata: { inferenceMs: 1 },
+      review: {
+        ...deterministicReviewFor(checklist, morphologyTransparentArtifact.artifactId, "DIAGNOSTIC_ITEM"),
+        checks: checklist.items.map((item) => ({
+          requirementId: item.requirementId,
+          result: item.requirementId.startsWith("MORPH_") ? "FAIL" as const : "PASS" as const,
+          severity: item.severity,
+          evidence: "Fixture model over-flagged basic morphology.",
+        })),
+      },
+    }),
+    persistDecision: async () => null,
+    attachDecision: async () => {},
+  });
+  const transparentById = new Map(morphologyTransparentWrapped.checks.map((check) => [check.requirementId, check]));
+  assert.equal(transparentById.get("MORPH_UNAMBIGUOUS_BASE_AFFIX_ROOT")?.result, "PASS");
+  assert.equal(transparentById.get("MORPH_TRANSPARENT_BAND_APPROPRIATE")?.result, "PASS");
+  assert.notEqual(morphologyTransparentWrapped.recommendation, "REJECT");
+
+  const morphologyTheoryDependentWrapped = await runAIFirstLookReview(
+    {
+      ...morphologyTransparentArtifact,
+      artifactId: "fixture-morph-theory-dependent",
+      contentForReview: {
+        ...morphologyTransparentArtifact.contentForReview,
+        studentPromptJson: { kidPrompt: "Which part is the base word in unhappiness?", choices: ["happy", "unhappy", "-ness"] },
+        expectedResponseJson: {
+          canonical: "happy",
+          acceptedSemanticResponses: ["happy"],
+          speechTranscriptAliases: [],
+          rejectedResponses: ["unhappy", "-ness"],
+        },
+      },
+    },
+    {
+      modelRunner: async ({ checklist }) => ({
+        modelName: "fixture-model",
+        metadata: { inferenceMs: 1 },
+        review: deterministicReviewFor(checklist, "fixture-morph-theory-dependent", "DIAGNOSTIC_ITEM"),
+      }),
+      persistDecision: async () => null,
+      attachDecision: async () => {},
+    },
+  );
+  const theoryById = new Map(morphologyTheoryDependentWrapped.checks.map((check) => [check.requirementId, check]));
+  assert.equal(theoryById.get("MORPH_UNAMBIGUOUS_BASE_AFFIX_ROOT")?.result, "FAIL");
+  assert.equal(morphologyTheoryDependentWrapped.recommendation, "FLAG_FOR_HUMAN");
+
+  const fixableBlockerWrapped = await runAIFirstLookReview(fixtureArtifact, {
+    modelRunner: async ({ checklist }) => ({
+      modelName: "fixture-model",
+      metadata: { inferenceMs: 1 },
+      review: {
+        ...deterministicReviewFor(checklist, "fixture-fixable-blocker", "PASSAGE"),
+        checks: checklist.items.map((item, index) => ({
+          requirementId: item.requirementId,
+          result: index === 0 ? "FAIL" as const : "PASS" as const,
+          severity: item.severity,
+          evidence: index === 0 ? "Fixable wording issue an edit can resolve." : item.requirement,
+        })),
+      },
+    }),
+    persistDecision: async () => null,
+    attachDecision: async () => {},
+  });
+  assert.equal(fixableBlockerWrapped.recommendation, "FLAG_FOR_HUMAN");
+
+  const hardRejectWrapped = await runAIFirstLookReview(fixtureArtifact, {
+    modelRunner: async ({ checklist }) => ({
+      modelName: "fixture-model",
+      metadata: { inferenceMs: 1 },
+      review: {
+        ...deterministicReviewFor(checklist, "fixture-hard-reject", "PASSAGE"),
+        checks: checklist.items.map((item, index) => ({
+          requirementId: item.requirementId,
+          result: index === 0 ? "FAIL" as const : "PASS" as const,
+          severity: item.severity,
+          evidence: index === 0 ? "Wrong strand for this diagnostic item." : item.requirement,
+        })),
+      },
+    }),
+    persistDecision: async () => null,
+    attachDecision: async () => {},
+  });
+  assert.equal(hardRejectWrapped.recommendation, "REJECT");
+
+  const morphologySeed = buildPhase3EntryDiagnosticItems().find((item) => item.strand === "MORPHOLOGY" && item.itemType === "BASE_WORD_ID");
+  assert(morphologySeed);
+  assert.equal((morphologySeed.studentPromptJson as { kidPrompt: string }).kidPrompt, "Which part is the base word in playful?");
+  assert.deepEqual((morphologySeed.studentPromptJson as { choices: string[] }).choices, ["play", "-ful", "playful"]);
+  assert.equal(morphologySeed.phaseBand, 3);
+  assert.equal(morphologySeed.morphologyWave, "transparent_suffixes");
+  assert.equal(morphologySeed.targetMorpheme, "-ful");
+  assert.equal(morphologySeed.skill, "base_word_identification");
+
+  console.log("Content v3 first-look wrapper preserves model output exactly, including deterministic persistence failure, dispatches diagnostic checks by strand, enforces kid-view audience boundaries, isolates per-check evidence, preserves strand scoring modes, recalibrates transparent morphology, maps fixable blockers to FLAG_FOR_HUMAN, and renders bound morphemes in BASE_WORD_ID prompts.");
 }
 
 main().catch((error) => {

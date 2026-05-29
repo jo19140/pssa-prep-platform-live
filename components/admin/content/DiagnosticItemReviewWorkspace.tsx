@@ -30,7 +30,7 @@ export function DiagnosticItemReviewWorkspace({ item }: { item: any }) {
     description: check.evidence,
   }));
   const kidViewLintViolations = Array.isArray(firstLook.kidViewLintViolations) ? firstLook.kidViewLintViolations : [];
-  const canReview = item.reviewStatus === "PENDING";
+  const canReview = item.reviewStatus === "PENDING" || item.reviewStatus === "EDITED";
   const hasFirstLookDecision = Boolean(item.firstLookReviewModelDecisionId);
 
   const statusLine = useMemo(() => {
@@ -98,6 +98,10 @@ export function DiagnosticItemReviewWorkspace({ item }: { item: any }) {
             <div className="mt-4 grid gap-4 md:grid-cols-2">
               <Readonly label="Item type" value={item.itemType} />
               <Readonly label="Phase position" value={item.phasePosition?.name || "None"} />
+              <Readonly label="Phase band" value={item.phaseBand == null ? "None" : String(item.phaseBand)} />
+              <Readonly label="Morphology wave" value={item.morphologyWave || "None"} />
+              <Readonly label="Target morpheme" value={item.targetMorpheme || "None"} />
+              <Readonly label="Skill" value={item.skill || "None"} />
             </div>
             <JsonEditor label="Student prompt JSON (kid-visible)" value={studentPromptJson} onChange={setStudentPromptJson} />
             <JsonEditor label="Stimulus JSON (kid-visible/heard)" value={stimulusJson} onChange={setStimulusJson} />
@@ -232,7 +236,7 @@ function Checklist({ title, items, tone }: { title: string; items: Array<string 
               <div>
                 <div className="flex flex-wrap items-center gap-2">
                   <span className="font-mono text-xs font-black text-slate-900">{item.requirementId}</span>
-                  <span className="rounded-full bg-white/70 px-2 py-0.5 text-[10px] font-black text-slate-700">{item.severity}</span>
+                  <span className="rounded-full bg-white/70 px-2 py-0.5 text-[10px] font-black text-slate-700">{checkStatusLabel(item)}</span>
                 </div>
                 <p className="mt-1">{item.evidence}</p>
               </div>
@@ -298,4 +302,20 @@ function recommendationPillClass(recommendation: string) {
   if (recommendation === "REJECT") return "rounded-full bg-rose-100 px-3 py-1.5 text-xs font-black text-rose-800";
   if (recommendation === "APPROVE") return "rounded-full bg-emerald-100 px-3 py-1.5 text-xs font-black text-emerald-800";
   return "rounded-full bg-amber-100 px-3 py-1.5 text-xs font-black text-amber-800";
+}
+
+function checkStatusLabel(check: DisplayCheck) {
+  if (check.result === "PASS") {
+    if (check.severity === "BLOCKER") return "PASS · Blocker-level requirement";
+    if (check.severity === "WARNING") return "PASS · Warning-level requirement";
+    return "PASS · Info-level requirement";
+  }
+  if (check.result === "FAIL") {
+    if (check.severity === "BLOCKER") return "FAIL · Blocker";
+    if (check.severity === "WARNING") return "FAIL · Warning";
+    return "FAIL · Info";
+  }
+  if (check.severity === "BLOCKER") return "NA · Blocker-level requirement";
+  if (check.severity === "WARNING") return "NA · Warning-level requirement";
+  return "NA · Info-level requirement";
 }
