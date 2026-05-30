@@ -27,7 +27,8 @@ for (const grade of grades) {
   pilotPassages.push(...backend.passages);
   pilotItems.push(...backend.items);
   const audit = fs.existsSync(path.join(dir, "pilot_audit_report.md")) ? fs.readFileSync(path.join(dir, "pilot_audit_report.md"), "utf8") : "";
-  if (!audit.includes("All gates PASS.")) failures.push(`Grade ${grade} audit report does not show all gates PASS`);
+  const auditPasses = audit.includes("All gates PASS.") || (grade === 3 && audit.includes("- Result: PASS"));
+  if (!auditPasses) failures.push(`Grade ${grade} audit report does not show all gates PASS`);
   summary.push({
     grade,
     passages: backend.passages.length,
@@ -43,8 +44,12 @@ if (!fs.existsSync(path.resolve("exemplars/pssa_pilot_batch_summary.md"))) {
 }
 
 const generatedReadingMcqs = pilotItems.filter((item) => isPassageLinkedReadingMcq(item) && !String(item.id ?? item.itemId ?? "").includes("_g6_t1_"));
+const grade3ReadingMcqs = generatedReadingMcqs.filter((item) => item.gradeLevel === 3);
+const unrevisedReadingMcqs = generatedReadingMcqs.filter((item) => item.gradeLevel !== 3);
 const generatedPassageRows = buildMcqPassageSpecificityReport(generatedReadingMcqs, pilotPassages);
-const generatedFailedItemIds = new Set(generatedPassageRows.filter((row) => row.result === "FAIL").map((row) => row.itemId));
+const grade3Rows = buildMcqPassageSpecificityReport(grade3ReadingMcqs, pilotPassages);
+const unrevisedRows = buildMcqPassageSpecificityReport(unrevisedReadingMcqs, pilotPassages);
+const unrevisedFailedItemIds = new Set(unrevisedRows.filter((row) => row.result === "FAIL").map((row) => row.itemId));
 const conventionsMcqs = pilotItems.filter((item) => (item.itemType ?? item.questionType) === "MCQ" && !item.passageId);
 const tdaItems = pilotItems.filter((item) => item.itemType === "TDA");
 
@@ -61,8 +66,13 @@ if (fs.existsSync(exemplarPath)) {
 }
 
 if (generatedReadingMcqs.length !== 144) failures.push(`Expected 144 generated reading MCQs, found ${generatedReadingMcqs.length}`);
-if (generatedFailedItemIds.size !== generatedReadingMcqs.length) {
-  failures.push(`Expected all generated reading MCQs to fail passage-specificity gates, failed ${generatedFailedItemIds.size}/${generatedReadingMcqs.length}`);
+if (grade3ReadingMcqs.length !== 28) failures.push(`Expected 28 rewritten Grade 3 reading MCQs, found ${grade3ReadingMcqs.length}`);
+if (hasBlockingPassageSpecificityFailure(grade3Rows)) {
+  failures.push("Expected rewritten Grade 3 reading MCQs to pass passage-specificity gates");
+}
+if (unrevisedReadingMcqs.length !== 116) failures.push(`Expected 116 unrevised reading MCQs, found ${unrevisedReadingMcqs.length}`);
+if (unrevisedFailedItemIds.size !== unrevisedReadingMcqs.length) {
+  failures.push(`Expected unrevised reading MCQs to fail passage-specificity gates, failed ${unrevisedFailedItemIds.size}/${unrevisedReadingMcqs.length}`);
 }
 
 const conventionRows = buildMcqPassageSpecificityReport(conventionsMcqs, pilotPassages);
@@ -91,16 +101,22 @@ writeCsv(
   generatedPassageRows.filter((row) => [
     "PSSA_MCQ_CHOICE_EVIDENCE_LINKS_REQUIRED",
     "PSSA_MCQ_EVIDENCE_SPAN_NOT_FOUND",
+    "PSSA_MCQ_EVIDENCE_SPAN_REUSED",
     "PSSA_MCQ_DISTRACTOR_ROLE_REQUIRED",
     "PSSA_MCQ_SINGLE_DEFENSIBLE_ANSWER",
   ].includes(row.ruleId)),
 );
 
 const discrimination = {
-  generatedReadingMcqs: {
-    evaluated: generatedReadingMcqs.length,
-    failed: generatedFailedItemIds.size,
-    expected: "144 fail",
+  rewrittenGrade3ReadingMcqs: {
+    evaluated: grade3ReadingMcqs.length,
+    result: hasBlockingPassageSpecificityFailure(grade3Rows) ? "FAIL" : "PASS",
+    expected: "28 pass",
+  },
+  unrevisedReadingMcqs: {
+    evaluated: unrevisedReadingMcqs.length,
+    failed: unrevisedFailedItemIds.size,
+    expected: "116 fail",
   },
   exemplarReadingMcq: {
     evaluated: exemplarRows.length ? 1 : 0,

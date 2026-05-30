@@ -74,7 +74,9 @@
             {
               "paragraphIndex": 0,
               "sentenceIndex": 1,
-              "quotedSpan": "Trappers had hunted them for their thick fur until, in some regions, almost none were left."
+              "quotedSpan": "Trappers had hunted them for their thick fur until, in some regions, almost none were left.",
+              "startChar": 78,
+              "endChar": 169
             }
           ],
           "distractorRole": "too_narrow"
@@ -87,7 +89,9 @@
             {
               "paragraphIndex": 3,
               "sentenceIndex": 1,
-              "quotedSpan": "Frogs, fish, insects, and birds gather where the water is calm and steady."
+              "quotedSpan": "Frogs, fish, insects, and birds gather where the water is calm and steady.",
+              "startChar": 1128,
+              "endChar": 1202
             }
           ],
           "distractorRole": "too_narrow"
@@ -100,17 +104,23 @@
             {
               "paragraphIndex": 1,
               "sentenceIndex": 2,
-              "quotedSpan": "Using branches, mud, and stones, it blocks the flow of a stream until the water backs up and forms a pond."
+              "quotedSpan": "Using branches, mud, and stones, it blocks the flow of a stream until the water backs up and forms a pond.",
+              "startChar": 492,
+              "endChar": 598
             },
             {
               "paragraphIndex": 2,
               "sentenceIndex": 3,
-              "quotedSpan": "It holds water in place, lets the soil settle, and releases the water slowly over days or weeks."
+              "quotedSpan": "It holds water in place, lets the soil settle, and releases the water slowly over days or weeks.",
+              "startChar": 895,
+              "endChar": 991
             },
             {
               "paragraphIndex": 3,
               "sentenceIndex": 1,
-              "quotedSpan": "Frogs, fish, insects, and birds gather where the water is calm and steady."
+              "quotedSpan": "Frogs, fish, insects, and birds gather where the water is calm and steady.",
+              "startChar": 1128,
+              "endChar": 1202
             }
           ],
           "distractorRole": null
@@ -123,7 +133,9 @@
             {
               "paragraphIndex": 4,
               "sentenceIndex": 3,
-              "quotedSpan": "The beaver, it turns out, may be one of the most skilled water engineers of all—and it works for free."
+              "quotedSpan": "The beaver, it turns out, may be one of the most skilled water engineers of all—and it works for free.",
+              "startChar": 1813,
+              "endChar": 1915
             }
           ],
           "distractorRole": "wrong_emphasis"

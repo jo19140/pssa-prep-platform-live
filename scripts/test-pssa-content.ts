@@ -92,34 +92,40 @@ const passage = {
   ].join("\n\n"),
 };
 
+function link(paragraphIndex: number, sentenceIndex: number, quotedSpan: string) {
+  const startChar = passage.text.indexOf(quotedSpan);
+  assert.notEqual(startChar, -1);
+  return { paragraphIndex, sentenceIndex, quotedSpan, startChar, endChar: startChar + quotedSpan.length };
+}
+
 function readingItem(overrides: Partial<McqAuditInput> = {}): McqAuditInput {
   const structuredChoicesJson: StructuredChoice[] = [
     {
       text: "Beavers reshape streams by building dams that help water, soil, and wildlife.",
       isCorrect: true,
       rationale: "This central idea matches the passage evidence and the EC skill for determining a central idea from details.",
-      evidenceLinks: [{ paragraphIndex: 0, sentenceIndex: 1, quotedSpan: "Using branches, mud, and stones, a beaver blocks the flow of a stream until the water backs up and forms a pond." }],
+      evidenceLinks: [link(0, 1, "Using branches, mud, and stones, a beaver blocks the flow of a stream until the water backs up and forms a pond.")],
       distractorRole: null,
     },
     {
       text: "Frogs and fish gather near calm beaver pond water.",
       isCorrect: false,
       rationale: "This is a real detail, but it is too narrow to state the whole central idea.",
-      evidenceLinks: [{ paragraphIndex: 2, sentenceIndex: 0, quotedSpan: "Frogs, fish, insects, and birds gather where the water is calm and steady." }],
+      evidenceLinks: [link(2, 0, "Frogs, fish, insects, and birds gather where the water is calm and steady.")],
       distractorRole: "too_narrow",
     },
     {
       text: "Branches and mud matter because they help beavers block stream flow.",
       isCorrect: false,
       rationale: "This detail explains how the dam is made, but it misses the broader effects on water, soil, and wildlife.",
-      evidenceLinks: [{ paragraphIndex: 0, sentenceIndex: 1, quotedSpan: "Using branches, mud, and stones, a beaver blocks the flow of a stream until the water backs up and forms a pond." }],
+      evidenceLinks: [link(0, 1, "Using branches, mud, and stones, a beaver blocks the flow of a stream until the water backs up and forms a pond.")],
       distractorRole: "wrong_section",
     },
     {
       text: "Soil settles because beaver ponds hold water in place.",
       isCorrect: false,
       rationale: "This evidence is accurate, but it names only one result of the beaver dam.",
-      evidenceLinks: [{ paragraphIndex: 1, sentenceIndex: 0, quotedSpan: "It holds water in place, lets the soil settle, and releases the water slowly over days or weeks." }],
+      evidenceLinks: [link(1, 0, "It holds water in place, lets the soil settle, and releases the water slowly over days or weeks.")],
       distractorRole: "too_narrow",
     },
   ];
@@ -178,7 +184,7 @@ assert.equal(buildMcqPassageSpecificityReport([readingItem({
 assert.equal(buildMcqPassageSpecificityReport([readingItem({
   id: "fabricated-span",
   structuredChoicesJson: (readingItem() as any).structuredChoicesJson.map((choice: any, index: number) => index === 0
-    ? { ...choice, evidenceLinks: [{ paragraphIndex: 0, sentenceIndex: 0, quotedSpan: "students planned a garden" }] }
+    ? { ...choice, evidenceLinks: [{ paragraphIndex: 0, sentenceIndex: 0, quotedSpan: "students planned a garden", startChar: 0, endChar: 25 }] }
     : choice),
 })], [passage]).some((row) => row.ruleId === "PSSA_MCQ_EVIDENCE_SPAN_NOT_FOUND" && row.result === "FAIL"), true);
 

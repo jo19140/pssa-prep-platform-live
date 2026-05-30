@@ -27,6 +27,8 @@ export type EvidenceLink = {
   paragraphIndex: number;
   sentenceIndex: number;
   quotedSpan: string;
+  startChar?: number;
+  endChar?: number;
 };
 
 export type DistractorRole =
@@ -52,6 +54,7 @@ export type PassageSpecificityRuleId =
   | "PSSA_MCQ_PASSAGE_SPECIFIC_CHOICES"
   | "PSSA_MCQ_CHOICE_EVIDENCE_LINKS_REQUIRED"
   | "PSSA_MCQ_EVIDENCE_SPAN_NOT_FOUND"
+  | "PSSA_MCQ_EVIDENCE_SPAN_REUSED"
   | "PSSA_MCQ_DISTRACTOR_ROLE_REQUIRED"
   | "PSSA_MCQ_SINGLE_DEFENSIBLE_ANSWER"
   | "PSSA_DUPLICATE_ITEM_WITH_REORDERED_CHOICES";
@@ -321,12 +324,14 @@ function auditPassageLinkedReadingMcq(item: McqAuditInput, passage: PssaPassageA
   } else {
     const missingEvidence: number[] = [];
     const badEvidence: string[] = [];
+    const citedSpans: string[] = [];
     const missingRole: number[] = [];
     structuredChoices.forEach((choice, index) => {
       if (!choice.rationale || !choice.evidenceLinks?.length) missingEvidence.push(index);
       if (choice.isCorrect && choice.distractorRole !== null) missingRole.push(index);
       if (!choice.isCorrect && !validDistractorRoles.has(choice.distractorRole as DistractorRole)) missingRole.push(index);
       for (const link of choice.evidenceLinks ?? []) {
+        citedSpans.push(normalizeQuotesWhitespace(link.quotedSpan));
         const validation = validateEvidenceLink(link, sentenceGrid, passageText);
         if (!validation.valid) badEvidence.push(`choice ${index}: ${validation.reason}`);
       }
@@ -336,6 +341,9 @@ function auditPassageLinkedReadingMcq(item: McqAuditInput, passage: PssaPassageA
     }
     if (badEvidence.length) {
       rows.push(row(item, "PSSA_MCQ_EVIDENCE_SPAN_NOT_FOUND", "FAIL", "BLOCKER", badEvidence.join("; "), [], "Every evidence quotedSpan must appear in the linked passage at the cited paragraph and sentence."));
+    }
+    if (citedSpans.length >= choices.length && new Set(citedSpans).size === 1) {
+      rows.push(row(item, "PSSA_MCQ_EVIDENCE_SPAN_REUSED", "FAIL", "BLOCKER", citedSpans[0], [0, 1, 2, 3], "Choices cite the same single span instead of linking to the detail that makes each choice correct or wrong."));
     }
     if (missingRole.length) {
       rows.push(row(item, "PSSA_MCQ_DISTRACTOR_ROLE_REQUIRED", "FAIL", "BLOCKER", "invalid distractorRole/isCorrect pairing", missingRole, "Distractors need a valid role; the correct choice must have distractorRole null."));
@@ -454,6 +462,9 @@ function validateEvidenceLink(link: EvidenceLink, sentenceGrid: string[][], pass
   if (!Number.isInteger(link.paragraphIndex) || !Number.isInteger(link.sentenceIndex)) {
     return { valid: false, reason: "paragraphIndex and sentenceIndex must be integers" };
   }
+  if (!Number.isInteger(link.startChar) || !Number.isInteger(link.endChar)) {
+    return { valid: false, reason: "startChar and endChar must be integers" };
+  }
   const sentence = sentenceGrid[link.paragraphIndex]?.[link.sentenceIndex];
   if (!sentence) return { valid: false, reason: `invalid paragraph/sentence index ${link.paragraphIndex}/${link.sentenceIndex}` };
   if (!containsNormalized(sentence, link.quotedSpan)) {
@@ -461,6 +472,9 @@ function validateEvidenceLink(link: EvidenceLink, sentenceGrid: string[][], pass
   }
   if (!containsNormalized(passageText, link.quotedSpan)) {
     return { valid: false, reason: `quotedSpan not found in passage: ${link.quotedSpan}` };
+  }
+  if (passageText.slice(link.startChar, link.endChar) !== link.quotedSpan) {
+    return { valid: false, reason: `char offsets do not point to quotedSpan: ${link.quotedSpan}` };
   }
   return { valid: true, reason: "" };
 }

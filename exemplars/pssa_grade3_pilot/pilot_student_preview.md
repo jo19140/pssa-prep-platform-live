@@ -1,8 +1,6 @@
-# PSSA Grade 3 ELA Pilot — Student Preview
+# PSSA Grade 3 Pilot Student Preview
 
-> Student-facing view only. No answers, rationales, or rubrics appear in this file.
-
-## Passage: Creek Watchers 3
+## Creek Watchers 3
 
 The sixth-period research team began with a question that sounded simple: how could students test stream water after a heavy rain? Their teacher asked them to avoid guesses and collect details that another group could check. By Monday afternoon, the students had notebooks, a shared chart, and a route for gathering observations around the building.
 
@@ -14,61 +12,55 @@ Their final proposal was modest but specific. It named the problem, explained th
 
 By the end of the week, the students understood that research is not a stack of facts. It is a way of noticing relationships. A useful plan grows when people connect observations, listen to others, and revise an idea before asking the community to trust it. Their teacher saved the chart so the next class could test whether the proposed changes actually worked. The team also wrote a short reflection explaining which evidence felt reliable and which questions still needed another careful look. That reflection helped them separate a useful recommendation from a quick opinion, and it gave the next group a fair place to begin.
 
-### 1. Multiple Choice
+### pssa_item_g3_reading_1
+Why did the team in "Creek Watchers 3" collect details that another group could check?
 
-Which statement best addresses this reading focus in "Creek Watchers 3": Ask and answer questions to demonstrate understanding of a text, referring explicitly to the text as the basis for the answers?
+A. The team needed checkable details before making a stream water plan.
+B. The shared chart meant the stream water answer had already been proven.
+C. The interviews mattered because the team had stopped comparing stream water observations.
+D. The short reflection was the first step in solving the stream water problem.
 
-A. The passage connects science/nature details with a careful plan that improves.
-B. The opening detail gives useful background but does not explain the full passage focus clearly enough.
-C. One middle detail is useful evidence, yet it covers a smaller part of the passage's idea.
-D. The ending reflection is memorable, though it shifts attention from the main question being asked.
+### pssa_item_g3_reading_6
+Which sentence from "Creek Watchers 3" shows that the plan still needed to be checked later?
 
-### 6. Multiple Choice
+A. The stream water proposal was modest and specific, but that does not show the later test.
+B. The teacher saved the chart so another class could test the proposed changes.
+C. The scattered stream water notes show an early problem, not a later check of the plan.
+D. The team still had stream water questions, but the saved chart names who would test changes.
 
-Which answer best applies this vocabulary focus in "Creek Watchers 3": Determine or clarify the meaning of unknown and multiple-meaning words and phrases based on grade 3 reading and content, choosing flexibly from a range of strategies (context clues, affixes, root words)?
+### pssa_item_g3_reading_11
+How did the final proposal in "Creek Watchers 3" show careful planning?
 
-A. The opening detail gives useful background but does not explain the full passage focus clearly enough.
-B. The passage connects science/nature details with a careful plan that improves.
-C. One middle detail is useful evidence, yet it covers a smaller part of the passage's idea.
-D. The ending reflection is memorable, though it shifts attention from the main question being asked.
+A. The notebooks and route started the stream water work, but they do not describe the final proposal.
+B. The route around the building helped stream water gathering, not the two tested changes.
+C. It named the problem, explained evidence, and described two changes to test.
+D. The stream water research was not a stack of facts, but that lesson comes after the proposal.
 
-### 11. Multiple Choice
+### pssa_item_g3_reading_16
+What helped the team organize its scattered notes in "Creek Watchers 3"?
 
-How does "Creek Watchers 3" develop this craft focus: Explain the point of view from which a text is written?
+A. The notebooks and chart solved the stream water problem before sorting began.
+B. Talking with people helped the stream water research, but it did not organize the scattered notes.
+C. The final proposal came before the team sorted its stream water notes.
+D. Sorting by place, time, and cause helped the team understand the stream water problem.
 
-A. The opening detail gives useful background but does not explain the full passage focus clearly enough.
-B. One middle detail is useful evidence, yet it covers a smaller part of the passage's idea.
-C. The passage connects science/nature details with a careful plan that improves.
-D. The ending reflection is memorable, though it shifts attention from the main question being asked.
+### pssa_item_g3_reading_21
+What is the most important reason the short reflection helped the next group in "Creek Watchers 3"?
 
-### 16. Multiple Choice
+A. It separated a useful recommendation from a quick opinion for the next group.
+B. The notebooks and chart solved the stream water problem before sorting began.
+C. Talking with people helped the stream water research, but it did not organize the scattered notes.
+D. The two stream water changes were part of the proposal, but they do not explain why the next group had a fair start.
 
-Which answer best applies this vocabulary focus in "Creek Watchers 3": Determine or clarify the meaning of unknown and multiple-meaning words and phrases based on grade 3 reading and content, choosing flexibly from a range of strategies (context clues, affixes, academic/domain words, root words)?
+### pssa_item_g3_reading_26
+What lesson about research does "Creek Watchers 3" develop near the end?
 
-A. The opening detail gives useful background but does not explain the full passage focus clearly enough.
-B. One middle detail is useful evidence, yet it covers a smaller part of the passage's idea.
-C. The ending reflection is memorable, though it shifts attention from the main question being asked.
-D. The passage connects science/nature details with a careful plan that improves.
+A. A quick stream water opinion was separated from the recommendation, but that is one result of reflection.
+B. Research means connecting observations, listening, and revising before asking for trust.
+C. Checking the same stream water location showed care, but it leaves out listening and revising.
+D. Spending little money was part of the stream water proposal, not the whole lesson about research.
 
-### 21. Multiple Choice
-
-How does "Creek Watchers 3" develop this craft focus: Explain the point of view from which a story is narrated, including the difference between first- and third-person narrations?
-
-A. The passage connects science/nature details with a careful plan that improves.
-B. The opening detail gives useful background but does not explain the full passage focus clearly enough.
-C. One middle detail is useful evidence, yet it covers a smaller part of the passage's idea.
-D. The ending reflection is memorable, though it shifts attention from the main question being asked.
-
-### 26. Multiple Choice
-
-Which statement best addresses this reading focus in "Creek Watchers 3": Determine the main idea of a text; recount the key details and explain how they support the main idea?
-
-A. The opening detail gives useful background but does not explain the full passage focus clearly enough.
-B. The passage connects science/nature details with a careful plan that improves.
-C. One middle detail is useful evidence, yet it covers a smaller part of the passage's idea.
-D. The ending reflection is memorable, though it shifts attention from the main question being asked.
-
-## Passage: The Map in the Station 3
+## The Map in the Station 3
 
 The sixth-period research team began with a question that sounded simple: how could neighbors preserve an old transit map? Their teacher asked them to avoid guesses and collect details that another group could check. By Monday afternoon, the students had notebooks, a shared chart, and a route for gathering observations around the building.
 
@@ -80,61 +72,55 @@ Their final proposal was modest but specific. It named the problem, explained th
 
 By the end of the week, the students understood that research is not a stack of facts. It is a way of noticing relationships. A useful plan grows when people connect observations, listen to others, and revise an idea before asking the community to trust it. Their teacher saved the chart so the next class could test whether the proposed changes actually worked. The team also wrote a short reflection explaining which evidence felt reliable and which questions still needed another careful look. That reflection helped them separate a useful recommendation from a quick opinion, and it gave the next group a fair place to begin.
 
-### 2. Multiple Choice
+### pssa_item_g3_reading_2
+What helped the team organize its scattered notes in "The Map in the Station 3"?
 
-Which statement best addresses this reading focus in "The Map in the Station 3": Recount poems, dramas, or stories, including fables, folktales, and myths from diverse cultures; determine the central message, lesson, or moral and explain how it is conveyed through key details in the text?
+A. The notebooks and chart solved the transit map problem before sorting began.
+B. Sorting by place, time, and cause helped the team understand the transit map problem.
+C. Talking with people helped the transit map research, but it did not organize the scattered notes.
+D. The final proposal came before the team sorted its transit map notes.
 
-A. The opening detail gives useful background but does not explain the full passage focus clearly enough.
-B. The passage connects history/social studies details with a careful plan that improves.
-C. One middle detail is useful evidence, yet it covers a smaller part of the passage's idea.
-D. The ending reflection is memorable, though it shifts attention from the main question being asked.
+### pssa_item_g3_reading_7
+What is the most important reason the short reflection helped the next group in "The Map in the Station 3"?
 
-### 7. Multiple Choice
+A. The notebooks and chart solved the transit map problem before sorting began.
+B. Talking with people helped the transit map research, but it did not organize the scattered notes.
+C. It separated a useful recommendation from a quick opinion for the next group.
+D. The two transit map changes were part of the proposal, but they do not explain why the next group had a fair start.
 
-Which answer best applies this vocabulary focus in "The Map in the Station 3": Demonstrate understanding of word relationships and nuances in word meanings (literal vs. nonliteral meaning; shades of meaning among related words)?
+### pssa_item_g3_reading_12
+What lesson about research does "The Map in the Station 3" develop near the end?
 
-A. The opening detail gives useful background but does not explain the full passage focus clearly enough.
-B. One middle detail is useful evidence, yet it covers a smaller part of the passage's idea.
-C. The passage connects history/social studies details with a careful plan that improves.
-D. The ending reflection is memorable, though it shifts attention from the main question being asked.
+A. A quick transit map opinion was separated from the recommendation, but that is one result of reflection.
+B. Checking the same transit map location showed care, but it leaves out listening and revising.
+C. Spending little money was part of the transit map proposal, not the whole lesson about research.
+D. Research means connecting observations, listening, and revising before asking for trust.
 
-### 12. Multiple Choice
+### pssa_item_g3_reading_17
+Which detail best supports that the team used more than one kind of evidence in "The Map in the Station 3"?
 
-How does "The Map in the Station 3" develop this craft focus: Use text features (e.g., headings, graphics, charts) and search tools (e.g., key words, sidebars, hyperlinks) to efficiently locate information relevant to a given topic?
+A. The team compared repeated observations and talked with people who used the space.
+B. Changes in the town gave one useful clue, but it was not the whole evidence set.
+C. The transit map proposal avoided a perfect fix, but that does not show several kinds of evidence.
+D. The saved transit map chart helped the next class, but it came after the evidence was gathered.
 
-A. The opening detail gives useful background but does not explain the full passage focus clearly enough.
-B. One middle detail is useful evidence, yet it covers a smaller part of the passage's idea.
-C. The ending reflection is memorable, though it shifts attention from the main question being asked.
-D. The passage connects history/social studies details with a careful plan that improves.
+### pssa_item_g3_reading_22
+Why did the team in "The Map in the Station 3" collect details that another group could check?
 
-### 17. Multiple Choice
+A. The shared chart meant the transit map answer had already been proven.
+B. The team needed checkable details before making a transit map plan.
+C. The interviews mattered because the team had stopped comparing transit map observations.
+D. The short reflection was the first step in solving the transit map problem.
 
-Which answer best applies this vocabulary focus in "The Map in the Station 3": Demonstrate understanding of word relationships and nuances in word meanings (literal vs. nonliteral meaning; shades of meaning among related words)?
+### pssa_item_g3_reading_27
+Which sentence from "The Map in the Station 3" shows that the plan still needed to be checked later?
 
-A. The passage connects history/social studies details with a careful plan that improves.
-B. The opening detail gives useful background but does not explain the full passage focus clearly enough.
-C. One middle detail is useful evidence, yet it covers a smaller part of the passage's idea.
-D. The ending reflection is memorable, though it shifts attention from the main question being asked.
+A. The transit map proposal was modest and specific, but that does not show the later test.
+B. The scattered transit map notes show an early problem, not a later check of the plan.
+C. The teacher saved the chart so another class could test the proposed changes.
+D. The team still had transit map questions, but the saved chart names who would test changes.
 
-### 22. Multiple Choice
-
-How does "The Map in the Station 3" develop this craft focus: Compare and contrast the themes, settings, and plots of stories written by the same author about the same or similar characters (e.g., in books from a series)?
-
-A. The opening detail gives useful background but does not explain the full passage focus clearly enough.
-B. The passage connects history/social studies details with a careful plan that improves.
-C. One middle detail is useful evidence, yet it covers a smaller part of the passage's idea.
-D. The ending reflection is memorable, though it shifts attention from the main question being asked.
-
-### 27. Multiple Choice
-
-Which statement best addresses this reading focus in "The Map in the Station 3": Describe the relationship between a series of historical events, scientific ideas or concepts, or steps in technical procedures in a text, using language that pertains to time, sequence, and cause/effect?
-
-A. The opening detail gives useful background but does not explain the full passage focus clearly enough.
-B. One middle detail is useful evidence, yet it covers a smaller part of the passage's idea.
-C. The passage connects history/social studies details with a careful plan that improves.
-D. The ending reflection is memorable, though it shifts attention from the main question being asked.
-
-## Passage: A Cooler Lunch Line 3
+## A Cooler Lunch Line 3
 
 The sixth-period research team began with a question that sounded simple: how could students redesign a crowded lunch routine? Their teacher asked them to avoid guesses and collect details that another group could check. By Monday afternoon, the students had notebooks, a shared chart, and a route for gathering observations around the building.
 
@@ -146,61 +132,55 @@ Their final proposal was modest but specific. It named the problem, explained th
 
 By the end of the week, the students understood that research is not a stack of facts. It is a way of noticing relationships. A useful plan grows when people connect observations, listen to others, and revise an idea before asking the community to trust it. Their teacher saved the chart so the next class could test whether the proposed changes actually worked. The team also wrote a short reflection explaining which evidence felt reliable and which questions still needed another careful look. That reflection helped them separate a useful recommendation from a quick opinion, and it gave the next group a fair place to begin.
 
-### 3. Multiple Choice
+### pssa_item_g3_reading_3
+Which detail best supports that the team used more than one kind of evidence in "A Cooler Lunch Line 3"?
 
-Which statement best addresses this reading focus in "A Cooler Lunch Line 3": Describe characters in a story (e.g., their traits, motivations, feelings) and explain how their actions contribute to the sequence of events?
+A. Shared lunch responsibilities gave one useful clue, but it was not the whole evidence set.
+B. The lunch routine proposal avoided a perfect fix, but that does not show several kinds of evidence.
+C. The team compared repeated observations and talked with people who used the space.
+D. The saved lunch routine chart helped the next class, but it came after the evidence was gathered.
 
-A. The opening detail gives useful background but does not explain the full passage focus clearly enough.
-B. One middle detail is useful evidence, yet it covers a smaller part of the passage's idea.
-C. The passage connects school/community details with a careful plan that improves.
-D. The ending reflection is memorable, though it shifts attention from the main question being asked.
+### pssa_item_g3_reading_8
+Why did the team in "A Cooler Lunch Line 3" collect details that another group could check?
 
-### 8. Multiple Choice
+A. The shared chart meant the lunch routine answer had already been proven.
+B. The interviews mattered because the team had stopped comparing lunch routine observations.
+C. The short reflection was the first step in solving the lunch routine problem.
+D. The team needed checkable details before making a lunch routine plan.
 
-Which statement best addresses this reading focus in "A Cooler Lunch Line 3": Answer questions to demonstrate understanding of a text, referring explicitly to the text as the basis for the answers?
+### pssa_item_g3_reading_13
+Which sentence from "A Cooler Lunch Line 3" shows that the plan still needed to be checked later?
 
-A. The opening detail gives useful background but does not explain the full passage focus clearly enough.
-B. One middle detail is useful evidence, yet it covers a smaller part of the passage's idea.
-C. The ending reflection is memorable, though it shifts attention from the main question being asked.
-D. The passage connects school/community details with a careful plan that improves.
+A. The teacher saved the chart so another class could test the proposed changes.
+B. The lunch routine proposal was modest and specific, but that does not show the later test.
+C. The scattered lunch routine notes show an early problem, not a later check of the plan.
+D. The team still had lunch routine questions, but the saved chart names who would test changes.
 
-### 13. Multiple Choice
+### pssa_item_g3_reading_18
+How did the final proposal in "A Cooler Lunch Line 3" show careful planning?
 
-How does "A Cooler Lunch Line 3" develop this craft focus: Describe the logical connection between particular sentences and paragraphs to support specific points in a text (e.g., comparison, cause/effect, first/second/third in a sequence)?
+A. The notebooks and route started the lunch routine work, but they do not describe the final proposal.
+B. It named the problem, explained evidence, and described two changes to test.
+C. The route around the building helped lunch routine gathering, not the two tested changes.
+D. The lunch routine research was not a stack of facts, but that lesson comes after the proposal.
 
-A. The passage connects school/community details with a careful plan that improves.
-B. The opening detail gives useful background but does not explain the full passage focus clearly enough.
-C. One middle detail is useful evidence, yet it covers a smaller part of the passage's idea.
-D. The ending reflection is memorable, though it shifts attention from the main question being asked.
+### pssa_item_g3_reading_23
+What helped the team organize its scattered notes in "A Cooler Lunch Line 3"?
 
-### 18. Multiple Choice
+A. The notebooks and chart solved the lunch routine problem before sorting began.
+B. Talking with people helped the lunch routine research, but it did not organize the scattered notes.
+C. Sorting by place, time, and cause helped the team understand the lunch routine problem.
+D. The final proposal came before the team sorted its lunch routine notes.
 
-Which statement best addresses this reading focus in "A Cooler Lunch Line 3": Ask and answer questions to demonstrate understanding of a text, referring explicitly to the text as the basis for the answers?
+### pssa_item_g3_reading_28
+What is the most important reason the short reflection helped the next group in "A Cooler Lunch Line 3"?
 
-A. The opening detail gives useful background but does not explain the full passage focus clearly enough.
-B. The passage connects school/community details with a careful plan that improves.
-C. One middle detail is useful evidence, yet it covers a smaller part of the passage's idea.
-D. The ending reflection is memorable, though it shifts attention from the main question being asked.
+A. The notebooks and chart solved the lunch routine problem before sorting began.
+B. Talking with people helped the lunch routine research, but it did not organize the scattered notes.
+C. The two lunch routine changes were part of the proposal, but they do not explain why the next group had a fair start.
+D. It separated a useful recommendation from a quick opinion for the next group.
 
-### 23. Multiple Choice
-
-Which answer best applies this vocabulary focus in "A Cooler Lunch Line 3": Determine or clarify the meaning of unknown and multiple-meaning words and phrases based on grade 3 reading and content, choosing flexibly from a range of strategies (context clues, affixes, root words)?
-
-A. The opening detail gives useful background but does not explain the full passage focus clearly enough.
-B. One middle detail is useful evidence, yet it covers a smaller part of the passage's idea.
-C. The passage connects school/community details with a careful plan that improves.
-D. The ending reflection is memorable, though it shifts attention from the main question being asked.
-
-### 28. Multiple Choice
-
-How does "A Cooler Lunch Line 3" develop this craft focus: Explain the point of view from which a text is written?
-
-A. The opening detail gives useful background but does not explain the full passage focus clearly enough.
-B. One middle detail is useful evidence, yet it covers a smaller part of the passage's idea.
-C. The ending reflection is memorable, though it shifts attention from the main question being asked.
-D. The passage connects school/community details with a careful plan that improves.
-
-## Passage: The Mural Plan 3
+## The Mural Plan 3
 
 The sixth-period research team began with a question that sounded simple: how could a class plans a hallway mural from local stories? Their teacher asked them to avoid guesses and collect details that another group could check. By Monday afternoon, the students had notebooks, a shared chart, and a route for gathering observations around the building.
 
@@ -212,52 +192,47 @@ Their final proposal was modest but specific. It named the problem, explained th
 
 By the end of the week, the students understood that research is not a stack of facts. It is a way of noticing relationships. A useful plan grows when people connect observations, listen to others, and revise an idea before asking the community to trust it. Their teacher saved the chart so the next class could test whether the proposed changes actually worked. The team also wrote a short reflection explaining which evidence felt reliable and which questions still needed another careful look. That reflection helped them separate a useful recommendation from a quick opinion, and it gave the next group a fair place to begin.
 
-### 4. Multiple Choice
+### pssa_item_g3_reading_4
+How did the final proposal in "The Mural Plan 3" show careful planning?
 
-How does "The Mural Plan 3" develop this craft focus: Explain the point of view from which a story is narrated, including the difference between first- and third-person narrations?
+A. The notebooks and route started the hallway mural work, but they do not describe the final proposal.
+B. The route around the building helped hallway mural gathering, not the two tested changes.
+C. The hallway mural research was not a stack of facts, but that lesson comes after the proposal.
+D. It named the problem, explained evidence, and described two changes to test.
 
-A. The opening detail gives useful background but does not explain the full passage focus clearly enough.
-B. One middle detail is useful evidence, yet it covers a smaller part of the passage's idea.
-C. The ending reflection is memorable, though it shifts attention from the main question being asked.
-D. The passage connects arts/culture details with a careful plan that improves.
+### pssa_item_g3_reading_9
+What helped the team organize its scattered notes in "The Mural Plan 3"?
 
-### 9. Multiple Choice
+A. Sorting by place, time, and cause helped the team understand the hallway mural problem.
+B. The notebooks and chart solved the hallway mural problem before sorting began.
+C. Talking with people helped the hallway mural research, but it did not organize the scattered notes.
+D. The final proposal came before the team sorted its hallway mural notes.
 
-Which statement best addresses this reading focus in "The Mural Plan 3": Determine the main idea of a text; recount the key details and explain how they support the main idea?
+### pssa_item_g3_reading_14
+What is the most important reason the short reflection helped the next group in "The Mural Plan 3"?
 
-A. The passage connects arts/culture details with a careful plan that improves.
-B. The opening detail gives useful background but does not explain the full passage focus clearly enough.
-C. One middle detail is useful evidence, yet it covers a smaller part of the passage's idea.
-D. The ending reflection is memorable, though it shifts attention from the main question being asked.
+A. The notebooks and chart solved the hallway mural problem before sorting began.
+B. It separated a useful recommendation from a quick opinion for the next group.
+C. Talking with people helped the hallway mural research, but it did not organize the scattered notes.
+D. The two hallway mural changes were part of the proposal, but they do not explain why the next group had a fair start.
 
-### 14. Multiple Choice
+### pssa_item_g3_reading_19
+What lesson about research does "The Mural Plan 3" develop near the end?
 
-How does "The Mural Plan 3" develop this craft focus: Compare and contrast the most important points and key details presented in two texts on the same topic?
+A. A quick hallway mural opinion was separated from the recommendation, but that is one result of reflection.
+B. Checking the same hallway mural location showed care, but it leaves out listening and revising.
+C. Research means connecting observations, listening, and revising before asking for trust.
+D. Spending little money was part of the hallway mural proposal, not the whole lesson about research.
 
-A. The opening detail gives useful background but does not explain the full passage focus clearly enough.
-B. The passage connects arts/culture details with a careful plan that improves.
-C. One middle detail is useful evidence, yet it covers a smaller part of the passage's idea.
-D. The ending reflection is memorable, though it shifts attention from the main question being asked.
+### pssa_item_g3_reading_24
+Which detail best supports that the team used more than one kind of evidence in "The Mural Plan 3"?
 
-### 19. Multiple Choice
+A. Community symbols gave one useful clue, but it was not the whole evidence set.
+B. The hallway mural proposal avoided a perfect fix, but that does not show several kinds of evidence.
+C. The saved hallway mural chart helped the next class, but it came after the evidence was gathered.
+D. The team compared repeated observations and talked with people who used the space.
 
-Which statement best addresses this reading focus in "The Mural Plan 3": Recount poems, dramas, or stories, including fables, folktales, and myths from diverse cultures; determine the central message, lesson, or moral and explain how it is conveyed through key details in the text?
-
-A. The opening detail gives useful background but does not explain the full passage focus clearly enough.
-B. One middle detail is useful evidence, yet it covers a smaller part of the passage's idea.
-C. The passage connects arts/culture details with a careful plan that improves.
-D. The ending reflection is memorable, though it shifts attention from the main question being asked.
-
-### 24. Multiple Choice
-
-Which answer best applies this vocabulary focus in "The Mural Plan 3": Demonstrate understanding of word relationships and nuances in word meanings (literal vs. nonliteral meaning; shades of meaning among related words)?
-
-A. The opening detail gives useful background but does not explain the full passage focus clearly enough.
-B. One middle detail is useful evidence, yet it covers a smaller part of the passage's idea.
-C. The ending reflection is memorable, though it shifts attention from the main question being asked.
-D. The passage connects arts/culture details with a careful plan that improves.
-
-## Passage: The Cart That Would Not Turn 3
+## The Cart That Would Not Turn 3
 
 The sixth-period research team began with a question that sounded simple: how could a team improves a supply cart? Their teacher asked them to avoid guesses and collect details that another group could check. By Monday afternoon, the students had notebooks, a shared chart, and a route for gathering observations around the building.
 
@@ -269,55 +244,49 @@ Their final proposal was modest but specific. It named the problem, explained th
 
 By the end of the week, the students understood that research is not a stack of facts. It is a way of noticing relationships. A useful plan grows when people connect observations, listen to others, and revise an idea before asking the community to trust it. Their teacher saved the chart so the next class could test whether the proposed changes actually worked. The team also wrote a short reflection explaining which evidence felt reliable and which questions still needed another careful look. That reflection helped them separate a useful recommendation from a quick opinion, and it gave the next group a fair place to begin.
 
-### 5. Multiple Choice
+### pssa_item_g3_reading_5
+What lesson about research does "The Cart That Would Not Turn 3" develop near the end?
 
-How does "The Cart That Would Not Turn 3" develop this craft focus: Compare and contrast the themes, settings, and plots of stories written by the same author about the same or similar characters (e.g., in books from a series)?
+A. Research means connecting observations, listening, and revising before asking for trust.
+B. A quick supply cart opinion was separated from the recommendation, but that is one result of reflection.
+C. Checking the same supply cart location showed care, but it leaves out listening and revising.
+D. Spending little money was part of the supply cart proposal, not the whole lesson about research.
 
-A. The passage connects everyday problem-solving details with a careful plan that improves.
-B. The opening detail gives useful background but does not explain the full passage focus clearly enough.
-C. One middle detail is useful evidence, yet it covers a smaller part of the passage's idea.
-D. The ending reflection is memorable, though it shifts attention from the main question being asked.
+### pssa_item_g3_reading_10
+Which detail best supports that the team used more than one kind of evidence in "The Cart That Would Not Turn 3"?
 
-### 10. Multiple Choice
+A. Practical cart adjustments gave one useful clue, but it was not the whole evidence set.
+B. The team compared repeated observations and talked with people who used the space.
+C. The supply cart proposal avoided a perfect fix, but that does not show several kinds of evidence.
+D. The saved supply cart chart helped the next class, but it came after the evidence was gathered.
 
-Which statement best addresses this reading focus in "The Cart That Would Not Turn 3": Describe the relationship between a series of historical events, scientific ideas or concepts, or steps in technical procedures in a text, using language that pertains to time, sequence, and cause/effect?
+### pssa_item_g3_reading_15
+Why did the team in "The Cart That Would Not Turn 3" collect details that another group could check?
 
-A. The opening detail gives useful background but does not explain the full passage focus clearly enough.
-B. The passage connects everyday problem-solving details with a careful plan that improves.
-C. One middle detail is useful evidence, yet it covers a smaller part of the passage's idea.
-D. The ending reflection is memorable, though it shifts attention from the main question being asked.
+A. The shared chart meant the supply cart answer had already been proven.
+B. The interviews mattered because the team had stopped comparing supply cart observations.
+C. The team needed checkable details before making a supply cart plan.
+D. The short reflection was the first step in solving the supply cart problem.
 
-### 15. Multiple Choice
+### pssa_item_g3_reading_20
+Which sentence from "The Cart That Would Not Turn 3" shows that the plan still needed to be checked later?
 
-How does "The Cart That Would Not Turn 3" develop this craft focus: Use information gained from illustrations, maps, photographs, and the words in a text to demonstrate understanding of the text (e.g., where, when, why, and how key events occur)?
+A. The supply cart proposal was modest and specific, but that does not show the later test.
+B. The scattered supply cart notes show an early problem, not a later check of the plan.
+C. The team still had supply cart questions, but the saved chart names who would test changes.
+D. The teacher saved the chart so another class could test the proposed changes.
 
-A. The opening detail gives useful background but does not explain the full passage focus clearly enough.
-B. One middle detail is useful evidence, yet it covers a smaller part of the passage's idea.
-C. The passage connects everyday problem-solving details with a careful plan that improves.
-D. The ending reflection is memorable, though it shifts attention from the main question being asked.
+### pssa_item_g3_reading_25
+How did the final proposal in "The Cart That Would Not Turn 3" show careful planning?
 
-### 20. Multiple Choice
+A. It named the problem, explained evidence, and described two changes to test.
+B. The notebooks and route started the supply cart work, but they do not describe the final proposal.
+C. The route around the building helped supply cart gathering, not the two tested changes.
+D. The supply cart research was not a stack of facts, but that lesson comes after the proposal.
 
-Which statement best addresses this reading focus in "The Cart That Would Not Turn 3": Describe characters in a story (e.g., their traits, motivations, feelings) and explain how their actions contribute to the sequence of events?
+## Conventions
 
-A. The opening detail gives useful background but does not explain the full passage focus clearly enough.
-B. One middle detail is useful evidence, yet it covers a smaller part of the passage's idea.
-C. The ending reflection is memorable, though it shifts attention from the main question being asked.
-D. The passage connects everyday problem-solving details with a careful plan that improves.
-
-### 25. Multiple Choice
-
-Which statement best addresses this reading focus in "The Cart That Would Not Turn 3": Answer questions to demonstrate understanding of a text, referring explicitly to the text as the basis for the answers?
-
-A. The passage connects everyday problem-solving details with a careful plan that improves.
-B. The opening detail gives useful background but does not explain the full passage focus clearly enough.
-C. One middle detail is useful evidence, yet it covers a smaller part of the passage's idea.
-D. The ending reflection is memorable, though it shifts attention from the main question being asked.
-
-## Standalone Conventions
-
-### 29. Multiple Choice
-
+### pssa_item_g3_conv_29
 Which sentence best demonstrates this convention: Explain the function of nouns, pronouns, verbs, adjectives, and adverbs in general and their functions in particular sentences.
 
 A. The student revised the report carefully before the grade 3 conference began.
@@ -325,8 +294,7 @@ B. The student revised the report careful before the grade 3 conference began ye
 C. The student revise the report carefully before the grade 3 conference began yesterday.
 D. The student revised the report carefully before grade 3 conference began yesterday.
 
-### 30. Multiple Choice
-
+### pssa_item_g3_conv_30
 Which sentence best demonstrates this convention: Form and use regular and irregular plural nouns.
 
 A. The student revised the report careful before the grade 3 conference began yesterday.
@@ -334,8 +302,7 @@ B. The student revised the report carefully before the grade 3 conference began.
 C. The student revise the report carefully before the grade 3 conference began yesterday.
 D. The student revised the report carefully before grade 3 conference began yesterday.
 
-### 31. Multiple Choice
-
+### pssa_item_g3_conv_31
 Which sentence best demonstrates this convention: Use abstract nouns (e.g., childhood).
 
 A. The student revised the report careful before the grade 3 conference began yesterday.
@@ -343,8 +310,7 @@ B. The student revise the report carefully before the grade 3 conference began y
 C. The student revised the report carefully before the grade 3 conference began.
 D. The student revised the report carefully before grade 3 conference began yesterday.
 
-### 32. Multiple Choice
-
+### pssa_item_g3_conv_32
 Which sentence best demonstrates this convention: Form and use regular and irregular verbs.
 
 A. The student revised the report careful before the grade 3 conference began yesterday.
@@ -352,8 +318,7 @@ B. The student revise the report carefully before the grade 3 conference began y
 C. The student revised the report carefully before grade 3 conference began yesterday.
 D. The student revised the report carefully before the grade 3 conference began.
 
-### 33. Multiple Choice
-
+### pssa_item_g3_conv_33
 Which sentence best demonstrates this convention: Form and use the simple verb tenses (e.g., I walked; I walk; I will walk).
 
 A. The student revised the report carefully before the grade 3 conference began.
@@ -361,8 +326,7 @@ B. The student revised the report careful before the grade 3 conference began ye
 C. The student revise the report carefully before the grade 3 conference began yesterday.
 D. The student revised the report carefully before grade 3 conference began yesterday.
 
-### 34. Multiple Choice
-
+### pssa_item_g3_conv_34
 Which sentence best demonstrates this convention: Ensure subject-verb and pronoun-antecedent agreement.
 
 A. The student revised the report careful before the grade 3 conference began yesterday.
@@ -370,8 +334,7 @@ B. The student revised the report carefully before the grade 3 conference began.
 C. The student revise the report carefully before the grade 3 conference began yesterday.
 D. The student revised the report carefully before grade 3 conference began yesterday.
 
-### 35. Multiple Choice
-
+### pssa_item_g3_conv_35
 Which sentence best demonstrates this convention: Form and use comparative and superlative adjectives and adverbs, and choose between them depending on what is to be modified.
 
 A. The student revised the report careful before the grade 3 conference began yesterday.
@@ -379,8 +342,7 @@ B. The student revise the report carefully before the grade 3 conference began y
 C. The student revised the report carefully before the grade 3 conference began.
 D. The student revised the report carefully before grade 3 conference began yesterday.
 
-### 36. Multiple Choice
-
+### pssa_item_g3_conv_36
 Which sentence best demonstrates this convention: Use coordinating and subordinating conjunctions.
 
 A. The student revised the report careful before the grade 3 conference began yesterday.
@@ -388,8 +350,7 @@ B. The student revise the report carefully before the grade 3 conference began y
 C. The student revised the report carefully before grade 3 conference began yesterday.
 D. The student revised the report carefully before the grade 3 conference began.
 
-### 37. Multiple Choice
-
+### pssa_item_g3_conv_37
 Which sentence best demonstrates this convention: Produce simple, compound, and complex sentences.
 
 A. The student revised the report carefully before the grade 3 conference began.
@@ -397,8 +358,7 @@ B. The student revised the report careful before the grade 3 conference began ye
 C. The student revise the report carefully before the grade 3 conference began yesterday.
 D. The student revised the report carefully before grade 3 conference began yesterday.
 
-### 38. Multiple Choice
-
+### pssa_item_g3_conv_38
 Which sentence best demonstrates this convention: Capitalize appropriate words in titles.
 
 A. The student revised the report careful before the grade 3 conference began yesterday.
@@ -406,8 +366,7 @@ B. The student revised the report carefully before the grade 3 conference began.
 C. The student revise the report carefully before the grade 3 conference began yesterday.
 D. The student revised the report carefully before grade 3 conference began yesterday.
 
-### 39. Multiple Choice
-
+### pssa_item_g3_conv_39
 Which sentence best demonstrates this convention: Use commas in addresses.
 
 A. The student revised the report careful before the grade 3 conference began yesterday.
@@ -415,8 +374,7 @@ B. The student revise the report carefully before the grade 3 conference began y
 C. The student revised the report carefully before the grade 3 conference began.
 D. The student revised the report carefully before grade 3 conference began yesterday.
 
-### 40. Multiple Choice
-
+### pssa_item_g3_conv_40
 Which sentence best demonstrates this convention: Use commas and quotation marks in dialogue.
 
 A. The student revised the report careful before the grade 3 conference began yesterday.
