@@ -1,0 +1,15 @@
+{
+  "rules": {
+    "no-restricted-properties": [
+      "error",
+      { "property": "expectedResponseJson", "message": "Diagnostic UI may only read StudentDiagnosticItemDTO kid-visible fields." },
+      { "property": "scoringRubricJson", "message": "Diagnostic UI may only read StudentDiagnosticItemDTO kid-visible fields." },
+      { "property": "adminReviewJson", "message": "Diagnostic UI may only read StudentDiagnosticItemDTO kid-visible fields." },
+      { "property": "firstLookReviewModelDecisionId", "message": "Diagnostic UI may only read StudentDiagnosticItemDTO kid-visible fields." },
+      { "property": "validationMetadataJson", "message": "Diagnostic UI may only read StudentDiagnosticItemDTO kid-visible fields." },
+      { "property": "canonicalAnswer", "message": "Diagnostic UI may only read StudentDiagnosticItemDTO kid-visible fields." },
+      { "property": "correctAnswer", "message": "Diagnostic UI may only read StudentDiagnosticItemDTO kid-visible fields." },
+      { "property": "expectedPronunciation", "message": "Diagnostic UI may only read StudentDiagnosticItemDTO kid-visible fields." }
+    ]
+  }
+}

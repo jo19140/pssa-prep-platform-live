@@ -1,0 +1,15 @@
+{
+  "id": "fixture-listening",
+  "strand": "COMPREHENSION",
+  "itemType": "LISTENING_MAIN_IDEA",
+  "studentPromptJson": {
+    "kidPrompt": "Listen to Harper read. Then choose what the story is mostly about.",
+    "choices": ["Mia and Ben solving a bridge problem", "a bridge over a city river", "a race across a field"]
+  },
+  "stimulusJson": {
+    "audioScript": "Mia and Ben built a small bridge from sticks. The first bridge fell. They tried a wider base, and the bridge held."
+  },
+  "displayMode": "AUDIO_THEN_TEXT_CHOICES",
+  "responseMode": "selected_choice",
+  "isPracticeItem": false
+}

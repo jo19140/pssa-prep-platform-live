@@ -1,0 +1,12 @@
+{
+  "id": "fixture-decode",
+  "strand": "DECODING",
+  "itemType": "REAL_WORD_DECODE",
+  "studentPromptJson": {
+    "kidPrompt": "Read this word out loud.",
+    "displayText": "bike"
+  },
+  "displayMode": "TEXT_CARD_ONE_WORD",
+  "responseMode": "speech_response",
+  "isPracticeItem": false
+}
