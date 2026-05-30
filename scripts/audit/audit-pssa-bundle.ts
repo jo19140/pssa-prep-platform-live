@@ -2,9 +2,12 @@ import fs from "node:fs";
 import path from "node:path";
 import {
   buildMcqPassageSpecificityReport,
+  buildPssaPassageQualityReport,
   hasBlockingPassageSpecificityFailure,
+  hasBlockingPassageQualityFailure,
   isPassageLinkedReadingMcq,
   type McqAuditInput,
+  type PassageQualityRow,
   type PassageSpecificityRow,
   type PssaPassageAuditInput,
 } from "./pssa-audit-detectors";
@@ -13,6 +16,7 @@ const grades = [3, 4, 5, 6, 7, 8];
 const failures: string[] = [];
 const summary: Record<string, unknown>[] = [];
 const reportDir = path.resolve("audit_exports/pssa_pr4c_passage_specificity");
+const passageQualityReportDir = path.resolve("audit_exports/pssa_pr4e_passage_quality");
 const pilotItems: McqAuditInput[] = [];
 const pilotPassages: PssaPassageAuditInput[] = [];
 
@@ -55,11 +59,16 @@ const tdaItems = pilotItems.filter((item) => item.itemType === "TDA");
 
 const exemplarPath = path.resolve("exemplars/pssa_grade6/pssa_grade6_exemplar_backend.json");
 let exemplarRows: PassageSpecificityRow[] = [];
+let exemplarPassageRows: PassageQualityRow[] = [];
 if (fs.existsSync(exemplarPath)) {
   const exemplar = JSON.parse(fs.readFileSync(exemplarPath, "utf8"));
   exemplarRows = buildMcqPassageSpecificityReport(exemplar.items, [exemplar.passage]);
+  exemplarPassageRows = buildPssaPassageQualityReport([exemplar.passage]);
   if (hasBlockingPassageSpecificityFailure(exemplarRows)) {
     failures.push("Grade 6 exemplar failed passage-specificity gates");
+  }
+  if (hasBlockingPassageQualityFailure(exemplarPassageRows) || exemplarPassageRows.some((row) => row.severity === "WARNING")) {
+    failures.push("Grade 6 exemplar failed passage-quality gates");
   }
 } else {
   failures.push("Missing Grade 6 exemplar backend for passage-specificity pass test");
@@ -80,6 +89,26 @@ const tdaRows = buildMcqPassageSpecificityReport(tdaItems, pilotPassages);
 if (conventionRows.length) failures.push("Conventions MCQs were evaluated by passage-grounding gates");
 if (tdaRows.length) failures.push("TDA items were evaluated by passage-grounding gates");
 
+const passageQualityRows = buildPssaPassageQualityReport(pilotPassages);
+const passageQualityFailedIds = new Set(passageQualityRows.filter((row) => row.result === "FAIL" && row.severity === "BLOCKER").map((row) => row.passageId));
+const passageCoherenceWarnRows = passageQualityRows.filter((row) => row.ruleId === "PSSA_PASSAGE_TOPIC_COHERENCE" && row.severity === "WARNING");
+const templatedPilotPassages = pilotPassages.filter((passage) => !passage.id.includes("tranche1"));
+const approvedTranchePassages = pilotPassages.filter((passage) => passage.id.includes("tranche1"));
+const templatedPassageFailedIds = new Set([...passageQualityFailedIds].filter((id) => templatedPilotPassages.some((passage) => passage.id === id)));
+const approvedTrancheFailedIds = new Set([...passageQualityFailedIds].filter((id) => approvedTranchePassages.some((passage) => passage.id === id)));
+const grade3ClusterIds = new Set(passageQualityRows
+  .filter((row) => row.ruleId === "PSSA_PASSAGE_CROSS_DUPLICATE" && row.gradeLevel === 3 && row.clusterId)
+  .map((row) => row.clusterId));
+
+if (pilotPassages.length !== 30) failures.push(`Expected 30 pilot passages, found ${pilotPassages.length}`);
+if (templatedPassageFailedIds.size !== templatedPilotPassages.length) {
+  failures.push(`Expected all templated pilot passages to fail passage-quality blockers, failed ${templatedPassageFailedIds.size}/${templatedPilotPassages.length}`);
+}
+if (approvedTrancheFailedIds.size) {
+  failures.push(`Expected approved Grade 6 tranche passages to avoid passage-quality blockers, failed ${approvedTrancheFailedIds.size}/${approvedTranchePassages.length}`);
+}
+if (grade3ClusterIds.size !== 1) failures.push(`Expected Grade 3 five passages to cluster together, found ${grade3ClusterIds.size} clusters`);
+
 fs.mkdirSync(reportDir, { recursive: true });
 writeCsv(
   path.join(reportDir, "pssa_mcq_passage_specificity_report.csv"),
@@ -88,6 +117,24 @@ writeCsv(
     "PSSA_MCQ_GENERIC_STEM_LANGUAGE",
     "PSSA_MCQ_PASSAGE_SPECIFIC_CHOICES",
   ].includes(row.ruleId)),
+);
+
+fs.mkdirSync(passageQualityReportDir, { recursive: true });
+writePassageQualityCsv(
+  path.join(passageQualityReportDir, "pssa_passage_cross_duplicate_report.csv"),
+  passageQualityRows.filter((row) => row.ruleId === "PSSA_PASSAGE_CROSS_DUPLICATE"),
+);
+writePassageQualityCsv(
+  path.join(passageQualityReportDir, "pssa_passage_template_skeleton_report.csv"),
+  passageQualityRows.filter((row) => row.ruleId === "PSSA_PASSAGE_TEMPLATE_SKELETON"),
+);
+writePassageQualityCsv(
+  path.join(passageQualityReportDir, "pssa_passage_coherence_report.csv"),
+  passageQualityRows.filter((row) => row.ruleId === "PSSA_PASSAGE_TOPIC_COHERENCE"),
+);
+writePassageQualityCsv(
+  path.join(passageQualityReportDir, "pssa_passage_concreteness_report.csv"),
+  passageQualityRows.filter((row) => row.ruleId === "PSSA_PASSAGE_CONCRETENESS"),
 );
 writeCsv(
   path.join(reportDir, "pssa_mcq_template_language_reuse_report.csv"),
@@ -122,6 +169,17 @@ const discrimination = {
     evaluated: exemplarRows.length ? 1 : 0,
     result: hasBlockingPassageSpecificityFailure(exemplarRows) ? "FAIL" : "PASS",
   },
+  passageQuality: {
+    pilotPassagesEvaluated: pilotPassages.length,
+    templatedPilotPassagesEvaluated: templatedPilotPassages.length,
+    templatedPilotPassagesFailed: templatedPassageFailedIds.size,
+    approvedTranchePassagesEvaluated: approvedTranchePassages.length,
+    approvedTranchePassagesFailed: approvedTrancheFailedIds.size,
+    expected: "27 templated fail; 3 approved tranche passages avoid blockers",
+    grade3ClusterIds: [...grade3ClusterIds],
+    exemplarPassageResult: hasBlockingPassageQualityFailure(exemplarPassageRows) || exemplarPassageRows.some((row) => row.severity === "WARNING") ? "FAIL" : "PASS",
+    topicCoherenceWarnings: passageCoherenceWarnRows.map((row) => row.passageId),
+  },
   exempt: {
     conventionsMcqs: conventionsMcqs.length,
     conventionsFlaggedByPassageGrounding: conventionRows.length,
@@ -132,6 +190,10 @@ const discrimination = {
     path.relative(process.cwd(), path.join(reportDir, "pssa_mcq_passage_specificity_report.csv")),
     path.relative(process.cwd(), path.join(reportDir, "pssa_mcq_template_language_reuse_report.csv")),
     path.relative(process.cwd(), path.join(reportDir, "pssa_mcq_choice_grounding_report.csv")),
+    path.relative(process.cwd(), path.join(passageQualityReportDir, "pssa_passage_cross_duplicate_report.csv")),
+    path.relative(process.cwd(), path.join(passageQualityReportDir, "pssa_passage_template_skeleton_report.csv")),
+    path.relative(process.cwd(), path.join(passageQualityReportDir, "pssa_passage_coherence_report.csv")),
+    path.relative(process.cwd(), path.join(passageQualityReportDir, "pssa_passage_concreteness_report.csv")),
   ],
 };
 
@@ -154,4 +216,13 @@ function writeCsv(filePath: string, rows: PassageSpecificityRow[]) {
 function csvCell(value: unknown) {
   const text = Array.isArray(value) ? value.join("|") : String(value ?? "");
   return /[",\n]/.test(text) ? `"${text.replace(/"/g, "\"\"")}"` : text;
+}
+
+function writePassageQualityCsv(filePath: string, rows: PassageQualityRow[]) {
+  const columns = ["passageId", "gradeLevel", "title", "topicDomain", "ruleId", "result", "severity", "clusterId", "score", "evidence", "notes"];
+  const lines = [
+    columns.join(","),
+    ...rows.map((row) => columns.map((column) => csvCell((row as any)[column])).join(",")),
+  ];
+  fs.writeFileSync(filePath, `${lines.join("\n")}\n`);
 }

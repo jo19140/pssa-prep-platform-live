@@ -3,7 +3,9 @@ import {
   buildMcqAbsoluteLanguageDistractorReport,
   buildMcqCorrectIsLongestReport,
   buildMcqPassageSpecificityReport,
+  buildPssaPassageQualityReport,
   hasBlockingPassageSpecificityFailure,
+  hasBlockingPassageQualityFailure,
   type McqAuditInput,
   type StructuredChoice,
 } from "./audit/pssa-audit-detectors";
@@ -201,5 +203,65 @@ assert.equal(buildMcqPassageSpecificityReport([{
   correctIndex: 0,
   answerChoicesJson: ["A clear sentence.", "A fragment.", "A comma splice.", "A run-on sentence."],
 }], [passage]).length, 0);
+
+const duplicateOpeningPassages = [
+  {
+    id: "dup-a",
+    title: "Creek Check",
+    gradeLevel: 3,
+    topicDomain: "science/nature",
+    text: "The students began with a careful question about water testing after rain. They measured water near the creek and recorded mud, leaves, and puddles.",
+  },
+  {
+    id: "dup-b",
+    title: "Map Check",
+    gradeLevel: 3,
+    topicDomain: "history/social studies",
+    text: "The students began with a careful question about water testing after rain. They studied an old map near the station and recorded dates, labels, and routes.",
+  },
+];
+assert.equal(buildPssaPassageQualityReport(duplicateOpeningPassages)
+  .some((row) => row.ruleId === "PSSA_PASSAGE_CROSS_DUPLICATE" && row.result === "FAIL"), true);
+
+const skeletonPassages = Array.from({ length: 5 }, (_, index) => ({
+  id: `skel-${index}`,
+  title: `Topic ${index}`,
+  gradeLevel: 3,
+  topicDomain: "school/community",
+  text: `The research team began with a question about topic ${index}. Their teacher asked them to collect details another group could check. The final proposal explained evidence and described two changes that could be tested.`,
+}));
+assert.equal(buildPssaPassageQualityReport(skeletonPassages)
+  .filter((row) => row.ruleId === "PSSA_PASSAGE_TEMPLATE_SKELETON" && row.result === "FAIL").length, 5);
+
+const incoherentWater = {
+  id: "water-incoherent",
+  title: "Creek Watchers",
+  gradeLevel: 3,
+  topicDomain: "science/nature",
+  text: "The team asked how students could test stream water after heavy rain. The team interviewed people who used the space often. A design on paper may not match how people move, wait, or work. Their proposal made a plan stronger.",
+};
+assert.equal(buildPssaPassageQualityReport([incoherentWater])
+  .some((row) => row.ruleId === "PSSA_PASSAGE_TOPIC_COHERENCE" && row.severity === "WARNING"), true);
+
+const abstractProcess = {
+  id: "abstract-process",
+  title: "A Better Plan",
+  gradeLevel: 4,
+  topicDomain: "school/community",
+  text: "The research team asked a question and collected details. The group organized evidence, discussed a proposal, revised the plan, and made the idea stronger. The final reflection separated a recommendation from an opinion.",
+};
+assert.equal(buildPssaPassageQualityReport([abstractProcess])
+  .some((row) => row.ruleId === "PSSA_PASSAGE_CONCRETENESS" && row.result === "FAIL"), true);
+
+const beaverPassage = {
+  id: "beaver",
+  title: "The Animal That Builds Its Own Wetland",
+  gradeLevel: 6,
+  topicDomain: "science/nature",
+  text: "For most of the last century, beavers were rare across much of North America. Trappers had hunted them for their thick fur until, in some regions, almost none were left. Rivers that had once spread into marshes and ponds began to run straight and fast. Few people noticed that something important had disappeared along with the beavers.\n\nBeavers are often called \"ecosystem engineers,\" a term scientists use for animals that reshape the land around them. A beaver does this by building dams. Using branches, mud, and stones, it blocks the flow of a stream until the water backs up and forms a pond. The pond is not just a home for the beaver. It slows the movement of water across the whole landscape.\n\nThat slowing matters more than it might seem. When rain falls fast, water rushes downhill, carrying away soil and sometimes causing floods farther downstream. A beaver pond acts like a brake. It holds water in place, lets the soil settle, and releases the water slowly over days or weeks. During a dry summer, land near a beaver pond often stays green while nearby areas turn brown.\n\nThe ponds help other living things, too. Frogs, fish, insects, and birds gather where the water is calm and steady. Plants that need wet ground take root along the edges. In places where beavers have returned, scientists have counted far more kinds of animals than in similar streams without them. A single beaver pond can become like a crowded apartment building for wildlife.\n\nToday, some communities are inviting beavers back on purpose. Instead of removing the animals or their dams, they protect them, and in a few cases they even build simple \"starter dams\" to encourage beavers to settle. It is an unusual kind of repair: rather than sending in machines and workers, people step back and let an animal do the building. The beaver, it turns out, may be one of the most skilled water engineers of all—and it works for free.",
+};
+const beaverRows = buildPssaPassageQualityReport([beaverPassage]);
+assert.equal(hasBlockingPassageQualityFailure(beaverRows), false);
+assert.equal(beaverRows.some((row) => row.severity === "WARNING"), false);
 
 console.log("PSSA content audit detector tests passed.");

@@ -21,6 +21,12 @@ export type PssaPassageAuditInput = {
   title?: string;
   text: string;
   gradeLevel?: number;
+  topicDomain?: string;
+  crossDuplicateClusterId?: string | null;
+  skeletonHash?: string | null;
+  topicCoherenceScore?: number | null;
+  concretenessRatio?: number | null;
+  passageQualityResult?: RuleResult | "WARN" | null;
 };
 
 export type EvidenceLink = {
@@ -69,6 +75,26 @@ export type PassageSpecificityRow = {
   severity: "INFO" | "WARNING" | "BLOCKER";
   evidence: string;
   failedChoiceIndices: number[];
+  notes: string;
+};
+
+export type PassageQualityRuleId =
+  | "PSSA_PASSAGE_CROSS_DUPLICATE"
+  | "PSSA_PASSAGE_TEMPLATE_SKELETON"
+  | "PSSA_PASSAGE_TOPIC_COHERENCE"
+  | "PSSA_PASSAGE_CONCRETENESS";
+
+export type PassageQualityRow = {
+  passageId: string;
+  gradeLevel: number | string;
+  title: string;
+  topicDomain: string;
+  ruleId: PassageQualityRuleId;
+  result: RuleResult;
+  severity: "INFO" | "WARNING" | "BLOCKER";
+  clusterId: string;
+  score: number | string;
+  evidence: string;
   notes: string;
 };
 
@@ -215,6 +241,19 @@ export function isPassageLinkedReadingMcq(item: McqAuditInput) {
 }
 
 export function hasBlockingPassageSpecificityFailure(rows: PassageSpecificityRow[]) {
+  return rows.some((row) => row.result === "FAIL" && row.severity === "BLOCKER");
+}
+
+export function buildPssaPassageQualityReport(passages: PssaPassageAuditInput[]): PassageQualityRow[] {
+  const rows: PassageQualityRow[] = [];
+  rows.push(...buildPassageCrossDuplicateRows(passages));
+  rows.push(...buildPassageSkeletonRows(passages));
+  rows.push(...buildPassageTopicCoherenceRows(passages));
+  rows.push(...buildPassageConcretenessRows(passages));
+  return rows;
+}
+
+export function hasBlockingPassageQualityFailure(rows: PassageQualityRow[]) {
   return rows.some((row) => row.result === "FAIL" && row.severity === "BLOCKER");
 }
 
@@ -534,3 +573,247 @@ function uniqueBy<T>(values: T[], getKey: (value: T) => string) {
 function escapeRegExp(value: string) {
   return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
+
+function buildPassageCrossDuplicateRows(passages: PssaPassageAuditInput[]) {
+  const pairs: Array<{ a: PssaPassageAuditInput; b: PssaPassageAuditInput; score: number; evidence: string }> = [];
+  for (let i = 0; i < passages.length; i += 1) {
+    for (let j = i + 1; j < passages.length; j += 1) {
+      const a = passages[i];
+      const b = passages[j];
+      const identical = sharedLongSentence(a.text, b.text);
+      const score = sentenceShingleJaccard(a.text, b.text);
+      if (identical || score > 0.3) {
+        pairs.push({ a, b, score, evidence: identical || `8-gram Jaccard ${round(score)}` });
+      }
+    }
+  }
+  const clusters = clusterPassagePairs(passages, pairs);
+  const rows: PassageQualityRow[] = [];
+  const failedIds = new Set(pairs.flatMap((pair) => [pair.a.id, pair.b.id]));
+  for (const passage of passages) {
+    if (!failedIds.has(passage.id)) {
+      rows.push(passageQualityRow(passage, "PSSA_PASSAGE_CROSS_DUPLICATE", "PASS", "INFO", "", 0, "No cross-passage duplicate sentence or shingle overlap found.", "Unique against evaluated passages."));
+      continue;
+    }
+    const relevant = pairs.filter((pair) => pair.a.id === passage.id || pair.b.id === passage.id);
+    const best = relevant.sort((left, right) => right.score - left.score)[0];
+    rows.push(passageQualityRow(
+      passage,
+      "PSSA_PASSAGE_CROSS_DUPLICATE",
+      "FAIL",
+      "BLOCKER",
+      clusters.get(passage.id) ?? "",
+      round(best.score),
+      best.evidence,
+      `Near-duplicate with ${best.a.id === passage.id ? best.b.id : best.a.id}.`,
+    ));
+  }
+  return rows;
+}
+
+function buildPassageSkeletonRows(passages: PssaPassageAuditInput[]) {
+  const buckets = new Map<string, PssaPassageAuditInput[]>();
+  for (const passage of passages) {
+    const skeleton = passageSkeleton(passage);
+    buckets.set(skeleton, [...(buckets.get(skeleton) ?? []), passage]);
+  }
+  const rows: PassageQualityRow[] = [];
+  for (const passage of passages) {
+    const skeleton = passageSkeleton(passage);
+    const bucket = buckets.get(skeleton) ?? [];
+    const hash = skeletonHash(skeleton);
+    if (bucket.length >= 2) {
+      rows.push(passageQualityRow(passage, "PSSA_PASSAGE_TEMPLATE_SKELETON", "FAIL", "BLOCKER", `skeleton-${hash}`, bucket.length, skeleton.slice(0, 180), `Masked skeleton shared by ${bucket.length} passages.`));
+    } else {
+      rows.push(passageQualityRow(passage, "PSSA_PASSAGE_TEMPLATE_SKELETON", "PASS", "INFO", `skeleton-${hash}`, 1, skeleton.slice(0, 180), "No reused masked skeleton found."));
+    }
+  }
+  return rows;
+}
+
+function buildPassageTopicCoherenceRows(passages: PssaPassageAuditInput[]) {
+  return passages.map((passage) => {
+    const sentences = flatSentences(passage.text);
+    const topicTerms = passageTopicTerms(passage);
+    const laterHits = sentences.slice(1).filter((sentence) => [...topicTerms].some((term) => normalizeText(sentence).includes(term))).length;
+    const conflictTerms = topicConflictTerms(passage);
+    const score = Math.min(5, Math.max(1, 1 + laterHits + (conflictTerms.length ? 0 : 1)));
+    if (conflictTerms.length || laterHits < 3) {
+      return passageQualityRow(
+        passage,
+        "PSSA_PASSAGE_TOPIC_COHERENCE",
+        "FAIL",
+        "WARNING",
+        "",
+        score,
+        `topicTerms=${[...topicTerms].join("|")}; laterHits=${laterHits}; conflicts=${conflictTerms.join("|")}`,
+        "Topic coherence needs human review; deterministic check found topic drift or too few later topic recurrences.",
+      );
+    }
+    return passageQualityRow(passage, "PSSA_PASSAGE_TOPIC_COHERENCE", "PASS", "INFO", "", score, `topicTerms=${[...topicTerms].join("|")}; laterHits=${laterHits}`, "Topic terms recur through the body without deterministic conflict terms.");
+  });
+}
+
+function buildPassageConcretenessRows(passages: PssaPassageAuditInput[]) {
+  return passages.map((passage) => {
+    const terms = passageConcreteAndGenericTerms(passage.text);
+    const ratio = terms.concrete.length / Math.max(1, terms.concrete.length + terms.generic.length);
+    const fails = ratio < 0.46;
+    return passageQualityRow(
+      passage,
+      "PSSA_PASSAGE_CONCRETENESS",
+      fails ? "FAIL" : "PASS",
+      fails ? "BLOCKER" : "INFO",
+      "",
+      round(ratio),
+      `concrete=${terms.concrete.slice(0, 20).join("|")}; generic=${terms.generic.slice(0, 20).join("|")}`,
+      fails
+        ? "Passage is dominated by generic process vocabulary and lacks enough concrete topic detail."
+        : "Concrete topic detail ratio passes calibrated threshold.",
+    );
+  });
+}
+
+function passageQualityRow(
+  passage: PssaPassageAuditInput,
+  ruleId: PassageQualityRuleId,
+  result: RuleResult,
+  severity: "INFO" | "WARNING" | "BLOCKER",
+  clusterId: string,
+  score: number | string,
+  evidence: string,
+  notes: string,
+): PassageQualityRow {
+  return {
+    passageId: passage.id,
+    gradeLevel: passage.gradeLevel ?? "",
+    title: passage.title ?? "",
+    topicDomain: passage.topicDomain ?? "",
+    ruleId,
+    result,
+    severity,
+    clusterId,
+    score,
+    evidence,
+    notes,
+  };
+}
+
+function sharedLongSentence(a: string, b: string) {
+  const bSentences = new Set(flatSentences(b).map(normalizeText));
+  return flatSentences(a)
+    .find((sentence) => wordCount(sentence) >= 8 && bSentences.has(normalizeText(sentence))) ?? "";
+}
+
+function sentenceShingleJaccard(a: string, b: string) {
+  const aSet = shingleSet(normalizeText(a).split(" "), 8);
+  const bSet = shingleSet(normalizeText(b).split(" "), 8);
+  const intersection = [...aSet].filter((value) => bSet.has(value)).length;
+  const union = new Set([...aSet, ...bSet]).size;
+  return union ? intersection / union : 0;
+}
+
+function shingleSet(words: string[], size: number) {
+  const shingles = new Set<string>();
+  for (let index = 0; index <= words.length - size; index += 1) {
+    shingles.add(words.slice(index, index + size).join(" "));
+  }
+  return shingles;
+}
+
+function clusterPassagePairs(passages: PssaPassageAuditInput[], pairs: Array<{ a: PssaPassageAuditInput; b: PssaPassageAuditInput }>) {
+  const parent = new Map(passages.map((passage) => [passage.id, passage.id]));
+  const find = (id: string): string => {
+    const current = parent.get(id) ?? id;
+    if (current === id) return id;
+    const root = find(current);
+    parent.set(id, root);
+    return root;
+  };
+  const union = (a: string, b: string) => parent.set(find(a), find(b));
+  pairs.forEach((pair) => union(pair.a.id, pair.b.id));
+  const roots = new Map<string, string>();
+  let next = 1;
+  const clusters = new Map<string, string>();
+  for (const passage of passages) {
+    const root = find(passage.id);
+    if (!roots.has(root)) roots.set(root, `cluster-${next++}`);
+    clusters.set(passage.id, roots.get(root) ?? "");
+  }
+  return clusters;
+}
+
+function passageSkeleton(passage: PssaPassageAuditInput) {
+  const topicTerms = passageTopicTerms(passage);
+  const words = normalizeText(passage.text).split(" ");
+  return words.map((word) => {
+    if (topicTerms.has(word)) return "<topic>";
+    if (passageSkeletonKeepWords.has(word)) return word;
+    if (passageGenericProcessWords.has(word)) return word;
+    return "<x>";
+  }).join(" ").replace(/(?:<x> ){2,}/g, "<x> ");
+}
+
+function skeletonHash(value: string) {
+  let hash = 0;
+  for (let index = 0; index < value.length; index += 1) hash = ((hash << 5) - hash + value.charCodeAt(index)) | 0;
+  return Math.abs(hash).toString(36);
+}
+
+function passageTopicTerms(passage: PssaPassageAuditInput) {
+  const firstSentence = flatSentences(passage.text)[0] ?? "";
+  const source = `${passage.title ?? ""} ${firstSentence}`;
+  return contentWords(source);
+}
+
+function topicConflictTerms(passage: PssaPassageAuditInput) {
+  const normalizedTitle = normalizeText(`${passage.title ?? ""} ${flatSentences(passage.text)[0] ?? ""}`);
+  const normalizedBody = normalizeText(flatSentences(passage.text).slice(1).join(" "));
+  const conflicts: string[] = [];
+  if (/\b(stream|water|rain|creek)\b/.test(normalizedTitle) && /\bspace|design|move|wait|work\b/.test(normalizedBody)) {
+    conflicts.push("space/design/move/wait/work in water-testing passage");
+  }
+  if (/\b(map|transit)\b/.test(normalizedTitle) && /\bbuilding|space|move|wait|work\b/.test(normalizedBody)) {
+    conflicts.push("space/move/wait/work in transit-map passage");
+  }
+  if (/\bmural\b/.test(normalizedTitle) && /\bspace|design|move|wait|work\b/.test(normalizedBody)) {
+    conflicts.push("space/design/move/wait/work in mural passage");
+  }
+  if (/\bcart\b/.test(normalizedTitle) && /\bspace|design|move|wait\b/.test(normalizedBody)) {
+    conflicts.push("space/design/move/wait in supply-cart passage");
+  }
+  return conflicts;
+}
+
+function passageConcreteAndGenericTerms(text: string) {
+  const words = (text.match(/[A-Za-z][A-Za-z'-]+/g) ?? []).map((word) => word.toLowerCase().replace(/'s$/, ""));
+  const generic = words.filter((word) => passageGenericProcessWords.has(word));
+  const concrete = words.filter((word) => word.length >= 4 && !stopwords.has(word) && !passageGenericProcessWords.has(word) && !genericAcademicWords.has(word));
+  return { concrete, generic };
+}
+
+function flatSentences(text: string) {
+  return splitPassageSentences(text).flat();
+}
+
+const passageGenericProcessWords = new Set([
+  "research", "team", "teams", "question", "questions", "guesses", "collect", "details", "group", "check",
+  "notebooks", "shared", "chart", "route", "gathering", "observations", "building", "notes", "student",
+  "class", "decided", "sort", "place", "time", "cause", "structure", "problem", "solution", "evidence",
+  "repeated", "location", "compared", "interviewed", "people", "used", "space", "design", "helpful",
+  "paper", "match", "move", "wait", "work", "final", "proposal", "modest", "specific", "named",
+  "explained", "described", "changes", "tested", "spending", "money", "promise", "perfect", "instead",
+  "showed", "careful", "information", "plan", "stronger", "understood", "facts", "noticing", "relationships",
+  "useful", "grows", "connect", "listen", "revise", "idea", "asking", "community", "trust", "saved",
+  "actually", "wrote", "short", "reflection", "reliable", "needed", "look", "recommendation", "opinion",
+  "fair", "begin", "began", "simple", "teacher", "asked", "avoid", "another", "monday", "afternoon",
+]);
+
+const passageSkeletonKeepWords = new Set([
+  "the", "a", "an", "with", "by", "for", "to", "of", "and", "or", "in", "on", "at", "from", "after",
+  "before", "during", "around", "into", "until", "while", "because", "that", "which", "who", "what",
+  "how", "could", "would", "not", "but", "so", "their", "them", "they", "it", "its", "is", "was",
+  "were", "had", "has", "have", "be", "been", "began", "asked", "decided", "helped", "came", "checked",
+  "also", "did", "does", "do", "than", "more", "most", "same", "other", "some", "few", "many", "one",
+  "two", "three", "first", "final", "next", "end", "week",
+]);
