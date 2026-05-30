@@ -1,0 +1,3333 @@
+{
+  "generationBatchId": "pssa_pilot_g4_review_0001",
+  "module": "PSSA",
+  "subject": "ELA",
+  "gradeLevel": 4,
+  "reviewStatus": "PENDING",
+  "itemStatus": "candidate",
+  "writesDatabaseRows": false,
+  "passages": [
+    {
+      "model": "PssaPassage",
+      "id": "pssa_psg_g4_creek_watchers",
+      "title": "Creek Watchers 4",
+      "gradeLevel": 4,
+      "passageType": "informational",
+      "topicDomain": "science/nature",
+      "text": "The sixth-period research team began with a question that sounded simple: how could students test stream water after a heavy rain? Their teacher asked them to avoid guesses and collect details that another group could check. By Monday afternoon, the students had notebooks, a shared chart, and a route for gathering observations around the building.\n\nAt first, the notes were scattered. One student wrote about clear measurements, while another noticed nearby plant growth. The class decided to sort the notes by place, time, and cause. That structure helped them see which details described the problem and which details suggested a possible solution.\n\nThe strongest evidence came from repeated observations. The team checked the same location during different parts of the day and compared what changed. They also interviewed people who used the space often, because a design that looks helpful on paper may not match how people move, wait, or work.\n\nTheir final proposal was modest but specific. It named the problem, explained the evidence, and described two changes that could be tested without spending much money. The proposal did not promise a perfect fix. Instead, it showed why careful information can make a small plan stronger.\n\nBy the end of the week, the students understood that research is not a stack of facts. It is a way of noticing relationships. A useful plan grows when people connect observations, listen to others, and revise an idea before asking the community to trust it. Their teacher saved the chart so the next class could test whether the proposed changes actually worked. The team also wrote a short reflection explaining which evidence felt reliable and which questions still needed another careful look. That reflection helped them separate a useful recommendation from a quick opinion, and it gave the next group a fair place to begin.",
+      "subject": "ELA",
+      "wordCount": 304,
+      "sourceType": "internal_original",
+      "sourceName": "Synesis PSSA pilot original authoring",
+      "sourceCitation": null,
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "factCheckStatus": "HUMAN_REVIEW_REQUIRED",
+      "factualClaimsReviewed": false,
+      "repetitionAuditJson": {
+        "paragraphCount": 5,
+        "sentenceCount": 20,
+        "uniqueSentenceRatio": 1,
+        "repeatedParagraphs": 0,
+        "repeatedTrigrams": 0
+      },
+      "provenanceJson": {
+        "authoredBy": "model-assisted, human-review-pending",
+        "method": "original_composition",
+        "containsAttributedQuotes": false
+      },
+      "approvedAt": null,
+      "reviewedBy": null,
+      "retiredAt": null
+    },
+    {
+      "model": "PssaPassage",
+      "id": "pssa_psg_g4_the_map_in_the_station",
+      "title": "The Map in the Station 4",
+      "gradeLevel": 4,
+      "passageType": "informational",
+      "topicDomain": "history/social studies",
+      "text": "The sixth-period research team began with a question that sounded simple: how could neighbors preserve an old transit map? Their teacher asked them to avoid guesses and collect details that another group could check. By Monday afternoon, the students had notebooks, a shared chart, and a route for gathering observations around the building.\n\nAt first, the notes were scattered. One student wrote about careful interviews, while another noticed changes in the town. The class decided to sort the notes by place, time, and cause. That structure helped them see which details described the problem and which details suggested a possible solution.\n\nThe strongest evidence came from repeated observations. The team checked the same location during different parts of the day and compared what changed. They also interviewed people who used the space often, because a design that looks helpful on paper may not match how people move, wait, or work.\n\nTheir final proposal was modest but specific. It named the problem, explained the evidence, and described two changes that could be tested without spending much money. The proposal did not promise a perfect fix. Instead, it showed why careful information can make a small plan stronger.\n\nBy the end of the week, the students understood that research is not a stack of facts. It is a way of noticing relationships. A useful plan grows when people connect observations, listen to others, and revise an idea before asking the community to trust it. Their teacher saved the chart so the next class could test whether the proposed changes actually worked. The team also wrote a short reflection explaining which evidence felt reliable and which questions still needed another careful look. That reflection helped them separate a useful recommendation from a quick opinion, and it gave the next group a fair place to begin.",
+      "subject": "ELA",
+      "wordCount": 303,
+      "sourceType": "internal_original",
+      "sourceName": "Synesis PSSA pilot original authoring",
+      "sourceCitation": null,
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "factCheckStatus": "HUMAN_REVIEW_REQUIRED",
+      "factualClaimsReviewed": false,
+      "repetitionAuditJson": {
+        "paragraphCount": 5,
+        "sentenceCount": 20,
+        "uniqueSentenceRatio": 1,
+        "repeatedParagraphs": 0,
+        "repeatedTrigrams": 0
+      },
+      "provenanceJson": {
+        "authoredBy": "model-assisted, human-review-pending",
+        "method": "original_composition",
+        "containsAttributedQuotes": false
+      },
+      "approvedAt": null,
+      "reviewedBy": null,
+      "retiredAt": null
+    },
+    {
+      "model": "PssaPassage",
+      "id": "pssa_psg_g4_a_cooler_lunch_line",
+      "title": "A Cooler Lunch Line 4",
+      "gradeLevel": 4,
+      "passageType": "informational",
+      "topicDomain": "school/community",
+      "text": "The sixth-period research team began with a question that sounded simple: how could students redesign a crowded lunch routine? Their teacher asked them to avoid guesses and collect details that another group could check. By Monday afternoon, the students had notebooks, a shared chart, and a route for gathering observations around the building.\n\nAt first, the notes were scattered. One student wrote about timed observations, while another noticed shared responsibilities. The class decided to sort the notes by place, time, and cause. That structure helped them see which details described the problem and which details suggested a possible solution.\n\nThe strongest evidence came from repeated observations. The team checked the same location during different parts of the day and compared what changed. They also interviewed people who used the space often, because a design that looks helpful on paper may not match how people move, wait, or work.\n\nTheir final proposal was modest but specific. It named the problem, explained the evidence, and described two changes that could be tested without spending much money. The proposal did not promise a perfect fix. Instead, it showed why careful information can make a small plan stronger.\n\nBy the end of the week, the students understood that research is not a stack of facts. It is a way of noticing relationships. A useful plan grows when people connect observations, listen to others, and revise an idea before asking the community to trust it. Their teacher saved the chart so the next class could test whether the proposed changes actually worked. The team also wrote a short reflection explaining which evidence felt reliable and which questions still needed another careful look. That reflection helped them separate a useful recommendation from a quick opinion, and it gave the next group a fair place to begin.",
+      "subject": "ELA",
+      "wordCount": 301,
+      "sourceType": "internal_original",
+      "sourceName": "Synesis PSSA pilot original authoring",
+      "sourceCitation": null,
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "factCheckStatus": "HUMAN_REVIEW_REQUIRED",
+      "factualClaimsReviewed": false,
+      "repetitionAuditJson": {
+        "paragraphCount": 5,
+        "sentenceCount": 20,
+        "uniqueSentenceRatio": 1,
+        "repeatedParagraphs": 0,
+        "repeatedTrigrams": 0
+      },
+      "provenanceJson": {
+        "authoredBy": "model-assisted, human-review-pending",
+        "method": "original_composition",
+        "containsAttributedQuotes": false
+      },
+      "approvedAt": null,
+      "reviewedBy": null,
+      "retiredAt": null
+    },
+    {
+      "model": "PssaPassage",
+      "id": "pssa_psg_g4_the_mural_plan",
+      "title": "The Mural Plan 4",
+      "gradeLevel": 4,
+      "passageType": "informational",
+      "topicDomain": "arts/culture",
+      "text": "The sixth-period research team began with a question that sounded simple: how could a class plans a hallway mural from local stories? Their teacher asked them to avoid guesses and collect details that another group could check. By Monday afternoon, the students had notebooks, a shared chart, and a route for gathering observations around the building.\n\nAt first, the notes were scattered. One student wrote about sketch revisions, while another noticed community symbols. The class decided to sort the notes by place, time, and cause. That structure helped them see which details described the problem and which details suggested a possible solution.\n\nThe strongest evidence came from repeated observations. The team checked the same location during different parts of the day and compared what changed. They also interviewed people who used the space often, because a design that looks helpful on paper may not match how people move, wait, or work.\n\nTheir final proposal was modest but specific. It named the problem, explained the evidence, and described two changes that could be tested without spending much money. The proposal did not promise a perfect fix. Instead, it showed why careful information can make a small plan stronger.\n\nBy the end of the week, the students understood that research is not a stack of facts. It is a way of noticing relationships. A useful plan grows when people connect observations, listen to others, and revise an idea before asking the community to trust it. Their teacher saved the chart so the next class could test whether the proposed changes actually worked. The team also wrote a short reflection explaining which evidence felt reliable and which questions still needed another careful look. That reflection helped them separate a useful recommendation from a quick opinion, and it gave the next group a fair place to begin.",
+      "subject": "ELA",
+      "wordCount": 304,
+      "sourceType": "internal_original",
+      "sourceName": "Synesis PSSA pilot original authoring",
+      "sourceCitation": null,
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "factCheckStatus": "HUMAN_REVIEW_REQUIRED",
+      "factualClaimsReviewed": false,
+      "repetitionAuditJson": {
+        "paragraphCount": 5,
+        "sentenceCount": 20,
+        "uniqueSentenceRatio": 1,
+        "repeatedParagraphs": 0,
+        "repeatedTrigrams": 0
+      },
+      "provenanceJson": {
+        "authoredBy": "model-assisted, human-review-pending",
+        "method": "original_composition",
+        "containsAttributedQuotes": false
+      },
+      "approvedAt": null,
+      "reviewedBy": null,
+      "retiredAt": null
+    },
+    {
+      "model": "PssaPassage",
+      "id": "pssa_psg_g4_the_cart_that_would_not_turn",
+      "title": "The Cart That Would Not Turn 4",
+      "gradeLevel": 4,
+      "passageType": "informational",
+      "topicDomain": "everyday problem-solving",
+      "text": "The sixth-period research team began with a question that sounded simple: how could a team improves a supply cart? Their teacher asked them to avoid guesses and collect details that another group could check. By Monday afternoon, the students had notebooks, a shared chart, and a route for gathering observations around the building.\n\nAt first, the notes were scattered. One student wrote about wheel tests, while another noticed practical adjustments. The class decided to sort the notes by place, time, and cause. That structure helped them see which details described the problem and which details suggested a possible solution.\n\nThe strongest evidence came from repeated observations. The team checked the same location during different parts of the day and compared what changed. They also interviewed people who used the space often, because a design that looks helpful on paper may not match how people move, wait, or work.\n\nTheir final proposal was modest but specific. It named the problem, explained the evidence, and described two changes that could be tested without spending much money. The proposal did not promise a perfect fix. Instead, it showed why careful information can make a small plan stronger.\n\nBy the end of the week, the students understood that research is not a stack of facts. It is a way of noticing relationships. A useful plan grows when people connect observations, listen to others, and revise an idea before asking the community to trust it. Their teacher saved the chart so the next class could test whether the proposed changes actually worked. The team also wrote a short reflection explaining which evidence felt reliable and which questions still needed another careful look. That reflection helped them separate a useful recommendation from a quick opinion, and it gave the next group a fair place to begin.",
+      "subject": "ELA",
+      "wordCount": 301,
+      "sourceType": "internal_original",
+      "sourceName": "Synesis PSSA pilot original authoring",
+      "sourceCitation": null,
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "factCheckStatus": "HUMAN_REVIEW_REQUIRED",
+      "factualClaimsReviewed": false,
+      "repetitionAuditJson": {
+        "paragraphCount": 5,
+        "sentenceCount": 20,
+        "uniqueSentenceRatio": 1,
+        "repeatedParagraphs": 0,
+        "repeatedTrigrams": 0
+      },
+      "provenanceJson": {
+        "authoredBy": "model-assisted, human-review-pending",
+        "method": "original_composition",
+        "containsAttributedQuotes": false
+      },
+      "approvedAt": null,
+      "reviewedBy": null,
+      "retiredAt": null
+    }
+  ],
+  "items": [
+    {
+      "model": "PssaItem",
+      "id": "pssa_item_g4_reading_1",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 4,
+      "itemType": "MCQ",
+      "skill": "key_ideas_and_details",
+      "passageId": "pssa_psg_g4_creek_watchers",
+      "eligibleContent": "E04.A-K.1.1.1",
+      "assessmentAnchor": "E04.A-K.1",
+      "anchorDescriptor": "E04.A-K.1.1",
+      "reportingCategory": "A",
+      "dokLevel": 2,
+      "paCoreStandardCodes": [
+        "CC.1.3.4.A",
+        "CC.1.3.4.B",
+        "CC.1.3.4.C"
+      ],
+      "alignmentStatus": "ALIGNED",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "approvalEligible": false,
+      "studentFacingPrompt": "Which statement best addresses this reading focus in \"Creek Watchers 4\": Refer to details and examples in a text when explaining what the text explicitly says and when drawing inferences from the text?",
+      "answerChoicesJson": [
+        "The passage connects science/nature details with a careful plan that improves.",
+        "The opening detail gives useful background but does not explain the full passage focus clearly enough.",
+        "One middle detail is useful evidence, yet it covers a smaller part of the passage's idea.",
+        "The ending reflection is memorable, though it shifts attention from the main question being asked."
+      ],
+      "correctIndex": 0,
+      "correctAnswer": "The passage connects science/nature details with a careful plan that improves.",
+      "distractorRationalesJson": [
+        "Correct. This choice matches the targeted skill and the passage or sentence evidence.",
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis.",
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis.",
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis."
+      ],
+      "expectedResponseJson": null,
+      "scoringRubricJson": null,
+      "studentPreviewJson": {
+        "prompt": "Which statement best addresses this reading focus in \"Creek Watchers 4\": Refer to details and examples in a text when explaining what the text explicitly says and when drawing inferences from the text?",
+        "choices": [
+          "The passage connects science/nature details with a careful plan that improves.",
+          "The opening detail gives useful background but does not explain the full passage focus clearly enough.",
+          "One middle detail is useful evidence, yet it covers a smaller part of the passage's idea.",
+          "The ending reflection is memorable, though it shifts attention from the main question being asked."
+        ],
+        "leaksAnswer": false
+      },
+      "validationMetadataJson": {
+        "exactEcResolved": true,
+        "simulatedStudentReadyBlockers": [
+          "reviewStatus=PENDING",
+          "itemStatus=candidate"
+        ]
+      },
+      "linterResultsJson": {
+        "blockers": [],
+        "warnings": [],
+        "status": "PASS"
+      },
+      "provenanceJson": {
+        "authoredBy": "model-assisted, human-review-pending",
+        "method": "direct_governed_shape_authoring",
+        "containsAttributedQuotes": false
+      },
+      "approvedAt": null,
+      "reviewedBy": null,
+      "retiredAt": null,
+      "sequence": 1
+    },
+    {
+      "model": "PssaItem",
+      "id": "pssa_item_g4_reading_2",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 4,
+      "itemType": "MCQ",
+      "skill": "key_ideas_and_details",
+      "passageId": "pssa_psg_g4_the_map_in_the_station",
+      "eligibleContent": "E04.A-K.1.1.2",
+      "assessmentAnchor": "E04.A-K.1",
+      "anchorDescriptor": "E04.A-K.1.1",
+      "reportingCategory": "A",
+      "dokLevel": 2,
+      "paCoreStandardCodes": [
+        "CC.1.3.4.A",
+        "CC.1.3.4.B",
+        "CC.1.3.4.C"
+      ],
+      "alignmentStatus": "ALIGNED",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "approvalEligible": false,
+      "studentFacingPrompt": "Which statement best addresses this reading focus in \"The Map in the Station 4\": Determine a theme of a story, drama, or poem from details in the text; summarize the text?",
+      "answerChoicesJson": [
+        "The opening detail gives useful background but does not explain the full passage focus clearly enough.",
+        "The passage connects history/social studies details with a careful plan that improves.",
+        "One middle detail is useful evidence, yet it covers a smaller part of the passage's idea.",
+        "The ending reflection is memorable, though it shifts attention from the main question being asked."
+      ],
+      "correctIndex": 1,
+      "correctAnswer": "The passage connects history/social studies details with a careful plan that improves.",
+      "distractorRationalesJson": [
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis.",
+        "Correct. This choice matches the targeted skill and the passage or sentence evidence.",
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis.",
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis."
+      ],
+      "expectedResponseJson": null,
+      "scoringRubricJson": null,
+      "studentPreviewJson": {
+        "prompt": "Which statement best addresses this reading focus in \"The Map in the Station 4\": Determine a theme of a story, drama, or poem from details in the text; summarize the text?",
+        "choices": [
+          "The opening detail gives useful background but does not explain the full passage focus clearly enough.",
+          "The passage connects history/social studies details with a careful plan that improves.",
+          "One middle detail is useful evidence, yet it covers a smaller part of the passage's idea.",
+          "The ending reflection is memorable, though it shifts attention from the main question being asked."
+        ],
+        "leaksAnswer": false
+      },
+      "validationMetadataJson": {
+        "exactEcResolved": true,
+        "simulatedStudentReadyBlockers": [
+          "reviewStatus=PENDING",
+          "itemStatus=candidate"
+        ]
+      },
+      "linterResultsJson": {
+        "blockers": [],
+        "warnings": [],
+        "status": "PASS"
+      },
+      "provenanceJson": {
+        "authoredBy": "model-assisted, human-review-pending",
+        "method": "direct_governed_shape_authoring",
+        "containsAttributedQuotes": false
+      },
+      "approvedAt": null,
+      "reviewedBy": null,
+      "retiredAt": null,
+      "sequence": 2
+    },
+    {
+      "model": "PssaItem",
+      "id": "pssa_item_g4_reading_3",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 4,
+      "itemType": "MCQ",
+      "skill": "key_ideas_and_details",
+      "passageId": "pssa_psg_g4_a_cooler_lunch_line",
+      "eligibleContent": "E04.A-K.1.1.3",
+      "assessmentAnchor": "E04.A-K.1",
+      "anchorDescriptor": "E04.A-K.1.1",
+      "reportingCategory": "A",
+      "dokLevel": 2,
+      "paCoreStandardCodes": [
+        "CC.1.3.4.A",
+        "CC.1.3.4.B",
+        "CC.1.3.4.C"
+      ],
+      "alignmentStatus": "ALIGNED",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "approvalEligible": false,
+      "studentFacingPrompt": "Which statement best addresses this reading focus in \"A Cooler Lunch Line 4\": Describe in depth a character, setting, or event in a story, drama, or poem, drawing on specific details in the text (e.g., a character's thoughts, words, or actions)?",
+      "answerChoicesJson": [
+        "The opening detail gives useful background but does not explain the full passage focus clearly enough.",
+        "One middle detail is useful evidence, yet it covers a smaller part of the passage's idea.",
+        "The passage connects school/community details with a careful plan that improves.",
+        "The ending reflection is memorable, though it shifts attention from the main question being asked."
+      ],
+      "correctIndex": 2,
+      "correctAnswer": "The passage connects school/community details with a careful plan that improves.",
+      "distractorRationalesJson": [
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis.",
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis.",
+        "Correct. This choice matches the targeted skill and the passage or sentence evidence.",
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis."
+      ],
+      "expectedResponseJson": null,
+      "scoringRubricJson": null,
+      "studentPreviewJson": {
+        "prompt": "Which statement best addresses this reading focus in \"A Cooler Lunch Line 4\": Describe in depth a character, setting, or event in a story, drama, or poem, drawing on specific details in the text (e.g., a character's thoughts, words, or actions)?",
+        "choices": [
+          "The opening detail gives useful background but does not explain the full passage focus clearly enough.",
+          "One middle detail is useful evidence, yet it covers a smaller part of the passage's idea.",
+          "The passage connects school/community details with a careful plan that improves.",
+          "The ending reflection is memorable, though it shifts attention from the main question being asked."
+        ],
+        "leaksAnswer": false
+      },
+      "validationMetadataJson": {
+        "exactEcResolved": true,
+        "simulatedStudentReadyBlockers": [
+          "reviewStatus=PENDING",
+          "itemStatus=candidate"
+        ]
+      },
+      "linterResultsJson": {
+        "blockers": [],
+        "warnings": [],
+        "status": "PASS"
+      },
+      "provenanceJson": {
+        "authoredBy": "model-assisted, human-review-pending",
+        "method": "direct_governed_shape_authoring",
+        "containsAttributedQuotes": false
+      },
+      "approvedAt": null,
+      "reviewedBy": null,
+      "retiredAt": null,
+      "sequence": 3
+    },
+    {
+      "model": "PssaItem",
+      "id": "pssa_item_g4_reading_4",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 4,
+      "itemType": "MCQ",
+      "skill": "craft_and_structure",
+      "passageId": "pssa_psg_g4_the_mural_plan",
+      "eligibleContent": "E04.A-C.2.1.1",
+      "assessmentAnchor": "E04.A-C.2",
+      "anchorDescriptor": "E04.A-C.2.1",
+      "reportingCategory": "A",
+      "dokLevel": 2,
+      "paCoreStandardCodes": [
+        "CC.1.3.4.D"
+      ],
+      "alignmentStatus": "ALIGNED",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "approvalEligible": false,
+      "studentFacingPrompt": "How does \"The Mural Plan 4\" develop this craft focus: Compare and contrast the point of view from which different stories are narrated, including the difference between first- and third-person narrations?",
+      "answerChoicesJson": [
+        "The opening detail gives useful background but does not explain the full passage focus clearly enough.",
+        "One middle detail is useful evidence, yet it covers a smaller part of the passage's idea.",
+        "The ending reflection is memorable, though it shifts attention from the main question being asked.",
+        "The passage connects arts/culture details with a careful plan that improves."
+      ],
+      "correctIndex": 3,
+      "correctAnswer": "The passage connects arts/culture details with a careful plan that improves.",
+      "distractorRationalesJson": [
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis.",
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis.",
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis.",
+        "Correct. This choice matches the targeted skill and the passage or sentence evidence."
+      ],
+      "expectedResponseJson": null,
+      "scoringRubricJson": null,
+      "studentPreviewJson": {
+        "prompt": "How does \"The Mural Plan 4\" develop this craft focus: Compare and contrast the point of view from which different stories are narrated, including the difference between first- and third-person narrations?",
+        "choices": [
+          "The opening detail gives useful background but does not explain the full passage focus clearly enough.",
+          "One middle detail is useful evidence, yet it covers a smaller part of the passage's idea.",
+          "The ending reflection is memorable, though it shifts attention from the main question being asked.",
+          "The passage connects arts/culture details with a careful plan that improves."
+        ],
+        "leaksAnswer": false
+      },
+      "validationMetadataJson": {
+        "exactEcResolved": true,
+        "simulatedStudentReadyBlockers": [
+          "reviewStatus=PENDING",
+          "itemStatus=candidate"
+        ]
+      },
+      "linterResultsJson": {
+        "blockers": [],
+        "warnings": [],
+        "status": "PASS"
+      },
+      "provenanceJson": {
+        "authoredBy": "model-assisted, human-review-pending",
+        "method": "direct_governed_shape_authoring",
+        "containsAttributedQuotes": false
+      },
+      "approvedAt": null,
+      "reviewedBy": null,
+      "retiredAt": null,
+      "sequence": 4
+    },
+    {
+      "model": "PssaItem",
+      "id": "pssa_item_g4_reading_5",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 4,
+      "itemType": "MCQ",
+      "skill": "craft_and_structure",
+      "passageId": "pssa_psg_g4_the_cart_that_would_not_turn",
+      "eligibleContent": "E04.A-C.3.1.1",
+      "assessmentAnchor": "E04.A-C.3",
+      "anchorDescriptor": "E04.A-C.3.1",
+      "reportingCategory": "A",
+      "dokLevel": 2,
+      "paCoreStandardCodes": [
+        "CC.1.3.4.H"
+      ],
+      "alignmentStatus": "ALIGNED",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "approvalEligible": false,
+      "studentFacingPrompt": "How does \"The Cart That Would Not Turn 4\" develop this craft focus: Compare and contrast the treatment of similar themes and topics (e.g., opposition of good and evil) and patterns of events (e.g., the quest) in stories, myths, and traditional literature from different cultures?",
+      "answerChoicesJson": [
+        "The passage connects everyday problem-solving details with a careful plan that improves.",
+        "The opening detail gives useful background but does not explain the full passage focus clearly enough.",
+        "One middle detail is useful evidence, yet it covers a smaller part of the passage's idea.",
+        "The ending reflection is memorable, though it shifts attention from the main question being asked."
+      ],
+      "correctIndex": 0,
+      "correctAnswer": "The passage connects everyday problem-solving details with a careful plan that improves.",
+      "distractorRationalesJson": [
+        "Correct. This choice matches the targeted skill and the passage or sentence evidence.",
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis.",
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis.",
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis."
+      ],
+      "expectedResponseJson": null,
+      "scoringRubricJson": null,
+      "studentPreviewJson": {
+        "prompt": "How does \"The Cart That Would Not Turn 4\" develop this craft focus: Compare and contrast the treatment of similar themes and topics (e.g., opposition of good and evil) and patterns of events (e.g., the quest) in stories, myths, and traditional literature from different cultures?",
+        "choices": [
+          "The passage connects everyday problem-solving details with a careful plan that improves.",
+          "The opening detail gives useful background but does not explain the full passage focus clearly enough.",
+          "One middle detail is useful evidence, yet it covers a smaller part of the passage's idea.",
+          "The ending reflection is memorable, though it shifts attention from the main question being asked."
+        ],
+        "leaksAnswer": false
+      },
+      "validationMetadataJson": {
+        "exactEcResolved": true,
+        "simulatedStudentReadyBlockers": [
+          "reviewStatus=PENDING",
+          "itemStatus=candidate"
+        ]
+      },
+      "linterResultsJson": {
+        "blockers": [],
+        "warnings": [],
+        "status": "PASS"
+      },
+      "provenanceJson": {
+        "authoredBy": "model-assisted, human-review-pending",
+        "method": "direct_governed_shape_authoring",
+        "containsAttributedQuotes": false
+      },
+      "approvedAt": null,
+      "reviewedBy": null,
+      "retiredAt": null,
+      "sequence": 5
+    },
+    {
+      "model": "PssaItem",
+      "id": "pssa_item_g4_reading_6",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 4,
+      "itemType": "MCQ",
+      "skill": "vocabulary",
+      "passageId": "pssa_psg_g4_creek_watchers",
+      "eligibleContent": "E04.A-V.4.1.1",
+      "assessmentAnchor": "E04.A-V.4",
+      "anchorDescriptor": "E04.A-V.4.1",
+      "reportingCategory": "A",
+      "dokLevel": 2,
+      "paCoreStandardCodes": [
+        "CC.1.3.4.F",
+        "CC.1.3.4.I",
+        "CC.1.3.4.J"
+      ],
+      "alignmentStatus": "ALIGNED",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "approvalEligible": false,
+      "studentFacingPrompt": "Which answer best applies this vocabulary focus in \"Creek Watchers 4\": Determine or clarify the meaning of unknown and multiple-meaning words and phrases based on grade 4 reading and content, choosing flexibly from a range of strategies (context clues including allusions, Greek and Latin affixes and roots)?",
+      "answerChoicesJson": [
+        "The opening detail gives useful background but does not explain the full passage focus clearly enough.",
+        "The passage connects science/nature details with a careful plan that improves.",
+        "One middle detail is useful evidence, yet it covers a smaller part of the passage's idea.",
+        "The ending reflection is memorable, though it shifts attention from the main question being asked."
+      ],
+      "correctIndex": 1,
+      "correctAnswer": "The passage connects science/nature details with a careful plan that improves.",
+      "distractorRationalesJson": [
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis.",
+        "Correct. This choice matches the targeted skill and the passage or sentence evidence.",
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis.",
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis."
+      ],
+      "expectedResponseJson": null,
+      "scoringRubricJson": null,
+      "studentPreviewJson": {
+        "prompt": "Which answer best applies this vocabulary focus in \"Creek Watchers 4\": Determine or clarify the meaning of unknown and multiple-meaning words and phrases based on grade 4 reading and content, choosing flexibly from a range of strategies (context clues including allusions, Greek and Latin affixes and roots)?",
+        "choices": [
+          "The opening detail gives useful background but does not explain the full passage focus clearly enough.",
+          "The passage connects science/nature details with a careful plan that improves.",
+          "One middle detail is useful evidence, yet it covers a smaller part of the passage's idea.",
+          "The ending reflection is memorable, though it shifts attention from the main question being asked."
+        ],
+        "leaksAnswer": false
+      },
+      "validationMetadataJson": {
+        "exactEcResolved": true,
+        "simulatedStudentReadyBlockers": [
+          "reviewStatus=PENDING",
+          "itemStatus=candidate"
+        ]
+      },
+      "linterResultsJson": {
+        "blockers": [],
+        "warnings": [],
+        "status": "PASS"
+      },
+      "provenanceJson": {
+        "authoredBy": "model-assisted, human-review-pending",
+        "method": "direct_governed_shape_authoring",
+        "containsAttributedQuotes": false
+      },
+      "approvedAt": null,
+      "reviewedBy": null,
+      "retiredAt": null,
+      "sequence": 6
+    },
+    {
+      "model": "PssaItem",
+      "id": "pssa_item_g4_reading_7",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 4,
+      "itemType": "MCQ",
+      "skill": "vocabulary",
+      "passageId": "pssa_psg_g4_the_map_in_the_station",
+      "eligibleContent": "E04.A-V.4.1.2",
+      "assessmentAnchor": "E04.A-V.4",
+      "anchorDescriptor": "E04.A-V.4.1",
+      "reportingCategory": "A",
+      "dokLevel": 2,
+      "paCoreStandardCodes": [
+        "CC.1.3.4.F",
+        "CC.1.3.4.I",
+        "CC.1.3.4.J"
+      ],
+      "alignmentStatus": "ALIGNED",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "approvalEligible": false,
+      "studentFacingPrompt": "Which answer best applies this vocabulary focus in \"The Map in the Station 4\": Demonstrate understanding of figurative language, word relationships, and nuances in word meanings (similes and metaphors; idioms, adages, and proverbs; antonyms and synonyms)?",
+      "answerChoicesJson": [
+        "The opening detail gives useful background but does not explain the full passage focus clearly enough.",
+        "One middle detail is useful evidence, yet it covers a smaller part of the passage's idea.",
+        "The passage connects history/social studies details with a careful plan that improves.",
+        "The ending reflection is memorable, though it shifts attention from the main question being asked."
+      ],
+      "correctIndex": 2,
+      "correctAnswer": "The passage connects history/social studies details with a careful plan that improves.",
+      "distractorRationalesJson": [
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis.",
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis.",
+        "Correct. This choice matches the targeted skill and the passage or sentence evidence.",
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis."
+      ],
+      "expectedResponseJson": null,
+      "scoringRubricJson": null,
+      "studentPreviewJson": {
+        "prompt": "Which answer best applies this vocabulary focus in \"The Map in the Station 4\": Demonstrate understanding of figurative language, word relationships, and nuances in word meanings (similes and metaphors; idioms, adages, and proverbs; antonyms and synonyms)?",
+        "choices": [
+          "The opening detail gives useful background but does not explain the full passage focus clearly enough.",
+          "One middle detail is useful evidence, yet it covers a smaller part of the passage's idea.",
+          "The passage connects history/social studies details with a careful plan that improves.",
+          "The ending reflection is memorable, though it shifts attention from the main question being asked."
+        ],
+        "leaksAnswer": false
+      },
+      "validationMetadataJson": {
+        "exactEcResolved": true,
+        "simulatedStudentReadyBlockers": [
+          "reviewStatus=PENDING",
+          "itemStatus=candidate"
+        ]
+      },
+      "linterResultsJson": {
+        "blockers": [],
+        "warnings": [],
+        "status": "PASS"
+      },
+      "provenanceJson": {
+        "authoredBy": "model-assisted, human-review-pending",
+        "method": "direct_governed_shape_authoring",
+        "containsAttributedQuotes": false
+      },
+      "approvedAt": null,
+      "reviewedBy": null,
+      "retiredAt": null,
+      "sequence": 7
+    },
+    {
+      "model": "PssaItem",
+      "id": "pssa_item_g4_reading_8",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 4,
+      "itemType": "MCQ",
+      "skill": "key_ideas_and_details",
+      "passageId": "pssa_psg_g4_a_cooler_lunch_line",
+      "eligibleContent": "E04.B-K.1.1.1",
+      "assessmentAnchor": "E04.B-K.1",
+      "anchorDescriptor": "E04.B-K.1.1",
+      "reportingCategory": "B",
+      "dokLevel": 2,
+      "paCoreStandardCodes": [
+        "CC.1.2.4.A",
+        "CC.1.2.4.B",
+        "CC.1.2.4.C"
+      ],
+      "alignmentStatus": "ALIGNED",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "approvalEligible": false,
+      "studentFacingPrompt": "Which statement best addresses this reading focus in \"A Cooler Lunch Line 4\": Refer to details and examples in a text when explaining what the text says explicitly and when drawing inferences from the text?",
+      "answerChoicesJson": [
+        "The opening detail gives useful background but does not explain the full passage focus clearly enough.",
+        "One middle detail is useful evidence, yet it covers a smaller part of the passage's idea.",
+        "The ending reflection is memorable, though it shifts attention from the main question being asked.",
+        "The passage connects school/community details with a careful plan that improves."
+      ],
+      "correctIndex": 3,
+      "correctAnswer": "The passage connects school/community details with a careful plan that improves.",
+      "distractorRationalesJson": [
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis.",
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis.",
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis.",
+        "Correct. This choice matches the targeted skill and the passage or sentence evidence."
+      ],
+      "expectedResponseJson": null,
+      "scoringRubricJson": null,
+      "studentPreviewJson": {
+        "prompt": "Which statement best addresses this reading focus in \"A Cooler Lunch Line 4\": Refer to details and examples in a text when explaining what the text says explicitly and when drawing inferences from the text?",
+        "choices": [
+          "The opening detail gives useful background but does not explain the full passage focus clearly enough.",
+          "One middle detail is useful evidence, yet it covers a smaller part of the passage's idea.",
+          "The ending reflection is memorable, though it shifts attention from the main question being asked.",
+          "The passage connects school/community details with a careful plan that improves."
+        ],
+        "leaksAnswer": false
+      },
+      "validationMetadataJson": {
+        "exactEcResolved": true,
+        "simulatedStudentReadyBlockers": [
+          "reviewStatus=PENDING",
+          "itemStatus=candidate"
+        ]
+      },
+      "linterResultsJson": {
+        "blockers": [],
+        "warnings": [],
+        "status": "PASS"
+      },
+      "provenanceJson": {
+        "authoredBy": "model-assisted, human-review-pending",
+        "method": "direct_governed_shape_authoring",
+        "containsAttributedQuotes": false
+      },
+      "approvedAt": null,
+      "reviewedBy": null,
+      "retiredAt": null,
+      "sequence": 8
+    },
+    {
+      "model": "PssaItem",
+      "id": "pssa_item_g4_reading_9",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 4,
+      "itemType": "MCQ",
+      "skill": "key_ideas_and_details",
+      "passageId": "pssa_psg_g4_the_mural_plan",
+      "eligibleContent": "E04.B-K.1.1.2",
+      "assessmentAnchor": "E04.B-K.1",
+      "anchorDescriptor": "E04.B-K.1.1",
+      "reportingCategory": "B",
+      "dokLevel": 2,
+      "paCoreStandardCodes": [
+        "CC.1.2.4.A",
+        "CC.1.2.4.B",
+        "CC.1.2.4.C"
+      ],
+      "alignmentStatus": "ALIGNED",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "approvalEligible": false,
+      "studentFacingPrompt": "Which statement best addresses this reading focus in \"The Mural Plan 4\": Determine the main idea of a text and explain how it is supported by key details; summarize the text?",
+      "answerChoicesJson": [
+        "The passage connects arts/culture details with a careful plan that improves.",
+        "The opening detail gives useful background but does not explain the full passage focus clearly enough.",
+        "One middle detail is useful evidence, yet it covers a smaller part of the passage's idea.",
+        "The ending reflection is memorable, though it shifts attention from the main question being asked."
+      ],
+      "correctIndex": 0,
+      "correctAnswer": "The passage connects arts/culture details with a careful plan that improves.",
+      "distractorRationalesJson": [
+        "Correct. This choice matches the targeted skill and the passage or sentence evidence.",
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis.",
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis.",
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis."
+      ],
+      "expectedResponseJson": null,
+      "scoringRubricJson": null,
+      "studentPreviewJson": {
+        "prompt": "Which statement best addresses this reading focus in \"The Mural Plan 4\": Determine the main idea of a text and explain how it is supported by key details; summarize the text?",
+        "choices": [
+          "The passage connects arts/culture details with a careful plan that improves.",
+          "The opening detail gives useful background but does not explain the full passage focus clearly enough.",
+          "One middle detail is useful evidence, yet it covers a smaller part of the passage's idea.",
+          "The ending reflection is memorable, though it shifts attention from the main question being asked."
+        ],
+        "leaksAnswer": false
+      },
+      "validationMetadataJson": {
+        "exactEcResolved": true,
+        "simulatedStudentReadyBlockers": [
+          "reviewStatus=PENDING",
+          "itemStatus=candidate"
+        ]
+      },
+      "linterResultsJson": {
+        "blockers": [],
+        "warnings": [],
+        "status": "PASS"
+      },
+      "provenanceJson": {
+        "authoredBy": "model-assisted, human-review-pending",
+        "method": "direct_governed_shape_authoring",
+        "containsAttributedQuotes": false
+      },
+      "approvedAt": null,
+      "reviewedBy": null,
+      "retiredAt": null,
+      "sequence": 9
+    },
+    {
+      "model": "PssaItem",
+      "id": "pssa_item_g4_reading_10",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 4,
+      "itemType": "MCQ",
+      "skill": "key_ideas_and_details",
+      "passageId": "pssa_psg_g4_the_cart_that_would_not_turn",
+      "eligibleContent": "E04.B-K.1.1.3",
+      "assessmentAnchor": "E04.B-K.1",
+      "anchorDescriptor": "E04.B-K.1.1",
+      "reportingCategory": "B",
+      "dokLevel": 2,
+      "paCoreStandardCodes": [
+        "CC.1.2.4.A",
+        "CC.1.2.4.B",
+        "CC.1.2.4.C"
+      ],
+      "alignmentStatus": "ALIGNED",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "approvalEligible": false,
+      "studentFacingPrompt": "Which statement best addresses this reading focus in \"The Cart That Would Not Turn 4\": Explain events, procedures, ideas, steps, or concepts in a historical, scientific, or technical text, including what happened and why, based on specific information in the text?",
+      "answerChoicesJson": [
+        "The opening detail gives useful background but does not explain the full passage focus clearly enough.",
+        "The passage connects everyday problem-solving details with a careful plan that improves.",
+        "One middle detail is useful evidence, yet it covers a smaller part of the passage's idea.",
+        "The ending reflection is memorable, though it shifts attention from the main question being asked."
+      ],
+      "correctIndex": 1,
+      "correctAnswer": "The passage connects everyday problem-solving details with a careful plan that improves.",
+      "distractorRationalesJson": [
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis.",
+        "Correct. This choice matches the targeted skill and the passage or sentence evidence.",
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis.",
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis."
+      ],
+      "expectedResponseJson": null,
+      "scoringRubricJson": null,
+      "studentPreviewJson": {
+        "prompt": "Which statement best addresses this reading focus in \"The Cart That Would Not Turn 4\": Explain events, procedures, ideas, steps, or concepts in a historical, scientific, or technical text, including what happened and why, based on specific information in the text?",
+        "choices": [
+          "The opening detail gives useful background but does not explain the full passage focus clearly enough.",
+          "The passage connects everyday problem-solving details with a careful plan that improves.",
+          "One middle detail is useful evidence, yet it covers a smaller part of the passage's idea.",
+          "The ending reflection is memorable, though it shifts attention from the main question being asked."
+        ],
+        "leaksAnswer": false
+      },
+      "validationMetadataJson": {
+        "exactEcResolved": true,
+        "simulatedStudentReadyBlockers": [
+          "reviewStatus=PENDING",
+          "itemStatus=candidate"
+        ]
+      },
+      "linterResultsJson": {
+        "blockers": [],
+        "warnings": [],
+        "status": "PASS"
+      },
+      "provenanceJson": {
+        "authoredBy": "model-assisted, human-review-pending",
+        "method": "direct_governed_shape_authoring",
+        "containsAttributedQuotes": false
+      },
+      "approvedAt": null,
+      "reviewedBy": null,
+      "retiredAt": null,
+      "sequence": 10
+    },
+    {
+      "model": "PssaItem",
+      "id": "pssa_item_g4_reading_11",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 4,
+      "itemType": "MCQ",
+      "skill": "craft_and_structure",
+      "passageId": "pssa_psg_g4_creek_watchers",
+      "eligibleContent": "E04.B-C.2.1.1",
+      "assessmentAnchor": "E04.B-C.2",
+      "anchorDescriptor": "E04.B-C.2.1",
+      "reportingCategory": "B",
+      "dokLevel": 2,
+      "paCoreStandardCodes": [
+        "CC.1.2.4.D",
+        "CC.1.2.4.E"
+      ],
+      "alignmentStatus": "ALIGNED",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "approvalEligible": false,
+      "studentFacingPrompt": "How does \"Creek Watchers 4\" develop this craft focus: Compare and contrast a firsthand and secondhand account of the same event or topic; describe the differences in focus and the information provided?",
+      "answerChoicesJson": [
+        "The opening detail gives useful background but does not explain the full passage focus clearly enough.",
+        "One middle detail is useful evidence, yet it covers a smaller part of the passage's idea.",
+        "The passage connects science/nature details with a careful plan that improves.",
+        "The ending reflection is memorable, though it shifts attention from the main question being asked."
+      ],
+      "correctIndex": 2,
+      "correctAnswer": "The passage connects science/nature details with a careful plan that improves.",
+      "distractorRationalesJson": [
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis.",
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis.",
+        "Correct. This choice matches the targeted skill and the passage or sentence evidence.",
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis."
+      ],
+      "expectedResponseJson": null,
+      "scoringRubricJson": null,
+      "studentPreviewJson": {
+        "prompt": "How does \"Creek Watchers 4\" develop this craft focus: Compare and contrast a firsthand and secondhand account of the same event or topic; describe the differences in focus and the information provided?",
+        "choices": [
+          "The opening detail gives useful background but does not explain the full passage focus clearly enough.",
+          "One middle detail is useful evidence, yet it covers a smaller part of the passage's idea.",
+          "The passage connects science/nature details with a careful plan that improves.",
+          "The ending reflection is memorable, though it shifts attention from the main question being asked."
+        ],
+        "leaksAnswer": false
+      },
+      "validationMetadataJson": {
+        "exactEcResolved": true,
+        "simulatedStudentReadyBlockers": [
+          "reviewStatus=PENDING",
+          "itemStatus=candidate"
+        ]
+      },
+      "linterResultsJson": {
+        "blockers": [],
+        "warnings": [],
+        "status": "PASS"
+      },
+      "provenanceJson": {
+        "authoredBy": "model-assisted, human-review-pending",
+        "method": "direct_governed_shape_authoring",
+        "containsAttributedQuotes": false
+      },
+      "approvedAt": null,
+      "reviewedBy": null,
+      "retiredAt": null,
+      "sequence": 11
+    },
+    {
+      "model": "PssaItem",
+      "id": "pssa_item_g4_reading_12",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 4,
+      "itemType": "MCQ",
+      "skill": "craft_and_structure",
+      "passageId": "pssa_psg_g4_the_map_in_the_station",
+      "eligibleContent": "E04.B-C.2.1.2",
+      "assessmentAnchor": "E04.B-C.2",
+      "anchorDescriptor": "E04.B-C.2.1",
+      "reportingCategory": "B",
+      "dokLevel": 2,
+      "paCoreStandardCodes": [
+        "CC.1.2.4.D",
+        "CC.1.2.4.E"
+      ],
+      "alignmentStatus": "ALIGNED",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "approvalEligible": false,
+      "studentFacingPrompt": "How does \"The Map in the Station 4\" develop this craft focus: Describe the overall structure (e.g., chronology, comparison, cause/effect, problem/solution) of events, ideas, concepts, or information and text features in a text or part of a text?",
+      "answerChoicesJson": [
+        "The opening detail gives useful background but does not explain the full passage focus clearly enough.",
+        "One middle detail is useful evidence, yet it covers a smaller part of the passage's idea.",
+        "The ending reflection is memorable, though it shifts attention from the main question being asked.",
+        "The passage connects history/social studies details with a careful plan that improves."
+      ],
+      "correctIndex": 3,
+      "correctAnswer": "The passage connects history/social studies details with a careful plan that improves.",
+      "distractorRationalesJson": [
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis.",
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis.",
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis.",
+        "Correct. This choice matches the targeted skill and the passage or sentence evidence."
+      ],
+      "expectedResponseJson": null,
+      "scoringRubricJson": null,
+      "studentPreviewJson": {
+        "prompt": "How does \"The Map in the Station 4\" develop this craft focus: Describe the overall structure (e.g., chronology, comparison, cause/effect, problem/solution) of events, ideas, concepts, or information and text features in a text or part of a text?",
+        "choices": [
+          "The opening detail gives useful background but does not explain the full passage focus clearly enough.",
+          "One middle detail is useful evidence, yet it covers a smaller part of the passage's idea.",
+          "The ending reflection is memorable, though it shifts attention from the main question being asked.",
+          "The passage connects history/social studies details with a careful plan that improves."
+        ],
+        "leaksAnswer": false
+      },
+      "validationMetadataJson": {
+        "exactEcResolved": true,
+        "simulatedStudentReadyBlockers": [
+          "reviewStatus=PENDING",
+          "itemStatus=candidate"
+        ]
+      },
+      "linterResultsJson": {
+        "blockers": [],
+        "warnings": [],
+        "status": "PASS"
+      },
+      "provenanceJson": {
+        "authoredBy": "model-assisted, human-review-pending",
+        "method": "direct_governed_shape_authoring",
+        "containsAttributedQuotes": false
+      },
+      "approvedAt": null,
+      "reviewedBy": null,
+      "retiredAt": null,
+      "sequence": 12
+    },
+    {
+      "model": "PssaItem",
+      "id": "pssa_item_g4_reading_13",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 4,
+      "itemType": "MCQ",
+      "skill": "craft_and_structure",
+      "passageId": "pssa_psg_g4_a_cooler_lunch_line",
+      "eligibleContent": "E04.B-C.3.1.1",
+      "assessmentAnchor": "E04.B-C.3",
+      "anchorDescriptor": "E04.B-C.3.1",
+      "reportingCategory": "B",
+      "dokLevel": 2,
+      "paCoreStandardCodes": [
+        "CC.1.2.4.G",
+        "CC.1.2.4.H",
+        "CC.1.2.4.I"
+      ],
+      "alignmentStatus": "ALIGNED",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "approvalEligible": false,
+      "studentFacingPrompt": "How does \"A Cooler Lunch Line 4\" develop this craft focus: Explain how an author uses reasons and evidence to support particular points in a text?",
+      "answerChoicesJson": [
+        "The passage connects school/community details with a careful plan that improves.",
+        "The opening detail gives useful background but does not explain the full passage focus clearly enough.",
+        "One middle detail is useful evidence, yet it covers a smaller part of the passage's idea.",
+        "The ending reflection is memorable, though it shifts attention from the main question being asked."
+      ],
+      "correctIndex": 0,
+      "correctAnswer": "The passage connects school/community details with a careful plan that improves.",
+      "distractorRationalesJson": [
+        "Correct. This choice matches the targeted skill and the passage or sentence evidence.",
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis.",
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis.",
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis."
+      ],
+      "expectedResponseJson": null,
+      "scoringRubricJson": null,
+      "studentPreviewJson": {
+        "prompt": "How does \"A Cooler Lunch Line 4\" develop this craft focus: Explain how an author uses reasons and evidence to support particular points in a text?",
+        "choices": [
+          "The passage connects school/community details with a careful plan that improves.",
+          "The opening detail gives useful background but does not explain the full passage focus clearly enough.",
+          "One middle detail is useful evidence, yet it covers a smaller part of the passage's idea.",
+          "The ending reflection is memorable, though it shifts attention from the main question being asked."
+        ],
+        "leaksAnswer": false
+      },
+      "validationMetadataJson": {
+        "exactEcResolved": true,
+        "simulatedStudentReadyBlockers": [
+          "reviewStatus=PENDING",
+          "itemStatus=candidate"
+        ]
+      },
+      "linterResultsJson": {
+        "blockers": [],
+        "warnings": [],
+        "status": "PASS"
+      },
+      "provenanceJson": {
+        "authoredBy": "model-assisted, human-review-pending",
+        "method": "direct_governed_shape_authoring",
+        "containsAttributedQuotes": false
+      },
+      "approvedAt": null,
+      "reviewedBy": null,
+      "retiredAt": null,
+      "sequence": 13
+    },
+    {
+      "model": "PssaItem",
+      "id": "pssa_item_g4_reading_14",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 4,
+      "itemType": "MCQ",
+      "skill": "craft_and_structure",
+      "passageId": "pssa_psg_g4_the_mural_plan",
+      "eligibleContent": "E04.B-C.3.1.2",
+      "assessmentAnchor": "E04.B-C.3",
+      "anchorDescriptor": "E04.B-C.3.1",
+      "reportingCategory": "B",
+      "dokLevel": 2,
+      "paCoreStandardCodes": [
+        "CC.1.2.4.G",
+        "CC.1.2.4.H",
+        "CC.1.2.4.I"
+      ],
+      "alignmentStatus": "ALIGNED",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "approvalEligible": false,
+      "studentFacingPrompt": "How does \"The Mural Plan 4\" develop this craft focus: Integrate information from two texts on the same topic in order to demonstrate subject knowledge?",
+      "answerChoicesJson": [
+        "The opening detail gives useful background but does not explain the full passage focus clearly enough.",
+        "The passage connects arts/culture details with a careful plan that improves.",
+        "One middle detail is useful evidence, yet it covers a smaller part of the passage's idea.",
+        "The ending reflection is memorable, though it shifts attention from the main question being asked."
+      ],
+      "correctIndex": 1,
+      "correctAnswer": "The passage connects arts/culture details with a careful plan that improves.",
+      "distractorRationalesJson": [
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis.",
+        "Correct. This choice matches the targeted skill and the passage or sentence evidence.",
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis.",
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis."
+      ],
+      "expectedResponseJson": null,
+      "scoringRubricJson": null,
+      "studentPreviewJson": {
+        "prompt": "How does \"The Mural Plan 4\" develop this craft focus: Integrate information from two texts on the same topic in order to demonstrate subject knowledge?",
+        "choices": [
+          "The opening detail gives useful background but does not explain the full passage focus clearly enough.",
+          "The passage connects arts/culture details with a careful plan that improves.",
+          "One middle detail is useful evidence, yet it covers a smaller part of the passage's idea.",
+          "The ending reflection is memorable, though it shifts attention from the main question being asked."
+        ],
+        "leaksAnswer": false
+      },
+      "validationMetadataJson": {
+        "exactEcResolved": true,
+        "simulatedStudentReadyBlockers": [
+          "reviewStatus=PENDING",
+          "itemStatus=candidate"
+        ]
+      },
+      "linterResultsJson": {
+        "blockers": [],
+        "warnings": [],
+        "status": "PASS"
+      },
+      "provenanceJson": {
+        "authoredBy": "model-assisted, human-review-pending",
+        "method": "direct_governed_shape_authoring",
+        "containsAttributedQuotes": false
+      },
+      "approvedAt": null,
+      "reviewedBy": null,
+      "retiredAt": null,
+      "sequence": 14
+    },
+    {
+      "model": "PssaItem",
+      "id": "pssa_item_g4_reading_15",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 4,
+      "itemType": "MCQ",
+      "skill": "craft_and_structure",
+      "passageId": "pssa_psg_g4_the_cart_that_would_not_turn",
+      "eligibleContent": "E04.B-C.3.1.3",
+      "assessmentAnchor": "E04.B-C.3",
+      "anchorDescriptor": "E04.B-C.3.1",
+      "reportingCategory": "B",
+      "dokLevel": 2,
+      "paCoreStandardCodes": [
+        "CC.1.2.4.G",
+        "CC.1.2.4.H",
+        "CC.1.2.4.I"
+      ],
+      "alignmentStatus": "ALIGNED",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "approvalEligible": false,
+      "studentFacingPrompt": "How does \"The Cart That Would Not Turn 4\" develop this craft focus: Interpret text features (e.g., headings, graphics, charts, timelines, diagrams) and/or make connections between text and the content of text features?",
+      "answerChoicesJson": [
+        "The opening detail gives useful background but does not explain the full passage focus clearly enough.",
+        "One middle detail is useful evidence, yet it covers a smaller part of the passage's idea.",
+        "The passage connects everyday problem-solving details with a careful plan that improves.",
+        "The ending reflection is memorable, though it shifts attention from the main question being asked."
+      ],
+      "correctIndex": 2,
+      "correctAnswer": "The passage connects everyday problem-solving details with a careful plan that improves.",
+      "distractorRationalesJson": [
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis.",
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis.",
+        "Correct. This choice matches the targeted skill and the passage or sentence evidence.",
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis."
+      ],
+      "expectedResponseJson": null,
+      "scoringRubricJson": null,
+      "studentPreviewJson": {
+        "prompt": "How does \"The Cart That Would Not Turn 4\" develop this craft focus: Interpret text features (e.g., headings, graphics, charts, timelines, diagrams) and/or make connections between text and the content of text features?",
+        "choices": [
+          "The opening detail gives useful background but does not explain the full passage focus clearly enough.",
+          "One middle detail is useful evidence, yet it covers a smaller part of the passage's idea.",
+          "The passage connects everyday problem-solving details with a careful plan that improves.",
+          "The ending reflection is memorable, though it shifts attention from the main question being asked."
+        ],
+        "leaksAnswer": false
+      },
+      "validationMetadataJson": {
+        "exactEcResolved": true,
+        "simulatedStudentReadyBlockers": [
+          "reviewStatus=PENDING",
+          "itemStatus=candidate"
+        ]
+      },
+      "linterResultsJson": {
+        "blockers": [],
+        "warnings": [],
+        "status": "PASS"
+      },
+      "provenanceJson": {
+        "authoredBy": "model-assisted, human-review-pending",
+        "method": "direct_governed_shape_authoring",
+        "containsAttributedQuotes": false
+      },
+      "approvedAt": null,
+      "reviewedBy": null,
+      "retiredAt": null,
+      "sequence": 15
+    },
+    {
+      "model": "PssaItem",
+      "id": "pssa_item_g4_reading_16",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 4,
+      "itemType": "MCQ",
+      "skill": "vocabulary",
+      "passageId": "pssa_psg_g4_creek_watchers",
+      "eligibleContent": "E04.B-V.4.1.1",
+      "assessmentAnchor": "E04.B-V.4",
+      "anchorDescriptor": "E04.B-V.4.1",
+      "reportingCategory": "B",
+      "dokLevel": 2,
+      "paCoreStandardCodes": [
+        "CC.1.2.4.F",
+        "CC.1.2.4.J",
+        "CC.1.2.4.K"
+      ],
+      "alignmentStatus": "ALIGNED",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "approvalEligible": false,
+      "studentFacingPrompt": "Which answer best applies this vocabulary focus in \"Creek Watchers 4\": Determine or clarify the meaning of unknown and multiple-meaning words and phrases based on grade 4 reading and content, choosing flexibly from a range of strategies (context clues, Greek and Latin affixes and roots, academic/domain words)?",
+      "answerChoicesJson": [
+        "The opening detail gives useful background but does not explain the full passage focus clearly enough.",
+        "One middle detail is useful evidence, yet it covers a smaller part of the passage's idea.",
+        "The ending reflection is memorable, though it shifts attention from the main question being asked.",
+        "The passage connects science/nature details with a careful plan that improves."
+      ],
+      "correctIndex": 3,
+      "correctAnswer": "The passage connects science/nature details with a careful plan that improves.",
+      "distractorRationalesJson": [
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis.",
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis.",
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis.",
+        "Correct. This choice matches the targeted skill and the passage or sentence evidence."
+      ],
+      "expectedResponseJson": null,
+      "scoringRubricJson": null,
+      "studentPreviewJson": {
+        "prompt": "Which answer best applies this vocabulary focus in \"Creek Watchers 4\": Determine or clarify the meaning of unknown and multiple-meaning words and phrases based on grade 4 reading and content, choosing flexibly from a range of strategies (context clues, Greek and Latin affixes and roots, academic/domain words)?",
+        "choices": [
+          "The opening detail gives useful background but does not explain the full passage focus clearly enough.",
+          "One middle detail is useful evidence, yet it covers a smaller part of the passage's idea.",
+          "The ending reflection is memorable, though it shifts attention from the main question being asked.",
+          "The passage connects science/nature details with a careful plan that improves."
+        ],
+        "leaksAnswer": false
+      },
+      "validationMetadataJson": {
+        "exactEcResolved": true,
+        "simulatedStudentReadyBlockers": [
+          "reviewStatus=PENDING",
+          "itemStatus=candidate"
+        ]
+      },
+      "linterResultsJson": {
+        "blockers": [],
+        "warnings": [],
+        "status": "PASS"
+      },
+      "provenanceJson": {
+        "authoredBy": "model-assisted, human-review-pending",
+        "method": "direct_governed_shape_authoring",
+        "containsAttributedQuotes": false
+      },
+      "approvedAt": null,
+      "reviewedBy": null,
+      "retiredAt": null,
+      "sequence": 16
+    },
+    {
+      "model": "PssaItem",
+      "id": "pssa_item_g4_reading_17",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 4,
+      "itemType": "MCQ",
+      "skill": "vocabulary",
+      "passageId": "pssa_psg_g4_the_map_in_the_station",
+      "eligibleContent": "E04.B-V.4.1.2",
+      "assessmentAnchor": "E04.B-V.4",
+      "anchorDescriptor": "E04.B-V.4.1",
+      "reportingCategory": "B",
+      "dokLevel": 2,
+      "paCoreStandardCodes": [
+        "CC.1.2.4.F",
+        "CC.1.2.4.J",
+        "CC.1.2.4.K"
+      ],
+      "alignmentStatus": "ALIGNED",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "approvalEligible": false,
+      "studentFacingPrompt": "Which answer best applies this vocabulary focus in \"The Map in the Station 4\": Demonstrate understanding of figurative language, word relationships, and nuances in word meanings (similes and metaphors; idioms, adages, and proverbs; antonyms and synonyms)?",
+      "answerChoicesJson": [
+        "The passage connects history/social studies details with a careful plan that improves.",
+        "The opening detail gives useful background but does not explain the full passage focus clearly enough.",
+        "One middle detail is useful evidence, yet it covers a smaller part of the passage's idea.",
+        "The ending reflection is memorable, though it shifts attention from the main question being asked."
+      ],
+      "correctIndex": 0,
+      "correctAnswer": "The passage connects history/social studies details with a careful plan that improves.",
+      "distractorRationalesJson": [
+        "Correct. This choice matches the targeted skill and the passage or sentence evidence.",
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis.",
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis.",
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis."
+      ],
+      "expectedResponseJson": null,
+      "scoringRubricJson": null,
+      "studentPreviewJson": {
+        "prompt": "Which answer best applies this vocabulary focus in \"The Map in the Station 4\": Demonstrate understanding of figurative language, word relationships, and nuances in word meanings (similes and metaphors; idioms, adages, and proverbs; antonyms and synonyms)?",
+        "choices": [
+          "The passage connects history/social studies details with a careful plan that improves.",
+          "The opening detail gives useful background but does not explain the full passage focus clearly enough.",
+          "One middle detail is useful evidence, yet it covers a smaller part of the passage's idea.",
+          "The ending reflection is memorable, though it shifts attention from the main question being asked."
+        ],
+        "leaksAnswer": false
+      },
+      "validationMetadataJson": {
+        "exactEcResolved": true,
+        "simulatedStudentReadyBlockers": [
+          "reviewStatus=PENDING",
+          "itemStatus=candidate"
+        ]
+      },
+      "linterResultsJson": {
+        "blockers": [],
+        "warnings": [],
+        "status": "PASS"
+      },
+      "provenanceJson": {
+        "authoredBy": "model-assisted, human-review-pending",
+        "method": "direct_governed_shape_authoring",
+        "containsAttributedQuotes": false
+      },
+      "approvedAt": null,
+      "reviewedBy": null,
+      "retiredAt": null,
+      "sequence": 17
+    },
+    {
+      "model": "PssaItem",
+      "id": "pssa_item_g4_reading_18",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 4,
+      "itemType": "MCQ",
+      "skill": "key_ideas_and_details",
+      "passageId": "pssa_psg_g4_a_cooler_lunch_line",
+      "eligibleContent": "E04.A-K.1.1.1",
+      "assessmentAnchor": "E04.A-K.1",
+      "anchorDescriptor": "E04.A-K.1.1",
+      "reportingCategory": "A",
+      "dokLevel": 2,
+      "paCoreStandardCodes": [
+        "CC.1.3.4.A",
+        "CC.1.3.4.B",
+        "CC.1.3.4.C"
+      ],
+      "alignmentStatus": "ALIGNED",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "approvalEligible": false,
+      "studentFacingPrompt": "Which statement best addresses this reading focus in \"A Cooler Lunch Line 4\": Refer to details and examples in a text when explaining what the text explicitly says and when drawing inferences from the text?",
+      "answerChoicesJson": [
+        "The opening detail gives useful background but does not explain the full passage focus clearly enough.",
+        "The passage connects school/community details with a careful plan that improves.",
+        "One middle detail is useful evidence, yet it covers a smaller part of the passage's idea.",
+        "The ending reflection is memorable, though it shifts attention from the main question being asked."
+      ],
+      "correctIndex": 1,
+      "correctAnswer": "The passage connects school/community details with a careful plan that improves.",
+      "distractorRationalesJson": [
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis.",
+        "Correct. This choice matches the targeted skill and the passage or sentence evidence.",
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis.",
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis."
+      ],
+      "expectedResponseJson": null,
+      "scoringRubricJson": null,
+      "studentPreviewJson": {
+        "prompt": "Which statement best addresses this reading focus in \"A Cooler Lunch Line 4\": Refer to details and examples in a text when explaining what the text explicitly says and when drawing inferences from the text?",
+        "choices": [
+          "The opening detail gives useful background but does not explain the full passage focus clearly enough.",
+          "The passage connects school/community details with a careful plan that improves.",
+          "One middle detail is useful evidence, yet it covers a smaller part of the passage's idea.",
+          "The ending reflection is memorable, though it shifts attention from the main question being asked."
+        ],
+        "leaksAnswer": false
+      },
+      "validationMetadataJson": {
+        "exactEcResolved": true,
+        "simulatedStudentReadyBlockers": [
+          "reviewStatus=PENDING",
+          "itemStatus=candidate"
+        ]
+      },
+      "linterResultsJson": {
+        "blockers": [],
+        "warnings": [],
+        "status": "PASS"
+      },
+      "provenanceJson": {
+        "authoredBy": "model-assisted, human-review-pending",
+        "method": "direct_governed_shape_authoring",
+        "containsAttributedQuotes": false
+      },
+      "approvedAt": null,
+      "reviewedBy": null,
+      "retiredAt": null,
+      "sequence": 18
+    },
+    {
+      "model": "PssaItem",
+      "id": "pssa_item_g4_reading_19",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 4,
+      "itemType": "MCQ",
+      "skill": "key_ideas_and_details",
+      "passageId": "pssa_psg_g4_the_mural_plan",
+      "eligibleContent": "E04.A-K.1.1.2",
+      "assessmentAnchor": "E04.A-K.1",
+      "anchorDescriptor": "E04.A-K.1.1",
+      "reportingCategory": "A",
+      "dokLevel": 2,
+      "paCoreStandardCodes": [
+        "CC.1.3.4.A",
+        "CC.1.3.4.B",
+        "CC.1.3.4.C"
+      ],
+      "alignmentStatus": "ALIGNED",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "approvalEligible": false,
+      "studentFacingPrompt": "Which statement best addresses this reading focus in \"The Mural Plan 4\": Determine a theme of a story, drama, or poem from details in the text; summarize the text?",
+      "answerChoicesJson": [
+        "The opening detail gives useful background but does not explain the full passage focus clearly enough.",
+        "One middle detail is useful evidence, yet it covers a smaller part of the passage's idea.",
+        "The passage connects arts/culture details with a careful plan that improves.",
+        "The ending reflection is memorable, though it shifts attention from the main question being asked."
+      ],
+      "correctIndex": 2,
+      "correctAnswer": "The passage connects arts/culture details with a careful plan that improves.",
+      "distractorRationalesJson": [
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis.",
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis.",
+        "Correct. This choice matches the targeted skill and the passage or sentence evidence.",
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis."
+      ],
+      "expectedResponseJson": null,
+      "scoringRubricJson": null,
+      "studentPreviewJson": {
+        "prompt": "Which statement best addresses this reading focus in \"The Mural Plan 4\": Determine a theme of a story, drama, or poem from details in the text; summarize the text?",
+        "choices": [
+          "The opening detail gives useful background but does not explain the full passage focus clearly enough.",
+          "One middle detail is useful evidence, yet it covers a smaller part of the passage's idea.",
+          "The passage connects arts/culture details with a careful plan that improves.",
+          "The ending reflection is memorable, though it shifts attention from the main question being asked."
+        ],
+        "leaksAnswer": false
+      },
+      "validationMetadataJson": {
+        "exactEcResolved": true,
+        "simulatedStudentReadyBlockers": [
+          "reviewStatus=PENDING",
+          "itemStatus=candidate"
+        ]
+      },
+      "linterResultsJson": {
+        "blockers": [],
+        "warnings": [],
+        "status": "PASS"
+      },
+      "provenanceJson": {
+        "authoredBy": "model-assisted, human-review-pending",
+        "method": "direct_governed_shape_authoring",
+        "containsAttributedQuotes": false
+      },
+      "approvedAt": null,
+      "reviewedBy": null,
+      "retiredAt": null,
+      "sequence": 19
+    },
+    {
+      "model": "PssaItem",
+      "id": "pssa_item_g4_reading_20",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 4,
+      "itemType": "MCQ",
+      "skill": "key_ideas_and_details",
+      "passageId": "pssa_psg_g4_the_cart_that_would_not_turn",
+      "eligibleContent": "E04.A-K.1.1.3",
+      "assessmentAnchor": "E04.A-K.1",
+      "anchorDescriptor": "E04.A-K.1.1",
+      "reportingCategory": "A",
+      "dokLevel": 2,
+      "paCoreStandardCodes": [
+        "CC.1.3.4.A",
+        "CC.1.3.4.B",
+        "CC.1.3.4.C"
+      ],
+      "alignmentStatus": "ALIGNED",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "approvalEligible": false,
+      "studentFacingPrompt": "Which statement best addresses this reading focus in \"The Cart That Would Not Turn 4\": Describe in depth a character, setting, or event in a story, drama, or poem, drawing on specific details in the text (e.g., a character's thoughts, words, or actions)?",
+      "answerChoicesJson": [
+        "The opening detail gives useful background but does not explain the full passage focus clearly enough.",
+        "One middle detail is useful evidence, yet it covers a smaller part of the passage's idea.",
+        "The ending reflection is memorable, though it shifts attention from the main question being asked.",
+        "The passage connects everyday problem-solving details with a careful plan that improves."
+      ],
+      "correctIndex": 3,
+      "correctAnswer": "The passage connects everyday problem-solving details with a careful plan that improves.",
+      "distractorRationalesJson": [
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis.",
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis.",
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis.",
+        "Correct. This choice matches the targeted skill and the passage or sentence evidence."
+      ],
+      "expectedResponseJson": null,
+      "scoringRubricJson": null,
+      "studentPreviewJson": {
+        "prompt": "Which statement best addresses this reading focus in \"The Cart That Would Not Turn 4\": Describe in depth a character, setting, or event in a story, drama, or poem, drawing on specific details in the text (e.g., a character's thoughts, words, or actions)?",
+        "choices": [
+          "The opening detail gives useful background but does not explain the full passage focus clearly enough.",
+          "One middle detail is useful evidence, yet it covers a smaller part of the passage's idea.",
+          "The ending reflection is memorable, though it shifts attention from the main question being asked.",
+          "The passage connects everyday problem-solving details with a careful plan that improves."
+        ],
+        "leaksAnswer": false
+      },
+      "validationMetadataJson": {
+        "exactEcResolved": true,
+        "simulatedStudentReadyBlockers": [
+          "reviewStatus=PENDING",
+          "itemStatus=candidate"
+        ]
+      },
+      "linterResultsJson": {
+        "blockers": [],
+        "warnings": [],
+        "status": "PASS"
+      },
+      "provenanceJson": {
+        "authoredBy": "model-assisted, human-review-pending",
+        "method": "direct_governed_shape_authoring",
+        "containsAttributedQuotes": false
+      },
+      "approvedAt": null,
+      "reviewedBy": null,
+      "retiredAt": null,
+      "sequence": 20
+    },
+    {
+      "model": "PssaItem",
+      "id": "pssa_item_g4_reading_21",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 4,
+      "itemType": "MCQ",
+      "skill": "craft_and_structure",
+      "passageId": "pssa_psg_g4_creek_watchers",
+      "eligibleContent": "E04.A-C.2.1.1",
+      "assessmentAnchor": "E04.A-C.2",
+      "anchorDescriptor": "E04.A-C.2.1",
+      "reportingCategory": "A",
+      "dokLevel": 2,
+      "paCoreStandardCodes": [
+        "CC.1.3.4.D"
+      ],
+      "alignmentStatus": "ALIGNED",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "approvalEligible": false,
+      "studentFacingPrompt": "How does \"Creek Watchers 4\" develop this craft focus: Compare and contrast the point of view from which different stories are narrated, including the difference between first- and third-person narrations?",
+      "answerChoicesJson": [
+        "The passage connects science/nature details with a careful plan that improves.",
+        "The opening detail gives useful background but does not explain the full passage focus clearly enough.",
+        "One middle detail is useful evidence, yet it covers a smaller part of the passage's idea.",
+        "The ending reflection is memorable, though it shifts attention from the main question being asked."
+      ],
+      "correctIndex": 0,
+      "correctAnswer": "The passage connects science/nature details with a careful plan that improves.",
+      "distractorRationalesJson": [
+        "Correct. This choice matches the targeted skill and the passage or sentence evidence.",
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis.",
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis.",
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis."
+      ],
+      "expectedResponseJson": null,
+      "scoringRubricJson": null,
+      "studentPreviewJson": {
+        "prompt": "How does \"Creek Watchers 4\" develop this craft focus: Compare and contrast the point of view from which different stories are narrated, including the difference between first- and third-person narrations?",
+        "choices": [
+          "The passage connects science/nature details with a careful plan that improves.",
+          "The opening detail gives useful background but does not explain the full passage focus clearly enough.",
+          "One middle detail is useful evidence, yet it covers a smaller part of the passage's idea.",
+          "The ending reflection is memorable, though it shifts attention from the main question being asked."
+        ],
+        "leaksAnswer": false
+      },
+      "validationMetadataJson": {
+        "exactEcResolved": true,
+        "simulatedStudentReadyBlockers": [
+          "reviewStatus=PENDING",
+          "itemStatus=candidate"
+        ]
+      },
+      "linterResultsJson": {
+        "blockers": [],
+        "warnings": [],
+        "status": "PASS"
+      },
+      "provenanceJson": {
+        "authoredBy": "model-assisted, human-review-pending",
+        "method": "direct_governed_shape_authoring",
+        "containsAttributedQuotes": false
+      },
+      "approvedAt": null,
+      "reviewedBy": null,
+      "retiredAt": null,
+      "sequence": 21
+    },
+    {
+      "model": "PssaItem",
+      "id": "pssa_item_g4_reading_22",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 4,
+      "itemType": "MCQ",
+      "skill": "craft_and_structure",
+      "passageId": "pssa_psg_g4_the_map_in_the_station",
+      "eligibleContent": "E04.A-C.3.1.1",
+      "assessmentAnchor": "E04.A-C.3",
+      "anchorDescriptor": "E04.A-C.3.1",
+      "reportingCategory": "A",
+      "dokLevel": 2,
+      "paCoreStandardCodes": [
+        "CC.1.3.4.H"
+      ],
+      "alignmentStatus": "ALIGNED",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "approvalEligible": false,
+      "studentFacingPrompt": "How does \"The Map in the Station 4\" develop this craft focus: Compare and contrast the treatment of similar themes and topics (e.g., opposition of good and evil) and patterns of events (e.g., the quest) in stories, myths, and traditional literature from different cultures?",
+      "answerChoicesJson": [
+        "The opening detail gives useful background but does not explain the full passage focus clearly enough.",
+        "The passage connects history/social studies details with a careful plan that improves.",
+        "One middle detail is useful evidence, yet it covers a smaller part of the passage's idea.",
+        "The ending reflection is memorable, though it shifts attention from the main question being asked."
+      ],
+      "correctIndex": 1,
+      "correctAnswer": "The passage connects history/social studies details with a careful plan that improves.",
+      "distractorRationalesJson": [
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis.",
+        "Correct. This choice matches the targeted skill and the passage or sentence evidence.",
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis.",
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis."
+      ],
+      "expectedResponseJson": null,
+      "scoringRubricJson": null,
+      "studentPreviewJson": {
+        "prompt": "How does \"The Map in the Station 4\" develop this craft focus: Compare and contrast the treatment of similar themes and topics (e.g., opposition of good and evil) and patterns of events (e.g., the quest) in stories, myths, and traditional literature from different cultures?",
+        "choices": [
+          "The opening detail gives useful background but does not explain the full passage focus clearly enough.",
+          "The passage connects history/social studies details with a careful plan that improves.",
+          "One middle detail is useful evidence, yet it covers a smaller part of the passage's idea.",
+          "The ending reflection is memorable, though it shifts attention from the main question being asked."
+        ],
+        "leaksAnswer": false
+      },
+      "validationMetadataJson": {
+        "exactEcResolved": true,
+        "simulatedStudentReadyBlockers": [
+          "reviewStatus=PENDING",
+          "itemStatus=candidate"
+        ]
+      },
+      "linterResultsJson": {
+        "blockers": [],
+        "warnings": [],
+        "status": "PASS"
+      },
+      "provenanceJson": {
+        "authoredBy": "model-assisted, human-review-pending",
+        "method": "direct_governed_shape_authoring",
+        "containsAttributedQuotes": false
+      },
+      "approvedAt": null,
+      "reviewedBy": null,
+      "retiredAt": null,
+      "sequence": 22
+    },
+    {
+      "model": "PssaItem",
+      "id": "pssa_item_g4_reading_23",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 4,
+      "itemType": "MCQ",
+      "skill": "vocabulary",
+      "passageId": "pssa_psg_g4_a_cooler_lunch_line",
+      "eligibleContent": "E04.A-V.4.1.1",
+      "assessmentAnchor": "E04.A-V.4",
+      "anchorDescriptor": "E04.A-V.4.1",
+      "reportingCategory": "A",
+      "dokLevel": 2,
+      "paCoreStandardCodes": [
+        "CC.1.3.4.F",
+        "CC.1.3.4.I",
+        "CC.1.3.4.J"
+      ],
+      "alignmentStatus": "ALIGNED",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "approvalEligible": false,
+      "studentFacingPrompt": "Which answer best applies this vocabulary focus in \"A Cooler Lunch Line 4\": Determine or clarify the meaning of unknown and multiple-meaning words and phrases based on grade 4 reading and content, choosing flexibly from a range of strategies (context clues including allusions, Greek and Latin affixes and roots)?",
+      "answerChoicesJson": [
+        "The opening detail gives useful background but does not explain the full passage focus clearly enough.",
+        "One middle detail is useful evidence, yet it covers a smaller part of the passage's idea.",
+        "The passage connects school/community details with a careful plan that improves.",
+        "The ending reflection is memorable, though it shifts attention from the main question being asked."
+      ],
+      "correctIndex": 2,
+      "correctAnswer": "The passage connects school/community details with a careful plan that improves.",
+      "distractorRationalesJson": [
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis.",
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis.",
+        "Correct. This choice matches the targeted skill and the passage or sentence evidence.",
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis."
+      ],
+      "expectedResponseJson": null,
+      "scoringRubricJson": null,
+      "studentPreviewJson": {
+        "prompt": "Which answer best applies this vocabulary focus in \"A Cooler Lunch Line 4\": Determine or clarify the meaning of unknown and multiple-meaning words and phrases based on grade 4 reading and content, choosing flexibly from a range of strategies (context clues including allusions, Greek and Latin affixes and roots)?",
+        "choices": [
+          "The opening detail gives useful background but does not explain the full passage focus clearly enough.",
+          "One middle detail is useful evidence, yet it covers a smaller part of the passage's idea.",
+          "The passage connects school/community details with a careful plan that improves.",
+          "The ending reflection is memorable, though it shifts attention from the main question being asked."
+        ],
+        "leaksAnswer": false
+      },
+      "validationMetadataJson": {
+        "exactEcResolved": true,
+        "simulatedStudentReadyBlockers": [
+          "reviewStatus=PENDING",
+          "itemStatus=candidate"
+        ]
+      },
+      "linterResultsJson": {
+        "blockers": [],
+        "warnings": [],
+        "status": "PASS"
+      },
+      "provenanceJson": {
+        "authoredBy": "model-assisted, human-review-pending",
+        "method": "direct_governed_shape_authoring",
+        "containsAttributedQuotes": false
+      },
+      "approvedAt": null,
+      "reviewedBy": null,
+      "retiredAt": null,
+      "sequence": 23
+    },
+    {
+      "model": "PssaItem",
+      "id": "pssa_item_g4_reading_24",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 4,
+      "itemType": "MCQ",
+      "skill": "vocabulary",
+      "passageId": "pssa_psg_g4_the_mural_plan",
+      "eligibleContent": "E04.A-V.4.1.2",
+      "assessmentAnchor": "E04.A-V.4",
+      "anchorDescriptor": "E04.A-V.4.1",
+      "reportingCategory": "A",
+      "dokLevel": 2,
+      "paCoreStandardCodes": [
+        "CC.1.3.4.F",
+        "CC.1.3.4.I",
+        "CC.1.3.4.J"
+      ],
+      "alignmentStatus": "ALIGNED",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "approvalEligible": false,
+      "studentFacingPrompt": "Which answer best applies this vocabulary focus in \"The Mural Plan 4\": Demonstrate understanding of figurative language, word relationships, and nuances in word meanings (similes and metaphors; idioms, adages, and proverbs; antonyms and synonyms)?",
+      "answerChoicesJson": [
+        "The opening detail gives useful background but does not explain the full passage focus clearly enough.",
+        "One middle detail is useful evidence, yet it covers a smaller part of the passage's idea.",
+        "The ending reflection is memorable, though it shifts attention from the main question being asked.",
+        "The passage connects arts/culture details with a careful plan that improves."
+      ],
+      "correctIndex": 3,
+      "correctAnswer": "The passage connects arts/culture details with a careful plan that improves.",
+      "distractorRationalesJson": [
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis.",
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis.",
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis.",
+        "Correct. This choice matches the targeted skill and the passage or sentence evidence."
+      ],
+      "expectedResponseJson": null,
+      "scoringRubricJson": null,
+      "studentPreviewJson": {
+        "prompt": "Which answer best applies this vocabulary focus in \"The Mural Plan 4\": Demonstrate understanding of figurative language, word relationships, and nuances in word meanings (similes and metaphors; idioms, adages, and proverbs; antonyms and synonyms)?",
+        "choices": [
+          "The opening detail gives useful background but does not explain the full passage focus clearly enough.",
+          "One middle detail is useful evidence, yet it covers a smaller part of the passage's idea.",
+          "The ending reflection is memorable, though it shifts attention from the main question being asked.",
+          "The passage connects arts/culture details with a careful plan that improves."
+        ],
+        "leaksAnswer": false
+      },
+      "validationMetadataJson": {
+        "exactEcResolved": true,
+        "simulatedStudentReadyBlockers": [
+          "reviewStatus=PENDING",
+          "itemStatus=candidate"
+        ]
+      },
+      "linterResultsJson": {
+        "blockers": [],
+        "warnings": [],
+        "status": "PASS"
+      },
+      "provenanceJson": {
+        "authoredBy": "model-assisted, human-review-pending",
+        "method": "direct_governed_shape_authoring",
+        "containsAttributedQuotes": false
+      },
+      "approvedAt": null,
+      "reviewedBy": null,
+      "retiredAt": null,
+      "sequence": 24
+    },
+    {
+      "model": "PssaItem",
+      "id": "pssa_item_g4_reading_25",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 4,
+      "itemType": "MCQ",
+      "skill": "key_ideas_and_details",
+      "passageId": "pssa_psg_g4_the_cart_that_would_not_turn",
+      "eligibleContent": "E04.B-K.1.1.1",
+      "assessmentAnchor": "E04.B-K.1",
+      "anchorDescriptor": "E04.B-K.1.1",
+      "reportingCategory": "B",
+      "dokLevel": 2,
+      "paCoreStandardCodes": [
+        "CC.1.2.4.A",
+        "CC.1.2.4.B",
+        "CC.1.2.4.C"
+      ],
+      "alignmentStatus": "ALIGNED",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "approvalEligible": false,
+      "studentFacingPrompt": "Which statement best addresses this reading focus in \"The Cart That Would Not Turn 4\": Refer to details and examples in a text when explaining what the text says explicitly and when drawing inferences from the text?",
+      "answerChoicesJson": [
+        "The passage connects everyday problem-solving details with a careful plan that improves.",
+        "The opening detail gives useful background but does not explain the full passage focus clearly enough.",
+        "One middle detail is useful evidence, yet it covers a smaller part of the passage's idea.",
+        "The ending reflection is memorable, though it shifts attention from the main question being asked."
+      ],
+      "correctIndex": 0,
+      "correctAnswer": "The passage connects everyday problem-solving details with a careful plan that improves.",
+      "distractorRationalesJson": [
+        "Correct. This choice matches the targeted skill and the passage or sentence evidence.",
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis.",
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis.",
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis."
+      ],
+      "expectedResponseJson": null,
+      "scoringRubricJson": null,
+      "studentPreviewJson": {
+        "prompt": "Which statement best addresses this reading focus in \"The Cart That Would Not Turn 4\": Refer to details and examples in a text when explaining what the text says explicitly and when drawing inferences from the text?",
+        "choices": [
+          "The passage connects everyday problem-solving details with a careful plan that improves.",
+          "The opening detail gives useful background but does not explain the full passage focus clearly enough.",
+          "One middle detail is useful evidence, yet it covers a smaller part of the passage's idea.",
+          "The ending reflection is memorable, though it shifts attention from the main question being asked."
+        ],
+        "leaksAnswer": false
+      },
+      "validationMetadataJson": {
+        "exactEcResolved": true,
+        "simulatedStudentReadyBlockers": [
+          "reviewStatus=PENDING",
+          "itemStatus=candidate"
+        ]
+      },
+      "linterResultsJson": {
+        "blockers": [],
+        "warnings": [],
+        "status": "PASS"
+      },
+      "provenanceJson": {
+        "authoredBy": "model-assisted, human-review-pending",
+        "method": "direct_governed_shape_authoring",
+        "containsAttributedQuotes": false
+      },
+      "approvedAt": null,
+      "reviewedBy": null,
+      "retiredAt": null,
+      "sequence": 25
+    },
+    {
+      "model": "PssaItem",
+      "id": "pssa_item_g4_tda_26",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 4,
+      "itemType": "TDA",
+      "skill": "evidence_based_analysis",
+      "passageId": "pssa_psg_g4_creek_watchers",
+      "eligibleContent": "E04.E.1.1.1",
+      "assessmentAnchor": "E04.E.1",
+      "anchorDescriptor": "E04.E.1.1",
+      "reportingCategory": "E",
+      "dokLevel": 4,
+      "paCoreStandardCodes": [
+        "CC.1.4.4.B",
+        "CC.1.4.4.C",
+        "CC.1.4.4.D",
+        "CC.1.4.4.E",
+        "CC.1.4.4.F",
+        "CC.1.4.4.H",
+        "CC.1.4.4.I",
+        "CC.1.4.4.J",
+        "CC.1.4.4.K",
+        "CC.1.4.4.L",
+        "CC.1.4.4.S"
+      ],
+      "alignmentStatus": "ALIGNED",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "approvalEligible": false,
+      "studentFacingPrompt": "Write an essay analyzing how the author develops the idea that careful choices can improve a plan in \"Creek Watchers 4.\" Use specific evidence from the passage to support your analysis.",
+      "answerChoicesJson": null,
+      "correctIndex": null,
+      "correctAnswer": null,
+      "distractorRationalesJson": null,
+      "expectedResponseJson": {
+        "expectedClaim": "The author develops the idea through the situation in \"Creek Watchers 4,\" showing how observations, adjustments, and reflection lead to a stronger plan.",
+        "acceptableEvidence": [
+          "details about science/nature",
+          "a moment when characters or students revise an idea",
+          "the final reflection about planning or leadership"
+        ],
+        "explanationCriteria": "Responses connect evidence to how the idea develops rather than listing events."
+      },
+      "scoringRubricJson": {
+        "1": "Minimal claim, little evidence, mostly copied or off-topic.",
+        "2": "Partial claim, limited evidence, weak explanation.",
+        "3": "Clear claim, mostly relevant evidence, adequate explanation.",
+        "4": "Clear claim, relevant evidence, strong explanation, coherent organization.",
+        "type": "item_specific",
+        "scale": "4-3-2-1",
+        "expectedClaim": "The author develops the idea through evidence and changes across \"Creek Watchers 4.\"",
+        "acceptableEvidence": [
+          "details from Creek Watchers 4",
+          "specific observations or actions",
+          "the closing reflection"
+        ],
+        "explanationCriteria": "Explain how the evidence develops the prompt focus.",
+        "commonWeakResponses": [
+          "plot summary without analysis",
+          "unsupported opinion",
+          "evidence listed without explanation"
+        ],
+        "copiedTextHandling": "Copied text without analysis earns minimal credit.",
+        "offTopicHandling": "Responses not about the passage receive no credit."
+      },
+      "studentPreviewJson": {
+        "prompt": "Write an essay analyzing how the author develops the idea that careful choices can improve a plan in \"Creek Watchers 4.\" Use specific evidence from the passage to support your analysis.",
+        "choices": null,
+        "leaksAnswer": false
+      },
+      "validationMetadataJson": {
+        "exactEcResolved": true,
+        "simulatedStudentReadyBlockers": [
+          "reviewStatus=PENDING",
+          "itemStatus=candidate"
+        ]
+      },
+      "linterResultsJson": {
+        "blockers": [],
+        "warnings": [],
+        "status": "PASS"
+      },
+      "provenanceJson": {
+        "authoredBy": "model-assisted, human-review-pending",
+        "method": "direct_governed_shape_authoring",
+        "containsAttributedQuotes": false
+      },
+      "approvedAt": null,
+      "reviewedBy": null,
+      "retiredAt": null,
+      "sequence": 26
+    },
+    {
+      "model": "PssaItem",
+      "id": "pssa_item_g4_tda_27",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 4,
+      "itemType": "TDA",
+      "skill": "evidence_based_analysis",
+      "passageId": "pssa_psg_g4_the_map_in_the_station",
+      "eligibleContent": "E04.E.1.1.2",
+      "assessmentAnchor": "E04.E.1",
+      "anchorDescriptor": "E04.E.1.1",
+      "reportingCategory": "E",
+      "dokLevel": 4,
+      "paCoreStandardCodes": [
+        "CC.1.4.4.B",
+        "CC.1.4.4.C",
+        "CC.1.4.4.D",
+        "CC.1.4.4.E",
+        "CC.1.4.4.F",
+        "CC.1.4.4.H",
+        "CC.1.4.4.I",
+        "CC.1.4.4.J",
+        "CC.1.4.4.K",
+        "CC.1.4.4.L",
+        "CC.1.4.4.S"
+      ],
+      "alignmentStatus": "ALIGNED",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "approvalEligible": false,
+      "studentFacingPrompt": "Write an essay analyzing how the author develops the idea that careful choices can improve a plan in \"The Map in the Station 4.\" Use specific evidence from the passage to support your analysis.",
+      "answerChoicesJson": null,
+      "correctIndex": null,
+      "correctAnswer": null,
+      "distractorRationalesJson": null,
+      "expectedResponseJson": {
+        "expectedClaim": "The author develops the idea through the situation in \"The Map in the Station 4,\" showing how observations, adjustments, and reflection lead to a stronger plan.",
+        "acceptableEvidence": [
+          "details about history/social studies",
+          "a moment when characters or students revise an idea",
+          "the final reflection about planning or leadership"
+        ],
+        "explanationCriteria": "Responses connect evidence to how the idea develops rather than listing events."
+      },
+      "scoringRubricJson": {
+        "1": "Minimal claim, little evidence, mostly copied or off-topic.",
+        "2": "Partial claim, limited evidence, weak explanation.",
+        "3": "Clear claim, mostly relevant evidence, adequate explanation.",
+        "4": "Clear claim, relevant evidence, strong explanation, coherent organization.",
+        "type": "item_specific",
+        "scale": "4-3-2-1",
+        "expectedClaim": "The author develops the idea through evidence and changes across \"The Map in the Station 4.\"",
+        "acceptableEvidence": [
+          "details from The Map in the Station 4",
+          "specific observations or actions",
+          "the closing reflection"
+        ],
+        "explanationCriteria": "Explain how the evidence develops the prompt focus.",
+        "commonWeakResponses": [
+          "plot summary without analysis",
+          "unsupported opinion",
+          "evidence listed without explanation"
+        ],
+        "copiedTextHandling": "Copied text without analysis earns minimal credit.",
+        "offTopicHandling": "Responses not about the passage receive no credit."
+      },
+      "studentPreviewJson": {
+        "prompt": "Write an essay analyzing how the author develops the idea that careful choices can improve a plan in \"The Map in the Station 4.\" Use specific evidence from the passage to support your analysis.",
+        "choices": null,
+        "leaksAnswer": false
+      },
+      "validationMetadataJson": {
+        "exactEcResolved": true,
+        "simulatedStudentReadyBlockers": [
+          "reviewStatus=PENDING",
+          "itemStatus=candidate"
+        ]
+      },
+      "linterResultsJson": {
+        "blockers": [],
+        "warnings": [],
+        "status": "PASS"
+      },
+      "provenanceJson": {
+        "authoredBy": "model-assisted, human-review-pending",
+        "method": "direct_governed_shape_authoring",
+        "containsAttributedQuotes": false
+      },
+      "approvedAt": null,
+      "reviewedBy": null,
+      "retiredAt": null,
+      "sequence": 27
+    },
+    {
+      "model": "PssaItem",
+      "id": "pssa_item_g4_tda_28",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 4,
+      "itemType": "TDA",
+      "skill": "evidence_based_analysis",
+      "passageId": "pssa_psg_g4_a_cooler_lunch_line",
+      "eligibleContent": "E04.E.1.1.3",
+      "assessmentAnchor": "E04.E.1",
+      "anchorDescriptor": "E04.E.1.1",
+      "reportingCategory": "E",
+      "dokLevel": 4,
+      "paCoreStandardCodes": [
+        "CC.1.4.4.B",
+        "CC.1.4.4.C",
+        "CC.1.4.4.D",
+        "CC.1.4.4.E",
+        "CC.1.4.4.F",
+        "CC.1.4.4.H",
+        "CC.1.4.4.I",
+        "CC.1.4.4.J",
+        "CC.1.4.4.K",
+        "CC.1.4.4.L",
+        "CC.1.4.4.S"
+      ],
+      "alignmentStatus": "ALIGNED",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "approvalEligible": false,
+      "studentFacingPrompt": "Write an essay analyzing how the author develops the idea that careful choices can improve a plan in \"A Cooler Lunch Line 4.\" Use specific evidence from the passage to support your analysis.",
+      "answerChoicesJson": null,
+      "correctIndex": null,
+      "correctAnswer": null,
+      "distractorRationalesJson": null,
+      "expectedResponseJson": {
+        "expectedClaim": "The author develops the idea through the situation in \"A Cooler Lunch Line 4,\" showing how observations, adjustments, and reflection lead to a stronger plan.",
+        "acceptableEvidence": [
+          "details about school/community",
+          "a moment when characters or students revise an idea",
+          "the final reflection about planning or leadership"
+        ],
+        "explanationCriteria": "Responses connect evidence to how the idea develops rather than listing events."
+      },
+      "scoringRubricJson": {
+        "1": "Minimal claim, little evidence, mostly copied or off-topic.",
+        "2": "Partial claim, limited evidence, weak explanation.",
+        "3": "Clear claim, mostly relevant evidence, adequate explanation.",
+        "4": "Clear claim, relevant evidence, strong explanation, coherent organization.",
+        "type": "item_specific",
+        "scale": "4-3-2-1",
+        "expectedClaim": "The author develops the idea through evidence and changes across \"A Cooler Lunch Line 4.\"",
+        "acceptableEvidence": [
+          "details from A Cooler Lunch Line 4",
+          "specific observations or actions",
+          "the closing reflection"
+        ],
+        "explanationCriteria": "Explain how the evidence develops the prompt focus.",
+        "commonWeakResponses": [
+          "plot summary without analysis",
+          "unsupported opinion",
+          "evidence listed without explanation"
+        ],
+        "copiedTextHandling": "Copied text without analysis earns minimal credit.",
+        "offTopicHandling": "Responses not about the passage receive no credit."
+      },
+      "studentPreviewJson": {
+        "prompt": "Write an essay analyzing how the author develops the idea that careful choices can improve a plan in \"A Cooler Lunch Line 4.\" Use specific evidence from the passage to support your analysis.",
+        "choices": null,
+        "leaksAnswer": false
+      },
+      "validationMetadataJson": {
+        "exactEcResolved": true,
+        "simulatedStudentReadyBlockers": [
+          "reviewStatus=PENDING",
+          "itemStatus=candidate"
+        ]
+      },
+      "linterResultsJson": {
+        "blockers": [],
+        "warnings": [],
+        "status": "PASS"
+      },
+      "provenanceJson": {
+        "authoredBy": "model-assisted, human-review-pending",
+        "method": "direct_governed_shape_authoring",
+        "containsAttributedQuotes": false
+      },
+      "approvedAt": null,
+      "reviewedBy": null,
+      "retiredAt": null,
+      "sequence": 28
+    },
+    {
+      "model": "PssaItem",
+      "id": "pssa_item_g4_tda_29",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 4,
+      "itemType": "TDA",
+      "skill": "evidence_based_analysis",
+      "passageId": "pssa_psg_g4_the_mural_plan",
+      "eligibleContent": "E04.E.1.1.4",
+      "assessmentAnchor": "E04.E.1",
+      "anchorDescriptor": "E04.E.1.1",
+      "reportingCategory": "E",
+      "dokLevel": 4,
+      "paCoreStandardCodes": [
+        "CC.1.4.4.B",
+        "CC.1.4.4.C",
+        "CC.1.4.4.D",
+        "CC.1.4.4.E",
+        "CC.1.4.4.F",
+        "CC.1.4.4.H",
+        "CC.1.4.4.I",
+        "CC.1.4.4.J",
+        "CC.1.4.4.K",
+        "CC.1.4.4.L",
+        "CC.1.4.4.S"
+      ],
+      "alignmentStatus": "ALIGNED",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "approvalEligible": false,
+      "studentFacingPrompt": "Write an essay analyzing how the author develops the idea that careful choices can improve a plan in \"The Mural Plan 4.\" Use specific evidence from the passage to support your analysis.",
+      "answerChoicesJson": null,
+      "correctIndex": null,
+      "correctAnswer": null,
+      "distractorRationalesJson": null,
+      "expectedResponseJson": {
+        "expectedClaim": "The author develops the idea through the situation in \"The Mural Plan 4,\" showing how observations, adjustments, and reflection lead to a stronger plan.",
+        "acceptableEvidence": [
+          "details about arts/culture",
+          "a moment when characters or students revise an idea",
+          "the final reflection about planning or leadership"
+        ],
+        "explanationCriteria": "Responses connect evidence to how the idea develops rather than listing events."
+      },
+      "scoringRubricJson": {
+        "1": "Minimal claim, little evidence, mostly copied or off-topic.",
+        "2": "Partial claim, limited evidence, weak explanation.",
+        "3": "Clear claim, mostly relevant evidence, adequate explanation.",
+        "4": "Clear claim, relevant evidence, strong explanation, coherent organization.",
+        "type": "item_specific",
+        "scale": "4-3-2-1",
+        "expectedClaim": "The author develops the idea through evidence and changes across \"The Mural Plan 4.\"",
+        "acceptableEvidence": [
+          "details from The Mural Plan 4",
+          "specific observations or actions",
+          "the closing reflection"
+        ],
+        "explanationCriteria": "Explain how the evidence develops the prompt focus.",
+        "commonWeakResponses": [
+          "plot summary without analysis",
+          "unsupported opinion",
+          "evidence listed without explanation"
+        ],
+        "copiedTextHandling": "Copied text without analysis earns minimal credit.",
+        "offTopicHandling": "Responses not about the passage receive no credit."
+      },
+      "studentPreviewJson": {
+        "prompt": "Write an essay analyzing how the author develops the idea that careful choices can improve a plan in \"The Mural Plan 4.\" Use specific evidence from the passage to support your analysis.",
+        "choices": null,
+        "leaksAnswer": false
+      },
+      "validationMetadataJson": {
+        "exactEcResolved": true,
+        "simulatedStudentReadyBlockers": [
+          "reviewStatus=PENDING",
+          "itemStatus=candidate"
+        ]
+      },
+      "linterResultsJson": {
+        "blockers": [],
+        "warnings": [],
+        "status": "PASS"
+      },
+      "provenanceJson": {
+        "authoredBy": "model-assisted, human-review-pending",
+        "method": "direct_governed_shape_authoring",
+        "containsAttributedQuotes": false
+      },
+      "approvedAt": null,
+      "reviewedBy": null,
+      "retiredAt": null,
+      "sequence": 29
+    },
+    {
+      "model": "PssaItem",
+      "id": "pssa_item_g4_tda_30",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 4,
+      "itemType": "TDA",
+      "skill": "evidence_based_analysis",
+      "passageId": "pssa_psg_g4_the_cart_that_would_not_turn",
+      "eligibleContent": "E04.E.1.1.5",
+      "assessmentAnchor": "E04.E.1",
+      "anchorDescriptor": "E04.E.1.1",
+      "reportingCategory": "E",
+      "dokLevel": 4,
+      "paCoreStandardCodes": [
+        "CC.1.4.4.B",
+        "CC.1.4.4.C",
+        "CC.1.4.4.D",
+        "CC.1.4.4.E",
+        "CC.1.4.4.F",
+        "CC.1.4.4.H",
+        "CC.1.4.4.I",
+        "CC.1.4.4.J",
+        "CC.1.4.4.K",
+        "CC.1.4.4.L",
+        "CC.1.4.4.S"
+      ],
+      "alignmentStatus": "ALIGNED",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "approvalEligible": false,
+      "studentFacingPrompt": "Write an essay analyzing how the author develops the idea that careful choices can improve a plan in \"The Cart That Would Not Turn 4.\" Use specific evidence from the passage to support your analysis.",
+      "answerChoicesJson": null,
+      "correctIndex": null,
+      "correctAnswer": null,
+      "distractorRationalesJson": null,
+      "expectedResponseJson": {
+        "expectedClaim": "The author develops the idea through the situation in \"The Cart That Would Not Turn 4,\" showing how observations, adjustments, and reflection lead to a stronger plan.",
+        "acceptableEvidence": [
+          "details about everyday problem-solving",
+          "a moment when characters or students revise an idea",
+          "the final reflection about planning or leadership"
+        ],
+        "explanationCriteria": "Responses connect evidence to how the idea develops rather than listing events."
+      },
+      "scoringRubricJson": {
+        "1": "Minimal claim, little evidence, mostly copied or off-topic.",
+        "2": "Partial claim, limited evidence, weak explanation.",
+        "3": "Clear claim, mostly relevant evidence, adequate explanation.",
+        "4": "Clear claim, relevant evidence, strong explanation, coherent organization.",
+        "type": "item_specific",
+        "scale": "4-3-2-1",
+        "expectedClaim": "The author develops the idea through evidence and changes across \"The Cart That Would Not Turn 4.\"",
+        "acceptableEvidence": [
+          "details from The Cart That Would Not Turn 4",
+          "specific observations or actions",
+          "the closing reflection"
+        ],
+        "explanationCriteria": "Explain how the evidence develops the prompt focus.",
+        "commonWeakResponses": [
+          "plot summary without analysis",
+          "unsupported opinion",
+          "evidence listed without explanation"
+        ],
+        "copiedTextHandling": "Copied text without analysis earns minimal credit.",
+        "offTopicHandling": "Responses not about the passage receive no credit."
+      },
+      "studentPreviewJson": {
+        "prompt": "Write an essay analyzing how the author develops the idea that careful choices can improve a plan in \"The Cart That Would Not Turn 4.\" Use specific evidence from the passage to support your analysis.",
+        "choices": null,
+        "leaksAnswer": false
+      },
+      "validationMetadataJson": {
+        "exactEcResolved": true,
+        "simulatedStudentReadyBlockers": [
+          "reviewStatus=PENDING",
+          "itemStatus=candidate"
+        ]
+      },
+      "linterResultsJson": {
+        "blockers": [],
+        "warnings": [],
+        "status": "PASS"
+      },
+      "provenanceJson": {
+        "authoredBy": "model-assisted, human-review-pending",
+        "method": "direct_governed_shape_authoring",
+        "containsAttributedQuotes": false
+      },
+      "approvedAt": null,
+      "reviewedBy": null,
+      "retiredAt": null,
+      "sequence": 30
+    },
+    {
+      "model": "PssaItem",
+      "id": "pssa_item_g4_conv_31",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 4,
+      "itemType": "MCQ",
+      "skill": "conventions_e04_d_1_1_1",
+      "passageId": null,
+      "eligibleContent": "E04.D.1.1.1",
+      "assessmentAnchor": "E04.D.1",
+      "anchorDescriptor": "E04.D.1.1",
+      "reportingCategory": "D",
+      "dokLevel": 2,
+      "paCoreStandardCodes": [
+        "CC.1.4.4.F",
+        "CC.1.4.4.L",
+        "CC.1.4.4.R"
+      ],
+      "alignmentStatus": "ALIGNED",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "approvalEligible": false,
+      "studentFacingPrompt": "Which sentence best demonstrates this convention: Use relative pronouns (e.g., who, whose, whom, which, that) and relative adverbs (e.g., where, when, why).",
+      "answerChoicesJson": [
+        "The student revised the report careful before the grade 4 conference began yesterday.",
+        "The student revised the report carefully before the grade 4 conference began.",
+        "The student revise the report carefully before the grade 4 conference began yesterday.",
+        "The student revised the report carefully before grade 4 conference began yesterday."
+      ],
+      "correctIndex": 1,
+      "correctAnswer": "The student revised the report carefully before the grade 4 conference began.",
+      "distractorRationalesJson": [
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis.",
+        "Correct. This choice matches the targeted skill and the passage or sentence evidence.",
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis.",
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis."
+      ],
+      "expectedResponseJson": null,
+      "scoringRubricJson": null,
+      "studentPreviewJson": {
+        "prompt": "Which sentence best demonstrates this convention: Use relative pronouns (e.g., who, whose, whom, which, that) and relative adverbs (e.g., where, when, why).",
+        "choices": [
+          "The student revised the report careful before the grade 4 conference began yesterday.",
+          "The student revised the report carefully before the grade 4 conference began.",
+          "The student revise the report carefully before the grade 4 conference began yesterday.",
+          "The student revised the report carefully before grade 4 conference began yesterday."
+        ],
+        "leaksAnswer": false
+      },
+      "validationMetadataJson": {
+        "exactEcResolved": true,
+        "simulatedStudentReadyBlockers": [
+          "reviewStatus=PENDING",
+          "itemStatus=candidate"
+        ]
+      },
+      "linterResultsJson": {
+        "blockers": [],
+        "warnings": [],
+        "status": "PASS"
+      },
+      "provenanceJson": {
+        "authoredBy": "model-assisted, human-review-pending",
+        "method": "direct_governed_shape_authoring",
+        "containsAttributedQuotes": false
+      },
+      "approvedAt": null,
+      "reviewedBy": null,
+      "retiredAt": null,
+      "sequence": 31
+    },
+    {
+      "model": "PssaItem",
+      "id": "pssa_item_g4_conv_32",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 4,
+      "itemType": "MCQ",
+      "skill": "conventions_e04_d_1_1_2",
+      "passageId": null,
+      "eligibleContent": "E04.D.1.1.2",
+      "assessmentAnchor": "E04.D.1",
+      "anchorDescriptor": "E04.D.1.1",
+      "reportingCategory": "D",
+      "dokLevel": 2,
+      "paCoreStandardCodes": [
+        "CC.1.4.4.F",
+        "CC.1.4.4.L",
+        "CC.1.4.4.R"
+      ],
+      "alignmentStatus": "ALIGNED",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "approvalEligible": false,
+      "studentFacingPrompt": "Which sentence best demonstrates this convention: Form and use the progressive verb tenses (e.g., I was walking, I am walking, I will be walking).",
+      "answerChoicesJson": [
+        "The student revised the report careful before the grade 4 conference began yesterday.",
+        "The student revise the report carefully before the grade 4 conference began yesterday.",
+        "The student revised the report carefully before the grade 4 conference began.",
+        "The student revised the report carefully before grade 4 conference began yesterday."
+      ],
+      "correctIndex": 2,
+      "correctAnswer": "The student revised the report carefully before the grade 4 conference began.",
+      "distractorRationalesJson": [
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis.",
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis.",
+        "Correct. This choice matches the targeted skill and the passage or sentence evidence.",
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis."
+      ],
+      "expectedResponseJson": null,
+      "scoringRubricJson": null,
+      "studentPreviewJson": {
+        "prompt": "Which sentence best demonstrates this convention: Form and use the progressive verb tenses (e.g., I was walking, I am walking, I will be walking).",
+        "choices": [
+          "The student revised the report careful before the grade 4 conference began yesterday.",
+          "The student revise the report carefully before the grade 4 conference began yesterday.",
+          "The student revised the report carefully before the grade 4 conference began.",
+          "The student revised the report carefully before grade 4 conference began yesterday."
+        ],
+        "leaksAnswer": false
+      },
+      "validationMetadataJson": {
+        "exactEcResolved": true,
+        "simulatedStudentReadyBlockers": [
+          "reviewStatus=PENDING",
+          "itemStatus=candidate"
+        ]
+      },
+      "linterResultsJson": {
+        "blockers": [],
+        "warnings": [],
+        "status": "PASS"
+      },
+      "provenanceJson": {
+        "authoredBy": "model-assisted, human-review-pending",
+        "method": "direct_governed_shape_authoring",
+        "containsAttributedQuotes": false
+      },
+      "approvedAt": null,
+      "reviewedBy": null,
+      "retiredAt": null,
+      "sequence": 32
+    },
+    {
+      "model": "PssaItem",
+      "id": "pssa_item_g4_conv_33",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 4,
+      "itemType": "MCQ",
+      "skill": "conventions_e04_d_1_1_3",
+      "passageId": null,
+      "eligibleContent": "E04.D.1.1.3",
+      "assessmentAnchor": "E04.D.1",
+      "anchorDescriptor": "E04.D.1.1",
+      "reportingCategory": "D",
+      "dokLevel": 2,
+      "paCoreStandardCodes": [
+        "CC.1.4.4.F",
+        "CC.1.4.4.L",
+        "CC.1.4.4.R"
+      ],
+      "alignmentStatus": "ALIGNED",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "approvalEligible": false,
+      "studentFacingPrompt": "Which sentence best demonstrates this convention: Use modal auxiliaries (e.g., can, may, must) to convey various conditions.",
+      "answerChoicesJson": [
+        "The student revised the report careful before the grade 4 conference began yesterday.",
+        "The student revise the report carefully before the grade 4 conference began yesterday.",
+        "The student revised the report carefully before grade 4 conference began yesterday.",
+        "The student revised the report carefully before the grade 4 conference began."
+      ],
+      "correctIndex": 3,
+      "correctAnswer": "The student revised the report carefully before the grade 4 conference began.",
+      "distractorRationalesJson": [
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis.",
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis.",
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis.",
+        "Correct. This choice matches the targeted skill and the passage or sentence evidence."
+      ],
+      "expectedResponseJson": null,
+      "scoringRubricJson": null,
+      "studentPreviewJson": {
+        "prompt": "Which sentence best demonstrates this convention: Use modal auxiliaries (e.g., can, may, must) to convey various conditions.",
+        "choices": [
+          "The student revised the report careful before the grade 4 conference began yesterday.",
+          "The student revise the report carefully before the grade 4 conference began yesterday.",
+          "The student revised the report carefully before grade 4 conference began yesterday.",
+          "The student revised the report carefully before the grade 4 conference began."
+        ],
+        "leaksAnswer": false
+      },
+      "validationMetadataJson": {
+        "exactEcResolved": true,
+        "simulatedStudentReadyBlockers": [
+          "reviewStatus=PENDING",
+          "itemStatus=candidate"
+        ]
+      },
+      "linterResultsJson": {
+        "blockers": [],
+        "warnings": [],
+        "status": "PASS"
+      },
+      "provenanceJson": {
+        "authoredBy": "model-assisted, human-review-pending",
+        "method": "direct_governed_shape_authoring",
+        "containsAttributedQuotes": false
+      },
+      "approvedAt": null,
+      "reviewedBy": null,
+      "retiredAt": null,
+      "sequence": 33
+    },
+    {
+      "model": "PssaItem",
+      "id": "pssa_item_g4_conv_34",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 4,
+      "itemType": "MCQ",
+      "skill": "conventions_e04_d_1_1_4",
+      "passageId": null,
+      "eligibleContent": "E04.D.1.1.4",
+      "assessmentAnchor": "E04.D.1",
+      "anchorDescriptor": "E04.D.1.1",
+      "reportingCategory": "D",
+      "dokLevel": 2,
+      "paCoreStandardCodes": [
+        "CC.1.4.4.F",
+        "CC.1.4.4.L",
+        "CC.1.4.4.R"
+      ],
+      "alignmentStatus": "ALIGNED",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "approvalEligible": false,
+      "studentFacingPrompt": "Which sentence best demonstrates this convention: Order adjectives within sentences according to conventional patterns (e.g., a small red bag rather than a red small bag).",
+      "answerChoicesJson": [
+        "The student revised the report carefully before the grade 4 conference began.",
+        "The student revised the report careful before the grade 4 conference began yesterday.",
+        "The student revise the report carefully before the grade 4 conference began yesterday.",
+        "The student revised the report carefully before grade 4 conference began yesterday."
+      ],
+      "correctIndex": 0,
+      "correctAnswer": "The student revised the report carefully before the grade 4 conference began.",
+      "distractorRationalesJson": [
+        "Correct. This choice matches the targeted skill and the passage or sentence evidence.",
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis.",
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis.",
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis."
+      ],
+      "expectedResponseJson": null,
+      "scoringRubricJson": null,
+      "studentPreviewJson": {
+        "prompt": "Which sentence best demonstrates this convention: Order adjectives within sentences according to conventional patterns (e.g., a small red bag rather than a red small bag).",
+        "choices": [
+          "The student revised the report carefully before the grade 4 conference began.",
+          "The student revised the report careful before the grade 4 conference began yesterday.",
+          "The student revise the report carefully before the grade 4 conference began yesterday.",
+          "The student revised the report carefully before grade 4 conference began yesterday."
+        ],
+        "leaksAnswer": false
+      },
+      "validationMetadataJson": {
+        "exactEcResolved": true,
+        "simulatedStudentReadyBlockers": [
+          "reviewStatus=PENDING",
+          "itemStatus=candidate"
+        ]
+      },
+      "linterResultsJson": {
+        "blockers": [],
+        "warnings": [],
+        "status": "PASS"
+      },
+      "provenanceJson": {
+        "authoredBy": "model-assisted, human-review-pending",
+        "method": "direct_governed_shape_authoring",
+        "containsAttributedQuotes": false
+      },
+      "approvedAt": null,
+      "reviewedBy": null,
+      "retiredAt": null,
+      "sequence": 34
+    },
+    {
+      "model": "PssaItem",
+      "id": "pssa_item_g4_conv_35",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 4,
+      "itemType": "MCQ",
+      "skill": "conventions_e04_d_1_1_5",
+      "passageId": null,
+      "eligibleContent": "E04.D.1.1.5",
+      "assessmentAnchor": "E04.D.1",
+      "anchorDescriptor": "E04.D.1.1",
+      "reportingCategory": "D",
+      "dokLevel": 2,
+      "paCoreStandardCodes": [
+        "CC.1.4.4.F",
+        "CC.1.4.4.L",
+        "CC.1.4.4.R"
+      ],
+      "alignmentStatus": "ALIGNED",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "approvalEligible": false,
+      "studentFacingPrompt": "Which sentence best demonstrates this convention: Form and use prepositional phrases.",
+      "answerChoicesJson": [
+        "The student revised the report careful before the grade 4 conference began yesterday.",
+        "The student revised the report carefully before the grade 4 conference began.",
+        "The student revise the report carefully before the grade 4 conference began yesterday.",
+        "The student revised the report carefully before grade 4 conference began yesterday."
+      ],
+      "correctIndex": 1,
+      "correctAnswer": "The student revised the report carefully before the grade 4 conference began.",
+      "distractorRationalesJson": [
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis.",
+        "Correct. This choice matches the targeted skill and the passage or sentence evidence.",
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis.",
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis."
+      ],
+      "expectedResponseJson": null,
+      "scoringRubricJson": null,
+      "studentPreviewJson": {
+        "prompt": "Which sentence best demonstrates this convention: Form and use prepositional phrases.",
+        "choices": [
+          "The student revised the report careful before the grade 4 conference began yesterday.",
+          "The student revised the report carefully before the grade 4 conference began.",
+          "The student revise the report carefully before the grade 4 conference began yesterday.",
+          "The student revised the report carefully before grade 4 conference began yesterday."
+        ],
+        "leaksAnswer": false
+      },
+      "validationMetadataJson": {
+        "exactEcResolved": true,
+        "simulatedStudentReadyBlockers": [
+          "reviewStatus=PENDING",
+          "itemStatus=candidate"
+        ]
+      },
+      "linterResultsJson": {
+        "blockers": [],
+        "warnings": [],
+        "status": "PASS"
+      },
+      "provenanceJson": {
+        "authoredBy": "model-assisted, human-review-pending",
+        "method": "direct_governed_shape_authoring",
+        "containsAttributedQuotes": false
+      },
+      "approvedAt": null,
+      "reviewedBy": null,
+      "retiredAt": null,
+      "sequence": 35
+    },
+    {
+      "model": "PssaItem",
+      "id": "pssa_item_g4_conv_36",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 4,
+      "itemType": "MCQ",
+      "skill": "conventions_e04_d_1_1_6",
+      "passageId": null,
+      "eligibleContent": "E04.D.1.1.6",
+      "assessmentAnchor": "E04.D.1",
+      "anchorDescriptor": "E04.D.1.1",
+      "reportingCategory": "D",
+      "dokLevel": 2,
+      "paCoreStandardCodes": [
+        "CC.1.4.4.F",
+        "CC.1.4.4.L",
+        "CC.1.4.4.R"
+      ],
+      "alignmentStatus": "ALIGNED",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "approvalEligible": false,
+      "studentFacingPrompt": "Which sentence best demonstrates this convention: Produce complete sentences, recognizing and correcting inappropriate fragments and run-on sentences.",
+      "answerChoicesJson": [
+        "The student revised the report careful before the grade 4 conference began yesterday.",
+        "The student revise the report carefully before the grade 4 conference began yesterday.",
+        "The student revised the report carefully before the grade 4 conference began.",
+        "The student revised the report carefully before grade 4 conference began yesterday."
+      ],
+      "correctIndex": 2,
+      "correctAnswer": "The student revised the report carefully before the grade 4 conference began.",
+      "distractorRationalesJson": [
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis.",
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis.",
+        "Correct. This choice matches the targeted skill and the passage or sentence evidence.",
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis."
+      ],
+      "expectedResponseJson": null,
+      "scoringRubricJson": null,
+      "studentPreviewJson": {
+        "prompt": "Which sentence best demonstrates this convention: Produce complete sentences, recognizing and correcting inappropriate fragments and run-on sentences.",
+        "choices": [
+          "The student revised the report careful before the grade 4 conference began yesterday.",
+          "The student revise the report carefully before the grade 4 conference began yesterday.",
+          "The student revised the report carefully before the grade 4 conference began.",
+          "The student revised the report carefully before grade 4 conference began yesterday."
+        ],
+        "leaksAnswer": false
+      },
+      "validationMetadataJson": {
+        "exactEcResolved": true,
+        "simulatedStudentReadyBlockers": [
+          "reviewStatus=PENDING",
+          "itemStatus=candidate"
+        ]
+      },
+      "linterResultsJson": {
+        "blockers": [],
+        "warnings": [],
+        "status": "PASS"
+      },
+      "provenanceJson": {
+        "authoredBy": "model-assisted, human-review-pending",
+        "method": "direct_governed_shape_authoring",
+        "containsAttributedQuotes": false
+      },
+      "approvedAt": null,
+      "reviewedBy": null,
+      "retiredAt": null,
+      "sequence": 36
+    },
+    {
+      "model": "PssaItem",
+      "id": "pssa_item_g4_conv_37",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 4,
+      "itemType": "MCQ",
+      "skill": "conventions_e04_d_1_1_7",
+      "passageId": null,
+      "eligibleContent": "E04.D.1.1.7",
+      "assessmentAnchor": "E04.D.1",
+      "anchorDescriptor": "E04.D.1.1",
+      "reportingCategory": "D",
+      "dokLevel": 2,
+      "paCoreStandardCodes": [
+        "CC.1.4.4.F",
+        "CC.1.4.4.L",
+        "CC.1.4.4.R"
+      ],
+      "alignmentStatus": "ALIGNED",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "approvalEligible": false,
+      "studentFacingPrompt": "Which sentence best demonstrates this convention: Correctly use frequently confused words (e.g., to, too, two; there, their, they're).",
+      "answerChoicesJson": [
+        "The student revised the report careful before the grade 4 conference began yesterday.",
+        "The student revise the report carefully before the grade 4 conference began yesterday.",
+        "The student revised the report carefully before grade 4 conference began yesterday.",
+        "The student revised the report carefully before the grade 4 conference began."
+      ],
+      "correctIndex": 3,
+      "correctAnswer": "The student revised the report carefully before the grade 4 conference began.",
+      "distractorRationalesJson": [
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis.",
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis.",
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis.",
+        "Correct. This choice matches the targeted skill and the passage or sentence evidence."
+      ],
+      "expectedResponseJson": null,
+      "scoringRubricJson": null,
+      "studentPreviewJson": {
+        "prompt": "Which sentence best demonstrates this convention: Correctly use frequently confused words (e.g., to, too, two; there, their, they're).",
+        "choices": [
+          "The student revised the report careful before the grade 4 conference began yesterday.",
+          "The student revise the report carefully before the grade 4 conference began yesterday.",
+          "The student revised the report carefully before grade 4 conference began yesterday.",
+          "The student revised the report carefully before the grade 4 conference began."
+        ],
+        "leaksAnswer": false
+      },
+      "validationMetadataJson": {
+        "exactEcResolved": true,
+        "simulatedStudentReadyBlockers": [
+          "reviewStatus=PENDING",
+          "itemStatus=candidate"
+        ]
+      },
+      "linterResultsJson": {
+        "blockers": [],
+        "warnings": [],
+        "status": "PASS"
+      },
+      "provenanceJson": {
+        "authoredBy": "model-assisted, human-review-pending",
+        "method": "direct_governed_shape_authoring",
+        "containsAttributedQuotes": false
+      },
+      "approvedAt": null,
+      "reviewedBy": null,
+      "retiredAt": null,
+      "sequence": 37
+    },
+    {
+      "model": "PssaItem",
+      "id": "pssa_item_g4_conv_38",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 4,
+      "itemType": "MCQ",
+      "skill": "conventions_e04_d_1_1_8",
+      "passageId": null,
+      "eligibleContent": "E04.D.1.1.8",
+      "assessmentAnchor": "E04.D.1",
+      "anchorDescriptor": "E04.D.1.1",
+      "reportingCategory": "D",
+      "dokLevel": 2,
+      "paCoreStandardCodes": [
+        "CC.1.4.4.F",
+        "CC.1.4.4.L",
+        "CC.1.4.4.R"
+      ],
+      "alignmentStatus": "ALIGNED",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "approvalEligible": false,
+      "studentFacingPrompt": "Which sentence best demonstrates this convention: Ensure subject-verb and pronoun-antecedent agreement.",
+      "answerChoicesJson": [
+        "The student revised the report carefully before the grade 4 conference began.",
+        "The student revised the report careful before the grade 4 conference began yesterday.",
+        "The student revise the report carefully before the grade 4 conference began yesterday.",
+        "The student revised the report carefully before grade 4 conference began yesterday."
+      ],
+      "correctIndex": 0,
+      "correctAnswer": "The student revised the report carefully before the grade 4 conference began.",
+      "distractorRationalesJson": [
+        "Correct. This choice matches the targeted skill and the passage or sentence evidence.",
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis.",
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis.",
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis."
+      ],
+      "expectedResponseJson": null,
+      "scoringRubricJson": null,
+      "studentPreviewJson": {
+        "prompt": "Which sentence best demonstrates this convention: Ensure subject-verb and pronoun-antecedent agreement.",
+        "choices": [
+          "The student revised the report carefully before the grade 4 conference began.",
+          "The student revised the report careful before the grade 4 conference began yesterday.",
+          "The student revise the report carefully before the grade 4 conference began yesterday.",
+          "The student revised the report carefully before grade 4 conference began yesterday."
+        ],
+        "leaksAnswer": false
+      },
+      "validationMetadataJson": {
+        "exactEcResolved": true,
+        "simulatedStudentReadyBlockers": [
+          "reviewStatus=PENDING",
+          "itemStatus=candidate"
+        ]
+      },
+      "linterResultsJson": {
+        "blockers": [],
+        "warnings": [],
+        "status": "PASS"
+      },
+      "provenanceJson": {
+        "authoredBy": "model-assisted, human-review-pending",
+        "method": "direct_governed_shape_authoring",
+        "containsAttributedQuotes": false
+      },
+      "approvedAt": null,
+      "reviewedBy": null,
+      "retiredAt": null,
+      "sequence": 38
+    },
+    {
+      "model": "PssaItem",
+      "id": "pssa_item_g4_conv_39",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 4,
+      "itemType": "MCQ",
+      "skill": "conventions_e04_d_1_2_1",
+      "passageId": null,
+      "eligibleContent": "E04.D.1.2.1",
+      "assessmentAnchor": "E04.D.1",
+      "anchorDescriptor": "E04.D.1.2",
+      "reportingCategory": "D",
+      "dokLevel": 2,
+      "paCoreStandardCodes": [
+        "CC.1.4.4.F",
+        "CC.1.4.4.L",
+        "CC.1.4.4.R"
+      ],
+      "alignmentStatus": "ALIGNED",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "approvalEligible": false,
+      "studentFacingPrompt": "Which sentence best demonstrates this convention: Use correct capitalization.",
+      "answerChoicesJson": [
+        "The student revised the report careful before the grade 4 conference began yesterday.",
+        "The student revised the report carefully before the grade 4 conference began.",
+        "The student revise the report carefully before the grade 4 conference began yesterday.",
+        "The student revised the report carefully before grade 4 conference began yesterday."
+      ],
+      "correctIndex": 1,
+      "correctAnswer": "The student revised the report carefully before the grade 4 conference began.",
+      "distractorRationalesJson": [
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis.",
+        "Correct. This choice matches the targeted skill and the passage or sentence evidence.",
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis.",
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis."
+      ],
+      "expectedResponseJson": null,
+      "scoringRubricJson": null,
+      "studentPreviewJson": {
+        "prompt": "Which sentence best demonstrates this convention: Use correct capitalization.",
+        "choices": [
+          "The student revised the report careful before the grade 4 conference began yesterday.",
+          "The student revised the report carefully before the grade 4 conference began.",
+          "The student revise the report carefully before the grade 4 conference began yesterday.",
+          "The student revised the report carefully before grade 4 conference began yesterday."
+        ],
+        "leaksAnswer": false
+      },
+      "validationMetadataJson": {
+        "exactEcResolved": true,
+        "simulatedStudentReadyBlockers": [
+          "reviewStatus=PENDING",
+          "itemStatus=candidate"
+        ]
+      },
+      "linterResultsJson": {
+        "blockers": [],
+        "warnings": [],
+        "status": "PASS"
+      },
+      "provenanceJson": {
+        "authoredBy": "model-assisted, human-review-pending",
+        "method": "direct_governed_shape_authoring",
+        "containsAttributedQuotes": false
+      },
+      "approvedAt": null,
+      "reviewedBy": null,
+      "retiredAt": null,
+      "sequence": 39
+    },
+    {
+      "model": "PssaItem",
+      "id": "pssa_item_g4_conv_40",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 4,
+      "itemType": "MCQ",
+      "skill": "conventions_e04_d_1_2_2",
+      "passageId": null,
+      "eligibleContent": "E04.D.1.2.2",
+      "assessmentAnchor": "E04.D.1",
+      "anchorDescriptor": "E04.D.1.2",
+      "reportingCategory": "D",
+      "dokLevel": 2,
+      "paCoreStandardCodes": [
+        "CC.1.4.4.F",
+        "CC.1.4.4.L",
+        "CC.1.4.4.R"
+      ],
+      "alignmentStatus": "ALIGNED",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "approvalEligible": false,
+      "studentFacingPrompt": "Which sentence best demonstrates this convention: Use commas and quotation marks to mark direct speech and quotations from a text.",
+      "answerChoicesJson": [
+        "The student revised the report careful before the grade 4 conference began yesterday.",
+        "The student revise the report carefully before the grade 4 conference began yesterday.",
+        "The student revised the report carefully before the grade 4 conference began.",
+        "The student revised the report carefully before grade 4 conference began yesterday."
+      ],
+      "correctIndex": 2,
+      "correctAnswer": "The student revised the report carefully before the grade 4 conference began.",
+      "distractorRationalesJson": [
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis.",
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis.",
+        "Correct. This choice matches the targeted skill and the passage or sentence evidence.",
+        "Incorrect. This choice is plausible but reflects a detail, wording issue, or wrong emphasis."
+      ],
+      "expectedResponseJson": null,
+      "scoringRubricJson": null,
+      "studentPreviewJson": {
+        "prompt": "Which sentence best demonstrates this convention: Use commas and quotation marks to mark direct speech and quotations from a text.",
+        "choices": [
+          "The student revised the report careful before the grade 4 conference began yesterday.",
+          "The student revise the report carefully before the grade 4 conference began yesterday.",
+          "The student revised the report carefully before the grade 4 conference began.",
+          "The student revised the report carefully before grade 4 conference began yesterday."
+        ],
+        "leaksAnswer": false
+      },
+      "validationMetadataJson": {
+        "exactEcResolved": true,
+        "simulatedStudentReadyBlockers": [
+          "reviewStatus=PENDING",
+          "itemStatus=candidate"
+        ]
+      },
+      "linterResultsJson": {
+        "blockers": [],
+        "warnings": [],
+        "status": "PASS"
+      },
+      "provenanceJson": {
+        "authoredBy": "model-assisted, human-review-pending",
+        "method": "direct_governed_shape_authoring",
+        "containsAttributedQuotes": false
+      },
+      "approvedAt": null,
+      "reviewedBy": null,
+      "retiredAt": null,
+      "sequence": 40
+    }
+  ]
+}

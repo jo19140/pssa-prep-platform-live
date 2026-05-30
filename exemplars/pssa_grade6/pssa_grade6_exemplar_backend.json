@@ -1,0 +1,177 @@
+{
+  "generationBatchId": "pilot_g6_exemplar_0001",
+  "module": "PSSA",
+  "subject": "ELA",
+  "passage": {
+    "model": "PssaPassage",
+    "id": "pssa_psg_g6_beaver_0001",
+    "title": "The Animal That Builds Its Own Wetland",
+    "gradeLevel": 6,
+    "subject": "ELA",
+    "passageType": "informational",
+    "text": "For most of the last century, beavers were rare across much of North America. Trappers had hunted them for their thick fur until, in some regions, almost none were left. Rivers that had once spread into marshes and ponds began to run straight and fast. Few people noticed that something important had disappeared along with the beavers.\n\nBeavers are often called \"ecosystem engineers,\" a term scientists use for animals that reshape the land around them. A beaver does this by building dams. Using branches, mud, and stones, it blocks the flow of a stream until the water backs up and forms a pond. The pond is not just a home for the beaver. It slows the movement of water across the whole landscape.\n\nThat slowing matters more than it might seem. When rain falls fast, water rushes downhill, carrying away soil and sometimes causing floods farther downstream. A beaver pond acts like a brake. It holds water in place, lets the soil settle, and releases the water slowly over days or weeks. During a dry summer, land near a beaver pond often stays green while nearby areas turn brown.\n\nThe ponds help other living things, too. Frogs, fish, insects, and birds gather where the water is calm and steady. Plants that need wet ground take root along the edges. In places where beavers have returned, scientists have counted far more kinds of animals than in similar streams without them. A single beaver pond can become like a crowded apartment building for wildlife.\n\nToday, some communities are inviting beavers back on purpose. Instead of removing the animals or their dams, they protect them, and in a few cases they even build simple \"starter dams\" to encourage beavers to settle. It is an unusual kind of repair: rather than sending in machines and workers, people step back and let an animal do the building. The beaver, it turns out, may be one of the most skilled water engineers of all—and it works for free.",
+    "wordCount": 333,
+    "sourceType": "internal_original",
+    "sourceName": "Authored for Synesis PSSA exemplar",
+    "sourceCitation": null,
+    "licenseStatus": "cleared_internal_original",
+    "commercialUseAllowed": true,
+    "needsLegalReview": false,
+    "reviewStatus": "PENDING",
+    "itemStatus": "candidate",
+    "approvedAt": null,
+    "reviewedBy": null,
+    "repetitionAuditJson": {
+      "paragraphCount": 5,
+      "uniqueParagraphCount": 5,
+      "sentenceCount": 23,
+      "uniqueSentenceCount": 23,
+      "uniqueSentenceRatio": 1.0,
+      "repeatedTrigrams": 0,
+      "result": "PASS"
+    },
+    "provenanceJson": {
+      "authoredBy": "model-assisted, human-review-pending",
+      "method": "original_composition",
+      "pdeSamplerDerived": false,
+      "containsAttributedQuotes": false,
+      "note": "The 'crowded apartment building for wildlife' line is an author-created comparison, not a quotation attributed to any real person or source."
+    },
+    "retiredAt": null
+  },
+  "items": [
+    {
+      "model": "PssaItem",
+      "id": "pssa_item_g6_beaver_mcq_0001",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 6,
+      "itemType": "MCQ",
+      "skill": "central_idea",
+      "difficultyBand": "medium",
+      "passageId": "pssa_psg_g6_beaver_0001",
+      "eligibleContent": "E06.B-K.1.1.2",
+      "assessmentAnchor": "E06.B-K.1",
+      "anchorDescriptor": "E06.B-K.1.1",
+      "reportingCategory": "B",
+      "dokLevel": 2,
+      "paCoreStandardCodes": ["CC.1.2.6.A", "CC.1.2.6.B", "CC.1.2.6.C"],
+      "alignmentStatus": "ALIGNED",
+      "alignmentNotes": "Exact eligibleContent match resolved from data/pssa/anchor_ec_crosswalk.csv (E06.B-K.1.1.2).",
+      "studentFacingPrompt": "Which sentence best states the central idea of the passage?",
+      "answerChoicesJson": [
+        "Beavers were hunted for their fur until they nearly disappeared.",
+        "Calm beaver ponds attract frogs, fish, insects, and birds.",
+        "Beavers reshape the land by building dams, which help water, soil, and wildlife.",
+        "Beavers matter mainly because they help communities save money on repairs."
+      ],
+      "correctAnswer": "Beavers reshape the land by building dams, which help water, soil, and wildlife.",
+      "correctIndex": 2,
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "approvedAt": null,
+      "reviewedBy": null,
+      "studentPreviewJson": {
+        "prompt": "Which sentence best states the central idea of the passage?",
+        "choices": ["A", "B", "C", "D"],
+        "leaksAnswer": false
+      },
+      "validationMetadataJson": {
+        "singleDefensibleAnswer": true,
+        "distractorsPassageSpecific": true,
+        "genericTestTakingChoices": false,
+        "noAbsoluteLanguageDistractors": true,
+        "answerChoiceLengthBalanced": true
+      },
+      "linterResultsJson": {
+        "blockers": [],
+        "warnings": [],
+        "PSSA_ANSWER_POSITION_BIAS": "OK",
+        "PSSA_DUPLICATE_ITEM_EXACT": "OK",
+        "PSSA_DISTRACTOR_IRRELEVANT": "OK"
+      },
+      "provenanceJson": { "authoredBy": "model-assisted, human-review-pending" },
+      "retiredAt": null
+    },
+    {
+      "model": "PssaItem",
+      "id": "pssa_item_g6_beaver_tda_0001",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 6,
+      "itemType": "TDA",
+      "skill": "evidence_based_analysis",
+      "difficultyBand": "high",
+      "passageId": "pssa_psg_g6_beaver_0001",
+      "eligibleContent": "E06.E.1.1.2",
+      "assessmentAnchor": "E06.E.1",
+      "anchorDescriptor": "E06.E.1.1",
+      "reportingCategory": "E",
+      "dokLevel": 4,
+      "paCoreStandardCodes": ["CC.1.4.6.B","CC.1.4.6.C","CC.1.4.6.D","CC.1.4.6.E","CC.1.4.6.F","CC.1.4.6.H","CC.1.4.6.I","CC.1.4.6.J","CC.1.4.6.K","CC.1.4.6.L","CC.1.4.6.S"],
+      "alignmentStatus": "ALIGNED",
+      "alignmentNotes": "Exact eligibleContent match (E06.E.1.1.2). TDA addresses the full E06.E.1 anchor; primary EC is the develop-with-evidence statement.",
+      "studentFacingPrompt": "Write an essay analyzing how the author develops the idea that the beaver is an \"ecosystem engineer.\" Use specific evidence from the passage to support your analysis.",
+      "answerChoicesJson": null,
+      "correctAnswer": null,
+      "correctIndex": null,
+      "expectedResponseJson": {
+        "expectedClaim": "The author develops the idea by showing the beaver actively reshaping its environment: dam-building creates a pond that changes how water, soil, and wildlife behave across the landscape.",
+        "acceptableEvidence": [
+          "dam built from \"branches, mud, and stones\"",
+          "pond \"acts like a brake,\" slowing water and reducing floods",
+          "land nearby \"stays green\" during drought",
+          "more kinds of animals counted where beavers returned",
+          "\"a crowded apartment building for wildlife\"",
+          "communities building \"starter dams\""
+        ]
+      },
+      "scoringRubricJson": {
+        "type": "item_specific",
+        "scale": "4-3-2-1",
+        "4": "Clear claim about the beaver as agent of change; multiple relevant pieces of text evidence; each tied explicitly to the engineer idea; organized and coherent.",
+        "3": "Clear claim; some relevant evidence; mostly connected to the engineer idea; minor gaps.",
+        "2": "Vague or partial claim; limited evidence; weak or missing connection between evidence and idea; may drift into summary.",
+        "1": "No real claim; little/no text evidence, or pure summary/copying; does not address the engineer idea.",
+        "commonWeakResponses": [
+          "summarizing the passage without addressing the 'engineer' idea",
+          "listing animals without linking them to the beaver's role",
+          "relying only on the title"
+        ],
+        "copiedTextHandling": "Verbatim copying with no analysis scores 1.",
+        "offTopicHandling": "Off-topic responses (e.g., beavers as pets) receive no credit."
+      },
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "approvedAt": null,
+      "reviewedBy": null,
+      "studentPreviewJson": {
+        "prompt": "Write an essay analyzing how the author develops the idea that the beaver is an \"ecosystem engineer.\" Use specific evidence from the passage to support your analysis.",
+        "leaksAnswer": false
+      },
+      "validationMetadataJson": {
+        "rubricItemSpecific": true,
+        "expectedClaimPresent": true,
+        "evidenceGuidancePresent": true,
+        "weakResponseNotesPresent": true
+      },
+      "linterResultsJson": {
+        "blockers": [],
+        "warnings": [],
+        "PSSA_TDA_RUBRIC_GENERIC": "OK",
+        "PSSA_TDA_EXPECTED_CLAIM_MISSING": "OK",
+        "PSSA_TDA_EVIDENCE_GUIDANCE_MISSING": "OK"
+      },
+      "provenanceJson": { "authoredBy": "model-assisted, human-review-pending" },
+      "retiredAt": null
+    }
+  ]
+}
