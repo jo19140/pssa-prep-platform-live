@@ -3,6 +3,8 @@ import path from "node:path";
 import {
   buildMcqAbsoluteLanguageDistractorReport,
   buildMcqCorrectIsLongestReport,
+  deriveAnswerChoicesFromStructuredChoices,
+  type StructuredChoice,
 } from "../audit/pssa-audit-detectors";
 
 type CrosswalkRow = Record<string, string>;
@@ -23,6 +25,7 @@ type Item = {
   eligibleContent: string;
   prompt: string;
   answerChoicesJson: string[] | null;
+  structuredChoicesJson?: StructuredChoice[] | null;
   correctIndex: number | null;
   correctAnswer: string | null;
   distractorRationalesJson: string[] | null;
@@ -263,6 +266,7 @@ function governedPassage(passage: Passage) {
 function governedItem(item: Item, sequence: number, crosswalk: CrosswalkRow[]) {
   const row = crosswalk.find((entry) => entry.eligibleContent === item.eligibleContent);
   if (!row) throw new Error(`Missing EC ${item.eligibleContent}`);
+  const answerChoicesJson = deriveAnswerChoicesFromStructuredChoices(item.structuredChoicesJson) ?? item.answerChoicesJson;
   return {
     model: "PssaItem",
     id: item.id,
@@ -287,13 +291,14 @@ function governedItem(item: Item, sequence: number, crosswalk: CrosswalkRow[]) {
     itemStatus: "candidate",
     approvalEligible: false,
     studentFacingPrompt: item.prompt,
-    answerChoicesJson: item.answerChoicesJson,
+    answerChoicesJson,
+    structuredChoicesJson: item.structuredChoicesJson ?? null,
     correctIndex: item.correctIndex,
     correctAnswer: item.correctAnswer,
     distractorRationalesJson: item.distractorRationalesJson,
     expectedResponseJson: item.expectedResponseJson,
     scoringRubricJson: item.scoringRubricJson,
-    studentPreviewJson: { prompt: item.prompt, choices: item.answerChoicesJson, leaksAnswer: false },
+    studentPreviewJson: { prompt: item.prompt, choices: answerChoicesJson, leaksAnswer: false },
     validationMetadataJson: { exactEcResolved: true, simulatedStudentReadyBlockers: ["reviewStatus=PENDING", "itemStatus=candidate"] },
     linterResultsJson: { blockers: [], warnings: [], status: "PASS" },
     provenanceJson: { authoredBy: "model-assisted, human-review-pending", method: "direct_governed_shape_authoring", containsAttributedQuotes: false },

@@ -8,7 +8,65 @@ export type McqAuditInput = {
   correctIndex?: number | null;
   choices?: string[];
   answerChoicesJson?: string[];
+  structuredChoicesJson?: StructuredChoice[] | null;
   studentFacingPrompt?: string;
+  passageId?: string | null;
+  eligibleContent?: string;
+  gradeLevel?: number;
+  reportingCategory?: string;
+};
+
+export type PssaPassageAuditInput = {
+  id: string;
+  title?: string;
+  text: string;
+  gradeLevel?: number;
+};
+
+export type EvidenceLink = {
+  paragraphIndex: number;
+  sentenceIndex: number;
+  quotedSpan: string;
+};
+
+export type DistractorRole =
+  | "too_narrow"
+  | "wrong_emphasis"
+  | "plausible_misreading"
+  | "unsupported_inference"
+  | "opposite_claim"
+  | "wrong_section";
+
+export type StructuredChoice = {
+  text: string;
+  isCorrect: boolean;
+  rationale?: string;
+  evidenceLinks?: EvidenceLink[];
+  distractorRole?: DistractorRole | null;
+};
+
+export type PassageSpecificityRuleId =
+  | "PSSA_MCQ_GENERIC_TEST_TAKING_LANGUAGE"
+  | "PSSA_MCQ_GENERIC_STEM_LANGUAGE"
+  | "PSSA_MCQ_TEMPLATE_LANGUAGE_REUSE"
+  | "PSSA_MCQ_PASSAGE_SPECIFIC_CHOICES"
+  | "PSSA_MCQ_CHOICE_EVIDENCE_LINKS_REQUIRED"
+  | "PSSA_MCQ_EVIDENCE_SPAN_NOT_FOUND"
+  | "PSSA_MCQ_DISTRACTOR_ROLE_REQUIRED"
+  | "PSSA_MCQ_SINGLE_DEFENSIBLE_ANSWER"
+  | "PSSA_DUPLICATE_ITEM_WITH_REORDERED_CHOICES";
+
+export type PassageSpecificityRow = {
+  itemId: string;
+  passageId: string;
+  gradeLevel: number | string;
+  eligibleContent: string;
+  ruleId: PassageSpecificityRuleId;
+  result: RuleResult;
+  severity: "INFO" | "WARNING" | "BLOCKER";
+  evidence: string;
+  failedChoiceIndices: number[];
+  notes: string;
 };
 
 export type McqCorrectIsLongestRow = {
@@ -125,11 +183,43 @@ export function buildMcqAbsoluteLanguageDistractorReport(items: McqAuditInput[])
   }];
 }
 
+export function deriveAnswerChoicesFromStructuredChoices(choices: StructuredChoice[] | null | undefined) {
+  return Array.isArray(choices) ? choices.map((choice) => choice.text) : null;
+}
+
+export function buildMcqPassageSpecificityReport(
+  rawItems: McqAuditInput[],
+  rawPassages: PssaPassageAuditInput[],
+): PassageSpecificityRow[] {
+  const passageById = new Map(rawPassages.map((passage) => [passage.id, passage]));
+  const readingMcqs = rawItems.filter(isPassageLinkedReadingMcq);
+  const rows: PassageSpecificityRow[] = [];
+
+  for (const item of readingMcqs) {
+    const passage = passageById.get(String(item.passageId));
+    const itemRows = auditPassageLinkedReadingMcq(item, passage);
+    rows.push(...itemRows);
+  }
+
+  rows.push(...buildTemplateReuseRows(readingMcqs, "choice"));
+  rows.push(...buildTemplateReuseRows(readingMcqs, "stem"));
+  rows.push(...buildDuplicateReorderedChoiceRows(readingMcqs));
+  return rows;
+}
+
+export function isPassageLinkedReadingMcq(item: McqAuditInput) {
+  return (item.itemType ?? item.questionType) === "MCQ" && Boolean(item.passageId) && item.reportingCategory !== "D";
+}
+
+export function hasBlockingPassageSpecificityFailure(rows: PassageSpecificityRow[]) {
+  return rows.some((row) => row.result === "FAIL" && row.severity === "BLOCKER");
+}
+
 function toMcq(raw: McqAuditInput) {
   return {
     itemId: String(raw.itemId ?? raw.id ?? ""),
     correctIndex: typeof raw.correctIndex === "number" ? raw.correctIndex : null,
-    choices: (raw.answerChoicesJson ?? raw.choices ?? []).map(String),
+    choices: (deriveAnswerChoicesFromStructuredChoices(raw.structuredChoicesJson) ?? raw.answerChoicesJson ?? raw.choices ?? []).map(String),
   };
 }
 
@@ -143,4 +233,290 @@ function wordCount(value: string) {
 
 function round(value: number) {
   return Math.round(value * 10000) / 10000;
+}
+
+const genericExactPhrases = [
+  "the opening detail",
+  "one middle detail",
+  "the ending reflection",
+  "useful background",
+  "the passage focus",
+  "the main question being asked",
+  "smaller part of the passage's idea",
+  "best applies this",
+  "addresses this reading focus",
+  "the reader should guess",
+  "only the title",
+  "copied from one sentence",
+];
+
+const genericRegexPatterns = [
+  /\b(opening|middle|ending|first|final|later)\s+(detail|reflection|sentence|paragraph|section)\b/i,
+  /\b(passage|text)\s+(focus|main question|central point)\b/i,
+  /\b(useful|supporting)\s+(evidence|detail)\b/i,
+  /\breader\s+(should\s+)?(guess|infer)\b/i,
+  /\b(applies|addresses)\s+this\s+(reading|vocabulary)\s+focus\b/i,
+  /\bconnects\s+.+\s+details\s+with\s+a\s+careful\s+plan\b/i,
+  /\bcopied\s+from\s+one\s+sentence\b/i,
+  /\bonly\s+the\s+title\b/i,
+  /\bwhich\s+(option|statement|answer)\s+best\s+(addresses|applies|uses)\b/i,
+  /\bwhich\s+answer\s+uses\s+evidence\s+correctly\b/i,
+];
+
+const genericAcademicWords = new Set([
+  "passage", "text", "detail", "details", "idea", "author", "reader", "statement", "answer", "focus",
+  "main", "evidence", "paragraph", "section", "sentence", "sentences", "choice", "option", "question",
+  "correctly", "skill", "reading", "central", "point", "support", "supports", "supporting",
+]);
+
+const stopwords = new Set([
+  "about", "after", "again", "also", "because", "before", "being", "between", "could", "does", "down",
+  "each", "from", "have", "into", "more", "most", "near", "only", "other", "over", "same", "some",
+  "than", "that", "their", "them", "then", "there", "these", "they", "this", "those", "through", "until",
+  "very", "were", "what", "when", "where", "which", "while", "with", "without", "would", "your", "best",
+]);
+
+const validDistractorRoles = new Set<DistractorRole>([
+  "too_narrow",
+  "wrong_emphasis",
+  "plausible_misreading",
+  "unsupported_inference",
+  "opposite_claim",
+  "wrong_section",
+]);
+
+function auditPassageLinkedReadingMcq(item: McqAuditInput, passage: PssaPassageAuditInput | undefined) {
+  const rows: PassageSpecificityRow[] = [];
+  const itemId = String(item.id ?? item.itemId ?? "");
+  const passageId = String(item.passageId ?? "");
+  const choices = toMcq(item).choices;
+  const structuredChoices = Array.isArray(item.structuredChoicesJson) ? item.structuredChoicesJson : null;
+  const passageText = passage?.text ?? "";
+  const passageWords = contentWords(passageText);
+  const sentenceGrid = passage ? splitPassageSentences(passage.text) : [];
+
+  const choiceGenericHits = choices.flatMap((choice, index) => genericLanguageHits(choice).map((hit) => ({ index, hit })));
+  if (choiceGenericHits.length) {
+    rows.push(row(item, "PSSA_MCQ_GENERIC_TEST_TAKING_LANGUAGE", "FAIL", "BLOCKER", choiceGenericHits.map((hit) => hit.hit).join("; "), choiceGenericHits.map((hit) => hit.index), "Choice text contains passage-agnostic template language."));
+  }
+
+  const stemHits = genericLanguageHits(item.studentFacingPrompt ?? "");
+  if (stemHits.length) {
+    rows.push(row(item, "PSSA_MCQ_GENERIC_STEM_LANGUAGE", "FAIL", "BLOCKER", stemHits.join("; "), [], "Stem uses generic test-taking language instead of a passage-specific question."));
+  }
+
+  const overlapFailures: number[] = [];
+  let concreteChoiceCount = 0;
+  choices.forEach((choice, index) => {
+    const shared = [...contentWords(choice)].filter((word) => passageWords.has(word));
+    if (shared.length < 2) overlapFailures.push(index);
+    if (shared.length >= 2) concreteChoiceCount += 1;
+  });
+  if (overlapFailures.length || concreteChoiceCount < 3) {
+    rows.push(row(item, "PSSA_MCQ_PASSAGE_SPECIFIC_CHOICES", "FAIL", "BLOCKER", `concreteChoices=${concreteChoiceCount}/4`, overlapFailures, "Each choice needs at least two passage-specific content words, and at least three choices need concrete passage details."));
+  }
+
+  if (!structuredChoices || structuredChoices.length !== choices.length) {
+    rows.push(row(item, "PSSA_MCQ_CHOICE_EVIDENCE_LINKS_REQUIRED", "FAIL", "BLOCKER", "structuredChoicesJson missing or length mismatch", choices.map((_, index) => index), "Structured choices with rationale and evidenceLinks are required for passage-linked reading MCQs."));
+  } else {
+    const missingEvidence: number[] = [];
+    const badEvidence: string[] = [];
+    const missingRole: number[] = [];
+    structuredChoices.forEach((choice, index) => {
+      if (!choice.rationale || !choice.evidenceLinks?.length) missingEvidence.push(index);
+      if (choice.isCorrect && choice.distractorRole !== null) missingRole.push(index);
+      if (!choice.isCorrect && !validDistractorRoles.has(choice.distractorRole as DistractorRole)) missingRole.push(index);
+      for (const link of choice.evidenceLinks ?? []) {
+        const validation = validateEvidenceLink(link, sentenceGrid, passageText);
+        if (!validation.valid) badEvidence.push(`choice ${index}: ${validation.reason}`);
+      }
+    });
+    if (missingEvidence.length) {
+      rows.push(row(item, "PSSA_MCQ_CHOICE_EVIDENCE_LINKS_REQUIRED", "FAIL", "BLOCKER", "missing rationale/evidenceLinks", missingEvidence, "Each structured choice needs a rationale and at least one evidence link."));
+    }
+    if (badEvidence.length) {
+      rows.push(row(item, "PSSA_MCQ_EVIDENCE_SPAN_NOT_FOUND", "FAIL", "BLOCKER", badEvidence.join("; "), [], "Every evidence quotedSpan must appear in the linked passage at the cited paragraph and sentence."));
+    }
+    if (missingRole.length) {
+      rows.push(row(item, "PSSA_MCQ_DISTRACTOR_ROLE_REQUIRED", "FAIL", "BLOCKER", "invalid distractorRole/isCorrect pairing", missingRole, "Distractors need a valid role; the correct choice must have distractorRole null."));
+    }
+  }
+
+  const correctChoices = structuredChoices ? structuredChoices.filter((choice) => choice.isCorrect).length : (typeof item.correctIndex === "number" ? 1 : 0);
+  const nearDuplicatePairs = nearDuplicateChoicePairs(choices);
+  if (correctChoices !== 1 || nearDuplicatePairs.length) {
+    rows.push(row(item, "PSSA_MCQ_SINGLE_DEFENSIBLE_ANSWER", "FAIL", nearDuplicatePairs.length ? "BLOCKER" : "BLOCKER", `correctChoices=${correctChoices}; duplicatePairs=${nearDuplicatePairs.join("|")}`, [], "A passage-linked MCQ needs exactly one correct answer and no near-identical choices."));
+  }
+
+  if (!rows.length) {
+    rows.push(row(item, "PSSA_MCQ_PASSAGE_SPECIFIC_CHOICES", "PASS", "INFO", "all passage-specificity gates clear", [], "Passage-linked reading MCQ passed grounding gates."));
+  }
+  return rows;
+
+  function row(
+    raw: McqAuditInput,
+    ruleId: PassageSpecificityRuleId,
+    result: RuleResult,
+    severity: "INFO" | "WARNING" | "BLOCKER",
+    evidence: string,
+    failedChoiceIndices: number[],
+    notes: string,
+  ): PassageSpecificityRow {
+    return {
+      itemId,
+      passageId,
+      gradeLevel: raw.gradeLevel ?? "",
+      eligibleContent: raw.eligibleContent ?? "",
+      ruleId,
+      result,
+      severity,
+      evidence,
+      failedChoiceIndices,
+      notes,
+    };
+  }
+}
+
+function buildTemplateReuseRows(items: McqAuditInput[], scope: "choice" | "stem") {
+  const buckets = new Map<string, McqAuditInput[]>();
+  for (const item of items) {
+    const values = scope === "choice"
+      ? toMcq(item).choices.filter((_, index) => index !== item.correctIndex)
+      : [maskStem(item.studentFacingPrompt ?? "")];
+    for (const value of values) {
+      const key = normalizeText(value);
+      if (!key) continue;
+      buckets.set(key, [...(buckets.get(key) ?? []), item]);
+    }
+  }
+  const rows: PassageSpecificityRow[] = [];
+  for (const [key, bucket] of buckets) {
+    const uniqueItems = uniqueBy(bucket, (item) => String(item.id ?? item.itemId ?? ""));
+    if (uniqueItems.length <= 2) continue;
+    for (const item of uniqueItems) {
+      rows.push({
+        itemId: String(item.id ?? item.itemId ?? ""),
+        passageId: String(item.passageId ?? ""),
+        gradeLevel: item.gradeLevel ?? "",
+        eligibleContent: item.eligibleContent ?? "",
+        ruleId: "PSSA_MCQ_TEMPLATE_LANGUAGE_REUSE",
+        result: "FAIL",
+        severity: "BLOCKER",
+        evidence: `${scope}:${key}`,
+        failedChoiceIndices: scope === "choice" ? repeatedChoiceIndices(item, key) : [],
+        notes: `${scope} template reused across ${uniqueItems.length} passage-linked reading MCQs.`,
+      });
+    }
+  }
+  return rows;
+}
+
+function buildDuplicateReorderedChoiceRows(items: McqAuditInput[]) {
+  const buckets = new Map<string, McqAuditInput[]>();
+  for (const item of items) {
+    const choicesKey = toMcq(item).choices.map(normalizeText).sort().join("|");
+    const key = `${item.passageId ?? ""}::${normalizeText(item.studentFacingPrompt ?? "")}::${choicesKey}`;
+    buckets.set(key, [...(buckets.get(key) ?? []), item]);
+  }
+  const rows: PassageSpecificityRow[] = [];
+  for (const [key, bucket] of buckets) {
+    if (bucket.length <= 1) continue;
+    for (const item of bucket) {
+      rows.push({
+        itemId: String(item.id ?? item.itemId ?? ""),
+        passageId: String(item.passageId ?? ""),
+        gradeLevel: item.gradeLevel ?? "",
+        eligibleContent: item.eligibleContent ?? "",
+        ruleId: "PSSA_DUPLICATE_ITEM_WITH_REORDERED_CHOICES",
+        result: "FAIL",
+        severity: "BLOCKER",
+        evidence: key,
+        failedChoiceIndices: [],
+        notes: "Duplicate stem and normalized choice set found for the same passage, ignoring eligibleContent.",
+      });
+    }
+  }
+  return rows;
+}
+
+function repeatedChoiceIndices(item: McqAuditInput, normalizedChoice: string) {
+  return toMcq(item).choices.flatMap((choice, index) => normalizeText(choice) === normalizedChoice ? [index] : []);
+}
+
+function genericLanguageHits(value: string) {
+  const normalized = normalizeText(value);
+  const exactHits = genericExactPhrases.filter((phrase) => new RegExp(`(^|\\W)${escapeRegExp(normalizeText(phrase))}(\\W|$)`, "i").test(normalized));
+  const regexHits = genericRegexPatterns.filter((pattern) => pattern.test(value)).map((pattern) => pattern.source);
+  return [...exactHits, ...regexHits];
+}
+
+function validateEvidenceLink(link: EvidenceLink, sentenceGrid: string[][], passageText: string) {
+  if (!Number.isInteger(link.paragraphIndex) || !Number.isInteger(link.sentenceIndex)) {
+    return { valid: false, reason: "paragraphIndex and sentenceIndex must be integers" };
+  }
+  const sentence = sentenceGrid[link.paragraphIndex]?.[link.sentenceIndex];
+  if (!sentence) return { valid: false, reason: `invalid paragraph/sentence index ${link.paragraphIndex}/${link.sentenceIndex}` };
+  if (!containsNormalized(sentence, link.quotedSpan)) {
+    return { valid: false, reason: `quotedSpan not found in cited sentence: ${link.quotedSpan}` };
+  }
+  if (!containsNormalized(passageText, link.quotedSpan)) {
+    return { valid: false, reason: `quotedSpan not found in passage: ${link.quotedSpan}` };
+  }
+  return { valid: true, reason: "" };
+}
+
+function splitPassageSentences(text: string) {
+  return text.split(/\n\s*\n/g).map((paragraph) => {
+    const matches = paragraph.match(/[^.!?]+[.!?]+(?:["”])?/g);
+    return (matches ?? [paragraph]).map((sentence) => sentence.trim()).filter(Boolean);
+  });
+}
+
+function containsNormalized(haystack: string, needle: string) {
+  return normalizeQuotesWhitespace(haystack).includes(normalizeQuotesWhitespace(needle));
+}
+
+function normalizeQuotesWhitespace(value: string) {
+  return value.replace(/[“”]/g, "\"").replace(/[‘’]/g, "'").replace(/\s+/g, " ").trim();
+}
+
+function contentWords(value: string) {
+  return new Set((value.match(/[A-Za-z][A-Za-z'-]+/g) ?? [])
+    .map((word) => word.toLowerCase().replace(/'s$/, ""))
+    .filter((word) => word.length >= 4 && !stopwords.has(word) && !genericAcademicWords.has(word)));
+}
+
+function nearDuplicateChoicePairs(choices: string[]) {
+  const pairs: string[] = [];
+  for (let i = 0; i < choices.length; i += 1) {
+    for (let j = i + 1; j < choices.length; j += 1) {
+      if (normalizeText(choices[i]) === normalizeText(choices[j])) pairs.push(`${i}-${j}`);
+    }
+  }
+  return pairs;
+}
+
+function maskStem(value: string) {
+  return normalizeText(value)
+    .replace(/"[^"]+"/g, "\"<title>\"")
+    .replace(/e0[3-8]\.[a-z]-[a-z]\.\d\.\d\.\d/gi, "<ec>")
+    .replace(/ask and answer questions.+|determine.+|explain.+|analyze.+|cite.+|compare.+/i, "<ec-text>");
+}
+
+function normalizeText(value: string) {
+  return value.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+}
+
+function uniqueBy<T>(values: T[], getKey: (value: T) => string) {
+  const seen = new Set<string>();
+  return values.filter((value) => {
+    const key = getKey(value);
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
+
+function escapeRegExp(value: string) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }

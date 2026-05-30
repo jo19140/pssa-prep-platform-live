@@ -65,6 +65,70 @@
         "Beavers reshape the land by building dams, which help water, soil, and wildlife.",
         "Beavers matter mainly because they help communities save money on repairs."
       ],
+      "structuredChoicesJson": [
+        {
+          "text": "Beavers were hunted for their fur until they nearly disappeared.",
+          "isCorrect": false,
+          "rationale": "This detail is stated in the opening paragraph, but it is too narrow because the central idea asks how beavers affect land, water, and other living things across the whole passage.",
+          "evidenceLinks": [
+            {
+              "paragraphIndex": 0,
+              "sentenceIndex": 1,
+              "quotedSpan": "Trappers had hunted them for their thick fur until, in some regions, almost none were left."
+            }
+          ],
+          "distractorRole": "too_narrow"
+        },
+        {
+          "text": "Calm beaver ponds attract frogs, fish, insects, and birds.",
+          "isCorrect": false,
+          "rationale": "This uses a real wildlife detail, but it covers only one supporting effect, not the broader central idea about dams helping water, soil, and wildlife.",
+          "evidenceLinks": [
+            {
+              "paragraphIndex": 3,
+              "sentenceIndex": 1,
+              "quotedSpan": "Frogs, fish, insects, and birds gather where the water is calm and steady."
+            }
+          ],
+          "distractorRole": "too_narrow"
+        },
+        {
+          "text": "Beavers reshape the land by building dams, which help water, soil, and wildlife.",
+          "isCorrect": true,
+          "rationale": "This states the central idea and matches E06.B-K.1.1.2 because it combines the passage's repeated evidence about beaver dams reshaping streams, slowing water, settling soil, and supporting wildlife.",
+          "evidenceLinks": [
+            {
+              "paragraphIndex": 1,
+              "sentenceIndex": 2,
+              "quotedSpan": "Using branches, mud, and stones, it blocks the flow of a stream until the water backs up and forms a pond."
+            },
+            {
+              "paragraphIndex": 2,
+              "sentenceIndex": 3,
+              "quotedSpan": "It holds water in place, lets the soil settle, and releases the water slowly over days or weeks."
+            },
+            {
+              "paragraphIndex": 3,
+              "sentenceIndex": 1,
+              "quotedSpan": "Frogs, fish, insects, and birds gather where the water is calm and steady."
+            }
+          ],
+          "distractorRole": null
+        },
+        {
+          "text": "Beavers matter mainly because they help communities save money on repairs.",
+          "isCorrect": false,
+          "rationale": "The final paragraph mentions that beavers work for free, but this wrong emphasis turns one closing idea into the main point and ignores the passage's water, soil, and wildlife evidence.",
+          "evidenceLinks": [
+            {
+              "paragraphIndex": 4,
+              "sentenceIndex": 3,
+              "quotedSpan": "The beaver, it turns out, may be one of the most skilled water engineers of all—and it works for free."
+            }
+          ],
+          "distractorRole": "wrong_emphasis"
+        }
+      ],
       "correctAnswer": "Beavers reshape the land by building dams, which help water, soil, and wildlife.",
       "correctIndex": 2,
       "sourceType": "internal_original",
