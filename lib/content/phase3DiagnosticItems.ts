@@ -5,6 +5,7 @@ type DiagnosticItemSeed = {
   strand: "PA" | "DECODING" | "MORPHOLOGY" | "FLUENCY" | "VOCABULARY" | "COMPREHENSION";
   itemType: string;
   dailyTargetCode?: string;
+  itemStatus?: "candidate" | "human_reviewed" | "pilot_ready" | "calibrated";
   studentPromptJson: Prisma.InputJsonValue;
   stimulusJson?: Prisma.InputJsonValue;
   expectedResponseJson: Prisma.InputJsonValue;
@@ -14,6 +15,22 @@ type DiagnosticItemSeed = {
   morphologyWave?: string;
   targetMorpheme?: string;
   skill?: string;
+  displayMode?: string;
+  responseMode?: string;
+  vocabularyBand?: string;
+  targetWord?: string;
+  comprehensionMode?: string;
+  stimulusMode?: string;
+  calibratedProbeLevel?: string;
+  audioAssetRequired?: boolean;
+  audioValidatedByHuman?: boolean;
+  expectedPronunciation?: string;
+  targetPattern?: string;
+  wordType?: string;
+  displayText?: string;
+  canonicalAnswer?: string;
+  placementEvidenceJson?: Prisma.InputJsonValue;
+  fluencyEvidenceJson?: Prisma.InputJsonValue;
   difficultyBand: number;
   isPracticeItem?: boolean;
 };
@@ -34,6 +51,9 @@ export function buildPhase3EntryDiagnosticItems(): DiagnosticItemSeed[] {
       expectedResponseJson: response("sun and seal", ["sun and map", "seal and map"], ["sun seal", "sun and seals"]),
       scoringRubricJson: { scoring: "speech_response", evidence: "initial sound matching" },
       adminReviewJson: { note: "Choices are reviewer/scoring context; PA kid view should stay audio-first." },
+      skill: "initial_sound_matching",
+      displayMode: "AUDIO_ONLY",
+      responseMode: "speech_response",
       difficultyBand: 3,
     },
     {
@@ -44,9 +64,18 @@ export function buildPhase3EntryDiagnosticItems(): DiagnosticItemSeed[] {
       },
       stimulusJson: {
         audioScript: "m ... ake",
+        backendPhonemeMetadata: { blendType: "onset_rime", onset: "m", rime: "ake" },
       },
       expectedResponseJson: response("make", [], ["mayk"]),
       scoringRubricJson: { scoring: "speech_response", evidence: "oral word blend" },
+      adminReviewJson: {
+        note: "Raw segmented stimulus is backend/TTS-only. Human-validated audio is required before approval.",
+      },
+      skill: "onset_rime_blending",
+      displayMode: "AUDIO_ONLY",
+      responseMode: "speech_response",
+      audioAssetRequired: true,
+      audioValidatedByHuman: false,
       difficultyBand: 3,
     },
     {
@@ -69,11 +98,16 @@ export function buildPhase3EntryDiagnosticItems(): DiagnosticItemSeed[] {
       strand: "VOCABULARY",
       itemType: "WORD_MEANING_CONTEXT",
       studentPromptJson: {
-        kidPrompt: "In this sentence, what does brave mean? The brave kid tried again after the tower fell.",
-        choices: ["not afraid to try", "very sleepy", "made of stone"],
+        kidPrompt: "In this sentence, what does enormous mean? The enormous pumpkin was so big that two people had to carry it.",
+        choices: ["very large", "very tiny", "broken"],
       },
-      expectedResponseJson: response("not afraid to try", ["very sleepy", "made of stone"]),
-      scoringRubricJson: { scoring: "selected_choice", evidence: "context meaning" },
+      expectedResponseJson: response("very large", ["very tiny", "broken"]),
+      scoringRubricJson: { scoring: "selected_choice", evidence: "word meaning from context" },
+      skill: "infer_word_meaning_from_context",
+      displayMode: "TEXT_CHOICE",
+      responseMode: "selected_choice",
+      vocabularyBand: "Tier 2",
+      targetWord: "enormous",
       difficultyBand: 3,
     },
     {
@@ -88,6 +122,12 @@ export function buildPhase3EntryDiagnosticItems(): DiagnosticItemSeed[] {
       },
       expectedResponseJson: response("friends solving a building problem", ["a bridge over a city river", "a race across a field"]),
       scoringRubricJson: { scoring: "selected_choice", evidence: "main idea from listening" },
+      skill: "main_idea",
+      displayMode: "AUDIO_THEN_TEXT_CHOICES",
+      responseMode: "selected_choice",
+      comprehensionMode: "listening",
+      stimulusMode: "audio_only",
+      calibratedProbeLevel: "phase_band_3",
       difficultyBand: 3,
     },
   ];
@@ -106,8 +146,17 @@ export function buildPhase3EntryDiagnosticItems(): DiagnosticItemSeed[] {
           noVisibleTimer: true,
         },
         expectedResponseJson: response(realWordA),
-        scoringRubricJson: { scoring: "speech_match", latencyFeeds: "FLUENCY" },
+        scoringRubricJson: { scoring: "speech_match", latencyFeeds: "FLUENCY", placementUses: "accuracy_only" },
         adminReviewJson: { latencyRules: { delayedAfterMs: 5000, noAttemptAfterMs: 10000, placementUsesAccuracyOnly: true } },
+        skill: "real_word_decoding",
+        displayMode: "TEXT_CARD_ONE_WORD",
+        responseMode: "speech_response",
+        targetPattern: target.code,
+        wordType: "real_word",
+        displayText: realWordA,
+        canonicalAnswer: realWordA,
+        placementEvidenceJson: { source: "real_word_accuracy", usesLatency: false },
+        fluencyEvidenceJson: { source: "response_latency", placementImpact: "none" },
         difficultyBand: 3,
       },
       {
@@ -120,8 +169,28 @@ export function buildPhase3EntryDiagnosticItems(): DiagnosticItemSeed[] {
           noVisibleTimer: true,
         },
         expectedResponseJson: response(nonwordA),
-        scoringRubricJson: { scoring: "speech_match", latencyFeeds: "FLUENCY" },
-        adminReviewJson: { latencyRules: { delayedAfterMs: 5000, noAttemptAfterMs: 10000, placementUsesAccuracyOnly: true } },
+        scoringRubricJson: { scoring: "speech_match", latencyFeeds: "FLUENCY", placementUses: "accuracy_only" },
+        adminReviewJson: {
+          latencyRules: { delayedAfterMs: 5000, noAttemptAfterMs: 10000, placementUsesAccuracyOnly: true },
+          pseudowordValidation: {
+            checkedAgainstDictionary: true,
+            checkedAgainstHighFrequencyWords: true,
+            checkedAgainstPronunciationDictionary: true,
+            homophoneRejected: true,
+            nearMisspellingRejected: true,
+            targetPatternOnly: true,
+          },
+        },
+        skill: "pseudoword_decoding",
+        displayMode: "TEXT_CARD_ONE_WORD",
+        responseMode: "speech_response",
+        targetPattern: target.code,
+        wordType: "pseudoword",
+        displayText: nonwordA,
+        canonicalAnswer: nonwordA,
+        expectedPronunciation: expectedPronunciation(nonwordA, target.code),
+        placementEvidenceJson: { source: "pseudoword_accuracy", usesLatency: false },
+        fluencyEvidenceJson: { source: "response_latency", placementImpact: "none" },
         difficultyBand: 3,
       },
       {
@@ -134,13 +203,23 @@ export function buildPhase3EntryDiagnosticItems(): DiagnosticItemSeed[] {
           noVisibleTimer: true,
         },
         expectedResponseJson: response(`${realWordB} and ${CLOSED_REVIEW_WORDS[target.introductionOrder - 1]}`),
-        scoringRubricJson: { scoring: "speech_accuracy_plus_latency", delayedAfterMs: 5000, noAttemptAfterMs: 10000 },
+        scoringRubricJson: { scoring: "speech_accuracy_plus_latency", delayedAfterMs: 5000, noAttemptAfterMs: 10000, placementUses: "none" },
+        skill: "phrase_fluency",
+        displayMode: "TEXT_PHRASE",
+        responseMode: "speech_response",
+        targetPattern: target.code,
+        placementEvidenceJson: { source: "none", note: "Phrase-read fluency evidence does not determine decoding phase placement." },
+        fluencyEvidenceJson: { source: "phrase_accuracy_and_latency", delayedAfterMs: 5000, noAttemptAfterMs: 10000 },
         difficultyBand: 3,
       },
     );
   }
 
   return items;
+}
+
+function expectedPronunciation(nonword: string, targetPattern: string) {
+  return `${nonword} (${targetPattern} target pattern)`;
 }
 
 function response(canonical: string, rejectedResponses: string[] = [], speechTranscriptAliases: string[] = []): Prisma.InputJsonValue {

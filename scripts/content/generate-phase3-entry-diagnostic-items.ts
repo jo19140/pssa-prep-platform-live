@@ -1,5 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import { runAIFirstLookReview } from "../../lib/content/aiFirstLookReviewer";
+import { deriveDiagnosticItemMetadata, diagnosticMetadataToCreateInput } from "../../lib/content/diagnosticItemMetadata";
 import { buildPhase3EntryDiagnosticItems } from "../../lib/content/phase3DiagnosticItems";
 import { PHASE_3_ENTRY } from "../../lib/content/phase3EntrySeed";
 import { seedPhase3Entry } from "./seed-phase3-entry";
@@ -29,6 +30,12 @@ export async function generatePhase3EntryDiagnosticItems({ runFirstLook = true }
     if (seed.dailyTargetCode && !dailyTarget) {
       throw new Error(`Missing DailyTarget ${seed.dailyTargetCode}; seed Phase 3 Entry before generating diagnostics.`);
     }
+    const derived = deriveDiagnosticItemMetadata({
+      ...seed,
+      phasePositionId: phasePosition.id,
+      dailyTargetId: dailyTarget?.id,
+      dailyTargetCode: seed.dailyTargetCode,
+    });
 
     const item = await db.diagnosticItem.create({
       data: {
@@ -41,10 +48,7 @@ export async function generatePhase3EntryDiagnosticItems({ runFirstLook = true }
         expectedResponseJson: seed.expectedResponseJson,
         scoringRubricJson: seed.scoringRubricJson,
         adminReviewJson: seed.adminReviewJson,
-        phaseBand: seed.phaseBand,
-        morphologyWave: seed.morphologyWave,
-        targetMorpheme: seed.targetMorpheme,
-        skill: seed.skill,
+        ...diagnosticMetadataToCreateInput(derived.metadata),
         difficultyBand: seed.difficultyBand,
         isPracticeItem: seed.isPracticeItem ?? false,
         reviewStatus: "PENDING",
@@ -65,10 +69,21 @@ export async function generatePhase3EntryDiagnosticItems({ runFirstLook = true }
           morphologyWave: item.morphologyWave,
           targetMorpheme: item.targetMorpheme,
           skill: item.skill,
+          itemStatus: item.itemStatus,
+          displayMode: item.displayMode,
+          responseMode: item.responseMode,
+          vocabularyBand: item.vocabularyBand,
+          targetWord: item.targetWord,
+          targetPattern: item.targetPattern,
+          wordType: item.wordType,
+          expectedPronunciation: item.expectedPronunciation,
+          audioAssetRequired: item.audioAssetRequired,
+          audioValidatedByHuman: item.audioValidatedByHuman,
         },
         contentForReview: {
           strand: item.strand,
           itemType: item.itemType,
+          itemStatus: item.itemStatus,
           studentPromptJson: item.studentPromptJson,
           stimulusJson: item.stimulusJson,
           expectedResponseJson: item.expectedResponseJson,
@@ -78,6 +93,17 @@ export async function generatePhase3EntryDiagnosticItems({ runFirstLook = true }
           morphologyWave: item.morphologyWave,
           targetMorpheme: item.targetMorpheme,
           skill: item.skill,
+          displayMode: item.displayMode,
+          responseMode: item.responseMode,
+          vocabularyBand: item.vocabularyBand,
+          targetWord: item.targetWord,
+          targetPattern: item.targetPattern,
+          wordType: item.wordType,
+          expectedPronunciation: item.expectedPronunciation,
+          placementEvidenceJson: item.placementEvidenceJson,
+          fluencyEvidenceJson: item.fluencyEvidenceJson,
+          audioAssetRequired: item.audioAssetRequired,
+          audioValidatedByHuman: item.audioValidatedByHuman,
         },
       });
     }

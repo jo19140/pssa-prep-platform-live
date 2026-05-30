@@ -6,6 +6,8 @@ export const paDiagnosticChecklist: FirstLookChecklist = {
   artifactType: "DIAGNOSTIC_ITEM",
   items: [
     check("PA_REQUIRES_AUDIO_DELIVERY", "BLOCKER", "Prompt is delivered through audio/oral stimulus; audio-only design is required for PA items."),
+    check("PA_AUDIO_ASSET_REQUIRED_FOR_PHONEMES", "BLOCKER", "PA items with isolated phonemes or segmented sounds require human-validated audio assets before approval; raw TTS phoneme strings are not production-safe."),
+    check("PA_NO_PRINTED_STIMULUS", "BLOCKER", "Student preview does not render phoneme strings, slash notation, letter chunks, or audioScript text from the PA stimulus."),
     check("PA_NO_VISIBLE_PRINTED_CHOICES", "BLOCKER", "Student-visible prompt contains no printed answer choices for phonemic-awareness items unless the item type explicitly requires a visual response."),
     check("PA_SCORING_SPEECH_RESPONSE", "BLOCKER", "PA items use speech_response scoring, not selected_choice scoring."),
     check("PA_UNAMBIGUOUS_CORRECT_ANSWER", "BLOCKER", "Correct answer is unique, defensible, and matches the spoken stimulus."),

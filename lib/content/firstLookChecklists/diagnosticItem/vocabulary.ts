@@ -8,6 +8,8 @@ export const vocabularyDiagnosticChecklist: FirstLookChecklist = {
     check("VOCAB_CONTEXT_SUFFICIENT", "BLOCKER", "Context gives enough information to infer the target meaning without teaching the answer."),
     check("VOCAB_SINGLE_DEFENSIBLE_ANSWER", "BLOCKER", "Correct answer is unique and defensible from the sentence or short context."),
     check("VOCAB_DISTRACTORS_PLAUSIBLE", "WARNING", "Distractors are plausible but clearly wrong for the context."),
+    check("VOCAB_TIER2_NO_PICTURE_CHOICE", "BLOCKER", "Tier 2, abstract, or relational vocabulary uses context/scenario meaning tasks, not concrete picture-choice tasks."),
+    check("VOCAB_DISTRACTORS_SAME_ATTRIBUTE", "BLOCKER", "Distractors test the same semantic attribute as the target word, such as size with size, not unrelated condition or category."),
     check("VOCAB_GRADE_APPROPRIATE", "WARNING", "Target word and choices are age-respectful and suitable for grades 3-8 intervention."),
     check("VOCAB_NO_KID_METADATA", "BLOCKER", "Kid-visible copy contains no phase codes, item counters, curriculum metadata, scoring jargon, or correctness feedback."),
   ],
