@@ -23,7 +23,8 @@ export function DiagnosticItemReviewWorkspace({ item }: { item: any }) {
   const passedChecks = checks.filter((check) => check.result === "PASS");
   const failedChecks = checks.filter((check) => check.result === "FAIL");
   const checksNa = checks.filter((check) => check.result === "NA");
-  const failedBlocker = failedChecks.some((check) => check.severity === "BLOCKER");
+  const failedBlockers = failedChecks.filter((check) => check.severity === "BLOCKER");
+  const failedBlocker = failedBlockers.length > 0;
   const specificIssues = failedChecks.map((check) => ({
     severity: check.severity === "BLOCKER" ? "major" : check.severity === "WARNING" ? "moderate" : "minor",
     location: check.requirementId,
@@ -97,11 +98,26 @@ export function DiagnosticItemReviewWorkspace({ item }: { item: any }) {
             <h2 className="text-lg font-black text-slate-950">Candidate item</h2>
             <div className="mt-4 grid gap-4 md:grid-cols-2">
               <Readonly label="Item type" value={item.itemType} />
-              <Readonly label="Phase position" value={item.phasePosition?.name || "None"} />
+              <Readonly label="Phase position" value={item.phasePosition?.label || "None"} />
               <Readonly label="Phase band" value={item.phaseBand == null ? "None" : String(item.phaseBand)} />
               <Readonly label="Morphology wave" value={item.morphologyWave || "None"} />
               <Readonly label="Target morpheme" value={item.targetMorpheme || "None"} />
               <Readonly label="Skill" value={item.skill || "None"} />
+              <Readonly label="Item status" value={item.itemStatus || "None"} />
+              <Readonly label="Display mode" value={item.displayMode || "None"} />
+              <Readonly label="Response mode" value={item.responseMode || "None"} />
+              <Readonly label="Vocabulary band" value={item.vocabularyBand || "None"} />
+              <Readonly label="Target word" value={item.targetWord || "None"} />
+              <Readonly label="Audio asset required" value={item.audioAssetRequired ? "Yes" : "No"} />
+              <Readonly label="Audio validated by human" value={item.audioValidatedByHuman ? "Yes" : "No"} />
+              <Readonly label="Expected pronunciation" value={item.expectedPronunciation || "None"} />
+              <Readonly label="Comprehension mode" value={item.comprehensionMode || "None"} />
+              <Readonly label="Stimulus mode" value={item.stimulusMode || "None"} />
+              <Readonly label="Calibrated probe level" value={item.calibratedProbeLevel || "None"} />
+              <Readonly label="Target pattern" value={item.targetPattern || "None"} />
+              <Readonly label="Word type" value={item.wordType || "None"} />
+              <Readonly label="Display text" value={item.displayText || "None"} />
+              <Readonly label="Canonical answer" value={item.canonicalAnswer || "None"} />
             </div>
             <JsonEditor label="Student prompt JSON (kid-visible)" value={studentPromptJson} onChange={setStudentPromptJson} />
             <JsonEditor label="Stimulus JSON (kid-visible/heard)" value={stimulusJson} onChange={setStimulusJson} />
@@ -252,15 +268,23 @@ function StudentPreview({ studentPrompt, stimulus }: { studentPrompt: any; stimu
   const prompt = studentPrompt && typeof studentPrompt === "object" ? studentPrompt : {};
   const stim = stimulus && typeof stimulus === "object" ? stimulus : {};
   const choices = Array.isArray(prompt.choices) ? prompt.choices : [];
+  const hasAudioStimulus = typeof stim.audioScript === "string" && stim.audioScript.trim().length > 0;
+  const expectsSpokenResponse = hasAudioStimulus && choices.length === 0;
   return (
     <div className="mt-4 rounded-2xl border border-indigo-100 bg-indigo-50 p-5">
       <p className="text-sm font-black uppercase tracking-wide text-indigo-700">Reading Buddy</p>
       {prompt.kidPrompt ? <p className="mt-3 text-xl font-black text-slate-950">{String(prompt.kidPrompt)}</p> : null}
       {prompt.displayText ? <div className="mt-4 rounded-xl bg-white p-5 text-center text-4xl font-black text-slate-950 shadow-sm">{String(prompt.displayText)}</div> : null}
-      {stim.audioScript ? (
-        <div className="mt-4 rounded-xl border border-indigo-200 bg-white p-3 text-sm text-slate-700">
-          <span className="font-bold text-indigo-700">Audio/TTS stimulus:</span> {String(stim.audioScript)}
-        </div>
+      {hasAudioStimulus ? (
+        <button type="button" className="mt-4 rounded-full bg-indigo-700 px-5 py-3 text-sm font-black text-white shadow-sm">
+          Listen
+        </button>
+      ) : null}
+      {expectsSpokenResponse && prompt.readyPrompt ? <p className="mt-4 text-base font-bold text-slate-800">{String(prompt.readyPrompt)}</p> : null}
+      {expectsSpokenResponse ? (
+        <button type="button" className="mt-3 rounded-full border border-indigo-200 bg-white px-5 py-3 text-sm font-black text-indigo-700 shadow-sm">
+          Mic
+        </button>
       ) : null}
       {choices.length ? (
         <div className="mt-4 grid gap-2">

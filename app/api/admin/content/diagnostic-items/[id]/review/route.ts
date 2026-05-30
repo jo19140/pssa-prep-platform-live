@@ -13,6 +13,7 @@ const reviewSchema = z.object({
   expectedResponseJson: z.unknown().optional(),
   scoringRubricJson: z.unknown().optional(),
   adminReviewJson: z.unknown().optional().nullable(),
+  metadata: z.record(z.unknown()).optional(),
 });
 
 export async function POST(req: Request, { params }: { params: Promise<{ id: string }> }) {
@@ -65,6 +66,7 @@ export async function POST(req: Request, { params }: { params: Promise<{ id: str
     expectedResponseJson: expectedResponseJson.value as Prisma.InputJsonValue | undefined,
     scoringRubricJson: scoringRubricJson.value as Prisma.InputJsonValue | undefined,
     adminReviewJson: adminReviewJson.value as Prisma.InputJsonValue | null | undefined,
+    metadata: parsed.data.metadata,
   });
 
   if (!result.ok) {

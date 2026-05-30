@@ -1,8 +1,10 @@
 import { Prisma } from "@prisma/client";
 import { db } from "@/lib/db";
+import { deriveDiagnosticItemMetadata, diagnosticMetadataToUpdateInput } from "./diagnosticItemMetadata";
 
 export const STUDENT_READY_DIAGNOSTIC_ITEM_WHERE = {
   reviewStatus: "APPROVED",
+  itemStatus: "pilot_ready",
   retiredAt: null,
 } satisfies Prisma.DiagnosticItemWhereInput;
 
@@ -28,14 +30,27 @@ const diagnosticItemInclude = {
 } satisfies Prisma.DiagnosticItemInclude;
 
 export async function getStudentReadyDiagnosticItems(args: Omit<Prisma.DiagnosticItemFindManyArgs, "where"> = {}) {
-  return db.diagnosticItem.findMany({
+  const items = await db.diagnosticItem.findMany({
     ...args,
     where: STUDENT_READY_DIAGNOSTIC_ITEM_WHERE,
+    include: {
+      dailyTarget: true,
+      firstLookReviewModelDecision: true,
+      ...(args.include || {}),
+    },
   });
+  return items.filter(isDiagnosticItemStudentReady);
 }
 
 export async function countStudentReadyDiagnosticItems() {
-  return db.diagnosticItem.count({ where: STUDENT_READY_DIAGNOSTIC_ITEM_WHERE });
+  const items = await db.diagnosticItem.findMany({
+    where: STUDENT_READY_DIAGNOSTIC_ITEM_WHERE,
+    include: {
+      dailyTarget: true,
+      firstLookReviewModelDecision: true,
+    },
+  });
+  return items.filter(isDiagnosticItemStudentReady).length;
 }
 
 export type DiagnosticItemQueueFilter =
@@ -111,6 +126,7 @@ export type DiagnosticItemReviewInput = {
   expectedResponseJson?: Prisma.InputJsonValue;
   scoringRubricJson?: Prisma.InputJsonValue;
   adminReviewJson?: Prisma.InputJsonValue | null;
+  metadata?: Record<string, unknown>;
 };
 
 export async function reviewDiagnosticItem(id: string, input: DiagnosticItemReviewInput) {
@@ -118,7 +134,33 @@ export async function reviewDiagnosticItem(id: string, input: DiagnosticItemRevi
     where: { id, retiredAt: null },
     select: {
       id: true,
+      strand: true,
+      itemType: true,
+      phaseBand: true,
+      phasePositionId: true,
+      dailyTargetId: true,
+      dailyTarget: { select: { code: true } },
       reviewStatus: true,
+      itemStatus: true,
+      skill: true,
+      displayMode: true,
+      responseMode: true,
+      targetPattern: true,
+      wordType: true,
+      displayText: true,
+      canonicalAnswer: true,
+      targetWord: true,
+      vocabularyBand: true,
+      morphologyWave: true,
+      targetMorpheme: true,
+      audioAssetRequired: true,
+      audioValidatedByHuman: true,
+      expectedPronunciation: true,
+      comprehensionMode: true,
+      stimulusMode: true,
+      calibratedProbeLevel: true,
+      placementEvidenceJson: true,
+      fluencyEvidenceJson: true,
       studentPromptJson: true,
       stimulusJson: true,
       expectedResponseJson: true,
@@ -151,13 +193,46 @@ export async function reviewDiagnosticItem(id: string, input: DiagnosticItemRevi
     return { ok: false as const, status: 409, error: "This AI first-look decision already has a human review outcome." };
   }
 
+  const nextStudentPromptJson = input.studentPromptJson !== undefined ? input.studentPromptJson : item.studentPromptJson;
+  const nextStimulusJson = input.stimulusJson !== undefined ? input.stimulusJson : item.stimulusJson;
+  const nextExpectedResponseJson = input.expectedResponseJson !== undefined ? input.expectedResponseJson : item.expectedResponseJson;
+  const nextScoringRubricJson = input.scoringRubricJson !== undefined ? input.scoringRubricJson : item.scoringRubricJson;
+  const nextAdminReviewJson = input.adminReviewJson !== undefined ? input.adminReviewJson : item.adminReviewJson;
+  const derived = deriveDiagnosticItemMetadata({
+    ...item,
+    ...(input.metadata || {}),
+    dailyTargetCode: item.dailyTarget?.code,
+    studentPromptJson: nextStudentPromptJson,
+    stimulusJson: nextStimulusJson,
+    expectedResponseJson: nextExpectedResponseJson,
+    scoringRubricJson: nextScoringRubricJson,
+    adminReviewJson: nextAdminReviewJson,
+  });
+  const relationUpdate = await diagnosticRelationUpdate({
+    phasePositionId: item.phasePositionId,
+    dailyTargetId: item.dailyTargetId,
+    targetPattern: derived.metadata.targetPattern,
+  });
+
+  const failedBlockers = firstLookFailedBlockers(item.firstLookReviewModelDecision.decisionJson);
+  const reviewNotes = input.reviewNotes?.trim() || null;
+  if (input.action === "APPROVE" && derived.approvalBlockers.length > 0) {
+    return { ok: false as const, status: 400, error: `Cannot approve until metadata is complete: ${derived.approvalBlockers.join(" ")}` };
+  }
+  if (input.action === "APPROVE" && failedBlockers.length > 0) {
+    return { ok: false as const, status: 400, error: `Cannot approve while AI first-look has blocker failures: ${failedBlockers.map((blocker) => blocker.requirementId).join(", ")}` };
+  }
+
   const reviewStatus = input.action === "APPROVE" ? "APPROVED" : input.action === "REJECT" ? "REJECTED" : "EDITED";
   const now = new Date();
   const updateData: Prisma.DiagnosticItemUpdateInput = {
     reviewStatus,
+    itemStatus: input.action === "APPROVE" ? "pilot_ready" : "candidate",
     reviewedAt: now,
     reviewedByUserId: input.reviewerUserId,
-    reviewNotes: input.reviewNotes?.trim() || null,
+    reviewNotes,
+    ...diagnosticMetadataToUpdateInput(derived.metadata),
+    ...relationUpdate,
   };
 
   if (input.action === "EDIT") {
@@ -187,8 +262,11 @@ export async function reviewDiagnosticItem(id: string, input: DiagnosticItemRevi
           reviewerUserId: input.reviewerUserId,
           action: input.action,
           finalReviewStatus: reviewStatus,
-          reviewNotes: input.reviewNotes?.trim() || null,
+          reviewNotes,
           aiFirstLookRecommendation: firstLookRecommendation(item.firstLookReviewModelDecision?.decisionJson),
+          aiFlaggedBlockers: failedBlockers,
+          overrideApplied: false,
+          overrideReasoning: null,
           editedFields:
             input.action === "EDIT"
               ? {
@@ -221,6 +299,54 @@ export function firstLookConfidence(decisionJson: unknown) {
   return confidence == null ? 0 : Math.max(0, Math.min(1, confidence));
 }
 
+export function isDiagnosticItemStudentReady(item: {
+  strand: string;
+  itemType: string;
+  phaseBand?: number | null;
+  phasePositionId?: string | null;
+  dailyTargetId?: string | null;
+  dailyTarget?: { code?: string | null } | null;
+  reviewStatus?: string | null;
+  itemStatus?: string | null;
+  retiredAt?: Date | null;
+  skill?: string | null;
+  displayMode?: string | null;
+  responseMode?: string | null;
+  targetPattern?: string | null;
+  wordType?: string | null;
+  displayText?: string | null;
+  canonicalAnswer?: string | null;
+  targetWord?: string | null;
+  vocabularyBand?: string | null;
+  morphologyWave?: string | null;
+  targetMorpheme?: string | null;
+  audioAssetRequired?: boolean | null;
+  audioValidatedByHuman?: boolean | null;
+  expectedPronunciation?: string | null;
+  comprehensionMode?: string | null;
+  stimulusMode?: string | null;
+  calibratedProbeLevel?: string | null;
+  placementEvidenceJson?: unknown;
+  fluencyEvidenceJson?: unknown;
+  studentPromptJson?: unknown;
+  stimulusJson?: unknown;
+  expectedResponseJson?: unknown;
+  scoringRubricJson?: unknown;
+  adminReviewJson?: unknown;
+  firstLookReviewModelDecision?: { decisionJson?: unknown } | null;
+}) {
+  if (item.reviewStatus !== "APPROVED" || item.itemStatus !== "pilot_ready" || item.retiredAt) return false;
+  const derived = deriveDiagnosticItemMetadata({
+    ...item,
+    dailyTargetCode: item.dailyTarget?.code,
+  });
+  if (derived.approvalBlockers.length > 0) return false;
+  const firstLook = item.firstLookReviewModelDecision?.decisionJson;
+  if (firstLookFailedBlockers(firstLook).length > 0) return false;
+  if (!firstLook && !jsonRecord(item.adminReviewJson).fastTrackEligible) return false;
+  return true;
+}
+
 function readDecisionString(decisionJson: unknown, key: string) {
   if (!decisionJson || typeof decisionJson !== "object") return null;
   const value = (decisionJson as Record<string, unknown>)[key];
@@ -231,4 +357,37 @@ function readDecisionNumber(decisionJson: unknown, key: string) {
   if (!decisionJson || typeof decisionJson !== "object") return null;
   const value = (decisionJson as Record<string, unknown>)[key];
   return typeof value === "number" ? value : Number.isFinite(Number(value)) ? Number(value) : null;
+}
+
+function jsonRecord(value: unknown): Record<string, unknown> {
+  if (!value || typeof value !== "object" || Array.isArray(value)) return {};
+  return value as Record<string, unknown>;
+}
+
+function firstLookFailedBlockers(decisionJson: unknown) {
+  if (!decisionJson || typeof decisionJson !== "object" || Array.isArray(decisionJson)) return [];
+  const checks = (decisionJson as Record<string, unknown>).checks;
+  if (!Array.isArray(checks)) return [];
+  return checks
+    .filter((check): check is Record<string, unknown> => Boolean(check) && typeof check === "object" && !Array.isArray(check))
+    .filter((check) => check.result === "FAIL" && check.severity === "BLOCKER")
+    .map((check) => ({
+      requirementId: typeof check.requirementId === "string" ? check.requirementId : "UNKNOWN_REQUIREMENT",
+      severity: "BLOCKER",
+      evidence: typeof check.evidence === "string" ? check.evidence : "",
+    }));
+}
+
+async function diagnosticRelationUpdate(input: { phasePositionId?: string | null; dailyTargetId?: string | null; targetPattern?: string | null }): Promise<Prisma.DiagnosticItemUpdateInput> {
+  if (input.phasePositionId && input.dailyTargetId) return {};
+  if (!input.targetPattern) return {};
+  const target = await db.dailyTarget.findUnique({
+    where: { code: input.targetPattern },
+    select: { id: true, phasePositionId: true },
+  });
+  if (!target) return {};
+  return {
+    ...(input.dailyTargetId ? {} : { dailyTarget: { connect: { id: target.id } } }),
+    ...(input.phasePositionId ? {} : { phasePosition: { connect: { id: target.phasePositionId } } }),
+  };
 }

@@ -816,6 +816,23 @@ model DiagnosticItem {
   morphologyWave                 String?
   targetMorpheme                 String?
   skill                          String?
+  displayMode                    String?
+  responseMode                   String?
+  itemStatus                     String   @default("candidate")
+  vocabularyBand                 String?
+  targetWord                     String?
+  comprehensionMode              String?
+  stimulusMode                   String?
+  calibratedProbeLevel           String?
+  audioAssetRequired             Boolean  @default(false)
+  audioValidatedByHuman          Boolean  @default(false)
+  expectedPronunciation          String?
+  targetPattern                  String?
+  wordType                       String?
+  displayText                    String?
+  canonicalAnswer                String?
+  placementEvidenceJson          Json?
+  fluencyEvidenceJson            Json?
   difficultyBand                 Int
   isPracticeItem                 Boolean  @default(false)
   reviewStatus                   String   @default("PENDING")
@@ -837,6 +854,9 @@ model DiagnosticItem {
   @@index([reviewStatus])
   @@index([firstLookReviewModelDecisionId])
   @@index([phasePositionId, dailyTargetId])
+  @@index([itemStatus])
+  @@index([vocabularyBand, targetWord])
+  @@index([targetPattern, wordType])
   @@index([strand, phaseBand, morphologyWave, skill])
 }
 
@@ -881,10 +901,20 @@ model Lesson {
   phasePositionId  String
   dailyTargetId    String
   passageId        String?
+  phaseBand        Int?
+  dailyTargetCode  String?
+  targetPattern    String?
+  targetLabel      String?
+  lessonStatus     String   @default("candidate")
+  lessonType       String?
+  generatedBy      String?
+  sourceModelDecisionId String?
+  contentAuditStatus String?
   reviewStatus     String   @default("PENDING")
   reviewedAt       DateTime?
   reviewedByUserId String?
   reviewNotes      String?  @db.Text
+  approvedAt       DateTime?
   version          Int      @default(1)
   effectiveFrom    DateTime @default(now())
   retiredAt        DateTime?
@@ -897,6 +927,8 @@ model Lesson {
   sessions      LessonSession[]
 
   @@index([phasePositionId, dailyTargetId])
+  @@index([dailyTargetCode, targetPattern])
+  @@index([lessonStatus])
   @@index([reviewStatus])
 }
 
@@ -908,6 +940,18 @@ model LessonPart {
   kidVisibleCopy                 Json
   tutorVisibleCopy               Json?
   contentJson                    Json
+  partType                       String?
+  dailyTargetCode                String?
+  targetPattern                  String?
+  skillFocus                     String?
+  strandFocus                    String?
+  contentAuditJson               Json?
+  wordTagsJson                   Json?
+  scoringRubricJson              Json?
+  studentDisplayMode             String?
+  responseMode                   String?
+  assistedModeAllowed            Boolean?
+  independentScoreEligible       Boolean?
   designNotes                    String?  @db.Text
   reviewStatus                   String   @default("PENDING")
   reviewedAt                     DateTime?
@@ -922,6 +966,8 @@ model LessonPart {
   firstLookReviewModelDecision ModelDecision? @relation("LessonPartFirstLookReview", fields: [firstLookReviewModelDecisionId], references: [id], onDelete: SetNull)
 
   @@unique([lessonId, partNumber])
+  @@index([lessonId, partType])
+  @@index([dailyTargetCode, targetPattern])
   @@index([reviewStatus])
   @@index([firstLookReviewModelDecisionId])
 }

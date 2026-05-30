@@ -280,6 +280,7 @@ function enforceDiagnosticCheckBoundaries(checks: CheckResult[], artifact: First
   const stimulus = asRecord(content.stimulusJson);
   const expected = asRecord(content.expectedResponseJson);
   const scoring = asRecord(content.scoringRubricJson);
+  const adminReview = asRecord(content.adminReviewJson);
   const kidViewText = `${visibleTextFromKidJson(studentPrompt)} ${visibleTextFromKidJson(stimulus)}`;
 
   return checks.map((check) => {
@@ -293,6 +294,12 @@ function enforceDiagnosticCheckBoundaries(checks: CheckResult[], artifact: First
         result: hasAudio ? "PASS" as const : "FAIL" as const,
         evidence: hasAudio ? "PASS: PA item has an oral/audio stimulus for delivery." : "FAIL: PA item is missing an oral/audio stimulus.",
       };
+    }
+    if (check.requirementId === "PA_AUDIO_ASSET_REQUIRED_FOR_PHONEMES") {
+      return evaluatePaAudioAssetCheck(check, content, stimulus);
+    }
+    if (check.requirementId === "PA_NO_PRINTED_STIMULUS") {
+      return evaluatePaNoPrintedStimulusCheck(check, studentPrompt, stimulus);
     }
     if (check.requirementId === "PA_SCORING_SPEECH_RESPONSE") {
       const scoringMode = typeof scoring.scoring === "string" ? scoring.scoring : "";
@@ -322,14 +329,78 @@ function enforceDiagnosticCheckBoundaries(checks: CheckResult[], artifact: First
     if (check.requirementId === "DECODING_TARGET_PATTERN_ONLY") {
       return evaluateDecodingTargetPatternCheck(check, studentPrompt, artifact.metadata);
     }
-    if (check.requirementId === "DECODING_PSEUDOWORD_NOT_MISSPELLING") {
+    if (
+      check.requirementId === "DECODING_PSEUDOWORD_NOT_MISSPELLING" ||
+      check.requirementId === "PSEUDOWORD_NO_REALWORD_HOMOPHONE" ||
+      check.requirementId === "PSEUDOWORD_NO_NEAR_MISSPELLING"
+    ) {
       return evaluateDecodingPseudowordCheck(check, studentPrompt, content);
+    }
+    if (check.requirementId === "DECODE_LATENCY_NOT_PLACEMENT") {
+      return evaluateDecodeLatencyPlacementCheck(check, content, scoring);
+    }
+    if (check.requirementId === "ITEM_POOL_STATUS_NOT_CALIBRATED_BY_DEFAULT") {
+      return evaluateItemPoolStatusCheck(check, content);
+    }
+    if (check.requirementId === "VOCAB_TIER2_NO_PICTURE_CHOICE") {
+      return evaluateVocabularyPictureChoiceCheck(check, content, studentPrompt);
+    }
+    if (check.requirementId === "VOCAB_DISTRACTORS_SAME_ATTRIBUTE") {
+      return evaluateVocabularyDistractorsCheck(check, content, studentPrompt, expected, adminReview);
     }
     if (check.evidence.toLowerCase().includes("other stated blockers") || check.evidence.toLowerCase().includes("compliance issues with other")) {
       return { ...check, evidence: "Evidence reset: each check must evaluate only its own requirement." };
     }
     return check;
   });
+}
+
+function evaluatePaAudioAssetCheck(check: CheckResult, content: Record<string, unknown>, stimulus: Record<string, unknown>): CheckResult {
+  const audioScript = stringFrom(stimulus.audioScript);
+  const skill = stringFrom(content.skill) || stringFrom(asRecord(content.adminReviewJson).skill);
+  const requiresValidatedAudio =
+    Boolean(content.audioAssetRequired) ||
+    /phoneme_blending|onset_rime_blending/i.test(skill) ||
+    /\/[a-z]+\/|[āēīōūăĕĭŏŭ]|\.{2,}|\b[a-z]\s*\.\.\.\s*[a-z]/i.test(audioScript);
+  const validated = content.audioValidatedByHuman === true || asRecord(content.adminReviewJson).audioValidatedByHuman === true;
+  if (!requiresValidatedAudio) {
+    return {
+      ...check,
+      result: "NA",
+      evidence: "NA: PA item uses whole-word audio and does not depend on isolated phoneme or segmented-sound production.",
+    };
+  }
+  return {
+    ...check,
+    result: validated ? "PASS" : "FAIL",
+    evidence: validated
+      ? "PASS: segmented/phoneme PA stimulus has human-validated audio."
+      : "FAIL: segmented/phoneme PA stimulus requires human-validated audio before approval; raw TTS strings are not production-safe.",
+  };
+}
+
+function evaluatePaNoPrintedStimulusCheck(check: CheckResult, studentPrompt: Record<string, unknown>, stimulus: Record<string, unknown>): CheckResult {
+  const printedStimulus = [
+    studentPrompt.displayText,
+    studentPrompt.printedStimulus,
+    stimulus.displayText,
+    stimulus.printedStimulus,
+    stimulus.phonemeText,
+    stimulus.letterChunks,
+  ].filter(Boolean);
+  const hasPrintedChoices = Array.isArray(studentPrompt.choices) && studentPrompt.choices.length > 0;
+  const visiblePrintedStimulus = printedStimulus.map(String).join(" ");
+  const hasPrintedStimulus =
+    hasPrintedChoices ||
+    visiblePrintedStimulus.trim().length > 0 ||
+    /\/[a-z]+\/|[āēīōūăĕĭŏŭ]|\b[a-z]\s+\.\.\.\s+[a-z]/i.test(visiblePrintedStimulus);
+  return {
+    ...check,
+    result: hasPrintedStimulus ? "FAIL" : "PASS",
+    evidence: hasPrintedStimulus
+      ? "FAIL: PA student-facing JSON exposes printed stimulus, choices, phoneme notation, or letter chunks."
+      : "PASS: PA student-facing JSON does not expose printed stimulus, choices, phoneme notation, or letter chunks.",
+  };
 }
 
 function evaluateKidViewCheck(check: CheckResult, studentPrompt: Record<string, unknown>, stimulus: Record<string, unknown>, kidViewText: string, strand: string): CheckResult {
@@ -440,7 +511,7 @@ function evaluateDecodingOneCardCheck(check: CheckResult, studentPrompt: Record<
 
 function evaluateDecodingTargetPatternCheck(check: CheckResult, studentPrompt: Record<string, unknown>, metadata: Record<string, unknown>): CheckResult {
   const displayText = typeof studentPrompt.displayText === "string" ? studentPrompt.displayText.toLowerCase() : "";
-  const dailyTargetCode = typeof metadata.dailyTargetCode === "string" ? metadata.dailyTargetCode : "";
+  const dailyTargetCode = typeof metadata.dailyTargetCode === "string" ? metadata.dailyTargetCode : typeof metadata.targetPattern === "string" ? metadata.targetPattern : "";
   if (!displayText || !dailyTargetCode) return check;
   const targetRegex = patternRegex(dailyTargetCode);
   return {
@@ -463,12 +534,111 @@ function evaluateDecodingPseudowordCheck(check: CheckResult, studentPrompt: Reco
     };
   }
   const obviousRealWordMisspellings = new Set(["maik", "mayk", "caik", "cayk", "bote", "boet", "lite", "lyt", "cute", "kyute"]);
+  const commonRealWordHomophones = new Set(["mayk", "maik", "boet", "bote", "noe", "knew", "nite"]);
+  const hasExpectedPronunciation = Boolean(stringFrom(content.expectedPronunciation) || stringFrom(asRecord(content.adminReviewJson).expectedPronunciation));
+  if (check.requirementId === "PSEUDOWORD_NO_REALWORD_HOMOPHONE") {
+    return {
+      ...check,
+      result: commonRealWordHomophones.has(displayText) ? "FAIL" : "PASS",
+      evidence: commonRealWordHomophones.has(displayText)
+        ? "FAIL: pseudoword is a real-word homophone or near-homophone."
+        : "PASS: pseudoword does not match the explicit common homophone blocklist.",
+    };
+  }
+  if (check.requirementId === "PSEUDOWORD_NO_NEAR_MISSPELLING") {
+    return {
+      ...check,
+      result: obviousRealWordMisspellings.has(displayText) || !hasExpectedPronunciation ? "FAIL" : "PASS",
+      evidence: obviousRealWordMisspellings.has(displayText)
+        ? "FAIL: pseudoword resembles a common target-pattern word misspelling."
+        : hasExpectedPronunciation
+          ? "PASS: pseudoword has expectedPronunciation metadata and does not match the explicit near-misspelling blocklist."
+          : "FAIL: pseudoword is missing backend expectedPronunciation metadata.",
+    };
+  }
   return {
     ...check,
     result: obviousRealWordMisspellings.has(displayText) ? "FAIL" : "PASS",
     evidence: obviousRealWordMisspellings.has(displayText)
       ? "FAIL: pseudoword resembles a common real-word misspelling."
       : "PASS: pseudoword does not match the explicit real-word-misspelling blocklist.",
+  };
+}
+
+function evaluateDecodeLatencyPlacementCheck(check: CheckResult, content: Record<string, unknown>, scoring: Record<string, unknown>): CheckResult {
+  const placementEvidence = asRecord(content.placementEvidenceJson);
+  const fluencyEvidence = asRecord(content.fluencyEvidenceJson);
+  const placementUses = stringFrom(scoring.placementUses) || stringFrom(placementEvidence.source);
+  const latencyFeeds = stringFrom(scoring.latencyFeeds) || stringFrom(fluencyEvidence.source);
+  const placementUsesLatency = placementEvidence.usesLatency === true || /latency|time/i.test(placementUses);
+  const separated = Object.keys(placementEvidence).length > 0 && Object.keys(fluencyEvidence).length > 0;
+  const passes = separated && !placementUsesLatency && Boolean(latencyFeeds);
+  return {
+    ...check,
+    result: passes ? "PASS" : "FAIL",
+    evidence: passes
+      ? "PASS: placementEvidenceJson and fluencyEvidenceJson are separated; latency feeds fluency, not decoding placement."
+      : "FAIL: decoding evidence must separate accuracy-based placement from latency-based fluency/automaticity.",
+  };
+}
+
+function evaluateItemPoolStatusCheck(check: CheckResult, content: Record<string, unknown>): CheckResult {
+  const itemStatus = stringFrom(content.itemStatus) || "candidate";
+  const reviewStatus = stringFrom(content.reviewStatus);
+  const invalidCalibrated = itemStatus === "calibrated" && reviewStatus !== "APPROVED";
+  return {
+    ...check,
+    result: invalidCalibrated ? "FAIL" : "PASS",
+    evidence: invalidCalibrated
+      ? "FAIL: generated content cannot be labeled calibrated before review and response-data calibration."
+      : `PASS: itemStatus is ${itemStatus}; generated banks are candidate pools until human review and calibration data support promotion.`,
+  };
+}
+
+function evaluateVocabularyPictureChoiceCheck(check: CheckResult, content: Record<string, unknown>, studentPrompt: Record<string, unknown>): CheckResult {
+  const itemType = stringFrom(content.itemType).toUpperCase();
+  const vocabularyBand = stringFrom(content.vocabularyBand).toLowerCase();
+  const targetWord = stringFrom(content.targetWord).toLowerCase();
+  const concretePictureChoice = itemType === "CONCRETE_WORD_PICTURE_CHOICE";
+  const tier2OrAbstract = vocabularyBand === "tier 2" || ["enormous", "brave", "fair", "similar", "different"].includes(targetWord);
+  const hasPictureChoices = Array.isArray(studentPrompt.pictureChoices) || Array.isArray(studentPrompt.images);
+  const violates = tier2OrAbstract && (concretePictureChoice || hasPictureChoices);
+  return {
+    ...check,
+    result: violates ? "FAIL" : "PASS",
+    evidence: violates
+      ? "FAIL: Tier 2 or abstract/relational vocabulary must use context/scenario meaning tasks, not picture-choice tasks."
+      : "PASS: vocabulary item type matches target-word concreteness and vocabulary band.",
+  };
+}
+
+function evaluateVocabularyDistractorsCheck(
+  check: CheckResult,
+  content: Record<string, unknown>,
+  studentPrompt: Record<string, unknown>,
+  expected: Record<string, unknown>,
+  adminReview: Record<string, unknown>,
+): CheckResult {
+  const targetWord = stringFrom(content.targetWord).toLowerCase();
+  const canonical = stringFrom(expected.canonical).toLowerCase();
+  const choices = Array.isArray(studentPrompt.choices) ? studentPrompt.choices.map(String).map((choice) => choice.toLowerCase()) : [];
+  const semanticAttribute = stringFrom(adminReview.semanticAttribute) || (targetWord === "enormous" ? "size" : "");
+  if (targetWord === "enormous") {
+    const sizeDistractors = choices.includes("very tiny");
+    return {
+      ...check,
+      result: canonical === "very large" && sizeDistractors ? "PASS" : "FAIL",
+      evidence: canonical === "very large" && sizeDistractors
+        ? "PASS: enormous tests size and includes a direct size-contrast distractor."
+        : "FAIL: enormous distractors must contrast size, not condition or unrelated attributes.",
+    };
+  }
+  return {
+    ...check,
+    result: semanticAttribute ? "PASS" : "NA",
+    evidence: semanticAttribute
+      ? `PASS: reviewer metadata declares distractors test the same attribute (${semanticAttribute}).`
+      : "NA: semantic-attribute match is not machine-assessable without target metadata.",
   };
 }
 
