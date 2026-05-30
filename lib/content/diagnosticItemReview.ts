@@ -4,7 +4,7 @@ import { deriveDiagnosticItemMetadata, diagnosticMetadataToUpdateInput } from ".
 
 export const STUDENT_READY_DIAGNOSTIC_ITEM_WHERE = {
   reviewStatus: "APPROVED",
-  itemStatus: "pilot_ready",
+  itemStatus: { in: ["pilot_ready", "active"] },
   retiredAt: null,
 } satisfies Prisma.DiagnosticItemWhereInput;
 
@@ -335,7 +335,7 @@ export function isDiagnosticItemStudentReady(item: {
   adminReviewJson?: unknown;
   firstLookReviewModelDecision?: { decisionJson?: unknown } | null;
 }) {
-  if (item.reviewStatus !== "APPROVED" || item.itemStatus !== "pilot_ready" || item.retiredAt) return false;
+  if (item.reviewStatus !== "APPROVED" || !["pilot_ready", "active"].includes(item.itemStatus || "") || item.retiredAt) return false;
   const derived = deriveDiagnosticItemMetadata({
     ...item,
     dailyTargetCode: item.dailyTarget?.code,

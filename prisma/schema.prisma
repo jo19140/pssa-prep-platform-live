@@ -869,8 +869,12 @@ model DiagnosticItemAttempt {
   scored              Boolean
   correct             Boolean?
   responseTimeMs      Int?
+  delayed             Boolean  @default(false)
   audioConfidence     Float?
+  scoreConfidence     Float?
   scoreContext        String?
+  scorerReasoningJson Json?
+  isPracticeAttempt   Boolean  @default(false)
   attemptedAt         DateTime @default(now())
 
   diagnosticItem    DiagnosticItem    @relation(fields: [diagnosticItemId], references: [id])
