@@ -659,6 +659,20 @@ Once enough outcome data exists (~500-1000 reviewed artifacts with logged human 
 
 **Where this feeds the flywheel.**
 
+### 6.10 Passage Word Count Bands by Phase
+
+Connected-text passage generation uses phase-specific word-count bands. The generator targets the midpoint of the band in its prompt parameters; the mechanical audit accepts any passage whose final tokenized word count falls inside the min/max band.
+
+| Phase | Word count band |
+| --- | --- |
+| Phase 0 | N/A |
+| Phase 1 | 15-25 |
+| Phase 2 | 25-45 |
+| Phase 3 | 45-80 |
+| Phase 4 | 80-120 |
+| Phase 5 | 120-180 |
+| Phase 6 | 180-280 |
+
 Every `AIFirstLookReview` row pairs with a `ModelDecisionOutcome` row reflecting the human's final decision (approve / reject / edit). This gives a labeled corpus of "AI thought X, human decided Y" — exactly the training data needed to fine-tune a downstream first-look reviewer model. The same way the passage generator becomes a candidate for Llama fine-tuning after ~2,000 approved passages (see `specs/data-flywheel-foundation-codex-spec.md` §16), the AI reviewer becomes a fine-tuning candidate after ~500 human override pairs.
 
 ---
