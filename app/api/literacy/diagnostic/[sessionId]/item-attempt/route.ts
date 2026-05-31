@@ -10,7 +10,12 @@ const schema = z.object({
   itemId: z.string(),
   responseJson: z.unknown().optional(),
   responseTimeMs: z.number().int().nonnegative().optional(),
+  latency_ms: z.number().int().nonnegative().optional(),
   audioConfidence: z.number().min(0).max(1).optional(),
+  attemptType: z.enum(["response", "no_attempt", "audio_problem"]).optional(),
+  reason: z.enum(["frontend_silence_timeout"]).optional(),
+  silenceDurationMs: z.number().int().nonnegative().optional(),
+  clientIssue: z.enum(["could_not_hear", "mic_problem", "tts_failed"]).optional(),
 });
 
 export async function POST(req: Request, { params }: { params: Promise<{ sessionId: string }> }) {
@@ -30,11 +35,23 @@ export async function POST(req: Request, { params }: { params: Promise<{ session
   const item = await db.diagnosticItem.findUnique({ where: { id: parsed.data.itemId } });
   if (!item) return NextResponse.json({ error: "diagnostic_item_not_found" }, { status: 404 });
 
+  const responseTimeMs = parsed.data.responseTimeMs ?? parsed.data.latency_ms ?? (parsed.data.attemptType === "no_attempt" ? parsed.data.silenceDurationMs : undefined);
+  const responseJson =
+    parsed.data.responseJson === undefined
+      ? ({
+          attemptType: parsed.data.attemptType || "response",
+          reason: parsed.data.reason,
+          silenceDurationMs: parsed.data.silenceDurationMs,
+          clientIssue: parsed.data.clientIssue,
+        } satisfies Record<string, unknown>)
+      : parsed.data.responseJson;
+  const audioConfidence = parsed.data.audioConfidence ?? (parsed.data.attemptType === "audio_problem" ? 0 : undefined);
+
   const score = await scoreDiagnosticAttempt({
     item,
-    responseJson: parsed.data.responseJson,
-    responseTimeMs: parsed.data.responseTimeMs,
-    audioConfidence: parsed.data.audioConfidence,
+    responseJson,
+    responseTimeMs,
+    audioConfidence,
     studentUserId: session.studentUserId,
   });
 
@@ -43,12 +60,12 @@ export async function POST(req: Request, { params }: { params: Promise<{ session
       studentUserId: session.studentUserId,
       diagnosticItemId: item.id,
       diagnosticSessionId: session.id,
-      responseJson: parsed.data.responseJson === undefined ? Prisma.JsonNull : (parsed.data.responseJson as Prisma.InputJsonValue),
+      responseJson: responseJson === undefined ? Prisma.JsonNull : (responseJson as Prisma.InputJsonValue),
       scored: score.scored,
       correct: score.correct,
-      responseTimeMs: parsed.data.responseTimeMs,
+      responseTimeMs,
       delayed: score.delayed,
-      audioConfidence: parsed.data.audioConfidence,
+      audioConfidence,
       scoreConfidence: score.scoreConfidence,
       scoreContext: typeof score.scorerReasoningJson.reasonCode === "string" ? score.scorerReasoningJson.reasonCode : null,
       scorerReasoningJson: score.scorerReasoningJson as Prisma.InputJsonValue,

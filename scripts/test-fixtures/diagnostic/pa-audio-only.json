@@ -1,0 +1,15 @@
+{
+  "id": "fixture-pa",
+  "strand": "PA",
+  "itemType": "ORAL_SOUND_MATCH",
+  "studentPromptJson": {
+    "kidPrompt": "Listen carefully. Harper will say three words. Which two start the same way?",
+    "readyPrompt": "When you’re ready, say your answer."
+  },
+  "stimulusJson": {
+    "audioScript": "sun, seal, map"
+  },
+  "displayMode": "AUDIO_ONLY",
+  "responseMode": "speech_response",
+  "isPracticeItem": false
+}

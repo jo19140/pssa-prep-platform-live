@@ -1,0 +1,29 @@
+itemId,passageId,passageTitle,eligibleContent,questionType,answerPosition,correctAnswerLength,correctIsLongest,evidenceSpanFound,distractorRoles,copiedChoiceCheck,genericLanguageCheck,duplicateStemCheck,sameSpanShortcutCheck,absoluteLanguageCheck,finalResult
+pssa_item_g3_reading_1,pssa_psg_g3_creek_watchers,The Night the Creek Glowed,E03.A-K.1.1.1,MCQ,A,68,false,true,correct|unsupported_inference|wrong_section|opposite_claim,PASS,PASS,PASS,PASS,PASS,PASS
+pssa_item_g3_reading_2,pssa_psg_g3_the_map_in_the_station,A Map Under the Bench,E03.A-K.1.1.2,MCQ,A,64,false,true,correct|wrong_emphasis|opposite_claim|too_narrow,PASS,PASS,PASS,PASS,PASS,PASS
+pssa_item_g3_reading_3,pssa_psg_g3_a_cooler_lunch_line,The Bell That Saved Lunch,E03.A-K.1.1.3,MCQ,B,49,false,true,too_narrow|correct|wrong_section|wrong_section,PASS,PASS,PASS,PASS,PASS,PASS
+pssa_item_g3_reading_4,pssa_psg_g3_the_mural_plan,Blue Paint for Saturday,E03.A-C.2.1.1,MCQ,D,59,true,true,wrong_section|unsupported_inference|opposite_claim|correct,PASS,PASS,PASS,PASS,PASS,PASS
+pssa_item_g3_reading_5,pssa_psg_g3_the_cart_that_would_not_turn,The Cart That Would Not Turn,E03.A-C.3.1.1,MCQ,A,54,true,true,correct|opposite_claim|unsupported_inference|opposite_claim,PASS,PASS,PASS,PASS,PASS,PASS
+pssa_item_g3_reading_6,pssa_psg_g3_creek_watchers,The Night the Creek Glowed,E03.A-V.4.1.1,MCQ,D,44,false,true,plausible_misreading|opposite_claim|unsupported_inference|correct,PASS,PASS,PASS,PASS,PASS,PASS
+pssa_item_g3_reading_7,pssa_psg_g3_the_map_in_the_station,A Map Under the Bench,E03.A-V.4.1.2,MCQ,D,37,false,true,wrong_section|plausible_misreading|wrong_section|correct,PASS,PASS,PASS,PASS,PASS,PASS
+pssa_item_g3_reading_8,pssa_psg_g3_a_cooler_lunch_line,The Bell That Saved Lunch,E03.B-K.1.1.1,MCQ,C,54,false,true,wrong_section|unsupported_inference|correct|opposite_claim,PASS,PASS,PASS,PASS,PASS,PASS
+pssa_item_g3_reading_9,pssa_psg_g3_the_mural_plan,Blue Paint for Saturday,E03.B-K.1.1.2,MCQ,A,48,false,true,correct|opposite_claim|wrong_emphasis|opposite_claim,PASS,PASS,PASS,PASS,PASS,PASS
+pssa_item_g3_reading_10,pssa_psg_g3_the_cart_that_would_not_turn,The Cart That Would Not Turn,E03.B-K.1.1.3,MCQ,B,58,true,true,wrong_section|correct|wrong_section|opposite_claim,PASS,PASS,PASS,PASS,PASS,PASS
+pssa_item_g3_reading_11,pssa_psg_g3_creek_watchers,The Night the Creek Glowed,E03.B-C.2.1.1,MCQ,A,60,true,true,correct|unsupported_inference|opposite_claim|plausible_misreading,PASS,PASS,PASS,PASS,PASS,PASS
+pssa_item_g3_reading_12,pssa_psg_g3_the_map_in_the_station,A Map Under the Bench,E03.B-C.2.1.2,MCQ,A,60,false,true,correct|opposite_claim|wrong_section|plausible_misreading,PASS,PASS,PASS,PASS,PASS,PASS
+pssa_item_g3_reading_13,pssa_psg_g3_a_cooler_lunch_line,The Bell That Saved Lunch,E03.B-C.3.1.1,MCQ,D,42,false,true,opposite_claim|unsupported_inference|opposite_claim|correct,PASS,PASS,PASS,PASS,PASS,PASS
+pssa_item_g3_reading_14,pssa_psg_g3_the_mural_plan,Blue Paint for Saturday,E03.B-C.3.1.2,MCQ,B,58,false,true,unsupported_inference|correct|wrong_section|opposite_claim,PASS,PASS,PASS,PASS,PASS,PASS
+pssa_item_g3_reading_15,pssa_psg_g3_the_cart_that_would_not_turn,The Cart That Would Not Turn,E03.B-C.3.1.3,MCQ,C,62,false,true,unsupported_inference|plausible_misreading|correct|opposite_claim,PASS,PASS,PASS,PASS,PASS,PASS
+pssa_item_g3_reading_16,pssa_psg_g3_creek_watchers,The Night the Creek Glowed,E03.B-V.4.1.1,MCQ,B,46,true,true,opposite_claim|correct|plausible_misreading|unsupported_inference,PASS,PASS,PASS,PASS,PASS,PASS
+pssa_item_g3_reading_17,pssa_psg_g3_the_map_in_the_station,A Map Under the Bench,E03.B-V.4.1.2,MCQ,B,46,true,true,opposite_claim|correct|wrong_section|unsupported_inference,PASS,PASS,PASS,PASS,PASS,PASS
+pssa_item_g3_reading_18,pssa_psg_g3_a_cooler_lunch_line,The Bell That Saved Lunch,E03.A-K.1.1.1,MCQ,A,58,false,true,correct|opposite_claim|opposite_claim|wrong_section,PASS,PASS,PASS,PASS,PASS,PASS
+pssa_item_g3_reading_19,pssa_psg_g3_the_mural_plan,Blue Paint for Saturday,E03.A-K.1.1.2,MCQ,C,59,false,true,too_narrow|wrong_emphasis|correct|wrong_section,PASS,PASS,PASS,PASS,PASS,PASS
+pssa_item_g3_reading_20,pssa_psg_g3_the_cart_that_would_not_turn,The Cart That Would Not Turn,E03.A-K.1.1.3,MCQ,D,46,false,true,wrong_section|too_narrow|wrong_emphasis|correct,PASS,PASS,PASS,PASS,PASS,PASS
+pssa_item_g3_reading_21,pssa_psg_g3_creek_watchers,The Night the Creek Glowed,E03.A-C.2.1.1,MCQ,C,58,false,true,too_narrow|wrong_section|correct|wrong_section,PASS,PASS,PASS,PASS,PASS,PASS
+pssa_item_g3_reading_22,pssa_psg_g3_the_map_in_the_station,A Map Under the Bench,E03.A-C.3.1.1,MCQ,C,59,false,true,plausible_misreading|unsupported_inference|correct|wrong_emphasis,PASS,PASS,PASS,PASS,PASS,PASS
+pssa_item_g3_reading_23,pssa_psg_g3_a_cooler_lunch_line,The Bell That Saved Lunch,E03.A-V.4.1.1,MCQ,B,43,false,true,wrong_section|correct|plausible_misreading|wrong_section,PASS,PASS,PASS,PASS,PASS,PASS
+pssa_item_g3_reading_24,pssa_psg_g3_the_mural_plan,Blue Paint for Saturday,E03.A-V.4.1.2,MCQ,D,38,false,true,wrong_section|plausible_misreading|wrong_section|correct,PASS,PASS,PASS,PASS,PASS,PASS
+pssa_item_g3_reading_25,pssa_psg_g3_the_cart_that_would_not_turn,The Cart That Would Not Turn,E03.B-K.1.1.1,MCQ,A,63,true,true,correct|wrong_emphasis|unsupported_inference|opposite_claim,PASS,PASS,PASS,PASS,PASS,PASS
+pssa_item_g3_reading_26,pssa_psg_g3_creek_watchers,The Night the Creek Glowed,E03.B-K.1.1.2,MCQ,B,57,false,true,opposite_claim|correct|unsupported_inference|plausible_misreading,PASS,PASS,PASS,PASS,PASS,PASS
+pssa_item_g3_reading_27,pssa_psg_g3_the_map_in_the_station,A Map Under the Bench,E03.B-K.1.1.3,MCQ,D,47,false,true,wrong_section|wrong_section|plausible_misreading|correct,PASS,PASS,PASS,PASS,PASS,PASS
+pssa_item_g3_reading_28,pssa_psg_g3_a_cooler_lunch_line,The Bell That Saved Lunch,E03.B-C.2.1.1,MCQ,C,60,true,true,opposite_claim|unsupported_inference|correct|wrong_emphasis,PASS,PASS,PASS,PASS,PASS,PASS

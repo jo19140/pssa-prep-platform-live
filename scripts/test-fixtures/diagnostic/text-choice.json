@@ -1,0 +1,12 @@
+{
+  "id": "fixture-choice",
+  "strand": "VOCABULARY",
+  "itemType": "WORD_MEANING_CONTEXT",
+  "studentPromptJson": {
+    "kidPrompt": "In this sentence, what does enormous mean? The enormous pumpkin was so big that two people had to carry it.",
+    "choices": ["very large", "very tiny", "broken"]
+  },
+  "displayMode": "TEXT_CHOICE",
+  "responseMode": "selected_choice",
+  "isPracticeItem": false
+}

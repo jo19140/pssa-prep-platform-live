@@ -1,0 +1,12 @@
+{
+  "id": "fixture-fluency",
+  "strand": "FLUENCY",
+  "itemType": "ORAL_READING_PASSAGE",
+  "studentPromptJson": {
+    "kidPrompt": "Read this out loud.",
+    "passageText": "Jade packed a snack and sat by the lake. She watched a kite glide over the trees."
+  },
+  "displayMode": "ORAL_READING_PASSAGE",
+  "responseMode": "speech_response",
+  "isPracticeItem": false
+}

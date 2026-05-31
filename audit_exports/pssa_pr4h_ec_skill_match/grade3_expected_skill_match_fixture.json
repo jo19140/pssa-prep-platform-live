@@ -1,0 +1,82 @@
+{
+  "createdBeforeDetectorImplementation": true,
+  "scope": "PSSA PR #4h fixed expected-outcome fixture for the current Grade 3 vertical slice",
+  "notes": [
+    "This fixture is hand-authored from manual review and is intentionally not generated from detector output.",
+    "The five expected FAIL rows are the proof target for PR #4h and must not be suppressed, downgraded, retagged, waived to PASS, or rewritten in this PR."
+  ],
+  "expectedOutcomes": [
+    {
+      "itemId": "pssa_item_g3_reading_6",
+      "passageId": "pssa_psg_g3_creek_watchers",
+      "eligibleContent": "E03.A-V.4.1.1",
+      "expectedSkillFamily": "vocabulary",
+      "expectedResult": "PASS",
+      "rationale": "Genuine vocabulary-in-context item: asks what 'faint' means, target appears in the stem, passage, evidence span, and correct answer is a contextual meaning."
+    },
+    {
+      "itemId": "pssa_item_g3_reading_7",
+      "passageId": "pssa_psg_g3_the_map_in_the_station",
+      "eligibleContent": "E03.A-V.4.1.2",
+      "expectedSkillFamily": "vocabulary",
+      "expectedResult": "FAIL",
+      "rationale": "Vocabulary-tagged item asks for the main reason people spent longer near the bench, not a word or phrase meaning."
+    },
+    {
+      "itemId": "pssa_item_g3_reading_16",
+      "passageId": "pssa_psg_g3_creek_watchers",
+      "eligibleContent": "E03.B-V.4.1.1",
+      "expectedSkillFamily": "vocabulary",
+      "expectedResult": "FAIL",
+      "rationale": "Vocabulary-tagged item asks what Maya's visit shows about what she learned, an inference/comprehension task."
+    },
+    {
+      "itemId": "pssa_item_g3_reading_17",
+      "passageId": "pssa_psg_g3_the_map_in_the_station",
+      "eligibleContent": "E03.B-V.4.1.2",
+      "expectedSkillFamily": "vocabulary",
+      "expectedResult": "FAIL",
+      "rationale": "Vocabulary-tagged item asks which evidence supports comparing past and present, an evidence/comprehension task."
+    },
+    {
+      "itemId": "pssa_item_g3_reading_23",
+      "passageId": "pssa_psg_g3_a_cooler_lunch_line",
+      "eligibleContent": "E03.A-V.4.1.1",
+      "expectedSkillFamily": "vocabulary",
+      "expectedResult": "FAIL",
+      "rationale": "Vocabulary-tagged item asks what the class noticed after watching the counter, a detail/sequence task."
+    },
+    {
+      "itemId": "pssa_item_g3_reading_24",
+      "passageId": "pssa_psg_g3_the_mural_plan",
+      "eligibleContent": "E03.A-V.4.1.2",
+      "expectedSkillFamily": "vocabulary",
+      "expectedResult": "FAIL",
+      "rationale": "Vocabulary-tagged item asks which event shows the narrator felt proud but quiet, a character inference task."
+    },
+    {
+      "itemId": "pssa_item_g3_reading_1",
+      "passageId": "pssa_psg_g3_creek_watchers",
+      "eligibleContent": "E03.A-K.1.1.1",
+      "expectedSkillFamily": "literature_elements",
+      "expectedResult": "PASS",
+      "rationale": "Representative correctly tagged non-vocabulary item asking why the class compared creek details."
+    },
+    {
+      "itemId": "pssa_item_g3_reading_14",
+      "passageId": "pssa_psg_g3_the_mural_plan",
+      "eligibleContent": "E03.B-C.3.1.2",
+      "expectedSkillFamily": "informational_elements",
+      "expectedResult": "PASS",
+      "rationale": "Representative non-vocabulary item requiring evidence about how mural details connect to neighborhood memories."
+    },
+    {
+      "itemId": "pssa_item_g3_reading_25",
+      "passageId": "pssa_psg_g3_the_cart_that_would_not_turn",
+      "eligibleContent": "E03.B-K.1.1.1",
+      "expectedSkillFamily": "informational_elements",
+      "expectedResult": "PASS",
+      "rationale": "Representative non-vocabulary informational item asking how the reminder card helps prevent another problem."
+    }
+  ]
+}

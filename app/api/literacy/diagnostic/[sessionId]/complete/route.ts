@@ -12,6 +12,9 @@ export async function POST(_req: Request, { params }: { params: Promise<{ sessio
   if (auth.user!.role !== "ADMIN" && session.studentUserId !== auth.user!.id) {
     return NextResponse.json({ error: "Forbidden" }, { status: 403 });
   }
+  if (session.completedAt) {
+    return NextResponse.json({ sessionComplete: true, sessionId: session.id, resultJson: session.resultJson, reasonCode: "SESSION_ALREADY_COMPLETE" });
+  }
 
   const attempts = session.attempts.map((attempt) => ({
     diagnosticItemId: attempt.diagnosticItemId,
