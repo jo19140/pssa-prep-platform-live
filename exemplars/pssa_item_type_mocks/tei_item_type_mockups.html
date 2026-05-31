@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PSSA ELA — Item-Type Mockups</title>
+<style>
+  :root{
+    --drc-navy:#1c3a6e; --drc-bar:#23477f; --drc-blue:#1f5fbf; --drc-line:#9fb4d6;
+    --ink:#14233b; --muted:#5c6b82; --bg:#eef1f5; --card:#ffffff;
+    --good:#137a3f; --good-bg:#e7f5ec; --warn:#8a5a00;
+    --hl:#fff27a; --chip:#eaf1fb; --chip-br:#bcd2f0;
+    --radius:8px; font-synthesis:none;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.5;padding:24px 16px 64px}
+  .wrap{max-width:1000px;margin:0 auto}
+  header.intro{background:var(--card);border:1px solid #d8dee8;border-radius:var(--radius);
+    padding:20px 22px;margin-bottom:22px}
+  header.intro h1{margin:0 0 6px;font-size:21px;color:var(--drc-navy)}
+  header.intro p{margin:6px 0;font-size:14px;color:var(--muted)}
+  .legend{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .pill{font-size:12px;font-weight:600;background:var(--chip);border:1px solid var(--chip-br);
+    color:var(--drc-navy);border-radius:999px;padding:3px 10px}
+  .note{background:#fff8e6;border:1px solid #f0dca0;border-radius:6px;padding:10px 12px;
+    font-size:13px;color:#6b5418;margin-top:12px}
+
+  /* DRC-styled item shell */
+  .item{background:var(--card);border:1px solid #cdd6e4;border-radius:var(--radius);
+    overflow:hidden;margin-bottom:26px;box-shadow:0 1px 2px rgba(20,35,59,.06)}
+  .item .titlebar{background:#fff;border-bottom:1px solid #e2e7ef;padding:10px 16px;
+    display:flex;align-items:center;justify-content:space-between}
+  .item .titlebar .t{font-weight:700;color:var(--drc-navy);font-size:15px}
+  .item .titlebar .sub{font-size:12px;color:var(--muted)}
+  .qbar{background:var(--drc-bar);color:#fff;font-weight:600;font-size:13px;padding:7px 16px;
+    display:flex;justify-content:space-between;align-items:center}
+  .qbar .typetag{background:rgba(255,255,255,.16);border-radius:4px;padding:2px 8px;font-size:11px;
+    text-transform:uppercase;letter-spacing:.04em}
+  .toolbar{display:flex;gap:6px;padding:8px 16px;border-bottom:1px solid #e6eaf1;background:#f7f9fc}
+  .toolbar i{width:26px;height:22px;border:1px solid #c7d2e3;border-radius:4px;display:inline-block;
+    background:#fff;position:relative}
+  .toolbar i::after{content:"";position:absolute;inset:5px;border-radius:2px;background:#b9c6dc}
+  .body{display:grid;grid-template-columns:1fr 1fr;gap:0}
+  .body.single{grid-template-columns:1fr}
+  .pane{padding:16px 18px}
+  .pane.passage{border-right:1px solid #e6eaf1;background:#fcfdff}
+  .pane.passage h3{margin:0 0 8px;text-align:center;font-size:16px;color:var(--ink)}
+  .pane.passage p{margin:0 0 10px;font-size:14px}
+  .hint{font-style:italic;color:#445;font-size:12.5px;background:#f1f5fb;border-left:3px solid var(--drc-line);
+    padding:7px 10px;margin:0 0 14px;border-radius:0 4px 4px 0}
+  .stem{font-size:14.5px;font-weight:600;margin:0 0 14px}
+  .stem .light{font-weight:400}
+
+  /* options */
+  .opts{display:flex;flex-direction:column;gap:9px}
+  .opt{display:flex;gap:10px;align-items:flex-start;border:1px solid #d4ddea;border-radius:6px;
+    padding:9px 11px;cursor:pointer;font-size:14px;background:#fff;transition:.12s}
+  .opt:hover{border-color:#9db8df;background:#f6faff}
+  .opt .box{flex:0 0 auto;width:20px;height:20px;border:2px solid #9aa9c2;border-radius:4px;
+    display:flex;align-items:center;justify-content:center;font-size:13px;color:#fff;background:#fff}
+  .opt.radio .box{border-radius:50%}
+  .opt.sel .box{background:var(--drc-blue);border-color:var(--drc-blue)}
+  .opt.sel{border-color:var(--drc-blue);background:#eef5ff}
+  .opt .lbl{flex:0 0 auto;font-weight:700;color:var(--muted)}
+
+  /* inline dropdown */
+  .clozewrap{font-size:15px;line-height:2.2}
+  .clozewrap select{font-size:14px;padding:4px 6px;border:1px solid #6f86ad;border-radius:4px;
+    background:#fff;color:var(--ink);margin:0 2px}
+
+  /* matching grid */
+  table.grid{border-collapse:collapse;width:100%;font-size:13.5px}
+  table.grid th,table.grid td{border:1px solid #c4cfe0;padding:8px 10px;text-align:center}
+  table.grid th{background:#eef3fb;color:var(--drc-navy);font-size:12.5px}
+  table.grid td.stmt{text-align:left;font-weight:500}
+  table.grid .cell{width:20px;height:20px;border:2px solid #9aa9c2;border-radius:4px;margin:0 auto;
+    cursor:pointer;display:flex;align-items:center;justify-content:center;color:#fff}
+  table.grid .cell.sel{background:var(--drc-blue);border-color:var(--drc-blue)}
+
+  /* hot-text */
+  .hotpassage p{margin:0 0 10px;font-size:14px}
+  .hotpassage .s{cursor:pointer;border-radius:3px;padding:0 1px}
+  .hotpassage .s:hover{background:#eef3fb}
+  .hotpassage .s.hl{background:var(--hl);box-shadow:0 0 0 1px #d9c200 inset}
+
+  /* drag drop */
+  .dndsource{display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
+  .chip{border:1px solid var(--chip-br);background:var(--chip);border-radius:6px;padding:9px 11px;
+    font-size:13.5px;cursor:grab;color:var(--drc-navy);font-weight:600}
+  .chip.dragging{opacity:.4}
+  .bucket{border:2px dashed #9db8df;border-radius:8px;min-height:84px;padding:10px;background:#fafcff}
+  .bucket .bt{font-size:12px;font-weight:700;color:var(--muted);text-align:center;margin-bottom:6px;
+    text-transform:uppercase;letter-spacing:.03em}
+  .bucket.over{border-color:var(--drc-blue);background:#eef5ff}
+  .bucket .chip{cursor:default;background:#e7f5ec;border-color:#aedcc0;color:#0f5c30}
+
+  /* reviewer key */
+  .key{border-top:1px dashed #cfd8e6;background:#f9fbfe}
+  .key .keytoggle{width:100%;text-align:left;border:0;background:none;padding:11px 16px;cursor:pointer;
+    font-size:13px;font-weight:700;color:var(--drc-blue)}
+  .key .keybody{display:none;padding:0 16px 16px;font-size:13px}
+  .key.open .keybody{display:block}
+  .key.open .keytoggle{color:var(--good)}
+  .key .row{display:flex;gap:8px;margin:5px 0}
+  .key .k{flex:0 0 130px;color:var(--muted);font-weight:600}
+  .key .ans{background:var(--good-bg);border:1px solid #b9e2c8;color:var(--good);border-radius:4px;
+    padding:1px 7px;font-weight:600}
+  .checkbtn{margin:14px 0 2px;background:var(--drc-blue);color:#fff;border:0;border-radius:6px;
+    padding:9px 16px;font-size:13px;font-weight:600;cursor:pointer}
+  .checkbtn:hover{background:#1a52a6}
+  .result{margin-top:10px;font-size:13.5px;font-weight:600}
+  .result.ok{color:var(--good)}.result.no{color:#a32a2a}
+  @media(max-width:760px){.body{grid-template-columns:1fr}.pane.passage{border-right:0;border-bottom:1px solid #e6eaf1}}
+
+  /* word hot-text */
+  .wordhot{font-size:15px;line-height:2.1}
+  .wordhot .w{cursor:pointer;border-radius:3px;padding:0 2px}
+  .wordhot .w:hover{background:#eef3fb}
+  .wordhot .w.hl{background:var(--hl);box-shadow:0 0 0 1px #d9c200 inset}
+  /* token slots (punctuation drag / order) */
+  .slotline{font-size:15px;line-height:2.4}
+  .slot{display:inline-flex;align-items:center;justify-content:center;min-width:42px;height:28px;
+    border:2px dashed #9db8df;border-radius:5px;background:#fafcff;margin:0 3px;vertical-align:middle}
+  .slot.over{border-color:var(--drc-blue);background:#eef5ff}
+  .slot .tok{margin:0}
+  .toksource{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}
+  .tok{border:1px solid var(--chip-br);background:var(--chip);border-radius:6px;padding:6px 12px;
+    font-size:14px;font-weight:700;color:var(--drc-navy);cursor:grab}
+  .tok.dragging{opacity:.4}
+  .orderrow{display:flex;align-items:center;gap:10px;margin:8px 0}
+  .orderrow .num{flex:0 0 26px;height:26px;border-radius:50%;background:var(--drc-bar);color:#fff;
+    display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700}
+  .orderrow .slot{flex:1;justify-content:flex-start;min-height:34px;height:auto;padding:4px 8px;text-align:left}
+  .orderrow .slot .tok{cursor:default;white-space:normal}
+  /* constructed response */
+  .craft{width:100%;min-height:120px;border:1px solid #b9c6dc;border-radius:6px;padding:10px;
+    font-size:14px;font-family:inherit;resize:vertical;background:#fff}
+  .checklist{font-size:13px;background:#f1f5fb;border:1px solid #d6e0ef;border-radius:6px;padding:10px 12px;margin:12px 0}
+  .checklist b{color:var(--drc-navy)}
+  table.rubric{border-collapse:collapse;width:100%;font-size:12.5px;margin-top:6px}
+  table.rubric th,table.rubric td{border:1px solid #c4cfe0;padding:6px 8px;text-align:left;vertical-align:top}
+  table.rubric th{background:#eef3fb;color:var(--drc-navy)}
+  table.rubric td.score{text-align:center;font-weight:700;color:var(--drc-navy);width:42px}
+  .band{margin:6px 0;padding:7px 10px;border-radius:5px;background:#f7faff;border:1px solid #dfe8f4;font-size:12.5px}
+  .band .bscore{font-weight:700;color:var(--drc-navy)}
+  /* appendix */
+  .appendix{background:var(--card);border:1px solid #cdd6e4;border-radius:var(--radius);padding:20px 22px;margin-bottom:26px}
+  .appendix h2{margin:0 0 10px;font-size:18px;color:var(--drc-navy)}
+  .appendix h3{margin:18px 0 6px;font-size:15px;color:var(--ink)}
+  .appendix table{border-collapse:collapse;width:100%;font-size:12.5px;margin:8px 0}
+  .appendix th,.appendix td{border:1px solid #c4cfe0;padding:6px 9px;text-align:left;vertical-align:top}
+  .appendix th{background:#eef3fb;color:var(--drc-navy)}
+  .appendix .src{font-size:12px;color:var(--muted);font-style:italic;margin-top:6px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="intro">
+  <h1>PSSA ELA — Item-Type Mockups</h1>
+  <p><strong>Purpose:</strong> design sign-off on every item type beyond standard multiple-choice, before any Codex build. Visual layout matches the DRC INSIGHT student testing interface. <strong>All passages and items below are original toy content written for this mock</strong> — no approved production passage and no released-sampler text is reproduced. Grade labels are illustrative (Short Answer shown at Grade 3; TDA shown at Grade 5, since TDA is Grades 4–8).</p>
+  <div class="legend">
+    <span class="pill">1 · MCQ</span>
+    <span class="pill">2 · EBSR</span>
+    <span class="pill">3 · Multiple-select</span>
+    <span class="pill">4 · Inline drop-down</span>
+    <span class="pill">5 · Matching grid</span>
+    <span class="pill">6 · Hot-text (sentence)</span>
+    <span class="pill">7 · Drag-and-drop</span>
+    <span class="pill">8 · Hot-text (word)</span>
+    <span class="pill">9 · Punctuation-token drag</span>
+    <span class="pill">10 · Drag-to-order</span>
+    <span class="pill">11 · Short Answer</span>
+    <span class="pill">12 · TDA</span>
+  </div>
+  <div class="note">Each item is interactive — click options, open menus, highlight sentences/words, drag chips. Use <strong>Reviewer key</strong> at the bottom of each item to see the correct answer, the Eligible Content code, scoring, and the gate it must pass. Students never see the key panel. Items 1–6 are the core palette; 7–9 are sub-variants the live DRC surface uses; 10–11 are the constructed-response types. A <strong>subtype inventory</strong> and a <strong>TDA/Short-Answer calibration appendix</strong> follow at the bottom.</div>
+</header>
+
+<!-- ============ 1. MULTIPLE CHOICE ============ -->
+<section class="item" id="mcq">
+  <div class="titlebar"><span class="t">English Language Arts — Grade 3</span><span class="sub">Test Coach mock · toy content</span></div>
+  <div class="qbar"><span>Question 1</span><span class="typetag">Multiple choice</span></div>
+  <div class="toolbar"><i></i><i></i><i></i><i></i><i></i></div>
+  <div class="body">
+    <div class="pane passage">
+      <h3>The Class Garden</h3>
+      <p>Room 4 planted bean seeds in two trays. They put one tray on the sunny windowsill and one tray in the dark closet.</p>
+      <p>After a week, the sunny tray had tall green sprouts. The closet tray had only pale, thin stems. The class decided the plants needed light to grow strong.</p>
+    </div>
+    <div class="pane">
+      <p class="hint">Use the Pointer tool to choose the best answer. Use the Cross-Off tool to mark out answers that are not correct.</p>
+      <p class="stem">What did Room 4 learn from their two trays of beans?</p>
+      <div class="opts" data-single="1" data-correct="2">
+        <label class="opt radio"><span class="box"></span><span class="lbl">A</span><span>Bean seeds grow faster in a dark closet.</span></label>
+        <label class="opt radio"><span class="box"></span><span class="lbl">B</span><span>Using two trays is better than using one tray.</span></label>
+        <label class="opt radio"><span class="box"></span><span class="lbl">C</span><span>Plants need light to grow strong.</span></label>
+        <label class="opt radio"><span class="box"></span><span class="lbl">D</span><span>Beans must be watered every single day.</span></label>
+      </div>
+      <button class="checkbtn">Check my answer</button>
+      <div class="result"></div>
+    </div>
+  </div>
+  <div class="key">
+    <button class="keytoggle">▸ Reviewer key</button>
+    <div class="keybody">
+      <div class="row"><span class="k">Key</span><span class="ans">C</span></div>
+      <div class="row"><span class="k">Eligible Content</span><span>E03.B-K.1.1.2 (main idea / key details, informational)</span></div>
+      <div class="row"><span class="k">Scoring</span><span>1 point — single defensible answer</span></div>
+      <div class="row"><span class="k">Distractor roles</span><span>A = opposite of the text (closet stems were pale/thin) · B = irrelevant (number of trays isn't the lesson) · D = plausible real-world fact but not stated in the passage</span></div>
+      <div class="row"><span class="k">Gates</span><span>exactly one defensible answer · passage-grounded · no generic distractors · no copied-choice shortcut · key not longest / not position A · EC skill-match (tests main idea)</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 2. EBSR ============ -->
+<section class="item" id="ebsr">
+  <div class="titlebar"><span class="t">English Language Arts — Grade 3</span><span class="sub">Test Coach mock · toy content</span></div>
+  <div class="qbar"><span>Question 2 — Page 1 of 2</span><span class="typetag">EBSR · two-part</span></div>
+  <div class="toolbar"><i></i><i></i><i></i><i></i><i></i></div>
+  <div class="body">
+    <div class="pane passage">
+      <h3>The Puddle Map</h3>
+      <p>After the rain, Room 5 went outside to study the puddles on the blacktop. The class measured each puddle with a paper ruler and marked it on a map.</p>
+      <p>By noon, most puddles had dried, but the one near the north wall was still there. The students noticed the north wall blocked the afternoon sun. They decided the shade kept that puddle cool and wet.</p>
+    </div>
+    <div class="pane">
+      <p class="hint">This question has two parts. Answer Part One, then answer Part Two.</p>
+      <p class="stem"><strong>Part One.</strong> What is the central idea of the passage?</p>
+      <div class="opts" data-single="1" data-correct="2">
+        <label class="opt radio"><span class="box"></span><span class="lbl">A</span><span>Room 5 measured the puddles with a paper ruler.</span></label>
+        <label class="opt radio"><span class="box"></span><span class="lbl">B</span><span>Most of the puddles on the blacktop dried by noon.</span></label>
+        <label class="opt radio"><span class="box"></span><span class="lbl">C</span><span>Room 5 used careful observation to explain why one puddle lasted the longest.</span></label>
+        <label class="opt radio"><span class="box"></span><span class="lbl">D</span><span>The north wall of the school is very tall.</span></label>
+      </div>
+      <p class="stem" style="margin-top:18px"><strong>Part Two.</strong> <span class="light">Which <strong>two</strong> details from the passage best support the answer to Part One? Choose two.</span></p>
+      <div class="opts" data-correct="0,1">
+        <label class="opt"><span class="box"></span><span class="lbl">A</span><span>"The class measured each puddle with a paper ruler and marked it on a map."</span></label>
+        <label class="opt"><span class="box"></span><span class="lbl">B</span><span>"The students noticed the north wall blocked the afternoon sun."</span></label>
+        <label class="opt"><span class="box"></span><span class="lbl">C</span><span>"After the rain, Room 5 went outside to study the puddles on the blacktop."</span></label>
+        <label class="opt"><span class="box"></span><span class="lbl">D</span><span>"By noon, most puddles had dried, but the one near the north wall was still there."</span></label>
+      </div>
+      <button class="checkbtn">Check my answer</button>
+      <div class="result"></div>
+    </div>
+  </div>
+  <div class="key">
+    <button class="keytoggle">▸ Reviewer key</button>
+    <div class="keybody">
+      <div class="row"><span class="k">Part One key</span><span class="ans">C</span></div>
+      <div class="row"><span class="k">Part Two key</span><span class="ans">A + B</span></div>
+      <div class="row"><span class="k">Eligible Content</span><span>E03.B-K.1.1.2 (main idea / key details, informational)</span></div>
+      <div class="row"><span class="k">Scoring</span><span>2 points — 1 (Part One) + 1 (both Part Two correct; partial credit per rule)</span></div>
+      <div class="row"><span class="k">Gates</span><span>Part-A single-defensible · Part-B verbatim-evidence (both spans appear verbatim) · Part-B-supports-Part-A · correct-count = "two" · EC skill-match</span></div>
+      <div class="row"><span class="k">Why distractors fail</span><span>C = setup/context, not method evidence; D = a true detail but states the puzzle, not the careful method.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 2. MULTIPLE-SELECT ============ -->
+<section class="item" id="mselect">
+  <div class="titlebar"><span class="t">English Language Arts — Grade 3</span><span class="sub">Test Coach mock · toy content</span></div>
+  <div class="qbar"><span>Question 3</span><span class="typetag">Multiple-select</span></div>
+  <div class="toolbar"><i></i><i></i><i></i><i></i><i></i></div>
+  <div class="body">
+    <div class="pane passage">
+      <h3>The Sticky Door</h3>
+      <p>The door to Room 2 stuck every morning. The class watched the door instead of pushing harder. They saw the bottom corner rubbed the floor.</p>
+      <p>First, they cleared the rug bunched under the door. Next, they tightened the loose screw on the hinge. Then they rubbed a little soap on the edge. The door swung easily after that.</p>
+    </div>
+    <div class="pane">
+      <p class="hint">Use the Pointer tool to make a check mark next to each answer you want to select.</p>
+      <p class="stem">Select the <strong>three</strong> changes the class made to fix the sticky door.</p>
+      <div class="opts" data-correct="0,1,2">
+        <label class="opt"><span class="box"></span><span>Cleared the rug bunched under the door.</span></label>
+        <label class="opt"><span class="box"></span><span>Tightened the loose screw on the hinge.</span></label>
+        <label class="opt"><span class="box"></span><span>Rubbed a little soap on the edge.</span></label>
+        <label class="opt"><span class="box"></span><span>Bought a brand-new door.</span></label>
+        <label class="opt"><span class="box"></span><span>Took the door off its frame.</span></label>
+        <label class="opt"><span class="box"></span><span>Painted the door a new color.</span></label>
+      </div>
+      <button class="checkbtn">Check my answer</button>
+      <div class="result"></div>
+    </div>
+  </div>
+  <div class="key">
+    <button class="keytoggle">▸ Reviewer key</button>
+    <div class="keybody">
+      <div class="row"><span class="k">Key</span><span class="ans">Options 1, 2, 3</span></div>
+      <div class="row"><span class="k">Eligible Content</span><span>E03.B-K.1.1.1 (refer to text explicitly, informational)</span></div>
+      <div class="row"><span class="k">Scoring</span><span>2 points — all three correct & none extra; 1 point partial per rule</span></div>
+      <div class="row"><span class="k">Gates</span><span>correct-count = "three" · each option passage-specific · distractors (4–6) are plausible fixes but not in the text</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 3. INLINE DROP-DOWN ============ -->
+<section class="item" id="dropdown">
+  <div class="titlebar"><span class="t">English Language Arts — Grade 3</span><span class="sub">Test Coach mock · toy content</span></div>
+  <div class="qbar"><span>Question 4</span><span class="typetag">Inline drop-down</span></div>
+  <div class="toolbar"><i></i><i></i><i></i><i></i><i></i></div>
+  <div class="body single">
+    <div class="pane">
+      <p class="hint">Use the Pointer tool to open each drop-down menu and choose the correct spelling.</p>
+      <p class="stem light">Use the drop-down menus to choose the correct spelling of the words needed to complete the sentence.</p>
+      <p class="clozewrap">When we
+        <select data-correct="arrived">
+          <option value="" selected>— choose —</option>
+          <option value="arived">arived</option>
+          <option value="arrived">arrived</option>
+          <option value="arrivd">arrivd</option>
+        </select>
+        at the park, we
+        <select data-correct="hurried">
+          <option value="" selected>— choose —</option>
+          <option value="huryed">huryed</option>
+          <option value="hurryd">hurryd</option>
+          <option value="hurried">hurried</option>
+        </select>
+        to the swings.
+      </p>
+      <button class="checkbtn">Check my answer</button>
+      <div class="result"></div>
+    </div>
+  </div>
+  <div class="key">
+    <button class="keytoggle">▸ Reviewer key</button>
+    <div class="keybody">
+      <div class="row"><span class="k">Key</span><span class="ans">arrived</span> &nbsp; <span class="ans">hurried</span></div>
+      <div class="row"><span class="k">Eligible Content</span><span>E03.D.1.2.x conventions — spelling / encoding in context</span></div>
+      <div class="row"><span class="k">Scoring</span><span>1 point — both menus correct</span></div>
+      <div class="row"><span class="k">Gates</span><span>exactly one correct spelling per menu · misspellings are plausible (doubled-letter / dropped-vowel error patterns) · original toy sentence, passage-free conventions item</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 4. MATCHING GRID ============ -->
+<section class="item" id="grid">
+  <div class="titlebar"><span class="t">English Language Arts — Grade 3</span><span class="sub">Test Coach mock · toy content</span></div>
+  <div class="qbar"><span>Question 5</span><span class="typetag">Matching grid</span></div>
+  <div class="toolbar"><i></i><i></i><i></i><i></i><i></i></div>
+  <div class="body single">
+    <div class="pane">
+      <p class="hint">Use the Pointer tool to select the boxes you want to check. To erase a check mark, click it again.</p>
+      <p class="stem light">Complete the table by putting a check mark in the correct box to show whether each event happens in <strong>"The Sticky Door,"</strong> <strong>"The Wobbly Cart,"</strong> or <strong>both</strong> passages.</p>
+      <table class="grid">
+        <thead><tr><th></th><th>Sticky Door</th><th>Wobbly Cart</th><th>Both</th></tr></thead>
+        <tbody>
+          <tr data-correct="2"><td class="stmt">The class studies the problem before changing anything.</td><td><span class="cell"></span></td><td><span class="cell"></span></td><td><span class="cell"></span></td></tr>
+          <tr data-correct="0"><td class="stmt">A rug was bunched under the door.</td><td><span class="cell"></span></td><td><span class="cell"></span></td><td><span class="cell"></span></td></tr>
+          <tr data-correct="1"><td class="stmt">A rubber band was twisted around a wheel.</td><td><span class="cell"></span></td><td><span class="cell"></span></td><td><span class="cell"></span></td></tr>
+          <tr data-correct="2"><td class="stmt">The same careful plan later fixes another object.</td><td><span class="cell"></span></td><td><span class="cell"></span></td><td><span class="cell"></span></td></tr>
+        </tbody>
+      </table>
+      <button class="checkbtn">Check my answer</button>
+      <div class="result"></div>
+    </div>
+  </div>
+  <div class="key">
+    <button class="keytoggle">▸ Reviewer key</button>
+    <div class="keybody">
+      <div class="row"><span class="k">Key</span><span>Row 1 → <span class="ans">Both</span> · Row 2 → <span class="ans">Sticky Door</span> · Row 3 → <span class="ans">Wobbly Cart</span> · Row 4 → <span class="ans">Both</span></span></div>
+      <div class="row"><span class="k">Eligible Content</span><span>E03.B-C.3.1.2 (compare two texts on the same topic)</span></div>
+      <div class="row"><span class="k">Scoring</span><span>2 points — 4/4 rows; 1 point for 3/4</span></div>
+      <div class="row"><span class="k">Gates</span><span>each row has exactly one correct column · "Both" rows verified true in <em>each</em> passage · single-passage rows verified absent from the other</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 5. HOT-TEXT (SENTENCE) ============ -->
+<section class="item" id="hottext">
+  <div class="titlebar"><span class="t">English Language Arts — Grade 3</span><span class="sub">Test Coach mock · toy content</span></div>
+  <div class="qbar"><span>Question 6</span><span class="typetag">Hot-text · sentence</span></div>
+  <div class="toolbar"><i></i><i></i><i></i><i></i><i></i></div>
+  <div class="body">
+    <div class="pane passage hotpassage" id="hotpsg">
+      <h3>The Blue Bird Mural</h3>
+      <p><span class="s">On Saturday, I helped paint a mural on the fence.</span> <span class="s">My first brushstroke smeared outside the lines.</span> <span class="s">I almost wiped it away.</span></p>
+      <p><span class="s" data-c="1">"Make it part of the sky," said Mr. Ruiz.</span> <span class="s">So I turned the smear into a soft cloud.</span></p>
+      <p><span class="s">When we finished, the fence did not look perfect, but the birds seemed to fly.</span> <span class="s" data-c="1">I smiled at the cloud that used to be a mistake.</span></p>
+    </div>
+    <div class="pane">
+      <p class="hint">Use the Pointer tool to choose two sentences from the passage. When you choose a sentence, it will become highlighted. Choose it again to remove the highlight.</p>
+      <p class="stem">Choose the <strong>two</strong> sentences that best show the central message of the passage.</p>
+      <button class="checkbtn">Check my answer</button>
+      <div class="result"></div>
+    </div>
+  </div>
+  <div class="key">
+    <button class="keytoggle">▸ Reviewer key</button>
+    <div class="keybody">
+      <div class="row"><span class="k">Key</span><span class="ans">"Make it part of the sky," said Mr. Ruiz.</span></div>
+      <div class="row"><span class="k"></span><span class="ans">I smiled at the cloud that used to be a mistake.</span></div>
+      <div class="row"><span class="k">Eligible Content</span><span>E03.A-K.1.1.2 (central message / lesson, literature)</span></div>
+      <div class="row"><span class="k">Scoring</span><span>2 points — both sentences; 1 point for one</span></div>
+      <div class="row"><span class="k">Gates</span><span>selectable sentences are verbatim passage text · exactly two convey the message (a mistake reworked into something good) · distractor sentences are real but off-theme</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 6. DRAG-AND-DROP ============ -->
+<section class="item" id="dnd">
+  <div class="titlebar"><span class="t">English Language Arts — Grade 3</span><span class="sub">Test Coach mock · toy content</span></div>
+  <div class="qbar"><span>Question 7</span><span class="typetag">Drag-and-drop</span></div>
+  <div class="toolbar"><i></i><i></i><i></i><i></i><i></i></div>
+  <div class="body single">
+    <div class="pane">
+      <p class="hint">Move your answers into the chart by selecting and dragging them. To start again, drag a chip back out.</p>
+      <p class="stem light">Drag the <strong>two</strong> statements that describe what happens in <strong>both</strong> "The Sticky Door" and "The Wobbly Cart" into the chart.</p>
+      <div class="dndsource" id="dndsource">
+        <div class="chip" draggable="true" data-c="1">People look closely before trying a fix.</div>
+        <div class="chip" draggable="true" data-c="1">One careful plan solves a second problem later.</div>
+        <div class="chip" draggable="true" data-c="0">A rug is bunched under a door.</div>
+        <div class="chip" draggable="true" data-c="0">A rubber band is twisted around a wheel.</div>
+      </div>
+      <div class="bucket" id="dndbucket"><div class="bt">Happens in Both Passages</div></div>
+      <button class="checkbtn">Check my answer</button>
+      <div class="result"></div>
+    </div>
+  </div>
+  <div class="key">
+    <button class="keytoggle">▸ Reviewer key</button>
+    <div class="keybody">
+      <div class="row"><span class="k">Key</span><span class="ans">"People look closely…" + "One careful plan solves a second problem later."</span></div>
+      <div class="row"><span class="k">Eligible Content</span><span>E03.B-C.3.1.2 (compare two texts on the same topic)</span></div>
+      <div class="row"><span class="k">Scoring</span><span>2 points — both correct chips in the bucket, no extras</span></div>
+      <div class="row"><span class="k">Gates</span><span>"Both" chips verified true in each passage · single-passage chips verified specific to one text · exactly two correct droppable targets</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 7. HOT-TEXT (WORD-LEVEL, CONVENTIONS) ============ -->
+<section class="item" id="hottext_word">
+  <div class="titlebar"><span class="t">English Language Arts — Grade 3</span><span class="sub">Test Coach mock · toy content</span></div>
+  <div class="qbar"><span>Question 8</span><span class="typetag">Hot-text · word</span></div>
+  <div class="toolbar"><i></i><i></i><i></i><i></i><i></i></div>
+  <div class="body single">
+    <div class="pane">
+      <p class="hint">Use the Pointer tool to click the words you want to select. Click a word again to remove the selection.</p>
+      <p class="stem">Click the <strong>two</strong> words that are spelled incorrectly.</p>
+      <p class="wordhot" id="wordhotline">
+        <span class="w">When</span> <span class="w">the</span> <span class="w">class</span> <span class="w">reached</span> <span class="w">the</span> <span class="w" data-c="1">libary</span> <span class="w">,</span> <span class="w">they</span> <span class="w" data-c="1">returnd</span> <span class="w">the</span> <span class="w">books</span> <span class="w">and</span> <span class="w">signed</span> <span class="w">the</span> <span class="w">list</span> <span class="w">.</span>
+      </p>
+      <button class="checkbtn">Check my answer</button>
+      <div class="result"></div>
+    </div>
+  </div>
+  <div class="key">
+    <button class="keytoggle">▸ Reviewer key</button>
+    <div class="keybody">
+      <div class="row"><span class="k">Key</span><span class="ans">libary → library</span> &nbsp; <span class="ans">returnd → returned</span></div>
+      <div class="row"><span class="k">Eligible Content</span><span>E03.D.1.2.x conventions — spelling (word-level select)</span></div>
+      <div class="row"><span class="k">Scoring</span><span>1 point — both misspelled words selected, none extra</span></div>
+      <div class="row"><span class="k">Gates</span><span>selectable tokens are word spans · exactly two are misspelled · distractor words are correctly spelled · original toy sentence (no copied text)</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 8. PUNCTUATION-TOKEN DRAG ============ -->
+<section class="item" id="punct_drag">
+  <div class="titlebar"><span class="t">English Language Arts — Grade 3</span><span class="sub">Test Coach mock · toy content</span></div>
+  <div class="qbar"><span>Question 9</span><span class="typetag">Drag-and-drop · punctuation token</span></div>
+  <div class="toolbar"><i></i><i></i><i></i><i></i><i></i></div>
+  <div class="body single">
+    <div class="pane">
+      <p class="hint">Drag a punctuation mark into each blank. To change an answer, drag a different mark over it.</p>
+      <p class="stem light">Drag the correct punctuation mark into each blank to complete the sentence.</p>
+      <p class="slotline">For the trip, Sam packed a water bottle<span class="slot" data-accept="comma"></span> a snack<span class="slot" data-accept="comma"></span> and a map.</p>
+      <div class="toksource" id="puncttokens">
+        <span class="tok" draggable="true" data-tok="comma">,</span>
+        <span class="tok" draggable="true" data-tok="comma">,</span>
+        <span class="tok" draggable="true" data-tok="period">.</span>
+        <span class="tok" draggable="true" data-tok="dash">—</span>
+      </div>
+      <button class="checkbtn">Check my answer</button>
+      <div class="result"></div>
+    </div>
+  </div>
+  <div class="key">
+    <button class="keytoggle">▸ Reviewer key</button>
+    <div class="keybody">
+      <div class="row"><span class="k">Key</span><span class="ans">comma</span> in both blanks (items in a series)</div>
+      <div class="row"><span class="k">Eligible Content</span><span>E03.D.1.2.x conventions — punctuation (commas in a series)</span></div>
+      <div class="row"><span class="k">Scoring</span><span>1 point — both blanks correct</span></div>
+      <div class="row"><span class="k">Gates</span><span>token-typed answer key (accept by mark type) · period/em-dash are plausible-error distractors · slot capacity = 1 each · original toy sentence</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 9. DRAG-TO-ORDER ============ -->
+<section class="item" id="order_drag">
+  <div class="titlebar"><span class="t">English Language Arts — Grade 3</span><span class="sub">Test Coach mock · toy content</span></div>
+  <div class="qbar"><span>Question 10</span><span class="typetag">Drag-and-drop · order</span></div>
+  <div class="toolbar"><i></i><i></i><i></i><i></i><i></i></div>
+  <div class="body single">
+    <div class="pane">
+      <p class="hint">Select-and-drag each step into the chart to put the steps in the correct order.</p>
+      <p class="stem light">Based on <strong>"The Sticky Door,"</strong> drag the four steps into the chart in the order the class did them.</p>
+      <div class="toksource" id="ordertokens">
+        <span class="tok" draggable="true" data-order="3">Tighten the loose screw on the hinge.</span>
+        <span class="tok" draggable="true" data-order="1">Watch the door to find the problem.</span>
+        <span class="tok" draggable="true" data-order="4">Rub a little soap on the edge.</span>
+        <span class="tok" draggable="true" data-order="2">Clear the rug bunched under the door.</span>
+      </div>
+      <div class="orderrow"><span class="num">1</span><span class="slot" data-pos="1"></span></div>
+      <div class="orderrow"><span class="num">2</span><span class="slot" data-pos="2"></span></div>
+      <div class="orderrow"><span class="num">3</span><span class="slot" data-pos="3"></span></div>
+      <div class="orderrow"><span class="num">4</span><span class="slot" data-pos="4"></span></div>
+      <button class="checkbtn">Check my answer</button>
+      <div class="result"></div>
+    </div>
+  </div>
+  <div class="key">
+    <button class="keytoggle">▸ Reviewer key</button>
+    <div class="keybody">
+      <div class="row"><span class="k">Key order</span><span>watch the door → clear the rug → tighten the screw → rub soap</span></div>
+      <div class="row"><span class="k">Eligible Content</span><span>E03.B-K.1.1.3 (steps in a technical procedure: time/sequence)</span></div>
+      <div class="row"><span class="k">Scoring</span><span>2 points — all four in order; 1 point partial per rule</span></div>
+      <div class="row"><span class="k">Gates</span><span>steps are grounded in the passage · unique correct sequence (no two steps interchangeable) · slot capacity = 1 each</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 10. SHORT ANSWER (Grade 3) ============ -->
+<section class="item" id="short_answer">
+  <div class="titlebar"><span class="t">English Language Arts — Grade 3</span><span class="sub">Test Coach mock · toy content</span></div>
+  <div class="qbar"><span>Question 11</span><span class="typetag">Short Answer · 3 pts</span></div>
+  <div class="toolbar"><i></i><i></i><i></i><i></i><i></i></div>
+  <div class="body">
+    <div class="pane passage">
+      <h3>The Puddle Map</h3>
+      <p>By noon, most puddles had dried, but the one near the north wall was still there. The students noticed the north wall blocked the afternoon sun. They decided the shade kept that puddle cool and wet. The class measured each puddle and marked it on a map before they decided.</p>
+    </div>
+    <div class="pane">
+      <p class="hint">Write your answer in the box. Use details from the passage.</p>
+      <p class="stem">Why did the puddle near the north wall last the longest? Use <strong>two</strong> details from the passage to support your answer.</p>
+      <textarea class="craft" placeholder="Type your answer here…"></textarea>
+    </div>
+  </div>
+  <div class="key">
+    <button class="keytoggle">▸ Reviewer key</button>
+    <div class="keybody">
+      <div class="row"><span class="k">Eligible Content</span><span>E03.B-K.1.1.2 (main idea / key details, informational)</span></div>
+      <div class="row"><span class="k">Expected answer</span><span>The puddle lasted because the north wall blocked the afternoon sun, so the shade kept it cool and wet; the class figured this out by measuring and mapping the puddles before deciding.</span></div>
+      <div class="row"><span class="k">Acceptable support</span><span>any two: north wall blocked the afternoon sun · the shade kept it cool and wet · they measured each puddle and marked it on a map · most others had dried by noon</span></div>
+      <table class="rubric">
+        <tr><th class="score">Pts</th><th>What earns it</th></tr>
+        <tr><td class="score">3</td><td>Correct answer (shade from the wall blocked the sun) <em>plus</em> two specific, accurate text details.</td></tr>
+        <tr><td class="score">2</td><td>Partial — some awareness + at least one text detail; may have minor inaccuracy.</td></tr>
+        <tr><td class="score">1</td><td>Incomplete/misreads task or no text details — <strong>or the answer is entirely copied text.</strong></td></tr>
+        <tr><td class="score">0</td><td>Insufficient to score, or inaccurate throughout.</td></tr>
+      </table>
+      <div class="band"><span class="bscore">Toy 3-pt response:</span> "It lasted because the north wall blocked the afternoon sun, so the shade kept it cool and wet. The class knew because they measured each puddle and marked it on a map." <em>(answer + two details)</em></div>
+      <div class="band"><span class="bscore">Toy 2-pt response:</span> "Because it was in the shade by the wall." <em>(one idea, no second supporting detail)</em></div>
+      <div class="band"><span class="bscore">Toy 1-pt response:</span> "The one near the north wall was still there." <em>(entirely copied from the passage → capped at 1)</em></div>
+      <div class="row" style="margin-top:8px"><span class="k">Gates</span><span>3/2/1/0 rubric present · prompt requires text support · expected answer + acceptable support listed · copied-text cap encoded · score-band examples render</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 11. TDA (Grades 4–8) ============ -->
+<section class="item" id="tda">
+  <div class="titlebar"><span class="t">English Language Arts — Grade 5</span><span class="sub">Test Coach mock · toy content</span></div>
+  <div class="qbar"><span>Question 12</span><span class="typetag">TDA · 4-pt analytic ×4</span></div>
+  <div class="toolbar"><i></i><i></i><i></i><i></i><i></i></div>
+  <div class="body">
+    <div class="pane passage">
+      <h3>The Town Clock That Everyone Trusts</h3>
+      <p>For a hundred years, the brick clock tower has stood in the middle of Maple Town. Shopkeepers set their watches by it. Bus drivers slow down when its bell rings. When a storm once stopped the clock, the whole town felt out of step until it was fixed. People say the clock does not just tell time — it keeps the town together.</p>
+    </div>
+    <div class="pane">
+      <p class="stem">Write an essay analyzing <em>how</em> the author develops the idea that the town clock is more than a machine. Use specific evidence from the passage to support your analysis.</p>
+      <div class="checklist">
+        <b>Writer's Checklist</b> — PLAN: read the question and the whole passage; organize your ideas. FOCUS: analyze the passage as you write; use evidence; use precise language, varied sentences, transitions; organize with an introduction, body, and conclusion. PROOFREAD: stay focused; use evidence; fix capitalization, spelling, sentence formation, punctuation, word choice.
+      </div>
+      <textarea class="craft" placeholder="Write your essay here…"></textarea>
+    </div>
+  </div>
+  <div class="key">
+    <button class="keytoggle">▸ Reviewer key</button>
+    <div class="keybody">
+      <div class="row"><span class="k">Eligible Content</span><span>E05.E.1.1.2 (analysis across the text; Reporting Category E)</span></div>
+      <div class="row"><span class="k">Weight</span><span>4-point analytic score, weighted ×4 = up to 16 points on the form</span></div>
+      <div class="row"><span class="k">Expected claim</span><span>The author builds the "more than a machine" idea by showing the clock guides daily life (watches, buses) and that the town feels lost without it — implying it holds the community together.</span></div>
+      <div class="row"><span class="k">Acceptable evidence</span><span>shopkeepers set their watches by it; bus drivers slow at the bell; the town "felt out of step" when it stopped; "it keeps the town together."</span></div>
+      <table class="rubric">
+        <tr><th class="score">Pts</th><th>Analytic behavior (nine dimensions, summarized)</th></tr>
+        <tr><td class="score">4</td><td>In-depth analysis of <em>how</em> the author develops the idea; thorough explicit + implicit reasoning; substantial accurate text evidence; strong structure; skillful transitions/vocabulary; few/no errors.</td></tr>
+        <tr><td class="score">3</td><td>Sufficient analysis; clear structure; sufficient accurate evidence; appropriate transitions; some errors that seldom interfere.</td></tr>
+        <tr><td class="score">2</td><td>Partial/inconsistent analysis; weak structure; vague evidence; errors may interfere with meaning.</td></tr>
+        <tr><td class="score">1</td><td>Minimal/inadequate; little or no analysis or text evidence; many errors often interfere.</td></tr>
+      </table>
+      <div class="band"><span class="bscore">Toy high-band outline (3–4):</span> intro names the "more than a machine" idea → body shows how the author uses daily-life details (watches, buses slowing at the bell) and the storm that left the town "out of step" to build the clock's role → explains <em>why</em> "keeps the town together" caps the idea → conclusion ties the details to community.</div>
+      <div class="band"><span class="bscore">Toy low-band outline (1–2):</span> retells what the clock does (it is old, it rings a bell) without analyzing how the author builds the "more than a machine" idea; little or no evidence. <em>(summary/retell, not analysis)</em></div>
+      <div class="row" style="margin-top:8px"><span class="k">Gates</span><span>all nine rubric dimensions present at all four levels · prompt is genuinely analytic (how/why), not summary/opinion · text-evidence requirement · ×4 weight recorded · Writer's-Checklist preview present</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SUBTYPE INVENTORY ============ -->
+<div class="appendix" id="subtypes">
+  <h2>Sub-variant inventory (locked, even where not separately mocked)</h2>
+  <p style="font-size:13px;color:var(--muted)">Interaction surface is separated from scoring family. Sub-variants live <em>inside</em> a family (an <code>interactionSubtype</code> field) so the schema doesn't explode into a dozen fake top-level types. Mocked variants are marked ✓.</p>
+  <table>
+    <tr><th>Family</th><th>Sub-variants</th></tr>
+    <tr><td>HOT_TEXT</td><td>sentence-select ✓ (Q6) · phrase-select · word-select ✓ (Q8)</td></tr>
+    <tr><td>DRAG_DROP</td><td>into category/chart ✓ (Q7) · drag-to-order ✓ (Q10) · punctuation/token placement ✓ (Q9) · drag-replace-into-table-cell (MC-via-drag)</td></tr>
+    <tr><td>INLINE_DROPDOWN</td><td>single blank · multi-blank ✓ (Q4) · spelling ✓ (Q4) · grammar/usage · punctuation/capitalization · reading-comprehension phrase</td></tr>
+    <tr><td>MULTI_SELECT</td><td>choose-N evidence/details ✓ (Q3) · choose-N traits · choose-N notes supporting a topic</td></tr>
+    <tr><td>MATCHING_GRID</td><td>one-box-per-row ✓ (Q5) · multi-box-per-column · explicit "Both" column ✓ (Q5)</td></tr>
+    <tr><td>EBSR</td><td>2-point (choose-two evidence) ✓ (Q2) · 3-point</td></tr>
+    <tr><td>MCQ</td><td>passage-based 1-pt ✓ (Q1) · standalone conventions 1-pt</td></tr>
+    <tr><td>SHORT_ANSWER</td><td>Grade 3 only, 3-pt, text-supported ✓ (Q11)</td></tr>
+    <tr><td>TDA</td><td>Grades 4–8 only, 4-pt analytic ×4 ✓ (Q12)</td></tr>
+  </table>
+</div>
+
+<!-- ============ CALIBRATION APPENDIX ============ -->
+<div class="appendix" id="calibration">
+  <h2>Calibration appendix — Short Answer &amp; TDA rubric behavior</h2>
+  <p style="font-size:13px;color:var(--muted)">Summarizes how the official PDE rubrics <em>behave</em> so authored items and gates calibrate to real scoring — <strong>without copying any released anchor responses</strong>. Annotated anchor papers are used later, only to spot-check behavior, after the contract is fixed (so we don't overfit the schema to one paper).</p>
+
+  <h3>Short Answer (Grade 3) — 3 / 2 / 1 / 0</h3>
+  <table>
+    <tr><th>Score</th><th>Behavior that defines the boundary</th></tr>
+    <tr><td>3</td><td>Correct answer <em>and</em> text-based support; specific, accurate details (name/describe/explain/compare).</td></tr>
+    <tr><td>2</td><td>Partial: some task awareness + at least one text detail; minor inaccuracy tolerated.</td></tr>
+    <tr><td>1</td><td>Incomplete or misreads the task, or no text details — <strong>and a response that is entirely copied text cannot exceed 1.</strong></td></tr>
+    <tr><td>0</td><td>Insufficient to score or inaccurate throughout.</td></tr>
+  </table>
+  <p style="font-size:13px"><strong>Authoring/gate implications:</strong> the prompt must require both an answer and support (a one-word recall can't reach 3); the reviewer key must list the expected answer core + the set of acceptable supporting details; the gate must encode the <em>copied-text cap</em> so a verbatim lift is flagged, not credited.</p>
+
+  <h3>Text-Dependent Analysis (Grades 4–8) — 4-point analytic, weighted ×4</h3>
+  <table>
+    <tr><th>Dimension</th><th>What moves a score up</th></tr>
+    <tr><td>Task / analytic understanding</td><td>addresses all parts with in-depth (not surface) analysis of the text</td></tr>
+    <tr><td>Structure</td><td>clear introduction → development → conclusion; organization supports the focus</td></tr>
+    <tr><td>Analysis</td><td>explains explicit <em>and</em> implicit meaning, not just retelling</td></tr>
+    <tr><td>Text evidence</td><td>substantial, accurate, direct reference (details, examples, quotes, facts, definitions)</td></tr>
+    <tr><td>Language</td><td>skillful transitions; precise, domain-specific vocabulary drawn from the text</td></tr>
+    <tr><td>Conventions</td><td>few/no errors; errors do not interfere with meaning</td></tr>
+  </table>
+  <p style="font-size:13px"><strong>Authoring/gate implications:</strong> the prompt must be analytic ("how/why the author develops X"), never summary or opinion; the reviewer key must carry an expected claim + acceptable evidence + the per-dimension rubric; scoring metadata records the ×4 weight; a summary-only or opinion-only response should land in the low band by rule.</p>
+  <p class="src">Sources: PSSA TDA Scoring Guidelines; Grade 3 Reading Short-Answer Scoring Guidelines; Grades 4–8 TDA Writer's Checklist (PDE). Transcribed in <code>reference/pssa-test-design/constructed_response_scoring.md</code>. No released item, passage, stem, choice, or student-response text is reproduced in this mock.</p>
+</div>
+
+<p style="text-align:center;color:var(--muted);font-size:12.5px;margin-top:30px">
+  Original toy content · reviewStatus = PENDING · for design sign-off only · not student-ready until human approval.
+</p>
+</div>
+
+<script>
+// ---- single/multi select options ----
+document.querySelectorAll('.opts').forEach(group=>{
+  const single = group.dataset.single==='1';
+  group.querySelectorAll('.opt').forEach((opt,i)=>{
+    opt.addEventListener('click',e=>{
+      e.preventDefault();
+      if(single){group.querySelectorAll('.opt').forEach(o=>o.classList.remove('sel'));opt.classList.add('sel');opt.querySelector('.box').textContent='●';group.querySelectorAll('.opt').forEach(o=>{if(o!==opt)o.querySelector('.box').textContent='';});}
+      else{opt.classList.toggle('sel');opt.querySelector('.box').textContent=opt.classList.contains('sel')?'✓':'';}
+    });
+  });
+});
+// ---- matching grid ----
+document.querySelectorAll('table.grid tr[data-correct]').forEach(row=>{
+  row.querySelectorAll('.cell').forEach((cell,ci)=>{
+    cell.addEventListener('click',()=>{
+      row.querySelectorAll('.cell').forEach(c=>{if(c!==cell){c.classList.remove('sel');c.textContent='';}});
+      cell.classList.toggle('sel');cell.textContent=cell.classList.contains('sel')?'✓':'';
+    });
+  });
+});
+// ---- hot-text ----
+document.querySelectorAll('.hotpassage .s').forEach(s=>{
+  s.addEventListener('click',()=>s.classList.toggle('hl'));
+});
+// ---- drag and drop ----
+let dragged=null;
+document.querySelectorAll('.chip').forEach(ch=>{
+  ch.addEventListener('dragstart',()=>{dragged=ch;ch.classList.add('dragging');});
+  ch.addEventListener('dragend',()=>{ch.classList.remove('dragging');});
+});
+function wireDrop(zone){
+  zone.addEventListener('dragover',e=>{e.preventDefault();zone.classList.add('over');});
+  zone.addEventListener('dragleave',()=>zone.classList.remove('over'));
+  zone.addEventListener('drop',e=>{e.preventDefault();zone.classList.remove('over');if(dragged)zone.appendChild(dragged);});
+}
+wireDrop(document.getElementById('dndbucket'));
+wireDrop(document.getElementById('dndsource'));
+// ---- word-level hot-text ----
+document.querySelectorAll('.wordhot .w').forEach(w=>w.addEventListener('click',()=>w.classList.toggle('hl')));
+// ---- generic token drag (punctuation + order) ----
+let draggedTok=null;
+document.querySelectorAll('.tok').forEach(t=>{
+  t.addEventListener('dragstart',()=>{draggedTok=t;t.classList.add('dragging');});
+  t.addEventListener('dragend',()=>t.classList.remove('dragging'));
+});
+document.querySelectorAll('.slot').forEach(slot=>{
+  slot.addEventListener('dragover',e=>{e.preventDefault();slot.classList.add('over');});
+  slot.addEventListener('dragleave',()=>slot.classList.remove('over'));
+  slot.addEventListener('drop',e=>{e.preventDefault();slot.classList.remove('over');
+    if(!draggedTok)return;
+    const src=draggedTok.closest('.item').querySelector('.toksource');
+    const existing=slot.querySelector('.tok');
+    if(existing&&existing!==draggedTok&&src)src.appendChild(existing);
+    slot.appendChild(draggedTok);
+  });
+});
+document.querySelectorAll('.toksource').forEach(src=>{
+  src.addEventListener('dragover',e=>e.preventDefault());
+  src.addEventListener('drop',e=>{e.preventDefault();if(draggedTok)src.appendChild(draggedTok);});
+});
+// ---- reviewer key toggles ----
+document.querySelectorAll('.key .keytoggle').forEach(btn=>{
+  btn.addEventListener('click',()=>{const k=btn.closest('.key');k.classList.toggle('open');btn.textContent=(k.classList.contains('open')?'▾':'▸')+' Reviewer key';});
+});
+// ---- check buttons ----
+function setResult(el,ok,msg){el.className='result '+(ok?'ok':'no');el.textContent=(ok?'✓ ':'✗ ')+msg;}
+document.querySelectorAll('.checkbtn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const item=btn.closest('.item');const res=item.querySelector('.result');
+    if(item.id==='ebsr'){
+      const groups=item.querySelectorAll('.opts');
+      const p1=[...groups[0].querySelectorAll('.opt')].findIndex(o=>o.classList.contains('sel'));
+      const p2=[...groups[1].querySelectorAll('.opt')].map((o,i)=>o.classList.contains('sel')?i:-1).filter(i=>i>=0);
+      const ok=p1===2 && p2.length===2 && p2.includes(0)&&p2.includes(1);
+      setResult(res,ok,ok?'Part One and Part Two correct.':'Not yet — check both parts.');
+    }else if(item.id==='mselect'||false){
+      checkMulti(item,res);
+    }else if(item.querySelector('.opts')){
+      checkMulti(item,res);
+    }else if(item.id==='dropdown'){
+      const sels=item.querySelectorAll('select');let ok=true;sels.forEach(s=>{if(s.value!==s.dataset.correct)ok=false;});
+      setResult(res,ok,ok?'Both spellings correct.':'Not yet — check each menu.');
+    }else if(item.id==='grid'){
+      let ok=true;item.querySelectorAll('tr[data-correct]').forEach(r=>{const sel=[...r.querySelectorAll('.cell')].findIndex(c=>c.classList.contains('sel'));if(sel!==+r.dataset.correct)ok=false;});
+      setResult(res,ok,ok?'All rows correct.':'Not yet — check each row.');
+    }else if(item.id==='hottext'){
+      const sel=[...item.querySelectorAll('.hotpassage .s')];const ok=sel.filter(s=>s.classList.contains('hl')).every(s=>s.dataset.c==='1')&&sel.filter(s=>s.dataset.c==='1').every(s=>s.classList.contains('hl'))&&sel.filter(s=>s.classList.contains('hl')).length===2;
+      setResult(res,ok,ok?'Both correct sentences highlighted.':'Not yet — choose the two message sentences.');
+    }else if(item.id==='dnd'){
+      const inB=[...document.getElementById('dndbucket').querySelectorAll('.chip')];
+      const ok=inB.length===2 && inB.every(c=>c.dataset.c==='1');
+      setResult(res,ok,ok?'Both correct statements in the chart.':'Not yet — only "both passages" statements belong.');
+    }else if(item.id==='hottext_word'){
+      const ws=[...item.querySelectorAll('.wordhot .w')];
+      const hl=ws.filter(w=>w.classList.contains('hl'));
+      const ok=hl.length===2 && hl.every(w=>w.dataset.c==='1');
+      setResult(res,ok,ok?'Both misspelled words selected.':'Not yet — find the two misspellings.');
+    }else if(item.id==='punct_drag'){
+      const slots=[...item.querySelectorAll('.slot')];
+      const ok=slots.every(s=>{const t=s.querySelector('.tok');return t&&t.dataset.tok===s.dataset.accept;});
+      setResult(res,ok,ok?'Both blanks correct.':'Not yet — items in a series take commas.');
+    }else if(item.id==='order_drag'){
+      const slots=[...item.querySelectorAll('.slot')];
+      const filled=slots.filter(s=>s.querySelector('.tok')).length;
+      const ok=filled===4 && slots.every(s=>{const t=s.querySelector('.tok');return t&&t.dataset.order===s.dataset.pos;});
+      setResult(res,ok,ok?'Correct order.':'Not yet — re-check the sequence.');
+    }
+  });
+});
+function checkMulti(item,res){
+  const group=item.querySelector('.opts');const correct=group.dataset.correct.split(',').map(Number);
+  const sel=[...group.querySelectorAll('.opt')].map((o,i)=>o.classList.contains('sel')?i:-1).filter(i=>i>=0);
+  const ok=sel.length===correct.length && correct.every(c=>sel.includes(c));
+  setResult(res,ok,ok?'Correct selection.':'Not yet — re-check your selections.');
+}
+</script>
+</body>
+</html>
