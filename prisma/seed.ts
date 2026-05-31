@@ -231,6 +231,29 @@ async function main() {
     }).catch(() => {});
   }
 
+  await db.licenseAttribution.upsert({
+    where: { sourceCode: "AI_GENERATED" },
+    update: {
+      sourceName: "Sý Learning AI-generated content",
+      licenseCode: "PROPRIETARY_INTERNAL",
+      attributionText: "Original Sý Learning AI-generated passage content; reviewed before use with students.",
+      sourceUrl: null,
+      commercialUseAllowed: true,
+      shareAlikeRequired: false,
+      notes: "Source attribution code for pre-generated Reading Buddy passages produced by the passage generation pipeline.",
+    },
+    create: {
+      sourceCode: "AI_GENERATED",
+      sourceName: "Sý Learning AI-generated content",
+      licenseCode: "PROPRIETARY_INTERNAL",
+      attributionText: "Original Sý Learning AI-generated passage content; reviewed before use with students.",
+      sourceUrl: null,
+      commercialUseAllowed: true,
+      shareAlikeRequired: false,
+      notes: "Source attribution code for pre-generated Reading Buddy passages produced by the passage generation pipeline.",
+    },
+  });
+
   console.log("Seed complete");
   console.log(`${SCHOOL_NAME} roster created for grades 3-8`);
   console.log(`All seeded users use password: ${PASSWORD}`);
