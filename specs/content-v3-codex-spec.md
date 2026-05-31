@@ -131,7 +131,186 @@ The diagnostic produces:
 
 Until Reading Buddy has its own validated grade-norm dataset (or formal alignment to NCII-rated screeners for each strand), strand status uses **"Priority 1/2/3"** and **"Relative strength on this diagnostic"** framing, never "above grade level" or "below grade level." Fluency may use Hasbrouck-Tindal norms (published research, public reference) with explicit citation.
 
-### 4.9 UI discipline for the student-facing diagnostic
+### 4.9 Diagnostic Results Computation Thresholds (v1)
+
+These thresholds are canonical. PR #32 (and any future results-computation work)
+must reuse them; do not invent new cutoffs without updating this section first.
+
+#### 4.9.1 Pattern classification
+
+For each decoding pattern within the placed phase:
+
+```text
+secure:
+  scoredItems >= 4 AND accuracy >= 0.80
+
+developing:
+  scoredItems >= 3 AND accuracy >= 0.50 AND accuracy < 0.80
+
+notYetSecure:
+  scoredItems >= 3 AND accuracy < 0.50
+
+insufficientEvidence:
+  scoredItems < 3
+```
+
+Edge-case canonical test cases (PR #32 must include these as unit tests):
+
+```text
+2/2 -> insufficientEvidence
+2/3 -> developing  (66.7%)
+1/3 -> notYetSecure  (33.3%)
+3/4 -> developing  (75%)
+4/4 -> secure  (100%)
+4/5 -> secure  (80%)
+3/5 -> developing  (60%)
+2/5 -> notYetSecure  (40%)
+```
+
+Instructional planning rule:
+
+`decodingSecure` is true only when `status == "secure"`. `developing`, `notYetSecure`, and `insufficientEvidence` are all treated as not secure for first-lesson target selection.
+
+Adult copy rule:
+
+UI must not describe `insufficientEvidence` as a student weakness. It must be surfaced as "not enough evidence yet" or folded into the confidence explanation. Never as "not yet secure" in parent-facing copy.
+
+#### 4.9.2 Confidence level
+
+Inputs:
+
+```text
+totalScoredItems            — count of items where scored == true
+                              (excludes practice items, no-attempt, audio-problem)
+usableAudioFraction         — usableVoiceAttempts / totalVoiceAttempts
+                              (denominator excludes selected-choice attempts)
+strandsBelowMinimumEvidence — count of strands whose scored-item count is
+                              strictly less than that strand's floor
+strandsAtMinimumEvidence    — count of strands whose scored-item count equals
+                              its floor exactly (no margin)
+```
+
+Note: items selected via low-confidence replacement count toward `totalScoredItems` if they were ultimately scored; the original unscored attempt does not.
+
+Computed via precedence (first match wins):
+
+```ts
+if (
+  totalScoredItems < 20 ||
+  usableAudioFraction < 0.80 ||
+  strandsBelowMinimumEvidence >= 3
+) {
+  return "low";
+}
+
+if (
+  totalScoredItems >= 30 &&
+  usableAudioFraction >= 0.90 &&
+  strandsBelowMinimumEvidence === 0 &&
+  strandsAtMinimumEvidence === 0
+) {
+  return "high";
+}
+
+return "medium";
+```
+
+#### 4.9.3 Listening-vs-reading interpretation
+
+Only compute a gap interpretation if:
+
+```text
+listeningTotal >= 4 AND readingTotal >= 4
+```
+
+`gap = listeningPercent - readingPercent` (both expressed 0-100)
+
+Bands:
+
+```text
+gap >= 25:
+  "Listening comprehension is notably stronger than independent reading
+  comprehension. This pattern is consistent with decoding and/or fluency
+  limiting access to meaning."
+
+15 <= gap < 25:
+  "Listening comprehension is moderately stronger than reading comprehension.
+  Continue decoding instruction and monitor reading-comprehension growth as
+  automaticity develops."
+
+-10 <= gap < 15:
+  "Listening and reading comprehension are operating consistently on this
+  diagnostic."
+
+gap < -10:
+  "Reading comprehension is stronger than listening comprehension on this
+  diagnostic. Review listening-language evidence and continue monitoring."
+```
+
+If evidence floor is not met:
+
+```text
+"Not enough evidence yet to compare listening and reading comprehension."
+```
+
+#### 4.9.4 First lesson target selection
+
+Within the placed `PhasePosition`:
+
+1. Pull `DailyTarget`s ordered by `introductionOrder` ascending.
+2. For each target, compute pattern status per §4.9.1 above.
+3. The first lesson target = the lowest `introductionOrder` `DailyTarget` where status is NOT `"secure"` (i.e., `developing`, `notYetSecure`, or `insufficientEvidence`).
+4. If all targets in the placed phase have `status == "secure"`: do NOT silently advance to the next phase. Recommend a review / consolidation target for the placed phase, and surface a tutor note "Student may be ready to advance — confirm via tutor review before promoting placement."
+
+The "advance to next phase" decision must come from the autopilot loop (§5.13), not from first-lesson recommendation logic — that prevents the results dashboard from bypassing the original placement.
+
+#### 4.9.5 Additional support
+
+Generate up to 3 supports in this priority order (first 3 that match):
+
+1. `confidence == "low"`:
+   "Use the first full lesson cycle to confirm this starting point before making longer-term placement decisions."
+2. `listeningVsReading.gap >= 25`:
+   "Emphasize decoding and connected-text fluency. Use the listen-first scaffold for the lesson passage on the first day."
+3. `strandPriority[0].strand == "PA"`:
+   "Add extra phonemic-awareness warm-up before the target instruction."
+4. `strandPriority[0].strand == "MORPHOLOGY"` OR `strandPriority[1]?.strand == "MORPHOLOGY"`:
+   "Include morphology connections during target instruction (target word families with shared roots or affixes)."
+5. `confidence == "medium"`:
+   "Treat this placement as a starting hypothesis; confirm or adjust after the first 2 lessons."
+
+#### 4.9.6 Structured evidence shaping
+
+Every claim string carries an `evidence` field. Evidence objects use this shape:
+
+```ts
+{
+  strand: "DECODING" | "PA" | "MORPHOLOGY" | "FLUENCY" | "VOCABULARY" |
+          "LISTENING_COMPREHENSION" | "READING_COMPREHENSION",
+  pattern?: string,    // e.g. "a_e" — required when claim is pattern-specific
+  score: number,
+  total: number
+}
+```
+
+Per-claim conventions:
+
+- `whyThisPlacement.{secure|developing|notYetSecure}[i].evidence`: Always `strand=DECODING` with `pattern` set to the specific pattern being classified.
+- `parentFriendlySummary.evidence` (up to 3 entries, balanced):
+  1. Placement strand evidence (`DECODING` at the placed phase)
+  2. Top priority strand evidence (whichever strand is Priority 1)
+  3. One "relative strength" strand if available (`priority == null`, `label == "Relative strength on this diagnostic"`). If no relative strength, omit this slot — do not pad with another weakness.
+- `firstLessonRecommendation.evidence`: Pattern-specific evidence supporting the target choice — the per-pattern score for the recommended target. Example: `[{ strand: "DECODING", pattern: "a_e", score: 1, total: 4 }]`
+- `listeningVsReading.evidence`: Both listening and reading scores.
+
+```ts
+[
+  { strand: "LISTENING_COMPREHENSION", score: 5, total: 6 },
+  { strand: "READING_COMPREHENSION", score: 2, total: 5 }
+]
+```
+
+### 4.10 UI discipline for the student-facing diagnostic
 
 - No phase labels visible to the student.
 - No item-of-N counters.
