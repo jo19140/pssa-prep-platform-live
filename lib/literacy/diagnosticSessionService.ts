@@ -5,6 +5,8 @@ import { toStudentItemDTO } from "./diagnosticItemDTO";
 import { selectNextDiagnosticItem, evidenceFloorStatus, type EngineAttempt, type EngineItem } from "./diagnosticEngine";
 import { DIAGNOSTIC_STRANDS } from "./diagnosticEvidenceFloors";
 import { computeDiagnosticResults } from "./diagnosticPlacement";
+import { buildDiagnosticResults } from "./diagnosticResults";
+import { validateDiagnosticResultsCopy } from "./validateDiagnosticResultsCopy";
 
 export async function loadDiagnosticSessionState(sessionId: string) {
   const [session, pool] = await Promise.all([
@@ -57,8 +59,8 @@ export function completionBlockers(attempts: EngineAttempt[], pool: EngineItem[]
   return blockers;
 }
 
-export function diagnosticResultJson(attempts: Array<EngineAttempt & { item?: EngineItem | null }>) {
-  return computeDiagnosticResults(
+export async function diagnosticResultJson(sessionId: string, attempts: Array<EngineAttempt & { item?: EngineItem | null }>) {
+  const baseResult = computeDiagnosticResults(
     attempts.map((attempt) => ({
       strand: attempt.item?.strand || "UNKNOWN",
       phaseBand: attempt.item?.phaseBand,
@@ -66,5 +68,44 @@ export function diagnosticResultJson(attempts: Array<EngineAttempt & { item?: En
       scored: attempt.scored,
       isPracticeItem: attempt.isPracticeAttempt,
     })),
-  ) as Prisma.InputJsonValue;
+  );
+  const phaseNumber = typeof baseResult.phasePlacement === "number" ? baseResult.phasePlacement : null;
+  const phasePosition = phaseNumber
+    ? await db.phasePosition.findFirst({
+        where: { phaseNumber },
+        include: { dailyTargets: { orderBy: { introductionOrder: "asc" } } },
+      })
+    : null;
+  const result = buildDiagnosticResults({
+    diagnosticSessionId: sessionId,
+    attempts: attempts.map((attempt) => ({
+      diagnosticItemId: attempt.diagnosticItemId,
+      scored: attempt.scored,
+      correct: attempt.correct,
+      isPracticeAttempt: attempt.isPracticeAttempt,
+      item: attempt.item
+        ? {
+            id: attempt.item.id,
+            strand: attempt.item.strand,
+            itemType: attempt.item.itemType,
+            phaseBand: attempt.item.phaseBand,
+            targetPattern: attempt.item.targetPattern,
+            wordType: attempt.item.wordType,
+            displayMode: attempt.item.displayMode,
+            responseMode: attempt.item.responseMode,
+            comprehensionMode: (attempt.item as { comprehensionMode?: string | null }).comprehensionMode,
+          }
+        : null,
+    })),
+    dailyTargets: phasePosition?.dailyTargets.map((target) => ({
+      code: target.code,
+      phaseLabel: phasePosition.label,
+      phaseNumber: phasePosition.phaseNumber,
+      exampleWords: target.exampleWords,
+      introductionOrder: target.introductionOrder,
+    })),
+    engineVersion: "content-v3-phase-a",
+  });
+  validateDiagnosticResultsCopy(result);
+  return result as Prisma.InputJsonValue;
 }
