@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-31T20:12:13.356Z",
+  "generatedAt": "2026-05-31T21:52:50.811Z",
   "mockOnly": false,
   "productionImportReady": false,
   "noDbWrite": true,
@@ -79,18 +79,18 @@
             "rationale": "The map shows careful observations from more than one location."
           },
           {
-            "text": "Those clues helped the class ask a better question: why was the glow strongest in one place?",
-            "quotedSpan": "Those clues helped the class ask a better question: why was the glow strongest in one place?",
-            "evidenceRole": "supports_part_a",
-            "supportsPartA": true,
-            "rationale": "This directly connects the observations to the main question."
-          },
-          {
             "text": "A beetle skated over the surface, and a robin hopped in the wet grass.",
             "quotedSpan": "A beetle skated over the surface, and a robin hopped in the wet grass.",
             "evidenceRole": "background",
             "supportsPartA": false,
             "rationale": "This is a later scene, not evidence explaining the glow."
+          },
+          {
+            "text": "Those clues helped the class ask a better question: why was the glow strongest in one place?",
+            "quotedSpan": "Those clues helped the class ask a better question: why was the glow strongest in one place?",
+            "evidenceRole": "supports_part_a",
+            "supportsPartA": true,
+            "rationale": "This directly connects the observations to the main question."
           },
           {
             "text": "The class wrote a creek notice for families.",
@@ -102,7 +102,7 @@
         ],
         "correctIndices": [
           0,
-          1
+          2
         ]
       },
       "scoring": {
@@ -143,12 +143,12 @@
               "quotedSpan": "Maya drew a map of three creek spots."
             },
             {
-              "text": "Those clues helped the class ask a better question: why was the glow strongest in one place?",
-              "quotedSpan": "Those clues helped the class ask a better question: why was the glow strongest in one place?"
-            },
-            {
               "text": "A beetle skated over the surface, and a robin hopped in the wet grass.",
               "quotedSpan": "A beetle skated over the surface, and a robin hopped in the wet grass."
+            },
+            {
+              "text": "Those clues helped the class ask a better question: why was the glow strongest in one place?",
+              "quotedSpan": "Those clues helped the class ask a better question: why was the glow strongest in one place?"
             },
             {
               "text": "The class wrote a creek notice for families.",
@@ -164,7 +164,7 @@
         "partB": {
           "correctIndices": [
             0,
-            1
+            2
           ]
         }
       },
@@ -198,16 +198,16 @@
         "stem": "What main idea do the details about the old map support?",
         "choices": [
           {
-            "text": "The old map helps people compare how Linden Station and the town changed over time.",
-            "distractorRole": null,
-            "supportsPartA": true,
-            "rationale": "The passage repeatedly connects the old map to past-and-present comparison."
-          },
-          {
             "text": "The old bench matters because it is more valuable than the map inside the display.",
             "distractorRole": "wrong_emphasis",
             "supportsPartA": false,
             "rationale": "The bench is where the map was found, not the main idea."
+          },
+          {
+            "text": "The old map helps people compare how Linden Station and the town changed over time.",
+            "distractorRole": null,
+            "supportsPartA": true,
+            "rationale": "The passage repeatedly connects the old map to past-and-present comparison."
           },
           {
             "text": "The town archive closed after Mr. Ortiz put the map in a clear sleeve.",
@@ -222,18 +222,18 @@
             "rationale": "The new map helps visitors compare the town with the old map."
           }
         ],
-        "correctIndex": 0,
+        "correctIndex": 1,
         "evidenceNeededDescription": "Evidence should show the old map being used to compare past and present.",
         "rationale": "The passage repeatedly connects the old map to past-and-present comparison.",
         "distractorRationales": [
-          "The passage repeatedly connects the old map to past-and-present comparison.",
           "The bench is where the map was found, not the main idea.",
+          "The passage repeatedly connects the old map to past-and-present comparison.",
           "The passage does not say the archive closed.",
           "The new map helps visitors compare the town with the old map."
         ],
         "distractorRoles": [
-          "correct",
           "wrong_emphasis",
+          "correct",
           "unsupported_inference",
           "opposite_claim"
         ]
@@ -243,20 +243,6 @@
         "instruction": "Choose two answers.",
         "choices": [
           {
-            "text": "Mr. Ortiz put a new town map beside the old one.",
-            "quotedSpan": "Mr. Ortiz put a new town map beside the old one.",
-            "evidenceRole": "supports_part_a",
-            "supportsPartA": true,
-            "rationale": "The two maps make comparison possible."
-          },
-          {
-            "text": "Some streets had new names, and the trolley tracks were gone.",
-            "quotedSpan": "Some streets had new names, and the trolley tracks were gone.",
-            "evidenceRole": "supports_part_a",
-            "supportsPartA": true,
-            "rationale": "This shows how the town had changed."
-          },
-          {
             "text": "He slid a flat card under one corner, opened the first fold, and placed small cloth weights along the edges.",
             "quotedSpan": "He slid a flat card under one corner, opened the first fold, and placed small cloth weights along the edges.",
             "evidenceRole": "background",
@@ -264,16 +250,30 @@
             "rationale": "This tells how the map was handled, not what people learned from it."
           },
           {
+            "text": "Mr. Ortiz put a new town map beside the old one.",
+            "quotedSpan": "Mr. Ortiz put a new town map beside the old one.",
+            "evidenceRole": "supports_part_a",
+            "supportsPartA": true,
+            "rationale": "The two maps make comparison possible."
+          },
+          {
             "text": "Dust covered the front, but blue rail lines still crossed the page.",
             "quotedSpan": "Dust covered the front, but blue rail lines still crossed the page.",
             "evidenceRole": "too_narrow",
             "supportsPartA": false,
             "rationale": "This describes the map's appearance, not the larger comparison of past and present."
+          },
+          {
+            "text": "Some streets had new names, and the trolley tracks were gone.",
+            "quotedSpan": "Some streets had new names, and the trolley tracks were gone.",
+            "evidenceRole": "supports_part_a",
+            "supportsPartA": true,
+            "rationale": "This shows how the town had changed."
           }
         ],
         "correctIndices": [
-          0,
-          1
+          1,
+          3
         ]
       },
       "scoring": {
@@ -300,8 +300,8 @@
       "responseSpec": {
         "partA": {
           "choices": [
-            "The old map helps people compare how Linden Station and the town changed over time.",
             "The old bench matters because it is more valuable than the map inside the display.",
+            "The old map helps people compare how Linden Station and the town changed over time.",
             "The town archive closed after Mr. Ortiz put the map in a clear sleeve.",
             "The children visit the station because the new map has no street names."
           ]
@@ -310,32 +310,32 @@
           "instruction": "Choose two answers.",
           "choices": [
             {
-              "text": "Mr. Ortiz put a new town map beside the old one.",
-              "quotedSpan": "Mr. Ortiz put a new town map beside the old one."
-            },
-            {
-              "text": "Some streets had new names, and the trolley tracks were gone.",
-              "quotedSpan": "Some streets had new names, and the trolley tracks were gone."
-            },
-            {
               "text": "He slid a flat card under one corner, opened the first fold, and placed small cloth weights along the edges.",
               "quotedSpan": "He slid a flat card under one corner, opened the first fold, and placed small cloth weights along the edges."
             },
             {
+              "text": "Mr. Ortiz put a new town map beside the old one.",
+              "quotedSpan": "Mr. Ortiz put a new town map beside the old one."
+            },
+            {
               "text": "Dust covered the front, but blue rail lines still crossed the page.",
               "quotedSpan": "Dust covered the front, but blue rail lines still crossed the page."
+            },
+            {
+              "text": "Some streets had new names, and the trolley tracks were gone.",
+              "quotedSpan": "Some streets had new names, and the trolley tracks were gone."
             }
           ]
         }
       },
       "correctResponse": {
         "partA": {
-          "correctIndex": 0
+          "correctIndex": 1
         },
         "partB": {
           "correctIndices": [
-            0,
-            1
+            1,
+            3
           ]
         }
       },
@@ -369,12 +369,6 @@
         "stem": "How are the students' observations related to the lunch-line changes?",
         "choices": [
           {
-            "text": "The students use the slow spots to choose changes for the lunch line.",
-            "distractorRole": null,
-            "supportsPartA": true,
-            "rationale": "The class studies the line before moving milk, spoons, and napkins."
-          },
-          {
             "text": "The observations prove that students should stop eating soup at lunch.",
             "distractorRole": "unsupported_inference",
             "supportsPartA": false,
@@ -387,25 +381,31 @@
             "rationale": "No new shelves are needed."
           },
           {
+            "text": "The students use the slow spots to choose changes for the lunch line.",
+            "distractorRole": null,
+            "supportsPartA": true,
+            "rationale": "The class studies the line before moving milk, spoons, and napkins."
+          },
+          {
             "text": "The observations explain why pizza trays are warmer than soup bowls.",
             "distractorRole": "wrong_section",
             "supportsPartA": false,
             "rationale": "Pizza trays are used later to test the setup, not to explain the original fix."
           }
         ],
-        "correctIndex": 0,
+        "correctIndex": 2,
         "evidenceNeededDescription": "Evidence should connect the class observations to the specific line changes.",
         "rationale": "The class studies the line before moving milk, spoons, and napkins.",
         "distractorRationales": [
-          "The class studies the line before moving milk, spoons, and napkins.",
           "The passage keeps soup but changes the line setup.",
           "No new shelves are needed.",
+          "The class studies the line before moving milk, spoons, and napkins.",
           "Pizza trays are used later to test the setup, not to explain the original fix."
         ],
         "distractorRoles": [
-          "correct",
           "unsupported_inference",
           "opposite_claim",
+          "correct",
           "wrong_section"
         ]
       },
@@ -471,9 +471,9 @@
       "responseSpec": {
         "partA": {
           "choices": [
-            "The students use the slow spots to choose changes for the lunch line.",
             "The observations prove that students should stop eating soup at lunch.",
             "The observations show that the cafeteria needs new shelves before the line can improve.",
+            "The students use the slow spots to choose changes for the lunch line.",
             "The observations explain why pizza trays are warmer than soup bowls."
           ]
         },
@@ -501,7 +501,7 @@
       },
       "correctResponse": {
         "partA": {
-          "correctIndex": 0
+          "correctIndex": 2
         },
         "partB": {
           "correctIndices": [
@@ -540,12 +540,6 @@
         "stem": "Which message is best conveyed by the narrator's work on the mural?",
         "choices": [
           {
-            "text": "A paint mistake can become useful when a person turns it into ripples.",
-            "distractorRole": null,
-            "supportsPartA": true,
-            "rationale": "The narrator turns paint drips into ripples and feels proud of the finished mural."
-          },
-          {
             "text": "A person should hide mistakes so other people miss them later.",
             "distractorRole": "opposite_claim",
             "supportsPartA": false,
@@ -562,42 +556,34 @@
             "distractorRole": "too_narrow",
             "supportsPartA": false,
             "rationale": "Those details are part of the mural, not its message."
+          },
+          {
+            "text": "A paint mistake can become useful when a person turns it into ripples.",
+            "distractorRole": null,
+            "supportsPartA": true,
+            "rationale": "The narrator turns paint drips into ripples and feels proud of the finished mural."
           }
         ],
-        "correctIndex": 0,
+        "correctIndex": 3,
         "evidenceNeededDescription": "Evidence should show how the narrator turns the drip mistake into a meaningful part of the mural.",
         "rationale": "The narrator turns paint drips into ripples and feels proud of the finished mural.",
         "distractorRationales": [
-          "The narrator turns paint drips into ripples and feels proud of the finished mural.",
           "The narrator does not hide the ripples; they become part of the mural.",
           "The narrator says the river is not perfectly smooth but still works.",
-          "Those details are part of the mural, not its message."
+          "Those details are part of the mural, not its message.",
+          "The narrator turns paint drips into ripples and feels proud of the finished mural."
         ],
         "distractorRoles": [
-          "correct",
           "opposite_claim",
           "opposite_claim",
-          "too_narrow"
+          "too_narrow",
+          "correct"
         ]
       },
       "partB": {
         "stem": "Which two details best support the answer in Part One?",
         "instruction": "Choose two answers.",
         "choices": [
-          {
-            "text": "I bent close and painted tiny waves around each tail.",
-            "quotedSpan": "I bent close and painted tiny waves around each tail.",
-            "evidenceRole": "supports_part_a",
-            "supportsPartA": true,
-            "rationale": "The narrator changes the mistake into ripples."
-          },
-          {
-            "text": "But the fish seemed to move, and the wall no longer looked empty.",
-            "quotedSpan": "But the fish seemed to move, and the wall no longer looked empty.",
-            "evidenceRole": "supports_part_a",
-            "supportsPartA": true,
-            "rationale": "The changed mural becomes meaningful and lively."
-          },
           {
             "text": "The wall was rough brick, and chalk lines crossed it like a giant puzzle.",
             "quotedSpan": "The wall was rough brick, and chalk lines crossed it like a giant puzzle.",
@@ -611,11 +597,25 @@
             "evidenceRole": "background",
             "supportsPartA": false,
             "rationale": "This shows someone noticed the mural later, but it does not explain how the narrator handled the mistake."
+          },
+          {
+            "text": "I bent close and painted tiny waves around each tail.",
+            "quotedSpan": "I bent close and painted tiny waves around each tail.",
+            "evidenceRole": "supports_part_a",
+            "supportsPartA": true,
+            "rationale": "The narrator changes the mistake into ripples."
+          },
+          {
+            "text": "But the fish seemed to move, and the wall no longer looked empty.",
+            "quotedSpan": "But the fish seemed to move, and the wall no longer looked empty.",
+            "evidenceRole": "supports_part_a",
+            "supportsPartA": true,
+            "rationale": "The changed mural becomes meaningful and lively."
           }
         ],
         "correctIndices": [
-          0,
-          1
+          2,
+          3
         ]
       },
       "scoring": {
@@ -642,23 +642,15 @@
       "responseSpec": {
         "partA": {
           "choices": [
-            "A paint mistake can become useful when a person turns it into ripples.",
             "A person should hide mistakes so other people miss them later.",
             "A mural is successful when each painted line is perfectly smooth.",
-            "A library wall should show buses, gardens, and birds from the neighborhood."
+            "A library wall should show buses, gardens, and birds from the neighborhood.",
+            "A paint mistake can become useful when a person turns it into ripples."
           ]
         },
         "partB": {
           "instruction": "Choose two answers.",
           "choices": [
-            {
-              "text": "I bent close and painted tiny waves around each tail.",
-              "quotedSpan": "I bent close and painted tiny waves around each tail."
-            },
-            {
-              "text": "But the fish seemed to move, and the wall no longer looked empty.",
-              "quotedSpan": "But the fish seemed to move, and the wall no longer looked empty."
-            },
             {
               "text": "The wall was rough brick, and chalk lines crossed it like a giant puzzle.",
               "quotedSpan": "The wall was rough brick, and chalk lines crossed it like a giant puzzle."
@@ -666,18 +658,26 @@
             {
               "text": "A woman had stopped to take a picture of the sparrows.",
               "quotedSpan": "A woman had stopped to take a picture of the sparrows."
+            },
+            {
+              "text": "I bent close and painted tiny waves around each tail.",
+              "quotedSpan": "I bent close and painted tiny waves around each tail."
+            },
+            {
+              "text": "But the fish seemed to move, and the wall no longer looked empty.",
+              "quotedSpan": "But the fish seemed to move, and the wall no longer looked empty."
             }
           ]
         }
       },
       "correctResponse": {
         "partA": {
-          "correctIndex": 0
+          "correctIndex": 3
         },
         "partB": {
           "correctIndices": [
-            0,
-            1
+            2,
+            3
           ]
         }
       },
@@ -756,6 +756,13 @@
         "instruction": "Choose two answers.",
         "choices": [
           {
+            "text": "After the repair, the cart still squeaked a little.",
+            "quotedSpan": "After the repair, the cart still squeaked a little.",
+            "evidenceRole": "background",
+            "supportsPartA": false,
+            "rationale": "This detail comes after the repair and does not explain why the steps work."
+          },
+          {
             "text": "First, you would empty the heavy paper boxes from the bottom shelf.",
             "quotedSpan": "First, you would empty the heavy paper boxes from the bottom shelf.",
             "evidenceRole": "supports_part_a",
@@ -770,13 +777,6 @@
             "rationale": "This explains why the class follows the procedure before forcing the cart."
           },
           {
-            "text": "After the repair, the cart still squeaked a little.",
-            "quotedSpan": "After the repair, the cart still squeaked a little.",
-            "evidenceRole": "background",
-            "supportsPartA": false,
-            "rationale": "This detail comes after the repair and does not explain why the steps work."
-          },
-          {
             "text": "The green cart in the art room did not.",
             "quotedSpan": "The green cart in the art room did not.",
             "evidenceRole": "too_narrow",
@@ -785,8 +785,8 @@
           }
         ],
         "correctIndices": [
-          0,
-          1
+          1,
+          2
         ]
       },
       "scoring": {
@@ -823,16 +823,16 @@
           "instruction": "Choose two answers.",
           "choices": [
             {
+              "text": "After the repair, the cart still squeaked a little.",
+              "quotedSpan": "After the repair, the cart still squeaked a little."
+            },
+            {
               "text": "First, you would empty the heavy paper boxes from the bottom shelf.",
               "quotedSpan": "First, you would empty the heavy paper boxes from the bottom shelf."
             },
             {
               "text": "Weight can hide a small problem.",
               "quotedSpan": "Weight can hide a small problem."
-            },
-            {
-              "text": "After the repair, the cart still squeaked a little.",
-              "quotedSpan": "After the repair, the cart still squeaked a little."
             },
             {
               "text": "The green cart in the art room did not.",
@@ -847,8 +847,8 @@
         },
         "partB": {
           "correctIndices": [
-            0,
-            1
+            1,
+            2
           ]
         }
       },

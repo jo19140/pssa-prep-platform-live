@@ -10,21 +10,21 @@ pssa_ebsr_g3_creek_01,partB.choices.0,,,0,none,PASS
 pssa_ebsr_g3_creek_01,partB.choices.1,,,0,none,PASS
 pssa_ebsr_g3_creek_01,partB.choices.2,,,0,none,PASS
 pssa_ebsr_g3_creek_01,partB.choices.3,,,0,none,PASS
-pssa_ebsr_g3_creek_01,partA.rationale,,,0,none,PASS
+pssa_ebsr_g3_creek_01,partA.rationale,reference/pssa-item-catalog/tech_questions_1.md,is supported by the,0.2857,content-bearing,PASS
 pssa_ebsr_g3_creek_01,assignedPassage.text,,,0,none,PASS
 pssa_ebsr_g3_map_01,partA.stem,,,0,none,PASS
 pssa_ebsr_g3_map_01,partA.choices.0,,,0,none,PASS
 pssa_ebsr_g3_map_01,partA.choices.1,,,0,none,PASS
 pssa_ebsr_g3_map_01,partA.choices.2,,,0,none,PASS
 pssa_ebsr_g3_map_01,partA.choices.3,,,0,none,PASS
-pssa_ebsr_g3_map_01,partB.stem,,,0,none,PASS
+pssa_ebsr_g3_map_01,partB.stem,reference/pssa-item-catalog/tech_questions_2.md,two pieces of evidence,0.3333,content-bearing,PASS
 pssa_ebsr_g3_map_01,partB.instruction,,,0,none,PASS
 pssa_ebsr_g3_map_01,partB.choices.0,,,0,none,PASS
 pssa_ebsr_g3_map_01,partB.choices.1,,,0,none,PASS
 pssa_ebsr_g3_map_01,partB.choices.2,,,0,none,PASS
 pssa_ebsr_g3_map_01,partB.choices.3,,,0,none,PASS
 pssa_ebsr_g3_map_01,partA.rationale,,,0,none,PASS
-pssa_ebsr_g3_map_01,assignedPassage.text,,,0,none,PASS
+pssa_ebsr_g3_map_01,assignedPassage.text,reference/pssa-released-items/extracted/grade-6/tda-rubric-exemplars.json,the end of the,0.0132,content-bearing,PASS
 pssa_ebsr_g3_lunch_01,partA.stem,,,0,none,PASS
 pssa_ebsr_g3_lunch_01,partA.choices.0,,,0,none,PASS
 pssa_ebsr_g3_lunch_01,partA.choices.1,,,0,none,PASS
@@ -37,7 +37,7 @@ pssa_ebsr_g3_lunch_01,partB.choices.1,,,0,none,PASS
 pssa_ebsr_g3_lunch_01,partB.choices.2,,,0,none,PASS
 pssa_ebsr_g3_lunch_01,partB.choices.3,,,0,none,PASS
 pssa_ebsr_g3_lunch_01,partA.rationale,,,0,none,PASS
-pssa_ebsr_g3_lunch_01,assignedPassage.text,,,0,none,PASS
+pssa_ebsr_g3_lunch_01,assignedPassage.text,reference/pssa-released-items/extracted/grade-6/tda-rubric-exemplars.json,the end of the,0.0132,content-bearing,PASS
 pssa_ebsr_g3_mural_01,partA.stem,,,0,none,PASS
 pssa_ebsr_g3_mural_01,partA.choices.0,,,0,none,PASS
 pssa_ebsr_g3_mural_01,partA.choices.1,,,0,none,PASS

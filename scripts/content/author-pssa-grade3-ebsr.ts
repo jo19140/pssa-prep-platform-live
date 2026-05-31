@@ -98,6 +98,16 @@ type SourceCorpusEntry = {
   file: string;
   text: string;
   normalizedText: string;
+  contentNormalizedText: string;
+};
+
+type EbsrPositionDistribution = {
+  partACorrectPositionDistribution: string;
+  partBCorrectPairDistribution: string;
+  partAPositionBiasResult: Result;
+  partBPositionBiasResult: Result;
+  ebsrPositionBiasResult: Result;
+  positionBiasNotes: string;
 };
 
 type EbsrAuditRow = {
@@ -119,6 +129,12 @@ type EbsrAuditRow = {
   skillMatchResult: Result;
   scoringResult: Result;
   sourceComplianceResult: Result;
+  partACorrectPositionDistribution: string;
+  partBCorrectPairDistribution: string;
+  partAPositionBiasResult: Result;
+  partBPositionBiasResult: Result;
+  ebsrPositionBiasResult: Result;
+  positionBiasNotes: string;
   finalEbsrResult: Result;
   notes: string;
 };
@@ -128,6 +144,7 @@ type EbsrAuditBundle = {
   rows: EbsrAuditRow[];
   sourceMatches: SourceMatch[];
   passageRows: PassageQualityRow[];
+  positionDistribution: EbsrPositionDistribution;
 };
 
 const outputDir = path.resolve("exemplars/pssa_grade3_ebsr");
@@ -171,6 +188,7 @@ export function buildGrade3EbsrItems(): Grade3EbsrItem[] {
         ["A beetle skated over the surface, and a robin hopped in the wet grass.", "A beetle skated over the surface, and a robin hopped in the wet grass.", "background", false, "This is a later scene, not evidence explaining the glow."],
         ["The class wrote a creek notice for families.", "The class wrote a creek notice for families.", "too_narrow", false, "This is a result of the study, not the main evidence for why the glow was strongest."],
       ],
+      partBOrder: [0, 2, 1, 3],
     }),
     makeItem({
       itemId: "pssa_ebsr_g3_map_01",
@@ -186,6 +204,7 @@ export function buildGrade3EbsrItems(): Grade3EbsrItem[] {
         ["The town archive closed after Mr. Ortiz put the map in a clear sleeve.", false, "unsupported_inference", false, "The passage does not say the archive closed."],
         ["The children visit the station because the new map has no street names.", false, "opposite_claim", false, "The new map helps visitors compare the town with the old map."],
       ],
+      partAOrder: [1, 0, 2, 3],
       evidenceDescription: "Evidence should show the old map being used to compare past and present.",
       partBStem: "Which two pieces of evidence best support the answer in Part One?",
       partBChoices: [
@@ -194,6 +213,7 @@ export function buildGrade3EbsrItems(): Grade3EbsrItem[] {
         ["He slid a flat card under one corner, opened the first fold, and placed small cloth weights along the edges.", "He slid a flat card under one corner, opened the first fold, and placed small cloth weights along the edges.", "background", false, "This tells how the map was handled, not what people learned from it."],
         ["Dust covered the front, but blue rail lines still crossed the page.", "Dust covered the front, but blue rail lines still crossed the page.", "too_narrow", false, "This describes the map's appearance, not the larger comparison of past and present."],
       ],
+      partBOrder: [2, 0, 3, 1],
     }),
     makeItem({
       itemId: "pssa_ebsr_g3_lunch_01",
@@ -209,6 +229,7 @@ export function buildGrade3EbsrItems(): Grade3EbsrItem[] {
         ["The observations show that the cafeteria needs new shelves before the line can improve.", false, "opposite_claim", false, "No new shelves are needed."],
         ["The observations explain why pizza trays are warmer than soup bowls.", false, "wrong_section", false, "Pizza trays are used later to test the setup, not to explain the original fix."],
       ],
+      partAOrder: [1, 2, 0, 3],
       evidenceDescription: "Evidence should connect the class observations to the specific line changes.",
       partBStem: "Which two details best support the answer in Part One?",
       partBChoices: [
@@ -217,6 +238,7 @@ export function buildGrade3EbsrItems(): Grade3EbsrItem[] {
         ["At lunch, the line still made noise, but it moved more smoothly.", "At lunch, the line still made noise, but it moved more smoothly.", "background", false, "This reports the result after the changes, not how observations led to the changes."],
         ["Mrs. Lane circled that note in purple marker.", "Mrs. Lane circled that note in purple marker.", "too_narrow", false, "This is a later classroom note and does not explain the relationship between observations and changes."],
       ],
+      partBOrder: [0, 1, 2, 3],
     }),
     makeItem({
       itemId: "pssa_ebsr_g3_mural_01",
@@ -232,6 +254,7 @@ export function buildGrade3EbsrItems(): Grade3EbsrItem[] {
         ["A mural is successful when each painted line is perfectly smooth.", false, "opposite_claim", false, "The narrator says the river is not perfectly smooth but still works."],
         ["A library wall should show buses, gardens, and birds from the neighborhood.", false, "too_narrow", false, "Those details are part of the mural, not its message."],
       ],
+      partAOrder: [1, 2, 3, 0],
       evidenceDescription: "Evidence should show how the narrator turns the drip mistake into a meaningful part of the mural.",
       partBStem: "Which two details best support the answer in Part One?",
       partBChoices: [
@@ -240,6 +263,7 @@ export function buildGrade3EbsrItems(): Grade3EbsrItem[] {
         ["The wall was rough brick, and chalk lines crossed it like a giant puzzle.", "The wall was rough brick, and chalk lines crossed it like a giant puzzle.", "background", false, "This describes the work area, not the message about mistakes."],
         ["A woman had stopped to take a picture of the sparrows.", "A woman had stopped to take a picture of the sparrows.", "background", false, "This shows someone noticed the mural later, but it does not explain how the narrator handled the mistake."],
       ],
+      partBOrder: [2, 3, 0, 1],
     }),
     makeItem({
       itemId: "pssa_ebsr_g3_cart_01",
@@ -263,6 +287,7 @@ export function buildGrade3EbsrItems(): Grade3EbsrItem[] {
         ["After the repair, the cart still squeaked a little.", "After the repair, the cart still squeaked a little.", "background", false, "This detail comes after the repair and does not explain why the steps work."],
         ["The green cart in the art room did not.", "The green cart in the art room did not.", "too_narrow", false, "This states the problem, not how the repair steps solve it."],
       ],
+      partBOrder: [2, 0, 1, 3],
     }),
   ];
 }
@@ -276,24 +301,28 @@ function makeItem(config: {
   reportingCategory: "A" | "B";
   partAStem: string;
   partAChoices: Array<[string, boolean, string | null, boolean, string]>;
+  partAOrder?: [number, number, number, number];
   evidenceDescription: string;
   partBStem: string;
   partBChoices: Array<[string, string, EbsrEvidenceChoice["evidenceRole"], boolean, string]>;
+  partBOrder?: [number, number, number, number];
 }): Grade3EbsrItem {
-  const partAChoices = config.partAChoices.map(([text, _isCorrect, role, supportsPartA, rationale]) => ({
+  const partAInputs = config.partAOrder ? config.partAOrder.map((index) => config.partAChoices[index]) : config.partAChoices;
+  const partBInputs = config.partBOrder ? config.partBOrder.map((index) => config.partBChoices[index]) : config.partBChoices;
+  const partAChoices = partAInputs.map(([text, _isCorrect, role, supportsPartA, rationale]) => ({
     text,
     distractorRole: role,
     supportsPartA,
     rationale,
   }));
-  const partBChoices = config.partBChoices.map(([text, quotedSpan, evidenceRole, supportsPartA, rationale]) => ({
+  const partBChoices = partBInputs.map(([text, quotedSpan, evidenceRole, supportsPartA, rationale]) => ({
     text,
     quotedSpan,
     evidenceRole,
     supportsPartA,
     rationale,
   }));
-  const correctIndex = config.partAChoices.findIndex((choice) => choice[1]);
+  const correctIndex = partAInputs.findIndex((choice) => choice[1]);
   const correctIndices = partBChoices
     .map((choice, index) => choice.supportsPartA ? index : -1)
     .filter((index) => index >= 0) as [number, number];
@@ -370,6 +399,7 @@ export function auditGrade3EbsrItems(items = buildGrade3EbsrItems()): EbsrAuditB
   const passageById = new Map(passages.map((passage) => [passage.id, passage]));
   const passageRows = buildPssaPassageQualityReport(passages);
   const sourceCorpus = loadSourceCorpus();
+  const positionDistribution = buildEbsrPositionDistribution(items);
   const rows: EbsrAuditRow[] = [];
   const sourceMatches: SourceMatch[] = [];
   for (const item of items) {
@@ -387,7 +417,18 @@ export function auditGrade3EbsrItems(items = buildGrade3EbsrItems()): EbsrAuditB
     sourceMatches.push(...itemSourceMatches);
     const sourceComplianceResult: Result = itemSourceMatches.some((match) => match.result === "FAIL") ? "FAIL" : "PASS";
     if (sourceComplianceResult === "FAIL") notes.push("PSSA_ITEM_SOURCE_COMPLIANCE_NO_COPY");
-    const finalEbsrResult: Result = [schemaResult, partAResult, spansResult, supportResult, countResult, skillMatchResult, scoringResult, sourceComplianceResult].every((result) => result === "PASS") ? "PASS" : "FAIL";
+    if (positionDistribution.ebsrPositionBiasResult === "FAIL") notes.push("PSSA_EBSR_ANSWER_POSITION_DISTRIBUTION");
+    const finalEbsrResult: Result = [
+      schemaResult,
+      partAResult,
+      spansResult,
+      supportResult,
+      countResult,
+      skillMatchResult,
+      scoringResult,
+      sourceComplianceResult,
+      positionDistribution.ebsrPositionBiasResult,
+    ].every((result) => result === "PASS") ? "PASS" : "FAIL";
     rows.push({
       itemId: item.itemId,
       gradeLevel: 3,
@@ -407,11 +448,55 @@ export function auditGrade3EbsrItems(items = buildGrade3EbsrItems()): EbsrAuditB
       skillMatchResult,
       scoringResult,
       sourceComplianceResult,
+      ...positionDistribution,
       finalEbsrResult,
       notes: notes.join("; ") || "PASS",
     });
   }
-  return { items, rows, sourceMatches, passageRows };
+  return { items, rows, sourceMatches, passageRows, positionDistribution };
+}
+
+export function buildEbsrPositionDistribution(items: Grade3EbsrItem[]): EbsrPositionDistribution {
+  const partACounts = [0, 0, 0, 0];
+  const pairCounts = new Map<string, number>();
+  for (const item of items) {
+    partACounts[item.partA.correctIndex] = (partACounts[item.partA.correctIndex] ?? 0) + 1;
+    const pair = normalizedPair(item.partB.correctIndices);
+    pairCounts.set(pair, (pairCounts.get(pair) ?? 0) + 1);
+  }
+  const n = items.length;
+  const maxPerPartAPosition = Math.ceil(n / 4);
+  const partAUsed = partACounts.filter((count) => count > 0).length;
+  const maxPartACount = Math.max(...partACounts);
+  const allSamePartA = partAUsed === 1 && n > 1;
+  const partAPositionBiasResult: Result = maxPartACount > maxPerPartAPosition || allSamePartA || (n >= 5 && partAUsed < 3) ? "FAIL" : "PASS";
+
+  const firstTwoCount = pairCounts.get("0,1") ?? 0;
+  const maxPairCount = Math.max(0, ...pairCounts.values());
+  const partBPatternsUsed = pairCounts.size;
+  const allSamePartB = partBPatternsUsed === 1 && n > 1;
+  const partBPositionBiasResult: Result = allSamePartB || firstTwoCount > 2 || (n === 5 && maxPairCount > 2) || (n >= 5 && partBPatternsUsed < 3) ? "FAIL" : "PASS";
+  const ebsrPositionBiasResult: Result = partAPositionBiasResult === "PASS" && partBPositionBiasResult === "PASS" ? "PASS" : "FAIL";
+  const partADistribution = `A:${partACounts[0]} B:${partACounts[1]} C:${partACounts[2]} D:${partACounts[3]}`;
+  const partBDistribution = [...pairCounts.entries()]
+    .sort(([a], [b]) => a.localeCompare(b))
+    .map(([pair, count]) => `${pair}:${count}`)
+    .join(" ");
+  const notes: string[] = [];
+  if (partAPositionBiasResult === "FAIL") notes.push(`Part A distribution ${partADistribution} violates max ${maxPerPartAPosition} or minimum 3 positions.`);
+  if (partBPositionBiasResult === "FAIL") notes.push(`Part B pair distribution ${partBDistribution} violates max pattern/first-two/minimum-pattern rules.`);
+  return {
+    partACorrectPositionDistribution: partADistribution,
+    partBCorrectPairDistribution: partBDistribution,
+    partAPositionBiasResult,
+    partBPositionBiasResult,
+    ebsrPositionBiasResult,
+    positionBiasNotes: notes.join(" ") || "PSSA_EBSR_ANSWER_POSITION_DISTRIBUTION passed.",
+  };
+}
+
+function normalizedPair(indices: [number, number] | number[]) {
+  return [...indices].sort((a, b) => a - b).join(",");
 }
 
 function validateSchema(item: Grade3EbsrItem, notes: string[]): Result {
@@ -493,7 +578,12 @@ function loadSourceCorpus(): SourceCorpusEntry[] {
       const text = path.extname(file).toLowerCase() === ".pdf"
         ? extractAsciiTextFromPdfBytes(buffer)
         : buffer.toString("utf8");
-      files.push({ file: path.relative(process.cwd(), file), text, normalizedText: ` ${normalizeForScan(text)} ` });
+      files.push({
+        file: path.relative(process.cwd(), file),
+        text,
+        normalizedText: ` ${normalizeForScan(text)} `,
+        contentNormalizedText: ` ${contentTokensForScan(text).join(" ")} `,
+      });
     }
   }
   sourceCorpusCache = files;
@@ -561,11 +651,18 @@ function sourceScanFields(item: Grade3EbsrItem, passage: PssaPassageAuditInput |
 }
 
 function longestSourceMatch(text: string, corpus: SourceCorpusEntry[]) {
-  const tokens = tokenizeForScan(text).filter((token) => token.length > 2);
+  const rawTokens = tokenizeForScan(text);
+  const contentTokens = contentTokensForScan(text);
+  const rawBest = longestSourceMatchForTokens(rawTokens, corpus, "raw");
+  const contentBest = longestSourceMatchForTokens(contentTokens, corpus, "content");
+  return rawBest.tokens >= contentBest.tokens ? rawBest : contentBest;
+}
+
+function longestSourceMatchForTokens(tokens: string[], corpus: SourceCorpusEntry[], mode: "raw" | "content") {
   let best = { file: "", ngram: "", tokens: 0, score: 0 };
   if (tokens.length < 4) return best;
   for (const source of corpus) {
-    const sourceNorm = source.normalizedText;
+    const sourceNorm = mode === "raw" ? source.normalizedText : source.contentNormalizedText;
     const maxN = Math.min(tokens.length, 18);
     for (let n = maxN; n >= 4; n--) {
       if (n < best.tokens) break;
@@ -582,6 +679,10 @@ function longestSourceMatch(text: string, corpus: SourceCorpusEntry[]) {
 
 function tokenizeForScan(text: string) {
   return normalizeForScan(text).split(" ").filter(Boolean);
+}
+
+function contentTokensForScan(text: string) {
+  return tokenizeForScan(text).filter((token) => token.length > 2);
 }
 
 function normalizeForScan(text: string) {
@@ -602,8 +703,23 @@ export function assertGrade3EbsrContract() {
   assert.equal(new Set(bundle.items.map((item) => item.passageId)).size, 5);
   assert.equal(bundle.rows.filter((row) => row.finalEbsrResult === "PASS").length, 5);
   assert.equal(bundle.rows.filter((row) => row.sourceComplianceResult === "PASS").length, 5);
+  assert.equal(bundle.positionDistribution.ebsrPositionBiasResult, "PASS");
+  assert.equal(bundle.positionDistribution.partACorrectPositionDistribution, "A:2 B:1 C:1 D:1");
+  assert.equal(new Set(bundle.items.map((item) => normalizedPair(item.partB.correctIndices))).size >= 3, true);
   assert.equal(bundle.passageRows.filter((row) => row.result === "FAIL").length, 0);
   assert.equal(hasBlockingPassageQualityFailure(bundle.passageRows), false);
+
+  const allPartA = forcePartAPosition(buildGrade3EbsrItems(), 0);
+  assert.equal(auditGrade3EbsrItems(allPartA).positionDistribution.ebsrPositionBiasResult, "FAIL");
+  const allPartB = forcePartBPair(buildGrade3EbsrItems(), [0, 1]);
+  assert.equal(auditGrade3EbsrItems(allPartB).positionDistribution.ebsrPositionBiasResult, "FAIL");
+  assert.equal(buildEbsrPositionDistribution(buildGrade3EbsrItems()).ebsrPositionBiasResult, "PASS");
+
+  for (const item of bundle.items) {
+    assert.equal(item.partA.choices[item.partA.correctIndex].supportsPartA, true);
+    assert.deepEqual(item.partB.correctIndices.map((index) => item.partB.choices[index].supportsPartA), [true, true]);
+    assert.equal(item.partB.choices.filter((choice) => choice.supportsPartA).length, 2);
+  }
 
   const adversarial = buildAdversarialFixtures();
   for (const fixture of adversarial) {
@@ -617,6 +733,12 @@ export function assertGrade3EbsrContract() {
   assert.equal(sourceRow.sourceComplianceResult, "FAIL");
   assert.ok(sourceRow.notes.includes("PSSA_ITEM_SOURCE_COMPLIANCE_NO_COPY"));
 
+  const sourceShortWords = structuredClone(sourceNegative);
+  sourceShortWords.itemId = "pssa_ebsr_fixture_source_copy_short_words";
+  sourceShortWords.partA.stem = "Part One identify the central theme of the passage single select MC";
+  const sourceShortWordsRow = auditGrade3EbsrItems([sourceShortWords]).rows[0];
+  assert.equal(sourceShortWordsRow.sourceComplianceResult, "FAIL");
+
   const boilerplateOnly = structuredClone(buildGrade3EbsrItems()[0]);
   boilerplateOnly.itemId = "pssa_ebsr_fixture_boilerplate_only";
   boilerplateOnly.partA.stem = "Part One";
@@ -625,16 +747,67 @@ export function assertGrade3EbsrContract() {
   assert.equal(boilerplateScan.some((match) => match.matchType === "content-bearing" && match.result === "FAIL"), false);
 }
 
+function forcePartAPosition(items: Grade3EbsrItem[], targetIndex: number) {
+  return items.map((item) => {
+    const copy = structuredClone(item);
+    copy.partA.choices = moveChoiceToIndex(copy.partA.choices, copy.partA.correctIndex, targetIndex);
+    syncPartA(copy);
+    return copy;
+  });
+}
+
+function forcePartBPair(items: Grade3EbsrItem[], targetPair: [number, number]) {
+  return items.map((item) => {
+    const copy = structuredClone(item);
+    const correctChoices = copy.partB.choices.filter((choice) => choice.supportsPartA);
+    const distractors = copy.partB.choices.filter((choice) => !choice.supportsPartA);
+    const nextChoices: EbsrEvidenceChoice[] = [];
+    let correctCursor = 0;
+    let distractorCursor = 0;
+    for (let index = 0; index < copy.partB.choices.length; index++) {
+      nextChoices[index] = targetPair.includes(index) ? correctChoices[correctCursor++] : distractors[distractorCursor++];
+    }
+    copy.partB.choices = nextChoices;
+    syncPartB(copy);
+    return copy;
+  });
+}
+
+function moveChoiceToIndex<T extends { supportsPartA?: boolean }>(choices: T[], fromIndex: number, toIndex: number) {
+  const next = [...choices];
+  const [choice] = next.splice(fromIndex, 1);
+  next.splice(toIndex, 0, choice);
+  return next;
+}
+
+function syncPartA(item: Grade3EbsrItem) {
+  item.partA.correctIndex = item.partA.choices.findIndex((choice) => choice.supportsPartA);
+  item.partA.rationale = item.partA.choices[item.partA.correctIndex].rationale;
+  item.partA.distractorRationales = item.partA.choices.map((choice) => choice.rationale);
+  item.partA.distractorRoles = item.partA.choices.map((choice) => choice.distractorRole ?? "correct");
+  item.responseSpec.partA.choices = item.partA.choices.map((choice) => choice.text);
+  item.correctResponse.partA.correctIndex = item.partA.correctIndex;
+}
+
+function syncPartB(item: Grade3EbsrItem) {
+  item.partB.correctIndices = item.partB.choices
+    .map((choice, index) => choice.supportsPartA ? index : -1)
+    .filter((index) => index >= 0) as [number, number];
+  item.responseSpec.partB.choices = item.partB.choices.map((choice) => ({ text: choice.text, quotedSpan: choice.quotedSpan }));
+  item.correctResponse.partB.correctIndices = item.partB.correctIndices;
+}
+
 function buildAdversarialFixtures() {
   const [creek] = buildGrade3EbsrItems();
   const topicOnly = structuredClone(creek);
   topicOnly.itemId = "pssa_ebsr_fixture_topic_only_support";
-  topicOnly.partB.choices[1].supportsPartA = false;
-  topicOnly.partB.choices[1].evidenceRole = "too_narrow";
+  topicOnly.partB.choices[topicOnly.partB.correctIndices[1]].supportsPartA = false;
+  topicOnly.partB.choices[topicOnly.partB.correctIndices[1]].evidenceRole = "too_narrow";
 
   const equallyValidDistractor = structuredClone(creek);
   equallyValidDistractor.itemId = "pssa_ebsr_fixture_equally_valid_distractor";
-  equallyValidDistractor.partB.choices[2].supportsPartA = true;
+  const firstDistractorIndex = equallyValidDistractor.partB.choices.findIndex((choice, index) => !equallyValidDistractor.partB.correctIndices.includes(index));
+  equallyValidDistractor.partB.choices[firstDistractorIndex].supportsPartA = true;
 
   const wrongSkill = structuredClone(creek);
   wrongSkill.itemId = "pssa_ebsr_fixture_wrong_skill";
@@ -692,7 +865,7 @@ function renderReviewerPreview(bundle: EbsrAuditBundle) {
   const lines = ["# Grade 3 PSSA EBSR Reviewer Preview", "", "Includes keys, evidence spans, scoring, source scan, and gate results. All items remain PENDING/candidate.", ""];
   for (const item of bundle.items) {
     const row = rowById.get(item.itemId);
-    lines.push(`## ${item.itemId}`, "", `- Passage: ${item.passageTitle} (${item.passageId})`, `- EC: ${item.eligibleContent}`, `- Part A correct: ${String.fromCharCode(65 + item.partA.correctIndex)}. ${item.partA.choices[item.partA.correctIndex].text}`, `- Part B correct: ${item.partB.correctIndices.map((index) => index + 1).join(", ")}`, `- Gate result: ${row?.finalEbsrResult}`, `- Notes: ${row?.notes}`, "", "### Evidence Options");
+    lines.push(`## ${item.itemId}`, "", `- Passage: ${item.passageTitle} (${item.passageId})`, `- EC: ${item.eligibleContent}`, `- Part A correct: ${String.fromCharCode(65 + item.partA.correctIndex)}. ${item.partA.choices[item.partA.correctIndex].text}`, `- Part B correct: ${item.partB.correctIndices.map((index) => index + 1).join(", ")}`, `- Position-bias gate: ${row?.ebsrPositionBiasResult} (${row?.partACorrectPositionDistribution}; ${row?.partBCorrectPairDistribution})`, `- Gate result: ${row?.finalEbsrResult}`, `- Notes: ${row?.notes}`, "", "### Evidence Options");
     item.partB.choices.forEach((choice, index) => {
       lines.push(`- ${index + 1}. ${choice.supportsPartA ? "CORRECT" : "DISTRACTOR"}: "${choice.quotedSpan}"`);
       lines.push(`  - ${choice.rationale}`);
@@ -735,12 +908,22 @@ function renderSummary(bundle: EbsrAuditBundle) {
 - PSSA_EBSR_SKILL_MATCH
 - PSSA_EBSR_PARTIAL_CREDIT_VALID
 - PSSA_ITEM_SOURCE_COMPLIANCE_NO_COPY
+- PSSA_EBSR_ANSWER_POSITION_DISTRIBUTION
+
+## Position Distribution
+
+- Before #4k-fix Part A distribution: A:5 B:0 C:0 D:0
+- Before #4k-fix Part B pair distribution: 0,1:5
+- After #4k-fix Part A distribution: ${bundle.positionDistribution.partACorrectPositionDistribution}
+- After #4k-fix Part B pair distribution: ${bundle.positionDistribution.partBCorrectPairDistribution}
+- PSSA_EBSR_ANSWER_POSITION_DISTRIBUTION: ${bundle.positionDistribution.ebsrPositionBiasResult}
+- Notes: ${bundle.positionDistribution.positionBiasNotes}
 
 ## Item PASS Table
 
-| itemId | passage | EC | Part B correct count | spans found | support | skill | scoring | source | final |
-|---|---|---|---:|---|---|---|---|---|---|
-${bundle.rows.map((row) => `| ${row.itemId} | ${row.passageTitle} | ${row.eligibleContent} | ${row.partBCorrectIndices.split("|").length} | ${row.allPartBSpansFound} | ${row.supportLinkResult} | ${row.skillMatchResult} | ${row.scoringResult} | ${row.sourceComplianceResult} | ${row.finalEbsrResult} |`).join("\n")}
+| itemId | passage | EC | Part A pos | Part B pair | spans found | support | skill | scoring | source | position | final |
+|---|---|---|---:|---|---|---|---|---|---|---|---|
+${bundle.rows.map((row) => `| ${row.itemId} | ${row.passageTitle} | ${row.eligibleContent} | ${row.partACorrectIndex} | ${row.partBCorrectIndices.replace(/\|/g, ",")} | ${row.allPartBSpansFound} | ${row.supportLinkResult} | ${row.skillMatchResult} | ${row.scoringResult} | ${row.sourceComplianceResult} | ${row.ebsrPositionBiasResult} | ${row.finalEbsrResult} |`).join("\n")}
 
 ## Passage Gate Rerun
 
@@ -750,7 +933,7 @@ ${passageRows.map((row) => `| ${row.passageId} | ${row.ruleId} | ${row.result} |
 
 ## Source-Compliance Scan Method
 
-Case, punctuation, and whitespace are normalized. Item fields and assigned passage text are scanned against \`reference/pssa-released-items/\`, \`reference/pssa-item-catalog/\`, and extracted project source text where present. Content-bearing matches of 8+ normalized tokens are blockers. Generic directions such as "Choose two answers", "Part One", and "Part Two" are reported as boilerplate and do not block by themselves.
+Case, punctuation, and whitespace are normalized. Raw normalized n-grams preserve short words, and a separate content-token stream is also scanned. Item fields and assigned passage text are scanned against \`reference/pssa-released-items/\`, \`reference/pssa-item-catalog/\`, and extracted project source text where present. Content-bearing matches of 8+ normalized tokens are blockers. Generic directions such as "Choose two answers", "Part One", and "Part Two" are reported as boilerplate and do not block by themselves.
 
 | itemId | matched source | field | longest n-gram | overlap | match type | result |
 |---|---|---|---|---:|---|---|

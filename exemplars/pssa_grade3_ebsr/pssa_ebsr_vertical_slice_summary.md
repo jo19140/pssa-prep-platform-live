@@ -19,16 +19,26 @@
 - PSSA_EBSR_SKILL_MATCH
 - PSSA_EBSR_PARTIAL_CREDIT_VALID
 - PSSA_ITEM_SOURCE_COMPLIANCE_NO_COPY
+- PSSA_EBSR_ANSWER_POSITION_DISTRIBUTION
+
+## Position Distribution
+
+- Before #4k-fix Part A distribution: A:5 B:0 C:0 D:0
+- Before #4k-fix Part B pair distribution: 0,1:5
+- After #4k-fix Part A distribution: A:2 B:1 C:1 D:1
+- After #4k-fix Part B pair distribution: 0,1:1 0,2:1 1,2:1 1,3:1 2,3:1
+- PSSA_EBSR_ANSWER_POSITION_DISTRIBUTION: PASS
+- Notes: PSSA_EBSR_ANSWER_POSITION_DISTRIBUTION passed.
 
 ## Item PASS Table
 
-| itemId | passage | EC | Part B correct count | spans found | support | skill | scoring | source | final |
-|---|---|---|---:|---|---|---|---|---|---|
-| pssa_ebsr_g3_creek_01 | The Night the Creek Glowed | E03.B-K.1.1.2 | 2 | PASS | PASS | PASS | PASS | PASS | PASS |
-| pssa_ebsr_g3_map_01 | A Map Under the Bench | E03.B-K.1.1.2 | 2 | PASS | PASS | PASS | PASS | PASS | PASS |
-| pssa_ebsr_g3_lunch_01 | The Bell That Saved Lunch | E03.B-K.1.1.3 | 2 | PASS | PASS | PASS | PASS | PASS | PASS |
-| pssa_ebsr_g3_mural_01 | Blue Paint for Saturday | E03.A-K.1.1.2 | 2 | PASS | PASS | PASS | PASS | PASS | PASS |
-| pssa_ebsr_g3_cart_01 | The Cart That Would Not Turn | E03.B-K.1.1.3 | 2 | PASS | PASS | PASS | PASS | PASS | PASS |
+| itemId | passage | EC | Part A pos | Part B pair | spans found | support | skill | scoring | source | position | final |
+|---|---|---|---:|---|---|---|---|---|---|---|---|
+| pssa_ebsr_g3_creek_01 | The Night the Creek Glowed | E03.B-K.1.1.2 | 0 | 0,2 | PASS | PASS | PASS | PASS | PASS | PASS | PASS |
+| pssa_ebsr_g3_map_01 | A Map Under the Bench | E03.B-K.1.1.2 | 1 | 1,3 | PASS | PASS | PASS | PASS | PASS | PASS | PASS |
+| pssa_ebsr_g3_lunch_01 | The Bell That Saved Lunch | E03.B-K.1.1.3 | 2 | 0,1 | PASS | PASS | PASS | PASS | PASS | PASS | PASS |
+| pssa_ebsr_g3_mural_01 | Blue Paint for Saturday | E03.A-K.1.1.2 | 3 | 2,3 | PASS | PASS | PASS | PASS | PASS | PASS | PASS |
+| pssa_ebsr_g3_cart_01 | The Cart That Would Not Turn | E03.B-K.1.1.3 | 0 | 1,2 | PASS | PASS | PASS | PASS | PASS | PASS | PASS |
 
 ## Passage Gate Rerun
 
@@ -57,13 +67,13 @@
 
 ## Source-Compliance Scan Method
 
-Case, punctuation, and whitespace are normalized. Item fields and assigned passage text are scanned against `reference/pssa-released-items/`, `reference/pssa-item-catalog/`, and extracted project source text where present. Content-bearing matches of 8+ normalized tokens are blockers. Generic directions such as "Choose two answers", "Part One", and "Part Two" are reported as boilerplate and do not block by themselves.
+Case, punctuation, and whitespace are normalized. Raw normalized n-grams preserve short words, and a separate content-token stream is also scanned. Item fields and assigned passage text are scanned against `reference/pssa-released-items/`, `reference/pssa-item-catalog/`, and extracted project source text where present. Content-bearing matches of 8+ normalized tokens are blockers. Generic directions such as "Choose two answers", "Part One", and "Part Two" are reported as boilerplate and do not block by themselves.
 
 | itemId | matched source | field | longest n-gram | overlap | match type | result |
 |---|---|---|---|---:|---|---|
-| pssa_ebsr_g3_creek_01 | none | partA.stem |  | 0 | none | PASS |
-| pssa_ebsr_g3_map_01 | none | partA.stem |  | 0 | none | PASS |
-| pssa_ebsr_g3_lunch_01 | none | partA.stem |  | 0 | none | PASS |
+| pssa_ebsr_g3_creek_01 | reference/pssa-item-catalog/tech_questions_1.md | partA.rationale | is supported by the | 0.2857 | content-bearing | PASS |
+| pssa_ebsr_g3_map_01 | reference/pssa-item-catalog/tech_questions_2.md | partB.stem | two pieces of evidence | 0.3333 | content-bearing | PASS |
+| pssa_ebsr_g3_lunch_01 | reference/pssa-released-items/extracted/grade-6/tda-rubric-exemplars.json | assignedPassage.text | the end of the | 0.0132 | content-bearing | PASS |
 | pssa_ebsr_g3_mural_01 | none | partA.stem |  | 0 | none | PASS |
 | pssa_ebsr_g3_cart_01 | none | partA.stem |  | 0 | none | PASS |
 

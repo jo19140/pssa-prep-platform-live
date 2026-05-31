@@ -34,8 +34,8 @@ Which two details best support the answer in Part One?
 Choose two answers.
 
 1. Maya drew a map of three creek spots.
-2. Those clues helped the class ask a better question: why was the glow strongest in one place?
-3. A beetle skated over the surface, and a robin hopped in the wet grass.
+2. A beetle skated over the surface, and a robin hopped in the wet grass.
+3. Those clues helped the class ask a better question: why was the glow strongest in one place?
 4. The class wrote a creek notice for families.
 
 ## A Map Under the Bench
@@ -58,8 +58,8 @@ Nia copied the dotted river path into her notebook. At home, her grandmother rem
 
 What main idea do the details about the old map support?
 
-A. The old map helps people compare how Linden Station and the town changed over time.
-B. The old bench matters because it is more valuable than the map inside the display.
+A. The old bench matters because it is more valuable than the map inside the display.
+B. The old map helps people compare how Linden Station and the town changed over time.
 C. The town archive closed after Mr. Ortiz put the map in a clear sleeve.
 D. The children visit the station because the new map has no street names.
 
@@ -69,10 +69,10 @@ Which two pieces of evidence best support the answer in Part One?
 
 Choose two answers.
 
-1. Mr. Ortiz put a new town map beside the old one.
-2. Some streets had new names, and the trolley tracks were gone.
-3. He slid a flat card under one corner, opened the first fold, and placed small cloth weights along the edges.
-4. Dust covered the front, but blue rail lines still crossed the page.
+1. He slid a flat card under one corner, opened the first fold, and placed small cloth weights along the edges.
+2. Mr. Ortiz put a new town map beside the old one.
+3. Dust covered the front, but blue rail lines still crossed the page.
+4. Some streets had new names, and the trolley tracks were gone.
 
 ## The Bell That Saved Lunch
 
@@ -94,9 +94,9 @@ On Friday, the class tried the setup with pizza trays instead of soup bowls. The
 
 How are the students' observations related to the lunch-line changes?
 
-A. The students use the slow spots to choose changes for the lunch line.
-B. The observations prove that students should stop eating soup at lunch.
-C. The observations show that the cafeteria needs new shelves before the line can improve.
+A. The observations prove that students should stop eating soup at lunch.
+B. The observations show that the cafeteria needs new shelves before the line can improve.
+C. The students use the slow spots to choose changes for the lunch line.
 D. The observations explain why pizza trays are warmer than soup bowls.
 
 **Part Two**
@@ -130,10 +130,10 @@ The next morning, my wrist was sore, but I asked Dad to walk past the library. A
 
 Which message is best conveyed by the narrator's work on the mural?
 
-A. A paint mistake can become useful when a person turns it into ripples.
-B. A person should hide mistakes so other people miss them later.
-C. A mural is successful when each painted line is perfectly smooth.
-D. A library wall should show buses, gardens, and birds from the neighborhood.
+A. A person should hide mistakes so other people miss them later.
+B. A mural is successful when each painted line is perfectly smooth.
+C. A library wall should show buses, gardens, and birds from the neighborhood.
+D. A paint mistake can become useful when a person turns it into ripples.
 
 **Part Two**
 
@@ -141,10 +141,10 @@ Which two details best support the answer in Part One?
 
 Choose two answers.
 
-1. I bent close and painted tiny waves around each tail.
-2. But the fish seemed to move, and the wall no longer looked empty.
-3. The wall was rough brick, and chalk lines crossed it like a giant puzzle.
-4. A woman had stopped to take a picture of the sparrows.
+1. The wall was rough brick, and chalk lines crossed it like a giant puzzle.
+2. A woman had stopped to take a picture of the sparrows.
+3. I bent close and painted tiny waves around each tail.
+4. But the fish seemed to move, and the wall no longer looked empty.
 
 ## The Cart That Would Not Turn
 
@@ -177,7 +177,7 @@ Which two details best support the answer in Part One?
 
 Choose two answers.
 
-1. First, you would empty the heavy paper boxes from the bottom shelf.
-2. Weight can hide a small problem.
-3. After the repair, the cart still squeaked a little.
+1. After the repair, the cart still squeaked a little.
+2. First, you would empty the heavy paper boxes from the bottom shelf.
+3. Weight can hide a small problem.
 4. The green cart in the art room did not.
