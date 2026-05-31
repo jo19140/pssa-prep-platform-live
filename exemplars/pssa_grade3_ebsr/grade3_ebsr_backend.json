@@ -1,0 +1,863 @@
+{
+  "generatedAt": "2026-05-31T20:12:13.356Z",
+  "mockOnly": false,
+  "productionImportReady": false,
+  "noDbWrite": true,
+  "items": [
+    {
+      "itemId": "pssa_ebsr_g3_creek_01",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "EBSR",
+      "interactionType": "EBSR",
+      "interactionSubtype": "two_point",
+      "passageId": "pssa_psg_g3_creek_watchers",
+      "passageTitle": "The Night the Creek Glowed",
+      "eligibleContent": "E03.B-K.1.1.2",
+      "ecSkillFamily": "informational_elements",
+      "reportingCategory": "B",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "partA": {
+        "stem": "What is the main idea of the creek passage?",
+        "choices": [
+          {
+            "text": "The class uses creek clues to ask why the glow is strongest in one place.",
+            "distractorRole": null,
+            "supportsPartA": true,
+            "rationale": "This states the passage's main idea and is supported by the class observations."
+          },
+          {
+            "text": "Maya wants families to decide that Pine Creek is unsafe after the heavy rain.",
+            "distractorRole": "opposite_claim",
+            "supportsPartA": false,
+            "rationale": "The notice does not claim the water is safe or unsafe."
+          },
+          {
+            "text": "The teacher asks students to collect creek water in jars for a classroom test.",
+            "distractorRole": "plausible_misreading",
+            "supportsPartA": false,
+            "rationale": "The jars are mentioned, but the class does not touch the water."
+          },
+          {
+            "text": "Neighbors learn that robins and beetles caused the pale green creek glow.",
+            "distractorRole": "unsupported_inference",
+            "supportsPartA": false,
+            "rationale": "The animals appear after the glow fades and do not explain it."
+          }
+        ],
+        "correctIndex": 0,
+        "evidenceNeededDescription": "Evidence should show that the class gathered observations and used them to explain the stronger glow.",
+        "rationale": "This states the passage's main idea and is supported by the class observations.",
+        "distractorRationales": [
+          "This states the passage's main idea and is supported by the class observations.",
+          "The notice does not claim the water is safe or unsafe.",
+          "The jars are mentioned, but the class does not touch the water.",
+          "The animals appear after the glow fades and do not explain it."
+        ],
+        "distractorRoles": [
+          "correct",
+          "opposite_claim",
+          "plausible_misreading",
+          "unsupported_inference"
+        ]
+      },
+      "partB": {
+        "stem": "Which two details best support the answer in Part One?",
+        "instruction": "Choose two answers.",
+        "choices": [
+          {
+            "text": "Maya drew a map of three creek spots.",
+            "quotedSpan": "Maya drew a map of three creek spots.",
+            "evidenceRole": "supports_part_a",
+            "supportsPartA": true,
+            "rationale": "The map shows careful observations from more than one location."
+          },
+          {
+            "text": "Those clues helped the class ask a better question: why was the glow strongest in one place?",
+            "quotedSpan": "Those clues helped the class ask a better question: why was the glow strongest in one place?",
+            "evidenceRole": "supports_part_a",
+            "supportsPartA": true,
+            "rationale": "This directly connects the observations to the main question."
+          },
+          {
+            "text": "A beetle skated over the surface, and a robin hopped in the wet grass.",
+            "quotedSpan": "A beetle skated over the surface, and a robin hopped in the wet grass.",
+            "evidenceRole": "background",
+            "supportsPartA": false,
+            "rationale": "This is a later scene, not evidence explaining the glow."
+          },
+          {
+            "text": "The class wrote a creek notice for families.",
+            "quotedSpan": "The class wrote a creek notice for families.",
+            "evidenceRole": "too_narrow",
+            "supportsPartA": false,
+            "rationale": "This is a result of the study, not the main evidence for why the glow was strongest."
+          }
+        ],
+        "correctIndices": [
+          0,
+          1
+        ]
+      },
+      "scoring": {
+        "totalPoints": 2,
+        "partAPoints": 1,
+        "partBPoints": 1,
+        "requirePartACorrectForFullCredit": true,
+        "partialCreditRules": [
+          {
+            "points": 2,
+            "rule": "Part One is correct and both Part Two evidence choices are correct."
+          },
+          {
+            "points": 1,
+            "rule": "Part One is correct and one Part Two evidence choice is correct, or Part One is incorrect but both Part Two evidence choices are correct."
+          },
+          {
+            "points": 0,
+            "rule": "The response is unsupported, incomplete, or missing."
+          }
+        ],
+        "scoringNotes": "Full credit requires the Part One answer and both supporting evidence choices; unsupported evidence cannot earn full credit."
+      },
+      "responseSpec": {
+        "partA": {
+          "choices": [
+            "The class uses creek clues to ask why the glow is strongest in one place.",
+            "Maya wants families to decide that Pine Creek is unsafe after the heavy rain.",
+            "The teacher asks students to collect creek water in jars for a classroom test.",
+            "Neighbors learn that robins and beetles caused the pale green creek glow."
+          ]
+        },
+        "partB": {
+          "instruction": "Choose two answers.",
+          "choices": [
+            {
+              "text": "Maya drew a map of three creek spots.",
+              "quotedSpan": "Maya drew a map of three creek spots."
+            },
+            {
+              "text": "Those clues helped the class ask a better question: why was the glow strongest in one place?",
+              "quotedSpan": "Those clues helped the class ask a better question: why was the glow strongest in one place?"
+            },
+            {
+              "text": "A beetle skated over the surface, and a robin hopped in the wet grass.",
+              "quotedSpan": "A beetle skated over the surface, and a robin hopped in the wet grass."
+            },
+            {
+              "text": "The class wrote a creek notice for families.",
+              "quotedSpan": "The class wrote a creek notice for families."
+            }
+          ]
+        }
+      },
+      "correctResponse": {
+        "partA": {
+          "correctIndex": 0
+        },
+        "partB": {
+          "correctIndices": [
+            0,
+            1
+          ]
+        }
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_PR_4K_GRADE3_EBSR",
+        "copiedReleasedText": false,
+        "copiedDrcText": false,
+        "noDbWrite": true
+      }
+    },
+    {
+      "itemId": "pssa_ebsr_g3_map_01",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "EBSR",
+      "interactionType": "EBSR",
+      "interactionSubtype": "two_point",
+      "passageId": "pssa_psg_g3_the_map_in_the_station",
+      "passageTitle": "A Map Under the Bench",
+      "eligibleContent": "E03.B-K.1.1.2",
+      "ecSkillFamily": "informational_elements",
+      "reportingCategory": "B",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "partA": {
+        "stem": "What main idea do the details about the old map support?",
+        "choices": [
+          {
+            "text": "The old map helps people compare how Linden Station and the town changed over time.",
+            "distractorRole": null,
+            "supportsPartA": true,
+            "rationale": "The passage repeatedly connects the old map to past-and-present comparison."
+          },
+          {
+            "text": "The old bench matters because it is more valuable than the map inside the display.",
+            "distractorRole": "wrong_emphasis",
+            "supportsPartA": false,
+            "rationale": "The bench is where the map was found, not the main idea."
+          },
+          {
+            "text": "The town archive closed after Mr. Ortiz put the map in a clear sleeve.",
+            "distractorRole": "unsupported_inference",
+            "supportsPartA": false,
+            "rationale": "The passage does not say the archive closed."
+          },
+          {
+            "text": "The children visit the station because the new map has no street names.",
+            "distractorRole": "opposite_claim",
+            "supportsPartA": false,
+            "rationale": "The new map helps visitors compare the town with the old map."
+          }
+        ],
+        "correctIndex": 0,
+        "evidenceNeededDescription": "Evidence should show the old map being used to compare past and present.",
+        "rationale": "The passage repeatedly connects the old map to past-and-present comparison.",
+        "distractorRationales": [
+          "The passage repeatedly connects the old map to past-and-present comparison.",
+          "The bench is where the map was found, not the main idea.",
+          "The passage does not say the archive closed.",
+          "The new map helps visitors compare the town with the old map."
+        ],
+        "distractorRoles": [
+          "correct",
+          "wrong_emphasis",
+          "unsupported_inference",
+          "opposite_claim"
+        ]
+      },
+      "partB": {
+        "stem": "Which two pieces of evidence best support the answer in Part One?",
+        "instruction": "Choose two answers.",
+        "choices": [
+          {
+            "text": "Mr. Ortiz put a new town map beside the old one.",
+            "quotedSpan": "Mr. Ortiz put a new town map beside the old one.",
+            "evidenceRole": "supports_part_a",
+            "supportsPartA": true,
+            "rationale": "The two maps make comparison possible."
+          },
+          {
+            "text": "Some streets had new names, and the trolley tracks were gone.",
+            "quotedSpan": "Some streets had new names, and the trolley tracks were gone.",
+            "evidenceRole": "supports_part_a",
+            "supportsPartA": true,
+            "rationale": "This shows how the town had changed."
+          },
+          {
+            "text": "He slid a flat card under one corner, opened the first fold, and placed small cloth weights along the edges.",
+            "quotedSpan": "He slid a flat card under one corner, opened the first fold, and placed small cloth weights along the edges.",
+            "evidenceRole": "background",
+            "supportsPartA": false,
+            "rationale": "This tells how the map was handled, not what people learned from it."
+          },
+          {
+            "text": "Dust covered the front, but blue rail lines still crossed the page.",
+            "quotedSpan": "Dust covered the front, but blue rail lines still crossed the page.",
+            "evidenceRole": "too_narrow",
+            "supportsPartA": false,
+            "rationale": "This describes the map's appearance, not the larger comparison of past and present."
+          }
+        ],
+        "correctIndices": [
+          0,
+          1
+        ]
+      },
+      "scoring": {
+        "totalPoints": 2,
+        "partAPoints": 1,
+        "partBPoints": 1,
+        "requirePartACorrectForFullCredit": true,
+        "partialCreditRules": [
+          {
+            "points": 2,
+            "rule": "Part One is correct and both Part Two evidence choices are correct."
+          },
+          {
+            "points": 1,
+            "rule": "Part One is correct and one Part Two evidence choice is correct, or Part One is incorrect but both Part Two evidence choices are correct."
+          },
+          {
+            "points": 0,
+            "rule": "The response is unsupported, incomplete, or missing."
+          }
+        ],
+        "scoringNotes": "Full credit requires the Part One answer and both supporting evidence choices; unsupported evidence cannot earn full credit."
+      },
+      "responseSpec": {
+        "partA": {
+          "choices": [
+            "The old map helps people compare how Linden Station and the town changed over time.",
+            "The old bench matters because it is more valuable than the map inside the display.",
+            "The town archive closed after Mr. Ortiz put the map in a clear sleeve.",
+            "The children visit the station because the new map has no street names."
+          ]
+        },
+        "partB": {
+          "instruction": "Choose two answers.",
+          "choices": [
+            {
+              "text": "Mr. Ortiz put a new town map beside the old one.",
+              "quotedSpan": "Mr. Ortiz put a new town map beside the old one."
+            },
+            {
+              "text": "Some streets had new names, and the trolley tracks were gone.",
+              "quotedSpan": "Some streets had new names, and the trolley tracks were gone."
+            },
+            {
+              "text": "He slid a flat card under one corner, opened the first fold, and placed small cloth weights along the edges.",
+              "quotedSpan": "He slid a flat card under one corner, opened the first fold, and placed small cloth weights along the edges."
+            },
+            {
+              "text": "Dust covered the front, but blue rail lines still crossed the page.",
+              "quotedSpan": "Dust covered the front, but blue rail lines still crossed the page."
+            }
+          ]
+        }
+      },
+      "correctResponse": {
+        "partA": {
+          "correctIndex": 0
+        },
+        "partB": {
+          "correctIndices": [
+            0,
+            1
+          ]
+        }
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_PR_4K_GRADE3_EBSR",
+        "copiedReleasedText": false,
+        "copiedDrcText": false,
+        "noDbWrite": true
+      }
+    },
+    {
+      "itemId": "pssa_ebsr_g3_lunch_01",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "EBSR",
+      "interactionType": "EBSR",
+      "interactionSubtype": "two_point",
+      "passageId": "pssa_psg_g3_a_cooler_lunch_line",
+      "passageTitle": "The Bell That Saved Lunch",
+      "eligibleContent": "E03.B-K.1.1.3",
+      "ecSkillFamily": "informational_elements",
+      "reportingCategory": "B",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "partA": {
+        "stem": "How are the students' observations related to the lunch-line changes?",
+        "choices": [
+          {
+            "text": "The students use the slow spots to choose changes for the lunch line.",
+            "distractorRole": null,
+            "supportsPartA": true,
+            "rationale": "The class studies the line before moving milk, spoons, and napkins."
+          },
+          {
+            "text": "The observations prove that students should stop eating soup at lunch.",
+            "distractorRole": "unsupported_inference",
+            "supportsPartA": false,
+            "rationale": "The passage keeps soup but changes the line setup."
+          },
+          {
+            "text": "The observations show that the cafeteria needs new shelves before the line can improve.",
+            "distractorRole": "opposite_claim",
+            "supportsPartA": false,
+            "rationale": "No new shelves are needed."
+          },
+          {
+            "text": "The observations explain why pizza trays are warmer than soup bowls.",
+            "distractorRole": "wrong_section",
+            "supportsPartA": false,
+            "rationale": "Pizza trays are used later to test the setup, not to explain the original fix."
+          }
+        ],
+        "correctIndex": 0,
+        "evidenceNeededDescription": "Evidence should connect the class observations to the specific line changes.",
+        "rationale": "The class studies the line before moving milk, spoons, and napkins.",
+        "distractorRationales": [
+          "The class studies the line before moving milk, spoons, and napkins.",
+          "The passage keeps soup but changes the line setup.",
+          "No new shelves are needed.",
+          "Pizza trays are used later to test the setup, not to explain the original fix."
+        ],
+        "distractorRoles": [
+          "correct",
+          "unsupported_inference",
+          "opposite_claim",
+          "wrong_section"
+        ]
+      },
+      "partB": {
+        "stem": "Which two details best support the answer in Part One?",
+        "instruction": "Choose two answers.",
+        "choices": [
+          {
+            "text": "They counted how many times the line paused.",
+            "quotedSpan": "They counted how many times the line paused.",
+            "evidenceRole": "supports_part_a",
+            "supportsPartA": true,
+            "rationale": "Counting pauses shows the class gathered information about the problem."
+          },
+          {
+            "text": "The class noticed two slow spots.",
+            "quotedSpan": "The class noticed two slow spots.",
+            "evidenceRole": "supports_part_a",
+            "supportsPartA": true,
+            "rationale": "The slow spots explain why the later changes are chosen."
+          },
+          {
+            "text": "At lunch, the line still made noise, but it moved more smoothly.",
+            "quotedSpan": "At lunch, the line still made noise, but it moved more smoothly.",
+            "evidenceRole": "background",
+            "supportsPartA": false,
+            "rationale": "This reports the result after the changes, not how observations led to the changes."
+          },
+          {
+            "text": "Mrs. Lane circled that note in purple marker.",
+            "quotedSpan": "Mrs. Lane circled that note in purple marker.",
+            "evidenceRole": "too_narrow",
+            "supportsPartA": false,
+            "rationale": "This is a later classroom note and does not explain the relationship between observations and changes."
+          }
+        ],
+        "correctIndices": [
+          0,
+          1
+        ]
+      },
+      "scoring": {
+        "totalPoints": 2,
+        "partAPoints": 1,
+        "partBPoints": 1,
+        "requirePartACorrectForFullCredit": true,
+        "partialCreditRules": [
+          {
+            "points": 2,
+            "rule": "Part One is correct and both Part Two evidence choices are correct."
+          },
+          {
+            "points": 1,
+            "rule": "Part One is correct and one Part Two evidence choice is correct, or Part One is incorrect but both Part Two evidence choices are correct."
+          },
+          {
+            "points": 0,
+            "rule": "The response is unsupported, incomplete, or missing."
+          }
+        ],
+        "scoringNotes": "Full credit requires the Part One answer and both supporting evidence choices; unsupported evidence cannot earn full credit."
+      },
+      "responseSpec": {
+        "partA": {
+          "choices": [
+            "The students use the slow spots to choose changes for the lunch line.",
+            "The observations prove that students should stop eating soup at lunch.",
+            "The observations show that the cafeteria needs new shelves before the line can improve.",
+            "The observations explain why pizza trays are warmer than soup bowls."
+          ]
+        },
+        "partB": {
+          "instruction": "Choose two answers.",
+          "choices": [
+            {
+              "text": "They counted how many times the line paused.",
+              "quotedSpan": "They counted how many times the line paused."
+            },
+            {
+              "text": "The class noticed two slow spots.",
+              "quotedSpan": "The class noticed two slow spots."
+            },
+            {
+              "text": "At lunch, the line still made noise, but it moved more smoothly.",
+              "quotedSpan": "At lunch, the line still made noise, but it moved more smoothly."
+            },
+            {
+              "text": "Mrs. Lane circled that note in purple marker.",
+              "quotedSpan": "Mrs. Lane circled that note in purple marker."
+            }
+          ]
+        }
+      },
+      "correctResponse": {
+        "partA": {
+          "correctIndex": 0
+        },
+        "partB": {
+          "correctIndices": [
+            0,
+            1
+          ]
+        }
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_PR_4K_GRADE3_EBSR",
+        "copiedReleasedText": false,
+        "copiedDrcText": false,
+        "noDbWrite": true
+      }
+    },
+    {
+      "itemId": "pssa_ebsr_g3_mural_01",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "EBSR",
+      "interactionType": "EBSR",
+      "interactionSubtype": "two_point",
+      "passageId": "pssa_psg_g3_the_mural_plan",
+      "passageTitle": "Blue Paint for Saturday",
+      "eligibleContent": "E03.A-K.1.1.2",
+      "ecSkillFamily": "literature_elements",
+      "reportingCategory": "A",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "partA": {
+        "stem": "Which message is best conveyed by the narrator's work on the mural?",
+        "choices": [
+          {
+            "text": "A paint mistake can become useful when a person turns it into ripples.",
+            "distractorRole": null,
+            "supportsPartA": true,
+            "rationale": "The narrator turns paint drips into ripples and feels proud of the finished mural."
+          },
+          {
+            "text": "A person should hide mistakes so other people miss them later.",
+            "distractorRole": "opposite_claim",
+            "supportsPartA": false,
+            "rationale": "The narrator does not hide the ripples; they become part of the mural."
+          },
+          {
+            "text": "A mural is successful when each painted line is perfectly smooth.",
+            "distractorRole": "opposite_claim",
+            "supportsPartA": false,
+            "rationale": "The narrator says the river is not perfectly smooth but still works."
+          },
+          {
+            "text": "A library wall should show buses, gardens, and birds from the neighborhood.",
+            "distractorRole": "too_narrow",
+            "supportsPartA": false,
+            "rationale": "Those details are part of the mural, not its message."
+          }
+        ],
+        "correctIndex": 0,
+        "evidenceNeededDescription": "Evidence should show how the narrator turns the drip mistake into a meaningful part of the mural.",
+        "rationale": "The narrator turns paint drips into ripples and feels proud of the finished mural.",
+        "distractorRationales": [
+          "The narrator turns paint drips into ripples and feels proud of the finished mural.",
+          "The narrator does not hide the ripples; they become part of the mural.",
+          "The narrator says the river is not perfectly smooth but still works.",
+          "Those details are part of the mural, not its message."
+        ],
+        "distractorRoles": [
+          "correct",
+          "opposite_claim",
+          "opposite_claim",
+          "too_narrow"
+        ]
+      },
+      "partB": {
+        "stem": "Which two details best support the answer in Part One?",
+        "instruction": "Choose two answers.",
+        "choices": [
+          {
+            "text": "I bent close and painted tiny waves around each tail.",
+            "quotedSpan": "I bent close and painted tiny waves around each tail.",
+            "evidenceRole": "supports_part_a",
+            "supportsPartA": true,
+            "rationale": "The narrator changes the mistake into ripples."
+          },
+          {
+            "text": "But the fish seemed to move, and the wall no longer looked empty.",
+            "quotedSpan": "But the fish seemed to move, and the wall no longer looked empty.",
+            "evidenceRole": "supports_part_a",
+            "supportsPartA": true,
+            "rationale": "The changed mural becomes meaningful and lively."
+          },
+          {
+            "text": "The wall was rough brick, and chalk lines crossed it like a giant puzzle.",
+            "quotedSpan": "The wall was rough brick, and chalk lines crossed it like a giant puzzle.",
+            "evidenceRole": "background",
+            "supportsPartA": false,
+            "rationale": "This describes the work area, not the message about mistakes."
+          },
+          {
+            "text": "A woman had stopped to take a picture of the sparrows.",
+            "quotedSpan": "A woman had stopped to take a picture of the sparrows.",
+            "evidenceRole": "background",
+            "supportsPartA": false,
+            "rationale": "This shows someone noticed the mural later, but it does not explain how the narrator handled the mistake."
+          }
+        ],
+        "correctIndices": [
+          0,
+          1
+        ]
+      },
+      "scoring": {
+        "totalPoints": 2,
+        "partAPoints": 1,
+        "partBPoints": 1,
+        "requirePartACorrectForFullCredit": true,
+        "partialCreditRules": [
+          {
+            "points": 2,
+            "rule": "Part One is correct and both Part Two evidence choices are correct."
+          },
+          {
+            "points": 1,
+            "rule": "Part One is correct and one Part Two evidence choice is correct, or Part One is incorrect but both Part Two evidence choices are correct."
+          },
+          {
+            "points": 0,
+            "rule": "The response is unsupported, incomplete, or missing."
+          }
+        ],
+        "scoringNotes": "Full credit requires the Part One answer and both supporting evidence choices; unsupported evidence cannot earn full credit."
+      },
+      "responseSpec": {
+        "partA": {
+          "choices": [
+            "A paint mistake can become useful when a person turns it into ripples.",
+            "A person should hide mistakes so other people miss them later.",
+            "A mural is successful when each painted line is perfectly smooth.",
+            "A library wall should show buses, gardens, and birds from the neighborhood."
+          ]
+        },
+        "partB": {
+          "instruction": "Choose two answers.",
+          "choices": [
+            {
+              "text": "I bent close and painted tiny waves around each tail.",
+              "quotedSpan": "I bent close and painted tiny waves around each tail."
+            },
+            {
+              "text": "But the fish seemed to move, and the wall no longer looked empty.",
+              "quotedSpan": "But the fish seemed to move, and the wall no longer looked empty."
+            },
+            {
+              "text": "The wall was rough brick, and chalk lines crossed it like a giant puzzle.",
+              "quotedSpan": "The wall was rough brick, and chalk lines crossed it like a giant puzzle."
+            },
+            {
+              "text": "A woman had stopped to take a picture of the sparrows.",
+              "quotedSpan": "A woman had stopped to take a picture of the sparrows."
+            }
+          ]
+        }
+      },
+      "correctResponse": {
+        "partA": {
+          "correctIndex": 0
+        },
+        "partB": {
+          "correctIndices": [
+            0,
+            1
+          ]
+        }
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_PR_4K_GRADE3_EBSR",
+        "copiedReleasedText": false,
+        "copiedDrcText": false,
+        "noDbWrite": true
+      }
+    },
+    {
+      "itemId": "pssa_ebsr_g3_cart_01",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "EBSR",
+      "interactionType": "EBSR",
+      "interactionSubtype": "two_point",
+      "passageId": "pssa_psg_g3_the_cart_that_would_not_turn",
+      "passageTitle": "The Cart That Would Not Turn",
+      "eligibleContent": "E03.B-K.1.1.3",
+      "ecSkillFamily": "informational_elements",
+      "reportingCategory": "B",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "partA": {
+        "stem": "How does following the repair steps help the class solve the cart problem?",
+        "choices": [
+          {
+            "text": "The steps help the class find the small cause before loading the cart.",
+            "distractorRole": null,
+            "supportsPartA": true,
+            "rationale": "The passage explains the order of unloading, checking wheels, and fixing the axle."
+          },
+          {
+            "text": "The steps show that a hammer is the best tool for repairing a stuck wheel.",
+            "distractorRole": "opposite_claim",
+            "supportsPartA": false,
+            "rationale": "The passage says not to start with a hammer."
+          },
+          {
+            "text": "The steps prove that old carts should be replaced whenever they squeak loudly.",
+            "distractorRole": "unsupported_inference",
+            "supportsPartA": false,
+            "rationale": "The cart still squeaks after repair but is useful."
+          },
+          {
+            "text": "The steps help students paint the cart green before moving it to the sink.",
+            "distractorRole": "wrong_section",
+            "supportsPartA": false,
+            "rationale": "The cart is already green; painting is not part of the repair."
+          }
+        ],
+        "correctIndex": 0,
+        "evidenceNeededDescription": "Evidence should show the ordered procedure and the reason for checking the cart before it is heavy.",
+        "rationale": "The passage explains the order of unloading, checking wheels, and fixing the axle.",
+        "distractorRationales": [
+          "The passage explains the order of unloading, checking wheels, and fixing the axle.",
+          "The passage says not to start with a hammer.",
+          "The cart still squeaks after repair but is useful.",
+          "The cart is already green; painting is not part of the repair."
+        ],
+        "distractorRoles": [
+          "correct",
+          "opposite_claim",
+          "unsupported_inference",
+          "wrong_section"
+        ]
+      },
+      "partB": {
+        "stem": "Which two details best support the answer in Part One?",
+        "instruction": "Choose two answers.",
+        "choices": [
+          {
+            "text": "First, you would empty the heavy paper boxes from the bottom shelf.",
+            "quotedSpan": "First, you would empty the heavy paper boxes from the bottom shelf.",
+            "evidenceRole": "supports_part_a",
+            "supportsPartA": true,
+            "rationale": "The first step removes weight before checking the problem."
+          },
+          {
+            "text": "Weight can hide a small problem.",
+            "quotedSpan": "Weight can hide a small problem.",
+            "evidenceRole": "supports_part_a",
+            "supportsPartA": true,
+            "rationale": "This explains why the class follows the procedure before forcing the cart."
+          },
+          {
+            "text": "After the repair, the cart still squeaked a little.",
+            "quotedSpan": "After the repair, the cart still squeaked a little.",
+            "evidenceRole": "background",
+            "supportsPartA": false,
+            "rationale": "This detail comes after the repair and does not explain why the steps work."
+          },
+          {
+            "text": "The green cart in the art room did not.",
+            "quotedSpan": "The green cart in the art room did not.",
+            "evidenceRole": "too_narrow",
+            "supportsPartA": false,
+            "rationale": "This states the problem, not how the repair steps solve it."
+          }
+        ],
+        "correctIndices": [
+          0,
+          1
+        ]
+      },
+      "scoring": {
+        "totalPoints": 2,
+        "partAPoints": 1,
+        "partBPoints": 1,
+        "requirePartACorrectForFullCredit": true,
+        "partialCreditRules": [
+          {
+            "points": 2,
+            "rule": "Part One is correct and both Part Two evidence choices are correct."
+          },
+          {
+            "points": 1,
+            "rule": "Part One is correct and one Part Two evidence choice is correct, or Part One is incorrect but both Part Two evidence choices are correct."
+          },
+          {
+            "points": 0,
+            "rule": "The response is unsupported, incomplete, or missing."
+          }
+        ],
+        "scoringNotes": "Full credit requires the Part One answer and both supporting evidence choices; unsupported evidence cannot earn full credit."
+      },
+      "responseSpec": {
+        "partA": {
+          "choices": [
+            "The steps help the class find the small cause before loading the cart.",
+            "The steps show that a hammer is the best tool for repairing a stuck wheel.",
+            "The steps prove that old carts should be replaced whenever they squeak loudly.",
+            "The steps help students paint the cart green before moving it to the sink."
+          ]
+        },
+        "partB": {
+          "instruction": "Choose two answers.",
+          "choices": [
+            {
+              "text": "First, you would empty the heavy paper boxes from the bottom shelf.",
+              "quotedSpan": "First, you would empty the heavy paper boxes from the bottom shelf."
+            },
+            {
+              "text": "Weight can hide a small problem.",
+              "quotedSpan": "Weight can hide a small problem."
+            },
+            {
+              "text": "After the repair, the cart still squeaked a little.",
+              "quotedSpan": "After the repair, the cart still squeaked a little."
+            },
+            {
+              "text": "The green cart in the art room did not.",
+              "quotedSpan": "The green cart in the art room did not."
+            }
+          ]
+        }
+      },
+      "correctResponse": {
+        "partA": {
+          "correctIndex": 0
+        },
+        "partB": {
+          "correctIndices": [
+            0,
+            1
+          ]
+        }
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_PR_4K_GRADE3_EBSR",
+        "copiedReleasedText": false,
+        "copiedDrcText": false,
+        "noDbWrite": true
+      }
+    }
+  ]
+}

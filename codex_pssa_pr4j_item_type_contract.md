@@ -80,6 +80,7 @@ All student responses in mocks must be original toy text written for this PR.
 
 ## Tests — negative fixtures required (keeps this detector-first, not preview-only)
 For **each** `interactionType`, add at least one NEGATIVE fixture proving the family-specific gate fails the intended defect (passing mocks alone are not enough):
+- MCQ with two equally defensible correct answers → FAIL `PSSA_MCQ_SINGLE_DEFENSIBLE`.
 - MULTI_SELECT says "Choose two" but has three `correctIndices` → FAIL `_CORRECT_COUNT_MATCHES_INSTRUCTION`.
 - INLINE_DROPDOWN has two blanks but one blank spec → FAIL `_EACH_BLANK_VALID`.
 - MATCHING_GRID one-per-row item has two correct cells in one row → FAIL `_SELECTION_RULE_VALID`/`_NO_AMBIGUOUS_ALT_CELL`.

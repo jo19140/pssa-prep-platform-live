@@ -1,0 +1,10 @@
+itemId,itemType,interactionType,interactionSubtype,hasValidResponseSpec,hasValidCorrectResponse,instructionMatchesResponse,scoringValid,sourceCompliance,studentPreviewRenderable,reviewerPreviewRenderable,finalResult,notes
+pssa_mock_mcq_01,selected_response,MCQ,passage_based,PASS,PASS,PASS,PASS,PASS,PASS,PASS,PASS,PASS
+pssa_mock_ebsr_01,evidence_based_selected_response,EBSR,two_point,PASS,PASS,PASS,PASS,PASS,PASS,PASS,PASS,PASS
+pssa_mock_multi_select_01,technology_enhanced,MULTI_SELECT,choose_n_evidence,PASS,PASS,PASS,PASS,PASS,PASS,PASS,PASS,PASS
+pssa_mock_inline_dropdown_01,technology_enhanced,INLINE_DROPDOWN,multi_blank,PASS,PASS,PASS,PASS,PASS,PASS,PASS,PASS,PASS
+pssa_mock_matching_grid_01,technology_enhanced,MATCHING_GRID,one_per_row,PASS,PASS,PASS,PASS,PASS,PASS,PASS,PASS,PASS
+pssa_mock_hot_text_01,technology_enhanced,HOT_TEXT,sentence_select,PASS,PASS,PASS,PASS,PASS,PASS,PASS,PASS,PASS
+pssa_mock_drag_drop_01,technology_enhanced,DRAG_DROP,category_chart,PASS,PASS,PASS,PASS,PASS,PASS,PASS,PASS,PASS
+pssa_mock_short_answer_01,constructed_response,SHORT_ANSWER,,PASS,PASS,PASS,PASS,PASS,PASS,PASS,PASS,PASS
+pssa_mock_tda_01,constructed_response,TDA,,PASS,PASS,PASS,PASS,PASS,PASS,PASS,PASS,PASS

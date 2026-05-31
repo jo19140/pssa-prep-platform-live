@@ -28,7 +28,7 @@ export async function POST(_req: Request, { params }: { params: Promise<{ sessio
     return NextResponse.json({ error: "diagnostic_evidence_floor_not_met", details: { blockers } }, { status: 409 });
   }
 
-  const resultJson = diagnosticResultJson(attempts);
+  const resultJson = await diagnosticResultJson(session.id, attempts);
   const updated = await db.diagnosticSession.update({
     where: { id: session.id },
     data: {

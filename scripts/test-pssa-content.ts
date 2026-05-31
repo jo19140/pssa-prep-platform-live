@@ -10,6 +10,11 @@ import {
   type McqAuditInput,
   type StructuredChoice,
 } from "./audit/pssa-audit-detectors";
+import { assertPssaItemTypeMockContract } from "./audit/pssa-item-type-contract";
+import { assertGrade3EbsrContract } from "./content/author-pssa-grade3-ebsr";
+
+assertPssaItemTypeMockContract();
+assertGrade3EbsrContract();
 
 function mcqFixture(id: string, correctIndex: number, choices: string[]) {
   return { id, itemType: "MCQ", correctIndex, answerChoicesJson: choices };

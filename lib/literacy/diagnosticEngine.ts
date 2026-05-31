@@ -17,6 +17,7 @@ export type EngineItem = {
   phaseBand?: number | null;
   targetPattern?: string | null;
   wordType?: string | null;
+  comprehensionMode?: string | null;
   isPracticeItem?: boolean | null;
 };
 

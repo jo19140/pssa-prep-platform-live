@@ -4,6 +4,10 @@
 
 **Rule 0 — safeguard inheritance (binding):** before authoring, re-read the "Safeguard inheritance for production TEI / constructed-response items" section in `codex_pssa_pr4j_item_type_contract.md`. Every item here must inherit passage gates, universal item safeguards, passage-grounding gates, MCQ-style subpart gates (EBSR Part A), multi-response/TEI gates (Part B), and `PSSA_ITEM_EC_SKILL_MISMATCH` per surface. A valid response surface alone is NOT sufficient to pass.
 
+**Rule 0a — source-compliance must be a REAL text scan, not flag-based.** #4j's source-compliance gate was metadata/flag-based (acceptable for mock-only). #4k authors real items on the real five Grade 3 passages, so source compliance must actually scan item + passage text against the released/sampler corpus in `reference/pssa-released-items/` and the DRC screenshot catalog, and FAIL (blocker) on any verbatim or near-verbatim match (e.g., normalized n-gram overlap above threshold). Trusting `auditMetadata` flags is NOT sufficient for production. Report the scan method and the longest matched n-gram per item.
+
+**Source-compliance scan details.** Normalize case, punctuation, whitespace, and stopword-only differences. **Scan these fields:** Part A stem; Part A choices; Part B stem; Part B evidence choices; rationales; any item metadata text intended for preview; assigned passage text. **Against:** `reference/pssa-released-items/`; `reference/pssa-item-catalog/` text where available; any extracted sampler/corpus text used by the project. **Allowed generic boilerplate** (do NOT fail solely for standard assessment directions): "Choose two answers", "Which evidence from the passage supports…", "Part One", "Part Two" — but report boilerplate matches separately. **Blocker:** fail on *content-bearing* verbatim/near-verbatim overlap above the documented threshold (stems, choices, rationales, passage text, evidence statements — not generic directions). **Report per item:** matched source file, matched field, longest normalized n-gram, overlap score, and whether the match is boilerplate or content-bearing.
+
 First PRODUCTION authoring tranche. Author 5 real Grade 3 EBSR items against the locked contract; prove on Grade 3 first. No passage regeneration. No Grades 4–8. No conventions/TDA work. No approvals/imports/DB writes. File-only. Commit.
 
 ## Context
@@ -44,7 +48,9 @@ Align each EBSR to an evidence-oriented Grade 3 reading EC (Part One's skill; e.
 `pssa_ebsr_grade3_audit_report.csv` (itemId, gradeLevel, passageId, passageTitle, eligibleContent, ecSkillFamily, partAStem, partACorrectIndex, partAResult, partBStem, partBCorrectIndices, partBInstruction, correctCountMatchesInstruction, allPartBSpansFound, supportLinkResult, skillMatchResult, scoringResult, finalEbsrResult, notes). Plus a Grade 3 EBSR student preview (passage + Part One + choices + Part Two + choices; NO keys/rationales/metadata), a reviewer preview (correct answers, every `quotedSpan`, why each correct evidence supports Part One and each incorrect does not, skill-match result, scoring rules, gate results), and an EBSR vertical-slice summary.
 
 ## Acceptance
-5 EBSR items, exactly 1 per passage; 5/5 PASS on all seven EBSR gates; 100% Part Two spans verbatim in the assigned passage; 0 released-item text copied; 0 old-templated-passage evidence; no passage text changed; no Grades 4–8 changes; no approvals/imports/DB writes.
+5 EBSR items, exactly 1 per passage; 5/5 PASS on all seven EBSR gates; **5/5 PASS `PSSA_ITEM_SOURCE_COMPLIANCE_NO_COPY` under the real production text scan** (reported as a gate result, not a narrative confirmation); 100% Part Two spans verbatim in the assigned passage; 0 released-item text copied; 0 old-templated-passage evidence; no passage text changed; no Grades 4–8 changes; no approvals/imports/DB writes.
+
+**Passage gate rerun (required).** Before accepting any EBSR item, rerun the four passage-quality gates on the five assigned Grade 3 passages: `PSSA_PASSAGE_CROSS_DUPLICATE`, `PSSA_PASSAGE_TEMPLATE_SKELETON`, `PSSA_PASSAGE_TOPIC_COHERENCE`, `PSSA_PASSAGE_CONCRETENESS`. Acceptance requires **5/5 assigned passages PASS all four**. Include the passage-gate table in the EBSR vertical-slice summary. (The Wilson failure started when good items sat on bad passages — prove that cannot recur.)
 
 ## Tests
 1. Valid EBSR (one correct Part A; "Choose two" with exactly two verbatim-found supporting spans) → PASS.
@@ -54,6 +60,14 @@ Align each EBSR to an evidence-oriented Grade 3 reading EC (Part One's skill; e.
 5. A distractor evidence option also supports Part A (not uniquely defensible) → FAIL `PSSA_EBSR_PART_B_SUPPORTS_PART_A`.
 6. EBSR with vocabulary EC but Part A asks main idea → FAIL `PSSA_EBSR_SKILL_MATCH`.
 7. partA+partB points ≠ totalPoints, or missing partial rules → FAIL `PSSA_EBSR_PARTIAL_CREDIT_VALID`.
+8. **Source-compliance negative fixture:** an EBSR item whose Part A stem or a choice contains a content-bearing phrase copied from released-sampler text → FAIL `PSSA_ITEM_SOURCE_COMPLIANCE_NO_COPY`. (And confirm a generic direction like "Choose two answers" alone does NOT trigger the blocker.)
+
+## Adversarial validation (novel fixtures NOT used in authoring)
+In addition to the unit tests, add at least three adversarial fixtures distinct from the five authored items, and report them in the test output:
+1. EBSR where Part B has two verbatim passage spans, but one correct span supports only the topic, not the Part A answer → FAIL `PSSA_EBSR_PART_B_SUPPORTS_PART_A`.
+2. EBSR where an *incorrect* Part B option also supports Part A (not uniquely defensible) → FAIL `PSSA_EBSR_PART_B_SUPPORTS_PART_A`.
+3. EBSR with a valid response surface and valid verbatim evidence spans, but Part A tests the wrong EC skill → FAIL `PSSA_EBSR_SKILL_MATCH`.
+This keeps the EBSR gates from being tuned only to the five authored items (the same generalization check #4j passed).
 
 ## Verification
 ```
@@ -64,5 +78,8 @@ npm run content:audit-pssa
 ```
 Commit schema, EBSR authoring output, audit logic, tests, reports, previews, summaries. Do not leave untracked files.
 
+## Grade 3 vertical-slice summary (include in the EBSR summary output)
+Report the final Grade 3 reading state: 5 approved passages (with the passage-gate rerun table, 5/5 PASS); 28 existing MCQ reading items unchanged; 5 new EBSR items; total Grade 3 reading item streams by type; confirmation the existing MCQ audit still passes if rerun; confirmation EBSR is a separate stream and NOT folded into the 28-MCQ count.
+
 ## Stop
-Report: EBSR rule IDs added; the 5 Grade 3 EBSR item IDs; passage→EBSR mapping; EC distribution; Part B correct-count distribution; evidence-span-found counts; support-link PASS/WARN/FAIL; skill-match PASS/WARN/FAIL; scoring-validation table; student + reviewer preview paths; confirmation no sampler text copied; confirmation no passages changed; confirmation no Grades 4–8 changes; confirmation no approvals/imports/DB writes. Do not proceed to Grades 4–8. Do not scale EBSR beyond the 5 Grade 3 proof items.
+Report: EBSR rule IDs added; the 5 Grade 3 EBSR item IDs; passage→EBSR mapping; EC distribution; Part B correct-count distribution; evidence-span-found counts; support-link PASS/WARN/FAIL; skill-match PASS/WARN/FAIL; scoring-validation table; passage-gate rerun table (5/5); source-compliance scan results (matched source/field/longest n-gram/overlap/boilerplate-vs-content per item); the 3 adversarial fixtures and their FAIL results; student + reviewer preview paths; confirmation no sampler text copied; confirmation no passages changed; confirmation no Grades 4–8 changes; confirmation no approvals/imports/DB writes. Do not proceed to Grades 4–8. Do not scale EBSR beyond the 5 Grade 3 proof items.
