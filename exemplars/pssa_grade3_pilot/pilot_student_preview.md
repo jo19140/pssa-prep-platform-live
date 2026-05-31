@@ -1,384 +1,296 @@
 # PSSA Grade 3 Pilot Student Preview
 
-## Creek Watchers 3
+## The Night the Creek Glowed
 
-The sixth-period research team began with a question that sounded simple: how could students test stream water after a heavy rain? Their teacher asked them to avoid guesses and collect details that another group could check. By Monday afternoon, the students had notebooks, a shared chart, and a route for gathering observations around the building.
+Just after sunset, Maya noticed a pale green shine along Pine Creek. The glow was not bright like a flashlight. It looked more like a soft line of paint floating near the bank. The next morning, her class visited the creek with clear jars, a thermometer, and a hand lens.
 
-At first, the notes were scattered. One student wrote about clear measurements, while another noticed nearby plant growth. The class decided to sort the notes by place, time, and cause. That structure helped them see which details described the problem and which details suggested a possible solution.
+The teacher explained that some tiny living things in water can look green when many of them grow at once. The class did not touch the water. They stood on the bridge and wrote what they could see: slow water near the reeds, brown leaves caught against stones, and small bubbles where the creek bent around a log.
 
-The strongest evidence came from repeated observations. The team checked the same location during different parts of the day and compared what changed. They also interviewed people who used the space often, because a design that looks helpful on paper may not match how people move, wait, or work.
+Maya drew a map of three creek spots. At the shady bend, the water looked clear. Near the sunny bank, the green color was thicker. Downstream from the storm pipe, bits of grass and soil floated in a wide fan. Those clues helped the class ask a better question: why was the glow strongest in one place?
 
-Their final proposal was modest but specific. It named the problem, explained the evidence, and described two changes that could be tested without spending much money. The proposal did not promise a perfect fix. Instead, it showed why careful information can make a small plan stronger.
+Back at school, the students compared their notes with the weather chart. Two warm days had followed a heavy rain. Rain had washed soil into the creek, and sunlight warmed the shallow edge. The teacher said those conditions can help green water plants grow quickly.
 
-By the end of the week, the students understood that research is not a stack of facts. It is a way of noticing relationships. A useful plan grows when people connect observations, listen to others, and revise an idea before asking the community to trust it. Their teacher saved the chart so the next class could test whether the proposed changes actually worked. The team also wrote a short reflection explaining which evidence felt reliable and which questions still needed another careful look. That reflection helped them separate a useful recommendation from a quick opinion, and it gave the next group a fair place to begin.
+The class wrote a creek notice for families. It did not claim the water was safe or unsafe. Instead, it told what the students observed and asked neighbors not to dump grass clippings near the drain. Maya added her map to the notice so readers could see why the sunny bank mattered most.
+
+On Friday, Maya returned with her father and pointed from the bridge. The glow had faded to a faint stripe. A beetle skated over the surface, and a robin hopped in the wet grass. Maya knew the creek still needed watching, but now she had a careful way to notice changes.
 
 ### pssa_item_g3_reading_1
-Why did the team in "Creek Watchers 3" collect details that another group could check?
+Why did Maya's class compare creek spots instead of guessing about the glow?
 
-A. The team needed checkable details before making a stream water plan.
-B. The shared chart meant the stream water answer had already been proven.
-C. The interviews mattered because the team had stopped comparing stream water observations.
-D. The short reflection was the first step in solving the stream water problem.
+A. They wanted clues showing why the glow was strongest near one place.
+B. They wanted jars to prove the Pine Creek water was safe for families.
+C. They wanted a beetle and robin sighting to show the creek had stopped changing.
+D. They wanted the bridge visit to replace Maya's sunny-bank map.
 
 ### pssa_item_g3_reading_6
-Which sentence from "Creek Watchers 3" shows that the plan still needed to be checked later?
+In the creek passage, what does faint mean when the glow became a faint stripe?
 
-A. The stream water proposal was modest and specific, but that does not show the later test.
-B. The teacher saved the chart so another class could test the proposed changes.
-C. The scattered stream water notes show an early problem, not a later check of the plan.
-D. The team still had stream water questions, but the saved chart names who would test changes.
+A. sharp and noisy like bubbles near a creek log
+B. thick and green like the sunny bank color
+C. safe and clean for families near Pine Creek
+D. weak and hard to see along the creek surface
 
 ### pssa_item_g3_reading_11
-How did the final proposal in "Creek Watchers 3" show careful planning?
+Why did the creek notice include Maya's map?
 
-A. The notebooks and route started the stream water work, but they do not describe the final proposal.
-B. The route around the building helped stream water gathering, not the two tested changes.
-C. It named the problem, explained evidence, and described two changes to test.
-D. The stream water research was not a stack of facts, but that lesson comes after the proposal.
+A. The map showed why the sunny bank mattered most to the glow.
+B. The map proved the creek notice should call the water unsafe.
+C. The map replaced the students' notes about reeds and brown leaves.
+D. The map showed that grass clippings came from the shady bend.
 
 ### pssa_item_g3_reading_16
-What helped the team organize its scattered notes in "Creek Watchers 3"?
+What does Maya's Friday visit show about what she learned at Pine Creek?
 
-A. The notebooks and chart solved the stream water problem before sorting began.
-B. Talking with people helped the stream water research, but it did not organize the scattered notes.
-C. The final proposal came before the team sorted its stream water notes.
-D. Sorting by place, time, and cause helped the team understand the stream water problem.
+A. Maya thought the robin and beetle had caused the green glow.
+B. Maya learned a careful way to watch for creek changes.
+C. Maya stopped using maps after the glow faded to a stripe.
+D. Maya's father told the class to bring jars and a thermometer.
 
 ### pssa_item_g3_reading_21
-What is the most important reason the short reflection helped the next group in "Creek Watchers 3"?
+Which event caused the class to ask a better creek question?
 
-A. It separated a useful recommendation from a quick opinion for the next group.
-B. The notebooks and chart solved the stream water problem before sorting began.
-C. Talking with people helped the stream water research, but it did not organize the scattered notes.
-D. The two stream water changes were part of the proposal, but they do not explain why the next group had a fair start.
+A. The teacher explained green water plants before the map was drawn.
+B. Families read a creek notice after Maya added her sunny-bank map.
+C. Maya compared clear, thicker, and soil-filled creek spots.
+D. The glow faded when Maya returned with her father on Friday.
 
 ### pssa_item_g3_reading_26
-What lesson about research does "Creek Watchers 3" develop near the end?
+How did the class use weather information to explain Pine Creek's glow?
 
-A. A quick stream water opinion was separated from the recommendation, but that is one result of reflection.
-B. Research means connecting observations, listening, and revising before asking for trust.
-C. Checking the same stream water location showed care, but it leaves out listening and revising.
-D. Spending little money was part of the stream water proposal, not the whole lesson about research.
+A. They learned that the clear shady bend made green plants grow quickly.
+B. They connected warm days, heavy rain, soil, and sunlight.
+C. They decided the storm pipe proved families could touch the water.
+D. They saw a beetle and robin after the glow became brighter.
 
-## The Map in the Station 3
+## A Map Under the Bench
 
-The sixth-period research team began with a question that sounded simple: how could neighbors preserve an old transit map? Their teacher asked them to avoid guesses and collect details that another group could check. By Monday afternoon, the students had notebooks, a shared chart, and a route for gathering observations around the building.
+When workers lifted an old wooden bench at Linden Station, they found a paper map folded into a thin square. Dust covered the front, but blue rail lines still crossed the page. A date in the corner said 1928.
 
-At first, the notes were scattered. One student wrote about careful interviews, while another noticed changes in the town. The class decided to sort the notes by place, time, and cause. That structure helped them see which details described the problem and which details suggested a possible solution.
+The station manager called Mr. Ortiz, who cared for the town archive. He did not unfold the map quickly. Old paper can tear along its creases. He slid a flat card under one corner, opened the first fold, and placed small cloth weights along the edges. The map showed trolley stops, a river bridge, and a market square that no longer had tracks.
 
-The strongest evidence came from repeated observations. The team checked the same location during different parts of the day and compared what changed. They also interviewed people who used the space often, because a design that looks helpful on paper may not match how people move, wait, or work.
+On Saturday, three children visited the station display. Nia noticed that the old trolley line passed the bakery where her grandmother worked. Ben found the school, but it had a different name. Leo pointed to a dotted path beside the river and wondered whether people had walked there when the bridge was closed.
 
-Their final proposal was modest but specific. It named the problem, explained the evidence, and described two changes that could be tested without spending much money. The proposal did not promise a perfect fix. Instead, it showed why careful information can make a small plan stronger.
+Mr. Ortiz put a new town map beside the old one. The two maps did not match exactly. Some streets had new names, and the trolley tracks were gone. Still, the river, the hill road, and the market square helped visitors compare past and present.
 
-By the end of the week, the students understood that research is not a stack of facts. It is a way of noticing relationships. A useful plan grows when people connect observations, listen to others, and revise an idea before asking the community to trust it. Their teacher saved the chart so the next class could test whether the proposed changes actually worked. The team also wrote a short reflection explaining which evidence felt reliable and which questions still needed another careful look. That reflection helped them separate a useful recommendation from a quick opinion, and it gave the next group a fair place to begin.
+By the end of the week, the map was inside a clear sleeve. A label told where it was found and how it was opened. People stopped near the bench longer than before, not because the paper looked perfect, but because it showed how the town had changed while some landmarks stayed in place.
+
+Nia copied the dotted river path into her notebook. At home, her grandmother remembered taking a trolley to the market with a basket on her lap. The old map had not spoken, of course, but it helped one family tell a true town story that had almost been folded away.
 
 ### pssa_item_g3_reading_2
-What helped the team organize its scattered notes in "The Map in the Station 3"?
+Which sentence best states what the old station map helps people understand?
 
-A. The notebooks and chart solved the transit map problem before sorting began.
-B. Sorting by place, time, and cause helped the team understand the transit map problem.
-C. Talking with people helped the transit map research, but it did not organize the scattered notes.
-D. The final proposal came before the team sorted its transit map notes.
+A. Linden Station's map shows changed streets and steady landmarks.
+B. Linden Station's bench was more important than the clear map sleeve.
+C. The old paper was useful because it looked perfect in the display.
+D. Nia's notebook mattered because the trolley tracks were gone.
 
 ### pssa_item_g3_reading_7
-What is the most important reason the short reflection helped the next group in "The Map in the Station 3"?
+What is the main reason people spent longer near the station bench?
 
-A. The notebooks and chart solved the transit map problem before sorting began.
-B. Talking with people helped the transit map research, but it did not organize the scattered notes.
-C. It separated a useful recommendation from a quick opinion for the next group.
-D. The two transit map changes were part of the proposal, but they do not explain why the next group had a fair start.
+A. The blue rail lines were still easy to follow across the dusty page.
+B. The cloth weights made the old paper unfold quickly for visitors.
+C. The dotted river path proved the bridge was closed that Saturday.
+D. The map showed town changes while some landmarks stayed in place.
 
 ### pssa_item_g3_reading_12
-What lesson about research does "The Map in the Station 3" develop near the end?
+How did Mr. Ortiz protect the old map as he opened it?
 
-A. A quick transit map opinion was separated from the recommendation, but that is one result of reflection.
-B. Checking the same transit map location showed care, but it leaves out listening and revising.
-C. Spending little money was part of the transit map proposal, not the whole lesson about research.
-D. Research means connecting observations, listening, and revising before asking for trust.
+A. He used a flat card and small cloth weights along the edges.
+B. He left the paper under the wooden bench at Linden Station.
+C. He asked three children to unfold the map at the station display.
+D. He copied the dotted river path into Nia's notebook.
 
 ### pssa_item_g3_reading_17
-Which detail best supports that the team used more than one kind of evidence in "The Map in the Station 3"?
+Which evidence shows visitors could compare the town's past and present?
 
-A. The team compared repeated observations and talked with people who used the space.
-B. Changes in the town gave one useful clue, but it was not the whole evidence set.
-C. The transit map proposal avoided a perfect fix, but that does not show several kinds of evidence.
-D. The saved transit map chart helped the next class, but it came after the evidence was gathered.
+A. A date in the corner of the old paper said 1928.
+B. The river, hill road, and market square matched across the maps.
+C. The school on the map had a different name from Ben's school.
+D. The clear sleeve made the paper look perfect beside the bench.
 
 ### pssa_item_g3_reading_22
-Why did the team in "The Map in the Station 3" collect details that another group could check?
+What can be inferred when Nia's grandmother remembers the trolley ride?
 
-A. The shared chart meant the transit map answer had already been proven.
-B. The team needed checkable details before making a transit map plan.
-C. The interviews mattered because the team had stopped comparing transit map observations.
-D. The short reflection was the first step in solving the transit map problem.
+A. The station manager had ridden the trolley with a market basket.
+B. The dotted river path was drawn after the bridge closed.
+C. The old map helped a family connect with a true town story.
+D. The new town map made the old rail lines disappear from the page.
 
 ### pssa_item_g3_reading_27
-Which sentence from "The Map in the Station 3" shows that the plan still needed to be checked later?
+Which event came just before the map was placed inside a clear sleeve?
 
-A. The transit map proposal was modest and specific, but that does not show the later test.
-B. The scattered transit map notes show an early problem, not a later check of the plan.
-C. The teacher saved the chart so another class could test the proposed changes.
-D. The team still had transit map questions, but the saved chart names who would test changes.
+A. Workers lifted the old wooden bench at Linden Station.
+B. Nia copied the dotted river path into her notebook.
+C. The station manager called Mr. Ortiz from the town archive.
+D. The new town map was placed beside the old map.
 
-## A Cooler Lunch Line 3
+## The Bell That Saved Lunch
 
-The sixth-period research team began with a question that sounded simple: how could students redesign a crowded lunch routine? Their teacher asked them to avoid guesses and collect details that another group could check. By Monday afternoon, the students had notebooks, a shared chart, and a route for gathering observations around the building.
+By Tuesday, Room 3 knew the lunch line had a problem. Hot soup cooled in bowls while students searched for spoons. Milk cartons crowded the end of the counter. The line stopped whenever someone had to step backward for a napkin.
 
-At first, the notes were scattered. One student wrote about timed observations, while another noticed shared responsibilities. The class decided to sort the notes by place, time, and cause. That structure helped them see which details described the problem and which details suggested a possible solution.
+Mrs. Lane asked the class to watch without blaming anyone. Four students stood near the cafeteria door with clipboards. They counted how many times the line paused. They also sketched where trays, fruit, milk, spoons, and napkins sat on the counter.
 
-The strongest evidence came from repeated observations. The team checked the same location during different parts of the day and compared what changed. They also interviewed people who used the space often, because a design that looks helpful on paper may not match how people move, wait, or work.
+The class noticed two slow spots. First, students picked up milk after they already had full trays, so cartons tipped and rolled. Second, spoons and napkins were tucked behind the soup pot. Even careful students had to reach across the hot area.
 
-Their final proposal was modest but specific. It named the problem, explained the evidence, and described two changes that could be tested without spending much money. The proposal did not promise a perfect fix. Instead, it showed why careful information can make a small plan stronger.
+The cafeteria manager let the class try a small change on Thursday. Milk moved to the first table, before trays. Spoons and napkins went into two red baskets at the end. A paper arrow showed the direction of the line. Nothing fancy was added, and no one had to buy new shelves.
 
-By the end of the week, the students understood that research is not a stack of facts. It is a way of noticing relationships. A useful plan grows when people connect observations, listen to others, and revise an idea before asking the community to trust it. Their teacher saved the chart so the next class could test whether the proposed changes actually worked. The team also wrote a short reflection explaining which evidence felt reliable and which questions still needed another careful look. That reflection helped them separate a useful recommendation from a quick opinion, and it gave the next group a fair place to begin.
+At lunch, the line still made noise, but it moved more smoothly. Students grabbed milk before their trays were heavy. The red baskets were easy to spot. When the bell rang, most bowls of soup were still warm. Room 3 wrote the result on a chart and decided to check again next week, because one good day was useful but not enough proof.
+
+On Friday, the class tried the setup with pizza trays instead of soup bowls. The line was a little slower, but no one had to walk backward for a napkin. Mrs. Lane circled that note in purple marker. A good solution, she said, should work on more than one lunch day. The class posted the arrow again before the next lunch bell rang.
 
 ### pssa_item_g3_reading_3
-Which detail best supports that the team used more than one kind of evidence in "A Cooler Lunch Line 3"?
+Which evidence shows Room 3 studied the lunch line before changing it?
 
-A. Shared lunch responsibilities gave one useful clue, but it was not the whole evidence set.
-B. The lunch routine proposal avoided a perfect fix, but that does not show several kinds of evidence.
-C. The team compared repeated observations and talked with people who used the space.
-D. The saved lunch routine chart helped the next class, but it came after the evidence was gathered.
+A. Hot soup cooled while students searched for spoons.
+B. Students counted pauses and sketched lunch items.
+C. A paper arrow showed the direction of the line.
+D. The red baskets were easy for students to spot.
 
 ### pssa_item_g3_reading_8
-Why did the team in "A Cooler Lunch Line 3" collect details that another group could check?
+What problem did Room 3 try to solve in the cafeteria?
 
-A. The shared chart meant the lunch routine answer had already been proven.
-B. The interviews mattered because the team had stopped comparing lunch routine observations.
-C. The short reflection was the first step in solving the lunch routine problem.
-D. The team needed checkable details before making a lunch routine plan.
+A. The pizza trays made the Friday line a little slower.
+B. The purple marker made Mrs. Lane circle the wrong lunch note.
+C. The lunch line paused when students reached for items.
+D. The cafeteria manager needed new shelves for milk cartons.
 
 ### pssa_item_g3_reading_13
-Which sentence from "A Cooler Lunch Line 3" shows that the plan still needed to be checked later?
+Why did Room 3 decide to check the lunch setup again next week?
 
-A. The teacher saved the chart so another class could test the proposed changes.
-B. The lunch routine proposal was modest and specific, but that does not show the later test.
-C. The scattered lunch routine notes show an early problem, not a later check of the plan.
-D. The team still had lunch routine questions, but the saved chart names who would test changes.
+A. The class wanted the milk cartons back at the crowded counter.
+B. The paper arrow had made the lunch line completely silent.
+C. The soup bowls were cold when the Thursday bell rang.
+D. One useful lunch day was not enough proof.
 
 ### pssa_item_g3_reading_18
-How did the final proposal in "A Cooler Lunch Line 3" show careful planning?
+How did the cafeteria manager's Thursday change help the line?
 
-A. The notebooks and route started the lunch routine work, but they do not describe the final proposal.
-B. It named the problem, explained evidence, and described two changes to test.
-C. The route around the building helped lunch routine gathering, not the two tested changes.
-D. The lunch routine research was not a stack of facts, but that lesson comes after the proposal.
+A. Milk moved before trays, and spoons went into red baskets.
+B. Soup moved behind the counter so students reached across the hot area.
+C. The milk cartons stayed after trays because students had full hands.
+D. Pizza trays replaced soup bowls before Room 3 counted pauses.
 
 ### pssa_item_g3_reading_23
-What helped the team organize its scattered notes in "A Cooler Lunch Line 3"?
+What did the class notice after watching the cafeteria counter?
 
-A. The notebooks and chart solved the lunch routine problem before sorting began.
-B. Talking with people helped the lunch routine research, but it did not organize the scattered notes.
-C. Sorting by place, time, and cause helped the team understand the lunch routine problem.
-D. The final proposal came before the team sorted its lunch routine notes.
+A. The lunch bell rang before most soup bowls were served warm.
+B. Milk came too late, and spoons were tucked behind soup.
+C. The purple marker showed that trays belonged near the cafeteria door.
+D. The red baskets caused students to walk backward for napkins.
 
 ### pssa_item_g3_reading_28
-What is the most important reason the short reflection helped the next group in "A Cooler Lunch Line 3"?
+What does Mrs. Lane mean by saying a good solution should work on more than one lunch day?
 
-A. The notebooks and chart solved the lunch routine problem before sorting began.
-B. Talking with people helped the lunch routine research, but it did not organize the scattered notes.
-C. The two lunch routine changes were part of the proposal, but they do not explain why the next group had a fair start.
-D. It separated a useful recommendation from a quick opinion for the next group.
+A. A solution needs pizza trays instead of soup bowls at lunch.
+B. A solution should make the cafeteria line quiet during lunch.
+C. A solution should help during different lunches, not just once.
+D. A solution needs purple marker notes instead of a paper arrow.
 
-## The Mural Plan 3
+## Blue Paint for Saturday
 
-The sixth-period research team began with a question that sounded simple: how could a class plans a hallway mural from local stories? Their teacher asked them to avoid guesses and collect details that another group could check. By Monday afternoon, the students had notebooks, a shared chart, and a route for gathering observations around the building.
+I carried the smallest paint can because my wrist still had a purple soccer bruise. The label said sky blue, but inside the can the paint looked like melted berries. Grandpa laughed when he saw my face. "Paint dries lighter," he said.
 
-At first, the notes were scattered. One student wrote about sketch revisions, while another noticed community symbols. The class decided to sort the notes by place, time, and cause. That structure helped them see which details described the problem and which details suggested a possible solution.
+We were helping with the Saturday mural behind the library. The wall was rough brick, and chalk lines crossed it like a giant puzzle. Ms. Vega had drawn the river, three row houses, a bus, and a pair of sparrows. My job was to paint the river between the chalk marks without covering the silver fish.
 
-The strongest evidence came from repeated observations. The team checked the same location during different parts of the day and compared what changed. They also interviewed people who used the space often, because a design that looks helpful on paper may not match how people move, wait, or work.
+At first, I worked too fast. Blue drops slid down the brick and landed on the fish tails. I wanted to wipe them away, but Grandpa handed me a thin brush. "Turn mistakes into ripples," he said. I bent close and painted tiny waves around each tail. The fish looked as if they were flicking through the water.
 
-Their final proposal was modest but specific. It named the problem, explained the evidence, and described two changes that could be tested without spending much money. The proposal did not promise a perfect fix. Instead, it showed why careful information can make a small plan stronger.
+Near noon, a little boy asked why the bus had flowers on its roof. Ms. Vega told him people had suggested things they loved about our block. Mrs. Chen loved her roof garden. Mr. Bell loved the number seven bus. The mural mixed those memories into one picture.
 
-By the end of the week, the students understood that research is not a stack of facts. It is a way of noticing relationships. A useful plan grows when people connect observations, listen to others, and revise an idea before asking the community to trust it. Their teacher saved the chart so the next class could test whether the proposed changes actually worked. The team also wrote a short reflection explaining which evidence felt reliable and which questions still needed another careful look. That reflection helped them separate a useful recommendation from a quick opinion, and it gave the next group a fair place to begin.
+When we stepped back, the river was not perfectly smooth. Some ripples were dark, and some were pale. I could still find the first drip if I looked hard. But the fish seemed to move, and the wall no longer looked empty. I carried the light blue can home feeling taller than when I had arrived.
+
+The next morning, my wrist was sore, but I asked Dad to walk past the library. A woman had stopped to take a picture of the sparrows. Two kids traced the bus route in the air. I did not tell them which ripples were mine. I just stood there, smiling at the blue.
 
 ### pssa_item_g3_reading_4
-How did the final proposal in "The Mural Plan 3" show careful planning?
+How did the narrator respond after blue drops landed on the fish tails?
 
-A. The notebooks and route started the hallway mural work, but they do not describe the final proposal.
-B. The route around the building helped hallway mural gathering, not the two tested changes.
-C. The hallway mural research was not a stack of facts, but that lesson comes after the proposal.
-D. It named the problem, explained evidence, and described two changes to test.
+A. She carried the light blue can home before fixing the fish.
+B. She asked Ms. Vega to cover the river with row houses.
+C. She told the little boy which ripples were hers.
+D. She painted tiny waves so the fish looked as if they moved.
 
 ### pssa_item_g3_reading_9
-What helped the team organize its scattered notes in "The Mural Plan 3"?
+What is a central message of the mural story?
 
-A. Sorting by place, time, and cause helped the team understand the hallway mural problem.
-B. The notebooks and chart solved the hallway mural problem before sorting began.
-C. Talking with people helped the hallway mural research, but it did not organize the scattered notes.
-D. The final proposal came before the team sorted its hallway mural notes.
+A. Paint drips can become meaningful mural ripples.
+B. A wrist bruise keeps a painter from helping with a mural.
+C. A bus route matters more than river fish or sparrows.
+D. A library wall should stay empty until paint dries lighter.
 
 ### pssa_item_g3_reading_14
-What is the most important reason the short reflection helped the next group in "The Mural Plan 3"?
+What do the flowers on the bus roof show about the mural?
 
-A. The notebooks and chart solved the hallway mural problem before sorting began.
-B. It separated a useful recommendation from a quick opinion for the next group.
-C. Talking with people helped the hallway mural research, but it did not organize the scattered notes.
-D. The two hallway mural changes were part of the proposal, but they do not explain why the next group had a fair start.
+A. Ms. Vega painted flowers because chalk lines crossed the rough wall.
+B. The mural included things neighbors loved about the block.
+C. The narrator's purple wrist bruise changed the roof garden.
+D. The silver fish were covered when blue paint dried lighter.
 
 ### pssa_item_g3_reading_19
-What lesson about research does "The Mural Plan 3" develop near the end?
+What does rough mean in the sentence about the brick wall?
 
-A. A quick hallway mural opinion was separated from the recommendation, but that is one result of reflection.
-B. Checking the same hallway mural location showed care, but it leaves out listening and revising.
-C. Research means connecting observations, listening, and revising before asking for trust.
-D. Spending little money was part of the hallway mural proposal, not the whole lesson about research.
+A. empty, because no kids had traced the bus route yet
+B. purple, because the narrator's wrist still had a bruise
+C. bumpy, because chalk lines crossed the brick like a puzzle
+D. lighter, because Grandpa said the paint would dry that way
 
 ### pssa_item_g3_reading_24
-Which detail best supports that the team used more than one kind of evidence in "The Mural Plan 3"?
+Which event shows the narrator felt proud but quiet about her work?
 
-A. Community symbols gave one useful clue, but it was not the whole evidence set.
-B. The hallway mural proposal avoided a perfect fix, but that does not show several kinds of evidence.
-C. The saved hallway mural chart helped the next class, but it came after the evidence was gathered.
-D. The team compared repeated observations and talked with people who used the space.
+A. Grandpa laughed when the paint looked like melted berries.
+B. Ms. Vega drew row houses, a bus, and sparrows.
+C. A woman stopped near the library to photograph the sparrows.
+D. She watched children trace the route and kept her ripples secret.
 
-## The Cart That Would Not Turn 3
+## The Cart That Would Not Turn
 
-The sixth-period research team began with a question that sounded simple: how could a team improves a supply cart? Their teacher asked them to avoid guesses and collect details that another group could check. By Monday afternoon, the students had notebooks, a shared chart, and a route for gathering observations around the building.
+A supply cart should roll where you guide it. The green cart in the art room did not. When students pushed it toward the sink, the front wheel wobbled left. When they pulled it back, the cart scraped the table leg.
 
-At first, the notes were scattered. One student wrote about wheel tests, while another noticed practical adjustments. The class decided to sort the notes by place, time, and cause. That structure helped them see which details described the problem and which details suggested a possible solution.
+To find the trouble, you would not start with a hammer. First, you would empty the heavy paper boxes from the bottom shelf. Weight can hide a small problem. Next, you would turn the cart upside down on a rug so the wheels could spin freely.
 
-The strongest evidence came from repeated observations. The team checked the same location during different parts of the day and compared what changed. They also interviewed people who used the space often, because a design that looks helpful on paper may not match how people move, wait, or work.
+One wheel might spin like a top. Another might stop after half a turn. On the green cart, a strand of yarn had wrapped around the front axle. Dried glue made the yarn stiff. The wheel could roll, but it could not swing smoothly around corners.
 
-Their final proposal was modest but specific. It named the problem, explained the evidence, and described two changes that could be tested without spending much money. The proposal did not promise a perfect fix. Instead, it showed why careful information can make a small plan stronger.
+The fix had three steps. A teacher snipped the yarn with small scissors. A student wiped the axle with a damp cloth. Then the class added one drop of oil where the metal pin met the wheel. Too much oil would have dripped onto the floor, so one drop was enough.
 
-By the end of the week, the students understood that research is not a stack of facts. It is a way of noticing relationships. A useful plan grows when people connect observations, listen to others, and revise an idea before asking the community to trust it. Their teacher saved the chart so the next class could test whether the proposed changes actually worked. The team also wrote a short reflection explaining which evidence felt reliable and which questions still needed another careful look. That reflection helped them separate a useful recommendation from a quick opinion, and it gave the next group a fair place to begin.
+After the repair, the cart still squeaked a little. It was old, and its handle had a dent. But it turned around the table without scraping. The class taped a card to the top shelf: Check wheels before loading paper. The card reminded everyone that a stuck cart is easier to fix before it is heavy.
+
+The next week, the same steps helped with a rolling book bin. This time, a pebble was caught beside the wheel instead of yarn. The class did not guess or shove harder. They unloaded the bin, checked each wheel, and found the small thing that caused the big trouble. Their careful order saved time and kept the floor completely clear.
 
 ### pssa_item_g3_reading_5
-What lesson about research does "The Cart That Would Not Turn 3" develop near the end?
+What is the main lesson in the cart passage?
 
-A. Research means connecting observations, listening, and revising before asking for trust.
-B. A quick supply cart opinion was separated from the recommendation, but that is one result of reflection.
-C. Checking the same supply cart location showed care, but it leaves out listening and revising.
-D. Spending little money was part of the supply cart proposal, not the whole lesson about research.
+A. Careful steps can find a small cause of a big problem.
+B. A hammer should be used before checking cart wheels.
+C. A squeaky handle means a supply cart should be replaced.
+D. Paper boxes should stay loaded while wheels spin freely.
 
 ### pssa_item_g3_reading_10
-Which detail best supports that the team used more than one kind of evidence in "The Cart That Would Not Turn 3"?
+What should happen before turning the green cart upside down?
 
-A. Practical cart adjustments gave one useful clue, but it was not the whole evidence set.
-B. The team compared repeated observations and talked with people who used the space.
-C. The supply cart proposal avoided a perfect fix, but that does not show several kinds of evidence.
-D. The saved supply cart chart helped the next class, but it came after the evidence was gathered.
+A. A teacher should snip yarn from the front axle.
+B. Someone should empty the heavy paper boxes from the shelf.
+C. The class should tape a card to the top shelf.
+D. Students should push the cart harder toward the sink.
 
 ### pssa_item_g3_reading_15
-Why did the team in "The Cart That Would Not Turn 3" collect details that another group could check?
+Why was the yarn around the axle a problem?
 
-A. The shared chart meant the supply cart answer had already been proven.
-B. The interviews mattered because the team had stopped comparing supply cart observations.
-C. The team needed checkable details before making a supply cart plan.
-D. The short reflection was the first step in solving the supply cart problem.
+A. It made the green cart scrape because paper boxes were missing.
+B. It caused the wheel to spin like a top during repair.
+C. It kept the front wheel from swinging smoothly around corners.
+D. It meant the class needed too much oil on the floor.
 
 ### pssa_item_g3_reading_20
-Which sentence from "The Cart That Would Not Turn 3" shows that the plan still needed to be checked later?
+Which sentence shows the class used the cart steps again later?
 
-A. The supply cart proposal was modest and specific, but that does not show the later test.
-B. The scattered supply cart notes show an early problem, not a later check of the plan.
-C. The team still had supply cart questions, but the saved chart names who would test changes.
-D. The teacher saved the chart so another class could test the proposed changes.
+A. The green cart in the art room did not.
+B. The fix had three steps.
+C. The class taped a reminder card to the top shelf before loading paper.
+D. The same steps helped with a rolling book bin.
 
 ### pssa_item_g3_reading_25
-How did the final proposal in "The Cart That Would Not Turn 3" show careful planning?
+How does the reminder card help prevent another cart problem?
 
-A. It named the problem, explained evidence, and described two changes to test.
-B. The notebooks and route started the supply cart work, but they do not describe the final proposal.
-C. The route around the building helped supply cart gathering, not the two tested changes.
-D. The supply cart research was not a stack of facts, but that lesson comes after the proposal.
-
-## Conventions
-
-### pssa_item_g3_conv_29
-Which sentence best demonstrates this convention: Explain the function of nouns, pronouns, verbs, adjectives, and adverbs in general and their functions in particular sentences.
-
-A. The student revised the report carefully before the grade 3 conference began.
-B. The student revised the report careful before the grade 3 conference began yesterday.
-C. The student revise the report carefully before the grade 3 conference began yesterday.
-D. The student revised the report carefully before grade 3 conference began yesterday.
-
-### pssa_item_g3_conv_30
-Which sentence best demonstrates this convention: Form and use regular and irregular plural nouns.
-
-A. The student revised the report careful before the grade 3 conference began yesterday.
-B. The student revised the report carefully before the grade 3 conference began.
-C. The student revise the report carefully before the grade 3 conference began yesterday.
-D. The student revised the report carefully before grade 3 conference began yesterday.
-
-### pssa_item_g3_conv_31
-Which sentence best demonstrates this convention: Use abstract nouns (e.g., childhood).
-
-A. The student revised the report careful before the grade 3 conference began yesterday.
-B. The student revise the report carefully before the grade 3 conference began yesterday.
-C. The student revised the report carefully before the grade 3 conference began.
-D. The student revised the report carefully before grade 3 conference began yesterday.
-
-### pssa_item_g3_conv_32
-Which sentence best demonstrates this convention: Form and use regular and irregular verbs.
-
-A. The student revised the report careful before the grade 3 conference began yesterday.
-B. The student revise the report carefully before the grade 3 conference began yesterday.
-C. The student revised the report carefully before grade 3 conference began yesterday.
-D. The student revised the report carefully before the grade 3 conference began.
-
-### pssa_item_g3_conv_33
-Which sentence best demonstrates this convention: Form and use the simple verb tenses (e.g., I walked; I walk; I will walk).
-
-A. The student revised the report carefully before the grade 3 conference began.
-B. The student revised the report careful before the grade 3 conference began yesterday.
-C. The student revise the report carefully before the grade 3 conference began yesterday.
-D. The student revised the report carefully before grade 3 conference began yesterday.
-
-### pssa_item_g3_conv_34
-Which sentence best demonstrates this convention: Ensure subject-verb and pronoun-antecedent agreement.
-
-A. The student revised the report careful before the grade 3 conference began yesterday.
-B. The student revised the report carefully before the grade 3 conference began.
-C. The student revise the report carefully before the grade 3 conference began yesterday.
-D. The student revised the report carefully before grade 3 conference began yesterday.
-
-### pssa_item_g3_conv_35
-Which sentence best demonstrates this convention: Form and use comparative and superlative adjectives and adverbs, and choose between them depending on what is to be modified.
-
-A. The student revised the report careful before the grade 3 conference began yesterday.
-B. The student revise the report carefully before the grade 3 conference began yesterday.
-C. The student revised the report carefully before the grade 3 conference began.
-D. The student revised the report carefully before grade 3 conference began yesterday.
-
-### pssa_item_g3_conv_36
-Which sentence best demonstrates this convention: Use coordinating and subordinating conjunctions.
-
-A. The student revised the report careful before the grade 3 conference began yesterday.
-B. The student revise the report carefully before the grade 3 conference began yesterday.
-C. The student revised the report carefully before grade 3 conference began yesterday.
-D. The student revised the report carefully before the grade 3 conference began.
-
-### pssa_item_g3_conv_37
-Which sentence best demonstrates this convention: Produce simple, compound, and complex sentences.
-
-A. The student revised the report carefully before the grade 3 conference began.
-B. The student revised the report careful before the grade 3 conference began yesterday.
-C. The student revise the report carefully before the grade 3 conference began yesterday.
-D. The student revised the report carefully before grade 3 conference began yesterday.
-
-### pssa_item_g3_conv_38
-Which sentence best demonstrates this convention: Capitalize appropriate words in titles.
-
-A. The student revised the report careful before the grade 3 conference began yesterday.
-B. The student revised the report carefully before the grade 3 conference began.
-C. The student revise the report carefully before the grade 3 conference began yesterday.
-D. The student revised the report carefully before grade 3 conference began yesterday.
-
-### pssa_item_g3_conv_39
-Which sentence best demonstrates this convention: Use commas in addresses.
-
-A. The student revised the report careful before the grade 3 conference began yesterday.
-B. The student revise the report carefully before the grade 3 conference began yesterday.
-C. The student revised the report carefully before the grade 3 conference began.
-D. The student revised the report carefully before grade 3 conference began yesterday.
-
-### pssa_item_g3_conv_40
-Which sentence best demonstrates this convention: Use commas and quotation marks in dialogue.
-
-A. The student revised the report careful before the grade 3 conference began yesterday.
-B. The student revise the report carefully before the grade 3 conference began yesterday.
-C. The student revised the report carefully before grade 3 conference began yesterday.
-D. The student revised the report carefully before the grade 3 conference began.
+A. It reminds the class to check wheels before adding heavy paper.
+B. It tells students to add oil before looking at the axle.
+C. It shows that the old handle dent caused the scraping.
+D. It tells students to keep boxes on the bottom shelf.
 

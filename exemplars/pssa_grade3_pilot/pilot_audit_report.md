@@ -1,52 +1,67 @@
 # PSSA Grade 3 Pilot Audit Report
 
-## PR #4d Passage-Grounded Rewrite
-- Rewritten reading MCQs: 28
+## PR #4g Count Check
+- Prior Grade 3 reading-item count: 28
+- Target replacement count: 28
+- Passage distribution: pssa_psg_g3_a_cooler_lunch_line:6, pssa_psg_g3_creek_watchers:6, pssa_psg_g3_the_cart_that_would_not_turn:5, pssa_psg_g3_the_map_in_the_station:6, pssa_psg_g3_the_mural_plan:5
+- EC distribution: E03.A-C.2.1.1:2, E03.A-C.3.1.1:2, E03.A-K.1.1.1:2, E03.A-K.1.1.2:2, E03.A-K.1.1.3:2, E03.A-V.4.1.1:2, E03.A-V.4.1.2:2, E03.B-C.2.1.1:2, E03.B-C.2.1.2:1, E03.B-C.3.1.1:1, E03.B-C.3.1.2:1, E03.B-C.3.1.3:1, E03.B-K.1.1.1:2, E03.B-K.1.1.2:2, E03.B-K.1.1.3:2, E03.B-V.4.1.1:1, E03.B-V.4.1.2:1
+
+## Gate Summary
 - Passage-specificity blocker rows: 0
-- Evidence spans found: true
-- Same-span reuse blockers: 0
-- Correct-answer-longest rate: 0%
-- Answer-position distribution: A:7 B:7 C:7 D:7
+- Evidence spans found: 28/28
+- Correct-answer-longest rate: 29%
+- Answer-position distribution: A:8 B:7 C:6 D:7
 - Absolute-language distractors: 0
+- Passage-quality failures: 0
 - Result: PASS
 
+## Grade 3 Passage Gates
+
+| passageId | cross_duplicate | template_skeleton | topic_coherence | concreteness |
+|---|---|---|---|---|
+| pssa_psg_g3_creek_watchers | PASS | PASS | PASS | PASS |
+| pssa_psg_g3_the_map_in_the_station | PASS | PASS | PASS | PASS |
+| pssa_psg_g3_a_cooler_lunch_line | PASS | PASS | PASS | PASS |
+| pssa_psg_g3_the_mural_plan | PASS | PASS | PASS | PASS |
+| pssa_psg_g3_the_cart_that_would_not_turn | PASS | PASS | PASS | PASS |
+
 ## Distractor Role Counts
-- opposite_claim: 4
-- plausible_misreading: 4
-- too_narrow: 32
-- unsupported_inference: 8
-- wrong_emphasis: 16
-- wrong_section: 20
+- opposite_claim: 24
+- plausible_misreading: 8
+- too_narrow: 10
+- unsupported_inference: 16
+- wrong_emphasis: 8
+- wrong_section: 18
 
-## Per-Item Review Table
+## Per-Item Audit Table
 
-| itemId | passageId | eligibleContent | stem | correctIndex | distractorRoles | evidenceSpansFound | singleDefensibleAnswer | passageSpecificity | note |
-|---|---|---|---|---:|---|---|---|---|---|
-| pssa_item_g3_reading_1 | pssa_psg_g3_creek_watchers | E03.A-K.1.1.1 | Why did the team in "Creek Watchers 3" collect details that another group could check? | 0 | correct; wrong_emphasis; plausible_misreading; wrong_section | true | PASS | PASS | Correct: this answers E03.A-K.1.1.1 by using the teacher's direction and the team's research purpose. |
-| pssa_item_g3_reading_2 | pssa_psg_g3_the_map_in_the_station | E03.A-K.1.1.2 | What helped the team organize its scattered notes in "The Map in the Station 3"? | 1 | unsupported_inference; correct; too_narrow; opposite_claim | true | PASS | PASS | Correct: this uses the passage's key detail about how the team organized information for E03.A-K.1.1.2. |
-| pssa_item_g3_reading_3 | pssa_psg_g3_a_cooler_lunch_line | E03.A-K.1.1.3 | Which detail best supports that the team used more than one kind of evidence in "A Cooler Lunch Line 3"? | 2 | too_narrow; wrong_emphasis; correct; wrong_section | true | PASS | PASS | Correct: this combines observation and interview evidence, which directly supports the E03.A-K.1.1.3 skill. |
-| pssa_item_g3_reading_4 | pssa_psg_g3_the_mural_plan | E03.A-C.2.1.1 | How did the final proposal in "The Mural Plan 3" show careful planning? | 3 | wrong_section; too_narrow; wrong_section; correct | true | PASS | PASS | Correct: this paraphrases the proposal sentence and explains why the plan was careful for E03.A-C.2.1.1. |
-| pssa_item_g3_reading_5 | pssa_psg_g3_the_cart_that_would_not_turn | E03.A-C.3.1.1 | What lesson about research does "The Cart That Would Not Turn 3" develop near the end? | 0 | correct; too_narrow; too_narrow; wrong_emphasis | true | PASS | PASS | Correct: this states the lesson developed by the final paragraph and matches the E03.A-C.3.1.1 focus. |
-| pssa_item_g3_reading_6 | pssa_psg_g3_creek_watchers | E03.A-V.4.1.1 | Which sentence from "Creek Watchers 3" shows that the plan still needed to be checked later? | 1 | too_narrow; correct; wrong_section; wrong_emphasis | true | PASS | PASS | Correct: this identifies the later-check detail and uses text evidence for E03.A-V.4.1.1. |
-| pssa_item_g3_reading_7 | pssa_psg_g3_the_map_in_the_station | E03.A-V.4.1.2 | What is the most important reason the short reflection helped the next group in "The Map in the Station 3"? | 2 | unsupported_inference; too_narrow; correct; too_narrow | true | PASS | PASS | Correct: this explains how the reflection helped future work, which is the targeted E03.A-V.4.1.2 idea. |
-| pssa_item_g3_reading_8 | pssa_psg_g3_a_cooler_lunch_line | E03.B-K.1.1.1 | Why did the team in "A Cooler Lunch Line 3" collect details that another group could check? | 3 | wrong_emphasis; plausible_misreading; wrong_section; correct | true | PASS | PASS | Correct: this answers E03.B-K.1.1.1 by using the teacher's direction and the team's research purpose. |
-| pssa_item_g3_reading_9 | pssa_psg_g3_the_mural_plan | E03.B-K.1.1.2 | What helped the team organize its scattered notes in "The Mural Plan 3"? | 0 | correct; unsupported_inference; too_narrow; opposite_claim | true | PASS | PASS | Correct: this uses the passage's key detail about how the team organized information for E03.B-K.1.1.2. |
-| pssa_item_g3_reading_10 | pssa_psg_g3_the_cart_that_would_not_turn | E03.B-K.1.1.3 | Which detail best supports that the team used more than one kind of evidence in "The Cart That Would Not Turn 3"? | 1 | too_narrow; correct; wrong_emphasis; wrong_section | true | PASS | PASS | Correct: this combines observation and interview evidence, which directly supports the E03.B-K.1.1.3 skill. |
-| pssa_item_g3_reading_11 | pssa_psg_g3_creek_watchers | E03.B-C.2.1.1 | How did the final proposal in "Creek Watchers 3" show careful planning? | 2 | wrong_section; too_narrow; correct; wrong_section | true | PASS | PASS | Correct: this paraphrases the proposal sentence and explains why the plan was careful for E03.B-C.2.1.1. |
-| pssa_item_g3_reading_12 | pssa_psg_g3_the_map_in_the_station | E03.B-C.2.1.2 | What lesson about research does "The Map in the Station 3" develop near the end? | 3 | too_narrow; too_narrow; wrong_emphasis; correct | true | PASS | PASS | Correct: this states the lesson developed by the final paragraph and matches the E03.B-C.2.1.2 focus. |
-| pssa_item_g3_reading_13 | pssa_psg_g3_a_cooler_lunch_line | E03.B-C.3.1.1 | Which sentence from "A Cooler Lunch Line 3" shows that the plan still needed to be checked later? | 0 | correct; too_narrow; wrong_section; wrong_emphasis | true | PASS | PASS | Correct: this identifies the later-check detail and uses text evidence for E03.B-C.3.1.1. |
-| pssa_item_g3_reading_14 | pssa_psg_g3_the_mural_plan | E03.B-C.3.1.2 | What is the most important reason the short reflection helped the next group in "The Mural Plan 3"? | 1 | unsupported_inference; correct; too_narrow; too_narrow | true | PASS | PASS | Correct: this explains how the reflection helped future work, which is the targeted E03.B-C.3.1.2 idea. |
-| pssa_item_g3_reading_15 | pssa_psg_g3_the_cart_that_would_not_turn | E03.B-C.3.1.3 | Why did the team in "The Cart That Would Not Turn 3" collect details that another group could check? | 2 | wrong_emphasis; plausible_misreading; correct; wrong_section | true | PASS | PASS | Correct: this answers E03.B-C.3.1.3 by using the teacher's direction and the team's research purpose. |
-| pssa_item_g3_reading_16 | pssa_psg_g3_creek_watchers | E03.B-V.4.1.1 | What helped the team organize its scattered notes in "Creek Watchers 3"? | 3 | unsupported_inference; too_narrow; opposite_claim; correct | true | PASS | PASS | Correct: this uses the passage's key detail about how the team organized information for E03.B-V.4.1.1. |
-| pssa_item_g3_reading_17 | pssa_psg_g3_the_map_in_the_station | E03.B-V.4.1.2 | Which detail best supports that the team used more than one kind of evidence in "The Map in the Station 3"? | 0 | correct; too_narrow; wrong_emphasis; wrong_section | true | PASS | PASS | Correct: this combines observation and interview evidence, which directly supports the E03.B-V.4.1.2 skill. |
-| pssa_item_g3_reading_18 | pssa_psg_g3_a_cooler_lunch_line | E03.A-K.1.1.1 | How did the final proposal in "A Cooler Lunch Line 3" show careful planning? | 1 | wrong_section; correct; too_narrow; wrong_section | true | PASS | PASS | Correct: this paraphrases the proposal sentence and explains why the plan was careful for E03.A-K.1.1.1. |
-| pssa_item_g3_reading_19 | pssa_psg_g3_the_mural_plan | E03.A-K.1.1.2 | What lesson about research does "The Mural Plan 3" develop near the end? | 2 | too_narrow; too_narrow; correct; wrong_emphasis | true | PASS | PASS | Correct: this states the lesson developed by the final paragraph and matches the E03.A-K.1.1.2 focus. |
-| pssa_item_g3_reading_20 | pssa_psg_g3_the_cart_that_would_not_turn | E03.A-K.1.1.3 | Which sentence from "The Cart That Would Not Turn 3" shows that the plan still needed to be checked later? | 3 | too_narrow; wrong_section; wrong_emphasis; correct | true | PASS | PASS | Correct: this identifies the later-check detail and uses text evidence for E03.A-K.1.1.3. |
-| pssa_item_g3_reading_21 | pssa_psg_g3_creek_watchers | E03.A-C.2.1.1 | What is the most important reason the short reflection helped the next group in "Creek Watchers 3"? | 0 | correct; unsupported_inference; too_narrow; too_narrow | true | PASS | PASS | Correct: this explains how the reflection helped future work, which is the targeted E03.A-C.2.1.1 idea. |
-| pssa_item_g3_reading_22 | pssa_psg_g3_the_map_in_the_station | E03.A-C.3.1.1 | Why did the team in "The Map in the Station 3" collect details that another group could check? | 1 | wrong_emphasis; correct; plausible_misreading; wrong_section | true | PASS | PASS | Correct: this answers E03.A-C.3.1.1 by using the teacher's direction and the team's research purpose. |
-| pssa_item_g3_reading_23 | pssa_psg_g3_a_cooler_lunch_line | E03.A-V.4.1.1 | What helped the team organize its scattered notes in "A Cooler Lunch Line 3"? | 2 | unsupported_inference; too_narrow; correct; opposite_claim | true | PASS | PASS | Correct: this uses the passage's key detail about how the team organized information for E03.A-V.4.1.1. |
-| pssa_item_g3_reading_24 | pssa_psg_g3_the_mural_plan | E03.A-V.4.1.2 | Which detail best supports that the team used more than one kind of evidence in "The Mural Plan 3"? | 3 | too_narrow; wrong_emphasis; wrong_section; correct | true | PASS | PASS | Correct: this combines observation and interview evidence, which directly supports the E03.A-V.4.1.2 skill. |
-| pssa_item_g3_reading_25 | pssa_psg_g3_the_cart_that_would_not_turn | E03.B-K.1.1.1 | How did the final proposal in "The Cart That Would Not Turn 3" show careful planning? | 0 | correct; wrong_section; too_narrow; wrong_section | true | PASS | PASS | Correct: this paraphrases the proposal sentence and explains why the plan was careful for E03.B-K.1.1.1. |
-| pssa_item_g3_reading_26 | pssa_psg_g3_creek_watchers | E03.B-K.1.1.2 | What lesson about research does "Creek Watchers 3" develop near the end? | 1 | too_narrow; correct; too_narrow; wrong_emphasis | true | PASS | PASS | Correct: this states the lesson developed by the final paragraph and matches the E03.B-K.1.1.2 focus. |
-| pssa_item_g3_reading_27 | pssa_psg_g3_the_map_in_the_station | E03.B-K.1.1.3 | Which sentence from "The Map in the Station 3" shows that the plan still needed to be checked later? | 2 | too_narrow; wrong_section; correct; wrong_emphasis | true | PASS | PASS | Correct: this identifies the later-check detail and uses text evidence for E03.B-K.1.1.3. |
-| pssa_item_g3_reading_28 | pssa_psg_g3_a_cooler_lunch_line | E03.B-C.2.1.1 | What is the most important reason the short reflection helped the next group in "A Cooler Lunch Line 3"? | 3 | unsupported_inference; too_narrow; too_narrow; correct | true | PASS | PASS | Correct: this explains how the reflection helped future work, which is the targeted E03.B-C.2.1.1 idea. |
+| itemId | passageId | EC | answer | correctLongest | evidenceFound | finalResult |
+|---|---|---|---:|---|---|---|
+| pssa_item_g3_reading_1 | pssa_psg_g3_creek_watchers | E03.A-K.1.1.1 | A | false | true | PASS |
+| pssa_item_g3_reading_2 | pssa_psg_g3_the_map_in_the_station | E03.A-K.1.1.2 | A | false | true | PASS |
+| pssa_item_g3_reading_3 | pssa_psg_g3_a_cooler_lunch_line | E03.A-K.1.1.3 | B | false | true | PASS |
+| pssa_item_g3_reading_4 | pssa_psg_g3_the_mural_plan | E03.A-C.2.1.1 | D | true | true | PASS |
+| pssa_item_g3_reading_5 | pssa_psg_g3_the_cart_that_would_not_turn | E03.A-C.3.1.1 | A | true | true | PASS |
+| pssa_item_g3_reading_6 | pssa_psg_g3_creek_watchers | E03.A-V.4.1.1 | D | false | true | PASS |
+| pssa_item_g3_reading_7 | pssa_psg_g3_the_map_in_the_station | E03.A-V.4.1.2 | D | false | true | PASS |
+| pssa_item_g3_reading_8 | pssa_psg_g3_a_cooler_lunch_line | E03.B-K.1.1.1 | C | false | true | PASS |
+| pssa_item_g3_reading_9 | pssa_psg_g3_the_mural_plan | E03.B-K.1.1.2 | A | false | true | PASS |
+| pssa_item_g3_reading_10 | pssa_psg_g3_the_cart_that_would_not_turn | E03.B-K.1.1.3 | B | true | true | PASS |
+| pssa_item_g3_reading_11 | pssa_psg_g3_creek_watchers | E03.B-C.2.1.1 | A | true | true | PASS |
+| pssa_item_g3_reading_12 | pssa_psg_g3_the_map_in_the_station | E03.B-C.2.1.2 | A | false | true | PASS |
+| pssa_item_g3_reading_13 | pssa_psg_g3_a_cooler_lunch_line | E03.B-C.3.1.1 | D | false | true | PASS |
+| pssa_item_g3_reading_14 | pssa_psg_g3_the_mural_plan | E03.B-C.3.1.2 | B | false | true | PASS |
+| pssa_item_g3_reading_15 | pssa_psg_g3_the_cart_that_would_not_turn | E03.B-C.3.1.3 | C | false | true | PASS |
+| pssa_item_g3_reading_16 | pssa_psg_g3_creek_watchers | E03.B-V.4.1.1 | B | false | true | PASS |
+| pssa_item_g3_reading_17 | pssa_psg_g3_the_map_in_the_station | E03.B-V.4.1.2 | B | true | true | PASS |
+| pssa_item_g3_reading_18 | pssa_psg_g3_a_cooler_lunch_line | E03.A-K.1.1.1 | A | false | true | PASS |
+| pssa_item_g3_reading_19 | pssa_psg_g3_the_mural_plan | E03.A-K.1.1.2 | C | false | true | PASS |
+| pssa_item_g3_reading_20 | pssa_psg_g3_the_cart_that_would_not_turn | E03.A-K.1.1.3 | D | false | true | PASS |
+| pssa_item_g3_reading_21 | pssa_psg_g3_creek_watchers | E03.A-C.2.1.1 | C | false | true | PASS |
+| pssa_item_g3_reading_22 | pssa_psg_g3_the_map_in_the_station | E03.A-C.3.1.1 | C | false | true | PASS |
+| pssa_item_g3_reading_23 | pssa_psg_g3_a_cooler_lunch_line | E03.A-V.4.1.1 | B | false | true | PASS |
+| pssa_item_g3_reading_24 | pssa_psg_g3_the_mural_plan | E03.A-V.4.1.2 | D | true | true | PASS |
+| pssa_item_g3_reading_25 | pssa_psg_g3_the_cart_that_would_not_turn | E03.B-K.1.1.1 | A | true | true | PASS |
+| pssa_item_g3_reading_26 | pssa_psg_g3_creek_watchers | E03.B-K.1.1.2 | B | false | true | PASS |
+| pssa_item_g3_reading_27 | pssa_psg_g3_the_map_in_the_station | E03.B-K.1.1.3 | D | false | true | PASS |
+| pssa_item_g3_reading_28 | pssa_psg_g3_a_cooler_lunch_line | E03.B-C.2.1.1 | C | true | true | PASS |

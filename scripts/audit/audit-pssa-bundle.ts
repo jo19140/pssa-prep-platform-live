@@ -53,7 +53,7 @@ const unrevisedReadingMcqs = generatedReadingMcqs.filter((item) => item.gradeLev
 const generatedPassageRows = buildMcqPassageSpecificityReport(generatedReadingMcqs, pilotPassages);
 const grade3Rows = buildMcqPassageSpecificityReport(grade3ReadingMcqs, pilotPassages);
 const unrevisedRows = buildMcqPassageSpecificityReport(unrevisedReadingMcqs, pilotPassages);
-const grade3QuarantinedItems = grade3ReadingMcqs.filter((item: any) => item.validationMetadataJson?.quarantinedUntilPassageReauthored === true);
+const grade3ReplacementItems = grade3ReadingMcqs.filter((item: any) => item.validationMetadataJson?.replacementAuthoredInPr4g === true);
 const unrevisedFailedItemIds = new Set(unrevisedRows.filter((row) => row.result === "FAIL").map((row) => row.itemId));
 const conventionsMcqs = pilotItems.filter((item) => (item.itemType ?? item.questionType) === "MCQ" && !item.passageId);
 const tdaItems = pilotItems.filter((item) => item.itemType === "TDA");
@@ -76,8 +76,9 @@ if (fs.existsSync(exemplarPath)) {
 }
 
 if (generatedReadingMcqs.length !== 144) failures.push(`Expected 144 generated reading MCQs, found ${generatedReadingMcqs.length}`);
-if (grade3ReadingMcqs.length !== 28) failures.push(`Expected 28 quarantined Grade 3 reading MCQs, found ${grade3ReadingMcqs.length}`);
-if (grade3QuarantinedItems.length !== grade3ReadingMcqs.length) failures.push(`Expected all Grade 3 reading MCQs to be quarantined pending re-authoring, found ${grade3QuarantinedItems.length}/${grade3ReadingMcqs.length}`);
+if (grade3ReadingMcqs.length !== 28) failures.push(`Expected 28 reauthored Grade 3 reading MCQs, found ${grade3ReadingMcqs.length}`);
+if (grade3ReplacementItems.length !== grade3ReadingMcqs.length) failures.push(`Expected all Grade 3 reading MCQs to be PR #4g replacements, found ${grade3ReplacementItems.length}/${grade3ReadingMcqs.length}`);
+if (hasBlockingPassageSpecificityFailure(grade3Rows)) failures.push("Expected reauthored Grade 3 reading MCQs to pass passage-specificity gates");
 if (unrevisedReadingMcqs.length !== 116) failures.push(`Expected 116 unrevised reading MCQs, found ${unrevisedReadingMcqs.length}`);
 if (unrevisedFailedItemIds.size !== unrevisedReadingMcqs.length) {
   failures.push(`Expected unrevised reading MCQs to fail passage-specificity gates, failed ${unrevisedFailedItemIds.size}/${unrevisedReadingMcqs.length}`);
@@ -159,8 +160,8 @@ writeCsv(
 const discrimination = {
   rewrittenGrade3ReadingMcqs: {
     evaluated: grade3ReadingMcqs.length,
-    result: grade3QuarantinedItems.length === grade3ReadingMcqs.length ? "QUARANTINED" : "FAIL",
-    expected: "28 quarantined pending item re-authoring",
+    result: !hasBlockingPassageSpecificityFailure(grade3Rows) && grade3ReplacementItems.length === grade3ReadingMcqs.length ? "PASS" : "FAIL",
+    expected: "28 PR #4g reauthored items pass",
   },
   unrevisedReadingMcqs: {
     evaluated: unrevisedReadingMcqs.length,
