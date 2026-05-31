@@ -1141,30 +1141,30 @@
       "reviewStatus": "PENDING",
       "itemStatus": "candidate",
       "approvalEligible": false,
-      "studentFacingPrompt": "What is the main reason people spent longer near the station bench?",
+      "studentFacingPrompt": "What does creases mean as it is used in the station passage?",
       "answerChoicesJson": [
-        "The blue rail lines were still easy to follow across the dusty page.",
-        "The cloth weights made the old paper unfold quickly for visitors.",
-        "The dotted river path proved the bridge was closed that Saturday.",
-        "The map showed town changes while some landmarks stayed in place."
+        "blue rail lines printed across the old page",
+        "small cloth weights placed along map edges",
+        "thin sleeves used to keep paper clean",
+        "folded lines where old paper can tear"
       ],
       "correctIndex": 3,
-      "correctAnswer": "The map showed town changes while some landmarks stayed in place.",
+      "correctAnswer": "folded lines where old paper can tear",
       "distractorRationalesJson": [
-        "Too narrow: the rail lines are one feature, not the main reason visitors stopped.",
-        "Opposite claim: Mr. Ortiz did not unfold the old paper quickly.",
-        "Unsupported inference: Leo wondered about the closed bridge; the map does not prove Saturday events.",
-        "This sentence explains why the map held visitors' attention."
+        "Wrong section: the blue rail lines are printed map details, not creases.",
+        "Plausible misreading: the weights protect the paper, but they are not the creases.",
+        "Wrong section: the clear sleeve is added after the map is opened.",
+        "Creases are the folded lines in old paper that could tear when opened."
       ],
       "expectedResponseJson": null,
       "scoringRubricJson": null,
       "studentPreviewJson": {
-        "prompt": "What is the main reason people spent longer near the station bench?",
+        "prompt": "What does creases mean as it is used in the station passage?",
         "choices": [
-          "The blue rail lines were still easy to follow across the dusty page.",
-          "The cloth weights made the old paper unfold quickly for visitors.",
-          "The dotted river path proved the bridge was closed that Saturday.",
-          "The map showed town changes while some landmarks stayed in place."
+          "blue rail lines printed across the old page",
+          "small cloth weights placed along map edges",
+          "thin sleeves used to keep paper clean",
+          "folded lines where old paper can tear"
         ],
         "leaksAnswer": false
       },
@@ -1199,9 +1199,9 @@
       "sequence": 7,
       "structuredChoicesJson": [
         {
-          "text": "The blue rail lines were still easy to follow across the dusty page.",
+          "text": "blue rail lines printed across the old page",
           "isCorrect": false,
-          "rationale": "Too narrow: the rail lines are one feature, not the main reason visitors stopped.",
+          "rationale": "Wrong section: the blue rail lines are printed map details, not creases.",
           "evidenceLinks": [
             {
               "paragraphIndex": 0,
@@ -1211,49 +1211,49 @@
               "endChar": 176
             }
           ],
-          "distractorRole": "too_narrow"
+          "distractorRole": "wrong_section"
         },
         {
-          "text": "The cloth weights made the old paper unfold quickly for visitors.",
+          "text": "small cloth weights placed along map edges",
           "isCorrect": false,
-          "rationale": "Opposite claim: Mr. Ortiz did not unfold the old paper quickly.",
+          "rationale": "Plausible misreading: the weights protect the paper, but they are not the creases.",
           "evidenceLinks": [
             {
               "paragraphIndex": 1,
-              "sentenceIndex": 2,
-              "quotedSpan": "He did not unfold the map quickly.",
-              "startChar": 280,
-              "endChar": 314
+              "sentenceIndex": 4,
+              "quotedSpan": "He slid a flat card under one corner, opened the first fold, and placed small cloth weights along the edges.",
+              "startChar": 353,
+              "endChar": 461
             }
           ],
-          "distractorRole": "opposite_claim"
+          "distractorRole": "plausible_misreading"
         },
         {
-          "text": "The dotted river path proved the bridge was closed that Saturday.",
+          "text": "thin sleeves used to keep paper clean",
           "isCorrect": false,
-          "rationale": "Unsupported inference: Leo wondered about the closed bridge; the map does not prove Saturday events.",
-          "evidenceLinks": [
-            {
-              "paragraphIndex": 2,
-              "sentenceIndex": 3,
-              "quotedSpan": "Leo pointed to a dotted path beside the river and wondered whether people had walked there when the bridge was closed.",
-              "startChar": 750,
-              "endChar": 868
-            }
-          ],
-          "distractorRole": "unsupported_inference"
-        },
-        {
-          "text": "The map showed town changes while some landmarks stayed in place.",
-          "isCorrect": true,
-          "rationale": "This sentence explains why the map held visitors' attention.",
+          "rationale": "Wrong section: the clear sleeve is added after the map is opened.",
           "evidenceLinks": [
             {
               "paragraphIndex": 4,
-              "sentenceIndex": 2,
-              "quotedSpan": "People stopped near the bench longer than before, not because the paper looked perfect, but because it showed how the town had changed while some landmarks stayed in place.",
-              "startChar": 1229,
-              "endChar": 1401
+              "sentenceIndex": 0,
+              "quotedSpan": "By the end of the week, the map was inside a clear sleeve.",
+              "startChar": 1115,
+              "endChar": 1173
+            }
+          ],
+          "distractorRole": "wrong_section"
+        },
+        {
+          "text": "folded lines where old paper can tear",
+          "isCorrect": true,
+          "rationale": "Creases are the folded lines in old paper that could tear when opened.",
+          "evidenceLinks": [
+            {
+              "paragraphIndex": 1,
+              "sentenceIndex": 3,
+              "quotedSpan": "Old paper can tear along its creases.",
+              "startChar": 315,
+              "endChar": 352
             }
           ],
           "distractorRole": null
@@ -2453,30 +2453,30 @@
       "reviewStatus": "PENDING",
       "itemStatus": "candidate",
       "approvalEligible": false,
-      "studentFacingPrompt": "What does Maya's Friday visit show about what she learned at Pine Creek?",
+      "studentFacingPrompt": "What does faded mean as it is used in the creek passage?",
       "answerChoicesJson": [
-        "Maya thought the robin and beetle had caused the green glow.",
-        "Maya learned a careful way to watch for creek changes.",
-        "Maya stopped using maps after the glow faded to a stripe.",
-        "Maya's father told the class to bring jars and a thermometer."
+        "grew thicker along the sunny creek bank",
+        "the creek glow became weaker and harder to see",
+        "moved quickly around the bend in the creek",
+        "became safe enough for families to touch"
       ],
       "correctIndex": 1,
-      "correctAnswer": "Maya learned a careful way to watch for creek changes.",
+      "correctAnswer": "the creek glow became weaker and harder to see",
       "distractorRationalesJson": [
-        "Unsupported inference: the animals are observed, but they are not given as the cause.",
-        "The final sentence directly supports this inference.",
-        "Opposite claim: her map had already helped readers understand the sunny bank.",
-        "Wrong section: her father appears on Friday, after the class visit with tools."
+        "Opposite claim: thicker describes the earlier green color near the sunny bank.",
+        "Faded means the glow became less noticeable, which fits the faint stripe context.",
+        "Plausible misreading: the passage describes water bending around a log, not the glow moving quickly.",
+        "Unsupported inference: the class did not claim the water was safe."
       ],
       "expectedResponseJson": null,
       "scoringRubricJson": null,
       "studentPreviewJson": {
-        "prompt": "What does Maya's Friday visit show about what she learned at Pine Creek?",
+        "prompt": "What does faded mean as it is used in the creek passage?",
         "choices": [
-          "Maya thought the robin and beetle had caused the green glow.",
-          "Maya learned a careful way to watch for creek changes.",
-          "Maya stopped using maps after the glow faded to a stripe.",
-          "Maya's father told the class to bring jars and a thermometer."
+          "grew thicker along the sunny creek bank",
+          "the creek glow became weaker and harder to see",
+          "moved quickly around the bend in the creek",
+          "became safe enough for families to touch"
         ],
         "leaksAnswer": false
       },
@@ -2511,64 +2511,64 @@
       "sequence": 16,
       "structuredChoicesJson": [
         {
-          "text": "Maya thought the robin and beetle had caused the green glow.",
+          "text": "grew thicker along the sunny creek bank",
           "isCorrect": false,
-          "rationale": "Unsupported inference: the animals are observed, but they are not given as the cause.",
+          "rationale": "Opposite claim: thicker describes the earlier green color near the sunny bank.",
           "evidenceLinks": [
             {
-              "paragraphIndex": 5,
+              "paragraphIndex": 2,
               "sentenceIndex": 2,
-              "quotedSpan": "A beetle skated over the surface, and a robin hopped in the wet grass.",
-              "startChar": 1555,
-              "endChar": 1625
-            }
-          ],
-          "distractorRole": "unsupported_inference"
-        },
-        {
-          "text": "Maya learned a careful way to watch for creek changes.",
-          "isCorrect": true,
-          "rationale": "The final sentence directly supports this inference.",
-          "evidenceLinks": [
-            {
-              "paragraphIndex": 5,
-              "sentenceIndex": 3,
-              "quotedSpan": "Maya knew the creek still needed watching, but now she had a careful way to notice changes.",
-              "startChar": 1626,
-              "endChar": 1717
-            }
-          ],
-          "distractorRole": null
-        },
-        {
-          "text": "Maya stopped using maps after the glow faded to a stripe.",
-          "isCorrect": false,
-          "rationale": "Opposite claim: her map had already helped readers understand the sunny bank.",
-          "evidenceLinks": [
-            {
-              "paragraphIndex": 4,
-              "sentenceIndex": 3,
-              "quotedSpan": "Maya added her map to the notice so readers could see why the sunny bank mattered most.",
-              "startChar": 1358,
-              "endChar": 1445
+              "quotedSpan": "Near the sunny bank, the green color was thicker.",
+              "startChar": 669,
+              "endChar": 718
             }
           ],
           "distractorRole": "opposite_claim"
         },
         {
-          "text": "Maya's father told the class to bring jars and a thermometer.",
-          "isCorrect": false,
-          "rationale": "Wrong section: her father appears on Friday, after the class visit with tools.",
+          "text": "the creek glow became weaker and harder to see",
+          "isCorrect": true,
+          "rationale": "Faded means the glow became less noticeable, which fits the faint stripe context.",
           "evidenceLinks": [
             {
               "paragraphIndex": 5,
-              "sentenceIndex": 0,
-              "quotedSpan": "On Friday, Maya returned with her father and pointed from the bridge.",
-              "startChar": 1447,
-              "endChar": 1516
+              "sentenceIndex": 1,
+              "quotedSpan": "The glow had faded to a faint stripe.",
+              "startChar": 1517,
+              "endChar": 1554
             }
           ],
-          "distractorRole": "wrong_section"
+          "distractorRole": null
+        },
+        {
+          "text": "moved quickly around the bend in the creek",
+          "isCorrect": false,
+          "rationale": "Plausible misreading: the passage describes water bending around a log, not the glow moving quickly.",
+          "evidenceLinks": [
+            {
+              "paragraphIndex": 1,
+              "sentenceIndex": 2,
+              "quotedSpan": "They stood on the bridge and wrote what they could see: slow water near the reeds, brown leaves caught against stones, and small bubbles where the creek bent around a log.",
+              "startChar": 415,
+              "endChar": 586
+            }
+          ],
+          "distractorRole": "plausible_misreading"
+        },
+        {
+          "text": "became safe enough for families to touch",
+          "isCorrect": false,
+          "rationale": "Unsupported inference: the class did not claim the water was safe.",
+          "evidenceLinks": [
+            {
+              "paragraphIndex": 4,
+              "sentenceIndex": 1,
+              "quotedSpan": "It did not claim the water was safe or unsafe.",
+              "startChar": 1203,
+              "endChar": 1249
+            }
+          ],
+          "distractorRole": "unsupported_inference"
         }
       ]
     },
@@ -2599,30 +2599,30 @@
       "reviewStatus": "PENDING",
       "itemStatus": "candidate",
       "approvalEligible": false,
-      "studentFacingPrompt": "Which evidence shows visitors could compare the town's past and present?",
+      "studentFacingPrompt": "What does landmarks mean as it is used in the station passage?",
       "answerChoicesJson": [
-        "A date in the corner of the old paper said 1928.",
-        "The river, hill road, and market square matched across the maps.",
-        "The school on the map had a different name from Ben's school.",
-        "The clear sleeve made the paper look perfect beside the bench."
+        "new street names written on the town map",
+        "important places that help people compare maps",
+        "folds in paper that Mr. Ortiz opened slowly",
+        "children who visited the station display"
       ],
       "correctIndex": 1,
-      "correctAnswer": "The river, hill road, and market square matched across the maps.",
+      "correctAnswer": "important places that help people compare maps",
       "distractorRationalesJson": [
-        "Too narrow: the date shows age, but not the full past-present comparison.",
-        "Those shared landmarks helped visitors compare the old and new maps.",
-        "Too narrow: the school name is one example, not the full evidence for comparing maps.",
-        "Wrong emphasis: the map mattered because of town change, not perfect-looking paper."
+        "Opposite claim: some streets had new names, but the landmarks stayed useful for comparison.",
+        "Landmarks are recognizable places that helped visitors understand the town changes.",
+        "Wrong section: folds and creases describe the paper, not town landmarks.",
+        "Unsupported inference: the children noticed map details but are not landmarks."
       ],
       "expectedResponseJson": null,
       "scoringRubricJson": null,
       "studentPreviewJson": {
-        "prompt": "Which evidence shows visitors could compare the town's past and present?",
+        "prompt": "What does landmarks mean as it is used in the station passage?",
         "choices": [
-          "A date in the corner of the old paper said 1928.",
-          "The river, hill road, and market square matched across the maps.",
-          "The school on the map had a different name from Ben's school.",
-          "The clear sleeve made the paper look perfect beside the bench."
+          "new street names written on the town map",
+          "important places that help people compare maps",
+          "folds in paper that Mr. Ortiz opened slowly",
+          "children who visited the station display"
         ],
         "leaksAnswer": false
       },
@@ -2657,54 +2657,24 @@
       "sequence": 17,
       "structuredChoicesJson": [
         {
-          "text": "A date in the corner of the old paper said 1928.",
+          "text": "new street names written on the town map",
           "isCorrect": false,
-          "rationale": "Too narrow: the date shows age, but not the full past-present comparison.",
-          "evidenceLinks": [
-            {
-              "paragraphIndex": 0,
-              "sentenceIndex": 2,
-              "quotedSpan": "A date in the corner said 1928.",
-              "startChar": 177,
-              "endChar": 208
-            }
-          ],
-          "distractorRole": "too_narrow"
-        },
-        {
-          "text": "The river, hill road, and market square matched across the maps.",
-          "isCorrect": true,
-          "rationale": "Those shared landmarks helped visitors compare the old and new maps.",
+          "rationale": "Opposite claim: some streets had new names, but the landmarks stayed useful for comparison.",
           "evidenceLinks": [
             {
               "paragraphIndex": 3,
-              "sentenceIndex": 4,
-              "quotedSpan": "Still, the river, the hill road, and the market square helped visitors compare past and present.",
-              "startChar": 1017,
-              "endChar": 1113
+              "sentenceIndex": 3,
+              "quotedSpan": "Some streets had new names, and the trolley tracks were gone.",
+              "startChar": 955,
+              "endChar": 1016
             }
           ],
-          "distractorRole": null
+          "distractorRole": "opposite_claim"
         },
         {
-          "text": "The school on the map had a different name from Ben's school.",
-          "isCorrect": false,
-          "rationale": "Too narrow: the school name is one example, not the full evidence for comparing maps.",
-          "evidenceLinks": [
-            {
-              "paragraphIndex": 2,
-              "sentenceIndex": 2,
-              "quotedSpan": "Ben found the school, but it had a different name.",
-              "startChar": 699,
-              "endChar": 749
-            }
-          ],
-          "distractorRole": "too_narrow"
-        },
-        {
-          "text": "The clear sleeve made the paper look perfect beside the bench.",
-          "isCorrect": false,
-          "rationale": "Wrong emphasis: the map mattered because of town change, not perfect-looking paper.",
+          "text": "important places that help people compare maps",
+          "isCorrect": true,
+          "rationale": "Landmarks are recognizable places that helped visitors understand the town changes.",
           "evidenceLinks": [
             {
               "paragraphIndex": 4,
@@ -2714,7 +2684,37 @@
               "endChar": 1401
             }
           ],
-          "distractorRole": "wrong_emphasis"
+          "distractorRole": null
+        },
+        {
+          "text": "folds in paper that Mr. Ortiz opened slowly",
+          "isCorrect": false,
+          "rationale": "Wrong section: folds and creases describe the paper, not town landmarks.",
+          "evidenceLinks": [
+            {
+              "paragraphIndex": 1,
+              "sentenceIndex": 3,
+              "quotedSpan": "Old paper can tear along its creases.",
+              "startChar": 315,
+              "endChar": 352
+            }
+          ],
+          "distractorRole": "wrong_section"
+        },
+        {
+          "text": "children who visited the station display",
+          "isCorrect": false,
+          "rationale": "Unsupported inference: the children noticed map details but are not landmarks.",
+          "evidenceLinks": [
+            {
+              "paragraphIndex": 2,
+              "sentenceIndex": 0,
+              "quotedSpan": "On Saturday, three children visited the station display.",
+              "startChar": 556,
+              "endChar": 612
+            }
+          ],
+          "distractorRole": "unsupported_inference"
         }
       ]
     },
@@ -2891,30 +2891,30 @@
       "reviewStatus": "PENDING",
       "itemStatus": "candidate",
       "approvalEligible": false,
-      "studentFacingPrompt": "What does rough mean in the sentence about the brick wall?",
+      "studentFacingPrompt": "Which detail best shows the story's message about mistakes?",
       "answerChoicesJson": [
-        "empty, because no kids had traced the bus route yet",
-        "purple, because the narrator's wrist still had a bruise",
-        "bumpy, because chalk lines crossed the brick like a puzzle",
-        "lighter, because Grandpa said the paint would dry that way"
+        "The narrator carries the smallest can because her wrist is bruised.",
+        "The mural includes a bus, row houses, and sparrows.",
+        "The narrator turns blue drips into ripples around the fish.",
+        "A woman stops to take a picture of the sparrows."
       ],
       "correctIndex": 2,
-      "correctAnswer": "bumpy, because chalk lines crossed the brick like a puzzle",
+      "correctAnswer": "The narrator turns blue drips into ripples around the fish.",
       "distractorRationalesJson": [
-        "Plausible misreading: the empty wall appears later as the mural changes it.",
-        "Wrong section: purple describes the narrator's bruise, not the wall surface.",
-        "Rough describes the uneven brick surface that held chalk lines.",
-        "Wrong emphasis: lighter describes drying paint, not the brick wall."
+        "Too narrow: the bruise explains why she carries a small can, not the message about mistakes.",
+        "Wrong emphasis: the design shows neighborhood memories, not the narrator learning from a mistake.",
+        "This detail shows the message that a mistake can become part of something good.",
+        "Wrong section: the photo happens after the narrator has already solved the paint mistake."
       ],
       "expectedResponseJson": null,
       "scoringRubricJson": null,
       "studentPreviewJson": {
-        "prompt": "What does rough mean in the sentence about the brick wall?",
+        "prompt": "Which detail best shows the story's message about mistakes?",
         "choices": [
-          "empty, because no kids had traced the bus route yet",
-          "purple, because the narrator's wrist still had a bruise",
-          "bumpy, because chalk lines crossed the brick like a puzzle",
-          "lighter, because Grandpa said the paint would dry that way"
+          "The narrator carries the smallest can because her wrist is bruised.",
+          "The mural includes a bus, row houses, and sparrows.",
+          "The narrator turns blue drips into ripples around the fish.",
+          "A woman stops to take a picture of the sparrows."
         ],
         "leaksAnswer": false
       },
@@ -2949,24 +2949,9 @@
       "sequence": 19,
       "structuredChoicesJson": [
         {
-          "text": "empty, because no kids had traced the bus route yet",
+          "text": "The narrator carries the smallest can because her wrist is bruised.",
           "isCorrect": false,
-          "rationale": "Plausible misreading: the empty wall appears later as the mural changes it.",
-          "evidenceLinks": [
-            {
-              "paragraphIndex": 4,
-              "sentenceIndex": 3,
-              "quotedSpan": "But the fish seemed to move, and the wall no longer looked empty.",
-              "startChar": 1261,
-              "endChar": 1326
-            }
-          ],
-          "distractorRole": "plausible_misreading"
-        },
-        {
-          "text": "purple, because the narrator's wrist still had a bruise",
-          "isCorrect": false,
-          "rationale": "Wrong section: purple describes the narrator's bruise, not the wall surface.",
+          "rationale": "Too narrow: the bruise explains why she carries a small can, not the message about mistakes.",
           "evidenceLinks": [
             {
               "paragraphIndex": 0,
@@ -2976,37 +2961,52 @@
               "endChar": 83
             }
           ],
-          "distractorRole": "wrong_section"
+          "distractorRole": "too_narrow"
         },
         {
-          "text": "bumpy, because chalk lines crossed the brick like a puzzle",
-          "isCorrect": true,
-          "rationale": "Rough describes the uneven brick surface that held chalk lines.",
+          "text": "The mural includes a bus, row houses, and sparrows.",
+          "isCorrect": false,
+          "rationale": "Wrong emphasis: the design shows neighborhood memories, not the narrator learning from a mistake.",
           "evidenceLinks": [
             {
               "paragraphIndex": 1,
-              "sentenceIndex": 1,
-              "quotedSpan": "The wall was rough brick, and chalk lines crossed it like a giant puzzle.",
-              "startChar": 296,
-              "endChar": 369
+              "sentenceIndex": 3,
+              "quotedSpan": "Vega had drawn the river, three row houses, a bus, and a pair of sparrows.",
+              "startChar": 374,
+              "endChar": 448
+            }
+          ],
+          "distractorRole": "wrong_emphasis"
+        },
+        {
+          "text": "The narrator turns blue drips into ripples around the fish.",
+          "isCorrect": true,
+          "rationale": "This detail shows the message that a mistake can become part of something good.",
+          "evidenceLinks": [
+            {
+              "paragraphIndex": 2,
+              "sentenceIndex": 4,
+              "quotedSpan": "I bent close and painted tiny waves around each tail.",
+              "startChar": 731,
+              "endChar": 784
             }
           ],
           "distractorRole": null
         },
         {
-          "text": "lighter, because Grandpa said the paint would dry that way",
+          "text": "A woman stops to take a picture of the sparrows.",
           "isCorrect": false,
-          "rationale": "Wrong emphasis: lighter describes drying paint, not the brick wall.",
+          "rationale": "Wrong section: the photo happens after the narrator has already solved the paint mistake.",
           "evidenceLinks": [
             {
-              "paragraphIndex": 0,
-              "sentenceIndex": 3,
-              "quotedSpan": "\"Paint dries lighter,\" he said.",
-              "startChar": 203,
-              "endChar": 234
+              "paragraphIndex": 5,
+              "sentenceIndex": 1,
+              "quotedSpan": "A woman had stopped to take a picture of the sparrows.",
+              "startChar": 1481,
+              "endChar": 1535
             }
           ],
-          "distractorRole": "wrong_emphasis"
+          "distractorRole": "wrong_section"
         }
       ]
     },
@@ -3471,30 +3471,30 @@
       "reviewStatus": "PENDING",
       "itemStatus": "candidate",
       "approvalEligible": false,
-      "studentFacingPrompt": "What did the class notice after watching the cafeteria counter?",
+      "studentFacingPrompt": "What does tucked mean as it is used in the lunch passage?",
       "answerChoicesJson": [
-        "The lunch bell rang before most soup bowls were served warm.",
-        "Milk came too late, and spoons were tucked behind soup.",
-        "The purple marker showed that trays belonged near the cafeteria door.",
-        "The red baskets caused students to walk backward for napkins."
+        "counted carefully by students with clipboards",
+        "placed where students had to reach for them",
+        "moved first before trays and milk cartons",
+        "marked with purple so the class could remember"
       ],
       "correctIndex": 1,
-      "correctAnswer": "Milk came too late, and spoons were tucked behind soup.",
+      "correctAnswer": "placed where students had to reach for them",
       "distractorRationalesJson": [
-        "Opposite claim: most bowls were still warm when the bell rang.",
-        "This names the two slow spots the class discovered.",
-        "Unsupported inference: the marker circled a Friday note, not a tray location.",
-        "Opposite claim: the baskets helped, and on Friday no one walked backward."
+        "Wrong section: students counted pauses, not spoons and napkins.",
+        "Tucked means the spoons and napkins were placed behind the soup pot, making them hard to reach.",
+        "Plausible misreading: milk moved before trays later, but tucked describes spoons and napkins.",
+        "Wrong section: Mrs. Lane circled a note in purple marker later."
       ],
       "expectedResponseJson": null,
       "scoringRubricJson": null,
       "studentPreviewJson": {
-        "prompt": "What did the class notice after watching the cafeteria counter?",
+        "prompt": "What does tucked mean as it is used in the lunch passage?",
         "choices": [
-          "The lunch bell rang before most soup bowls were served warm.",
-          "Milk came too late, and spoons were tucked behind soup.",
-          "The purple marker showed that trays belonged near the cafeteria door.",
-          "The red baskets caused students to walk backward for napkins."
+          "counted carefully by students with clipboards",
+          "placed where students had to reach for them",
+          "moved first before trays and milk cartons",
+          "marked with purple so the class could remember"
         ],
         "leaksAnswer": false
       },
@@ -3529,24 +3529,24 @@
       "sequence": 23,
       "structuredChoicesJson": [
         {
-          "text": "The lunch bell rang before most soup bowls were served warm.",
+          "text": "counted carefully by students with clipboards",
           "isCorrect": false,
-          "rationale": "Opposite claim: most bowls were still warm when the bell rang.",
+          "rationale": "Wrong section: students counted pauses, not spoons and napkins.",
           "evidenceLinks": [
             {
-              "paragraphIndex": 4,
+              "paragraphIndex": 1,
               "sentenceIndex": 3,
-              "quotedSpan": "When the bell rang, most bowls of soup were still warm.",
-              "startChar": 1160,
-              "endChar": 1215
+              "quotedSpan": "They counted how many times the line paused.",
+              "startChar": 350,
+              "endChar": 394
             }
           ],
-          "distractorRole": "opposite_claim"
+          "distractorRole": "wrong_section"
         },
         {
-          "text": "Milk came too late, and spoons were tucked behind soup.",
+          "text": "placed where students had to reach for them",
           "isCorrect": true,
-          "rationale": "This names the two slow spots the class discovered.",
+          "rationale": "Tucked means the spoons and napkins were placed behind the soup pot, making them hard to reach.",
           "evidenceLinks": [
             {
               "paragraphIndex": 2,
@@ -3559,9 +3559,24 @@
           "distractorRole": null
         },
         {
-          "text": "The purple marker showed that trays belonged near the cafeteria door.",
+          "text": "moved first before trays and milk cartons",
           "isCorrect": false,
-          "rationale": "Unsupported inference: the marker circled a Friday note, not a tray location.",
+          "rationale": "Plausible misreading: milk moved before trays later, but tucked describes spoons and napkins.",
+          "evidenceLinks": [
+            {
+              "paragraphIndex": 3,
+              "sentenceIndex": 1,
+              "quotedSpan": "Milk moved to the first table, before trays.",
+              "startChar": 796,
+              "endChar": 840
+            }
+          ],
+          "distractorRole": "plausible_misreading"
+        },
+        {
+          "text": "marked with purple so the class could remember",
+          "isCorrect": false,
+          "rationale": "Wrong section: Mrs. Lane circled a note in purple marker later.",
           "evidenceLinks": [
             {
               "paragraphIndex": 5,
@@ -3571,22 +3586,7 @@
               "endChar": 1542
             }
           ],
-          "distractorRole": "unsupported_inference"
-        },
-        {
-          "text": "The red baskets caused students to walk backward for napkins.",
-          "isCorrect": false,
-          "rationale": "Opposite claim: the baskets helped, and on Friday no one walked backward.",
-          "evidenceLinks": [
-            {
-              "paragraphIndex": 5,
-              "sentenceIndex": 1,
-              "quotedSpan": "The line was a little slower, but no one had to walk backward for a napkin.",
-              "startChar": 1421,
-              "endChar": 1496
-            }
-          ],
-          "distractorRole": "opposite_claim"
+          "distractorRole": "wrong_section"
         }
       ]
     },
@@ -3617,30 +3617,30 @@
       "reviewStatus": "PENDING",
       "itemStatus": "candidate",
       "approvalEligible": false,
-      "studentFacingPrompt": "Which event shows the narrator felt proud but quiet about her work?",
+      "studentFacingPrompt": "What does traced mean as it is used in the mural passage?",
       "answerChoicesJson": [
-        "Grandpa laughed when the paint looked like melted berries.",
-        "Ms. Vega drew row houses, a bus, and sparrows.",
-        "A woman stopped near the library to photograph the sparrows.",
-        "She watched children trace the route and kept her ripples secret."
+        "painted over the river with blue drips",
+        "carried the smallest can past the library",
+        "took a picture of sparrows on the wall",
+        "kids followed the bus route in the air"
       ],
       "correctIndex": 3,
-      "correctAnswer": "She watched children trace the route and kept her ripples secret.",
+      "correctAnswer": "kids followed the bus route in the air",
       "distractorRationalesJson": [
-        "Wrong section: Grandpa laughs before the narrator begins painting.",
-        "Too narrow: this describes the mural design, not the narrator's quiet pride.",
-        "Too narrow: the picture shows public interest, but not the narrator staying quiet about her ripples.",
-        "The final paragraph shows she is pleased without pointing out her own work."
+        "Wrong section: the narrator paints ripples, but traced describes what two kids do later.",
+        "Plausible misreading: the narrator carries a paint can, but the kids trace the bus route.",
+        "Wrong section: a woman takes a picture; two kids trace the route.",
+        "Traced means the kids followed the shape of the bus route with their hands."
       ],
       "expectedResponseJson": null,
       "scoringRubricJson": null,
       "studentPreviewJson": {
-        "prompt": "Which event shows the narrator felt proud but quiet about her work?",
+        "prompt": "What does traced mean as it is used in the mural passage?",
         "choices": [
-          "Grandpa laughed when the paint looked like melted berries.",
-          "Ms. Vega drew row houses, a bus, and sparrows.",
-          "A woman stopped near the library to photograph the sparrows.",
-          "She watched children trace the route and kept her ripples secret."
+          "painted over the river with blue drips",
+          "carried the smallest can past the library",
+          "took a picture of sparrows on the wall",
+          "kids followed the bus route in the air"
         ],
         "leaksAnswer": false
       },
@@ -3675,39 +3675,39 @@
       "sequence": 24,
       "structuredChoicesJson": [
         {
-          "text": "Grandpa laughed when the paint looked like melted berries.",
+          "text": "painted over the river with blue drips",
           "isCorrect": false,
-          "rationale": "Wrong section: Grandpa laughs before the narrator begins painting.",
+          "rationale": "Wrong section: the narrator paints ripples, but traced describes what two kids do later.",
           "evidenceLinks": [
             {
-              "paragraphIndex": 0,
-              "sentenceIndex": 2,
-              "quotedSpan": "Grandpa laughed when he saw my face.",
-              "startChar": 166,
-              "endChar": 202
+              "paragraphIndex": 2,
+              "sentenceIndex": 4,
+              "quotedSpan": "I bent close and painted tiny waves around each tail.",
+              "startChar": 731,
+              "endChar": 784
             }
           ],
           "distractorRole": "wrong_section"
         },
         {
-          "text": "Ms. Vega drew row houses, a bus, and sparrows.",
+          "text": "carried the smallest can past the library",
           "isCorrect": false,
-          "rationale": "Too narrow: this describes the mural design, not the narrator's quiet pride.",
+          "rationale": "Plausible misreading: the narrator carries a paint can, but the kids trace the bus route.",
           "evidenceLinks": [
             {
-              "paragraphIndex": 1,
-              "sentenceIndex": 3,
-              "quotedSpan": "Vega had drawn the river, three row houses, a bus, and a pair of sparrows.",
-              "startChar": 374,
-              "endChar": 448
+              "paragraphIndex": 4,
+              "sentenceIndex": 4,
+              "quotedSpan": "I carried the light blue can home feeling taller than when I had arrived.",
+              "startChar": 1327,
+              "endChar": 1400
             }
           ],
-          "distractorRole": "too_narrow"
+          "distractorRole": "plausible_misreading"
         },
         {
-          "text": "A woman stopped near the library to photograph the sparrows.",
+          "text": "took a picture of sparrows on the wall",
           "isCorrect": false,
-          "rationale": "Too narrow: the picture shows public interest, but not the narrator staying quiet about her ripples.",
+          "rationale": "Wrong section: a woman takes a picture; two kids trace the route.",
           "evidenceLinks": [
             {
               "paragraphIndex": 5,
@@ -3717,19 +3717,19 @@
               "endChar": 1535
             }
           ],
-          "distractorRole": "too_narrow"
+          "distractorRole": "wrong_section"
         },
         {
-          "text": "She watched children trace the route and kept her ripples secret.",
+          "text": "kids followed the bus route in the air",
           "isCorrect": true,
-          "rationale": "The final paragraph shows she is pleased without pointing out her own work.",
+          "rationale": "Traced means the kids followed the shape of the bus route with their hands.",
           "evidenceLinks": [
             {
               "paragraphIndex": 5,
-              "sentenceIndex": 3,
-              "quotedSpan": "I did not tell them which ripples were mine.",
-              "startChar": 1578,
-              "endChar": 1622
+              "sentenceIndex": 2,
+              "quotedSpan": "Two kids traced the bus route in the air.",
+              "startChar": 1536,
+              "endChar": 1577
             }
           ],
           "distractorRole": null
@@ -4200,30 +4200,30 @@
       "reviewStatus": "PENDING",
       "itemStatus": "candidate",
       "approvalEligible": false,
-      "studentFacingPrompt": "What does Mrs. Lane mean by saying a good solution should work on more than one lunch day?",
+      "studentFacingPrompt": "From whose point of view is the lunch passage mostly written?",
       "answerChoicesJson": [
-        "A solution needs pizza trays instead of soup bowls at lunch.",
-        "A solution should make the cafeteria line quiet during lunch.",
-        "A solution should help during different lunches, not just once.",
-        "A solution needs purple marker notes instead of a paper arrow."
+        "Room 3 tells the lunch story using the word we.",
+        "Mrs. Lane tells readers her private thoughts about lunch.",
+        "A narrator describes Room 3 and the lunch line from outside.",
+        "The cafeteria manager speaks directly to readers about shelves."
       ],
       "correctIndex": 2,
-      "correctAnswer": "A solution should help during different lunches, not just once.",
+      "correctAnswer": "A narrator describes Room 3 and the lunch line from outside.",
       "distractorRationalesJson": [
-        "Too narrow: pizza trays were one way to test the setup.",
-        "Unsupported inference: the line still made noise after the change.",
-        "Mrs. Lane's note shows the class should test the setup on another lunch day.",
-        "Wrong emphasis: the marker recorded a note; the arrow guided the line."
+        "Opposite claim: the passage does not use a first-person class narrator.",
+        "Unsupported inference: Mrs. Lane is described from outside, and her private thoughts are not given.",
+        "The passage uses third-person wording such as Room 3, students, and Mrs. Lane.",
+        "Wrong emphasis: the manager allows a change but does not narrate the passage."
       ],
       "expectedResponseJson": null,
       "scoringRubricJson": null,
       "studentPreviewJson": {
-        "prompt": "What does Mrs. Lane mean by saying a good solution should work on more than one lunch day?",
+        "prompt": "From whose point of view is the lunch passage mostly written?",
         "choices": [
-          "A solution needs pizza trays instead of soup bowls at lunch.",
-          "A solution should make the cafeteria line quiet during lunch.",
-          "A solution should help during different lunches, not just once.",
-          "A solution needs purple marker notes instead of a paper arrow."
+          "Room 3 tells the lunch story using the word we.",
+          "Mrs. Lane tells readers her private thoughts about lunch.",
+          "A narrator describes Room 3 and the lunch line from outside.",
+          "The cafeteria manager speaks directly to readers about shelves."
         ],
         "leaksAnswer": false
       },
@@ -4258,61 +4258,61 @@
       "sequence": 28,
       "structuredChoicesJson": [
         {
-          "text": "A solution needs pizza trays instead of soup bowls at lunch.",
+          "text": "Room 3 tells the lunch story using the word we.",
           "isCorrect": false,
-          "rationale": "Too narrow: pizza trays were one way to test the setup.",
+          "rationale": "Opposite claim: the passage does not use a first-person class narrator.",
           "evidenceLinks": [
             {
-              "paragraphIndex": 5,
+              "paragraphIndex": 0,
               "sentenceIndex": 0,
-              "quotedSpan": "On Friday, the class tried the setup with pizza trays instead of soup bowls.",
-              "startChar": 1344,
-              "endChar": 1420
+              "quotedSpan": "By Tuesday, Room 3 knew the lunch line had a problem.",
+              "startChar": 0,
+              "endChar": 53
             }
           ],
-          "distractorRole": "too_narrow"
+          "distractorRole": "opposite_claim"
         },
         {
-          "text": "A solution should make the cafeteria line quiet during lunch.",
+          "text": "Mrs. Lane tells readers her private thoughts about lunch.",
           "isCorrect": false,
-          "rationale": "Unsupported inference: the line still made noise after the change.",
+          "rationale": "Unsupported inference: Mrs. Lane is described from outside, and her private thoughts are not given.",
           "evidenceLinks": [
             {
-              "paragraphIndex": 4,
-              "sentenceIndex": 0,
-              "quotedSpan": "At lunch, the line still made noise, but it moved more smoothly.",
-              "startChar": 1007,
-              "endChar": 1071
+              "paragraphIndex": 1,
+              "sentenceIndex": 1,
+              "quotedSpan": "Lane asked the class to watch without blaming anyone.",
+              "startChar": 235,
+              "endChar": 288
             }
           ],
           "distractorRole": "unsupported_inference"
         },
         {
-          "text": "A solution should help during different lunches, not just once.",
+          "text": "A narrator describes Room 3 and the lunch line from outside.",
           "isCorrect": true,
-          "rationale": "Mrs. Lane's note shows the class should test the setup on another lunch day.",
+          "rationale": "The passage uses third-person wording such as Room 3, students, and Mrs. Lane.",
           "evidenceLinks": [
             {
-              "paragraphIndex": 5,
-              "sentenceIndex": 4,
-              "quotedSpan": "A good solution, she said, should work on more than one lunch day.",
-              "startChar": 1543,
-              "endChar": 1609
+              "paragraphIndex": 0,
+              "sentenceIndex": 0,
+              "quotedSpan": "By Tuesday, Room 3 knew the lunch line had a problem.",
+              "startChar": 0,
+              "endChar": 53
             }
           ],
           "distractorRole": null
         },
         {
-          "text": "A solution needs purple marker notes instead of a paper arrow.",
+          "text": "The cafeteria manager speaks directly to readers about shelves.",
           "isCorrect": false,
-          "rationale": "Wrong emphasis: the marker recorded a note; the arrow guided the line.",
+          "rationale": "Wrong emphasis: the manager allows a change but does not narrate the passage.",
           "evidenceLinks": [
             {
               "paragraphIndex": 3,
-              "sentenceIndex": 3,
-              "quotedSpan": "A paper arrow showed the direction of the line.",
-              "startChar": 898,
-              "endChar": 945
+              "sentenceIndex": 0,
+              "quotedSpan": "The cafeteria manager let the class try a small change on Thursday.",
+              "startChar": 728,
+              "endChar": 795
             }
           ],
           "distractorRole": "wrong_emphasis"

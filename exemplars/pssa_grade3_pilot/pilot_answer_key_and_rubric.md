@@ -121,24 +121,24 @@
   - Evidence: The glow had faded to a faint stripe.
 
 ## pssa_item_g3_reading_7
-- Correct answer: D -- The map showed town changes while some landmarks stayed in place.
+- Correct answer: D -- folded lines where old paper can tear
 
-- A. The blue rail lines were still easy to follow across the dusty page.
-  - Too narrow: the rail lines are one feature, not the main reason visitors stopped.
-  - Role: too_narrow
+- A. blue rail lines printed across the old page
+  - Wrong section: the blue rail lines are printed map details, not creases.
+  - Role: wrong_section
   - Evidence: Dust covered the front, but blue rail lines still crossed the page.
-- B. The cloth weights made the old paper unfold quickly for visitors.
-  - Opposite claim: Mr. Ortiz did not unfold the old paper quickly.
-  - Role: opposite_claim
-  - Evidence: He did not unfold the map quickly.
-- C. The dotted river path proved the bridge was closed that Saturday.
-  - Unsupported inference: Leo wondered about the closed bridge; the map does not prove Saturday events.
-  - Role: unsupported_inference
-  - Evidence: Leo pointed to a dotted path beside the river and wondered whether people had walked there when the bridge was closed.
-- D. The map showed town changes while some landmarks stayed in place.
-  - This sentence explains why the map held visitors' attention.
+- B. small cloth weights placed along map edges
+  - Plausible misreading: the weights protect the paper, but they are not the creases.
+  - Role: plausible_misreading
+  - Evidence: He slid a flat card under one corner, opened the first fold, and placed small cloth weights along the edges.
+- C. thin sleeves used to keep paper clean
+  - Wrong section: the clear sleeve is added after the map is opened.
+  - Role: wrong_section
+  - Evidence: By the end of the week, the map was inside a clear sleeve.
+- D. folded lines where old paper can tear
+  - Creases are the folded lines in old paper that could tear when opened.
   - Role: correct
-  - Evidence: People stopped near the bench longer than before, not because the paper looked perfect, but because it showed how the town had changed while some landmarks stayed in place.
+  - Evidence: Old paper can tear along its creases.
 
 ## pssa_item_g3_reading_8
 - Correct answer: C -- The lunch line paused when students reached for items.
@@ -301,44 +301,44 @@
   - Evidence: Too much oil would have dripped onto the floor, so one drop was enough.
 
 ## pssa_item_g3_reading_16
-- Correct answer: B -- Maya learned a careful way to watch for creek changes.
+- Correct answer: B -- the creek glow became weaker and harder to see
 
-- A. Maya thought the robin and beetle had caused the green glow.
-  - Unsupported inference: the animals are observed, but they are not given as the cause.
-  - Role: unsupported_inference
-  - Evidence: A beetle skated over the surface, and a robin hopped in the wet grass.
-- B. Maya learned a careful way to watch for creek changes.
-  - The final sentence directly supports this inference.
-  - Role: correct
-  - Evidence: Maya knew the creek still needed watching, but now she had a careful way to notice changes.
-- C. Maya stopped using maps after the glow faded to a stripe.
-  - Opposite claim: her map had already helped readers understand the sunny bank.
+- A. grew thicker along the sunny creek bank
+  - Opposite claim: thicker describes the earlier green color near the sunny bank.
   - Role: opposite_claim
-  - Evidence: Maya added her map to the notice so readers could see why the sunny bank mattered most.
-- D. Maya's father told the class to bring jars and a thermometer.
-  - Wrong section: her father appears on Friday, after the class visit with tools.
-  - Role: wrong_section
-  - Evidence: On Friday, Maya returned with her father and pointed from the bridge.
+  - Evidence: Near the sunny bank, the green color was thicker.
+- B. the creek glow became weaker and harder to see
+  - Faded means the glow became less noticeable, which fits the faint stripe context.
+  - Role: correct
+  - Evidence: The glow had faded to a faint stripe.
+- C. moved quickly around the bend in the creek
+  - Plausible misreading: the passage describes water bending around a log, not the glow moving quickly.
+  - Role: plausible_misreading
+  - Evidence: They stood on the bridge and wrote what they could see: slow water near the reeds, brown leaves caught against stones, and small bubbles where the creek bent around a log.
+- D. became safe enough for families to touch
+  - Unsupported inference: the class did not claim the water was safe.
+  - Role: unsupported_inference
+  - Evidence: It did not claim the water was safe or unsafe.
 
 ## pssa_item_g3_reading_17
-- Correct answer: B -- The river, hill road, and market square matched across the maps.
+- Correct answer: B -- important places that help people compare maps
 
-- A. A date in the corner of the old paper said 1928.
-  - Too narrow: the date shows age, but not the full past-present comparison.
-  - Role: too_narrow
-  - Evidence: A date in the corner said 1928.
-- B. The river, hill road, and market square matched across the maps.
-  - Those shared landmarks helped visitors compare the old and new maps.
+- A. new street names written on the town map
+  - Opposite claim: some streets had new names, but the landmarks stayed useful for comparison.
+  - Role: opposite_claim
+  - Evidence: Some streets had new names, and the trolley tracks were gone.
+- B. important places that help people compare maps
+  - Landmarks are recognizable places that helped visitors understand the town changes.
   - Role: correct
-  - Evidence: Still, the river, the hill road, and the market square helped visitors compare past and present.
-- C. The school on the map had a different name from Ben's school.
-  - Too narrow: the school name is one example, not the full evidence for comparing maps.
-  - Role: too_narrow
-  - Evidence: Ben found the school, but it had a different name.
-- D. The clear sleeve made the paper look perfect beside the bench.
-  - Wrong emphasis: the map mattered because of town change, not perfect-looking paper.
-  - Role: wrong_emphasis
   - Evidence: People stopped near the bench longer than before, not because the paper looked perfect, but because it showed how the town had changed while some landmarks stayed in place.
+- C. folds in paper that Mr. Ortiz opened slowly
+  - Wrong section: folds and creases describe the paper, not town landmarks.
+  - Role: wrong_section
+  - Evidence: Old paper can tear along its creases.
+- D. children who visited the station display
+  - Unsupported inference: the children noticed map details but are not landmarks.
+  - Role: unsupported_inference
+  - Evidence: On Saturday, three children visited the station display.
 
 ## pssa_item_g3_reading_18
 - Correct answer: A -- Milk moved before trays, and spoons went into red baskets.
@@ -361,24 +361,24 @@
   - Evidence: On Friday, the class tried the setup with pizza trays instead of soup bowls.
 
 ## pssa_item_g3_reading_19
-- Correct answer: C -- bumpy, because chalk lines crossed the brick like a puzzle
+- Correct answer: C -- The narrator turns blue drips into ripples around the fish.
 
-- A. empty, because no kids had traced the bus route yet
-  - Plausible misreading: the empty wall appears later as the mural changes it.
-  - Role: plausible_misreading
-  - Evidence: But the fish seemed to move, and the wall no longer looked empty.
-- B. purple, because the narrator's wrist still had a bruise
-  - Wrong section: purple describes the narrator's bruise, not the wall surface.
-  - Role: wrong_section
+- A. The narrator carries the smallest can because her wrist is bruised.
+  - Too narrow: the bruise explains why she carries a small can, not the message about mistakes.
+  - Role: too_narrow
   - Evidence: I carried the smallest paint can because my wrist still had a purple soccer bruise.
-- C. bumpy, because chalk lines crossed the brick like a puzzle
-  - Rough describes the uneven brick surface that held chalk lines.
-  - Role: correct
-  - Evidence: The wall was rough brick, and chalk lines crossed it like a giant puzzle.
-- D. lighter, because Grandpa said the paint would dry that way
-  - Wrong emphasis: lighter describes drying paint, not the brick wall.
+- B. The mural includes a bus, row houses, and sparrows.
+  - Wrong emphasis: the design shows neighborhood memories, not the narrator learning from a mistake.
   - Role: wrong_emphasis
-  - Evidence: "Paint dries lighter," he said.
+  - Evidence: Vega had drawn the river, three row houses, a bus, and a pair of sparrows.
+- C. The narrator turns blue drips into ripples around the fish.
+  - This detail shows the message that a mistake can become part of something good.
+  - Role: correct
+  - Evidence: I bent close and painted tiny waves around each tail.
+- D. A woman stops to take a picture of the sparrows.
+  - Wrong section: the photo happens after the narrator has already solved the paint mistake.
+  - Role: wrong_section
+  - Evidence: A woman had stopped to take a picture of the sparrows.
 
 ## pssa_item_g3_reading_20
 - Correct answer: D -- The same steps helped with a rolling book bin.
@@ -441,44 +441,44 @@
   - Evidence: Some streets had new names, and the trolley tracks were gone.
 
 ## pssa_item_g3_reading_23
-- Correct answer: B -- Milk came too late, and spoons were tucked behind soup.
+- Correct answer: B -- placed where students had to reach for them
 
-- A. The lunch bell rang before most soup bowls were served warm.
-  - Opposite claim: most bowls were still warm when the bell rang.
-  - Role: opposite_claim
-  - Evidence: When the bell rang, most bowls of soup were still warm.
-- B. Milk came too late, and spoons were tucked behind soup.
-  - This names the two slow spots the class discovered.
+- A. counted carefully by students with clipboards
+  - Wrong section: students counted pauses, not spoons and napkins.
+  - Role: wrong_section
+  - Evidence: They counted how many times the line paused.
+- B. placed where students had to reach for them
+  - Tucked means the spoons and napkins were placed behind the soup pot, making them hard to reach.
   - Role: correct
   - Evidence: Second, spoons and napkins were tucked behind the soup pot.
-- C. The purple marker showed that trays belonged near the cafeteria door.
-  - Unsupported inference: the marker circled a Friday note, not a tray location.
-  - Role: unsupported_inference
+- C. moved first before trays and milk cartons
+  - Plausible misreading: milk moved before trays later, but tucked describes spoons and napkins.
+  - Role: plausible_misreading
+  - Evidence: Milk moved to the first table, before trays.
+- D. marked with purple so the class could remember
+  - Wrong section: Mrs. Lane circled a note in purple marker later.
+  - Role: wrong_section
   - Evidence: Lane circled that note in purple marker.
-- D. The red baskets caused students to walk backward for napkins.
-  - Opposite claim: the baskets helped, and on Friday no one walked backward.
-  - Role: opposite_claim
-  - Evidence: The line was a little slower, but no one had to walk backward for a napkin.
 
 ## pssa_item_g3_reading_24
-- Correct answer: D -- She watched children trace the route and kept her ripples secret.
+- Correct answer: D -- kids followed the bus route in the air
 
-- A. Grandpa laughed when the paint looked like melted berries.
-  - Wrong section: Grandpa laughs before the narrator begins painting.
+- A. painted over the river with blue drips
+  - Wrong section: the narrator paints ripples, but traced describes what two kids do later.
   - Role: wrong_section
-  - Evidence: Grandpa laughed when he saw my face.
-- B. Ms. Vega drew row houses, a bus, and sparrows.
-  - Too narrow: this describes the mural design, not the narrator's quiet pride.
-  - Role: too_narrow
-  - Evidence: Vega had drawn the river, three row houses, a bus, and a pair of sparrows.
-- C. A woman stopped near the library to photograph the sparrows.
-  - Too narrow: the picture shows public interest, but not the narrator staying quiet about her ripples.
-  - Role: too_narrow
+  - Evidence: I bent close and painted tiny waves around each tail.
+- B. carried the smallest can past the library
+  - Plausible misreading: the narrator carries a paint can, but the kids trace the bus route.
+  - Role: plausible_misreading
+  - Evidence: I carried the light blue can home feeling taller than when I had arrived.
+- C. took a picture of sparrows on the wall
+  - Wrong section: a woman takes a picture; two kids trace the route.
+  - Role: wrong_section
   - Evidence: A woman had stopped to take a picture of the sparrows.
-- D. She watched children trace the route and kept her ripples secret.
-  - The final paragraph shows she is pleased without pointing out her own work.
+- D. kids followed the bus route in the air
+  - Traced means the kids followed the shape of the bus route with their hands.
   - Role: correct
-  - Evidence: I did not tell them which ripples were mine.
+  - Evidence: Two kids traced the bus route in the air.
 
 ## pssa_item_g3_reading_25
 - Correct answer: A -- It reminds the class to check wheels before adding heavy paper.
@@ -541,22 +541,22 @@
   - Evidence: Ortiz put a new town map beside the old one.
 
 ## pssa_item_g3_reading_28
-- Correct answer: C -- A solution should help during different lunches, not just once.
+- Correct answer: C -- A narrator describes Room 3 and the lunch line from outside.
 
-- A. A solution needs pizza trays instead of soup bowls at lunch.
-  - Too narrow: pizza trays were one way to test the setup.
-  - Role: too_narrow
-  - Evidence: On Friday, the class tried the setup with pizza trays instead of soup bowls.
-- B. A solution should make the cafeteria line quiet during lunch.
-  - Unsupported inference: the line still made noise after the change.
+- A. Room 3 tells the lunch story using the word we.
+  - Opposite claim: the passage does not use a first-person class narrator.
+  - Role: opposite_claim
+  - Evidence: By Tuesday, Room 3 knew the lunch line had a problem.
+- B. Mrs. Lane tells readers her private thoughts about lunch.
+  - Unsupported inference: Mrs. Lane is described from outside, and her private thoughts are not given.
   - Role: unsupported_inference
-  - Evidence: At lunch, the line still made noise, but it moved more smoothly.
-- C. A solution should help during different lunches, not just once.
-  - Mrs. Lane's note shows the class should test the setup on another lunch day.
+  - Evidence: Lane asked the class to watch without blaming anyone.
+- C. A narrator describes Room 3 and the lunch line from outside.
+  - The passage uses third-person wording such as Room 3, students, and Mrs. Lane.
   - Role: correct
-  - Evidence: A good solution, she said, should work on more than one lunch day.
-- D. A solution needs purple marker notes instead of a paper arrow.
-  - Wrong emphasis: the marker recorded a note; the arrow guided the line.
+  - Evidence: By Tuesday, Room 3 knew the lunch line had a problem.
+- D. The cafeteria manager speaks directly to readers about shelves.
+  - Wrong emphasis: the manager allows a change but does not narrate the passage.
   - Role: wrong_emphasis
-  - Evidence: A paper arrow showed the direction of the line.
+  - Evidence: The cafeteria manager let the class try a small change on Thursday.
 

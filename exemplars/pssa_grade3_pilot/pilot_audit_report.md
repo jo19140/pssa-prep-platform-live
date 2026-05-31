@@ -26,12 +26,12 @@
 | pssa_psg_g3_the_cart_that_would_not_turn | PASS | PASS | PASS | PASS |
 
 ## Distractor Role Counts
-- opposite_claim: 24
-- plausible_misreading: 8
-- too_narrow: 10
-- unsupported_inference: 16
-- wrong_emphasis: 8
-- wrong_section: 18
+- opposite_claim: 23
+- plausible_misreading: 11
+- too_narrow: 5
+- unsupported_inference: 15
+- wrong_emphasis: 7
+- wrong_section: 23
 
 ## Per-Item Audit Table
 
@@ -52,7 +52,7 @@
 | pssa_item_g3_reading_13 | pssa_psg_g3_a_cooler_lunch_line | E03.B-C.3.1.1 | D | false | true | PASS |
 | pssa_item_g3_reading_14 | pssa_psg_g3_the_mural_plan | E03.B-C.3.1.2 | B | false | true | PASS |
 | pssa_item_g3_reading_15 | pssa_psg_g3_the_cart_that_would_not_turn | E03.B-C.3.1.3 | C | false | true | PASS |
-| pssa_item_g3_reading_16 | pssa_psg_g3_creek_watchers | E03.B-V.4.1.1 | B | false | true | PASS |
+| pssa_item_g3_reading_16 | pssa_psg_g3_creek_watchers | E03.B-V.4.1.1 | B | true | true | PASS |
 | pssa_item_g3_reading_17 | pssa_psg_g3_the_map_in_the_station | E03.B-V.4.1.2 | B | true | true | PASS |
 | pssa_item_g3_reading_18 | pssa_psg_g3_a_cooler_lunch_line | E03.A-K.1.1.1 | A | false | true | PASS |
 | pssa_item_g3_reading_19 | pssa_psg_g3_the_mural_plan | E03.A-K.1.1.2 | C | false | true | PASS |
@@ -60,7 +60,7 @@
 | pssa_item_g3_reading_21 | pssa_psg_g3_creek_watchers | E03.A-C.2.1.1 | C | false | true | PASS |
 | pssa_item_g3_reading_22 | pssa_psg_g3_the_map_in_the_station | E03.A-C.3.1.1 | C | false | true | PASS |
 | pssa_item_g3_reading_23 | pssa_psg_g3_a_cooler_lunch_line | E03.A-V.4.1.1 | B | false | true | PASS |
-| pssa_item_g3_reading_24 | pssa_psg_g3_the_mural_plan | E03.A-V.4.1.2 | D | true | true | PASS |
+| pssa_item_g3_reading_24 | pssa_psg_g3_the_mural_plan | E03.A-V.4.1.2 | D | false | true | PASS |
 | pssa_item_g3_reading_25 | pssa_psg_g3_the_cart_that_would_not_turn | E03.B-K.1.1.1 | A | true | true | PASS |
 | pssa_item_g3_reading_26 | pssa_psg_g3_creek_watchers | E03.B-K.1.1.2 | B | false | true | PASS |
 | pssa_item_g3_reading_27 | pssa_psg_g3_the_map_in_the_station | E03.B-K.1.1.3 | D | false | true | PASS |

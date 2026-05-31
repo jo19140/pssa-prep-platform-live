@@ -69,11 +69,11 @@ const drafts: Record<string, ItemDraft> = {
     c("The map replaced the students' notes about reeds and brown leaves.", false, "Opposite claim: the class used observations and then added the map.", "They stood on the bridge and wrote what they could see: slow water near the reeds, brown leaves caught against stones, and small bubbles where the creek bent around a log.", "opposite_claim"),
     c("The map showed that grass clippings came from the shady bend.", false, "Plausible misreading: grass clippings are mentioned near the drain, not the shady bend.", "Instead, it told what the students observed and asked neighbors not to dump grass clippings near the drain.", "plausible_misreading"),
   ]),
-  pssa_item_g3_reading_16: draft("What does Maya's Friday visit show about what she learned at Pine Creek?", 1, [
-    c("Maya thought the robin and beetle had caused the green glow.", false, "Unsupported inference: the animals are observed, but they are not given as the cause.", "A beetle skated over the surface, and a robin hopped in the wet grass.", "unsupported_inference"),
-    c("Maya learned a careful way to watch for creek changes.", true, "The final sentence directly supports this inference.", "Maya knew the creek still needed watching, but now she had a careful way to notice changes.", null),
-    c("Maya stopped using maps after the glow faded to a stripe.", false, "Opposite claim: her map had already helped readers understand the sunny bank.", "Maya added her map to the notice so readers could see why the sunny bank mattered most.", "opposite_claim"),
-    c("Maya's father told the class to bring jars and a thermometer.", false, "Wrong section: her father appears on Friday, after the class visit with tools.", "On Friday, Maya returned with her father and pointed from the bridge.", "wrong_section"),
+  pssa_item_g3_reading_16: draft("What does faded mean as it is used in the creek passage?", 1, [
+    c("grew thicker along the sunny creek bank", false, "Opposite claim: thicker describes the earlier green color near the sunny bank.", "Near the sunny bank, the green color was thicker.", "opposite_claim"),
+    c("the creek glow became weaker and harder to see", true, "Faded means the glow became less noticeable, which fits the faint stripe context.", "The glow had faded to a faint stripe.", null),
+    c("moved quickly around the bend in the creek", false, "Plausible misreading: the passage describes water bending around a log, not the glow moving quickly.", "They stood on the bridge and wrote what they could see: slow water near the reeds, brown leaves caught against stones, and small bubbles where the creek bent around a log.", "plausible_misreading"),
+    c("became safe enough for families to touch", false, "Unsupported inference: the class did not claim the water was safe.", "It did not claim the water was safe or unsafe.", "unsupported_inference"),
   ]),
   pssa_item_g3_reading_21: draft("Which event caused the class to ask a better creek question?", 2, [
     c("The teacher explained green water plants before the map was drawn.", false, "Too narrow: the explanation gives background, but the mapped clues led to the better question.", "The teacher explained that some tiny living things in water can look green when many of them grow at once.", "too_narrow"),
@@ -88,11 +88,11 @@ const drafts: Record<string, ItemDraft> = {
     c("They saw a beetle and robin after the glow became brighter.", false, "Plausible misreading: the beetle and robin appear after the glow faded.", "A beetle skated over the surface, and a robin hopped in the wet grass.", "plausible_misreading"),
   ]),
 
-  pssa_item_g3_reading_7: draft("What is the main reason people spent longer near the station bench?", 3, [
-    c("The blue rail lines were still easy to follow across the dusty page.", false, "Too narrow: the rail lines are one feature, not the main reason visitors stopped.", "Dust covered the front, but blue rail lines still crossed the page.", "too_narrow"),
-    c("The cloth weights made the old paper unfold quickly for visitors.", false, "Opposite claim: Mr. Ortiz did not unfold the old paper quickly.", "He did not unfold the map quickly.", "opposite_claim"),
-    c("The dotted river path proved the bridge was closed that Saturday.", false, "Unsupported inference: Leo wondered about the closed bridge; the map does not prove Saturday events.", "Leo pointed to a dotted path beside the river and wondered whether people had walked there when the bridge was closed.", "unsupported_inference"),
-    c("The map showed town changes while some landmarks stayed in place.", true, "This sentence explains why the map held visitors' attention.", "People stopped near the bench longer than before, not because the paper looked perfect, but because it showed how the town had changed while some landmarks stayed in place.", null),
+  pssa_item_g3_reading_7: draft("What does creases mean as it is used in the station passage?", 3, [
+    c("blue rail lines printed across the old page", false, "Wrong section: the blue rail lines are printed map details, not creases.", "Dust covered the front, but blue rail lines still crossed the page.", "wrong_section"),
+    c("small cloth weights placed along map edges", false, "Plausible misreading: the weights protect the paper, but they are not the creases.", "He slid a flat card under one corner, opened the first fold, and placed small cloth weights along the edges.", "plausible_misreading"),
+    c("thin sleeves used to keep paper clean", false, "Wrong section: the clear sleeve is added after the map is opened.", "By the end of the week, the map was inside a clear sleeve.", "wrong_section"),
+    c("folded lines where old paper can tear", true, "Creases are the folded lines in old paper that could tear when opened.", "Old paper can tear along its creases.", null),
   ]),
   pssa_item_g3_reading_12: draft("How did Mr. Ortiz protect the old map as he opened it?", 0, [
     c("He used a flat card and small cloth weights along the edges.", true, "The sentence gives the careful method used to open the old map.", "He slid a flat card under one corner, opened the first fold, and placed small cloth weights along the edges.", null),
@@ -100,11 +100,11 @@ const drafts: Record<string, ItemDraft> = {
     c("He asked three children to unfold the map at the station display.", false, "Wrong section: the children visited after Mr. Ortiz had opened and displayed the map.", "On Saturday, three children visited the station display.", "wrong_section"),
     c("He copied the dotted river path into Nia's notebook.", false, "Plausible misreading: Nia copied the path later; Mr. Ortiz did not.", "Nia copied the dotted river path into her notebook.", "plausible_misreading"),
   ]),
-  pssa_item_g3_reading_17: draft("Which evidence shows visitors could compare the town's past and present?", 1, [
-    c("A date in the corner of the old paper said 1928.", false, "Too narrow: the date shows age, but not the full past-present comparison.", "A date in the corner said 1928.", "too_narrow"),
-    c("The river, hill road, and market square matched across the maps.", true, "Those shared landmarks helped visitors compare the old and new maps.", "Still, the river, the hill road, and the market square helped visitors compare past and present.", null),
-    c("The school on the map had a different name from Ben's school.", false, "Too narrow: the school name is one example, not the full evidence for comparing maps.", "Ben found the school, but it had a different name.", "too_narrow"),
-    c("The clear sleeve made the paper look perfect beside the bench.", false, "Wrong emphasis: the map mattered because of town change, not perfect-looking paper.", "People stopped near the bench longer than before, not because the paper looked perfect, but because it showed how the town had changed while some landmarks stayed in place.", "wrong_emphasis"),
+  pssa_item_g3_reading_17: draft("What does landmarks mean as it is used in the station passage?", 1, [
+    c("new street names written on the town map", false, "Opposite claim: some streets had new names, but the landmarks stayed useful for comparison.", "Some streets had new names, and the trolley tracks were gone.", "opposite_claim"),
+    c("important places that help people compare maps", true, "Landmarks are recognizable places that helped visitors understand the town changes.", "People stopped near the bench longer than before, not because the paper looked perfect, but because it showed how the town had changed while some landmarks stayed in place.", null),
+    c("folds in paper that Mr. Ortiz opened slowly", false, "Wrong section: folds and creases describe the paper, not town landmarks.", "Old paper can tear along its creases.", "wrong_section"),
+    c("children who visited the station display", false, "Unsupported inference: the children noticed map details but are not landmarks.", "On Saturday, three children visited the station display.", "unsupported_inference"),
   ]),
   pssa_item_g3_reading_22: draft("What can be inferred when Nia's grandmother remembers the trolley ride?", 2, [
     c("The station manager had ridden the trolley with a market basket.", false, "Plausible misreading: the grandmother, not Mr. Ortiz, remembers the trolley ride.", "At home, her grandmother remembered taking a trolley to the market with a basket on her lap.", "plausible_misreading"),
@@ -149,17 +149,17 @@ const drafts: Record<string, ItemDraft> = {
     c("The milk cartons stayed after trays because students had full hands.", false, "Opposite claim: milk moved before trays.", "Milk moved to the first table, before trays.", "opposite_claim"),
     c("Pizza trays replaced soup bowls before Room 3 counted pauses.", false, "Wrong section: pizza trays were part of the Friday check, not the first study.", "On Friday, the class tried the setup with pizza trays instead of soup bowls.", "wrong_section"),
   ]),
-  pssa_item_g3_reading_23: draft("What did the class notice after watching the cafeteria counter?", 1, [
-    c("The lunch bell rang before most soup bowls were served warm.", false, "Opposite claim: most bowls were still warm when the bell rang.", "When the bell rang, most bowls of soup were still warm.", "opposite_claim"),
-    c("Milk came too late, and spoons were tucked behind soup.", true, "This names the two slow spots the class discovered.", "Second, spoons and napkins were tucked behind the soup pot.", null),
-    c("The purple marker showed that trays belonged near the cafeteria door.", false, "Unsupported inference: the marker circled a Friday note, not a tray location.", "Lane circled that note in purple marker.", "unsupported_inference"),
-    c("The red baskets caused students to walk backward for napkins.", false, "Opposite claim: the baskets helped, and on Friday no one walked backward.", "The line was a little slower, but no one had to walk backward for a napkin.", "opposite_claim"),
+  pssa_item_g3_reading_23: draft("What does tucked mean as it is used in the lunch passage?", 1, [
+    c("counted carefully by students with clipboards", false, "Wrong section: students counted pauses, not spoons and napkins.", "They counted how many times the line paused.", "wrong_section"),
+    c("placed where students had to reach for them", true, "Tucked means the spoons and napkins were placed behind the soup pot, making them hard to reach.", "Second, spoons and napkins were tucked behind the soup pot.", null),
+    c("moved first before trays and milk cartons", false, "Plausible misreading: milk moved before trays later, but tucked describes spoons and napkins.", "Milk moved to the first table, before trays.", "plausible_misreading"),
+    c("marked with purple so the class could remember", false, "Wrong section: Mrs. Lane circled a note in purple marker later.", "Lane circled that note in purple marker.", "wrong_section"),
   ]),
-  pssa_item_g3_reading_28: draft("What does Mrs. Lane mean by saying a good solution should work on more than one lunch day?", 2, [
-    c("A solution needs pizza trays instead of soup bowls at lunch.", false, "Too narrow: pizza trays were one way to test the setup.", "On Friday, the class tried the setup with pizza trays instead of soup bowls.", "too_narrow"),
-    c("A solution should make the cafeteria line quiet during lunch.", false, "Unsupported inference: the line still made noise after the change.", "At lunch, the line still made noise, but it moved more smoothly.", "unsupported_inference"),
-    c("A solution should help during different lunches, not just once.", true, "Mrs. Lane's note shows the class should test the setup on another lunch day.", "A good solution, she said, should work on more than one lunch day.", null),
-    c("A solution needs purple marker notes instead of a paper arrow.", false, "Wrong emphasis: the marker recorded a note; the arrow guided the line.", "A paper arrow showed the direction of the line.", "wrong_emphasis"),
+  pssa_item_g3_reading_28: draft("From whose point of view is the lunch passage mostly written?", 2, [
+    c("Room 3 tells the lunch story using the word we.", false, "Opposite claim: the passage does not use a first-person class narrator.", "By Tuesday, Room 3 knew the lunch line had a problem.", "opposite_claim"),
+    c("Mrs. Lane tells readers her private thoughts about lunch.", false, "Unsupported inference: Mrs. Lane is described from outside, and her private thoughts are not given.", "Lane asked the class to watch without blaming anyone.", "unsupported_inference"),
+    c("A narrator describes Room 3 and the lunch line from outside.", true, "The passage uses third-person wording such as Room 3, students, and Mrs. Lane.", "By Tuesday, Room 3 knew the lunch line had a problem.", null),
+    c("The cafeteria manager speaks directly to readers about shelves.", false, "Wrong emphasis: the manager allows a change but does not narrate the passage.", "The cafeteria manager let the class try a small change on Thursday.", "wrong_emphasis"),
   ]),
 
   pssa_item_g3_reading_4: draft("How did the narrator respond after blue drops landed on the fish tails?", 3, [
@@ -180,17 +180,17 @@ const drafts: Record<string, ItemDraft> = {
     c("The narrator's purple wrist bruise changed the roof garden.", false, "Wrong section: the bruise explains why she carried the smallest can.", "I carried the smallest paint can because my wrist still had a purple soccer bruise.", "wrong_section"),
     c("The silver fish were covered when blue paint dried lighter.", false, "Opposite claim: the narrator painted around the fish tails.", "My job was to paint the river between the chalk marks without covering the silver fish.", "opposite_claim"),
   ]),
-  pssa_item_g3_reading_19: draft("What does rough mean in the sentence about the brick wall?", 2, [
-    c("empty, because no kids had traced the bus route yet", false, "Plausible misreading: the empty wall appears later as the mural changes it.", "But the fish seemed to move, and the wall no longer looked empty.", "plausible_misreading"),
-    c("purple, because the narrator's wrist still had a bruise", false, "Wrong section: purple describes the narrator's bruise, not the wall surface.", "I carried the smallest paint can because my wrist still had a purple soccer bruise.", "wrong_section"),
-    c("bumpy, because chalk lines crossed the brick like a puzzle", true, "Rough describes the uneven brick surface that held chalk lines.", "The wall was rough brick, and chalk lines crossed it like a giant puzzle.", null),
-    c("lighter, because Grandpa said the paint would dry that way", false, "Wrong emphasis: lighter describes drying paint, not the brick wall.", "\"Paint dries lighter,\" he said.", "wrong_emphasis"),
+  pssa_item_g3_reading_19: draft("Which detail best shows the story's message about mistakes?", 2, [
+    c("The narrator carries the smallest can because her wrist is bruised.", false, "Too narrow: the bruise explains why she carries a small can, not the message about mistakes.", "I carried the smallest paint can because my wrist still had a purple soccer bruise.", "too_narrow"),
+    c("The mural includes a bus, row houses, and sparrows.", false, "Wrong emphasis: the design shows neighborhood memories, not the narrator learning from a mistake.", "Vega had drawn the river, three row houses, a bus, and a pair of sparrows.", "wrong_emphasis"),
+    c("The narrator turns blue drips into ripples around the fish.", true, "This detail shows the message that a mistake can become part of something good.", "I bent close and painted tiny waves around each tail.", null),
+    c("A woman stops to take a picture of the sparrows.", false, "Wrong section: the photo happens after the narrator has already solved the paint mistake.", "A woman had stopped to take a picture of the sparrows.", "wrong_section"),
   ]),
-  pssa_item_g3_reading_24: draft("Which event shows the narrator felt proud but quiet about her work?", 3, [
-    c("Grandpa laughed when the paint looked like melted berries.", false, "Wrong section: Grandpa laughs before the narrator begins painting.", "Grandpa laughed when he saw my face.", "wrong_section"),
-    c("Ms. Vega drew row houses, a bus, and sparrows.", false, "Too narrow: this describes the mural design, not the narrator's quiet pride.", "Vega had drawn the river, three row houses, a bus, and a pair of sparrows.", "too_narrow"),
-    c("A woman stopped near the library to photograph the sparrows.", false, "Too narrow: the picture shows public interest, but not the narrator staying quiet about her ripples.", "A woman had stopped to take a picture of the sparrows.", "too_narrow"),
-    c("She watched children trace the route and kept her ripples secret.", true, "The final paragraph shows she is pleased without pointing out her own work.", "I did not tell them which ripples were mine.", null),
+  pssa_item_g3_reading_24: draft("What does traced mean as it is used in the mural passage?", 3, [
+    c("painted over the river with blue drips", false, "Wrong section: the narrator paints ripples, but traced describes what two kids do later.", "I bent close and painted tiny waves around each tail.", "wrong_section"),
+    c("carried the smallest can past the library", false, "Plausible misreading: the narrator carries a paint can, but the kids trace the bus route.", "I carried the light blue can home feeling taller than when I had arrived.", "plausible_misreading"),
+    c("took a picture of sparrows on the wall", false, "Wrong section: a woman takes a picture; two kids trace the route.", "A woman had stopped to take a picture of the sparrows.", "wrong_section"),
+    c("kids followed the bus route in the air", true, "Traced means the kids followed the shape of the bus route with their hands.", "Two kids traced the bus route in the air.", null),
   ]),
 
   pssa_item_g3_reading_5: draft("What is the main lesson in the cart passage?", 0, [

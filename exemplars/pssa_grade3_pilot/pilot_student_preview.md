@@ -39,12 +39,12 @@ C. The map replaced the students' notes about reeds and brown leaves.
 D. The map showed that grass clippings came from the shady bend.
 
 ### pssa_item_g3_reading_16
-What does Maya's Friday visit show about what she learned at Pine Creek?
+What does faded mean as it is used in the creek passage?
 
-A. Maya thought the robin and beetle had caused the green glow.
-B. Maya learned a careful way to watch for creek changes.
-C. Maya stopped using maps after the glow faded to a stripe.
-D. Maya's father told the class to bring jars and a thermometer.
+A. grew thicker along the sunny creek bank
+B. the creek glow became weaker and harder to see
+C. moved quickly around the bend in the creek
+D. became safe enough for families to touch
 
 ### pssa_item_g3_reading_21
 Which event caused the class to ask a better creek question?
@@ -85,12 +85,12 @@ C. The old paper was useful because it looked perfect in the display.
 D. Nia's notebook mattered because the trolley tracks were gone.
 
 ### pssa_item_g3_reading_7
-What is the main reason people spent longer near the station bench?
+What does creases mean as it is used in the station passage?
 
-A. The blue rail lines were still easy to follow across the dusty page.
-B. The cloth weights made the old paper unfold quickly for visitors.
-C. The dotted river path proved the bridge was closed that Saturday.
-D. The map showed town changes while some landmarks stayed in place.
+A. blue rail lines printed across the old page
+B. small cloth weights placed along map edges
+C. thin sleeves used to keep paper clean
+D. folded lines where old paper can tear
 
 ### pssa_item_g3_reading_12
 How did Mr. Ortiz protect the old map as he opened it?
@@ -101,12 +101,12 @@ C. He asked three children to unfold the map at the station display.
 D. He copied the dotted river path into Nia's notebook.
 
 ### pssa_item_g3_reading_17
-Which evidence shows visitors could compare the town's past and present?
+What does landmarks mean as it is used in the station passage?
 
-A. A date in the corner of the old paper said 1928.
-B. The river, hill road, and market square matched across the maps.
-C. The school on the map had a different name from Ben's school.
-D. The clear sleeve made the paper look perfect beside the bench.
+A. new street names written on the town map
+B. important places that help people compare maps
+C. folds in paper that Mr. Ortiz opened slowly
+D. children who visited the station display
 
 ### pssa_item_g3_reading_22
 What can be inferred when Nia's grandmother remembers the trolley ride?
@@ -171,20 +171,20 @@ C. The milk cartons stayed after trays because students had full hands.
 D. Pizza trays replaced soup bowls before Room 3 counted pauses.
 
 ### pssa_item_g3_reading_23
-What did the class notice after watching the cafeteria counter?
+What does tucked mean as it is used in the lunch passage?
 
-A. The lunch bell rang before most soup bowls were served warm.
-B. Milk came too late, and spoons were tucked behind soup.
-C. The purple marker showed that trays belonged near the cafeteria door.
-D. The red baskets caused students to walk backward for napkins.
+A. counted carefully by students with clipboards
+B. placed where students had to reach for them
+C. moved first before trays and milk cartons
+D. marked with purple so the class could remember
 
 ### pssa_item_g3_reading_28
-What does Mrs. Lane mean by saying a good solution should work on more than one lunch day?
+From whose point of view is the lunch passage mostly written?
 
-A. A solution needs pizza trays instead of soup bowls at lunch.
-B. A solution should make the cafeteria line quiet during lunch.
-C. A solution should help during different lunches, not just once.
-D. A solution needs purple marker notes instead of a paper arrow.
+A. Room 3 tells the lunch story using the word we.
+B. Mrs. Lane tells readers her private thoughts about lunch.
+C. A narrator describes Room 3 and the lunch line from outside.
+D. The cafeteria manager speaks directly to readers about shelves.
 
 ## Blue Paint for Saturday
 
@@ -225,20 +225,20 @@ C. The narrator's purple wrist bruise changed the roof garden.
 D. The silver fish were covered when blue paint dried lighter.
 
 ### pssa_item_g3_reading_19
-What does rough mean in the sentence about the brick wall?
+Which detail best shows the story's message about mistakes?
 
-A. empty, because no kids had traced the bus route yet
-B. purple, because the narrator's wrist still had a bruise
-C. bumpy, because chalk lines crossed the brick like a puzzle
-D. lighter, because Grandpa said the paint would dry that way
+A. The narrator carries the smallest can because her wrist is bruised.
+B. The mural includes a bus, row houses, and sparrows.
+C. The narrator turns blue drips into ripples around the fish.
+D. A woman stops to take a picture of the sparrows.
 
 ### pssa_item_g3_reading_24
-Which event shows the narrator felt proud but quiet about her work?
+What does traced mean as it is used in the mural passage?
 
-A. Grandpa laughed when the paint looked like melted berries.
-B. Ms. Vega drew row houses, a bus, and sparrows.
-C. A woman stopped near the library to photograph the sparrows.
-D. She watched children trace the route and kept her ripples secret.
+A. painted over the river with blue drips
+B. carried the smallest can past the library
+C. took a picture of sparrows on the wall
+D. kids followed the bus route in the air
 
 ## The Cart That Would Not Turn
 

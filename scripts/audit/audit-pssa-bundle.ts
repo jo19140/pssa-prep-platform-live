@@ -19,8 +19,8 @@ const failures: string[] = [];
 const summary: Record<string, unknown>[] = [];
 const reportDir = path.resolve("audit_exports/pssa_pr4c_passage_specificity");
 const passageQualityReportDir = path.resolve("audit_exports/pssa_pr4e_passage_quality");
-const ecSkillMatchReportDir = path.resolve("audit_exports/pssa_pr4h_ec_skill_match");
-const expectedSkillFixturePath = path.join(ecSkillMatchReportDir, "grade3_expected_skill_match_fixture.json");
+const ecSkillMatchReportDir = path.resolve("audit_exports/pssa_pr4i_grade3_skill_repair");
+const expectedSkillFixturePath = path.resolve("audit_exports/pssa_pr4h_ec_skill_match/grade3_expected_skill_match_fixture.json");
 const pilotItems: McqAuditInput[] = [];
 const pilotPassages: PssaPassageAuditInput[] = [];
 
@@ -70,6 +70,7 @@ const skillRowsByItemId = new Map(grade3SkillRows.map((row) => [row.itemId, row]
 const actualSkillFailures = new Set(grade3SkillRows.filter((row) => row.skillMatchResult === "FAIL").map((row) => row.itemId));
 const actualSkillPasses = new Set(grade3SkillRows.filter((row) => row.skillMatchResult === "PASS").map((row) => row.itemId));
 const vocabSkillRows = grade3SkillRows.filter((row) => row.ecSkillFamily === "vocabulary");
+const actualSkillWarnings = new Set(grade3SkillRows.filter((row) => row.skillMatchResult === "WARN").map((row) => row.itemId));
 
 for (const expected of expectedSkillFixture.expectedOutcomes) {
   const row = skillRowsByItemId.get(expected.itemId);
@@ -77,15 +78,15 @@ for (const expected of expectedSkillFixture.expectedOutcomes) {
     failures.push(`PSSA_ITEM_EC_SKILL_MISMATCH fixture item missing: ${expected.itemId}`);
     continue;
   }
-  if (row.skillMatchResult !== expected.expectedResult) {
-    failures.push(`PSSA_ITEM_EC_SKILL_MISMATCH expected ${expected.itemId} to be ${expected.expectedResult}, found ${row.skillMatchResult}`);
-  }
   if (expected.expectedSkillFamily && row.ecSkillFamily !== expected.expectedSkillFamily) {
     failures.push(`PSSA_ITEM_EC_SKILL_MISMATCH expected ${expected.itemId} family ${expected.expectedSkillFamily}, found ${row.ecSkillFamily}`);
   }
 }
-if (actualSkillFailures.size !== expectedFailures.size || [...expectedFailures].some((id) => !actualSkillFailures.has(id))) {
-  failures.push(`PSSA_ITEM_EC_SKILL_MISMATCH expected five fixed Grade 3 failures ${[...expectedFailures].join("|")}, found ${[...actualSkillFailures].join("|")}`);
+if (actualSkillFailures.size || actualSkillWarnings.size) {
+  failures.push(`PSSA_ITEM_EC_SKILL_MISMATCH expected all Grade 3 repaired items to PASS; failures=${[...actualSkillFailures].join("|")} warnings=${[...actualSkillWarnings].join("|")}`);
+}
+if ([...expectedFailures].some((id) => !actualSkillPasses.has(id))) {
+  failures.push(`PSSA_ITEM_EC_SKILL_MISMATCH expected former PR #4h failures to pass after PR #4i repair, not passing: ${[...expectedFailures].filter((id) => !actualSkillPasses.has(id)).join("|")}`);
 }
 if ([...expectedPasses].some((id) => !actualSkillPasses.has(id))) {
   failures.push(`PSSA_ITEM_EC_SKILL_MISMATCH expected representative pass items to pass, found failures in ${[...expectedPasses].filter((id) => !actualSkillPasses.has(id)).join("|")}`);
@@ -247,10 +248,11 @@ const discrimination = {
     pass: grade3SkillRows.filter((row) => row.skillMatchResult === "PASS").length,
     warn: grade3SkillRows.filter((row) => row.skillMatchResult === "WARN").length,
     fail: grade3SkillRows.filter((row) => row.skillMatchResult === "FAIL").length,
-    expectedFailures: [...expectedFailures],
+    formerPr4hFailuresRepaired: [...expectedFailures].filter((id) => actualSkillPasses.has(id)),
     actualFailures: [...actualSkillFailures],
+    actualWarnings: [...actualSkillWarnings],
     genuineVocabularyPass: skillRowsByItemId.get("pssa_item_g3_reading_6")?.skillMatchResult ?? "",
-    note: "Expected detector failures prove current vocabulary-tagged mismatches; deterministic FAILs are not waived to PASS in PR #4h.",
+    note: "PR #4i repairs require all Grade 3 EC skill-match rows to PASS; no retagging or waivers.",
   },
   reports: [
     path.relative(process.cwd(), path.join(reportDir, "pssa_mcq_passage_specificity_report.csv")),
@@ -358,17 +360,18 @@ function writeSkillMatchDiscrimination(filePath: string, rows: ItemEcSkillMatchR
   }
   const vocabRows = rows.filter((row) => row.ecSkillFamily === "vocabulary");
   const failedRows = rows.filter((row) => row.skillMatchResult === "FAIL");
+  const warningRows = rows.filter((row) => row.skillMatchResult === "WARN");
   const lines = [
-    "# PSSA PR #4h EC Skill-Match Discrimination",
+    "# PSSA PR #4i EC Skill-Match Repair",
     "",
     "- Rule ID: PSSA_ITEM_EC_SKILL_MISMATCH",
     `- Total Grade 3 items: ${rows.length}`,
     `- PASS/WARN/FAIL: ${rows.filter((row) => row.skillMatchResult === "PASS").length}/${rows.filter((row) => row.skillMatchResult === "WARN").length}/${failedRows.length}`,
-    "- Deterministic FAIL rows are expected proof findings in PR #4h and are not waived to PASS.",
+    "- Former PR #4h FAIL/WARN rows are repaired in place; EC tags are preserved and no deterministic result is waived.",
     "",
-    "## Fixed Fixture Check",
+    "## Before/After Fixture Check",
     "",
-    "| itemId | expected | actual | family |",
+    "| itemId | PR4h expected | PR4i actual | family |",
     "|---|---|---|---|",
     ...expectedOutcomes.map((expected) => {
       const row = rows.find((entry) => entry.itemId === expected.itemId);
@@ -379,7 +382,13 @@ function writeSkillMatchDiscrimination(filePath: string, rows: ItemEcSkillMatchR
     "",
     "| itemId | EC | stem | expected | observed | reason |",
     "|---|---|---|---|---|---|",
-    ...failedRows.map((row) => `| ${row.itemId} | ${row.eligibleContent} | ${escapeTable(row.stem)} | ${row.expectedSkillPattern} | ${row.observedSkillPattern} | ${escapeTable(row.mismatchReason)} |`),
+    ...(failedRows.length ? failedRows.map((row) => `| ${row.itemId} | ${row.eligibleContent} | ${escapeTable(row.stem)} | ${row.expectedSkillPattern} | ${row.observedSkillPattern} | ${escapeTable(row.mismatchReason)} |`) : ["| none |  |  |  |  |  |"]),
+    "",
+    "## Warning Items",
+    "",
+    "| itemId | EC | stem | expected | observed | reason |",
+    "|---|---|---|---|---|---|",
+    ...(warningRows.length ? warningRows.map((row) => `| ${row.itemId} | ${row.eligibleContent} | ${escapeTable(row.stem)} | ${row.expectedSkillPattern} | ${row.observedSkillPattern} | ${escapeTable(row.mismatchReason)} |`) : ["| none |  |  |  |  |  |"]),
     "",
     "## Vocabulary-Tagged Items",
     "",
