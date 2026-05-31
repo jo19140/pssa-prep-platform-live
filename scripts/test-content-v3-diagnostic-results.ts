@@ -88,6 +88,8 @@ assert("governance" in tutorPayload);
 assert("decodingEvidence" in tutorPayload);
 
 assert.throws(() => validateDiagnosticResultsCopy({ parentFriendlySummary: { text: "This is below grade level." } }));
+assert.throws(() => validateDiagnosticResultsCopy({ parentFriendlySummary: { text: "This is above grade level." } }));
+assert.throws(() => validateDiagnosticResultsCopy({ parentFriendlySummary: { text: "This uses a percentile." } }));
 assert.equal(findDiagnosticResultsCopyIssues({ dailyTargetCode: "a_e", phaseCode: "PHASE_3_ENTRY", id: "123e4567-e89b-12d3-a456-426614174000" }).length, 0);
 
 const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "diagnostic-results-lint-"));
