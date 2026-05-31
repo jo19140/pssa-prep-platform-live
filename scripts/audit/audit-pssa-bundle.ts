@@ -53,6 +53,7 @@ const unrevisedReadingMcqs = generatedReadingMcqs.filter((item) => item.gradeLev
 const generatedPassageRows = buildMcqPassageSpecificityReport(generatedReadingMcqs, pilotPassages);
 const grade3Rows = buildMcqPassageSpecificityReport(grade3ReadingMcqs, pilotPassages);
 const unrevisedRows = buildMcqPassageSpecificityReport(unrevisedReadingMcqs, pilotPassages);
+const grade3QuarantinedItems = grade3ReadingMcqs.filter((item: any) => item.validationMetadataJson?.quarantinedUntilPassageReauthored === true);
 const unrevisedFailedItemIds = new Set(unrevisedRows.filter((row) => row.result === "FAIL").map((row) => row.itemId));
 const conventionsMcqs = pilotItems.filter((item) => (item.itemType ?? item.questionType) === "MCQ" && !item.passageId);
 const tdaItems = pilotItems.filter((item) => item.itemType === "TDA");
@@ -75,10 +76,8 @@ if (fs.existsSync(exemplarPath)) {
 }
 
 if (generatedReadingMcqs.length !== 144) failures.push(`Expected 144 generated reading MCQs, found ${generatedReadingMcqs.length}`);
-if (grade3ReadingMcqs.length !== 28) failures.push(`Expected 28 rewritten Grade 3 reading MCQs, found ${grade3ReadingMcqs.length}`);
-if (hasBlockingPassageSpecificityFailure(grade3Rows)) {
-  failures.push("Expected rewritten Grade 3 reading MCQs to pass passage-specificity gates");
-}
+if (grade3ReadingMcqs.length !== 28) failures.push(`Expected 28 quarantined Grade 3 reading MCQs, found ${grade3ReadingMcqs.length}`);
+if (grade3QuarantinedItems.length !== grade3ReadingMcqs.length) failures.push(`Expected all Grade 3 reading MCQs to be quarantined pending re-authoring, found ${grade3QuarantinedItems.length}/${grade3ReadingMcqs.length}`);
 if (unrevisedReadingMcqs.length !== 116) failures.push(`Expected 116 unrevised reading MCQs, found ${unrevisedReadingMcqs.length}`);
 if (unrevisedFailedItemIds.size !== unrevisedReadingMcqs.length) {
   failures.push(`Expected unrevised reading MCQs to fail passage-specificity gates, failed ${unrevisedFailedItemIds.size}/${unrevisedReadingMcqs.length}`);
@@ -92,7 +91,9 @@ if (tdaRows.length) failures.push("TDA items were evaluated by passage-grounding
 const passageQualityRows = buildPssaPassageQualityReport(pilotPassages);
 const passageQualityFailedIds = new Set(passageQualityRows.filter((row) => row.result === "FAIL" && row.severity === "BLOCKER").map((row) => row.passageId));
 const passageCoherenceWarnRows = passageQualityRows.filter((row) => row.ruleId === "PSSA_PASSAGE_TOPIC_COHERENCE" && row.severity === "WARNING");
-const templatedPilotPassages = pilotPassages.filter((passage) => !passage.id.includes("tranche1"));
+const grade3Passages = pilotPassages.filter((passage) => passage.gradeLevel === 3);
+const grade3PassageRows = passageQualityRows.filter((row) => row.gradeLevel === 3);
+const templatedPilotPassages = pilotPassages.filter((passage) => passage.gradeLevel !== 3 && !passage.id.includes("tranche1"));
 const approvedTranchePassages = pilotPassages.filter((passage) => passage.id.includes("tranche1"));
 const templatedPassageFailedIds = new Set([...passageQualityFailedIds].filter((id) => templatedPilotPassages.some((passage) => passage.id === id)));
 const approvedTrancheFailedIds = new Set([...passageQualityFailedIds].filter((id) => approvedTranchePassages.some((passage) => passage.id === id)));
@@ -101,13 +102,14 @@ const grade3ClusterIds = new Set(passageQualityRows
   .map((row) => row.clusterId));
 
 if (pilotPassages.length !== 30) failures.push(`Expected 30 pilot passages, found ${pilotPassages.length}`);
+if (hasBlockingPassageQualityFailure(grade3PassageRows) || grade3PassageRows.some((row) => row.severity === "WARNING")) failures.push("Expected regenerated Grade 3 passages to pass passage-quality gates without WARN");
 if (templatedPassageFailedIds.size !== templatedPilotPassages.length) {
   failures.push(`Expected all templated pilot passages to fail passage-quality blockers, failed ${templatedPassageFailedIds.size}/${templatedPilotPassages.length}`);
 }
 if (approvedTrancheFailedIds.size) {
   failures.push(`Expected approved Grade 6 tranche passages to avoid passage-quality blockers, failed ${approvedTrancheFailedIds.size}/${approvedTranchePassages.length}`);
 }
-if (grade3ClusterIds.size !== 1) failures.push(`Expected Grade 3 five passages to cluster together, found ${grade3ClusterIds.size} clusters`);
+if (grade3ClusterIds.size !== 0) failures.push(`Expected regenerated Grade 3 passages not to cluster, found ${grade3ClusterIds.size} clusters`);
 
 fs.mkdirSync(reportDir, { recursive: true });
 writeCsv(
@@ -157,8 +159,8 @@ writeCsv(
 const discrimination = {
   rewrittenGrade3ReadingMcqs: {
     evaluated: grade3ReadingMcqs.length,
-    result: hasBlockingPassageSpecificityFailure(grade3Rows) ? "FAIL" : "PASS",
-    expected: "28 pass",
+    result: grade3QuarantinedItems.length === grade3ReadingMcqs.length ? "QUARANTINED" : "FAIL",
+    expected: "28 quarantined pending item re-authoring",
   },
   unrevisedReadingMcqs: {
     evaluated: unrevisedReadingMcqs.length,
@@ -171,11 +173,13 @@ const discrimination = {
   },
   passageQuality: {
     pilotPassagesEvaluated: pilotPassages.length,
+    regeneratedGrade3PassagesEvaluated: grade3Passages.length,
+    regeneratedGrade3PassageResult: hasBlockingPassageQualityFailure(grade3PassageRows) || grade3PassageRows.some((row) => row.severity === "WARNING") ? "FAIL" : "PASS",
     templatedPilotPassagesEvaluated: templatedPilotPassages.length,
     templatedPilotPassagesFailed: templatedPassageFailedIds.size,
     approvedTranchePassagesEvaluated: approvedTranchePassages.length,
     approvedTranchePassagesFailed: approvedTrancheFailedIds.size,
-    expected: "27 templated fail; 3 approved tranche passages avoid blockers",
+    expected: "5 regenerated Grade 3 pass; 22 remaining templated fail; 3 approved tranche passages avoid blockers",
     grade3ClusterIds: [...grade3ClusterIds],
     exemplarPassageResult: hasBlockingPassageQualityFailure(exemplarPassageRows) || exemplarPassageRows.some((row) => row.severity === "WARNING") ? "FAIL" : "PASS",
     topicCoherenceWarnings: passageCoherenceWarnRows.map((row) => row.passageId),

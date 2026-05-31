@@ -20,6 +20,7 @@
     "content:audit-pssa": "tsx scripts/audit/audit-pssa-bundle.ts",
     "content:author-pssa-pilot": "tsx scripts/content/author-pssa-pilot-batch.ts",
     "content:rewrite-pssa-grade3-reading": "tsx scripts/content/rewrite-pssa-grade3-reading.ts",
+    "content:regenerate-pssa-grade3-passages": "tsx scripts/content/regenerate-pssa-grade3-passages.ts",
     "content:export-pssa-audit": "tsx scripts/audit/export-pssa-audit-bundle.ts",
     "content:import-diagnostic-bank-v1-4": "tsx scripts/content/import-diagnostic-bank-v1-4.ts",
     "voice:enforce-retention": "tsx scripts/voice/enforce-retention.ts",
