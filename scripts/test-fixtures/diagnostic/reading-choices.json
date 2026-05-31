@@ -1,0 +1,13 @@
+{
+  "id": "fixture-reading",
+  "strand": "COMPREHENSION",
+  "itemType": "READING_MAIN_IDEA",
+  "studentPromptJson": {
+    "kidPrompt": "Read this. Then choose what it is mostly about.",
+    "passageText": "Lena watered the class plant each morning. By Friday, new green leaves had opened.",
+    "choices": ["Lena caring for a plant", "a rainy morning", "a classroom game"]
+  },
+  "displayMode": "SILENT_READING_THEN_TEXT_CHOICES",
+  "responseMode": "selected_choice",
+  "isPracticeItem": false
+}
