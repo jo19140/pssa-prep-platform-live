@@ -16,6 +16,14 @@ export type McqAuditInput = {
   reportingCategory?: string;
 };
 
+export type EcCatalogEntry = {
+  eligibleContent: string;
+  eligibleContentText: string;
+  reportingCategory?: string;
+  assessmentAnchor?: string;
+  anchorDescriptor?: string;
+};
+
 export type PssaPassageAuditInput = {
   id: string;
   title?: string;
@@ -124,6 +132,38 @@ export type McqAbsoluteLanguageRow = {
   notes: string;
 };
 
+export type EcSkillFamily =
+  | "vocabulary"
+  | "key_ideas_details"
+  | "inference_evidence"
+  | "craft_structure"
+  | "literature_elements"
+  | "informational_elements"
+  | "unknown";
+
+export type SkillMatchResult = "PASS" | "WARN" | "FAIL";
+
+export type ItemEcSkillMatchRow = {
+  itemId: string;
+  gradeLevel: number | string;
+  passageId: string;
+  passageTitle: string;
+  eligibleContent: string;
+  ecDescription: string;
+  ecSkillFamily: EcSkillFamily;
+  questionType: string;
+  stem: string;
+  targetWordOrPhrase: string;
+  observedSkillPattern: string;
+  expectedSkillPattern: string;
+  skillMatchResult: SkillMatchResult;
+  skillMatchConfidence: number;
+  mismatchReason: string;
+  evidenceSpan: string;
+  stemSkillSignals: string;
+  notes: string;
+};
+
 export function buildMcqCorrectIsLongestReport(items: McqAuditInput[], batchThreshold = 0.35): McqCorrectIsLongestRow[] {
   const mcqs = items.map(toMcq).filter((item) => item.correctIndex !== null && item.choices.length === 4);
   const rows: McqCorrectIsLongestRow[] = [];
@@ -212,6 +252,17 @@ export function buildMcqAbsoluteLanguageDistractorReport(items: McqAuditInput[])
   }];
 }
 
+export function buildItemEcSkillMatchReport(
+  rawItems: McqAuditInput[],
+  rawPassages: PssaPassageAuditInput[],
+  ecCatalog: Record<string, EcCatalogEntry | string> = {},
+): ItemEcSkillMatchRow[] {
+  const passageById = new Map(rawPassages.map((passage) => [passage.id, passage]));
+  return rawItems
+    .filter(isPassageLinkedReadingMcq)
+    .map((item) => auditItemEcSkillMatch(item, passageById.get(String(item.passageId ?? "")), ecCatalog));
+}
+
 export function deriveAnswerChoicesFromStructuredChoices(choices: StructuredChoice[] | null | undefined) {
   return Array.isArray(choices) ? choices.map((choice) => choice.text) : null;
 }
@@ -263,6 +314,221 @@ function toMcq(raw: McqAuditInput) {
     correctIndex: typeof raw.correctIndex === "number" ? raw.correctIndex : null,
     choices: (deriveAnswerChoicesFromStructuredChoices(raw.structuredChoicesJson) ?? raw.answerChoicesJson ?? raw.choices ?? []).map(String),
   };
+}
+
+function auditItemEcSkillMatch(
+  item: McqAuditInput,
+  passage: PssaPassageAuditInput | undefined,
+  ecCatalog: Record<string, EcCatalogEntry | string>,
+): ItemEcSkillMatchRow {
+  const itemId = String(item.id ?? item.itemId ?? "");
+  const passageText = passage?.text ?? "";
+  const eligibleContent = item.eligibleContent ?? "";
+  const ecDescription = ecDescriptionFor(eligibleContent, ecCatalog);
+  const ecSkillFamily = classifyEcSkillFamily(eligibleContent, ecDescription, item.reportingCategory);
+  const stem = item.studentFacingPrompt ?? "";
+  const correctChoice = correctStructuredChoice(item);
+  const evidenceSpan = correctChoice?.evidenceLinks?.[0]?.quotedSpan ?? "";
+  const targetWordOrPhrase = extractTargetWordOrPhrase(stem, passageText);
+  const stemSignals = stemSkillSignals(stem);
+  const observedSkillPattern = inferObservedSkillPattern(stem, targetWordOrPhrase, stemSignals);
+  const expectedSkillPattern = expectedSkillPatternFor(ecSkillFamily);
+  const base = {
+    itemId,
+    gradeLevel: item.gradeLevel ?? "",
+    passageId: String(item.passageId ?? ""),
+    passageTitle: passage?.title ?? "",
+    eligibleContent,
+    ecDescription,
+    ecSkillFamily,
+    questionType: item.questionType ?? item.itemType ?? "",
+    stem,
+    targetWordOrPhrase,
+    observedSkillPattern,
+    expectedSkillPattern,
+    evidenceSpan,
+    stemSkillSignals: stemSignals.join("|"),
+  };
+
+  if (ecSkillFamily === "vocabulary") {
+    const vocabularyIntent = observedSkillPattern === "vocabulary_context";
+    const targetInPassage = targetWordOrPhrase ? containsNormalized(passageText, targetWordOrPhrase) : false;
+    const targetInEvidence = targetWordOrPhrase ? containsNormalized(evidenceSpan, targetWordOrPhrase) : false;
+    const choicesLookLikeMeanings = choicesAreCandidateMeanings(item, targetWordOrPhrase);
+    if (!targetWordOrPhrase) {
+      return skillRow(base, "FAIL", 0.96, "Vocabulary EC requires a specific target word or phrase from the passage.", "No target word or phrase identified from stem.");
+    }
+    if (!vocabularyIntent) {
+      return skillRow(base, "FAIL", 0.96, "Vocabulary EC stem asks a comprehension skill instead of word or phrase meaning.", "Observed stem signals are not vocabulary-intent signals.");
+    }
+    if (!targetInPassage) {
+      return skillRow(base, "FAIL", 0.94, "Vocabulary target does not appear in assigned passage.", "Target must be passage text.");
+    }
+    if (!targetInEvidence) {
+      return skillRow(base, "FAIL", 0.94, "Vocabulary target does not appear in the cited evidence span.", "Evidence span must contain the target.");
+    }
+    if (/\bmean\s+by\b/i.test(stem) || wordCount(targetWordOrPhrase) > 2) {
+      return skillRow(base, "WARN", 0.64, "", "Figurative phrase or word-choice-effect interpretation needs human review.");
+    }
+    if (!choicesLookLikeMeanings) {
+      return skillRow(base, "WARN", 0.62, "Vocabulary target is present, but choices may not be clean meaning candidates.", "Ambiguous vocabulary-choice shape; human review needed.");
+    }
+    return skillRow(base, "PASS", 0.93, "", "Vocabulary stem, target, evidence, and choices align.");
+  }
+
+  if (observedSkillPattern === "vocabulary_context") {
+    return skillRow(base, "WARN", 0.66, "Non-vocabulary EC may be attached to a word-meaning or phrase-interpretation item.", "Observed skill is vocabulary-context; human review needed.");
+  }
+  if (ecSkillFamily === "craft_structure" && observedSkillPattern === "plain_recall" && obviousRecallStem(stem)) {
+    return skillRow(base, "FAIL", 0.86, "Craft/structure EC is attached to a plain recall/detail item.", "Expected purpose, POV, organization, structure, or word-choice effect.");
+  }
+  if (ecSkillFamily === "inference_evidence" && observedSkillPattern === "plain_recall" && obviousRecallStem(stem)) {
+    return skillRow(base, "FAIL", 0.82, "Inference/evidence EC is attached to a plain recall item.", "Expected inference, conclusion, or evidence-support relationship.");
+  }
+  if (ecSkillFamily === "literature_elements" && item.reportingCategory === "B") {
+    return skillRow(base, "FAIL", 0.82, "Literature-elements EC is attached to an informational reporting category.", "Expected character, setting, plot, conflict, or literary event work.");
+  }
+  if (ecSkillFamily === "informational_elements" && literarySignals(stemSignals)) {
+    return skillRow(base, "FAIL", 0.82, "Informational-elements EC is attached to a literary character/plot task.", "Expected informational details, process, reasons, examples, claims, or evidence.");
+  }
+  if (ecSkillFamily === "unknown") {
+    return skillRow(base, "WARN", 0.45, "EC skill family could not be classified deterministically.", "Human review needed.");
+  }
+  return skillRow(base, "PASS", 0.78, "", "Observed stem/evidence pattern is compatible with EC skill family.");
+}
+
+function skillRow(
+  base: Omit<ItemEcSkillMatchRow, "skillMatchResult" | "skillMatchConfidence" | "mismatchReason" | "notes">,
+  skillMatchResult: SkillMatchResult,
+  skillMatchConfidence: number,
+  mismatchReason: string,
+  notes: string,
+): ItemEcSkillMatchRow {
+  return {
+    ...base,
+    skillMatchResult,
+    skillMatchConfidence,
+    mismatchReason,
+    notes,
+  };
+}
+
+function ecDescriptionFor(eligibleContent: string, ecCatalog: Record<string, EcCatalogEntry | string>) {
+  const entry = ecCatalog[eligibleContent];
+  if (!entry) return "";
+  return typeof entry === "string" ? entry : entry.eligibleContentText;
+}
+
+function classifyEcSkillFamily(eligibleContent: string, description: string, reportingCategory?: string): EcSkillFamily {
+  const value = `${eligibleContent} ${description}`.toLowerCase();
+  if (eligibleContent.includes("-V.") || /\bvocabulary\b|\bmeaning\b|\bword\b|\bphrase\b|figurative|context clue|multiple-meaning/.test(value)) return "vocabulary";
+  if (/\binfer|\binference|conclude|evidence|support/.test(value)) return "inference_evidence";
+  if (eligibleContent.includes("-C.2") || /craft|structure|point of view|purpose|text feature|organization|author/.test(value)) return "craft_structure";
+  if (reportingCategory === "A" && (eligibleContent.includes("-K.") || /character|setting|plot|story|theme|central message|lesson|moral|literature/.test(value))) return "literature_elements";
+  if (reportingCategory === "B" && (eligibleContent.includes("-K.") || /informational|main idea|details|process|reasons|claims/.test(value))) return "informational_elements";
+  if (eligibleContent.includes("-K.")) return "key_ideas_details";
+  if (eligibleContent.includes("-C.3") && reportingCategory === "B") return "informational_elements";
+  if (eligibleContent.includes("-C.3") && reportingCategory === "A") return "literature_elements";
+  return "unknown";
+}
+
+function expectedSkillPatternFor(family: EcSkillFamily) {
+  switch (family) {
+    case "vocabulary":
+      return "word_or_phrase_meaning_in_context";
+    case "key_ideas_details":
+      return "central_idea_theme_summary_or_key_detail";
+    case "inference_evidence":
+      return "inference_conclusion_or_evidence_support";
+    case "craft_structure":
+      return "purpose_pov_structure_text_feature_or_word_choice_effect";
+    case "literature_elements":
+      return "character_setting_plot_conflict_or_literary_message";
+    case "informational_elements":
+      return "informational_detail_process_reason_connection_or_claim_evidence";
+    default:
+      return "unknown";
+  }
+}
+
+function correctStructuredChoice(item: McqAuditInput) {
+  if (Array.isArray(item.structuredChoicesJson)) {
+    const marked = item.structuredChoicesJson.find((choice) => choice.isCorrect);
+    if (marked) return marked;
+    if (typeof item.correctIndex === "number") return item.structuredChoicesJson[item.correctIndex];
+  }
+  return null;
+}
+
+function extractTargetWordOrPhrase(stem: string, passageText: string) {
+  const patterns = [
+    /["“]([^"“”]+)["”"]/,
+    /\bwhat\s+does\s+["“']?([^"“”'?]+?)["”']?\s+mean\b/i,
+    /\bwhat\s+does\s+(.+?)\s+mean\s+as\s+it\s+is\s+used\b/i,
+    /\bmeaning\s+of\s+["“']?([^"“”'?]+?)["”']?\b/i,
+    /\bmost\s+nearly\s+means\b.*?["“']([^"“”]+)["”']/i,
+    /\bword\s+["“']([^"“”]+)["”']/i,
+    /\bphrase\s+["“']([^"“”]+)["”']/i,
+  ];
+  for (const pattern of patterns) {
+    const match = stem.match(pattern);
+    const candidate = cleanTarget(match?.[1] ?? "");
+    if (candidate && containsNormalized(passageText, candidate)) return candidate;
+  }
+  return "";
+}
+
+function cleanTarget(value: string) {
+  return value
+    .replace(/\bas\s+it\s+is\s+used.*$/i, "")
+    .replace(/\bwhen\b.*$/i, "")
+    .replace(/\bin\s+the\s+(?:passage|text|story).*$/i, "")
+    .replace(/[?.!,:;]+$/g, "")
+    .replace(/^the\s+word\s+/i, "")
+    .trim();
+}
+
+function stemSkillSignals(stem: string) {
+  const normalized = normalizeText(stem);
+  const signals: string[] = [];
+  if (/\bmean|meaning|most nearly means|as used|context|word|phrase\b/i.test(stem)) signals.push("vocabulary");
+  if (/\binfer|conclude|show about|shows?|suggest|learned|why\s+did|why\s+was\b/i.test(stem)) signals.push("inference");
+  if (/\bevidence|supports?|best supports|which sentence\b/i.test(stem)) signals.push("evidence");
+  if (/\bmain reason|central idea|main idea|lesson|message|summary|best states\b/i.test(stem)) signals.push("key_ideas");
+  if (/\bwhy did|how did|what happened|what did|which event|what problem\b/i.test(stem)) signals.push("detail_event");
+  if (/\bpoint of view|narrator|author|purpose|organized|structure|feature|sequence|compare|contrast|cause|effect\b/i.test(stem)) signals.push("craft_structure");
+  if (/\bcharacter|setting|plot|conflict|felt|proud|quiet|story\b/i.test(stem)) signals.push("literary");
+  if (/\bprocess|steps|notice|noticed|reason|claim|information\b/i.test(stem)) signals.push("informational");
+  if (!signals.length && normalized) signals.push("plain_recall");
+  return signals;
+}
+
+function inferObservedSkillPattern(stem: string, targetWordOrPhrase: string, signals: string[]) {
+  if (signals.includes("vocabulary") && targetWordOrPhrase) return "vocabulary_context";
+  if (signals.includes("evidence")) return "evidence_use";
+  if (signals.includes("inference")) return "inference";
+  if (signals.includes("craft_structure")) return "craft_structure";
+  if (signals.includes("literary")) return "literature_elements";
+  if (signals.includes("key_ideas")) return "key_ideas_details";
+  if (signals.includes("informational")) return "informational_elements";
+  if (signals.includes("detail_event")) return "plain_recall";
+  return "plain_recall";
+}
+
+function choicesAreCandidateMeanings(item: McqAuditInput, targetWordOrPhrase: string) {
+  const choices = toMcq(item).choices;
+  if (!targetWordOrPhrase || choices.length !== 4) return false;
+  const shortEnough = choices.filter((choice) => wordCount(choice) <= 12).length >= 3;
+  const noTargetEcho = choices.filter((choice) => containsNormalized(choice, targetWordOrPhrase)).length === 0;
+  return shortEnough && noTargetEcho;
+}
+
+function literarySignals(signals: string[]) {
+  return signals.includes("literary");
+}
+
+function obviousRecallStem(stem: string) {
+  return /\bwhat\s+(?:color|number|name)|\bhow\s+many\b|\bwho\s+(?:was|is|did)\b|\bwhere\s+(?:was|is|did)\b|\bwhen\s+(?:was|is|did)\b/i.test(stem);
 }
 
 function absoluteTerms(value: string) {

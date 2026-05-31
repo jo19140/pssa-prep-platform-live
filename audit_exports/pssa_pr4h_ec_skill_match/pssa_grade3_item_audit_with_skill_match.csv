@@ -1,0 +1,29 @@
+itemId,passageId,eligibleContent,questionType,priorItemQualityResult,ecSkillFamily,skillMatchResult,mismatchReason,observedSkillPattern,targetWordOrPhrase,ruleId
+pssa_item_g3_reading_1,pssa_psg_g3_creek_watchers,E03.A-K.1.1.1,MCQ,PASS,literature_elements,PASS,,inference,,PSSA_ITEM_EC_SKILL_MISMATCH
+pssa_item_g3_reading_2,pssa_psg_g3_the_map_in_the_station,E03.A-K.1.1.2,MCQ,PASS,literature_elements,PASS,,evidence_use,,PSSA_ITEM_EC_SKILL_MISMATCH
+pssa_item_g3_reading_3,pssa_psg_g3_a_cooler_lunch_line,E03.A-K.1.1.3,MCQ,PASS,literature_elements,PASS,,evidence_use,,PSSA_ITEM_EC_SKILL_MISMATCH
+pssa_item_g3_reading_4,pssa_psg_g3_the_mural_plan,E03.A-C.2.1.1,MCQ,PASS,craft_structure,PASS,,craft_structure,,PSSA_ITEM_EC_SKILL_MISMATCH
+pssa_item_g3_reading_5,pssa_psg_g3_the_cart_that_would_not_turn,E03.A-C.3.1.1,MCQ,PASS,craft_structure,PASS,,key_ideas_details,,PSSA_ITEM_EC_SKILL_MISMATCH
+pssa_item_g3_reading_6,pssa_psg_g3_creek_watchers,E03.A-V.4.1.1,MCQ,PASS,vocabulary,PASS,,vocabulary_context,faint,PSSA_ITEM_EC_SKILL_MISMATCH
+pssa_item_g3_reading_7,pssa_psg_g3_the_map_in_the_station,E03.A-V.4.1.2,MCQ,PASS,vocabulary,FAIL,Vocabulary EC requires a specific target word or phrase from the passage.,key_ideas_details,,PSSA_ITEM_EC_SKILL_MISMATCH
+pssa_item_g3_reading_8,pssa_psg_g3_a_cooler_lunch_line,E03.B-K.1.1.1,MCQ,PASS,informational_elements,PASS,,plain_recall,,PSSA_ITEM_EC_SKILL_MISMATCH
+pssa_item_g3_reading_9,pssa_psg_g3_the_mural_plan,E03.B-K.1.1.2,MCQ,PASS,inference_evidence,PASS,,literature_elements,,PSSA_ITEM_EC_SKILL_MISMATCH
+pssa_item_g3_reading_10,pssa_psg_g3_the_cart_that_would_not_turn,E03.B-K.1.1.3,MCQ,PASS,informational_elements,PASS,,plain_recall,,PSSA_ITEM_EC_SKILL_MISMATCH
+pssa_item_g3_reading_11,pssa_psg_g3_creek_watchers,E03.B-C.2.1.1,MCQ,PASS,craft_structure,PASS,,inference,,PSSA_ITEM_EC_SKILL_MISMATCH
+pssa_item_g3_reading_12,pssa_psg_g3_the_map_in_the_station,E03.B-C.2.1.2,MCQ,PASS,craft_structure,PASS,,plain_recall,,PSSA_ITEM_EC_SKILL_MISMATCH
+pssa_item_g3_reading_13,pssa_psg_g3_a_cooler_lunch_line,E03.B-C.3.1.1,MCQ,PASS,inference_evidence,PASS,,inference,,PSSA_ITEM_EC_SKILL_MISMATCH
+pssa_item_g3_reading_14,pssa_psg_g3_the_mural_plan,E03.B-C.3.1.2,MCQ,PASS,informational_elements,PASS,,inference,,PSSA_ITEM_EC_SKILL_MISMATCH
+pssa_item_g3_reading_15,pssa_psg_g3_the_cart_that_would_not_turn,E03.B-C.3.1.3,MCQ,PASS,informational_elements,PASS,,inference,,PSSA_ITEM_EC_SKILL_MISMATCH
+pssa_item_g3_reading_16,pssa_psg_g3_creek_watchers,E03.B-V.4.1.1,MCQ,PASS,vocabulary,FAIL,Vocabulary EC requires a specific target word or phrase from the passage.,inference,,PSSA_ITEM_EC_SKILL_MISMATCH
+pssa_item_g3_reading_17,pssa_psg_g3_the_map_in_the_station,E03.B-V.4.1.2,MCQ,PASS,vocabulary,FAIL,Vocabulary EC requires a specific target word or phrase from the passage.,evidence_use,,PSSA_ITEM_EC_SKILL_MISMATCH
+pssa_item_g3_reading_18,pssa_psg_g3_a_cooler_lunch_line,E03.A-K.1.1.1,MCQ,PASS,literature_elements,PASS,,plain_recall,,PSSA_ITEM_EC_SKILL_MISMATCH
+pssa_item_g3_reading_19,pssa_psg_g3_the_mural_plan,E03.A-K.1.1.2,MCQ,PASS,literature_elements,WARN,Non-vocabulary EC may be attached to a word-meaning or phrase-interpretation item.,vocabulary_context,rough,PSSA_ITEM_EC_SKILL_MISMATCH
+pssa_item_g3_reading_20,pssa_psg_g3_the_cart_that_would_not_turn,E03.A-K.1.1.3,MCQ,PASS,literature_elements,PASS,,evidence_use,,PSSA_ITEM_EC_SKILL_MISMATCH
+pssa_item_g3_reading_21,pssa_psg_g3_creek_watchers,E03.A-C.2.1.1,MCQ,PASS,craft_structure,PASS,,craft_structure,,PSSA_ITEM_EC_SKILL_MISMATCH
+pssa_item_g3_reading_22,pssa_psg_g3_the_map_in_the_station,E03.A-C.3.1.1,MCQ,PASS,craft_structure,PASS,,inference,,PSSA_ITEM_EC_SKILL_MISMATCH
+pssa_item_g3_reading_23,pssa_psg_g3_a_cooler_lunch_line,E03.A-V.4.1.1,MCQ,PASS,vocabulary,FAIL,Vocabulary EC requires a specific target word or phrase from the passage.,informational_elements,,PSSA_ITEM_EC_SKILL_MISMATCH
+pssa_item_g3_reading_24,pssa_psg_g3_the_mural_plan,E03.A-V.4.1.2,MCQ,PASS,vocabulary,FAIL,Vocabulary EC requires a specific target word or phrase from the passage.,inference,,PSSA_ITEM_EC_SKILL_MISMATCH
+pssa_item_g3_reading_25,pssa_psg_g3_the_cart_that_would_not_turn,E03.B-K.1.1.1,MCQ,PASS,informational_elements,PASS,,plain_recall,,PSSA_ITEM_EC_SKILL_MISMATCH
+pssa_item_g3_reading_26,pssa_psg_g3_creek_watchers,E03.B-K.1.1.2,MCQ,PASS,inference_evidence,PASS,,informational_elements,,PSSA_ITEM_EC_SKILL_MISMATCH
+pssa_item_g3_reading_27,pssa_psg_g3_the_map_in_the_station,E03.B-K.1.1.3,MCQ,PASS,informational_elements,PASS,,plain_recall,,PSSA_ITEM_EC_SKILL_MISMATCH
+pssa_item_g3_reading_28,pssa_psg_g3_a_cooler_lunch_line,E03.B-C.2.1.1,MCQ,PASS,craft_structure,WARN,Non-vocabulary EC may be attached to a word-meaning or phrase-interpretation item.,vocabulary_context,Mrs. Lane,PSSA_ITEM_EC_SKILL_MISMATCH

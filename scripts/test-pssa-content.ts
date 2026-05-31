@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import {
   buildMcqAbsoluteLanguageDistractorReport,
   buildMcqCorrectIsLongestReport,
+  buildItemEcSkillMatchReport,
   buildMcqPassageSpecificityReport,
   buildPssaPassageQualityReport,
   hasBlockingPassageSpecificityFailure,
@@ -203,6 +204,105 @@ assert.equal(buildMcqPassageSpecificityReport([{
   correctIndex: 0,
   answerChoicesJson: ["A clear sentence.", "A fragment.", "A comma splice.", "A run-on sentence."],
 }], [passage]).length, 0);
+
+const ecCatalog = {
+  "E03.A-V.4.1.1": "Determine or clarify the meaning of unknown and multiple-meaning words and phrases based on grade 3 reading and content.",
+  "E03.A-K.1.1.1": "Ask and answer questions to demonstrate understanding of a text, referring explicitly to the text as the basis for the answers.",
+  "E03.A-C.2.1.1": "Explain the point of view from which a story is narrated, including the difference between first- and third-person narrations.",
+};
+
+function vocabItem(overrides: Partial<McqAuditInput> = {}): McqAuditInput {
+  const structuredChoicesJson: StructuredChoice[] = [
+    {
+      text: "weak and hard to see",
+      isCorrect: true,
+      rationale: "The context says the glow faded, so faint means weak.",
+      evidenceLinks: [link(1, 0, "It holds water in place, lets the soil settle, and releases the water slowly over days or weeks.")],
+      distractorRole: null,
+    },
+    {
+      text: "bright and flashing",
+      isCorrect: false,
+      rationale: "This is the opposite of faint in context.",
+      evidenceLinks: [link(0, 0, "Beavers are often called ecosystem engineers.")],
+      distractorRole: "opposite_claim",
+    },
+    {
+      text: "muddy and heavy",
+      isCorrect: false,
+      rationale: "This misreads the surrounding water details.",
+      evidenceLinks: [link(0, 1, "Using branches, mud, and stones, a beaver blocks the flow of a stream until the water backs up and forms a pond.")],
+      distractorRole: "plausible_misreading",
+    },
+    {
+      text: "calm and steady",
+      isCorrect: false,
+      rationale: "This is a real detail but not the word meaning.",
+      evidenceLinks: [link(2, 0, "Frogs, fish, insects, and birds gather where the water is calm and steady.")],
+      distractorRole: "wrong_section",
+    },
+  ];
+  return {
+    id: "vocab-pass",
+    itemType: "MCQ",
+    passageId: "p1",
+    reportingCategory: "A",
+    gradeLevel: 3,
+    eligibleContent: "E03.A-V.4.1.1",
+    studentFacingPrompt: "What does place mean as it is used in the passage?",
+    correctIndex: 0,
+    answerChoicesJson: structuredChoicesJson.map((choice) => choice.text),
+    structuredChoicesJson,
+    ...overrides,
+  };
+}
+
+assert.equal(buildItemEcSkillMatchReport([vocabItem()], [passage], ecCatalog)[0].skillMatchResult, "PASS");
+assert.equal(buildItemEcSkillMatchReport([vocabItem({
+  id: "vocab-inference-fail",
+  studentFacingPrompt: "What does Maya's Friday visit show about what she learned?",
+})], [passage], ecCatalog)[0].skillMatchResult, "FAIL");
+assert.equal(buildItemEcSkillMatchReport([vocabItem({
+  id: "vocab-main-idea-fail",
+  studentFacingPrompt: "What is the main reason people spent longer near the bench?",
+})], [passage], ecCatalog)[0].skillMatchResult, "FAIL");
+assert.equal(buildItemEcSkillMatchReport([vocabItem({
+  id: "vocab-no-target-fail",
+  studentFacingPrompt: "Which evidence best supports the class plan?",
+})], [passage], ecCatalog)[0].skillMatchResult, "FAIL");
+assert.equal(buildItemEcSkillMatchReport([vocabItem({
+  id: "vocab-evidence-missing-target-fail",
+  studentFacingPrompt: "What does place mean as it is used in the passage?",
+  structuredChoicesJson: (vocabItem() as any).structuredChoicesJson.map((choice: any, index: number) => index === 0
+    ? { ...choice, evidenceLinks: [link(0, 0, "Beavers are often called ecosystem engineers.")] }
+    : choice),
+})], [passage], ecCatalog)[0].skillMatchResult, "FAIL");
+assert.equal(buildItemEcSkillMatchReport([readingItem({
+  id: "key-ideas-pass",
+  gradeLevel: 3,
+  eligibleContent: "E03.A-K.1.1.1",
+  reportingCategory: "A",
+})], [passage], ecCatalog)[0].skillMatchResult, "PASS");
+assert.equal(buildItemEcSkillMatchReport([readingItem({
+  id: "craft-recall-fail",
+  gradeLevel: 3,
+  eligibleContent: "E03.A-C.2.1.1",
+  reportingCategory: "A",
+  studentFacingPrompt: "What color were the rail lines on the old map?",
+})], [passage], ecCatalog)[0].skillMatchResult, "FAIL");
+assert.equal(buildItemEcSkillMatchReport([vocabItem({
+  id: "vocab-ambiguous-warn",
+  studentFacingPrompt: "What does the narrator mean by \"ecosystem engineers\"?",
+  structuredChoicesJson: (vocabItem() as any).structuredChoicesJson.map((choice: any, index: number) => index === 0
+    ? { ...choice, text: "animals that reshape land and water", evidenceLinks: [link(0, 0, "Beavers are often called ecosystem engineers.")] }
+    : choice),
+  answerChoicesJson: [
+    "animals that reshape land and water",
+    "people who build apartment houses",
+    "machines that remove river mud",
+    "birds that gather by ponds",
+  ],
+})], [passage], ecCatalog)[0].skillMatchResult, "WARN");
 
 const duplicateOpeningPassages = [
   {

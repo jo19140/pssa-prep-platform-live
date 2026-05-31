@@ -1,12 +1,14 @@
 import fs from "node:fs";
 import path from "node:path";
 import {
+  buildItemEcSkillMatchReport,
   buildMcqPassageSpecificityReport,
   buildPssaPassageQualityReport,
   hasBlockingPassageSpecificityFailure,
   hasBlockingPassageQualityFailure,
   isPassageLinkedReadingMcq,
   type McqAuditInput,
+  type ItemEcSkillMatchRow,
   type PassageQualityRow,
   type PassageSpecificityRow,
   type PssaPassageAuditInput,
@@ -17,6 +19,8 @@ const failures: string[] = [];
 const summary: Record<string, unknown>[] = [];
 const reportDir = path.resolve("audit_exports/pssa_pr4c_passage_specificity");
 const passageQualityReportDir = path.resolve("audit_exports/pssa_pr4e_passage_quality");
+const ecSkillMatchReportDir = path.resolve("audit_exports/pssa_pr4h_ec_skill_match");
+const expectedSkillFixturePath = path.join(ecSkillMatchReportDir, "grade3_expected_skill_match_fixture.json");
 const pilotItems: McqAuditInput[] = [];
 const pilotPassages: PssaPassageAuditInput[] = [];
 
@@ -57,6 +61,35 @@ const grade3ReplacementItems = grade3ReadingMcqs.filter((item: any) => item.vali
 const unrevisedFailedItemIds = new Set(unrevisedRows.filter((row) => row.result === "FAIL").map((row) => row.itemId));
 const conventionsMcqs = pilotItems.filter((item) => (item.itemType ?? item.questionType) === "MCQ" && !item.passageId);
 const tdaItems = pilotItems.filter((item) => item.itemType === "TDA");
+const ecCatalog = loadEcCatalog(path.resolve("data/pssa/anchor_ec_crosswalk.csv"));
+const grade3SkillRows = buildItemEcSkillMatchReport(grade3ReadingMcqs, pilotPassages, ecCatalog);
+const expectedSkillFixture = loadExpectedSkillFixture(expectedSkillFixturePath);
+const expectedFailures = new Set(expectedSkillFixture.expectedOutcomes.filter((entry) => entry.expectedResult === "FAIL").map((entry) => entry.itemId));
+const expectedPasses = new Set(expectedSkillFixture.expectedOutcomes.filter((entry) => entry.expectedResult === "PASS").map((entry) => entry.itemId));
+const skillRowsByItemId = new Map(grade3SkillRows.map((row) => [row.itemId, row]));
+const actualSkillFailures = new Set(grade3SkillRows.filter((row) => row.skillMatchResult === "FAIL").map((row) => row.itemId));
+const actualSkillPasses = new Set(grade3SkillRows.filter((row) => row.skillMatchResult === "PASS").map((row) => row.itemId));
+const vocabSkillRows = grade3SkillRows.filter((row) => row.ecSkillFamily === "vocabulary");
+
+for (const expected of expectedSkillFixture.expectedOutcomes) {
+  const row = skillRowsByItemId.get(expected.itemId);
+  if (!row) {
+    failures.push(`PSSA_ITEM_EC_SKILL_MISMATCH fixture item missing: ${expected.itemId}`);
+    continue;
+  }
+  if (row.skillMatchResult !== expected.expectedResult) {
+    failures.push(`PSSA_ITEM_EC_SKILL_MISMATCH expected ${expected.itemId} to be ${expected.expectedResult}, found ${row.skillMatchResult}`);
+  }
+  if (expected.expectedSkillFamily && row.ecSkillFamily !== expected.expectedSkillFamily) {
+    failures.push(`PSSA_ITEM_EC_SKILL_MISMATCH expected ${expected.itemId} family ${expected.expectedSkillFamily}, found ${row.ecSkillFamily}`);
+  }
+}
+if (actualSkillFailures.size !== expectedFailures.size || [...expectedFailures].some((id) => !actualSkillFailures.has(id))) {
+  failures.push(`PSSA_ITEM_EC_SKILL_MISMATCH expected five fixed Grade 3 failures ${[...expectedFailures].join("|")}, found ${[...actualSkillFailures].join("|")}`);
+}
+if ([...expectedPasses].some((id) => !actualSkillPasses.has(id))) {
+  failures.push(`PSSA_ITEM_EC_SKILL_MISMATCH expected representative pass items to pass, found failures in ${[...expectedPasses].filter((id) => !actualSkillPasses.has(id)).join("|")}`);
+}
 
 const exemplarPath = path.resolve("exemplars/pssa_grade6/pssa_grade6_exemplar_backend.json");
 let exemplarRows: PassageSpecificityRow[] = [];
@@ -157,6 +190,23 @@ writeCsv(
   ].includes(row.ruleId)),
 );
 
+fs.mkdirSync(ecSkillMatchReportDir, { recursive: true });
+writeSkillMatchCsv(
+  path.join(ecSkillMatchReportDir, "pssa_item_ec_skill_match_report.csv"),
+  grade3SkillRows,
+);
+writeGrade3ItemAuditWithSkillMatchCsv(
+  path.join(ecSkillMatchReportDir, "pssa_grade3_item_audit_with_skill_match.csv"),
+  grade3ReadingMcqs,
+  grade3Rows,
+  grade3SkillRows,
+);
+writeSkillMatchDiscrimination(
+  path.join(ecSkillMatchReportDir, "pssa_grade3_skill_match_discrimination.md"),
+  grade3SkillRows,
+  expectedSkillFixture.expectedOutcomes,
+);
+
 const discrimination = {
   rewrittenGrade3ReadingMcqs: {
     evaluated: grade3ReadingMcqs.length,
@@ -191,6 +241,17 @@ const discrimination = {
     tdaItems: tdaItems.length,
     tdaFlaggedByPassageGrounding: tdaRows.length,
   },
+  ecSkillMatch: {
+    ruleId: "PSSA_ITEM_EC_SKILL_MISMATCH",
+    evaluated: grade3SkillRows.length,
+    pass: grade3SkillRows.filter((row) => row.skillMatchResult === "PASS").length,
+    warn: grade3SkillRows.filter((row) => row.skillMatchResult === "WARN").length,
+    fail: grade3SkillRows.filter((row) => row.skillMatchResult === "FAIL").length,
+    expectedFailures: [...expectedFailures],
+    actualFailures: [...actualSkillFailures],
+    genuineVocabularyPass: skillRowsByItemId.get("pssa_item_g3_reading_6")?.skillMatchResult ?? "",
+    note: "Expected detector failures prove current vocabulary-tagged mismatches; deterministic FAILs are not waived to PASS in PR #4h.",
+  },
   reports: [
     path.relative(process.cwd(), path.join(reportDir, "pssa_mcq_passage_specificity_report.csv")),
     path.relative(process.cwd(), path.join(reportDir, "pssa_mcq_template_language_reuse_report.csv")),
@@ -199,6 +260,9 @@ const discrimination = {
     path.relative(process.cwd(), path.join(passageQualityReportDir, "pssa_passage_template_skeleton_report.csv")),
     path.relative(process.cwd(), path.join(passageQualityReportDir, "pssa_passage_coherence_report.csv")),
     path.relative(process.cwd(), path.join(passageQualityReportDir, "pssa_passage_concreteness_report.csv")),
+    path.relative(process.cwd(), path.join(ecSkillMatchReportDir, "pssa_item_ec_skill_match_report.csv")),
+    path.relative(process.cwd(), path.join(ecSkillMatchReportDir, "pssa_grade3_item_audit_with_skill_match.csv")),
+    path.relative(process.cwd(), path.join(ecSkillMatchReportDir, "pssa_grade3_skill_match_discrimination.md")),
   ],
 };
 
@@ -230,4 +294,182 @@ function writePassageQualityCsv(filePath: string, rows: PassageQualityRow[]) {
     ...rows.map((row) => columns.map((column) => csvCell((row as any)[column])).join(",")),
   ];
   fs.writeFileSync(filePath, `${lines.join("\n")}\n`);
+}
+
+function writeSkillMatchCsv(filePath: string, rows: ItemEcSkillMatchRow[]) {
+  const columns = [
+    "itemId", "gradeLevel", "passageId", "passageTitle", "eligibleContent", "ecDescription",
+    "ecSkillFamily", "questionType", "stem", "targetWordOrPhrase", "observedSkillPattern",
+    "expectedSkillPattern", "skillMatchResult", "skillMatchConfidence", "mismatchReason",
+    "evidenceSpan", "stemSkillSignals", "notes",
+  ];
+  const lines = [
+    columns.join(","),
+    ...rows.map((row) => columns.map((column) => csvCell((row as any)[column])).join(",")),
+  ];
+  fs.writeFileSync(filePath, `${lines.join("\n")}\n`);
+}
+
+function writeGrade3ItemAuditWithSkillMatchCsv(
+  filePath: string,
+  items: McqAuditInput[],
+  passageRows: PassageSpecificityRow[],
+  skillRows: ItemEcSkillMatchRow[],
+) {
+  const skillByItem = new Map(skillRows.map((row) => [row.itemId, row]));
+  const columns = [
+    "itemId", "passageId", "eligibleContent", "questionType", "priorItemQualityResult",
+    "ecSkillFamily", "skillMatchResult", "mismatchReason", "observedSkillPattern", "targetWordOrPhrase",
+    "ruleId",
+  ];
+  const rows = items.map((item) => {
+    const itemId = String(item.id ?? item.itemId ?? "");
+    const qualityPass = !passageRows.some((row) => row.itemId === itemId && row.result === "FAIL");
+    const skill = skillByItem.get(itemId);
+    return {
+      itemId,
+      passageId: item.passageId ?? "",
+      eligibleContent: item.eligibleContent ?? "",
+      questionType: item.questionType ?? item.itemType ?? "",
+      priorItemQualityResult: qualityPass ? "PASS" : "FAIL",
+      ecSkillFamily: skill?.ecSkillFamily ?? "",
+      skillMatchResult: skill?.skillMatchResult ?? "",
+      mismatchReason: skill?.mismatchReason ?? "",
+      observedSkillPattern: skill?.observedSkillPattern ?? "",
+      targetWordOrPhrase: skill?.targetWordOrPhrase ?? "",
+      ruleId: "PSSA_ITEM_EC_SKILL_MISMATCH",
+    };
+  });
+  const lines = [
+    columns.join(","),
+    ...rows.map((row) => columns.map((column) => csvCell((row as any)[column])).join(",")),
+  ];
+  fs.writeFileSync(filePath, `${lines.join("\n")}\n`);
+}
+
+function writeSkillMatchDiscrimination(filePath: string, rows: ItemEcSkillMatchRow[], expectedOutcomes: ExpectedSkillOutcome[]) {
+  const byFamily = new Map<string, { pass: number; warn: number; fail: number }>();
+  for (const row of rows) {
+    const current = byFamily.get(row.ecSkillFamily) ?? { pass: 0, warn: 0, fail: 0 };
+    if (row.skillMatchResult === "PASS") current.pass += 1;
+    if (row.skillMatchResult === "WARN") current.warn += 1;
+    if (row.skillMatchResult === "FAIL") current.fail += 1;
+    byFamily.set(row.ecSkillFamily, current);
+  }
+  const vocabRows = rows.filter((row) => row.ecSkillFamily === "vocabulary");
+  const failedRows = rows.filter((row) => row.skillMatchResult === "FAIL");
+  const lines = [
+    "# PSSA PR #4h EC Skill-Match Discrimination",
+    "",
+    "- Rule ID: PSSA_ITEM_EC_SKILL_MISMATCH",
+    `- Total Grade 3 items: ${rows.length}`,
+    `- PASS/WARN/FAIL: ${rows.filter((row) => row.skillMatchResult === "PASS").length}/${rows.filter((row) => row.skillMatchResult === "WARN").length}/${failedRows.length}`,
+    "- Deterministic FAIL rows are expected proof findings in PR #4h and are not waived to PASS.",
+    "",
+    "## Fixed Fixture Check",
+    "",
+    "| itemId | expected | actual | family |",
+    "|---|---|---|---|",
+    ...expectedOutcomes.map((expected) => {
+      const row = rows.find((entry) => entry.itemId === expected.itemId);
+      return `| ${expected.itemId} | ${expected.expectedResult} | ${row?.skillMatchResult ?? "MISSING"} | ${row?.ecSkillFamily ?? ""} |`;
+    }),
+    "",
+    "## Failed Items",
+    "",
+    "| itemId | EC | stem | expected | observed | reason |",
+    "|---|---|---|---|---|---|",
+    ...failedRows.map((row) => `| ${row.itemId} | ${row.eligibleContent} | ${escapeTable(row.stem)} | ${row.expectedSkillPattern} | ${row.observedSkillPattern} | ${escapeTable(row.mismatchReason)} |`),
+    "",
+    "## Vocabulary-Tagged Items",
+    "",
+    "| itemId | EC | result | targetWordOrPhrase | evidenceContainsTarget | stem |",
+    "|---|---|---|---|---|---|",
+    ...vocabRows.map((row) => `| ${row.itemId} | ${row.eligibleContent} | ${row.skillMatchResult} | ${row.targetWordOrPhrase || "(none)"} | ${row.targetWordOrPhrase ? row.evidenceSpan.toLowerCase().includes(row.targetWordOrPhrase.toLowerCase()) : "false"} | ${escapeTable(row.stem)} |`),
+    "",
+    "## PASS/WARN/FAIL By Skill Family",
+    "",
+    "| skillFamily | PASS | WARN | FAIL |",
+    "|---|---:|---:|---:|",
+    ...[...byFamily.entries()].sort().map(([family, counts]) => `| ${family} | ${counts.pass} | ${counts.warn} | ${counts.fail} |`),
+    "",
+  ];
+  fs.writeFileSync(filePath, `${lines.join("\n")}\n`);
+}
+
+type ExpectedSkillOutcome = {
+  itemId: string;
+  expectedResult: "PASS" | "WARN" | "FAIL";
+  expectedSkillFamily?: string;
+};
+
+function loadExpectedSkillFixture(filePath: string): { expectedOutcomes: ExpectedSkillOutcome[] } {
+  if (!fs.existsSync(filePath)) {
+    failures.push(`Missing fixed EC skill-match fixture: ${path.relative(process.cwd(), filePath)}`);
+    return { expectedOutcomes: [] };
+  }
+  return JSON.parse(fs.readFileSync(filePath, "utf8"));
+}
+
+function loadEcCatalog(filePath: string) {
+  if (!fs.existsSync(filePath)) return {};
+  const rows = parseCsv(fs.readFileSync(filePath, "utf8"));
+  const [header, ...data] = rows;
+  const index = Object.fromEntries(header.map((column, columnIndex) => [column, columnIndex]));
+  const catalog: Record<string, { eligibleContent: string; eligibleContentText: string; reportingCategory: string; assessmentAnchor: string; anchorDescriptor: string }> = {};
+  for (const row of data) {
+    const eligibleContent = row[index.eligibleContent];
+    if (!eligibleContent) continue;
+    catalog[eligibleContent] = {
+      eligibleContent,
+      eligibleContentText: row[index.eligibleContentText] ?? "",
+      reportingCategory: row[index.reportingCategory] ?? "",
+      assessmentAnchor: row[index.assessmentAnchor] ?? "",
+      anchorDescriptor: row[index.anchorDescriptor] ?? "",
+    };
+  }
+  return catalog;
+}
+
+function parseCsv(text: string) {
+  const rows: string[][] = [];
+  let row: string[] = [];
+  let cell = "";
+  let quoted = false;
+  for (let index = 0; index < text.length; index += 1) {
+    const char = text[index];
+    const next = text[index + 1];
+    if (quoted && char === "\"" && next === "\"") {
+      cell += "\"";
+      index += 1;
+      continue;
+    }
+    if (char === "\"") {
+      quoted = !quoted;
+      continue;
+    }
+    if (!quoted && char === ",") {
+      row.push(cell);
+      cell = "";
+      continue;
+    }
+    if (!quoted && (char === "\n" || char === "\r")) {
+      if (char === "\r" && next === "\n") index += 1;
+      row.push(cell);
+      if (row.some((value) => value.length)) rows.push(row);
+      row = [];
+      cell = "";
+      continue;
+    }
+    cell += char;
+  }
+  if (cell || row.length) {
+    row.push(cell);
+    rows.push(row);
+  }
+  return rows;
+}
+
+function escapeTable(value: string) {
+  return value.replace(/\|/g, "\\|");
 }
