@@ -1,0 +1,71 @@
+itemId,interactionType,field,matchedSourceFile,longestNormalizedNgram,overlapScore,matchType,result
+pssa_ms_g3_creek_01,MULTI_SELECT,stem,,,0,none,PASS
+pssa_ms_g3_creek_01,MULTI_SELECT,instructionText,,,0,none,PASS
+pssa_ms_g3_creek_01,MULTI_SELECT,choices.0,,,0,none,PASS
+pssa_ms_g3_creek_01,MULTI_SELECT,choices.1,,,0,none,PASS
+pssa_ms_g3_creek_01,MULTI_SELECT,choices.2,,,0,none,PASS
+pssa_ms_g3_creek_01,MULTI_SELECT,choices.3,,,0,none,PASS
+pssa_ms_g3_creek_01,MULTI_SELECT,assignedPassage.text,,,0,none,PASS
+pssa_ms_g3_map_01,MULTI_SELECT,stem,,,0,none,PASS
+pssa_ms_g3_map_01,MULTI_SELECT,instructionText,,,0,none,PASS
+pssa_ms_g3_map_01,MULTI_SELECT,choices.0,,,0,none,PASS
+pssa_ms_g3_map_01,MULTI_SELECT,choices.1,,,0,none,PASS
+pssa_ms_g3_map_01,MULTI_SELECT,choices.2,,,0,none,PASS
+pssa_ms_g3_map_01,MULTI_SELECT,choices.3,,,0,none,PASS
+pssa_ms_g3_map_01,MULTI_SELECT,assignedPassage.text,reference/pssa-released-items/extracted/grade-6/tda-rubric-exemplars.json,the end of the,0.0132,content-bearing,PASS
+pssa_ms_g3_lunch_01,MULTI_SELECT,stem,,,0,none,PASS
+pssa_ms_g3_lunch_01,MULTI_SELECT,instructionText,,,0,none,PASS
+pssa_ms_g3_lunch_01,MULTI_SELECT,choices.0,,,0,none,PASS
+pssa_ms_g3_lunch_01,MULTI_SELECT,choices.1,,,0,none,PASS
+pssa_ms_g3_lunch_01,MULTI_SELECT,choices.2,,,0,none,PASS
+pssa_ms_g3_lunch_01,MULTI_SELECT,choices.3,,,0,none,PASS
+pssa_ms_g3_lunch_01,MULTI_SELECT,assignedPassage.text,reference/pssa-released-items/extracted/grade-6/tda-rubric-exemplars.json,the end of the,0.0132,content-bearing,PASS
+pssa_ms_g3_mural_01,MULTI_SELECT,stem,,,0,none,PASS
+pssa_ms_g3_mural_01,MULTI_SELECT,instructionText,,,0,none,PASS
+pssa_ms_g3_mural_01,MULTI_SELECT,choices.0,,,0,none,PASS
+pssa_ms_g3_mural_01,MULTI_SELECT,choices.1,,,0,none,PASS
+pssa_ms_g3_mural_01,MULTI_SELECT,choices.2,,,0,none,PASS
+pssa_ms_g3_mural_01,MULTI_SELECT,choices.3,,,0,none,PASS
+pssa_ms_g3_mural_01,MULTI_SELECT,assignedPassage.text,,,0,none,PASS
+pssa_ms_g3_cart_01,MULTI_SELECT,stem,,,0,none,PASS
+pssa_ms_g3_cart_01,MULTI_SELECT,instructionText,,,0,none,PASS
+pssa_ms_g3_cart_01,MULTI_SELECT,choices.0,,,0,none,PASS
+pssa_ms_g3_cart_01,MULTI_SELECT,choices.1,,,0,none,PASS
+pssa_ms_g3_cart_01,MULTI_SELECT,choices.2,,,0,none,PASS
+pssa_ms_g3_cart_01,MULTI_SELECT,choices.3,,,0,none,PASS
+pssa_ms_g3_cart_01,MULTI_SELECT,assignedPassage.text,,,0,none,PASS
+pssa_ht_g3_creek_01,HOT_TEXT,prompt,reference/pssa-item-catalog/grades456.md,choose two sentences that best support the,0.3684,content-bearing,PASS
+pssa_ht_g3_creek_01,HOT_TEXT,instructionText,,,0,none,PASS
+pssa_ht_g3_creek_01,HOT_TEXT,selectableSpans.0,,,0,none,PASS
+pssa_ht_g3_creek_01,HOT_TEXT,selectableSpans.1,,,0,none,PASS
+pssa_ht_g3_creek_01,HOT_TEXT,selectableSpans.2,,,0,none,PASS
+pssa_ht_g3_creek_01,HOT_TEXT,selectableSpans.3,,,0,none,PASS
+pssa_ht_g3_creek_01,HOT_TEXT,assignedPassage.text,,,0,none,PASS
+pssa_ht_g3_map_01,HOT_TEXT,prompt,,,0,none,PASS
+pssa_ht_g3_map_01,HOT_TEXT,instructionText,,,0,none,PASS
+pssa_ht_g3_map_01,HOT_TEXT,selectableSpans.0,,,0,none,PASS
+pssa_ht_g3_map_01,HOT_TEXT,selectableSpans.1,,,0,none,PASS
+pssa_ht_g3_map_01,HOT_TEXT,selectableSpans.2,,,0,none,PASS
+pssa_ht_g3_map_01,HOT_TEXT,selectableSpans.3,,,0,none,PASS
+pssa_ht_g3_map_01,HOT_TEXT,assignedPassage.text,reference/pssa-released-items/extracted/grade-6/tda-rubric-exemplars.json,the end of the,0.0132,content-bearing,PASS
+pssa_ht_g3_lunch_01,HOT_TEXT,prompt,reference/pssa-item-catalog/tech_questions_2.md,choose two sentences that show,0.3571,boilerplate,PASS
+pssa_ht_g3_lunch_01,HOT_TEXT,instructionText,,,0,none,PASS
+pssa_ht_g3_lunch_01,HOT_TEXT,selectableSpans.0,,,0,none,PASS
+pssa_ht_g3_lunch_01,HOT_TEXT,selectableSpans.1,,,0,none,PASS
+pssa_ht_g3_lunch_01,HOT_TEXT,selectableSpans.2,,,0,none,PASS
+pssa_ht_g3_lunch_01,HOT_TEXT,selectableSpans.3,,,0,none,PASS
+pssa_ht_g3_lunch_01,HOT_TEXT,assignedPassage.text,reference/pssa-released-items/extracted/grade-6/tda-rubric-exemplars.json,the end of the,0.0132,content-bearing,PASS
+pssa_ht_g3_mural_01,HOT_TEXT,prompt,reference/pssa-item-catalog/tech_questions_2.md,choose two sentences that show,0.2778,boilerplate,PASS
+pssa_ht_g3_mural_01,HOT_TEXT,instructionText,,,0,none,PASS
+pssa_ht_g3_mural_01,HOT_TEXT,selectableSpans.0,,,0,none,PASS
+pssa_ht_g3_mural_01,HOT_TEXT,selectableSpans.1,,,0,none,PASS
+pssa_ht_g3_mural_01,HOT_TEXT,selectableSpans.2,,,0,none,PASS
+pssa_ht_g3_mural_01,HOT_TEXT,selectableSpans.3,,,0,none,PASS
+pssa_ht_g3_mural_01,HOT_TEXT,assignedPassage.text,,,0,none,PASS
+pssa_ht_g3_cart_01,HOT_TEXT,prompt,reference/pssa-item-catalog/grades456.md,choose two sentences that,0.2857,boilerplate,PASS
+pssa_ht_g3_cart_01,HOT_TEXT,instructionText,,,0,none,PASS
+pssa_ht_g3_cart_01,HOT_TEXT,selectableSpans.0,,,0,none,PASS
+pssa_ht_g3_cart_01,HOT_TEXT,selectableSpans.1,,,0,none,PASS
+pssa_ht_g3_cart_01,HOT_TEXT,selectableSpans.2,,,0,none,PASS
+pssa_ht_g3_cart_01,HOT_TEXT,selectableSpans.3,,,0,none,PASS
+pssa_ht_g3_cart_01,HOT_TEXT,assignedPassage.text,,,0,none,PASS

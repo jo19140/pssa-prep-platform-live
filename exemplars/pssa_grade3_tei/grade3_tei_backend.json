@@ -1,0 +1,869 @@
+{
+  "generatedAt": "2026-06-01T00:06:40.191Z",
+  "noDbWrite": true,
+  "productionImportReady": false,
+  "multiSelectItems": [
+    {
+      "itemId": "pssa_ms_g3_creek_01",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "MULTI_SELECT",
+      "interactionType": "MULTI_SELECT",
+      "interactionSubtype": "choose_n_details",
+      "passageId": "pssa_psg_g3_creek_watchers",
+      "passageTitle": "The Night the Creek Glowed",
+      "eligibleContent": "E03.B-K.1.1.2",
+      "ecSkillFamily": "informational_elements",
+      "reportingCategory": "B",
+      "stem": "Which two details best support the main idea that the class used observations to explain the creek glow?",
+      "instructionText": "Choose two answers.",
+      "choices": [
+        {
+          "text": "Maya drew a map of three creek spots.",
+          "supportsPrompt": true,
+          "distractorRole": null,
+          "rationale": "The map shows direct observation across locations."
+        },
+        {
+          "text": "The teacher brought clear jars and a thermometer.",
+          "supportsPrompt": false,
+          "distractorRole": "wrong_emphasis",
+          "rationale": "This names tools but does not show the explanation."
+        },
+        {
+          "text": "Students compared their notes with the weather chart.",
+          "supportsPrompt": true,
+          "distractorRole": null,
+          "rationale": "This shows the class used evidence to explain conditions."
+        },
+        {
+          "text": "A robin hopped in the wet grass on Friday.",
+          "supportsPrompt": false,
+          "distractorRole": "wrong_section",
+          "rationale": "This happens later and does not explain the glow."
+        }
+      ],
+      "correctIndices": [
+        0,
+        2
+      ],
+      "minSelections": 2,
+      "maxSelections": 2,
+      "exactSelectionCount": 2,
+      "scoring": {
+        "totalPoints": 2,
+        "partialCreditRules": [
+          {
+            "points": 2,
+            "rule": "Both correct choices and no extra selections."
+          },
+          {
+            "points": 1,
+            "rule": "One correct choice and no extra selections."
+          },
+          {
+            "points": 0,
+            "rule": "Unsupported, extra, or missing selections."
+          }
+        ],
+        "scoringNotes": "Full credit cannot be earned with unsupported or extra selections."
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "auditMetadata": {
+        "authoredIn": "PSSA_PR_4L_GRADE3_TEI",
+        "noDbWrite": true
+      }
+    },
+    {
+      "itemId": "pssa_ms_g3_map_01",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "MULTI_SELECT",
+      "interactionType": "MULTI_SELECT",
+      "interactionSubtype": "choose_n_evidence",
+      "passageId": "pssa_psg_g3_the_map_in_the_station",
+      "passageTitle": "A Map Under the Bench",
+      "eligibleContent": "E03.B-K.1.1.2",
+      "ecSkillFamily": "informational_elements",
+      "reportingCategory": "B",
+      "stem": "Which two details show that the old map helped visitors compare the town's past and present?",
+      "instructionText": "Choose two answers.",
+      "choices": [
+        {
+          "text": "A date in the corner said 1928.",
+          "supportsPrompt": false,
+          "distractorRole": "too_narrow",
+          "rationale": "This shows the map is old but not how visitors compare changes."
+        },
+        {
+          "text": "Mr. Ortiz put a new town map beside the old one.",
+          "supportsPrompt": true,
+          "distractorRole": null,
+          "rationale": "The two maps allow visitors to compare."
+        },
+        {
+          "text": "A label told where it was found and how it was opened.",
+          "supportsPrompt": false,
+          "distractorRole": "wrong_emphasis",
+          "rationale": "This explains display information, not the comparison."
+        },
+        {
+          "text": "Some streets had new names, and the trolley tracks were gone.",
+          "supportsPrompt": true,
+          "distractorRole": null,
+          "rationale": "This directly shows changes between past and present."
+        }
+      ],
+      "correctIndices": [
+        1,
+        3
+      ],
+      "minSelections": 2,
+      "maxSelections": 2,
+      "exactSelectionCount": 2,
+      "scoring": {
+        "totalPoints": 2,
+        "partialCreditRules": [
+          {
+            "points": 2,
+            "rule": "Both correct choices and no extra selections."
+          },
+          {
+            "points": 1,
+            "rule": "One correct choice and no extra selections."
+          },
+          {
+            "points": 0,
+            "rule": "Unsupported, extra, or missing selections."
+          }
+        ],
+        "scoringNotes": "Full credit cannot be earned with unsupported or extra selections."
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "auditMetadata": {
+        "authoredIn": "PSSA_PR_4L_GRADE3_TEI",
+        "noDbWrite": true
+      }
+    },
+    {
+      "itemId": "pssa_ms_g3_lunch_01",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "MULTI_SELECT",
+      "interactionType": "MULTI_SELECT",
+      "interactionSubtype": "choose_n_details",
+      "passageId": "pssa_psg_g3_a_cooler_lunch_line",
+      "passageTitle": "The Bell That Saved Lunch",
+      "eligibleContent": "E03.B-K.1.1.3",
+      "ecSkillFamily": "informational_elements",
+      "reportingCategory": "B",
+      "stem": "Which two details show the cause of the lunch-line changes?",
+      "instructionText": "Choose two answers.",
+      "choices": [
+        {
+          "text": "Students picked up milk after they already had full trays.",
+          "supportsPrompt": true,
+          "distractorRole": null,
+          "rationale": "This is one slow spot that caused a change."
+        },
+        {
+          "text": "Spoons and napkins were tucked behind the soup pot.",
+          "supportsPrompt": true,
+          "distractorRole": null,
+          "rationale": "This is another slow spot that caused a change."
+        },
+        {
+          "text": "The red baskets were easy to spot.",
+          "supportsPrompt": false,
+          "distractorRole": "wrong_section",
+          "rationale": "This describes the result after the change."
+        },
+        {
+          "text": "Mrs. Lane circled that note in purple marker.",
+          "supportsPrompt": false,
+          "distractorRole": "too_narrow",
+          "rationale": "This later note is not a cause of the setup change."
+        }
+      ],
+      "correctIndices": [
+        0,
+        1
+      ],
+      "minSelections": 2,
+      "maxSelections": 2,
+      "exactSelectionCount": 2,
+      "scoring": {
+        "totalPoints": 2,
+        "partialCreditRules": [
+          {
+            "points": 2,
+            "rule": "Both correct choices and no extra selections."
+          },
+          {
+            "points": 1,
+            "rule": "One correct choice and no extra selections."
+          },
+          {
+            "points": 0,
+            "rule": "Unsupported, extra, or missing selections."
+          }
+        ],
+        "scoringNotes": "Full credit cannot be earned with unsupported or extra selections."
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "auditMetadata": {
+        "authoredIn": "PSSA_PR_4L_GRADE3_TEI",
+        "noDbWrite": true
+      }
+    },
+    {
+      "itemId": "pssa_ms_g3_mural_01",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "MULTI_SELECT",
+      "interactionType": "MULTI_SELECT",
+      "interactionSubtype": "choose_n_evidence",
+      "passageId": "pssa_psg_g3_the_mural_plan",
+      "passageTitle": "Blue Paint for Saturday",
+      "eligibleContent": "E03.A-K.1.1.2",
+      "ecSkillFamily": "literature_elements",
+      "reportingCategory": "A",
+      "stem": "Which two details best show the message that mistakes can become part of something good?",
+      "instructionText": "Choose two answers.",
+      "choices": [
+        {
+          "text": "The wall was rough brick, and chalk lines crossed it like a giant puzzle.",
+          "supportsPrompt": false,
+          "distractorRole": "too_narrow",
+          "rationale": "This describes the wall, not the message."
+        },
+        {
+          "text": "I wanted to wipe them away, but Grandpa handed me a thin brush.",
+          "supportsPrompt": false,
+          "distractorRole": "wrong_emphasis",
+          "rationale": "This starts the problem but does not show the mistake becoming useful."
+        },
+        {
+          "text": "I bent close and painted tiny waves around each tail.",
+          "supportsPrompt": true,
+          "distractorRole": null,
+          "rationale": "The narrator turns the drips into ripples."
+        },
+        {
+          "text": "The fish seemed to move, and the wall no longer looked empty.",
+          "supportsPrompt": true,
+          "distractorRole": null,
+          "rationale": "The changed mural becomes lively and meaningful."
+        }
+      ],
+      "correctIndices": [
+        2,
+        3
+      ],
+      "minSelections": 2,
+      "maxSelections": 2,
+      "exactSelectionCount": 2,
+      "scoring": {
+        "totalPoints": 2,
+        "partialCreditRules": [
+          {
+            "points": 2,
+            "rule": "Both correct choices and no extra selections."
+          },
+          {
+            "points": 1,
+            "rule": "One correct choice and no extra selections."
+          },
+          {
+            "points": 0,
+            "rule": "Unsupported, extra, or missing selections."
+          }
+        ],
+        "scoringNotes": "Full credit cannot be earned with unsupported or extra selections."
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "auditMetadata": {
+        "authoredIn": "PSSA_PR_4L_GRADE3_TEI",
+        "noDbWrite": true
+      }
+    },
+    {
+      "itemId": "pssa_ms_g3_cart_01",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "MULTI_SELECT",
+      "interactionType": "MULTI_SELECT",
+      "interactionSubtype": "choose_n_details",
+      "passageId": "pssa_psg_g3_the_cart_that_would_not_turn",
+      "passageTitle": "The Cart That Would Not Turn",
+      "eligibleContent": "E03.B-K.1.1.3",
+      "ecSkillFamily": "informational_elements",
+      "reportingCategory": "B",
+      "stem": "Which two details explain why the class follows the repair steps in order?",
+      "instructionText": "Choose two answers.",
+      "choices": [
+        {
+          "text": "The green cart in the art room did not.",
+          "supportsPrompt": false,
+          "distractorRole": "too_narrow",
+          "rationale": "This states the problem but not why the steps matter."
+        },
+        {
+          "text": "First, you would empty the heavy paper boxes from the bottom shelf.",
+          "supportsPrompt": true,
+          "distractorRole": null,
+          "rationale": "The first step removes weight before checking the wheel."
+        },
+        {
+          "text": "Weight can hide a small problem.",
+          "supportsPrompt": true,
+          "distractorRole": null,
+          "rationale": "This explains why the order matters."
+        },
+        {
+          "text": "After the repair, the cart still squeaked a little.",
+          "supportsPrompt": false,
+          "distractorRole": "wrong_section",
+          "rationale": "This is after the repair and does not explain the step order."
+        }
+      ],
+      "correctIndices": [
+        1,
+        2
+      ],
+      "minSelections": 2,
+      "maxSelections": 2,
+      "exactSelectionCount": 2,
+      "scoring": {
+        "totalPoints": 2,
+        "partialCreditRules": [
+          {
+            "points": 2,
+            "rule": "Both correct choices and no extra selections."
+          },
+          {
+            "points": 1,
+            "rule": "One correct choice and no extra selections."
+          },
+          {
+            "points": 0,
+            "rule": "Unsupported, extra, or missing selections."
+          }
+        ],
+        "scoringNotes": "Full credit cannot be earned with unsupported or extra selections."
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "auditMetadata": {
+        "authoredIn": "PSSA_PR_4L_GRADE3_TEI",
+        "noDbWrite": true
+      }
+    }
+  ],
+  "hotTextItems": [
+    {
+      "itemId": "pssa_ht_g3_creek_01",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "HOT_TEXT",
+      "interactionType": "HOT_TEXT",
+      "interactionSubtype": "sentence_select",
+      "passageId": "pssa_psg_g3_creek_watchers",
+      "passageTitle": "The Night the Creek Glowed",
+      "eligibleContent": "E03.B-K.1.1.2",
+      "ecSkillFamily": "informational_elements",
+      "reportingCategory": "B",
+      "prompt": "Choose two sentences that best support the main idea that the class used evidence to understand the creek glow.",
+      "instructionText": "Choose two sentences.",
+      "selectableSpans": [
+        {
+          "spanId": "pssa_ht_g3_creek_01_span_1",
+          "text": "The glow was not bright like a flashlight.",
+          "paragraphIndex": 0,
+          "sentenceIndex": 1,
+          "startOffset": 69,
+          "endOffset": 111,
+          "supportsPrompt": false,
+          "distractorRole": "background",
+          "rationale": "This describes the glow but not the class evidence."
+        },
+        {
+          "spanId": "pssa_ht_g3_creek_01_span_2",
+          "text": "Maya drew a map of three creek spots.",
+          "paragraphIndex": 2,
+          "sentenceIndex": 0,
+          "startOffset": 588,
+          "endOffset": 625,
+          "supportsPrompt": true,
+          "distractorRole": null,
+          "rationale": "This shows organized observation."
+        },
+        {
+          "spanId": "pssa_ht_g3_creek_01_span_3",
+          "text": "Those clues helped the class ask a better question: why was the glow strongest in one place?",
+          "paragraphIndex": 2,
+          "sentenceIndex": 4,
+          "startOffset": 797,
+          "endOffset": 889,
+          "supportsPrompt": true,
+          "distractorRole": null,
+          "rationale": "This connects clues to the explanation question."
+        },
+        {
+          "spanId": "pssa_ht_g3_creek_01_span_4",
+          "text": "A beetle skated over the surface, and a robin hopped in the wet grass.",
+          "paragraphIndex": 5,
+          "sentenceIndex": 2,
+          "startOffset": 1555,
+          "endOffset": 1625,
+          "supportsPrompt": false,
+          "distractorRole": "wrong_section",
+          "rationale": "This later detail does not support the main idea."
+        }
+      ],
+      "correctSpanIds": [
+        "pssa_ht_g3_creek_01_span_2",
+        "pssa_ht_g3_creek_01_span_3"
+      ],
+      "minSelections": 2,
+      "maxSelections": 2,
+      "exactSelectionCount": 2,
+      "scoring": {
+        "totalPoints": 2,
+        "partialCreditRules": [
+          {
+            "points": 2,
+            "rule": "Both correct spans and no extra selections."
+          },
+          {
+            "points": 1,
+            "rule": "One correct span and no extra selections."
+          },
+          {
+            "points": 0,
+            "rule": "Unsupported, extra, or missing selections."
+          }
+        ],
+        "scoringNotes": "Full credit cannot be earned with unsupported or extra selected spans."
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "auditMetadata": {
+        "authoredIn": "PSSA_PR_4L_GRADE3_TEI",
+        "noDbWrite": true
+      }
+    },
+    {
+      "itemId": "pssa_ht_g3_map_01",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "HOT_TEXT",
+      "interactionType": "HOT_TEXT",
+      "interactionSubtype": "sentence_select",
+      "passageId": "pssa_psg_g3_the_map_in_the_station",
+      "passageTitle": "A Map Under the Bench",
+      "eligibleContent": "E03.B-K.1.1.2",
+      "ecSkillFamily": "informational_elements",
+      "reportingCategory": "B",
+      "prompt": "Choose two sentences showing that the old map helped people compare past and present.",
+      "instructionText": "Choose two sentences.",
+      "selectableSpans": [
+        {
+          "spanId": "pssa_ht_g3_map_01_span_1",
+          "text": "The station manager called Mr. Ortiz, who cared for the town archive.",
+          "paragraphIndex": 1,
+          "sentenceIndex": 0,
+          "startOffset": 210,
+          "endOffset": 279,
+          "supportsPrompt": false,
+          "distractorRole": "background",
+          "rationale": "This introduces Mr. Ortiz but not the comparison."
+        },
+        {
+          "spanId": "pssa_ht_g3_map_01_span_2",
+          "text": "He did not unfold the map quickly.",
+          "paragraphIndex": 1,
+          "sentenceIndex": 1,
+          "startOffset": 280,
+          "endOffset": 314,
+          "supportsPrompt": false,
+          "distractorRole": "wrong_emphasis",
+          "rationale": "This shows careful handling, not past-present comparison."
+        },
+        {
+          "spanId": "pssa_ht_g3_map_01_span_3",
+          "text": "Mr. Ortiz put a new town map beside the old one.",
+          "paragraphIndex": 3,
+          "sentenceIndex": 0,
+          "startOffset": 870,
+          "endOffset": 918,
+          "supportsPrompt": true,
+          "distractorRole": null,
+          "rationale": "This directly sets up comparison."
+        },
+        {
+          "spanId": "pssa_ht_g3_map_01_span_4",
+          "text": "Some streets had new names, and the trolley tracks were gone.",
+          "paragraphIndex": 3,
+          "sentenceIndex": 2,
+          "startOffset": 955,
+          "endOffset": 1016,
+          "supportsPrompt": true,
+          "distractorRole": null,
+          "rationale": "This shows how the town changed."
+        }
+      ],
+      "correctSpanIds": [
+        "pssa_ht_g3_map_01_span_3",
+        "pssa_ht_g3_map_01_span_4"
+      ],
+      "minSelections": 2,
+      "maxSelections": 2,
+      "exactSelectionCount": 2,
+      "scoring": {
+        "totalPoints": 2,
+        "partialCreditRules": [
+          {
+            "points": 2,
+            "rule": "Both correct spans and no extra selections."
+          },
+          {
+            "points": 1,
+            "rule": "One correct span and no extra selections."
+          },
+          {
+            "points": 0,
+            "rule": "Unsupported, extra, or missing selections."
+          }
+        ],
+        "scoringNotes": "Full credit cannot be earned with unsupported or extra selected spans."
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "auditMetadata": {
+        "authoredIn": "PSSA_PR_4L_GRADE3_TEI",
+        "noDbWrite": true
+      }
+    },
+    {
+      "itemId": "pssa_ht_g3_lunch_01",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "HOT_TEXT",
+      "interactionType": "HOT_TEXT",
+      "interactionSubtype": "sentence_select",
+      "passageId": "pssa_psg_g3_a_cooler_lunch_line",
+      "passageTitle": "The Bell That Saved Lunch",
+      "eligibleContent": "E03.B-K.1.1.3",
+      "ecSkillFamily": "informational_elements",
+      "reportingCategory": "B",
+      "prompt": "Choose two sentences that show what caused the class to change the lunch line.",
+      "instructionText": "Choose two sentences.",
+      "selectableSpans": [
+        {
+          "spanId": "pssa_ht_g3_lunch_01_span_1",
+          "text": "They counted how many times the line paused.",
+          "paragraphIndex": 1,
+          "sentenceIndex": 2,
+          "startOffset": 350,
+          "endOffset": 394,
+          "supportsPrompt": false,
+          "distractorRole": "background",
+          "rationale": "This shows observation but not a specific cause of the setup change."
+        },
+        {
+          "spanId": "pssa_ht_g3_lunch_01_span_2",
+          "text": "First, students picked up milk after they already had full trays, so cartons tipped and rolled.",
+          "paragraphIndex": 2,
+          "sentenceIndex": 1,
+          "startOffset": 515,
+          "endOffset": 610,
+          "supportsPrompt": true,
+          "distractorRole": null,
+          "rationale": "This identifies one slow spot."
+        },
+        {
+          "spanId": "pssa_ht_g3_lunch_01_span_3",
+          "text": "Second, spoons and napkins were tucked behind the soup pot.",
+          "paragraphIndex": 2,
+          "sentenceIndex": 2,
+          "startOffset": 611,
+          "endOffset": 670,
+          "supportsPrompt": true,
+          "distractorRole": null,
+          "rationale": "This identifies another slow spot."
+        },
+        {
+          "spanId": "pssa_ht_g3_lunch_01_span_4",
+          "text": "When the bell rang, most bowls of soup were still warm.",
+          "paragraphIndex": 4,
+          "sentenceIndex": 4,
+          "startOffset": 1160,
+          "endOffset": 1215,
+          "supportsPrompt": false,
+          "distractorRole": "wrong_section",
+          "rationale": "This is a result after the change."
+        }
+      ],
+      "correctSpanIds": [
+        "pssa_ht_g3_lunch_01_span_2",
+        "pssa_ht_g3_lunch_01_span_3"
+      ],
+      "minSelections": 2,
+      "maxSelections": 2,
+      "exactSelectionCount": 2,
+      "scoring": {
+        "totalPoints": 2,
+        "partialCreditRules": [
+          {
+            "points": 2,
+            "rule": "Both correct spans and no extra selections."
+          },
+          {
+            "points": 1,
+            "rule": "One correct span and no extra selections."
+          },
+          {
+            "points": 0,
+            "rule": "Unsupported, extra, or missing selections."
+          }
+        ],
+        "scoringNotes": "Full credit cannot be earned with unsupported or extra selected spans."
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "auditMetadata": {
+        "authoredIn": "PSSA_PR_4L_GRADE3_TEI",
+        "noDbWrite": true
+      }
+    },
+    {
+      "itemId": "pssa_ht_g3_mural_01",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "HOT_TEXT",
+      "interactionType": "HOT_TEXT",
+      "interactionSubtype": "sentence_select",
+      "passageId": "pssa_psg_g3_the_mural_plan",
+      "passageTitle": "Blue Paint for Saturday",
+      "eligibleContent": "E03.A-K.1.1.2",
+      "ecSkillFamily": "literature_elements",
+      "reportingCategory": "A",
+      "prompt": "Choose two sentences that show how the narrator turns a mistake into part of the mural's message.",
+      "instructionText": "Choose two sentences.",
+      "selectableSpans": [
+        {
+          "spanId": "pssa_ht_g3_mural_01_span_1",
+          "text": "The label said sky blue, but inside the can the paint looked like melted berries.",
+          "paragraphIndex": 0,
+          "sentenceIndex": 2,
+          "startOffset": 84,
+          "endOffset": 165,
+          "supportsPrompt": false,
+          "distractorRole": "background",
+          "rationale": "This describes the paint color, not the mistake becoming useful."
+        },
+        {
+          "spanId": "pssa_ht_g3_mural_01_span_2",
+          "text": "I wanted to wipe them away, but Grandpa handed me a thin brush.",
+          "paragraphIndex": 2,
+          "sentenceIndex": 2,
+          "startOffset": 628,
+          "endOffset": 691,
+          "supportsPrompt": false,
+          "distractorRole": "wrong_emphasis",
+          "rationale": "This introduces the problem but does not show the solution."
+        },
+        {
+          "spanId": "pssa_ht_g3_mural_01_span_3",
+          "text": "I bent close and painted tiny waves around each tail.",
+          "paragraphIndex": 2,
+          "sentenceIndex": 3,
+          "startOffset": 731,
+          "endOffset": 784,
+          "supportsPrompt": true,
+          "distractorRole": null,
+          "rationale": "This shows the narrator changing drips into ripples."
+        },
+        {
+          "spanId": "pssa_ht_g3_mural_01_span_4",
+          "text": "But the fish seemed to move, and the wall no longer looked empty.",
+          "paragraphIndex": 4,
+          "sentenceIndex": 3,
+          "startOffset": 1261,
+          "endOffset": 1326,
+          "supportsPrompt": true,
+          "distractorRole": null,
+          "rationale": "This shows the positive result of the changed mistake."
+        }
+      ],
+      "correctSpanIds": [
+        "pssa_ht_g3_mural_01_span_3",
+        "pssa_ht_g3_mural_01_span_4"
+      ],
+      "minSelections": 2,
+      "maxSelections": 2,
+      "exactSelectionCount": 2,
+      "scoring": {
+        "totalPoints": 2,
+        "partialCreditRules": [
+          {
+            "points": 2,
+            "rule": "Both correct spans and no extra selections."
+          },
+          {
+            "points": 1,
+            "rule": "One correct span and no extra selections."
+          },
+          {
+            "points": 0,
+            "rule": "Unsupported, extra, or missing selections."
+          }
+        ],
+        "scoringNotes": "Full credit cannot be earned with unsupported or extra selected spans."
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "auditMetadata": {
+        "authoredIn": "PSSA_PR_4L_GRADE3_TEI",
+        "noDbWrite": true
+      }
+    },
+    {
+      "itemId": "pssa_ht_g3_cart_01",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "HOT_TEXT",
+      "interactionType": "HOT_TEXT",
+      "interactionSubtype": "sentence_select",
+      "passageId": "pssa_psg_g3_the_cart_that_would_not_turn",
+      "passageTitle": "The Cart That Would Not Turn",
+      "eligibleContent": "E03.B-K.1.1.3",
+      "ecSkillFamily": "informational_elements",
+      "reportingCategory": "B",
+      "prompt": "Choose two sentences that explain why the cart repair steps should happen in order.",
+      "instructionText": "Choose two sentences.",
+      "selectableSpans": [
+        {
+          "spanId": "pssa_ht_g3_cart_01_span_1",
+          "text": "A supply cart should roll where you guide it.",
+          "paragraphIndex": 0,
+          "sentenceIndex": 0,
+          "startOffset": 0,
+          "endOffset": 45,
+          "supportsPrompt": false,
+          "distractorRole": "background",
+          "rationale": "This states an expectation, not why the steps are ordered."
+        },
+        {
+          "spanId": "pssa_ht_g3_cart_01_span_2",
+          "text": "First, you would empty the heavy paper boxes from the bottom shelf.",
+          "paragraphIndex": 1,
+          "sentenceIndex": 1,
+          "startOffset": 272,
+          "endOffset": 339,
+          "supportsPrompt": true,
+          "distractorRole": null,
+          "rationale": "This gives the first step in the order."
+        },
+        {
+          "spanId": "pssa_ht_g3_cart_01_span_3",
+          "text": "Weight can hide a small problem.",
+          "paragraphIndex": 1,
+          "sentenceIndex": 2,
+          "startOffset": 340,
+          "endOffset": 372,
+          "supportsPrompt": true,
+          "distractorRole": null,
+          "rationale": "This explains why the first step matters."
+        },
+        {
+          "spanId": "pssa_ht_g3_cart_01_span_4",
+          "text": "After the repair, the cart still squeaked a little.",
+          "paragraphIndex": 4,
+          "sentenceIndex": 0,
+          "startOffset": 965,
+          "endOffset": 1016,
+          "supportsPrompt": false,
+          "distractorRole": "wrong_section",
+          "rationale": "This happens after the repair and does not explain the order."
+        }
+      ],
+      "correctSpanIds": [
+        "pssa_ht_g3_cart_01_span_2",
+        "pssa_ht_g3_cart_01_span_3"
+      ],
+      "minSelections": 2,
+      "maxSelections": 2,
+      "exactSelectionCount": 2,
+      "scoring": {
+        "totalPoints": 2,
+        "partialCreditRules": [
+          {
+            "points": 2,
+            "rule": "Both correct spans and no extra selections."
+          },
+          {
+            "points": 1,
+            "rule": "One correct span and no extra selections."
+          },
+          {
+            "points": 0,
+            "rule": "Unsupported, extra, or missing selections."
+          }
+        ],
+        "scoringNotes": "Full credit cannot be earned with unsupported or extra selected spans."
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "auditMetadata": {
+        "authoredIn": "PSSA_PR_4L_GRADE3_TEI",
+        "noDbWrite": true
+      }
+    }
+  ]
+}
