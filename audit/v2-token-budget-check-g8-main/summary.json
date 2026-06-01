@@ -1,0 +1,44 @@
+{
+  "generatedAt": "2026-05-20T07:17:13.381Z",
+  "lessonCount": 1,
+  "averageQuality": 75,
+  "teiTypes": [
+    "drag-drop-table",
+    "evidence-mapping"
+  ],
+  "duplicatePairs": [],
+  "lessons": [
+    {
+      "title": "Understanding Multiple Central Ideas",
+      "gradeLevel": 8,
+      "standardCode": "CC.1.2.8.A",
+      "skill": "Multiple Central Ideas",
+      "qualityScore": 75,
+      "qualityIssues": [
+        "Practice passage duplicate risk: current passage 1 is 0.93 similar to existing V2 passage 898. Previous passage was too similar to Urban gardening is boosting local economies by creating jobs and supporting small businesses. Community gardens often se. Write on a different topic/scenario.",
+        "Practice passage duplicate risk: current passage 2 is 0.92 similar to existing V2 passage 843. Previous passage was too similar to Digital technology is reshaping the way we communicate. Social media platforms connect people across the globe, enabling. Write on a different topic/scenario.",
+        "Practice passage duplicate risk: current passage 3 is 0.96 similar to existing V2 passage 645. Previous passage was too similar to A new community center opened in the neighborhood, offering various activities for residents. The center includes a gym,. Write on a different topic/scenario.",
+        "Practice passage duplicate risk: current passage 7 is 0.93 similar to existing V2 passage 687. Previous passage was too similar to Reading is a fundamental skill that offers numerous benefits. It enhances vocabulary, improves concentration, and stimul. Write on a different topic/scenario.",
+        "Practice passage duplicate risk: current passage 7 is 0.93 similar to existing V2 passage 834. Previous passage was too similar to Reading is a powerful tool for mental growth. It enhances vocabulary, improves focus, and stimulates imagination. By eng. Write on a different topic/scenario.",
+        "Practice passage duplicate risk: current passage 8 is 0.92 similar to existing V2 passage 617. Previous passage was too similar to Exercise is essential for maintaining good health. Regular physical activity can improve cardiovascular health, strength. Write on a different topic/scenario.",
+        "Practice passage duplicate risk: current passage 12 is 0.93 similar to existing V2 passage 618. Previous passage was too similar to Technology has transformed education by making learning more accessible and engaging. With online resources, students ca. Write on a different topic/scenario.",
+        "Practice passage duplicate risk: current passage 12 is 0.93 similar to existing V2 passage 809. Previous passage was too similar to Technology in education offers numerous advantages, including personalized learning and increased engagement. Digital to. Write on a different topic/scenario.",
+        "Practice passage duplicate risk: current passage 12 is 0.93 similar to existing V2 passage 810. Previous passage was too similar to Technology in education offers numerous advantages, including personalized learning and increased engagement. Digital to. Write on a different topic/scenario.",
+        "Practice passage duplicate risk: current passage 12 is 0.93 similar to existing V2 passage 836. Previous passage was too similar to The integration of technology in education is transforming how students learn and teachers instruct. Digital tools and o. Write on a different topic/scenario.",
+        "Practice passage duplicate risk: current passage 12 is 0.93 similar to existing V2 passage 837. Previous passage was too similar to Technology is transforming education by providing new opportunities for learning. Online courses and digital resources m. Write on a different topic/scenario.",
+        "guidedPractice[0]: Passage duplicate risk with existing content. (Replace the passage with a unique scenario that explores urban gardening from a different angle, such as its impact on local economies or cultural integration.)",
+        "independentPractice[0]: Passage duplicate risk with existing content. (Create a new passage focusing on a different aspect of renewable energy, such as technological innovations or international collaborations.)",
+        "exitTicket[1]: Passage duplicate risk with existing content. (Develop a new passage that discusses renewable energy in the context of a specific country's policy changes or community initiatives.)",
+        "masteryCheck[1]: Passage duplicate risk with existing content. (Write a new passage that highlights biodiversity in a specific ecosystem or region, focusing on unique conservation efforts.)"
+      ],
+      "teiTypesUsed": [
+        "evidence-mapping",
+        "drag-drop-table"
+      ],
+      "heroResourceLinkId": "cmpcxj3m6004ue8593snom9nw",
+      "resourceTitle": "Breaking Down Bias - Understanding and Identifying Different Types of Bias",
+      "resourceUrl": "https://www.youtube.com/watch?v=m1I0K4K-ffQ",
+      "resourceProvider": "Miacademy & MiaPrep Learning Channel"
+    }
+  ]
+}

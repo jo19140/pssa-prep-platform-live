@@ -1,0 +1,2 @@
+category,totalRows,studentReadyRows,excludedFromRuntimeRows,quarantinePolicy,blockerReason
+legacy_assessment_questions,1026,0,1026,fail_closed_governed_allowlist_only,legacy_generated_not_migrated_to_governed_pssa_item

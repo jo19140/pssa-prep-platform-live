@@ -1,0 +1,32 @@
+{
+  "generatedAt": "2026-05-20T07:21:54.432Z",
+  "lessonCount": 1,
+  "averageQuality": 92,
+  "teiTypes": [
+    "evidence-mapping",
+    "hot-text-phrase",
+    "two-part-ebsr"
+  ],
+  "duplicatePairs": [],
+  "lessons": [
+    {
+      "title": "Understanding Point of View in Narratives",
+      "gradeLevel": 7,
+      "standardCode": "CC.1.3.7.D",
+      "skill": "Point of View",
+      "qualityScore": 92,
+      "qualityIssues": [
+        "Critic requested revision after 3 iterations."
+      ],
+      "teiTypesUsed": [
+        "hot-text-phrase",
+        "two-part-ebsr",
+        "evidence-mapping"
+      ],
+      "heroResourceLinkId": "cmp5ki5b0000g6herugxfofld",
+      "resourceTitle": "Viewpoint Voyage: Narrative Point of View - First, Second, and Third-Person Perspective",
+      "resourceUrl": "https://www.youtube.com/watch?v=hIJsmZrRgrs",
+      "resourceProvider": "Miacademy & MiaPrep Learning Channel"
+    }
+  ]
+}

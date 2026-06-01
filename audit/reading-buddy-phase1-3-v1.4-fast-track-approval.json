@@ -1,0 +1,24 @@
+{
+  "sourceBankId": "reading_buddy_phase1_3_pilot_bank_120_v1_4_governance_trace",
+  "approvedAt": "2026-05-29T03:58:29.327Z",
+  "approvalNote": "Fast-track approved from Reading Buddy Phase 1-3 Pilot Diagnostic Bank v1.4 governance-trace package. Items underwent repeated GPT/Claude review, mechanical phonics audit, presentation-mode audit, pseudoword validation, and changelog reconciliation. Local Codex import validators passed before approval. Final source audit expected 120/120 eligible.",
+  "totalImportedFromBank": 120,
+  "approvedCount": 116,
+  "pendingCount": 4,
+  "failedCount": 0,
+  "sourceAudit": {
+    "bankId": "reading_buddy_phase1_3_pilot_bank_120_v1_4_governance_trace",
+    "expectedCount": 120,
+    "passCount": 120,
+    "failCount": 0,
+    "strandCounts": {
+      "PA": 20,
+      "DECODING": 40,
+      "MORPHOLOGY": 15,
+      "FLUENCY": 10,
+      "VOCABULARY": 15,
+      "COMPREHENSION": 20
+    },
+    "failedItems": []
+  }
+}

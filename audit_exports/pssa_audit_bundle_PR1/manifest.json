@@ -1,0 +1,61 @@
+{
+  "bundleName": "pssa_audit_bundle_PR1",
+  "generatedAt": "2026-05-30T04:45:12.981Z",
+  "generatedBy": "scripts/audit/export-pssa-audit-bundle.ts",
+  "module": "Pennsylvania PSSA ELA",
+  "state": "PA",
+  "subject": "ELA",
+  "grades": [
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+  ],
+  "options": {
+    "includeBackendAnswers": true,
+    "redactPii": true
+  },
+  "counts": {
+    "diagnosticItems": 1344,
+    "lessons": 210,
+    "passages": 101,
+    "standardsAlignmentRows": 317,
+    "studentPreviewEntries": 36,
+    "backendAnswerKeys": 1344,
+    "databaseAssessmentQuestions": 1026,
+    "databaseLessons": 210,
+    "databasePassages": 77
+  },
+  "totalDiagnosticItems": 1344,
+  "totalLessons": 210,
+  "totalPassages": 101,
+  "totalStandards": 317,
+  "totalStudentPreviewEntries": 36,
+  "files": [
+    "README.md",
+    "manifest.json",
+    "pssa_diagnostic_items.jsonl",
+    "pssa_lessons.jsonl",
+    "pssa_passages.jsonl",
+    "pssa_item_summary.csv",
+    "pssa_lesson_summary.csv",
+    "pssa_standards_alignment.csv",
+    "pssa_student_preview.md",
+    "pssa_backend_answer_keys.jsonl",
+    "pssa_metadata_completeness_report.csv",
+    "pssa_linter_report.csv",
+    "pssa_manifest_validation_report.csv",
+    "pssa_answer_position_distribution.csv",
+    "pssa_duplicate_item_report.csv",
+    "pssa_passage_repetition_report.csv",
+    "pssa_source_license_report.csv",
+    "pssa_field_mapping.md",
+    "pssa_generation_root_cause_report.md",
+    "pssa_export_log.md"
+  ],
+  "zipFile": "pssa_audit_bundle_PR1.zip",
+  "readOnlyExport": true,
+  "noDatabaseMutations": true
+}

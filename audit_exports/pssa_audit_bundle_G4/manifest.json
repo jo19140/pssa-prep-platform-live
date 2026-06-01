@@ -1,0 +1,44 @@
+{
+  "bundleName": "pssa_audit_bundle_G4",
+  "generatedAt": "2026-05-30T04:02:46.406Z",
+  "generatedBy": "scripts/audit/export-pssa-audit-bundle.ts",
+  "module": "Pennsylvania PSSA ELA",
+  "state": "PA",
+  "subject": "ELA",
+  "grades": [
+    4
+  ],
+  "options": {
+    "includeBackendAnswers": true,
+    "redactPii": true
+  },
+  "counts": {
+    "diagnosticItems": 53,
+    "lessons": 32,
+    "passages": 4,
+    "standardsAlignmentRows": 56,
+    "backendAnswerKeys": 53,
+    "databaseAssessmentQuestions": 0,
+    "databaseLessons": 32,
+    "databasePassages": 0
+  },
+  "files": [
+    "README.md",
+    "manifest.json",
+    "pssa_diagnostic_items.jsonl",
+    "pssa_lessons.jsonl",
+    "pssa_passages.jsonl",
+    "pssa_item_summary.csv",
+    "pssa_lesson_summary.csv",
+    "pssa_standards_alignment.csv",
+    "pssa_student_preview.md",
+    "pssa_backend_answer_keys.jsonl",
+    "pssa_metadata_completeness_report.csv",
+    "pssa_linter_report.csv",
+    "pssa_source_license_report.csv",
+    "pssa_export_log.md"
+  ],
+  "zipFile": "pssa_audit_bundle_G4.zip",
+  "readOnlyExport": true,
+  "noDatabaseMutations": true
+}

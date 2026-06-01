@@ -1,0 +1,386 @@
+{
+  "lesson": {
+    "gradeLevel": 7,
+    "standardCode": "CC.1.3.7.D",
+    "standardLabel": "Analyze point of view and narrator perspective",
+    "skill": "Point of View",
+    "title": "Understanding Point of View in Narratives",
+    "whyAssigned": "This mini-lesson targets Point of View because the diagnostic showed a standards-aligned practice gap.",
+    "hook": "Imagine reading a story where you only hear one side of the conversation. How would that change your understanding of the events? Point of view in literature works similarly. It shapes how we perceive the story and understand the characters' motivations. Let's explore how different perspectives can alter the narrative.",
+    "explanation": "Point of view (POV) in literature refers to the perspective from which a story is told. It significantly influences how readers perceive the narrative and understand the characters. There are several types of POV, including first-person, second-person, and third-person. In first-person POV, the narrator is a character within the story, using 'I' or 'we.' This perspective provides intimate insights into the narrator's thoughts and feelings but can be limited by their biases and lack of knowledge about other characters' thoughts. Second-person POV, using 'you,' is less common and directly addresses the reader, creating an immersive experience. Third-person POV can be limited or omniscient. A limited third-person narrator knows the thoughts and feelings of one character, while an omniscient narrator knows everything about all characters. The choice of POV affects the narrative tone, reliability, and how much information the reader receives. For example, a first-person narrator might be unreliable, providing a skewed version of events, while an omniscient narrator offers a more comprehensive view. Understanding POV helps readers analyze the narrator's reliability and the story's depth, enhancing comprehension and critical thinking skills. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step.",
+    "workedExample": "Consider a story told from a first-person perspective: \"I watched as the sun set, painting the sky in hues of orange and pink. My heart felt heavy, knowing tomorrow would bring challenges.\" Here, the narrator shares personal emotions and observations, giving readers direct access to their inner world. However, this perspective is limited to what the narrator knows and feels. Now, imagine the same scene from a third-person omniscient perspective: \"As the sun set, painting the sky in hues of orange and pink, Sarah felt a heaviness in her heart, aware of tomorrow's challenges. Meanwhile, across town, John was oblivious to the impending storm.\" This version provides a broader view, revealing multiple characters' experiences and emotions. By comparing these perspectives, we see how POV shapes the narrative and influences our understanding of the story. This matters because the correct answer is not just a matching word or phrase. It is the choice that fits the whole question and can be defended with a specific detail. The reasoning should explain both what the evidence says and how it supports the answer.",
+    "commonErrors": [
+      "Confusing first-person and third-person perspectives.",
+      "Assuming all narrators are reliable without considering their biases.",
+      "Overlooking how POV affects the reader's understanding of the story."
+    ],
+    "sentenceFrames": [
+      "The narrator's point of view is important because...",
+      "In first-person point of view, the narrator...",
+      "A third-person omniscient narrator can..."
+    ],
+    "successCriteria": [
+      "Identify the point of view in a given text.",
+      "Explain how the point of view affects the narrative.",
+      "Analyze the reliability of the narrator based on their perspective."
+    ],
+    "guidedPractice": [
+      {
+        "question": "What is the point of view in the following passage?",
+        "passage": "The sun dipped below the horizon, leaving a trail of colors in the sky. I sighed, knowing tomorrow would bring new challenges. My thoughts drifted to the conversation I had earlier with my friend, wondering if I had made the right decision. The world felt both vast and small in that moment, as if I were the only one aware of its beauty and its burdens. I turned away from the window, ready to face whatever came next, alone with my thoughts and hopes for the future. The night was young, and so was I, with dreams yet to be realized and paths yet to be walked. As the stars began to twinkle, I felt a sense of calm wash over me, a reminder that every ending is just a new beginning waiting to unfold. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "The passage is written in first-person point of view, as indicated by the use of 'I' and 'my,' providing insight into the narrator's personal thoughts and feelings.",
+        "coachHint": "Look for pronouns like 'I' or 'my' to determine the point of view.",
+        "type": "mc",
+        "choices": [
+          "First-person",
+          "Second-person",
+          "Third-person limited",
+          "Third-person omniscient"
+        ],
+        "correctAnswer": "First-person",
+        "distractorRationale": [
+          {
+            "choice": "Second-person",
+            "whyWrong": "Second-person uses 'you,' which is not present here."
+          },
+          {
+            "choice": "Third-person limited",
+            "whyWrong": "Third-person limited would use 'he' or 'she,' not 'I.'"
+          },
+          {
+            "choice": "Third-person omniscient",
+            "whyWrong": "Third-person omniscient provides multiple characters' thoughts, not just one."
+          }
+        ]
+      },
+      {
+        "question": "Which sentence best supports the claim that the narrator is unreliable?",
+        "passage": "I always tell the truth, even when it might hurt others. But sometimes, I find myself bending the facts just a little to make things easier. It's not lying, really, just smoothing out the rough edges of reality. After all, everyone does it, right? I mean, who hasn't told a white lie to avoid conflict or to spare someone's feelings? It's just part of being human, isn't it? So, when I say I always tell the truth, you can trust me... most of the time. But don't we all have our moments of weakness? It's not like I'm hurting anyone, just making life a bit more bearable for everyone involved. And isn't that what really matters? Making sure everyone is happy and content, even if it means stretching the truth a little here and there. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "The sentence 'But sometimes, I find myself bending the facts just a little to make things easier.' indicates the narrator's tendency to alter the truth, suggesting unreliability.",
+        "coachHint": "Look for sentences where the narrator admits to altering the truth.",
+        "type": "hot-text-phrase",
+        "selectablePhrases": [
+          "I always tell the truth, even when it might hurt others.",
+          "But sometimes, I find myself bending the facts just a little to make things easier.",
+          "It's not lying, really, just smoothing out the rough edges of reality.",
+          "After all, everyone does it, right?"
+        ],
+        "correctPhrases": [
+          "But sometimes, I find myself bending the facts just a little to make things easier."
+        ],
+        "minSelect": 1,
+        "maxSelect": 1
+      },
+      {
+        "question": "How does the narrator's perspective influence the story's tone?",
+        "passage": "The room was silent except for the ticking of the clock. I sat there, feeling the weight of the world on my shoulders. Every tick seemed to echo my thoughts, each one a reminder of the decisions I had to make. The silence was deafening, a constant companion to my solitude. I knew what I had to do, but the fear of the unknown held me back. It was as if time itself was urging me forward, yet I remained frozen, caught between the past and the future. The room felt both comforting and oppressive, a reflection of my inner turmoil. I took a deep breath, steeling myself for what lay ahead. The clock ticked on, indifferent to my plight, a reminder that time waits for no one. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "The first-person perspective creates an intimate and introspective tone, allowing readers to connect deeply with the narrator's internal conflict and emotions.",
+        "coachHint": "Consider how the narrator's personal thoughts and feelings shape the mood of the story.",
+        "type": "two-part-ebsr",
+        "partA": {
+          "question": "What is the tone of the passage?",
+          "choices": [
+            "Introspective",
+            "Joyful",
+            "Indifferent",
+            "Optimistic"
+          ],
+          "correctAnswer": "Introspective"
+        },
+        "partB": {
+          "question": "Which sentence best supports the tone identified in Part A?",
+          "choices": [
+            "The room was silent except for the ticking of the clock.",
+            "I sat there, feeling the weight of the world on my shoulders.",
+            "Every tick seemed to echo my thoughts, each one a reminder of the decisions I had to make.",
+            "The clock ticked on, indifferent to my plight, a reminder that time waits for no one."
+          ],
+          "correctAnswers": [
+            "I sat there, feeling the weight of the world on my shoulders."
+          ]
+        },
+        "scoringRule": "B-counts-only-if-A-correct"
+      }
+    ],
+    "independentPractice": [
+      {
+        "question": "What is the point of view in this passage?",
+        "passage": "The forest was alive with the sounds of nature. Birds chirped, leaves rustled, and a gentle breeze whispered through the trees. I walked along the path, feeling the cool earth beneath my feet. The forest was my sanctuary, a place where I could escape the chaos of the world and find peace. As I walked, I thought about the events of the day, replaying conversations and decisions in my mind. The forest listened, a silent companion to my thoughts. I knew that no matter what happened, I could always return here to find solace and clarity. The trees stood tall and strong, a testament to the resilience of nature and a reminder that I, too, could weather any storm. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "The passage is written in first-person point of view, indicated by the use of 'I' and 'my,' providing a personal perspective on the narrator's experiences.",
+        "coachHint": "Look for pronouns like 'I' or 'my' to determine the point of view.",
+        "type": "mc",
+        "choices": [
+          "First-person",
+          "Second-person",
+          "Third-person limited",
+          "Third-person omniscient"
+        ],
+        "correctAnswer": "First-person",
+        "distractorRationale": [
+          {
+            "choice": "Second-person",
+            "whyWrong": "Second-person uses 'you,' which is not present here."
+          },
+          {
+            "choice": "Third-person limited",
+            "whyWrong": "Third-person limited would use 'he' or 'she,' not 'I.'"
+          },
+          {
+            "choice": "Third-person omniscient",
+            "whyWrong": "Third-person omniscient provides multiple characters' thoughts, not just one."
+          }
+        ]
+      },
+      {
+        "question": "Which sentence best supports the claim that the narrator is biased?",
+        "passage": "I always knew that my brother was the favorite. He could do no wrong in my parents' eyes, while I was always the one getting into trouble. It didn't matter what I did; he was always praised, and I was always criticized. I remember one time when he broke a vase, and I got blamed for it. It was always like that, him getting away with everything while I took the fall. I tried to tell my parents, but they never listened. They only saw what they wanted to see, and that was a perfect son who could do no wrong. It was frustrating, but I learned to live with it. After all, what could I do? I was just the other child, the one who never measured up to their expectations. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "The sentence 'They only saw what they wanted to see, and that was a perfect son who could do no wrong.' shows the narrator's biased perspective, believing their parents favor their brother.",
+        "coachHint": "Look for sentences where the narrator expresses a one-sided view.",
+        "type": "hot-text-phrase",
+        "selectablePhrases": [
+          "I always knew that my brother was the favorite.",
+          "He could do no wrong in my parents' eyes.",
+          "It didn't matter what I did; he was always praised.",
+          "They only saw what they wanted to see, and that was a perfect son who could do no wrong."
+        ],
+        "correctPhrases": [
+          "They only saw what they wanted to see, and that was a perfect son who could do no wrong."
+        ],
+        "minSelect": 1,
+        "maxSelect": 1
+      },
+      {
+        "question": "How does the narrator's perspective influence the story's theme?",
+        "passage": "The city was bustling with life, people rushing to and fro, each with their own story to tell. I watched from my window, feeling disconnected from it all. The world seemed to move at a pace I couldn't keep up with, and I often felt like an outsider looking in. My life was a series of routines, each day blending into the next without much change. I longed for something more, something that would break the monotony and give my life meaning. But for now, I remained an observer, watching the world pass by, waiting for the day when I could join in and make my mark. The city was full of possibilities, but they seemed just out of reach, like a dream I couldn't quite grasp. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "The first-person perspective highlights the theme of isolation and longing for connection, as the narrator feels detached from the bustling city life.",
+        "coachHint": "Consider how the narrator's feelings of disconnection shape the story's message.",
+        "type": "two-part-ebsr",
+        "partA": {
+          "question": "What is the theme of the passage?",
+          "choices": [
+            "Isolation",
+            "Adventure",
+            "Contentment",
+            "Chaos"
+          ],
+          "correctAnswer": "Isolation"
+        },
+        "partB": {
+          "question": "Which sentence best supports the theme identified in Part A?",
+          "choices": [
+            "The city was bustling with life, people rushing to and fro.",
+            "I watched from my window, feeling disconnected from it all.",
+            "My life was a series of routines, each day blending into the next.",
+            "The city was full of possibilities, but they seemed just out of reach."
+          ],
+          "correctAnswers": [
+            "I watched from my window, feeling disconnected from it all."
+          ]
+        },
+        "scoringRule": "B-counts-only-if-A-correct"
+      },
+      {
+        "question": "Which evidence best supports the claim that the narrator is reflective?",
+        "passage": "The garden was my sanctuary, a place where I could escape the chaos of the world and find peace. As I tended to the flowers, I thought about the events of the day, replaying conversations and decisions in my mind. The garden listened, a silent companion to my thoughts. I knew that no matter what happened, I could always return here to find solace and clarity. The flowers bloomed in vibrant colors, a testament to the resilience of nature and a reminder that I, too, could weather any storm. The garden was more than just a collection of plants; it was a reflection of my inner world, a place where I could be myself without judgment or fear. It was here that I found the strength to face whatever challenges lay ahead. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "The sentence 'As I tended to the flowers, I thought about the events of the day, replaying conversations and decisions in my mind.' shows the narrator's reflective nature.",
+        "coachHint": "Look for sentences where the narrator is thinking deeply about their experiences.",
+        "type": "evidence-mapping",
+        "claims": [
+          "The narrator is reflective."
+        ],
+        "evidenceItems": [
+          "As I tended to the flowers, I thought about the events of the day, replaying conversations and decisions in my mind.",
+          "The garden was my sanctuary, a place where I could escape the chaos of the world and find peace.",
+          "The flowers bloomed in vibrant colors, a testament to the resilience of nature.",
+          "The garden was more than just a collection of plants; it was a reflection of my inner world."
+        ],
+        "correctMapping": [
+          {
+            "claim": "The narrator is reflective.",
+            "evidenceItems": [
+              "As I tended to the flowers, I thought about the events of the day, replaying conversations and decisions in my mind."
+            ]
+          }
+        ]
+      }
+    ],
+    "exitTicket": [
+      {
+        "question": "What is the point of view in this passage?",
+        "passage": "The rain tapped gently against the window, a soothing rhythm that matched my heartbeat. I sat in my favorite chair, a book in hand, lost in a world of words. The story unfolded before me, each page a new adventure, a new escape from reality. I loved these moments of solitude, where the outside world faded away, and it was just me and the characters on the page. The rain continued its gentle serenade, a reminder that even in the midst of chaos, there could be peace. I turned the page, eager to see what happened next, knowing that in this world, anything was possible. The rain was my companion, a constant presence that kept me grounded even as I soared through the pages of my book. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "The passage is written in first-person point of view, as indicated by the use of 'I' and 'my,' providing a personal perspective on the narrator's experiences.",
+        "coachHint": "Look for pronouns like 'I' or 'my' to determine the point of view.",
+        "type": "mc",
+        "choices": [
+          "First-person",
+          "Second-person",
+          "Third-person limited",
+          "Third-person omniscient"
+        ],
+        "correctAnswer": "First-person",
+        "distractorRationale": [
+          {
+            "choice": "Second-person",
+            "whyWrong": "Second-person uses 'you,' which is not present here."
+          },
+          {
+            "choice": "Third-person limited",
+            "whyWrong": "Third-person limited would use 'he' or 'she,' not 'I.'"
+          },
+          {
+            "choice": "Third-person omniscient",
+            "whyWrong": "Third-person omniscient provides multiple characters' thoughts, not just one."
+          }
+        ]
+      },
+      {
+        "question": "Which sentence best supports the claim that the narrator is introspective?",
+        "passage": "The ocean stretched out before me, vast and endless. I stood on the shore, feeling the sand between my toes and the salty breeze on my face. It was moments like these that made me reflect on my life, on the choices I had made and the paths I had taken. The ocean was a mirror, reflecting my innermost thoughts and fears. I knew that I had come a long way, but there was still so much more to explore, so much more to understand about myself and the world around me. The waves crashed against the shore, a reminder of the constant ebb and flow of life. I took a deep breath, ready to dive into the unknown, to embrace whatever came my way. The ocean was my guide, a symbol of the journey that lay ahead. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "The sentence 'It was moments like these that made me reflect on my life, on the choices I had made and the paths I had taken.' shows the narrator's introspective nature.",
+        "coachHint": "Look for sentences where the narrator is thinking deeply about their experiences.",
+        "type": "hot-text-phrase",
+        "selectablePhrases": [
+          "The ocean stretched out before me, vast and endless.",
+          "I stood on the shore, feeling the sand between my toes and the salty breeze on my face.",
+          "It was moments like these that made me reflect on my life, on the choices I had made and the paths I had taken.",
+          "The ocean was a mirror, reflecting my innermost thoughts and fears."
+        ],
+        "correctPhrases": [
+          "It was moments like these that made me reflect on my life, on the choices I had made and the paths I had taken."
+        ],
+        "minSelect": 1,
+        "maxSelect": 1
+      }
+    ],
+    "masteryCheck": [
+      {
+        "question": "What is the point of view in this passage?",
+        "passage": "The mountains loomed in the distance, their peaks shrouded in mist. I felt a sense of awe as I gazed at their majesty, a reminder of the power and beauty of nature. The path ahead was steep and winding, but I was determined to reach the summit. Each step brought me closer to my goal, each breath a testament to my perseverance. The journey was challenging, but it was also rewarding, a chance to push myself beyond my limits and discover what I was truly capable of. The mountains were my guide, a symbol of the challenges and triumphs that lay ahead. I knew that no matter how difficult the climb, the view from the top would be worth it. The mountains were calling, and I was ready to answer. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "The passage is written in first-person point of view, as indicated by the use of 'I' and 'my,' providing a personal perspective on the narrator's experiences.",
+        "coachHint": "Look for pronouns like 'I' or 'my' to determine the point of view.",
+        "type": "mc",
+        "choices": [
+          "First-person",
+          "Second-person",
+          "Third-person limited",
+          "Third-person omniscient"
+        ],
+        "correctAnswer": "First-person",
+        "distractorRationale": [
+          {
+            "choice": "Second-person",
+            "whyWrong": "Second-person uses 'you,' which is not present here."
+          },
+          {
+            "choice": "Third-person limited",
+            "whyWrong": "Third-person limited would use 'he' or 'she,' not 'I.'"
+          },
+          {
+            "choice": "Third-person omniscient",
+            "whyWrong": "Third-person omniscient provides multiple characters' thoughts, not just one."
+          }
+        ]
+      },
+      {
+        "question": "Which sentence best supports the claim that the narrator is determined?",
+        "passage": "The river flowed swiftly, its waters churning with energy and life. I stood on the bank, watching the current carry away leaves and debris. It was a powerful force, one that I respected and admired. I knew that crossing the river would be difficult, but I was determined to reach the other side. I had come too far to turn back now, and I was ready to face whatever challenges lay ahead. The river was a test, a challenge that I was eager to conquer. I took a deep breath, steeling myself for the journey across. The water was cold and swift, but I was undeterred. I knew that with each step, I was getting closer to my goal, closer to the other side. The river was my guide, a symbol of the obstacles I had overcome and the ones I would face in the future. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "The sentence 'I knew that crossing the river would be difficult, but I was determined to reach the other side.' shows the narrator's determination to overcome challenges.",
+        "coachHint": "Look for sentences where the narrator expresses a strong resolve to achieve their goals.",
+        "type": "hot-text-phrase",
+        "selectablePhrases": [
+          "The river flowed swiftly, its waters churning with energy and life.",
+          "I stood on the bank, watching the current carry away leaves and debris.",
+          "I knew that crossing the river would be difficult, but I was determined to reach the other side.",
+          "The river was a test, a challenge that I was eager to conquer."
+        ],
+        "correctPhrases": [
+          "I knew that crossing the river would be difficult, but I was determined to reach the other side."
+        ],
+        "minSelect": 1,
+        "maxSelect": 1
+      },
+      {
+        "question": "Which evidence best supports the claim that the narrator is hopeful?",
+        "passage": "The dawn broke over the horizon, painting the sky in shades of pink and gold. I watched as the first rays of sunlight touched the earth, bringing warmth and light to the world. It was a new day, a fresh start, and I felt a sense of hope and possibility. The challenges of yesterday were behind me, and I was ready to embrace whatever the future held. The sun was a symbol of renewal, a reminder that each day was a chance to begin again. I took a deep breath, feeling the cool morning air fill my lungs, and I knew that I was ready to face whatever came my way. The dawn was my guide, a beacon of hope and promise, lighting the path ahead. I was ready to step into the future, confident and hopeful. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "The sentence 'It was a new day, a fresh start, and I felt a sense of hope and possibility.' shows the narrator's hopeful outlook on the future.",
+        "coachHint": "Look for sentences where the narrator expresses optimism about the future.",
+        "type": "evidence-mapping",
+        "claims": [
+          "The narrator is hopeful."
+        ],
+        "evidenceItems": [
+          "The dawn broke over the horizon, painting the sky in shades of pink and gold.",
+          "I watched as the first rays of sunlight touched the earth, bringing warmth and light to the world.",
+          "It was a new day, a fresh start, and I felt a sense of hope and possibility.",
+          "The sun was a symbol of renewal, a reminder that each day was a chance to begin again."
+        ],
+        "correctMapping": [
+          {
+            "claim": "The narrator is hopeful.",
+            "evidenceItems": [
+              "It was a new day, a fresh start, and I felt a sense of hope and possibility."
+            ]
+          }
+        ]
+      }
+    ],
+    "heroResourceLinkId": "cmp5ki5b0000g6herugxfofld",
+    "resourceTitle": "Viewpoint Voyage: Narrative Point of View - First, Second, and Third-Person Perspective",
+    "resourceUrl": "https://www.youtube.com/watch?v=hIJsmZrRgrs",
+    "resourceProvider": "Miacademy & MiaPrep Learning Channel",
+    "resourceDescription": "Strand: RL · Text type: literary · Duration: 10m 36s · Tier: on_grade · Collection: miacademy_level_h",
+    "exemplarsUsed": [
+      "The Finch",
+      "Read the sentence from the passage. “A person’s voice is also very distinctive.” Which word best replaces the word “distinctive” without changing the meaning of the sentence?",
+      "How does the section titled “A Hacker Attack” contribute to the purpose of the passage?",
+      "Which conclusion about identity theft is best supported by the passage?",
+      "Move two pieces of evidence from the passage that best support the claim that many teens who text are too tired for school.",
+      "Read the paragraph. Select the two phrases that help you understand the meaning of “don’t rush.”",
+      "g7-p1",
+      "g7-mc-1",
+      "g7-mc-2",
+      "g7-mc-3",
+      "g7-tei-8",
+      "g6-tei-7",
+      "g5-tei-5"
+    ],
+    "teiTypesUsed": [
+      "hot-text-phrase",
+      "two-part-ebsr",
+      "evidence-mapping"
+    ],
+    "generatorVersion": "V2",
+    "qualityScore": 92,
+    "qualityIssues": [
+      "Critic requested revision after 3 iterations."
+    ]
+  },
+  "critic": {
+    "status": "REVISE",
+    "score": 82,
+    "revisions": [
+      {
+        "section": "explanation",
+        "issue": "Repetitive content and lack of clarity.",
+        "suggestion": "Remove repetitive sentences and clarify the explanation of how POV affects narrative tone and reliability."
+      },
+      {
+        "section": "guidedPractice[0]",
+        "issue": "Repetitive rationale text.",
+        "suggestion": "Remove repeated sentences in the rationale to improve clarity and focus."
+      },
+      {
+        "section": "independentPractice[0]",
+        "issue": "Repetitive rationale text.",
+        "suggestion": "Remove repeated sentences in the rationale to improve clarity and focus."
+      },
+      {
+        "section": "exitTicket[0]",
+        "issue": "Repetitive rationale text.",
+        "suggestion": "Remove repeated sentences in the rationale to improve clarity and focus."
+      }
+    ]
+  },
+  "validationIssues": [],
+  "iterations": 5
+}

@@ -1,0 +1,344 @@
+{
+  "lesson": {
+    "gradeLevel": 8,
+    "standardCode": "CC.1.4.8.F",
+    "standardLabel": "Use parallel structure and formal academic style",
+    "skill": "Parallel Structure",
+    "title": "Mastering Parallel Structure for Clarity and Style",
+    "whyAssigned": "This mini-lesson targets Parallel Structure because the diagnostic showed a standards-aligned practice gap.",
+    "hook": "Have you ever read a sentence that just felt off, even though it was grammatically correct? This might be due to a lack of parallel structure. Parallel structure, or parallelism, involves using the same pattern of words to show that two or more ideas have the same level of importance. It makes your writing clearer and more engaging. Let's explore how mastering this skill can enhance your writing style.",
+    "explanation": "Parallel structure involves using the same grammatical form for similar elements within a sentence. This creates balance and rhythm, making writing clearer and easier to understand. For example, \"She likes reading, writing, and jogging\" uses parallel structure by keeping all verbs in the gerund form. This technique is crucial in lists, comparisons, and paired ideas, ensuring each element is equally emphasized. By applying parallel structure, your writing becomes more formal and polished, enhancing clarity and persuasiveness in academic and professional settings. Focus on clear, parallel elements that enhance the overall message and style of your writing. This approach not only improves clarity but also elevates the rhythm and flow of your writing, making it more cohesive and engaging for the reader. By practicing parallel structure, you can improve the flow and impact of your writing, making your ideas more persuasive and memorable. Avoid choosing details that sound related but don't actually support the idea. Instead, focus on clear, parallel elements that enhance the overall message and style of your writing. This approach not only improves clarity but also elevates the rhythm and flow of your writing, making it more cohesive and engaging for the reader. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step.",
+    "workedExample": "Consider the sentence: \"The coach told the players that they should get plenty of sleep, not eat too much, and to do warm-up exercises before the game.\" This lacks parallel structure because the verbs are in different forms: \"get,\" \"eat,\" and \"to do.\" Correcting this to \"The coach told the players that they should get plenty of sleep, avoid eating too much, and do warm-up exercises before the game\" aligns all verbs in the base form, improving clarity and flow. This example shows how parallel structure enhances sentence cohesion, making it easier to read and understand. The correct answer is not just a matching word or phrase; it fits the whole question and is supported by specific details. The reasoning should explain both what the evidence says and how it supports the answer. This matters because the correct answer is not just a matching word or phrase. It is the choice that fits the whole question and can be defended with a specific detail. The reasoning should explain both what the evidence says and how it supports the answer.",
+    "commonErrors": [
+      "Students often mix verb forms, disrupting parallel structure.",
+      "Lists may contain items in different grammatical forms, causing confusion.",
+      "Comparisons may lack parallel elements, leading to unclear relationships."
+    ],
+    "sentenceFrames": [
+      "To maintain parallel structure, the verbs should be [BLANK].",
+      "In a list, each item should be in the [BLANK] form.",
+      "For comparisons, ensure that [BLANK] elements are parallel."
+    ],
+    "successCriteria": [
+      "Identify and correct sentences lacking parallel structure.",
+      "Use parallel structure in lists and comparisons.",
+      "Enhance writing style by applying parallel structure consistently."
+    ],
+    "guidedPractice": [
+      {
+        "question": "Which sentence uses parallel structure correctly?",
+        "passage": null,
+        "rightAnswerRationale": "Option B maintains parallel structure by using 'running,' 'jumping,' and 'swimming,' all in the gerund form.",
+        "coachHint": "Look for sentences where all verbs or phrases are in the same form.",
+        "type": "mc",
+        "choices": [
+          "A. She enjoys to run, jumping, and to swim.",
+          "B. She enjoys running, jumping, and swimming.",
+          "C. She enjoys running, to jump, and swimming.",
+          "D. She enjoys to run, to jump, and swimming."
+        ],
+        "correctAnswer": "B",
+        "distractorRationale": [
+          {
+            "choice": "A. She enjoys to run, jumping, and to swim.",
+            "whyWrong": "This option mixes verb forms, disrupting parallel structure."
+          },
+          {
+            "choice": "B. She enjoys running, jumping, and swimming.",
+            "whyWrong": "This option correctly uses parallel structure by aligning all verbs in the gerund form."
+          },
+          {
+            "choice": "C. She enjoys running, to jump, and swimming.",
+            "whyWrong": "This option disrupts parallel structure by mixing gerunds and infinitives."
+          },
+          {
+            "choice": "D. She enjoys to run, to jump, and swimming.",
+            "whyWrong": "This option mixes infinitives and gerunds, breaking parallel structure."
+          }
+        ]
+      },
+      {
+        "question": "Select the sentence that maintains parallel structure.",
+        "passage": null,
+        "rightAnswerRationale": "The sentence uses parallel structure by listing 'to read,' 'to write,' and 'to draw,' all in the infinitive form.",
+        "coachHint": "Check if all the verbs are in the same form.",
+        "type": "hot-text-sentence",
+        "paragraph": "(1) She likes to read, to write, and to draw. (2) She likes reading, writing, and to draw. (3) She likes to read, writing, and drawing.",
+        "sentenceCount": 3,
+        "correctSentenceNumber": 1
+      },
+      {
+        "question": "Choose the correct verb form to complete the sentence: \"He is known for [BLANK] quickly, efficiently, and accurately.\"",
+        "passage": null,
+        "rightAnswerRationale": "The correct verb form is 'working' to maintain parallel structure with 'quickly, efficiently, and accurately.'",
+        "coachHint": "Ensure the verb form matches the adverbs that follow.",
+        "type": "inline-dropdown",
+        "sentence": "He is known for [BLANK] quickly, efficiently, and accurately.",
+        "dropdownOptions": [
+          "work",
+          "working",
+          "to work"
+        ],
+        "correctOption": "working",
+        "distractorRationale": [
+          {
+            "option": "work",
+            "whyWrong": "'Work' does not match the adverbial structure."
+          },
+          {
+            "option": "to work",
+            "whyWrong": "'To work' breaks the parallel structure with the adverbs."
+          }
+        ]
+      }
+    ],
+    "independentPractice": [
+      {
+        "question": "Which sentence demonstrates parallel structure?",
+        "passage": null,
+        "rightAnswerRationale": "Option C uses parallel structure with 'to study,' 'to learn,' and 'to succeed,' all in the infinitive form.",
+        "coachHint": "Look for sentences where all verbs or phrases are in the same form.",
+        "type": "mc",
+        "choices": [
+          "A. To study, learning, and succeed are important.",
+          "B. To study, to learn, and succeeding are important.",
+          "C. To study, to learn, and to succeed are important.",
+          "D. Studying, to learn, and to succeed are important."
+        ],
+        "correctAnswer": "C",
+        "distractorRationale": [
+          {
+            "choice": "A. To study, learning, and succeed are important.",
+            "whyWrong": "This option mixes verb forms, disrupting parallel structure."
+          },
+          {
+            "choice": "B. To study, to learn, and succeeding are important.",
+            "whyWrong": "This option disrupts parallel structure by mixing infinitives and gerunds."
+          },
+          {
+            "choice": "C. To study, to learn, and to succeed are important.",
+            "whyWrong": "This option correctly uses parallel structure by aligning all verbs in the infinitive form."
+          },
+          {
+            "choice": "D. Studying, to learn, and to succeed are important.",
+            "whyWrong": "This option mixes gerunds and infinitives, breaking parallel structure."
+          }
+        ]
+      },
+      {
+        "question": "Select the sentence that maintains parallel structure.",
+        "passage": null,
+        "rightAnswerRationale": "The sentence uses parallel structure by listing 'running,' 'jumping,' and 'swimming,' all in the gerund form.",
+        "coachHint": "Check if all the verbs are in the same form.",
+        "type": "hot-text-sentence",
+        "paragraph": "(1) He enjoys running, jumping, and swimming. (2) He enjoys to run, jumping, and swimming. (3) He enjoys running, to jump, and swimming.",
+        "sentenceCount": 3,
+        "correctSentenceNumber": 1
+      },
+      {
+        "question": "Choose the correct verb form to complete the sentence: \"The manager asked us to [BLANK] the report, to review the data, and to present the findings.\"",
+        "passage": null,
+        "rightAnswerRationale": "The correct verb form is 'complete' to maintain parallel structure with 'to review' and 'to present.'",
+        "coachHint": "Ensure the verb form matches the other verbs in the list.",
+        "type": "inline-dropdown",
+        "sentence": "The manager asked us to [BLANK] the report, to review the data, and to present the findings.",
+        "dropdownOptions": [
+          "complete",
+          "completing",
+          "to complete"
+        ],
+        "correctOption": "complete",
+        "distractorRationale": [
+          {
+            "option": "completing",
+            "whyWrong": "'Completing' does not match the infinitive form used in the list."
+          },
+          {
+            "option": "to complete",
+            "whyWrong": "'To complete' is redundant with 'to' already present in the sentence."
+          }
+        ]
+      },
+      {
+        "question": "Arrange the steps in the correct order to maintain parallel structure:",
+        "passage": null,
+        "rightAnswerRationale": "The correct order is 'to plan,' 'to organize,' 'to execute,' maintaining parallel structure.",
+        "coachHint": "Ensure each step uses the same verb form.",
+        "type": "drag-drop-order",
+        "draggableItems": [
+          "to plan",
+          "to execute",
+          "to organize"
+        ],
+        "correctOrder": [
+          "to plan",
+          "to organize",
+          "to execute"
+        ]
+      }
+    ],
+    "exitTicket": [
+      {
+        "question": "Which sentence uses parallel structure correctly?",
+        "passage": null,
+        "rightAnswerRationale": "Option B maintains parallel structure by using 'to read,' 'to write,' and 'to draw,' all in the infinitive form.",
+        "coachHint": "Look for sentences where all verbs or phrases are in the same form.",
+        "type": "mc",
+        "choices": [
+          "A. She likes reading, writing, and to draw.",
+          "B. She likes to read, to write, and to draw.",
+          "C. She likes to read, writing, and drawing.",
+          "D. She likes reading, to write, and drawing."
+        ],
+        "correctAnswer": "B",
+        "distractorRationale": [
+          {
+            "choice": "A. She likes reading, writing, and to draw.",
+            "whyWrong": "This option mixes gerunds and infinitives, disrupting parallel structure."
+          },
+          {
+            "choice": "B. She likes to read, to write, and to draw.",
+            "whyWrong": "This option correctly uses parallel structure by aligning all verbs in the infinitive form."
+          },
+          {
+            "choice": "C. She likes to read, writing, and drawing.",
+            "whyWrong": "This option disrupts parallel structure by mixing infinitives and gerunds."
+          },
+          {
+            "choice": "D. She likes reading, to write, and drawing.",
+            "whyWrong": "This option mixes gerunds and infinitives, breaking parallel structure."
+          }
+        ]
+      },
+      {
+        "question": "Select the sentence that maintains parallel structure.",
+        "passage": null,
+        "rightAnswerRationale": "The sentence uses parallel structure by listing 'to eat,' 'to drink,' and 'to be merry,' all in the infinitive form.",
+        "coachHint": "Check if all the verbs are in the same form.",
+        "type": "hot-text-sentence",
+        "paragraph": "(1) To eat, to drink, and to be merry is the goal. (2) Eating, drinking, and to be merry is the goal. (3) To eat, drinking, and to be merry is the goal.",
+        "sentenceCount": 3,
+        "correctSentenceNumber": 1
+      }
+    ],
+    "masteryCheck": [
+      {
+        "question": "Which sentence demonstrates parallel structure?",
+        "passage": null,
+        "rightAnswerRationale": "Option C uses parallel structure with 'to run,' 'to jump,' and 'to play,' all in the infinitive form.",
+        "coachHint": "Look for sentences where all verbs or phrases are in the same form.",
+        "type": "mc",
+        "choices": [
+          "A. To run, jumping, and to play are fun.",
+          "B. Running, to jump, and playing are fun.",
+          "C. To run, to jump, and to play are fun.",
+          "D. To run, jumping, and playing are fun."
+        ],
+        "correctAnswer": "C",
+        "distractorRationale": [
+          {
+            "choice": "A. To run, jumping, and to play are fun.",
+            "whyWrong": "This option mixes infinitives and gerunds, disrupting parallel structure."
+          },
+          {
+            "choice": "B. Running, to jump, and playing are fun.",
+            "whyWrong": "This option disrupts parallel structure by mixing gerunds and infinitives."
+          },
+          {
+            "choice": "C. To run, to jump, and to play are fun.",
+            "whyWrong": "This option correctly uses parallel structure by aligning all verbs in the infinitive form."
+          },
+          {
+            "choice": "D. To run, jumping, and playing are fun.",
+            "whyWrong": "This option mixes infinitives and gerunds, breaking parallel structure."
+          }
+        ]
+      },
+      {
+        "question": "Select the sentence that maintains parallel structure.",
+        "passage": null,
+        "rightAnswerRationale": "The sentence uses parallel structure by listing 'to sing,' 'to dance,' and 'to laugh,' all in the infinitive form.",
+        "coachHint": "Check if all the verbs are in the same form.",
+        "type": "hot-text-sentence",
+        "paragraph": "(1) To sing, to dance, and to laugh is joyful. (2) Singing, dancing, and to laugh is joyful. (3) To sing, dancing, and to laugh is joyful.",
+        "sentenceCount": 3,
+        "correctSentenceNumber": 1
+      },
+      {
+        "question": "Choose the correct verb form to complete the sentence: \"The teacher encouraged us to [BLANK] our best, to strive for excellence, and to never give up.\"",
+        "passage": null,
+        "rightAnswerRationale": "The correct verb form is 'do' to maintain parallel structure with 'to strive' and 'to never give up.'",
+        "coachHint": "Ensure the verb form matches the other verbs in the list.",
+        "type": "inline-dropdown",
+        "sentence": "The teacher encouraged us to [BLANK] our best, to strive for excellence, and to never give up.",
+        "dropdownOptions": [
+          "do",
+          "doing",
+          "to do"
+        ],
+        "correctOption": "do",
+        "distractorRationale": [
+          {
+            "option": "doing",
+            "whyWrong": "'Doing' does not match the infinitive form used in the list."
+          },
+          {
+            "option": "to do",
+            "whyWrong": "'To do' is redundant with 'to' already present in the sentence."
+          }
+        ]
+      }
+    ],
+    "heroResourceLinkId": "cmp4fw8tn004rg3sasjrcqewa",
+    "resourceTitle": "Archaeology | Vocabulary | Khan Academy",
+    "resourceUrl": "https://www.youtube.com/watch?v=fS3TOHnUwdw",
+    "resourceProvider": "Miacademy & MiaPrep Learning Channel",
+    "resourceDescription": "Strand: RI · Duration: 2m 47s · Tier: on_grade · Collection: khan_8_reading_vocab",
+    "exemplarsUsed": [
+      "g8-p1",
+      "g8-p2",
+      "g8-mc-11",
+      "g8-mc-12",
+      "g8-mc-13",
+      "g8-tda-1",
+      "g7-tei-2",
+      "g6-tei-2",
+      "g8-tei-1"
+    ],
+    "teiTypesUsed": [
+      "hot-text-sentence",
+      "inline-dropdown",
+      "drag-drop-order"
+    ],
+    "generatorVersion": "V2",
+    "qualityScore": 92,
+    "qualityIssues": [
+      "guidedPractice[0]: Distractor rationale for correct answer is incorrect. (Correct the rationale for option B to accurately reflect why it is the correct choice, emphasizing its use of parallel structure.)",
+      "independentPractice[0]: Distractor rationale for correct answer is incorrect. (Revise the rationale for option C to clearly explain why it demonstrates parallel structure, focusing on the consistent use of infinitives.)",
+      "exitTicket[0]: Distractor rationale for correct answer is incorrect. (Update the rationale for option B to correctly explain its use of parallel structure with all verbs in the infinitive form.)"
+    ]
+  },
+  "critic": {
+    "status": "REVISE",
+    "score": 92,
+    "revisions": [
+      {
+        "section": "guidedPractice[0]",
+        "issue": "Distractor rationale for correct answer is incorrect.",
+        "suggestion": "Correct the rationale for option B to accurately reflect why it is the correct choice, emphasizing its use of parallel structure."
+      },
+      {
+        "section": "independentPractice[0]",
+        "issue": "Distractor rationale for correct answer is incorrect.",
+        "suggestion": "Revise the rationale for option C to clearly explain why it demonstrates parallel structure, focusing on the consistent use of infinitives."
+      },
+      {
+        "section": "exitTicket[0]",
+        "issue": "Distractor rationale for correct answer is incorrect.",
+        "suggestion": "Update the rationale for option B to correctly explain its use of parallel structure with all verbs in the infinitive form."
+      }
+    ]
+  },
+  "validationIssues": [],
+  "iterations": 5
+}

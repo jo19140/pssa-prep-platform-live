@@ -1,0 +1,54 @@
+source,grade,assessmentId,assessmentTitle,questionNo,itemId,standardCode,skill,questionType,difficulty,passageId,hasBackendAnswer
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,1,40001,CC.1.4.4.F1,Grammar,CONVENTIONS,2,conventions,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,2,40002,CC.1.4.4.F2,Punctuation,DRAG_DROP,2,conventions,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,3,40003,CC.1.4.4.F3,Capitalization,HOT_TEXT,2,conventions,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,4,40004,CC.1.4.4.F4,Sentence Structure,CONVENTIONS,2,conventions,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,5,40005,CC.1.4.4.F5,Verb Tense,CONVENTIONS,3,conventions,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,6,40006,CC.1.4.4.F6,Pronoun Usage,MULTI_SELECT,3,conventions,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,7,40007,CC.1.4.4.F7,Commas,CONVENTIONS,3,conventions,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,8,40008,CC.1.4.4.F8,Apostrophes,CONVENTIONS,3,conventions,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,9,40009,CC.1.4.4.F9,Subject-Verb Agreement,DRAG_DROP,3,conventions,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,10,40010,CC.1.2.4.A,Main Idea,MCQ,2,informational,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,11,40011,CC.1.2.4.B,Inference,MCQ,2,informational,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,12,40012,CC.1.2.4.C,Text Structure,EBSR,2,informational,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,13,40013,CC.1.2.4.D,Vocabulary,MCQ,2,informational,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,14,40014,CC.1.3.4.C,Point of View,DRAG_DROP,3,informational,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,15,40015,CC.1.2.4.B,Inference,MCQ,3,informational,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,16,40016,CC.1.2.4.A,Main Idea,HOT_TEXT,3,informational,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,17,40017,CC.1.3.4.A,Theme,MCQ,3,literary,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,18,40018,CC.1.3.4.B,Literary Inference,MCQ,3,literary,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,19,40019,CC.1.3.4.C,Setting,MCQ,4,literary,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,20,40020,CC.1.3.4.H,Plot Development,MCQ,4,literary,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,21,40021,CC.1.3.4.C,Point of View,DRAG_DROP,4,literary,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,22,40022,CC.1.3.4.F / CC.1.2.4.F,Figurative Language,MCQ,4,literary,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,23,40023,CC.1.3.4.E,Flashback,HOT_TEXT,4,literary,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,24,40024,CC.1.2.4.A,Main Idea,MCQ,4,paired,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,25,40025,CC.1.2.4.B,Inference,MCQ,4,paired,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,26,40026,CC.1.3.4.C,Point of View,MCQ,4,paired,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,27,40027,CC.1.2.4.C,Text Structure,MCQ,4,paired,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,28,40028,CC.1.2.4.D,Vocabulary,DRAG_DROP,4,paired,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,29,40029,CC.1.2.4.B,Inference,MCQ,4,paired,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,30,40030,CC.1.2.4.A,Main Idea,MCQ,4,table,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,31,40031,CC.1.2.4.B,Inference,MCQ,4,table,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,32,40032,CC.1.2.4.C,Text Structure,EBSR,4,table,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,33,40033,CC.1.2.4.D,Vocabulary,MCQ,4,table,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,34,40034,CC.1.3.4.C,Point of View,DRAG_DROP,4,table,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,35,40035,CC.1.2.4.B,Inference,MCQ,4,table,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,36,40036,CC.1.2.4.A,Main Idea,HOT_TEXT,4,table,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,37,40037,CC.1.2.4.B,Inference,MCQ,4,table,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,38,40038,CC.1.2.4.C,Text Structure,MULTI_SELECT,4,table,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,39,40039,CC.1.2.4.D,Vocabulary,MCQ,4,table,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,40,40040,CC.1.4.4.S,TDA Writing,TDA,4,table,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,41,40041,CC.1.3.4.A,Theme,MCQ,4,literary,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,42,40042,CC.1.3.4.B,Literary Inference,MCQ,4,literary,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,43,40043,CC.1.3.4.C,Setting,MCQ,4,literary,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,44,40044,CC.1.3.4.H,Plot Development,MCQ,4,literary,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,45,40045,CC.1.3.4.C,Point of View,DRAG_DROP,4,literary,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,46,40046,CC.1.3.4.F / CC.1.2.4.F,Figurative Language,MCQ,4,literary,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,47,40047,CC.1.3.4.E,Flashback,HOT_TEXT,4,literary,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,48,40048,CC.1.3.4.D,Literary Vocabulary,MCQ,4,literary,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,49,40049,CC.1.3.4.A,Theme,MULTI_SELECT,4,literary,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,50,40050,CC.1.3.4.B,Literary Inference,MCQ,4,literary,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,51,40051,CC.1.3.4.C,Setting,MCQ,4,literary,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,52,40052,CC.1.3.4.H,Plot Development,MCQ,4,literary,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,53,40053,CC.1.4.4.S,TDA Writing,TDA,4,literary,yes

@@ -1,0 +1,34 @@
+{
+  "generatedAt": "2026-05-20T07:25:16.226Z",
+  "lessonCount": 1,
+  "averageQuality": 92,
+  "teiTypes": [
+    "drag-drop-order",
+    "hot-text-sentence",
+    "inline-dropdown"
+  ],
+  "duplicatePairs": [],
+  "lessons": [
+    {
+      "title": "Mastering Parallel Structure for Clarity and Style",
+      "gradeLevel": 8,
+      "standardCode": "CC.1.4.8.F",
+      "skill": "Parallel Structure",
+      "qualityScore": 92,
+      "qualityIssues": [
+        "guidedPractice[0]: Distractor rationale for correct answer is incorrect. (Correct the rationale for option B to accurately reflect why it is the correct choice, emphasizing its use of parallel structure.)",
+        "independentPractice[0]: Distractor rationale for correct answer is incorrect. (Revise the rationale for option C to clearly explain why it demonstrates parallel structure, focusing on the consistent use of infinitives.)",
+        "exitTicket[0]: Distractor rationale for correct answer is incorrect. (Update the rationale for option B to correctly explain its use of parallel structure with all verbs in the infinitive form.)"
+      ],
+      "teiTypesUsed": [
+        "hot-text-sentence",
+        "inline-dropdown",
+        "drag-drop-order"
+      ],
+      "heroResourceLinkId": "cmp4fw8tn004rg3sasjrcqewa",
+      "resourceTitle": "Archaeology | Vocabulary | Khan Academy",
+      "resourceUrl": "https://www.youtube.com/watch?v=fS3TOHnUwdw",
+      "resourceProvider": "Miacademy & MiaPrep Learning Channel"
+    }
+  ]
+}

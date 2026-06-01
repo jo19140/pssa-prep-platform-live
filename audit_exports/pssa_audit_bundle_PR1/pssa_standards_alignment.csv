@@ -1,0 +1,318 @@
+source,module,state,subject,grade,standardCode,standardLabel,skill,strand,itemCount,lessonCount
+database,PSSA,PA,ELA,3,CC.1.1.3.D,Decode multisyllable words using word parts,Multisyllable Word Parts,Foundational Skills,0,2
+database,PSSA,PA,ELA,3,CC.1.1.3.D,Foundational Skills - phonics patterns,Phonics Patterns,Foundational Skills,0,2
+database,PSSA,PA,ELA,3,CC.1.1.3.D,Read grade-level words with common vowel patterns,Short and Long Vowel Patterns,Foundational Skills,0,2
+database,PSSA,PA,ELA,3,CC.1.1.3.E,Foundational Skills - multisyllabic word reading,Multisyllabic Words,Foundational Skills,0,2
+database,PSSA,PA,ELA,3,CC.1.1.3.E,Foundational Skills - common affixes,Common Affixes,Foundational Skills,0,2
+database,PSSA,PA,ELA,3,CC.1.2.3.A,Determine main idea and recount key details,Main Idea,Informational,8,2
+database,PSSA,PA,ELA,3,CC.1.2.3.B,Make inferences using text evidence,Inference,Informational,11,2
+generated,PSSA,PA,ELA,3,CC.1.2.3.B,Reading short-answer response with text-based support,Short Answer Reading Response,Writing,17,0
+database,PSSA,PA,ELA,3,CC.1.2.3.B,Ask and answer questions using text evidence,Text Evidence,Informational,0,2
+generated,PSSA,PA,ELA,3,CC.1.2.3.C,Analyze text structure and author's craft,Text Structure,Informational,14,0
+database,PSSA,PA,ELA,3,CC.1.2.3.C,"Describe relationships between events, ideas, and concepts",Cause and Effect,Informational,0,2
+generated,PSSA,PA,ELA,3,CC.1.2.3.D,Determine word meaning and vocabulary,Vocabulary,Informational,8,0
+database,PSSA,PA,ELA,3,CC.1.2.3.E,Use text features to locate and interpret information,Text Features,Informational,0,2
+database,PSSA,PA,ELA,3,CC.1.2.3.E,Identify author's purpose and point of view clues,Author's Purpose,Informational,0,2
+database,PSSA,PA,ELA,3,CC.1.2.3.F,Use word parts to determine meaning,Prefixes and Suffixes,Informational,0,2
+database,PSSA,PA,ELA,3,CC.1.2.3.F,Determine word meaning using context,Context Clues,Informational,0,2
+database,PSSA,PA,ELA,3,CC.1.2.3.F,Use word relationships to determine meaning,Synonyms and Antonyms,Informational,0,2
+database,PSSA,PA,ELA,3,CC.1.2.3.I,Compare and contrast important points and details,Compare and Contrast,Informational,0,2
+database,PSSA,PA,ELA,3,CC.1.3.3.A,"Determine theme, message, or lesson",Theme,Literature,1,2
+generated,PSSA,PA,ELA,3,CC.1.3.3.B,Ask and answer questions about literature and begin making simple inferences using clues,Literary Inference,Literature,2,0
+generated,PSSA,PA,ELA,3,CC.1.3.3.C,Analyze character development,Character,Literature,1,0
+generated,PSSA,PA,ELA,3,CC.1.3.3.C,Describe where and when a story happens and how the setting relates to events,Setting,Literature,2,0
+generated,PSSA,PA,ELA,3,CC.1.3.3.C,Describe how events happen in order and recognize past and present events,Flashback,Literature,1,0
+database,PSSA,PA,ELA,3,CC.1.3.3.C,Describe characters and explain how actions affect events,Character Traits and Actions,Literature,0,2
+database,PSSA,PA,ELA,3,CC.1.3.3.C,Describe how story events build in sequence,Sequence of Events,Literature,0,2
+database,PSSA,PA,ELA,3,CC.1.3.3.C,"Describe characters, setting, and events",Story Elements,Literature,0,2
+generated,PSSA,PA,ELA,3,CC.1.3.3.C / CC.1.2.3.E,Identify who is telling the story and distinguish first-person from third-person point of view,Point of View,Literature,10,0
+generated,PSSA,PA,ELA,3,CC.1.3.3.D,Determine figurative and connotative meaning,Literary Vocabulary,Literature,0,0
+database,PSSA,PA,ELA,3,CC.1.3.3.D,Explain point of view and narrator perspective,Point of View,Literature,0,2
+database,PSSA,PA,ELA,3,CC.1.3.3.E,"Refer to parts of stories, poems, and dramas",Poetry Lines and Stanzas,Literature,0,2
+database,PSSA,PA,ELA,3,CC.1.3.3.F,Determine literal and nonliteral meanings,Connotation and Figurative Language,Literature,0,2
+generated,PSSA,PA,ELA,3,CC.1.3.3.F / CC.1.2.3.F,Determine the meaning of words and phrases and recognize literal versus nonliteral language,Figurative Language,Literature,0,0
+generated,PSSA,PA,ELA,3,CC.1.3.3.H,"Describe how plot unfolds through beginning, middle, end, conflict, and resolution",Plot Development,Literature,0,0
+database,PSSA,PA,ELA,3,CC.1.4.3.C,Develop writing with organization and details,Paragraph Organization,Writing/Conventions,0,2
+database,PSSA,PA,ELA,3,CC.1.4.3.F,Use capitalization and title conventions,Capitalization and Titles,Writing/Conventions,0,2
+database,PSSA,PA,ELA,3,CC.1.4.3.F,Use commas and punctuation correctly,Commas in a Series,Writing/Conventions,0,2
+database,PSSA,PA,ELA,3,CC.1.4.3.F,Demonstrate command of sentence conventions,Complete Sentences,Writing/Conventions,0,2
+database,PSSA,PA,ELA,3,CC.1.4.3.F,Conventions of Standard English - Pronoun Agreement and Shifts,Pronoun Agreement and Shifts,Writing/Conventions,0,2
+database,PSSA,PA,ELA,3,CC.1.4.3.F,Conventions of Standard English - Formal and Informal Style,Formal and Informal Style,Writing/Conventions,0,2
+generated,PSSA,PA,ELA,3,CC.1.4.3.F1,Grammar in Standard English,Grammar,Conventions,2,0
+generated,PSSA,PA,ELA,3,CC.1.4.3.F10,Frequently Confused Words in Standard English,Frequently Confused Words,Conventions,0,0
+generated,PSSA,PA,ELA,3,CC.1.4.3.F2,Punctuation in Standard English,Punctuation,Conventions,2,0
+generated,PSSA,PA,ELA,3,CC.1.4.3.F3,Capitalization in Standard English,Capitalization,Conventions,2,0
+generated,PSSA,PA,ELA,3,CC.1.4.3.F4,Sentence Structure in Standard English,Sentence Structure,Conventions,2,0
+generated,PSSA,PA,ELA,3,CC.1.4.3.F5,Verb Tense in Standard English,Verb Tense,Conventions,2,0
+generated,PSSA,PA,ELA,3,CC.1.4.3.F6,Pronoun Usage in Standard English,Pronoun Usage,Conventions,2,0
+generated,PSSA,PA,ELA,3,CC.1.4.3.F7,Commas in Standard English,Commas,Conventions,2,0
+generated,PSSA,PA,ELA,3,CC.1.4.3.F8,Apostrophes in Standard English,Apostrophes,Conventions,2,0
+generated,PSSA,PA,ELA,3,CC.1.4.3.F9,Subject-Verb Agreement in Standard English,Subject-Verb Agreement,Conventions,2,0
+database,PSSA,PA,ELA,3,CC.1.4.3.G,Support opinion writing with reasons,Opinion Reasons,Writing/Conventions,0,2
+database,PSSA,PA,ELA,3,CC.1.4.3.S,Use evidence and explanation in text-dependent writing,TDA Evidence and Explanation,Writing/Conventions,0,2
+database,PSSA,PA,ELA,4,CC.1.1.4.D,Foundational Skills - affixes and roots,Affixes and Roots,Foundational Skills,0,2
+database,PSSA,PA,ELA,4,CC.1.1.4.E,Foundational Skills - multisyllabic decoding,Decoding Multisyllabic Words,Foundational Skills,0,2
+database,PSSA,PA,ELA,4,CC.1.1.4.E,Foundational Skills - fluency strategies,Fluency Strategies,Foundational Skills,0,2
+database,PSSA,PA,ELA,4,CC.1.2.4.A,Determine main idea and explain key details,Main Idea,Informational,5,2
+database,PSSA,PA,ELA,4,CC.1.2.4.A,Combine main ideas and details across texts,Combine Main Ideas Across Texts,Informational,0,2
+database,PSSA,PA,ELA,4,CC.1.2.4.B,Make inferences using text evidence,Inference,Informational,7,2
+database,PSSA,PA,ELA,4,CC.1.2.4.B,Make inferences and support them with details,Inference with Supporting Details,Informational,0,2
+database,PSSA,PA,ELA,4,CC.1.2.4.B,Cite relevant details and examples from text,Text Evidence,Informational,0,2
+generated,PSSA,PA,ELA,4,CC.1.2.4.C,Analyze text structure and author's craft,Text Structure,Informational,8,0
+generated,PSSA,PA,ELA,4,CC.1.2.4.D,Determine word meaning and vocabulary,Vocabulary,Informational,8,0
+database,PSSA,PA,ELA,4,CC.1.2.4.D,Compare accounts and explain author's purpose,Author's Purpose and Message,Informational,0,2
+database,PSSA,PA,ELA,4,CC.1.2.4.E,Interpret information from visual text features,Graphic Organizers,Informational,0,2
+database,PSSA,PA,ELA,4,CC.1.2.4.E,Describe text structure and organization,Problem and Solution Text Structure,Informational,0,2
+database,PSSA,PA,ELA,4,CC.1.2.4.F,Use reference materials to clarify meaning,Dictionary and Thesaurus Skills,Informational,0,2
+database,PSSA,PA,ELA,4,CC.1.2.4.F,Use context to determine word meaning,Homophones and Multiple-Meaning Words,Informational,0,2
+database,PSSA,PA,ELA,4,CC.1.2.4.F,Use roots and affixes to determine word meaning,Greek and Latin Roots,Informational,0,2
+database,PSSA,PA,ELA,4,CC.1.2.4.G,Explain reasons and evidence supporting points,Argumentative Text Clues,Informational,0,2
+database,PSSA,PA,ELA,4,CC.1.3.4.A,Determine theme and summarize key details,Theme,Literature,3,2
+generated,PSSA,PA,ELA,4,CC.1.3.4.B,Refer to details and examples to draw inferences from literature,Literary Inference,Literature,6,0
+generated,PSSA,PA,ELA,4,CC.1.3.4.C,Analyze character development,Character,Literature,8,0
+generated,PSSA,PA,ELA,4,CC.1.3.4.C,Compare first-person and third-person narration and understand different perspectives,Point of View,Literature,13,0
+generated,PSSA,PA,ELA,4,CC.1.3.4.C,Describe setting and connect time and place to story events,Setting,Literature,11,0
+database,PSSA,PA,ELA,4,CC.1.3.4.C,Describe characters in depth using text evidence,Compare Characters,Literature,0,2
+database,PSSA,PA,ELA,4,CC.1.3.4.C,Describe plot events and character responses,Plot Elements,Literature,0,2
+generated,PSSA,PA,ELA,4,CC.1.3.4.D,Determine figurative and connotative meaning,Literary Vocabulary,Literature,2,0
+database,PSSA,PA,ELA,4,CC.1.3.4.D,Compare points of view and perspectives,Point of View,Literature,0,2
+generated,PSSA,PA,ELA,4,CC.1.3.4.E,Notice shifts in time and explain how structure shapes a story,Flashback,Literature,4,0
+database,PSSA,PA,ELA,4,CC.1.3.4.E,Explain structural elements of poems,Rhyme Scheme and Poetry Elements,Literature,0,2
+database,PSSA,PA,ELA,4,CC.1.3.4.F,"Determine meaning of words, phrases, and references",Allusion Meaning,Literature,0,2
+database,PSSA,PA,ELA,4,CC.1.3.4.F,Interpret figurative language in context,Connotation and Figurative Language,Literature,0,2
+database,PSSA,PA,ELA,4,CC.1.3.4.F,"Interpret similes, metaphors, and figurative language",Similes and Metaphors,Literature,0,2
+database,PSSA,PA,ELA,4,CC.1.3.4.F,Determine meaning and effect of words and phrases,Sensory Details,Literature,0,2
+generated,PSSA,PA,ELA,4,CC.1.3.4.F / CC.1.2.4.F,"Determine the meaning of words and phrases, including figurative language",Figurative Language,Literature,4,0
+generated,PSSA,PA,ELA,4,CC.1.3.4.H,Describe how characters respond to events and how the plot unfolds,Plot Development,Literature,6,0
+database,PSSA,PA,ELA,4,CC.1.4.4.A,Write clear summaries with relevant details,Summarizing Stories,Writing/Conventions,0,2
+database,PSSA,PA,ELA,4,CC.1.4.4.C,Organize writing with linking words and transitions,Transitions and Linking Words,Writing/Conventions,0,2
+database,PSSA,PA,ELA,4,CC.1.4.4.F,Conventions of Standard English - Formal and Informal Style,Formal and Informal Style,Writing/Conventions,0,2
+database,PSSA,PA,ELA,4,CC.1.4.4.F,Demonstrate command of spelling and conventions,Spelling with Affixes,Writing/Conventions,0,2
+database,PSSA,PA,ELA,4,CC.1.4.4.F,Conventions of Standard English - Pronoun Agreement and Shifts,Pronoun Agreement and Shifts,Writing/Conventions,0,2
+generated,PSSA,PA,ELA,4,CC.1.4.4.F1,Grammar in Standard English,Grammar,Conventions,2,0
+generated,PSSA,PA,ELA,4,CC.1.4.4.F10,Frequently Confused Words in Standard English,Frequently Confused Words,Conventions,0,0
+generated,PSSA,PA,ELA,4,CC.1.4.4.F2,Punctuation in Standard English,Punctuation,Conventions,2,0
+generated,PSSA,PA,ELA,4,CC.1.4.4.F3,Capitalization in Standard English,Capitalization,Conventions,2,0
+generated,PSSA,PA,ELA,4,CC.1.4.4.F4,Sentence Structure in Standard English,Sentence Structure,Conventions,2,0
+generated,PSSA,PA,ELA,4,CC.1.4.4.F5,Verb Tense in Standard English,Verb Tense,Conventions,2,0
+generated,PSSA,PA,ELA,4,CC.1.4.4.F6,Pronoun Usage in Standard English,Pronoun Usage,Conventions,2,0
+generated,PSSA,PA,ELA,4,CC.1.4.4.F7,Commas in Standard English,Commas,Conventions,2,0
+generated,PSSA,PA,ELA,4,CC.1.4.4.F8,Apostrophes in Standard English,Apostrophes,Conventions,2,0
+generated,PSSA,PA,ELA,4,CC.1.4.4.F9,Subject-Verb Agreement in Standard English,Subject-Verb Agreement,Conventions,2,0
+database,PSSA,PA,ELA,4,CC.1.4.4.G,Support opinion writing with reasons and evidence,Supporting Reasons,Writing/Conventions,0,2
+database,PSSA,PA,ELA,4,CC.1.4.4.I,Use facts and details to develop writing,Facts and Opinions,Writing/Conventions,0,2
+generated,PSSA,PA,ELA,4,CC.1.4.4.S,Text-dependent analysis essay,TDA Writing,Writing,4,0
+database,PSSA,PA,ELA,4,CC.1.4.4.S,Use evidence and explanation in text-dependent writing,TDA Evidence and Explanation,Writing/Conventions,0,2
+database,PSSA,PA,ELA,5,CC.1.1.5.D,Foundational Skills - Greek and Latin roots,Greek and Latin Roots,Foundational Skills,0,2
+database,PSSA,PA,ELA,5,CC.1.1.5.E,Foundational Skills - academic affixes,Affixes in Academic Vocabulary,Foundational Skills,0,2
+database,PSSA,PA,ELA,5,CC.1.1.5.E,Foundational Skills - fluency for comprehension,Fluency for Comprehension,Foundational Skills,0,2
+database,PSSA,PA,ELA,5,CC.1.2.5.A,Determine a central idea and summarize,Main Idea,Informational,20,2
+database,PSSA,PA,ELA,5,CC.1.2.5.B,Make inferences supported by text evidence,Inference,Informational,7,2
+database,PSSA,PA,ELA,5,CC.1.2.5.B,Cite textual evidence and make inferences,Text Evidence,Informational,14,2
+database,PSSA,PA,ELA,5,CC.1.2.5.C,Analyze text structure and author's craft,Text Structure,Informational,12,0
+database,PSSA,PA,ELA,5,CC.1.2.5.D,Determine word meaning and vocabulary,Vocabulary,Informational,12,0
+database,PSSA,PA,ELA,5,CC.1.2.5.D,Analyze multiple accounts of the same event or topic,Multiple Accounts of the Same Event,Informational,0,2
+database,PSSA,PA,ELA,5,CC.1.2.5.E,Use text structure to interpret information,Chronology and Sequence Text Structure,Informational,0,2
+database,PSSA,PA,ELA,5,CC.1.2.5.F,Determine academic and domain-specific word meaning,Academic and Domain-Specific Vocabulary,Informational,0,2
+database,PSSA,PA,ELA,5,CC.1.2.5.F,Use roots and affixes to determine word meaning,Greek and Latin Affixes and Roots,Informational,0,2
+database,PSSA,PA,ELA,5,CC.1.2.5.F,Use word relationships to deepen understanding,Analogies and Word Relationships,Informational,0,2
+database,PSSA,PA,ELA,5,CC.1.2.5.G,Explain how reasons and evidence support points,Reasons and Evidence in Arguments,Informational,0,2
+database,PSSA,PA,ELA,5,CC.1.2.5.I,Integrate information from several texts on the same topic,Integrating Information from Sources,Informational,0,2
+database,PSSA,PA,ELA,5,CC.1.3.5.A,Determine theme and summarize literature,Theme,Literature,11,2
+generated,PSSA,PA,ELA,5,CC.1.3.5.B,Quote accurately from literature when supporting inferences,Literary Inference,Literature,6,0
+database,PSSA,PA,ELA,5,CC.1.3.5.B,Cite textual evidence in literature,Literary Evidence,Literature,8,0
+generated,PSSA,PA,ELA,5,CC.1.3.5.C,Analyze character development,Character,Literature,8,0
+generated,PSSA,PA,ELA,5,CC.1.3.5.C,Analyze how point of view influences events and compare perspectives,Point of View,Literature,13,0
+generated,PSSA,PA,ELA,5,CC.1.3.5.C,Describe setting and explain how it connects to characters and major events,Setting,Literature,11,0
+database,PSSA,PA,ELA,5,CC.1.3.5.C,"Analyze character, plot, and setting",Character / Plot,Literature,6,0
+database,PSSA,PA,ELA,5,CC.1.3.5.C,"Compare characters, settings, and events using details",Character Response and Plot,Literature,0,2
+database,PSSA,PA,ELA,5,CC.1.3.5.D,Determine figurative and connotative meaning,Literary Vocabulary,Literature,7,0
+database,PSSA,PA,ELA,5,CC.1.3.5.D,Analyze narrator or speaker point of view,Point of View,Literature,0,2
+generated,PSSA,PA,ELA,5,CC.1.3.5.E,"Explain how chapters, scenes, or events fit together to build a story",Flashback,Literature,4,0
+database,PSSA,PA,ELA,5,CC.1.3.5.E,"Explain how chapters, scenes, or stanzas fit together",Story Structure and Chapters,Literature,0,2
+database,PSSA,PA,ELA,5,CC.1.3.5.F,"Analyze word choice, tone, and speaker meaning",Poetry Speaker and Tone,Literature,0,2
+database,PSSA,PA,ELA,5,CC.1.3.5.F,Interpret figurative language and word meaning,Connotation and Figurative Language,Literature,0,2
+generated,PSSA,PA,ELA,5,CC.1.3.5.F / CC.1.2.5.F,Interpret figurative language in context and explain how it impacts meaning,Figurative Language,Literature,4,0
+generated,PSSA,PA,ELA,5,CC.1.3.5.H,Describe how plot unfolds and how character responses shape the story,Plot Development,Literature,6,0
+database,PSSA,PA,ELA,5,CC.1.3.5.H,Compare stories in the same genre on themes and topics,Compare Themes Across Stories,Literature,0,2
+database,PSSA,PA,ELA,5,CC.1.4.5.A,Write informative texts with facts and details,Informative Essay Development,Writing/Conventions,0,2
+database,PSSA,PA,ELA,5,CC.1.4.5.F,Use conventions to produce clear sentences,Combining Sentences,Writing/Conventions,0,2
+database,PSSA,PA,ELA,5,CC.1.4.5.F,Use commas and punctuation correctly,Commas and Introductory Elements,Writing/Conventions,0,2
+database,PSSA,PA,ELA,5,CC.1.4.5.F,Conventions of Standard English - Formal and Informal Style,Formal and Informal Style,Writing/Conventions,0,2
+database,PSSA,PA,ELA,5,CC.1.4.5.F,Conventions of Standard English - Pronoun Agreement and Shifts,Pronoun Agreement and Shifts,Writing/Conventions,0,2
+database,PSSA,PA,ELA,5,CC.1.4.5.F,Maintain consistent verb tense in writing,Verb Tense Consistency,Writing/Conventions,0,2
+database,PSSA,PA,ELA,5,CC.1.4.5.F1,Grammar in Standard English,Grammar,Writing/Conventions,5,0
+database,PSSA,PA,ELA,5,CC.1.4.5.F10,Frequently Confused Words in Standard English,Frequently Confused Words,Writing/Conventions,2,0
+database,PSSA,PA,ELA,5,CC.1.4.5.F2,Punctuation in Standard English,Punctuation,Writing/Conventions,5,0
+database,PSSA,PA,ELA,5,CC.1.4.5.F3,Capitalization in Standard English,Capitalization,Writing/Conventions,5,0
+database,PSSA,PA,ELA,5,CC.1.4.5.F4,Sentence Structure in Standard English,Sentence Structure,Writing/Conventions,5,0
+database,PSSA,PA,ELA,5,CC.1.4.5.F5,Verb Tense in Standard English,Verb Tense,Writing/Conventions,5,0
+database,PSSA,PA,ELA,5,CC.1.4.5.F6,Pronoun Usage in Standard English,Pronoun Usage,Writing/Conventions,3,0
+database,PSSA,PA,ELA,5,CC.1.4.5.F7,Commas in Standard English,Commas,Writing/Conventions,3,0
+database,PSSA,PA,ELA,5,CC.1.4.5.F8,Apostrophes in Standard English,Apostrophes,Writing/Conventions,3,0
+database,PSSA,PA,ELA,5,CC.1.4.5.F9,Subject-Verb Agreement in Standard English,Subject-Verb Agreement,Writing/Conventions,3,0
+database,PSSA,PA,ELA,5,CC.1.4.5.G,Write opinion pieces with reasons and evidence,Opinion Essay Organization,Writing/Conventions,0,2
+database,PSSA,PA,ELA,5,CC.1.4.5.M,Use narrative techniques to develop experiences,Narrative Techniques,Writing/Conventions,0,2
+database,PSSA,PA,ELA,5,CC.1.4.5.S,Text-dependent analysis essay,TDA Writing,Writing/Conventions,6,0
+database,PSSA,PA,ELA,5,CC.1.4.5.S,Use evidence and explanation in text-dependent writing,TDA Evidence and Explanation,Writing/Conventions,0,2
+database,PSSA,PA,ELA,5,SMOKE.5.1,Placeholder Reading Buddy diagnostic item,Placeholder diagnostic skill,,2,0
+database,PSSA,PA,ELA,5,SMOKE.5.2,Placeholder Reading Buddy diagnostic item,Placeholder diagnostic skill,,2,0
+database,PSSA,PA,ELA,5,SMOKE.5.3,Placeholder Reading Buddy diagnostic item,Placeholder diagnostic skill,,2,0
+database,PSSA,PA,ELA,5,SMOKE.5.4,Placeholder Reading Buddy diagnostic item,Placeholder diagnostic skill,,2,0
+database,PSSA,PA,ELA,5,SMOKE.5.5,Placeholder Reading Buddy diagnostic item,Placeholder diagnostic skill,,2,0
+database,PSSA,PA,ELA,6,CC.1.1.6.E,Foundational Skills - morphological analysis,Morphological Analysis,Foundational Skills,0,2
+database,PSSA,PA,ELA,6,CC.1.1.6.E,Foundational Skills - reading fluency,Reading Fluency,Foundational Skills,0,2
+database,PSSA,PA,ELA,6,CC.1.1.6.E,Foundational Skills - word origins,Word Origins,Foundational Skills,0,2
+database,PSSA,PA,ELA,6,CC.1.2.6.A,Determine a central idea and summarize,Main Idea,Informational,204,4
+database,PSSA,PA,ELA,6,CC.1.2.6.A,Analyze how a central idea is developed,Central Idea Development,Informational,0,2
+database,PSSA,PA,ELA,6,CC.1.2.6.A,Summarize without opinion using key details,Objective Summary,Informational,0,2
+database,PSSA,PA,ELA,6,CC.1.2.6.B,Cite textual evidence to support analysis and inferences in informational text,Inference,Informational,266,2
+database,PSSA,PA,ELA,6,CC.1.2.6.B,Cite textual evidence and make inferences,Text Evidence,Informational,6,2
+database,PSSA,PA,ELA,6,CC.1.2.6.C,Analyze text structure,Text Structure,Informational,152,0
+database,PSSA,PA,ELA,6,CC.1.2.6.D,Determine word meaning and vocabulary,Vocabulary,Informational,138,0
+database,PSSA,PA,ELA,6,CC.1.2.6.D,Determine author's purpose or point of view,Author's Purpose and Point of View,Informational,0,2
+database,PSSA,PA,ELA,6,CC.1.2.6.E,Analyze how structure organizes ideas,Text Structure and Author Organization,Informational,0,2
+database,PSSA,PA,ELA,6,CC.1.2.6.F,Determine technical and academic word meanings,Technical Vocabulary in Context,Informational,0,2
+database,PSSA,PA,ELA,6,CC.1.2.6.F,Analyze connotation and tone in word choice,Tone and Connotation,Informational,0,2
+database,PSSA,PA,ELA,6,CC.1.2.6.G,"Trace and evaluate claims, reasons, and evidence","Claims, Reasons, and Evidence",Informational,0,2
+database,PSSA,PA,ELA,6,CC.1.2.6.I,Compare how texts present similar information,Compare Text Presentations,Informational,0,2
+database,PSSA,PA,ELA,6,CC.1.3.6.A,Determine theme and summarize literature,Theme,Literature,95,2
+database,PSSA,PA,ELA,6,CC.1.3.6.A,Analyze theme development with evidence,Theme Development,Literature,0,2
+database,PSSA,PA,ELA,6,CC.1.3.6.B,Cite textual evidence to support analysis and inferences in literature,Literary Inference,Literature,95,0
+database,PSSA,PA,ELA,6,CC.1.3.6.B,Cite textual evidence in literature,Literary Evidence,Literature,6,0
+generated,PSSA,PA,ELA,6,CC.1.3.6.C,Analyze character development,Character,Literature,5,0
+database,PSSA,PA,ELA,6,CC.1.3.6.C,Explain how setting helps shape plot events and character responses,Setting Impact,Literature,99,0
+database,PSSA,PA,ELA,6,CC.1.3.6.C,Describe how a plot unfolds in episodes and how characters respond or change,Plot Development,Literature,76,0
+database,PSSA,PA,ELA,6,CC.1.3.6.C,"Analyze character, plot, and setting",Character / Plot,Literature,6,0
+database,PSSA,PA,ELA,6,CC.1.3.6.C,Analyze character response and conflict,Character Change and Conflict,Literature,0,2
+database,PSSA,PA,ELA,6,CC.1.3.6.C,Analyze how plot unfolds through episodes,Plot Development in Episodes,Literature,0,2
+database,PSSA,PA,ELA,6,CC.1.3.6.D,Determine figurative and connotative meaning,Literary Vocabulary,Literature,37,0
+database,PSSA,PA,ELA,6,CC.1.3.6.D,Explain how point of view is developed,Point of View,Literature,0,2
+database,PSSA,PA,ELA,6,CC.1.3.6.E,"Analyze how structure, including flashback, contributes to theme, setting, and plot",Flashback,Literature,64,0
+database,PSSA,PA,ELA,6,CC.1.3.6.E,Analyze how structure contributes to meaning,Story Structure and Flashback,Literature,0,2
+database,PSSA,PA,ELA,6,CC.1.3.6.F,"Analyze figurative, connotative, and technical meanings",Connotation and Figurative Language,Literature,0,2
+database,PSSA,PA,ELA,6,CC.1.3.6.F / CC.1.2.6.F,"Determine figurative, connotative, and technical meanings and explain their effect",Figurative Language,Literature,82,0
+database,PSSA,PA,ELA,6,CC.1.3.6.G,Explain how the author develops point of view,Point of View,Literature,175,0
+database,PSSA,PA,ELA,6,CC.1.4.6.A,Write informative texts with organized ideas,Informative Essay Organization,Writing/Conventions,0,2
+database,PSSA,PA,ELA,6,CC.1.4.6.F,Use punctuation to set off elements,"Commas, Parentheses, and Dashes",Writing/Conventions,0,2
+database,PSSA,PA,ELA,6,CC.1.4.6.F,Conventions of Standard English - Formal and Informal Style,Formal and Informal Style,Writing/Conventions,0,2
+database,PSSA,PA,ELA,6,CC.1.4.6.F,Conventions of Standard English - Pronoun Agreement and Shifts,Pronoun Agreement and Shifts,Writing/Conventions,0,2
+database,PSSA,PA,ELA,6,CC.1.4.6.F,Demonstrate command of pronoun conventions,Pronoun Case and Agreement,Writing/Conventions,0,2
+database,PSSA,PA,ELA,6,CC.1.4.6.F,Maintain pronoun consistency in writing,Shifts in Pronoun Person and Number,Writing/Conventions,0,2
+database,PSSA,PA,ELA,6,CC.1.4.6.F,Use sentence variety for meaning and style,Varying Sentence Patterns,Writing/Conventions,0,2
+database,PSSA,PA,ELA,6,CC.1.4.6.F1,Grammar in Standard English,Grammar,Writing/Conventions,35,8
+generated,PSSA,PA,ELA,6,CC.1.4.6.F10,Frequently Confused Words in Standard English,Frequently Confused Words,Conventions,0,0
+database,PSSA,PA,ELA,6,CC.1.4.6.F2,Punctuation in Standard English,Punctuation,Writing/Conventions,35,12
+database,PSSA,PA,ELA,6,CC.1.4.6.F3,Capitalization in Standard English,Capitalization,Writing/Conventions,35,6
+database,PSSA,PA,ELA,6,CC.1.4.6.F4,Sentence Structure in Standard English,Sentence Structure,Writing/Conventions,35,4
+database,PSSA,PA,ELA,6,CC.1.4.6.F5,Verb Tense in Standard English,Verb Tense,Writing/Conventions,35,4
+database,PSSA,PA,ELA,6,CC.1.4.6.F6,Pronoun Usage in Standard English,Pronoun Usage,Writing/Conventions,35,2
+database,PSSA,PA,ELA,6,CC.1.4.6.F7,Commas in Standard English,Commas,Writing/Conventions,35,2
+database,PSSA,PA,ELA,6,CC.1.4.6.F8,Apostrophes in Standard English,Apostrophes,Writing/Conventions,35,0
+database,PSSA,PA,ELA,6,CC.1.4.6.F9,Subject-Verb Agreement in Standard English,Subject-Verb Agreement,Writing/Conventions,35,0
+database,PSSA,PA,ELA,6,CC.1.4.6.G,Write arguments with clear reasons and evidence,Argument Essay Evidence,Writing/Conventions,0,2
+database,PSSA,PA,ELA,6,CC.1.4.6.S,Text-dependent analysis essay,TDA Writing,Writing/Conventions,66,16
+database,PSSA,PA,ELA,6,CC.1.4.6.S,Use evidence and analysis in text-dependent writing,TDA Evidence and Explanation,Writing/Conventions,0,2
+database,PSSA,PA,ELA,6,CC.1.4.6.V,Conduct short research and integrate sources,Research Source Integration,Writing/Conventions,0,2
+database,PSSA,PA,ELA,7,CC.1.1.7.E,Foundational Skills - domain-specific vocabulary morphology,Domain-Specific Vocabulary Morphology,Foundational Skills,0,2
+database,PSSA,PA,ELA,7,CC.1.1.7.E,Foundational Skills - etymology and word study,Etymology and Word Study,Foundational Skills,0,2
+database,PSSA,PA,ELA,7,CC.1.2.7.A,Determine a central idea and summarize,Main Idea,Informational,18,2
+database,PSSA,PA,ELA,7,CC.1.2.7.A,Analyze central idea development across sections,Central Idea Across Sections,Informational,0,2
+database,PSSA,PA,ELA,7,CC.1.2.7.B,Analyze deeper meaning and author message through inference using multiple layers of evidence,Inference,Informational,21,2
+database,PSSA,PA,ELA,7,CC.1.2.7.B,Cite several pieces of textual evidence to support analysis,Text Evidence,Informational,0,2
+database,PSSA,PA,ELA,7,CC.1.2.7.C,Analyze text structure and author's craft,Text Structure,Informational,12,0
+database,PSSA,PA,ELA,7,CC.1.2.7.D,Determine word meaning and vocabulary,Vocabulary,Informational,12,0
+database,PSSA,PA,ELA,7,CC.1.2.7.D,Analyze author's purpose and point of view,Author Purpose and Rhetorical Choices,Informational,0,2
+database,PSSA,PA,ELA,7,CC.1.2.7.E,Analyze text features and visual information,Data and Visual Information,Informational,0,2
+database,PSSA,PA,ELA,7,CC.1.2.7.E,Analyze how text structure develops ideas,Text Structure Effects,Informational,0,2
+database,PSSA,PA,ELA,7,CC.1.2.7.F,Determine academic and domain-specific meanings,Precise Academic Vocabulary,Informational,0,2
+database,PSSA,PA,ELA,7,CC.1.2.7.G,"Evaluate claims, reasons, and evidence",Argument Claim Strength,Informational,0,2
+database,PSSA,PA,ELA,7,CC.1.2.7.I,Compare how authors present similar topics,Compare Authors on the Same Topic,Informational,0,2
+database,PSSA,PA,ELA,7,CC.1.3.7.A,Determine theme and summarize literature,Theme,Literature,9,2
+database,PSSA,PA,ELA,7,CC.1.3.7.B,"Analyze theme, deeper meaning, and author message through inference using multiple layers of evidence",Literary Inference,Literature,9,0
+generated,PSSA,PA,ELA,7,CC.1.3.7.C,Analyze character development,Character,Literature,6,0
+database,PSSA,PA,ELA,7,CC.1.3.7.C,"Analyze how setting interacts with plot, conflict, and characters",Setting Analysis,Literature,9,0
+database,PSSA,PA,ELA,7,CC.1.3.7.C,"Analyze how story elements interact, including plot, setting, and characters",Plot Analysis,Literature,9,0
+database,PSSA,PA,ELA,7,CC.1.3.7.C,Analyze character interaction and theme development,Character Motivation and Theme,Literature,0,2
+database,PSSA,PA,ELA,7,CC.1.3.7.C,Analyze interaction of story elements,Plot Lines and Conflict Development,Literature,0,2
+database,PSSA,PA,ELA,7,CC.1.3.7.D,Determine figurative and connotative meaning,Literary Vocabulary,Literature,3,0
+database,PSSA,PA,ELA,7,CC.1.3.7.D,Analyze how point of view shapes a text,Point of View,Literature,0,2
+database,PSSA,PA,ELA,7,CC.1.3.7.D,Analyze narrator point of view and perspective,Narrator Reliability and Perspective,Literature,0,2
+database,PSSA,PA,ELA,7,CC.1.3.7.E,"Analyze how structure, flashback, foreshadowing, and nonlinear storytelling contribute to meaning",Flashback,Literature,6,0
+database,PSSA,PA,ELA,7,CC.1.3.7.E,Analyze how structure contributes to meaning,Poetry Structure and Meaning,Literature,0,2
+database,PSSA,PA,ELA,7,CC.1.3.7.F,"Analyze figurative, connotative, and technical meanings",Connotation and Figurative Language,Literature,0,2
+database,PSSA,PA,ELA,7,CC.1.3.7.F,Analyze how word choice affects meaning and tone,"Mood, Tone, and Word Choice",Literature,0,2
+database,PSSA,PA,ELA,7,CC.1.3.7.F / CC.1.2.7.F,"Analyze tone, mood, purpose, and deeper meaning created by figurative language",Figurative Language,Literature,6,0
+database,PSSA,PA,ELA,7,CC.1.3.7.G,"Analyze author bias, multiple perspectives, and narrator reliability",Point of View,Literature,15,0
+database,PSSA,PA,ELA,7,CC.1.4.7.A,Write informative texts with clear organization,Informative Writing with Transitions,Writing/Conventions,0,2
+database,PSSA,PA,ELA,7,CC.1.4.7.F,Use phrases and clauses for clear writing,Phrases and Clauses,Writing/Conventions,0,2
+database,PSSA,PA,ELA,7,CC.1.4.7.F,Apply grade-level punctuation conventions,Comma Use with Coordinate Adjectives,Writing/Conventions,0,2
+database,PSSA,PA,ELA,7,CC.1.4.7.F,Conventions of Standard English - Formal and Informal Style,Formal and Informal Style,Writing/Conventions,0,2
+database,PSSA,PA,ELA,7,CC.1.4.7.F,Maintain formal style and precise language,Formal Style and Precise Language,Writing/Conventions,0,2
+database,PSSA,PA,ELA,7,CC.1.4.7.F,Conventions of Standard English - Pronoun Agreement and Shifts,Pronoun Agreement and Shifts,Writing/Conventions,0,2
+database,PSSA,PA,ELA,7,CC.1.4.7.F,Use modifiers clearly and correctly,Misplaced and Dangling Modifiers,Writing/Conventions,0,2
+database,PSSA,PA,ELA,7,CC.1.4.7.F1,Grammar in Standard English,Grammar,Writing/Conventions,3,0
+generated,PSSA,PA,ELA,7,CC.1.4.7.F10,Frequently Confused Words in Standard English,Frequently Confused Words,Conventions,0,0
+database,PSSA,PA,ELA,7,CC.1.4.7.F2,Punctuation in Standard English,Punctuation,Writing/Conventions,3,0
+database,PSSA,PA,ELA,7,CC.1.4.7.F3,Capitalization in Standard English,Capitalization,Writing/Conventions,3,0
+database,PSSA,PA,ELA,7,CC.1.4.7.F4,Sentence Structure in Standard English,Sentence Structure,Writing/Conventions,3,0
+database,PSSA,PA,ELA,7,CC.1.4.7.F5,Verb Tense in Standard English,Verb Tense,Writing/Conventions,3,0
+database,PSSA,PA,ELA,7,CC.1.4.7.F6,Pronoun Usage in Standard English,Pronoun Usage,Writing/Conventions,3,0
+database,PSSA,PA,ELA,7,CC.1.4.7.F7,Commas in Standard English,Commas,Writing/Conventions,3,0
+database,PSSA,PA,ELA,7,CC.1.4.7.F8,Apostrophes in Standard English,Apostrophes,Writing/Conventions,3,0
+database,PSSA,PA,ELA,7,CC.1.4.7.F9,Subject-Verb Agreement in Standard English,Subject-Verb Agreement,Writing/Conventions,3,0
+database,PSSA,PA,ELA,7,CC.1.4.7.G,"Write arguments with claims, reasons, and counterclaims",Argument Counterclaim Response,Writing/Conventions,0,2
+database,PSSA,PA,ELA,7,CC.1.4.7.S,Text-dependent analysis essay,TDA Writing,Writing/Conventions,6,0
+database,PSSA,PA,ELA,7,CC.1.4.7.S,Use evidence and analysis in text-dependent writing,TDA Evidence and Explanation,Writing/Conventions,0,2
+database,PSSA,PA,ELA,7,CC.1.4.7.V,Conduct short research and gather relevant information,Research Questions and Source Notes,Writing/Conventions,0,2
+database,PSSA,PA,ELA,8,CC.1.1.8.E,Foundational Skills - advanced word analysis,Advanced Word Analysis,Foundational Skills,0,2
+database,PSSA,PA,ELA,8,CC.1.1.8.E,Foundational Skills - connotation through word structure,Connotation Through Word Structure,Foundational Skills,0,2
+database,PSSA,PA,ELA,8,CC.1.2.8.A,Analyze central idea development and objective summary,Main Idea,Informational,4,2
+database,PSSA,PA,ELA,8,CC.1.2.8.A,Analyze multiple central ideas and their development,Multiple Central Ideas,Informational,0,2
+database,PSSA,PA,ELA,8,CC.1.2.8.B,Draw inferences supported by strong textual evidence,Inference,Informational,7,2
+database,PSSA,PA,ELA,8,CC.1.2.8.B,Cite the strongest textual evidence to support analysis,Text Evidence,Informational,0,2
+generated,PSSA,PA,ELA,8,CC.1.2.8.C,Analyze text structure and author's craft,Text Structure,Informational,8,0
+generated,PSSA,PA,ELA,8,CC.1.2.8.D,Determine word meaning and vocabulary,Vocabulary,Informational,8,0
+database,PSSA,PA,ELA,8,CC.1.2.8.D,Analyze author's point of view and bias,Author Perspective and Bias,Informational,0,2
+database,PSSA,PA,ELA,8,CC.1.2.8.E,Analyze and compare text structures,Compare Text Structures,Informational,0,2
+database,PSSA,PA,ELA,8,CC.1.2.8.E,Analyze visual and quantitative information,Visual and Quantitative Evidence,Informational,0,2
+database,PSSA,PA,ELA,8,CC.1.2.8.G,"Evaluate reasoning, appeals, and fallacies",Logical Fallacies and Appeals,Informational,0,2
+database,PSSA,PA,ELA,8,CC.1.2.8.G,Trace and evaluate argument and evidence,Trace and Evaluate Arguments,Informational,0,2
+database,PSSA,PA,ELA,8,CC.1.2.8.I,Analyze conflicting information across texts,Conflicting Information Across Texts,Informational,0,2
+database,PSSA,PA,ELA,8,CC.1.3.8.A,Analyze theme development and relationships,Theme,Literature,3,2
+database,PSSA,PA,ELA,8,CC.1.3.8.A,Analyze multiple themes and their development,Multiple Themes in Literature,Literature,0,2
+generated,PSSA,PA,ELA,8,CC.1.3.8.B,Analyze themes and implied meanings using multiple layers of evidence,Literary Inference,Literature,6,0
+generated,PSSA,PA,ELA,8,CC.1.3.8.C,Analyze character development,Character,Literature,6,0
+generated,PSSA,PA,ELA,8,CC.1.3.8.C,"Analyze how environment, events, or dialogue shape actions, outcomes, and meaning",Setting Analysis,Literature,9,0
+generated,PSSA,PA,ELA,8,CC.1.3.8.C,"Analyze how dialogue or incidents propel action, reveal character, or provoke decisions",Plot Analysis,Literature,9,0
+database,PSSA,PA,ELA,8,CC.1.3.8.C,Analyze literary elements and plot effects,Dramatic Irony and Suspense,Literature,0,2
+database,PSSA,PA,ELA,8,CC.1.3.8.C,Analyze dialogue and incidents that reveal character,Dialogue and Characterization,Literature,0,2
+generated,PSSA,PA,ELA,8,CC.1.3.8.D,Determine figurative and connotative meaning,Literary Vocabulary,Literature,2,0
+database,PSSA,PA,ELA,8,CC.1.3.8.D,Analyze how point of view creates effects,Point of View,Literature,0,2
+generated,PSSA,PA,ELA,8,CC.1.3.8.E,"Evaluate how differences in structure, including flashback, affect meaning",Flashback,Literature,2,0
+database,PSSA,PA,ELA,8,CC.1.3.8.F,"Analyze figurative, connotative, and technical meanings",Connotation and Figurative Language,Literature,0,2
+database,PSSA,PA,ELA,8,CC.1.3.8.F,Analyze the effect of figurative language,Figurative Language Effect,Literature,0,2
+generated,PSSA,PA,ELA,8,CC.1.3.8.F / CC.1.2.8.F,"Evaluate tone, mood, symbolism, and author purpose created by figurative language",Figurative Language,Literature,6,0
+generated,PSSA,PA,ELA,8,CC.1.3.8.G,"Evaluate bias, conflicting viewpoints, multiple perspectives, and reliability of narrator",Point of View,Literature,12,0
+database,PSSA,PA,ELA,8,CC.1.3.8.H,Compare texts across genres on themes and patterns,Compare Genres on Similar Themes,Literature,0,2
+database,PSSA,PA,ELA,8,CC.1.4.8.A,Write informative texts that synthesize ideas,Informative Synthesis Writing,Writing/Conventions,0,2
+database,PSSA,PA,ELA,8,CC.1.4.8.F,Use parallel structure for clarity and style,Parallel Structure,Writing/Conventions,0,2
+database,PSSA,PA,ELA,8,CC.1.4.8.F,Apply punctuation for clarity and effect,"Ellipses, Dashes, and Punctuation Effects",Writing/Conventions,0,2
+database,PSSA,PA,ELA,8,CC.1.4.8.F,Maintain formal academic style and precise language,Formal Academic Style,Writing/Conventions,0,2
+database,PSSA,PA,ELA,8,CC.1.4.8.F,Conventions of Standard English - Pronoun Agreement and Shifts,Pronoun Agreement and Shifts,Writing/Conventions,0,2
+database,PSSA,PA,ELA,8,CC.1.4.8.F,Conventions of Standard English - Formal and Informal Style,Formal and Informal Style,Writing/Conventions,0,2
+database,PSSA,PA,ELA,8,CC.1.4.8.F,Use verbs in active/passive voice and mood,Verb Moods and Voice,Writing/Conventions,0,2
+generated,PSSA,PA,ELA,8,CC.1.4.8.F1,Grammar in Standard English,Grammar,Conventions,2,0
+generated,PSSA,PA,ELA,8,CC.1.4.8.F10,Frequently Confused Words in Standard English,Frequently Confused Words,Conventions,0,0
+generated,PSSA,PA,ELA,8,CC.1.4.8.F2,Punctuation in Standard English,Punctuation,Conventions,2,0
+generated,PSSA,PA,ELA,8,CC.1.4.8.F3,Capitalization in Standard English,Capitalization,Conventions,2,0
+generated,PSSA,PA,ELA,8,CC.1.4.8.F4,Sentence Structure in Standard English,Sentence Structure,Conventions,2,0
+generated,PSSA,PA,ELA,8,CC.1.4.8.F5,Verb Tense in Standard English,Verb Tense,Conventions,2,0
+generated,PSSA,PA,ELA,8,CC.1.4.8.F6,Pronoun Usage in Standard English,Pronoun Usage,Conventions,2,0
+generated,PSSA,PA,ELA,8,CC.1.4.8.F7,Commas in Standard English,Commas,Conventions,2,0
+generated,PSSA,PA,ELA,8,CC.1.4.8.F8,Apostrophes in Standard English,Apostrophes,Conventions,2,0
+generated,PSSA,PA,ELA,8,CC.1.4.8.F9,Subject-Verb Agreement in Standard English,Subject-Verb Agreement,Conventions,2,0
+database,PSSA,PA,ELA,8,CC.1.4.8.G,"Write arguments with claims, counterclaims, and evidence",Argument with Counterclaims and Evidence,Writing/Conventions,0,2
+generated,PSSA,PA,ELA,8,CC.1.4.8.S,Text-dependent analysis essay,TDA Writing,Writing,4,0
+database,PSSA,PA,ELA,8,CC.1.4.8.S,Use strong evidence and analysis in text-dependent writing,TDA Evidence and Explanation,Writing/Conventions,0,2
+database,PSSA,PA,ELA,8,CC.1.4.8.V,Assess source credibility and integrate research,Research Source Credibility,Writing/Conventions,0,2

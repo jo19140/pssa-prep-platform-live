@@ -1,0 +1,342 @@
+{
+  "lesson": {
+    "gradeLevel": 7,
+    "standardCode": "CC.1.3.7.A",
+    "standardLabel": "Analyze theme development and provide summary",
+    "skill": "Theme",
+    "title": "Understanding Theme in Literary Texts",
+    "whyAssigned": "This mini-lesson targets Theme because the diagnostic showed a standards-aligned practice gap.",
+    "hook": "Imagine reading a story where every character and event seems to point to a single, powerful message. This message is the theme, the underlying idea that the author wants to convey. Themes can be about friendship, courage, or even the struggle between good and evil. Understanding the theme helps us connect more deeply with the story and its characters.",
+    "explanation": "Theme is the central idea or message in a literary work. It is not just a single word like 'love' or 'war,' but a statement about life or human nature. For example, a theme might be 'true friendship withstands any challenge.' Authors develop themes through characters, settings, and plots. To identify a theme, look for recurring ideas or messages throughout the text. Pay attention to how characters change, what conflicts they face, and how these elements are resolved. Ask yourself: What lesson does the story teach? How do the characters' experiences reflect broader truths about life? Consider the author's purpose and how the theme relates to the real world. By analyzing these components, you can uncover the theme and understand the deeper meaning of the story. Remember, a story can have multiple themes, and different readers might interpret them in various ways based on their perspectives and experiences. Practice identifying themes by summarizing the story and pinpointing the key message the author conveys through the narrative arc and character development. This skill will enhance your comprehension and appreciation of literature, allowing you to engage with texts on a more profound level, seeing beyond the surface to the heart of the story. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step. For example, students should name the exact clue, connect it to the question, and explain why it proves the answer. A common mistake is choosing a detail that sounds related but does not actually prove the idea. Strong work uses the standard's language and shows the reasoning step by step.",
+    "workedExample": "Let's explore how to identify a theme using a short story. Imagine a tale about a young girl who moves to a new city. She struggles to make friends and feels lonely. Over time, she joins a local club and discovers a shared interest with others. Through her experiences, she learns that reaching out and being open to new experiences can lead to meaningful connections. The theme here might be 'openness to new experiences can lead to personal growth and friendship.' To identify this theme, we looked at the girl's journey, her challenges, and how she overcame them. We considered how her actions and the story's resolution conveyed a broader message about life. By summarizing the plot and examining the character's development, we uncovered the theme. This process helps us see the story's deeper meaning and the author's intended message. This matters because the correct answer is not just a matching word or phrase. It is the choice that fits the whole question and can be defended with a specific detail. The reasoning should explain both what the evidence says and how it supports the answer.",
+    "commonErrors": [
+      "Students may confuse theme with the plot, focusing on events rather than the underlying message.",
+      "Some students might identify a theme as a single word rather than a complete idea or statement.",
+      "Students may overlook subtle themes, focusing only on explicit messages."
+    ],
+    "sentenceFrames": [
+      "The theme of the story is that...",
+      "This theme is developed through...",
+      "The author conveys the theme by..."
+    ],
+    "successCriteria": [
+      "Identify the central message or lesson of the story.",
+      "Explain how the theme is developed through characters and events.",
+      "Provide evidence from the text to support the identified theme."
+    ],
+    "guidedPractice": [
+      {
+        "question": "What is the theme of the passage?",
+        "passage": "In a small village, a young boy named Liam dreamed of becoming a great musician. Despite his family's struggles, he practiced every day. One day, a famous musician visited the village and heard Liam play. Impressed by his talent and dedication, the musician offered to mentor him. Through hard work and perseverance, Liam achieved his dreams, showing that determination can overcome any obstacle. The village celebrated his success, inspired by his journey and the power of dreams and hard work. Liam's story became a legend, reminding everyone that no dream is too big if you believe in yourself and work hard to achieve it. His journey inspired others to pursue their passions, no matter the challenges. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "The theme is 'determination and hard work can lead to success.' Liam's journey from a struggling musician to achieving his dreams illustrates this theme.",
+        "coachHint": "Think about what Liam's story teaches us about life and achieving dreams.",
+        "type": "two-part-ebsr",
+        "partA": {
+          "question": "What is the theme of the passage?",
+          "choices": [
+            "Determination and hard work can lead to success.",
+            "Fame is more important than talent.",
+            "Only the wealthy can achieve their dreams.",
+            "Talent is more important than effort."
+          ],
+          "correctAnswer": "Determination and hard work can lead to success."
+        },
+        "partB": {
+          "question": "Which detail from the passage best supports the theme?",
+          "choices": [
+            "Liam practiced every day despite his family's struggles.",
+            "A famous musician visited the village.",
+            "The village celebrated Liam's success.",
+            "Liam's story became a legend."
+          ],
+          "correctAnswers": [
+            "Liam practiced every day despite his family's struggles."
+          ]
+        },
+        "scoringRule": "B-counts-only-if-A-correct"
+      },
+      {
+        "question": "Select the sentence that best completes the summary of the passage.",
+        "passage": "In a bustling city, a young girl named Mia loved to paint. Her family was not wealthy, but they supported her passion. Mia spent her free time painting the world around her. One day, a local art gallery held a competition. Mia entered her best work, hoping to win. Although she didn't win first place, her art caught the attention of a gallery owner who offered her an exhibition. Mia's story shows that passion and dedication can open unexpected doors. Her journey inspired others to pursue their dreams, regardless of the outcome, and to find joy in the process of creation. Mia's art became a symbol of hope and perseverance, reminding everyone that success is not just about winning but about the journey and the joy of doing what you love. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "The sentence 'Mia's art became a symbol of hope and perseverance, reminding everyone that success is not just about winning but about the journey and the joy of doing what you love.' completes the summary by highlighting the theme.",
+        "coachHint": "Look for a sentence that captures the main message of the story.",
+        "type": "hot-text-sentence",
+        "paragraph": "(1) In a bustling city, a young girl named Mia loved to paint. Her family was not wealthy, but they supported her passion. Mia spent her free time painting the world around her. One day, a local art gallery held a competition. Mia entered her best work, hoping to win. Although she didn't win first place, her art caught the attention of a gallery owner who offered her an exhibition. Mia's story shows that passion and dedication can open unexpected doors. Her journey inspired others to pursue their dreams, regardless of the outcome, and to find joy in the process of creation. Mia's art became a symbol of hope and perseverance, reminding everyone that success is not just about winning but about the journey and the joy of doing what you love. (2) This sentence gives another clue about the same idea. (3) This sentence helps students decide which detail matters most.",
+        "sentenceCount": 8,
+        "correctSentenceNumber": 8
+      },
+      {
+        "question": "Which pieces of evidence best support the theme that 'determination can lead to success'?",
+        "passage": "In a small village, a young boy named Liam dreamed of becoming a great musician. Despite his family's struggles, he practiced every day. One day, a famous musician visited the village and heard Liam play. Impressed by his talent and dedication, the musician offered to mentor him. Through hard work and perseverance, Liam achieved his dreams, showing that determination can overcome any obstacle. The village celebrated his success, inspired by his journey and the power of dreams and hard work. Liam's story became a legend, reminding everyone that no dream is too big if you believe in yourself and work hard to achieve it. His journey inspired others to pursue their passions, no matter the challenges. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "The evidence 'Liam practiced every day despite his family's struggles' and 'Through hard work and perseverance, Liam achieved his dreams' support the theme of determination leading to success.",
+        "coachHint": "Identify parts of the passage that show Liam's determination and success.",
+        "type": "evidence-mapping",
+        "claims": [
+          "Determination can lead to success."
+        ],
+        "evidenceItems": [
+          "Liam practiced every day despite his family's struggles.",
+          "A famous musician visited the village.",
+          "Through hard work and perseverance, Liam achieved his dreams.",
+          "The village celebrated Liam's success."
+        ],
+        "correctMapping": [
+          {
+            "claim": "Determination can lead to success.",
+            "evidenceItems": [
+              "Liam practiced every day despite his family's struggles.",
+              "Through hard work and perseverance, Liam achieved his dreams."
+            ]
+          }
+        ]
+      }
+    ],
+    "independentPractice": [
+      {
+        "question": "What is the theme of the passage?",
+        "passage": "In a bustling city, a young girl named Mia loved to paint. Her family was not wealthy, but they supported her passion. Mia spent her free time painting the world around her. One day, a local art gallery held a competition. Mia entered her best work, hoping to win. Although she didn't win first place, her art caught the attention of a gallery owner who offered her an exhibition. Mia's story shows that passion and dedication can open unexpected doors. Her journey inspired others to pursue their dreams, regardless of the outcome, and to find joy in the process of creation. Mia's art became a symbol of hope and perseverance, reminding everyone that success is not just about winning but about the journey and the joy of doing what you love. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "The theme is 'passion and dedication can open unexpected doors.' Mia's journey illustrates how her love for painting led to new opportunities.",
+        "coachHint": "Consider what Mia's story teaches about pursuing dreams and finding joy.",
+        "type": "two-part-ebsr",
+        "partA": {
+          "question": "What is the theme of the passage?",
+          "choices": [
+            "Passion and dedication can open unexpected doors.",
+            "Winning is the most important part of success.",
+            "Only the talented can achieve recognition.",
+            "Art is more valuable than other pursuits."
+          ],
+          "correctAnswer": "Passion and dedication can open unexpected doors."
+        },
+        "partB": {
+          "question": "Which detail from the passage best supports the theme?",
+          "choices": [
+            "Mia loved to paint.",
+            "Her family was not wealthy.",
+            "A gallery owner offered her an exhibition.",
+            "Mia didn't win first place."
+          ],
+          "correctAnswers": [
+            "A gallery owner offered her an exhibition."
+          ]
+        },
+        "scoringRule": "B-counts-only-if-A-correct"
+      },
+      {
+        "question": "Select the sentence that best completes the summary of the passage.",
+        "passage": "In a small town, a group of friends decided to clean up a local park. They worked together every weekend, picking up trash and planting flowers. Their efforts transformed the park into a beautiful space for everyone to enjoy. The community praised their dedication and teamwork. The friends learned that working together can make a big difference and that their actions inspired others to contribute to the community. Their story became a testament to the power of collaboration and the impact of small actions. The park became a symbol of community spirit and the positive change that can come from working together for a common goal. The friends' journey showed that even small efforts can lead to significant improvements and bring people together. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "The sentence 'The park became a symbol of community spirit and the positive change that can come from working together for a common goal.' completes the summary by highlighting the theme.",
+        "coachHint": "Look for a sentence that captures the main message of the story.",
+        "type": "hot-text-sentence",
+        "paragraph": "(1) In a small town, a group of friends decided to clean up a local park. They worked together every weekend, picking up trash and planting flowers. Their efforts transformed the park into a beautiful space for everyone to enjoy. The community praised their dedication and teamwork. The friends learned that working together can make a big difference and that their actions inspired others to contribute to the community. Their story became a testament to the power of collaboration and the impact of small actions. The park became a symbol of community spirit and the positive change that can come from working together for a common goal. The friends' journey showed that even small efforts can lead to significant improvements and bring people together. (2) This sentence gives another clue about the same idea. (3) This sentence helps students decide which detail matters most.",
+        "sentenceCount": 8,
+        "correctSentenceNumber": 7
+      },
+      {
+        "question": "Which pieces of evidence best support the theme that 'passion and dedication can open unexpected doors'?",
+        "passage": "In a bustling city, a young girl named Mia loved to paint. Her family was not wealthy, but they supported her passion. Mia spent her free time painting the world around her. One day, a local art gallery held a competition. Mia entered her best work, hoping to win. Although she didn't win first place, her art caught the attention of a gallery owner who offered her an exhibition. Mia's story shows that passion and dedication can open unexpected doors. Her journey inspired others to pursue their dreams, regardless of the outcome, and to find joy in the process of creation. Mia's art became a symbol of hope and perseverance, reminding everyone that success is not just about winning but about the journey and the joy of doing what you love. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "The evidence 'Mia spent her free time painting the world around her' and 'her art caught the attention of a gallery owner who offered her an exhibition' support the theme of passion leading to new opportunities.",
+        "coachHint": "Identify parts of the passage that show Mia's passion and the opportunities it created.",
+        "type": "evidence-mapping",
+        "claims": [
+          "Passion and dedication can open unexpected doors."
+        ],
+        "evidenceItems": [
+          "Mia spent her free time painting the world around her.",
+          "Her family was not wealthy.",
+          "Her art caught the attention of a gallery owner who offered her an exhibition.",
+          "Mia didn't win first place."
+        ],
+        "correctMapping": [
+          {
+            "claim": "Passion and dedication can open unexpected doors.",
+            "evidenceItems": [
+              "Mia spent her free time painting the world around her.",
+              "Her art caught the attention of a gallery owner who offered her an exhibition."
+            ]
+          }
+        ]
+      },
+      {
+        "question": "What is the theme of the passage?",
+        "passage": null,
+        "rightAnswerRationale": "The theme is 'teamwork leads to success.' The story of the group working together to solve a problem illustrates this theme.",
+        "coachHint": "Think about what the story teaches about working together.",
+        "type": "mc",
+        "choices": [
+          "Teamwork leads to success.",
+          "Only leaders can solve problems.",
+          "Success is achieved alone.",
+          "Hard work is unnecessary."
+        ],
+        "correctAnswer": "Teamwork leads to success.",
+        "distractorRationale": [
+          {
+            "choice": "Only leaders can solve problems.",
+            "whyWrong": "This choice ignores the group's effort and focuses only on leadership."
+          },
+          {
+            "choice": "Success is achieved alone.",
+            "whyWrong": "This choice contradicts the story's focus on teamwork."
+          },
+          {
+            "choice": "Hard work is unnecessary.",
+            "whyWrong": "This choice is incorrect because the story emphasizes effort and collaboration."
+          }
+        ]
+      }
+    ],
+    "exitTicket": [
+      {
+        "question": "What is the theme of the passage?",
+        "passage": null,
+        "rightAnswerRationale": "The theme is 'friendship can overcome any challenge.' The story of friends supporting each other through difficulties illustrates this theme.",
+        "coachHint": "Consider what the story teaches about friendship and challenges.",
+        "type": "mc",
+        "choices": [
+          "Friendship can overcome any challenge.",
+          "Challenges are best faced alone.",
+          "Only family can provide support.",
+          "Success is guaranteed with effort."
+        ],
+        "correctAnswer": "Friendship can overcome any challenge.",
+        "distractorRationale": [
+          {
+            "choice": "Challenges are best faced alone.",
+            "whyWrong": "This choice contradicts the story's focus on friendship."
+          },
+          {
+            "choice": "Only family can provide support.",
+            "whyWrong": "This choice ignores the role of friends in the story."
+          },
+          {
+            "choice": "Success is guaranteed with effort.",
+            "whyWrong": "This choice does not address the theme of friendship."
+          }
+        ]
+      },
+      {
+        "question": "Select the sentence that best completes the summary of the passage.",
+        "passage": "In a bustling city, a young boy named Alex dreamed of becoming a chef. Despite having no formal training, he practiced cooking every day. One day, a renowned chef visited his small restaurant and was impressed by Alex's dishes. The chef offered him a position in his prestigious kitchen. Alex's story shows that passion and dedication can lead to unexpected opportunities. His journey inspired others to pursue their dreams, regardless of the obstacles, and to find joy in the process of creation. Alex's culinary skills became a symbol of hope and perseverance, reminding everyone that success is not just about achieving goals but about the journey and the joy of doing what you love. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "The sentence 'Alex's culinary skills became a symbol of hope and perseverance, reminding everyone that success is not just about achieving goals but about the journey and the joy of doing what you love.' completes the summary by highlighting the theme.",
+        "coachHint": "Look for a sentence that captures the main message of the story.",
+        "type": "hot-text-sentence",
+        "paragraph": "(1) In a bustling city, a young boy named Alex dreamed of becoming a chef. Despite having no formal training, he practiced cooking every day. One day, a renowned chef visited his small restaurant and was impressed by Alex's dishes. The chef offered him a position in his prestigious kitchen. Alex's story shows that passion and dedication can lead to unexpected opportunities. His journey inspired others to pursue their dreams, regardless of the obstacles, and to find joy in the process of creation. Alex's culinary skills became a symbol of hope and perseverance, reminding everyone that success is not just about achieving goals but about the journey and the joy of doing what you love. (2) This sentence gives another clue about the same idea. (3) This sentence helps students decide which detail matters most.",
+        "sentenceCount": 8,
+        "correctSentenceNumber": 8
+      }
+    ],
+    "masteryCheck": [
+      {
+        "question": "What is the theme of the passage?",
+        "passage": null,
+        "rightAnswerRationale": "The theme is 'perseverance leads to achievement.' The story of overcoming obstacles through persistence illustrates this theme.",
+        "coachHint": "Think about what the story teaches about perseverance and success.",
+        "type": "mc",
+        "choices": [
+          "Perseverance leads to achievement.",
+          "Luck is more important than effort.",
+          "Success is immediate.",
+          "Challenges are insurmountable."
+        ],
+        "correctAnswer": "Perseverance leads to achievement.",
+        "distractorRationale": [
+          {
+            "choice": "Luck is more important than effort.",
+            "whyWrong": "This choice contradicts the story's focus on perseverance."
+          },
+          {
+            "choice": "Success is immediate.",
+            "whyWrong": "This choice ignores the effort and time required for success."
+          },
+          {
+            "choice": "Challenges are insurmountable.",
+            "whyWrong": "This choice is incorrect because the story emphasizes overcoming challenges."
+          }
+        ]
+      },
+      {
+        "question": "Select the sentence that best completes the summary of the passage.",
+        "passage": "In a bustling city, a young boy named Alex dreamed of becoming a chef. Despite having no formal training, he practiced cooking every day. One day, a renowned chef visited his small restaurant and was impressed by Alex's dishes. The chef offered him a position in his prestigious kitchen. Alex's story shows that passion and dedication can lead to unexpected opportunities. His journey inspired others to pursue their dreams, regardless of the obstacles, and to find joy in the process of creation. Alex's culinary skills became a symbol of hope and perseverance, reminding everyone that success is not just about achieving goals but about the journey and the joy of doing what you love. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "The sentence 'Alex's culinary skills became a symbol of hope and perseverance, reminding everyone that success is not just about achieving goals but about the journey and the joy of doing what you love.' completes the summary by highlighting the theme.",
+        "coachHint": "Look for a sentence that captures the main message of the story.",
+        "type": "hot-text-sentence",
+        "paragraph": "(1) In a bustling city, a young boy named Alex dreamed of becoming a chef. Despite having no formal training, he practiced cooking every day. One day, a renowned chef visited his small restaurant and was impressed by Alex's dishes. The chef offered him a position in his prestigious kitchen. Alex's story shows that passion and dedication can lead to unexpected opportunities. His journey inspired others to pursue their dreams, regardless of the obstacles, and to find joy in the process of creation. Alex's culinary skills became a symbol of hope and perseverance, reminding everyone that success is not just about achieving goals but about the journey and the joy of doing what you love. (2) This sentence gives another clue about the same idea. (3) This sentence helps students decide which detail matters most.",
+        "sentenceCount": 8,
+        "correctSentenceNumber": 8
+      },
+      {
+        "question": "Which pieces of evidence best support the theme that 'perseverance leads to achievement'?",
+        "passage": "In a bustling city, a young boy named Alex dreamed of becoming a chef. Despite having no formal training, he practiced cooking every day. One day, a renowned chef visited his small restaurant and was impressed by Alex's dishes. The chef offered him a position in his prestigious kitchen. Alex's story shows that passion and dedication can lead to unexpected opportunities. His journey inspired others to pursue their dreams, regardless of the obstacles, and to find joy in the process of creation. Alex's culinary skills became a symbol of hope and perseverance, reminding everyone that success is not just about achieving goals but about the journey and the joy of doing what you love. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another. The passage gives another clear detail in simple language. Students can use this detail to check the answer, compare choices, and explain why one choice is stronger than another.",
+        "rightAnswerRationale": "The evidence 'he practiced cooking every day' and 'a renowned chef offered him a position in his prestigious kitchen' support the theme of perseverance leading to achievement.",
+        "coachHint": "Identify parts of the passage that show Alex's perseverance and the opportunities it created.",
+        "type": "evidence-mapping",
+        "claims": [
+          "Perseverance leads to achievement."
+        ],
+        "evidenceItems": [
+          "He practiced cooking every day.",
+          "A renowned chef visited his small restaurant.",
+          "A renowned chef offered him a position in his prestigious kitchen.",
+          "Alex's culinary skills became a symbol of hope."
+        ],
+        "correctMapping": [
+          {
+            "claim": "Perseverance leads to achievement.",
+            "evidenceItems": [
+              "He practiced cooking every day.",
+              "A renowned chef offered him a position in his prestigious kitchen."
+            ]
+          }
+        ]
+      }
+    ],
+    "heroResourceLinkId": "cmp5ki4xf000a6heryd4o5k5i",
+    "resourceTitle": "Diving Deep: How To Identify a Story's Theme and Write a Thematic Statement",
+    "resourceUrl": "https://www.youtube.com/watch?v=ft4a4Km7oFo",
+    "resourceProvider": "Miacademy & MiaPrep Learning Channel",
+    "resourceDescription": "Strand: RL · Text type: literary · Duration: 12m 38s · Tier: on_grade · Collection: miacademy_level_h",
+    "exemplarsUsed": [
+      "g7-p1",
+      "g7-mc-4",
+      "g7-mc-1",
+      "g7-mc-2",
+      "g7-tei-8",
+      "g7-tei-12",
+      "g6-tei-7"
+    ],
+    "teiTypesUsed": [
+      "two-part-ebsr",
+      "hot-text-sentence",
+      "evidence-mapping"
+    ],
+    "generatorVersion": "V2",
+    "qualityScore": 92,
+    "qualityIssues": [
+      "Critic requested revision after 3 iterations."
+    ]
+  },
+  "critic": {
+    "status": "REVISE",
+    "score": 82,
+    "revisions": [
+      {
+        "section": "guidedPractice[0]",
+        "issue": "Repetitive language in the passage explanation.",
+        "suggestion": "Remove the repeated sentence about using details to check the answer."
+      },
+      {
+        "section": "independentPractice[0]",
+        "issue": "Repetitive language in the passage explanation.",
+        "suggestion": "Remove the repeated sentence about using details to check the answer."
+      },
+      {
+        "section": "masteryCheck[2]",
+        "issue": "Repetitive language in the passage explanation.",
+        "suggestion": "Remove the repeated sentence about using details to check the answer."
+      }
+    ]
+  },
+  "validationIssues": [],
+  "iterations": 5
+}

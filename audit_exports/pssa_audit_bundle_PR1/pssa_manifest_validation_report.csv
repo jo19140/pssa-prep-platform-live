@@ -1,0 +1,6 @@
+fileName,manifestCount,actualCount,result,notes
+pssa_diagnostic_items.jsonl,1344,1344,PASS,Manifest count matches file count.
+pssa_lessons.jsonl,210,210,PASS,Manifest count matches file count.
+pssa_passages.jsonl,101,101,PASS,Manifest count matches file count.
+pssa_standards_alignment.csv,317,317,PASS,Manifest count matches file count.
+pssa_student_preview.md,36,36,PASS,Manifest count matches file count.

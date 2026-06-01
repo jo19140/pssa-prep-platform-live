@@ -1,0 +1,1345 @@
+source,grade,assessmentId,assessmentTitle,questionNo,itemId,standardCode,skill,questionType,difficulty,passageId,hasBackendAnswer
+generated,3,generated-pssa-ela-grade-3,Grade 3 PSSA ELA Diagnostic,1,30001,CC.1.4.3.F1,Grammar,CONVENTIONS,2,conventions,yes
+generated,3,generated-pssa-ela-grade-3,Grade 3 PSSA ELA Diagnostic,2,30002,CC.1.4.3.F2,Punctuation,DRAG_DROP,2,conventions,yes
+generated,3,generated-pssa-ela-grade-3,Grade 3 PSSA ELA Diagnostic,3,30003,CC.1.4.3.F3,Capitalization,HOT_TEXT,2,conventions,yes
+generated,3,generated-pssa-ela-grade-3,Grade 3 PSSA ELA Diagnostic,4,30004,CC.1.4.3.F4,Sentence Structure,CONVENTIONS,2,conventions,yes
+generated,3,generated-pssa-ela-grade-3,Grade 3 PSSA ELA Diagnostic,5,30005,CC.1.4.3.F5,Verb Tense,CONVENTIONS,3,conventions,yes
+generated,3,generated-pssa-ela-grade-3,Grade 3 PSSA ELA Diagnostic,6,30006,CC.1.4.3.F6,Pronoun Usage,MULTI_SELECT,3,conventions,yes
+generated,3,generated-pssa-ela-grade-3,Grade 3 PSSA ELA Diagnostic,7,30007,CC.1.4.3.F7,Commas,CONVENTIONS,3,conventions,yes
+generated,3,generated-pssa-ela-grade-3,Grade 3 PSSA ELA Diagnostic,8,30008,CC.1.4.3.F8,Apostrophes,CONVENTIONS,3,conventions,yes
+generated,3,generated-pssa-ela-grade-3,Grade 3 PSSA ELA Diagnostic,9,30009,CC.1.4.3.F9,Subject-Verb Agreement,DRAG_DROP,3,conventions,yes
+generated,3,generated-pssa-ela-grade-3,Grade 3 PSSA ELA Diagnostic,10,30010,CC.1.2.3.A,Main Idea,MCQ,2,informational,yes
+generated,3,generated-pssa-ela-grade-3,Grade 3 PSSA ELA Diagnostic,11,30011,CC.1.2.3.B,Inference,MCQ,2,informational,yes
+generated,3,generated-pssa-ela-grade-3,Grade 3 PSSA ELA Diagnostic,12,30012,CC.1.2.3.C,Text Structure,EBSR,2,informational,yes
+generated,3,generated-pssa-ela-grade-3,Grade 3 PSSA ELA Diagnostic,13,30013,CC.1.3.3.A,Theme,MCQ,2,literary,yes
+generated,3,generated-pssa-ela-grade-3,Grade 3 PSSA ELA Diagnostic,14,30014,CC.1.3.3.B,Literary Inference,MCQ,3,literary,yes
+generated,3,generated-pssa-ela-grade-3,Grade 3 PSSA ELA Diagnostic,15,30015,CC.1.3.3.C,Setting,MCQ,3,literary,yes
+generated,3,generated-pssa-ela-grade-3,Grade 3 PSSA ELA Diagnostic,16,30016,CC.1.2.3.A,Main Idea,MCQ,3,paired,yes
+generated,3,generated-pssa-ela-grade-3,Grade 3 PSSA ELA Diagnostic,17,30017,CC.1.2.3.B,Inference,MCQ,3,paired,yes
+generated,3,generated-pssa-ela-grade-3,Grade 3 PSSA ELA Diagnostic,18,30018,CC.1.3.3.C / CC.1.2.3.E,Point of View,MCQ,3,paired,yes
+generated,3,generated-pssa-ela-grade-3,Grade 3 PSSA ELA Diagnostic,19,30019,CC.1.2.3.B,Short Answer Reading Response,SHORT_RESPONSE,3,informational,yes
+generated,3,generated-pssa-ela-grade-3,Grade 3 PSSA ELA Diagnostic,20,30020,CC.1.2.3.A,Main Idea,MCQ,4,table,yes
+generated,3,generated-pssa-ela-grade-3,Grade 3 PSSA ELA Diagnostic,21,30021,CC.1.2.3.B,Inference,MCQ,4,table,yes
+generated,3,generated-pssa-ela-grade-3,Grade 3 PSSA ELA Diagnostic,22,30022,CC.1.2.3.C,Text Structure,EBSR,4,table,yes
+generated,3,generated-pssa-ela-grade-3,Grade 3 PSSA ELA Diagnostic,23,30023,CC.1.2.3.D,Vocabulary,MCQ,4,table,yes
+generated,3,generated-pssa-ela-grade-3,Grade 3 PSSA ELA Diagnostic,24,30024,CC.1.3.3.C / CC.1.2.3.E,Point of View,DRAG_DROP,4,table,yes
+generated,3,generated-pssa-ela-grade-3,Grade 3 PSSA ELA Diagnostic,25,30025,CC.1.2.3.B,Inference,MCQ,4,table,yes
+generated,3,generated-pssa-ela-grade-3,Grade 3 PSSA ELA Diagnostic,26,30026,CC.1.2.3.A,Main Idea,HOT_TEXT,4,table,yes
+generated,3,generated-pssa-ela-grade-3,Grade 3 PSSA ELA Diagnostic,27,30027,CC.1.2.3.B,Inference,MCQ,4,table,yes
+generated,3,generated-pssa-ela-grade-3,Grade 3 PSSA ELA Diagnostic,28,30028,CC.1.2.3.C,Text Structure,MULTI_SELECT,4,table,yes
+generated,3,generated-pssa-ela-grade-3,Grade 3 PSSA ELA Diagnostic,29,30029,CC.1.2.3.D,Vocabulary,MCQ,4,table,yes
+generated,3,generated-pssa-ela-grade-3,Grade 3 PSSA ELA Diagnostic,30,30030,CC.1.2.3.B,Short Answer Reading Response,SHORT_RESPONSE,3,literary,yes
+generated,3,generated-pssa-ela-grade-3,Grade 3 PSSA ELA Diagnostic,31,30031,CC.1.2.3.A,Main Idea,MCQ,4,paired,yes
+generated,3,generated-pssa-ela-grade-3,Grade 3 PSSA ELA Diagnostic,32,30032,CC.1.2.3.B,Inference,MCQ,4,paired,yes
+generated,3,generated-pssa-ela-grade-3,Grade 3 PSSA ELA Diagnostic,33,30033,CC.1.3.3.C / CC.1.2.3.E,Point of View,MCQ,4,paired,yes
+generated,3,generated-pssa-ela-grade-3,Grade 3 PSSA ELA Diagnostic,34,30034,CC.1.2.3.C,Text Structure,MCQ,4,paired,yes
+generated,3,generated-pssa-ela-grade-3,Grade 3 PSSA ELA Diagnostic,35,30035,CC.1.2.3.D,Vocabulary,DRAG_DROP,4,paired,yes
+generated,3,generated-pssa-ela-grade-3,Grade 3 PSSA ELA Diagnostic,36,30036,CC.1.2.3.B,Inference,MCQ,4,paired,yes
+generated,3,generated-pssa-ela-grade-3,Grade 3 PSSA ELA Diagnostic,37,30037,CC.1.2.3.A,Main Idea,HOT_TEXT,4,paired,yes
+generated,3,generated-pssa-ela-grade-3,Grade 3 PSSA ELA Diagnostic,38,30038,CC.1.2.3.B,Inference,MCQ,4,paired,yes
+generated,3,generated-pssa-ela-grade-3,Grade 3 PSSA ELA Diagnostic,39,30039,CC.1.3.3.C / CC.1.2.3.E,Point of View,MULTI_SELECT,4,paired,yes
+generated,3,generated-pssa-ela-grade-3,Grade 3 PSSA ELA Diagnostic,40,30040,CC.1.2.3.C,Text Structure,MCQ,4,paired,yes
+generated,3,generated-pssa-ela-grade-3,Grade 3 PSSA ELA Diagnostic,41,30041,CC.1.2.3.A,Main Idea,MCQ,4,table,yes
+generated,3,generated-pssa-ela-grade-3,Grade 3 PSSA ELA Diagnostic,42,30042,CC.1.2.3.B,Inference,MCQ,4,table,yes
+generated,3,generated-pssa-ela-grade-3,Grade 3 PSSA ELA Diagnostic,43,30043,CC.1.2.3.C,Text Structure,EBSR,4,table,yes
+generated,3,generated-pssa-ela-grade-3,Grade 3 PSSA ELA Diagnostic,44,30044,CC.1.2.3.D,Vocabulary,MCQ,4,table,yes
+generated,3,generated-pssa-ela-grade-3,Grade 3 PSSA ELA Diagnostic,45,30045,CC.1.3.3.C / CC.1.2.3.E,Point of View,DRAG_DROP,4,table,yes
+generated,3,generated-pssa-ela-grade-3,Grade 3 PSSA ELA Diagnostic,46,30046,CC.1.2.3.B,Inference,MCQ,4,table,yes
+generated,3,generated-pssa-ela-grade-3,Grade 3 PSSA ELA Diagnostic,47,30047,CC.1.2.3.A,Main Idea,HOT_TEXT,4,table,yes
+generated,3,generated-pssa-ela-grade-3,Grade 3 PSSA ELA Diagnostic,48,30048,CC.1.2.3.B,Inference,MCQ,4,table,yes
+generated,3,generated-pssa-ela-grade-3,Grade 3 PSSA ELA Diagnostic,49,30049,CC.1.2.3.C,Text Structure,MULTI_SELECT,4,table,yes
+generated,3,generated-pssa-ela-grade-3,Grade 3 PSSA ELA Diagnostic,50,30050,CC.1.2.3.B,Short Answer Reading Response,SHORT_RESPONSE,3,paired,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,1,40001,CC.1.4.4.F1,Grammar,CONVENTIONS,2,conventions,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,2,40002,CC.1.4.4.F2,Punctuation,DRAG_DROP,2,conventions,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,3,40003,CC.1.4.4.F3,Capitalization,HOT_TEXT,2,conventions,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,4,40004,CC.1.4.4.F4,Sentence Structure,CONVENTIONS,2,conventions,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,5,40005,CC.1.4.4.F5,Verb Tense,CONVENTIONS,3,conventions,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,6,40006,CC.1.4.4.F6,Pronoun Usage,MULTI_SELECT,3,conventions,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,7,40007,CC.1.4.4.F7,Commas,CONVENTIONS,3,conventions,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,8,40008,CC.1.4.4.F8,Apostrophes,CONVENTIONS,3,conventions,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,9,40009,CC.1.4.4.F9,Subject-Verb Agreement,DRAG_DROP,3,conventions,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,10,40010,CC.1.2.4.A,Main Idea,MCQ,2,informational,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,11,40011,CC.1.2.4.B,Inference,MCQ,2,informational,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,12,40012,CC.1.2.4.C,Text Structure,EBSR,2,informational,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,13,40013,CC.1.2.4.D,Vocabulary,MCQ,2,informational,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,14,40014,CC.1.3.4.C,Point of View,DRAG_DROP,3,informational,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,15,40015,CC.1.2.4.B,Inference,MCQ,3,informational,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,16,40016,CC.1.2.4.A,Main Idea,HOT_TEXT,3,informational,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,17,40017,CC.1.3.4.A,Theme,MCQ,3,literary,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,18,40018,CC.1.3.4.B,Literary Inference,MCQ,3,literary,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,19,40019,CC.1.3.4.C,Setting,MCQ,4,literary,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,20,40020,CC.1.3.4.H,Plot Development,MCQ,4,literary,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,21,40021,CC.1.3.4.C,Point of View,DRAG_DROP,4,literary,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,22,40022,CC.1.3.4.F / CC.1.2.4.F,Figurative Language,MCQ,4,literary,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,23,40023,CC.1.3.4.E,Flashback,HOT_TEXT,4,literary,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,24,40024,CC.1.2.4.A,Main Idea,MCQ,4,paired,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,25,40025,CC.1.2.4.B,Inference,MCQ,4,paired,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,26,40026,CC.1.3.4.C,Point of View,MCQ,4,paired,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,27,40027,CC.1.2.4.C,Text Structure,MCQ,4,paired,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,28,40028,CC.1.2.4.D,Vocabulary,DRAG_DROP,4,paired,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,29,40029,CC.1.2.4.B,Inference,MCQ,4,paired,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,30,40030,CC.1.2.4.A,Main Idea,MCQ,4,table,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,31,40031,CC.1.2.4.B,Inference,MCQ,4,table,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,32,40032,CC.1.2.4.C,Text Structure,EBSR,4,table,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,33,40033,CC.1.2.4.D,Vocabulary,MCQ,4,table,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,34,40034,CC.1.3.4.C,Point of View,DRAG_DROP,4,table,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,35,40035,CC.1.2.4.B,Inference,MCQ,4,table,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,36,40036,CC.1.2.4.A,Main Idea,HOT_TEXT,4,table,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,37,40037,CC.1.2.4.B,Inference,MCQ,4,table,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,38,40038,CC.1.2.4.C,Text Structure,MULTI_SELECT,4,table,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,39,40039,CC.1.2.4.D,Vocabulary,MCQ,4,table,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,40,40040,CC.1.4.4.S,TDA Writing,TDA,4,table,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,41,40041,CC.1.3.4.A,Theme,MCQ,4,literary,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,42,40042,CC.1.3.4.B,Literary Inference,MCQ,4,literary,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,43,40043,CC.1.3.4.C,Setting,MCQ,4,literary,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,44,40044,CC.1.3.4.H,Plot Development,MCQ,4,literary,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,45,40045,CC.1.3.4.C,Point of View,DRAG_DROP,4,literary,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,46,40046,CC.1.3.4.F / CC.1.2.4.F,Figurative Language,MCQ,4,literary,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,47,40047,CC.1.3.4.E,Flashback,HOT_TEXT,4,literary,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,48,40048,CC.1.3.4.D,Literary Vocabulary,MCQ,4,literary,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,49,40049,CC.1.3.4.A,Theme,MULTI_SELECT,4,literary,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,50,40050,CC.1.3.4.B,Literary Inference,MCQ,4,literary,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,51,40051,CC.1.3.4.C,Setting,MCQ,4,literary,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,52,40052,CC.1.3.4.H,Plot Development,MCQ,4,literary,yes
+generated,4,generated-pssa-ela-grade-4,Grade 4 PSSA ELA Diagnostic,53,40053,CC.1.4.4.S,TDA Writing,TDA,4,literary,yes
+generated,5,generated-pssa-ela-grade-5,Grade 5 PSSA ELA Diagnostic,1,50001,CC.1.4.5.F1,Grammar,CONVENTIONS,2,conventions,yes
+generated,5,generated-pssa-ela-grade-5,Grade 5 PSSA ELA Diagnostic,2,50002,CC.1.4.5.F2,Punctuation,DRAG_DROP,2,conventions,yes
+generated,5,generated-pssa-ela-grade-5,Grade 5 PSSA ELA Diagnostic,3,50003,CC.1.4.5.F3,Capitalization,HOT_TEXT,2,conventions,yes
+generated,5,generated-pssa-ela-grade-5,Grade 5 PSSA ELA Diagnostic,4,50004,CC.1.4.5.F4,Sentence Structure,CONVENTIONS,2,conventions,yes
+generated,5,generated-pssa-ela-grade-5,Grade 5 PSSA ELA Diagnostic,5,50005,CC.1.4.5.F5,Verb Tense,CONVENTIONS,3,conventions,yes
+generated,5,generated-pssa-ela-grade-5,Grade 5 PSSA ELA Diagnostic,6,50006,CC.1.4.5.F6,Pronoun Usage,MULTI_SELECT,3,conventions,yes
+generated,5,generated-pssa-ela-grade-5,Grade 5 PSSA ELA Diagnostic,7,50007,CC.1.4.5.F7,Commas,CONVENTIONS,3,conventions,yes
+generated,5,generated-pssa-ela-grade-5,Grade 5 PSSA ELA Diagnostic,8,50008,CC.1.4.5.F8,Apostrophes,CONVENTIONS,3,conventions,yes
+generated,5,generated-pssa-ela-grade-5,Grade 5 PSSA ELA Diagnostic,9,50009,CC.1.4.5.F9,Subject-Verb Agreement,DRAG_DROP,3,conventions,yes
+generated,5,generated-pssa-ela-grade-5,Grade 5 PSSA ELA Diagnostic,10,50010,CC.1.2.5.A,Main Idea,MCQ,2,informational,yes
+generated,5,generated-pssa-ela-grade-5,Grade 5 PSSA ELA Diagnostic,11,50011,CC.1.2.5.B,Inference,MCQ,2,informational,yes
+generated,5,generated-pssa-ela-grade-5,Grade 5 PSSA ELA Diagnostic,12,50012,CC.1.2.5.C,Text Structure,EBSR,2,informational,yes
+generated,5,generated-pssa-ela-grade-5,Grade 5 PSSA ELA Diagnostic,13,50013,CC.1.2.5.D,Vocabulary,MCQ,2,informational,yes
+generated,5,generated-pssa-ela-grade-5,Grade 5 PSSA ELA Diagnostic,14,50014,CC.1.3.5.C,Point of View,DRAG_DROP,3,informational,yes
+generated,5,generated-pssa-ela-grade-5,Grade 5 PSSA ELA Diagnostic,15,50015,CC.1.2.5.B,Inference,MCQ,3,informational,yes
+generated,5,generated-pssa-ela-grade-5,Grade 5 PSSA ELA Diagnostic,16,50016,CC.1.2.5.A,Main Idea,HOT_TEXT,3,informational,yes
+generated,5,generated-pssa-ela-grade-5,Grade 5 PSSA ELA Diagnostic,17,50017,CC.1.3.5.A,Theme,MCQ,3,literary,yes
+generated,5,generated-pssa-ela-grade-5,Grade 5 PSSA ELA Diagnostic,18,50018,CC.1.3.5.B,Literary Inference,MCQ,3,literary,yes
+generated,5,generated-pssa-ela-grade-5,Grade 5 PSSA ELA Diagnostic,19,50019,CC.1.3.5.C,Setting,MCQ,4,literary,yes
+generated,5,generated-pssa-ela-grade-5,Grade 5 PSSA ELA Diagnostic,20,50020,CC.1.3.5.H,Plot Development,MCQ,4,literary,yes
+generated,5,generated-pssa-ela-grade-5,Grade 5 PSSA ELA Diagnostic,21,50021,CC.1.3.5.C,Point of View,DRAG_DROP,4,literary,yes
+generated,5,generated-pssa-ela-grade-5,Grade 5 PSSA ELA Diagnostic,22,50022,CC.1.3.5.F / CC.1.2.5.F,Figurative Language,MCQ,4,literary,yes
+generated,5,generated-pssa-ela-grade-5,Grade 5 PSSA ELA Diagnostic,23,50023,CC.1.3.5.E,Flashback,HOT_TEXT,4,literary,yes
+generated,5,generated-pssa-ela-grade-5,Grade 5 PSSA ELA Diagnostic,24,50024,CC.1.2.5.A,Main Idea,MCQ,4,paired,yes
+generated,5,generated-pssa-ela-grade-5,Grade 5 PSSA ELA Diagnostic,25,50025,CC.1.2.5.B,Inference,MCQ,4,paired,yes
+generated,5,generated-pssa-ela-grade-5,Grade 5 PSSA ELA Diagnostic,26,50026,CC.1.3.5.C,Point of View,MCQ,4,paired,yes
+generated,5,generated-pssa-ela-grade-5,Grade 5 PSSA ELA Diagnostic,27,50027,CC.1.2.5.C,Text Structure,MCQ,4,paired,yes
+generated,5,generated-pssa-ela-grade-5,Grade 5 PSSA ELA Diagnostic,28,50028,CC.1.2.5.D,Vocabulary,DRAG_DROP,4,paired,yes
+generated,5,generated-pssa-ela-grade-5,Grade 5 PSSA ELA Diagnostic,29,50029,CC.1.2.5.B,Inference,MCQ,4,paired,yes
+generated,5,generated-pssa-ela-grade-5,Grade 5 PSSA ELA Diagnostic,30,50030,CC.1.2.5.A,Main Idea,HOT_TEXT,4,paired,yes
+generated,5,generated-pssa-ela-grade-5,Grade 5 PSSA ELA Diagnostic,31,50031,CC.1.2.5.A,Main Idea,MCQ,4,table,yes
+generated,5,generated-pssa-ela-grade-5,Grade 5 PSSA ELA Diagnostic,32,50032,CC.1.2.5.B,Inference,MCQ,4,table,yes
+generated,5,generated-pssa-ela-grade-5,Grade 5 PSSA ELA Diagnostic,33,50033,CC.1.2.5.C,Text Structure,EBSR,4,table,yes
+generated,5,generated-pssa-ela-grade-5,Grade 5 PSSA ELA Diagnostic,34,50034,CC.1.2.5.D,Vocabulary,MCQ,4,table,yes
+generated,5,generated-pssa-ela-grade-5,Grade 5 PSSA ELA Diagnostic,35,50035,CC.1.3.5.C,Point of View,DRAG_DROP,4,table,yes
+generated,5,generated-pssa-ela-grade-5,Grade 5 PSSA ELA Diagnostic,36,50036,CC.1.2.5.B,Inference,MCQ,4,table,yes
+generated,5,generated-pssa-ela-grade-5,Grade 5 PSSA ELA Diagnostic,37,50037,CC.1.2.5.A,Main Idea,HOT_TEXT,4,table,yes
+generated,5,generated-pssa-ela-grade-5,Grade 5 PSSA ELA Diagnostic,38,50038,CC.1.2.5.B,Inference,MCQ,4,table,yes
+generated,5,generated-pssa-ela-grade-5,Grade 5 PSSA ELA Diagnostic,39,50039,CC.1.2.5.C,Text Structure,MULTI_SELECT,4,table,yes
+generated,5,generated-pssa-ela-grade-5,Grade 5 PSSA ELA Diagnostic,40,50040,CC.1.2.5.D,Vocabulary,MCQ,4,table,yes
+generated,5,generated-pssa-ela-grade-5,Grade 5 PSSA ELA Diagnostic,41,50041,CC.1.4.5.S,TDA Writing,TDA,4,table,yes
+generated,5,generated-pssa-ela-grade-5,Grade 5 PSSA ELA Diagnostic,42,50042,CC.1.3.5.A,Theme,MCQ,4,literary,yes
+generated,5,generated-pssa-ela-grade-5,Grade 5 PSSA ELA Diagnostic,43,50043,CC.1.3.5.B,Literary Inference,MCQ,4,literary,yes
+generated,5,generated-pssa-ela-grade-5,Grade 5 PSSA ELA Diagnostic,44,50044,CC.1.3.5.C,Setting,MCQ,4,literary,yes
+generated,5,generated-pssa-ela-grade-5,Grade 5 PSSA ELA Diagnostic,45,50045,CC.1.3.5.H,Plot Development,MCQ,4,literary,yes
+generated,5,generated-pssa-ela-grade-5,Grade 5 PSSA ELA Diagnostic,46,50046,CC.1.3.5.C,Point of View,DRAG_DROP,4,literary,yes
+generated,5,generated-pssa-ela-grade-5,Grade 5 PSSA ELA Diagnostic,47,50047,CC.1.3.5.F / CC.1.2.5.F,Figurative Language,MCQ,4,literary,yes
+generated,5,generated-pssa-ela-grade-5,Grade 5 PSSA ELA Diagnostic,48,50048,CC.1.3.5.E,Flashback,HOT_TEXT,4,literary,yes
+generated,5,generated-pssa-ela-grade-5,Grade 5 PSSA ELA Diagnostic,49,50049,CC.1.3.5.D,Literary Vocabulary,MCQ,4,literary,yes
+generated,5,generated-pssa-ela-grade-5,Grade 5 PSSA ELA Diagnostic,50,50050,CC.1.3.5.A,Theme,MULTI_SELECT,4,literary,yes
+generated,5,generated-pssa-ela-grade-5,Grade 5 PSSA ELA Diagnostic,51,50051,CC.1.3.5.B,Literary Inference,MCQ,4,literary,yes
+generated,5,generated-pssa-ela-grade-5,Grade 5 PSSA ELA Diagnostic,52,50052,CC.1.3.5.C,Setting,MCQ,4,literary,yes
+generated,5,generated-pssa-ela-grade-5,Grade 5 PSSA ELA Diagnostic,53,50053,CC.1.3.5.H,Plot Development,MCQ,4,literary,yes
+generated,5,generated-pssa-ela-grade-5,Grade 5 PSSA ELA Diagnostic,54,50054,CC.1.4.5.S,TDA Writing,TDA,4,literary,yes
+generated,6,generated-pssa-ela-grade-6,Grade 6 PSSA ELA Diagnostic,1,60001,CC.1.4.6.F1,Grammar,CONVENTIONS,2,conventions,yes
+generated,6,generated-pssa-ela-grade-6,Grade 6 PSSA ELA Diagnostic,2,60002,CC.1.4.6.F2,Punctuation,DRAG_DROP,2,conventions,yes
+generated,6,generated-pssa-ela-grade-6,Grade 6 PSSA ELA Diagnostic,3,60003,CC.1.4.6.F3,Capitalization,HOT_TEXT,2,conventions,yes
+generated,6,generated-pssa-ela-grade-6,Grade 6 PSSA ELA Diagnostic,4,60004,CC.1.4.6.F4,Sentence Structure,CONVENTIONS,2,conventions,yes
+generated,6,generated-pssa-ela-grade-6,Grade 6 PSSA ELA Diagnostic,5,60005,CC.1.4.6.F5,Verb Tense,CONVENTIONS,3,conventions,yes
+generated,6,generated-pssa-ela-grade-6,Grade 6 PSSA ELA Diagnostic,6,60006,CC.1.4.6.F6,Pronoun Usage,MULTI_SELECT,3,conventions,yes
+generated,6,generated-pssa-ela-grade-6,Grade 6 PSSA ELA Diagnostic,7,60007,CC.1.4.6.F7,Commas,CONVENTIONS,3,conventions,yes
+generated,6,generated-pssa-ela-grade-6,Grade 6 PSSA ELA Diagnostic,8,60008,CC.1.4.6.F8,Apostrophes,CONVENTIONS,3,conventions,yes
+generated,6,generated-pssa-ela-grade-6,Grade 6 PSSA ELA Diagnostic,9,60009,CC.1.4.6.F9,Subject-Verb Agreement,DRAG_DROP,3,conventions,yes
+generated,6,generated-pssa-ela-grade-6,Grade 6 PSSA ELA Diagnostic,10,60010,CC.1.2.6.A,Main Idea,MCQ,2,informational,yes
+generated,6,generated-pssa-ela-grade-6,Grade 6 PSSA ELA Diagnostic,11,60011,CC.1.2.6.B,Inference,MCQ,2,informational,yes
+generated,6,generated-pssa-ela-grade-6,Grade 6 PSSA ELA Diagnostic,12,60012,CC.1.2.6.C,Text Structure,EBSR,2,informational,yes
+generated,6,generated-pssa-ela-grade-6,Grade 6 PSSA ELA Diagnostic,13,60013,CC.1.2.6.D,Vocabulary,MCQ,2,informational,yes
+generated,6,generated-pssa-ela-grade-6,Grade 6 PSSA ELA Diagnostic,14,60014,CC.1.3.6.G,Point of View,DRAG_DROP,3,informational,yes
+generated,6,generated-pssa-ela-grade-6,Grade 6 PSSA ELA Diagnostic,15,60015,CC.1.2.6.B,Inference,MCQ,3,informational,yes
+generated,6,generated-pssa-ela-grade-6,Grade 6 PSSA ELA Diagnostic,16,60016,CC.1.2.6.A,Main Idea,HOT_TEXT,3,informational,yes
+generated,6,generated-pssa-ela-grade-6,Grade 6 PSSA ELA Diagnostic,17,60017,CC.1.2.6.B,Inference,MCQ,3,informational,yes
+generated,6,generated-pssa-ela-grade-6,Grade 6 PSSA ELA Diagnostic,18,60018,CC.1.3.6.A,Theme,MCQ,3,literary,yes
+generated,6,generated-pssa-ela-grade-6,Grade 6 PSSA ELA Diagnostic,19,60019,CC.1.3.6.B,Literary Inference,MCQ,4,literary,yes
+generated,6,generated-pssa-ela-grade-6,Grade 6 PSSA ELA Diagnostic,20,60020,CC.1.3.6.C,Setting Impact,MCQ,4,literary,yes
+generated,6,generated-pssa-ela-grade-6,Grade 6 PSSA ELA Diagnostic,21,60021,CC.1.3.6.C,Plot Development,MCQ,4,literary,yes
+generated,6,generated-pssa-ela-grade-6,Grade 6 PSSA ELA Diagnostic,22,60022,CC.1.3.6.G,Point of View,DRAG_DROP,4,literary,yes
+generated,6,generated-pssa-ela-grade-6,Grade 6 PSSA ELA Diagnostic,23,60023,CC.1.3.6.F / CC.1.2.6.F,Figurative Language,MCQ,4,literary,yes
+generated,6,generated-pssa-ela-grade-6,Grade 6 PSSA ELA Diagnostic,24,60024,CC.1.3.6.E,Flashback,HOT_TEXT,4,literary,yes
+generated,6,generated-pssa-ela-grade-6,Grade 6 PSSA ELA Diagnostic,25,60025,CC.1.2.6.A,Main Idea,MCQ,4,paired,yes
+generated,6,generated-pssa-ela-grade-6,Grade 6 PSSA ELA Diagnostic,26,60026,CC.1.2.6.B,Inference,MCQ,4,paired,yes
+generated,6,generated-pssa-ela-grade-6,Grade 6 PSSA ELA Diagnostic,27,60027,CC.1.3.6.G,Point of View,MCQ,4,paired,yes
+generated,6,generated-pssa-ela-grade-6,Grade 6 PSSA ELA Diagnostic,28,60028,CC.1.2.6.C,Text Structure,MCQ,4,paired,yes
+generated,6,generated-pssa-ela-grade-6,Grade 6 PSSA ELA Diagnostic,29,60029,CC.1.2.6.D,Vocabulary,DRAG_DROP,4,paired,yes
+generated,6,generated-pssa-ela-grade-6,Grade 6 PSSA ELA Diagnostic,30,60030,CC.1.2.6.B,Inference,MCQ,4,paired,yes
+generated,6,generated-pssa-ela-grade-6,Grade 6 PSSA ELA Diagnostic,31,60031,CC.1.2.6.A,Main Idea,HOT_TEXT,4,paired,yes
+generated,6,generated-pssa-ela-grade-6,Grade 6 PSSA ELA Diagnostic,32,60032,CC.1.2.6.A,Main Idea,MCQ,4,table,yes
+generated,6,generated-pssa-ela-grade-6,Grade 6 PSSA ELA Diagnostic,33,60033,CC.1.2.6.B,Inference,MCQ,4,table,yes
+generated,6,generated-pssa-ela-grade-6,Grade 6 PSSA ELA Diagnostic,34,60034,CC.1.2.6.C,Text Structure,EBSR,4,table,yes
+generated,6,generated-pssa-ela-grade-6,Grade 6 PSSA ELA Diagnostic,35,60035,CC.1.2.6.D,Vocabulary,MCQ,4,table,yes
+generated,6,generated-pssa-ela-grade-6,Grade 6 PSSA ELA Diagnostic,36,60036,CC.1.3.6.G,Point of View,DRAG_DROP,4,table,yes
+generated,6,generated-pssa-ela-grade-6,Grade 6 PSSA ELA Diagnostic,37,60037,CC.1.2.6.B,Inference,MCQ,4,table,yes
+generated,6,generated-pssa-ela-grade-6,Grade 6 PSSA ELA Diagnostic,38,60038,CC.1.2.6.A,Main Idea,HOT_TEXT,4,table,yes
+generated,6,generated-pssa-ela-grade-6,Grade 6 PSSA ELA Diagnostic,39,60039,CC.1.2.6.B,Inference,MCQ,4,table,yes
+generated,6,generated-pssa-ela-grade-6,Grade 6 PSSA ELA Diagnostic,40,60040,CC.1.2.6.C,Text Structure,MULTI_SELECT,4,table,yes
+generated,6,generated-pssa-ela-grade-6,Grade 6 PSSA ELA Diagnostic,41,60041,CC.1.2.6.D,Vocabulary,MCQ,4,table,yes
+generated,6,generated-pssa-ela-grade-6,Grade 6 PSSA ELA Diagnostic,42,60042,CC.1.4.6.S,TDA Writing,TDA,4,table,yes
+generated,6,generated-pssa-ela-grade-6,Grade 6 PSSA ELA Diagnostic,43,60043,CC.1.3.6.A,Theme,MCQ,4,literary,yes
+generated,6,generated-pssa-ela-grade-6,Grade 6 PSSA ELA Diagnostic,44,60044,CC.1.3.6.B,Literary Inference,MCQ,4,literary,yes
+generated,6,generated-pssa-ela-grade-6,Grade 6 PSSA ELA Diagnostic,45,60045,CC.1.3.6.C,Setting Impact,MCQ,4,literary,yes
+generated,6,generated-pssa-ela-grade-6,Grade 6 PSSA ELA Diagnostic,46,60046,CC.1.3.6.C,Plot Development,MCQ,4,literary,yes
+generated,6,generated-pssa-ela-grade-6,Grade 6 PSSA ELA Diagnostic,47,60047,CC.1.3.6.G,Point of View,DRAG_DROP,4,literary,yes
+generated,6,generated-pssa-ela-grade-6,Grade 6 PSSA ELA Diagnostic,48,60048,CC.1.3.6.F / CC.1.2.6.F,Figurative Language,MCQ,4,literary,yes
+generated,6,generated-pssa-ela-grade-6,Grade 6 PSSA ELA Diagnostic,49,60049,CC.1.3.6.E,Flashback,HOT_TEXT,4,literary,yes
+generated,6,generated-pssa-ela-grade-6,Grade 6 PSSA ELA Diagnostic,50,60050,CC.1.3.6.D,Literary Vocabulary,MCQ,4,literary,yes
+generated,6,generated-pssa-ela-grade-6,Grade 6 PSSA ELA Diagnostic,51,60051,CC.1.3.6.A,Theme,MULTI_SELECT,4,literary,yes
+generated,6,generated-pssa-ela-grade-6,Grade 6 PSSA ELA Diagnostic,52,60052,CC.1.3.6.B,Literary Inference,MCQ,4,literary,yes
+generated,6,generated-pssa-ela-grade-6,Grade 6 PSSA ELA Diagnostic,53,60053,CC.1.3.6.C,Setting Impact,MCQ,4,literary,yes
+generated,6,generated-pssa-ela-grade-6,Grade 6 PSSA ELA Diagnostic,54,60054,CC.1.4.6.S,TDA Writing,TDA,4,literary,yes
+generated,7,generated-pssa-ela-grade-7,Grade 7 PSSA ELA Diagnostic,1,70001,CC.1.4.7.F1,Grammar,CONVENTIONS,2,conventions,yes
+generated,7,generated-pssa-ela-grade-7,Grade 7 PSSA ELA Diagnostic,2,70002,CC.1.4.7.F2,Punctuation,DRAG_DROP,2,conventions,yes
+generated,7,generated-pssa-ela-grade-7,Grade 7 PSSA ELA Diagnostic,3,70003,CC.1.4.7.F3,Capitalization,HOT_TEXT,2,conventions,yes
+generated,7,generated-pssa-ela-grade-7,Grade 7 PSSA ELA Diagnostic,4,70004,CC.1.4.7.F4,Sentence Structure,CONVENTIONS,2,conventions,yes
+generated,7,generated-pssa-ela-grade-7,Grade 7 PSSA ELA Diagnostic,5,70005,CC.1.4.7.F5,Verb Tense,CONVENTIONS,3,conventions,yes
+generated,7,generated-pssa-ela-grade-7,Grade 7 PSSA ELA Diagnostic,6,70006,CC.1.4.7.F6,Pronoun Usage,MULTI_SELECT,3,conventions,yes
+generated,7,generated-pssa-ela-grade-7,Grade 7 PSSA ELA Diagnostic,7,70007,CC.1.4.7.F7,Commas,CONVENTIONS,3,conventions,yes
+generated,7,generated-pssa-ela-grade-7,Grade 7 PSSA ELA Diagnostic,8,70008,CC.1.4.7.F8,Apostrophes,CONVENTIONS,3,conventions,yes
+generated,7,generated-pssa-ela-grade-7,Grade 7 PSSA ELA Diagnostic,9,70009,CC.1.4.7.F9,Subject-Verb Agreement,DRAG_DROP,3,conventions,yes
+generated,7,generated-pssa-ela-grade-7,Grade 7 PSSA ELA Diagnostic,10,70010,CC.1.2.7.A,Main Idea,MCQ,2,informational,yes
+generated,7,generated-pssa-ela-grade-7,Grade 7 PSSA ELA Diagnostic,11,70011,CC.1.2.7.B,Inference,MCQ,2,informational,yes
+generated,7,generated-pssa-ela-grade-7,Grade 7 PSSA ELA Diagnostic,12,70012,CC.1.2.7.C,Text Structure,EBSR,2,informational,yes
+generated,7,generated-pssa-ela-grade-7,Grade 7 PSSA ELA Diagnostic,13,70013,CC.1.2.7.D,Vocabulary,MCQ,2,informational,yes
+generated,7,generated-pssa-ela-grade-7,Grade 7 PSSA ELA Diagnostic,14,70014,CC.1.3.7.G,Point of View,DRAG_DROP,3,informational,yes
+generated,7,generated-pssa-ela-grade-7,Grade 7 PSSA ELA Diagnostic,15,70015,CC.1.2.7.B,Inference,MCQ,3,informational,yes
+generated,7,generated-pssa-ela-grade-7,Grade 7 PSSA ELA Diagnostic,16,70016,CC.1.2.7.A,Main Idea,HOT_TEXT,3,informational,yes
+generated,7,generated-pssa-ela-grade-7,Grade 7 PSSA ELA Diagnostic,17,70017,CC.1.3.7.A,Theme,MCQ,3,literary,yes
+generated,7,generated-pssa-ela-grade-7,Grade 7 PSSA ELA Diagnostic,18,70018,CC.1.3.7.B,Literary Inference,MCQ,3,literary,yes
+generated,7,generated-pssa-ela-grade-7,Grade 7 PSSA ELA Diagnostic,19,70019,CC.1.3.7.C,Setting Analysis,MCQ,4,literary,yes
+generated,7,generated-pssa-ela-grade-7,Grade 7 PSSA ELA Diagnostic,20,70020,CC.1.3.7.C,Plot Analysis,MCQ,4,literary,yes
+generated,7,generated-pssa-ela-grade-7,Grade 7 PSSA ELA Diagnostic,21,70021,CC.1.3.7.G,Point of View,DRAG_DROP,4,literary,yes
+generated,7,generated-pssa-ela-grade-7,Grade 7 PSSA ELA Diagnostic,22,70022,CC.1.3.7.F / CC.1.2.7.F,Figurative Language,MCQ,4,literary,yes
+generated,7,generated-pssa-ela-grade-7,Grade 7 PSSA ELA Diagnostic,23,70023,CC.1.3.7.E,Flashback,HOT_TEXT,4,literary,yes
+generated,7,generated-pssa-ela-grade-7,Grade 7 PSSA ELA Diagnostic,24,70024,CC.1.2.7.A,Main Idea,MCQ,4,paired,yes
+generated,7,generated-pssa-ela-grade-7,Grade 7 PSSA ELA Diagnostic,25,70025,CC.1.2.7.B,Inference,MCQ,4,paired,yes
+generated,7,generated-pssa-ela-grade-7,Grade 7 PSSA ELA Diagnostic,26,70026,CC.1.3.7.G,Point of View,MCQ,4,paired,yes
+generated,7,generated-pssa-ela-grade-7,Grade 7 PSSA ELA Diagnostic,27,70027,CC.1.2.7.C,Text Structure,MCQ,4,paired,yes
+generated,7,generated-pssa-ela-grade-7,Grade 7 PSSA ELA Diagnostic,28,70028,CC.1.2.7.D,Vocabulary,DRAG_DROP,4,paired,yes
+generated,7,generated-pssa-ela-grade-7,Grade 7 PSSA ELA Diagnostic,29,70029,CC.1.2.7.B,Inference,MCQ,4,paired,yes
+generated,7,generated-pssa-ela-grade-7,Grade 7 PSSA ELA Diagnostic,30,70030,CC.1.2.7.A,Main Idea,HOT_TEXT,4,paired,yes
+generated,7,generated-pssa-ela-grade-7,Grade 7 PSSA ELA Diagnostic,31,70031,CC.1.2.7.A,Main Idea,MCQ,4,table,yes
+generated,7,generated-pssa-ela-grade-7,Grade 7 PSSA ELA Diagnostic,32,70032,CC.1.2.7.B,Inference,MCQ,4,table,yes
+generated,7,generated-pssa-ela-grade-7,Grade 7 PSSA ELA Diagnostic,33,70033,CC.1.2.7.C,Text Structure,EBSR,4,table,yes
+generated,7,generated-pssa-ela-grade-7,Grade 7 PSSA ELA Diagnostic,34,70034,CC.1.2.7.D,Vocabulary,MCQ,4,table,yes
+generated,7,generated-pssa-ela-grade-7,Grade 7 PSSA ELA Diagnostic,35,70035,CC.1.3.7.G,Point of View,DRAG_DROP,4,table,yes
+generated,7,generated-pssa-ela-grade-7,Grade 7 PSSA ELA Diagnostic,36,70036,CC.1.2.7.B,Inference,MCQ,4,table,yes
+generated,7,generated-pssa-ela-grade-7,Grade 7 PSSA ELA Diagnostic,37,70037,CC.1.2.7.A,Main Idea,HOT_TEXT,4,table,yes
+generated,7,generated-pssa-ela-grade-7,Grade 7 PSSA ELA Diagnostic,38,70038,CC.1.2.7.B,Inference,MCQ,4,table,yes
+generated,7,generated-pssa-ela-grade-7,Grade 7 PSSA ELA Diagnostic,39,70039,CC.1.2.7.C,Text Structure,MULTI_SELECT,4,table,yes
+generated,7,generated-pssa-ela-grade-7,Grade 7 PSSA ELA Diagnostic,40,70040,CC.1.2.7.D,Vocabulary,MCQ,4,table,yes
+generated,7,generated-pssa-ela-grade-7,Grade 7 PSSA ELA Diagnostic,41,70041,CC.1.4.7.S,TDA Writing,TDA,4,table,yes
+generated,7,generated-pssa-ela-grade-7,Grade 7 PSSA ELA Diagnostic,42,70042,CC.1.3.7.A,Theme,MCQ,4,literary,yes
+generated,7,generated-pssa-ela-grade-7,Grade 7 PSSA ELA Diagnostic,43,70043,CC.1.3.7.B,Literary Inference,MCQ,4,literary,yes
+generated,7,generated-pssa-ela-grade-7,Grade 7 PSSA ELA Diagnostic,44,70044,CC.1.3.7.C,Setting Analysis,MCQ,4,literary,yes
+generated,7,generated-pssa-ela-grade-7,Grade 7 PSSA ELA Diagnostic,45,70045,CC.1.3.7.C,Plot Analysis,MCQ,4,literary,yes
+generated,7,generated-pssa-ela-grade-7,Grade 7 PSSA ELA Diagnostic,46,70046,CC.1.3.7.G,Point of View,DRAG_DROP,4,literary,yes
+generated,7,generated-pssa-ela-grade-7,Grade 7 PSSA ELA Diagnostic,47,70047,CC.1.3.7.F / CC.1.2.7.F,Figurative Language,MCQ,4,literary,yes
+generated,7,generated-pssa-ela-grade-7,Grade 7 PSSA ELA Diagnostic,48,70048,CC.1.3.7.E,Flashback,HOT_TEXT,4,literary,yes
+generated,7,generated-pssa-ela-grade-7,Grade 7 PSSA ELA Diagnostic,49,70049,CC.1.3.7.D,Literary Vocabulary,MCQ,4,literary,yes
+generated,7,generated-pssa-ela-grade-7,Grade 7 PSSA ELA Diagnostic,50,70050,CC.1.3.7.A,Theme,MULTI_SELECT,4,literary,yes
+generated,7,generated-pssa-ela-grade-7,Grade 7 PSSA ELA Diagnostic,51,70051,CC.1.3.7.B,Literary Inference,MCQ,4,literary,yes
+generated,7,generated-pssa-ela-grade-7,Grade 7 PSSA ELA Diagnostic,52,70052,CC.1.3.7.C,Setting Analysis,MCQ,4,literary,yes
+generated,7,generated-pssa-ela-grade-7,Grade 7 PSSA ELA Diagnostic,53,70053,CC.1.3.7.C,Plot Analysis,MCQ,4,literary,yes
+generated,7,generated-pssa-ela-grade-7,Grade 7 PSSA ELA Diagnostic,54,70054,CC.1.4.7.S,TDA Writing,TDA,4,literary,yes
+generated,8,generated-pssa-ela-grade-8,Grade 8 PSSA ELA Diagnostic,1,80001,CC.1.4.8.F1,Grammar,CONVENTIONS,2,conventions,yes
+generated,8,generated-pssa-ela-grade-8,Grade 8 PSSA ELA Diagnostic,2,80002,CC.1.4.8.F2,Punctuation,DRAG_DROP,2,conventions,yes
+generated,8,generated-pssa-ela-grade-8,Grade 8 PSSA ELA Diagnostic,3,80003,CC.1.4.8.F3,Capitalization,HOT_TEXT,2,conventions,yes
+generated,8,generated-pssa-ela-grade-8,Grade 8 PSSA ELA Diagnostic,4,80004,CC.1.4.8.F4,Sentence Structure,CONVENTIONS,2,conventions,yes
+generated,8,generated-pssa-ela-grade-8,Grade 8 PSSA ELA Diagnostic,5,80005,CC.1.4.8.F5,Verb Tense,CONVENTIONS,3,conventions,yes
+generated,8,generated-pssa-ela-grade-8,Grade 8 PSSA ELA Diagnostic,6,80006,CC.1.4.8.F6,Pronoun Usage,MULTI_SELECT,3,conventions,yes
+generated,8,generated-pssa-ela-grade-8,Grade 8 PSSA ELA Diagnostic,7,80007,CC.1.4.8.F7,Commas,CONVENTIONS,3,conventions,yes
+generated,8,generated-pssa-ela-grade-8,Grade 8 PSSA ELA Diagnostic,8,80008,CC.1.4.8.F8,Apostrophes,CONVENTIONS,3,conventions,yes
+generated,8,generated-pssa-ela-grade-8,Grade 8 PSSA ELA Diagnostic,9,80009,CC.1.4.8.F9,Subject-Verb Agreement,DRAG_DROP,3,conventions,yes
+generated,8,generated-pssa-ela-grade-8,Grade 8 PSSA ELA Diagnostic,10,80010,CC.1.2.8.A,Main Idea,MCQ,2,informational,yes
+generated,8,generated-pssa-ela-grade-8,Grade 8 PSSA ELA Diagnostic,11,80011,CC.1.2.8.B,Inference,MCQ,2,informational,yes
+generated,8,generated-pssa-ela-grade-8,Grade 8 PSSA ELA Diagnostic,12,80012,CC.1.2.8.C,Text Structure,EBSR,2,informational,yes
+generated,8,generated-pssa-ela-grade-8,Grade 8 PSSA ELA Diagnostic,13,80013,CC.1.2.8.D,Vocabulary,MCQ,2,informational,yes
+generated,8,generated-pssa-ela-grade-8,Grade 8 PSSA ELA Diagnostic,14,80014,CC.1.3.8.G,Point of View,DRAG_DROP,3,informational,yes
+generated,8,generated-pssa-ela-grade-8,Grade 8 PSSA ELA Diagnostic,15,80015,CC.1.2.8.B,Inference,MCQ,3,informational,yes
+generated,8,generated-pssa-ela-grade-8,Grade 8 PSSA ELA Diagnostic,16,80016,CC.1.3.8.A,Theme,MCQ,3,literary,yes
+generated,8,generated-pssa-ela-grade-8,Grade 8 PSSA ELA Diagnostic,17,80017,CC.1.3.8.B,Literary Inference,MCQ,3,literary,yes
+generated,8,generated-pssa-ela-grade-8,Grade 8 PSSA ELA Diagnostic,18,80018,CC.1.3.8.C,Setting Analysis,MCQ,3,literary,yes
+generated,8,generated-pssa-ela-grade-8,Grade 8 PSSA ELA Diagnostic,19,80019,CC.1.3.8.C,Plot Analysis,MCQ,4,literary,yes
+generated,8,generated-pssa-ela-grade-8,Grade 8 PSSA ELA Diagnostic,20,80020,CC.1.3.8.G,Point of View,DRAG_DROP,4,literary,yes
+generated,8,generated-pssa-ela-grade-8,Grade 8 PSSA ELA Diagnostic,21,80021,CC.1.3.8.F / CC.1.2.8.F,Figurative Language,MCQ,4,literary,yes
+generated,8,generated-pssa-ela-grade-8,Grade 8 PSSA ELA Diagnostic,22,80022,CC.1.2.8.A,Main Idea,MCQ,4,paired,yes
+generated,8,generated-pssa-ela-grade-8,Grade 8 PSSA ELA Diagnostic,23,80023,CC.1.2.8.B,Inference,MCQ,4,paired,yes
+generated,8,generated-pssa-ela-grade-8,Grade 8 PSSA ELA Diagnostic,24,80024,CC.1.3.8.G,Point of View,MCQ,4,paired,yes
+generated,8,generated-pssa-ela-grade-8,Grade 8 PSSA ELA Diagnostic,25,80025,CC.1.2.8.C,Text Structure,MCQ,4,paired,yes
+generated,8,generated-pssa-ela-grade-8,Grade 8 PSSA ELA Diagnostic,26,80026,CC.1.2.8.D,Vocabulary,DRAG_DROP,4,paired,yes
+generated,8,generated-pssa-ela-grade-8,Grade 8 PSSA ELA Diagnostic,27,80027,CC.1.2.8.B,Inference,MCQ,4,paired,yes
+generated,8,generated-pssa-ela-grade-8,Grade 8 PSSA ELA Diagnostic,28,80028,CC.1.2.8.A,Main Idea,MCQ,4,table,yes
+generated,8,generated-pssa-ela-grade-8,Grade 8 PSSA ELA Diagnostic,29,80029,CC.1.2.8.B,Inference,MCQ,4,table,yes
+generated,8,generated-pssa-ela-grade-8,Grade 8 PSSA ELA Diagnostic,30,80030,CC.1.2.8.C,Text Structure,EBSR,4,table,yes
+generated,8,generated-pssa-ela-grade-8,Grade 8 PSSA ELA Diagnostic,31,80031,CC.1.2.8.D,Vocabulary,MCQ,4,table,yes
+generated,8,generated-pssa-ela-grade-8,Grade 8 PSSA ELA Diagnostic,32,80032,CC.1.3.8.G,Point of View,DRAG_DROP,4,table,yes
+generated,8,generated-pssa-ela-grade-8,Grade 8 PSSA ELA Diagnostic,33,80033,CC.1.2.8.B,Inference,MCQ,4,table,yes
+generated,8,generated-pssa-ela-grade-8,Grade 8 PSSA ELA Diagnostic,34,80034,CC.1.2.8.A,Main Idea,HOT_TEXT,4,table,yes
+generated,8,generated-pssa-ela-grade-8,Grade 8 PSSA ELA Diagnostic,35,80035,CC.1.2.8.B,Inference,MCQ,4,table,yes
+generated,8,generated-pssa-ela-grade-8,Grade 8 PSSA ELA Diagnostic,36,80036,CC.1.2.8.C,Text Structure,MULTI_SELECT,4,table,yes
+generated,8,generated-pssa-ela-grade-8,Grade 8 PSSA ELA Diagnostic,37,80037,CC.1.2.8.D,Vocabulary,MCQ,4,table,yes
+generated,8,generated-pssa-ela-grade-8,Grade 8 PSSA ELA Diagnostic,38,80038,CC.1.4.8.S,TDA Writing,TDA,4,table,yes
+generated,8,generated-pssa-ela-grade-8,Grade 8 PSSA ELA Diagnostic,39,80039,CC.1.3.8.A,Theme,MCQ,4,literary,yes
+generated,8,generated-pssa-ela-grade-8,Grade 8 PSSA ELA Diagnostic,40,80040,CC.1.3.8.B,Literary Inference,MCQ,4,literary,yes
+generated,8,generated-pssa-ela-grade-8,Grade 8 PSSA ELA Diagnostic,41,80041,CC.1.3.8.C,Setting Analysis,MCQ,4,literary,yes
+generated,8,generated-pssa-ela-grade-8,Grade 8 PSSA ELA Diagnostic,42,80042,CC.1.3.8.C,Plot Analysis,MCQ,4,literary,yes
+generated,8,generated-pssa-ela-grade-8,Grade 8 PSSA ELA Diagnostic,43,80043,CC.1.3.8.G,Point of View,DRAG_DROP,4,literary,yes
+generated,8,generated-pssa-ela-grade-8,Grade 8 PSSA ELA Diagnostic,44,80044,CC.1.3.8.F / CC.1.2.8.F,Figurative Language,MCQ,4,literary,yes
+generated,8,generated-pssa-ela-grade-8,Grade 8 PSSA ELA Diagnostic,45,80045,CC.1.3.8.E,Flashback,MCQ,4,literary,yes
+generated,8,generated-pssa-ela-grade-8,Grade 8 PSSA ELA Diagnostic,46,80046,CC.1.3.8.D,Literary Vocabulary,MCQ,4,literary,yes
+generated,8,generated-pssa-ela-grade-8,Grade 8 PSSA ELA Diagnostic,47,80047,CC.1.3.8.A,Theme,MULTI_SELECT,4,literary,yes
+generated,8,generated-pssa-ela-grade-8,Grade 8 PSSA ELA Diagnostic,48,80048,CC.1.3.8.B,Literary Inference,MCQ,4,literary,yes
+generated,8,generated-pssa-ela-grade-8,Grade 8 PSSA ELA Diagnostic,49,80049,CC.1.3.8.C,Setting Analysis,MCQ,4,literary,yes
+generated,8,generated-pssa-ela-grade-8,Grade 8 PSSA ELA Diagnostic,50,80050,CC.1.3.8.C,Plot Analysis,MCQ,4,literary,yes
+generated,8,generated-pssa-ela-grade-8,Grade 8 PSSA ELA Diagnostic,51,80051,CC.1.3.8.G,Point of View,MCQ,4,literary,yes
+generated,8,generated-pssa-ela-grade-8,Grade 8 PSSA ELA Diagnostic,52,80052,CC.1.3.8.F / CC.1.2.8.F,Figurative Language,MCQ,4,literary,yes
+generated,8,generated-pssa-ela-grade-8,Grade 8 PSSA ELA Diagnostic,53,80053,CC.1.4.8.S,TDA Writing,TDA,4,literary,yes
+database,5,cmon9lmli0001lj039nt0oh4i,Grade 5 PSSA ELA Diagnostic,1,cmon9lmnr0002lj03mkh8onf9,CC.1.2.5.A,Main Idea,MCQ,2,,yes
+database,5,cmon9lmli0001lj039nt0oh4i,Grade 5 PSSA ELA Diagnostic,2,cmon9lmnr0003lj03ash02v8j,CC.1.2.5.A,Main Idea,MULTI_SELECT,3,,yes
+database,5,cmon9lmli0001lj039nt0oh4i,Grade 5 PSSA ELA Diagnostic,3,cmon9lmnr0004lj03xmpsmidw,CC.1.2.5.A,Main Idea,EBSR,4,,yes
+database,5,cmon9lmli0001lj039nt0oh4i,Grade 5 PSSA ELA Diagnostic,4,cmon9lmnr0005lj03um6phakw,CC.1.2.5.B,Text Evidence,MULTI_SELECT,2,,yes
+database,5,cmon9lmli0001lj039nt0oh4i,Grade 5 PSSA ELA Diagnostic,5,cmon9lmnr0006lj03qmz6f1ox,CC.1.2.5.B,Text Evidence,EBSR,3,,yes
+database,5,cmon9lmli0001lj039nt0oh4i,Grade 5 PSSA ELA Diagnostic,6,cmon9lmns0007lj03w6dwpca8,CC.1.2.5.B,Text Evidence,HOT_TEXT,4,,yes
+database,5,cmon9lmli0001lj039nt0oh4i,Grade 5 PSSA ELA Diagnostic,7,cmon9lmns0008lj032kpdmehg,CC.1.2.5.C,Text Structure,EBSR,2,,yes
+database,5,cmon9lmli0001lj039nt0oh4i,Grade 5 PSSA ELA Diagnostic,8,cmon9lmns0009lj039a21oces,CC.1.2.5.C,Text Structure,HOT_TEXT,3,,yes
+database,5,cmon9lmli0001lj039nt0oh4i,Grade 5 PSSA ELA Diagnostic,9,cmon9lmns000alj03iftnmu39,CC.1.2.5.C,Text Structure,DRAG_DROP,4,,yes
+database,5,cmon9lmli0001lj039nt0oh4i,Grade 5 PSSA ELA Diagnostic,10,cmon9lmns000blj03ziz4htdi,CC.1.2.5.D,Vocabulary,HOT_TEXT,2,,yes
+database,5,cmon9lmli0001lj039nt0oh4i,Grade 5 PSSA ELA Diagnostic,11,cmon9lmns000clj03it2v2sh0,CC.1.2.5.D,Vocabulary,DRAG_DROP,3,,yes
+database,5,cmon9lmli0001lj039nt0oh4i,Grade 5 PSSA ELA Diagnostic,12,cmon9lmns000dlj03zupuyfok,CC.1.2.5.D,Vocabulary,MCQ,4,,yes
+database,5,cmon9lmli0001lj039nt0oh4i,Grade 5 PSSA ELA Diagnostic,13,cmon9lmns000elj03qx2fh6iz,CC.1.3.5.A,Theme,DRAG_DROP,2,,yes
+database,5,cmon9lmli0001lj039nt0oh4i,Grade 5 PSSA ELA Diagnostic,14,cmon9lmns000flj03nvft08uu,CC.1.3.5.A,Theme,MCQ,3,,yes
+database,5,cmon9lmli0001lj039nt0oh4i,Grade 5 PSSA ELA Diagnostic,15,cmon9lmns000glj03ydkt0mn0,CC.1.3.5.A,Theme,MULTI_SELECT,4,,yes
+database,5,cmon9lmli0001lj039nt0oh4i,Grade 5 PSSA ELA Diagnostic,16,cmon9lmns000hlj038azo8fym,CC.1.3.5.B,Literary Evidence,MCQ,2,,yes
+database,5,cmon9lmli0001lj039nt0oh4i,Grade 5 PSSA ELA Diagnostic,17,cmon9lmns000ilj033divto1d,CC.1.3.5.B,Literary Evidence,MULTI_SELECT,3,,yes
+database,5,cmon9lmli0001lj039nt0oh4i,Grade 5 PSSA ELA Diagnostic,18,cmon9lmns000jlj0362v9djsc,CC.1.3.5.B,Literary Evidence,EBSR,4,,yes
+database,5,cmon9lmli0001lj039nt0oh4i,Grade 5 PSSA ELA Diagnostic,19,cmon9lmns000klj03utkduor4,CC.1.3.5.C,Character / Plot,MULTI_SELECT,2,,yes
+database,5,cmon9lmli0001lj039nt0oh4i,Grade 5 PSSA ELA Diagnostic,20,cmon9lmns000llj030ljgqoli,CC.1.3.5.C,Character / Plot,EBSR,3,,yes
+database,5,cmon9lmli0001lj039nt0oh4i,Grade 5 PSSA ELA Diagnostic,21,cmon9lmns000mlj038xhcya1w,CC.1.3.5.C,Character / Plot,HOT_TEXT,4,,yes
+database,5,cmon9lmli0001lj039nt0oh4i,Grade 5 PSSA ELA Diagnostic,22,cmon9lmns000nlj03anrcuw9s,CC.1.3.5.D,Literary Vocabulary,EBSR,2,,yes
+database,5,cmon9lmli0001lj039nt0oh4i,Grade 5 PSSA ELA Diagnostic,23,cmon9lmns000olj03suqfp4x6,CC.1.3.5.D,Literary Vocabulary,HOT_TEXT,3,,yes
+database,5,cmon9lmli0001lj039nt0oh4i,Grade 5 PSSA ELA Diagnostic,24,cmon9lmns000plj03y00tbyll,CC.1.3.5.D,Literary Vocabulary,DRAG_DROP,4,,yes
+database,5,cmon9lmli0001lj039nt0oh4i,Grade 5 PSSA ELA Diagnostic,25,cmon9lmns000qlj03jx88iref,CC.1.4.5.F1,Grammar,CONVENTIONS,2,,yes
+database,5,cmon9lmli0001lj039nt0oh4i,Grade 5 PSSA ELA Diagnostic,26,cmon9lmns000rlj038y5ynvai,CC.1.4.5.F2,Punctuation,CONVENTIONS,2,,yes
+database,5,cmon9lmli0001lj039nt0oh4i,Grade 5 PSSA ELA Diagnostic,27,cmon9lmns000slj03emqp4mzu,CC.1.4.5.F3,Capitalization,CONVENTIONS,3,,yes
+database,5,cmon9lmli0001lj039nt0oh4i,Grade 5 PSSA ELA Diagnostic,28,cmon9lmns000tlj03235d26y1,CC.1.4.5.F4,Sentence Structure,CONVENTIONS,3,,yes
+database,5,cmon9lmli0001lj039nt0oh4i,Grade 5 PSSA ELA Diagnostic,29,cmon9lmns000ulj03mrwf3hpc,CC.1.4.5.F5,Verb Tense,CONVENTIONS,3,,yes
+database,5,cmon9lmli0001lj039nt0oh4i,Grade 5 PSSA ELA Diagnostic,30,cmon9lmns000vlj03ql53435p,CC.1.4.5.S,TDA Writing,TDA,4,,no
+database,5,cmonfruy60001dpdkkjd7nixo,Grade 5 PSSA ELA Diagnostic - Full Passage Set,1,cmonfrv0f0006dpdkjj8urqrf,CC.1.2.5.A,Main Idea,MCQ,2,,yes
+database,5,cmonfruy60001dpdkkjd7nixo,Grade 5 PSSA ELA Diagnostic - Full Passage Set,2,cmonfrv0f0007dpdkz9sm6kk3,CC.1.2.5.B,Text Evidence,MCQ,2,,yes
+database,5,cmonfruy60001dpdkkjd7nixo,Grade 5 PSSA ELA Diagnostic - Full Passage Set,3,cmonfrv0f0008dpdkygl58ijw,CC.1.2.5.A,Main Idea,MCQ,2,,yes
+database,5,cmonfruy60001dpdkkjd7nixo,Grade 5 PSSA ELA Diagnostic - Full Passage Set,4,cmonfrv0f0009dpdk0t8mb6vq,CC.1.2.5.B,Text Evidence,MCQ,2,,yes
+database,5,cmonfruy60001dpdkkjd7nixo,Grade 5 PSSA ELA Diagnostic - Full Passage Set,5,cmonfrv0f000adpdk1a2lhmni,CC.1.2.5.A,Main Idea,MCQ,3,,yes
+database,5,cmonfruy60001dpdkkjd7nixo,Grade 5 PSSA ELA Diagnostic - Full Passage Set,6,cmonfrv0f000bdpdk95fbnz8x,CC.1.2.5.B,Text Evidence,MCQ,3,,yes
+database,5,cmonfruy60001dpdkkjd7nixo,Grade 5 PSSA ELA Diagnostic - Full Passage Set,7,cmonfrv0f000cdpdk5mia10rg,CC.1.2.5.A,Main Idea,MCQ,3,,yes
+database,5,cmonfruy60001dpdkkjd7nixo,Grade 5 PSSA ELA Diagnostic - Full Passage Set,8,cmonfrv0g000ddpdk939pq4u1,CC.1.3.5.B,Literary Evidence,EBSR,3,,yes
+database,5,cmonfruy60001dpdkkjd7nixo,Grade 5 PSSA ELA Diagnostic - Full Passage Set,9,cmonfrv0g000edpdk463dzcdh,CC.1.2.5.B,Text Evidence,EBSR,3,,yes
+database,5,cmonfruy60001dpdkkjd7nixo,Grade 5 PSSA ELA Diagnostic - Full Passage Set,10,cmonfrv0g000fdpdk40xf4dxn,CC.1.2.5.C,Text Structure,MULTI_SELECT,4,,yes
+database,5,cmonfruy60001dpdkkjd7nixo,Grade 5 PSSA ELA Diagnostic - Full Passage Set,11,cmonfrv0g000gdpdkqw9dhj83,CC.1.3.5.A,Theme,HOT_TEXT,4,,yes
+database,5,cmonfruy60001dpdkkjd7nixo,Grade 5 PSSA ELA Diagnostic - Full Passage Set,12,cmonfrv0g000hdpdkzdoy6q09,CC.1.2.5.D,Vocabulary,DRAG_DROP,4,,yes
+database,5,cmonfruy60001dpdkkjd7nixo,Grade 5 PSSA ELA Diagnostic - Full Passage Set,13,cmonfrv0g000idpdksj7xruoi,CC.1.4.5.F1,Grammar,CONVENTIONS,2,,yes
+database,5,cmonfruy60001dpdkkjd7nixo,Grade 5 PSSA ELA Diagnostic - Full Passage Set,14,cmonfrv0g000jdpdkto7y5kst,CC.1.4.5.F2,Punctuation,CONVENTIONS,2,,yes
+database,5,cmonfruy60001dpdkkjd7nixo,Grade 5 PSSA ELA Diagnostic - Full Passage Set,15,cmonfrv0g000kdpdkpxsywv3p,CC.1.4.5.F3,Capitalization,CONVENTIONS,2,,yes
+database,5,cmonfruy60001dpdkkjd7nixo,Grade 5 PSSA ELA Diagnostic - Full Passage Set,16,cmonfrv0g000ldpdkdkeaaqtd,CC.1.4.5.F4,Sentence Structure,CONVENTIONS,2,,yes
+database,5,cmonfruy60001dpdkkjd7nixo,Grade 5 PSSA ELA Diagnostic - Full Passage Set,17,cmonfrv0g000mdpdkzbylxxl4,CC.1.4.5.F5,Verb Tense,CONVENTIONS,3,,yes
+database,5,cmonfruy60001dpdkkjd7nixo,Grade 5 PSSA ELA Diagnostic - Full Passage Set,18,cmonfrv0g000ndpdkfvnannp7,CC.1.4.5.F6,Pronoun Usage,CONVENTIONS,3,,yes
+database,5,cmonfruy60001dpdkkjd7nixo,Grade 5 PSSA ELA Diagnostic - Full Passage Set,19,cmonfrv0g000odpdkfv3mmo1k,CC.1.4.5.F7,Commas,CONVENTIONS,3,,yes
+database,5,cmonfruy60001dpdkkjd7nixo,Grade 5 PSSA ELA Diagnostic - Full Passage Set,20,cmonfrv0g000pdpdk63679tu1,CC.1.4.5.F8,Apostrophes,CONVENTIONS,3,,yes
+database,5,cmonfruy60001dpdkkjd7nixo,Grade 5 PSSA ELA Diagnostic - Full Passage Set,21,cmonfrv0g000qdpdk88n3j5dw,CC.1.4.5.F9,Subject-Verb Agreement,CONVENTIONS,3,,yes
+database,5,cmonfruy60001dpdkkjd7nixo,Grade 5 PSSA ELA Diagnostic - Full Passage Set,22,cmonfrv0g000rdpdkanohezbt,CC.1.4.5.F10,Frequently Confused Words,CONVENTIONS,3,,yes
+database,5,cmonfruy60001dpdkkjd7nixo,Grade 5 PSSA ELA Diagnostic - Full Passage Set,23,cmonfrv0g000sdpdkonnhx094,CC.1.4.5.S,TDA Writing,TDA,4,,yes
+database,5,smoke-reading-buddy-grade-5,Smoke Test Reading Buddy Diagnostic,1,cmpkgf4jd000gh22o2lengxj6,SMOKE.5.1,Placeholder diagnostic skill,MCQ,1,,yes
+database,5,smoke-reading-buddy-grade-5,Smoke Test Reading Buddy Diagnostic,2,cmpkgf4ki000ih22ojsijkkv8,SMOKE.5.2,Placeholder diagnostic skill,MCQ,1,,yes
+database,5,smoke-reading-buddy-grade-5,Smoke Test Reading Buddy Diagnostic,3,cmpkgf4kx000kh22olxvywyv8,SMOKE.5.3,Placeholder diagnostic skill,MCQ,1,,yes
+database,5,smoke-reading-buddy-grade-5,Smoke Test Reading Buddy Diagnostic,4,cmpkgf4ld000mh22opp18pgoj,SMOKE.5.4,Placeholder diagnostic skill,MCQ,1,,yes
+database,5,smoke-reading-buddy-grade-5,Smoke Test Reading Buddy Diagnostic,5,cmpkgf4lt000oh22oisljseog,SMOKE.5.5,Placeholder diagnostic skill,MCQ,1,,yes
+database,6,cmon8ndat0001z340epux952m,Grade 6 PSSA ELA Diagnostic,1,cmon8ndd10002z340xbi2g3wq,CC.1.2.6.A,Main Idea,MCQ,2,,yes
+database,6,cmon8ndat0001z340epux952m,Grade 6 PSSA ELA Diagnostic,2,cmon8ndd10003z340jff0p3n9,CC.1.2.6.A,Main Idea,MULTI_SELECT,3,,yes
+database,6,cmon8ndat0001z340epux952m,Grade 6 PSSA ELA Diagnostic,3,cmon8ndd10004z340zxav0ft0,CC.1.2.6.A,Main Idea,EBSR,4,,yes
+database,6,cmon8ndat0001z340epux952m,Grade 6 PSSA ELA Diagnostic,4,cmon8ndd10005z3405f0vzffk,CC.1.2.6.B,Text Evidence,MULTI_SELECT,2,,yes
+database,6,cmon8ndat0001z340epux952m,Grade 6 PSSA ELA Diagnostic,5,cmon8ndd10006z340o2z8vbwm,CC.1.2.6.B,Text Evidence,EBSR,3,,yes
+database,6,cmon8ndat0001z340epux952m,Grade 6 PSSA ELA Diagnostic,6,cmon8ndd10007z340rwiadorp,CC.1.2.6.B,Text Evidence,HOT_TEXT,4,,yes
+database,6,cmon8ndat0001z340epux952m,Grade 6 PSSA ELA Diagnostic,7,cmon8ndd10008z340bs4v26dh,CC.1.2.6.C,Text Structure,EBSR,2,,yes
+database,6,cmon8ndat0001z340epux952m,Grade 6 PSSA ELA Diagnostic,8,cmon8ndd20009z340hbibtuiv,CC.1.2.6.C,Text Structure,HOT_TEXT,3,,yes
+database,6,cmon8ndat0001z340epux952m,Grade 6 PSSA ELA Diagnostic,9,cmon8ndd2000az340623c0hgc,CC.1.2.6.C,Text Structure,MCQ,4,,yes
+database,6,cmon8ndat0001z340epux952m,Grade 6 PSSA ELA Diagnostic,10,cmon8ndd2000bz34023y6tw8z,CC.1.2.6.D,Vocabulary,HOT_TEXT,2,,yes
+database,6,cmon8ndat0001z340epux952m,Grade 6 PSSA ELA Diagnostic,11,cmon8ndd2000cz3407qmivsvf,CC.1.2.6.D,Vocabulary,MCQ,3,,yes
+database,6,cmon8ndat0001z340epux952m,Grade 6 PSSA ELA Diagnostic,12,cmon8ndd2000dz340lgrl6obh,CC.1.2.6.D,Vocabulary,MULTI_SELECT,4,,yes
+database,6,cmon8ndat0001z340epux952m,Grade 6 PSSA ELA Diagnostic,13,cmon8ndd2000ez340rlq93gqp,CC.1.3.6.A,Theme,MCQ,2,,yes
+database,6,cmon8ndat0001z340epux952m,Grade 6 PSSA ELA Diagnostic,14,cmon8ndd2000fz340bwqba4k4,CC.1.3.6.A,Theme,MULTI_SELECT,3,,yes
+database,6,cmon8ndat0001z340epux952m,Grade 6 PSSA ELA Diagnostic,15,cmon8ndd2000gz3404bzuhk2q,CC.1.3.6.A,Theme,EBSR,4,,yes
+database,6,cmon8ndat0001z340epux952m,Grade 6 PSSA ELA Diagnostic,16,cmon8ndd2000hz3407gs8hwhr,CC.1.3.6.B,Literary Evidence,MULTI_SELECT,2,,yes
+database,6,cmon8ndat0001z340epux952m,Grade 6 PSSA ELA Diagnostic,17,cmon8ndd2000iz340as0fxm78,CC.1.3.6.B,Literary Evidence,EBSR,3,,yes
+database,6,cmon8ndat0001z340epux952m,Grade 6 PSSA ELA Diagnostic,18,cmon8ndd2000jz3401ne4i3tz,CC.1.3.6.B,Literary Evidence,HOT_TEXT,4,,yes
+database,6,cmon8ndat0001z340epux952m,Grade 6 PSSA ELA Diagnostic,19,cmon8ndd2000kz340bt07o13d,CC.1.3.6.C,Character / Plot,EBSR,2,,yes
+database,6,cmon8ndat0001z340epux952m,Grade 6 PSSA ELA Diagnostic,20,cmon8ndd2000lz340lh9ya9ah,CC.1.3.6.C,Character / Plot,HOT_TEXT,3,,yes
+database,6,cmon8ndat0001z340epux952m,Grade 6 PSSA ELA Diagnostic,21,cmon8ndd2000mz340e37wr1ew,CC.1.3.6.C,Character / Plot,MCQ,4,,yes
+database,6,cmon8ndat0001z340epux952m,Grade 6 PSSA ELA Diagnostic,22,cmon8ndd2000nz340xn5impsy,CC.1.3.6.D,Literary Vocabulary,HOT_TEXT,2,,yes
+database,6,cmon8ndat0001z340epux952m,Grade 6 PSSA ELA Diagnostic,23,cmon8ndd2000oz340va3r5imb,CC.1.3.6.D,Literary Vocabulary,MCQ,3,,yes
+database,6,cmon8ndat0001z340epux952m,Grade 6 PSSA ELA Diagnostic,24,cmon8ndd2000pz340d345frqo,CC.1.3.6.D,Literary Vocabulary,MULTI_SELECT,4,,yes
+database,6,cmowe890u00015ishc8zojkla,Grade 6 PSSA ELA Diagnostic,1,cmowe892700025ish821yzt0t,CC.1.2.6.A,Main Idea,MCQ,2,,yes
+database,6,cmowe890u00015ishc8zojkla,Grade 6 PSSA ELA Diagnostic,2,cmowe892700035ishpo5uilo8,CC.1.2.6.B,Inference,MCQ,2,,yes
+database,6,cmowe890u00015ishc8zojkla,Grade 6 PSSA ELA Diagnostic,3,cmowe892700045ishnrd8ut14,CC.1.3.6.G,Point of View,MCQ,2,,yes
+database,6,cmowe890u00015ishc8zojkla,Grade 6 PSSA ELA Diagnostic,4,cmowe892700055ish4omnl0fo,CC.1.2.6.A,Main Idea,MCQ,2,,yes
+database,6,cmowe890u00015ishc8zojkla,Grade 6 PSSA ELA Diagnostic,5,cmowe892700065ishj7aixcqc,CC.1.2.6.B,Inference,MCQ,3,,yes
+database,6,cmowe890u00015ishc8zojkla,Grade 6 PSSA ELA Diagnostic,6,cmowe892700075ishsrvucw02,CC.1.3.6.G,Point of View,MCQ,3,,yes
+database,6,cmowe890u00015ishc8zojkla,Grade 6 PSSA ELA Diagnostic,7,cmowe892700085ishszni6l0u,CC.1.3.6.C,Setting Impact,MCQ,3,,yes
+database,6,cmowe890u00015ishc8zojkla,Grade 6 PSSA ELA Diagnostic,8,cmowe892700095ish5m0il59s,CC.1.3.6.C,Plot Development,MCQ,3,,yes
+database,6,cmowe890u00015ishc8zojkla,Grade 6 PSSA ELA Diagnostic,9,cmowe8927000a5ishblh33qbm,CC.1.3.6.C,Plot Development,MCQ,3,,yes
+database,6,cmowe890u00015ishc8zojkla,Grade 6 PSSA ELA Diagnostic,10,cmowe8927000b5ishppb78c82,CC.1.3.6.B,Literary Inference,EBSR,4,,yes
+database,6,cmowe890u00015ishc8zojkla,Grade 6 PSSA ELA Diagnostic,11,cmowe8927000c5ishnayvsx8p,CC.1.2.6.B,Inference,EBSR,4,,yes
+database,6,cmowe890u00015ishc8zojkla,Grade 6 PSSA ELA Diagnostic,12,cmowe8928000d5ishoh0ep0gj,CC.1.2.6.C,Text Structure,MULTI_SELECT,4,,yes
+database,6,cmowe890u00015ishc8zojkla,Grade 6 PSSA ELA Diagnostic,13,cmowe8928000e5ishirly4mty,CC.1.3.6.G,Point of View,HOT_TEXT,4,,yes
+database,6,cmowe890u00015ishc8zojkla,Grade 6 PSSA ELA Diagnostic,14,cmowe8928000f5ishtqc6y0uq,CC.1.2.6.D,Vocabulary,DRAG_DROP,4,,yes
+database,6,cmowe890u00015ishc8zojkla,Grade 6 PSSA ELA Diagnostic,15,cmowe8928000g5ish1w5esi68,CC.1.3.6.C,Setting Impact,MCQ,4,,yes
+database,6,cmowe890u00015ishc8zojkla,Grade 6 PSSA ELA Diagnostic,16,cmowe8928000h5ishudscgeih,CC.1.3.6.C,Plot Development,MCQ,4,,yes
+database,6,cmowe890u00015ishc8zojkla,Grade 6 PSSA ELA Diagnostic,17,cmowe8928000i5ish5bz9o4d0,CC.1.3.6.E,Flashback,MCQ,4,,yes
+database,6,cmowe890u00015ishc8zojkla,Grade 6 PSSA ELA Diagnostic,18,cmowe8928000j5ish3sy1iwtr,CC.1.3.6.F / CC.1.2.6.F,Figurative Language,MCQ,4,,yes
+database,6,cmowe890u00015ishc8zojkla,Grade 6 PSSA ELA Diagnostic,19,cmowe8928000k5ishm6k6lgql,CC.1.3.6.F / CC.1.2.6.F,Figurative Language,MCQ,4,,yes
+database,6,cmowe890u00015ishc8zojkla,Grade 6 PSSA ELA Diagnostic,20,cmowe8928000l5ishlbnj0t0c,CC.1.3.6.F / CC.1.2.6.F,Figurative Language,MCQ,4,,yes
+database,6,cmowe890u00015ishc8zojkla,Grade 6 PSSA ELA Diagnostic,21,cmowe8928000m5ishw6ycxm1x,CC.1.3.6.F / CC.1.2.6.F,Figurative Language,MCQ,4,,yes
+database,6,cmowe890u00015ishc8zojkla,Grade 6 PSSA ELA Diagnostic,22,cmowe8928000n5ishz3m7nstb,CC.1.2.6.C,Text Structure,MCQ,4,,yes
+database,6,cmowe890u00015ishc8zojkla,Grade 6 PSSA ELA Diagnostic,23,cmowe8928000o5ishti2ibf64,CC.1.2.6.A,Main Idea,MCQ,4,,yes
+database,6,cmowe890u00015ishc8zojkla,Grade 6 PSSA ELA Diagnostic,24,cmowe8928000p5ishoe1rhwwp,CC.1.2.6.D,Vocabulary,MCQ,4,,yes
+database,6,cmowe890u00015ishc8zojkla,Grade 6 PSSA ELA Diagnostic,25,cmowe8928000q5ishzeikab1d,CC.1.2.6.B,Inference,MCQ,4,,yes
+database,6,cmowe890u00015ishc8zojkla,Grade 6 PSSA ELA Diagnostic,26,cmowe8928000r5ish5nr143rh,CC.1.3.6.G,Point of View,MCQ,4,,yes
+database,6,cmowe890u00015ishc8zojkla,Grade 6 PSSA ELA Diagnostic,27,cmowe8928000s5ish2n1nyozx,CC.1.2.6.C,Text Structure,MCQ,4,,yes
+database,6,cmowe890u00015ishc8zojkla,Grade 6 PSSA ELA Diagnostic,28,cmowe8928000t5ishab894b38,CC.1.2.6.B,Inference,EBSR,4,,yes
+database,6,cmowe890u00015ishc8zojkla,Grade 6 PSSA ELA Diagnostic,29,cmowe8928000u5ishantbpdt9,CC.1.2.6.C,Text Structure,EBSR,4,,yes
+database,6,cmowe890u00015ishc8zojkla,Grade 6 PSSA ELA Diagnostic,30,cmowe8929000v5ish43zr2u8a,CC.1.3.6.G,Point of View,MCQ,4,,yes
+database,6,cmowe890u00015ishc8zojkla,Grade 6 PSSA ELA Diagnostic,31,cmowe8929000w5ish1ds0xyky,CC.1.4.6.F1,Grammar,CONVENTIONS,2,,yes
+database,6,cmowe890u00015ishc8zojkla,Grade 6 PSSA ELA Diagnostic,32,cmowe8929000x5ishj9o673oc,CC.1.4.6.F2,Punctuation,CONVENTIONS,2,,yes
+database,6,cmowe890u00015ishc8zojkla,Grade 6 PSSA ELA Diagnostic,33,cmowe8929000y5ishci8wk0e9,CC.1.4.6.F3,Capitalization,CONVENTIONS,2,,yes
+database,6,cmowe890u00015ishc8zojkla,Grade 6 PSSA ELA Diagnostic,34,cmowe8929000z5ishl4ac3hmu,CC.1.4.6.F4,Sentence Structure,CONVENTIONS,2,,yes
+database,6,cmowe890u00015ishc8zojkla,Grade 6 PSSA ELA Diagnostic,35,cmowe892900105ish0xo4od0w,CC.1.4.6.F5,Verb Tense,CONVENTIONS,3,,yes
+database,6,cmowe890u00015ishc8zojkla,Grade 6 PSSA ELA Diagnostic,36,cmowe892900115ishyk10jubs,CC.1.4.6.F6,Pronoun Usage,CONVENTIONS,3,,yes
+database,6,cmowe890u00015ishc8zojkla,Grade 6 PSSA ELA Diagnostic,37,cmowe892900125ish6wuya6kk,CC.1.4.6.F7,Commas,CONVENTIONS,3,,yes
+database,6,cmowe890u00015ishc8zojkla,Grade 6 PSSA ELA Diagnostic,38,cmowe892900135ishq34mw1zt,CC.1.4.6.F8,Apostrophes,CONVENTIONS,3,,yes
+database,6,cmowe890u00015ishc8zojkla,Grade 6 PSSA ELA Diagnostic,39,cmowe892900145ish0drx23dd,CC.1.4.6.F9,Subject-Verb Agreement,CONVENTIONS,3,,yes
+database,6,cmowe890u00015ishc8zojkla,Grade 6 PSSA ELA Diagnostic,40,cmowe892900155ish21rliblm,CC.1.4.6.S,TDA Writing,TDA,4,,yes
+database,6,cmoweqxei00016zhzbmh0qi15,Grade 6 PSSA ELA Diagnostic,1,cmoweqxg200026zhzhjpk7ix4,CC.1.2.6.A,Main Idea,MCQ,2,,yes
+database,6,cmoweqxei00016zhzbmh0qi15,Grade 6 PSSA ELA Diagnostic,2,cmoweqxg200036zhz7mvnetzx,CC.1.2.6.B,Inference,MCQ,2,,yes
+database,6,cmoweqxei00016zhzbmh0qi15,Grade 6 PSSA ELA Diagnostic,3,cmoweqxg200046zhzi2tukbvx,CC.1.3.6.G,Point of View,MCQ,2,,yes
+database,6,cmoweqxei00016zhzbmh0qi15,Grade 6 PSSA ELA Diagnostic,4,cmoweqxg200056zhzjxbdf5qu,CC.1.2.6.A,Main Idea,MCQ,2,,yes
+database,6,cmoweqxei00016zhzbmh0qi15,Grade 6 PSSA ELA Diagnostic,5,cmoweqxg200066zhzuafppe5j,CC.1.2.6.B,Inference,MCQ,3,,yes
+database,6,cmoweqxei00016zhzbmh0qi15,Grade 6 PSSA ELA Diagnostic,6,cmoweqxg200076zhzfmv2qycv,CC.1.3.6.G,Point of View,MCQ,3,,yes
+database,6,cmoweqxei00016zhzbmh0qi15,Grade 6 PSSA ELA Diagnostic,7,cmoweqxg200086zhzqfp0ti5o,CC.1.3.6.C,Setting Impact,MCQ,3,,yes
+database,6,cmoweqxei00016zhzbmh0qi15,Grade 6 PSSA ELA Diagnostic,8,cmoweqxg200096zhzamp6gr9c,CC.1.3.6.C,Plot Development,MCQ,3,,yes
+database,6,cmoweqxei00016zhzbmh0qi15,Grade 6 PSSA ELA Diagnostic,9,cmoweqxg2000a6zhz3swev8b1,CC.1.3.6.C,Plot Development,MCQ,3,,yes
+database,6,cmoweqxei00016zhzbmh0qi15,Grade 6 PSSA ELA Diagnostic,10,cmoweqxg2000b6zhz4egvcv4d,CC.1.3.6.B,Literary Inference,EBSR,4,,yes
+database,6,cmoweqxei00016zhzbmh0qi15,Grade 6 PSSA ELA Diagnostic,11,cmoweqxg2000c6zhzvn0we6kl,CC.1.2.6.B,Inference,EBSR,4,,yes
+database,6,cmoweqxei00016zhzbmh0qi15,Grade 6 PSSA ELA Diagnostic,12,cmoweqxg2000d6zhzpr4i9oxh,CC.1.2.6.C,Text Structure,MULTI_SELECT,4,,yes
+database,6,cmoweqxei00016zhzbmh0qi15,Grade 6 PSSA ELA Diagnostic,13,cmoweqxg3000e6zhz8ccmj208,CC.1.3.6.G,Point of View,HOT_TEXT,4,,yes
+database,6,cmoweqxei00016zhzbmh0qi15,Grade 6 PSSA ELA Diagnostic,14,cmoweqxg3000f6zhzsual9e1a,CC.1.2.6.D,Vocabulary,DRAG_DROP,4,,yes
+database,6,cmoweqxei00016zhzbmh0qi15,Grade 6 PSSA ELA Diagnostic,15,cmoweqxg3000g6zhzqrybowef,CC.1.3.6.C,Setting Impact,MCQ,4,,yes
+database,6,cmoweqxei00016zhzbmh0qi15,Grade 6 PSSA ELA Diagnostic,16,cmoweqxg3000h6zhzw4896h1m,CC.1.3.6.C,Plot Development,MCQ,4,,yes
+database,6,cmoweqxei00016zhzbmh0qi15,Grade 6 PSSA ELA Diagnostic,17,cmoweqxg3000i6zhze4izlokt,CC.1.3.6.E,Flashback,MCQ,4,,yes
+database,6,cmoweqxei00016zhzbmh0qi15,Grade 6 PSSA ELA Diagnostic,18,cmoweqxg3000j6zhzuucigt17,CC.1.3.6.F / CC.1.2.6.F,Figurative Language,MCQ,4,,yes
+database,6,cmoweqxei00016zhzbmh0qi15,Grade 6 PSSA ELA Diagnostic,19,cmoweqxg3000k6zhzdcviwlnw,CC.1.3.6.F / CC.1.2.6.F,Figurative Language,MCQ,4,,yes
+database,6,cmoweqxei00016zhzbmh0qi15,Grade 6 PSSA ELA Diagnostic,20,cmoweqxg3000l6zhz6r3of5vt,CC.1.3.6.F / CC.1.2.6.F,Figurative Language,MCQ,4,,yes
+database,6,cmoweqxei00016zhzbmh0qi15,Grade 6 PSSA ELA Diagnostic,21,cmoweqxg3000m6zhzcgyq2cyb,CC.1.3.6.F / CC.1.2.6.F,Figurative Language,MCQ,4,,yes
+database,6,cmoweqxei00016zhzbmh0qi15,Grade 6 PSSA ELA Diagnostic,22,cmoweqxg3000n6zhzf7r72l5k,CC.1.2.6.C,Text Structure,MCQ,4,,yes
+database,6,cmoweqxei00016zhzbmh0qi15,Grade 6 PSSA ELA Diagnostic,23,cmoweqxg3000o6zhzi28ijby3,CC.1.2.6.A,Main Idea,MCQ,4,,yes
+database,6,cmoweqxei00016zhzbmh0qi15,Grade 6 PSSA ELA Diagnostic,24,cmoweqxg3000p6zhz7aib67ej,CC.1.2.6.D,Vocabulary,MCQ,4,,yes
+database,6,cmoweqxei00016zhzbmh0qi15,Grade 6 PSSA ELA Diagnostic,25,cmoweqxg3000q6zhzrf0zlh9q,CC.1.2.6.B,Inference,MCQ,4,,yes
+database,6,cmoweqxei00016zhzbmh0qi15,Grade 6 PSSA ELA Diagnostic,26,cmoweqxg3000r6zhzcgomct2y,CC.1.3.6.G,Point of View,MCQ,4,,yes
+database,6,cmoweqxei00016zhzbmh0qi15,Grade 6 PSSA ELA Diagnostic,27,cmoweqxg3000s6zhzkllxv87z,CC.1.2.6.C,Text Structure,MCQ,4,,yes
+database,6,cmoweqxei00016zhzbmh0qi15,Grade 6 PSSA ELA Diagnostic,28,cmoweqxg3000t6zhzv6947cbc,CC.1.2.6.B,Inference,EBSR,4,,yes
+database,6,cmoweqxei00016zhzbmh0qi15,Grade 6 PSSA ELA Diagnostic,29,cmoweqxg4000u6zhz2og85ysw,CC.1.2.6.C,Text Structure,EBSR,4,,yes
+database,6,cmoweqxei00016zhzbmh0qi15,Grade 6 PSSA ELA Diagnostic,30,cmoweqxg4000v6zhz6v7mty4c,CC.1.3.6.G,Point of View,MCQ,4,,yes
+database,6,cmoweqxei00016zhzbmh0qi15,Grade 6 PSSA ELA Diagnostic,31,cmoweqxg4000w6zhz2g02rhup,CC.1.4.6.F1,Grammar,CONVENTIONS,2,,yes
+database,6,cmoweqxei00016zhzbmh0qi15,Grade 6 PSSA ELA Diagnostic,32,cmoweqxg4000x6zhzq67nqhjo,CC.1.4.6.F2,Punctuation,CONVENTIONS,2,,yes
+database,6,cmoweqxei00016zhzbmh0qi15,Grade 6 PSSA ELA Diagnostic,33,cmoweqxg4000y6zhzen4qjbmh,CC.1.4.6.F3,Capitalization,CONVENTIONS,2,,yes
+database,6,cmoweqxei00016zhzbmh0qi15,Grade 6 PSSA ELA Diagnostic,34,cmoweqxg4000z6zhz116euqv5,CC.1.4.6.F4,Sentence Structure,CONVENTIONS,2,,yes
+database,6,cmoweqxei00016zhzbmh0qi15,Grade 6 PSSA ELA Diagnostic,35,cmoweqxg400106zhzmtdgoo0j,CC.1.4.6.F5,Verb Tense,CONVENTIONS,3,,yes
+database,6,cmoweqxei00016zhzbmh0qi15,Grade 6 PSSA ELA Diagnostic,36,cmoweqxg400116zhzhfghrlm1,CC.1.4.6.F6,Pronoun Usage,CONVENTIONS,3,,yes
+database,6,cmoweqxei00016zhzbmh0qi15,Grade 6 PSSA ELA Diagnostic,37,cmoweqxg400126zhzace4tgyg,CC.1.4.6.F7,Commas,CONVENTIONS,3,,yes
+database,6,cmoweqxei00016zhzbmh0qi15,Grade 6 PSSA ELA Diagnostic,38,cmoweqxg400136zhzmjosf1za,CC.1.4.6.F8,Apostrophes,CONVENTIONS,3,,yes
+database,6,cmoweqxei00016zhzbmh0qi15,Grade 6 PSSA ELA Diagnostic,39,cmoweqxg400146zhzouosczwv,CC.1.4.6.F9,Subject-Verb Agreement,CONVENTIONS,3,,yes
+database,6,cmoweqxei00016zhzbmh0qi15,Grade 6 PSSA ELA Diagnostic,40,cmoweqxg400156zhzcjo7mkau,CC.1.4.6.S,TDA Writing,TDA,4,,yes
+database,6,cmowg7f310001pspnkxcg20vx,Grade 6 PSSA ELA Diagnostic,1,cmowg7f480002pspngtpb93qa,CC.1.2.6.A,Main Idea,MCQ,2,,yes
+database,6,cmowg7f310001pspnkxcg20vx,Grade 6 PSSA ELA Diagnostic,2,cmowg7f490003pspn7c358ife,CC.1.2.6.B,Inference,MCQ,2,,yes
+database,6,cmowg7f310001pspnkxcg20vx,Grade 6 PSSA ELA Diagnostic,3,cmowg7f490004pspnihhwfqt8,CC.1.3.6.G,Point of View,MCQ,2,,yes
+database,6,cmowg7f310001pspnkxcg20vx,Grade 6 PSSA ELA Diagnostic,4,cmowg7f490005pspnqpc1ei5b,CC.1.2.6.A,Main Idea,MCQ,2,,yes
+database,6,cmowg7f310001pspnkxcg20vx,Grade 6 PSSA ELA Diagnostic,5,cmowg7f490006pspnr9e0989s,CC.1.2.6.B,Inference,MCQ,3,,yes
+database,6,cmowg7f310001pspnkxcg20vx,Grade 6 PSSA ELA Diagnostic,6,cmowg7f490007pspnmjv9zrn9,CC.1.3.6.G,Point of View,MCQ,3,,yes
+database,6,cmowg7f310001pspnkxcg20vx,Grade 6 PSSA ELA Diagnostic,7,cmowg7f490008pspnd0w2l36b,CC.1.3.6.C,Setting Impact,MCQ,3,,yes
+database,6,cmowg7f310001pspnkxcg20vx,Grade 6 PSSA ELA Diagnostic,8,cmowg7f490009pspnqnxd0nza,CC.1.3.6.C,Plot Development,MCQ,3,,yes
+database,6,cmowg7f310001pspnkxcg20vx,Grade 6 PSSA ELA Diagnostic,9,cmowg7f49000apspnv9qfcowu,CC.1.3.6.C,Plot Development,MCQ,3,,yes
+database,6,cmowg7f310001pspnkxcg20vx,Grade 6 PSSA ELA Diagnostic,10,cmowg7f49000bpspnfmobxoxu,CC.1.3.6.B,Literary Inference,EBSR,4,,yes
+database,6,cmowg7f310001pspnkxcg20vx,Grade 6 PSSA ELA Diagnostic,11,cmowg7f49000cpspn5vo9w2nl,CC.1.2.6.B,Inference,EBSR,4,,yes
+database,6,cmowg7f310001pspnkxcg20vx,Grade 6 PSSA ELA Diagnostic,12,cmowg7f49000dpspnoy2zor5o,CC.1.2.6.C,Text Structure,MULTI_SELECT,4,,yes
+database,6,cmowg7f310001pspnkxcg20vx,Grade 6 PSSA ELA Diagnostic,13,cmowg7f49000epspn1omx6eat,CC.1.3.6.G,Point of View,HOT_TEXT,4,,yes
+database,6,cmowg7f310001pspnkxcg20vx,Grade 6 PSSA ELA Diagnostic,14,cmowg7f49000fpspn4fmd317o,CC.1.2.6.D,Vocabulary,DRAG_DROP,4,,yes
+database,6,cmowg7f310001pspnkxcg20vx,Grade 6 PSSA ELA Diagnostic,15,cmowg7f49000gpspnw58xs9v2,CC.1.3.6.C,Setting Impact,MCQ,4,,yes
+database,6,cmowg7f310001pspnkxcg20vx,Grade 6 PSSA ELA Diagnostic,16,cmowg7f49000hpspn9clmw459,CC.1.3.6.C,Plot Development,MCQ,4,,yes
+database,6,cmowg7f310001pspnkxcg20vx,Grade 6 PSSA ELA Diagnostic,17,cmowg7f49000ipspnjlz6ku31,CC.1.3.6.E,Flashback,MCQ,4,,yes
+database,6,cmowg7f310001pspnkxcg20vx,Grade 6 PSSA ELA Diagnostic,18,cmowg7f49000jpspnb6mtulja,CC.1.3.6.F / CC.1.2.6.F,Figurative Language,MCQ,4,,yes
+database,6,cmowg7f310001pspnkxcg20vx,Grade 6 PSSA ELA Diagnostic,19,cmowg7f49000kpspnwq1izhz7,CC.1.3.6.F / CC.1.2.6.F,Figurative Language,MCQ,4,,yes
+database,6,cmowg7f310001pspnkxcg20vx,Grade 6 PSSA ELA Diagnostic,20,cmowg7f49000lpspndubn111x,CC.1.3.6.F / CC.1.2.6.F,Figurative Language,MCQ,4,,yes
+database,6,cmowg7f310001pspnkxcg20vx,Grade 6 PSSA ELA Diagnostic,21,cmowg7f49000mpspn0xawsxfj,CC.1.3.6.F / CC.1.2.6.F,Figurative Language,MCQ,4,,yes
+database,6,cmowg7f310001pspnkxcg20vx,Grade 6 PSSA ELA Diagnostic,22,cmowg7f49000npspn92x5wkoz,CC.1.2.6.C,Text Structure,MCQ,4,,yes
+database,6,cmowg7f310001pspnkxcg20vx,Grade 6 PSSA ELA Diagnostic,23,cmowg7f4a000opspn8rgx9ig7,CC.1.2.6.A,Main Idea,MCQ,4,,yes
+database,6,cmowg7f310001pspnkxcg20vx,Grade 6 PSSA ELA Diagnostic,24,cmowg7f4a000ppspn2nj5pe1a,CC.1.2.6.D,Vocabulary,MCQ,4,,yes
+database,6,cmowg7f310001pspnkxcg20vx,Grade 6 PSSA ELA Diagnostic,25,cmowg7f4a000qpspn0r5oar52,CC.1.2.6.B,Inference,MCQ,4,,yes
+database,6,cmowg7f310001pspnkxcg20vx,Grade 6 PSSA ELA Diagnostic,26,cmowg7f4a000rpspn6mtybp5l,CC.1.3.6.G,Point of View,MCQ,4,,yes
+database,6,cmowg7f310001pspnkxcg20vx,Grade 6 PSSA ELA Diagnostic,27,cmowg7f4a000spspnxczvqe2g,CC.1.2.6.C,Text Structure,MCQ,4,,yes
+database,6,cmowg7f310001pspnkxcg20vx,Grade 6 PSSA ELA Diagnostic,28,cmowg7f4a000tpspn5pu2lh5d,CC.1.2.6.B,Inference,EBSR,4,,yes
+database,6,cmowg7f310001pspnkxcg20vx,Grade 6 PSSA ELA Diagnostic,29,cmowg7f4a000upspnhnkmpmiu,CC.1.2.6.C,Text Structure,EBSR,4,,yes
+database,6,cmowg7f310001pspnkxcg20vx,Grade 6 PSSA ELA Diagnostic,30,cmowg7f4a000vpspnac0orgdc,CC.1.3.6.G,Point of View,MCQ,4,,yes
+database,6,cmowg7f310001pspnkxcg20vx,Grade 6 PSSA ELA Diagnostic,31,cmowg7f4a000wpspnu34jub0a,CC.1.2.6.A,Main Idea,MCQ,4,,yes
+database,6,cmowg7f310001pspnkxcg20vx,Grade 6 PSSA ELA Diagnostic,32,cmowg7f4a000xpspnw6qswnii,CC.1.2.6.D,Vocabulary,MCQ,4,,yes
+database,6,cmowg7f310001pspnkxcg20vx,Grade 6 PSSA ELA Diagnostic,33,cmowg7f4a000ypspniqxh3hmj,CC.1.2.6.C,Text Structure,MCQ,4,,yes
+database,6,cmowg7f310001pspnkxcg20vx,Grade 6 PSSA ELA Diagnostic,34,cmowg7f4a000zpspn5fhd4s2w,CC.1.2.6.A,Main Idea,MCQ,4,,yes
+database,6,cmowg7f310001pspnkxcg20vx,Grade 6 PSSA ELA Diagnostic,35,cmowg7f4a0010pspn1ygclnee,CC.1.2.6.B,Inference,MCQ,4,,yes
+database,6,cmowg7f310001pspnkxcg20vx,Grade 6 PSSA ELA Diagnostic,36,cmowg7f4a0011pspnxdax137f,CC.1.2.6.C,Text Structure,MCQ,4,,yes
+database,6,cmowg7f310001pspnkxcg20vx,Grade 6 PSSA ELA Diagnostic,37,cmowg7f4a0012pspnta9ved4v,CC.1.2.6.A,Main Idea,MCQ,4,,yes
+database,6,cmowg7f310001pspnkxcg20vx,Grade 6 PSSA ELA Diagnostic,38,cmowg7f4a0013pspna9jkq3gd,CC.1.2.6.D,Vocabulary,MCQ,4,,yes
+database,6,cmowg7f310001pspnkxcg20vx,Grade 6 PSSA ELA Diagnostic,39,cmowg7f4a0014pspnw02rt1we,CC.1.2.6.C,Text Structure,MCQ,4,,yes
+database,6,cmowg7f310001pspnkxcg20vx,Grade 6 PSSA ELA Diagnostic,40,cmowg7f4a0015pspnz90g4k1p,CC.1.3.6.A,Theme,MCQ,4,,yes
+database,6,cmowg7f310001pspnkxcg20vx,Grade 6 PSSA ELA Diagnostic,41,cmowg7f4a0016pspn5xrso69z,CC.1.3.6.D,Literary Vocabulary,MCQ,4,,yes
+database,6,cmowg7f310001pspnkxcg20vx,Grade 6 PSSA ELA Diagnostic,42,cmowg7f4b0017pspniak6qcmu,CC.1.4.6.S,TDA Writing,TDA,4,,yes
+database,6,cmowg7f310001pspnkxcg20vx,Grade 6 PSSA ELA Diagnostic,43,cmowg7f4b0018pspnz9b9f0mp,CC.1.3.6.B,Literary Inference,EBSR,4,,yes
+database,6,cmowg7f310001pspnkxcg20vx,Grade 6 PSSA ELA Diagnostic,44,cmowg7f4b0019pspnur3495q9,CC.1.2.6.B,Inference,EBSR,4,,yes
+database,6,cmowg7f310001pspnkxcg20vx,Grade 6 PSSA ELA Diagnostic,45,cmowg7f4b001apspn1o2rk8pz,CC.1.4.6.F1,Grammar,CONVENTIONS,2,,yes
+database,6,cmowg7f310001pspnkxcg20vx,Grade 6 PSSA ELA Diagnostic,46,cmowg7f4b001bpspnbh69ybdv,CC.1.4.6.F2,Punctuation,CONVENTIONS,2,,yes
+database,6,cmowg7f310001pspnkxcg20vx,Grade 6 PSSA ELA Diagnostic,47,cmowg7f4b001cpspncjatnjdb,CC.1.4.6.F3,Capitalization,CONVENTIONS,2,,yes
+database,6,cmowg7f310001pspnkxcg20vx,Grade 6 PSSA ELA Diagnostic,48,cmowg7f4b001dpspnqzr1ys5g,CC.1.4.6.F4,Sentence Structure,CONVENTIONS,2,,yes
+database,6,cmowg7f310001pspnkxcg20vx,Grade 6 PSSA ELA Diagnostic,49,cmowg7f4b001epspnidhggltr,CC.1.4.6.F5,Verb Tense,CONVENTIONS,3,,yes
+database,6,cmowg7f310001pspnkxcg20vx,Grade 6 PSSA ELA Diagnostic,50,cmowg7f4b001fpspnq06zcvnv,CC.1.4.6.F6,Pronoun Usage,CONVENTIONS,3,,yes
+database,6,cmowg7f310001pspnkxcg20vx,Grade 6 PSSA ELA Diagnostic,51,cmowg7f4b001gpspnzf3y3w5s,CC.1.4.6.F7,Commas,CONVENTIONS,3,,yes
+database,6,cmowg7f310001pspnkxcg20vx,Grade 6 PSSA ELA Diagnostic,52,cmowg7f4b001hpspn7g1r9sgw,CC.1.4.6.F8,Apostrophes,CONVENTIONS,3,,yes
+database,6,cmowg7f310001pspnkxcg20vx,Grade 6 PSSA ELA Diagnostic,53,cmowg7f4b001ipspnreozp30i,CC.1.4.6.F9,Subject-Verb Agreement,CONVENTIONS,3,,yes
+database,6,cmowg7f310001pspnkxcg20vx,Grade 6 PSSA ELA Diagnostic,54,cmowg7f4b001jpspnj3lanizn,CC.1.4.6.S,TDA Writing,TDA,4,,yes
+database,6,cmowzttjv0001twqwmmh5vw4h,Grade 6 PSSA ELA Diagnostic,1,cmowzttnj0002twqwjwblspz0,CC.1.4.6.F1,Grammar,CONVENTIONS,2,,yes
+database,6,cmowzttjv0001twqwmmh5vw4h,Grade 6 PSSA ELA Diagnostic,2,cmowzttnj0003twqwoafz6t3m,CC.1.4.6.F2,Punctuation,CONVENTIONS,2,,yes
+database,6,cmowzttjv0001twqwmmh5vw4h,Grade 6 PSSA ELA Diagnostic,3,cmowzttnj0004twqw1hz3txp1,CC.1.4.6.F3,Capitalization,CONVENTIONS,2,,yes
+database,6,cmowzttjv0001twqwmmh5vw4h,Grade 6 PSSA ELA Diagnostic,4,cmowzttnj0005twqw39qphacy,CC.1.4.6.F4,Sentence Structure,CONVENTIONS,2,,yes
+database,6,cmowzttjv0001twqwmmh5vw4h,Grade 6 PSSA ELA Diagnostic,5,cmowzttnj0006twqwcd2rehe3,CC.1.4.6.F5,Verb Tense,CONVENTIONS,3,,yes
+database,6,cmowzttjv0001twqwmmh5vw4h,Grade 6 PSSA ELA Diagnostic,6,cmowzttnj0007twqw6x8kq7aw,CC.1.4.6.F6,Pronoun Usage,CONVENTIONS,3,,yes
+database,6,cmowzttjv0001twqwmmh5vw4h,Grade 6 PSSA ELA Diagnostic,7,cmowzttnj0008twqw9m23j8oy,CC.1.4.6.F7,Commas,CONVENTIONS,3,,yes
+database,6,cmowzttjv0001twqwmmh5vw4h,Grade 6 PSSA ELA Diagnostic,8,cmowzttnj0009twqwxiz0xo9q,CC.1.4.6.F8,Apostrophes,CONVENTIONS,3,,yes
+database,6,cmowzttjv0001twqwmmh5vw4h,Grade 6 PSSA ELA Diagnostic,9,cmowzttnj000atwqw0lcx0o6e,CC.1.4.6.F9,Subject-Verb Agreement,CONVENTIONS,3,,yes
+database,6,cmowzttjv0001twqwmmh5vw4h,Grade 6 PSSA ELA Diagnostic,10,cmowzttnj000btwqwmrww2upy,CC.1.2.6.A,Main Idea,MCQ,2,,yes
+database,6,cmowzttjv0001twqwmmh5vw4h,Grade 6 PSSA ELA Diagnostic,11,cmowzttnj000ctwqwfnd5t9sc,CC.1.2.6.B,Inference,MCQ,2,,yes
+database,6,cmowzttjv0001twqwmmh5vw4h,Grade 6 PSSA ELA Diagnostic,12,cmowzttnj000dtwqw0wiyiex2,CC.1.2.6.C,Text Structure,EBSR,2,,yes
+database,6,cmowzttjv0001twqwmmh5vw4h,Grade 6 PSSA ELA Diagnostic,13,cmowzttnj000etwqwz1guzph9,CC.1.2.6.D,Vocabulary,MCQ,2,,yes
+database,6,cmowzttjv0001twqwmmh5vw4h,Grade 6 PSSA ELA Diagnostic,14,cmowzttnk000ftwqwfdwz83wh,CC.1.3.6.G,Point of View,MULTI_SELECT,3,,yes
+database,6,cmowzttjv0001twqwmmh5vw4h,Grade 6 PSSA ELA Diagnostic,15,cmowzttnk000gtwqwligburgd,CC.1.2.6.B,Inference,MCQ,3,,yes
+database,6,cmowzttjv0001twqwmmh5vw4h,Grade 6 PSSA ELA Diagnostic,16,cmowzttnk000htwqw7kh0azx5,CC.1.2.6.A,Main Idea,HOT_TEXT,3,,yes
+database,6,cmowzttjv0001twqwmmh5vw4h,Grade 6 PSSA ELA Diagnostic,17,cmowzttnk000itwqwrnhagsy2,CC.1.2.6.B,Inference,MCQ,3,,yes
+database,6,cmowzttjv0001twqwmmh5vw4h,Grade 6 PSSA ELA Diagnostic,18,cmowzttnk000jtwqwtgeo73xo,CC.1.3.6.A,Theme,MCQ,3,,yes
+database,6,cmowzttjv0001twqwmmh5vw4h,Grade 6 PSSA ELA Diagnostic,19,cmowzttnk000ktwqwoo8dflpd,CC.1.3.6.B,Literary Inference,MCQ,4,,yes
+database,6,cmowzttjv0001twqwmmh5vw4h,Grade 6 PSSA ELA Diagnostic,20,cmowzttnk000ltwqw3sgqv7tc,CC.1.3.6.C,Setting Impact,MCQ,4,,yes
+database,6,cmowzttjv0001twqwmmh5vw4h,Grade 6 PSSA ELA Diagnostic,21,cmowzttnk000mtwqwn6u7iwas,CC.1.3.6.C,Plot Development,MCQ,4,,yes
+database,6,cmowzttjv0001twqwmmh5vw4h,Grade 6 PSSA ELA Diagnostic,22,cmowzttnk000ntwqw82150y1s,CC.1.3.6.G,Point of View,MULTI_SELECT,4,,yes
+database,6,cmowzttjv0001twqwmmh5vw4h,Grade 6 PSSA ELA Diagnostic,23,cmowzttnk000otwqwt4sguilm,CC.1.3.6.F / CC.1.2.6.F,Figurative Language,MCQ,4,,yes
+database,6,cmowzttjv0001twqwmmh5vw4h,Grade 6 PSSA ELA Diagnostic,24,cmowzttnk000ptwqww27bc8ry,CC.1.3.6.E,Flashback,HOT_TEXT,4,,yes
+database,6,cmowzttjv0001twqwmmh5vw4h,Grade 6 PSSA ELA Diagnostic,25,cmowzttnk000qtwqwpf8wk7gb,CC.1.2.6.A,Main Idea,MCQ,4,,yes
+database,6,cmowzttjv0001twqwmmh5vw4h,Grade 6 PSSA ELA Diagnostic,26,cmowzttnk000rtwqwajl2alkz,CC.1.2.6.B,Inference,MCQ,4,,yes
+database,6,cmowzttjv0001twqwmmh5vw4h,Grade 6 PSSA ELA Diagnostic,27,cmowzttnk000stwqwtnbg93gz,CC.1.3.6.G,Point of View,MCQ,4,,yes
+database,6,cmowzttjv0001twqwmmh5vw4h,Grade 6 PSSA ELA Diagnostic,28,cmowzttnk000ttwqwe4iuy9yq,CC.1.2.6.C,Text Structure,MCQ,4,,yes
+database,6,cmowzttjv0001twqwmmh5vw4h,Grade 6 PSSA ELA Diagnostic,29,cmowzttnk000utwqw4a976rn2,CC.1.2.6.D,Vocabulary,MULTI_SELECT,4,,yes
+database,6,cmowzttjv0001twqwmmh5vw4h,Grade 6 PSSA ELA Diagnostic,30,cmowzttnk000vtwqwc43uwghi,CC.1.2.6.B,Inference,MCQ,4,,yes
+database,6,cmowzttjv0001twqwmmh5vw4h,Grade 6 PSSA ELA Diagnostic,31,cmowzttnk000wtwqw2v9ed4bq,CC.1.2.6.A,Main Idea,HOT_TEXT,4,,yes
+database,6,cmowzttjv0001twqwmmh5vw4h,Grade 6 PSSA ELA Diagnostic,32,cmowzttnk000xtwqw75pde0uh,CC.1.2.6.A,Main Idea,MCQ,4,,yes
+database,6,cmowzttjv0001twqwmmh5vw4h,Grade 6 PSSA ELA Diagnostic,33,cmowzttnk000ytwqwzkcxemnu,CC.1.2.6.B,Inference,MCQ,4,,yes
+database,6,cmowzttjv0001twqwmmh5vw4h,Grade 6 PSSA ELA Diagnostic,34,cmowzttnl000ztwqwq0fa0ko1,CC.1.2.6.C,Text Structure,EBSR,4,,yes
+database,6,cmowzttjv0001twqwmmh5vw4h,Grade 6 PSSA ELA Diagnostic,35,cmowzttnl0010twqw0cd85tw2,CC.1.2.6.D,Vocabulary,MCQ,4,,yes
+database,6,cmowzttjv0001twqwmmh5vw4h,Grade 6 PSSA ELA Diagnostic,36,cmowzttnl0011twqwo7nin99n,CC.1.3.6.G,Point of View,MULTI_SELECT,4,,yes
+database,6,cmowzttjv0001twqwmmh5vw4h,Grade 6 PSSA ELA Diagnostic,37,cmowzttnl0012twqw5hnd98ct,CC.1.2.6.B,Inference,MCQ,4,,yes
+database,6,cmowzttjv0001twqwmmh5vw4h,Grade 6 PSSA ELA Diagnostic,38,cmowzttnl0013twqw2qbmmpbn,CC.1.2.6.A,Main Idea,HOT_TEXT,4,,yes
+database,6,cmowzttjv0001twqwmmh5vw4h,Grade 6 PSSA ELA Diagnostic,39,cmowzttnl0014twqwwuvi8iiw,CC.1.2.6.B,Inference,MCQ,4,,yes
+database,6,cmowzttjv0001twqwmmh5vw4h,Grade 6 PSSA ELA Diagnostic,40,cmowzttnl0015twqw7uptg3br,CC.1.2.6.C,Text Structure,DRAG_DROP,4,,yes
+database,6,cmowzttjv0001twqwmmh5vw4h,Grade 6 PSSA ELA Diagnostic,41,cmowzttnl0016twqwsmgsji7h,CC.1.2.6.D,Vocabulary,MCQ,4,,yes
+database,6,cmowzttjv0001twqwmmh5vw4h,Grade 6 PSSA ELA Diagnostic,42,cmowzttnl0017twqwaygefcw2,CC.1.4.6.S,TDA Writing,TDA,4,,yes
+database,6,cmowzttjv0001twqwmmh5vw4h,Grade 6 PSSA ELA Diagnostic,43,cmowzttnl0018twqw2szbu5hv,CC.1.3.6.A,Theme,MCQ,4,,yes
+database,6,cmowzttjv0001twqwmmh5vw4h,Grade 6 PSSA ELA Diagnostic,44,cmowzttnl0019twqw3ibnb2bw,CC.1.3.6.B,Literary Inference,MCQ,4,,yes
+database,6,cmowzttjv0001twqwmmh5vw4h,Grade 6 PSSA ELA Diagnostic,45,cmowzttnl001atwqw5c09t3qo,CC.1.3.6.C,Setting Impact,MCQ,4,,yes
+database,6,cmowzttjv0001twqwmmh5vw4h,Grade 6 PSSA ELA Diagnostic,46,cmowzttnl001btwqwp5m6vtmx,CC.1.3.6.C,Plot Development,MCQ,4,,yes
+database,6,cmowzttjv0001twqwmmh5vw4h,Grade 6 PSSA ELA Diagnostic,47,cmowzttnl001ctwqwr1to2fo6,CC.1.3.6.G,Point of View,MULTI_SELECT,4,,yes
+database,6,cmowzttjv0001twqwmmh5vw4h,Grade 6 PSSA ELA Diagnostic,48,cmowzttnl001dtwqw5abautzd,CC.1.3.6.F / CC.1.2.6.F,Figurative Language,MCQ,4,,yes
+database,6,cmowzttjv0001twqwmmh5vw4h,Grade 6 PSSA ELA Diagnostic,49,cmowzttnl001etwqw3pgtn9aw,CC.1.3.6.E,Flashback,HOT_TEXT,4,,yes
+database,6,cmowzttjv0001twqwmmh5vw4h,Grade 6 PSSA ELA Diagnostic,50,cmowzttnl001ftwqwddacwfg9,CC.1.3.6.D,Literary Vocabulary,MCQ,4,,yes
+database,6,cmowzttjv0001twqwmmh5vw4h,Grade 6 PSSA ELA Diagnostic,51,cmowzttnm001gtwqwq7hwmfon,CC.1.3.6.A,Theme,DRAG_DROP,4,,yes
+database,6,cmowzttjv0001twqwmmh5vw4h,Grade 6 PSSA ELA Diagnostic,52,cmowzttnm001htwqwkunv0z66,CC.1.3.6.B,Literary Inference,MCQ,4,,yes
+database,6,cmowzttjv0001twqwmmh5vw4h,Grade 6 PSSA ELA Diagnostic,53,cmowzttnm001itwqwrdtac9re,CC.1.3.6.C,Setting Impact,MCQ,4,,yes
+database,6,cmowzttjv0001twqwmmh5vw4h,Grade 6 PSSA ELA Diagnostic,54,cmowzttnm001jtwqw5ghlv0b3,CC.1.4.6.S,TDA Writing,TDA,4,,yes
+database,6,cmox0dd6m0001vlf112gmn4mn,Grade 6 PSSA ELA Diagnostic,1,cmox0dd9w0002vlf184kwu85t,CC.1.4.6.F1,Grammar,CONVENTIONS,2,,yes
+database,6,cmox0dd6m0001vlf112gmn4mn,Grade 6 PSSA ELA Diagnostic,2,cmox0dd9w0003vlf1b4jg28ql,CC.1.4.6.F2,Punctuation,CONVENTIONS,2,,yes
+database,6,cmox0dd6m0001vlf112gmn4mn,Grade 6 PSSA ELA Diagnostic,3,cmox0dd9w0004vlf17q1zg3w3,CC.1.4.6.F3,Capitalization,CONVENTIONS,2,,yes
+database,6,cmox0dd6m0001vlf112gmn4mn,Grade 6 PSSA ELA Diagnostic,4,cmox0dd9w0005vlf1i22ge0is,CC.1.4.6.F4,Sentence Structure,CONVENTIONS,2,,yes
+database,6,cmox0dd6m0001vlf112gmn4mn,Grade 6 PSSA ELA Diagnostic,5,cmox0dd9w0006vlf1xlhcivku,CC.1.4.6.F5,Verb Tense,CONVENTIONS,3,,yes
+database,6,cmox0dd6m0001vlf112gmn4mn,Grade 6 PSSA ELA Diagnostic,6,cmox0dd9w0007vlf1k7cdqsp6,CC.1.4.6.F6,Pronoun Usage,CONVENTIONS,3,,yes
+database,6,cmox0dd6m0001vlf112gmn4mn,Grade 6 PSSA ELA Diagnostic,7,cmox0dd9w0008vlf1er2g6nv9,CC.1.4.6.F7,Commas,CONVENTIONS,3,,yes
+database,6,cmox0dd6m0001vlf112gmn4mn,Grade 6 PSSA ELA Diagnostic,8,cmox0dd9w0009vlf17807uo80,CC.1.4.6.F8,Apostrophes,CONVENTIONS,3,,yes
+database,6,cmox0dd6m0001vlf112gmn4mn,Grade 6 PSSA ELA Diagnostic,9,cmox0dd9w000avlf191x23qps,CC.1.4.6.F9,Subject-Verb Agreement,CONVENTIONS,3,,yes
+database,6,cmox0dd6m0001vlf112gmn4mn,Grade 6 PSSA ELA Diagnostic,10,cmox0dd9w000bvlf188h4rmt5,CC.1.2.6.A,Main Idea,MCQ,2,,yes
+database,6,cmox0dd6m0001vlf112gmn4mn,Grade 6 PSSA ELA Diagnostic,11,cmox0dd9w000cvlf1qultgt30,CC.1.2.6.B,Inference,MCQ,2,,yes
+database,6,cmox0dd6m0001vlf112gmn4mn,Grade 6 PSSA ELA Diagnostic,12,cmox0dd9x000dvlf1qqtl9tyv,CC.1.2.6.C,Text Structure,EBSR,2,,yes
+database,6,cmox0dd6m0001vlf112gmn4mn,Grade 6 PSSA ELA Diagnostic,13,cmox0dd9x000evlf1akje3pnr,CC.1.2.6.D,Vocabulary,MCQ,2,,yes
+database,6,cmox0dd6m0001vlf112gmn4mn,Grade 6 PSSA ELA Diagnostic,14,cmox0dd9x000fvlf15y7h3luu,CC.1.3.6.G,Point of View,DRAG_DROP,3,,yes
+database,6,cmox0dd6m0001vlf112gmn4mn,Grade 6 PSSA ELA Diagnostic,15,cmox0dd9x000gvlf1vd4ozl58,CC.1.2.6.B,Inference,MCQ,3,,yes
+database,6,cmox0dd6m0001vlf112gmn4mn,Grade 6 PSSA ELA Diagnostic,16,cmox0dd9x000hvlf1u9c0qxq3,CC.1.2.6.A,Main Idea,HOT_TEXT,3,,yes
+database,6,cmox0dd6m0001vlf112gmn4mn,Grade 6 PSSA ELA Diagnostic,17,cmox0dd9x000ivlf1j1nkcst0,CC.1.2.6.B,Inference,MCQ,3,,yes
+database,6,cmox0dd6m0001vlf112gmn4mn,Grade 6 PSSA ELA Diagnostic,18,cmox0dd9x000jvlf1lldzt8ak,CC.1.3.6.A,Theme,MCQ,3,,yes
+database,6,cmox0dd6m0001vlf112gmn4mn,Grade 6 PSSA ELA Diagnostic,19,cmox0dd9x000kvlf1b5bs54rd,CC.1.3.6.B,Literary Inference,MCQ,4,,yes
+database,6,cmox0dd6m0001vlf112gmn4mn,Grade 6 PSSA ELA Diagnostic,20,cmox0dd9x000lvlf17uanr68a,CC.1.3.6.C,Setting Impact,MCQ,4,,yes
+database,6,cmox0dd6m0001vlf112gmn4mn,Grade 6 PSSA ELA Diagnostic,21,cmox0dd9x000mvlf1x8y9cuhc,CC.1.3.6.C,Plot Development,MCQ,4,,yes
+database,6,cmox0dd6m0001vlf112gmn4mn,Grade 6 PSSA ELA Diagnostic,22,cmox0dd9x000nvlf1cqpvjbg7,CC.1.3.6.G,Point of View,DRAG_DROP,4,,yes
+database,6,cmox0dd6m0001vlf112gmn4mn,Grade 6 PSSA ELA Diagnostic,23,cmox0dd9x000ovlf144tjovzn,CC.1.3.6.F / CC.1.2.6.F,Figurative Language,MCQ,4,,yes
+database,6,cmox0dd6m0001vlf112gmn4mn,Grade 6 PSSA ELA Diagnostic,24,cmox0dd9x000pvlf1glyvrfhn,CC.1.3.6.E,Flashback,HOT_TEXT,4,,yes
+database,6,cmox0dd6m0001vlf112gmn4mn,Grade 6 PSSA ELA Diagnostic,25,cmox0dd9x000qvlf1yfbqlfwx,CC.1.2.6.A,Main Idea,MCQ,4,,yes
+database,6,cmox0dd6m0001vlf112gmn4mn,Grade 6 PSSA ELA Diagnostic,26,cmox0dd9x000rvlf1zi1mvfg9,CC.1.2.6.B,Inference,MCQ,4,,yes
+database,6,cmox0dd6m0001vlf112gmn4mn,Grade 6 PSSA ELA Diagnostic,27,cmox0dd9x000svlf1kldzh4or,CC.1.3.6.G,Point of View,MCQ,4,,yes
+database,6,cmox0dd6m0001vlf112gmn4mn,Grade 6 PSSA ELA Diagnostic,28,cmox0dd9y000tvlf1f7arl9qt,CC.1.2.6.C,Text Structure,MCQ,4,,yes
+database,6,cmox0dd6m0001vlf112gmn4mn,Grade 6 PSSA ELA Diagnostic,29,cmox0dd9y000uvlf1takspubq,CC.1.2.6.D,Vocabulary,DRAG_DROP,4,,yes
+database,6,cmox0dd6m0001vlf112gmn4mn,Grade 6 PSSA ELA Diagnostic,30,cmox0dd9y000vvlf1nzzj84lv,CC.1.2.6.B,Inference,MCQ,4,,yes
+database,6,cmox0dd6m0001vlf112gmn4mn,Grade 6 PSSA ELA Diagnostic,31,cmox0dd9y000wvlf17uzb5fut,CC.1.2.6.A,Main Idea,HOT_TEXT,4,,yes
+database,6,cmox0dd6m0001vlf112gmn4mn,Grade 6 PSSA ELA Diagnostic,32,cmox0dd9y000xvlf1uitexay7,CC.1.2.6.A,Main Idea,MCQ,4,,yes
+database,6,cmox0dd6m0001vlf112gmn4mn,Grade 6 PSSA ELA Diagnostic,33,cmox0dd9y000yvlf12hr793ui,CC.1.2.6.B,Inference,MCQ,4,,yes
+database,6,cmox0dd6m0001vlf112gmn4mn,Grade 6 PSSA ELA Diagnostic,34,cmox0dd9y000zvlf1x0evh518,CC.1.2.6.C,Text Structure,EBSR,4,,yes
+database,6,cmox0dd6m0001vlf112gmn4mn,Grade 6 PSSA ELA Diagnostic,35,cmox0dd9y0010vlf1syet3hax,CC.1.2.6.D,Vocabulary,MCQ,4,,yes
+database,6,cmox0dd6m0001vlf112gmn4mn,Grade 6 PSSA ELA Diagnostic,36,cmox0dd9y0011vlf1ai3m9wvy,CC.1.3.6.G,Point of View,DRAG_DROP,4,,yes
+database,6,cmox0dd6m0001vlf112gmn4mn,Grade 6 PSSA ELA Diagnostic,37,cmox0dd9y0012vlf1gam6371d,CC.1.2.6.B,Inference,MCQ,4,,yes
+database,6,cmox0dd6m0001vlf112gmn4mn,Grade 6 PSSA ELA Diagnostic,38,cmox0dd9y0013vlf1qgavb35x,CC.1.2.6.A,Main Idea,HOT_TEXT,4,,yes
+database,6,cmox0dd6m0001vlf112gmn4mn,Grade 6 PSSA ELA Diagnostic,39,cmox0dd9y0014vlf19xr5bpys,CC.1.2.6.B,Inference,MCQ,4,,yes
+database,6,cmox0dd6m0001vlf112gmn4mn,Grade 6 PSSA ELA Diagnostic,40,cmox0dd9y0015vlf1a0v2z8nn,CC.1.2.6.C,Text Structure,MULTI_SELECT,4,,yes
+database,6,cmox0dd6m0001vlf112gmn4mn,Grade 6 PSSA ELA Diagnostic,41,cmox0dd9y0016vlf1ayab3jpf,CC.1.2.6.D,Vocabulary,MCQ,4,,yes
+database,6,cmox0dd6m0001vlf112gmn4mn,Grade 6 PSSA ELA Diagnostic,42,cmox0dd9z0017vlf1rsc1qhzc,CC.1.4.6.S,TDA Writing,TDA,4,,yes
+database,6,cmox0dd6m0001vlf112gmn4mn,Grade 6 PSSA ELA Diagnostic,43,cmox0dd9z0018vlf1ij7l9x7i,CC.1.3.6.A,Theme,MCQ,4,,yes
+database,6,cmox0dd6m0001vlf112gmn4mn,Grade 6 PSSA ELA Diagnostic,44,cmox0dd9z0019vlf17sedg3fh,CC.1.3.6.B,Literary Inference,MCQ,4,,yes
+database,6,cmox0dd6m0001vlf112gmn4mn,Grade 6 PSSA ELA Diagnostic,45,cmox0dd9z001avlf17ilhgkjh,CC.1.3.6.C,Setting Impact,MCQ,4,,yes
+database,6,cmox0dd6m0001vlf112gmn4mn,Grade 6 PSSA ELA Diagnostic,46,cmox0dd9z001bvlf1v68a7133,CC.1.3.6.C,Plot Development,MCQ,4,,yes
+database,6,cmox0dd6m0001vlf112gmn4mn,Grade 6 PSSA ELA Diagnostic,47,cmox0dd9z001cvlf1f10cs9fj,CC.1.3.6.G,Point of View,DRAG_DROP,4,,yes
+database,6,cmox0dd6m0001vlf112gmn4mn,Grade 6 PSSA ELA Diagnostic,48,cmox0dd9z001dvlf1ceukqir9,CC.1.3.6.F / CC.1.2.6.F,Figurative Language,MCQ,4,,yes
+database,6,cmox0dd6m0001vlf112gmn4mn,Grade 6 PSSA ELA Diagnostic,49,cmox0dd9z001evlf18lebojhd,CC.1.3.6.E,Flashback,HOT_TEXT,4,,yes
+database,6,cmox0dd6m0001vlf112gmn4mn,Grade 6 PSSA ELA Diagnostic,50,cmox0dd9z001fvlf1tvdwml49,CC.1.3.6.D,Literary Vocabulary,MCQ,4,,yes
+database,6,cmox0dd6m0001vlf112gmn4mn,Grade 6 PSSA ELA Diagnostic,51,cmox0dd9z001gvlf1i0jn13t8,CC.1.3.6.A,Theme,MULTI_SELECT,4,,yes
+database,6,cmox0dd6m0001vlf112gmn4mn,Grade 6 PSSA ELA Diagnostic,52,cmox0dd9z001hvlf1sky9tg47,CC.1.3.6.B,Literary Inference,MCQ,4,,yes
+database,6,cmox0dd6m0001vlf112gmn4mn,Grade 6 PSSA ELA Diagnostic,53,cmox0dd9z001ivlf19gr6u98o,CC.1.3.6.C,Setting Impact,MCQ,4,,yes
+database,6,cmox0dd6m0001vlf112gmn4mn,Grade 6 PSSA ELA Diagnostic,54,cmox0dd9z001jvlf1jnuqg7o2,CC.1.4.6.S,TDA Writing,TDA,4,,yes
+database,6,cmox0o8jm000174o54afnlqsl,Grade 6 PSSA ELA Diagnostic,1,cmox0o8mx000274o54qi7nzqc,CC.1.4.6.F1,Grammar,CONVENTIONS,2,,yes
+database,6,cmox0o8jm000174o54afnlqsl,Grade 6 PSSA ELA Diagnostic,2,cmox0o8mx000374o5v1wdq23i,CC.1.4.6.F2,Punctuation,CONVENTIONS,2,,yes
+database,6,cmox0o8jm000174o54afnlqsl,Grade 6 PSSA ELA Diagnostic,3,cmox0o8mx000474o5ro3wao4g,CC.1.4.6.F3,Capitalization,HOT_TEXT,2,,yes
+database,6,cmox0o8jm000174o54afnlqsl,Grade 6 PSSA ELA Diagnostic,4,cmox0o8mx000574o5qc2ct87u,CC.1.4.6.F4,Sentence Structure,CONVENTIONS,2,,yes
+database,6,cmox0o8jm000174o54afnlqsl,Grade 6 PSSA ELA Diagnostic,5,cmox0o8mx000674o54w5x6x37,CC.1.4.6.F5,Verb Tense,CONVENTIONS,3,,yes
+database,6,cmox0o8jm000174o54afnlqsl,Grade 6 PSSA ELA Diagnostic,6,cmox0o8mx000774o5w9tn5vfn,CC.1.4.6.F6,Pronoun Usage,MULTI_SELECT,3,,yes
+database,6,cmox0o8jm000174o54afnlqsl,Grade 6 PSSA ELA Diagnostic,7,cmox0o8mx000874o5qhg4pwps,CC.1.4.6.F7,Commas,CONVENTIONS,3,,yes
+database,6,cmox0o8jm000174o54afnlqsl,Grade 6 PSSA ELA Diagnostic,8,cmox0o8mx000974o5szp0xtsc,CC.1.4.6.F8,Apostrophes,CONVENTIONS,3,,yes
+database,6,cmox0o8jm000174o54afnlqsl,Grade 6 PSSA ELA Diagnostic,9,cmox0o8mx000a74o5vjcd444c,CC.1.4.6.F9,Subject-Verb Agreement,DRAG_DROP,3,,yes
+database,6,cmox0o8jm000174o54afnlqsl,Grade 6 PSSA ELA Diagnostic,10,cmox0o8mx000b74o5zmu315bc,CC.1.2.6.A,Main Idea,MCQ,2,,yes
+database,6,cmox0o8jm000174o54afnlqsl,Grade 6 PSSA ELA Diagnostic,11,cmox0o8mx000c74o5pmilnkmn,CC.1.2.6.B,Inference,MCQ,2,,yes
+database,6,cmox0o8jm000174o54afnlqsl,Grade 6 PSSA ELA Diagnostic,12,cmox0o8my000d74o5v3byu4on,CC.1.2.6.C,Text Structure,EBSR,2,,yes
+database,6,cmox0o8jm000174o54afnlqsl,Grade 6 PSSA ELA Diagnostic,13,cmox0o8my000e74o55i1inxus,CC.1.2.6.D,Vocabulary,MCQ,2,,yes
+database,6,cmox0o8jm000174o54afnlqsl,Grade 6 PSSA ELA Diagnostic,14,cmox0o8my000f74o55q5dwt7t,CC.1.3.6.G,Point of View,DRAG_DROP,3,,yes
+database,6,cmox0o8jm000174o54afnlqsl,Grade 6 PSSA ELA Diagnostic,15,cmox0o8my000g74o5wty3bgid,CC.1.2.6.B,Inference,MCQ,3,,yes
+database,6,cmox0o8jm000174o54afnlqsl,Grade 6 PSSA ELA Diagnostic,16,cmox0o8my000h74o56y90tk4q,CC.1.2.6.A,Main Idea,HOT_TEXT,3,,yes
+database,6,cmox0o8jm000174o54afnlqsl,Grade 6 PSSA ELA Diagnostic,17,cmox0o8my000i74o5z2fu4wjt,CC.1.2.6.B,Inference,MCQ,3,,yes
+database,6,cmox0o8jm000174o54afnlqsl,Grade 6 PSSA ELA Diagnostic,18,cmox0o8my000j74o5gmxpskxd,CC.1.3.6.A,Theme,MCQ,3,,yes
+database,6,cmox0o8jm000174o54afnlqsl,Grade 6 PSSA ELA Diagnostic,19,cmox0o8my000k74o59wx7u374,CC.1.3.6.B,Literary Inference,MCQ,4,,yes
+database,6,cmox0o8jm000174o54afnlqsl,Grade 6 PSSA ELA Diagnostic,20,cmox0o8my000l74o5ehgc9s2c,CC.1.3.6.C,Setting Impact,MCQ,4,,yes
+database,6,cmox0o8jm000174o54afnlqsl,Grade 6 PSSA ELA Diagnostic,21,cmox0o8my000m74o5oexd07cb,CC.1.3.6.C,Plot Development,MCQ,4,,yes
+database,6,cmox0o8jm000174o54afnlqsl,Grade 6 PSSA ELA Diagnostic,22,cmox0o8my000n74o5x0a46mk7,CC.1.3.6.G,Point of View,DRAG_DROP,4,,yes
+database,6,cmox0o8jm000174o54afnlqsl,Grade 6 PSSA ELA Diagnostic,23,cmox0o8my000o74o53l1craak,CC.1.3.6.F / CC.1.2.6.F,Figurative Language,MCQ,4,,yes
+database,6,cmox0o8jm000174o54afnlqsl,Grade 6 PSSA ELA Diagnostic,24,cmox0o8my000p74o5w5vj4ita,CC.1.3.6.E,Flashback,HOT_TEXT,4,,yes
+database,6,cmox0o8jm000174o54afnlqsl,Grade 6 PSSA ELA Diagnostic,25,cmox0o8my000q74o5fqr9nhry,CC.1.2.6.A,Main Idea,MCQ,4,,yes
+database,6,cmox0o8jm000174o54afnlqsl,Grade 6 PSSA ELA Diagnostic,26,cmox0o8my000r74o5p4pyl2s0,CC.1.2.6.B,Inference,MCQ,4,,yes
+database,6,cmox0o8jm000174o54afnlqsl,Grade 6 PSSA ELA Diagnostic,27,cmox0o8my000s74o5puwxkc30,CC.1.3.6.G,Point of View,MCQ,4,,yes
+database,6,cmox0o8jm000174o54afnlqsl,Grade 6 PSSA ELA Diagnostic,28,cmox0o8my000t74o5qqo946rx,CC.1.2.6.C,Text Structure,MCQ,4,,yes
+database,6,cmox0o8jm000174o54afnlqsl,Grade 6 PSSA ELA Diagnostic,29,cmox0o8my000u74o50k40cz2i,CC.1.2.6.D,Vocabulary,DRAG_DROP,4,,yes
+database,6,cmox0o8jm000174o54afnlqsl,Grade 6 PSSA ELA Diagnostic,30,cmox0o8my000v74o56s0sdapp,CC.1.2.6.B,Inference,MCQ,4,,yes
+database,6,cmox0o8jm000174o54afnlqsl,Grade 6 PSSA ELA Diagnostic,31,cmox0o8my000w74o5cazybrzm,CC.1.2.6.A,Main Idea,HOT_TEXT,4,,yes
+database,6,cmox0o8jm000174o54afnlqsl,Grade 6 PSSA ELA Diagnostic,32,cmox0o8my000x74o5mtfvv8f8,CC.1.2.6.A,Main Idea,MCQ,4,,yes
+database,6,cmox0o8jm000174o54afnlqsl,Grade 6 PSSA ELA Diagnostic,33,cmox0o8my000y74o5cs4wdboc,CC.1.2.6.B,Inference,MCQ,4,,yes
+database,6,cmox0o8jm000174o54afnlqsl,Grade 6 PSSA ELA Diagnostic,34,cmox0o8my000z74o5t9q83thj,CC.1.2.6.C,Text Structure,EBSR,4,,yes
+database,6,cmox0o8jm000174o54afnlqsl,Grade 6 PSSA ELA Diagnostic,35,cmox0o8my001074o5e8lth1xk,CC.1.2.6.D,Vocabulary,MCQ,4,,yes
+database,6,cmox0o8jm000174o54afnlqsl,Grade 6 PSSA ELA Diagnostic,36,cmox0o8mz001174o5oyc5bkf6,CC.1.3.6.G,Point of View,DRAG_DROP,4,,yes
+database,6,cmox0o8jm000174o54afnlqsl,Grade 6 PSSA ELA Diagnostic,37,cmox0o8mz001274o54hfnq4n7,CC.1.2.6.B,Inference,MCQ,4,,yes
+database,6,cmox0o8jm000174o54afnlqsl,Grade 6 PSSA ELA Diagnostic,38,cmox0o8mz001374o5rjlo66q4,CC.1.2.6.A,Main Idea,HOT_TEXT,4,,yes
+database,6,cmox0o8jm000174o54afnlqsl,Grade 6 PSSA ELA Diagnostic,39,cmox0o8mz001474o5rliw8jgc,CC.1.2.6.B,Inference,MCQ,4,,yes
+database,6,cmox0o8jm000174o54afnlqsl,Grade 6 PSSA ELA Diagnostic,40,cmox0o8mz001574o5dgn1jc8k,CC.1.2.6.C,Text Structure,MULTI_SELECT,4,,yes
+database,6,cmox0o8jm000174o54afnlqsl,Grade 6 PSSA ELA Diagnostic,41,cmox0o8mz001674o5lg2bw5ug,CC.1.2.6.D,Vocabulary,MCQ,4,,yes
+database,6,cmox0o8jm000174o54afnlqsl,Grade 6 PSSA ELA Diagnostic,42,cmox0o8mz001774o58qrm9xys,CC.1.4.6.S,TDA Writing,TDA,4,,yes
+database,6,cmox0o8jm000174o54afnlqsl,Grade 6 PSSA ELA Diagnostic,43,cmox0o8mz001874o5ip4iy789,CC.1.3.6.A,Theme,MCQ,4,,yes
+database,6,cmox0o8jm000174o54afnlqsl,Grade 6 PSSA ELA Diagnostic,44,cmox0o8mz001974o5opg1p9mm,CC.1.3.6.B,Literary Inference,MCQ,4,,yes
+database,6,cmox0o8jm000174o54afnlqsl,Grade 6 PSSA ELA Diagnostic,45,cmox0o8mz001a74o5g1ul1gwt,CC.1.3.6.C,Setting Impact,MCQ,4,,yes
+database,6,cmox0o8jm000174o54afnlqsl,Grade 6 PSSA ELA Diagnostic,46,cmox0o8mz001b74o5wu2f9vle,CC.1.3.6.C,Plot Development,MCQ,4,,yes
+database,6,cmox0o8jm000174o54afnlqsl,Grade 6 PSSA ELA Diagnostic,47,cmox0o8mz001c74o5xzjn38e3,CC.1.3.6.G,Point of View,DRAG_DROP,4,,yes
+database,6,cmox0o8jm000174o54afnlqsl,Grade 6 PSSA ELA Diagnostic,48,cmox0o8mz001d74o59fljna32,CC.1.3.6.F / CC.1.2.6.F,Figurative Language,MCQ,4,,yes
+database,6,cmox0o8jm000174o54afnlqsl,Grade 6 PSSA ELA Diagnostic,49,cmox0o8mz001e74o55eqne5mv,CC.1.3.6.E,Flashback,HOT_TEXT,4,,yes
+database,6,cmox0o8jm000174o54afnlqsl,Grade 6 PSSA ELA Diagnostic,50,cmox0o8mz001f74o59v5bd66d,CC.1.3.6.D,Literary Vocabulary,MCQ,4,,yes
+database,6,cmox0o8jm000174o54afnlqsl,Grade 6 PSSA ELA Diagnostic,51,cmox0o8mz001g74o5rp2hkqw8,CC.1.3.6.A,Theme,MULTI_SELECT,4,,yes
+database,6,cmox0o8jm000174o54afnlqsl,Grade 6 PSSA ELA Diagnostic,52,cmox0o8mz001h74o5ji979588,CC.1.3.6.B,Literary Inference,MCQ,4,,yes
+database,6,cmox0o8jm000174o54afnlqsl,Grade 6 PSSA ELA Diagnostic,53,cmox0o8mz001i74o5fhqg50x5,CC.1.3.6.C,Setting Impact,MCQ,4,,yes
+database,6,cmox0o8jm000174o54afnlqsl,Grade 6 PSSA ELA Diagnostic,54,cmox0o8mz001j74o5e51b12kk,CC.1.4.6.S,TDA Writing,TDA,4,,yes
+database,6,cmox1en5a00017pv3i0wh52rj,Grade 6 PSSA ELA Diagnostic,1,cmox1en8o00027pv3dg21y2l1,CC.1.4.6.F1,Grammar,CONVENTIONS,2,,yes
+database,6,cmox1en5a00017pv3i0wh52rj,Grade 6 PSSA ELA Diagnostic,2,cmox1en8o00037pv3pnwbw479,CC.1.4.6.F2,Punctuation,DRAG_DROP,2,,yes
+database,6,cmox1en5a00017pv3i0wh52rj,Grade 6 PSSA ELA Diagnostic,3,cmox1en8o00047pv3gk75b57j,CC.1.4.6.F3,Capitalization,HOT_TEXT,2,,yes
+database,6,cmox1en5a00017pv3i0wh52rj,Grade 6 PSSA ELA Diagnostic,4,cmox1en8o00057pv3zwkdo7jr,CC.1.4.6.F4,Sentence Structure,CONVENTIONS,2,,yes
+database,6,cmox1en5a00017pv3i0wh52rj,Grade 6 PSSA ELA Diagnostic,5,cmox1en8o00067pv3rhmnk0oc,CC.1.4.6.F5,Verb Tense,CONVENTIONS,3,,yes
+database,6,cmox1en5a00017pv3i0wh52rj,Grade 6 PSSA ELA Diagnostic,6,cmox1en8o00077pv3tld3rnby,CC.1.4.6.F6,Pronoun Usage,MULTI_SELECT,3,,yes
+database,6,cmox1en5a00017pv3i0wh52rj,Grade 6 PSSA ELA Diagnostic,7,cmox1en8o00087pv3wd10qufx,CC.1.4.6.F7,Commas,CONVENTIONS,3,,yes
+database,6,cmox1en5a00017pv3i0wh52rj,Grade 6 PSSA ELA Diagnostic,8,cmox1en8o00097pv3ujz0ycy2,CC.1.4.6.F8,Apostrophes,CONVENTIONS,3,,yes
+database,6,cmox1en5a00017pv3i0wh52rj,Grade 6 PSSA ELA Diagnostic,9,cmox1en8o000a7pv3e8ppm6fa,CC.1.4.6.F9,Subject-Verb Agreement,DRAG_DROP,3,,yes
+database,6,cmox1en5a00017pv3i0wh52rj,Grade 6 PSSA ELA Diagnostic,10,cmox1en8o000b7pv3gwoujq30,CC.1.2.6.A,Main Idea,MCQ,2,,yes
+database,6,cmox1en5a00017pv3i0wh52rj,Grade 6 PSSA ELA Diagnostic,11,cmox1en8o000c7pv3cy3qq5nx,CC.1.2.6.B,Inference,MCQ,2,,yes
+database,6,cmox1en5a00017pv3i0wh52rj,Grade 6 PSSA ELA Diagnostic,12,cmox1en8o000d7pv3r1n8jzbc,CC.1.2.6.C,Text Structure,EBSR,2,,yes
+database,6,cmox1en5a00017pv3i0wh52rj,Grade 6 PSSA ELA Diagnostic,13,cmox1en8o000e7pv3th37xcdk,CC.1.2.6.D,Vocabulary,MCQ,2,,yes
+database,6,cmox1en5a00017pv3i0wh52rj,Grade 6 PSSA ELA Diagnostic,14,cmox1en8o000f7pv3wbxotou1,CC.1.3.6.G,Point of View,DRAG_DROP,3,,yes
+database,6,cmox1en5a00017pv3i0wh52rj,Grade 6 PSSA ELA Diagnostic,15,cmox1en8o000g7pv370r058bd,CC.1.2.6.B,Inference,MCQ,3,,yes
+database,6,cmox1en5a00017pv3i0wh52rj,Grade 6 PSSA ELA Diagnostic,16,cmox1en8o000h7pv3k2f2llxk,CC.1.2.6.A,Main Idea,HOT_TEXT,3,,yes
+database,6,cmox1en5a00017pv3i0wh52rj,Grade 6 PSSA ELA Diagnostic,17,cmox1en8o000i7pv3fflr5mji,CC.1.2.6.B,Inference,MCQ,3,,yes
+database,6,cmox1en5a00017pv3i0wh52rj,Grade 6 PSSA ELA Diagnostic,18,cmox1en8o000j7pv3p2f95u5a,CC.1.3.6.A,Theme,MCQ,3,,yes
+database,6,cmox1en5a00017pv3i0wh52rj,Grade 6 PSSA ELA Diagnostic,19,cmox1en8o000k7pv38uj67vze,CC.1.3.6.B,Literary Inference,MCQ,4,,yes
+database,6,cmox1en5a00017pv3i0wh52rj,Grade 6 PSSA ELA Diagnostic,20,cmox1en8o000l7pv324kjmtqj,CC.1.3.6.C,Setting Impact,MCQ,4,,yes
+database,6,cmox1en5a00017pv3i0wh52rj,Grade 6 PSSA ELA Diagnostic,21,cmox1en8o000m7pv343gupi9n,CC.1.3.6.C,Plot Development,MCQ,4,,yes
+database,6,cmox1en5a00017pv3i0wh52rj,Grade 6 PSSA ELA Diagnostic,22,cmox1en8o000n7pv3po1zl5f6,CC.1.3.6.G,Point of View,DRAG_DROP,4,,yes
+database,6,cmox1en5a00017pv3i0wh52rj,Grade 6 PSSA ELA Diagnostic,23,cmox1en8o000o7pv3vhmfssfq,CC.1.3.6.F / CC.1.2.6.F,Figurative Language,MCQ,4,,yes
+database,6,cmox1en5a00017pv3i0wh52rj,Grade 6 PSSA ELA Diagnostic,24,cmox1en8o000p7pv3tplkj5v8,CC.1.3.6.E,Flashback,HOT_TEXT,4,,yes
+database,6,cmox1en5a00017pv3i0wh52rj,Grade 6 PSSA ELA Diagnostic,25,cmox1en8o000q7pv30mtbr112,CC.1.2.6.A,Main Idea,MCQ,4,,yes
+database,6,cmox1en5a00017pv3i0wh52rj,Grade 6 PSSA ELA Diagnostic,26,cmox1en8o000r7pv3end8swvg,CC.1.2.6.B,Inference,MCQ,4,,yes
+database,6,cmox1en5a00017pv3i0wh52rj,Grade 6 PSSA ELA Diagnostic,27,cmox1en8o000s7pv3l6yds9rv,CC.1.3.6.G,Point of View,MCQ,4,,yes
+database,6,cmox1en5a00017pv3i0wh52rj,Grade 6 PSSA ELA Diagnostic,28,cmox1en8o000t7pv3jqiq6jyj,CC.1.2.6.C,Text Structure,MCQ,4,,yes
+database,6,cmox1en5a00017pv3i0wh52rj,Grade 6 PSSA ELA Diagnostic,29,cmox1en8o000u7pv3a7qfo9ha,CC.1.2.6.D,Vocabulary,DRAG_DROP,4,,yes
+database,6,cmox1en5a00017pv3i0wh52rj,Grade 6 PSSA ELA Diagnostic,30,cmox1en8o000v7pv3g499kgyf,CC.1.2.6.B,Inference,MCQ,4,,yes
+database,6,cmox1en5a00017pv3i0wh52rj,Grade 6 PSSA ELA Diagnostic,31,cmox1en8o000w7pv39bj7zahj,CC.1.2.6.A,Main Idea,HOT_TEXT,4,,yes
+database,6,cmox1en5a00017pv3i0wh52rj,Grade 6 PSSA ELA Diagnostic,32,cmox1en8o000x7pv33y4n5cux,CC.1.2.6.A,Main Idea,MCQ,4,,yes
+database,6,cmox1en5a00017pv3i0wh52rj,Grade 6 PSSA ELA Diagnostic,33,cmox1en8p000y7pv3aqpgnfl8,CC.1.2.6.B,Inference,MCQ,4,,yes
+database,6,cmox1en5a00017pv3i0wh52rj,Grade 6 PSSA ELA Diagnostic,34,cmox1en8p000z7pv36w8glrdz,CC.1.2.6.C,Text Structure,EBSR,4,,yes
+database,6,cmox1en5a00017pv3i0wh52rj,Grade 6 PSSA ELA Diagnostic,35,cmox1en8p00107pv35t07nwq2,CC.1.2.6.D,Vocabulary,MCQ,4,,yes
+database,6,cmox1en5a00017pv3i0wh52rj,Grade 6 PSSA ELA Diagnostic,36,cmox1en8p00117pv31ch7pa2q,CC.1.3.6.G,Point of View,DRAG_DROP,4,,yes
+database,6,cmox1en5a00017pv3i0wh52rj,Grade 6 PSSA ELA Diagnostic,37,cmox1en8p00127pv30goamu71,CC.1.2.6.B,Inference,MCQ,4,,yes
+database,6,cmox1en5a00017pv3i0wh52rj,Grade 6 PSSA ELA Diagnostic,38,cmox1en8p00137pv31ymxkgh2,CC.1.2.6.A,Main Idea,HOT_TEXT,4,,yes
+database,6,cmox1en5a00017pv3i0wh52rj,Grade 6 PSSA ELA Diagnostic,39,cmox1en8p00147pv3ahl7a2ao,CC.1.2.6.B,Inference,MCQ,4,,yes
+database,6,cmox1en5a00017pv3i0wh52rj,Grade 6 PSSA ELA Diagnostic,40,cmox1en8p00157pv3yhw096vb,CC.1.2.6.C,Text Structure,MULTI_SELECT,4,,yes
+database,6,cmox1en5a00017pv3i0wh52rj,Grade 6 PSSA ELA Diagnostic,41,cmox1en8p00167pv37fvahbv9,CC.1.2.6.D,Vocabulary,MCQ,4,,yes
+database,6,cmox1en5a00017pv3i0wh52rj,Grade 6 PSSA ELA Diagnostic,42,cmox1en8p00177pv3a9biutu2,CC.1.4.6.S,TDA Writing,TDA,4,,yes
+database,6,cmox1en5a00017pv3i0wh52rj,Grade 6 PSSA ELA Diagnostic,43,cmox1en8p00187pv38xjw2l1z,CC.1.3.6.A,Theme,MCQ,4,,yes
+database,6,cmox1en5a00017pv3i0wh52rj,Grade 6 PSSA ELA Diagnostic,44,cmox1en8p00197pv37wj2fr7i,CC.1.3.6.B,Literary Inference,MCQ,4,,yes
+database,6,cmox1en5a00017pv3i0wh52rj,Grade 6 PSSA ELA Diagnostic,45,cmox1en8p001a7pv3vmfrda4i,CC.1.3.6.C,Setting Impact,MCQ,4,,yes
+database,6,cmox1en5a00017pv3i0wh52rj,Grade 6 PSSA ELA Diagnostic,46,cmox1en8p001b7pv3hf9jx1r5,CC.1.3.6.C,Plot Development,MCQ,4,,yes
+database,6,cmox1en5a00017pv3i0wh52rj,Grade 6 PSSA ELA Diagnostic,47,cmox1en8p001c7pv37kkpit1i,CC.1.3.6.G,Point of View,DRAG_DROP,4,,yes
+database,6,cmox1en5a00017pv3i0wh52rj,Grade 6 PSSA ELA Diagnostic,48,cmox1en8p001d7pv3rhw7rbon,CC.1.3.6.F / CC.1.2.6.F,Figurative Language,MCQ,4,,yes
+database,6,cmox1en5a00017pv3i0wh52rj,Grade 6 PSSA ELA Diagnostic,49,cmox1en8p001e7pv3p8gf0ust,CC.1.3.6.E,Flashback,HOT_TEXT,4,,yes
+database,6,cmox1en5a00017pv3i0wh52rj,Grade 6 PSSA ELA Diagnostic,50,cmox1en8p001f7pv38b2k5puk,CC.1.3.6.D,Literary Vocabulary,MCQ,4,,yes
+database,6,cmox1en5a00017pv3i0wh52rj,Grade 6 PSSA ELA Diagnostic,51,cmox1en8p001g7pv3eitb2geh,CC.1.3.6.A,Theme,MULTI_SELECT,4,,yes
+database,6,cmox1en5a00017pv3i0wh52rj,Grade 6 PSSA ELA Diagnostic,52,cmox1en8p001h7pv3auwgoj90,CC.1.3.6.B,Literary Inference,MCQ,4,,yes
+database,6,cmox1en5a00017pv3i0wh52rj,Grade 6 PSSA ELA Diagnostic,53,cmox1en8p001i7pv3t2kjhq2w,CC.1.3.6.C,Setting Impact,MCQ,4,,yes
+database,6,cmox1en5a00017pv3i0wh52rj,Grade 6 PSSA ELA Diagnostic,54,cmox1en8p001j7pv34hovbdyk,CC.1.4.6.S,TDA Writing,TDA,4,,yes
+database,6,cmox1weu0000111juj7ttaghi,Grade 6 PSSA ELA Diagnostic,1,cmox1wex0000211ju9syvd5eu,CC.1.4.6.F1,Grammar,CONVENTIONS,2,,yes
+database,6,cmox1weu0000111juj7ttaghi,Grade 6 PSSA ELA Diagnostic,2,cmox1wex0000311jukrpdcdwv,CC.1.4.6.F2,Punctuation,DRAG_DROP,2,,yes
+database,6,cmox1weu0000111juj7ttaghi,Grade 6 PSSA ELA Diagnostic,3,cmox1wex0000411junmm5iwtd,CC.1.4.6.F3,Capitalization,HOT_TEXT,2,,yes
+database,6,cmox1weu0000111juj7ttaghi,Grade 6 PSSA ELA Diagnostic,4,cmox1wex0000511ju2l4odn6b,CC.1.4.6.F4,Sentence Structure,CONVENTIONS,2,,yes
+database,6,cmox1weu0000111juj7ttaghi,Grade 6 PSSA ELA Diagnostic,5,cmox1wex0000611juujvos1ym,CC.1.4.6.F5,Verb Tense,CONVENTIONS,3,,yes
+database,6,cmox1weu0000111juj7ttaghi,Grade 6 PSSA ELA Diagnostic,6,cmox1wex0000711juuhuayl81,CC.1.4.6.F6,Pronoun Usage,MULTI_SELECT,3,,yes
+database,6,cmox1weu0000111juj7ttaghi,Grade 6 PSSA ELA Diagnostic,7,cmox1wex0000811juefqedh1p,CC.1.4.6.F7,Commas,CONVENTIONS,3,,yes
+database,6,cmox1weu0000111juj7ttaghi,Grade 6 PSSA ELA Diagnostic,8,cmox1wex0000911ju1nv86uss,CC.1.4.6.F8,Apostrophes,CONVENTIONS,3,,yes
+database,6,cmox1weu0000111juj7ttaghi,Grade 6 PSSA ELA Diagnostic,9,cmox1wex0000a11juh7etlu17,CC.1.4.6.F9,Subject-Verb Agreement,DRAG_DROP,3,,yes
+database,6,cmox1weu0000111juj7ttaghi,Grade 6 PSSA ELA Diagnostic,10,cmox1wex0000b11jumi740st1,CC.1.2.6.A,Main Idea,MCQ,2,,yes
+database,6,cmox1weu0000111juj7ttaghi,Grade 6 PSSA ELA Diagnostic,11,cmox1wex0000c11juwiq2bl4m,CC.1.2.6.B,Inference,MCQ,2,,yes
+database,6,cmox1weu0000111juj7ttaghi,Grade 6 PSSA ELA Diagnostic,12,cmox1wex0000d11jutaii6nr2,CC.1.2.6.C,Text Structure,EBSR,2,,yes
+database,6,cmox1weu0000111juj7ttaghi,Grade 6 PSSA ELA Diagnostic,13,cmox1wex0000e11junbencktr,CC.1.2.6.D,Vocabulary,MCQ,2,,yes
+database,6,cmox1weu0000111juj7ttaghi,Grade 6 PSSA ELA Diagnostic,14,cmox1wex0000f11juktg3scie,CC.1.3.6.G,Point of View,DRAG_DROP,3,,yes
+database,6,cmox1weu0000111juj7ttaghi,Grade 6 PSSA ELA Diagnostic,15,cmox1wex0000g11jujyu1g0jr,CC.1.2.6.B,Inference,MCQ,3,,yes
+database,6,cmox1weu0000111juj7ttaghi,Grade 6 PSSA ELA Diagnostic,16,cmox1wex0000h11ju2vlwbl79,CC.1.2.6.A,Main Idea,HOT_TEXT,3,,yes
+database,6,cmox1weu0000111juj7ttaghi,Grade 6 PSSA ELA Diagnostic,17,cmox1wex1000i11jut5ygci0m,CC.1.2.6.B,Inference,MCQ,3,,yes
+database,6,cmox1weu0000111juj7ttaghi,Grade 6 PSSA ELA Diagnostic,18,cmox1wex1000j11ju9e08xpwu,CC.1.3.6.A,Theme,MCQ,3,,yes
+database,6,cmox1weu0000111juj7ttaghi,Grade 6 PSSA ELA Diagnostic,19,cmox1wex1000k11juph6irw5j,CC.1.3.6.B,Literary Inference,MCQ,4,,yes
+database,6,cmox1weu0000111juj7ttaghi,Grade 6 PSSA ELA Diagnostic,20,cmox1wex1000l11ju16c1nj5q,CC.1.3.6.C,Setting Impact,MCQ,4,,yes
+database,6,cmox1weu0000111juj7ttaghi,Grade 6 PSSA ELA Diagnostic,21,cmox1wex1000m11judizfgjgs,CC.1.3.6.C,Plot Development,MCQ,4,,yes
+database,6,cmox1weu0000111juj7ttaghi,Grade 6 PSSA ELA Diagnostic,22,cmox1wex1000n11jusbrrhocs,CC.1.3.6.G,Point of View,DRAG_DROP,4,,yes
+database,6,cmox1weu0000111juj7ttaghi,Grade 6 PSSA ELA Diagnostic,23,cmox1wex1000o11juzdu79pcd,CC.1.3.6.F / CC.1.2.6.F,Figurative Language,MCQ,4,,yes
+database,6,cmox1weu0000111juj7ttaghi,Grade 6 PSSA ELA Diagnostic,24,cmox1wex1000p11ju6bbatwwk,CC.1.3.6.E,Flashback,HOT_TEXT,4,,yes
+database,6,cmox1weu0000111juj7ttaghi,Grade 6 PSSA ELA Diagnostic,25,cmox1wex1000q11juzhyanrz5,CC.1.2.6.A,Main Idea,MCQ,4,,yes
+database,6,cmox1weu0000111juj7ttaghi,Grade 6 PSSA ELA Diagnostic,26,cmox1wex1000r11juyif65nmh,CC.1.2.6.B,Inference,MCQ,4,,yes
+database,6,cmox1weu0000111juj7ttaghi,Grade 6 PSSA ELA Diagnostic,27,cmox1wex1000s11juj69caqzg,CC.1.3.6.G,Point of View,MCQ,4,,yes
+database,6,cmox1weu0000111juj7ttaghi,Grade 6 PSSA ELA Diagnostic,28,cmox1wex1000t11juzw69klc7,CC.1.2.6.C,Text Structure,MCQ,4,,yes
+database,6,cmox1weu0000111juj7ttaghi,Grade 6 PSSA ELA Diagnostic,29,cmox1wex1000u11juvoih70n6,CC.1.2.6.D,Vocabulary,DRAG_DROP,4,,yes
+database,6,cmox1weu0000111juj7ttaghi,Grade 6 PSSA ELA Diagnostic,30,cmox1wex1000v11jute0229ci,CC.1.2.6.B,Inference,MCQ,4,,yes
+database,6,cmox1weu0000111juj7ttaghi,Grade 6 PSSA ELA Diagnostic,31,cmox1wex1000w11juq52o77xf,CC.1.2.6.A,Main Idea,HOT_TEXT,4,,yes
+database,6,cmox1weu0000111juj7ttaghi,Grade 6 PSSA ELA Diagnostic,32,cmox1wex1000x11jutd6yge9n,CC.1.2.6.A,Main Idea,MCQ,4,,yes
+database,6,cmox1weu0000111juj7ttaghi,Grade 6 PSSA ELA Diagnostic,33,cmox1wex1000y11ju6fc3aees,CC.1.2.6.B,Inference,MCQ,4,,yes
+database,6,cmox1weu0000111juj7ttaghi,Grade 6 PSSA ELA Diagnostic,34,cmox1wex1000z11juzo53pitk,CC.1.2.6.C,Text Structure,EBSR,4,,yes
+database,6,cmox1weu0000111juj7ttaghi,Grade 6 PSSA ELA Diagnostic,35,cmox1wex1001011ju6whwl9vt,CC.1.2.6.D,Vocabulary,MCQ,4,,yes
+database,6,cmox1weu0000111juj7ttaghi,Grade 6 PSSA ELA Diagnostic,36,cmox1wex1001111juodql4abb,CC.1.3.6.G,Point of View,DRAG_DROP,4,,yes
+database,6,cmox1weu0000111juj7ttaghi,Grade 6 PSSA ELA Diagnostic,37,cmox1wex1001211ju14kp8a7u,CC.1.2.6.B,Inference,MCQ,4,,yes
+database,6,cmox1weu0000111juj7ttaghi,Grade 6 PSSA ELA Diagnostic,38,cmox1wex2001311ju91pksyph,CC.1.2.6.A,Main Idea,HOT_TEXT,4,,yes
+database,6,cmox1weu0000111juj7ttaghi,Grade 6 PSSA ELA Diagnostic,39,cmox1wex2001411ju8zw85vds,CC.1.2.6.B,Inference,MCQ,4,,yes
+database,6,cmox1weu0000111juj7ttaghi,Grade 6 PSSA ELA Diagnostic,40,cmox1wex2001511ju7j03n5u9,CC.1.2.6.C,Text Structure,MULTI_SELECT,4,,yes
+database,6,cmox1weu0000111juj7ttaghi,Grade 6 PSSA ELA Diagnostic,41,cmox1wex2001611jutrd3aji9,CC.1.2.6.D,Vocabulary,MCQ,4,,yes
+database,6,cmox1weu0000111juj7ttaghi,Grade 6 PSSA ELA Diagnostic,42,cmox1wex2001711ju67chfoyp,CC.1.4.6.S,TDA Writing,TDA,4,,yes
+database,6,cmox1weu0000111juj7ttaghi,Grade 6 PSSA ELA Diagnostic,43,cmox1wex2001811juhep6db5u,CC.1.3.6.A,Theme,MCQ,4,,yes
+database,6,cmox1weu0000111juj7ttaghi,Grade 6 PSSA ELA Diagnostic,44,cmox1wex2001911juhd7a697e,CC.1.3.6.B,Literary Inference,MCQ,4,,yes
+database,6,cmox1weu0000111juj7ttaghi,Grade 6 PSSA ELA Diagnostic,45,cmox1wex2001a11jukccn8hci,CC.1.3.6.C,Setting Impact,MCQ,4,,yes
+database,6,cmox1weu0000111juj7ttaghi,Grade 6 PSSA ELA Diagnostic,46,cmox1wex2001b11juwzqpg90i,CC.1.3.6.C,Plot Development,MCQ,4,,yes
+database,6,cmox1weu0000111juj7ttaghi,Grade 6 PSSA ELA Diagnostic,47,cmox1wex2001c11ju8ayd7aq8,CC.1.3.6.G,Point of View,DRAG_DROP,4,,yes
+database,6,cmox1weu0000111juj7ttaghi,Grade 6 PSSA ELA Diagnostic,48,cmox1wex2001d11jud63i0gc2,CC.1.3.6.F / CC.1.2.6.F,Figurative Language,MCQ,4,,yes
+database,6,cmox1weu0000111juj7ttaghi,Grade 6 PSSA ELA Diagnostic,49,cmox1wex2001e11ju4ybrz1vk,CC.1.3.6.E,Flashback,HOT_TEXT,4,,yes
+database,6,cmox1weu0000111juj7ttaghi,Grade 6 PSSA ELA Diagnostic,50,cmox1wex2001f11juicyrao4q,CC.1.3.6.D,Literary Vocabulary,MCQ,4,,yes
+database,6,cmox1weu0000111juj7ttaghi,Grade 6 PSSA ELA Diagnostic,51,cmox1wex2001g11juxa54l309,CC.1.3.6.A,Theme,MULTI_SELECT,4,,yes
+database,6,cmox1weu0000111juj7ttaghi,Grade 6 PSSA ELA Diagnostic,52,cmox1wex2001h11jup5e5ofnl,CC.1.3.6.B,Literary Inference,MCQ,4,,yes
+database,6,cmox1weu0000111juj7ttaghi,Grade 6 PSSA ELA Diagnostic,53,cmox1wex2001i11jub9fh10y5,CC.1.3.6.C,Setting Impact,MCQ,4,,yes
+database,6,cmox1weu0000111juj7ttaghi,Grade 6 PSSA ELA Diagnostic,54,cmox1wex2001j11julhrtrm75,CC.1.4.6.S,TDA Writing,TDA,4,,yes
+database,6,cmp30b1of0003rzygvud3j634,Grade 6 PSSA ELA Baseline Diagnostic,1,cmp30b1p60004rzygec6ps7b8,CC.1.4.6.F1,Grammar,CONVENTIONS,2,,yes
+database,6,cmp30b1of0003rzygvud3j634,Grade 6 PSSA ELA Baseline Diagnostic,2,cmp30b1p60005rzygbozh0lvn,CC.1.4.6.F2,Punctuation,DRAG_DROP,2,,yes
+database,6,cmp30b1of0003rzygvud3j634,Grade 6 PSSA ELA Baseline Diagnostic,3,cmp30b1p60006rzyg373xb1cw,CC.1.4.6.F3,Capitalization,HOT_TEXT,2,,yes
+database,6,cmp30b1of0003rzygvud3j634,Grade 6 PSSA ELA Baseline Diagnostic,4,cmp30b1p60007rzyg3dp3m4hh,CC.1.4.6.F4,Sentence Structure,CONVENTIONS,2,,yes
+database,6,cmp30b1of0003rzygvud3j634,Grade 6 PSSA ELA Baseline Diagnostic,5,cmp30b1p60008rzyg6pcrjz79,CC.1.4.6.F5,Verb Tense,CONVENTIONS,3,,yes
+database,6,cmp30b1of0003rzygvud3j634,Grade 6 PSSA ELA Baseline Diagnostic,6,cmp30b1p60009rzygkbpun82v,CC.1.4.6.F6,Pronoun Usage,MULTI_SELECT,3,,yes
+database,6,cmp30b1of0003rzygvud3j634,Grade 6 PSSA ELA Baseline Diagnostic,7,cmp30b1p6000arzyghsqxs8nl,CC.1.4.6.F7,Commas,CONVENTIONS,3,,yes
+database,6,cmp30b1of0003rzygvud3j634,Grade 6 PSSA ELA Baseline Diagnostic,8,cmp30b1p6000brzygdr4eyq1m,CC.1.4.6.F8,Apostrophes,CONVENTIONS,3,,yes
+database,6,cmp30b1of0003rzygvud3j634,Grade 6 PSSA ELA Baseline Diagnostic,9,cmp30b1p6000crzygca4wvqji,CC.1.4.6.F9,Subject-Verb Agreement,DRAG_DROP,3,,yes
+database,6,cmp30b1of0003rzygvud3j634,Grade 6 PSSA ELA Baseline Diagnostic,10,cmp30b1p6000drzygkvdk9l5v,CC.1.2.6.A,Main Idea,MCQ,2,,yes
+database,6,cmp30b1of0003rzygvud3j634,Grade 6 PSSA ELA Baseline Diagnostic,11,cmp30b1p7000erzygbmaf616g,CC.1.2.6.B,Inference,MCQ,2,,yes
+database,6,cmp30b1of0003rzygvud3j634,Grade 6 PSSA ELA Baseline Diagnostic,12,cmp30b1p7000frzygszwq7b00,CC.1.2.6.C,Text Structure,EBSR,2,,yes
+database,6,cmp30b1of0003rzygvud3j634,Grade 6 PSSA ELA Baseline Diagnostic,13,cmp30b1p7000grzyg3fre69ky,CC.1.2.6.D,Vocabulary,MCQ,2,,yes
+database,6,cmp30b1of0003rzygvud3j634,Grade 6 PSSA ELA Baseline Diagnostic,14,cmp30b1p7000hrzyguxal6rj2,CC.1.3.6.G,Point of View,DRAG_DROP,3,,yes
+database,6,cmp30b1of0003rzygvud3j634,Grade 6 PSSA ELA Baseline Diagnostic,15,cmp30b1p7000irzygtdbgh8z5,CC.1.2.6.B,Inference,MCQ,3,,yes
+database,6,cmp30b1of0003rzygvud3j634,Grade 6 PSSA ELA Baseline Diagnostic,16,cmp30b1p7000jrzyg123sogb1,CC.1.2.6.A,Main Idea,HOT_TEXT,3,,yes
+database,6,cmp30b1of0003rzygvud3j634,Grade 6 PSSA ELA Baseline Diagnostic,17,cmp30b1p7000krzygu3shu3xk,CC.1.2.6.B,Inference,MCQ,3,,yes
+database,6,cmp30b1of0003rzygvud3j634,Grade 6 PSSA ELA Baseline Diagnostic,18,cmp30b1p7000lrzyg4ca62o8u,CC.1.3.6.A,Theme,MCQ,3,,yes
+database,6,cmp30b1of0003rzygvud3j634,Grade 6 PSSA ELA Baseline Diagnostic,19,cmp30b1p7000mrzyg29k4y54v,CC.1.3.6.B,Literary Inference,MCQ,4,,yes
+database,6,cmp30b1of0003rzygvud3j634,Grade 6 PSSA ELA Baseline Diagnostic,20,cmp30b1p7000nrzyg7jxppgr7,CC.1.3.6.C,Setting Impact,MCQ,4,,yes
+database,6,cmp30b1of0003rzygvud3j634,Grade 6 PSSA ELA Baseline Diagnostic,21,cmp30b1p7000orzygptu7rvbo,CC.1.3.6.C,Plot Development,MCQ,4,,yes
+database,6,cmp30b1of0003rzygvud3j634,Grade 6 PSSA ELA Baseline Diagnostic,22,cmp30b1p7000przyg1pny3qg9,CC.1.3.6.G,Point of View,DRAG_DROP,4,,yes
+database,6,cmp30b1of0003rzygvud3j634,Grade 6 PSSA ELA Baseline Diagnostic,23,cmp30b1p7000qrzyg1e4zm7wo,CC.1.3.6.F / CC.1.2.6.F,Figurative Language,MCQ,4,,yes
+database,6,cmp30b1of0003rzygvud3j634,Grade 6 PSSA ELA Baseline Diagnostic,24,cmp30b1p7000rrzygur72gs8w,CC.1.3.6.E,Flashback,HOT_TEXT,4,,yes
+database,6,cmp30b1of0003rzygvud3j634,Grade 6 PSSA ELA Baseline Diagnostic,25,cmp30b1p8000srzygbxu528ss,CC.1.2.6.A,Main Idea,MCQ,4,,yes
+database,6,cmp30b1of0003rzygvud3j634,Grade 6 PSSA ELA Baseline Diagnostic,26,cmp30b1p8000trzyge9dkqu5b,CC.1.2.6.B,Inference,MCQ,4,,yes
+database,6,cmp30b1of0003rzygvud3j634,Grade 6 PSSA ELA Baseline Diagnostic,27,cmp30b1p8000urzyg8aomdzz2,CC.1.3.6.G,Point of View,MCQ,4,,yes
+database,6,cmp30b1of0003rzygvud3j634,Grade 6 PSSA ELA Baseline Diagnostic,28,cmp30b1p8000vrzygftoknx9d,CC.1.2.6.C,Text Structure,MCQ,4,,yes
+database,6,cmp30b1of0003rzygvud3j634,Grade 6 PSSA ELA Baseline Diagnostic,29,cmp30b1p8000wrzygv8iwtt60,CC.1.2.6.D,Vocabulary,DRAG_DROP,4,,yes
+database,6,cmp30b1of0003rzygvud3j634,Grade 6 PSSA ELA Baseline Diagnostic,30,cmp30b1p8000xrzygmzdc81ak,CC.1.2.6.B,Inference,MCQ,4,,yes
+database,6,cmp30b1of0003rzygvud3j634,Grade 6 PSSA ELA Baseline Diagnostic,31,cmp30b1p8000yrzygrpp4vuav,CC.1.2.6.A,Main Idea,HOT_TEXT,4,,yes
+database,6,cmp30b1of0003rzygvud3j634,Grade 6 PSSA ELA Baseline Diagnostic,32,cmp30b1p8000zrzyg0e22v45j,CC.1.2.6.A,Main Idea,MCQ,4,,yes
+database,6,cmp30b1of0003rzygvud3j634,Grade 6 PSSA ELA Baseline Diagnostic,33,cmp30b1p80010rzyg783zaizw,CC.1.2.6.B,Inference,MCQ,4,,yes
+database,6,cmp30b1of0003rzygvud3j634,Grade 6 PSSA ELA Baseline Diagnostic,34,cmp30b1p80011rzygfaig453n,CC.1.2.6.C,Text Structure,EBSR,4,,yes
+database,6,cmp30b1of0003rzygvud3j634,Grade 6 PSSA ELA Baseline Diagnostic,35,cmp30b1p80012rzygk4p9q88n,CC.1.2.6.D,Vocabulary,MCQ,4,,yes
+database,6,cmp30b1of0003rzygvud3j634,Grade 6 PSSA ELA Baseline Diagnostic,36,cmp30b1p80013rzyg1gjac5zk,CC.1.3.6.G,Point of View,DRAG_DROP,4,,yes
+database,6,cmp30b1of0003rzygvud3j634,Grade 6 PSSA ELA Baseline Diagnostic,37,cmp30b1p90014rzyghom5sce1,CC.1.2.6.B,Inference,MCQ,4,,yes
+database,6,cmp30b1of0003rzygvud3j634,Grade 6 PSSA ELA Baseline Diagnostic,38,cmp30b1p90015rzygshf6w76n,CC.1.2.6.A,Main Idea,HOT_TEXT,4,,yes
+database,6,cmp30b1of0003rzygvud3j634,Grade 6 PSSA ELA Baseline Diagnostic,39,cmp30b1p90016rzygu79ly4pn,CC.1.2.6.B,Inference,MCQ,4,,yes
+database,6,cmp30b1of0003rzygvud3j634,Grade 6 PSSA ELA Baseline Diagnostic,40,cmp30b1p90017rzyg3dyp9wxj,CC.1.2.6.C,Text Structure,MULTI_SELECT,4,,yes
+database,6,cmp30b1of0003rzygvud3j634,Grade 6 PSSA ELA Baseline Diagnostic,41,cmp30b1p90018rzygf8hljtyx,CC.1.2.6.D,Vocabulary,MCQ,4,,yes
+database,6,cmp30b1of0003rzygvud3j634,Grade 6 PSSA ELA Baseline Diagnostic,42,cmp30b1p90019rzygssvvichs,CC.1.4.6.S,TDA Writing,TDA,4,,yes
+database,6,cmp30b1of0003rzygvud3j634,Grade 6 PSSA ELA Baseline Diagnostic,43,cmp30b1p9001arzyghms1mkz9,CC.1.3.6.A,Theme,MCQ,4,,yes
+database,6,cmp30b1of0003rzygvud3j634,Grade 6 PSSA ELA Baseline Diagnostic,44,cmp30b1p9001brzygmxuubpck,CC.1.3.6.B,Literary Inference,MCQ,4,,yes
+database,6,cmp30b1of0003rzygvud3j634,Grade 6 PSSA ELA Baseline Diagnostic,45,cmp30b1p9001crzygaqo15vpt,CC.1.3.6.C,Setting Impact,MCQ,4,,yes
+database,6,cmp30b1of0003rzygvud3j634,Grade 6 PSSA ELA Baseline Diagnostic,46,cmp30b1p9001drzygozzzwpkg,CC.1.3.6.C,Plot Development,MCQ,4,,yes
+database,6,cmp30b1of0003rzygvud3j634,Grade 6 PSSA ELA Baseline Diagnostic,47,cmp30b1p9001erzygm7ttytzw,CC.1.3.6.G,Point of View,DRAG_DROP,4,,yes
+database,6,cmp30b1of0003rzygvud3j634,Grade 6 PSSA ELA Baseline Diagnostic,48,cmp30b1p9001frzygflw0s23h,CC.1.3.6.F / CC.1.2.6.F,Figurative Language,MCQ,4,,yes
+database,6,cmp30b1of0003rzygvud3j634,Grade 6 PSSA ELA Baseline Diagnostic,49,cmp30b1p9001grzyg9w1h3gcm,CC.1.3.6.E,Flashback,HOT_TEXT,4,,yes
+database,6,cmp30b1of0003rzygvud3j634,Grade 6 PSSA ELA Baseline Diagnostic,50,cmp30b1p9001hrzygk9pxxp92,CC.1.3.6.D,Literary Vocabulary,MCQ,4,,yes
+database,6,cmp30b1of0003rzygvud3j634,Grade 6 PSSA ELA Baseline Diagnostic,51,cmp30b1pa001irzygaiw5jbow,CC.1.3.6.A,Theme,MULTI_SELECT,4,,yes
+database,6,cmp30b1of0003rzygvud3j634,Grade 6 PSSA ELA Baseline Diagnostic,52,cmp30b1pa001jrzygvi0xnqzz,CC.1.3.6.B,Literary Inference,MCQ,4,,yes
+database,6,cmp30b1of0003rzygvud3j634,Grade 6 PSSA ELA Baseline Diagnostic,53,cmp30b1pa001krzyg4m75yikx,CC.1.3.6.C,Setting Impact,MCQ,4,,yes
+database,6,cmp30b1of0003rzygvud3j634,Grade 6 PSSA ELA Baseline Diagnostic,54,cmp30b1pa001lrzyg5i8noxrw,CC.1.4.6.S,TDA Writing,TDA,4,,yes
+database,6,cmp30b8ml001trzygc0l59c6f,Grade 6 PSSA ELA Baseline Diagnostic,1,cmp30b8ng001urzygc5m6ktk5,CC.1.4.6.F1,Grammar,CONVENTIONS,2,,yes
+database,6,cmp30b8ml001trzygc0l59c6f,Grade 6 PSSA ELA Baseline Diagnostic,2,cmp30b8ng001vrzygyx4u3oxl,CC.1.4.6.F2,Punctuation,DRAG_DROP,2,,yes
+database,6,cmp30b8ml001trzygc0l59c6f,Grade 6 PSSA ELA Baseline Diagnostic,3,cmp30b8ng001wrzygg466khqy,CC.1.4.6.F3,Capitalization,HOT_TEXT,2,,yes
+database,6,cmp30b8ml001trzygc0l59c6f,Grade 6 PSSA ELA Baseline Diagnostic,4,cmp30b8ng001xrzyg4oip43si,CC.1.4.6.F4,Sentence Structure,CONVENTIONS,2,,yes
+database,6,cmp30b8ml001trzygc0l59c6f,Grade 6 PSSA ELA Baseline Diagnostic,5,cmp30b8ng001yrzygwq55z9qu,CC.1.4.6.F5,Verb Tense,CONVENTIONS,3,,yes
+database,6,cmp30b8ml001trzygc0l59c6f,Grade 6 PSSA ELA Baseline Diagnostic,6,cmp30b8ng001zrzyghjx9sakd,CC.1.4.6.F6,Pronoun Usage,MULTI_SELECT,3,,yes
+database,6,cmp30b8ml001trzygc0l59c6f,Grade 6 PSSA ELA Baseline Diagnostic,7,cmp30b8ng0020rzygcusqcf3x,CC.1.4.6.F7,Commas,CONVENTIONS,3,,yes
+database,6,cmp30b8ml001trzygc0l59c6f,Grade 6 PSSA ELA Baseline Diagnostic,8,cmp30b8ng0021rzygto6ak376,CC.1.4.6.F8,Apostrophes,CONVENTIONS,3,,yes
+database,6,cmp30b8ml001trzygc0l59c6f,Grade 6 PSSA ELA Baseline Diagnostic,9,cmp30b8ng0022rzygwbu3cujb,CC.1.4.6.F9,Subject-Verb Agreement,DRAG_DROP,3,,yes
+database,6,cmp30b8ml001trzygc0l59c6f,Grade 6 PSSA ELA Baseline Diagnostic,10,cmp30b8ng0023rzyghrjhfw55,CC.1.2.6.A,Main Idea,MCQ,2,,yes
+database,6,cmp30b8ml001trzygc0l59c6f,Grade 6 PSSA ELA Baseline Diagnostic,11,cmp30b8ng0024rzygmjfad1dt,CC.1.2.6.B,Inference,MCQ,2,,yes
+database,6,cmp30b8ml001trzygc0l59c6f,Grade 6 PSSA ELA Baseline Diagnostic,12,cmp30b8ng0025rzygpx8qoq6i,CC.1.2.6.C,Text Structure,EBSR,2,,yes
+database,6,cmp30b8ml001trzygc0l59c6f,Grade 6 PSSA ELA Baseline Diagnostic,13,cmp30b8ng0026rzygp1pb3dt0,CC.1.2.6.D,Vocabulary,MCQ,2,,yes
+database,6,cmp30b8ml001trzygc0l59c6f,Grade 6 PSSA ELA Baseline Diagnostic,14,cmp30b8ng0027rzygtloqyoo4,CC.1.3.6.G,Point of View,DRAG_DROP,3,,yes
+database,6,cmp30b8ml001trzygc0l59c6f,Grade 6 PSSA ELA Baseline Diagnostic,15,cmp30b8ng0028rzyg0pmy4ssb,CC.1.2.6.B,Inference,MCQ,3,,yes
+database,6,cmp30b8ml001trzygc0l59c6f,Grade 6 PSSA ELA Baseline Diagnostic,16,cmp30b8nh0029rzyg2knjj6i0,CC.1.2.6.A,Main Idea,HOT_TEXT,3,,yes
+database,6,cmp30b8ml001trzygc0l59c6f,Grade 6 PSSA ELA Baseline Diagnostic,17,cmp30b8nh002arzygl1x0p2q2,CC.1.2.6.B,Inference,MCQ,3,,yes
+database,6,cmp30b8ml001trzygc0l59c6f,Grade 6 PSSA ELA Baseline Diagnostic,18,cmp30b8nh002brzygtx734n27,CC.1.3.6.A,Theme,MCQ,3,,yes
+database,6,cmp30b8ml001trzygc0l59c6f,Grade 6 PSSA ELA Baseline Diagnostic,19,cmp30b8nh002crzygal1dla0f,CC.1.3.6.B,Literary Inference,MCQ,4,,yes
+database,6,cmp30b8ml001trzygc0l59c6f,Grade 6 PSSA ELA Baseline Diagnostic,20,cmp30b8nh002drzygwtqpoyks,CC.1.3.6.C,Setting Impact,MCQ,4,,yes
+database,6,cmp30b8ml001trzygc0l59c6f,Grade 6 PSSA ELA Baseline Diagnostic,21,cmp30b8nh002erzygcl5j0syx,CC.1.3.6.C,Plot Development,MCQ,4,,yes
+database,6,cmp30b8ml001trzygc0l59c6f,Grade 6 PSSA ELA Baseline Diagnostic,22,cmp30b8nh002frzygvqzjhd85,CC.1.3.6.G,Point of View,DRAG_DROP,4,,yes
+database,6,cmp30b8ml001trzygc0l59c6f,Grade 6 PSSA ELA Baseline Diagnostic,23,cmp30b8nh002grzyggc3vjrn3,CC.1.3.6.F / CC.1.2.6.F,Figurative Language,MCQ,4,,yes
+database,6,cmp30b8ml001trzygc0l59c6f,Grade 6 PSSA ELA Baseline Diagnostic,24,cmp30b8nh002hrzyggo9zcdss,CC.1.3.6.E,Flashback,HOT_TEXT,4,,yes
+database,6,cmp30b8ml001trzygc0l59c6f,Grade 6 PSSA ELA Baseline Diagnostic,25,cmp30b8nh002irzygvaw8gd7y,CC.1.2.6.A,Main Idea,MCQ,4,,yes
+database,6,cmp30b8ml001trzygc0l59c6f,Grade 6 PSSA ELA Baseline Diagnostic,26,cmp30b8nh002jrzygrgcrs303,CC.1.2.6.B,Inference,MCQ,4,,yes
+database,6,cmp30b8ml001trzygc0l59c6f,Grade 6 PSSA ELA Baseline Diagnostic,27,cmp30b8nh002krzyg99k0acxm,CC.1.3.6.G,Point of View,MCQ,4,,yes
+database,6,cmp30b8ml001trzygc0l59c6f,Grade 6 PSSA ELA Baseline Diagnostic,28,cmp30b8nh002lrzygie6ic608,CC.1.2.6.C,Text Structure,MCQ,4,,yes
+database,6,cmp30b8ml001trzygc0l59c6f,Grade 6 PSSA ELA Baseline Diagnostic,29,cmp30b8nh002mrzygequ4iz1x,CC.1.2.6.D,Vocabulary,DRAG_DROP,4,,yes
+database,6,cmp30b8ml001trzygc0l59c6f,Grade 6 PSSA ELA Baseline Diagnostic,30,cmp30b8nh002nrzyg2h78p64z,CC.1.2.6.B,Inference,MCQ,4,,yes
+database,6,cmp30b8ml001trzygc0l59c6f,Grade 6 PSSA ELA Baseline Diagnostic,31,cmp30b8ni002orzygaoipf1mj,CC.1.2.6.A,Main Idea,HOT_TEXT,4,,yes
+database,6,cmp30b8ml001trzygc0l59c6f,Grade 6 PSSA ELA Baseline Diagnostic,32,cmp30b8ni002przyg771p27jv,CC.1.2.6.A,Main Idea,MCQ,4,,yes
+database,6,cmp30b8ml001trzygc0l59c6f,Grade 6 PSSA ELA Baseline Diagnostic,33,cmp30b8ni002qrzygm98wpgxg,CC.1.2.6.B,Inference,MCQ,4,,yes
+database,6,cmp30b8ml001trzygc0l59c6f,Grade 6 PSSA ELA Baseline Diagnostic,34,cmp30b8ni002rrzygae3s2w4u,CC.1.2.6.C,Text Structure,EBSR,4,,yes
+database,6,cmp30b8ml001trzygc0l59c6f,Grade 6 PSSA ELA Baseline Diagnostic,35,cmp30b8ni002srzyg7vli6k4y,CC.1.2.6.D,Vocabulary,MCQ,4,,yes
+database,6,cmp30b8ml001trzygc0l59c6f,Grade 6 PSSA ELA Baseline Diagnostic,36,cmp30b8ni002trzyg03hysdb3,CC.1.3.6.G,Point of View,DRAG_DROP,4,,yes
+database,6,cmp30b8ml001trzygc0l59c6f,Grade 6 PSSA ELA Baseline Diagnostic,37,cmp30b8ni002urzygjihm31nk,CC.1.2.6.B,Inference,MCQ,4,,yes
+database,6,cmp30b8ml001trzygc0l59c6f,Grade 6 PSSA ELA Baseline Diagnostic,38,cmp30b8ni002vrzygfz5kzihh,CC.1.2.6.A,Main Idea,HOT_TEXT,4,,yes
+database,6,cmp30b8ml001trzygc0l59c6f,Grade 6 PSSA ELA Baseline Diagnostic,39,cmp30b8ni002wrzygd9hzsacd,CC.1.2.6.B,Inference,MCQ,4,,yes
+database,6,cmp30b8ml001trzygc0l59c6f,Grade 6 PSSA ELA Baseline Diagnostic,40,cmp30b8ni002xrzygaeodqgtc,CC.1.2.6.C,Text Structure,MULTI_SELECT,4,,yes
+database,6,cmp30b8ml001trzygc0l59c6f,Grade 6 PSSA ELA Baseline Diagnostic,41,cmp30b8nj002yrzygp7vldkcv,CC.1.2.6.D,Vocabulary,MCQ,4,,yes
+database,6,cmp30b8ml001trzygc0l59c6f,Grade 6 PSSA ELA Baseline Diagnostic,42,cmp30b8nj002zrzygl980obtb,CC.1.4.6.S,TDA Writing,TDA,4,,yes
+database,6,cmp30b8ml001trzygc0l59c6f,Grade 6 PSSA ELA Baseline Diagnostic,43,cmp30b8nj0030rzyg5h86z0we,CC.1.3.6.A,Theme,MCQ,4,,yes
+database,6,cmp30b8ml001trzygc0l59c6f,Grade 6 PSSA ELA Baseline Diagnostic,44,cmp30b8nj0031rzyg07lszbv2,CC.1.3.6.B,Literary Inference,MCQ,4,,yes
+database,6,cmp30b8ml001trzygc0l59c6f,Grade 6 PSSA ELA Baseline Diagnostic,45,cmp30b8nj0032rzygcur2vgcy,CC.1.3.6.C,Setting Impact,MCQ,4,,yes
+database,6,cmp30b8ml001trzygc0l59c6f,Grade 6 PSSA ELA Baseline Diagnostic,46,cmp30b8nj0033rzygcbddi7jf,CC.1.3.6.C,Plot Development,MCQ,4,,yes
+database,6,cmp30b8ml001trzygc0l59c6f,Grade 6 PSSA ELA Baseline Diagnostic,47,cmp30b8nj0034rzyg3q4b75fs,CC.1.3.6.G,Point of View,DRAG_DROP,4,,yes
+database,6,cmp30b8ml001trzygc0l59c6f,Grade 6 PSSA ELA Baseline Diagnostic,48,cmp30b8nj0035rzygmh7vfx97,CC.1.3.6.F / CC.1.2.6.F,Figurative Language,MCQ,4,,yes
+database,6,cmp30b8ml001trzygc0l59c6f,Grade 6 PSSA ELA Baseline Diagnostic,49,cmp30b8nj0036rzygvfjsey6i,CC.1.3.6.E,Flashback,HOT_TEXT,4,,yes
+database,6,cmp30b8ml001trzygc0l59c6f,Grade 6 PSSA ELA Baseline Diagnostic,50,cmp30b8nj0037rzygktevtr2z,CC.1.3.6.D,Literary Vocabulary,MCQ,4,,yes
+database,6,cmp30b8ml001trzygc0l59c6f,Grade 6 PSSA ELA Baseline Diagnostic,51,cmp30b8nj0038rzyg9rrdymf8,CC.1.3.6.A,Theme,MULTI_SELECT,4,,yes
+database,6,cmp30b8ml001trzygc0l59c6f,Grade 6 PSSA ELA Baseline Diagnostic,52,cmp30b8nj0039rzygn4g14a4p,CC.1.3.6.B,Literary Inference,MCQ,4,,yes
+database,6,cmp30b8ml001trzygc0l59c6f,Grade 6 PSSA ELA Baseline Diagnostic,53,cmp30b8nj003arzyg8zd4a7lc,CC.1.3.6.C,Setting Impact,MCQ,4,,yes
+database,6,cmp30b8ml001trzygc0l59c6f,Grade 6 PSSA ELA Baseline Diagnostic,54,cmp30b8nj003brzygzeu4gh2f,CC.1.4.6.S,TDA Writing,TDA,4,,yes
+database,6,cmp39560d0001nrdz12i5zojl,Grade 6 PSSA ELA Retest,1,cmp39561i0002nrdznqg4pcww,CC.1.4.6.F1,Grammar,CONVENTIONS,2,,yes
+database,6,cmp39560d0001nrdz12i5zojl,Grade 6 PSSA ELA Retest,2,cmp39561i0003nrdz3u20rr3w,CC.1.4.6.F2,Punctuation,DRAG_DROP,2,,yes
+database,6,cmp39560d0001nrdz12i5zojl,Grade 6 PSSA ELA Retest,3,cmp39561i0004nrdz4347vbdj,CC.1.4.6.F3,Capitalization,HOT_TEXT,2,,yes
+database,6,cmp39560d0001nrdz12i5zojl,Grade 6 PSSA ELA Retest,4,cmp39561i0005nrdz6qzzc44y,CC.1.4.6.F4,Sentence Structure,CONVENTIONS,2,,yes
+database,6,cmp39560d0001nrdz12i5zojl,Grade 6 PSSA ELA Retest,5,cmp39561m0006nrdzfqo0kdrc,CC.1.4.6.F5,Verb Tense,CONVENTIONS,3,,yes
+database,6,cmp39560d0001nrdz12i5zojl,Grade 6 PSSA ELA Retest,6,cmp39561m0007nrdzax7q5w4n,CC.1.4.6.F6,Pronoun Usage,MULTI_SELECT,3,,yes
+database,6,cmp39560d0001nrdz12i5zojl,Grade 6 PSSA ELA Retest,7,cmp39561m0008nrdzzbeyyx8y,CC.1.4.6.F7,Commas,CONVENTIONS,3,,yes
+database,6,cmp39560d0001nrdz12i5zojl,Grade 6 PSSA ELA Retest,8,cmp39561m0009nrdz6vu3x8bs,CC.1.4.6.F8,Apostrophes,CONVENTIONS,3,,yes
+database,6,cmp39560d0001nrdz12i5zojl,Grade 6 PSSA ELA Retest,9,cmp39561m000anrdzc8yuwl6z,CC.1.4.6.F9,Subject-Verb Agreement,DRAG_DROP,3,,yes
+database,6,cmp39560d0001nrdz12i5zojl,Grade 6 PSSA ELA Retest,10,cmp39561m000bnrdzyhtuvvuf,CC.1.2.6.A,Main Idea,MCQ,2,,yes
+database,6,cmp39560d0001nrdz12i5zojl,Grade 6 PSSA ELA Retest,11,cmp39561m000cnrdzymhcitak,CC.1.2.6.B,Inference,MCQ,2,,yes
+database,6,cmp39560d0001nrdz12i5zojl,Grade 6 PSSA ELA Retest,12,cmp39561n000dnrdzy8j92h5l,CC.1.2.6.C,Text Structure,EBSR,2,,yes
+database,6,cmp39560d0001nrdz12i5zojl,Grade 6 PSSA ELA Retest,13,cmp39561n000enrdzn6kiq5uu,CC.1.2.6.D,Vocabulary,MCQ,2,,yes
+database,6,cmp39560d0001nrdz12i5zojl,Grade 6 PSSA ELA Retest,14,cmp39561n000fnrdzewttxxq5,CC.1.3.6.G,Point of View,DRAG_DROP,3,,yes
+database,6,cmp39560d0001nrdz12i5zojl,Grade 6 PSSA ELA Retest,15,cmp39561n000gnrdztqy6ropo,CC.1.2.6.B,Inference,MCQ,3,,yes
+database,6,cmp39560d0001nrdz12i5zojl,Grade 6 PSSA ELA Retest,16,cmp39561n000hnrdzsyuigw0p,CC.1.2.6.A,Main Idea,HOT_TEXT,3,,yes
+database,6,cmp39560d0001nrdz12i5zojl,Grade 6 PSSA ELA Retest,17,cmp39561n000inrdz2955qrp0,CC.1.2.6.B,Inference,MCQ,3,,yes
+database,6,cmp39560d0001nrdz12i5zojl,Grade 6 PSSA ELA Retest,18,cmp39561n000jnrdzm2ta3fwn,CC.1.3.6.A,Theme,MCQ,3,,yes
+database,6,cmp39560d0001nrdz12i5zojl,Grade 6 PSSA ELA Retest,19,cmp39561n000knrdzktng1gae,CC.1.3.6.B,Literary Inference,MCQ,4,,yes
+database,6,cmp39560d0001nrdz12i5zojl,Grade 6 PSSA ELA Retest,20,cmp39561n000lnrdzrcs4uyyu,CC.1.3.6.C,Setting Impact,MCQ,4,,yes
+database,6,cmp39560d0001nrdz12i5zojl,Grade 6 PSSA ELA Retest,21,cmp39561n000mnrdzug0jesne,CC.1.3.6.C,Plot Development,MCQ,4,,yes
+database,6,cmp39560d0001nrdz12i5zojl,Grade 6 PSSA ELA Retest,22,cmp39561n000nnrdz5s1hgp8w,CC.1.3.6.G,Point of View,DRAG_DROP,4,,yes
+database,6,cmp39560d0001nrdz12i5zojl,Grade 6 PSSA ELA Retest,23,cmp39561n000onrdzt6b5mmnq,CC.1.3.6.F / CC.1.2.6.F,Figurative Language,MCQ,4,,yes
+database,6,cmp39560d0001nrdz12i5zojl,Grade 6 PSSA ELA Retest,24,cmp39561n000pnrdzdqsb7dju,CC.1.3.6.E,Flashback,HOT_TEXT,4,,yes
+database,6,cmp39560d0001nrdz12i5zojl,Grade 6 PSSA ELA Retest,25,cmp39561n000qnrdzt93eiil3,CC.1.2.6.A,Main Idea,MCQ,4,,yes
+database,6,cmp39560d0001nrdz12i5zojl,Grade 6 PSSA ELA Retest,26,cmp39561o000rnrdz755gutaj,CC.1.2.6.B,Inference,MCQ,4,,yes
+database,6,cmp39560d0001nrdz12i5zojl,Grade 6 PSSA ELA Retest,27,cmp39561o000snrdzldn7450r,CC.1.3.6.G,Point of View,MCQ,4,,yes
+database,6,cmp39560d0001nrdz12i5zojl,Grade 6 PSSA ELA Retest,28,cmp39561o000tnrdzagiwb4hm,CC.1.2.6.C,Text Structure,MCQ,4,,yes
+database,6,cmp39560d0001nrdz12i5zojl,Grade 6 PSSA ELA Retest,29,cmp39561o000unrdz0mvnjs8v,CC.1.2.6.D,Vocabulary,DRAG_DROP,4,,yes
+database,6,cmp39560d0001nrdz12i5zojl,Grade 6 PSSA ELA Retest,30,cmp39561o000vnrdzgiaotdxm,CC.1.2.6.B,Inference,MCQ,4,,yes
+database,6,cmp39560d0001nrdz12i5zojl,Grade 6 PSSA ELA Retest,31,cmp39561o000wnrdz10xtcyel,CC.1.2.6.A,Main Idea,HOT_TEXT,4,,yes
+database,6,cmp39560d0001nrdz12i5zojl,Grade 6 PSSA ELA Retest,32,cmp39561o000xnrdz6j6lsx9r,CC.1.2.6.A,Main Idea,MCQ,4,,yes
+database,6,cmp39560d0001nrdz12i5zojl,Grade 6 PSSA ELA Retest,33,cmp39561o000ynrdzx683m34g,CC.1.2.6.B,Inference,MCQ,4,,yes
+database,6,cmp39560d0001nrdz12i5zojl,Grade 6 PSSA ELA Retest,34,cmp39561o000znrdz6m26y0wx,CC.1.2.6.C,Text Structure,EBSR,4,,yes
+database,6,cmp39560d0001nrdz12i5zojl,Grade 6 PSSA ELA Retest,35,cmp39561o0010nrdznx2sw8jc,CC.1.2.6.D,Vocabulary,MCQ,4,,yes
+database,6,cmp39560d0001nrdz12i5zojl,Grade 6 PSSA ELA Retest,36,cmp39561o0011nrdz4ikreb6i,CC.1.3.6.G,Point of View,DRAG_DROP,4,,yes
+database,6,cmp39560d0001nrdz12i5zojl,Grade 6 PSSA ELA Retest,37,cmp39561o0012nrdz3vi7hf20,CC.1.2.6.B,Inference,MCQ,4,,yes
+database,6,cmp39560d0001nrdz12i5zojl,Grade 6 PSSA ELA Retest,38,cmp39561p0013nrdz2fq3b3cq,CC.1.2.6.A,Main Idea,HOT_TEXT,4,,yes
+database,6,cmp39560d0001nrdz12i5zojl,Grade 6 PSSA ELA Retest,39,cmp39561p0014nrdzqenp7id2,CC.1.2.6.B,Inference,MCQ,4,,yes
+database,6,cmp39560d0001nrdz12i5zojl,Grade 6 PSSA ELA Retest,40,cmp39561p0015nrdz3pzlakjs,CC.1.2.6.C,Text Structure,MULTI_SELECT,4,,yes
+database,6,cmp39560d0001nrdz12i5zojl,Grade 6 PSSA ELA Retest,41,cmp39561p0016nrdzkhtmcihg,CC.1.2.6.D,Vocabulary,MCQ,4,,yes
+database,6,cmp39560d0001nrdz12i5zojl,Grade 6 PSSA ELA Retest,42,cmp39561p0017nrdzchihr8dp,CC.1.4.6.S,TDA Writing,TDA,4,,yes
+database,6,cmp39560d0001nrdz12i5zojl,Grade 6 PSSA ELA Retest,43,cmp39561p0018nrdzsktpv3bb,CC.1.3.6.A,Theme,MCQ,4,,yes
+database,6,cmp39560d0001nrdz12i5zojl,Grade 6 PSSA ELA Retest,44,cmp39561p0019nrdzgb3vhgq2,CC.1.3.6.B,Literary Inference,MCQ,4,,yes
+database,6,cmp39560d0001nrdz12i5zojl,Grade 6 PSSA ELA Retest,45,cmp39561p001anrdza2fvxjhi,CC.1.3.6.C,Setting Impact,MCQ,4,,yes
+database,6,cmp39560d0001nrdz12i5zojl,Grade 6 PSSA ELA Retest,46,cmp39561p001bnrdzkm1l1nr8,CC.1.3.6.C,Plot Development,MCQ,4,,yes
+database,6,cmp39560d0001nrdz12i5zojl,Grade 6 PSSA ELA Retest,47,cmp39561p001cnrdzghgiawaq,CC.1.3.6.G,Point of View,DRAG_DROP,4,,yes
+database,6,cmp39560d0001nrdz12i5zojl,Grade 6 PSSA ELA Retest,48,cmp39561p001dnrdz570d7x1w,CC.1.3.6.F / CC.1.2.6.F,Figurative Language,MCQ,4,,yes
+database,6,cmp39560d0001nrdz12i5zojl,Grade 6 PSSA ELA Retest,49,cmp39561p001enrdz43bnpzcf,CC.1.3.6.E,Flashback,HOT_TEXT,4,,yes
+database,6,cmp39560d0001nrdz12i5zojl,Grade 6 PSSA ELA Retest,50,cmp39561p001fnrdz3dqoku7k,CC.1.3.6.D,Literary Vocabulary,MCQ,4,,yes
+database,6,cmp39560d0001nrdz12i5zojl,Grade 6 PSSA ELA Retest,51,cmp39561p001gnrdzwg4u3hau,CC.1.3.6.A,Theme,MULTI_SELECT,4,,yes
+database,6,cmp39560d0001nrdz12i5zojl,Grade 6 PSSA ELA Retest,52,cmp39561q001hnrdzfmtox51t,CC.1.3.6.B,Literary Inference,MCQ,4,,yes
+database,6,cmp39560d0001nrdz12i5zojl,Grade 6 PSSA ELA Retest,53,cmp39561q001inrdzcn2t01yw,CC.1.3.6.C,Setting Impact,MCQ,4,,yes
+database,6,cmp39560d0001nrdz12i5zojl,Grade 6 PSSA ELA Retest,54,cmp39561q001jnrdze7he7ftw,CC.1.4.6.S,TDA Writing,TDA,4,,yes
+database,6,cmp39lq4o000111zemifkheel,Grade 6 PSSA ELA Baseline Diagnostic,1,cmp39lq5m000211ze3y9x8la5,CC.1.4.6.F1,Grammar,CONVENTIONS,2,,yes
+database,6,cmp39lq4o000111zemifkheel,Grade 6 PSSA ELA Baseline Diagnostic,2,cmp39lq5m000311zetvu3zawd,CC.1.4.6.F2,Punctuation,DRAG_DROP,2,,yes
+database,6,cmp39lq4o000111zemifkheel,Grade 6 PSSA ELA Baseline Diagnostic,3,cmp39lq5m000411ze04x7hivs,CC.1.4.6.F3,Capitalization,HOT_TEXT,2,,yes
+database,6,cmp39lq4o000111zemifkheel,Grade 6 PSSA ELA Baseline Diagnostic,4,cmp39lq5m000511zev26ehbqy,CC.1.4.6.F4,Sentence Structure,CONVENTIONS,2,,yes
+database,6,cmp39lq4o000111zemifkheel,Grade 6 PSSA ELA Baseline Diagnostic,5,cmp39lq5m000611zeoey1lemt,CC.1.4.6.F5,Verb Tense,CONVENTIONS,3,,yes
+database,6,cmp39lq4o000111zemifkheel,Grade 6 PSSA ELA Baseline Diagnostic,6,cmp39lq5m000711zeuq7ivdcf,CC.1.4.6.F6,Pronoun Usage,MULTI_SELECT,3,,yes
+database,6,cmp39lq4o000111zemifkheel,Grade 6 PSSA ELA Baseline Diagnostic,7,cmp39lq5m000811zed4chpuso,CC.1.4.6.F7,Commas,CONVENTIONS,3,,yes
+database,6,cmp39lq4o000111zemifkheel,Grade 6 PSSA ELA Baseline Diagnostic,8,cmp39lq5m000911zehjxdb6kk,CC.1.4.6.F8,Apostrophes,CONVENTIONS,3,,yes
+database,6,cmp39lq4o000111zemifkheel,Grade 6 PSSA ELA Baseline Diagnostic,9,cmp39lq5m000a11zeh40ic5eh,CC.1.4.6.F9,Subject-Verb Agreement,DRAG_DROP,3,,yes
+database,6,cmp39lq4o000111zemifkheel,Grade 6 PSSA ELA Baseline Diagnostic,10,cmp39lq5m000b11zedaliqt5r,CC.1.2.6.A,Main Idea,MCQ,2,,yes
+database,6,cmp39lq4o000111zemifkheel,Grade 6 PSSA ELA Baseline Diagnostic,11,cmp39lq5m000c11zek8t1ynky,CC.1.2.6.B,Inference,MCQ,2,,yes
+database,6,cmp39lq4o000111zemifkheel,Grade 6 PSSA ELA Baseline Diagnostic,12,cmp39lq5m000d11zeru54qw9s,CC.1.2.6.C,Text Structure,EBSR,2,,yes
+database,6,cmp39lq4o000111zemifkheel,Grade 6 PSSA ELA Baseline Diagnostic,13,cmp39lq5m000e11zecqwgol0d,CC.1.2.6.D,Vocabulary,MCQ,2,,yes
+database,6,cmp39lq4o000111zemifkheel,Grade 6 PSSA ELA Baseline Diagnostic,14,cmp39lq5m000f11zevtpmwqpe,CC.1.3.6.G,Point of View,DRAG_DROP,3,,yes
+database,6,cmp39lq4o000111zemifkheel,Grade 6 PSSA ELA Baseline Diagnostic,15,cmp39lq5n000g11zeulbxxwuy,CC.1.2.6.B,Inference,MCQ,3,,yes
+database,6,cmp39lq4o000111zemifkheel,Grade 6 PSSA ELA Baseline Diagnostic,16,cmp39lq5n000h11ze3tzr5hq1,CC.1.2.6.A,Main Idea,HOT_TEXT,3,,yes
+database,6,cmp39lq4o000111zemifkheel,Grade 6 PSSA ELA Baseline Diagnostic,17,cmp39lq5n000i11ze7z88molg,CC.1.2.6.B,Inference,MCQ,3,,yes
+database,6,cmp39lq4o000111zemifkheel,Grade 6 PSSA ELA Baseline Diagnostic,18,cmp39lq5n000j11zevtvl2nsm,CC.1.3.6.A,Theme,MCQ,3,,yes
+database,6,cmp39lq4o000111zemifkheel,Grade 6 PSSA ELA Baseline Diagnostic,19,cmp39lq5n000k11ze962zld4t,CC.1.3.6.B,Literary Inference,MCQ,4,,yes
+database,6,cmp39lq4o000111zemifkheel,Grade 6 PSSA ELA Baseline Diagnostic,20,cmp39lq5n000l11zenc23ieyr,CC.1.3.6.C,Setting Impact,MCQ,4,,yes
+database,6,cmp39lq4o000111zemifkheel,Grade 6 PSSA ELA Baseline Diagnostic,21,cmp39lq5n000m11zernc0d2cx,CC.1.3.6.C,Plot Development,MCQ,4,,yes
+database,6,cmp39lq4o000111zemifkheel,Grade 6 PSSA ELA Baseline Diagnostic,22,cmp39lq5n000n11zehwebwqr8,CC.1.3.6.G,Point of View,DRAG_DROP,4,,yes
+database,6,cmp39lq4o000111zemifkheel,Grade 6 PSSA ELA Baseline Diagnostic,23,cmp39lq5n000o11zeniz2rack,CC.1.3.6.F / CC.1.2.6.F,Figurative Language,MCQ,4,,yes
+database,6,cmp39lq4o000111zemifkheel,Grade 6 PSSA ELA Baseline Diagnostic,24,cmp39lq5n000p11ze9bcp7cus,CC.1.3.6.E,Flashback,HOT_TEXT,4,,yes
+database,6,cmp39lq4o000111zemifkheel,Grade 6 PSSA ELA Baseline Diagnostic,25,cmp39lq5n000q11zec9xe6stw,CC.1.2.6.A,Main Idea,MCQ,4,,yes
+database,6,cmp39lq4o000111zemifkheel,Grade 6 PSSA ELA Baseline Diagnostic,26,cmp39lq5n000r11zeg2ok8ub7,CC.1.2.6.B,Inference,MCQ,4,,yes
+database,6,cmp39lq4o000111zemifkheel,Grade 6 PSSA ELA Baseline Diagnostic,27,cmp39lq5n000s11ze7ljxt2uv,CC.1.3.6.G,Point of View,MCQ,4,,yes
+database,6,cmp39lq4o000111zemifkheel,Grade 6 PSSA ELA Baseline Diagnostic,28,cmp39lq5n000t11ze5h0mnwte,CC.1.2.6.C,Text Structure,MCQ,4,,yes
+database,6,cmp39lq4o000111zemifkheel,Grade 6 PSSA ELA Baseline Diagnostic,29,cmp39lq5n000u11ze65f5w5az,CC.1.2.6.D,Vocabulary,DRAG_DROP,4,,yes
+database,6,cmp39lq4o000111zemifkheel,Grade 6 PSSA ELA Baseline Diagnostic,30,cmp39lq5o000v11ze3wsfujka,CC.1.2.6.B,Inference,MCQ,4,,yes
+database,6,cmp39lq4o000111zemifkheel,Grade 6 PSSA ELA Baseline Diagnostic,31,cmp39lq5o000w11zevtong0kj,CC.1.2.6.A,Main Idea,HOT_TEXT,4,,yes
+database,6,cmp39lq4o000111zemifkheel,Grade 6 PSSA ELA Baseline Diagnostic,32,cmp39lq5o000x11zesgjj51xw,CC.1.2.6.A,Main Idea,MCQ,4,,yes
+database,6,cmp39lq4o000111zemifkheel,Grade 6 PSSA ELA Baseline Diagnostic,33,cmp39lq5o000y11zezunnyjnt,CC.1.2.6.B,Inference,MCQ,4,,yes
+database,6,cmp39lq4o000111zemifkheel,Grade 6 PSSA ELA Baseline Diagnostic,34,cmp39lq5o000z11zes2fhii2p,CC.1.2.6.C,Text Structure,EBSR,4,,yes
+database,6,cmp39lq4o000111zemifkheel,Grade 6 PSSA ELA Baseline Diagnostic,35,cmp39lq5o001011zem06kk5o1,CC.1.2.6.D,Vocabulary,MCQ,4,,yes
+database,6,cmp39lq4o000111zemifkheel,Grade 6 PSSA ELA Baseline Diagnostic,36,cmp39lq5o001111zemeuy5six,CC.1.3.6.G,Point of View,DRAG_DROP,4,,yes
+database,6,cmp39lq4o000111zemifkheel,Grade 6 PSSA ELA Baseline Diagnostic,37,cmp39lq5o001211ze3a84bs8v,CC.1.2.6.B,Inference,MCQ,4,,yes
+database,6,cmp39lq4o000111zemifkheel,Grade 6 PSSA ELA Baseline Diagnostic,38,cmp39lq5o001311zev19brgu4,CC.1.2.6.A,Main Idea,HOT_TEXT,4,,yes
+database,6,cmp39lq4o000111zemifkheel,Grade 6 PSSA ELA Baseline Diagnostic,39,cmp39lq5o001411zec0k362uq,CC.1.2.6.B,Inference,MCQ,4,,yes
+database,6,cmp39lq4o000111zemifkheel,Grade 6 PSSA ELA Baseline Diagnostic,40,cmp39lq5o001511zewabkyn6j,CC.1.2.6.C,Text Structure,MULTI_SELECT,4,,yes
+database,6,cmp39lq4o000111zemifkheel,Grade 6 PSSA ELA Baseline Diagnostic,41,cmp39lq5p001611ze8vf6n3v5,CC.1.2.6.D,Vocabulary,MCQ,4,,yes
+database,6,cmp39lq4o000111zemifkheel,Grade 6 PSSA ELA Baseline Diagnostic,42,cmp39lq5p001711zeolosj8m3,CC.1.4.6.S,TDA Writing,TDA,4,,yes
+database,6,cmp39lq4o000111zemifkheel,Grade 6 PSSA ELA Baseline Diagnostic,43,cmp39lq5p001811ze96m1ctji,CC.1.3.6.A,Theme,MCQ,4,,yes
+database,6,cmp39lq4o000111zemifkheel,Grade 6 PSSA ELA Baseline Diagnostic,44,cmp39lq5p001911zeunrw0o50,CC.1.3.6.B,Literary Inference,MCQ,4,,yes
+database,6,cmp39lq4o000111zemifkheel,Grade 6 PSSA ELA Baseline Diagnostic,45,cmp39lq5p001a11ze9xhqwboq,CC.1.3.6.C,Setting Impact,MCQ,4,,yes
+database,6,cmp39lq4o000111zemifkheel,Grade 6 PSSA ELA Baseline Diagnostic,46,cmp39lq5p001b11zezkyljk9q,CC.1.3.6.C,Plot Development,MCQ,4,,yes
+database,6,cmp39lq4o000111zemifkheel,Grade 6 PSSA ELA Baseline Diagnostic,47,cmp39lq5p001c11zegdc8cagq,CC.1.3.6.G,Point of View,DRAG_DROP,4,,yes
+database,6,cmp39lq4o000111zemifkheel,Grade 6 PSSA ELA Baseline Diagnostic,48,cmp39lq5p001d11zeop5dn2l6,CC.1.3.6.F / CC.1.2.6.F,Figurative Language,MCQ,4,,yes
+database,6,cmp39lq4o000111zemifkheel,Grade 6 PSSA ELA Baseline Diagnostic,49,cmp39lq5p001e11zegelj3ljj,CC.1.3.6.E,Flashback,HOT_TEXT,4,,yes
+database,6,cmp39lq4o000111zemifkheel,Grade 6 PSSA ELA Baseline Diagnostic,50,cmp39lq5p001f11ze7zvy4wbt,CC.1.3.6.D,Literary Vocabulary,MCQ,4,,yes
+database,6,cmp39lq4o000111zemifkheel,Grade 6 PSSA ELA Baseline Diagnostic,51,cmp39lq5p001g11zeip5d1lmp,CC.1.3.6.A,Theme,MULTI_SELECT,4,,yes
+database,6,cmp39lq4o000111zemifkheel,Grade 6 PSSA ELA Baseline Diagnostic,52,cmp39lq5p001h11zeufu1tosg,CC.1.3.6.B,Literary Inference,MCQ,4,,yes
+database,6,cmp39lq4o000111zemifkheel,Grade 6 PSSA ELA Baseline Diagnostic,53,cmp39lq5p001i11zelkpynfnx,CC.1.3.6.C,Setting Impact,MCQ,4,,yes
+database,6,cmp39lq4o000111zemifkheel,Grade 6 PSSA ELA Baseline Diagnostic,54,cmp39lq5p001j11ze8c4ivbll,CC.1.4.6.S,TDA Writing,TDA,4,,yes
+database,6,cmp3dtj800001chf9dli84606,Grade 6 PSSA ELA Baseline Diagnostic,1,cmp3dtj970002chf9pr81zh4o,CC.1.4.6.F1,Grammar,CONVENTIONS,2,,yes
+database,6,cmp3dtj800001chf9dli84606,Grade 6 PSSA ELA Baseline Diagnostic,2,cmp3dtj970003chf9mz1ehmo3,CC.1.4.6.F2,Punctuation,DRAG_DROP,2,,yes
+database,6,cmp3dtj800001chf9dli84606,Grade 6 PSSA ELA Baseline Diagnostic,3,cmp3dtj970004chf93trj8uv0,CC.1.4.6.F3,Capitalization,HOT_TEXT,2,,yes
+database,6,cmp3dtj800001chf9dli84606,Grade 6 PSSA ELA Baseline Diagnostic,4,cmp3dtj970005chf9isst4d1m,CC.1.4.6.F4,Sentence Structure,CONVENTIONS,2,,yes
+database,6,cmp3dtj800001chf9dli84606,Grade 6 PSSA ELA Baseline Diagnostic,5,cmp3dtj970006chf9kpvwn7eh,CC.1.4.6.F5,Verb Tense,CONVENTIONS,3,,yes
+database,6,cmp3dtj800001chf9dli84606,Grade 6 PSSA ELA Baseline Diagnostic,6,cmp3dtj970007chf927ln4jr5,CC.1.4.6.F6,Pronoun Usage,MULTI_SELECT,3,,yes
+database,6,cmp3dtj800001chf9dli84606,Grade 6 PSSA ELA Baseline Diagnostic,7,cmp3dtj970008chf92u509rk8,CC.1.4.6.F7,Commas,CONVENTIONS,3,,yes
+database,6,cmp3dtj800001chf9dli84606,Grade 6 PSSA ELA Baseline Diagnostic,8,cmp3dtj970009chf913sdouhn,CC.1.4.6.F8,Apostrophes,CONVENTIONS,3,,yes
+database,6,cmp3dtj800001chf9dli84606,Grade 6 PSSA ELA Baseline Diagnostic,9,cmp3dtj98000achf9xnl4gy06,CC.1.4.6.F9,Subject-Verb Agreement,DRAG_DROP,3,,yes
+database,6,cmp3dtj800001chf9dli84606,Grade 6 PSSA ELA Baseline Diagnostic,10,cmp3dtj98000bchf9rhuwaq3x,CC.1.2.6.A,Main Idea,MCQ,2,,yes
+database,6,cmp3dtj800001chf9dli84606,Grade 6 PSSA ELA Baseline Diagnostic,11,cmp3dtj98000cchf9fjvnebyj,CC.1.2.6.B,Inference,MCQ,2,,yes
+database,6,cmp3dtj800001chf9dli84606,Grade 6 PSSA ELA Baseline Diagnostic,12,cmp3dtj98000dchf9pks2zdkh,CC.1.2.6.C,Text Structure,EBSR,2,,yes
+database,6,cmp3dtj800001chf9dli84606,Grade 6 PSSA ELA Baseline Diagnostic,13,cmp3dtj98000echf9hnynw71m,CC.1.2.6.D,Vocabulary,MCQ,2,,yes
+database,6,cmp3dtj800001chf9dli84606,Grade 6 PSSA ELA Baseline Diagnostic,14,cmp3dtj98000fchf9kt9rrd5e,CC.1.3.6.G,Point of View,DRAG_DROP,3,,yes
+database,6,cmp3dtj800001chf9dli84606,Grade 6 PSSA ELA Baseline Diagnostic,15,cmp3dtj98000gchf94ksreaa9,CC.1.2.6.B,Inference,MCQ,3,,yes
+database,6,cmp3dtj800001chf9dli84606,Grade 6 PSSA ELA Baseline Diagnostic,16,cmp3dtj98000hchf9sj9x7fit,CC.1.2.6.A,Main Idea,HOT_TEXT,3,,yes
+database,6,cmp3dtj800001chf9dli84606,Grade 6 PSSA ELA Baseline Diagnostic,17,cmp3dtj99000ichf9r1dc4ywf,CC.1.2.6.B,Inference,MCQ,3,,yes
+database,6,cmp3dtj800001chf9dli84606,Grade 6 PSSA ELA Baseline Diagnostic,18,cmp3dtj99000jchf9yli6x09a,CC.1.3.6.A,Theme,MCQ,3,,yes
+database,6,cmp3dtj800001chf9dli84606,Grade 6 PSSA ELA Baseline Diagnostic,19,cmp3dtj99000kchf9kzq8vi5v,CC.1.3.6.B,Literary Inference,MCQ,4,,yes
+database,6,cmp3dtj800001chf9dli84606,Grade 6 PSSA ELA Baseline Diagnostic,20,cmp3dtj99000lchf9itl3zwr4,CC.1.3.6.C,Setting Impact,MCQ,4,,yes
+database,6,cmp3dtj800001chf9dli84606,Grade 6 PSSA ELA Baseline Diagnostic,21,cmp3dtj99000mchf9bn5lvvfn,CC.1.3.6.C,Plot Development,MCQ,4,,yes
+database,6,cmp3dtj800001chf9dli84606,Grade 6 PSSA ELA Baseline Diagnostic,22,cmp3dtj99000nchf9ghlzpxmb,CC.1.3.6.G,Point of View,DRAG_DROP,4,,yes
+database,6,cmp3dtj800001chf9dli84606,Grade 6 PSSA ELA Baseline Diagnostic,23,cmp3dtj99000ochf91ifs7nel,CC.1.3.6.F / CC.1.2.6.F,Figurative Language,MCQ,4,,yes
+database,6,cmp3dtj800001chf9dli84606,Grade 6 PSSA ELA Baseline Diagnostic,24,cmp3dtj99000pchf9pdr659om,CC.1.3.6.E,Flashback,HOT_TEXT,4,,yes
+database,6,cmp3dtj800001chf9dli84606,Grade 6 PSSA ELA Baseline Diagnostic,25,cmp3dtj99000qchf9i9esqy9c,CC.1.2.6.A,Main Idea,MCQ,4,,yes
+database,6,cmp3dtj800001chf9dli84606,Grade 6 PSSA ELA Baseline Diagnostic,26,cmp3dtj99000rchf9s6huq1bb,CC.1.2.6.B,Inference,MCQ,4,,yes
+database,6,cmp3dtj800001chf9dli84606,Grade 6 PSSA ELA Baseline Diagnostic,27,cmp3dtj99000schf9zlvfygny,CC.1.3.6.G,Point of View,MCQ,4,,yes
+database,6,cmp3dtj800001chf9dli84606,Grade 6 PSSA ELA Baseline Diagnostic,28,cmp3dtj9a000tchf979nh39bb,CC.1.2.6.C,Text Structure,MCQ,4,,yes
+database,6,cmp3dtj800001chf9dli84606,Grade 6 PSSA ELA Baseline Diagnostic,29,cmp3dtj9a000uchf9sqp0jtsq,CC.1.2.6.D,Vocabulary,DRAG_DROP,4,,yes
+database,6,cmp3dtj800001chf9dli84606,Grade 6 PSSA ELA Baseline Diagnostic,30,cmp3dtj9a000vchf9qjrxynpy,CC.1.2.6.B,Inference,MCQ,4,,yes
+database,6,cmp3dtj800001chf9dli84606,Grade 6 PSSA ELA Baseline Diagnostic,31,cmp3dtj9a000wchf9eltbwx02,CC.1.2.6.A,Main Idea,HOT_TEXT,4,,yes
+database,6,cmp3dtj800001chf9dli84606,Grade 6 PSSA ELA Baseline Diagnostic,32,cmp3dtj9a000xchf9e768igb6,CC.1.2.6.A,Main Idea,MCQ,4,,yes
+database,6,cmp3dtj800001chf9dli84606,Grade 6 PSSA ELA Baseline Diagnostic,33,cmp3dtj9a000ychf9s3gsdvi9,CC.1.2.6.B,Inference,MCQ,4,,yes
+database,6,cmp3dtj800001chf9dli84606,Grade 6 PSSA ELA Baseline Diagnostic,34,cmp3dtj9a000zchf9822o51cy,CC.1.2.6.C,Text Structure,EBSR,4,,yes
+database,6,cmp3dtj800001chf9dli84606,Grade 6 PSSA ELA Baseline Diagnostic,35,cmp3dtj9a0010chf9jrumtpmt,CC.1.2.6.D,Vocabulary,MCQ,4,,yes
+database,6,cmp3dtj800001chf9dli84606,Grade 6 PSSA ELA Baseline Diagnostic,36,cmp3dtj9a0011chf95b861qdt,CC.1.3.6.G,Point of View,DRAG_DROP,4,,yes
+database,6,cmp3dtj800001chf9dli84606,Grade 6 PSSA ELA Baseline Diagnostic,37,cmp3dtj9b0012chf99tp155os,CC.1.2.6.B,Inference,MCQ,4,,yes
+database,6,cmp3dtj800001chf9dli84606,Grade 6 PSSA ELA Baseline Diagnostic,38,cmp3dtj9b0013chf9y1pnwy0w,CC.1.2.6.A,Main Idea,HOT_TEXT,4,,yes
+database,6,cmp3dtj800001chf9dli84606,Grade 6 PSSA ELA Baseline Diagnostic,39,cmp3dtj9b0014chf9lhazzyv4,CC.1.2.6.B,Inference,MCQ,4,,yes
+database,6,cmp3dtj800001chf9dli84606,Grade 6 PSSA ELA Baseline Diagnostic,40,cmp3dtj9b0015chf92r67usp7,CC.1.2.6.C,Text Structure,MULTI_SELECT,4,,yes
+database,6,cmp3dtj800001chf9dli84606,Grade 6 PSSA ELA Baseline Diagnostic,41,cmp3dtj9b0016chf9sp8ldwz4,CC.1.2.6.D,Vocabulary,MCQ,4,,yes
+database,6,cmp3dtj800001chf9dli84606,Grade 6 PSSA ELA Baseline Diagnostic,42,cmp3dtj9b0017chf92za7lbqb,CC.1.4.6.S,TDA Writing,TDA,4,,yes
+database,6,cmp3dtj800001chf9dli84606,Grade 6 PSSA ELA Baseline Diagnostic,43,cmp3dtj9b0018chf9davognpq,CC.1.3.6.A,Theme,MCQ,4,,yes
+database,6,cmp3dtj800001chf9dli84606,Grade 6 PSSA ELA Baseline Diagnostic,44,cmp3dtj9b0019chf9jcxo4dk8,CC.1.3.6.B,Literary Inference,MCQ,4,,yes
+database,6,cmp3dtj800001chf9dli84606,Grade 6 PSSA ELA Baseline Diagnostic,45,cmp3dtj9c001achf9v84lf99l,CC.1.3.6.C,Setting Impact,MCQ,4,,yes
+database,6,cmp3dtj800001chf9dli84606,Grade 6 PSSA ELA Baseline Diagnostic,46,cmp3dtj9c001bchf9lvetkxt9,CC.1.3.6.C,Plot Development,MCQ,4,,yes
+database,6,cmp3dtj800001chf9dli84606,Grade 6 PSSA ELA Baseline Diagnostic,47,cmp3dtj9c001cchf97r0t7iio,CC.1.3.6.G,Point of View,DRAG_DROP,4,,yes
+database,6,cmp3dtj800001chf9dli84606,Grade 6 PSSA ELA Baseline Diagnostic,48,cmp3dtj9c001dchf9b3nii21g,CC.1.3.6.F / CC.1.2.6.F,Figurative Language,MCQ,4,,yes
+database,6,cmp3dtj800001chf9dli84606,Grade 6 PSSA ELA Baseline Diagnostic,49,cmp3dtj9c001echf92ijy9mco,CC.1.3.6.E,Flashback,HOT_TEXT,4,,yes
+database,6,cmp3dtj800001chf9dli84606,Grade 6 PSSA ELA Baseline Diagnostic,50,cmp3dtj9c001fchf9y4qi4s2i,CC.1.3.6.D,Literary Vocabulary,MCQ,4,,yes
+database,6,cmp3dtj800001chf9dli84606,Grade 6 PSSA ELA Baseline Diagnostic,51,cmp3dtj9c001gchf9waan9yma,CC.1.3.6.A,Theme,MULTI_SELECT,4,,yes
+database,6,cmp3dtj800001chf9dli84606,Grade 6 PSSA ELA Baseline Diagnostic,52,cmp3dtj9c001hchf9ycw582ww,CC.1.3.6.B,Literary Inference,MCQ,4,,yes
+database,6,cmp3dtj800001chf9dli84606,Grade 6 PSSA ELA Baseline Diagnostic,53,cmp3dtj9c001ichf918rbednx,CC.1.3.6.C,Setting Impact,MCQ,4,,yes
+database,6,cmp3dtj800001chf9dli84606,Grade 6 PSSA ELA Baseline Diagnostic,54,cmp3dtj9c001jchf98lsermli,CC.1.4.6.S,TDA Writing,TDA,4,,yes
+database,6,cmp5noc0w0001149w87dd5wol,Grade 6 PSSA ELA Baseline Diagnostic,1,cmp5noc290002149wj4xxrhkc,CC.1.4.6.F1,Grammar,CONVENTIONS,2,,yes
+database,6,cmp5noc0w0001149w87dd5wol,Grade 6 PSSA ELA Baseline Diagnostic,2,cmp5noc290003149wu4hw6rz1,CC.1.4.6.F2,Punctuation,DRAG_DROP,2,,yes
+database,6,cmp5noc0w0001149w87dd5wol,Grade 6 PSSA ELA Baseline Diagnostic,3,cmp5noc290004149wxz3k1i0z,CC.1.4.6.F3,Capitalization,HOT_TEXT,2,,yes
+database,6,cmp5noc0w0001149w87dd5wol,Grade 6 PSSA ELA Baseline Diagnostic,4,cmp5noc290005149wfxe3t442,CC.1.4.6.F4,Sentence Structure,CONVENTIONS,2,,yes
+database,6,cmp5noc0w0001149w87dd5wol,Grade 6 PSSA ELA Baseline Diagnostic,5,cmp5noc290006149wo1zbhivd,CC.1.4.6.F5,Verb Tense,CONVENTIONS,3,,yes
+database,6,cmp5noc0w0001149w87dd5wol,Grade 6 PSSA ELA Baseline Diagnostic,6,cmp5noc290007149w98hdwehn,CC.1.4.6.F6,Pronoun Usage,MULTI_SELECT,3,,yes
+database,6,cmp5noc0w0001149w87dd5wol,Grade 6 PSSA ELA Baseline Diagnostic,7,cmp5noc290008149wu7ls3h2a,CC.1.4.6.F7,Commas,CONVENTIONS,3,,yes
+database,6,cmp5noc0w0001149w87dd5wol,Grade 6 PSSA ELA Baseline Diagnostic,8,cmp5noc290009149wpbbiz1hf,CC.1.4.6.F8,Apostrophes,CONVENTIONS,3,,yes
+database,6,cmp5noc0w0001149w87dd5wol,Grade 6 PSSA ELA Baseline Diagnostic,9,cmp5noc29000a149wkwqmsy0n,CC.1.4.6.F9,Subject-Verb Agreement,DRAG_DROP,3,,yes
+database,6,cmp5noc0w0001149w87dd5wol,Grade 6 PSSA ELA Baseline Diagnostic,10,cmp5noc29000b149w0z5hjz3e,CC.1.2.6.A,Main Idea,MCQ,2,,yes
+database,6,cmp5noc0w0001149w87dd5wol,Grade 6 PSSA ELA Baseline Diagnostic,11,cmp5noc29000c149wr9u96wil,CC.1.2.6.B,Inference,MCQ,2,,yes
+database,6,cmp5noc0w0001149w87dd5wol,Grade 6 PSSA ELA Baseline Diagnostic,12,cmp5noc29000d149wfio2gu3w,CC.1.2.6.C,Text Structure,EBSR,2,,yes
+database,6,cmp5noc0w0001149w87dd5wol,Grade 6 PSSA ELA Baseline Diagnostic,13,cmp5noc2a000e149wjxta7jax,CC.1.2.6.D,Vocabulary,MCQ,2,,yes
+database,6,cmp5noc0w0001149w87dd5wol,Grade 6 PSSA ELA Baseline Diagnostic,14,cmp5noc2a000f149wdp7rj90x,CC.1.3.6.G,Point of View,DRAG_DROP,3,,yes
+database,6,cmp5noc0w0001149w87dd5wol,Grade 6 PSSA ELA Baseline Diagnostic,15,cmp5noc2a000g149wo26ah6tn,CC.1.2.6.B,Inference,MCQ,3,,yes
+database,6,cmp5noc0w0001149w87dd5wol,Grade 6 PSSA ELA Baseline Diagnostic,16,cmp5noc2a000h149wgi1bown5,CC.1.2.6.A,Main Idea,HOT_TEXT,3,,yes
+database,6,cmp5noc0w0001149w87dd5wol,Grade 6 PSSA ELA Baseline Diagnostic,17,cmp5noc2a000i149wjrwxh2ks,CC.1.2.6.B,Inference,MCQ,3,,yes
+database,6,cmp5noc0w0001149w87dd5wol,Grade 6 PSSA ELA Baseline Diagnostic,18,cmp5noc2a000j149wqnil8tvh,CC.1.3.6.A,Theme,MCQ,3,,yes
+database,6,cmp5noc0w0001149w87dd5wol,Grade 6 PSSA ELA Baseline Diagnostic,19,cmp5noc2a000k149whbz9drxk,CC.1.3.6.B,Literary Inference,MCQ,4,,yes
+database,6,cmp5noc0w0001149w87dd5wol,Grade 6 PSSA ELA Baseline Diagnostic,20,cmp5noc2a000l149wcfxg437n,CC.1.3.6.C,Setting Impact,MCQ,4,,yes
+database,6,cmp5noc0w0001149w87dd5wol,Grade 6 PSSA ELA Baseline Diagnostic,21,cmp5noc2a000m149wzbbz1q5j,CC.1.3.6.C,Plot Development,MCQ,4,,yes
+database,6,cmp5noc0w0001149w87dd5wol,Grade 6 PSSA ELA Baseline Diagnostic,22,cmp5noc2b000n149wmgphzhdt,CC.1.3.6.G,Point of View,DRAG_DROP,4,,yes
+database,6,cmp5noc0w0001149w87dd5wol,Grade 6 PSSA ELA Baseline Diagnostic,23,cmp5noc2b000o149wy9gtdfnc,CC.1.3.6.F / CC.1.2.6.F,Figurative Language,MCQ,4,,yes
+database,6,cmp5noc0w0001149w87dd5wol,Grade 6 PSSA ELA Baseline Diagnostic,24,cmp5noc2b000p149wy3ii98zs,CC.1.3.6.E,Flashback,HOT_TEXT,4,,yes
+database,6,cmp5noc0w0001149w87dd5wol,Grade 6 PSSA ELA Baseline Diagnostic,25,cmp5noc2b000q149w8aqrizru,CC.1.2.6.A,Main Idea,MCQ,4,,yes
+database,6,cmp5noc0w0001149w87dd5wol,Grade 6 PSSA ELA Baseline Diagnostic,26,cmp5noc2b000r149w8d9ws6rq,CC.1.2.6.B,Inference,MCQ,4,,yes
+database,6,cmp5noc0w0001149w87dd5wol,Grade 6 PSSA ELA Baseline Diagnostic,27,cmp5noc2b000s149wv91a2y3w,CC.1.3.6.G,Point of View,MCQ,4,,yes
+database,6,cmp5noc0w0001149w87dd5wol,Grade 6 PSSA ELA Baseline Diagnostic,28,cmp5noc2b000t149w3vy7if23,CC.1.2.6.C,Text Structure,MCQ,4,,yes
+database,6,cmp5noc0w0001149w87dd5wol,Grade 6 PSSA ELA Baseline Diagnostic,29,cmp5noc2b000u149waaanvje6,CC.1.2.6.D,Vocabulary,DRAG_DROP,4,,yes
+database,6,cmp5noc0w0001149w87dd5wol,Grade 6 PSSA ELA Baseline Diagnostic,30,cmp5noc2b000v149wy1jz7w5b,CC.1.2.6.B,Inference,MCQ,4,,yes
+database,6,cmp5noc0w0001149w87dd5wol,Grade 6 PSSA ELA Baseline Diagnostic,31,cmp5noc2b000w149w0hy4zjse,CC.1.2.6.A,Main Idea,HOT_TEXT,4,,yes
+database,6,cmp5noc0w0001149w87dd5wol,Grade 6 PSSA ELA Baseline Diagnostic,32,cmp5noc2b000x149w2hrbxxgc,CC.1.2.6.A,Main Idea,MCQ,4,,yes
+database,6,cmp5noc0w0001149w87dd5wol,Grade 6 PSSA ELA Baseline Diagnostic,33,cmp5noc2c000y149wy43iy3lg,CC.1.2.6.B,Inference,MCQ,4,,yes
+database,6,cmp5noc0w0001149w87dd5wol,Grade 6 PSSA ELA Baseline Diagnostic,34,cmp5noc2c000z149w960xeinj,CC.1.2.6.C,Text Structure,EBSR,4,,yes
+database,6,cmp5noc0w0001149w87dd5wol,Grade 6 PSSA ELA Baseline Diagnostic,35,cmp5noc2i0010149w1t2g98w1,CC.1.2.6.D,Vocabulary,MCQ,4,,yes
+database,6,cmp5noc0w0001149w87dd5wol,Grade 6 PSSA ELA Baseline Diagnostic,36,cmp5noc2j0011149w2zaxfll1,CC.1.3.6.G,Point of View,DRAG_DROP,4,,yes
+database,6,cmp5noc0w0001149w87dd5wol,Grade 6 PSSA ELA Baseline Diagnostic,37,cmp5noc2j0012149w9zmue4wa,CC.1.2.6.B,Inference,MCQ,4,,yes
+database,6,cmp5noc0w0001149w87dd5wol,Grade 6 PSSA ELA Baseline Diagnostic,38,cmp5noc2j0013149wytlmkiet,CC.1.2.6.A,Main Idea,HOT_TEXT,4,,yes
+database,6,cmp5noc0w0001149w87dd5wol,Grade 6 PSSA ELA Baseline Diagnostic,39,cmp5noc2j0014149wf7xj9ynj,CC.1.2.6.B,Inference,MCQ,4,,yes
+database,6,cmp5noc0w0001149w87dd5wol,Grade 6 PSSA ELA Baseline Diagnostic,40,cmp5noc2j0015149wdd6lo8vy,CC.1.2.6.C,Text Structure,MULTI_SELECT,4,,yes
+database,6,cmp5noc0w0001149w87dd5wol,Grade 6 PSSA ELA Baseline Diagnostic,41,cmp5noc2j0016149wgzx3ox7f,CC.1.2.6.D,Vocabulary,MCQ,4,,yes
+database,6,cmp5noc0w0001149w87dd5wol,Grade 6 PSSA ELA Baseline Diagnostic,42,cmp5noc2j0017149w34ksyv5f,CC.1.4.6.S,TDA Writing,TDA,4,,yes
+database,6,cmp5noc0w0001149w87dd5wol,Grade 6 PSSA ELA Baseline Diagnostic,43,cmp5noc2j0018149wy00tqm13,CC.1.3.6.A,Theme,MCQ,4,,yes
+database,6,cmp5noc0w0001149w87dd5wol,Grade 6 PSSA ELA Baseline Diagnostic,44,cmp5noc2k0019149w2h3yicy3,CC.1.3.6.B,Literary Inference,MCQ,4,,yes
+database,6,cmp5noc0w0001149w87dd5wol,Grade 6 PSSA ELA Baseline Diagnostic,45,cmp5noc2k001a149wi4cf673m,CC.1.3.6.C,Setting Impact,MCQ,4,,yes
+database,6,cmp5noc0w0001149w87dd5wol,Grade 6 PSSA ELA Baseline Diagnostic,46,cmp5noc2k001b149wyixxoeav,CC.1.3.6.C,Plot Development,MCQ,4,,yes
+database,6,cmp5noc0w0001149w87dd5wol,Grade 6 PSSA ELA Baseline Diagnostic,47,cmp5noc2k001c149wncr6ahkl,CC.1.3.6.G,Point of View,DRAG_DROP,4,,yes
+database,6,cmp5noc0w0001149w87dd5wol,Grade 6 PSSA ELA Baseline Diagnostic,48,cmp5noc2k001d149wbnh6lwj8,CC.1.3.6.F / CC.1.2.6.F,Figurative Language,MCQ,4,,yes
+database,6,cmp5noc0w0001149w87dd5wol,Grade 6 PSSA ELA Baseline Diagnostic,49,cmp5noc2k001e149w0zbzl47i,CC.1.3.6.E,Flashback,HOT_TEXT,4,,yes
+database,6,cmp5noc0w0001149w87dd5wol,Grade 6 PSSA ELA Baseline Diagnostic,50,cmp5noc2k001f149wk59j8afq,CC.1.3.6.D,Literary Vocabulary,MCQ,4,,yes
+database,6,cmp5noc0w0001149w87dd5wol,Grade 6 PSSA ELA Baseline Diagnostic,51,cmp5noc2k001g149wnh0m0075,CC.1.3.6.A,Theme,MULTI_SELECT,4,,yes
+database,6,cmp5noc0w0001149w87dd5wol,Grade 6 PSSA ELA Baseline Diagnostic,52,cmp5noc2k001h149w10ge3vbq,CC.1.3.6.B,Literary Inference,MCQ,4,,yes
+database,6,cmp5noc0w0001149w87dd5wol,Grade 6 PSSA ELA Baseline Diagnostic,53,cmp5noc2k001i149w40c3ra4d,CC.1.3.6.C,Setting Impact,MCQ,4,,yes
+database,6,cmp5noc0w0001149w87dd5wol,Grade 6 PSSA ELA Baseline Diagnostic,54,cmp5noc2k001j149wz4l3g9a0,CC.1.4.6.S,TDA Writing,TDA,4,,yes
+database,6,cmp61ap760001r85qixztqmcj,Grade 6 PSSA ELA Baseline Diagnostic,1,cmp61ap8d0002r85q7hslrui5,CC.1.4.6.F1,Grammar,CONVENTIONS,2,,yes
+database,6,cmp61ap760001r85qixztqmcj,Grade 6 PSSA ELA Baseline Diagnostic,2,cmp61ap8d0003r85q68zli25g,CC.1.4.6.F2,Punctuation,DRAG_DROP,2,,yes
+database,6,cmp61ap760001r85qixztqmcj,Grade 6 PSSA ELA Baseline Diagnostic,3,cmp61ap8d0004r85qib85fes7,CC.1.4.6.F3,Capitalization,HOT_TEXT,2,,yes
+database,6,cmp61ap760001r85qixztqmcj,Grade 6 PSSA ELA Baseline Diagnostic,4,cmp61ap8d0005r85qvm6z7qe5,CC.1.4.6.F4,Sentence Structure,CONVENTIONS,2,,yes
+database,6,cmp61ap760001r85qixztqmcj,Grade 6 PSSA ELA Baseline Diagnostic,5,cmp61ap8d0006r85qq6acg3vy,CC.1.4.6.F5,Verb Tense,CONVENTIONS,3,,yes
+database,6,cmp61ap760001r85qixztqmcj,Grade 6 PSSA ELA Baseline Diagnostic,6,cmp61ap8d0007r85q2nvjbs2f,CC.1.4.6.F6,Pronoun Usage,MULTI_SELECT,3,,yes
+database,6,cmp61ap760001r85qixztqmcj,Grade 6 PSSA ELA Baseline Diagnostic,7,cmp61ap8d0008r85qagvkmywa,CC.1.4.6.F7,Commas,CONVENTIONS,3,,yes
+database,6,cmp61ap760001r85qixztqmcj,Grade 6 PSSA ELA Baseline Diagnostic,8,cmp61ap8d0009r85qj47rgoeh,CC.1.4.6.F8,Apostrophes,CONVENTIONS,3,,yes
+database,6,cmp61ap760001r85qixztqmcj,Grade 6 PSSA ELA Baseline Diagnostic,9,cmp61ap8d000ar85qpo8jbmix,CC.1.4.6.F9,Subject-Verb Agreement,DRAG_DROP,3,,yes
+database,6,cmp61ap760001r85qixztqmcj,Grade 6 PSSA ELA Baseline Diagnostic,10,cmp61ap8d000br85qhh4adgsn,CC.1.2.6.A,Main Idea,MCQ,2,,yes
+database,6,cmp61ap760001r85qixztqmcj,Grade 6 PSSA ELA Baseline Diagnostic,11,cmp61ap8d000cr85qulhhypa0,CC.1.2.6.B,Inference,MCQ,2,,yes
+database,6,cmp61ap760001r85qixztqmcj,Grade 6 PSSA ELA Baseline Diagnostic,12,cmp61ap8e000dr85qvvl94av0,CC.1.2.6.C,Text Structure,EBSR,2,,yes
+database,6,cmp61ap760001r85qixztqmcj,Grade 6 PSSA ELA Baseline Diagnostic,13,cmp61ap8e000er85q1q70659k,CC.1.2.6.D,Vocabulary,MCQ,2,,yes
+database,6,cmp61ap760001r85qixztqmcj,Grade 6 PSSA ELA Baseline Diagnostic,14,cmp61ap8e000fr85qcluryg28,CC.1.3.6.G,Point of View,DRAG_DROP,3,,yes
+database,6,cmp61ap760001r85qixztqmcj,Grade 6 PSSA ELA Baseline Diagnostic,15,cmp61ap8e000gr85qukbjoso6,CC.1.2.6.B,Inference,MCQ,3,,yes
+database,6,cmp61ap760001r85qixztqmcj,Grade 6 PSSA ELA Baseline Diagnostic,16,cmp61ap8e000hr85qcxngxuj5,CC.1.2.6.A,Main Idea,HOT_TEXT,3,,yes
+database,6,cmp61ap760001r85qixztqmcj,Grade 6 PSSA ELA Baseline Diagnostic,17,cmp61ap8e000ir85qacyqv19h,CC.1.2.6.B,Inference,MCQ,3,,yes
+database,6,cmp61ap760001r85qixztqmcj,Grade 6 PSSA ELA Baseline Diagnostic,18,cmp61ap8e000jr85qfqvylebl,CC.1.3.6.A,Theme,MCQ,3,,yes
+database,6,cmp61ap760001r85qixztqmcj,Grade 6 PSSA ELA Baseline Diagnostic,19,cmp61ap8e000kr85q64crij7b,CC.1.3.6.B,Literary Inference,MCQ,4,,yes
+database,6,cmp61ap760001r85qixztqmcj,Grade 6 PSSA ELA Baseline Diagnostic,20,cmp61ap8e000lr85qvzvciyvb,CC.1.3.6.C,Setting Impact,MCQ,4,,yes
+database,6,cmp61ap760001r85qixztqmcj,Grade 6 PSSA ELA Baseline Diagnostic,21,cmp61ap8e000mr85q379kpj25,CC.1.3.6.C,Plot Development,MCQ,4,,yes
+database,6,cmp61ap760001r85qixztqmcj,Grade 6 PSSA ELA Baseline Diagnostic,22,cmp61ap8f000nr85qss9ubta8,CC.1.3.6.G,Point of View,DRAG_DROP,4,,yes
+database,6,cmp61ap760001r85qixztqmcj,Grade 6 PSSA ELA Baseline Diagnostic,23,cmp61ap8f000or85qwyp8hh5g,CC.1.3.6.F / CC.1.2.6.F,Figurative Language,MCQ,4,,yes
+database,6,cmp61ap760001r85qixztqmcj,Grade 6 PSSA ELA Baseline Diagnostic,24,cmp61ap8f000pr85qmxewwz9j,CC.1.3.6.E,Flashback,HOT_TEXT,4,,yes
+database,6,cmp61ap760001r85qixztqmcj,Grade 6 PSSA ELA Baseline Diagnostic,25,cmp61ap8f000qr85qdgwnydod,CC.1.2.6.A,Main Idea,MCQ,4,,yes
+database,6,cmp61ap760001r85qixztqmcj,Grade 6 PSSA ELA Baseline Diagnostic,26,cmp61ap8f000rr85q9usodksy,CC.1.2.6.B,Inference,MCQ,4,,yes
+database,6,cmp61ap760001r85qixztqmcj,Grade 6 PSSA ELA Baseline Diagnostic,27,cmp61ap8f000sr85q4l2b42df,CC.1.3.6.G,Point of View,MCQ,4,,yes
+database,6,cmp61ap760001r85qixztqmcj,Grade 6 PSSA ELA Baseline Diagnostic,28,cmp61ap8f000tr85qv68emty1,CC.1.2.6.C,Text Structure,MCQ,4,,yes
+database,6,cmp61ap760001r85qixztqmcj,Grade 6 PSSA ELA Baseline Diagnostic,29,cmp61ap8f000ur85qd8seyop5,CC.1.2.6.D,Vocabulary,DRAG_DROP,4,,yes
+database,6,cmp61ap760001r85qixztqmcj,Grade 6 PSSA ELA Baseline Diagnostic,30,cmp61ap8f000vr85qkmrbkm4o,CC.1.2.6.B,Inference,MCQ,4,,yes
+database,6,cmp61ap760001r85qixztqmcj,Grade 6 PSSA ELA Baseline Diagnostic,31,cmp61ap8f000wr85q29q8lzct,CC.1.2.6.A,Main Idea,HOT_TEXT,4,,yes
+database,6,cmp61ap760001r85qixztqmcj,Grade 6 PSSA ELA Baseline Diagnostic,32,cmp61ap8g000xr85qms8szz85,CC.1.2.6.A,Main Idea,MCQ,4,,yes
+database,6,cmp61ap760001r85qixztqmcj,Grade 6 PSSA ELA Baseline Diagnostic,33,cmp61ap8g000yr85qlccksv8v,CC.1.2.6.B,Inference,MCQ,4,,yes
+database,6,cmp61ap760001r85qixztqmcj,Grade 6 PSSA ELA Baseline Diagnostic,34,cmp61ap8g000zr85qyy8zcz82,CC.1.2.6.C,Text Structure,EBSR,4,,yes
+database,6,cmp61ap760001r85qixztqmcj,Grade 6 PSSA ELA Baseline Diagnostic,35,cmp61ap8g0010r85qvx3jmk2f,CC.1.2.6.D,Vocabulary,MCQ,4,,yes
+database,6,cmp61ap760001r85qixztqmcj,Grade 6 PSSA ELA Baseline Diagnostic,36,cmp61ap8g0011r85qyl20ho3x,CC.1.3.6.G,Point of View,DRAG_DROP,4,,yes
+database,6,cmp61ap760001r85qixztqmcj,Grade 6 PSSA ELA Baseline Diagnostic,37,cmp61ap8g0012r85qgqqj10yz,CC.1.2.6.B,Inference,MCQ,4,,yes
+database,6,cmp61ap760001r85qixztqmcj,Grade 6 PSSA ELA Baseline Diagnostic,38,cmp61ap8g0013r85qvwlk84ux,CC.1.2.6.A,Main Idea,HOT_TEXT,4,,yes
+database,6,cmp61ap760001r85qixztqmcj,Grade 6 PSSA ELA Baseline Diagnostic,39,cmp61ap8h0014r85qs62wauuc,CC.1.2.6.B,Inference,MCQ,4,,yes
+database,6,cmp61ap760001r85qixztqmcj,Grade 6 PSSA ELA Baseline Diagnostic,40,cmp61ap8h0015r85qdic585y4,CC.1.2.6.C,Text Structure,MULTI_SELECT,4,,yes
+database,6,cmp61ap760001r85qixztqmcj,Grade 6 PSSA ELA Baseline Diagnostic,41,cmp61ap8h0016r85q7cpe2kvi,CC.1.2.6.D,Vocabulary,MCQ,4,,yes
+database,6,cmp61ap760001r85qixztqmcj,Grade 6 PSSA ELA Baseline Diagnostic,42,cmp61ap8h0017r85q85mqgceg,CC.1.4.6.S,TDA Writing,TDA,4,,yes
+database,6,cmp61ap760001r85qixztqmcj,Grade 6 PSSA ELA Baseline Diagnostic,43,cmp61ap8h0018r85qkiplv9qd,CC.1.3.6.A,Theme,MCQ,4,,yes
+database,6,cmp61ap760001r85qixztqmcj,Grade 6 PSSA ELA Baseline Diagnostic,44,cmp61ap8h0019r85qojneao81,CC.1.3.6.B,Literary Inference,MCQ,4,,yes
+database,6,cmp61ap760001r85qixztqmcj,Grade 6 PSSA ELA Baseline Diagnostic,45,cmp61ap8h001ar85q4mi264a1,CC.1.3.6.C,Setting Impact,MCQ,4,,yes
+database,6,cmp61ap760001r85qixztqmcj,Grade 6 PSSA ELA Baseline Diagnostic,46,cmp61ap8h001br85qtpo7fup1,CC.1.3.6.C,Plot Development,MCQ,4,,yes
+database,6,cmp61ap760001r85qixztqmcj,Grade 6 PSSA ELA Baseline Diagnostic,47,cmp61ap8h001cr85q5lg4i9sk,CC.1.3.6.G,Point of View,DRAG_DROP,4,,yes
+database,6,cmp61ap760001r85qixztqmcj,Grade 6 PSSA ELA Baseline Diagnostic,48,cmp61ap8h001dr85qgdogtemj,CC.1.3.6.F / CC.1.2.6.F,Figurative Language,MCQ,4,,yes
+database,6,cmp61ap760001r85qixztqmcj,Grade 6 PSSA ELA Baseline Diagnostic,49,cmp61ap8i001er85qjh3cpzfp,CC.1.3.6.E,Flashback,HOT_TEXT,4,,yes
+database,6,cmp61ap760001r85qixztqmcj,Grade 6 PSSA ELA Baseline Diagnostic,50,cmp61ap8i001fr85qlo8qu74x,CC.1.3.6.D,Literary Vocabulary,MCQ,4,,yes
+database,6,cmp61ap760001r85qixztqmcj,Grade 6 PSSA ELA Baseline Diagnostic,51,cmp61ap8i001gr85qnlxr2pq1,CC.1.3.6.A,Theme,MULTI_SELECT,4,,yes
+database,6,cmp61ap760001r85qixztqmcj,Grade 6 PSSA ELA Baseline Diagnostic,52,cmp61ap8i001hr85q57brm6t5,CC.1.3.6.B,Literary Inference,MCQ,4,,yes
+database,6,cmp61ap760001r85qixztqmcj,Grade 6 PSSA ELA Baseline Diagnostic,53,cmp61ap8i001ir85qqnjc0ue8,CC.1.3.6.C,Setting Impact,MCQ,4,,yes
+database,6,cmp61ap760001r85qixztqmcj,Grade 6 PSSA ELA Baseline Diagnostic,54,cmp61ap8i001jr85q7mkr3t3k,CC.1.4.6.S,TDA Writing,TDA,4,,yes
+database,6,cmp62uiwt0001ajtyk3hoi18f,Grade 6 PSSA ELA Baseline Diagnostic,1,cmp62uiy00002ajtyvb1i9x19,CC.1.4.6.F1,Grammar,CONVENTIONS,2,,yes
+database,6,cmp62uiwt0001ajtyk3hoi18f,Grade 6 PSSA ELA Baseline Diagnostic,2,cmp62uiy00003ajtyvgckyjw9,CC.1.4.6.F2,Punctuation,DRAG_DROP,2,,yes
+database,6,cmp62uiwt0001ajtyk3hoi18f,Grade 6 PSSA ELA Baseline Diagnostic,3,cmp62uiy10004ajtys6rtmg64,CC.1.4.6.F3,Capitalization,HOT_TEXT,2,,yes
+database,6,cmp62uiwt0001ajtyk3hoi18f,Grade 6 PSSA ELA Baseline Diagnostic,4,cmp62uiy10005ajtypxo06lk2,CC.1.4.6.F4,Sentence Structure,CONVENTIONS,2,,yes
+database,6,cmp62uiwt0001ajtyk3hoi18f,Grade 6 PSSA ELA Baseline Diagnostic,5,cmp62uiy10006ajty717k1d0s,CC.1.4.6.F5,Verb Tense,CONVENTIONS,3,,yes
+database,6,cmp62uiwt0001ajtyk3hoi18f,Grade 6 PSSA ELA Baseline Diagnostic,6,cmp62uiy10007ajtyui75p589,CC.1.4.6.F6,Pronoun Usage,MULTI_SELECT,3,,yes
+database,6,cmp62uiwt0001ajtyk3hoi18f,Grade 6 PSSA ELA Baseline Diagnostic,7,cmp62uiy10008ajtylfobje8w,CC.1.4.6.F7,Commas,CONVENTIONS,3,,yes
+database,6,cmp62uiwt0001ajtyk3hoi18f,Grade 6 PSSA ELA Baseline Diagnostic,8,cmp62uiy10009ajtywt4gyysf,CC.1.4.6.F8,Apostrophes,CONVENTIONS,3,,yes
+database,6,cmp62uiwt0001ajtyk3hoi18f,Grade 6 PSSA ELA Baseline Diagnostic,9,cmp62uiy1000aajty06z8ppe5,CC.1.4.6.F9,Subject-Verb Agreement,DRAG_DROP,3,,yes
+database,6,cmp62uiwt0001ajtyk3hoi18f,Grade 6 PSSA ELA Baseline Diagnostic,10,cmp62uiy1000bajtyo5raan7g,CC.1.2.6.A,Main Idea,MCQ,2,,yes
+database,6,cmp62uiwt0001ajtyk3hoi18f,Grade 6 PSSA ELA Baseline Diagnostic,11,cmp62uiy1000cajtyy7swm7ua,CC.1.2.6.B,Inference,MCQ,2,,yes
+database,6,cmp62uiwt0001ajtyk3hoi18f,Grade 6 PSSA ELA Baseline Diagnostic,12,cmp62uiy1000dajtyyss1d3fl,CC.1.2.6.C,Text Structure,EBSR,2,,yes
+database,6,cmp62uiwt0001ajtyk3hoi18f,Grade 6 PSSA ELA Baseline Diagnostic,13,cmp62uiy1000eajty7x1m4krh,CC.1.2.6.D,Vocabulary,MCQ,2,,yes
+database,6,cmp62uiwt0001ajtyk3hoi18f,Grade 6 PSSA ELA Baseline Diagnostic,14,cmp62uiy1000fajty7s56ft12,CC.1.3.6.G,Point of View,DRAG_DROP,3,,yes
+database,6,cmp62uiwt0001ajtyk3hoi18f,Grade 6 PSSA ELA Baseline Diagnostic,15,cmp62uiy2000gajtyi516zg6u,CC.1.2.6.B,Inference,MCQ,3,,yes
+database,6,cmp62uiwt0001ajtyk3hoi18f,Grade 6 PSSA ELA Baseline Diagnostic,16,cmp62uiy2000hajtywe0gaw48,CC.1.2.6.A,Main Idea,HOT_TEXT,3,,yes
+database,6,cmp62uiwt0001ajtyk3hoi18f,Grade 6 PSSA ELA Baseline Diagnostic,17,cmp62uiy2000iajty2556bq7s,CC.1.2.6.B,Inference,MCQ,3,,yes
+database,6,cmp62uiwt0001ajtyk3hoi18f,Grade 6 PSSA ELA Baseline Diagnostic,18,cmp62uiy2000jajtyucubjh11,CC.1.3.6.A,Theme,MCQ,3,,yes
+database,6,cmp62uiwt0001ajtyk3hoi18f,Grade 6 PSSA ELA Baseline Diagnostic,19,cmp62uiy2000kajtyyfzqyzqn,CC.1.3.6.B,Literary Inference,MCQ,4,,yes
+database,6,cmp62uiwt0001ajtyk3hoi18f,Grade 6 PSSA ELA Baseline Diagnostic,20,cmp62uiy2000lajtyuguqo7qa,CC.1.3.6.C,Setting Impact,MCQ,4,,yes
+database,6,cmp62uiwt0001ajtyk3hoi18f,Grade 6 PSSA ELA Baseline Diagnostic,21,cmp62uiy2000majtyfbq1hep0,CC.1.3.6.C,Plot Development,MCQ,4,,yes
+database,6,cmp62uiwt0001ajtyk3hoi18f,Grade 6 PSSA ELA Baseline Diagnostic,22,cmp62uiy2000najty2z3l5mh3,CC.1.3.6.G,Point of View,DRAG_DROP,4,,yes
+database,6,cmp62uiwt0001ajtyk3hoi18f,Grade 6 PSSA ELA Baseline Diagnostic,23,cmp62uiy2000oajtyp3cz5n6v,CC.1.3.6.F / CC.1.2.6.F,Figurative Language,MCQ,4,,yes
+database,6,cmp62uiwt0001ajtyk3hoi18f,Grade 6 PSSA ELA Baseline Diagnostic,24,cmp62uiy3000pajtyzsjcnspw,CC.1.3.6.E,Flashback,HOT_TEXT,4,,yes
+database,6,cmp62uiwt0001ajtyk3hoi18f,Grade 6 PSSA ELA Baseline Diagnostic,25,cmp62uiy3000qajtyliacwmjb,CC.1.2.6.A,Main Idea,MCQ,4,,yes
+database,6,cmp62uiwt0001ajtyk3hoi18f,Grade 6 PSSA ELA Baseline Diagnostic,26,cmp62uiy3000rajty3twpreeb,CC.1.2.6.B,Inference,MCQ,4,,yes
+database,6,cmp62uiwt0001ajtyk3hoi18f,Grade 6 PSSA ELA Baseline Diagnostic,27,cmp62uiy3000sajtykosi80kr,CC.1.3.6.G,Point of View,MCQ,4,,yes
+database,6,cmp62uiwt0001ajtyk3hoi18f,Grade 6 PSSA ELA Baseline Diagnostic,28,cmp62uiy3000tajtymu06lpxu,CC.1.2.6.C,Text Structure,MCQ,4,,yes
+database,6,cmp62uiwt0001ajtyk3hoi18f,Grade 6 PSSA ELA Baseline Diagnostic,29,cmp62uiy3000uajtyb0sbc5sd,CC.1.2.6.D,Vocabulary,DRAG_DROP,4,,yes
+database,6,cmp62uiwt0001ajtyk3hoi18f,Grade 6 PSSA ELA Baseline Diagnostic,30,cmp62uiy3000vajtyzxsco7g9,CC.1.2.6.B,Inference,MCQ,4,,yes
+database,6,cmp62uiwt0001ajtyk3hoi18f,Grade 6 PSSA ELA Baseline Diagnostic,31,cmp62uiy3000wajtyn9mpef26,CC.1.2.6.A,Main Idea,HOT_TEXT,4,,yes
+database,6,cmp62uiwt0001ajtyk3hoi18f,Grade 6 PSSA ELA Baseline Diagnostic,32,cmp62uiy3000xajtyq2ajfifx,CC.1.2.6.A,Main Idea,MCQ,4,,yes
+database,6,cmp62uiwt0001ajtyk3hoi18f,Grade 6 PSSA ELA Baseline Diagnostic,33,cmp62uiy3000yajtyv1jduwnq,CC.1.2.6.B,Inference,MCQ,4,,yes
+database,6,cmp62uiwt0001ajtyk3hoi18f,Grade 6 PSSA ELA Baseline Diagnostic,34,cmp62uiy4000zajty564v58yz,CC.1.2.6.C,Text Structure,EBSR,4,,yes
+database,6,cmp62uiwt0001ajtyk3hoi18f,Grade 6 PSSA ELA Baseline Diagnostic,35,cmp62uiy40010ajtyxb02otd2,CC.1.2.6.D,Vocabulary,MCQ,4,,yes
+database,6,cmp62uiwt0001ajtyk3hoi18f,Grade 6 PSSA ELA Baseline Diagnostic,36,cmp62uiy40011ajty0subo3tk,CC.1.3.6.G,Point of View,DRAG_DROP,4,,yes
+database,6,cmp62uiwt0001ajtyk3hoi18f,Grade 6 PSSA ELA Baseline Diagnostic,37,cmp62uiy40012ajtysl6loxje,CC.1.2.6.B,Inference,MCQ,4,,yes
+database,6,cmp62uiwt0001ajtyk3hoi18f,Grade 6 PSSA ELA Baseline Diagnostic,38,cmp62uiy40013ajty7mzj5x0h,CC.1.2.6.A,Main Idea,HOT_TEXT,4,,yes
+database,6,cmp62uiwt0001ajtyk3hoi18f,Grade 6 PSSA ELA Baseline Diagnostic,39,cmp62uiy40014ajty6lqwy5sq,CC.1.2.6.B,Inference,MCQ,4,,yes
+database,6,cmp62uiwt0001ajtyk3hoi18f,Grade 6 PSSA ELA Baseline Diagnostic,40,cmp62uiy40015ajtyg1pbwhe6,CC.1.2.6.C,Text Structure,MULTI_SELECT,4,,yes
+database,6,cmp62uiwt0001ajtyk3hoi18f,Grade 6 PSSA ELA Baseline Diagnostic,41,cmp62uiy40016ajtya8v48j60,CC.1.2.6.D,Vocabulary,MCQ,4,,yes
+database,6,cmp62uiwt0001ajtyk3hoi18f,Grade 6 PSSA ELA Baseline Diagnostic,42,cmp62uiy50017ajtyzihrdd63,CC.1.4.6.S,TDA Writing,TDA,4,,yes
+database,6,cmp62uiwt0001ajtyk3hoi18f,Grade 6 PSSA ELA Baseline Diagnostic,43,cmp62uiy50018ajty6kjduxq9,CC.1.3.6.A,Theme,MCQ,4,,yes
+database,6,cmp62uiwt0001ajtyk3hoi18f,Grade 6 PSSA ELA Baseline Diagnostic,44,cmp62uiy50019ajtyqvidntzn,CC.1.3.6.B,Literary Inference,MCQ,4,,yes
+database,6,cmp62uiwt0001ajtyk3hoi18f,Grade 6 PSSA ELA Baseline Diagnostic,45,cmp62uiy5001aajtyy6na2a15,CC.1.3.6.C,Setting Impact,MCQ,4,,yes
+database,6,cmp62uiwt0001ajtyk3hoi18f,Grade 6 PSSA ELA Baseline Diagnostic,46,cmp62uiy5001bajtynjopy54p,CC.1.3.6.C,Plot Development,MCQ,4,,yes
+database,6,cmp62uiwt0001ajtyk3hoi18f,Grade 6 PSSA ELA Baseline Diagnostic,47,cmp62uiy5001cajtyj6wylg21,CC.1.3.6.G,Point of View,DRAG_DROP,4,,yes
+database,6,cmp62uiwt0001ajtyk3hoi18f,Grade 6 PSSA ELA Baseline Diagnostic,48,cmp62uiy5001dajtyt6ssc1jg,CC.1.3.6.F / CC.1.2.6.F,Figurative Language,MCQ,4,,yes
+database,6,cmp62uiwt0001ajtyk3hoi18f,Grade 6 PSSA ELA Baseline Diagnostic,49,cmp62uiy5001eajtypht1kvaq,CC.1.3.6.E,Flashback,HOT_TEXT,4,,yes
+database,6,cmp62uiwt0001ajtyk3hoi18f,Grade 6 PSSA ELA Baseline Diagnostic,50,cmp62uiy5001fajtyd835jgnh,CC.1.3.6.D,Literary Vocabulary,MCQ,4,,yes
+database,6,cmp62uiwt0001ajtyk3hoi18f,Grade 6 PSSA ELA Baseline Diagnostic,51,cmp62uiy5001gajty0ao691nf,CC.1.3.6.A,Theme,MULTI_SELECT,4,,yes
+database,6,cmp62uiwt0001ajtyk3hoi18f,Grade 6 PSSA ELA Baseline Diagnostic,52,cmp62uiy6001hajtylylu4c92,CC.1.3.6.B,Literary Inference,MCQ,4,,yes
+database,6,cmp62uiwt0001ajtyk3hoi18f,Grade 6 PSSA ELA Baseline Diagnostic,53,cmp62uiy6001iajtykqbbojcj,CC.1.3.6.C,Setting Impact,MCQ,4,,yes
+database,6,cmp62uiwt0001ajtyk3hoi18f,Grade 6 PSSA ELA Baseline Diagnostic,54,cmp62uiy6001jajtysz2r7evm,CC.1.4.6.S,TDA Writing,TDA,4,,yes
+database,6,pilot-diagnostic-g6-id,Grade 6 PSSA ELA Pilot Diagnostic,1,cmp7kxbgw0005nu4us7rob0d5,CC.1.4.6.F1,Grammar,CONVENTIONS,2,,yes
+database,6,pilot-diagnostic-g6-id,Grade 6 PSSA ELA Pilot Diagnostic,2,cmp7kxbgw0006nu4uhwfiuuwr,CC.1.4.6.F2,Punctuation,DRAG_DROP,2,,yes
+database,6,pilot-diagnostic-g6-id,Grade 6 PSSA ELA Pilot Diagnostic,3,cmp7kxbgw0007nu4ucj0oxbxj,CC.1.4.6.F3,Capitalization,HOT_TEXT,2,,yes
+database,6,pilot-diagnostic-g6-id,Grade 6 PSSA ELA Pilot Diagnostic,4,cmp7kxbgw0008nu4ut26rq08a,CC.1.4.6.F4,Sentence Structure,CONVENTIONS,2,,yes
+database,6,pilot-diagnostic-g6-id,Grade 6 PSSA ELA Pilot Diagnostic,5,cmp7kxbgw0009nu4uple7y192,CC.1.4.6.F5,Verb Tense,CONVENTIONS,3,,yes
+database,6,pilot-diagnostic-g6-id,Grade 6 PSSA ELA Pilot Diagnostic,6,cmp7kxbgw000anu4u06rcanvd,CC.1.4.6.F6,Pronoun Usage,MULTI_SELECT,3,,yes
+database,6,pilot-diagnostic-g6-id,Grade 6 PSSA ELA Pilot Diagnostic,7,cmp7kxbgw000bnu4u8el2nf1q,CC.1.4.6.F7,Commas,CONVENTIONS,3,,yes
+database,6,pilot-diagnostic-g6-id,Grade 6 PSSA ELA Pilot Diagnostic,8,cmp7kxbgw000cnu4u921glbde,CC.1.4.6.F8,Apostrophes,CONVENTIONS,3,,yes
+database,6,pilot-diagnostic-g6-id,Grade 6 PSSA ELA Pilot Diagnostic,9,cmp7kxbgw000dnu4ugb8z4uwf,CC.1.4.6.F9,Subject-Verb Agreement,DRAG_DROP,3,,yes
+database,6,pilot-diagnostic-g6-id,Grade 6 PSSA ELA Pilot Diagnostic,10,cmp7kxbgw000enu4udxuwk8b3,CC.1.2.6.A,Main Idea,MCQ,2,,yes
+database,6,pilot-diagnostic-g6-id,Grade 6 PSSA ELA Pilot Diagnostic,11,cmp7kxbgw000fnu4ulseuaync,CC.1.2.6.B,Inference,MCQ,2,,yes
+database,6,pilot-diagnostic-g6-id,Grade 6 PSSA ELA Pilot Diagnostic,12,cmp7kxbgw000gnu4ut4d3ma0s,CC.1.2.6.C,Text Structure,EBSR,2,,yes
+database,6,pilot-diagnostic-g6-id,Grade 6 PSSA ELA Pilot Diagnostic,13,cmp7kxbgw000hnu4uyeh0psma,CC.1.2.6.D,Vocabulary,MCQ,2,,yes
+database,6,pilot-diagnostic-g6-id,Grade 6 PSSA ELA Pilot Diagnostic,14,cmp7kxbgw000inu4upsadw7qw,CC.1.3.6.G,Point of View,DRAG_DROP,3,,yes
+database,6,pilot-diagnostic-g6-id,Grade 6 PSSA ELA Pilot Diagnostic,15,cmp7kxbgw000jnu4u2hhzt1u9,CC.1.2.6.B,Inference,MCQ,3,,yes
+database,6,pilot-diagnostic-g6-id,Grade 6 PSSA ELA Pilot Diagnostic,16,cmp7kxbgx000knu4u85xyhwnp,CC.1.2.6.A,Main Idea,HOT_TEXT,3,,yes
+database,6,pilot-diagnostic-g6-id,Grade 6 PSSA ELA Pilot Diagnostic,17,cmp7kxbgx000lnu4ujd2yxeb6,CC.1.2.6.B,Inference,MCQ,3,,yes
+database,6,pilot-diagnostic-g6-id,Grade 6 PSSA ELA Pilot Diagnostic,18,cmp7kxbgx000mnu4uhqkdq7bg,CC.1.3.6.A,Theme,MCQ,3,,yes
+database,6,pilot-diagnostic-g6-id,Grade 6 PSSA ELA Pilot Diagnostic,19,cmp7kxbgx000nnu4uo271v345,CC.1.3.6.B,Literary Inference,MCQ,4,,yes
+database,6,pilot-diagnostic-g6-id,Grade 6 PSSA ELA Pilot Diagnostic,20,cmp7kxbgx000onu4uww7qraut,CC.1.3.6.C,Setting Impact,MCQ,4,,yes
+database,6,pilot-diagnostic-g6-id,Grade 6 PSSA ELA Pilot Diagnostic,21,cmp7kxbgx000pnu4uhysvbxad,CC.1.3.6.C,Plot Development,MCQ,4,,yes
+database,6,pilot-diagnostic-g6-id,Grade 6 PSSA ELA Pilot Diagnostic,22,cmp7kxbgx000qnu4uuzhaqgez,CC.1.3.6.G,Point of View,DRAG_DROP,4,,yes
+database,6,pilot-diagnostic-g6-id,Grade 6 PSSA ELA Pilot Diagnostic,23,cmp7kxbgx000rnu4u4zwd2err,CC.1.3.6.F / CC.1.2.6.F,Figurative Language,MCQ,4,,yes
+database,6,pilot-diagnostic-g6-id,Grade 6 PSSA ELA Pilot Diagnostic,24,cmp7kxbgx000snu4u8z91zvez,CC.1.3.6.E,Flashback,HOT_TEXT,4,,yes
+database,6,pilot-diagnostic-g6-id,Grade 6 PSSA ELA Pilot Diagnostic,25,cmp7kxbgx000tnu4unos6050c,CC.1.2.6.A,Main Idea,MCQ,4,,yes
+database,6,pilot-diagnostic-g6-id,Grade 6 PSSA ELA Pilot Diagnostic,26,cmp7kxbgx000unu4uw2a1niwl,CC.1.2.6.B,Inference,MCQ,4,,yes
+database,6,pilot-diagnostic-g6-id,Grade 6 PSSA ELA Pilot Diagnostic,27,cmp7kxbgx000vnu4uoriumgs1,CC.1.3.6.G,Point of View,MCQ,4,,yes
+database,6,pilot-diagnostic-g6-id,Grade 6 PSSA ELA Pilot Diagnostic,28,cmp7kxbgx000wnu4ul9hs2qcs,CC.1.2.6.C,Text Structure,MCQ,4,,yes
+database,6,pilot-diagnostic-g6-id,Grade 6 PSSA ELA Pilot Diagnostic,29,cmp7kxbgx000xnu4u61404ntw,CC.1.2.6.D,Vocabulary,DRAG_DROP,4,,yes
+database,6,pilot-diagnostic-g6-id,Grade 6 PSSA ELA Pilot Diagnostic,30,cmp7kxbgx000ynu4uluk1ojn5,CC.1.2.6.B,Inference,MCQ,4,,yes
+database,6,pilot-diagnostic-g6-id,Grade 6 PSSA ELA Pilot Diagnostic,31,cmp7kxbgy000znu4urgvvz2np,CC.1.2.6.A,Main Idea,HOT_TEXT,4,,yes
+database,6,pilot-diagnostic-g6-id,Grade 6 PSSA ELA Pilot Diagnostic,32,cmp7kxbgy0010nu4ue8dav9pb,CC.1.2.6.A,Main Idea,MCQ,4,,yes
+database,6,pilot-diagnostic-g6-id,Grade 6 PSSA ELA Pilot Diagnostic,33,cmp7kxbgy0011nu4uddhqwcz4,CC.1.2.6.B,Inference,MCQ,4,,yes
+database,6,pilot-diagnostic-g6-id,Grade 6 PSSA ELA Pilot Diagnostic,34,cmp7kxbgy0012nu4ucavrx27w,CC.1.2.6.C,Text Structure,EBSR,4,,yes
+database,6,pilot-diagnostic-g6-id,Grade 6 PSSA ELA Pilot Diagnostic,35,cmp7kxbgy0013nu4u5zf2aqu6,CC.1.2.6.D,Vocabulary,MCQ,4,,yes
+database,6,pilot-diagnostic-g6-id,Grade 6 PSSA ELA Pilot Diagnostic,36,cmp7kxbgy0014nu4u1op5xbf2,CC.1.3.6.G,Point of View,DRAG_DROP,4,,yes
+database,6,pilot-diagnostic-g6-id,Grade 6 PSSA ELA Pilot Diagnostic,37,cmp7kxbgy0015nu4uxvsqeg4q,CC.1.2.6.B,Inference,MCQ,4,,yes
+database,6,pilot-diagnostic-g6-id,Grade 6 PSSA ELA Pilot Diagnostic,38,cmp7kxbgy0016nu4usr6ufquo,CC.1.2.6.A,Main Idea,HOT_TEXT,4,,yes
+database,6,pilot-diagnostic-g6-id,Grade 6 PSSA ELA Pilot Diagnostic,39,cmp7kxbgy0017nu4u4mwagxhs,CC.1.2.6.B,Inference,MCQ,4,,yes
+database,6,pilot-diagnostic-g6-id,Grade 6 PSSA ELA Pilot Diagnostic,40,cmp7kxbgy0018nu4u725oc1w1,CC.1.2.6.C,Text Structure,MULTI_SELECT,4,,yes
+database,6,pilot-diagnostic-g6-id,Grade 6 PSSA ELA Pilot Diagnostic,41,cmp7kxbgy0019nu4uqwk386pw,CC.1.2.6.D,Vocabulary,MCQ,4,,yes
+database,6,pilot-diagnostic-g6-id,Grade 6 PSSA ELA Pilot Diagnostic,42,cmp7kxbgy001anu4uahfp6rcm,CC.1.4.6.S,TDA Writing,TDA,4,,yes
+database,6,pilot-diagnostic-g6-id,Grade 6 PSSA ELA Pilot Diagnostic,43,cmp7kxbgy001bnu4u9jqc9hof,CC.1.3.6.A,Theme,MCQ,4,,yes
+database,6,pilot-diagnostic-g6-id,Grade 6 PSSA ELA Pilot Diagnostic,44,cmp7kxbgy001cnu4u5hgsdi4k,CC.1.3.6.B,Literary Inference,MCQ,4,,yes
+database,6,pilot-diagnostic-g6-id,Grade 6 PSSA ELA Pilot Diagnostic,45,cmp7kxbgz001dnu4ury4siukm,CC.1.3.6.C,Setting Impact,MCQ,4,,yes
+database,6,pilot-diagnostic-g6-id,Grade 6 PSSA ELA Pilot Diagnostic,46,cmp7kxbgz001enu4uwuzxfm0i,CC.1.3.6.C,Plot Development,MCQ,4,,yes
+database,6,pilot-diagnostic-g6-id,Grade 6 PSSA ELA Pilot Diagnostic,47,cmp7kxbgz001fnu4u3817dfse,CC.1.3.6.G,Point of View,DRAG_DROP,4,,yes
+database,6,pilot-diagnostic-g6-id,Grade 6 PSSA ELA Pilot Diagnostic,48,cmp7kxbgz001gnu4ulj4ep1u6,CC.1.3.6.F / CC.1.2.6.F,Figurative Language,MCQ,4,,yes
+database,6,pilot-diagnostic-g6-id,Grade 6 PSSA ELA Pilot Diagnostic,49,cmp7kxbgz001hnu4us0rpjxi2,CC.1.3.6.E,Flashback,HOT_TEXT,4,,yes
+database,6,pilot-diagnostic-g6-id,Grade 6 PSSA ELA Pilot Diagnostic,50,cmp7kxbgz001inu4uaedxme5r,CC.1.3.6.D,Literary Vocabulary,MCQ,4,,yes
+database,6,pilot-diagnostic-g6-id,Grade 6 PSSA ELA Pilot Diagnostic,51,cmp7kxbgz001jnu4unsg7vx5j,CC.1.3.6.A,Theme,MULTI_SELECT,4,,yes
+database,6,pilot-diagnostic-g6-id,Grade 6 PSSA ELA Pilot Diagnostic,52,cmp7kxbgz001knu4u0f0nmd7q,CC.1.3.6.B,Literary Inference,MCQ,4,,yes
+database,6,pilot-diagnostic-g6-id,Grade 6 PSSA ELA Pilot Diagnostic,53,cmp7kxbgz001lnu4ui2ka0jct,CC.1.3.6.C,Setting Impact,MCQ,4,,yes
+database,6,pilot-diagnostic-g6-id,Grade 6 PSSA ELA Pilot Diagnostic,54,cmp7kxbgz001mnu4uf294nkfi,CC.1.4.6.S,TDA Writing,TDA,4,,yes
+database,7,pilot-diagnostic-g7-id,Grade 7 PSSA ELA Pilot Diagnostic,1,cmp7kxbw7001snu4un7mg3vya,CC.1.4.7.F1,Grammar,CONVENTIONS,2,,yes
+database,7,pilot-diagnostic-g7-id,Grade 7 PSSA ELA Pilot Diagnostic,2,cmp7kxbw7001tnu4u4wyqthq5,CC.1.4.7.F2,Punctuation,DRAG_DROP,2,,yes
+database,7,pilot-diagnostic-g7-id,Grade 7 PSSA ELA Pilot Diagnostic,3,cmp7kxbw7001unu4u4x6urna3,CC.1.4.7.F3,Capitalization,HOT_TEXT,2,,yes
+database,7,pilot-diagnostic-g7-id,Grade 7 PSSA ELA Pilot Diagnostic,4,cmp7kxbw7001vnu4uscsj57wk,CC.1.4.7.F4,Sentence Structure,CONVENTIONS,2,,yes
+database,7,pilot-diagnostic-g7-id,Grade 7 PSSA ELA Pilot Diagnostic,5,cmp7kxbw7001wnu4uqt740eo2,CC.1.4.7.F5,Verb Tense,CONVENTIONS,3,,yes
+database,7,pilot-diagnostic-g7-id,Grade 7 PSSA ELA Pilot Diagnostic,6,cmp7kxbw7001xnu4uiscnkxch,CC.1.4.7.F6,Pronoun Usage,MULTI_SELECT,3,,yes
+database,7,pilot-diagnostic-g7-id,Grade 7 PSSA ELA Pilot Diagnostic,7,cmp7kxbw7001ynu4uh7ac4gw4,CC.1.4.7.F7,Commas,CONVENTIONS,3,,yes
+database,7,pilot-diagnostic-g7-id,Grade 7 PSSA ELA Pilot Diagnostic,8,cmp7kxbw7001znu4u17mg3713,CC.1.4.7.F8,Apostrophes,CONVENTIONS,3,,yes
+database,7,pilot-diagnostic-g7-id,Grade 7 PSSA ELA Pilot Diagnostic,9,cmp7kxbw70020nu4uphmqeoir,CC.1.4.7.F9,Subject-Verb Agreement,DRAG_DROP,3,,yes
+database,7,pilot-diagnostic-g7-id,Grade 7 PSSA ELA Pilot Diagnostic,10,cmp7kxbw70021nu4unh0c1tv9,CC.1.2.7.A,Main Idea,MCQ,2,,yes
+database,7,pilot-diagnostic-g7-id,Grade 7 PSSA ELA Pilot Diagnostic,11,cmp7kxbw70022nu4uiv69zhbr,CC.1.2.7.B,Inference,MCQ,2,,yes
+database,7,pilot-diagnostic-g7-id,Grade 7 PSSA ELA Pilot Diagnostic,12,cmp7kxbw80023nu4u7e14vdc0,CC.1.2.7.C,Text Structure,EBSR,2,,yes
+database,7,pilot-diagnostic-g7-id,Grade 7 PSSA ELA Pilot Diagnostic,13,cmp7kxbw80024nu4ud4bzfq8q,CC.1.2.7.D,Vocabulary,MCQ,2,,yes
+database,7,pilot-diagnostic-g7-id,Grade 7 PSSA ELA Pilot Diagnostic,14,cmp7kxbw80025nu4upd4q2uk9,CC.1.3.7.G,Point of View,DRAG_DROP,3,,yes
+database,7,pilot-diagnostic-g7-id,Grade 7 PSSA ELA Pilot Diagnostic,15,cmp7kxbw80026nu4u65xu1lj5,CC.1.2.7.B,Inference,MCQ,3,,yes
+database,7,pilot-diagnostic-g7-id,Grade 7 PSSA ELA Pilot Diagnostic,16,cmp7kxbw80027nu4urbgnrhzh,CC.1.2.7.A,Main Idea,HOT_TEXT,3,,yes
+database,7,pilot-diagnostic-g7-id,Grade 7 PSSA ELA Pilot Diagnostic,17,cmp7kxbw80028nu4ukkdii9t0,CC.1.3.7.A,Theme,MCQ,3,,yes
+database,7,pilot-diagnostic-g7-id,Grade 7 PSSA ELA Pilot Diagnostic,18,cmp7kxbw80029nu4u6nmsfx1c,CC.1.3.7.B,Literary Inference,MCQ,3,,yes
+database,7,pilot-diagnostic-g7-id,Grade 7 PSSA ELA Pilot Diagnostic,19,cmp7kxbw8002anu4umcckyyr0,CC.1.3.7.C,Setting Analysis,MCQ,4,,yes
+database,7,pilot-diagnostic-g7-id,Grade 7 PSSA ELA Pilot Diagnostic,20,cmp7kxbw8002bnu4ulbao5n6a,CC.1.3.7.C,Plot Analysis,MCQ,4,,yes
+database,7,pilot-diagnostic-g7-id,Grade 7 PSSA ELA Pilot Diagnostic,21,cmp7kxbw8002cnu4uxla876s5,CC.1.3.7.G,Point of View,DRAG_DROP,4,,yes
+database,7,pilot-diagnostic-g7-id,Grade 7 PSSA ELA Pilot Diagnostic,22,cmp7kxbw8002dnu4u6yp0a1kp,CC.1.3.7.F / CC.1.2.7.F,Figurative Language,MCQ,4,,yes
+database,7,pilot-diagnostic-g7-id,Grade 7 PSSA ELA Pilot Diagnostic,23,cmp7kxbw8002enu4urcom3bog,CC.1.3.7.E,Flashback,HOT_TEXT,4,,yes
+database,7,pilot-diagnostic-g7-id,Grade 7 PSSA ELA Pilot Diagnostic,24,cmp7kxbw8002fnu4uxggddmhl,CC.1.2.7.A,Main Idea,MCQ,4,,yes
+database,7,pilot-diagnostic-g7-id,Grade 7 PSSA ELA Pilot Diagnostic,25,cmp7kxbw8002gnu4ua7xc9f20,CC.1.2.7.B,Inference,MCQ,4,,yes
+database,7,pilot-diagnostic-g7-id,Grade 7 PSSA ELA Pilot Diagnostic,26,cmp7kxbw8002hnu4ux61tffpc,CC.1.3.7.G,Point of View,MCQ,4,,yes
+database,7,pilot-diagnostic-g7-id,Grade 7 PSSA ELA Pilot Diagnostic,27,cmp7kxbw8002inu4ubb0c21jb,CC.1.2.7.C,Text Structure,MCQ,4,,yes
+database,7,pilot-diagnostic-g7-id,Grade 7 PSSA ELA Pilot Diagnostic,28,cmp7kxbw8002jnu4ubihj4in8,CC.1.2.7.D,Vocabulary,DRAG_DROP,4,,yes
+database,7,pilot-diagnostic-g7-id,Grade 7 PSSA ELA Pilot Diagnostic,29,cmp7kxbw9002knu4ur63cwlcx,CC.1.2.7.B,Inference,MCQ,4,,yes
+database,7,pilot-diagnostic-g7-id,Grade 7 PSSA ELA Pilot Diagnostic,30,cmp7kxbw9002lnu4urr8n3ppt,CC.1.2.7.A,Main Idea,HOT_TEXT,4,,yes
+database,7,pilot-diagnostic-g7-id,Grade 7 PSSA ELA Pilot Diagnostic,31,cmp7kxbw9002mnu4uu72nvpkf,CC.1.2.7.A,Main Idea,MCQ,4,,yes
+database,7,pilot-diagnostic-g7-id,Grade 7 PSSA ELA Pilot Diagnostic,32,cmp7kxbw9002nnu4umh64xwmy,CC.1.2.7.B,Inference,MCQ,4,,yes
+database,7,pilot-diagnostic-g7-id,Grade 7 PSSA ELA Pilot Diagnostic,33,cmp7kxbw9002onu4uo7wfwqp3,CC.1.2.7.C,Text Structure,EBSR,4,,yes
+database,7,pilot-diagnostic-g7-id,Grade 7 PSSA ELA Pilot Diagnostic,34,cmp7kxbw9002pnu4uxdvgpdau,CC.1.2.7.D,Vocabulary,MCQ,4,,yes
+database,7,pilot-diagnostic-g7-id,Grade 7 PSSA ELA Pilot Diagnostic,35,cmp7kxbw9002qnu4ujjkgn1wr,CC.1.3.7.G,Point of View,DRAG_DROP,4,,yes
+database,7,pilot-diagnostic-g7-id,Grade 7 PSSA ELA Pilot Diagnostic,36,cmp7kxbw9002rnu4ulvaaspe0,CC.1.2.7.B,Inference,MCQ,4,,yes
+database,7,pilot-diagnostic-g7-id,Grade 7 PSSA ELA Pilot Diagnostic,37,cmp7kxbw9002snu4usrxjo1sj,CC.1.2.7.A,Main Idea,HOT_TEXT,4,,yes
+database,7,pilot-diagnostic-g7-id,Grade 7 PSSA ELA Pilot Diagnostic,38,cmp7kxbw9002tnu4u0bflztfu,CC.1.2.7.B,Inference,MCQ,4,,yes
+database,7,pilot-diagnostic-g7-id,Grade 7 PSSA ELA Pilot Diagnostic,39,cmp7kxbwa002unu4ufsgjx4uv,CC.1.2.7.C,Text Structure,MULTI_SELECT,4,,yes
+database,7,pilot-diagnostic-g7-id,Grade 7 PSSA ELA Pilot Diagnostic,40,cmp7kxbwa002vnu4uaqqkolyb,CC.1.2.7.D,Vocabulary,MCQ,4,,yes
+database,7,pilot-diagnostic-g7-id,Grade 7 PSSA ELA Pilot Diagnostic,41,cmp7kxbwa002wnu4u5qsxq2ab,CC.1.4.7.S,TDA Writing,TDA,4,,yes
+database,7,pilot-diagnostic-g7-id,Grade 7 PSSA ELA Pilot Diagnostic,42,cmp7kxbwa002xnu4uwlt66nd4,CC.1.3.7.A,Theme,MCQ,4,,yes
+database,7,pilot-diagnostic-g7-id,Grade 7 PSSA ELA Pilot Diagnostic,43,cmp7kxbwa002ynu4uqvs3bxjy,CC.1.3.7.B,Literary Inference,MCQ,4,,yes
+database,7,pilot-diagnostic-g7-id,Grade 7 PSSA ELA Pilot Diagnostic,44,cmp7kxbwa002znu4un2w6xcy7,CC.1.3.7.C,Setting Analysis,MCQ,4,,yes
+database,7,pilot-diagnostic-g7-id,Grade 7 PSSA ELA Pilot Diagnostic,45,cmp7kxbwa0030nu4uqv30yx51,CC.1.3.7.C,Plot Analysis,MCQ,4,,yes
+database,7,pilot-diagnostic-g7-id,Grade 7 PSSA ELA Pilot Diagnostic,46,cmp7kxbwa0031nu4u1ugya87b,CC.1.3.7.G,Point of View,DRAG_DROP,4,,yes
+database,7,pilot-diagnostic-g7-id,Grade 7 PSSA ELA Pilot Diagnostic,47,cmp7kxbwa0032nu4ue272qydd,CC.1.3.7.F / CC.1.2.7.F,Figurative Language,MCQ,4,,yes
+database,7,pilot-diagnostic-g7-id,Grade 7 PSSA ELA Pilot Diagnostic,48,cmp7kxbwa0033nu4u160lvwgv,CC.1.3.7.E,Flashback,HOT_TEXT,4,,yes
+database,7,pilot-diagnostic-g7-id,Grade 7 PSSA ELA Pilot Diagnostic,49,cmp7kxbwa0034nu4udh405t1v,CC.1.3.7.D,Literary Vocabulary,MCQ,4,,yes
+database,7,pilot-diagnostic-g7-id,Grade 7 PSSA ELA Pilot Diagnostic,50,cmp7kxbwa0035nu4ulwqx8cb3,CC.1.3.7.A,Theme,MULTI_SELECT,4,,yes
+database,7,pilot-diagnostic-g7-id,Grade 7 PSSA ELA Pilot Diagnostic,51,cmp7kxbwa0036nu4ulkauwi2n,CC.1.3.7.B,Literary Inference,MCQ,4,,yes
+database,7,pilot-diagnostic-g7-id,Grade 7 PSSA ELA Pilot Diagnostic,52,cmp7kxbwa0037nu4ur0irj57l,CC.1.3.7.C,Setting Analysis,MCQ,4,,yes
+database,7,pilot-diagnostic-g7-id,Grade 7 PSSA ELA Pilot Diagnostic,53,cmp7kxbwa0038nu4u40s5h17f,CC.1.3.7.C,Plot Analysis,MCQ,4,,yes
+database,7,pilot-diagnostic-g7-id,Grade 7 PSSA ELA Pilot Diagnostic,54,cmp7kxbwa0039nu4u1179xqij,CC.1.4.7.S,TDA Writing,TDA,4,,yes

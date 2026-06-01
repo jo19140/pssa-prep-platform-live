@@ -1,0 +1,16 @@
+check,expected,actual,result
+column_count,19,19,PASS
+total_ec_rows,241,241,PASS
+grade_3_ec_rows,33,33,PASS
+grade_4_ec_rows,37,37,PASS
+grade_5_ec_rows,40,40,PASS
+grade_6_ec_rows,41,41,PASS
+grade_7_ec_rows,43,43,PASS
+grade_8_ec_rows,47,47,PASS
+primary_pa_core_blank,all_blank,0,PASS
+mapping_granularity,ANCHOR_BLOCK,ANCHOR_BLOCK,PASS
+mapping_confidence,SOURCE_ANCHOR_LEVEL,SOURCE_ANCHOR_LEVEL,PASS
+unconfirmed_source_anomaly_rows,6,6,PASS
+planned_creates,dry_run_plan,241,INFO
+planned_updates,dry_run_plan,0,INFO
+planned_skipped_existing,dry_run_plan,0,INFO

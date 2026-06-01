@@ -1,0 +1,211 @@
+source,grade,lessonId,title,standardCode,skill,reviewStatus,generatedBy,aiStatus,approvedAt,rejectedAt,practiceSections,reviewCount,approvable,blockerCount
+database.learningLesson,3,cmpdfkjg10007evu9n99td6m5,Decoding Multisyllable Words,CC.1.1.3.D,Multisyllable Word Parts,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,3,cmpdfllov000fevu97xukjt9t,Exploring Phonics Patterns,CC.1.1.3.D,Phonics Patterns,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,3,cmpdfmzxq000sevu9v6rfh6gf,Understanding Short and Long Vowel Patterns,CC.1.1.3.D,Short and Long Vowel Patterns,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,3,cmpdfprp00015evu9t95bnlth,Mastering Multisyllabic Words,CC.1.1.3.E,Multisyllabic Words,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,3,cmpdfpwdp001devu9m22ak7yq,Understanding Common Affixes,CC.1.1.3.E,Common Affixes,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,3,cmpdfsse80023evu9p3ru6hyw,Understanding Main Idea,CC.1.2.3.A,Main Idea,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,3,cmpdfsjgm001vevu9ftccbyhm,Making Inferences from Text,CC.1.2.3.B,Inference,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,3,cmpdfvzjb002gevu9myf1nvdt,Using Text Evidence to Understand Stories,CC.1.2.3.B,Text Evidence,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,3,cmpdfxnn7002tevu993vrd9h7,Understanding Cause and Effect,CC.1.2.3.C,Cause and Effect,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,3,cmpdg13nn0036evu9quxzpq9a,Exploring Text Features,CC.1.2.3.E,Text Features,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,3,cmpdg1f67003eevu9q8cyr7oa,Understanding Author's Purpose,CC.1.2.3.E,Author's Purpose,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,3,cmpdg5iim003wevu9kuk3b0bf,Understanding Prefixes and Suffixes,CC.1.2.3.F,Prefixes and Suffixes,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,3,cmpdg77dl0048evu9yx51bo8o,Using Context Clues to Understand Words,CC.1.2.3.F,Context Clues,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,3,cmpdg94wd004levu9htte4cct,Understanding Synonyms and Antonyms,CC.1.2.3.F,Synonyms and Antonyms,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,3,cmpdgccj1004yevu9ezvs5f22,Exploring Compare and Contrast,CC.1.2.3.I,Compare and Contrast,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,3,cmpdge47w005bevu9y1vtuc9k,Exploring Themes in Stories,CC.1.3.3.A,Theme,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,3,cmpdggth4005oevu9zrifadqq,Understanding Character Traits and Actions,CC.1.3.3.C,Character Traits and Actions,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,3,cmpdgj3z00061evu9osxvuo1u,Understanding Sequence of Events,CC.1.3.3.C,Sequence of Events,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,3,cmpdgkud3006eevu9jb8e6dht,"Exploring Story Elements: Characters, Setting, and Events",CC.1.3.3.C,Story Elements,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,3,cmpdgm4f3006mevu91x36jxg8,Understanding Point of View,CC.1.3.3.D,Point of View,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,3,cmpdgpv0n006zevu9ueolu61j,Understanding Poetry: Lines and Stanzas,CC.1.3.3.E,Poetry Lines and Stanzas,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,3,cmpdqz49f000aes458ungmt69,Exploring Connotation and Figurative Language,CC.1.3.3.F,Connotation and Figurative Language,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,3,cmpdgspjc007devu9e4f0jqfu,Organizing Paragraphs Effectively,CC.1.4.3.C,Paragraph Organization,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,3,cmpdgte5s007levu96qndx56t,Mastering Capitalization and Titles,CC.1.4.3.F,Capitalization and Titles,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,3,cmpdgvi9g0082evu9jlk35wzb,Mastering Commas in a Series,CC.1.4.3.F,Commas in a Series,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,3,cmpdgvnv5008aevu90h6ug77j,Mastering Complete Sentences,CC.1.4.3.F,Complete Sentences,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,3,cmpdgyudg008nevu9q18muwup,Mastering Pronoun Agreement and Shifts,CC.1.4.3.F,Pronoun Agreement and Shifts,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,3,cmpdgyw0h008vevu9kb541y7f,Understanding Formal and Informal Style,CC.1.4.3.F,Formal and Informal Style,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,3,cmpdh2xsi0098evu9zawl135n,Supporting Opinions with Reasons,CC.1.4.3.G,Opinion Reasons,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,3,cmpdh3j20009gevu9lc0iynfk,Mastering Evidence and Explanation in Writing,CC.1.4.3.S,TDA Evidence and Explanation,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,4,cmpdh5m7u009qevu9b6sq9ivk,Understanding Affixes and Roots,CC.1.1.4.D,Affixes and Roots,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,4,cmpdh63tp009yevu9abub6l5w,Mastering Multisyllabic Words,CC.1.1.4.E,Decoding Multisyllabic Words,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,4,cmpdha1hu00abevu9csx08m68,Enhancing Reading Fluency,CC.1.1.4.E,Fluency Strategies,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,4,cmpdhas9n00ajevu9teh71x9k,Understanding Main Ideas Across Texts,CC.1.2.4.A,Combine Main Ideas Across Texts,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,4,cmpdhcgsm00awevu9rk3hmgr4,Understanding Main Idea and Key Details,CC.1.2.4.A,Main Idea,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,4,cmpdhgonw00b9evu9g6u9w9jt,Making Inferences from Text,CC.1.2.4.B,Inference,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,4,cmpdhhzd600bjevu9362t3f0f,Inference with Supporting Details,CC.1.2.4.B,Inference with Supporting Details,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,4,cmpdhlfoh00buevu902sxjmck,Using Text Evidence,CC.1.2.4.B,Text Evidence,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,4,cmpdhn7na00c2evu91o7fjgaw,Understanding Author's Purpose and Message,CC.1.2.4.D,Author's Purpose and Message,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,4,cmpdhp9cf00cfevu9521zskko,Understanding Graphic Organizers,CC.1.2.4.E,Graphic Organizers,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,4,cmpdhrlfc00cqevu9gdjhv6if,Understanding Problem and Solution Text Structure,CC.1.2.4.E,Problem and Solution Text Structure,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,4,cmpdht2ut00cyevu96difvrzn,Mastering Dictionary and Thesaurus Skills,CC.1.2.4.F,Dictionary and Thesaurus Skills,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,4,cmpdhvyp400d8evu9dt50rod2,Mastering Homophones and Multiple-Meaning Words,CC.1.2.4.F,Homophones and Multiple-Meaning Words,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,4,cmpdhwrjk00dievu9tdtn7as2,Understanding Greek and Latin Roots,CC.1.2.4.F,Greek and Latin Roots,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,4,cmpdi049g00e0evu9i4lhqmdd,Understanding Argumentative Text Clues,CC.1.2.4.G,Argumentative Text Clues,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,4,cmpdhzp7s00dsevu91d5ngbrd,Exploring Themes in Stories,CC.1.3.4.A,Theme,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,4,cmpdi436p00edevu9qj8qbl4v,Exploring Character Comparisons,CC.1.3.4.C,Compare Characters,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,4,cmpdi5a0y00elevu98ni5vpa6,Understanding Plot Elements,CC.1.3.4.C,Plot Elements,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,4,cmpdi8kps00etevu9e5xap1kx,Understanding Point of View in Stories,CC.1.3.4.D,Point of View,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,4,cmpdibiyu00f1evu9w0ber6ec,Understanding Rhyme Schemes and Poetry Elements,CC.1.3.4.E,Rhyme Scheme and Poetry Elements,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,4,cmpdid0ed00fdevu9ztkt8ejr,Understanding Allusions in Texts,CC.1.3.4.F,Allusion Meaning,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,4,cmpdie6nd00fqevu9h7ooi2ft,Understanding Figurative Language and Connotation,CC.1.3.4.F,Connotation and Figurative Language,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,4,cmpdii6m500g2evu9v5z7faq3,Understanding Similes and Metaphors,CC.1.3.4.F,Similes and Metaphors,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,4,cmpdijwpx00gaevu9kg2tawq6,Exploring Sensory Details in Text,CC.1.3.4.F,Sensory Details,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,4,cmpdillv200gkevu9hbeud3qu,Mastering Story Summaries,CC.1.4.4.A,Summarizing Stories,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,4,cmpdio2v800h0evu9lu9ndp41,Using Transitions and Linking Words in Writing,CC.1.4.4.C,Transitions and Linking Words,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,4,cmpdio0lr00gsevu959kopr04,Understanding Formal and Informal Writing Styles,CC.1.4.4.F,Formal and Informal Style,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,4,cmpdiqi2w00hcevu9yw697jp4,Mastering Spelling with Affixes,CC.1.4.4.F,Spelling with Affixes,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,4,cmpdiqj9200hkevu9wac0r2fv,Mastering Pronoun Agreement and Shifts,CC.1.4.4.F,Pronoun Agreement and Shifts,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,4,cmpdiswsi00hwevu91ig9arf8,Building Strong Arguments with Reasons and Evidence,CC.1.4.4.G,Supporting Reasons,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,4,cmpditszl00i4evu9n5fh3bke,Distinguishing Facts from Opinions,CC.1.4.4.I,Facts and Opinions,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,4,cmpdix3ca00ieevu93foszdc7,Mastering Text-Dependent Analysis,CC.1.4.4.S,TDA Evidence and Explanation,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,5,cmpdixewz00imevu9suq29iqw,Understanding Greek and Latin Roots,CC.1.1.5.D,Greek and Latin Roots,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,5,cmpdj01xo00iuevu9izx8k7y1,Understanding Affixes in Academic Vocabulary,CC.1.1.5.E,Affixes in Academic Vocabulary,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,5,cmpdj1ix500j7evu9zr5yunga,Enhancing Reading Fluency for Better Comprehension,CC.1.1.5.E,Fluency for Comprehension,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,5,cmpdj50cw00jievu9ntghh2es,Understanding Main Ideas and Key Details,CC.1.2.5.A,Main Idea,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,5,cmpdj5q6m00jqevu9qdtztwdw,Making Inferences from Text,CC.1.2.5.B,Inference,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,5,cmpdja62n00kcevu95i3mk73e,Mastering Text Evidence,CC.1.2.5.B,Text Evidence,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,5,cmpdj9vr600k4evu9dq98qlfl,Understanding Multiple Accounts of the Same Event,CC.1.2.5.D,Multiple Accounts of the Same Event,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,5,cmpdjhkxi00l2evu94t0y8mor,Understanding Chronology and Sequence in Texts,CC.1.2.5.E,Chronology and Sequence Text Structure,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,5,cmpdjez5k00kpevu91xq22rwd,Understanding Academic and Domain-Specific Vocabulary,CC.1.2.5.F,Academic and Domain-Specific Vocabulary,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,5,cmpdjk9h000laevu9jego1yoz,Unlocking Word Meanings with Greek and Latin Roots,CC.1.2.5.F,Greek and Latin Affixes and Roots,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,5,cmpdjkgeo00lievu9ok63uz47,Exploring Analogies and Word Relationships,CC.1.2.5.F,Analogies and Word Relationships,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,5,cmpdjovhx00lvevu9o9spwc6q,Understanding Reasons and Evidence in Arguments,CC.1.2.5.G,Reasons and Evidence in Arguments,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,5,cmpdjp0sg00m3evu9tkxbxwug,Integrating Information from Multiple Sources,CC.1.2.5.I,Integrating Information from Sources,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,5,cmpdjtbbo00mlevu9enr8byga,Exploring Themes in Literary Texts,CC.1.3.5.A,Theme,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,5,cmpdjtj3o00mtevu9o263edmr,Understanding Character Response and Plot,CC.1.3.5.C,Character Response and Plot,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,5,cmpdjy2zi00naevu9av8fdpd2,Understanding Point of View in Texts,CC.1.3.5.D,Point of View,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,5,cmpdjyhek00nievu9j1rvl9io,Understanding Story Structure: Chapters and Scenes,CC.1.3.5.E,Story Structure and Chapters,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,5,cmpdk17vx00nwevu9n6g3b65k,Understanding Poetry: Speaker and Tone,CC.1.3.5.F,Poetry Speaker and Tone,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,5,cmpdqxir80002es45p4gcsqlk,Understanding Connotation and Figurative Language,CC.1.3.5.F,Connotation and Figurative Language,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,5,cmpdk5iju00ojevu943zwy1tm,Exploring Themes Across Stories,CC.1.3.5.H,Compare Themes Across Stories,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,5,cmpdk4zzo00obevu91zcquruk,Crafting Informative Essays with Clarity,CC.1.4.5.A,Informative Essay Development,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,5,cmpdk7k7200owevu9jarxr5tf,Mastering Sentence Combining,CC.1.4.5.F,Combining Sentences,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,5,cmpdk8jln00p4evu99v8crx18,Mastering Commas with Introductory Elements,CC.1.4.5.F,Commas and Introductory Elements,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,5,cmpdkbsrq00pcevu9o175yfc5,Understanding Formal and Informal Style,CC.1.4.5.F,Formal and Informal Style,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,5,cmpdke88v00pkevu9ajqwyh1q,Mastering Pronoun Agreement and Shifts,CC.1.4.5.F,Pronoun Agreement and Shifts,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,5,cmpdkffqp00pxevu9f0mucil1,Mastering Verb Tense Consistency,CC.1.4.5.F,Verb Tense Consistency,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,5,cmpdkhiww00qaevu93zt0u0s8,Organizing Opinion Essays,CC.1.4.5.G,Opinion Essay Organization,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,5,cmpdki7du00qievu9wx2fzhsr,Enhancing Narratives with Dialogue and Description,CC.1.4.5.M,Narrative Techniques,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,5,cmpdkmxrk00r3evu9iafs2oto,Mastering Text-Dependent Analysis: Evidence and Explanation,CC.1.4.5.S,TDA Evidence and Explanation,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,6,cmpdklgau00qvevu9onhou89r,Understanding Morphological Analysis,CC.1.1.6.E,Morphological Analysis,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,6,cmpdkpqwp00rgevu9x5qf3daw,Enhancing Reading Fluency,CC.1.1.6.E,Reading Fluency,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,6,cmpdkq71z00roevu90islneyp,Exploring Word Origins,CC.1.1.6.E,Word Origins,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,6,cmonnkicy0001arooxm1rwpnf,Main Idea Mini-Lesson,CC.1.2.6.A,Main Idea,APPROVED,DETERMINISTIC,SKIPPED,,,5,0,,0
+database.learningLesson,6,cmpdkug6d00s6evu96gaij95v,Understanding Central Idea Development,CC.1.2.6.A,Central Idea Development,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,6,cmpdkvdwd00seevu9uhnbiq9v,Understanding Main Idea and Supporting Details,CC.1.2.6.A,Main Idea,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,6,cmpdkyfnl00spevu98inu218g,Mastering Objective Summaries,CC.1.2.6.A,Objective Summary,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,6,cmpdkztnq00t2evu911zhtoy9,Uncovering Hidden Meanings: Making Inferences,CC.1.2.6.B,Inference,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,6,cmpdl2lpd00tcevu9k8pq4w4i,Using Text Evidence for Analysis,CC.1.2.6.B,Text Evidence,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,6,cmpdl4tel00tlevu9cl8zx5pw,Understanding Author's Purpose and Point of View,CC.1.2.6.D,Author's Purpose and Point of View,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,6,cmpdl7ca100tyevu935r71png,Understanding Text Structure and Author Organization,CC.1.2.6.E,Text Structure and Author Organization,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,6,cmpdl8ydo00u6evu9etp7qt32,Understanding Technical Vocabulary in Context,CC.1.2.6.F,Technical Vocabulary in Context,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,6,cmpdlbjuf00ujevu9v3rwynp1,Understanding Tone and Connotation,CC.1.2.6.F,Tone and Connotation,NEEDS_REVISION,PREBUILT_AI_LIBRARY,COMPLETED,,,5,1,,0
+database.learningLesson,6,cmpdldlmy00usevu9olw2a5s9,"Understanding Claims, Reasons, and Evidence",CC.1.2.6.G,"Claims, Reasons, and Evidence",PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,6,cmpdlho4i00v2evu9xsy6kkqv,Exploring Different Text Presentations,CC.1.2.6.I,Compare Text Presentations,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,6,cmpdlkb9w00vcevu95d033ehp,Exploring Theme in Literary Texts,CC.1.3.6.A,Theme,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,6,cmpdlpsjw00vlevu9e9fvdv3y,Understanding Theme Development,CC.1.3.6.A,Theme Development,NEEDS_REVISION,PREBUILT_AI_LIBRARY,COMPLETED,,,5,1,,0
+database.learningLesson,6,cmpdlq62v00vtevu9szk9s8yr,Understanding Character Change and Conflict,CC.1.3.6.C,Character Change and Conflict,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,6,cmpdlulcl00wdevu9b1iewyb7,Understanding Plot Development in Episodes,CC.1.3.6.C,Plot Development in Episodes,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,6,cmpdlsfwi00w4evu9g1q6o1a2,Understanding Point of View in Texts,CC.1.3.6.D,Point of View,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,6,cmpdlxlnf00wpevu9g67bl85d,Understanding Story Structure and Flashback,CC.1.3.6.E,Story Structure and Flashback,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,6,cmpdlz5ik00wxevu9l87lwmwy,Understanding Connotation and Figurative Language,CC.1.3.6.F,Connotation and Figurative Language,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,6,cmpdm0xwm00x5evu9wld8xp8n,Organizing Informative Essays,CC.1.4.6.A,Informative Essay Organization,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,6,cmpdm229u00xdevu9u7dmxptz,"Mastering Commas, Parentheses, and Dashes",CC.1.4.6.F,"Commas, Parentheses, and Dashes",PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,6,cmpdm34am00xlevu9wg4syc6i,Understanding Formal and Informal Style,CC.1.4.6.F,Formal and Informal Style,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,6,cmpdm5xsa00xtevu9tno0pj6v,Mastering Pronoun Agreement and Shifts,CC.1.4.6.F,Pronoun Agreement and Shifts,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,6,cmpdm7hfs00y1evu98f3efqpo,Mastering Pronoun Case and Agreement,CC.1.4.6.F,Pronoun Case and Agreement,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,6,cmpdm9r6u00y9evu91a1pnqzz,Mastering Pronoun Consistency,CC.1.4.6.F,Shifts in Pronoun Person and Number,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,6,cmpdmaj1f00yievu9ui4dxure,Enhancing Writing with Sentence Variety,CC.1.4.6.F,Varying Sentence Patterns,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,6,cmp39etqn006unrdzu07f32jz,Grammar Mini-Lesson,CC.1.4.6.F1,Grammar,APPROVED,DETERMINISTIC,PENDING,,,5,0,,0
+database.learningLesson,6,cmp39pu36006s11zemific5ic,Grammar Mini-Lesson,CC.1.4.6.F1,Grammar,APPROVED,AI_ENRICHED,COMPLETED,,,5,0,,0
+database.learningLesson,6,cmp3dz486002o111beui23cwb,Grammar Mini-Lesson,CC.1.4.6.F1,Grammar,APPROVED,AI_ENRICHED,COMPLETED,,,5,0,,0
+database.learningLesson,6,cmp5ns6op0079149wc8n858lh,Grammar Mini-Lesson,CC.1.4.6.F1,Grammar,PENDING_REVIEW,AI_ENRICHED,COMPLETED,,,6,0,,0
+database.learningLesson,6,cmp2uknnn009dg530ymnqdkjx,Punctuation Mini-Lesson,CC.1.4.6.F2,Punctuation,APPROVED,AI_ENRICHED,COMPLETED,,,5,0,,0
+database.learningLesson,6,cmp36npvr00533hihss7lyjo6,Punctuation Mini-Lesson,CC.1.4.6.F2,Punctuation,APPROVED,DETERMINISTIC,PENDING,,,5,0,,0
+database.learningLesson,6,cmp39pu57007311zerijjemi9,Punctuation Mini-Lesson,CC.1.4.6.F2,Punctuation,APPROVED,AI_ENRICHED,COMPLETED,,,5,0,,0
+database.learningLesson,6,cmp3dz49k002z111bl60wju1u,Punctuation Mini-Lesson,CC.1.4.6.F2,Punctuation,APPROVED,AI_ENRICHED,COMPLETED,,,5,0,,0
+database.learningLesson,6,cmp61fsuu006vr85qpftc80kw,Punctuation Mini-Lesson,CC.1.4.6.F2,Punctuation,PENDING_REVIEW,AI_ENRICHED,COMPLETED,,,6,0,,0
+database.learningLesson,6,cmp6423b20055m5s7bzml7ods,Punctuation Mini-Lesson,CC.1.4.6.F2,Punctuation,PENDING_REVIEW,AI_ENRICHED,COMPLETED,,,6,0,,0
+database.learningLesson,6,cmp30i9fc008krzygi7fekjjv,Capitalization Mini-Lesson,CC.1.4.6.F3,Capitalization,APPROVED,DETERMINISTIC,PENDING,,,5,0,,0
+database.learningLesson,6,cmp39etrx0075nrdzwobmqoo6,Capitalization Mini-Lesson,CC.1.4.6.F3,Capitalization,APPROVED,DETERMINISTIC,PENDING,,,5,0,,0
+database.learningLesson,6,cmp6423cc005jm5s7769nual7,Capitalization Mini-Lesson,CC.1.4.6.F3,Capitalization,PENDING_REVIEW,AI_ENRICHED,COMPLETED,,,6,0,,0
+database.learningLesson,6,cmp5ns6mz006v149wdbdgg205,Sentence Structure Mini-Lesson,CC.1.4.6.F4,Sentence Structure,PENDING_REVIEW,AI_ENRICHED,COMPLETED,,,6,0,,0
+database.learningLesson,6,cmp61fswg0079r85qwrlgp81k,Sentence Structure Mini-Lesson,CC.1.4.6.F4,Sentence Structure,PENDING_REVIEW,AI_ENRICHED,COMPLETED,,,6,0,,0
+database.learningLesson,6,cmp30i9gg008vrzygajx5iyyk,Verb Tense Mini-Lesson,CC.1.4.6.F5,Verb Tense,APPROVED,DETERMINISTIC,PENDING,,,5,0,,0
+database.learningLesson,6,cmp36npxb005e3hihf9d6iqlj,Verb Tense Mini-Lesson,CC.1.4.6.F5,Verb Tense,APPROVED,DETERMINISTIC,PENDING,,,5,0,,0
+database.learningLesson,6,cmp2ukmiy008kg530gnrdqi2t,Pronoun Usage Mini-Lesson,CC.1.4.6.F6,Pronoun Usage,APPROVED,AI_ENRICHED,COMPLETED,,,5,0,,0
+database.learningLesson,6,cmp2ukn850090g530f4qx8t6q,Commas Mini-Lesson,CC.1.4.6.F7,Commas,APPROVED,AI_ENRICHED,COMPLETED,,,5,0,,0
+database.learningLesson,6,cmpdmdumb00yzevu9rvm0arnd,Building Strong Argument Essays,CC.1.4.6.G,Argument Essay Evidence,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,6,cmp30i9cu0089rzygsw3be1yi,TDA Writing Mini-Lesson,CC.1.4.6.S,TDA Writing,APPROVED,DETERMINISTIC,PENDING,,,5,0,,0
+database.learningLesson,6,cmp36nps8004s3hihy11uzloa,TDA Writing Mini-Lesson,CC.1.4.6.S,TDA Writing,APPROVED,DETERMINISTIC,PENDING,,,5,0,,0
+database.learningLesson,6,cmp39etni006jnrdzt0k16mn8,TDA Writing Mini-Lesson,CC.1.4.6.S,TDA Writing,APPROVED,DETERMINISTIC,PENDING,,,5,0,,0
+database.learningLesson,6,cmp39pu1h006h11ze2ttj8m3j,TDA Writing Mini-Lesson,CC.1.4.6.S,TDA Writing,APPROVED,AI_ENRICHED,COMPLETED,,,5,0,,0
+database.learningLesson,6,cmp3dz45w002d111b5n38gael,TDA Writing Mini-Lesson,CC.1.4.6.S,TDA Writing,APPROVED,AI_ENRICHED,COMPLETED,,,5,0,,0
+database.learningLesson,6,cmp5ns6k0006h149ws4wdk3kc,TDA Writing Mini-Lesson,CC.1.4.6.S,TDA Writing,APPROVED,AI_ENRICHED,COMPLETED,,,5,0,,0
+database.learningLesson,6,cmp61fssi006hr85qsg8vnb99,TDA Writing Mini-Lesson,CC.1.4.6.S,TDA Writing,PENDING_REVIEW,AI_ENRICHED,COMPLETED,,,6,0,,0
+database.learningLesson,6,cmp64236x004rm5s7z9rc07jq,TDA Writing Mini-Lesson,CC.1.4.6.S,TDA Writing,PENDING_REVIEW,AI_ENRICHED,COMPLETED,,,6,0,,0
+database.learningLesson,6,cmpdmeaxw00z7evu9n5yzuzdh,Mastering Text-Dependent Analysis with Evidence,CC.1.4.6.S,TDA Evidence and Explanation,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,6,cmpdmlad400ztevu941rhy9hz,Mastering Research Source Integration,CC.1.4.6.V,Research Source Integration,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,7,cmpdmhj0500zgevu9bu6ocm3k,Understanding Domain-Specific Vocabulary Morphology,CC.1.1.7.E,Domain-Specific Vocabulary Morphology,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,7,cmpdmlk6r0101evu9x7yib8oo,Exploring Etymology: Unlocking Word Meanings,CC.1.1.7.E,Etymology and Word Study,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,7,cmpdmq10y010hevu9spinmfoh,Understanding Main Ideas in Texts,CC.1.2.7.A,Main Idea,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,7,cmpdmqdnz010pevu94j9g8iu1,Understanding Central Ideas Across Text Sections,CC.1.2.7.A,Central Idea Across Sections,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,7,cmpdmtkel010xevu9h5hnqy7c,Mastering Text Evidence: Analyzing and Supporting Claims,CC.1.2.7.B,Text Evidence,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,7,cmpdmurek0118evu9j5ct4z2y,Making Inferences from Text,CC.1.2.7.B,Inference,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,7,cmpdmxkrt011gevu9lgkrwzj8,Understanding Author's Purpose and Rhetorical Choices,CC.1.2.7.D,Author Purpose and Rhetorical Choices,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,7,cmpdmyk49011sevu9shm2qp3s,Understanding Data and Visual Information,CC.1.2.7.E,Data and Visual Information,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,7,cmpdn2k4r0120evu9e0u3rx6y,Understanding Text Structure Effects,CC.1.2.7.E,Text Structure Effects,NEEDS_REVISION,PREBUILT_AI_LIBRARY,COMPLETED,,,5,1,,0
+database.learningLesson,7,cmpdn2wdv0128evu985jqquxc,Mastering Academic Vocabulary,CC.1.2.7.F,Precise Academic Vocabulary,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,7,cmpdn756z012oevu91hvv2l0h,Evaluating Argument Claim Strength,CC.1.2.7.G,Argument Claim Strength,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,7,cmpdn6y8o012gevu928lq7woo,Exploring Different Perspectives on Technology,CC.1.2.7.I,Compare Authors on the Same Topic,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,7,cmpdr5mjm000ies455h6l2m6y,Exploring Theme in Literary Texts,CC.1.3.7.A,Theme,NEEDS_REVISION,PREBUILT_AI_LIBRARY,COMPLETED,,,5,1,,0
+database.learningLesson,7,cmpdnawxp0132evu9421t2kdi,Understanding Character Motivation and Theme,CC.1.3.7.C,Character Motivation and Theme,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,7,cmpdr7uap000ves45o6w35qba,Understanding Plot and Conflict,CC.1.3.7.C,Plot Lines and Conflict Development,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,7,cmpdnfohx013cevu9qi18uk0t,Understanding Point of View in Texts,CC.1.3.7.D,Point of View,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,7,cmpdnfrkl013kevu9alffqe61,Understanding Narrator Reliability and Perspective,CC.1.3.7.D,Narrator Reliability and Perspective,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,7,cmpdraxs00018es456aypnpx3,Understanding Poetry Structure and Meaning,CC.1.3.7.E,Poetry Structure and Meaning,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,7,cmpdrcx02001les451zrqsm0o,Exploring Connotation and Figurative Language,CC.1.3.7.F,Connotation and Figurative Language,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,7,cmpdrg64e001yes45nah75zki,"Exploring Mood, Tone, and Word Choice",CC.1.3.7.F,"Mood, Tone, and Word Choice",NEEDS_REVISION,PREBUILT_AI_LIBRARY,COMPLETED,,,5,1,,0
+database.learningLesson,7,cmpdrgnnq0026es45b2sfw0z9,Mastering Informative Writing with Transitions,CC.1.4.7.A,Informative Writing with Transitions,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,7,cmpdnmgiv013tevu9984wxcmm,Mastering Phrases and Clauses,CC.1.4.7.F,Phrases and Clauses,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,7,cmpdrisev002ges453t4k53n8,Mastering Comma Use with Coordinate Adjectives,CC.1.4.7.F,Comma Use with Coordinate Adjectives,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,7,cmpdrm51w002tes45uqe05i0h,Understanding Formal and Informal Style,CC.1.4.7.F,Formal and Informal Style,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,7,cmpdrmsl00031es45m2wz2v99,Mastering Formal Style and Precise Language,CC.1.4.7.F,Formal Style and Precise Language,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,7,cmpdrolvr0039es45s7sey9xw,Mastering Pronoun Agreement and Shifts,CC.1.4.7.F,Pronoun Agreement and Shifts,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,7,cmpdrqfxf003hes45dl70s9qu,Mastering Misplaced and Dangling Modifiers,CC.1.4.7.F,Misplaced and Dangling Modifiers,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,7,cmpdrt2ns003pes45axpwxi5b,Crafting Effective Argument Counterclaims,CC.1.4.7.G,Argument Counterclaim Response,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,7,cmpdrxi4u004des45g4827yja,Mastering Text-Dependent Analysis,CC.1.4.7.S,TDA Evidence and Explanation,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,7,cmpdrvfe40040es450k8999m4,Mastering Research Questions and Source Notes,CC.1.4.7.V,Research Questions and Source Notes,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,8,cmpds1rq1004qes458ueo06yl,Mastering Advanced Word Analysis,CC.1.1.8.E,Advanced Word Analysis,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,8,cmpds2q7q004yes458pm7m1ob,Understanding Connotation Through Word Structure,CC.1.1.8.E,Connotation Through Word Structure,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,8,cmpds8ny0005bes45uzecfgra,Exploring Multiple Central Ideas in Texts,CC.1.2.8.A,Multiple Central Ideas,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,8,cmpds9vvd005jes453b6w2xcy,Understanding Main Ideas in Texts,CC.1.2.8.A,Main Idea,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,8,cmpdsezgq005wes45e60xpxwf,Making Inferences from Text,CC.1.2.8.B,Inference,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,8,cmpdsfj5z0064es45riauv7ez,Mastering Text Evidence,CC.1.2.8.B,Text Evidence,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,8,cmpdsm05h006les45dbx0miny,Understanding Author Perspective and Bias,CC.1.2.8.D,Author Perspective and Bias,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,8,cmpdsl5ti006des459upxtlim,Understanding and Comparing Text Structures,CC.1.2.8.E,Compare Text Structures,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,8,cmpdsqtg0006yes45f93a94ql,Understanding Visual and Quantitative Evidence,CC.1.2.8.E,Visual and Quantitative Evidence,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,8,cmpdsr0gj0076es45ogfn7m4a,Understanding Logical Fallacies and Appeals,CC.1.2.8.G,Logical Fallacies and Appeals,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,8,cmpdsxgll007mes45pd6col7t,Evaluating Arguments and Evidence,CC.1.2.8.G,Trace and Evaluate Arguments,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,8,cmpdsvcwm007ees456x3aqfcu,Understanding Conflicting Information Across Texts,CC.1.2.8.I,Conflicting Information Across Texts,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,8,cmpdt2374007yes45do5jjccj,Exploring Multiple Themes in Literature,CC.1.3.8.A,Multiple Themes in Literature,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,8,cmpdt33r40086es45i2hx9gz5,Exploring Theme in Literature,CC.1.3.8.A,Theme,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,8,cmpdt9btz008ges45o0h9shfu,Understanding Dramatic Irony and Suspense,CC.1.3.8.C,Dramatic Irony and Suspense,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,8,cmpdt9xt5008oes45lld5j8ib,Understanding Characters Through Dialogue,CC.1.3.8.C,Dialogue and Characterization,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,8,cmpdtgt4j009ces45flvdiw7p,Understanding Point of View in Literature,CC.1.3.8.D,Point of View,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,8,cmpdtfb640094es459thxsnzj,Understanding Connotation and Figurative Language,CC.1.3.8.F,Connotation and Figurative Language,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,8,cmpdtnbsf009nes45u4w4vz7z,Understanding Figurative Language and Its Effects,CC.1.3.8.F,Figurative Language Effect,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,8,cmpdtpwmz00a0es45czh5rfgk,Exploring Themes Across Genres,CC.1.3.8.H,Compare Genres on Similar Themes,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,8,cmpdtri4z00a8es450ep4u8gq,Mastering Informative Synthesis Writing,CC.1.4.8.A,Informative Synthesis Writing,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,8,cmpdo4ai10142evu9v0tfvssp,Mastering Parallel Structure,CC.1.4.8.F,Parallel Structure,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,8,cmpdtt4hh00ages45qrbhrz0u,Mastering Punctuation: Ellipses and Dashes,CC.1.4.8.F,"Ellipses, Dashes, and Punctuation Effects",PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,8,cmpdtw12r00aoes45flc1te0a,Mastering Formal Academic Style,CC.1.4.8.F,Formal Academic Style,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,8,cmpdtxj9t00awes45prcsuusn,Mastering Pronoun Agreement and Shifts,CC.1.4.8.F,Pronoun Agreement and Shifts,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,8,cmpdtyiwy00b4es45hy6zgpak,Mastering Formal and Informal Style,CC.1.4.8.F,Formal and Informal Style,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,8,cmpdu0yst00bhes45jqiyjonu,Understanding Verb Moods and Voice,CC.1.4.8.F,Verb Moods and Voice,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,8,cmpdu4xtv00bues4512yda0la,Crafting Strong Arguments with Counterclaims,CC.1.4.8.G,Argument with Counterclaims and Evidence,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,8,cmpdu85qu00c7es45er2w1r62,Mastering Text-Dependent Analysis,CC.1.4.8.S,TDA Evidence and Explanation,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
+database.learningLesson,8,cmpdu9nlm00cfes45m3bscx8k,Evaluating Source Credibility,CC.1.4.8.V,Research Source Credibility,PENDING_REVIEW,PREBUILT_AI_LIBRARY,COMPLETED,,,6,1,,0
