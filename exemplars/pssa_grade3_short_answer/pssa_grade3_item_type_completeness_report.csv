@@ -1,0 +1,10 @@
+itemType,grade3Status,countOrDraw,notes
+MCQ,PRESENT,28 reading MCQs,Existing Grade 3 reading MCQ stream.
+EBSR,PRESENT,5 pool items,Existing #4k stream.
+Multiple Select,PRESENT,5 pool items,Existing #4l stream.
+Hot Text,PRESENT,5 pool items,Existing #4l stream.
+Matching Grid,PRESENT,5 pool items,Existing #4m stream.
+Drag Drop,PRESENT,5 pool items,Existing #4m stream.
+Inline Dropdown / Conventions,PRESENT,9 points,Existing #4n stream; 12 old conventions MCQs remain deprecated.
+Short Answer,PRESENT,5 pool items; draw 2,Added by #4o.
+TDA,N/A,0,N/A for Grade 3; production deferred to Grades 4-8.

@@ -1,0 +1,636 @@
+{
+  "generatedAt": "2026-06-01T05:41:35.747Z",
+  "noDbWrite": true,
+  "productionImportReady": false,
+  "autoScoringClaim": false,
+  "blueprint": {
+    "shortAnswerPoolCount": 5,
+    "shortAnswerDrawCount": 2,
+    "shortAnswerPointsPerItem": 3,
+    "activeFormShortAnswerPoints": 6,
+    "poolShortAnswerPoints": 15,
+    "result": "PASS",
+    "notes": "Grade 3 live form draws 2 Short Answer items from the 5-item pool; pool points are not active-form points."
+  },
+  "items": [
+    {
+      "itemId": "pssa_sa_g3_creek_main_idea_01",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "CONSTRUCTED_RESPONSE",
+      "interactionType": "SHORT_ANSWER",
+      "interactionSubtype": "text_supported_short_answer",
+      "passageId": "pssa_psg_g3_creek_watchers",
+      "passageTitle": "The Night the Creek Glowed",
+      "eligibleContent": "E03.B-K.1.1.2",
+      "ecSkillFamily": "key_ideas_details",
+      "reportingCategory": "B",
+      "stem": "What is the main idea of the passage? Use two details from the passage to support your answer.",
+      "instructionText": "Write a short answer that states the main idea and explains how two passage details support it.",
+      "requiredSupportCount": 2,
+      "requiresTextSupport": true,
+      "expectedAnswerCore": "The class learns to observe the creek carefully and use evidence to explain why the green glow was strongest near the sunny bank.",
+      "acceptableTextSupport": [
+        {
+          "supportId": "creek_s1",
+          "supportType": "direct_quote",
+          "quotedSpan": "Near the sunny bank, the green color was thicker.",
+          "detail": "Near the sunny bank, the green color was thicker.",
+          "connectsToExpectedAnswer": "This detail identifies the place where the glow was strongest.",
+          "independentKey": "sunny-bank"
+        },
+        {
+          "supportId": "creek_s2",
+          "supportType": "direct_quote",
+          "quotedSpan": "Two warm days had followed a heavy rain.",
+          "detail": "Two warm days had followed a heavy rain.",
+          "connectsToExpectedAnswer": "This detail explains one condition that helped the class think about the glow.",
+          "independentKey": "weather-rain"
+        },
+        {
+          "supportId": "creek_s3",
+          "supportType": "direct_quote",
+          "quotedSpan": "Maya added her map to the notice so readers could see why the sunny bank mattered most.",
+          "detail": "Maya added her map to the notice so readers could see why the sunny bank mattered most.",
+          "connectsToExpectedAnswer": "This detail shows the class used observations as evidence for readers.",
+          "independentKey": "map-evidence"
+        }
+      ],
+      "rubric": {
+        "points3": "A 3-point response gives The class learns to observe the creek carefully and use evidence to explain why the green glow was strongest near the sunny bank. and explains at least two accurate, independent details from \"The Night the Creek Glowed\" that support the answer.",
+        "points2": "A 2-point response shows partial understanding of main idea and includes at least one accurate text detail, but the answer or support is incomplete.",
+        "points1": "A 1-point response gives an incomplete or weak answer about main idea, gives no useful text support, misreads part of the task, or consists entirely or almost entirely of copied passage text.",
+        "points0": "A 0-point response is insufficient, unrelated to \"The Night the Creek Glowed\", or inaccurate in all aspects of the task."
+      },
+      "copiedTextCap": true,
+      "copiedTextCapRule": "A response made entirely or almost entirely of copied passage text with no student explanation earns no more than 1 point, even if the copied text is relevant.",
+      "scoreBandExamples": [
+        {
+          "band": 3,
+          "response": "The main idea is that Maya's class uses careful observations to understand the creek glow. They notice that the green color was thicker near the sunny bank, and they compare their notes with the weather chart after two warm days and heavy rain. These details show they are using evidence instead of guessing.",
+          "why": "Correct answer plus at least two independent supporting details.",
+          "supportIdsUsed": [
+            "creek_s1",
+            "creek_s2"
+          ]
+        },
+        {
+          "band": 2,
+          "response": "The class is trying to learn about the glow. One detail is that the green color was thicker near the sunny bank. They also made a map, but my answer does not fully explain why those details support the main idea.",
+          "why": "Partial answer with some text support but not enough for the full-credit rule.",
+          "supportIdsUsed": [
+            "creek_s1"
+          ]
+        },
+        {
+          "band": 1,
+          "response": "Near the sunny bank, the green color was thicker. Two warm days had followed a heavy rain.",
+          "why": "Relevant copied text only; copied-text cap limits the score to 1.",
+          "supportIdsUsed": [
+            "creek_s1",
+            "creek_s2"
+          ],
+          "copyOnly": true
+        },
+        {
+          "band": 0,
+          "response": "The creek is green because green is a pretty color.",
+          "why": "Inaccurate or unsupported response."
+        }
+      ],
+      "scoring": {
+        "totalPoints": 3,
+        "partialCreditRules": [
+          {
+            "points": 3,
+            "rule": "Correct answer plus at least two accurate, independent passage details or quotes."
+          },
+          {
+            "points": 2,
+            "rule": "Partial answer with at least one accurate passage detail; minor inaccuracy or incomplete explanation may remain."
+          },
+          {
+            "points": 1,
+            "rule": "Incomplete answer, no useful text support, misunderstanding, or relevant copy-only response."
+          },
+          {
+            "points": 0,
+            "rule": "Insufficient, unrelated, or inaccurate response."
+          }
+        ],
+        "scoringNotes": "Rubric metadata is validated for reviewer use only; this PR does not implement automated scoring."
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "auditMetadata": {
+        "authoredIn": "PSSA_PR_4O_GRADE3_SHORT_ANSWER",
+        "noDbWrite": true,
+        "autoScoringClaim": false
+      }
+    },
+    {
+      "itemId": "pssa_sa_g3_map_evidence_01",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "CONSTRUCTED_RESPONSE",
+      "interactionType": "SHORT_ANSWER",
+      "interactionSubtype": "text_supported_short_answer",
+      "passageId": "pssa_psg_g3_the_map_in_the_station",
+      "passageTitle": "A Map Under the Bench",
+      "eligibleContent": "E03.B-C.3.1.3",
+      "ecSkillFamily": "integration_knowledge_ideas",
+      "reportingCategory": "B",
+      "stem": "How does the old map help people understand the town's past and present? Use two details from the passage to support your answer.",
+      "instructionText": "Write a short answer that explains how information from the map and the passage helps visitors compare the town then and now.",
+      "requiredSupportCount": 2,
+      "requiresTextSupport": true,
+      "expectedAnswerCore": "The old map helps people compare what changed in town with landmarks that stayed in place.",
+      "acceptableTextSupport": [
+        {
+          "supportId": "map_s1",
+          "supportType": "direct_quote",
+          "quotedSpan": "The map showed trolley stops, a river bridge, and a market square that no longer had tracks.",
+          "detail": "The map showed trolley stops, a river bridge, and a market square that no longer had tracks.",
+          "connectsToExpectedAnswer": "This detail shows information from the old map about the town's past.",
+          "independentKey": "old-map-features"
+        },
+        {
+          "supportId": "map_s2",
+          "supportType": "direct_quote",
+          "quotedSpan": "Some streets had new names, and the trolley tracks were gone.",
+          "detail": "Some streets had new names, and the trolley tracks were gone.",
+          "connectsToExpectedAnswer": "This detail names changes that visitors can compare with the newer map.",
+          "independentKey": "changes"
+        },
+        {
+          "supportId": "map_s3",
+          "supportType": "direct_quote",
+          "quotedSpan": "Still, the river, the hill road, and the market square helped visitors compare past and present.",
+          "detail": "Still, the river, the hill road, and the market square helped visitors compare past and present.",
+          "connectsToExpectedAnswer": "This detail directly explains how the map supports comparison.",
+          "independentKey": "compare-landmarks"
+        }
+      ],
+      "rubric": {
+        "points3": "A 3-point response gives The old map helps people compare what changed in town with landmarks that stayed in place. and explains at least two accurate, independent details from \"A Map Under the Bench\" that support the answer.",
+        "points2": "A 2-point response shows partial understanding of map and text evidence and includes at least one accurate text detail, but the answer or support is incomplete.",
+        "points1": "A 1-point response gives an incomplete or weak answer about map and text evidence, gives no useful text support, misreads part of the task, or consists entirely or almost entirely of copied passage text.",
+        "points0": "A 0-point response is insufficient, unrelated to \"A Map Under the Bench\", or inaccurate in all aspects of the task."
+      },
+      "copiedTextCap": true,
+      "copiedTextCapRule": "A response made entirely or almost entirely of copied passage text with no student explanation earns no more than 1 point, even if the copied text is relevant.",
+      "scoreBandExamples": [
+        {
+          "band": 3,
+          "response": "The map helps people see what changed and what stayed the same. It shows trolley stops and a market square from the past, and the passage says some street names changed and the tracks were gone. The river and market square still helped visitors compare the two maps.",
+          "why": "Correct answer plus at least two independent supporting details.",
+          "supportIdsUsed": [
+            "map_s1",
+            "map_s2"
+          ]
+        },
+        {
+          "band": 2,
+          "response": "The old map helps people learn about the town. It shows trolley stops, and the new map is different. This uses some evidence but does not fully explain the past-and-present comparison.",
+          "why": "Partial answer with some text support but not enough for the full-credit rule.",
+          "supportIdsUsed": [
+            "map_s1"
+          ]
+        },
+        {
+          "band": 1,
+          "response": "Some streets had new names, and the trolley tracks were gone. Still, the river, the hill road, and the market square helped visitors compare past and present.",
+          "why": "Relevant copied text only; copied-text cap limits the score to 1.",
+          "supportIdsUsed": [
+            "map_s1",
+            "map_s2"
+          ],
+          "copyOnly": true
+        },
+        {
+          "band": 0,
+          "response": "Maps are useful because they are colorful.",
+          "why": "Inaccurate or unsupported response."
+        }
+      ],
+      "scoring": {
+        "totalPoints": 3,
+        "partialCreditRules": [
+          {
+            "points": 3,
+            "rule": "Correct answer plus at least two accurate, independent passage details or quotes."
+          },
+          {
+            "points": 2,
+            "rule": "Partial answer with at least one accurate passage detail; minor inaccuracy or incomplete explanation may remain."
+          },
+          {
+            "points": 1,
+            "rule": "Incomplete answer, no useful text support, misunderstanding, or relevant copy-only response."
+          },
+          {
+            "points": 0,
+            "rule": "Insufficient, unrelated, or inaccurate response."
+          }
+        ],
+        "scoringNotes": "Rubric metadata is validated for reviewer use only; this PR does not implement automated scoring."
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "auditMetadata": {
+        "authoredIn": "PSSA_PR_4O_GRADE3_SHORT_ANSWER",
+        "noDbWrite": true,
+        "autoScoringClaim": false
+      }
+    },
+    {
+      "itemId": "pssa_sa_g3_lunch_sequence_01",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "CONSTRUCTED_RESPONSE",
+      "interactionType": "SHORT_ANSWER",
+      "interactionSubtype": "text_supported_short_answer",
+      "passageId": "pssa_psg_g3_a_cooler_lunch_line",
+      "passageTitle": "The Bell That Saved Lunch",
+      "eligibleContent": "E03.B-K.1.1.3",
+      "ecSkillFamily": "key_ideas_details",
+      "reportingCategory": "B",
+      "stem": "Explain how the class solved the lunch-line problem. Use two details from the passage to support your answer.",
+      "instructionText": "Write a short answer that explains the problem-solution sequence and supports it with two text details.",
+      "requiredSupportCount": 2,
+      "requiresTextSupport": true,
+      "expectedAnswerCore": "The class observed the lunch line, found the slow spots, made small changes, and checked whether the changes worked.",
+      "acceptableTextSupport": [
+        {
+          "supportId": "lunch_s1",
+          "supportType": "direct_quote",
+          "quotedSpan": "They counted how many times the line paused.",
+          "detail": "They counted how many times the line paused.",
+          "connectsToExpectedAnswer": "This detail shows the class gathered information before changing anything.",
+          "independentKey": "observe-count"
+        },
+        {
+          "supportId": "lunch_s2",
+          "supportType": "direct_quote",
+          "quotedSpan": "Milk moved to the first table, before trays.",
+          "detail": "Milk moved to the first table, before trays.",
+          "connectsToExpectedAnswer": "This detail names one change that addressed the milk-carton problem.",
+          "independentKey": "milk-change"
+        },
+        {
+          "supportId": "lunch_s3",
+          "supportType": "direct_quote",
+          "quotedSpan": "Spoons and napkins went into two red baskets at the end.",
+          "detail": "Spoons and napkins went into two red baskets at the end.",
+          "connectsToExpectedAnswer": "This detail names another change that addressed the hard-to-reach supplies.",
+          "independentKey": "basket-change"
+        },
+        {
+          "supportId": "lunch_s4",
+          "supportType": "direct_quote",
+          "quotedSpan": "Room 3 wrote the result on a chart and decided to check again next week",
+          "detail": "Room 3 wrote the result on a chart and decided to check again next week",
+          "connectsToExpectedAnswer": "This detail shows the class tested the solution instead of stopping after one day.",
+          "independentKey": "check-again"
+        }
+      ],
+      "rubric": {
+        "points3": "A 3-point response gives The class observed the lunch line, found the slow spots, made small changes, and checked whether the changes worked. and explains at least two accurate, independent details from \"The Bell That Saved Lunch\" that support the answer.",
+        "points2": "A 2-point response shows partial understanding of sequence and cause/effect and includes at least one accurate text detail, but the answer or support is incomplete.",
+        "points1": "A 1-point response gives an incomplete or weak answer about sequence and cause/effect, gives no useful text support, misreads part of the task, or consists entirely or almost entirely of copied passage text.",
+        "points0": "A 0-point response is insufficient, unrelated to \"The Bell That Saved Lunch\", or inaccurate in all aspects of the task."
+      },
+      "copiedTextCap": true,
+      "copiedTextCapRule": "A response made entirely or almost entirely of copied passage text with no student explanation earns no more than 1 point, even if the copied text is relevant.",
+      "scoreBandExamples": [
+        {
+          "band": 3,
+          "response": "The class solved the problem by watching the line, changing the setup, and checking the result. They counted how many times the line paused, then moved milk before the trays and put spoons and napkins in red baskets. Those details show a clear problem-solution order.",
+          "why": "Correct answer plus at least two independent supporting details.",
+          "supportIdsUsed": [
+            "lunch_s1",
+            "lunch_s2"
+          ]
+        },
+        {
+          "band": 2,
+          "response": "The class made the lunch line better. They moved milk before trays and put napkins in baskets. This gives details, but it does not explain the whole sequence of observing, changing, and checking.",
+          "why": "Partial answer with some text support but not enough for the full-credit rule.",
+          "supportIdsUsed": [
+            "lunch_s1"
+          ]
+        },
+        {
+          "band": 1,
+          "response": "Milk moved to the first table, before trays. Spoons and napkins went into two red baskets at the end.",
+          "why": "Relevant copied text only; copied-text cap limits the score to 1.",
+          "supportIdsUsed": [
+            "lunch_s1",
+            "lunch_s2"
+          ],
+          "copyOnly": true
+        },
+        {
+          "band": 0,
+          "response": "Lunch was saved because everyone liked soup.",
+          "why": "Inaccurate or unsupported response."
+        }
+      ],
+      "scoring": {
+        "totalPoints": 3,
+        "partialCreditRules": [
+          {
+            "points": 3,
+            "rule": "Correct answer plus at least two accurate, independent passage details or quotes."
+          },
+          {
+            "points": 2,
+            "rule": "Partial answer with at least one accurate passage detail; minor inaccuracy or incomplete explanation may remain."
+          },
+          {
+            "points": 1,
+            "rule": "Incomplete answer, no useful text support, misunderstanding, or relevant copy-only response."
+          },
+          {
+            "points": 0,
+            "rule": "Insufficient, unrelated, or inaccurate response."
+          }
+        ],
+        "scoringNotes": "Rubric metadata is validated for reviewer use only; this PR does not implement automated scoring."
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "auditMetadata": {
+        "authoredIn": "PSSA_PR_4O_GRADE3_SHORT_ANSWER",
+        "noDbWrite": true,
+        "autoScoringClaim": false
+      }
+    },
+    {
+      "itemId": "pssa_sa_g3_mural_character_01",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "CONSTRUCTED_RESPONSE",
+      "interactionType": "SHORT_ANSWER",
+      "interactionSubtype": "text_supported_short_answer",
+      "passageId": "pssa_psg_g3_the_mural_plan",
+      "passageTitle": "Blue Paint for Saturday",
+      "eligibleContent": "E03.A-K.1.1.3",
+      "ecSkillFamily": "key_ideas_details",
+      "reportingCategory": "A",
+      "stem": "How does the narrator's attitude about the mural change? Use two details from the passage to support your answer.",
+      "instructionText": "Write a short answer that describes the narrator's change and supports it with two passage details.",
+      "requiredSupportCount": 2,
+      "requiresTextSupport": true,
+      "expectedAnswerCore": "The narrator changes from unsure and frustrated about painting to proud of helping make the mural look alive.",
+      "acceptableTextSupport": [
+        {
+          "supportId": "mural_s1",
+          "supportType": "direct_quote",
+          "quotedSpan": "The label said sky blue, but inside the can the paint looked like melted berries.",
+          "detail": "The label said sky blue, but inside the can the paint looked like melted berries.",
+          "connectsToExpectedAnswer": "This detail shows the narrator starts unsure about the paint.",
+          "independentKey": "paint-uncertainty"
+        },
+        {
+          "supportId": "mural_s2",
+          "supportType": "direct_quote",
+          "quotedSpan": "At first, I worked too fast.",
+          "detail": "At first, I worked too fast.",
+          "connectsToExpectedAnswer": "This detail shows the narrator makes a mistake and feels unsure.",
+          "independentKey": "mistake"
+        },
+        {
+          "supportId": "mural_s3",
+          "supportType": "direct_quote",
+          "quotedSpan": "The fish looked as if they were flicking through the water.",
+          "detail": "The fish looked as if they were flicking through the water.",
+          "connectsToExpectedAnswer": "This detail shows the narrator turns the mistake into something that improves the mural.",
+          "independentKey": "ripples"
+        },
+        {
+          "supportId": "mural_s4",
+          "supportType": "direct_quote",
+          "quotedSpan": "I just stood there, smiling at the blue.",
+          "detail": "I just stood there, smiling at the blue.",
+          "connectsToExpectedAnswer": "This detail shows the narrator feels proud at the end.",
+          "independentKey": "pride"
+        }
+      ],
+      "rubric": {
+        "points3": "A 3-point response gives The narrator changes from unsure and frustrated about painting to proud of helping make the mural look alive. and explains at least two accurate, independent details from \"Blue Paint for Saturday\" that support the answer.",
+        "points2": "A 2-point response shows partial understanding of character change and includes at least one accurate text detail, but the answer or support is incomplete.",
+        "points1": "A 1-point response gives an incomplete or weak answer about character change, gives no useful text support, misreads part of the task, or consists entirely or almost entirely of copied passage text.",
+        "points0": "A 0-point response is insufficient, unrelated to \"Blue Paint for Saturday\", or inaccurate in all aspects of the task."
+      },
+      "copiedTextCap": true,
+      "copiedTextCapRule": "A response made entirely or almost entirely of copied passage text with no student explanation earns no more than 1 point, even if the copied text is relevant.",
+      "scoreBandExamples": [
+        {
+          "band": 3,
+          "response": "The narrator changes from unsure to proud. At first the paint does not look sky blue, and the narrator works too fast and drips paint on the fish. Later the ripples make the fish look as if they are moving, and the narrator stands smiling at the blue.",
+          "why": "Correct answer plus at least two independent supporting details.",
+          "supportIdsUsed": [
+            "mural_s1",
+            "mural_s2"
+          ]
+        },
+        {
+          "band": 2,
+          "response": "The narrator feels better by the end. The fish look as if they are moving, and the narrator smiles. This has text details but does not explain the beginning of the change very much.",
+          "why": "Partial answer with some text support but not enough for the full-credit rule.",
+          "supportIdsUsed": [
+            "mural_s1"
+          ]
+        },
+        {
+          "band": 1,
+          "response": "The fish looked as if they were flicking through the water. I just stood there, smiling at the blue.",
+          "why": "Relevant copied text only; copied-text cap limits the score to 1.",
+          "supportIdsUsed": [
+            "mural_s1",
+            "mural_s2"
+          ],
+          "copyOnly": true
+        },
+        {
+          "band": 0,
+          "response": "The narrator is happy because soccer is fun.",
+          "why": "Inaccurate or unsupported response."
+        }
+      ],
+      "scoring": {
+        "totalPoints": 3,
+        "partialCreditRules": [
+          {
+            "points": 3,
+            "rule": "Correct answer plus at least two accurate, independent passage details or quotes."
+          },
+          {
+            "points": 2,
+            "rule": "Partial answer with at least one accurate passage detail; minor inaccuracy or incomplete explanation may remain."
+          },
+          {
+            "points": 1,
+            "rule": "Incomplete answer, no useful text support, misunderstanding, or relevant copy-only response."
+          },
+          {
+            "points": 0,
+            "rule": "Insufficient, unrelated, or inaccurate response."
+          }
+        ],
+        "scoringNotes": "Rubric metadata is validated for reviewer use only; this PR does not implement automated scoring."
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "auditMetadata": {
+        "authoredIn": "PSSA_PR_4O_GRADE3_SHORT_ANSWER",
+        "noDbWrite": true,
+        "autoScoringClaim": false
+      }
+    },
+    {
+      "itemId": "pssa_sa_g3_cart_connection_01",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "CONSTRUCTED_RESPONSE",
+      "interactionType": "SHORT_ANSWER",
+      "interactionSubtype": "text_supported_short_answer",
+      "passageId": "pssa_psg_g3_the_cart_that_would_not_turn",
+      "passageTitle": "The Cart That Would Not Turn",
+      "eligibleContent": "E03.B-C.3.1.1",
+      "ecSkillFamily": "integration_knowledge_ideas",
+      "reportingCategory": "B",
+      "stem": "Why is the order of steps important when fixing the cart? Use two details from the passage to support your answer.",
+      "instructionText": "Write a short answer that explains the connection between the steps and the successful repair.",
+      "requiredSupportCount": 2,
+      "requiresTextSupport": true,
+      "expectedAnswerCore": "The order matters because unloading and checking first help the class find the small cause before they fix the wheel safely.",
+      "acceptableTextSupport": [
+        {
+          "supportId": "cart_s1",
+          "supportType": "direct_quote",
+          "quotedSpan": "First, you would empty the heavy paper boxes from the bottom shelf.",
+          "detail": "First, you would empty the heavy paper boxes from the bottom shelf.",
+          "connectsToExpectedAnswer": "This detail shows the first step makes the cart easier to inspect.",
+          "independentKey": "empty-first"
+        },
+        {
+          "supportId": "cart_s2",
+          "supportType": "direct_quote",
+          "quotedSpan": "Weight can hide a small problem.",
+          "detail": "Weight can hide a small problem.",
+          "connectsToExpectedAnswer": "This detail explains why the first step matters.",
+          "independentKey": "weight-hides"
+        },
+        {
+          "supportId": "cart_s3",
+          "supportType": "direct_quote",
+          "quotedSpan": "On the green cart, a strand of yarn had wrapped around the front axle.",
+          "detail": "On the green cart, a strand of yarn had wrapped around the front axle.",
+          "connectsToExpectedAnswer": "This detail identifies the cause found by checking the wheel.",
+          "independentKey": "yarn-cause"
+        },
+        {
+          "supportId": "cart_s4",
+          "supportType": "direct_quote",
+          "quotedSpan": "Their careful order saved time and kept the floor completely clear.",
+          "detail": "Their careful order saved time and kept the floor completely clear.",
+          "connectsToExpectedAnswer": "This detail states the result of following the steps carefully.",
+          "independentKey": "result"
+        }
+      ],
+      "rubric": {
+        "points3": "A 3-point response gives The order matters because unloading and checking first help the class find the small cause before they fix the wheel safely. and explains at least two accurate, independent details from \"The Cart That Would Not Turn\" that support the answer.",
+        "points2": "A 2-point response shows partial understanding of logical connection and includes at least one accurate text detail, but the answer or support is incomplete.",
+        "points1": "A 1-point response gives an incomplete or weak answer about logical connection, gives no useful text support, misreads part of the task, or consists entirely or almost entirely of copied passage text.",
+        "points0": "A 0-point response is insufficient, unrelated to \"The Cart That Would Not Turn\", or inaccurate in all aspects of the task."
+      },
+      "copiedTextCap": true,
+      "copiedTextCapRule": "A response made entirely or almost entirely of copied passage text with no student explanation earns no more than 1 point, even if the copied text is relevant.",
+      "scoreBandExamples": [
+        {
+          "band": 3,
+          "response": "The order is important because each step helps the class find and fix the real problem. First they empty the heavy boxes because weight can hide a small problem. Then they find yarn wrapped around the axle, so the repair fixes the cause instead of just pushing harder.",
+          "why": "Correct answer plus at least two independent supporting details.",
+          "supportIdsUsed": [
+            "cart_s1",
+            "cart_s2"
+          ]
+        },
+        {
+          "band": 2,
+          "response": "The steps are important because the class finds yarn on the wheel. They empty the cart first. This gives some support but does not fully explain how the steps connect to the repair.",
+          "why": "Partial answer with some text support but not enough for the full-credit rule.",
+          "supportIdsUsed": [
+            "cart_s1"
+          ]
+        },
+        {
+          "band": 1,
+          "response": "First, you would empty the heavy paper boxes from the bottom shelf. Weight can hide a small problem.",
+          "why": "Relevant copied text only; copied-text cap limits the score to 1.",
+          "supportIdsUsed": [
+            "cart_s1",
+            "cart_s2"
+          ],
+          "copyOnly": true
+        },
+        {
+          "band": 0,
+          "response": "The cart turns because green carts are easy to move.",
+          "why": "Inaccurate or unsupported response."
+        }
+      ],
+      "scoring": {
+        "totalPoints": 3,
+        "partialCreditRules": [
+          {
+            "points": 3,
+            "rule": "Correct answer plus at least two accurate, independent passage details or quotes."
+          },
+          {
+            "points": 2,
+            "rule": "Partial answer with at least one accurate passage detail; minor inaccuracy or incomplete explanation may remain."
+          },
+          {
+            "points": 1,
+            "rule": "Incomplete answer, no useful text support, misunderstanding, or relevant copy-only response."
+          },
+          {
+            "points": 0,
+            "rule": "Insufficient, unrelated, or inaccurate response."
+          }
+        ],
+        "scoringNotes": "Rubric metadata is validated for reviewer use only; this PR does not implement automated scoring."
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "auditMetadata": {
+        "authoredIn": "PSSA_PR_4O_GRADE3_SHORT_ANSWER",
+        "noDbWrite": true,
+        "autoScoringClaim": false
+      }
+    }
+  ]
+}

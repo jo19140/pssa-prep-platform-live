@@ -1,0 +1,84 @@
+itemId,field,matchedSource,longestNormalizedNgram,overlapScore,boilerplateOrContent,result,notes
+pssa_sa_g3_creek_main_idea_01,stem,reference/pssa-released-items/extracted/grade-6/tda-rubric-exemplars.json,from the passage to support your,0.3333,content,PASS,PASS
+pssa_sa_g3_creek_main_idea_01,instructionText,,,0,none,PASS,PASS
+pssa_sa_g3_creek_main_idea_01,expectedAnswerCore,,,0,none,PASS,PASS
+pssa_sa_g3_creek_main_idea_01,acceptableTextSupport.0,,,0,none,PASS,PASS
+pssa_sa_g3_creek_main_idea_01,acceptableTextSupport.1,,,0,none,PASS,PASS
+pssa_sa_g3_creek_main_idea_01,acceptableTextSupport.2,,,0,none,PASS,PASS
+pssa_sa_g3_creek_main_idea_01,rubric.points3,,,0,none,PASS,PASS
+pssa_sa_g3_creek_main_idea_01,rubric.points2,,,0,none,PASS,PASS
+pssa_sa_g3_creek_main_idea_01,rubric.points1,reference/pssa-released-items/extracted/grade-6/tda-rubric-exemplars.json,part of the task,0.1212,content,PASS,PASS
+pssa_sa_g3_creek_main_idea_01,rubric.points0,,,0,none,PASS,PASS
+pssa_sa_g3_creek_main_idea_01,copiedTextCapRule,,,0,none,PASS,PASS
+pssa_sa_g3_creek_main_idea_01,scoreBandExamples.3,,,0,none,PASS,PASS
+pssa_sa_g3_creek_main_idea_01,scoreBandExamples.2,,,0,none,PASS,PASS
+pssa_sa_g3_creek_main_idea_01,scoreBandExamples.1,,,0,none,PASS,PASS
+pssa_sa_g3_creek_main_idea_01,scoreBandExamples.0,,,0,none,PASS,PASS
+pssa_sa_g3_creek_main_idea_01,assignedPassageText,,,0,none,PASS,PASS
+pssa_sa_g3_map_evidence_01,stem,reference/pssa-released-items/extracted/grade-6/tda-rubric-exemplars.json,from the passage to support your,0.25,content,PASS,PASS
+pssa_sa_g3_map_evidence_01,instructionText,,,0,none,PASS,PASS
+pssa_sa_g3_map_evidence_01,expectedAnswerCore,,,0,none,PASS,PASS
+pssa_sa_g3_map_evidence_01,acceptableTextSupport.0,,,0,none,PASS,PASS
+pssa_sa_g3_map_evidence_01,acceptableTextSupport.1,,,0,none,PASS,PASS
+pssa_sa_g3_map_evidence_01,acceptableTextSupport.2,,,0,none,PASS,PASS
+pssa_sa_g3_map_evidence_01,rubric.points3,,,0,none,PASS,PASS
+pssa_sa_g3_map_evidence_01,rubric.points2,,,0,none,PASS,PASS
+pssa_sa_g3_map_evidence_01,rubric.points1,reference/pssa-released-items/extracted/grade-6/tda-rubric-exemplars.json,part of the task,0.1143,content,PASS,PASS
+pssa_sa_g3_map_evidence_01,rubric.points0,,,0,none,PASS,PASS
+pssa_sa_g3_map_evidence_01,copiedTextCapRule,,,0,none,PASS,PASS
+pssa_sa_g3_map_evidence_01,scoreBandExamples.3,,,0,none,PASS,PASS
+pssa_sa_g3_map_evidence_01,scoreBandExamples.2,,,0,none,PASS,PASS
+pssa_sa_g3_map_evidence_01,scoreBandExamples.1,,,0,none,PASS,PASS
+pssa_sa_g3_map_evidence_01,scoreBandExamples.0,,,0,none,PASS,PASS
+pssa_sa_g3_map_evidence_01,assignedPassageText,reference/pssa-released-items/extracted/grade-6/tda-rubric-exemplars.json,the end of the,0.0132,content,PASS,PASS
+pssa_sa_g3_lunch_sequence_01,stem,reference/pssa-released-items/extracted/grade-6/tda-rubric-exemplars.json,from the passage to support your,0.3158,content,PASS,PASS
+pssa_sa_g3_lunch_sequence_01,instructionText,,,0,none,PASS,PASS
+pssa_sa_g3_lunch_sequence_01,expectedAnswerCore,,,0,none,PASS,PASS
+pssa_sa_g3_lunch_sequence_01,acceptableTextSupport.0,,,0,none,PASS,PASS
+pssa_sa_g3_lunch_sequence_01,acceptableTextSupport.1,,,0,none,PASS,PASS
+pssa_sa_g3_lunch_sequence_01,acceptableTextSupport.2,,,0,none,PASS,PASS
+pssa_sa_g3_lunch_sequence_01,acceptableTextSupport.3,,,0,none,PASS,PASS
+pssa_sa_g3_lunch_sequence_01,rubric.points3,,,0,none,PASS,PASS
+pssa_sa_g3_lunch_sequence_01,rubric.points2,,,0,none,PASS,PASS
+pssa_sa_g3_lunch_sequence_01,rubric.points1,reference/pssa-released-items/extracted/grade-6/tda-rubric-exemplars.json,part of the task,0.1143,content,PASS,PASS
+pssa_sa_g3_lunch_sequence_01,rubric.points0,,,0,none,PASS,PASS
+pssa_sa_g3_lunch_sequence_01,copiedTextCapRule,,,0,none,PASS,PASS
+pssa_sa_g3_lunch_sequence_01,scoreBandExamples.3,,,0,none,PASS,PASS
+pssa_sa_g3_lunch_sequence_01,scoreBandExamples.2,,,0,none,PASS,PASS
+pssa_sa_g3_lunch_sequence_01,scoreBandExamples.1,,,0,none,PASS,PASS
+pssa_sa_g3_lunch_sequence_01,scoreBandExamples.0,,,0,none,PASS,PASS
+pssa_sa_g3_lunch_sequence_01,assignedPassageText,reference/pssa-released-items/extracted/grade-6/tda-rubric-exemplars.json,the end of the,0.0132,content,PASS,PASS
+pssa_sa_g3_mural_character_01,stem,reference/pssa-released-items/extracted/grade-6/tda-rubric-exemplars.json,from the passage to support your,0.3,content,PASS,PASS
+pssa_sa_g3_mural_character_01,instructionText,,,0,none,PASS,PASS
+pssa_sa_g3_mural_character_01,expectedAnswerCore,,,0,none,PASS,PASS
+pssa_sa_g3_mural_character_01,acceptableTextSupport.0,,,0,none,PASS,PASS
+pssa_sa_g3_mural_character_01,acceptableTextSupport.1,,,0,none,PASS,PASS
+pssa_sa_g3_mural_character_01,acceptableTextSupport.2,,,0,none,PASS,PASS
+pssa_sa_g3_mural_character_01,acceptableTextSupport.3,,,0,none,PASS,PASS
+pssa_sa_g3_mural_character_01,rubric.points3,,,0,none,PASS,PASS
+pssa_sa_g3_mural_character_01,rubric.points2,,,0,none,PASS,PASS
+pssa_sa_g3_mural_character_01,rubric.points1,reference/pssa-released-items/extracted/grade-6/tda-rubric-exemplars.json,part of the task,0.1212,content,PASS,PASS
+pssa_sa_g3_mural_character_01,rubric.points0,,,0,none,PASS,PASS
+pssa_sa_g3_mural_character_01,copiedTextCapRule,,,0,none,PASS,PASS
+pssa_sa_g3_mural_character_01,scoreBandExamples.3,,,0,none,PASS,PASS
+pssa_sa_g3_mural_character_01,scoreBandExamples.2,,,0,none,PASS,PASS
+pssa_sa_g3_mural_character_01,scoreBandExamples.1,,,0,none,PASS,PASS
+pssa_sa_g3_mural_character_01,scoreBandExamples.0,,,0,none,PASS,PASS
+pssa_sa_g3_mural_character_01,assignedPassageText,,,0,none,PASS,PASS
+pssa_sa_g3_cart_connection_01,stem,reference/pssa-released-items/extracted/grade-6/tda-rubric-exemplars.json,from the passage to support your,0.2857,content,PASS,PASS
+pssa_sa_g3_cart_connection_01,instructionText,,,0,none,PASS,PASS
+pssa_sa_g3_cart_connection_01,expectedAnswerCore,,,0,none,PASS,PASS
+pssa_sa_g3_cart_connection_01,acceptableTextSupport.0,,,0,none,PASS,PASS
+pssa_sa_g3_cart_connection_01,acceptableTextSupport.1,,,0,none,PASS,PASS
+pssa_sa_g3_cart_connection_01,acceptableTextSupport.2,,,0,none,PASS,PASS
+pssa_sa_g3_cart_connection_01,acceptableTextSupport.3,,,0,none,PASS,PASS
+pssa_sa_g3_cart_connection_01,rubric.points3,,,0,none,PASS,PASS
+pssa_sa_g3_cart_connection_01,rubric.points2,,,0,none,PASS,PASS
+pssa_sa_g3_cart_connection_01,rubric.points1,reference/pssa-released-items/extracted/grade-6/tda-rubric-exemplars.json,part of the task,0.1212,content,PASS,PASS
+pssa_sa_g3_cart_connection_01,rubric.points0,,,0,none,PASS,PASS
+pssa_sa_g3_cart_connection_01,copiedTextCapRule,,,0,none,PASS,PASS
+pssa_sa_g3_cart_connection_01,scoreBandExamples.3,,,0,none,PASS,PASS
+pssa_sa_g3_cart_connection_01,scoreBandExamples.2,,,0,none,PASS,PASS
+pssa_sa_g3_cart_connection_01,scoreBandExamples.1,,,0,none,PASS,PASS
+pssa_sa_g3_cart_connection_01,scoreBandExamples.0,,,0,none,PASS,PASS
+pssa_sa_g3_cart_connection_01,assignedPassageText,,,0,none,PASS,PASS
