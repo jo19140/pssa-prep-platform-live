@@ -35,7 +35,7 @@ export const PHASE_3_ENTRY_TARGETS: DailyTargetSeed[] = [
     allowedPatternCodes: ["closed_short_a", "closed_short_i", "closed_short_o", "closed_short_u", "closed_short_e"],
     blockedPatternCodes: ["i_e", "o_e", "u_e", "e_e", "ai", "ay", "oa", "ee"],
     exampleWords: ["cake", "game", "make", "same", "tape"],
-    exampleNonwords: ["zake", "mave", "pame", "lathe", "nape"],
+    exampleNonwords: ["zake", "mave", "pame", "vade", "sape"],
   },
   {
     code: "i_e",
