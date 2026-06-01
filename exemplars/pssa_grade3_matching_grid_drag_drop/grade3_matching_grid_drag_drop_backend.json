@@ -1,0 +1,1177 @@
+{
+  "generatedAt": "2026-06-01T02:24:03.984Z",
+  "noDbWrite": true,
+  "productionImportReady": false,
+  "matchingGridItems": [
+    {
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "passageId": "pssa_psg_g3_creek_watchers",
+      "passageTitle": "The Night the Creek Glowed",
+      "eligibleContent": "E03.B-K.1.1.2",
+      "ecSkillFamily": "informational_elements",
+      "reportingCategory": "B",
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "auditMetadata": {
+        "authoredIn": "PSSA_PR_4M_GRADE3_MG_DD",
+        "noDbWrite": true
+      },
+      "itemId": "pssa_mg_g3_creek_01",
+      "itemType": "MATCHING_GRID",
+      "interactionType": "MATCHING_GRID",
+      "interactionSubtype": "within_text_category",
+      "secondaryPassageId": null,
+      "secondaryPassageTitle": null,
+      "comparisonBasis": null,
+      "stem": "Complete the table to show how details in the creek passage support the main idea.",
+      "instructionText": "Choose one column for each row.",
+      "rows": [
+        {
+          "rowId": "creek_r1",
+          "label": "Maya drew a map of three creek spots.",
+          "correctColumnId": "observed_detail",
+          "groundedInPassageId": "pssa_psg_g3_creek_watchers",
+          "evidenceQuote": "Maya drew a map of three creek spots.",
+          "rationale": "This is an observed detail the class recorded.",
+          "plausibleWrongRationales": {
+            "explanation_clue": "Explanation clue is plausible, but the passage evidence supports observed_detail.",
+            "later_result": "Later result is plausible, but the passage evidence supports observed_detail."
+          }
+        },
+        {
+          "rowId": "creek_r2",
+          "label": "Two warm days followed a heavy rain.",
+          "correctColumnId": "explanation_clue",
+          "groundedInPassageId": "pssa_psg_g3_creek_watchers",
+          "evidenceQuote": "Two warm days had followed a heavy rain.",
+          "rationale": "This clue helps explain why the green color grew.",
+          "plausibleWrongRationales": {
+            "observed_detail": "Observed detail is plausible, but the passage evidence supports explanation_clue.",
+            "later_result": "Later result is plausible, but the passage evidence supports explanation_clue."
+          }
+        },
+        {
+          "rowId": "creek_r3",
+          "label": "The glow had faded to a faint stripe.",
+          "correctColumnId": "later_result",
+          "groundedInPassageId": "pssa_psg_g3_creek_watchers",
+          "evidenceQuote": "The glow had faded to a faint stripe.",
+          "rationale": "This is what Maya saw after the class notice.",
+          "plausibleWrongRationales": {
+            "observed_detail": "Observed detail is plausible, but the passage evidence supports later_result.",
+            "explanation_clue": "Explanation clue is plausible, but the passage evidence supports later_result."
+          }
+        }
+      ],
+      "columns": [
+        {
+          "columnId": "observed_detail",
+          "label": "Observed detail"
+        },
+        {
+          "columnId": "explanation_clue",
+          "label": "Explanation clue"
+        },
+        {
+          "columnId": "later_result",
+          "label": "Later result"
+        }
+      ],
+      "selectionRule": "one_per_row",
+      "bothColumnId": null,
+      "correctCells": [
+        {
+          "rowId": "creek_r1",
+          "columnId": "observed_detail"
+        },
+        {
+          "rowId": "creek_r2",
+          "columnId": "explanation_clue"
+        },
+        {
+          "rowId": "creek_r3",
+          "columnId": "later_result"
+        }
+      ],
+      "scoring": {
+        "totalPoints": 3,
+        "partialCreditRules": [
+          {
+            "points": 3,
+            "rule": "All three rows matched to the supported column."
+          },
+          {
+            "points": 2,
+            "rule": "Two rows matched to supported columns."
+          },
+          {
+            "points": 1,
+            "rule": "One row matched to a supported column."
+          },
+          {
+            "points": 0,
+            "rule": "No supported row matches, unanswered rows, or extra/multiple selections in a row."
+          }
+        ],
+        "scoringNotes": "Full credit requires every required row and no incorrect or unanswered row."
+      }
+    },
+    {
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "passageId": "pssa_psg_g3_the_map_in_the_station",
+      "passageTitle": "A Map Under the Bench",
+      "eligibleContent": "E03.B-K.1.1.2",
+      "ecSkillFamily": "informational_elements",
+      "reportingCategory": "B",
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "auditMetadata": {
+        "authoredIn": "PSSA_PR_4M_GRADE3_MG_DD",
+        "noDbWrite": true
+      },
+      "itemId": "pssa_mg_g3_map_01",
+      "itemType": "MATCHING_GRID",
+      "interactionType": "MATCHING_GRID",
+      "interactionSubtype": "within_text_category",
+      "secondaryPassageId": null,
+      "secondaryPassageTitle": null,
+      "comparisonBasis": null,
+      "stem": "Complete the table to show how map details help visitors compare past and present.",
+      "instructionText": "Choose one column for each row.",
+      "rows": [
+        {
+          "rowId": "map_r2",
+          "label": "Some streets had new names.",
+          "correctColumnId": "present_change",
+          "groundedInPassageId": "pssa_psg_g3_the_map_in_the_station",
+          "evidenceQuote": "Some streets had new names, and the trolley tracks were gone.",
+          "rationale": "This is a change visitors can notice.",
+          "plausibleWrongRationales": {
+            "old_map_detail": "Old map detail is plausible, but the passage evidence supports present_change.",
+            "lasting_landmark": "Still in place is plausible, but the passage evidence supports present_change."
+          }
+        },
+        {
+          "rowId": "map_r1",
+          "label": "The map showed trolley stops.",
+          "correctColumnId": "old_map_detail",
+          "groundedInPassageId": "pssa_psg_g3_the_map_in_the_station",
+          "evidenceQuote": "The map showed trolley stops, a river bridge, and a market square that no longer had tracks.",
+          "rationale": "The trolley stops are part of the old map.",
+          "plausibleWrongRationales": {
+            "present_change": "Present-day change is plausible, but the passage evidence supports old_map_detail.",
+            "lasting_landmark": "Still in place is plausible, but the passage evidence supports old_map_detail."
+          }
+        },
+        {
+          "rowId": "map_r3",
+          "label": "The river helped visitors compare the maps.",
+          "correctColumnId": "lasting_landmark",
+          "groundedInPassageId": "pssa_psg_g3_the_map_in_the_station",
+          "evidenceQuote": "Still, the river, the hill road, and the market square helped visitors compare past and present.",
+          "rationale": "The river stayed useful as a landmark.",
+          "plausibleWrongRationales": {
+            "old_map_detail": "Old map detail is plausible, but the passage evidence supports lasting_landmark.",
+            "present_change": "Present-day change is plausible, but the passage evidence supports lasting_landmark."
+          }
+        }
+      ],
+      "columns": [
+        {
+          "columnId": "old_map_detail",
+          "label": "Old map detail"
+        },
+        {
+          "columnId": "present_change",
+          "label": "Present-day change"
+        },
+        {
+          "columnId": "lasting_landmark",
+          "label": "Still in place"
+        }
+      ],
+      "selectionRule": "one_per_row",
+      "bothColumnId": null,
+      "correctCells": [
+        {
+          "rowId": "map_r2",
+          "columnId": "present_change"
+        },
+        {
+          "rowId": "map_r1",
+          "columnId": "old_map_detail"
+        },
+        {
+          "rowId": "map_r3",
+          "columnId": "lasting_landmark"
+        }
+      ],
+      "scoring": {
+        "totalPoints": 3,
+        "partialCreditRules": [
+          {
+            "points": 3,
+            "rule": "All three rows matched to the supported column."
+          },
+          {
+            "points": 2,
+            "rule": "Two rows matched to supported columns."
+          },
+          {
+            "points": 1,
+            "rule": "One row matched to a supported column."
+          },
+          {
+            "points": 0,
+            "rule": "No supported row matches, unanswered rows, or extra/multiple selections in a row."
+          }
+        ],
+        "scoringNotes": "Full credit requires every required row and no incorrect or unanswered row."
+      }
+    },
+    {
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "passageId": "pssa_psg_g3_a_cooler_lunch_line",
+      "passageTitle": "The Bell That Saved Lunch",
+      "eligibleContent": "E03.B-K.1.1.3",
+      "ecSkillFamily": "informational_elements",
+      "reportingCategory": "B",
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "auditMetadata": {
+        "authoredIn": "PSSA_PR_4M_GRADE3_MG_DD",
+        "noDbWrite": true
+      },
+      "itemId": "pssa_mg_g3_lunch_01",
+      "itemType": "MATCHING_GRID",
+      "interactionType": "MATCHING_GRID",
+      "interactionSubtype": "sequence_category",
+      "secondaryPassageId": null,
+      "secondaryPassageTitle": null,
+      "comparisonBasis": null,
+      "stem": "Complete the table to show the lunch-line problem, change, and result.",
+      "instructionText": "Choose one column for each row.",
+      "rows": [
+        {
+          "rowId": "lunch_r3",
+          "label": "Most bowls of soup were still warm.",
+          "correctColumnId": "result",
+          "groundedInPassageId": "pssa_psg_g3_a_cooler_lunch_line",
+          "evidenceQuote": "When the bell rang, most bowls of soup were still warm.",
+          "rationale": "This is a result after the new setup.",
+          "plausibleWrongRationales": {
+            "problem": "Problem noticed is plausible, but the passage evidence supports result.",
+            "change": "Change tried is plausible, but the passage evidence supports result."
+          }
+        },
+        {
+          "rowId": "lunch_r1",
+          "label": "Students had to step backward for a napkin.",
+          "correctColumnId": "problem",
+          "groundedInPassageId": "pssa_psg_g3_a_cooler_lunch_line",
+          "evidenceQuote": "The line stopped whenever someone had to step backward for a napkin.",
+          "rationale": "This is one cause of the slow line.",
+          "plausibleWrongRationales": {
+            "change": "Change tried is plausible, but the passage evidence supports problem.",
+            "result": "Result checked is plausible, but the passage evidence supports problem."
+          }
+        },
+        {
+          "rowId": "lunch_r2",
+          "label": "Milk moved to the first table.",
+          "correctColumnId": "change",
+          "groundedInPassageId": "pssa_psg_g3_a_cooler_lunch_line",
+          "evidenceQuote": "Milk moved to the first table, before trays.",
+          "rationale": "This is a change the class tested.",
+          "plausibleWrongRationales": {
+            "problem": "Problem noticed is plausible, but the passage evidence supports change.",
+            "result": "Result checked is plausible, but the passage evidence supports change."
+          }
+        }
+      ],
+      "columns": [
+        {
+          "columnId": "problem",
+          "label": "Problem noticed"
+        },
+        {
+          "columnId": "change",
+          "label": "Change tried"
+        },
+        {
+          "columnId": "result",
+          "label": "Result checked"
+        }
+      ],
+      "selectionRule": "one_per_row",
+      "bothColumnId": null,
+      "correctCells": [
+        {
+          "rowId": "lunch_r3",
+          "columnId": "result"
+        },
+        {
+          "rowId": "lunch_r1",
+          "columnId": "problem"
+        },
+        {
+          "rowId": "lunch_r2",
+          "columnId": "change"
+        }
+      ],
+      "scoring": {
+        "totalPoints": 3,
+        "partialCreditRules": [
+          {
+            "points": 3,
+            "rule": "All three rows matched to the supported column."
+          },
+          {
+            "points": 2,
+            "rule": "Two rows matched to supported columns."
+          },
+          {
+            "points": 1,
+            "rule": "One row matched to a supported column."
+          },
+          {
+            "points": 0,
+            "rule": "No supported row matches, unanswered rows, or extra/multiple selections in a row."
+          }
+        ],
+        "scoringNotes": "Full credit requires every required row and no incorrect or unanswered row."
+      }
+    },
+    {
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "passageId": "pssa_psg_g3_the_mural_plan",
+      "passageTitle": "Blue Paint for Saturday",
+      "eligibleContent": "E03.A-K.1.1.2",
+      "ecSkillFamily": "literature_elements",
+      "reportingCategory": "A",
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "auditMetadata": {
+        "authoredIn": "PSSA_PR_4M_GRADE3_MG_DD",
+        "noDbWrite": true
+      },
+      "itemId": "pssa_mg_g3_mural_01",
+      "itemType": "MATCHING_GRID",
+      "interactionType": "MATCHING_GRID",
+      "interactionSubtype": "within_text_category",
+      "secondaryPassageId": null,
+      "secondaryPassageTitle": null,
+      "comparisonBasis": null,
+      "stem": "Complete the table to show how the mural story develops its message.",
+      "instructionText": "Choose one column for each row.",
+      "rows": [
+        {
+          "rowId": "mural_r2",
+          "label": "The narrator painted tiny waves around each fish tail.",
+          "correctColumnId": "mistake_response",
+          "groundedInPassageId": "pssa_psg_g3_the_mural_plan",
+          "evidenceQuote": "I bent close and painted tiny waves around each tail.",
+          "rationale": "This shows the mistake being changed into art.",
+          "plausibleWrongRationales": {
+            "setting_detail": "Setting detail is plausible, but the passage evidence supports mistake_response.",
+            "lesson_result": "Lesson shown is plausible, but the passage evidence supports mistake_response."
+          }
+        },
+        {
+          "rowId": "mural_r3",
+          "label": "The wall no longer looked empty.",
+          "correctColumnId": "lesson_result",
+          "groundedInPassageId": "pssa_psg_g3_the_mural_plan",
+          "evidenceQuote": "But the fish seemed to move, and the wall no longer looked empty.",
+          "rationale": "This shows the good result of using the mistake.",
+          "plausibleWrongRationales": {
+            "setting_detail": "Setting detail is plausible, but the passage evidence supports lesson_result.",
+            "mistake_response": "Response to mistake is plausible, but the passage evidence supports lesson_result."
+          }
+        },
+        {
+          "rowId": "mural_r1",
+          "label": "Chalk lines crossed the brick wall like a giant puzzle.",
+          "correctColumnId": "setting_detail",
+          "groundedInPassageId": "pssa_psg_g3_the_mural_plan",
+          "evidenceQuote": "The wall was rough brick, and chalk lines crossed it like a giant puzzle.",
+          "rationale": "This describes the place where the mural is painted.",
+          "plausibleWrongRationales": {
+            "mistake_response": "Response to mistake is plausible, but the passage evidence supports setting_detail.",
+            "lesson_result": "Lesson shown is plausible, but the passage evidence supports setting_detail."
+          }
+        }
+      ],
+      "columns": [
+        {
+          "columnId": "setting_detail",
+          "label": "Setting detail"
+        },
+        {
+          "columnId": "mistake_response",
+          "label": "Response to mistake"
+        },
+        {
+          "columnId": "lesson_result",
+          "label": "Lesson shown"
+        }
+      ],
+      "selectionRule": "one_per_row",
+      "bothColumnId": null,
+      "correctCells": [
+        {
+          "rowId": "mural_r2",
+          "columnId": "mistake_response"
+        },
+        {
+          "rowId": "mural_r3",
+          "columnId": "lesson_result"
+        },
+        {
+          "rowId": "mural_r1",
+          "columnId": "setting_detail"
+        }
+      ],
+      "scoring": {
+        "totalPoints": 3,
+        "partialCreditRules": [
+          {
+            "points": 3,
+            "rule": "All three rows matched to the supported column."
+          },
+          {
+            "points": 2,
+            "rule": "Two rows matched to supported columns."
+          },
+          {
+            "points": 1,
+            "rule": "One row matched to a supported column."
+          },
+          {
+            "points": 0,
+            "rule": "No supported row matches, unanswered rows, or extra/multiple selections in a row."
+          }
+        ],
+        "scoringNotes": "Full credit requires every required row and no incorrect or unanswered row."
+      }
+    },
+    {
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "passageId": "pssa_psg_g3_the_cart_that_would_not_turn",
+      "passageTitle": "The Cart That Would Not Turn",
+      "eligibleContent": "E03.B-K.1.1.3",
+      "ecSkillFamily": "informational_elements",
+      "reportingCategory": "B",
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "auditMetadata": {
+        "authoredIn": "PSSA_PR_4M_GRADE3_MG_DD",
+        "noDbWrite": true
+      },
+      "itemId": "pssa_mg_g3_cart_01",
+      "itemType": "MATCHING_GRID",
+      "interactionType": "MATCHING_GRID",
+      "interactionSubtype": "sequence_category",
+      "secondaryPassageId": null,
+      "secondaryPassageTitle": null,
+      "comparisonBasis": null,
+      "stem": "Complete the table to show the cart problem, fix, and lesson.",
+      "instructionText": "Choose one column for each row.",
+      "rows": [
+        {
+          "rowId": "cart_r3",
+          "label": "Check wheels before loading paper.",
+          "correctColumnId": "lesson",
+          "groundedInPassageId": "pssa_psg_g3_the_cart_that_would_not_turn",
+          "evidenceQuote": "Check wheels before loading paper.",
+          "rationale": "This is the reminder the class keeps from the repair.",
+          "plausibleWrongRationales": {
+            "problem": "Problem is plausible, but the passage evidence supports lesson.",
+            "repair_step": "Repair step is plausible, but the passage evidence supports lesson."
+          }
+        },
+        {
+          "rowId": "cart_r2",
+          "label": "A teacher snipped the yarn with small scissors.",
+          "correctColumnId": "repair_step",
+          "groundedInPassageId": "pssa_psg_g3_the_cart_that_would_not_turn",
+          "evidenceQuote": "A teacher snipped the yarn with small scissors.",
+          "rationale": "This is one repair step.",
+          "plausibleWrongRationales": {
+            "problem": "Problem is plausible, but the passage evidence supports repair_step.",
+            "lesson": "Lesson is plausible, but the passage evidence supports repair_step."
+          }
+        },
+        {
+          "rowId": "cart_r1",
+          "label": "The front wheel wobbled left.",
+          "correctColumnId": "problem",
+          "groundedInPassageId": "pssa_psg_g3_the_cart_that_would_not_turn",
+          "evidenceQuote": "When students pushed it toward the sink, the front wheel wobbled left.",
+          "rationale": "This is the cart problem.",
+          "plausibleWrongRationales": {
+            "repair_step": "Repair step is plausible, but the passage evidence supports problem.",
+            "lesson": "Lesson is plausible, but the passage evidence supports problem."
+          }
+        }
+      ],
+      "columns": [
+        {
+          "columnId": "problem",
+          "label": "Problem"
+        },
+        {
+          "columnId": "repair_step",
+          "label": "Repair step"
+        },
+        {
+          "columnId": "lesson",
+          "label": "Lesson"
+        }
+      ],
+      "selectionRule": "one_per_row",
+      "bothColumnId": null,
+      "correctCells": [
+        {
+          "rowId": "cart_r3",
+          "columnId": "lesson"
+        },
+        {
+          "rowId": "cart_r2",
+          "columnId": "repair_step"
+        },
+        {
+          "rowId": "cart_r1",
+          "columnId": "problem"
+        }
+      ],
+      "scoring": {
+        "totalPoints": 3,
+        "partialCreditRules": [
+          {
+            "points": 3,
+            "rule": "All three rows matched to the supported column."
+          },
+          {
+            "points": 2,
+            "rule": "Two rows matched to supported columns."
+          },
+          {
+            "points": 1,
+            "rule": "One row matched to a supported column."
+          },
+          {
+            "points": 0,
+            "rule": "No supported row matches, unanswered rows, or extra/multiple selections in a row."
+          }
+        ],
+        "scoringNotes": "Full credit requires every required row and no incorrect or unanswered row."
+      }
+    }
+  ],
+  "dragDropItems": [
+    {
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "passageId": "pssa_psg_g3_creek_watchers",
+      "passageTitle": "The Night the Creek Glowed",
+      "eligibleContent": "E03.B-K.1.1.3",
+      "ecSkillFamily": "informational_elements",
+      "reportingCategory": "B",
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "auditMetadata": {
+        "authoredIn": "PSSA_PR_4M_GRADE3_MG_DD",
+        "noDbWrite": true
+      },
+      "itemId": "pssa_dd_g3_creek_01",
+      "itemType": "DRAG_DROP",
+      "interactionType": "DRAG_DROP",
+      "interactionSubtype": "order",
+      "prompt": "Put the class's creek investigation events in the order they happened.",
+      "instructionText": "Drag each event into the correct order.",
+      "tokens": [
+        {
+          "tokenId": "creek_t1",
+          "text": "The class wrote a creek notice for families.",
+          "isDistractor": false,
+          "groundedInPassage": true,
+          "evidenceQuote": "The class wrote a creek notice for families.",
+          "rationale": "The passage supports this placement in order_3.",
+          "validTargetIds": [
+            "order_3"
+          ]
+        },
+        {
+          "tokenId": "creek_t2",
+          "text": "Maya noticed a pale green shine along Pine Creek.",
+          "isDistractor": false,
+          "groundedInPassage": true,
+          "evidenceQuote": "Maya noticed a pale green shine along Pine Creek.",
+          "rationale": "The passage supports this placement in order_1.",
+          "validTargetIds": [
+            "order_1"
+          ]
+        },
+        {
+          "tokenId": "creek_t3",
+          "text": "Students compared their notes with the weather chart.",
+          "isDistractor": false,
+          "groundedInPassage": true,
+          "evidenceQuote": "Back at school, the students compared their notes with the weather chart.",
+          "rationale": "The passage supports this placement in order_2.",
+          "validTargetIds": [
+            "order_2"
+          ]
+        }
+      ],
+      "targets": [
+        {
+          "targetId": "order_1",
+          "label": "1",
+          "capacity": 1
+        },
+        {
+          "targetId": "order_2",
+          "label": "2",
+          "capacity": 1
+        },
+        {
+          "targetId": "order_3",
+          "label": "3",
+          "capacity": 1
+        }
+      ],
+      "correctAssignments": [
+        {
+          "tokenId": "creek_t2",
+          "targetId": "order_1"
+        },
+        {
+          "tokenId": "creek_t3",
+          "targetId": "order_2"
+        },
+        {
+          "tokenId": "creek_t1",
+          "targetId": "order_3"
+        }
+      ],
+      "useAllTokens": true,
+      "scoring": {
+        "totalPoints": 3,
+        "partialCreditRules": [
+          {
+            "points": 3,
+            "rule": "All required tokens placed in the supported target or order position."
+          },
+          {
+            "points": 2,
+            "rule": "Two required tokens placed correctly without exceeding target capacity."
+          },
+          {
+            "points": 1,
+            "rule": "One required token placed correctly without exceeding target capacity."
+          },
+          {
+            "points": 0,
+            "rule": "Wrong placement, unanswered required placement, extra distractor placement, or capacity exceeded."
+          }
+        ],
+        "scoringNotes": "Full credit requires every required token and no wrong target, presented-order shortcut, or capacity violation."
+      }
+    },
+    {
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "passageId": "pssa_psg_g3_the_map_in_the_station",
+      "passageTitle": "A Map Under the Bench",
+      "eligibleContent": "E03.B-K.1.1.2",
+      "ecSkillFamily": "informational_elements",
+      "reportingCategory": "B",
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "auditMetadata": {
+        "authoredIn": "PSSA_PR_4M_GRADE3_MG_DD",
+        "noDbWrite": true
+      },
+      "itemId": "pssa_dd_g3_map_01",
+      "itemType": "DRAG_DROP",
+      "interactionType": "DRAG_DROP",
+      "interactionSubtype": "category_chart",
+      "prompt": "Sort the details by how they help visitors compare the old town and the present town.",
+      "instructionText": "Drag each detail into the best bucket. Leave the extra detail out.",
+      "tokens": [
+        {
+          "tokenId": "map_t1",
+          "text": "Trolley tracks were gone.",
+          "isDistractor": false,
+          "groundedInPassage": true,
+          "evidenceQuote": "Some streets had new names, and the trolley tracks were gone.",
+          "rationale": "The passage supports this placement in changed.",
+          "validTargetIds": [
+            "changed"
+          ]
+        },
+        {
+          "tokenId": "map_t2",
+          "text": "The river helped compare the maps.",
+          "isDistractor": false,
+          "groundedInPassage": true,
+          "evidenceQuote": "Still, the river, the hill road, and the market square helped visitors compare past and present.",
+          "rationale": "The passage supports this placement in same.",
+          "validTargetIds": [
+            "same"
+          ]
+        },
+        {
+          "tokenId": "map_t3",
+          "text": "A date in the corner said 1928.",
+          "isDistractor": true,
+          "groundedInPassage": true,
+          "evidenceQuote": "A date in the corner said 1928.",
+          "rationale": "This passage detail is real but does not belong in any target for this task.",
+          "validTargetIds": []
+        },
+        {
+          "tokenId": "map_t4",
+          "text": "Some streets had new names.",
+          "isDistractor": false,
+          "groundedInPassage": true,
+          "evidenceQuote": "Some streets had new names, and the trolley tracks were gone.",
+          "rationale": "The passage supports this placement in changed.",
+          "validTargetIds": [
+            "changed"
+          ]
+        }
+      ],
+      "targets": [
+        {
+          "targetId": "changed",
+          "label": "Changed from past to present",
+          "capacity": 2
+        },
+        {
+          "targetId": "same",
+          "label": "Helped compare both maps",
+          "capacity": 1
+        }
+      ],
+      "correctAssignments": [
+        {
+          "tokenId": "map_t1",
+          "targetId": "changed"
+        },
+        {
+          "tokenId": "map_t4",
+          "targetId": "changed"
+        },
+        {
+          "tokenId": "map_t2",
+          "targetId": "same"
+        }
+      ],
+      "useAllTokens": false,
+      "scoring": {
+        "totalPoints": 3,
+        "partialCreditRules": [
+          {
+            "points": 3,
+            "rule": "All required tokens placed in the supported target or order position."
+          },
+          {
+            "points": 2,
+            "rule": "Two required tokens placed correctly without exceeding target capacity."
+          },
+          {
+            "points": 1,
+            "rule": "One required token placed correctly without exceeding target capacity."
+          },
+          {
+            "points": 0,
+            "rule": "Wrong placement, unanswered required placement, extra distractor placement, or capacity exceeded."
+          }
+        ],
+        "scoringNotes": "Full credit requires every required token and no wrong target, presented-order shortcut, or capacity violation."
+      }
+    },
+    {
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "passageId": "pssa_psg_g3_a_cooler_lunch_line",
+      "passageTitle": "The Bell That Saved Lunch",
+      "eligibleContent": "E03.B-K.1.1.3",
+      "ecSkillFamily": "informational_elements",
+      "reportingCategory": "B",
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "auditMetadata": {
+        "authoredIn": "PSSA_PR_4M_GRADE3_MG_DD",
+        "noDbWrite": true
+      },
+      "itemId": "pssa_dd_g3_lunch_01",
+      "itemType": "DRAG_DROP",
+      "interactionType": "DRAG_DROP",
+      "interactionSubtype": "order",
+      "prompt": "Put the lunch-line work in the order the class followed.",
+      "instructionText": "Drag each event into the correct order.",
+      "tokens": [
+        {
+          "tokenId": "lunch_t1",
+          "text": "Milk moved to the first table.",
+          "isDistractor": false,
+          "groundedInPassage": true,
+          "evidenceQuote": "Milk moved to the first table, before trays.",
+          "rationale": "The passage supports this placement in order_3.",
+          "validTargetIds": [
+            "order_3"
+          ]
+        },
+        {
+          "tokenId": "lunch_t2",
+          "text": "Students counted how many times the line paused.",
+          "isDistractor": false,
+          "groundedInPassage": true,
+          "evidenceQuote": "They counted how many times the line paused.",
+          "rationale": "The passage supports this placement in order_1.",
+          "validTargetIds": [
+            "order_1"
+          ]
+        },
+        {
+          "tokenId": "lunch_t3",
+          "text": "The class noticed two slow spots.",
+          "isDistractor": false,
+          "groundedInPassage": true,
+          "evidenceQuote": "The class noticed two slow spots.",
+          "rationale": "The passage supports this placement in order_2.",
+          "validTargetIds": [
+            "order_2"
+          ]
+        }
+      ],
+      "targets": [
+        {
+          "targetId": "order_1",
+          "label": "1",
+          "capacity": 1
+        },
+        {
+          "targetId": "order_2",
+          "label": "2",
+          "capacity": 1
+        },
+        {
+          "targetId": "order_3",
+          "label": "3",
+          "capacity": 1
+        }
+      ],
+      "correctAssignments": [
+        {
+          "tokenId": "lunch_t2",
+          "targetId": "order_1"
+        },
+        {
+          "tokenId": "lunch_t3",
+          "targetId": "order_2"
+        },
+        {
+          "tokenId": "lunch_t1",
+          "targetId": "order_3"
+        }
+      ],
+      "useAllTokens": true,
+      "scoring": {
+        "totalPoints": 3,
+        "partialCreditRules": [
+          {
+            "points": 3,
+            "rule": "All required tokens placed in the supported target or order position."
+          },
+          {
+            "points": 2,
+            "rule": "Two required tokens placed correctly without exceeding target capacity."
+          },
+          {
+            "points": 1,
+            "rule": "One required token placed correctly without exceeding target capacity."
+          },
+          {
+            "points": 0,
+            "rule": "Wrong placement, unanswered required placement, extra distractor placement, or capacity exceeded."
+          }
+        ],
+        "scoringNotes": "Full credit requires every required token and no wrong target, presented-order shortcut, or capacity violation."
+      }
+    },
+    {
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "passageId": "pssa_psg_g3_the_mural_plan",
+      "passageTitle": "Blue Paint for Saturday",
+      "eligibleContent": "E03.A-K.1.1.2",
+      "ecSkillFamily": "literature_elements",
+      "reportingCategory": "A",
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "auditMetadata": {
+        "authoredIn": "PSSA_PR_4M_GRADE3_MG_DD",
+        "noDbWrite": true
+      },
+      "itemId": "pssa_dd_g3_mural_01",
+      "itemType": "DRAG_DROP",
+      "interactionType": "DRAG_DROP",
+      "interactionSubtype": "category_chart",
+      "prompt": "Sort the details by how they show the mural story's message.",
+      "instructionText": "Drag each detail into the best bucket. Leave the extra detail out.",
+      "tokens": [
+        {
+          "tokenId": "mural_t1",
+          "text": "Grandpa said to turn mistakes into ripples.",
+          "isDistractor": false,
+          "groundedInPassage": true,
+          "evidenceQuote": "Turn mistakes into ripples",
+          "rationale": "The passage supports this placement in mistake_to_art.",
+          "validTargetIds": [
+            "mistake_to_art"
+          ]
+        },
+        {
+          "tokenId": "mural_t2",
+          "text": "The fish seemed to move.",
+          "isDistractor": false,
+          "groundedInPassage": true,
+          "evidenceQuote": "But the fish seemed to move, and the wall no longer looked empty.",
+          "rationale": "The passage supports this placement in good_result.",
+          "validTargetIds": [
+            "good_result"
+          ]
+        },
+        {
+          "tokenId": "mural_t3",
+          "text": "The narrator had a purple soccer bruise.",
+          "isDistractor": true,
+          "groundedInPassage": true,
+          "evidenceQuote": "my wrist still had a purple soccer bruise",
+          "rationale": "This passage detail is real but does not belong in any target for this task.",
+          "validTargetIds": []
+        },
+        {
+          "tokenId": "mural_t4",
+          "text": "The wall no longer looked empty.",
+          "isDistractor": false,
+          "groundedInPassage": true,
+          "evidenceQuote": "the wall no longer looked empty",
+          "rationale": "The passage supports this placement in good_result.",
+          "validTargetIds": [
+            "good_result"
+          ]
+        }
+      ],
+      "targets": [
+        {
+          "targetId": "mistake_to_art",
+          "label": "Mistake changed into art",
+          "capacity": 1
+        },
+        {
+          "targetId": "good_result",
+          "label": "Good result of the change",
+          "capacity": 2
+        }
+      ],
+      "correctAssignments": [
+        {
+          "tokenId": "mural_t1",
+          "targetId": "mistake_to_art"
+        },
+        {
+          "tokenId": "mural_t2",
+          "targetId": "good_result"
+        },
+        {
+          "tokenId": "mural_t4",
+          "targetId": "good_result"
+        }
+      ],
+      "useAllTokens": false,
+      "scoring": {
+        "totalPoints": 3,
+        "partialCreditRules": [
+          {
+            "points": 3,
+            "rule": "All required tokens placed in the supported target or order position."
+          },
+          {
+            "points": 2,
+            "rule": "Two required tokens placed correctly without exceeding target capacity."
+          },
+          {
+            "points": 1,
+            "rule": "One required token placed correctly without exceeding target capacity."
+          },
+          {
+            "points": 0,
+            "rule": "Wrong placement, unanswered required placement, extra distractor placement, or capacity exceeded."
+          }
+        ],
+        "scoringNotes": "Full credit requires every required token and no wrong target, presented-order shortcut, or capacity violation."
+      }
+    },
+    {
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "passageId": "pssa_psg_g3_the_cart_that_would_not_turn",
+      "passageTitle": "The Cart That Would Not Turn",
+      "eligibleContent": "E03.B-K.1.1.3",
+      "ecSkillFamily": "informational_elements",
+      "reportingCategory": "B",
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "auditMetadata": {
+        "authoredIn": "PSSA_PR_4M_GRADE3_MG_DD",
+        "noDbWrite": true
+      },
+      "itemId": "pssa_dd_g3_cart_01",
+      "itemType": "DRAG_DROP",
+      "interactionType": "DRAG_DROP",
+      "interactionSubtype": "order",
+      "prompt": "Put the cart repair steps in the order the passage explains.",
+      "instructionText": "Drag each step into the correct order.",
+      "tokens": [
+        {
+          "tokenId": "cart_t1",
+          "text": "Add one drop of oil.",
+          "isDistractor": false,
+          "groundedInPassage": true,
+          "evidenceQuote": "Then the class added one drop of oil where the metal pin met the wheel.",
+          "rationale": "The passage supports this placement in order_3.",
+          "validTargetIds": [
+            "order_3"
+          ]
+        },
+        {
+          "tokenId": "cart_t2",
+          "text": "Wipe the axle with a damp cloth.",
+          "isDistractor": false,
+          "groundedInPassage": true,
+          "evidenceQuote": "A student wiped the axle with a damp cloth.",
+          "rationale": "The passage supports this placement in order_2.",
+          "validTargetIds": [
+            "order_2"
+          ]
+        },
+        {
+          "tokenId": "cart_t3",
+          "text": "Snip the yarn with small scissors.",
+          "isDistractor": false,
+          "groundedInPassage": true,
+          "evidenceQuote": "A teacher snipped the yarn with small scissors.",
+          "rationale": "The passage supports this placement in order_1.",
+          "validTargetIds": [
+            "order_1"
+          ]
+        }
+      ],
+      "targets": [
+        {
+          "targetId": "order_1",
+          "label": "1",
+          "capacity": 1
+        },
+        {
+          "targetId": "order_2",
+          "label": "2",
+          "capacity": 1
+        },
+        {
+          "targetId": "order_3",
+          "label": "3",
+          "capacity": 1
+        }
+      ],
+      "correctAssignments": [
+        {
+          "tokenId": "cart_t3",
+          "targetId": "order_1"
+        },
+        {
+          "tokenId": "cart_t2",
+          "targetId": "order_2"
+        },
+        {
+          "tokenId": "cart_t1",
+          "targetId": "order_3"
+        }
+      ],
+      "useAllTokens": true,
+      "scoring": {
+        "totalPoints": 3,
+        "partialCreditRules": [
+          {
+            "points": 3,
+            "rule": "All required tokens placed in the supported target or order position."
+          },
+          {
+            "points": 2,
+            "rule": "Two required tokens placed correctly without exceeding target capacity."
+          },
+          {
+            "points": 1,
+            "rule": "One required token placed correctly without exceeding target capacity."
+          },
+          {
+            "points": 0,
+            "rule": "Wrong placement, unanswered required placement, extra distractor placement, or capacity exceeded."
+          }
+        ],
+        "scoringNotes": "Full credit requires every required token and no wrong target, presented-order shortcut, or capacity violation."
+      }
+    }
+  ]
+}

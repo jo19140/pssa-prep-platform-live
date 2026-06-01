@@ -1,0 +1,3 @@
+tranche,interactionType,itemCount,correctColumnPatterns,correctAssignmentPatterns,orderPatterns,result,severity,notes
+grade3_pr4m_matching_grid,MATCHING_GRID,5,"0,1,2:1 1,0,2:1 1,2,0:1 2,0,1:1 2,1,0:1",col0:5 col1:5 col2:5,,PASS,INFO,PSSA_MATCHING_GRID_SHORTCUT_DISTRIBUTION passed.
+grade3_pr4m_drag_drop,DRAG_DROP,5,,"0>0,1>1,3>1:1 0>0,3>0,1>1:1","1,2,0:2 2,1,0:1",PASS,INFO,PSSA_DRAG_DROP_SHORTCUT_DISTRIBUTION passed.
