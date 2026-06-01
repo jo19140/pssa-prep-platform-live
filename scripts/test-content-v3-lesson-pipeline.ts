@@ -121,6 +121,70 @@ async function main() {
   });
   assert.equal(approvedReady.approvable, true, approvedReady.blockers.join("\n"));
 
+  // --- PR #36-gates conformance: pseudoword real-word + homophone collisions ---
+  const kape = validatePseudowordCandidate("kape", "a_e");
+  assert.equal(kape.valid, false);
+  assert.equal(kape.collidesWith, "cape");
+  const drane = validatePseudowordCandidate("drane", "a_e");
+  assert.equal(drane.valid, false);
+  assert.equal(drane.collidesWith, "drain");
+  const brade = validatePseudowordCandidate("brade", "a_e");
+  assert.equal(brade.valid, false);
+  assert.equal(brade.collidesWith, "braid");
+  for (const word of ["zake", "mave", "pame", "vade", "sape", "nace", "gake", "tave"]) {
+    assert.equal(validatePseudowordCandidate(word, "a_e").valid, true, `${word} should be a valid pseudoword`);
+  }
+
+  const findCheck = (mutated: typeof draft, ruleId: string) =>
+    auditGeneratedLessonDraft(mutated).checks.find((entry) => entry.ruleId === ruleId);
+  const replacePart = (partNumber: number, contentJson: Record<string, unknown>) => ({
+    ...draft,
+    parts: draft.parts.map((part) => (part.partNumber === partNumber ? { ...part, contentJson: { ...part.contentJson, ...contentJson } } : part)),
+  });
+  const lines = draft.parts.find((part) => part.partNumber === 3)!.contentJson.contrastiveLines as Array<{ lineNumber: number; role: string; words: string[] }>;
+
+  // r-controlled word in Part 5
+  const rControlled = replacePart(5, { sentences: ["The cake is a gift for a pal."] });
+  assert.equal(findCheck(rControlled, "LESSON_PART5_NO_RCONTROLLED")?.result, "FAIL");
+
+  // silent-e exception word tagged as target
+  const exceptionDraft = {
+    ...draft,
+    parts: draft.parts.map((part) =>
+      part.partNumber === 3
+        ? { ...part, wordTagsJson: { words: [...(part.wordTagsJson as { words: unknown[] }).words, { word: "have", tag: "target" }] } }
+        : part,
+    ),
+  };
+  assert.equal(findCheck(exceptionDraft, "LESSON_PART4_SILENT_E_EXCEPTION_AS_HEART")?.result, "FAIL");
+
+  // Part 3 count gates
+  const fewRealWords = replacePart(3, {
+    contrastiveLines: [
+      { lineNumber: 1, role: "target_real_words", words: ["cake", "game", "make"] },
+      { lineNumber: 2, role: "contrastive_target_vs_review", words: ["cap", "cape", "man"] },
+      { lineNumber: 3, role: "cumulative_review", words: ["ran", "lake", "hand"] },
+      lines.find((line) => line.role === "target_pseudowords"),
+    ],
+  });
+  assert.equal(findCheck(fewRealWords, "LESSON_PART3_REAL_WORD_COUNT")?.result, "FAIL");
+
+  const fewPseudowords = replacePart(3, {
+    contrastiveLines: [
+      ...lines.filter((line) => line.role !== "target_pseudowords"),
+      { lineNumber: 4, role: "target_pseudowords", words: ["zake", "mave", "pame"] },
+    ],
+  });
+  assert.equal(findCheck(fewPseudowords, "LESSON_PART3_PSEUDOWORD_COUNT")?.result, "FAIL");
+
+  // Part 8 broadened yes/no stems
+  for (const yesNo of ["Can you tell me about Dave?", "Would Dave make a cake?", "Has Jane seen the lake?"]) {
+    const ynDraft = replacePart(8, {
+      questions: [{ question: yesNo }, { question: "Why did Dave bake the cake?" }, { question: "Tell me about the lake." }],
+    });
+    assert.equal(findCheck(ynDraft, "LESSON_PART8_OPEN_ENDED")?.result, "FAIL", `"${yesNo}" should fail open-ended`);
+  }
+
   console.log("content-v3 lesson pipeline checks passed");
 }
 

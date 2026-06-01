@@ -29,6 +29,7 @@ export function auditGeneratedLessonDraft(draft: GeneratedLessonDraft): LessonGe
     ...auditPart5(draft),
     ...auditPart6(draft),
     ...auditPart8(draft),
+    ...auditSilentEExceptions(draft),
   ];
   const lessonLike = {
     phasePositionId: draft.phasePositionId,
@@ -85,11 +86,15 @@ function auditPart3(draft: GeneratedLessonDraft) {
   const lines = Array.isArray(part?.contentJson.contrastiveLines) ? part.contentJson.contrastiveLines as any[] : [];
   const pseudowords = strings(lines.find((line) => line.role === "target_pseudowords")?.words);
   const validations = validatePseudowordSet(pseudowords, draft.targetPattern);
+  const realWords = lines.filter((line) => Number(line.lineNumber) >= 1 && Number(line.lineNumber) <= 3).flatMap((line) => strings(line.words));
+  const invalidPseudowords = validations.filter((entry) => !entry.valid);
   return [
     check("LESSON_PART3_CONTRASTIVE_LINES", lines.length === 4 && !lines.some((line) => line.lineNumber === 5), "BLOCKER", "Part 3 must use four contrastive lines and no fifth line."),
+    check("LESSON_PART3_REAL_WORD_COUNT", realWords.length >= 15 && realWords.length <= 20, "BLOCKER", `Part 3 lines 1-3 have ${realWords.length} real words (need 15-20).`),
+    check("LESSON_PART3_PSEUDOWORD_COUNT", pseudowords.length >= 8 && pseudowords.length <= 10, "BLOCKER", `Part 3 has ${pseudowords.length} pseudowords (need 8-10).`),
     check("LESSON_PSEUDOWORDS_TARGET_ONLY", validations.every((entry) => wordMatchesPattern(entry.pseudoword, draft.targetPattern)), "BLOCKER", "Part 3 pseudowords must use only the target pattern."),
     check("LESSON_PSEUDOWORDS_HAVE_EXPECTED_PRONUNCIATION", validations.every((entry) => entry.expectedPronunciation), "BLOCKER", "Pseudowords require expectedPronunciation metadata."),
-    check("LESSON_PSEUDOWORDS_NOT_REAL_MISSPELLINGS", validations.every((entry) => entry.valid), "BLOCKER", validations.flatMap((entry) => entry.issues).join("; ") || "Pseudowords passed validation."),
+    check("LESSON_PSEUDOWORDS_NOT_REAL_MISSPELLINGS", invalidPseudowords.length === 0, "BLOCKER", invalidPseudowords.length ? invalidPseudowords.map((entry) => `${entry.pseudoword}${entry.collidesWith ? ` -> ${entry.collidesWith}` : ""}: ${entry.reason ?? entry.issues.join(", ")}`).join("; ") : "Pseudowords passed validation."),
     check("LESSON_WORDS_ALL_TAGGED", wordTags(part).length >= lines.flatMap((line) => strings(line.words)).length, "BLOCKER", "Part 3 words require tags."),
   ];
 }
@@ -113,11 +118,23 @@ function auditPart4And7(draft: GeneratedLessonDraft) {
 function auditPart5(draft: GeneratedLessonDraft) {
   const part = partNumber(draft, 5);
   const sentences = strings(part?.contentJson.sentences);
+  const rControlled = rControlledWords(sentences);
   return [
     check("LESSON_SENTENCE_COUNT", sentences.length >= 5 && sentences.length <= 8, "BLOCKER", `Part 5 has ${sentences.length} sentences.`),
     check("LESSON_NO_UNCLASSIFIED_WORDS", strings(part?.contentJson.unclassifiedWords).length === 0, "BLOCKER", "Part 5 sentence words must all classify."),
+    // Classifier-independent: r-controlled words (for, are, car, her, ...) are excluded at Phase 3 Entry
+    // even though the closed-syllable classifier would label e.g. "for" as a prerequisite.
+    check("LESSON_PART5_NO_RCONTROLLED", rControlled.length === 0, "BLOCKER", rControlled.length ? `Part 5 contains r-controlled words (not taught yet): ${Array.from(new Set(rControlled)).join(", ")}` : "No r-controlled words in Part 5."),
     check("LESSON_WORDS_ALL_TAGGED", wordTags(part).length > 0, "BLOCKER", "Part 5 requires word tags."),
   ];
+}
+
+/** Tokens whose vowel is immediately followed by an `r` in the same word (ar/er/ir/or/ur). */
+function rControlledWords(sentences: string[]): string[] {
+  return sentences
+    .flatMap((sentence) => sentence.toLowerCase().split(/[^a-z]+/))
+    .filter(Boolean)
+    .filter((word) => /[aeiou]r/.test(word));
 }
 
 function auditPart6(draft: GeneratedLessonDraft) {
@@ -128,10 +145,34 @@ function auditPart6(draft: GeneratedLessonDraft) {
   ];
 }
 
+// Full yes/no auxiliary/copula stem list, word-boundary anchored at the start of the question.
+const YES_NO_STEM = /^(is|are|am|was|were|do|does|did|have|has|had|can|could|will|would|should|may|might)\b/i;
+
 function auditPart8(draft: GeneratedLessonDraft) {
   const questions = Array.isArray(partNumber(draft, 8)?.contentJson.questions) ? partNumber(draft, 8)?.contentJson.questions as any[] : [];
+  const yesNo = questions.filter((entry) => YES_NO_STEM.test(String(entry.question || "").trim()));
   return [
-    check("LESSON_PART8_OPEN_ENDED", questions.length >= 3 && questions.every((entry) => !/^is |^are |^did |^do |^does |^was |^were /i.test(String(entry.question || ""))), "WARNING", "Part 8 questions should be open-ended."),
+    check("LESSON_PART8_OPEN_ENDED", questions.length >= 3 && yesNo.length === 0, "WARNING", yesNo.length ? `Part 8 has yes/no questions: ${yesNo.map((entry) => `"${entry.question}"`).join(", ")}` : "Part 8 questions are open-ended."),
+  ];
+}
+
+const SILENT_E_EXCEPTION_WORDS = new Set(["have", "give", "live", "come", "some", "done", "gone", "love"]);
+
+/**
+ * Silent-e *exception* words (short-vowel VCe) must be tagged `heart`, never `target`.
+ * The classifier's a_e/i_e/o_e regex would otherwise match e.g. "have" and mis-decode it.
+ */
+function auditSilentEExceptions(draft: GeneratedLessonDraft) {
+  const offenders: string[] = [];
+  for (const part of draft.parts) {
+    for (const tagged of wordTags(part)) {
+      const word = String(tagged?.word ?? "").toLowerCase();
+      const category = String(tagged?.tag ?? tagged?.category ?? "").toLowerCase();
+      if (SILENT_E_EXCEPTION_WORDS.has(word) && category === "target") offenders.push(word);
+    }
+  }
+  return [
+    check("LESSON_PART4_SILENT_E_EXCEPTION_AS_HEART", offenders.length === 0, "BLOCKER", offenders.length ? `Silent-e exception words tagged as target (must be heart): ${Array.from(new Set(offenders)).join(", ")}` : "No silent-e exception words mis-tagged as target."),
   ];
 }
 
