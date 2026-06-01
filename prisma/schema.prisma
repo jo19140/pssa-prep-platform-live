@@ -54,6 +54,57 @@ enum MasteryLevel {
   MASTERED
 }
 
+enum PssaSourceType {
+  internal_original
+  owned
+  open_license
+  PDE_SAMPLER
+  OFFICIAL_RELEASED_ITEM
+  legacy_generated
+  unknown
+}
+
+enum PssaLicenseStatus {
+  cleared_internal_original
+  cleared_owned
+  cleared_open_license
+  review_required
+  unresolved
+}
+
+enum PssaReviewStatus {
+  DRAFT
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum PssaItemStatus {
+  candidate
+  pilot_ready
+  active
+  retired
+}
+
+enum PssaAlignmentStatus {
+  NEEDS_CROSSWALK
+  NEEDS_REVIEW
+  ALIGNED
+  REJECTED
+}
+
+enum PssaAuditSeverity {
+  INFO
+  WARNING
+  BLOCKER
+}
+
+enum PssaAuditResultStatus {
+  PASS
+  FAIL
+  SKIP
+}
+
 model User {
   id              String          @id @default(cuid())
   email           String          @unique
@@ -327,6 +378,249 @@ model AssessmentQuestion {
   assessment     Assessment @relation(fields: [assessmentId], references: [id], onDelete: Cascade)
 
   @@unique([assessmentId, questionNo])
+}
+
+model PssaGenerationBatch {
+  id              String   @id @default(cuid())
+  batchKey        String   @unique
+  purpose         String
+  generatorName   String?
+  generatorVersion String?
+  sourceType      PssaSourceType @default(unknown)
+  status          String   @default("DRAFT")
+  provenanceJson  Json
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  items       PssaItem[]
+  lessons     PssaLesson[]
+  linterRuns  PssaLinterRun[]
+
+  @@index([purpose, createdAt])
+}
+
+model PssaPassage {
+  id                   String            @id @default(cuid())
+  title                String
+  gradeLevel           Int
+  subject              String            @default("ELA")
+  passageType          String
+  text                 String            @db.Text
+  wordCount            Int
+  sourceType           PssaSourceType    @default(unknown)
+  sourceName           String?
+  sourceCitation       String?           @db.Text
+  licenseStatus        PssaLicenseStatus @default(unresolved)
+  commercialUseAllowed Boolean           @default(false)
+  needsLegalReview     Boolean           @default(true)
+  reviewStatus         PssaReviewStatus  @default(PENDING)
+  itemStatus           PssaItemStatus    @default(candidate)
+  approvedAt           DateTime?
+  reviewedBy           String?
+  provenanceJson       Json
+  retiredAt            DateTime?
+  createdAt            DateTime          @default(now())
+  updatedAt            DateTime          @updatedAt
+
+  items      PssaItem[]
+  reviewLogs PssaReviewLog[]
+
+  @@index([gradeLevel, subject, reviewStatus, itemStatus])
+  @@index([sourceType, licenseStatus])
+  @@index([retiredAt])
+}
+
+model PssaItem {
+  id                         String              @id @default(cuid())
+  module                     TestPrepModule      @default(PSSA)
+  subject                    String              @default("ELA")
+  gradeLevel                 Int
+  standardCode               String
+  assessmentAnchor           String?
+  eligibleContent            String?
+  reportingCategory          String?
+  dokLevel                   Int?
+  itemType                   String
+  skill                      String
+  difficultyBand             String?
+  studentFacingPrompt        String              @db.Text
+  studentFacingStimulus      String?             @db.Text
+  answerChoicesJson          Json?
+  correctAnswer              Json?
+  correctIndex               Int?
+  expectedResponseJson       Json?
+  scoringRubricJson          Json?
+  distractorRationalesJson   Json?
+  sourceType                 PssaSourceType      @default(unknown)
+  sourceName                 String?
+  sourceCitation             String?             @db.Text
+  licenseStatus              PssaLicenseStatus   @default(unresolved)
+  commercialUseAllowed       Boolean             @default(false)
+  needsLegalReview           Boolean             @default(true)
+  reviewStatus               PssaReviewStatus    @default(PENDING)
+  itemStatus                 PssaItemStatus      @default(candidate)
+  alignmentStatus            PssaAlignmentStatus @default(NEEDS_CROSSWALK)
+  approvalEligible           Boolean             @default(false)
+  approvedAt                 DateTime?
+  reviewedBy                 String?
+  studentPreviewJson         Json?
+  generationBatchId          String?
+  passageId                  String?
+  provenanceJson             Json
+  retiredAt                  DateTime?
+  createdAt                  DateTime            @default(now())
+  updatedAt                  DateTime            @updatedAt
+
+  generationBatch PssaGenerationBatch? @relation(fields: [generationBatchId], references: [id], onDelete: SetNull)
+  passage         PssaPassage?         @relation(fields: [passageId], references: [id], onDelete: SetNull)
+  reviewLogs      PssaReviewLog[]
+  auditResults    PssaAuditResult[]
+  practiceLessons PssaLesson[]         @relation("PssaLessonPracticeItems")
+  exitTicketLessons PssaLesson[]       @relation("PssaLessonExitTicketItems")
+
+  @@index([gradeLevel, subject, reviewStatus, itemStatus])
+  @@index([standardCode, assessmentAnchor, eligibleContent])
+  @@index([sourceType, licenseStatus])
+  @@index([alignmentStatus, approvalEligible])
+  @@index([generationBatchId])
+  @@index([passageId])
+  @@index([retiredAt])
+}
+
+model PssaLesson {
+  id                 String            @id @default(cuid())
+  title              String
+  gradeLevel         Int
+  subject            String            @default("ELA")
+  standardCode       String
+  assessmentAnchor   String?
+  eligibleContent    String?
+  objective          String            @db.Text
+  lessonPartsJson    Json
+  sourceType         PssaSourceType    @default(unknown)
+  licenseStatus      PssaLicenseStatus @default(unresolved)
+  reviewStatus       PssaReviewStatus  @default(PENDING)
+  itemStatus         PssaItemStatus    @default(candidate)
+  alignmentStatus    PssaAlignmentStatus @default(NEEDS_CROSSWALK)
+  approvalEligible   Boolean           @default(false)
+  approvedAt         DateTime?
+  reviewedBy         String?
+  generationBatchId  String?
+  provenanceJson     Json
+  retiredAt          DateTime?
+  createdAt          DateTime          @default(now())
+  updatedAt          DateTime          @updatedAt
+
+  generationBatch PssaGenerationBatch? @relation(fields: [generationBatchId], references: [id], onDelete: SetNull)
+  practiceItems   PssaItem[]           @relation("PssaLessonPracticeItems")
+  exitTicketItems PssaItem[]           @relation("PssaLessonExitTicketItems")
+  reviewLogs      PssaReviewLog[]
+
+  @@index([gradeLevel, subject, reviewStatus, itemStatus])
+  @@index([standardCode, assessmentAnchor, eligibleContent])
+  @@index([sourceType, licenseStatus])
+  @@index([alignmentStatus, approvalEligible])
+  @@index([generationBatchId])
+  @@index([retiredAt])
+}
+
+model PssaStandardsCrosswalk {
+  id                         String   @id @default(cuid())
+  subject                    String
+  gradeLevel                 Int
+  reportingCategory          String
+  reportingCategoryTitle     String
+  assessmentAnchor           String
+  assessmentAnchorTitle      String
+  anchorDescriptor           String
+  anchorDescriptorText       String   @db.Text
+  eligibleContent            String
+  eligibleContentText        String   @db.Text
+  dokCeiling                 String?
+  primaryPaCoreStandardCode  String?
+  mappingGranularity         String
+  mappingConfidence          String
+  sourceDocument             String
+  sourceVersionYear          Int
+  sourceUpdatedYear          Int
+  sourceAnomalyJson          Json?
+  createdAt                  DateTime @default(now())
+  updatedAt                  DateTime @updatedAt
+
+  paCoreStandards PssaCrosswalkPaCoreStandard[]
+
+  @@unique([subject, gradeLevel, eligibleContent, sourceVersionYear])
+  @@index([subject, gradeLevel, assessmentAnchor])
+  @@index([subject, gradeLevel, reportingCategory])
+  @@index([eligibleContent])
+}
+
+model PssaCrosswalkPaCoreStandard {
+  id           String   @id @default(cuid())
+  crosswalkId  String
+  standardCode String
+  createdAt    DateTime @default(now())
+
+  crosswalk PssaStandardsCrosswalk @relation(fields: [crosswalkId], references: [id], onDelete: Cascade)
+
+  @@unique([crosswalkId, standardCode])
+  @@index([standardCode])
+}
+
+model PssaLinterRun {
+  id                String   @id @default(cuid())
+  batchId           String?
+  runKey            String   @unique
+  sourceBundlePath  String?
+  totalResults      Int      @default(0)
+  blockerCount      Int      @default(0)
+  createdAt         DateTime @default(now())
+
+  batch   PssaGenerationBatch? @relation(fields: [batchId], references: [id], onDelete: SetNull)
+  results PssaAuditResult[]
+
+  @@index([batchId, createdAt])
+}
+
+model PssaAuditResult {
+  id            String                @id @default(cuid())
+  itemId        String
+  linterRunId   String
+  batchId       String?
+  ruleId        String
+  severity      PssaAuditSeverity
+  result        PssaAuditResultStatus
+  message       String                @db.Text
+  evidenceJson  Json?
+  createdAt     DateTime              @default(now())
+
+  item      PssaItem       @relation(fields: [itemId], references: [id], onDelete: Cascade)
+  linterRun PssaLinterRun  @relation(fields: [linterRunId], references: [id], onDelete: Cascade)
+
+  @@unique([itemId, linterRunId, ruleId])
+  @@index([itemId, result, severity])
+  @@index([batchId, ruleId])
+  @@index([linterRunId])
+}
+
+model PssaReviewLog {
+  id             String   @id @default(cuid())
+  itemId         String?
+  passageId      String?
+  lessonId       String?
+  action         String
+  reviewerUserId String?
+  notes          String?  @db.Text
+  editDiffJson   Json?
+  createdAt      DateTime @default(now())
+
+  item    PssaItem?    @relation(fields: [itemId], references: [id], onDelete: Cascade)
+  passage PssaPassage? @relation(fields: [passageId], references: [id], onDelete: Cascade)
+  lesson  PssaLesson?  @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+
+  @@index([itemId, createdAt])
+  @@index([passageId, createdAt])
+  @@index([lessonId, createdAt])
 }
 
 model Assignment {

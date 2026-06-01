@@ -4,6 +4,7 @@ import { z } from "zod";
 import { authOptions } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { applyStudentLessonReviewGate } from "@/lib/learningLessonPersistence";
+import { getStudentReadyPssaItems, getStudentReadyPssaPassages } from "@/lib/pssaGovernance";
 
 const sessionQuerySchema = z.object({
   assessmentId: z.string().min(1).max(128).nullable(),
@@ -24,16 +25,37 @@ export async function GET(req: Request) {
   if (!classIds.length) return NextResponse.json({ error: "Student is not enrolled in a class" }, { status: 404 });
 
   let assignment = assessmentId
-    ? await db.assignment.findFirst({ where: { assessmentId, classRoomId: { in: classIds }, status: "ASSIGNED" } })
+    ? await db.assignment.findFirst({ where: { assessmentId, classRoomId: { in: classIds }, status: "ASSIGNED" }, include: { assessment: true } })
     : null;
 
   if (!assignment) {
-    assignment = await db.assignment.findFirst({ where: { classRoomId: { in: classIds }, status: "ASSIGNED" }, orderBy: { createdAt: "desc" } });
+    assignment = await db.assignment.findFirst({ where: { classRoomId: { in: classIds }, status: "ASSIGNED" }, include: { assessment: true }, orderBy: { createdAt: "desc" } });
     assessmentId = assignment?.assessmentId || null;
   }
 
   if (!assignment || !assessmentId) return NextResponse.json({ error: "Assignment not found" }, { status: 404 });
 
+  const isPssaAssessment = assignment.assessment?.state === "PA" && assignment.assessment?.subject === "ELA";
+  const pssaAssessmentInclude = {
+    responses: { include: { essayEvaluation: true }, orderBy: { createdAt: "asc" as const } },
+    report: true,
+    assessment: true,
+    learningPath: {
+      include: {
+        items: { orderBy: { order: "asc" as const } },
+        lessons: {
+          orderBy: { priority: "asc" as const },
+          include: {
+            progress: { where: { userId: (session.user as any).id } },
+            items: { orderBy: { order: "asc" as const } },
+            steps: { orderBy: { order: "asc" as const } },
+            heroResourceLink: { select: { title: true, url: true, provider: true, description: true, tier: true, belowGradeLevel: true, aboveGradeLevel: true } },
+          },
+        },
+        session: { include: { responses: true, assessment: true } },
+      },
+    },
+  };
   const include = {
     responses: { include: { essayEvaluation: true }, orderBy: { createdAt: "asc" as const } },
     report: true,
@@ -54,11 +76,44 @@ export async function GET(req: Request) {
       },
     },
   };
-  let activeSession = await db.testSession.findFirst({ where: { userId: (session.user as any).id, assessmentId, submittedAt: null }, include, orderBy: { startedAt: "desc" } });
-  if (!activeSession) activeSession = await db.testSession.findFirst({ where: { userId: (session.user as any).id, assessmentId, submittedAt: { not: null } }, include, orderBy: { submittedAt: "desc" } });
-  if (!activeSession) activeSession = await db.testSession.create({ data: { userId: (session.user as any).id, assessmentId, currentQuestionNo: 1 }, include });
+  const sessionInclude = isPssaAssessment ? pssaAssessmentInclude : include;
+  let activeSession = await db.testSession.findFirst({ where: { userId: (session.user as any).id, assessmentId, submittedAt: null }, include: sessionInclude, orderBy: { startedAt: "desc" } });
+  if (!activeSession) activeSession = await db.testSession.findFirst({ where: { userId: (session.user as any).id, assessmentId, submittedAt: { not: null } }, include: sessionInclude, orderBy: { submittedAt: "desc" } });
+  if (!activeSession) activeSession = await db.testSession.create({ data: { userId: (session.user as any).id, assessmentId, currentQuestionNo: 1 }, include: sessionInclude });
   const standards = assignment.standards ? assignment.standards.split(",").map((item) => item.trim()).filter(Boolean) : [];
   const hydratedSession = activeSession as any;
+  if (isPssaAssessment) {
+    const [pssaItems, pssaPassages] = await Promise.all([
+      getStudentReadyPssaItems({
+        where: { gradeLevel: hydratedSession.assessment.grade, subject: hydratedSession.assessment.subject },
+        orderBy: [{ gradeLevel: "asc" }, { standardCode: "asc" }, { id: "asc" }],
+      }),
+      getStudentReadyPssaPassages({
+        where: { gradeLevel: hydratedSession.assessment.grade, subject: hydratedSession.assessment.subject },
+        orderBy: [{ title: "asc" }],
+      }),
+    ]);
+    if (!pssaItems.length) {
+      return NextResponse.json(
+        { error: "No student-ready Pennsylvania PSSA ELA content is available for this assignment." },
+        { status: 409 },
+      );
+    }
+    const questions = pssaItems.map(pssaItemToStudentQuestion);
+    return NextResponse.json({
+      sessionId: activeSession.id,
+      assessment: hydratedSession.assessment,
+      currentQuestionNo: activeSession.currentQuestionNo,
+      submittedAt: activeSession.submittedAt,
+      responses: hydratedSession.responses,
+      report: hydratedSession.report,
+      learningPath: withCrossGradeResources(hydratedSession.learningPath ? await applyStudentLessonReviewGate(hydratedSession.learningPath, (session.user as any).id) : null),
+      questions,
+      passages: pssaPassages,
+      standards,
+      assignmentType: assignment.assignmentType || "FULL",
+    });
+  }
   const passageByKey = new Map<string, any>((hydratedSession.assessment.passages || []).map((passage: any) => [passage.passageKey, passage]));
   const questions = hydratedSession.assessment.questions.map((question: any) => {
     const payload = question.questionPayload as any;
@@ -85,6 +140,19 @@ export async function GET(req: Request) {
     ? await applyStudentLessonReviewGate(hydratedSession.learningPath, (session.user as any).id)
     : null;
   return NextResponse.json({ sessionId: activeSession.id, assessment: hydratedSession.assessment, currentQuestionNo: activeSession.currentQuestionNo, submittedAt: activeSession.submittedAt, responses: hydratedSession.responses, report: hydratedSession.report, learningPath: withCrossGradeResources(learningPath), questions, passages: hydratedSession.assessment.passages, standards, assignmentType: assignment.assignmentType || "FULL" });
+}
+
+function pssaItemToStudentQuestion(item: any) {
+  const preview = item.studentPreviewJson && typeof item.studentPreviewJson === "object" ? item.studentPreviewJson : {};
+  return {
+    ...(preview as Record<string, unknown>),
+    id: item.id,
+    gradeLevel: item.gradeLevel,
+    type: item.itemType,
+    skill: item.skill,
+    standardCode: item.standardCode,
+    passageId: item.passageId,
+  };
 }
 
 function withCrossGradeResources(learningPath: any) {
