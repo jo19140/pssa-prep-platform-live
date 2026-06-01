@@ -14,6 +14,7 @@ import { generatePart6Encoding } from "./lessonParts/part6Encoding";
 import { generatePart7ConnectedText } from "./lessonParts/part7ConnectedText";
 import { generatePart8Comprehension } from "./lessonParts/part8Comprehension";
 import type { GeneratedLessonPart, LessonGeneratorContext } from "./lessonParts/types";
+import { validatePseudowordSet } from "./pseudowordValidator";
 
 export type LessonGenerationOptions = {
   phasePositionId: string;
@@ -87,7 +88,7 @@ export async function buildLessonGeneratorContext(phasePositionId: string, daily
     targetPattern: dailyTarget.code,
     targetWords: dailyTarget.exampleWords.slice(0, 5),
     reviewWords: [],
-    pseudowords: dailyTarget.exampleNonwords.slice(0, 8),
+    pseudowords: canonicalPseudowordsForTarget(dailyTarget.code, dailyTarget.exampleNonwords),
     heartWordsPreviewedThisLesson,
     heartWordsAssumedKnown,
     vocabularyWords,
@@ -234,4 +235,15 @@ function passageTargetsDailyTarget(passage: { sourceMetadataJson: unknown; conte
 
 function json(value: unknown): Prisma.InputJsonValue {
   return value as Prisma.InputJsonValue;
+}
+
+function canonicalPseudowordsForTarget(dailyTargetCode: string, seedNonwords: string[]) {
+  const firstEight = seedNonwords.slice(0, 8);
+  if (firstEight.length >= 8 && validatePseudowordSet(firstEight, dailyTargetCode).every((entry) => entry.valid)) {
+    return firstEight;
+  }
+  if (dailyTargetCode === "a_e") {
+    return ["zake", "mave", "pame", "vade", "sape", "nace", "gake", "tave"];
+  }
+  return firstEight;
 }

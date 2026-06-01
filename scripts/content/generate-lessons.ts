@@ -1,6 +1,8 @@
 import { db } from "@/lib/db";
 import { generateLessonsForTarget } from "@/lib/literacy/lessonGenerator";
 import type { FirstLookModelRunner } from "@/lib/content/aiFirstLookReviewer";
+import { auditPassage } from "@/lib/literacy/passageAudit";
+import type { Prisma } from "@prisma/client";
 
 async function main() {
   const args = parseArgs(process.argv.slice(2));
@@ -28,6 +30,9 @@ async function main() {
     where: { phasePositionId: phasePosition.id, code: dailyTargetArg },
   });
   if (!dailyTarget) throw new Error(`Daily target not found: ${dailyTargetArg} for ${phasePosition.label}`);
+  if (mockModel) {
+    await ensureMockApprovedPassage(phasePosition, dailyTarget);
+  }
 
   const result = await generateLessonsForTarget({
     phasePositionId: phasePosition.id,
@@ -64,6 +69,57 @@ const mockFirstLookRunner: FirstLookModelRunner = async ({ artifact, checklist }
     kidViewLintViolations: [],
   },
 });
+
+const MOCK_A_E_PASSAGE = `Dave has a cake. The cake is a gift to Jane. Jane came to the lake. Dave gave Jane the cake at the gate. "I made this cake," said Dave. Jane ate the cake. "This cake is the same as that cake," said Jane. They gave a big wave. Dave and Jane had fun. The lake was the best.`;
+
+async function ensureMockApprovedPassage(
+  phasePosition: { id: string; phaseNumber: number; label: string },
+  dailyTarget: {
+    id: string;
+    code: string;
+    targetPatternsJson: Prisma.JsonValue;
+    allowedPatternCodes: string[];
+    blockedPatternCodes: string[];
+  },
+) {
+  if (dailyTarget.code !== "a_e") return;
+  const existing = await db.passage.findFirst({
+    where: {
+      phasePositionId: phasePosition.id,
+      reviewStatus: "APPROVED",
+      retiredAt: null,
+      sourceMetadataJson: { path: ["dailyTargetCode"], equals: dailyTarget.code },
+    },
+  });
+  if (existing) return;
+  const audit = auditPassage(MOCK_A_E_PASSAGE, {
+    phasePosition,
+    dailyTarget,
+    heartWords: ["said", "was", "they", "I", "a", "the", "to"],
+    vocabularyAllowlist: ["gift", "pal"],
+  });
+  if (!audit.passesAuditGate) {
+    throw new Error(`Mock a_e passage failed audit: ${JSON.stringify(audit, null, 2)}`);
+  }
+  await db.passage.create({
+    data: {
+      source: "MOCK_APPROVED_FIXTURE",
+      sourceAttributionCode: "MOCK_APPROVED_FIXTURE",
+      phasePositionId: phasePosition.id,
+      text: MOCK_A_E_PASSAGE,
+      wordCount: audit.wordCount,
+      contentAuditJson: audit,
+      decodabilityScore: audit.decodabilityScore,
+      reviewStatus: "APPROVED",
+      reviewedAt: new Date(),
+      sourceMetadataJson: {
+        dailyTargetId: dailyTarget.id,
+        dailyTargetCode: dailyTarget.code,
+        mockFixture: true,
+      },
+    },
+  });
+}
 
 function parseArgs(args: string[]) {
   const parsed: Record<string, string | boolean> = {};
