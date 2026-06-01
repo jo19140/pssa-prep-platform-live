@@ -35,7 +35,9 @@ export const PHASE_3_ENTRY_TARGETS: DailyTargetSeed[] = [
     allowedPatternCodes: ["closed_short_a", "closed_short_i", "closed_short_o", "closed_short_u", "closed_short_e"],
     blockedPatternCodes: ["i_e", "o_e", "u_e", "e_e", "ai", "ay", "oa", "ee"],
     exampleWords: ["cake", "game", "make", "same", "tape"],
-    exampleNonwords: ["zake", "mave", "pame", "lathe", "nape"],
+    // 8 nonwords so Part 3 line 4 meets the 8-10 pseudoword count gate. All pass pseudowordValidator
+    // (a_e only, not real words, no homophone/near-spelling collisions).
+    exampleNonwords: ["zake", "mave", "pame", "vade", "sape", "nace", "gake", "tave"],
   },
   {
     code: "i_e",
