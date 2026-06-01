@@ -14,11 +14,13 @@ import { assertPssaItemTypeMockContract } from "./audit/pssa-item-type-contract"
 import { assertGrade3EbsrContract } from "./content/author-pssa-grade3-ebsr";
 import { assertGrade3TeiContract } from "./content/author-pssa-grade3-tei";
 import { assertGrade3MatchingGridDragDropContract } from "./content/author-pssa-grade3-matching-grid-drag-drop";
+import { assertGrade3ConventionsContract } from "./content/author-pssa-grade3-conventions";
 
 assertPssaItemTypeMockContract();
 assertGrade3EbsrContract();
 assertGrade3TeiContract();
 assertGrade3MatchingGridDragDropContract();
+assertGrade3ConventionsContract();
 
 function mcqFixture(id: string, correctIndex: number, choices: string[]) {
   return { id, itemType: "MCQ", correctIndex, answerChoicesJson: choices };

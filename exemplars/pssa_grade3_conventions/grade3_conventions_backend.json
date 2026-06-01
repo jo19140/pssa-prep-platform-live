@@ -1,0 +1,762 @@
+{
+  "generatedAt": "2026-06-01T04:37:45.211Z",
+  "noDbWrite": true,
+  "productionImportReady": false,
+  "items": [
+    {
+      "itemId": "pssa_conv_g3_dropdown_plural_01",
+      "eligibleContent": "E03.D.1.1.2",
+      "interactionType": "INLINE_DROPDOWN",
+      "interactionSubtype": "single_blank",
+      "targetConvention": "regular and irregular plural nouns",
+      "targetSubskill": "plural_nouns",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "passageId": null,
+      "ecSkillFamily": "conventions",
+      "reportingCategory": "D",
+      "pointValue": 1,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "scoring": {
+        "totalPoints": 1,
+        "partialCreditRules": [
+          {
+            "points": 1,
+            "rule": "The single correct convention response is selected or placed."
+          },
+          {
+            "points": 0,
+            "rule": "Any incorrect, ambiguous, missing, or extra response earns no credit."
+          }
+        ],
+        "scoringNotes": "Full credit requires the one defensible convention answer and no contradictory answer."
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_PR_4N_GRADE3_CONVENTIONS",
+        "noDbWrite": true
+      },
+      "stem": "Complete the sentence with the plural noun that fits.",
+      "baseTextWithBlanks": "The class packed three ___ for the nature walk.",
+      "blanks": [
+        {
+          "blankId": "plural_b1",
+          "position": 23,
+          "options": [
+            {
+              "text": "lunches",
+              "errorPattern": null,
+              "rationale": "correct plural with -es"
+            },
+            {
+              "text": "lunchs",
+              "errorPattern": "missing -es plural",
+              "rationale": "missing -es plural"
+            },
+            {
+              "text": "lunchies",
+              "errorPattern": "nonstandard plural ending",
+              "rationale": "nonstandard plural ending"
+            }
+          ],
+          "correctIndex": 0,
+          "targetSkill": "plural nouns",
+          "targetWordOrPhrase": "lunches",
+          "rationale": "correct plural with -es"
+        }
+      ]
+    },
+    {
+      "itemId": "pssa_conv_g3_dropdown_verbtense_01",
+      "eligibleContent": "E03.D.1.1.5",
+      "interactionType": "INLINE_DROPDOWN",
+      "interactionSubtype": "grammar_usage",
+      "targetConvention": "simple verb tense",
+      "targetSubskill": "verb_tense",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "passageId": null,
+      "ecSkillFamily": "conventions",
+      "reportingCategory": "D",
+      "pointValue": 1,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "scoring": {
+        "totalPoints": 1,
+        "partialCreditRules": [
+          {
+            "points": 1,
+            "rule": "The single correct convention response is selected or placed."
+          },
+          {
+            "points": 0,
+            "rule": "Any incorrect, ambiguous, missing, or extra response earns no credit."
+          }
+        ],
+        "scoringNotes": "Full credit requires the one defensible convention answer and no contradictory answer."
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_PR_4N_GRADE3_CONVENTIONS",
+        "noDbWrite": true
+      },
+      "stem": "Choose the verb phrase that keeps the sentence in future tense.",
+      "baseTextWithBlanks": "Tomorrow, our class ___ the bean plants again.",
+      "blanks": [
+        {
+          "blankId": "tense_b1",
+          "position": 20,
+          "options": [
+            {
+              "text": "measured",
+              "errorPattern": "past tense",
+              "rationale": "past tense"
+            },
+            {
+              "text": "will measure",
+              "errorPattern": null,
+              "rationale": "correct future tense"
+            },
+            {
+              "text": "measure",
+              "errorPattern": "present/base form",
+              "rationale": "present/base form"
+            }
+          ],
+          "correctIndex": 1,
+          "targetSkill": "simple future tense",
+          "targetWordOrPhrase": "will measure",
+          "rationale": "correct future tense"
+        }
+      ]
+    },
+    {
+      "itemId": "pssa_conv_g3_dropdown_compare_01",
+      "eligibleContent": "E03.D.1.1.7",
+      "interactionType": "INLINE_DROPDOWN",
+      "interactionSubtype": "grammar_usage",
+      "targetConvention": "comparative adjective",
+      "targetSubskill": "comparative_superlative",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "passageId": null,
+      "ecSkillFamily": "conventions",
+      "reportingCategory": "D",
+      "pointValue": 1,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "scoring": {
+        "totalPoints": 1,
+        "partialCreditRules": [
+          {
+            "points": 1,
+            "rule": "The single correct convention response is selected or placed."
+          },
+          {
+            "points": 0,
+            "rule": "Any incorrect, ambiguous, missing, or extra response earns no credit."
+          }
+        ],
+        "scoringNotes": "Full credit requires the one defensible convention answer and no contradictory answer."
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_PR_4N_GRADE3_CONVENTIONS",
+        "noDbWrite": true
+      },
+      "stem": "Choose the adjective form that correctly compares two things.",
+      "baseTextWithBlanks": "The second ramp was ___ than the first ramp.",
+      "blanks": [
+        {
+          "blankId": "compare_b1",
+          "position": 20,
+          "options": [
+            {
+              "text": "steepest",
+              "errorPattern": "superlative for three or more",
+              "rationale": "superlative for three or more"
+            },
+            {
+              "text": "more steep",
+              "errorPattern": "awkward comparative form",
+              "rationale": "awkward comparative form"
+            },
+            {
+              "text": "steeper",
+              "errorPattern": null,
+              "rationale": "correct comparative for two things"
+            }
+          ],
+          "correctIndex": 2,
+          "targetSkill": "comparative adjective",
+          "targetWordOrPhrase": "steeper",
+          "rationale": "correct comparative for two things"
+        }
+      ]
+    },
+    {
+      "itemId": "pssa_conv_g3_dropdown_titles_01",
+      "eligibleContent": "E03.D.1.2.1",
+      "interactionType": "INLINE_DROPDOWN",
+      "interactionSubtype": "punctuation_capitalization",
+      "targetConvention": "capitalization in titles",
+      "targetSubskill": "title_capitalization",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "passageId": null,
+      "ecSkillFamily": "conventions",
+      "reportingCategory": "D",
+      "pointValue": 1,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "scoring": {
+        "totalPoints": 1,
+        "partialCreditRules": [
+          {
+            "points": 1,
+            "rule": "The single correct convention response is selected or placed."
+          },
+          {
+            "points": 0,
+            "rule": "Any incorrect, ambiguous, missing, or extra response earns no credit."
+          }
+        ],
+        "scoringNotes": "Full credit requires the one defensible convention answer and no contradictory answer."
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_PR_4N_GRADE3_CONVENTIONS",
+        "noDbWrite": true
+      },
+      "stem": "Choose the correctly capitalized title.",
+      "baseTextWithBlanks": "Mia read the poem ___ before music class.",
+      "blanks": [
+        {
+          "blankId": "title_b1",
+          "position": 18,
+          "options": [
+            {
+              "text": "\"The Moon Over Maple Street\"",
+              "errorPattern": null,
+              "rationale": "correct title capitalization"
+            },
+            {
+              "text": "\"The moon over Maple Street\"",
+              "errorPattern": "important title word left lowercase",
+              "rationale": "important title word left lowercase"
+            },
+            {
+              "text": "\"The Moon over maple street\"",
+              "errorPattern": "proper noun and title word lowercase",
+              "rationale": "proper noun and title word lowercase"
+            }
+          ],
+          "correctIndex": 0,
+          "targetSkill": "capitalize words in titles",
+          "targetWordOrPhrase": "\"The Moon Over Maple Street\"",
+          "rationale": "correct title capitalization"
+        }
+      ]
+    },
+    {
+      "itemId": "pssa_conv_g3_hottext_spelling_01",
+      "eligibleContent": "E03.D.1.2.5",
+      "interactionType": "HOT_TEXT",
+      "interactionSubtype": "word_select",
+      "targetConvention": "grade-level spelling in context",
+      "targetSubskill": "spelling_in_context",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "passageId": null,
+      "ecSkillFamily": "conventions",
+      "reportingCategory": "D",
+      "pointValue": 1,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "scoring": {
+        "totalPoints": 1,
+        "partialCreditRules": [
+          {
+            "points": 1,
+            "rule": "The single correct convention response is selected or placed."
+          },
+          {
+            "points": 0,
+            "rule": "Any incorrect, ambiguous, missing, or extra response earns no credit."
+          }
+        ],
+        "scoringNotes": "Full credit requires the one defensible convention answer and no contradictory answer."
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_PR_4N_GRADE3_CONVENTIONS",
+        "noDbWrite": true
+      },
+      "prompt": "Choose the two misspelled words in the sentence.",
+      "instructionText": "Choose two words.",
+      "sourceSentence": "Our nieghbor broght fresh berries to the picnic.",
+      "selectableTokens": [
+        {
+          "tokenId": "spell_t1",
+          "text": "Our",
+          "tokenIndex": 0,
+          "isPunctuation": false,
+          "isCorrect": false,
+          "errorPattern": "correct word",
+          "rationale": "correct word"
+        },
+        {
+          "tokenId": "spell_t2",
+          "text": "nieghbor",
+          "tokenIndex": 1,
+          "isPunctuation": false,
+          "isCorrect": true,
+          "errorPattern": null,
+          "rationale": "transposed letters"
+        },
+        {
+          "tokenId": "spell_t3",
+          "text": "broght",
+          "tokenIndex": 2,
+          "isPunctuation": false,
+          "isCorrect": true,
+          "errorPattern": null,
+          "rationale": "missing vowel pattern"
+        },
+        {
+          "tokenId": "spell_t4",
+          "text": "fresh",
+          "tokenIndex": 3,
+          "isPunctuation": false,
+          "isCorrect": false,
+          "errorPattern": "correct word",
+          "rationale": "correct word"
+        },
+        {
+          "tokenId": "spell_t5",
+          "text": "berries",
+          "tokenIndex": 4,
+          "isPunctuation": false,
+          "isCorrect": false,
+          "errorPattern": "correct word",
+          "rationale": "correct word"
+        },
+        {
+          "tokenId": "spell_t6",
+          "text": "to",
+          "tokenIndex": 5,
+          "isPunctuation": false,
+          "isCorrect": false,
+          "errorPattern": "correct word",
+          "rationale": "correct word"
+        },
+        {
+          "tokenId": "spell_t7",
+          "text": "the",
+          "tokenIndex": 6,
+          "isPunctuation": false,
+          "isCorrect": false,
+          "errorPattern": "correct word",
+          "rationale": "correct word"
+        },
+        {
+          "tokenId": "spell_t8",
+          "text": "picnic",
+          "tokenIndex": 7,
+          "isPunctuation": false,
+          "isCorrect": false,
+          "errorPattern": "correct word",
+          "rationale": "correct word"
+        }
+      ],
+      "correctTokenIds": [
+        "spell_t2",
+        "spell_t3"
+      ],
+      "exactSelectionCount": 2
+    },
+    {
+      "itemId": "pssa_conv_g3_hottext_function_01",
+      "eligibleContent": "E03.D.1.1.1",
+      "interactionType": "HOT_TEXT",
+      "interactionSubtype": "word_select",
+      "targetConvention": "word function in a sentence",
+      "targetSubskill": "word_function",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "passageId": null,
+      "ecSkillFamily": "conventions",
+      "reportingCategory": "D",
+      "pointValue": 1,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "scoring": {
+        "totalPoints": 1,
+        "partialCreditRules": [
+          {
+            "points": 1,
+            "rule": "The single correct convention response is selected or placed."
+          },
+          {
+            "points": 0,
+            "rule": "Any incorrect, ambiguous, missing, or extra response earns no credit."
+          }
+        ],
+        "scoringNotes": "Full credit requires the one defensible convention answer and no contradictory answer."
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_PR_4N_GRADE3_CONVENTIONS",
+        "noDbWrite": true
+      },
+      "prompt": "Choose the adverb that tells how the fox moved.",
+      "instructionText": "Choose one word.",
+      "sourceSentence": "The fox quietly stepped around the sleeping dog.",
+      "selectableTokens": [
+        {
+          "tokenId": "function_t1",
+          "text": "The",
+          "tokenIndex": 0,
+          "isPunctuation": false,
+          "isCorrect": false,
+          "errorPattern": "article",
+          "rationale": "article"
+        },
+        {
+          "tokenId": "function_t2",
+          "text": "fox",
+          "tokenIndex": 1,
+          "isPunctuation": false,
+          "isCorrect": false,
+          "errorPattern": "noun",
+          "rationale": "noun"
+        },
+        {
+          "tokenId": "function_t3",
+          "text": "quietly",
+          "tokenIndex": 2,
+          "isPunctuation": false,
+          "isCorrect": true,
+          "errorPattern": null,
+          "rationale": "adverb tells how"
+        },
+        {
+          "tokenId": "function_t4",
+          "text": "stepped",
+          "tokenIndex": 3,
+          "isPunctuation": false,
+          "isCorrect": false,
+          "errorPattern": "verb",
+          "rationale": "verb"
+        },
+        {
+          "tokenId": "function_t5",
+          "text": "around",
+          "tokenIndex": 4,
+          "isPunctuation": false,
+          "isCorrect": false,
+          "errorPattern": "preposition",
+          "rationale": "preposition"
+        },
+        {
+          "tokenId": "function_t6",
+          "text": "the",
+          "tokenIndex": 5,
+          "isPunctuation": false,
+          "isCorrect": false,
+          "errorPattern": "article",
+          "rationale": "article"
+        },
+        {
+          "tokenId": "function_t7",
+          "text": "sleeping",
+          "tokenIndex": 6,
+          "isPunctuation": false,
+          "isCorrect": false,
+          "errorPattern": "adjective",
+          "rationale": "adjective"
+        },
+        {
+          "tokenId": "function_t8",
+          "text": "dog",
+          "tokenIndex": 7,
+          "isPunctuation": false,
+          "isCorrect": false,
+          "errorPattern": "noun",
+          "rationale": "noun"
+        }
+      ],
+      "correctTokenIds": [
+        "function_t3"
+      ],
+      "exactSelectionCount": 1
+    },
+    {
+      "itemId": "pssa_conv_g3_drag_address_01",
+      "eligibleContent": "E03.D.1.2.2",
+      "interactionType": "DRAG_DROP",
+      "interactionSubtype": "token_placement",
+      "targetConvention": "commas in an address",
+      "targetSubskill": "commas_in_addresses",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "passageId": null,
+      "ecSkillFamily": "conventions",
+      "reportingCategory": "D",
+      "pointValue": 1,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "scoring": {
+        "totalPoints": 1,
+        "partialCreditRules": [
+          {
+            "points": 1,
+            "rule": "The single correct convention response is selected or placed."
+          },
+          {
+            "points": 0,
+            "rule": "Any incorrect, ambiguous, missing, or extra response earns no credit."
+          }
+        ],
+        "scoringNotes": "Full credit requires the one defensible convention answer and no contradictory answer."
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_PR_4N_GRADE3_CONVENTIONS",
+        "noDbWrite": true
+      },
+      "prompt": "Place commas where they are needed in the address.",
+      "instructionText": "Drag each comma into the correct slot.",
+      "baseSentenceWithSlots": "Mail the card to 48 Pine Road [slot1] Erie [slot2] Pennsylvania.",
+      "draggableTokens": [
+        {
+          "tokenId": "drag_t1",
+          "text": ",",
+          "tokenType": "comma",
+          "isDistractor": false,
+          "errorPattern": null,
+          "rationale": "comma in a series"
+        },
+        {
+          "tokenId": "drag_t2",
+          "text": ",",
+          "tokenType": "comma",
+          "isDistractor": false,
+          "errorPattern": null,
+          "rationale": "comma in a series"
+        },
+        {
+          "tokenId": "drag_t3",
+          "text": ".",
+          "tokenType": "period",
+          "isDistractor": true,
+          "errorPattern": "period does not belong inside this series",
+          "rationale": "period does not belong inside this series"
+        }
+      ],
+      "slots": [
+        {
+          "slotId": "address_s1",
+          "position": 31,
+          "capacity": 1,
+          "acceptedTokenType": "comma"
+        },
+        {
+          "slotId": "address_s2",
+          "position": 38,
+          "capacity": 1,
+          "acceptedTokenType": "comma"
+        }
+      ],
+      "correctAssignments": [
+        {
+          "tokenId": "drag_t1",
+          "slotId": "address_s1"
+        },
+        {
+          "tokenId": "drag_t2",
+          "slotId": "address_s2"
+        }
+      ]
+    },
+    {
+      "itemId": "pssa_conv_g3_drag_dialogue_01",
+      "eligibleContent": "E03.D.1.2.3",
+      "interactionType": "DRAG_DROP",
+      "interactionSubtype": "token_placement",
+      "targetConvention": "quotation marks in dialogue",
+      "targetSubskill": "dialogue_punctuation",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "passageId": null,
+      "ecSkillFamily": "conventions",
+      "reportingCategory": "D",
+      "pointValue": 1,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "scoring": {
+        "totalPoints": 1,
+        "partialCreditRules": [
+          {
+            "points": 1,
+            "rule": "The single correct convention response is selected or placed."
+          },
+          {
+            "points": 0,
+            "rule": "Any incorrect, ambiguous, missing, or extra response earns no credit."
+          }
+        ],
+        "scoringNotes": "Full credit requires the one defensible convention answer and no contradictory answer."
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_PR_4N_GRADE3_CONVENTIONS",
+        "noDbWrite": true
+      },
+      "prompt": "Place quotation marks around the exact words the speaker says.",
+      "instructionText": "Drag each quotation mark into the correct slot.",
+      "baseSentenceWithSlots": "Lena said [slot1] I found your blue pencil [slot2] before recess.",
+      "draggableTokens": [
+        {
+          "tokenId": "drag_t1",
+          "text": ".",
+          "tokenType": "period",
+          "isDistractor": true,
+          "errorPattern": "period does not mark spoken words",
+          "rationale": "period does not mark spoken words"
+        },
+        {
+          "tokenId": "drag_t2",
+          "text": "\"",
+          "tokenType": "quotation_mark",
+          "isDistractor": false,
+          "errorPattern": null,
+          "rationale": "opening quotation mark"
+        },
+        {
+          "tokenId": "drag_t3",
+          "text": "\"",
+          "tokenType": "quotation_mark",
+          "isDistractor": false,
+          "errorPattern": null,
+          "rationale": "closing quotation mark"
+        }
+      ],
+      "slots": [
+        {
+          "slotId": "dialogue_s1",
+          "position": 10,
+          "capacity": 1,
+          "acceptedTokenType": "quotation_mark"
+        },
+        {
+          "slotId": "dialogue_s2",
+          "position": 36,
+          "capacity": 1,
+          "acceptedTokenType": "quotation_mark"
+        }
+      ],
+      "correctAssignments": [
+        {
+          "tokenId": "drag_t2",
+          "slotId": "dialogue_s1"
+        },
+        {
+          "tokenId": "drag_t3",
+          "slotId": "dialogue_s2"
+        }
+      ]
+    },
+    {
+      "itemId": "pssa_conv_g3_mcq_agreement_01",
+      "eligibleContent": "E03.D.1.1.6",
+      "interactionType": "MCQ",
+      "interactionSubtype": "standalone_conventions",
+      "targetConvention": "subject-verb agreement",
+      "targetSubskill": "subject_verb_agreement",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "passageId": null,
+      "ecSkillFamily": "conventions",
+      "reportingCategory": "D",
+      "pointValue": 1,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "scoring": {
+        "totalPoints": 1,
+        "partialCreditRules": [
+          {
+            "points": 1,
+            "rule": "The single correct convention response is selected or placed."
+          },
+          {
+            "points": 0,
+            "rule": "Any incorrect, ambiguous, missing, or extra response earns no credit."
+          }
+        ],
+        "scoringNotes": "Full credit requires the one defensible convention answer and no contradictory answer."
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_PR_4N_GRADE3_CONVENTIONS",
+        "noDbWrite": true
+      },
+      "stem": "Which sentence uses correct subject-verb agreement?",
+      "choices": [
+        {
+          "text": "The birds sings before sunrise.",
+          "isCorrect": false,
+          "errorPattern": "singular_verb_with_plural_subject",
+          "rationale": "Birds is plural, so sings does not agree."
+        },
+        {
+          "text": "The bird sing before sunrise.",
+          "isCorrect": false,
+          "errorPattern": "plural_verb_with_singular_subject",
+          "rationale": "Bird is singular, so sing does not agree."
+        },
+        {
+          "text": "The birds sing before sunrise.",
+          "isCorrect": true,
+          "errorPattern": null,
+          "rationale": "Plural subject birds agrees with sing."
+        },
+        {
+          "text": "The birds singing before sunrise.",
+          "isCorrect": false,
+          "errorPattern": "missing_finite_verb",
+          "rationale": "The sentence needs a complete verb."
+        }
+      ],
+      "correctIndex": 2
+    }
+  ]
+}

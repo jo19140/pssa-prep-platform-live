@@ -1,0 +1,13 @@
+oldItemId,oldStatusBefore,oldStatusAfter,deprecatedReason,oldEc,oldSubskill,supersededByItemIds,newEc,newSubskill,mappingNotes
+pssa_item_g3_conv_29,candidate,deprecated_superseded,superseded_by_pssa_pr4n_conventions_rebuild,E03.D.1.1.1,word_function,pssa_conv_g3_hottext_function_01,E03.D.1.1.1,word_function,Same EC replacement.
+pssa_item_g3_conv_30,candidate,deprecated_superseded,superseded_by_pssa_pr4n_conventions_rebuild,E03.D.1.1.2,noun_forms,pssa_conv_g3_dropdown_plural_01,E03.D.1.1.2,noun_forms,Same EC replacement.
+pssa_item_g3_conv_31,candidate,deprecated_superseded,superseded_by_pssa_pr4n_conventions_rebuild,E03.D.1.1.3,noun_forms,pssa_conv_g3_dropdown_plural_01,E03.D.1.1.2,noun_forms,Same conventions subskill-group replacement.
+pssa_item_g3_conv_32,candidate,deprecated_superseded,superseded_by_pssa_pr4n_conventions_rebuild,E03.D.1.1.4,verb_forms,pssa_conv_g3_dropdown_verbtense_01,E03.D.1.1.5,verb_forms,Same conventions subskill-group replacement.
+pssa_item_g3_conv_33,candidate,deprecated_superseded,superseded_by_pssa_pr4n_conventions_rebuild,E03.D.1.1.5,verb_forms,pssa_conv_g3_dropdown_verbtense_01,E03.D.1.1.5,verb_forms,Same EC replacement.
+pssa_item_g3_conv_34,candidate,deprecated_superseded,superseded_by_pssa_pr4n_conventions_rebuild,E03.D.1.1.6,sentence_grammar_usage,pssa_conv_g3_mcq_agreement_01,E03.D.1.1.6,sentence_grammar_usage,Same EC replacement.
+pssa_item_g3_conv_35,candidate,deprecated_superseded,superseded_by_pssa_pr4n_conventions_rebuild,E03.D.1.1.7,modifiers,pssa_conv_g3_dropdown_compare_01,E03.D.1.1.7,modifiers,Same EC replacement.
+pssa_item_g3_conv_36,candidate,deprecated_superseded,superseded_by_pssa_pr4n_conventions_rebuild,E03.D.1.1.8,sentence_grammar_usage,pssa_conv_g3_mcq_agreement_01,E03.D.1.1.6,sentence_grammar_usage,Same conventions subskill-group replacement.
+pssa_item_g3_conv_37,candidate,deprecated_superseded,superseded_by_pssa_pr4n_conventions_rebuild,E03.D.1.1.9,sentence_grammar_usage,pssa_conv_g3_mcq_agreement_01,E03.D.1.1.6,sentence_grammar_usage,Same conventions subskill-group replacement.
+pssa_item_g3_conv_38,candidate,deprecated_superseded,superseded_by_pssa_pr4n_conventions_rebuild,E03.D.1.2.1,capitalization,pssa_conv_g3_dropdown_titles_01,E03.D.1.2.1,capitalization,Same EC replacement.
+pssa_item_g3_conv_39,candidate,deprecated_superseded,superseded_by_pssa_pr4n_conventions_rebuild,E03.D.1.2.2,punctuation,pssa_conv_g3_drag_address_01,E03.D.1.2.2,punctuation,Same EC replacement.
+pssa_item_g3_conv_40,candidate,deprecated_superseded,superseded_by_pssa_pr4n_conventions_rebuild,E03.D.1.2.3,punctuation,pssa_conv_g3_drag_dialogue_01,E03.D.1.2.3,punctuation,Same EC replacement.

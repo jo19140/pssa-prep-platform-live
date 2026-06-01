@@ -1,0 +1,2 @@
+tranche,itemCount,dropdownCorrectIndexDistribution,hotTextCorrectTokenPositionPatterns,tokenDragAssignmentPatterns,mcqAnswerPositionDistribution,result,severity,notes
+grade3_pr4n_conventions,9,0:2 1:1 2:1,"1,2:1 2:1","0>0,1>1:1 1>0,2>1:1",2:1,PASS,INFO,PSSA_CONVENTIONS_SURFACE_SHORTCUT_DISTRIBUTION passed.

@@ -4345,7 +4345,7 @@
       "commercialUseAllowed": true,
       "needsLegalReview": false,
       "reviewStatus": "PENDING",
-      "itemStatus": "candidate",
+      "itemStatus": "deprecated_superseded",
       "approvalEligible": false,
       "studentFacingPrompt": "Which sentence best demonstrates this convention: Explain the function of nouns, pronouns, verbs, adjectives, and adverbs in general and their functions in particular sentences.",
       "answerChoicesJson": [
@@ -4394,7 +4394,11 @@
       "approvedAt": null,
       "reviewedBy": null,
       "retiredAt": null,
-      "sequence": 29
+      "sequence": 29,
+      "deprecatedReason": "superseded_by_pssa_pr4n_conventions_rebuild",
+      "supersededByItemIds": [
+        "pssa_conv_g3_hottext_function_01"
+      ]
     },
     {
       "model": "PssaItem",
@@ -4422,7 +4426,7 @@
       "commercialUseAllowed": true,
       "needsLegalReview": false,
       "reviewStatus": "PENDING",
-      "itemStatus": "candidate",
+      "itemStatus": "deprecated_superseded",
       "approvalEligible": false,
       "studentFacingPrompt": "Which sentence best demonstrates this convention: Form and use regular and irregular plural nouns.",
       "answerChoicesJson": [
@@ -4471,7 +4475,11 @@
       "approvedAt": null,
       "reviewedBy": null,
       "retiredAt": null,
-      "sequence": 30
+      "sequence": 30,
+      "deprecatedReason": "superseded_by_pssa_pr4n_conventions_rebuild",
+      "supersededByItemIds": [
+        "pssa_conv_g3_dropdown_plural_01"
+      ]
     },
     {
       "model": "PssaItem",
@@ -4499,7 +4507,7 @@
       "commercialUseAllowed": true,
       "needsLegalReview": false,
       "reviewStatus": "PENDING",
-      "itemStatus": "candidate",
+      "itemStatus": "deprecated_superseded",
       "approvalEligible": false,
       "studentFacingPrompt": "Which sentence best demonstrates this convention: Use abstract nouns (e.g., childhood).",
       "answerChoicesJson": [
@@ -4548,7 +4556,11 @@
       "approvedAt": null,
       "reviewedBy": null,
       "retiredAt": null,
-      "sequence": 31
+      "sequence": 31,
+      "deprecatedReason": "superseded_by_pssa_pr4n_conventions_rebuild",
+      "supersededByItemIds": [
+        "pssa_conv_g3_dropdown_plural_01"
+      ]
     },
     {
       "model": "PssaItem",
@@ -4576,7 +4588,7 @@
       "commercialUseAllowed": true,
       "needsLegalReview": false,
       "reviewStatus": "PENDING",
-      "itemStatus": "candidate",
+      "itemStatus": "deprecated_superseded",
       "approvalEligible": false,
       "studentFacingPrompt": "Which sentence best demonstrates this convention: Form and use regular and irregular verbs.",
       "answerChoicesJson": [
@@ -4625,7 +4637,11 @@
       "approvedAt": null,
       "reviewedBy": null,
       "retiredAt": null,
-      "sequence": 32
+      "sequence": 32,
+      "deprecatedReason": "superseded_by_pssa_pr4n_conventions_rebuild",
+      "supersededByItemIds": [
+        "pssa_conv_g3_dropdown_verbtense_01"
+      ]
     },
     {
       "model": "PssaItem",
@@ -4653,7 +4669,7 @@
       "commercialUseAllowed": true,
       "needsLegalReview": false,
       "reviewStatus": "PENDING",
-      "itemStatus": "candidate",
+      "itemStatus": "deprecated_superseded",
       "approvalEligible": false,
       "studentFacingPrompt": "Which sentence best demonstrates this convention: Form and use the simple verb tenses (e.g., I walked; I walk; I will walk).",
       "answerChoicesJson": [
@@ -4702,7 +4718,11 @@
       "approvedAt": null,
       "reviewedBy": null,
       "retiredAt": null,
-      "sequence": 33
+      "sequence": 33,
+      "deprecatedReason": "superseded_by_pssa_pr4n_conventions_rebuild",
+      "supersededByItemIds": [
+        "pssa_conv_g3_dropdown_verbtense_01"
+      ]
     },
     {
       "model": "PssaItem",
@@ -4730,7 +4750,7 @@
       "commercialUseAllowed": true,
       "needsLegalReview": false,
       "reviewStatus": "PENDING",
-      "itemStatus": "candidate",
+      "itemStatus": "deprecated_superseded",
       "approvalEligible": false,
       "studentFacingPrompt": "Which sentence best demonstrates this convention: Ensure subject-verb and pronoun-antecedent agreement.",
       "answerChoicesJson": [
@@ -4779,7 +4799,11 @@
       "approvedAt": null,
       "reviewedBy": null,
       "retiredAt": null,
-      "sequence": 34
+      "sequence": 34,
+      "deprecatedReason": "superseded_by_pssa_pr4n_conventions_rebuild",
+      "supersededByItemIds": [
+        "pssa_conv_g3_mcq_agreement_01"
+      ]
     },
     {
       "model": "PssaItem",
@@ -4807,7 +4831,7 @@
       "commercialUseAllowed": true,
       "needsLegalReview": false,
       "reviewStatus": "PENDING",
-      "itemStatus": "candidate",
+      "itemStatus": "deprecated_superseded",
       "approvalEligible": false,
       "studentFacingPrompt": "Which sentence best demonstrates this convention: Form and use comparative and superlative adjectives and adverbs, and choose between them depending on what is to be modified.",
       "answerChoicesJson": [
@@ -4856,7 +4880,11 @@
       "approvedAt": null,
       "reviewedBy": null,
       "retiredAt": null,
-      "sequence": 35
+      "sequence": 35,
+      "deprecatedReason": "superseded_by_pssa_pr4n_conventions_rebuild",
+      "supersededByItemIds": [
+        "pssa_conv_g3_dropdown_compare_01"
+      ]
     },
     {
       "model": "PssaItem",
@@ -4884,7 +4912,7 @@
       "commercialUseAllowed": true,
       "needsLegalReview": false,
       "reviewStatus": "PENDING",
-      "itemStatus": "candidate",
+      "itemStatus": "deprecated_superseded",
       "approvalEligible": false,
       "studentFacingPrompt": "Which sentence best demonstrates this convention: Use coordinating and subordinating conjunctions.",
       "answerChoicesJson": [
@@ -4933,7 +4961,11 @@
       "approvedAt": null,
       "reviewedBy": null,
       "retiredAt": null,
-      "sequence": 36
+      "sequence": 36,
+      "deprecatedReason": "superseded_by_pssa_pr4n_conventions_rebuild",
+      "supersededByItemIds": [
+        "pssa_conv_g3_mcq_agreement_01"
+      ]
     },
     {
       "model": "PssaItem",
@@ -4961,7 +4993,7 @@
       "commercialUseAllowed": true,
       "needsLegalReview": false,
       "reviewStatus": "PENDING",
-      "itemStatus": "candidate",
+      "itemStatus": "deprecated_superseded",
       "approvalEligible": false,
       "studentFacingPrompt": "Which sentence best demonstrates this convention: Produce simple, compound, and complex sentences.",
       "answerChoicesJson": [
@@ -5010,7 +5042,11 @@
       "approvedAt": null,
       "reviewedBy": null,
       "retiredAt": null,
-      "sequence": 37
+      "sequence": 37,
+      "deprecatedReason": "superseded_by_pssa_pr4n_conventions_rebuild",
+      "supersededByItemIds": [
+        "pssa_conv_g3_mcq_agreement_01"
+      ]
     },
     {
       "model": "PssaItem",
@@ -5037,7 +5073,7 @@
       "commercialUseAllowed": true,
       "needsLegalReview": false,
       "reviewStatus": "PENDING",
-      "itemStatus": "candidate",
+      "itemStatus": "deprecated_superseded",
       "approvalEligible": false,
       "studentFacingPrompt": "Which sentence best demonstrates this convention: Capitalize appropriate words in titles.",
       "answerChoicesJson": [
@@ -5086,7 +5122,11 @@
       "approvedAt": null,
       "reviewedBy": null,
       "retiredAt": null,
-      "sequence": 38
+      "sequence": 38,
+      "deprecatedReason": "superseded_by_pssa_pr4n_conventions_rebuild",
+      "supersededByItemIds": [
+        "pssa_conv_g3_dropdown_titles_01"
+      ]
     },
     {
       "model": "PssaItem",
@@ -5113,7 +5153,7 @@
       "commercialUseAllowed": true,
       "needsLegalReview": false,
       "reviewStatus": "PENDING",
-      "itemStatus": "candidate",
+      "itemStatus": "deprecated_superseded",
       "approvalEligible": false,
       "studentFacingPrompt": "Which sentence best demonstrates this convention: Use commas in addresses.",
       "answerChoicesJson": [
@@ -5162,7 +5202,11 @@
       "approvedAt": null,
       "reviewedBy": null,
       "retiredAt": null,
-      "sequence": 39
+      "sequence": 39,
+      "deprecatedReason": "superseded_by_pssa_pr4n_conventions_rebuild",
+      "supersededByItemIds": [
+        "pssa_conv_g3_drag_address_01"
+      ]
     },
     {
       "model": "PssaItem",
@@ -5189,7 +5233,7 @@
       "commercialUseAllowed": true,
       "needsLegalReview": false,
       "reviewStatus": "PENDING",
-      "itemStatus": "candidate",
+      "itemStatus": "deprecated_superseded",
       "approvalEligible": false,
       "studentFacingPrompt": "Which sentence best demonstrates this convention: Use commas and quotation marks in dialogue.",
       "answerChoicesJson": [
@@ -5238,7 +5282,11 @@
       "approvedAt": null,
       "reviewedBy": null,
       "retiredAt": null,
-      "sequence": 40
+      "sequence": 40,
+      "deprecatedReason": "superseded_by_pssa_pr4n_conventions_rebuild",
+      "supersededByItemIds": [
+        "pssa_conv_g3_drag_dialogue_01"
+      ]
     }
   ]
 }
