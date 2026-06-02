@@ -1,3 +1,5 @@
+import fs from "node:fs";
+import path from "node:path";
 import { wordMatchesPattern } from "./passageClassifier";
 
 export type PseudowordValidationResult = {
@@ -13,6 +15,18 @@ export type PseudowordValidationResult = {
   issues: string[];
 };
 
+export type PseudowordValidationOptions = {
+  strictLexicon?: boolean;
+  lexicon?: {
+    core?: Set<string>;
+    homophone?: Set<string>;
+  };
+};
+
+type HomophoneLexiconCache =
+  | { status: "loaded"; words: Set<string> }
+  | { status: "unavailable"; error: Error };
+
 /**
  * Curated authoritative real-word lexicon for the controlled silent-e / closed-syllable
  * vocabulary the generator produces at Phases 1-3.
@@ -21,7 +35,7 @@ export type PseudowordValidationResult = {
  * legitimate pseudowords (e.g. SUBTLEX lists "vade" and "tave" with non-trivial frequency),
  * which would wrongly reject valid pseudowords and break the golden fixture. A curated set is
  * deterministic, fast (no fs/JSON load), and avoids false positives. Extend it as new phases
- * introduce new controlled vocabulary. Callers may inject their own lexicon via `realWordSet`.
+ * introduce new controlled vocabulary. Callers may inject their own split lexicon via `opts.lexicon`.
  */
 export const CORE_REAL_WORDS: Set<string> = new Set([
   // --- a_e real words (incl. the spec's homophone collision targets) ---
@@ -55,11 +69,14 @@ export const CORE_REAL_WORDS: Set<string> = new Set([
   "stone", "bone", "cone", "lone", "tone", "zone", "phone", "alone",
   "hole", "mole", "pole", "role", "sole", "whole",
   "boat", "coat", "goat", "road", "toad", "load", "soap", "snow", "grow", "show", "throw",
+  "goal", "loam", "knoll",
   // --- u_e real words ---
   "cube", "tube", "cute", "mute", "mule", "rule", "tune", "dune", "june", "prune",
   "flute", "fume", "fuse", "huge", "duke", "fluke",
+  "fuel", "newt",
   // --- e_e real words ---
   "these", "theme", "eve", "complete", "delete", "scene", "scheme", "compete",
+  "need", "beet",
   // --- common closed-syllable + function words frequently in lessons ---
   "cat", "ran", "hand", "map", "fast", "last", "sand", "lamp", "stand", "band", "land",
   "pin", "did", "fish", "big", "sit", "fit", "lid", "rid", "hid", "kid", "wig", "dig",
@@ -68,6 +85,16 @@ export const CORE_REAL_WORDS: Set<string> = new Set([
   "pet", "red", "ten", "desk", "help", "bed", "leg", "men", "net", "wet", "yes", "best", "nest", "rest",
   "the", "a", "an", "and", "is", "it", "in", "on", "at", "as", "this", "that", "had", "has", "his",
 ]);
+
+let cmudictPath = path.resolve("data/phonogram/cmudict.json");
+let subtlexPath = path.resolve("data/phonogram/subtlex.csv");
+let homophoneLexiconCache: HomophoneLexiconCache | null = null;
+
+export function __setPseudowordLexiconPathsForTest(paths: { cmudictPath?: string; subtlexPath?: string } | null) {
+  cmudictPath = paths?.cmudictPath ?? path.resolve("data/phonogram/cmudict.json");
+  subtlexPath = paths?.subtlexPath ?? path.resolve("data/phonogram/subtlex.csv");
+  homophoneLexiconCache = null;
+}
 
 const LONG_VOWEL_TEAMS: Record<string, string[]> = {
   a: ["ai", "ay", "ea", "eigh", "ei"],
@@ -112,31 +139,40 @@ function vowelLetterForPattern(targetPattern: string): string | null {
 export function validatePseudowordCandidate(
   pseudoword: string,
   targetPattern: string,
-  realWordSet: Set<string> = CORE_REAL_WORDS,
+  opts: PseudowordValidationOptions = {},
 ): PseudowordValidationResult {
   const normalized = pseudoword.toLowerCase().trim();
+  const coreLexicon = opts.lexicon?.core ?? CORE_REAL_WORDS;
+  const homophoneLexiconResult = opts.lexicon?.homophone
+    ? { words: opts.lexicon.homophone, unavailable: false as const }
+    : getHomophoneLexicon(opts.strictLexicon === true);
+  const homophoneLexicon = homophoneLexiconResult.unavailable ? coreLexicon : homophoneLexiconResult.words;
   const issues: string[] = [];
+  const blockingIssues: string[] = [];
   let collidesWith: string | null = null;
 
   if (!normalized) {
-    issues.push("empty pseudoword");
+    blockingIssues.push("empty pseudoword");
   }
   if (!wordMatchesPattern(normalized, targetPattern)) {
-    issues.push(`pseudoword does not match target pattern ${targetPattern}`);
+    blockingIssues.push(`pseudoword does not match target pattern ${targetPattern}`);
   }
   // 1. Direct real-word membership.
-  if (normalized && realWordSet.has(normalized)) {
+  if (normalized && coreLexicon.has(normalized)) {
     collidesWith = normalized;
-    issues.push(`pseudoword is a real word ("${normalized}")`);
+    blockingIssues.push(`pseudoword is a real word ("${normalized}")`);
+  }
+  if (homophoneLexiconResult.unavailable) {
+    issues.push("HOMOPHONE_LEXICON_UNAVAILABLE");
   }
   // 2. Homophone / near-spelling collision via pronunciation-preserving variants.
   if (!collidesWith && normalized) {
     const vowelLetter = vowelLetterForPattern(targetPattern);
     if (vowelLetter) {
       for (const variant of homophoneVariants(normalized, vowelLetter)) {
-        if (realWordSet.has(variant)) {
+        if (homophoneLexicon.has(variant)) {
           collidesWith = variant;
-          issues.push(`pseudoword sounds like / is a near-spelling of the real word "${variant}"`);
+          blockingIssues.push(`pseudoword sounds like / is a near-spelling of the real word "${variant}"`);
           break;
         }
       }
@@ -147,19 +183,72 @@ export function validatePseudowordCandidate(
     pseudoword: normalized,
     expectedPronunciation: pronunciationForSilentE(normalized, targetPattern),
     targetPattern,
-    valid: issues.length === 0,
-    reason: issues[0] ?? null,
+    valid: blockingIssues.length === 0,
+    reason: blockingIssues[0] ?? null,
     collidesWith,
-    issues,
+    issues: [...blockingIssues, ...issues],
   };
 }
 
-export function validatePseudowordSet(pseudowords: string[], targetPattern: string, realWordSet?: Set<string>) {
-  return pseudowords.map((word) => validatePseudowordCandidate(word, targetPattern, realWordSet));
+export function validatePseudowordSet(pseudowords: string[], targetPattern: string, opts: PseudowordValidationOptions = {}) {
+  return pseudowords.map((word) => validatePseudowordCandidate(word, targetPattern, opts));
 }
 
 function pronunciationForSilentE(word: string, pattern: string) {
   const vowel = vowelLetterForPattern(pattern);
   if (!vowel) return word;
   return `${word} (${vowel} says its name)`;
+}
+
+function getHomophoneLexicon(strictLexicon: boolean): { words: Set<string>; unavailable: false } | { words: Set<string>; unavailable: true } {
+  if (!homophoneLexiconCache) {
+    try {
+      homophoneLexiconCache = { status: "loaded", words: loadFrequencyGatedHomophoneLexicon() };
+    } catch (error) {
+      const normalized = error instanceof Error ? error : new Error(String(error));
+      homophoneLexiconCache = { status: "unavailable", error: normalized };
+    }
+  }
+  if (homophoneLexiconCache.status === "loaded") {
+    return { words: homophoneLexiconCache.words, unavailable: false };
+  }
+  if (strictLexicon) {
+    throw new Error(`HOMOPHONE_LEXICON_UNAVAILABLE: ${homophoneLexiconCache.error.message}`);
+  }
+  return { words: CORE_REAL_WORDS, unavailable: true };
+}
+
+function loadFrequencyGatedHomophoneLexicon() {
+  const subtlexWords = loadSubtlexWordsWithZipfAtLeast(subtlexPath, 4.0);
+  const rawCmudict = JSON.parse(fs.readFileSync(cmudictPath, "utf8")) as Array<{ word?: unknown }>;
+  const gated = new Set<string>();
+  for (const entry of rawCmudict) {
+    const word = normalizeLexiconWord(String(entry.word ?? ""));
+    if (word && subtlexWords.has(word)) gated.add(word);
+  }
+  return gated;
+}
+
+function loadSubtlexWordsWithZipfAtLeast(filePath: string, minZipf: number) {
+  const lines = fs.readFileSync(filePath, "utf8").split(/\r?\n/);
+  const header = lines.shift()?.split(",") ?? [];
+  const wordIndex = header.indexOf("word");
+  const zipfIndex = header.indexOf("zipf");
+  if (wordIndex < 0 || zipfIndex < 0) {
+    throw new Error(`SUBTLEX header must include word and zipf columns: ${filePath}`);
+  }
+  const words = new Set<string>();
+  for (const line of lines) {
+    if (!line.trim()) continue;
+    const columns = line.split(",");
+    const word = normalizeLexiconWord(columns[wordIndex] ?? "");
+    const zipf = Number(columns[zipfIndex]);
+    if (word && Number.isFinite(zipf) && zipf >= minZipf) words.add(word);
+  }
+  return words;
+}
+
+function normalizeLexiconWord(word: string) {
+  const normalized = word.toLowerCase().trim();
+  return /^[a-z]+$/.test(normalized) ? normalized : "";
 }

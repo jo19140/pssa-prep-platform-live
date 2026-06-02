@@ -237,13 +237,12 @@ function json(value: unknown): Prisma.InputJsonValue {
   return value as Prisma.InputJsonValue;
 }
 
-function canonicalPseudowordsForTarget(dailyTargetCode: string, seedNonwords: string[]) {
+export function canonicalPseudowordsForTarget(dailyTargetCode: string, seedNonwords: string[]) {
   const firstEight = seedNonwords.slice(0, 8);
-  if (firstEight.length >= 8 && validatePseudowordSet(firstEight, dailyTargetCode).every((entry) => entry.valid)) {
+  if (firstEight.length >= 8 && validatePseudowordSet(firstEight, dailyTargetCode, { strictLexicon: true }).every((entry) => entry.valid)) {
     return firstEight;
   }
-  if (dailyTargetCode === "a_e") {
-    return ["zake", "mave", "pame", "vade", "sape", "nace", "gake", "tave"];
-  }
-  return firstEight;
+  throw new Error(
+    `DailyTarget ${dailyTargetCode} has fewer than 8 valid pseudowords. Re-seed Phase 3 Entry content with npm run db:seed before lesson generation.`,
+  );
 }
