@@ -54,47 +54,142 @@ enum MasteryLevel {
   MASTERED
 }
 
-model User {
-  id              String          @id @default(cuid())
-  email           String          @unique
-  passwordHash    String?
-  name            String
-  role            String
-  emailVerifiedAt DateTime?
-  dateOfBirth     DateTime?
-  parentalConsentRequired Boolean @default(false)
-  parentalConsentAt DateTime?
-  accountDeletedAt DateTime?
-  enrolledPrograms SynesisProgram[] @default([VENUS])
-  enrolledTestPrep TestPrepModule[] @default([PSSA])
-  synesisMigrationBannerDismissedAt DateTime?
-  createdAt       DateTime        @default(now())
-  updatedAt       DateTime        @updatedAt
+enum PssaSourceType {
+  internal_original
+  released_sampler
+  unknown
+}
 
-  teacherProfile  TeacherProfile?
-  studentProfile  StudentProfile?
-  parentProfile   ParentProfile?
-  sessions        TestSession[]
-  reportSchedules ReportSchedule[]
-  lessonProgress  StudentLessonProgress[]
-  questAttempts   LearningQuestAttempt[]
-  readingCoachAttempts ReadingCoachAttempt[]
-  readingCoachAssignments ReadingCoachAssignment[] @relation("ReadingCoachAssignedBy")
-  resourceLinks   ResourceLink[]
-  resourceSuggestions ResourceSuggestion[] @relation("ResourceSuggester")
-  reviewedResourceSuggestions ResourceSuggestion[] @relation("ResourceReviewer")
-  tutorMemory     TutorAgentMemory?
-  tutorMessages   TutorAgentMessage[]
-  passwordResetTokens PasswordResetToken[]
-  verificationTokens VerificationToken[]
-  lessonReviews   LessonReview[]
-  parentalConsent ParentalConsent?
-  dataSubjectRequests DataSubjectRequest[] @relation("DSRRequester")
-  processedDataSubjectRequests DataSubjectRequest[] @relation("DSRProcessor")
-  literacyProfile LiteracyProfile?
-  stateRequests StateRequests[]
-  voiceConsent VoiceConsent? @relation("StudentConsent")
-  studentEvents StudentEvent[] @relation("StudentEvents")
+enum PssaLicenseStatus {
+  cleared
+  unresolved
+  restricted
+}
+
+enum PssaReviewStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum PssaItemStatus {
+  candidate
+  pilot_ready
+  deprecated_superseded
+  retired
+}
+
+enum PssaAlignmentStatus {
+  ALIGNED
+  NEEDS_CROSSWALK
+  ANOMALY
+}
+
+enum PssaInteractionType {
+  MCQ
+  EBSR
+  MULTI_SELECT
+  INLINE_DROPDOWN
+  MATCHING_GRID
+  HOT_TEXT
+  DRAG_DROP
+  SHORT_ANSWER
+  TDA
+}
+
+enum PssaStreamType {
+  MCQ
+  EBSR
+  MULTI_SELECT
+  HOT_TEXT
+  INLINE_DROPDOWN
+  MATCHING_GRID
+  DRAG_DROP
+  CONVENTIONS
+  SHORT_ANSWER
+  TDA
+}
+
+enum PssaAuditSeverity {
+  BLOCKER
+  WARN
+  INFO
+}
+
+enum PssaAuditResultStatus {
+  PASS
+  WARN
+  FAIL
+}
+
+enum PssaStudentReadyBlockedReason {
+  NONE
+  PENDING_REVIEW
+  STALE_AUDIT_CONTRACT
+  STALE_SOURCE_SCAN
+  CONTENT_HASH_DRIFT
+  FAILED_LATEST_AUDIT
+  DEPRECATED_SUPERSEDED
+}
+
+enum PssaPassageRole {
+  primary
+  secondary
+  evidence_source
+}
+
+enum PssaImportMode {
+  dry_run
+  write
+}
+
+enum PssaAuditTargetType {
+  item
+  passage
+  batch
+}
+
+model User {
+  id                                String           @id @default(cuid())
+  email                             String           @unique
+  passwordHash                      String?
+  name                              String
+  role                              String
+  emailVerifiedAt                   DateTime?
+  dateOfBirth                       DateTime?
+  parentalConsentRequired           Boolean          @default(false)
+  parentalConsentAt                 DateTime?
+  accountDeletedAt                  DateTime?
+  enrolledPrograms                  SynesisProgram[] @default([VENUS])
+  enrolledTestPrep                  TestPrepModule[] @default([PSSA])
+  synesisMigrationBannerDismissedAt DateTime?
+  createdAt                         DateTime         @default(now())
+  updatedAt                         DateTime         @updatedAt
+
+  teacherProfile               TeacherProfile?
+  studentProfile               StudentProfile?
+  parentProfile                ParentProfile?
+  sessions                     TestSession[]
+  reportSchedules              ReportSchedule[]
+  lessonProgress               StudentLessonProgress[]
+  questAttempts                LearningQuestAttempt[]
+  readingCoachAttempts         ReadingCoachAttempt[]
+  readingCoachAssignments      ReadingCoachAssignment[] @relation("ReadingCoachAssignedBy")
+  resourceLinks                ResourceLink[]
+  resourceSuggestions          ResourceSuggestion[]     @relation("ResourceSuggester")
+  reviewedResourceSuggestions  ResourceSuggestion[]     @relation("ResourceReviewer")
+  tutorMemory                  TutorAgentMemory?
+  tutorMessages                TutorAgentMessage[]
+  passwordResetTokens          PasswordResetToken[]
+  verificationTokens           VerificationToken[]
+  lessonReviews                LessonReview[]
+  parentalConsent              ParentalConsent?
+  dataSubjectRequests          DataSubjectRequest[]     @relation("DSRRequester")
+  processedDataSubjectRequests DataSubjectRequest[]     @relation("DSRProcessor")
+  literacyProfile              LiteracyProfile?
+  stateRequests                StateRequests[]
+  voiceConsent                 VoiceConsent?            @relation("StudentConsent")
+  studentEvents                StudentEvent[]           @relation("StudentEvents")
 }
 
 model PendingStudentSignup {
@@ -119,65 +214,65 @@ model PendingStudentSignup {
 }
 
 model ParentalConsent {
-  id                String   @id @default(cuid())
-  studentUserId     String   @unique
+  id                String    @id @default(cuid())
+  studentUserId     String    @unique
   parentName        String
   parentEmail       String
   parentPhone       String?
   consentVersion    String
-  consentText       String   @db.Text
+  consentText       String    @db.Text
   consentedAt       DateTime?
   ipAddress         String?
-  verificationToken String?  @unique
+  verificationToken String?   @unique
   verifiedAt        DateTime?
   revokedAt         DateTime?
   revokedReason     String?
-  createdAt         DateTime @default(now())
-  updatedAt         DateTime @updatedAt
-  student           User     @relation(fields: [studentUserId], references: [id], onDelete: Cascade)
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+  student           User      @relation(fields: [studentUserId], references: [id], onDelete: Cascade)
 
   @@index([parentEmail])
 }
 
 model DataSubjectRequest {
-  id            String   @id @default(cuid())
+  id            String    @id @default(cuid())
   userId        String
   requestType   String
-  status        String   @default("PENDING")
+  status        String    @default("PENDING")
   reasonNotes   String?
   payloadUrl    String?
   completedAt   DateTime?
   expiresAt     DateTime?
   processedById String?
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-  user          User     @relation("DSRRequester", fields: [userId], references: [id], onDelete: Cascade)
-  processedBy   User?    @relation("DSRProcessor", fields: [processedById], references: [id], onDelete: SetNull)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  user          User      @relation("DSRRequester", fields: [userId], references: [id], onDelete: Cascade)
+  processedBy   User?     @relation("DSRProcessor", fields: [processedById], references: [id], onDelete: SetNull)
 
   @@index([userId, requestType])
   @@index([status, createdAt])
 }
 
 model PasswordResetToken {
-  id        String   @id @default(cuid())
+  id        String    @id @default(cuid())
   userId    String
-  tokenHash String   @unique
+  tokenHash String    @unique
   expiresAt DateTime
   usedAt    DateTime?
-  createdAt DateTime @default(now())
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime  @default(now())
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId])
 }
 
 model VerificationToken {
-  id        String   @id @default(cuid())
+  id        String    @id @default(cuid())
   userId    String
-  tokenHash String   @unique
+  tokenHash String    @unique
   expiresAt DateTime
   usedAt    DateTime?
-  createdAt DateTime @default(now())
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime  @default(now())
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId])
 }
@@ -201,27 +296,27 @@ model School {
 
 model TeacherProfile {
   id         String      @id @default(cuid())
-  userId      String      @unique
-  schoolId    String?
-  schoolName  String
-  gradeBand   String?
-  user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
-  school      School?     @relation(fields: [schoolId], references: [id], onDelete: SetNull)
-  classes     ClassRoom[]
+  userId     String      @unique
+  schoolId   String?
+  schoolName String
+  gradeBand  String?
+  user       User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  school     School?     @relation(fields: [schoolId], references: [id], onDelete: SetNull)
+  classes    ClassRoom[]
 
   students StudentProfile[] @relation("TeacherStudents")
 }
 
 model StudentProfile {
-  id          String         @id @default(cuid())
-  userId      String         @unique
+  id          String              @id @default(cuid())
+  userId      String              @unique
   schoolId    String?
   grade       Int
   schoolName  String
   teacherId   String?
-  user        User           @relation(fields: [userId], references: [id], onDelete: Cascade)
-  school      School?        @relation(fields: [schoolId], references: [id], onDelete: SetNull)
-  teacher     TeacherProfile? @relation("TeacherStudents", fields: [teacherId], references: [id])
+  user        User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+  school      School?             @relation(fields: [schoolId], references: [id], onDelete: SetNull)
+  teacher     TeacherProfile?     @relation("TeacherStudents", fields: [teacherId], references: [id])
   enrollments Enrollment[]
   parentLinks ParentStudentLink[]
 
@@ -229,10 +324,10 @@ model StudentProfile {
 }
 
 model ParentProfile {
-  id          String             @id @default(cuid())
-  userId      String             @unique
+  id          String              @id @default(cuid())
+  userId      String              @unique
   phoneNumber String?
-  user        User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user        User                @relation(fields: [userId], references: [id], onDelete: Cascade)
   children    ParentStudentLink[]
 }
 
@@ -247,20 +342,20 @@ model ParentStudentLink {
 }
 
 model ClassRoom {
-  id           String       @id @default(cuid())
-  name         String
-  schoolId     String?
-  teacherId    String
-  grade        Int
-  joinCode     String?      @unique
-  joinEnabled  Boolean      @default(true)
-  createdAt    DateTime     @default(now())
-  school       School?       @relation(fields: [schoolId], references: [id], onDelete: SetNull)
-  teacher      TeacherProfile @relation(fields: [teacherId], references: [id], onDelete: Cascade)
-  enrollments  Enrollment[]
-  assignments  Assignment[]
+  id                      String                   @id @default(cuid())
+  name                    String
+  schoolId                String?
+  teacherId               String
+  grade                   Int
+  joinCode                String?                  @unique
+  joinEnabled             Boolean                  @default(true)
+  createdAt               DateTime                 @default(now())
+  school                  School?                  @relation(fields: [schoolId], references: [id], onDelete: SetNull)
+  teacher                 TeacherProfile           @relation(fields: [teacherId], references: [id], onDelete: Cascade)
+  enrollments             Enrollment[]
+  assignments             Assignment[]
   readingCoachAssignments ReadingCoachAssignment[]
-  schedules    ReportSchedule[]
+  schedules               ReportSchedule[]
 
   @@index([schoolId, grade])
 }
@@ -277,19 +372,19 @@ model Enrollment {
 }
 
 model Assessment {
-  id          String        @id @default(cuid())
-  title       String
-  subject     String
-  state       String
-  grade       Int
-  isAdaptive  Boolean       @default(true)
+  id              String               @id @default(cuid())
+  title           String
+  subject         String
+  state           String
+  grade           Int
+  isAdaptive      Boolean              @default(true)
   ehriPhaseAtTime EhriPhase?
-  lexileBand  Int?
-  createdAt   DateTime      @default(now())
-  assignments Assignment[]
-  sessions    TestSession[]
-  questions   AssessmentQuestion[]
-  passages    AssessmentPassage[]
+  lexileBand      Int?
+  createdAt       DateTime             @default(now())
+  assignments     Assignment[]
+  sessions        TestSession[]
+  questions       AssessmentQuestion[]
+  passages        AssessmentPassage[]
 }
 
 model AssessmentPassage {
@@ -314,54 +409,351 @@ model AssessmentPassage {
 }
 
 model AssessmentQuestion {
-  id             String     @id @default(cuid())
-  assessmentId   String
-  questionNo     Int
-  standardCode   String
-  standardLabel  String
-  questionType   String
-  skill          String
-  difficulty     Int
+  id              String     @id @default(cuid())
+  assessmentId    String
+  questionNo      Int
+  standardCode    String
+  standardLabel   String
+  questionType    String
+  skill           String
+  difficulty      Int
   questionPayload Json
-  createdAt      DateTime   @default(now())
-  assessment     Assessment @relation(fields: [assessmentId], references: [id], onDelete: Cascade)
+  createdAt       DateTime   @default(now())
+  assessment      Assessment @relation(fields: [assessmentId], references: [id], onDelete: Cascade)
 
   @@unique([assessmentId, questionNo])
 }
 
+model PssaStandardsCrosswalk {
+  id                        String   @id @default(cuid())
+  subject                   String
+  gradeLevel                Int
+  reportingCategory         String
+  reportingCategoryTitle    String
+  assessmentAnchor          String
+  assessmentAnchorTitle     String
+  anchorDescriptor          String
+  anchorDescriptorText      String   @db.Text
+  eligibleContent           String
+  eligibleContentText       String   @db.Text
+  dokCeiling                String?
+  primaryPaCoreStandardCode String?
+  mappingGranularity        String
+  mappingConfidence         String
+  sourceDocument            String
+  sourceVersionYear         Int
+  sourceUpdatedYear         Int
+  sourceAnomalyJson         Json?
+  createdAt                 DateTime @default(now())
+  updatedAt                 DateTime @updatedAt
+
+  paCoreStandards PssaCrosswalkPaCoreStandard[]
+  pssaItems       PssaItem[]
+
+  @@unique([subject, gradeLevel, eligibleContent, sourceVersionYear])
+  @@index([subject, gradeLevel, assessmentAnchor])
+  @@index([subject, gradeLevel, reportingCategory])
+  @@index([eligibleContent])
+}
+
+model PssaCrosswalkPaCoreStandard {
+  id           String   @id @default(cuid())
+  crosswalkId  String
+  standardCode String
+  createdAt    DateTime @default(now())
+
+  crosswalk PssaStandardsCrosswalk @relation(fields: [crosswalkId], references: [id], onDelete: Cascade)
+
+  @@unique([crosswalkId, standardCode])
+  @@index([standardCode])
+}
+
+model PssaPassage {
+  id                        String                        @id @default(cuid())
+  title                     String
+  gradeLevel                Int
+  subject                   String                        @default("ELA")
+  passageType               String
+  text                      String                        @db.Text
+  wordCount                 Int
+  sourceType                PssaSourceType                @default(unknown)
+  sourceName                String?
+  sourceCitation            String?                       @db.Text
+  licenseStatus             PssaLicenseStatus             @default(unresolved)
+  commercialUseAllowed      Boolean                       @default(false)
+  needsLegalReview          Boolean                       @default(true)
+  reviewStatus              PssaReviewStatus              @default(PENDING)
+  itemStatus                PssaItemStatus                @default(candidate)
+  approvedAt                DateTime?
+  reviewedBy                String?
+  provenanceJson            Json
+  contentHash               String
+  latestAuditContentHash    String?
+  approvedContentHash       String?
+  auditContractVersion      String?
+  sourceScanVersion         String?
+  latestSourceCorpusHash    String?
+  latestAuditResult         PssaAuditResultStatus?
+  latestAuditAt             DateTime?
+  studentReadyBlockedReason PssaStudentReadyBlockedReason @default(PENDING_REVIEW)
+  retiredAt                 DateTime?
+  createdAt                 DateTime                      @default(now())
+  updatedAt                 DateTime                      @updatedAt
+
+  items        PssaItemPassageLink[]
+  auditResults PssaAuditResult[]
+  reviewLogs   PssaReviewLog[]
+
+  @@index([gradeLevel, subject, reviewStatus, itemStatus])
+  @@index([sourceType, licenseStatus])
+  @@index([retiredAt])
+  @@index([contentHash])
+}
+
+model PssaItem {
+  id                        String                        @id @default(cuid())
+  module                    TestPrepModule                @default(PSSA)
+  subject                   String                        @default("ELA")
+  gradeLevel                Int
+  standardCode              String
+  assessmentAnchor          String?
+  eligibleContent           String?
+  eligibleContentRefId      String?
+  reportingCategory         String?
+  dokLevel                  Int?
+  itemType                  String
+  skill                     String
+  difficultyBand            String?
+  interactionType           PssaInteractionType
+  interactionSubtype        String?
+  responseSpecJson          Json
+  correctResponseJson       Json
+  scoringJson               Json
+  pointValue                Int
+  sourceType                PssaSourceType                @default(unknown)
+  sourceName                String?
+  sourceCitation            String?                       @db.Text
+  licenseStatus             PssaLicenseStatus             @default(unresolved)
+  commercialUseAllowed      Boolean                       @default(false)
+  needsLegalReview          Boolean                       @default(true)
+  reviewStatus              PssaReviewStatus              @default(PENDING)
+  itemStatus                PssaItemStatus                @default(candidate)
+  alignmentStatus           PssaAlignmentStatus           @default(NEEDS_CROSSWALK)
+  approvalEligible          Boolean                       @default(false)
+  approvedAt                DateTime?
+  reviewedBy                String?
+  studentPreviewJson        Json?
+  responseSpecVersion       String
+  auditContractVersion      String
+  sourceScanVersion         String
+  contentHash               String
+  latestAuditContentHash    String?
+  approvedContentHash       String?
+  latestSourceCorpusHash    String?
+  latestAuditResult         PssaAuditResultStatus?
+  latestAuditAt             DateTime?
+  importedFromFile          String?
+  importRunId               String?
+  studentReadyBlockedReason PssaStudentReadyBlockedReason @default(PENDING_REVIEW)
+  deprecatedReason          String?                       @db.Text
+  batchId                   String?
+  provenanceJson            Json
+  retiredAt                 DateTime?
+  createdAt                 DateTime                      @default(now())
+  updatedAt                 DateTime                      @updatedAt
+
+  eligibleContentRef PssaStandardsCrosswalk? @relation(fields: [eligibleContentRefId], references: [id], onDelete: SetNull)
+  importRun          PssaImportRun?          @relation(fields: [importRunId], references: [id], onDelete: SetNull)
+  batch              PssaItemBatch?          @relation(fields: [batchId], references: [id], onDelete: SetNull)
+  passages           PssaItemPassageLink[]
+  auditResults       PssaAuditResult[]
+  reviewLogs         PssaReviewLog[]
+  supersededBy       PssaItemSupersession[]  @relation("PssaItemSupersededOld")
+  supersedes         PssaItemSupersession[]  @relation("PssaItemSupersededNew")
+
+  @@index([gradeLevel, subject, reviewStatus, itemStatus, studentReadyBlockedReason])
+  @@index([auditContractVersion, sourceScanVersion])
+  @@index([interactionType, interactionSubtype])
+  @@index([standardCode, assessmentAnchor, eligibleContent])
+  @@index([eligibleContentRefId])
+  @@index([alignmentStatus, approvalEligible])
+  @@index([batchId])
+  @@index([importRunId])
+  @@index([contentHash])
+  @@index([retiredAt])
+}
+
+model PssaItemPassageLink {
+  id        String          @id @default(cuid())
+  itemId    String
+  passageId String
+  role      PssaPassageRole
+  sortOrder Int
+  createdAt DateTime        @default(now())
+
+  item    PssaItem    @relation(fields: [itemId], references: [id], onDelete: Cascade)
+  passage PssaPassage @relation(fields: [passageId], references: [id], onDelete: Cascade)
+
+  @@unique([itemId, passageId, role])
+  @@index([itemId])
+  @@index([passageId, role])
+}
+
+model PssaItemBatch {
+  id                   String                 @id @default(cuid())
+  gradeLevel           Int
+  subject              String                 @default("ELA")
+  streamType           PssaStreamType
+  auditContractVersion String
+  sourceScanVersion    String
+  sourceCorpusHash     String
+  importRunId          String?
+  batchAuditResult     PssaAuditResultStatus?
+  batchAuditNotes      String?                @db.Text
+  createdAt            DateTime               @default(now())
+
+  importRun    PssaImportRun?    @relation(fields: [importRunId], references: [id], onDelete: SetNull)
+  items        PssaItem[]
+  linterRuns   PssaLinterRun[]
+  auditResults PssaAuditResult[]
+  reviewLogs   PssaReviewLog[]
+
+  @@index([gradeLevel, subject, streamType, auditContractVersion])
+  @@index([importRunId])
+}
+
+model PssaItemSupersession {
+  id        String   @id @default(cuid())
+  oldItemId String
+  newItemId String
+  reason    String   @db.Text
+  createdAt DateTime @default(now())
+
+  oldItem PssaItem @relation("PssaItemSupersededOld", fields: [oldItemId], references: [id], onDelete: Cascade)
+  newItem PssaItem @relation("PssaItemSupersededNew", fields: [newItemId], references: [id], onDelete: Restrict)
+
+  @@unique([oldItemId, newItemId])
+  @@index([oldItemId])
+  @@index([newItemId])
+}
+
+model PssaImportRun {
+  id                       String         @id @default(cuid())
+  runKey                   String         @unique
+  mode                     PssaImportMode
+  env                      String
+  auditContractVersion     String
+  sourceScanVersion        String
+  sourceCorpusHash         String
+  sourceCorpusManifestJson Json
+  addedCount               Int            @default(0)
+  updatedCount             Int            @default(0)
+  skippedCount             Int            @default(0)
+  failedCount              Int            @default(0)
+  reportPath               String?
+  createdAt                DateTime       @default(now())
+
+  items   PssaItem[]
+  batches PssaItemBatch[]
+}
+
+model PssaLinterRun {
+  id                   String   @id @default(cuid())
+  runKey               String   @unique
+  batchId              String?
+  sourceBundlePath     String?
+  auditContractVersion String
+  sourceScanVersion    String
+  sourceCorpusHash     String
+  totalResults         Int      @default(0)
+  blockerCount         Int      @default(0)
+  createdAt            DateTime @default(now())
+
+  batch   PssaItemBatch?    @relation(fields: [batchId], references: [id], onDelete: SetNull)
+  results PssaAuditResult[]
+}
+
+model PssaAuditResult {
+  id           String                @id @default(cuid())
+  targetType   PssaAuditTargetType
+  targetId     String
+  itemId       String?
+  passageId    String?
+  batchId      String?
+  linterRunId  String
+  ruleId       String
+  severity     PssaAuditSeverity
+  result       PssaAuditResultStatus
+  message      String                @db.Text
+  evidenceJson Json?
+  createdAt    DateTime              @default(now())
+
+  item      PssaItem?      @relation(fields: [itemId], references: [id], onDelete: Cascade)
+  passage   PssaPassage?   @relation(fields: [passageId], references: [id], onDelete: Cascade)
+  batch     PssaItemBatch? @relation(fields: [batchId], references: [id], onDelete: Cascade)
+  linterRun PssaLinterRun  @relation(fields: [linterRunId], references: [id], onDelete: Cascade)
+
+  @@unique([targetType, targetId, linterRunId, ruleId])
+  @@index([targetType, targetId, result, severity])
+  @@index([itemId, result, severity])
+  @@index([passageId, result, severity])
+  @@index([batchId, ruleId])
+  @@index([linterRunId])
+}
+
+model PssaReviewLog {
+  id             String   @id @default(cuid())
+  itemId         String?
+  passageId      String?
+  batchId        String?
+  action         String
+  reviewerUserId String?
+  notes          String?  @db.Text
+  editDiffJson   Json?
+  createdAt      DateTime @default(now())
+
+  item    PssaItem?      @relation(fields: [itemId], references: [id], onDelete: Cascade)
+  passage PssaPassage?   @relation(fields: [passageId], references: [id], onDelete: Cascade)
+  batch   PssaItemBatch? @relation(fields: [batchId], references: [id], onDelete: Cascade)
+
+  @@index([itemId, createdAt])
+  @@index([passageId, createdAt])
+  @@index([batchId, createdAt])
+}
+
 model Assignment {
-  id             String           @id @default(cuid())
+  id             String     @id @default(cuid())
   assessmentId   String
   classRoomId    String
   assignedById   String
-  status         String  @default("DRAFT")
+  status         String     @default("DRAFT")
   dueDate        DateTime?
-  createdAt      DateTime         @default(now())
+  createdAt      DateTime   @default(now())
   standards      String
   assignmentType String
-  assessment     Assessment       @relation(fields: [assessmentId], references: [id], onDelete: Cascade)
-  classRoom      ClassRoom        @relation(fields: [classRoomId], references: [id], onDelete: Cascade)
+  assessment     Assessment @relation(fields: [assessmentId], references: [id], onDelete: Cascade)
+  classRoom      ClassRoom  @relation(fields: [classRoomId], references: [id], onDelete: Cascade)
 
   @@index([classRoomId, status])
 }
 
 model TestSession {
-  id               String          @id @default(cuid())
-  userId           String
-  assessmentId     String
-  startedAt        DateTime        @default(now())
-  submittedAt      DateTime?
-  currentQuestionNo Int            @default(1)
-  scorePercent     Int?
-  totalPoints      Int?
-  earnedPoints     Int?
-  proficiencyBand  String?
-  user             User            @relation(fields: [userId], references: [id], onDelete: Cascade)
-  assessment       Assessment      @relation(fields: [assessmentId], references: [id], onDelete: Cascade)
-  responses        ResponseRecord[]
-  report           ReportSummary?
-  learningPath     LearningPath?
-  aiJobs           AiJob[]
+  id                String           @id @default(cuid())
+  userId            String
+  assessmentId      String
+  startedAt         DateTime         @default(now())
+  submittedAt       DateTime?
+  currentQuestionNo Int              @default(1)
+  scorePercent      Int?
+  totalPoints       Int?
+  earnedPoints      Int?
+  proficiencyBand   String?
+  user              User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  assessment        Assessment       @relation(fields: [assessmentId], references: [id], onDelete: Cascade)
+  responses         ResponseRecord[]
+  report            ReportSummary?
+  learningPath      LearningPath?
+  aiJobs            AiJob[]
 
   @@index([userId, assessmentId, submittedAt])
 }
@@ -386,78 +778,78 @@ model AiJob {
 }
 
 model ResponseRecord {
-  id               String      @id @default(cuid())
-  sessionId        String
-  questionId       Int
-  skill            String
-  standardCode     String
-  standardLabel    String
-  questionType     String
-  difficulty       Int
-  isCorrect        Boolean
+  id                String           @id @default(cuid())
+  sessionId         String
+  questionId        Int
+  skill             String
+  standardCode      String
+  standardLabel     String
+  questionType      String
+  difficulty        Int
+  isCorrect         Boolean
   scorePointsEarned Int
-  maxPoints        Int
-  errorPattern     String
-  timeSpentSec     Int
-  answerPayload    Json
-  createdAt        DateTime    @default(now())
-  session          TestSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
-  essayEvaluation  EssayEvaluation?
+  maxPoints         Int
+  errorPattern      String
+  timeSpentSec      Int
+  answerPayload     Json
+  createdAt         DateTime         @default(now())
+  session           TestSession      @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  essayEvaluation   EssayEvaluation?
 
   @@index([sessionId])
 }
 
 model EssayEvaluation {
-  id               String         @id @default(cuid())
-  responseRecordId String         @unique
-  score            Int
-  maxScore         Int            @default(4)
-  performanceBand  String
-  strengths        Json
-  areasForGrowth   Json
-  feedback         String
-  nextSteps        Json
-  rubricBreakdown  Json
-  gradingProvider  String
-  teacherScore     Int?
-  teacherFeedback  String?
+  id                     String         @id @default(cuid())
+  responseRecordId       String         @unique
+  score                  Int
+  maxScore               Int            @default(4)
+  performanceBand        String
+  strengths              Json
+  areasForGrowth         Json
+  feedback               String
+  nextSteps              Json
+  rubricBreakdown        Json
+  gradingProvider        String
+  teacherScore           Int?
+  teacherFeedback        String?
   teacherRubricBreakdown Json?
-  reviewedAt       DateTime?
-  reviewedById     String?
-  createdAt        DateTime       @default(now())
-  updatedAt        DateTime       @updatedAt
-  responseRecord   ResponseRecord @relation(fields: [responseRecordId], references: [id], onDelete: Cascade)
+  reviewedAt             DateTime?
+  reviewedById           String?
+  createdAt              DateTime       @default(now())
+  updatedAt              DateTime       @updatedAt
+  responseRecord         ResponseRecord @relation(fields: [responseRecordId], references: [id], onDelete: Cascade)
 }
 
 model ReportSummary {
-  id               String      @id @default(cuid())
-  sessionId        String      @unique
-  percentScore     Int
-  performanceBand  String
-  strongestSkill   String?
-  weakestSkill     String?
-  summaryPayload   Json
-  createdAt        DateTime    @default(now())
+  id                 String      @id @default(cuid())
+  sessionId          String      @unique
+  percentScore       Int
+  performanceBand    String
+  strongestSkill     String?
+  weakestSkill       String?
+  summaryPayload     Json
+  createdAt          DateTime    @default(now())
   growthFromPrevious Int?
-  previousReportId String?
-  session          TestSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  previousReportId   String?
+  session            TestSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
 }
 
 model LearningPath {
-  id              String             @id @default(cuid())
-  sessionId       String             @unique
-  generatedBy     String             @default("DETERMINISTIC")
-  aiStatus        String             @default("NOT_REQUESTED")
-  aiSummary       String?
-  createdAt       DateTime           @default(now())
-  updatedAt       DateTime           @updatedAt
-  session         TestSession        @relation(fields: [sessionId], references: [id], onDelete: Cascade)
-  items           LearningPathItem[]
-  lessons         LearningLesson[]
+  id          String             @id @default(cuid())
+  sessionId   String             @unique
+  generatedBy String             @default("DETERMINISTIC")
+  aiStatus    String             @default("NOT_REQUESTED")
+  aiSummary   String?
+  createdAt   DateTime           @default(now())
+  updatedAt   DateTime           @updatedAt
+  session     TestSession        @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  items       LearningPathItem[]
+  lessons     LearningLesson[]
 }
 
 model LearningPathItem {
-  id               String       @id @default(cuid())
+  id               String          @id @default(cuid())
   learningPathId   String
   order            Int
   standardCode     String
@@ -473,10 +865,10 @@ model LearningPathItem {
   practicePrompt   String
   aiExplanation    String?
   sourcePayload    Json
-  status           String       @default("TODO")
-  createdAt        DateTime     @default(now())
-  updatedAt        DateTime     @updatedAt
-  learningPath     LearningPath @relation(fields: [learningPathId], references: [id], onDelete: Cascade)
+  status           String          @default("TODO")
+  createdAt        DateTime        @default(now())
+  updatedAt        DateTime        @updatedAt
+  learningPath     LearningPath    @relation(fields: [learningPathId], references: [id], onDelete: Cascade)
   lesson           LearningLesson?
 
   @@unique([learningPathId, order])
@@ -546,25 +938,25 @@ model LessonStep {
 }
 
 model LessonCache {
-  id           String   @id @default(cuid())
-  cacheKey     String   @unique
-  gradeLevel   Int
-  standardCode String
-  skill        String
-  commonError  String
-  payload      Json
-  generatedBy  String
-  modelHint    String?
-  reviewStatus String   @default("PENDING_REVIEW")
-  approvedAt   DateTime?
-  approvedById String?
-  rejectedAt   DateTime?
-  rejectedById String?
+  id              String         @id @default(cuid())
+  cacheKey        String         @unique
+  gradeLevel      Int
+  standardCode    String
+  skill           String
+  commonError     String
+  payload         Json
+  generatedBy     String
+  modelHint       String?
+  reviewStatus    String         @default("PENDING_REVIEW")
+  approvedAt      DateTime?
+  approvedById    String?
+  rejectedAt      DateTime?
+  rejectedById    String?
   doNotRetryUntil DateTime?
-  createdAt    DateTime @default(now())
-  hitCount     Int      @default(0)
-  lastUsedAt   DateTime @default(now())
-  reviews      LessonReview[]
+  createdAt       DateTime       @default(now())
+  hitCount        Int            @default(0)
+  lastUsedAt      DateTime       @default(now())
+  reviews         LessonReview[]
 
   @@index([gradeLevel, standardCode, skill])
 }
@@ -620,44 +1012,44 @@ model LearningLessonItem {
 }
 
 model StudentLessonProgress {
-  id                    String         @id @default(cuid())
-  lessonId              String
-  userId                String
-  status                String         @default("NOT_STARTED")
-  guidedResponses       Json?
-  independentResponses  Json?
-  exitTicketResponses   Json?
-  masteryScore          Int?
-  masteryStatus         String         @default("NOT_STARTED")
-  startedAt             DateTime?
-  completedAt           DateTime?
-  masteredAt            DateTime?
-  createdAt             DateTime       @default(now())
-  updatedAt             DateTime       @updatedAt
-  lesson                LearningLesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
-  user                  User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id                   String         @id @default(cuid())
+  lessonId             String
+  userId               String
+  status               String         @default("NOT_STARTED")
+  guidedResponses      Json?
+  independentResponses Json?
+  exitTicketResponses  Json?
+  masteryScore         Int?
+  masteryStatus        String         @default("NOT_STARTED")
+  startedAt            DateTime?
+  completedAt          DateTime?
+  masteredAt           DateTime?
+  createdAt            DateTime       @default(now())
+  updatedAt            DateTime       @updatedAt
+  lesson               LearningLesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  user                 User           @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([lessonId, userId])
   @@index([userId])
 }
 
 model LearningQuestAttempt {
-  id              String         @id @default(cuid())
-  lessonId        String
-  userId          String
-  worldKey        String
-  questKey        String
-  skill           String
-  standardCode    String
-  score           Int
-  maxScore        Int
-  xpEarned        Int
-  status          String         @default("COMPLETED")
-  responses       Json
-  feedback        Json
-  createdAt       DateTime       @default(now())
-  lesson          LearningLesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
-  user            User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id           String         @id @default(cuid())
+  lessonId     String
+  userId       String
+  worldKey     String
+  questKey     String
+  skill        String
+  standardCode String
+  score        Int
+  maxScore     Int
+  xpEarned     Int
+  status       String         @default("COMPLETED")
+  responses    Json
+  feedback     Json
+  createdAt    DateTime       @default(now())
+  lesson       LearningLesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  user         User           @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId, createdAt])
   @@index([lessonId, userId])
@@ -665,26 +1057,26 @@ model LearningQuestAttempt {
 }
 
 model ReadingCoachAssignment {
-  id            String                @id @default(cuid())
-  classRoomId   String
-  assignedById  String
-  title         String
-  gradeLevel    Int
-  activityType  String                @default("READ_ALOUD")
-  expectedText  String
-  status        String                @default("ASSIGNED")
-  dueDate       DateTime?
-  createdAt     DateTime              @default(now())
-  classRoom     ClassRoom             @relation(fields: [classRoomId], references: [id], onDelete: Cascade)
-  assignedBy    User                  @relation("ReadingCoachAssignedBy", fields: [assignedById], references: [id], onDelete: Cascade)
-  attempts      ReadingCoachAttempt[]
+  id           String                @id @default(cuid())
+  classRoomId  String
+  assignedById String
+  title        String
+  gradeLevel   Int
+  activityType String                @default("READ_ALOUD")
+  expectedText String
+  status       String                @default("ASSIGNED")
+  dueDate      DateTime?
+  createdAt    DateTime              @default(now())
+  classRoom    ClassRoom             @relation(fields: [classRoomId], references: [id], onDelete: Cascade)
+  assignedBy   User                  @relation("ReadingCoachAssignedBy", fields: [assignedById], references: [id], onDelete: Cascade)
+  attempts     ReadingCoachAttempt[]
 
   @@index([classRoomId, status])
   @@index([assignedById, createdAt])
 }
 
 model ReadingCoachAttempt {
-  id             String   @id @default(cuid())
+  id             String                  @id @default(cuid())
   assignmentId   String?
   userId         String
   gradeLevel     Int
@@ -696,13 +1088,13 @@ model ReadingCoachAttempt {
   accuracy       Int
   wordsPerMinute Int?
   focusAreas     Json
-  miscues         Json
-  feedback        Json
-  provider        String
-  audioSeconds    Int?
-  createdAt       DateTime @default(now())
-  assignment      ReadingCoachAssignment? @relation(fields: [assignmentId], references: [id], onDelete: SetNull)
-  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  miscues        Json
+  feedback       Json
+  provider       String
+  audioSeconds   Int?
+  createdAt      DateTime                @default(now())
+  assignment     ReadingCoachAssignment? @relation(fields: [assignmentId], references: [id], onDelete: SetNull)
+  user           User                    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([assignmentId])
   @@index([userId, createdAt])
@@ -710,28 +1102,28 @@ model ReadingCoachAttempt {
 }
 
 model LiteracyProfile {
-  id                    String                 @id @default(cuid())
-  studentUserId         String                 @unique
-  ehriPhase             EhriPhase              @default(PRE_ALPHABETIC)
-  ehriPhaseConfidence   Float                  @default(0)
-  lexileEstimate        Int?
-  gradeEquivalent       Float?
-  lastDiagnosticAt      DateTime?
-  currentDailyTargetId  String?
-  phasePositionId       String?
-  diagnosticConfidence  Float?
+  id                     String                @id @default(cuid())
+  studentUserId          String                @unique
+  ehriPhase              EhriPhase             @default(PRE_ALPHABETIC)
+  ehriPhaseConfidence    Float                 @default(0)
+  lexileEstimate         Int?
+  gradeEquivalent        Float?
+  lastDiagnosticAt       DateTime?
+  currentDailyTargetId   String?
+  phasePositionId        String?
+  diagnosticConfidence   Float?
   diagnosticEvidenceJson Json?
-  createdAt             DateTime               @default(now())
-  updatedAt             DateTime               @updatedAt
-  student               User                   @relation(fields: [studentUserId], references: [id], onDelete: Cascade)
-  currentDailyTarget    DailyTarget?           @relation(fields: [currentDailyTargetId], references: [id], onDelete: SetNull)
-  phasePosition         PhasePosition?         @relation(fields: [phasePositionId], references: [id], onDelete: SetNull)
-  strandScores          StrandScore[]
-  phonogramMastery      PhonogramMastery[]
-  syllableTypeMastery   SyllableTypeMastery[]
-  dialectSettings       DialectSettings?
-  autopilotDecisions    AutopilotDecision[]
-  voiceSessions         VoiceSession[]
+  createdAt              DateTime              @default(now())
+  updatedAt              DateTime              @updatedAt
+  student                User                  @relation(fields: [studentUserId], references: [id], onDelete: Cascade)
+  currentDailyTarget     DailyTarget?          @relation(fields: [currentDailyTargetId], references: [id], onDelete: SetNull)
+  phasePosition          PhasePosition?        @relation(fields: [phasePositionId], references: [id], onDelete: SetNull)
+  strandScores           StrandScore[]
+  phonogramMastery       PhonogramMastery[]
+  syllableTypeMastery    SyllableTypeMastery[]
+  dialectSettings        DialectSettings?
+  autopilotDecisions     AutopilotDecision[]
+  voiceSessions          VoiceSession[]
 
   @@index([ehriPhase])
 }
@@ -761,40 +1153,40 @@ model PhasePosition {
   prerequisites   String[]
   createdAt       DateTime @default(now())
 
-  lessons         Lesson[]
-  diagnosticItems DiagnosticItem[]
-  dailyTargets    DailyTarget[]
+  lessons          Lesson[]
+  diagnosticItems  DiagnosticItem[]
+  dailyTargets     DailyTarget[]
   literacyProfiles LiteracyProfile[]
 
   @@unique([phaseNumber, subPosition])
 }
 
 model DailyTarget {
-  id                  String   @id @default(cuid())
+  id                  String    @id @default(cuid())
   phasePositionId     String
-  code                String   @unique
+  code                String    @unique
   kidVisibleLabel     String
   tutorLabel          String
-  description         String   @db.Text
+  description         String    @db.Text
   introductionOrder   Int
   targetPatternsJson  Json
   allowedPatternCodes String[]
   blockedPatternCodes String[]
   exampleWords        String[]
   exampleNonwords     String[]
-  reviewStatus        String   @default("PENDING")
+  reviewStatus        String    @default("PENDING")
   reviewedAt          DateTime?
   reviewedByUserId    String?
-  reviewNotes         String?  @db.Text
-  version             Int      @default(1)
-  effectiveFrom       DateTime @default(now())
+  reviewNotes         String?   @db.Text
+  version             Int       @default(1)
+  effectiveFrom       DateTime  @default(now())
   retiredAt           DateTime?
-  createdAt           DateTime @default(now())
+  createdAt           DateTime  @default(now())
 
-  phasePosition   PhasePosition @relation(fields: [phasePositionId], references: [id])
-  lessons         Lesson[]
-  diagnosticItems DiagnosticItem[]
-  mastery         DailyTargetMastery[]
+  phasePosition    PhasePosition        @relation(fields: [phasePositionId], references: [id])
+  lessons          Lesson[]
+  diagnosticItems  DiagnosticItem[]
+  mastery          DailyTargetMastery[]
   literacyProfiles LiteracyProfile[]
 
   @@index([phasePositionId, introductionOrder])
@@ -802,7 +1194,7 @@ model DailyTarget {
 }
 
 model DiagnosticItem {
-  id                             String   @id @default(cuid())
+  id                             String    @id @default(cuid())
   strand                         String
   phasePositionId                String?
   dailyTargetId                  String?
@@ -818,14 +1210,14 @@ model DiagnosticItem {
   skill                          String?
   displayMode                    String?
   responseMode                   String?
-  itemStatus                     String   @default("candidate")
+  itemStatus                     String    @default("candidate")
   vocabularyBand                 String?
   targetWord                     String?
   comprehensionMode              String?
   stimulusMode                   String?
   calibratedProbeLevel           String?
-  audioAssetRequired             Boolean  @default(false)
-  audioValidatedByHuman          Boolean  @default(false)
+  audioAssetRequired             Boolean   @default(false)
+  audioValidatedByHuman          Boolean   @default(false)
   expectedPronunciation          String?
   targetPattern                  String?
   wordType                       String?
@@ -834,21 +1226,21 @@ model DiagnosticItem {
   placementEvidenceJson          Json?
   fluencyEvidenceJson            Json?
   difficultyBand                 Int
-  isPracticeItem                 Boolean  @default(false)
-  reviewStatus                   String   @default("PENDING")
+  isPracticeItem                 Boolean   @default(false)
+  reviewStatus                   String    @default("PENDING")
   reviewedAt                     DateTime?
   reviewedByUserId               String?
-  reviewNotes                    String?  @db.Text
+  reviewNotes                    String?   @db.Text
   firstLookReviewModelDecisionId String?
-  version                        Int      @default(1)
-  effectiveFrom                  DateTime @default(now())
+  version                        Int       @default(1)
+  effectiveFrom                  DateTime  @default(now())
   retiredAt                      DateTime?
-  createdAt                      DateTime @default(now())
+  createdAt                      DateTime  @default(now())
 
-  phasePosition PhasePosition? @relation(fields: [phasePositionId], references: [id])
-  dailyTarget   DailyTarget?   @relation(fields: [dailyTargetId], references: [id])
-  firstLookReviewModelDecision ModelDecision? @relation("DiagnosticItemFirstLookReview", fields: [firstLookReviewModelDecisionId], references: [id], onDelete: SetNull)
-  attempts      DiagnosticItemAttempt[]
+  phasePosition                PhasePosition?          @relation(fields: [phasePositionId], references: [id])
+  dailyTarget                  DailyTarget?            @relation(fields: [dailyTargetId], references: [id])
+  firstLookReviewModelDecision ModelDecision?          @relation("DiagnosticItemFirstLookReview", fields: [firstLookReviewModelDecisionId], references: [id], onDelete: SetNull)
+  attempts                     DiagnosticItemAttempt[]
 
   @@index([strand, difficultyBand])
   @@index([reviewStatus])
@@ -885,15 +1277,15 @@ model DiagnosticItemAttempt {
 }
 
 model DiagnosticSession {
-  id                    String   @id @default(cuid())
+  id                    String    @id @default(cuid())
   studentUserId         String
-  startedAt             DateTime @default(now())
+  startedAt             DateTime  @default(now())
   completedAt           DateTime?
   resultJson            Json?
   confidenceScore       Float?
-  confidenceExplanation String?  @db.Text
-  totalScoredItems      Int      @default(0)
-  audioClearItems       Int      @default(0)
+  confidenceExplanation String?   @db.Text
+  totalScoredItems      Int       @default(0)
+  audioClearItems       Int       @default(0)
 
   attempts DiagnosticItemAttempt[]
 
@@ -901,33 +1293,33 @@ model DiagnosticSession {
 }
 
 model Lesson {
-  id               String   @id @default(cuid())
-  phasePositionId  String
-  dailyTargetId    String
-  passageId        String?
-  phaseBand        Int?
-  dailyTargetCode  String?
-  targetPattern    String?
-  targetLabel      String?
-  lessonStatus     String   @default("candidate")
-  lessonType       String?
-  generatedBy      String?
+  id                    String    @id @default(cuid())
+  phasePositionId       String
+  dailyTargetId         String
+  passageId             String?
+  phaseBand             Int?
+  dailyTargetCode       String?
+  targetPattern         String?
+  targetLabel           String?
+  lessonStatus          String    @default("candidate")
+  lessonType            String?
+  generatedBy           String?
   sourceModelDecisionId String?
-  contentAuditStatus String?
-  reviewStatus     String   @default("PENDING")
-  reviewedAt       DateTime?
-  reviewedByUserId String?
-  reviewNotes      String?  @db.Text
-  approvedAt       DateTime?
-  version          Int      @default(1)
-  effectiveFrom    DateTime @default(now())
-  retiredAt        DateTime?
-  createdAt        DateTime @default(now())
+  contentAuditStatus    String?
+  reviewStatus          String    @default("PENDING")
+  reviewedAt            DateTime?
+  reviewedByUserId      String?
+  reviewNotes           String?   @db.Text
+  approvedAt            DateTime?
+  version               Int       @default(1)
+  effectiveFrom         DateTime  @default(now())
+  retiredAt             DateTime?
+  createdAt             DateTime  @default(now())
 
   parts         LessonPart[]
-  passage       Passage?      @relation(fields: [passageId], references: [id])
-  phasePosition PhasePosition @relation(fields: [phasePositionId], references: [id])
-  dailyTarget   DailyTarget   @relation(fields: [dailyTargetId], references: [id])
+  passage       Passage?        @relation(fields: [passageId], references: [id])
+  phasePosition PhasePosition   @relation(fields: [phasePositionId], references: [id])
+  dailyTarget   DailyTarget     @relation(fields: [dailyTargetId], references: [id])
   sessions      LessonSession[]
 
   @@index([phasePositionId, dailyTargetId])
@@ -937,7 +1329,7 @@ model Lesson {
 }
 
 model LessonPart {
-  id                             String   @id @default(cuid())
+  id                             String    @id @default(cuid())
   lessonId                       String
   partNumber                     Int
   partLabel                      String
@@ -956,17 +1348,17 @@ model LessonPart {
   responseMode                   String?
   assistedModeAllowed            Boolean?
   independentScoreEligible       Boolean?
-  designNotes                    String?  @db.Text
-  reviewStatus                   String   @default("PENDING")
+  designNotes                    String?   @db.Text
+  reviewStatus                   String    @default("PENDING")
   reviewedAt                     DateTime?
   reviewedByUserId               String?
-  reviewNotes                    String?  @db.Text
+  reviewNotes                    String?   @db.Text
   firstLookReviewModelDecisionId String?
-  version                        Int      @default(1)
-  effectiveFrom                  DateTime @default(now())
+  version                        Int       @default(1)
+  effectiveFrom                  DateTime  @default(now())
   retiredAt                      DateTime?
 
-  lesson Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  lesson                       Lesson         @relation(fields: [lessonId], references: [id], onDelete: Cascade)
   firstLookReviewModelDecision ModelDecision? @relation("LessonPartFirstLookReview", fields: [firstLookReviewModelDecisionId], references: [id], onDelete: SetNull)
 
   @@unique([lessonId, partNumber])
@@ -977,28 +1369,28 @@ model LessonPart {
 }
 
 model Passage {
-  id                             String   @id @default(cuid())
+  id                             String    @id @default(cuid())
   source                         String
   sourceMetadataJson             Json?
   wordCount                      Int
   phasePositionId                String
-  text                           String   @db.Text
+  text                           String    @db.Text
   contentAuditJson               Json
   decodabilityScore              Float
-  reviewStatus                   String   @default("PENDING")
+  reviewStatus                   String    @default("PENDING")
   reviewedAt                     DateTime?
   reviewedByUserId               String?
-  reviewNotes                    String?  @db.Text
+  reviewNotes                    String?   @db.Text
   firstLookReviewModelDecisionId String?
-  version                        Int      @default(1)
-  effectiveFrom                  DateTime @default(now())
+  version                        Int       @default(1)
+  effectiveFrom                  DateTime  @default(now())
   retiredAt                      DateTime?
   sourceAttributionCode          String?
-  createdAt                      DateTime @default(now())
+  createdAt                      DateTime  @default(now())
 
-  lessons          Lesson[]
-  passageReviewLog PassageReviewLog[]
-  firstLookReviewModelDecision ModelDecision? @relation("PassageFirstLookReview", fields: [firstLookReviewModelDecisionId], references: [id], onDelete: SetNull)
+  lessons                      Lesson[]
+  passageReviewLog             PassageReviewLog[]
+  firstLookReviewModelDecision ModelDecision?     @relation("PassageFirstLookReview", fields: [firstLookReviewModelDecisionId], references: [id], onDelete: SetNull)
 
   @@index([phasePositionId, reviewStatus])
   @@index([firstLookReviewModelDecisionId])
@@ -1030,11 +1422,11 @@ model HighFrequencyWord {
 }
 
 model HfwMastery {
-  id            String   @id @default(cuid())
+  id            String    @id @default(cuid())
   studentUserId String
   hfwId         String
-  level         String   @default("INTRODUCED")
-  reviewCount   Int      @default(0)
+  level         String    @default("INTRODUCED")
+  reviewCount   Int       @default(0)
   lastSeenAt    DateTime?
 
   hfw HighFrequencyWord @relation(fields: [hfwId], references: [id])
@@ -1043,19 +1435,19 @@ model HfwMastery {
 }
 
 model DailyTargetMastery {
-  id                        String   @id @default(cuid())
+  id                        String    @id @default(cuid())
   studentUserId             String
   dailyTargetId             String
-  decodingStatus            String   @default("NOT_STARTED")
-  encodingStatus            String   @default("NOT_STARTED")
-  connectedTextStatus       String   @default("NOT_STARTED")
+  decodingStatus            String    @default("NOT_STARTED")
+  encodingStatus            String    @default("NOT_STARTED")
+  connectedTextStatus       String    @default("NOT_STARTED")
   lastDecodingAccuracy      Float?
   lastEncodingAccuracy      Float?
   lastConnectedTextAccuracy Float?
   evidenceJson              Json?
   lastPracticedAt           DateTime?
-  createdAt                 DateTime @default(now())
-  updatedAt                 DateTime @updatedAt
+  createdAt                 DateTime  @default(now())
+  updatedAt                 DateTime  @updatedAt
 
   dailyTarget DailyTarget @relation(fields: [dailyTargetId], references: [id])
 
@@ -1096,10 +1488,10 @@ model Morpheme {
 }
 
 model LessonSession {
-  id                String   @id @default(cuid())
+  id                String    @id @default(cuid())
   studentUserId     String
   lessonId          String
-  startedAt         DateTime @default(now())
+  startedAt         DateTime  @default(now())
   completedAt       DateTime?
   partResultsJson   Json
   reteachLogJson    Json
@@ -1128,15 +1520,15 @@ model ReteachEvent {
 }
 
 model PhonogramMastery {
-  id                String           @id @default(cuid())
+  id                String          @id @default(cuid())
   literacyProfileId String
   phonogramFamilyId String
-  level             MasteryLevel      @default(UNTESTED)
-  correctAttempts   Int               @default(0)
-  totalAttempts     Int               @default(0)
+  level             MasteryLevel    @default(UNTESTED)
+  correctAttempts   Int             @default(0)
+  totalAttempts     Int             @default(0)
   lastSeenAt        DateTime?
-  literacyProfile   LiteracyProfile   @relation(fields: [literacyProfileId], references: [id], onDelete: Cascade)
-  phonogramFamily   PhonogramFamily   @relation(fields: [phonogramFamilyId], references: [id])
+  literacyProfile   LiteracyProfile @relation(fields: [literacyProfileId], references: [id], onDelete: Cascade)
+  phonogramFamily   PhonogramFamily @relation(fields: [phonogramFamilyId], references: [id])
 
   @@unique([literacyProfileId, phonogramFamilyId])
 }
@@ -1145,10 +1537,10 @@ model SyllableTypeMastery {
   id                String          @id @default(cuid())
   literacyProfileId String
   syllableType      SyllableType
-  level             MasteryLevel     @default(UNTESTED)
-  correctAttempts   Int              @default(0)
-  totalAttempts     Int              @default(0)
-  literacyProfile   LiteracyProfile  @relation(fields: [literacyProfileId], references: [id], onDelete: Cascade)
+  level             MasteryLevel    @default(UNTESTED)
+  correctAttempts   Int             @default(0)
+  totalAttempts     Int             @default(0)
+  literacyProfile   LiteracyProfile @relation(fields: [literacyProfileId], references: [id], onDelete: Cascade)
 
   @@unique([literacyProfileId, syllableType])
 }
@@ -1179,27 +1571,27 @@ model AutopilotDecision {
 }
 
 model VoiceSession {
-  id                  String          @id @default(cuid())
-  literacyProfileId   String
-  sessionType         String
-  startedAt           DateTime        @default(now())
-  endedAt             DateTime?
-  durationSeconds     Int?
-  audioStorageKey     String?
-  transcriptJson      Json?
-  wordsRead           Int?
-  wordsCorrect        Int?
-  wordsSelfCorrected  Int?
-  wordsMissed         Int?
-  wpm                 Int?
-  retentionTier       String          @default("SERVICE")
-  deleteAfterDate     DateTime?
-  audioDeletedAt      DateTime?
-  asrVendor           String?
-  asrModelVersion     String?
-  asrConfidenceMean   Float?
-  literacyProfile     LiteracyProfile @relation(fields: [literacyProfileId], references: [id], onDelete: Cascade)
-  labeledSegments     LabeledVoiceSegment[]
+  id                 String                @id @default(cuid())
+  literacyProfileId  String
+  sessionType        String
+  startedAt          DateTime              @default(now())
+  endedAt            DateTime?
+  durationSeconds    Int?
+  audioStorageKey    String?
+  transcriptJson     Json?
+  wordsRead          Int?
+  wordsCorrect       Int?
+  wordsSelfCorrected Int?
+  wordsMissed        Int?
+  wpm                Int?
+  retentionTier      String                @default("SERVICE")
+  deleteAfterDate    DateTime?
+  audioDeletedAt     DateTime?
+  asrVendor          String?
+  asrModelVersion    String?
+  asrConfidenceMean  Float?
+  literacyProfile    LiteracyProfile       @relation(fields: [literacyProfileId], references: [id], onDelete: Cascade)
+  labeledSegments    LabeledVoiceSegment[]
 
   @@index([literacyProfileId, startedAt])
   @@index([sessionType, startedAt])
@@ -1208,25 +1600,25 @@ model VoiceSession {
 }
 
 model VoiceConsent {
-  id                            String                 @id @default(cuid())
-  studentUserId                 String                 @unique
-  serviceAudioRetained          Boolean                @default(true)
-  serviceAudioRetentionDays     Int                    @default(90)
-  generalDataRetained           Boolean                @default(true)
-  generalDataRetentionDays      Int                    @default(90)
-  trainingCorpusOptedIn         Boolean                @default(false)
-  trainingCorpusOptedInAt       DateTime?
-  trainingCorpusOptedOutAt      DateTime?
-  researchPublicationOptedIn    Boolean                @default(false)
-  researchPublicationOptedInAt  DateTime?
-  consentTextVersion            String
-  consentLastUpdatedAt          DateTime               @default(now())
-  consentLastUpdatedByUserId    String?
-  trainingPurgeRequestedAt      DateTime?
-  trainingPurgeExpectedBy       DateTime?
-  createdAt                     DateTime               @default(now())
-  student                       User                   @relation("StudentConsent", fields: [studentUserId], references: [id], onDelete: Cascade)
-  decisionLog                   VoiceConsentDecision[]
+  id                           String                 @id @default(cuid())
+  studentUserId                String                 @unique
+  serviceAudioRetained         Boolean                @default(true)
+  serviceAudioRetentionDays    Int                    @default(90)
+  generalDataRetained          Boolean                @default(true)
+  generalDataRetentionDays     Int                    @default(90)
+  trainingCorpusOptedIn        Boolean                @default(false)
+  trainingCorpusOptedInAt      DateTime?
+  trainingCorpusOptedOutAt     DateTime?
+  researchPublicationOptedIn   Boolean                @default(false)
+  researchPublicationOptedInAt DateTime?
+  consentTextVersion           String
+  consentLastUpdatedAt         DateTime               @default(now())
+  consentLastUpdatedByUserId   String?
+  trainingPurgeRequestedAt     DateTime?
+  trainingPurgeExpectedBy      DateTime?
+  createdAt                    DateTime               @default(now())
+  student                      User                   @relation("StudentConsent", fields: [studentUserId], references: [id], onDelete: Cascade)
+  decisionLog                  VoiceConsentDecision[]
 
   @@index([trainingCorpusOptedIn])
 }
@@ -1270,32 +1662,32 @@ model StudentEventOutcome {
 }
 
 model ModelDecision {
-  id               String                 @id @default(cuid())
-  decisionType     String
-  modelProvider    String
-  modelName        String
-  modelVersion     String?
-  inputContextJson Json
-  inputHash        String
-  promptKey        String?
-  decisionJson     Json
-  outputHash       String?
-  inferenceMs      Int?
-  inputTokens      Int?
-  outputTokens     Int?
-  costUsd          Float?
-  studentEventId   String?
-  parentDecisionId String?
-  retentionTier    String                 @default("SERVICE")
-  deleteAfterDate  DateTime?
-  occurredAt       DateTime               @default(now())
-  studentEvent     StudentEvent?          @relation(fields: [studentEventId], references: [id], onDelete: SetNull)
-  parentDecision   ModelDecision?         @relation("DecisionChain", fields: [parentDecisionId], references: [id], onDelete: SetNull)
-  childDecisions   ModelDecision[]        @relation("DecisionChain")
-  outcomes         ModelDecisionOutcome[]
-  diagnosticItemFirstLookReviews DiagnosticItem[] @relation("DiagnosticItemFirstLookReview")
-  lessonPartFirstLookReviews     LessonPart[]     @relation("LessonPartFirstLookReview")
-  passageFirstLookReviews        Passage[]        @relation("PassageFirstLookReview")
+  id                             String                 @id @default(cuid())
+  decisionType                   String
+  modelProvider                  String
+  modelName                      String
+  modelVersion                   String?
+  inputContextJson               Json
+  inputHash                      String
+  promptKey                      String?
+  decisionJson                   Json
+  outputHash                     String?
+  inferenceMs                    Int?
+  inputTokens                    Int?
+  outputTokens                   Int?
+  costUsd                        Float?
+  studentEventId                 String?
+  parentDecisionId               String?
+  retentionTier                  String                 @default("SERVICE")
+  deleteAfterDate                DateTime?
+  occurredAt                     DateTime               @default(now())
+  studentEvent                   StudentEvent?          @relation(fields: [studentEventId], references: [id], onDelete: SetNull)
+  parentDecision                 ModelDecision?         @relation("DecisionChain", fields: [parentDecisionId], references: [id], onDelete: SetNull)
+  childDecisions                 ModelDecision[]        @relation("DecisionChain")
+  outcomes                       ModelDecisionOutcome[]
+  diagnosticItemFirstLookReviews DiagnosticItem[]       @relation("DiagnosticItemFirstLookReview")
+  lessonPartFirstLookReviews     LessonPart[]           @relation("LessonPartFirstLookReview")
+  passageFirstLookReviews        Passage[]              @relation("PassageFirstLookReview")
 
   @@index([decisionType, occurredAt])
   @@index([modelProvider, modelName, occurredAt])
@@ -1319,22 +1711,22 @@ model ModelDecisionOutcome {
 }
 
 model EventExportBatch {
-  id                 String   @id @default(cuid())
-  batchName          String   @unique
-  exportPurpose      String
-  eventCount         Int
-  decisionCount      Int
-  eventTypeFilter    String[]
-  decisionTypeFilter String[]
-  dateRangeStart     DateTime?
-  dateRangeEnd       DateTime?
-  consentTierMinimum String
-  excludedRecordCount Int     @default(0)
-  manifestStorageKey String
-  manifestJsonl      String   @db.Text
-  exportedByUserId   String
-  exportedAt         DateTime @default(now())
-  notes              String?  @db.Text
+  id                  String    @id @default(cuid())
+  batchName           String    @unique
+  exportPurpose       String
+  eventCount          Int
+  decisionCount       Int
+  eventTypeFilter     String[]
+  decisionTypeFilter  String[]
+  dateRangeStart      DateTime?
+  dateRangeEnd        DateTime?
+  consentTierMinimum  String
+  excludedRecordCount Int       @default(0)
+  manifestStorageKey  String
+  manifestJsonl       String    @db.Text
+  exportedByUserId    String
+  exportedAt          DateTime  @default(now())
+  notes               String?   @db.Text
 
   @@index([exportPurpose, exportedAt])
 }
@@ -1370,30 +1762,30 @@ model VoiceConsentDecision {
 }
 
 model LabeledVoiceSegment {
-  id                 String       @id @default(cuid())
+  id                 String        @id @default(cuid())
   voiceSessionId     String
   segmentStartMs     Int
   segmentEndMs       Int
   segmentAudioKey    String?
-  expectedText       String       @db.Text
-  asrTranscript      String       @db.Text
-  humanTranscript    String?      @db.Text
+  expectedText       String        @db.Text
+  asrTranscript      String        @db.Text
+  humanTranscript    String?       @db.Text
   miscueType         String?
   phonogramCode      String?
   syllableType       SyllableType?
   dialectTransferTag String?
   uncertaintyScore   Float?
-  routedFromQueue    Boolean      @default(false)
+  routedFromQueue    Boolean       @default(false)
   skippedAt          DateTime?
   skippedByUserId    String?
-  skipReason         String?      @db.Text
+  skipReason         String?       @db.Text
   labeledByUserId    String?
   labeledAt          DateTime?
-  labelerNotes       String?      @db.Text
-  isEvalSet          Boolean      @default(false)
+  labelerNotes       String?       @db.Text
+  isEvalSet          Boolean       @default(false)
   qaParentSegmentId  String?
-  createdAt          DateTime     @default(now())
-  voiceSession       VoiceSession @relation(fields: [voiceSessionId], references: [id], onDelete: Cascade)
+  createdAt          DateTime      @default(now())
+  voiceSession       VoiceSession  @relation(fields: [voiceSessionId], references: [id], onDelete: Cascade)
 
   @@index([voiceSessionId, segmentStartMs])
   @@index([labeledAt])
@@ -1433,12 +1825,12 @@ model VoiceAudioDeletionLog {
 }
 
 model VoiceAudioAccessLog {
-  id              String   @id @default(cuid())
-  voiceSessionId  String?
-  segmentId       String?
-  accessedById    String
-  accessPurpose   String
-  createdAt       DateTime @default(now())
+  id             String   @id @default(cuid())
+  voiceSessionId String?
+  segmentId      String?
+  accessedById   String
+  accessPurpose  String
+  createdAt      DateTime @default(now())
 
   @@index([voiceSessionId, createdAt])
   @@index([segmentId, createdAt])
@@ -1446,23 +1838,23 @@ model VoiceAudioAccessLog {
 }
 
 model ResourceLink {
-  id           String   @id @default(cuid())
-  gradeLevel   Int?
-  standardCode String
-  skill        String
-  title        String
-  url          String
-  provider     String
-  description  String?
-  tier         String?
-  belowGradeLevel Boolean @default(false)
-  aboveGradeLevel Boolean @default(false)
-  createdById  String?
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-  createdBy    User?    @relation(fields: [createdById], references: [id], onDelete: SetNull)
-  heroLessons  LearningLesson[]
-  suggestions  ResourceSuggestion[]
+  id              String               @id @default(cuid())
+  gradeLevel      Int?
+  standardCode    String
+  skill           String
+  title           String
+  url             String
+  provider        String
+  description     String?
+  tier            String?
+  belowGradeLevel Boolean              @default(false)
+  aboveGradeLevel Boolean              @default(false)
+  createdById     String?
+  createdAt       DateTime             @default(now())
+  updatedAt       DateTime             @updatedAt
+  createdBy       User?                @relation(fields: [createdById], references: [id], onDelete: SetNull)
+  heroLessons     LearningLesson[]
+  suggestions     ResourceSuggestion[]
 
   @@index([gradeLevel, standardCode])
   @@index([belowGradeLevel, standardCode])
@@ -1483,7 +1875,7 @@ model StateRequests {
 }
 
 model ResourceSuggestion {
-  id             String   @id @default(cuid())
+  id             String        @id @default(cuid())
   teacherUserId  String
   url            String
   title          String
@@ -1493,15 +1885,15 @@ model ResourceSuggestion {
   skill          String?
   description    String?
   rationale      String?
-  status         String   @default("PENDING")
+  status         String        @default("PENDING")
   reviewedById   String?
   reviewedAt     DateTime?
   reviewerNotes  String?
   resourceLinkId String?
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
-  teacher        User     @relation("ResourceSuggester", fields: [teacherUserId], references: [id], onDelete: Cascade)
-  reviewedBy     User?    @relation("ResourceReviewer", fields: [reviewedById], references: [id], onDelete: SetNull)
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+  teacher        User          @relation("ResourceSuggester", fields: [teacherUserId], references: [id], onDelete: Cascade)
+  reviewedBy     User?         @relation("ResourceReviewer", fields: [reviewedById], references: [id], onDelete: SetNull)
   resourceLink   ResourceLink? @relation(fields: [resourceLinkId], references: [id], onDelete: SetNull)
 
   @@index([status, createdAt])
@@ -1509,57 +1901,57 @@ model ResourceSuggestion {
 }
 
 model TutorAgentMemory {
-  id              String   @id @default(cuid())
-  userId          String   @unique
-  gradeLevel      Int?
-  learnerSummary  String
-  weakStandards   Json
-  masteredSkills  Json
+  id                String    @id @default(cuid())
+  userId            String    @unique
+  gradeLevel        Int?
+  learnerSummary    String
+  weakStandards     Json
+  masteredSkills    Json
   preferredSupports Json
   lastInteractionAt DateTime?
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
-  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+  user              User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model TutorAgentMessage {
-  id          String   @id @default(cuid())
-  userId      String
-  role        String
-  intent      String
-  message     String
-  response    String
-  artifacts   Json?
-  createdAt   DateTime @default(now())
-  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id        String   @id @default(cuid())
+  userId    String
+  role      String
+  intent    String
+  message   String
+  response  String
+  artifacts Json?
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId, createdAt])
 }
 
 model ReportSchedule {
-  id            String                  @id @default(cuid())
+  id            String     @id @default(cuid())
   teacherUserId String
   classRoomId   String?
   frequency     String
   sendDay       Int?
-  sendHour      Int                     @default(7)
-  isEnabled     Boolean                 @default(true)
-  reportType    String                  @default("GROWTH")
-  createdAt     DateTime                @default(now())
-  updatedAt     DateTime                @updatedAt
-  teacher       User                    @relation(fields: [teacherUserId], references: [id], onDelete: Cascade)
-  classRoom     ClassRoom?              @relation(fields: [classRoomId], references: [id], onDelete: Cascade)
+  sendHour      Int        @default(7)
+  isEnabled     Boolean    @default(true)
+  reportType    String     @default("GROWTH")
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+  teacher       User       @relation(fields: [teacherUserId], references: [id], onDelete: Cascade)
+  classRoom     ClassRoom? @relation(fields: [classRoomId], references: [id], onDelete: Cascade)
 }
 
 model PhonogramFamily {
-  id                String   @id @default(cuid())
-  code              String   @unique
+  id                String             @id @default(cuid())
+  code              String             @unique
   category          String
   syllableType      String
   exampleWords      Json
   introductionOrder Int
-  createdAt         DateTime @default(now())
-  updatedAt         DateTime @updatedAt
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
   masteryRecords    PhonogramMastery[]
 
   @@index([category, introductionOrder])
