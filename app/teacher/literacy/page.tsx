@@ -3,7 +3,14 @@ import { TeacherLiteracyMonitor } from "@/components/literacy/TeacherLiteracyMon
 import { SynesisPageShell } from "@/components/synesis/SynesisPageShell";
 import { authOptions } from "@/lib/auth";
 import { db } from "@/lib/db";
-import { ensureLiteracyProfile } from "@/lib/literacy/profile";
+import { getLatestCompletedDiagnosticSession } from "@/lib/literacy/diagnosticResultsData";
+import { toTutorPayload } from "@/lib/literacy/diagnosticResultsPayload";
+import {
+  createDailyTargetLabelResolver,
+  deriveMTSSTierDisplay,
+  deriveReadingProfileSummary,
+  summarizeCaseloadTierMix,
+} from "@/lib/literacy/teacherDashboardData";
 
 async function TeacherLiteracyData() {
   const session = await getServerSession(authOptions);
@@ -27,12 +34,26 @@ async function TeacherLiteracyData() {
     }
   }
 
+  const resolveDailyTargetLabel = createDailyTargetLabelResolver();
   const rows = await Promise.all(
     [...studentProfiles.values()].map(async (student) => {
-      const profile = await ensureLiteracyProfile(student.userId);
-      return { ...student, phase: profile.ehriPhase, confidence: profile.ehriPhaseConfidence };
+      const session = await getLatestCompletedDiagnosticSession(student.userId);
+      const result = session?.resultJson ? toTutorPayload(session.resultJson) : null;
+      const tierDisplay = deriveMTSSTierDisplay(result);
+      const dailyTargetLabel = result
+        ? await resolveDailyTargetLabel(result.firstLessonRecommendation.dailyTargetCode)
+        : null;
+      return {
+        ...student,
+        result,
+        tierDisplay,
+        readingProfile: result ? deriveReadingProfileSummary(result) : null,
+        dailyTargetLabel,
+        computedAt: result?.computedAt ?? null,
+      };
     })
   );
+  const tierMix = summarizeCaseloadTierMix(rows.map((row) => row.tierDisplay?.tier ?? null));
 
   const decisions = rows.length
     ? await db.autopilotDecision.findMany({
@@ -45,7 +66,7 @@ async function TeacherLiteracyData() {
       })
     : [];
 
-  return <TeacherLiteracyMonitor students={rows} decisions={decisions} />;
+  return <TeacherLiteracyMonitor students={rows} decisions={decisions} tierMix={tierMix} />;
 }
 
 export default function TeacherLiteracyPage() {
