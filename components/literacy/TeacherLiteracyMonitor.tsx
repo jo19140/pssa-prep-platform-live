@@ -62,11 +62,11 @@ export function TeacherLiteracyMonitor({
         <aside className="space-y-6">
           <CaseloadTierMix tierMix={tierMix} />
           <AutopilotDecisionFeed decisions={decisions} />
-          <section className="rounded-md border border-slate-200 bg-white p-4 text-sm leading-6 text-slate-600">
-            {HONEST_UNCERTAINTY_FOOTER}
-          </section>
         </aside>
       </div>
+      <footer className="mt-8 border-t border-slate-200 pt-4 text-sm leading-6 text-slate-600">
+        {HONEST_UNCERTAINTY_FOOTER}
+      </footer>
     </main>
   );
 }
