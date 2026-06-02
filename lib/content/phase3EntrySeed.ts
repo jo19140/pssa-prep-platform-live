@@ -49,7 +49,7 @@ export const PHASE_3_ENTRY_TARGETS: DailyTargetSeed[] = [
     allowedPatternCodes: ["closed_short_a", "closed_short_i", "closed_short_o", "closed_short_u", "closed_short_e", "a_e"],
     blockedPatternCodes: ["o_e", "u_e", "e_e", "igh", "ie", "oa", "ee"],
     exampleWords: ["bike", "time", "line", "five", "ride"],
-    exampleNonwords: ["zibe", "mide", "fime", "pive", "nile"],
+    exampleNonwords: ["zibe", "mide", "fime", "pive", "wibe", "jite", "vime", "nibe"],
   },
   {
     code: "o_e",
@@ -61,7 +61,7 @@ export const PHASE_3_ENTRY_TARGETS: DailyTargetSeed[] = [
     allowedPatternCodes: ["closed_short_a", "closed_short_i", "closed_short_o", "closed_short_u", "closed_short_e", "a_e", "i_e"],
     blockedPatternCodes: ["u_e", "e_e", "oa", "ow", "oe", "ai", "ay"],
     exampleWords: ["home", "rope", "joke", "note", "stone"],
-    exampleNonwords: ["zome", "fope", "boke", "nole", "pote"],
+    exampleNonwords: ["zome", "fope", "bofe", "nofe", "vone", "wode", "zode", "lote"],
   },
   {
     code: "u_e",
@@ -73,7 +73,7 @@ export const PHASE_3_ENTRY_TARGETS: DailyTargetSeed[] = [
     allowedPatternCodes: ["closed_short_a", "closed_short_i", "closed_short_o", "closed_short_u", "closed_short_e", "a_e", "i_e", "o_e"],
     blockedPatternCodes: ["e_e", "ue", "ew", "oo", "oa", "ai", "ay"],
     exampleWords: ["cube", "mule", "cute", "tune", "flute"],
-    exampleNonwords: ["zube", "fule", "nute", "mune", "plute"],
+    exampleNonwords: ["mune", "plute", "vune", "zune", "gube", "mube", "nube", "pude"],
   },
   {
     code: "e_e",
@@ -85,7 +85,7 @@ export const PHASE_3_ENTRY_TARGETS: DailyTargetSeed[] = [
     allowedPatternCodes: ["closed_short_a", "closed_short_i", "closed_short_o", "closed_short_u", "closed_short_e", "a_e", "i_e", "o_e", "u_e"],
     blockedPatternCodes: ["ee", "ea", "y_final", "ai", "ay", "oa", "ue"],
     exampleWords: ["these", "theme", "eve", "complete", "delete"],
-    exampleNonwords: ["zete", "pheme", "nede", "bete", "lete"],
+    exampleNonwords: ["pheme", "zede", "gete", "kete", "nepe", "zene", "gede", "hefe"],
   },
 ];
 
