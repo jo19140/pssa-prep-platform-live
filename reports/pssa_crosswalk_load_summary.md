@@ -1,8 +1,8 @@
 # PSSA Crosswalk Load Summary
 
-- Mode: file-only-dry-run
-- Env: N/A
-- Wrote to DB: no
+- Mode: write
+- Env: dev
+- Wrote to DB: yes
 - Canonical crosswalk rows: 241
 - Canonical CC join rows: 936
 - Anomaly rows: 6
@@ -20,7 +20,12 @@
 
 ## DB Reconcile Counts
 
-- DB actions: N/A (canonical source only; no DB comparison)
+- Crosswalk inserts: 0
+- Crosswalk updates: 0
+- Crosswalk noops: 241
+- CC join inserts: 0
+- CC join removes: 0
+- CC join noops: 936
 
 ## Validation Gates
 
@@ -39,7 +44,7 @@
 
 - Zero invented EC, anchor, descriptor, or CC values: validation gate `PSSA_XWALK_NO_INVENTION` passed.
 - File-only idempotency proves deterministic canonical output for the unchanged CSV.
-- DB-aware idempotency was not evaluated in file-only mode.
+- DB-aware idempotency: PASS (Post-write reconcile plan is a no-op for unchanged CSV.)
 
 ## Anomaly Raw Values
 

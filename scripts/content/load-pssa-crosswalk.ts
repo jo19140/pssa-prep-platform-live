@@ -131,6 +131,7 @@ type DbIdempotencyCheck = {
 type Args = {
   write: boolean;
   dbAware: boolean;
+  selfTest: boolean;
   env: string | null;
   allowProduction: boolean;
   csvPath: string;
@@ -140,6 +141,7 @@ function parseArgs(argv: string[]): Args {
   const args: Args = {
     write: false,
     dbAware: false,
+    selfTest: false,
     env: null,
     allowProduction: false,
     csvPath: CSV_PATH,
@@ -153,6 +155,8 @@ function parseArgs(argv: string[]): Args {
       args.write = false;
     } else if (arg === "--db-aware" || arg === "--db-aware-dry-run") {
       args.dbAware = true;
+    } else if (arg === "--self-test") {
+      args.selfTest = true;
     } else if (arg === "--allow-production") {
       args.allowProduction = true;
     } else if (arg === "--env") {
@@ -447,8 +451,22 @@ function countByGrade(rows: CanonicalCrosswalk[]) {
   return counts;
 }
 
+function canonicalizeJsonForComparison(value: unknown): unknown {
+  if (value === null || value === undefined) return null;
+  if (Array.isArray(value)) return value.map(canonicalizeJsonForComparison);
+  if (typeof value === "object") {
+    return Object.keys(value as Record<string, unknown>)
+      .sort()
+      .reduce<Record<string, unknown>>((acc, key) => {
+        acc[key] = canonicalizeJsonForComparison((value as Record<string, unknown>)[key]);
+        return acc;
+      }, {});
+  }
+  return value;
+}
+
 function jsonEqual(a: unknown, b: unknown) {
-  return JSON.stringify(a ?? null) === JSON.stringify(b ?? null);
+  return JSON.stringify(canonicalizeJsonForComparison(a)) === JSON.stringify(canonicalizeJsonForComparison(b));
 }
 
 function dbRowMatches(dbRow: Record<string, unknown>, canonical: CanonicalCrosswalk) {
@@ -459,6 +477,43 @@ function dbRowMatches(dbRow: Record<string, unknown>, canonical: CanonicalCrossw
     }
     return dbRow[key] === value;
   });
+}
+
+function assertSelfTest(condition: boolean, message: string) {
+  if (!condition) {
+    throw new Error(`DB-2 JSON comparator self-test failed: ${message}`);
+  }
+}
+
+function runSelfTest() {
+  assertSelfTest(jsonEqual({ a: 1, b: 2 }, { b: 2, a: 1 }), "object key order should be ignored.");
+  assertSelfTest(!jsonEqual({ a: [1, 2] }, { a: [2, 1] }), "array order should be respected.");
+  assertSelfTest(jsonEqual(null, null), "null should compare equal to null.");
+  assertSelfTest(!jsonEqual(null, {}), "null should not compare equal to an empty object.");
+
+  const anomalyPayload = {
+    field: "paCoreStandardCodes",
+    sourceValue: "CC.1.4.7.B",
+    correctedValue: "CC.1.4.8.B",
+    reason: "PDE Grade 8 TDA reference block lists CC.1.4.7.B (grade-level mismatch); corrected to CC.1.4.8.B for grade consistency",
+    humanConfirmed: false,
+  };
+  const jsonbReadbackOrder = {
+    field: "paCoreStandardCodes",
+    reason: "PDE Grade 8 TDA reference block lists CC.1.4.7.B (grade-level mismatch); corrected to CC.1.4.8.B for grade consistency",
+    sourceValue: "CC.1.4.7.B",
+    humanConfirmed: false,
+    correctedValue: "CC.1.4.8.B",
+  };
+  assertSelfTest(jsonEqual(anomalyPayload, jsonbReadbackOrder), "actual anomaly payload should compare equal after JSONB key reordering.");
+
+  const csvText = fs.readFileSync(CSV_PATH, "utf8");
+  const { rows: rawRows } = parseCsv(csvText);
+  const anomalyCanonical = canonicalize(rawRows).find((row) => row.eligibleContent === "E08.E.1.1.1");
+  assertSelfTest(Boolean(anomalyCanonical), "expected anomaly row E08.E.1.1.1 to exist in the crosswalk CSV.");
+  assertSelfTest(dbRowMatches({ ...dbFields(anomalyCanonical!), sourceAnomalyJson: jsonbReadbackOrder }, anomalyCanonical!), "dbRowMatches should classify JSONB-reordered anomaly payload as a noop.");
+
+  console.log("DB-2 JSON comparator self-test passed.");
 }
 
 async function assertDb2TablesAvailable(db: PrismaClient) {
@@ -694,6 +749,10 @@ function writeReports(rows: ReconcileRow[], summary: string) {
 
 async function main() {
   const args = parseArgs(process.argv.slice(2));
+  if (args.selfTest) {
+    runSelfTest();
+    return;
+  }
   ensureWriteAllowed(args);
 
   const csvText = fs.readFileSync(args.csvPath, "utf8");
