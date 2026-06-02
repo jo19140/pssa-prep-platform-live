@@ -1,0 +1,6 @@
+sourceFile,recordType,count,expectedCount,match
+exemplars/pssa_grade3_pilot/pilot_backend.json,passage,5,5,true
+all active item files,item,67,67,true
+exemplars/pssa_grade3_pilot/pilot_backend.json,deprecated,12,12,true
+exemplars/pssa_grade3_conventions/pssa_conventions_grade3_deprecation_report.csv,supersession,12,12,true
+derived import batches,batch,8,8,true

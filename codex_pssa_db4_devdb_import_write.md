@@ -64,10 +64,10 @@ npm run content:import-pssa-items -- --dry-run --db-aware --env dev
 #    >>> manifest 5/67/12/12/8; 79/79 EC resolve; 0 blocked; wouldInsert matches.
 
 # 5. First real item-bank write.
-npm run content:import-pssa-items -- --write --env dev
+npm run content:write-pssa-items -- --write --env dev
 
 # 6. Re-run write immediately — must be a NO-OP (idempotency).
-npm run content:import-pssa-items -- --write --env dev
+npm run content:write-pssa-items -- --write --env dev
 ```
 If any step errors or a count is off, **stop, report, identify/fix the cause, then (on the disposable DB) tear down + rerun from the migration** — do NOT blindly rerun the same failing pipeline, and do not push past a surprise.
 
