@@ -1,13 +1,8 @@
+import { phase3EntryLessonContentFor } from "@/lib/content/phase3EntryLessonContent";
 import { withCommonPartMetadata, type GeneratedLessonPart, type LessonGeneratorContext } from "./types";
 
-const QUESTIONS = [
-  { question: "Why did Dave make the cake?", questionType: "inference" },
-  { question: "What did Jane do when Dave gave her the cake?", questionType: "literal" },
-  { question: "Tell me what happened at the lake, in your own words.", questionType: "retell" },
-  { question: "What is something you would make for a pal?", questionType: "personal_connection" },
-];
-
 export function generatePart8Comprehension(ctx: LessonGeneratorContext): GeneratedLessonPart {
+  const content = phase3EntryLessonContentFor(ctx.dailyTarget.code);
   return withCommonPartMetadata(ctx, {
     partNumber: 8,
     partLabel: "Comprehension and language extension",
@@ -15,15 +10,15 @@ export function generatePart8Comprehension(ctx: LessonGeneratorContext): Generat
     kidVisibleCopy: {
       title: "Talk about the story",
       directions: "Answer in your own words.",
-      questions: QUESTIONS,
+      questions: content.comprehensionQuestions,
     },
     tutorVisibleCopy: {
       purpose: "Check literal understanding, inference, retell, and language extension without making grade-level claims.",
     },
     contentJson: {
       skillFocus: "comprehension_language_extension",
-      questions: QUESTIONS,
-      questionTypes: QUESTIONS.map((entry) => entry.questionType),
+      questions: content.comprehensionQuestions,
+      questionTypes: content.comprehensionQuestions.map((entry) => entry.questionType),
       responseMode: "speech_response",
       studentDisplayMode: "OPEN_RESPONSE_QUESTIONS",
     },

@@ -1,22 +1,15 @@
+import { phase3EntryLessonContentFor } from "@/lib/content/phase3EntryLessonContent";
 import { classifyPassageWords } from "../passageClassifier";
 import { withCommonPartMetadata, type GeneratedLessonPart, type LessonGeneratorContext } from "./types";
 
-const SENTENCES = [
-  "Dave made a cake.",
-  "The cake is a gift.",
-  "Jane came to the lake.",
-  "They gave Jane a wave.",
-  "\"I made this cake,\" said Dave.",
-  "Jane is a pal to Dave.",
-];
-
 export function generatePart5Sentences(ctx: LessonGeneratorContext): GeneratedLessonPart {
-  const classification = classifyPassageWords(SENTENCES.join(" "), {
+  const content = phase3EntryLessonContentFor(ctx.dailyTarget.code);
+  const classification = classifyPassageWords(content.sentences.join(" "), {
     targetPatternCodes: [ctx.targetPattern],
     allowedPatternCodes: ctx.dailyTarget.allowedPatternCodes,
     blockedPatternCodes: ctx.dailyTarget.blockedPatternCodes,
     heartWords: [...ctx.heartWordsPreviewedThisLesson, ...ctx.heartWordsAssumedKnown, "is"],
-    vocabularyAllowlist: [...ctx.vocabularyWords, "dave", "jane"],
+    vocabularyAllowlist: ctx.vocabularyWords,
   });
   return withCommonPartMetadata(ctx, {
     partNumber: 5,
@@ -25,14 +18,14 @@ export function generatePart5Sentences(ctx: LessonGeneratorContext): GeneratedLe
     kidVisibleCopy: {
       title: "Read the sentences",
       directions: "Read each sentence out loud.",
-      sentences: SENTENCES,
+      sentences: content.sentences,
     },
     tutorVisibleCopy: {
       purpose: "Move from word-level target practice into short sentence reading.",
     },
     contentJson: {
       skillFocus: "sentence_reading",
-      sentences: SENTENCES,
+      sentences: content.sentences,
       targetPatternCoverage: classification.targetWords.length,
       unclassifiedWords: classification.unclassifiedWords,
       studentDisplayMode: "SENTENCE_LIST",

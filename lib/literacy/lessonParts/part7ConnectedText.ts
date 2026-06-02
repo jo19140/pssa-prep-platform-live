@@ -1,3 +1,4 @@
+import { phase3EntryLessonContentFor } from "@/lib/content/phase3EntryLessonContent";
 import { withCommonPartMetadata, type GeneratedLessonPart, type LessonGeneratorContext } from "./types";
 
 export function generatePart7ConnectedText(ctx: LessonGeneratorContext): GeneratedLessonPart {
@@ -5,12 +6,13 @@ export function generatePart7ConnectedText(ctx: LessonGeneratorContext): Generat
     throw new Error("Part 7 requires an approved selected passage and fresh content audit.");
   }
   const audit = ctx.selectedPassageAudit;
+  const content = phase3EntryLessonContentFor(ctx.dailyTarget.code);
   return withCommonPartMetadata(ctx, {
     partNumber: 7,
     partLabel: "Connected-text reading",
     partType: "CONNECTED_TEXT_READING",
     kidVisibleCopy: {
-      title: titleFromPassage(ctx.selectedPassage.text),
+      title: content.mockPassageTitle,
       directions: "Choose listen first or read on your own. Harper will help when you need it.",
       passageText: ctx.selectedPassage.text,
     },
@@ -55,8 +57,4 @@ export function generatePart7ConnectedText(ctx: LessonGeneratorContext): Generat
     assistedModeAllowed: true,
     independentScoreEligible: false,
   });
-}
-
-function titleFromPassage(text: string) {
-  return text.toLowerCase().includes("cake") ? "Dave's Cake" : "Story reading";
 }

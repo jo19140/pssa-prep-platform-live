@@ -1,6 +1,7 @@
 import assert from "assert/strict";
 import fs from "node:fs";
 import path from "node:path";
+import { PHASE_3_ENTRY_LESSON_CONTENT, phase3EntryLessonContentFor } from "../lib/content/phase3EntryLessonContent";
 import { PHASE_3_ENTRY_TARGETS } from "../lib/content/phase3EntrySeed";
 import { auditGeneratedLessonDraft, evaluateLessonApprovalReadiness, type GeneratedLessonDraft } from "../lib/literacy/lessonAudit";
 import { generateLessonDraft } from "../lib/literacy/lessonGenerator";
@@ -9,13 +10,11 @@ import { auditPassage, decodabilityThresholdForPhase, patternCodesFromDailyTarge
 import { classifyPassageWords, wordMatchesPattern } from "../lib/literacy/passageClassifier";
 import { homophoneVariants, validatePseudowordCandidate } from "../lib/literacy/pseudowordValidator";
 
-const exemplarPassage = `Dave has a cake. The cake is a gift to Jane. Jane came to the lake. Dave gave Jane the cake at the gate. "I made this cake," said Dave. Jane ate the cake. "This cake is the same as that cake," said Jane. They gave a big wave. Dave and Jane had fun. The lake was the best.`;
-
 const allowedCmudictNameTokenPseudowords = new Set(["mave", "nace"]);
 const allowedCmudictNameTokenVariants = new Map([["sape", new Set(["seip"])]]);
 
 async function main() {
-  const ctx = buildContextFromRealSeed();
+  const ctx = buildContextFromRealSeed("a_e");
   const draft = await generateLessonDraft(ctx, {
     recordDecision: async (_ctx, fn) => (await fn()).output,
   });
@@ -24,19 +23,29 @@ async function main() {
   assertGeneratedLessonAgainstIndependentOracles(draft, ctx);
   assertAdversarialGateFailures(draft, ctx);
 
+  for (const targetCode of Object.keys(PHASE_3_ENTRY_LESSON_CONTENT)) {
+    const targetCtx = buildContextFromRealSeed(targetCode);
+    const targetDraft = await generateLessonDraft(targetCtx, {
+      recordDecision: async (_ctx, fn) => (await fn()).output,
+    });
+    assert.equal(auditGeneratedLessonDraft(targetDraft).canPersist, true, targetCode);
+    assertGeneratedLessonAgainstIndependentOracles(targetDraft, targetCtx);
+  }
+
   console.log("content-v3 lesson spec-conformance checks passed");
 }
 
-function buildContextFromRealSeed(): LessonGeneratorContext {
-  const seedTarget = PHASE_3_ENTRY_TARGETS.find((target) => target.code === "a_e");
-  assert(seedTarget, "PHASE_3_ENTRY_TARGETS must include a_e");
+function buildContextFromRealSeed(targetCode: string): LessonGeneratorContext {
+  const seedTarget = PHASE_3_ENTRY_TARGETS.find((target) => target.code === targetCode);
+  assert(seedTarget, `PHASE_3_ENTRY_TARGETS must include ${targetCode}`);
+  const content = phase3EntryLessonContentFor(targetCode);
 
   const phasePosition = { id: "phase-3-entry", phaseNumber: 3, label: "Phase 3 Entry" };
-  const dailyTarget = { id: "target-a-e", ...seedTarget, targetPatternsJson: seedTarget.targetPatternsJson as any };
-  const heartWordsPreviewedThisLesson = ["said", "was", "they"];
-  const heartWordsAssumedKnown = ["I", "a", "the", "to"];
-  const vocabularyWords = ["gift", "pal"];
-  const selectedPassageAudit = auditPassage(exemplarPassage, {
+  const dailyTarget = { id: `target-${targetCode}`, ...seedTarget, targetPatternsJson: seedTarget.targetPatternsJson as any };
+  const heartWordsPreviewedThisLesson = content.heartWordsPreviewedThisLesson;
+  const heartWordsAssumedKnown = content.heartWordsAssumedKnown;
+  const vocabularyWords = content.vocabulary;
+  const selectedPassageAudit = auditPassage(content.mockPassageText, {
     phasePosition,
     dailyTarget,
     heartWords: [...heartWordsPreviewedThisLesson, ...heartWordsAssumedKnown],
@@ -54,8 +63,8 @@ function buildContextFromRealSeed(): LessonGeneratorContext {
     heartWordsAssumedKnown,
     vocabularyWords,
     selectedPassage: {
-      id: "passage-a-e",
-      text: exemplarPassage,
+      id: `passage-${targetCode}`,
+      text: content.mockPassageText,
       contentAuditJson: selectedPassageAudit,
       decodabilityScore: selectedPassageAudit.decodabilityScore,
     },
@@ -75,7 +84,7 @@ function assertGeneratedLessonAgainstIndependentOracles(draft: GeneratedLessonDr
   const part8 = requiredPart(draft, 8);
 
   for (const word of strings(part1.contentJson.warmupWords)) {
-    assert.equal(wordMatchesPattern(word, "a_e"), false, `Part 1 warm-up leaked today's target: ${word}`);
+    assert.equal(wordMatchesPattern(word, ctx.targetPattern), false, `Part 1 warm-up leaked today's target: ${word}`);
   }
 
   const lines = contrastiveLines(part3);
@@ -93,7 +102,7 @@ function assertGeneratedLessonAgainstIndependentOracles(draft: GeneratedLessonDr
     const normalized = pseudoword.toLowerCase();
     const directCmuHit = cmuWords.has(normalized);
     assert(
-      !directCmuHit || allowedCmudictNameTokenPseudowords.has(normalized),
+      !directCmuHit || allowedCmudictNameTokenAllowed(ctx.targetPattern, normalized),
       `Part 3 pseudoword ${pseudoword} appears in full CMUdict`,
     );
     if (directCmuHit) {
@@ -101,13 +110,13 @@ function assertGeneratedLessonAgainstIndependentOracles(draft: GeneratedLessonDr
     }
     const vowelLetter = ctx.targetPattern.match(/^([aeiou])_e$/)?.[1] ?? "";
     const collidingVariant = homophoneVariants(normalized, vowelLetter)
-      .find((variant) => cmuWords.has(variant) && !allowedCmudictNameTokenVariants.get(normalized)?.has(variant));
+      .find((variant) => cmuWords.has(variant) && !allowedCmudictVariant(ctx.targetPattern, normalized, variant));
     assert.equal(collidingVariant, undefined, `Part 3 pseudoword ${pseudoword} has CMUdict homophone variant ${collidingVariant}`);
   }
   for (const tag of wordTags(part3).filter((tag) => tag.lineNumber === 4 || String(tag.tag ?? tag.category) === "pseudoword")) {
     const word = String(tag.word ?? "").toLowerCase();
     assert(
-      !cmuWords.has(word) || allowedCmudictNameTokenPseudowords.has(word),
+      !cmuWords.has(word) || allowedCmudictNameTokenAllowed(ctx.targetPattern, word),
       `Word tagged as pseudoword/line-4 target appears in CMUdict: ${word}`,
     );
   }
@@ -144,6 +153,14 @@ function assertGeneratedLessonAgainstIndependentOracles(draft: GeneratedLessonDr
   for (const part of draft.parts) {
     assertKidCopyIsSpecClean(part, ctx.dailyTarget.kidVisibleLabel);
   }
+}
+
+function allowedCmudictNameTokenAllowed(targetPattern: string, word: string) {
+  return targetPattern === "a_e" && allowedCmudictNameTokenPseudowords.has(word);
+}
+
+function allowedCmudictVariant(targetPattern: string, word: string, variant: string) {
+  return targetPattern === "a_e" && Boolean(allowedCmudictNameTokenVariants.get(word)?.has(variant));
 }
 
 function assertAdversarialGateFailures(draft: GeneratedLessonDraft, ctx: LessonGeneratorContext) {
@@ -191,7 +208,7 @@ function assertAdversarialGateFailures(draft: GeneratedLessonDraft, ctx: LessonG
     assert.equal(findCheck(yesNo, "LESSON_PART8_OPEN_ENDED")?.result, "FAIL");
   }
 
-  const blockedPassage = `${exemplarPassage} Mike rides a bike.`;
+  const blockedPassage = `${ctx.selectedPassage?.text ?? ""} Mike rides a bike.`;
   const blockedClassification = classifyPassageWords(blockedPassage, classificationContext(ctx));
   assert(blockedClassification.blockedPatternViolations.some((entry) => entry.patternCode === "i_e"), "Independent Part 7 oracle should catch blocked i_e words.");
   const blockedPart7 = {

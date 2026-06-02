@@ -1,4 +1,5 @@
 import { db } from "@/lib/db";
+import { phase3EntryLessonContentFor } from "@/lib/content/phase3EntryLessonContent";
 import { generateLessonsForTarget } from "@/lib/literacy/lessonGenerator";
 import type { FirstLookModelRunner } from "@/lib/content/aiFirstLookReviewer";
 import { auditPassage } from "@/lib/literacy/passageAudit";
@@ -70,8 +71,6 @@ const mockFirstLookRunner: FirstLookModelRunner = async ({ artifact, checklist }
   },
 });
 
-const MOCK_A_E_PASSAGE = `Dave has a cake. The cake is a gift to Jane. Jane came to the lake. Dave gave Jane the cake at the gate. "I made this cake," said Dave. Jane ate the cake. "This cake is the same as that cake," said Jane. They gave a big wave. Dave and Jane had fun. The lake was the best.`;
-
 async function ensureMockApprovedPassage(
   phasePosition: { id: string; phaseNumber: number; label: string },
   dailyTarget: {
@@ -82,8 +81,9 @@ async function ensureMockApprovedPassage(
     blockedPatternCodes: string[];
   },
 ) {
-  if (dailyTarget.code !== "a_e") return;
-  const existing = await db.passage.findFirst({
+  const content = phase3EntryLessonContentFor(dailyTarget.code);
+  const normalizedMockText = normalizeText(content.mockPassageText);
+  const existingPassages = await db.passage.findMany({
     where: {
       phasePositionId: phasePosition.id,
       reviewStatus: "APPROVED",
@@ -91,22 +91,23 @@ async function ensureMockApprovedPassage(
       sourceMetadataJson: { path: ["dailyTargetCode"], equals: dailyTarget.code },
     },
   });
+  const existing = existingPassages.find((passage) => normalizeText(passage.text) === normalizedMockText);
   if (existing) return;
-  const audit = auditPassage(MOCK_A_E_PASSAGE, {
+  const audit = auditPassage(content.mockPassageText, {
     phasePosition,
     dailyTarget,
-    heartWords: ["said", "was", "they", "I", "a", "the", "to"],
-    vocabularyAllowlist: ["gift", "pal"],
+    heartWords: [...content.heartWordsPreviewedThisLesson, ...content.heartWordsAssumedKnown],
+    vocabularyAllowlist: content.vocabulary,
   });
-  if (!audit.passesAuditGate) {
-    throw new Error(`Mock a_e passage failed audit: ${JSON.stringify(audit, null, 2)}`);
+  if (!audit.passesAuditGate || !audit.quality.passesQualityGate) {
+    throw new Error(`Mock ${dailyTarget.code} passage failed audit: ${JSON.stringify(audit, null, 2)}`);
   }
   await db.passage.create({
     data: {
       source: "MOCK_APPROVED_FIXTURE",
       sourceAttributionCode: "MOCK_APPROVED_FIXTURE",
       phasePositionId: phasePosition.id,
-      text: MOCK_A_E_PASSAGE,
+      text: content.mockPassageText,
       wordCount: audit.wordCount,
       contentAuditJson: audit,
       decodabilityScore: audit.decodabilityScore,
@@ -115,10 +116,16 @@ async function ensureMockApprovedPassage(
       sourceMetadataJson: {
         dailyTargetId: dailyTarget.id,
         dailyTargetCode: dailyTarget.code,
+        mockPassageTitle: content.mockPassageTitle,
+        normalizedText: normalizedMockText,
         mockFixture: true,
       },
     },
   });
+}
+
+function normalizeText(value: string) {
+  return value.toLowerCase().replace(/\s+/g, " ").trim();
 }
 
 function parseArgs(args: string[]) {

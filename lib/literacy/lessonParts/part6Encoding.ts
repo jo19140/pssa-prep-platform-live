@@ -1,9 +1,9 @@
+import { phase3EntryLessonContentFor } from "@/lib/content/phase3EntryLessonContent";
+import { wordMatchesPattern } from "../passageClassifier";
 import { withCommonPartMetadata, type GeneratedLessonPart, type LessonGeneratorContext } from "./types";
 
-const DICTATED_WORDS = ["cake", "made", "lake", "game", "ran", "hand"];
-const DICTATED_SENTENCES = ["Dave made a cake.", "Jane came to the lake."];
-
 export function generatePart6Encoding(ctx: LessonGeneratorContext): GeneratedLessonPart {
+  const content = phase3EntryLessonContentFor(ctx.dailyTarget.code);
   return withCommonPartMetadata(ctx, {
     partNumber: 6,
     partLabel: "Encoding and spelling",
@@ -14,22 +14,22 @@ export function generatePart6Encoding(ctx: LessonGeneratorContext): GeneratedLes
     },
     tutorVisibleCopy: {
       purpose: "Dictation checks whether the student can spell today-pattern words and prerequisite review words.",
-      dictatedWords: DICTATED_WORDS,
-      dictatedSentences: DICTATED_SENTENCES,
+      dictatedWords: content.dictatedWords,
+      dictatedSentences: content.dictatedSentences,
     },
     contentJson: {
       skillFocus: "encoding_spelling",
-      dictatedWords: DICTATED_WORDS,
-      dictatedSentences: DICTATED_SENTENCES,
-      expectedSpellings: [...DICTATED_WORDS, ...DICTATED_SENTENCES],
+      dictatedWords: content.dictatedWords,
+      dictatedSentences: content.dictatedSentences,
+      expectedSpellings: [...content.dictatedWords, ...content.dictatedSentences],
       commonErrorPatterns: ["missing silent e", "short-vowel substitution"],
       studentDisplayMode: "DICTATION",
       responseMode: "text_response",
     },
     wordTagsJson: {
-      words: DICTATED_WORDS.map((word) => ({
+      words: content.dictatedWords.map((word) => ({
         word,
-        tag: ctx.targetWords.includes(word) || ["made", "lake", "game"].includes(word) ? "target" : "prerequisite",
+        tag: ctx.targetWords.includes(word) || wordMatchesPattern(word, ctx.targetPattern) ? "target" : "prerequisite",
       })),
     },
     scoringRubricJson: { scoring: "spelling_match", evidence: "dictated word and sentence spelling" },
