@@ -1,5 +1,6 @@
 import { auditLessonForApproval, runLessonLinter, type LessonLintCheck } from "@/lib/content/lessonMetadata";
 import { wordMatchesPattern } from "./passageClassifier";
+import { PATTERN_REGISTRY } from "./patternRegistry";
 import { detectVcePattern, validatePseudowordCandidate } from "./pseudowordValidator";
 import type { GeneratedLessonPart } from "./lessonParts/types";
 
@@ -84,7 +85,7 @@ function auditPart2(draft: GeneratedLessonDraft) {
     return target.toLowerCase() === `${closed.toLowerCase()}e` && matchesAnyTargetPattern(target, draft) && !matchesAnyTargetPattern(closed, draft) && isPrerequisiteWord(closed);
   });
   return [
-    check("LESSON_DAILY_TARGET_NARROW", targetPatterns(draft).every((pattern) => pattern.endsWith("_e")), "BLOCKER", `Daily target is ${draft.targetPattern}.`),
+    check("LESSON_DAILY_TARGET_NARROW", targetPatterns(draft).every(isNarrowPatternCode), "BLOCKER", `Daily target is ${draft.targetPattern}.`),
     check("LESSON_PART_TYPE_PRESENT", Boolean(part?.partType), "BLOCKER", "Part 2 requires partType."),
     check("LESSON_PART2_TARGET_EXAMPLES", examples.length > 0 && examples.every((word) => matchesAnyTargetPattern(word, draft)), "BLOCKER", "Part 2 concept examples must all match today's target."),
     check("LESSON_PART2_DEMO_MINIMAL_PAIRS", demoPairs.length > 0 && validDemoPairs.length === demoPairs.length, "BLOCKER", "Part 2 demonstration pairs must contrast closed-base review with VCe targets."),
@@ -105,7 +106,7 @@ function auditPart3(draft: GeneratedLessonDraft) {
   const realWords = lines.filter((line) => Number(line.lineNumber) >= 1 && Number(line.lineNumber) <= 3).flatMap((line) => strings(line.words));
   const invalidPseudowords = validations.filter((entry) => !entry.validation?.valid);
   const outOfTargetSet = validations.filter((entry) => !entry.detectedPattern || !targetPatterns(draft).includes(entry.detectedPattern));
-  const rControlled = rControlledWords([...pseudowords, ...realWords]);
+  const rControlled = rControlledViolations([...pseudowords, ...realWords], draft);
   return [
     check("LESSON_PART3_CONTRASTIVE_LINES", lines.length === 4 && !lines.some((line) => line.lineNumber === 5), "BLOCKER", "Part 3 must use four contrastive lines and no fifth line."),
     check("LESSON_PART3_REAL_WORD_COUNT", realWords.length >= 15 && realWords.length <= 20, "BLOCKER", `Part 3 lines 1-3 have ${realWords.length} real words (need 15-20).`),
@@ -127,7 +128,7 @@ function auditPart4And7(draft: GeneratedLessonDraft) {
   const heartWords = strings(part7?.contentJson.heartWordsUsedInConnectedText);
   const missing = heartWords.filter((word) => !previewed.has(word.toLowerCase()) && !assumed.has(word.toLowerCase()));
   const audit = part7?.contentAuditJson as any;
-  const rControlled = rControlledWords([String(part7?.contentJson.passageText ?? "")]);
+  const rControlled = rControlledViolations([String(part7?.contentJson.passageText ?? "")], draft);
   return [
     check("LESSON_HEART_WORDS_PREVIEWED", missing.length === 0, "BLOCKER", missing.length ? `Unpreviewed heart words: ${missing.join(", ")}` : "All connected-text heart words are previewed or assumed known."),
     check("LESSON_CONNECTED_TEXT_HAS_AUDIT", Boolean(part7?.contentAuditJson), "BLOCKER", "Part 7 requires contentAuditJson."),
@@ -140,7 +141,7 @@ function auditPart4And7(draft: GeneratedLessonDraft) {
 function auditPart5(draft: GeneratedLessonDraft) {
   const part = partNumber(draft, 5);
   const sentences = strings(part?.contentJson.sentences);
-  const rControlled = rControlledWords(sentences);
+  const rControlled = rControlledViolations(sentences, draft);
   const noRControlled = check("LESSON_PHASE3_NO_RCONTROLLED", rControlled.length === 0, "BLOCKER", rControlled.length ? `Phase 3 lesson contains r-controlled words (not taught yet): ${Array.from(new Set(rControlled)).join(", ")}` : "No r-controlled words in Part 5.");
   return [
     check("LESSON_SENTENCE_COUNT", sentences.length >= 5 && sentences.length <= 8, "BLOCKER", `Part 5 has ${sentences.length} sentences.`),
@@ -151,6 +152,12 @@ function auditPart5(draft: GeneratedLessonDraft) {
     check("LESSON_PART5_NO_RCONTROLLED", noRControlled.result === "PASS", "BLOCKER", noRControlled.evidence ?? "Compatibility alias for LESSON_PHASE3_NO_RCONTROLLED."),
     check("LESSON_WORDS_ALL_TAGGED", wordTags(part).length > 0, "BLOCKER", "Part 5 requires word tags."),
   ];
+}
+
+function rControlledViolations(sentences: string[], draft: GeneratedLessonDraft): string[] {
+  const activeRTargets = targetPatterns(draft).filter((pattern) => PATTERN_REGISTRY[pattern]?.family === "r_controlled");
+  return rControlledWords(sentences)
+    .filter((word) => activeRTargets.length === 0 || !activeRTargets.some((pattern) => wordMatchesPattern(word, pattern, { strictPhonemeLexicon: true })));
 }
 
 /** Tokens whose vowel is immediately followed by an `r` in the same word (ar/er/ir/or/ur). */
@@ -165,7 +172,7 @@ function auditPart6(draft: GeneratedLessonDraft) {
   const part = partNumber(draft, 6);
   const words = strings(part?.contentJson.dictatedWords);
   const sentences = strings(part?.contentJson.dictatedSentences);
-  const rControlled = rControlledWords([...words, ...sentences]);
+  const rControlled = rControlledViolations([...words, ...sentences], draft);
   return [
     check("LESSON_ENCODING_MINIMUM_ITEMS", words.length >= 6 && sentences.length >= 2, "BLOCKER", "Part 6 requires at least 6 dictated words and 2 dictated sentences."),
     check("LESSON_PHASE3_NO_RCONTROLLED", rControlled.length === 0, "BLOCKER", rControlled.length ? `Phase 3 lesson contains r-controlled words (not taught yet): ${Array.from(new Set(rControlled)).join(", ")}` : "No r-controlled words in Part 6."),
@@ -190,6 +197,10 @@ function targetPatterns(draft: GeneratedLessonDraft) {
 
 function matchesAnyTargetPattern(word: string, draft: GeneratedLessonDraft) {
   return targetPatterns(draft).some((pattern) => wordMatchesPattern(word, pattern));
+}
+
+function isNarrowPatternCode(pattern: string) {
+  return /^[aeiou]_e$/.test(pattern) || Boolean(PATTERN_REGISTRY[pattern]);
 }
 
 function isPrerequisiteWord(word: string) {

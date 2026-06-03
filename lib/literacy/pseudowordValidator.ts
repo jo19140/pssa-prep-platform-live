@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { wordMatchesPattern } from "./passageClassifier";
+import { PATTERN_REGISTRY } from "./patternRegistry";
 
 export type PseudowordValidationResult = {
   pseudoword: string;
@@ -141,6 +142,17 @@ export function detectVcePattern(word: string): string | null {
   return match ? `${match[1]}_e` : null;
 }
 
+export function detectPatternCandidates(word: string): string[] {
+  const normalized = word.toLowerCase().trim();
+  const candidates = new Set<string>();
+  const vce = detectVcePattern(normalized);
+  if (vce) candidates.add(vce);
+  for (const [code, def] of Object.entries(PATTERN_REGISTRY)) {
+    if (def.graphemes.some((grapheme) => normalized.includes(grapheme))) candidates.add(code);
+  }
+  return Array.from(candidates);
+}
+
 export function validatePseudowordCandidate(
   pseudoword: string,
   targetPattern: string,
@@ -155,11 +167,14 @@ export function validatePseudowordCandidate(
   const issues: string[] = [];
   const blockingIssues: string[] = [];
   let collidesWith: string | null = null;
+  const patternCandidates = detectPatternCandidates(normalized);
 
   if (!normalized) {
     blockingIssues.push("empty pseudoword");
   }
-  if (!wordMatchesPattern(normalized, targetPattern)) {
+  if (!patternCandidates.includes(targetPattern)) {
+    blockingIssues.push(`pseudoword does not contain target pattern ${targetPattern}`);
+  } else if (/^[aeiou]_e$/.test(targetPattern) && !wordMatchesPattern(normalized, targetPattern)) {
     blockingIssues.push(`pseudoword does not match target pattern ${targetPattern}`);
   }
   // 1. Direct real-word membership.

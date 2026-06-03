@@ -1,4 +1,5 @@
 import { tokenizePassage } from "./passageTokenizer";
+import { PATTERN_REGISTRY, wordMatchesRegisteredPattern, type PatternMatchOptions } from "./patternRegistry";
 
 export type WordCategory = "target" | "prerequisite" | "heart" | "vocabulary" | "unclassified";
 
@@ -80,7 +81,7 @@ function classifyWord(word: string, context: PassageClassificationContext, heart
   return { word, category: "unclassified" };
 }
 
-export function wordMatchesPattern(word: string, patternCode: string): boolean {
+export function wordMatchesPattern(word: string, patternCode: string, opts: PatternMatchOptions = {}): boolean {
   const normalized = word.toLowerCase();
   const silentE = patternCode.match(/^([aeiou])_e$/);
   if (silentE) {
@@ -93,6 +94,9 @@ export function wordMatchesPattern(word: string, patternCode: string): boolean {
   }
   if (patternCode === "ai" || patternCode === "ay" || patternCode === "oa" || patternCode === "ee" || patternCode === "ea" || patternCode === "igh" || patternCode === "ow" || patternCode === "ue" || patternCode === "ew") {
     return normalized.includes(patternCode);
+  }
+  if (PATTERN_REGISTRY[patternCode]) {
+    return wordMatchesRegisteredPattern(normalized, patternCode, opts);
   }
   return false;
 }
