@@ -1,0 +1,3 @@
+# Provenance: smoke-test output from local DB target 127.0.0.1:5434/pssa_dev; purpose is CLI guardrail verification, not canonical item-bank state.
+kind,id,batchId,bucket,blockedReason,detail,sourceType,licenseStatus,writeAction
+item,pssa_sa_g3_cart_connection_01,short_answer_grade3_pool,refused,PENDING_REVIEW,attestation_forbidden_for_source_type,released_sampler,unresolved,refused
