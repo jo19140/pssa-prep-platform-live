@@ -1,14 +1,8 @@
+import { phase3EntryLessonContentFor } from "@/lib/content/phase3EntryLessonContent";
 import { withCommonPartMetadata, type GeneratedLessonPart, type LessonGeneratorContext } from "./types";
 
-const DEMONSTRATION_PAIRS = [
-  { closed: "cap", target: "cape" },
-  { closed: "at", target: "ate" },
-  { closed: "man", target: "mane" },
-  { closed: "tap", target: "tape" },
-  { closed: "hat", target: "hate" },
-];
-
 export function generatePart2Concept(ctx: LessonGeneratorContext): GeneratedLessonPart {
+  const content = phase3EntryLessonContentFor(ctx.dailyTarget.code);
   return withCommonPartMetadata(ctx, {
     partNumber: 2,
     partLabel: "Explicit target concept",
@@ -20,12 +14,12 @@ export function generatePart2Concept(ctx: LessonGeneratorContext): GeneratedLess
     },
     tutorVisibleCopy: {
       purpose: "Introduce the specific daily target without using phoneme notation or broad category language.",
-      demonstrationPairs: DEMONSTRATION_PAIRS,
+      demonstrationPairs: content.demonstrationPairs,
     },
     contentJson: {
       skillFocus: "explicit_target_instruction",
       conceptExamples: ctx.targetWords,
-      demonstrationPairs: DEMONSTRATION_PAIRS,
+      demonstrationPairs: content.demonstrationPairs,
       teachingLanguage: "Silent e helps the vowel say its name in these words.",
       studentDisplayMode: "EXAMPLE_CARDS",
       responseMode: "listen_and_repeat",

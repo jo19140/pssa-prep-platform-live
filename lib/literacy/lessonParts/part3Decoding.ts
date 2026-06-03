@@ -1,20 +1,20 @@
+import { phase3EntryLessonContentFor } from "@/lib/content/phase3EntryLessonContent";
+import { wordMatchesPattern } from "../passageClassifier";
 import { validatePseudowordSet } from "../pseudowordValidator";
 import { withCommonPartMetadata, type GeneratedLessonPart, type LessonGeneratorContext } from "./types";
 
-const LINE_2 = ["cap", "cape", "man", "mane", "tap", "tape", "hat", "hate"];
-const LINE_3 = ["ran", "lake", "hand", "gave", "fast", "name", "desk"];
-
 export function generatePart3Decoding(ctx: LessonGeneratorContext): GeneratedLessonPart {
+  const content = phase3EntryLessonContentFor(ctx.dailyTarget.code);
   const pseudowordValidation = validatePseudowordSet(ctx.pseudowords, ctx.targetPattern);
   const contrastiveLines = [
     { lineNumber: 1, role: "target_real_words", words: ctx.targetWords },
-    { lineNumber: 2, role: "contrastive_target_vs_review", words: LINE_2 },
-    { lineNumber: 3, role: "cumulative_review", words: LINE_3 },
+    { lineNumber: 2, role: "contrastive_target_vs_review", words: content.contrastiveLine2 },
+    { lineNumber: 3, role: "cumulative_review", words: content.contrastiveLine3 },
     { lineNumber: 4, role: "target_pseudowords", words: ctx.pseudowords },
   ];
   const allWords = contrastiveLines.flatMap((line) => line.words.map((word) => ({
     word,
-    tag: line.role === "target_pseudowords" ? "target" : tagForWord(word, ctx.targetWords),
+    tag: line.role === "target_pseudowords" ? "target" : tagForWord(word, ctx.targetWords, ctx.targetPattern),
     lineNumber: line.lineNumber,
     expectedPronunciation: line.role === "target_pseudowords"
       ? pseudowordValidation.find((entry) => entry.pseudoword === word)?.expectedPronunciation
@@ -48,7 +48,8 @@ export function generatePart3Decoding(ctx: LessonGeneratorContext): GeneratedLes
   });
 }
 
-function tagForWord(word: string, targetWords: string[]) {
-  if (targetWords.includes(word) || ["cape", "mane", "tape", "hate", "lake", "gave", "name"].includes(word)) return "target";
+function tagForWord(word: string, targetWords: string[], targetPattern: string) {
+  if (targetWords.includes(word)) return "target";
+  if (wordMatchesPattern(word, targetPattern)) return "target";
   return "prerequisite";
 }

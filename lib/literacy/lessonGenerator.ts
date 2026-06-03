@@ -1,4 +1,5 @@
 import { Prisma } from "@prisma/client";
+import { phase3EntryLessonContentFor } from "@/lib/content/phase3EntryLessonContent";
 import { db } from "@/lib/db";
 import { runAIFirstLookReview, type FirstLookModelRunner } from "@/lib/content/aiFirstLookReviewer";
 import { DECISION_TYPES } from "@/lib/decisions/decisionTypes";
@@ -73,9 +74,10 @@ export async function buildLessonGeneratorContext(phasePositionId: string, daily
   if (!selectedPassage) {
     throw new Error(`No approved passage found for ${phasePosition.label} / ${dailyTarget.code}. Generate and approve a passage before lesson generation.`);
   }
-  const heartWordsPreviewedThisLesson = ["said", "was", "they"];
-  const heartWordsAssumedKnown = ["I", "a", "the", "to"];
-  const vocabularyWords = ["gift", "pal"];
+  const content = phase3EntryLessonContentFor(dailyTarget.code);
+  const heartWordsPreviewedThisLesson = content.heartWordsPreviewedThisLesson;
+  const heartWordsAssumedKnown = content.heartWordsAssumedKnown;
+  const vocabularyWords = content.vocabulary;
   const selectedPassageAudit = auditPassage(selectedPassage.text, {
     phasePosition,
     dailyTarget,
