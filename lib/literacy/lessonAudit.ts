@@ -1,7 +1,7 @@
 import { auditLessonForApproval, runLessonLinter, type LessonLintCheck } from "@/lib/content/lessonMetadata";
 import { wordMatchesPattern } from "./passageClassifier";
 import { PATTERN_REGISTRY } from "./patternRegistry";
-import { detectVcePattern, validatePseudowordCandidate } from "./pseudowordValidator";
+import { detectPatternCandidates, validatePseudowordCandidate } from "./pseudowordValidator";
 import type { GeneratedLessonPart } from "./lessonParts/types";
 
 export type GeneratedLessonDraft = {
@@ -11,6 +11,7 @@ export type GeneratedLessonDraft = {
   dailyTargetCode: string;
   targetPattern: string;
   targetPatterns: string[];
+  pseudowordPatterns?: string[];
   parts: GeneratedLessonPart[];
 };
 
@@ -41,6 +42,7 @@ export function auditGeneratedLessonDraft(draft: GeneratedLessonDraft): LessonGe
     dailyTargetCode: draft.dailyTargetCode,
     targetPattern: draft.targetPattern,
     targetPatterns: draft.targetPatterns,
+    pseudowordPatterns: pseudowordPatterns(draft),
     parts: draft.parts,
   };
   checks.push(...runLessonLinter(lessonLike));
@@ -78,17 +80,30 @@ function auditPart1(draft: GeneratedLessonDraft) {
 function auditPart2(draft: GeneratedLessonDraft) {
   const part = partNumber(draft, 2);
   const examples = strings(part?.contentJson.conceptExamples);
+  const demoMode = String(part?.contentJson.demoMode ?? "minimal_pairs");
   const demoPairs = Array.isArray(part?.contentJson.demonstrationPairs) ? part.contentJson.demonstrationPairs as Array<{ closed?: unknown; target?: unknown }> : [];
+  const demoExamples = strings(part?.contentJson.demonstrationExamples);
   const validDemoPairs = demoPairs.filter((pair) => {
     const closed = typeof pair.closed === "string" ? pair.closed : "";
     const target = typeof pair.target === "string" ? pair.target : "";
-    return target.toLowerCase() === `${closed.toLowerCase()}e` && matchesAnyTargetPattern(target, draft) && !matchesAnyTargetPattern(closed, draft) && isPrerequisiteWord(closed);
+    const targetPattern = targetPatterns(draft).find((pattern) => wordMatchesPattern(target, pattern, { strictPhonemeLexicon: draft.phaseBand >= 4 }));
+    return Boolean(
+      targetPattern &&
+      !matchesAnyTargetPattern(closed, draft) &&
+      isPrerequisiteWord(closed) &&
+      closedVowelLetter(closed) === longVowelLetterForPattern(targetPattern),
+    );
   });
+  const examplesOnlyValid = demoExamples.length >= 3 && demoExamples.length <= 5 && demoExamples.every((word) => matchesAnyTargetPattern(word, draft));
+  const demoValid = demoMode === "examples_only"
+    ? examplesOnlyValid && demoPairs.length === 0
+    : demoPairs.length > 0 && validDemoPairs.length === demoPairs.length;
   return [
     check("LESSON_DAILY_TARGET_NARROW", targetPatterns(draft).every(isNarrowPatternCode), "BLOCKER", `Daily target is ${draft.targetPattern}.`),
     check("LESSON_PART_TYPE_PRESENT", Boolean(part?.partType), "BLOCKER", "Part 2 requires partType."),
     check("LESSON_PART2_TARGET_EXAMPLES", examples.length > 0 && examples.every((word) => matchesAnyTargetPattern(word, draft)), "BLOCKER", "Part 2 concept examples must all match today's target."),
-    check("LESSON_PART2_DEMO_MINIMAL_PAIRS", demoPairs.length > 0 && validDemoPairs.length === demoPairs.length, "BLOCKER", "Part 2 demonstration pairs must contrast closed-base review with VCe targets."),
+    check("LESSON_PART2_DEMO_MODE_VALID", demoValid, "BLOCKER", demoMode === "examples_only" ? "Part 2 examples-only mode requires 3-5 clean target examples and no non-target pairs." : "Part 2 minimal-pair mode requires closed-base review words contrasted with target words."),
+    check("LESSON_PART2_DEMO_MINIMAL_PAIRS", demoMode === "examples_only" ? true : demoValid, "BLOCKER", "Compatibility alias for minimal-pair Part 2 demonstrations."),
   ];
 }
 
@@ -97,7 +112,7 @@ function auditPart3(draft: GeneratedLessonDraft) {
   const lines = Array.isArray(part?.contentJson.contrastiveLines) ? part.contentJson.contrastiveLines as any[] : [];
   const pseudowords = strings(lines.find((line) => line.role === "target_pseudowords")?.words);
   const validations = pseudowords.map((word) => {
-    const detectedPattern = detectVcePattern(word);
+    const detectedPattern = selectPseudowordPattern(word, draft);
     return {
       detectedPattern,
       validation: detectedPattern ? validatePseudowordCandidate(word, detectedPattern, { strictLexicon: true }) : null,
@@ -105,18 +120,19 @@ function auditPart3(draft: GeneratedLessonDraft) {
   });
   const realWords = lines.filter((line) => Number(line.lineNumber) >= 1 && Number(line.lineNumber) <= 3).flatMap((line) => strings(line.words));
   const invalidPseudowords = validations.filter((entry) => !entry.validation?.valid);
-  const outOfTargetSet = validations.filter((entry) => !entry.detectedPattern || !targetPatterns(draft).includes(entry.detectedPattern));
+  const outOfTargetSet = validations.filter((entry) => !entry.detectedPattern || !pseudowordPatterns(draft).includes(entry.detectedPattern));
   const rControlled = rControlledViolations([...pseudowords, ...realWords], draft);
   return [
     check("LESSON_PART3_CONTRASTIVE_LINES", lines.length === 4 && !lines.some((line) => line.lineNumber === 5), "BLOCKER", "Part 3 must use four contrastive lines and no fifth line."),
     check("LESSON_PART3_REAL_WORD_COUNT", realWords.length >= 15 && realWords.length <= 20, "BLOCKER", `Part 3 lines 1-3 have ${realWords.length} real words (need 15-20).`),
     check("LESSON_PART3_PSEUDOWORD_COUNT", pseudowords.length >= 8 && pseudowords.length <= 10, "BLOCKER", `Part 3 has ${pseudowords.length} pseudowords (need 8-10).`),
-    check("LESSON_PSEUDOWORDS_TARGET_ONLY", validations.every((entry) => entry.validation && wordMatchesPattern(entry.validation.pseudoword, entry.validation.targetPattern)), "BLOCKER", "Part 3 pseudowords must use only VCe target patterns."),
+    check("LESSON_PSEUDOWORDS_TARGET_ONLY", validations.every((entry) => entry.validation && detectPatternCandidates(entry.validation.pseudoword).includes(entry.validation.targetPattern)), "BLOCKER", "Part 3 pseudowords must use only the configured pseudoword target patterns."),
     check("LESSON_PSEUDOWORDS_IN_TARGET_SET", outOfTargetSet.length === 0, "BLOCKER", outOfTargetSet.length ? `Pseudowords outside target set: ${outOfTargetSet.map((entry) => `${entry.validation?.pseudoword ?? "unknown"}(${entry.detectedPattern ?? "none"})`).join(", ")}` : "Pseudowords detect to the target pattern set."),
     check("LESSON_PSEUDOWORDS_HAVE_EXPECTED_PRONUNCIATION", validations.every((entry) => entry.validation?.expectedPronunciation), "BLOCKER", "Pseudowords require expectedPronunciation metadata."),
     check("LESSON_PSEUDOWORDS_NOT_REAL_MISSPELLINGS", invalidPseudowords.length === 0, "BLOCKER", invalidPseudowords.length ? invalidPseudowords.map((entry) => `${entry.validation?.pseudoword ?? "unknown"}${entry.validation?.collidesWith ? ` -> ${entry.validation.collidesWith}` : ""}: ${entry.validation?.reason ?? entry.validation?.issues.join(", ") ?? "invalid"}`).join("; ") : "Pseudowords passed validation."),
     check("LESSON_PHASE3_NO_RCONTROLLED", rControlled.length === 0, "BLOCKER", rControlled.length ? `Phase 3 lesson contains r-controlled words (not taught yet): ${Array.from(new Set(rControlled)).join(", ")}` : "No r-controlled words in Part 3."),
     check("LESSON_WORDS_ALL_TAGGED", wordTags(part).length >= lines.flatMap((line) => strings(line.words)).length, "BLOCKER", "Part 3 words require tags."),
+    ...auditTargetPatternCoverage(draft),
   ];
 }
 
@@ -195,8 +211,12 @@ function targetPatterns(draft: GeneratedLessonDraft) {
   return draft.targetPatterns?.length ? draft.targetPatterns : [draft.targetPattern];
 }
 
+function pseudowordPatterns(draft: GeneratedLessonDraft) {
+  return draft.pseudowordPatterns?.length ? draft.pseudowordPatterns : targetPatterns(draft);
+}
+
 function matchesAnyTargetPattern(word: string, draft: GeneratedLessonDraft) {
-  return targetPatterns(draft).some((pattern) => wordMatchesPattern(word, pattern));
+  return targetPatterns(draft).some((pattern) => wordMatchesPattern(word, pattern, { strictPhonemeLexicon: draft.phaseBand >= 4 }));
 }
 
 function isNarrowPatternCode(pattern: string) {
@@ -205,6 +225,74 @@ function isNarrowPatternCode(pattern: string) {
 
 function isPrerequisiteWord(word: string) {
   return ["closed_short_a", "closed_short_i", "closed_short_o", "closed_short_u", "closed_short_e"].some((pattern) => wordMatchesPattern(word, pattern));
+}
+
+function closedVowelLetter(word: string) {
+  return word.toLowerCase().match(/^[bcdfghjklmnpqrstvwxyz]*([aeiou])[bcdfghjklmnpqrstvwxyz]+$/)?.[1] ?? null;
+}
+
+function longVowelLetterForPattern(pattern: string) {
+  const silentE = pattern.match(/^([aeiou])_e$/);
+  if (silentE) return silentE[1];
+  const phoneme = PATTERN_REGISTRY[pattern]?.expectedPhonemeSequences?.[0]?.join(" ");
+  if (phoneme === "EY") return "a";
+  if (phoneme === "IY") return "e";
+  if (phoneme === "AY") return "i";
+  if (phoneme === "OW") return "o";
+  if (phoneme === "Y UW" || phoneme === "UW") return "u";
+  return null;
+}
+
+function selectPseudowordPattern(word: string, draft: GeneratedLessonDraft) {
+  const candidates = detectPatternCandidates(word);
+  return pseudowordPatterns(draft).find((pattern) => candidates.includes(pattern)) ?? null;
+}
+
+function auditTargetPatternCoverage(draft: GeneratedLessonDraft): LessonLintCheck[] {
+  const patterns = targetPatterns(draft);
+  if (draft.phaseBand < 4 || patterns.length < 2) {
+    return [];
+  }
+  const part2 = partNumber(draft, 2);
+  const part3 = partNumber(draft, 3);
+  const part5 = partNumber(draft, 5);
+  const part7 = partNumber(draft, 7);
+  const part2Words = [
+    ...strings(part2?.contentJson.conceptExamples),
+    ...strings(part2?.contentJson.demonstrationExamples),
+    ...(Array.isArray(part2?.contentJson.demonstrationPairs) ? (part2?.contentJson.demonstrationPairs as any[]).map((pair) => String(pair?.target ?? "")).filter(Boolean) : []),
+  ];
+  const lines = Array.isArray(part3?.contentJson.contrastiveLines) ? part3?.contentJson.contrastiveLines as any[] : [];
+  const part3Words = lines
+    .filter((line) => line.role !== "target_pseudowords")
+    .flatMap((line) => strings(line.words));
+  const transferWords = [
+    ...strings(part5?.contentJson.sentences).flatMap(tokenizeWords),
+    ...tokenizeWords(String(part7?.contentJson.passageText ?? "")),
+  ];
+  const missing = patterns.filter((pattern) =>
+    !hasPattern(part2Words, pattern) ||
+    !hasPattern(part3Words, pattern) ||
+    !hasPattern(transferWords, pattern)
+  );
+  return [
+    check(
+      "LESSON_TARGET_PATTERN_COVERAGE",
+      missing.length === 0,
+      "BLOCKER",
+      missing.length
+        ? `Missing real-word coverage for target patterns: ${missing.join(", ")}`
+        : "Every target pattern appears in Part 2, Part 3, and transfer text.",
+    ),
+  ];
+}
+
+function hasPattern(words: string[], pattern: string) {
+  return words.some((word) => wordMatchesPattern(word, pattern, { strictPhonemeLexicon: true }));
+}
+
+function tokenizeWords(text: string) {
+  return text.toLowerCase().split(/[^a-z]+/).filter(Boolean);
 }
 
 const SILENT_E_EXCEPTION_WORDS = new Set(["have", "give", "live", "come", "some", "done", "gone", "love"]);

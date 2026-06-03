@@ -1,14 +1,14 @@
 import assert from "assert/strict";
 import fs from "node:fs";
 import path from "node:path";
-import { PHASE_3_ENTRY_LESSON_CONTENT, phase3EntryLessonContentFor } from "../lib/content/phase3EntryLessonContent";
-import { PHASE_3_MID_TARGETS, PHASE_3_TARGETS } from "../lib/content/phase3EntrySeed";
+import { LESSON_CONTENT_BY_DAILY_TARGET, phase3EntryLessonContentFor } from "../lib/content/phase3EntryLessonContent";
+import { CONTENT_V3_DAILY_TARGETS, PHASE_3_MID_TARGETS, PHASE_4_ENTRY_TARGETS } from "../lib/content/phase3EntrySeed";
 import { auditGeneratedLessonDraft, evaluateLessonApprovalReadiness, type GeneratedLessonDraft } from "../lib/literacy/lessonAudit";
 import { generateLessonDraft } from "../lib/literacy/lessonGenerator";
 import type { GeneratedLessonPart, LessonGeneratorContext } from "../lib/literacy/lessonParts/types";
 import { auditPassage, decodabilityThresholdForPhase } from "../lib/literacy/passageAudit";
 import { classifyPassageWords, wordMatchesPattern } from "../lib/literacy/passageClassifier";
-import { detectVcePattern, homophoneVariants, validatePseudowordCandidate } from "../lib/literacy/pseudowordValidator";
+import { detectPatternCandidates, detectVcePattern, homophoneVariants, validatePseudowordCandidate } from "../lib/literacy/pseudowordValidator";
 
 const allowedCmudictNameTokenPseudowords = new Set(["mave", "nace"]);
 const allowedCmudictNameTokenVariants = new Map([["sape", new Set(["seip"])]]);
@@ -23,7 +23,7 @@ async function main() {
   assertGeneratedLessonAgainstIndependentOracles(draft, ctx);
   assertAdversarialGateFailures(draft, ctx);
 
-  for (const targetCode of Object.keys(PHASE_3_ENTRY_LESSON_CONTENT)) {
+  for (const targetCode of Object.keys(LESSON_CONTENT_BY_DAILY_TARGET)) {
     const targetCtx = buildContextFromRealSeed(targetCode);
     const targetDraft = await generateLessonDraft(targetCtx, {
       recordDecision: async (_ctx, fn) => (await fn()).output,
@@ -36,14 +36,16 @@ async function main() {
 }
 
 function buildContextFromRealSeed(targetCode: string): LessonGeneratorContext {
-  const seedTarget = PHASE_3_TARGETS.find((target) => target.code === targetCode);
-  assert(seedTarget, `PHASE_3_TARGETS must include ${targetCode}`);
+  const seedTarget = CONTENT_V3_DAILY_TARGETS.find((target) => target.code === targetCode);
+  assert(seedTarget, `CONTENT_V3_DAILY_TARGETS must include ${targetCode}`);
   const content = phase3EntryLessonContentFor(targetCode);
 
   const isMid = PHASE_3_MID_TARGETS.some((target) => target.code === targetCode);
-  const phasePosition = { id: isMid ? "phase-3-mid" : "phase-3-entry", phaseNumber: 3, label: isMid ? "Phase 3 Mid" : "Phase 3 Entry" };
+  const isPhase4 = PHASE_4_ENTRY_TARGETS.some((target) => target.code === targetCode);
+  const phasePosition = { id: isPhase4 ? "phase-4-entry" : isMid ? "phase-3-mid" : "phase-3-entry", phaseNumber: isPhase4 ? 4 : 3, label: isPhase4 ? "Phase 4 Entry" : isMid ? "Phase 3 Mid" : "Phase 3 Entry" };
   const dailyTarget = { id: `target-${targetCode}`, ...seedTarget, targetPatternsJson: seedTarget.targetPatternsJson as any };
   const targetPatterns = targetPatternsFor(seedTarget);
+  const pseudowordPatterns = pseudowordPatternsFor(seedTarget, targetPatterns);
   const heartWordsPreviewedThisLesson = content.heartWordsPreviewedThisLesson;
   const heartWordsAssumedKnown = content.heartWordsAssumedKnown;
   const vocabularyWords = content.vocabulary;
@@ -59,7 +61,8 @@ function buildContextFromRealSeed(targetCode: string): LessonGeneratorContext {
     dailyTarget,
     targetPattern: dailyTarget.code,
     targetPatterns,
-    targetWords: dailyTarget.exampleWords,
+    pseudowordPatterns,
+    targetWords: dailyTarget.exampleWords.slice(0, 5),
     reviewWords: [],
     pseudowords: dailyTarget.exampleNonwords,
     heartWordsPreviewedThisLesson,
@@ -111,14 +114,16 @@ function assertGeneratedLessonAgainstIndependentOracles(draft: GeneratedLessonDr
     if (directCmuHit) {
       console.log(`CMUdict name-token caveat accepted for shipped fixture pseudoword: ${pseudoword}`);
     }
-    const detectedPattern = detectVcePattern(normalized);
+    const detectedPattern = selectPseudowordPattern(normalized, ctx.pseudowordPatterns);
     assert(detectedPattern && ctx.targetPatterns.includes(detectedPattern), `Part 3 pseudoword ${pseudoword} detects outside target pattern set.`);
     const validation = validatePseudowordCandidate(normalized, detectedPattern, { strictLexicon: true });
     assert.equal(validation.valid, true, `Part 3 pseudoword ${pseudoword} failed pseudoword validator: ${validation.reason ?? validation.issues.join(", ")}`);
     const vowelLetter = detectedPattern.match(/^([aeiou])_e$/)?.[1] ?? "";
-    const collidingVariant = homophoneVariants(normalized, vowelLetter)
-      .find((variant) => cmuWords.has(variant) && !allowedCmudictVariant(detectedPattern, normalized, variant));
-    assert.equal(collidingVariant, undefined, `Part 3 pseudoword ${pseudoword} has CMUdict homophone variant ${collidingVariant}`);
+    if (vowelLetter) {
+      const collidingVariant = homophoneVariants(normalized, vowelLetter)
+        .find((variant) => cmuWords.has(variant) && !allowedCmudictVariant(detectedPattern, normalized, variant));
+      assert.equal(collidingVariant, undefined, `Part 3 pseudoword ${pseudoword} has CMUdict homophone variant ${collidingVariant}`);
+    }
   }
   for (const tag of wordTags(part3).filter((tag) => tag.lineNumber === 4 || String(tag.tag ?? tag.category) === "pseudoword")) {
     const word = String(tag.word ?? "").toLowerCase();
@@ -270,6 +275,20 @@ function targetPatternsFor(seedTarget: { code: string; targetPatternsJson: unkno
     if (Array.isArray(patterns) && patterns.every((entry) => typeof entry === "string")) return patterns as string[];
   }
   return [seedTarget.code];
+}
+
+function pseudowordPatternsFor(seedTarget: { code: string; targetPatternsJson: unknown }, fallback: string[]) {
+  const json = seedTarget.targetPatternsJson;
+  if (json && typeof json === "object" && !Array.isArray(json)) {
+    const patterns = (json as { pseudowordPatterns?: unknown }).pseudowordPatterns;
+    if (Array.isArray(patterns) && patterns.every((entry) => typeof entry === "string")) return patterns as string[];
+  }
+  return fallback;
+}
+
+function selectPseudowordPattern(word: string, orderedPatterns: string[]) {
+  const candidates = detectPatternCandidates(word);
+  return orderedPatterns.find((pattern) => candidates.includes(pattern)) ?? null;
 }
 
 function findCheck(draft: GeneratedLessonDraft, ruleId: string) {

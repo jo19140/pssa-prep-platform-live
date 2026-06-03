@@ -22,6 +22,17 @@ export const PHASE_3_MID = {
   prerequisites: ["PHASE_3_ENTRY"],
 };
 
+export const PHASE_4_ENTRY = {
+  phaseNumber: 4,
+  subPosition: "ENTRY",
+  label: "Phase 4 Entry",
+  phonicsTrack:
+    "Long-vowel team entry targets grouped by sound. Instruction introduces ai/ay, ee/ea, oa, and igh as specific daily targets while preserving Phase 3 VCe behavior.",
+  morphologyTrack:
+    "No new morphology target. Phase 4 Entry expands phonics transfer into long-vowel teams before r-controlled and diphthong expansion.",
+  prerequisites: ["PHASE_3_MID"],
+};
+
 export type DailyTargetSeed = {
   code: string;
   kidVisibleLabel: string;
@@ -154,6 +165,101 @@ export const PHASE_3_MID_TARGETS: DailyTargetSeed[] = [
 ];
 
 export const PHASE_3_TARGETS = [...PHASE_3_ENTRY_TARGETS, ...PHASE_3_MID_TARGETS];
+
+const phase4EntryAllowedPatternCodes = [
+  "closed_short_a",
+  "closed_short_i",
+  "closed_short_o",
+  "closed_short_u",
+  "closed_short_e",
+  "a_e",
+  "i_e",
+  "o_e",
+  "u_e",
+  "e_e",
+];
+
+const phase4EntryBlockedPatternCodes = [
+  "team_ai",
+  "team_ay",
+  "team_ee",
+  "team_ea",
+  "team_oa",
+  "team_ow",
+  "team_igh",
+  "team_ew",
+  "team_ue",
+  "team_ie_long_i",
+  "team_ie_long_e",
+  "team_oo_long",
+  "team_oo_short",
+  "diph_ow",
+  "diph_ou",
+  "diph_oi",
+  "diph_oy",
+  "r_ar",
+  "r_er",
+  "r_ir",
+  "r_or",
+  "r_ur",
+];
+
+function blockedExcept(targetPatterns: string[]) {
+  return phase4EntryBlockedPatternCodes.filter((pattern) => !targetPatterns.includes(pattern));
+}
+
+export const PHASE_4_ENTRY_TARGETS: DailyTargetSeed[] = [
+  {
+    code: "team_ai_ay",
+    kidVisibleLabel: "long a team words",
+    tutorLabel: "Long a teams: ai and ay",
+    description: "Phase 4 Entry target for long a vowel-team words spelled ai or ay.",
+    introductionOrder: 9,
+    targetPatternsJson: { patterns: ["team_ai", "team_ay"], pseudowordPatterns: ["team_ai"], graphemes: ["ai", "ay"], sound: "long_a" },
+    allowedPatternCodes: phase4EntryAllowedPatternCodes,
+    blockedPatternCodes: blockedExcept(["team_ai", "team_ay"]),
+    exampleWords: ["rain", "wait", "mail", "paid", "play", "stay", "day", "gray"],
+    exampleNonwords: ["zaib", "vaib", "jaib", "maig", "naid", "paib", "saib", "taib"],
+  },
+  {
+    code: "team_ee_ea",
+    kidVisibleLabel: "long e team words",
+    tutorLabel: "Long e teams: ee and ea",
+    description: "Phase 4 Entry target for long e vowel-team words spelled ee or ea.",
+    introductionOrder: 10,
+    targetPatternsJson: { patterns: ["team_ee", "team_ea"], pseudowordPatterns: ["team_ee", "team_ea"], graphemes: ["ee", "ea"], sound: "long_e" },
+    allowedPatternCodes: phase4EntryAllowedPatternCodes,
+    blockedPatternCodes: blockedExcept(["team_ee", "team_ea"]),
+    exampleWords: ["see", "feet", "green", "deep", "sea", "seat", "read", "team"],
+    exampleNonwords: ["zeed", "veeb", "jeeb", "meeb", "zead", "veab", "jeab", "meab"],
+  },
+  {
+    code: "team_oa",
+    kidVisibleLabel: "oa words",
+    tutorLabel: "Long o team: oa",
+    description: "Phase 4 Entry target for long o vowel-team words spelled oa only.",
+    introductionOrder: 11,
+    targetPatternsJson: { patterns: ["team_oa"], pseudowordPatterns: ["team_oa"], graphemes: ["oa"], sound: "long_o" },
+    allowedPatternCodes: phase4EntryAllowedPatternCodes,
+    blockedPatternCodes: blockedExcept(["team_oa"]),
+    exampleWords: ["boat", "goat", "road", "coat", "oats", "load", "soap", "toast"],
+    exampleNonwords: ["zoab", "voab", "joad", "moag", "noab", "poab", "soab", "toag"],
+  },
+  {
+    code: "team_igh",
+    kidVisibleLabel: "igh words",
+    tutorLabel: "Long i team: igh",
+    description: "Phase 4 Entry target for long i vowel-team words spelled igh.",
+    introductionOrder: 12,
+    targetPatternsJson: { patterns: ["team_igh"], pseudowordPatterns: ["team_igh"], graphemes: ["igh"], sound: "long_i" },
+    allowedPatternCodes: phase4EntryAllowedPatternCodes,
+    blockedPatternCodes: blockedExcept(["team_igh"]),
+    exampleWords: ["light", "night", "bright", "fight", "might", "sight", "high", "tight"],
+    exampleNonwords: ["zighb", "vighg", "jighd", "mighb", "nighb", "pighb", "sighg", "tighb"],
+  },
+];
+
+export const CONTENT_V3_DAILY_TARGETS = [...PHASE_3_TARGETS, ...PHASE_4_ENTRY_TARGETS];
 
 export const NDL_LICENSE_ATTRIBUTION = {
   sourceCode: "NDL",

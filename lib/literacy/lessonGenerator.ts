@@ -15,7 +15,7 @@ import { generatePart6Encoding } from "./lessonParts/part6Encoding";
 import { generatePart7ConnectedText } from "./lessonParts/part7ConnectedText";
 import { generatePart8Comprehension } from "./lessonParts/part8Comprehension";
 import type { GeneratedLessonPart, LessonGeneratorContext } from "./lessonParts/types";
-import { detectVcePattern, validatePseudowordCandidate } from "./pseudowordValidator";
+import { detectPatternCandidates, validatePseudowordCandidate } from "./pseudowordValidator";
 
 export type LessonGenerationOptions = {
   phasePositionId: string;
@@ -38,6 +38,7 @@ export type LessonDraftGenerationParams = {
   dailyTargetCode: string;
   targetPattern: string;
   targetPatterns: string[];
+  pseudowordPatterns: string[];
   targetWords: string[];
   pseudowords: string[];
   selectedPassageId: string;
@@ -77,6 +78,7 @@ export async function buildLessonGeneratorContext(phasePositionId: string, daily
   }
   const content = phase3EntryLessonContentFor(dailyTarget.code);
   const targetPatterns = targetPatternsForDailyTarget(dailyTarget);
+  const pseudowordPatterns = pseudowordPatternsForDailyTarget(dailyTarget, targetPatterns);
   const heartWordsPreviewedThisLesson = content.heartWordsPreviewedThisLesson;
   const heartWordsAssumedKnown = content.heartWordsAssumedKnown;
   const vocabularyWords = content.vocabulary;
@@ -91,9 +93,10 @@ export async function buildLessonGeneratorContext(phasePositionId: string, daily
     dailyTarget,
     targetPattern: dailyTarget.code,
     targetPatterns,
+    pseudowordPatterns,
     targetWords: dailyTarget.exampleWords.slice(0, 5),
     reviewWords: [],
-    pseudowords: canonicalPseudowordsForTargetPatterns(dailyTarget.code, dailyTarget.exampleNonwords, targetPatterns),
+    pseudowords: canonicalPseudowordsForTargetPatterns(dailyTarget.code, dailyTarget.exampleNonwords, targetPatterns, "content-v3 lesson seed", pseudowordPatterns),
     heartWordsPreviewedThisLesson,
     heartWordsAssumedKnown,
     vocabularyWords,
@@ -116,6 +119,7 @@ export async function generateLessonDraft(ctx: LessonGeneratorContext, options: 
     dailyTargetCode: ctx.dailyTarget.code,
     targetPattern: ctx.targetPattern,
     targetPatterns: ctx.targetPatterns,
+    pseudowordPatterns: ctx.pseudowordPatterns,
     targetWords: ctx.targetWords,
     pseudowords: ctx.pseudowords,
     selectedPassageId: ctx.selectedPassage?.id || "",
@@ -132,6 +136,7 @@ export async function generateLessonDraft(ctx: LessonGeneratorContext, options: 
       dailyTargetCode: ctx.dailyTarget.code,
       targetPattern: ctx.targetPattern,
       targetPatterns: ctx.targetPatterns,
+      pseudowordPatterns: ctx.pseudowordPatterns,
       selectedPassageId: ctx.selectedPassage?.id || null,
       partCount: 8,
     },
@@ -147,6 +152,7 @@ export async function generateLessonDraft(ctx: LessonGeneratorContext, options: 
     dailyTargetCode: ctx.dailyTarget.code,
     targetPattern: ctx.targetPattern,
     targetPatterns: ctx.targetPatterns,
+    pseudowordPatterns: ctx.pseudowordPatterns,
     parts,
   };
 }
@@ -249,10 +255,16 @@ export function canonicalPseudowordsForTarget(dailyTargetCode: string, seedNonwo
   return canonicalPseudowordsForTargetPatterns(dailyTargetCode, seedNonwords, [dailyTargetCode], "Phase 3 Entry content");
 }
 
-export function canonicalPseudowordsForTargetPatterns(dailyTargetCode: string, seedNonwords: string[], targetPatterns: string[], seedLabel = "Phase 3 content") {
+export function canonicalPseudowordsForTargetPatterns(
+  dailyTargetCode: string,
+  seedNonwords: string[],
+  targetPatterns: string[],
+  seedLabel = "Phase 3 content",
+  pseudowordPatterns = targetPatterns,
+) {
   const firstEight = seedNonwords.slice(0, 8);
   if (firstEight.length >= 8 && firstEight.every((word) => {
-    const detected = detectVcePattern(word);
+    const detected = selectPseudowordPattern(word, pseudowordPatterns);
     return Boolean(detected && targetPatterns.includes(detected) && validatePseudowordCandidate(word, detected, { strictLexicon: true }).valid);
   })) {
     return firstEight;
@@ -271,4 +283,20 @@ function targetPatternsForDailyTarget(dailyTarget: Pick<DailyTarget, "code" | "t
     }
   }
   return [dailyTarget.code];
+}
+
+function pseudowordPatternsForDailyTarget(dailyTarget: Pick<DailyTarget, "code" | "targetPatternsJson">, fallback: string[]): string[] {
+  const json = dailyTarget.targetPatternsJson;
+  if (json && typeof json === "object" && !Array.isArray(json)) {
+    const patterns = (json as { pseudowordPatterns?: unknown }).pseudowordPatterns;
+    if (Array.isArray(patterns) && patterns.every((entry) => typeof entry === "string")) {
+      return patterns as string[];
+    }
+  }
+  return fallback;
+}
+
+function selectPseudowordPattern(word: string, orderedPatterns: string[]) {
+  const candidates = detectPatternCandidates(word);
+  return orderedPatterns.find((pattern) => candidates.includes(pattern)) ?? null;
 }

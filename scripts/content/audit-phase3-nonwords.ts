@@ -1,5 +1,5 @@
-import { PHASE_3_TARGETS } from "../../lib/content/phase3EntrySeed";
-import { detectVcePattern, validatePseudowordCandidate } from "../../lib/literacy/pseudowordValidator";
+import { CONTENT_V3_DAILY_TARGETS } from "../../lib/content/phase3EntrySeed";
+import { detectPatternCandidates, validatePseudowordCandidate } from "../../lib/literacy/pseudowordValidator";
 
 type TargetReport = {
   target: string;
@@ -10,14 +10,15 @@ type TargetReport = {
 
 function main() {
   const reports: TargetReport[] = [];
-  for (const target of PHASE_3_TARGETS) {
+  for (const target of CONTENT_V3_DAILY_TARGETS) {
     const patterns = targetPatternsForTarget(target);
+    const pseudowordPatterns = pseudowordPatternsForTarget(target, patterns);
     const invalid: string[] = [];
     for (const word of target.exampleNonwords) {
-      const detected = detectVcePattern(word);
+      const detected = selectPseudowordPattern(word, pseudowordPatterns);
       const result = detected ? validatePseudowordCandidate(word, detected, { strictLexicon: true }) : null;
-      if (!detected || !patterns.includes(detected)) {
-        invalid.push(`${word} -> ${detected ?? "NO_VCE_PATTERN"} (not in target pattern set ${patterns.join(", ")})`);
+      if (!detected || !patterns.includes(detected) || !pseudowordPatterns.includes(detected)) {
+        invalid.push(`${word} -> ${detected ?? "NO_PATTERN"} (not in pseudoword pattern set ${pseudowordPatterns.join(", ")})`);
         continue;
       }
       if (!result?.valid) {
@@ -32,7 +33,7 @@ function main() {
     });
   }
 
-  console.log("Phase 3 pseudoword readiness");
+  console.log("Content v3 pseudoword readiness");
   console.log("target | count | valid | status | notes");
   console.log("--- | ---: | ---: | --- | ---");
   for (const report of reports) {
@@ -47,7 +48,7 @@ function main() {
 
   const failures = reports.filter((report) => report.count < 8 || report.invalid.length);
   if (failures.length) {
-    console.error(`Phase 3 pseudoword audit failed for: ${failures.map((report) => report.target).join(", ")}`);
+    console.error(`Content v3 pseudoword audit failed for: ${failures.map((report) => report.target).join(", ")}`);
     process.exit(1);
   }
 }
@@ -61,6 +62,20 @@ function targetPatternsForTarget(target: { code: string; targetPatternsJson: unk
     }
   }
   return [target.code];
+}
+
+function pseudowordPatternsForTarget(target: { code: string; targetPatternsJson: unknown }, fallback: string[]) {
+  const json = target.targetPatternsJson;
+  if (json && typeof json === "object" && !Array.isArray(json)) {
+    const patterns = (json as { pseudowordPatterns?: unknown }).pseudowordPatterns;
+    if (Array.isArray(patterns) && patterns.every((entry) => typeof entry === "string")) return patterns as string[];
+  }
+  return fallback;
+}
+
+function selectPseudowordPattern(word: string, orderedPatterns: string[]) {
+  const candidates = detectPatternCandidates(word);
+  return orderedPatterns.find((pattern) => candidates.includes(pattern)) ?? null;
 }
 
 try {

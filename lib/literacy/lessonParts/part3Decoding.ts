@@ -1,15 +1,15 @@
 import { phase3EntryLessonContentFor } from "@/lib/content/phase3EntryLessonContent";
 import { wordMatchesPattern } from "../passageClassifier";
-import { detectVcePattern, validatePseudowordCandidate } from "../pseudowordValidator";
+import { detectPatternCandidates, validatePseudowordCandidate } from "../pseudowordValidator";
 import { withCommonPartMetadata, type GeneratedLessonPart, type LessonGeneratorContext } from "./types";
 
 export function generatePart3Decoding(ctx: LessonGeneratorContext): GeneratedLessonPart {
   const content = phase3EntryLessonContentFor(ctx.dailyTarget.code);
   const pseudowordValidation = ctx.pseudowords.map((word) => {
-    const detectedPattern = detectVcePattern(word);
+    const detectedPattern = selectPseudowordPattern(word, ctx.pseudowordPatterns);
     return detectedPattern
       ? validatePseudowordCandidate(word, detectedPattern, { strictLexicon: true })
-      : validatePseudowordCandidate(word, ctx.targetPatterns[0] ?? "a_e", { strictLexicon: true });
+      : validatePseudowordCandidate(word, ctx.pseudowordPatterns[0] ?? ctx.targetPatterns[0] ?? "a_e", { strictLexicon: true });
   });
   const contrastiveLines = [
     { lineNumber: 1, role: "target_real_words", words: ctx.targetWords },
@@ -21,6 +21,10 @@ export function generatePart3Decoding(ctx: LessonGeneratorContext): GeneratedLes
     word,
     tag: line.role === "target_pseudowords" ? "target" : tagForWord(word, ctx.targetWords, ctx.targetPatterns),
     lineNumber: line.lineNumber,
+    matchedPattern: line.role === "target_pseudowords"
+      ? selectPseudowordPattern(word, ctx.pseudowordPatterns) ?? undefined
+      : ctx.targetPatterns.find((pattern) => wordMatchesPattern(word, pattern, { strictPhonemeLexicon: ctx.phasePosition.phaseNumber >= 4 })),
+    selectedPattern: line.role === "target_pseudowords" ? selectPseudowordPattern(word, ctx.pseudowordPatterns) ?? undefined : undefined,
     expectedPronunciation: line.role === "target_pseudowords"
       ? pseudowordValidation.find((entry) => entry.pseudoword === word)?.expectedPronunciation
       : undefined,
@@ -55,6 +59,11 @@ export function generatePart3Decoding(ctx: LessonGeneratorContext): GeneratedLes
 
 function tagForWord(word: string, targetWords: string[], targetPatterns: string[]) {
   if (targetWords.includes(word)) return "target";
-  if (targetPatterns.some((pattern) => wordMatchesPattern(word, pattern))) return "target";
+  if (targetPatterns.some((pattern) => wordMatchesPattern(word, pattern, { strictPhonemeLexicon: true }))) return "target";
   return "prerequisite";
+}
+
+function selectPseudowordPattern(word: string, orderedPatterns: string[]) {
+  const candidates = detectPatternCandidates(word);
+  return orderedPatterns.find((pattern) => candidates.includes(pattern)) ?? null;
 }

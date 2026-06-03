@@ -128,6 +128,7 @@ async function fixtureDraft(): Promise<GeneratedLessonDraft> {
     dailyTarget,
     targetPattern: "a_e",
     targetPatterns: ["a_e"],
+    pseudowordPatterns: ["a_e"],
     targetWords: ["cake", "make", "lake", "game", "name", "tape", "cape", "date"],
     reviewWords: [],
     pseudowords: ["zake", "mave", "pame", "vade", "sape", "nace", "gake", "tave"],
@@ -150,6 +151,7 @@ async function fixtureDraft(): Promise<GeneratedLessonDraft> {
     dailyTargetCode: ctx.dailyTarget.code,
     targetPattern: ctx.targetPattern,
     targetPatterns: ctx.targetPatterns,
+    pseudowordPatterns: ctx.pseudowordPatterns,
     targetWords: ctx.targetWords,
     pseudowords: ctx.pseudowords,
     selectedPassageId: ctx.selectedPassage?.id ?? "",
@@ -161,6 +163,7 @@ async function fixtureDraft(): Promise<GeneratedLessonDraft> {
     dailyTargetCode: ctx.dailyTarget.code,
     targetPattern: ctx.targetPattern,
     targetPatterns: ctx.targetPatterns,
+    pseudowordPatterns: ctx.pseudowordPatterns,
     parts: result.parts,
   };
 }

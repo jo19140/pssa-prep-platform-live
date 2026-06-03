@@ -28,6 +28,10 @@ type HomophoneLexiconCache =
   | { status: "loaded"; words: Set<string> }
   | { status: "unavailable"; error: Error };
 
+type CmudictReverseCache =
+  | { status: "loaded"; byPronunciation: Map<string, Set<string>> }
+  | { status: "unavailable"; error: Error };
+
 /**
  * Curated authoritative real-word lexicon for the controlled silent-e / closed-syllable
  * vocabulary the generator produces at Phases 1-3.
@@ -90,11 +94,13 @@ export const CORE_REAL_WORDS: Set<string> = new Set([
 let cmudictPath = path.resolve("data/phonogram/cmudict.json");
 let subtlexPath = path.resolve("data/phonogram/subtlex.csv");
 let homophoneLexiconCache: HomophoneLexiconCache | null = null;
+let cmudictReverseCache: CmudictReverseCache | null = null;
 
 export function __setPseudowordLexiconPathsForTest(paths: { cmudictPath?: string; subtlexPath?: string } | null) {
   cmudictPath = paths?.cmudictPath ?? path.resolve("data/phonogram/cmudict.json");
   subtlexPath = paths?.subtlexPath ?? path.resolve("data/phonogram/subtlex.csv");
   homophoneLexiconCache = null;
+  cmudictReverseCache = null;
 }
 
 const LONG_VOWEL_TEAMS: Record<string, string[]> = {
@@ -196,12 +202,27 @@ export function validatePseudowordCandidate(
           break;
         }
       }
+    } else {
+      const decoded = decodeTeamPseudowordPronunciation(normalized, targetPattern);
+      if (decoded) {
+        const reverse = getCmudictReverseIndex(opts.strictLexicon === true);
+        if (reverse.unavailable) {
+          issues.push("CMUDICT_PHONEME_LEXICON_UNAVAILABLE");
+        } else {
+          const matches = reverse.byPronunciation.get(decoded.join(" "));
+          const realWord = matches ? Array.from(matches).find((word) => word !== normalized && homophoneLexicon.has(word)) : null;
+          if (realWord) {
+            collidesWith = realWord;
+            blockingIssues.push(`pseudoword sounds like the real word "${realWord}"`);
+          }
+        }
+      }
     }
   }
 
   return {
     pseudoword: normalized,
-    expectedPronunciation: pronunciationForSilentE(normalized, targetPattern),
+    expectedPronunciation: expectedPronunciationForPattern(normalized, targetPattern),
     targetPattern,
     valid: blockingIssues.length === 0,
     reason: blockingIssues[0] ?? null,
@@ -220,6 +241,60 @@ function pronunciationForSilentE(word: string, pattern: string) {
   return `${word} (${vowel} says its name)`;
 }
 
+function expectedPronunciationForPattern(word: string, pattern: string) {
+  const silentE = pronunciationForSilentE(word, pattern);
+  if (silentE !== word) return silentE;
+  const phonemes = decodeTeamPseudowordPronunciation(word, pattern);
+  return phonemes ? `${word} (${phonemes.join(" ")})` : word;
+}
+
+const CONSONANT_PHONEMES: Record<string, string> = {
+  b: "B",
+  c: "K",
+  d: "D",
+  f: "F",
+  g: "G",
+  h: "HH",
+  j: "JH",
+  k: "K",
+  l: "L",
+  m: "M",
+  n: "N",
+  p: "P",
+  q: "K",
+  r: "R",
+  s: "S",
+  t: "T",
+  v: "V",
+  w: "W",
+  x: "K S",
+  y: "Y",
+  z: "Z",
+};
+
+function decodeTeamPseudowordPronunciation(word: string, pattern: string): string[] | null {
+  const definition = PATTERN_REGISTRY[pattern];
+  const vowelPhonemes = definition?.expectedPhonemeSequences?.[0];
+  if (!definition || definition.family !== "vowel_team" || !vowelPhonemes?.length) return null;
+  const grapheme = definition.graphemes.find((entry) => word.includes(entry));
+  if (!grapheme) return null;
+  const index = word.indexOf(grapheme);
+  const onset = word.slice(0, index);
+  const coda = word.slice(index + grapheme.length);
+  const decoded = [...decodeConsonantString(onset), ...vowelPhonemes, ...decodeConsonantString(coda)];
+  return decoded.length ? decoded : null;
+}
+
+function decodeConsonantString(value: string): string[] {
+  const phonemes: string[] = [];
+  for (const char of value.toLowerCase()) {
+    const mapped = CONSONANT_PHONEMES[char];
+    if (!mapped) return [];
+    phonemes.push(...mapped.split(" "));
+  }
+  return phonemes;
+}
+
 function getHomophoneLexicon(strictLexicon: boolean): { words: Set<string>; unavailable: false } | { words: Set<string>; unavailable: true } {
   if (!homophoneLexiconCache) {
     try {
@@ -236,6 +311,47 @@ function getHomophoneLexicon(strictLexicon: boolean): { words: Set<string>; unav
     throw new Error(`HOMOPHONE_LEXICON_UNAVAILABLE: ${homophoneLexiconCache.error.message}`);
   }
   return { words: CORE_REAL_WORDS, unavailable: true };
+}
+
+function getCmudictReverseIndex(strictLexicon: boolean): { byPronunciation: Map<string, Set<string>>; unavailable: false } | { byPronunciation: Map<string, Set<string>>; unavailable: true } {
+  if (!cmudictReverseCache) {
+    try {
+      cmudictReverseCache = { status: "loaded", byPronunciation: loadCmudictReverseIndex() };
+    } catch (error) {
+      const normalized = error instanceof Error ? error : new Error(String(error));
+      cmudictReverseCache = { status: "unavailable", error: normalized };
+    }
+  }
+  if (cmudictReverseCache.status === "loaded") {
+    return { byPronunciation: cmudictReverseCache.byPronunciation, unavailable: false };
+  }
+  if (strictLexicon) {
+    throw new Error(`CMUDICT_PHONEME_LEXICON_UNAVAILABLE: ${cmudictReverseCache.error.message}`);
+  }
+  return { byPronunciation: new Map(), unavailable: true };
+}
+
+function loadCmudictReverseIndex() {
+  const rawCmudict = JSON.parse(fs.readFileSync(cmudictPath, "utf8")) as Array<{ word?: unknown; arpabet?: unknown }>;
+  const index = new Map<string, Set<string>>();
+  for (const entry of rawCmudict) {
+    const word = normalizeLexiconWord(String(entry.word ?? ""));
+    const arpabet = String(entry.arpabet ?? "")
+      .trim()
+      .split(/\s+/)
+      .filter(Boolean)
+      .map(stripStress);
+    if (!word || arpabet.length === 0) continue;
+    const key = arpabet.join(" ");
+    const words = index.get(key) ?? new Set<string>();
+    words.add(word);
+    index.set(key, words);
+  }
+  return index;
+}
+
+function stripStress(token: string) {
+  return token.replace(/\d/g, "");
 }
 
 function loadFrequencyGatedHomophoneLexicon() {

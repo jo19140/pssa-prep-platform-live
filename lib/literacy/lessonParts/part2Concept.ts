@@ -4,6 +4,10 @@ import { withCommonPartMetadata, type GeneratedLessonPart, type LessonGeneratorC
 
 export function generatePart2Concept(ctx: LessonGeneratorContext): GeneratedLessonPart {
   const content = phase3EntryLessonContentFor(ctx.dailyTarget.code);
+  const demoMode = content.demoMode ?? "minimal_pairs";
+  const demonstrationPairs = content.demonstrationPairs ?? [];
+  const demonstrationExamples = content.demonstrationExamples ?? [];
+  const allExamples = [...ctx.targetWords, ...demonstrationExamples, ...demonstrationPairs.map((pair) => pair.target)];
   return withCommonPartMetadata(ctx, {
     partNumber: 2,
     partLabel: "Explicit target concept",
@@ -15,17 +19,29 @@ export function generatePart2Concept(ctx: LessonGeneratorContext): GeneratedLess
     },
     tutorVisibleCopy: {
       purpose: "Introduce the specific daily target without using phoneme notation or broad category language.",
-      demonstrationPairs: content.demonstrationPairs,
+      demoMode,
+      demonstrationPairs,
+      demonstrationExamples,
     },
     contentJson: {
       skillFocus: "explicit_target_instruction",
       conceptExamples: ctx.targetWords,
-      demonstrationPairs: content.demonstrationPairs,
-      teachingLanguage: "Silent e helps the vowel say its name in these words.",
+      demoMode,
+      demonstrationPairs,
+      demonstrationExamples,
+      teachingLanguage: ctx.phasePosition.phaseNumber >= 4
+        ? "These letters work together to help the vowel sound stay long."
+        : "Silent e helps the vowel say its name in these words.",
       studentDisplayMode: "EXAMPLE_CARDS",
       responseMode: "listen_and_repeat",
     },
-    wordTagsJson: { words: ctx.targetWords.map((word) => ({ word, tag: "target", pattern: ctx.targetPatterns.find((pattern) => wordMatchesPattern(word, pattern)) ?? ctx.targetPattern })) },
+    wordTagsJson: {
+      words: Array.from(new Set(allExamples)).map((word) => ({
+        word,
+        tag: "target",
+        pattern: ctx.targetPatterns.find((pattern) => wordMatchesPattern(word, pattern, { strictPhonemeLexicon: ctx.phasePosition.phaseNumber >= 4 })) ?? ctx.targetPattern,
+      })),
+    },
     studentDisplayMode: "EXAMPLE_CARDS",
     responseMode: "listen_and_repeat",
   });

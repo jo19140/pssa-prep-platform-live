@@ -1,5 +1,7 @@
-export type Phase3EntryLessonContent = {
-  demonstrationPairs: { closed: string; target: string }[];
+export type LessonContentByDailyTarget = {
+  demoMode?: "minimal_pairs" | "examples_only";
+  demonstrationPairs?: { closed: string; target: string }[];
+  demonstrationExamples?: string[];
   contrastiveLine2: string[];
   contrastiveLine3: string[];
   sentences: string[];
@@ -14,9 +16,9 @@ export type Phase3EntryLessonContent = {
 };
 
 const sharedHeartWordsPreviewedThisLesson = ["said", "was", "they"];
-const sharedHeartWordsAssumedKnown = ["I", "a", "the", "to"];
+const sharedHeartWordsAssumedKnown = ["I", "a", "the", "to", "we", "he", "she", "me", "be", "of", "it", "and", "had", "has", "is", "can", "will", "all", "see", "day"];
 
-export const PHASE_3_ENTRY_LESSON_CONTENT: Record<string, Phase3EntryLessonContent> = {
+export const LESSON_CONTENT_BY_DAILY_TARGET: Record<string, LessonContentByDailyTarget> = {
   a_e: {
     demonstrationPairs: [
       { closed: "cap", target: "cape" },
@@ -267,10 +269,136 @@ export const PHASE_3_ENTRY_LESSON_CONTENT: Record<string, Phase3EntryLessonConte
     mockPassageText: `Dave has a bike. Mike rode the bike home. Rose has a cute mule. June came to ride the mule. "I like these," said Pete. Dave gave Pete a note. Mike and June like the lake. They ride and smile. It was a fine scene.`,
     mockPassageTitle: "At the Lake",
   },
+  team_ai_ay: {
+    demoMode: "minimal_pairs",
+    demonstrationPairs: [
+      { closed: "pan", target: "pain" },
+      { closed: "ran", target: "rain" },
+      { closed: "man", target: "main" },
+      { closed: "mad", target: "maid" },
+    ],
+    contrastiveLine2: ["pan", "pain", "ran", "rain", "man", "main", "mad", "maid"],
+    contrastiveLine3: ["sail", "gray", "stay", "lake", "hand", "jay", "desk"],
+    sentences: [
+      "Gail will play in the rain.",
+      "Jay had to wait all day.",
+      "May and Gail paint a sail.",
+      "\"I see the gray sail,\" said Jay.",
+      "They stay and play.",
+      "The rain is not bad.",
+    ],
+    dictatedWords: ["rain", "wait", "mail", "paid", "play", "stay"],
+    dictatedSentences: ["Gail will play in the rain.", "Jay had to wait all day."],
+    comprehensionQuestions: [
+      { question: "Why did Jay have to wait?", questionType: "inference" },
+      { question: "What did Gail and May paint?", questionType: "literal" },
+      { question: "Tell me what happened on the rainy day.", questionType: "retell" },
+      { question: "What would you paint on a rainy day?", questionType: "personal_connection" },
+    ],
+    heartWordsPreviewedThisLesson: sharedHeartWordsPreviewedThisLesson,
+    heartWordsAssumedKnown: sharedHeartWordsAssumedKnown,
+    vocabulary: ["paint", "sail"],
+    mockPassageText: `Gail will play in the rain. The rain fell all day. Jay had to wait. "I see the rain," said Gail. Jay and May ran to play. They paint a sail. The sail is gray. We help Gail paint. Gail had to stay. It was a fun day.`,
+    mockPassageTitle: "Gail's Rainy Day",
+  },
+  team_ee_ea: {
+    demoMode: "minimal_pairs",
+    demonstrationPairs: [
+      { closed: "bed", target: "bead" },
+      { closed: "men", target: "mean" },
+      { closed: "set", target: "seat" },
+      { closed: "ten", target: "teen" },
+    ],
+    contrastiveLine2: ["bed", "bead", "men", "mean", "set", "seat", "ten", "teen"],
+    contrastiveLine3: ["meat", "deep", "sea", "lake", "hand", "sweet", "desk"],
+    sentences: [
+      "We see a seal at the sea.",
+      "The seal can leap.",
+      "Jean will feed the seal.",
+      "\"I see green weeds,\" said Jean.",
+      "The seal sleeps in the deep sea.",
+      "It was a sweet week.",
+    ],
+    dictatedWords: ["see", "feet", "green", "deep", "sea", "team"],
+    dictatedSentences: ["We see a seal at the sea.", "The seal can leap."],
+    comprehensionQuestions: [
+      { question: "Why did Jean feed the seal?", questionType: "inference" },
+      { question: "Where did they see the seal?", questionType: "literal" },
+      { question: "Tell me what happened with the seal.", questionType: "retell" },
+      { question: "What animal would you like to see?", questionType: "personal_connection" },
+    ],
+    heartWordsPreviewedThisLesson: sharedHeartWordsPreviewedThisLesson,
+    heartWordsAssumedKnown: sharedHeartWordsAssumedKnown,
+    vocabulary: ["seal", "weeds"],
+    mockPassageText: `We see a seal at the sea. The seal can leap. The seal ate a treat. "I see green weeds," said Jean. They feed the seal meat. The seal sleeps in the deep. We keep the seal neat. He gave the seal a bean. It was a sweet week.`,
+    mockPassageTitle: "The Seal",
+  },
+  team_oa: {
+    demoMode: "minimal_pairs",
+    demonstrationPairs: [
+      { closed: "got", target: "goat" },
+      { closed: "cot", target: "coat" },
+      { closed: "rod", target: "road" },
+    ],
+    contrastiveLine2: ["got", "goat", "cot", "coat", "rod", "road"],
+    contrastiveLine3: ["oats", "toast", "home", "lake", "hand", "load", "desk"],
+    sentences: [
+      "Joan has a goat.",
+      "The goat ate the oats.",
+      "The goat ran on the road.",
+      "\"I see a goat,\" said Joan.",
+      "The goat sat on a boat.",
+      "It was a fine day.",
+    ],
+    dictatedWords: ["boat", "goat", "road", "coat", "oats", "load"],
+    dictatedSentences: ["Joan has a goat.", "The goat ran on the road."],
+    comprehensionQuestions: [
+      { question: "Why did Joan look at the goat?", questionType: "inference" },
+      { question: "What did the goat eat?", questionType: "literal" },
+      { question: "Tell me what happened with Joan's goat.", questionType: "retell" },
+      { question: "What animal would you like to help?", questionType: "personal_connection" },
+    ],
+    heartWordsPreviewedThisLesson: sharedHeartWordsPreviewedThisLesson,
+    heartWordsAssumedKnown: sharedHeartWordsAssumedKnown,
+    vocabulary: ["goat", "oats"],
+    mockPassageText: `Joan has a goat. The goat ate the oats. The goat ran on the road. The goat had a coat. "I see a goat," said Joan. They gave the goat soap. We made goat toast. The goat sat on a boat. It was a fine day.`,
+    mockPassageTitle: "Joan's Goat",
+  },
+  team_igh: {
+    demoMode: "examples_only",
+    demonstrationExamples: ["light", "night", "bright", "knight", "fight"],
+    contrastiveLine2: ["light", "night", "sight", "right", "tight", "might"],
+    contrastiveLine3: ["knight", "flight", "lake", "hand", "high", "desk"],
+    sentences: [
+      "The knight had a small light.",
+      "The night was bright.",
+      "The knight will fight.",
+      "\"I see the light,\" said Dwight.",
+      "They might win.",
+      "We held the light up high.",
+    ],
+    dictatedWords: ["light", "night", "bright", "fight", "might", "sight"],
+    dictatedSentences: ["The knight had a small light.", "The night was bright."],
+    comprehensionQuestions: [
+      { question: "Why did the knight need the light?", questionType: "inference" },
+      { question: "What did Dwight see?", questionType: "literal" },
+      { question: "Tell me what happened in the bright night.", questionType: "retell" },
+      { question: "What helps you see at night?", questionType: "personal_connection" },
+    ],
+    heartWordsPreviewedThisLesson: sharedHeartWordsPreviewedThisLesson,
+    heartWordsAssumedKnown: sharedHeartWordsAssumedKnown,
+    vocabulary: ["knight", "light"],
+    mockPassageText: `The knight had a small light. The night was bright. The knight will fight. "I see the light," said Dwight. They might win. We held the light up high. A knight ran in the night. The light is not tight. It was a fine sight.`,
+    mockPassageTitle: "The Knight",
+  },
 };
 
-export function phase3EntryLessonContentFor(dailyTargetCode: string): Phase3EntryLessonContent {
-  const content = PHASE_3_ENTRY_LESSON_CONTENT[dailyTargetCode];
-  if (!content) throw new Error(`No Phase 3 Entry lesson content configured for ${dailyTargetCode}.`);
+export const PHASE_3_ENTRY_LESSON_CONTENT = LESSON_CONTENT_BY_DAILY_TARGET;
+
+export type Phase3EntryLessonContent = LessonContentByDailyTarget;
+
+export function phase3EntryLessonContentFor(dailyTargetCode: string): LessonContentByDailyTarget {
+  const content = LESSON_CONTENT_BY_DAILY_TARGET[dailyTargetCode];
+  if (!content) throw new Error(`No lesson content configured for ${dailyTargetCode}.`);
   return content;
 }

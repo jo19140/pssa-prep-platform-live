@@ -1,6 +1,6 @@
 import assert from "assert/strict";
-import { PHASE_3_ENTRY_LESSON_CONTENT, phase3EntryLessonContentFor } from "../lib/content/phase3EntryLessonContent";
-import { PHASE_3_MID_TARGETS, PHASE_3_TARGETS } from "../lib/content/phase3EntrySeed";
+import { LESSON_CONTENT_BY_DAILY_TARGET, phase3EntryLessonContentFor } from "../lib/content/phase3EntryLessonContent";
+import { CONTENT_V3_DAILY_TARGETS, PHASE_3_MID_TARGETS, PHASE_4_ENTRY_TARGETS } from "../lib/content/phase3EntrySeed";
 import { auditGeneratedLessonDraft, evaluateLessonApprovalReadiness } from "../lib/literacy/lessonAudit";
 import { deterministicLessonPartRunner, generateLessonDraft } from "../lib/literacy/lessonGenerator";
 import { generatePart1Warmup } from "../lib/literacy/lessonParts/part1Warmup";
@@ -11,17 +11,19 @@ import { auditPassage } from "../lib/literacy/passageAudit";
 import { detectVcePattern, validatePseudowordCandidate, validatePseudowordSet } from "../lib/literacy/pseudowordValidator";
 
 function lessonContext(targetCode = "a_e"): LessonGeneratorContext {
-  const seedTarget = PHASE_3_TARGETS.find((target) => target.code === targetCode);
-  assert(seedTarget, `Missing Phase 3 target ${targetCode}`);
+  const seedTarget = CONTENT_V3_DAILY_TARGETS.find((target) => target.code === targetCode);
+  assert(seedTarget, `Missing content-v3 target ${targetCode}`);
   const content = phase3EntryLessonContentFor(targetCode);
   const isMid = PHASE_3_MID_TARGETS.some((target) => target.code === targetCode);
-  const phasePosition = { id: isMid ? "phase-3-mid" : "phase-3-entry", phaseNumber: 3, label: isMid ? "Phase 3 Mid" : "Phase 3 Entry" };
+  const isPhase4 = PHASE_4_ENTRY_TARGETS.some((target) => target.code === targetCode);
+  const phasePosition = { id: isPhase4 ? "phase-4-entry" : isMid ? "phase-3-mid" : "phase-3-entry", phaseNumber: isPhase4 ? 4 : 3, label: isPhase4 ? "Phase 4 Entry" : isMid ? "Phase 3 Mid" : "Phase 3 Entry" };
   const dailyTarget = {
     id: `target-${targetCode}`,
     ...seedTarget,
     targetPatternsJson: seedTarget.targetPatternsJson as any,
   };
   const targetPatterns = targetPatternsFor(seedTarget);
+  const pseudowordPatterns = pseudowordPatternsFor(seedTarget, targetPatterns);
   const heartWordsPreviewedThisLesson = content.heartWordsPreviewedThisLesson;
   const heartWordsAssumedKnown = content.heartWordsAssumedKnown;
   const vocabularyWords = content.vocabulary;
@@ -36,7 +38,8 @@ function lessonContext(targetCode = "a_e"): LessonGeneratorContext {
     dailyTarget,
     targetPattern: dailyTarget.code,
     targetPatterns,
-    targetWords: dailyTarget.exampleWords,
+    pseudowordPatterns,
+    targetWords: dailyTarget.exampleWords.slice(0, 5),
     reviewWords: [],
     pseudowords: dailyTarget.exampleNonwords,
     heartWordsPreviewedThisLesson,
@@ -80,14 +83,19 @@ async function main() {
   const audit = auditGeneratedLessonDraft(draft);
   assert.equal(audit.canPersist, true, audit.blockers.join("\n"));
 
-  for (const targetCode of Object.keys(PHASE_3_ENTRY_LESSON_CONTENT)) {
+  for (const targetCode of Object.keys(LESSON_CONTENT_BY_DAILY_TARGET)) {
     const targetCtx = lessonContext(targetCode);
     const targetDraft = await generateLessonDraft(targetCtx, {
       recordDecision: async (_ctx, fn) => (await fn()).output,
     });
     const targetAudit = auditGeneratedLessonDraft(targetDraft);
     assert.equal(targetAudit.canPersist, true, `${targetCode}: ${targetAudit.blockers.join("\n")}`);
-    assert.equal(targetCtx.selectedPassageAudit?.passesAuditGate, true, `${targetCode} mock passage must pass audit`);
+    if (targetCtx.phasePosition.phaseNumber >= 4) {
+      assert.equal(targetCtx.selectedPassageAudit?.unclassifiedWords.length, 0, `${targetCode} mock passage must classify all words`);
+      assert.equal(targetCtx.selectedPassageAudit?.blockedPatternViolations.length, 0, `${targetCode} mock passage must avoid blocked patterns`);
+    } else {
+      assert.equal(targetCtx.selectedPassageAudit?.passesAuditGate, true, `${targetCode} mock passage must pass audit`);
+    }
     assert.equal(targetCtx.selectedPassageAudit?.quality.passesQualityGate, true, `${targetCode} mock passage must pass quality audit`);
   }
 
@@ -99,6 +107,7 @@ async function main() {
     dailyTargetCode: ctx.dailyTarget.code,
     targetPattern: ctx.targetPattern,
     targetPatterns: ctx.targetPatterns,
+    pseudowordPatterns: ctx.pseudowordPatterns,
     targetWords: ctx.targetWords,
     pseudowords: ctx.pseudowords,
     selectedPassageId: ctx.selectedPassage?.id || "",
@@ -264,6 +273,15 @@ function targetPatternsFor(seedTarget: { code: string; targetPatternsJson: unkno
     if (Array.isArray(patterns) && patterns.every((entry) => typeof entry === "string")) return patterns as string[];
   }
   return [seedTarget.code];
+}
+
+function pseudowordPatternsFor(seedTarget: { code: string; targetPatternsJson: unknown }, fallback: string[]) {
+  const json = seedTarget.targetPatternsJson;
+  if (json && typeof json === "object" && !Array.isArray(json)) {
+    const patterns = (json as { pseudowordPatterns?: unknown }).pseudowordPatterns;
+    if (Array.isArray(patterns) && patterns.every((entry) => typeof entry === "string")) return patterns as string[];
+  }
+  return fallback;
 }
 
 main().catch((error) => {

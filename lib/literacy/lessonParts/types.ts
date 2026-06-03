@@ -23,6 +23,7 @@ export type LessonGeneratorContext = {
   dailyTarget: Pick<DailyTarget, "id" | "code" | "kidVisibleLabel" | "tutorLabel" | "targetPatternsJson" | "allowedPatternCodes" | "blockedPatternCodes" | "exampleWords" | "exampleNonwords">;
   targetPattern: string;
   targetPatterns: string[];
+  pseudowordPatterns: string[];
   targetWords: string[];
   reviewWords: string[];
   pseudowords: string[];
@@ -43,6 +44,7 @@ export function withCommonPartMetadata(
     dailyTargetCode: ctx.dailyTarget.code,
     targetPattern: ctx.targetPattern,
     targetPatterns: ctx.targetPatterns,
+    pseudowordPatterns: ctx.pseudowordPatterns,
     ...part.contentJson,
     ...extras,
   };
