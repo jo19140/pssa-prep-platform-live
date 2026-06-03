@@ -1,0 +1,2 @@
+kind,id,batchId,bucket,blockedReason,detail,sourceType,licenseStatus,writeAction
+item,pssa_sa_g3_cart_connection_01,short_answer_grade3_pool,refused,PENDING_REVIEW,attestation_forbidden_for_source_type,released_sampler,unresolved,refused
