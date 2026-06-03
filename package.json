@@ -33,6 +33,7 @@
     "content:write-pssa-items": "tsx scripts/content/write-pssa-items.ts",
     "content:approve-pssa-items": "tsx scripts/content/approve-pssa-items.ts",
     "test:pssa-db5": "tsx scripts/test-pssa-db5-approval.ts",
+    "test:pssa-db5-1": "tsx scripts/test-pssa-db5-1-review-ui.ts",
     "voice:enforce-retention": "tsx scripts/voice/enforce-retention.ts",
     "voice:purge-training-opt-outs": "tsx scripts/voice/purge-training-opt-outs.ts",
     "data-flywheel:compute-outcomes": "tsx scripts/data-flywheel/compute-outcomes.ts",
