@@ -1,5 +1,5 @@
-import { PHASE_3_ENTRY_TARGETS } from "../../lib/content/phase3EntrySeed";
-import { validatePseudowordCandidate } from "../../lib/literacy/pseudowordValidator";
+import { PHASE_3_TARGETS } from "../../lib/content/phase3EntrySeed";
+import { detectVcePattern, validatePseudowordCandidate } from "../../lib/literacy/pseudowordValidator";
 
 type TargetReport = {
   target: string;
@@ -10,11 +10,17 @@ type TargetReport = {
 
 function main() {
   const reports: TargetReport[] = [];
-  for (const target of PHASE_3_ENTRY_TARGETS) {
+  for (const target of PHASE_3_TARGETS) {
+    const patterns = targetPatternsForTarget(target);
     const invalid: string[] = [];
     for (const word of target.exampleNonwords) {
-      const result = validatePseudowordCandidate(word, target.code, { strictLexicon: true });
-      if (!result.valid) {
+      const detected = detectVcePattern(word);
+      const result = detected ? validatePseudowordCandidate(word, detected, { strictLexicon: true }) : null;
+      if (!detected || !patterns.includes(detected)) {
+        invalid.push(`${word} -> ${detected ?? "NO_VCE_PATTERN"} (not in target pattern set ${patterns.join(", ")})`);
+        continue;
+      }
+      if (!result?.valid) {
         invalid.push(`${word} -> ${result.collidesWith ?? "INVALID"} (${result.reason ?? result.issues.join("; ")})`);
       }
     }
@@ -26,7 +32,7 @@ function main() {
     });
   }
 
-  console.log("Phase 3 Entry pseudoword readiness");
+  console.log("Phase 3 pseudoword readiness");
   console.log("target | count | valid | status | notes");
   console.log("--- | ---: | ---: | --- | ---");
   for (const report of reports) {
@@ -41,9 +47,20 @@ function main() {
 
   const failures = reports.filter((report) => report.count < 8 || report.invalid.length);
   if (failures.length) {
-    console.error(`Phase 3 Entry pseudoword audit failed for: ${failures.map((report) => report.target).join(", ")}`);
+    console.error(`Phase 3 pseudoword audit failed for: ${failures.map((report) => report.target).join(", ")}`);
     process.exit(1);
   }
+}
+
+function targetPatternsForTarget(target: { code: string; targetPatternsJson: unknown }) {
+  const json = target.targetPatternsJson;
+  if (json && typeof json === "object" && !Array.isArray(json)) {
+    const patterns = (json as { patterns?: unknown }).patterns;
+    if (Array.isArray(patterns) && patterns.every((entry) => typeof entry === "string")) {
+      return patterns as string[];
+    }
+  }
+  return [target.code];
 }
 
 try {

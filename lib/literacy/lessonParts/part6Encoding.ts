@@ -29,7 +29,7 @@ export function generatePart6Encoding(ctx: LessonGeneratorContext): GeneratedLes
     wordTagsJson: {
       words: content.dictatedWords.map((word) => ({
         word,
-        tag: ctx.targetWords.includes(word) || wordMatchesPattern(word, ctx.targetPattern) ? "target" : "prerequisite",
+        tag: ctx.targetWords.includes(word) || ctx.targetPatterns.some((pattern) => wordMatchesPattern(word, pattern)) ? "target" : "prerequisite",
       })),
     },
     scoringRubricJson: { scoring: "spelling_match", evidence: "dictated word and sentence spelling" },

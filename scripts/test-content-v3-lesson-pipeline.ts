@@ -1,6 +1,6 @@
 import assert from "assert/strict";
 import { PHASE_3_ENTRY_LESSON_CONTENT, phase3EntryLessonContentFor } from "../lib/content/phase3EntryLessonContent";
-import { PHASE_3_ENTRY_TARGETS } from "../lib/content/phase3EntrySeed";
+import { PHASE_3_MID_TARGETS, PHASE_3_TARGETS } from "../lib/content/phase3EntrySeed";
 import { auditGeneratedLessonDraft, evaluateLessonApprovalReadiness } from "../lib/literacy/lessonAudit";
 import { deterministicLessonPartRunner, generateLessonDraft } from "../lib/literacy/lessonGenerator";
 import { generatePart1Warmup } from "../lib/literacy/lessonParts/part1Warmup";
@@ -8,18 +8,20 @@ import { generatePart3Decoding } from "../lib/literacy/lessonParts/part3Decoding
 import { generatePart6Encoding } from "../lib/literacy/lessonParts/part6Encoding";
 import type { LessonGeneratorContext } from "../lib/literacy/lessonParts/types";
 import { auditPassage } from "../lib/literacy/passageAudit";
-import { validatePseudowordCandidate, validatePseudowordSet } from "../lib/literacy/pseudowordValidator";
+import { detectVcePattern, validatePseudowordCandidate, validatePseudowordSet } from "../lib/literacy/pseudowordValidator";
 
 function lessonContext(targetCode = "a_e"): LessonGeneratorContext {
-  const seedTarget = PHASE_3_ENTRY_TARGETS.find((target) => target.code === targetCode);
-  assert(seedTarget, `Missing Phase 3 Entry target ${targetCode}`);
+  const seedTarget = PHASE_3_TARGETS.find((target) => target.code === targetCode);
+  assert(seedTarget, `Missing Phase 3 target ${targetCode}`);
   const content = phase3EntryLessonContentFor(targetCode);
-  const phasePosition = { id: "phase-3-entry", phaseNumber: 3, label: "Phase 3 Entry" };
+  const isMid = PHASE_3_MID_TARGETS.some((target) => target.code === targetCode);
+  const phasePosition = { id: isMid ? "phase-3-mid" : "phase-3-entry", phaseNumber: 3, label: isMid ? "Phase 3 Mid" : "Phase 3 Entry" };
   const dailyTarget = {
     id: `target-${targetCode}`,
     ...seedTarget,
     targetPatternsJson: seedTarget.targetPatternsJson as any,
   };
+  const targetPatterns = targetPatternsFor(seedTarget);
   const heartWordsPreviewedThisLesson = content.heartWordsPreviewedThisLesson;
   const heartWordsAssumedKnown = content.heartWordsAssumedKnown;
   const vocabularyWords = content.vocabulary;
@@ -33,6 +35,7 @@ function lessonContext(targetCode = "a_e"): LessonGeneratorContext {
     phasePosition,
     dailyTarget,
     targetPattern: dailyTarget.code,
+    targetPatterns,
     targetWords: dailyTarget.exampleWords,
     reviewWords: [],
     pseudowords: dailyTarget.exampleNonwords,
@@ -95,6 +98,7 @@ async function main() {
     dailyTargetId: ctx.dailyTarget.id,
     dailyTargetCode: ctx.dailyTarget.code,
     targetPattern: ctx.targetPattern,
+    targetPatterns: ctx.targetPatterns,
     targetWords: ctx.targetWords,
     pseudowords: ctx.pseudowords,
     selectedPassageId: ctx.selectedPassage?.id || "",
@@ -154,6 +158,7 @@ async function main() {
   // r-controlled word in Part 5
   const rControlled = replacePart(5, { sentences: ["The cake is a gift for a pal."] });
   assert.equal(findCheck(rControlled, "LESSON_PART5_NO_RCONTROLLED")?.result, "FAIL");
+  assert(auditGeneratedLessonDraft(rControlled).checks.some((entry) => entry.ruleId === "LESSON_PHASE3_NO_RCONTROLLED" && entry.result === "FAIL"));
 
   // silent-e exception word tagged as target
   const exceptionDraft = {
@@ -193,7 +198,72 @@ async function main() {
     assert.equal(findCheck(ynDraft, "LESSON_PART8_OPEN_ENDED")?.result, "FAIL", `"${yesNo}" should fail open-ended`);
   }
 
+  const midAiCtx = lessonContext("vce_mix_ai");
+  const midAiDraft = await generateLessonDraft(midAiCtx, {
+    recordDecision: async (_ctx, fn) => (await fn()).output,
+  });
+  assert.equal(auditGeneratedLessonDraft(midAiDraft).canPersist, true);
+  assert.deepEqual(midAiCtx.targetPatterns, ["a_e", "i_e"]);
+  assert(midAiCtx.pseudowords.every((word) => {
+    const detected = detectVcePattern(word);
+    return Boolean(detected && midAiCtx.targetPatterns.includes(detected));
+  }));
+  const midLines = midAiDraft.parts.find((part) => part.partNumber === 3)!.contentJson.contrastiveLines as Array<{ lineNumber: number; role: string; words: string[] }>;
+  const oPatternInAiMix = {
+    ...midAiDraft,
+    parts: midAiDraft.parts.map((part) =>
+      part.partNumber === 3
+        ? {
+          ...part,
+          contentJson: {
+            ...part.contentJson,
+            contrastiveLines: [
+              ...midLines.filter((line) => line.role !== "target_pseudowords"),
+              { lineNumber: 4, role: "target_pseudowords", words: ["zome", "zake", "pame", "vade", "sape", "zibe", "mide", "fime"] },
+            ],
+          },
+        }
+        : part,
+    ),
+  };
+  assert.equal(auditGeneratedLessonDraft(oPatternInAiMix).checks.find((entry) => entry.ruleId === "LESSON_PSEUDOWORDS_IN_TARGET_SET")?.result, "FAIL");
+  const zareInAiMix = {
+    ...midAiDraft,
+    parts: midAiDraft.parts.map((part) =>
+      part.partNumber === 3
+        ? {
+          ...part,
+          contentJson: {
+            ...part.contentJson,
+            contrastiveLines: [
+              ...midLines.filter((line) => line.role !== "target_pseudowords"),
+              { lineNumber: 4, role: "target_pseudowords", words: ["zare", "zake", "pame", "vade", "sape", "zibe", "mide", "fime"] },
+            ],
+          },
+        }
+        : part,
+    ),
+  };
+  assert.equal(detectVcePattern("zare"), "a_e");
+  assert(auditGeneratedLessonDraft(zareInAiMix).checks.some((entry) => entry.ruleId === "LESSON_PHASE3_NO_RCONTROLLED" && entry.result === "FAIL"));
+  assert.equal(detectVcePattern("nore"), "o_e");
+  const badDemoPair = {
+    ...midAiDraft,
+    parts: midAiDraft.parts.map((part) => (part.partNumber === 2 ? { ...part, contentJson: { ...part.contentJson, demonstrationPairs: [{ closed: "cap", target: "bike" }] } } : part)),
+  };
+  assert.equal(auditGeneratedLessonDraft(badDemoPair).checks.find((entry) => entry.ruleId === "LESSON_PART2_DEMO_MINIMAL_PAIRS")?.result, "FAIL");
+  assert.equal(lessonContext("vce_mix_all").dailyTarget.kidVisibleLabel, "silent-e review");
+
   console.log("content-v3 lesson pipeline checks passed");
+}
+
+function targetPatternsFor(seedTarget: { code: string; targetPatternsJson: unknown }) {
+  const json = seedTarget.targetPatternsJson;
+  if (json && typeof json === "object" && !Array.isArray(json)) {
+    const patterns = (json as { patterns?: unknown }).patterns;
+    if (Array.isArray(patterns) && patterns.every((entry) => typeof entry === "string")) return patterns as string[];
+  }
+  return [seedTarget.code];
 }
 
 main().catch((error) => {

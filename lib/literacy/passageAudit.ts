@@ -76,11 +76,11 @@ export function auditPassage(text: string, context: PassageAuditContext): Passag
 
 export function patternCodesFromDailyTarget(dailyTarget: Pick<DailyTarget, "code" | "targetPatternsJson">): string[] {
   const json = dailyTarget.targetPatternsJson;
-  const patterns = new Set<string>([dailyTarget.code]);
+  const patterns = new Set<string>();
   collectStrings(json).forEach((value) => {
     if (/^[a-z]+_e$|^closed_short_[aeiou]$|^[a-z]{2,4}$/.test(value)) patterns.add(value);
   });
-  return Array.from(patterns);
+  return patterns.size ? Array.from(patterns) : [dailyTarget.code];
 }
 
 function collectStrings(value: unknown): string[] {

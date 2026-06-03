@@ -1,4 +1,4 @@
-import { Prisma } from "@prisma/client";
+import { Prisma, type DailyTarget } from "@prisma/client";
 import { phase3EntryLessonContentFor } from "@/lib/content/phase3EntryLessonContent";
 import { db } from "@/lib/db";
 import { runAIFirstLookReview, type FirstLookModelRunner } from "@/lib/content/aiFirstLookReviewer";
@@ -15,7 +15,7 @@ import { generatePart6Encoding } from "./lessonParts/part6Encoding";
 import { generatePart7ConnectedText } from "./lessonParts/part7ConnectedText";
 import { generatePart8Comprehension } from "./lessonParts/part8Comprehension";
 import type { GeneratedLessonPart, LessonGeneratorContext } from "./lessonParts/types";
-import { validatePseudowordSet } from "./pseudowordValidator";
+import { detectVcePattern, validatePseudowordCandidate } from "./pseudowordValidator";
 
 export type LessonGenerationOptions = {
   phasePositionId: string;
@@ -37,6 +37,7 @@ export type LessonDraftGenerationParams = {
   dailyTargetId: string;
   dailyTargetCode: string;
   targetPattern: string;
+  targetPatterns: string[];
   targetWords: string[];
   pseudowords: string[];
   selectedPassageId: string;
@@ -75,6 +76,7 @@ export async function buildLessonGeneratorContext(phasePositionId: string, daily
     throw new Error(`No approved passage found for ${phasePosition.label} / ${dailyTarget.code}. Generate and approve a passage before lesson generation.`);
   }
   const content = phase3EntryLessonContentFor(dailyTarget.code);
+  const targetPatterns = targetPatternsForDailyTarget(dailyTarget);
   const heartWordsPreviewedThisLesson = content.heartWordsPreviewedThisLesson;
   const heartWordsAssumedKnown = content.heartWordsAssumedKnown;
   const vocabularyWords = content.vocabulary;
@@ -88,9 +90,10 @@ export async function buildLessonGeneratorContext(phasePositionId: string, daily
     phasePosition,
     dailyTarget,
     targetPattern: dailyTarget.code,
+    targetPatterns,
     targetWords: dailyTarget.exampleWords.slice(0, 5),
     reviewWords: [],
-    pseudowords: canonicalPseudowordsForTarget(dailyTarget.code, dailyTarget.exampleNonwords),
+    pseudowords: canonicalPseudowordsForTargetPatterns(dailyTarget.code, dailyTarget.exampleNonwords, targetPatterns),
     heartWordsPreviewedThisLesson,
     heartWordsAssumedKnown,
     vocabularyWords,
@@ -112,6 +115,7 @@ export async function generateLessonDraft(ctx: LessonGeneratorContext, options: 
     dailyTargetId: ctx.dailyTarget.id,
     dailyTargetCode: ctx.dailyTarget.code,
     targetPattern: ctx.targetPattern,
+    targetPatterns: ctx.targetPatterns,
     targetWords: ctx.targetWords,
     pseudowords: ctx.pseudowords,
     selectedPassageId: ctx.selectedPassage?.id || "",
@@ -127,6 +131,7 @@ export async function generateLessonDraft(ctx: LessonGeneratorContext, options: 
       dailyTargetId: ctx.dailyTarget.id,
       dailyTargetCode: ctx.dailyTarget.code,
       targetPattern: ctx.targetPattern,
+      targetPatterns: ctx.targetPatterns,
       selectedPassageId: ctx.selectedPassage?.id || null,
       partCount: 8,
     },
@@ -141,6 +146,7 @@ export async function generateLessonDraft(ctx: LessonGeneratorContext, options: 
     phaseBand: ctx.phasePosition.phaseNumber,
     dailyTargetCode: ctx.dailyTarget.code,
     targetPattern: ctx.targetPattern,
+    targetPatterns: ctx.targetPatterns,
     parts,
   };
 }
@@ -240,11 +246,29 @@ function json(value: unknown): Prisma.InputJsonValue {
 }
 
 export function canonicalPseudowordsForTarget(dailyTargetCode: string, seedNonwords: string[]) {
+  return canonicalPseudowordsForTargetPatterns(dailyTargetCode, seedNonwords, [dailyTargetCode], "Phase 3 Entry content");
+}
+
+export function canonicalPseudowordsForTargetPatterns(dailyTargetCode: string, seedNonwords: string[], targetPatterns: string[], seedLabel = "Phase 3 content") {
   const firstEight = seedNonwords.slice(0, 8);
-  if (firstEight.length >= 8 && validatePseudowordSet(firstEight, dailyTargetCode, { strictLexicon: true }).every((entry) => entry.valid)) {
+  if (firstEight.length >= 8 && firstEight.every((word) => {
+    const detected = detectVcePattern(word);
+    return Boolean(detected && targetPatterns.includes(detected) && validatePseudowordCandidate(word, detected, { strictLexicon: true }).valid);
+  })) {
     return firstEight;
   }
   throw new Error(
-    `DailyTarget ${dailyTargetCode} has fewer than 8 valid pseudowords. Re-seed Phase 3 Entry content with npm run db:seed before lesson generation.`,
+    `DailyTarget ${dailyTargetCode} has fewer than 8 valid pseudowords. Re-seed ${seedLabel} before lesson generation.`,
   );
+}
+
+function targetPatternsForDailyTarget(dailyTarget: Pick<DailyTarget, "code" | "targetPatternsJson">): string[] {
+  const json = dailyTarget.targetPatternsJson;
+  if (json && typeof json === "object" && !Array.isArray(json)) {
+    const patterns = (json as { patterns?: unknown }).patterns;
+    if (Array.isArray(patterns) && patterns.every((entry) => typeof entry === "string")) {
+      return patterns as string[];
+    }
+  }
+  return [dailyTarget.code];
 }

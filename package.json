@@ -39,7 +39,8 @@
     "data-flywheel:enforce-retention": "tsx scripts/data-flywheel/enforce-retention.ts",
     "db:generate": "prisma generate",
     "db:push": "prisma db push",
-    "db:seed": "tsx prisma/seed.ts"
+    "db:seed": "tsx prisma/seed.ts",
+    "seed:phase3-mid": "tsx scripts/content/seed-phase3-mid.ts"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"

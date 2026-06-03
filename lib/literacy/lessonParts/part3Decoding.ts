@@ -1,11 +1,16 @@
 import { phase3EntryLessonContentFor } from "@/lib/content/phase3EntryLessonContent";
 import { wordMatchesPattern } from "../passageClassifier";
-import { validatePseudowordSet } from "../pseudowordValidator";
+import { detectVcePattern, validatePseudowordCandidate } from "../pseudowordValidator";
 import { withCommonPartMetadata, type GeneratedLessonPart, type LessonGeneratorContext } from "./types";
 
 export function generatePart3Decoding(ctx: LessonGeneratorContext): GeneratedLessonPart {
   const content = phase3EntryLessonContentFor(ctx.dailyTarget.code);
-  const pseudowordValidation = validatePseudowordSet(ctx.pseudowords, ctx.targetPattern);
+  const pseudowordValidation = ctx.pseudowords.map((word) => {
+    const detectedPattern = detectVcePattern(word);
+    return detectedPattern
+      ? validatePseudowordCandidate(word, detectedPattern, { strictLexicon: true })
+      : validatePseudowordCandidate(word, ctx.targetPatterns[0] ?? "a_e", { strictLexicon: true });
+  });
   const contrastiveLines = [
     { lineNumber: 1, role: "target_real_words", words: ctx.targetWords },
     { lineNumber: 2, role: "contrastive_target_vs_review", words: content.contrastiveLine2 },
@@ -14,7 +19,7 @@ export function generatePart3Decoding(ctx: LessonGeneratorContext): GeneratedLes
   ];
   const allWords = contrastiveLines.flatMap((line) => line.words.map((word) => ({
     word,
-    tag: line.role === "target_pseudowords" ? "target" : tagForWord(word, ctx.targetWords, ctx.targetPattern),
+    tag: line.role === "target_pseudowords" ? "target" : tagForWord(word, ctx.targetWords, ctx.targetPatterns),
     lineNumber: line.lineNumber,
     expectedPronunciation: line.role === "target_pseudowords"
       ? pseudowordValidation.find((entry) => entry.pseudoword === word)?.expectedPronunciation
@@ -48,8 +53,8 @@ export function generatePart3Decoding(ctx: LessonGeneratorContext): GeneratedLes
   });
 }
 
-function tagForWord(word: string, targetWords: string[], targetPattern: string) {
+function tagForWord(word: string, targetWords: string[], targetPatterns: string[]) {
   if (targetWords.includes(word)) return "target";
-  if (wordMatchesPattern(word, targetPattern)) return "target";
+  if (targetPatterns.some((pattern) => wordMatchesPattern(word, pattern))) return "target";
   return "prerequisite";
 }

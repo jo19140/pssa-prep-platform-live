@@ -136,6 +136,11 @@ function vowelLetterForPattern(targetPattern: string): string | null {
   return targetPattern.match(/^([aeiou])_e$/)?.[1] ?? null;
 }
 
+export function detectVcePattern(word: string): string | null {
+  const match = word.toLowerCase().trim().match(/^[^aeiou]*([aeiou])[^aeiou]+e$/);
+  return match ? `${match[1]}_e` : null;
+}
+
 export function validatePseudowordCandidate(
   pseudoword: string,
   targetPattern: string,

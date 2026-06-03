@@ -1,4 +1,5 @@
 import { phase3EntryLessonContentFor } from "@/lib/content/phase3EntryLessonContent";
+import { wordMatchesPattern } from "../passageClassifier";
 import { withCommonPartMetadata, type GeneratedLessonPart, type LessonGeneratorContext } from "./types";
 
 export function generatePart2Concept(ctx: LessonGeneratorContext): GeneratedLessonPart {
@@ -24,7 +25,7 @@ export function generatePart2Concept(ctx: LessonGeneratorContext): GeneratedLess
       studentDisplayMode: "EXAMPLE_CARDS",
       responseMode: "listen_and_repeat",
     },
-    wordTagsJson: { words: ctx.targetWords.map((word) => ({ word, tag: "target", pattern: ctx.targetPattern })) },
+    wordTagsJson: { words: ctx.targetWords.map((word) => ({ word, tag: "target", pattern: ctx.targetPatterns.find((pattern) => wordMatchesPattern(word, pattern)) ?? ctx.targetPattern })) },
     studentDisplayMode: "EXAMPLE_CARDS",
     responseMode: "listen_and_repeat",
   });
