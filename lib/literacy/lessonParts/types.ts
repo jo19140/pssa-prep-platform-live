@@ -22,6 +22,7 @@ export type LessonGeneratorContext = {
   phasePosition: Pick<PhasePosition, "id" | "phaseNumber" | "label">;
   dailyTarget: Pick<DailyTarget, "id" | "code" | "kidVisibleLabel" | "tutorLabel" | "targetPatternsJson" | "allowedPatternCodes" | "blockedPatternCodes" | "exampleWords" | "exampleNonwords">;
   targetPattern: string;
+  targetPatterns: string[];
   targetWords: string[];
   reviewWords: string[];
   pseudowords: string[];
@@ -41,6 +42,7 @@ export function withCommonPartMetadata(
     partType: part.partType,
     dailyTargetCode: ctx.dailyTarget.code,
     targetPattern: ctx.targetPattern,
+    targetPatterns: ctx.targetPatterns,
     ...part.contentJson,
     ...extras,
   };

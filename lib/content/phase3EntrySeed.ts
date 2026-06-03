@@ -11,6 +11,17 @@ export const PHASE_3_ENTRY = {
   prerequisites: ["PHASE_2_MID"],
 };
 
+export const PHASE_3_MID = {
+  phaseNumber: 3,
+  subPosition: "MID",
+  label: "Phase 3 Mid",
+  phonicsTrack:
+    "Mixed silent-e consolidation across previously introduced vowel-consonant-e daily targets. Instruction stays inside VCe patterns only.",
+  morphologyTrack:
+    "No new morphology target. Phase 3 Mid consolidates phonics transfer before later morphology expansion.",
+  prerequisites: ["PHASE_3_ENTRY"],
+};
+
 export type DailyTargetSeed = {
   code: string;
   kidVisibleLabel: string;
@@ -88,6 +99,61 @@ export const PHASE_3_ENTRY_TARGETS: DailyTargetSeed[] = [
     exampleNonwords: ["pheme", "zede", "gete", "kete", "nepe", "zene", "gede", "hefe"],
   },
 ];
+
+const phase3MidAllowedPatternCodes = [
+  "closed_short_a",
+  "closed_short_i",
+  "closed_short_o",
+  "closed_short_u",
+  "closed_short_e",
+];
+
+const phase3MidBlockedPatternCodes = ["ai", "ay", "oa", "ow", "oe", "ee", "ea", "igh", "ie", "ue", "ew", "y_final"];
+
+function phase3MidAllowedPatterns(targetPatterns: string[]) {
+  return [...phase3MidAllowedPatternCodes, ...["a_e", "i_e", "o_e", "u_e", "e_e"].filter((pattern) => !targetPatterns.includes(pattern))];
+}
+
+export const PHASE_3_MID_TARGETS: DailyTargetSeed[] = [
+  {
+    code: "vce_mix_ai",
+    kidVisibleLabel: "a_e and i_e words",
+    tutorLabel: "Mixed a_e and i_e silent-e consolidation",
+    description: "Consolidation target for reading and spelling mixed a_e and i_e VCe words.",
+    introductionOrder: 6,
+    targetPatternsJson: { patterns: ["a_e", "i_e"] },
+    allowedPatternCodes: phase3MidAllowedPatterns(["a_e", "i_e"]),
+    blockedPatternCodes: phase3MidBlockedPatternCodes,
+    exampleWords: ["cake", "bike", "lake", "time", "ride"],
+    exampleNonwords: ["zake", "pame", "vade", "sape", "zibe", "mide", "fime", "pive"],
+  },
+  {
+    code: "vce_mix_oue",
+    kidVisibleLabel: "o_e, u_e, and e_e words",
+    tutorLabel: "Mixed o_e, u_e, and e_e silent-e consolidation",
+    description: "Consolidation target for reading and spelling mixed o_e, u_e, and e_e VCe words.",
+    introductionOrder: 7,
+    targetPatternsJson: { patterns: ["o_e", "u_e", "e_e"] },
+    allowedPatternCodes: phase3MidAllowedPatterns(["o_e", "u_e", "e_e"]),
+    blockedPatternCodes: phase3MidBlockedPatternCodes,
+    exampleWords: ["home", "mule", "note", "cute", "scene"],
+    exampleNonwords: ["zome", "fope", "bofe", "mune", "plute", "vune", "pheme", "zede"],
+  },
+  {
+    code: "vce_mix_all",
+    kidVisibleLabel: "silent-e review",
+    tutorLabel: "Mixed all silent-e VCe consolidation",
+    description: "Consolidation target for reading and spelling all five introduced VCe patterns.",
+    introductionOrder: 8,
+    targetPatternsJson: { patterns: ["a_e", "i_e", "o_e", "u_e", "e_e"] },
+    allowedPatternCodes: phase3MidAllowedPatterns(["a_e", "i_e", "o_e", "u_e", "e_e"]),
+    blockedPatternCodes: phase3MidBlockedPatternCodes,
+    exampleWords: ["cake", "bike", "home", "mule", "Pete"],
+    exampleNonwords: ["zake", "pame", "zibe", "mide", "zome", "fope", "mune", "pheme"],
+  },
+];
+
+export const PHASE_3_TARGETS = [...PHASE_3_ENTRY_TARGETS, ...PHASE_3_MID_TARGETS];
 
 export const NDL_LICENSE_ATTRIBUTION = {
   sourceCode: "NDL",

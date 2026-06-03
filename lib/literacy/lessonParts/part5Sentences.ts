@@ -5,7 +5,7 @@ import { withCommonPartMetadata, type GeneratedLessonPart, type LessonGeneratorC
 export function generatePart5Sentences(ctx: LessonGeneratorContext): GeneratedLessonPart {
   const content = phase3EntryLessonContentFor(ctx.dailyTarget.code);
   const classification = classifyPassageWords(content.sentences.join(" "), {
-    targetPatternCodes: [ctx.targetPattern],
+    targetPatternCodes: ctx.targetPatterns,
     allowedPatternCodes: ctx.dailyTarget.allowedPatternCodes,
     blockedPatternCodes: ctx.dailyTarget.blockedPatternCodes,
     heartWords: [...ctx.heartWordsPreviewedThisLesson, ...ctx.heartWordsAssumedKnown, "is"],

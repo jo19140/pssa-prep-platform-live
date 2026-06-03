@@ -26,6 +26,12 @@ const forbiddenPatterns = [
   /\bLINE_3\b/,
 ];
 
+const forbiddenMatchingPathPatterns = [
+  /wordMatchesPattern\([^)]*ctx\.targetPattern\b/,
+  /targetPatternCodes:\s*\[\s*ctx\.targetPattern\s*\]/,
+  /validatePseudoword(?:Candidate|Set)\([^)]*ctx\.targetPattern\b/,
+];
+
 for (const relativePath of filesToScan) {
   const fullPath = path.join(repoRoot, relativePath);
   const contents = fs.readFileSync(fullPath, "utf8");
@@ -33,6 +39,12 @@ for (const relativePath of filesToScan) {
     assert(
       !pattern.test(contents),
       `${relativePath} contains hardcoded Phase 3 Entry fixture content matching ${pattern}. Move fixture content to lib/content/phase3EntryLessonContent.ts.`,
+    );
+  }
+  for (const pattern of forbiddenMatchingPathPatterns) {
+    assert(
+      !pattern.test(contents),
+      `${relativePath} uses ctx.targetPattern in a matching/validation path. Use ctx.targetPatterns or detectVcePattern instead.`,
     );
   }
 }
