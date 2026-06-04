@@ -55,19 +55,20 @@ export function InlineDropdownItem({ item, onChange }: Props) {
     <section className="space-y-4" aria-label="Inline dropdown item">
       <div>
         <div className="text-xs font-bold uppercase text-emerald-700">Inline Dropdown</div>
-        <h2 className="mt-1 text-lg font-extrabold leading-snug text-slate-950">{responseSpec.stem}</h2>
+        <h2 className="mt-1 break-words text-lg font-extrabold leading-snug text-slate-950">{responseSpec.stem}</h2>
         {responseSpec.instructionText ? <p className="mt-2 inline-block border border-cyan-200 bg-cyan-50 px-3 py-2 text-sm font-bold text-cyan-900">{responseSpec.instructionText}</p> : null}
       </div>
-      <p className="text-base leading-10 text-slate-950 md:text-lg">
+      <p className="break-words text-base leading-10 text-slate-950 md:text-lg">
         {responseSpec.blanks.map((blank, index) => (
           <span key={blank.blankId}>
             <span>{parts[index]}</span>
-            <span className="inline-flex items-baseline whitespace-nowrap px-1">
+            <span className="inline-flex max-w-full min-w-0 items-baseline whitespace-normal px-1 align-baseline">
               <select
                 aria-label={`Blank ${index + 1} of ${responseSpec.blanks.length}`}
                 value={typeof blankSelections[blank.blankId] === "number" ? String(blankSelections[blank.blankId]) : ""}
                 onChange={(event) => selectBlank(blank.blankId, event.target.value)}
-                className={`max-w-full border-2 bg-white px-2 py-1 text-base font-bold text-slate-950 outline-offset-2 focus:outline focus:outline-2 focus:outline-cyan-300 ${typeof blankSelections[blank.blankId] === "number" ? "border-slate-950" : "border-slate-300"}`}
+                className={`min-w-0 max-w-full border-2 bg-white px-2 py-1 text-base font-bold text-slate-950 outline-offset-2 focus:outline focus:outline-2 focus:outline-cyan-300 ${typeof blankSelections[blank.blankId] === "number" ? "border-slate-950" : "border-slate-300"}`}
+                style={{ width: "min(14rem, calc(100vw - 4rem))" }}
               >
                 <option value="">Choose...</option>
                 {blank.options.map((option, optionIndex) => (
