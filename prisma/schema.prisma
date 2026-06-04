@@ -132,6 +132,19 @@ enum PssaStudentReadyBlockedReason {
   DEPRECATED_SUPERSEDED
 }
 
+enum PssaFormStatus {
+  draft
+  assembled
+  invalidated
+}
+
+enum PssaFormSlotType {
+  reading_1pt
+  conventions_1pt
+  multipoint
+  short_answer
+}
+
 enum PssaPassageRole {
   primary
   secondary
@@ -503,6 +516,7 @@ model PssaPassage {
   items        PssaItemPassageLink[]
   auditResults PssaAuditResult[]
   reviewLogs   PssaReviewLog[]
+  forms        PssaFormPassage[]
 
   @@index([gradeLevel, subject, reviewStatus, itemStatus])
   @@index([sourceType, licenseStatus])
@@ -570,6 +584,7 @@ model PssaItem {
   reviewLogs         PssaReviewLog[]
   supersededBy       PssaItemSupersession[]  @relation("PssaItemSupersededOld")
   supersedes         PssaItemSupersession[]  @relation("PssaItemSupersededNew")
+  forms              PssaFormItem[]
 
   @@index([gradeLevel, subject, reviewStatus, itemStatus, studentReadyBlockedReason])
   @@index([auditContractVersion, sourceScanVersion])
@@ -719,6 +734,72 @@ model PssaReviewLog {
   @@index([itemId, createdAt])
   @@index([passageId, createdAt])
   @@index([batchId, createdAt])
+}
+
+model PssaForm {
+  id                   String         @id @default(cuid())
+  module               TestPrepModule @default(PSSA)
+  subject              String         @default("ELA")
+  gradeLevel           Int
+  blueprintVersion     String
+  seed                 String
+  formStatus           PssaFormStatus @default(draft)
+  totalPoints          Int
+  categoryPointsJson   Json
+  contentHash          String         @unique
+  auditContractVersion String
+  sourceScanVersion    String
+  assembledAt          DateTime?
+  assembledBy          String
+  assemblyRunId        String
+  invalidatedReason    String?        @db.Text
+  createdAt            DateTime       @default(now())
+  updatedAt            DateTime       @updatedAt
+
+  passages PssaFormPassage[]
+  items    PssaFormItem[]
+
+  @@index([gradeLevel, formStatus])
+  @@index([blueprintVersion])
+  @@index([assemblyRunId])
+}
+
+model PssaFormPassage {
+  id                                 String   @id @default(cuid())
+  formId                             String
+  passageId                          String
+  position                           Int
+  approvedPassageContentHashSnapshot String
+  createdAt                          DateTime @default(now())
+
+  form    PssaForm    @relation(fields: [formId], references: [id], onDelete: Cascade)
+  passage PssaPassage @relation(fields: [passageId], references: [id], onDelete: Restrict)
+
+  @@unique([formId, position])
+  @@unique([formId, passageId])
+  @@index([formId])
+  @@index([passageId])
+}
+
+model PssaFormItem {
+  id                          String           @id @default(cuid())
+  formId                      String
+  itemId                      String
+  position                    Int
+  pointValue                  Int
+  slotType                    PssaFormSlotType
+  approvedContentHashSnapshot String
+  passageIdSnapshot           String?
+  createdAt                   DateTime         @default(now())
+
+  form PssaForm @relation(fields: [formId], references: [id], onDelete: Cascade)
+  item PssaItem @relation(fields: [itemId], references: [id], onDelete: Restrict)
+
+  @@unique([formId, position])
+  @@unique([formId, itemId])
+  @@index([formId])
+  @@index([itemId])
+  @@index([passageIdSnapshot])
 }
 
 model Assignment {
