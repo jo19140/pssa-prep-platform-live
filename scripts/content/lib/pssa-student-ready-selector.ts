@@ -9,7 +9,8 @@ export type StudentReadyBlockedReason =
   | "STALE_SOURCE_SCAN"
   | "CONTENT_HASH_DRIFT"
   | "FAILED_LATEST_AUDIT"
-  | "DEPRECATED_SUPERSEDED";
+  | "DEPRECATED_SUPERSEDED"
+  | "MISSING_RESPONSE_DOMAIN";
 
 export type PssaReadyBatch = {
   id?: string;
@@ -42,6 +43,8 @@ export type PssaReadyContent = {
 export type PssaReadyPassage = Omit<PssaReadyContent, "approvalEligible" | "deprecatedReason">;
 
 export type PssaReadyItem = PssaReadyContent & {
+  interactionType?: string | null;
+  responseSpecJson?: unknown;
   batchId?: string | null;
   batch?: PssaReadyBatch;
   passages?: Array<{ passage?: PssaReadyPassage | null }>;
@@ -98,6 +101,7 @@ export function explainPssaItemStudentReadiness(item: PssaReadyItem): StudentRea
   if (item.latestAuditResult !== "PASS") return { reason: "FAILED_LATEST_AUDIT", detail: "latest_audit_result_not_PASS" };
   const legal = legalFailure(item);
   if (legal) return { reason: "PENDING_REVIEW", detail: legal };
+  if (!hasMachineScorableResponseDomain(item.interactionType, item.responseSpecJson)) return { reason: "MISSING_RESPONSE_DOMAIN", detail: "missing_response_domain" };
 
   if (item.batchId) {
     if (!item.batch) return { reason: "PENDING_REVIEW", detail: "batch_missing" };
@@ -114,6 +118,27 @@ export function explainPssaItemStudentReadiness(item: PssaReadyItem): StudentRea
   }
 
   return { reason: "NONE", detail: "ready" };
+}
+
+function hasMachineScorableResponseDomain(interactionType: string | null | undefined, responseSpecJson: unknown) {
+  const type = String(interactionType ?? "").toUpperCase();
+  if (type === "SHORT_ANSWER" || type === "TDA") return true;
+  const spec = objectSource(responseSpecJson);
+  if (type === "MCQ" || type === "CONVENTIONS" || type === "MULTI_SELECT") return nonEmptyArray(spec.choices);
+  if (type === "HOT_TEXT") return nonEmptyArray(spec.selectableSpans);
+  if (type === "MATCHING_GRID") return nonEmptyArray(spec.rows) && nonEmptyArray(spec.columns);
+  if (type === "DRAG_DROP") return nonEmptyArray(spec.tokens) && nonEmptyArray(spec.targets);
+  if (type === "INLINE_DROPDOWN") return nonEmptyArray(spec.blanks) && spec.blanks.every((blank: unknown) => nonEmptyArray(objectSource(blank).options));
+  if (type === "EBSR") return nonEmptyArray(objectSource(spec.partA).choices) && nonEmptyArray(objectSource(spec.partB).choices);
+  return false;
+}
+
+function nonEmptyArray(value: unknown): value is unknown[] {
+  return Array.isArray(value) && value.length > 0;
+}
+
+function objectSource(value: unknown): Record<string, any> {
+  return value && typeof value === "object" && !Array.isArray(value) ? value as Record<string, any> : {};
 }
 
 export function computeStudentReadyBlockedReason(item: PssaReadyItem): StudentReadyBlockedReason {

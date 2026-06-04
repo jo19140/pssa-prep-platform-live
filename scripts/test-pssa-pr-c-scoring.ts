@@ -14,13 +14,6 @@ const bank = [...plan.activeItems, ...plan.deprecatedItems].map((item) => ({
   responseSpecJson: item.responseSpecJson,
 }));
 
-const expectedDomainThrowers = new Map([
-  ["pssa_conv_g3_hottext_spelling_01", "malformed_item_scoring_data:pssa_conv_g3_hottext_spelling_01:selectableSpans_missing"],
-  ["pssa_conv_g3_hottext_function_01", "malformed_item_scoring_data:pssa_conv_g3_hottext_function_01:selectableSpans_missing"],
-  ["pssa_conv_g3_drag_address_01", "malformed_item_scoring_data:pssa_conv_g3_drag_address_01:tokens_missing"],
-  ["pssa_conv_g3_drag_dialogue_01", "malformed_item_scoring_data:pssa_conv_g3_drag_dialogue_01:tokens_missing"],
-]);
-
 const syntheticHotTextAllOrNothing: PssaScorableItem = {
   itemId: "synthetic_hot_text_aon",
   interactionType: "HOT_TEXT",
@@ -132,7 +125,7 @@ function testRuleTables() {
   assertScored(score(ms, { selectedIndices: [cr(ms).correctIndices[0], msWrong] }), 0, "multi_select_zero");
   assertInvalid(score(ms, { selectedIndices: [cr(ms).correctIndices[0], cr(ms).correctIndices[0]] }), "multi_select_invalid_response");
 
-  const htGraded = item("HOT_TEXT", (row) => sj(row).totalPoints === cr(row).correctSpanIds.length);
+  const htGraded = item("HOT_TEXT", (row) => sj(row).totalPoints === cr(row).correctSpanIds.length && cr(row).correctSpanIds.length > 1);
   const htAon = syntheticHotTextAllOrNothing;
   const htWrong = firstWrongString(rs(htGraded).selectableSpans.map((span: any) => span.spanId), cr(htGraded).correctSpanIds);
   assertScored(score(htGraded, correctResponse(htGraded)), sj(htGraded).totalPoints, "hot_text_full_credit");
@@ -170,38 +163,30 @@ function testRuleTables() {
 
 function testRealBankCoverage() {
   const byType: Record<string, number> = {};
-  const throwers = new Map<string, string>();
   let machineScored = 0;
   let pendingHuman = 0;
   for (const row of bank) {
     byType[row.interactionType] = (byType[row.interactionType] ?? 0) + 1;
-    try {
-      const correct = score(row, correctResponse(row));
-      if (row.interactionType === "SHORT_ANSWER") {
-        assert.equal(correct.status, "pending_human_scoring", row.id);
-        pendingHuman += 1;
-      } else {
-        assertScored(correct, sj(row).totalPoints);
-        machineScored += 1;
-      }
-      const wrong = score(row, wrongResponse(row));
-      if (row.interactionType === "SHORT_ANSWER") {
-        assert.equal(wrong.status, "pending_human_scoring", row.id);
-      } else {
-        assert.equal(wrong.status, "scored", row.id);
-        assert.ok(wrong.pointsEarned >= 0 && wrong.pointsEarned <= wrong.maxPoints, row.id);
-      }
-    } catch (error) {
-      assert.ok(expectedDomainThrowers.has(row.id), `${row.id} unexpectedly threw ${(error as Error).message}`);
-      throwers.set(row.id, (error as Error).message);
+    const correct = score(row, correctResponse(row));
+    if (row.interactionType === "SHORT_ANSWER") {
+      assert.equal(correct.status, "pending_human_scoring", row.id);
+      pendingHuman += 1;
+    } else {
+      assertScored(correct, sj(row).totalPoints);
+      machineScored += 1;
+    }
+    const wrong = score(row, wrongResponse(row));
+    if (row.interactionType === "SHORT_ANSWER") {
+      assert.equal(wrong.status, "pending_human_scoring", row.id);
+    } else {
+      assert.equal(wrong.status, "scored", row.id);
+      assert.ok(wrong.pointsEarned >= 0 && wrong.pointsEarned <= wrong.maxPoints, row.id);
     }
   }
   assert.equal(bank.length, 79);
-  assert.equal(machineScored, 70);
+  assert.equal(machineScored, 74);
   assert.equal(pendingHuman, 5);
-  assert.deepEqual(throwers, expectedDomainThrowers);
-  console.log(`PSSA PR C real-bank coverage: ${machineScored}+${pendingHuman}+${throwers.size}=79 items`, byType);
-  console.log("PSSA PR C domain-gap throwers:", Object.fromEntries(throwers));
+  console.log(`PSSA PR C real-bank coverage: ${machineScored}+${pendingHuman}=79 items`, byType);
 }
 
 function testAdversarialInputs() {
@@ -217,6 +202,29 @@ function testAdversarialInputs() {
   assertInvalid(score(item("MATCHING_GRID"), { rowSelections: { [cr(item("MATCHING_GRID")).correctCells[0].rowId]: "unknown" } }), "matching_grid_invalid_response");
   assertInvalid(score(item("DRAG_DROP"), { assignments: { [cr(item("DRAG_DROP")).correctAssignments[0].tokenId]: "unknown" } }), "drag_drop_invalid_response");
   assertInvalid(score(item("INLINE_DROPDOWN"), { blankSelections: { [cr(item("INLINE_DROPDOWN")).blanks[0].blankId]: 99 } }), "inline_dropdown_invalid_response");
+}
+
+function testNormalizedConventionsItemsScoreAndValidateDomains() {
+  const spelling = bank.find((row) => row.id === "pssa_conv_g3_hottext_spelling_01")!;
+  const functionItem = bank.find((row) => row.id === "pssa_conv_g3_hottext_function_01")!;
+  const address = bank.find((row) => row.id === "pssa_conv_g3_drag_address_01")!;
+  const dialogue = bank.find((row) => row.id === "pssa_conv_g3_drag_dialogue_01")!;
+
+  assertScored(score(spelling, correctResponse(spelling)), 1, "hot_text_full_credit");
+  assertScored(score(spelling, { selectedSpanIds: ["spell_t1"] }), 0, "hot_text_zero");
+  assertInvalid(score(spelling, { selectedSpanIds: ["unknown"] }), "hot_text_invalid_response");
+
+  assertScored(score(functionItem, correctResponse(functionItem)), 1, "hot_text_full_credit");
+  assertScored(score(functionItem, { selectedSpanIds: ["function_t1"] }), 0, "hot_text_zero");
+  assertInvalid(score(functionItem, { selectedSpanIds: ["unknown"] }), "hot_text_invalid_response");
+
+  assertScored(score(address, correctResponse(address)), 1, "drag_drop_full_credit");
+  assertScored(score(address, { assignments: { drag_t1: "address_s2", drag_t2: "address_s1" } }), 0, "drag_drop_zero");
+  assertInvalid(score(address, { assignments: { drag_t1: "unknown" } }), "drag_drop_invalid_response");
+
+  assertScored(score(dialogue, correctResponse(dialogue)), 1, "drag_drop_full_credit");
+  assertScored(score(dialogue, { assignments: { drag_t2: "dialogue_s2", drag_t3: "dialogue_s1" } }), 0, "drag_drop_zero");
+  assertInvalid(score(dialogue, { assignments: { drag_t2: "unknown" } }), "drag_drop_invalid_response");
 }
 
 function testNoKeyEcho() {
@@ -294,6 +302,7 @@ function keyAtoms(item: PssaScorableItem) {
 testRuleTables();
 testRealBankCoverage();
 testAdversarialInputs();
+testNormalizedConventionsItemsScoreAndValidateDomains();
 testLegacyDivergenceAndFailClosed();
 testNoKeyEcho();
 

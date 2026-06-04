@@ -1,0 +1,1 @@
+ALTER TYPE "PssaStudentReadyBlockedReason" ADD VALUE 'MISSING_RESPONSE_DOMAIN';

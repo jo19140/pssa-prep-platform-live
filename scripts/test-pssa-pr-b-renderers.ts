@@ -14,6 +14,7 @@ import {
   buildMatchingGridResponse,
   isMatchingGridComplete,
 } from "@/components/pssa/MatchingGridItem";
+import { buildPlan } from "./content/lib/pssa-import-plan";
 
 const BACKEND_FILES = [
   "exemplars/pssa_grade3_pilot/pilot_backend.json",
@@ -162,10 +163,39 @@ function testCheckTableAndEbsrEvidence() {
   assert.equal(ebsrItems.every((item: any) => !("requiredSelectionCount" in (projectPssaStudentItem(item) as PssaStudentItemDto<"EBSR">).responseSpec.partB)), true);
 }
 
+function testNormalizedConventionsProjectionDomains() {
+  const planItems = [...buildPlan(3).activeItems, ...buildPlan(3).deprecatedItems];
+  const byId = (id: string) => {
+    const found = planItems.find((item) => item.itemId === id);
+    assert.ok(found, `missing normalized fixture ${id}`);
+    return found;
+  };
+
+  const spelling = projectPssaStudentItem(byId("pssa_conv_g3_hottext_spelling_01")) as PssaStudentItemDto<"HOT_TEXT">;
+  const functionItem = projectPssaStudentItem(byId("pssa_conv_g3_hottext_function_01")) as PssaStudentItemDto<"HOT_TEXT">;
+  assert.equal(spelling.responseSpec.selectableSpans.length, 8);
+  assert.equal(functionItem.responseSpec.selectableSpans.length, 8);
+  for (const dto of [spelling, functionItem]) {
+    assertKeyFree(dto);
+    assert.equal(dto.responseSpec.selectableSpans.every((span) => span.spanKind === "token"), true);
+    assert.equal(dto.responseSpec.selectableSpans.every((span) => !("paragraphIndex" in span) && !("sentenceIndex" in span) && !("startOffset" in span) && !("endOffset" in span)), true);
+  }
+
+  const address = projectPssaStudentItem(byId("pssa_conv_g3_drag_address_01")) as PssaStudentItemDto<"DRAG_DROP">;
+  const dialogue = projectPssaStudentItem(byId("pssa_conv_g3_drag_dialogue_01")) as PssaStudentItemDto<"DRAG_DROP">;
+  assert.deepEqual([address.responseSpec.tokens.length, address.responseSpec.targets.length], [3, 2]);
+  assert.deepEqual([dialogue.responseSpec.tokens.length, dialogue.responseSpec.targets.length], [3, 2]);
+  for (const dto of [address, dialogue]) {
+    assertKeyFree(dto);
+    assert.equal(JSON.stringify(dto).includes("slotId"), false);
+  }
+}
+
 testAllRealItemsProjectWithoutLeaks();
 testAdversarialNestedLeaksDropOrThrow();
 testProjectionShapes();
 testResponseStatePayloads();
 testCheckTableAndEbsrEvidence();
+testNormalizedConventionsProjectionDomains();
 
 console.log("PSSA PR B renderer/projection tests passed.");

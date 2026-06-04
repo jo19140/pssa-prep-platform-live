@@ -42,7 +42,7 @@ export type PssaStudentResponseSpec =
   | {
       prompt: string;
       instructionText: string;
-      selectableSpans: Array<{ spanId: string; text: string; paragraphIndex?: number; sentenceIndex?: number; startOffset?: number; endOffset?: number }>;
+      selectableSpans: Array<{ spanId: string; text: string; spanKind?: "token"; paragraphIndex?: number; sentenceIndex?: number; startOffset?: number; endOffset?: number }>;
       requiredSelectionCount?: number;
     }
   | { stem: string; instructionText: string; selectionRule: string; rows: Array<{ rowId: string; label: string }>; columns: Array<{ columnId: string; label: string }> }
@@ -61,7 +61,7 @@ export type ExtractSpec<T extends PssaInteractionType> =
   T extends "MCQ" ? { prompt: string; choices: PssaChoiceDto[] }
   : T extends "EBSR" ? { partA: { prompt: string; choices: PssaChoiceDto[] }; partB: { instruction: string; choices: PssaChoiceDto[]; requiredSelectionCount?: number } }
   : T extends "MULTI_SELECT" ? { stem: string; instructionText: string; choices: PssaChoiceDto[]; minSelections?: number; maxSelections?: number; exactSelectionCount?: number }
-  : T extends "HOT_TEXT" ? { prompt: string; instructionText: string; selectableSpans: Array<{ spanId: string; text: string; paragraphIndex?: number; sentenceIndex?: number; startOffset?: number; endOffset?: number }>; requiredSelectionCount?: number }
+  : T extends "HOT_TEXT" ? { prompt: string; instructionText: string; selectableSpans: Array<{ spanId: string; text: string; spanKind?: "token"; paragraphIndex?: number; sentenceIndex?: number; startOffset?: number; endOffset?: number }>; requiredSelectionCount?: number }
   : T extends "MATCHING_GRID" ? { stem: string; instructionText: string; selectionRule: string; rows: Array<{ rowId: string; label: string }>; columns: Array<{ columnId: string; label: string }> }
   : T extends "DRAG_DROP" ? { prompt: string; instructionText: string; tokens: Array<{ tokenId: string; text: string }>; targets: Array<{ targetId: string; label: string }>; useAllTokens: boolean }
   : T extends "INLINE_DROPDOWN" ? { stem: string; instructionText: string; baseTextWithBlanks: string; blanks: Array<{ blankId: string; position?: number; options: PssaChoiceDto[] }> }
@@ -158,6 +158,7 @@ function projectHotText(source: Recordish, row: Recordish): ExtractSpec<"HOT_TEX
     selectableSpans: arraySource(source.selectableSpans).map((span) => stripUndefined({
       spanId: stringOrEmpty(span.spanId),
       text: stringOrEmpty(span.text),
+      spanKind: span.spanKind === "token" ? "token" : undefined,
       paragraphIndex: numberOrUndefined(span.paragraphIndex),
       sentenceIndex: numberOrUndefined(span.sentenceIndex),
       startOffset: numberOrUndefined(span.startOffset),

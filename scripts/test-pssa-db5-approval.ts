@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import {
   AUDIT_CONTRACT_VERSION,
   SOURCE_SCAN_VERSION,
+  buildPlan,
 } from "./content/lib/pssa-import-plan";
 import {
   computeStudentReadyBlockedReason,
@@ -49,6 +50,8 @@ function readyItem(overrides: Partial<PssaReadyItem> = {}): PssaReadyItem {
     needsLegalReview: false,
     deprecatedReason: null,
     retiredAt: null,
+    interactionType: "MCQ",
+    responseSpecJson: { choices: [{ text: "A" }, { text: "B" }] },
     batchId: "batch-1",
     batch: {
       id: "batch-1",
@@ -91,6 +94,10 @@ const negativeCases: Array<[string, Partial<PssaReadyItem>, string]> = [
   ["license not cleared", { licenseStatus: "unresolved" }, "PENDING_REVIEW"],
   ["needs legal review", { needsLegalReview: true }, "PENDING_REVIEW"],
   ["commercial use blocked", { commercialUseAllowed: false }, "PENDING_REVIEW"],
+  ["missing MCQ choices", { responseSpecJson: { choices: [] } }, "MISSING_RESPONSE_DOMAIN"],
+  ["missing HOT_TEXT spans", { interactionType: "HOT_TEXT", responseSpecJson: { selectableSpans: [] } }, "MISSING_RESPONSE_DOMAIN"],
+  ["missing DRAG_DROP targets", { interactionType: "DRAG_DROP", responseSpecJson: { tokens: [{ tokenId: "t1" }], targets: [] } }, "MISSING_RESPONSE_DOMAIN"],
+  ["missing inline dropdown options", { interactionType: "INLINE_DROPDOWN", responseSpecJson: { blanks: [{ blankId: "b1", options: [] }] } }, "MISSING_RESPONSE_DOMAIN"],
   ["passage not approved", { passages: [{ passage: readyPassage({ reviewStatus: "PENDING", itemStatus: "candidate", studentReadyBlockedReason: "PENDING_REVIEW" }) }] }, "PENDING_REVIEW"],
   ["passage hash stale", { passages: [{ passage: readyPassage({ latestAuditContentHash: "other" }) }] }, "CONTENT_HASH_DRIFT"],
   ["passage license not cleared", { passages: [{ passage: readyPassage({ licenseStatus: "unresolved" }) }] }, "PENDING_REVIEW"],
@@ -102,5 +109,18 @@ for (const [label, overrides, reason] of negativeCases) {
 
 assert.equal(explainPssaPassageStudentReadiness(readyPassage()).reason, "NONE", "positive passage is ready");
 assert.equal(explainPssaPassageStudentReadiness(readyPassage({ approvedContentHash: null })).reason, "CONTENT_HASH_DRIFT", "passage approved hash required");
+
+const normalizedConventionIds = [
+  "pssa_conv_g3_hottext_spelling_01",
+  "pssa_conv_g3_hottext_function_01",
+  "pssa_conv_g3_drag_address_01",
+  "pssa_conv_g3_drag_dialogue_01",
+];
+const normalizedItems = [...buildPlan(3).activeItems, ...buildPlan(3).deprecatedItems];
+for (const id of normalizedConventionIds) {
+  const source = normalizedItems.find((item) => item.itemId === id);
+  assert.ok(source, `missing normalized item ${id}`);
+  assertReason(`normalized ${id} has response domain`, readyItem({ id, interactionType: source.interactionType, responseSpecJson: source.responseSpecJson, passages: [] }), "NONE");
+}
 
 console.log(`PSSA DB-5 selector tests passed (${negativeCases.length} negative cases + positive controls).`);

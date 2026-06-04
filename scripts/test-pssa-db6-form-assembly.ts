@@ -46,6 +46,7 @@ function readyItem(input: {
 }): PssaAssemblyItem {
   const p = input.passageId ? passages.find((row) => row.id === input.passageId)! : null;
   const pointValue = input.pointValue ?? 1;
+  const interactionType = input.interactionType ?? "MCQ";
   return {
     id: input.id,
     module: "PSSA",
@@ -54,8 +55,9 @@ function readyItem(input: {
     standardCode: input.ec,
     eligibleContent: input.ec,
     reportingCategory: input.reportingCategory ?? input.ec.match(/^E03\.([ABD])/)?.[1] ?? null,
-    interactionType: input.interactionType ?? "MCQ",
+    interactionType,
     pointValue,
+    responseSpecJson: responseSpecFor(interactionType),
     correctResponseJson: input.pattern ?? { correctIndex: input.correctIndex ?? 0 },
     reviewStatus: "APPROVED",
     itemStatus: "pilot_ready",
@@ -82,6 +84,15 @@ function readyItem(input: {
     },
     passages: p ? [{ passage: p, role: "primary", sortOrder: 0 } as any] : [],
   };
+}
+
+function responseSpecFor(interactionType: string) {
+  if (interactionType === "EBSR") return {
+    partA: { choices: [{ text: "A" }, { text: "B" }, { text: "C" }, { text: "D" }] },
+    partB: { choices: [{ text: "A" }, { text: "B" }, { text: "C" }, { text: "D" }] },
+  };
+  if (interactionType === "SHORT_ANSWER") return { stem: "Explain.", instructionText: "Use details.", requiresTextSupport: true };
+  return { choices: [{ text: "A" }, { text: "B" }, { text: "C" }, { text: "D" }] };
 }
 
 function validPool() {

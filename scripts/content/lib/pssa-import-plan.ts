@@ -349,9 +349,23 @@ function responseSpec(item: any) {
   const interactionType = interactionTypeFor(item);
   if (interactionType === "MCQ") return { prompt: item.studentFacingPrompt ?? item.stem, choices: item.answerChoicesJson ?? item.choices };
   if (interactionType === "MULTI_SELECT") return { stem: item.stem, instructionText: item.instructionText, choices: item.choices, minSelections: item.minSelections, maxSelections: item.maxSelections, exactSelectionCount: item.exactSelectionCount };
-  if (interactionType === "HOT_TEXT") return { prompt: item.prompt, instructionText: item.instructionText, selectableSpans: item.selectableSpans };
+  if (interactionType === "HOT_TEXT") return {
+    prompt: item.prompt,
+    instructionText: item.instructionText,
+    selectableSpans: item.selectableSpans ?? item.selectableTokens?.map((token: any) => ({
+      spanId: token.tokenId,
+      text: token.text,
+      spanKind: "token",
+    })),
+  };
   if (interactionType === "MATCHING_GRID") return { stem: item.stem, instructionText: item.instructionText, rows: item.rows, columns: item.columns, selectionRule: item.selectionRule };
-  if (interactionType === "DRAG_DROP") return { prompt: item.prompt, instructionText: item.instructionText, tokens: item.tokens, targets: item.targets, useAllTokens: item.useAllTokens };
+  if (interactionType === "DRAG_DROP") return {
+    prompt: item.prompt ?? item.baseSentenceWithSlots,
+    instructionText: item.instructionText,
+    tokens: item.tokens ?? item.draggableTokens?.map((token: any) => ({ tokenId: token.tokenId, text: token.text })),
+    targets: item.targets ?? item.slots?.map((slot: any) => ({ targetId: slot.slotId, label: slot.label ?? "" })),
+    useAllTokens: item.useAllTokens,
+  };
   if (interactionType === "INLINE_DROPDOWN") return { stem: item.stem, baseTextWithBlanks: item.baseTextWithBlanks, blanks: item.blanks?.map((blank: any) => ({ ...blank, correctIndex: undefined, rationale: undefined })) };
   if (interactionType === "SHORT_ANSWER") return { stem: item.stem, instructionText: item.instructionText, requiredSupportCount: item.requiredSupportCount, requiresTextSupport: item.requiresTextSupport };
   return item;
@@ -364,7 +378,7 @@ function correctResponse(item: any) {
   if (interactionType === "MULTI_SELECT") return { correctIndices: item.correctIndices };
   if (interactionType === "HOT_TEXT") return { correctSpanIds: item.correctSpanIds ?? item.correctTokenIds };
   if (interactionType === "MATCHING_GRID") return { correctCells: item.correctCells };
-  if (interactionType === "DRAG_DROP") return { correctAssignments: item.correctAssignments };
+  if (interactionType === "DRAG_DROP") return { correctAssignments: item.correctAssignments?.map((row: any) => ({ tokenId: row.tokenId, targetId: row.targetId ?? row.slotId })) };
   if (interactionType === "INLINE_DROPDOWN") return { blanks: item.blanks?.map((blank: any) => ({ blankId: blank.blankId, correctIndex: blank.correctIndex, correctOption: blank.options?.[blank.correctIndex]?.text })) };
   if (interactionType === "SHORT_ANSWER") return { expectedAnswerCore: item.expectedAnswerCore, acceptableTextSupport: item.acceptableTextSupport };
   return {};

@@ -130,6 +130,7 @@ enum PssaStudentReadyBlockedReason {
   CONTENT_HASH_DRIFT
   FAILED_LATEST_AUDIT
   DEPRECATED_SUPERSEDED
+  MISSING_RESPONSE_DOMAIN
 }
 
 enum PssaFormStatus {
