@@ -12,7 +12,7 @@ Phase 3 Mid builds on the content-module architecture from the content-parameter
 
 Phase 3 Entry targets practice one VCe pattern (a_e blocked i_e/o_e/u_e/e_e). Phase 3 Mid targets practice **two-plus** patterns at once, so the single `targetPattern: string` must become an array in the audit/generator path. Bounded change:
 
-- **`buildLessonGeneratorContext` / `LessonDraft` / `LessonGeneratorContext`:** add `targetPatterns: string[]` derived from `dailyTarget.targetPatternsJson.patterns` (reuse `patternCodesFromDailyTarget` if it returns them). Keep `targetPattern: string` = `dailyTarget.code` for display/back-compat.
+- **`buildLessonGeneratorContext` / `LessonDraft` / `LessonGeneratorContext`:** add `targetPatterns: string[]` derived from `dailyTarget.targetPatternsJson.patterns` (reuse `patternCodesFromDailyTarget` if it returns them). Keep `targetPattern: string` = `dailyTarget.code` for display/back-compat. **Entry-shape fallback:** if an Entry `DailyTarget` lacks `targetPatternsJson.patterns`, normalize `targetPatterns` to `[dailyTarget.code]` in `buildLessonGeneratorContext` rather than failing. Mid targets must carry explicit `targetPatternsJson.patterns`.
 - **`lessonAudit.ts`:**
   - `LESSON_WARMUP_NO_TODAY_PATTERN`: warm-up word matches **none** of `targetPatterns` (was: not the single pattern).
   - `LESSON_DAILY_TARGET_NARROW`: **every** entry in `targetPatterns` is a VCe code (ends `_e`) — was `targetPattern.includes("_e")`.
@@ -25,6 +25,8 @@ Phase 3 Entry targets practice one VCe pattern (a_e blocked i_e/o_e/u_e/e_e). Ph
 
 ### Independent r-controlled gate — `LESSON_PHASE3_NO_RCONTROLLED`
 Generalize the current Part-5-only `LESSON_PART5_NO_RCONTROLLED` into a single gate covering **Phase 3 Entry AND Mid**, scanning **Parts 3, 5, 6, and 7** (the decodable practice surfaces — NOT Part 8 spoken questions, where "in your own words" is fine). It flags any token containing `ar/er/ir/or/ur` (regex `[aeiou]r`) plus high-risk exception words `are/for/here`. **This gate is classifier-independent:** a token classified as target/prerequisite/heart/vocabulary does NOT shield it (`are` matches the a_e regex and would otherwise pass). The Part 3 pseudoword path applies the same r-controlled rule (rejects `zare`/`nore`).
+
+**Rule-code compatibility (avoid test drift):** `LESSON_PHASE3_NO_RCONTROLLED` is the canonical new gate. The existing spec-conformance test asserts the old `LESSON_PART5_NO_RCONTROLLED` ID — either preserve `LESSON_PART5_NO_RCONTROLLED` as a compatibility alias mapping to the same blocker, or update that test explicitly in this PR. Do **not** leave two gates with divergent logic.
 
 **Back-compat invariant:** a single-element `targetPatterns` (the 5 Entry targets) must behave **identically** to today. Existing Entry tests, golden exemplar, and spec-conformance must pass unchanged. Add an assertion that Entry a_e output is unchanged. **`ctx.targetPattern` (now `dailyTarget.code`, e.g. `vce_mix_ai`) is DISPLAY/back-compat only** — it is NOT a real spelling pattern. Add a regression check (grep or test) that no matching/classification/pseudoword path calls `wordMatchesPattern(..., ctx.targetPattern)` or `validatePseudowordCandidate(..., ctx.targetPattern)`; all matching must use `ctx.targetPatterns` or the per-word `detectedPattern`.
 
