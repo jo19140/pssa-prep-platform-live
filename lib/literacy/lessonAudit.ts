@@ -179,7 +179,13 @@ function auditPart3(draft: GeneratedLessonDraft) {
   const realWords = lines.filter((line) => Number(line.lineNumber) >= 1 && Number(line.lineNumber) <= 3).flatMap((line) => strings(line.words));
   const invalidPseudowords = validations.filter((entry) => !entry.validation?.valid);
   const outOfTargetSet = validations.filter((entry) => !entry.detectedPattern || !pseudowordPatterns(draft).includes(entry.detectedPattern));
-  const rControlled = rControlledViolations([...pseudowords, ...realWords], draft);
+  // Pseudowords are not in CMUdict, so the phoneme-based r-controlled check cannot
+  // admit them. Mirror the named admission gate: a pseudoword is acceptable when it
+  // DETECTS to one of the declared r-controlled target patterns.
+  const activeRTargetsForPseudowords = rControlledTargetPatterns(draft);
+  const rAdmittedPseudoword = (word: string) =>
+    activeRTargetsForPseudowords.length > 0 && detectPatternCandidates(word).some((pattern) => activeRTargetsForPseudowords.includes(pattern));
+  const rControlled = rControlledViolations([...pseudowords.filter((word) => !rAdmittedPseudoword(word)), ...realWords], draft);
   return [
     check("LESSON_PART3_CONTRASTIVE_LINES", lines.length === 4 && !lines.some((line) => line.lineNumber === 5), "BLOCKER", "Part 3 must use four contrastive lines and no fifth line."),
     check("LESSON_PART3_REAL_WORD_COUNT", realWords.length >= 15 && realWords.length <= 20, "BLOCKER", `Part 3 lines 1-3 have ${realWords.length} real words (need 15-20).`),
