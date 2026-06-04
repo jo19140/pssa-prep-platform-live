@@ -77,11 +77,10 @@ export async function buildLessonGeneratorContext(phasePositionId: string, daily
   if (!dbSelectedPassage) {
     throw new Error(`No approved passage found for ${phasePosition.label} / ${dailyTarget.code}. Generate and approve a passage before lesson generation.`);
   }
-  if (phasePosition.phaseNumber >= 4 && !content.fullAuditPassageText) {
-    throw new Error(`Phase 4+ lesson content for ${dailyTarget.code} requires fullAuditPassageText.`);
-  }
+  assertPhase4LessonContentHasFullAuditPassage(dailyTarget.code, phasePosition.phaseNumber, content);
   const selectedPassage = {
     ...dbSelectedPassage,
+    // TODO(phase4-passage-pipeline): make this override conditional once human-approved phase-4 passages exist in the DB; unconditional override is correct only while fixtures are the sole phase-4 passages.
     text: phasePosition.phaseNumber >= 4 ? content.fullAuditPassageText! : dbSelectedPassage.text,
   };
   const targetPatterns = targetPatternsForDailyTarget(dailyTarget);
@@ -110,6 +109,16 @@ export async function buildLessonGeneratorContext(phasePositionId: string, daily
     selectedPassage,
     selectedPassageAudit,
   };
+}
+
+export function assertPhase4LessonContentHasFullAuditPassage(
+  dailyTargetCode: string,
+  phaseNumber: number,
+  content: { fullAuditPassageText?: string },
+) {
+  if (phaseNumber >= 4 && !content.fullAuditPassageText) {
+    throw new Error(`Phase 4+ lesson content for ${dailyTargetCode} requires fullAuditPassageText.`);
+  }
 }
 
 export async function generateLessonDraft(ctx: LessonGeneratorContext, options: {
