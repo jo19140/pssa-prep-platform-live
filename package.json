@@ -37,6 +37,7 @@
     "test:pssa-db5-1": "tsx scripts/test-pssa-db5-1-review-ui.ts",
     "test:pssa-db6": "tsx scripts/test-pssa-db6-form-assembly.ts",
     "test:pssa-db6-5": "tsx scripts/test-pssa-db6-5-importer-multigrade.ts",
+    "test:pssa-pr-b": "tsx scripts/test-pssa-pr-b-renderers.ts",
     "voice:enforce-retention": "tsx scripts/voice/enforce-retention.ts",
     "voice:purge-training-opt-outs": "tsx scripts/voice/purge-training-opt-outs.ts",
     "data-flywheel:compute-outcomes": "tsx scripts/data-flywheel/compute-outcomes.ts",
