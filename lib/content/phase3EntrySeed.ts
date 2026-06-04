@@ -33,6 +33,16 @@ export const PHASE_4_ENTRY = {
   prerequisites: ["PHASE_3_MID"],
 };
 
+export const PHASE_4_MID = {
+  phaseNumber: 4,
+  subPosition: "MID",
+  label: "Phase 4 Mid",
+  phonicsTrack:
+    "Same-sound long-vowel consolidation: each target groups the VCe spelling with the vowel-team spellings of one long vowel (a_e/ai/ay, e_e/ee/ea, o_e/oa, i_e/igh).",
+  morphologyTrack: "No new morphology target.",
+  prerequisites: ["PHASE_4_ENTRY"],
+};
+
 export type DailyTargetSeed = {
   code: string;
   kidVisibleLabel: string;
@@ -259,7 +269,89 @@ export const PHASE_4_ENTRY_TARGETS: DailyTargetSeed[] = [
   },
 ];
 
-export const CONTENT_V3_DAILY_TARGETS = [...PHASE_3_TARGETS, ...PHASE_4_ENTRY_TARGETS];
+function phase4MidAllowedPatterns(targetPatterns: string[]) {
+  return [
+    "closed_short_a",
+    "closed_short_i",
+    "closed_short_o",
+    "closed_short_u",
+    "closed_short_e",
+    ...["a_e", "i_e", "o_e", "u_e", "e_e"].filter((pattern) => !targetPatterns.includes(pattern)),
+  ];
+}
+
+export const PHASE_4_MID_TARGETS: DailyTargetSeed[] = [
+  {
+    code: "consolidate_long_a",
+    kidVisibleLabel: "long a spellings",
+    tutorLabel: "Long a consolidation: a_e, ai, ay",
+    description: "Phase 4 Mid target consolidating long a spellings a_e, ai, and ay.",
+    introductionOrder: 13,
+    targetPatternsJson: {
+      patterns: ["a_e", "team_ai", "team_ay"],
+      pseudowordPatterns: ["a_e", "team_ai"],
+      graphemes: ["a_e", "ai", "ay"],
+      sound: "long_a",
+    },
+    allowedPatternCodes: phase4MidAllowedPatterns(["a_e", "team_ai", "team_ay"]),
+    blockedPatternCodes: blockedExcept(["a_e", "team_ai", "team_ay"]),
+    exampleWords: ["cake", "rain", "play", "made", "day", "wait", "gray", "lake"],
+    exampleNonwords: ["zake", "pame", "vade", "sape", "zaib", "vaib", "naid", "paib"],
+  },
+  {
+    code: "consolidate_long_e",
+    kidVisibleLabel: "long e spellings",
+    tutorLabel: "Long e consolidation: e_e, ee, ea",
+    description: "Phase 4 Mid target consolidating long e spellings e_e, ee, and ea.",
+    introductionOrder: 14,
+    targetPatternsJson: {
+      patterns: ["e_e", "team_ee", "team_ea"],
+      pseudowordPatterns: ["e_e", "team_ee", "team_ea"],
+      graphemes: ["e_e", "ee", "ea"],
+      sound: "long_e",
+    },
+    allowedPatternCodes: phase4MidAllowedPatterns(["e_e", "team_ee", "team_ea"]),
+    blockedPatternCodes: blockedExcept(["e_e", "team_ee", "team_ea"]),
+    exampleWords: ["Pete", "green", "sea", "these", "feet", "eat", "team", "keep"],
+    exampleNonwords: ["pheme", "zede", "zeed", "veeb", "jeeb", "zead", "veab", "jeab"],
+  },
+  {
+    code: "consolidate_long_o",
+    kidVisibleLabel: "long o spellings",
+    tutorLabel: "Long o consolidation: o_e, oa",
+    description: "Phase 4 Mid target consolidating long o spellings o_e and oa.",
+    introductionOrder: 15,
+    targetPatternsJson: {
+      patterns: ["o_e", "team_oa"],
+      pseudowordPatterns: ["o_e", "team_oa"],
+      graphemes: ["o_e", "oa"],
+      sound: "long_o",
+    },
+    allowedPatternCodes: phase4MidAllowedPatterns(["o_e", "team_oa"]),
+    blockedPatternCodes: blockedExcept(["o_e", "team_oa"]),
+    exampleWords: ["home", "boat", "note", "road", "rope", "goat", "soap", "hose"],
+    exampleNonwords: ["zome", "fope", "nofe", "vone", "zoab", "voab", "joad", "moag"],
+  },
+  {
+    code: "consolidate_long_i",
+    kidVisibleLabel: "long i spellings",
+    tutorLabel: "Long i consolidation: i_e, igh",
+    description: "Phase 4 Mid target consolidating long i spellings i_e and igh.",
+    introductionOrder: 16,
+    targetPatternsJson: {
+      patterns: ["i_e", "team_igh"],
+      pseudowordPatterns: ["i_e", "team_igh"],
+      graphemes: ["i_e", "igh"],
+      sound: "long_i",
+    },
+    allowedPatternCodes: phase4MidAllowedPatterns(["i_e", "team_igh"]),
+    blockedPatternCodes: blockedExcept(["i_e", "team_igh"]),
+    exampleWords: ["ride", "light", "time", "night", "fine", "bright", "bike", "high"],
+    exampleNonwords: ["zibe", "mide", "fime", "pive", "zighb", "vighg", "jighd", "mighb"],
+  },
+];
+
+export const CONTENT_V3_DAILY_TARGETS = [...PHASE_3_TARGETS, ...PHASE_4_ENTRY_TARGETS, ...PHASE_4_MID_TARGETS];
 
 export const NDL_LICENSE_ATTRIBUTION = {
   sourceCode: "NDL",

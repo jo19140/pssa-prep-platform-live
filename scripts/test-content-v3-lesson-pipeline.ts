@@ -1,6 +1,6 @@
 import assert from "assert/strict";
 import { LESSON_CONTENT_BY_DAILY_TARGET, phase3EntryLessonContentFor } from "../lib/content/phase3EntryLessonContent";
-import { CONTENT_V3_DAILY_TARGETS, PHASE_3_MID_TARGETS, PHASE_4_ENTRY_TARGETS } from "../lib/content/phase3EntrySeed";
+import { CONTENT_V3_DAILY_TARGETS, PHASE_3_MID_TARGETS, PHASE_4_ENTRY_TARGETS, PHASE_4_MID_TARGETS } from "../lib/content/phase3EntrySeed";
 import { auditGeneratedLessonDraft, evaluateLessonApprovalReadiness } from "../lib/literacy/lessonAudit";
 import { deterministicLessonPartRunner, generateLessonDraft } from "../lib/literacy/lessonGenerator";
 import { generatePart1Warmup } from "../lib/literacy/lessonParts/part1Warmup";
@@ -15,8 +15,14 @@ function lessonContext(targetCode = "a_e"): LessonGeneratorContext {
   assert(seedTarget, `Missing content-v3 target ${targetCode}`);
   const content = phase3EntryLessonContentFor(targetCode);
   const isMid = PHASE_3_MID_TARGETS.some((target) => target.code === targetCode);
-  const isPhase4 = PHASE_4_ENTRY_TARGETS.some((target) => target.code === targetCode);
-  const phasePosition = { id: isPhase4 ? "phase-4-entry" : isMid ? "phase-3-mid" : "phase-3-entry", phaseNumber: isPhase4 ? 4 : 3, label: isPhase4 ? "Phase 4 Entry" : isMid ? "Phase 3 Mid" : "Phase 3 Entry" };
+  const isPhase4Entry = PHASE_4_ENTRY_TARGETS.some((target) => target.code === targetCode);
+  const isPhase4Mid = PHASE_4_MID_TARGETS.some((target) => target.code === targetCode);
+  const isPhase4 = isPhase4Entry || isPhase4Mid;
+  const phasePosition = {
+    id: isPhase4Mid ? "phase-4-mid" : isPhase4Entry ? "phase-4-entry" : isMid ? "phase-3-mid" : "phase-3-entry",
+    phaseNumber: isPhase4 ? 4 : 3,
+    label: isPhase4Mid ? "Phase 4 Mid" : isPhase4Entry ? "Phase 4 Entry" : isMid ? "Phase 3 Mid" : "Phase 3 Entry",
+  };
   const dailyTarget = {
     id: `target-${targetCode}`,
     ...seedTarget,
