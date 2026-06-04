@@ -12,7 +12,7 @@ export function generatePart7ConnectedText(ctx: LessonGeneratorContext): Generat
     partLabel: "Connected-text reading",
     partType: "CONNECTED_TEXT_READING",
     kidVisibleCopy: {
-      title: content.mockPassageTitle,
+      title: ctx.phasePosition.phaseNumber >= 4 ? content.fullAuditPassageTitle || content.mockPassageTitle : content.mockPassageTitle,
       directions: "Choose listen first or read on your own. Harper will help when you need it.",
       passageText: ctx.selectedPassage.text,
     },

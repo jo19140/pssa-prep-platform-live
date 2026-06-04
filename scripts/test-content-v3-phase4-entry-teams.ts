@@ -1,6 +1,6 @@
 import assert from "assert/strict";
 import { PHASE_4_ENTRY_TARGETS } from "../lib/content/phase3EntrySeed";
-import { phase3EntryLessonContentFor } from "../lib/content/phase3EntryLessonContent";
+import { phase3EntryLessonContentFor, type LessonContentByDailyTarget } from "../lib/content/phase3EntryLessonContent";
 import { auditGeneratedLessonDraft } from "../lib/literacy/lessonAudit";
 import { generateLessonDraft } from "../lib/literacy/lessonGenerator";
 import { auditPassage } from "../lib/literacy/passageAudit";
@@ -35,6 +35,8 @@ async function main() {
     const part3 = draft.parts.find((part) => part.partNumber === 3)!;
     const pseudoTags = ((part3.wordTagsJson as { words?: any[] }).words ?? []).filter((entry) => entry.lineNumber === 4);
     assert(pseudoTags.every((entry) => entry.selectedPattern && pseudowordPatterns.includes(entry.selectedPattern)), `${target.code} pseudowords need selectedPattern metadata`);
+    assert.equal(part7PassageText(draft), phase3EntryLessonContentFor(target.code).fullAuditPassageText, `${target.code} should render the full audit passage in Part 7`);
+    assertFullPassageStyleConstraints(target.code, phase3EntryLessonContentFor(target.code));
   }
 
   const aiAyDraft = await generateLessonDraft(lessonContext("team_ai_ay"), {
@@ -42,6 +44,10 @@ async function main() {
   });
   const missingAy = removeAyWords(aiAyDraft);
   assert.equal(auditGeneratedLessonDraft(missingAy).checks.find((entry) => entry.ruleId === "LESSON_TARGET_PATTERN_COVERAGE")?.result, "FAIL");
+  assertNonMinimalTeamPairFails(aiAyDraft);
+  assertPhase4PassageAuditRoleSplit();
+  assertFullPassageRejectsUndeclaredCrossTeam();
+  assertBareTargetCodesStillFail();
 
   console.log("content-v3 Phase 4 Entry team lesson checks passed");
 }
@@ -61,7 +67,8 @@ function lessonContext(targetCode: string): LessonGeneratorContext {
   const heartWordsPreviewedThisLesson = content.heartWordsPreviewedThisLesson;
   const heartWordsAssumedKnown = content.heartWordsAssumedKnown;
   const vocabularyWords = content.vocabulary;
-  const selectedPassageAudit = auditPassage(content.mockPassageText, {
+  assert(content.fullAuditPassageText, `${targetCode} needs a full audit passage.`);
+  const selectedPassageAudit = auditPassage(content.fullAuditPassageText, {
     phasePosition,
     dailyTarget,
     heartWords: [...heartWordsPreviewedThisLesson, ...heartWordsAssumedKnown],
@@ -79,7 +86,7 @@ function lessonContext(targetCode: string): LessonGeneratorContext {
     heartWordsPreviewedThisLesson,
     heartWordsAssumedKnown,
     vocabularyWords,
-    selectedPassage: { id: `passage-${targetCode}`, text: content.mockPassageText, contentAuditJson: selectedPassageAudit, decodabilityScore: selectedPassageAudit.decodabilityScore },
+    selectedPassage: { id: `passage-${targetCode}`, text: content.fullAuditPassageText, contentAuditJson: selectedPassageAudit, decodabilityScore: selectedPassageAudit.decodabilityScore },
     selectedPassageAudit,
   };
 }
@@ -125,6 +132,102 @@ function pseudowordPatternsFor(seedTarget: { code: string; targetPatternsJson: u
 function selectPseudowordPattern(word: string, orderedPatterns: string[]) {
   const candidates = detectPatternCandidates(word);
   return orderedPatterns.find((pattern) => candidates.includes(pattern)) ?? null;
+}
+
+function part7PassageText(draft: GeneratedLessonDraft) {
+  const part7 = draft.parts.find((part) => part.partNumber === 7);
+  return typeof part7?.contentJson.passageText === "string" ? part7.contentJson.passageText : "";
+}
+
+function assertNonMinimalTeamPairFails(draft: GeneratedLessonDraft) {
+  // Team demonstration pairs must preserve onset and coda and swap only the
+  // vowel grapheme. pat/pain agrees on vowel letter but changes the coda
+  // (t -> n), so it must fail the Part 2 demo audit.
+  const nonMinimalTeamPair = {
+    ...draft,
+    parts: draft.parts.map((part) =>
+      part.partNumber === 2
+        ? { ...part, contentJson: { ...part.contentJson, demonstrationPairs: [{ closed: "pat", target: "pain" }] } }
+        : part,
+    ),
+  };
+  const checks = auditGeneratedLessonDraft(nonMinimalTeamPair).checks;
+  assert.equal(checks.find((entry) => entry.ruleId === "LESSON_PART2_DEMO_MODE_VALID")?.result, "FAIL", "Non-minimal team pair (pat/pain) must fail the Part 2 demo audit");
+}
+
+function assertPhase4PassageAuditRoleSplit() {
+  const content = phase3EntryLessonContentFor("team_ai_ay");
+  const ctx = lessonContext("team_ai_ay");
+  const fullAudit = auditPassage(content.fullAuditPassageText!, {
+    phasePosition: ctx.phasePosition,
+    dailyTarget: ctx.dailyTarget,
+    heartWords: [...content.heartWordsPreviewedThisLesson, ...content.heartWordsAssumedKnown],
+    vocabularyAllowlist: content.vocabulary,
+  });
+  assert.equal(fullAudit.passesAuditGate, true, "Phase 4 full audit passage should pass the production passage gate");
+
+  const missingFullText = {
+    ...ctx,
+    selectedPassage: { ...ctx.selectedPassage!, text: content.mockPassageText },
+    selectedPassageAudit: auditPassage(content.mockPassageText, {
+      phasePosition: ctx.phasePosition,
+      dailyTarget: ctx.dailyTarget,
+      heartWords: [...content.heartWordsPreviewedThisLesson, ...content.heartWordsAssumedKnown],
+      vocabularyAllowlist: content.vocabulary,
+    }),
+  };
+  assert.equal(missingFullText.selectedPassageAudit.passesAuditGate, false, "Short mock passage should stay a legacy/demo fixture, not the Phase 4 audit passage");
+
+  const shortFullAudit = auditPassage("Gail and Jay play. The rain fell all day.", {
+    phasePosition: ctx.phasePosition,
+    dailyTarget: ctx.dailyTarget,
+    heartWords: [...content.heartWordsPreviewedThisLesson, ...content.heartWordsAssumedKnown],
+    vocabularyAllowlist: content.vocabulary,
+  });
+  assert.equal(shortFullAudit.passesAuditGate, false, "Phase 4 full audit passage under 80 words should fail");
+}
+
+function assertFullPassageRejectsUndeclaredCrossTeam() {
+  const ctx = lessonContext("team_oa");
+  const content = phase3EntryLessonContentFor("team_oa");
+  const contaminated = auditPassage(`${content.fullAuditPassageText} I see the goat.`, {
+    phasePosition: ctx.phasePosition,
+    dailyTarget: ctx.dailyTarget,
+    heartWords: [...content.heartWordsPreviewedThisLesson, ...content.heartWordsAssumedKnown],
+    vocabularyAllowlist: content.vocabulary,
+  });
+  assert(contaminated.blockedPatternViolations.some((entry) => entry.word.toLowerCase() === "see"), "Undeclared cross-team words should fail in full audit passages");
+}
+
+function assertBareTargetCodesStillFail() {
+  const ctx = lessonContext("team_ai_ay");
+  const content = phase3EntryLessonContentFor("team_ai_ay");
+  const contaminated = auditPassage(`${content.fullAuditPassageText} team_ai team_ay`, {
+    phasePosition: ctx.phasePosition,
+    dailyTarget: ctx.dailyTarget,
+    heartWords: [...content.heartWordsPreviewedThisLesson, ...content.heartWordsAssumedKnown],
+    vocabularyAllowlist: content.vocabulary,
+  });
+  assert(contaminated.unclassifiedWords.some((entry) => entry.toLowerCase() === "team_ai" || entry.toLowerCase() === "team_ay"), "Bare target codes should not classify as student words");
+}
+
+function assertFullPassageStyleConstraints(targetCode: string, content: LessonContentByDailyTarget) {
+  const values = [
+    content.fullAuditPassageText || "",
+    ...content.sentences,
+    ...content.dictatedSentences,
+  ];
+  const banned = new Set(["we", "he", "she", "me", "be", "go", "so", "by", "my", "no"]);
+  for (const value of values) {
+    for (const token of value.toLowerCase().match(/[a-z]+/g) ?? []) {
+      assert.equal(banned.has(token), false, `${targetCode} should avoid banned open-syllable function word ${token}`);
+      const stem = token.replace(/(?:s|es|ed|ing)$/i, "");
+      if (stem !== token) {
+        const candidates = detectPatternCandidates(stem);
+        assert.equal(candidates.some((pattern) => targetPatternsFor(PHASE_4_ENTRY_TARGETS.find((target) => target.code === targetCode)!).includes(pattern)), false, `${targetCode} should avoid target-team inflection ${token}`);
+      }
+    }
+  }
 }
 
 main().catch((error) => {

@@ -49,7 +49,9 @@ function buildContextFromRealSeed(targetCode: string): LessonGeneratorContext {
   const heartWordsPreviewedThisLesson = content.heartWordsPreviewedThisLesson;
   const heartWordsAssumedKnown = content.heartWordsAssumedKnown;
   const vocabularyWords = content.vocabulary;
-  const selectedPassageAudit = auditPassage(content.mockPassageText, {
+  const selectedPassageText = isPhase4 ? content.fullAuditPassageText : content.mockPassageText;
+  assert(selectedPassageText, `${targetCode} needs fullAuditPassageText for Phase 4+ lesson generation.`);
+  const selectedPassageAudit = auditPassage(selectedPassageText, {
     phasePosition,
     dailyTarget,
     heartWords: [...heartWordsPreviewedThisLesson, ...heartWordsAssumedKnown],
@@ -70,7 +72,7 @@ function buildContextFromRealSeed(targetCode: string): LessonGeneratorContext {
     vocabularyWords,
     selectedPassage: {
       id: `passage-${targetCode}`,
-      text: content.mockPassageText,
+      text: selectedPassageText,
       contentAuditJson: selectedPassageAudit,
       decodabilityScore: selectedPassageAudit.decodabilityScore,
     },
@@ -178,6 +180,12 @@ function allowedCmudictVariant(targetPattern: string, word: string, variant: str
 function assertAdversarialGateFailures(draft: GeneratedLessonDraft, ctx: LessonGeneratorContext) {
   const warmupLeak = replacePart(draft, 1, { warmupWords: ["cake"] });
   assert.equal(findCheck(warmupLeak, "LESSON_WARMUP_NO_TODAY_PATTERN")?.result, "FAIL");
+
+  // VCe demonstration pairs must be true minimal pairs (closed base + appended e).
+  // cat/cape agrees on vowel letter but is NOT cat+e, so it must fail.
+  const nonMinimalVcePair = replacePart(draft, 2, { demonstrationPairs: [{ closed: "cat", target: "cape" }] });
+  assert.equal(findCheck(nonMinimalVcePair, "LESSON_PART2_DEMO_MODE_VALID")?.result, "FAIL");
+  assert.equal(findCheck(nonMinimalVcePair, "LESSON_PART2_DEMO_MINIMAL_PAIRS")?.result, "FAIL");
 
   const rControlled = replacePart(draft, 5, { sentences: ["The cake is a gift for a pal."] });
   assert.equal(findCheck(rControlled, "LESSON_PART5_NO_RCONTROLLED")?.result, "FAIL");

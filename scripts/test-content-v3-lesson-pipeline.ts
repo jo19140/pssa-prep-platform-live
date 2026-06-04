@@ -27,7 +27,9 @@ function lessonContext(targetCode = "a_e"): LessonGeneratorContext {
   const heartWordsPreviewedThisLesson = content.heartWordsPreviewedThisLesson;
   const heartWordsAssumedKnown = content.heartWordsAssumedKnown;
   const vocabularyWords = content.vocabulary;
-  const selectedPassageAudit = auditPassage(content.mockPassageText, {
+  const selectedPassageText = isPhase4 ? content.fullAuditPassageText : content.mockPassageText;
+  assert(selectedPassageText, `${targetCode} needs fullAuditPassageText for Phase 4+ lesson generation.`);
+  const selectedPassageAudit = auditPassage(selectedPassageText, {
     phasePosition,
     dailyTarget,
     heartWords: [...heartWordsPreviewedThisLesson, ...heartWordsAssumedKnown],
@@ -45,7 +47,7 @@ function lessonContext(targetCode = "a_e"): LessonGeneratorContext {
     heartWordsPreviewedThisLesson,
     heartWordsAssumedKnown,
     vocabularyWords,
-    selectedPassage: { id: `passage-${targetCode}`, text: content.mockPassageText, contentAuditJson: selectedPassageAudit, decodabilityScore: selectedPassageAudit.decodabilityScore },
+    selectedPassage: { id: `passage-${targetCode}`, text: selectedPassageText, contentAuditJson: selectedPassageAudit, decodabilityScore: selectedPassageAudit.decodabilityScore },
     selectedPassageAudit,
   };
 }
@@ -90,12 +92,7 @@ async function main() {
     });
     const targetAudit = auditGeneratedLessonDraft(targetDraft);
     assert.equal(targetAudit.canPersist, true, `${targetCode}: ${targetAudit.blockers.join("\n")}`);
-    if (targetCtx.phasePosition.phaseNumber >= 4) {
-      assert.equal(targetCtx.selectedPassageAudit?.unclassifiedWords.length, 0, `${targetCode} mock passage must classify all words`);
-      assert.equal(targetCtx.selectedPassageAudit?.blockedPatternViolations.length, 0, `${targetCode} mock passage must avoid blocked patterns`);
-    } else {
-      assert.equal(targetCtx.selectedPassageAudit?.passesAuditGate, true, `${targetCode} mock passage must pass audit`);
-    }
+    assert.equal(targetCtx.selectedPassageAudit?.passesAuditGate, true, `${targetCode} selected passage must pass audit`);
     assert.equal(targetCtx.selectedPassageAudit?.quality.passesQualityGate, true, `${targetCode} mock passage must pass quality audit`);
   }
 

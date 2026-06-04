@@ -242,7 +242,7 @@ export const PHASE_4_ENTRY_TARGETS: DailyTargetSeed[] = [
     targetPatternsJson: { patterns: ["team_oa"], pseudowordPatterns: ["team_oa"], graphemes: ["oa"], sound: "long_o" },
     allowedPatternCodes: phase4EntryAllowedPatternCodes,
     blockedPatternCodes: blockedExcept(["team_oa"]),
-    exampleWords: ["boat", "goat", "road", "coat", "oats", "load", "soap", "toast"],
+    exampleWords: ["boat", "goat", "road", "coat", "foam", "load", "soap", "toast"],
     exampleNonwords: ["zoab", "voab", "joad", "moag", "noab", "poab", "soab", "toag"],
   },
   {

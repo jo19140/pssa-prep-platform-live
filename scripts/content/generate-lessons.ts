@@ -82,7 +82,12 @@ async function ensureMockApprovedPassage(
   },
 ) {
   const content = phase3EntryLessonContentFor(dailyTarget.code);
-  const normalizedMockText = normalizeText(content.mockPassageText);
+  const passageText = phasePosition.phaseNumber >= 4 ? content.fullAuditPassageText : content.mockPassageText;
+  const passageTitle = phasePosition.phaseNumber >= 4 ? content.fullAuditPassageTitle || content.mockPassageTitle : content.mockPassageTitle;
+  if (!passageText) {
+    throw new Error(`Mock ${dailyTarget.code} passage requires fullAuditPassageText for Phase 4+.`);
+  }
+  const normalizedMockText = normalizeText(passageText);
   const existingPassages = await db.passage.findMany({
     where: {
       phasePositionId: phasePosition.id,
@@ -93,7 +98,7 @@ async function ensureMockApprovedPassage(
   });
   const existing = existingPassages.find((passage) => normalizeText(passage.text) === normalizedMockText);
   if (existing) return;
-  const audit = auditPassage(content.mockPassageText, {
+  const audit = auditPassage(passageText, {
     phasePosition,
     dailyTarget,
     heartWords: [...content.heartWordsPreviewedThisLesson, ...content.heartWordsAssumedKnown],
@@ -107,7 +112,7 @@ async function ensureMockApprovedPassage(
       source: "MOCK_APPROVED_FIXTURE",
       sourceAttributionCode: "MOCK_APPROVED_FIXTURE",
       phasePositionId: phasePosition.id,
-      text: content.mockPassageText,
+      text: passageText,
       wordCount: audit.wordCount,
       contentAuditJson: audit,
       decodabilityScore: audit.decodabilityScore,
@@ -116,7 +121,7 @@ async function ensureMockApprovedPassage(
       sourceMetadataJson: {
         dailyTargetId: dailyTarget.id,
         dailyTargetCode: dailyTarget.code,
-        mockPassageTitle: content.mockPassageTitle,
+        mockPassageTitle: passageTitle,
         normalizedText: normalizedMockText,
         mockFixture: true,
       },
