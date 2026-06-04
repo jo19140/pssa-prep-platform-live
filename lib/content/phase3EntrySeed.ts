@@ -43,6 +43,16 @@ export const PHASE_4_MID = {
   prerequisites: ["PHASE_4_ENTRY"],
 };
 
+export const PHASE_4_RCONTROLLED = {
+  phaseNumber: 4,
+  subPosition: "RCONTROLLED",
+  label: "Phase 4 R-Controlled Entry",
+  phonicsTrack:
+    "R-controlled vowel entry: ar and or as distinct sounds, then er/ir/ur as three spellings of the same r-controlled sound.",
+  morphologyTrack: "No new morphology target.",
+  prerequisites: ["PHASE_4_MID"],
+};
+
 export type DailyTargetSeed = {
   code: string;
   kidVisibleLabel: string;
@@ -351,7 +361,51 @@ export const PHASE_4_MID_TARGETS: DailyTargetSeed[] = [
   },
 ];
 
-export const CONTENT_V3_DAILY_TARGETS = [...PHASE_3_TARGETS, ...PHASE_4_ENTRY_TARGETS, ...PHASE_4_MID_TARGETS];
+export const PHASE_4_RCONTROLLED_TARGETS: DailyTargetSeed[] = [
+  {
+    code: "r_controlled_ar",
+    kidVisibleLabel: "ar words",
+    tutorLabel: "R-controlled ar: car, park, farm",
+    description: "Phase 4 R-Controlled Entry target for ar words.",
+    introductionOrder: 17,
+    targetPatternsJson: { patterns: ["r_ar"], pseudowordPatterns: ["r_ar"], graphemes: ["ar"], sound: "r_controlled_ar" },
+    allowedPatternCodes: phase4EntryAllowedPatternCodes,
+    blockedPatternCodes: blockedExcept(["r_ar"]),
+    exampleWords: ["car", "park", "barn", "farm", "star", "dark", "hard", "yard"],
+    exampleNonwords: ["zarb", "varn", "jarm", "marb", "narp", "sarb", "parn", "tarb"],
+  },
+  {
+    code: "r_controlled_or",
+    kidVisibleLabel: "or words",
+    tutorLabel: "R-controlled or: corn, fork, storm",
+    description: "Phase 4 R-Controlled Entry target for or words.",
+    introductionOrder: 18,
+    targetPatternsJson: { patterns: ["r_or"], pseudowordPatterns: ["r_or"], graphemes: ["or"], sound: "r_controlled_or" },
+    allowedPatternCodes: phase4EntryAllowedPatternCodes,
+    blockedPatternCodes: blockedExcept(["r_or"]),
+    exampleWords: ["corn", "fork", "storm", "horn", "north", "porch", "short", "fort"],
+    exampleNonwords: ["vorm", "zorb", "jorm", "morb", "norp", "torb", "dorb", "lorm"],
+  },
+  {
+    code: "r_controlled_er_ir_ur",
+    kidVisibleLabel: "er, ir, and ur words",
+    tutorLabel: "R-controlled er/ir/ur: her, bird, turn",
+    description: "Phase 4 R-Controlled Entry target for er, ir, and ur words.",
+    introductionOrder: 19,
+    targetPatternsJson: {
+      patterns: ["r_er", "r_ir", "r_ur"],
+      pseudowordPatterns: ["r_er", "r_ir", "r_ur"],
+      graphemes: ["er", "ir", "ur"],
+      sound: "r_controlled_er",
+    },
+    allowedPatternCodes: phase4EntryAllowedPatternCodes,
+    blockedPatternCodes: blockedExcept(["r_er", "r_ir", "r_ur"]),
+    exampleWords: ["her", "bird", "turn", "fern", "girl", "curb", "first", "burn"],
+    exampleNonwords: ["nerb", "zerb", "derm", "jirt", "virn", "nirt", "murb", "gurb"],
+  },
+];
+
+export const CONTENT_V3_DAILY_TARGETS = [...PHASE_3_TARGETS, ...PHASE_4_ENTRY_TARGETS, ...PHASE_4_MID_TARGETS, ...PHASE_4_RCONTROLLED_TARGETS];
 
 export const NDL_LICENSE_ATTRIBUTION = {
   sourceCode: "NDL",

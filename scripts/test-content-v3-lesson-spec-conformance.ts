@@ -2,7 +2,7 @@ import assert from "assert/strict";
 import fs from "node:fs";
 import path from "node:path";
 import { LESSON_CONTENT_BY_DAILY_TARGET, phase3EntryLessonContentFor } from "../lib/content/phase3EntryLessonContent";
-import { CONTENT_V3_DAILY_TARGETS, PHASE_3_MID_TARGETS, PHASE_4_ENTRY_TARGETS } from "../lib/content/phase3EntrySeed";
+import { CONTENT_V3_DAILY_TARGETS, PHASE_3_MID_TARGETS, PHASE_4_ENTRY_TARGETS, PHASE_4_MID_TARGETS, PHASE_4_RCONTROLLED_TARGETS } from "../lib/content/phase3EntrySeed";
 import { auditGeneratedLessonDraft, evaluateLessonApprovalReadiness, type GeneratedLessonDraft } from "../lib/literacy/lessonAudit";
 import { generateLessonDraft } from "../lib/literacy/lessonGenerator";
 import type { GeneratedLessonPart, LessonGeneratorContext } from "../lib/literacy/lessonParts/types";
@@ -10,7 +10,15 @@ import { auditPassage, decodabilityThresholdForPhase } from "../lib/literacy/pas
 import { classifyPassageWords, wordMatchesPattern } from "../lib/literacy/passageClassifier";
 import { detectPatternCandidates, detectVcePattern, homophoneVariants, validatePseudowordCandidate } from "../lib/literacy/pseudowordValidator";
 
-const allowedCmudictNameTokenPseudowords = new Set(["mave", "nace"]);
+// EXACT and MINIMAL per-target caveat list: pseudowords that collide with CMUdict
+// NAME TOKENS only (verified individually against the corpus). The oracle must stay
+// independent of the strict validator — never excuse a direct CMUdict hit just
+// because validatePseudowordCandidate passes it (the validator's homophone lexicon
+// is frequency-gated, so it misses low-frequency real words by design).
+const allowedCmudictNameTokenPseudowords = new Map<string, Set<string>>([
+  ["a_e", new Set(["mave", "nace"])],
+  ["r_controlled_ar", new Set(["zarb", "varn"])],
+]);
 const allowedCmudictNameTokenVariants = new Map([["sape", new Set(["seip"])]]);
 
 async function main() {
@@ -41,8 +49,15 @@ function buildContextFromRealSeed(targetCode: string): LessonGeneratorContext {
   const content = phase3EntryLessonContentFor(targetCode);
 
   const isMid = PHASE_3_MID_TARGETS.some((target) => target.code === targetCode);
-  const isPhase4 = PHASE_4_ENTRY_TARGETS.some((target) => target.code === targetCode);
-  const phasePosition = { id: isPhase4 ? "phase-4-entry" : isMid ? "phase-3-mid" : "phase-3-entry", phaseNumber: isPhase4 ? 4 : 3, label: isPhase4 ? "Phase 4 Entry" : isMid ? "Phase 3 Mid" : "Phase 3 Entry" };
+  const isPhase4Entry = PHASE_4_ENTRY_TARGETS.some((target) => target.code === targetCode);
+  const isPhase4Mid = PHASE_4_MID_TARGETS.some((target) => target.code === targetCode);
+  const isPhase4RControlled = PHASE_4_RCONTROLLED_TARGETS.some((target) => target.code === targetCode);
+  const isPhase4 = isPhase4Entry || isPhase4Mid || isPhase4RControlled;
+  const phasePosition = {
+    id: isPhase4RControlled ? "phase-4-rcontrolled" : isPhase4Mid ? "phase-4-mid" : isPhase4Entry ? "phase-4-entry" : isMid ? "phase-3-mid" : "phase-3-entry",
+    phaseNumber: isPhase4 ? 4 : 3,
+    label: isPhase4RControlled ? "Phase 4 R-Controlled Entry" : isPhase4Mid ? "Phase 4 Mid" : isPhase4Entry ? "Phase 4 Entry" : isMid ? "Phase 3 Mid" : "Phase 3 Entry",
+  };
   const dailyTarget = { id: `target-${targetCode}`, ...seedTarget, targetPatternsJson: seedTarget.targetPatternsJson as any };
   const targetPatterns = targetPatternsFor(seedTarget);
   const pseudowordPatterns = pseudowordPatternsFor(seedTarget, targetPatterns);
@@ -108,6 +123,10 @@ function assertGeneratedLessonAgainstIndependentOracles(draft: GeneratedLessonDr
   const cmuWords = loadCmudictWords();
   for (const pseudoword of pseudowords) {
     const normalized = pseudoword.toLowerCase();
+    const detectedPattern = selectPseudowordPattern(normalized, ctx.pseudowordPatterns);
+    assert(detectedPattern && ctx.targetPatterns.includes(detectedPattern), `Part 3 pseudoword ${pseudoword} detects outside target pattern set.`);
+    const validation = validatePseudowordCandidate(normalized, detectedPattern, { strictLexicon: true });
+    assert.equal(validation.valid, true, `Part 3 pseudoword ${pseudoword} failed pseudoword validator: ${validation.reason ?? validation.issues.join(", ")}`);
     const directCmuHit = cmuWords.has(normalized);
     assert(
       !directCmuHit || allowedCmudictNameTokenAllowed(ctx.targetPattern, normalized),
@@ -116,10 +135,6 @@ function assertGeneratedLessonAgainstIndependentOracles(draft: GeneratedLessonDr
     if (directCmuHit) {
       console.log(`CMUdict name-token caveat accepted for shipped fixture pseudoword: ${pseudoword}`);
     }
-    const detectedPattern = selectPseudowordPattern(normalized, ctx.pseudowordPatterns);
-    assert(detectedPattern && ctx.targetPatterns.includes(detectedPattern), `Part 3 pseudoword ${pseudoword} detects outside target pattern set.`);
-    const validation = validatePseudowordCandidate(normalized, detectedPattern, { strictLexicon: true });
-    assert.equal(validation.valid, true, `Part 3 pseudoword ${pseudoword} failed pseudoword validator: ${validation.reason ?? validation.issues.join(", ")}`);
     const vowelLetter = detectedPattern.match(/^([aeiou])_e$/)?.[1] ?? "";
     if (vowelLetter) {
       const collidingVariant = homophoneVariants(normalized, vowelLetter)
@@ -138,7 +153,13 @@ function assertGeneratedLessonAgainstIndependentOracles(draft: GeneratedLessonDr
   const part5Classification = classifyPassageWords(strings(part5.contentJson.sentences).join(" "), classificationContext(ctx, ["is"], ["dave", "jane"]));
   assert.equal(part5Classification.unclassifiedWords.length, 0, `Part 5 has unclassified words: ${part5Classification.unclassifiedWords.join(", ")}`);
   assert.equal(part5Classification.blockedPatternViolations.length, 0, `Part 5 has blocked patterns: ${JSON.stringify(part5Classification.blockedPatternViolations)}`);
-  assert.equal(rControlledWords(strings(part5.contentJson.sentences)).length, 0, "Part 5 contains r-controlled words.");
+  const part5RControlledWords = rControlledWords(strings(part5.contentJson.sentences));
+  if (ctx.targetPatterns.some((pattern) => pattern.startsWith("r_"))) {
+    const offTarget = part5RControlledWords.filter((word) => !ctx.targetPatterns.some((pattern) => wordMatchesPattern(word, pattern, { strictPhonemeLexicon: true })));
+    assert.deepEqual(offTarget, [], `Part 5 contains off-target r-controlled words: ${offTarget.join(", ")}`);
+  } else {
+    assert.equal(part5RControlledWords.length, 0, "Part 5 contains r-controlled words.");
+  }
 
   const passageText = String(part7.contentJson.passageText ?? "");
   const part7Classification = classifyPassageWords(passageText, classificationContext(ctx));
@@ -170,7 +191,7 @@ function assertGeneratedLessonAgainstIndependentOracles(draft: GeneratedLessonDr
 }
 
 function allowedCmudictNameTokenAllowed(targetPattern: string, word: string) {
-  return targetPattern === "a_e" && allowedCmudictNameTokenPseudowords.has(word);
+  return allowedCmudictNameTokenPseudowords.get(targetPattern)?.has(word) ?? false;
 }
 
 function allowedCmudictVariant(targetPattern: string, word: string, variant: string) {
