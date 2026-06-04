@@ -72,6 +72,7 @@ export function classifyPassageWords(text: string, context: PassageClassificatio
 }
 
 function classifyWord(word: string, context: PassageClassificationContext, heartSet: Set<string>, vocabularySet: Set<string>): WordAuditEntry {
+  if (word.includes("_")) return { word, category: "unclassified" };
   if (heartSet.has(word)) return { word, category: "heart" };
   const targetPattern = context.targetPatternCodes.find((code) => wordMatchesPattern(word, code));
   if (targetPattern) return { word, category: "target", matchedPattern: targetPattern };

@@ -49,7 +49,9 @@ function buildContextFromRealSeed(targetCode: string): LessonGeneratorContext {
   const heartWordsPreviewedThisLesson = content.heartWordsPreviewedThisLesson;
   const heartWordsAssumedKnown = content.heartWordsAssumedKnown;
   const vocabularyWords = content.vocabulary;
-  const selectedPassageAudit = auditPassage(content.mockPassageText, {
+  const selectedPassageText = isPhase4 ? content.fullAuditPassageText : content.mockPassageText;
+  assert(selectedPassageText, `${targetCode} needs fullAuditPassageText for Phase 4+ lesson generation.`);
+  const selectedPassageAudit = auditPassage(selectedPassageText, {
     phasePosition,
     dailyTarget,
     heartWords: [...heartWordsPreviewedThisLesson, ...heartWordsAssumedKnown],
@@ -70,7 +72,7 @@ function buildContextFromRealSeed(targetCode: string): LessonGeneratorContext {
     vocabularyWords,
     selectedPassage: {
       id: `passage-${targetCode}`,
-      text: content.mockPassageText,
+      text: selectedPassageText,
       contentAuditJson: selectedPassageAudit,
       decodabilityScore: selectedPassageAudit.decodabilityScore,
     },

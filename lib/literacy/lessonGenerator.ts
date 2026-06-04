@@ -72,11 +72,18 @@ export async function buildLessonGeneratorContext(phasePositionId: string, daily
   if (!phasePosition) throw new Error(`PhasePosition not found: ${phasePositionId}`);
   if (!dailyTarget) throw new Error(`DailyTarget not found: ${dailyTargetId}`);
   if (dailyTarget.phasePositionId !== phasePosition.id) throw new Error("DailyTarget does not belong to phase position.");
-  const selectedPassage = await selectApprovedPassageForLesson(phasePosition.id, dailyTarget.code);
-  if (!selectedPassage) {
+  const content = phase3EntryLessonContentFor(dailyTarget.code);
+  const dbSelectedPassage = await selectApprovedPassageForLesson(phasePosition.id, dailyTarget.code);
+  if (!dbSelectedPassage) {
     throw new Error(`No approved passage found for ${phasePosition.label} / ${dailyTarget.code}. Generate and approve a passage before lesson generation.`);
   }
-  const content = phase3EntryLessonContentFor(dailyTarget.code);
+  if (phasePosition.phaseNumber >= 4 && !content.fullAuditPassageText) {
+    throw new Error(`Phase 4+ lesson content for ${dailyTarget.code} requires fullAuditPassageText.`);
+  }
+  const selectedPassage = {
+    ...dbSelectedPassage,
+    text: phasePosition.phaseNumber >= 4 ? content.fullAuditPassageText! : dbSelectedPassage.text,
+  };
   const targetPatterns = targetPatternsForDailyTarget(dailyTarget);
   const pseudowordPatterns = pseudowordPatternsForDailyTarget(dailyTarget, targetPatterns);
   const heartWordsPreviewedThisLesson = content.heartWordsPreviewedThisLesson;

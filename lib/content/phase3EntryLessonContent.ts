@@ -13,10 +13,12 @@ export type LessonContentByDailyTarget = {
   vocabulary: string[];
   mockPassageText: string;
   mockPassageTitle: string;
+  fullAuditPassageText?: string;
+  fullAuditPassageTitle?: string;
 };
 
 const sharedHeartWordsPreviewedThisLesson = ["said", "was", "they"];
-const sharedHeartWordsAssumedKnown = ["I", "a", "the", "to", "we", "he", "she", "me", "be", "of", "it", "and", "had", "has", "is", "can", "will", "all", "see", "day"];
+const sharedHeartWordsAssumedKnown = ["I", "a", "the", "to"];
 
 export const LESSON_CONTENT_BY_DAILY_TARGET: Record<string, LessonContentByDailyTarget> = {
   a_e: {
@@ -283,7 +285,7 @@ export const LESSON_CONTENT_BY_DAILY_TARGET: Record<string, LessonContentByDaily
       "Gail will play in the rain.",
       "Jay had to wait all day.",
       "May and Gail paint a sail.",
-      "\"I see the gray sail,\" said Jay.",
+      "\"The gray sail is big,\" said Jay.",
       "They stay and play.",
       "The rain is not bad.",
     ],
@@ -300,6 +302,8 @@ export const LESSON_CONTENT_BY_DAILY_TARGET: Record<string, LessonContentByDaily
     vocabulary: ["paint", "sail"],
     mockPassageText: `Gail will play in the rain. The rain fell all day. Jay had to wait. "I see the rain," said Gail. Jay and May ran to play. They paint a sail. The sail is gray. We help Gail paint. Gail had to stay. It was a fun day.`,
     mockPassageTitle: "Gail's Rainy Day",
+    fullAuditPassageText: `Gail and Jay like to play. The rain fell all day. "Stay in," said Gail. Jay had to wait a long time. May came with paint and a big pail. "Make a sail," said May. Gail made a gray sail. Jay set a snail on his sail. May made a jay with a red wing. Rain hit the pane: drip, drip, drip. "The haze is gray," said Jay. At last, the sun came up. They ran to the wet grass. The sail slid away. "That was a fun day," said May.`,
+    fullAuditPassageTitle: "Gail's Rainy Day",
   },
   team_ee_ea: {
     demoMode: "minimal_pairs",
@@ -312,15 +316,15 @@ export const LESSON_CONTENT_BY_DAILY_TARGET: Record<string, LessonContentByDaily
     contrastiveLine2: ["bed", "bead", "men", "mean", "set", "seat", "ten", "teen"],
     contrastiveLine3: ["meat", "deep", "sea", "lake", "hand", "sweet", "desk"],
     sentences: [
-      "We see a seal at the sea.",
+      "Jean and Dean see a seal at the sea.",
       "The seal can leap.",
       "Jean will feed the seal.",
-      "\"I see green weeds,\" said Jean.",
-      "The seal sleeps in the deep sea.",
+      "\"I see a green reef,\" said Jean.",
+      "The seal can sleep in the deep sea.",
       "It was a sweet week.",
     ],
     dictatedWords: ["see", "feet", "green", "deep", "sea", "team"],
-    dictatedSentences: ["We see a seal at the sea.", "The seal can leap."],
+    dictatedSentences: ["Dean can see a seal at the sea.", "The seal can leap."],
     comprehensionQuestions: [
       { question: "Why did Jean feed the seal?", questionType: "inference" },
       { question: "Where did they see the seal?", questionType: "literal" },
@@ -329,9 +333,11 @@ export const LESSON_CONTENT_BY_DAILY_TARGET: Record<string, LessonContentByDaily
     ],
     heartWordsPreviewedThisLesson: sharedHeartWordsPreviewedThisLesson,
     heartWordsAssumedKnown: sharedHeartWordsAssumedKnown,
-    vocabulary: ["seal", "weeds"],
+    vocabulary: ["seal", "reef"],
     mockPassageText: `We see a seal at the sea. The seal can leap. The seal ate a treat. "I see green weeds," said Jean. They feed the seal meat. The seal sleeps in the deep. We keep the seal neat. He gave the seal a bean. It was a sweet week.`,
     mockPassageTitle: "The Seal",
+    fullAuditPassageText: `Jean and Dean went to the sea. They had a plan to see a seal. The sea was deep and green. "I see a green reef," said Jean. A seal swam up to eat. Jean gave the seal a treat. The seal ate meat in a tin pan. "That is a neat seal," said Dean. It can leap and dive. It made a big wave. Jean got wet feet. They sat in the sand and had a snack. "I can keep him fed," said Jean. "It must sleep in the deep sea," said Dean. The seal swam off at six. "See him speed," said Jean. The trip to the beach was sweet.`,
+    fullAuditPassageTitle: "The Seal",
   },
   team_oa: {
     demoMode: "minimal_pairs",
@@ -344,13 +350,13 @@ export const LESSON_CONTENT_BY_DAILY_TARGET: Record<string, LessonContentByDaily
     contrastiveLine3: ["oats", "toast", "home", "lake", "hand", "load", "desk"],
     sentences: [
       "Joan has a goat.",
-      "The goat ate the oats.",
+      "The goat ate the oat mash.",
       "The goat ran on the road.",
-      "\"I see a goat,\" said Joan.",
+      "\"That goat is fast,\" said Joan.",
       "The goat sat on a boat.",
-      "It was a fine day.",
+      "It was a fine time.",
     ],
-    dictatedWords: ["boat", "goat", "road", "coat", "oats", "load"],
+    dictatedWords: ["boat", "goat", "road", "coat", "soap", "load"],
     dictatedSentences: ["Joan has a goat.", "The goat ran on the road."],
     comprehensionQuestions: [
       { question: "Why did Joan look at the goat?", questionType: "inference" },
@@ -363,6 +369,8 @@ export const LESSON_CONTENT_BY_DAILY_TARGET: Record<string, LessonContentByDaily
     vocabulary: ["goat", "oats"],
     mockPassageText: `Joan has a goat. The goat ate the oats. The goat ran on the road. The goat had a coat. "I see a goat," said Joan. They gave the goat soap. We made goat toast. The goat sat on a boat. It was a fine day.`,
     mockPassageTitle: "Joan's Goat",
+    fullAuditPassageText: `Joan has a goat at home. The goat ate oat mash. It ate much oat mash. Then the goat ran up the road. "Stop that," said Joan. The goat got in the mud. Joan got soap and a hose. Joan gave the goat a bath. The goat did not like the foam. It hid in its pen. Joan made him toast with jam. The goat had on a red coat. Joan and the goat rode in a boat on the lake. A toad sat on a log and gave a croak. The boat did float past the dock. "I like this goat," said Joan. It was a fine time at home.`,
+    fullAuditPassageTitle: "Joan's Goat",
   },
   team_igh: {
     demoMode: "examples_only",
@@ -373,15 +381,15 @@ export const LESSON_CONTENT_BY_DAILY_TARGET: Record<string, LessonContentByDaily
       "The knight had a small light.",
       "The night was bright.",
       "The knight will fight.",
-      "\"I see the light,\" said Dwight.",
+      "\"The light is bright,\" said Dwight.",
       "They might win.",
-      "We held the light up high.",
+      "Dwight held the light up high.",
     ],
     dictatedWords: ["light", "night", "bright", "fight", "might", "sight"],
     dictatedSentences: ["The knight had a small light.", "The night was bright."],
     comprehensionQuestions: [
       { question: "Why did the knight need the light?", questionType: "inference" },
-      { question: "What did Dwight see?", questionType: "literal" },
+      { question: "What did the knight take up the hill?", questionType: "literal" },
       { question: "Tell me what happened in the bright night.", questionType: "retell" },
       { question: "What helps you see at night?", questionType: "personal_connection" },
     ],
@@ -390,6 +398,8 @@ export const LESSON_CONTENT_BY_DAILY_TARGET: Record<string, LessonContentByDaily
     vocabulary: ["knight", "light"],
     mockPassageText: `The knight had a small light. The night was bright. The knight will fight. "I see the light," said Dwight. They might win. We held the light up high. A knight ran in the night. The light is not tight. It was a fine sight.`,
     mockPassageTitle: "The Knight",
+    fullAuditPassageText: `Dwight is a knight. The knight had a small light. Dwight went up a high hill at night. The night was not bright. "I might slip on the hill," said Dwight. The wind made his light dim. The knight held the light up high. A bat came at him. The knight did not fight the bat. Dwight hid in a cave. His light lit up the cave. Dwight had figs as a snack. At last, the sun came up. The knight went home in bright sunlight. "It is a fine sight," said Dwight. Dwight slept tight all night.`,
+    fullAuditPassageTitle: "The Knight",
   },
 };
 
