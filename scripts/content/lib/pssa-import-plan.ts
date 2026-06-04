@@ -24,26 +24,97 @@ export const SOURCE_VERSION_YEAR = 2014;
 export const AUDIT_CONTRACT_VERSION = "pssa-db3-import-v1";
 export const SOURCE_SCAN_VERSION = "pssa-source-scan-v1";
 
-export const FILES = {
-  pilot: "exemplars/pssa_grade3_pilot/pilot_backend.json",
-  ebsr: "exemplars/pssa_grade3_ebsr/grade3_ebsr_backend.json",
-  tei: "exemplars/pssa_grade3_tei/grade3_tei_backend.json",
-  matchingGridDragDrop: "exemplars/pssa_grade3_matching_grid_drag_drop/grade3_matching_grid_drag_drop_backend.json",
-  conventions: "exemplars/pssa_grade3_conventions/grade3_conventions_backend.json",
-  shortAnswer: "exemplars/pssa_grade3_short_answer/grade3_short_answer_backend.json",
-  deprecation: "exemplars/pssa_grade3_conventions/pssa_conventions_grade3_deprecation_report.csv",
-} as const;
+type PssaGradeImportFiles = {
+  pilot: string;
+  ebsr: string;
+  tei: string;
+  matchingGridDragDrop: string;
+  conventions: string;
+  shortAnswer: string;
+  deprecation: string;
+};
+
+export type PssaGradeImportManifest = {
+  gradeLevel: number;
+  files: PssaGradeImportFiles;
+  expectedCounts: { passages: number; activeItems: number; deprecatedItems: number; supersessions: number; batches: number };
+  batchIds: {
+    readingMcq: string;
+    ebsr: string;
+    multiSelect: string;
+    hotText: string;
+    matchingGrid: string;
+    dragDrop: string;
+    conventions: string;
+    shortAnswerPool: string;
+  };
+  conventionItemIdPrefix: string;
+  audits: {
+    ebsr: (items: any[]) => any;
+    tei: (multiSelect: any[], hotText: any[]) => any;
+    matchingGridDragDrop: (mg: any[], dd: any[]) => any;
+    conventions: (items: any[]) => any;
+    shortAnswer: (items: any[]) => any;
+  };
+};
+
+export const GRADE3_IMPORT_MANIFEST: PssaGradeImportManifest = {
+  gradeLevel: 3,
+  files: {
+    pilot: "exemplars/pssa_grade3_pilot/pilot_backend.json",
+    ebsr: "exemplars/pssa_grade3_ebsr/grade3_ebsr_backend.json",
+    tei: "exemplars/pssa_grade3_tei/grade3_tei_backend.json",
+    matchingGridDragDrop: "exemplars/pssa_grade3_matching_grid_drag_drop/grade3_matching_grid_drag_drop_backend.json",
+    conventions: "exemplars/pssa_grade3_conventions/grade3_conventions_backend.json",
+    shortAnswer: "exemplars/pssa_grade3_short_answer/grade3_short_answer_backend.json",
+    deprecation: "exemplars/pssa_grade3_conventions/pssa_conventions_grade3_deprecation_report.csv",
+  },
+  expectedCounts: { passages: 5, activeItems: 67, deprecatedItems: 12, supersessions: 12, batches: 8 },
+  batchIds: {
+    readingMcq: "reading_mcq_grade3",
+    ebsr: "ebsr_grade3",
+    multiSelect: "multi_select_grade3",
+    hotText: "hot_text_grade3",
+    matchingGrid: "matching_grid_grade3",
+    dragDrop: "drag_drop_grade3",
+    conventions: "conventions_grade3",
+    shortAnswerPool: "short_answer_grade3_pool",
+  },
+  conventionItemIdPrefix: "pssa_conv_",
+  audits: {
+    ebsr: auditGrade3EbsrItems,
+    tei: auditGrade3TeiItems,
+    matchingGridDragDrop: auditGrade3MatchingGridDragDropItems,
+    conventions: auditGrade3ConventionsItems,
+    shortAnswer: auditGrade3ShortAnswerItems,
+  },
+};
+
+export const PSSA_GRADE_IMPORT_MANIFESTS: Record<number, PssaGradeImportManifest> = {
+  3: GRADE3_IMPORT_MANIFEST,
+};
+
+export const FILES = GRADE3_IMPORT_MANIFEST.files;
 
 export const EXPECTED_BATCHES = [
-  { batchId: "reading_mcq_grade3", streamType: "MCQ" },
-  { batchId: "ebsr_grade3", streamType: "EBSR" },
-  { batchId: "multi_select_grade3", streamType: "MULTI_SELECT" },
-  { batchId: "hot_text_grade3", streamType: "HOT_TEXT" },
-  { batchId: "matching_grid_grade3", streamType: "MATCHING_GRID" },
-  { batchId: "drag_drop_grade3", streamType: "DRAG_DROP" },
-  { batchId: "conventions_grade3", streamType: "CONVENTIONS" },
-  { batchId: "short_answer_grade3_pool", streamType: "SHORT_ANSWER" },
+  { batchId: GRADE3_IMPORT_MANIFEST.batchIds.readingMcq, streamType: "MCQ" },
+  { batchId: GRADE3_IMPORT_MANIFEST.batchIds.ebsr, streamType: "EBSR" },
+  { batchId: GRADE3_IMPORT_MANIFEST.batchIds.multiSelect, streamType: "MULTI_SELECT" },
+  { batchId: GRADE3_IMPORT_MANIFEST.batchIds.hotText, streamType: "HOT_TEXT" },
+  { batchId: GRADE3_IMPORT_MANIFEST.batchIds.matchingGrid, streamType: "MATCHING_GRID" },
+  { batchId: GRADE3_IMPORT_MANIFEST.batchIds.dragDrop, streamType: "DRAG_DROP" },
+  { batchId: GRADE3_IMPORT_MANIFEST.batchIds.conventions, streamType: "CONVENTIONS" },
+  { batchId: GRADE3_IMPORT_MANIFEST.batchIds.shortAnswerPool, streamType: "SHORT_ANSWER" },
 ] as const;
+
+export function lookupPssaGradeImportManifest(gradeLevel: number): PssaGradeImportManifest {
+  const manifest = PSSA_GRADE_IMPORT_MANIFESTS[gradeLevel];
+  if (!manifest) throw new Error(`No PSSA import manifest registered for grade ${gradeLevel}.`);
+  if (manifest.gradeLevel !== gradeLevel) throw new Error(`PSSA import manifest registry mismatch for grade ${gradeLevel}.`);
+  const batchIds = Object.values(manifest.batchIds);
+  if (new Set(batchIds).size !== batchIds.length) throw new Error(`PSSA import manifest has duplicate batch ids for grade ${gradeLevel}.`);
+  return manifest;
+}
 
 export type GateStatus = "PASS" | "FAIL";
 export type ImportStatus = "eligible" | "blocked";
@@ -136,12 +207,14 @@ export type WouldImportPassage = {
 };
 
 export type ImportPlan = {
+  gradeLevel: number;
   passages: WouldImportPassage[];
   activeItems: WouldImportItem[];
   deprecatedItems: WouldImportItem[];
   supersessions: Array<{ oldItemId: string; newItemId: string; reason: string }>;
   batches: BatchRow[];
   manifest: ManifestRow[];
+  manifestConfig: PssaGradeImportManifest;
   gateTallies: Map<string, { pass: number; fail: number }>;
   sourceScanFailures: number;
   hashStable: boolean;
@@ -207,8 +280,8 @@ function loadEcCatalog() {
   return catalog;
 }
 
-function loadDeprecationRows() {
-  const rows = parseCsv(fs.readFileSync(FILES.deprecation, "utf8"));
+function loadDeprecationRows(manifest: PssaGradeImportManifest) {
+  const rows = parseCsv(fs.readFileSync(manifest.files.deprecation, "utf8"));
   const header = rows[0];
   return rows.slice(1).map((row) => Object.fromEntries(header.map((column, index) => [column, row[index]])));
 }
@@ -256,17 +329,17 @@ function passageIdsFor(item: any) {
   return Array.from(new Set(ids));
 }
 
-function batchIdFor(item: any, deprecated = false) {
+function batchIdFor(item: any, manifest: PssaGradeImportManifest, deprecated = false) {
   if (deprecated) return "";
   switch (interactionTypeFor(item)) {
-    case "EBSR": return "ebsr_grade3";
-    case "MULTI_SELECT": return "multi_select_grade3";
-    case "HOT_TEXT": return item.itemId?.startsWith("pssa_conv_") ? "conventions_grade3" : "hot_text_grade3";
-    case "MATCHING_GRID": return "matching_grid_grade3";
-    case "DRAG_DROP": return item.itemId?.startsWith("pssa_conv_") ? "conventions_grade3" : "drag_drop_grade3";
-    case "INLINE_DROPDOWN": return "conventions_grade3";
-    case "SHORT_ANSWER": return "short_answer_grade3_pool";
-    case "MCQ": return item.passageId ? "reading_mcq_grade3" : "conventions_grade3";
+    case "EBSR": return manifest.batchIds.ebsr;
+    case "MULTI_SELECT": return manifest.batchIds.multiSelect;
+    case "HOT_TEXT": return item.itemId?.startsWith(manifest.conventionItemIdPrefix) ? manifest.batchIds.conventions : manifest.batchIds.hotText;
+    case "MATCHING_GRID": return manifest.batchIds.matchingGrid;
+    case "DRAG_DROP": return item.itemId?.startsWith(manifest.conventionItemIdPrefix) ? manifest.batchIds.conventions : manifest.batchIds.dragDrop;
+    case "INLINE_DROPDOWN": return manifest.batchIds.conventions;
+    case "SHORT_ANSWER": return manifest.batchIds.shortAnswerPool;
+    case "MCQ": return item.passageId ? manifest.batchIds.readingMcq : manifest.batchIds.conventions;
     default: return "";
   }
 }
@@ -312,14 +385,14 @@ function hasPreviewLeak(preview: unknown) {
   return /correctIndex|correctIndices|correctTokenIds|correctAssignments|correctOption|data-correct|data-c|data-answer|answerKey|rationale|skillMatchResult|sourceComplianceResult|auditMetadata|expectedAnswerCore|acceptableTextSupport|rubric|scoreBandExamples/i.test(JSON.stringify(preview));
 }
 
-function ecResolves(item: any, crosswalkKeys: Set<string>) {
-  return crosswalkKeys.has([item.subject ?? "ELA", String(item.gradeLevel ?? 3), item.eligibleContent, String(SOURCE_VERSION_YEAR)].join("|"));
+function ecResolves(item: any, crosswalkKeys: Set<string>, gradeLevel: number) {
+  return crosswalkKeys.has([item.subject ?? "ELA", String(item.gradeLevel ?? gradeLevel), item.eligibleContent, String(SOURCE_VERSION_YEAR)].join("|"));
 }
 
-function buildWouldItem(item: any, sourceFile: string, gates: Record<string, GateStatus>, crosswalkKeys: Set<string>, deprecated = false, deprecation?: any): WouldImportItem {
+function buildWouldItem(item: any, sourceFile: string, gates: Record<string, GateStatus>, crosswalkKeys: Set<string>, manifest: PssaGradeImportManifest, deprecated = false, deprecation?: any): WouldImportItem {
   const id = itemId(item);
   const interactionType = interactionTypeFor(item);
-  const resolved = ecResolves(item, crosswalkKeys);
+  const resolved = ecResolves(item, crosswalkKeys, manifest.gradeLevel);
   const preview = studentPreview(item);
   const reviewStatus = "PENDING" as const;
   const itemStatus = deprecated ? "deprecated_superseded" : "candidate";
@@ -367,7 +440,7 @@ function buildWouldItem(item: any, sourceFile: string, gates: Record<string, Gat
     needsLegalReview: Boolean(item.needsLegalReview ?? false),
     interactionType,
     interactionSubtype: item.interactionSubtype ?? "",
-    gradeLevel: item.gradeLevel ?? 3,
+    gradeLevel: item.gradeLevel ?? manifest.gradeLevel,
     subject: item.subject ?? "ELA",
     eligibleContent: item.eligibleContent ?? "",
     ecResolved: resolved,
@@ -377,7 +450,7 @@ function buildWouldItem(item: any, sourceFile: string, gates: Record<string, Gat
     studentReadyBlockedReason,
     approvalEligible: false,
     alignmentStatus: resolved ? "ALIGNED" : "NEEDS_CROSSWALK",
-    batchId: batchIdFor(item, deprecated),
+    batchId: batchIdFor(item, manifest, deprecated),
     responseSpecJson: content.responseSpecJson,
     correctResponseJson: content.correctResponseJson,
     scoringJson: content.scoringJson,
@@ -418,30 +491,31 @@ function finalFromRows(rows: any[], field = "finalResult"): Record<string, GateS
   return result;
 }
 
-function buildMcqPositionBatch(items: any[]): BatchRow {
+function buildMcqPositionBatch(items: any[], manifest: PssaGradeImportManifest): BatchRow {
   const counts = [0, 0, 0, 0];
   for (const item of items) if (typeof item.correctIndex === "number") counts[item.correctIndex] += 1;
   const maxShare = Math.max(...counts) / Math.max(items.length, 1);
   return {
-    batchId: "reading_mcq_grade3",
+    batchId: manifest.batchIds.readingMcq,
     streamType: "MCQ",
-    gradeLevel: 3,
+    gradeLevel: manifest.gradeLevel,
     batchGate: `PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION A:${counts[0]} B:${counts[1]} C:${counts[2]} D:${counts[3]}`,
     batchResult: maxShare <= 0.4 ? "PASS" : "FAIL",
     itemCount: items.length,
   };
 }
 
-export function buildPlan(): ImportPlan {
+export function buildPlan(gradeLevel: number): ImportPlan {
+  const manifestConfig = lookupPssaGradeImportManifest(gradeLevel);
   const crosswalkKeys = loadCrosswalkKeys();
   const ecCatalog = loadEcCatalog();
-  const pilot = readJson<any>(FILES.pilot);
-  const ebsr = readJson<any>(FILES.ebsr);
-  const tei = readJson<any>(FILES.tei);
-  const mgdd = readJson<any>(FILES.matchingGridDragDrop);
-  const conventions = readJson<any>(FILES.conventions);
-  const shortAnswer = readJson<any>(FILES.shortAnswer);
-  const deprecationRows = loadDeprecationRows();
+  const pilot = readJson<any>(manifestConfig.files.pilot);
+  const ebsr = readJson<any>(manifestConfig.files.ebsr);
+  const tei = readJson<any>(manifestConfig.files.tei);
+  const mgdd = readJson<any>(manifestConfig.files.matchingGridDragDrop);
+  const conventions = readJson<any>(manifestConfig.files.conventions);
+  const shortAnswer = readJson<any>(manifestConfig.files.shortAnswer);
+  const deprecationRows = loadDeprecationRows(manifestConfig);
   const deprecationByOld = new Map(deprecationRows.map((row) => [row.oldItemId, row]));
 
   const passages = pilot.passages as PssaPassageAuditInput[];
@@ -457,44 +531,44 @@ export function buildPlan(): ImportPlan {
   const mcqLengthFailed = new Set(mcqLength.filter((row) => row.scope === "item" && row.result === "FAIL").map((row) => row.itemId));
   const mcqAbsolute = buildMcqAbsoluteLanguageDistractorReport(activeReadingMcq as McqAuditInput[]);
   const mcqAbsoluteFailed = new Set(mcqAbsolute.filter((row) => row.itemId !== "batch" && row.result === "FAIL").map((row) => row.itemId));
-  const mcqPositionBatch = buildMcqPositionBatch(activeReadingMcq);
+  const mcqPositionBatch = buildMcqPositionBatch(activeReadingMcq, manifestConfig);
 
-  const ebsrAudit = auditGrade3EbsrItems(ebsr.items as any);
-  const teiAudit = auditGrade3TeiItems(tei.multiSelectItems as any, tei.hotTextItems as any);
-  const mgddAudit = auditGrade3MatchingGridDragDropItems(mgdd.matchingGridItems as any, mgdd.dragDropItems as any);
-  const conventionsAudit = auditGrade3ConventionsItems(conventions.items as any);
-  const shortAnswerAudit = auditGrade3ShortAnswerItems(shortAnswer.items as any);
+  const ebsrAudit = manifestConfig.audits.ebsr(ebsr.items as any);
+  const teiAudit = manifestConfig.audits.tei(tei.multiSelectItems as any, tei.hotTextItems as any);
+  const mgddAudit = manifestConfig.audits.matchingGridDragDrop(mgdd.matchingGridItems as any, mgdd.dragDropItems as any);
+  const conventionsAudit = manifestConfig.audits.conventions(conventions.items as any);
+  const shortAnswerAudit = manifestConfig.audits.shortAnswer(shortAnswer.items as any);
 
   const gateTallies = new Map<string, { pass: number; fail: number }>();
   const activeItems: WouldImportItem[] = [];
   const deprecatedItems: WouldImportItem[] = [];
 
   for (const item of activeReadingMcq) {
-    activeItems.push(buildWouldItem(item, FILES.pilot, {
+    activeItems.push(buildWouldItem(item, manifestConfig.files.pilot, {
       PSSA_MCQ_PASSAGE_SPECIFICITY: mcqSpecificityFailed.has(itemId(item)) ? "FAIL" : "PASS",
       PSSA_ITEM_EC_SKILL_MATCH: mcqSkillFailed.has(itemId(item)) ? "FAIL" : "PASS",
       PSSA_MCQ_CORRECT_IS_LONGEST: mcqLengthFailed.has(itemId(item)) ? "FAIL" : "PASS",
       PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR: mcqAbsoluteFailed.has(itemId(item)) ? "FAIL" : "PASS",
       PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION: mcqPositionBatch.batchResult,
-    }, crosswalkKeys));
+    }, crosswalkKeys, manifestConfig));
   }
 
-  for (const item of ebsr.items) activeItems.push(buildWouldItem(item, FILES.ebsr, { PSSA_EBSR_FAMILY_AND_BATCH: finalFromRows(ebsrAudit.rows, "finalEbsrResult")[item.itemId] ?? "FAIL" }, crosswalkKeys));
-  for (const item of tei.multiSelectItems) activeItems.push(buildWouldItem(item, FILES.tei, { PSSA_MULTI_SELECT_FAMILY_AND_BATCH: finalFromRows(teiAudit.multiSelectRows)[item.itemId] ?? "FAIL" }, crosswalkKeys));
-  for (const item of tei.hotTextItems) activeItems.push(buildWouldItem(item, FILES.tei, { PSSA_HOT_TEXT_FAMILY_AND_BATCH: finalFromRows(teiAudit.hotTextRows)[item.itemId] ?? "FAIL" }, crosswalkKeys));
-  for (const item of mgdd.matchingGridItems) activeItems.push(buildWouldItem(item, FILES.matchingGridDragDrop, { PSSA_MATCHING_GRID_FAMILY_AND_BATCH: finalFromRows(mgddAudit.matchingGridRows)[item.itemId] ?? "FAIL" }, crosswalkKeys));
-  for (const item of mgdd.dragDropItems) activeItems.push(buildWouldItem(item, FILES.matchingGridDragDrop, { PSSA_DRAG_DROP_FAMILY_AND_BATCH: finalFromRows(mgddAudit.dragDropRows)[item.itemId] ?? "FAIL" }, crosswalkKeys));
-  for (const item of conventions.items) activeItems.push(buildWouldItem(item, FILES.conventions, { PSSA_CONVENTIONS_FAMILY_AND_BATCH: finalFromRows(conventionsAudit.rows)[item.itemId] ?? "FAIL" }, crosswalkKeys));
-  for (const item of shortAnswer.items) activeItems.push(buildWouldItem(item, FILES.shortAnswer, { PSSA_SHORT_ANSWER_FAMILY: finalFromRows(shortAnswerAudit.rows)[item.itemId] ?? "FAIL" }, crosswalkKeys));
+  for (const item of ebsr.items) activeItems.push(buildWouldItem(item, manifestConfig.files.ebsr, { PSSA_EBSR_FAMILY_AND_BATCH: finalFromRows(ebsrAudit.rows, "finalEbsrResult")[item.itemId] ?? "FAIL" }, crosswalkKeys, manifestConfig));
+  for (const item of tei.multiSelectItems) activeItems.push(buildWouldItem(item, manifestConfig.files.tei, { PSSA_MULTI_SELECT_FAMILY_AND_BATCH: finalFromRows(teiAudit.multiSelectRows)[item.itemId] ?? "FAIL" }, crosswalkKeys, manifestConfig));
+  for (const item of tei.hotTextItems) activeItems.push(buildWouldItem(item, manifestConfig.files.tei, { PSSA_HOT_TEXT_FAMILY_AND_BATCH: finalFromRows(teiAudit.hotTextRows)[item.itemId] ?? "FAIL" }, crosswalkKeys, manifestConfig));
+  for (const item of mgdd.matchingGridItems) activeItems.push(buildWouldItem(item, manifestConfig.files.matchingGridDragDrop, { PSSA_MATCHING_GRID_FAMILY_AND_BATCH: finalFromRows(mgddAudit.matchingGridRows)[item.itemId] ?? "FAIL" }, crosswalkKeys, manifestConfig));
+  for (const item of mgdd.dragDropItems) activeItems.push(buildWouldItem(item, manifestConfig.files.matchingGridDragDrop, { PSSA_DRAG_DROP_FAMILY_AND_BATCH: finalFromRows(mgddAudit.dragDropRows)[item.itemId] ?? "FAIL" }, crosswalkKeys, manifestConfig));
+  for (const item of conventions.items) activeItems.push(buildWouldItem(item, manifestConfig.files.conventions, { PSSA_CONVENTIONS_FAMILY_AND_BATCH: finalFromRows(conventionsAudit.rows)[item.itemId] ?? "FAIL" }, crosswalkKeys, manifestConfig));
+  for (const item of shortAnswer.items) activeItems.push(buildWouldItem(item, manifestConfig.files.shortAnswer, { PSSA_SHORT_ANSWER_FAMILY: finalFromRows(shortAnswerAudit.rows)[item.itemId] ?? "FAIL" }, crosswalkKeys, manifestConfig));
 
   const activeIds = new Set(activeItems.map((item) => item.itemId));
   for (const item of deprecatedMcq) {
     const dep = deprecationByOld.get(itemId(item));
     const supersededIds = dep?.supersededByItemIds?.split("|").filter(Boolean) ?? [];
     const deprecationValid = dep && supersededIds.length > 0 && supersededIds.every((id: string) => activeIds.has(id));
-    deprecatedItems.push(buildWouldItem(item, FILES.pilot, {
+    deprecatedItems.push(buildWouldItem(item, manifestConfig.files.pilot, {
       PSSA_IMPORT_DEPRECATION_VALID: deprecationValid ? "PASS" : "FAIL",
-    }, crosswalkKeys, true, dep));
+    }, crosswalkKeys, manifestConfig, true, dep));
   }
 
   for (const item of [...activeItems, ...deprecatedItems]) addItemTallies(gateTallies, item);
@@ -504,27 +578,27 @@ export function buildPlan(): ImportPlan {
 
   const batches: BatchRow[] = [
     mcqPositionBatch,
-    { batchId: "ebsr_grade3", streamType: "EBSR", gradeLevel: 3, batchGate: "PSSA_EBSR_ANSWER_POSITION_DISTRIBUTION", batchResult: ebsrAudit.positionDistribution.ebsrPositionBiasResult, itemCount: ebsr.items.length },
-    ...teiAudit.shortcutRows.map((row: any) => ({ batchId: row.interactionType === "MULTI_SELECT" ? "multi_select_grade3" : "hot_text_grade3", streamType: row.interactionType, gradeLevel: 3, batchGate: "PSSA_TEI_SURFACE_SHORTCUT_DISTRIBUTION", batchResult: row.result, itemCount: row.itemCount })),
-    ...mgddAudit.shortcutRows.map((row: any) => ({ batchId: row.interactionType === "MATCHING_GRID" ? "matching_grid_grade3" : "drag_drop_grade3", streamType: row.interactionType, gradeLevel: 3, batchGate: "PSSA_MG_DD_SURFACE_SHORTCUT_DISTRIBUTION", batchResult: row.result, itemCount: row.itemCount })),
-    { batchId: "conventions_grade3", streamType: "CONVENTIONS", gradeLevel: 3, batchGate: "PSSA_CONVENTIONS_SURFACE_SHORTCUT_DISTRIBUTION", batchResult: conventionsAudit.shortcutRow.result, itemCount: conventions.items.length },
-    { batchId: "short_answer_grade3_pool", streamType: "SHORT_ANSWER", gradeLevel: 3, batchGate: "PSSA_SHORT_ANSWER_POOL_BLUEPRINT", batchResult: shortAnswer.blueprint?.result === "PASS" ? "PASS" : "FAIL", itemCount: shortAnswer.items.length },
+    { batchId: manifestConfig.batchIds.ebsr, streamType: "EBSR", gradeLevel: manifestConfig.gradeLevel, batchGate: "PSSA_EBSR_ANSWER_POSITION_DISTRIBUTION", batchResult: ebsrAudit.positionDistribution.ebsrPositionBiasResult, itemCount: ebsr.items.length },
+    ...teiAudit.shortcutRows.map((row: any) => ({ batchId: row.interactionType === "MULTI_SELECT" ? manifestConfig.batchIds.multiSelect : manifestConfig.batchIds.hotText, streamType: row.interactionType, gradeLevel: manifestConfig.gradeLevel, batchGate: "PSSA_TEI_SURFACE_SHORTCUT_DISTRIBUTION", batchResult: row.result, itemCount: row.itemCount })),
+    ...mgddAudit.shortcutRows.map((row: any) => ({ batchId: row.interactionType === "MATCHING_GRID" ? manifestConfig.batchIds.matchingGrid : manifestConfig.batchIds.dragDrop, streamType: row.interactionType, gradeLevel: manifestConfig.gradeLevel, batchGate: "PSSA_MG_DD_SURFACE_SHORTCUT_DISTRIBUTION", batchResult: row.result, itemCount: row.itemCount })),
+    { batchId: manifestConfig.batchIds.conventions, streamType: "CONVENTIONS", gradeLevel: manifestConfig.gradeLevel, batchGate: "PSSA_CONVENTIONS_SURFACE_SHORTCUT_DISTRIBUTION", batchResult: conventionsAudit.shortcutRow.result, itemCount: conventions.items.length },
+    { batchId: manifestConfig.batchIds.shortAnswerPool, streamType: "SHORT_ANSWER", gradeLevel: manifestConfig.gradeLevel, batchGate: "PSSA_SHORT_ANSWER_POOL_BLUEPRINT", batchResult: shortAnswer.blueprint?.result === "PASS" ? "PASS" : "FAIL", itemCount: shortAnswer.items.length },
   ];
 
   const manifest: ManifestRow[] = [
-    { sourceFile: FILES.pilot, recordType: "passage", count: pilot.passages.length, expectedCount: 5, match: pilot.passages.length === 5 },
-    { sourceFile: "all active item files", recordType: "item", count: activeItems.length, expectedCount: 67, match: activeItems.length === 67 },
-    { sourceFile: FILES.pilot, recordType: "deprecated", count: deprecatedItems.length, expectedCount: 12, match: deprecatedItems.length === 12 },
-    { sourceFile: FILES.deprecation, recordType: "supersession", count: deprecationRows.length, expectedCount: 12, match: deprecationRows.length === 12 },
-    { sourceFile: "derived import batches", recordType: "batch", count: batches.length, expectedCount: 8, match: batches.length === 8 },
+    { sourceFile: manifestConfig.files.pilot, recordType: "passage", count: pilot.passages.length, expectedCount: manifestConfig.expectedCounts.passages, match: pilot.passages.length === manifestConfig.expectedCounts.passages },
+    { sourceFile: "all active item files", recordType: "item", count: activeItems.length, expectedCount: manifestConfig.expectedCounts.activeItems, match: activeItems.length === manifestConfig.expectedCounts.activeItems },
+    { sourceFile: manifestConfig.files.pilot, recordType: "deprecated", count: deprecatedItems.length, expectedCount: manifestConfig.expectedCounts.deprecatedItems, match: deprecatedItems.length === manifestConfig.expectedCounts.deprecatedItems },
+    { sourceFile: manifestConfig.files.deprecation, recordType: "supersession", count: deprecationRows.length, expectedCount: manifestConfig.expectedCounts.supersessions, match: deprecationRows.length === manifestConfig.expectedCounts.supersessions },
+    { sourceFile: "derived import batches", recordType: "batch", count: batches.length, expectedCount: manifestConfig.expectedCounts.batches, match: batches.length === manifestConfig.expectedCounts.batches },
   ];
   if (manifest.some((row) => !row.match)) tallyGate(gateTallies, "PSSA_IMPORT_MANIFEST_VALID", "FAIL");
 
   const passageImports = pilot.passages.map((passage: any) => ({
     passageId: passage.id,
-    sourceFile: FILES.pilot,
+    sourceFile: manifestConfig.files.pilot,
     title: passage.title,
-    gradeLevel: passage.gradeLevel ?? 3,
+    gradeLevel: passage.gradeLevel ?? manifestConfig.gradeLevel,
     subject: passage.subject ?? "ELA",
     passageType: passage.passageType ?? "unknown",
     text: passage.text,
@@ -540,13 +614,13 @@ export function buildPlan(): ImportPlan {
     itemStatus: "candidate" as const,
     studentReadyBlockedReason: "PENDING_REVIEW" as const,
     provenanceJson: {
-      sourceFile: FILES.pilot,
+      sourceFile: manifestConfig.files.pilot,
       sourcePassageId: passage.id,
       importedBy: "pssa-db4-writer",
     },
   }));
 
-  const plan = { passages: passageImports, activeItems, deprecatedItems, supersessions: deprecationRows.map((row) => ({ oldItemId: row.oldItemId, newItemId: row.supersededByItemIds, reason: row.deprecatedReason })), batches, manifest, gateTallies, sourceScanFailures: 0, hashStable: true };
+  const plan = { gradeLevel: manifestConfig.gradeLevel, passages: passageImports, activeItems, deprecatedItems, supersessions: deprecationRows.map((row) => ({ oldItemId: row.oldItemId, newItemId: row.supersededByItemIds, reason: row.deprecatedReason })), batches, manifest, manifestConfig, gateTallies, sourceScanFailures: 0, hashStable: true };
   plan.sourceScanFailures = [
     ...ebsrAudit.sourceMatches,
     ...teiAudit.sourceMatches,
