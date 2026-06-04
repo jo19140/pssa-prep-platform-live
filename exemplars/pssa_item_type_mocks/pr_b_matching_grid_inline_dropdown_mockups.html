@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PR B mockups — matching grid + inline dropdown (mock-only, toy content)</title>
+<style>
+  :root { --slate-950:#0f172a; --slate-800:#1e293b; --slate-700:#334155; --slate-500:#64748b; --slate-300:#cbd5e1; --slate-200:#e2e8f0; --slate-100:#f1f5f9; --slate-50:#f8fafc; --emerald-700:#047857; --emerald-100:#d1fae5; --cyan-900:#164e63; --cyan-50:#ecfeff; --amber-900:#78350f; --amber-50:#fffbeb; }
+  * { box-sizing:border-box; }
+  body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif; margin:0; background:var(--slate-100); color:var(--slate-950); line-height:1.6; }
+  .page { max-width:880px; margin:0 auto; padding:24px 16px 64px; }
+  .banner { background:var(--amber-50); border:1px solid #fcd34d; color:var(--amber-900); border-radius:12px; padding:10px 14px; font-size:13px; font-weight:700; margin-bottom:20px; }
+  h1 { font-size:22px; font-weight:800; margin:8px 0 4px; }
+  .sub { color:var(--slate-500); font-size:14px; margin-bottom:24px; }
+  .card { background:#fff; border:1px solid var(--slate-200); border-radius:16px; padding:22px; margin-bottom:28px; box-shadow:0 1px 2px rgba(15,23,42,.05); }
+  .typechip { display:inline-block; font-size:11px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--emerald-700); margin-bottom:6px; }
+  .stem { font-size:17px; font-weight:800; margin:0 0 4px; }
+  .instr { font-size:13px; font-weight:700; color:var(--slate-700); background:var(--cyan-50); border:1px solid #a5f3fc; color:var(--cyan-900); border-radius:10px; padding:8px 12px; margin:10px 0 16px; display:inline-block; }
+  .passageref { font-size:12px; color:var(--slate-500); margin-bottom:14px; }
+  table.grid { border-collapse:collapse; width:100%; font-size:14px; }
+  table.grid th { background:var(--slate-50); border:1px solid var(--slate-200); padding:10px 12px; font-size:13px; text-align:center; }
+  table.grid th.rowhead { text-align:left; width:46%; }
+  table.grid td { border:1px solid var(--slate-200); padding:10px 12px; }
+  table.grid td.rowlabel { font-weight:600; }
+  table.grid td.cell { text-align:center; cursor:pointer; }
+  table.grid td.cell:hover { background:var(--slate-50); }
+  .radio { display:inline-block; width:20px; height:20px; border:2px solid var(--slate-300); border-radius:50%; vertical-align:middle; position:relative; }
+  td.cell[aria-checked="true"] .radio { border-color:var(--slate-950); }
+  td.cell[aria-checked="true"] .radio::after { content:""; position:absolute; inset:3px; border-radius:50%; background:var(--slate-950); }
+  .rowstate { font-size:11px; font-weight:700; color:var(--slate-500); }
+  .progress { margin-top:14px; font-size:13px; font-weight:700; color:var(--slate-700); }
+  .progress .done { color:var(--emerald-700); }
+  .clearbtn { margin-left:10px; font-size:12px; font-weight:700; color:var(--slate-500); background:none; border:1px solid var(--slate-300); border-radius:8px; padding:2px 8px; cursor:pointer; }
+  .dd-sentence { font-size:16px; line-height:2.2; }
+  select.dd { font-size:15px; font-weight:700; padding:4px 8px; border:2px solid var(--slate-300); border-radius:10px; background:#fff; color:var(--slate-950); cursor:pointer; }
+  select.dd.filled { border-color:var(--slate-950); }
+  select.dd:focus { outline:3px solid #99f6e4; }
+  .submitrow { margin-top:18px; display:flex; align-items:center; gap:12px; }
+  button.submit { background:var(--slate-950); color:#fff; font-weight:800; font-size:14px; border:none; border-radius:12px; padding:10px 18px; cursor:pointer; }
+  button.submit:disabled { opacity:.45; cursor:not-allowed; }
+  .hintnote { font-size:12px; color:var(--slate-500); }
+  .annot { background:var(--slate-50); border:1px dashed var(--slate-300); border-radius:12px; padding:14px 16px; margin-top:18px; font-size:12.5px; }
+  .annot h4 { margin:0 0 6px; font-size:12px; text-transform:uppercase; letter-spacing:.06em; color:var(--slate-500); }
+  .annot code { background:var(--slate-200); border-radius:4px; padding:1px 5px; font-size:11.5px; }
+  .annot pre { background:var(--slate-950); color:#a7f3d0; border-radius:8px; padding:10px 12px; font-size:11.5px; overflow-x:auto; margin:8px 0 0; }
+  .a11y { margin-top:10px; font-size:12px; color:var(--slate-500); }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="banner">MOCK-ONLY ARTIFACT — original toy content per the #4j mock rule (no production passages or items). Field shapes mirror the real Grade 3 bank; answer keys deliberately ABSENT (per-type projected DTO, PR B plan §F2b).</div>
+  <h1>PR B-impl renderer mockups</h1>
+  <p class="sub">The two canonical renderers missing from the live player: MATCHING_GRID (new component) and INLINE_DROPDOWN (adapted from archive). Interactive — click cells and dropdowns to see selection states.</p>
+
+  <!-- =============== MATCHING GRID =============== -->
+  <div class="card">
+    <span class="typechip">Matching grid · one_per_row · 3 points</span>
+    <p class="stem">Complete the table to show how details from the passage support the main idea.</p>
+    <p class="passageref">Passage: “The Squeaky Gate” (toy)</p>
+    <span class="instr">Choose one column for each row.</span>
+    <table class="grid" role="grid" aria-label="Matching grid: choose one column for each row">
+      <thead>
+        <tr>
+          <th class="rowhead">Detail from the passage</th>
+          <th>Observed detail</th>
+          <th>Explanation clue</th>
+          <th>Later result</th>
+        </tr>
+      </thead>
+      <tbody id="mgBody"></tbody>
+    </table>
+    <p class="progress" id="mgProgress">0 of 4 rows answered</p>
+    <div class="submitrow">
+      <button class="submit" id="mgSubmit" disabled>Submit answer</button>
+      <span class="hintnote">Enabled only when every row has a selection (one_per_row).</span>
+    </div>
+    <div class="annot">
+      <h4>Renderer contract (student-safe projection — what this component receives)</h4>
+      <div>rows → <code>{ rowId, label }</code> · columns → <code>{ columnId, label }</code> · plus <code>stem</code>, <code>instructionText</code>, <code>selectionRule</code>. <b>Absent by projection:</b> <code>correctColumnId</code>, <code>evidenceQuote</code>, scoring.</div>
+      <h4 style="margin-top:10px">Response payload emitted (server-scored against correctCells)</h4>
+      <pre id="mgPayload">{ "rowSelections": {} }</pre>
+      <p class="a11y">A11y: table uses role=grid; each cell is a focusable radio (arrow keys move within row; space selects); per-row clear button; read-aloud text = stem + row label + column labels.</p>
+    </div>
+  </div>
+
+  <!-- =============== INLINE DROPDOWN =============== -->
+  <div class="card">
+    <span class="typechip">Inline dropdown · conventions · 1 point each</span>
+    <p class="stem">Choose the correct word to complete each sentence.</p>
+    <span class="instr">Use the drop-down menus to choose the correct spelling.</span>
+    <p class="dd-sentence">
+      The team packed three
+      <select class="dd" id="dd1" aria-label="Blank 1 of 2">
+        <option value="">Choose…</option>
+        <option>boxs</option>
+        <option>boxes</option>
+        <option>boxies</option>
+      </select>
+      for the trip, and
+      <select class="dd" id="dd2" aria-label="Blank 2 of 2">
+        <option value="">Choose…</option>
+        <option>coach lee</option>
+        <option>Coach lee</option>
+        <option>Coach Lee</option>
+      </select>
+      carried the heavy one.
+    </p>
+    <p class="progress" id="ddProgress">0 of 2 blanks answered</p>
+    <div class="submitrow">
+      <button class="submit" id="ddSubmit" disabled>Submit answer</button>
+      <span class="hintnote">Enabled only when every blank has a selection.</span>
+    </div>
+    <div class="annot">
+      <h4>Renderer contract (student-safe projection — what this component receives)</h4>
+      <div><code>baseTextWithBlanks</code> (blank markers replaced inline) · blanks → <code>{ blankId, position, options: [{ text }] }</code>. <b>Absent by projection:</b> <code>correctIndex</code>, <code>rationale</code>, <code>errorPattern</code> (null-pattern reveals the key), <code>targetWordOrPhrase</code>, <code>targetSkill</code>.</div>
+      <h4 style="margin-top:10px">Response payload emitted (server-scored against blanks[].correctIndex)</h4>
+      <pre id="ddPayload">{ "blankSelections": {} }</pre>
+      <p class="a11y">A11y: native select elements (full keyboard + screen-reader support); aria-label announces blank n of N; selected state thickens border. Options render in authored order — no shuffle (position-distribution is an authoring-time batch gate).</p>
+    </div>
+  </div>
+</div>
+<script>
+  const mgRows = [
+    { rowId:"r1", label:"Sam heard the gate squeak every morning." },
+    { rowId:"r2", label:"Rust had built up inside the old hinge." },
+    { rowId:"r3", label:"Sam rubbed a little oil on the hinge pin." },
+    { rowId:"r4", label:"The gate swung open without a sound." },
+  ];
+  const mgCols = ["observed_detail","explanation_clue","later_result"];
+  const mgSel = {};
+  const body = document.getElementById("mgBody");
+  mgRows.forEach((row) => {
+    const tr = document.createElement("tr");
+    const td = document.createElement("td");
+    td.className = "rowlabel";
+    td.innerHTML = row.label + ' <button class="clearbtn" aria-label="Clear row" onclick="clearRow(\'' + row.rowId + '\')">clear</button>';
+    tr.appendChild(td);
+    mgCols.forEach((col) => {
+      const cell = document.createElement("td");
+      cell.className = "cell";
+      cell.setAttribute("role","radio");
+      cell.setAttribute("aria-checked","false");
+      cell.dataset.row = row.rowId; cell.dataset.col = col;
+      cell.innerHTML = '<span class="radio"></span>';
+      cell.onclick = () => { mgSel[row.rowId] = col; renderMg(); };
+      tr.appendChild(cell);
+    });
+    body.appendChild(tr);
+  });
+  function clearRow(rowId){ delete mgSel[rowId]; renderMg(); }
+  function renderMg(){
+    document.querySelectorAll("#mgBody td.cell").forEach((cell) => {
+      cell.setAttribute("aria-checked", String(mgSel[cell.dataset.row] === cell.dataset.col));
+    });
+    const n = Object.keys(mgSel).length;
+    const p = document.getElementById("mgProgress");
+    p.innerHTML = n === mgRows.length ? '<span class="done">All ' + mgRows.length + ' rows answered</span>' : n + " of " + mgRows.length + " rows answered";
+    document.getElementById("mgSubmit").disabled = n !== mgRows.length;
+    document.getElementById("mgPayload").textContent = JSON.stringify({ rowSelections: mgSel }, null, 1);
+  }
+  const ddSel = {};
+  ["dd1","dd2"].forEach((id, i) => {
+    document.getElementById(id).onchange = (e) => {
+      const v = e.target.selectedIndex - 1;
+      if (v >= 0) ddSel["blank_" + (i+1)] = v; else delete ddSel["blank_" + (i+1)];
+      e.target.classList.toggle("filled", v >= 0);
+      const n = Object.keys(ddSel).length;
+      const p = document.getElementById("ddProgress");
+      p.innerHTML = n === 2 ? '<span class="done">All 2 blanks answered</span>' : n + " of 2 blanks answered";
+      document.getElementById("ddSubmit").disabled = n !== 2;
+      document.getElementById("ddPayload").textContent = JSON.stringify({ blankSelections: ddSel }, null, 1);
+    };
+  });
+</script>
+</body>
+</html>
