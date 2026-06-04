@@ -181,6 +181,12 @@ function assertAdversarialGateFailures(draft: GeneratedLessonDraft, ctx: LessonG
   const warmupLeak = replacePart(draft, 1, { warmupWords: ["cake"] });
   assert.equal(findCheck(warmupLeak, "LESSON_WARMUP_NO_TODAY_PATTERN")?.result, "FAIL");
 
+  // VCe demonstration pairs must be true minimal pairs (closed base + appended e).
+  // cat/cape agrees on vowel letter but is NOT cat+e, so it must fail.
+  const nonMinimalVcePair = replacePart(draft, 2, { demonstrationPairs: [{ closed: "cat", target: "cape" }] });
+  assert.equal(findCheck(nonMinimalVcePair, "LESSON_PART2_DEMO_MODE_VALID")?.result, "FAIL");
+  assert.equal(findCheck(nonMinimalVcePair, "LESSON_PART2_DEMO_MINIMAL_PAIRS")?.result, "FAIL");
+
   const rControlled = replacePart(draft, 5, { sentences: ["The cake is a gift for a pal."] });
   assert.equal(findCheck(rControlled, "LESSON_PART5_NO_RCONTROLLED")?.result, "FAIL");
 

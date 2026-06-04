@@ -87,12 +87,15 @@ function auditPart2(draft: GeneratedLessonDraft) {
     const closed = typeof pair.closed === "string" ? pair.closed : "";
     const target = typeof pair.target === "string" ? pair.target : "";
     const targetPattern = targetPatterns(draft).find((pattern) => wordMatchesPattern(target, pattern, { strictPhonemeLexicon: draft.phaseBand >= 4 }));
-    return Boolean(
-      targetPattern &&
-      !matchesAnyTargetPattern(closed, draft) &&
-      isPrerequisiteWord(closed) &&
-      closedVowelLetter(closed) === longVowelLetterForPattern(targetPattern),
-    );
+    if (!targetPattern || matchesAnyTargetPattern(closed, draft) || !isPrerequisiteWord(closed)) return false;
+    if (closedVowelLetter(closed) !== longVowelLetterForPattern(targetPattern)) return false;
+    // True minimal pair, enforced per pattern family:
+    // VCe targets must be the closed base plus exactly one appended e (cap -> cape, never cat -> cape).
+    if (/^[aeiou]_e$/.test(targetPattern)) {
+      return target.toLowerCase() === `${closed.toLowerCase()}e`;
+    }
+    // Vowel-team targets must preserve onset and coda and swap only the vowel grapheme (pan -> pain, never pat -> pain).
+    return isMinimalTeamPair(closed, target, targetPattern);
   });
   const examplesOnlyValid = demoExamples.length >= 3 && demoExamples.length <= 5 && demoExamples.every((word) => matchesAnyTargetPattern(word, draft));
   const demoValid = demoMode === "examples_only"
@@ -229,6 +232,20 @@ function isPrerequisiteWord(word: string) {
 
 function closedVowelLetter(word: string) {
   return word.toLowerCase().match(/^[bcdfghjklmnpqrstvwxyz]*([aeiou])[bcdfghjklmnpqrstvwxyz]+$/)?.[1] ?? null;
+}
+
+/**
+ * A vowel-team demonstration pair is only a true minimal pair when the closed
+ * base and the team target share the same onset and coda, with only the vowel
+ * grapheme swapped (pan -> pain, bed -> bead, got -> goat).
+ */
+function isMinimalTeamPair(closed: string, target: string, pattern: string) {
+  const graphemes = PATTERN_REGISTRY[pattern]?.graphemes ?? [];
+  const parts = closed.toLowerCase().match(/^([bcdfghjklmnpqrstvwxyz]*)([aeiou])([bcdfghjklmnpqrstvwxyz]+)$/);
+  if (!parts) return false;
+  const [, onset, , coda] = parts;
+  const normalizedTarget = target.toLowerCase();
+  return graphemes.some((grapheme) => normalizedTarget === `${onset}${grapheme}${coda}`);
 }
 
 function longVowelLetterForPattern(pattern: string) {

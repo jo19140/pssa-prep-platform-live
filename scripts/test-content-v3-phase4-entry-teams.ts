@@ -44,6 +44,7 @@ async function main() {
   });
   const missingAy = removeAyWords(aiAyDraft);
   assert.equal(auditGeneratedLessonDraft(missingAy).checks.find((entry) => entry.ruleId === "LESSON_TARGET_PATTERN_COVERAGE")?.result, "FAIL");
+  assertNonMinimalTeamPairFails(aiAyDraft);
   assertPhase4PassageAuditRoleSplit();
   assertFullPassageRejectsUndeclaredCrossTeam();
   assertBareTargetCodesStillFail();
@@ -136,6 +137,22 @@ function selectPseudowordPattern(word: string, orderedPatterns: string[]) {
 function part7PassageText(draft: GeneratedLessonDraft) {
   const part7 = draft.parts.find((part) => part.partNumber === 7);
   return typeof part7?.contentJson.passageText === "string" ? part7.contentJson.passageText : "";
+}
+
+function assertNonMinimalTeamPairFails(draft: GeneratedLessonDraft) {
+  // Team demonstration pairs must preserve onset and coda and swap only the
+  // vowel grapheme. pat/pain agrees on vowel letter but changes the coda
+  // (t -> n), so it must fail the Part 2 demo audit.
+  const nonMinimalTeamPair = {
+    ...draft,
+    parts: draft.parts.map((part) =>
+      part.partNumber === 2
+        ? { ...part, contentJson: { ...part.contentJson, demonstrationPairs: [{ closed: "pat", target: "pain" }] } }
+        : part,
+    ),
+  };
+  const checks = auditGeneratedLessonDraft(nonMinimalTeamPair).checks;
+  assert.equal(checks.find((entry) => entry.ruleId === "LESSON_PART2_DEMO_MODE_VALID")?.result, "FAIL", "Non-minimal team pair (pat/pain) must fail the Part 2 demo audit");
 }
 
 function assertPhase4PassageAuditRoleSplit() {
