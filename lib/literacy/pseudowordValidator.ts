@@ -188,6 +188,10 @@ export function validatePseudowordCandidate(
     collidesWith = normalized;
     blockingIssues.push(`pseudoword is a real word ("${normalized}")`);
   }
+  if (!collidesWith && normalized && opts.strictLexicon === true && homophoneLexicon.has(normalized)) {
+    collidesWith = normalized;
+    blockingIssues.push(`pseudoword is a real word ("${normalized}")`);
+  }
   if (homophoneLexiconResult.unavailable) {
     issues.push("HOMOPHONE_LEXICON_UNAVAILABLE");
   }
@@ -203,7 +207,7 @@ export function validatePseudowordCandidate(
         }
       }
     } else {
-      const decoded = decodeTeamPseudowordPronunciation(normalized, targetPattern);
+      const decoded = decodePatternPseudowordPronunciation(normalized, targetPattern);
       if (decoded) {
         const reverse = getCmudictReverseIndex(opts.strictLexicon === true);
         if (reverse.unavailable) {
@@ -244,7 +248,7 @@ function pronunciationForSilentE(word: string, pattern: string) {
 function expectedPronunciationForPattern(word: string, pattern: string) {
   const silentE = pronunciationForSilentE(word, pattern);
   if (silentE !== word) return silentE;
-  const phonemes = decodeTeamPseudowordPronunciation(word, pattern);
+  const phonemes = decodePatternPseudowordPronunciation(word, pattern);
   return phonemes ? `${word} (${phonemes.join(" ")})` : word;
 }
 
@@ -272,10 +276,10 @@ const CONSONANT_PHONEMES: Record<string, string> = {
   z: "Z",
 };
 
-function decodeTeamPseudowordPronunciation(word: string, pattern: string): string[] | null {
+function decodePatternPseudowordPronunciation(word: string, pattern: string): string[] | null {
   const definition = PATTERN_REGISTRY[pattern];
   const vowelPhonemes = definition?.expectedPhonemeSequences?.[0];
-  if (!definition || definition.family !== "vowel_team" || !vowelPhonemes?.length) return null;
+  if (!definition || !["vowel_team", "r_controlled"].includes(definition.family) || !vowelPhonemes?.length) return null;
   const grapheme = definition.graphemes.find((entry) => word.includes(entry));
   if (!grapheme) return null;
   const index = word.indexOf(grapheme);

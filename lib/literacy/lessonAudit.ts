@@ -27,6 +27,7 @@ export function auditGeneratedLessonDraft(draft: GeneratedLessonDraft): LessonGe
     check("LESSON_PART_SEQUENCE_VALID", draft.parts.every((part, index) => part.partNumber === index + 1), "BLOCKER", "Lesson part sequence must be 1-8."),
     ...auditPart1(draft),
     ...auditPart2(draft),
+    ...auditRControlledTargetAdmission(draft),
     ...auditPart3(draft),
     ...auditPart4And7(draft),
     ...auditPart5(draft),
@@ -110,6 +111,60 @@ function auditPart2(draft: GeneratedLessonDraft) {
   ];
 }
 
+function auditRControlledTargetAdmission(draft: GeneratedLessonDraft): LessonLintCheck[] {
+  const activeRTargets = rControlledTargetPatterns(draft);
+  if (activeRTargets.length === 0) return [];
+
+  const offenders: string[] = [];
+  const part2 = partNumber(draft, 2);
+  const demoPairs = Array.isArray(part2?.contentJson.demonstrationPairs) ? part2.contentJson.demonstrationPairs as Array<{ closed?: unknown; target?: unknown }> : [];
+  for (const pair of demoPairs) {
+    const closed = typeof pair.closed === "string" ? pair.closed : "";
+    const target = typeof pair.target === "string" ? pair.target : "";
+    if (rControlledWords([closed]).length > 0) offenders.push(`Part 2 base ${closed}`);
+    if (rControlledWords([target]).length > 0 && !matchesDeclaredRTarget(target, activeRTargets)) offenders.push(`Part 2 target ${target}`);
+  }
+
+  const part3 = partNumber(draft, 3);
+  const lines = Array.isArray(part3?.contentJson.contrastiveLines) ? part3.contentJson.contrastiveLines as any[] : [];
+  for (const line of lines) {
+    const words = strings(line.words);
+    const isPseudowordLine = line.role === "target_pseudowords";
+    for (const word of rControlledWords(words)) {
+      const allowed = isPseudowordLine
+        ? activeRTargets.some((pattern) => detectPatternCandidates(word).includes(pattern))
+        : matchesDeclaredRTarget(word, activeRTargets);
+      if (!allowed) offenders.push(`Part 3 ${word}`);
+    }
+  }
+
+  const part5 = partNumber(draft, 5);
+  for (const word of rControlledWords(strings(part5?.contentJson.sentences))) {
+    if (!matchesDeclaredRTarget(word, activeRTargets)) offenders.push(`Part 5 ${word}`);
+  }
+
+  const part6 = partNumber(draft, 6);
+  for (const word of rControlledWords([...strings(part6?.contentJson.dictatedWords), ...strings(part6?.contentJson.dictatedSentences)])) {
+    if (!matchesDeclaredRTarget(word, activeRTargets)) offenders.push(`Part 6 ${word}`);
+  }
+
+  const part7 = partNumber(draft, 7);
+  for (const word of rControlledWords([String(part7?.contentJson.passageText ?? "")])) {
+    if (!matchesDeclaredRTarget(word, activeRTargets)) offenders.push(`Part 7 ${word}`);
+  }
+
+  return [
+    check(
+      "LESSON_PHASE4_RCONTROLLED_ALLOWED_FOR_TARGET",
+      offenders.length === 0,
+      "BLOCKER",
+      offenders.length
+        ? `R-controlled words must match declared r-controlled targets only: ${Array.from(new Set(offenders)).join(", ")}`
+        : "R-controlled words match declared target patterns, and Part 2 bases stay non-r-controlled.",
+    ),
+  ];
+}
+
 function auditPart3(draft: GeneratedLessonDraft) {
   const part = partNumber(draft, 3);
   const lines = Array.isArray(part?.contentJson.contrastiveLines) ? part.contentJson.contrastiveLines as any[] : [];
@@ -174,9 +229,17 @@ function auditPart5(draft: GeneratedLessonDraft) {
 }
 
 function rControlledViolations(sentences: string[], draft: GeneratedLessonDraft): string[] {
-  const activeRTargets = targetPatterns(draft).filter((pattern) => PATTERN_REGISTRY[pattern]?.family === "r_controlled");
+  const activeRTargets = rControlledTargetPatterns(draft);
   return rControlledWords(sentences)
-    .filter((word) => activeRTargets.length === 0 || !activeRTargets.some((pattern) => wordMatchesPattern(word, pattern, { strictPhonemeLexicon: true })));
+    .filter((word) => activeRTargets.length === 0 || !matchesDeclaredRTarget(word, activeRTargets));
+}
+
+function rControlledTargetPatterns(draft: GeneratedLessonDraft) {
+  return targetPatterns(draft).filter((pattern) => PATTERN_REGISTRY[pattern]?.family === "r_controlled");
+}
+
+function matchesDeclaredRTarget(word: string, activeRTargets: string[]) {
+  return activeRTargets.some((pattern) => wordMatchesPattern(word, pattern, { strictPhonemeLexicon: true }));
 }
 
 /** Tokens whose vowel is immediately followed by an `r` in the same word (ar/er/ir/or/ur). */
@@ -251,6 +314,11 @@ function isMinimalTeamPair(closed: string, target: string, pattern: string) {
 function longVowelLetterForPattern(pattern: string) {
   const silentE = pattern.match(/^([aeiou])_e$/);
   if (silentE) return silentE[1];
+  // Despite the historical name, this returns the base vowel letter needed for Part 2
+  // pair validation across VCe, vowel-team, and r-controlled patterns.
+  if (PATTERN_REGISTRY[pattern]?.family === "r_controlled") {
+    return PATTERN_REGISTRY[pattern]?.graphemes[0]?.[0] ?? null;
+  }
   const phoneme = PATTERN_REGISTRY[pattern]?.expectedPhonemeSequences?.[0]?.join(" ");
   if (phoneme === "EY") return "a";
   if (phoneme === "IY") return "e";
