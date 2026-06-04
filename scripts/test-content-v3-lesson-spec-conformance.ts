@@ -10,7 +10,15 @@ import { auditPassage, decodabilityThresholdForPhase } from "../lib/literacy/pas
 import { classifyPassageWords, wordMatchesPattern } from "../lib/literacy/passageClassifier";
 import { detectPatternCandidates, detectVcePattern, homophoneVariants, validatePseudowordCandidate } from "../lib/literacy/pseudowordValidator";
 
-const allowedCmudictNameTokenPseudowords = new Set(["mave", "nace"]);
+// EXACT and MINIMAL per-target caveat list: pseudowords that collide with CMUdict
+// NAME TOKENS only (verified individually against the corpus). The oracle must stay
+// independent of the strict validator — never excuse a direct CMUdict hit just
+// because validatePseudowordCandidate passes it (the validator's homophone lexicon
+// is frequency-gated, so it misses low-frequency real words by design).
+const allowedCmudictNameTokenPseudowords = new Map<string, Set<string>>([
+  ["a_e", new Set(["mave", "nace"])],
+  ["r_controlled_ar", new Set(["zarb", "varn"])],
+]);
 const allowedCmudictNameTokenVariants = new Map([["sape", new Set(["seip"])]]);
 
 async function main() {
@@ -121,11 +129,11 @@ function assertGeneratedLessonAgainstIndependentOracles(draft: GeneratedLessonDr
     assert.equal(validation.valid, true, `Part 3 pseudoword ${pseudoword} failed pseudoword validator: ${validation.reason ?? validation.issues.join(", ")}`);
     const directCmuHit = cmuWords.has(normalized);
     assert(
-      !directCmuHit || allowedCmudictNameTokenAllowed(ctx.targetPattern, normalized) || validation.valid,
+      !directCmuHit || allowedCmudictNameTokenAllowed(ctx.targetPattern, normalized),
       `Part 3 pseudoword ${pseudoword} appears in full CMUdict`,
     );
     if (directCmuHit) {
-      console.log(`CMUdict strict-validator caveat accepted for shipped fixture pseudoword: ${pseudoword}`);
+      console.log(`CMUdict name-token caveat accepted for shipped fixture pseudoword: ${pseudoword}`);
     }
     const vowelLetter = detectedPattern.match(/^([aeiou])_e$/)?.[1] ?? "";
     if (vowelLetter) {
@@ -136,10 +144,8 @@ function assertGeneratedLessonAgainstIndependentOracles(draft: GeneratedLessonDr
   }
   for (const tag of wordTags(part3).filter((tag) => tag.lineNumber === 4 || String(tag.tag ?? tag.category) === "pseudoword")) {
     const word = String(tag.word ?? "").toLowerCase();
-    const detectedPattern = selectPseudowordPattern(word, ctx.pseudowordPatterns);
-    const validation = detectedPattern ? validatePseudowordCandidate(word, detectedPattern, { strictLexicon: true }) : null;
     assert(
-      !cmuWords.has(word) || allowedCmudictNameTokenAllowed(ctx.targetPattern, word) || validation?.valid === true,
+      !cmuWords.has(word) || allowedCmudictNameTokenAllowed(ctx.targetPattern, word),
       `Word tagged as pseudoword/line-4 target appears in CMUdict: ${word}`,
     );
   }
@@ -185,7 +191,7 @@ function assertGeneratedLessonAgainstIndependentOracles(draft: GeneratedLessonDr
 }
 
 function allowedCmudictNameTokenAllowed(targetPattern: string, word: string) {
-  return targetPattern === "a_e" && allowedCmudictNameTokenPseudowords.has(word);
+  return allowedCmudictNameTokenPseudowords.get(targetPattern)?.has(word) ?? false;
 }
 
 function allowedCmudictVariant(targetPattern: string, word: string, variant: string) {
