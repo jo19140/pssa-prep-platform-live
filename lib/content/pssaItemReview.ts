@@ -103,8 +103,8 @@ export type PssaItemReviewDto = {
   reviewer: Record<string, unknown>;
 };
 
-export function currentPlanSourceCorpusHash() {
-  const plan = buildPlan();
+export function currentPlanSourceCorpusHash(gradeLevel: number) {
+  const plan = buildPlan(gradeLevel);
   return stableStringify([...plan.passages.map((row) => row.contentHash), ...plan.activeItems.map((row) => row.contentHash), ...plan.deprecatedItems.map((row) => row.contentHash)].sort());
 }
 
@@ -276,12 +276,12 @@ export async function fetchPssaReviewTargets(client: PrismaClient, args: { targe
 
 export async function pssaBatchDriftDetail(client: PrismaClient, args: { target: string; action: string; batchId?: string | null }) {
   if (args.target !== "batch" || args.action !== "approve") return null;
-  const batch = await client.pssaItemBatch.findUnique({ where: { id: args.batchId! }, select: { sourceCorpusHash: true, auditContractVersion: true, sourceScanVersion: true, batchAuditResult: true } });
+  const batch = await client.pssaItemBatch.findUnique({ where: { id: args.batchId! }, select: { gradeLevel: true, sourceCorpusHash: true, auditContractVersion: true, sourceScanVersion: true, batchAuditResult: true } });
   if (!batch) return "batch_missing";
   if (batch.auditContractVersion !== AUDIT_CONTRACT_VERSION) return "batch_audit_contract_version_stale";
   if (batch.sourceScanVersion !== SOURCE_SCAN_VERSION) return "batch_source_scan_version_stale";
   if (batch.batchAuditResult !== "PASS") return "batch_audit_result_not_PASS";
-  const currentHash = currentPlanSourceCorpusHash();
+  const currentHash = currentPlanSourceCorpusHash(batch.gradeLevel);
   if (!batch.sourceCorpusHash) return "batch_source_corpus_hash_missing";
   if (batch.sourceCorpusHash !== currentHash) return "batch_source_corpus_hash_drift";
   return null;

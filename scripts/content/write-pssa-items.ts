@@ -20,6 +20,7 @@ const REPORT_DIR = path.resolve("reports");
 type Args = {
   write: boolean;
   env: string | null;
+  grade: number | null;
   allowProduction: boolean;
 };
 
@@ -49,7 +50,7 @@ function emptyCounts(): MutationCounts {
 }
 
 function parseArgs(argv: string[]): Args {
-  const args: Args = { write: false, env: null, allowProduction: false };
+  const args: Args = { write: false, env: null, grade: null, allowProduction: false };
   for (let i = 0; i < argv.length; i += 1) {
     const arg = argv[i];
     if (arg === "--write") args.write = true;
@@ -57,16 +58,24 @@ function parseArgs(argv: string[]): Args {
       args.env = argv[i + 1] ?? null;
       i += 1;
     } else if (arg.startsWith("--env=")) args.env = arg.slice("--env=".length);
+    else if (arg === "--grade") {
+      args.grade = Number(argv[i + 1]);
+      i += 1;
+    } else if (arg.startsWith("--grade=")) args.grade = Number(arg.slice("--grade=".length));
     else if (arg === "--allow-production") args.allowProduction = true;
     else throw new Error(`Unknown argument: ${arg}`);
   }
   if (!args.write) throw new Error("DB-4 writer requires --write.");
   if (args.env !== "dev") throw new Error("--write requires explicit --env dev.");
-  if (!process.env.DATABASE_URL) throw new Error("--write requires DATABASE_URL.");
+  if (!Number.isInteger(args.grade)) throw new Error("--grade is required.");
   const envValues = [process.env.NODE_ENV, process.env.APP_ENV, args.env].filter(Boolean).map((value) => value!.toLowerCase());
   const looksProduction = envValues.some((value) => value.includes("prod") || value === "production");
   if (looksProduction && !args.allowProduction) throw new Error("Refusing production-like environment without --allow-production.");
   return args;
+}
+
+function assertDatabaseUrlPresent() {
+  if (!process.env.DATABASE_URL) throw new Error("--write requires DATABASE_URL.");
 }
 
 function redactedDbTarget() {
@@ -86,9 +95,9 @@ function writeCsv(filePath: string, rows: Record<string, unknown>[], columns: st
   fs.writeFileSync(filePath, `${lines.join("\n")}\n`);
 }
 
-function buildStablePlan() {
-  const first = buildPlan();
-  const second = buildPlan();
+function buildStablePlan(gradeLevel: number) {
+  const first = buildPlan(gradeLevel);
+  const second = buildPlan(gradeLevel);
   const firstHashes = [...first.passages.map((row) => row.contentHash), ...first.activeItems.map((row) => row.contentHash), ...first.deprecatedItems.map((row) => row.contentHash)].sort();
   const secondHashes = [...second.passages.map((row) => row.contentHash), ...second.activeItems.map((row) => row.contentHash), ...second.deprecatedItems.map((row) => row.contentHash)].sort();
   first.hashStable = stableStringify(firstHashes) === stableStringify(secondHashes);
@@ -101,7 +110,13 @@ function totalGateFailures(plan: ImportPlan) {
 }
 
 function assertPreWritePlan(plan: ImportPlan) {
-  const expected = { passage: 5, item: 67, deprecated: 12, supersession: 12, batch: 8 };
+  const expected = {
+    passage: plan.manifestConfig.expectedCounts.passages,
+    item: plan.manifestConfig.expectedCounts.activeItems,
+    deprecated: plan.manifestConfig.expectedCounts.deprecatedItems,
+    supersession: plan.manifestConfig.expectedCounts.supersessions,
+    batch: plan.manifestConfig.expectedCounts.batches,
+  };
   for (const row of plan.manifest) {
     if (row.count !== expected[row.recordType] || row.expectedCount !== expected[row.recordType] || !row.match) {
       throw new Error(`DB-4 pre-write refused: manifest mismatch for ${row.recordType}.`);
@@ -132,7 +147,7 @@ async function resolveCrosswalk(db: PrismaClient, plan: ImportPlan) {
   const rows = await db.pssaStandardsCrosswalk.findMany({
     where: {
       subject: "ELA",
-      gradeLevel: 3,
+      gradeLevel: plan.gradeLevel,
       sourceVersionYear: SOURCE_VERSION_YEAR,
       eligibleContent: { in: [...new Set([...plan.activeItems, ...plan.deprecatedItems].map((item) => item.eligibleContent).filter(Boolean))] },
     },
@@ -242,6 +257,12 @@ function batchCreateData(batch: BatchRow, importRunId: string, sourceCorpusHash:
   };
 }
 
+function reportPath(baseName: string, gradeLevel: number) {
+  if (gradeLevel === 3) return path.join(REPORT_DIR, baseName);
+  const extension = path.extname(baseName);
+  return path.join(REPORT_DIR, `${baseName.slice(0, -extension.length)}_g${gradeLevel}${extension}`);
+}
+
 function assertGovernanceRow(id: string, row: { reviewStatus: string; itemStatus: string; studentReadyBlockedReason: string; approvalEligible?: boolean; approvedAt?: Date | null; reviewedBy?: string | null }) {
   if (row.reviewStatus === "APPROVED" || row.itemStatus === "pilot_ready" || row.studentReadyBlockedReason === "NONE" || row.approvalEligible || row.approvedAt || row.reviewedBy) {
     throw new Error(`DB-4 refused: existing row ${id} is not fail-closed.`);
@@ -269,7 +290,7 @@ async function persistPlan(db: PrismaClient, plan: ImportPlan, dbTarget: string,
         sourceScanVersion: SOURCE_SCAN_VERSION,
         sourceCorpusHash,
         sourceCorpusManifestJson: json({ manifest: plan.manifest, batches: plan.batches }),
-        reportPath: "reports/pssa_db4_write_summary.md",
+        reportPath: `reports/${path.basename(reportPath("pssa_db4_write_summary.md", plan.gradeLevel))}`,
       },
     });
 
@@ -392,17 +413,17 @@ async function persistPlan(db: PrismaClient, plan: ImportPlan, dbTarget: string,
 
 function writeReports(plan: ImportPlan, result: WriteResult) {
   fs.mkdirSync(REPORT_DIR, { recursive: true });
-  writeCsv(path.join(REPORT_DIR, "pssa_db4_write_manifest.csv"), plan.manifest as any, ["sourceFile", "recordType", "count", "expectedCount", "match"]);
-  writeCsv(path.join(REPORT_DIR, "pssa_db4_db_state_assertions.csv"), Object.entries(result.assertions).map(([assertion, value]) => ({ assertion, value })), ["assertion", "value"]);
-  writeCsv(path.join(REPORT_DIR, "pssa_db4_idempotency_report.csv"), Object.entries(result.mutations).map(([table, counts]) => ({ table, ...counts })), ["table", "inserts", "updates", "deletes", "noops", "drift"]);
-  writeCsv(path.join(REPORT_DIR, "pssa_db4_student_ready_failclosed_report.csv"), [
+  writeCsv(reportPath("pssa_db4_write_manifest.csv", plan.gradeLevel), plan.manifest as any, ["sourceFile", "recordType", "count", "expectedCount", "match"]);
+  writeCsv(reportPath("pssa_db4_db_state_assertions.csv", plan.gradeLevel), Object.entries(result.assertions).map(([assertion, value]) => ({ assertion, value })), ["assertion", "value"]);
+  writeCsv(reportPath("pssa_db4_idempotency_report.csv", plan.gradeLevel), Object.entries(result.mutations).map(([table, counts]) => ({ table, ...counts })), ["table", "inserts", "updates", "deletes", "noops", "drift"]);
+  writeCsv(reportPath("pssa_db4_student_ready_failclosed_report.csv", plan.gradeLevel), [
     { check: "APPROVED", count: result.assertions.approvedItems },
     { check: "pilot_ready", count: result.assertions.pilotReadyItems },
     { check: "studentReadyBlockedReason_NONE", count: result.assertions.studentReadyItems },
     { check: "active_fail_closed", count: result.assertions.activeFailClosed },
     { check: "deprecated_fail_closed", count: result.assertions.deprecatedFailClosed },
   ], ["check", "count"]);
-  writeCsv(path.join(REPORT_DIR, "pssa_db4_supersession_report.csv"), result.supersessions, ["oldItemId", "newItemId", "reason", "status"]);
+  writeCsv(reportPath("pssa_db4_supersession_report.csv", plan.gradeLevel), result.supersessions, ["oldItemId", "newItemId", "reason", "status"]);
   const lines = [
     "# PSSA DB-4 Write Summary",
     "",
@@ -444,13 +465,14 @@ function writeReports(plan: ImportPlan, result: WriteResult) {
     "- Import did not build form assembly.",
     "- No governed content deletions are implemented in DB-4.",
   ];
-  fs.writeFileSync(path.join(REPORT_DIR, "pssa_db4_write_summary.md"), `${lines.join("\n")}\n`);
+  fs.writeFileSync(reportPath("pssa_db4_write_summary.md", plan.gradeLevel), `${lines.join("\n")}\n`);
 }
 
 async function main() {
-  parseArgs(process.argv.slice(2));
-  const plan = buildStablePlan();
+  const args = parseArgs(process.argv.slice(2));
+  const plan = buildStablePlan(args.grade!);
   assertPreWritePlan(plan);
+  assertDatabaseUrlPresent();
   const db = new PrismaClient();
   try {
     const dbTarget = redactedDbTarget();

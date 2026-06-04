@@ -12,10 +12,24 @@ const REPORT_DIR = path.resolve("reports");
 const PLAN_MODULE_PATH = path.resolve("scripts/content/lib/pssa-import-plan.ts");
 
 function parseArgs(args: string[]) {
+  let grade: number | null = null;
   if (args.includes("--write")) {
     throw new Error("writes are DB-4; run the DB-4 step.");
   }
-  return { mode: args.includes("--db-aware") ? "db-aware-dry-run" : "file-only-dry-run" };
+  for (let i = 0; i < args.length; i += 1) {
+    const arg = args[i];
+    if (arg === "--dry-run" || arg === "--db-aware") continue;
+    if (arg === "--grade") {
+      grade = Number(args[i + 1]);
+      i += 1;
+    } else if (arg.startsWith("--grade=")) {
+      grade = Number(arg.slice("--grade=".length));
+    } else {
+      throw new Error(`Unknown argument: ${arg}`);
+    }
+  }
+  if (!Number.isInteger(grade)) throw new Error("--grade is required.");
+  return { grade: grade!, mode: args.includes("--db-aware") ? "db-aware-dry-run" : "file-only-dry-run" };
 }
 
 function csvCell(value: unknown) {
@@ -28,10 +42,16 @@ function writeCsv(filePath: string, rows: Record<string, unknown>[], columns: st
   fs.writeFileSync(filePath, `${lines.join("\n")}\n`);
 }
 
+function reportPath(baseName: string, gradeLevel: number) {
+  if (gradeLevel === 3) return path.join(REPORT_DIR, baseName);
+  const extension = path.extname(baseName);
+  return path.join(REPORT_DIR, `${baseName.slice(0, -extension.length)}_g${gradeLevel}${extension}`);
+}
+
 function writeReports(plan: ImportPlan, mode: string) {
   fs.mkdirSync(REPORT_DIR, { recursive: true });
-  writeCsv(path.join(REPORT_DIR, "pssa_import_dryrun_manifest.csv"), plan.manifest as any, ["sourceFile", "recordType", "count", "expectedCount", "match"]);
-  writeCsv(path.join(REPORT_DIR, "pssa_import_dryrun_items.csv"), [...plan.activeItems, ...plan.deprecatedItems].map((item) => ({
+  writeCsv(reportPath("pssa_import_dryrun_manifest.csv", plan.gradeLevel), plan.manifest as any, ["sourceFile", "recordType", "count", "expectedCount", "match"]);
+  writeCsv(reportPath("pssa_import_dryrun_items.csv", plan.gradeLevel), [...plan.activeItems, ...plan.deprecatedItems].map((item) => ({
     itemId: item.itemId,
     interactionType: item.interactionType,
     interactionSubtype: item.interactionSubtype,
@@ -48,17 +68,17 @@ function writeReports(plan: ImportPlan, mode: string) {
     blockedReasons: item.blockedReasons.join("|"),
     dbAction: "N/A",
   })), ["itemId", "interactionType", "interactionSubtype", "gradeLevel", "eligibleContent", "ecResolved", "contentHash", "reviewStatus", "itemStatus", "studentReadyBlockedReason", "batchId", "perGateResults", "finalImportEligibility", "blockedReasons", "dbAction"]);
-  writeCsv(path.join(REPORT_DIR, "pssa_import_dryrun_batches.csv"), plan.batches as any, ["batchId", "streamType", "gradeLevel", "batchGate", "batchResult", "itemCount"]);
+  writeCsv(reportPath("pssa_import_dryrun_batches.csv", plan.gradeLevel), plan.batches as any, ["batchId", "streamType", "gradeLevel", "batchGate", "batchResult", "itemCount"]);
   const lines = [
     "# PSSA Import Dry-Run Summary",
     "",
     `- Mode: ${mode}`,
     "- 0 records written (DB-3 is dry-run only)",
-    `- Passages: ${plan.passages.length} / expected 5`,
-    `- Active items: ${plan.activeItems.length} / expected 67`,
-    `- Deprecated items: ${plan.deprecatedItems.length} / expected 12`,
-    `- Supersessions: ${plan.supersessions.length} / expected 12`,
-    `- Batches: ${plan.batches.length} / expected 8`,
+    `- Passages: ${plan.passages.length} / expected ${plan.manifestConfig.expectedCounts.passages}`,
+    `- Active items: ${plan.activeItems.length} / expected ${plan.manifestConfig.expectedCounts.activeItems}`,
+    `- Deprecated items: ${plan.deprecatedItems.length} / expected ${plan.manifestConfig.expectedCounts.deprecatedItems}`,
+    `- Supersessions: ${plan.supersessions.length} / expected ${plan.manifestConfig.expectedCounts.supersessions}`,
+    `- Batches: ${plan.batches.length} / expected ${plan.manifestConfig.expectedCounts.batches}`,
     `- EC resolved: ${[...plan.activeItems, ...plan.deprecatedItems].filter((item) => item.ecResolved).length}/${plan.activeItems.length + plan.deprecatedItems.length}`,
     `- Approved or pilot_ready would-import records: ${[...plan.activeItems, ...plan.deprecatedItems].filter((item) => String(item.reviewStatus) === "APPROVED" || String(item.itemStatus) === "pilot_ready").length}`,
     `- Preview leak failures: ${[...plan.activeItems, ...plan.deprecatedItems].filter((item) => item.gates.PSSA_IMPORT_NO_LEAK === "FAIL").length}`,
@@ -79,7 +99,7 @@ function writeReports(plan: ImportPlan, mode: string) {
     ...[...plan.gateTallies.entries()].sort(([a], [b]) => a.localeCompare(b)).map(([gate, tally]) => `| ${gate} | ${tally.pass} | ${tally.fail} |`),
     "",
   ];
-  fs.writeFileSync(path.join(REPORT_DIR, "pssa_import_dryrun_summary.md"), lines.join("\n"));
+  fs.writeFileSync(reportPath("pssa_import_dryrun_summary.md", plan.gradeLevel), lines.join("\n"));
 }
 
 function assertNoWrites() {
@@ -93,8 +113,8 @@ function assertNoWrites() {
 function main() {
   const args = parseArgs(process.argv.slice(2));
   assertNoWrites();
-  const first = buildPlan();
-  const second = buildPlan();
+  const first = buildPlan(args.grade);
+  const second = buildPlan(args.grade);
   const firstHashes = [...first.passages.map((row) => row.contentHash), ...first.activeItems.map((row) => row.contentHash), ...first.deprecatedItems.map((row) => row.contentHash)].sort();
   const secondHashes = [...second.passages.map((row) => row.contentHash), ...second.activeItems.map((row) => row.contentHash), ...second.deprecatedItems.map((row) => row.contentHash)].sort();
   first.hashStable = stableStringify(firstHashes) === stableStringify(secondHashes);
@@ -108,4 +128,9 @@ function main() {
   if (failures > 0) process.exitCode = 1;
 }
 
-main();
+try {
+  main();
+} catch (error) {
+  console.error(error instanceof Error ? error.message : error);
+  process.exit(1);
+}
