@@ -279,7 +279,7 @@ const CONSONANT_PHONEMES: Record<string, string> = {
 function decodePatternPseudowordPronunciation(word: string, pattern: string): string[] | null {
   const definition = PATTERN_REGISTRY[pattern];
   const vowelPhonemes = definition?.expectedPhonemeSequences?.[0];
-  if (!definition || !["vowel_team", "r_controlled"].includes(definition.family) || !vowelPhonemes?.length) return null;
+  if (!definition || !["vowel_team", "r_controlled", "diphthong"].includes(definition.family) || !vowelPhonemes?.length) return null;
   const grapheme = definition.graphemes.find((entry) => word.includes(entry));
   if (!grapheme) return null;
   const index = word.indexOf(grapheme);

@@ -320,9 +320,11 @@ function isMinimalTeamPair(closed: string, target: string, pattern: string) {
 function longVowelLetterForPattern(pattern: string) {
   const silentE = pattern.match(/^([aeiou])_e$/);
   if (silentE) return silentE[1];
+  if (pattern === "team_oo_long" || pattern === "team_oo_short") return "o";
+  if (pattern === "team_au" || pattern === "team_aw") return "a";
   // Despite the historical name, this returns the base vowel letter needed for Part 2
-  // pair validation across VCe, vowel-team, and r-controlled patterns.
-  if (PATTERN_REGISTRY[pattern]?.family === "r_controlled") {
+  // pair validation across VCe, vowel-team, r-controlled, and diphthong patterns.
+  if (PATTERN_REGISTRY[pattern]?.family === "r_controlled" || PATTERN_REGISTRY[pattern]?.family === "diphthong") {
     return PATTERN_REGISTRY[pattern]?.graphemes[0]?.[0] ?? null;
   }
   const phoneme = PATTERN_REGISTRY[pattern]?.expectedPhonemeSequences?.[0]?.join(" ");
