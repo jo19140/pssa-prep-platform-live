@@ -1,0 +1,2528 @@
+{
+  "generatedAt": "2026-06-05T00:00:00.000Z",
+  "noDbWrite": true,
+  "productionImportReady": false,
+  "passages": [
+    {
+      "model": "PssaPassage",
+      "id": "pssa_psg_g3_the_lantern_list",
+      "title": "The Lantern List",
+      "gradeLevel": 3,
+      "subject": "ELA",
+      "passageType": "literary",
+      "topicDomain": "lantern festival story",
+      "structureType": "realistic narrative",
+      "voicePov": "third-person limited",
+      "text": "Nia carried a lantern list in her jacket pocket on Friday morning. Grandma called it a lantern list, but Nia called it a promise. The neighborhood festival was only one day away, and Nia wanted the library steps to shine brighter than they had the year before.\n\nBy lunchtime, Nia had written twelve jobs beside her name. She would paint the paper stars, hang the lantern string, sweep the steps, and test every tiny bulb. Mateo read the list and raised his eyebrows. \"That is a parade for one person,\" he said. Nia folded the paper and said she could do it.\n\nAfter school, the first blue lantern slipped from Nia's hand and rolled under a bench. The ladder wobbled when she reached for the string. Mateo held the ladder while Nia tied the first blue lantern. Then Grandma brought a box of red paper stars, and two younger neighbors asked what job they could do.\n\nNia looked at the lantern list again. The promise had started to feel heavy, like a backpack full of stones. She crossed out half of her own jobs and added names beside them. Mateo tested the bulbs. Grandma taped the stars. The younger neighbors swept the steps in careful rows.\n\nAt dusk, every lantern swung safely above the library steps. Nia noticed that the lights did not look smaller because she had shared the work. They looked brighter. When Mateo asked what she would write on next year's lantern list, Nia smiled and wrote the first job in big letters: ask the helpers early.",
+      "wordCount": 283,
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "approvalEligible": false,
+      "auditMetadata": {
+        "authoredIn": "PSSA_PR_4P_GRADE3_LITERARY_TOPUP",
+        "noDbWrite": true
+      }
+    },
+    {
+      "model": "PssaPassage",
+      "id": "pssa_psg_g3_the_porch_bell",
+      "title": "The Porch Bell",
+      "gradeLevel": 3,
+      "subject": "ELA",
+      "passageType": "literary",
+      "topicDomain": "porch bell story",
+      "structureType": "realistic narrative",
+      "voicePov": "third-person limited",
+      "text": "Milo heard the porch bell before he saw the package. The bell was small and brass, tied to the rail with a faded green ribbon. Whenever the wind pushed the screen door, the porch bell made a bright ding that meant someone had arrived.\n\nThe package held a new sketchbook from Aunt Rosa. Milo wanted to keep it clean until he could draw something perfect. His little sister Tessa leaned over the porch step and asked for one page. Milo hugged the sketchbook to his chest and said the first drawing had to be special.\n\nThat afternoon, the porch bell rang again. Tessa had dropped a basket of clothespins, and the wind was carrying them across the yard. Milo almost stayed on the step with his clean sketchbook. Then he saw Tessa chasing pins near the rose bushes, so he set the book down and ran to help.\n\nOne clothespin landed beside the porch bell. Another caught on the green ribbon. Milo and Tessa laughed as they gathered the last pins into the basket. A smudge of dirt crossed Milo's thumb, and the thumbprint landed on the first blank page.\n\nMilo stared at the mark. Then he drew the porch rail around it, the green ribbon above it, and Tessa holding the basket below it. The smudge became a tiny stone on the path. When Aunt Rosa called that evening, Milo said the first page was special after all because it showed the day the porch bell reminded him to help.",
+      "wordCount": 280,
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "approvalEligible": false,
+      "auditMetadata": {
+        "authoredIn": "PSSA_PR_4P_GRADE3_LITERARY_TOPUP",
+        "noDbWrite": true
+      }
+    }
+  ],
+  "items": [
+    {
+      "model": "PssaItem",
+      "id": "pssa_item_g3_lantern_01",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "MCQ",
+      "interactionType": "MCQ",
+      "skill": "literary_key_ideas",
+      "passageId": "pssa_psg_g3_the_lantern_list",
+      "eligibleContent": "E03.A-K.1.1.1",
+      "assessmentAnchor": "E03.A-K.1",
+      "reportingCategory": "A",
+      "dokLevel": 2,
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "studentFacingPrompt": "Which detail shows why Nia's lantern promise starts to feel difficult?",
+      "answerChoicesJson": [
+        "Nia writes twelve lantern jobs beside her own name by lunchtime.",
+        "Grandma calls Nia's paper a lantern list on Friday morning.",
+        "Mateo reads Nia's folded lantern list beside the library steps.",
+        "The younger neighbors sweep the library steps in careful rows."
+      ],
+      "correctIndex": 0,
+      "pointValue": 1,
+      "auditMetadata": {
+        "authoredIn": "PSSA_PR_4P_GRADE3_LITERARY_TOPUP",
+        "noDbWrite": true
+      },
+      "structuredChoicesJson": [
+        {
+          "text": "Nia writes twelve lantern jobs beside her own name by lunchtime.",
+          "isCorrect": true,
+          "rationale": "This choice is supported by the passage evidence.",
+          "evidenceLinks": [
+            {
+              "paragraphIndex": 1,
+              "sentenceIndex": 0,
+              "quotedSpan": "By lunchtime, Nia had written twelve jobs beside her name.",
+              "startChar": 262,
+              "endChar": 320
+            }
+          ],
+          "distractorRole": null
+        },
+        {
+          "text": "Grandma calls Nia's paper a lantern list on Friday morning.",
+          "isCorrect": false,
+          "rationale": "This distractor uses a passage detail in a way that does not answer the question.",
+          "evidenceLinks": [
+            {
+              "paragraphIndex": 0,
+              "sentenceIndex": 1,
+              "quotedSpan": "Grandma called it a lantern list, but Nia called it a promise.",
+              "startChar": 67,
+              "endChar": 129
+            }
+          ],
+          "distractorRole": "wrong_emphasis"
+        },
+        {
+          "text": "Mateo reads Nia's folded lantern list beside the library steps.",
+          "isCorrect": false,
+          "rationale": "This distractor uses a passage detail in a way that does not answer the question.",
+          "evidenceLinks": [
+            {
+              "paragraphIndex": 2,
+              "sentenceIndex": 2,
+              "quotedSpan": "Mateo held the ladder while Nia tied the first blue lantern.",
+              "startChar": 698,
+              "endChar": 758
+            }
+          ],
+          "distractorRole": "plausible_misreading"
+        },
+        {
+          "text": "The younger neighbors sweep the library steps in careful rows.",
+          "isCorrect": false,
+          "rationale": "This distractor uses a passage detail in a way that does not answer the question.",
+          "evidenceLinks": [
+            {
+              "paragraphIndex": 3,
+              "sentenceIndex": 5,
+              "quotedSpan": "The younger neighbors swept the steps in careful rows.",
+              "startChar": 1087,
+              "endChar": 1141
+            }
+          ],
+          "distractorRole": "unsupported_inference"
+        }
+      ]
+    },
+    {
+      "model": "PssaItem",
+      "id": "pssa_item_g3_lantern_02",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "MCQ",
+      "interactionType": "MCQ",
+      "skill": "literary_theme",
+      "passageId": "pssa_psg_g3_the_lantern_list",
+      "eligibleContent": "E03.A-K.1.1.2",
+      "assessmentAnchor": "E03.A-K.1",
+      "reportingCategory": "A",
+      "dokLevel": 2,
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "studentFacingPrompt": "What message does Nia learn by the end of the story?",
+      "answerChoicesJson": [
+        "Lantern strings should be tested before the library festival begins.",
+        "Nia learns that sharing lantern jobs can make the festival work better.",
+        "Grandma's red paper stars are easier to tape than blue lanterns.",
+        "Nia's folded lantern list should stay hidden inside her jacket."
+      ],
+      "correctIndex": 1,
+      "pointValue": 1,
+      "auditMetadata": {
+        "authoredIn": "PSSA_PR_4P_GRADE3_LITERARY_TOPUP",
+        "noDbWrite": true
+      },
+      "structuredChoicesJson": [
+        {
+          "text": "Lantern strings should be tested before the library festival begins.",
+          "isCorrect": false,
+          "rationale": "This distractor uses a passage detail in a way that does not answer the question.",
+          "evidenceLinks": [
+            {
+              "paragraphIndex": 1,
+              "sentenceIndex": 0,
+              "quotedSpan": "By lunchtime, Nia had written twelve jobs beside her name.",
+              "startChar": 262,
+              "endChar": 320
+            }
+          ],
+          "distractorRole": "too_narrow"
+        },
+        {
+          "text": "Nia learns that sharing lantern jobs can make the festival work better.",
+          "isCorrect": true,
+          "rationale": "This choice is supported by the passage evidence.",
+          "evidenceLinks": [
+            {
+              "paragraphIndex": 0,
+              "sentenceIndex": 1,
+              "quotedSpan": "Grandma called it a lantern list, but Nia called it a promise.",
+              "startChar": 67,
+              "endChar": 129
+            }
+          ],
+          "distractorRole": null
+        },
+        {
+          "text": "Grandma's red paper stars are easier to tape than blue lanterns.",
+          "isCorrect": false,
+          "rationale": "This distractor uses a passage detail in a way that does not answer the question.",
+          "evidenceLinks": [
+            {
+              "paragraphIndex": 2,
+              "sentenceIndex": 2,
+              "quotedSpan": "Mateo held the ladder while Nia tied the first blue lantern.",
+              "startChar": 698,
+              "endChar": 758
+            }
+          ],
+          "distractorRole": "plausible_misreading"
+        },
+        {
+          "text": "Nia's folded lantern list should stay hidden inside her jacket.",
+          "isCorrect": false,
+          "rationale": "This distractor uses a passage detail in a way that does not answer the question.",
+          "evidenceLinks": [
+            {
+              "paragraphIndex": 3,
+              "sentenceIndex": 5,
+              "quotedSpan": "The younger neighbors swept the steps in careful rows.",
+              "startChar": 1087,
+              "endChar": 1141
+            }
+          ],
+          "distractorRole": "unsupported_inference"
+        }
+      ]
+    },
+    {
+      "model": "PssaItem",
+      "id": "pssa_item_g3_lantern_03",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "MCQ",
+      "interactionType": "MCQ",
+      "skill": "literary_character",
+      "passageId": "pssa_psg_g3_the_lantern_list",
+      "eligibleContent": "E03.A-K.1.1.3",
+      "assessmentAnchor": "E03.A-K.1",
+      "reportingCategory": "A",
+      "dokLevel": 2,
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "studentFacingPrompt": "How do Nia's actions change after the blue lantern slips under the bench?",
+      "answerChoicesJson": [
+        "Nia hides the red paper stars so Grandma does not help.",
+        "Nia carries the ladder away from the library steps.",
+        "Nia crosses out lantern jobs and adds helpers to her list.",
+        "Nia asks Mateo to write a new festival promise for her."
+      ],
+      "correctIndex": 2,
+      "pointValue": 1,
+      "auditMetadata": {
+        "authoredIn": "PSSA_PR_4P_GRADE3_LITERARY_TOPUP",
+        "noDbWrite": true
+      },
+      "structuredChoicesJson": [
+        {
+          "text": "Nia hides the red paper stars so Grandma does not help.",
+          "isCorrect": false,
+          "rationale": "This distractor uses a passage detail in a way that does not answer the question.",
+          "evidenceLinks": [
+            {
+              "paragraphIndex": 1,
+              "sentenceIndex": 0,
+              "quotedSpan": "By lunchtime, Nia had written twelve jobs beside her name.",
+              "startChar": 262,
+              "endChar": 320
+            }
+          ],
+          "distractorRole": "too_narrow"
+        },
+        {
+          "text": "Nia carries the ladder away from the library steps.",
+          "isCorrect": false,
+          "rationale": "This distractor uses a passage detail in a way that does not answer the question.",
+          "evidenceLinks": [
+            {
+              "paragraphIndex": 0,
+              "sentenceIndex": 1,
+              "quotedSpan": "Grandma called it a lantern list, but Nia called it a promise.",
+              "startChar": 67,
+              "endChar": 129
+            }
+          ],
+          "distractorRole": "wrong_emphasis"
+        },
+        {
+          "text": "Nia crosses out lantern jobs and adds helpers to her list.",
+          "isCorrect": true,
+          "rationale": "This choice is supported by the passage evidence.",
+          "evidenceLinks": [
+            {
+              "paragraphIndex": 2,
+              "sentenceIndex": 2,
+              "quotedSpan": "Mateo held the ladder while Nia tied the first blue lantern.",
+              "startChar": 698,
+              "endChar": 758
+            }
+          ],
+          "distractorRole": null
+        },
+        {
+          "text": "Nia asks Mateo to write a new festival promise for her.",
+          "isCorrect": false,
+          "rationale": "This distractor uses a passage detail in a way that does not answer the question.",
+          "evidenceLinks": [
+            {
+              "paragraphIndex": 3,
+              "sentenceIndex": 5,
+              "quotedSpan": "The younger neighbors swept the steps in careful rows.",
+              "startChar": 1087,
+              "endChar": 1141
+            }
+          ],
+          "distractorRole": "unsupported_inference"
+        }
+      ]
+    },
+    {
+      "model": "PssaItem",
+      "id": "pssa_item_g3_lantern_04",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "MCQ",
+      "interactionType": "MCQ",
+      "skill": "literary_point_of_view",
+      "passageId": "pssa_psg_g3_the_lantern_list",
+      "eligibleContent": "E03.A-C.2.1.1",
+      "assessmentAnchor": "E03.A-C.2",
+      "reportingCategory": "A",
+      "dokLevel": 2,
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "studentFacingPrompt": "From whose point of view is the story mainly told?",
+      "answerChoicesJson": [
+        "Grandma's view, as she brings red paper stars to the library.",
+        "Mateo's view, as he reads Nia's folded lantern list.",
+        "A neighbor's view, as the library steps are swept in rows.",
+        "Nia's view, as she learns how the lantern promise feels."
+      ],
+      "correctIndex": 3,
+      "pointValue": 1,
+      "auditMetadata": {
+        "authoredIn": "PSSA_PR_4P_GRADE3_LITERARY_TOPUP",
+        "noDbWrite": true
+      },
+      "structuredChoicesJson": [
+        {
+          "text": "Grandma's view, as she brings red paper stars to the library.",
+          "isCorrect": false,
+          "rationale": "This distractor uses a passage detail in a way that does not answer the question.",
+          "evidenceLinks": [
+            {
+              "paragraphIndex": 1,
+              "sentenceIndex": 0,
+              "quotedSpan": "By lunchtime, Nia had written twelve jobs beside her name.",
+              "startChar": 262,
+              "endChar": 320
+            }
+          ],
+          "distractorRole": "too_narrow"
+        },
+        {
+          "text": "Mateo's view, as he reads Nia's folded lantern list.",
+          "isCorrect": false,
+          "rationale": "This distractor uses a passage detail in a way that does not answer the question.",
+          "evidenceLinks": [
+            {
+              "paragraphIndex": 0,
+              "sentenceIndex": 1,
+              "quotedSpan": "Grandma called it a lantern list, but Nia called it a promise.",
+              "startChar": 67,
+              "endChar": 129
+            }
+          ],
+          "distractorRole": "wrong_emphasis"
+        },
+        {
+          "text": "A neighbor's view, as the library steps are swept in rows.",
+          "isCorrect": false,
+          "rationale": "This distractor uses a passage detail in a way that does not answer the question.",
+          "evidenceLinks": [
+            {
+              "paragraphIndex": 2,
+              "sentenceIndex": 2,
+              "quotedSpan": "Mateo held the ladder while Nia tied the first blue lantern.",
+              "startChar": 698,
+              "endChar": 758
+            }
+          ],
+          "distractorRole": "plausible_misreading"
+        },
+        {
+          "text": "Nia's view, as she learns how the lantern promise feels.",
+          "isCorrect": true,
+          "rationale": "This choice is supported by the passage evidence.",
+          "evidenceLinks": [
+            {
+              "paragraphIndex": 3,
+              "sentenceIndex": 5,
+              "quotedSpan": "The younger neighbors swept the steps in careful rows.",
+              "startChar": 1087,
+              "endChar": 1141
+            }
+          ],
+          "distractorRole": null
+        }
+      ]
+    },
+    {
+      "model": "PssaItem",
+      "id": "pssa_item_g3_lantern_05",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "MCQ",
+      "interactionType": "MCQ",
+      "skill": "literary_vocabulary",
+      "passageId": "pssa_psg_g3_the_lantern_list",
+      "eligibleContent": "E03.A-V.4.1.1",
+      "assessmentAnchor": "E03.A-V.4",
+      "reportingCategory": "A",
+      "dokLevel": 2,
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "studentFacingPrompt": "What does the phrase \"like a backpack full of stones\" help the reader understand?",
+      "answerChoicesJson": [
+        "The lantern promise feels heavy and difficult for Nia.",
+        "The library steps are covered with loose stones.",
+        "The blue lantern boxes are stored inside a backpack.",
+        "The neighbors carry festival supplies down a stone path."
+      ],
+      "correctIndex": 0,
+      "pointValue": 1,
+      "auditMetadata": {
+        "authoredIn": "PSSA_PR_4P_GRADE3_LITERARY_TOPUP",
+        "noDbWrite": true
+      },
+      "structuredChoicesJson": [
+        {
+          "text": "The lantern promise feels heavy and difficult for Nia.",
+          "isCorrect": true,
+          "rationale": "This choice is supported by the passage evidence.",
+          "evidenceLinks": [
+            {
+              "paragraphIndex": 3,
+              "sentenceIndex": 1,
+              "quotedSpan": "The promise had started to feel heavy, like a backpack full of stones.",
+              "startChar": 901,
+              "endChar": 971
+            }
+          ],
+          "distractorRole": null
+        },
+        {
+          "text": "The library steps are covered with loose stones.",
+          "isCorrect": false,
+          "rationale": "This distractor uses a passage detail in a way that does not answer the question.",
+          "evidenceLinks": [
+            {
+              "paragraphIndex": 0,
+              "sentenceIndex": 1,
+              "quotedSpan": "Grandma called it a lantern list, but Nia called it a promise.",
+              "startChar": 67,
+              "endChar": 129
+            }
+          ],
+          "distractorRole": "wrong_emphasis"
+        },
+        {
+          "text": "The blue lantern boxes are stored inside a backpack.",
+          "isCorrect": false,
+          "rationale": "This distractor uses a passage detail in a way that does not answer the question.",
+          "evidenceLinks": [
+            {
+              "paragraphIndex": 2,
+              "sentenceIndex": 2,
+              "quotedSpan": "Mateo held the ladder while Nia tied the first blue lantern.",
+              "startChar": 698,
+              "endChar": 758
+            }
+          ],
+          "distractorRole": "plausible_misreading"
+        },
+        {
+          "text": "The neighbors carry festival supplies down a stone path.",
+          "isCorrect": false,
+          "rationale": "This distractor uses a passage detail in a way that does not answer the question.",
+          "evidenceLinks": [
+            {
+              "paragraphIndex": 3,
+              "sentenceIndex": 5,
+              "quotedSpan": "The younger neighbors swept the steps in careful rows.",
+              "startChar": 1087,
+              "endChar": 1141
+            }
+          ],
+          "distractorRole": "unsupported_inference"
+        }
+      ]
+    },
+    {
+      "model": "PssaItem",
+      "id": "pssa_item_g3_lantern_06",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "MCQ",
+      "interactionType": "MCQ",
+      "skill": "literary_word_relationships",
+      "passageId": "pssa_psg_g3_the_lantern_list",
+      "eligibleContent": "E03.A-V.4.1.2",
+      "assessmentAnchor": "E03.A-V.4",
+      "reportingCategory": "A",
+      "dokLevel": 2,
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "studentFacingPrompt": "Which word is closest in meaning to \"promise\" as Nia uses it in the story?",
+      "answerChoicesJson": [
+        "a paper decoration for the library festival",
+        "a lantern promise that Nia means to keep",
+        "a ladder beside the first blue lantern",
+        "a note Mateo reads after school"
+      ],
+      "correctIndex": 1,
+      "pointValue": 1,
+      "auditMetadata": {
+        "authoredIn": "PSSA_PR_4P_GRADE3_LITERARY_TOPUP",
+        "noDbWrite": true
+      },
+      "structuredChoicesJson": [
+        {
+          "text": "a paper decoration for the library festival",
+          "isCorrect": false,
+          "rationale": "This distractor uses a passage detail in a way that does not answer the question.",
+          "evidenceLinks": [
+            {
+              "paragraphIndex": 1,
+              "sentenceIndex": 0,
+              "quotedSpan": "By lunchtime, Nia had written twelve jobs beside her name.",
+              "startChar": 262,
+              "endChar": 320
+            }
+          ],
+          "distractorRole": "too_narrow"
+        },
+        {
+          "text": "a lantern promise that Nia means to keep",
+          "isCorrect": true,
+          "rationale": "This choice is supported by the passage evidence.",
+          "evidenceLinks": [
+            {
+              "paragraphIndex": 0,
+              "sentenceIndex": 1,
+              "quotedSpan": "Grandma called it a lantern list, but Nia called it a promise.",
+              "startChar": 67,
+              "endChar": 129
+            }
+          ],
+          "distractorRole": null
+        },
+        {
+          "text": "a ladder beside the first blue lantern",
+          "isCorrect": false,
+          "rationale": "This distractor uses a passage detail in a way that does not answer the question.",
+          "evidenceLinks": [
+            {
+              "paragraphIndex": 2,
+              "sentenceIndex": 2,
+              "quotedSpan": "Mateo held the ladder while Nia tied the first blue lantern.",
+              "startChar": 698,
+              "endChar": 758
+            }
+          ],
+          "distractorRole": "plausible_misreading"
+        },
+        {
+          "text": "a note Mateo reads after school",
+          "isCorrect": false,
+          "rationale": "This distractor uses a passage detail in a way that does not answer the question.",
+          "evidenceLinks": [
+            {
+              "paragraphIndex": 3,
+              "sentenceIndex": 5,
+              "quotedSpan": "The younger neighbors swept the steps in careful rows.",
+              "startChar": 1087,
+              "endChar": 1141
+            }
+          ],
+          "distractorRole": "unsupported_inference"
+        }
+      ]
+    },
+    {
+      "model": "PssaItem",
+      "id": "pssa_item_g3_bell_01",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "MCQ",
+      "interactionType": "MCQ",
+      "skill": "literary_key_ideas",
+      "passageId": "pssa_psg_g3_the_porch_bell",
+      "eligibleContent": "E03.A-K.1.1.1",
+      "assessmentAnchor": "E03.A-K.1",
+      "reportingCategory": "A",
+      "dokLevel": 2,
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "studentFacingPrompt": "Which detail shows why Milo first wants to protect the sketchbook?",
+      "answerChoicesJson": [
+        "The porch bell is tied with a faded green ribbon.",
+        "Aunt Rosa calls Milo about the sketchbook during the evening.",
+        "Milo wants the first sketchbook drawing to be special.",
+        "Tessa gathers clothespins near the porch rose bushes."
+      ],
+      "correctIndex": 2,
+      "pointValue": 1,
+      "auditMetadata": {
+        "authoredIn": "PSSA_PR_4P_GRADE3_LITERARY_TOPUP",
+        "noDbWrite": true
+      },
+      "structuredChoicesJson": [
+        {
+          "text": "The porch bell is tied with a faded green ribbon.",
+          "isCorrect": false,
+          "rationale": "This distractor uses a passage detail in a way that does not answer the question.",
+          "evidenceLinks": [
+            {
+              "paragraphIndex": 0,
+              "sentenceIndex": 1,
+              "quotedSpan": "The bell was small and brass, tied to the rail with a faded green ribbon.",
+              "startChar": 53,
+              "endChar": 126
+            }
+          ],
+          "distractorRole": "too_narrow"
+        },
+        {
+          "text": "Aunt Rosa calls Milo about the sketchbook during the evening.",
+          "isCorrect": false,
+          "rationale": "This distractor uses a passage detail in a way that does not answer the question.",
+          "evidenceLinks": [
+            {
+              "paragraphIndex": 1,
+              "sentenceIndex": 0,
+              "quotedSpan": "The package held a new sketchbook from Aunt Rosa.",
+              "startChar": 236,
+              "endChar": 285
+            }
+          ],
+          "distractorRole": "wrong_emphasis"
+        },
+        {
+          "text": "Milo wants the first sketchbook drawing to be special.",
+          "isCorrect": true,
+          "rationale": "This choice is supported by the passage evidence.",
+          "evidenceLinks": [
+            {
+              "paragraphIndex": 1,
+              "sentenceIndex": 1,
+              "quotedSpan": "Milo wanted to keep it clean until he could draw something perfect.",
+              "startChar": 286,
+              "endChar": 353
+            }
+          ],
+          "distractorRole": null
+        },
+        {
+          "text": "Tessa gathers clothespins near the porch rose bushes.",
+          "isCorrect": false,
+          "rationale": "This distractor uses a passage detail in a way that does not answer the question.",
+          "evidenceLinks": [
+            {
+              "paragraphIndex": 2,
+              "sentenceIndex": 1,
+              "quotedSpan": "Tessa had dropped a basket of clothespins, and the wind was carrying them across the yard.",
+              "startChar": 559,
+              "endChar": 649
+            }
+          ],
+          "distractorRole": "unsupported_inference"
+        }
+      ]
+    },
+    {
+      "model": "PssaItem",
+      "id": "pssa_item_g3_bell_02",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "MCQ",
+      "interactionType": "MCQ",
+      "skill": "literary_theme",
+      "passageId": "pssa_psg_g3_the_porch_bell",
+      "eligibleContent": "E03.A-K.1.1.2",
+      "assessmentAnchor": "E03.A-K.1",
+      "reportingCategory": "A",
+      "dokLevel": 2,
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "studentFacingPrompt": "What lesson does Milo learn from the porch bell story?",
+      "answerChoicesJson": [
+        "A clean sketchbook page matters more than helping Tessa.",
+        "The brass porch bell should stay quiet during the wind.",
+        "The green ribbon can keep clothespins inside Tessa's basket.",
+        "Milo learns a smudged sketchbook page can show kindness."
+      ],
+      "correctIndex": 3,
+      "pointValue": 1,
+      "auditMetadata": {
+        "authoredIn": "PSSA_PR_4P_GRADE3_LITERARY_TOPUP",
+        "noDbWrite": true
+      },
+      "structuredChoicesJson": [
+        {
+          "text": "A clean sketchbook page matters more than helping Tessa.",
+          "isCorrect": false,
+          "rationale": "This distractor uses a passage detail in a way that does not answer the question.",
+          "evidenceLinks": [
+            {
+              "paragraphIndex": 0,
+              "sentenceIndex": 1,
+              "quotedSpan": "The bell was small and brass, tied to the rail with a faded green ribbon.",
+              "startChar": 53,
+              "endChar": 126
+            }
+          ],
+          "distractorRole": "too_narrow"
+        },
+        {
+          "text": "The brass porch bell should stay quiet during the wind.",
+          "isCorrect": false,
+          "rationale": "This distractor uses a passage detail in a way that does not answer the question.",
+          "evidenceLinks": [
+            {
+              "paragraphIndex": 1,
+              "sentenceIndex": 0,
+              "quotedSpan": "The package held a new sketchbook from Aunt Rosa.",
+              "startChar": 236,
+              "endChar": 285
+            }
+          ],
+          "distractorRole": "wrong_emphasis"
+        },
+        {
+          "text": "The green ribbon can keep clothespins inside Tessa's basket.",
+          "isCorrect": false,
+          "rationale": "This distractor uses a passage detail in a way that does not answer the question.",
+          "evidenceLinks": [
+            {
+              "paragraphIndex": 1,
+              "sentenceIndex": 1,
+              "quotedSpan": "Milo wanted to keep it clean until he could draw something perfect.",
+              "startChar": 286,
+              "endChar": 353
+            }
+          ],
+          "distractorRole": "plausible_misreading"
+        },
+        {
+          "text": "Milo learns a smudged sketchbook page can show kindness.",
+          "isCorrect": true,
+          "rationale": "This choice is supported by the passage evidence.",
+          "evidenceLinks": [
+            {
+              "paragraphIndex": 2,
+              "sentenceIndex": 1,
+              "quotedSpan": "Tessa had dropped a basket of clothespins, and the wind was carrying them across the yard.",
+              "startChar": 559,
+              "endChar": 649
+            }
+          ],
+          "distractorRole": null
+        }
+      ]
+    },
+    {
+      "model": "PssaItem",
+      "id": "pssa_item_g3_bell_03",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "MCQ",
+      "interactionType": "MCQ",
+      "skill": "literary_character",
+      "passageId": "pssa_psg_g3_the_porch_bell",
+      "eligibleContent": "E03.A-K.1.1.3",
+      "assessmentAnchor": "E03.A-K.1",
+      "reportingCategory": "A",
+      "dokLevel": 2,
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "studentFacingPrompt": "How do Milo's actions move the story forward after the porch bell rings again?",
+      "answerChoicesJson": [
+        "Milo runs from the porch to help Tessa gather clothespins.",
+        "Milo mails Aunt Rosa's new sketchbook back unopened.",
+        "Milo asks Tessa to stay away from the porch bell.",
+        "Milo ties another green ribbon around the porch rail."
+      ],
+      "correctIndex": 0,
+      "pointValue": 1,
+      "auditMetadata": {
+        "authoredIn": "PSSA_PR_4P_GRADE3_LITERARY_TOPUP",
+        "noDbWrite": true
+      },
+      "structuredChoicesJson": [
+        {
+          "text": "Milo runs from the porch to help Tessa gather clothespins.",
+          "isCorrect": true,
+          "rationale": "This choice is supported by the passage evidence.",
+          "evidenceLinks": [
+            {
+              "paragraphIndex": 0,
+              "sentenceIndex": 1,
+              "quotedSpan": "The bell was small and brass, tied to the rail with a faded green ribbon.",
+              "startChar": 53,
+              "endChar": 126
+            }
+          ],
+          "distractorRole": null
+        },
+        {
+          "text": "Milo mails Aunt Rosa's new sketchbook back unopened.",
+          "isCorrect": false,
+          "rationale": "This distractor uses a passage detail in a way that does not answer the question.",
+          "evidenceLinks": [
+            {
+              "paragraphIndex": 1,
+              "sentenceIndex": 0,
+              "quotedSpan": "The package held a new sketchbook from Aunt Rosa.",
+              "startChar": 236,
+              "endChar": 285
+            }
+          ],
+          "distractorRole": "wrong_emphasis"
+        },
+        {
+          "text": "Milo asks Tessa to stay away from the porch bell.",
+          "isCorrect": false,
+          "rationale": "This distractor uses a passage detail in a way that does not answer the question.",
+          "evidenceLinks": [
+            {
+              "paragraphIndex": 1,
+              "sentenceIndex": 1,
+              "quotedSpan": "Milo wanted to keep it clean until he could draw something perfect.",
+              "startChar": 286,
+              "endChar": 353
+            }
+          ],
+          "distractorRole": "plausible_misreading"
+        },
+        {
+          "text": "Milo ties another green ribbon around the porch rail.",
+          "isCorrect": false,
+          "rationale": "This distractor uses a passage detail in a way that does not answer the question.",
+          "evidenceLinks": [
+            {
+              "paragraphIndex": 2,
+              "sentenceIndex": 1,
+              "quotedSpan": "Tessa had dropped a basket of clothespins, and the wind was carrying them across the yard.",
+              "startChar": 559,
+              "endChar": 649
+            }
+          ],
+          "distractorRole": "unsupported_inference"
+        }
+      ]
+    },
+    {
+      "model": "PssaItem",
+      "id": "pssa_item_g3_bell_04",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "MCQ",
+      "interactionType": "MCQ",
+      "skill": "literary_point_of_view",
+      "passageId": "pssa_psg_g3_the_porch_bell",
+      "eligibleContent": "E03.A-C.2.1.1",
+      "assessmentAnchor": "E03.A-C.2",
+      "reportingCategory": "A",
+      "dokLevel": 2,
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "studentFacingPrompt": "Whose thoughts and feelings does the narrator mostly follow?",
+      "answerChoicesJson": [
+        "Aunt Rosa's thoughts about the sketchbook package she mailed.",
+        "Milo's feelings about the sketchbook and helping Tessa.",
+        "Tessa's ideas about drawing on the clean first page.",
+        "A neighbor's view of the brass bell on the porch."
+      ],
+      "correctIndex": 1,
+      "pointValue": 1,
+      "auditMetadata": {
+        "authoredIn": "PSSA_PR_4P_GRADE3_LITERARY_TOPUP",
+        "noDbWrite": true
+      },
+      "structuredChoicesJson": [
+        {
+          "text": "Aunt Rosa's thoughts about the sketchbook package she mailed.",
+          "isCorrect": false,
+          "rationale": "This distractor uses a passage detail in a way that does not answer the question.",
+          "evidenceLinks": [
+            {
+              "paragraphIndex": 0,
+              "sentenceIndex": 1,
+              "quotedSpan": "The bell was small and brass, tied to the rail with a faded green ribbon.",
+              "startChar": 53,
+              "endChar": 126
+            }
+          ],
+          "distractorRole": "too_narrow"
+        },
+        {
+          "text": "Milo's feelings about the sketchbook and helping Tessa.",
+          "isCorrect": true,
+          "rationale": "This choice is supported by the passage evidence.",
+          "evidenceLinks": [
+            {
+              "paragraphIndex": 1,
+              "sentenceIndex": 0,
+              "quotedSpan": "The package held a new sketchbook from Aunt Rosa.",
+              "startChar": 236,
+              "endChar": 285
+            }
+          ],
+          "distractorRole": null
+        },
+        {
+          "text": "Tessa's ideas about drawing on the clean first page.",
+          "isCorrect": false,
+          "rationale": "This distractor uses a passage detail in a way that does not answer the question.",
+          "evidenceLinks": [
+            {
+              "paragraphIndex": 1,
+              "sentenceIndex": 1,
+              "quotedSpan": "Milo wanted to keep it clean until he could draw something perfect.",
+              "startChar": 286,
+              "endChar": 353
+            }
+          ],
+          "distractorRole": "plausible_misreading"
+        },
+        {
+          "text": "A neighbor's view of the brass bell on the porch.",
+          "isCorrect": false,
+          "rationale": "This distractor uses a passage detail in a way that does not answer the question.",
+          "evidenceLinks": [
+            {
+              "paragraphIndex": 2,
+              "sentenceIndex": 1,
+              "quotedSpan": "Tessa had dropped a basket of clothespins, and the wind was carrying them across the yard.",
+              "startChar": 559,
+              "endChar": 649
+            }
+          ],
+          "distractorRole": "unsupported_inference"
+        }
+      ]
+    },
+    {
+      "model": "PssaItem",
+      "id": "pssa_item_g3_bell_05",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "MCQ",
+      "interactionType": "MCQ",
+      "skill": "literary_vocabulary",
+      "passageId": "pssa_psg_g3_the_porch_bell",
+      "eligibleContent": "E03.A-V.4.1.1",
+      "assessmentAnchor": "E03.A-V.4",
+      "reportingCategory": "A",
+      "dokLevel": 2,
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "studentFacingPrompt": "What does the word \"smudge\" mean as it is used in the story?",
+      "answerChoicesJson": [
+        "a neat drawing of the porch bell",
+        "a package from Aunt Rosa",
+        "a dirty mark from Milo's thumb",
+        "a basket full of clothespins"
+      ],
+      "correctIndex": 2,
+      "pointValue": 1,
+      "auditMetadata": {
+        "authoredIn": "PSSA_PR_4P_GRADE3_LITERARY_TOPUP",
+        "noDbWrite": true
+      },
+      "structuredChoicesJson": [
+        {
+          "text": "a neat drawing of the porch bell",
+          "isCorrect": false,
+          "rationale": "This distractor uses a passage detail in a way that does not answer the question.",
+          "evidenceLinks": [
+            {
+              "paragraphIndex": 0,
+              "sentenceIndex": 1,
+              "quotedSpan": "The bell was small and brass, tied to the rail with a faded green ribbon.",
+              "startChar": 53,
+              "endChar": 126
+            }
+          ],
+          "distractorRole": "too_narrow"
+        },
+        {
+          "text": "a package from Aunt Rosa",
+          "isCorrect": false,
+          "rationale": "This distractor uses a passage detail in a way that does not answer the question.",
+          "evidenceLinks": [
+            {
+              "paragraphIndex": 1,
+              "sentenceIndex": 0,
+              "quotedSpan": "The package held a new sketchbook from Aunt Rosa.",
+              "startChar": 236,
+              "endChar": 285
+            }
+          ],
+          "distractorRole": "wrong_emphasis"
+        },
+        {
+          "text": "a dirty mark from Milo's thumb",
+          "isCorrect": true,
+          "rationale": "This choice is supported by the passage evidence.",
+          "evidenceLinks": [
+            {
+              "paragraphIndex": 3,
+              "sentenceIndex": 3,
+              "quotedSpan": "A smudge of dirt crossed Milo's thumb, and the thumbprint landed on the first blank page.",
+              "startChar": 955,
+              "endChar": 1044
+            }
+          ],
+          "distractorRole": null
+        },
+        {
+          "text": "a basket full of clothespins",
+          "isCorrect": false,
+          "rationale": "This distractor uses a passage detail in a way that does not answer the question.",
+          "evidenceLinks": [
+            {
+              "paragraphIndex": 2,
+              "sentenceIndex": 1,
+              "quotedSpan": "Tessa had dropped a basket of clothespins, and the wind was carrying them across the yard.",
+              "startChar": 559,
+              "endChar": 649
+            }
+          ],
+          "distractorRole": "unsupported_inference"
+        }
+      ]
+    },
+    {
+      "model": "PssaItem",
+      "id": "pssa_item_g3_bell_06",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "MCQ",
+      "interactionType": "MCQ",
+      "skill": "literary_word_relationships",
+      "passageId": "pssa_psg_g3_the_porch_bell",
+      "eligibleContent": "E03.A-V.4.1.2",
+      "assessmentAnchor": "E03.A-V.4",
+      "reportingCategory": "A",
+      "dokLevel": 2,
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "studentFacingPrompt": "What does the word \"hugged\" show about how Milo feels before he helps Tessa?",
+      "answerChoicesJson": [
+        "careless with Aunt Rosa's sketchbook package",
+        "protective of the clean sketchbook page",
+        "angry about Tessa's clothespin basket",
+        "bored with the brass porch bell"
+      ],
+      "correctIndex": 1,
+      "pointValue": 1,
+      "auditMetadata": {
+        "authoredIn": "PSSA_PR_4P_GRADE3_LITERARY_TOPUP",
+        "noDbWrite": true
+      },
+      "structuredChoicesJson": [
+        {
+          "text": "careless with Aunt Rosa's sketchbook package",
+          "isCorrect": false,
+          "rationale": "This distractor uses a passage detail in a way that does not answer the question.",
+          "evidenceLinks": [
+            {
+              "paragraphIndex": 0,
+              "sentenceIndex": 1,
+              "quotedSpan": "The bell was small and brass, tied to the rail with a faded green ribbon.",
+              "startChar": 53,
+              "endChar": 126
+            }
+          ],
+          "distractorRole": "too_narrow"
+        },
+        {
+          "text": "protective of the clean sketchbook page",
+          "isCorrect": true,
+          "rationale": "This distractor uses a passage detail in a way that does not answer the question.",
+          "evidenceLinks": [
+            {
+              "paragraphIndex": 1,
+              "sentenceIndex": 3,
+              "quotedSpan": "Milo hugged the sketchbook to his chest and said the first drawing had to be special.",
+              "startChar": 429,
+              "endChar": 514
+            }
+          ],
+          "distractorRole": null
+        },
+        {
+          "text": "angry about Tessa's clothespin basket",
+          "isCorrect": false,
+          "rationale": "This distractor uses a passage detail in a way that does not answer the question.",
+          "evidenceLinks": [
+            {
+              "paragraphIndex": 1,
+              "sentenceIndex": 1,
+              "quotedSpan": "Milo wanted to keep it clean until he could draw something perfect.",
+              "startChar": 286,
+              "endChar": 353
+            }
+          ],
+          "distractorRole": "plausible_misreading"
+        },
+        {
+          "text": "bored with the brass porch bell",
+          "isCorrect": false,
+          "rationale": "This choice is supported by the passage evidence.",
+          "evidenceLinks": [
+            {
+              "paragraphIndex": 2,
+              "sentenceIndex": 1,
+              "quotedSpan": "Tessa had dropped a basket of clothespins, and the wind was carrying them across the yard.",
+              "startChar": 559,
+              "endChar": 649
+            }
+          ],
+          "distractorRole": "plausible_misreading"
+        }
+      ]
+    },
+    {
+      "itemId": "pssa_ebsr_g3_lantern_01",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "EBSR",
+      "interactionType": "EBSR",
+      "interactionSubtype": "two_point",
+      "passageId": "pssa_psg_g3_the_lantern_list",
+      "passageTitle": "The Lantern List",
+      "eligibleContent": "E03.A-K.1.1.2",
+      "ecSkillFamily": "literature_elements",
+      "reportingCategory": "A",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "partA": {
+        "stem": "What message does the lantern story teach?",
+        "choices": [
+          {
+            "text": "A festival looks best when one person controls the lantern jobs.",
+            "distractorRole": "opposite_claim",
+            "supportsPartA": false,
+            "rationale": "Nia learns that sharing the jobs helps."
+          },
+          {
+            "text": "Nia shares lantern jobs, so the library steps shine.",
+            "distractorRole": null,
+            "supportsPartA": true,
+            "rationale": "This states the message and uses the lantern result."
+          },
+          {
+            "text": "A blue lantern should be tied before red paper stars are taped.",
+            "distractorRole": "minor_detail",
+            "supportsPartA": false,
+            "rationale": "This is a detail, not the story message."
+          },
+          {
+            "text": "A folded list is useful when it stays inside a pocket.",
+            "distractorRole": "unsupported_inference",
+            "supportsPartA": false,
+            "rationale": "Nia changes the list instead of hiding it."
+          }
+        ],
+        "correctIndex": 1,
+        "evidenceNeededDescription": "Evidence should show Nia sharing work and seeing a better result.",
+        "rationale": "This states the message and uses the lantern result.",
+        "distractorRationales": [
+          "Nia learns that sharing the jobs helps.",
+          "This states the message and uses the lantern result.",
+          "This is a detail, not the story message.",
+          "Nia changes the list instead of hiding it."
+        ],
+        "distractorRoles": [
+          "opposite_claim",
+          "correct",
+          "minor_detail",
+          "unsupported_inference"
+        ]
+      },
+      "partB": {
+        "stem": "Which two details best support the answer in Part One?",
+        "instruction": "Choose two answers.",
+        "choices": [
+          {
+            "text": "Mateo read the list and raised his eyebrows.",
+            "quotedSpan": "Mateo read the list and raised his eyebrows.",
+            "evidenceRole": "background",
+            "supportsPartA": false,
+            "rationale": "This shows concern but not the final lesson."
+          },
+          {
+            "text": "She crossed out half of her own jobs and added names beside them.",
+            "quotedSpan": "She crossed out half of her own jobs and added names beside them.",
+            "evidenceRole": "supports_part_a",
+            "supportsPartA": true,
+            "rationale": "Nia decides to share the work."
+          },
+          {
+            "text": "At dusk, every lantern swung safely above the library steps.",
+            "quotedSpan": "At dusk, every lantern swung safely above the library steps.",
+            "evidenceRole": "supports_part_a",
+            "supportsPartA": true,
+            "rationale": "The shared work succeeds."
+          },
+          {
+            "text": "Grandma brought red paper stars, and younger neighbors asked for jobs.",
+            "quotedSpan": "Then Grandma brought a box of red paper stars, and two younger neighbors asked what job they could do.",
+            "evidenceRole": "minor_detail",
+            "supportsPartA": false,
+            "rationale": "This names a helper but not the lesson by itself."
+          }
+        ],
+        "correctIndices": [
+          1,
+          2
+        ],
+        "rationale": "Together these details show Nia sharing work and reaching a successful result."
+      },
+      "correctResponse": {
+        "partA": {
+          "correctIndex": 1
+        },
+        "partB": {
+          "correctIndices": [
+            1,
+            2
+          ]
+        }
+      },
+      "scoring": {
+        "totalPoints": 2,
+        "partAPoints": 1,
+        "partBPoints": 1,
+        "requirePartACorrectForFullCredit": true,
+        "partialCreditRules": [
+          {
+            "points": 2,
+            "rule": "Part One is correct and both Part Two evidence choices are correct."
+          },
+          {
+            "points": 1,
+            "rule": "Part One is correct and one Part Two evidence choice is correct, or Part One is incorrect but both Part Two evidence choices are correct."
+          },
+          {
+            "points": 0,
+            "rule": "The response is unsupported, incomplete, or missing."
+          }
+        ],
+        "scoringNotes": "Full credit requires the Part One answer and both supporting evidence choices; unsupported evidence cannot earn full credit."
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_PR_4P_GRADE3_LITERARY_TOPUP",
+        "noDbWrite": true
+      }
+    },
+    {
+      "itemId": "pssa_ebsr_g3_bell_01",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "EBSR",
+      "interactionType": "EBSR",
+      "interactionSubtype": "two_point",
+      "passageId": "pssa_psg_g3_the_porch_bell",
+      "passageTitle": "The Porch Bell",
+      "eligibleContent": "E03.A-K.1.1.2",
+      "ecSkillFamily": "literature_elements",
+      "reportingCategory": "A",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "partA": {
+        "stem": "What lesson does Milo learn in the porch bell story?",
+        "choices": [
+          {
+            "text": "A porch bell should be removed when the wind moves the screen door.",
+            "distractorRole": "unsupported_inference",
+            "supportsPartA": false,
+            "rationale": "The bell remains meaningful in the story."
+          },
+          {
+            "text": "Aunt Rosa wants Milo to keep sketchbook pages clean.",
+            "distractorRole": "opposite_claim",
+            "supportsPartA": false,
+            "rationale": "Aunt Rosa is not shown making that demand."
+          },
+          {
+            "text": "Aunt Rosa wants Milo to keep sketchbook pages clean.",
+            "distractorRole": "plausible_misreading",
+            "supportsPartA": false,
+            "rationale": "Tessa asks for a page, but that is not the lesson."
+          },
+          {
+            "text": "Milo makes the smudged page special by helping Tessa.",
+            "distractorRole": null,
+            "supportsPartA": true,
+            "rationale": "This states the lesson and uses Milo helping Tessa."
+          }
+        ],
+        "correctIndex": 3,
+        "evidenceNeededDescription": "Evidence should show Milo helping Tessa and turning the thumbprint into part of the drawing.",
+        "rationale": "This states the lesson and uses Milo helping Tessa.",
+        "distractorRationales": [
+          "The bell remains meaningful in the story.",
+          "Aunt Rosa is not shown making that demand.",
+          "Tessa asks for a page, but that is not the lesson.",
+          "This states the lesson and uses Milo helping Tessa."
+        ],
+        "distractorRoles": [
+          "unsupported_inference",
+          "opposite_claim",
+          "plausible_misreading",
+          "correct"
+        ]
+      },
+      "partB": {
+        "stem": "Which two details best support the answer in Part One?",
+        "instruction": "Choose two answers.",
+        "choices": [
+          {
+            "text": "Milo almost stayed on the step with his clean sketchbook.",
+            "quotedSpan": "Milo almost stayed on the step with his clean sketchbook.",
+            "evidenceRole": "background",
+            "supportsPartA": false,
+            "rationale": "This shows his first feeling, not the changed result."
+          },
+          {
+            "text": "Then he saw Tessa chasing pins near the rose bushes, so he set the book down and ran to help.",
+            "quotedSpan": "Then he saw Tessa chasing pins near the rose bushes, so he set the book down and ran to help.",
+            "evidenceRole": "supports_part_a",
+            "supportsPartA": true,
+            "rationale": "Milo chooses to help Tessa."
+          },
+          {
+            "text": "Milo stared at the mark.",
+            "quotedSpan": "Milo stared at the mark.",
+            "evidenceRole": "minor_detail",
+            "supportsPartA": false,
+            "rationale": "This is before he changes the mark into art."
+          },
+          {
+            "text": "Milo said the first page was special after all because it showed the day the porch bell reminded him to help.",
+            "quotedSpan": "Milo said the first page was special after all because it showed the day the porch bell reminded him to help.",
+            "evidenceRole": "supports_part_a",
+            "supportsPartA": true,
+            "rationale": "This directly explains why the page is special."
+          }
+        ],
+        "correctIndices": [
+          1,
+          3
+        ],
+        "rationale": "Together these details show Milo helping and valuing the page because of that choice."
+      },
+      "correctResponse": {
+        "partA": {
+          "correctIndex": 3
+        },
+        "partB": {
+          "correctIndices": [
+            1,
+            3
+          ]
+        }
+      },
+      "scoring": {
+        "totalPoints": 2,
+        "partAPoints": 1,
+        "partBPoints": 1,
+        "requirePartACorrectForFullCredit": true,
+        "partialCreditRules": [
+          {
+            "points": 2,
+            "rule": "Part One is correct and both Part Two evidence choices are correct."
+          },
+          {
+            "points": 1,
+            "rule": "Part One is correct and one Part Two evidence choice is correct, or Part One is incorrect but both Part Two evidence choices are correct."
+          },
+          {
+            "points": 0,
+            "rule": "The response is unsupported, incomplete, or missing."
+          }
+        ],
+        "scoringNotes": "Full credit requires the Part One answer and both supporting evidence choices; unsupported evidence cannot earn full credit."
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_PR_4P_GRADE3_LITERARY_TOPUP",
+        "noDbWrite": true
+      }
+    },
+    {
+      "itemId": "pssa_ms_g3_lantern_01",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "MULTI_SELECT",
+      "interactionType": "MULTI_SELECT",
+      "interactionSubtype": "choose_n_details",
+      "passageId": "pssa_psg_g3_the_lantern_list",
+      "passageTitle": "The Lantern List",
+      "eligibleContent": "E03.A-K.1.1.2",
+      "ecSkillFamily": "literature_elements",
+      "reportingCategory": "A",
+      "stem": "Which two details best support the message that sharing work helps Nia keep her promise?",
+      "instructionText": "Choose two answers.",
+      "choices": [
+        {
+          "text": "The ladder wobbled when Nia reached for the string.",
+          "supportsPrompt": false,
+          "distractorRole": "problem_detail",
+          "rationale": "This shows difficulty but not the shared solution."
+        },
+        {
+          "text": "She crossed out half of her own jobs and added names beside them.",
+          "supportsPrompt": true,
+          "distractorRole": null,
+          "rationale": "Nia shares the work."
+        },
+        {
+          "text": "Mateo tested the bulbs while Grandma taped the stars.",
+          "supportsPrompt": true,
+          "distractorRole": null,
+          "rationale": "Helpers take real jobs from the lantern list."
+        },
+        {
+          "text": "Nia kept the folded paper in her jacket pocket.",
+          "supportsPrompt": false,
+          "distractorRole": "minor_detail",
+          "rationale": "This does not show the lesson."
+        }
+      ],
+      "correctIndices": [
+        1,
+        2
+      ],
+      "minSelections": 2,
+      "maxSelections": 2,
+      "exactSelectionCount": 2,
+      "scoring": {
+        "totalPoints": 2,
+        "partialCreditRules": [
+          {
+            "points": 2,
+            "rule": "Both correct choices and no extra selections."
+          },
+          {
+            "points": 1,
+            "rule": "One correct choice and no extra selections."
+          },
+          {
+            "points": 0,
+            "rule": "Unsupported, extra, or missing selections."
+          }
+        ],
+        "scoringNotes": "Full credit cannot be earned with unsupported or extra selections."
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "auditMetadata": {
+        "authoredIn": "PSSA_PR_4P_GRADE3_LITERARY_TOPUP",
+        "noDbWrite": true
+      }
+    },
+    {
+      "itemId": "pssa_ms_g3_bell_01",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "MULTI_SELECT",
+      "interactionType": "MULTI_SELECT",
+      "interactionSubtype": "choose_n_details",
+      "passageId": "pssa_psg_g3_the_porch_bell",
+      "passageTitle": "The Porch Bell",
+      "eligibleContent": "E03.A-K.1.1.2",
+      "ecSkillFamily": "literature_elements",
+      "reportingCategory": "A",
+      "stem": "Which two details best support the lesson that Milo's imperfect page becomes special?",
+      "instructionText": "Choose two answers.",
+      "choices": [
+        {
+          "text": "The package held a new sketchbook from Aunt Rosa.",
+          "supportsPrompt": false,
+          "distractorRole": "setup_detail",
+          "rationale": "This sets up the sketchbook but not the lesson."
+        },
+        {
+          "text": "Milo hugged the sketchbook to his chest.",
+          "supportsPrompt": false,
+          "distractorRole": "early_feeling",
+          "rationale": "This shows Milo before he changes."
+        },
+        {
+          "text": "The smudge became a tiny stone on the path.",
+          "supportsPrompt": true,
+          "distractorRole": null,
+          "rationale": "Milo turns the mark into part of the drawing."
+        },
+        {
+          "text": "The first page showed the day the porch bell reminded him to help.",
+          "supportsPrompt": true,
+          "distractorRole": null,
+          "rationale": "This explains why the page is special."
+        }
+      ],
+      "correctIndices": [
+        2,
+        3
+      ],
+      "minSelections": 2,
+      "maxSelections": 2,
+      "exactSelectionCount": 2,
+      "scoring": {
+        "totalPoints": 2,
+        "partialCreditRules": [
+          {
+            "points": 2,
+            "rule": "Both correct choices and no extra selections."
+          },
+          {
+            "points": 1,
+            "rule": "One correct choice and no extra selections."
+          },
+          {
+            "points": 0,
+            "rule": "Unsupported, extra, or missing selections."
+          }
+        ],
+        "scoringNotes": "Full credit cannot be earned with unsupported or extra selections."
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "auditMetadata": {
+        "authoredIn": "PSSA_PR_4P_GRADE3_LITERARY_TOPUP",
+        "noDbWrite": true
+      }
+    },
+    {
+      "itemId": "pssa_ht_g3_lantern_01",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "HOT_TEXT",
+      "interactionType": "HOT_TEXT",
+      "interactionSubtype": "sentence_select",
+      "passageId": "pssa_psg_g3_the_lantern_list",
+      "passageTitle": "The Lantern List",
+      "eligibleContent": "E03.A-K.1.1.2",
+      "ecSkillFamily": "literature_elements",
+      "reportingCategory": "A",
+      "prompt": "Choose two sentences that best show the lesson that Nia should share the lantern work.",
+      "instructionText": "Choose two sentences.",
+      "selectableSpans": [
+        {
+          "spanId": "lantern_ht_s1",
+          "text": "By lunchtime, Nia had written twelve jobs beside her name.",
+          "paragraphIndex": 1,
+          "sentenceIndex": 0,
+          "startOffset": 0,
+          "endOffset": 58,
+          "supportsPrompt": false,
+          "distractorRole": "problem_detail",
+          "rationale": "This shows too much work but not the lesson."
+        },
+        {
+          "spanId": "lantern_ht_s2",
+          "text": "She crossed out half of her own jobs and added names beside them.",
+          "paragraphIndex": 3,
+          "sentenceIndex": 2,
+          "startOffset": 1,
+          "endOffset": 65,
+          "supportsPrompt": true,
+          "distractorRole": null,
+          "rationale": "Nia shares the jobs."
+        },
+        {
+          "spanId": "lantern_ht_s3",
+          "text": "At dusk, every lantern swung safely above the library steps.",
+          "paragraphIndex": 4,
+          "sentenceIndex": 0,
+          "startOffset": 2,
+          "endOffset": 59,
+          "supportsPrompt": true,
+          "distractorRole": null,
+          "rationale": "The shared work succeeds."
+        },
+        {
+          "spanId": "lantern_ht_s4",
+          "text": "Grandma called it a lantern list, but Nia called it a promise.",
+          "paragraphIndex": 0,
+          "sentenceIndex": 1,
+          "startOffset": 3,
+          "endOffset": 66,
+          "supportsPrompt": false,
+          "distractorRole": "setup_detail",
+          "rationale": "This introduces the promise but not the solution."
+        }
+      ],
+      "correctSpanIds": [
+        "lantern_ht_s2",
+        "lantern_ht_s3"
+      ],
+      "minSelections": 2,
+      "maxSelections": 2,
+      "exactSelectionCount": 2,
+      "scoring": {
+        "totalPoints": 2,
+        "partialCreditRules": [
+          {
+            "points": 2,
+            "rule": "Both correct spans and no extra selections."
+          },
+          {
+            "points": 1,
+            "rule": "One correct span and no extra selections."
+          },
+          {
+            "points": 0,
+            "rule": "Unsupported, extra, or missing selections."
+          }
+        ],
+        "scoringNotes": "Full credit cannot be earned with unsupported or extra selected spans."
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "auditMetadata": {
+        "authoredIn": "PSSA_PR_4P_GRADE3_LITERARY_TOPUP",
+        "noDbWrite": true
+      }
+    },
+    {
+      "itemId": "pssa_ht_g3_bell_01",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "HOT_TEXT",
+      "interactionType": "HOT_TEXT",
+      "interactionSubtype": "sentence_select",
+      "passageId": "pssa_psg_g3_the_porch_bell",
+      "passageTitle": "The Porch Bell",
+      "eligibleContent": "E03.A-K.1.1.2",
+      "ecSkillFamily": "literature_elements",
+      "reportingCategory": "A",
+      "prompt": "Choose two sentences that best support the lesson that helping makes Milo's page special.",
+      "instructionText": "Choose two sentences.",
+      "selectableSpans": [
+        {
+          "spanId": "bell_ht_s1",
+          "text": "Milo wanted to keep it clean until he could draw something perfect.",
+          "paragraphIndex": 1,
+          "sentenceIndex": 1,
+          "startOffset": 0,
+          "endOffset": 68,
+          "supportsPrompt": false,
+          "distractorRole": "early_feeling",
+          "rationale": "This shows Milo before he helps."
+        },
+        {
+          "spanId": "bell_ht_s2",
+          "text": "Then he saw Tessa chasing pins near the rose bushes, so he set the book down and ran to help.",
+          "paragraphIndex": 2,
+          "sentenceIndex": 3,
+          "startOffset": 1,
+          "endOffset": 96,
+          "supportsPrompt": true,
+          "distractorRole": null,
+          "rationale": "Milo chooses to help Tessa."
+        },
+        {
+          "spanId": "bell_ht_s3",
+          "text": "Milo stared at the mark.",
+          "paragraphIndex": 4,
+          "sentenceIndex": 0,
+          "startOffset": 2,
+          "endOffset": 27,
+          "supportsPrompt": false,
+          "distractorRole": "incomplete_result",
+          "rationale": "This does not yet show why the page is special."
+        },
+        {
+          "spanId": "bell_ht_s4",
+          "text": "Milo said the first page was special after all because it showed the day the porch bell reminded him to help.",
+          "paragraphIndex": 4,
+          "sentenceIndex": 3,
+          "startOffset": 3,
+          "endOffset": 108,
+          "supportsPrompt": true,
+          "distractorRole": null,
+          "rationale": "This states the lesson."
+        }
+      ],
+      "correctSpanIds": [
+        "bell_ht_s2",
+        "bell_ht_s4"
+      ],
+      "minSelections": 2,
+      "maxSelections": 2,
+      "exactSelectionCount": 2,
+      "scoring": {
+        "totalPoints": 2,
+        "partialCreditRules": [
+          {
+            "points": 2,
+            "rule": "Both correct spans and no extra selections."
+          },
+          {
+            "points": 1,
+            "rule": "One correct span and no extra selections."
+          },
+          {
+            "points": 0,
+            "rule": "Unsupported, extra, or missing selections."
+          }
+        ],
+        "scoringNotes": "Full credit cannot be earned with unsupported or extra selected spans."
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "auditMetadata": {
+        "authoredIn": "PSSA_PR_4P_GRADE3_LITERARY_TOPUP",
+        "noDbWrite": true
+      }
+    },
+    {
+      "itemId": "pssa_mg_g3_lantern_01",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "passageId": "pssa_psg_g3_the_lantern_list",
+      "passageTitle": "The Lantern List",
+      "eligibleContent": "E03.A-K.1.1.2",
+      "ecSkillFamily": "literature_elements",
+      "reportingCategory": "A",
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "itemType": "MATCHING_GRID",
+      "interactionType": "MATCHING_GRID",
+      "interactionSubtype": "within_text_category",
+      "stem": "Complete the table to show how details in the story support the message.",
+      "instructionText": "Choose one column for each row.",
+      "rows": [
+        {
+          "rowId": "lantern_mg_r1",
+          "label": "Nia had written twelve jobs beside her name.",
+          "correctColumnId": "problem",
+          "groundedInPassageId": "pssa_psg_g3_the_lantern_list",
+          "evidenceQuote": "By lunchtime, Nia had written twelve jobs beside her name.",
+          "rationale": "This shows the work is too much for one person.",
+          "plausibleWrongRationales": {
+            "choice": "The choice comes later.",
+            "result": "The result comes after helpers join."
+          }
+        },
+        {
+          "rowId": "lantern_mg_r2",
+          "label": "Nia added names beside half of the jobs.",
+          "correctColumnId": "choice",
+          "groundedInPassageId": "pssa_psg_g3_the_lantern_list",
+          "evidenceQuote": "She crossed out half of her own jobs and added names beside them.",
+          "rationale": "This shows Nia choosing to share the work.",
+          "plausibleWrongRationales": {
+            "problem": "The problem was earlier.",
+            "result": "The result comes at dusk."
+          }
+        },
+        {
+          "rowId": "lantern_mg_r3",
+          "label": "Every lantern swung safely above the steps.",
+          "correctColumnId": "result",
+          "groundedInPassageId": "pssa_psg_g3_the_lantern_list",
+          "evidenceQuote": "At dusk, every lantern swung safely above the library steps.",
+          "rationale": "This shows the successful result.",
+          "plausibleWrongRationales": {
+            "problem": "The problem is not happening here.",
+            "choice": "The choice was crossing out jobs."
+          }
+        }
+      ],
+      "columns": [
+        {
+          "columnId": "problem",
+          "label": "Problem"
+        },
+        {
+          "columnId": "choice",
+          "label": "Helpful choice"
+        },
+        {
+          "columnId": "result",
+          "label": "Result"
+        }
+      ],
+      "selectionRule": "one_per_row",
+      "bothColumnId": null,
+      "correctCells": [
+        {
+          "rowId": "lantern_mg_r1",
+          "columnId": "problem"
+        },
+        {
+          "rowId": "lantern_mg_r2",
+          "columnId": "choice"
+        },
+        {
+          "rowId": "lantern_mg_r3",
+          "columnId": "result"
+        }
+      ],
+      "scoring": {
+        "totalPoints": 3,
+        "partialCreditRules": [
+          {
+            "points": 3,
+            "rule": "All three rows matched to the supported column."
+          },
+          {
+            "points": 2,
+            "rule": "Two rows matched to supported columns."
+          },
+          {
+            "points": 1,
+            "rule": "One row matched to a supported column."
+          },
+          {
+            "points": 0,
+            "rule": "No supported matches or unanswered rows."
+          }
+        ],
+        "scoringNotes": "Full credit requires every required row; partial credit is reduced for each unanswered row or unsupported match."
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_PR_4P_GRADE3_LITERARY_TOPUP",
+        "noDbWrite": true
+      }
+    },
+    {
+      "itemId": "pssa_mg_g3_bell_01",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "passageId": "pssa_psg_g3_the_porch_bell",
+      "passageTitle": "The Porch Bell",
+      "eligibleContent": "E03.A-K.1.1.2",
+      "ecSkillFamily": "literature_elements",
+      "reportingCategory": "A",
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "itemType": "MATCHING_GRID",
+      "interactionType": "MATCHING_GRID",
+      "interactionSubtype": "within_text_category",
+      "stem": "Complete the table to show how story details connect to the lesson.",
+      "instructionText": "Choose one column for each row.",
+      "rows": [
+        {
+          "rowId": "bell_mg_r1",
+          "label": "Milo wants to keep the sketchbook clean.",
+          "correctColumnId": "early_wish",
+          "groundedInPassageId": "pssa_psg_g3_the_porch_bell",
+          "evidenceQuote": "Milo wanted to keep it clean until he could draw something perfect.",
+          "rationale": "This shows Milo's first wish.",
+          "plausibleWrongRationales": {
+            "helpful_action": "Helping happens later.",
+            "new_meaning": "The page is not meaningful yet."
+          }
+        },
+        {
+          "rowId": "bell_mg_r2",
+          "label": "Milo runs to help Tessa gather clothespins.",
+          "correctColumnId": "helpful_action",
+          "groundedInPassageId": "pssa_psg_g3_the_porch_bell",
+          "evidenceQuote": "Then he saw Tessa chasing pins near the rose bushes, so he set the book down and ran to help.",
+          "rationale": "This shows Milo choosing kindness.",
+          "plausibleWrongRationales": {
+            "early_wish": "That was before the bell rang again.",
+            "new_meaning": "The drawing happens afterward."
+          }
+        },
+        {
+          "rowId": "bell_mg_r3",
+          "label": "The first page shows the day the bell reminded him to help.",
+          "correctColumnId": "new_meaning",
+          "groundedInPassageId": "pssa_psg_g3_the_porch_bell",
+          "evidenceQuote": "Milo said the first page was special after all because it showed the day the porch bell reminded him to help.",
+          "rationale": "This shows the lesson's result.",
+          "plausibleWrongRationales": {
+            "early_wish": "Milo no longer only wants a clean page.",
+            "helpful_action": "The helping action happened earlier."
+          }
+        }
+      ],
+      "columns": [
+        {
+          "columnId": "early_wish",
+          "label": "Early wish"
+        },
+        {
+          "columnId": "helpful_action",
+          "label": "Helpful action"
+        },
+        {
+          "columnId": "new_meaning",
+          "label": "New meaning"
+        }
+      ],
+      "selectionRule": "one_per_row",
+      "bothColumnId": null,
+      "correctCells": [
+        {
+          "rowId": "bell_mg_r1",
+          "columnId": "early_wish"
+        },
+        {
+          "rowId": "bell_mg_r2",
+          "columnId": "helpful_action"
+        },
+        {
+          "rowId": "bell_mg_r3",
+          "columnId": "new_meaning"
+        }
+      ],
+      "scoring": {
+        "totalPoints": 3,
+        "partialCreditRules": [
+          {
+            "points": 3,
+            "rule": "All three rows matched to the supported column."
+          },
+          {
+            "points": 2,
+            "rule": "Two rows matched to supported columns."
+          },
+          {
+            "points": 1,
+            "rule": "One row matched to a supported column."
+          },
+          {
+            "points": 0,
+            "rule": "No supported matches or unanswered rows."
+          }
+        ],
+        "scoringNotes": "Full credit requires every required row; partial credit is reduced for each unanswered row or unsupported match."
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_PR_4P_GRADE3_LITERARY_TOPUP",
+        "noDbWrite": true
+      }
+    },
+    {
+      "itemId": "pssa_dd_g3_lantern_01",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "passageId": "pssa_psg_g3_the_lantern_list",
+      "passageTitle": "The Lantern List",
+      "eligibleContent": "E03.A-K.1.1.2",
+      "ecSkillFamily": "literature_elements",
+      "reportingCategory": "A",
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "itemType": "DRAG_DROP",
+      "interactionType": "DRAG_DROP",
+      "interactionSubtype": "order",
+      "prompt": "Put the story events in the order that shows how Nia learns the message.",
+      "instructionText": "Drag each event into the correct order.",
+      "tokens": [
+        {
+          "tokenId": "lantern_dd_t1",
+          "text": "Nia crosses out jobs and adds helpers' names.",
+          "isDistractor": false,
+          "groundedInPassage": true,
+          "evidenceQuote": "She crossed out half of her own jobs and added names beside them.",
+          "rationale": "This belongs second.",
+          "validTargetIds": [
+            "lantern_order_2"
+          ]
+        },
+        {
+          "tokenId": "lantern_dd_t2",
+          "text": "Nia writes twelve jobs beside her own name.",
+          "isDistractor": false,
+          "groundedInPassage": true,
+          "evidenceQuote": "By lunchtime, Nia had written twelve jobs beside her name.",
+          "rationale": "This belongs first.",
+          "validTargetIds": [
+            "lantern_order_1"
+          ]
+        },
+        {
+          "tokenId": "lantern_dd_t3",
+          "text": "Every lantern swings safely above the steps.",
+          "isDistractor": false,
+          "groundedInPassage": true,
+          "evidenceQuote": "At dusk, every lantern swung safely above the library steps.",
+          "rationale": "This belongs third.",
+          "validTargetIds": [
+            "lantern_order_3"
+          ]
+        }
+      ],
+      "targets": [
+        {
+          "targetId": "lantern_order_1",
+          "label": "1",
+          "capacity": 1
+        },
+        {
+          "targetId": "lantern_order_2",
+          "label": "2",
+          "capacity": 1
+        },
+        {
+          "targetId": "lantern_order_3",
+          "label": "3",
+          "capacity": 1
+        }
+      ],
+      "correctAssignments": [
+        {
+          "tokenId": "lantern_dd_t2",
+          "targetId": "lantern_order_1"
+        },
+        {
+          "tokenId": "lantern_dd_t1",
+          "targetId": "lantern_order_2"
+        },
+        {
+          "tokenId": "lantern_dd_t3",
+          "targetId": "lantern_order_3"
+        }
+      ],
+      "useAllTokens": true,
+      "scoring": {
+        "totalPoints": 3,
+        "partialCreditRules": [
+          {
+            "points": 3,
+            "rule": "All required tokens placed in the supported target or order position."
+          },
+          {
+            "points": 2,
+            "rule": "Two required tokens placed correctly without exceeding target capacity."
+          },
+          {
+            "points": 1,
+            "rule": "One required token placed correctly without exceeding target capacity."
+          },
+          {
+            "points": 0,
+            "rule": "Wrong placement, unanswered required placement, extra distractor placement, or capacity exceeded."
+          }
+        ],
+        "scoringNotes": "Full credit requires every required token and no wrong target, presented-order shortcut, or capacity violation."
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_PR_4P_GRADE3_LITERARY_TOPUP",
+        "noDbWrite": true
+      }
+    },
+    {
+      "itemId": "pssa_dd_g3_bell_01",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "passageId": "pssa_psg_g3_the_porch_bell",
+      "passageTitle": "The Porch Bell",
+      "eligibleContent": "E03.A-K.1.1.2",
+      "ecSkillFamily": "literature_elements",
+      "reportingCategory": "A",
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "itemType": "DRAG_DROP",
+      "interactionType": "DRAG_DROP",
+      "interactionSubtype": "order",
+      "prompt": "Put the story events in the order that shows Milo learning the lesson.",
+      "instructionText": "Drag each event into the correct order.",
+      "tokens": [
+        {
+          "tokenId": "bell_dd_t1",
+          "text": "Milo draws the porch rail around the thumbprint.",
+          "isDistractor": false,
+          "groundedInPassage": true,
+          "evidenceQuote": "Then he drew the porch rail around it, the green ribbon above it, and Tessa holding the basket below it.",
+          "rationale": "This belongs third.",
+          "validTargetIds": [
+            "bell_order_3"
+          ]
+        },
+        {
+          "tokenId": "bell_dd_t2",
+          "text": "Milo wants to keep the sketchbook clean.",
+          "isDistractor": false,
+          "groundedInPassage": true,
+          "evidenceQuote": "Milo wanted to keep it clean until he could draw something perfect.",
+          "rationale": "This belongs first.",
+          "validTargetIds": [
+            "bell_order_1"
+          ]
+        },
+        {
+          "tokenId": "bell_dd_t3",
+          "text": "Milo sets the book down and runs to help.",
+          "isDistractor": false,
+          "groundedInPassage": true,
+          "evidenceQuote": "Then he saw Tessa chasing pins near the rose bushes, so he set the book down and ran to help.",
+          "rationale": "This belongs second.",
+          "validTargetIds": [
+            "bell_order_2"
+          ]
+        }
+      ],
+      "targets": [
+        {
+          "targetId": "bell_order_1",
+          "label": "1",
+          "capacity": 1
+        },
+        {
+          "targetId": "bell_order_2",
+          "label": "2",
+          "capacity": 1
+        },
+        {
+          "targetId": "bell_order_3",
+          "label": "3",
+          "capacity": 1
+        }
+      ],
+      "correctAssignments": [
+        {
+          "tokenId": "bell_dd_t2",
+          "targetId": "bell_order_1"
+        },
+        {
+          "tokenId": "bell_dd_t3",
+          "targetId": "bell_order_2"
+        },
+        {
+          "tokenId": "bell_dd_t1",
+          "targetId": "bell_order_3"
+        }
+      ],
+      "useAllTokens": true,
+      "scoring": {
+        "totalPoints": 3,
+        "partialCreditRules": [
+          {
+            "points": 3,
+            "rule": "All required tokens placed in the supported target or order position."
+          },
+          {
+            "points": 2,
+            "rule": "Two required tokens placed correctly without exceeding target capacity."
+          },
+          {
+            "points": 1,
+            "rule": "One required token placed correctly without exceeding target capacity."
+          },
+          {
+            "points": 0,
+            "rule": "Wrong placement, unanswered required placement, extra distractor placement, or capacity exceeded."
+          }
+        ],
+        "scoringNotes": "Full credit requires every required token and no wrong target, presented-order shortcut, or capacity violation."
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_PR_4P_GRADE3_LITERARY_TOPUP",
+        "noDbWrite": true
+      }
+    },
+    {
+      "itemId": "pssa_sa_g3_lantern_message_01",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "CONSTRUCTED_RESPONSE",
+      "interactionType": "SHORT_ANSWER",
+      "interactionSubtype": "text_supported_short_answer",
+      "passageId": "pssa_psg_g3_the_lantern_list",
+      "passageTitle": "The Lantern List",
+      "eligibleContent": "E03.A-K.1.1.3",
+      "ecSkillFamily": "literature_elements",
+      "reportingCategory": "A",
+      "stem": "How does Nia change in the story? Use two details from the passage to support your answer.",
+      "instructionText": "Write a short answer that explains how Nia's actions change and supports the answer with two passage details.",
+      "requiredSupportCount": 2,
+      "requiresTextSupport": true,
+      "expectedAnswerCore": "Nia changes from trying to do every lantern job herself to sharing the work with helpers.",
+      "acceptableTextSupport": [
+        {
+          "supportId": "lantern_sa_s1",
+          "supportType": "direct_quote",
+          "quotedSpan": "By lunchtime, Nia had written twelve jobs beside her name.",
+          "detail": "Nia first writes twelve jobs beside her own name.",
+          "connectsToExpectedAnswer": "This shows she begins by trying to handle the lantern work alone.",
+          "independentKey": "alone"
+        },
+        {
+          "supportId": "lantern_sa_s2",
+          "supportType": "direct_quote",
+          "quotedSpan": "She crossed out half of her own jobs and added names beside them.",
+          "detail": "Nia later crosses out some of her jobs and adds helpers' names.",
+          "connectsToExpectedAnswer": "This shows she changes her actions by sharing the work.",
+          "independentKey": "shares"
+        },
+        {
+          "supportId": "lantern_sa_s3",
+          "supportType": "direct_quote",
+          "quotedSpan": "Nia noticed that the lights did not look smaller because she had shared the work.",
+          "detail": "Nia sees that sharing the work makes the lanterns look brighter.",
+          "connectsToExpectedAnswer": "This shows she understands the value of her changed actions.",
+          "independentKey": "understands"
+        }
+      ],
+      "rubric": {
+        "points3": "A 3-point response states that Nia changes from trying to do every lantern job herself to sharing the work with helpers. It uses at least two accurate details from The Lantern List.",
+        "points2": "A 2-point response gives a partial explanation of Nia's change and includes at least one accurate passage detail from The Lantern List.",
+        "points1": "A 1-point response gives a weak or incomplete idea about Nia, gives no useful text support, or is mostly copied passage text from The Lantern List.",
+        "points0": "A 0-point response is unrelated to The Lantern List, inaccurate, or too limited to show understanding."
+      },
+      "copiedTextCap": true,
+      "copiedTextCapRule": "A response made entirely or almost entirely of copied passage text with no student explanation earns no more than 1 point, even if the copied text is relevant.",
+      "scoreBandExamples": [
+        {
+          "band": 3,
+          "response": "Nia changes because at first she tries to do every lantern job alone. The passage says she wrote twelve jobs beside her name, but later she crossed out half her jobs and added names beside them. Those details show she learns to share the work.",
+          "why": "States the change and explains two independent passage details.",
+          "supportIdsUsed": [
+            "lantern_sa_s1",
+            "lantern_sa_s2"
+          ]
+        },
+        {
+          "band": 2,
+          "response": "Nia changes by letting people help her. She crossed out half of her jobs and added names beside them.",
+          "why": "Explains the change but uses only one independent support.",
+          "supportIdsUsed": [
+            "lantern_sa_s2"
+          ]
+        },
+        {
+          "band": 1,
+          "response": "She crossed out half of her own jobs and added names beside them. Mateo tested the bulbs. Grandma taped the stars.",
+          "why": "Mostly copied details with little explanation.",
+          "supportIdsUsed": [
+            "lantern_sa_s2"
+          ],
+          "copyOnly": true
+        },
+        {
+          "band": 0,
+          "response": "Nia wants a dog and goes to school late.",
+          "why": "Unrelated and inaccurate.",
+          "supportIdsUsed": []
+        }
+      ],
+      "scoring": {
+        "totalPoints": 3,
+        "partialCreditRules": [
+          {
+            "points": 3,
+            "rule": "Correct answer plus at least two accurate, independent passage details or quotes."
+          },
+          {
+            "points": 2,
+            "rule": "Partial answer with at least one accurate passage detail; minor inaccuracy or incomplete explanation may remain."
+          },
+          {
+            "points": 1,
+            "rule": "Incomplete answer, no useful text support, misunderstanding, or relevant copy-only response."
+          },
+          {
+            "points": 0,
+            "rule": "Insufficient, unrelated, or inaccurate response."
+          }
+        ],
+        "scoringNotes": "Rubric metadata is validated for reviewer use only; this PR does not implement automated scoring."
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "auditMetadata": {
+        "authoredIn": "PSSA_PR_4P_GRADE3_LITERARY_TOPUP",
+        "noDbWrite": true,
+        "autoScoringClaim": false
+      }
+    },
+    {
+      "itemId": "pssa_sa_g3_bell_character_01",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "CONSTRUCTED_RESPONSE",
+      "interactionType": "SHORT_ANSWER",
+      "interactionSubtype": "text_supported_short_answer",
+      "passageId": "pssa_psg_g3_the_porch_bell",
+      "passageTitle": "The Porch Bell",
+      "eligibleContent": "E03.A-K.1.1.3",
+      "ecSkillFamily": "literature_elements",
+      "reportingCategory": "A",
+      "stem": "How do Milo's actions show a change in what he thinks is important? Use two details from the passage to support your answer.",
+      "instructionText": "Write a short answer that explains Milo's change and supports the answer with two passage details.",
+      "requiredSupportCount": 2,
+      "requiresTextSupport": true,
+      "expectedAnswerCore": "Milo changes from protecting a perfect blank page to caring more about helping Tessa and remembering that moment.",
+      "acceptableTextSupport": [
+        {
+          "supportId": "bell_sa_s1",
+          "supportType": "direct_quote",
+          "quotedSpan": "Milo wanted to keep it clean until he could draw something perfect.",
+          "detail": "Milo first wants the sketchbook page to stay clean and perfect.",
+          "connectsToExpectedAnswer": "This shows what Milo values at the beginning.",
+          "independentKey": "perfect"
+        },
+        {
+          "supportId": "bell_sa_s2",
+          "supportType": "direct_quote",
+          "quotedSpan": "Then he saw Tessa chasing pins near the rose bushes, so he set the book down and ran to help.",
+          "detail": "Milo sets down the book and helps Tessa.",
+          "connectsToExpectedAnswer": "This shows he chooses helping over keeping the page untouched.",
+          "independentKey": "helps"
+        },
+        {
+          "supportId": "bell_sa_s3",
+          "supportType": "direct_quote",
+          "quotedSpan": "Milo said the first page was special after all because it showed the day the porch bell reminded him to help.",
+          "detail": "Milo decides the page is special because it shows the day he helped.",
+          "connectsToExpectedAnswer": "This shows he values the helpful memory more than perfection.",
+          "independentKey": "memory"
+        }
+      ],
+      "rubric": {
+        "points3": "A 3-point response states that Milo changes from protecting a perfect blank page to caring more about helping Tessa and remembering that moment. It uses at least two accurate details from The Porch Bell.",
+        "points2": "A 2-point response gives a partial explanation of Milo's change and includes at least one accurate passage detail from The Porch Bell.",
+        "points1": "A 1-point response gives a weak or incomplete idea about Milo, gives no useful text support, or is mostly copied passage text from The Porch Bell.",
+        "points0": "A 0-point response is unrelated to The Porch Bell, inaccurate, or too limited to show understanding."
+      },
+      "copiedTextCap": true,
+      "copiedTextCapRule": "A response made entirely or almost entirely of copied passage text with no student explanation earns no more than 1 point, even if the copied text is relevant.",
+      "scoreBandExamples": [
+        {
+          "band": 3,
+          "response": "Milo changes because first he wants the sketchbook to stay clean so the first drawing can be perfect. Later he sets the book down and runs to help Tessa, and he says the page is special because it shows that day. These details show helping becomes more important than a perfect page.",
+          "why": "Explains the change and uses two independent passage details.",
+          "supportIdsUsed": [
+            "bell_sa_s1",
+            "bell_sa_s2",
+            "bell_sa_s3"
+          ]
+        },
+        {
+          "band": 2,
+          "response": "Milo changes because he helps Tessa. The passage says he set the book down and ran to help her.",
+          "why": "Gives the change with one clear support but does not fully explain both sides.",
+          "supportIdsUsed": [
+            "bell_sa_s2"
+          ]
+        },
+        {
+          "band": 1,
+          "response": "Milo wanted to keep it clean until he could draw something perfect. Then he saw Tessa chasing pins near the rose bushes.",
+          "why": "Mostly copied passage text with little explanation.",
+          "supportIdsUsed": [
+            "bell_sa_s1"
+          ],
+          "copyOnly": true
+        },
+        {
+          "band": 0,
+          "response": "Milo dislikes bells and throws away the sketchbook.",
+          "why": "Unrelated and inaccurate.",
+          "supportIdsUsed": []
+        }
+      ],
+      "scoring": {
+        "totalPoints": 3,
+        "partialCreditRules": [
+          {
+            "points": 3,
+            "rule": "Correct answer plus at least two accurate, independent passage details or quotes."
+          },
+          {
+            "points": 2,
+            "rule": "Partial answer with at least one accurate passage detail; minor inaccuracy or incomplete explanation may remain."
+          },
+          {
+            "points": 1,
+            "rule": "Incomplete answer, no useful text support, misunderstanding, or relevant copy-only response."
+          },
+          {
+            "points": 0,
+            "rule": "Insufficient, unrelated, or inaccurate response."
+          }
+        ],
+        "scoringNotes": "Rubric metadata is validated for reviewer use only; this PR does not implement automated scoring."
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "auditMetadata": {
+        "authoredIn": "PSSA_PR_4P_GRADE3_LITERARY_TOPUP",
+        "noDbWrite": true,
+        "autoScoringClaim": false
+      }
+    }
+  ]
+}

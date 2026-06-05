@@ -23,6 +23,7 @@ const BACKEND_FILES = [
   "exemplars/pssa_grade3_matching_grid_drag_drop/grade3_matching_grid_drag_drop_backend.json",
   "exemplars/pssa_grade3_conventions/grade3_conventions_backend.json",
   "exemplars/pssa_grade3_short_answer/grade3_short_answer_backend.json",
+  "exemplars/pssa_grade3_literary_topup/grade3_literary_topup_backend.json",
 ];
 
 function readJson(filePath: string) {
@@ -73,7 +74,7 @@ function assertKeyFree(value: unknown) {
 
 function testAllRealItemsProjectWithoutLeaks() {
   const items = realItems();
-  assert.equal(items.length, 79);
+  assert.equal(items.length, 103);
   const projected = items.map((item: any) => projectPssaStudentItem(item));
   projected.forEach(assertKeyFree);
   console.log(`PSSA PR B leak sweep projected ${projected.length} real Grade 3 items with zero banned keys.`);
@@ -158,7 +159,7 @@ function testCheckTableAndEbsrEvidence() {
   assert.throws(() => projectPssaStudentItem({ interactionType: "MULTI_SELECT", rows: [], columns: [], cells: [] }), /unknown_interaction_shape/);
 
   const ebsrItems = items.filter((item: any) => item.interactionType === "EBSR");
-  assert.equal(ebsrItems.length, 5);
+  assert.equal(ebsrItems.length, 7);
   assert.equal(ebsrItems.every((item: any) => typeof item.responseSpec?.partB?.requiredSelectionCount !== "number"), true);
   assert.equal(ebsrItems.every((item: any) => !("requiredSelectionCount" in (projectPssaStudentItem(item) as PssaStudentItemDto<"EBSR">).responseSpec.partB)), true);
 }

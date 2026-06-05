@@ -31,6 +31,7 @@ type PssaGradeImportFiles = {
   matchingGridDragDrop: string;
   conventions: string;
   shortAnswer: string;
+  literaryTopup?: string;
   deprecation: string;
 };
 
@@ -50,11 +51,11 @@ export type PssaGradeImportManifest = {
   };
   conventionItemIdPrefix: string;
   audits: {
-    ebsr: (items: any[]) => any;
-    tei: (multiSelect: any[], hotText: any[]) => any;
-    matchingGridDragDrop: (mg: any[], dd: any[]) => any;
+    ebsr: (items: any[], passages?: PssaPassageAuditInput[]) => any;
+    tei: (multiSelect: any[], hotText: any[], passages?: PssaPassageAuditInput[]) => any;
+    matchingGridDragDrop: (mg: any[], dd: any[], passages?: PssaPassageAuditInput[]) => any;
     conventions: (items: any[]) => any;
-    shortAnswer: (items: any[]) => any;
+    shortAnswer: (items: any[], options?: { passages?: PssaPassageAuditInput[] }) => any;
   };
 };
 
@@ -67,9 +68,10 @@ export const GRADE3_IMPORT_MANIFEST: PssaGradeImportManifest = {
     matchingGridDragDrop: "exemplars/pssa_grade3_matching_grid_drag_drop/grade3_matching_grid_drag_drop_backend.json",
     conventions: "exemplars/pssa_grade3_conventions/grade3_conventions_backend.json",
     shortAnswer: "exemplars/pssa_grade3_short_answer/grade3_short_answer_backend.json",
+    literaryTopup: "exemplars/pssa_grade3_literary_topup/grade3_literary_topup_backend.json",
     deprecation: "exemplars/pssa_grade3_conventions/pssa_conventions_grade3_deprecation_report.csv",
   },
-  expectedCounts: { passages: 5, activeItems: 67, deprecatedItems: 12, supersessions: 12, batches: 8 },
+  expectedCounts: { passages: 7, activeItems: 91, deprecatedItems: 12, supersessions: 12, batches: 8 },
   batchIds: {
     readingMcq: "reading_mcq_grade3",
     ebsr: "ebsr_grade3",
@@ -344,6 +346,18 @@ function batchIdFor(item: any, manifest: PssaGradeImportManifest, deprecated = f
   }
 }
 
+function sourceFileForTopupItem(item: any, fallback: string, manifest: PssaGradeImportManifest) {
+  return item.auditMetadata?.authoredIn === "PSSA_PR_4P_GRADE3_LITERARY_TOPUP" && manifest.files.literaryTopup
+    ? manifest.files.literaryTopup
+    : fallback;
+}
+
+function sourceFileForTopupPassage(passage: any, manifest: PssaGradeImportManifest) {
+  return passage.auditMetadata?.authoredIn === "PSSA_PR_4P_GRADE3_LITERARY_TOPUP" && manifest.files.literaryTopup
+    ? manifest.files.literaryTopup
+    : manifest.files.pilot;
+}
+
 function responseSpec(item: any) {
   if (item.responseSpec) return item.responseSpec;
   const interactionType = interactionTypeFor(item);
@@ -529,12 +543,23 @@ export function buildPlan(gradeLevel: number): ImportPlan {
   const mgdd = readJson<any>(manifestConfig.files.matchingGridDragDrop);
   const conventions = readJson<any>(manifestConfig.files.conventions);
   const shortAnswer = readJson<any>(manifestConfig.files.shortAnswer);
+  const literaryTopup = manifestConfig.files.literaryTopup ? readJson<any>(manifestConfig.files.literaryTopup) : { passages: [], items: [] };
   const deprecationRows = loadDeprecationRows(manifestConfig);
   const deprecationByOld = new Map(deprecationRows.map((row) => [row.oldItemId, row]));
 
-  const passages = pilot.passages as PssaPassageAuditInput[];
-  const activeReadingMcq = pilot.items.filter((item: any) => item.itemType === "MCQ" && item.passageId && item.itemStatus !== "deprecated_superseded");
+  const literaryTopupItems = literaryTopup.items ?? [];
+  const passages = [...pilot.passages, ...(literaryTopup.passages ?? [])] as PssaPassageAuditInput[];
+  const activeReadingMcq = [
+    ...pilot.items.filter((item: any) => item.itemType === "MCQ" && item.passageId && item.itemStatus !== "deprecated_superseded"),
+    ...literaryTopupItems.filter((item: any) => interactionTypeFor(item) === "MCQ" && item.passageId && item.itemStatus !== "deprecated_superseded"),
+  ];
   const deprecatedMcq = pilot.items.filter((item: any) => item.itemStatus === "deprecated_superseded");
+  const ebsrItems = [...ebsr.items, ...literaryTopupItems.filter((item: any) => interactionTypeFor(item) === "EBSR")];
+  const multiSelectItems = [...tei.multiSelectItems, ...literaryTopupItems.filter((item: any) => interactionTypeFor(item) === "MULTI_SELECT")];
+  const hotTextItems = [...tei.hotTextItems, ...literaryTopupItems.filter((item: any) => interactionTypeFor(item) === "HOT_TEXT")];
+  const matchingGridItems = [...mgdd.matchingGridItems, ...literaryTopupItems.filter((item: any) => interactionTypeFor(item) === "MATCHING_GRID")];
+  const dragDropItems = [...mgdd.dragDropItems, ...literaryTopupItems.filter((item: any) => interactionTypeFor(item) === "DRAG_DROP")];
+  const shortAnswerItems = [...shortAnswer.items, ...literaryTopupItems.filter((item: any) => interactionTypeFor(item) === "SHORT_ANSWER")];
 
   const passageQuality = buildPssaPassageQualityReport(passages);
   const mcqSpecificity = buildMcqPassageSpecificityReport(activeReadingMcq as McqAuditInput[], passages);
@@ -547,18 +572,18 @@ export function buildPlan(gradeLevel: number): ImportPlan {
   const mcqAbsoluteFailed = new Set(mcqAbsolute.filter((row) => row.itemId !== "batch" && row.result === "FAIL").map((row) => row.itemId));
   const mcqPositionBatch = buildMcqPositionBatch(activeReadingMcq, manifestConfig);
 
-  const ebsrAudit = manifestConfig.audits.ebsr(ebsr.items as any);
-  const teiAudit = manifestConfig.audits.tei(tei.multiSelectItems as any, tei.hotTextItems as any);
-  const mgddAudit = manifestConfig.audits.matchingGridDragDrop(mgdd.matchingGridItems as any, mgdd.dragDropItems as any);
+  const ebsrAudit = manifestConfig.audits.ebsr(ebsrItems as any, passages);
+  const teiAudit = manifestConfig.audits.tei(multiSelectItems as any, hotTextItems as any, passages);
+  const mgddAudit = manifestConfig.audits.matchingGridDragDrop(matchingGridItems as any, dragDropItems as any, passages);
   const conventionsAudit = manifestConfig.audits.conventions(conventions.items as any);
-  const shortAnswerAudit = manifestConfig.audits.shortAnswer(shortAnswer.items as any);
+  const shortAnswerAudit = manifestConfig.audits.shortAnswer(shortAnswerItems as any, { passages });
 
   const gateTallies = new Map<string, { pass: number; fail: number }>();
   const activeItems: WouldImportItem[] = [];
   const deprecatedItems: WouldImportItem[] = [];
 
   for (const item of activeReadingMcq) {
-    activeItems.push(buildWouldItem(item, manifestConfig.files.pilot, {
+    activeItems.push(buildWouldItem(item, sourceFileForTopupItem(item, manifestConfig.files.pilot, manifestConfig), {
       PSSA_MCQ_PASSAGE_SPECIFICITY: mcqSpecificityFailed.has(itemId(item)) ? "FAIL" : "PASS",
       PSSA_ITEM_EC_SKILL_MATCH: mcqSkillFailed.has(itemId(item)) ? "FAIL" : "PASS",
       PSSA_MCQ_CORRECT_IS_LONGEST: mcqLengthFailed.has(itemId(item)) ? "FAIL" : "PASS",
@@ -567,13 +592,13 @@ export function buildPlan(gradeLevel: number): ImportPlan {
     }, crosswalkKeys, manifestConfig));
   }
 
-  for (const item of ebsr.items) activeItems.push(buildWouldItem(item, manifestConfig.files.ebsr, { PSSA_EBSR_FAMILY_AND_BATCH: finalFromRows(ebsrAudit.rows, "finalEbsrResult")[item.itemId] ?? "FAIL" }, crosswalkKeys, manifestConfig));
-  for (const item of tei.multiSelectItems) activeItems.push(buildWouldItem(item, manifestConfig.files.tei, { PSSA_MULTI_SELECT_FAMILY_AND_BATCH: finalFromRows(teiAudit.multiSelectRows)[item.itemId] ?? "FAIL" }, crosswalkKeys, manifestConfig));
-  for (const item of tei.hotTextItems) activeItems.push(buildWouldItem(item, manifestConfig.files.tei, { PSSA_HOT_TEXT_FAMILY_AND_BATCH: finalFromRows(teiAudit.hotTextRows)[item.itemId] ?? "FAIL" }, crosswalkKeys, manifestConfig));
-  for (const item of mgdd.matchingGridItems) activeItems.push(buildWouldItem(item, manifestConfig.files.matchingGridDragDrop, { PSSA_MATCHING_GRID_FAMILY_AND_BATCH: finalFromRows(mgddAudit.matchingGridRows)[item.itemId] ?? "FAIL" }, crosswalkKeys, manifestConfig));
-  for (const item of mgdd.dragDropItems) activeItems.push(buildWouldItem(item, manifestConfig.files.matchingGridDragDrop, { PSSA_DRAG_DROP_FAMILY_AND_BATCH: finalFromRows(mgddAudit.dragDropRows)[item.itemId] ?? "FAIL" }, crosswalkKeys, manifestConfig));
+  for (const item of ebsrItems) activeItems.push(buildWouldItem(item, sourceFileForTopupItem(item, manifestConfig.files.ebsr, manifestConfig), { PSSA_EBSR_FAMILY_AND_BATCH: finalFromRows(ebsrAudit.rows, "finalEbsrResult")[item.itemId] ?? "FAIL" }, crosswalkKeys, manifestConfig));
+  for (const item of multiSelectItems) activeItems.push(buildWouldItem(item, sourceFileForTopupItem(item, manifestConfig.files.tei, manifestConfig), { PSSA_MULTI_SELECT_FAMILY_AND_BATCH: finalFromRows(teiAudit.multiSelectRows)[item.itemId] ?? "FAIL" }, crosswalkKeys, manifestConfig));
+  for (const item of hotTextItems) activeItems.push(buildWouldItem(item, sourceFileForTopupItem(item, manifestConfig.files.tei, manifestConfig), { PSSA_HOT_TEXT_FAMILY_AND_BATCH: finalFromRows(teiAudit.hotTextRows)[item.itemId] ?? "FAIL" }, crosswalkKeys, manifestConfig));
+  for (const item of matchingGridItems) activeItems.push(buildWouldItem(item, sourceFileForTopupItem(item, manifestConfig.files.matchingGridDragDrop, manifestConfig), { PSSA_MATCHING_GRID_FAMILY_AND_BATCH: finalFromRows(mgddAudit.matchingGridRows)[item.itemId] ?? "FAIL" }, crosswalkKeys, manifestConfig));
+  for (const item of dragDropItems) activeItems.push(buildWouldItem(item, sourceFileForTopupItem(item, manifestConfig.files.matchingGridDragDrop, manifestConfig), { PSSA_DRAG_DROP_FAMILY_AND_BATCH: finalFromRows(mgddAudit.dragDropRows)[item.itemId] ?? "FAIL" }, crosswalkKeys, manifestConfig));
   for (const item of conventions.items) activeItems.push(buildWouldItem(item, manifestConfig.files.conventions, { PSSA_CONVENTIONS_FAMILY_AND_BATCH: finalFromRows(conventionsAudit.rows)[item.itemId] ?? "FAIL" }, crosswalkKeys, manifestConfig));
-  for (const item of shortAnswer.items) activeItems.push(buildWouldItem(item, manifestConfig.files.shortAnswer, { PSSA_SHORT_ANSWER_FAMILY: finalFromRows(shortAnswerAudit.rows)[item.itemId] ?? "FAIL" }, crosswalkKeys, manifestConfig));
+  for (const item of shortAnswerItems) activeItems.push(buildWouldItem(item, sourceFileForTopupItem(item, manifestConfig.files.shortAnswer, manifestConfig), { PSSA_SHORT_ANSWER_FAMILY: finalFromRows(shortAnswerAudit.rows)[item.itemId] ?? "FAIL" }, crosswalkKeys, manifestConfig));
 
   const activeIds = new Set(activeItems.map((item) => item.itemId));
   for (const item of deprecatedMcq) {
@@ -592,15 +617,15 @@ export function buildPlan(gradeLevel: number): ImportPlan {
 
   const batches: BatchRow[] = [
     mcqPositionBatch,
-    { batchId: manifestConfig.batchIds.ebsr, streamType: "EBSR", gradeLevel: manifestConfig.gradeLevel, batchGate: "PSSA_EBSR_ANSWER_POSITION_DISTRIBUTION", batchResult: ebsrAudit.positionDistribution.ebsrPositionBiasResult, itemCount: ebsr.items.length },
+    { batchId: manifestConfig.batchIds.ebsr, streamType: "EBSR", gradeLevel: manifestConfig.gradeLevel, batchGate: "PSSA_EBSR_ANSWER_POSITION_DISTRIBUTION", batchResult: ebsrAudit.positionDistribution.ebsrPositionBiasResult, itemCount: ebsrItems.length },
     ...teiAudit.shortcutRows.map((row: any) => ({ batchId: row.interactionType === "MULTI_SELECT" ? manifestConfig.batchIds.multiSelect : manifestConfig.batchIds.hotText, streamType: row.interactionType, gradeLevel: manifestConfig.gradeLevel, batchGate: "PSSA_TEI_SURFACE_SHORTCUT_DISTRIBUTION", batchResult: row.result, itemCount: row.itemCount })),
     ...mgddAudit.shortcutRows.map((row: any) => ({ batchId: row.interactionType === "MATCHING_GRID" ? manifestConfig.batchIds.matchingGrid : manifestConfig.batchIds.dragDrop, streamType: row.interactionType, gradeLevel: manifestConfig.gradeLevel, batchGate: "PSSA_MG_DD_SURFACE_SHORTCUT_DISTRIBUTION", batchResult: row.result, itemCount: row.itemCount })),
     { batchId: manifestConfig.batchIds.conventions, streamType: "CONVENTIONS", gradeLevel: manifestConfig.gradeLevel, batchGate: "PSSA_CONVENTIONS_SURFACE_SHORTCUT_DISTRIBUTION", batchResult: conventionsAudit.shortcutRow.result, itemCount: conventions.items.length },
-    { batchId: manifestConfig.batchIds.shortAnswerPool, streamType: "SHORT_ANSWER", gradeLevel: manifestConfig.gradeLevel, batchGate: "PSSA_SHORT_ANSWER_POOL_BLUEPRINT", batchResult: shortAnswer.blueprint?.result === "PASS" ? "PASS" : "FAIL", itemCount: shortAnswer.items.length },
+    { batchId: manifestConfig.batchIds.shortAnswerPool, streamType: "SHORT_ANSWER", gradeLevel: manifestConfig.gradeLevel, batchGate: "PSSA_SHORT_ANSWER_POOL_BLUEPRINT", batchResult: shortAnswerAudit.blueprint.result, itemCount: shortAnswerItems.length },
   ];
 
   const manifest: ManifestRow[] = [
-    { sourceFile: manifestConfig.files.pilot, recordType: "passage", count: pilot.passages.length, expectedCount: manifestConfig.expectedCounts.passages, match: pilot.passages.length === manifestConfig.expectedCounts.passages },
+    { sourceFile: "all passage files", recordType: "passage", count: passages.length, expectedCount: manifestConfig.expectedCounts.passages, match: passages.length === manifestConfig.expectedCounts.passages },
     { sourceFile: "all active item files", recordType: "item", count: activeItems.length, expectedCount: manifestConfig.expectedCounts.activeItems, match: activeItems.length === manifestConfig.expectedCounts.activeItems },
     { sourceFile: manifestConfig.files.pilot, recordType: "deprecated", count: deprecatedItems.length, expectedCount: manifestConfig.expectedCounts.deprecatedItems, match: deprecatedItems.length === manifestConfig.expectedCounts.deprecatedItems },
     { sourceFile: manifestConfig.files.deprecation, recordType: "supersession", count: deprecationRows.length, expectedCount: manifestConfig.expectedCounts.supersessions, match: deprecationRows.length === manifestConfig.expectedCounts.supersessions },
@@ -608,9 +633,9 @@ export function buildPlan(gradeLevel: number): ImportPlan {
   ];
   if (manifest.some((row) => !row.match)) tallyGate(gateTallies, "PSSA_IMPORT_MANIFEST_VALID", "FAIL");
 
-  const passageImports = pilot.passages.map((passage: any) => ({
+  const passageImports = passages.map((passage: any) => ({
     passageId: passage.id,
-    sourceFile: manifestConfig.files.pilot,
+    sourceFile: sourceFileForTopupPassage(passage, manifestConfig),
     title: passage.title,
     gradeLevel: passage.gradeLevel ?? manifestConfig.gradeLevel,
     subject: passage.subject ?? "ELA",
@@ -628,7 +653,7 @@ export function buildPlan(gradeLevel: number): ImportPlan {
     itemStatus: "candidate" as const,
     studentReadyBlockedReason: "PENDING_REVIEW" as const,
     provenanceJson: {
-      sourceFile: manifestConfig.files.pilot,
+      sourceFile: sourceFileForTopupPassage(passage, manifestConfig),
       sourcePassageId: passage.id,
       importedBy: "pssa-db4-writer",
     },

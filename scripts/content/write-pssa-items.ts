@@ -313,10 +313,30 @@ async function persistPlan(db: PrismaClient, plan: ImportPlan, dbTarget: string,
         await tx.pssaItemBatch.create({ data: desired });
         mutations.PssaItemBatch.inserts += 1;
       } else {
-        if (existing.streamType !== desired.streamType || existing.gradeLevel !== desired.gradeLevel || existing.batchAuditResult !== desired.batchAuditResult || existing.batchAuditNotes !== desired.batchAuditNotes) {
+        if (existing.streamType !== desired.streamType || existing.gradeLevel !== desired.gradeLevel || existing.subject !== desired.subject) {
           throw new Error(`DB-4 drift refused: batch ${batch.batchId} differs.`);
         }
-        mutations.PssaItemBatch.noops += 1;
+        if (
+          existing.auditContractVersion !== desired.auditContractVersion ||
+          existing.sourceScanVersion !== desired.sourceScanVersion ||
+          existing.sourceCorpusHash !== desired.sourceCorpusHash ||
+          existing.batchAuditResult !== desired.batchAuditResult ||
+          existing.batchAuditNotes !== desired.batchAuditNotes
+        ) {
+          await tx.pssaItemBatch.update({
+            where: { id: batch.batchId },
+            data: {
+              auditContractVersion: desired.auditContractVersion,
+              sourceScanVersion: desired.sourceScanVersion,
+              sourceCorpusHash: desired.sourceCorpusHash,
+              batchAuditResult: desired.batchAuditResult,
+              batchAuditNotes: desired.batchAuditNotes,
+            },
+          });
+          mutations.PssaItemBatch.updates += 1;
+        } else {
+          mutations.PssaItemBatch.noops += 1;
+        }
       }
     }
 

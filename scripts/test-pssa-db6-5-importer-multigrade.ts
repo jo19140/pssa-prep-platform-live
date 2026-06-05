@@ -26,15 +26,71 @@ const GRADE3_SOURCE_CORPUS_HASH_AFTER_VOCAB_NORMALIZATION = stableStringify(
     .sort(),
 );
 
+const LITERARY_TOPUP_HASH_ADDITIONS = [
+  "sha256:020e754444f8e6802f567d31cd6cddf536c6faa6f6b210da471fd95340755d84",
+  "sha256:092bac0e5cab32e7ed7eab59f0d0a8e6324c688af4d5626e7b881ed91cd343cf",
+  "sha256:125ed4c4a1c729376788bb2439a565b4ad310c51b9f875d1731f82cbfc53118e",
+  "sha256:1889ab1a10d051c438d983561e0792caa4a7eff0da39d833c491420cf1b60c56",
+  "sha256:361d978bd197a0d2254b8972623ebed7738231b9d5fd44fb661d6200af2a8cee",
+  "sha256:38ace888856cc5d3a2b08c51dfd96137626602bf0bb6ca05c3b7f45196a4e0ac",
+  "sha256:3bf2d831467dc0a37148d90ac4165fcf1858e4352473a655cf7292201d1655ea",
+  "sha256:4c2cc9a53ee626cc77dfdcf42edd996699fbb148ba507cd56bd0a10960479424",
+  "sha256:5cccd697b143cd1ce8c9702f21106a37339608acbd511624e5527fd4c47ffd7b",
+  "sha256:5d0f2e499f0c22a7e80e03174fd3dce1f16383c11f444f8ecd60d3da68d59d0a",
+  "sha256:68e54473366c3cd9e213bafd8dd0d25e4227c7a6b59f225b68f3e36d9b043769",
+  "sha256:6aa6d8cc04632215b44eb790d652435f672f6f23df77af149432d2ba86658564",
+  "sha256:6e0a084845297325a12dfe994b5d186634b7952639bd62dbeaf4201b6171570b",
+  "sha256:6f2856d28314743cb1139ac2c4c14878d08644bb1de1d1de595488dafceca58a",
+  "sha256:9a8a0052df0960f48a228554e3f2d6497ed41c67d5de8173923b5debe730e85d",
+  "sha256:a1a12c651902091099d0a0f1a6f4b235fce1629b7ca55783ec265c092c1f73d5",
+  "sha256:bcb5ba75771bde7da0cc41ca705053add3720ddb8e9fac25407bd2b089f2a26c",
+  "sha256:c162a47e8e5a90106f89de9850d8aa55e04e6fe76491cda2e6437e985966e83d",
+  "sha256:c41107337f8d456059aabce2a2acb71bef6fd8bec9ffa23fbda3a7f8096a6642",
+  "sha256:c4ce31f24c3c6584ba22d4916f068b87c0fbfbe8642769b664441840665936a6",
+  "sha256:cd00bc6deceb7c79c927ec24d9a59d23d93289efa3ec8f3eb63076b7716c4f27",
+  "sha256:df7425b7461503e7e83b8993d5d2503dbb65fdde3ea987be84192a8339e0c67a",
+  "sha256:e4d55eb796804b85f4b71e4d433102a47e2b1a553ba741b1bc597bd03c72d378",
+  "sha256:e8e84b08765aece8fffbfe98f2cfc89ab3578718d57e407a4cc245cafbc68c9b",
+  "sha256:fc5f97eab40fd337b27c260d771c6fed0c62e3f2d66b8cdff56311c25881911a",
+  "sha256:fce492739823239afdc81ccf6702e1e7a8783cf097008bf480f888071658c90e",
+] as const;
+
+const GRADE3_SOURCE_CORPUS_HASH_AFTER_LITERARY_TOPUP = stableStringify(
+  (JSON.parse(GRADE3_SOURCE_CORPUS_HASH_AFTER_VOCAB_NORMALIZATION) as string[])
+    .concat([...LITERARY_TOPUP_HASH_ADDITIONS])
+    .sort(),
+);
+
+const grade3Plan = buildPlan(3);
+
 function testGrade3GoldenHashes() {
-  const plan = buildPlan(3);
+  const plan = grade3Plan;
   assert.equal(plan.activeItems.find((item) => item.itemId === "pssa_item_g3_reading_1")?.contentHash, "sha256:1fea51d2127fc1a7d087348c736003278508a97589eddfb9eb9c489342c1fa2f");
   assert.equal(plan.activeItems.find((item) => item.itemId === "pssa_sa_g3_creek_main_idea_01")?.contentHash, "sha256:f8aafc9cf82a2957c3f2d33760bacaf3c7abaefddd4ac5c4132fa4be7a5814d2");
   assert.equal(plan.passages.find((passage) => passage.passageId === "pssa_psg_g3_the_mural_plan")?.contentHash, "sha256:b5a4ebf1c2057220d73ad63a925607b00c677be0a10f56da1abd1cabe3b0adbb");
+  assert.equal(plan.passages.find((passage) => passage.passageId === "pssa_psg_g3_the_lantern_list")?.contentHash, "sha256:6f2856d28314743cb1139ac2c4c14878d08644bb1de1d1de595488dafceca58a");
+  assert.equal(plan.passages.find((passage) => passage.passageId === "pssa_psg_g3_the_porch_bell")?.contentHash, "sha256:c162a47e8e5a90106f89de9850d8aa55e04e6fe76491cda2e6437e985966e83d");
+  assert.equal(plan.activeItems.find((item) => item.itemId === "pssa_sa_g3_lantern_message_01")?.contentHash, "sha256:bcb5ba75771bde7da0cc41ca705053add3720ddb8e9fac25407bd2b089f2a26c");
+  assert.equal(plan.activeItems.find((item) => item.itemId === "pssa_sa_g3_bell_character_01")?.contentHash, "sha256:6aa6d8cc04632215b44eb790d652435f672f6f23df77af149432d2ba86658564");
+}
+
+function testLiteraryTopupManifestShape() {
+  const plan = grade3Plan;
+  const topupPassages = plan.passages.filter((passage) => passage.sourceFile.includes("literary_topup"));
+  const topupItems = plan.activeItems.filter((item) => item.importedFromFile.includes("literary_topup"));
+  assert.equal(topupPassages.length, 2);
+  assert.equal(topupItems.length, 24);
+  assert.equal(plan.passages.length, 7);
+  assert.equal(plan.activeItems.length, 91);
+  assert.equal(plan.deprecatedItems.length, 12);
+  assert.equal(plan.supersessions.length, 12);
+  assert.equal(plan.batches.length, 8);
+  assert.equal(new Set(plan.passages.map((passage) => passage.passageId)).size, plan.passages.length);
+  assert.equal(new Set([...plan.activeItems, ...plan.deprecatedItems].map((item) => item.itemId)).size, plan.activeItems.length + plan.deprecatedItems.length);
 }
 
 function testConventionsVocabularyNormalization() {
-  const rows: Record<string, any> = Object.fromEntries([...buildPlan(3).activeItems, ...buildPlan(3).deprecatedItems].map((item) => [item.itemId, item]));
+  const rows: Record<string, any> = Object.fromEntries([...grade3Plan.activeItems, ...grade3Plan.deprecatedItems].map((item) => [item.itemId, item]));
   const expectedHashes = {
     pssa_conv_g3_hottext_spelling_01: "sha256:580dbd7fc3a41601d32d6e540a3010d9113de8864ce836a938e318d62a84adb3",
     pssa_conv_g3_hottext_function_01: "sha256:61f0f9c09d35b62202b1575bf7b343b01f240e7d96715e7bc40911c16add87bd",
@@ -73,10 +129,10 @@ function collectKeys(value: unknown, keys = new Set<string>()) {
 }
 
 function testSourceCorpusHashParity() {
-  const plan = buildPlan(3);
+  const plan = grade3Plan;
   const sourceCorpusHash = stableStringify([...plan.passages.map((row) => row.contentHash), ...plan.activeItems.map((row) => row.contentHash), ...plan.deprecatedItems.map((row) => row.contentHash)].sort());
-  assert.equal(sourceCorpusHash, GRADE3_SOURCE_CORPUS_HASH_AFTER_VOCAB_NORMALIZATION);
-  assert.equal(currentPlanSourceCorpusHash(3), GRADE3_SOURCE_CORPUS_HASH_AFTER_VOCAB_NORMALIZATION);
+  assert.equal(sourceCorpusHash, GRADE3_SOURCE_CORPUS_HASH_AFTER_LITERARY_TOPUP);
+  assert.equal(currentPlanSourceCorpusHash(3), GRADE3_SOURCE_CORPUS_HASH_AFTER_LITERARY_TOPUP);
 }
 
 function testUnregisteredGradeRefuses() {
@@ -108,6 +164,7 @@ function testManifestValidation() {
 }
 
 testGrade3GoldenHashes();
+testLiteraryTopupManifestShape();
 testConventionsVocabularyNormalization();
 testSourceCorpusHashParity();
 testUnregisteredGradeRefuses();

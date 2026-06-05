@@ -543,9 +543,10 @@ function base(config: { itemId: string; passageId: string; passageTitle: string;
 export function auditGrade3MatchingGridDragDropItems(
   matchingGridItems = buildGrade3MatchingGridItems(),
   dragDropItems = buildGrade3DragDropItems(),
+  passagesOverride?: PssaPassageAuditInput[],
 ): AuditBundle {
   const pilot = loadGrade3Pilot();
-  const passages = pilot.passages as PssaPassageAuditInput[];
+  const passages = passagesOverride ?? pilot.passages as PssaPassageAuditInput[];
   const passagesById = new Map(passages.map((passage) => [passage.id, passage]));
   const passageRows = buildPssaPassageQualityReport(passages);
   const corpus = loadSourceCorpus();

@@ -1,6 +1,6 @@
 table,inserts,updates,deletes,noops,drift
-PssaPassage,0,0,0,5,0
+PssaPassage,0,0,0,7,0
 PssaItemBatch,0,0,0,8,0
-PssaItem,0,0,0,79,0
-PssaItemPassageLink,0,0,0,58,0
+PssaItem,0,0,0,103,0
+PssaItemPassageLink,0,0,0,82,0
 PssaItemSupersession,0,0,0,12,0

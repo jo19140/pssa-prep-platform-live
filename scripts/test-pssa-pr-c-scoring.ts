@@ -183,10 +183,10 @@ function testRealBankCoverage() {
       assert.ok(wrong.pointsEarned >= 0 && wrong.pointsEarned <= wrong.maxPoints, row.id);
     }
   }
-  assert.equal(bank.length, 79);
-  assert.equal(machineScored, 74);
-  assert.equal(pendingHuman, 5);
-  console.log(`PSSA PR C real-bank coverage: ${machineScored}+${pendingHuman}=79 items`, byType);
+  assert.equal(bank.length, 103);
+  assert.equal(machineScored, 96);
+  assert.equal(pendingHuman, 7);
+  console.log(`PSSA PR C real-bank coverage: ${machineScored}+${pendingHuman}=103 items`, byType);
 }
 
 function testAdversarialInputs() {

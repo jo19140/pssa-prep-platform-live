@@ -393,9 +393,9 @@ function makeItem(config: {
   };
 }
 
-export function auditGrade3EbsrItems(items = buildGrade3EbsrItems()): EbsrAuditBundle {
+export function auditGrade3EbsrItems(items = buildGrade3EbsrItems(), passagesOverride?: PssaPassageAuditInput[]): EbsrAuditBundle {
   const pilot = loadGrade3Pilot();
-  const passages: PssaPassageAuditInput[] = pilot.passages;
+  const passages: PssaPassageAuditInput[] = passagesOverride ?? pilot.passages;
   const passageById = new Map(passages.map((passage) => [passage.id, passage]));
   const passageRows = buildPssaPassageQualityReport(passages);
   const sourceCorpus = loadSourceCorpus();

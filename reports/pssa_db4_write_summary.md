@@ -1,16 +1,16 @@
 # PSSA DB-4 Write Summary
 
-- DB target: postgresql://(user):(redacted)@localhost:5433/pssa_dev
-- Import run id: cmpx0pxa80001bjqhqownbsp3
+- DB target: postgresql://(user):(redacted)@127.0.0.1:5433/pssa_dev
+- Import run id: cmq0vwgi100012wpyyl82lm1l
 - Crosswalk rows: 241
 - Crosswalk join rows: 936
-- Passages: 5
-- Items: 79
-- Active candidate items: 67
+- Passages: 7
+- Items: 103
+- Active candidate items: 91
 - Deprecated items: 12
 - Batches: 8
 - Supersessions: 12
-- EC resolved: 79/79
+- EC resolved: 103/103
 - Approved items: 0
 - Pilot-ready items: 0
 - Student-ready items: 0
@@ -23,23 +23,23 @@
 
 | Batch | Items |
 |---|---:|
-| reading_mcq_grade3 | 28 |
-| ebsr_grade3 | 5 |
-| multi_select_grade3 | 5 |
-| hot_text_grade3 | 5 |
-| matching_grid_grade3 | 5 |
-| drag_drop_grade3 | 5 |
+| reading_mcq_grade3 | 40 |
+| ebsr_grade3 | 7 |
+| multi_select_grade3 | 7 |
+| hot_text_grade3 | 7 |
+| matching_grid_grade3 | 7 |
+| drag_drop_grade3 | 7 |
 | conventions_grade3 | 9 |
-| short_answer_grade3_pool | 5 |
+| short_answer_grade3_pool | 7 |
 
 ## Content Mutations
 
 | Table | Inserts | Updates | Deletes | Noops | Drift |
 |---|---:|---:|---:|---:|---:|
-| PssaPassage | 0 | 0 | 0 | 5 | 0 |
+| PssaPassage | 0 | 0 | 0 | 7 | 0 |
 | PssaItemBatch | 0 | 0 | 0 | 8 | 0 |
-| PssaItem | 0 | 0 | 0 | 79 | 0 |
-| PssaItemPassageLink | 0 | 0 | 0 | 58 | 0 |
+| PssaItem | 0 | 0 | 0 | 103 | 0 |
+| PssaItemPassageLink | 0 | 0 | 0 | 82 | 0 |
 | PssaItemSupersession | 0 | 0 | 0 | 12 | 0 |
 
 ## Guardrails

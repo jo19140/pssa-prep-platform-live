@@ -496,9 +496,10 @@ function makeHotText(config: {
 export function auditGrade3TeiItems(
   multiSelectItems = buildGrade3MultiSelectItems(),
   hotTextItems = buildGrade3HotTextItems(),
+  passagesOverride?: PssaPassageAuditInput[],
 ): TeiAuditBundle {
   const pilot = loadGrade3Pilot();
-  const passages = pilot.passages as PssaPassageAuditInput[];
+  const passages = passagesOverride ?? pilot.passages as PssaPassageAuditInput[];
   const passagesById = new Map(passages.map((passage) => [passage.id, passage]));
   const passageRows = buildPssaPassageQualityReport(passages);
   const corpus = loadSourceCorpus();

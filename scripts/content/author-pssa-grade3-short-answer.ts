@@ -154,6 +154,7 @@ type AuditBundle = {
 type AuditOptions = {
   sourceScan?: boolean;
   passageScan?: boolean;
+  passages?: PssaPassageAuditInput[];
 };
 
 const outputDir = path.resolve("exemplars/pssa_grade3_short_answer");
@@ -178,9 +179,8 @@ function loadPilot() {
   return loadJson(pilotPath);
 }
 
-function passageMap() {
-  const pilot = loadPilot();
-  return new Map((pilot.passages as PssaPassageAuditInput[]).map((passage) => [passage.id, passage]));
+function passageMap(passages = loadPilot().passages as PssaPassageAuditInput[]) {
+  return new Map(passages.map((passage) => [passage.id, passage]));
 }
 
 export function buildGrade3ShortAnswerItems(): ShortAnswerItem[] {
@@ -378,12 +378,14 @@ function makeSa(args: {
 
 export function auditGrade3ShortAnswerItems(items = buildGrade3ShortAnswerItems(), options: AuditOptions = {}): AuditBundle {
   const sourceScan = options.sourceScan ?? true;
+  const passages = options.passages ?? loadPilot().passages as PssaPassageAuditInput[];
+  const passagesById = passageMap(passages);
   const corpus = sourceScan ? loadSourceCorpus() : [];
   const sourceMatches: SourceMatch[] = [];
   const studentPreview = renderStudentPreview(items);
   const previewLeakResult: Result = previewLeakPattern.test(studentPreview) ? "FAIL" : "PASS";
-  const rows = items.map((item) => auditItem(item, corpus, sourceMatches, previewLeakResult, sourceScan));
-  const passageRows = options.passageScan === false ? [] : buildPssaPassageQualityReport(loadPilot().passages as PssaPassageAuditInput[]);
+  const rows = items.map((item) => auditItem(item, corpus, sourceMatches, previewLeakResult, sourceScan, passagesById));
+  const passageRows = options.passageScan === false ? [] : buildPssaPassageQualityReport(passages);
   return {
     items,
     rows,
@@ -396,18 +398,18 @@ export function auditGrade3ShortAnswerItems(items = buildGrade3ShortAnswerItems(
   };
 }
 
-function auditItem(item: ShortAnswerItem, corpus: SourceCorpusEntry[], sourceMatches: SourceMatch[], previewLeakResult: Result, sourceScan: boolean): AuditRow {
+function auditItem(item: ShortAnswerItem, corpus: SourceCorpusEntry[], sourceMatches: SourceMatch[], previewLeakResult: Result, sourceScan: boolean, passagesById: Map<string, PssaPassageAuditInput>): AuditRow {
   const notes: string[] = [];
-  const schemaResult = validateSchema(item, notes);
+  const schemaResult = validateSchema(item, notes, passagesById);
   const rubricValidResult = validateRubric(item, notes);
   const promptRequiresSupportResult = validatePromptRequiresSupport(item, notes);
-  const componentsResult = validateExpectedComponents(item, notes);
+  const componentsResult = validateExpectedComponents(item, notes, passagesById);
   const copiedTextCapResult = validateCopiedTextCap(item, notes);
   const scoreBandExamplesResult = validateScoreBandExamples(item, notes);
   const supportSufficiencyResult = validateSupportSufficiency(item, notes);
   const skillMatchResult = validateSkillMatch(item, notes);
-  const groundingResult = validateGrounding(item, notes);
-  const itemMatches = sourceScan ? scanFields(item).map((field) => scanField(item.itemId, field.field, field.text, corpus)) : [];
+  const groundingResult = validateGrounding(item, notes, passagesById);
+  const itemMatches = sourceScan ? scanFields(item, passagesById).map((field) => scanField(item.itemId, field.field, field.text, corpus)) : [];
   sourceMatches.push(...itemMatches);
   const sourceComplianceResult: Result = itemMatches.some((match) => match.result === "FAIL") ? "FAIL" : "PASS";
   if (sourceComplianceResult === "FAIL") notes.push("PSSA_ITEM_SOURCE_COMPLIANCE_NO_COPY");
@@ -451,8 +453,8 @@ function auditItem(item: ShortAnswerItem, corpus: SourceCorpusEntry[], sourceMat
   };
 }
 
-function validateSchema(item: ShortAnswerItem, notes: string[]): Result {
-  const passage = passageMap().get(item.passageId);
+function validateSchema(item: ShortAnswerItem, notes: string[], passagesById: Map<string, PssaPassageAuditInput>): Result {
+  const passage = passagesById.get(item.passageId);
   const ok = item.gradeLevel === 3
     && item.itemType === "CONSTRUCTED_RESPONSE"
     && item.interactionType === "SHORT_ANSWER"
@@ -489,8 +491,8 @@ function validatePromptRequiresSupport(item: ShortAnswerItem, notes: string[]): 
   return ok ? "PASS" : "FAIL";
 }
 
-function validateExpectedComponents(item: ShortAnswerItem, notes: string[]): Result {
-  const passage = passageMap().get(item.passageId);
+function validateExpectedComponents(item: ShortAnswerItem, notes: string[], passagesById: Map<string, PssaPassageAuditInput>): Result {
+  const passage = passagesById.get(item.passageId);
   const text = passage?.text ?? "";
   const quoteOk = item.acceptableTextSupport.every((support) => !support.quotedSpan || text.includes(support.quotedSpan));
   const ok = Boolean(item.expectedAnswerCore)
@@ -556,8 +558,8 @@ function validateSkillMatch(item: ShortAnswerItem, notes: string[]): Result {
   return ok ? "PASS" : "FAIL";
 }
 
-function validateGrounding(item: ShortAnswerItem, notes: string[]): Result {
-  const passage = passageMap().get(item.passageId);
+function validateGrounding(item: ShortAnswerItem, notes: string[], passagesById: Map<string, PssaPassageAuditInput>): Result {
+  const passage = passagesById.get(item.passageId);
   const text = normalizeForScan(passage?.text ?? "");
   const supportGrounded = item.acceptableTextSupport.every((support) => {
     if (support.quotedSpan) return text.includes(normalizeForScan(support.quotedSpan));
@@ -608,8 +610,8 @@ function buildBlueprintRow(items: ShortAnswerItem[]): BlueprintRow {
   };
   return {
     ...row,
-    result: row.shortAnswerPoolCount === 5 && row.shortAnswerDrawCount === 2 && row.activeFormShortAnswerPoints === 6 ? "PASS" : "FAIL",
-    notes: "Grade 3 live form draws 2 Short Answer items from the 5-item pool; pool points are not active-form points.",
+    result: [5, 7].includes(row.shortAnswerPoolCount) && row.shortAnswerDrawCount === 2 && row.activeFormShortAnswerPoints === 6 ? "PASS" : "FAIL",
+    notes: `Grade 3 live form draws 2 Short Answer items from the ${row.shortAnswerPoolCount}-item pool; pool points are not active-form points.`,
   };
 }
 
@@ -627,7 +629,7 @@ function buildCompletenessRows(items: ShortAnswerItem[]): ItemTypeCompletenessRo
   ];
 }
 
-function scanFields(item: ShortAnswerItem) {
+function scanFields(item: ShortAnswerItem, passagesById = passageMap()) {
   return [
     { field: "stem", text: item.stem },
     { field: "instructionText", text: item.instructionText },
@@ -639,7 +641,7 @@ function scanFields(item: ShortAnswerItem) {
     { field: "rubric.points0", text: item.rubric.points0 },
     { field: "copiedTextCapRule", text: item.copiedTextCapRule },
     ...item.scoreBandExamples.map((example) => ({ field: `scoreBandExamples.${example.band}`, text: `${example.response} ${example.why}` })),
-    { field: "assignedPassageText", text: passageMap().get(item.passageId)?.text ?? "" },
+    { field: "assignedPassageText", text: passagesById.get(item.passageId)?.text ?? "" },
   ];
 }
 
