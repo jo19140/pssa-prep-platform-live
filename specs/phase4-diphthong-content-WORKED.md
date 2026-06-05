@@ -34,7 +34,7 @@ Short demo fixtures: 39w / 38w / 37w / 38w — all classified clean, quality gat
 - "roof" matches BOTH oo patterns (dual CMUdict pronunciation) — banned from the oo_both contrastive day. "too" (heart-word homophone) and "poor" (oo_long + r coda) also avoided.
 - door/floor/blood/flood/would: unclassified — keep out of all passages.
 - Cross-rung blocking: out/down/now blocked outside ou_ow; stood/look/took/good blocked outside oo_both; saw/dawn blocked outside au_aw; coin/boy blocked outside oi_oy; dark/sharp/bark/start r-blocked everywhere in this rung.
-- Raw-CMUdict name tokens banned from seeds even when the validator passes them (SUBTLEX gate misses them; they would force new oracle caveats): floy, spaw, vaw, nouz, gaul, craw, trow, clow, taul (→tall), gawn (→gone), soud (→sowed), toob (→tube).
+- Raw-CMUdict name tokens banned from seeds even when the validator passes them (SUBTLEX gate misses them; they would force new oracle caveats): floy, spaw, the rejected predecessor to dook, vaw, nouz, gaul, craw, trow, clow, taul (→tall), gawn (→gone), soud (→sowed), toob (→tube). Process rule from that catch: every seed nonword must be swept against RAW CMUdict membership (not just the validator) before it enters a spec — the validator's SUBTLEX frequency gate cannot see name tokens; only the oracle can.
 - Inflection rule unchanged: no -s/-es/-ed/-ing on TARGET stems (cows/looks/hauled banned); non-target stems fine (steps, tricks, pals — hens precedent).
 
 ## 1. diph_oi_oy — "The Coin in the Soil" (order 20)
@@ -67,7 +67,7 @@ fullAuditPassageText (95w): Scout the dog sat on the steps. A loud sound came fr
 
 ## 3. oo_both — "A Good Look at the Moon" (order 22)
 
-Seed: patterns ["team_oo_long","team_oo_short"], pseudowordPatterns ["team_oo_long","team_oo_short"]; kid "oo words", tutor "Two sounds of oo: moon and book". exampleWords: moon, book, soon, look, food, good, boot, foot (first five span both sounds). exampleNonwords (4 long + 4 short): zoon, voom, zood, noof, vook, zook, vood, tood.
+Seed: patterns ["team_oo_long","team_oo_short"], pseudowordPatterns ["team_oo_short","team_oo_long"] (selector order is deliberate so dook is evaluated under team_oo_short); kid "oo words", tutor "Two sounds of oo: moon and book". exampleWords: moon, book, soon, look, food, good, boot, foot (first five span both sounds). exampleNonwords (4 long + 4 short): zoon, voom, zood, noof, vook, dook, vood, tood. (CORRECTION 2026-06-04: the rejected predecessor to dook was caught by the independent CMUdict oracle as a raw-CMUdict direct hit during Codex implementation — replaced with "dook" (raw-clean, validator-valid, D UH K) rather than adding an oracle caveat. Full 32-word raw sweep re-run: that predecessor was the only hit.)
 
 Part 2: minimal_pairs — rot→root, hot→hoot, tot→toot, hop→hoop (all oo_long; oo_short coverage via conceptExamples/targetWords). Line 2: those 8. Line 3: zoo, wood, broom, lake, hand, desk, home. Vocabulary: stool, hood.
 

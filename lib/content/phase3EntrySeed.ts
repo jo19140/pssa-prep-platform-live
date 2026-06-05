@@ -53,6 +53,16 @@ export const PHASE_4_RCONTROLLED = {
   prerequisites: ["PHASE_4_MID"],
 };
 
+export const PHASE_4_DIPHTHONG = {
+  phaseNumber: 4,
+  subPosition: "DIPHTHONG",
+  label: "Phase 4 Diphthong Entry",
+  phonicsTrack:
+    "Diphthongs and ambiguous vowels: oi/oy and ou/ow gliding vowels, the two sounds of oo, and au/aw as one broad-a sound with two spellings.",
+  morphologyTrack: "No new morphology target.",
+  prerequisites: ["PHASE_4_RCONTROLLED"],
+};
+
 export type DailyTargetSeed = {
   code: string;
   kidVisibleLabel: string;
@@ -405,7 +415,95 @@ export const PHASE_4_RCONTROLLED_TARGETS: DailyTargetSeed[] = [
   },
 ];
 
-export const CONTENT_V3_DAILY_TARGETS = [...PHASE_3_TARGETS, ...PHASE_4_ENTRY_TARGETS, ...PHASE_4_MID_TARGETS, ...PHASE_4_RCONTROLLED_TARGETS];
+const phase4DiphthongBlockedPatternCodes = [
+  "team_ai",
+  "team_ay",
+  "team_ee",
+  "team_ea",
+  "team_oa",
+  "team_ow",
+  "team_igh",
+  "team_ew",
+  "team_ue",
+  "team_ie_long_i",
+  "team_ie_long_e",
+  "team_oo_long",
+  "team_oo_short",
+  "team_au",
+  "team_aw",
+  "diph_oi",
+  "diph_oy",
+  "diph_ou",
+  "diph_ow",
+  "r_ar",
+  "r_or",
+  "r_er",
+  "r_ir",
+  "r_ur",
+];
+
+function diphthongBlockedExcept(targetPatterns: string[]) {
+  return phase4DiphthongBlockedPatternCodes.filter((pattern) => !targetPatterns.includes(pattern));
+}
+
+export const PHASE_4_DIPHTHONG_TARGETS: DailyTargetSeed[] = [
+  {
+    code: "diph_oi_oy",
+    kidVisibleLabel: "oi and oy words",
+    tutorLabel: "Diphthong oi/oy: coin, boy",
+    description: "Phase 4 Diphthong Entry target for oi and oy words.",
+    introductionOrder: 20,
+    targetPatternsJson: { patterns: ["diph_oi", "diph_oy"], pseudowordPatterns: ["diph_oi", "diph_oy"], graphemes: ["oi", "oy"], sound: "diphthong_oi_oy" },
+    allowedPatternCodes: phase4EntryAllowedPatternCodes,
+    blockedPatternCodes: diphthongBlockedExcept(["diph_oi", "diph_oy"]),
+    exampleWords: ["coin", "boy", "oil", "joy", "soil", "toy", "join", "point"],
+    exampleNonwords: ["zoit", "voib", "noib", "foid", "zoy", "voy", "snoy", "gloy"],
+  },
+  {
+    code: "diph_ou_ow",
+    kidVisibleLabel: "ou and ow words",
+    tutorLabel: "Diphthong ou/ow: out, town",
+    description: "Phase 4 Diphthong Entry target for ou and ow words.",
+    introductionOrder: 21,
+    targetPatternsJson: { patterns: ["diph_ou", "diph_ow"], pseudowordPatterns: ["diph_ou", "diph_ow"], graphemes: ["ou", "ow"], sound: "diphthong_ou_ow" },
+    allowedPatternCodes: phase4EntryAllowedPatternCodes,
+    blockedPatternCodes: diphthongBlockedExcept(["diph_ou", "diph_ow"]),
+    exampleWords: ["out", "town", "loud", "down", "found", "cow", "shout", "owl"],
+    exampleNonwords: ["zoud", "vout", "noud", "foud", "zown", "fown", "plown", "vown"],
+  },
+  {
+    code: "oo_both",
+    kidVisibleLabel: "oo words",
+    tutorLabel: "Two sounds of oo: moon and book",
+    description: "Phase 4 Diphthong Entry target for the two common sounds of oo.",
+    introductionOrder: 22,
+    targetPatternsJson: { patterns: ["team_oo_long", "team_oo_short"], pseudowordPatterns: ["team_oo_short", "team_oo_long"], graphemes: ["oo"], sound: "oo_long_short" },
+    allowedPatternCodes: phase4EntryAllowedPatternCodes,
+    blockedPatternCodes: diphthongBlockedExcept(["team_oo_long", "team_oo_short"]),
+    exampleWords: ["moon", "book", "soon", "look", "food", "good", "boot", "foot"],
+    exampleNonwords: ["zoon", "voom", "zood", "noof", "vook", "dook", "vood", "tood"],
+  },
+  {
+    code: "diph_au_aw",
+    kidVisibleLabel: "au and aw words",
+    tutorLabel: "Vowel au/aw: haul, saw",
+    description: "Phase 4 Diphthong Entry target for broad-a au and aw words.",
+    introductionOrder: 23,
+    targetPatternsJson: { patterns: ["team_au", "team_aw"], pseudowordPatterns: ["team_au", "team_aw"], graphemes: ["au", "aw"], sound: "broad_a_au_aw" },
+    allowedPatternCodes: phase4EntryAllowedPatternCodes,
+    blockedPatternCodes: diphthongBlockedExcept(["team_au", "team_aw"]),
+    exampleWords: ["saw", "haul", "paw", "fault", "lawn", "draw", "dawn", "yawn"],
+    exampleNonwords: ["zaul", "vaul", "naul", "jaul", "zaw", "snaw", "blaw", "glaw"],
+  },
+];
+
+export const CONTENT_V3_DAILY_TARGETS = [
+  ...PHASE_3_TARGETS,
+  ...PHASE_4_ENTRY_TARGETS,
+  ...PHASE_4_MID_TARGETS,
+  ...PHASE_4_RCONTROLLED_TARGETS,
+  ...PHASE_4_DIPHTHONG_TARGETS,
+];
 
 export const NDL_LICENSE_ATTRIBUTION = {
   sourceCode: "NDL",
