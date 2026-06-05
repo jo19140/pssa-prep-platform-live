@@ -1,4 +1,5 @@
 import { Prisma, type DailyTarget } from "@prisma/client";
+import { morphologyConfigFromTargetPatternsJson } from "./morphologyAnalyzer";
 import { phase3EntryLessonContentFor } from "@/lib/content/phase3EntryLessonContent";
 import { db } from "@/lib/db";
 import { runAIFirstLookReview, type FirstLookModelRunner } from "@/lib/content/aiFirstLookReviewer";
@@ -169,6 +170,7 @@ export async function generateLessonDraft(ctx: LessonGeneratorContext, options: 
     targetPattern: ctx.targetPattern,
     targetPatterns: ctx.targetPatterns,
     pseudowordPatterns: ctx.pseudowordPatterns,
+    morphology: morphologyConfigFromTargetPatternsJson(ctx.dailyTarget.targetPatternsJson),
     parts,
   };
 }

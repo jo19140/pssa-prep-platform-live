@@ -148,11 +148,18 @@ export function detectVcePattern(word: string): string | null {
   return match ? `${match[1]}_e` : null;
 }
 
+export function detectClosedShortPattern(word: string): string | null {
+  const match = word.toLowerCase().trim().match(/^[^aeiou]*([aeiou])[^aeiou]+$/);
+  return match ? `closed_short_${match[1]}` : null;
+}
+
 export function detectPatternCandidates(word: string): string[] {
   const normalized = word.toLowerCase().trim();
   const candidates = new Set<string>();
   const vce = detectVcePattern(normalized);
   if (vce) candidates.add(vce);
+  const closedShort = detectClosedShortPattern(normalized);
+  if (closedShort) candidates.add(closedShort);
   for (const [code, def] of Object.entries(PATTERN_REGISTRY)) {
     if (def.graphemes.some((grapheme) => normalized.includes(grapheme))) candidates.add(code);
   }
@@ -276,7 +283,21 @@ const CONSONANT_PHONEMES: Record<string, string> = {
   z: "Z",
 };
 
+const CLOSED_SHORT_VOWEL_PHONEMES: Record<string, string> = { a: "AE", i: "IH", o: "AA", u: "AH", e: "EH" };
+
 function decodePatternPseudowordPronunciation(word: string, pattern: string): string[] | null {
+  const closedShort = pattern.match(/^closed_short_([aeiou])$/);
+  if (closedShort) {
+    const vowelLetter = closedShort[1];
+    const vowelPhoneme = CLOSED_SHORT_VOWEL_PHONEMES[vowelLetter];
+    if (!vowelPhoneme || detectClosedShortPattern(word) !== pattern) return null;
+    const index = word.indexOf(vowelLetter);
+    if (index < 0) return null;
+    const onset = word.slice(0, index);
+    const coda = word.slice(index + 1);
+    const decoded = [...decodeConsonantString(onset), vowelPhoneme, ...decodeConsonantString(coda)];
+    return decoded.length ? decoded : null;
+  }
   const definition = PATTERN_REGISTRY[pattern];
   const vowelPhonemes = definition?.expectedPhonemeSequences?.[0];
   if (!definition || !["vowel_team", "r_controlled", "diphthong"].includes(definition.family) || !vowelPhonemes?.length) return null;

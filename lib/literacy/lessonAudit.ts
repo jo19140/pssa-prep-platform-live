@@ -322,7 +322,7 @@ function matchesAnyTargetPattern(word: string, draft: GeneratedLessonDraft) {
 }
 
 function isNarrowPatternCode(pattern: string) {
-  return /^[aeiou]_e$/.test(pattern) || Boolean(PATTERN_REGISTRY[pattern]);
+  return /^[aeiou]_e$/.test(pattern) || /^closed_short_[aeiou]$/.test(pattern) || Boolean(PATTERN_REGISTRY[pattern]);
 }
 
 function isPrerequisiteWord(word: string) {

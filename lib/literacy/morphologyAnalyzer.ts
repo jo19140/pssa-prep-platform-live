@@ -151,3 +151,18 @@ function normalizeWord(word: string) {
   const normalized = word.toLowerCase().trim();
   return /^[a-z]+$/.test(normalized) ? normalized : "";
 }
+
+// Shared parser so the generator, part builders, and passage audit derive the
+// morphology config from a daily target identically (single source of truth).
+export function morphologyConfigFromTargetPatternsJson(json: unknown): MorphologyAnalyzerConfig | undefined {
+  if (!json || typeof json !== "object" || Array.isArray(json)) return undefined;
+  const morphologyJson = (json as { morphologyJson?: unknown }).morphologyJson;
+  if (!morphologyJson || typeof morphologyJson !== "object" || Array.isArray(morphologyJson)) return undefined;
+  const rule = (morphologyJson as { rule?: unknown }).rule;
+  const stemPatterns = (morphologyJson as { stemPatterns?: unknown }).stemPatterns;
+  const suffixes = (morphologyJson as { suffixes?: unknown }).suffixes;
+  if (rule !== "drop_e" && rule !== "double") return undefined;
+  if (!Array.isArray(stemPatterns) || !stemPatterns.every((entry) => typeof entry === "string")) return undefined;
+  if (!Array.isArray(suffixes) || !suffixes.every((entry) => entry === "ing" || entry === "ed" || entry === "s" || entry === "es")) return undefined;
+  return { rule, stemPatterns: stemPatterns as string[], suffixes: suffixes as ("ing" | "ed" | "s" | "es")[] };
+}

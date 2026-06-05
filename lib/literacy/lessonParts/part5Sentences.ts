@@ -1,5 +1,6 @@
 import { phase3EntryLessonContentFor } from "@/lib/content/phase3EntryLessonContent";
 import { classifyPassageWords } from "../passageClassifier";
+import { morphologyConfigFromTargetPatternsJson } from "../morphologyAnalyzer";
 import { withCommonPartMetadata, type GeneratedLessonPart, type LessonGeneratorContext } from "./types";
 
 export function generatePart5Sentences(ctx: LessonGeneratorContext): GeneratedLessonPart {
@@ -10,6 +11,7 @@ export function generatePart5Sentences(ctx: LessonGeneratorContext): GeneratedLe
     blockedPatternCodes: ctx.dailyTarget.blockedPatternCodes,
     heartWords: [...ctx.heartWordsPreviewedThisLesson, ...ctx.heartWordsAssumedKnown, "is"],
     vocabularyAllowlist: ctx.vocabularyWords,
+    morphology: morphologyConfigFromTargetPatternsJson(ctx.dailyTarget.targetPatternsJson),
   });
   return withCommonPartMetadata(ctx, {
     partNumber: 5,
