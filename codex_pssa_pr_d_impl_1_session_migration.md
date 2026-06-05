@@ -80,6 +80,17 @@ model PssaFormResponse {
 - `form → Restrict`: a form with sessions must never be deletable — sessions are audit records of what students saw.
 - `formItem → Restrict`, `item → Restrict`: same rationale; `PssaFormItem.itemId` is already `Restrict` in DB-6 (verify, don't change).
 
+### Partial unique index (raw migration SQL only — Prisma can't express partial indexes)
+Add a partial unique index enforcing at most one active in-progress session per user/form pair:
+
+```sql
+CREATE UNIQUE INDEX "PssaFormSession_one_in_progress_per_user_form_idx"
+  ON "PssaFormSession" ("userId", "formId")
+  WHERE "status" = 'in_progress';
+```
+
+This is a D-impl-1 migration requirement, not D-impl-2 service behavior. Submitted and invalidated sessions may coexist historically; only the active `in_progress` row is unique.
+
 ### D-impl-2 write invariants (record here for continuity — NOT implemented in this PR)
 PR D-impl-2 enforces at every write: `response.formItem.formId === session.formId`, `positionSnapshot === formItem.position`, **and `itemId === formItem.itemId`**. The denormalized `itemId` is audit-only and must never be allowed to disagree with the selected `PssaFormItem` — without the third invariant the DB could store a response pointing at slot X while audit-labeling itself as item Y. A cross-table CHECK cannot express this cleanly; it belongs in the write service contract.
 
@@ -127,7 +138,7 @@ NOTE: these `ALTER TABLE ... ADD CONSTRAINT` statements target the NEW table cre
 - No DB connection — pure types/enums, runnable everywhere.
 
 ## Acceptance
-`prisma validate` + `prisma generate` green; migration SQL contains ONLY `CREATE TYPE`/`CREATE TABLE`/`CREATE INDEX`/`CREATE UNIQUE INDEX` + FK/CHECK `ALTER`s scoped to the two NEW tables; schema diff has ZERO deletions and the only edits to existing models are relation-list lines (`User`, `PssaForm`, `PssaFormItem`, `PssaItem`); `tsc --noEmit` + `build` + ALL existing `test:pssa-*` suites green; `test:pssa-pr-d1` green; `git diff` = schema, migration dir, the new test file, package.json script line.
+`prisma validate` + `prisma generate` green; migration SQL contains ONLY `CREATE TYPE`/`CREATE TABLE`/`CREATE INDEX`/`CREATE UNIQUE INDEX` + FK/CHECK `ALTER`s scoped to the two NEW tables; migration SQL includes the partial unique index `PssaFormSession_one_in_progress_per_user_form_idx` on `("userId", "formId") WHERE "status" = 'in_progress'`; schema diff has ZERO deletions and the only edits to existing models are relation-list lines (`User`, `PssaForm`, `PssaFormItem`, `PssaItem`); `tsc --noEmit` + `build` + ALL existing `test:pssa-*` suites green; `test:pssa-pr-d1` green; `git diff` = schema, migration dir, the new test file, package.json script line.
 
 ## Stop — report (for Claude's independent audit)
-The full migration SQL; the schema diff; the four relation-list additions; CHECK constraint text; types-test output; confirmation `migrate deploy` applied clean on the CURRENT dev DB (the rebuilt one — these tables are empty additions, no approvals are touched and the importer is NOT re-run); tsc/build/all-suites results. Do NOT create PssaHumanScore. Do NOT touch TestSession/ResponseRecord/Assignment. Do NOT write any route or service code.
+The full migration SQL; the schema diff; the four relation-list additions; partial unique index text; CHECK constraint text; types-test output; confirmation `migrate deploy` applied clean on the CURRENT dev DB (the rebuilt one — these tables are empty additions, no approvals are touched and the importer is NOT re-run); tsc/build/all-suites results. Do NOT create PssaHumanScore. Do NOT touch TestSession/ResponseRecord/Assignment. Do NOT write any route or service code.
