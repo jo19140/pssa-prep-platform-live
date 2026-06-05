@@ -1,6 +1,6 @@
 import assert from "assert/strict";
 import { LESSON_CONTENT_BY_DAILY_TARGET, phase3EntryLessonContentFor } from "../lib/content/phase3EntryLessonContent";
-import { CONTENT_V3_DAILY_TARGETS, PHASE_3_MID_TARGETS, PHASE_4_ENTRY_TARGETS, PHASE_4_MID_TARGETS, PHASE_4_RCONTROLLED_TARGETS, PHASE_4_DIPHTHONG_TARGETS } from "../lib/content/phase3EntrySeed";
+import { CONTENT_V3_DAILY_TARGETS, PHASE_3_MID_TARGETS, PHASE_4_ENTRY_TARGETS, PHASE_4_MID_TARGETS, PHASE_4_RCONTROLLED_TARGETS, PHASE_4_DIPHTHONG_TARGETS, PHASE_4_TEAMS_CLEANUP_TARGETS } from "../lib/content/phase3EntrySeed";
 import { auditGeneratedLessonDraft, evaluateLessonApprovalReadiness } from "../lib/literacy/lessonAudit";
 import { deterministicLessonPartRunner, generateLessonDraft } from "../lib/literacy/lessonGenerator";
 import { generatePart1Warmup } from "../lib/literacy/lessonParts/part1Warmup";
@@ -19,11 +19,12 @@ function lessonContext(targetCode = "a_e"): LessonGeneratorContext {
   const isPhase4Mid = PHASE_4_MID_TARGETS.some((target) => target.code === targetCode);
   const isPhase4RControlled = PHASE_4_RCONTROLLED_TARGETS.some((target) => target.code === targetCode);
   const isPhase4Diphthong = PHASE_4_DIPHTHONG_TARGETS.some((target) => target.code === targetCode);
-  const isPhase4 = isPhase4Entry || isPhase4Mid || isPhase4RControlled || isPhase4Diphthong;
+  const isPhase4TeamsCleanup = PHASE_4_TEAMS_CLEANUP_TARGETS.some((target) => target.code === targetCode);
+  const isPhase4 = isPhase4Entry || isPhase4Mid || isPhase4RControlled || isPhase4Diphthong || isPhase4TeamsCleanup;
   const phasePosition = {
-    id: isPhase4Diphthong ? "phase-4-diphthong" : isPhase4RControlled ? "phase-4-rcontrolled" : isPhase4Mid ? "phase-4-mid" : isPhase4Entry ? "phase-4-entry" : isMid ? "phase-3-mid" : "phase-3-entry",
+    id: isPhase4TeamsCleanup ? "phase-4-teams-cleanup" : isPhase4Diphthong ? "phase-4-diphthong" : isPhase4RControlled ? "phase-4-rcontrolled" : isPhase4Mid ? "phase-4-mid" : isPhase4Entry ? "phase-4-entry" : isMid ? "phase-3-mid" : "phase-3-entry",
     phaseNumber: isPhase4 ? 4 : 3,
-    label: isPhase4Diphthong ? "Phase 4 Diphthong Entry" : isPhase4RControlled ? "Phase 4 R-Controlled Entry" : isPhase4Mid ? "Phase 4 Mid" : isPhase4Entry ? "Phase 4 Entry" : isMid ? "Phase 3 Mid" : "Phase 3 Entry",
+    label: isPhase4TeamsCleanup ? "Phase 4 Teams Cleanup" : isPhase4Diphthong ? "Phase 4 Diphthong Entry" : isPhase4RControlled ? "Phase 4 R-Controlled Entry" : isPhase4Mid ? "Phase 4 Mid" : isPhase4Entry ? "Phase 4 Entry" : isMid ? "Phase 3 Mid" : "Phase 3 Entry",
   };
   const dailyTarget = {
     id: `target-${targetCode}`,

@@ -63,6 +63,16 @@ export const PHASE_4_DIPHTHONG = {
   prerequisites: ["PHASE_4_RCONTROLLED"],
 };
 
+export const PHASE_4_TEAMS_CLEANUP = {
+  phaseNumber: 4,
+  subPosition: "TEAMS_CLEANUP",
+  label: "Phase 4 Teams Cleanup",
+  phonicsTrack:
+    "Cleanup of the deferred ambiguous vowel teams: ow as long o, ew and ue as long u, and the two sounds of ie.",
+  morphologyTrack: "No new morphology target.",
+  prerequisites: ["PHASE_4_DIPHTHONG"],
+};
+
 export type DailyTargetSeed = {
   code: string;
   kidVisibleLabel: string;
@@ -497,12 +507,57 @@ export const PHASE_4_DIPHTHONG_TARGETS: DailyTargetSeed[] = [
   },
 ];
 
+export const PHASE_4_TEAMS_CLEANUP_TARGETS: DailyTargetSeed[] = [
+  {
+    code: "team_ow",
+    kidVisibleLabel: "ow as in snow",
+    tutorLabel: "Vowel team ow: snow, grow, show",
+    description: "Phase 4 Teams Cleanup target for long o spelled ow.",
+    introductionOrder: 24,
+    targetPatternsJson: { patterns: ["team_ow"], pseudowordPatterns: ["team_ow"], graphemes: ["ow"], sound: "long_o_ow" },
+    allowedPatternCodes: phase4EntryAllowedPatternCodes,
+    blockedPatternCodes: diphthongBlockedExcept(["team_ow"]),
+    exampleWords: ["snow", "grow", "show", "low", "own", "glow", "slow", "blow"],
+    exampleNonwords: ["zow", "thow", "smow", "drow", "zowl", "vowl", "blowl", "zowm"],
+  },
+  {
+    code: "team_ew_ue",
+    kidVisibleLabel: "ew and ue words",
+    tutorLabel: "Long u teams ew/ue: new, blue",
+    description: "Phase 4 Teams Cleanup target for long u spelled ew or ue.",
+    introductionOrder: 25,
+    targetPatternsJson: { patterns: ["team_ew", "team_ue"], pseudowordPatterns: ["team_ew", "team_ue"], graphemes: ["ew", "ue"], sound: "long_u_ew_ue" },
+    allowedPatternCodes: phase4EntryAllowedPatternCodes,
+    blockedPatternCodes: diphthongBlockedExcept(["team_ew", "team_ue"]),
+    exampleWords: ["new", "blue", "few", "true", "grew", "clue", "chew", "glue"],
+    exampleNonwords: ["vew", "snew", "twew", "swew", "frue", "smue", "spue", "snue"],
+  },
+  {
+    code: "team_ie_both",
+    kidVisibleLabel: "two sounds for ie",
+    tutorLabel: "Two sounds of ie: pie and field",
+    description: "Phase 4 Teams Cleanup target for the two common sounds of ie.",
+    introductionOrder: 26,
+    targetPatternsJson: {
+      patterns: ["team_ie_long_i", "team_ie_long_e"],
+      pseudowordPatterns: ["team_ie_long_i", "team_ie_long_e"],
+      graphemes: ["ie"],
+      sound: "ie_long_i_long_e",
+    },
+    allowedPatternCodes: phase4EntryAllowedPatternCodes,
+    blockedPatternCodes: diphthongBlockedExcept(["team_ie_long_i", "team_ie_long_e"]),
+    exampleWords: ["pie", "field", "tie", "chief", "brief", "shield", "niece", "lie"],
+    exampleNonwords: ["zie", "blie", "snie", "grie", "vief", "zief", "glief", "sniel"],
+  },
+];
+
 export const CONTENT_V3_DAILY_TARGETS = [
   ...PHASE_3_TARGETS,
   ...PHASE_4_ENTRY_TARGETS,
   ...PHASE_4_MID_TARGETS,
   ...PHASE_4_RCONTROLLED_TARGETS,
   ...PHASE_4_DIPHTHONG_TARGETS,
+  ...PHASE_4_TEAMS_CLEANUP_TARGETS,
 ];
 
 export const NDL_LICENSE_ATTRIBUTION = {
