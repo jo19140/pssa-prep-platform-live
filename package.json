@@ -41,6 +41,7 @@
     "test:pssa-pr-b": "tsx scripts/test-pssa-pr-b-renderers.ts",
     "test:pssa-pr-c": "tsx scripts/test-pssa-pr-c-scoring.ts",
     "test:pssa-pr-d1": "tsx scripts/test-pssa-pr-d1-prisma-types.ts",
+    "test:pssa-pr-d2": "tsx scripts/test-pssa-pr-d2-delivery.ts",
     "voice:enforce-retention": "tsx scripts/voice/enforce-retention.ts",
     "voice:purge-training-opt-outs": "tsx scripts/voice/purge-training-opt-outs.ts",
     "data-flywheel:compute-outcomes": "tsx scripts/data-flywheel/compute-outcomes.ts",
