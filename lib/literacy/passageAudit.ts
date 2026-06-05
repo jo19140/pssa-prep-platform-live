@@ -1,4 +1,5 @@
 import type { DailyTarget, PhasePosition } from "@prisma/client";
+import { PATTERN_REGISTRY } from "./patternRegistry";
 import { classifyPassageWords, type PassageClassification } from "./passageClassifier";
 import { runPassageQualityAudit, type PassageQualityAudit } from "./passageQualityAudit";
 
@@ -76,11 +77,29 @@ export function auditPassage(text: string, context: PassageAuditContext): Passag
 
 export function patternCodesFromDailyTarget(dailyTarget: Pick<DailyTarget, "code" | "targetPatternsJson">): string[] {
   const json = dailyTarget.targetPatternsJson;
+  // Prefer the declared patterns array verbatim when every entry is a classifiable code.
+  // The legacy collector below regex-mangles multi-underscore registry codes (team_oo_long,
+  // r_ar, diph_ou) down to bare graphemes, which the classifier can only match for the nine
+  // hardcoded substring graphemes — phoneme-blind, and impossible for oo/diphthong targets.
+  if (json && typeof json === "object" && !Array.isArray(json)) {
+    const declared = (json as { patterns?: unknown }).patterns;
+    if (
+      Array.isArray(declared) &&
+      declared.length > 0 &&
+      declared.every((entry) => typeof entry === "string" && isClassifiablePatternCode(entry))
+    ) {
+      return Array.from(new Set(declared as string[]));
+    }
+  }
   const patterns = new Set<string>();
   collectStrings(json).forEach((value) => {
     if (/^[a-z]+_e$|^closed_short_[aeiou]$|^[a-z]{2,4}$/.test(value)) patterns.add(value);
   });
   return patterns.size ? Array.from(patterns) : [dailyTarget.code];
+}
+
+function isClassifiablePatternCode(code: string) {
+  return Boolean(PATTERN_REGISTRY[code]) || /^[a-z]+_e$|^closed_short_[aeiou]$/.test(code);
 }
 
 function collectStrings(value: unknown): string[] {
