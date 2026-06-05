@@ -75,7 +75,12 @@ For every stored response, `maxPoints` must equal its `formItem.pointValue` (alr
 4. **Answer lifecycle**: store → change before submit (updated + re-scored) → submit → further answer 409; invalid_response stored with 0; CHECK-constraint compatibility (scored/pending/invalid rows all insertable).
 5. **Submit math**: totals from `PssaFormItem.pointValue` snapshots; machine-scored totals + pendingHumanPoints with SA in the mix; allowIncomplete semantics (0 earned/0 pending/no rows for skipped).
 6. **Scope proof**: `git diff` shows zero changes to legacy routes/player/scorer AND zero schema/migration changes; no imports of `serverScoring` or legacy session code anywhere in the new files.
+7. **POST/security guard tests (Pro round-3 patch — pins the DB-5.1 route hardening):**
+   - every POST rejects non-JSON `Content-Type`;
+   - every POST rejects cross-origin `Origin`/`Referer`;
+   - every route returns `Cache-Control: no-store, private`;
+   - route tests spy/assert `consumeRateLimit` and `getClientIp` are invoked.
 `tsc` + `build` + ALL existing `test:pssa-*` green.
 
 ## Stop — report (for Claude's independent audit)
-Service + route file list; the validity-check implementation (single function, call sites at all five routes); the launch authorization choice (roster-bound TEACHER or ADMIN-only) with its evidence; authz matrix output for the implemented branch; leak-test output incl. planted-key results; answer-lifecycle outputs; submit math fixtures (snapshot-sourced totals); minimal-response shapes for each route; archival-state proof for submitted sessions; `git diff --stat`; tsc/build/suite results. Do NOT touch legacy surfaces or schema. Do NOT add student self-launch. Do NOT echo points or `detail` before submit. E2E demo against the real dev DB is NOT part of this stop-report (gated separately).
+Service + route file list; the validity-check implementation (single function, call sites at all five routes); the launch authorization choice (roster-bound TEACHER or ADMIN-only) with its evidence; authz matrix output for the implemented branch; leak-test output incl. planted-key results; answer-lifecycle outputs; submit math fixtures (snapshot-sourced totals); minimal-response shapes for each route; archival-state proof for submitted sessions; POST guard + cache-header test output; `git diff --stat`; tsc/build/suite results. Do NOT touch legacy surfaces or schema. Do NOT add student self-launch. Do NOT echo points or `detail` before submit. E2E demo against the real dev DB is NOT part of this stop-report (gated separately).
