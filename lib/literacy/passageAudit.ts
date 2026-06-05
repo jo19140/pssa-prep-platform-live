@@ -2,6 +2,7 @@ import type { DailyTarget, PhasePosition } from "@prisma/client";
 import { PATTERN_REGISTRY } from "./patternRegistry";
 import { classifyPassageWords, type PassageClassification } from "./passageClassifier";
 import { runPassageQualityAudit, type PassageQualityAudit } from "./passageQualityAudit";
+import type { MorphologyAnalyzerConfig } from "./morphologyAnalyzer";
 
 export type PassageAuditContext = {
   phasePosition: Pick<PhasePosition, "id" | "phaseNumber" | "label">;
@@ -49,6 +50,7 @@ export function auditPassage(text: string, context: PassageAuditContext): Passag
     blockedPatternCodes: context.dailyTarget.blockedPatternCodes,
     heartWords: context.heartWords,
     vocabularyAllowlist: context.vocabularyAllowlist,
+    morphology: morphologyFromDailyTarget(context.dailyTarget),
   });
   const wordCountBand = phaseWordCountBand(context.phasePosition.phaseNumber);
   const wordCountWithinBand = Boolean(wordCountBand && classification.wordCount >= wordCountBand.min && classification.wordCount <= wordCountBand.max);
@@ -73,6 +75,20 @@ export function auditPassage(text: string, context: PassageAuditContext): Passag
     unclassifiedCount,
     passesAuditGate,
   };
+}
+
+function morphologyFromDailyTarget(dailyTarget: Pick<DailyTarget, "targetPatternsJson">): MorphologyAnalyzerConfig | undefined {
+  const json = dailyTarget.targetPatternsJson;
+  if (!json || typeof json !== "object" || Array.isArray(json)) return undefined;
+  const morphologyJson = (json as { morphologyJson?: unknown }).morphologyJson;
+  if (!morphologyJson || typeof morphologyJson !== "object" || Array.isArray(morphologyJson)) return undefined;
+  const rule = (morphologyJson as { rule?: unknown }).rule;
+  const stemPatterns = (morphologyJson as { stemPatterns?: unknown }).stemPatterns;
+  const suffixes = (morphologyJson as { suffixes?: unknown }).suffixes;
+  if (rule !== "drop_e" && rule !== "double") return undefined;
+  if (!Array.isArray(stemPatterns) || !stemPatterns.every((entry) => typeof entry === "string")) return undefined;
+  if (!Array.isArray(suffixes) || !suffixes.every((entry) => entry === "ing" || entry === "ed" || entry === "s" || entry === "es")) return undefined;
+  return { rule, stemPatterns, suffixes };
 }
 
 export function patternCodesFromDailyTarget(dailyTarget: Pick<DailyTarget, "code" | "targetPatternsJson">): string[] {
