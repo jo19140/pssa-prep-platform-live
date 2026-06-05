@@ -1,0 +1,35 @@
+# PSSA #4p — Grade 3 literary top-up tranche (2 passages + full item complements; SEQUENCED BEFORE the approval pass)
+
+## Why now (sequencing is the point — read first)
+Category-A(Lit) supply is structurally fragile: 4 of 5 pool passages are informational, and ~18 of the pool's 29 A points sit on `pssa_psg_g3_the_mural_plan` — every valid form is currently mural-or-bust (DB-6 finding). Separately, the import pipeline cannot run against a DB with approvals (DB-4 fail-closed, by design) and the batch corpus hash covers the whole plan — so **this tranche must import into the CURRENT rebuilt, approval-free dev DB BEFORE Jonathan's approval pass.** Land #4p → import incrementally (nothing is approved, so create-if-absent + verify-unchanged works) → ONE approval pass over the full pool. Approving first would force a second rebuild + full re-approval.
+
+**Rebuild caveat (Pro):** the no-fresh-rebuild claim holds because the conventions-vocab normalization is ALREADY merged and the current dev DB was rebuilt post-vocab (e5e4951 state — verified). The general rule for the record: corpus-changing PRs must all land before the approval pass, with at most one rebuild between them — never approve between corpus-changing PRs. If any future corpus change lands after approvals exist, the path is fresh rebuild + full re-approval, no exceptions.
+
+**Critical-path precision (Pro):** the conventions-vocab fix was the HARD blocker (conventions_1pt mathematically unsatisfiable — now resolved). #4p is the form-RESILIENCE blocker: without it, a valid form is possible but every form is mural-dependent for category A; with it, the assembler gains genuine choice and the PDE-typical 2-lit + 2-info mix becomes available.
+
+## Deliverable
+TWO original Grade 3 LITERARY passages + full per-passage item complements, mirroring the existing per-passage composition:
+- Per passage: 6 reading 1-pt MCQs + 1 EBSR (2pt) + 1 MULTI_SELECT (2pt) + 1 HOT_TEXT (2pt) + 1 MATCHING_GRID (3pt) + 1 DRAG_DROP (3pt) + 1 SHORT_ANSWER (3pt) = **12 items / 21 pts per passage** (6+2+2+2+3+3+3 = 21).
+- Tranche total: 2 passages, 24 items, **+42 category-A points (pool A: 29 → 71)**. Pool afterward: 7 passages (3 literary / 4 informational — enabling the PDE-typical 2-lit + 2-info form mix), 91 active items, SA pool 7.
+- All items use LITERARY ECs (E03.A-K / A-C / A-V families) resolved against the crosswalk; genre = literary narrative (character/plot/theme surfaces), NOT informational structures.
+
+## Authoring rules (full #4-series inheritance — nothing relaxed)
+- Original passages: Grade 3 band, length consistent with the existing five; pass ALL passage gates including CROSS-DUPLICATE vs the existing 5 passages (and each other), template-skeleton, topic-coherence, concreteness.
+- Every item: passage-grounded, EC skill-match (`PSSA_ITEM_EC_SKILL_MISMATCH`), evidence spans verbatim, labeled distractor roles, no copied released text (hardened source scan), `reviewStatus=PENDING` / `itemStatus=candidate` / `sourceType=internal_original` / license cleared / `noDbWrite:true` exemplar JSON under `exemplars/pssa_grade3_literary_topup/`.
+- SA items follow the #4o contract exactly (3/2/1/0 rubric, copied-text cap, score-band examples, `autoScoringClaim=false`).
+- DRAG_DROP/HOT_TEXT/etc. use the CANONICAL reading vocabulary (`selectableSpans`/`spanId`, `tokens`/`targets`/`targetId`) — do NOT use the conventions token/slot vocabulary.
+
+## Batch-gate rule (the integration trap — get this right)
+New items join the EXISTING batch ids (`reading_mcq_grade3`, `ebsr_grade3`, `multi_select_grade3`, `hot_text_grade3`, `matching_grid_grade3`, `drag_drop_grade3`, `short_answer_grade3_pool`). Therefore every batch-level gate (#4j §4a: EBSR/MCQ answer-position distribution, MS/HT/MG/DD surface-shortcut distribution, SA pool blueprint) must be RE-RUN AND PASS over the MERGED membership (old + new items), not over the new tranche in isolation. Author the new items' correct-answer positions/patterns to keep the merged distributions inside thresholds. The import plan's batch construction must consume merged arrays.
+
+## Pipeline integration (DB-6.5 manifest discipline)
+- Extend `PssaGradeImportManifest` with an OPTIONAL `literaryTopup?: string` files entry (additive type change; absent for future grades until they have one) + the new exemplar file in `GRADE3_IMPORT_MANIFEST`; `buildPlan` merges it into the same streams/batches.
+- `expectedCounts` update: passages 7, activeItems 91, deprecatedItems 12 (unchanged), supersessions 12 (unchanged), batches 8 (unchanged ids).
+- **Deliberate constant/test flips (enumerate each in the diff):** `GRADE3_SOURCE_CORPUS_HASH` (corpus grows; document old→new), DB-6.5 golden hashes for EXISTING items must remain IDENTICAL (blast-radius proof), PR B leak-test count 79 → 103 total rows (91 active + 12 deprecated), **PR C real-bank coverage 79 → 103 total rows: 96 scored machine/deprecated rows + 7 pending SHORT_ANSWER rows** (91 active = 84 machine-scored + 7 SA pending; 12 deprecated still covered/scored as their types), dry-run report regeneration (new rows only; existing rows byte-identical).
+- Form assembly: NO assembler changes — the existing category/blueprint gates simply gain supply. DB-6 assemble dry-run post-approval should show category-A satisfiable without mural monopoly.
+
+## Acceptance
+All passage + item + MERGED batch gates PASS; cross-duplicate clean vs existing corpus; ECs 24/24 resolve; exemplar JSON noDbWrite; manifest/expectedCounts updated; **existing passage AND item hashes byte-identical** (golden test) with only additive corpus growth; **all 24 new item IDs + 2 passage IDs globally unique — zero collisions with existing active or deprecated IDs (assert in tests)**; import dry-run manifest 7/91/12/12/8 with 0 gate failures; incremental write on the CURRENT dev DB inserts exactly 2 passages + 24 items + links (existing rows verify-unchanged, no approvals exist to violate); second write = content no-op; all `test:pssa-*` + `tsc` + `build` green with the enumerated flips.
+
+## Stop — report (for Claude's independent audit)
+Both passages + per-item table (EC, type, points, position/pattern choices); merged batch-gate outputs (before/after distributions per batch); cross-duplicate results; manifest diff; the enumerated test flips with old→new values; dry-run manifest; incremental-write counts + no-op proof; tsc/build/suites. Do NOT approve anything. Do NOT touch conventions items, the assembler, PR D files, or legacy surfaces. After my audit passes: Jonathan's SINGLE approval pass over the full pool (7 passages + 91 items), then the DB-6 assemble dry-run.
