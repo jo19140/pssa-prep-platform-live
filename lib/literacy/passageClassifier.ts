@@ -1,5 +1,6 @@
 import { tokenizePassage } from "./passageTokenizer";
 import { PATTERN_REGISTRY, wordMatchesRegisteredPattern, type PatternMatchOptions } from "./patternRegistry";
+import { decomposeInflectedWord, type MorphologyAnalysis, type MorphologyAnalyzerConfig } from "./morphologyAnalyzer";
 
 export type WordCategory = "target" | "prerequisite" | "heart" | "vocabulary" | "unclassified";
 
@@ -7,6 +8,7 @@ export type WordAuditEntry = {
   word: string;
   category: WordCategory;
   matchedPattern?: string;
+  morphology?: MorphologyAnalysis;
 };
 
 export type BlockedPatternViolation = {
@@ -20,6 +22,7 @@ export type PassageClassificationContext = {
   blockedPatternCodes: string[];
   heartWords: string[];
   vocabularyAllowlist: string[];
+  morphology?: MorphologyAnalyzerConfig;
 };
 
 export type PassageClassification = {
@@ -79,6 +82,10 @@ function classifyWord(word: string, context: PassageClassificationContext, heart
   const prerequisitePattern = context.allowedPatternCodes.find((code) => wordMatchesPattern(word, code));
   if (prerequisitePattern || CLOSED_SHORT_WORDS.has(word)) return { word, category: "prerequisite", matchedPattern: prerequisitePattern };
   if (vocabularySet.has(word)) return { word, category: "vocabulary" };
+  if (context.morphology) {
+    const analysis = decomposeInflectedWord(word, context.morphology);
+    if (analysis) return { word, category: "target", matchedPattern: analysis.basePattern, morphology: analysis };
+  }
   return { word, category: "unclassified" };
 }
 

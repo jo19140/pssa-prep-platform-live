@@ -3,6 +3,7 @@ import { wordMatchesPattern } from "./passageClassifier";
 import { PATTERN_REGISTRY } from "./patternRegistry";
 import { detectPatternCandidates, validatePseudowordCandidate } from "./pseudowordValidator";
 import type { GeneratedLessonPart } from "./lessonParts/types";
+import { decomposeInflectedWord, type MorphologyAnalyzerConfig } from "./morphologyAnalyzer";
 
 export type GeneratedLessonDraft = {
   phasePositionId: string;
@@ -12,6 +13,7 @@ export type GeneratedLessonDraft = {
   targetPattern: string;
   targetPatterns: string[];
   pseudowordPatterns?: string[];
+  morphology?: MorphologyAnalyzerConfig;
   parts: GeneratedLessonPart[];
 };
 
@@ -82,7 +84,7 @@ function auditPart2(draft: GeneratedLessonDraft) {
   const part = partNumber(draft, 2);
   const examples = strings(part?.contentJson.conceptExamples);
   const demoMode = String(part?.contentJson.demoMode ?? "minimal_pairs");
-  const demoPairs = Array.isArray(part?.contentJson.demonstrationPairs) ? part.contentJson.demonstrationPairs as Array<{ closed?: unknown; target?: unknown }> : [];
+  const demoPairs = Array.isArray(part?.contentJson.demonstrationPairs) ? part.contentJson.demonstrationPairs as Array<{ closed?: unknown; base?: unknown; target?: unknown }> : [];
   const demoExamples = strings(part?.contentJson.demonstrationExamples);
   const validDemoPairs = demoPairs.filter((pair) => {
     const closed = typeof pair.closed === "string" ? pair.closed : "";
@@ -99,16 +101,44 @@ function auditPart2(draft: GeneratedLessonDraft) {
     return isMinimalTeamPair(closed, target, targetPattern);
   });
   const examplesOnlyValid = demoExamples.length >= 3 && demoExamples.length <= 5 && demoExamples.every((word) => matchesAnyTargetPattern(word, draft));
+  const transformationPairsValid = demoPairs.length > 0 && demoPairs.every((pair) => transformationPairValid(pair, draft));
   const demoValid = demoMode === "examples_only"
     ? examplesOnlyValid && demoPairs.length === 0
-    : demoPairs.length > 0 && validDemoPairs.length === demoPairs.length;
+    : demoMode === "transformation_pairs"
+      ? transformationPairsValid
+      : demoPairs.length > 0 && validDemoPairs.length === demoPairs.length;
   return [
     check("LESSON_DAILY_TARGET_NARROW", targetPatterns(draft).every(isNarrowPatternCode), "BLOCKER", `Daily target is ${draft.targetPattern}.`),
     check("LESSON_PART_TYPE_PRESENT", Boolean(part?.partType), "BLOCKER", "Part 2 requires partType."),
     check("LESSON_PART2_TARGET_EXAMPLES", examples.length > 0 && examples.every((word) => matchesAnyTargetPattern(word, draft)), "BLOCKER", "Part 2 concept examples must all match today's target."),
-    check("LESSON_PART2_DEMO_MODE_VALID", demoValid, "BLOCKER", demoMode === "examples_only" ? "Part 2 examples-only mode requires 3-5 clean target examples and no non-target pairs." : "Part 2 minimal-pair mode requires closed-base review words contrasted with target words."),
-    check("LESSON_PART2_DEMO_MINIMAL_PAIRS", demoMode === "examples_only" ? true : demoValid, "BLOCKER", "Compatibility alias for minimal-pair Part 2 demonstrations."),
+    check("LESSON_PART2_DEMO_MODE_VALID", demoValid, "BLOCKER", demoMode === "examples_only" ? "Part 2 examples-only mode requires 3-5 clean target examples and no non-target pairs." : demoMode === "transformation_pairs" ? "Part 2 transformation-pairs mode requires verified base-to-inflected morphology pairs." : "Part 2 minimal-pair mode requires closed-base review words contrasted with target words."),
+    check("LESSON_PART2_DEMO_MINIMAL_PAIRS", demoMode === "examples_only" || demoMode === "transformation_pairs" ? true : demoValid, "BLOCKER", "Compatibility alias for minimal-pair Part 2 demonstrations."),
   ];
+}
+
+function transformationPairValid(pair: { base?: unknown; target?: unknown }, draft: GeneratedLessonDraft) {
+  const morphology = morphologyForDraft(draft);
+  if (!morphology) return false;
+  const base = typeof pair.base === "string" ? pair.base.toLowerCase() : "";
+  const target = typeof pair.target === "string" ? pair.target.toLowerCase() : "";
+  if (!base || !target) return false;
+  if (!morphology.stemPatterns.some((pattern) => wordMatchesPattern(base, pattern, { strictPhonemeLexicon: draft.phaseBand >= 4 }))) return false;
+  const analysis = decomposeInflectedWord(target, morphology);
+  return Boolean(analysis && analysis.base === base && analysis.rule === morphology.rule);
+}
+
+function morphologyForDraft(draft: GeneratedLessonDraft): MorphologyAnalyzerConfig | null {
+  if (draft.morphology) return draft.morphology;
+  const part = partNumber(draft, 2);
+  const morphologyJson = part?.contentJson.morphologyJson;
+  if (!morphologyJson || typeof morphologyJson !== "object" || Array.isArray(morphologyJson)) return null;
+  const rule = (morphologyJson as { rule?: unknown }).rule;
+  const stemPatterns = (morphologyJson as { stemPatterns?: unknown }).stemPatterns;
+  const suffixes = (morphologyJson as { suffixes?: unknown }).suffixes;
+  if (rule !== "drop_e" && rule !== "double") return null;
+  if (!Array.isArray(stemPatterns) || !stemPatterns.every((entry) => typeof entry === "string")) return null;
+  if (!Array.isArray(suffixes) || !suffixes.every((entry) => entry === "ing" || entry === "ed" || entry === "s" || entry === "es")) return null;
+  return { rule, stemPatterns, suffixes };
 }
 
 function auditRControlledTargetAdmission(draft: GeneratedLessonDraft): LessonLintCheck[] {
