@@ -481,12 +481,13 @@ const passageQueueSelect = {
   commercialUseAllowed: true,
 } satisfies Prisma.PssaPassageSelect;
 
-const itemQueueSelect = {
+export const itemQueueSelect = {
   id: true,
   interactionType: true,
   interactionSubtype: true,
   eligibleContent: true,
   batchId: true,
+  responseSpecJson: true,
   pointValue: true,
   gradeLevel: true,
   reviewStatus: true,

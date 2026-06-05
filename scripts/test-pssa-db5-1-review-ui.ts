@@ -5,6 +5,7 @@ import {
   SOURCE_SCAN_VERSION,
 } from "./content/lib/pssa-import-plan";
 import {
+  itemQueueSelect,
   itemToQueueDto,
   passageToQueueDto,
   rejectPssaItem,
@@ -76,6 +77,39 @@ assert.deepEqual(validatePssaReviewDtoAllowlist(payload), { ok: true, forbidden:
 assert.equal(JSON.stringify(itemDto.studentPreview).includes("correctIndex"), false, "studentPreview must not include answer key");
 assert.equal(JSON.stringify(itemDto.studentPreview).includes("Reviewer only"), false, "studentPreview must not include scoring rationale");
 assert.equal(JSON.stringify(itemDto.reviewer).includes("correctIndex"), true, "reviewer block carries answer key for admin route");
+
+// --- vocab-normalization fix: queue must fetch responseSpecJson for the domain gate ---
+assert.equal(
+  (itemQueueSelect as Record<string, unknown>).responseSpecJson,
+  true,
+  "itemQueueSelect must fetch responseSpecJson or every queue row computes MISSING_RESPONSE_DOMAIN",
+);
+
+// Ready-shaped slim row (passes every readiness check up to the domain gate;
+// batchId without batch keeps it PENDING_REVIEW afterward — that's fine, we only
+// care that the reason is NOT the domain reason when a healthy domain is present).
+const readyShapedItem: any = {
+  ...fakeItem,
+  reviewStatus: "APPROVED",
+  itemStatus: "pilot_ready",
+  approvalEligible: true,
+  studentReadyBlockedReason: "NONE",
+  approvedContentHash: "hash-item",
+  contentHash: "hash-item",
+  latestAuditContentHash: "hash-item",
+  responseSpecJson: { prompt: "Which detail supports the answer?", choices: ["a", "b", "c", "d"] },
+};
+const computedBlockedReason = (row: any) => (itemToQueueDto(row).reviewer.gateResults as any).computedBlockedReason;
+assert.notEqual(
+  computedBlockedReason(readyShapedItem),
+  "MISSING_RESPONSE_DOMAIN",
+  "healthy domain must not be flagged as missing in the queue DTO",
+);
+assert.equal(
+  computedBlockedReason({ ...readyShapedItem, responseSpecJson: null }),
+  "MISSING_RESPONSE_DOMAIN",
+  "empty domain must surface as MISSING_RESPONSE_DOMAIN in the queue DTO",
+);
 
 async function main() {
   const fakeDb: any = {
