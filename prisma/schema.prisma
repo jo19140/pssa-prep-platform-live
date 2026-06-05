@@ -146,6 +146,18 @@ enum PssaFormSlotType {
   short_answer
 }
 
+enum PssaFormSessionStatus {
+  in_progress
+  submitted
+  invalidated_midflight
+}
+
+enum PssaFormResponseScoreStatus {
+  scored
+  pending_human_scoring
+  invalid_response
+}
+
 enum PssaPassageRole {
   primary
   secondary
@@ -204,6 +216,7 @@ model User {
   stateRequests                StateRequests[]
   voiceConsent                 VoiceConsent?            @relation("StudentConsent")
   studentEvents                StudentEvent[]           @relation("StudentEvents")
+  pssaFormSessions             PssaFormSession[]
 }
 
 model PendingStudentSignup {
@@ -586,6 +599,7 @@ model PssaItem {
   supersededBy       PssaItemSupersession[]  @relation("PssaItemSupersededOld")
   supersedes         PssaItemSupersession[]  @relation("PssaItemSupersededNew")
   forms              PssaFormItem[]
+  formResponses      PssaFormResponse[]
 
   @@index([gradeLevel, subject, reviewStatus, itemStatus, studentReadyBlockedReason])
   @@index([auditContractVersion, sourceScanVersion])
@@ -759,6 +773,7 @@ model PssaForm {
 
   passages PssaFormPassage[]
   items    PssaFormItem[]
+  sessions PssaFormSession[]
 
   @@index([gradeLevel, formStatus])
   @@index([blueprintVersion])
@@ -793,14 +808,64 @@ model PssaFormItem {
   passageIdSnapshot           String?
   createdAt                   DateTime         @default(now())
 
-  form PssaForm @relation(fields: [formId], references: [id], onDelete: Cascade)
-  item PssaItem @relation(fields: [itemId], references: [id], onDelete: Restrict)
+  form      PssaForm           @relation(fields: [formId], references: [id], onDelete: Cascade)
+  item      PssaItem           @relation(fields: [itemId], references: [id], onDelete: Restrict)
+  responses PssaFormResponse[]
 
   @@unique([formId, position])
   @@unique([formId, itemId])
   @@index([formId])
   @@index([itemId])
   @@index([passageIdSnapshot])
+}
+
+model PssaFormSession {
+  id                     String                @id @default(cuid())
+  userId                 String
+  formId                 String
+  formContentHashAtStart String
+  status                 PssaFormSessionStatus @default(in_progress)
+  currentPosition        Int                   @default(1)
+  startedAt              DateTime              @default(now())
+  submittedAt            DateTime?
+  totalPoints            Int?
+  earnedPoints           Int?
+  pendingHumanPoints     Int?
+  invalidatedReason      String?               @db.Text
+  createdAt              DateTime              @default(now())
+  updatedAt              DateTime              @updatedAt
+
+  user      User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  form      PssaForm           @relation(fields: [formId], references: [id], onDelete: Restrict)
+  responses PssaFormResponse[]
+
+  @@index([userId, formId, submittedAt])
+  @@index([formId, status])
+}
+
+model PssaFormResponse {
+  id                  String                      @id @default(cuid())
+  sessionId           String
+  formItemId          String
+  positionSnapshot    Int
+  itemId              String
+  responsePayloadJson Json
+  scoreStatus         PssaFormResponseScoreStatus
+  pointsEarned        Int?
+  maxPoints           Int
+  detail              String
+  createdAt           DateTime                    @default(now())
+  updatedAt           DateTime                    @updatedAt
+
+  session  PssaFormSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  formItem PssaFormItem    @relation(fields: [formItemId], references: [id], onDelete: Restrict)
+  item     PssaItem        @relation(fields: [itemId], references: [id], onDelete: Restrict)
+
+  @@unique([sessionId, formItemId])
+  @@unique([sessionId, positionSnapshot])
+  @@index([sessionId])
+  @@index([formItemId])
+  @@index([itemId])
 }
 
 model Assignment {
