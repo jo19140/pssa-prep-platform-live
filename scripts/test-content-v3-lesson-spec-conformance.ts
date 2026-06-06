@@ -2,12 +2,13 @@ import assert from "assert/strict";
 import fs from "node:fs";
 import path from "node:path";
 import { LESSON_CONTENT_BY_DAILY_TARGET, phase3EntryLessonContentFor } from "../lib/content/phase3EntryLessonContent";
-import { CONTENT_V3_DAILY_TARGETS, PHASE_3_MID_TARGETS, PHASE_4_ENTRY_TARGETS, PHASE_4_MID_TARGETS, PHASE_4_RCONTROLLED_TARGETS, PHASE_4_DIPHTHONG_TARGETS, PHASE_4_TEAMS_CLEANUP_TARGETS } from "../lib/content/phase3EntrySeed";
+import { CONTENT_V3_DAILY_TARGETS, PHASE_3_MID_TARGETS, PHASE_4_ENTRY_TARGETS, PHASE_4_MID_TARGETS, PHASE_4_RCONTROLLED_TARGETS, PHASE_4_DIPHTHONG_TARGETS, PHASE_4_TEAMS_CLEANUP_TARGETS, PHASE_4_MORPHOLOGY_TARGETS } from "../lib/content/phase3EntrySeed";
 import { auditGeneratedLessonDraft, evaluateLessonApprovalReadiness, type GeneratedLessonDraft } from "../lib/literacy/lessonAudit";
 import { generateLessonDraft } from "../lib/literacy/lessonGenerator";
 import type { GeneratedLessonPart, LessonGeneratorContext } from "../lib/literacy/lessonParts/types";
 import { auditPassage, decodabilityThresholdForPhase } from "../lib/literacy/passageAudit";
 import { classifyPassageWords, wordMatchesPattern } from "../lib/literacy/passageClassifier";
+import { morphologyConfigFromTargetPatternsJson } from "../lib/literacy/morphologyAnalyzer";
 import { detectPatternCandidates, detectVcePattern, homophoneVariants, validatePseudowordCandidate } from "../lib/literacy/pseudowordValidator";
 
 // EXACT and MINIMAL per-target caveat list: pseudowords that collide with CMUdict
@@ -54,11 +55,12 @@ function buildContextFromRealSeed(targetCode: string): LessonGeneratorContext {
   const isPhase4RControlled = PHASE_4_RCONTROLLED_TARGETS.some((target) => target.code === targetCode);
   const isPhase4Diphthong = PHASE_4_DIPHTHONG_TARGETS.some((target) => target.code === targetCode);
   const isPhase4TeamsCleanup = PHASE_4_TEAMS_CLEANUP_TARGETS.some((target) => target.code === targetCode);
-  const isPhase4 = isPhase4Entry || isPhase4Mid || isPhase4RControlled || isPhase4Diphthong || isPhase4TeamsCleanup;
+  const isPhase4Morphology = PHASE_4_MORPHOLOGY_TARGETS.some((target) => target.code === targetCode);
+  const isPhase4 = isPhase4Entry || isPhase4Mid || isPhase4RControlled || isPhase4Diphthong || isPhase4TeamsCleanup || isPhase4Morphology;
   const phasePosition = {
-    id: isPhase4TeamsCleanup ? "phase-4-teams-cleanup" : isPhase4Diphthong ? "phase-4-diphthong" : isPhase4RControlled ? "phase-4-rcontrolled" : isPhase4Mid ? "phase-4-mid" : isPhase4Entry ? "phase-4-entry" : isMid ? "phase-3-mid" : "phase-3-entry",
+    id: isPhase4Morphology ? "phase-4-morphology" : isPhase4TeamsCleanup ? "phase-4-teams-cleanup" : isPhase4Diphthong ? "phase-4-diphthong" : isPhase4RControlled ? "phase-4-rcontrolled" : isPhase4Mid ? "phase-4-mid" : isPhase4Entry ? "phase-4-entry" : isMid ? "phase-3-mid" : "phase-3-entry",
     phaseNumber: isPhase4 ? 4 : 3,
-    label: isPhase4TeamsCleanup ? "Phase 4 Teams Cleanup" : isPhase4Diphthong ? "Phase 4 Diphthong Entry" : isPhase4RControlled ? "Phase 4 R-Controlled Entry" : isPhase4Mid ? "Phase 4 Mid" : isPhase4Entry ? "Phase 4 Entry" : isMid ? "Phase 3 Mid" : "Phase 3 Entry",
+    label: isPhase4Morphology ? "Phase 4 Morphology Entry A" : isPhase4TeamsCleanup ? "Phase 4 Teams Cleanup" : isPhase4Diphthong ? "Phase 4 Diphthong Entry" : isPhase4RControlled ? "Phase 4 R-Controlled Entry" : isPhase4Mid ? "Phase 4 Mid" : isPhase4Entry ? "Phase 4 Entry" : isMid ? "Phase 3 Mid" : "Phase 3 Entry",
   };
   const dailyTarget = { id: `target-${targetCode}`, ...seedTarget, targetPatternsJson: seedTarget.targetPatternsJson as any };
   const targetPatterns = targetPatternsFor(seedTarget);
@@ -82,7 +84,7 @@ function buildContextFromRealSeed(targetCode: string): LessonGeneratorContext {
     targetPatterns,
     pseudowordPatterns,
     targetWords: dailyTarget.exampleWords.slice(0, 5),
-    reviewWords: [],
+    reviewWords: content.reviewWords ?? [],
     pseudowords: dailyTarget.exampleNonwords,
     heartWordsPreviewedThisLesson,
     heartWordsAssumedKnown,
@@ -282,6 +284,7 @@ function classificationContext(ctx: LessonGeneratorContext, extraHeartWords: str
     blockedPatternCodes: ctx.dailyTarget.blockedPatternCodes,
     heartWords: [...ctx.heartWordsPreviewedThisLesson, ...ctx.heartWordsAssumedKnown, ...extraHeartWords],
     vocabularyAllowlist: [...ctx.vocabularyWords, ...extraVocabularyWords],
+    morphology: morphologyConfigFromTargetPatternsJson(ctx.dailyTarget.targetPatternsJson),
   };
 }
 

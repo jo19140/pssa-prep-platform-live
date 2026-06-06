@@ -38,7 +38,7 @@ The morphology gate verifies the DECLARED RULE, not "anything with a suffix":
 
 ## 1. morph_drop_e — "Baking with Mike" (order 27)
 
-Seed: patterns ["a_e","i_e","o_e","u_e"], pseudowordPatterns ["a_e","i_e","o_e","u_e"], morphologyJson `{ rule: "drop_e", stemPatterns: ["a_e","i_e","o_e","u_e"], suffixes: ["ing","ed","s","es"] }`; kid "drop the e", tutor "Drop-e rule: hope → hoping, make → making". allowed = closed_short_* + e_e. exampleWords (stems; first five span a/i/o/u): hope, make, ride, use, bake, smile, skate, slide. exampleNonwords (stem-VCe, raw-clean): zame, vate, jide, mive, bime, zote, vope, fute.
+Seed: patterns ["a_e","i_e","o_e","u_e"], pseudowordPatterns ["a_e","i_e","o_e","u_e"], morphologyJson `{ rule: "drop_e", stemPatterns: ["a_e","i_e","o_e","u_e"], suffixes: ["ing","ed","s","es"] }`; kid "drop the e", tutor "Drop-e rule: hope → hoping, make → making". allowed = closed_short_* + e_e. exampleWords (stems; first five span a/i/o/u): hope, make, ride, use, bake, smile, skate, slide. exampleNonwords (stem-VCe, raw-clean): zame, tabe, jide, mive, bime, zote, vope, fute.
 
 Part 2: transformation_pairs — hope→hoping, make→making, ride→riding, bake→baked (mixes -ing and -ed). Line 2: hope, hoping, make, making, ride, riding, bake, baked. Line 3: smile, use, skate, lake, hand, desk, home. Hearts standard. Vocabulary: blade, dome.
 

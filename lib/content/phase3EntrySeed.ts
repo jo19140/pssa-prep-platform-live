@@ -73,6 +73,17 @@ export const PHASE_4_TEAMS_CLEANUP = {
   prerequisites: ["PHASE_4_DIPHTHONG"],
 };
 
+export const PHASE_4_MORPHOLOGY = {
+  phaseNumber: 4,
+  subPosition: "MORPHOLOGY",
+  label: "Phase 4 Morphology Entry A",
+  phonicsTrack:
+    "No new phonics target; morphology applies suffix spelling rules to already-taught stems.",
+  morphologyTrack:
+    "Suffix spelling changes: drop final e before a vowel suffix; double the final consonant of a short-vowel stem before a vowel suffix. Suffixes -ing, -ed, -s, -es.",
+  prerequisites: ["PHASE_4_TEAMS_CLEANUP"],
+};
+
 export type DailyTargetSeed = {
   code: string;
   kidVisibleLabel: string;
@@ -551,6 +562,45 @@ export const PHASE_4_TEAMS_CLEANUP_TARGETS: DailyTargetSeed[] = [
   },
 ];
 
+export const PHASE_4_MORPHOLOGY_TARGETS: DailyTargetSeed[] = [
+  {
+    code: "morph_drop_e",
+    kidVisibleLabel: "drop the e",
+    tutorLabel: "Drop-e rule: hope → hoping, make → making",
+    description: "Phase 4 Morphology Entry A target for dropping final e before vowel suffixes.",
+    introductionOrder: 27,
+    targetPatternsJson: {
+      patterns: ["a_e", "i_e", "o_e", "u_e"],
+      pseudowordPatterns: ["a_e", "i_e", "o_e", "u_e"],
+      graphemes: ["a_e", "i_e", "o_e", "u_e"],
+      sound: "morph_drop_e",
+      morphologyJson: { rule: "drop_e", stemPatterns: ["a_e", "i_e", "o_e", "u_e"], suffixes: ["ing", "ed", "s", "es"] },
+    },
+    allowedPatternCodes: ["closed_short_a", "closed_short_i", "closed_short_o", "closed_short_u", "closed_short_e", "e_e"],
+    blockedPatternCodes: diphthongBlockedExcept([]),
+    exampleWords: ["hope", "make", "ride", "use", "bake", "smile", "skate", "slide"],
+    exampleNonwords: ["zame", "tabe", "jide", "mive", "bime", "zote", "vope", "fute"],
+  },
+  {
+    code: "morph_double",
+    kidVisibleLabel: "double the last letter",
+    tutorLabel: "Doubling rule: run → running, hop → hopped",
+    description: "Phase 4 Morphology Entry A target for doubling the final consonant before vowel suffixes.",
+    introductionOrder: 28,
+    targetPatternsJson: {
+      patterns: ["closed_short_a", "closed_short_i", "closed_short_o", "closed_short_u", "closed_short_e"],
+      pseudowordPatterns: ["closed_short_a", "closed_short_i", "closed_short_o", "closed_short_u", "closed_short_e"],
+      graphemes: ["a", "i", "o", "u", "e"],
+      sound: "morph_double",
+      morphologyJson: { rule: "double", stemPatterns: ["closed_short_a", "closed_short_i", "closed_short_o", "closed_short_u", "closed_short_e"], suffixes: ["ing", "ed", "s", "es"] },
+    },
+    allowedPatternCodes: ["a_e", "i_e", "o_e", "u_e", "e_e"],
+    blockedPatternCodes: diphthongBlockedExcept([]),
+    exampleWords: ["run", "sit", "hop", "grab", "sled", "hug", "win", "swim"],
+    exampleNonwords: ["zat", "vit", "jop", "gub", "zet", "mip", "fim", "nuv"],
+  },
+];
+
 export const CONTENT_V3_DAILY_TARGETS = [
   ...PHASE_3_TARGETS,
   ...PHASE_4_ENTRY_TARGETS,
@@ -558,6 +608,7 @@ export const CONTENT_V3_DAILY_TARGETS = [
   ...PHASE_4_RCONTROLLED_TARGETS,
   ...PHASE_4_DIPHTHONG_TARGETS,
   ...PHASE_4_TEAMS_CLEANUP_TARGETS,
+  ...PHASE_4_MORPHOLOGY_TARGETS,
 ];
 
 export const NDL_LICENSE_ATTRIBUTION = {
