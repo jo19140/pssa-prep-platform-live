@@ -29,6 +29,7 @@ async function main() {
   const pairRows: string[][] = [];
   const collisionRows: string[][] = [];
   const warmupRows: string[][] = [];
+  const coverageRows: string[][] = [];
 
   for (const targetCode of morphologyTargets) {
     const ctx = lessonContext(targetCode);
@@ -111,6 +112,27 @@ async function main() {
   assert.equal(runs.morphology?.rule, "none");
   ruleRows.push(["morph_double", "runs", runs.morphology.base, runs.morphology.rule, "REVIEW_ONLY"]);
 
+  coverageRows.push(await assertCoverageFailure(
+    "degenerate stems plus no-change forms",
+    {
+      demonstrationPairs: [{ base: "run", target: "runs" }, { base: "hop", target: "hops" }],
+      part3Words: ["run", "runs", "hop", "hops", "sit", "sits", "grab", "grabs"],
+      part5Sentences: ["The pup runs and hops.", "Sam sits with his pup."],
+      part7Text: "The pup runs. Sam sits. The pup hops.",
+      dictatedWords: ["run", "runs", "hop", "hops", "sit", "sits"],
+    },
+  ));
+  coverageRows.push(await assertCoverageFailure(
+    "incidental closed words plus no-change forms",
+    {
+      demonstrationPairs: [{ base: "log", target: "logs" }, { base: "bug", target: "bugs" }],
+      part3Words: ["log", "bug", "sat", "logs", "bugs", "sits", "run", "runs"],
+      part5Sentences: ["The log sat by the bug.", "The bug runs by the log."],
+      part7Text: "A log sat. A bug runs. Sam logs bugs.",
+      dictatedWords: ["log", "logs", "bug", "bugs", "sat", "sits"],
+    },
+  ));
+
   pairRows.push(assertPair("morph_drop_e", "hope", "hoping", true));
   pairRows.push(assertPair("morph_drop_e", "make", "making", true));
   pairRows.push(assertPair("morph_drop_e", "ride", "riding", true));
@@ -134,6 +156,7 @@ async function main() {
   printTable("target | word | pattern | pronunciation | result", fixtureRows);
   printTable("context | surface | base | rule | result", ruleRows);
   printTable("demoMode | context | pair | result", pairRows);
+  printTable("coverage regression | detail | result", coverageRows);
   printTable("closed pseudoword pin | pattern | collision | result", collisionRows);
   printTable("warmup producer path | words | result", warmupRows);
   console.log("ORACLE INTEGRITY | PASS | zero new caveats, no validator-valid fallback, existing caveats unchanged");
@@ -244,6 +267,58 @@ function assertExamplesOnly() {
   const result = auditGeneratedLessonDraft(draft).checks.find((check) => check.ruleId === "LESSON_PART2_DEMO_MODE_VALID")?.result;
   assert.equal(result, "PASS");
   return ["examples_only", "a_e", "cake/make/bake", "PASS"];
+}
+
+async function assertCoverageFailure(name: string, fixture: {
+  demonstrationPairs: { base: string; target: string }[];
+  part3Words: string[];
+  part5Sentences: string[];
+  part7Text: string;
+  dictatedWords: string[];
+}) {
+  const ctx = lessonContext("morph_double");
+  const draft = await generateLessonDraft(ctx, { recordDecision: async (_ctx, fn) => (await fn()).output });
+  const mutated: GeneratedLessonDraft = {
+    ...draft,
+    parts: draft.parts.map((part) => {
+      if (part.partNumber === 2) {
+        return {
+          ...part,
+          contentJson: {
+            ...part.contentJson,
+            demonstrationPairs: fixture.demonstrationPairs,
+          },
+        };
+      }
+      if (part.partNumber === 3) {
+        return {
+          ...part,
+          contentJson: {
+            ...part.contentJson,
+            contrastiveLines: [
+              { lineNumber: 1, role: "target_real_words", words: fixture.part3Words.slice(0, 4) },
+              { lineNumber: 2, role: "contrastive_target_vs_review", words: fixture.part3Words.slice(4) },
+              { lineNumber: 3, role: "cumulative_review", words: ["lake", "home", "bike"] },
+              { lineNumber: 4, role: "target_pseudowords", words: ctx.pseudowords },
+            ],
+          },
+        };
+      }
+      if (part.partNumber === 5) {
+        return { ...part, contentJson: { ...part.contentJson, sentences: fixture.part5Sentences } };
+      }
+      if (part.partNumber === 6) {
+        return { ...part, contentJson: { ...part.contentJson, dictatedWords: fixture.dictatedWords } };
+      }
+      if (part.partNumber === 7) {
+        return { ...part, contentJson: { ...part.contentJson, passageText: fixture.part7Text } };
+      }
+      return part;
+    }),
+  };
+  const result = auditGeneratedLessonDraft(mutated).checks.find((check) => check.ruleId === "LESSON_MORPHOLOGY_TARGET_COVERAGE")?.result;
+  assert.equal(result, "FAIL", `${name} must fail LESSON_MORPHOLOGY_TARGET_COVERAGE`);
+  return [name, "LESSON_MORPHOLOGY_TARGET_COVERAGE", "FAIL"];
 }
 
 function baseDraft(ctx: LessonGeneratorContext, demonstrationPairs: { base?: string; closed?: string; target: string }[]): GeneratedLessonDraft {
