@@ -371,7 +371,67 @@ function selectPseudowordPattern(word: string, draft: GeneratedLessonDraft) {
   return pseudowordPatterns(draft).find((pattern) => candidates.includes(pattern)) ?? null;
 }
 
+const MORPHOLOGY_RULE_EVIDENCE_MIN = 3;
+
+// Morphology targets use a rule-aware coverage gate instead of phonics vowel-span.
+// Only forms whose decomposed morphology.rule === the declared lesson rule count as
+// target evidence. No-change (-s/-es, rule "none") forms, bare stems, incidental
+// closed/VCe passage words, and wrong-rule forms NEVER count. Intentional stem spread
+// is credited through transformation-pair bases, Part 2 concept examples, dictation,
+// and the base patterns of true rule-matched forms (an eligibility list, not a demand
+// that every declared stem vowel appear transformed in every section).
+function auditMorphologyTargetCoverage(draft: GeneratedLessonDraft, morphology: MorphologyAnalyzerConfig): LessonLintCheck[] {
+  if (draft.phaseBand < 4) return [];
+  const part2 = partNumber(draft, 2);
+  const part3 = partNumber(draft, 3);
+  const part5 = partNumber(draft, 5);
+  const part6 = partNumber(draft, 6);
+  const part7 = partNumber(draft, 7);
+  const pairs = Array.isArray(part2?.contentJson.demonstrationPairs) ? part2?.contentJson.demonstrationPairs as any[] : [];
+  const pairTargets = pairs.map((pair) => String(pair?.target ?? "")).filter(Boolean);
+  const pairBases = pairs.map((pair) => String(pair?.base ?? "")).filter(Boolean);
+  const conceptExamples = strings(part2?.contentJson.conceptExamples);
+  const lines = Array.isArray(part3?.contentJson.contrastiveLines) ? part3?.contentJson.contrastiveLines as any[] : [];
+  const part3Words = lines.filter((line) => line.role !== "target_pseudowords").flatMap((line) => strings(line.words));
+  const dictatedWords = strings(part6?.contentJson.dictatedWords);
+  const transferWords = [
+    ...strings(part5?.contentJson.sentences).flatMap(tokenizeWords),
+    ...tokenizeWords(String(part7?.contentJson.passageText ?? "")),
+  ];
+  const ruleAnalysis = (word: string) => {
+    const analysis = decomposeInflectedWord(word, morphology);
+    return analysis && analysis.rule === morphology.rule ? analysis : null;
+  };
+  const lessonWords = [...pairTargets, ...part3Words, ...transferWords];
+  const ruleMatched = Array.from(new Set(lessonWords.filter((word) => ruleAnalysis(word))));
+  const part2RuleMatched = pairTargets.filter((word) => ruleAnalysis(word));
+  const stemPatternsCovered = new Set<string>();
+  for (const word of ruleMatched) {
+    const analysis = ruleAnalysis(word);
+    if (analysis) stemPatternsCovered.add(analysis.basePattern);
+  }
+  for (const word of [...pairBases, ...conceptExamples, ...dictatedWords]) {
+    const stem = morphology.stemPatterns.find((pattern) => wordMatchesPattern(word, pattern, { strictPhonemeLexicon: true }));
+    if (stem) stemPatternsCovered.add(stem);
+  }
+  const stemMin = Math.min(3, morphology.stemPatterns.length);
+  const ruleEvidenceOk = ruleMatched.length >= MORPHOLOGY_RULE_EVIDENCE_MIN && part2RuleMatched.length >= 1;
+  const stemSpreadOk = stemPatternsCovered.size >= stemMin;
+  return [
+    check(
+      "LESSON_MORPHOLOGY_TARGET_COVERAGE",
+      ruleEvidenceOk && stemSpreadOk,
+      "BLOCKER",
+      ruleEvidenceOk && stemSpreadOk
+        ? `Morphology rule '${morphology.rule}' shown by ${ruleMatched.length} rule-matched form(s) across ${stemPatternsCovered.size} stem pattern(s).`
+        : `Insufficient morphology coverage for rule '${morphology.rule}': ${ruleMatched.length} rule-matched form(s) (need >=${MORPHOLOGY_RULE_EVIDENCE_MIN}, with >=1 in Part 2 pairs; have ${part2RuleMatched.length}), ${stemPatternsCovered.size} stem pattern(s) (need >=${stemMin}). No-change forms, bare stems, and incidental words do not count.`,
+    ),
+  ];
+}
+
 function auditTargetPatternCoverage(draft: GeneratedLessonDraft): LessonLintCheck[] {
+  const morphology = morphologyForDraft(draft);
+  if (morphology) return auditMorphologyTargetCoverage(draft, morphology);
   const patterns = targetPatterns(draft);
   if (draft.phaseBand < 4 || patterns.length < 2) {
     return [];

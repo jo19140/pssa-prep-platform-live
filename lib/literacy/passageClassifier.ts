@@ -77,15 +77,21 @@ export function classifyPassageWords(text: string, context: PassageClassificatio
 function classifyWord(word: string, context: PassageClassificationContext, heartSet: Set<string>, vocabularySet: Set<string>): WordAuditEntry {
   if (word.includes("_")) return { word, category: "unclassified" };
   if (heartSet.has(word)) return { word, category: "heart" };
+  // In a morphology lesson, decompose suffixed forms BEFORE the direct pattern match.
+  // Otherwise a no-change -s/-es form (runs, hops) that still scans as a single closed
+  // syllable short-circuits to a plain closed_short target and loses its morphology
+  // annotation (rule "none"), making it indistinguishable from real target evidence.
+  // Bare stems carry no suffix, so decomposition returns null and they fall through.
+  // Opt-in: with no morphology context this block is skipped (behavior unchanged).
+  if (context.morphology) {
+    const analysis = decomposeInflectedWord(word, context.morphology);
+    if (analysis) return { word, category: "target", matchedPattern: analysis.basePattern, morphology: analysis };
+  }
   const targetPattern = context.targetPatternCodes.find((code) => wordMatchesPattern(word, code));
   if (targetPattern) return { word, category: "target", matchedPattern: targetPattern };
   const prerequisitePattern = context.allowedPatternCodes.find((code) => wordMatchesPattern(word, code));
   if (prerequisitePattern || CLOSED_SHORT_WORDS.has(word)) return { word, category: "prerequisite", matchedPattern: prerequisitePattern };
   if (vocabularySet.has(word)) return { word, category: "vocabulary" };
-  if (context.morphology) {
-    const analysis = decomposeInflectedWord(word, context.morphology);
-    if (analysis) return { word, category: "target", matchedPattern: analysis.basePattern, morphology: analysis };
-  }
   return { word, category: "unclassified" };
 }
 
