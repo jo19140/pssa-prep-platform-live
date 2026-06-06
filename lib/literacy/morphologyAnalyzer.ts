@@ -2,7 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { wordMatchesPattern } from "./passageClassifier";
 
-export type MorphologyRule = "drop_e" | "double";
+export type MorphologyRule = "drop_e" | "double" | "y_to_i";
 export type MorphologyAnalysisRule = MorphologyRule | "none";
 
 export type MorphologyAnalyzerConfig = {
@@ -44,6 +44,7 @@ const PATTERN_VOWEL_PHONEMES: Record<string, string> = {
   closed_short_o: "AA",
   closed_short_u: "AH",
   closed_short_e: "EH",
+  y_long_i: "AY",
 };
 
 const SUFFIX_ALLOMORPHS: Record<"ing" | "ed" | "s" | "es", string[][]> = {
@@ -83,6 +84,15 @@ export function decomposeInflectedWord(surface: string, config: MorphologyAnalyz
 
 function candidateStems(rawBase: string, suffix: "ing" | "ed" | "s" | "es", lessonRule: MorphologyRule) {
   const candidates: Array<{ base: string; rule: MorphologyAnalysisRule }> = [];
+  if (lessonRule === "y_to_i") {
+    if ((suffix === "ed" || suffix === "es") && rawBase.endsWith("i")) {
+      candidates.push({ base: `${rawBase.slice(0, -1)}y`, rule: "y_to_i" });
+    }
+    if (suffix === "ing") {
+      candidates.push({ base: rawBase, rule: "none" });
+    }
+    return candidates;
+  }
   if (lessonRule === "drop_e" && VOWEL_SUFFIXES.has(suffix)) {
     candidates.push({ base: `${rawBase}e`, rule: "drop_e" });
   }
@@ -98,6 +108,7 @@ function candidateStems(rawBase: string, suffix: "ing" | "ed" | "s" | "es", less
 function synthesize(base: string, suffix: "ing" | "ed" | "s" | "es", rule: MorphologyAnalysisRule) {
   if (rule === "drop_e") return `${base.slice(0, -1)}${suffix}`;
   if (rule === "double") return `${base}${base.at(-1)}${suffix}`;
+  if (rule === "y_to_i") return `${base.slice(0, -1)}i${suffix}`;
   return `${base}${suffix}`;
 }
 
@@ -161,7 +172,7 @@ export function morphologyConfigFromTargetPatternsJson(json: unknown): Morpholog
   const rule = (morphologyJson as { rule?: unknown }).rule;
   const stemPatterns = (morphologyJson as { stemPatterns?: unknown }).stemPatterns;
   const suffixes = (morphologyJson as { suffixes?: unknown }).suffixes;
-  if (rule !== "drop_e" && rule !== "double") return undefined;
+  if (rule !== "drop_e" && rule !== "double" && rule !== "y_to_i") return undefined;
   if (!Array.isArray(stemPatterns) || !stemPatterns.every((entry) => typeof entry === "string")) return undefined;
   if (!Array.isArray(suffixes) || !suffixes.every((entry) => entry === "ing" || entry === "ed" || entry === "s" || entry === "es")) return undefined;
   return { rule, stemPatterns: stemPatterns as string[], suffixes: suffixes as ("ing" | "ed" | "s" | "es")[] };

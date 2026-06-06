@@ -32,6 +32,10 @@ type CmudictReverseCache =
   | { status: "loaded"; byPronunciation: Map<string, Set<string>> }
   | { status: "unavailable"; error: Error };
 
+type RawCmudictWordCache =
+  | { status: "loaded"; words: Set<string> }
+  | { status: "unavailable"; error: Error };
+
 /**
  * Curated authoritative real-word lexicon for the controlled silent-e / closed-syllable
  * vocabulary the generator produces at Phases 1-3.
@@ -95,12 +99,14 @@ let cmudictPath = path.resolve("data/phonogram/cmudict.json");
 let subtlexPath = path.resolve("data/phonogram/subtlex.csv");
 let homophoneLexiconCache: HomophoneLexiconCache | null = null;
 let cmudictReverseCache: CmudictReverseCache | null = null;
+let rawCmudictWordCache: RawCmudictWordCache | null = null;
 
 export function __setPseudowordLexiconPathsForTest(paths: { cmudictPath?: string; subtlexPath?: string } | null) {
   cmudictPath = paths?.cmudictPath ?? path.resolve("data/phonogram/cmudict.json");
   subtlexPath = paths?.subtlexPath ?? path.resolve("data/phonogram/subtlex.csv");
   homophoneLexiconCache = null;
   cmudictReverseCache = null;
+  rawCmudictWordCache = null;
 }
 
 const LONG_VOWEL_TEAMS: Record<string, string[]> = {
@@ -153,6 +159,10 @@ export function detectClosedShortPattern(word: string): string | null {
   return match ? `closed_short_${match[1]}` : null;
 }
 
+export function detectYLongIPattern(word: string): "y_long_i" | null {
+  return /^[bcdfghjklmnpqrstvwxz]+y$/.test(word.toLowerCase().trim()) ? "y_long_i" : null;
+}
+
 export function detectPatternCandidates(word: string): string[] {
   const normalized = word.toLowerCase().trim();
   const candidates = new Set<string>();
@@ -160,7 +170,10 @@ export function detectPatternCandidates(word: string): string[] {
   if (vce) candidates.add(vce);
   const closedShort = detectClosedShortPattern(normalized);
   if (closedShort) candidates.add(closedShort);
+  const yLongI = detectYLongIPattern(normalized);
+  if (yLongI) candidates.add(yLongI);
   for (const [code, def] of Object.entries(PATTERN_REGISTRY)) {
+    if (code === "y_long_i") continue;
     if (def.graphemes.some((grapheme) => normalized.includes(grapheme))) candidates.add(code);
   }
   return Array.from(candidates);
@@ -198,6 +211,15 @@ export function validatePseudowordCandidate(
   if (!collidesWith && normalized && opts.strictLexicon === true && homophoneLexicon.has(normalized)) {
     collidesWith = normalized;
     blockingIssues.push(`pseudoword is a real word ("${normalized}")`);
+  }
+  if (!collidesWith && normalized && targetPattern === "y_long_i" && opts.strictLexicon === true) {
+    const rawCmudictWords = getRawCmudictWords(true);
+    if (rawCmudictWords.unavailable) {
+      issues.push("CMUDICT_WORD_LEXICON_UNAVAILABLE");
+    } else if (rawCmudictWords.words.has(normalized)) {
+      collidesWith = normalized;
+      blockingIssues.push(`pseudoword is a real word ("${normalized}")`);
+    }
   }
   if (homophoneLexiconResult.unavailable) {
     issues.push("HOMOPHONE_LEXICON_UNAVAILABLE");
@@ -286,6 +308,12 @@ const CONSONANT_PHONEMES: Record<string, string> = {
 const CLOSED_SHORT_VOWEL_PHONEMES: Record<string, string> = { a: "AE", i: "IH", o: "AA", u: "AH", e: "EH" };
 
 function decodePatternPseudowordPronunciation(word: string, pattern: string): string[] | null {
+  if (pattern === "y_long_i") {
+    if (detectYLongIPattern(word) !== "y_long_i") return null;
+    const onset = word.slice(0, -1);
+    const decoded = [...decodeConsonantString(onset), "AY"];
+    return decoded.length ? decoded : null;
+  }
   const closedShort = pattern.match(/^closed_short_([aeiou])$/);
   if (closedShort) {
     const vowelLetter = closedShort[1];
@@ -356,6 +384,24 @@ function getCmudictReverseIndex(strictLexicon: boolean): { byPronunciation: Map<
   return { byPronunciation: new Map(), unavailable: true };
 }
 
+function getRawCmudictWords(strictLexicon: boolean): { words: Set<string>; unavailable: false } | { words: Set<string>; unavailable: true } {
+  if (!rawCmudictWordCache) {
+    try {
+      rawCmudictWordCache = { status: "loaded", words: loadRawCmudictWords() };
+    } catch (error) {
+      const normalized = error instanceof Error ? error : new Error(String(error));
+      rawCmudictWordCache = { status: "unavailable", error: normalized };
+    }
+  }
+  if (rawCmudictWordCache.status === "loaded") {
+    return { words: rawCmudictWordCache.words, unavailable: false };
+  }
+  if (strictLexicon) {
+    throw new Error(`CMUDICT_WORD_LEXICON_UNAVAILABLE: ${rawCmudictWordCache.error.message}`);
+  }
+  return { words: new Set(), unavailable: true };
+}
+
 function loadCmudictReverseIndex() {
   const rawCmudict = JSON.parse(fs.readFileSync(cmudictPath, "utf8")) as Array<{ word?: unknown; arpabet?: unknown }>;
   const index = new Map<string, Set<string>>();
@@ -373,6 +419,16 @@ function loadCmudictReverseIndex() {
     index.set(key, words);
   }
   return index;
+}
+
+function loadRawCmudictWords() {
+  const rawCmudict = JSON.parse(fs.readFileSync(cmudictPath, "utf8")) as Array<{ word?: unknown }>;
+  const words = new Set<string>();
+  for (const entry of rawCmudict) {
+    const word = normalizeLexiconWord(String(entry.word ?? ""));
+    if (word) words.add(word);
+  }
+  return words;
 }
 
 function stripStress(token: string) {

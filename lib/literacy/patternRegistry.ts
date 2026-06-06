@@ -16,6 +16,8 @@ export type PatternMatchOptions = {
   strictPhonemeLexicon?: boolean;
 };
 
+const VOWEL_PHONEMES = new Set(["AA", "AE", "AH", "AO", "AW", "AY", "EH", "ER", "EY", "IH", "IY", "OW", "OY", "UH", "UW"]);
+
 export const LEGACY_SUBSTRING_PATTERN_CODES = new Set(["ai", "ay", "oa", "ow", "oe", "ee", "ea", "igh", "ie", "ue", "ew", "oo", "y_final"]);
 
 export const PATTERN_REGISTRY: Record<string, PatternDef> = {
@@ -64,6 +66,7 @@ export const PATTERN_REGISTRY: Record<string, PatternDef> = {
   diph_oy: { code: "diph_oy", family: "diphthong", graphemes: ["oy"], expectedPhonemeSequences: [["OY"]], introducedPhase: 4 },
   diph_ow: { code: "diph_ow", family: "diphthong", graphemes: ["ow"], expectedPhonemeSequences: [["AW"]], introducedPhase: 4 },
   diph_ou: { code: "diph_ou", family: "diphthong", graphemes: ["ou"], expectedPhonemeSequences: [["AW"]], introducedPhase: 4 },
+  y_long_i: { code: "y_long_i", family: "vowel_team", graphemes: ["y"], expectedPhonemeSequences: [["AY"]], introducedPhase: 4 },
 };
 
 export function normalizePatternCode(code: string) {
@@ -89,6 +92,7 @@ export function wordMatchesRegisteredPattern(word: string, patternCode: string, 
   const def = PATTERN_REGISTRY[patternCode];
   if (!def) return false;
   const normalized = normalizeWord(word);
+  if (patternCode === "y_long_i") return wordMatchesMonosyllabicFinalYLongI(normalized, opts);
   if (!normalized || !def.graphemes.some((grapheme) => normalized.includes(grapheme))) return false;
   if (def.excludeWords?.map(normalizeWord).includes(normalized)) return false;
   if (def.includeWords?.map(normalizeWord).includes(normalized)) return true;
@@ -96,6 +100,15 @@ export function wordMatchesRegisteredPattern(word: string, patternCode: string, 
   if (expected.length === 0) return false;
   const pronunciations = getCmudictPronunciations(normalized, opts);
   return pronunciations.some((pronunciation) => expected.some((sequence) => containsSequence(pronunciation, sequence)));
+}
+
+function wordMatchesMonosyllabicFinalYLongI(word: string, opts: PatternMatchOptions) {
+  if (!word.endsWith("y")) return false;
+  const pronunciations = getCmudictPronunciations(word, opts);
+  return pronunciations.some((pronunciation) => {
+    const vowels = pronunciation.filter((phoneme) => VOWEL_PHONEMES.has(phoneme));
+    return vowels.length === 1 && vowels[0] === "AY";
+  });
 }
 
 function containsSequence(pronunciation: string[], sequence: string[]) {
