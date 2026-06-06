@@ -2458,15 +2458,15 @@
       "studentFacingPrompt": "What does faded mean as it is used in the creek passage?",
       "answerChoicesJson": [
         "grew thicker along the sunny creek bank",
-        "became weaker than before",
+        "became weaker along the creek surface",
         "moved quickly around the bend in the creek",
         "became safe enough for families to touch"
       ],
       "correctIndex": 1,
-      "correctAnswer": "became weaker than before",
+      "correctAnswer": "became weaker along the creek surface",
       "distractorRationalesJson": [
         "Opposite claim: thicker describes the earlier green color near the sunny bank.",
-        "Faded means the glow became weaker than it had been earlier.",
+        "Faded means the creek glow became weaker and less noticeable.",
         "Plausible misreading: the passage describes water bending around a log, not the glow moving quickly.",
         "Unsupported inference: the class did not claim the water was safe."
       ],
@@ -2476,7 +2476,7 @@
         "prompt": "What does faded mean as it is used in the creek passage?",
         "choices": [
           "grew thicker along the sunny creek bank",
-          "became weaker than before",
+          "became weaker along the creek surface",
           "moved quickly around the bend in the creek",
           "became safe enough for families to touch"
         ],
@@ -2528,9 +2528,9 @@
           "distractorRole": "opposite_claim"
         },
         {
-          "text": "became weaker than before",
+          "text": "became weaker along the creek surface",
           "isCorrect": true,
-          "rationale": "Faded means the glow became weaker than it had been earlier.",
+          "rationale": "Faded means the creek glow became weaker and less noticeable.",
           "evidenceLinks": [
             {
               "paragraphIndex": 5,
@@ -3625,17 +3625,17 @@
       "studentFacingPrompt": "What does traced mean as it is used in the mural passage?",
       "answerChoicesJson": [
         "made marks with paint",
-        "held something with both hands",
+        "held the smallest paint can near the library",
         "looked closely at a picture",
-        "moved a finger along the path of something"
+        "followed the mural route outline"
       ],
       "correctIndex": 3,
-      "correctAnswer": "moved a finger along the path of something",
+      "correctAnswer": "followed the mural route outline",
       "distractorRationalesJson": [
         "Wrong kind of action: traced describes the kids following a route shape, not painting marks.",
         "Plausible misreading: the passage has people holding objects, but traced does not mean held.",
         "Wrong action: the kids used their fingers in the air, not just their eyes.",
-        "Traced means moved a finger along the path or outline of something."
+        "Traced means followed the path or outline of something with a finger."
       ],
       "expectedResponseJson": null,
       "scoringRubricJson": null,
@@ -3643,9 +3643,9 @@
         "prompt": "What does traced mean as it is used in the mural passage?",
         "choices": [
           "made marks with paint",
-          "held something with both hands",
+          "held the smallest paint can",
           "looked closely at a picture",
-          "moved a finger along the path of something"
+        "followed the mural route outline"
         ],
         "leaksAnswer": false
       },
@@ -3695,7 +3695,7 @@
           "distractorRole": "wrong_section"
         },
         {
-          "text": "held something with both hands",
+          "text": "held the smallest paint can near the library",
           "isCorrect": false,
           "rationale": "Plausible misreading: the passage has people holding objects, but traced does not mean held.",
           "evidenceLinks": [
@@ -3725,9 +3725,9 @@
           "distractorRole": "wrong_section"
         },
         {
-          "text": "moved a finger along the path of something",
+          "text": "followed the mural route outline",
           "isCorrect": true,
-          "rationale": "Traced means moved a finger along the path or outline of something.",
+          "rationale": "Traced means followed the path or outline of something with a finger.",
           "evidenceLinks": [
             {
               "paragraphIndex": 5,

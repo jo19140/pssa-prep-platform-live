@@ -649,7 +649,7 @@ export function evaluatePssaItemEcGenreMatch(item: any, passage?: PssaPassageAud
   if (!passageIdsFor(item).length || !ec.startsWith("E03.")) return "PASS";
   if (ec.includes(".D-")) return "PASS";
   if (!passage) return "FAIL";
-  const passageType = String(passage.passageType ?? "").toLowerCase();
+  const passageType = String((passage as Record<string, unknown>).passageType ?? "").toLowerCase();
   if (ec.includes(".A-")) return passageType === "literary" ? "PASS" : "FAIL";
   if (ec.includes(".B-")) return passageType === "informational" ? "PASS" : "FAIL";
   return "PASS";
@@ -677,7 +677,7 @@ function keyedEvidenceSentenceIds(item: any, passage?: PssaPassageAuditInput) {
   if (interactionType === "HOT_TEXT") {
     return new Set((item.correctSpanIds ?? [])
       .map((spanId: string) => item.selectableSpans?.find((span: any) => span.spanId === spanId))
-      .map((span: any) => span ? `${span.paragraphIndex}:${span.sentenceIndex}` : "")
+      .map((span: any) => span ? sentenceIdForText(span.text, passage) : "")
       .filter(Boolean));
   }
   if (interactionType === "MULTI_SELECT") {

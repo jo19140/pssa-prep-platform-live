@@ -556,7 +556,7 @@
       "studentFacingPrompt": "Which word is closest in meaning to \"promise\" as Nia uses it in the story?",
       "answerChoicesJson": [
         "a paper decoration for the library festival",
-        "a job Nia feels responsible for finishing",
+        "a lantern list job to finish",
         "a ladder beside the first blue lantern",
         "a note Mateo reads after school"
       ],
@@ -583,7 +583,7 @@
           "distractorRole": "too_narrow"
         },
         {
-          "text": "a job Nia feels responsible for finishing",
+          "text": "a lantern list job to finish",
           "isCorrect": true,
           "rationale": "This defines promise as a responsibility Nia means to keep without repeating the tested word.",
           "evidenceLinks": [
@@ -628,7 +628,7 @@
           "distractorRole": "unsupported_inference"
         }
       ],
-      "correctAnswer": "a job Nia feels responsible for finishing"
+      "correctAnswer": "a lantern list job to finish"
     },
     {
       "model": "PssaItem",

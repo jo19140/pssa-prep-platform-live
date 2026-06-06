@@ -169,20 +169,20 @@
       "eligibleContent": "E03.B-K.1.1.3",
       "ecSkillFamily": "informational_elements",
       "reportingCategory": "B",
-      "stem": "Which two details show the cause of the lunch-line changes?",
+      "stem": "Which two details show causes that led to the lunch-line changes?",
       "instructionText": "Choose two answers.",
       "choices": [
         {
           "text": "Students picked up milk after they already had full trays.",
           "supportsPrompt": true,
           "distractorRole": null,
-          "rationale": "This is one slow spot that caused a change."
+          "rationale": "This concrete slow spot shows why the line setup needed to change."
         },
         {
           "text": "Spoons and napkins were tucked behind the soup pot.",
-          "supportsPrompt": true,
-          "distractorRole": null,
-          "rationale": "This is another slow spot that caused a change."
+          "supportsPrompt": false,
+          "distractorRole": "nearby_cause",
+          "rationale": "This is another slow spot, but the item keys the observation pattern plus one example."
         },
         {
           "text": "The red baskets were easy to spot.",
@@ -191,15 +191,15 @@
           "rationale": "This describes the result after the change."
         },
         {
-          "text": "Mrs. Lane circled that note in purple marker.",
-          "supportsPrompt": false,
-          "distractorRole": "too_narrow",
-          "rationale": "This later note is not a cause of the setup change."
+          "text": "They counted how many times the line paused.",
+          "supportsPrompt": true,
+          "distractorRole": null,
+          "rationale": "This shows the class observed repeated pauses before changing the setup."
         }
       ],
       "correctIndices": [
         0,
-        1
+        3
       ],
       "minSelections": 2,
       "maxSelections": 2,
@@ -399,7 +399,7 @@
       "eligibleContent": "E03.B-K.1.1.2",
       "ecSkillFamily": "informational_elements",
       "reportingCategory": "B",
-      "prompt": "Choose two sentences that show the observations and conditions the class used to understand the creek glow.",
+      "prompt": "Choose two sentences with details that support the main idea that observations and conditions helped the class understand the creek glow.",
       "instructionText": "Choose two sentences.",
       "selectableSpans": [
         {
@@ -433,7 +433,7 @@
           "endOffset": 889,
           "supportsPrompt": false,
           "distractorRole": "nearby_conclusion",
-          "rationale": "This names the question, but the item asks for observations and conditions."
+          "rationale": "This names the question, but the item asks for details that support the main idea."
         },
         {
           "spanId": "pssa_ht_g3_creek_01_span_4",

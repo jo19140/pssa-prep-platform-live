@@ -374,8 +374,8 @@ const shortAnswerBands = {
 assert.equal(evaluatePssaShortAnswerBandsNonempty(shortAnswerBands), "PASS");
 assert.equal(evaluatePssaShortAnswerBandsNonempty({ ...shortAnswerBands, scoreBandExamples: shortAnswerBands.scoreBandExamples.filter((row) => row.band !== 0) }), "FAIL");
 
-assert.equal(evaluatePssaItemEcGenreMatch({ ...readingItem(), eligibleContent: "E03.A-K.1.1.1" }, { ...passage, passageType: "informational" }), "FAIL");
-assert.equal(evaluatePssaItemEcGenreMatch({ ...readingItem(), eligibleContent: "E03.B-K.1.1.1" }, { ...passage, passageType: "informational" }), "PASS");
+assert.equal(evaluatePssaItemEcGenreMatch({ ...readingItem(), eligibleContent: "E03.A-K.1.1.1" }, { ...passage, passageType: "informational" } as any), "FAIL");
+assert.equal(evaluatePssaItemEcGenreMatch({ ...readingItem(), eligibleContent: "E03.B-K.1.1.1" }, { ...passage, passageType: "informational" } as any), "PASS");
 
 const overlapPassage = {
   id: "overlap",
@@ -394,12 +394,26 @@ const overlapItems = [
     interactionType: "HOT_TEXT",
     passageId: "overlap",
     correctSpanIds: ["a", "b"],
-    selectableSpans: [{ spanId: "a", paragraphIndex: 0, sentenceIndex: 0 }, { spanId: "b", paragraphIndex: 0, sentenceIndex: 1 }],
+    selectableSpans: [
+      { spanId: "a", text: "First sentence shows one detail.", paragraphIndex: 0, sentenceIndex: 0 },
+      { spanId: "b", text: "Second sentence shows another detail.", paragraphIndex: 0, sentenceIndex: 1 },
+    ],
   },
 ];
 assert.equal(evaluatePssaPassageMultipointEvidenceOverlap(overlapItems, [overlapPassage])["ebsr-overlap"], "FAIL");
+const mismatchedHotTextIndex = structuredClone(overlapItems);
+(mismatchedHotTextIndex[1] as any).selectableSpans = [
+  { spanId: "a", text: "First sentence shows one detail.", paragraphIndex: 9, sentenceIndex: 9 },
+  { spanId: "b", text: "Second sentence shows another detail.", paragraphIndex: 8, sentenceIndex: 8 },
+];
+assert.equal(
+  evaluatePssaPassageMultipointEvidenceOverlap(mismatchedHotTextIndex, [overlapPassage])["ht-overlap"],
+  "FAIL",
+  "hot-text overlap must resolve through canonical sentence text, not authored paragraph/sentence indexes",
+);
 const compliantOverlap = structuredClone(overlapItems);
 compliantOverlap[1].selectableSpans[1].sentenceIndex = 2;
+compliantOverlap[1].selectableSpans[1].text = "Third sentence shows a final detail.";
 assert.equal(evaluatePssaPassageMultipointEvidenceOverlap(compliantOverlap, [overlapPassage])["ebsr-overlap"], "PASS");
 
 const duplicateOpeningPassages = [
