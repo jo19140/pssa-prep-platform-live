@@ -120,6 +120,13 @@ export function lookupPssaGradeImportManifest(gradeLevel: number): PssaGradeImpo
 
 export type GateStatus = "PASS" | "FAIL";
 export type ImportStatus = "eligible" | "blocked";
+export const PSSA_CONTENT_QUALITY_GATE_IDS = [
+  "PSSA_ITEM_INTRA_CHOICE_DUPLICATE",
+  "PSSA_VOCAB_KEY_CONSTRUCT",
+  "PSSA_SA_BANDS_NONEMPTY",
+  "PSSA_ITEM_EC_GENRE_MATCH",
+  "PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP",
+] as const;
 
 export type ManifestRow = {
   sourceFile: string;
@@ -399,7 +406,10 @@ function correctResponse(item: any) {
 }
 
 function scoringJson(item: any) {
-  return item.scoring ?? item.scoringRubricJson ?? item.rubric ?? { totalPoints: pointValue(item) };
+  const base = item.scoring ?? item.scoringRubricJson ?? item.rubric ?? { totalPoints: pointValue(item) };
+  return interactionTypeFor(item) === "SHORT_ANSWER"
+    ? { ...base, scoreBandExamples: item.scoreBandExamples ?? [] }
+    : base;
 }
 
 function studentPreview(item: any) {
@@ -519,6 +529,209 @@ function finalFromRows(rows: any[], field = "finalResult"): Record<string, GateS
   return result;
 }
 
+function defaultContentQualityGates(): Record<string, GateStatus> {
+  return Object.fromEntries(PSSA_CONTENT_QUALITY_GATE_IDS.map((gate) => [gate, "PASS" as GateStatus]));
+}
+
+function normalizeChoiceText(value: unknown) {
+  return String(value ?? "").toLowerCase().replace(/[^\p{L}\p{N}]+/gu, " ").trim().replace(/\s+/g, " ");
+}
+
+function rawChoiceText(value: unknown) {
+  return String(value ?? "").trim();
+}
+
+function choiceTextGroups(item: any): Array<{ raw: boolean; values: string[] }> {
+  const interactionType = interactionTypeFor(item);
+  if (interactionType === "MCQ") return [{ raw: false, values: (item.answerChoicesJson ?? item.choices ?? []).map((choice: any) => typeof choice === "string" ? choice : choice.text) }];
+  if (interactionType === "EBSR") return [
+    { raw: false, values: item.partA?.choices?.map((choice: any) => choice.text) ?? [] },
+    { raw: false, values: item.partB?.choices?.map((choice: any) => choice.text) ?? [] },
+  ];
+  if (interactionType === "MULTI_SELECT") return [{ raw: false, values: item.choices?.map((choice: any) => choice.text) ?? [] }];
+  if (interactionType === "MATCHING_GRID") return [
+    { raw: false, values: item.rows?.map((row: any) => row.label) ?? [] },
+    { raw: false, values: item.columns?.map((column: any) => column.label) ?? [] },
+  ];
+  if (interactionType === "INLINE_DROPDOWN") return (item.blanks ?? []).map((blank: any) => ({
+    raw: true,
+    values: blank.options?.map((option: any) => typeof option === "string" ? option : option.text) ?? [],
+  }));
+  return [];
+}
+
+export function evaluatePssaItemIntraChoiceDuplicate(item: any): GateStatus {
+  for (const group of choiceTextGroups(item)) {
+    const seen = new Set<string>();
+    for (const value of group.values) {
+      const normalized = group.raw ? rawChoiceText(value) : normalizeChoiceText(value);
+      if (!normalized) continue;
+      if (seen.has(normalized)) return "FAIL";
+      seen.add(normalized);
+    }
+  }
+  return "PASS";
+}
+
+const VOCAB_STOP_WORDS = new Set([
+  "a", "an", "and", "are", "as", "at", "be", "became", "before", "by", "for", "from", "had", "has", "he", "her", "his",
+  "in", "into", "is", "it", "like", "near", "not", "of", "old", "on", "or", "paper", "she", "so", "that", "the",
+  "their", "them", "then", "there", "they", "this", "to", "was", "were", "when", "where", "which", "while", "with", "would",
+]);
+
+function vocabTargetWord(item: any) {
+  const prompt = String(item.studentFacingPrompt ?? item.stem ?? item.prompt ?? "");
+  return prompt.match(/"([^"]+)"/)?.[1]
+    ?? prompt.match(/\bwhat does\s+([A-Za-z'-]+)\s+mean\b/i)?.[1]
+    ?? prompt.match(/\bmeaning of\s+([A-Za-z'-]+)/i)?.[1]
+    ?? "";
+}
+
+function inflections(word: string) {
+  const base = word.toLowerCase();
+  const forms = new Set([base, `${base}s`, `${base}es`, `${base}ed`, `${base}ing`]);
+  if (base.endsWith("e")) forms.add(`${base.slice(0, -1)}ing`);
+  if (base.endsWith("y")) forms.add(`${base.slice(0, -1)}ied`);
+  return forms;
+}
+
+function contentWordsWithoutTarget(value: string, targetForms: Set<string>) {
+  return normalizeChoiceText(value)
+    .split(" ")
+    .filter((token) => token.length > 2 && !VOCAB_STOP_WORDS.has(token) && !targetForms.has(token));
+}
+
+function passageSentences(passage?: PssaPassageAuditInput) {
+  const text = passage?.text ?? "";
+  const rows: Array<{ id: string; text: string }> = [];
+  for (const [paragraphIndex, paragraph] of text.split(/\n\n/).entries()) {
+    const matches = paragraph.match(/[^.!?]+[.!?]/g) ?? [];
+    matches.forEach((sentence, sentenceIndex) => rows.push({ id: `${paragraphIndex}:${sentenceIndex}`, text: sentence.trim() }));
+  }
+  return rows;
+}
+
+function keyedChoiceText(item: any) {
+  const interactionType = interactionTypeFor(item);
+  if (interactionType !== "MCQ") return "";
+  return String((item.answerChoicesJson ?? item.choices ?? [])[item.correctIndex] ?? "");
+}
+
+export function evaluatePssaVocabKeyConstruct(item: any, passage?: PssaPassageAuditInput): GateStatus {
+  if (!String(item.eligibleContent ?? "").includes("-V.")) return "PASS";
+  const target = vocabTargetWord(item);
+  const key = keyedChoiceText(item);
+  if (!target || !key) return "FAIL";
+  const targetForms = inflections(target);
+  const keyWords = normalizeChoiceText(key).split(" ");
+  if (keyWords.some((word) => targetForms.has(word))) return "FAIL";
+  const sourceSentence = passageSentences(passage).find((sentence) => {
+    const words = normalizeChoiceText(sentence.text).split(" ");
+    return words.some((word) => targetForms.has(word));
+  });
+  if (!sourceSentence) return "PASS";
+  const sourceWords = new Set(contentWordsWithoutTarget(sourceSentence.text, targetForms));
+  const shared = new Set(contentWordsWithoutTarget(key, targetForms).filter((word) => sourceWords.has(word)));
+  return shared.size >= 3 ? "FAIL" : "PASS";
+}
+
+export function evaluatePssaShortAnswerBandsNonempty(item: any): GateStatus {
+  if (interactionTypeFor(item) !== "SHORT_ANSWER") return "PASS";
+  const examples = Array.isArray(item.scoreBandExamples) ? item.scoreBandExamples : [];
+  return [0, 1, 2, 3].every((band) => {
+    const example = examples.find((row: any) => row.band === band);
+    return example && String(example.response ?? "").trim() && String(example.why ?? "").trim();
+  }) ? "PASS" : "FAIL";
+}
+
+export function evaluatePssaItemEcGenreMatch(item: any, passage?: PssaPassageAuditInput): GateStatus {
+  const ec = String(item.eligibleContent ?? "");
+  if (!passageIdsFor(item).length || !ec.startsWith("E03.")) return "PASS";
+  if (ec.includes(".D-")) return "PASS";
+  if (!passage) return "FAIL";
+  const passageType = String(passage.passageType ?? "").toLowerCase();
+  if (ec.includes(".A-")) return passageType === "literary" ? "PASS" : "FAIL";
+  if (ec.includes(".B-")) return passageType === "informational" ? "PASS" : "FAIL";
+  return "PASS";
+}
+
+function sentenceIdForText(text: string, passage?: PssaPassageAuditInput) {
+  const normalized = normalizeChoiceText(text);
+  const sentences = passageSentences(passage);
+  const exact = sentences.find((sentence) => normalizeChoiceText(sentence.text) === normalized);
+  if (exact) return exact.id;
+  return sentences.find((sentence) => {
+    const sentenceNorm = normalizeChoiceText(sentence.text);
+    return normalized && (sentenceNorm.includes(normalized) || normalized.includes(sentenceNorm));
+  })?.id ?? "";
+}
+
+function keyedEvidenceSentenceIds(item: any, passage?: PssaPassageAuditInput) {
+  const interactionType = interactionTypeFor(item);
+  if (interactionType === "EBSR") {
+    return new Set((item.partB?.correctIndices ?? [])
+      .map((index: number) => item.partB?.choices?.[index]?.quotedSpan ?? item.partB?.choices?.[index]?.text)
+      .map((text: string) => sentenceIdForText(text, passage))
+      .filter(Boolean));
+  }
+  if (interactionType === "HOT_TEXT") {
+    return new Set((item.correctSpanIds ?? [])
+      .map((spanId: string) => item.selectableSpans?.find((span: any) => span.spanId === spanId))
+      .map((span: any) => span ? `${span.paragraphIndex}:${span.sentenceIndex}` : "")
+      .filter(Boolean));
+  }
+  if (interactionType === "MULTI_SELECT") {
+    return new Set((item.correctIndices ?? [])
+      .map((index: number) => item.choices?.[index]?.text)
+      .map((text: string) => sentenceIdForText(text, passage))
+      .filter(Boolean));
+  }
+  return new Set<string>();
+}
+
+export function evaluatePssaPassageMultipointEvidenceOverlap(items: any[], passages: PssaPassageAuditInput[]): Record<string, GateStatus> {
+  const byId = new Map(passages.map((passage) => [passage.id, passage]));
+  const result: Record<string, GateStatus> = {};
+  const multipoint = items
+    .filter((item) => ["EBSR", "HOT_TEXT", "MULTI_SELECT"].includes(interactionTypeFor(item)) && passageIdsFor(item).length)
+    .map((item) => ({ item, passageId: passageIdsFor(item)[0], evidence: keyedEvidenceSentenceIds(item, byId.get(passageIdsFor(item)[0])) }));
+  for (const row of multipoint) result[itemId(row.item)] = "PASS";
+  for (let i = 0; i < multipoint.length; i += 1) {
+    for (let j = i + 1; j < multipoint.length; j += 1) {
+      const a = multipoint[i];
+      const b = multipoint[j];
+      if (a.passageId !== b.passageId) continue;
+      const overlap = [...a.evidence].filter((id) => b.evidence.has(id)).length;
+      if (overlap > 1) {
+        result[itemId(a.item)] = "FAIL";
+        result[itemId(b.item)] = "FAIL";
+      }
+    }
+  }
+  return result;
+}
+
+function buildContentQualityGateMap(items: any[], passages: PssaPassageAuditInput[]) {
+  const passagesById = new Map(passages.map((passage) => [passage.id, passage]));
+  const overlap = evaluatePssaPassageMultipointEvidenceOverlap(items, passages);
+  const gates = new Map<string, Record<string, GateStatus>>();
+  for (const item of items) {
+    const passage = passagesById.get(passageIdsFor(item)[0]);
+    gates.set(itemId(item), {
+      PSSA_ITEM_INTRA_CHOICE_DUPLICATE: evaluatePssaItemIntraChoiceDuplicate(item),
+      PSSA_VOCAB_KEY_CONSTRUCT: evaluatePssaVocabKeyConstruct(item, passage),
+      PSSA_SA_BANDS_NONEMPTY: evaluatePssaShortAnswerBandsNonempty(item),
+      PSSA_ITEM_EC_GENRE_MATCH: evaluatePssaItemEcGenreMatch(item, passage),
+      PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP: overlap[itemId(item)] ?? "PASS",
+    });
+  }
+  return gates;
+}
+
+function contentQualityGatesFor(gates: Map<string, Record<string, GateStatus>>, item: any) {
+  return gates.get(itemId(item)) ?? defaultContentQualityGates();
+}
+
 function buildMcqPositionBatch(items: any[], manifest: PssaGradeImportManifest): BatchRow {
   const counts = [0, 0, 0, 0];
   for (const item of items) if (typeof item.correctIndex === "number") counts[item.correctIndex] += 1;
@@ -560,6 +773,17 @@ export function buildPlan(gradeLevel: number): ImportPlan {
   const matchingGridItems = [...mgdd.matchingGridItems, ...literaryTopupItems.filter((item: any) => interactionTypeFor(item) === "MATCHING_GRID")];
   const dragDropItems = [...mgdd.dragDropItems, ...literaryTopupItems.filter((item: any) => interactionTypeFor(item) === "DRAG_DROP")];
   const shortAnswerItems = [...shortAnswer.items, ...literaryTopupItems.filter((item: any) => interactionTypeFor(item) === "SHORT_ANSWER")];
+  const contentQualityGates = buildContentQualityGateMap([
+    ...activeReadingMcq,
+    ...deprecatedMcq,
+    ...ebsrItems,
+    ...multiSelectItems,
+    ...hotTextItems,
+    ...matchingGridItems,
+    ...dragDropItems,
+    ...conventions.items,
+    ...shortAnswerItems,
+  ], passages);
 
   const passageQuality = buildPssaPassageQualityReport(passages);
   const mcqSpecificity = buildMcqPassageSpecificityReport(activeReadingMcq as McqAuditInput[], passages);
@@ -589,16 +813,17 @@ export function buildPlan(gradeLevel: number): ImportPlan {
       PSSA_MCQ_CORRECT_IS_LONGEST: mcqLengthFailed.has(itemId(item)) ? "FAIL" : "PASS",
       PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR: mcqAbsoluteFailed.has(itemId(item)) ? "FAIL" : "PASS",
       PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION: mcqPositionBatch.batchResult,
+      ...contentQualityGatesFor(contentQualityGates, item),
     }, crosswalkKeys, manifestConfig));
   }
 
-  for (const item of ebsrItems) activeItems.push(buildWouldItem(item, sourceFileForTopupItem(item, manifestConfig.files.ebsr, manifestConfig), { PSSA_EBSR_FAMILY_AND_BATCH: finalFromRows(ebsrAudit.rows, "finalEbsrResult")[item.itemId] ?? "FAIL" }, crosswalkKeys, manifestConfig));
-  for (const item of multiSelectItems) activeItems.push(buildWouldItem(item, sourceFileForTopupItem(item, manifestConfig.files.tei, manifestConfig), { PSSA_MULTI_SELECT_FAMILY_AND_BATCH: finalFromRows(teiAudit.multiSelectRows)[item.itemId] ?? "FAIL" }, crosswalkKeys, manifestConfig));
-  for (const item of hotTextItems) activeItems.push(buildWouldItem(item, sourceFileForTopupItem(item, manifestConfig.files.tei, manifestConfig), { PSSA_HOT_TEXT_FAMILY_AND_BATCH: finalFromRows(teiAudit.hotTextRows)[item.itemId] ?? "FAIL" }, crosswalkKeys, manifestConfig));
-  for (const item of matchingGridItems) activeItems.push(buildWouldItem(item, sourceFileForTopupItem(item, manifestConfig.files.matchingGridDragDrop, manifestConfig), { PSSA_MATCHING_GRID_FAMILY_AND_BATCH: finalFromRows(mgddAudit.matchingGridRows)[item.itemId] ?? "FAIL" }, crosswalkKeys, manifestConfig));
-  for (const item of dragDropItems) activeItems.push(buildWouldItem(item, sourceFileForTopupItem(item, manifestConfig.files.matchingGridDragDrop, manifestConfig), { PSSA_DRAG_DROP_FAMILY_AND_BATCH: finalFromRows(mgddAudit.dragDropRows)[item.itemId] ?? "FAIL" }, crosswalkKeys, manifestConfig));
-  for (const item of conventions.items) activeItems.push(buildWouldItem(item, manifestConfig.files.conventions, { PSSA_CONVENTIONS_FAMILY_AND_BATCH: finalFromRows(conventionsAudit.rows)[item.itemId] ?? "FAIL" }, crosswalkKeys, manifestConfig));
-  for (const item of shortAnswerItems) activeItems.push(buildWouldItem(item, sourceFileForTopupItem(item, manifestConfig.files.shortAnswer, manifestConfig), { PSSA_SHORT_ANSWER_FAMILY: finalFromRows(shortAnswerAudit.rows)[item.itemId] ?? "FAIL" }, crosswalkKeys, manifestConfig));
+  for (const item of ebsrItems) activeItems.push(buildWouldItem(item, sourceFileForTopupItem(item, manifestConfig.files.ebsr, manifestConfig), { PSSA_EBSR_FAMILY_AND_BATCH: finalFromRows(ebsrAudit.rows, "finalEbsrResult")[item.itemId] ?? "FAIL", ...contentQualityGatesFor(contentQualityGates, item) }, crosswalkKeys, manifestConfig));
+  for (const item of multiSelectItems) activeItems.push(buildWouldItem(item, sourceFileForTopupItem(item, manifestConfig.files.tei, manifestConfig), { PSSA_MULTI_SELECT_FAMILY_AND_BATCH: finalFromRows(teiAudit.multiSelectRows)[item.itemId] ?? "FAIL", ...contentQualityGatesFor(contentQualityGates, item) }, crosswalkKeys, manifestConfig));
+  for (const item of hotTextItems) activeItems.push(buildWouldItem(item, sourceFileForTopupItem(item, manifestConfig.files.tei, manifestConfig), { PSSA_HOT_TEXT_FAMILY_AND_BATCH: finalFromRows(teiAudit.hotTextRows)[item.itemId] ?? "FAIL", ...contentQualityGatesFor(contentQualityGates, item) }, crosswalkKeys, manifestConfig));
+  for (const item of matchingGridItems) activeItems.push(buildWouldItem(item, sourceFileForTopupItem(item, manifestConfig.files.matchingGridDragDrop, manifestConfig), { PSSA_MATCHING_GRID_FAMILY_AND_BATCH: finalFromRows(mgddAudit.matchingGridRows)[item.itemId] ?? "FAIL", ...contentQualityGatesFor(contentQualityGates, item) }, crosswalkKeys, manifestConfig));
+  for (const item of dragDropItems) activeItems.push(buildWouldItem(item, sourceFileForTopupItem(item, manifestConfig.files.matchingGridDragDrop, manifestConfig), { PSSA_DRAG_DROP_FAMILY_AND_BATCH: finalFromRows(mgddAudit.dragDropRows)[item.itemId] ?? "FAIL", ...contentQualityGatesFor(contentQualityGates, item) }, crosswalkKeys, manifestConfig));
+  for (const item of conventions.items) activeItems.push(buildWouldItem(item, manifestConfig.files.conventions, { PSSA_CONVENTIONS_FAMILY_AND_BATCH: finalFromRows(conventionsAudit.rows)[item.itemId] ?? "FAIL", ...contentQualityGatesFor(contentQualityGates, item) }, crosswalkKeys, manifestConfig));
+  for (const item of shortAnswerItems) activeItems.push(buildWouldItem(item, sourceFileForTopupItem(item, manifestConfig.files.shortAnswer, manifestConfig), { PSSA_SHORT_ANSWER_FAMILY: finalFromRows(shortAnswerAudit.rows)[item.itemId] ?? "FAIL", ...contentQualityGatesFor(contentQualityGates, item) }, crosswalkKeys, manifestConfig));
 
   const activeIds = new Set(activeItems.map((item) => item.itemId));
   for (const item of deprecatedMcq) {
@@ -607,6 +832,7 @@ export function buildPlan(gradeLevel: number): ImportPlan {
     const deprecationValid = dep && supersededIds.length > 0 && supersededIds.every((id: string) => activeIds.has(id));
     deprecatedItems.push(buildWouldItem(item, manifestConfig.files.pilot, {
       PSSA_IMPORT_DEPRECATION_VALID: deprecationValid ? "PASS" : "FAIL",
+      ...contentQualityGatesFor(contentQualityGates, item),
     }, crosswalkKeys, manifestConfig, true, dep));
   }
 

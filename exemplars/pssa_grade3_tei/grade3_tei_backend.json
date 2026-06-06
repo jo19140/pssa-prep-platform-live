@@ -115,10 +115,10 @@
           "rationale": "This explains display information, not the comparison."
         },
         {
-          "text": "Some streets had new names, and the trolley tracks were gone.",
+          "text": "The river, the hill road, and the market square helped visitors compare past and present.",
           "supportsPrompt": true,
           "distractorRole": null,
-          "rationale": "This directly shows changes between past and present."
+          "rationale": "This explains how steady landmarks helped visitors compare the old and new maps."
         }
       ],
       "correctIndices": [
@@ -337,10 +337,10 @@
           "rationale": "The first step removes weight before checking the wheel."
         },
         {
-          "text": "Weight can hide a small problem.",
+          "text": "Next, you would turn the cart upside down on a rug.",
           "supportsPrompt": true,
           "distractorRole": null,
-          "rationale": "This explains why the order matters."
+          "rationale": "This is the next step after emptying the cart."
         },
         {
           "text": "After the repair, the cart still squeaked a little.",
@@ -399,7 +399,7 @@
       "eligibleContent": "E03.B-K.1.1.2",
       "ecSkillFamily": "informational_elements",
       "reportingCategory": "B",
-      "prompt": "Choose two sentences that best support the main idea that the class used evidence to understand the creek glow.",
+      "prompt": "Choose two sentences that show the observations and conditions the class used to understand the creek glow.",
       "instructionText": "Choose two sentences.",
       "selectableSpans": [
         {
@@ -422,7 +422,7 @@
           "endOffset": 625,
           "supportsPrompt": true,
           "distractorRole": null,
-          "rationale": "This shows organized observation."
+          "rationale": "This shows Maya organizing observations from different creek spots."
         },
         {
           "spanId": "pssa_ht_g3_creek_01_span_3",
@@ -431,25 +431,25 @@
           "sentenceIndex": 4,
           "startOffset": 797,
           "endOffset": 889,
-          "supportsPrompt": true,
-          "distractorRole": null,
-          "rationale": "This connects clues to the explanation question."
+          "supportsPrompt": false,
+          "distractorRole": "nearby_conclusion",
+          "rationale": "This names the question, but the item asks for observations and conditions."
         },
         {
           "spanId": "pssa_ht_g3_creek_01_span_4",
-          "text": "A beetle skated over the surface, and a robin hopped in the wet grass.",
-          "paragraphIndex": 5,
+          "text": "Rain had washed soil into the creek, and sunlight warmed the shallow edge.",
+          "paragraphIndex": 3,
           "sentenceIndex": 2,
-          "startOffset": 1555,
-          "endOffset": 1625,
-          "supportsPrompt": false,
-          "distractorRole": "wrong_section",
-          "rationale": "This later detail does not support the main idea."
+          "startOffset": 1006,
+          "endOffset": 1080,
+          "supportsPrompt": true,
+          "distractorRole": null,
+          "rationale": "This gives conditions that helped explain the glow."
         }
       ],
       "correctSpanIds": [
         "pssa_ht_g3_creek_01_span_2",
-        "pssa_ht_g3_creek_01_span_3"
+        "pssa_ht_g3_creek_01_span_4"
       ],
       "minSelections": 2,
       "maxSelections": 2,
@@ -522,25 +522,25 @@
         },
         {
           "spanId": "pssa_ht_g3_map_01_span_3",
-          "text": "Mr. Ortiz put a new town map beside the old one.",
+          "text": "The two maps did not match exactly.",
           "paragraphIndex": 3,
-          "sentenceIndex": 0,
-          "startOffset": 870,
-          "endOffset": 918,
+          "sentenceIndex": 2,
+          "startOffset": 919,
+          "endOffset": 954,
           "supportsPrompt": true,
           "distractorRole": null,
-          "rationale": "This directly sets up comparison."
+          "rationale": "This directly shows past and present were different."
         },
         {
           "spanId": "pssa_ht_g3_map_01_span_4",
-          "text": "Some streets had new names, and the trolley tracks were gone.",
+          "text": "Still, the river, the hill road, and the market square helped visitors compare past and present.",
           "paragraphIndex": 3,
-          "sentenceIndex": 2,
-          "startOffset": 955,
-          "endOffset": 1016,
+          "sentenceIndex": 4,
+          "startOffset": 1017,
+          "endOffset": 1113,
           "supportsPrompt": true,
           "distractorRole": null,
-          "rationale": "This shows how the town changed."
+          "rationale": "This explains how landmarks helped visitors compare the two maps."
         }
       ],
       "correctSpanIds": [
@@ -703,20 +703,20 @@
         },
         {
           "spanId": "pssa_ht_g3_mural_01_span_2",
-          "text": "I wanted to wipe them away, but Grandpa handed me a thin brush.",
+          "text": "\"Turn mistakes into ripples,\" he said.",
           "paragraphIndex": 2,
-          "sentenceIndex": 2,
-          "startOffset": 628,
-          "endOffset": 691,
-          "supportsPrompt": false,
-          "distractorRole": "wrong_emphasis",
-          "rationale": "This introduces the problem but does not show the solution."
+          "sentenceIndex": 3,
+          "startOffset": 692,
+          "endOffset": 730,
+          "supportsPrompt": true,
+          "distractorRole": null,
+          "rationale": "Grandpa tells the narrator how to make the mistake useful."
         },
         {
           "spanId": "pssa_ht_g3_mural_01_span_3",
           "text": "I bent close and painted tiny waves around each tail.",
           "paragraphIndex": 2,
-          "sentenceIndex": 3,
+          "sentenceIndex": 4,
           "startOffset": 731,
           "endOffset": 784,
           "supportsPrompt": true,
@@ -730,14 +730,14 @@
           "sentenceIndex": 3,
           "startOffset": 1261,
           "endOffset": 1326,
-          "supportsPrompt": true,
-          "distractorRole": null,
-          "rationale": "This shows the positive result of the changed mistake."
+          "supportsPrompt": false,
+          "distractorRole": "result",
+          "rationale": "This is the result of the changed mistake, not the turning action."
         }
       ],
       "correctSpanIds": [
-        "pssa_ht_g3_mural_01_span_3",
-        "pssa_ht_g3_mural_01_span_4"
+        "pssa_ht_g3_mural_01_span_2",
+        "pssa_ht_g3_mural_01_span_3"
       ],
       "minSelections": 2,
       "maxSelections": 2,
@@ -788,14 +788,14 @@
       "selectableSpans": [
         {
           "spanId": "pssa_ht_g3_cart_01_span_1",
-          "text": "A supply cart should roll where you guide it.",
-          "paragraphIndex": 0,
-          "sentenceIndex": 0,
-          "startOffset": 0,
-          "endOffset": 45,
-          "supportsPrompt": false,
-          "distractorRole": "background",
-          "rationale": "This states an expectation, not why the steps are ordered."
+          "text": "Next, you would turn the cart upside down on a rug so the wheels could spin freely.",
+          "paragraphIndex": 1,
+          "sentenceIndex": 3,
+          "startOffset": 373,
+          "endOffset": 456,
+          "supportsPrompt": true,
+          "distractorRole": null,
+          "rationale": "This gives the next step, showing the order before the wheel can be checked."
         },
         {
           "spanId": "pssa_ht_g3_cart_01_span_2",
@@ -804,9 +804,9 @@
           "sentenceIndex": 1,
           "startOffset": 272,
           "endOffset": 339,
-          "supportsPrompt": true,
-          "distractorRole": null,
-          "rationale": "This gives the first step in the order."
+          "supportsPrompt": false,
+          "distractorRole": "nearby_step",
+          "rationale": "This is a valid step, but the item now keys the reason plus the next action."
         },
         {
           "spanId": "pssa_ht_g3_cart_01_span_3",
@@ -832,7 +832,7 @@
         }
       ],
       "correctSpanIds": [
-        "pssa_ht_g3_cart_01_span_2",
+        "pssa_ht_g3_cart_01_span_1",
         "pssa_ht_g3_cart_01_span_3"
       ],
       "minSelections": 2,

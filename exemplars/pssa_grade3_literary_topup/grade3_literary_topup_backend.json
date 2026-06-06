@@ -556,7 +556,7 @@
       "studentFacingPrompt": "Which word is closest in meaning to \"promise\" as Nia uses it in the story?",
       "answerChoicesJson": [
         "a paper decoration for the library festival",
-        "a lantern promise that Nia means to keep",
+        "a job Nia feels responsible for finishing",
         "a ladder beside the first blue lantern",
         "a note Mateo reads after school"
       ],
@@ -583,9 +583,9 @@
           "distractorRole": "too_narrow"
         },
         {
-          "text": "a lantern promise that Nia means to keep",
+          "text": "a job Nia feels responsible for finishing",
           "isCorrect": true,
-          "rationale": "This choice is supported by the passage evidence.",
+          "rationale": "This defines promise as a responsibility Nia means to keep without repeating the tested word.",
           "evidenceLinks": [
             {
               "paragraphIndex": 0,
@@ -627,7 +627,8 @@
           ],
           "distractorRole": "unsupported_inference"
         }
-      ]
+      ],
+      "correctAnswer": "a job Nia feels responsible for finishing"
     },
     {
       "model": "PssaItem",
@@ -1379,10 +1380,10 @@
             "rationale": "Aunt Rosa is not shown making that demand."
           },
           {
-            "text": "Aunt Rosa wants Milo to keep sketchbook pages clean.",
+            "text": "Tessa needs Milo to draw a perfect picture before he helps her.",
             "distractorRole": "plausible_misreading",
             "supportsPartA": false,
-            "rationale": "Tessa asks for a page, but that is not the lesson."
+            "rationale": "Tessa asks for one page, but she never needs a perfect picture before Milo helps."
           },
           {
             "text": "Milo makes the smudged page special by helping Tessa.",
@@ -1397,7 +1398,7 @@
         "distractorRationales": [
           "The bell remains meaningful in the story.",
           "Aunt Rosa is not shown making that demand.",
-          "Tessa asks for a page, but that is not the lesson.",
+          "Tessa asks for one page, but she never needs a perfect picture before Milo helps.",
           "This states the lesson and uses Milo helping Tessa."
         ],
         "distractorRoles": [
@@ -1426,23 +1427,23 @@
             "rationale": "Milo chooses to help Tessa."
           },
           {
-            "text": "Milo stared at the mark.",
-            "quotedSpan": "Milo stared at the mark.",
-            "evidenceRole": "minor_detail",
-            "supportsPartA": false,
-            "rationale": "This is before he changes the mark into art."
+            "text": "The smudge became a tiny stone on the path.",
+            "quotedSpan": "The smudge became a tiny stone on the path.",
+            "evidenceRole": "supports_part_a",
+            "supportsPartA": true,
+            "rationale": "This shows Milo turning the imperfect mark into part of the special page."
           },
           {
             "text": "Milo said the first page was special after all because it showed the day the porch bell reminded him to help.",
             "quotedSpan": "Milo said the first page was special after all because it showed the day the porch bell reminded him to help.",
-            "evidenceRole": "supports_part_a",
-            "supportsPartA": true,
-            "rationale": "This directly explains why the page is special."
+            "evidenceRole": "nearby_conclusion",
+            "supportsPartA": false,
+            "rationale": "This states the final lesson, while the item keys the action and changed mark as evidence."
           }
         ],
         "correctIndices": [
           1,
-          3
+          2
         ],
         "rationale": "Together these details show Milo helping and valuing the page because of that choice."
       },
@@ -1453,7 +1454,7 @@
         "partB": {
           "correctIndices": [
             1,
-            3
+            2
           ]
         }
       },
@@ -1668,38 +1669,38 @@
           "text": "She crossed out half of her own jobs and added names beside them.",
           "paragraphIndex": 3,
           "sentenceIndex": 2,
-          "startOffset": 1,
-          "endOffset": 65,
-          "supportsPrompt": true,
-          "distractorRole": null,
-          "rationale": "Nia shares the jobs."
+          "startOffset": 972,
+          "endOffset": 1037,
+          "supportsPrompt": false,
+          "distractorRole": "nearby_support",
+          "rationale": "This shows sharing work, but the item keys the result and final lesson."
         },
         {
           "spanId": "lantern_ht_s3",
           "text": "At dusk, every lantern swung safely above the library steps.",
           "paragraphIndex": 4,
           "sentenceIndex": 0,
-          "startOffset": 2,
-          "endOffset": 59,
+          "startOffset": 1143,
+          "endOffset": 1203,
           "supportsPrompt": true,
           "distractorRole": null,
-          "rationale": "The shared work succeeds."
+          "rationale": "This shows the work succeeded after Nia shared jobs."
         },
         {
           "spanId": "lantern_ht_s4",
-          "text": "Grandma called it a lantern list, but Nia called it a promise.",
-          "paragraphIndex": 0,
-          "sentenceIndex": 1,
-          "startOffset": 3,
-          "endOffset": 66,
-          "supportsPrompt": false,
-          "distractorRole": "setup_detail",
-          "rationale": "This introduces the promise but not the solution."
+          "text": "When Mateo asked what she would write on next year's lantern list, Nia smiled and wrote the first job in big letters: ask the helpers early.",
+          "paragraphIndex": 4,
+          "sentenceIndex": 3,
+          "startOffset": 1308,
+          "endOffset": 1448,
+          "supportsPrompt": true,
+          "distractorRole": null,
+          "rationale": "This states the lesson Nia learned about asking helpers early."
         }
       ],
       "correctSpanIds": [
-        "lantern_ht_s2",
-        "lantern_ht_s3"
+        "lantern_ht_s3",
+        "lantern_ht_s4"
       ],
       "minSelections": 2,
       "maxSelections": 2,
@@ -1750,25 +1751,25 @@
       "selectableSpans": [
         {
           "spanId": "bell_ht_s1",
-          "text": "Milo wanted to keep it clean until he could draw something perfect.",
-          "paragraphIndex": 1,
-          "sentenceIndex": 1,
-          "startOffset": 0,
-          "endOffset": 68,
-          "supportsPrompt": false,
-          "distractorRole": "early_feeling",
-          "rationale": "This shows Milo before he helps."
+          "text": "Milo almost stayed on the step with his clean sketchbook.",
+          "paragraphIndex": 2,
+          "sentenceIndex": 2,
+          "startOffset": 650,
+          "endOffset": 707,
+          "supportsPrompt": true,
+          "distractorRole": null,
+          "rationale": "This shows what Milo nearly chose before helping."
         },
         {
           "spanId": "bell_ht_s2",
           "text": "Then he saw Tessa chasing pins near the rose bushes, so he set the book down and ran to help.",
           "paragraphIndex": 2,
           "sentenceIndex": 3,
-          "startOffset": 1,
-          "endOffset": 96,
-          "supportsPrompt": true,
-          "distractorRole": null,
-          "rationale": "Milo chooses to help Tessa."
+          "startOffset": 708,
+          "endOffset": 801,
+          "supportsPrompt": false,
+          "distractorRole": "nearby_action",
+          "rationale": "This shows the helping action, but the item keys the contrast and final lesson."
         },
         {
           "spanId": "bell_ht_s3",
@@ -1786,15 +1787,15 @@
           "text": "Milo said the first page was special after all because it showed the day the porch bell reminded him to help.",
           "paragraphIndex": 4,
           "sentenceIndex": 3,
-          "startOffset": 3,
-          "endOffset": 108,
+          "startOffset": 1256,
+          "endOffset": 1365,
           "supportsPrompt": true,
           "distractorRole": null,
-          "rationale": "This states the lesson."
+          "rationale": "This connects helping to why the page became special."
         }
       ],
       "correctSpanIds": [
-        "bell_ht_s2",
+        "bell_ht_s1",
         "bell_ht_s4"
       ],
       "minSelections": 2,

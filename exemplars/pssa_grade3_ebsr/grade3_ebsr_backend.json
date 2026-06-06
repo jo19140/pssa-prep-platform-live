@@ -74,9 +74,9 @@
           {
             "text": "Maya drew a map of three creek spots.",
             "quotedSpan": "Maya drew a map of three creek spots.",
-            "evidenceRole": "supports_part_a",
-            "supportsPartA": true,
-            "rationale": "The map shows careful observations from more than one location."
+            "evidenceRole": "nearby_observation",
+            "supportsPartA": false,
+            "rationale": "This is one observation, but the item keys the question and conditions that explain the glow."
           },
           {
             "text": "A beetle skated over the surface, and a robin hopped in the wet grass.",
@@ -90,19 +90,19 @@
             "quotedSpan": "Those clues helped the class ask a better question: why was the glow strongest in one place?",
             "evidenceRole": "supports_part_a",
             "supportsPartA": true,
-            "rationale": "This directly connects the observations to the main question."
+            "rationale": "This states the main question the evidence helped the class ask."
           },
           {
-            "text": "The class wrote a creek notice for families.",
-            "quotedSpan": "The class wrote a creek notice for families.",
-            "evidenceRole": "too_narrow",
-            "supportsPartA": false,
-            "rationale": "This is a result of the study, not the main evidence for why the glow was strongest."
+            "text": "Rain had washed soil into the creek, and sunlight warmed the shallow edge.",
+            "quotedSpan": "Rain had washed soil into the creek, and sunlight warmed the shallow edge.",
+            "evidenceRole": "supports_part_a",
+            "supportsPartA": true,
+            "rationale": "This gives the conditions the class used to explain the strongest glow."
           }
         ],
         "correctIndices": [
-          0,
-          2
+          2,
+          3
         ]
       },
       "scoring": {
@@ -151,8 +151,8 @@
               "quotedSpan": "Those clues helped the class ask a better question: why was the glow strongest in one place?"
             },
             {
-              "text": "The class wrote a creek notice for families.",
-              "quotedSpan": "The class wrote a creek notice for families."
+              "text": "Rain had washed soil into the creek, and sunlight warmed the shallow edge.",
+              "quotedSpan": "Rain had washed soil into the creek, and sunlight warmed the shallow edge."
             }
           ]
         }
@@ -163,8 +163,8 @@
         },
         "partB": {
           "correctIndices": [
-            0,
-            2
+            2,
+            3
           ]
         }
       },
@@ -592,18 +592,18 @@
             "rationale": "This describes the work area, not the message about mistakes."
           },
           {
-            "text": "A woman had stopped to take a picture of the sparrows.",
-            "quotedSpan": "A woman had stopped to take a picture of the sparrows.",
-            "evidenceRole": "background",
-            "supportsPartA": false,
-            "rationale": "This shows someone noticed the mural later, but it does not explain how the narrator handled the mistake."
+            "text": "\"Turn mistakes into ripples,\" he said.",
+            "quotedSpan": "\"Turn mistakes into ripples,\" he said.",
+            "evidenceRole": "supports_part_a",
+            "supportsPartA": true,
+            "rationale": "Grandpa states how the mistake can become useful."
           },
           {
             "text": "I bent close and painted tiny waves around each tail.",
             "quotedSpan": "I bent close and painted tiny waves around each tail.",
-            "evidenceRole": "supports_part_a",
-            "supportsPartA": true,
-            "rationale": "The narrator changes the mistake into ripples."
+            "evidenceRole": "nearby_action",
+            "supportsPartA": false,
+            "rationale": "This shows the narrator doing the work, but the item keys the message and result."
           },
           {
             "text": "But the fish seemed to move, and the wall no longer looked empty.",
@@ -614,7 +614,7 @@
           }
         ],
         "correctIndices": [
-          2,
+          1,
           3
         ]
       },
@@ -656,8 +656,8 @@
               "quotedSpan": "The wall was rough brick, and chalk lines crossed it like a giant puzzle."
             },
             {
-              "text": "A woman had stopped to take a picture of the sparrows.",
-              "quotedSpan": "A woman had stopped to take a picture of the sparrows."
+              "text": "\"Turn mistakes into ripples,\" he said.",
+              "quotedSpan": "\"Turn mistakes into ripples,\" he said."
             },
             {
               "text": "I bent close and painted tiny waves around each tail.",
@@ -676,7 +676,7 @@
         },
         "partB": {
           "correctIndices": [
-            2,
+            1,
             3
           ]
         }
@@ -770,11 +770,11 @@
             "rationale": "The first step removes weight before checking the problem."
           },
           {
-            "text": "Weight can hide a small problem.",
-            "quotedSpan": "Weight can hide a small problem.",
+            "text": "On the green cart, a strand of yarn had wrapped around the front axle.",
+            "quotedSpan": "On the green cart, a strand of yarn had wrapped around the front axle.",
             "evidenceRole": "supports_part_a",
             "supportsPartA": true,
-            "rationale": "This explains why the class follows the procedure before forcing the cart."
+            "rationale": "This identifies the small cause the ordered steps helped the class find."
           },
           {
             "text": "The green cart in the art room did not.",
@@ -831,8 +831,8 @@
               "quotedSpan": "First, you would empty the heavy paper boxes from the bottom shelf."
             },
             {
-              "text": "Weight can hide a small problem.",
-              "quotedSpan": "Weight can hide a small problem."
+              "text": "On the green cart, a strand of yarn had wrapped around the front axle.",
+              "quotedSpan": "On the green cart, a strand of yarn had wrapped around the front axle."
             },
             {
               "text": "The green cart in the art room did not.",

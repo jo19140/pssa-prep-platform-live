@@ -16,6 +16,15 @@ import { assertGrade3TeiContract } from "./content/author-pssa-grade3-tei";
 import { assertGrade3MatchingGridDragDropContract } from "./content/author-pssa-grade3-matching-grid-drag-drop";
 import { assertGrade3ConventionsContract } from "./content/author-pssa-grade3-conventions";
 import { assertGrade3ShortAnswerContract } from "./content/author-pssa-grade3-short-answer";
+import {
+  PSSA_CONTENT_QUALITY_GATE_IDS,
+  buildPlan,
+  evaluatePssaItemEcGenreMatch,
+  evaluatePssaItemIntraChoiceDuplicate,
+  evaluatePssaPassageMultipointEvidenceOverlap,
+  evaluatePssaShortAnswerBandsNonempty,
+  evaluatePssaVocabKeyConstruct,
+} from "./content/lib/pssa-import-plan";
 
 assertPssaItemTypeMockContract();
 assertGrade3EbsrContract();
@@ -317,6 +326,82 @@ assert.equal(buildItemEcSkillMatchReport([vocabItem({
   ],
 })], [passage], ecCatalog)[0].skillMatchResult, "WARN");
 
+assert.equal(evaluatePssaItemIntraChoiceDuplicate({
+  itemType: "EBSR",
+  interactionType: "EBSR",
+  partA: { choices: [{ text: "same answer" }, { text: "same answer" }, { text: "other" }, { text: "another" }] },
+  partB: { choices: [{ text: "one" }, { text: "two" }, { text: "three" }, { text: "four" }] },
+}), "FAIL", "duplicate EBSR Part A choices must fail");
+assert.equal(evaluatePssaItemIntraChoiceDuplicate({
+  itemType: "INLINE_DROPDOWN",
+  interactionType: "INLINE_DROPDOWN",
+  blanks: [{ options: [{ text: "May" }, { text: "may" }] }],
+}), "PASS", "inline dropdown raw case-only options must remain allowed");
+assert.equal(evaluatePssaItemIntraChoiceDuplicate({
+  itemType: "DRAG_DROP",
+  interactionType: "DRAG_DROP",
+  tokens: [{ text: "same" }, { text: "same" }],
+}), "PASS", "drag-drop token pools are exempt from intra-choice duplicate gate");
+assert.equal(evaluatePssaItemIntraChoiceDuplicate({
+  itemType: "HOT_TEXT",
+  interactionType: "HOT_TEXT",
+  selectableSpans: [{ text: "same" }, { text: "same" }],
+}), "PASS", "hot-text token-kind spans are exempt from intra-choice duplicate gate");
+
+assert.equal(evaluatePssaVocabKeyConstruct(vocabItem({
+  id: "vocab-circular",
+  studentFacingPrompt: "What does faint mean as it is used in the passage?",
+  answerChoicesJson: ["bright", "a faint stripe", "muddy", "quick"],
+  correctIndex: 1,
+}), { ...passage, text: `${passage.text}\n\nThe glow had faded to a faint stripe.` }), "FAIL", "vocab key cannot repeat the tested word");
+assert.equal(evaluatePssaVocabKeyConstruct(vocabItem({
+  id: "vocab-source-paraphrase",
+  studentFacingPrompt: "What does traced mean as it is used in the passage?",
+  answerChoicesJson: ["painted", "held", "looked", "kids followed the bus route in the air"],
+  correctIndex: 3,
+}), { ...passage, text: `${passage.text}\n\nTwo kids traced the bus route in the air.` }), "FAIL", "vocab key cannot near-paraphrase the source sentence");
+assert.equal(evaluatePssaVocabKeyConstruct(vocabItem({
+  id: "vocab-definition",
+  studentFacingPrompt: "What does faint mean as it is used in the passage?",
+  answerChoicesJson: ["bright", "muddy", "quick", "dim and pale"],
+  correctIndex: 3,
+}), { ...passage, text: `${passage.text}\n\nThe glow had faded to a faint stripe.` }), "PASS", "clean short definitions must not false-fail");
+
+const shortAnswerBands = {
+  interactionType: "SHORT_ANSWER",
+  scoreBandExamples: [3, 2, 1, 0].map((band) => ({ band, response: `response for band ${band}`, why: `why band ${band}` })),
+};
+assert.equal(evaluatePssaShortAnswerBandsNonempty(shortAnswerBands), "PASS");
+assert.equal(evaluatePssaShortAnswerBandsNonempty({ ...shortAnswerBands, scoreBandExamples: shortAnswerBands.scoreBandExamples.filter((row) => row.band !== 0) }), "FAIL");
+
+assert.equal(evaluatePssaItemEcGenreMatch({ ...readingItem(), eligibleContent: "E03.A-K.1.1.1" }, { ...passage, passageType: "informational" }), "FAIL");
+assert.equal(evaluatePssaItemEcGenreMatch({ ...readingItem(), eligibleContent: "E03.B-K.1.1.1" }, { ...passage, passageType: "informational" }), "PASS");
+
+const overlapPassage = {
+  id: "overlap",
+  passageType: "informational",
+  text: "First sentence shows one detail. Second sentence shows another detail. Third sentence shows a final detail.",
+};
+const overlapItems = [
+  {
+    itemId: "ebsr-overlap",
+    interactionType: "EBSR",
+    passageId: "overlap",
+    partB: { correctIndices: [0, 1], choices: [{ quotedSpan: "First sentence shows one detail." }, { quotedSpan: "Second sentence shows another detail." }] },
+  },
+  {
+    itemId: "ht-overlap",
+    interactionType: "HOT_TEXT",
+    passageId: "overlap",
+    correctSpanIds: ["a", "b"],
+    selectableSpans: [{ spanId: "a", paragraphIndex: 0, sentenceIndex: 0 }, { spanId: "b", paragraphIndex: 0, sentenceIndex: 1 }],
+  },
+];
+assert.equal(evaluatePssaPassageMultipointEvidenceOverlap(overlapItems, [overlapPassage])["ebsr-overlap"], "FAIL");
+const compliantOverlap = structuredClone(overlapItems);
+compliantOverlap[1].selectableSpans[1].sentenceIndex = 2;
+assert.equal(evaluatePssaPassageMultipointEvidenceOverlap(compliantOverlap, [overlapPassage])["ebsr-overlap"], "PASS");
+
 const duplicateOpeningPassages = [
   {
     id: "dup-a",
@@ -376,5 +461,11 @@ const beaverPassage = {
 const beaverRows = buildPssaPassageQualityReport([beaverPassage]);
 assert.equal(hasBlockingPassageQualityFailure(beaverRows), false);
 assert.equal(beaverRows.some((row) => row.severity === "WARNING"), false);
+
+const grade3Plan = buildPlan(3);
+for (const gateId of PSSA_CONTENT_QUALITY_GATE_IDS) {
+  const tally = grade3Plan.gateTallies.get(gateId);
+  assert.equal(tally?.fail ?? 0, 0, `${gateId} must have zero failures across the Grade 3 import plan`);
+}
 
 console.log("PSSA content audit detector tests passed.");

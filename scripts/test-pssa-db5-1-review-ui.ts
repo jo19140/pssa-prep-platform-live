@@ -78,6 +78,20 @@ assert.equal(JSON.stringify(itemDto.studentPreview).includes("correctIndex"), fa
 assert.equal(JSON.stringify(itemDto.studentPreview).includes("Reviewer only"), false, "studentPreview must not include scoring rationale");
 assert.equal(JSON.stringify(itemDto.reviewer).includes("correctIndex"), true, "reviewer block carries answer key for admin route");
 
+const shortAnswerDto = itemToQueueDto({
+  ...fakeItem,
+  interactionType: "SHORT_ANSWER",
+  scoringJson: {
+    totalPoints: 3,
+    scoreBandExamples: [3, 2, 1, 0].map((band) => ({ band, response: `response for band ${band}`, why: `why band ${band}` })),
+  },
+});
+assert.deepEqual(
+  (shortAnswerDto.reviewer.scoring as any).scoreBandExamples.map((row: any) => row.band).sort(),
+  [0, 1, 2, 3],
+  "short-answer queue DTO must carry all four score-band examples for reviewer judgment",
+);
+
 // --- vocab-normalization fix: queue must fetch responseSpecJson for the domain gate ---
 assert.equal(
   (itemQueueSelect as Record<string, unknown>).responseSpecJson,
