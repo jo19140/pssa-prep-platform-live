@@ -27,14 +27,22 @@ Mirror `seed-phase4-teams-cleanup.ts`: upsert position + 2 targets; validate pse
 
 ## 4. Tests — new `scripts/test-content-v3-phase4-morphology.ts`, wired into `test:content-v3`
 
-Per target: nonwords detect + validate strict; generateLessonDraft (phaseNumber 4) → canPersist (the generator now threads morphology from targetPatternsJson — assert draft.morphology is set); Part 7 renders fullAuditPassageText; full passage passes FULL passesAuditGate; short fixture classified + unblocked + quality; style sweep (banned function words + "are" + sunup; no plain-attach forms); `LESSON_TARGET_PATTERN_COVERAGE` PASS for both; transformation_pairs PASSES for both with zero misclassified pairs.
+Per target: nonwords detect + validate strict; generateLessonDraft (phaseNumber 4) → canPersist (the generator now threads morphology from targetPatternsJson — assert draft.morphology is set); Part 7 renders fullAuditPassageText; full passage passes FULL passesAuditGate; short fixture classified + unblocked + quality; style sweep (banned function words + "are" + sunup; no plain-attach forms); `LESSON_MORPHOLOGY_TARGET_COVERAGE` PASS for both (morphology targets use this gate, NOT LESSON_TARGET_PATTERN_COVERAGE); transformation_pairs PASSES for both with zero misclassified pairs.
 
 Rung-specific assertions — THE CORE RULE-VERIFICATION FIRST:
 
 1. **Rule verification (decompose under the lesson's rule only):**
    - morph_drop_e context: hoping/baked/making classify TARGET with morphology.rule "drop_e"; running/hopped decompose to NULL (not target) — assert they do NOT classify as target in a drop_e passage.
    - morph_double context: running/hopped/sitting classify TARGET with morphology.rule "double"; named/baked decompose to NULL.
-2. **No-change scoping:** "hopes" in the drop_e passage and "runs" in the double passage classify with morphology.rule "none"; assert each is distinguishable from rule-target evidence via the word-entry morphology field, and that coverage does NOT credit them.
+2. **No-change scoping + coverage gate (LESSON_MORPHOLOGY_TARGET_COVERAGE — upstream prerequisite):** morphology targets use `LESSON_MORPHOLOGY_TARGET_COVERAGE`, NOT the phonics vowel-span gate. GOVERNING PRINCIPLE (verbatim): *Coverage counts only intentional morphology evidence: rule-matched transformed forms and intentional stem spread. It never counts no-change forms, incidental phonics words, or wrong-rule transformations as target evidence.* (Bare stems contribute to stem spread only when intentionally placed in pair bases / concept examples / dictation — never from incidental passage appearance.) Required test cases (Jonathan, verbatim):
+   1. Degenerate morph_double (only bare stems + no-change forms) → LESSON_MORPHOLOGY_TARGET_COVERAGE FAIL.
+   2. "runs"/"hops"/"sits" present → carry morphology.rule "none" → excluded from doubling coverage.
+   3. Incidental "log"/"bug"/"sat" in the passage → do NOT count as morphology target evidence.
+   4. running/hopping/sitting/hopped/etc → count only because morphology.rule === "double".
+   5. morph_drop_e: hopes/makes/rides → rule "none" → excluded from drop_e coverage.
+   6. morph_drop_e: making/hoping/riding/baked → count only because morphology.rule === "drop_e".
+   7. A drop_e form in a double lesson does NOT count; a double form in a drop_e lesson does NOT count.
+   8. Both signed-off exemplars PASS LESSON_MORPHOLOGY_TARGET_COVERAGE.
 3. **transformation_pairs PASS/FAIL:** hope→hoping/make→making/ride→riding/bake→baked PASS in drop_e; run→running/hop→hopping/sit→sitting/hug→hugged PASS in double; hope→hopping FAILS in drop_e (wrong rule), run→runing FAILS (misspelling), hope→hopes FAILS (no-change is not drop_e evidence); a minimal_pairs draft (cap→cape) and an examples_only draft still PASS unchanged.
 4. **Closed pseudoword pins:** the 8 morph_double nonwords validate strict under their closed patterns; "nok" rejects (knock collision), "wat" rejects (real word) — pin the closed-pseudoword collision path exists.
 5. **Warmup override (PRODUCER PATH):** call the real `generatePart1Warmup` (not a hand-built warmup) for morph_double and assert its contentJson.warmupWords are the VCe review words from content (not the default closed list), and LESSON_WARMUP_NO_TODAY_PATTERN PASSES; morph_drop_e keeps the default warmup.
