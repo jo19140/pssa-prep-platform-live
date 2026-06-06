@@ -102,7 +102,7 @@ export async function buildLessonGeneratorContext(phasePositionId: string, daily
     targetPatterns,
     pseudowordPatterns,
     targetWords: dailyTarget.exampleWords.slice(0, 5),
-    reviewWords: [],
+    reviewWords: content.reviewWords ?? [],
     pseudowords: canonicalPseudowordsForTargetPatterns(dailyTarget.code, dailyTarget.exampleNonwords, targetPatterns, "content-v3 lesson seed", pseudowordPatterns),
     heartWordsPreviewedThisLesson,
     heartWordsAssumedKnown,

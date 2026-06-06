@@ -7,6 +7,7 @@ export function generatePart2Concept(ctx: LessonGeneratorContext): GeneratedLess
   const demoMode = content.demoMode ?? "minimal_pairs";
   const demonstrationPairs = content.demonstrationPairs ?? [];
   const demonstrationExamples = content.demonstrationExamples ?? [];
+  const morphologyJson = content.morphologyJson;
   const allExamples = [...ctx.targetWords, ...demonstrationExamples, ...demonstrationPairs.map((pair) => pair.target)];
   return withCommonPartMetadata(ctx, {
     partNumber: 2,
@@ -22,6 +23,7 @@ export function generatePart2Concept(ctx: LessonGeneratorContext): GeneratedLess
       demoMode,
       demonstrationPairs,
       demonstrationExamples,
+      morphologyJson,
     },
     contentJson: {
       skillFocus: "explicit_target_instruction",
@@ -29,6 +31,7 @@ export function generatePart2Concept(ctx: LessonGeneratorContext): GeneratedLess
       demoMode,
       demonstrationPairs,
       demonstrationExamples,
+      morphologyJson,
       teachingLanguage: ctx.phasePosition.phaseNumber >= 4
         ? "These letters work together to help the vowel sound stay long."
         : "Silent e helps the vowel say its name in these words.",
