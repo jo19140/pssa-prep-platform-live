@@ -226,7 +226,7 @@ export async function getPssaReviewQueue(filter: PssaReviewQueueFilter = {}): Pr
       take: 100,
     }),
     db.pssaItem.findMany({
-      where: { gradeLevel, subject: "ELA", reviewStatus: status, retiredAt: null },
+      where: { gradeLevel, subject: "ELA", reviewStatus: status, retiredAt: null, itemStatus: { not: "deprecated_superseded" } },
       select: itemQueueSelect,
       orderBy: [{ batchId: "asc" }, { id: "asc" }],
       take: 300,
@@ -245,9 +245,9 @@ export async function getPssaReviewQueue(filter: PssaReviewQueueFilter = {}): Pr
 export async function getPssaReviewCounts(gradeLevel = 3) {
   const [pendingPassages, pendingItems, approvedPassages, approvedItems] = await Promise.all([
     db.pssaPassage.count({ where: { gradeLevel, subject: "ELA", reviewStatus: "PENDING", retiredAt: null } }),
-    db.pssaItem.count({ where: { gradeLevel, subject: "ELA", reviewStatus: "PENDING", retiredAt: null } }),
+    db.pssaItem.count({ where: { gradeLevel, subject: "ELA", reviewStatus: "PENDING", retiredAt: null, itemStatus: { not: "deprecated_superseded" } } }),
     db.pssaPassage.count({ where: { gradeLevel, subject: "ELA", reviewStatus: "APPROVED", retiredAt: null } }),
-    db.pssaItem.count({ where: { gradeLevel, subject: "ELA", reviewStatus: "APPROVED", retiredAt: null } }),
+    db.pssaItem.count({ where: { gradeLevel, subject: "ELA", reviewStatus: "APPROVED", retiredAt: null, itemStatus: { not: "deprecated_superseded" } } }),
   ]);
   return { pendingPassages, pendingItems, approved: approvedPassages + approvedItems };
 }
