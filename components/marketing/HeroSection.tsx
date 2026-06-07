@@ -27,7 +27,7 @@ export function HeroSection() {
             </Link>
             <span className="text-sm font-bold text-indigo-100">No credit card required</span>
           </div>
-          <p className="relative z-10 mt-5 max-w-2xl text-sm font-extrabold leading-6 text-white drop-shadow-[0_2px_10px_rgba(0,0,27,0.7)] sm:text-base">
+          <p className="relative z-10 mt-5 max-w-2xl text-sm font-semibold leading-6 text-white/85 drop-shadow-[0_2px_10px_rgba(0,0,27,0.7)] sm:text-base">
             Built by a classroom teacher · Structured literacy · Dialect-aware listening · Simple parent updates
           </p>
         </div>

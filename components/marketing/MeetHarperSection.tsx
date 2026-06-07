@@ -17,7 +17,7 @@ export function MeetHarperSection() {
           <p className="inline-flex rounded-full border border-[#ded4f4] bg-white px-4 py-2 text-xs font-black uppercase tracking-[0.2em] text-synesis-primary shadow-sm">
             MEET HARPER
           </p>
-          <h2 id="meet-harper-heading" className="mt-5 font-display text-4xl font-black tracking-normal text-synesis-ink sm:text-5xl">
+          <h2 id="meet-harper-heading" className="mt-5 font-serif text-4xl font-black tracking-normal text-synesis-ink sm:text-5xl">
             Read with Harper. Confidence grows.
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-lg font-medium leading-8 text-synesis-body">
@@ -52,7 +52,8 @@ export function MeetHarperSection() {
             </ol>
 
             <figure className="mt-6 rounded-lg border-l-4 border-[#f3b63f] bg-white p-5 shadow-sm shadow-slate-200/70">
-              <blockquote className="text-lg font-black leading-8 text-synesis-ink">
+              <figcaption className="mb-2 text-xs font-black uppercase tracking-[0.2em] text-[#b7791f]">HARPER&apos;S PROMISE</figcaption>
+              <blockquote className="text-lg font-semibold italic leading-8 text-synesis-ink">
                 &quot;I&apos;m here to help you read with confidence. We&apos;ll take it one sound, one word, one story at a time.&quot;
               </blockquote>
             </figure>
