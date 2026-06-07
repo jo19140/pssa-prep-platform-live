@@ -187,21 +187,22 @@ function baseFor(word: string) {
 }
 
 function assertOptInInvariance() {
-  const seedPatterns = CONTENT_V3_DAILY_TARGETS.flatMap((target) => [
+  const priorTargets = CONTENT_V3_DAILY_TARGETS.filter((target) => target.code !== "morph_y_to_i");
+  const seedPatterns = priorTargets.flatMap((target) => [
     ...patternsFromJson(target.targetPatternsJson),
     ...target.exampleWords,
     ...target.exampleNonwords,
   ]);
-  assert.equal(seedPatterns.includes("y_long_i"), false, "existing targets must not reference y_long_i");
-  assert.equal(seedPatterns.some((entry) => entry === "y_to_i"), false, "existing targets must not reference y_to_i");
-  for (const target of CONTENT_V3_DAILY_TARGETS) {
+  assert.equal(seedPatterns.includes("y_long_i"), false, "prior targets must not reference y_long_i");
+  assert.equal(seedPatterns.some((entry) => entry === "y_to_i"), false, "prior targets must not reference y_to_i");
+  for (const target of priorTargets) {
     for (const word of [...target.exampleWords, ...target.exampleNonwords]) {
       assert.equal(wordMatchesRegisteredPattern(word, "y_long_i", { strictPhonemeLexicon: true }), false, `${target.code} seed word ${word} should not newly match y_long_i`);
     }
   }
   return [
-    { probe: "existing target metadata", result: "no y_long_i / y_to_i references" },
-    { probe: "existing seed example words + nonwords", result: "no y_long_i matches" },
+    { probe: "prior target metadata", result: "no y_long_i / y_to_i references" },
+    { probe: "prior seed example words + nonwords", result: "no y_long_i matches" },
   ];
 }
 
