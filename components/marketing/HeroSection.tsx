@@ -15,7 +15,7 @@ export function HeroSection() {
           <p className="relative z-10 mb-5 inline-flex rounded-full border border-white/25 bg-white/10 px-4 py-2 text-xs font-black uppercase tracking-[0.2em] text-white shadow-lg shadow-indigo-950/20 backdrop-blur">
             READING BUDDY BY SÝ LEARNING
           </p>
-          <h1 className="relative z-10 font-display text-5xl font-black tracking-normal text-white drop-shadow-[0_4px_18px_rgba(0,0,27,0.75)] sm:text-6xl lg:text-7xl">
+          <h1 className="relative z-10 font-display text-5xl font-black leading-[1.1] tracking-normal text-white drop-shadow-[0_4px_18px_rgba(0,0,27,0.75)] sm:text-6xl sm:leading-none lg:text-7xl">
             Reading practice that listens.
           </h1>
           <p className="relative z-10 mt-6 max-w-2xl text-lg font-medium leading-8 text-indigo-100 drop-shadow-[0_2px_10px_rgba(0,0,27,0.55)] sm:text-xl">
