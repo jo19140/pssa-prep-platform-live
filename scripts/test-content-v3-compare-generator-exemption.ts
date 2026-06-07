@@ -69,7 +69,7 @@ function main() {
   rows.push(["real-path smoke", "LESSON_PART3_PSEUDOWORD_COUNT", realPath.countCheck]);
 
   const invariantCount = assertExistingTargetsUnchanged();
-  rows.push(["29-target invariance", `${invariantCount} current targets`, "PASS"]);
+  rows.push(["30-target invariance", `${invariantCount} current targets`, "PASS"]);
 
   printTable("check | fixture | result", rows);
   console.log(">=8-pseudoword contract unchanged for all non-compare targets; canonicalPseudowordsForTarget byte-identical");
@@ -96,7 +96,6 @@ function assertExistingTargetsUnchanged() {
   let count = 0;
   for (const target of CONTENT_V3_DAILY_TARGETS) {
     const morphology = morphologyConfigFromTargetPatternsJson(target.targetPatternsJson);
-    assert.notEqual(morphology?.rule, "compare", `${target.code} must not opt into compare yet`);
     const targetPatterns = targetPatternsFor(target);
     const pseudowordPatterns = pseudowordPatternsFor(target, targetPatterns);
     const resolved = canonicalPseudowordsForTargetPatterns(
@@ -107,10 +106,16 @@ function assertExistingTargetsUnchanged() {
       pseudowordPatterns,
       { allowNoPseudowords: morphology?.rule === "compare" },
     );
-    assert.deepEqual(resolved, target.exampleNonwords.slice(0, 8), `${target.code} pseudoword resolution changed`);
+    if (target.code === "morph_compare_no_change") {
+      assert.equal(morphology?.rule, "compare", `${target.code} must opt into compare`);
+      assert.deepEqual(resolved, [], `${target.code} must resolve no pseudowords through the canonical resolver`);
+    } else {
+      assert.notEqual(morphology?.rule, "compare", `${target.code} must not opt into compare`);
+      assert.deepEqual(resolved, target.exampleNonwords.slice(0, 8), `${target.code} pseudoword resolution changed`);
+    }
     count += 1;
   }
-  assert.equal(count, 29);
+  assert.equal(count, 30);
   return count;
 }
 

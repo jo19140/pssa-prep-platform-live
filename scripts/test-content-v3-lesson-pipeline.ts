@@ -1,6 +1,6 @@
 import assert from "assert/strict";
 import { LESSON_CONTENT_BY_DAILY_TARGET, phase3EntryLessonContentFor } from "../lib/content/phase3EntryLessonContent";
-import { CONTENT_V3_DAILY_TARGETS, PHASE_3_MID_TARGETS, PHASE_4_ENTRY_TARGETS, PHASE_4_MID_TARGETS, PHASE_4_RCONTROLLED_TARGETS, PHASE_4_DIPHTHONG_TARGETS, PHASE_4_TEAMS_CLEANUP_TARGETS, PHASE_4_MORPHOLOGY_TARGETS, PHASE_4_MORPHOLOGY_Y_TO_I_TARGETS } from "../lib/content/phase3EntrySeed";
+import { CONTENT_V3_DAILY_TARGETS, PHASE_3_MID_TARGETS, PHASE_4_ENTRY_TARGETS, PHASE_4_MID_TARGETS, PHASE_4_RCONTROLLED_TARGETS, PHASE_4_DIPHTHONG_TARGETS, PHASE_4_TEAMS_CLEANUP_TARGETS, PHASE_4_MORPHOLOGY_TARGETS, PHASE_4_MORPHOLOGY_Y_TO_I_TARGETS, PHASE_4_MORPHOLOGY_COMPARE_TARGETS } from "../lib/content/phase3EntrySeed";
 import { auditGeneratedLessonDraft, evaluateLessonApprovalReadiness } from "../lib/literacy/lessonAudit";
 import { deterministicLessonPartRunner, generateLessonDraft } from "../lib/literacy/lessonGenerator";
 import { generatePart1Warmup } from "../lib/literacy/lessonParts/part1Warmup";
@@ -22,11 +22,12 @@ function lessonContext(targetCode = "a_e"): LessonGeneratorContext {
   const isPhase4TeamsCleanup = PHASE_4_TEAMS_CLEANUP_TARGETS.some((target) => target.code === targetCode);
   const isPhase4Morphology = PHASE_4_MORPHOLOGY_TARGETS.some((target) => target.code === targetCode);
   const isPhase4MorphologyYToI = PHASE_4_MORPHOLOGY_Y_TO_I_TARGETS.some((target) => target.code === targetCode);
-  const isPhase4 = isPhase4Entry || isPhase4Mid || isPhase4RControlled || isPhase4Diphthong || isPhase4TeamsCleanup || isPhase4Morphology || isPhase4MorphologyYToI;
+  const isPhase4MorphologyCompare = PHASE_4_MORPHOLOGY_COMPARE_TARGETS.some((target) => target.code === targetCode);
+  const isPhase4 = isPhase4Entry || isPhase4Mid || isPhase4RControlled || isPhase4Diphthong || isPhase4TeamsCleanup || isPhase4Morphology || isPhase4MorphologyYToI || isPhase4MorphologyCompare;
   const phasePosition = {
-    id: isPhase4MorphologyYToI ? "phase-4-morphology-y-to-i" : isPhase4Morphology ? "phase-4-morphology" : isPhase4TeamsCleanup ? "phase-4-teams-cleanup" : isPhase4Diphthong ? "phase-4-diphthong" : isPhase4RControlled ? "phase-4-rcontrolled" : isPhase4Mid ? "phase-4-mid" : isPhase4Entry ? "phase-4-entry" : isMid ? "phase-3-mid" : "phase-3-entry",
+    id: isPhase4MorphologyCompare ? "phase-4-morphology-compare" : isPhase4MorphologyYToI ? "phase-4-morphology-y-to-i" : isPhase4Morphology ? "phase-4-morphology" : isPhase4TeamsCleanup ? "phase-4-teams-cleanup" : isPhase4Diphthong ? "phase-4-diphthong" : isPhase4RControlled ? "phase-4-rcontrolled" : isPhase4Mid ? "phase-4-mid" : isPhase4Entry ? "phase-4-entry" : isMid ? "phase-3-mid" : "phase-3-entry",
     phaseNumber: isPhase4 ? 4 : 3,
-    label: isPhase4MorphologyYToI ? "Phase 4 Morphology y to i" : isPhase4Morphology ? "Phase 4 Morphology Entry A" : isPhase4TeamsCleanup ? "Phase 4 Teams Cleanup" : isPhase4Diphthong ? "Phase 4 Diphthong Entry" : isPhase4RControlled ? "Phase 4 R-Controlled Entry" : isPhase4Mid ? "Phase 4 Mid" : isPhase4Entry ? "Phase 4 Entry" : isMid ? "Phase 3 Mid" : "Phase 3 Entry",
+    label: isPhase4MorphologyCompare ? "Phase 4 Morphology Compare" : isPhase4MorphologyYToI ? "Phase 4 Morphology y to i" : isPhase4Morphology ? "Phase 4 Morphology Entry A" : isPhase4TeamsCleanup ? "Phase 4 Teams Cleanup" : isPhase4Diphthong ? "Phase 4 Diphthong Entry" : isPhase4RControlled ? "Phase 4 R-Controlled Entry" : isPhase4Mid ? "Phase 4 Mid" : isPhase4Entry ? "Phase 4 Entry" : isMid ? "Phase 3 Mid" : "Phase 3 Entry",
   };
   const dailyTarget = {
     id: `target-${targetCode}`,

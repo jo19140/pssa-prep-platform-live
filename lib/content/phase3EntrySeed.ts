@@ -657,6 +657,36 @@ export const PHASE_4_MORPHOLOGY_Y_TO_I_TARGETS: DailyTargetSeed[] = [
   },
 ];
 
+export const PHASE_4_MORPHOLOGY_COMPARE_TARGETS: DailyTargetSeed[] = [
+  {
+    code: "morph_compare_no_change",
+    kidVisibleLabel: "add -er and -est",
+    tutorLabel: "comparative rule: fast → faster → fastest",
+    description: "Phase 4 Morphology target for adding -er (comparative) and -est (superlative) with no change to the base.",
+    introductionOrder: 30,
+    targetPatternsJson: {
+      patterns: ["closed_short_a", "closed_short_e", "closed_short_i", "closed_short_o", "team_ow"],
+      pseudowordPatterns: [],
+      graphemes: ["er", "est"],
+      sound: "morph_compare_no_change",
+      morphologyJson: {
+        rule: "compare",
+        stemPatterns: ["closed_short_a", "closed_short_e", "closed_short_i", "closed_short_o", "team_ow"],
+        comparativeStems: ["fast", "tall", "slow", "soft", "fresh", "thick", "rich"],
+        suffixes: ["er", "est"],
+      },
+    },
+    allowedPatternCodes: ["closed_short_u", "a_e", "i_e", "o_e", "u_e", "e_e"],
+    blockedPatternCodes: [
+      "team_ai", "team_ay", "team_ee", "team_ea", "team_oa", "team_igh", "team_ew", "team_ue",
+      "team_ie_long_i", "team_ie_long_e", "team_oo_long", "team_oo_short", "team_au", "team_aw",
+      "diph_oi", "diph_oy", "diph_ou", "diph_ow", "r_ar", "r_or", "r_er", "r_ir", "r_ur",
+    ],
+    exampleWords: ["fast", "tall", "slow", "soft", "fresh", "thick", "rich"],
+    exampleNonwords: [],
+  },
+];
+
 export const CONTENT_V3_DAILY_TARGETS = [
   ...PHASE_3_TARGETS,
   ...PHASE_4_ENTRY_TARGETS,
@@ -666,6 +696,7 @@ export const CONTENT_V3_DAILY_TARGETS = [
   ...PHASE_4_TEAMS_CLEANUP_TARGETS,
   ...PHASE_4_MORPHOLOGY_TARGETS,
   ...PHASE_4_MORPHOLOGY_Y_TO_I_TARGETS,
+  ...PHASE_4_MORPHOLOGY_COMPARE_TARGETS,
 ];
 
 export const NDL_LICENSE_ATTRIBUTION = {
