@@ -33,7 +33,7 @@ export function MarketingHeader() {
           />
           <span className="flex flex-col leading-none text-synesis-ink">
             <span className="font-display text-[1.9rem] font-black tracking-normal sm:text-[2.2rem]">Sý</span>
-            <span className="-mt-1 font-display text-lg font-black tracking-normal sm:text-xl">Learning</span>
+            <span className="font-display text-lg font-black tracking-normal sm:text-xl">Learning</span>
             <span className="mt-1 text-[0.42rem] font-black uppercase tracking-[0.28em] sm:text-[0.48rem]">Together We Learn</span>
           </span>
         </Link>
