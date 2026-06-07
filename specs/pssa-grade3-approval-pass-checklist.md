@@ -40,3 +40,7 @@ Run AFTER the conventions-vocab normalization AND #4p imports, on a rebuilt appr
 - The 12 deprecated items never appear in the queue (structurally excluded).
 - License fields are all `internal_original/cleared` from import — no attestation flags needed in this pass (the formal commercial-use attestation remains a separate launch-checklist item).
 - This pass is on the disposable dev DB. The same pass repeats on any future production DB — your reasons/notes in `PssaReviewLog` are the rehearsal record.
+
+## Watchlist
+- `pssa_item_g3_reading_24` — does "followed the mural's bus route with a finger" read naturally?
+- `pssa_ms_g3_cart_01` — preserve the multi-select cart watch: both keyed details should be necessary and no third choice should be defensible.

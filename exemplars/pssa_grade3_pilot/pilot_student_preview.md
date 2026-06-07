@@ -238,7 +238,7 @@ What does traced mean as it is used in the mural passage?
 A. painted over the river with blue drips
 B. carried the smallest can past the library
 C. took a picture of sparrows on the wall
-D. kids followed the bus route in the air
+D. followed the mural's bus route with a finger
 
 ## The Cart That Would Not Turn
 
@@ -293,4 +293,3 @@ A. It reminds the class to check wheels before adding heavy paper.
 B. It tells students to add oil before looking at the axle.
 C. It shows that the old handle dent caused the scraping.
 D. It tells students to keep boxes on the bottom shelf.
-

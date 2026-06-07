@@ -461,7 +461,7 @@
   - Evidence: Lane circled that note in purple marker.
 
 ## pssa_item_g3_reading_24
-- Correct answer: D -- kids followed the bus route in the air
+- Correct answer: D -- followed the mural's bus route with a finger
 
 - A. painted over the river with blue drips
   - Wrong section: the narrator paints ripples, but traced describes what two kids do later.
@@ -475,7 +475,7 @@
   - Wrong section: a woman takes a picture; two kids trace the route.
   - Role: wrong_section
   - Evidence: A woman had stopped to take a picture of the sparrows.
-- D. kids followed the bus route in the air
+- D. followed the mural's bus route with a finger
   - Traced means the kids followed the shape of the bus route with their hands.
   - Role: correct
   - Evidence: Two kids traced the bus route in the air.
@@ -559,4 +559,3 @@
   - Wrong emphasis: the manager allows a change but does not narrate the passage.
   - Role: wrong_emphasis
   - Evidence: The cafeteria manager let the class try a small change on Thursday.
-

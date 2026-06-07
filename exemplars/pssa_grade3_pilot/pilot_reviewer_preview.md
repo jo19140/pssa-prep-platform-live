@@ -525,7 +525,7 @@ Audit: PASS
 ### pssa_item_g3_reading_24 (E03.A-V.4.1.2)
 What does traced mean as it is used in the mural passage?
 
-Correct: D — kids followed the bus route in the air
+Correct: D — followed the mural's bus route with a finger
 Audit: PASS
 
 - A. painted over the river with blue drips
@@ -540,7 +540,7 @@ Audit: PASS
   - role: wrong_section
   - evidence: A woman had stopped to take a picture of the sparrows.
   - rationale: Wrong section: a woman takes a picture; two kids trace the route.
-- D. kids followed the bus route in the air
+- D. followed the mural's bus route with a finger
   - role: correct
   - evidence: Two kids traced the bus route in the air.
   - rationale: Traced means the kids followed the shape of the bus route with their hands.
@@ -663,4 +663,3 @@ Audit: PASS
   - role: opposite_claim
   - evidence: First, you would empty the heavy paper boxes from the bottom shelf.
   - rationale: Opposite claim: the first step is emptying the heavy paper boxes.
-
