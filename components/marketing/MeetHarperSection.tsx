@@ -17,7 +17,7 @@ export function MeetHarperSection() {
           <p className="inline-flex rounded-full border border-[#ded4f4] bg-white px-4 py-2 text-xs font-black uppercase tracking-[0.2em] text-synesis-primary shadow-sm">
             MEET HARPER
           </p>
-          <h2 id="meet-harper-heading" className="mt-5 font-serif text-4xl font-black tracking-normal text-synesis-ink sm:text-5xl">
+          <h2 id="meet-harper-heading" className="mt-5 font-serif text-4xl font-bold tracking-normal text-synesis-ink sm:text-5xl">
             Read with Harper. Confidence grows.
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-lg font-medium leading-8 text-synesis-body">
