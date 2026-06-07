@@ -3627,10 +3627,10 @@
         "made marks with paint",
         "held the smallest paint can near the library",
         "looked closely at a picture",
-        "followed the mural route outline"
+        "followed the mural's bus route with a finger"
       ],
       "correctIndex": 3,
-      "correctAnswer": "followed the mural route outline",
+      "correctAnswer": "followed the mural's bus route with a finger",
       "distractorRationalesJson": [
         "Wrong kind of action: traced describes the kids following a route shape, not painting marks.",
         "Plausible misreading: the passage has people holding objects, but traced does not mean held.",
@@ -3645,7 +3645,7 @@
           "made marks with paint",
           "held the smallest paint can",
           "looked closely at a picture",
-        "followed the mural route outline"
+          "followed the mural's bus route with a finger"
         ],
         "leaksAnswer": false
       },
@@ -3725,7 +3725,7 @@
           "distractorRole": "wrong_section"
         },
         {
-          "text": "followed the mural route outline",
+          "text": "followed the mural's bus route with a finger",
           "isCorrect": true,
           "rationale": "Traced means followed the path or outline of something with a finger.",
           "evidenceLinks": [
