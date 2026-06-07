@@ -2,19 +2,21 @@ import fs from "node:fs";
 import path from "node:path";
 import { wordMatchesPattern } from "./passageClassifier";
 
-export type MorphologyRule = "drop_e" | "double" | "y_to_i";
+export type MorphologyRule = "drop_e" | "double" | "y_to_i" | "compare";
 export type MorphologyAnalysisRule = MorphologyRule | "none";
+export type MorphologySuffix = "ing" | "ed" | "s" | "es" | "er" | "est";
 
 export type MorphologyAnalyzerConfig = {
   rule: MorphologyRule;
   stemPatterns: string[];
-  suffixes: Array<"ing" | "ed" | "s" | "es">;
+  suffixes: MorphologySuffix[];
+  comparativeStems?: string[];
 };
 
 export type MorphologyAnalysis = {
   surface: string;
   base: string;
-  suffix: "ing" | "ed" | "s" | "es";
+  suffix: MorphologySuffix;
   rule: MorphologyAnalysisRule;
   basePattern: string;
   verified: true;
@@ -29,7 +31,7 @@ type CmudictEntry = {
 let cmudictCache: Map<string, string[][]> | null = null;
 const cmudictPath = path.resolve("data/phonogram/cmudict.json");
 
-const SUFFIX_ORDER: Array<"ing" | "ed" | "es" | "s"> = ["ing", "ed", "es", "s"];
+const SUFFIX_ORDER: MorphologySuffix[] = ["ing", "est", "ed", "es", "er", "s"];
 const VOWEL_SUFFIXES = new Set(["ing", "ed"]);
 const CONSONANTS = "bcdfghjklmnpqrstvwxyz";
 
@@ -47,11 +49,13 @@ const PATTERN_VOWEL_PHONEMES: Record<string, string> = {
   y_long_i: "AY",
 };
 
-const SUFFIX_ALLOMORPHS: Record<"ing" | "ed" | "s" | "es", string[][]> = {
+const SUFFIX_ALLOMORPHS: Record<MorphologySuffix, string[][]> = {
   ing: [["IH", "NG"], ["AH", "NG"]],
   ed: [["T"], ["D"], ["IH", "D"], ["AH", "D"]],
   s: [["S"], ["Z"], ["IH", "Z"], ["AH", "Z"]],
   es: [["S"], ["Z"], ["IH", "Z"], ["AH", "Z"]],
+  er: [["ER"]],
+  est: [["AH", "S", "T"], ["IH", "S", "T"]],
 };
 
 export function decomposeInflectedWord(surface: string, config: MorphologyAnalyzerConfig): MorphologyAnalysis | null {
@@ -61,6 +65,25 @@ export function decomposeInflectedWord(surface: string, config: MorphologyAnalyz
   for (const suffix of suffixes) {
     if (!normalized.endsWith(suffix) || normalized.length <= suffix.length) continue;
     const rawBase = normalized.slice(0, -suffix.length);
+    if (config.rule === "compare") {
+      const comparativeStems = new Set((config.comparativeStems ?? []).map((stem) => stem.toLowerCase()));
+      if (!comparativeStems.has(rawBase)) continue;
+      if (synthesize(rawBase, suffix, "compare") !== normalized) continue;
+      if (!cmudictPronunciations(rawBase).length) continue;
+      const basePattern = config.stemPatterns.find((pattern) =>
+        wordMatchesPattern(rawBase, pattern, { strictPhonemeLexicon: true })
+      );
+      if (!basePattern) continue;
+      if (!comparePronunciationVerifies(rawBase, normalized, suffix)) continue;
+      return {
+        surface: normalized,
+        base: rawBase,
+        suffix,
+        rule: "compare",
+        basePattern,
+        verified: true,
+      };
+    }
     for (const candidate of candidateStems(rawBase, suffix, config.rule)) {
       if (synthesize(candidate.base, suffix, candidate.rule) !== normalized) continue;
       if (!cmudictPronunciations(candidate.base).length) continue;
@@ -82,7 +105,7 @@ export function decomposeInflectedWord(surface: string, config: MorphologyAnalyz
   return null;
 }
 
-function candidateStems(rawBase: string, suffix: "ing" | "ed" | "s" | "es", lessonRule: MorphologyRule) {
+function candidateStems(rawBase: string, suffix: MorphologySuffix, lessonRule: MorphologyRule) {
   const candidates: Array<{ base: string; rule: MorphologyAnalysisRule }> = [];
   if (lessonRule === "y_to_i") {
     if ((suffix === "ed" || suffix === "es") && rawBase.endsWith("i")) {
@@ -105,7 +128,7 @@ function candidateStems(rawBase: string, suffix: "ing" | "ed" | "s" | "es", less
   return candidates;
 }
 
-function synthesize(base: string, suffix: "ing" | "ed" | "s" | "es", rule: MorphologyAnalysisRule) {
+function synthesize(base: string, suffix: MorphologySuffix, rule: MorphologyAnalysisRule) {
   if (rule === "drop_e") return `${base.slice(0, -1)}${suffix}`;
   if (rule === "double") return `${base}${base.at(-1)}${suffix}`;
   if (rule === "y_to_i") return `${base.slice(0, -1)}i${suffix}`;
@@ -118,12 +141,29 @@ function hasDoubledFinalConsonant(value: string) {
   return last === value.at(-2) && CONSONANTS.includes(last);
 }
 
-function surfacePronunciationVerifies(surface: string, basePattern: string, suffix: "ing" | "ed" | "s" | "es") {
+function surfacePronunciationVerifies(surface: string, basePattern: string, suffix: MorphologySuffix) {
   const expectedVowel = PATTERN_VOWEL_PHONEMES[basePattern];
   if (!expectedVowel) return false;
   return cmudictPronunciations(surface).some((pronunciation) =>
     pronunciation.includes(expectedVowel) && SUFFIX_ALLOMORPHS[suffix].some((ending) => endsWithSequence(pronunciation, ending))
   );
+}
+
+function comparePronunciationVerifies(base: string, surface: string, suffix: MorphologySuffix) {
+  if (suffix !== "er" && suffix !== "est") return false;
+  const basePronunciations = cmudictPronunciations(base);
+  const surfacePronunciations = cmudictPronunciations(surface);
+  return surfacePronunciations.some((surfacePronunciation) =>
+    basePronunciations.some((basePronunciation) =>
+      SUFFIX_ALLOMORPHS[suffix].some((ending) =>
+        arraysEqual(surfacePronunciation, [...basePronunciation, ...ending])
+      )
+    )
+  );
+}
+
+function arraysEqual(left: string[], right: string[]) {
+  return left.length === right.length && left.every((value, index) => value === right[index]);
 }
 
 function endsWithSequence(values: string[], suffix: string[]) {
@@ -172,8 +212,17 @@ export function morphologyConfigFromTargetPatternsJson(json: unknown): Morpholog
   const rule = (morphologyJson as { rule?: unknown }).rule;
   const stemPatterns = (morphologyJson as { stemPatterns?: unknown }).stemPatterns;
   const suffixes = (morphologyJson as { suffixes?: unknown }).suffixes;
-  if (rule !== "drop_e" && rule !== "double" && rule !== "y_to_i") return undefined;
+  const comparativeStems = (morphologyJson as { comparativeStems?: unknown }).comparativeStems;
+  if (rule !== "drop_e" && rule !== "double" && rule !== "y_to_i" && rule !== "compare") return undefined;
   if (!Array.isArray(stemPatterns) || !stemPatterns.every((entry) => typeof entry === "string")) return undefined;
-  if (!Array.isArray(suffixes) || !suffixes.every((entry) => entry === "ing" || entry === "ed" || entry === "s" || entry === "es")) return undefined;
-  return { rule, stemPatterns: stemPatterns as string[], suffixes: suffixes as ("ing" | "ed" | "s" | "es")[] };
+  if (!Array.isArray(suffixes) || !suffixes.every(isMorphologySuffix)) return undefined;
+  if (rule === "compare") {
+    if (!Array.isArray(comparativeStems) || !comparativeStems.every((entry) => typeof entry === "string")) return undefined;
+    return { rule, stemPatterns: stemPatterns as string[], suffixes: suffixes as MorphologySuffix[], comparativeStems: comparativeStems as string[] };
+  }
+  return { rule, stemPatterns: stemPatterns as string[], suffixes: suffixes as MorphologySuffix[] };
+}
+
+function isMorphologySuffix(value: unknown): value is MorphologySuffix {
+  return value === "ing" || value === "ed" || value === "s" || value === "es" || value === "er" || value === "est";
 }
