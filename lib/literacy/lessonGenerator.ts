@@ -86,6 +86,7 @@ export async function buildLessonGeneratorContext(phasePositionId: string, daily
   };
   const targetPatterns = targetPatternsForDailyTarget(dailyTarget);
   const pseudowordPatterns = pseudowordPatternsForDailyTarget(dailyTarget, targetPatterns);
+  const morphology = morphologyConfigFromTargetPatternsJson(dailyTarget.targetPatternsJson);
   const heartWordsPreviewedThisLesson = content.heartWordsPreviewedThisLesson;
   const heartWordsAssumedKnown = content.heartWordsAssumedKnown;
   const vocabularyWords = content.vocabulary;
@@ -103,7 +104,14 @@ export async function buildLessonGeneratorContext(phasePositionId: string, daily
     pseudowordPatterns,
     targetWords: dailyTarget.exampleWords.slice(0, 5),
     reviewWords: content.reviewWords ?? [],
-    pseudowords: canonicalPseudowordsForTargetPatterns(dailyTarget.code, dailyTarget.exampleNonwords, targetPatterns, "content-v3 lesson seed", pseudowordPatterns),
+    pseudowords: canonicalPseudowordsForTargetPatterns(
+      dailyTarget.code,
+      dailyTarget.exampleNonwords,
+      targetPatterns,
+      "content-v3 lesson seed",
+      pseudowordPatterns,
+      { allowNoPseudowords: morphology?.rule === "compare" },
+    ),
     heartWordsPreviewedThisLesson,
     heartWordsAssumedKnown,
     vocabularyWords,
@@ -279,7 +287,11 @@ export function canonicalPseudowordsForTargetPatterns(
   targetPatterns: string[],
   seedLabel = "Phase 3 content",
   pseudowordPatterns = targetPatterns,
+  options: { allowNoPseudowords?: boolean } = {},
 ) {
+  if (options.allowNoPseudowords && seedNonwords.length === 0 && pseudowordPatterns.length === 0) {
+    return [];
+  }
   const firstEight = seedNonwords.slice(0, 8);
   if (firstEight.length >= 8 && firstEight.every((word) => {
     const detected = selectPseudowordPattern(word, pseudowordPatterns);
