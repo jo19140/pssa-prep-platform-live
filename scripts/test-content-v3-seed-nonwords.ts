@@ -16,10 +16,12 @@ function assertInvalid(word: string, targetPattern: string, collidesWith: string
 
 async function main() {
   for (const target of PHASE_3_ENTRY_TARGETS) {
-    assert(
-      target.exampleNonwords.length >= 8,
-      `${target.code} must have at least 8 exampleNonwords; found ${target.exampleNonwords.length}`,
-    );
+    if (!targetRequiresNoPseudowords(target.targetPatternsJson)) {
+      assert(
+        target.exampleNonwords.length >= 8,
+        `${target.code} must have at least 8 exampleNonwords; found ${target.exampleNonwords.length}`,
+      );
+    }
     for (const word of target.exampleNonwords) {
       const result = validatePseudowordCandidate(word, target.code, { strictLexicon: true });
       assert.equal(result.valid, true, `${target.code}/${word} failed: ${result.reason ?? result.issues.join("; ")}`);
@@ -60,6 +62,17 @@ async function main() {
   __setPseudowordLexiconPathsForTest(null);
 
   console.log("content-v3 Phase 3 seed nonword checks passed");
+}
+
+function targetRequiresNoPseudowords(targetPatternsJson: unknown) {
+  if (!targetPatternsJson || typeof targetPatternsJson !== "object" || Array.isArray(targetPatternsJson)) return false;
+  const morphologyJson = (targetPatternsJson as { morphologyJson?: unknown }).morphologyJson;
+  return Boolean(
+    morphologyJson &&
+    typeof morphologyJson === "object" &&
+    !Array.isArray(morphologyJson) &&
+    (morphologyJson as { rule?: unknown }).rule === "compare"
+  );
 }
 
 main().catch((error) => {

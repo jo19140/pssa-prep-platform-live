@@ -1,9 +1,11 @@
+import type { MorphologyAnalyzerConfig } from "@/lib/literacy/morphologyAnalyzer";
+
 export type LessonContentByDailyTarget = {
   demoMode?: "minimal_pairs" | "examples_only" | "transformation_pairs";
   demonstrationPairs?: { closed?: string; base?: string; target: string }[];
   demonstrationExamples?: string[];
   reviewWords?: string[];
-  morphologyJson?: { rule: "drop_e" | "double" | "y_to_i"; stemPatterns: string[]; suffixes: ("ing" | "ed" | "s" | "es")[] };
+  morphologyJson?: MorphologyAnalyzerConfig;
   contrastiveLine2: string[];
   contrastiveLine3: string[];
   sentences: string[];

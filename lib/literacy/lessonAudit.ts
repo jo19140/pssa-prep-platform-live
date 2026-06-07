@@ -193,6 +193,7 @@ function auditPart3(draft: GeneratedLessonDraft) {
   const part = partNumber(draft, 3);
   const lines = Array.isArray(part?.contentJson.contrastiveLines) ? part.contentJson.contrastiveLines as any[] : [];
   const pseudowords = strings(lines.find((line) => line.role === "target_pseudowords")?.words);
+  const compareTarget = morphologyForDraft(draft)?.rule === "compare";
   const validations = pseudowords.map((word) => {
     const detectedPattern = selectPseudowordPattern(word, draft);
     return {
@@ -213,7 +214,14 @@ function auditPart3(draft: GeneratedLessonDraft) {
   return [
     check("LESSON_PART3_CONTRASTIVE_LINES", lines.length === 4 && !lines.some((line) => line.lineNumber === 5), "BLOCKER", "Part 3 must use four contrastive lines and no fifth line."),
     check("LESSON_PART3_REAL_WORD_COUNT", realWords.length >= 15 && realWords.length <= 20, "BLOCKER", `Part 3 lines 1-3 have ${realWords.length} real words (need 15-20).`),
-    check("LESSON_PART3_PSEUDOWORD_COUNT", pseudowords.length >= 8 && pseudowords.length <= 10, "BLOCKER", `Part 3 has ${pseudowords.length} pseudowords (need 8-10).`),
+    check(
+      "LESSON_PART3_PSEUDOWORD_COUNT",
+      compareTarget ? pseudowords.length === 0 : pseudowords.length >= 8 && pseudowords.length <= 10,
+      "BLOCKER",
+      compareTarget
+        ? `Compare morphology targets carry no pseudowords; Part 3 has ${pseudowords.length}.`
+        : `Part 3 has ${pseudowords.length} pseudowords (need 8-10).`,
+    ),
     check("LESSON_PSEUDOWORDS_TARGET_ONLY", validations.every((entry) => entry.validation && detectPatternCandidates(entry.validation.pseudoword).includes(entry.validation.targetPattern)), "BLOCKER", "Part 3 pseudowords must use only the configured pseudoword target patterns."),
     check("LESSON_PSEUDOWORDS_IN_TARGET_SET", outOfTargetSet.length === 0, "BLOCKER", outOfTargetSet.length ? `Pseudowords outside target set: ${outOfTargetSet.map((entry) => `${entry.validation?.pseudoword ?? "unknown"}(${entry.detectedPattern ?? "none"})`).join(", ")}` : "Pseudowords detect to the target pattern set."),
     check("LESSON_PSEUDOWORDS_HAVE_EXPECTED_PRONUNCIATION", validations.every((entry) => entry.validation?.expectedPronunciation), "BLOCKER", "Pseudowords require expectedPronunciation metadata."),
@@ -260,8 +268,16 @@ function auditPart5(draft: GeneratedLessonDraft) {
 
 function rControlledViolations(sentences: string[], draft: GeneratedLessonDraft): string[] {
   const activeRTargets = rControlledTargetPatterns(draft);
+  const morphology = morphologyForDraft(draft);
   return rControlledWords(sentences)
-    .filter((word) => activeRTargets.length === 0 || !matchesDeclaredRTarget(word, activeRTargets));
+    .filter((word) => {
+      if (activeRTargets.length > 0 && matchesDeclaredRTarget(word, activeRTargets)) return false;
+      if (morphology?.rule === "compare") {
+        const analysis = decomposeInflectedWord(word, morphology);
+        if (analysis?.rule === "compare") return false;
+      }
+      return true;
+    });
 }
 
 function rControlledTargetPatterns(draft: GeneratedLessonDraft) {
