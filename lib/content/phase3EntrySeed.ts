@@ -84,6 +84,16 @@ export const PHASE_4_MORPHOLOGY = {
   prerequisites: ["PHASE_4_TEAMS_CLEANUP"],
 };
 
+export const PHASE_4_MORPHOLOGY_Y_TO_I = {
+  phaseNumber: 4,
+  subPosition: "MORPHOLOGY_Y_TO_I",
+  label: "Phase 4 Morphology y to i",
+  phonicsTrack:
+    "No new phonics target; applies the y-to-i spelling rule to already-taught final-y long-i stems.",
+  morphologyTrack: "Change y to i before -ed and -es; keep y before -ing.",
+  prerequisites: ["PHASE_4_MORPHOLOGY"],
+};
+
 export type DailyTargetSeed = {
   code: string;
   kidVisibleLabel: string;
@@ -601,6 +611,52 @@ export const PHASE_4_MORPHOLOGY_TARGETS: DailyTargetSeed[] = [
   },
 ];
 
+export const PHASE_4_MORPHOLOGY_Y_TO_I_TARGETS: DailyTargetSeed[] = [
+  {
+    code: "morph_y_to_i",
+    kidVisibleLabel: "change y to i",
+    tutorLabel: "y to i rule: cry → cried, fly → flies",
+    description: "Phase 4 Morphology target for changing final y to i before -ed and -es while keeping y before -ing.",
+    introductionOrder: 29,
+    targetPatternsJson: {
+      patterns: ["y_long_i"],
+      pseudowordPatterns: ["y_long_i"],
+      graphemes: ["y"],
+      sound: "morph_y_to_i",
+      morphologyJson: { rule: "y_to_i", stemPatterns: ["y_long_i"], suffixes: ["ed", "es", "ing"] },
+    },
+    allowedPatternCodes: ["closed_short_a", "closed_short_i", "closed_short_o", "closed_short_u", "closed_short_e", "a_e", "i_e", "o_e", "u_e", "e_e"],
+    blockedPatternCodes: [
+      "team_ai",
+      "team_ay",
+      "team_ee",
+      "team_ea",
+      "team_oa",
+      "team_igh",
+      "team_ew",
+      "team_ue",
+      "team_ie_long_i",
+      "team_ie_long_e",
+      "team_ow",
+      "team_oo_long",
+      "team_oo_short",
+      "team_au",
+      "team_aw",
+      "diph_oi",
+      "diph_oy",
+      "diph_ou",
+      "diph_ow",
+      "r_ar",
+      "r_or",
+      "r_er",
+      "r_ir",
+      "r_ur",
+    ],
+    exampleWords: ["cry", "try", "fly", "dry", "spy", "fry", "shy", "sky"],
+    exampleNonwords: ["cly", "sny", "gly", "zy", "smy", "vry", "zby", "gry"],
+  },
+];
+
 export const CONTENT_V3_DAILY_TARGETS = [
   ...PHASE_3_TARGETS,
   ...PHASE_4_ENTRY_TARGETS,
@@ -609,6 +665,7 @@ export const CONTENT_V3_DAILY_TARGETS = [
   ...PHASE_4_DIPHTHONG_TARGETS,
   ...PHASE_4_TEAMS_CLEANUP_TARGETS,
   ...PHASE_4_MORPHOLOGY_TARGETS,
+  ...PHASE_4_MORPHOLOGY_Y_TO_I_TARGETS,
 ];
 
 export const NDL_LICENSE_ATTRIBUTION = {

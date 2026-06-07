@@ -3,7 +3,7 @@ export type LessonContentByDailyTarget = {
   demonstrationPairs?: { closed?: string; base?: string; target: string }[];
   demonstrationExamples?: string[];
   reviewWords?: string[];
-  morphologyJson?: { rule: "drop_e" | "double"; stemPatterns: string[]; suffixes: ("ing" | "ed" | "s" | "es")[] };
+  morphologyJson?: { rule: "drop_e" | "double" | "y_to_i"; stemPatterns: string[]; suffixes: ("ing" | "ed" | "s" | "es")[] };
   contrastiveLine2: string[];
   contrastiveLine3: string[];
   sentences: string[];
@@ -931,6 +931,41 @@ export const LESSON_CONTENT_BY_DAILY_TARGET: Record<string, LessonContentByDaily
     mockPassageTitle: "The Hopping Pup",
     fullAuditPassageText: `Tim has a pup. His pup is Rex. Rex sat at the gate at six. Tim grabbed the strap and they set off. Rex was hopping at a bug on the path. The bug zipped off in the grass. A frog was sitting on a log. Rex stopped and sat still. The frog hopped off the log and was gone. Rex wagged and wagged. "What a fine pup," said Tim. Tim patted him on the back. They jogged home in the dusk. Rex napped on his rug. Rex had fun running with Tim.`,
     fullAuditPassageTitle: "The Hopping Pup",
+  },
+  morph_y_to_i: {
+    demoMode: "transformation_pairs",
+    morphologyJson: { rule: "y_to_i", stemPatterns: ["y_long_i"], suffixes: ["ed", "es", "ing"] },
+    demonstrationPairs: [
+      { base: "cry", target: "cried" },
+      { base: "try", target: "tried" },
+      { base: "fly", target: "flies" },
+      { base: "dry", target: "dries" },
+    ],
+    contrastiveLine2: ["cry", "cried", "try", "tried", "fly", "flies", "dry", "dries"],
+    contrastiveLine3: ["spy", "sky", "shy", "lake", "hand", "desk", "home"],
+    sentences: [
+      "Sky tried to fly the kite.",
+      "The bug flies up.",
+      "Sky did not cry.",
+      "Dad spied a fox in the den.",
+      "The mud dries in the sun.",
+      "\"Sky cries a lot,\" said Mom.",
+    ],
+    dictatedWords: ["cried", "tried", "flies", "dries", "cries", "crying"],
+    dictatedSentences: ["Sky tried to fly the kite.", "The mud dries in the sun."],
+    comprehensionQuestions: [
+      { question: "How can you tell Sky kept trying?", questionType: "inference" },
+      { question: "What did Dad spy in the den?", questionType: "literal" },
+      { question: "Tell me how Sky got the kite to fly.", questionType: "retell" },
+      { question: "What would you try to fly?", questionType: "personal_connection" },
+    ],
+    heartWordsPreviewedThisLesson: sharedHeartWordsPreviewedThisLesson,
+    heartWordsAssumedKnown: sharedHeartWordsAssumedKnown,
+    vocabulary: ["gust", "den"],
+    mockPassageText: `Sky had a red kite. Sky tried to make it fly. The kite did not fly yet. Sky did not cry. Sky tried a lot. Then it flies up. Sky cried a glad cry. It was a fine try.`,
+    mockPassageTitle: "Sky and the Kite",
+    fullAuditPassageText: `Sky had a red kite. Sky tried to make it fly. The kite did not fly yet. Sky did not cry. Sky tried a lot. Then a gust came. The kite rose up fast. It flies! The kite flies up in the sky. Sky cried a glad cry. Dad spied the kite up on the hill. Mom came up to help. The kite dips, then flies up. They had a fine time. Sky kept trying fun tricks. The mud dries on the kite. It was a fine try.`,
+    fullAuditPassageTitle: "Sky and the Kite",
   },
 };
 
