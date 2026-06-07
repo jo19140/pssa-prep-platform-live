@@ -2,13 +2,13 @@ import assert from "assert/strict";
 import fs from "node:fs";
 import path from "node:path";
 import { LESSON_CONTENT_BY_DAILY_TARGET, phase3EntryLessonContentFor } from "../lib/content/phase3EntryLessonContent";
-import { CONTENT_V3_DAILY_TARGETS, PHASE_3_MID_TARGETS, PHASE_4_ENTRY_TARGETS, PHASE_4_MID_TARGETS, PHASE_4_RCONTROLLED_TARGETS, PHASE_4_DIPHTHONG_TARGETS, PHASE_4_TEAMS_CLEANUP_TARGETS, PHASE_4_MORPHOLOGY_TARGETS, PHASE_4_MORPHOLOGY_Y_TO_I_TARGETS } from "../lib/content/phase3EntrySeed";
+import { CONTENT_V3_DAILY_TARGETS, PHASE_3_MID_TARGETS, PHASE_4_ENTRY_TARGETS, PHASE_4_MID_TARGETS, PHASE_4_RCONTROLLED_TARGETS, PHASE_4_DIPHTHONG_TARGETS, PHASE_4_TEAMS_CLEANUP_TARGETS, PHASE_4_MORPHOLOGY_TARGETS, PHASE_4_MORPHOLOGY_Y_TO_I_TARGETS, PHASE_4_MORPHOLOGY_COMPARE_TARGETS } from "../lib/content/phase3EntrySeed";
 import { auditGeneratedLessonDraft, evaluateLessonApprovalReadiness, type GeneratedLessonDraft } from "../lib/literacy/lessonAudit";
 import { generateLessonDraft } from "../lib/literacy/lessonGenerator";
 import type { GeneratedLessonPart, LessonGeneratorContext } from "../lib/literacy/lessonParts/types";
 import { auditPassage, decodabilityThresholdForPhase } from "../lib/literacy/passageAudit";
 import { classifyPassageWords, wordMatchesPattern } from "../lib/literacy/passageClassifier";
-import { morphologyConfigFromTargetPatternsJson } from "../lib/literacy/morphologyAnalyzer";
+import { decomposeInflectedWord, morphologyConfigFromTargetPatternsJson } from "../lib/literacy/morphologyAnalyzer";
 import { detectPatternCandidates, detectVcePattern, homophoneVariants, validatePseudowordCandidate } from "../lib/literacy/pseudowordValidator";
 
 // EXACT and MINIMAL per-target caveat list: pseudowords that collide with CMUdict
@@ -57,11 +57,12 @@ function buildContextFromRealSeed(targetCode: string): LessonGeneratorContext {
   const isPhase4TeamsCleanup = PHASE_4_TEAMS_CLEANUP_TARGETS.some((target) => target.code === targetCode);
   const isPhase4Morphology = PHASE_4_MORPHOLOGY_TARGETS.some((target) => target.code === targetCode);
   const isPhase4MorphologyYToI = PHASE_4_MORPHOLOGY_Y_TO_I_TARGETS.some((target) => target.code === targetCode);
-  const isPhase4 = isPhase4Entry || isPhase4Mid || isPhase4RControlled || isPhase4Diphthong || isPhase4TeamsCleanup || isPhase4Morphology || isPhase4MorphologyYToI;
+  const isPhase4MorphologyCompare = PHASE_4_MORPHOLOGY_COMPARE_TARGETS.some((target) => target.code === targetCode);
+  const isPhase4 = isPhase4Entry || isPhase4Mid || isPhase4RControlled || isPhase4Diphthong || isPhase4TeamsCleanup || isPhase4Morphology || isPhase4MorphologyYToI || isPhase4MorphologyCompare;
   const phasePosition = {
-    id: isPhase4MorphologyYToI ? "phase-4-morphology-y-to-i" : isPhase4Morphology ? "phase-4-morphology" : isPhase4TeamsCleanup ? "phase-4-teams-cleanup" : isPhase4Diphthong ? "phase-4-diphthong" : isPhase4RControlled ? "phase-4-rcontrolled" : isPhase4Mid ? "phase-4-mid" : isPhase4Entry ? "phase-4-entry" : isMid ? "phase-3-mid" : "phase-3-entry",
+    id: isPhase4MorphologyCompare ? "phase-4-morphology-compare" : isPhase4MorphologyYToI ? "phase-4-morphology-y-to-i" : isPhase4Morphology ? "phase-4-morphology" : isPhase4TeamsCleanup ? "phase-4-teams-cleanup" : isPhase4Diphthong ? "phase-4-diphthong" : isPhase4RControlled ? "phase-4-rcontrolled" : isPhase4Mid ? "phase-4-mid" : isPhase4Entry ? "phase-4-entry" : isMid ? "phase-3-mid" : "phase-3-entry",
     phaseNumber: isPhase4 ? 4 : 3,
-    label: isPhase4MorphologyYToI ? "Phase 4 Morphology y to i" : isPhase4Morphology ? "Phase 4 Morphology Entry A" : isPhase4TeamsCleanup ? "Phase 4 Teams Cleanup" : isPhase4Diphthong ? "Phase 4 Diphthong Entry" : isPhase4RControlled ? "Phase 4 R-Controlled Entry" : isPhase4Mid ? "Phase 4 Mid" : isPhase4Entry ? "Phase 4 Entry" : isMid ? "Phase 3 Mid" : "Phase 3 Entry",
+    label: isPhase4MorphologyCompare ? "Phase 4 Morphology Compare" : isPhase4MorphologyYToI ? "Phase 4 Morphology y to i" : isPhase4Morphology ? "Phase 4 Morphology Entry A" : isPhase4TeamsCleanup ? "Phase 4 Teams Cleanup" : isPhase4Diphthong ? "Phase 4 Diphthong Entry" : isPhase4RControlled ? "Phase 4 R-Controlled Entry" : isPhase4Mid ? "Phase 4 Mid" : isPhase4Entry ? "Phase 4 Entry" : isMid ? "Phase 3 Mid" : "Phase 3 Entry",
   };
   const dailyTarget = { id: `target-${targetCode}`, ...seedTarget, targetPatternsJson: seedTarget.targetPatternsJson as any };
   const targetPatterns = targetPatternsFor(seedTarget);
@@ -120,7 +121,11 @@ function assertGeneratedLessonAgainstIndependentOracles(draft: GeneratedLessonDr
   const realWords = realWordLines.flatMap((line) => line.words);
   const pseudowords = lines.find((line) => line.role === "target_pseudowords")?.words ?? [];
   assert(realWords.length >= 15 && realWords.length <= 20, `Part 3 real-word count should be 15-20, found ${realWords.length}`);
-  assert(pseudowords.length >= 8 && pseudowords.length <= 10, `Part 3 pseudoword count should be 8-10, found ${pseudowords.length}`);
+  if (draft.morphology?.rule === "compare") {
+    assert.equal(pseudowords.length, 0, "Compare targets intentionally have no Part 3 pseudowords");
+  } else {
+    assert(pseudowords.length >= 8 && pseudowords.length <= 10, `Part 3 pseudoword count should be 8-10, found ${pseudowords.length}`);
+  }
   const lineClassification = classifyPassageWords(realWords.join(" "), classificationContext(ctx));
   assert.equal(lineClassification.unclassifiedWords.length, 0, `Part 3 real lines have unclassified words: ${lineClassification.unclassifiedWords.join(", ")}`);
   assert.equal(lineClassification.blockedPatternViolations.length, 0, `Part 3 real lines have blocked patterns: ${JSON.stringify(lineClassification.blockedPatternViolations)}`);
@@ -159,11 +164,15 @@ function assertGeneratedLessonAgainstIndependentOracles(draft: GeneratedLessonDr
   assert.equal(part5Classification.unclassifiedWords.length, 0, `Part 5 has unclassified words: ${part5Classification.unclassifiedWords.join(", ")}`);
   assert.equal(part5Classification.blockedPatternViolations.length, 0, `Part 5 has blocked patterns: ${JSON.stringify(part5Classification.blockedPatternViolations)}`);
   const part5RControlledWords = rControlledWords(strings(part5.contentJson.sentences));
+  const compareRControlledWords = draft.morphology?.rule === "compare"
+    ? part5RControlledWords.filter((word) => decomposeInflectedWord(word, draft.morphology!)?.rule === "compare")
+    : [];
+  const unexpectedPart5RControlledWords = part5RControlledWords.filter((word) => !compareRControlledWords.includes(word));
   if (ctx.targetPatterns.some((pattern) => pattern.startsWith("r_"))) {
-    const offTarget = part5RControlledWords.filter((word) => !ctx.targetPatterns.some((pattern) => wordMatchesPattern(word, pattern, { strictPhonemeLexicon: true })));
+    const offTarget = unexpectedPart5RControlledWords.filter((word) => !ctx.targetPatterns.some((pattern) => wordMatchesPattern(word, pattern, { strictPhonemeLexicon: true })));
     assert.deepEqual(offTarget, [], `Part 5 contains off-target r-controlled words: ${offTarget.join(", ")}`);
   } else {
-    assert.equal(part5RControlledWords.length, 0, "Part 5 contains r-controlled words.");
+    assert.equal(unexpectedPart5RControlledWords.length, 0, "Part 5 contains r-controlled words.");
   }
 
   const passageText = String(part7.contentJson.passageText ?? "");

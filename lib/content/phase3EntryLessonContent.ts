@@ -969,6 +969,48 @@ export const LESSON_CONTENT_BY_DAILY_TARGET: Record<string, LessonContentByDaily
     fullAuditPassageText: `Sky had a red kite. Sky tried to make it fly. The kite did not fly yet. Sky did not cry. Sky tried a lot. Then a gust came. The kite rose up fast. It flies! The kite flies up in the sky. Sky cried a glad cry. Dad spied the kite up on the hill. Mom came up to help. The kite dips, then flies up. They had a fine time. Sky kept trying fun tricks. The mud dries on the kite. It was a fine try.`,
     fullAuditPassageTitle: "Sky and the Kite",
   },
+  morph_compare_no_change: {
+    demoMode: "transformation_pairs",
+    morphologyJson: {
+      rule: "compare",
+      stemPatterns: ["closed_short_a", "closed_short_e", "closed_short_i", "closed_short_o", "team_ow"],
+      comparativeStems: ["fast", "tall", "slow", "soft", "fresh", "thick", "rich"],
+      suffixes: ["er", "est"],
+    },
+    reviewWords: ["lake", "home", "bike", "cube", "gate", "five"],
+    demonstrationPairs: [
+      { base: "fast", target: "faster" },
+      { base: "soft", target: "softer" },
+      { base: "thick", target: "thicker" },
+      { base: "slow", target: "slowest" },
+      { base: "tall", target: "tallest" },
+    ],
+    contrastiveLine2: ["fast", "faster", "soft", "softer", "thick", "thicker", "slow", "slowest"],
+    contrastiveLine3: ["tall", "taller", "fresh", "fresher", "rich", "richer"],
+    sentences: [
+      "The cat can run faster than the pup.",
+      "The pup naps on the softer mat.",
+      "The pond mud is thicker.",
+      "The slug is the slowest bug.",
+      "Sam has the fresher snack.",
+      "That hill is the tallest.",
+    ],
+    dictatedWords: ["faster", "softer", "thicker", "slower", "fastest", "softest"],
+    dictatedSentences: ["The cat can run faster.", "That hill is the tallest."],
+    comprehensionQuestions: [
+      { question: "How can you tell the cat is faster than the pup?", questionType: "inference" },
+      { question: "What does the cat nap on?", questionType: "literal" },
+      { question: "Tell me how Sam's pets are different.", questionType: "retell" },
+      { question: "What pet would you like?", questionType: "personal_connection" },
+    ],
+    heartWordsPreviewedThisLesson: sharedHeartWordsPreviewedThisLesson,
+    heartWordsAssumedKnown: sharedHeartWordsAssumedKnown,
+    vocabulary: ["slug", "pond"],
+    mockPassageText: `Sam has a cat and a pup. The pup can run fast. The cat can run faster. The cat is fastest. The pup sits on a soft mat. The cat naps on a softer mat. The softest mat is a hit.`,
+    mockPassageTitle: "Sam and His Pets",
+    fullAuditPassageText: `Sam has a cat and a pup. The pup can run fast. The cat can run faster. The cat is fastest. The pup sits on a soft mat. The cat naps on a softer mat. The softest mat is a hit. Sam spots a slug. The slug is slow. It gets slower. It is the slowest. Sam digs in thick mud. The pond mud is thicker. The thickest mud is a mess. At lunch, Sam has fresh ham. The next snack is fresher. Sam grins and naps in the sun.`,
+    fullAuditPassageTitle: "Sam and His Pets",
+  },
 };
 
 export const PHASE_3_ENTRY_LESSON_CONTENT = LESSON_CONTENT_BY_DAILY_TARGET;

@@ -1,6 +1,6 @@
 import assert from "assert/strict";
 import fs from "node:fs";
-import { LESSON_CONTENT_BY_DAILY_TARGET, phase3EntryLessonContentFor } from "../lib/content/phase3EntryLessonContent";
+import { phase3EntryLessonContentFor } from "../lib/content/phase3EntryLessonContent";
 import {
   CONTENT_V3_DAILY_TARGETS,
   PHASE_3_MID_TARGETS,
@@ -14,26 +14,34 @@ import {
   PHASE_4_TEAMS_CLEANUP_TARGETS,
 } from "../lib/content/phase3EntrySeed";
 import { auditGeneratedLessonDraft, type GeneratedLessonDraft } from "../lib/literacy/lessonAudit";
-import { generateLessonDraft } from "../lib/literacy/lessonGenerator";
+import { canonicalPseudowordsForTargetPatterns, generateLessonDraft } from "../lib/literacy/lessonGenerator";
+import { generatePart1Warmup } from "../lib/literacy/lessonParts/part1Warmup";
 import { generatePart2Concept } from "../lib/literacy/lessonParts/part2Concept";
 import type { LessonGeneratorContext } from "../lib/literacy/lessonParts/types";
 import { decomposeInflectedWord, morphologyConfigFromTargetPatternsJson, type MorphologyAnalyzerConfig } from "../lib/literacy/morphologyAnalyzer";
 import { auditPassage } from "../lib/literacy/passageAudit";
-import { classifyPassageWords, type WordAuditEntry } from "../lib/literacy/passageClassifier";
-import { detectPatternCandidates, validatePseudowordCandidate } from "../lib/literacy/pseudowordValidator";
+import type { WordAuditEntry } from "../lib/literacy/passageClassifier";
 
-const TARGET_CODE = "morph_y_to_i";
+const TARGET_CODE = "morph_compare_no_change";
+const EXPECTED_MORPHOLOGY: MorphologyAnalyzerConfig = {
+  rule: "compare",
+  stemPatterns: ["closed_short_a", "closed_short_e", "closed_short_i", "closed_short_o", "team_ow"],
+  comparativeStems: ["fast", "tall", "slow", "soft", "fresh", "thick", "rich"],
+  suffixes: ["er", "est"],
+};
 
 async function main() {
   const ctx = lessonContext(TARGET_CODE);
   const morphology = requiredMorphology(ctx);
-  assert.deepEqual(morphology, { rule: "y_to_i", stemPatterns: ["y_long_i"], suffixes: ["ed", "es", "ing"] });
+  assert.deepEqual(morphology, EXPECTED_MORPHOLOGY);
+  assert.deepEqual(ctx.pseudowords, [], "compare context must route through resolver and return []");
 
   const draft = await generateLessonDraft(ctx, { recordDecision: async (_ctx, fn) => (await fn()).output });
   assert.deepEqual(draft.morphology, morphology);
   const draftAudit = auditGeneratedLessonDraft(draft);
   assert.equal(draftAudit.canPersist, true, draftAudit.blockers.join("\n"));
   assert.equal(checkResult(draft, "LESSON_MORPHOLOGY_TARGET_COVERAGE"), "PASS");
+  assert.equal(checkResult(draft, "LESSON_PART3_PSEUDOWORD_COUNT"), "PASS");
 
   const content = phase3EntryLessonContentFor(TARGET_CODE);
   const fullAudit = auditPassage(content.fullAuditPassageText!, passageContext(ctx));
@@ -44,16 +52,26 @@ async function main() {
   assert.equal(shortAudit.quality.passesQualityGate, true, `${TARGET_CODE} short passage must pass quality audit`);
   assertStyleSweep(content);
 
+  const part1 = generatePart1Warmup(ctx);
+  assert.deepEqual(part1.contentJson.warmupWords, ["lake", "home", "bike", "cube", "gate", "five"]);
+  assert.equal(auditGeneratedLessonDraft({ ...draft, parts: replacePart(draft, 1, part1) }).checks.find((check) => check.ruleId === "LESSON_WARMUP_NO_TODAY_PATTERN")?.result, "PASS");
+
   const part2 = generatePart2Concept(ctx);
   assert.deepEqual(part2.contentJson.morphologyJson, content.morphologyJson, "Part 2 must mirror content morphologyJson through the real producer path");
+  assert.equal(part2.contentJson.demoMode, "transformation_pairs");
+
+  const part3 = draft.parts.find((part) => part.partNumber === 3);
+  const pseudowordLine = (part3?.contentJson.contrastiveLines as Array<{ role: string; words: string[] }>).find((line) => line.role === "target_pseudowords");
+  assert(pseudowordLine, "Part 3 must include target_pseudowords line");
+  assert.deepEqual(pseudowordLine.words, []);
 
   const part7 = draft.parts.find((part) => part.partNumber === 7);
   assert.equal(part7?.contentJson.passageText, content.fullAuditPassageText, "Part 7 must render fullAuditPassageText for Phase 4");
 
-  const pseudowordRows = assertPseudowords(ctx);
-  const ruleRows = assertRuleMatrix(ctx, morphology, fullAudit.words);
+  const evidenceRows = assertMorphologyEvidence(fullAudit.words);
+  const bareRows = assertBareStemReview(fullAudit.words);
+  const adversarialRows = assertAdversarialFixtures(draft, morphology);
   const coverageRows = assertDegenerateCoverage(draft);
-  const collisionRows = assertIeCollision(morphology);
   const priorRows = await assertPriorTargetsUnchanged();
   assertOracleIntegrity();
 
@@ -68,118 +86,70 @@ async function main() {
     String(draftAudit.canPersist).toUpperCase(),
     checkResult(draft, "LESSON_MORPHOLOGY_TARGET_COVERAGE"),
   ]]);
-  printTable("target | word | pattern | pronunciation | result", pseudowordRows);
-  printTable("context | surface | base | suffix | rule | classification", ruleRows);
+  printTable("resolver | target | result", [[TARGET_CODE, "canonicalPseudowordsForTargetPatterns", JSON.stringify(ctx.pseudowords)]]);
+  printTable("morphology evidence | surface | base | suffix | rule", evidenceRows);
+  printTable("bare stem review | surface | morphology | result", bareRows);
+  printTable("adversarial | fixture | result", adversarialRows);
   printTable("coverage regression | detail | result", coverageRows);
-  printTable("ie collision | context | word | result", collisionRows);
   printTable("producer path | assertion | result", [
+    ["Part 1 warmup override", JSON.stringify(part1.contentJson.warmupWords), "PASS"],
     ["Part 2 morphologyJson mirror", JSON.stringify(part2.contentJson.morphologyJson), "PASS"],
+    ["Part 3 target_pseudowords", JSON.stringify(pseudowordLine.words), "PASS"],
     ["Part 7 fullAuditPassageText", content.fullAuditPassageTitle ?? "", "PASS"],
   ]);
   printTable("prior target invariance | probe | result", priorRows);
   console.log("ORACLE INTEGRITY | PASS | zero new caveats, no validator-valid fallback, existing caveats unchanged");
-  console.log("content-v3 Phase 4 Morphology y-to-i checks passed");
+  console.log("content-v3 Phase 4 Morphology compare checks passed");
 }
 
-function assertPseudowords(ctx: LessonGeneratorContext) {
+function assertMorphologyEvidence(words: WordAuditEntry[]) {
   const rows: string[][] = [];
-  for (const word of ctx.pseudowords) {
-    const pattern = selectPseudowordPattern(word, ctx.pseudowordPatterns);
-    assert.equal(pattern, "y_long_i", `${word} must detect y_long_i`);
-    const validation = validatePseudowordCandidate(word, pattern, { strictLexicon: true });
-    assert.equal(validation.valid, true, `${word} failed: ${validation.reason ?? validation.issues.join(", ")}`);
-    rows.push([TARGET_CODE, word, pattern, validation.expectedPronunciation ?? "", "PASS"]);
+  for (const surface of ["faster", "fastest", "softer", "softest", "slower", "slowest", "thicker", "thickest", "fresher"]) {
+    const entries = words.filter((entry) => entry.word.toLowerCase() === surface);
+    assert(entries.length > 0, `Expected ${surface} in full passage audit`);
+    const evidence = entries.find((entry) => entry.morphology?.rule === "compare");
+    assert(evidence, `${surface} must audit as compare`);
+    rows.push([surface, evidence.morphology?.base ?? "", evidence.morphology?.suffix ?? "", evidence.morphology?.rule ?? ""]);
   }
-
-  const fy = validatePseudowordCandidate("fy", "y_long_i", { strictLexicon: true });
-  assert.equal(fy.valid, false, "fy must reject as a homophone collision");
-  assert(fy.collidesWith, "fy rejection must name a collision");
-  rows.push([TARGET_CODE, "fy", "y_long_i", fy.expectedPronunciation ?? "", `REJECT ${fy.collidesWith}`]);
-
-  const bly = validatePseudowordCandidate("bly", "y_long_i", { strictLexicon: true });
-  assert.equal(bly.valid, false, "bly must reject as a raw/direct CMUdict hit");
-  assert.equal(bly.collidesWith, "bly");
-  rows.push([TARGET_CODE, "bly", "y_long_i", bly.expectedPronunciation ?? "", `REJECT ${bly.collidesWith}`]);
   return rows;
 }
 
-function assertRuleMatrix(ctx: LessonGeneratorContext, morphology: MorphologyAnalyzerConfig, passageWords: WordAuditEntry[]) {
+function assertBareStemReview(words: WordAuditEntry[]) {
   const rows: string[][] = [];
-  for (const word of ["cried", "tried", "dried", "flies", "cries", "dries"]) {
-    const analysis = decomposeInflectedWord(word, morphology);
-    assert(analysis, `${word} must decompose`);
-    assert.equal(analysis.rule, "y_to_i");
-    const entry = classifiedEntry(word, ctx);
-    assert.equal(entry.category, "target");
-    assert.equal(entry.morphology?.rule, "y_to_i");
-    rows.push(["rule evidence", word, analysis.base, analysis.suffix, analysis.rule, "target"]);
+  for (const surface of ["fast", "soft", "slow", "thick", "fresh"]) {
+    const entries = words.filter((entry) => entry.word.toLowerCase() === surface);
+    assert(entries.length > 0, `Expected bare stem ${surface} in full passage audit`);
+    assert(entries.every((entry) => entry.morphology?.rule !== "compare"), `${surface} must not count as compare evidence`);
+    rows.push([surface, "not compare", "PASS"]);
   }
-  for (const word of ["crying", "trying", "flying", "drying"]) {
-    const analysis = decomposeInflectedWord(word, morphology);
-    assert(analysis, `${word} must decompose as keeps-y`);
-    assert.equal(analysis.rule, "none");
-    const entry = classifiedEntry(word, ctx);
-    assert.notEqual(entry.morphology?.rule, "y_to_i");
-    rows.push(["keeps-y review", word, analysis.base, analysis.suffix, analysis.rule, entry.category]);
-  }
+  return rows;
+}
 
-  const expectedPassageMorphology = new Map([
-    ["tried", "y_to_i"],
-    ["flies", "y_to_i"],
-    ["cried", "y_to_i"],
-    ["spied", "y_to_i"],
-    ["trying", "none"],
-    ["dries", "y_to_i"],
-  ]);
-  for (const [surface, rule] of expectedPassageMorphology) {
-    const entries = passageWords.filter((word) => word.word.toLowerCase() === surface);
-    assert(entries.length > 0, `Expected ${surface} in full passage audit`);
-    assert(entries.some((entry) => entry.morphology?.rule === rule), `${surface} must audit as ${rule}`);
+function assertAdversarialFixtures(draft: GeneratedLessonDraft, morphology: MorphologyAnalyzerConfig) {
+  const rows: string[][] = [];
+  for (const word of ["after", "teacher", "bigger", "nicer"]) {
+    assert.equal(decomposeInflectedWord(word, morphology), null, `${word} must not decompose as compare`);
   }
+  const afterTeacher = injectPassage(draft, "The faster cat ran after the teacher.");
+  assert.equal(checkResult(afterTeacher, "LESSON_PHASE3_NO_RCONTROLLED"), "FAIL");
+  rows.push(["after/teacher", "LESSON_PHASE3_NO_RCONTROLLED FAIL + null decomposition", "PASS"]);
+
+  const biggerNicer = injectPassage(draft, "The bigger cat sat on a nicer mat.");
+  assert.equal(checkResult(biggerNicer, "LESSON_PHASE3_NO_RCONTROLLED"), "FAIL");
+  rows.push(["bigger/nicer", "LESSON_PHASE3_NO_RCONTROLLED FAIL + null decomposition", "PASS"]);
   return rows;
 }
 
 function assertDegenerateCoverage(draft: GeneratedLessonDraft) {
-  const degenerate = mutateDraftForKeepsYOnly(draft);
+  const degenerate = mutateDraftForBareStemsOnly(draft);
   const result = checkResult(degenerate, "LESSON_MORPHOLOGY_TARGET_COVERAGE");
-  assert.equal(result, "FAIL", "keeps-y-only evidence must fail morphology coverage");
-  return [["keeps-y only", "crying, trying, flying, drying", result]];
-}
-
-function assertIeCollision(morphology: MorphologyAnalyzerConfig) {
-  const rows: string[][] = [];
-  for (const word of ["cried", "flies"]) {
-    const inLesson = classifyPassageWords(word, {
-      targetPatternCodes: ["y_long_i"],
-      allowedPatternCodes: [],
-      blockedPatternCodes: ["team_ie_long_i"],
-      heartWords: [],
-      vocabularyAllowlist: [],
-      morphology,
-    }).words[0];
-    assert.equal(inLesson.category, "target");
-    assert.equal(inLesson.matchedPattern, "y_long_i");
-    assert.equal(inLesson.morphology?.rule, "y_to_i");
-    rows.push(["with y_to_i morphology", word, "target:y_long_i:y_to_i"]);
-
-    const outsideLesson = classifyPassageWords(word, {
-      targetPatternCodes: ["team_ie_long_i"],
-      allowedPatternCodes: [],
-      blockedPatternCodes: [],
-      heartWords: [],
-      vocabularyAllowlist: [],
-    }).words[0];
-    assert.equal(outsideLesson.category, "target");
-    assert.equal(outsideLesson.matchedPattern, "team_ie_long_i");
-    assert.equal(outsideLesson.morphology, undefined);
-    rows.push(["without morphology", word, "target:team_ie_long_i"]);
-  }
-  return rows;
+  assert.equal(result, "FAIL", "bare-stem-only evidence must fail morphology coverage");
+  return [["bare stems only", "fast, soft, slow, thick, fresh", result]];
 }
 
 async function assertPriorTargetsUnchanged() {
   const priorTargets = CONTENT_V3_DAILY_TARGETS.filter((target) => target.code !== TARGET_CODE);
-  assert.equal(priorTargets.length, 29, "Exactly 29 other targets should remain with morph_y_to_i excluded");
+  assert.equal(priorTargets.length, 29, "Exactly 29 prior targets should remain before morph_compare_no_change");
   const rows: string[][] = [];
   for (const target of priorTargets) {
     const draft = await generateLessonDraft(lessonContext(target.code), { recordDecision: async (_ctx, fn) => (await fn()).output });
@@ -187,14 +157,14 @@ async function assertPriorTargetsUnchanged() {
       assert.equal(draft.morphology?.rule, "drop_e");
     } else if (target.code === "morph_double") {
       assert.equal(draft.morphology?.rule, "double");
-    } else if (target.code === "morph_compare_no_change") {
-      assert.equal(draft.morphology?.rule, "compare");
+    } else if (target.code === "morph_y_to_i") {
+      assert.equal(draft.morphology?.rule, "y_to_i");
     } else {
       assert.equal(draft.morphology, undefined, `${target.code} should not opt into morphology`);
     }
   }
   rows.push(["prior target count", String(priorTargets.length), "PASS"]);
-  rows.push(["prior morphology opt-in states", "drop_e/double/compare unchanged; non-morph undefined", "PASS"]);
+  rows.push(["prior morphology opt-in states", "drop_e/double/y_to_i unchanged; non-morph undefined", "PASS"]);
   return rows;
 }
 
@@ -206,6 +176,16 @@ function lessonContext(targetCode: string): LessonGeneratorContext {
   const dailyTarget = { id: `target-${targetCode}`, ...seedTarget, targetPatternsJson: seedTarget.targetPatternsJson as any };
   const targetPatterns = targetPatternsFor(seedTarget);
   const pseudowordPatterns = pseudowordPatternsFor(seedTarget, targetPatterns);
+  const morphology = morphologyConfigFromTargetPatternsJson(dailyTarget.targetPatternsJson);
+  const pseudowords = canonicalPseudowordsForTargetPatterns(
+    dailyTarget.code,
+    dailyTarget.exampleNonwords,
+    targetPatterns,
+    "content-v3 lesson seed",
+    pseudowordPatterns,
+    { allowNoPseudowords: morphology?.rule === "compare" },
+  );
+  if (targetCode === TARGET_CODE) assert.deepEqual(pseudowords, []);
   const heartWordsPreviewedThisLesson = content.heartWordsPreviewedThisLesson;
   const heartWordsAssumedKnown = content.heartWordsAssumedKnown;
   const vocabularyWords = content.vocabulary;
@@ -225,7 +205,7 @@ function lessonContext(targetCode: string): LessonGeneratorContext {
     pseudowordPatterns,
     targetWords: dailyTarget.exampleWords.slice(0, 5),
     reviewWords: content.reviewWords ?? [],
-    pseudowords: dailyTarget.exampleNonwords,
+    pseudowords,
     heartWordsPreviewedThisLesson,
     heartWordsAssumedKnown,
     vocabularyWords,
@@ -267,20 +247,19 @@ function requiredMorphology(ctx: LessonGeneratorContext): MorphologyAnalyzerConf
   return morphology;
 }
 
-function classifiedEntry(word: string, ctx: LessonGeneratorContext): WordAuditEntry {
-  const result = classifyPassageWords(word, {
-    targetPatternCodes: ctx.targetPatterns,
-    allowedPatternCodes: ctx.dailyTarget.allowedPatternCodes,
-    blockedPatternCodes: ctx.dailyTarget.blockedPatternCodes,
-    heartWords: [...ctx.heartWordsPreviewedThisLesson, ...ctx.heartWordsAssumedKnown],
-    vocabularyAllowlist: ctx.vocabularyWords,
-    morphology: requiredMorphology(ctx),
-  });
-  assert.equal(result.words.length, 1);
-  return result.words[0];
+function injectPassage(draft: GeneratedLessonDraft, sentence: string): GeneratedLessonDraft {
+  return {
+    ...draft,
+    parts: draft.parts.map((part) => {
+      if (part.partNumber === 7) {
+        return { ...part, contentJson: { ...part.contentJson, passageText: `${part.contentJson.passageText} ${sentence}` } };
+      }
+      return part;
+    }),
+  };
 }
 
-function mutateDraftForKeepsYOnly(draft: GeneratedLessonDraft): GeneratedLessonDraft {
+function mutateDraftForBareStemsOnly(draft: GeneratedLessonDraft): GeneratedLessonDraft {
   return {
     ...draft,
     parts: draft.parts.map((part) => {
@@ -290,10 +269,9 @@ function mutateDraftForKeepsYOnly(draft: GeneratedLessonDraft): GeneratedLessonD
           contentJson: {
             ...part.contentJson,
             demonstrationPairs: [
-              { base: "cry", target: "crying" },
-              { base: "try", target: "trying" },
-              { base: "fly", target: "flying" },
-              { base: "dry", target: "drying" },
+              { base: "fast", target: "fast" },
+              { base: "soft", target: "soft" },
+              { base: "slow", target: "slow" },
             ],
           },
         };
@@ -304,22 +282,22 @@ function mutateDraftForKeepsYOnly(draft: GeneratedLessonDraft): GeneratedLessonD
           contentJson: {
             ...part.contentJson,
             contrastiveLines: [
-              { lineNumber: 1, role: "target_real_words", words: ["crying", "trying", "flying", "drying"] },
-              { lineNumber: 2, role: "contrastive_target_vs_review", words: ["cry", "try", "fly", "dry"] },
-              { lineNumber: 3, role: "cumulative_review", words: ["lake", "hand", "desk"] },
-              { lineNumber: 4, role: "target_pseudowords", words: ["cly", "sny", "gly", "zy", "smy", "vry", "zby", "gry"] },
+              { lineNumber: 1, role: "target_real_words", words: ["fast", "soft", "slow", "thick", "fresh"] },
+              { lineNumber: 2, role: "contrastive_target_vs_review", words: ["fast", "soft", "slow", "thick", "fresh"] },
+              { lineNumber: 3, role: "cumulative_review", words: ["fast", "soft", "slow", "thick", "fresh"] },
+              { lineNumber: 4, role: "target_pseudowords", words: [] },
             ],
           },
         };
       }
       if (part.partNumber === 5) {
-        return { ...part, contentJson: { ...part.contentJson, sentences: ["Sky is trying to fly.", "The pup is crying."] } };
+        return { ...part, contentJson: { ...part.contentJson, sentences: ["The fast cat sat.", "The slow slug sat."] } };
       }
       if (part.partNumber === 6) {
-        return { ...part, contentJson: { ...part.contentJson, dictatedWords: ["crying", "trying", "flying", "drying", "cry", "fly"] } };
+        return { ...part, contentJson: { ...part.contentJson, dictatedWords: ["fast", "soft", "slow", "thick", "fresh", "tall"] } };
       }
       if (part.partNumber === 7) {
-        return { ...part, contentJson: { ...part.contentJson, passageText: "Sky is trying. The bug is flying. The kid is crying." } };
+        return { ...part, contentJson: { ...part.contentJson, passageText: "The fast cat sat. The soft mat sat. The slow slug sat." } };
       }
       return part;
     }),
@@ -327,15 +305,18 @@ function mutateDraftForKeepsYOnly(draft: GeneratedLessonDraft): GeneratedLessonD
 }
 
 function checkResult(draft: GeneratedLessonDraft, ruleId: string) {
-  const check = auditGeneratedLessonDraft(draft).checks.find((entry) => entry.ruleId === ruleId);
-  assert(check, `Missing ${ruleId}`);
-  return check.result;
+  const checks = auditGeneratedLessonDraft(draft).checks.filter((entry) => entry.ruleId === ruleId);
+  assert(checks.length > 0, `Missing ${ruleId}`);
+  return checks.some((entry) => entry.result === "FAIL") ? "FAIL" : checks[0].result;
+}
+
+function replacePart(draft: GeneratedLessonDraft, partNumber: number, replacement: GeneratedLessonDraft["parts"][number]) {
+  return draft.parts.map((part) => part.partNumber === partNumber ? replacement : part);
 }
 
 function assertStyleSweep(content: { sentences: string[]; fullAuditPassageText?: string; mockPassageText: string }) {
   const text = [content.sentences.join(" "), content.mockPassageText, content.fullAuditPassageText ?? ""].join(" ").toLowerCase();
-  assert(!/\bare\b/.test(text), `${TARGET_CODE} must not use are`);
-  for (const banned of ["crys", "flys", "drys"]) {
+  for (const banned of ["after", "teacher", "bigger", "nicer", "dampest", "longer", "longest"]) {
     assert(!new RegExp(`\\b${banned}\\b`).test(text), `${TARGET_CODE} must not use ${banned}`);
   }
 }
@@ -356,11 +337,6 @@ function pseudowordPatternsFor(seedTarget: { code: string; targetPatternsJson: u
     if (Array.isArray(patterns) && patterns.every((entry) => typeof entry === "string")) return patterns as string[];
   }
   return fallback;
-}
-
-function selectPseudowordPattern(word: string, orderedPatterns: string[]) {
-  const candidates = detectPatternCandidates(word);
-  return orderedPatterns.find((pattern) => candidates.includes(pattern)) ?? null;
 }
 
 function assertOracleIntegrity() {
