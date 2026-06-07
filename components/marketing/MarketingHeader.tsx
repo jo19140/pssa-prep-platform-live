@@ -5,8 +5,8 @@ import Link from "next/link";
 import { useState } from "react";
 
 const navLinks = [
-  { href: "/for-teachers", label: "For Teachers" },
   { href: "/for-parents", label: "For Parents" },
+  { href: "/for-teachers", label: "For Teachers" },
   { href: "/for-schools", label: "For Schools" },
 ];
 
@@ -63,9 +63,8 @@ export function MarketingHeader() {
           <Link href="/login" className="text-sm font-bold text-synesis-body hover:text-synesis-primary">
             Log In
           </Link>
-          {/* TODO: Wire Start Free Trial to a real signup flow when the route is built. */}
           <Link href="/signup" className="rounded-full bg-synesis-primary px-5 py-2.5 text-sm font-black text-white shadow-lg shadow-indigo-200 transition hover:bg-synesis-primaryDark">
-            Start Free Trial
+            Start Free for 14 Days
           </Link>
         </div>
 
@@ -93,7 +92,7 @@ export function MarketingHeader() {
                 Log In
               </Link>
               <Link href="/signup" className="rounded-full bg-synesis-primary px-4 py-3 text-center font-black text-white" onClick={() => setOpen(false)}>
-                Start Free Trial
+                Start Free for 14 Days
               </Link>
             </div>
           </nav>

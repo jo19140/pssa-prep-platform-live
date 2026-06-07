@@ -4,6 +4,7 @@ import { HeroSection } from "@/components/marketing/HeroSection";
 import { HowItWorks } from "@/components/marketing/HowItWorks";
 import { MarketingFooter } from "@/components/marketing/MarketingFooter";
 import { MarketingHeader } from "@/components/marketing/MarketingHeader";
+import { MeetHarperSection } from "@/components/marketing/MeetHarperSection";
 import { PlatformFeatures } from "@/components/marketing/PlatformFeatures";
 import { ResearchTrustSection } from "@/components/marketing/ResearchTrustSection";
 import { StatsBar } from "@/components/marketing/StatsBar";
@@ -14,6 +15,7 @@ export default function HomePage() {
       <MarketingHeader />
       <main>
         <HeroSection />
+        <MeetHarperSection />
         <StatsBar />
         <HowItWorks />
         <PlatformFeatures />
