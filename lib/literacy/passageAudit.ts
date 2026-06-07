@@ -2,7 +2,7 @@ import type { DailyTarget, PhasePosition } from "@prisma/client";
 import { PATTERN_REGISTRY } from "./patternRegistry";
 import { classifyPassageWords, type PassageClassification } from "./passageClassifier";
 import { runPassageQualityAudit, type PassageQualityAudit } from "./passageQualityAudit";
-import type { MorphologyAnalyzerConfig } from "./morphologyAnalyzer";
+import { morphologyConfigFromTargetPatternsJson, type MorphologyAnalyzerConfig } from "./morphologyAnalyzer";
 
 export type PassageAuditContext = {
   phasePosition: Pick<PhasePosition, "id" | "phaseNumber" | "label">;
@@ -77,18 +77,10 @@ export function auditPassage(text: string, context: PassageAuditContext): Passag
   };
 }
 
+// Single source of truth: delegate to the shared parser so new rules (y_to_i, later -er/-est)
+// are added in ONE place (morphologyConfigFromTargetPatternsJson) instead of three.
 function morphologyFromDailyTarget(dailyTarget: Pick<DailyTarget, "targetPatternsJson">): MorphologyAnalyzerConfig | undefined {
-  const json = dailyTarget.targetPatternsJson;
-  if (!json || typeof json !== "object" || Array.isArray(json)) return undefined;
-  const morphologyJson = (json as { morphologyJson?: unknown }).morphologyJson;
-  if (!morphologyJson || typeof morphologyJson !== "object" || Array.isArray(morphologyJson)) return undefined;
-  const rule = (morphologyJson as { rule?: unknown }).rule;
-  const stemPatterns = (morphologyJson as { stemPatterns?: unknown }).stemPatterns;
-  const suffixes = (morphologyJson as { suffixes?: unknown }).suffixes;
-  if (rule !== "drop_e" && rule !== "double") return undefined;
-  if (!Array.isArray(stemPatterns) || !stemPatterns.every((entry) => typeof entry === "string")) return undefined;
-  if (!Array.isArray(suffixes) || !suffixes.every((entry) => entry === "ing" || entry === "ed" || entry === "s" || entry === "es")) return undefined;
-  return { rule, stemPatterns, suffixes };
+  return morphologyConfigFromTargetPatternsJson(dailyTarget.targetPatternsJson);
 }
 
 export function patternCodesFromDailyTarget(dailyTarget: Pick<DailyTarget, "code" | "targetPatternsJson">): string[] {

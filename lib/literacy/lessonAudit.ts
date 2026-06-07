@@ -3,7 +3,7 @@ import { wordMatchesPattern } from "./passageClassifier";
 import { PATTERN_REGISTRY } from "./patternRegistry";
 import { detectPatternCandidates, validatePseudowordCandidate } from "./pseudowordValidator";
 import type { GeneratedLessonPart } from "./lessonParts/types";
-import { decomposeInflectedWord, type MorphologyAnalyzerConfig } from "./morphologyAnalyzer";
+import { decomposeInflectedWord, morphologyConfigFromTargetPatternsJson, type MorphologyAnalyzerConfig } from "./morphologyAnalyzer";
 
 export type GeneratedLessonDraft = {
   phasePositionId: string;
@@ -127,18 +127,12 @@ function transformationPairValid(pair: { base?: unknown; target?: unknown }, dra
   return Boolean(analysis && analysis.base === base && analysis.rule === morphology.rule);
 }
 
+// Single source of truth: delegate to the shared parser (wrap the Part 2 morphologyJson so it
+// matches the targetPatternsJson shape the parser expects). New rules added in ONE place.
 function morphologyForDraft(draft: GeneratedLessonDraft): MorphologyAnalyzerConfig | null {
   if (draft.morphology) return draft.morphology;
   const part = partNumber(draft, 2);
-  const morphologyJson = part?.contentJson.morphologyJson;
-  if (!morphologyJson || typeof morphologyJson !== "object" || Array.isArray(morphologyJson)) return null;
-  const rule = (morphologyJson as { rule?: unknown }).rule;
-  const stemPatterns = (morphologyJson as { stemPatterns?: unknown }).stemPatterns;
-  const suffixes = (morphologyJson as { suffixes?: unknown }).suffixes;
-  if (rule !== "drop_e" && rule !== "double") return null;
-  if (!Array.isArray(stemPatterns) || !stemPatterns.every((entry) => typeof entry === "string")) return null;
-  if (!Array.isArray(suffixes) || !suffixes.every((entry) => entry === "ing" || entry === "ed" || entry === "s" || entry === "es")) return null;
-  return { rule, stemPatterns, suffixes };
+  return morphologyConfigFromTargetPatternsJson({ morphologyJson: part?.contentJson.morphologyJson }) ?? null;
 }
 
 function auditRControlledTargetAdmission(draft: GeneratedLessonDraft): LessonLintCheck[] {
