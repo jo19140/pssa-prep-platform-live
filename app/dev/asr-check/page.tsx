@@ -283,7 +283,7 @@ async function finishAttempt() {
     humanHeardAs: document.getElementById("humanHeardAs").value.trim() || "unclear",
     webspeech_transcript: attempt.getTranscript(),
     webspeech_conf: attempt.getConfidence() ?? "",
-    webspeech_latencyMs,
+    webspeech_latencyMs: webspeechLatencyMs,
     whisper_transcript: transcribe.transcript || "",
     whisper_confidence_or_proxy: transcribe.confidenceProxy ?? "",
     whisper_latencyMs: transcribe.latencyMs || "",
