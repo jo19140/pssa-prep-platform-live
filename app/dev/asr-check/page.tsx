@@ -134,6 +134,7 @@ export default async function AsrCheckPage() {
             <div>
               <h2 className="text-xl font-black">Corpus</h2>
               <p id="status" className="mt-1 text-sm font-bold text-slate-600" aria-live="polite">Ready.</p>
+              <div id="latestResult" className="mt-3 hidden rounded border border-emerald-200 bg-emerald-50 p-3 text-sm text-emerald-950" aria-live="polite" />
             </div>
             <button id="copyTable" type="button" className="rounded bg-slate-900 px-4 py-2 text-sm font-bold text-white">Copy table (CSV/markdown)</button>
           </div>
@@ -295,7 +296,8 @@ async function finishAttempt() {
   };
   rows.push(row);
   appendRow(row);
-  setStatus("Row added. Audio blob deleted from the page.");
+  showLatestResult(row);
+  setStatus("Row added below. Audio blob deleted from the page.");
   // Drop the only blob reference after the table row is produced. No storage, no replay.
   buttons.forEach((entry) => { entry.disabled = false; });
   attempt.button.textContent = "Record";
@@ -315,6 +317,27 @@ function appendRow(row) {
     tr.appendChild(td);
   }
   document.getElementById("rows").appendChild(tr);
+}
+
+function showLatestResult(row) {
+  const latest = document.getElementById("latestResult");
+  if (!latest) return;
+  latest.classList.remove("hidden");
+  latest.innerHTML = [
+    "<div class='font-black'>Latest result: " + escapeHtml(row.target) + "</div>",
+    "<div>Web Speech: <span class='font-bold'>" + escapeHtml(row.webspeech_transcript || "(blank)") + "</span></div>",
+    "<div>OpenAI: <span class='font-bold'>" + escapeHtml(row.whisper_transcript || "(blank)") + "</span></div>",
+    row.engineError ? "<div class='mt-1 text-red-700'>Issue: " + escapeHtml(row.engineError) + "</div>" : "",
+  ].filter(Boolean).join("");
+}
+
+function escapeHtml(value) {
+  return String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
 }
 
 function csvEscape(value) {
