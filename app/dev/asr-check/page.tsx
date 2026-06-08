@@ -131,7 +131,10 @@ export default async function AsrCheckPage() {
 
         <section className="rounded-lg border border-slate-200 bg-white p-4">
           <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
-            <h2 className="text-xl font-black">Corpus</h2>
+            <div>
+              <h2 className="text-xl font-black">Corpus</h2>
+              <p id="status" className="mt-1 text-sm font-bold text-slate-600" aria-live="polite">Ready.</p>
+            </div>
             <button id="copyTable" type="button" className="rounded bg-slate-900 px-4 py-2 text-sm font-bold text-white">Copy table (CSV/markdown)</button>
           </div>
           <div id="corpus" className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
@@ -169,6 +172,7 @@ export default async function AsrCheckPage() {
       </div>
       <script
         nonce={nonce}
+        suppressHydrationWarning
         dangerouslySetInnerHTML={{
           __html: `
 const corpus = ${JSON.stringify(corpus)};
@@ -190,7 +194,22 @@ async function startAttempt(button) {
   let webConfidence = null;
   let webError = "";
   const startedAt = performance.now();
-  const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+  buttons.forEach((entry) => { if (entry !== button) entry.disabled = true; });
+  button.disabled = true;
+  button.textContent = "Requesting mic...";
+  setStatus("Requesting microphone access...");
+  let stream;
+  try {
+    if (!navigator.mediaDevices?.getUserMedia) throw new Error("getUserMedia unavailable");
+    stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+  } catch (error) {
+    setStatus("Microphone permission was denied or unavailable. Allow microphone access for this local page, then try Record again.");
+    button.disabled = false;
+    button.textContent = "Record";
+    buttons.forEach((entry) => { entry.disabled = false; });
+    console.error(error);
+    return;
+  }
   const recorder = new MediaRecorder(stream);
   recorder.ondataavailable = (event) => { if (event.data && event.data.size > 0) chunks.push(event.data); };
   const Recognition = recognitionCtor();
@@ -216,7 +235,8 @@ async function startAttempt(button) {
   }
   recorder.start();
   button.textContent = "Stop";
-  buttons.forEach((entry) => { if (entry !== button) entry.disabled = true; });
+  button.disabled = false;
+  setStatus("Recording. Click Stop when finished.");
   active = { button, item, utteranceId, chunks, recorder, stream, recognition, startedAt, getTranscript: () => transcript, getConfidence: () => webConfidence, getError: () => webError };
 }
 
@@ -225,6 +245,7 @@ async function finishAttempt() {
   active = null;
   attempt.button.disabled = true;
   attempt.button.textContent = "Working...";
+  setStatus("Transcribing the same recorded blob...");
   const webspeechLatencyMs = Math.round(performance.now() - attempt.startedAt);
   try { attempt.recognition?.stop(); } catch {}
   const audioBlob = await new Promise((resolve) => {
@@ -274,9 +295,15 @@ async function finishAttempt() {
   };
   rows.push(row);
   appendRow(row);
+  setStatus("Row added. Audio blob deleted from the page.");
   // Drop the only blob reference after the table row is produced. No storage, no replay.
   buttons.forEach((entry) => { entry.disabled = false; });
   attempt.button.textContent = "Record";
+}
+
+function setStatus(message) {
+  const status = document.getElementById("status");
+  if (status) status.textContent = message;
 }
 
 function appendRow(row) {
