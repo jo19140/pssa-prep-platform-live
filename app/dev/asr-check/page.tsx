@@ -6,22 +6,24 @@ import { phase3EntryLessonContentFor } from "@/lib/content/phase3EntryLessonCont
 
 export const dynamic = "force-dynamic";
 
+const phaseBSilentEWords = new Set(["cake", "cape", "made", "lake", "game", "take", "name", "plate"]);
+
 const isolatedWordItems = [
-  corpusItem("isolated_word", "cake", false, "ASR-scoreable-real-word"),
+  corpusItem("isolated_word", "cake", false, "ASR-scoreable-real-word", ["A", "B"]),
   corpusItem("isolated_word", "cack", false, "ASR-scoreable-real-word"),
-  corpusItem("isolated_word", "cape", false, "ASR-scoreable-real-word"),
+  corpusItem("isolated_word", "cape", false, "ASR-scoreable-real-word", ["A", "B"]),
   corpusItem("isolated_word", "cap", false, "ASR-scoreable-real-word"),
-  corpusItem("isolated_word", "made", false, "ASR-scoreable-real-word"),
+  corpusItem("isolated_word", "made", false, "ASR-scoreable-real-word", ["A", "B"]),
   corpusItem("isolated_word", "mad", false, "ASR-scoreable-real-word"),
-  corpusItem("isolated_word", "lake", false, "ASR-scoreable-real-word"),
+  corpusItem("isolated_word", "lake", false, "ASR-scoreable-real-word", ["A", "B"]),
   corpusItem("isolated_word", "lack", false, "ASR-scoreable-real-word"),
-  corpusItem("isolated_word", "game", false, "ASR-scoreable-real-word"),
+  corpusItem("isolated_word", "game", false, "ASR-scoreable-real-word", ["A", "B"]),
   corpusItem("isolated_word", "gam", false, "ASR-scoreable-real-word"),
-  corpusItem("isolated_word", "take", false, "ASR-scoreable-real-word"),
+  corpusItem("isolated_word", "take", false, "ASR-scoreable-real-word", ["A", "B"]),
   corpusItem("isolated_word", "tack", false, "ASR-scoreable-real-word"),
-  corpusItem("isolated_word", "name", false, "ASR-scoreable-real-word"),
+  corpusItem("isolated_word", "name", false, "ASR-scoreable-real-word", ["A", "B"]),
   corpusItem("isolated_word", "nam", false, "ASR-scoreable-real-word"),
-  corpusItem("isolated_word", "plate", false, "ASR-scoreable-real-word"),
+  corpusItem("isolated_word", "plate", false, "ASR-scoreable-real-word", ["A", "B"]),
   corpusItem("isolated_word", "plat", false, "ASR-scoreable-real-word"),
   corpusItem("isolated_word", "said", false, "ASR-scoreable-real-word"),
   corpusItem("isolated_word", "was", false, "ASR-scoreable-real-word"),
@@ -37,7 +39,7 @@ const isolatedWordItems = [
 const aELessonContent = phase3EntryLessonContentFor("a_e");
 
 const connectedSentenceItems = aELessonContent.sentences.map((sentence) =>
-  corpusItem("connected_sentence", sentence, false, "ASR-scoreable-real-word"),
+  corpusItem("connected_sentence", sentence, false, "ASR-scoreable-real-word", ["A", "B"]),
 );
 
 const connectedPassageItems = [
@@ -46,6 +48,7 @@ const connectedPassageItems = [
     aELessonContent.mockPassageText,
     false,
     "ASR-scoreable-real-word",
+    ["A", "B"],
   ),
 ];
 
@@ -56,9 +59,12 @@ const tableColumns = [
   "phase",
   "surfaceType",
   "target",
+  "screenTarget",
+  "intendedRead",
   "isPseudoword",
   "groundTruthSource",
   "humanHeardAs",
+  "humanHeardAs2",
   "webspeech_transcript",
   "webspeech_conf",
   "webspeech_latencyMs",
@@ -66,6 +72,11 @@ const tableColumns = [
   "whisper_confidence_or_proxy",
   "whisper_latencyMs",
   "uncertaintyScore",
+  "falseCreditWebSpeech",
+  "falseCreditTranscribe",
+  "falseNegativeWebSpeech",
+  "falseNegativeTranscribe",
+  "excludeFromThreshold",
   "engineError",
   "audioQualityNote",
   "expectedFeedbackFamily",
@@ -90,10 +101,10 @@ export default async function AsrCheckPage() {
 
         <section className="grid gap-4 rounded-lg border border-slate-200 bg-white p-4 md:grid-cols-4">
           <label className="space-y-1 text-sm font-bold">
-            Phase
+            Corpus mode
             <select id="phase" className="w-full rounded border border-slate-300 p-2">
-              <option value="A">A adult scripted</option>
-              <option value="B">B child consented</option>
+              <option value="A">Phase A adult scripted</option>
+              <option value="B">Phase B child target-only</option>
             </select>
           </label>
           <label className="space-y-1 text-sm font-bold">
@@ -138,9 +149,31 @@ export default async function AsrCheckPage() {
             </div>
             <button id="copyTable" type="button" className="rounded bg-slate-900 px-4 py-2 text-sm font-bold text-white">Copy table (CSV/markdown)</button>
           </div>
+          <div id="reviewPanel" className="mb-4 hidden rounded border border-sky-200 bg-sky-50 p-4 text-sm text-sky-950">
+            <div className="mb-3">
+              <p id="reviewTitle" className="font-black">Review recording</p>
+              <p className="text-xs font-bold uppercase text-sky-700">Blob is held in browser memory only until commit/cancel.</p>
+            </div>
+            <audio id="reviewAudio" className="mb-3 w-full" controls />
+            <div className="grid gap-3 md:grid-cols-2">
+              <label className="space-y-1 font-bold">
+                Human heard as
+                <input id="reviewHumanHeardAs" placeholder="required: word, phrase, or unclear" className="w-full rounded border border-sky-300 p-2" />
+              </label>
+              <label className="space-y-1 font-bold">
+                Human heard as 2 (optional)
+                <input id="reviewHumanHeardAs2" placeholder="optional second listener" className="w-full rounded border border-sky-300 p-2" />
+              </label>
+            </div>
+            <div className="mt-3 flex flex-wrap items-center gap-3">
+              <button id="commitReview" type="button" disabled className="rounded bg-sky-900 px-4 py-2 font-black text-white disabled:opacity-50">Commit row</button>
+              <button id="cancelReview" type="button" className="rounded border border-sky-300 px-4 py-2 font-black text-sky-950">Cancel</button>
+              <span id="reviewValidation" className="font-bold text-sky-800">Enter what was heard, or exactly unclear.</span>
+            </div>
+          </div>
           <div id="corpus" className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
             {corpus.map((item, index) => (
-              <article key={`${item.surfaceType}-${item.target}-${index}`} className="rounded border border-slate-200 p-3">
+              <article key={`${item.surfaceType}-${item.target}-${index}`} className="corpus-card rounded border border-slate-200 p-3" data-phase-modes={item.phaseModes.join(",")}>
                 <div className="flex items-start justify-between gap-3">
                   <div>
                     <p className="text-xs font-bold uppercase text-slate-500">{item.surfaceType}{item.isPseudoword ? " · pseudoword" : ""}</p>
@@ -181,6 +214,7 @@ const columns = ${JSON.stringify(tableColumns)};
 const rows = [];
 const buttons = Array.from(document.querySelectorAll(".record"));
 let active = null;
+let pendingReview = null;
 
 function recognitionCtor() {
   return window.SpeechRecognition || window.webkitSpeechRecognition || null;
@@ -188,6 +222,7 @@ function recognitionCtor() {
 
 async function startAttempt(button) {
   if (active) return finishAttempt();
+  clearPendingReview("discarded because a new recording started");
   const item = corpus[Number(button.dataset.index)];
   const utteranceId = crypto.randomUUID();
   const chunks = [];
@@ -246,7 +281,7 @@ async function finishAttempt() {
   active = null;
   attempt.button.disabled = true;
   attempt.button.textContent = "Working...";
-  setStatus("Transcribing the same recorded blob...");
+  setStatus("Transcribing the same recorded blob, then preparing replay...");
   const webspeechLatencyMs = Math.round(performance.now() - attempt.startedAt);
   try { attempt.recognition?.stop(); } catch {}
   const audioBlob = await new Promise((resolve) => {
@@ -274,14 +309,17 @@ async function finishAttempt() {
     engineError = [engineError, error instanceof Error ? error.message : "transcribe_failed"].filter(Boolean).join("; ");
   }
 
-  const row = {
+  const rowBase = {
     utteranceId: attempt.utteranceId,
     phase: document.getElementById("phase").value,
     surfaceType: attempt.item.surfaceType,
     target: attempt.item.target,
+    screenTarget: attempt.item.target,
+    intendedRead: document.getElementById("phase").value === "B" ? "" : attempt.item.target,
     isPseudoword: String(attempt.item.isPseudoword),
     groundTruthSource: document.getElementById("groundTruthSource").value,
-    humanHeardAs: document.getElementById("humanHeardAs").value.trim() || "unclear",
+    humanHeardAs: "",
+    humanHeardAs2: "",
     webspeech_transcript: attempt.getTranscript(),
     webspeech_conf: attempt.getConfidence() ?? "",
     webspeech_latencyMs: webspeechLatencyMs,
@@ -289,16 +327,18 @@ async function finishAttempt() {
     whisper_confidence_or_proxy: transcribe.confidenceProxy ?? "",
     whisper_latencyMs: transcribe.latencyMs || "",
     uncertaintyScore: typeof transcribe.uncertaintyScore === "number" ? transcribe.uncertaintyScore.toFixed(3) : "",
+    falseCreditWebSpeech: "false",
+    falseCreditTranscribe: "false",
+    falseNegativeWebSpeech: "false",
+    falseNegativeTranscribe: "false",
+    excludeFromThreshold: "false",
     engineError,
     audioQualityNote: document.getElementById("audioQualityNote").value.trim(),
     expectedFeedbackFamily: attempt.item.expectedFeedbackFamily,
     safe_branch: "",
   };
-  rows.push(row);
-  appendRow(row);
-  showLatestResult(row);
-  setStatus("Row added below. Audio blob deleted from the page.");
-  // Drop the only blob reference after the table row is produced. No storage, no replay.
+  showReviewPanel(rowBase, audioBlob);
+  setStatus("Replay the recording, label humanHeardAs, then commit or cancel.");
   buttons.forEach((entry) => { entry.disabled = false; });
   attempt.button.textContent = "Record";
 }
@@ -310,6 +350,11 @@ function setStatus(message) {
 
 function appendRow(row) {
   const tr = document.createElement("tr");
+  if (isTrue(row.falseCreditWebSpeech) || isTrue(row.falseCreditTranscribe)) {
+    tr.className = "bg-red-50";
+  } else if (isTrue(row.falseNegativeWebSpeech) || isTrue(row.falseNegativeTranscribe)) {
+    tr.className = "bg-amber-50";
+  }
   for (const column of columns) {
     const td = document.createElement("td");
     td.className = "border border-slate-200 p-2 align-top";
@@ -319,14 +364,105 @@ function appendRow(row) {
   document.getElementById("rows").appendChild(tr);
 }
 
+function showReviewPanel(rowBase, audioBlob) {
+  clearPendingReview();
+  const objectUrl = URL.createObjectURL(audioBlob);
+  pendingReview = { rowBase, audioBlob, objectUrl };
+  const panel = document.getElementById("reviewPanel");
+  const audio = document.getElementById("reviewAudio");
+  const heard = document.getElementById("reviewHumanHeardAs");
+  const heard2 = document.getElementById("reviewHumanHeardAs2");
+  document.getElementById("reviewTitle").textContent = "Review recording: " + rowBase.screenTarget;
+  audio.src = objectUrl;
+  heard.value = document.getElementById("humanHeardAs").value.trim();
+  heard2.value = "";
+  panel.classList.remove("hidden");
+  updateCommitState();
+}
+
+function clearPendingReview(reason) {
+  if (!pendingReview) return;
+  URL.revokeObjectURL(pendingReview.objectUrl);
+  pendingReview = null;
+  const audio = document.getElementById("reviewAudio");
+  if (audio) {
+    audio.pause();
+    audio.removeAttribute("src");
+    audio.load();
+  }
+  document.getElementById("reviewPanel")?.classList.add("hidden");
+  if (reason) setStatus("Review discarded: " + reason + ". Audio blob released.");
+}
+
+function updateCommitState() {
+  const input = document.getElementById("reviewHumanHeardAs");
+  const button = document.getElementById("commitReview");
+  const validation = document.getElementById("reviewValidation");
+  const value = input.value.trim();
+  const valid = value.length > 0 || norm(value) === "unclear";
+  button.disabled = !valid || !pendingReview;
+  validation.textContent = valid ? "Ready to commit." : "Enter what was heard, or exactly unclear.";
+}
+
+function commitReview() {
+  if (!pendingReview) return;
+  const humanHeardAs = document.getElementById("reviewHumanHeardAs").value.trim();
+  if (!humanHeardAs) {
+    updateCommitState();
+    return;
+  }
+  const humanHeardAs2 = document.getElementById("reviewHumanHeardAs2").value.trim();
+  const row = finalizeRow(pendingReview.rowBase, humanHeardAs, humanHeardAs2);
+  rows.push(row);
+  appendRow(row);
+  showLatestResult(row);
+  clearPendingReview();
+  setStatus("Row added below. Audio blob deleted from the page.");
+}
+
+function finalizeRow(rowBase, humanHeardAs, humanHeardAs2) {
+  const heard = norm(humanHeardAs);
+  const heard2 = norm(humanHeardAs2);
+  const screen = norm(rowBase.screenTarget);
+  const web = norm(rowBase.webspeech_transcript);
+  const transcribe = norm(rowBase.whisper_transcript);
+  const hasListenerDisagreement = Boolean(heard2) && heard !== heard2;
+  const isUnclear = heard === "unclear";
+  return {
+    ...rowBase,
+    humanHeardAs,
+    humanHeardAs2,
+    falseCreditWebSpeech: String(heard !== "unclear" && heard !== screen && web === screen),
+    falseCreditTranscribe: String(heard !== "unclear" && heard !== screen && transcribe === screen),
+    falseNegativeWebSpeech: String(heard !== "unclear" && heard === screen && web !== screen),
+    falseNegativeTranscribe: String(heard !== "unclear" && heard === screen && transcribe !== screen),
+    excludeFromThreshold: String(isUnclear || hasListenerDisagreement),
+  };
+}
+
+function norm(value) {
+  return String(value ?? "")
+    .toLowerCase()
+    .trim()
+    .replaceAll(/[^\\p{L}\\p{N}\\s]/gu, "")
+    .replaceAll(/\\s+/g, " ");
+}
+
+function isTrue(value) {
+  return value === true || value === "true";
+}
+
 function showLatestResult(row) {
   const latest = document.getElementById("latestResult");
   if (!latest) return;
   latest.classList.remove("hidden");
   latest.innerHTML = [
-    "<div class='font-black'>Latest result: " + escapeHtml(row.target) + "</div>",
+    "<div class='font-black'>Latest result: " + escapeHtml(row.screenTarget || row.target) + "</div>",
     "<div>Web Speech: <span class='font-bold'>" + escapeHtml(row.webspeech_transcript || "(blank)") + "</span></div>",
     "<div>OpenAI: <span class='font-bold'>" + escapeHtml(row.whisper_transcript || "(blank)") + "</span></div>",
+    "<div>Human heard as: <span class='font-bold'>" + escapeHtml(row.humanHeardAs || "(blank)") + "</span></div>",
+    isTrue(row.falseCreditWebSpeech) || isTrue(row.falseCreditTranscribe) ? "<div class='mt-1 font-black text-red-700'>False credit flagged</div>" : "",
+    isTrue(row.falseNegativeWebSpeech) || isTrue(row.falseNegativeTranscribe) ? "<div class='mt-1 font-black text-amber-700'>False negative flagged</div>" : "",
     row.engineError ? "<div class='mt-1 text-red-700'>Issue: " + escapeHtml(row.engineError) + "</div>" : "",
   ].filter(Boolean).join("");
 }
@@ -351,11 +487,57 @@ function markdownEscape(value) {
 function copyTable() {
   const csv = [columns.join(","), ...rows.map((row) => columns.map((column) => csvEscape(row[column])).join(","))].join("\\n");
   const markdown = ["| " + columns.join(" | ") + " |", "| " + columns.map(() => "---").join(" | ") + " |", ...rows.map((row) => "| " + columns.map((column) => markdownEscape(row[column])).join(" | ") + " |")].join("\\n");
-  navigator.clipboard.writeText(csv + "\\n\\n" + markdown);
+  navigator.clipboard.writeText(csv + "\\n\\n" + surfaceTypeRateReport() + "\\n\\n" + markdown);
+}
+
+function surfaceTypeRateReport() {
+  const surfaceTypes = ["isolated_word", "connected_sentence", "connected_passage"];
+  const lines = [
+    "SurfaceType rate breakout (threshold rows exclude unclear/listener-disagreement rows)",
+    "| surfaceType | thresholdRows | falseCreditWebSpeechRate | falseCreditTranscribeRate | falseNegativeWebSpeechRate | falseNegativeTranscribeRate |",
+    "| --- | ---: | ---: | ---: | ---: | ---: |",
+  ];
+  for (const surfaceType of surfaceTypes) {
+    const eligible = rows.filter((row) => row.surfaceType === surfaceType && !isTrue(row.excludeFromThreshold));
+    const denominator = eligible.length || 0;
+    lines.push("| " + [
+      surfaceType,
+      String(denominator),
+      rate(eligible, "falseCreditWebSpeech"),
+      rate(eligible, "falseCreditTranscribe"),
+      rate(eligible, "falseNegativeWebSpeech"),
+      rate(eligible, "falseNegativeTranscribe"),
+    ].join(" | ") + " |");
+  }
+  lines.push("");
+  lines.push("Part-3 autonomy decision uses isolated_word rows only; connected rows are advisory.");
+  return lines.join("\\n");
+}
+
+function rate(rowsForSurface, key) {
+  if (rowsForSurface.length === 0) return "n/a";
+  const count = rowsForSurface.filter((row) => isTrue(row[key])).length;
+  return count + "/" + rowsForSurface.length + " (" + (count / rowsForSurface.length).toFixed(3) + ")";
+}
+
+function updateCorpusForPhase() {
+  clearPendingReview("corpus mode changed");
+  const phase = document.getElementById("phase").value;
+  for (const card of document.querySelectorAll(".corpus-card")) {
+    const modes = String(card.dataset.phaseModes || "A").split(",");
+    card.classList.toggle("hidden", !modes.includes(phase));
+  }
 }
 
 for (const button of buttons) button.addEventListener("click", () => startAttempt(button));
+document.getElementById("phase").addEventListener("change", updateCorpusForPhase);
+document.getElementById("reviewHumanHeardAs").addEventListener("input", updateCommitState);
+document.getElementById("reviewHumanHeardAs2").addEventListener("input", updateCommitState);
+document.getElementById("commitReview").addEventListener("click", commitReview);
+document.getElementById("cancelReview").addEventListener("click", () => clearPendingReview("review canceled"));
 document.getElementById("copyTable").addEventListener("click", copyTable);
+window.addEventListener("beforeunload", () => clearPendingReview());
+updateCorpusForPhase();
           `,
         }}
       />
@@ -363,6 +545,12 @@ document.getElementById("copyTable").addEventListener("click", copyTable);
   );
 }
 
-function corpusItem(surfaceType: "isolated_word" | "connected_sentence" | "connected_passage", target: string, isPseudoword: boolean, expectedFeedbackFamily: string) {
-  return { surfaceType, target, isPseudoword, expectedFeedbackFamily };
+function corpusItem(
+  surfaceType: "isolated_word" | "connected_sentence" | "connected_passage",
+  target: string,
+  isPseudoword: boolean,
+  expectedFeedbackFamily: string,
+  phaseModes: Array<"A" | "B"> = ["A"],
+) {
+  return { surfaceType, target, isPseudoword, expectedFeedbackFamily, phaseModes };
 }
