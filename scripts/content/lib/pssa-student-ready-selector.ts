@@ -47,7 +47,16 @@ export type PssaReadyItem = PssaReadyContent & {
   responseSpecJson?: unknown;
   batchId?: string | null;
   batch?: PssaReadyBatch;
+  passageGroupId?: string | null;
+  isCrossText?: boolean | null;
+  requiredEvidenceSlotsJson?: unknown;
+  crossTextSupportRuleJson?: unknown;
+  structuredChoicesJson?: Array<{ isCorrect?: boolean; evidenceLinks?: Array<Record<string, unknown>> }> | null;
+  acceptableTextSupport?: unknown;
+  acceptableSupportEvidenceLinks?: Array<Record<string, unknown>>;
+  scoreBandExamples?: unknown;
   passages?: Array<{ passage?: PssaReadyPassage | null }>;
+  passageGroup?: { members?: Array<{ passage?: PssaReadyPassage | null; slot?: string | null }> } | null;
 };
 
 export type StudentReadyExplanation = {
@@ -117,7 +126,63 @@ export function explainPssaItemStudentReadiness(item: PssaReadyItem): StudentRea
     if (passage.reason !== "NONE") return { reason: passage.reason, detail: `linked_passage_${link.passage.id}_${passage.detail}` };
   }
 
+  if (item.passageGroupId) {
+    const members = item.passageGroup?.members ?? [];
+    if (!members.length) return { reason: "PENDING_REVIEW", detail: "passage_group_members_missing" };
+    for (const member of members) {
+      if (!member.passage) return { reason: "PENDING_REVIEW", detail: `passage_group_member_${member.slot ?? "unknown"}_missing` };
+      const passage = explainPssaPassageStudentReadiness(member.passage);
+      if (passage.reason !== "NONE") return { reason: passage.reason, detail: `passage_group_member_${member.slot ?? member.passage.id}_${passage.detail}` };
+    }
+    if (!pairedRequiredEvidenceSlotsCovered(item)) return { reason: "PENDING_REVIEW", detail: "required_evidence_slots_not_covered" };
+  }
+
   return { reason: "NONE", detail: "ready" };
+}
+
+function pairedRequiredEvidenceSlotsCovered(item: PssaReadyItem) {
+  const required = requiredEvidenceSlots(item);
+  if (!required.length) return !item.isCrossText;
+  const memberSlots = new Set((item.passageGroup?.members ?? []).map((member) => String(member.slot ?? "")).filter(Boolean));
+  if (required.some((slot) => !memberSlots.has(slot))) return false;
+  const covered = new Set<string>();
+  for (const link of pairedEvidenceLinks(item)) {
+    const slot = String(link.passageSlot ?? "");
+    if (!slot || !memberSlots.has(slot)) return false;
+    covered.add(slot);
+  }
+  return required.every((slot) => covered.has(slot));
+}
+
+function requiredEvidenceSlots(item: PssaReadyItem) {
+  const direct = Array.isArray(item.requiredEvidenceSlotsJson) ? item.requiredEvidenceSlotsJson.map(String) : [];
+  const rule = objectSource(item.crossTextSupportRuleJson);
+  const fromRule = Array.isArray(rule.requiredPassageSlots) ? rule.requiredPassageSlots.map(String) : [];
+  return Array.from(new Set([...direct, ...fromRule]));
+}
+
+function pairedEvidenceLinks(item: PssaReadyItem): Array<Record<string, unknown>> {
+  if (String(item.interactionType ?? "").toUpperCase() === "MCQ") {
+    return item.structuredChoicesJson?.find((choice) => choice.isCorrect)?.evidenceLinks ?? [];
+  }
+  return [
+    ...(item.acceptableSupportEvidenceLinks ?? []),
+    ...collectEvidenceLinks(item.crossTextSupportRuleJson),
+    ...collectEvidenceLinks(item.acceptableTextSupport),
+    ...collectEvidenceLinks(item.scoreBandExamples),
+  ];
+}
+
+function collectEvidenceLinks(value: unknown, out: Array<Record<string, unknown>> = []) {
+  if (!value || typeof value !== "object") return out;
+  if (Array.isArray(value)) {
+    for (const entry of value) collectEvidenceLinks(entry, out);
+    return out;
+  }
+  const row = value as Record<string, unknown>;
+  if ("passageSlot" in row || "evidenceKind" in row || "quotedSpan" in row || "sectionId" in row) out.push(row);
+  for (const nested of Object.values(row)) collectEvidenceLinks(nested, out);
+  return out;
 }
 
 function hasMachineScorableResponseDomain(interactionType: string | null | undefined, responseSpecJson: unknown) {
@@ -159,6 +224,7 @@ export async function getStudentReadyPssaItems(db: PrismaClient, filters: Studen
     include: {
       batch: true,
       passages: { include: { passage: true }, orderBy: { sortOrder: "asc" } },
+      passageGroup: { include: { members: { include: { passage: true }, orderBy: { position: "asc" } } } },
     },
     orderBy: { id: "asc" },
   });

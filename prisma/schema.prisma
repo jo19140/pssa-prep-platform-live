@@ -515,6 +515,11 @@ model PssaPassage {
   reviewedBy                String?
   provenanceJson            Json
   contentHash               String
+  staminaBand               String?
+  genre                     String?
+  textFeaturesJson          Json?
+  domainVocabularyLoad      String?
+  factCheckNotesJson        Json?
   latestAuditContentHash    String?
   approvedContentHash       String?
   auditContractVersion      String?
@@ -528,6 +533,7 @@ model PssaPassage {
   updatedAt                 DateTime                      @updatedAt
 
   items        PssaItemPassageLink[]
+  groupMembers PssaPassageGroupMember[]
   auditResults PssaAuditResult[]
   reviewLogs   PssaReviewLog[]
   forms        PssaFormPassage[]
@@ -539,60 +545,67 @@ model PssaPassage {
 }
 
 model PssaItem {
-  id                        String                        @id @default(cuid())
-  module                    TestPrepModule                @default(PSSA)
-  subject                   String                        @default("ELA")
-  gradeLevel                Int
-  standardCode              String
-  assessmentAnchor          String?
-  eligibleContent           String?
-  eligibleContentRefId      String?
-  reportingCategory         String?
-  dokLevel                  Int?
-  itemType                  String
-  skill                     String
-  difficultyBand            String?
-  interactionType           PssaInteractionType
-  interactionSubtype        String?
-  responseSpecJson          Json
-  correctResponseJson       Json
-  scoringJson               Json
-  pointValue                Int
-  sourceType                PssaSourceType                @default(unknown)
-  sourceName                String?
-  sourceCitation            String?                       @db.Text
-  licenseStatus             PssaLicenseStatus             @default(unresolved)
-  commercialUseAllowed      Boolean                       @default(false)
-  needsLegalReview          Boolean                       @default(true)
-  reviewStatus              PssaReviewStatus              @default(PENDING)
-  itemStatus                PssaItemStatus                @default(candidate)
-  alignmentStatus           PssaAlignmentStatus           @default(NEEDS_CROSSWALK)
-  approvalEligible          Boolean                       @default(false)
-  approvedAt                DateTime?
-  reviewedBy                String?
-  studentPreviewJson        Json?
-  responseSpecVersion       String
-  auditContractVersion      String
-  sourceScanVersion         String
-  contentHash               String
-  latestAuditContentHash    String?
-  approvedContentHash       String?
-  latestSourceCorpusHash    String?
-  latestAuditResult         PssaAuditResultStatus?
-  latestAuditAt             DateTime?
-  importedFromFile          String?
-  importRunId               String?
-  studentReadyBlockedReason PssaStudentReadyBlockedReason @default(PENDING_REVIEW)
-  deprecatedReason          String?                       @db.Text
-  batchId                   String?
-  provenanceJson            Json
-  retiredAt                 DateTime?
-  createdAt                 DateTime                      @default(now())
-  updatedAt                 DateTime                      @updatedAt
+  id                            String                        @id @default(cuid())
+  module                        TestPrepModule                @default(PSSA)
+  subject                       String                        @default("ELA")
+  gradeLevel                    Int
+  standardCode                  String
+  assessmentAnchor              String?
+  eligibleContent               String?
+  eligibleContentRefId          String?
+  reportingCategory             String?
+  dokLevel                      Int?
+  itemType                      String
+  skill                         String
+  difficultyBand                String?
+  interactionType               PssaInteractionType
+  interactionSubtype            String?
+  responseSpecJson              Json
+  correctResponseJson           Json
+  scoringJson                   Json
+  pointValue                    Int
+  sourceType                    PssaSourceType                @default(unknown)
+  sourceName                    String?
+  sourceCitation                String?                       @db.Text
+  licenseStatus                 PssaLicenseStatus             @default(unresolved)
+  commercialUseAllowed          Boolean                       @default(false)
+  needsLegalReview              Boolean                       @default(true)
+  reviewStatus                  PssaReviewStatus              @default(PENDING)
+  itemStatus                    PssaItemStatus                @default(candidate)
+  alignmentStatus               PssaAlignmentStatus           @default(NEEDS_CROSSWALK)
+  approvalEligible              Boolean                       @default(false)
+  approvedAt                    DateTime?
+  reviewedBy                    String?
+  studentPreviewJson            Json?
+  targetWordOrPhrase            String?
+  testsApplicationNotDefinition Boolean?
+  passageGroupId                String?
+  isCrossText                   Boolean?
+  requiredEvidenceSlotsJson     Json?
+  crossTextSupportRuleJson      Json?
+  responseSpecVersion           String
+  auditContractVersion          String
+  sourceScanVersion             String
+  contentHash                   String
+  latestAuditContentHash        String?
+  approvedContentHash           String?
+  latestSourceCorpusHash        String?
+  latestAuditResult             PssaAuditResultStatus?
+  latestAuditAt                 DateTime?
+  importedFromFile              String?
+  importRunId                   String?
+  studentReadyBlockedReason     PssaStudentReadyBlockedReason @default(PENDING_REVIEW)
+  deprecatedReason              String?                       @db.Text
+  batchId                       String?
+  provenanceJson                Json
+  retiredAt                     DateTime?
+  createdAt                     DateTime                      @default(now())
+  updatedAt                     DateTime                      @updatedAt
 
   eligibleContentRef PssaStandardsCrosswalk? @relation(fields: [eligibleContentRefId], references: [id], onDelete: SetNull)
   importRun          PssaImportRun?          @relation(fields: [importRunId], references: [id], onDelete: SetNull)
   batch              PssaItemBatch?          @relation(fields: [batchId], references: [id], onDelete: SetNull)
+  passageGroup       PssaPassageGroup?       @relation(fields: [passageGroupId], references: [id], onDelete: Restrict)
   passages           PssaItemPassageLink[]
   auditResults       PssaAuditResult[]
   reviewLogs         PssaReviewLog[]
@@ -609,8 +622,48 @@ model PssaItem {
   @@index([alignmentStatus, approvalEligible])
   @@index([batchId])
   @@index([importRunId])
+  @@index([passageGroupId])
   @@index([contentHash])
   @@index([retiredAt])
+}
+
+model PssaPassageGroup {
+  id                   String   @id @default(cuid())
+  gradeLevel           Int
+  subject              String
+  groupType            String
+  genre                String
+  staminaBand          String
+  title                String
+  wordCount            Int
+  domainVocabularyLoad String?
+  textFeaturesJson     Json?
+  contentHash          String   @unique
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+
+  members PssaPassageGroupMember[]
+  items   PssaItem[]
+
+  @@index([gradeLevel, groupType])
+  @@index([staminaBand, genre])
+}
+
+model PssaPassageGroupMember {
+  id                         String @id @default(cuid())
+  groupId                    String
+  passageId                  String
+  slot                       String
+  position                   Int
+  passageContentHashSnapshot String
+
+  group   PssaPassageGroup @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  passage PssaPassage      @relation(fields: [passageId], references: [id], onDelete: Restrict)
+
+  @@unique([groupId, slot])
+  @@unique([groupId, passageId])
+  @@index([groupId])
+  @@index([passageId])
 }
 
 model PssaItemPassageLink {

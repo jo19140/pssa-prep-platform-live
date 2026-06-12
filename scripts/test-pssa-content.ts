@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import fs from "node:fs";
 import {
   buildMcqAbsoluteLanguageDistractorReport,
   buildMcqCorrectIsLongestReport,
@@ -25,6 +26,28 @@ import {
   evaluatePssaShortAnswerBandsNonempty,
   evaluatePssaVocabKeyConstruct,
 } from "./content/lib/pssa-import-plan";
+import {
+  buildPssaPairedSectionMap,
+  computePssaPassageGroupContentHash,
+  evaluatePssaPairedGroupStaminaMetadata,
+  evaluatePssaPairedMultipointEvidenceOverlap,
+  evaluatePssaPairedSectionLookbackBalance,
+  evaluatePssaRequiredEvidenceSlots,
+  pairedEvidenceKey,
+  pssaPassageGroupContentHashInput,
+  verifyPssaPassageGroupMemberSnapshots,
+  type PairedPassageGroupInput,
+} from "./content/lib/pssa-paired-passage-gates";
+import {
+  buildPssaStaminaSectionMap,
+  evaluatePssaDomainFactCheckRequired,
+  evaluatePssaItemFootnoteGiveaway,
+  evaluatePssaPassageStaminaMetadata,
+  evaluatePssaSectionLookbackBalance,
+  evaluatePssaStaminaGates,
+  evaluatePssaTextFeatureIntegrity,
+  evaluatePssaTextFeatureItemLink,
+} from "./content/lib/pssa-stamina-gates";
 
 assertPssaItemTypeMockContract();
 assertGrade3EbsrContract();
@@ -197,6 +220,19 @@ assert.equal(buildMcqPassageSpecificityReport([readingItem({
 })], [passage]).some((row) => row.ruleId === "PSSA_MCQ_PASSAGE_SPECIFIC_CHOICES" && row.result === "FAIL"), true);
 
 assert.equal(buildMcqPassageSpecificityReport([readingItem({
+  id: "distractor-synthesis-does-not-skip",
+  answerChoicesJson: [
+    "Beavers reshape streams by building dams that help water, soil, and wildlife.",
+    "The quiet library display helped visitors compare several drawings.",
+    "Branches and mud matter because they help beavers block stream flow.",
+    "Soil settles because beaver ponds hold water in place.",
+  ],
+  structuredChoicesJson: (readingItem() as any).structuredChoicesJson.map((choice: any, index: number) => index === 1
+    ? { ...choice, text: "The quiet library display helped visitors compare several drawings.", evidenceLinks: [{ evidenceKind: "paragraph_synthesis", sectionId: "paragraph_02" }] }
+    : choice),
+})], [passage]).some((row) => row.ruleId === "PSSA_MCQ_PASSAGE_SPECIFIC_CHOICES" && row.result === "FAIL"), true, "synthesis skip must be driven by correct-choice evidence only");
+
+assert.equal(buildMcqPassageSpecificityReport([readingItem({
   id: "missing-evidence",
   structuredChoicesJson: [{ text: "Beavers reshape streams by building dams that help water, soil, and wildlife.", isCorrect: true, distractorRole: null }],
 })], [passage]).some((row) => row.ruleId === "PSSA_MCQ_CHOICE_EVIDENCE_LINKS_REQUIRED" && row.result === "FAIL"), true);
@@ -229,7 +265,10 @@ assert.equal(buildMcqPassageSpecificityReport([{
 
 const ecCatalog = {
   "E03.A-V.4.1.1": "Determine or clarify the meaning of unknown and multiple-meaning words and phrases based on grade 3 reading and content.",
+  "E03.A-V.4.1.2": "Demonstrate understanding of word relationships and nuances in word meanings.",
   "E03.A-K.1.1.1": "Ask and answer questions to demonstrate understanding of a text, referring explicitly to the text as the basis for the answers.",
+  "E03.A-K.1.1.2": "Recount stories, including fables, folktales, and myths; determine the central message, lesson, or moral.",
+  "E03.A-K.1.1.3": "Describe characters in a story and explain how their actions contribute to the sequence of events.",
   "E03.A-C.2.1.1": "Explain the point of view from which a story is narrated, including the difference between first- and third-person narrations.",
 };
 
@@ -476,7 +515,319 @@ const beaverRows = buildPssaPassageQualityReport([beaverPassage]);
 assert.equal(hasBlockingPassageQualityFailure(beaverRows), false);
 assert.equal(beaverRows.some((row) => row.severity === "WARNING"), false);
 
+const staminaFixture = JSON.parse(fs.readFileSync("exemplars/pssa_grade3_stamina_pilot/syrup_released_length.json", "utf8"));
+const syrupPassage = staminaFixture.passages[0];
+const syrupItems = staminaFixture.items;
+const syrupSpecificityRows = buildMcqPassageSpecificityReport(syrupItems, [syrupPassage]);
+const syrupSpecificityFailures = syrupSpecificityRows.filter((row) => row.result === "FAIL");
+assert.deepEqual(syrupSpecificityFailures, [], "stamina syrup fixture must pass existing MCQ specificity detectors");
+assert.deepEqual(
+  syrupSpecificityRows
+    .filter((row) => row.itemId === "pssa_stamina_item_g3_syrup_02" && row.ruleId === "PSSA_MCQ_PASSAGE_SPECIFIC_CHOICES")
+    .map((row) => [row.result, row.evidence]),
+  [["SKIP", "vocabulary-in-context item"]],
+  "vocabulary-in-context MCQs must skip comprehension choice-specificity instead of using a relaxed threshold",
+);
+assert.equal(
+  buildMcqCorrectIsLongestReport(syrupItems).some((row) => row.itemId === "pssa_stamina_item_g3_syrup_02" && row.result === "FAIL"),
+  false,
+  "passage-anchored scorch key must remain the shortest choice and not trip correct-is-longest",
+);
+const syrupVocabItem = syrupItems.find((item: any) => item.id === "pssa_stamina_item_g3_syrup_02");
+assert.equal(evaluatePssaItemFootnoteGiveaway(syrupVocabItem, syrupPassage), "PASS", "scorch is not a footnoted giveaway");
+const syrupMainIdeaCorrectLinks = syrupItems
+  .find((item: any) => item.id === "pssa_stamina_item_g3_syrup_01")
+  .structuredChoicesJson.find((choice: any) => choice.isCorrect).evidenceLinks;
+assert.equal(
+  syrupMainIdeaCorrectLinks.every((link: any) => link.evidenceKind === "section_synthesis" && link.sectionId && !("quotedSpan" in link) && !("paragraphIndex" in link) && !("sentenceIndex" in link) && !("startChar" in link) && !("endChar" in link)),
+  true,
+  "main-idea synthesis evidence must use section IDs only, with no fabricated offsets",
+);
+assert.equal(
+  buildItemEcSkillMatchReport(syrupItems, [syrupPassage], ecCatalog).some((row) => row.skillMatchResult === "FAIL"),
+  false,
+  "stamina syrup fixture must pass existing EC skill-match detector",
+);
+assert.deepEqual(
+  buildPssaStaminaSectionMap(syrupPassage).map((section) => section.sectionId),
+  [
+    "section_0_intro",
+    "waiting_for_the_right_weather",
+    "tapping_the_trees",
+    "boiling_it_down",
+    "from_tree_to_table",
+    "section_sidebar",
+    "section_footnotes",
+  ],
+  "stamina syrup fixture section map must be canonical and auditable",
+);
+const syrupStaminaRows = evaluatePssaStaminaGates(syrupPassage, syrupItems);
+assert.equal(
+  syrupStaminaRows.every((row) => row.status === "PASS"),
+  true,
+  `stamina syrup fixture must pass all six stamina gates: ${JSON.stringify(syrupStaminaRows.filter((row) => row.status === "FAIL"))}`,
+);
+
+const boatFixture = JSON.parse(fs.readFileSync("exemplars/pssa_grade3_stamina_pilot/boat_literary_released_length.json", "utf8"));
+const boatPassage = boatFixture.passages[0];
+const boatItems = boatFixture.items;
+const boatSectionIds = buildPssaStaminaSectionMap(boatPassage).map((section) => section.sectionId);
+assert.equal(boatSectionIds.length, 19, "literary released-length passages must use paragraph-based section maps");
+assert.deepEqual([boatSectionIds[0], boatSectionIds.at(-1)], ["paragraph_01", "paragraph_19"]);
+const boatSpecificityRows = buildMcqPassageSpecificityReport(boatItems, [boatPassage]);
+assert.deepEqual(
+  boatSpecificityRows
+    .filter((row) => row.itemId === "pssa_stamina_item_g3_boat_01" && row.ruleId === "PSSA_MCQ_PASSAGE_SPECIFIC_CHOICES")
+    .map((row) => [row.result, row.evidence]),
+  [["SKIP", "synthesis evidence item"]],
+  "literary theme synthesis MCQs must skip choice-concreteness by explicit correct-choice paragraph_synthesis evidence",
+);
+assert.deepEqual(
+  boatSpecificityRows
+    .filter((row) => row.itemId === "pssa_stamina_item_g3_boat_04" && row.ruleId === "PSSA_MCQ_PASSAGE_SPECIFIC_CHOICES")
+    .map((row) => [row.result, row.evidence]),
+  [["SKIP", "vocabulary-in-context item"]],
+  "V-family figurative-language MCQs must remain scoped to vocab gates",
+);
+assert.equal(
+  boatSpecificityRows.some((row) => row.itemId === "pssa_stamina_item_g3_boat_05" && row.ruleId === "PSSA_MCQ_PASSAGE_SPECIFIC_CHOICES" && row.result === "FAIL"),
+  false,
+  "concrete literary detail MCQs must still run through passage-specificity rather than being skipped",
+);
+assert.deepEqual(boatSpecificityRows.filter((row) => row.result === "FAIL"), [], "boat literary fixture must pass existing MCQ specificity detectors");
+assert.equal(
+  buildItemEcSkillMatchReport(boatItems, [boatPassage], ecCatalog).some((row) => row.skillMatchResult === "FAIL"),
+  false,
+  "boat literary fixture must pass EC skill-match detector",
+);
+const boatStaminaRows = evaluatePssaStaminaGates(boatPassage, boatItems);
+assert.equal(boatStaminaRows.find((row) => row.gateId === "PSSA_DOMAIN_FACT_CHECK_REQUIRED")?.status, "SKIP", "literary fiction must not require fact-check notes unless explicitly flagged");
+assert.equal(boatStaminaRows.find((row) => row.gateId === "PSSA_TEXT_FEATURE_INTEGRITY")?.status, "PASS", "literary feature metadata must be validated by literary feature rules");
+assert.equal(boatStaminaRows.find((row) => row.gateId === "PSSA_TEXT_FEATURE_ITEM_LINK")?.status, "SKIP", "literary text features do not require item linkage unless mustUseInItem is true");
+assert.equal(boatStaminaRows.find((row) => row.gateId === "PSSA_PASSAGE_STAMINA_METADATA")?.status, "PASS", "literary released-length passages require genre, pov, word count, band, and feature metadata");
+assert.equal(boatStaminaRows.find((row) => row.gateId === "PSSA_SECTION_LOOKBACK_BALANCE")?.status, "PASS", "literary lookback balance must use multiple paragraph groups");
+assert.deepEqual(boatStaminaRows.filter((row) => row.status === "FAIL"), [], `boat literary fixture must not fail stamina gates: ${JSON.stringify(boatStaminaRows)}`);
+
+const owlFixture = JSON.parse(fs.readFileSync("exemplars/pssa_grade3_stamina_pilot/owls_paired_released_length.json", "utf8"));
+const owlGroup = owlFixture.passageGroups[0] as PairedPassageGroupInput;
+const owlItems = owlFixture.items;
+assert.equal(owlGroup.members.length, 2, "owl fixture must encode two real member passages");
+assert.deepEqual(owlGroup.members.map((member) => [member.slot, member.passageId]), [
+  ["passage_1", "pssa_stamina_psg_g3_owls_p1_night"],
+  ["passage_2", "pssa_stamina_psg_g3_owls_p2_barn"],
+]);
+assert.equal(owlItems.every((item: any) => item.passageGroupId === owlGroup.id), true, "all owl items must carry passageGroupId");
+assert.deepEqual(
+  owlItems.find((item: any) => item.id === "pssa_stamina_item_g3_owls_05").passageLinks.map((link: any) => [link.passageId, link.role]),
+  [["pssa_stamina_psg_g3_owls_p1_night", "primary"], ["pssa_stamina_psg_g3_owls_p2_barn", "primary"]],
+  "cross-text MCQ must link both member passages as co-equal primary links without a new enum value",
+);
+assert.deepEqual(
+  owlItems.find((item: any) => item.id === "pssa_stamina_item_g3_owls_06").passageLinks.map((link: any) => [link.passageId, link.role]),
+  [["pssa_stamina_psg_g3_owls_p1_night", "primary"], ["pssa_stamina_psg_g3_owls_p2_barn", "primary"]],
+  "cross-text SA must link both member passages as co-equal primary links",
+);
+assert.equal(evaluatePssaPairedGroupStaminaMetadata(owlGroup), "PASS", "paired_informational stamina metadata must evaluate at the group level");
+assert.equal(evaluatePssaPassageStaminaMetadata(owlGroup.members[0].passage as any), "SKIP", "a paired member passage must not fail released-length metadata on its own");
+assert.equal(owlGroup.members.every((member) => Array.isArray(member.passage.factCheckNotesJson) && member.passage.factCheckNotesJson.length >= 4), true, "both owl member passages must carry structured fact-check notes");
+assert.equal(owlGroup.members.every((member) => (member.passage.factCheckNotesJson as any[]).every((note) => new URL(note.sourceUrl).protocol === "https:")), true, "owl fact-check source URLs must be full parseable https URLs");
+assert.equal(computePssaPassageGroupContentHash(owlGroup), owlGroup.contentHash, "fixture group contentHash must match the derived group hash");
+assert.equal(
+  computePssaPassageGroupContentHash({ ...owlGroup, title: "Renamed Internal Admin Title" }),
+  owlGroup.contentHash,
+  "group contentHash must exclude title",
+);
+assert.equal(
+  JSON.stringify(pssaPassageGroupContentHashInput(owlGroup)).includes("passageContentHashSnapshot"),
+  true,
+  "group contentHash input must include persisted passageContentHashSnapshot values",
+);
+assert.equal(verifyPssaPassageGroupMemberSnapshots(owlGroup).ok, true, "member live hashes must match persisted group snapshots");
+assert.deepEqual(
+  verifyPssaPassageGroupMemberSnapshots({
+    ...owlGroup,
+    members: owlGroup.members.map((member, index) => index === 0 ? { ...member, passage: { ...member.passage, contentHash: "sha256:changed-live-member" } } : member),
+  }),
+  { ok: false, detail: "group stale — recompose: passage_1" },
+  "member drift must fail closed instead of silently changing group identity",
+);
+const owlSectionIds = buildPssaPairedSectionMap(owlGroup).map((section) => section.sectionId);
+assert.deepEqual(owlSectionIds.slice(0, 4), ["passage_1.paragraph_01", "passage_1.paragraph_02", "passage_1.paragraph_03", "passage_1.paragraph_04"]);
+assert.deepEqual(owlSectionIds.slice(-4), ["passage_2.paragraph_01", "passage_2.paragraph_02", "passage_2.paragraph_03", "passage_2.paragraph_04"]);
+assert.equal(
+  evaluatePssaPairedSectionLookbackBalance(owlGroup, owlItems).every((row) => row.status === "PASS"),
+  true,
+  "paired lookback must pass when cross-text evidence covers passage_1 and passage_2",
+);
+const crossMcq = owlItems.find((item: any) => item.id === "pssa_stamina_item_g3_owls_05");
+const crossSa = owlItems.find((item: any) => item.id === "pssa_stamina_item_g3_owls_06");
+assert.equal(evaluatePssaRequiredEvidenceSlots(crossMcq, owlGroup), "PASS", "cross-text MCQ slot coverage must come from correct-choice evidence");
+assert.equal(evaluatePssaRequiredEvidenceSlots(crossSa, owlGroup), "PASS", "cross-text SA slot coverage must come from rubric/acceptable-support metadata, not a correct choice");
+assert.equal(
+  evaluatePssaRequiredEvidenceSlots({
+    ...crossMcq,
+    structuredChoicesJson: crossMcq.structuredChoicesJson.map((choice: any) => choice.isCorrect
+      ? { ...choice, evidenceLinks: choice.evidenceLinks.filter((link: any) => link.passageSlot === "passage_1") }
+      : choice),
+  }, owlGroup),
+  "FAIL",
+  "cross-text item missing a required evidence slot must fail closed",
+);
+assert.equal(
+  evaluatePssaRequiredEvidenceSlots({
+    ...crossMcq,
+    structuredChoicesJson: crossMcq.structuredChoicesJson.map((choice: any) => choice.isCorrect
+      ? { ...choice, evidenceLinks: [{ evidenceKind: "whole_passage_synthesis", passageSlot: "passage_3", passageId: "unknown" }] }
+      : choice),
+  }, owlGroup),
+  "FAIL",
+  "unknown passageSlot must fail closed",
+);
+assert.equal(pairedEvidenceKey({ passageSlot: "passage_1", paragraphIndex: 0, sentenceIndex: 2 }), "passage_1:0:2");
+assert.equal(pairedEvidenceKey({ passageSlot: "passage_2", paragraphIndex: 0, sentenceIndex: 2 }), "passage_2:0:2");
+assert.deepEqual(
+  evaluatePssaPairedMultipointEvidenceOverlap([
+    { id: "p1-ms", interactionType: "MULTI_SELECT", acceptableSupportEvidenceLinks: [{ passageSlot: "passage_1", paragraphIndex: 0, sentenceIndex: 2 }, { passageSlot: "passage_1", paragraphIndex: 1, sentenceIndex: 1 }] },
+    { id: "p2-ms", interactionType: "MULTI_SELECT", acceptableSupportEvidenceLinks: [{ passageSlot: "passage_2", paragraphIndex: 0, sentenceIndex: 2 }, { passageSlot: "passage_2", paragraphIndex: 1, sentenceIndex: 1 }] },
+  ]),
+  { "p1-ms": "PASS", "p2-ms": "PASS" },
+  "paired overlap keys must not collide across passage_1 and passage_2 sentence IDs",
+);
+assert.deepEqual(
+  evaluatePssaPairedMultipointEvidenceOverlap([
+    { id: "a-ms", interactionType: "MULTI_SELECT", acceptableSupportEvidenceLinks: [{ passageSlot: "passage_1", paragraphIndex: 0, sentenceIndex: 2 }, { passageSlot: "passage_1", paragraphIndex: 1, sentenceIndex: 1 }] },
+    { id: "b-ms", interactionType: "MULTI_SELECT", acceptableSupportEvidenceLinks: [{ passageSlot: "passage_1", paragraphIndex: 0, sentenceIndex: 2 }, { passageSlot: "passage_1", paragraphIndex: 1, sentenceIndex: 1 }] },
+  ]),
+  { "a-ms": "FAIL", "b-ms": "FAIL" },
+  "paired overlap gate must still fail true same-passage multipoint evidence reuse",
+);
+
+const footnotedPassage = {
+  id: "footnote-def",
+  text: "A spile¹ carries sap.\n\n¹ **spile** — a small spout",
+  wordCount: 6,
+  textFeaturesJson: [
+    { type: "footnote", term: "spile", marker: "¹", bodyText: "¹ **spile** — a small spout", sectionId: "section_footnotes" },
+  ],
+};
+assert.equal(evaluatePssaItemFootnoteGiveaway({
+  id: "footnote-vocab",
+  eligibleContent: "E03.B-V.4.1.1",
+  studentFacingPrompt: "What does spile mean?",
+  targetWordOrPhrase: "spile",
+}, footnotedPassage), "FAIL", "vocab items cannot test visible footnote definitions");
+assert.equal(evaluatePssaItemFootnoteGiveaway({
+  id: "footnote-application",
+  eligibleContent: "E03.B-V.4.1.1",
+  studentFacingPrompt: "Which detail shows how a spile is used?",
+  targetWordOrPhrase: "spile",
+  testsApplicationNotDefinition: true,
+}, footnotedPassage), "PASS", "application vocab items can use a footnoted term only when explicitly flagged");
+assert.equal(evaluatePssaItemFootnoteGiveaway({
+  id: "footnote-missing-target",
+  eligibleContent: "E03.B-V.4.1.1",
+  studentFacingPrompt: "What does the word mean?",
+}, footnotedPassage), "FAIL", "footnoted-passage vocab items fail closed without targetWordOrPhrase");
+
+assert.equal(evaluatePssaDomainFactCheckRequired({ id: "foundation-no-facts", text: "Short foundation text." }), "SKIP");
+assert.equal(evaluatePssaDomainFactCheckRequired({
+  id: "literary-explicit-fact-check",
+  text: "A fictional character says a real bridge was built in 1901.",
+  genre: "literary_narrative",
+  factCheckRequired: true,
+  factCheckNotesJson: null,
+}), "FAIL", "explicit factCheckRequired must override literary default skip");
+assert.equal(evaluatePssaDomainFactCheckRequired({
+  ...syrupPassage,
+  factCheckNotesJson: [{ claimId: "bad", claim: "Sap claim", sourceTitle: "Common knowledge", organization: "Someone", sourceUrl: "example.com/...", claimSupported: true, dateAccessed: "2026-06-09" }],
+}), "FAIL", "stamina fact notes require full https source URLs and structured source metadata");
+
+assert.equal(evaluatePssaTextFeatureIntegrity({
+  id: "bad-feature",
+  text: "### Empty Heading\n\n¹ **word** — not enough",
+  textFeaturesJson: [
+    { type: "heading", label: "Empty Heading", sectionId: "empty_heading", bodyText: "### Empty Heading" },
+    { type: "footnote", term: "absent", marker: "¹", bodyText: "¹ **word** — not enough", sectionId: "section_footnotes" },
+  ],
+}), "FAIL", "meaningless headings and non-defining footnotes must fail text-feature integrity");
+assert.equal(evaluatePssaTextFeatureIntegrity({
+  id: "bad-literary-feature",
+  text: "June smiled. The boat floated.",
+  genre: "literary_narrative",
+  staminaBand: "released_length",
+  textFeaturesJson: [{ type: "figurative_language", featureText: "absent comparison" }],
+}), "FAIL", "literary featureText must be non-empty and exact in the passage");
+assert.equal(evaluatePssaTextFeatureItemLink({
+  id: "unlinked-sidebar",
+  text: "Body text.\n\n> **Did You Know?** Extra fact.",
+  textFeaturesJson: [{ type: "sidebar", label: "Did You Know?", sectionId: "section_sidebar", bodyText: "> **Did You Know?** Extra fact." }],
+}, []), "FAIL", "non-decorative text features require at least one linked item");
+assert.equal(evaluatePssaTextFeatureItemLink({
+  id: "literary-required-link",
+  text: "June smiled. The boat floated.",
+  genre: "literary_narrative",
+  textFeaturesJson: [{ type: "figurative_language", featureText: "The boat floated.", mustUseInItem: true, sectionId: "paragraph_01" }],
+}, []), "FAIL", "literary features require item linkage only when mustUseInItem is true");
+assert.equal(evaluatePssaTextFeatureItemLink({
+  id: "literary-required-link-ok",
+  text: "June smiled.\n\nThe boat floated.",
+  genre: "literary_narrative",
+  textFeaturesJson: [{ type: "figurative_language", featureText: "The boat floated.", mustUseInItem: true, sectionId: "paragraph_02" }],
+}, [{
+  id: "linked-literary-item",
+  passageId: "literary-required-link-ok",
+  structuredChoicesJson: [{ text: "The boat floated.", evidenceLinks: [{ evidenceKind: "paragraph_synthesis", sectionId: "paragraph_02" }] }],
+}]), "PASS", "mustUseInItem literary features may be satisfied by paragraph evidence links");
+
+assert.equal(evaluatePssaPassageStaminaMetadata({
+  id: "stamina-missing-metadata",
+  text: "Longer text without required metadata.",
+  staminaBand: "released_length",
+}), "FAIL", "released_length passages require stamina metadata");
+assert.equal(evaluatePssaPassageStaminaMetadata({
+  id: "literary-missing-pov",
+  text: "June smiled at the boat.",
+  staminaBand: "released_length",
+  genre: "literary_narrative",
+  wordCount: 5,
+  textFeaturesJson: [{ type: "dialogue", featureText: "June smiled" }],
+}), "FAIL", "literary released-length metadata must include pov");
+assert.equal(evaluatePssaPassageStaminaMetadata({
+  id: "foundation-null-metadata",
+  text: "Short foundation passage without stamina metadata.",
+  staminaBand: null,
+}), "SKIP", "foundation/null passages must not fail stamina metadata checks");
+assert.equal(evaluatePssaSectionLookbackBalance({
+  ...syrupPassage,
+  id: "one-section",
+}, [{
+  id: "one-section-item",
+  passageId: "one-section",
+  structuredChoicesJson: [{
+    text: "same section",
+    evidenceLinks: [{ sectionId: "waiting_for_the_right_weather", evidenceKind: "section_synthesis" }],
+  }],
+}]), "FAIL", "released_length itemsets citing only one section must fail lookback balance");
+assert.equal(evaluatePssaSectionLookbackBalance({
+  id: "drama-lookback-deferred",
+  text: "Scene one.\n\nScene two.",
+  staminaBand: "released_length",
+  genre: "drama",
+}, []), "SKIP", "drama lookback balance is explicitly deferred");
+
 const grade3Plan = buildPlan(3);
+assert.deepEqual(grade3Plan.manifest.map((row) => [row.recordType, row.count, row.expectedCount]), [
+  ["passage", 7, 7],
+  ["item", 91, 91],
+  ["deprecated", 12, 12],
+  ["supersession", 12, 12],
+  ["batch", 8, 8],
+], "stamina fixture must not modify the Grade 3 import manifest");
+for (const itemId of ["pssa_item_g3_reading_6", "pssa_item_g3_reading_7", "pssa_item_g3_reading_16", "pssa_item_g3_reading_17"]) {
+  const item = grade3Plan.activeItems.find((row) => row.itemId === itemId);
+  assert(item, `${itemId} must remain in the active foundation plan`);
+  assert.deepEqual(item.blockedReasons, [], `${itemId} must still pass all import gates`);
+}
 for (const gateId of PSSA_CONTENT_QUALITY_GATE_IDS) {
   const tally = grade3Plan.gateTallies.get(gateId);
   assert.equal(tally?.fail ?? 0, 0, `${gateId} must have zero failures across the Grade 3 import plan`);

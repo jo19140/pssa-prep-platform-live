@@ -316,10 +316,21 @@ function testScopeProof() {
     "app/api/test/submit/route.ts",
     "lib/serverScoring.ts",
     "app/student/StudentTest.tsx",
-    "prisma/schema.prisma",
   ];
   const changed = new Set(require("node:child_process").execSync("git diff --name-only", { encoding: "utf8" }).trim().split(/\n/).filter(Boolean));
   for (const file of forbidden) assert.equal(changed.has(file), false, `${file} must be untouched`);
+  const schema = fs.readFileSync(path.join(process.cwd(), "prisma/schema.prisma"), "utf8");
+  const baseSchema = require("node:child_process").execSync("git show HEAD:prisma/schema.prisma", { encoding: "utf8" });
+  assert.equal(modelBlock(schema, "PssaFormSession"), modelBlock(baseSchema, "PssaFormSession"), "PssaFormSession model must be unchanged");
+  assert.equal(modelBlock(schema, "PssaFormResponse"), modelBlock(baseSchema, "PssaFormResponse"), "PssaFormResponse model must be unchanged");
+  assertNullableModelFields(schema, "PssaPassage", ["staminaBand", "genre", "textFeaturesJson", "domainVocabularyLoad", "factCheckNotesJson"]);
+  assertNullableModelFields(schema, "PssaItem", ["targetWordOrPhrase", "testsApplicationNotDefinition"]);
+  const pssaFormSessionBlock = modelBlock(schema, "PssaFormSession");
+  const pssaFormResponseBlock = modelBlock(schema, "PssaFormResponse");
+  for (const field of ["staminaBand", "genre", "textFeaturesJson", "domainVocabularyLoad", "factCheckNotesJson", "targetWordOrPhrase", "testsApplicationNotDefinition"]) {
+    assert.equal(pssaFormSessionBlock.includes(field), false, `${field} must not be added to PssaFormSession`);
+    assert.equal(pssaFormResponseBlock.includes(field), false, `${field} must not be added to PssaFormResponse`);
+  }
   const newSources = [
     "lib/content/pssaFormSession.ts",
     "app/api/pssa/session/launch/route.ts",
@@ -341,6 +352,22 @@ function testScopeProof() {
   const serviceSource = fs.readFileSync(path.join(process.cwd(), "lib/content/pssaFormSession.ts"), "utf8");
   assert(serviceSource.includes("consumeRateLimit"));
   assert(serviceSource.includes("getClientIp"));
+}
+
+function modelBlock(schema: string, modelName: string) {
+  const lines = schema.split("\n");
+  const start = lines.findIndex((line) => line === `model ${modelName} {`);
+  assert.notEqual(start, -1, `${modelName} model must exist`);
+  const end = lines.findIndex((line, index) => index > start && line === "}");
+  assert.notEqual(end, -1, `${modelName} model must close`);
+  return lines.slice(start, end + 1).join("\n");
+}
+
+function assertNullableModelFields(schema: string, modelName: string, fields: string[]) {
+  const block = modelBlock(schema, modelName);
+  for (const field of fields) {
+    assert(new RegExp(`\\n\\s+${field}\\s+\\w+\\?`).test(block), `${field} must be nullable on ${modelName}`);
+  }
 }
 
 async function main() {
