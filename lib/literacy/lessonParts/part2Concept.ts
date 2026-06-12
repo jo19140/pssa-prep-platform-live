@@ -17,6 +17,7 @@ export function generatePart2Concept(ctx: LessonGeneratorContext): GeneratedLess
       title: "New thing to learn",
       teachingLanguage: "Today, a word can have a silent e at the end. The silent e helps the vowel say its name.",
       examples: ctx.targetWords,
+      kidRuleStatement: content.kidRuleStatement,
     },
     tutorVisibleCopy: {
       purpose: "Introduce the specific daily target without using phoneme notation or broad category language.",
@@ -32,6 +33,7 @@ export function generatePart2Concept(ctx: LessonGeneratorContext): GeneratedLess
       demonstrationPairs,
       demonstrationExamples,
       morphologyJson,
+      kidRuleStatement: content.kidRuleStatement,
       teachingLanguage: ctx.phasePosition.phaseNumber >= 4
         ? "These letters work together to help the vowel sound stay long."
         : "Silent e helps the vowel say its name in these words.",

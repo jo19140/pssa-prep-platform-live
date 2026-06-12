@@ -4,11 +4,15 @@ import { CONTENT_V3_DAILY_TARGETS, PHASE_3_MID_TARGETS, PHASE_4_ENTRY_TARGETS, P
 import { auditGeneratedLessonDraft, evaluateLessonApprovalReadiness } from "../lib/literacy/lessonAudit";
 import { deterministicLessonPartRunner, generateLessonDraft } from "../lib/literacy/lessonGenerator";
 import { generatePart1Warmup } from "../lib/literacy/lessonParts/part1Warmup";
+import { generatePart2Concept } from "../lib/literacy/lessonParts/part2Concept";
 import { generatePart3Decoding } from "../lib/literacy/lessonParts/part3Decoding";
 import { generatePart6Encoding } from "../lib/literacy/lessonParts/part6Encoding";
 import type { LessonGeneratorContext } from "../lib/literacy/lessonParts/types";
 import { auditPassage } from "../lib/literacy/passageAudit";
 import { detectVcePattern, validatePseudowordCandidate, validatePseudowordSet } from "../lib/literacy/pseudowordValidator";
+
+const A_E_KID_RULE_STATEMENT = "When a word ends in a silent e, the e is quiet — but it makes the a say its name. Watch: cap turns into cape.";
+const A_E_RETEACH_PROMPT = "Look at the e at the end. It is quiet, but it helps a say its name. Try again: {word}.";
 
 function lessonContext(targetCode = "a_e"): LessonGeneratorContext {
   const seedTarget = CONTENT_V3_DAILY_TARGETS.find((target) => target.code === targetCode);
@@ -73,7 +77,14 @@ async function main() {
   const part1 = generatePart1Warmup(ctx);
   assert.equal((part1.contentJson.warmupWords as string[]).some((word) => /a[^aeiou]+e$/.test(word)), false);
 
+  const part2 = generatePart2Concept(ctx);
+  assert.equal(part2.contentJson.kidRuleStatement, A_E_KID_RULE_STATEMENT);
+  assert.equal(part2.kidVisibleCopy.kidRuleStatement, A_E_KID_RULE_STATEMENT);
+
   const part3 = generatePart3Decoding(ctx);
+  assert.equal(part3.contentJson.reteachPrompt, A_E_RETEACH_PROMPT);
+  assert.equal(part3.kidVisibleCopy.reteachPrompt, A_E_RETEACH_PROMPT);
+  assert.equal(String(part3.contentJson.reteachPrompt).includes("{word}"), true);
   const contrastiveLines = part3.contentJson.contrastiveLines as Array<{ lineNumber: number; role: string; words: string[] }>;
   assert.equal(contrastiveLines.length, 4);
   assert.equal(contrastiveLines.some((line) => line.lineNumber === 5), false);
@@ -93,9 +104,20 @@ async function main() {
   assert.deepEqual(draft.parts.map((part) => part.partNumber), [1, 2, 3, 4, 5, 6, 7, 8]);
   assert.equal(draft.dailyTargetCode, "a_e");
   assert.equal(draft.targetPattern, "a_e");
+  assert.equal(draft.parts.find((part) => part.partNumber === 2)?.contentJson.kidRuleStatement, A_E_KID_RULE_STATEMENT);
+  assert.equal(draft.parts.find((part) => part.partNumber === 3)?.contentJson.reteachPrompt, A_E_RETEACH_PROMPT);
 
   const audit = auditGeneratedLessonDraft(draft);
   assert.equal(audit.canPersist, true, audit.blockers.join("\n"));
+
+  const nonAeCtx = lessonContext("i_e");
+  const nonAePart2 = generatePart2Concept(nonAeCtx);
+  const nonAePart3 = generatePart3Decoding(nonAeCtx);
+  assert.equal(nonAePart2.contentJson.kidRuleStatement, undefined);
+  assert.equal(nonAePart2.kidVisibleCopy.kidRuleStatement, undefined);
+  assert.equal(nonAePart3.contentJson.reteachPrompt, undefined);
+  assert.equal(nonAePart3.kidVisibleCopy.reteachPrompt, undefined);
+  assert.equal(nonAeCtx.dailyTarget.tutorLabel.includes("silent-e"), true);
 
   for (const targetCode of Object.keys(LESSON_CONTENT_BY_DAILY_TARGET)) {
     const targetCtx = lessonContext(targetCode);

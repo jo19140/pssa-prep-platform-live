@@ -2,6 +2,8 @@ import type { MorphologyAnalyzerConfig } from "@/lib/literacy/morphologyAnalyzer
 
 export type LessonContentByDailyTarget = {
   demoMode?: "minimal_pairs" | "examples_only" | "transformation_pairs";
+  kidRuleStatement?: string;
+  reteachPrompt?: string;
   demonstrationPairs?: { closed?: string; base?: string; target: string }[];
   demonstrationExamples?: string[];
   reviewWords?: string[];
@@ -26,6 +28,8 @@ const sharedHeartWordsAssumedKnown = ["I", "a", "the", "to"];
 
 export const LESSON_CONTENT_BY_DAILY_TARGET: Record<string, LessonContentByDailyTarget> = {
   a_e: {
+    kidRuleStatement: "When a word ends in a silent e, the e is quiet — but it makes the a say its name. Watch: cap turns into cape.",
+    reteachPrompt: "Look at the e at the end. It is quiet, but it helps a say its name. Try again: {word}.",
     demonstrationPairs: [
       { closed: "cap", target: "cape" },
       { closed: "at", target: "ate" },

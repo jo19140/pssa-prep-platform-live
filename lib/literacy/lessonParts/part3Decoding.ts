@@ -38,6 +38,7 @@ export function generatePart3Decoding(ctx: LessonGeneratorContext): GeneratedLes
       title: "Read the word lines",
       directions: "Read each line with Harper. Take your time and try each word.",
       contrastiveLines,
+      reteachPrompt: content.reteachPrompt,
     },
     tutorVisibleCopy: {
       purpose: "Practice target real words, contrast target words against closed-syllable review, then read target-only pseudowords.",
@@ -47,6 +48,7 @@ export function generatePart3Decoding(ctx: LessonGeneratorContext): GeneratedLes
       skillFocus: "word_level_decoding",
       contrastiveLines,
       pseudowordValidation,
+      reteachPrompt: content.reteachPrompt,
       studentDisplayMode: "WORD_LINES",
       responseMode: "speech_response",
     },
