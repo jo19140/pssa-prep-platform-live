@@ -2,8 +2,9 @@ import { StudentPracticeSession } from "@/components/literacy/StudentPracticeSes
 import { buildLessonPlayerData } from "@/components/literacy/lessonPlayerData";
 import { SynesisPageShell } from "@/components/synesis/SynesisPageShell";
 
-export default async function StudentPracticePage() {
-  const lesson = await buildLessonPlayerData("a_e");
+export default async function TargetPracticePage({ params }: { params: Promise<{ target: string }> }) {
+  const { target } = await params;
+  const lesson = await buildLessonPlayerData(target);
 
   return (
     <SynesisPageShell roles={["STUDENT"]}>
