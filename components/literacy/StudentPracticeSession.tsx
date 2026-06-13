@@ -12,9 +12,9 @@ const PART_META = [
   { icon: "Spark", short: "Rule", mode: "teaching", evidence: "no score" },
   { icon: "Words", short: "Words", mode: "read and retry", evidence: "speech attempt" },
   { icon: "Heart", short: "Power", mode: "listen and repeat", evidence: "not scored" },
-  { icon: "Read", short: "Sent.", mode: "coming soon", evidence: "placeholder" },
+  { icon: "Read", short: "Sent.", mode: "listen and encourage", evidence: "completion only" },
   { icon: "Spell", short: "Spell", mode: "spelling match", evidence: "typed/tile" },
-  { icon: "Story", short: "Story", mode: "coming soon", evidence: "placeholder" },
+  { icon: "Story", short: "Story", mode: "listen and encourage", evidence: "completion only" },
   { icon: "Talk", short: "Talk", mode: "open response", evidence: "no auto-grade" },
 ];
 
@@ -255,8 +255,28 @@ function PartRenderer({
       );
     case 4:
       return <PowerWordsPart part={part} onSpeak={onSpeak} onComplete={onComplete} />;
+    case 5:
+      return (
+        <SentenceReadingPart
+          part={part}
+          onComplete={onComplete}
+          onHarperMessage={onHarperMessage}
+          onBuddyState={onBuddyState}
+          onSpeak={onSpeak}
+        />
+      );
     case 6:
       return <SpellingPart part={part} onSpeak={onSpeak} onComplete={onComplete} />;
+    case 7:
+      return (
+        <StoryReadingPart
+          part={part}
+          onComplete={onComplete}
+          onHarperMessage={onHarperMessage}
+          onBuddyState={onBuddyState}
+          onSpeak={onSpeak}
+        />
+      );
     case 8:
       return <TalkPart part={part} onComplete={onComplete} />;
     default:
@@ -806,6 +826,160 @@ function PowerWordsPart({
   );
 }
 
+function SentenceReadingPart({
+  part,
+  onComplete,
+  onHarperMessage,
+  onBuddyState,
+  onSpeak,
+}: {
+  part: LessonPlayerPart;
+  onComplete: (extra?: Record<string, unknown>) => void;
+  onHarperMessage: (text: string) => void;
+  onBuddyState: (state: BuddyState) => void;
+  onSpeak: (text: string) => Promise<void>;
+}) {
+  const sentences = stringArray(part.contentJson.sentences);
+  const [reading, setReading] = useState(false);
+  const [finished, setFinished] = useState(false);
+
+  useEffect(() => {
+    return () => onBuddyState("idle");
+  }, [onBuddyState]);
+
+  function beginReading() {
+    setReading(true);
+    setFinished(false);
+    onBuddyState("listening");
+    onHarperMessage("I'm listening. Read each sentence out loud when you are ready.");
+  }
+
+  async function finishReading() {
+    setFinished(true);
+    setReading(false);
+    const message = "I loved listening to you read those sentences!";
+    onHarperMessage(message);
+    await onSpeak(message);
+    onComplete({ listenAndEncourage: true, sentenceCount: sentences.length });
+  }
+
+  return (
+    <div className="flex flex-1 flex-col gap-5">
+      <div className="grid gap-3">
+        {sentences.map((sentence, index) => (
+          <div key={`${sentence}-${index}`} className="rounded-3xl border-2 border-[#ead9c2] bg-[#fffdf8] p-5">
+            <p className="text-xs font-black uppercase tracking-wide text-slate-500">Sentence {index + 1}</p>
+            <p className="mt-2 text-2xl font-black leading-relaxed text-slate-950">{sentence}</p>
+          </div>
+        ))}
+      </div>
+      <div className={`rounded-3xl border-2 p-4 font-black ${reading ? "border-blue-200 bg-blue-50 text-blue-900" : "border-[#efe1d2] bg-white text-slate-700"}`}>
+        {reading ? "Harper is listening while you read. Tap done when you finish." : "Tap start when you are ready to read the sentences."}
+      </div>
+      <div className="mt-auto flex flex-wrap gap-3">
+        <button onClick={beginReading} className="rounded-2xl border border-[#e8d9c7] bg-white px-5 py-4 font-black">
+          Start reading
+        </button>
+        <button
+          onClick={finishReading}
+          disabled={!reading && !finished}
+          className="rounded-2xl bg-amber-300 px-5 py-4 font-black text-amber-950 disabled:cursor-not-allowed disabled:opacity-50"
+        >
+          Done reading
+        </button>
+      </div>
+    </div>
+  );
+}
+
+function StoryReadingPart({
+  part,
+  onComplete,
+  onHarperMessage,
+  onBuddyState,
+  onSpeak,
+}: {
+  part: LessonPlayerPart;
+  onComplete: (extra?: Record<string, unknown>) => void;
+  onHarperMessage: (text: string) => void;
+  onBuddyState: (state: BuddyState) => void;
+  onSpeak: (text: string) => Promise<void>;
+}) {
+  const title = stringValue(part.kidVisibleCopy.title) || "Story";
+  const passage = stringValue(part.contentJson.passageText) || stringValue(part.kidVisibleCopy.passageText);
+  const listenFirstAllowed = part.contentJson.listenFirstAllowed !== false;
+  const readOnOwnAllowed = part.contentJson.readOnOwnAllowed !== false;
+  const [mode, setMode] = useState<"idle" | "listening-first" | "reading">("idle");
+  const [finished, setFinished] = useState(false);
+
+  useEffect(() => {
+    return () => onBuddyState("idle");
+  }, [onBuddyState]);
+
+  async function listenFirst() {
+    if (!listenFirstAllowed) return;
+    setMode("listening-first");
+    setFinished(false);
+    onHarperMessage("Listen first. Then you can read it on your own.");
+    await onSpeak(passage);
+    setMode("idle");
+    onHarperMessage("Now you can read the story on your own when you are ready.");
+  }
+
+  function readOnOwn() {
+    if (!readOnOwnAllowed) return;
+    setMode("reading");
+    setFinished(false);
+    onBuddyState("listening");
+    onHarperMessage("I'm listening. Read the story in your own voice.");
+  }
+
+  async function finishReading() {
+    setFinished(true);
+    setMode("idle");
+    const message = "I loved listening to you read that!";
+    onHarperMessage(message);
+    await onSpeak(message);
+    onComplete({ listenAndEncourage: true, connectedTextMode: "read_on_own" });
+  }
+
+  return (
+    <div className="flex flex-1 flex-col gap-5">
+      <div className="rounded-3xl border-2 border-[#ead9c2] bg-[#fffdf8] p-5">
+        <p className="text-xs font-black uppercase tracking-wide text-slate-500">Story</p>
+        <h3 className="mt-2 text-3xl font-black">{title}</h3>
+        <p className="mt-4 whitespace-pre-wrap text-xl font-extrabold leading-relaxed text-slate-950">{passage}</p>
+      </div>
+      <div className={`rounded-3xl border-2 p-4 font-black ${mode === "reading" ? "border-blue-200 bg-blue-50 text-blue-900" : "border-[#efe1d2] bg-white text-slate-700"}`}>
+        {mode === "reading" ? "Harper is listening while you read. Tap done when you finish." : "Choose listen first, or read the story on your own."}
+      </div>
+      <div className="mt-auto flex flex-wrap gap-3">
+        <button
+          onClick={listenFirst}
+          disabled={!listenFirstAllowed || mode === "listening-first"}
+          className="rounded-2xl border border-[#e8d9c7] bg-white px-5 py-4 font-black disabled:cursor-not-allowed disabled:opacity-50"
+        >
+          {mode === "listening-first" ? "Listening..." : "Listen first"}
+        </button>
+        <button
+          onClick={readOnOwn}
+          disabled={!readOnOwnAllowed}
+          className="rounded-2xl border border-[#e8d9c7] bg-white px-5 py-4 font-black disabled:cursor-not-allowed disabled:opacity-50"
+        >
+          Read on my own
+        </button>
+        <button
+          onClick={finishReading}
+          disabled={mode !== "reading" && !finished}
+          className="rounded-2xl bg-amber-300 px-5 py-4 font-black text-amber-950 disabled:cursor-not-allowed disabled:opacity-50"
+        >
+          Done reading
+        </button>
+      </div>
+    </div>
+  );
+}
+
 function SpellingPart({
   part,
   onSpeak,
@@ -938,7 +1112,8 @@ function speechForPart(part: LessonPlayerPart) {
 
 function partDescription(part: LessonPlayerPart) {
   if (part.partNumber === 3) return "Read the generated word lines with Harper.";
-  if (part.partNumber === 5 || part.partNumber === 7) return "Visible placeholder for a later speech slice.";
+  if (part.partNumber === 5) return "Read the generated sentences with Harper listening.";
+  if (part.partNumber === 7) return "Listen first or read the generated story on your own.";
   return stringValue(part.contentJson.skillFocus).replace(/_/g, " ") || "Generated lesson activity.";
 }
 
