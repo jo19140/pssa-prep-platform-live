@@ -18,6 +18,17 @@ const PART_META = [
   { icon: "Talk", short: "Talk", mode: "open response", evidence: "no auto-grade" },
 ];
 
+const KID_FACING_PART_TITLES: Record<number, string> = {
+  1: "Warm-up",
+  2: "New thing to learn",
+  3: "Read the words",
+  4: "Power words",
+  5: "Read sentences",
+  6: "Spell it",
+  7: "Read the story",
+  8: "Talk about it",
+};
+
 type CompletedState = Record<number, boolean>;
 type LessonPlayerEventType =
   | "LESSON_STARTED"
@@ -175,7 +186,7 @@ function GeneratedLessonPlayer({ lesson }: { lesson: LessonPlayerData & { enable
             <div className="flex min-w-0 flex-col p-5">
               <div className="mb-5 flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
                 <div>
-                  <h2 className="text-3xl font-black tracking-tight">{activePart.partLabel}</h2>
+                  <h2 className="text-3xl font-black tracking-tight">{kidFacingPartTitle(activePart)}</h2>
                   <p className="mt-1 text-sm font-bold text-slate-500">{partDescription(activePart)}</p>
                 </div>
                 <span className="w-fit rounded-full border border-violet-200 bg-violet-50 px-3 py-1 text-xs font-black text-violet-800">
@@ -1074,7 +1085,7 @@ function PlaceholderPart({ part }: { part: LessonPlayerPart }) {
     <div className="flex flex-1 flex-col justify-center gap-4 text-center">
       <div className="mx-auto max-w-xl rounded-3xl border-2 border-dashed border-[#ead9c2] bg-[#fffdf8] p-6">
         <p className="text-sm font-black uppercase tracking-wide text-slate-500">Coming in the next lesson-player slice</p>
-        <h3 className="mt-2 text-2xl font-black">{stringValue(part.kidVisibleCopy.title) || part.partLabel}</h3>
+        <h3 className="mt-2 text-2xl font-black">{kidFacingPartTitle(part)}</h3>
         <p className="mt-3 text-base font-bold text-slate-600">{preview}</p>
       </div>
     </div>
@@ -1108,6 +1119,10 @@ function DemoCard({ label, word }: { label: string; word: string }) {
 function speechForPart(part: LessonPlayerPart) {
   if (part.partNumber === 2) return stringValue(part.contentJson.kidRuleStatement) || "Listen to the new thing with Harper.";
   return stringValue(part.kidVisibleCopy.directions) || stringValue(part.kidVisibleCopy.title) || part.partLabel;
+}
+
+function kidFacingPartTitle(part: LessonPlayerPart) {
+  return KID_FACING_PART_TITLES[part.partNumber] || part.partLabel;
 }
 
 function partDescription(part: LessonPlayerPart) {

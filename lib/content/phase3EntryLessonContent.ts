@@ -28,8 +28,8 @@ const sharedHeartWordsAssumedKnown = ["I", "a", "the", "to"];
 
 export const LESSON_CONTENT_BY_DAILY_TARGET: Record<string, LessonContentByDailyTarget> = {
   a_e: {
-    kidRuleStatement: "When a word ends in a silent e, the e is quiet — but it makes the a say its name. Watch: cap turns into cape.",
-    reteachPrompt: "Look at the e at the end. It is quiet, but it helps a say its name. Try again: {word}.",
+    kidRuleStatement: "When we add an e to the end of a word like cap, it makes the a say its name — and the e is silent. Watch: cap turns into cape.",
+    reteachPrompt: "The e at the end is silent, and it makes the a say its name. Try again: {word}.",
     demonstrationPairs: [
       { closed: "cap", target: "cape" },
       { closed: "at", target: "ate" },

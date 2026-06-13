@@ -11,8 +11,8 @@ import type { LessonGeneratorContext } from "../lib/literacy/lessonParts/types";
 import { auditPassage } from "../lib/literacy/passageAudit";
 import { detectVcePattern, validatePseudowordCandidate, validatePseudowordSet } from "../lib/literacy/pseudowordValidator";
 
-const A_E_KID_RULE_STATEMENT = "When a word ends in a silent e, the e is quiet — but it makes the a say its name. Watch: cap turns into cape.";
-const A_E_RETEACH_PROMPT = "Look at the e at the end. It is quiet, but it helps a say its name. Try again: {word}.";
+const A_E_KID_RULE_STATEMENT = "When we add an e to the end of a word like cap, it makes the a say its name — and the e is silent. Watch: cap turns into cape.";
+const A_E_RETEACH_PROMPT = "The e at the end is silent, and it makes the a say its name. Try again: {word}.";
 
 function lessonContext(targetCode = "a_e"): LessonGeneratorContext {
   const seedTarget = CONTENT_V3_DAILY_TARGETS.find((target) => target.code === targetCode);
