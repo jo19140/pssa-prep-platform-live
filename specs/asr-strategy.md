@@ -31,6 +31,17 @@ Phase B evidence ([[asr-reality-check-RESULTS-phaseB]], 2026-06-08, small founde
 
 Sý Learning's durable advantage is **owning the largest labeled corpus of children reading aloud, and training a child-reading verifier on it** — target text + audio + what-the-child-actually-said + skill-tagged error labels + longitudinal reading-outcome data. No competitor can copy that, because nobody else is sitting on the data. Off-the-shelf ASR can't hear a kindergartner read a lone word; *that hard problem is the moat.* We don't wait for gpt-4o to improve — we collect the data that lets us pass it.
 
+## Capture-everywhere under consent (program-wide principle, DECIDED 2026-06-12)
+
+**Whenever a child reads aloud anywhere in the program and consent allows, capture it.** Voice capture is a program-wide architectural principle, not a Part-3 feature — every read surface gives complementary corpus signal: warm-up words (known-word fluency), Part-3 target words (decoding), **pseudowords (the purest decoding signal — no real-word shortcut, so a correct "gake" proves the kid applied the rule to a novel word)**, sentences (connected reading + prosody), the story (fluency/stamina), spell-aloud. A corpus spanning all surfaces is far more valuable than Part-3-only.
+
+**Build ONE consent-gated capture layer that every read surface plugs into** — not per-part hacks. Each read emits `{audio, target, surface, partNumber, context, consentTier}` into the same pipeline. Design once, capture everywhere.
+
+**This is "capture whenever consent + storage allow" — the gates:**
+- **Consent** — capture only what the family opted into. Two-tier consent is built (`lib/voice/consent.ts`; Tier-2 training opt-in, default OFF). Consented → capture broadly; others → process-and-drop. (Consent *default* opt-in-vs-opt-out is a deliberate later trust/UX call; opt-in is the conservative COPPA posture.)
+- **Storage** — student path is deliberately process-and-drop TODAY. Capture-everywhere needs the secure storage layer (encrypted, retention, deletion). **This principle ELEVATES the production consent + secure-storage track from "deferred" to a near-term priority.**
+- **Retention + cost** — capture broadly, but with a deliberate retention/sampling policy that prioritizes the gold (failures, uncertain reads, the labeled subset). Hoarding everything forever without a plan is cost + liability.
+
 ## What we build (and the order)
 
 This is a **reading verifier**, not general dictation. The question is "did this child read *this known target* accurately enough?", not "what did this audio say?". Verifier output (not `transcript === target`, which is what failed):
