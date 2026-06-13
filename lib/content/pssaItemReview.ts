@@ -262,14 +262,14 @@ export async function fetchPssaReviewTargets(client: PrismaClient, args: { targe
     return { items: [] as PssaReadyItem[], passages: await client.pssaPassage.findMany({ where: { gradeLevel: args.gradeLevel!, subject: "ELA" }, orderBy: { id: "asc" } }) as PssaReadyPassage[] };
   }
   if (args.target === "item") {
-    const item = await client.pssaItem.findUnique({ where: { id: args.itemId! }, include: { batch: true, passages: { include: { passage: true }, orderBy: { sortOrder: "asc" } } } });
+    const item = await client.pssaItem.findUnique({ where: { id: args.itemId! }, include: { batch: true, passages: { include: { passage: true }, orderBy: { sortOrder: "asc" } }, passageGroup: { include: { members: { include: { passage: true }, orderBy: { position: "asc" } } } } } });
     if (!item) throw new Error(`PssaItem not found: ${args.itemId}`);
     return { items: [item as PssaReadyItem], passages: [] as PssaReadyPassage[] };
   }
   const batch = await client.pssaItemBatch.findUnique({ where: { id: args.batchId! } });
   if (!batch) throw new Error(`PssaItemBatch not found: ${args.batchId}`);
   return {
-    items: await client.pssaItem.findMany({ where: { batchId: args.batchId! }, include: { batch: true, passages: { include: { passage: true }, orderBy: { sortOrder: "asc" } } }, orderBy: { id: "asc" } }) as PssaReadyItem[],
+    items: await client.pssaItem.findMany({ where: { batchId: args.batchId! }, include: { batch: true, passages: { include: { passage: true }, orderBy: { sortOrder: "asc" } }, passageGroup: { include: { members: { include: { passage: true }, orderBy: { position: "asc" } } } } }, orderBy: { id: "asc" } }) as PssaReadyItem[],
     passages: [] as PssaReadyPassage[],
   };
 }
@@ -460,7 +460,7 @@ async function writeReviewMutations(
 
 async function fetchSingleTarget(client: PrismaClient, kind: PssaReviewKind, id: string) {
   if (kind === "passage") return client.pssaPassage.findUnique({ where: { id } });
-  return client.pssaItem.findUnique({ where: { id }, include: { batch: true, passages: { include: { passage: true }, orderBy: { sortOrder: "asc" } } } });
+  return client.pssaItem.findUnique({ where: { id }, include: { batch: true, passages: { include: { passage: true }, orderBy: { sortOrder: "asc" } }, passageGroup: { include: { members: { include: { passage: true }, orderBy: { position: "asc" } } } } } });
 }
 
 const passageQueueSelect = {
@@ -488,6 +488,10 @@ export const itemQueueSelect = {
   eligibleContent: true,
   batchId: true,
   responseSpecJson: true,
+  passageGroupId: true,
+  isCrossText: true,
+  requiredEvidenceSlotsJson: true,
+  crossTextSupportRuleJson: true,
   pointValue: true,
   gradeLevel: true,
   reviewStatus: true,
@@ -516,6 +520,35 @@ export const itemQueueSelect = {
       },
     },
     orderBy: { sortOrder: "asc" as const },
+  },
+  passageGroup: {
+    select: {
+      members: {
+        select: {
+          slot: true,
+          passage: {
+            select: {
+              id: true,
+              reviewStatus: true,
+              itemStatus: true,
+              studentReadyBlockedReason: true,
+              approvedContentHash: true,
+              auditContractVersion: true,
+              sourceScanVersion: true,
+              contentHash: true,
+              latestAuditContentHash: true,
+              latestAuditResult: true,
+              retiredAt: true,
+              sourceType: true,
+              licenseStatus: true,
+              commercialUseAllowed: true,
+              needsLegalReview: true,
+            },
+          },
+        },
+        orderBy: { position: "asc" as const },
+      },
+    },
   },
 } satisfies Prisma.PssaItemSelect;
 

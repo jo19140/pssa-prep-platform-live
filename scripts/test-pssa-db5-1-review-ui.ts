@@ -98,6 +98,8 @@ assert.equal(
   true,
   "itemQueueSelect must fetch responseSpecJson or every queue row computes MISSING_RESPONSE_DOMAIN",
 );
+assert.equal((itemQueueSelect as Record<string, unknown>).passageGroupId, true, "itemQueueSelect must fetch passageGroupId for paired readiness checks");
+assert.equal((itemQueueSelect as Record<string, unknown>).requiredEvidenceSlotsJson, true, "itemQueueSelect must fetch requiredEvidenceSlotsJson for paired readiness checks");
 
 // Ready-shaped slim row (passes every readiness check up to the domain gate;
 // batchId without batch keeps it PENDING_REVIEW afterward — that's fine, we only
@@ -123,6 +125,72 @@ assert.equal(
   computedBlockedReason({ ...readyShapedItem, responseSpecJson: null }),
   "MISSING_RESPONSE_DOMAIN",
   "empty domain must surface as MISSING_RESPONSE_DOMAIN in the queue DTO",
+);
+
+const readyPassage = (id: string) => ({
+  id,
+  reviewStatus: "APPROVED",
+  itemStatus: "pilot_ready",
+  studentReadyBlockedReason: "NONE",
+  approvedContentHash: `hash-${id}`,
+  contentHash: `hash-${id}`,
+  latestAuditContentHash: `hash-${id}`,
+  auditContractVersion: AUDIT_CONTRACT_VERSION,
+  sourceScanVersion: SOURCE_SCAN_VERSION,
+  latestAuditResult: "PASS",
+  retiredAt: null,
+  sourceType: "internal_original",
+  licenseStatus: "cleared",
+  commercialUseAllowed: true,
+  needsLegalReview: false,
+});
+const pendingPassage = { ...readyPassage("p2"), reviewStatus: "PENDING", studentReadyBlockedReason: "PENDING_REVIEW" };
+const pairedReadyItem: any = {
+  ...readyShapedItem,
+  batchId: null,
+  passageGroupId: "pg1",
+  isCrossText: false,
+  requiredEvidenceSlotsJson: null,
+  crossTextSupportRuleJson: null,
+  responseSpecJson: { prompt: "Which detail supports the answer?", choices: ["a", "b", "c", "d"] },
+  passages: [{ passage: readyPassage("p1") }],
+  passageGroup: { members: [{ slot: "passage_1", passage: readyPassage("p1") }, { slot: "passage_2", passage: pendingPassage }] },
+};
+assert.equal(
+  computedBlockedReason(pairedReadyItem),
+  "PENDING_REVIEW",
+  "single-passage paired-set item must be blocked until all group member passages are approved",
+);
+assert.equal(
+  computedBlockedReason({
+    ...pairedReadyItem,
+    isCrossText: true,
+    requiredEvidenceSlotsJson: ["passage_1", "passage_2"],
+    structuredChoicesJson: [{ isCorrect: true, evidenceLinks: [{ passageSlot: "passage_1" }, { passageSlot: "passage_2" }] }],
+    passages: [{ passage: readyPassage("p1") }, { passage: pendingPassage }],
+  }),
+  "PENDING_REVIEW",
+  "cross-text paired-set item must be blocked until all directly linked/member passages are approved",
+);
+assert.equal(
+  (itemToQueueDto({
+    ...pairedReadyItem,
+    isCrossText: true,
+    requiredEvidenceSlotsJson: ["passage_1", "passage_2"],
+    structuredChoicesJson: [{ isCorrect: true, evidenceLinks: [{ passageSlot: "passage_1" }] }],
+    passages: [{ passage: readyPassage("p1") }, { passage: readyPassage("p2") }],
+    passageGroup: { members: [{ slot: "passage_1", passage: readyPassage("p1") }, { slot: "passage_2", passage: readyPassage("p2") }] },
+  }).reviewer.gateResults as any).computedBlockedReason,
+  "PENDING_REVIEW",
+  "cross-text paired-set item must fail when requiredEvidenceSlots are not covered",
+);
+assert.equal(
+  computedBlockedReason({
+    ...pairedReadyItem,
+    passageGroup: { members: [{ slot: "passage_1", passage: readyPassage("p1") }, { slot: "passage_2", passage: readyPassage("p2") }] },
+  }),
+  "NONE",
+  "single-passage paired-set item becomes ready once all group member passages are approved",
 );
 
 async function main() {

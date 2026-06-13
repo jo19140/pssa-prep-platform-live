@@ -1,0 +1,361 @@
+{
+  "generationBatchId": "pssa_stamina_g3_syrup_v4_fixture",
+  "module": "PSSA",
+  "subject": "ELA",
+  "gradeLevel": 3,
+  "reviewStatus": "PENDING",
+  "itemStatus": "candidate",
+  "writesDatabaseRows": false,
+  "fixtureOnly": true,
+  "passages": [
+    {
+      "model": "PssaPassage",
+      "id": "pssa_stamina_psg_g3_syrup_v4",
+      "title": "Sweet Work: How Sap Becomes Syrup",
+      "gradeLevel": 3,
+      "subject": "ELA",
+      "passageType": "informational",
+      "topicDomain": "science/nature",
+      "structureType": "process explanatory article",
+      "voicePov": "third-person informational",
+      "staminaBand": "released_length",
+      "genre": "informational_process",
+      "domainVocabularyLoad": "medium",
+      "text": "Every year in late winter, the Alvarez family walks into a quiet woods carrying a drill, a handful of metal spouts, and clean buckets. The maple trees stand bare and still, as if they are asleep. But deep inside each trunk, something is already beginning to move. In a few weeks, these same trees will help fill jars with golden maple syrup. Turning thin, watery sap into thick, sweet syrup is slow work. It takes patience, the right weather, and a great deal of boiling. Most people only ever see the finished syrup on their plate, never the weeks of work behind it.\n\n### Waiting for the Right Weather\nSugar maple trees store a kind of sugar-water called sap inside their trunks and roots. Sap only flows well for a short season, usually during late February and March. The trees need a very particular pattern of weather: freezing nights followed by warmer days above freezing. On freezing nights, pressure changes help draw water into the tree. When the next day warms above freezing, pressure builds in the wood and pushes the sap back outward. If the weather stays icy all day, the sap barely moves. If it turns warm and stays warm too soon, the season ends almost before it starts. That is why syrup makers watch the thermometer almost as carefully as they watch the trees.\n\n### Tapping the Trees\nWhen the weather is finally right, the Alvarez family drills a small hole into each healthy maple. Into the hole they gently tap a metal spout, called a spile.¹ A bucket or a long plastic tube hangs below to catch the steady drips. The sap that comes out looks almost exactly like water. It is only a little sweet, because it is mostly water with just a small amount of sugar mixed in. A single tree might drip many gallons over the whole season, yet it is never harmed. The hole is small, and the tree heals it by the following year. A wide, older maple can hold more than one spile, but thin young trees are left alone so they can keep growing.\n\n### Boiling It Down\nCollecting the sap is only the beginning. To become syrup, sap must be boiled for hours inside a building called a sugarhouse. As the sap heats, the water in it turns into steam and floats away into the air. This slow change is called evaporation.² Hour after hour, the watery sap grows thicker, darker, and much sweeter. The amount of boiling is hard to believe: it takes about forty gallons of thin sap to make a single gallon of finished syrup. That is one reason real maple syrup costs more than syrup made from plain corn sugar. Someone must keep the fire steady and watch the bubbling sap the entire time, because syrup that boils a few minutes too long can scorch and turn bitter.\n\n### From Tree to Table\nWhen the syrup finally reaches just the right thickness, it is poured through a filter to remove tiny bits of bark, then sealed into clean jars while it is still warm. The Alvarez family keeps some for their own pancakes and sells the rest at a spring farmers market. By the time the jars are filled, the maples have begun to grow tiny green buds, and the sap stops flowing for the year. The work is finished. But next winter, when the nights turn cold and the days slowly warm again, the family will return to the same quiet woods and begin the sweet, slow work all over again.\n\n> **Did You Know?** A sugar maple can live for more than two hundred years — long enough for many generations of families to tap it.\n\n¹ **spile** — a small spout that carries sap out of a tree\n² **evaporation** — when a liquid slowly turns into a gas, the way water turns into steam",
+      "wordCount": 644,
+      "sourceType": "internal_original",
+      "sourceName": "Authored for PSSA Grade 3 stamina-tranche pilot v4",
+      "sourceCitation": null,
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "factCheckStatus": "STRUCTURED_FACT_CHECK_COMPLETE",
+      "factualClaimsReviewed": true,
+      "textFeaturesJson": [
+        { "type": "heading", "label": "Waiting for the Right Weather", "sectionId": "waiting_for_the_right_weather", "bodyText": "### Waiting for the Right Weather", "charBounds": { "startChar": 569, "endChar": 602 } },
+        { "type": "heading", "label": "Tapping the Trees", "sectionId": "tapping_the_trees", "bodyText": "### Tapping the Trees", "charBounds": { "startChar": 1281, "endChar": 1302 } },
+        { "type": "heading", "label": "Boiling It Down", "sectionId": "boiling_it_down", "bodyText": "### Boiling It Down", "charBounds": { "startChar": 1951, "endChar": 1970 } },
+        { "type": "heading", "label": "From Tree to Table", "sectionId": "from_tree_to_table", "bodyText": "### From Tree to Table", "charBounds": { "startChar": 2660, "endChar": 2682 } },
+        { "type": "sidebar", "label": "Did You Know?", "sectionId": "section_sidebar", "bodyText": "> **Did You Know?** A sugar maple can live for more than two hundred years — long enough for many generations of families to tap it.", "charBounds": { "startChar": 3263, "endChar": 3395 }, "linkedByItemIds": ["pssa_stamina_item_g3_syrup_04"] },
+        { "type": "footnote", "label": "spile", "term": "spile", "marker": "¹", "sectionId": "section_footnotes", "bodyText": "¹ **spile** — a small spout that carries sap out of a tree", "charBounds": { "startChar": 3397, "endChar": 3455 } },
+        { "type": "footnote", "label": "evaporation", "term": "evaporation", "marker": "²", "sectionId": "section_footnotes", "bodyText": "² **evaporation** — when a liquid slowly turns into a gas, the way water turns into steam", "charBounds": { "startChar": 3456, "endChar": 3545 } }
+      ],
+      "factCheckNotesJson": [
+        { "claimId": "sap_flow_freeze_thaw", "claim": "Sap flows by a freeze-thaw pressure cycle: below-freezing draws water in; above-freezing pushes sap out.", "sourceTitle": "The Science Behind Sap Flow", "organization": "Penn State Extension", "sourceUrl": "https://extension.psu.edu/programs/master-gardener/counties/franklin/news/the-science-behind-sap-flow-in-maple-sugaring", "claimSupported": true, "dateAccessed": "2026-06-09" },
+        { "claimId": "sap_flow_corroboration", "claim": "Freeze-thaw pressure generation occurs in sugar maple.", "sourceTitle": "Freeze-thaw-induced pressure generation in red and sugar maple", "organization": "Tree Physiology / PubMed Central", "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11448476/", "claimSupported": true, "dateAccessed": "2026-06-09" },
+        { "claimId": "sap_to_syrup_ratio", "claim": "About forty gallons of sap make one gallon of syrup, with variation by sugar content.", "sourceTitle": "How Much Sap Can One Tree Produce", "organization": "New York State Maple Producers Association", "sourceUrl": "https://nysmaple.com/how-much-sap-can-one-tree-produce/", "claimSupported": true, "dateAccessed": "2026-06-09" },
+        { "claimId": "sugar_maple_longevity", "claim": "A sugar maple can live for more than two hundred years.", "sourceTitle": "Silvics of North America, Vol. 2 — Acer saccharum (Sugar Maple)", "organization": "USDA Forest Service", "sourceUrl": "https://www.srs.fs.usda.gov/pubs/misc/ag_654/volume_2/acer/saccharum.htm", "claimSupported": true, "dateAccessed": "2026-06-09" },
+        { "claimId": "spile_definition", "claim": "A spile is a spout that carries sap out of the tree.", "sourceTitle": "How to Tap and Make Maple Syrup", "organization": "Minnesota Department of Natural Resources", "sourceUrl": "https://files.dnr.state.mn.us/destinations/state_parks/maplesyrup_how.pdf", "claimSupported": true, "dateAccessed": "2026-06-09" }
+      ],
+      "provenanceJson": {
+        "authoredBy": "model-assisted, human-reviewed v4 source",
+        "method": "original_composition",
+        "sourceDoc": "stamina_pilot_passage_maple_syrup.md",
+        "fixtureOnly": true,
+        "pdeSamplerDerived": false,
+        "containsAttributedQuotes": false
+      },
+      "approvedAt": null,
+      "reviewedBy": null,
+      "retiredAt": null
+    }
+  ],
+  "items": [
+    {
+      "model": "PssaItem",
+      "id": "pssa_stamina_item_g3_syrup_01",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "MCQ",
+      "interactionType": "MCQ",
+      "skill": "main_idea",
+      "passageId": "pssa_stamina_psg_g3_syrup_v4",
+      "eligibleContent": "E03.B-K.1.1.2",
+      "assessmentAnchor": "E03.B-K.1",
+      "reportingCategory": "B",
+      "dokLevel": 2,
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "approvalEligible": false,
+      "studentFacingPrompt": "What is the passage mostly about?",
+      "answerChoicesJson": [
+        "Making maple syrup takes the right weather, careful tapping, and long boiling.",
+        "The maples grow tiny green buds when the season ends.",
+        "The Alvarez family sells syrup at a spring farmers market.",
+        "Maple syrup is healthier than corn syrup."
+      ],
+      "correctIndex": 0,
+      "distractorRationalesJson": [
+        "Correct: the full passage explains the weather, tapping, and boiling steps that make syrup.",
+        "Too narrow: this detail appears only near the ending.",
+        "Too narrow: this detail appears in the final section but misses the process.",
+        "Unsupported inference: the passage contrasts cost, not health."
+      ],
+      "structuredChoicesJson": [
+        {
+          "text": "Making maple syrup takes the right weather, careful tapping, and long boiling.",
+          "isCorrect": true,
+          "rationale": "Whole-passage synthesis: the answer draws across the process sections rather than one literal sentence.",
+          "evidenceLinks": [
+            { "evidenceKind": "section_synthesis", "sectionId": "section_0_intro" },
+            { "evidenceKind": "section_synthesis", "sectionId": "waiting_for_the_right_weather" },
+            { "evidenceKind": "section_synthesis", "sectionId": "tapping_the_trees" },
+            { "evidenceKind": "section_synthesis", "sectionId": "boiling_it_down" },
+            { "evidenceKind": "section_synthesis", "sectionId": "from_tree_to_table" }
+          ],
+          "distractorRole": null
+        },
+        {
+          "text": "The maples grow tiny green buds when the season ends.",
+          "isCorrect": false,
+          "rationale": "Too narrow: this ending detail does not state what the whole passage is mostly about.",
+          "evidenceLinks": [
+            { "paragraphIndex": 4, "sentenceIndex": 2, "quotedSpan": "By the time the jars are filled, the maples have begun to grow tiny green buds, and the sap stops flowing for the year.", "startChar": 2951, "endChar": 3070 }
+          ],
+          "distractorRole": "too_narrow"
+        },
+        {
+          "text": "The Alvarez family sells syrup at a spring farmers market.",
+          "isCorrect": false,
+          "rationale": "Too narrow: the market detail appears at the end but does not cover the process.",
+          "evidenceLinks": [
+            { "paragraphIndex": 4, "sentenceIndex": 1, "quotedSpan": "The Alvarez family keeps some for their own pancakes and sells the rest at a spring farmers market.", "startChar": 2851, "endChar": 2950 }
+          ],
+          "distractorRole": "too_narrow"
+        },
+        {
+          "text": "Maple syrup is healthier than corn syrup.",
+          "isCorrect": false,
+          "rationale": "Unsupported inference: the passage compares cost, not health.",
+          "evidenceLinks": [
+            { "paragraphIndex": 3, "sentenceIndex": 6, "quotedSpan": "That is one reason real maple syrup costs more than syrup made from plain corn sugar.", "startChar": 2419, "endChar": 2504 }
+          ],
+          "distractorRole": "unsupported_inference"
+        }
+      ],
+      "provenanceJson": { "sourcePassageId": "pssa_stamina_psg_g3_syrup_v4", "fixtureOnly": true }
+    },
+    {
+      "model": "PssaItem",
+      "id": "pssa_stamina_item_g3_syrup_02",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "MCQ",
+      "interactionType": "MCQ",
+      "skill": "vocabulary_in_context",
+      "passageId": "pssa_stamina_psg_g3_syrup_v4",
+      "eligibleContent": "E03.B-V.4.1.1",
+      "assessmentAnchor": "E03.B-V.4",
+      "reportingCategory": "B",
+      "dokLevel": 2,
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "approvalEligible": false,
+      "targetWordOrPhrase": "scorch",
+      "studentFacingPrompt": "\"...syrup that boils a few minutes too long can scorch and turn bitter.\" What does scorch mean?",
+      "answerChoicesJson": [
+        "to burn",
+        "to cool down and harden",
+        "to bubble over the edge of the pot",
+        "to grow thick and golden"
+      ],
+      "correctAnswer": "to burn",
+      "correctIndex": 0,
+      "distractorRationalesJson": [
+        "Correct: in context, syrup can scorch and turn bitter if it boils too long.",
+        "Opposite claim: cooling down is not what happens during boiling.",
+        "Plausible misreading: bubbling is mentioned, but not as the meaning of scorch.",
+        "Wrong emphasis: thick and golden describes syrup developing, not burning."
+      ],
+      "structuredChoicesJson": [
+        {
+          "text": "to burn",
+          "isCorrect": true,
+          "rationale": "The sentence explains that syrup can scorch and turn bitter if it boils too long.",
+          "evidenceLinks": [
+            { "paragraphIndex": 3, "sentenceIndex": 7, "quotedSpan": "Someone must keep the fire steady and watch the bubbling sap the entire time, because syrup that boils a few minutes too long can scorch and turn bitter.", "startChar": 2505, "endChar": 2658 }
+          ],
+          "distractorRole": null
+        },
+        {
+          "text": "to cool down and harden",
+          "isCorrect": false,
+          "rationale": "Opposite claim: the context is boiling, not cooling.",
+          "evidenceLinks": [
+            { "paragraphIndex": 3, "sentenceIndex": 7, "quotedSpan": "Someone must keep the fire steady and watch the bubbling sap the entire time, because syrup that boils a few minutes too long can scorch and turn bitter.", "startChar": 2505, "endChar": 2658 }
+          ],
+          "distractorRole": "opposite_claim"
+        },
+        {
+          "text": "to bubble over the edge of the pot",
+          "isCorrect": false,
+          "rationale": "Plausible misreading: the sentence mentions bubbling but does not say the syrup spills over.",
+          "evidenceLinks": [
+            { "paragraphIndex": 3, "sentenceIndex": 7, "quotedSpan": "Someone must keep the fire steady and watch the bubbling sap the entire time, because syrup that boils a few minutes too long can scorch and turn bitter.", "startChar": 2505, "endChar": 2658 }
+          ],
+          "distractorRole": "plausible_misreading"
+        },
+        {
+          "text": "to grow thick and golden",
+          "isCorrect": false,
+          "rationale": "Wrong emphasis: this describes syrup changing during boiling, not the meaning of scorch.",
+          "evidenceLinks": [
+            { "paragraphIndex": 3, "sentenceIndex": 5, "quotedSpan": "The amount of boiling is hard to believe: it takes about forty gallons of thin sap to make a single gallon of finished syrup.", "startChar": 2293, "endChar": 2418 }
+          ],
+          "distractorRole": "wrong_emphasis"
+        }
+      ],
+      "provenanceJson": { "sourcePassageId": "pssa_stamina_psg_g3_syrup_v4", "fixtureOnly": true }
+    },
+    {
+      "model": "PssaItem",
+      "id": "pssa_stamina_item_g3_syrup_03",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "MCQ",
+      "interactionType": "MCQ",
+      "skill": "cause_effect",
+      "passageId": "pssa_stamina_psg_g3_syrup_v4",
+      "eligibleContent": "E03.B-K.1.1.3",
+      "assessmentAnchor": "E03.B-K.1",
+      "reportingCategory": "B",
+      "dokLevel": 2,
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "approvalEligible": false,
+      "studentFacingPrompt": "Why does sap flow best when the nights are freezing and the days are warm?",
+      "answerChoicesJson": [
+        "Freezing nights and warmer days create pressure changes that help sap flow out.",
+        "The warm days make the maples grow new buds.",
+        "The cold nights make the sap taste sweeter than daytime sap.",
+        "The changing weather fills the buckets with rain."
+      ],
+      "correctIndex": 0,
+      "structuredChoicesJson": [
+        {
+          "text": "Freezing nights and warmer days create pressure changes that help sap flow out.",
+          "isCorrect": true,
+          "rationale": "Correct: the weather pattern creates pressure changes that help move sap.",
+          "evidenceLinks": [
+            { "paragraphIndex": 1, "sentenceIndex": 4, "quotedSpan": "When the next day warms above freezing, pressure builds in the wood and pushes the sap back outward.", "startChar": 948, "endChar": 1048 }
+          ],
+          "distractorRole": null
+        },
+        {
+          "text": "The warm days make the maples grow new buds.",
+          "isCorrect": false,
+          "rationale": "Wrong section: green buds appear at the season's end, not as the reason sap flows best.",
+          "evidenceLinks": [
+            { "paragraphIndex": 4, "sentenceIndex": 2, "quotedSpan": "By the time the jars are filled, the maples have begun to grow tiny green buds, and the sap stops flowing for the year.", "startChar": 2951, "endChar": 3070 }
+          ],
+          "distractorRole": "wrong_section"
+        },
+        {
+          "text": "The cold nights make the sap taste sweeter than daytime sap.",
+          "isCorrect": false,
+          "rationale": "Unsupported inference: the passage describes pressure changes, not different sweetness by time of day.",
+          "evidenceLinks": [
+            { "paragraphIndex": 1, "sentenceIndex": 2, "quotedSpan": "The trees need a very particular pattern of weather: freezing nights followed by warmer days above freezing.", "startChar": 771, "endChar": 879 }
+          ],
+          "distractorRole": "unsupported_inference"
+        },
+        {
+          "text": "The changing weather fills the buckets with rain.",
+          "isCorrect": false,
+          "rationale": "Unsupported inference: buckets collect sap, not rain.",
+          "evidenceLinks": [
+            { "paragraphIndex": 2, "sentenceIndex": 2, "quotedSpan": "A bucket or a long plastic tube hangs below to catch the steady drips.", "startChar": 1464, "endChar": 1534 }
+          ],
+          "distractorRole": "unsupported_inference"
+        }
+      ],
+      "provenanceJson": { "sourcePassageId": "pssa_stamina_psg_g3_syrup_v4", "fixtureOnly": true }
+    },
+    {
+      "model": "PssaItem",
+      "id": "pssa_stamina_item_g3_syrup_04",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "MCQ",
+      "interactionType": "MCQ",
+      "skill": "text_feature",
+      "passageId": "pssa_stamina_psg_g3_syrup_v4",
+      "eligibleContent": "E03.B-C.2.1.2",
+      "assessmentAnchor": "E03.B-C.2",
+      "reportingCategory": "B",
+      "dokLevel": 2,
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "approvalEligible": false,
+      "studentFacingPrompt": "How does the \"Did You Know?\" box add to the passage?",
+      "answerChoicesJson": [
+        "It shows that a sugar maple can live for many generations.",
+        "It explains why syrup must be filtered before it is sold.",
+        "It tells why thin young trees are left alone.",
+        "It proves that syrup is healthier than corn syrup."
+      ],
+      "correctIndex": 0,
+      "structuredChoicesJson": [
+        {
+          "text": "It shows that a sugar maple can live for many generations.",
+          "isCorrect": true,
+          "rationale": "Correct: the sidebar gives extra information about how long sugar maples can live.",
+          "evidenceLinks": [
+            { "paragraphIndex": 5, "sentenceIndex": 1, "quotedSpan": "A sugar maple can live for more than two hundred years — long enough for many generations of families to tap it.", "startChar": 3283, "endChar": 3395, "sectionId": "section_sidebar" }
+          ],
+          "distractorRole": null
+        },
+        {
+          "text": "It explains why syrup must be filtered before it is sold.",
+          "isCorrect": false,
+          "rationale": "Wrong section: filtering is explained in the final body section, not the sidebar.",
+          "evidenceLinks": [
+            { "paragraphIndex": 4, "sentenceIndex": 0, "quotedSpan": "When the syrup finally reaches just the right thickness, it is poured through a filter to remove tiny bits of bark, then sealed into clean jars while it is still warm.", "startChar": 2683, "endChar": 2850 }
+          ],
+          "distractorRole": "wrong_section"
+        },
+        {
+          "text": "It tells why thin young trees are left alone.",
+          "isCorrect": false,
+          "rationale": "Wrong section: young trees are discussed in the tapping section, not the sidebar.",
+          "evidenceLinks": [
+            { "paragraphIndex": 2, "sentenceIndex": 7, "quotedSpan": "A wide, older maple can hold more than one spile, but thin young trees are left alone so they can keep growing.", "startChar": 1838, "endChar": 1949 }
+          ],
+          "distractorRole": "wrong_section"
+        },
+        {
+          "text": "It proves that syrup is healthier than corn syrup.",
+          "isCorrect": false,
+          "rationale": "Unsupported inference: the passage compares cost, not health.",
+          "evidenceLinks": [
+            { "paragraphIndex": 3, "sentenceIndex": 6, "quotedSpan": "That is one reason real maple syrup costs more than syrup made from plain corn sugar.", "startChar": 2419, "endChar": 2504 }
+          ],
+          "distractorRole": "unsupported_inference"
+        }
+      ],
+      "provenanceJson": { "sourcePassageId": "pssa_stamina_psg_g3_syrup_v4", "fixtureOnly": true }
+    }
+  ]
+}

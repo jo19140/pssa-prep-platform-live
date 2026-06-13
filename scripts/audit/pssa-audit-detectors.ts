@@ -38,9 +38,11 @@ export type PssaPassageAuditInput = {
 };
 
 export type EvidenceLink = {
-  paragraphIndex: number;
-  sentenceIndex: number;
-  quotedSpan: string;
+  evidenceKind?: "section_synthesis" | string;
+  sectionId?: string;
+  paragraphIndex?: number;
+  sentenceIndex?: number;
+  quotedSpan?: string;
   startChar?: number;
   endChar?: number;
 };
@@ -602,6 +604,8 @@ function auditPassageLinkedReadingMcq(item: McqAuditInput, passage: PssaPassageA
   const passageText = passage?.text ?? "";
   const passageWords = contentWords(passageText);
   const sentenceGrid = passage ? splitPassageSentences(passage.text) : [];
+  const isVocabItem = /^E\d{2}\.[AB]-V\./.test(String(item.eligibleContent ?? ""));
+  const isSynthesisItem = correctChoiceHasSynthesisEvidence(structuredChoices);
 
   const choiceGenericHits = choices.flatMap((choice, index) => genericLanguageHits(choice).map((hit) => ({ index, hit })));
   if (choiceGenericHits.length) {
@@ -613,15 +617,21 @@ function auditPassageLinkedReadingMcq(item: McqAuditInput, passage: PssaPassageA
     rows.push(row(item, "PSSA_MCQ_GENERIC_STEM_LANGUAGE", "FAIL", "BLOCKER", stemHits.join("; "), [], "Stem uses generic test-taking language instead of a passage-specific question."));
   }
 
-  const overlapFailures: number[] = [];
-  let concreteChoiceCount = 0;
-  choices.forEach((choice, index) => {
-    const shared = [...contentWords(choice)].filter((word) => passageWords.has(word));
-    if (shared.length < 2) overlapFailures.push(index);
-    if (shared.length >= 2) concreteChoiceCount += 1;
-  });
-  if (overlapFailures.length || concreteChoiceCount < 3) {
-    rows.push(row(item, "PSSA_MCQ_PASSAGE_SPECIFIC_CHOICES", "FAIL", "BLOCKER", `concreteChoices=${concreteChoiceCount}/4`, overlapFailures, "Each choice needs at least two passage-specific content words, and at least three choices need concrete passage details."));
+  if (isVocabItem) {
+    rows.push(row(item, "PSSA_MCQ_PASSAGE_SPECIFIC_CHOICES", "SKIP", "INFO", "vocabulary-in-context item", [], "Vocabulary-in-context MCQs are scoped to vocab-specific gates, not comprehension choice-specificity."));
+  } else if (isSynthesisItem) {
+    rows.push(row(item, "PSSA_MCQ_PASSAGE_SPECIFIC_CHOICES", "SKIP", "INFO", "synthesis evidence item", [], "Whole-passage synthesis MCQs are scoped by explicit evidenceKind rather than choice concreteness."));
+  } else {
+    const overlapFailures: number[] = [];
+    let concreteChoiceCount = 0;
+    choices.forEach((choice, index) => {
+      const shared = [...contentWords(choice)].filter((word) => passageWords.has(word));
+      if (shared.length < 2) overlapFailures.push(index);
+      if (shared.length >= 2) concreteChoiceCount += 1;
+    });
+    if (overlapFailures.length || concreteChoiceCount < 3) {
+      rows.push(row(item, "PSSA_MCQ_PASSAGE_SPECIFIC_CHOICES", "FAIL", "BLOCKER", `concreteChoices=${concreteChoiceCount}/4`, overlapFailures, "Each choice needs at least two passage-specific content words, and at least three choices need concrete passage details."));
+    }
   }
 
   if (!structuredChoices || structuredChoices.length !== choices.length) {
@@ -636,7 +646,11 @@ function auditPassageLinkedReadingMcq(item: McqAuditInput, passage: PssaPassageA
       if (choice.isCorrect && choice.distractorRole !== null) missingRole.push(index);
       if (!choice.isCorrect && !validDistractorRoles.has(choice.distractorRole as DistractorRole)) missingRole.push(index);
       for (const link of choice.evidenceLinks ?? []) {
-        citedSpans.push(normalizeQuotesWhitespace(link.quotedSpan));
+        if (isSynthesisEvidenceKind(link.evidenceKind)) {
+          if (!link.sectionId) badEvidence.push(`choice ${index}: section_synthesis evidence requires sectionId`);
+          continue;
+        }
+        citedSpans.push(normalizeQuotesWhitespace(link.quotedSpan ?? ""));
         const validation = validateEvidenceLink(link, sentenceGrid, passageText);
         if (!validation.valid) badEvidence.push(`choice ${index}: ${validation.reason}`);
       }
@@ -688,6 +702,15 @@ function auditPassageLinkedReadingMcq(item: McqAuditInput, passage: PssaPassageA
       notes,
     };
   }
+}
+
+function correctChoiceHasSynthesisEvidence(choices: StructuredChoice[] | null) {
+  const correct = choices?.find((choice) => choice.isCorrect);
+  return Boolean(correct?.evidenceLinks?.some((link) => isSynthesisEvidenceKind(link.evidenceKind)));
+}
+
+function isSynthesisEvidenceKind(evidenceKind: unknown) {
+  return ["section_synthesis", "paragraph_synthesis", "whole_passage_synthesis"].includes(String(evidenceKind ?? ""));
 }
 
 function buildTemplateReuseRows(items: McqAuditInput[], scope: "choice" | "stem") {
@@ -764,21 +787,26 @@ function genericLanguageHits(value: string) {
 }
 
 function validateEvidenceLink(link: EvidenceLink, sentenceGrid: string[][], passageText: string) {
+  if (!link.quotedSpan) return { valid: false, reason: "quotedSpan is required for literal evidence links" };
   if (!Number.isInteger(link.paragraphIndex) || !Number.isInteger(link.sentenceIndex)) {
     return { valid: false, reason: "paragraphIndex and sentenceIndex must be integers" };
   }
   if (!Number.isInteger(link.startChar) || !Number.isInteger(link.endChar)) {
     return { valid: false, reason: "startChar and endChar must be integers" };
   }
-  const sentence = sentenceGrid[link.paragraphIndex]?.[link.sentenceIndex];
-  if (!sentence) return { valid: false, reason: `invalid paragraph/sentence index ${link.paragraphIndex}/${link.sentenceIndex}` };
+  const paragraphIndex = link.paragraphIndex as number;
+  const sentenceIndex = link.sentenceIndex as number;
+  const startChar = link.startChar as number;
+  const endChar = link.endChar as number;
+  const sentence = sentenceGrid[paragraphIndex]?.[sentenceIndex];
+  if (!sentence) return { valid: false, reason: `invalid paragraph/sentence index ${paragraphIndex}/${sentenceIndex}` };
   if (!containsNormalized(sentence, link.quotedSpan)) {
     return { valid: false, reason: `quotedSpan not found in cited sentence: ${link.quotedSpan}` };
   }
   if (!containsNormalized(passageText, link.quotedSpan)) {
     return { valid: false, reason: `quotedSpan not found in passage: ${link.quotedSpan}` };
   }
-  if (passageText.slice(link.startChar, link.endChar) !== link.quotedSpan) {
+  if (passageText.slice(startChar, endChar) !== link.quotedSpan) {
     return { valid: false, reason: `char offsets do not point to quotedSpan: ${link.quotedSpan}` };
   }
   return { valid: true, reason: "" };
