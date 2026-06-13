@@ -4,12 +4,13 @@ import { useEffect, useMemo, useRef, useState, useTransition } from "react";
 import { BuddyCharacter, type BuddyState } from "@/components/literacy/BuddyCharacter";
 import { browserTts } from "@/lib/voice/tts";
 import { recordLessonPlayerEvent } from "@/app/student/practice/actions";
+import { startAudioCapture, stopAudioCapture, type AudioCaptureState } from "@/lib/voice/audioCapture";
 import type { LessonPlayerData, LessonPlayerPart } from "./lessonPlayerData";
 
 const PART_META = [
   { icon: "Fire", short: "Warm", mode: "self-confirm", evidence: "not scored" },
   { icon: "Spark", short: "Rule", mode: "teaching", evidence: "no score" },
-  { icon: "Words", short: "Words", mode: "coming soon", evidence: "placeholder" },
+  { icon: "Words", short: "Words", mode: "read and retry", evidence: "speech attempt" },
   { icon: "Heart", short: "Power", mode: "listen and repeat", evidence: "not scored" },
   { icon: "Read", short: "Sent.", mode: "coming soon", evidence: "placeholder" },
   { icon: "Spell", short: "Spell", mode: "spelling match", evidence: "typed/tile" },
@@ -18,6 +19,23 @@ const PART_META = [
 ];
 
 type CompletedState = Record<number, boolean>;
+type LessonPlayerEventType =
+  | "LESSON_STARTED"
+  | "LESSON_STEP_COMPLETED"
+  | "LESSON_COMPLETED"
+  | "VOICE_WORD_READ"
+  | "VOICE_MISCUE_DETECTED";
+
+type LessonPlayerEventInput = {
+  eventType: LessonPlayerEventType;
+  sessionId: string;
+  partNumber: number | null;
+  targetCode: string;
+  extra?: Record<string, unknown>;
+  response?: Record<string, unknown>;
+  durationMs?: number;
+  immediateOutcome?: string;
+};
 
 export function StudentPracticeSession({ lesson }: { lesson: LessonPlayerData }) {
   if (lesson.enabled === false) return <DisabledPractice targetCode={lesson.targetCode} reason={lesson.disabledReason} />;
@@ -52,13 +70,7 @@ function GeneratedLessonPlayer({ lesson }: { lesson: LessonPlayerData & { enable
     setSpeech(speechForPart(activePart));
   }, [activePart]);
 
-  function emitLessonEvent(input: {
-    eventType: "LESSON_STARTED" | "LESSON_STEP_COMPLETED" | "LESSON_COMPLETED";
-    sessionId: string;
-    partNumber: number | null;
-    targetCode: string;
-    extra?: Record<string, unknown>;
-  }) {
+  function emitLessonEvent(input: LessonPlayerEventInput) {
     startTransition(() => {
       void recordLessonPlayerEvent(input);
     });
@@ -172,7 +184,20 @@ function GeneratedLessonPlayer({ lesson }: { lesson: LessonPlayerData & { enable
               </div>
 
               <div className="flex flex-1 flex-col rounded-[26px] border border-[#efe1d2] bg-white p-5">
-                <PartRenderer part={activePart} onSpeak={speak} onComplete={completePart} />
+                <PartRenderer
+                  part={activePart}
+                  onSpeak={speak}
+                  onComplete={completePart}
+                  onHarperMessage={setSpeech}
+                  onBuddyState={setBuddyState}
+                  onVoiceEvent={(input) => {
+                    emitLessonEvent({ ...input, sessionId, targetCode: lesson.targetCode });
+                    setEventLines((lines) => [
+                      ...lines,
+                      `${input.eventType} · part=${input.partNumber} · ${input.immediateOutcome || "event"}`,
+                    ]);
+                  }}
+                />
               </div>
             </div>
           </section>
@@ -201,16 +226,33 @@ function PartRenderer({
   part,
   onSpeak,
   onComplete,
+  onHarperMessage,
+  onBuddyState,
+  onVoiceEvent,
 }: {
   part: LessonPlayerPart;
   onSpeak: (text: string) => Promise<void>;
   onComplete: (extra?: Record<string, unknown>) => void;
+  onHarperMessage: (text: string) => void;
+  onBuddyState: (state: BuddyState) => void;
+  onVoiceEvent: (input: Omit<LessonPlayerEventInput, "sessionId" | "targetCode">) => void;
 }) {
   switch (part.partNumber) {
     case 1:
       return <WarmupPart part={part} onComplete={onComplete} />;
     case 2:
       return <ConceptPart part={part} onSpeak={onSpeak} onComplete={onComplete} />;
+    case 3:
+      return (
+        <Part3LiveLoop
+          part={part}
+          onComplete={onComplete}
+          onHarperMessage={onHarperMessage}
+          onBuddyState={onBuddyState}
+          onSpeak={onSpeak}
+          onVoiceEvent={onVoiceEvent}
+        />
+      );
     case 4:
       return <PowerWordsPart part={part} onSpeak={onSpeak} onComplete={onComplete} />;
     case 6:
@@ -280,6 +322,445 @@ function ConceptPart({
         </button>
         <button onClick={() => onComplete({ listenedToRule: true })} className="rounded-2xl bg-amber-300 px-5 py-4 font-black text-amber-950">
           I practiced it
+        </button>
+      </div>
+    </div>
+  );
+}
+
+type Part3WordEntry = {
+  word: string;
+  lineNumber: number;
+  lineRole: string;
+  index: number;
+};
+
+type Part3Status = "pending" | "correct" | "retry" | "reteach" | "assisted" | "unscored";
+
+function Part3LiveLoop({
+  part,
+  onComplete,
+  onHarperMessage,
+  onBuddyState,
+  onSpeak,
+  onVoiceEvent,
+}: {
+  part: LessonPlayerPart;
+  onComplete: (extra?: Record<string, unknown>) => void;
+  onHarperMessage: (text: string) => void;
+  onBuddyState: (state: BuddyState) => void;
+  onSpeak: (text: string) => Promise<void>;
+  onVoiceEvent: (input: Omit<LessonPlayerEventInput, "sessionId" | "targetCode">) => void;
+}) {
+  const lines = useMemo(() => arrayOfRecords(part.contentJson.contrastiveLines), [part.contentJson.contrastiveLines]);
+  const realEntries = useMemo<Part3WordEntry[]>(
+    () =>
+      lines
+        .filter((line) => stringValue(line.role) !== "target_pseudowords")
+        .flatMap((line) =>
+          stringArray(line.words).map((word) => ({
+            word,
+            lineNumber: Number(line.lineNumber) || 0,
+            lineRole: stringValue(line.role) || "word_line",
+          })),
+        )
+        .map((entry, index) => ({ ...entry, index })),
+    [lines],
+  );
+  const pseudowordLine = useMemo(
+    () => lines.find((line) => stringValue(line.role) === "target_pseudowords"),
+    [lines],
+  );
+  const pseudowords = stringArray(pseudowordLine?.words);
+  const reteachTemplate =
+    stringValue(part.contentJson.reteachPrompt) ||
+    stringValue(part.kidVisibleCopy.reteachPrompt) ||
+    "Look carefully at the word. Try again: {word}.";
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [statuses, setStatuses] = useState<Record<string, Part3Status>>({});
+  const [attempts, setAttempts] = useState<Record<string, number>>({});
+  const [technicalFailures, setTechnicalFailures] = useState<Record<string, number>>({});
+  const [feedback, setFeedback] = useState("Tap read when you are ready. Harper will listen to one word at a time.");
+  const [recording, setRecording] = useState(false);
+  const [thinking, setThinking] = useState(false);
+  const [rateLimitedUntil, setRateLimitedUntil] = useState<number | null>(null);
+  const [showFallback, setShowFallback] = useState(false);
+  const [pseudowordsConfirmed, setPseudowordsConfirmed] = useState(false);
+  const captureRef = useRef<AudioCaptureState | null>(null);
+  const chunksRef = useRef<Blob[]>([]);
+  const requestInFlightRef = useRef(false);
+  const currentWord = realEntries[currentIndex];
+  const isRateLimited = rateLimitedUntil !== null && Date.now() < rateLimitedUntil;
+  const readDisabled = thinking || recording || requestInFlightRef.current || isRateLimited || !currentWord;
+  const allRealWordsComplete = currentIndex >= realEntries.length;
+
+  useEffect(() => {
+    if (!rateLimitedUntil) return;
+    const delay = Math.max(0, rateLimitedUntil - Date.now());
+    const timer = window.setTimeout(() => setRateLimitedUntil(null), delay);
+    return () => window.clearTimeout(timer);
+  }, [rateLimitedUntil]);
+
+  useEffect(() => {
+    return () => {
+      if (captureRef.current) {
+        stopAudioCapture(captureRef.current);
+        captureRef.current = null;
+      }
+    };
+  }, []);
+
+  async function beginRecording() {
+    if (readDisabled || !currentWord) return;
+    chunksRef.current = [];
+    setShowFallback(false);
+    setFeedback(`Read ${currentWord.word}.`);
+    onHarperMessage(`Read ${currentWord.word}.`);
+    onBuddyState("listening");
+    try {
+      captureRef.current = await startAudioCapture((chunk) => {
+        chunksRef.current.push(chunk);
+      });
+      setRecording(true);
+    } catch {
+      handleTechnicalFailure(currentWord, "I had trouble hearing that. Let's try once more.", "transcribe_error_retry");
+    }
+  }
+
+  async function stopAndScore() {
+    if (!recording || !captureRef.current || !currentWord || requestInFlightRef.current) return;
+    requestInFlightRef.current = true;
+    setRecording(false);
+    setThinking(true);
+    onBuddyState("listening");
+    const capture = captureRef.current;
+    captureRef.current = null;
+    stopAudioCapture(capture);
+    await waitForRecorderFlush();
+    const blob = new Blob(chunksRef.current, { type: chunksRef.current[0]?.type || "audio/webm" });
+    chunksRef.current = [];
+    if (!blob.size) {
+      requestInFlightRef.current = false;
+      setThinking(false);
+      handleTechnicalFailure(currentWord, "I had trouble hearing that. Let's try once more.", "transcribe_error_retry");
+      return;
+    }
+
+    const startedAt = Date.now();
+    try {
+      const form = new FormData();
+      form.set("audio", new File([blob], `${currentWord.word}.webm`, { type: blob.type || "audio/webm" }));
+      form.set("model", "gpt-4o-transcribe");
+      form.set("expectedText", currentWord.word);
+      const controller = new AbortController();
+      const timeout = window.setTimeout(() => controller.abort(), 20000);
+      const response = await fetch("/api/voice/transcribe", { method: "POST", body: form, signal: controller.signal });
+      window.clearTimeout(timeout);
+      const durationMs = Date.now() - startedAt;
+
+      if (response.status === 429) {
+        const retrySeconds = retryAfterSeconds(response.headers.get("Retry-After"));
+        const retryUntil = Date.now() + retrySeconds * 1000;
+        setRateLimitedUntil(retryUntil);
+        setFeedback("Let's take a quick pause. I'll be ready in a moment.");
+        onHarperMessage("Let's take a quick pause. I'll be ready in a moment.");
+        onVoiceEvent({
+          eventType: "VOICE_WORD_READ",
+          partNumber: 3,
+          immediateOutcome: "transcribe_rate_limited",
+          durationMs,
+          extra: voiceContext(currentWord, attempts[currentWord.word] || 0, { retryAfterSeconds: retrySeconds }),
+          response: { scaffoldStep: "rate_limited", scoringMode: "unscored" },
+        });
+        return;
+      }
+
+      if (!response.ok) {
+        handleTechnicalFailure(currentWord, "I had trouble hearing that. Let's try once more.", "transcribe_error_retry", durationMs);
+        return;
+      }
+
+      const result = (await response.json()) as {
+        transcript?: unknown;
+        confidenceProxy?: unknown;
+        uncertaintyScore?: unknown;
+        model?: unknown;
+        latencyMs?: unknown;
+      };
+      const rawTranscript = stringValue(result.transcript);
+      if (!rawTranscript.trim()) {
+        handleTechnicalFailure(currentWord, "I had trouble hearing that. Let's try once more.", "transcribe_error_retry", durationMs);
+        return;
+      }
+
+      scoreTranscript(currentWord, rawTranscript, durationMs, {
+        confidenceProxy: typeof result.confidenceProxy === "number" ? result.confidenceProxy : null,
+        uncertaintyScore: typeof result.uncertaintyScore === "number" ? result.uncertaintyScore : null,
+        model: stringValue(result.model) || "gpt-4o-transcribe",
+        latencyMs: typeof result.latencyMs === "number" ? result.latencyMs : null,
+      });
+    } catch {
+      handleTechnicalFailure(currentWord, "I had trouble hearing that. Let's try once more.", "transcribe_error_retry");
+    } finally {
+      requestInFlightRef.current = false;
+      setThinking(false);
+      onBuddyState("idle");
+    }
+  }
+
+  function scoreTranscript(
+    entry: Part3WordEntry,
+    rawTranscript: string,
+    durationMs: number,
+    metadata: { confidenceProxy: number | null; uncertaintyScore: number | null; model: string; latencyMs: number | null },
+  ) {
+    const attemptNumber = (attempts[entry.word] || 0) + 1;
+    setAttempts((state) => ({ ...state, [entry.word]: attemptNumber }));
+    const normalizedTranscript = normalize(rawTranscript);
+    const normalizedTarget = normalize(entry.word);
+    const lowConfidence = metadata.confidenceProxy !== null && metadata.confidenceProxy < 0.55;
+    const baseContext = voiceContext(entry, attemptNumber, metadata);
+    const baseResponse = {
+      rawTranscript,
+      normalizedTranscript,
+      scaffoldStep: "speech_match",
+      scoringMode: "independent",
+      independentScoreEligible: true,
+    };
+
+    if (normalizedTranscript === normalizedTarget && !lowConfidence) {
+      const message = `Nice reading — that was ${entry.word}!`;
+      setStatuses((state) => ({ ...state, [entryKey(entry)]: "correct" }));
+      setFeedback(message);
+      onHarperMessage(message);
+      onVoiceEvent({
+        eventType: "VOICE_WORD_READ",
+        partNumber: 3,
+        immediateOutcome: "CORRECT",
+        durationMs,
+        extra: { ...baseContext, expectedText: entry.word },
+        response: { ...baseResponse, scaffoldStep: "correct" },
+      });
+      advanceFrom(entry);
+      return;
+    }
+
+    if (attemptNumber <= 1 || lowConfidence) {
+      const message = "Read that one more time for me.";
+      setStatuses((state) => ({ ...state, [entryKey(entry)]: "retry" }));
+      setFeedback(message);
+      onHarperMessage(message);
+      onVoiceEvent({
+        eventType: "VOICE_WORD_READ",
+        partNumber: 3,
+        immediateOutcome: "retry_prompted",
+        durationMs,
+        extra: { ...baseContext, lowConfidence, expectedText: entry.word },
+        response: { ...baseResponse, scaffoldStep: "retry_prompted" },
+      });
+      return;
+    }
+
+    if (attemptNumber === 2) {
+      const message = reteachTemplate.replace(/\{word\}/g, entry.word);
+      setStatuses((state) => ({ ...state, [entryKey(entry)]: "reteach" }));
+      setFeedback(message);
+      onHarperMessage(message);
+      onVoiceEvent({
+        eventType: "VOICE_WORD_READ",
+        partNumber: 3,
+        immediateOutcome: "retry_prompted",
+        durationMs,
+        extra: { ...baseContext, expectedText: entry.word },
+        response: { ...baseResponse, scaffoldStep: "rule_reteach" },
+      });
+      onVoiceEvent({
+        eventType: "VOICE_MISCUE_DETECTED",
+        partNumber: 3,
+        immediateOutcome: "INCORRECT",
+        extra: { ...baseContext, expectedText: entry.word, feedbackBranch: "rule_reteach" },
+        response: { rawTranscript, normalizedTranscript, scaffoldStep: "rule_reteach", scoringMode: "independent" },
+      });
+      return;
+    }
+
+    void assistAndAdvance(entry, durationMs, baseContext, rawTranscript, normalizedTranscript);
+  }
+
+  async function assistAndAdvance(
+    entry: Part3WordEntry,
+    durationMs: number,
+    context: Record<string, unknown>,
+    rawTranscript: string,
+    normalizedTranscript: string,
+  ) {
+    const message = `Listen: ${entry.word}. Now you try.`;
+    setStatuses((state) => ({ ...state, [entryKey(entry)]: "assisted" }));
+    setFeedback(message);
+    onHarperMessage(message);
+    onVoiceEvent({
+      eventType: "VOICE_WORD_READ",
+      partNumber: 3,
+      immediateOutcome: "INCORRECT",
+      durationMs,
+      extra: { ...context, expectedText: entry.word, assisted: true },
+      response: {
+        rawTranscript,
+        normalizedTranscript,
+        scaffoldStep: "assisted_advance",
+        scoringMode: "assisted",
+        independentScoreEligible: false,
+      },
+    });
+    await onSpeak(message);
+    advanceFrom(entry);
+  }
+
+  function handleTechnicalFailure(entry: Part3WordEntry, message: string, immediateOutcome: string, durationMs?: number) {
+    const nextFailures = (technicalFailures[entry.word] || 0) + 1;
+    setTechnicalFailures((state) => ({ ...state, [entry.word]: nextFailures }));
+    setFeedback(message);
+    onHarperMessage(message);
+    onBuddyState("idle");
+    onVoiceEvent({
+      eventType: "VOICE_WORD_READ",
+      partNumber: 3,
+      immediateOutcome,
+      durationMs,
+      extra: voiceContext(entry, attempts[entry.word] || 0, { technicalFailureCount: nextFailures }),
+      response: { scaffoldStep: "technical_retry", scoringMode: "unscored" },
+    });
+    if (nextFailures >= 2) setShowFallback(true);
+  }
+
+  function adultSupportAdvance() {
+    if (!currentWord) return;
+    setStatuses((state) => ({ ...state, [entryKey(currentWord)]: "unscored" }));
+    setFeedback("Thanks for reading with your adult. Let's keep going.");
+    onHarperMessage("Thanks for reading with your adult. Let's keep going.");
+    onVoiceEvent({
+      eventType: "VOICE_WORD_READ",
+      partNumber: 3,
+      immediateOutcome: "SKIPPED",
+      extra: voiceContext(currentWord, attempts[currentWord.word] || 0, { fallback: "adult_support" }),
+      response: { scaffoldStep: "adult_support_fallback", scoringMode: "unscored", independentScoreEligible: false },
+    });
+    advanceFrom(currentWord);
+  }
+
+  function advanceFrom(entry: Part3WordEntry) {
+    setShowFallback(false);
+    setCurrentIndex((index) => Math.max(index, entry.index + 1));
+  }
+
+  function confirmPseudowords() {
+    setPseudowordsConfirmed(true);
+    setFeedback("Nice work with the silly words.");
+    onHarperMessage("Nice work with the silly words.");
+  }
+
+  const completedRealCount = Object.values(statuses).filter((status) => ["correct", "assisted", "unscored"].includes(status)).length;
+
+  return (
+    <div className="flex flex-1 flex-col gap-5">
+      <div className="rounded-3xl border-2 border-blue-100 bg-blue-50 p-4 text-base font-black leading-relaxed text-blue-950">
+        {feedback}
+      </div>
+      <div className="grid gap-3">
+        {lines.map((line) => {
+          const role = stringValue(line.role);
+          const words = stringArray(line.words);
+          const isPseudo = role === "target_pseudowords";
+          return (
+            <div key={`${line.lineNumber}-${role}`} className={`rounded-3xl border-2 p-4 ${isPseudo ? "border-violet-100 bg-violet-50" : "border-[#ead9c2] bg-[#fffdf8]"}`}>
+              <div className="mb-3 flex items-center justify-between">
+                <p className="text-xs font-black uppercase tracking-wide text-slate-500">
+                  {isPseudo ? "Silly words" : `Line ${String(line.lineNumber)}`}
+                </p>
+                {isPseudo ? <span className="rounded-full bg-white px-2 py-1 text-xs font-black text-violet-700">self or adult confirm</span> : null}
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {words.map((word, index) => {
+                  const realEntry = realEntries.find((entry) => entry.lineNumber === Number(line.lineNumber) && entry.word === word && entry.index >= index);
+                  const status = realEntry ? statuses[entryKey(realEntry)] : undefined;
+                  const isCurrent = realEntry?.index === currentIndex && !allRealWordsComplete;
+                  return (
+                    <span
+                      key={`${role}-${word}-${index}`}
+                      className={`rounded-2xl border-2 px-4 py-3 text-2xl font-black ${
+                        status === "correct"
+                          ? "border-emerald-300 bg-emerald-50 text-emerald-800"
+                          : status === "retry" || status === "reteach"
+                            ? "border-amber-300 bg-amber-50 text-amber-900"
+                            : status === "assisted" || status === "unscored"
+                              ? "border-blue-200 bg-blue-50 text-blue-800"
+                              : isCurrent
+                                ? "border-violet-300 bg-violet-50 text-violet-900"
+                                : "border-[#ead9c2] bg-white text-slate-900"
+                      }`}
+                    >
+                      {word}
+                    </span>
+                  );
+                })}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      {!allRealWordsComplete ? (
+        <div className="rounded-3xl border border-[#efe1d2] bg-[#fffdf8] p-4">
+          <p className="text-sm font-black uppercase tracking-wide text-slate-500">Current word</p>
+          <p className="mt-1 text-4xl font-black">{currentWord?.word}</p>
+          <div className="mt-4 flex flex-wrap gap-3">
+            {!recording ? (
+              <button
+                onClick={beginRecording}
+                disabled={readDisabled}
+                className="rounded-2xl bg-amber-300 px-5 py-4 font-black text-amber-950 disabled:cursor-not-allowed disabled:opacity-50"
+              >
+                {isRateLimited ? "Harper is pausing" : thinking ? "Thinking..." : `Read ${currentWord?.word}`}
+              </button>
+            ) : (
+              <button onClick={stopAndScore} className="rounded-2xl bg-blue-600 px-5 py-4 font-black text-white">
+                Stop and check
+              </button>
+            )}
+            {showFallback ? (
+              <button onClick={adultSupportAdvance} className="rounded-2xl border border-[#e8d9c7] bg-white px-5 py-4 font-black">
+                I read it with my adult
+              </button>
+            ) : null}
+          </div>
+        </div>
+      ) : (
+        <div className="rounded-3xl border-2 border-violet-100 bg-violet-50 p-5">
+          <h3 className="text-2xl font-black">Now the silly words</h3>
+          <p className="mt-2 font-bold text-violet-900">Read these with your adult or tap when you have tried them. Harper will not score silly words.</p>
+          <div className="mt-4 flex flex-wrap gap-2">
+            {pseudowords.map((word) => (
+              <span key={word} className="rounded-2xl border-2 border-violet-200 bg-white px-4 py-3 text-2xl font-black">
+                {word}
+              </span>
+            ))}
+          </div>
+          <button onClick={confirmPseudowords} className="mt-4 rounded-2xl bg-violet-600 px-5 py-4 font-black text-white">
+            We read the silly words
+          </button>
+        </div>
+      )}
+
+      <div className="mt-auto flex items-center justify-between gap-3">
+        <p className="text-sm font-black text-slate-500">
+          Real words complete: {completedRealCount}/{realEntries.length}
+        </p>
+        <button
+          onClick={() => onComplete({ realWordsComplete: completedRealCount, pseudowordsConfirmed })}
+          disabled={!allRealWordsComplete || !pseudowordsConfirmed}
+          className="rounded-2xl bg-amber-300 px-5 py-4 font-black text-amber-950 disabled:cursor-not-allowed disabled:opacity-50"
+        >
+          Done with word lines
         </button>
       </div>
     </div>
@@ -456,7 +937,8 @@ function speechForPart(part: LessonPlayerPart) {
 }
 
 function partDescription(part: LessonPlayerPart) {
-  if (part.partNumber === 3 || part.partNumber === 5 || part.partNumber === 7) return "Visible placeholder for a later speech slice.";
+  if (part.partNumber === 3) return "Read the generated word lines with Harper.";
+  if (part.partNumber === 5 || part.partNumber === 7) return "Visible placeholder for a later speech slice.";
   return stringValue(part.contentJson.skillFocus).replace(/_/g, " ") || "Generated lesson activity.";
 }
 
@@ -468,6 +950,38 @@ function placeholderPreview(part: LessonPlayerPart) {
   if (part.partNumber === 5) return stringArray(part.contentJson.sentences).slice(0, 2).join(" ");
   if (part.partNumber === 7) return stringValue(part.contentJson.passageText).slice(0, 160);
   return "This part is generated and will be wired in a later slice.";
+}
+
+function entryKey(entry: Part3WordEntry) {
+  return `${entry.lineNumber}:${entry.index}:${entry.word}`;
+}
+
+function retryAfterSeconds(value: string | null) {
+  if (!value) return 5;
+  const seconds = Number(value);
+  if (Number.isFinite(seconds) && seconds > 0) return Math.min(60, Math.ceil(seconds));
+  const date = Date.parse(value);
+  if (Number.isFinite(date)) return Math.min(60, Math.max(1, Math.ceil((date - Date.now()) / 1000)));
+  return 5;
+}
+
+function waitForRecorderFlush() {
+  return new Promise((resolve) => window.setTimeout(resolve, 80));
+}
+
+function voiceContext(entry: Part3WordEntry, attemptNumber: number, extra?: Record<string, unknown>) {
+  return {
+    lineRole: entry.lineRole,
+    lineNumber: entry.lineNumber,
+    wordId: entryKey(entry),
+    target: entry.word,
+    expectedText: entry.word,
+    attemptNumber,
+    asrVendor: "openai",
+    partNumber: 3,
+    PART3_SCORING_MODE: "harper_retry_only",
+    ...extra,
+  };
 }
 
 function letterTiles(word: string) {

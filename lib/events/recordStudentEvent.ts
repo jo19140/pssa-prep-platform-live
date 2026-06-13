@@ -4,7 +4,17 @@ import { addDays } from "@/lib/voice/retention";
 import { ensureVoiceConsent } from "@/lib/voice/consent";
 import type { EventType } from "./eventTypes";
 
-type ImmediateOutcome = "CORRECT" | "INCORRECT" | "PARTIAL" | "ABANDONED" | "SELF_CORRECTED" | "TIMED_OUT" | "SKIPPED";
+type ImmediateOutcome =
+  | "CORRECT"
+  | "INCORRECT"
+  | "PARTIAL"
+  | "ABANDONED"
+  | "SELF_CORRECTED"
+  | "TIMED_OUT"
+  | "SKIPPED"
+  | "retry_prompted"
+  | "transcribe_rate_limited"
+  | "transcribe_error_retry";
 
 export interface RecordStudentEventInput {
   studentUserId: string;
