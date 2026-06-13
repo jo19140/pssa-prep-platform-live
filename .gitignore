@@ -20,3 +20,6 @@ content/reading-buddy-phase1-3-v1.4-fast-track/
 
 # Local session audit outputs — regenerable via scripts/content/audit-*
 audit/passage_audit_report.*
+
+# Consent-gated local voice recordings; never commit raw runtime data.
+voice-corpus/
