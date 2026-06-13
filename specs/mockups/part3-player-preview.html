@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Part 3 Player — live read-to-Harper (preview)</title>
+<style>
+  :root{
+    --bg:#f4f6fb; --card:#fff; --ink:#1f2740; --muted:#6b7488; --line:#e4e8f2;
+    --brand:#3f5bd9; --brand-soft:#eaeefc; --good:#1f9d6b; --good-soft:#e6f7f0;
+    --warn:#d98a1f; --warn-soft:#fdf3e3; --silent:#b6bccb; --hl:#ffd34d;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.5}
+  .wrap{max-width:720px;margin:0 auto;padding:24px 18px 60px}
+  .label{font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;margin:14px 0;box-shadow:0 1px 0 rgba(20,30,60,.03)}
+  h2{margin:.2em 0 .1em;font-size:22px}
+  .buddy{width:54px;height:54px;border-radius:50%;flex:0 0 auto;
+    background:radial-gradient(circle at 35% 32%, #8aa0ff 0 38%, #5b76ec 39% 70%, #3f5bd9 71%);
+    box-shadow:inset 0 -6px 10px rgba(0,0,0,.12)}
+  .harper-row{display:flex;gap:14px;align-items:center}
+  .bubble{background:var(--brand-soft);border-radius:14px;padding:12px 16px;font-weight:600;font-size:17px}
+  .wordline{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0 4px}
+  .chip{padding:8px 14px;border-radius:12px;border:1px solid var(--line);background:#fbfcff;font-weight:700;font-size:20px;color:#7a8499}
+  .chip.active{background:#fff;border-color:var(--brand);color:var(--ink);box-shadow:0 0 0 3px var(--brand-soft)}
+  .chip.done{color:var(--good);border-color:#bfe8d6;background:var(--good-soft)}
+  .chip.assist{color:var(--warn);border-color:#f0d8aa;background:var(--warn-soft)}
+  .word-large{font-size:60px;font-weight:800;text-align:center;margin:10px 0;letter-spacing:.04em}
+  .word-large .hl{background:linear-gradient(transparent 55%, var(--hl) 55%);padding:0 2px}
+  .word-large .silent{color:var(--silent)}
+  .mic{display:flex;flex-direction:column;align-items:center;gap:8px;margin:8px 0}
+  .micbtn{width:78px;height:78px;border-radius:50%;border:none;cursor:pointer;color:#fff;font-size:30px;
+    background:var(--brand);box-shadow:0 8px 18px rgba(63,91,217,.32);transition:transform .08s}
+  .micbtn:active{transform:scale(.95)}
+  .micbtn.rec{background:#e0473c;animation:pulse 1s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(224,71,60,.5)}100%{box-shadow:0 0 0 16px rgba(224,71,60,0)}}
+  .panel{border-radius:14px;padding:14px 16px;margin-top:12px;font-weight:600}
+  .panel.good{background:var(--good-soft);color:#0f6e49}
+  .panel.retry{background:var(--brand-soft);color:#2c3da8}
+  .panel.reteach{background:var(--warn-soft);color:#8a5a12}
+  .panel.assist{background:#eef1f7;color:#3a4256}
+  .btn{display:inline-block;padding:9px 16px;border-radius:11px;border:1px solid var(--line);background:#fff;font-weight:800;cursor:pointer;font-size:14px}
+  .btn.primary{background:var(--brand);color:#fff;border-color:var(--brand)}
+  .sim{position:sticky;top:0;z-index:5;background:#11182b;color:#cfd6ea;border-radius:14px;padding:12px 14px;margin-bottom:8px;font-size:13px}
+  .sim b{color:#fff}
+  .sim .btn{margin:6px 6px 0 0;background:#1e2740;color:#dfe5f5;border-color:#2c3756;font-size:13px}
+  .sim .btn.k{background:#1f9d6b;border-color:#1f9d6b;color:#fff}
+  .sim .btn.m{background:#d98a1f;border-color:#d98a1f;color:#fff}
+  .notes{font-size:13px;color:var(--muted);background:#fbfcff;border:1px dashed var(--line);border-radius:12px;padding:14px;margin-top:8px}
+  .notes b{color:var(--ink)}
+  .progress{font-size:12px;color:var(--muted);font-weight:700}
+  .crossout{text-decoration:line-through;opacity:.5}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="sim">
+    <b>Adult preview controls</b> — the child never sees these. Tap to simulate what the recognizer hears, then watch Harper respond.
+    <div>
+      <span class="btn k" onclick="simulate('correct')">Kid read it right</span>
+      <span class="btn m" onclick="simulate('miss')">Kid misread / soft voice</span>
+      <span class="btn" onclick="resetWord()">Reset word</span>
+      <span class="btn" onclick="nextWord()">Next word →</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="label">Part 3 of 8 · Reading a_e words</div>
+    <span class="progress" id="prog">Line 1 · word 1 of 5</span>
+    <h2>Read each word out loud</h2>
+    <div class="wordline" id="wordline"></div>
+  </div>
+
+  <div class="card">
+    <div class="harper-row">
+      <div class="buddy"></div>
+      <div class="bubble" id="harper">Read this word for me.</div>
+    </div>
+
+    <div class="word-large" id="bigword"></div>
+
+    <div class="mic">
+      <button class="micbtn" id="mic" onclick="tapMic()">🎙️</button>
+      <div class="progress" id="micstate">Tap to read</div>
+    </div>
+
+    <div id="feedback"></div>
+  </div>
+
+  <div class="notes" id="designnotes">
+    <b>Design notes (adult-only) — grounded in the voice pilot, 158 clips / 6 kids.</b><br>
+    • <b>Harper never says “wrong” and never echoes a transcript.</b> The recognizer returned “K” / “Qué?” for a soft reader who read correctly — so “you said ___” is unsafe. Re-teach is rule-anchored from the known target, not the heard audio.<br>
+    • <b>Isolated words default to <code>harper_retry_only</code></b> — Harper listens and re-prompts, but does <i>not</i> make a mastery decision from ASR at this tier (isolated false-negative ~36%, up to 72% for a soft reader). No autonomous reject.<br>
+    • <b>A “miss” is gentle and bounded:</b> attempt 1 → “read it once more”; repeat → rule re-teach (silent-e); still stuck → Harper models it, marks assisted, moves on. A struggling reader is never stuck or scolded.<br>
+    • <b>Line 4 (silly words)</b> = read-and-self-confirm, never ASR-scored (pseudowords over-normalize).<br>
+    • Every attempt emits evidence for the teacher view; nothing the child sees says “fail.”
+  </div>
+
+</div>
+
+<script>
+const lines = [
+  {label:"Line 1", words:["make","cake","lake","take","bake"], pseudo:false},
+  {label:"Line 2", words:["cap","cape","tap","tape","mate"], pseudo:false},
+  {label:"Line 3", words:["ran","cane","same","mad","made"], pseudo:false},
+  {label:"Line 4", words:["mave","lape","nake","zame","tave"], pseudo:true},
+];
+let li=0, wi=0, attempt=0, status=[]; // status[li][wi] = 'done'|'assist'|undefined
+lines.forEach(l=>status.push(l.words.map(()=>undefined)));
+
+function vce(w){ // render silent-e highlight: c a k e -> a highlighted, e silent
+  if(/^[a-z]+a[a-z]e$/.test(w)){
+    return w.replace(/a([a-z])e$/, '<span class="hl">a</span>$1<span class="silent">e</span>');
+  }
+  if(/e$/.test(w)) return w.replace(/([a-z])e$/,'$1<span class="silent">e</span>');
+  return w;
+}
+function renderLine(){
+  const l=lines[li];
+  document.getElementById('wordline').innerHTML = l.words.map((w,i)=>{
+    let cls='chip'; if(i===wi) cls+=' active'; if(status[li][i]==='done') cls+=' done'; if(status[li][i]==='assist') cls+=' assist';
+    return `<span class="${cls}">${w}</span>`;
+  }).join('');
+  document.getElementById('prog').textContent = `${l.label} · word ${wi+1} of ${l.words.length}`;
+  document.getElementById('bigword').innerHTML = vce(l.words[wi]);
+}
+function setHarper(t){ document.getElementById('harper').textContent=t; }
+function fb(html){ document.getElementById('feedback').innerHTML=html; }
+
+function resetWord(){ attempt=0; fb(''); setMic('idle');
+  const l=lines[li];
+  setHarper(l.pseudo ? "These are silly made-up words. Read each one your best — there’s no wrong here." : "Read this word for me.");
+  renderLine();
+}
+function setMic(s){
+  const b=document.getElementById('mic'), t=document.getElementById('micstate');
+  b.classList.toggle('rec', s==='rec');
+  t.textContent = s==='rec' ? 'Listening… tap when done' : (s==='idle'?'Tap to read':'…');
+}
+let listening=false;
+function tapMic(){
+  listening=!listening;
+  if(listening){ setMic('rec'); setHarper("I’m listening…"); fb(''); }
+  else { setMic('idle'); setHarper("Use the adult controls above to simulate what I heard."); }
+}
+function simulate(kind){
+  listening=false; setMic('idle');
+  const l=lines[li], w=l.words[wi];
+  if(l.pseudo){ // pseudoword: self-confirm, never scored
+    setHarper(`Nice try on “${w}”! Silly words help your brain practice.`);
+    fb(`<div class="panel assist">Read-and-go — silly words aren’t scored. <span class="btn primary" onclick="markPseudo()">I read it</span></div>`);
+    return;
+  }
+  if(kind==='correct'){
+    status[li][wi]='done'; renderLine();
+    setHarper(`Nice reading — that was “${w}.”`);
+    fb(`<div class="panel good">✓ Correct · counted as: <b>read on own</b></div>`);
+    return;
+  }
+  // miss path — retry-tolerant, NO transcript echo
+  attempt++;
+  if(attempt===1){
+    setHarper("Let’s read that one more time for me.");
+    fb(`<div class="panel retry">No “wrong,” no echo of what was heard. Re-record. <span class="btn" onclick="simulate('miss')">simulate another miss</span> <span class="btn k" onclick="simulate('correct')">they get it</span></div>`);
+  } else if(attempt===2){
+    const hl = vce(w);
+    setHarper("Look at the e at the end. It is quiet, but it helps a say its name.");
+    fb(`<div class="panel reteach"><b>Rule re-teach (locked a_e reteachPrompt, no “you said ___”):</b> “Look at the e at the end. It is quiet, but it helps a say its name. Try again: <span style="font-size:22px">${hl}</span>”</div>`);
+  } else {
+    status[li][wi]='assist'; renderLine();
+    setHarper(`Listen: “${w}.” Now you try — I’ll help.`);
+    fb(`<div class="panel assist">Harper models it (I-do / you-do) → marked <b>assisted</b> (not independent), and we move on. The child is never stuck.</div>`);
+  }
+}
+function markPseudo(){ status[li][wi]='done'; renderLine(); nextWord(); }
+function nextWord(){
+  const l=lines[li];
+  if(wi < l.words.length-1){ wi++; }
+  else if(li < lines.length-1){ li++; wi=0; }
+  else { setHarper("You read every line! Great work."); fb(`<div class="panel good">Part 3 complete → on to Part 4.</div>`); return; }
+  resetWord();
+}
+resetWord();
+</script>
+</body>
+</html>
