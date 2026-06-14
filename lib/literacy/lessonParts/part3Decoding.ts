@@ -8,8 +8,11 @@ export function generatePart3Decoding(ctx: LessonGeneratorContext): GeneratedLes
   const pseudowordValidation = ctx.pseudowords.map((word) => {
     const detectedPattern = selectPseudowordPattern(word, ctx.pseudowordPatterns);
     return detectedPattern
-      ? validatePseudowordCandidate(word, detectedPattern, { strictLexicon: true })
-      : validatePseudowordCandidate(word, ctx.pseudowordPatterns[0] ?? ctx.targetPatterns[0] ?? "a_e", { strictLexicon: true });
+      ? validatePseudowordCandidate(word, detectedPattern, { strictLexicon: true, failClosedOnMissingLexicon: false })
+      : validatePseudowordCandidate(word, ctx.pseudowordPatterns[0] ?? ctx.targetPatterns[0] ?? "a_e", {
+        strictLexicon: true,
+        failClosedOnMissingLexicon: false,
+      });
   });
   const contrastiveLines = [
     { lineNumber: 1, role: "target_real_words", words: ctx.targetWords },
