@@ -332,6 +332,19 @@ function ConceptPart({
 }) {
   const statement = stringValue(part.contentJson.kidRuleStatement) || stringValue(part.kidVisibleCopy.kidRuleStatement);
   const pairs = arrayOfRecords(part.contentJson.demonstrationPairs);
+  const pairItems = pairs
+    .map((pair, index) => {
+      const before = stringValue(pair.closed) || stringValue(pair.base);
+      const after = stringValue(pair.target);
+      if (!before || !after) return null;
+      return {
+        id: `${before}-${after}-${index}`,
+        label: `${before} → ${after}`,
+        helper: index === 0 ? "Main pair" : "Practice pair",
+        utterance: `${before}. ${after}.`,
+      };
+    })
+    .filter((item): item is TappableItem => Boolean(item));
   return (
     <div className="flex flex-1 flex-col gap-5">
       <div className="rounded-3xl border-2 border-amber-300 bg-amber-50 p-5 text-xl font-black leading-relaxed">{statement}</div>
@@ -340,19 +353,16 @@ function ConceptPart({
         <div className="text-center text-3xl font-black text-amber-700">to</div>
         <DemoCard label="Silent e word" word={stringValue(pairs[0]?.target) || "cape"} />
       </div>
-      <div className="flex flex-wrap gap-2">
-        {pairs.slice(1).map((pair, index) => (
-          <span key={`${pair.target}-${index}`} className="rounded-2xl border border-[#ead9c2] bg-[#fffdf8] px-4 py-3 text-xl font-black">
-            {stringValue(pair.closed) || stringValue(pair.base)} to {stringValue(pair.target)}
-          </span>
-        ))}
-      </div>
-      <div className="mt-auto flex flex-wrap gap-3">
+      <TappableItemPractice
+        items={pairItems}
+        onSpeak={onSpeak}
+        completeLabel="I practiced it"
+        completeDisabledLabel="Tap each pair first"
+        onComplete={(heardCount) => onComplete({ listenedToRule: true, heardPairs: heardCount })}
+      />
+      <div className="flex flex-wrap gap-3">
         <button onClick={() => onSpeak(statement)} className="rounded-2xl border border-[#e8d9c7] bg-white px-5 py-4 font-black">
           Listen again
-        </button>
-        <button onClick={() => onComplete({ listenedToRule: true })} className="rounded-2xl bg-amber-300 px-5 py-4 font-black text-amber-950">
-          I practiced it
         </button>
       </div>
     </div>
@@ -809,28 +819,83 @@ function PowerWordsPart({
 }) {
   const heartWords = stringArray(part.contentJson.heartWords);
   const vocabularyWords = arrayOfRecords(part.contentJson.vocabularyWords).map((entry) => stringValue(entry.word)).filter(Boolean);
-  const [recognized, setRecognized] = useState<Record<string, boolean>>({});
   const allWords = [...heartWords.map((word) => ({ word, kind: "Power word" })), ...vocabularyWords.map((word) => ({ word, kind: "Story word" }))];
+  const wordItems = allWords.map(({ word, kind }) => ({
+    id: `${kind}-${word}`,
+    label: word,
+    helper: kind,
+    utterance: `${word}.`,
+  }));
   return (
     <div className="flex flex-1 flex-col gap-5">
+      <TappableItemPractice
+        items={wordItems}
+        onSpeak={onSpeak}
+        completeLabel="I know these"
+        completeDisabledLabel="Tap each word first"
+        onComplete={(heardCount) => onComplete({ heardWords: heardCount })}
+      />
+    </div>
+  );
+}
+
+type TappableItem = {
+  id: string;
+  label: string;
+  helper: string;
+  utterance: string;
+};
+
+function TappableItemPractice({
+  items,
+  onSpeak,
+  completeLabel,
+  completeDisabledLabel,
+  onComplete,
+}: {
+  items: TappableItem[];
+  onSpeak: (text: string) => Promise<void>;
+  completeLabel: string;
+  completeDisabledLabel: string;
+  onComplete: (heardCount: number) => void;
+}) {
+  const [heard, setHeard] = useState<Record<string, boolean>>({});
+  const heardCount = items.filter((item) => heard[item.id]).length;
+  const allHeard = items.length > 0 && heardCount === items.length;
+
+  async function hearItem(item: TappableItem) {
+    setHeard((state) => ({ ...state, [item.id]: true }));
+    await onSpeak(item.utterance);
+  }
+
+  return (
+    <div className="flex flex-1 flex-col gap-4">
       <div className="grid gap-3 md:grid-cols-3">
-        {allWords.map(({ word, kind }) => (
+        {items.map((item) => (
           <button
-            key={`${kind}-${word}`}
-            onClick={() => setRecognized((state) => ({ ...state, [word]: !state[word] }))}
-            className={`rounded-3xl border-2 p-5 text-center ${recognized[word] ? "border-emerald-300 bg-emerald-50" : "border-rose-100 bg-rose-50"}`}
+            key={item.id}
+            onClick={() => hearItem(item)}
+            className={`rounded-3xl border-2 p-5 text-center transition ${
+              heard[item.id] ? "border-emerald-300 bg-emerald-50 text-emerald-900" : "border-[#ead9c2] bg-[#fffdf8] text-slate-950"
+            }`}
           >
-            <span className="block text-3xl font-black">{word}</span>
-            <span className="mt-2 inline-block rounded-full bg-white px-2 py-1 text-xs font-black text-rose-700">{kind}</span>
+            <span className="block text-3xl font-black">{item.label}</span>
+            <span className="mt-2 inline-block rounded-full bg-white px-2 py-1 text-xs font-black text-amber-800">
+              {heard[item.id] ? "Heard" : item.helper}
+            </span>
           </button>
         ))}
       </div>
-      <div className="mt-auto flex flex-wrap gap-3">
-        <button onClick={() => onSpeak(allWords.map((entry) => entry.word).join(". "))} className="rounded-2xl border border-[#e8d9c7] bg-white px-5 py-4 font-black">
-          Hear the words
-        </button>
-        <button onClick={() => onComplete({ recognizedWords: Object.keys(recognized).filter((word) => recognized[word]).length })} className="rounded-2xl bg-amber-300 px-5 py-4 font-black text-amber-950">
-          I know these
+      <div className="mt-auto flex flex-wrap items-center gap-3">
+        <span className="rounded-full border border-[#ead9c2] bg-white px-3 py-2 text-xs font-black text-slate-600">
+          Heard {heardCount}/{items.length}
+        </span>
+        <button
+          onClick={() => onComplete(heardCount)}
+          disabled={!allHeard}
+          className="rounded-2xl bg-amber-300 px-5 py-4 font-black text-amber-950 disabled:cursor-not-allowed disabled:opacity-50"
+        >
+          {allHeard ? completeLabel : completeDisabledLabel}
         </button>
       </div>
     </div>
