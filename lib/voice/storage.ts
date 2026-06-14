@@ -49,13 +49,43 @@ export async function purgeVoiceSessionAudio(input: {
   deletionReason: string;
   triggeredByUserId?: string | null;
 }) {
-  const session = await db.voiceSession.findUnique({ where: { id: input.voiceSessionId }, include: { literacyProfile: true } });
-  if (!session?.audioStorageKey) return session;
+  const session = await db.voiceSession.findUnique({
+    where: { id: input.voiceSessionId },
+    include: {
+      literacyProfile: true,
+      labeledSegments: { where: { segmentAudioKey: { not: null } }, select: { id: true, segmentAudioKey: true } },
+    },
+  });
+  if (!session) return session;
+  const deletedAt = new Date();
+  for (const segment of session.labeledSegments) {
+    if (!segment.segmentAudioKey) continue;
+    await deleteVoiceAudioObject(segment.segmentAudioKey);
+    await db.labeledVoiceSegment.update({
+      where: { id: segment.id },
+      data: { segmentAudioKey: null },
+    });
+    await db.voiceAudioDeletionLog.create({
+      data: {
+        voiceSessionId: session.id,
+        studentUserId: session.literacyProfile.studentUserId,
+        audioStorageKey: segment.segmentAudioKey,
+        deletionReason: input.deletionReason,
+        triggeredByUserId: input.triggeredByUserId || undefined,
+      },
+    });
+  }
+
+  if (!session.audioStorageKey) {
+    return session.labeledSegments.length
+      ? db.voiceSession.update({ where: { id: session.id }, data: { audioDeletedAt: deletedAt } })
+      : session;
+  }
   const audioStorageKey = session.audioStorageKey;
   await deleteVoiceAudioObject(audioStorageKey);
   const updated = await db.voiceSession.update({
     where: { id: session.id },
-    data: { audioStorageKey: null, audioDeletedAt: new Date() },
+    data: { audioStorageKey: null, audioDeletedAt: deletedAt },
   });
   await db.voiceAudioDeletionLog.create({
     data: {
@@ -71,7 +101,12 @@ export async function purgeVoiceSessionAudio(input: {
 
 export async function purgeAudioForStudent(studentUserId: string, reason: string, triggeredByUserId?: string | null, retentionTier?: string) {
   const sessions = await db.voiceSession.findMany({
-    where: { literacyProfile: { studentUserId }, audioStorageKey: { not: null }, audioDeletedAt: null, ...(retentionTier ? { retentionTier } : {}) },
+    where: {
+      literacyProfile: { studentUserId },
+      audioDeletedAt: null,
+      ...(retentionTier ? { retentionTier } : {}),
+      OR: [{ audioStorageKey: { not: null } }, { labeledSegments: { some: { segmentAudioKey: { not: null } } } }],
+    },
     select: { id: true },
   });
   for (const session of sessions) {

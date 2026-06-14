@@ -12,6 +12,7 @@ export type VoiceActivityFrame = {
 
 export type VoiceActivityHandle = {
   readonly startedAt: number;
+  readonly stream: MediaStream;
   readonly frames: VoiceActivityFrame[];
   get voicedMs(): number;
   heardSpeech: (minMs?: number) => boolean;

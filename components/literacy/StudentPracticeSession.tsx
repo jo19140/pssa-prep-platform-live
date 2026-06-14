@@ -5,6 +5,8 @@ import { BuddyCharacter, type BuddyState } from "@/components/literacy/BuddyChar
 import { getTtsProvider } from "@/lib/voice/tts";
 import { recordLessonPlayerEvent } from "@/app/student/practice/actions";
 import { startAudioCapture, stopAudioCapture, type AudioCaptureState } from "@/lib/voice/audioCapture";
+import { capturePseudowordClip } from "@/lib/voice/captureClient";
+import { startClipRecorder, type ClipRecorder } from "@/lib/voice/captureRecorder";
 import {
   startVoiceActivity,
   stopVoiceActivity,
@@ -214,6 +216,9 @@ function GeneratedLessonPlayer({ lesson }: { lesson: LessonPlayerData & { enable
                       `${input.eventType} · part=${input.partNumber} · ${input.immediateOutcome || "event"}`,
                     ]);
                   }}
+                  trainingCaptureEnabled={lesson.trainingCaptureEnabled === true}
+                  studentUserId={lesson.studentUserId}
+                  lessonTargetCode={lesson.targetCode}
                 />
               </div>
             </div>
@@ -246,6 +251,9 @@ function PartRenderer({
   onHarperMessage,
   onBuddyState,
   onVoiceEvent,
+  trainingCaptureEnabled,
+  studentUserId,
+  lessonTargetCode,
 }: {
   part: LessonPlayerPart;
   onSpeak: (text: string) => Promise<void>;
@@ -253,6 +261,9 @@ function PartRenderer({
   onHarperMessage: (text: string) => void;
   onBuddyState: (state: BuddyState) => void;
   onVoiceEvent: (input: Omit<LessonPlayerEventInput, "sessionId" | "targetCode">) => void;
+  trainingCaptureEnabled?: boolean;
+  studentUserId?: string;
+  lessonTargetCode: string;
 }) {
   switch (part.partNumber) {
     case 1:
@@ -276,6 +287,9 @@ function PartRenderer({
           onBuddyState={onBuddyState}
           onSpeak={onSpeak}
           onVoiceEvent={onVoiceEvent}
+          trainingCaptureEnabled={trainingCaptureEnabled}
+          studentUserId={studentUserId}
+          lessonTargetCode={lessonTargetCode}
         />
       );
     case 4:
@@ -404,6 +418,9 @@ function Part3LiveLoop({
   onBuddyState,
   onSpeak,
   onVoiceEvent,
+  trainingCaptureEnabled,
+  studentUserId,
+  lessonTargetCode,
 }: {
   part: LessonPlayerPart;
   onComplete: (extra?: Record<string, unknown>) => void;
@@ -411,6 +428,9 @@ function Part3LiveLoop({
   onBuddyState: (state: BuddyState) => void;
   onSpeak: (text: string) => Promise<void>;
   onVoiceEvent: (input: Omit<LessonPlayerEventInput, "sessionId" | "targetCode">) => void;
+  trainingCaptureEnabled?: boolean;
+  studentUserId?: string;
+  lessonTargetCode: string;
 }) {
   const lines = useMemo(() => arrayOfRecords(part.contentJson.contrastiveLines), [part.contentJson.contrastiveLines]);
   const realEntries = useMemo<Part3WordEntry[]>(
@@ -848,6 +868,9 @@ function Part3LiveLoop({
               onBuddyState={onBuddyState}
               onSpeak={onSpeak}
               speakEncouragement
+              trainingCaptureEnabled={trainingCaptureEnabled === true}
+              studentUserId={studentUserId}
+              lessonTargetCode={lessonTargetCode}
             />
           </div>
         </div>
@@ -982,6 +1005,9 @@ function ListenForReadingAttempt({
   onBuddyState,
   onSpeak,
   speakEncouragement = true,
+  trainingCaptureEnabled = false,
+  studentUserId,
+  lessonTargetCode,
 }: {
   surface: "warmup" | "pseudoword";
   words: string[];
@@ -995,6 +1021,9 @@ function ListenForReadingAttempt({
   onBuddyState: (state: BuddyState) => void;
   onSpeak: (text: string) => Promise<void>;
   speakEncouragement?: boolean;
+  trainingCaptureEnabled?: boolean;
+  studentUserId?: string;
+  lessonTargetCode?: string;
 }) {
   const [statuses, setStatuses] = useState<Record<string, ListenAttemptStatus>>({});
   const [attempts, setAttempts] = useState<Record<string, number>>({});
@@ -1003,10 +1032,14 @@ function ListenForReadingAttempt({
   const [micUnavailable, setMicUnavailable] = useState(false);
   const activeWordRef = useRef<string | null>(null);
   const voiceActivityRef = useRef<VoiceActivityHandle | null>(null);
+  const clipRecorderRef = useRef<ClipRecorder | null>(null);
+  const listenStartedAtRef = useRef<number | null>(null);
+  const voiceSessionIdRef = useRef<string | null>(null);
   const pollTimerRef = useRef<number | null>(null);
   const timeoutRef = useRef<number | null>(null);
   const startingRef = useRef(false);
   const speakPromiseRef = useRef<Promise<void> | null>(null);
+  const completingRef = useRef(false);
 
   const doneWords = words.filter((word) => statuses[word] === "heard" || fallbackAccepted[word]);
   const allDone = words.length > 0 && doneWords.length === words.length;
@@ -1017,11 +1050,13 @@ function ListenForReadingAttempt({
     return () => {
       stopActiveListening();
       speakPromiseRef.current = null;
+      completingRef.current = false;
       onBuddyState("idle");
     };
   }, [onBuddyState]);
 
   async function handleWordTap(word: string) {
+    if (completingRef.current) return;
     if (startingRef.current) return;
     if (fallbackAccepted[word] || statuses[word] === "heard") return;
     if (activeWordRef.current === word && voiceActivityRef.current) {
@@ -1044,6 +1079,10 @@ function ListenForReadingAttempt({
     try {
       const handle = await startVoiceActivity();
       voiceActivityRef.current = handle;
+      listenStartedAtRef.current = Date.now();
+      if (trainingCaptureEnabled === true && surface === "pseudoword") {
+        clipRecorderRef.current = startClipRecorder(handle.stream);
+      }
       pollTimerRef.current = window.setInterval(() => {
         if (handle.heardSpeech()) void completeHeard(word);
       }, 100);
@@ -1068,7 +1107,43 @@ function ListenForReadingAttempt({
   }
 
   async function completeHeard(word: string) {
-    stopActiveListening();
+    if (completingRef.current) return;
+    completingRef.current = true;
+    const clipDurationMs = listenStartedAtRef.current ? Date.now() - listenStartedAtRef.current : 0;
+    let blob: Blob | null = null;
+    try {
+      if (pollTimerRef.current) window.clearInterval(pollTimerRef.current);
+      if (timeoutRef.current) window.clearTimeout(timeoutRef.current);
+      pollTimerRef.current = null;
+      timeoutRef.current = null;
+
+      const clipRecorder = clipRecorderRef.current;
+      clipRecorderRef.current = null;
+      if (trainingCaptureEnabled === true && surface === "pseudoword" && clipRecorder) {
+        try {
+          blob = await clipRecorder.stop();
+        } catch {
+          blob = null;
+        }
+      }
+      stopActiveListening();
+    } finally {
+      completingRef.current = false;
+    }
+
+    if (blob && lessonTargetCode) {
+      void capturePseudowordClip({
+        blob,
+        voiceSessionId: voiceSessionIdRef.current,
+        lessonTargetCode,
+        expectedText: word,
+        wordIndex: words.indexOf(word),
+        speakerAgeBand: undefined,
+        clipDurationMs,
+      }).then((result) => {
+        if (result?.voiceSessionId) voiceSessionIdRef.current = result.voiceSessionId;
+      });
+    }
     setStatuses((state) => ({ ...state, [word]: "heard" }));
     setMessageByWord((state) => ({ ...state, [word]: encourage }));
     onHarperMessage(encourage);
@@ -1122,6 +1197,11 @@ function ListenForReadingAttempt({
   }
 
   function stopActiveListening() {
+    if (clipRecorderRef.current) {
+      void clipRecorderRef.current.stop();
+      clipRecorderRef.current = null;
+    }
+    listenStartedAtRef.current = null;
     if (pollTimerRef.current) window.clearInterval(pollTimerRef.current);
     if (timeoutRef.current) window.clearTimeout(timeoutRef.current);
     pollTimerRef.current = null;
