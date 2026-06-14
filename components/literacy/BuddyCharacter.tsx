@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+
 export type BuddyState = "idle" | "listening" | "speaking" | "confused";
 
 const labels: Record<BuddyState, string> = {
@@ -14,14 +16,18 @@ export function BuddyCharacter({ state = "idle", name = "Reading Buddy" }: { sta
   return (
     <div className="flex items-center gap-4">
       <div
-        className={`relative grid h-24 w-24 place-items-center rounded-full border-4 ${
-          isActive ? "border-amber-300 bg-amber-100" : "border-slate-200 bg-white"
+        className={`relative grid h-24 w-24 place-items-center overflow-hidden rounded-full border-4 bg-white shadow-sm transition ${
+          isActive ? "scale-105 border-amber-300 ring-4 ring-amber-100" : "border-slate-200"
         }`}
       >
-        <div className="h-12 w-12 rounded-full bg-slate-900" />
-        <div className="absolute left-7 top-9 h-2 w-2 rounded-full bg-white" />
-        <div className="absolute right-7 top-9 h-2 w-2 rounded-full bg-white" />
-        {state === "confused" ? <div className="absolute bottom-6 h-1 w-8 rounded bg-slate-600" /> : <div className="absolute bottom-6 h-2 w-8 rounded-b-full border-b-4 border-white" />}
+        <Image
+          src="/branding/harper-character-v1.png"
+          alt="Harper"
+          fill
+          sizes="96px"
+          priority
+          className="object-contain p-1"
+        />
       </div>
       <div>
         <p className="text-sm font-semibold text-slate-500">{name}</p>
