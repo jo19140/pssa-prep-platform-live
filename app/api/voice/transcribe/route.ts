@@ -14,7 +14,7 @@ const ALLOWED_MODELS = new Set(["gpt-4o-transcribe", "whisper-1"]);
 const ALLOWED_AUDIO_MIME_TYPES = new Set(["audio/webm", "audio/mp4", "audio/wav"]);
 const MAX_AUDIO_BYTES = 10 * 1024 * 1024;
 const MAX_AUDIO_DURATION_MS = 30_000;
-const RATE_LIMIT_CAPACITY = 20;
+const RATE_LIMIT_CAPACITY = 60;
 const RATE_LIMIT_REFILL_MS = 60_000;
 
 export async function POST(req: Request) {
