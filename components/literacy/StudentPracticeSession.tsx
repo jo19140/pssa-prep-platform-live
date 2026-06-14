@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState, useTransition } from "react";
 import { BuddyCharacter, type BuddyState } from "@/components/literacy/BuddyCharacter";
-import { browserTts } from "@/lib/voice/tts";
+import { getTtsProvider } from "@/lib/voice/tts";
 import { recordLessonPlayerEvent } from "@/app/student/practice/actions";
 import { startAudioCapture, stopAudioCapture, type AudioCaptureState } from "@/lib/voice/audioCapture";
 import type { LessonPlayerData, LessonPlayerPart } from "./lessonPlayerData";
@@ -90,7 +90,7 @@ function GeneratedLessonPlayer({ lesson }: { lesson: LessonPlayerData & { enable
   async function speak(text = speech) {
     setBuddyState("speaking");
     try {
-      await browserTts.speak(text);
+      await getTtsProvider().speak(text);
     } catch {
       // Browser speech may be unavailable; the visible text remains the source of truth.
     } finally {
