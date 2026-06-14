@@ -421,19 +421,23 @@ function Part3LiveLoop({
   const [statuses, setStatuses] = useState<Record<string, Part3Status>>({});
   const [attempts, setAttempts] = useState<Record<string, number>>({});
   const [technicalFailures, setTechnicalFailures] = useState<Record<string, number>>({});
-  const [feedback, setFeedback] = useState("Tap read when you are ready. Harper will listen to one word at a time.");
+  const [, setFeedback] = useState("Tap the highlighted word when you are ready. Harper will listen to one word at a time.");
+  const [wordFeedback, setWordFeedback] = useState<Record<string, string>>({});
   const [recording, setRecording] = useState(false);
   const [thinking, setThinking] = useState(false);
   const [rateLimitedUntil, setRateLimitedUntil] = useState<number | null>(null);
   const [showFallback, setShowFallback] = useState(false);
   const [pseudowordsConfirmed, setPseudowordsConfirmed] = useState(false);
+  const [pseudowordsTried, setPseudowordsTried] = useState<Record<string, boolean>>({});
   const captureRef = useRef<AudioCaptureState | null>(null);
   const chunksRef = useRef<Blob[]>([]);
+  const recordingStartInFlightRef = useRef(false);
   const requestInFlightRef = useRef(false);
   const currentWord = realEntries[currentIndex];
   const isRateLimited = rateLimitedUntil !== null && Date.now() < rateLimitedUntil;
-  const readDisabled = thinking || recording || requestInFlightRef.current || isRateLimited || !currentWord;
+  const readDisabled = thinking || recordingStartInFlightRef.current || requestInFlightRef.current || isRateLimited || !currentWord;
   const allRealWordsComplete = currentIndex >= realEntries.length;
+  const allPseudowordsTried = pseudowords.length > 0 && pseudowords.every((word) => pseudowordsTried[word]);
 
   useEffect(() => {
     if (!rateLimitedUntil) return;
@@ -453,9 +457,11 @@ function Part3LiveLoop({
 
   async function beginRecording() {
     if (readDisabled || !currentWord) return;
+    recordingStartInFlightRef.current = true;
     chunksRef.current = [];
     setShowFallback(false);
     setFeedback(`Read ${currentWord.word}.`);
+    setChipFeedback(currentWord, "I'm listening. Tap this word again when you are done.");
     onHarperMessage(`Read ${currentWord.word}.`);
     onBuddyState("listening");
     try {
@@ -465,6 +471,8 @@ function Part3LiveLoop({
       setRecording(true);
     } catch {
       handleTechnicalFailure(currentWord, "I had trouble hearing that. Let's try once more.", "transcribe_error_retry");
+    } finally {
+      recordingStartInFlightRef.current = false;
     }
   }
 
@@ -504,6 +512,7 @@ function Part3LiveLoop({
         const retryUntil = Date.now() + retrySeconds * 1000;
         setRateLimitedUntil(retryUntil);
         setFeedback("Let's take a quick pause. I'll be ready in a moment.");
+        setChipFeedback(currentWord, "Let's take a quick pause. Harper will be ready in a moment.");
         onHarperMessage("Let's take a quick pause. I'll be ready in a moment.");
         onVoiceEvent({
           eventType: "VOICE_WORD_READ",
@@ -573,6 +582,7 @@ function Part3LiveLoop({
       const message = `Nice reading — that was ${entry.word}!`;
       setStatuses((state) => ({ ...state, [entryKey(entry)]: "correct" }));
       setFeedback(message);
+      setChipFeedback(entry, message);
       onHarperMessage(message);
       onVoiceEvent({
         eventType: "VOICE_WORD_READ",
@@ -590,6 +600,7 @@ function Part3LiveLoop({
       const message = "Read that one more time for me.";
       setStatuses((state) => ({ ...state, [entryKey(entry)]: "retry" }));
       setFeedback(message);
+      setChipFeedback(entry, message);
       onHarperMessage(message);
       onVoiceEvent({
         eventType: "VOICE_WORD_READ",
@@ -606,6 +617,7 @@ function Part3LiveLoop({
       const message = reteachTemplate.replace(/\{word\}/g, entry.word);
       setStatuses((state) => ({ ...state, [entryKey(entry)]: "reteach" }));
       setFeedback(message);
+      setChipFeedback(entry, message);
       onHarperMessage(message);
       onVoiceEvent({
         eventType: "VOICE_WORD_READ",
@@ -638,6 +650,7 @@ function Part3LiveLoop({
     const message = `Listen: ${entry.word}. Now you try.`;
     setStatuses((state) => ({ ...state, [entryKey(entry)]: "assisted" }));
     setFeedback(message);
+    setChipFeedback(entry, message);
     onHarperMessage(message);
     onVoiceEvent({
       eventType: "VOICE_WORD_READ",
@@ -661,6 +674,7 @@ function Part3LiveLoop({
     const nextFailures = (technicalFailures[entry.word] || 0) + 1;
     setTechnicalFailures((state) => ({ ...state, [entry.word]: nextFailures }));
     setFeedback(message);
+    setChipFeedback(entry, message);
     onHarperMessage(message);
     onBuddyState("idle");
     onVoiceEvent({
@@ -678,6 +692,7 @@ function Part3LiveLoop({
     if (!currentWord) return;
     setStatuses((state) => ({ ...state, [entryKey(currentWord)]: "unscored" }));
     setFeedback("Thanks for reading with your adult. Let's keep going.");
+    setChipFeedback(currentWord, "Thanks for reading with your adult. Let's keep going.");
     onHarperMessage("Thanks for reading with your adult. Let's keep going.");
     onVoiceEvent({
       eventType: "VOICE_WORD_READ",
@@ -700,34 +715,64 @@ function Part3LiveLoop({
     onHarperMessage("Nice work with the silly words.");
   }
 
+  function setChipFeedback(entry: Part3WordEntry, message: string) {
+    setWordFeedback((state) => ({ ...state, [entryKey(entry)]: message }));
+  }
+
+  function wordChipInstruction() {
+    if (recording) return "Harper is listening. Tap the word again when you are done.";
+    if (thinking) return "Harper is thinking about that word.";
+    if (isRateLimited) return "Harper is taking a quick pause before the next try.";
+    if (allRealWordsComplete) return "Nice word reading. Now try the silly words with your adult.";
+    return "Tap the highlighted word to read it to Harper.";
+  }
+
+  function handleWordChipTap(entry: Part3WordEntry) {
+    if (recordingStartInFlightRef.current) return;
+    if (entry.index !== currentIndex) return;
+    if (recording) {
+      void stopAndScore();
+      return;
+    }
+    void beginRecording();
+  }
+
+  async function tryPseudoword(word: string) {
+    setPseudowordsTried((state) => ({ ...state, [word]: true }));
+    await onSpeak(`${word}.`);
+  }
+
   const completedRealCount = Object.values(statuses).filter((status) => ["correct", "assisted", "unscored"].includes(status)).length;
 
   return (
     <div className="flex flex-1 flex-col gap-5">
       <div className="rounded-3xl border-2 border-blue-100 bg-blue-50 p-4 text-base font-black leading-relaxed text-blue-950">
-        {feedback}
+        {wordChipInstruction()}
       </div>
       <div className="grid gap-3">
-        {lines.map((line) => {
+        {lines.filter((line) => stringValue(line.role) !== "target_pseudowords").map((line) => {
           const role = stringValue(line.role);
           const words = stringArray(line.words);
-          const isPseudo = role === "target_pseudowords";
           return (
-            <div key={`${line.lineNumber}-${role}`} className={`rounded-3xl border-2 p-4 ${isPseudo ? "border-violet-100 bg-violet-50" : "border-[#ead9c2] bg-[#fffdf8]"}`}>
+            <div key={`${line.lineNumber}-${role}`} className="rounded-3xl border-2 border-[#ead9c2] bg-[#fffdf8] p-4">
               <div className="mb-3 flex items-center justify-between">
                 <p className="text-xs font-black uppercase tracking-wide text-slate-500">
-                  {isPseudo ? "Silly words" : `Line ${String(line.lineNumber)}`}
+                  Line {String(line.lineNumber)}
                 </p>
-                {isPseudo ? <span className="rounded-full bg-white px-2 py-1 text-xs font-black text-violet-700">self or adult confirm</span> : null}
               </div>
               <div className="flex flex-wrap gap-2">
                 {words.map((word, index) => {
                   const realEntry = realEntries.find((entry) => entry.lineNumber === Number(line.lineNumber) && entry.word === word && entry.index >= index);
                   const status = realEntry ? statuses[entryKey(realEntry)] : undefined;
                   const isCurrent = realEntry?.index === currentIndex && !allRealWordsComplete;
+                  const processing = Boolean(isCurrent && (recording || thinking || requestInFlightRef.current));
+                  const disabled = !realEntry || (!isCurrent && status !== "correct" && status !== "assisted" && status !== "unscored") || (isCurrent && readDisabled && !recording);
+                  const chipFeedback = realEntry ? wordFeedback[entryKey(realEntry)] : "";
                   return (
-                    <span
+                    <button
                       key={`${role}-${word}-${index}`}
+                      onClick={() => realEntry && handleWordChipTap(realEntry)}
+                      disabled={disabled}
                       className={`rounded-2xl border-2 px-4 py-3 text-2xl font-black ${
                         status === "correct"
                           ? "border-emerald-300 bg-emerald-50 text-emerald-800"
@@ -738,10 +783,17 @@ function Part3LiveLoop({
                               : isCurrent
                                 ? "border-violet-300 bg-violet-50 text-violet-900"
                                 : "border-[#ead9c2] bg-white text-slate-900"
-                      }`}
+                      } disabled:cursor-not-allowed disabled:opacity-60`}
                     >
-                      {word}
-                    </span>
+                      <span className="block">{word}</span>
+                      {isCurrent ? (
+                        <span className="mt-1 block text-xs font-black uppercase tracking-wide">
+                          {recording ? "tap when done" : thinking ? "checking" : "tap to read"}
+                        </span>
+                      ) : null}
+                      {processing ? <span className="mt-1 block text-xs font-black text-violet-700">Harper is listening</span> : null}
+                      {chipFeedback ? <span className="mt-2 block max-w-[15rem] text-sm font-extrabold normal-case leading-snug">{chipFeedback}</span> : null}
+                    </button>
                   );
                 })}
               </div>
@@ -753,21 +805,8 @@ function Part3LiveLoop({
       {!allRealWordsComplete ? (
         <div className="rounded-3xl border border-[#efe1d2] bg-[#fffdf8] p-4">
           <p className="text-sm font-black uppercase tracking-wide text-slate-500">Current word</p>
-          <p className="mt-1 text-4xl font-black">{currentWord?.word}</p>
+          <p className="mt-1 text-2xl font-black text-slate-700">Use the highlighted word chip above. The word is the read button.</p>
           <div className="mt-4 flex flex-wrap gap-3">
-            {!recording ? (
-              <button
-                onClick={beginRecording}
-                disabled={readDisabled}
-                className="rounded-2xl bg-amber-300 px-5 py-4 font-black text-amber-950 disabled:cursor-not-allowed disabled:opacity-50"
-              >
-                {isRateLimited ? "Harper is pausing" : thinking ? "Thinking..." : `Read ${currentWord?.word}`}
-              </button>
-            ) : (
-              <button onClick={stopAndScore} className="rounded-2xl bg-blue-600 px-5 py-4 font-black text-white">
-                Stop and check
-              </button>
-            )}
             {showFallback ? (
               <button onClick={adultSupportAdvance} className="rounded-2xl border border-[#e8d9c7] bg-white px-5 py-4 font-black">
                 I read it with my adult
@@ -781,13 +820,24 @@ function Part3LiveLoop({
           <p className="mt-2 font-bold text-violet-900">Read these with your adult or tap when you have tried them. Harper will not score silly words.</p>
           <div className="mt-4 flex flex-wrap gap-2">
             {pseudowords.map((word) => (
-              <span key={word} className="rounded-2xl border-2 border-violet-200 bg-white px-4 py-3 text-2xl font-black">
-                {word}
-              </span>
+              <button
+                key={word}
+                onClick={() => tryPseudoword(word)}
+                className={`rounded-2xl border-2 px-4 py-3 text-2xl font-black ${
+                  pseudowordsTried[word] ? "border-emerald-300 bg-emerald-50 text-emerald-800" : "border-violet-200 bg-white text-violet-950"
+                }`}
+              >
+                <span className="block">{word}</span>
+                <span className="mt-1 block text-xs font-black uppercase tracking-wide">{pseudowordsTried[word] ? "tried" : "tap to hear"}</span>
+              </button>
             ))}
           </div>
-          <button onClick={confirmPseudowords} className="mt-4 rounded-2xl bg-violet-600 px-5 py-4 font-black text-white">
-            We read the silly words
+          <button
+            onClick={confirmPseudowords}
+            disabled={!allPseudowordsTried}
+            className="mt-4 rounded-2xl bg-violet-600 px-5 py-4 font-black text-white disabled:cursor-not-allowed disabled:opacity-50"
+          >
+            {allPseudowordsTried ? "We read the silly words" : "Tap each silly word first"}
           </button>
         </div>
       )}
