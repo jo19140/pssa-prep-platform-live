@@ -5,10 +5,16 @@ import { BuddyCharacter, type BuddyState } from "@/components/literacy/BuddyChar
 import { getTtsProvider } from "@/lib/voice/tts";
 import { recordLessonPlayerEvent } from "@/app/student/practice/actions";
 import { startAudioCapture, stopAudioCapture, type AudioCaptureState } from "@/lib/voice/audioCapture";
+import {
+  startVoiceActivity,
+  stopVoiceActivity,
+  VOICE_ACTIVITY_MAX_LISTEN_MS,
+  type VoiceActivityHandle,
+} from "@/lib/voice/voiceActivity";
 import type { LessonPlayerData, LessonPlayerPart } from "./lessonPlayerData";
 
 const PART_META = [
-  { icon: "Fire", short: "Warm", mode: "self-confirm", evidence: "not scored" },
+  { icon: "Fire", short: "Warm", mode: "listen for attempt", evidence: "heard speech / completion only" },
   { icon: "Spark", short: "Rule", mode: "teaching", evidence: "no score" },
   { icon: "Words", short: "Words", mode: "read and retry", evidence: "speech attempt" },
   { icon: "Heart", short: "Power", mode: "listen and repeat", evidence: "not scored" },
@@ -250,7 +256,15 @@ function PartRenderer({
 }) {
   switch (part.partNumber) {
     case 1:
-      return <WarmupPart part={part} onComplete={onComplete} />;
+      return (
+        <WarmupPart
+          part={part}
+          onComplete={onComplete}
+          onHarperMessage={onHarperMessage}
+          onBuddyState={onBuddyState}
+          onSpeak={onSpeak}
+        />
+      );
     case 2:
       return <ConceptPart part={part} onSpeak={onSpeak} onComplete={onComplete} />;
     case 3:
@@ -295,29 +309,34 @@ function PartRenderer({
   }
 }
 
-function WarmupPart({ part, onComplete }: { part: LessonPlayerPart; onComplete: (extra?: Record<string, unknown>) => void }) {
+function WarmupPart({
+  part,
+  onComplete,
+  onHarperMessage,
+  onBuddyState,
+  onSpeak,
+}: {
+  part: LessonPlayerPart;
+  onComplete: (extra?: Record<string, unknown>) => void;
+  onHarperMessage: (text: string) => void;
+  onBuddyState: (state: BuddyState) => void;
+  onSpeak: (text: string) => Promise<void>;
+}) {
   const words = stringArray(part.contentJson.warmupWords);
-  const [readWords, setReadWords] = useState<Record<string, boolean>>({});
   return (
-    <div className="flex flex-1 flex-col gap-5">
-      <div className="grid grid-cols-2 gap-3 md:grid-cols-3">
-        {words.map((word) => (
-          <button
-            key={word}
-            onClick={() => setReadWords((state) => ({ ...state, [word]: !state[word] }))}
-            className={`rounded-3xl border-2 px-4 py-6 text-3xl font-black ${readWords[word] ? "border-emerald-300 bg-emerald-50 text-emerald-800" : "border-[#ead9c2] bg-[#fffdf8]"}`}
-          >
-            {word}
-          </button>
-        ))}
-      </div>
-      <button
-        onClick={() => onComplete({ selfConfirmedWords: Object.keys(readWords).filter((word) => readWords[word]).length })}
-        className="mt-auto rounded-2xl bg-amber-300 px-5 py-4 text-lg font-black text-amber-950"
-      >
-        I read it
-      </button>
-    </div>
+    <ListenForReadingAttempt
+      surface="warmup"
+      words={words}
+      intro="Tap each word and read it to Harper. Harper will listen for your voice."
+      prompt="I'm listening — read it to me."
+      encourage="Thanks — I heard you read that!"
+      completeLabel="I read the warm-up words"
+      completeDisabledLabel="Read each word to Harper first"
+      onComplete={onComplete}
+      onHarperMessage={onHarperMessage}
+      onBuddyState={onBuddyState}
+      onSpeak={onSpeak}
+    />
   );
 }
 
@@ -428,7 +447,7 @@ function Part3LiveLoop({
   const [rateLimitedUntil, setRateLimitedUntil] = useState<number | null>(null);
   const [showFallback, setShowFallback] = useState(false);
   const [pseudowordsConfirmed, setPseudowordsConfirmed] = useState(false);
-  const [pseudowordsTried, setPseudowordsTried] = useState<Record<string, boolean>>({});
+  const [pseudowordAttemptMeta, setPseudowordAttemptMeta] = useState<Record<string, unknown> | null>(null);
   const captureRef = useRef<AudioCaptureState | null>(null);
   const chunksRef = useRef<Blob[]>([]);
   const recordingStartInFlightRef = useRef(false);
@@ -437,7 +456,6 @@ function Part3LiveLoop({
   const isRateLimited = rateLimitedUntil !== null && Date.now() < rateLimitedUntil;
   const readDisabled = thinking || recordingStartInFlightRef.current || requestInFlightRef.current || isRateLimited || !currentWord;
   const allRealWordsComplete = currentIndex >= realEntries.length;
-  const allPseudowordsTried = pseudowords.length > 0 && pseudowords.every((word) => pseudowordsTried[word]);
 
   useEffect(() => {
     if (!rateLimitedUntil) return;
@@ -709,8 +727,9 @@ function Part3LiveLoop({
     setCurrentIndex((index) => Math.max(index, entry.index + 1));
   }
 
-  function confirmPseudowords() {
+  function confirmPseudowords(extra?: Record<string, unknown>) {
     setPseudowordsConfirmed(true);
+    setPseudowordAttemptMeta(extra ?? null);
     setFeedback("Nice work with the silly words.");
     onHarperMessage("Nice work with the silly words.");
   }
@@ -735,11 +754,6 @@ function Part3LiveLoop({
       return;
     }
     void beginRecording();
-  }
-
-  async function tryPseudoword(word: string) {
-    setPseudowordsTried((state) => ({ ...state, [word]: true }));
-    await onSpeak(`${word}.`);
   }
 
   const completedRealCount = Object.values(statuses).filter((status) => ["correct", "assisted", "unscored"].includes(status)).length;
@@ -817,28 +831,25 @@ function Part3LiveLoop({
       ) : (
         <div className="rounded-3xl border-2 border-violet-100 bg-violet-50 p-5">
           <h3 className="text-2xl font-black">Now the silly words</h3>
-          <p className="mt-2 font-bold text-violet-900">Read these with your adult or tap when you have tried them. Harper will not score silly words.</p>
-          <div className="mt-4 flex flex-wrap gap-2">
-            {pseudowords.map((word) => (
-              <button
-                key={word}
-                onClick={() => tryPseudoword(word)}
-                className={`rounded-2xl border-2 px-4 py-3 text-2xl font-black ${
-                  pseudowordsTried[word] ? "border-emerald-300 bg-emerald-50 text-emerald-800" : "border-violet-200 bg-white text-violet-950"
-                }`}
-              >
-                <span className="block">{word}</span>
-                <span className="mt-1 block text-xs font-black uppercase tracking-wide">{pseudowordsTried[word] ? "tried" : "tap to hear"}</span>
-              </button>
-            ))}
+          <p className="mt-2 font-bold text-violet-900">
+            Sound out each silly word and read it to Harper. Harper will listen for your try. She won't say silly words for you; they are just for trying.
+          </p>
+          <div className="mt-4 rounded-3xl bg-white p-4">
+            <ListenForReadingAttempt
+              surface="pseudoword"
+              words={pseudowords}
+              intro="Sound out each silly word and read it to Harper. Harper will listen for your try."
+              prompt="I'm listening — sound it out for me."
+              encourage="Thanks — I heard your try!"
+              completeLabel="We read the silly words"
+              completeDisabledLabel="Read each silly word to Harper first"
+              onComplete={confirmPseudowords}
+              onHarperMessage={onHarperMessage}
+              onBuddyState={onBuddyState}
+              onSpeak={onSpeak}
+              speakEncouragement
+            />
           </div>
-          <button
-            onClick={confirmPseudowords}
-            disabled={!allPseudowordsTried}
-            className="mt-4 rounded-2xl bg-violet-600 px-5 py-4 font-black text-white disabled:cursor-not-allowed disabled:opacity-50"
-          >
-            {allPseudowordsTried ? "We read the silly words" : "Tap each silly word first"}
-          </button>
         </div>
       )}
 
@@ -847,7 +858,7 @@ function Part3LiveLoop({
           Real words complete: {completedRealCount}/{realEntries.length}
         </p>
         <button
-          onClick={() => onComplete({ realWordsComplete: completedRealCount, pseudowordsConfirmed })}
+          onClick={() => onComplete({ realWordsComplete: completedRealCount, pseudowordsConfirmed, pseudowordAttemptMeta })}
           disabled={!allRealWordsComplete || !pseudowordsConfirmed}
           className="rounded-2xl bg-amber-300 px-5 py-4 font-black text-amber-950 disabled:cursor-not-allowed disabled:opacity-50"
         >
@@ -950,6 +961,239 @@ function TappableItemPractice({
       </div>
     </div>
   );
+}
+
+type ListenAttemptStatus = "idle" | "listening" | "heard" | "tryAgain" | "fallback";
+
+/**
+ * Gates on hearing a speech attempt, not correctness. Local VAD cannot tell which word
+ * was read, whether it was accurate, or who spoke; it only confirms audible speech.
+ */
+function ListenForReadingAttempt({
+  surface,
+  words,
+  intro,
+  prompt,
+  encourage,
+  completeLabel,
+  completeDisabledLabel,
+  onComplete,
+  onHarperMessage,
+  onBuddyState,
+  onSpeak,
+  speakEncouragement = true,
+}: {
+  surface: "warmup" | "pseudoword";
+  words: string[];
+  intro: string;
+  prompt: string;
+  encourage: string;
+  completeLabel: string;
+  completeDisabledLabel: string;
+  onComplete: (extra?: Record<string, unknown>) => void;
+  onHarperMessage: (text: string) => void;
+  onBuddyState: (state: BuddyState) => void;
+  onSpeak: (text: string) => Promise<void>;
+  speakEncouragement?: boolean;
+}) {
+  const [statuses, setStatuses] = useState<Record<string, ListenAttemptStatus>>({});
+  const [attempts, setAttempts] = useState<Record<string, number>>({});
+  const [messageByWord, setMessageByWord] = useState<Record<string, string>>({});
+  const [fallbackAccepted, setFallbackAccepted] = useState<Record<string, boolean>>({});
+  const [micUnavailable, setMicUnavailable] = useState(false);
+  const activeWordRef = useRef<string | null>(null);
+  const voiceActivityRef = useRef<VoiceActivityHandle | null>(null);
+  const pollTimerRef = useRef<number | null>(null);
+  const timeoutRef = useRef<number | null>(null);
+  const startingRef = useRef(false);
+  const speakPromiseRef = useRef<Promise<void> | null>(null);
+
+  const doneWords = words.filter((word) => statuses[word] === "heard" || fallbackAccepted[word]);
+  const allDone = words.length > 0 && doneWords.length === words.length;
+  const fallbackWords = words.filter((word) => fallbackAccepted[word]);
+  const vadConfirmedWords = words.filter((word) => statuses[word] === "heard" && !fallbackAccepted[word]);
+
+  useEffect(() => {
+    return () => {
+      stopActiveListening();
+      speakPromiseRef.current = null;
+      onBuddyState("idle");
+    };
+  }, [onBuddyState]);
+
+  async function handleWordTap(word: string) {
+    if (startingRef.current) return;
+    if (fallbackAccepted[word] || statuses[word] === "heard") return;
+    if (activeWordRef.current === word && voiceActivityRef.current) {
+      await stopEarly(word);
+      return;
+    }
+    if (voiceActivityRef.current) return;
+    startingRef.current = true;
+    if (speakPromiseRef.current) {
+      await speakPromiseRef.current.catch(() => undefined);
+      speakPromiseRef.current = null;
+    }
+    await cooldownAfterSpeech();
+    onHarperMessage(prompt);
+    onBuddyState("listening");
+    setStatuses((state) => ({ ...state, [word]: "listening" }));
+    setMessageByWord((state) => ({ ...state, [word]: prompt }));
+    setAttempts((state) => ({ ...state, [word]: (state[word] ?? 0) + 1 }));
+    activeWordRef.current = word;
+    try {
+      const handle = await startVoiceActivity();
+      voiceActivityRef.current = handle;
+      pollTimerRef.current = window.setInterval(() => {
+        if (handle.heardSpeech()) void completeHeard(word);
+      }, 100);
+      timeoutRef.current = window.setTimeout(() => {
+        void markTryAgain(word, "I did not hear your voice yet. Try that one again.");
+      }, VOICE_ACTIVITY_MAX_LISTEN_MS);
+    } catch {
+      setMicUnavailable(true);
+      showFallback(word, "I could not use the microphone. You can read it with your adult and tap confirm.");
+    } finally {
+      startingRef.current = false;
+    }
+  }
+
+  async function stopEarly(word: string) {
+    const handle = voiceActivityRef.current;
+    if (handle?.heardSpeech()) {
+      await completeHeard(word);
+    } else {
+      await markTryAgain(word, "Try that one again so Harper can hear your voice.");
+    }
+  }
+
+  async function completeHeard(word: string) {
+    stopActiveListening();
+    setStatuses((state) => ({ ...state, [word]: "heard" }));
+    setMessageByWord((state) => ({ ...state, [word]: encourage }));
+    onHarperMessage(encourage);
+    onBuddyState("idle");
+    if (speakEncouragement) {
+      const promise = onSpeak(encourage)
+        .catch(() => undefined)
+        .finally(() => {
+          if (speakPromiseRef.current === promise) speakPromiseRef.current = null;
+        });
+      speakPromiseRef.current = promise;
+      await promise;
+    }
+  }
+
+  async function markTryAgain(word: string, text: string) {
+    stopActiveListening();
+    const nextAttempts = (attempts[word] ?? 0) + 1;
+    if (nextAttempts >= 3) {
+      showFallback(word, "You can read it with your adult and tap confirm.");
+      return;
+    }
+    setStatuses((state) => ({ ...state, [word]: "tryAgain" }));
+    setMessageByWord((state) => ({ ...state, [word]: text }));
+    onHarperMessage(text);
+    onBuddyState("idle");
+  }
+
+  function showFallback(word: string, text: string) {
+    stopActiveListening();
+    setStatuses((state) => ({ ...state, [word]: "fallback" }));
+    setMessageByWord((state) => ({ ...state, [word]: text }));
+    onHarperMessage(text);
+    onBuddyState("idle");
+  }
+
+  function acceptFallback(word: string) {
+    stopActiveListening();
+    setFallbackAccepted((state) => ({ ...state, [word]: true }));
+    setStatuses((state) => ({ ...state, [word]: "heard" }));
+    setMessageByWord((state) => ({ ...state, [word]: "Thanks for reading it with your adult." }));
+  }
+
+  function finish() {
+    onComplete({
+      surface,
+      vadConfirmedWords: vadConfirmedWords.length,
+      fallbackWords: fallbackWords.length,
+      totalWords: words.length,
+    });
+  }
+
+  function stopActiveListening() {
+    if (pollTimerRef.current) window.clearInterval(pollTimerRef.current);
+    if (timeoutRef.current) window.clearTimeout(timeoutRef.current);
+    pollTimerRef.current = null;
+    timeoutRef.current = null;
+    stopVoiceActivity(voiceActivityRef.current);
+    voiceActivityRef.current = null;
+    activeWordRef.current = null;
+  }
+
+  return (
+    <div className="flex flex-1 flex-col gap-5">
+      <div className="rounded-3xl border-2 border-blue-100 bg-blue-50 p-4 text-base font-black leading-relaxed text-blue-950">
+        {intro}
+        <span className="mt-2 block text-sm font-extrabold text-blue-800">
+          Heard {doneWords.length}/{words.length}
+        </span>
+      </div>
+      <div className="grid grid-cols-2 gap-3 md:grid-cols-3">
+        {words.map((word) => {
+          const status = statuses[word] ?? "idle";
+          const fallbackVisible = status === "fallback" || micUnavailable || (attempts[word] ?? 0) >= 3;
+          const listening = status === "listening";
+          const done = status === "heard" || fallbackAccepted[word];
+          return (
+            <div
+              key={word}
+              className={`rounded-3xl border-2 p-3 ${
+                done
+                  ? "border-emerald-300 bg-emerald-50 text-emerald-900"
+                  : status === "tryAgain" || status === "fallback"
+                    ? "border-amber-300 bg-amber-50 text-amber-900"
+                    : listening
+                      ? "border-blue-300 bg-blue-50 text-blue-900"
+                      : "border-[#ead9c2] bg-[#fffdf8] text-slate-950"
+              }`}
+            >
+              <button
+                onClick={() => handleWordTap(word)}
+                disabled={done || Boolean(activeWordRef.current && activeWordRef.current !== word)}
+                className="w-full rounded-2xl bg-white/70 px-4 py-4 text-center text-3xl font-black disabled:cursor-not-allowed disabled:opacity-60"
+              >
+                <span className="block">{word}</span>
+                <span className="mt-1 block text-xs font-black uppercase tracking-wide">
+                  {done ? "✓ heard" : listening ? "tap to stop" : status === "tryAgain" ? "try again" : "tap to read"}
+                </span>
+              </button>
+              {messageByWord[word] ? <p className="mt-2 text-sm font-extrabold leading-snug">{messageByWord[word]}</p> : null}
+              {fallbackVisible && !done ? (
+                <button
+                  onClick={() => acceptFallback(word)}
+                  className="mt-3 w-full rounded-2xl border border-[#e8d9c7] bg-white px-3 py-2 text-sm font-black"
+                >
+                  I read it with my adult
+                </button>
+              ) : null}
+            </div>
+          );
+        })}
+      </div>
+      <button
+        onClick={finish}
+        disabled={!allDone}
+        className="mt-auto rounded-2xl bg-amber-300 px-5 py-4 text-lg font-black text-amber-950 disabled:cursor-not-allowed disabled:opacity-50"
+      >
+        {allDone ? completeLabel : completeDisabledLabel}
+      </button>
+    </div>
+  );
+}
+
+function cooldownAfterSpeech() {
+  return new Promise((resolve) => window.setTimeout(resolve, 250));
 }
 
 function SentenceReadingPart({
