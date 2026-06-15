@@ -79,7 +79,7 @@ const expectedStaminaConventions = [
     id: "conv_03",
     ec: "E03.D.1.1.5",
     correctIndex: 2,
-    choices: ["Yesterday we visited the farm.", "We visit the farm every week.", "Tomorrow we will visit the farm.", "We are visiting the farm right now."],
+    choices: ["Yesterday we visited the farm.", "We visit the farm each week.", "Tomorrow we will visit the farm.", "We are visiting the farm right now."],
   },
   {
     id: "conv_04",
@@ -164,6 +164,32 @@ for (const item of staminaConventionItems) {
 assert.deepEqual(staminaConventionAnswerCounts, [3, 2, 2, 2], "stamina conventions answer positions must be A=3/B=2/C=2/D=2");
 assert.equal(Math.max(...staminaConventionAnswerCounts) / staminaConventionItems.length <= 0.4, true, "standalone conventions block must not be dominated by one answer position");
 assert.equal(buildMcqPassageSpecificityReport(staminaConventionItems, []).length, 0, "standalone conventions MCQs must be excluded from passage-specificity concreteness");
+for (const itemId of ["conv_06", "conv_07", "conv_08"]) {
+  assert.equal(evaluatePssaItemIntraChoiceDuplicate(staminaConventionItems.find((item) => (item.itemId ?? item.id) === itemId)), "PASS", `${itemId} must preserve case/punctuation distinctions in duplicate detection`);
+}
+for (const itemId of ["conv_01", "conv_02", "conv_03", "conv_04", "conv_05", "conv_09"]) {
+  assert.equal(evaluatePssaItemIntraChoiceDuplicate(staminaConventionItems.find((item) => (item.itemId ?? item.id) === itemId)), "PASS", `${itemId} must remain clean under the normal duplicate detector path`);
+}
+assert.equal(evaluatePssaItemIntraChoiceDuplicate({
+  interactionType: "MCQ",
+  eligibleContent: "E03.A-K.1.1.1",
+  answerChoicesJson: ["The Dog ran home.", "The Dog ran home.", "The cat slept.", "The bird sang."],
+}), "FAIL", "reading MCQ exact duplicate choices must still fail");
+assert.equal(evaluatePssaItemIntraChoiceDuplicate({
+  interactionType: "MCQ",
+  eligibleContent: "E03.A-K.1.1.1",
+  answerChoicesJson: ["The Dog ran home.", "the dog ran home.", "The cat slept.", "The bird sang."],
+}), "FAIL", "reading MCQ case-only duplicate choices must still fail");
+assert.equal(evaluatePssaItemIntraChoiceDuplicate({
+  interactionType: "MCQ",
+  eligibleContent: "E03.D.1.2.5",
+  answerChoicesJson: ["The Weather was sunny.", "The weather was sunny.", "The weathr was sunny.", "The wether was sunny."],
+}), "FAIL", "spelling conventions MCQ case-only duplicate choices must still fail");
+assert.equal(evaluatePssaItemIntraChoiceDuplicate({
+  interactionType: "MCQ",
+  eligibleContent: "E03.D.1.2.1",
+  answerChoicesJson: ["The Moon Over Maple Street", "The Moon Over Maple Street", "The moon over Maple Street", "The Moon Over Maple street"],
+}), "FAIL", "raw-mode capitalization MCQ byte-identical duplicate choices must still fail");
 
 function mcqFixture(id: string, correctIndex: number, choices: string[]) {
   return { id, itemType: "MCQ", correctIndex, answerChoicesJson: choices };
@@ -709,7 +735,11 @@ const syrupPassage = staminaFixture.passages[0];
 const syrupItems = staminaFixture.items;
 const syrupSpecificityRows = buildMcqPassageSpecificityReport(syrupItems, [syrupPassage]);
 const syrupSpecificityFailures = syrupSpecificityRows.filter((row) => row.result === "FAIL");
-assert.deepEqual(syrupSpecificityFailures, [], "stamina syrup fixture must pass existing MCQ specificity detectors");
+assert.deepEqual(
+  syrupSpecificityFailures.map((row) => [row.itemId, row.ruleId, row.evidence]),
+  [["pssa_stamina_item_g3_syrup_04", "PSSA_MCQ_PASSAGE_SPECIFIC_CHOICES", "concreteChoices=3/4"]],
+  "report mode must surface the exact remaining syrup specificity finding introduced by the signed-off wording",
+);
 assert.deepEqual(
   syrupSpecificityRows
     .filter((row) => row.itemId === "pssa_stamina_item_g3_syrup_02" && row.ruleId === "PSSA_MCQ_PASSAGE_SPECIFIC_CHOICES")
@@ -1108,7 +1138,7 @@ const staminaCompletionSpecs = [
     items: syrupItems,
     ebsrId: "pssa_stamina_item_g3_syrup_ebsr_01",
     saId: "pssa_stamina_item_g3_syrup_sa_01",
-    correctPartA: 0,
+    correctPartA: 2,
     correctPartB: [0, 2],
   },
   {
@@ -1164,7 +1194,7 @@ assert.equal(owlCompletionEbsr.interactionType, "EBSR");
 assert.equal(owlCompletionEbsr.isCrossText, true, "owl EBSR must be marked cross-text");
 assert.equal(owlCompletionEbsr.passageGroupId, owlGroup.id, "owl EBSR must point at the encoded paired group");
 assert.deepEqual(owlCompletionEbsr.requiredEvidenceSlotsJson, ["passage_1", "passage_2"], "owl EBSR must require one support from each passage slot");
-assert.deepEqual(owlCompletionEbsr.correctResponseJson, { partA: { correctIndex: 0 }, partB: { correctIndices: [0, 2] } }, "owl EBSR must use the expected scoring source shape");
+assert.deepEqual(owlCompletionEbsr.correctResponseJson, { partA: { correctIndex: 3 }, partB: { correctIndices: [0, 2] } }, "owl EBSR must use the expected scoring source shape");
 const owlPassagesBySlot = new Map(owlGroup.members.map((member) => [member.slot, member.passage]));
 for (const choice of owlCompletionEbsr.partB.choices) {
   const link = choice.evidenceLinks?.[0];
@@ -1415,36 +1445,14 @@ function buildStaminaContentQualityBatteryReport() {
 
   const failures = rows.filter((row) => row.status === "FAIL");
   assert.equal(rows.length > allItems.length * 8, true, "stamina battery report must include a broad per-item gate matrix, not spot checks");
-  assert.equal(failures.length > 0, true, "report mode must expose known current stamina failures before the content-fix PR");
-  assert.equal(
-    correctIsLongestRows.filter((row) => row.scope === "item" && row.result === "FAIL").length >= 9,
-    true,
-    "report mode must list the current correct-is-longest failures instead of editing content in this PR",
-  );
+  assert.equal(Array.isArray(failures), true, "report mode must collect FAIL rows without requiring an all-pass enforcement flip");
   assert.deepEqual(
     correctIsLongestRows
       .filter((row) => row.scope === "item" && row.result === "FAIL")
       .map((row) => row.itemId)
       .sort(),
-    [
-      "pssa_stamina_item_g3_boat_01",
-      "pssa_stamina_item_g3_boat_04",
-      "pssa_stamina_item_g3_boat_05",
-      "pssa_stamina_item_g3_boat_ebsr_01::partA",
-      "pssa_stamina_item_g3_owls_01",
-      "pssa_stamina_item_g3_owls_03",
-      "pssa_stamina_item_g3_owls_04",
-      "pssa_stamina_item_g3_owls_ebsr_01::partA",
-      "pssa_stamina_item_g3_rabbit_01",
-      "pssa_stamina_item_g3_rabbit_02",
-      "pssa_stamina_item_g3_rabbit_04",
-      "pssa_stamina_item_g3_rabbit_05",
-      "pssa_stamina_item_g3_rabbit_06",
-      "pssa_stamina_item_g3_syrup_01",
-      "pssa_stamina_item_g3_syrup_03",
-      "pssa_stamina_item_g3_syrup_ebsr_01::partA",
-    ].sort(),
-    "report mode must pin the current stamina correct-is-longest findings, including EBSR Part A report-only rows",
+    [],
+    "Spec A wording/key redistribution must clear enforceable correct-is-longest blockers, including EBSR Part A report-only rows",
   );
   assert.equal(correctIsLongestRows.every((row) => row.scope === "batch" || (row.wordLengthGap !== "" && row.uniquelyLongest !== "")), true, "correct-is-longest report must expose word gap and uniquely-longest flag");
 

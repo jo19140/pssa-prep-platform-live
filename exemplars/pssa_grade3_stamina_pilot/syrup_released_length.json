@@ -196,21 +196,36 @@
       "approvalEligible": false,
       "studentFacingPrompt": "What is the passage mostly about?",
       "answerChoicesJson": [
-        "Making maple syrup takes the right weather, careful tapping, and long boiling.",
         "The maples grow tiny green buds when the season ends.",
+        "Making syrup needs right weather, careful tapping, and boiling.",
         "The Alvarez family sells syrup at a spring farmers market.",
         "Maple syrup is healthier than corn syrup."
       ],
-      "correctIndex": 0,
+      "correctIndex": 1,
       "distractorRationalesJson": [
-        "Correct: the full passage explains the weather, tapping, and boiling steps that make syrup.",
-        "Too narrow: this detail appears only near the ending.",
-        "Too narrow: this detail appears in the final section but misses the process.",
-        "Unsupported inference: the passage contrasts cost, not health."
+        "Too narrow: this ending detail does not state what the whole passage is mostly about.",
+        "Whole-passage synthesis: the answer draws across the process sections rather than one literal sentence.",
+        "Too narrow: the market detail appears at the end but does not cover the process.",
+        "Unsupported inference: the passage compares cost, not health."
       ],
       "structuredChoicesJson": [
         {
-          "text": "Making maple syrup takes the right weather, careful tapping, and long boiling.",
+          "text": "The maples grow tiny green buds when the season ends.",
+          "isCorrect": false,
+          "rationale": "Too narrow: this ending detail does not state what the whole passage is mostly about.",
+          "evidenceLinks": [
+            {
+              "paragraphIndex": 4,
+              "sentenceIndex": 2,
+              "quotedSpan": "By the time the jars are filled, the maples have begun to grow tiny green buds, and the sap stops flowing for the year.",
+              "startChar": 2951,
+              "endChar": 3070
+            }
+          ],
+          "distractorRole": "too_narrow"
+        },
+        {
+          "text": "Making syrup needs right weather, careful tapping, and boiling.",
           "isCorrect": true,
           "rationale": "Whole-passage synthesis: the answer draws across the process sections rather than one literal sentence.",
           "evidenceLinks": [
@@ -236,21 +251,6 @@
             }
           ],
           "distractorRole": null
-        },
-        {
-          "text": "The maples grow tiny green buds when the season ends.",
-          "isCorrect": false,
-          "rationale": "Too narrow: this ending detail does not state what the whole passage is mostly about.",
-          "evidenceLinks": [
-            {
-              "paragraphIndex": 4,
-              "sentenceIndex": 2,
-              "quotedSpan": "By the time the jars are filled, the maples have begun to grow tiny green buds, and the sap stops flowing for the year.",
-              "startChar": 2951,
-              "endChar": 3070
-            }
-          ],
-          "distractorRole": "too_narrow"
         },
         {
           "text": "The Alvarez family sells syrup at a spring farmers market.",
@@ -312,35 +312,20 @@
       "targetWordOrPhrase": "scorch",
       "studentFacingPrompt": "\"...syrup that boils a few minutes too long can scorch and turn bitter.\" What does scorch mean?",
       "answerChoicesJson": [
-        "to burn",
         "to cool down and harden",
         "to bubble over the edge of the pot",
+        "to burn",
         "to grow thick and golden"
       ],
       "correctAnswer": "to burn",
-      "correctIndex": 0,
+      "correctIndex": 2,
       "distractorRationalesJson": [
-        "Correct: in context, syrup can scorch and turn bitter if it boils too long.",
-        "Opposite claim: cooling down is not what happens during boiling.",
-        "Plausible misreading: bubbling is mentioned, but not as the meaning of scorch.",
-        "Wrong emphasis: thick and golden describes syrup developing, not burning."
+        "Opposite claim: the context is boiling, not cooling.",
+        "Plausible misreading: the sentence mentions bubbling but does not say the syrup spills over.",
+        "The sentence explains that syrup can scorch and turn bitter if it boils too long.",
+        "Wrong emphasis: this describes syrup changing during boiling, not the meaning of scorch."
       ],
       "structuredChoicesJson": [
-        {
-          "text": "to burn",
-          "isCorrect": true,
-          "rationale": "The sentence explains that syrup can scorch and turn bitter if it boils too long.",
-          "evidenceLinks": [
-            {
-              "paragraphIndex": 3,
-              "sentenceIndex": 7,
-              "quotedSpan": "Someone must keep the fire steady and watch the bubbling sap the entire time, because syrup that boils a few minutes too long can scorch and turn bitter.",
-              "startChar": 2505,
-              "endChar": 2658
-            }
-          ],
-          "distractorRole": null
-        },
         {
           "text": "to cool down and harden",
           "isCorrect": false,
@@ -370,6 +355,21 @@
             }
           ],
           "distractorRole": "plausible_misreading"
+        },
+        {
+          "text": "to burn",
+          "isCorrect": true,
+          "rationale": "The sentence explains that syrup can scorch and turn bitter if it boils too long.",
+          "evidenceLinks": [
+            {
+              "paragraphIndex": 3,
+              "sentenceIndex": 7,
+              "quotedSpan": "Someone must keep the fire steady and watch the bubbling sap the entire time, because syrup that boils a few minutes too long can scorch and turn bitter.",
+              "startChar": 2505,
+              "endChar": 2658
+            }
+          ],
+          "distractorRole": null
         },
         {
           "text": "to grow thick and golden",
@@ -415,28 +415,13 @@
       "approvalEligible": false,
       "studentFacingPrompt": "Why does sap flow best when the nights are freezing and the days are warm?",
       "answerChoicesJson": [
-        "Freezing nights and warmer days create pressure changes that help sap flow out.",
         "The warm days make the maples grow new buds.",
         "The cold nights make the sap taste sweeter than daytime sap.",
-        "The changing weather fills the buckets with rain."
+        "The changing weather fills the buckets with rain.",
+        "Freezing nights and warm days build pressure that helps sap flow."
       ],
-      "correctIndex": 0,
+      "correctIndex": 3,
       "structuredChoicesJson": [
-        {
-          "text": "Freezing nights and warmer days create pressure changes that help sap flow out.",
-          "isCorrect": true,
-          "rationale": "Correct: the weather pattern creates pressure changes that help move sap.",
-          "evidenceLinks": [
-            {
-              "paragraphIndex": 1,
-              "sentenceIndex": 4,
-              "quotedSpan": "When the next day warms above freezing, pressure builds in the wood and pushes the sap back outward.",
-              "startChar": 948,
-              "endChar": 1048
-            }
-          ],
-          "distractorRole": null
-        },
         {
           "text": "The warm days make the maples grow new buds.",
           "isCorrect": false,
@@ -481,6 +466,21 @@
             }
           ],
           "distractorRole": "unsupported_inference"
+        },
+        {
+          "text": "Freezing nights and warm days build pressure that helps sap flow.",
+          "isCorrect": true,
+          "rationale": "Correct: the weather pattern creates pressure changes that help move sap.",
+          "evidenceLinks": [
+            {
+              "paragraphIndex": 1,
+              "sentenceIndex": 4,
+              "quotedSpan": "When the next day warms above freezing, pressure builds in the wood and pushes the sap back outward.",
+              "startChar": 948,
+              "endChar": 1048
+            }
+          ],
+          "distractorRole": null
         }
       ],
       "provenanceJson": {
@@ -512,7 +512,7 @@
       "studentFacingPrompt": "How does the \"Did You Know?\" box add to the passage?",
       "answerChoicesJson": [
         "It shows that a sugar maple can live for many generations.",
-        "It explains why syrup must be filtered before it is sold.",
+        "It explains why syrup should be filtered before it is sold.",
         "It tells why thin young trees are left alone.",
         "It proves that syrup is healthier than corn syrup."
       ],
@@ -535,7 +535,7 @@
           "distractorRole": null
         },
         {
-          "text": "It explains why syrup must be filtered before it is sold.",
+          "text": "It explains why syrup should be filtered before it is sold.",
           "isCorrect": false,
           "rationale": "Wrong section: filtering is explained in the final body section, not the sidebar.",
           "evidenceLinks": [
@@ -611,31 +611,35 @@
         "stem": "Why do syrup makers need both the right weather and careful boiling?",
         "choices": [
           {
-            "text": "The weather helps sap flow, and boiling removes water so the sap becomes syrup.",
-            "distractorRole": null,
-            "supportsPartA": true,
-            "rationale": "Correct."
-          },
-          {
             "text": "The weather makes the syrup turn golden before it leaves the tree.",
             "distractorRole": "opposite_claim",
             "supportsPartA": false,
-            "rationale": "Distractor."
+            "rationale": "Distractor.",
+            "isCorrect": false
           },
           {
             "text": "Boiling helps the trees grow buds before winter begins.",
             "distractorRole": "wrong_section",
             "supportsPartA": false,
-            "rationale": "Distractor."
+            "rationale": "Distractor.",
+            "isCorrect": false
+          },
+          {
+            "text": "Weather helps sap flow, and boiling turns sap into syrup.",
+            "distractorRole": null,
+            "supportsPartA": true,
+            "rationale": "Correct.",
+            "isCorrect": true
           },
           {
             "text": "The cold nights make syrup pour through a filter into jars.",
             "distractorRole": "plausible_misreading",
             "supportsPartA": false,
-            "rationale": "Distractor."
+            "rationale": "Distractor.",
+            "isCorrect": false
           }
         ],
-        "correctIndex": 0
+        "correctIndex": 2
       },
       "partB": {
         "stem": "Which two details best support the answer in Part A?",
@@ -717,18 +721,19 @@
           "prompt": "Why do syrup makers need both the right weather and careful boiling?",
           "choices": [
             {
-              "text": "The weather helps sap flow, and boiling removes water so the sap becomes syrup."
-            },
-            {
               "text": "The weather makes the syrup turn golden before it leaves the tree."
             },
             {
               "text": "Boiling helps the trees grow buds before winter begins."
             },
             {
+              "text": "Weather helps sap flow, and boiling turns sap into syrup."
+            },
+            {
               "text": "The cold nights make syrup pour through a filter into jars."
             }
-          ]
+          ],
+          "correctIndex": 2
         },
         "partB": {
           "instruction": "Which two details best support the answer in Part A?",
@@ -751,7 +756,7 @@
       },
       "correctResponse": {
         "partA": {
-          "correctIndex": 0
+          "correctIndex": 2
         },
         "partB": {
           "correctIndices": [
@@ -762,7 +767,7 @@
       },
       "correctResponseJson": {
         "partA": {
-          "correctIndex": 0
+          "correctIndex": 2
         },
         "partB": {
           "correctIndices": [

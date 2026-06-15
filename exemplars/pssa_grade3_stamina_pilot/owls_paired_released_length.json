@@ -184,28 +184,13 @@
       "reportingCategory": "B",
       "studentFacingPrompt": "Which detail explains why an owl turns its whole head to look around?",
       "answerChoicesJson": [
-        "Its eyes do not roll from side to side.",
         "Its ears are hidden under feathers.",
         "Its wing feathers are soft.",
-        "Its face works like a sound dish."
+        "Its face works like a round sound dish.",
+        "Its eyes do not move side to side."
       ],
-      "correctIndex": 0,
+      "correctIndex": 3,
       "structuredChoicesJson": [
-        {
-          "text": "Its eyes do not roll from side to side.",
-          "isCorrect": true,
-          "evidenceLinks": [
-            {
-              "evidenceKind": "quoted_span",
-              "passageSlot": "passage_1",
-              "passageId": "pssa_stamina_psg_g3_owls_p1_night",
-              "paragraphIndex": 0,
-              "sentenceIndex": 3,
-              "quotedSpan": "The eyes do not roll from side to side the way human eyes do."
-            }
-          ],
-          "distractorRole": null
-        },
         {
           "text": "Its ears are hidden under feathers.",
           "isCorrect": false,
@@ -237,7 +222,7 @@
           "distractorRole": "wrong_section"
         },
         {
-          "text": "Its face works like a sound dish.",
+          "text": "Its face works like a round sound dish.",
           "isCorrect": false,
           "evidenceLinks": [
             {
@@ -250,6 +235,21 @@
             }
           ],
           "distractorRole": "wrong_section"
+        },
+        {
+          "text": "Its eyes do not move side to side.",
+          "isCorrect": true,
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_1",
+              "passageId": "pssa_stamina_psg_g3_owls_p1_night",
+              "paragraphIndex": 0,
+              "sentenceIndex": 3,
+              "quotedSpan": "The eyes do not roll from side to side the way human eyes do."
+            }
+          ],
+          "distractorRole": null
         }
       ]
     },
@@ -364,30 +364,15 @@
       "reportingCategory": "B",
       "studentFacingPrompt": "Why do some farms put up barn owl nest boxes?",
       "answerChoicesJson": [
-        "To give owls a safe place to raise young nearby.",
-        "To make mice easier for people to hear.",
+        "To make the mice easier for people to hear.",
+        "To give owls a safe place to nest nearby.",
         "To teach owls to hunt during the day.",
         "To store grain away from rodents."
       ],
-      "correctIndex": 0,
+      "correctIndex": 1,
       "structuredChoicesJson": [
         {
-          "text": "To give owls a safe place to raise young nearby.",
-          "isCorrect": true,
-          "evidenceLinks": [
-            {
-              "evidenceKind": "quoted_span",
-              "passageSlot": "passage_2",
-              "passageId": "pssa_stamina_psg_g3_owls_p2_barn",
-              "paragraphIndex": 1,
-              "sentenceIndex": 1,
-              "quotedSpan": "A nest box gives the owls a safe place to raise young when old barns or hollow trees are hard to find."
-            }
-          ],
-          "distractorRole": null
-        },
-        {
-          "text": "To make mice easier for people to hear.",
+          "text": "To make the mice easier for people to hear.",
           "isCorrect": false,
           "evidenceLinks": [
             {
@@ -400,6 +385,21 @@
             }
           ],
           "distractorRole": "wrong_section"
+        },
+        {
+          "text": "To give owls a safe place to nest nearby.",
+          "isCorrect": true,
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_2",
+              "passageId": "pssa_stamina_psg_g3_owls_p2_barn",
+              "paragraphIndex": 1,
+              "sentenceIndex": 1,
+              "quotedSpan": "A nest box gives the owls a safe place to raise young when old barns or hollow trees are hard to find."
+            }
+          ],
+          "distractorRole": null
         },
         {
           "text": "To teach owls to hunt during the day.",
@@ -454,28 +454,13 @@
       "reportingCategory": "B",
       "studentFacingPrompt": "What problem can rodent poison cause?",
       "answerChoicesJson": [
-        "It can harm animals that eat poisoned rodents.",
         "It can make owls turn their heads.",
         "It can stop nest boxes from working.",
-        "It can make fields too quiet at night."
+        "It can harm animals that eat poisoned mice.",
+        "It can make the open fields too quiet at night."
       ],
-      "correctIndex": 0,
+      "correctIndex": 2,
       "structuredChoicesJson": [
-        {
-          "text": "It can harm animals that eat poisoned rodents.",
-          "isCorrect": true,
-          "evidenceLinks": [
-            {
-              "evidenceKind": "quoted_span",
-              "passageSlot": "passage_2",
-              "passageId": "pssa_stamina_psg_g3_owls_p2_barn",
-              "paragraphIndex": 3,
-              "sentenceIndex": 2,
-              "quotedSpan": "The poison can then harm the animal that ate the mouse."
-            }
-          ],
-          "distractorRole": null
-        },
         {
           "text": "It can make owls turn their heads.",
           "isCorrect": false,
@@ -507,7 +492,22 @@
           "distractorRole": "unsupported_inference"
         },
         {
-          "text": "It can make fields too quiet at night.",
+          "text": "It can harm animals that eat poisoned mice.",
+          "isCorrect": true,
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_2",
+              "passageId": "pssa_stamina_psg_g3_owls_p2_barn",
+              "paragraphIndex": 3,
+              "sentenceIndex": 2,
+              "quotedSpan": "The poison can then harm the animal that ate the mouse."
+            }
+          ],
+          "distractorRole": null
+        },
+        {
+          "text": "It can make the open fields too quiet at night.",
           "isCorrect": false,
           "evidenceLinks": [
             {
@@ -553,30 +553,13 @@
       "reportingCategory": "B",
       "studentFacingPrompt": "How do the two passages work together?",
       "answerChoicesJson": [
-        "The first explains how owls hunt, and the second explains how that hunting can help farms.",
         "The first tells how to build a nest box, and the second tells how to train an owl.",
         "Both passages mainly explain why owls are dangerous to pets.",
-        "Both passages mainly describe how farmers store grain."
+        "Both passages mainly describe how farmers store grain.",
+        "The first explains how owls hunt, and the second explains how that hunting can help farms."
       ],
-      "correctIndex": 0,
+      "correctIndex": 3,
       "structuredChoicesJson": [
-        {
-          "text": "The first explains how owls hunt, and the second explains how that hunting can help farms.",
-          "isCorrect": true,
-          "evidenceLinks": [
-            {
-              "evidenceKind": "whole_passage_synthesis",
-              "passageSlot": "passage_1",
-              "passageId": "pssa_stamina_psg_g3_owls_p1_night"
-            },
-            {
-              "evidenceKind": "whole_passage_synthesis",
-              "passageSlot": "passage_2",
-              "passageId": "pssa_stamina_psg_g3_owls_p2_barn"
-            }
-          ],
-          "distractorRole": null
-        },
         {
           "text": "The first tells how to build a nest box, and the second tells how to train an owl.",
           "isCorrect": false,
@@ -621,6 +604,23 @@
             }
           ],
           "distractorRole": "too_narrow"
+        },
+        {
+          "text": "The first explains how owls hunt, and the second explains how that hunting can help farms.",
+          "isCorrect": true,
+          "evidenceLinks": [
+            {
+              "evidenceKind": "whole_passage_synthesis",
+              "passageSlot": "passage_1",
+              "passageId": "pssa_stamina_psg_g3_owls_p1_night"
+            },
+            {
+              "evidenceKind": "whole_passage_synthesis",
+              "passageSlot": "passage_2",
+              "passageId": "pssa_stamina_psg_g3_owls_p2_barn"
+            }
+          ],
+          "distractorRole": null
         }
       ]
     },
@@ -741,31 +741,35 @@
         "stem": "How does Passage 1 help explain why barn owls can be useful on a farm, as described in Passage 2?",
         "choices": [
           {
-            "text": "Passage 1 explains how owls are built to hunt prey in the dark.",
-            "distractorRole": null,
-            "supportsPartA": true,
-            "rationale": "Correct."
-          },
-          {
             "text": "Passage 1 explains how farmers build wooden nest boxes.",
             "distractorRole": "wrong_section",
             "supportsPartA": false,
-            "rationale": "Distractor."
+            "rationale": "Distractor.",
+            "isCorrect": false
           },
           {
             "text": "Passage 1 explains why rodent poison is dangerous to pets.",
             "distractorRole": "wrong_section",
             "supportsPartA": false,
-            "rationale": "Distractor."
+            "rationale": "Distractor.",
+            "isCorrect": false
           },
           {
             "text": "Passage 1 explains why rodents chew stored grain.",
             "distractorRole": "wrong_section",
             "supportsPartA": false,
-            "rationale": "Distractor."
+            "rationale": "Distractor.",
+            "isCorrect": false
+          },
+          {
+            "text": "Passage 1 explains how owls hunt prey in the dark.",
+            "distractorRole": null,
+            "supportsPartA": true,
+            "rationale": "Correct.",
+            "isCorrect": true
           }
         ],
-        "correctIndex": 0
+        "correctIndex": 3
       },
       "partB": {
         "stem": "Choose two details, one from each passage, that best support the answer in Part A.",
@@ -855,9 +859,6 @@
           "prompt": "How does Passage 1 help explain why barn owls can be useful on a farm, as described in Passage 2?",
           "choices": [
             {
-              "text": "Passage 1 explains how owls are built to hunt prey in the dark."
-            },
-            {
               "text": "Passage 1 explains how farmers build wooden nest boxes."
             },
             {
@@ -865,8 +866,12 @@
             },
             {
               "text": "Passage 1 explains why rodents chew stored grain."
+            },
+            {
+              "text": "Passage 1 explains how owls hunt prey in the dark."
             }
-          ]
+          ],
+          "correctIndex": 3
         },
         "partB": {
           "instruction": "Choose two details, one from each passage, that best support the answer in Part A.",
@@ -889,7 +894,7 @@
       },
       "correctResponse": {
         "partA": {
-          "correctIndex": 0
+          "correctIndex": 3
         },
         "partB": {
           "correctIndices": [
@@ -900,7 +905,7 @@
       },
       "correctResponseJson": {
         "partA": {
-          "correctIndex": 0
+          "correctIndex": 3
         },
         "partB": {
           "correctIndices": [

@@ -299,7 +299,7 @@
       "studentFacingPrompt": "Which sentence is written in the future tense?",
       "answerChoicesJson": [
         "Yesterday we visited the farm.",
-        "We visit the farm every week.",
+        "We visit the farm each week.",
         "Tomorrow we will visit the farm.",
         "We are visiting the farm right now."
       ],
@@ -307,30 +307,26 @@
         {
           "text": "Yesterday we visited the farm.",
           "isCorrect": false,
-          "errorPattern": "past_tense",
-          "distractorRole": "past_tense",
-          "rationale": "Visited describes an action that already happened."
+          "rationale": "Visited describes an action that already happened.",
+          "distractorRole": "past_tense"
         },
         {
-          "text": "We visit the farm every week.",
+          "text": "We visit the farm each week.",
           "isCorrect": false,
-          "errorPattern": "present_tense",
-          "distractorRole": "present_tense",
-          "rationale": "Visit describes a present or repeated action."
+          "rationale": "Visit describes a present or repeated action.",
+          "distractorRole": "present_tense"
         },
         {
           "text": "Tomorrow we will visit the farm.",
           "isCorrect": true,
-          "errorPattern": null,
-          "distractorRole": null,
-          "rationale": "Will visit shows the action will happen in the future."
+          "rationale": "Will visit shows the action will happen in the future.",
+          "distractorRole": null
         },
         {
           "text": "We are visiting the farm right now.",
           "isCorrect": false,
-          "errorPattern": "present_progressive",
-          "distractorRole": "present_progressive",
-          "rationale": "Are visiting describes an action happening now."
+          "rationale": "Are visiting describes an action happening now.",
+          "distractorRole": "present_progressive"
         }
       ],
       "structuredChoicesJson": [
@@ -341,7 +337,7 @@
           "distractorRole": "past_tense"
         },
         {
-          "text": "We visit the farm every week.",
+          "text": "We visit the farm each week.",
           "isCorrect": false,
           "rationale": "Visit describes a present or repeated action.",
           "distractorRole": "present_tense"
@@ -385,7 +381,7 @@
         "prompt": "Which sentence is written in the future tense?",
         "choices": [
           "Yesterday we visited the farm.",
-          "We visit the farm every week.",
+          "We visit the farm each week.",
           "Tomorrow we will visit the farm.",
           "We are visiting the farm right now."
         ],

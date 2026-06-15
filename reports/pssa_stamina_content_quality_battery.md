@@ -28,29 +28,29 @@ Report mode: this file lists PASS/FAIL/SKIP findings for the 37-item encoded sta
 
 | itemId | source | result | correctWords | maxDistractorWords | gap | uniquelyLongest | notes |
 | --- | --- | --- | ---: | ---: | ---: | --- | --- |
-| pssa_stamina_item_g3_syrup_01 | MCQ | FAIL | 12 | 10 | 2 | true | PSSA_MCQ_CORRECT_IS_LONGEST: correct choice is longest by 2 words and 34% chars. |
+| pssa_stamina_item_g3_syrup_01 | MCQ | PASS | 9 | 10 | -1 | true | Correct choice length is within threshold. |
 | pssa_stamina_item_g3_syrup_02 | MCQ | PASS | 2 | 8 | -6 | false | Correct choice length is within threshold. |
-| pssa_stamina_item_g3_syrup_03 | MCQ | FAIL | 13 | 11 | 2 | true | PSSA_MCQ_CORRECT_IS_LONGEST: correct choice is longest by 2 words and 32% chars. |
-| pssa_stamina_item_g3_syrup_04 | MCQ | PASS | 11 | 11 | 0 | true | Correct choice length is within threshold. |
-| pssa_stamina_item_g3_syrup_ebsr_01::partA | EBSR_PART_A | FAIL | 14 | 12 | 2 | true | PSSA_MCQ_CORRECT_IS_LONGEST: correct choice is longest by 2 words and 20% chars. |
-| pssa_stamina_item_g3_boat_01 | MCQ | FAIL | 14 | 10 | 4 | true | PSSA_MCQ_CORRECT_IS_LONGEST: correct choice is longest by 4 words and 74% chars. |
+| pssa_stamina_item_g3_syrup_03 | MCQ | PASS | 11 | 11 | 0 | true | Correct choice length is within threshold. |
+| pssa_stamina_item_g3_syrup_04 | MCQ | PASS | 11 | 11 | 0 | false | Correct choice length is within threshold. |
+| pssa_stamina_item_g3_syrup_ebsr_01::partA | EBSR_PART_A | PASS | 10 | 12 | -2 | false | Correct choice length is within threshold. |
+| pssa_stamina_item_g3_boat_01 | MCQ | PASS | 12 | 15 | -3 | false | Correct choice length is within threshold. |
 | pssa_stamina_item_g3_boat_02 | MCQ | PASS | 14 | 15 | -1 | false | Correct choice length is within threshold. |
 | pssa_stamina_item_g3_boat_03 | MCQ | PASS | 7 | 7 | 0 | false | Correct choice length is within threshold. |
-| pssa_stamina_item_g3_boat_04 | MCQ | FAIL | 12 | 10 | 2 | true | PSSA_MCQ_CORRECT_IS_LONGEST: correct choice is longest by 2 words and 26% chars. |
-| pssa_stamina_item_g3_boat_05 | MCQ | FAIL | 19 | 9 | 10 | true | PSSA_MCQ_CORRECT_IS_LONGEST: correct choice is longest by 10 words and 140% chars. |
-| pssa_stamina_item_g3_boat_ebsr_01::partA | EBSR_PART_A | FAIL | 10 | 9 | 1 | true | PSSA_MCQ_CORRECT_IS_LONGEST: correct choice is longest by 1 words and 41% chars. |
-| pssa_stamina_item_g3_owls_01 | MCQ | FAIL | 9 | 7 | 2 | true | PSSA_MCQ_CORRECT_IS_LONGEST: correct choice is longest by 2 words and 11% chars. |
+| pssa_stamina_item_g3_boat_04 | MCQ | PASS | 11 | 11 | 0 | false | Correct choice length is within threshold. |
+| pssa_stamina_item_g3_boat_05 | MCQ | PASS | 14 | 16 | -2 | false | Correct choice length is within threshold. |
+| pssa_stamina_item_g3_boat_ebsr_01::partA | EBSR_PART_A | PASS | 8 | 9 | -1 | true | Correct choice length is within threshold. |
+| pssa_stamina_item_g3_owls_01 | MCQ | PASS | 8 | 8 | 0 | false | Correct choice length is within threshold. |
 | pssa_stamina_item_g3_owls_02 | MCQ | PASS | 7 | 7 | 0 | true | Correct choice length is within threshold. |
-| pssa_stamina_item_g3_owls_03 | MCQ | FAIL | 10 | 8 | 2 | true | PSSA_MCQ_CORRECT_IS_LONGEST: correct choice is longest by 2 words and 23% chars. |
-| pssa_stamina_item_g3_owls_04 | MCQ | FAIL | 8 | 8 | 0 | true | PSSA_MCQ_CORRECT_IS_LONGEST: correct choice is longest by 0 words and 21% chars. |
+| pssa_stamina_item_g3_owls_03 | MCQ | PASS | 9 | 9 | 0 | false | Correct choice length is within threshold. |
+| pssa_stamina_item_g3_owls_04 | MCQ | PASS | 8 | 10 | -2 | false | Correct choice length is within threshold. |
 | pssa_stamina_item_g3_owls_05 | MCQ | PASS | 16 | 18 | -2 | true | Correct choice length is within threshold. |
-| pssa_stamina_item_g3_owls_ebsr_01::partA | EBSR_PART_A | FAIL | 13 | 10 | 3 | true | PSSA_MCQ_CORRECT_IS_LONGEST: correct choice is longest by 3 words and 9% chars. |
-| pssa_stamina_item_g3_rabbit_01 | MCQ | FAIL | 11 | 11 | 0 | true | PSSA_MCQ_CORRECT_IS_LONGEST: correct choice is longest by 0 words and 17% chars. |
-| pssa_stamina_item_g3_rabbit_02 | MCQ | FAIL | 16 | 11 | 5 | true | PSSA_MCQ_CORRECT_IS_LONGEST: correct choice is longest by 5 words and 24% chars. |
+| pssa_stamina_item_g3_owls_ebsr_01::partA | EBSR_PART_A | PASS | 10 | 10 | 0 | false | Correct choice length is within threshold. |
+| pssa_stamina_item_g3_rabbit_01 | MCQ | PASS | 9 | 11 | -2 | false | Correct choice length is within threshold. |
+| pssa_stamina_item_g3_rabbit_02 | MCQ | PASS | 14 | 14 | 0 | false | Correct choice length is within threshold. |
 | pssa_stamina_item_g3_rabbit_03 | MCQ | PASS | 7 | 8 | -1 | true | Correct choice length is within threshold. |
-| pssa_stamina_item_g3_rabbit_04 | MCQ | FAIL | 10 | 8 | 2 | true | PSSA_MCQ_CORRECT_IS_LONGEST: correct choice is longest by 2 words and 32% chars. |
-| pssa_stamina_item_g3_rabbit_05 | MCQ | FAIL | 6 | 6 | 0 | true | PSSA_MCQ_CORRECT_IS_LONGEST: correct choice is longest by 0 words and 24% chars. |
-| pssa_stamina_item_g3_rabbit_06 | MCQ | FAIL | 9 | 8 | 1 | true | PSSA_MCQ_CORRECT_IS_LONGEST: correct choice is longest by 1 words and 21% chars. |
+| pssa_stamina_item_g3_rabbit_04 | MCQ | PASS | 8 | 9 | -1 | false | Correct choice length is within threshold. |
+| pssa_stamina_item_g3_rabbit_05 | MCQ | PASS | 5 | 6 | -1 | false | Correct choice length is within threshold. |
+| pssa_stamina_item_g3_rabbit_06 | MCQ | PASS | 9 | 9 | 0 | false | Correct choice length is within threshold. |
 | pssa_stamina_item_g3_rabbit_ebsr_01::partA | EBSR_PART_A | PASS | 10 | 11 | -1 | true | Correct choice length is within threshold. |
 | conv_01 | MCQ | PASS | 1 | 1 | 0 | false | Correct choice length is within threshold. |
 | conv_02 | MCQ | PASS | 5 | 5 | 0 | true | Correct choice length is within threshold. |
@@ -78,62 +78,7 @@ Report mode: this file lists PASS/FAIL/SKIP findings for the 37-item encoded sta
 
 | itemId | interactionType | gateId | detail |
 | --- | --- | --- | --- |
-| conv_06 | MCQ | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | foundation evaluator |
-| conv_07 | MCQ | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | foundation evaluator |
-| conv_08 | MCQ | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | foundation evaluator |
-| pssa_stamina_item_g3_syrup_01 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | choiceGroup=pssa_stamina_item_g3_syrup_01; correctWords=12; maxDistractorWords=10; gap=2; uniquelyLongest=true |
-| pssa_stamina_item_g3_syrup_03 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | choiceGroup=pssa_stamina_item_g3_syrup_03; correctWords=13; maxDistractorWords=11; gap=2; uniquelyLongest=true |
-| pssa_stamina_item_g3_syrup_ebsr_01 | EBSR | PSSA_MCQ_CORRECT_IS_LONGEST_EBSR_PART_A_REPORT_ONLY | choiceGroup=pssa_stamina_item_g3_syrup_ebsr_01::partA; correctWords=14; maxDistractorWords=12; gap=2; uniquelyLongest=true |
-| pssa_stamina_item_g3_boat_01 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | choiceGroup=pssa_stamina_item_g3_boat_01; correctWords=14; maxDistractorWords=10; gap=4; uniquelyLongest=true |
-| pssa_stamina_item_g3_boat_04 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | choiceGroup=pssa_stamina_item_g3_boat_04; correctWords=12; maxDistractorWords=10; gap=2; uniquelyLongest=true |
-| pssa_stamina_item_g3_boat_05 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | choiceGroup=pssa_stamina_item_g3_boat_05; correctWords=19; maxDistractorWords=9; gap=10; uniquelyLongest=true |
-| pssa_stamina_item_g3_boat_ebsr_01 | EBSR | PSSA_MCQ_CORRECT_IS_LONGEST_EBSR_PART_A_REPORT_ONLY | choiceGroup=pssa_stamina_item_g3_boat_ebsr_01::partA; correctWords=10; maxDistractorWords=9; gap=1; uniquelyLongest=true |
-| pssa_stamina_item_g3_owls_01 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | choiceGroup=pssa_stamina_item_g3_owls_01; correctWords=9; maxDistractorWords=7; gap=2; uniquelyLongest=true |
-| pssa_stamina_item_g3_owls_03 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | choiceGroup=pssa_stamina_item_g3_owls_03; correctWords=10; maxDistractorWords=8; gap=2; uniquelyLongest=true |
-| pssa_stamina_item_g3_owls_04 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | choiceGroup=pssa_stamina_item_g3_owls_04; correctWords=8; maxDistractorWords=8; gap=0; uniquelyLongest=true |
-| pssa_stamina_item_g3_owls_ebsr_01 | EBSR | PSSA_MCQ_CORRECT_IS_LONGEST_EBSR_PART_A_REPORT_ONLY | choiceGroup=pssa_stamina_item_g3_owls_ebsr_01::partA; correctWords=13; maxDistractorWords=10; gap=3; uniquelyLongest=true |
-| pssa_stamina_item_g3_rabbit_01 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | choiceGroup=pssa_stamina_item_g3_rabbit_01; correctWords=11; maxDistractorWords=11; gap=0; uniquelyLongest=true |
-| pssa_stamina_item_g3_rabbit_02 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | choiceGroup=pssa_stamina_item_g3_rabbit_02; correctWords=16; maxDistractorWords=11; gap=5; uniquelyLongest=true |
-| pssa_stamina_item_g3_rabbit_04 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | choiceGroup=pssa_stamina_item_g3_rabbit_04; correctWords=10; maxDistractorWords=8; gap=2; uniquelyLongest=true |
-| pssa_stamina_item_g3_rabbit_05 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | choiceGroup=pssa_stamina_item_g3_rabbit_05; correctWords=6; maxDistractorWords=6; gap=0; uniquelyLongest=true |
-| pssa_stamina_item_g3_rabbit_06 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | choiceGroup=pssa_stamina_item_g3_rabbit_06; correctWords=9; maxDistractorWords=8; gap=1; uniquelyLongest=true |
-| pssa_stamina_item_g3_syrup_04 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | choiceGroup=pssa_stamina_item_g3_syrup_04 |
-| pssa_stamina_item_g3_boat_ebsr_01 | EBSR | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR_EBSR_PART_A_REPORT_ONLY | choiceGroup=pssa_stamina_item_g3_boat_ebsr_01::partA |
-| pssa_stamina_item_g3_rabbit_02 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | choiceGroup=pssa_stamina_item_g3_rabbit_02 |
-| conv_03 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | choiceGroup=conv_03 |
-| pssa_stamina_item_g3_syrup_01 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | A:23 B:2 C:2 D:2 maxShare=0.7931 |
-| pssa_stamina_item_g3_syrup_02 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | A:23 B:2 C:2 D:2 maxShare=0.7931 |
-| pssa_stamina_item_g3_syrup_03 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | A:23 B:2 C:2 D:2 maxShare=0.7931 |
-| pssa_stamina_item_g3_syrup_04 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | A:23 B:2 C:2 D:2 maxShare=0.7931 |
-| pssa_stamina_item_g3_boat_01 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | A:23 B:2 C:2 D:2 maxShare=0.7931 |
-| pssa_stamina_item_g3_boat_02 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | A:23 B:2 C:2 D:2 maxShare=0.7931 |
-| pssa_stamina_item_g3_boat_03 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | A:23 B:2 C:2 D:2 maxShare=0.7931 |
-| pssa_stamina_item_g3_boat_04 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | A:23 B:2 C:2 D:2 maxShare=0.7931 |
-| pssa_stamina_item_g3_boat_05 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | A:23 B:2 C:2 D:2 maxShare=0.7931 |
-| pssa_stamina_item_g3_owls_01 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | A:23 B:2 C:2 D:2 maxShare=0.7931 |
-| pssa_stamina_item_g3_owls_02 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | A:23 B:2 C:2 D:2 maxShare=0.7931 |
-| pssa_stamina_item_g3_owls_03 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | A:23 B:2 C:2 D:2 maxShare=0.7931 |
-| pssa_stamina_item_g3_owls_04 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | A:23 B:2 C:2 D:2 maxShare=0.7931 |
-| pssa_stamina_item_g3_owls_05 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | A:23 B:2 C:2 D:2 maxShare=0.7931 |
-| pssa_stamina_item_g3_rabbit_01 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | A:23 B:2 C:2 D:2 maxShare=0.7931 |
-| pssa_stamina_item_g3_rabbit_02 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | A:23 B:2 C:2 D:2 maxShare=0.7931 |
-| pssa_stamina_item_g3_rabbit_03 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | A:23 B:2 C:2 D:2 maxShare=0.7931 |
-| pssa_stamina_item_g3_rabbit_04 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | A:23 B:2 C:2 D:2 maxShare=0.7931 |
-| pssa_stamina_item_g3_rabbit_05 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | A:23 B:2 C:2 D:2 maxShare=0.7931 |
-| pssa_stamina_item_g3_rabbit_06 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | A:23 B:2 C:2 D:2 maxShare=0.7931 |
-| conv_01 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | A:23 B:2 C:2 D:2 maxShare=0.7931 |
-| conv_02 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | A:23 B:2 C:2 D:2 maxShare=0.7931 |
-| conv_03 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | A:23 B:2 C:2 D:2 maxShare=0.7931 |
-| conv_04 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | A:23 B:2 C:2 D:2 maxShare=0.7931 |
-| conv_05 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | A:23 B:2 C:2 D:2 maxShare=0.7931 |
-| conv_06 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | A:23 B:2 C:2 D:2 maxShare=0.7931 |
-| conv_07 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | A:23 B:2 C:2 D:2 maxShare=0.7931 |
-| conv_08 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | A:23 B:2 C:2 D:2 maxShare=0.7931 |
-| conv_09 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | A:23 B:2 C:2 D:2 maxShare=0.7931 |
-| pssa_stamina_item_g3_syrup_ebsr_01 | EBSR | PSSA_EBSR_PART_A_ANSWER_POSITION_DISTRIBUTION_REPORT_ONLY | A:3 B:1 C:0 D:0 maxShare=0.7500 |
-| pssa_stamina_item_g3_boat_ebsr_01 | EBSR | PSSA_EBSR_PART_A_ANSWER_POSITION_DISTRIBUTION_REPORT_ONLY | A:3 B:1 C:0 D:0 maxShare=0.7500 |
-| pssa_stamina_item_g3_owls_ebsr_01 | EBSR | PSSA_EBSR_PART_A_ANSWER_POSITION_DISTRIBUTION_REPORT_ONLY | A:3 B:1 C:0 D:0 maxShare=0.7500 |
-| pssa_stamina_item_g3_rabbit_ebsr_01 | EBSR | PSSA_EBSR_PART_A_ANSWER_POSITION_DISTRIBUTION_REPORT_ONLY | A:3 B:1 C:0 D:0 maxShare=0.7500 |
+| pssa_stamina_item_g3_syrup_04 | MCQ | PSSA_MCQ_PASSAGE_SPECIFICITY | 1 detector rows; failures=1 |
 
 ## Per-Item Gate Matrix
 
@@ -304,17 +249,17 @@ Report mode: this file lists PASS/FAIL/SKIP findings for the 37-item encoded sta
 | conv_05 | MCQ | PSSA_SA_BANDS_NONEMPTY | PASS | foundation evaluator |
 | conv_05 | MCQ | PSSA_ITEM_EC_GENRE_MATCH | PASS | foundation evaluator |
 | conv_05 | MCQ | PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP | PASS | foundation evaluator |
-| conv_06 | MCQ | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | FAIL | foundation evaluator |
+| conv_06 | MCQ | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | PASS | foundation evaluator |
 | conv_06 | MCQ | PSSA_VOCAB_KEY_CONSTRUCT | PASS | foundation evaluator |
 | conv_06 | MCQ | PSSA_SA_BANDS_NONEMPTY | PASS | foundation evaluator |
 | conv_06 | MCQ | PSSA_ITEM_EC_GENRE_MATCH | PASS | foundation evaluator |
 | conv_06 | MCQ | PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP | PASS | foundation evaluator |
-| conv_07 | MCQ | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | FAIL | foundation evaluator |
+| conv_07 | MCQ | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | PASS | foundation evaluator |
 | conv_07 | MCQ | PSSA_VOCAB_KEY_CONSTRUCT | PASS | foundation evaluator |
 | conv_07 | MCQ | PSSA_SA_BANDS_NONEMPTY | PASS | foundation evaluator |
 | conv_07 | MCQ | PSSA_ITEM_EC_GENRE_MATCH | PASS | foundation evaluator |
 | conv_07 | MCQ | PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP | PASS | foundation evaluator |
-| conv_08 | MCQ | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | FAIL | foundation evaluator |
+| conv_08 | MCQ | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | PASS | foundation evaluator |
 | conv_08 | MCQ | PSSA_VOCAB_KEY_CONSTRUCT | PASS | foundation evaluator |
 | conv_08 | MCQ | PSSA_SA_BANDS_NONEMPTY | PASS | foundation evaluator |
 | conv_08 | MCQ | PSSA_ITEM_EC_GENRE_MATCH | PASS | foundation evaluator |
@@ -327,7 +272,7 @@ Report mode: this file lists PASS/FAIL/SKIP findings for the 37-item encoded sta
 | pssa_stamina_item_g3_syrup_01 | MCQ | PSSA_MCQ_PASSAGE_SPECIFICITY | PASS | 1 detector rows; failures=0 |
 | pssa_stamina_item_g3_syrup_02 | MCQ | PSSA_MCQ_PASSAGE_SPECIFICITY | PASS | 1 detector rows; failures=0 |
 | pssa_stamina_item_g3_syrup_03 | MCQ | PSSA_MCQ_PASSAGE_SPECIFICITY | PASS | 1 detector rows; failures=0 |
-| pssa_stamina_item_g3_syrup_04 | MCQ | PSSA_MCQ_PASSAGE_SPECIFICITY | PASS | 1 detector rows; failures=0 |
+| pssa_stamina_item_g3_syrup_04 | MCQ | PSSA_MCQ_PASSAGE_SPECIFICITY | FAIL | 1 detector rows; failures=1 |
 | pssa_stamina_item_g3_boat_01 | MCQ | PSSA_MCQ_PASSAGE_SPECIFICITY | PASS | 1 detector rows; failures=0 |
 | pssa_stamina_item_g3_boat_02 | MCQ | PSSA_MCQ_PASSAGE_SPECIFICITY | PASS | 1 detector rows; failures=0 |
 | pssa_stamina_item_g3_boat_03 | MCQ | PSSA_MCQ_PASSAGE_SPECIFICITY | PASS | 1 detector rows; failures=0 |
@@ -382,29 +327,29 @@ Report mode: this file lists PASS/FAIL/SKIP findings for the 37-item encoded sta
 | conv_07 | MCQ | PSSA_ITEM_EC_SKILL_MATCH | SKIP | not passage-linked reading MCQ |
 | conv_08 | MCQ | PSSA_ITEM_EC_SKILL_MATCH | SKIP | not passage-linked reading MCQ |
 | conv_09 | MCQ | PSSA_ITEM_EC_SKILL_MATCH | SKIP | not passage-linked reading MCQ |
-| pssa_stamina_item_g3_syrup_01 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | FAIL | choiceGroup=pssa_stamina_item_g3_syrup_01; correctWords=12; maxDistractorWords=10; gap=2; uniquelyLongest=true |
+| pssa_stamina_item_g3_syrup_01 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | choiceGroup=pssa_stamina_item_g3_syrup_01; correctWords=9; maxDistractorWords=10; gap=-1; uniquelyLongest=true |
 | pssa_stamina_item_g3_syrup_02 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | choiceGroup=pssa_stamina_item_g3_syrup_02; correctWords=2; maxDistractorWords=8; gap=-6; uniquelyLongest=false |
-| pssa_stamina_item_g3_syrup_03 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | FAIL | choiceGroup=pssa_stamina_item_g3_syrup_03; correctWords=13; maxDistractorWords=11; gap=2; uniquelyLongest=true |
-| pssa_stamina_item_g3_syrup_04 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | choiceGroup=pssa_stamina_item_g3_syrup_04; correctWords=11; maxDistractorWords=11; gap=0; uniquelyLongest=true |
-| pssa_stamina_item_g3_syrup_ebsr_01 | EBSR | PSSA_MCQ_CORRECT_IS_LONGEST_EBSR_PART_A_REPORT_ONLY | FAIL | choiceGroup=pssa_stamina_item_g3_syrup_ebsr_01::partA; correctWords=14; maxDistractorWords=12; gap=2; uniquelyLongest=true |
-| pssa_stamina_item_g3_boat_01 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | FAIL | choiceGroup=pssa_stamina_item_g3_boat_01; correctWords=14; maxDistractorWords=10; gap=4; uniquelyLongest=true |
+| pssa_stamina_item_g3_syrup_03 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | choiceGroup=pssa_stamina_item_g3_syrup_03; correctWords=11; maxDistractorWords=11; gap=0; uniquelyLongest=true |
+| pssa_stamina_item_g3_syrup_04 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | choiceGroup=pssa_stamina_item_g3_syrup_04; correctWords=11; maxDistractorWords=11; gap=0; uniquelyLongest=false |
+| pssa_stamina_item_g3_syrup_ebsr_01 | EBSR | PSSA_MCQ_CORRECT_IS_LONGEST_EBSR_PART_A_REPORT_ONLY | PASS | choiceGroup=pssa_stamina_item_g3_syrup_ebsr_01::partA; correctWords=10; maxDistractorWords=12; gap=-2; uniquelyLongest=false |
+| pssa_stamina_item_g3_boat_01 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | choiceGroup=pssa_stamina_item_g3_boat_01; correctWords=12; maxDistractorWords=15; gap=-3; uniquelyLongest=false |
 | pssa_stamina_item_g3_boat_02 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | choiceGroup=pssa_stamina_item_g3_boat_02; correctWords=14; maxDistractorWords=15; gap=-1; uniquelyLongest=false |
 | pssa_stamina_item_g3_boat_03 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | choiceGroup=pssa_stamina_item_g3_boat_03; correctWords=7; maxDistractorWords=7; gap=0; uniquelyLongest=false |
-| pssa_stamina_item_g3_boat_04 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | FAIL | choiceGroup=pssa_stamina_item_g3_boat_04; correctWords=12; maxDistractorWords=10; gap=2; uniquelyLongest=true |
-| pssa_stamina_item_g3_boat_05 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | FAIL | choiceGroup=pssa_stamina_item_g3_boat_05; correctWords=19; maxDistractorWords=9; gap=10; uniquelyLongest=true |
-| pssa_stamina_item_g3_boat_ebsr_01 | EBSR | PSSA_MCQ_CORRECT_IS_LONGEST_EBSR_PART_A_REPORT_ONLY | FAIL | choiceGroup=pssa_stamina_item_g3_boat_ebsr_01::partA; correctWords=10; maxDistractorWords=9; gap=1; uniquelyLongest=true |
-| pssa_stamina_item_g3_owls_01 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | FAIL | choiceGroup=pssa_stamina_item_g3_owls_01; correctWords=9; maxDistractorWords=7; gap=2; uniquelyLongest=true |
+| pssa_stamina_item_g3_boat_04 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | choiceGroup=pssa_stamina_item_g3_boat_04; correctWords=11; maxDistractorWords=11; gap=0; uniquelyLongest=false |
+| pssa_stamina_item_g3_boat_05 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | choiceGroup=pssa_stamina_item_g3_boat_05; correctWords=14; maxDistractorWords=16; gap=-2; uniquelyLongest=false |
+| pssa_stamina_item_g3_boat_ebsr_01 | EBSR | PSSA_MCQ_CORRECT_IS_LONGEST_EBSR_PART_A_REPORT_ONLY | PASS | choiceGroup=pssa_stamina_item_g3_boat_ebsr_01::partA; correctWords=8; maxDistractorWords=9; gap=-1; uniquelyLongest=true |
+| pssa_stamina_item_g3_owls_01 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | choiceGroup=pssa_stamina_item_g3_owls_01; correctWords=8; maxDistractorWords=8; gap=0; uniquelyLongest=false |
 | pssa_stamina_item_g3_owls_02 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | choiceGroup=pssa_stamina_item_g3_owls_02; correctWords=7; maxDistractorWords=7; gap=0; uniquelyLongest=true |
-| pssa_stamina_item_g3_owls_03 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | FAIL | choiceGroup=pssa_stamina_item_g3_owls_03; correctWords=10; maxDistractorWords=8; gap=2; uniquelyLongest=true |
-| pssa_stamina_item_g3_owls_04 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | FAIL | choiceGroup=pssa_stamina_item_g3_owls_04; correctWords=8; maxDistractorWords=8; gap=0; uniquelyLongest=true |
+| pssa_stamina_item_g3_owls_03 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | choiceGroup=pssa_stamina_item_g3_owls_03; correctWords=9; maxDistractorWords=9; gap=0; uniquelyLongest=false |
+| pssa_stamina_item_g3_owls_04 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | choiceGroup=pssa_stamina_item_g3_owls_04; correctWords=8; maxDistractorWords=10; gap=-2; uniquelyLongest=false |
 | pssa_stamina_item_g3_owls_05 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | choiceGroup=pssa_stamina_item_g3_owls_05; correctWords=16; maxDistractorWords=18; gap=-2; uniquelyLongest=true |
-| pssa_stamina_item_g3_owls_ebsr_01 | EBSR | PSSA_MCQ_CORRECT_IS_LONGEST_EBSR_PART_A_REPORT_ONLY | FAIL | choiceGroup=pssa_stamina_item_g3_owls_ebsr_01::partA; correctWords=13; maxDistractorWords=10; gap=3; uniquelyLongest=true |
-| pssa_stamina_item_g3_rabbit_01 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | FAIL | choiceGroup=pssa_stamina_item_g3_rabbit_01; correctWords=11; maxDistractorWords=11; gap=0; uniquelyLongest=true |
-| pssa_stamina_item_g3_rabbit_02 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | FAIL | choiceGroup=pssa_stamina_item_g3_rabbit_02; correctWords=16; maxDistractorWords=11; gap=5; uniquelyLongest=true |
+| pssa_stamina_item_g3_owls_ebsr_01 | EBSR | PSSA_MCQ_CORRECT_IS_LONGEST_EBSR_PART_A_REPORT_ONLY | PASS | choiceGroup=pssa_stamina_item_g3_owls_ebsr_01::partA; correctWords=10; maxDistractorWords=10; gap=0; uniquelyLongest=false |
+| pssa_stamina_item_g3_rabbit_01 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | choiceGroup=pssa_stamina_item_g3_rabbit_01; correctWords=9; maxDistractorWords=11; gap=-2; uniquelyLongest=false |
+| pssa_stamina_item_g3_rabbit_02 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | choiceGroup=pssa_stamina_item_g3_rabbit_02; correctWords=14; maxDistractorWords=14; gap=0; uniquelyLongest=false |
 | pssa_stamina_item_g3_rabbit_03 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | choiceGroup=pssa_stamina_item_g3_rabbit_03; correctWords=7; maxDistractorWords=8; gap=-1; uniquelyLongest=true |
-| pssa_stamina_item_g3_rabbit_04 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | FAIL | choiceGroup=pssa_stamina_item_g3_rabbit_04; correctWords=10; maxDistractorWords=8; gap=2; uniquelyLongest=true |
-| pssa_stamina_item_g3_rabbit_05 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | FAIL | choiceGroup=pssa_stamina_item_g3_rabbit_05; correctWords=6; maxDistractorWords=6; gap=0; uniquelyLongest=true |
-| pssa_stamina_item_g3_rabbit_06 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | FAIL | choiceGroup=pssa_stamina_item_g3_rabbit_06; correctWords=9; maxDistractorWords=8; gap=1; uniquelyLongest=true |
+| pssa_stamina_item_g3_rabbit_04 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | choiceGroup=pssa_stamina_item_g3_rabbit_04; correctWords=8; maxDistractorWords=9; gap=-1; uniquelyLongest=false |
+| pssa_stamina_item_g3_rabbit_05 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | choiceGroup=pssa_stamina_item_g3_rabbit_05; correctWords=5; maxDistractorWords=6; gap=-1; uniquelyLongest=false |
+| pssa_stamina_item_g3_rabbit_06 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | choiceGroup=pssa_stamina_item_g3_rabbit_06; correctWords=9; maxDistractorWords=9; gap=0; uniquelyLongest=false |
 | pssa_stamina_item_g3_rabbit_ebsr_01 | EBSR | PSSA_MCQ_CORRECT_IS_LONGEST_EBSR_PART_A_REPORT_ONLY | PASS | choiceGroup=pssa_stamina_item_g3_rabbit_ebsr_01::partA; correctWords=10; maxDistractorWords=11; gap=-1; uniquelyLongest=true |
 | conv_01 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | choiceGroup=conv_01; correctWords=1; maxDistractorWords=1; gap=0; uniquelyLongest=false |
 | conv_02 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | choiceGroup=conv_02; correctWords=5; maxDistractorWords=5; gap=0; uniquelyLongest=true |
@@ -418,14 +363,14 @@ Report mode: this file lists PASS/FAIL/SKIP findings for the 37-item encoded sta
 | pssa_stamina_item_g3_syrup_01 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | choiceGroup=pssa_stamina_item_g3_syrup_01 |
 | pssa_stamina_item_g3_syrup_02 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | choiceGroup=pssa_stamina_item_g3_syrup_02 |
 | pssa_stamina_item_g3_syrup_03 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | choiceGroup=pssa_stamina_item_g3_syrup_03 |
-| pssa_stamina_item_g3_syrup_04 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | FAIL | choiceGroup=pssa_stamina_item_g3_syrup_04 |
+| pssa_stamina_item_g3_syrup_04 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | choiceGroup=pssa_stamina_item_g3_syrup_04 |
 | pssa_stamina_item_g3_syrup_ebsr_01 | EBSR | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR_EBSR_PART_A_REPORT_ONLY | PASS | choiceGroup=pssa_stamina_item_g3_syrup_ebsr_01::partA |
 | pssa_stamina_item_g3_boat_01 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | choiceGroup=pssa_stamina_item_g3_boat_01 |
 | pssa_stamina_item_g3_boat_02 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | choiceGroup=pssa_stamina_item_g3_boat_02 |
 | pssa_stamina_item_g3_boat_03 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | choiceGroup=pssa_stamina_item_g3_boat_03 |
 | pssa_stamina_item_g3_boat_04 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | choiceGroup=pssa_stamina_item_g3_boat_04 |
 | pssa_stamina_item_g3_boat_05 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | choiceGroup=pssa_stamina_item_g3_boat_05 |
-| pssa_stamina_item_g3_boat_ebsr_01 | EBSR | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR_EBSR_PART_A_REPORT_ONLY | FAIL | choiceGroup=pssa_stamina_item_g3_boat_ebsr_01::partA |
+| pssa_stamina_item_g3_boat_ebsr_01 | EBSR | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR_EBSR_PART_A_REPORT_ONLY | PASS | choiceGroup=pssa_stamina_item_g3_boat_ebsr_01::partA |
 | pssa_stamina_item_g3_owls_01 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | choiceGroup=pssa_stamina_item_g3_owls_01 |
 | pssa_stamina_item_g3_owls_02 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | choiceGroup=pssa_stamina_item_g3_owls_02 |
 | pssa_stamina_item_g3_owls_03 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | choiceGroup=pssa_stamina_item_g3_owls_03 |
@@ -433,7 +378,7 @@ Report mode: this file lists PASS/FAIL/SKIP findings for the 37-item encoded sta
 | pssa_stamina_item_g3_owls_05 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | choiceGroup=pssa_stamina_item_g3_owls_05 |
 | pssa_stamina_item_g3_owls_ebsr_01 | EBSR | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR_EBSR_PART_A_REPORT_ONLY | PASS | choiceGroup=pssa_stamina_item_g3_owls_ebsr_01::partA |
 | pssa_stamina_item_g3_rabbit_01 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | choiceGroup=pssa_stamina_item_g3_rabbit_01 |
-| pssa_stamina_item_g3_rabbit_02 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | FAIL | choiceGroup=pssa_stamina_item_g3_rabbit_02 |
+| pssa_stamina_item_g3_rabbit_02 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | choiceGroup=pssa_stamina_item_g3_rabbit_02 |
 | pssa_stamina_item_g3_rabbit_03 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | choiceGroup=pssa_stamina_item_g3_rabbit_03 |
 | pssa_stamina_item_g3_rabbit_04 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | choiceGroup=pssa_stamina_item_g3_rabbit_04 |
 | pssa_stamina_item_g3_rabbit_05 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | choiceGroup=pssa_stamina_item_g3_rabbit_05 |
@@ -441,46 +386,46 @@ Report mode: this file lists PASS/FAIL/SKIP findings for the 37-item encoded sta
 | pssa_stamina_item_g3_rabbit_ebsr_01 | EBSR | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR_EBSR_PART_A_REPORT_ONLY | PASS | choiceGroup=pssa_stamina_item_g3_rabbit_ebsr_01::partA |
 | conv_01 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | choiceGroup=conv_01 |
 | conv_02 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | choiceGroup=conv_02 |
-| conv_03 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | FAIL | choiceGroup=conv_03 |
+| conv_03 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | choiceGroup=conv_03 |
 | conv_04 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | choiceGroup=conv_04 |
 | conv_05 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | choiceGroup=conv_05 |
 | conv_06 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | choiceGroup=conv_06 |
 | conv_07 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | choiceGroup=conv_07 |
 | conv_08 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | choiceGroup=conv_08 |
 | conv_09 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | choiceGroup=conv_09 |
-| pssa_stamina_item_g3_syrup_01 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | FAIL | A:23 B:2 C:2 D:2 maxShare=0.7931 |
-| pssa_stamina_item_g3_syrup_02 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | FAIL | A:23 B:2 C:2 D:2 maxShare=0.7931 |
-| pssa_stamina_item_g3_syrup_03 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | FAIL | A:23 B:2 C:2 D:2 maxShare=0.7931 |
-| pssa_stamina_item_g3_syrup_04 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | FAIL | A:23 B:2 C:2 D:2 maxShare=0.7931 |
-| pssa_stamina_item_g3_boat_01 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | FAIL | A:23 B:2 C:2 D:2 maxShare=0.7931 |
-| pssa_stamina_item_g3_boat_02 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | FAIL | A:23 B:2 C:2 D:2 maxShare=0.7931 |
-| pssa_stamina_item_g3_boat_03 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | FAIL | A:23 B:2 C:2 D:2 maxShare=0.7931 |
-| pssa_stamina_item_g3_boat_04 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | FAIL | A:23 B:2 C:2 D:2 maxShare=0.7931 |
-| pssa_stamina_item_g3_boat_05 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | FAIL | A:23 B:2 C:2 D:2 maxShare=0.7931 |
-| pssa_stamina_item_g3_owls_01 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | FAIL | A:23 B:2 C:2 D:2 maxShare=0.7931 |
-| pssa_stamina_item_g3_owls_02 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | FAIL | A:23 B:2 C:2 D:2 maxShare=0.7931 |
-| pssa_stamina_item_g3_owls_03 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | FAIL | A:23 B:2 C:2 D:2 maxShare=0.7931 |
-| pssa_stamina_item_g3_owls_04 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | FAIL | A:23 B:2 C:2 D:2 maxShare=0.7931 |
-| pssa_stamina_item_g3_owls_05 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | FAIL | A:23 B:2 C:2 D:2 maxShare=0.7931 |
-| pssa_stamina_item_g3_rabbit_01 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | FAIL | A:23 B:2 C:2 D:2 maxShare=0.7931 |
-| pssa_stamina_item_g3_rabbit_02 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | FAIL | A:23 B:2 C:2 D:2 maxShare=0.7931 |
-| pssa_stamina_item_g3_rabbit_03 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | FAIL | A:23 B:2 C:2 D:2 maxShare=0.7931 |
-| pssa_stamina_item_g3_rabbit_04 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | FAIL | A:23 B:2 C:2 D:2 maxShare=0.7931 |
-| pssa_stamina_item_g3_rabbit_05 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | FAIL | A:23 B:2 C:2 D:2 maxShare=0.7931 |
-| pssa_stamina_item_g3_rabbit_06 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | FAIL | A:23 B:2 C:2 D:2 maxShare=0.7931 |
-| conv_01 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | FAIL | A:23 B:2 C:2 D:2 maxShare=0.7931 |
-| conv_02 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | FAIL | A:23 B:2 C:2 D:2 maxShare=0.7931 |
-| conv_03 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | FAIL | A:23 B:2 C:2 D:2 maxShare=0.7931 |
-| conv_04 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | FAIL | A:23 B:2 C:2 D:2 maxShare=0.7931 |
-| conv_05 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | FAIL | A:23 B:2 C:2 D:2 maxShare=0.7931 |
-| conv_06 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | FAIL | A:23 B:2 C:2 D:2 maxShare=0.7931 |
-| conv_07 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | FAIL | A:23 B:2 C:2 D:2 maxShare=0.7931 |
-| conv_08 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | FAIL | A:23 B:2 C:2 D:2 maxShare=0.7931 |
-| conv_09 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | FAIL | A:23 B:2 C:2 D:2 maxShare=0.7931 |
-| pssa_stamina_item_g3_syrup_ebsr_01 | EBSR | PSSA_EBSR_PART_A_ANSWER_POSITION_DISTRIBUTION_REPORT_ONLY | FAIL | A:3 B:1 C:0 D:0 maxShare=0.7500 |
-| pssa_stamina_item_g3_boat_ebsr_01 | EBSR | PSSA_EBSR_PART_A_ANSWER_POSITION_DISTRIBUTION_REPORT_ONLY | FAIL | A:3 B:1 C:0 D:0 maxShare=0.7500 |
-| pssa_stamina_item_g3_owls_ebsr_01 | EBSR | PSSA_EBSR_PART_A_ANSWER_POSITION_DISTRIBUTION_REPORT_ONLY | FAIL | A:3 B:1 C:0 D:0 maxShare=0.7500 |
-| pssa_stamina_item_g3_rabbit_ebsr_01 | EBSR | PSSA_EBSR_PART_A_ANSWER_POSITION_DISTRIBUTION_REPORT_ONLY | FAIL | A:3 B:1 C:0 D:0 maxShare=0.7500 |
+| pssa_stamina_item_g3_syrup_01 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | A:8 B:7 C:7 D:7 maxShare=0.2759 |
+| pssa_stamina_item_g3_syrup_02 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | A:8 B:7 C:7 D:7 maxShare=0.2759 |
+| pssa_stamina_item_g3_syrup_03 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | A:8 B:7 C:7 D:7 maxShare=0.2759 |
+| pssa_stamina_item_g3_syrup_04 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | A:8 B:7 C:7 D:7 maxShare=0.2759 |
+| pssa_stamina_item_g3_boat_01 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | A:8 B:7 C:7 D:7 maxShare=0.2759 |
+| pssa_stamina_item_g3_boat_02 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | A:8 B:7 C:7 D:7 maxShare=0.2759 |
+| pssa_stamina_item_g3_boat_03 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | A:8 B:7 C:7 D:7 maxShare=0.2759 |
+| pssa_stamina_item_g3_boat_04 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | A:8 B:7 C:7 D:7 maxShare=0.2759 |
+| pssa_stamina_item_g3_boat_05 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | A:8 B:7 C:7 D:7 maxShare=0.2759 |
+| pssa_stamina_item_g3_owls_01 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | A:8 B:7 C:7 D:7 maxShare=0.2759 |
+| pssa_stamina_item_g3_owls_02 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | A:8 B:7 C:7 D:7 maxShare=0.2759 |
+| pssa_stamina_item_g3_owls_03 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | A:8 B:7 C:7 D:7 maxShare=0.2759 |
+| pssa_stamina_item_g3_owls_04 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | A:8 B:7 C:7 D:7 maxShare=0.2759 |
+| pssa_stamina_item_g3_owls_05 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | A:8 B:7 C:7 D:7 maxShare=0.2759 |
+| pssa_stamina_item_g3_rabbit_01 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | A:8 B:7 C:7 D:7 maxShare=0.2759 |
+| pssa_stamina_item_g3_rabbit_02 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | A:8 B:7 C:7 D:7 maxShare=0.2759 |
+| pssa_stamina_item_g3_rabbit_03 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | A:8 B:7 C:7 D:7 maxShare=0.2759 |
+| pssa_stamina_item_g3_rabbit_04 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | A:8 B:7 C:7 D:7 maxShare=0.2759 |
+| pssa_stamina_item_g3_rabbit_05 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | A:8 B:7 C:7 D:7 maxShare=0.2759 |
+| pssa_stamina_item_g3_rabbit_06 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | A:8 B:7 C:7 D:7 maxShare=0.2759 |
+| conv_01 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | A:8 B:7 C:7 D:7 maxShare=0.2759 |
+| conv_02 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | A:8 B:7 C:7 D:7 maxShare=0.2759 |
+| conv_03 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | A:8 B:7 C:7 D:7 maxShare=0.2759 |
+| conv_04 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | A:8 B:7 C:7 D:7 maxShare=0.2759 |
+| conv_05 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | A:8 B:7 C:7 D:7 maxShare=0.2759 |
+| conv_06 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | A:8 B:7 C:7 D:7 maxShare=0.2759 |
+| conv_07 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | A:8 B:7 C:7 D:7 maxShare=0.2759 |
+| conv_08 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | A:8 B:7 C:7 D:7 maxShare=0.2759 |
+| conv_09 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | A:8 B:7 C:7 D:7 maxShare=0.2759 |
+| pssa_stamina_item_g3_syrup_ebsr_01 | EBSR | PSSA_EBSR_PART_A_ANSWER_POSITION_DISTRIBUTION_REPORT_ONLY | PASS | A:1 B:1 C:1 D:1 maxShare=0.2500 |
+| pssa_stamina_item_g3_boat_ebsr_01 | EBSR | PSSA_EBSR_PART_A_ANSWER_POSITION_DISTRIBUTION_REPORT_ONLY | PASS | A:1 B:1 C:1 D:1 maxShare=0.2500 |
+| pssa_stamina_item_g3_owls_ebsr_01 | EBSR | PSSA_EBSR_PART_A_ANSWER_POSITION_DISTRIBUTION_REPORT_ONLY | PASS | A:1 B:1 C:1 D:1 maxShare=0.2500 |
+| pssa_stamina_item_g3_rabbit_ebsr_01 | EBSR | PSSA_EBSR_PART_A_ANSWER_POSITION_DISTRIBUTION_REPORT_ONLY | PASS | A:1 B:1 C:1 D:1 maxShare=0.2500 |
 | pssa_stamina_item_g3_syrup_01 | MCQ | PSSA_ITEM_FOOTNOTE_GIVEAWAY | PASS | vocab targets must not be visible footnote definitions |
 | pssa_stamina_item_g3_syrup_02 | MCQ | PSSA_ITEM_FOOTNOTE_GIVEAWAY | PASS | vocab targets must not be visible footnote definitions |
 | pssa_stamina_item_g3_syrup_03 | MCQ | PSSA_ITEM_FOOTNOTE_GIVEAWAY | PASS | vocab targets must not be visible footnote definitions |
@@ -550,7 +495,7 @@ Report mode: this file lists PASS/FAIL/SKIP findings for the 37-item encoded sta
 | pssa_stamina_item_g3_syrup_01 | PSSA_MCQ_PASSAGE_SPECIFIC_CHOICES | SKIP | INFO | synthesis evidence item | Whole-passage synthesis MCQs are scoped by explicit evidenceKind rather than choice concreteness. |
 | pssa_stamina_item_g3_syrup_02 | PSSA_MCQ_PASSAGE_SPECIFIC_CHOICES | SKIP | INFO | vocabulary-in-context item | Vocabulary-in-context MCQs are scoped to vocab-specific gates, not comprehension choice-specificity. |
 | pssa_stamina_item_g3_syrup_03 | PSSA_MCQ_PASSAGE_SPECIFIC_CHOICES | PASS | INFO | all passage-specificity gates clear | Passage-linked reading MCQ passed grounding gates. |
-| pssa_stamina_item_g3_syrup_04 | PSSA_MCQ_PASSAGE_SPECIFIC_CHOICES | PASS | INFO | all passage-specificity gates clear | Passage-linked reading MCQ passed grounding gates. |
+| pssa_stamina_item_g3_syrup_04 | PSSA_MCQ_PASSAGE_SPECIFIC_CHOICES | FAIL | BLOCKER | concreteChoices=3/4 | Each choice needs at least two passage-specific content words, and at least three choices need concrete passage details. |
 | pssa_stamina_item_g3_boat_01 | PSSA_MCQ_PASSAGE_SPECIFIC_CHOICES | SKIP | INFO | synthesis evidence item | Whole-passage synthesis MCQs are scoped by explicit evidenceKind rather than choice concreteness. |
 | pssa_stamina_item_g3_boat_02 | PSSA_MCQ_PASSAGE_SPECIFIC_CHOICES | PASS | INFO | all passage-specificity gates clear | Passage-linked reading MCQ passed grounding gates. |
 | pssa_stamina_item_g3_boat_03 | PSSA_MCQ_PASSAGE_SPECIFIC_CHOICES | PASS | INFO | all passage-specificity gates clear | Passage-linked reading MCQ passed grounding gates. |

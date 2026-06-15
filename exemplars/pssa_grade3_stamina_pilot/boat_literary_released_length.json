@@ -92,15 +92,45 @@
       "approvalEligible": false,
       "studentFacingPrompt": "What is the most important lesson June learns in the story?",
       "answerChoicesJson": [
-        "Something built carefully to last can matter more than something that only looks impressive.",
         "A boat needs four milk jugs to float.",
-        "It is good to collect things other people throw away.",
+        "It is a good idea to collect the things that other people have thrown away.",
+        "Something built to last matters more than something that just looks good.",
         "Younger sisters should help test boats before races."
       ],
-      "correctIndex": 0,
+      "correctIndex": 2,
       "structuredChoicesJson": [
         {
-          "text": "Something built carefully to last can matter more than something that only looks impressive.",
+          "text": "A boat needs four milk jugs to float.",
+          "isCorrect": false,
+          "rationale": "Too narrow: this detail describes June's boat, not the story's lesson.",
+          "evidenceLinks": [
+            {
+              "paragraphIndex": 12,
+              "sentenceIndex": 2,
+              "quotedSpan": "four milk jugs holding it up like four small, stubborn hands.",
+              "startChar": 3406,
+              "endChar": 3467
+            }
+          ],
+          "distractorRole": "too_narrow"
+        },
+        {
+          "text": "It is a good idea to collect the things that other people have thrown away.",
+          "isCorrect": false,
+          "rationale": "Too narrow: collecting junk is one action June takes, not the story's message.",
+          "evidenceLinks": [
+            {
+              "paragraphIndex": 3,
+              "sentenceIndex": 0,
+              "quotedSpan": "For two whole weeks, I collected things other people had thrown away: bottle caps, a cracked plastic cutting board, a tangle of fishing line, and four empty milk jugs that still smelled a little like milk.",
+              "startChar": 811,
+              "endChar": 1016
+            }
+          ],
+          "distractorRole": "too_narrow"
+        },
+        {
+          "text": "Something built to last matters more than something that just looks good.",
           "isCorrect": true,
           "rationale": "Whole-story synthesis: June learns that careful building matters more than flashy looks.",
           "evidenceLinks": [
@@ -122,36 +152,6 @@
             }
           ],
           "distractorRole": null
-        },
-        {
-          "text": "A boat needs four milk jugs to float.",
-          "isCorrect": false,
-          "rationale": "Too narrow: this detail describes June's boat, not the story's lesson.",
-          "evidenceLinks": [
-            {
-              "paragraphIndex": 12,
-              "sentenceIndex": 2,
-              "quotedSpan": "four milk jugs holding it up like four small, stubborn hands.",
-              "startChar": 3406,
-              "endChar": 3467
-            }
-          ],
-          "distractorRole": "too_narrow"
-        },
-        {
-          "text": "It is good to collect things other people throw away.",
-          "isCorrect": false,
-          "rationale": "Too narrow: collecting junk is one action June takes, not the story's message.",
-          "evidenceLinks": [
-            {
-              "paragraphIndex": 3,
-              "sentenceIndex": 0,
-              "quotedSpan": "For two whole weeks, I collected things other people had thrown away: bottle caps, a cracked plastic cutting board, a tangle of fishing line, and four empty milk jugs that still smelled a little like milk.",
-              "startChar": 811,
-              "endChar": 1016
-            }
-          ],
-          "distractorRole": "too_narrow"
         },
         {
           "text": "Younger sisters should help test boats before races.",
@@ -197,49 +197,13 @@
       "approvalEligible": false,
       "studentFacingPrompt": "How do June's feelings about her boat change from the beginning to the end of the story?",
       "answerChoicesJson": [
-        "She is embarrassed by it at first, but proud of it by the end.",
         "She is proud of the milk-jug sandwich at first, but ashamed after the race.",
         "She stays bored as the slow sandwich bumps along the creek.",
-        "She is afraid near the bridge, but forgets the boat after Mateo lifts it."
+        "She is afraid near the bridge, but forgets the boat after Mateo lifts it.",
+        "She is embarrassed by it at first, but proud of it by the end."
       ],
-      "correctIndex": 0,
+      "correctIndex": 3,
       "structuredChoicesJson": [
-        {
-          "text": "She is embarrassed by it at first, but proud of it by the end.",
-          "isCorrect": true,
-          "rationale": "June feels embarrassed beside the flashy boats, then understands why her carefully built boat won.",
-          "evidenceLinks": [
-            {
-              "paragraphIndex": 7,
-              "sentenceIndex": 2,
-              "quotedSpan": "my milk-jug sandwich looked like a mistake somebody had left behind.",
-              "startChar": 1936,
-              "endChar": 2004
-            },
-            {
-              "paragraphIndex": 7,
-              "sentenceIndex": 3,
-              "quotedSpan": "My face went hot, and for one long second I almost picked my boat back up and walked home.",
-              "startChar": 2005,
-              "endChar": 2095
-            },
-            {
-              "paragraphIndex": 15,
-              "sentenceIndex": 0,
-              "quotedSpan": "I did not win because my boat was fast.",
-              "startChar": 3721,
-              "endChar": 3760
-            },
-            {
-              "paragraphIndex": 15,
-              "sentenceIndex": 1,
-              "quotedSpan": "I won because it was the last one floating — because I had spent two weeks making sure it would not sink, while everyone else was busy making sure their boats would look amazing.",
-              "startChar": 3761,
-              "endChar": 3939
-            }
-          ],
-          "distractorRole": null
-        },
         {
           "text": "She is proud of the milk-jug sandwich at first, but ashamed after the race.",
           "isCorrect": false,
@@ -284,6 +248,42 @@
             }
           ],
           "distractorRole": "wrong_emphasis"
+        },
+        {
+          "text": "She is embarrassed by it at first, but proud of it by the end.",
+          "isCorrect": true,
+          "rationale": "June feels embarrassed beside the flashy boats, then understands why her carefully built boat won.",
+          "evidenceLinks": [
+            {
+              "paragraphIndex": 7,
+              "sentenceIndex": 2,
+              "quotedSpan": "my milk-jug sandwich looked like a mistake somebody had left behind.",
+              "startChar": 1936,
+              "endChar": 2004
+            },
+            {
+              "paragraphIndex": 7,
+              "sentenceIndex": 3,
+              "quotedSpan": "My face went hot, and for one long second I almost picked my boat back up and walked home.",
+              "startChar": 2005,
+              "endChar": 2095
+            },
+            {
+              "paragraphIndex": 15,
+              "sentenceIndex": 0,
+              "quotedSpan": "I did not win because my boat was fast.",
+              "startChar": 3721,
+              "endChar": 3760
+            },
+            {
+              "paragraphIndex": 15,
+              "sentenceIndex": 1,
+              "quotedSpan": "I won because it was the last one floating — because I had spent two weeks making sure it would not sink, while everyone else was busy making sure their boats would look amazing.",
+              "startChar": 3761,
+              "endChar": 3939
+            }
+          ],
+          "distractorRole": null
         }
       ],
       "provenanceJson": {
@@ -418,30 +418,15 @@
       "targetWordOrPhrase": "four small, stubborn hands",
       "studentFacingPrompt": "What does the phrase \"four small, stubborn hands\" suggest about the milk jugs?",
       "answerChoicesJson": [
-        "They kept the boat floating steadily and would not let it sink.",
-        "The boat had real hands that could grab the water.",
+        "The boat had real little hands that could grab the water.",
+        "They kept the boat floating and would not let it sink.",
         "The jugs made the boat move quickly.",
         "The boat was shaped like a person."
       ],
-      "correctIndex": 0,
+      "correctIndex": 1,
       "structuredChoicesJson": [
         {
-          "text": "They kept the boat floating steadily and would not let it sink.",
-          "isCorrect": true,
-          "rationale": "The comparison shows the jugs holding up the boat through rough water.",
-          "evidenceLinks": [
-            {
-              "paragraphIndex": 12,
-              "sentenceIndex": 2,
-              "quotedSpan": "I opened my eyes, it was still there — riding over the choppy water like the bumps were nothing at all, four milk jugs holding it up like four small, stubborn hands.",
-              "startChar": 3302,
-              "endChar": 3467
-            }
-          ],
-          "distractorRole": null
-        },
-        {
-          "text": "The boat had real hands that could grab the water.",
+          "text": "The boat had real little hands that could grab the water.",
           "isCorrect": false,
           "rationale": "Plausible misreading: this takes the comparison literally.",
           "evidenceLinks": [
@@ -454,6 +439,21 @@
             }
           ],
           "distractorRole": "plausible_misreading"
+        },
+        {
+          "text": "They kept the boat floating and would not let it sink.",
+          "isCorrect": true,
+          "rationale": "The comparison shows the jugs holding up the boat through rough water.",
+          "evidenceLinks": [
+            {
+              "paragraphIndex": 12,
+              "sentenceIndex": 2,
+              "quotedSpan": "I opened my eyes, it was still there — riding over the choppy water like the bumps were nothing at all, four milk jugs holding it up like four small, stubborn hands.",
+              "startChar": 3302,
+              "endChar": 3467
+            }
+          ],
+          "distractorRole": null
         },
         {
           "text": "The jugs made the boat move quickly.",
@@ -516,28 +516,13 @@
       "approvalEligible": false,
       "studentFacingPrompt": "Why was June's boat the only one left floating at the end?",
       "answerChoicesJson": [
-        "She had built it carefully so it would not sink, while the others were built mainly to look impressive.",
         "It was the fastest boat in the race.",
         "It had a cloth sail that caught the wind.",
-        "The crowd lifted it out of the rough water."
+        "She built hers to float, while the others were built mainly to look good.",
+        "The crowd lifted her boat out of the cold, rough water right at the very end."
       ],
-      "correctIndex": 0,
+      "correctIndex": 2,
       "structuredChoicesJson": [
-        {
-          "text": "She had built it carefully so it would not sink, while the others were built mainly to look impressive.",
-          "isCorrect": true,
-          "rationale": "June explains that she tested the boat for floating while others focused on looks.",
-          "evidenceLinks": [
-            {
-              "paragraphIndex": 15,
-              "sentenceIndex": 1,
-              "quotedSpan": "I won because it was the last one floating — because I had spent two weeks making sure it would not sink, while everyone else was busy making sure their boats would look amazing.",
-              "startChar": 3761,
-              "endChar": 3939
-            }
-          ],
-          "distractorRole": null
-        },
         {
           "text": "It was the fastest boat in the race.",
           "isCorrect": false,
@@ -569,7 +554,22 @@
           "distractorRole": "wrong_section"
         },
         {
-          "text": "The crowd lifted it out of the rough water.",
+          "text": "She built hers to float, while the others were built mainly to look good.",
+          "isCorrect": true,
+          "rationale": "June explains that she tested the boat for floating while others focused on looks.",
+          "evidenceLinks": [
+            {
+              "paragraphIndex": 15,
+              "sentenceIndex": 1,
+              "quotedSpan": "I won because it was the last one floating — because I had spent two weeks making sure it would not sink, while everyone else was busy making sure their boats would look amazing.",
+              "startChar": 3761,
+              "endChar": 3939
+            }
+          ],
+          "distractorRole": null
+        },
+        {
+          "text": "The crowd lifted her boat out of the cold, rough water right at the very end.",
           "isCorrect": false,
           "rationale": "Unsupported inference: the crowd cheers, but nobody lifts the boat out of the water.",
           "evidenceLinks": [
@@ -615,28 +615,32 @@
         "stem": "What is the best lesson June learns from the boat race?",
         "choices": [
           {
-            "text": "A boat must look beautiful to win a race.",
+            "text": "A boat that looks beautiful will win the race.",
             "distractorRole": "opposite_claim",
             "supportsPartA": false,
-            "rationale": "Distractor."
+            "rationale": "Distractor.",
+            "isCorrect": false
           },
           {
-            "text": "A careful design can matter more than a flashy appearance.",
+            "text": "Careful design can matter more than flashy looks.",
             "distractorRole": null,
             "supportsPartA": true,
-            "rationale": "Correct."
+            "rationale": "Correct.",
+            "isCorrect": true
           },
           {
-            "text": "A fast boat will always beat a slow boat.",
+            "text": "A fast boat will beat a slow boat.",
             "distractorRole": "opposite_claim",
             "supportsPartA": false,
-            "rationale": "Distractor."
+            "rationale": "Distractor.",
+            "isCorrect": false
           },
           {
             "text": "A crowd can make a weak boat stronger.",
             "distractorRole": "unsupported_inference",
             "supportsPartA": false,
-            "rationale": "Distractor."
+            "rationale": "Distractor.",
+            "isCorrect": false
           }
         ],
         "correctIndex": 1
@@ -721,18 +725,19 @@
           "prompt": "What is the best lesson June learns from the boat race?",
           "choices": [
             {
-              "text": "A boat must look beautiful to win a race."
+              "text": "A boat that looks beautiful will win the race."
             },
             {
-              "text": "A careful design can matter more than a flashy appearance."
+              "text": "Careful design can matter more than flashy looks."
             },
             {
-              "text": "A fast boat will always beat a slow boat."
+              "text": "A fast boat will beat a slow boat."
             },
             {
               "text": "A crowd can make a weak boat stronger."
             }
-          ]
+          ],
+          "correctIndex": 1
         },
         "partB": {
           "instruction": "Which two details best support the answer in Part A?",

@@ -90,7 +90,7 @@
       "dokLevel": 2,
       "studentFacingPrompt": "What is the most important lesson Rabbit learns in the play?",
       "answerChoicesJson": [
-        "Sharing what you have can leave you with more, not less.",
+        "Sharing what you have can leave you with more.",
         "A hollow log is a good place to hide from rain.",
         "Hedgehogs should be careful with their prickles.",
         "It is best to keep your home to yourself."
@@ -98,7 +98,7 @@
       "correctIndex": 0,
       "structuredChoicesJson": [
         {
-          "text": "Sharing what you have can leave you with more, not less.",
+          "text": "Sharing what you have can leave you with more.",
           "isCorrect": true,
           "rationale": "Rabbit learns that sharing her dry log gives her warmth, help, and friends.",
           "evidenceLinks": [
@@ -175,15 +175,27 @@
       "dokLevel": 2,
       "studentFacingPrompt": "How do Rabbit's feelings change from the beginning of the play to the end?",
       "answerChoicesJson": [
-        "She does not want to share at first, but is glad she did by the end.",
-        "She is afraid at first, but becomes brave by the end.",
+        "She is very afraid at first, but slowly becomes brave by the very end.",
+        "She does not want to share at first, but is glad by the end.",
         "She is friendly at first, but becomes angry by the end.",
-        "She is sleepy the whole play and never changes."
+        "She stays sleepy for most of the play and hardly changes."
       ],
-      "correctIndex": 0,
+      "correctIndex": 1,
       "structuredChoicesJson": [
         {
-          "text": "She does not want to share at first, but is glad she did by the end.",
+          "text": "She is very afraid at first, but slowly becomes brave by the very end.",
+          "isCorrect": false,
+          "rationale": "Rabbit is annoyed, not mainly afraid.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "scene_synthesis",
+              "sceneId": "scene_01"
+            }
+          ],
+          "distractorRole": "wrong_emphasis"
+        },
+        {
+          "text": "She does not want to share at first, but is glad by the end.",
           "isCorrect": true,
           "rationale": "Rabbit begins by wanting the log to herself and ends by welcoming the others.",
           "evidenceLinks": [
@@ -199,18 +211,6 @@
           "distractorRole": null
         },
         {
-          "text": "She is afraid at first, but becomes brave by the end.",
-          "isCorrect": false,
-          "rationale": "Rabbit is annoyed, not mainly afraid.",
-          "evidenceLinks": [
-            {
-              "evidenceKind": "scene_synthesis",
-              "sceneId": "scene_01"
-            }
-          ],
-          "distractorRole": "wrong_emphasis"
-        },
-        {
           "text": "She is friendly at first, but becomes angry by the end.",
           "isCorrect": false,
           "rationale": "Rabbit changes in the opposite direction.",
@@ -223,7 +223,7 @@
           "distractorRole": "opposite_claim"
         },
         {
-          "text": "She is sleepy the whole play and never changes.",
+          "text": "She stays sleepy for most of the play and hardly changes.",
           "isCorrect": false,
           "rationale": "Rabbit clearly changes by the end of the play.",
           "evidenceLinks": [
@@ -255,35 +255,13 @@
       "dokLevel": 2,
       "studentFacingPrompt": "Why do Hedgehog and Mouse come to Rabbit's log?",
       "answerChoicesJson": [
-        "The storm has flooded their own homes.",
         "They want to play a game with Rabbit.",
         "Rabbit invited them to a party.",
+        "The storm has flooded their own homes.",
         "They are looking for food to eat."
       ],
-      "correctIndex": 0,
+      "correctIndex": 2,
       "structuredChoicesJson": [
-        {
-          "text": "The storm has flooded their own homes.",
-          "isCorrect": true,
-          "rationale": "Hedgehog and Mouse both say water has ruined their homes.",
-          "evidenceLinks": [
-            {
-              "evidenceKind": "spoken_line",
-              "sceneId": "scene_02",
-              "lineIndex": 2,
-              "speaker": "HEDGEHOG",
-              "quotedSpan": "The rain has flooded my burrow and soaked my whole bed of leaves."
-            },
-            {
-              "evidenceKind": "spoken_line",
-              "sceneId": "scene_02",
-              "lineIndex": 3,
-              "speaker": "MOUSE",
-              "quotedSpan": "The water washed right through my little nest."
-            }
-          ],
-          "distractorRole": null
-        },
         {
           "text": "They want to play a game with Rabbit.",
           "isCorrect": false,
@@ -313,6 +291,28 @@
             }
           ],
           "distractorRole": "opposite_claim"
+        },
+        {
+          "text": "The storm has flooded their own homes.",
+          "isCorrect": true,
+          "rationale": "Hedgehog and Mouse both say water has ruined their homes.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "spoken_line",
+              "sceneId": "scene_02",
+              "lineIndex": 2,
+              "speaker": "HEDGEHOG",
+              "quotedSpan": "The rain has flooded my burrow and soaked my whole bed of leaves."
+            },
+            {
+              "evidenceKind": "spoken_line",
+              "sceneId": "scene_02",
+              "lineIndex": 3,
+              "speaker": "MOUSE",
+              "quotedSpan": "The water washed right through my little nest."
+            }
+          ],
+          "distractorRole": null
         },
         {
           "text": "They are looking for food to eat.",
@@ -350,27 +350,13 @@
       "dokLevel": 2,
       "studentFacingPrompt": "Read this stage direction from Scene 3: [Then RABBIT turns and looks at the shivering mouse. Slowly, her frown begins to soften.] What does it show about Rabbit?",
       "answerChoicesJson": [
-        "She is beginning to feel sorry for the cold mouse.",
         "She is getting ready to leave the log.",
         "She is falling asleep.",
-        "She is angry that the mouse is there."
+        "She is angry that the cold mouse is there.",
+        "She starts to feel sorry for the mouse."
       ],
-      "correctIndex": 0,
+      "correctIndex": 3,
       "structuredChoicesJson": [
-        {
-          "text": "She is beginning to feel sorry for the cold mouse.",
-          "isCorrect": true,
-          "rationale": "Rabbit notices Mouse is cold and begins to soften.",
-          "evidenceLinks": [
-            {
-              "evidenceKind": "stage_direction",
-              "sceneId": "scene_03",
-              "lineIndex": 3,
-              "quotedSpan": "[For a long moment, no one speaks. Then RABBIT turns and looks at the shivering mouse. Slowly, her frown begins to soften.]"
-            }
-          ],
-          "distractorRole": null
-        },
         {
           "text": "She is getting ready to leave the log.",
           "isCorrect": false,
@@ -402,7 +388,7 @@
           "distractorRole": "plausible_misreading"
         },
         {
-          "text": "She is angry that the mouse is there.",
+          "text": "She is angry that the cold mouse is there.",
           "isCorrect": false,
           "rationale": "Her frown softens, so she is becoming less angry.",
           "evidenceLinks": [
@@ -414,6 +400,20 @@
             }
           ],
           "distractorRole": "opposite_claim"
+        },
+        {
+          "text": "She starts to feel sorry for the mouse.",
+          "isCorrect": true,
+          "rationale": "Rabbit notices Mouse is cold and begins to soften.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "stage_direction",
+              "sceneId": "scene_03",
+              "lineIndex": 3,
+              "quotedSpan": "[For a long moment, no one speaks. Then RABBIT turns and looks at the shivering mouse. Slowly, her frown begins to soften.]"
+            }
+          ],
+          "distractorRole": null
         }
       ],
       "pointValue": 1
@@ -435,7 +435,7 @@
       "targetWordOrPhrase": "shuffle",
       "studentFacingPrompt": "In Scene 2, the animals \"shuffle and bump in the dark.\" What does shuffle mean here?",
       "answerChoicesJson": [
-        "to move slowly with small steps",
+        "to walk with small steps",
         "to jump high into the air",
         "to fall fast asleep",
         "to shout very loudly"
@@ -443,7 +443,7 @@
       "correctIndex": 0,
       "structuredChoicesJson": [
         {
-          "text": "to move slowly with small steps",
+          "text": "to walk with small steps",
           "isCorrect": true,
           "rationale": "The animals are trying to find places in the dark by moving around carefully.",
           "evidenceLinks": [
@@ -520,15 +520,30 @@
       "dokLevel": 2,
       "studentFacingPrompt": "What finally makes Rabbit decide to let the mouse into the middle of the log?",
       "answerChoicesJson": [
-        "She sees how cold and frightened the mouse is.",
         "Squirrel tells her she has to.",
-        "The rain stops and there is more room.",
+        "She sees how cold and scared the mouse is.",
+        "The rain finally stops and there is more room.",
         "Hedgehog promises to leave."
       ],
-      "correctIndex": 0,
+      "correctIndex": 1,
       "structuredChoicesJson": [
         {
-          "text": "She sees how cold and frightened the mouse is.",
+          "text": "Squirrel tells her she has to.",
+          "isCorrect": false,
+          "rationale": "Squirrel helps make room, but he does not order Rabbit to let Mouse stay.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "spoken_line",
+              "sceneId": "scene_02",
+              "lineIndex": 5,
+              "speaker": "SQUIRREL",
+              "quotedSpan": "We can at least try."
+            }
+          ],
+          "distractorRole": "unsupported_inference"
+        },
+        {
+          "text": "She sees how cold and scared the mouse is.",
           "isCorrect": true,
           "rationale": "Mouse says she is cold, and Rabbit's frown softens before she invites Mouse into the middle.",
           "evidenceLinks": [
@@ -556,22 +571,7 @@
           "distractorRole": null
         },
         {
-          "text": "Squirrel tells her she has to.",
-          "isCorrect": false,
-          "rationale": "Squirrel helps make room, but he does not order Rabbit to let Mouse stay.",
-          "evidenceLinks": [
-            {
-              "evidenceKind": "spoken_line",
-              "sceneId": "scene_02",
-              "lineIndex": 5,
-              "speaker": "SQUIRREL",
-              "quotedSpan": "We can at least try."
-            }
-          ],
-          "distractorRole": "unsupported_inference"
-        },
-        {
-          "text": "The rain stops and there is more room.",
+          "text": "The rain finally stops and there is more room.",
           "isCorrect": false,
           "rationale": "The storm is still raging when Rabbit changes her mind.",
           "evidenceLinks": [
@@ -631,25 +631,29 @@
             "text": "She becomes more willing to share her log with others.",
             "distractorRole": null,
             "supportsPartA": true,
-            "rationale": "Correct."
+            "rationale": "Correct.",
+            "isCorrect": true
           },
           {
             "text": "She becomes more afraid of the storm outside.",
             "distractorRole": "wrong_emphasis",
             "supportsPartA": false,
-            "rationale": "Distractor."
+            "rationale": "Distractor.",
+            "isCorrect": false
           },
           {
             "text": "She decides that the log is too small for any animal.",
             "distractorRole": "opposite_claim",
             "supportsPartA": false,
-            "rationale": "Distractor."
+            "rationale": "Distractor.",
+            "isCorrect": false
           },
           {
             "text": "She learns that Hedgehog should leave the log first.",
             "distractorRole": "unsupported_inference",
             "supportsPartA": false,
-            "rationale": "Distractor."
+            "rationale": "Distractor.",
+            "isCorrect": false
           }
         ],
         "correctIndex": 0
@@ -743,7 +747,8 @@
             {
               "text": "She learns that Hedgehog should leave the log first."
             }
-          ]
+          ],
+          "correctIndex": 0
         },
         "partB": {
           "instruction": "Which two details best support the answer in Part A?",
