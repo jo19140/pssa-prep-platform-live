@@ -295,7 +295,10 @@ export function canonicalPseudowordsForTargetPatterns(
   const firstEight = seedNonwords.slice(0, 8);
   if (firstEight.length >= 8 && firstEight.every((word) => {
     const detected = selectPseudowordPattern(word, pseudowordPatterns);
-    return Boolean(detected && targetPatterns.includes(detected) && validatePseudowordCandidate(word, detected, { strictLexicon: true }).valid);
+    return Boolean(detected && targetPatterns.includes(detected) && validatePseudowordCandidate(word, detected, {
+      strictLexicon: true,
+      failClosedOnMissingLexicon: false,
+    }).valid);
   })) {
     return firstEight;
   }

@@ -18,6 +18,7 @@ export type PseudowordValidationResult = {
 
 export type PseudowordValidationOptions = {
   strictLexicon?: boolean;
+  failClosedOnMissingLexicon?: boolean;
   lexicon?: {
     core?: Set<string>;
     homophone?: Set<string>;
@@ -104,6 +105,10 @@ let rawCmudictWordCache: RawCmudictWordCache | null = null;
 export function __setPseudowordLexiconPathsForTest(paths: { cmudictPath?: string; subtlexPath?: string } | null) {
   cmudictPath = paths?.cmudictPath ?? path.resolve("data/phonogram/cmudict.json");
   subtlexPath = paths?.subtlexPath ?? path.resolve("data/phonogram/subtlex.csv");
+  __resetPseudowordLexiconCachesForTests();
+}
+
+export function __resetPseudowordLexiconCachesForTests() {
   homophoneLexiconCache = null;
   cmudictReverseCache = null;
   rawCmudictWordCache = null;
@@ -186,9 +191,10 @@ export function validatePseudowordCandidate(
 ): PseudowordValidationResult {
   const normalized = pseudoword.toLowerCase().trim();
   const coreLexicon = opts.lexicon?.core ?? CORE_REAL_WORDS;
+  const throwIfUnavailable = opts.failClosedOnMissingLexicon !== false;
   const homophoneLexiconResult = opts.lexicon?.homophone
     ? { words: opts.lexicon.homophone, unavailable: false as const }
-    : getHomophoneLexicon(opts.strictLexicon === true);
+    : getHomophoneLexicon(throwIfUnavailable);
   const homophoneLexicon = homophoneLexiconResult.unavailable ? coreLexicon : homophoneLexiconResult.words;
   const issues: string[] = [];
   const blockingIssues: string[] = [];
@@ -213,7 +219,7 @@ export function validatePseudowordCandidate(
     blockingIssues.push(`pseudoword is a real word ("${normalized}")`);
   }
   if (!collidesWith && normalized && targetPattern === "y_long_i" && opts.strictLexicon === true) {
-    const rawCmudictWords = getRawCmudictWords(true);
+    const rawCmudictWords = getRawCmudictWords(throwIfUnavailable);
     if (rawCmudictWords.unavailable) {
       issues.push("CMUDICT_WORD_LEXICON_UNAVAILABLE");
     } else if (rawCmudictWords.words.has(normalized)) {
@@ -238,7 +244,7 @@ export function validatePseudowordCandidate(
     } else {
       const decoded = decodePatternPseudowordPronunciation(normalized, targetPattern);
       if (decoded) {
-        const reverse = getCmudictReverseIndex(opts.strictLexicon === true);
+        const reverse = getCmudictReverseIndex(throwIfUnavailable);
         if (reverse.unavailable) {
           issues.push("CMUDICT_PHONEME_LEXICON_UNAVAILABLE");
         } else {
@@ -348,7 +354,7 @@ function decodeConsonantString(value: string): string[] {
   return phonemes;
 }
 
-function getHomophoneLexicon(strictLexicon: boolean): { words: Set<string>; unavailable: false } | { words: Set<string>; unavailable: true } {
+function getHomophoneLexicon(throwIfUnavailable: boolean): { words: Set<string>; unavailable: false } | { words: Set<string>; unavailable: true } {
   if (!homophoneLexiconCache) {
     try {
       homophoneLexiconCache = { status: "loaded", words: loadFrequencyGatedHomophoneLexicon() };
@@ -360,13 +366,13 @@ function getHomophoneLexicon(strictLexicon: boolean): { words: Set<string>; unav
   if (homophoneLexiconCache.status === "loaded") {
     return { words: homophoneLexiconCache.words, unavailable: false };
   }
-  if (strictLexicon) {
+  if (throwIfUnavailable) {
     throw new Error(`HOMOPHONE_LEXICON_UNAVAILABLE: ${homophoneLexiconCache.error.message}`);
   }
   return { words: CORE_REAL_WORDS, unavailable: true };
 }
 
-function getCmudictReverseIndex(strictLexicon: boolean): { byPronunciation: Map<string, Set<string>>; unavailable: false } | { byPronunciation: Map<string, Set<string>>; unavailable: true } {
+function getCmudictReverseIndex(throwIfUnavailable: boolean): { byPronunciation: Map<string, Set<string>>; unavailable: false } | { byPronunciation: Map<string, Set<string>>; unavailable: true } {
   if (!cmudictReverseCache) {
     try {
       cmudictReverseCache = { status: "loaded", byPronunciation: loadCmudictReverseIndex() };
@@ -378,13 +384,13 @@ function getCmudictReverseIndex(strictLexicon: boolean): { byPronunciation: Map<
   if (cmudictReverseCache.status === "loaded") {
     return { byPronunciation: cmudictReverseCache.byPronunciation, unavailable: false };
   }
-  if (strictLexicon) {
+  if (throwIfUnavailable) {
     throw new Error(`CMUDICT_PHONEME_LEXICON_UNAVAILABLE: ${cmudictReverseCache.error.message}`);
   }
   return { byPronunciation: new Map(), unavailable: true };
 }
 
-function getRawCmudictWords(strictLexicon: boolean): { words: Set<string>; unavailable: false } | { words: Set<string>; unavailable: true } {
+function getRawCmudictWords(throwIfUnavailable: boolean): { words: Set<string>; unavailable: false } | { words: Set<string>; unavailable: true } {
   if (!rawCmudictWordCache) {
     try {
       rawCmudictWordCache = { status: "loaded", words: loadRawCmudictWords() };
@@ -396,7 +402,7 @@ function getRawCmudictWords(strictLexicon: boolean): { words: Set<string>; unava
   if (rawCmudictWordCache.status === "loaded") {
     return { words: rawCmudictWordCache.words, unavailable: false };
   }
-  if (strictLexicon) {
+  if (throwIfUnavailable) {
     throw new Error(`CMUDICT_WORD_LEXICON_UNAVAILABLE: ${rawCmudictWordCache.error.message}`);
   }
   return { words: new Set(), unavailable: true };
