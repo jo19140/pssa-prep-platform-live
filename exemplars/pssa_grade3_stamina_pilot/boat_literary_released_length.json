@@ -856,35 +856,23 @@
       "scoreBandExamples": [
         {
           "band": 3,
-          "response": "At first June feels embarrassed because her boat looks plain. By the end, she is proud because it stays floating and wins. One detail is june feels embarrassed and almost takes the boat home Another detail is june's boat is the only one left and wins",
-          "why": "Explains both sides of the change and uses two details.",
-          "supportIdsUsed": [
-            "boat_sa_s1",
-            "boat_sa_s2"
-          ]
+          "response": "At first June is embarrassed because her milk-jug boat looks plain next to the fancy ones. By the end she is proud because her boat is the last one still floating and wins.",
+          "why": "Explains both sides of the change with two details."
         },
         {
           "band": 2,
-          "response": "At first June feels embarrassed because her boat looks plain. By the end, she is proud because it stays floating and wins. One detail is june feels embarrassed and almost takes the boat home",
-          "why": "Explains the change with one clear support.",
-          "supportIdsUsed": [
-            "boat_sa_s1"
-          ]
+          "response": "June is embarrassed at first because her boat looks plain, but she is proud by the end.",
+          "why": "Names the change and gives one clear support, but does not fully support both sides."
         },
         {
           "band": 1,
-          "response": "My face went hot, and for one long second I almost picked my boat back up and walked home.",
-          "why": "Mostly copied details with little explanation.",
-          "supportIdsUsed": [
-            "boat_sa_s1"
-          ],
-          "copyOnly": true
+          "response": "June's boat won the race.",
+          "why": "One partial detail with little explanation of the change."
         },
         {
           "band": 0,
-          "response": "This answer is unrelated to the passage.",
-          "why": "Unsupported or inaccurate.",
-          "supportIdsUsed": []
+          "response": "June likes building boats.",
+          "why": "Unsupported or inaccurate."
         }
       ],
       "responseSpecJson": {

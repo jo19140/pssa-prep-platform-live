@@ -1072,6 +1072,36 @@ assert.equal(JSON.stringify(owlCompletionEbsr).includes("Okafor"), false, "owl E
 assert.equal(JSON.stringify(owlCompletionEbsr).includes("thousand mice"), false, "owl EBSR must not use stale thousand-mice draft wording");
 projectPssaStudentItem(owlCompletionEbsr);
 
+const staminaShortAnswers = [
+  { label: "maple", passage: syrupPassage, item: syrupItems.find((item: any) => (item.itemId ?? item.id) === "pssa_stamina_item_g3_syrup_sa_01"), expectedEc: "E03.B-K.1.1.3" },
+  { label: "boat", passage: boatPassage, item: boatItems.find((item: any) => (item.itemId ?? item.id) === "pssa_stamina_item_g3_boat_sa_01"), expectedEc: "E03.A-K.1.1.3" },
+  { label: "owl", passage: undefined, item: owlItems.find((item: any) => (item.itemId ?? item.id) === "pssa_stamina_item_g3_owls_06"), expectedEc: "E03.B-C.3.1.2" },
+  { label: "rabbit", passage: rabbitPassage, item: rabbitItems.find((item: any) => (item.itemId ?? item.id) === "pssa_stamina_item_g3_rabbit_sa_01"), expectedEc: "E03.A-K.1.1.3" },
+];
+for (const spec of staminaShortAnswers) {
+  assert(spec.item, `${spec.label} stamina SHORT_ANSWER must exist`);
+  assert.equal(spec.item.interactionType, "SHORT_ANSWER", `${spec.label} item must remain SHORT_ANSWER`);
+  assert.equal(spec.item.studentFacingPrompt, spec.item.stem, `${spec.label} SHORT_ANSWER must carry matching studentFacingPrompt and stem`);
+  assert.equal(String(spec.item.studentFacingPrompt ?? "").trim().length > 0, true, `${spec.label} SHORT_ANSWER prompt must be non-empty`);
+  assert.equal(spec.item.eligibleContent, spec.expectedEc, `${spec.label} SHORT_ANSWER EC must match the normalized metadata`);
+  assert.deepEqual(spec.item.scoreBandExamples.map((row: any) => row.band), [3, 2, 1, 0], `${spec.label} SHORT_ANSWER must carry foundation-style 3/2/1/0 scoreBandExamples`);
+  assert.equal(evaluatePssaShortAnswerBandsNonempty(spec.item), "PASS", `${spec.label} SHORT_ANSWER score bands must be non-empty`);
+  assert.equal(spec.item.scoringJson.scoreStatus, "pending_human_scoring", `${spec.label} SHORT_ANSWER must stay pending human scoring`);
+  assert.equal((projectPssaStudentItem(spec.item).responseSpec as { stem: string }).stem, spec.item.stem, `${spec.label} SHORT_ANSWER student DTO must read the non-empty stem`);
+}
+assert.equal(
+  buildItemEcSkillMatchReport([staminaShortAnswers[0].item], [syrupPassage], ecCatalog).some((row) => row.skillMatchResult === "FAIL"),
+  false,
+  "maple process SHORT_ANSWER retagged to E03.B-K.1.1.3 must pass EC-skill-match",
+);
+const staminaReviewerDraft = fs.readFileSync("reports/pssa_stamina_item_set_completion_reviewer_draft.md", "utf8");
+assert.equal(staminaReviewerDraft.includes("### pssa_stamina_item_g3_owls_06"), true, "reviewer draft must include the owl SHORT_ANSWER item");
+assert.equal(staminaReviewerDraft.includes("Prompt: Use details from both passages to explain why owls can be helpful hunters."), true, "reviewer draft must render the owl SHORT_ANSWER prompt");
+assert.equal(/\*\*\*\*/.test(staminaReviewerDraft), false, "reviewer draft must not contain blank **** prompt placeholders");
+for (const band of [3, 2, 1, 0]) {
+  assert.equal(staminaReviewerDraft.includes(`- ${band}:`), true, `reviewer draft must render score band ${band}`);
+}
+
 const grade3Plan = buildPlan(3);
 assert.equal(grade3Plan.hashStable, true, "stamina fixture must keep foundation import hashes stable");
 assert.deepEqual(grade3Plan.manifest.map((row) => [row.recordType, row.count, row.expectedCount]), [

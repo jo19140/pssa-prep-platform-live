@@ -712,7 +712,8 @@
       "scoringJson": {
         "scoreStatus": "pending_human_scoring",
         "totalPoints": 3
-      }
+      },
+      "studentFacingPrompt": "Use details from both passages to explain why owls can be helpful hunters."
     },
     {
       "id": "pssa_stamina_item_g3_owls_ebsr_01",

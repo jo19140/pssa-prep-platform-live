@@ -815,7 +815,7 @@
       "interactionSubtype": "text_supported_short_answer",
       "passageId": "pssa_stamina_psg_g3_syrup_v4",
       "passageTitle": "Sweet Work: How Sap Becomes Syrup",
-      "eligibleContent": "E03.B-K.1.1.2",
+      "eligibleContent": "E03.B-K.1.1.3",
       "assessmentAnchor": "E03.B-K",
       "reportingCategory": "B",
       "stem": "Explain how sap changes into syrup. Use two details from the passage to support your answer.",
@@ -852,35 +852,23 @@
       "scoreBandExamples": [
         {
           "band": 3,
-          "response": "Sap starts as thin sugar-water. The right weather helps it flow from the tree, and boiling removes water so it becomes thicker and sweeter. One detail is freezing nights followed by warmer days help sap flow Another detail is boiling removes water as steam",
-          "why": "Explains the process clearly and uses two details (freeze/warm weather and boiling/evaporation).",
-          "supportIdsUsed": [
-            "syrup_sa_s1",
-            "syrup_sa_s2"
-          ]
+          "response": "Sap is thin and watery when it leaves the tree. Freezing nights and warm days help the sap flow, and boiling it for a long time makes the water turn to steam and leave, so the sap gets thick and sweet.",
+          "why": "Explains the process and uses two details (weather-driven flow + boiling/evaporation)."
         },
         {
           "band": 2,
-          "response": "Sap starts as thin sugar-water. The right weather helps it flow from the tree, and boiling removes water so it becomes thicker and sweeter. One detail is freezing nights followed by warmer days help sap flow",
-          "why": "Mostly correct explanation with one clear support.",
-          "supportIdsUsed": [
-            "syrup_sa_s1"
-          ]
+          "response": "The sap is boiled for a long time until the water leaves and it turns into syrup.",
+          "why": "Mostly correct but uses one detail (boiling), not the weather."
         },
         {
           "band": 1,
-          "response": "The trees need a very particular pattern of weather: freezing nights followed by warmer days above freezing.",
-          "why": "One copied or partial detail with little explanation.",
-          "supportIdsUsed": [
-            "syrup_sa_s1"
-          ],
-          "copyOnly": true
+          "response": "The water turns into steam.",
+          "why": "One partial detail with little explanation of the process."
         },
         {
           "band": 0,
-          "response": "This answer is unrelated to the passage.",
-          "why": "Unsupported or unrelated.",
-          "supportIdsUsed": []
+          "response": "Maple syrup is sweet and good on pancakes.",
+          "why": "Unsupported / unrelated to how sap becomes syrup."
         }
       ],
       "responseSpecJson": {

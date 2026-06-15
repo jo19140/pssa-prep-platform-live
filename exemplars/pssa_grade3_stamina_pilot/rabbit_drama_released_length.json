@@ -902,35 +902,23 @@
       "scoreBandExamples": [
         {
           "band": 3,
-          "response": "Rabbit first wants the log for herself. Later, when she lets everyone stay, the animals help one another stay warm and safe. One detail is rabbit first calls the log a perfect home for one careful rabbit Another detail is rabbit later tells mouse to come into the warm middle",
-          "why": "Explains Rabbit's change and uses two details (wanting the log for one rabbit; later letting Mouse into the middle or noticing the log feels bigger).",
-          "supportIdsUsed": [
-            "rabbit_sa_s1",
-            "rabbit_sa_s2"
-          ]
+          "response": "At first Rabbit wants the log all to herself and does not want to share. Later she lets the others stay, and they keep each other warm, so she learns that sharing helps everyone.",
+          "why": "Explains the change and uses two details (wanting it alone + sharing keeps everyone warm/safe)."
         },
         {
           "band": 2,
-          "response": "Rabbit first wants the log for herself. Later, when she lets everyone stay, the animals help one another stay warm and safe. One detail is rabbit first calls the log a perfect home for one careful rabbit",
-          "why": "Explains the change with one clear support.",
-          "supportIdsUsed": [
-            "rabbit_sa_s1"
-          ]
+          "response": "Rabbit shares the log and the animals stay warm together.",
+          "why": "Shows the result with one clear support but not the change from the start."
         },
         {
           "band": 1,
-          "response": "A perfect home for one careful rabbit, just the way I like it.",
-          "why": "Mostly copied detail with little explanation.",
-          "supportIdsUsed": [
-            "rabbit_sa_s1"
-          ],
-          "copyOnly": true
+          "response": "Rabbit lets the mouse come in.",
+          "why": "One partial detail with little explanation."
         },
         {
           "band": 0,
-          "response": "This answer is unrelated to the passage.",
-          "why": "Unsupported or inaccurate.",
-          "supportIdsUsed": []
+          "response": "Rabbit lives in a log in the woods.",
+          "why": "Unsupported or unrelated."
         }
       ],
       "responseSpecJson": {

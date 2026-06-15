@@ -24,15 +24,15 @@ Correct response: partAIndex=0; partBIndices=[0, 2]
 
 ### pssa_stamina_item_g3_syrup_sa_01
 Type: SHORT_ANSWER
-EC: E03.B-K.1.1.2
+EC: E03.B-K.1.1.3
 
 Prompt: Explain how sap changes into syrup. Use two details from the passage to support your answer.
 Expected core: Sap starts as thin sugar-water. The right weather helps it flow from the tree, and boiling removes water so it becomes thicker and sweeter.
-Rubric:
-- 3: Explains the process clearly and uses two details (freeze/warm weather and boiling/evaporation).
-- 2: Mostly correct explanation with one clear support.
-- 1: One copied or partial detail with little explanation.
-- 0: Unsupported or unrelated.
+Score band examples:
+- 3: Sap is thin and watery when it leaves the tree. Freezing nights and warm days help the sap flow, and boiling it for a long time makes the water turn to steam and leave, so the sap gets thick and sweet. [Explains the process and uses two details (weather-driven flow + boiling/evaporation).]
+- 2: The sap is boiled for a long time until the water leaves and it turns into syrup. [Mostly correct but uses one detail (boiling), not the weather.]
+- 1: The water turns into steam. [One partial detail with little explanation of the process.]
+- 0: Maple syrup is sweet and good on pancakes. [Unsupported / unrelated to how sap becomes syrup.]
 
 ## The Boat That Wouldn't Quit
 Source: `boat_literary_released_length.json`
@@ -60,11 +60,11 @@ EC: E03.A-K.1.1.3
 
 Prompt: How does June's opinion of her boat change from the beginning of the race to the end? Use two details from the story.
 Expected core: At first June feels embarrassed because her boat looks plain. By the end, she is proud because it stays floating and wins.
-Rubric:
-- 3: Explains both sides of the change and uses two details.
-- 2: Explains the change with one clear support.
-- 1: Mostly copied details with little explanation.
-- 0: Unsupported or inaccurate.
+Score band examples:
+- 3: At first June is embarrassed because her milk-jug boat looks plain next to the fancy ones. By the end she is proud because her boat is the last one still floating and wins. [Explains both sides of the change with two details.]
+- 2: June is embarrassed at first because her boat looks plain, but she is proud by the end. [Names the change and gives one clear support, but does not fully support both sides.]
+- 1: June's boat won the race. [One partial detail with little explanation of the change.]
+- 0: June likes building boats. [Unsupported or inaccurate.]
 
 ## Owl Adaptations and Barn Helpers
 Source: `owls_paired_released_length.json`
@@ -85,6 +85,18 @@ Part B: Choose two details, one from each passage, that best support the answer 
 - 2. [KEY] Passage 2: "But an owl family can reduce the number of rodents without leaving poison in the field."
 - 3. Passage 2: "A nest box gives the owls a safe place to raise young when old barns or hollow trees are hard to find."
 Correct response: partAIndex=0; partBIndices=[0, 2]
+
+### pssa_stamina_item_g3_owls_06
+Type: SHORT_ANSWER
+EC: E03.B-C.3.1.2
+
+Prompt: Use details from both passages to explain why owls can be helpful hunters.
+Expected core: Owls have body features that help them hunt at night, and barn owls can help farms by eating rodents.
+Score band examples:
+- 3: Owls are helpful hunters because their eyes, ears, face feathers, and quiet wings help them catch prey at night. Barn owls can then help farms by catching rodents that damage grain and fields. [Uses support from both passages.]
+- 2: Owls hunt quietly at night and barn owls eat rodents on farms. [Uses both passages with less explanation.]
+- 1: Owls eat mice. [Uses one relevant idea but not both passages.]
+- 0: Owls live in trees. [Does not answer with support from the paired passages.]
 
 ## Room for One More
 Source: `rabbit_drama_released_length.json`
@@ -112,8 +124,8 @@ EC: E03.A-K.1.1.3
 
 Prompt: How does Rabbit learn that sharing the log helps everyone? Use two details from the play to support your answer.
 Expected core: Rabbit first wants the log for herself. Later, when she lets everyone stay, the animals help one another stay warm and safe.
-Rubric:
-- 3: Explains Rabbit's change and uses two details (wanting the log for one rabbit; later letting Mouse into the middle or noticing the log feels bigger).
-- 2: Explains the change with one clear support.
-- 1: Mostly copied detail with little explanation.
-- 0: Unsupported or inaccurate.
+Score band examples:
+- 3: At first Rabbit wants the log all to herself and does not want to share. Later she lets the others stay, and they keep each other warm, so she learns that sharing helps everyone. [Explains the change and uses two details (wanting it alone + sharing keeps everyone warm/safe).]
+- 2: Rabbit shares the log and the animals stay warm together. [Shows the result with one clear support but not the change from the start.]
+- 1: Rabbit lets the mouse come in. [One partial detail with little explanation.]
+- 0: Rabbit lives in a log in the woods. [Unsupported or unrelated.]
