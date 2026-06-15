@@ -38,7 +38,9 @@ import {
   verifyPssaPassageGroupMemberSnapshots,
   type PairedPassageGroupInput,
 } from "./content/lib/pssa-paired-passage-gates";
+import { projectPssaStudentItem } from "../lib/content/pssaStudentDto";
 import {
+  buildPssaDramaLineMap,
   buildPssaStaminaSectionMap,
   evaluatePssaDomainFactCheckRequired,
   evaluatePssaItemFootnoteGiveaway,
@@ -47,6 +49,7 @@ import {
   evaluatePssaStaminaGates,
   evaluatePssaTextFeatureIntegrity,
   evaluatePssaTextFeatureItemLink,
+  pssaDramaEvidenceKey,
 } from "./content/lib/pssa-stamina-gates";
 
 assertPssaItemTypeMockContract();
@@ -231,6 +234,86 @@ assert.equal(buildMcqPassageSpecificityReport([readingItem({
     ? { ...choice, text: "The quiet library display helped visitors compare several drawings.", evidenceLinks: [{ evidenceKind: "paragraph_synthesis", sectionId: "paragraph_02" }] }
     : choice),
 })], [passage]).some((row) => row.ruleId === "PSSA_MCQ_PASSAGE_SPECIFIC_CHOICES" && row.result === "FAIL"), true, "synthesis skip must be driven by correct-choice evidence only");
+
+const literalDetailFailureRows = buildMcqPassageSpecificityReport([readingItem({
+  id: "literal-detail-generic-choices",
+  answerChoicesJson: [
+    "The quiet library display helped visitors compare several drawings.",
+    "The bright kitchen timer helped cooks plan several lunches.",
+    "The small garden marker helped neighbors label several flowers.",
+    "The local music poster helped families choose several concerts.",
+  ],
+  structuredChoicesJson: null,
+  comprehensionKind: "literal_detail",
+})], [passage]);
+assert.deepEqual(
+  literalDetailFailureRows
+    .filter((row) => row.ruleId === "PSSA_MCQ_PASSAGE_SPECIFIC_CHOICES")
+    .map((row) => [row.result, row.severity, row.evidence, row.notes]),
+  [["FAIL", "BLOCKER", "concreteChoices=0/4", "Each choice needs at least two passage-specific content words, and at least three choices need concrete passage details."]],
+  "literal-detail generic-choice MCQs must still fail the byte-identical concreteness rule",
+);
+
+const inferenceWithoutRationaleRows = buildMcqPassageSpecificityReport([readingItem({
+  id: "inference-without-rationale",
+  answerChoicesJson: [
+    "The quiet library display helped visitors compare several drawings.",
+    "The bright kitchen timer helped cooks plan several lunches.",
+    "The small garden marker helped neighbors label several flowers.",
+    "The local music poster helped families choose several concerts.",
+  ],
+  structuredChoicesJson: null,
+  comprehensionKind: "inference",
+  comprehensionKindRationale: " ",
+})], [passage]);
+assert.equal(
+  inferenceWithoutRationaleRows.some((row) => row.ruleId === "PSSA_MCQ_COMPREHENSION_KIND_RATIONALE_REQUIRED" && row.result === "FAIL" && row.severity === "BLOCKER"),
+  true,
+  "inference/interpretation labels cannot skip without a non-empty rationale",
+);
+assert.equal(
+  inferenceWithoutRationaleRows.some((row) => row.ruleId === "PSSA_MCQ_PASSAGE_SPECIFIC_CHOICES" && row.result === "SKIP"),
+  false,
+  "missing rationale must prevent the inference/interpretation skip",
+);
+
+const mislabeledInferenceRows = buildMcqPassageSpecificityReport([readingItem({
+  id: "literal-mislabeled-inference-visible",
+  answerChoicesJson: [
+    "The quiet library display helped visitors compare several drawings.",
+    "The bright kitchen timer helped cooks plan several lunches.",
+    "The small garden marker helped neighbors label several flowers.",
+    "The local music poster helped families choose several concerts.",
+  ],
+  structuredChoicesJson: null,
+  comprehensionKind: "inference",
+  comprehensionKindRationale: "Reviewer claims this is inferential; visible skip row makes that judgment auditable.",
+})], [passage]);
+assert.deepEqual(
+  mislabeledInferenceRows
+    .filter((row) => row.ruleId === "PSSA_MCQ_PASSAGE_SPECIFIC_CHOICES")
+    .map((row) => [row.result, row.evidence]),
+  [["SKIP", "SKIP_INFERENCE_INTERPRETATION:inference"]],
+  "mislabeled inference items with rationale must be visibly skipped rather than silently clean",
+);
+assert.equal(
+  mislabeledInferenceRows.some((row) => row.ruleId === "PSSA_MCQ_CHOICE_EVIDENCE_LINKS_REQUIRED" && row.result === "FAIL"),
+  true,
+  "the visible inference skip must not bypass the other MCQ evidence blockers",
+);
+
+assert.equal(buildMcqPassageSpecificityReport([readingItem({
+  id: "synthesis-label-does-not-skip",
+  answerChoicesJson: [
+    "The quiet library display helped visitors compare several drawings.",
+    "The bright kitchen timer helped cooks plan several lunches.",
+    "The small garden marker helped neighbors label several flowers.",
+    "The local music poster helped families choose several concerts.",
+  ],
+  structuredChoicesJson: null,
+  comprehensionKind: "synthesis",
+  comprehensionKindRationale: "This label alone must not control the concreteness skip.",
+})], [passage]).some((row) => row.ruleId === "PSSA_MCQ_PASSAGE_SPECIFIC_CHOICES" && row.result === "FAIL"), true, "synthesis labels without synthesis evidence must run the normal concreteness gate");
 
 assert.equal(buildMcqPassageSpecificityReport([readingItem({
   id: "missing-evidence",
@@ -584,15 +667,17 @@ assert.deepEqual(
 );
 assert.deepEqual(
   boatSpecificityRows
+    .filter((row) => row.itemId === "pssa_stamina_item_g3_boat_05" && row.ruleId === "PSSA_MCQ_PASSAGE_SPECIFIC_CHOICES")
+    .map((row) => [row.result, row.evidence]),
+  [["SKIP", "SKIP_INFERENCE_INTERPRETATION:inference"]],
+  "concrete literary inference MCQs must visibly skip choice-concreteness only with explicit comprehensionKind rationale",
+);
+assert.deepEqual(
+  boatSpecificityRows
     .filter((row) => row.itemId === "pssa_stamina_item_g3_boat_04" && row.ruleId === "PSSA_MCQ_PASSAGE_SPECIFIC_CHOICES")
     .map((row) => [row.result, row.evidence]),
   [["SKIP", "vocabulary-in-context item"]],
   "V-family figurative-language MCQs must remain scoped to vocab gates",
-);
-assert.equal(
-  boatSpecificityRows.some((row) => row.itemId === "pssa_stamina_item_g3_boat_05" && row.ruleId === "PSSA_MCQ_PASSAGE_SPECIFIC_CHOICES" && row.result === "FAIL"),
-  false,
-  "concrete literary detail MCQs must still run through passage-specificity rather than being skipped",
 );
 assert.deepEqual(boatSpecificityRows.filter((row) => row.result === "FAIL"), [], "boat literary fixture must pass existing MCQ specificity detectors");
 assert.equal(
@@ -808,14 +893,187 @@ assert.equal(evaluatePssaSectionLookbackBalance({
     evidenceLinks: [{ sectionId: "waiting_for_the_right_weather", evidenceKind: "section_synthesis" }],
   }],
 }]), "FAIL", "released_length itemsets citing only one section must fail lookback balance");
+const rabbitFixture = JSON.parse(fs.readFileSync("exemplars/pssa_grade3_stamina_pilot/rabbit_drama_released_length.json", "utf8"));
+const rabbitPassage = rabbitFixture.passages[0];
+const rabbitItems = rabbitFixture.items;
+assert.equal(rabbitPassage.title, "Room for One More", "drama fixture must encode the signed-off Room for One More passage");
+assert.equal(rabbitPassage.wordCount >= 1000 && rabbitPassage.wordCount <= 1050, true, "signed-off drama fixture must be released-length, not the short substitute");
+assert.equal(rabbitPassage.text.includes("HEDGEHOG — slow, polite, and covered in prickles"), true, "signed-off drama cast must include Hedgehog");
+assert.equal(rabbitPassage.text.includes("SETTING: A hollow log at the edge of the woods."), true, "signed-off drama setting must be the hollow log in an autumn storm");
+assert.equal(/\bMOLE\b/.test(rabbitPassage.text), false, "wrong substitute cast member Mole must not appear");
+assert.equal(/snowy burrow|snow taps|stacked the carrots/i.test(rabbitPassage.text), false, "wrong snowy-burrow substitute markers must not appear");
+const rabbitSections = buildPssaStaminaSectionMap(rabbitPassage);
+assert.deepEqual(
+  rabbitSections.map((section) => section.sectionId),
+  ["front_matter", "scene_01", "scene_02", "scene_03"],
+  "drama scene map must be marker-derived with cast/setting front matter outside scenes",
+);
+assert.deepEqual(
+  rabbitSections.filter((section) => section.sectionId !== "front_matter").map((section) => section.sectionId),
+  ["scene_01", "scene_02", "scene_03"],
+  "drama lookback sections must be explicit scene markers only",
+);
+const rabbitLineMap = buildPssaDramaLineMap(rabbitPassage);
+assert.equal(rabbitLineMap.find((line) => line.sceneId === "scene_01" && line.lineIndex === 4)?.speaker, "SQUIRREL");
+assert.equal(rabbitLineMap.find((line) => line.sceneId === "scene_03" && line.lineIndex === 4)?.speaker, "RABBIT");
+assert.notEqual(
+  pssaDramaEvidenceKey({ evidenceKind: "spoken_line", sceneId: "scene_01", lineIndex: 4, speaker: "SQUIRREL" }),
+  pssaDramaEvidenceKey({ evidenceKind: "spoken_line", sceneId: "scene_03", lineIndex: 4, speaker: "RABBIT" }),
+  "scene-scoped line keys must not collide across real Scene 1 line 4 and Scene 3 line 4",
+);
+assert.equal(
+  pssaDramaEvidenceKey({ evidenceKind: "stage_direction", sceneId: "scene_03", lineIndex: 3 }),
+  "scene_03:3",
+  "stage directions use the same sceneId:lineIndex address space without speaker",
+);
+assert.equal(
+  rabbitItems.find((item: any) => item.id === "pssa_stamina_item_g3_rabbit_01").structuredChoicesJson[0].evidenceLinks.every((link: any) =>
+    (link.evidenceKind === "whole_play_synthesis" && !("quotedSpan" in link) && !("lineIndex" in link) && !("sceneId" in link))
+    || (link.evidenceKind === "scene_synthesis" && link.sceneId && !("quotedSpan" in link) && !("lineIndex" in link))
+  ),
+  true,
+  "drama theme synthesis uses whole_play_synthesis plus explicit scene_synthesis links without fabricated spans",
+);
+const rabbitSpecificityRows = buildMcqPassageSpecificityReport(rabbitItems, [rabbitPassage]);
+assert.deepEqual(
+  rabbitSpecificityRows
+    .filter((row) => row.itemId === "pssa_stamina_item_g3_rabbit_01" && row.ruleId === "PSSA_MCQ_PASSAGE_SPECIFIC_CHOICES")
+    .map((row) => [row.result, row.evidence]),
+  [["SKIP", "synthesis evidence item"]],
+  "drama theme MCQs skip concreteness only through correct-choice whole_play/scene synthesis evidence",
+);
+assert.deepEqual(
+  rabbitSpecificityRows
+    .filter((row) => row.itemId === "pssa_stamina_item_g3_rabbit_02" && row.ruleId === "PSSA_MCQ_PASSAGE_SPECIFIC_CHOICES")
+    .map((row) => [row.result, row.evidence]),
+  [["SKIP", "synthesis evidence item"]],
+  "drama character-change MCQs skip concreteness only through explicit correct-choice scene_synthesis evidence",
+);
+assert.deepEqual(
+  rabbitSpecificityRows
+    .filter((row) => row.itemId === "pssa_stamina_item_g3_rabbit_05" && row.ruleId === "PSSA_MCQ_PASSAGE_SPECIFIC_CHOICES")
+    .map((row) => [row.result, row.evidence]),
+  [["SKIP", "vocabulary-in-context item"]],
+  "drama V-family vocab items retain the anchored vocab skip",
+);
+assert.deepEqual(
+  rabbitSpecificityRows
+    .filter((row) => ["pssa_stamina_item_g3_rabbit_03", "pssa_stamina_item_g3_rabbit_04", "pssa_stamina_item_g3_rabbit_06"].includes(row.itemId) && row.ruleId === "PSSA_MCQ_PASSAGE_SPECIFIC_CHOICES")
+    .map((row) => [row.itemId, row.result, row.evidence]),
+  [
+    ["pssa_stamina_item_g3_rabbit_03", "SKIP", "SKIP_INFERENCE_INTERPRETATION:inference"],
+    ["pssa_stamina_item_g3_rabbit_04", "SKIP", "SKIP_INFERENCE_INTERPRETATION:interpretation"],
+    ["pssa_stamina_item_g3_rabbit_06", "SKIP", "SKIP_INFERENCE_INTERPRETATION:inference"],
+  ],
+  "drama inference/interpretation MCQs visibly skip choice-concreteness only with explicit comprehensionKind rationales",
+);
+assert.equal(
+  rabbitSpecificityRows.some((row) => row.itemId === "pssa_stamina_item_g3_rabbit_05" && row.ruleId === "PSSA_MCQ_EVIDENCE_SPAN_REUSED" && row.result === "FAIL"),
+  false,
+  "drama vocab distractors should not reuse one evidence span for every choice",
+);
+const rabbitStaminaRows = evaluatePssaStaminaGates(rabbitPassage, rabbitItems);
+assert.equal(rabbitStaminaRows.find((row) => row.gateId === "PSSA_DOMAIN_FACT_CHECK_REQUIRED")?.status, "SKIP", "drama fiction must not require fact-check notes unless explicitly flagged");
+assert.equal(rabbitStaminaRows.find((row) => row.gateId === "PSSA_TEXT_FEATURE_INTEGRITY")?.status, "PASS", "drama feature metadata must use cast_list/scene_marker/stage_direction records");
+assert.equal(rabbitStaminaRows.find((row) => row.gateId === "PSSA_TEXT_FEATURE_ITEM_LINK")?.status, "SKIP", "drama features do not require item linkage");
+assert.equal(rabbitStaminaRows.find((row) => row.gateId === "PSSA_PASSAGE_STAMINA_METADATA")?.status, "PASS", "drama released-length metadata requires genre, word count, band, and feature metadata");
+assert.equal(rabbitStaminaRows.find((row) => row.gateId === "PSSA_SECTION_LOOKBACK_BALANCE")?.status, "PASS", "drama lookback balance must be satisfied by explicit scene_synthesis/spoken/stage evidence across scenes");
+assert.deepEqual(rabbitStaminaRows.filter((row) => row.status === "FAIL"), [], `rabbit drama fixture must not fail stamina gates: ${JSON.stringify(rabbitStaminaRows)}`);
+assert.equal(evaluatePssaTextFeatureIntegrity({
+  ...rabbitPassage,
+  textFeaturesJson: [{ type: "dialogue", featureText: "RABBIT:" }],
+}), "FAIL", "dialogue is intentionally not a drama text feature type");
 assert.equal(evaluatePssaSectionLookbackBalance({
-  id: "drama-lookback-deferred",
-  text: "Scene one.\n\nScene two.",
-  staminaBand: "released_length",
-  genre: "drama",
-}, []), "SKIP", "drama lookback balance is explicitly deferred");
+  ...rabbitPassage,
+  id: "drama-whole-play-only",
+}, [{
+  id: "whole-play-only-item",
+  passageId: "drama-whole-play-only",
+  structuredChoicesJson: [{
+    text: "theme",
+    evidenceLinks: [{ evidenceKind: "whole_play_synthesis" }],
+  }],
+}]), "FAIL", "whole_play_synthesis alone must not satisfy scene lookback balance");
+
+const staminaCompletionSpecs = [
+  {
+    label: "maple",
+    passage: syrupPassage,
+    items: syrupItems,
+    ebsrId: "pssa_stamina_item_g3_syrup_ebsr_01",
+    saId: "pssa_stamina_item_g3_syrup_sa_01",
+    correctPartA: 0,
+    correctPartB: [0, 2],
+  },
+  {
+    label: "boat",
+    passage: boatPassage,
+    items: boatItems,
+    ebsrId: "pssa_stamina_item_g3_boat_ebsr_01",
+    saId: "pssa_stamina_item_g3_boat_sa_01",
+    correctPartA: 1,
+    correctPartB: [1, 3],
+  },
+  {
+    label: "rabbit",
+    passage: rabbitPassage,
+    items: rabbitItems,
+    ebsrId: "pssa_stamina_item_g3_rabbit_ebsr_01",
+    saId: "pssa_stamina_item_g3_rabbit_sa_01",
+    correctPartA: 0,
+    correctPartB: [0, 2],
+  },
+];
+
+for (const spec of staminaCompletionSpecs) {
+  const ebsr = spec.items.find((item: any) => (item.itemId ?? item.id) === spec.ebsrId);
+  assert(ebsr, `${spec.label} completion EBSR must exist`);
+  assert.equal(ebsr.interactionType, "EBSR");
+  assert.deepEqual(ebsr.correctResponseJson, { partA: { correctIndex: spec.correctPartA }, partB: { correctIndices: spec.correctPartB } }, `${spec.label} EBSR must use PR-C partAIndex/partBIndices scoring source shape`);
+  assert.equal(ebsr.responseSpecJson.partB.requiredSelectionCount, 2, `${spec.label} EBSR Part B requires two selections`);
+  assert.equal(ebsr.scoringJson.totalPoints, 2, `${spec.label} EBSR is two points`);
+  for (const choice of ebsr.partB.choices) {
+    assert.equal(spec.passage.text.includes(choice.quotedSpan), true, `${spec.label} EBSR Part B span must be verbatim: ${choice.quotedSpan}`);
+    for (const link of choice.evidenceLinks ?? []) {
+      assert.equal(spec.passage.text.includes(link.quotedSpan), true, `${spec.label} EBSR evidence link span must be verbatim: ${link.quotedSpan}`);
+    }
+  }
+  projectPssaStudentItem(ebsr);
+
+  const sa = spec.items.find((item: any) => (item.itemId ?? item.id) === spec.saId);
+  assert(sa, `${spec.label} completion SHORT_ANSWER must exist`);
+  assert.equal(sa.interactionType, "SHORT_ANSWER");
+  assert.equal(sa.scoringJson.scoreStatus, "pending_human_scoring", `${spec.label} SHORT_ANSWER must stay pending human scoring`);
+  assert.equal(sa.scoringJson.totalPoints, 3, `${spec.label} SHORT_ANSWER is three points`);
+  assert.equal(evaluatePssaShortAnswerBandsNonempty(sa), "PASS", `${spec.label} SHORT_ANSWER must have non-empty score bands`);
+  for (const support of sa.acceptableTextSupport ?? []) {
+    assert.equal(spec.passage.text.includes(support.quotedSpan), true, `${spec.label} SHORT_ANSWER support span must be verbatim: ${support.quotedSpan}`);
+  }
+  projectPssaStudentItem(sa);
+}
+
+const owlCompletionEbsr = owlItems.find((item: any) => (item.itemId ?? item.id) === "pssa_stamina_item_g3_owls_ebsr_01");
+assert(owlCompletionEbsr, "owl cross-text completion EBSR must exist");
+assert.equal(owlCompletionEbsr.interactionType, "EBSR");
+assert.equal(owlCompletionEbsr.isCrossText, true, "owl EBSR must be marked cross-text");
+assert.equal(owlCompletionEbsr.passageGroupId, owlGroup.id, "owl EBSR must point at the encoded paired group");
+assert.deepEqual(owlCompletionEbsr.requiredEvidenceSlotsJson, ["passage_1", "passage_2"], "owl EBSR must require one support from each passage slot");
+assert.deepEqual(owlCompletionEbsr.correctResponseJson, { partA: { correctIndex: 0 }, partB: { correctIndices: [0, 2] } }, "owl EBSR must use the expected scoring source shape");
+const owlPassagesBySlot = new Map(owlGroup.members.map((member) => [member.slot, member.passage]));
+for (const choice of owlCompletionEbsr.partB.choices) {
+  const link = choice.evidenceLinks?.[0];
+  assert(link?.passageSlot, `owl EBSR Part B span must carry passageSlot: ${choice.quotedSpan}`);
+  const linkedPassage = owlPassagesBySlot.get(link.passageSlot);
+  assert(linkedPassage, `owl EBSR passageSlot must exist in encoded group: ${link.passageSlot}`);
+  assert.equal(linkedPassage.text.includes(choice.quotedSpan), true, `owl EBSR Part B span must be verbatim in encoded ${link.passageSlot}: ${choice.quotedSpan}`);
+  assert.equal(linkedPassage.text.includes(link.quotedSpan), true, `owl EBSR evidence link span must be verbatim in encoded ${link.passageSlot}: ${link.quotedSpan}`);
+}
+assert.equal(JSON.stringify(owlCompletionEbsr).includes("Okafor"), false, "owl EBSR must not use stale Okafor draft wording");
+assert.equal(JSON.stringify(owlCompletionEbsr).includes("thousand mice"), false, "owl EBSR must not use stale thousand-mice draft wording");
+projectPssaStudentItem(owlCompletionEbsr);
 
 const grade3Plan = buildPlan(3);
+assert.equal(grade3Plan.hashStable, true, "stamina fixture must keep foundation import hashes stable");
 assert.deepEqual(grade3Plan.manifest.map((row) => [row.recordType, row.count, row.expectedCount]), [
   ["passage", 7, 7],
   ["item", 91, 91],

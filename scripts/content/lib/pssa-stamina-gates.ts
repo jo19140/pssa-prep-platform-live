@@ -64,6 +64,9 @@ export type StaminaItemInput = {
 export type StaminaEvidenceLink = {
   evidenceKind?: string;
   sectionId?: string;
+  sceneId?: string;
+  lineIndex?: number;
+  speaker?: string;
   paragraphIndex?: number;
   sentenceIndex?: number;
   quotedSpan?: string;
@@ -136,6 +139,7 @@ export function pssaStaminaSectionIdForHeading(heading: string) {
 }
 
 export function buildPssaStaminaSectionMap(passage: StaminaPassageInput): SectionRow[] {
+  if (isDramaGenre(passage)) return buildDramaSceneSectionMap(passage);
   if (isLiteraryGenre(passage)) return buildParagraphSectionMap(passage);
   const text = passage.text;
   const headingPattern = /^###\s+(.+)$/gm;
@@ -189,6 +193,60 @@ export function buildPssaStaminaSectionMap(passage: StaminaPassageInput): Sectio
     });
   }
   return sections;
+}
+
+export function buildPssaDramaLineMap(passage: StaminaPassageInput) {
+  const scenes = buildDramaSceneSectionMap(passage).filter((section) => section.sectionId !== "front_matter");
+  return scenes.flatMap((scene) => {
+    const lines = scene.text.split("\n").map((line) => line.trim()).filter(Boolean);
+    return lines
+      .filter((line) => !/^##?\s*SCENE\s+\d+/i.test(line))
+      .map((text, lineIndex) => {
+        const spoken = text.match(/^([A-Z][A-Z\s'-]*):\s*(.+)$/);
+        return {
+          sceneId: scene.sectionId,
+          lineIndex,
+          speaker: spoken?.[1]?.trim(),
+          text,
+          evidenceKind: spoken ? "spoken_line" : "stage_direction",
+        };
+      });
+  });
+}
+
+export function pssaDramaEvidenceKey(link: StaminaEvidenceLink) {
+  if (!link.sceneId || !Number.isInteger(link.lineIndex)) return "";
+  return `${link.sceneId}:${link.lineIndex}`;
+}
+
+function buildDramaSceneSectionMap(passage: StaminaPassageInput): SectionRow[] {
+  const text = passage.text;
+  const scenePattern = /^#{0,2}\s*SCENE\s+(\d+)\b.*$/gim;
+  const markers = [...text.matchAll(scenePattern)].map((match) => ({
+    label: match[0].trim().replace(/^#+\s*/, ""),
+    number: Number(match[1]),
+    start: match.index ?? 0,
+    bodyStart: (match.index ?? 0) + match[0].length,
+  }));
+  const rows: SectionRow[] = [];
+  if (!markers.length) {
+    return [{ sectionId: "front_matter", label: "Front Matter", startChar: 0, endChar: text.length, text }];
+  }
+  const frontMatter = text.slice(0, markers[0].start);
+  if (frontMatter.trim()) {
+    rows.push({ sectionId: "front_matter", label: "Front Matter", startChar: 0, endChar: markers[0].start, text: frontMatter });
+  }
+  markers.forEach((marker, index) => {
+    const end = markers[index + 1]?.start ?? text.length;
+    rows.push({
+      sectionId: `scene_${String(marker.number).padStart(2, "0")}`,
+      label: marker.label,
+      startChar: marker.start,
+      endChar: end,
+      text: text.slice(marker.start, end),
+    });
+  });
+  return rows;
 }
 
 function buildParagraphSectionMap(passage: StaminaPassageInput): SectionRow[] {
@@ -272,6 +330,7 @@ export function evaluatePssaTextFeatureIntegrity(passage: StaminaPassageInput, i
   if (!isStaminaScoped(passage)) return "SKIP";
   const features = featureRows(passage);
   if (!features.length) return "SKIP";
+  if (isDramaGenre(passage)) return evaluateDramaFeatureIntegrity(passage);
   if (isLiteraryGenre(passage)) return evaluateLiteraryFeatureIntegrity(passage);
   const headings = features.filter((feature) => feature.type === "heading");
   const headingLabels = headings.map((feature) => String(feature.label ?? "").trim()).filter(Boolean);
@@ -312,6 +371,23 @@ export function evaluatePssaTextFeatureIntegrity(passage: StaminaPassageInput, i
   return "PASS";
 }
 
+function evaluateDramaFeatureIntegrity(passage: StaminaPassageInput): StaminaGateStatus {
+  const allowed = new Set(["cast_list", "scene_marker", "stage_direction"]);
+  const sceneIds = new Set(buildPssaStaminaSectionMap(passage).map((section) => section.sectionId));
+  for (const feature of featureRows(passage)) {
+    if (!allowed.has(feature.type)) return "FAIL";
+    if ("featureText" in feature) {
+      if (typeof feature.featureText !== "string" || !feature.featureText.trim()) return "FAIL";
+      if (!passage.text.includes(feature.featureText)) return "FAIL";
+    }
+    if (feature.type === "scene_marker" && feature.sectionId && !sceneIds.has(feature.sectionId)) return "FAIL";
+    for (const key of ["mustUseInItem", "decorative", "context_only"] as const) {
+      if (key in feature && typeof feature[key] !== "boolean") return "FAIL";
+    }
+  }
+  return "PASS";
+}
+
 function evaluateLiteraryFeatureIntegrity(passage: StaminaPassageInput): StaminaGateStatus {
   const allowed = new Set(["dialogue", "figurative_language", "character_arc", "multi_scene"]);
   for (const feature of featureRows(passage)) {
@@ -331,6 +407,7 @@ export function evaluatePssaTextFeatureItemLink(passage: StaminaPassageInput, it
   if (!isStaminaScoped(passage)) return "SKIP";
   const required = activeFeatures(passage).filter((feature) => {
     if (feature.mustUseInItem) return true;
+    if (isDramaGenre(passage)) return false;
     if (isLiteraryGenre(passage)) return false;
     return ["sidebar", "footnote", "diagram"].includes(feature.type);
   });
@@ -346,6 +423,14 @@ export function evaluatePssaTextFeatureItemLink(passage: StaminaPassageInput, it
 
 export function evaluatePssaPassageStaminaMetadata(passage: StaminaPassageInput): StaminaGateStatus {
   if (!isStaminaPassage(passage)) return "SKIP";
+  if (isDramaGenre(passage)) {
+    return Number(passage.wordCount ?? wordCount(passage.text)) > 0
+      && Boolean(passage.staminaBand)
+      && Boolean(passage.genre)
+      && featureRows(passage).length > 0
+      ? "PASS"
+      : "FAIL";
+  }
   if (isLiteraryGenre(passage)) {
     return Number(passage.wordCount ?? wordCount(passage.text)) > 0
       && Boolean(passage.staminaBand)
@@ -365,7 +450,6 @@ export function evaluatePssaPassageStaminaMetadata(passage: StaminaPassageInput)
 
 export function evaluatePssaSectionLookbackBalance(passage: StaminaPassageInput, items: StaminaItemInput[]): StaminaGateStatus {
   if (!isStaminaPassage(passage)) return "SKIP";
-  if (isDramaGenre(passage)) return "SKIP";
   const sectionIds = new Set<string>();
   for (const item of items) {
     if (item.passageId && item.passageId !== passage.id) continue;
@@ -403,10 +487,15 @@ export function evidenceSectionIds(item: StaminaItemInput, passage: StaminaPassa
   for (const choice of choices) {
     for (const link of choice.evidenceLinks ?? []) {
       if (link.evidenceKind === "section_synthesis" && link.sectionId) ids.add(link.sectionId);
+      else if (link.evidenceKind === "scene_synthesis" && link.sceneId) ids.add(link.sceneId);
       else if (link.evidenceKind === "paragraph_synthesis" && link.sectionId) ids.add(link.sectionId);
+      else if (link.evidenceKind === "whole_play_synthesis") {
+        continue;
+      }
       else if (link.evidenceKind === "whole_passage_synthesis") {
         for (const section of sections) ids.add(section.sectionId);
       }
+      else if ((link.evidenceKind === "spoken_line" || link.evidenceKind === "stage_direction") && link.sceneId) ids.add(link.sceneId);
       else if (link.sectionId) ids.add(link.sectionId);
       else if (typeof link.startChar === "number") {
         const section = sections.find((row) => link.startChar! >= row.startChar && link.startChar! < row.endChar);

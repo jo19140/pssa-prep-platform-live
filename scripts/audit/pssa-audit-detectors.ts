@@ -14,6 +14,8 @@ export type McqAuditInput = {
   eligibleContent?: string;
   gradeLevel?: number;
   reportingCategory?: string;
+  comprehensionKind?: "literal_detail" | "inference" | "interpretation" | "synthesis" | string | null;
+  comprehensionKindRationale?: string | null;
 };
 
 export type EcCatalogEntry = {
@@ -40,6 +42,9 @@ export type PssaPassageAuditInput = {
 export type EvidenceLink = {
   evidenceKind?: "section_synthesis" | string;
   sectionId?: string;
+  sceneId?: string;
+  lineIndex?: number;
+  speaker?: string;
   paragraphIndex?: number;
   sentenceIndex?: number;
   quotedSpan?: string;
@@ -68,6 +73,7 @@ export type PassageSpecificityRuleId =
   | "PSSA_MCQ_GENERIC_STEM_LANGUAGE"
   | "PSSA_MCQ_TEMPLATE_LANGUAGE_REUSE"
   | "PSSA_MCQ_PASSAGE_SPECIFIC_CHOICES"
+  | "PSSA_MCQ_COMPREHENSION_KIND_RATIONALE_REQUIRED"
   | "PSSA_MCQ_CHOICE_EVIDENCE_LINKS_REQUIRED"
   | "PSSA_MCQ_EVIDENCE_SPAN_NOT_FOUND"
   | "PSSA_MCQ_EVIDENCE_SPAN_REUSED"
@@ -606,6 +612,8 @@ function auditPassageLinkedReadingMcq(item: McqAuditInput, passage: PssaPassageA
   const sentenceGrid = passage ? splitPassageSentences(passage.text) : [];
   const isVocabItem = /^E\d{2}\.[AB]-V\./.test(String(item.eligibleContent ?? ""));
   const isSynthesisItem = correctChoiceHasSynthesisEvidence(structuredChoices);
+  const comprehensionKind = normalizeComprehensionKind(item.comprehensionKind);
+  const isInferenceInterpretationItem = comprehensionKind === "inference" || comprehensionKind === "interpretation";
 
   const choiceGenericHits = choices.flatMap((choice, index) => genericLanguageHits(choice).map((hit) => ({ index, hit })));
   if (choiceGenericHits.length) {
@@ -621,6 +629,10 @@ function auditPassageLinkedReadingMcq(item: McqAuditInput, passage: PssaPassageA
     rows.push(row(item, "PSSA_MCQ_PASSAGE_SPECIFIC_CHOICES", "SKIP", "INFO", "vocabulary-in-context item", [], "Vocabulary-in-context MCQs are scoped to vocab-specific gates, not comprehension choice-specificity."));
   } else if (isSynthesisItem) {
     rows.push(row(item, "PSSA_MCQ_PASSAGE_SPECIFIC_CHOICES", "SKIP", "INFO", "synthesis evidence item", [], "Whole-passage synthesis MCQs are scoped by explicit evidenceKind rather than choice concreteness."));
+  } else if (isInferenceInterpretationItem && hasComprehensionKindRationale(item)) {
+    rows.push(row(item, "PSSA_MCQ_PASSAGE_SPECIFIC_CHOICES", "SKIP", "INFO", `SKIP_INFERENCE_INTERPRETATION:${comprehensionKind}`, [], `Inference/interpretation MCQ carries comprehensionKindRationale: ${item.comprehensionKindRationale}`));
+  } else if (isInferenceInterpretationItem) {
+    rows.push(row(item, "PSSA_MCQ_COMPREHENSION_KIND_RATIONALE_REQUIRED", "FAIL", "BLOCKER", String(comprehensionKind), [], "Inference/interpretation comprehensionKind requires a non-empty comprehensionKindRationale before choice-concreteness can be skipped."));
   } else {
     const overlapFailures: number[] = [];
     let concreteChoiceCount = 0;
@@ -647,7 +659,18 @@ function auditPassageLinkedReadingMcq(item: McqAuditInput, passage: PssaPassageA
       if (!choice.isCorrect && !validDistractorRoles.has(choice.distractorRole as DistractorRole)) missingRole.push(index);
       for (const link of choice.evidenceLinks ?? []) {
         if (isSynthesisEvidenceKind(link.evidenceKind)) {
-          if (!link.sectionId) badEvidence.push(`choice ${index}: section_synthesis evidence requires sectionId`);
+          if (link.evidenceKind === "scene_synthesis") {
+            if (!link.sceneId) badEvidence.push(`choice ${index}: scene_synthesis evidence requires sceneId`);
+            if ("quotedSpan" in link || "paragraphIndex" in link || "sentenceIndex" in link || "startChar" in link || "endChar" in link || "lineIndex" in link) {
+              badEvidence.push(`choice ${index}: scene_synthesis evidence must not carry fabricated literal location fields`);
+            }
+          } else if (link.evidenceKind === "whole_play_synthesis" || link.evidenceKind === "whole_passage_synthesis") {
+            if ("quotedSpan" in link || "paragraphIndex" in link || "sentenceIndex" in link || "startChar" in link || "endChar" in link || "lineIndex" in link || "sceneId" in link || "sectionId" in link) {
+              badEvidence.push(`choice ${index}: ${link.evidenceKind} evidence must not carry fabricated literal location fields`);
+            }
+          } else if (!link.sectionId) {
+            badEvidence.push(`choice ${index}: section_synthesis evidence requires sectionId`);
+          }
           continue;
         }
         citedSpans.push(normalizeQuotesWhitespace(link.quotedSpan ?? ""));
@@ -709,8 +732,16 @@ function correctChoiceHasSynthesisEvidence(choices: StructuredChoice[] | null) {
   return Boolean(correct?.evidenceLinks?.some((link) => isSynthesisEvidenceKind(link.evidenceKind)));
 }
 
+function normalizeComprehensionKind(value: unknown) {
+  return typeof value === "string" ? value.trim().toLowerCase() : "";
+}
+
+function hasComprehensionKindRationale(item: McqAuditInput) {
+  return typeof item.comprehensionKindRationale === "string" && item.comprehensionKindRationale.trim().length > 0;
+}
+
 function isSynthesisEvidenceKind(evidenceKind: unknown) {
-  return ["section_synthesis", "paragraph_synthesis", "whole_passage_synthesis"].includes(String(evidenceKind ?? ""));
+  return ["section_synthesis", "paragraph_synthesis", "whole_passage_synthesis", "scene_synthesis", "whole_play_synthesis"].includes(String(evidenceKind ?? ""));
 }
 
 function buildTemplateReuseRows(items: McqAuditInput[], scope: "choice" | "stem") {
@@ -787,6 +818,7 @@ function genericLanguageHits(value: string) {
 }
 
 function validateEvidenceLink(link: EvidenceLink, sentenceGrid: string[][], passageText: string) {
+  if (link.evidenceKind === "spoken_line" || link.evidenceKind === "stage_direction") return validateDramaEvidenceLink(link, passageText);
   if (!link.quotedSpan) return { valid: false, reason: "quotedSpan is required for literal evidence links" };
   if (!Number.isInteger(link.paragraphIndex) || !Number.isInteger(link.sentenceIndex)) {
     return { valid: false, reason: "paragraphIndex and sentenceIndex must be integers" };
@@ -808,6 +840,18 @@ function validateEvidenceLink(link: EvidenceLink, sentenceGrid: string[][], pass
   }
   if (passageText.slice(startChar, endChar) !== link.quotedSpan) {
     return { valid: false, reason: `char offsets do not point to quotedSpan: ${link.quotedSpan}` };
+  }
+  return { valid: true, reason: "" };
+}
+
+function validateDramaEvidenceLink(link: EvidenceLink, passageText: string) {
+  if (!link.quotedSpan) return { valid: false, reason: "quotedSpan is required for drama literal evidence links" };
+  if (!link.sceneId || !/^scene_\d{2}$/.test(link.sceneId)) return { valid: false, reason: "sceneId is required for drama evidence links" };
+  if (!Number.isInteger(link.lineIndex)) return { valid: false, reason: "lineIndex must be an integer for drama evidence links" };
+  if (link.evidenceKind === "spoken_line" && !String(link.speaker ?? "").trim()) return { valid: false, reason: "speaker is required for spoken_line evidence" };
+  if (link.evidenceKind === "stage_direction" && "speaker" in link) return { valid: false, reason: "speaker must be omitted for stage_direction evidence" };
+  if (!containsNormalized(passageText, link.quotedSpan)) {
+    return { valid: false, reason: `quotedSpan not found in passage: ${link.quotedSpan}` };
   }
   return { valid: true, reason: "" };
 }

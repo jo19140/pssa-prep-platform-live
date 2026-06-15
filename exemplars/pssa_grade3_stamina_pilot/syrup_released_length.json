@@ -34,20 +34,130 @@
       "factCheckStatus": "STRUCTURED_FACT_CHECK_COMPLETE",
       "factualClaimsReviewed": true,
       "textFeaturesJson": [
-        { "type": "heading", "label": "Waiting for the Right Weather", "sectionId": "waiting_for_the_right_weather", "bodyText": "### Waiting for the Right Weather", "charBounds": { "startChar": 569, "endChar": 602 } },
-        { "type": "heading", "label": "Tapping the Trees", "sectionId": "tapping_the_trees", "bodyText": "### Tapping the Trees", "charBounds": { "startChar": 1281, "endChar": 1302 } },
-        { "type": "heading", "label": "Boiling It Down", "sectionId": "boiling_it_down", "bodyText": "### Boiling It Down", "charBounds": { "startChar": 1951, "endChar": 1970 } },
-        { "type": "heading", "label": "From Tree to Table", "sectionId": "from_tree_to_table", "bodyText": "### From Tree to Table", "charBounds": { "startChar": 2660, "endChar": 2682 } },
-        { "type": "sidebar", "label": "Did You Know?", "sectionId": "section_sidebar", "bodyText": "> **Did You Know?** A sugar maple can live for more than two hundred years — long enough for many generations of families to tap it.", "charBounds": { "startChar": 3263, "endChar": 3395 }, "linkedByItemIds": ["pssa_stamina_item_g3_syrup_04"] },
-        { "type": "footnote", "label": "spile", "term": "spile", "marker": "¹", "sectionId": "section_footnotes", "bodyText": "¹ **spile** — a small spout that carries sap out of a tree", "charBounds": { "startChar": 3397, "endChar": 3455 } },
-        { "type": "footnote", "label": "evaporation", "term": "evaporation", "marker": "²", "sectionId": "section_footnotes", "bodyText": "² **evaporation** — when a liquid slowly turns into a gas, the way water turns into steam", "charBounds": { "startChar": 3456, "endChar": 3545 } }
+        {
+          "type": "heading",
+          "label": "Waiting for the Right Weather",
+          "sectionId": "waiting_for_the_right_weather",
+          "bodyText": "### Waiting for the Right Weather",
+          "charBounds": {
+            "startChar": 569,
+            "endChar": 602
+          }
+        },
+        {
+          "type": "heading",
+          "label": "Tapping the Trees",
+          "sectionId": "tapping_the_trees",
+          "bodyText": "### Tapping the Trees",
+          "charBounds": {
+            "startChar": 1281,
+            "endChar": 1302
+          }
+        },
+        {
+          "type": "heading",
+          "label": "Boiling It Down",
+          "sectionId": "boiling_it_down",
+          "bodyText": "### Boiling It Down",
+          "charBounds": {
+            "startChar": 1951,
+            "endChar": 1970
+          }
+        },
+        {
+          "type": "heading",
+          "label": "From Tree to Table",
+          "sectionId": "from_tree_to_table",
+          "bodyText": "### From Tree to Table",
+          "charBounds": {
+            "startChar": 2660,
+            "endChar": 2682
+          }
+        },
+        {
+          "type": "sidebar",
+          "label": "Did You Know?",
+          "sectionId": "section_sidebar",
+          "bodyText": "> **Did You Know?** A sugar maple can live for more than two hundred years — long enough for many generations of families to tap it.",
+          "charBounds": {
+            "startChar": 3263,
+            "endChar": 3395
+          },
+          "linkedByItemIds": [
+            "pssa_stamina_item_g3_syrup_04"
+          ]
+        },
+        {
+          "type": "footnote",
+          "label": "spile",
+          "term": "spile",
+          "marker": "¹",
+          "sectionId": "section_footnotes",
+          "bodyText": "¹ **spile** — a small spout that carries sap out of a tree",
+          "charBounds": {
+            "startChar": 3397,
+            "endChar": 3455
+          }
+        },
+        {
+          "type": "footnote",
+          "label": "evaporation",
+          "term": "evaporation",
+          "marker": "²",
+          "sectionId": "section_footnotes",
+          "bodyText": "² **evaporation** — when a liquid slowly turns into a gas, the way water turns into steam",
+          "charBounds": {
+            "startChar": 3456,
+            "endChar": 3545
+          }
+        }
       ],
       "factCheckNotesJson": [
-        { "claimId": "sap_flow_freeze_thaw", "claim": "Sap flows by a freeze-thaw pressure cycle: below-freezing draws water in; above-freezing pushes sap out.", "sourceTitle": "The Science Behind Sap Flow", "organization": "Penn State Extension", "sourceUrl": "https://extension.psu.edu/programs/master-gardener/counties/franklin/news/the-science-behind-sap-flow-in-maple-sugaring", "claimSupported": true, "dateAccessed": "2026-06-09" },
-        { "claimId": "sap_flow_corroboration", "claim": "Freeze-thaw pressure generation occurs in sugar maple.", "sourceTitle": "Freeze-thaw-induced pressure generation in red and sugar maple", "organization": "Tree Physiology / PubMed Central", "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11448476/", "claimSupported": true, "dateAccessed": "2026-06-09" },
-        { "claimId": "sap_to_syrup_ratio", "claim": "About forty gallons of sap make one gallon of syrup, with variation by sugar content.", "sourceTitle": "How Much Sap Can One Tree Produce", "organization": "New York State Maple Producers Association", "sourceUrl": "https://nysmaple.com/how-much-sap-can-one-tree-produce/", "claimSupported": true, "dateAccessed": "2026-06-09" },
-        { "claimId": "sugar_maple_longevity", "claim": "A sugar maple can live for more than two hundred years.", "sourceTitle": "Silvics of North America, Vol. 2 — Acer saccharum (Sugar Maple)", "organization": "USDA Forest Service", "sourceUrl": "https://www.srs.fs.usda.gov/pubs/misc/ag_654/volume_2/acer/saccharum.htm", "claimSupported": true, "dateAccessed": "2026-06-09" },
-        { "claimId": "spile_definition", "claim": "A spile is a spout that carries sap out of the tree.", "sourceTitle": "How to Tap and Make Maple Syrup", "organization": "Minnesota Department of Natural Resources", "sourceUrl": "https://files.dnr.state.mn.us/destinations/state_parks/maplesyrup_how.pdf", "claimSupported": true, "dateAccessed": "2026-06-09" }
+        {
+          "claimId": "sap_flow_freeze_thaw",
+          "claim": "Sap flows by a freeze-thaw pressure cycle: below-freezing draws water in; above-freezing pushes sap out.",
+          "sourceTitle": "The Science Behind Sap Flow",
+          "organization": "Penn State Extension",
+          "sourceUrl": "https://extension.psu.edu/programs/master-gardener/counties/franklin/news/the-science-behind-sap-flow-in-maple-sugaring",
+          "claimSupported": true,
+          "dateAccessed": "2026-06-09"
+        },
+        {
+          "claimId": "sap_flow_corroboration",
+          "claim": "Freeze-thaw pressure generation occurs in sugar maple.",
+          "sourceTitle": "Freeze-thaw-induced pressure generation in red and sugar maple",
+          "organization": "Tree Physiology / PubMed Central",
+          "sourceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11448476/",
+          "claimSupported": true,
+          "dateAccessed": "2026-06-09"
+        },
+        {
+          "claimId": "sap_to_syrup_ratio",
+          "claim": "About forty gallons of sap make one gallon of syrup, with variation by sugar content.",
+          "sourceTitle": "How Much Sap Can One Tree Produce",
+          "organization": "New York State Maple Producers Association",
+          "sourceUrl": "https://nysmaple.com/how-much-sap-can-one-tree-produce/",
+          "claimSupported": true,
+          "dateAccessed": "2026-06-09"
+        },
+        {
+          "claimId": "sugar_maple_longevity",
+          "claim": "A sugar maple can live for more than two hundred years.",
+          "sourceTitle": "Silvics of North America, Vol. 2 — Acer saccharum (Sugar Maple)",
+          "organization": "USDA Forest Service",
+          "sourceUrl": "https://www.srs.fs.usda.gov/pubs/misc/ag_654/volume_2/acer/saccharum.htm",
+          "claimSupported": true,
+          "dateAccessed": "2026-06-09"
+        },
+        {
+          "claimId": "spile_definition",
+          "claim": "A spile is a spout that carries sap out of the tree.",
+          "sourceTitle": "How to Tap and Make Maple Syrup",
+          "organization": "Minnesota Department of Natural Resources",
+          "sourceUrl": "https://files.dnr.state.mn.us/destinations/state_parks/maplesyrup_how.pdf",
+          "claimSupported": true,
+          "dateAccessed": "2026-06-09"
+        }
       ],
       "provenanceJson": {
         "authoredBy": "model-assisted, human-reviewed v4 source",
@@ -104,11 +214,26 @@
           "isCorrect": true,
           "rationale": "Whole-passage synthesis: the answer draws across the process sections rather than one literal sentence.",
           "evidenceLinks": [
-            { "evidenceKind": "section_synthesis", "sectionId": "section_0_intro" },
-            { "evidenceKind": "section_synthesis", "sectionId": "waiting_for_the_right_weather" },
-            { "evidenceKind": "section_synthesis", "sectionId": "tapping_the_trees" },
-            { "evidenceKind": "section_synthesis", "sectionId": "boiling_it_down" },
-            { "evidenceKind": "section_synthesis", "sectionId": "from_tree_to_table" }
+            {
+              "evidenceKind": "section_synthesis",
+              "sectionId": "section_0_intro"
+            },
+            {
+              "evidenceKind": "section_synthesis",
+              "sectionId": "waiting_for_the_right_weather"
+            },
+            {
+              "evidenceKind": "section_synthesis",
+              "sectionId": "tapping_the_trees"
+            },
+            {
+              "evidenceKind": "section_synthesis",
+              "sectionId": "boiling_it_down"
+            },
+            {
+              "evidenceKind": "section_synthesis",
+              "sectionId": "from_tree_to_table"
+            }
           ],
           "distractorRole": null
         },
@@ -117,7 +242,13 @@
           "isCorrect": false,
           "rationale": "Too narrow: this ending detail does not state what the whole passage is mostly about.",
           "evidenceLinks": [
-            { "paragraphIndex": 4, "sentenceIndex": 2, "quotedSpan": "By the time the jars are filled, the maples have begun to grow tiny green buds, and the sap stops flowing for the year.", "startChar": 2951, "endChar": 3070 }
+            {
+              "paragraphIndex": 4,
+              "sentenceIndex": 2,
+              "quotedSpan": "By the time the jars are filled, the maples have begun to grow tiny green buds, and the sap stops flowing for the year.",
+              "startChar": 2951,
+              "endChar": 3070
+            }
           ],
           "distractorRole": "too_narrow"
         },
@@ -126,7 +257,13 @@
           "isCorrect": false,
           "rationale": "Too narrow: the market detail appears at the end but does not cover the process.",
           "evidenceLinks": [
-            { "paragraphIndex": 4, "sentenceIndex": 1, "quotedSpan": "The Alvarez family keeps some for their own pancakes and sells the rest at a spring farmers market.", "startChar": 2851, "endChar": 2950 }
+            {
+              "paragraphIndex": 4,
+              "sentenceIndex": 1,
+              "quotedSpan": "The Alvarez family keeps some for their own pancakes and sells the rest at a spring farmers market.",
+              "startChar": 2851,
+              "endChar": 2950
+            }
           ],
           "distractorRole": "too_narrow"
         },
@@ -135,12 +272,21 @@
           "isCorrect": false,
           "rationale": "Unsupported inference: the passage compares cost, not health.",
           "evidenceLinks": [
-            { "paragraphIndex": 3, "sentenceIndex": 6, "quotedSpan": "That is one reason real maple syrup costs more than syrup made from plain corn sugar.", "startChar": 2419, "endChar": 2504 }
+            {
+              "paragraphIndex": 3,
+              "sentenceIndex": 6,
+              "quotedSpan": "That is one reason real maple syrup costs more than syrup made from plain corn sugar.",
+              "startChar": 2419,
+              "endChar": 2504
+            }
           ],
           "distractorRole": "unsupported_inference"
         }
       ],
-      "provenanceJson": { "sourcePassageId": "pssa_stamina_psg_g3_syrup_v4", "fixtureOnly": true }
+      "provenanceJson": {
+        "sourcePassageId": "pssa_stamina_psg_g3_syrup_v4",
+        "fixtureOnly": true
+      }
     },
     {
       "model": "PssaItem",
@@ -185,7 +331,13 @@
           "isCorrect": true,
           "rationale": "The sentence explains that syrup can scorch and turn bitter if it boils too long.",
           "evidenceLinks": [
-            { "paragraphIndex": 3, "sentenceIndex": 7, "quotedSpan": "Someone must keep the fire steady and watch the bubbling sap the entire time, because syrup that boils a few minutes too long can scorch and turn bitter.", "startChar": 2505, "endChar": 2658 }
+            {
+              "paragraphIndex": 3,
+              "sentenceIndex": 7,
+              "quotedSpan": "Someone must keep the fire steady and watch the bubbling sap the entire time, because syrup that boils a few minutes too long can scorch and turn bitter.",
+              "startChar": 2505,
+              "endChar": 2658
+            }
           ],
           "distractorRole": null
         },
@@ -194,7 +346,13 @@
           "isCorrect": false,
           "rationale": "Opposite claim: the context is boiling, not cooling.",
           "evidenceLinks": [
-            { "paragraphIndex": 3, "sentenceIndex": 7, "quotedSpan": "Someone must keep the fire steady and watch the bubbling sap the entire time, because syrup that boils a few minutes too long can scorch and turn bitter.", "startChar": 2505, "endChar": 2658 }
+            {
+              "paragraphIndex": 3,
+              "sentenceIndex": 7,
+              "quotedSpan": "Someone must keep the fire steady and watch the bubbling sap the entire time, because syrup that boils a few minutes too long can scorch and turn bitter.",
+              "startChar": 2505,
+              "endChar": 2658
+            }
           ],
           "distractorRole": "opposite_claim"
         },
@@ -203,7 +361,13 @@
           "isCorrect": false,
           "rationale": "Plausible misreading: the sentence mentions bubbling but does not say the syrup spills over.",
           "evidenceLinks": [
-            { "paragraphIndex": 3, "sentenceIndex": 7, "quotedSpan": "Someone must keep the fire steady and watch the bubbling sap the entire time, because syrup that boils a few minutes too long can scorch and turn bitter.", "startChar": 2505, "endChar": 2658 }
+            {
+              "paragraphIndex": 3,
+              "sentenceIndex": 7,
+              "quotedSpan": "Someone must keep the fire steady and watch the bubbling sap the entire time, because syrup that boils a few minutes too long can scorch and turn bitter.",
+              "startChar": 2505,
+              "endChar": 2658
+            }
           ],
           "distractorRole": "plausible_misreading"
         },
@@ -212,12 +376,21 @@
           "isCorrect": false,
           "rationale": "Wrong emphasis: this describes syrup changing during boiling, not the meaning of scorch.",
           "evidenceLinks": [
-            { "paragraphIndex": 3, "sentenceIndex": 5, "quotedSpan": "The amount of boiling is hard to believe: it takes about forty gallons of thin sap to make a single gallon of finished syrup.", "startChar": 2293, "endChar": 2418 }
+            {
+              "paragraphIndex": 3,
+              "sentenceIndex": 5,
+              "quotedSpan": "The amount of boiling is hard to believe: it takes about forty gallons of thin sap to make a single gallon of finished syrup.",
+              "startChar": 2293,
+              "endChar": 2418
+            }
           ],
           "distractorRole": "wrong_emphasis"
         }
       ],
-      "provenanceJson": { "sourcePassageId": "pssa_stamina_psg_g3_syrup_v4", "fixtureOnly": true }
+      "provenanceJson": {
+        "sourcePassageId": "pssa_stamina_psg_g3_syrup_v4",
+        "fixtureOnly": true
+      }
     },
     {
       "model": "PssaItem",
@@ -254,7 +427,13 @@
           "isCorrect": true,
           "rationale": "Correct: the weather pattern creates pressure changes that help move sap.",
           "evidenceLinks": [
-            { "paragraphIndex": 1, "sentenceIndex": 4, "quotedSpan": "When the next day warms above freezing, pressure builds in the wood and pushes the sap back outward.", "startChar": 948, "endChar": 1048 }
+            {
+              "paragraphIndex": 1,
+              "sentenceIndex": 4,
+              "quotedSpan": "When the next day warms above freezing, pressure builds in the wood and pushes the sap back outward.",
+              "startChar": 948,
+              "endChar": 1048
+            }
           ],
           "distractorRole": null
         },
@@ -263,7 +442,13 @@
           "isCorrect": false,
           "rationale": "Wrong section: green buds appear at the season's end, not as the reason sap flows best.",
           "evidenceLinks": [
-            { "paragraphIndex": 4, "sentenceIndex": 2, "quotedSpan": "By the time the jars are filled, the maples have begun to grow tiny green buds, and the sap stops flowing for the year.", "startChar": 2951, "endChar": 3070 }
+            {
+              "paragraphIndex": 4,
+              "sentenceIndex": 2,
+              "quotedSpan": "By the time the jars are filled, the maples have begun to grow tiny green buds, and the sap stops flowing for the year.",
+              "startChar": 2951,
+              "endChar": 3070
+            }
           ],
           "distractorRole": "wrong_section"
         },
@@ -272,7 +457,13 @@
           "isCorrect": false,
           "rationale": "Unsupported inference: the passage describes pressure changes, not different sweetness by time of day.",
           "evidenceLinks": [
-            { "paragraphIndex": 1, "sentenceIndex": 2, "quotedSpan": "The trees need a very particular pattern of weather: freezing nights followed by warmer days above freezing.", "startChar": 771, "endChar": 879 }
+            {
+              "paragraphIndex": 1,
+              "sentenceIndex": 2,
+              "quotedSpan": "The trees need a very particular pattern of weather: freezing nights followed by warmer days above freezing.",
+              "startChar": 771,
+              "endChar": 879
+            }
           ],
           "distractorRole": "unsupported_inference"
         },
@@ -281,12 +472,21 @@
           "isCorrect": false,
           "rationale": "Unsupported inference: buckets collect sap, not rain.",
           "evidenceLinks": [
-            { "paragraphIndex": 2, "sentenceIndex": 2, "quotedSpan": "A bucket or a long plastic tube hangs below to catch the steady drips.", "startChar": 1464, "endChar": 1534 }
+            {
+              "paragraphIndex": 2,
+              "sentenceIndex": 2,
+              "quotedSpan": "A bucket or a long plastic tube hangs below to catch the steady drips.",
+              "startChar": 1464,
+              "endChar": 1534
+            }
           ],
           "distractorRole": "unsupported_inference"
         }
       ],
-      "provenanceJson": { "sourcePassageId": "pssa_stamina_psg_g3_syrup_v4", "fixtureOnly": true }
+      "provenanceJson": {
+        "sourcePassageId": "pssa_stamina_psg_g3_syrup_v4",
+        "fixtureOnly": true
+      }
     },
     {
       "model": "PssaItem",
@@ -323,7 +523,14 @@
           "isCorrect": true,
           "rationale": "Correct: the sidebar gives extra information about how long sugar maples can live.",
           "evidenceLinks": [
-            { "paragraphIndex": 5, "sentenceIndex": 1, "quotedSpan": "A sugar maple can live for more than two hundred years — long enough for many generations of families to tap it.", "startChar": 3283, "endChar": 3395, "sectionId": "section_sidebar" }
+            {
+              "paragraphIndex": 5,
+              "sentenceIndex": 1,
+              "quotedSpan": "A sugar maple can live for more than two hundred years — long enough for many generations of families to tap it.",
+              "startChar": 3283,
+              "endChar": 3395,
+              "sectionId": "section_sidebar"
+            }
           ],
           "distractorRole": null
         },
@@ -332,7 +539,13 @@
           "isCorrect": false,
           "rationale": "Wrong section: filtering is explained in the final body section, not the sidebar.",
           "evidenceLinks": [
-            { "paragraphIndex": 4, "sentenceIndex": 0, "quotedSpan": "When the syrup finally reaches just the right thickness, it is poured through a filter to remove tiny bits of bark, then sealed into clean jars while it is still warm.", "startChar": 2683, "endChar": 2850 }
+            {
+              "paragraphIndex": 4,
+              "sentenceIndex": 0,
+              "quotedSpan": "When the syrup finally reaches just the right thickness, it is poured through a filter to remove tiny bits of bark, then sealed into clean jars while it is still warm.",
+              "startChar": 2683,
+              "endChar": 2850
+            }
           ],
           "distractorRole": "wrong_section"
         },
@@ -341,7 +554,13 @@
           "isCorrect": false,
           "rationale": "Wrong section: young trees are discussed in the tapping section, not the sidebar.",
           "evidenceLinks": [
-            { "paragraphIndex": 2, "sentenceIndex": 7, "quotedSpan": "A wide, older maple can hold more than one spile, but thin young trees are left alone so they can keep growing.", "startChar": 1838, "endChar": 1949 }
+            {
+              "paragraphIndex": 2,
+              "sentenceIndex": 7,
+              "quotedSpan": "A wide, older maple can hold more than one spile, but thin young trees are left alone so they can keep growing.",
+              "startChar": 1838,
+              "endChar": 1949
+            }
           ],
           "distractorRole": "wrong_section"
         },
@@ -350,12 +569,402 @@
           "isCorrect": false,
           "rationale": "Unsupported inference: the passage compares cost, not health.",
           "evidenceLinks": [
-            { "paragraphIndex": 3, "sentenceIndex": 6, "quotedSpan": "That is one reason real maple syrup costs more than syrup made from plain corn sugar.", "startChar": 2419, "endChar": 2504 }
+            {
+              "paragraphIndex": 3,
+              "sentenceIndex": 6,
+              "quotedSpan": "That is one reason real maple syrup costs more than syrup made from plain corn sugar.",
+              "startChar": 2419,
+              "endChar": 2504
+            }
           ],
           "distractorRole": "unsupported_inference"
         }
       ],
-      "provenanceJson": { "sourcePassageId": "pssa_stamina_psg_g3_syrup_v4", "fixtureOnly": true }
+      "provenanceJson": {
+        "sourcePassageId": "pssa_stamina_psg_g3_syrup_v4",
+        "fixtureOnly": true
+      }
+    },
+    {
+      "id": "pssa_stamina_item_g3_syrup_ebsr_01",
+      "itemId": "pssa_stamina_item_g3_syrup_ebsr_01",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "EBSR",
+      "interactionType": "EBSR",
+      "interactionSubtype": "two_point",
+      "passageId": "pssa_stamina_psg_g3_syrup_v4",
+      "passageTitle": "Sweet Work: How Sap Becomes Syrup",
+      "eligibleContent": "E03.B-K.1.1.2",
+      "assessmentAnchor": "E03.B-K",
+      "reportingCategory": "B",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "approvalEligible": false,
+      "pointValue": 2,
+      "partA": {
+        "stem": "Why do syrup makers need both the right weather and careful boiling?",
+        "choices": [
+          {
+            "text": "The weather helps sap flow, and boiling removes water so the sap becomes syrup.",
+            "distractorRole": null,
+            "supportsPartA": true,
+            "rationale": "Correct."
+          },
+          {
+            "text": "The weather makes the syrup turn golden before it leaves the tree.",
+            "distractorRole": "opposite_claim",
+            "supportsPartA": false,
+            "rationale": "Distractor."
+          },
+          {
+            "text": "Boiling helps the trees grow buds before winter begins.",
+            "distractorRole": "wrong_section",
+            "supportsPartA": false,
+            "rationale": "Distractor."
+          },
+          {
+            "text": "The cold nights make syrup pour through a filter into jars.",
+            "distractorRole": "plausible_misreading",
+            "supportsPartA": false,
+            "rationale": "Distractor."
+          }
+        ],
+        "correctIndex": 0
+      },
+      "partB": {
+        "stem": "Which two details best support the answer in Part A?",
+        "instruction": "Choose two answers.",
+        "requiredSelectionCount": 2,
+        "choices": [
+          {
+            "text": "The trees need a very particular pattern of weather: freezing nights followed by warmer days above freezing.",
+            "quotedSpan": "The trees need a very particular pattern of weather: freezing nights followed by warmer days above freezing.",
+            "evidenceLinks": [
+              {
+                "paragraphIndex": 1,
+                "sentenceIndex": 2,
+                "quotedSpan": "The trees need a very particular pattern of weather: freezing nights followed by warmer days above freezing.",
+                "startChar": 771,
+                "endChar": 879
+              }
+            ],
+            "evidenceRole": "supports_part_a",
+            "supportsPartA": true,
+            "rationale": "Supports Part A."
+          },
+          {
+            "text": "A wide, older maple can hold more than one spile, but thin young trees are left alone so they can keep growing.",
+            "quotedSpan": "A wide, older maple can hold more than one spile, but thin young trees are left alone so they can keep growing.",
+            "evidenceLinks": [
+              {
+                "paragraphIndex": 2,
+                "sentenceIndex": 7,
+                "quotedSpan": "A wide, older maple can hold more than one spile, but thin young trees are left alone so they can keep growing.",
+                "startChar": 1838,
+                "endChar": 1949
+              }
+            ],
+            "evidenceRole": "distractor",
+            "supportsPartA": false,
+            "rationale": "Does not best support Part A."
+          },
+          {
+            "text": "As the sap heats, the water in it turns into steam and floats away into the air.",
+            "quotedSpan": "As the sap heats, the water in it turns into steam and floats away into the air.",
+            "evidenceLinks": [
+              {
+                "paragraphIndex": 3,
+                "sentenceIndex": 2,
+                "quotedSpan": "As the sap heats, the water in it turns into steam and floats away into the air.",
+                "startChar": 2098,
+                "endChar": 2178
+              }
+            ],
+            "evidenceRole": "supports_part_a",
+            "supportsPartA": true,
+            "rationale": "Supports Part A."
+          },
+          {
+            "text": "The Alvarez family keeps some for their own pancakes and sells the rest at a spring farmers market.",
+            "quotedSpan": "The Alvarez family keeps some for their own pancakes and sells the rest at a spring farmers market.",
+            "evidenceLinks": [
+              {
+                "paragraphIndex": 4,
+                "sentenceIndex": 1,
+                "quotedSpan": "The Alvarez family keeps some for their own pancakes and sells the rest at a spring farmers market.",
+                "startChar": 2851,
+                "endChar": 2950
+              }
+            ],
+            "evidenceRole": "distractor",
+            "supportsPartA": false,
+            "rationale": "Does not best support Part A."
+          }
+        ],
+        "correctIndices": [
+          0,
+          2
+        ]
+      },
+      "responseSpecJson": {
+        "partA": {
+          "prompt": "Why do syrup makers need both the right weather and careful boiling?",
+          "choices": [
+            {
+              "text": "The weather helps sap flow, and boiling removes water so the sap becomes syrup."
+            },
+            {
+              "text": "The weather makes the syrup turn golden before it leaves the tree."
+            },
+            {
+              "text": "Boiling helps the trees grow buds before winter begins."
+            },
+            {
+              "text": "The cold nights make syrup pour through a filter into jars."
+            }
+          ]
+        },
+        "partB": {
+          "instruction": "Which two details best support the answer in Part A?",
+          "choices": [
+            {
+              "text": "The trees need a very particular pattern of weather: freezing nights followed by warmer days above freezing."
+            },
+            {
+              "text": "A wide, older maple can hold more than one spile, but thin young trees are left alone so they can keep growing."
+            },
+            {
+              "text": "As the sap heats, the water in it turns into steam and floats away into the air."
+            },
+            {
+              "text": "The Alvarez family keeps some for their own pancakes and sells the rest at a spring farmers market."
+            }
+          ],
+          "requiredSelectionCount": 2
+        }
+      },
+      "correctResponse": {
+        "partA": {
+          "correctIndex": 0
+        },
+        "partB": {
+          "correctIndices": [
+            0,
+            2
+          ]
+        }
+      },
+      "correctResponseJson": {
+        "partA": {
+          "correctIndex": 0
+        },
+        "partB": {
+          "correctIndices": [
+            0,
+            2
+          ]
+        }
+      },
+      "scoring": {
+        "totalPoints": 2,
+        "partAPoints": 1,
+        "partBPoints": 1,
+        "requirePartACorrectForFullCredit": true
+      },
+      "scoringJson": {
+        "totalPoints": 2,
+        "partAPoints": 1,
+        "partBPoints": 1,
+        "requirePartACorrectForFullCredit": true,
+        "partialCreditRules": [
+          {
+            "points": 2,
+            "rule": "Part A is correct and both Part B evidence choices are correct."
+          },
+          {
+            "points": 1,
+            "rule": "Part A is correct and one Part B evidence choice is correct, or Part A is incorrect but both Part B evidence choices are correct."
+          },
+          {
+            "points": 0,
+            "rule": "The response is unsupported, incomplete, or missing."
+          }
+        ]
+      },
+      "provenanceJson": {
+        "fixtureOnly": true,
+        "sourcePassageId": "pssa_stamina_psg_g3_syrup_v4",
+        "authoredIn": "PSSA_STAMINA_ITEM_SET_COMPLETION"
+      }
+    },
+    {
+      "id": "pssa_stamina_item_g3_syrup_sa_01",
+      "itemId": "pssa_stamina_item_g3_syrup_sa_01",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "CONSTRUCTED_RESPONSE",
+      "interactionType": "SHORT_ANSWER",
+      "interactionSubtype": "text_supported_short_answer",
+      "passageId": "pssa_stamina_psg_g3_syrup_v4",
+      "passageTitle": "Sweet Work: How Sap Becomes Syrup",
+      "eligibleContent": "E03.B-K.1.1.2",
+      "assessmentAnchor": "E03.B-K",
+      "reportingCategory": "B",
+      "stem": "Explain how sap changes into syrup. Use two details from the passage to support your answer.",
+      "studentFacingPrompt": "Explain how sap changes into syrup. Use two details from the passage to support your answer.",
+      "instructionText": "Write a short answer that uses two details from the passage to support your answer.",
+      "requiredSupportCount": 2,
+      "requiresTextSupport": true,
+      "expectedAnswerCore": "Sap starts as thin sugar-water. The right weather helps it flow from the tree, and boiling removes water so it becomes thicker and sweeter.",
+      "acceptableTextSupport": [
+        {
+          "supportId": "syrup_sa_s1",
+          "supportType": "direct_quote",
+          "quotedSpan": "The trees need a very particular pattern of weather: freezing nights followed by warmer days above freezing.",
+          "detail": "freezing nights followed by warmer days help sap flow",
+          "connectsToExpectedAnswer": "This supports the weather part of the process.",
+          "independentKey": "weather"
+        },
+        {
+          "supportId": "syrup_sa_s2",
+          "supportType": "direct_quote",
+          "quotedSpan": "As the sap heats, the water in it turns into steam and floats away into the air.",
+          "detail": "boiling removes water as steam",
+          "connectsToExpectedAnswer": "This supports how sap thickens into syrup.",
+          "independentKey": "boiling"
+        }
+      ],
+      "rubric": {
+        "points3": "Explains the process clearly and uses two details (freeze/warm weather and boiling/evaporation).",
+        "points2": "Mostly correct explanation with one clear support.",
+        "points1": "One copied or partial detail with little explanation.",
+        "points0": "Unsupported or unrelated."
+      },
+      "copiedTextCap": true,
+      "scoreBandExamples": [
+        {
+          "band": 3,
+          "response": "Sap starts as thin sugar-water. The right weather helps it flow from the tree, and boiling removes water so it becomes thicker and sweeter. One detail is freezing nights followed by warmer days help sap flow Another detail is boiling removes water as steam",
+          "why": "Explains the process clearly and uses two details (freeze/warm weather and boiling/evaporation).",
+          "supportIdsUsed": [
+            "syrup_sa_s1",
+            "syrup_sa_s2"
+          ]
+        },
+        {
+          "band": 2,
+          "response": "Sap starts as thin sugar-water. The right weather helps it flow from the tree, and boiling removes water so it becomes thicker and sweeter. One detail is freezing nights followed by warmer days help sap flow",
+          "why": "Mostly correct explanation with one clear support.",
+          "supportIdsUsed": [
+            "syrup_sa_s1"
+          ]
+        },
+        {
+          "band": 1,
+          "response": "The trees need a very particular pattern of weather: freezing nights followed by warmer days above freezing.",
+          "why": "One copied or partial detail with little explanation.",
+          "supportIdsUsed": [
+            "syrup_sa_s1"
+          ],
+          "copyOnly": true
+        },
+        {
+          "band": 0,
+          "response": "This answer is unrelated to the passage.",
+          "why": "Unsupported or unrelated.",
+          "supportIdsUsed": []
+        }
+      ],
+      "responseSpecJson": {
+        "stem": "Explain how sap changes into syrup. Use two details from the passage to support your answer.",
+        "instructionText": "Write a short answer that uses two details from the passage to support your answer.",
+        "requiredSupportCount": 2,
+        "requiresTextSupport": true
+      },
+      "correctResponseJson": {
+        "expectedAnswerCore": "Sap starts as thin sugar-water. The right weather helps it flow from the tree, and boiling removes water so it becomes thicker and sweeter.",
+        "acceptableTextSupport": [
+          {
+            "supportId": "syrup_sa_s1",
+            "supportType": "direct_quote",
+            "quotedSpan": "The trees need a very particular pattern of weather: freezing nights followed by warmer days above freezing.",
+            "detail": "freezing nights followed by warmer days help sap flow",
+            "connectsToExpectedAnswer": "This supports the weather part of the process.",
+            "independentKey": "weather"
+          },
+          {
+            "supportId": "syrup_sa_s2",
+            "supportType": "direct_quote",
+            "quotedSpan": "As the sap heats, the water in it turns into steam and floats away into the air.",
+            "detail": "boiling removes water as steam",
+            "connectsToExpectedAnswer": "This supports how sap thickens into syrup.",
+            "independentKey": "boiling"
+          }
+        ]
+      },
+      "scoring": {
+        "totalPoints": 3,
+        "partialCreditRules": [
+          {
+            "points": 3,
+            "rule": "Explains the process clearly and uses two details (freeze/warm weather and boiling/evaporation)."
+          },
+          {
+            "points": 2,
+            "rule": "Mostly correct explanation with one clear support."
+          },
+          {
+            "points": 1,
+            "rule": "One copied or partial detail with little explanation."
+          },
+          {
+            "points": 0,
+            "rule": "Unsupported or unrelated."
+          }
+        ]
+      },
+      "scoringJson": {
+        "scoreStatus": "pending_human_scoring",
+        "totalPoints": 3,
+        "partialCreditRules": [
+          {
+            "points": 3,
+            "rule": "Explains the process clearly and uses two details (freeze/warm weather and boiling/evaporation)."
+          },
+          {
+            "points": 2,
+            "rule": "Mostly correct explanation with one clear support."
+          },
+          {
+            "points": 1,
+            "rule": "One copied or partial detail with little explanation."
+          },
+          {
+            "points": 0,
+            "rule": "Unsupported or unrelated."
+          }
+        ]
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "approvalEligible": false,
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "provenanceJson": {
+        "fixtureOnly": true,
+        "sourcePassageId": "pssa_stamina_psg_g3_syrup_v4",
+        "authoredIn": "PSSA_STAMINA_ITEM_SET_COMPLETION",
+        "autoScoringClaim": false
+      }
     }
   ]
 }
