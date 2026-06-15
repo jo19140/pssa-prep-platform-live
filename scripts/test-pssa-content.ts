@@ -1245,6 +1245,8 @@ type BatteryRow = {
   gateId: string;
   status: BatteryStatus;
   detail: string;
+  enforced?: boolean;
+  reportOnly?: boolean;
 };
 
 function staminaItemId(item: any) {
@@ -1264,13 +1266,14 @@ function staminaPassageIds(item: any) {
   return [...new Set(ids)];
 }
 
-function reportRow(item: any, gateId: string, status: BatteryStatus, detail: string): BatteryRow {
+function reportRow(item: any, gateId: string, status: BatteryStatus, detail: string, options: { enforced?: boolean; reportOnly?: boolean } = {}): BatteryRow {
   return {
     itemId: staminaItemId(item),
     interactionType: staminaInteractionType(item),
     gateId,
     status,
     detail,
+    ...options,
   };
 }
 
@@ -1361,6 +1364,7 @@ function buildStaminaContentQualityBatteryReport() {
       lengthRow
         ? `choiceGroup=${group.itemId}; correctWords=${lengthRow.correctWordLength}; maxDistractorWords=${lengthRow.longestDistractorWordLength}; gap=${lengthRow.wordLengthGap}; uniquelyLongest=${lengthRow.uniquelyLongest}`
         : `choiceGroup=${group.itemId}; missing length row`,
+      group.sourceInteractionType === "EBSR_PART_A" ? { enforced: false, reportOnly: true } : {},
     ));
   }
 
@@ -1373,13 +1377,14 @@ function buildStaminaContentQualityBatteryReport() {
       `PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR${group.sourceInteractionType === "EBSR_PART_A" ? "_EBSR_PART_A_REPORT_ONLY" : ""}`,
       absoluteFailuresById.has(String(group.itemId)) ? "FAIL" : "PASS",
       `choiceGroup=${group.itemId}`,
+      group.sourceInteractionType === "EBSR_PART_A" ? { enforced: false, reportOnly: true } : {},
     ));
   }
 
   const mcqPosition = buildAnswerPositionRow(singleAnswerGroups.filter((group) => group.sourceInteractionType === "MCQ"), "stamina MCQ");
   const ebsrPartAPosition = buildAnswerPositionRow(singleAnswerGroups.filter((group) => group.sourceInteractionType === "EBSR_PART_A"), "stamina EBSR Part A report-only");
   for (const item of mcqItems) rows.push(reportRow(item, "PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION", mcqPosition.status, mcqPosition.detail));
-  for (const item of ebsrItems) rows.push(reportRow(item, "PSSA_EBSR_PART_A_ANSWER_POSITION_DISTRIBUTION_REPORT_ONLY", ebsrPartAPosition.status, ebsrPartAPosition.detail));
+  for (const item of ebsrItems) rows.push(reportRow(item, "PSSA_EBSR_PART_A_ANSWER_POSITION_DISTRIBUTION_REPORT_ONLY", ebsrPartAPosition.status, ebsrPartAPosition.detail, { enforced: false, reportOnly: true }));
 
   for (const passage of [syrupPassage, boatPassage, rabbitPassage]) {
     const passageItems = readingItems.filter((item) => staminaPassageIds(item).includes(passage.id));
@@ -1444,8 +1449,11 @@ function buildStaminaContentQualityBatteryReport() {
     .filter((row) => row.scope === "item" && String(row.itemId).includes("::partA"));
 
   const failures = rows.filter((row) => row.status === "FAIL");
+  const enforceableFailures = rows.filter((row) => row.status === "FAIL" && row.enforced !== false);
+  const ebsrPartAInformationalRows = rows.filter((row) => row.reportOnly);
   assert.equal(rows.length > allItems.length * 8, true, "stamina battery report must include a broad per-item gate matrix, not spot checks");
-  assert.equal(Array.isArray(failures), true, "report mode must collect FAIL rows without requiring an all-pass enforcement flip");
+  assert.deepEqual(enforceableFailures, [], "ENFORCED stamina battery must have zero rows where status is FAIL and enforced is not false");
+  assert.equal(ebsrPartAInformationalRows.length, 12, "EBSR Part A shortcut rows must stay report-only and mechanically excluded from enforcement");
   assert.deepEqual(
     correctIsLongestRows
       .filter((row) => row.scope === "item" && row.result === "FAIL")
@@ -1459,7 +1467,7 @@ function buildStaminaContentQualityBatteryReport() {
   const reportLines = [
     "# PSSA Stamina Content-Quality Battery Report",
     "",
-    "Report mode: this file lists PASS/FAIL/SKIP findings for the 37-item encoded stamina diagnostic packet. It does not enforce all-pass yet.",
+    "Enforced mode: every row with status FAIL and enforced !== false fails test:pssa-content. EBSR Part A shortcut rows are report-only for this PR.",
     "",
     "## Functions Reused",
     "",
@@ -1497,17 +1505,23 @@ function buildStaminaContentQualityBatteryReport() {
     "| --- | --- | ---: | ---: | ---: | --- |",
     ...foundationPartALengthRows.map((row) => `| ${row.itemId} | ${row.result} | ${row.correctWordLength} | ${row.longestDistractorWordLength} | ${row.wordLengthGap} | ${row.uniquelyLongest} |`),
     "",
-    "## FAIL List",
+    "## EBSR Part A Informational Rows (Not Enforced)",
+    "",
+    "| itemId | gateId | status | detail |",
+    "| --- | --- | --- | --- |",
+    ...ebsrPartAInformationalRows.map((row) => `| ${row.itemId} | ${row.gateId} | ${row.status} | ${row.detail.replace(/\|/g, "/")} |`),
+    "",
+    "## Enforceable FAIL List",
     "",
     "| itemId | interactionType | gateId | detail |",
     "| --- | --- | --- | --- |",
-    ...failures.map((row) => `| ${row.itemId} | ${row.interactionType} | ${row.gateId} | ${row.detail.replace(/\|/g, "/")} |`),
+    ...enforceableFailures.map((row) => `| ${row.itemId} | ${row.interactionType} | ${row.gateId} | ${row.detail.replace(/\|/g, "/")} |`),
     "",
     "## Per-Item Gate Matrix",
     "",
-    "| itemId | interactionType | gateId | status | detail |",
-    "| --- | --- | --- | --- | --- |",
-    ...rows.map((row) => `| ${row.itemId} | ${row.interactionType} | ${row.gateId} | ${row.status} | ${row.detail.replace(/\|/g, "/")} |`),
+    "| itemId | interactionType | gateId | status | enforced | detail |",
+    "| --- | --- | --- | --- | --- | --- |",
+    ...rows.map((row) => `| ${row.itemId} | ${row.interactionType} | ${row.gateId} | ${row.status} | ${row.enforced === false ? "false" : "true"} | ${row.detail.replace(/\|/g, "/")} |`),
     "",
     "## Passage Quality Rows",
     "",
@@ -1523,11 +1537,13 @@ function buildStaminaContentQualityBatteryReport() {
     "",
   ];
   fs.writeFileSync("reports/pssa_stamina_content_quality_battery.md", `${reportLines.join("\n")}\n`);
-  return { rows, failures, passageQualityRows, passageSpecificityRows, correctIsLongestRows, foundationPartALengthRows };
+  return { rows, failures, enforceableFailures, ebsrPartAInformationalRows, passageQualityRows, passageSpecificityRows, correctIsLongestRows, foundationPartALengthRows };
 }
 
 const staminaBattery = buildStaminaContentQualityBatteryReport();
 assert.equal(staminaBattery.foundationPartALengthRows.length > 0, true, "EBSR Part A foundation impact must be reported without enforcing it in buildPlan");
+assert.deepEqual(staminaBattery.enforceableFailures, [], "test:pssa-content must enforce zero stamina battery failures");
+assert.equal(staminaBattery.ebsrPartAInformationalRows.every((row) => row.enforced === false && row.reportOnly), true, "EBSR Part A rows must be incapable of failing test:pssa-content in this PR");
 
 const grade3Plan = buildPlan(3);
 assert.equal(grade3Plan.hashStable, true, "stamina fixture must keep foundation import hashes stable");

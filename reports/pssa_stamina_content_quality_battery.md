@@ -1,6 +1,6 @@
 # PSSA Stamina Content-Quality Battery Report
 
-Report mode: this file lists PASS/FAIL/SKIP findings for the 37-item encoded stamina diagnostic packet. It does not enforce all-pass yet.
+Enforced mode: every row with status FAIL and enforced !== false fails test:pssa-content. EBSR Part A shortcut rows are report-only for this PR.
 
 ## Functions Reused
 
@@ -74,393 +74,410 @@ Report mode: this file lists PASS/FAIL/SKIP findings for the 37-item encoded sta
 | pssa_ebsr_g3_lantern_01::partA | PASS | 9 | 12 | -3 | false |
 | pssa_ebsr_g3_bell_01::partA | PASS | 9 | 13 | -4 | false |
 
-## FAIL List
+## EBSR Part A Informational Rows (Not Enforced)
+
+| itemId | gateId | status | detail |
+| --- | --- | --- | --- |
+| pssa_stamina_item_g3_syrup_ebsr_01 | PSSA_MCQ_CORRECT_IS_LONGEST_EBSR_PART_A_REPORT_ONLY | PASS | choiceGroup=pssa_stamina_item_g3_syrup_ebsr_01::partA; correctWords=10; maxDistractorWords=12; gap=-2; uniquelyLongest=false |
+| pssa_stamina_item_g3_boat_ebsr_01 | PSSA_MCQ_CORRECT_IS_LONGEST_EBSR_PART_A_REPORT_ONLY | PASS | choiceGroup=pssa_stamina_item_g3_boat_ebsr_01::partA; correctWords=8; maxDistractorWords=9; gap=-1; uniquelyLongest=true |
+| pssa_stamina_item_g3_owls_ebsr_01 | PSSA_MCQ_CORRECT_IS_LONGEST_EBSR_PART_A_REPORT_ONLY | PASS | choiceGroup=pssa_stamina_item_g3_owls_ebsr_01::partA; correctWords=10; maxDistractorWords=10; gap=0; uniquelyLongest=false |
+| pssa_stamina_item_g3_rabbit_ebsr_01 | PSSA_MCQ_CORRECT_IS_LONGEST_EBSR_PART_A_REPORT_ONLY | PASS | choiceGroup=pssa_stamina_item_g3_rabbit_ebsr_01::partA; correctWords=10; maxDistractorWords=11; gap=-1; uniquelyLongest=true |
+| pssa_stamina_item_g3_syrup_ebsr_01 | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR_EBSR_PART_A_REPORT_ONLY | PASS | choiceGroup=pssa_stamina_item_g3_syrup_ebsr_01::partA |
+| pssa_stamina_item_g3_boat_ebsr_01 | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR_EBSR_PART_A_REPORT_ONLY | PASS | choiceGroup=pssa_stamina_item_g3_boat_ebsr_01::partA |
+| pssa_stamina_item_g3_owls_ebsr_01 | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR_EBSR_PART_A_REPORT_ONLY | PASS | choiceGroup=pssa_stamina_item_g3_owls_ebsr_01::partA |
+| pssa_stamina_item_g3_rabbit_ebsr_01 | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR_EBSR_PART_A_REPORT_ONLY | PASS | choiceGroup=pssa_stamina_item_g3_rabbit_ebsr_01::partA |
+| pssa_stamina_item_g3_syrup_ebsr_01 | PSSA_EBSR_PART_A_ANSWER_POSITION_DISTRIBUTION_REPORT_ONLY | PASS | A:1 B:1 C:1 D:1 maxShare=0.2500 |
+| pssa_stamina_item_g3_boat_ebsr_01 | PSSA_EBSR_PART_A_ANSWER_POSITION_DISTRIBUTION_REPORT_ONLY | PASS | A:1 B:1 C:1 D:1 maxShare=0.2500 |
+| pssa_stamina_item_g3_owls_ebsr_01 | PSSA_EBSR_PART_A_ANSWER_POSITION_DISTRIBUTION_REPORT_ONLY | PASS | A:1 B:1 C:1 D:1 maxShare=0.2500 |
+| pssa_stamina_item_g3_rabbit_ebsr_01 | PSSA_EBSR_PART_A_ANSWER_POSITION_DISTRIBUTION_REPORT_ONLY | PASS | A:1 B:1 C:1 D:1 maxShare=0.2500 |
+
+## Enforceable FAIL List
 
 | itemId | interactionType | gateId | detail |
 | --- | --- | --- | --- |
 
 ## Per-Item Gate Matrix
 
-| itemId | interactionType | gateId | status | detail |
-| --- | --- | --- | --- | --- |
-| pssa_stamina_item_g3_syrup_01 | MCQ | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | PASS | foundation evaluator |
-| pssa_stamina_item_g3_syrup_01 | MCQ | PSSA_VOCAB_KEY_CONSTRUCT | PASS | foundation evaluator |
-| pssa_stamina_item_g3_syrup_01 | MCQ | PSSA_SA_BANDS_NONEMPTY | PASS | foundation evaluator |
-| pssa_stamina_item_g3_syrup_01 | MCQ | PSSA_ITEM_EC_GENRE_MATCH | PASS | foundation evaluator |
-| pssa_stamina_item_g3_syrup_01 | MCQ | PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP | PASS | foundation evaluator |
-| pssa_stamina_item_g3_syrup_02 | MCQ | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | PASS | foundation evaluator |
-| pssa_stamina_item_g3_syrup_02 | MCQ | PSSA_VOCAB_KEY_CONSTRUCT | PASS | foundation evaluator |
-| pssa_stamina_item_g3_syrup_02 | MCQ | PSSA_SA_BANDS_NONEMPTY | PASS | foundation evaluator |
-| pssa_stamina_item_g3_syrup_02 | MCQ | PSSA_ITEM_EC_GENRE_MATCH | PASS | foundation evaluator |
-| pssa_stamina_item_g3_syrup_02 | MCQ | PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP | PASS | foundation evaluator |
-| pssa_stamina_item_g3_syrup_03 | MCQ | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | PASS | foundation evaluator |
-| pssa_stamina_item_g3_syrup_03 | MCQ | PSSA_VOCAB_KEY_CONSTRUCT | PASS | foundation evaluator |
-| pssa_stamina_item_g3_syrup_03 | MCQ | PSSA_SA_BANDS_NONEMPTY | PASS | foundation evaluator |
-| pssa_stamina_item_g3_syrup_03 | MCQ | PSSA_ITEM_EC_GENRE_MATCH | PASS | foundation evaluator |
-| pssa_stamina_item_g3_syrup_03 | MCQ | PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP | PASS | foundation evaluator |
-| pssa_stamina_item_g3_syrup_04 | MCQ | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | PASS | foundation evaluator |
-| pssa_stamina_item_g3_syrup_04 | MCQ | PSSA_VOCAB_KEY_CONSTRUCT | PASS | foundation evaluator |
-| pssa_stamina_item_g3_syrup_04 | MCQ | PSSA_SA_BANDS_NONEMPTY | PASS | foundation evaluator |
-| pssa_stamina_item_g3_syrup_04 | MCQ | PSSA_ITEM_EC_GENRE_MATCH | PASS | foundation evaluator |
-| pssa_stamina_item_g3_syrup_04 | MCQ | PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP | PASS | foundation evaluator |
-| pssa_stamina_item_g3_syrup_ebsr_01 | EBSR | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | PASS | foundation evaluator |
-| pssa_stamina_item_g3_syrup_ebsr_01 | EBSR | PSSA_VOCAB_KEY_CONSTRUCT | PASS | foundation evaluator |
-| pssa_stamina_item_g3_syrup_ebsr_01 | EBSR | PSSA_SA_BANDS_NONEMPTY | PASS | foundation evaluator |
-| pssa_stamina_item_g3_syrup_ebsr_01 | EBSR | PSSA_ITEM_EC_GENRE_MATCH | PASS | foundation evaluator |
-| pssa_stamina_item_g3_syrup_ebsr_01 | EBSR | PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP | PASS | foundation evaluator |
-| pssa_stamina_item_g3_syrup_sa_01 | SHORT_ANSWER | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | PASS | foundation evaluator |
-| pssa_stamina_item_g3_syrup_sa_01 | SHORT_ANSWER | PSSA_VOCAB_KEY_CONSTRUCT | PASS | foundation evaluator |
-| pssa_stamina_item_g3_syrup_sa_01 | SHORT_ANSWER | PSSA_SA_BANDS_NONEMPTY | PASS | foundation evaluator |
-| pssa_stamina_item_g3_syrup_sa_01 | SHORT_ANSWER | PSSA_ITEM_EC_GENRE_MATCH | PASS | foundation evaluator |
-| pssa_stamina_item_g3_syrup_sa_01 | SHORT_ANSWER | PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP | PASS | foundation evaluator |
-| pssa_stamina_item_g3_boat_01 | MCQ | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | PASS | foundation evaluator |
-| pssa_stamina_item_g3_boat_01 | MCQ | PSSA_VOCAB_KEY_CONSTRUCT | PASS | foundation evaluator |
-| pssa_stamina_item_g3_boat_01 | MCQ | PSSA_SA_BANDS_NONEMPTY | PASS | foundation evaluator |
-| pssa_stamina_item_g3_boat_01 | MCQ | PSSA_ITEM_EC_GENRE_MATCH | PASS | foundation evaluator |
-| pssa_stamina_item_g3_boat_01 | MCQ | PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP | PASS | foundation evaluator |
-| pssa_stamina_item_g3_boat_02 | MCQ | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | PASS | foundation evaluator |
-| pssa_stamina_item_g3_boat_02 | MCQ | PSSA_VOCAB_KEY_CONSTRUCT | PASS | foundation evaluator |
-| pssa_stamina_item_g3_boat_02 | MCQ | PSSA_SA_BANDS_NONEMPTY | PASS | foundation evaluator |
-| pssa_stamina_item_g3_boat_02 | MCQ | PSSA_ITEM_EC_GENRE_MATCH | PASS | foundation evaluator |
-| pssa_stamina_item_g3_boat_02 | MCQ | PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP | PASS | foundation evaluator |
-| pssa_stamina_item_g3_boat_03 | MCQ | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | PASS | foundation evaluator |
-| pssa_stamina_item_g3_boat_03 | MCQ | PSSA_VOCAB_KEY_CONSTRUCT | PASS | foundation evaluator |
-| pssa_stamina_item_g3_boat_03 | MCQ | PSSA_SA_BANDS_NONEMPTY | PASS | foundation evaluator |
-| pssa_stamina_item_g3_boat_03 | MCQ | PSSA_ITEM_EC_GENRE_MATCH | PASS | foundation evaluator |
-| pssa_stamina_item_g3_boat_03 | MCQ | PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP | PASS | foundation evaluator |
-| pssa_stamina_item_g3_boat_04 | MCQ | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | PASS | foundation evaluator |
-| pssa_stamina_item_g3_boat_04 | MCQ | PSSA_VOCAB_KEY_CONSTRUCT | PASS | foundation evaluator |
-| pssa_stamina_item_g3_boat_04 | MCQ | PSSA_SA_BANDS_NONEMPTY | PASS | foundation evaluator |
-| pssa_stamina_item_g3_boat_04 | MCQ | PSSA_ITEM_EC_GENRE_MATCH | PASS | foundation evaluator |
-| pssa_stamina_item_g3_boat_04 | MCQ | PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP | PASS | foundation evaluator |
-| pssa_stamina_item_g3_boat_05 | MCQ | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | PASS | foundation evaluator |
-| pssa_stamina_item_g3_boat_05 | MCQ | PSSA_VOCAB_KEY_CONSTRUCT | PASS | foundation evaluator |
-| pssa_stamina_item_g3_boat_05 | MCQ | PSSA_SA_BANDS_NONEMPTY | PASS | foundation evaluator |
-| pssa_stamina_item_g3_boat_05 | MCQ | PSSA_ITEM_EC_GENRE_MATCH | PASS | foundation evaluator |
-| pssa_stamina_item_g3_boat_05 | MCQ | PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP | PASS | foundation evaluator |
-| pssa_stamina_item_g3_boat_ebsr_01 | EBSR | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | PASS | foundation evaluator |
-| pssa_stamina_item_g3_boat_ebsr_01 | EBSR | PSSA_VOCAB_KEY_CONSTRUCT | PASS | foundation evaluator |
-| pssa_stamina_item_g3_boat_ebsr_01 | EBSR | PSSA_SA_BANDS_NONEMPTY | PASS | foundation evaluator |
-| pssa_stamina_item_g3_boat_ebsr_01 | EBSR | PSSA_ITEM_EC_GENRE_MATCH | PASS | foundation evaluator |
-| pssa_stamina_item_g3_boat_ebsr_01 | EBSR | PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP | PASS | foundation evaluator |
-| pssa_stamina_item_g3_boat_sa_01 | SHORT_ANSWER | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | PASS | foundation evaluator |
-| pssa_stamina_item_g3_boat_sa_01 | SHORT_ANSWER | PSSA_VOCAB_KEY_CONSTRUCT | PASS | foundation evaluator |
-| pssa_stamina_item_g3_boat_sa_01 | SHORT_ANSWER | PSSA_SA_BANDS_NONEMPTY | PASS | foundation evaluator |
-| pssa_stamina_item_g3_boat_sa_01 | SHORT_ANSWER | PSSA_ITEM_EC_GENRE_MATCH | PASS | foundation evaluator |
-| pssa_stamina_item_g3_boat_sa_01 | SHORT_ANSWER | PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP | PASS | foundation evaluator |
-| pssa_stamina_item_g3_owls_01 | MCQ | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | PASS | foundation evaluator |
-| pssa_stamina_item_g3_owls_01 | MCQ | PSSA_VOCAB_KEY_CONSTRUCT | PASS | foundation evaluator |
-| pssa_stamina_item_g3_owls_01 | MCQ | PSSA_SA_BANDS_NONEMPTY | PASS | foundation evaluator |
-| pssa_stamina_item_g3_owls_01 | MCQ | PSSA_ITEM_EC_GENRE_MATCH | PASS | foundation evaluator |
-| pssa_stamina_item_g3_owls_01 | MCQ | PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP | PASS | foundation evaluator |
-| pssa_stamina_item_g3_owls_02 | MCQ | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | PASS | foundation evaluator |
-| pssa_stamina_item_g3_owls_02 | MCQ | PSSA_VOCAB_KEY_CONSTRUCT | PASS | foundation evaluator |
-| pssa_stamina_item_g3_owls_02 | MCQ | PSSA_SA_BANDS_NONEMPTY | PASS | foundation evaluator |
-| pssa_stamina_item_g3_owls_02 | MCQ | PSSA_ITEM_EC_GENRE_MATCH | PASS | foundation evaluator |
-| pssa_stamina_item_g3_owls_02 | MCQ | PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP | PASS | foundation evaluator |
-| pssa_stamina_item_g3_owls_03 | MCQ | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | PASS | foundation evaluator |
-| pssa_stamina_item_g3_owls_03 | MCQ | PSSA_VOCAB_KEY_CONSTRUCT | PASS | foundation evaluator |
-| pssa_stamina_item_g3_owls_03 | MCQ | PSSA_SA_BANDS_NONEMPTY | PASS | foundation evaluator |
-| pssa_stamina_item_g3_owls_03 | MCQ | PSSA_ITEM_EC_GENRE_MATCH | PASS | foundation evaluator |
-| pssa_stamina_item_g3_owls_03 | MCQ | PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP | PASS | foundation evaluator |
-| pssa_stamina_item_g3_owls_04 | MCQ | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | PASS | foundation evaluator |
-| pssa_stamina_item_g3_owls_04 | MCQ | PSSA_VOCAB_KEY_CONSTRUCT | PASS | foundation evaluator |
-| pssa_stamina_item_g3_owls_04 | MCQ | PSSA_SA_BANDS_NONEMPTY | PASS | foundation evaluator |
-| pssa_stamina_item_g3_owls_04 | MCQ | PSSA_ITEM_EC_GENRE_MATCH | PASS | foundation evaluator |
-| pssa_stamina_item_g3_owls_04 | MCQ | PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP | PASS | foundation evaluator |
-| pssa_stamina_item_g3_owls_05 | MCQ | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | PASS | foundation evaluator |
-| pssa_stamina_item_g3_owls_05 | MCQ | PSSA_VOCAB_KEY_CONSTRUCT | PASS | foundation evaluator |
-| pssa_stamina_item_g3_owls_05 | MCQ | PSSA_SA_BANDS_NONEMPTY | PASS | foundation evaluator |
-| pssa_stamina_item_g3_owls_05 | MCQ | PSSA_ITEM_EC_GENRE_MATCH | PASS | foundation evaluator |
-| pssa_stamina_item_g3_owls_05 | MCQ | PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP | PASS | foundation evaluator |
-| pssa_stamina_item_g3_owls_06 | SHORT_ANSWER | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | PASS | foundation evaluator |
-| pssa_stamina_item_g3_owls_06 | SHORT_ANSWER | PSSA_VOCAB_KEY_CONSTRUCT | PASS | foundation evaluator |
-| pssa_stamina_item_g3_owls_06 | SHORT_ANSWER | PSSA_SA_BANDS_NONEMPTY | PASS | foundation evaluator |
-| pssa_stamina_item_g3_owls_06 | SHORT_ANSWER | PSSA_ITEM_EC_GENRE_MATCH | PASS | foundation evaluator |
-| pssa_stamina_item_g3_owls_06 | SHORT_ANSWER | PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP | PASS | foundation evaluator |
-| pssa_stamina_item_g3_owls_ebsr_01 | EBSR | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | PASS | foundation evaluator |
-| pssa_stamina_item_g3_owls_ebsr_01 | EBSR | PSSA_VOCAB_KEY_CONSTRUCT | PASS | foundation evaluator |
-| pssa_stamina_item_g3_owls_ebsr_01 | EBSR | PSSA_SA_BANDS_NONEMPTY | PASS | foundation evaluator |
-| pssa_stamina_item_g3_owls_ebsr_01 | EBSR | PSSA_ITEM_EC_GENRE_MATCH | PASS | foundation evaluator |
-| pssa_stamina_item_g3_owls_ebsr_01 | EBSR | PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP | PASS | foundation evaluator |
-| pssa_stamina_item_g3_rabbit_01 | MCQ | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | PASS | foundation evaluator |
-| pssa_stamina_item_g3_rabbit_01 | MCQ | PSSA_VOCAB_KEY_CONSTRUCT | PASS | foundation evaluator |
-| pssa_stamina_item_g3_rabbit_01 | MCQ | PSSA_SA_BANDS_NONEMPTY | PASS | foundation evaluator |
-| pssa_stamina_item_g3_rabbit_01 | MCQ | PSSA_ITEM_EC_GENRE_MATCH | PASS | foundation evaluator |
-| pssa_stamina_item_g3_rabbit_01 | MCQ | PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP | PASS | foundation evaluator |
-| pssa_stamina_item_g3_rabbit_02 | MCQ | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | PASS | foundation evaluator |
-| pssa_stamina_item_g3_rabbit_02 | MCQ | PSSA_VOCAB_KEY_CONSTRUCT | PASS | foundation evaluator |
-| pssa_stamina_item_g3_rabbit_02 | MCQ | PSSA_SA_BANDS_NONEMPTY | PASS | foundation evaluator |
-| pssa_stamina_item_g3_rabbit_02 | MCQ | PSSA_ITEM_EC_GENRE_MATCH | PASS | foundation evaluator |
-| pssa_stamina_item_g3_rabbit_02 | MCQ | PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP | PASS | foundation evaluator |
-| pssa_stamina_item_g3_rabbit_03 | MCQ | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | PASS | foundation evaluator |
-| pssa_stamina_item_g3_rabbit_03 | MCQ | PSSA_VOCAB_KEY_CONSTRUCT | PASS | foundation evaluator |
-| pssa_stamina_item_g3_rabbit_03 | MCQ | PSSA_SA_BANDS_NONEMPTY | PASS | foundation evaluator |
-| pssa_stamina_item_g3_rabbit_03 | MCQ | PSSA_ITEM_EC_GENRE_MATCH | PASS | foundation evaluator |
-| pssa_stamina_item_g3_rabbit_03 | MCQ | PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP | PASS | foundation evaluator |
-| pssa_stamina_item_g3_rabbit_04 | MCQ | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | PASS | foundation evaluator |
-| pssa_stamina_item_g3_rabbit_04 | MCQ | PSSA_VOCAB_KEY_CONSTRUCT | PASS | foundation evaluator |
-| pssa_stamina_item_g3_rabbit_04 | MCQ | PSSA_SA_BANDS_NONEMPTY | PASS | foundation evaluator |
-| pssa_stamina_item_g3_rabbit_04 | MCQ | PSSA_ITEM_EC_GENRE_MATCH | PASS | foundation evaluator |
-| pssa_stamina_item_g3_rabbit_04 | MCQ | PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP | PASS | foundation evaluator |
-| pssa_stamina_item_g3_rabbit_05 | MCQ | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | PASS | foundation evaluator |
-| pssa_stamina_item_g3_rabbit_05 | MCQ | PSSA_VOCAB_KEY_CONSTRUCT | PASS | foundation evaluator |
-| pssa_stamina_item_g3_rabbit_05 | MCQ | PSSA_SA_BANDS_NONEMPTY | PASS | foundation evaluator |
-| pssa_stamina_item_g3_rabbit_05 | MCQ | PSSA_ITEM_EC_GENRE_MATCH | PASS | foundation evaluator |
-| pssa_stamina_item_g3_rabbit_05 | MCQ | PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP | PASS | foundation evaluator |
-| pssa_stamina_item_g3_rabbit_06 | MCQ | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | PASS | foundation evaluator |
-| pssa_stamina_item_g3_rabbit_06 | MCQ | PSSA_VOCAB_KEY_CONSTRUCT | PASS | foundation evaluator |
-| pssa_stamina_item_g3_rabbit_06 | MCQ | PSSA_SA_BANDS_NONEMPTY | PASS | foundation evaluator |
-| pssa_stamina_item_g3_rabbit_06 | MCQ | PSSA_ITEM_EC_GENRE_MATCH | PASS | foundation evaluator |
-| pssa_stamina_item_g3_rabbit_06 | MCQ | PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP | PASS | foundation evaluator |
-| pssa_stamina_item_g3_rabbit_ebsr_01 | EBSR | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | PASS | foundation evaluator |
-| pssa_stamina_item_g3_rabbit_ebsr_01 | EBSR | PSSA_VOCAB_KEY_CONSTRUCT | PASS | foundation evaluator |
-| pssa_stamina_item_g3_rabbit_ebsr_01 | EBSR | PSSA_SA_BANDS_NONEMPTY | PASS | foundation evaluator |
-| pssa_stamina_item_g3_rabbit_ebsr_01 | EBSR | PSSA_ITEM_EC_GENRE_MATCH | PASS | foundation evaluator |
-| pssa_stamina_item_g3_rabbit_ebsr_01 | EBSR | PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP | PASS | foundation evaluator |
-| pssa_stamina_item_g3_rabbit_sa_01 | SHORT_ANSWER | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | PASS | foundation evaluator |
-| pssa_stamina_item_g3_rabbit_sa_01 | SHORT_ANSWER | PSSA_VOCAB_KEY_CONSTRUCT | PASS | foundation evaluator |
-| pssa_stamina_item_g3_rabbit_sa_01 | SHORT_ANSWER | PSSA_SA_BANDS_NONEMPTY | PASS | foundation evaluator |
-| pssa_stamina_item_g3_rabbit_sa_01 | SHORT_ANSWER | PSSA_ITEM_EC_GENRE_MATCH | PASS | foundation evaluator |
-| pssa_stamina_item_g3_rabbit_sa_01 | SHORT_ANSWER | PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP | PASS | foundation evaluator |
-| conv_01 | MCQ | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | PASS | foundation evaluator |
-| conv_01 | MCQ | PSSA_VOCAB_KEY_CONSTRUCT | PASS | foundation evaluator |
-| conv_01 | MCQ | PSSA_SA_BANDS_NONEMPTY | PASS | foundation evaluator |
-| conv_01 | MCQ | PSSA_ITEM_EC_GENRE_MATCH | PASS | foundation evaluator |
-| conv_01 | MCQ | PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP | PASS | foundation evaluator |
-| conv_02 | MCQ | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | PASS | foundation evaluator |
-| conv_02 | MCQ | PSSA_VOCAB_KEY_CONSTRUCT | PASS | foundation evaluator |
-| conv_02 | MCQ | PSSA_SA_BANDS_NONEMPTY | PASS | foundation evaluator |
-| conv_02 | MCQ | PSSA_ITEM_EC_GENRE_MATCH | PASS | foundation evaluator |
-| conv_02 | MCQ | PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP | PASS | foundation evaluator |
-| conv_03 | MCQ | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | PASS | foundation evaluator |
-| conv_03 | MCQ | PSSA_VOCAB_KEY_CONSTRUCT | PASS | foundation evaluator |
-| conv_03 | MCQ | PSSA_SA_BANDS_NONEMPTY | PASS | foundation evaluator |
-| conv_03 | MCQ | PSSA_ITEM_EC_GENRE_MATCH | PASS | foundation evaluator |
-| conv_03 | MCQ | PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP | PASS | foundation evaluator |
-| conv_04 | MCQ | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | PASS | foundation evaluator |
-| conv_04 | MCQ | PSSA_VOCAB_KEY_CONSTRUCT | PASS | foundation evaluator |
-| conv_04 | MCQ | PSSA_SA_BANDS_NONEMPTY | PASS | foundation evaluator |
-| conv_04 | MCQ | PSSA_ITEM_EC_GENRE_MATCH | PASS | foundation evaluator |
-| conv_04 | MCQ | PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP | PASS | foundation evaluator |
-| conv_05 | MCQ | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | PASS | foundation evaluator |
-| conv_05 | MCQ | PSSA_VOCAB_KEY_CONSTRUCT | PASS | foundation evaluator |
-| conv_05 | MCQ | PSSA_SA_BANDS_NONEMPTY | PASS | foundation evaluator |
-| conv_05 | MCQ | PSSA_ITEM_EC_GENRE_MATCH | PASS | foundation evaluator |
-| conv_05 | MCQ | PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP | PASS | foundation evaluator |
-| conv_06 | MCQ | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | PASS | foundation evaluator |
-| conv_06 | MCQ | PSSA_VOCAB_KEY_CONSTRUCT | PASS | foundation evaluator |
-| conv_06 | MCQ | PSSA_SA_BANDS_NONEMPTY | PASS | foundation evaluator |
-| conv_06 | MCQ | PSSA_ITEM_EC_GENRE_MATCH | PASS | foundation evaluator |
-| conv_06 | MCQ | PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP | PASS | foundation evaluator |
-| conv_07 | MCQ | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | PASS | foundation evaluator |
-| conv_07 | MCQ | PSSA_VOCAB_KEY_CONSTRUCT | PASS | foundation evaluator |
-| conv_07 | MCQ | PSSA_SA_BANDS_NONEMPTY | PASS | foundation evaluator |
-| conv_07 | MCQ | PSSA_ITEM_EC_GENRE_MATCH | PASS | foundation evaluator |
-| conv_07 | MCQ | PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP | PASS | foundation evaluator |
-| conv_08 | MCQ | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | PASS | foundation evaluator |
-| conv_08 | MCQ | PSSA_VOCAB_KEY_CONSTRUCT | PASS | foundation evaluator |
-| conv_08 | MCQ | PSSA_SA_BANDS_NONEMPTY | PASS | foundation evaluator |
-| conv_08 | MCQ | PSSA_ITEM_EC_GENRE_MATCH | PASS | foundation evaluator |
-| conv_08 | MCQ | PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP | PASS | foundation evaluator |
-| conv_09 | MCQ | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | PASS | foundation evaluator |
-| conv_09 | MCQ | PSSA_VOCAB_KEY_CONSTRUCT | PASS | foundation evaluator |
-| conv_09 | MCQ | PSSA_SA_BANDS_NONEMPTY | PASS | foundation evaluator |
-| conv_09 | MCQ | PSSA_ITEM_EC_GENRE_MATCH | PASS | foundation evaluator |
-| conv_09 | MCQ | PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP | PASS | foundation evaluator |
-| pssa_stamina_item_g3_syrup_01 | MCQ | PSSA_MCQ_PASSAGE_SPECIFICITY | PASS | 1 detector rows; failures=0 |
-| pssa_stamina_item_g3_syrup_02 | MCQ | PSSA_MCQ_PASSAGE_SPECIFICITY | PASS | 1 detector rows; failures=0 |
-| pssa_stamina_item_g3_syrup_03 | MCQ | PSSA_MCQ_PASSAGE_SPECIFICITY | PASS | 1 detector rows; failures=0 |
-| pssa_stamina_item_g3_syrup_04 | MCQ | PSSA_MCQ_PASSAGE_SPECIFICITY | PASS | 1 detector rows; failures=0 |
-| pssa_stamina_item_g3_boat_01 | MCQ | PSSA_MCQ_PASSAGE_SPECIFICITY | PASS | 1 detector rows; failures=0 |
-| pssa_stamina_item_g3_boat_02 | MCQ | PSSA_MCQ_PASSAGE_SPECIFICITY | PASS | 1 detector rows; failures=0 |
-| pssa_stamina_item_g3_boat_03 | MCQ | PSSA_MCQ_PASSAGE_SPECIFICITY | PASS | 1 detector rows; failures=0 |
-| pssa_stamina_item_g3_boat_04 | MCQ | PSSA_MCQ_PASSAGE_SPECIFICITY | PASS | 1 detector rows; failures=0 |
-| pssa_stamina_item_g3_boat_05 | MCQ | PSSA_MCQ_PASSAGE_SPECIFICITY | PASS | 1 detector rows; failures=0 |
-| pssa_stamina_item_g3_owls_01 | MCQ | PSSA_MCQ_PASSAGE_SPECIFICITY | SKIP | not passage-linked reading MCQ (standalone conventions or paired group variant) |
-| pssa_stamina_item_g3_owls_02 | MCQ | PSSA_MCQ_PASSAGE_SPECIFICITY | SKIP | not passage-linked reading MCQ (standalone conventions or paired group variant) |
-| pssa_stamina_item_g3_owls_03 | MCQ | PSSA_MCQ_PASSAGE_SPECIFICITY | SKIP | not passage-linked reading MCQ (standalone conventions or paired group variant) |
-| pssa_stamina_item_g3_owls_04 | MCQ | PSSA_MCQ_PASSAGE_SPECIFICITY | SKIP | not passage-linked reading MCQ (standalone conventions or paired group variant) |
-| pssa_stamina_item_g3_owls_05 | MCQ | PSSA_MCQ_PASSAGE_SPECIFICITY | SKIP | not passage-linked reading MCQ (standalone conventions or paired group variant) |
-| pssa_stamina_item_g3_rabbit_01 | MCQ | PSSA_MCQ_PASSAGE_SPECIFICITY | PASS | 1 detector rows; failures=0 |
-| pssa_stamina_item_g3_rabbit_02 | MCQ | PSSA_MCQ_PASSAGE_SPECIFICITY | PASS | 1 detector rows; failures=0 |
-| pssa_stamina_item_g3_rabbit_03 | MCQ | PSSA_MCQ_PASSAGE_SPECIFICITY | PASS | 1 detector rows; failures=0 |
-| pssa_stamina_item_g3_rabbit_04 | MCQ | PSSA_MCQ_PASSAGE_SPECIFICITY | PASS | 1 detector rows; failures=0 |
-| pssa_stamina_item_g3_rabbit_05 | MCQ | PSSA_MCQ_PASSAGE_SPECIFICITY | PASS | 1 detector rows; failures=0 |
-| pssa_stamina_item_g3_rabbit_06 | MCQ | PSSA_MCQ_PASSAGE_SPECIFICITY | PASS | 1 detector rows; failures=0 |
-| conv_01 | MCQ | PSSA_MCQ_PASSAGE_SPECIFICITY | SKIP | not passage-linked reading MCQ (standalone conventions or paired group variant) |
-| conv_02 | MCQ | PSSA_MCQ_PASSAGE_SPECIFICITY | SKIP | not passage-linked reading MCQ (standalone conventions or paired group variant) |
-| conv_03 | MCQ | PSSA_MCQ_PASSAGE_SPECIFICITY | SKIP | not passage-linked reading MCQ (standalone conventions or paired group variant) |
-| conv_04 | MCQ | PSSA_MCQ_PASSAGE_SPECIFICITY | SKIP | not passage-linked reading MCQ (standalone conventions or paired group variant) |
-| conv_05 | MCQ | PSSA_MCQ_PASSAGE_SPECIFICITY | SKIP | not passage-linked reading MCQ (standalone conventions or paired group variant) |
-| conv_06 | MCQ | PSSA_MCQ_PASSAGE_SPECIFICITY | SKIP | not passage-linked reading MCQ (standalone conventions or paired group variant) |
-| conv_07 | MCQ | PSSA_MCQ_PASSAGE_SPECIFICITY | SKIP | not passage-linked reading MCQ (standalone conventions or paired group variant) |
-| conv_08 | MCQ | PSSA_MCQ_PASSAGE_SPECIFICITY | SKIP | not passage-linked reading MCQ (standalone conventions or paired group variant) |
-| conv_09 | MCQ | PSSA_MCQ_PASSAGE_SPECIFICITY | SKIP | not passage-linked reading MCQ (standalone conventions or paired group variant) |
-| pssa_stamina_item_g3_syrup_01 | MCQ | PSSA_ITEM_EC_SKILL_MATCH | PASS | PASS: Observed stem/evidence pattern is compatible with EC skill family. |
-| pssa_stamina_item_g3_syrup_02 | MCQ | PSSA_ITEM_EC_SKILL_MATCH | PASS | PASS: Vocabulary stem, target, evidence, and choices align. |
-| pssa_stamina_item_g3_syrup_03 | MCQ | PSSA_ITEM_EC_SKILL_MATCH | PASS | PASS: Observed stem/evidence pattern is compatible with EC skill family. |
-| pssa_stamina_item_g3_syrup_04 | MCQ | PSSA_ITEM_EC_SKILL_MATCH | PASS | PASS: Observed stem/evidence pattern is compatible with EC skill family. |
-| pssa_stamina_item_g3_boat_01 | MCQ | PSSA_ITEM_EC_SKILL_MATCH | PASS | PASS: Observed stem/evidence pattern is compatible with EC skill family. |
-| pssa_stamina_item_g3_boat_02 | MCQ | PSSA_ITEM_EC_SKILL_MATCH | PASS | PASS: Observed stem/evidence pattern is compatible with EC skill family. |
-| pssa_stamina_item_g3_boat_03 | MCQ | PSSA_ITEM_EC_SKILL_MATCH | PASS | PASS: Observed stem/evidence pattern is compatible with EC skill family. |
-| pssa_stamina_item_g3_boat_04 | MCQ | PSSA_ITEM_EC_SKILL_MATCH | PASS | WARN: Figurative phrase or word-choice-effect interpretation needs human review. |
-| pssa_stamina_item_g3_boat_05 | MCQ | PSSA_ITEM_EC_SKILL_MATCH | PASS | PASS: Observed stem/evidence pattern is compatible with EC skill family. |
-| pssa_stamina_item_g3_owls_01 | MCQ | PSSA_ITEM_EC_SKILL_MATCH | SKIP | not passage-linked reading MCQ |
-| pssa_stamina_item_g3_owls_02 | MCQ | PSSA_ITEM_EC_SKILL_MATCH | SKIP | not passage-linked reading MCQ |
-| pssa_stamina_item_g3_owls_03 | MCQ | PSSA_ITEM_EC_SKILL_MATCH | SKIP | not passage-linked reading MCQ |
-| pssa_stamina_item_g3_owls_04 | MCQ | PSSA_ITEM_EC_SKILL_MATCH | SKIP | not passage-linked reading MCQ |
-| pssa_stamina_item_g3_owls_05 | MCQ | PSSA_ITEM_EC_SKILL_MATCH | SKIP | not passage-linked reading MCQ |
-| pssa_stamina_item_g3_rabbit_01 | MCQ | PSSA_ITEM_EC_SKILL_MATCH | PASS | PASS: Observed stem/evidence pattern is compatible with EC skill family. |
-| pssa_stamina_item_g3_rabbit_02 | MCQ | PSSA_ITEM_EC_SKILL_MATCH | PASS | PASS: Observed stem/evidence pattern is compatible with EC skill family. |
-| pssa_stamina_item_g3_rabbit_03 | MCQ | PSSA_ITEM_EC_SKILL_MATCH | PASS | PASS: Observed stem/evidence pattern is compatible with EC skill family. |
-| pssa_stamina_item_g3_rabbit_04 | MCQ | PSSA_ITEM_EC_SKILL_MATCH | PASS | PASS: Observed stem/evidence pattern is compatible with EC skill family. |
-| pssa_stamina_item_g3_rabbit_05 | MCQ | PSSA_ITEM_EC_SKILL_MATCH | PASS | WARN: Figurative phrase or word-choice-effect interpretation needs human review. |
-| pssa_stamina_item_g3_rabbit_06 | MCQ | PSSA_ITEM_EC_SKILL_MATCH | PASS | PASS: Observed stem/evidence pattern is compatible with EC skill family. |
-| conv_01 | MCQ | PSSA_ITEM_EC_SKILL_MATCH | SKIP | not passage-linked reading MCQ |
-| conv_02 | MCQ | PSSA_ITEM_EC_SKILL_MATCH | SKIP | not passage-linked reading MCQ |
-| conv_03 | MCQ | PSSA_ITEM_EC_SKILL_MATCH | SKIP | not passage-linked reading MCQ |
-| conv_04 | MCQ | PSSA_ITEM_EC_SKILL_MATCH | SKIP | not passage-linked reading MCQ |
-| conv_05 | MCQ | PSSA_ITEM_EC_SKILL_MATCH | SKIP | not passage-linked reading MCQ |
-| conv_06 | MCQ | PSSA_ITEM_EC_SKILL_MATCH | SKIP | not passage-linked reading MCQ |
-| conv_07 | MCQ | PSSA_ITEM_EC_SKILL_MATCH | SKIP | not passage-linked reading MCQ |
-| conv_08 | MCQ | PSSA_ITEM_EC_SKILL_MATCH | SKIP | not passage-linked reading MCQ |
-| conv_09 | MCQ | PSSA_ITEM_EC_SKILL_MATCH | SKIP | not passage-linked reading MCQ |
-| pssa_stamina_item_g3_syrup_01 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | choiceGroup=pssa_stamina_item_g3_syrup_01; correctWords=9; maxDistractorWords=10; gap=-1; uniquelyLongest=true |
-| pssa_stamina_item_g3_syrup_02 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | choiceGroup=pssa_stamina_item_g3_syrup_02; correctWords=2; maxDistractorWords=8; gap=-6; uniquelyLongest=false |
-| pssa_stamina_item_g3_syrup_03 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | choiceGroup=pssa_stamina_item_g3_syrup_03; correctWords=11; maxDistractorWords=11; gap=0; uniquelyLongest=true |
-| pssa_stamina_item_g3_syrup_04 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | choiceGroup=pssa_stamina_item_g3_syrup_04; correctWords=11; maxDistractorWords=12; gap=-1; uniquelyLongest=false |
-| pssa_stamina_item_g3_syrup_ebsr_01 | EBSR | PSSA_MCQ_CORRECT_IS_LONGEST_EBSR_PART_A_REPORT_ONLY | PASS | choiceGroup=pssa_stamina_item_g3_syrup_ebsr_01::partA; correctWords=10; maxDistractorWords=12; gap=-2; uniquelyLongest=false |
-| pssa_stamina_item_g3_boat_01 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | choiceGroup=pssa_stamina_item_g3_boat_01; correctWords=12; maxDistractorWords=15; gap=-3; uniquelyLongest=false |
-| pssa_stamina_item_g3_boat_02 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | choiceGroup=pssa_stamina_item_g3_boat_02; correctWords=14; maxDistractorWords=15; gap=-1; uniquelyLongest=false |
-| pssa_stamina_item_g3_boat_03 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | choiceGroup=pssa_stamina_item_g3_boat_03; correctWords=7; maxDistractorWords=7; gap=0; uniquelyLongest=false |
-| pssa_stamina_item_g3_boat_04 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | choiceGroup=pssa_stamina_item_g3_boat_04; correctWords=11; maxDistractorWords=11; gap=0; uniquelyLongest=false |
-| pssa_stamina_item_g3_boat_05 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | choiceGroup=pssa_stamina_item_g3_boat_05; correctWords=14; maxDistractorWords=16; gap=-2; uniquelyLongest=false |
-| pssa_stamina_item_g3_boat_ebsr_01 | EBSR | PSSA_MCQ_CORRECT_IS_LONGEST_EBSR_PART_A_REPORT_ONLY | PASS | choiceGroup=pssa_stamina_item_g3_boat_ebsr_01::partA; correctWords=8; maxDistractorWords=9; gap=-1; uniquelyLongest=true |
-| pssa_stamina_item_g3_owls_01 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | choiceGroup=pssa_stamina_item_g3_owls_01; correctWords=8; maxDistractorWords=8; gap=0; uniquelyLongest=false |
-| pssa_stamina_item_g3_owls_02 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | choiceGroup=pssa_stamina_item_g3_owls_02; correctWords=7; maxDistractorWords=7; gap=0; uniquelyLongest=true |
-| pssa_stamina_item_g3_owls_03 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | choiceGroup=pssa_stamina_item_g3_owls_03; correctWords=9; maxDistractorWords=9; gap=0; uniquelyLongest=false |
-| pssa_stamina_item_g3_owls_04 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | choiceGroup=pssa_stamina_item_g3_owls_04; correctWords=8; maxDistractorWords=10; gap=-2; uniquelyLongest=false |
-| pssa_stamina_item_g3_owls_05 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | choiceGroup=pssa_stamina_item_g3_owls_05; correctWords=16; maxDistractorWords=18; gap=-2; uniquelyLongest=true |
-| pssa_stamina_item_g3_owls_ebsr_01 | EBSR | PSSA_MCQ_CORRECT_IS_LONGEST_EBSR_PART_A_REPORT_ONLY | PASS | choiceGroup=pssa_stamina_item_g3_owls_ebsr_01::partA; correctWords=10; maxDistractorWords=10; gap=0; uniquelyLongest=false |
-| pssa_stamina_item_g3_rabbit_01 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | choiceGroup=pssa_stamina_item_g3_rabbit_01; correctWords=9; maxDistractorWords=11; gap=-2; uniquelyLongest=false |
-| pssa_stamina_item_g3_rabbit_02 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | choiceGroup=pssa_stamina_item_g3_rabbit_02; correctWords=14; maxDistractorWords=14; gap=0; uniquelyLongest=false |
-| pssa_stamina_item_g3_rabbit_03 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | choiceGroup=pssa_stamina_item_g3_rabbit_03; correctWords=7; maxDistractorWords=8; gap=-1; uniquelyLongest=true |
-| pssa_stamina_item_g3_rabbit_04 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | choiceGroup=pssa_stamina_item_g3_rabbit_04; correctWords=8; maxDistractorWords=9; gap=-1; uniquelyLongest=false |
-| pssa_stamina_item_g3_rabbit_05 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | choiceGroup=pssa_stamina_item_g3_rabbit_05; correctWords=5; maxDistractorWords=6; gap=-1; uniquelyLongest=false |
-| pssa_stamina_item_g3_rabbit_06 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | choiceGroup=pssa_stamina_item_g3_rabbit_06; correctWords=9; maxDistractorWords=9; gap=0; uniquelyLongest=false |
-| pssa_stamina_item_g3_rabbit_ebsr_01 | EBSR | PSSA_MCQ_CORRECT_IS_LONGEST_EBSR_PART_A_REPORT_ONLY | PASS | choiceGroup=pssa_stamina_item_g3_rabbit_ebsr_01::partA; correctWords=10; maxDistractorWords=11; gap=-1; uniquelyLongest=true |
-| conv_01 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | choiceGroup=conv_01; correctWords=1; maxDistractorWords=1; gap=0; uniquelyLongest=false |
-| conv_02 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | choiceGroup=conv_02; correctWords=5; maxDistractorWords=5; gap=0; uniquelyLongest=true |
-| conv_03 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | choiceGroup=conv_03; correctWords=6; maxDistractorWords=7; gap=-1; uniquelyLongest=false |
-| conv_04 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | choiceGroup=conv_04; correctWords=7; maxDistractorWords=7; gap=0; uniquelyLongest=false |
-| conv_05 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | choiceGroup=conv_05; correctWords=1; maxDistractorWords=2; gap=-1; uniquelyLongest=false |
-| conv_06 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | choiceGroup=conv_06; correctWords=5; maxDistractorWords=5; gap=0; uniquelyLongest=false |
-| conv_07 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | choiceGroup=conv_07; correctWords=9; maxDistractorWords=9; gap=0; uniquelyLongest=true |
-| conv_08 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | choiceGroup=conv_08; correctWords=7; maxDistractorWords=7; gap=0; uniquelyLongest=false |
-| conv_09 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | choiceGroup=conv_09; correctWords=6; maxDistractorWords=6; gap=0; uniquelyLongest=true |
-| pssa_stamina_item_g3_syrup_01 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | choiceGroup=pssa_stamina_item_g3_syrup_01 |
-| pssa_stamina_item_g3_syrup_02 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | choiceGroup=pssa_stamina_item_g3_syrup_02 |
-| pssa_stamina_item_g3_syrup_03 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | choiceGroup=pssa_stamina_item_g3_syrup_03 |
-| pssa_stamina_item_g3_syrup_04 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | choiceGroup=pssa_stamina_item_g3_syrup_04 |
-| pssa_stamina_item_g3_syrup_ebsr_01 | EBSR | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR_EBSR_PART_A_REPORT_ONLY | PASS | choiceGroup=pssa_stamina_item_g3_syrup_ebsr_01::partA |
-| pssa_stamina_item_g3_boat_01 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | choiceGroup=pssa_stamina_item_g3_boat_01 |
-| pssa_stamina_item_g3_boat_02 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | choiceGroup=pssa_stamina_item_g3_boat_02 |
-| pssa_stamina_item_g3_boat_03 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | choiceGroup=pssa_stamina_item_g3_boat_03 |
-| pssa_stamina_item_g3_boat_04 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | choiceGroup=pssa_stamina_item_g3_boat_04 |
-| pssa_stamina_item_g3_boat_05 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | choiceGroup=pssa_stamina_item_g3_boat_05 |
-| pssa_stamina_item_g3_boat_ebsr_01 | EBSR | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR_EBSR_PART_A_REPORT_ONLY | PASS | choiceGroup=pssa_stamina_item_g3_boat_ebsr_01::partA |
-| pssa_stamina_item_g3_owls_01 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | choiceGroup=pssa_stamina_item_g3_owls_01 |
-| pssa_stamina_item_g3_owls_02 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | choiceGroup=pssa_stamina_item_g3_owls_02 |
-| pssa_stamina_item_g3_owls_03 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | choiceGroup=pssa_stamina_item_g3_owls_03 |
-| pssa_stamina_item_g3_owls_04 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | choiceGroup=pssa_stamina_item_g3_owls_04 |
-| pssa_stamina_item_g3_owls_05 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | choiceGroup=pssa_stamina_item_g3_owls_05 |
-| pssa_stamina_item_g3_owls_ebsr_01 | EBSR | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR_EBSR_PART_A_REPORT_ONLY | PASS | choiceGroup=pssa_stamina_item_g3_owls_ebsr_01::partA |
-| pssa_stamina_item_g3_rabbit_01 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | choiceGroup=pssa_stamina_item_g3_rabbit_01 |
-| pssa_stamina_item_g3_rabbit_02 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | choiceGroup=pssa_stamina_item_g3_rabbit_02 |
-| pssa_stamina_item_g3_rabbit_03 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | choiceGroup=pssa_stamina_item_g3_rabbit_03 |
-| pssa_stamina_item_g3_rabbit_04 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | choiceGroup=pssa_stamina_item_g3_rabbit_04 |
-| pssa_stamina_item_g3_rabbit_05 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | choiceGroup=pssa_stamina_item_g3_rabbit_05 |
-| pssa_stamina_item_g3_rabbit_06 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | choiceGroup=pssa_stamina_item_g3_rabbit_06 |
-| pssa_stamina_item_g3_rabbit_ebsr_01 | EBSR | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR_EBSR_PART_A_REPORT_ONLY | PASS | choiceGroup=pssa_stamina_item_g3_rabbit_ebsr_01::partA |
-| conv_01 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | choiceGroup=conv_01 |
-| conv_02 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | choiceGroup=conv_02 |
-| conv_03 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | choiceGroup=conv_03 |
-| conv_04 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | choiceGroup=conv_04 |
-| conv_05 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | choiceGroup=conv_05 |
-| conv_06 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | choiceGroup=conv_06 |
-| conv_07 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | choiceGroup=conv_07 |
-| conv_08 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | choiceGroup=conv_08 |
-| conv_09 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | choiceGroup=conv_09 |
-| pssa_stamina_item_g3_syrup_01 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | A:8 B:7 C:7 D:7 maxShare=0.2759 |
-| pssa_stamina_item_g3_syrup_02 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | A:8 B:7 C:7 D:7 maxShare=0.2759 |
-| pssa_stamina_item_g3_syrup_03 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | A:8 B:7 C:7 D:7 maxShare=0.2759 |
-| pssa_stamina_item_g3_syrup_04 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | A:8 B:7 C:7 D:7 maxShare=0.2759 |
-| pssa_stamina_item_g3_boat_01 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | A:8 B:7 C:7 D:7 maxShare=0.2759 |
-| pssa_stamina_item_g3_boat_02 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | A:8 B:7 C:7 D:7 maxShare=0.2759 |
-| pssa_stamina_item_g3_boat_03 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | A:8 B:7 C:7 D:7 maxShare=0.2759 |
-| pssa_stamina_item_g3_boat_04 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | A:8 B:7 C:7 D:7 maxShare=0.2759 |
-| pssa_stamina_item_g3_boat_05 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | A:8 B:7 C:7 D:7 maxShare=0.2759 |
-| pssa_stamina_item_g3_owls_01 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | A:8 B:7 C:7 D:7 maxShare=0.2759 |
-| pssa_stamina_item_g3_owls_02 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | A:8 B:7 C:7 D:7 maxShare=0.2759 |
-| pssa_stamina_item_g3_owls_03 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | A:8 B:7 C:7 D:7 maxShare=0.2759 |
-| pssa_stamina_item_g3_owls_04 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | A:8 B:7 C:7 D:7 maxShare=0.2759 |
-| pssa_stamina_item_g3_owls_05 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | A:8 B:7 C:7 D:7 maxShare=0.2759 |
-| pssa_stamina_item_g3_rabbit_01 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | A:8 B:7 C:7 D:7 maxShare=0.2759 |
-| pssa_stamina_item_g3_rabbit_02 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | A:8 B:7 C:7 D:7 maxShare=0.2759 |
-| pssa_stamina_item_g3_rabbit_03 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | A:8 B:7 C:7 D:7 maxShare=0.2759 |
-| pssa_stamina_item_g3_rabbit_04 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | A:8 B:7 C:7 D:7 maxShare=0.2759 |
-| pssa_stamina_item_g3_rabbit_05 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | A:8 B:7 C:7 D:7 maxShare=0.2759 |
-| pssa_stamina_item_g3_rabbit_06 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | A:8 B:7 C:7 D:7 maxShare=0.2759 |
-| conv_01 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | A:8 B:7 C:7 D:7 maxShare=0.2759 |
-| conv_02 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | A:8 B:7 C:7 D:7 maxShare=0.2759 |
-| conv_03 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | A:8 B:7 C:7 D:7 maxShare=0.2759 |
-| conv_04 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | A:8 B:7 C:7 D:7 maxShare=0.2759 |
-| conv_05 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | A:8 B:7 C:7 D:7 maxShare=0.2759 |
-| conv_06 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | A:8 B:7 C:7 D:7 maxShare=0.2759 |
-| conv_07 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | A:8 B:7 C:7 D:7 maxShare=0.2759 |
-| conv_08 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | A:8 B:7 C:7 D:7 maxShare=0.2759 |
-| conv_09 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | A:8 B:7 C:7 D:7 maxShare=0.2759 |
-| pssa_stamina_item_g3_syrup_ebsr_01 | EBSR | PSSA_EBSR_PART_A_ANSWER_POSITION_DISTRIBUTION_REPORT_ONLY | PASS | A:1 B:1 C:1 D:1 maxShare=0.2500 |
-| pssa_stamina_item_g3_boat_ebsr_01 | EBSR | PSSA_EBSR_PART_A_ANSWER_POSITION_DISTRIBUTION_REPORT_ONLY | PASS | A:1 B:1 C:1 D:1 maxShare=0.2500 |
-| pssa_stamina_item_g3_owls_ebsr_01 | EBSR | PSSA_EBSR_PART_A_ANSWER_POSITION_DISTRIBUTION_REPORT_ONLY | PASS | A:1 B:1 C:1 D:1 maxShare=0.2500 |
-| pssa_stamina_item_g3_rabbit_ebsr_01 | EBSR | PSSA_EBSR_PART_A_ANSWER_POSITION_DISTRIBUTION_REPORT_ONLY | PASS | A:1 B:1 C:1 D:1 maxShare=0.2500 |
-| pssa_stamina_item_g3_syrup_01 | MCQ | PSSA_ITEM_FOOTNOTE_GIVEAWAY | PASS | vocab targets must not be visible footnote definitions |
-| pssa_stamina_item_g3_syrup_02 | MCQ | PSSA_ITEM_FOOTNOTE_GIVEAWAY | PASS | vocab targets must not be visible footnote definitions |
-| pssa_stamina_item_g3_syrup_03 | MCQ | PSSA_ITEM_FOOTNOTE_GIVEAWAY | PASS | vocab targets must not be visible footnote definitions |
-| pssa_stamina_item_g3_syrup_04 | MCQ | PSSA_ITEM_FOOTNOTE_GIVEAWAY | PASS | vocab targets must not be visible footnote definitions |
-| pssa_stamina_item_g3_syrup_ebsr_01 | EBSR | PSSA_ITEM_FOOTNOTE_GIVEAWAY | PASS | vocab targets must not be visible footnote definitions |
-| pssa_stamina_item_g3_syrup_sa_01 | SHORT_ANSWER | PSSA_ITEM_FOOTNOTE_GIVEAWAY | PASS | vocab targets must not be visible footnote definitions |
-| pssa_stamina_item_g3_boat_01 | MCQ | PSSA_ITEM_FOOTNOTE_GIVEAWAY | PASS | vocab targets must not be visible footnote definitions |
-| pssa_stamina_item_g3_boat_02 | MCQ | PSSA_ITEM_FOOTNOTE_GIVEAWAY | PASS | vocab targets must not be visible footnote definitions |
-| pssa_stamina_item_g3_boat_03 | MCQ | PSSA_ITEM_FOOTNOTE_GIVEAWAY | PASS | vocab targets must not be visible footnote definitions |
-| pssa_stamina_item_g3_boat_04 | MCQ | PSSA_ITEM_FOOTNOTE_GIVEAWAY | PASS | vocab targets must not be visible footnote definitions |
-| pssa_stamina_item_g3_boat_05 | MCQ | PSSA_ITEM_FOOTNOTE_GIVEAWAY | PASS | vocab targets must not be visible footnote definitions |
-| pssa_stamina_item_g3_boat_ebsr_01 | EBSR | PSSA_ITEM_FOOTNOTE_GIVEAWAY | PASS | vocab targets must not be visible footnote definitions |
-| pssa_stamina_item_g3_boat_sa_01 | SHORT_ANSWER | PSSA_ITEM_FOOTNOTE_GIVEAWAY | PASS | vocab targets must not be visible footnote definitions |
-| pssa_stamina_item_g3_rabbit_01 | MCQ | PSSA_ITEM_FOOTNOTE_GIVEAWAY | PASS | vocab targets must not be visible footnote definitions |
-| pssa_stamina_item_g3_rabbit_02 | MCQ | PSSA_ITEM_FOOTNOTE_GIVEAWAY | PASS | vocab targets must not be visible footnote definitions |
-| pssa_stamina_item_g3_rabbit_03 | MCQ | PSSA_ITEM_FOOTNOTE_GIVEAWAY | PASS | vocab targets must not be visible footnote definitions |
-| pssa_stamina_item_g3_rabbit_04 | MCQ | PSSA_ITEM_FOOTNOTE_GIVEAWAY | PASS | vocab targets must not be visible footnote definitions |
-| pssa_stamina_item_g3_rabbit_05 | MCQ | PSSA_ITEM_FOOTNOTE_GIVEAWAY | PASS | vocab targets must not be visible footnote definitions |
-| pssa_stamina_item_g3_rabbit_06 | MCQ | PSSA_ITEM_FOOTNOTE_GIVEAWAY | PASS | vocab targets must not be visible footnote definitions |
-| pssa_stamina_item_g3_rabbit_ebsr_01 | EBSR | PSSA_ITEM_FOOTNOTE_GIVEAWAY | PASS | vocab targets must not be visible footnote definitions |
-| pssa_stamina_item_g3_rabbit_sa_01 | SHORT_ANSWER | PSSA_ITEM_FOOTNOTE_GIVEAWAY | PASS | vocab targets must not be visible footnote definitions |
-| pssa_stamina_item_g3_owls_01 | MCQ | PSSA_SECTION_LOOKBACK_BALANCE | PASS | required evidence slots covered |
-| pssa_stamina_item_g3_owls_02 | MCQ | PSSA_SECTION_LOOKBACK_BALANCE | PASS | required evidence slots covered |
-| pssa_stamina_item_g3_owls_03 | MCQ | PSSA_SECTION_LOOKBACK_BALANCE | PASS | required evidence slots covered |
-| pssa_stamina_item_g3_owls_04 | MCQ | PSSA_SECTION_LOOKBACK_BALANCE | PASS | required evidence slots covered |
-| pssa_stamina_item_g3_owls_05 | MCQ | PSSA_SECTION_LOOKBACK_BALANCE | PASS | required evidence slots covered |
-| pssa_stamina_item_g3_owls_06 | SHORT_ANSWER | PSSA_SECTION_LOOKBACK_BALANCE | PASS | required evidence slots covered |
-| pssa_stamina_item_g3_owls_ebsr_01 | EBSR | PSSA_SECTION_LOOKBACK_BALANCE | PASS | required evidence slots covered |
-| pssa_stamina_item_g3_owls_01 | MCQ | PSSA_REQUIRED_EVIDENCE_SLOTS | PASS | paired passageSlot variant |
-| pssa_stamina_item_g3_owls_02 | MCQ | PSSA_REQUIRED_EVIDENCE_SLOTS | PASS | paired passageSlot variant |
-| pssa_stamina_item_g3_owls_03 | MCQ | PSSA_REQUIRED_EVIDENCE_SLOTS | PASS | paired passageSlot variant |
-| pssa_stamina_item_g3_owls_04 | MCQ | PSSA_REQUIRED_EVIDENCE_SLOTS | PASS | paired passageSlot variant |
-| pssa_stamina_item_g3_owls_05 | MCQ | PSSA_REQUIRED_EVIDENCE_SLOTS | PASS | paired passageSlot variant |
-| pssa_stamina_item_g3_owls_06 | SHORT_ANSWER | PSSA_REQUIRED_EVIDENCE_SLOTS | PASS | paired passageSlot variant |
-| pssa_stamina_item_g3_owls_ebsr_01 | EBSR | PSSA_PAIRED_MULTIPOINT_EVIDENCE_OVERLAP | PASS | paired passageSlot variant |
-| pssa_stamina_item_g3_owls_ebsr_01 | EBSR | PSSA_REQUIRED_EVIDENCE_SLOTS | PASS | paired passageSlot variant |
+| itemId | interactionType | gateId | status | enforced | detail |
+| --- | --- | --- | --- | --- | --- |
+| pssa_stamina_item_g3_syrup_01 | MCQ | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_syrup_01 | MCQ | PSSA_VOCAB_KEY_CONSTRUCT | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_syrup_01 | MCQ | PSSA_SA_BANDS_NONEMPTY | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_syrup_01 | MCQ | PSSA_ITEM_EC_GENRE_MATCH | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_syrup_01 | MCQ | PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_syrup_02 | MCQ | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_syrup_02 | MCQ | PSSA_VOCAB_KEY_CONSTRUCT | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_syrup_02 | MCQ | PSSA_SA_BANDS_NONEMPTY | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_syrup_02 | MCQ | PSSA_ITEM_EC_GENRE_MATCH | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_syrup_02 | MCQ | PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_syrup_03 | MCQ | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_syrup_03 | MCQ | PSSA_VOCAB_KEY_CONSTRUCT | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_syrup_03 | MCQ | PSSA_SA_BANDS_NONEMPTY | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_syrup_03 | MCQ | PSSA_ITEM_EC_GENRE_MATCH | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_syrup_03 | MCQ | PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_syrup_04 | MCQ | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_syrup_04 | MCQ | PSSA_VOCAB_KEY_CONSTRUCT | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_syrup_04 | MCQ | PSSA_SA_BANDS_NONEMPTY | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_syrup_04 | MCQ | PSSA_ITEM_EC_GENRE_MATCH | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_syrup_04 | MCQ | PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_syrup_ebsr_01 | EBSR | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_syrup_ebsr_01 | EBSR | PSSA_VOCAB_KEY_CONSTRUCT | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_syrup_ebsr_01 | EBSR | PSSA_SA_BANDS_NONEMPTY | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_syrup_ebsr_01 | EBSR | PSSA_ITEM_EC_GENRE_MATCH | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_syrup_ebsr_01 | EBSR | PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_syrup_sa_01 | SHORT_ANSWER | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_syrup_sa_01 | SHORT_ANSWER | PSSA_VOCAB_KEY_CONSTRUCT | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_syrup_sa_01 | SHORT_ANSWER | PSSA_SA_BANDS_NONEMPTY | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_syrup_sa_01 | SHORT_ANSWER | PSSA_ITEM_EC_GENRE_MATCH | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_syrup_sa_01 | SHORT_ANSWER | PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_boat_01 | MCQ | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_boat_01 | MCQ | PSSA_VOCAB_KEY_CONSTRUCT | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_boat_01 | MCQ | PSSA_SA_BANDS_NONEMPTY | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_boat_01 | MCQ | PSSA_ITEM_EC_GENRE_MATCH | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_boat_01 | MCQ | PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_boat_02 | MCQ | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_boat_02 | MCQ | PSSA_VOCAB_KEY_CONSTRUCT | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_boat_02 | MCQ | PSSA_SA_BANDS_NONEMPTY | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_boat_02 | MCQ | PSSA_ITEM_EC_GENRE_MATCH | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_boat_02 | MCQ | PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_boat_03 | MCQ | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_boat_03 | MCQ | PSSA_VOCAB_KEY_CONSTRUCT | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_boat_03 | MCQ | PSSA_SA_BANDS_NONEMPTY | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_boat_03 | MCQ | PSSA_ITEM_EC_GENRE_MATCH | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_boat_03 | MCQ | PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_boat_04 | MCQ | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_boat_04 | MCQ | PSSA_VOCAB_KEY_CONSTRUCT | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_boat_04 | MCQ | PSSA_SA_BANDS_NONEMPTY | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_boat_04 | MCQ | PSSA_ITEM_EC_GENRE_MATCH | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_boat_04 | MCQ | PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_boat_05 | MCQ | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_boat_05 | MCQ | PSSA_VOCAB_KEY_CONSTRUCT | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_boat_05 | MCQ | PSSA_SA_BANDS_NONEMPTY | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_boat_05 | MCQ | PSSA_ITEM_EC_GENRE_MATCH | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_boat_05 | MCQ | PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_boat_ebsr_01 | EBSR | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_boat_ebsr_01 | EBSR | PSSA_VOCAB_KEY_CONSTRUCT | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_boat_ebsr_01 | EBSR | PSSA_SA_BANDS_NONEMPTY | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_boat_ebsr_01 | EBSR | PSSA_ITEM_EC_GENRE_MATCH | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_boat_ebsr_01 | EBSR | PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_boat_sa_01 | SHORT_ANSWER | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_boat_sa_01 | SHORT_ANSWER | PSSA_VOCAB_KEY_CONSTRUCT | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_boat_sa_01 | SHORT_ANSWER | PSSA_SA_BANDS_NONEMPTY | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_boat_sa_01 | SHORT_ANSWER | PSSA_ITEM_EC_GENRE_MATCH | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_boat_sa_01 | SHORT_ANSWER | PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_owls_01 | MCQ | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_owls_01 | MCQ | PSSA_VOCAB_KEY_CONSTRUCT | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_owls_01 | MCQ | PSSA_SA_BANDS_NONEMPTY | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_owls_01 | MCQ | PSSA_ITEM_EC_GENRE_MATCH | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_owls_01 | MCQ | PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_owls_02 | MCQ | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_owls_02 | MCQ | PSSA_VOCAB_KEY_CONSTRUCT | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_owls_02 | MCQ | PSSA_SA_BANDS_NONEMPTY | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_owls_02 | MCQ | PSSA_ITEM_EC_GENRE_MATCH | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_owls_02 | MCQ | PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_owls_03 | MCQ | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_owls_03 | MCQ | PSSA_VOCAB_KEY_CONSTRUCT | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_owls_03 | MCQ | PSSA_SA_BANDS_NONEMPTY | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_owls_03 | MCQ | PSSA_ITEM_EC_GENRE_MATCH | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_owls_03 | MCQ | PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_owls_04 | MCQ | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_owls_04 | MCQ | PSSA_VOCAB_KEY_CONSTRUCT | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_owls_04 | MCQ | PSSA_SA_BANDS_NONEMPTY | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_owls_04 | MCQ | PSSA_ITEM_EC_GENRE_MATCH | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_owls_04 | MCQ | PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_owls_05 | MCQ | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_owls_05 | MCQ | PSSA_VOCAB_KEY_CONSTRUCT | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_owls_05 | MCQ | PSSA_SA_BANDS_NONEMPTY | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_owls_05 | MCQ | PSSA_ITEM_EC_GENRE_MATCH | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_owls_05 | MCQ | PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_owls_06 | SHORT_ANSWER | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_owls_06 | SHORT_ANSWER | PSSA_VOCAB_KEY_CONSTRUCT | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_owls_06 | SHORT_ANSWER | PSSA_SA_BANDS_NONEMPTY | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_owls_06 | SHORT_ANSWER | PSSA_ITEM_EC_GENRE_MATCH | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_owls_06 | SHORT_ANSWER | PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_owls_ebsr_01 | EBSR | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_owls_ebsr_01 | EBSR | PSSA_VOCAB_KEY_CONSTRUCT | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_owls_ebsr_01 | EBSR | PSSA_SA_BANDS_NONEMPTY | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_owls_ebsr_01 | EBSR | PSSA_ITEM_EC_GENRE_MATCH | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_owls_ebsr_01 | EBSR | PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_rabbit_01 | MCQ | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_rabbit_01 | MCQ | PSSA_VOCAB_KEY_CONSTRUCT | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_rabbit_01 | MCQ | PSSA_SA_BANDS_NONEMPTY | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_rabbit_01 | MCQ | PSSA_ITEM_EC_GENRE_MATCH | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_rabbit_01 | MCQ | PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_rabbit_02 | MCQ | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_rabbit_02 | MCQ | PSSA_VOCAB_KEY_CONSTRUCT | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_rabbit_02 | MCQ | PSSA_SA_BANDS_NONEMPTY | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_rabbit_02 | MCQ | PSSA_ITEM_EC_GENRE_MATCH | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_rabbit_02 | MCQ | PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_rabbit_03 | MCQ | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_rabbit_03 | MCQ | PSSA_VOCAB_KEY_CONSTRUCT | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_rabbit_03 | MCQ | PSSA_SA_BANDS_NONEMPTY | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_rabbit_03 | MCQ | PSSA_ITEM_EC_GENRE_MATCH | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_rabbit_03 | MCQ | PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_rabbit_04 | MCQ | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_rabbit_04 | MCQ | PSSA_VOCAB_KEY_CONSTRUCT | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_rabbit_04 | MCQ | PSSA_SA_BANDS_NONEMPTY | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_rabbit_04 | MCQ | PSSA_ITEM_EC_GENRE_MATCH | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_rabbit_04 | MCQ | PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_rabbit_05 | MCQ | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_rabbit_05 | MCQ | PSSA_VOCAB_KEY_CONSTRUCT | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_rabbit_05 | MCQ | PSSA_SA_BANDS_NONEMPTY | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_rabbit_05 | MCQ | PSSA_ITEM_EC_GENRE_MATCH | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_rabbit_05 | MCQ | PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_rabbit_06 | MCQ | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_rabbit_06 | MCQ | PSSA_VOCAB_KEY_CONSTRUCT | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_rabbit_06 | MCQ | PSSA_SA_BANDS_NONEMPTY | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_rabbit_06 | MCQ | PSSA_ITEM_EC_GENRE_MATCH | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_rabbit_06 | MCQ | PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_rabbit_ebsr_01 | EBSR | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_rabbit_ebsr_01 | EBSR | PSSA_VOCAB_KEY_CONSTRUCT | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_rabbit_ebsr_01 | EBSR | PSSA_SA_BANDS_NONEMPTY | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_rabbit_ebsr_01 | EBSR | PSSA_ITEM_EC_GENRE_MATCH | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_rabbit_ebsr_01 | EBSR | PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_rabbit_sa_01 | SHORT_ANSWER | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_rabbit_sa_01 | SHORT_ANSWER | PSSA_VOCAB_KEY_CONSTRUCT | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_rabbit_sa_01 | SHORT_ANSWER | PSSA_SA_BANDS_NONEMPTY | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_rabbit_sa_01 | SHORT_ANSWER | PSSA_ITEM_EC_GENRE_MATCH | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_rabbit_sa_01 | SHORT_ANSWER | PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP | PASS | true | foundation evaluator |
+| conv_01 | MCQ | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | PASS | true | foundation evaluator |
+| conv_01 | MCQ | PSSA_VOCAB_KEY_CONSTRUCT | PASS | true | foundation evaluator |
+| conv_01 | MCQ | PSSA_SA_BANDS_NONEMPTY | PASS | true | foundation evaluator |
+| conv_01 | MCQ | PSSA_ITEM_EC_GENRE_MATCH | PASS | true | foundation evaluator |
+| conv_01 | MCQ | PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP | PASS | true | foundation evaluator |
+| conv_02 | MCQ | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | PASS | true | foundation evaluator |
+| conv_02 | MCQ | PSSA_VOCAB_KEY_CONSTRUCT | PASS | true | foundation evaluator |
+| conv_02 | MCQ | PSSA_SA_BANDS_NONEMPTY | PASS | true | foundation evaluator |
+| conv_02 | MCQ | PSSA_ITEM_EC_GENRE_MATCH | PASS | true | foundation evaluator |
+| conv_02 | MCQ | PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP | PASS | true | foundation evaluator |
+| conv_03 | MCQ | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | PASS | true | foundation evaluator |
+| conv_03 | MCQ | PSSA_VOCAB_KEY_CONSTRUCT | PASS | true | foundation evaluator |
+| conv_03 | MCQ | PSSA_SA_BANDS_NONEMPTY | PASS | true | foundation evaluator |
+| conv_03 | MCQ | PSSA_ITEM_EC_GENRE_MATCH | PASS | true | foundation evaluator |
+| conv_03 | MCQ | PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP | PASS | true | foundation evaluator |
+| conv_04 | MCQ | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | PASS | true | foundation evaluator |
+| conv_04 | MCQ | PSSA_VOCAB_KEY_CONSTRUCT | PASS | true | foundation evaluator |
+| conv_04 | MCQ | PSSA_SA_BANDS_NONEMPTY | PASS | true | foundation evaluator |
+| conv_04 | MCQ | PSSA_ITEM_EC_GENRE_MATCH | PASS | true | foundation evaluator |
+| conv_04 | MCQ | PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP | PASS | true | foundation evaluator |
+| conv_05 | MCQ | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | PASS | true | foundation evaluator |
+| conv_05 | MCQ | PSSA_VOCAB_KEY_CONSTRUCT | PASS | true | foundation evaluator |
+| conv_05 | MCQ | PSSA_SA_BANDS_NONEMPTY | PASS | true | foundation evaluator |
+| conv_05 | MCQ | PSSA_ITEM_EC_GENRE_MATCH | PASS | true | foundation evaluator |
+| conv_05 | MCQ | PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP | PASS | true | foundation evaluator |
+| conv_06 | MCQ | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | PASS | true | foundation evaluator |
+| conv_06 | MCQ | PSSA_VOCAB_KEY_CONSTRUCT | PASS | true | foundation evaluator |
+| conv_06 | MCQ | PSSA_SA_BANDS_NONEMPTY | PASS | true | foundation evaluator |
+| conv_06 | MCQ | PSSA_ITEM_EC_GENRE_MATCH | PASS | true | foundation evaluator |
+| conv_06 | MCQ | PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP | PASS | true | foundation evaluator |
+| conv_07 | MCQ | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | PASS | true | foundation evaluator |
+| conv_07 | MCQ | PSSA_VOCAB_KEY_CONSTRUCT | PASS | true | foundation evaluator |
+| conv_07 | MCQ | PSSA_SA_BANDS_NONEMPTY | PASS | true | foundation evaluator |
+| conv_07 | MCQ | PSSA_ITEM_EC_GENRE_MATCH | PASS | true | foundation evaluator |
+| conv_07 | MCQ | PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP | PASS | true | foundation evaluator |
+| conv_08 | MCQ | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | PASS | true | foundation evaluator |
+| conv_08 | MCQ | PSSA_VOCAB_KEY_CONSTRUCT | PASS | true | foundation evaluator |
+| conv_08 | MCQ | PSSA_SA_BANDS_NONEMPTY | PASS | true | foundation evaluator |
+| conv_08 | MCQ | PSSA_ITEM_EC_GENRE_MATCH | PASS | true | foundation evaluator |
+| conv_08 | MCQ | PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP | PASS | true | foundation evaluator |
+| conv_09 | MCQ | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | PASS | true | foundation evaluator |
+| conv_09 | MCQ | PSSA_VOCAB_KEY_CONSTRUCT | PASS | true | foundation evaluator |
+| conv_09 | MCQ | PSSA_SA_BANDS_NONEMPTY | PASS | true | foundation evaluator |
+| conv_09 | MCQ | PSSA_ITEM_EC_GENRE_MATCH | PASS | true | foundation evaluator |
+| conv_09 | MCQ | PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_syrup_01 | MCQ | PSSA_MCQ_PASSAGE_SPECIFICITY | PASS | true | 1 detector rows; failures=0 |
+| pssa_stamina_item_g3_syrup_02 | MCQ | PSSA_MCQ_PASSAGE_SPECIFICITY | PASS | true | 1 detector rows; failures=0 |
+| pssa_stamina_item_g3_syrup_03 | MCQ | PSSA_MCQ_PASSAGE_SPECIFICITY | PASS | true | 1 detector rows; failures=0 |
+| pssa_stamina_item_g3_syrup_04 | MCQ | PSSA_MCQ_PASSAGE_SPECIFICITY | PASS | true | 1 detector rows; failures=0 |
+| pssa_stamina_item_g3_boat_01 | MCQ | PSSA_MCQ_PASSAGE_SPECIFICITY | PASS | true | 1 detector rows; failures=0 |
+| pssa_stamina_item_g3_boat_02 | MCQ | PSSA_MCQ_PASSAGE_SPECIFICITY | PASS | true | 1 detector rows; failures=0 |
+| pssa_stamina_item_g3_boat_03 | MCQ | PSSA_MCQ_PASSAGE_SPECIFICITY | PASS | true | 1 detector rows; failures=0 |
+| pssa_stamina_item_g3_boat_04 | MCQ | PSSA_MCQ_PASSAGE_SPECIFICITY | PASS | true | 1 detector rows; failures=0 |
+| pssa_stamina_item_g3_boat_05 | MCQ | PSSA_MCQ_PASSAGE_SPECIFICITY | PASS | true | 1 detector rows; failures=0 |
+| pssa_stamina_item_g3_owls_01 | MCQ | PSSA_MCQ_PASSAGE_SPECIFICITY | SKIP | true | not passage-linked reading MCQ (standalone conventions or paired group variant) |
+| pssa_stamina_item_g3_owls_02 | MCQ | PSSA_MCQ_PASSAGE_SPECIFICITY | SKIP | true | not passage-linked reading MCQ (standalone conventions or paired group variant) |
+| pssa_stamina_item_g3_owls_03 | MCQ | PSSA_MCQ_PASSAGE_SPECIFICITY | SKIP | true | not passage-linked reading MCQ (standalone conventions or paired group variant) |
+| pssa_stamina_item_g3_owls_04 | MCQ | PSSA_MCQ_PASSAGE_SPECIFICITY | SKIP | true | not passage-linked reading MCQ (standalone conventions or paired group variant) |
+| pssa_stamina_item_g3_owls_05 | MCQ | PSSA_MCQ_PASSAGE_SPECIFICITY | SKIP | true | not passage-linked reading MCQ (standalone conventions or paired group variant) |
+| pssa_stamina_item_g3_rabbit_01 | MCQ | PSSA_MCQ_PASSAGE_SPECIFICITY | PASS | true | 1 detector rows; failures=0 |
+| pssa_stamina_item_g3_rabbit_02 | MCQ | PSSA_MCQ_PASSAGE_SPECIFICITY | PASS | true | 1 detector rows; failures=0 |
+| pssa_stamina_item_g3_rabbit_03 | MCQ | PSSA_MCQ_PASSAGE_SPECIFICITY | PASS | true | 1 detector rows; failures=0 |
+| pssa_stamina_item_g3_rabbit_04 | MCQ | PSSA_MCQ_PASSAGE_SPECIFICITY | PASS | true | 1 detector rows; failures=0 |
+| pssa_stamina_item_g3_rabbit_05 | MCQ | PSSA_MCQ_PASSAGE_SPECIFICITY | PASS | true | 1 detector rows; failures=0 |
+| pssa_stamina_item_g3_rabbit_06 | MCQ | PSSA_MCQ_PASSAGE_SPECIFICITY | PASS | true | 1 detector rows; failures=0 |
+| conv_01 | MCQ | PSSA_MCQ_PASSAGE_SPECIFICITY | SKIP | true | not passage-linked reading MCQ (standalone conventions or paired group variant) |
+| conv_02 | MCQ | PSSA_MCQ_PASSAGE_SPECIFICITY | SKIP | true | not passage-linked reading MCQ (standalone conventions or paired group variant) |
+| conv_03 | MCQ | PSSA_MCQ_PASSAGE_SPECIFICITY | SKIP | true | not passage-linked reading MCQ (standalone conventions or paired group variant) |
+| conv_04 | MCQ | PSSA_MCQ_PASSAGE_SPECIFICITY | SKIP | true | not passage-linked reading MCQ (standalone conventions or paired group variant) |
+| conv_05 | MCQ | PSSA_MCQ_PASSAGE_SPECIFICITY | SKIP | true | not passage-linked reading MCQ (standalone conventions or paired group variant) |
+| conv_06 | MCQ | PSSA_MCQ_PASSAGE_SPECIFICITY | SKIP | true | not passage-linked reading MCQ (standalone conventions or paired group variant) |
+| conv_07 | MCQ | PSSA_MCQ_PASSAGE_SPECIFICITY | SKIP | true | not passage-linked reading MCQ (standalone conventions or paired group variant) |
+| conv_08 | MCQ | PSSA_MCQ_PASSAGE_SPECIFICITY | SKIP | true | not passage-linked reading MCQ (standalone conventions or paired group variant) |
+| conv_09 | MCQ | PSSA_MCQ_PASSAGE_SPECIFICITY | SKIP | true | not passage-linked reading MCQ (standalone conventions or paired group variant) |
+| pssa_stamina_item_g3_syrup_01 | MCQ | PSSA_ITEM_EC_SKILL_MATCH | PASS | true | PASS: Observed stem/evidence pattern is compatible with EC skill family. |
+| pssa_stamina_item_g3_syrup_02 | MCQ | PSSA_ITEM_EC_SKILL_MATCH | PASS | true | PASS: Vocabulary stem, target, evidence, and choices align. |
+| pssa_stamina_item_g3_syrup_03 | MCQ | PSSA_ITEM_EC_SKILL_MATCH | PASS | true | PASS: Observed stem/evidence pattern is compatible with EC skill family. |
+| pssa_stamina_item_g3_syrup_04 | MCQ | PSSA_ITEM_EC_SKILL_MATCH | PASS | true | PASS: Observed stem/evidence pattern is compatible with EC skill family. |
+| pssa_stamina_item_g3_boat_01 | MCQ | PSSA_ITEM_EC_SKILL_MATCH | PASS | true | PASS: Observed stem/evidence pattern is compatible with EC skill family. |
+| pssa_stamina_item_g3_boat_02 | MCQ | PSSA_ITEM_EC_SKILL_MATCH | PASS | true | PASS: Observed stem/evidence pattern is compatible with EC skill family. |
+| pssa_stamina_item_g3_boat_03 | MCQ | PSSA_ITEM_EC_SKILL_MATCH | PASS | true | PASS: Observed stem/evidence pattern is compatible with EC skill family. |
+| pssa_stamina_item_g3_boat_04 | MCQ | PSSA_ITEM_EC_SKILL_MATCH | PASS | true | WARN: Figurative phrase or word-choice-effect interpretation needs human review. |
+| pssa_stamina_item_g3_boat_05 | MCQ | PSSA_ITEM_EC_SKILL_MATCH | PASS | true | PASS: Observed stem/evidence pattern is compatible with EC skill family. |
+| pssa_stamina_item_g3_owls_01 | MCQ | PSSA_ITEM_EC_SKILL_MATCH | SKIP | true | not passage-linked reading MCQ |
+| pssa_stamina_item_g3_owls_02 | MCQ | PSSA_ITEM_EC_SKILL_MATCH | SKIP | true | not passage-linked reading MCQ |
+| pssa_stamina_item_g3_owls_03 | MCQ | PSSA_ITEM_EC_SKILL_MATCH | SKIP | true | not passage-linked reading MCQ |
+| pssa_stamina_item_g3_owls_04 | MCQ | PSSA_ITEM_EC_SKILL_MATCH | SKIP | true | not passage-linked reading MCQ |
+| pssa_stamina_item_g3_owls_05 | MCQ | PSSA_ITEM_EC_SKILL_MATCH | SKIP | true | not passage-linked reading MCQ |
+| pssa_stamina_item_g3_rabbit_01 | MCQ | PSSA_ITEM_EC_SKILL_MATCH | PASS | true | PASS: Observed stem/evidence pattern is compatible with EC skill family. |
+| pssa_stamina_item_g3_rabbit_02 | MCQ | PSSA_ITEM_EC_SKILL_MATCH | PASS | true | PASS: Observed stem/evidence pattern is compatible with EC skill family. |
+| pssa_stamina_item_g3_rabbit_03 | MCQ | PSSA_ITEM_EC_SKILL_MATCH | PASS | true | PASS: Observed stem/evidence pattern is compatible with EC skill family. |
+| pssa_stamina_item_g3_rabbit_04 | MCQ | PSSA_ITEM_EC_SKILL_MATCH | PASS | true | PASS: Observed stem/evidence pattern is compatible with EC skill family. |
+| pssa_stamina_item_g3_rabbit_05 | MCQ | PSSA_ITEM_EC_SKILL_MATCH | PASS | true | WARN: Figurative phrase or word-choice-effect interpretation needs human review. |
+| pssa_stamina_item_g3_rabbit_06 | MCQ | PSSA_ITEM_EC_SKILL_MATCH | PASS | true | PASS: Observed stem/evidence pattern is compatible with EC skill family. |
+| conv_01 | MCQ | PSSA_ITEM_EC_SKILL_MATCH | SKIP | true | not passage-linked reading MCQ |
+| conv_02 | MCQ | PSSA_ITEM_EC_SKILL_MATCH | SKIP | true | not passage-linked reading MCQ |
+| conv_03 | MCQ | PSSA_ITEM_EC_SKILL_MATCH | SKIP | true | not passage-linked reading MCQ |
+| conv_04 | MCQ | PSSA_ITEM_EC_SKILL_MATCH | SKIP | true | not passage-linked reading MCQ |
+| conv_05 | MCQ | PSSA_ITEM_EC_SKILL_MATCH | SKIP | true | not passage-linked reading MCQ |
+| conv_06 | MCQ | PSSA_ITEM_EC_SKILL_MATCH | SKIP | true | not passage-linked reading MCQ |
+| conv_07 | MCQ | PSSA_ITEM_EC_SKILL_MATCH | SKIP | true | not passage-linked reading MCQ |
+| conv_08 | MCQ | PSSA_ITEM_EC_SKILL_MATCH | SKIP | true | not passage-linked reading MCQ |
+| conv_09 | MCQ | PSSA_ITEM_EC_SKILL_MATCH | SKIP | true | not passage-linked reading MCQ |
+| pssa_stamina_item_g3_syrup_01 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | true | choiceGroup=pssa_stamina_item_g3_syrup_01; correctWords=9; maxDistractorWords=10; gap=-1; uniquelyLongest=true |
+| pssa_stamina_item_g3_syrup_02 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | true | choiceGroup=pssa_stamina_item_g3_syrup_02; correctWords=2; maxDistractorWords=8; gap=-6; uniquelyLongest=false |
+| pssa_stamina_item_g3_syrup_03 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | true | choiceGroup=pssa_stamina_item_g3_syrup_03; correctWords=11; maxDistractorWords=11; gap=0; uniquelyLongest=true |
+| pssa_stamina_item_g3_syrup_04 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | true | choiceGroup=pssa_stamina_item_g3_syrup_04; correctWords=11; maxDistractorWords=12; gap=-1; uniquelyLongest=false |
+| pssa_stamina_item_g3_syrup_ebsr_01 | EBSR | PSSA_MCQ_CORRECT_IS_LONGEST_EBSR_PART_A_REPORT_ONLY | PASS | false | choiceGroup=pssa_stamina_item_g3_syrup_ebsr_01::partA; correctWords=10; maxDistractorWords=12; gap=-2; uniquelyLongest=false |
+| pssa_stamina_item_g3_boat_01 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | true | choiceGroup=pssa_stamina_item_g3_boat_01; correctWords=12; maxDistractorWords=15; gap=-3; uniquelyLongest=false |
+| pssa_stamina_item_g3_boat_02 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | true | choiceGroup=pssa_stamina_item_g3_boat_02; correctWords=14; maxDistractorWords=15; gap=-1; uniquelyLongest=false |
+| pssa_stamina_item_g3_boat_03 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | true | choiceGroup=pssa_stamina_item_g3_boat_03; correctWords=7; maxDistractorWords=7; gap=0; uniquelyLongest=false |
+| pssa_stamina_item_g3_boat_04 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | true | choiceGroup=pssa_stamina_item_g3_boat_04; correctWords=11; maxDistractorWords=11; gap=0; uniquelyLongest=false |
+| pssa_stamina_item_g3_boat_05 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | true | choiceGroup=pssa_stamina_item_g3_boat_05; correctWords=14; maxDistractorWords=16; gap=-2; uniquelyLongest=false |
+| pssa_stamina_item_g3_boat_ebsr_01 | EBSR | PSSA_MCQ_CORRECT_IS_LONGEST_EBSR_PART_A_REPORT_ONLY | PASS | false | choiceGroup=pssa_stamina_item_g3_boat_ebsr_01::partA; correctWords=8; maxDistractorWords=9; gap=-1; uniquelyLongest=true |
+| pssa_stamina_item_g3_owls_01 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | true | choiceGroup=pssa_stamina_item_g3_owls_01; correctWords=8; maxDistractorWords=8; gap=0; uniquelyLongest=false |
+| pssa_stamina_item_g3_owls_02 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | true | choiceGroup=pssa_stamina_item_g3_owls_02; correctWords=7; maxDistractorWords=7; gap=0; uniquelyLongest=true |
+| pssa_stamina_item_g3_owls_03 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | true | choiceGroup=pssa_stamina_item_g3_owls_03; correctWords=9; maxDistractorWords=9; gap=0; uniquelyLongest=false |
+| pssa_stamina_item_g3_owls_04 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | true | choiceGroup=pssa_stamina_item_g3_owls_04; correctWords=8; maxDistractorWords=10; gap=-2; uniquelyLongest=false |
+| pssa_stamina_item_g3_owls_05 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | true | choiceGroup=pssa_stamina_item_g3_owls_05; correctWords=16; maxDistractorWords=18; gap=-2; uniquelyLongest=true |
+| pssa_stamina_item_g3_owls_ebsr_01 | EBSR | PSSA_MCQ_CORRECT_IS_LONGEST_EBSR_PART_A_REPORT_ONLY | PASS | false | choiceGroup=pssa_stamina_item_g3_owls_ebsr_01::partA; correctWords=10; maxDistractorWords=10; gap=0; uniquelyLongest=false |
+| pssa_stamina_item_g3_rabbit_01 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | true | choiceGroup=pssa_stamina_item_g3_rabbit_01; correctWords=9; maxDistractorWords=11; gap=-2; uniquelyLongest=false |
+| pssa_stamina_item_g3_rabbit_02 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | true | choiceGroup=pssa_stamina_item_g3_rabbit_02; correctWords=14; maxDistractorWords=14; gap=0; uniquelyLongest=false |
+| pssa_stamina_item_g3_rabbit_03 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | true | choiceGroup=pssa_stamina_item_g3_rabbit_03; correctWords=7; maxDistractorWords=8; gap=-1; uniquelyLongest=true |
+| pssa_stamina_item_g3_rabbit_04 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | true | choiceGroup=pssa_stamina_item_g3_rabbit_04; correctWords=8; maxDistractorWords=9; gap=-1; uniquelyLongest=false |
+| pssa_stamina_item_g3_rabbit_05 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | true | choiceGroup=pssa_stamina_item_g3_rabbit_05; correctWords=5; maxDistractorWords=6; gap=-1; uniquelyLongest=false |
+| pssa_stamina_item_g3_rabbit_06 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | true | choiceGroup=pssa_stamina_item_g3_rabbit_06; correctWords=9; maxDistractorWords=9; gap=0; uniquelyLongest=false |
+| pssa_stamina_item_g3_rabbit_ebsr_01 | EBSR | PSSA_MCQ_CORRECT_IS_LONGEST_EBSR_PART_A_REPORT_ONLY | PASS | false | choiceGroup=pssa_stamina_item_g3_rabbit_ebsr_01::partA; correctWords=10; maxDistractorWords=11; gap=-1; uniquelyLongest=true |
+| conv_01 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | true | choiceGroup=conv_01; correctWords=1; maxDistractorWords=1; gap=0; uniquelyLongest=false |
+| conv_02 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | true | choiceGroup=conv_02; correctWords=5; maxDistractorWords=5; gap=0; uniquelyLongest=true |
+| conv_03 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | true | choiceGroup=conv_03; correctWords=6; maxDistractorWords=7; gap=-1; uniquelyLongest=false |
+| conv_04 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | true | choiceGroup=conv_04; correctWords=7; maxDistractorWords=7; gap=0; uniquelyLongest=false |
+| conv_05 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | true | choiceGroup=conv_05; correctWords=1; maxDistractorWords=2; gap=-1; uniquelyLongest=false |
+| conv_06 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | true | choiceGroup=conv_06; correctWords=5; maxDistractorWords=5; gap=0; uniquelyLongest=false |
+| conv_07 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | true | choiceGroup=conv_07; correctWords=9; maxDistractorWords=9; gap=0; uniquelyLongest=true |
+| conv_08 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | true | choiceGroup=conv_08; correctWords=7; maxDistractorWords=7; gap=0; uniquelyLongest=false |
+| conv_09 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | true | choiceGroup=conv_09; correctWords=6; maxDistractorWords=6; gap=0; uniquelyLongest=true |
+| pssa_stamina_item_g3_syrup_01 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | true | choiceGroup=pssa_stamina_item_g3_syrup_01 |
+| pssa_stamina_item_g3_syrup_02 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | true | choiceGroup=pssa_stamina_item_g3_syrup_02 |
+| pssa_stamina_item_g3_syrup_03 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | true | choiceGroup=pssa_stamina_item_g3_syrup_03 |
+| pssa_stamina_item_g3_syrup_04 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | true | choiceGroup=pssa_stamina_item_g3_syrup_04 |
+| pssa_stamina_item_g3_syrup_ebsr_01 | EBSR | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR_EBSR_PART_A_REPORT_ONLY | PASS | false | choiceGroup=pssa_stamina_item_g3_syrup_ebsr_01::partA |
+| pssa_stamina_item_g3_boat_01 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | true | choiceGroup=pssa_stamina_item_g3_boat_01 |
+| pssa_stamina_item_g3_boat_02 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | true | choiceGroup=pssa_stamina_item_g3_boat_02 |
+| pssa_stamina_item_g3_boat_03 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | true | choiceGroup=pssa_stamina_item_g3_boat_03 |
+| pssa_stamina_item_g3_boat_04 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | true | choiceGroup=pssa_stamina_item_g3_boat_04 |
+| pssa_stamina_item_g3_boat_05 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | true | choiceGroup=pssa_stamina_item_g3_boat_05 |
+| pssa_stamina_item_g3_boat_ebsr_01 | EBSR | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR_EBSR_PART_A_REPORT_ONLY | PASS | false | choiceGroup=pssa_stamina_item_g3_boat_ebsr_01::partA |
+| pssa_stamina_item_g3_owls_01 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | true | choiceGroup=pssa_stamina_item_g3_owls_01 |
+| pssa_stamina_item_g3_owls_02 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | true | choiceGroup=pssa_stamina_item_g3_owls_02 |
+| pssa_stamina_item_g3_owls_03 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | true | choiceGroup=pssa_stamina_item_g3_owls_03 |
+| pssa_stamina_item_g3_owls_04 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | true | choiceGroup=pssa_stamina_item_g3_owls_04 |
+| pssa_stamina_item_g3_owls_05 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | true | choiceGroup=pssa_stamina_item_g3_owls_05 |
+| pssa_stamina_item_g3_owls_ebsr_01 | EBSR | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR_EBSR_PART_A_REPORT_ONLY | PASS | false | choiceGroup=pssa_stamina_item_g3_owls_ebsr_01::partA |
+| pssa_stamina_item_g3_rabbit_01 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | true | choiceGroup=pssa_stamina_item_g3_rabbit_01 |
+| pssa_stamina_item_g3_rabbit_02 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | true | choiceGroup=pssa_stamina_item_g3_rabbit_02 |
+| pssa_stamina_item_g3_rabbit_03 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | true | choiceGroup=pssa_stamina_item_g3_rabbit_03 |
+| pssa_stamina_item_g3_rabbit_04 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | true | choiceGroup=pssa_stamina_item_g3_rabbit_04 |
+| pssa_stamina_item_g3_rabbit_05 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | true | choiceGroup=pssa_stamina_item_g3_rabbit_05 |
+| pssa_stamina_item_g3_rabbit_06 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | true | choiceGroup=pssa_stamina_item_g3_rabbit_06 |
+| pssa_stamina_item_g3_rabbit_ebsr_01 | EBSR | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR_EBSR_PART_A_REPORT_ONLY | PASS | false | choiceGroup=pssa_stamina_item_g3_rabbit_ebsr_01::partA |
+| conv_01 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | true | choiceGroup=conv_01 |
+| conv_02 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | true | choiceGroup=conv_02 |
+| conv_03 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | true | choiceGroup=conv_03 |
+| conv_04 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | true | choiceGroup=conv_04 |
+| conv_05 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | true | choiceGroup=conv_05 |
+| conv_06 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | true | choiceGroup=conv_06 |
+| conv_07 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | true | choiceGroup=conv_07 |
+| conv_08 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | true | choiceGroup=conv_08 |
+| conv_09 | MCQ | PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR | PASS | true | choiceGroup=conv_09 |
+| pssa_stamina_item_g3_syrup_01 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | true | A:8 B:7 C:7 D:7 maxShare=0.2759 |
+| pssa_stamina_item_g3_syrup_02 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | true | A:8 B:7 C:7 D:7 maxShare=0.2759 |
+| pssa_stamina_item_g3_syrup_03 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | true | A:8 B:7 C:7 D:7 maxShare=0.2759 |
+| pssa_stamina_item_g3_syrup_04 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | true | A:8 B:7 C:7 D:7 maxShare=0.2759 |
+| pssa_stamina_item_g3_boat_01 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | true | A:8 B:7 C:7 D:7 maxShare=0.2759 |
+| pssa_stamina_item_g3_boat_02 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | true | A:8 B:7 C:7 D:7 maxShare=0.2759 |
+| pssa_stamina_item_g3_boat_03 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | true | A:8 B:7 C:7 D:7 maxShare=0.2759 |
+| pssa_stamina_item_g3_boat_04 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | true | A:8 B:7 C:7 D:7 maxShare=0.2759 |
+| pssa_stamina_item_g3_boat_05 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | true | A:8 B:7 C:7 D:7 maxShare=0.2759 |
+| pssa_stamina_item_g3_owls_01 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | true | A:8 B:7 C:7 D:7 maxShare=0.2759 |
+| pssa_stamina_item_g3_owls_02 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | true | A:8 B:7 C:7 D:7 maxShare=0.2759 |
+| pssa_stamina_item_g3_owls_03 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | true | A:8 B:7 C:7 D:7 maxShare=0.2759 |
+| pssa_stamina_item_g3_owls_04 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | true | A:8 B:7 C:7 D:7 maxShare=0.2759 |
+| pssa_stamina_item_g3_owls_05 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | true | A:8 B:7 C:7 D:7 maxShare=0.2759 |
+| pssa_stamina_item_g3_rabbit_01 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | true | A:8 B:7 C:7 D:7 maxShare=0.2759 |
+| pssa_stamina_item_g3_rabbit_02 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | true | A:8 B:7 C:7 D:7 maxShare=0.2759 |
+| pssa_stamina_item_g3_rabbit_03 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | true | A:8 B:7 C:7 D:7 maxShare=0.2759 |
+| pssa_stamina_item_g3_rabbit_04 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | true | A:8 B:7 C:7 D:7 maxShare=0.2759 |
+| pssa_stamina_item_g3_rabbit_05 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | true | A:8 B:7 C:7 D:7 maxShare=0.2759 |
+| pssa_stamina_item_g3_rabbit_06 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | true | A:8 B:7 C:7 D:7 maxShare=0.2759 |
+| conv_01 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | true | A:8 B:7 C:7 D:7 maxShare=0.2759 |
+| conv_02 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | true | A:8 B:7 C:7 D:7 maxShare=0.2759 |
+| conv_03 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | true | A:8 B:7 C:7 D:7 maxShare=0.2759 |
+| conv_04 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | true | A:8 B:7 C:7 D:7 maxShare=0.2759 |
+| conv_05 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | true | A:8 B:7 C:7 D:7 maxShare=0.2759 |
+| conv_06 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | true | A:8 B:7 C:7 D:7 maxShare=0.2759 |
+| conv_07 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | true | A:8 B:7 C:7 D:7 maxShare=0.2759 |
+| conv_08 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | true | A:8 B:7 C:7 D:7 maxShare=0.2759 |
+| conv_09 | MCQ | PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION | PASS | true | A:8 B:7 C:7 D:7 maxShare=0.2759 |
+| pssa_stamina_item_g3_syrup_ebsr_01 | EBSR | PSSA_EBSR_PART_A_ANSWER_POSITION_DISTRIBUTION_REPORT_ONLY | PASS | false | A:1 B:1 C:1 D:1 maxShare=0.2500 |
+| pssa_stamina_item_g3_boat_ebsr_01 | EBSR | PSSA_EBSR_PART_A_ANSWER_POSITION_DISTRIBUTION_REPORT_ONLY | PASS | false | A:1 B:1 C:1 D:1 maxShare=0.2500 |
+| pssa_stamina_item_g3_owls_ebsr_01 | EBSR | PSSA_EBSR_PART_A_ANSWER_POSITION_DISTRIBUTION_REPORT_ONLY | PASS | false | A:1 B:1 C:1 D:1 maxShare=0.2500 |
+| pssa_stamina_item_g3_rabbit_ebsr_01 | EBSR | PSSA_EBSR_PART_A_ANSWER_POSITION_DISTRIBUTION_REPORT_ONLY | PASS | false | A:1 B:1 C:1 D:1 maxShare=0.2500 |
+| pssa_stamina_item_g3_syrup_01 | MCQ | PSSA_ITEM_FOOTNOTE_GIVEAWAY | PASS | true | vocab targets must not be visible footnote definitions |
+| pssa_stamina_item_g3_syrup_02 | MCQ | PSSA_ITEM_FOOTNOTE_GIVEAWAY | PASS | true | vocab targets must not be visible footnote definitions |
+| pssa_stamina_item_g3_syrup_03 | MCQ | PSSA_ITEM_FOOTNOTE_GIVEAWAY | PASS | true | vocab targets must not be visible footnote definitions |
+| pssa_stamina_item_g3_syrup_04 | MCQ | PSSA_ITEM_FOOTNOTE_GIVEAWAY | PASS | true | vocab targets must not be visible footnote definitions |
+| pssa_stamina_item_g3_syrup_ebsr_01 | EBSR | PSSA_ITEM_FOOTNOTE_GIVEAWAY | PASS | true | vocab targets must not be visible footnote definitions |
+| pssa_stamina_item_g3_syrup_sa_01 | SHORT_ANSWER | PSSA_ITEM_FOOTNOTE_GIVEAWAY | PASS | true | vocab targets must not be visible footnote definitions |
+| pssa_stamina_item_g3_boat_01 | MCQ | PSSA_ITEM_FOOTNOTE_GIVEAWAY | PASS | true | vocab targets must not be visible footnote definitions |
+| pssa_stamina_item_g3_boat_02 | MCQ | PSSA_ITEM_FOOTNOTE_GIVEAWAY | PASS | true | vocab targets must not be visible footnote definitions |
+| pssa_stamina_item_g3_boat_03 | MCQ | PSSA_ITEM_FOOTNOTE_GIVEAWAY | PASS | true | vocab targets must not be visible footnote definitions |
+| pssa_stamina_item_g3_boat_04 | MCQ | PSSA_ITEM_FOOTNOTE_GIVEAWAY | PASS | true | vocab targets must not be visible footnote definitions |
+| pssa_stamina_item_g3_boat_05 | MCQ | PSSA_ITEM_FOOTNOTE_GIVEAWAY | PASS | true | vocab targets must not be visible footnote definitions |
+| pssa_stamina_item_g3_boat_ebsr_01 | EBSR | PSSA_ITEM_FOOTNOTE_GIVEAWAY | PASS | true | vocab targets must not be visible footnote definitions |
+| pssa_stamina_item_g3_boat_sa_01 | SHORT_ANSWER | PSSA_ITEM_FOOTNOTE_GIVEAWAY | PASS | true | vocab targets must not be visible footnote definitions |
+| pssa_stamina_item_g3_rabbit_01 | MCQ | PSSA_ITEM_FOOTNOTE_GIVEAWAY | PASS | true | vocab targets must not be visible footnote definitions |
+| pssa_stamina_item_g3_rabbit_02 | MCQ | PSSA_ITEM_FOOTNOTE_GIVEAWAY | PASS | true | vocab targets must not be visible footnote definitions |
+| pssa_stamina_item_g3_rabbit_03 | MCQ | PSSA_ITEM_FOOTNOTE_GIVEAWAY | PASS | true | vocab targets must not be visible footnote definitions |
+| pssa_stamina_item_g3_rabbit_04 | MCQ | PSSA_ITEM_FOOTNOTE_GIVEAWAY | PASS | true | vocab targets must not be visible footnote definitions |
+| pssa_stamina_item_g3_rabbit_05 | MCQ | PSSA_ITEM_FOOTNOTE_GIVEAWAY | PASS | true | vocab targets must not be visible footnote definitions |
+| pssa_stamina_item_g3_rabbit_06 | MCQ | PSSA_ITEM_FOOTNOTE_GIVEAWAY | PASS | true | vocab targets must not be visible footnote definitions |
+| pssa_stamina_item_g3_rabbit_ebsr_01 | EBSR | PSSA_ITEM_FOOTNOTE_GIVEAWAY | PASS | true | vocab targets must not be visible footnote definitions |
+| pssa_stamina_item_g3_rabbit_sa_01 | SHORT_ANSWER | PSSA_ITEM_FOOTNOTE_GIVEAWAY | PASS | true | vocab targets must not be visible footnote definitions |
+| pssa_stamina_item_g3_owls_01 | MCQ | PSSA_SECTION_LOOKBACK_BALANCE | PASS | true | required evidence slots covered |
+| pssa_stamina_item_g3_owls_02 | MCQ | PSSA_SECTION_LOOKBACK_BALANCE | PASS | true | required evidence slots covered |
+| pssa_stamina_item_g3_owls_03 | MCQ | PSSA_SECTION_LOOKBACK_BALANCE | PASS | true | required evidence slots covered |
+| pssa_stamina_item_g3_owls_04 | MCQ | PSSA_SECTION_LOOKBACK_BALANCE | PASS | true | required evidence slots covered |
+| pssa_stamina_item_g3_owls_05 | MCQ | PSSA_SECTION_LOOKBACK_BALANCE | PASS | true | required evidence slots covered |
+| pssa_stamina_item_g3_owls_06 | SHORT_ANSWER | PSSA_SECTION_LOOKBACK_BALANCE | PASS | true | required evidence slots covered |
+| pssa_stamina_item_g3_owls_ebsr_01 | EBSR | PSSA_SECTION_LOOKBACK_BALANCE | PASS | true | required evidence slots covered |
+| pssa_stamina_item_g3_owls_01 | MCQ | PSSA_REQUIRED_EVIDENCE_SLOTS | PASS | true | paired passageSlot variant |
+| pssa_stamina_item_g3_owls_02 | MCQ | PSSA_REQUIRED_EVIDENCE_SLOTS | PASS | true | paired passageSlot variant |
+| pssa_stamina_item_g3_owls_03 | MCQ | PSSA_REQUIRED_EVIDENCE_SLOTS | PASS | true | paired passageSlot variant |
+| pssa_stamina_item_g3_owls_04 | MCQ | PSSA_REQUIRED_EVIDENCE_SLOTS | PASS | true | paired passageSlot variant |
+| pssa_stamina_item_g3_owls_05 | MCQ | PSSA_REQUIRED_EVIDENCE_SLOTS | PASS | true | paired passageSlot variant |
+| pssa_stamina_item_g3_owls_06 | SHORT_ANSWER | PSSA_REQUIRED_EVIDENCE_SLOTS | PASS | true | paired passageSlot variant |
+| pssa_stamina_item_g3_owls_ebsr_01 | EBSR | PSSA_PAIRED_MULTIPOINT_EVIDENCE_OVERLAP | PASS | true | paired passageSlot variant |
+| pssa_stamina_item_g3_owls_ebsr_01 | EBSR | PSSA_REQUIRED_EVIDENCE_SLOTS | PASS | true | paired passageSlot variant |
 
 ## Passage Quality Rows
 
