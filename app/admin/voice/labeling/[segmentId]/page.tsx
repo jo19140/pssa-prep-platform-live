@@ -11,5 +11,8 @@ export default async function AdminVoiceLabelingWorkspace({ params }: { params: 
   const { segmentId } = await params;
   const segment = await db.labeledVoiceSegment.findUnique({ where: { id: segmentId } });
   if (!segment) notFound();
-  return <LabelingWorkspace segment={segment} audioUrl={`/api/voice/audio/session/${segment.voiceSessionId}`} />;
+  const audioUrl = segment.segmentAudioKey
+    ? `/api/voice/audio/segment/${segment.id}`
+    : `/api/voice/audio/session/${segment.voiceSessionId}`;
+  return <LabelingWorkspace segment={segment} audioUrl={audioUrl} />;
 }
