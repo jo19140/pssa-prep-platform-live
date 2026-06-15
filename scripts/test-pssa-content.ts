@@ -737,8 +737,8 @@ const syrupSpecificityRows = buildMcqPassageSpecificityReport(syrupItems, [syrup
 const syrupSpecificityFailures = syrupSpecificityRows.filter((row) => row.result === "FAIL");
 assert.deepEqual(
   syrupSpecificityFailures.map((row) => [row.itemId, row.ruleId, row.evidence]),
-  [["pssa_stamina_item_g3_syrup_04", "PSSA_MCQ_PASSAGE_SPECIFIC_CHOICES", "concreteChoices=3/4"]],
-  "report mode must surface the exact remaining syrup specificity finding introduced by the signed-off wording",
+  [],
+  "syrup fixture must pass existing MCQ specificity detectors after the syrup_04 choice-B wording fix",
 );
 assert.deepEqual(
   syrupSpecificityRows

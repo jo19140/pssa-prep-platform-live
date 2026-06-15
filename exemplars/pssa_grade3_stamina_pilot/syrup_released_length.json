@@ -512,7 +512,7 @@
       "studentFacingPrompt": "How does the \"Did You Know?\" box add to the passage?",
       "answerChoicesJson": [
         "It shows that a sugar maple can live for many generations.",
-        "It explains why syrup should be filtered before it is sold.",
+        "It explains how the syrup is poured through a filter into jars.",
         "It tells why thin young trees are left alone.",
         "It proves that syrup is healthier than corn syrup."
       ],
@@ -535,9 +535,9 @@
           "distractorRole": null
         },
         {
-          "text": "It explains why syrup should be filtered before it is sold.",
+          "text": "It explains how the syrup is poured through a filter into jars.",
           "isCorrect": false,
-          "rationale": "Wrong section: filtering is explained in the final body section, not the sidebar.",
+          "rationale": "Wrong section: pouring syrup through a filter into jars is explained in the main passage, not in the \"Did You Know?\" box.",
           "evidenceLinks": [
             {
               "paragraphIndex": 4,

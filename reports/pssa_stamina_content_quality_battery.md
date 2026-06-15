@@ -31,7 +31,7 @@ Report mode: this file lists PASS/FAIL/SKIP findings for the 37-item encoded sta
 | pssa_stamina_item_g3_syrup_01 | MCQ | PASS | 9 | 10 | -1 | true | Correct choice length is within threshold. |
 | pssa_stamina_item_g3_syrup_02 | MCQ | PASS | 2 | 8 | -6 | false | Correct choice length is within threshold. |
 | pssa_stamina_item_g3_syrup_03 | MCQ | PASS | 11 | 11 | 0 | true | Correct choice length is within threshold. |
-| pssa_stamina_item_g3_syrup_04 | MCQ | PASS | 11 | 11 | 0 | false | Correct choice length is within threshold. |
+| pssa_stamina_item_g3_syrup_04 | MCQ | PASS | 11 | 12 | -1 | false | Correct choice length is within threshold. |
 | pssa_stamina_item_g3_syrup_ebsr_01::partA | EBSR_PART_A | PASS | 10 | 12 | -2 | false | Correct choice length is within threshold. |
 | pssa_stamina_item_g3_boat_01 | MCQ | PASS | 12 | 15 | -3 | false | Correct choice length is within threshold. |
 | pssa_stamina_item_g3_boat_02 | MCQ | PASS | 14 | 15 | -1 | false | Correct choice length is within threshold. |
@@ -78,7 +78,6 @@ Report mode: this file lists PASS/FAIL/SKIP findings for the 37-item encoded sta
 
 | itemId | interactionType | gateId | detail |
 | --- | --- | --- | --- |
-| pssa_stamina_item_g3_syrup_04 | MCQ | PSSA_MCQ_PASSAGE_SPECIFICITY | 1 detector rows; failures=1 |
 
 ## Per-Item Gate Matrix
 
@@ -272,7 +271,7 @@ Report mode: this file lists PASS/FAIL/SKIP findings for the 37-item encoded sta
 | pssa_stamina_item_g3_syrup_01 | MCQ | PSSA_MCQ_PASSAGE_SPECIFICITY | PASS | 1 detector rows; failures=0 |
 | pssa_stamina_item_g3_syrup_02 | MCQ | PSSA_MCQ_PASSAGE_SPECIFICITY | PASS | 1 detector rows; failures=0 |
 | pssa_stamina_item_g3_syrup_03 | MCQ | PSSA_MCQ_PASSAGE_SPECIFICITY | PASS | 1 detector rows; failures=0 |
-| pssa_stamina_item_g3_syrup_04 | MCQ | PSSA_MCQ_PASSAGE_SPECIFICITY | FAIL | 1 detector rows; failures=1 |
+| pssa_stamina_item_g3_syrup_04 | MCQ | PSSA_MCQ_PASSAGE_SPECIFICITY | PASS | 1 detector rows; failures=0 |
 | pssa_stamina_item_g3_boat_01 | MCQ | PSSA_MCQ_PASSAGE_SPECIFICITY | PASS | 1 detector rows; failures=0 |
 | pssa_stamina_item_g3_boat_02 | MCQ | PSSA_MCQ_PASSAGE_SPECIFICITY | PASS | 1 detector rows; failures=0 |
 | pssa_stamina_item_g3_boat_03 | MCQ | PSSA_MCQ_PASSAGE_SPECIFICITY | PASS | 1 detector rows; failures=0 |
@@ -330,7 +329,7 @@ Report mode: this file lists PASS/FAIL/SKIP findings for the 37-item encoded sta
 | pssa_stamina_item_g3_syrup_01 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | choiceGroup=pssa_stamina_item_g3_syrup_01; correctWords=9; maxDistractorWords=10; gap=-1; uniquelyLongest=true |
 | pssa_stamina_item_g3_syrup_02 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | choiceGroup=pssa_stamina_item_g3_syrup_02; correctWords=2; maxDistractorWords=8; gap=-6; uniquelyLongest=false |
 | pssa_stamina_item_g3_syrup_03 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | choiceGroup=pssa_stamina_item_g3_syrup_03; correctWords=11; maxDistractorWords=11; gap=0; uniquelyLongest=true |
-| pssa_stamina_item_g3_syrup_04 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | choiceGroup=pssa_stamina_item_g3_syrup_04; correctWords=11; maxDistractorWords=11; gap=0; uniquelyLongest=false |
+| pssa_stamina_item_g3_syrup_04 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | choiceGroup=pssa_stamina_item_g3_syrup_04; correctWords=11; maxDistractorWords=12; gap=-1; uniquelyLongest=false |
 | pssa_stamina_item_g3_syrup_ebsr_01 | EBSR | PSSA_MCQ_CORRECT_IS_LONGEST_EBSR_PART_A_REPORT_ONLY | PASS | choiceGroup=pssa_stamina_item_g3_syrup_ebsr_01::partA; correctWords=10; maxDistractorWords=12; gap=-2; uniquelyLongest=false |
 | pssa_stamina_item_g3_boat_01 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | choiceGroup=pssa_stamina_item_g3_boat_01; correctWords=12; maxDistractorWords=15; gap=-3; uniquelyLongest=false |
 | pssa_stamina_item_g3_boat_02 | MCQ | PSSA_MCQ_CORRECT_IS_LONGEST | PASS | choiceGroup=pssa_stamina_item_g3_boat_02; correctWords=14; maxDistractorWords=15; gap=-1; uniquelyLongest=false |
@@ -495,7 +494,7 @@ Report mode: this file lists PASS/FAIL/SKIP findings for the 37-item encoded sta
 | pssa_stamina_item_g3_syrup_01 | PSSA_MCQ_PASSAGE_SPECIFIC_CHOICES | SKIP | INFO | synthesis evidence item | Whole-passage synthesis MCQs are scoped by explicit evidenceKind rather than choice concreteness. |
 | pssa_stamina_item_g3_syrup_02 | PSSA_MCQ_PASSAGE_SPECIFIC_CHOICES | SKIP | INFO | vocabulary-in-context item | Vocabulary-in-context MCQs are scoped to vocab-specific gates, not comprehension choice-specificity. |
 | pssa_stamina_item_g3_syrup_03 | PSSA_MCQ_PASSAGE_SPECIFIC_CHOICES | PASS | INFO | all passage-specificity gates clear | Passage-linked reading MCQ passed grounding gates. |
-| pssa_stamina_item_g3_syrup_04 | PSSA_MCQ_PASSAGE_SPECIFIC_CHOICES | FAIL | BLOCKER | concreteChoices=3/4 | Each choice needs at least two passage-specific content words, and at least three choices need concrete passage details. |
+| pssa_stamina_item_g3_syrup_04 | PSSA_MCQ_PASSAGE_SPECIFIC_CHOICES | PASS | INFO | all passage-specificity gates clear | Passage-linked reading MCQ passed grounding gates. |
 | pssa_stamina_item_g3_boat_01 | PSSA_MCQ_PASSAGE_SPECIFIC_CHOICES | SKIP | INFO | synthesis evidence item | Whole-passage synthesis MCQs are scoped by explicit evidenceKind rather than choice concreteness. |
 | pssa_stamina_item_g3_boat_02 | PSSA_MCQ_PASSAGE_SPECIFIC_CHOICES | PASS | INFO | all passage-specificity gates clear | Passage-linked reading MCQ passed grounding gates. |
 | pssa_stamina_item_g3_boat_03 | PSSA_MCQ_PASSAGE_SPECIFIC_CHOICES | PASS | INFO | all passage-specificity gates clear | Passage-linked reading MCQ passed grounding gates. |
