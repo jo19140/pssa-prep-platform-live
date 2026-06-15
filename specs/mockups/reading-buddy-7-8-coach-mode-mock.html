@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Reading Buddy Coach Mode 7–8 — a_e Full Lesson Mock (Pro, 2026-06-14)</title>
+<!--
+  SOURCE: Pro's full-length 7-8 "Coach Mode" a_e lesson mock (2026-06-14).
+  STATUS: APPROVED as the 7-8 VISUAL + TONE direction (see specs/presentation-profile-architecture.md P3).
+  RECONCILE BEFORE BUILD (Claude review):
+   1. CONTENT IS PLACEHOLDER — "rough", "Stays/stayed" (ay), "eyes" break a_e-entry decodability.
+      Final 7-8 content must come from the content-v3 pipeline and pass the decodability/audit gates.
+   2. KEEP HARPER'S REAL IMAGE (harper-character-v1.png) per the "same Harper, older tone" decision —
+      do NOT ship the abstract gradient avatar used here.
+   3. The "Evidence preview / event log" and "Adult/teacher layer" panels are DEV/TEACHER illustration,
+      hidden from the student view in production.
+   4. Real interaction uses the Wave 1 VAD listen-for-attempt path (warm-up / nonsense / sentences / story),
+      not literal taps; power words stay tap-to-hear. The mock's taps are simulation only.
+-->
+<style>
+  :root{
+    --bg:#0f172a;
+    --bg2:#111827;
+    --panel:#f8fafc;
+    --card:#ffffff;
+    --ink:#111827;
+    --muted:#64748b;
+    --line:#d9e2ef;
+    --slate:#334155;
+    --indigo:#3730a3;
+    --indigo2:#4f46e5;
+    --cyan:#0891b2;
+    --green:#15803d;
+    --green-bg:#ecfdf3;
+    --amber:#b45309;
+    --amber-bg:#fff7ed;
+    --red:#b91c1c;
+    --soft:#f1f5f9;
+    --chip:#e8eef8;
+    --focus:#eef2ff;
+    --shadow:0 18px 50px rgba(15,23,42,.16);
+    --radius:18px;
+    --radius2:10px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    background:
+      radial-gradient(circle at top left, rgba(79,70,229,.25), transparent 38%),
+      linear-gradient(135deg,#0f172a 0%,#111827 52%,#1e1b4b 100%);
+    color:var(--ink);
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    line-height:1.5;
+  }
+  .app{ max-width:1320px; margin:0 auto; padding:22px; }
+  .top{ display:grid; grid-template-columns:minmax(0,1.1fr) 360px; gap:18px; align-items:stretch; margin-bottom:18px; }
+  .hero{ background:rgba(255,255,255,.94); border:1px solid rgba(255,255,255,.55); border-radius:26px; padding:26px; box-shadow:var(--shadow); overflow:hidden; position:relative; }
+  .hero:before{ content:""; position:absolute; right:-90px; top:-90px; width:260px; height:260px; background:radial-gradient(circle, rgba(79,70,229,.14), transparent 68%); }
+  .eyebrow{ display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;align-items:center; position:relative;z-index:1; }
+  .pill{ border:1px solid #c7d2fe; color:#312e81; background:#eef2ff; padding:5px 10px; border-radius:999px; font-size:12px; font-weight:700; letter-spacing:.02em; }
+  .pill.dark{ background:#111827;color:#f8fafc;border-color:#111827; }
+  h1{font-size:36px;line-height:1.05;margin:0 0 12px;color:#0f172a;letter-spacing:-.04em;position:relative;z-index:1}
+  .hero p{font-size:16px;color:#475569;max-width:760px;margin:0 0 18px;position:relative;z-index:1}
+  .coach-note{ border-left:4px solid var(--indigo2); background:#f8fafc; padding:12px 14px; border-radius:0 12px 12px 0; color:#334155; font-size:14px; max-width:760px; position:relative;z-index:1; }
+  .coach-card{ background:#0b1224; border:1px solid rgba(255,255,255,.16); border-radius:26px; color:#f8fafc; padding:22px; box-shadow:var(--shadow); display:flex; flex-direction:column; gap:16px; }
+  .harper{ display:grid; grid-template-columns:78px 1fr; gap:14px; align-items:center; }
+  .avatar{ width:78px;height:78px;border-radius:24px; background: radial-gradient(circle at 58% 35%, #f8fafc 0 6px, transparent 7px), radial-gradient(circle at 40% 36%, #f8fafc 0 6px, transparent 7px), linear-gradient(135deg,#6366f1,#06b6d4); box-shadow:0 10px 24px rgba(6,182,212,.25); position:relative; }
+  .avatar:after{ content:""; position:absolute;left:22px;right:22px;bottom:22px;height:9px;border-radius:999px; background:#f8fafc;opacity:.9; }
+  .harper h2{font-size:20px;margin:0 0 4px}
+  .harper p{margin:0;color:#cbd5e1;font-size:13.5px}
+  .coach-line{ background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.14); padding:14px; border-radius:16px; color:#e2e8f0; font-size:14px; }
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  .stat{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:10px}
+  .stat b{display:block;font-size:18px;color:white}
+  .stat span{font-size:11px;color:#cbd5e1;text-transform:uppercase;letter-spacing:.06em}
+  .layout{ display:grid; grid-template-columns:220px minmax(0,1fr); gap:18px; }
+  .rail{ position:sticky; top:16px; align-self:start; background:rgba(255,255,255,.96); border:1px solid rgba(255,255,255,.6); border-radius:24px; padding:14px; box-shadow:var(--shadow); }
+  .rail h3{ margin:4px 8px 12px; font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:#64748b; }
+  .rail a{ display:flex; align-items:center; gap:9px; padding:9px 10px; margin:3px 0; border-radius:12px; color:#334155; text-decoration:none; font-size:13px; font-weight:650; }
+  .rail a:hover{background:#f1f5f9}
+  .rail a .num{ width:24px;height:24px;border-radius:8px;background:#e2e8f0;color:#334155; display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800; }
+  .rail a.active{background:#eef2ff;color:#312e81}
+  .rail a.active .num{background:#4f46e5;color:white}
+  .rail .note{ margin:12px 8px 0;color:#64748b;font-size:12px;border-top:1px solid #e2e8f0;padding-top:12px; }
+  main{display:flex;flex-direction:column;gap:18px}
+  .part{ background:rgba(255,255,255,.96); border:1px solid rgba(255,255,255,.64); border-radius:26px; box-shadow:var(--shadow); overflow:hidden; }
+  .part-head{ display:grid; grid-template-columns:1fr auto; gap:16px; align-items:center; padding:20px 24px; border-bottom:1px solid #e2e8f0; background:linear-gradient(180deg,#ffffff,#f8fafc); }
+  .part-title{display:flex;align-items:center;gap:14px}
+  .badge{ width:42px;height:42px;border-radius:14px;background:#111827;color:white; display:flex;align-items:center;justify-content:center;font-weight:900; }
+  .part-title h2{margin:0;font-size:23px;letter-spacing:-.03em;color:#111827}
+  .part-title p{margin:3px 0 0;color:#64748b;font-size:14px}
+  .status{ display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end; }
+  .status .tag{ font-size:12px;font-weight:800;border-radius:999px;padding:6px 10px; background:#f1f5f9;color:#475569;border:1px solid #e2e8f0; }
+  .tag.safe{background:#ecfdf3;color:#166534;border-color:#bbf7d0}
+  .tag.listen{background:#e0f2fe;color:#075985;border-color:#bae6fd}
+  .tag.noscore{background:#fff7ed;color:#9a3412;border-color:#fed7aa}
+  .content{padding:22px 24px}
+  .coach-prompt{ display:flex;gap:12px;align-items:flex-start; background:#f8fafc;border:1px solid #e2e8f0;border-radius:18px;padding:14px;margin-bottom:18px; }
+  .coach-mini{ width:38px;height:38px;border-radius:13px;background:linear-gradient(135deg,#4f46e5,#0891b2); flex:0 0 auto;position:relative; }
+  .coach-mini:after{content:"";position:absolute;left:11px;right:11px;bottom:10px;height:5px;border-radius:99px;background:white}
+  .coach-prompt b{display:block;margin-bottom:2px}
+  .coach-prompt span{color:#475569;font-size:14px}
+  .rep-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(112px,1fr)); gap:10px; }
+  .word-chip, .pair-card, .sentence-card, .power-card{ border:1px solid #cbd5e1; background:white; border-radius:14px; padding:12px 13px; min-height:50px; display:flex;align-items:center;justify-content:center; text-align:center; font-size:20px; font-weight:850; color:#111827; cursor:pointer; transition:.15s ease; position:relative; }
+  .word-chip:hover,.pair-card:hover,.sentence-card:hover,.power-card:hover{border-color:#818cf8;box-shadow:0 0 0 4px #eef2ff}
+  .word-chip.done,.pair-card.done,.power-card.done{background:var(--green-bg);border-color:#86efac;color:#166534}
+  .word-chip.retry{background:var(--amber-bg);border-color:#fdba74;color:#9a3412}
+  .word-chip:after,.pair-card:after,.power-card:after{ content:attr(data-status); position:absolute;top:6px;right:8px;font-size:10px;font-weight:900;color:#64748b;text-transform:uppercase;letter-spacing:.05em; }
+  .line-label{ font-size:12px; text-transform:uppercase; letter-spacing:.08em; color:#64748b; font-weight:900; margin:18px 0 8px; }
+  .pair-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}
+  .pair-card{ flex-direction:column; gap:8px; font-size:16px; min-height:112px; }
+  .pair-top{font-size:28px;letter-spacing:.03em}
+  .arrow{color:#4f46e5;margin:0 8px}
+  .pair-note{font-size:12px;color:#64748b;font-weight:700}
+  .rule-box{ background:#111827;color:white;border-radius:20px;padding:20px;margin-bottom:16px; display:grid;grid-template-columns:1fr auto;gap:18px;align-items:center; }
+  .rule-box h3{margin:0 0 8px;font-size:22px}
+  .rule-box p{margin:0;color:#cbd5e1}
+  .rule-example{font-weight:900;font-size:36px;white-space:nowrap}
+  .rule-example span{color:#93c5fd}
+  .decode-board{ display:grid; grid-template-columns:minmax(0,1fr) 260px; gap:16px; }
+  .feedback{ border:1px solid #e2e8f0; background:#f8fafc; border-radius:18px; padding:14px; align-self:start; }
+  .feedback h4{margin:0 0 10px;font-size:14px;color:#334155;text-transform:uppercase;letter-spacing:.08em}
+  .msg{ background:white;border:1px solid #e2e8f0;border-radius:14px;padding:12px;font-size:14px;color:#334155;margin-bottom:10px; }
+  .event-log{ font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:11px;color:#64748b;background:#0f172a;border-radius:12px;padding:10px;max-height:160px;overflow:auto; }
+  .event-log div{color:#cbd5e1;margin-bottom:4px}
+  .sentence-list{display:grid;gap:10px}
+  .sentence-card{ justify-content:flex-start;text-align:left; font-size:17px;font-weight:700; padding:14px 16px; }
+  .sentence-card .mini-state{margin-left:auto;font-size:12px;background:#f1f5f9;border:1px solid #e2e8f0;border-radius:999px;padding:4px 9px;color:#64748b}
+  .spell-wrap{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .dictation{ border:1px solid #dbe3ee;border-radius:18px;padding:16px;background:#f8fafc; }
+  .dictation h4{margin:0 0 8px}
+  .tiles{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}
+  .tile{ width:38px;height:38px;border-radius:10px;background:white;border:1px solid #cbd5e1; display:flex;align-items:center;justify-content:center;font-weight:900;font-size:18px;box-shadow:0 2px 0 #e2e8f0; }
+  .answer-line{ min-height:44px;border:2px dashed #cbd5e1;border-radius:12px;background:white;margin:12px 0;padding:8px;color:#64748b; }
+  .story{ background:#f8fafc;border:1px solid #e2e8f0;border-radius:20px;padding:22px; }
+  .story h3{margin:0 0 12px;font-size:24px;color:#111827}
+  .story p{font-size:18px;line-height:1.85;margin:0;color:#1f2937}
+  .story mark{background:#dbeafe;color:#1e3a8a;padding:1px 3px;border-radius:4px}
+  .story-controls{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
+  .qa-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
+  .question{ border:1px solid #dbe3ee;background:#f8fafc;border-radius:18px;padding:14px; }
+  .question b{display:block;margin-bottom:8px;color:#334155}
+  .question textarea{width:100%;height:92px;border:1px solid #cbd5e1;border-radius:12px;padding:10px;font-family:inherit}
+  button{ appearance:none;border:0;border-radius:12px;background:#111827;color:white; font-weight:850;padding:10px 14px;cursor:pointer;transition:.15s ease; }
+  button:hover{transform:translateY(-1px);box-shadow:0 8px 18px rgba(15,23,42,.16)}
+  button.secondary{background:#eef2ff;color:#312e81}
+  button.ghost{background:#f1f5f9;color:#334155}
+  button.good{background:#15803d}
+  button.warn{background:#b45309}
+  button:disabled{background:#cbd5e1;color:#64748b;cursor:not-allowed;transform:none;box-shadow:none}
+  .controls{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;align-items:center}
+  .progress-note{font-size:13px;color:#64748b;margin-left:auto}
+  .completion{ display:flex;align-items:center;justify-content:space-between;gap:14px; margin-top:18px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:18px;padding:14px; }
+  .completion b{color:#111827}
+  .adult-panel{ margin-top:16px;border:1px dashed #94a3b8;background:#f8fafc;border-radius:18px;padding:14px; }
+  .adult-panel h4{margin:0 0 8px;color:#334155;font-size:14px}
+  .adult-panel p{margin:0;color:#64748b;font-size:13px}
+  .note-line{font-size:13px;color:#64748b;margin-top:10px}
+  @media(max-width:980px){ .top,.layout,.decode-board,.spell-wrap{grid-template-columns:1fr} .rail{position:relative;top:auto} }
+</style>
+</head>
+<body>
+<div class="app">
+  <section class="top">
+    <div class="hero">
+      <div class="eyebrow">
+        <span class="pill dark">Reading Buddy</span>
+        <span class="pill">Presentation band: 7–8</span>
+        <span class="pill">Coach Mode</span>
+        <span class="pill">Skill: silent e / long a</span>
+      </div>
+      <h1>Private reading coach session</h1>
+      <p>Same eight-part structured-literacy lesson, age-respecting optics for an older struggling reader. Calm, focused — a training session, not a cartoon phonics game.</p>
+      <div class="coach-note"><b>Design target:</b> a 7th grader feels, “This is not babyish. This is helping me get better.”</div>
+    </div>
+    <aside class="coach-card">
+      <div class="harper">
+        <div class="avatar" aria-hidden="true"></div>
+        <div><h2>Harper · Reading Coach</h2><p>Clear, direct, supportive. No hype. (Production keeps Harper's real image.)</p></div>
+      </div>
+      <div class="coach-line">Read when you're ready. I’ll listen, help when needed, and keep the lesson moving.</div>
+      <div class="stats"><div class="stat"><b>8</b><span>lesson parts</span></div><div class="stat"><b>a_e</b><span>target skill</span></div><div class="stat"><b>0</b><span>story scoring</span></div></div>
+    </aside>
+  </section>
+  <section class="layout">
+    <nav class="rail" aria-label="Lesson parts">
+      <h3>Lesson flow</h3>
+      <a href="#p1" class="active"><span class="num">1</span>Warm-up</a>
+      <a href="#p2"><span class="num">2</span>The rule</a>
+      <a href="#p3"><span class="num">3</span>Decoding reps</a>
+      <a href="#p4"><span class="num">4</span>Power words</a>
+      <a href="#p5"><span class="num">5</span>Sentences</a>
+      <a href="#p6"><span class="num">6</span>Spelling</a>
+      <a href="#p7"><span class="num">7</span>Story</a>
+      <a href="#p8"><span class="num">8</span>Talk about it</a>
+      <div class="note">Status = engaged / heard / completed. Not a public ranking.</div>
+    </nav>
+    <main>
+      <section class="part" id="p1"><div class="part-head"><div class="part-title"><div class="badge">1</div><div><h2>Warm-up</h2><p>Known words to get your reading system ready.</p></div></div><div class="status"><span class="tag listen">heard attempt</span><span class="tag noscore">no score</span></div></div><div class="content"><div class="coach-prompt"><div class="coach-mini"></div><div><b>Coach line</b><span>Read each word out loud when you're ready. I’m listening for your attempt, not grading this warm-up.</span></div></div><div class="rep-grid tappable" data-complete="warmup"><div class="word-chip" data-status="">sat</div><div class="word-chip" data-status="">hand</div><div class="word-chip" data-status="">fast</div><div class="word-chip" data-status="">lamp</div><div class="word-chip" data-status="">made</div><div class="word-chip" data-status="">lake</div></div><div class="completion"><b id="warmupCount">0 / 6 heard</b><button id="warmupNext" disabled>Continue</button></div></div></section>
+      <section class="part" id="p2"><div class="part-head"><div class="part-title"><div class="badge">2</div><div><h2>The rule</h2><p>Silent e changes the vowel sound.</p></div></div><div class="status"><span class="tag safe">instruction</span><span class="tag noscore">no score</span></div></div><div class="content"><div class="rule-box"><div><h3>Silent e changes the vowel to its long sound.</h3><p>When a short word adds silent e, the vowel changes: <b>cap → cape</b>. The e is silent.</p></div><div class="rule-example">cap <span>+ e</span> → cape</div></div><div class="coach-prompt"><div class="coach-mini"></div><div><b>Harper says</b><span>Watch the same move across a few words. The vowel changes; the e stays quiet.</span></div></div><div class="pair-grid tappable" data-complete="pairs"><div class="pair-card" data-status=""><div class="pair-top">cap <span class="arrow">→</span> cape</div><div class="pair-note">short a → long a</div></div><div class="pair-card" data-status=""><div class="pair-top">mad <span class="arrow">→</span> made</div><div class="pair-note">silent e changes the vowel</div></div><div class="pair-card" data-status=""><div class="pair-top">tap <span class="arrow">→</span> tape</div><div class="pair-note">same pattern, new word</div></div></div><div class="completion"><b id="pairsCount">0 / 3 examples heard</b><button id="pairsNext" disabled>Continue</button></div></div></section>
+      <section class="part" id="p3"><div class="part-head"><div class="part-title"><div class="badge">3</div><div><h2>Decoding reps</h2><p>Read the word. Harper listens. If needed, you get another rep.</p></div></div><div class="status"><span class="tag listen">speech loop</span><span class="tag safe">no transcript echo</span></div></div><div class="content"><div class="decode-board"><div><div class="coach-prompt"><div class="coach-mini"></div><div><b>Coach line</b><span>Read each real word out loud. If a word needs another rep, I’ll point you back to the pattern.</span></div></div><div class="line-label">Line 1 · short a vs silent e</div><div class="rep-grid"><div class="word-chip real" data-status="">cap</div><div class="word-chip real" data-status="">cape</div><div class="word-chip real" data-status="">mad</div><div class="word-chip real" data-status="">made</div><div class="word-chip real" data-status="">tap</div><div class="word-chip real" data-status="">tape</div></div><div class="line-label">Line 2 · long-a words</div><div class="rep-grid"><div class="word-chip real" data-status="">cake</div><div class="word-chip real" data-status="">late</div><div class="word-chip real" data-status="">game</div><div class="word-chip real" data-status="">save</div><div class="word-chip real" data-status="">base</div><div class="word-chip real" data-status="">brave</div></div><div class="line-label">Line 3 · review mix</div><div class="rep-grid"><div class="word-chip real" data-status="">hand</div><div class="word-chip real" data-status="">lake</div><div class="word-chip real" data-status="">fast</div><div class="word-chip real" data-status="">gate</div><div class="word-chip real" data-status="">lamp</div><div class="word-chip real" data-status="">came</div></div><div class="line-label">Line 4 · nonsense words — not graded</div><div class="coach-prompt"><div class="coach-mini"></div><div><b>Why these matter</b><span>Nonsense words show whether the pattern is automatic, not memorized. They are not scored.</span></div></div><div class="rep-grid tappable" data-complete="nonsense"><div class="word-chip nonsense" data-status="">zake</div><div class="word-chip nonsense" data-status="">mave</div><div class="word-chip nonsense" data-status="">pame</div><div class="word-chip nonsense" data-status="">vade</div><div class="word-chip nonsense" data-status="">sape</div><div class="word-chip nonsense" data-status="">nace</div><div class="word-chip nonsense" data-status="">gake</div><div class="word-chip nonsense" data-status="">tave</div></div><div class="completion"><b id="nonsenseCount">0 / 8 attempts heard</b><button id="nonsenseNext" disabled>Continue</button></div></div><aside class="feedback"><h4>Harper feedback</h4><div class="msg" id="p3msg">Tap a word chip to simulate a read. First miss gets a retry; second miss gets the silent-e reteach. No “you said ___.”</div><div class="controls"><button class="secondary" id="simulateCorrect">Simulate correct</button><button class="ghost" id="simulateMiss">Simulate miss</button></div><h4 style="margin-top:16px">Evidence preview <span style="font-weight:600;text-transform:none;color:#94a3b8">(dev/teacher only — hidden from student)</span></h4><div class="event-log" id="eventLog"><div>VOICE_WORD_READ only after an attempt</div></div></aside></div></div></section>
+      <section class="part" id="p4"><div class="part-head"><div class="part-title"><div class="badge">4</div><div><h2>Power words</h2><p>Words that show up often or matter in the passage.</p></div></div><div class="status"><span class="tag safe">tap to hear</span><span class="tag noscore">no hard score</span></div></div><div class="content"><div class="coach-prompt"><div class="coach-mini"></div><div><b>Coach line</b><span>Tap each word once. Hear it clearly by itself, then move on.</span></div></div><div class="rep-grid tappable" data-complete="power"><div class="power-card" data-status="">said</div><div class="power-card" data-status="">was</div><div class="power-card" data-status="">they</div><div class="power-card" data-status="">brave</div><div class="power-card" data-status="">save</div></div><div class="completion"><b id="powerCount">0 / 5 heard</b><button id="powerNext" disabled>Continue</button></div></div></section>
+      <section class="part" id="p5"><div class="part-head"><div class="part-title"><div class="badge">5</div><div><h2>Sentences</h2><p>Apply the pattern in short connected text.</p></div></div><div class="status"><span class="tag listen">listen & encourage</span><span class="tag noscore">no verdict</span></div></div><div class="content"><div class="coach-prompt"><div class="coach-mini"></div><div><b>Coach line</b><span>Read one sentence at a time. I’m listening, but I’m not grading sentence reading yet.</span></div></div><div class="sentence-list tappable" data-complete="sentences"><div class="sentence-card">Jake came late to the game. <span class="mini-state">not read</span></div><div class="sentence-card">He made a fast save. <span class="mini-state">not read</span></div><div class="sentence-card">Max gave Jake a clap. <span class="mini-state">not read</span></div><div class="sentence-card">The club had a bad game. <span class="mini-state">not read</span></div><div class="sentence-card">Jake stayed brave. <span class="mini-state">not read</span></div><div class="sentence-card">They came back at the end. <span class="mini-state">not read</span></div></div><div class="completion"><b id="sentencesCount">0 / 6 sentences read</b><button id="sentencesNext" disabled>Continue</button></div></div></section>
+      <section class="part" id="p6"><div class="part-head"><div class="part-title"><div class="badge">6</div><div><h2>Spelling</h2><p>Use the pattern from sound to spelling.</p></div></div><div class="status"><span class="tag safe">typed/tile score</span><span class="tag noscore">not ASR</span></div></div><div class="content"><div class="coach-prompt"><div class="coach-mini"></div><div><b>Coach line</b><span>I’ll say the word. Build it or type it. Look for the silent e when the vowel is long.</span></div></div><div class="spell-wrap"><div class="dictation"><h4>Dictated words</h4><p><b>cape</b> · <b>made</b> · <b>lake</b> · <b>game</b> · <b>save</b> · <b>brave</b></p><div class="answer-line">Student builds/ types here</div><div class="tiles"><span class="tile">c</span><span class="tile">a</span><span class="tile">p</span><span class="tile">e</span><span class="tile">m</span><span class="tile">d</span><span class="tile">l</span><span class="tile">k</span><span class="tile">g</span><span class="tile">s</span><span class="tile">v</span><span class="tile">b</span><span class="tile">r</span></div></div><div class="dictation"><h4>Dictated sentences</h4><p>1. Jake made a save.</p><p>2. The game came back.</p><textarea class="craft" placeholder="Type the sentence here..."></textarea></div></div><div class="completion"><b>Spelling checks typed/tile response, not speech.</b><button>Complete spelling</button></div></div></section>
+      <section class="part" id="p7"><div class="part-head"><div class="part-title"><div class="badge">7</div><div><h2>Story</h2><p>Read a short passage using the pattern.</p></div></div><div class="status"><span class="tag listen">listen & encourage</span><span class="tag noscore">no word-level judgment</span></div></div><div class="content"><div class="coach-prompt"><div class="coach-mini"></div><div><b>Coach line</b><span>You can listen first or read on your own. I won’t score the story yet — I’ll listen and keep you moving.</span></div></div><div class="story-controls"><button class="secondary">Listen first</button><button class="ghost">Read on my own</button></div><article class="story"><h3>Jake Stays In</h3><p><mark>Jake</mark> came <mark>late</mark> to the <mark>game</mark>. He sat on the bench and felt bad. The club had a rough game, and Max had to run fast. At last, Jake got in. Max <mark>gave</mark> him a pass, but Jake missed it. The ball hit the net. Jake did not quit. He took his place and kept his eyes on the ball. The ball came back fast. Jake ran to the line and <mark>made</mark> the <mark>save</mark>. Max gave Jake a clap. Jake was not the best. He was <mark>brave</mark>, and he kept at it.</p><p style="margin-top:10px;font-size:13px;color:#b45309"><b>NOTE (Claude):</b> placeholder content — “rough”, “Stays/stayed”, “eyes” are NOT a_e-entry decodable. Final story must pass the content-v3 decodability gates.</p></article><div class="completion"><b>Story reading completed when the student finishes.</b><button class="good">I finished reading</button></div></div></section>
+      <section class="part" id="p8"><div class="part-head"><div class="part-title"><div class="badge">8</div><div><h2>Talk about it</h2><p>Show what you understood. No auto-grade in v1.</p></div></div><div class="status"><span class="tag safe">open response</span><span class="tag noscore">teacher review later</span></div></div><div class="content"><div class="coach-prompt"><div class="coach-mini"></div><div><b>Coach line</b><span>Answer in your own words. This is a conversation about the story, not a trick question.</span></div></div><div class="qa-grid"><div class="question"><b>1. What went wrong for Jake at first?</b><textarea placeholder="Type or say your answer..."></textarea></div><div class="question"><b>2. How can you tell Jake did not quit?</b><textarea placeholder="Type or say your answer..."></textarea></div><div class="question"><b>3. Tell what happened at the end.</b><textarea placeholder="Type or say your answer..."></textarea></div><div class="question"><b>4. What is one time you kept trying after a mistake?</b><textarea placeholder="Type or say your answer..."></textarea></div></div><div class="adult-panel"><h4>Adult/teacher layer, hidden from student</h4><p>Future: responses captured for async teacher review + AI shadow grading. The child never sees an automatic comprehension grade.</p></div><div class="completion"><b>Lesson complete.</b><button class="good">Finish session</button></div></div></section>
+    </main>
+  </section>
+</div>
+<script>
+  const log=(t)=>{const b=document.getElementById('eventLog');if(!b)return;const d=document.createElement('div');d.textContent='• '+t;b.prepend(d);};
+  document.querySelectorAll('.rail a').forEach(a=>a.addEventListener('click',()=>{document.querySelectorAll('.rail a').forEach(x=>x.classList.remove('active'));a.classList.add('active');}));
+  const cfgs={warmup:{c:'warmupCount',b:'warmupNext',l:'heard'},pairs:{c:'pairsCount',b:'pairsNext',l:'examples heard'},nonsense:{c:'nonsenseCount',b:'nonsenseNext',l:'attempts heard'},power:{c:'powerCount',b:'powerNext',l:'heard'},sentences:{c:'sentencesCount',b:'sentencesNext',l:'sentences read'}};
+  document.querySelectorAll('.tappable').forEach(group=>{const cfg=cfgs[group.dataset.complete];const upd=()=>{if(!cfg)return;const items=[...group.children];const done=items.filter(x=>x.classList.contains('done')).length;const c=document.getElementById(cfg.c);const b=document.getElementById(cfg.b);if(c)c.textContent=`${done} / ${items.length} ${cfg.l}`;if(b)b.disabled=done!==items.length;};group.addEventListener('click',e=>{const item=e.target.closest('.word-chip,.pair-card,.power-card,.sentence-card');if(!item||!group.contains(item))return;item.classList.toggle('done');const st=item.querySelector('.mini-state');if(item.classList.contains('done')){item.dataset.status='heard';if(st)st.textContent='read';}else{item.dataset.status='';if(st)st.textContent='not read';}upd();});upd();});
+  let sel=null,miss=0;
+  document.querySelectorAll('.word-chip.real').forEach(chip=>chip.addEventListener('click',()=>{document.querySelectorAll('.word-chip.real').forEach(x=>x.style.outline='none');chip.style.outline='4px solid #c7d2fe';sel=chip;miss=0;document.getElementById('p3msg').textContent=`Ready for "${chip.textContent.trim()}." Use the buttons to simulate Harper.`;}));
+  document.getElementById('simulateCorrect')?.addEventListener('click',()=>{if(!sel)return;sel.classList.remove('retry');sel.classList.add('done');sel.dataset.status='correct';const w=sel.textContent.trim();document.getElementById('p3msg').textContent=`Got it — that was ${w}.`;log(`VOICE_WORD_READ · ${w} · CORRECT`);});
+  document.getElementById('simulateMiss')?.addEventListener('click',()=>{if(!sel)return;miss++;const w=sel.textContent.trim();sel.classList.add('retry');sel.dataset.status=miss===1?'retry':'reteach';if(miss===1){document.getElementById('p3msg').textContent='Read that one more time for me.';log(`VOICE_WORD_READ · ${w} · retry_prompted`);}else{document.getElementById('p3msg').textContent=`Check the silent e — it makes the vowel long. Try again: ${w}.`;log(`VOICE_MISCUE_DETECTED · ${w} · rule_reteach`);}});
+</script>
+</body>
+</html>

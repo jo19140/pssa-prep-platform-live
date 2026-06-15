@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>presentationProfile mock — a_e lesson: K-3 vs 7-8</title>
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;background:#e9eef3;font-family:ui-rounded,"Segoe UI",system-ui,sans-serif;color:#0f172a;padding:22px}
+  .wrap{max-width:780px;margin:0 auto}
+  h1{font-size:19px;margin:0 0 4px}
+  .sub{color:#64748b;font-weight:700;font-size:13px;margin:0 0 16px}
+  .toggle{display:inline-flex;background:#fff;border:2px solid #cbd5e1;border-radius:999px;padding:4px;margin-bottom:6px;gap:4px}
+  .toggle button{border:none;background:transparent;font-weight:900;font-size:14px;padding:8px 18px;border-radius:999px;cursor:pointer;color:#475569}
+  .toggle button.on{background:#0f172a;color:#fff}
+  .note{font-size:12px;color:#64748b;font-weight:700;margin:6px 0 16px}
+  /* the lesson "device" reskins by band via data-band on .device */
+  .device{border-radius:24px;padding:22px;transition:.2s}
+  /* K-3 theme: warm, playful, rounded */
+  .device[data-band="k3"]{background:#fffdf8;border:3px solid #ead9c2}
+  .device[data-band="k3"] .card{background:#fff;border:2px solid #efe1d2;border-radius:22px}
+  .device[data-band="k3"] .title{color:#b45309}
+  .device[data-band="k3"] .chip{border:2px solid #ead9c2;background:#fffdf8;border-radius:22px}
+  .device[data-band="k3"] .gate{background:#fcd34d;color:#451a03;border-radius:18px}
+  .device[data-band="k3"] .harper{background:#fff7ed;border:2px solid #fde68a}
+  .device[data-band="k3"] .dot{background:#fde68a}
+  /* 7-8 theme: cool, clean, tool-like, squarer */
+  .device[data-band="b78"]{background:#f8fafc;border:2px solid #cbd5e1}
+  .device[data-band="b78"] .card{background:#fff;border:1px solid #e2e8f0;border-radius:12px}
+  .device[data-band="b78"] .title{color:#334155}
+  .device[data-band="b78"] .chip{border:1px solid #cbd5e1;background:#fff;border-radius:10px}
+  .device[data-band="b78"] .gate{background:#4338ca;color:#fff;border-radius:10px}
+  .device[data-band="b78"] .harper{background:#eef2ff;border:1px solid #c7d2fe}
+  .device[data-band="b78"] .dot{background:#c7d2fe}
+
+  .ptag{font-size:11px;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:#94a3b8}
+  .title{font-size:22px;font-weight:900;margin:2px 0 14px}
+  .harper{display:flex;align-items:center;gap:12px;border-radius:16px;padding:11px 15px;margin:8px 0 18px}
+  .dot{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-size:18px;flex:0 0 auto}
+  .hmsg{font-weight:800;font-size:14px}
+  .card{padding:16px;margin-bottom:14px}
+  .clabel{font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.05em;color:#94a3b8;margin:0 0 8px}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  .chip{padding:16px 8px;text-align:center;font-size:22px;font-weight:900}
+  .story{font-size:17px;line-height:1.7;font-weight:600;color:#1e293b}
+  .q{font-weight:800;margin:6px 0;font-size:14px}
+  .gate{border:none;font-size:15px;font-weight:900;padding:13px;width:100%;margin-top:6px;cursor:default}
+  .diffbar{font-size:11px;color:#64748b;font-weight:800;background:#fff;border:1px dashed #cbd5e1;border-radius:10px;padding:8px 12px;margin:14px 0 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Same a_e lesson, two presentation bands</h1>
+  <p class="sub">Same skill (long-a a_e), same 8-part flow, same VAD/capture rules. Only the <b>presentation</b> changes. Toggle the band:</p>
+  <div class="toggle">
+    <button id="bK3" class="on" onclick="setBand('k3')">K-3 (current)</button>
+    <button id="bB78" onclick="setBand('b78')">7-8 (Yohanna)</button>
+  </div>
+  <p class="note" id="bandNote"></p>
+
+  <div class="device" id="device" data-band="k3">
+    <div class="ptag" id="pLessonTag"></div>
+    <div class="title" id="pTitle"></div>
+    <div class="harper"><span class="dot">🦊</span><span class="hmsg" id="hMsg"></span></div>
+
+    <div class="card">
+      <p class="clabel" id="sillyLabel"></p>
+      <p class="q" id="sillyIntro" style="font-weight:800;margin-bottom:10px"></p>
+      <div class="grid" id="sillyGrid"></div>
+      <button class="gate" id="sillyGate"></button>
+    </div>
+
+    <div class="card">
+      <p class="clabel">Part 5 · Sentences</p>
+      <div id="sentences"></div>
+    </div>
+
+    <div class="card">
+      <p class="clabel" id="storyLabel"></p>
+      <p class="title" id="storyTitle" style="font-size:18px;margin:0 0 8px"></p>
+      <p class="story" id="storyText"></p>
+    </div>
+
+    <div class="card">
+      <p class="clabel">Part 8 · Talk about it</p>
+      <div id="questions"></div>
+    </div>
+  </div>
+
+  <div class="diffbar" id="diffbar"></div>
+</div>
+
+<script>
+const BANDS = {
+  k3: {
+    note: "K-3: warm, playful, cartoon-buddy Harper. The current build — unchanged.",
+    lessonTag: "Reading Buddy · a_e",
+    title: "Dave's Cake",
+    harper: "Tap each word and read it to Harper. Harper will listen for your voice!",
+    sillyLabel: "Part 3 · Silly words",
+    sillyIntro: "Sound out each silly word and read it to Harper. She won't say silly words for you!",
+    silly: ["zake","mave","pight","flate"],
+    sillyGate: "I read the silly words ▸",
+    sentences: ["Dave made a cake.","Jane came to the lake.","They gave Jane a wave."],
+    storyLabel: "Part 7 · Story",
+    storyTitle: "Dave's Cake",
+    story: "Dave has a cake. The cake is a gift to Jane. Jane came to the lake. Dave gave Jane the cake at the gate. “I made this cake,” said Dave. They gave a big wave. Dave and Jane had fun.",
+    questions: ["Why did Dave make the cake?","What did Jane do when Dave gave her the cake?","Tell me what happened at the lake, in your own words."],
+    diff: "K-3 baseline: cartoon framing, “silly words,” peppy Harper, “Dave's Cake.”"
+  },
+  b78: {
+    note: "7-8: same Harper (different tone), cleaner/cooler theme, age-respecting content. The new band for Yohanna.",
+    lessonTag: "Long-a pattern · a_e",
+    title: "The a_e Pattern",
+    harper: "Read each word out loud when you're ready — I'm listening.",
+    sillyLabel: "Part 3 · Nonsense words",
+    sillyIntro: "These aren't real words. Decode each one and read it out loud — I won't read them for you.",
+    silly: ["zake","mave","pight","flate"],
+    sillyGate: "Done — continue ▸",
+    sentences: ["Jake made a brave play.","He gave it everything he had.","The whole game was at stake."],
+    storyLabel: "Part 7 · Read",
+    storyTitle: "Jake's Save",
+    story: "Jake came late to the game. His face felt hot. “Did I make a mistake?” he said. Jake gave it his best. He made the same play — and this time, he made the save. His pals gave a wave. Jake stayed brave. He had saved the game.",
+    questions: ["Why did Jake think he’d made a mistake?","What did Jake do after the late start?","Tell me about a time you stayed steady after a setback."],
+    diff: "7-8: “nonsense words,” matter-of-fact coach tone, sports-stakes “Jake's Save” — same a_e words, no babyish framing."
+  }
+};
+
+function setBand(b){
+  const d = BANDS[b];
+  document.getElementById("bK3").classList.toggle("on", b==="k3");
+  document.getElementById("bB78").classList.toggle("on", b==="b78");
+  const dev = document.getElementById("device");
+  dev.dataset.band = b;
+  document.getElementById("bandNote").textContent = d.note;
+  document.getElementById("pLessonTag").textContent = d.lessonTag;
+  document.getElementById("pTitle").textContent = d.title;
+  document.getElementById("hMsg").textContent = d.harper;
+  document.getElementById("sillyLabel").textContent = d.sillyLabel;
+  document.getElementById("sillyIntro").textContent = d.sillyIntro;
+  document.getElementById("sillyGate").textContent = d.sillyGate;
+  document.getElementById("sillyGrid").innerHTML = d.silly.map(w=>`<div class="chip">${w}</div>`).join("");
+  document.getElementById("sentences").innerHTML = d.sentences.map((s,i)=>`<p style="font-size:17px;font-weight:800;margin:6px 0">${i+1}. ${s}</p>`).join("");
+  document.getElementById("storyLabel").textContent = d.storyLabel;
+  document.getElementById("storyTitle").textContent = d.storyTitle;
+  document.getElementById("storyText").textContent = d.story;
+  document.getElementById("questions").innerHTML = d.questions.map(q=>`<p class="q">• ${q}</p>`).join("");
+  document.getElementById("diffbar").textContent = d.diff;
+}
+setBand("k3");
+</script>
+</body>
+</html>
