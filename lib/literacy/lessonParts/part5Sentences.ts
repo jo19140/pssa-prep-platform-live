@@ -4,7 +4,7 @@ import { morphologyConfigFromTargetPatternsJson } from "../morphologyAnalyzer";
 import { withCommonPartMetadata, type GeneratedLessonPart, type LessonGeneratorContext } from "./types";
 
 export function generatePart5Sentences(ctx: LessonGeneratorContext): GeneratedLessonPart {
-  const content = phase3EntryLessonContentFor(ctx.dailyTarget.code);
+  const content = phase3EntryLessonContentFor(ctx.dailyTarget.code, ctx.presentationProfile);
   const classification = classifyPassageWords(content.sentences.join(" "), {
     targetPatternCodes: ctx.targetPatterns,
     allowedPatternCodes: ctx.dailyTarget.allowedPatternCodes,

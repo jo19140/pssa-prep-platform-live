@@ -1,4 +1,5 @@
 import type { MorphologyAnalyzerConfig } from "@/lib/literacy/morphologyAnalyzer";
+import type { PresentationProfile } from "@/lib/literacy/presentationProfile";
 
 export type LessonContentByDailyTarget = {
   demoMode?: "minimal_pairs" | "examples_only" | "transformation_pairs";
@@ -1021,8 +1022,48 @@ export const PHASE_3_ENTRY_LESSON_CONTENT = LESSON_CONTENT_BY_DAILY_TARGET;
 
 export type Phase3EntryLessonContent = LessonContentByDailyTarget;
 
-export function phase3EntryLessonContentFor(dailyTargetCode: string): LessonContentByDailyTarget {
-  const content = LESSON_CONTENT_BY_DAILY_TARGET[dailyTargetCode];
+const BAND_7_8_LESSON_CONTENT_BY_DAILY_TARGET: Partial<Record<string, LessonContentByDailyTarget>> = {
+  a_e: {
+    demoMode: "minimal_pairs",
+    kidRuleStatement: "Silent e changes the vowel to its long sound. When a short word adds silent e, the vowel says its name: cap turns into cape. The e stays silent.",
+    reteachPrompt: "Silent e at the end makes the vowel long. Try {word} again.",
+    demonstrationPairs: [
+      { closed: "cap", target: "cape" },
+      { closed: "at", target: "ate" },
+      { closed: "man", target: "mane" },
+      { closed: "tap", target: "tape" },
+      { closed: "hat", target: "hate" },
+    ],
+    contrastiveLine2: ["cap", "cape", "man", "mane", "hat", "hate"],
+    contrastiveLine3: ["ran", "lake", "hand", "fast", "name", "desk"],
+    sentences: [
+      "Jake ran his last race.",
+      "He set a fast pace.",
+      "Jake gave it his best.",
+      "His pals gave a wave.",
+      "Jake was brave.",
+      "He made up the gap.",
+    ],
+    dictatedWords: ["cape", "made", "lake", "game", "gave", "brave"],
+    dictatedSentences: ["Jake made a save.", "He gave his best."],
+    comprehensionQuestions: [
+      { question: "Why did Jake feel he messed up at the start?", questionType: "inference" },
+      { question: "How do you know Jake did not give up?", questionType: "literal" },
+      { question: "Tell what happened at the end, in your own words.", questionType: "retell" },
+      { question: "Tell about a time you kept going after a setback.", questionType: "personal_connection" },
+    ],
+    heartWordsPreviewedThisLesson: sharedHeartWordsPreviewedThisLesson,
+    heartWordsAssumedKnown: [...sharedHeartWordsAssumedKnown, "he"],
+    vocabulary: ["brave", "pace", "gap"],
+    mockPassageText: `Jake had his last race. He came in late. His face felt hot. "Did I mess up?" Jake said. But Jake did not stop. He set his pace. A pal said, "Jake, get set." Jake felt bad, but he ran on. He ran his best lap and did not fade. Jake ran fast in his lane. He made up the gap. At the end, Jake came in. His pals gave him a wave. Jake was brave. He gave his best.`,
+    mockPassageTitle: "Jake at the Race",
+  },
+};
+
+export function phase3EntryLessonContentFor(dailyTargetCode: string, presentationProfile?: PresentationProfile): LessonContentByDailyTarget {
+  const content = presentationProfile === "BAND_7_8"
+    ? BAND_7_8_LESSON_CONTENT_BY_DAILY_TARGET[dailyTargetCode] ?? LESSON_CONTENT_BY_DAILY_TARGET[dailyTargetCode]
+    : LESSON_CONTENT_BY_DAILY_TARGET[dailyTargetCode];
   if (!content) throw new Error(`No lesson content configured for ${dailyTargetCode}.`);
   return content;
 }
