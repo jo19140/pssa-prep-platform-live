@@ -35,10 +35,24 @@
       "factCheckStatus": "NOT_REQUIRED_FICTION",
       "factualClaimsReviewed": false,
       "textFeaturesJson": [
-        { "type": "dialogue", "featureText": "\"That's it?\"", "mustUseInItem": false },
-        { "type": "figurative_language", "featureText": "four milk jugs holding it up like four small, stubborn hands", "mustUseInItem": false },
-        { "type": "character_arc", "decorative": false },
-        { "type": "multi_scene", "decorative": false }
+        {
+          "type": "dialogue",
+          "featureText": "\"That's it?\"",
+          "mustUseInItem": false
+        },
+        {
+          "type": "figurative_language",
+          "featureText": "four milk jugs holding it up like four small, stubborn hands",
+          "mustUseInItem": false
+        },
+        {
+          "type": "character_arc",
+          "decorative": false
+        },
+        {
+          "type": "multi_scene",
+          "decorative": false
+        }
       ],
       "factCheckNotesJson": null,
       "provenanceJson": {
@@ -78,54 +92,87 @@
       "approvalEligible": false,
       "studentFacingPrompt": "What is the most important lesson June learns in the story?",
       "answerChoicesJson": [
-        "Something built carefully to last can matter more than something that only looks impressive.",
         "A boat needs four milk jugs to float.",
-        "It is good to collect things other people throw away.",
+        "It is a good idea to collect the things that other people have thrown away.",
+        "Something built to last matters more than something that just looks good.",
         "Younger sisters should help test boats before races."
       ],
-      "correctIndex": 0,
+      "correctIndex": 2,
       "structuredChoicesJson": [
-        {
-          "text": "Something built carefully to last can matter more than something that only looks impressive.",
-          "isCorrect": true,
-          "rationale": "Whole-story synthesis: June learns that careful building matters more than flashy looks.",
-          "evidenceLinks": [
-            { "evidenceKind": "paragraph_synthesis", "sectionId": "paragraph_04" },
-            { "evidenceKind": "paragraph_synthesis", "sectionId": "paragraph_12" },
-            { "evidenceKind": "paragraph_synthesis", "sectionId": "paragraph_16" },
-            { "evidenceKind": "paragraph_synthesis", "sectionId": "paragraph_18" }
-          ],
-          "distractorRole": null
-        },
         {
           "text": "A boat needs four milk jugs to float.",
           "isCorrect": false,
           "rationale": "Too narrow: this detail describes June's boat, not the story's lesson.",
           "evidenceLinks": [
-            { "paragraphIndex": 12, "sentenceIndex": 2, "quotedSpan": "four milk jugs holding it up like four small, stubborn hands.", "startChar": 3406, "endChar": 3467 }
+            {
+              "paragraphIndex": 12,
+              "sentenceIndex": 2,
+              "quotedSpan": "four milk jugs holding it up like four small, stubborn hands.",
+              "startChar": 3406,
+              "endChar": 3467
+            }
           ],
           "distractorRole": "too_narrow"
         },
         {
-          "text": "It is good to collect things other people throw away.",
+          "text": "It is a good idea to collect the things that other people have thrown away.",
           "isCorrect": false,
           "rationale": "Too narrow: collecting junk is one action June takes, not the story's message.",
           "evidenceLinks": [
-            { "paragraphIndex": 3, "sentenceIndex": 0, "quotedSpan": "For two whole weeks, I collected things other people had thrown away: bottle caps, a cracked plastic cutting board, a tangle of fishing line, and four empty milk jugs that still smelled a little like milk.", "startChar": 811, "endChar": 1016 }
+            {
+              "paragraphIndex": 3,
+              "sentenceIndex": 0,
+              "quotedSpan": "For two whole weeks, I collected things other people had thrown away: bottle caps, a cracked plastic cutting board, a tangle of fishing line, and four empty milk jugs that still smelled a little like milk.",
+              "startChar": 811,
+              "endChar": 1016
+            }
           ],
           "distractorRole": "too_narrow"
+        },
+        {
+          "text": "Something built to last matters more than something that just looks good.",
+          "isCorrect": true,
+          "rationale": "Whole-story synthesis: June learns that careful building matters more than flashy looks.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "paragraph_synthesis",
+              "sectionId": "paragraph_04"
+            },
+            {
+              "evidenceKind": "paragraph_synthesis",
+              "sectionId": "paragraph_12"
+            },
+            {
+              "evidenceKind": "paragraph_synthesis",
+              "sectionId": "paragraph_16"
+            },
+            {
+              "evidenceKind": "paragraph_synthesis",
+              "sectionId": "paragraph_18"
+            }
+          ],
+          "distractorRole": null
         },
         {
           "text": "Younger sisters should help test boats before races.",
           "isCorrect": false,
           "rationale": "Unsupported inference: June tests the boat with a toy frog, not with her sister helping.",
           "evidenceLinks": [
-            { "paragraphIndex": 3, "sentenceIndex": 5, "quotedSpan": "I set my little sister's toy frog on top to see if it could carry weight.", "startChar": 1207, "endChar": 1280 }
+            {
+              "paragraphIndex": 3,
+              "sentenceIndex": 5,
+              "quotedSpan": "I set my little sister's toy frog on top to see if it could carry weight.",
+              "startChar": 1207,
+              "endChar": 1280
+            }
           ],
           "distractorRole": "unsupported_inference"
         }
       ],
-      "provenanceJson": { "sourcePassageId": "pssa_stamina_psg_g3_boat_literary", "fixtureOnly": true }
+      "provenanceJson": {
+        "sourcePassageId": "pssa_stamina_psg_g3_boat_literary",
+        "fixtureOnly": true
+      }
     },
     {
       "model": "PssaItem",
@@ -150,31 +197,25 @@
       "approvalEligible": false,
       "studentFacingPrompt": "How do June's feelings about her boat change from the beginning to the end of the story?",
       "answerChoicesJson": [
-        "She is embarrassed by it at first, but proud of it by the end.",
         "She is proud of the milk-jug sandwich at first, but ashamed after the race.",
         "She stays bored as the slow sandwich bumps along the creek.",
-        "She is afraid near the bridge, but forgets the boat after Mateo lifts it."
+        "She is afraid near the bridge, but forgets the boat after Mateo lifts it.",
+        "She is embarrassed by it at first, but proud of it by the end."
       ],
-      "correctIndex": 0,
+      "correctIndex": 3,
       "structuredChoicesJson": [
-        {
-          "text": "She is embarrassed by it at first, but proud of it by the end.",
-          "isCorrect": true,
-          "rationale": "June feels embarrassed beside the flashy boats, then understands why her carefully built boat won.",
-          "evidenceLinks": [
-            { "paragraphIndex": 7, "sentenceIndex": 2, "quotedSpan": "my milk-jug sandwich looked like a mistake somebody had left behind.", "startChar": 1936, "endChar": 2004 },
-            { "paragraphIndex": 7, "sentenceIndex": 3, "quotedSpan": "My face went hot, and for one long second I almost picked my boat back up and walked home.", "startChar": 2005, "endChar": 2095 },
-            { "paragraphIndex": 15, "sentenceIndex": 0, "quotedSpan": "I did not win because my boat was fast.", "startChar": 3721, "endChar": 3760 },
-            { "paragraphIndex": 15, "sentenceIndex": 1, "quotedSpan": "I won because it was the last one floating — because I had spent two weeks making sure it would not sink, while everyone else was busy making sure their boats would look amazing.", "startChar": 3761, "endChar": 3939 }
-          ],
-          "distractorRole": null
-        },
         {
           "text": "She is proud of the milk-jug sandwich at first, but ashamed after the race.",
           "isCorrect": false,
           "rationale": "Opposite claim: June is embarrassed at first, and her boat wins by the end.",
           "evidenceLinks": [
-            { "paragraphIndex": 14, "sentenceIndex": 0, "quotedSpan": "By the time my boat drifted past the finish line, it was the only one left on the water.", "startChar": 3631, "endChar": 3719 }
+            {
+              "paragraphIndex": 14,
+              "sentenceIndex": 0,
+              "quotedSpan": "By the time my boat drifted past the finish line, it was the only one left on the water.",
+              "startChar": 3631,
+              "endChar": 3719
+            }
           ],
           "distractorRole": "opposite_claim"
         },
@@ -183,7 +224,13 @@
           "isCorrect": false,
           "rationale": "Unsupported inference: June worries and later reflects; she is not bored by the boat.",
           "evidenceLinks": [
-            { "paragraphIndex": 12, "sentenceIndex": 0, "quotedSpan": "When my boat finally slid into the rough water under the bridge, I squeezed my eyes shut.", "startChar": 3153, "endChar": 3242 }
+            {
+              "paragraphIndex": 12,
+              "sentenceIndex": 0,
+              "quotedSpan": "When my boat finally slid into the rough water under the bridge, I squeezed my eyes shut.",
+              "startChar": 3153,
+              "endChar": 3242
+            }
           ],
           "distractorRole": "unsupported_inference"
         },
@@ -192,12 +239,57 @@
           "isCorrect": false,
           "rationale": "Wrong emphasis: June is embarrassed, not afraid of the boat, and she is already saving milk jugs for next year.",
           "evidenceLinks": [
-            { "paragraphIndex": 18, "sentenceIndex": 0, "quotedSpan": "I am already saving milk jugs for next year.", "startChar": 4303, "endChar": 4347 }
+            {
+              "paragraphIndex": 18,
+              "sentenceIndex": 0,
+              "quotedSpan": "I am already saving milk jugs for next year.",
+              "startChar": 4303,
+              "endChar": 4347
+            }
           ],
           "distractorRole": "wrong_emphasis"
+        },
+        {
+          "text": "She is embarrassed by it at first, but proud of it by the end.",
+          "isCorrect": true,
+          "rationale": "June feels embarrassed beside the flashy boats, then understands why her carefully built boat won.",
+          "evidenceLinks": [
+            {
+              "paragraphIndex": 7,
+              "sentenceIndex": 2,
+              "quotedSpan": "my milk-jug sandwich looked like a mistake somebody had left behind.",
+              "startChar": 1936,
+              "endChar": 2004
+            },
+            {
+              "paragraphIndex": 7,
+              "sentenceIndex": 3,
+              "quotedSpan": "My face went hot, and for one long second I almost picked my boat back up and walked home.",
+              "startChar": 2005,
+              "endChar": 2095
+            },
+            {
+              "paragraphIndex": 15,
+              "sentenceIndex": 0,
+              "quotedSpan": "I did not win because my boat was fast.",
+              "startChar": 3721,
+              "endChar": 3760
+            },
+            {
+              "paragraphIndex": 15,
+              "sentenceIndex": 1,
+              "quotedSpan": "I won because it was the last one floating — because I had spent two weeks making sure it would not sink, while everyone else was busy making sure their boats would look amazing.",
+              "startChar": 3761,
+              "endChar": 3939
+            }
+          ],
+          "distractorRole": null
         }
       ],
-      "provenanceJson": { "sourcePassageId": "pssa_stamina_psg_g3_boat_literary", "fixtureOnly": true }
+      "provenanceJson": {
+        "sourcePassageId": "pssa_stamina_psg_g3_boat_literary",
+        "fixtureOnly": true
+      }
     },
     {
       "model": "PssaItem",
@@ -234,8 +326,20 @@
           "isCorrect": true,
           "rationale": "The narrator uses first-person words and describes June's own actions and feelings.",
           "evidenceLinks": [
-            { "paragraphIndex": 0, "sentenceIndex": 2, "quotedSpan": "So when I signed up for this year's race, people smiled at me the way you smile at a puppy trying to climb a tall set of stairs.", "startChar": 205, "endChar": 333 },
-            { "paragraphIndex": 7, "sentenceIndex": 3, "quotedSpan": "My face went hot, and for one long second I almost picked my boat back up and walked home.", "startChar": 2005, "endChar": 2095 }
+            {
+              "paragraphIndex": 0,
+              "sentenceIndex": 2,
+              "quotedSpan": "So when I signed up for this year's race, people smiled at me the way you smile at a puppy trying to climb a tall set of stairs.",
+              "startChar": 205,
+              "endChar": 333
+            },
+            {
+              "paragraphIndex": 7,
+              "sentenceIndex": 3,
+              "quotedSpan": "My face went hot, and for one long second I almost picked my boat back up and walked home.",
+              "startChar": 2005,
+              "endChar": 2095
+            }
           ],
           "distractorRole": null
         },
@@ -244,7 +348,13 @@
           "isCorrect": false,
           "rationale": "Plausible misreading: Mateo is important in the story, but he is not the narrator.",
           "evidenceLinks": [
-            { "paragraphIndex": 16, "sentenceIndex": 0, "quotedSpan": "Mateo lifted my dripping milk-jug sandwich over his head like a trophy.", "startChar": 3941, "endChar": 4012 }
+            {
+              "paragraphIndex": 16,
+              "sentenceIndex": 0,
+              "quotedSpan": "Mateo lifted my dripping milk-jug sandwich over his head like a trophy.",
+              "startChar": 3941,
+              "endChar": 4012
+            }
           ],
           "distractorRole": "plausible_misreading"
         },
@@ -253,7 +363,13 @@
           "isCorrect": false,
           "rationale": "Unsupported inference: people on the bank cheer, but the narrator tells June's own thoughts.",
           "evidenceLinks": [
-            { "paragraphIndex": 13, "sentenceIndex": 1, "quotedSpan": "a voice yelled from the bank.", "startChar": 3485, "endChar": 3514 }
+            {
+              "paragraphIndex": 13,
+              "sentenceIndex": 1,
+              "quotedSpan": "a voice yelled from the bank.",
+              "startChar": 3485,
+              "endChar": 3514
+            }
           ],
           "distractorRole": "unsupported_inference"
         },
@@ -262,12 +378,21 @@
           "isCorrect": false,
           "rationale": "Wrong section: the tall ship is another boat in the race, not the narrator's boat.",
           "evidenceLinks": [
-            { "paragraphIndex": 9, "sentenceIndex": 3, "quotedSpan": "The tall ship caught the wind and flew across the water — until a sudden gust tipped it sideways, and its proud sail dragged it straight under.", "startChar": 2346, "endChar": 2489 }
+            {
+              "paragraphIndex": 9,
+              "sentenceIndex": 3,
+              "quotedSpan": "The tall ship caught the wind and flew across the water — until a sudden gust tipped it sideways, and its proud sail dragged it straight under.",
+              "startChar": 2346,
+              "endChar": 2489
+            }
           ],
           "distractorRole": "wrong_section"
         }
       ],
-      "provenanceJson": { "sourcePassageId": "pssa_stamina_psg_g3_boat_literary", "fixtureOnly": true }
+      "provenanceJson": {
+        "sourcePassageId": "pssa_stamina_psg_g3_boat_literary",
+        "fixtureOnly": true
+      }
     },
     {
       "model": "PssaItem",
@@ -293,37 +418,55 @@
       "targetWordOrPhrase": "four small, stubborn hands",
       "studentFacingPrompt": "What does the phrase \"four small, stubborn hands\" suggest about the milk jugs?",
       "answerChoicesJson": [
-        "They kept the boat floating steadily and would not let it sink.",
-        "The boat had real hands that could grab the water.",
+        "The boat had real little hands that could grab the water.",
+        "They kept the boat floating and would not let it sink.",
         "The jugs made the boat move quickly.",
         "The boat was shaped like a person."
       ],
-      "correctIndex": 0,
+      "correctIndex": 1,
       "structuredChoicesJson": [
         {
-          "text": "They kept the boat floating steadily and would not let it sink.",
-          "isCorrect": true,
-          "rationale": "The comparison shows the jugs holding up the boat through rough water.",
-          "evidenceLinks": [
-            { "paragraphIndex": 12, "sentenceIndex": 2, "quotedSpan": "I opened my eyes, it was still there — riding over the choppy water like the bumps were nothing at all, four milk jugs holding it up like four small, stubborn hands.", "startChar": 3302, "endChar": 3467 }
-          ],
-          "distractorRole": null
-        },
-        {
-          "text": "The boat had real hands that could grab the water.",
+          "text": "The boat had real little hands that could grab the water.",
           "isCorrect": false,
           "rationale": "Plausible misreading: this takes the comparison literally.",
           "evidenceLinks": [
-            { "paragraphIndex": 12, "sentenceIndex": 2, "quotedSpan": "four milk jugs holding it up like four small, stubborn hands.", "startChar": 3406, "endChar": 3467 }
+            {
+              "paragraphIndex": 12,
+              "sentenceIndex": 2,
+              "quotedSpan": "four milk jugs holding it up like four small, stubborn hands.",
+              "startChar": 3406,
+              "endChar": 3467
+            }
           ],
           "distractorRole": "plausible_misreading"
+        },
+        {
+          "text": "They kept the boat floating and would not let it sink.",
+          "isCorrect": true,
+          "rationale": "The comparison shows the jugs holding up the boat through rough water.",
+          "evidenceLinks": [
+            {
+              "paragraphIndex": 12,
+              "sentenceIndex": 2,
+              "quotedSpan": "I opened my eyes, it was still there — riding over the choppy water like the bumps were nothing at all, four milk jugs holding it up like four small, stubborn hands.",
+              "startChar": 3302,
+              "endChar": 3467
+            }
+          ],
+          "distractorRole": null
         },
         {
           "text": "The jugs made the boat move quickly.",
           "isCorrect": false,
           "rationale": "Unsupported inference: the boat is described as slow, not quick.",
           "evidenceLinks": [
-            { "paragraphIndex": 10, "sentenceIndex": 1, "quotedSpan": "Slow.", "startChar": 2536, "endChar": 2541 }
+            {
+              "paragraphIndex": 10,
+              "sentenceIndex": 1,
+              "quotedSpan": "Slow.",
+              "startChar": 2536,
+              "endChar": 2541
+            }
           ],
           "distractorRole": "unsupported_inference"
         },
@@ -332,12 +475,21 @@
           "isCorrect": false,
           "rationale": "Plausible misreading: the comparison is about how the jugs support the boat, not its shape.",
           "evidenceLinks": [
-            { "paragraphIndex": 6, "sentenceIndex": 2, "quotedSpan": "It really did look like a sandwich — a flat board with four lumpy jugs for bread.", "startChar": 1553, "endChar": 1634 }
+            {
+              "paragraphIndex": 6,
+              "sentenceIndex": 2,
+              "quotedSpan": "It really did look like a sandwich — a flat board with four lumpy jugs for bread.",
+              "startChar": 1553,
+              "endChar": 1634
+            }
           ],
           "distractorRole": "plausible_misreading"
         }
       ],
-      "provenanceJson": { "sourcePassageId": "pssa_stamina_psg_g3_boat_literary", "fixtureOnly": true }
+      "provenanceJson": {
+        "sourcePassageId": "pssa_stamina_psg_g3_boat_literary",
+        "fixtureOnly": true
+      }
     },
     {
       "model": "PssaItem",
@@ -348,6 +500,8 @@
       "itemType": "MCQ",
       "interactionType": "MCQ",
       "skill": "key_detail_cause",
+      "comprehensionKind": "inference",
+      "comprehensionKindRationale": "The item asks why June's boat survived by connecting her careful testing with the contrast against boats built mainly for appearance, rather than recalling one literal detail.",
       "passageId": "pssa_stamina_psg_g3_boat_literary",
       "eligibleContent": "E03.A-K.1.1.1",
       "assessmentAnchor": "E03.A-K.1",
@@ -362,28 +516,25 @@
       "approvalEligible": false,
       "studentFacingPrompt": "Why was June's boat the only one left floating at the end?",
       "answerChoicesJson": [
-        "She had built it carefully so it would not sink, while the others were built mainly to look impressive.",
         "It was the fastest boat in the race.",
         "It had a cloth sail that caught the wind.",
-        "The crowd lifted it out of the rough water."
+        "She built hers to float, while the others were built mainly to look good.",
+        "The crowd lifted her boat out of the cold, rough water right at the very end."
       ],
-      "correctIndex": 0,
+      "correctIndex": 2,
       "structuredChoicesJson": [
-        {
-          "text": "She had built it carefully so it would not sink, while the others were built mainly to look impressive.",
-          "isCorrect": true,
-          "rationale": "June explains that she tested the boat for floating while others focused on looks.",
-          "evidenceLinks": [
-            { "paragraphIndex": 15, "sentenceIndex": 1, "quotedSpan": "I won because it was the last one floating — because I had spent two weeks making sure it would not sink, while everyone else was busy making sure their boats would look amazing.", "startChar": 3761, "endChar": 3939 }
-          ],
-          "distractorRole": null
-        },
         {
           "text": "It was the fastest boat in the race.",
           "isCorrect": false,
           "rationale": "Opposite claim: June says her boat was not fast.",
           "evidenceLinks": [
-            { "paragraphIndex": 15, "sentenceIndex": 0, "quotedSpan": "I did not win because my boat was fast.", "startChar": 3721, "endChar": 3760 }
+            {
+              "paragraphIndex": 15,
+              "sentenceIndex": 0,
+              "quotedSpan": "I did not win because my boat was fast.",
+              "startChar": 3721,
+              "endChar": 3760
+            }
           ],
           "distractorRole": "opposite_claim"
         },
@@ -392,21 +543,425 @@
           "isCorrect": false,
           "rationale": "Wrong section: that was the tall ship, which sank.",
           "evidenceLinks": [
-            { "paragraphIndex": 9, "sentenceIndex": 3, "quotedSpan": "The tall ship caught the wind and flew across the water — until a sudden gust tipped it sideways, and its proud sail dragged it straight under.", "startChar": 2346, "endChar": 2489 }
+            {
+              "paragraphIndex": 9,
+              "sentenceIndex": 3,
+              "quotedSpan": "The tall ship caught the wind and flew across the water — until a sudden gust tipped it sideways, and its proud sail dragged it straight under.",
+              "startChar": 2346,
+              "endChar": 2489
+            }
           ],
           "distractorRole": "wrong_section"
         },
         {
-          "text": "The crowd lifted it out of the rough water.",
+          "text": "She built hers to float, while the others were built mainly to look good.",
+          "isCorrect": true,
+          "rationale": "June explains that she tested the boat for floating while others focused on looks.",
+          "evidenceLinks": [
+            {
+              "paragraphIndex": 15,
+              "sentenceIndex": 1,
+              "quotedSpan": "I won because it was the last one floating — because I had spent two weeks making sure it would not sink, while everyone else was busy making sure their boats would look amazing.",
+              "startChar": 3761,
+              "endChar": 3939
+            }
+          ],
+          "distractorRole": null
+        },
+        {
+          "text": "The crowd lifted her boat out of the cold, rough water right at the very end.",
           "isCorrect": false,
           "rationale": "Unsupported inference: the crowd cheers, but nobody lifts the boat out of the water.",
           "evidenceLinks": [
-            { "paragraphIndex": 13, "sentenceIndex": 2, "quotedSpan": "Then more people joined in.", "startChar": 3515, "endChar": 3542 }
+            {
+              "paragraphIndex": 13,
+              "sentenceIndex": 2,
+              "quotedSpan": "Then more people joined in.",
+              "startChar": 3515,
+              "endChar": 3542
+            }
           ],
           "distractorRole": "unsupported_inference"
         }
       ],
-      "provenanceJson": { "sourcePassageId": "pssa_stamina_psg_g3_boat_literary", "fixtureOnly": true }
+      "provenanceJson": {
+        "sourcePassageId": "pssa_stamina_psg_g3_boat_literary",
+        "fixtureOnly": true
+      }
+    },
+    {
+      "id": "pssa_stamina_item_g3_boat_ebsr_01",
+      "itemId": "pssa_stamina_item_g3_boat_ebsr_01",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "EBSR",
+      "interactionType": "EBSR",
+      "interactionSubtype": "two_point",
+      "passageId": "pssa_stamina_psg_g3_boat_literary",
+      "passageTitle": "The Boat That Wouldn't Quit",
+      "eligibleContent": "E03.A-K.1.1.2",
+      "assessmentAnchor": "E03.A-K",
+      "reportingCategory": "A",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "approvalEligible": false,
+      "pointValue": 2,
+      "partA": {
+        "stem": "What is the best lesson June learns from the boat race?",
+        "choices": [
+          {
+            "text": "A boat that looks beautiful will win the race.",
+            "distractorRole": "opposite_claim",
+            "supportsPartA": false,
+            "rationale": "Distractor.",
+            "isCorrect": false
+          },
+          {
+            "text": "Careful design can matter more than flashy looks.",
+            "distractorRole": null,
+            "supportsPartA": true,
+            "rationale": "Correct.",
+            "isCorrect": true
+          },
+          {
+            "text": "A fast boat will beat a slow boat.",
+            "distractorRole": "opposite_claim",
+            "supportsPartA": false,
+            "rationale": "Distractor.",
+            "isCorrect": false
+          },
+          {
+            "text": "A crowd can make a weak boat stronger.",
+            "distractorRole": "unsupported_inference",
+            "supportsPartA": false,
+            "rationale": "Distractor.",
+            "isCorrect": false
+          }
+        ],
+        "correctIndex": 1
+      },
+      "partB": {
+        "stem": "Which two details best support the answer in Part A?",
+        "instruction": "Choose two answers.",
+        "requiredSelectionCount": 2,
+        "choices": [
+          {
+            "text": "every single boat was more beautiful than mine",
+            "quotedSpan": "every single boat was more beautiful than mine",
+            "evidenceLinks": [
+              {
+                "paragraphIndex": 7,
+                "sentenceIndex": 0,
+                "quotedSpan": "every single boat was more beautiful than mine",
+                "startChar": 1702,
+                "endChar": 1748
+              }
+            ],
+            "evidenceRole": "distractor",
+            "supportsPartA": false,
+            "rationale": "Does not best support Part A."
+          },
+          {
+            "text": "Eleven times I tested that boat, and eleven times it floated.",
+            "quotedSpan": "Eleven times I tested that boat, and eleven times it floated.",
+            "evidenceLinks": [
+              {
+                "paragraphIndex": 3,
+                "sentenceIndex": 6,
+                "quotedSpan": "Eleven times I tested that boat, and eleven times it floated.",
+                "startChar": 1281,
+                "endChar": 1342
+              }
+            ],
+            "evidenceRole": "supports_part_a",
+            "supportsPartA": true,
+            "rationale": "Supports Part A."
+          },
+          {
+            "text": "The dragon shot out ahead, fast and fierce.",
+            "quotedSpan": "The dragon shot out ahead, fast and fierce.",
+            "evidenceLinks": [
+              {
+                "paragraphIndex": 9,
+                "sentenceIndex": 1,
+                "quotedSpan": "The dragon shot out ahead, fast and fierce.",
+                "startChar": 2210,
+                "endChar": 2253
+              }
+            ],
+            "evidenceRole": "distractor",
+            "supportsPartA": false,
+            "rationale": "Does not best support Part A."
+          },
+          {
+            "text": "I won because it was the last one floating — because I had spent two weeks making sure it would not sink, while everyone else was busy making sure their boats would look amazing.",
+            "quotedSpan": "I won because it was the last one floating — because I had spent two weeks making sure it would not sink, while everyone else was busy making sure their boats would look amazing.",
+            "evidenceLinks": [
+              {
+                "paragraphIndex": 15,
+                "sentenceIndex": 1,
+                "quotedSpan": "I won because it was the last one floating — because I had spent two weeks making sure it would not sink, while everyone else was busy making sure their boats would look amazing.",
+                "startChar": 3761,
+                "endChar": 3939
+              }
+            ],
+            "evidenceRole": "supports_part_a",
+            "supportsPartA": true,
+            "rationale": "Supports Part A."
+          }
+        ],
+        "correctIndices": [
+          1,
+          3
+        ]
+      },
+      "responseSpecJson": {
+        "partA": {
+          "prompt": "What is the best lesson June learns from the boat race?",
+          "choices": [
+            {
+              "text": "A boat that looks beautiful will win the race."
+            },
+            {
+              "text": "Careful design can matter more than flashy looks."
+            },
+            {
+              "text": "A fast boat will beat a slow boat."
+            },
+            {
+              "text": "A crowd can make a weak boat stronger."
+            }
+          ],
+          "correctIndex": 1
+        },
+        "partB": {
+          "instruction": "Which two details best support the answer in Part A?",
+          "choices": [
+            {
+              "text": "every single boat was more beautiful than mine"
+            },
+            {
+              "text": "Eleven times I tested that boat, and eleven times it floated."
+            },
+            {
+              "text": "The dragon shot out ahead, fast and fierce."
+            },
+            {
+              "text": "I won because it was the last one floating — because I had spent two weeks making sure it would not sink, while everyone else was busy making sure their boats would look amazing."
+            }
+          ],
+          "requiredSelectionCount": 2
+        }
+      },
+      "correctResponse": {
+        "partA": {
+          "correctIndex": 1
+        },
+        "partB": {
+          "correctIndices": [
+            1,
+            3
+          ]
+        }
+      },
+      "correctResponseJson": {
+        "partA": {
+          "correctIndex": 1
+        },
+        "partB": {
+          "correctIndices": [
+            1,
+            3
+          ]
+        }
+      },
+      "scoring": {
+        "totalPoints": 2,
+        "partAPoints": 1,
+        "partBPoints": 1,
+        "requirePartACorrectForFullCredit": true
+      },
+      "scoringJson": {
+        "totalPoints": 2,
+        "partAPoints": 1,
+        "partBPoints": 1,
+        "requirePartACorrectForFullCredit": true,
+        "partialCreditRules": [
+          {
+            "points": 2,
+            "rule": "Part A is correct and both Part B evidence choices are correct."
+          },
+          {
+            "points": 1,
+            "rule": "Part A is correct and one Part B evidence choice is correct, or Part A is incorrect but both Part B evidence choices are correct."
+          },
+          {
+            "points": 0,
+            "rule": "The response is unsupported, incomplete, or missing."
+          }
+        ]
+      },
+      "provenanceJson": {
+        "fixtureOnly": true,
+        "sourcePassageId": "pssa_stamina_psg_g3_boat_literary",
+        "authoredIn": "PSSA_STAMINA_ITEM_SET_COMPLETION"
+      }
+    },
+    {
+      "id": "pssa_stamina_item_g3_boat_sa_01",
+      "itemId": "pssa_stamina_item_g3_boat_sa_01",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "CONSTRUCTED_RESPONSE",
+      "interactionType": "SHORT_ANSWER",
+      "interactionSubtype": "text_supported_short_answer",
+      "passageId": "pssa_stamina_psg_g3_boat_literary",
+      "passageTitle": "The Boat That Wouldn't Quit",
+      "eligibleContent": "E03.A-K.1.1.3",
+      "assessmentAnchor": "E03.A-K",
+      "reportingCategory": "A",
+      "stem": "How does June's opinion of her boat change from the beginning of the race to the end? Use two details from the story.",
+      "studentFacingPrompt": "How does June's opinion of her boat change from the beginning of the race to the end? Use two details from the story.",
+      "instructionText": "Write a short answer that uses two details from the passage to support your answer.",
+      "requiredSupportCount": 2,
+      "requiresTextSupport": true,
+      "expectedAnswerCore": "At first June feels embarrassed because her boat looks plain. By the end, she is proud because it stays floating and wins.",
+      "acceptableTextSupport": [
+        {
+          "supportId": "boat_sa_s1",
+          "supportType": "direct_quote",
+          "quotedSpan": "My face went hot, and for one long second I almost picked my boat back up and walked home.",
+          "detail": "June feels embarrassed and almost takes the boat home",
+          "connectsToExpectedAnswer": "This shows how she feels at the beginning of the race.",
+          "independentKey": "embarrassed"
+        },
+        {
+          "supportId": "boat_sa_s2",
+          "supportType": "direct_quote",
+          "quotedSpan": "By the time my boat drifted past the finish line, it was the only one left on the water.",
+          "detail": "June's boat is the only one left and wins",
+          "connectsToExpectedAnswer": "This shows why her opinion changes by the end.",
+          "independentKey": "wins"
+        }
+      ],
+      "rubric": {
+        "points3": "Explains both sides of the change and uses two details.",
+        "points2": "Explains the change with one clear support.",
+        "points1": "Mostly copied details with little explanation.",
+        "points0": "Unsupported or inaccurate."
+      },
+      "copiedTextCap": true,
+      "scoreBandExamples": [
+        {
+          "band": 3,
+          "response": "At first June is embarrassed because her milk-jug boat looks plain next to the fancy ones. By the end she is proud because her boat is the last one still floating and wins.",
+          "why": "Explains both sides of the change with two details."
+        },
+        {
+          "band": 2,
+          "response": "June is embarrassed at first because her boat looks plain, but she is proud by the end.",
+          "why": "Names the change and gives one clear support, but does not fully support both sides."
+        },
+        {
+          "band": 1,
+          "response": "June's boat won the race.",
+          "why": "One partial detail with little explanation of the change."
+        },
+        {
+          "band": 0,
+          "response": "June likes building boats.",
+          "why": "Unsupported or inaccurate."
+        }
+      ],
+      "responseSpecJson": {
+        "stem": "How does June's opinion of her boat change from the beginning of the race to the end? Use two details from the story.",
+        "instructionText": "Write a short answer that uses two details from the passage to support your answer.",
+        "requiredSupportCount": 2,
+        "requiresTextSupport": true
+      },
+      "correctResponseJson": {
+        "expectedAnswerCore": "At first June feels embarrassed because her boat looks plain. By the end, she is proud because it stays floating and wins.",
+        "acceptableTextSupport": [
+          {
+            "supportId": "boat_sa_s1",
+            "supportType": "direct_quote",
+            "quotedSpan": "My face went hot, and for one long second I almost picked my boat back up and walked home.",
+            "detail": "June feels embarrassed and almost takes the boat home",
+            "connectsToExpectedAnswer": "This shows how she feels at the beginning of the race.",
+            "independentKey": "embarrassed"
+          },
+          {
+            "supportId": "boat_sa_s2",
+            "supportType": "direct_quote",
+            "quotedSpan": "By the time my boat drifted past the finish line, it was the only one left on the water.",
+            "detail": "June's boat is the only one left and wins",
+            "connectsToExpectedAnswer": "This shows why her opinion changes by the end.",
+            "independentKey": "wins"
+          }
+        ]
+      },
+      "scoring": {
+        "totalPoints": 3,
+        "partialCreditRules": [
+          {
+            "points": 3,
+            "rule": "Explains both sides of the change and uses two details."
+          },
+          {
+            "points": 2,
+            "rule": "Explains the change with one clear support."
+          },
+          {
+            "points": 1,
+            "rule": "Mostly copied details with little explanation."
+          },
+          {
+            "points": 0,
+            "rule": "Unsupported or inaccurate."
+          }
+        ]
+      },
+      "scoringJson": {
+        "scoreStatus": "pending_human_scoring",
+        "totalPoints": 3,
+        "partialCreditRules": [
+          {
+            "points": 3,
+            "rule": "Explains both sides of the change and uses two details."
+          },
+          {
+            "points": 2,
+            "rule": "Explains the change with one clear support."
+          },
+          {
+            "points": 1,
+            "rule": "Mostly copied details with little explanation."
+          },
+          {
+            "points": 0,
+            "rule": "Unsupported or inaccurate."
+          }
+        ]
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "approvalEligible": false,
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "provenanceJson": {
+        "fixtureOnly": true,
+        "sourcePassageId": "pssa_stamina_psg_g3_boat_literary",
+        "authoredIn": "PSSA_STAMINA_ITEM_SET_COMPLETION",
+        "autoScoringClaim": false
+      }
     }
   ]
 }

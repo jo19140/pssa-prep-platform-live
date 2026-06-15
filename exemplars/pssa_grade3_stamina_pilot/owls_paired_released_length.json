@@ -18,8 +18,16 @@
       "wordCount": 628,
       "domainVocabularyLoad": "medium",
       "textFeaturesJson": [
-        { "type": "paired_member", "slot": "passage_1", "title": "Built for the Night" },
-        { "type": "paired_member", "slot": "passage_2", "title": "The Barn's Best Helper" }
+        {
+          "type": "paired_member",
+          "slot": "passage_1",
+          "title": "Built for the Night"
+        },
+        {
+          "type": "paired_member",
+          "slot": "passage_2",
+          "title": "The Barn's Best Helper"
+        }
       ],
       "contentHash": "sha256:8c56d58db1d015fd4cb532d29229baf2655b15a85244e86bbc483515bb3da6a7",
       "members": [
@@ -48,10 +56,42 @@
             "itemStatus": "candidate",
             "text": "Owls are birds that do much of their hunting after sunset. Their bodies are built for the dark. An owl's eyes are large and face forward, so the bird can judge distance when it dives toward prey. The eyes do not roll from side to side the way human eyes do. To look around, an owl turns its whole head instead. This head turning may look strange, but it solves a real problem. The owl can keep its sharp eyes aimed forward and still check the space around a branch, field, or fence post.\n\nAn owl also listens in a special way. In many owls, one ear opening sits a little higher than the other. A sound reaches each ear at a slightly different time. That tiny difference helps the owl tell whether a rustling mouse is above, below, left, or right. The circle of feathers around the face works almost like a dish. It guides sound toward the hidden ears. When the owl hears a squeak under grass or leaves, the sound pattern helps the bird aim before it drops.\n\nSilent flight is another night-hunting tool. The front edges of many owl feathers are comb-like instead of smooth. Soft fringes on the wings help break up air as the bird flaps. Because the feathers quiet the wingbeats, a mouse may not hear the owl coming until the owl is very close. The quiet flight does not make the owl invisible, but it gives the hunter a few extra seconds. In a dark field, those seconds can matter.\n\nThese features work together. Big forward-facing eyes help the owl see in dim light. Uneven ears and a face shaped for hearing help it aim at tiny sounds. Quiet wings let it move without warning the animals below. None of the features works alone like magic. Together, they make the owl a careful night hunter.",
             "factCheckNotesJson": [
-              { "claimId": "owl_eyes_fixed", "claim": "Owls have forward-facing eyes that are fixed in their sockets, so they turn their heads to look around.", "sourceTitle": "Owl", "organization": "Encyclopaedia Britannica", "sourceUrl": "https://www.britannica.com/animal/owl", "claimSupported": true, "dateAccessed": "2026-06-11" },
-              { "claimId": "owl_asymmetrical_ears", "claim": "Many owls use asymmetrical ear placement to locate sound.", "sourceTitle": "Sound localization in owls", "organization": "Encyclopaedia Britannica", "sourceUrl": "https://www.britannica.com/science/sound-localization", "claimSupported": true, "dateAccessed": "2026-06-11" },
-              { "claimId": "owl_facial_disk_sound", "claim": "An owl's facial disk helps direct sound toward the ears.", "sourceTitle": "Facial disc", "organization": "Wikipedia summary of ornithology sources", "sourceUrl": "https://en.wikipedia.org/wiki/Facial_disc", "claimSupported": true, "dateAccessed": "2026-06-11" },
-              { "claimId": "owl_silent_flight", "claim": "Comb-like and fringed wing feathers help owls fly quietly.", "sourceTitle": "Evolution and Ecology of Silent Flight in Owls and Other Flying Vertebrates", "organization": "Integrative Organismal Biology", "sourceUrl": "https://academic.oup.com/iob/article/2/1/obaa001/5710231", "claimSupported": true, "dateAccessed": "2026-06-11" }
+              {
+                "claimId": "owl_eyes_fixed",
+                "claim": "Owls have forward-facing eyes that are fixed in their sockets, so they turn their heads to look around.",
+                "sourceTitle": "Owl",
+                "organization": "Encyclopaedia Britannica",
+                "sourceUrl": "https://www.britannica.com/animal/owl",
+                "claimSupported": true,
+                "dateAccessed": "2026-06-11"
+              },
+              {
+                "claimId": "owl_asymmetrical_ears",
+                "claim": "Many owls use asymmetrical ear placement to locate sound.",
+                "sourceTitle": "Sound localization in owls",
+                "organization": "Encyclopaedia Britannica",
+                "sourceUrl": "https://www.britannica.com/science/sound-localization",
+                "claimSupported": true,
+                "dateAccessed": "2026-06-11"
+              },
+              {
+                "claimId": "owl_facial_disk_sound",
+                "claim": "An owl's facial disk helps direct sound toward the ears.",
+                "sourceTitle": "Facial disc",
+                "organization": "Wikipedia summary of ornithology sources",
+                "sourceUrl": "https://en.wikipedia.org/wiki/Facial_disc",
+                "claimSupported": true,
+                "dateAccessed": "2026-06-11"
+              },
+              {
+                "claimId": "owl_silent_flight",
+                "claim": "Comb-like and fringed wing feathers help owls fly quietly.",
+                "sourceTitle": "Evolution and Ecology of Silent Flight in Owls and Other Flying Vertebrates",
+                "organization": "Integrative Organismal Biology",
+                "sourceUrl": "https://academic.oup.com/iob/article/2/1/obaa001/5710231",
+                "claimSupported": true,
+                "dateAccessed": "2026-06-11"
+              }
             ]
           }
         },
@@ -80,10 +120,42 @@
             "itemStatus": "candidate",
             "text": "A barn owl may look pale and quiet, but it can be a busy helper on a farm. Barn owls hunt mostly small mammals such as mice, voles, and rats. A nesting pair with hungry young can catch many rodents in one season. That matters to farmers because rodents can chew stored grain, damage fields, and carry disease. When fewer rodents reach a storage shed or field, the farmer may lose less food and spend less time fixing damage.\n\nSome farms put up nest boxes to invite barn owls to live nearby. A nest box gives the owls a safe place to raise young when old barns or hollow trees are hard to find. If the land around the box has enough grass and field edges for hunting, the owls may stay and search the farm at night. The box does not feed the owls by itself. It simply gives them a home base near the places where mice and voles move.\n\nBarn owls are not a perfect answer to every pest problem. They are wild animals, not workers that can be ordered around. A farm still needs clean storage, careful planting, and other smart choices. But an owl family can reduce the number of rodents without leaving poison in the field. That makes barn owls one part of a safer pest plan, especially on farms that already have good hunting habitat.\n\nPoison can create a different problem. If a poisoned mouse staggers into the open, an owl, hawk, fox, dog, or cat may eat it. The poison can then harm the animal that ate the mouse. For that reason, many wildlife groups warn people to be careful with rodent poisons and to protect natural hunters when possible. Helping barn owls is not only about liking birds. It is also about choosing a method that can protect crops while causing less harm to other animals.",
             "factCheckNotesJson": [
-              { "claimId": "barn_owl_rodent_diet", "claim": "Barn owls feed heavily on rodents and other small mammals.", "sourceTitle": "Barn Owl Life History", "organization": "Cornell Lab of Ornithology", "sourceUrl": "https://www.allaboutbirds.org/guide/Barn_Owl/lifehistory", "claimSupported": true, "dateAccessed": "2026-06-11" },
-              { "claimId": "barn_owl_many_rodents", "claim": "Barn owls feed mainly on small mammals such as rats, mice, and voles, and a nesting pair brings large amounts of prey to the nest to feed their young.", "sourceTitle": "American Barn Owl Life History", "organization": "Cornell Lab of Ornithology", "sourceUrl": "https://www.allaboutbirds.org/guide/Barn_Owl/lifehistory", "claimSupported": true, "dateAccessed": "2026-06-12" },
-              { "claimId": "barn_owl_nest_boxes", "claim": "Nest boxes are used to encourage barn owls in suitable habitat.", "sourceTitle": "American Barn Owl", "organization": "Wikipedia summary with Cornell/USGS references", "sourceUrl": "https://en.wikipedia.org/wiki/American_barn_owl", "claimSupported": true, "dateAccessed": "2026-06-11" },
-              { "claimId": "rodenticide_secondary_poisoning", "claim": "Rodent poison can harm predators and pets that eat poisoned rodents.", "sourceTitle": "Rodenticides", "organization": "National Pesticide Information Center", "sourceUrl": "https://npic.orst.edu/factsheets/rodenticides.html", "claimSupported": true, "dateAccessed": "2026-06-11" }
+              {
+                "claimId": "barn_owl_rodent_diet",
+                "claim": "Barn owls feed heavily on rodents and other small mammals.",
+                "sourceTitle": "Barn Owl Life History",
+                "organization": "Cornell Lab of Ornithology",
+                "sourceUrl": "https://www.allaboutbirds.org/guide/Barn_Owl/lifehistory",
+                "claimSupported": true,
+                "dateAccessed": "2026-06-11"
+              },
+              {
+                "claimId": "barn_owl_many_rodents",
+                "claim": "Barn owls feed mainly on small mammals such as rats, mice, and voles, and a nesting pair brings large amounts of prey to the nest to feed their young.",
+                "sourceTitle": "American Barn Owl Life History",
+                "organization": "Cornell Lab of Ornithology",
+                "sourceUrl": "https://www.allaboutbirds.org/guide/Barn_Owl/lifehistory",
+                "claimSupported": true,
+                "dateAccessed": "2026-06-12"
+              },
+              {
+                "claimId": "barn_owl_nest_boxes",
+                "claim": "Nest boxes are used to encourage barn owls in suitable habitat.",
+                "sourceTitle": "American Barn Owl",
+                "organization": "Wikipedia summary with Cornell/USGS references",
+                "sourceUrl": "https://en.wikipedia.org/wiki/American_barn_owl",
+                "claimSupported": true,
+                "dateAccessed": "2026-06-11"
+              },
+              {
+                "claimId": "rodenticide_secondary_poisoning",
+                "claim": "Rodent poison can harm predators and pets that eat poisoned rodents.",
+                "sourceTitle": "Rodenticides",
+                "organization": "National Pesticide Information Center",
+                "sourceUrl": "https://npic.orst.edu/factsheets/rodenticides.html",
+                "claimSupported": true,
+                "dateAccessed": "2026-06-11"
+              }
             ]
           }
         }
@@ -101,22 +173,84 @@
       "skill": "key_detail",
       "passageGroupId": "pssa_pg_g3_owls_paired_01",
       "isCrossText": null,
-      "passageLinks": [{ "passageId": "pssa_stamina_psg_g3_owls_p1_night", "role": "primary", "sortOrder": 0 }],
+      "passageLinks": [
+        {
+          "passageId": "pssa_stamina_psg_g3_owls_p1_night",
+          "role": "primary",
+          "sortOrder": 0
+        }
+      ],
       "eligibleContent": "E03.B-K.1.1.1",
       "reportingCategory": "B",
       "studentFacingPrompt": "Which detail explains why an owl turns its whole head to look around?",
       "answerChoicesJson": [
-        "Its eyes do not roll from side to side.",
         "Its ears are hidden under feathers.",
         "Its wing feathers are soft.",
-        "Its face works like a sound dish."
+        "Its face works like a round sound dish.",
+        "Its eyes do not move side to side."
       ],
-      "correctIndex": 0,
+      "correctIndex": 3,
       "structuredChoicesJson": [
-        { "text": "Its eyes do not roll from side to side.", "isCorrect": true, "evidenceLinks": [{ "evidenceKind": "quoted_span", "passageSlot": "passage_1", "passageId": "pssa_stamina_psg_g3_owls_p1_night", "paragraphIndex": 0, "sentenceIndex": 3, "quotedSpan": "The eyes do not roll from side to side the way human eyes do." }], "distractorRole": null },
-        { "text": "Its ears are hidden under feathers.", "isCorrect": false, "evidenceLinks": [{ "evidenceKind": "quoted_span", "passageSlot": "passage_1", "passageId": "pssa_stamina_psg_g3_owls_p1_night", "paragraphIndex": 1, "sentenceIndex": 4, "quotedSpan": "It guides sound toward the hidden ears." }], "distractorRole": "wrong_section" },
-        { "text": "Its wing feathers are soft.", "isCorrect": false, "evidenceLinks": [{ "evidenceKind": "quoted_span", "passageSlot": "passage_1", "passageId": "pssa_stamina_psg_g3_owls_p1_night", "paragraphIndex": 2, "sentenceIndex": 2, "quotedSpan": "Soft fringes on the wings help break up air as the bird flaps." }], "distractorRole": "wrong_section" },
-        { "text": "Its face works like a sound dish.", "isCorrect": false, "evidenceLinks": [{ "evidenceKind": "quoted_span", "passageSlot": "passage_1", "passageId": "pssa_stamina_psg_g3_owls_p1_night", "paragraphIndex": 1, "sentenceIndex": 3, "quotedSpan": "The circle of feathers around the face works almost like a dish." }], "distractorRole": "wrong_section" }
+        {
+          "text": "Its ears are hidden under feathers.",
+          "isCorrect": false,
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_1",
+              "passageId": "pssa_stamina_psg_g3_owls_p1_night",
+              "paragraphIndex": 1,
+              "sentenceIndex": 4,
+              "quotedSpan": "It guides sound toward the hidden ears."
+            }
+          ],
+          "distractorRole": "wrong_section"
+        },
+        {
+          "text": "Its wing feathers are soft.",
+          "isCorrect": false,
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_1",
+              "passageId": "pssa_stamina_psg_g3_owls_p1_night",
+              "paragraphIndex": 2,
+              "sentenceIndex": 2,
+              "quotedSpan": "Soft fringes on the wings help break up air as the bird flaps."
+            }
+          ],
+          "distractorRole": "wrong_section"
+        },
+        {
+          "text": "Its face works like a round sound dish.",
+          "isCorrect": false,
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_1",
+              "passageId": "pssa_stamina_psg_g3_owls_p1_night",
+              "paragraphIndex": 1,
+              "sentenceIndex": 3,
+              "quotedSpan": "The circle of feathers around the face works almost like a dish."
+            }
+          ],
+          "distractorRole": "wrong_section"
+        },
+        {
+          "text": "Its eyes do not move side to side.",
+          "isCorrect": true,
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_1",
+              "passageId": "pssa_stamina_psg_g3_owls_p1_night",
+              "paragraphIndex": 0,
+              "sentenceIndex": 3,
+              "quotedSpan": "The eyes do not roll from side to side the way human eyes do."
+            }
+          ],
+          "distractorRole": null
+        }
       ]
     },
     {
@@ -129,7 +263,13 @@
       "skill": "text_feature_adaptation",
       "passageGroupId": "pssa_pg_g3_owls_paired_01",
       "isCrossText": null,
-      "passageLinks": [{ "passageId": "pssa_stamina_psg_g3_owls_p1_night", "role": "primary", "sortOrder": 0 }],
+      "passageLinks": [
+        {
+          "passageId": "pssa_stamina_psg_g3_owls_p1_night",
+          "role": "primary",
+          "sortOrder": 0
+        }
+      ],
       "eligibleContent": "E03.B-K.1.1.1",
       "reportingCategory": "B",
       "studentFacingPrompt": "How do an owl's facial feathers help it hunt?",
@@ -141,10 +281,66 @@
       ],
       "correctIndex": 0,
       "structuredChoicesJson": [
-        { "text": "They guide sound toward the owl's ears.", "isCorrect": true, "evidenceLinks": [{ "evidenceKind": "quoted_span", "passageSlot": "passage_1", "passageId": "pssa_stamina_psg_g3_owls_p1_night", "paragraphIndex": 1, "sentenceIndex": 4, "quotedSpan": "It guides sound toward the hidden ears." }], "distractorRole": null },
-        { "text": "They make the owl's eyes larger.", "isCorrect": false, "evidenceLinks": [{ "evidenceKind": "quoted_span", "passageSlot": "passage_1", "passageId": "pssa_stamina_psg_g3_owls_p1_night", "paragraphIndex": 0, "sentenceIndex": 1, "quotedSpan": "Their bodies are built for the dark." }], "distractorRole": "unsupported_inference" },
-        { "text": "They let the owl chew stored grain.", "isCorrect": false, "evidenceLinks": [{ "evidenceKind": "quoted_span", "passageSlot": "passage_2", "passageId": "pssa_stamina_psg_g3_owls_p2_barn", "paragraphIndex": 0, "sentenceIndex": 3, "quotedSpan": "That matters to farmers because rodents can chew stored grain, damage fields, and carry disease." }], "distractorRole": "wrong_section" },
-        { "text": "They keep the owl warm in barns.", "isCorrect": false, "evidenceLinks": [{ "evidenceKind": "quoted_span", "passageSlot": "passage_2", "passageId": "pssa_stamina_psg_g3_owls_p2_barn", "paragraphIndex": 1, "sentenceIndex": 1, "quotedSpan": "A nest box gives the owls a safe place to raise young when old barns or hollow trees are hard to find." }], "distractorRole": "wrong_section" }
+        {
+          "text": "They guide sound toward the owl's ears.",
+          "isCorrect": true,
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_1",
+              "passageId": "pssa_stamina_psg_g3_owls_p1_night",
+              "paragraphIndex": 1,
+              "sentenceIndex": 4,
+              "quotedSpan": "It guides sound toward the hidden ears."
+            }
+          ],
+          "distractorRole": null
+        },
+        {
+          "text": "They make the owl's eyes larger.",
+          "isCorrect": false,
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_1",
+              "passageId": "pssa_stamina_psg_g3_owls_p1_night",
+              "paragraphIndex": 0,
+              "sentenceIndex": 1,
+              "quotedSpan": "Their bodies are built for the dark."
+            }
+          ],
+          "distractorRole": "unsupported_inference"
+        },
+        {
+          "text": "They let the owl chew stored grain.",
+          "isCorrect": false,
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_2",
+              "passageId": "pssa_stamina_psg_g3_owls_p2_barn",
+              "paragraphIndex": 0,
+              "sentenceIndex": 3,
+              "quotedSpan": "That matters to farmers because rodents can chew stored grain, damage fields, and carry disease."
+            }
+          ],
+          "distractorRole": "wrong_section"
+        },
+        {
+          "text": "They keep the owl warm in barns.",
+          "isCorrect": false,
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_2",
+              "passageId": "pssa_stamina_psg_g3_owls_p2_barn",
+              "paragraphIndex": 1,
+              "sentenceIndex": 1,
+              "quotedSpan": "A nest box gives the owls a safe place to raise young when old barns or hollow trees are hard to find."
+            }
+          ],
+          "distractorRole": "wrong_section"
+        }
       ]
     },
     {
@@ -157,22 +353,84 @@
       "skill": "key_detail",
       "passageGroupId": "pssa_pg_g3_owls_paired_01",
       "isCrossText": null,
-      "passageLinks": [{ "passageId": "pssa_stamina_psg_g3_owls_p2_barn", "role": "primary", "sortOrder": 0 }],
+      "passageLinks": [
+        {
+          "passageId": "pssa_stamina_psg_g3_owls_p2_barn",
+          "role": "primary",
+          "sortOrder": 0
+        }
+      ],
       "eligibleContent": "E03.B-K.1.1.1",
       "reportingCategory": "B",
       "studentFacingPrompt": "Why do some farms put up barn owl nest boxes?",
       "answerChoicesJson": [
-        "To give owls a safe place to raise young nearby.",
-        "To make mice easier for people to hear.",
+        "To make the mice easier for people to hear.",
+        "To give owls a safe place to nest nearby.",
         "To teach owls to hunt during the day.",
         "To store grain away from rodents."
       ],
-      "correctIndex": 0,
+      "correctIndex": 1,
       "structuredChoicesJson": [
-        { "text": "To give owls a safe place to raise young nearby.", "isCorrect": true, "evidenceLinks": [{ "evidenceKind": "quoted_span", "passageSlot": "passage_2", "passageId": "pssa_stamina_psg_g3_owls_p2_barn", "paragraphIndex": 1, "sentenceIndex": 1, "quotedSpan": "A nest box gives the owls a safe place to raise young when old barns or hollow trees are hard to find." }], "distractorRole": null },
-        { "text": "To make mice easier for people to hear.", "isCorrect": false, "evidenceLinks": [{ "evidenceKind": "quoted_span", "passageSlot": "passage_1", "passageId": "pssa_stamina_psg_g3_owls_p1_night", "paragraphIndex": 1, "sentenceIndex": 1, "quotedSpan": "In many owls, one ear opening sits a little higher than the other." }], "distractorRole": "wrong_section" },
-        { "text": "To teach owls to hunt during the day.", "isCorrect": false, "evidenceLinks": [{ "evidenceKind": "quoted_span", "passageSlot": "passage_2", "passageId": "pssa_stamina_psg_g3_owls_p2_barn", "paragraphIndex": 1, "sentenceIndex": 2, "quotedSpan": "If the land around the box has enough grass and field edges for hunting, the owls may stay and search the farm at night." }], "distractorRole": "opposite_claim" },
-        { "text": "To store grain away from rodents.", "isCorrect": false, "evidenceLinks": [{ "evidenceKind": "quoted_span", "passageSlot": "passage_2", "passageId": "pssa_stamina_psg_g3_owls_p2_barn", "paragraphIndex": 0, "sentenceIndex": 3, "quotedSpan": "That matters to farmers because rodents can chew stored grain, damage fields, and carry disease." }], "distractorRole": "wrong_emphasis" }
+        {
+          "text": "To make the mice easier for people to hear.",
+          "isCorrect": false,
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_1",
+              "passageId": "pssa_stamina_psg_g3_owls_p1_night",
+              "paragraphIndex": 1,
+              "sentenceIndex": 1,
+              "quotedSpan": "In many owls, one ear opening sits a little higher than the other."
+            }
+          ],
+          "distractorRole": "wrong_section"
+        },
+        {
+          "text": "To give owls a safe place to nest nearby.",
+          "isCorrect": true,
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_2",
+              "passageId": "pssa_stamina_psg_g3_owls_p2_barn",
+              "paragraphIndex": 1,
+              "sentenceIndex": 1,
+              "quotedSpan": "A nest box gives the owls a safe place to raise young when old barns or hollow trees are hard to find."
+            }
+          ],
+          "distractorRole": null
+        },
+        {
+          "text": "To teach owls to hunt during the day.",
+          "isCorrect": false,
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_2",
+              "passageId": "pssa_stamina_psg_g3_owls_p2_barn",
+              "paragraphIndex": 1,
+              "sentenceIndex": 2,
+              "quotedSpan": "If the land around the box has enough grass and field edges for hunting, the owls may stay and search the farm at night."
+            }
+          ],
+          "distractorRole": "opposite_claim"
+        },
+        {
+          "text": "To store grain away from rodents.",
+          "isCorrect": false,
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_2",
+              "passageId": "pssa_stamina_psg_g3_owls_p2_barn",
+              "paragraphIndex": 0,
+              "sentenceIndex": 3,
+              "quotedSpan": "That matters to farmers because rodents can chew stored grain, damage fields, and carry disease."
+            }
+          ],
+          "distractorRole": "wrong_emphasis"
+        }
       ]
     },
     {
@@ -185,22 +443,84 @@
       "skill": "problem_solution",
       "passageGroupId": "pssa_pg_g3_owls_paired_01",
       "isCrossText": null,
-      "passageLinks": [{ "passageId": "pssa_stamina_psg_g3_owls_p2_barn", "role": "primary", "sortOrder": 0 }],
+      "passageLinks": [
+        {
+          "passageId": "pssa_stamina_psg_g3_owls_p2_barn",
+          "role": "primary",
+          "sortOrder": 0
+        }
+      ],
       "eligibleContent": "E03.B-K.1.1.1",
       "reportingCategory": "B",
       "studentFacingPrompt": "What problem can rodent poison cause?",
       "answerChoicesJson": [
-        "It can harm animals that eat poisoned rodents.",
         "It can make owls turn their heads.",
         "It can stop nest boxes from working.",
-        "It can make fields too quiet at night."
+        "It can harm animals that eat poisoned mice.",
+        "It can make the open fields too quiet at night."
       ],
-      "correctIndex": 0,
+      "correctIndex": 2,
       "structuredChoicesJson": [
-        { "text": "It can harm animals that eat poisoned rodents.", "isCorrect": true, "evidenceLinks": [{ "evidenceKind": "quoted_span", "passageSlot": "passage_2", "passageId": "pssa_stamina_psg_g3_owls_p2_barn", "paragraphIndex": 3, "sentenceIndex": 2, "quotedSpan": "The poison can then harm the animal that ate the mouse." }], "distractorRole": null },
-        { "text": "It can make owls turn their heads.", "isCorrect": false, "evidenceLinks": [{ "evidenceKind": "quoted_span", "passageSlot": "passage_1", "passageId": "pssa_stamina_psg_g3_owls_p1_night", "paragraphIndex": 0, "sentenceIndex": 4, "quotedSpan": "To look around, an owl turns its whole head instead." }], "distractorRole": "wrong_section" },
-        { "text": "It can stop nest boxes from working.", "isCorrect": false, "evidenceLinks": [{ "evidenceKind": "quoted_span", "passageSlot": "passage_2", "passageId": "pssa_stamina_psg_g3_owls_p2_barn", "paragraphIndex": 1, "sentenceIndex": 0, "quotedSpan": "Some farms put up nest boxes to invite barn owls to live nearby." }], "distractorRole": "unsupported_inference" },
-        { "text": "It can make fields too quiet at night.", "isCorrect": false, "evidenceLinks": [{ "evidenceKind": "quoted_span", "passageSlot": "passage_2", "passageId": "pssa_stamina_psg_g3_owls_p2_barn", "paragraphIndex": 2, "sentenceIndex": 3, "quotedSpan": "But an owl family can reduce the number of rodents without leaving poison in the field." }], "distractorRole": "plausible_misreading" }
+        {
+          "text": "It can make owls turn their heads.",
+          "isCorrect": false,
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_1",
+              "passageId": "pssa_stamina_psg_g3_owls_p1_night",
+              "paragraphIndex": 0,
+              "sentenceIndex": 4,
+              "quotedSpan": "To look around, an owl turns its whole head instead."
+            }
+          ],
+          "distractorRole": "wrong_section"
+        },
+        {
+          "text": "It can stop nest boxes from working.",
+          "isCorrect": false,
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_2",
+              "passageId": "pssa_stamina_psg_g3_owls_p2_barn",
+              "paragraphIndex": 1,
+              "sentenceIndex": 0,
+              "quotedSpan": "Some farms put up nest boxes to invite barn owls to live nearby."
+            }
+          ],
+          "distractorRole": "unsupported_inference"
+        },
+        {
+          "text": "It can harm animals that eat poisoned mice.",
+          "isCorrect": true,
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_2",
+              "passageId": "pssa_stamina_psg_g3_owls_p2_barn",
+              "paragraphIndex": 3,
+              "sentenceIndex": 2,
+              "quotedSpan": "The poison can then harm the animal that ate the mouse."
+            }
+          ],
+          "distractorRole": null
+        },
+        {
+          "text": "It can make the open fields too quiet at night.",
+          "isCorrect": false,
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_2",
+              "passageId": "pssa_stamina_psg_g3_owls_p2_barn",
+              "paragraphIndex": 2,
+              "sentenceIndex": 3,
+              "quotedSpan": "But an owl family can reduce the number of rodents without leaving poison in the field."
+            }
+          ],
+          "distractorRole": "plausible_misreading"
+        }
       ]
     },
     {
@@ -213,26 +533,95 @@
       "skill": "cross_text_connection",
       "passageGroupId": "pssa_pg_g3_owls_paired_01",
       "isCrossText": true,
-      "requiredEvidenceSlotsJson": ["passage_1", "passage_2"],
+      "requiredEvidenceSlotsJson": [
+        "passage_1",
+        "passage_2"
+      ],
       "passageLinks": [
-        { "passageId": "pssa_stamina_psg_g3_owls_p1_night", "role": "primary", "sortOrder": 0 },
-        { "passageId": "pssa_stamina_psg_g3_owls_p2_barn", "role": "primary", "sortOrder": 1 }
+        {
+          "passageId": "pssa_stamina_psg_g3_owls_p1_night",
+          "role": "primary",
+          "sortOrder": 0
+        },
+        {
+          "passageId": "pssa_stamina_psg_g3_owls_p2_barn",
+          "role": "primary",
+          "sortOrder": 1
+        }
       ],
       "eligibleContent": "E03.B-C.3.1.1",
       "reportingCategory": "B",
       "studentFacingPrompt": "How do the two passages work together?",
       "answerChoicesJson": [
-        "The first explains how owls hunt, and the second explains how that hunting can help farms.",
         "The first tells how to build a nest box, and the second tells how to train an owl.",
         "Both passages mainly explain why owls are dangerous to pets.",
-        "Both passages mainly describe how farmers store grain."
+        "Both passages mainly describe how farmers store grain.",
+        "The first explains how owls hunt, and the second explains how that hunting can help farms."
       ],
-      "correctIndex": 0,
+      "correctIndex": 3,
       "structuredChoicesJson": [
-        { "text": "The first explains how owls hunt, and the second explains how that hunting can help farms.", "isCorrect": true, "evidenceLinks": [{ "evidenceKind": "whole_passage_synthesis", "passageSlot": "passage_1", "passageId": "pssa_stamina_psg_g3_owls_p1_night" }, { "evidenceKind": "whole_passage_synthesis", "passageSlot": "passage_2", "passageId": "pssa_stamina_psg_g3_owls_p2_barn" }], "distractorRole": null },
-        { "text": "The first tells how to build a nest box, and the second tells how to train an owl.", "isCorrect": false, "evidenceLinks": [{ "evidenceKind": "quoted_span", "passageSlot": "passage_2", "passageId": "pssa_stamina_psg_g3_owls_p2_barn", "paragraphIndex": 1, "sentenceIndex": 0, "quotedSpan": "Some farms put up nest boxes to invite barn owls to live nearby." }], "distractorRole": "wrong_section" },
-        { "text": "Both passages mainly explain why owls are dangerous to pets.", "isCorrect": false, "evidenceLinks": [{ "evidenceKind": "quoted_span", "passageSlot": "passage_2", "passageId": "pssa_stamina_psg_g3_owls_p2_barn", "paragraphIndex": 3, "sentenceIndex": 1, "quotedSpan": "If a poisoned mouse staggers into the open, an owl, hawk, fox, dog, or cat may eat it." }], "distractorRole": "wrong_emphasis" },
-        { "text": "Both passages mainly describe how farmers store grain.", "isCorrect": false, "evidenceLinks": [{ "evidenceKind": "quoted_span", "passageSlot": "passage_2", "passageId": "pssa_stamina_psg_g3_owls_p2_barn", "paragraphIndex": 0, "sentenceIndex": 3, "quotedSpan": "That matters to farmers because rodents can chew stored grain, damage fields, and carry disease." }], "distractorRole": "too_narrow" }
+        {
+          "text": "The first tells how to build a nest box, and the second tells how to train an owl.",
+          "isCorrect": false,
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_2",
+              "passageId": "pssa_stamina_psg_g3_owls_p2_barn",
+              "paragraphIndex": 1,
+              "sentenceIndex": 0,
+              "quotedSpan": "Some farms put up nest boxes to invite barn owls to live nearby."
+            }
+          ],
+          "distractorRole": "wrong_section"
+        },
+        {
+          "text": "Both passages mainly explain why owls are dangerous to pets.",
+          "isCorrect": false,
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_2",
+              "passageId": "pssa_stamina_psg_g3_owls_p2_barn",
+              "paragraphIndex": 3,
+              "sentenceIndex": 1,
+              "quotedSpan": "If a poisoned mouse staggers into the open, an owl, hawk, fox, dog, or cat may eat it."
+            }
+          ],
+          "distractorRole": "wrong_emphasis"
+        },
+        {
+          "text": "Both passages mainly describe how farmers store grain.",
+          "isCorrect": false,
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_2",
+              "passageId": "pssa_stamina_psg_g3_owls_p2_barn",
+              "paragraphIndex": 0,
+              "sentenceIndex": 3,
+              "quotedSpan": "That matters to farmers because rodents can chew stored grain, damage fields, and carry disease."
+            }
+          ],
+          "distractorRole": "too_narrow"
+        },
+        {
+          "text": "The first explains how owls hunt, and the second explains how that hunting can help farms.",
+          "isCorrect": true,
+          "evidenceLinks": [
+            {
+              "evidenceKind": "whole_passage_synthesis",
+              "passageSlot": "passage_1",
+              "passageId": "pssa_stamina_psg_g3_owls_p1_night"
+            },
+            {
+              "evidenceKind": "whole_passage_synthesis",
+              "passageSlot": "passage_2",
+              "passageId": "pssa_stamina_psg_g3_owls_p2_barn"
+            }
+          ],
+          "distractorRole": null
+        }
       ]
     },
     {
@@ -245,34 +634,353 @@
       "skill": "cross_text_support",
       "passageGroupId": "pssa_pg_g3_owls_paired_01",
       "isCrossText": true,
-      "requiredEvidenceSlotsJson": ["passage_1", "passage_2"],
+      "requiredEvidenceSlotsJson": [
+        "passage_1",
+        "passage_2"
+      ],
       "crossTextSupportRuleJson": {
         "requiresSupportFromEachPassage": true,
-        "requiredPassageSlots": ["passage_1", "passage_2"],
+        "requiredPassageSlots": [
+          "passage_1",
+          "passage_2"
+        ],
         "evidenceLinks": [
-          { "evidenceKind": "whole_passage_synthesis", "passageSlot": "passage_1", "passageId": "pssa_stamina_psg_g3_owls_p1_night" },
-          { "evidenceKind": "whole_passage_synthesis", "passageSlot": "passage_2", "passageId": "pssa_stamina_psg_g3_owls_p2_barn" }
+          {
+            "evidenceKind": "whole_passage_synthesis",
+            "passageSlot": "passage_1",
+            "passageId": "pssa_stamina_psg_g3_owls_p1_night"
+          },
+          {
+            "evidenceKind": "whole_passage_synthesis",
+            "passageSlot": "passage_2",
+            "passageId": "pssa_stamina_psg_g3_owls_p2_barn"
+          }
         ]
       },
       "passageLinks": [
-        { "passageId": "pssa_stamina_psg_g3_owls_p1_night", "role": "primary", "sortOrder": 0 },
-        { "passageId": "pssa_stamina_psg_g3_owls_p2_barn", "role": "primary", "sortOrder": 1 }
+        {
+          "passageId": "pssa_stamina_psg_g3_owls_p1_night",
+          "role": "primary",
+          "sortOrder": 0
+        },
+        {
+          "passageId": "pssa_stamina_psg_g3_owls_p2_barn",
+          "role": "primary",
+          "sortOrder": 1
+        }
       ],
       "eligibleContent": "E03.B-C.3.1.2",
       "reportingCategory": "B",
       "pointValue": 3,
       "stem": "Use details from both passages to explain why owls can be helpful hunters.",
       "acceptableTextSupport": [
-        { "passageSlot": "passage_1", "passageId": "pssa_stamina_psg_g3_owls_p1_night", "evidenceKind": "whole_passage_synthesis", "note": "night-hunting adaptations" },
-        { "passageSlot": "passage_2", "passageId": "pssa_stamina_psg_g3_owls_p2_barn", "evidenceKind": "whole_passage_synthesis", "note": "rodent control on farms" }
+        {
+          "passageSlot": "passage_1",
+          "passageId": "pssa_stamina_psg_g3_owls_p1_night",
+          "evidenceKind": "whole_passage_synthesis",
+          "note": "night-hunting adaptations"
+        },
+        {
+          "passageSlot": "passage_2",
+          "passageId": "pssa_stamina_psg_g3_owls_p2_barn",
+          "evidenceKind": "whole_passage_synthesis",
+          "note": "rodent control on farms"
+        }
       ],
       "scoreBandExamples": [
-        { "band": 3, "response": "Owls are helpful hunters because their eyes, ears, face feathers, and quiet wings help them catch prey at night. Barn owls can then help farms by catching rodents that damage grain and fields.", "why": "Uses support from both passages." },
-        { "band": 2, "response": "Owls hunt quietly at night and barn owls eat rodents on farms.", "why": "Uses both passages with less explanation." },
-        { "band": 1, "response": "Owls eat mice.", "why": "Uses one relevant idea but not both passages." },
-        { "band": 0, "response": "Owls live in trees.", "why": "Does not answer with support from the paired passages." }
+        {
+          "band": 3,
+          "response": "Owls are helpful hunters because their eyes, ears, face feathers, and quiet wings help them catch prey at night. Barn owls can then help farms by catching rodents that damage grain and fields.",
+          "why": "Uses support from both passages."
+        },
+        {
+          "band": 2,
+          "response": "Owls hunt quietly at night and barn owls eat rodents on farms.",
+          "why": "Uses both passages with less explanation."
+        },
+        {
+          "band": 1,
+          "response": "Owls eat mice.",
+          "why": "Uses one relevant idea but not both passages."
+        },
+        {
+          "band": 0,
+          "response": "Owls live in trees.",
+          "why": "Does not answer with support from the paired passages."
+        }
       ],
-      "scoringJson": { "scoreStatus": "pending_human_scoring", "totalPoints": 3 }
+      "scoringJson": {
+        "scoreStatus": "pending_human_scoring",
+        "totalPoints": 3
+      },
+      "studentFacingPrompt": "Use details from both passages to explain why owls can be helpful hunters."
+    },
+    {
+      "id": "pssa_stamina_item_g3_owls_ebsr_01",
+      "itemId": "pssa_stamina_item_g3_owls_ebsr_01",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "EBSR",
+      "interactionType": "EBSR",
+      "interactionSubtype": "two_point",
+      "passageId": null,
+      "passageTitle": "Owl Adaptations and Barn Helpers",
+      "eligibleContent": "E03.B-C.3.1.1",
+      "assessmentAnchor": "E03.B-C",
+      "reportingCategory": "B",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "approvalEligible": false,
+      "pointValue": 2,
+      "partA": {
+        "stem": "How does Passage 1 help explain why barn owls can be useful on a farm, as described in Passage 2?",
+        "choices": [
+          {
+            "text": "Passage 1 explains how farmers build wooden nest boxes.",
+            "distractorRole": "wrong_section",
+            "supportsPartA": false,
+            "rationale": "Distractor.",
+            "isCorrect": false
+          },
+          {
+            "text": "Passage 1 explains why rodent poison is dangerous to pets.",
+            "distractorRole": "wrong_section",
+            "supportsPartA": false,
+            "rationale": "Distractor.",
+            "isCorrect": false
+          },
+          {
+            "text": "Passage 1 explains why rodents chew stored grain.",
+            "distractorRole": "wrong_section",
+            "supportsPartA": false,
+            "rationale": "Distractor.",
+            "isCorrect": false
+          },
+          {
+            "text": "Passage 1 explains how owls hunt prey in the dark.",
+            "distractorRole": null,
+            "supportsPartA": true,
+            "rationale": "Correct.",
+            "isCorrect": true
+          }
+        ],
+        "correctIndex": 3
+      },
+      "partB": {
+        "stem": "Choose two details, one from each passage, that best support the answer in Part A.",
+        "instruction": "Choose two answers.",
+        "requiredSelectionCount": 2,
+        "choices": [
+          {
+            "text": "Passage 1: \"Because the feathers quiet the wingbeats, a mouse may not hear the owl coming until the owl is very close.\"",
+            "quotedSpan": "Because the feathers quiet the wingbeats, a mouse may not hear the owl coming until the owl is very close.",
+            "evidenceLinks": [
+              {
+                "passageSlot": "passage_1",
+                "passageId": "pssa_stamina_psg_g3_owls_p1_night",
+                "paragraphIndex": 2,
+                "sentenceIndex": 3,
+                "quotedSpan": "Because the feathers quiet the wingbeats, a mouse may not hear the owl coming until the owl is very close.",
+                "startChar": 1136,
+                "endChar": 1242
+              }
+            ],
+            "evidenceRole": "supports_part_a",
+            "supportsPartA": true,
+            "rationale": "Supports Part A."
+          },
+          {
+            "text": "Passage 1: \"To look around, an owl turns its whole head instead.\"",
+            "quotedSpan": "To look around, an owl turns its whole head instead.",
+            "evidenceLinks": [
+              {
+                "passageSlot": "passage_1",
+                "passageId": "pssa_stamina_psg_g3_owls_p1_night",
+                "paragraphIndex": 0,
+                "sentenceIndex": 4,
+                "quotedSpan": "To look around, an owl turns its whole head instead.",
+                "startChar": 258,
+                "endChar": 310
+              }
+            ],
+            "evidenceRole": "distractor",
+            "supportsPartA": false,
+            "rationale": "Does not best support Part A."
+          },
+          {
+            "text": "Passage 2: \"But an owl family can reduce the number of rodents without leaving poison in the field.\"",
+            "quotedSpan": "But an owl family can reduce the number of rodents without leaving poison in the field.",
+            "evidenceLinks": [
+              {
+                "passageSlot": "passage_2",
+                "passageId": "pssa_stamina_psg_g3_owls_p2_barn",
+                "paragraphIndex": 2,
+                "sentenceIndex": 3,
+                "quotedSpan": "But an owl family can reduce the number of rodents without leaving poison in the field.",
+                "startChar": 1032,
+                "endChar": 1119
+              }
+            ],
+            "evidenceRole": "supports_part_a",
+            "supportsPartA": true,
+            "rationale": "Supports Part A."
+          },
+          {
+            "text": "Passage 2: \"A nest box gives the owls a safe place to raise young when old barns or hollow trees are hard to find.\"",
+            "quotedSpan": "A nest box gives the owls a safe place to raise young when old barns or hollow trees are hard to find.",
+            "evidenceLinks": [
+              {
+                "passageSlot": "passage_2",
+                "passageId": "pssa_stamina_psg_g3_owls_p2_barn",
+                "paragraphIndex": 1,
+                "sentenceIndex": 1,
+                "quotedSpan": "A nest box gives the owls a safe place to raise young when old barns or hollow trees are hard to find.",
+                "startChar": 491,
+                "endChar": 593
+              }
+            ],
+            "evidenceRole": "distractor",
+            "supportsPartA": false,
+            "rationale": "Does not best support Part A."
+          }
+        ],
+        "correctIndices": [
+          0,
+          2
+        ]
+      },
+      "responseSpecJson": {
+        "partA": {
+          "prompt": "How does Passage 1 help explain why barn owls can be useful on a farm, as described in Passage 2?",
+          "choices": [
+            {
+              "text": "Passage 1 explains how farmers build wooden nest boxes."
+            },
+            {
+              "text": "Passage 1 explains why rodent poison is dangerous to pets."
+            },
+            {
+              "text": "Passage 1 explains why rodents chew stored grain."
+            },
+            {
+              "text": "Passage 1 explains how owls hunt prey in the dark."
+            }
+          ],
+          "correctIndex": 3
+        },
+        "partB": {
+          "instruction": "Choose two details, one from each passage, that best support the answer in Part A.",
+          "choices": [
+            {
+              "text": "Passage 1: \"Because the feathers quiet the wingbeats, a mouse may not hear the owl coming until the owl is very close.\""
+            },
+            {
+              "text": "Passage 1: \"To look around, an owl turns its whole head instead.\""
+            },
+            {
+              "text": "Passage 2: \"But an owl family can reduce the number of rodents without leaving poison in the field.\""
+            },
+            {
+              "text": "Passage 2: \"A nest box gives the owls a safe place to raise young when old barns or hollow trees are hard to find.\""
+            }
+          ],
+          "requiredSelectionCount": 2
+        }
+      },
+      "correctResponse": {
+        "partA": {
+          "correctIndex": 3
+        },
+        "partB": {
+          "correctIndices": [
+            0,
+            2
+          ]
+        }
+      },
+      "correctResponseJson": {
+        "partA": {
+          "correctIndex": 3
+        },
+        "partB": {
+          "correctIndices": [
+            0,
+            2
+          ]
+        }
+      },
+      "scoring": {
+        "totalPoints": 2,
+        "partAPoints": 1,
+        "partBPoints": 1,
+        "requirePartACorrectForFullCredit": true
+      },
+      "scoringJson": {
+        "totalPoints": 2,
+        "partAPoints": 1,
+        "partBPoints": 1,
+        "requirePartACorrectForFullCredit": true,
+        "partialCreditRules": [
+          {
+            "points": 2,
+            "rule": "Part A is correct and both Part B evidence choices are correct."
+          },
+          {
+            "points": 1,
+            "rule": "Part A is correct and one Part B evidence choice is correct, or Part A is incorrect but both Part B evidence choices are correct."
+          },
+          {
+            "points": 0,
+            "rule": "The response is unsupported, incomplete, or missing."
+          }
+        ]
+      },
+      "provenanceJson": {
+        "fixtureOnly": true,
+        "sourcePassageId": null,
+        "authoredIn": "PSSA_STAMINA_ITEM_SET_COMPLETION"
+      },
+      "passageGroupId": "pssa_pg_g3_owls_paired_01",
+      "isCrossText": true,
+      "requiredEvidenceSlotsJson": [
+        "passage_1",
+        "passage_2"
+      ],
+      "passageLinks": [
+        {
+          "passageId": "pssa_stamina_psg_g3_owls_p1_night",
+          "role": "primary"
+        },
+        {
+          "passageId": "pssa_stamina_psg_g3_owls_p2_barn",
+          "role": "primary"
+        }
+      ],
+      "acceptableSupportEvidenceLinks": [
+        {
+          "passageSlot": "passage_1",
+          "passageId": "pssa_stamina_psg_g3_owls_p1_night",
+          "paragraphIndex": 2,
+          "sentenceIndex": 3,
+          "quotedSpan": "Because the feathers quiet the wingbeats, a mouse may not hear the owl coming until the owl is very close.",
+          "startChar": 1136,
+          "endChar": 1242
+        },
+        {
+          "passageSlot": "passage_2",
+          "passageId": "pssa_stamina_psg_g3_owls_p2_barn",
+          "paragraphIndex": 2,
+          "sentenceIndex": 3,
+          "quotedSpan": "But an owl family can reduce the number of rodents without leaving poison in the field.",
+          "startChar": 1032,
+          "endChar": 1119
+        }
+      ]
     }
   ]
 }

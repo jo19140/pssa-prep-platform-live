@@ -543,7 +543,7 @@ function rawChoiceText(value: unknown) {
 
 function choiceTextGroups(item: any): Array<{ raw: boolean; values: string[] }> {
   const interactionType = interactionTypeFor(item);
-  if (interactionType === "MCQ") return [{ raw: false, values: (item.answerChoicesJson ?? item.choices ?? []).map((choice: any) => typeof choice === "string" ? choice : choice.text) }];
+  if (interactionType === "MCQ") return [{ raw: isConventionsCasePunctuationMcq(item), values: (item.answerChoicesJson ?? item.choices ?? []).map((choice: any) => typeof choice === "string" ? choice : choice.text) }];
   if (interactionType === "EBSR") return [
     { raw: false, values: item.partA?.choices?.map((choice: any) => choice.text) ?? [] },
     { raw: false, values: item.partB?.choices?.map((choice: any) => choice.text) ?? [] },
@@ -558,6 +558,14 @@ function choiceTextGroups(item: any): Array<{ raw: boolean; values: string[] }> 
     values: blank.options?.map((option: any) => typeof option === "string" ? option : option.text) ?? [],
   }));
   return [];
+}
+
+function isConventionsCasePunctuationMcq(item: any) {
+  return [
+    "E03.D.1.2.1",
+    "E03.D.1.2.2",
+    "E03.D.1.2.3",
+  ].includes(String(item.eligibleContent ?? ""));
 }
 
 export function evaluatePssaItemIntraChoiceDuplicate(item: any): GateStatus {

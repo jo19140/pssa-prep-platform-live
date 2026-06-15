@@ -1,0 +1,1048 @@
+{
+  "generationBatchId": "pssa_stamina_g3_rabbit_drama_fixture",
+  "module": "PSSA",
+  "subject": "ELA",
+  "gradeLevel": 3,
+  "reviewStatus": "PENDING",
+  "itemStatus": "candidate",
+  "writesDatabaseRows": false,
+  "fixtureOnly": true,
+  "passages": [
+    {
+      "model": "PssaPassage",
+      "id": "pssa_stamina_psg_g3_rabbit_drama",
+      "title": "Room for One More",
+      "gradeLevel": 3,
+      "subject": "ELA",
+      "passageType": "literary",
+      "topicDomain": "fiction/drama",
+      "structureType": "script drama",
+      "voicePov": "third-person drama",
+      "staminaBand": "released_length",
+      "genre": "drama",
+      "domainVocabularyLoad": "low",
+      "text": "CAST OF CHARACTERS\nRABBIT — careful and tidy; likes things just so\nSQUIRREL — quick and cheerful\nHEDGEHOG — slow, polite, and covered in prickles\nMOUSE — very small and easily cold\n\nSETTING: A hollow log at the edge of the woods. It is late autumn. Dark clouds are rolling in, and the wind is pushing the last dry leaves across the ground.\n\nSCENE 1\n\n[RABBIT sits inside the hollow log, sweeping out leaves with her front paws. The log is neat and dry, with a tidy little pile of acorns stacked in one corner. Outside, the wind begins to howl, and the first drops of rain tap against the wood.]\nRABBIT: [to herself, patting the walls] There. Swept, dry, and quiet. A perfect home for one careful rabbit, just the way I like it.\n[SQUIRREL dashes in from the side, soaked and shaking water from his tail. RABBIT jumps back, brushing the drops off her fur.]\nSQUIRREL: Rabbit! A big storm is coming up the valley — the biggest one all autumn. May I please wait inside your log until it blows past?\nRABBIT: [frowning] My log? Squirrel, this log is exactly the right size for one rabbit. If you climb in, there will not be room to turn around, and you are dripping all over my clean floor.\nSQUIRREL: I will make myself small. I will tuck my tail and hold my paws in tight. You will hardly know I am here, I promise.\nRABBIT: [with a long sigh] Oh, very well. But only until the rain stops. Not one minute longer, and keep that wet tail to yourself.\n[SQUIRREL squeezes in beside her and tries to fold himself into a small ball. A low rumble of thunder rolls across the woods. RABBIT scoots as far away as she can and folds her arms.]\nSQUIRREL: [cheerfully] Thank you, Rabbit. You are kinder than the other animals say.\nRABBIT: [muttering] The other animals should mind their own logs.\n\nSCENE 2\n\n[The rain is falling harder now, drumming on the log. HEDGEHOG shuffles in slowly through the doorway, his prickles dripping. Close behind him creeps tiny MOUSE, shivering from nose to tail.]\nHEDGEHOG: Good evening, friends. I am sorry to trouble you. The rain has flooded my burrow and soaked my whole bed of leaves. Might I share your dry log until morning?\nMOUSE: [in a tiny, trembling voice] And me? Please? The water washed right through my little nest. I have nowhere warm to go, and the storm is getting worse.\nRABBIT: [throwing up her paws] Now look at this! Four of us in one small log — a dripping squirrel, a hedgehog covered in pins, a wet little mouse, and me. We will never fit. Somebody is going to get poked!\nSQUIRREL: We can at least try. If each of us takes up a little less space, perhaps there is room enough for all of us.\nRABBIT: [grumbling] I liked it much better when this log belonged to me alone. Sweep, sweep, all day, and for what? So the whole forest can drip on my floor.\n[The animals shuffle and bump in the dark, trying to find places. HEDGEHOG turns to make room, and his sharp prickles brush against SQUIRREL.]\nSQUIRREL: Ouch! Watch your back, Hedgehog!\nHEDGEHOG: [embarrassed] Oh, I am so sorry. I cannot help my prickles. I will try to face the other way.\nSQUIRREL: [trying to sort everyone out] Here now — if Hedgehog stands near the wall, and Mouse sits up front, and I curl into this side, then each of us has a spot.\nRABBIT: A spot! Squirrel, look around you. This is a log, not a barn. There is barely a spot for my own two ears.\nMOUSE: [shrinking back toward the door] Maybe I should go. There is not enough room because of me.\nRABBIT: [throwing up her paws again] You see? It is far too crowded in here. This will never, ever work.\n[MOUSE takes a sad step toward the storm. A flash of lightning lights up the doorway.]\n\nSCENE 3\n\n[A loud CRACK of thunder splits the air. The wind screams, and rain pours down in heavy sheets. All four animals go still, listening to the storm. MOUSE freezes in the doorway, too frightened to step outside.]\nMOUSE: [barely a whisper] I am so cold. My paws have gone numb.\n[For a long moment, no one speaks. Then RABBIT turns and looks at the shivering mouse. Slowly, her frown begins to soften.]\nRABBIT: [gently] Come here, little one. Do not go out in that. Get into the middle, where it is warmest.\n[MOUSE creeps to the center of the log. HEDGEHOG carefully turns his prickly side toward the wall so that no one will be poked. SQUIRREL curls his big, bushy tail around the whole group like a blanket.]\nSQUIRREL: There. My tail can keep us all warm.\nHEDGEHOG: And my back can face the door and block the cold wind from coming in.\n[A gust blows a spray of rain through the doorway. HEDGEHOG shifts to cover the gap, and the inside of the log grows warm and still.]\nRABBIT: [looking around in surprise] Why... there is room after all. When each of us gives up a little space, the log somehow feels bigger, not smaller.\n[The storm rages on outside, but inside the hollow log the four animals are warm and dry. MOUSE lets out a long, happy sigh.]\nMOUSE: This is the coziest place I have ever been.\nRABBIT: [smiling at last] I was so sure that sharing my log would leave me with less. Instead I have a warm tail wrapped around me, a wall of prickles to block the wind, and three good friends I did not have this morning. [She looks around at the others.] I suppose there is always room for one more.\nSQUIRREL: [grinning] And next storm, we will know just where to come.\nRABBIT: [laughing softly] Yes. Bring your wet tails. I will sweep up after.\n[The thunder begins to fade. The rain softens to a gentle patter. The four animals settle close together as the lights slowly dim.]\nTHE END",
+      "wordCount": 1017,
+      "sourceType": "internal_original",
+      "sourceName": "Authored for PSSA Grade 3 stamina-tranche pilot drama probe",
+      "sourceCitation": null,
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "factCheckStatus": "NOT_REQUIRED_FICTION",
+      "factualClaimsReviewed": false,
+      "textFeaturesJson": [
+        {
+          "type": "cast_list",
+          "featureText": "CAST OF CHARACTERS\nRABBIT — careful and tidy; likes things just so\nSQUIRREL — quick and cheerful\nHEDGEHOG — slow, polite, and covered in prickles\nMOUSE — very small and easily cold"
+        },
+        {
+          "type": "scene_marker",
+          "sectionId": "scene_01",
+          "featureText": "SCENE 1"
+        },
+        {
+          "type": "scene_marker",
+          "sectionId": "scene_02",
+          "featureText": "SCENE 2"
+        },
+        {
+          "type": "scene_marker",
+          "sectionId": "scene_03",
+          "featureText": "SCENE 3"
+        },
+        {
+          "type": "stage_direction",
+          "sectionId": "scene_03",
+          "featureText": "[For a long moment, no one speaks. Then RABBIT turns and looks at the shivering mouse. Slowly, her frown begins to soften.]"
+        }
+      ],
+      "factCheckNotesJson": null,
+      "provenanceJson": {
+        "authoredBy": "model-assisted, human-reviewed drama stamina probe",
+        "method": "original_composition",
+        "sourceDoc": "signed_off_room_for_one_more_drama.md",
+        "fixtureOnly": true,
+        "pdeSamplerDerived": false,
+        "containsAttributedQuotes": false
+      },
+      "approvedAt": null,
+      "reviewedBy": null,
+      "retiredAt": null
+    }
+  ],
+  "items": [
+    {
+      "model": "PssaItem",
+      "id": "pssa_stamina_item_g3_rabbit_01",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "MCQ",
+      "interactionType": "MCQ",
+      "skill": "theme_central_message",
+      "passageId": "pssa_stamina_psg_g3_rabbit_drama",
+      "eligibleContent": "E03.A-K.1.1.2",
+      "assessmentAnchor": "E03.A-K.1",
+      "reportingCategory": "A",
+      "dokLevel": 2,
+      "studentFacingPrompt": "What is the most important lesson Rabbit learns in the play?",
+      "answerChoicesJson": [
+        "Sharing what you have can leave you with more.",
+        "A hollow log is a good place to hide from rain.",
+        "Hedgehogs should be careful with their prickles.",
+        "It is best to keep your home to yourself."
+      ],
+      "correctIndex": 0,
+      "structuredChoicesJson": [
+        {
+          "text": "Sharing what you have can leave you with more.",
+          "isCorrect": true,
+          "rationale": "Rabbit learns that sharing her dry log gives her warmth, help, and friends.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "whole_play_synthesis"
+            },
+            {
+              "evidenceKind": "scene_synthesis",
+              "sceneId": "scene_01"
+            },
+            {
+              "evidenceKind": "scene_synthesis",
+              "sceneId": "scene_02"
+            },
+            {
+              "evidenceKind": "scene_synthesis",
+              "sceneId": "scene_03"
+            }
+          ],
+          "distractorRole": null
+        },
+        {
+          "text": "A hollow log is a good place to hide from rain.",
+          "isCorrect": false,
+          "rationale": "The log is the setting, but the lesson is about sharing.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "scene_synthesis",
+              "sceneId": "scene_01"
+            }
+          ],
+          "distractorRole": "too_narrow"
+        },
+        {
+          "text": "Hedgehogs should be careful with their prickles.",
+          "isCorrect": false,
+          "rationale": "Hedgehog's prickles cause a problem, but that is only one detail.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "scene_synthesis",
+              "sceneId": "scene_02"
+            }
+          ],
+          "distractorRole": "too_narrow"
+        },
+        {
+          "text": "It is best to keep your home to yourself.",
+          "isCorrect": false,
+          "rationale": "This is the opposite of what Rabbit learns.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "scene_synthesis",
+              "sceneId": "scene_03"
+            }
+          ],
+          "distractorRole": "opposite_claim"
+        }
+      ],
+      "pointValue": 1
+    },
+    {
+      "model": "PssaItem",
+      "id": "pssa_stamina_item_g3_rabbit_02",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "MCQ",
+      "interactionType": "MCQ",
+      "skill": "character_change",
+      "passageId": "pssa_stamina_psg_g3_rabbit_drama",
+      "eligibleContent": "E03.A-K.1.1.3",
+      "assessmentAnchor": "E03.A-K.1",
+      "reportingCategory": "A",
+      "dokLevel": 2,
+      "studentFacingPrompt": "How do Rabbit's feelings change from the beginning of the play to the end?",
+      "answerChoicesJson": [
+        "She is very afraid at first, but slowly becomes brave by the very end.",
+        "She does not want to share at first, but is glad by the end.",
+        "She is friendly at first, but becomes angry by the end.",
+        "She stays sleepy for most of the play and hardly changes."
+      ],
+      "correctIndex": 1,
+      "structuredChoicesJson": [
+        {
+          "text": "She is very afraid at first, but slowly becomes brave by the very end.",
+          "isCorrect": false,
+          "rationale": "Rabbit is annoyed, not mainly afraid.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "scene_synthesis",
+              "sceneId": "scene_01"
+            }
+          ],
+          "distractorRole": "wrong_emphasis"
+        },
+        {
+          "text": "She does not want to share at first, but is glad by the end.",
+          "isCorrect": true,
+          "rationale": "Rabbit begins by wanting the log to herself and ends by welcoming the others.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "scene_synthesis",
+              "sceneId": "scene_01"
+            },
+            {
+              "evidenceKind": "scene_synthesis",
+              "sceneId": "scene_03"
+            }
+          ],
+          "distractorRole": null
+        },
+        {
+          "text": "She is friendly at first, but becomes angry by the end.",
+          "isCorrect": false,
+          "rationale": "Rabbit changes in the opposite direction.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "scene_synthesis",
+              "sceneId": "scene_03"
+            }
+          ],
+          "distractorRole": "opposite_claim"
+        },
+        {
+          "text": "She stays sleepy for most of the play and hardly changes.",
+          "isCorrect": false,
+          "rationale": "Rabbit clearly changes by the end of the play.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "scene_synthesis",
+              "sceneId": "scene_03"
+            }
+          ],
+          "distractorRole": "unsupported_inference"
+        }
+      ],
+      "pointValue": 1
+    },
+    {
+      "model": "PssaItem",
+      "id": "pssa_stamina_item_g3_rabbit_03",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "MCQ",
+      "interactionType": "MCQ",
+      "skill": "plot_cause",
+      "comprehensionKind": "inference",
+      "comprehensionKindRationale": "The item asks students to infer the shared cause for Hedgehog and Mouse coming to the log from Scene 2 dialogue rather than matching a single quoted sentence.",
+      "passageId": "pssa_stamina_psg_g3_rabbit_drama",
+      "eligibleContent": "E03.A-K.1.1.1",
+      "assessmentAnchor": "E03.A-K.1",
+      "reportingCategory": "A",
+      "dokLevel": 2,
+      "studentFacingPrompt": "Why do Hedgehog and Mouse come to Rabbit's log?",
+      "answerChoicesJson": [
+        "They want to play a game with Rabbit.",
+        "Rabbit invited them to a party.",
+        "The storm has flooded their own homes.",
+        "They are looking for food to eat."
+      ],
+      "correctIndex": 2,
+      "structuredChoicesJson": [
+        {
+          "text": "They want to play a game with Rabbit.",
+          "isCorrect": false,
+          "rationale": "They come because of the storm, not to play.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "spoken_line",
+              "sceneId": "scene_02",
+              "lineIndex": 2,
+              "speaker": "HEDGEHOG",
+              "quotedSpan": "Might I share your dry log until morning?"
+            }
+          ],
+          "distractorRole": "unsupported_inference"
+        },
+        {
+          "text": "Rabbit invited them to a party.",
+          "isCorrect": false,
+          "rationale": "Rabbit did not invite them; they ask to come in.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "spoken_line",
+              "sceneId": "scene_02",
+              "lineIndex": 4,
+              "speaker": "RABBIT",
+              "quotedSpan": "Now look at this!"
+            }
+          ],
+          "distractorRole": "opposite_claim"
+        },
+        {
+          "text": "The storm has flooded their own homes.",
+          "isCorrect": true,
+          "rationale": "Hedgehog and Mouse both say water has ruined their homes.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "spoken_line",
+              "sceneId": "scene_02",
+              "lineIndex": 2,
+              "speaker": "HEDGEHOG",
+              "quotedSpan": "The rain has flooded my burrow and soaked my whole bed of leaves."
+            },
+            {
+              "evidenceKind": "spoken_line",
+              "sceneId": "scene_02",
+              "lineIndex": 3,
+              "speaker": "MOUSE",
+              "quotedSpan": "The water washed right through my little nest."
+            }
+          ],
+          "distractorRole": null
+        },
+        {
+          "text": "They are looking for food to eat.",
+          "isCorrect": false,
+          "rationale": "The scene is about shelter from rain, not food.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "spoken_line",
+              "sceneId": "scene_02",
+              "lineIndex": 3,
+              "speaker": "MOUSE",
+              "quotedSpan": "I have nowhere warm to go, and the storm is getting worse."
+            }
+          ],
+          "distractorRole": "wrong_section"
+        }
+      ],
+      "pointValue": 1
+    },
+    {
+      "model": "PssaItem",
+      "id": "pssa_stamina_item_g3_rabbit_04",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "MCQ",
+      "interactionType": "MCQ",
+      "skill": "stage_direction_inference",
+      "comprehensionKind": "interpretation",
+      "comprehensionKindRationale": "The item asks what a stage direction shows about Rabbit's internal change, so students interpret action and expression rather than recall a literal event.",
+      "passageId": "pssa_stamina_psg_g3_rabbit_drama",
+      "eligibleContent": "E03.A-K.1.1.3",
+      "assessmentAnchor": "E03.A-K.1",
+      "reportingCategory": "A",
+      "dokLevel": 2,
+      "studentFacingPrompt": "Read this stage direction from Scene 3: [Then RABBIT turns and looks at the shivering mouse. Slowly, her frown begins to soften.] What does it show about Rabbit?",
+      "answerChoicesJson": [
+        "She is getting ready to leave the log.",
+        "She is falling asleep.",
+        "She is angry that the cold mouse is there.",
+        "She starts to feel sorry for the mouse."
+      ],
+      "correctIndex": 3,
+      "structuredChoicesJson": [
+        {
+          "text": "She is getting ready to leave the log.",
+          "isCorrect": false,
+          "rationale": "The stage direction shows a change in feeling, not that Rabbit plans to leave.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "spoken_line",
+              "sceneId": "scene_03",
+              "lineIndex": 4,
+              "speaker": "RABBIT",
+              "quotedSpan": "Come here, little one. Do not go out in that."
+            }
+          ],
+          "distractorRole": "unsupported_inference"
+        },
+        {
+          "text": "She is falling asleep.",
+          "isCorrect": false,
+          "rationale": "A softening frown could be misread as tiredness, but the next line shows kindness.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "spoken_line",
+              "sceneId": "scene_03",
+              "lineIndex": 4,
+              "speaker": "RABBIT",
+              "quotedSpan": "Get into the middle, where it is warmest."
+            }
+          ],
+          "distractorRole": "plausible_misreading"
+        },
+        {
+          "text": "She is angry that the cold mouse is there.",
+          "isCorrect": false,
+          "rationale": "Her frown softens, so she is becoming less angry.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "stage_direction",
+              "sceneId": "scene_03",
+              "lineIndex": 3,
+              "quotedSpan": "[For a long moment, no one speaks. Then RABBIT turns and looks at the shivering mouse. Slowly, her frown begins to soften.]"
+            }
+          ],
+          "distractorRole": "opposite_claim"
+        },
+        {
+          "text": "She starts to feel sorry for the mouse.",
+          "isCorrect": true,
+          "rationale": "Rabbit notices Mouse is cold and begins to soften.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "stage_direction",
+              "sceneId": "scene_03",
+              "lineIndex": 3,
+              "quotedSpan": "[For a long moment, no one speaks. Then RABBIT turns and looks at the shivering mouse. Slowly, her frown begins to soften.]"
+            }
+          ],
+          "distractorRole": null
+        }
+      ],
+      "pointValue": 1
+    },
+    {
+      "model": "PssaItem",
+      "id": "pssa_stamina_item_g3_rabbit_05",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "MCQ",
+      "interactionType": "MCQ",
+      "skill": "vocabulary_in_context",
+      "passageId": "pssa_stamina_psg_g3_rabbit_drama",
+      "eligibleContent": "E03.A-V.4.1.1",
+      "assessmentAnchor": "E03.A-V.4",
+      "reportingCategory": "A",
+      "dokLevel": 2,
+      "targetWordOrPhrase": "shuffle",
+      "studentFacingPrompt": "In Scene 2, the animals \"shuffle and bump in the dark.\" What does shuffle mean here?",
+      "answerChoicesJson": [
+        "to walk with small steps",
+        "to jump high into the air",
+        "to fall fast asleep",
+        "to shout very loudly"
+      ],
+      "correctIndex": 0,
+      "structuredChoicesJson": [
+        {
+          "text": "to walk with small steps",
+          "isCorrect": true,
+          "rationale": "The animals are trying to find places in the dark by moving around carefully.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "stage_direction",
+              "sceneId": "scene_02",
+              "lineIndex": 7,
+              "quotedSpan": "[The animals shuffle and bump in the dark, trying to find places. HEDGEHOG turns to make room, and his sharp prickles brush against SQUIRREL.]"
+            }
+          ],
+          "distractorRole": null
+        },
+        {
+          "text": "to jump high into the air",
+          "isCorrect": false,
+          "rationale": "The animals are moving in a crowded log, not jumping.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "stage_direction",
+              "sceneId": "scene_02",
+              "lineIndex": 14,
+              "quotedSpan": "[MOUSE takes a sad step toward the storm. A flash of lightning lights up the doorway.]"
+            }
+          ],
+          "distractorRole": "opposite_claim"
+        },
+        {
+          "text": "to fall fast asleep",
+          "isCorrect": false,
+          "rationale": "The animals are awake and trying to make room.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "stage_direction",
+              "sceneId": "scene_03",
+              "lineIndex": 15,
+              "quotedSpan": "[The thunder begins to fade. The rain softens to a gentle patter. The four animals settle close together as the lights slowly dim.]"
+            }
+          ],
+          "distractorRole": "plausible_misreading"
+        },
+        {
+          "text": "to shout very loudly",
+          "isCorrect": false,
+          "rationale": "Shuffle describes movement, not sound.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "stage_direction",
+              "sceneId": "scene_01",
+              "lineIndex": 8,
+              "quotedSpan": "[SQUIRREL squeezes in beside her and tries to fold himself into a small ball. A low rumble of thunder rolls across the woods. RABBIT scoots as far away as she can and folds her arms.]"
+            }
+          ],
+          "distractorRole": "wrong_emphasis"
+        }
+      ],
+      "testsApplicationNotDefinition": true,
+      "pointValue": 1
+    },
+    {
+      "model": "PssaItem",
+      "id": "pssa_stamina_item_g3_rabbit_06",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "MCQ",
+      "interactionType": "MCQ",
+      "skill": "dialogue_action_inference",
+      "comprehensionKind": "inference",
+      "comprehensionKindRationale": "The item asks what motivates Rabbit's final decision by combining Mouse's condition, Rabbit's softening expression, and Rabbit's action.",
+      "passageId": "pssa_stamina_psg_g3_rabbit_drama",
+      "eligibleContent": "E03.A-K.1.1.3",
+      "assessmentAnchor": "E03.A-K.1",
+      "reportingCategory": "A",
+      "dokLevel": 2,
+      "studentFacingPrompt": "What finally makes Rabbit decide to let the mouse into the middle of the log?",
+      "answerChoicesJson": [
+        "Squirrel tells her she has to.",
+        "She sees how cold and scared the mouse is.",
+        "The rain finally stops and there is more room.",
+        "Hedgehog promises to leave."
+      ],
+      "correctIndex": 1,
+      "structuredChoicesJson": [
+        {
+          "text": "Squirrel tells her she has to.",
+          "isCorrect": false,
+          "rationale": "Squirrel helps make room, but he does not order Rabbit to let Mouse stay.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "spoken_line",
+              "sceneId": "scene_02",
+              "lineIndex": 5,
+              "speaker": "SQUIRREL",
+              "quotedSpan": "We can at least try."
+            }
+          ],
+          "distractorRole": "unsupported_inference"
+        },
+        {
+          "text": "She sees how cold and scared the mouse is.",
+          "isCorrect": true,
+          "rationale": "Mouse says she is cold, and Rabbit's frown softens before she invites Mouse into the middle.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "spoken_line",
+              "sceneId": "scene_03",
+              "lineIndex": 2,
+              "speaker": "MOUSE",
+              "quotedSpan": "I am so cold. My paws have gone numb."
+            },
+            {
+              "evidenceKind": "stage_direction",
+              "sceneId": "scene_03",
+              "lineIndex": 3,
+              "quotedSpan": "[For a long moment, no one speaks. Then RABBIT turns and looks at the shivering mouse. Slowly, her frown begins to soften.]"
+            },
+            {
+              "evidenceKind": "spoken_line",
+              "sceneId": "scene_03",
+              "lineIndex": 4,
+              "speaker": "RABBIT",
+              "quotedSpan": "Come here, little one. Do not go out in that. Get into the middle, where it is warmest."
+            }
+          ],
+          "distractorRole": null
+        },
+        {
+          "text": "The rain finally stops and there is more room.",
+          "isCorrect": false,
+          "rationale": "The storm is still raging when Rabbit changes her mind.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "stage_direction",
+              "sceneId": "scene_03",
+              "lineIndex": 1,
+              "quotedSpan": "[A loud CRACK of thunder splits the air. The wind screams, and rain pours down in heavy sheets. All four animals go still, listening to the storm. MOUSE freezes in the doorway, too frightened to step outside.]"
+            }
+          ],
+          "distractorRole": "opposite_claim"
+        },
+        {
+          "text": "Hedgehog promises to leave.",
+          "isCorrect": false,
+          "rationale": "Hedgehog does not promise to leave; he makes room safely.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "spoken_line",
+              "sceneId": "scene_03",
+              "lineIndex": 7,
+              "speaker": "HEDGEHOG",
+              "quotedSpan": "And my back can face the door and block the cold wind from coming in."
+            }
+          ],
+          "distractorRole": "unsupported_inference"
+        }
+      ],
+      "pointValue": 1
+    },
+    {
+      "id": "pssa_stamina_item_g3_rabbit_ebsr_01",
+      "itemId": "pssa_stamina_item_g3_rabbit_ebsr_01",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "EBSR",
+      "interactionType": "EBSR",
+      "interactionSubtype": "two_point",
+      "passageId": "pssa_stamina_psg_g3_rabbit_drama",
+      "passageTitle": "Room for One More",
+      "eligibleContent": "E03.A-K.1.1.3",
+      "assessmentAnchor": "E03.A-K",
+      "reportingCategory": "A",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "approvalEligible": false,
+      "pointValue": 2,
+      "partA": {
+        "stem": "How does Rabbit change from the beginning of the play to the end?",
+        "choices": [
+          {
+            "text": "She becomes more willing to share her log with others.",
+            "distractorRole": null,
+            "supportsPartA": true,
+            "rationale": "Correct.",
+            "isCorrect": true
+          },
+          {
+            "text": "She becomes more afraid of the storm outside.",
+            "distractorRole": "wrong_emphasis",
+            "supportsPartA": false,
+            "rationale": "Distractor.",
+            "isCorrect": false
+          },
+          {
+            "text": "She decides that the log is too small for any animal.",
+            "distractorRole": "opposite_claim",
+            "supportsPartA": false,
+            "rationale": "Distractor.",
+            "isCorrect": false
+          },
+          {
+            "text": "She learns that Hedgehog should leave the log first.",
+            "distractorRole": "unsupported_inference",
+            "supportsPartA": false,
+            "rationale": "Distractor.",
+            "isCorrect": false
+          }
+        ],
+        "correctIndex": 0
+      },
+      "partB": {
+        "stem": "Which two details best support the answer in Part A?",
+        "instruction": "Choose two answers.",
+        "requiredSelectionCount": 2,
+        "choices": [
+          {
+            "text": "A perfect home for one careful rabbit, just the way I like it.",
+            "quotedSpan": "A perfect home for one careful rabbit, just the way I like it.",
+            "evidenceLinks": [
+              {
+                "evidenceKind": "spoken_line",
+                "sceneId": "scene_01",
+                "lineIndex": 2,
+                "speaker": "RABBIT",
+                "quotedSpan": "A perfect home for one careful rabbit, just the way I like it."
+              }
+            ],
+            "evidenceRole": "supports_part_a",
+            "supportsPartA": true,
+            "rationale": "Supports Part A."
+          },
+          {
+            "text": "The rain is falling harder now, drumming on the log.",
+            "quotedSpan": "The rain is falling harder now, drumming on the log.",
+            "evidenceLinks": [
+              {
+                "evidenceKind": "stage_direction",
+                "sceneId": "scene_02",
+                "lineIndex": 1,
+                "quotedSpan": "The rain is falling harder now, drumming on the log."
+              }
+            ],
+            "evidenceRole": "distractor",
+            "supportsPartA": false,
+            "rationale": "Does not best support Part A."
+          },
+          {
+            "text": "Come here, little one. Do not go out in that. Get into the middle, where it is warmest.",
+            "quotedSpan": "Come here, little one. Do not go out in that. Get into the middle, where it is warmest.",
+            "evidenceLinks": [
+              {
+                "evidenceKind": "spoken_line",
+                "sceneId": "scene_03",
+                "lineIndex": 4,
+                "speaker": "RABBIT",
+                "quotedSpan": "Come here, little one. Do not go out in that. Get into the middle, where it is warmest."
+              }
+            ],
+            "evidenceRole": "supports_part_a",
+            "supportsPartA": true,
+            "rationale": "Supports Part A."
+          },
+          {
+            "text": "SQUIRREL curls his big, bushy tail around the whole group like a blanket.",
+            "quotedSpan": "SQUIRREL curls his big, bushy tail around the whole group like a blanket.",
+            "evidenceLinks": [
+              {
+                "evidenceKind": "stage_direction",
+                "sceneId": "scene_03",
+                "lineIndex": 5,
+                "quotedSpan": "SQUIRREL curls his big, bushy tail around the whole group like a blanket."
+              }
+            ],
+            "evidenceRole": "distractor",
+            "supportsPartA": false,
+            "rationale": "Does not best support Part A."
+          }
+        ],
+        "correctIndices": [
+          0,
+          2
+        ]
+      },
+      "responseSpecJson": {
+        "partA": {
+          "prompt": "How does Rabbit change from the beginning of the play to the end?",
+          "choices": [
+            {
+              "text": "She becomes more willing to share her log with others."
+            },
+            {
+              "text": "She becomes more afraid of the storm outside."
+            },
+            {
+              "text": "She decides that the log is too small for any animal."
+            },
+            {
+              "text": "She learns that Hedgehog should leave the log first."
+            }
+          ],
+          "correctIndex": 0
+        },
+        "partB": {
+          "instruction": "Which two details best support the answer in Part A?",
+          "choices": [
+            {
+              "text": "A perfect home for one careful rabbit, just the way I like it."
+            },
+            {
+              "text": "The rain is falling harder now, drumming on the log."
+            },
+            {
+              "text": "Come here, little one. Do not go out in that. Get into the middle, where it is warmest."
+            },
+            {
+              "text": "SQUIRREL curls his big, bushy tail around the whole group like a blanket."
+            }
+          ],
+          "requiredSelectionCount": 2
+        }
+      },
+      "correctResponse": {
+        "partA": {
+          "correctIndex": 0
+        },
+        "partB": {
+          "correctIndices": [
+            0,
+            2
+          ]
+        }
+      },
+      "correctResponseJson": {
+        "partA": {
+          "correctIndex": 0
+        },
+        "partB": {
+          "correctIndices": [
+            0,
+            2
+          ]
+        }
+      },
+      "scoring": {
+        "totalPoints": 2,
+        "partAPoints": 1,
+        "partBPoints": 1,
+        "requirePartACorrectForFullCredit": true
+      },
+      "scoringJson": {
+        "totalPoints": 2,
+        "partAPoints": 1,
+        "partBPoints": 1,
+        "requirePartACorrectForFullCredit": true,
+        "partialCreditRules": [
+          {
+            "points": 2,
+            "rule": "Part A is correct and both Part B evidence choices are correct."
+          },
+          {
+            "points": 1,
+            "rule": "Part A is correct and one Part B evidence choice is correct, or Part A is incorrect but both Part B evidence choices are correct."
+          },
+          {
+            "points": 0,
+            "rule": "The response is unsupported, incomplete, or missing."
+          }
+        ]
+      },
+      "provenanceJson": {
+        "fixtureOnly": true,
+        "sourcePassageId": "pssa_stamina_psg_g3_rabbit_drama",
+        "authoredIn": "PSSA_STAMINA_ITEM_SET_COMPLETION"
+      }
+    },
+    {
+      "id": "pssa_stamina_item_g3_rabbit_sa_01",
+      "itemId": "pssa_stamina_item_g3_rabbit_sa_01",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "CONSTRUCTED_RESPONSE",
+      "interactionType": "SHORT_ANSWER",
+      "interactionSubtype": "text_supported_short_answer",
+      "passageId": "pssa_stamina_psg_g3_rabbit_drama",
+      "passageTitle": "Room for One More",
+      "eligibleContent": "E03.A-K.1.1.3",
+      "assessmentAnchor": "E03.A-K",
+      "reportingCategory": "A",
+      "stem": "How does Rabbit learn that sharing the log helps everyone? Use two details from the play to support your answer.",
+      "studentFacingPrompt": "How does Rabbit learn that sharing the log helps everyone? Use two details from the play to support your answer.",
+      "instructionText": "Write a short answer that uses two details from the passage to support your answer.",
+      "requiredSupportCount": 2,
+      "requiresTextSupport": true,
+      "expectedAnswerCore": "Rabbit first wants the log for herself. Later, when she lets everyone stay, the animals help one another stay warm and safe.",
+      "acceptableTextSupport": [
+        {
+          "supportId": "rabbit_sa_s1",
+          "supportType": "direct_quote",
+          "quotedSpan": "A perfect home for one careful rabbit, just the way I like it.",
+          "detail": "Rabbit first calls the log a perfect home for one careful rabbit",
+          "connectsToExpectedAnswer": "This shows Rabbit begins by wanting the log for herself.",
+          "independentKey": "alone",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "spoken_line",
+              "sceneId": "scene_01",
+              "lineIndex": 2,
+              "speaker": "RABBIT",
+              "quotedSpan": "A perfect home for one careful rabbit, just the way I like it."
+            }
+          ]
+        },
+        {
+          "supportId": "rabbit_sa_s2",
+          "supportType": "direct_quote",
+          "quotedSpan": "Come here, little one. Do not go out in that. Get into the middle, where it is warmest.",
+          "detail": "Rabbit later tells Mouse to come into the warm middle",
+          "connectsToExpectedAnswer": "This shows Rabbit chooses to share the log and keep Mouse safe.",
+          "independentKey": "share",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "spoken_line",
+              "sceneId": "scene_03",
+              "lineIndex": 4,
+              "speaker": "RABBIT",
+              "quotedSpan": "Come here, little one. Do not go out in that. Get into the middle, where it is warmest."
+            }
+          ]
+        },
+        {
+          "supportId": "rabbit_sa_s3",
+          "supportType": "direct_quote",
+          "quotedSpan": "When each of us gives up a little space, the log somehow feels bigger, not smaller.",
+          "detail": "Rabbit realizes the log feels bigger when everyone gives up space",
+          "connectsToExpectedAnswer": "This shows Rabbit understands how sharing helps everyone.",
+          "independentKey": "understands",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "spoken_line",
+              "sceneId": "scene_03",
+              "lineIndex": 9,
+              "speaker": "RABBIT",
+              "quotedSpan": "When each of us gives up a little space, the log somehow feels bigger, not smaller."
+            }
+          ]
+        }
+      ],
+      "rubric": {
+        "points3": "Explains Rabbit's change and uses two details (wanting the log for one rabbit; later letting Mouse into the middle or noticing the log feels bigger).",
+        "points2": "Explains the change with one clear support.",
+        "points1": "Mostly copied detail with little explanation.",
+        "points0": "Unsupported or inaccurate."
+      },
+      "copiedTextCap": true,
+      "scoreBandExamples": [
+        {
+          "band": 3,
+          "response": "At first Rabbit wants the log all to herself and does not want to share. Later she lets the others stay, and they keep each other warm, so she learns that sharing helps everyone.",
+          "why": "Explains the change and uses two details (wanting it alone + sharing keeps everyone warm/safe)."
+        },
+        {
+          "band": 2,
+          "response": "Rabbit shares the log and the animals stay warm together.",
+          "why": "Shows the result with one clear support but not the change from the start."
+        },
+        {
+          "band": 1,
+          "response": "Rabbit lets the mouse come in.",
+          "why": "One partial detail with little explanation."
+        },
+        {
+          "band": 0,
+          "response": "Rabbit lives in a log in the woods.",
+          "why": "Unsupported or unrelated."
+        }
+      ],
+      "responseSpecJson": {
+        "stem": "How does Rabbit learn that sharing the log helps everyone? Use two details from the play to support your answer.",
+        "instructionText": "Write a short answer that uses two details from the passage to support your answer.",
+        "requiredSupportCount": 2,
+        "requiresTextSupport": true
+      },
+      "correctResponseJson": {
+        "expectedAnswerCore": "Rabbit first wants the log for herself. Later, when she lets everyone stay, the animals help one another stay warm and safe.",
+        "acceptableTextSupport": [
+          {
+            "supportId": "rabbit_sa_s1",
+            "supportType": "direct_quote",
+            "quotedSpan": "A perfect home for one careful rabbit, just the way I like it.",
+            "detail": "Rabbit first calls the log a perfect home for one careful rabbit",
+            "connectsToExpectedAnswer": "This shows Rabbit begins by wanting the log for herself.",
+            "independentKey": "alone",
+            "evidenceLinks": [
+              {
+                "evidenceKind": "spoken_line",
+                "sceneId": "scene_01",
+                "lineIndex": 2,
+                "speaker": "RABBIT",
+                "quotedSpan": "A perfect home for one careful rabbit, just the way I like it."
+              }
+            ]
+          },
+          {
+            "supportId": "rabbit_sa_s2",
+            "supportType": "direct_quote",
+            "quotedSpan": "Come here, little one. Do not go out in that. Get into the middle, where it is warmest.",
+            "detail": "Rabbit later tells Mouse to come into the warm middle",
+            "connectsToExpectedAnswer": "This shows Rabbit chooses to share the log and keep Mouse safe.",
+            "independentKey": "share",
+            "evidenceLinks": [
+              {
+                "evidenceKind": "spoken_line",
+                "sceneId": "scene_03",
+                "lineIndex": 4,
+                "speaker": "RABBIT",
+                "quotedSpan": "Come here, little one. Do not go out in that. Get into the middle, where it is warmest."
+              }
+            ]
+          },
+          {
+            "supportId": "rabbit_sa_s3",
+            "supportType": "direct_quote",
+            "quotedSpan": "When each of us gives up a little space, the log somehow feels bigger, not smaller.",
+            "detail": "Rabbit realizes the log feels bigger when everyone gives up space",
+            "connectsToExpectedAnswer": "This shows Rabbit understands how sharing helps everyone.",
+            "independentKey": "understands",
+            "evidenceLinks": [
+              {
+                "evidenceKind": "spoken_line",
+                "sceneId": "scene_03",
+                "lineIndex": 9,
+                "speaker": "RABBIT",
+                "quotedSpan": "When each of us gives up a little space, the log somehow feels bigger, not smaller."
+              }
+            ]
+          }
+        ]
+      },
+      "scoring": {
+        "totalPoints": 3,
+        "partialCreditRules": [
+          {
+            "points": 3,
+            "rule": "Explains Rabbit's change and uses two details (wanting the log for one rabbit; later letting Mouse into the middle or noticing the log feels bigger)."
+          },
+          {
+            "points": 2,
+            "rule": "Explains the change with one clear support."
+          },
+          {
+            "points": 1,
+            "rule": "Mostly copied detail with little explanation."
+          },
+          {
+            "points": 0,
+            "rule": "Unsupported or inaccurate."
+          }
+        ]
+      },
+      "scoringJson": {
+        "scoreStatus": "pending_human_scoring",
+        "totalPoints": 3,
+        "partialCreditRules": [
+          {
+            "points": 3,
+            "rule": "Explains Rabbit's change and uses two details (wanting the log for one rabbit; later letting Mouse into the middle or noticing the log feels bigger)."
+          },
+          {
+            "points": 2,
+            "rule": "Explains the change with one clear support."
+          },
+          {
+            "points": 1,
+            "rule": "Mostly copied detail with little explanation."
+          },
+          {
+            "points": 0,
+            "rule": "Unsupported or inaccurate."
+          }
+        ]
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "approvalEligible": false,
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "provenanceJson": {
+        "fixtureOnly": true,
+        "sourcePassageId": "pssa_stamina_psg_g3_rabbit_drama",
+        "authoredIn": "PSSA_STAMINA_ITEM_SET_COMPLETION",
+        "autoScoringClaim": false
+      }
+    }
+  ]
+}

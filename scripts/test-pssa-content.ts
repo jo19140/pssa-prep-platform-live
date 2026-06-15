@@ -8,6 +8,7 @@ import {
   buildPssaPassageQualityReport,
   hasBlockingPassageSpecificityFailure,
   hasBlockingPassageQualityFailure,
+  singleAnswerChoiceGroups,
   type McqAuditInput,
   type StructuredChoice,
 } from "./audit/pssa-audit-detectors";
@@ -38,7 +39,9 @@ import {
   verifyPssaPassageGroupMemberSnapshots,
   type PairedPassageGroupInput,
 } from "./content/lib/pssa-paired-passage-gates";
+import { projectPssaStudentItem } from "../lib/content/pssaStudentDto";
 import {
+  buildPssaDramaLineMap,
   buildPssaStaminaSectionMap,
   evaluatePssaDomainFactCheckRequired,
   evaluatePssaItemFootnoteGiveaway,
@@ -47,6 +50,7 @@ import {
   evaluatePssaStaminaGates,
   evaluatePssaTextFeatureIntegrity,
   evaluatePssaTextFeatureItemLink,
+  pssaDramaEvidenceKey,
 } from "./content/lib/pssa-stamina-gates";
 
 assertPssaItemTypeMockContract();
@@ -55,6 +59,137 @@ assertGrade3TeiContract();
 assertGrade3MatchingGridDragDropContract();
 assertGrade3ConventionsContract();
 assertGrade3ShortAnswerContract();
+
+const staminaConventionsFixture = JSON.parse(fs.readFileSync("exemplars/pssa_grade3_stamina_pilot/conventions_mc_block.json", "utf8"));
+const staminaConventionItems = staminaConventionsFixture.items as any[];
+const expectedStaminaConventions = [
+  {
+    id: "conv_01",
+    ec: "E03.D.1.1.1",
+    correctIndex: 1,
+    choices: ["quiet", "quietly", "quieter", "quietness"],
+  },
+  {
+    id: "conv_02",
+    ec: "E03.D.1.1.2",
+    correctIndex: 0,
+    choices: ["The children carried three boxes.", "The childs carried three boxs.", "The children carried three boxs.", "The childs carried three boxes."],
+  },
+  {
+    id: "conv_03",
+    ec: "E03.D.1.1.5",
+    correctIndex: 2,
+    choices: ["Yesterday we visited the farm.", "We visit the farm each week.", "Tomorrow we will visit the farm.", "We are visiting the farm right now."],
+  },
+  {
+    id: "conv_04",
+    ec: "E03.D.1.1.6",
+    correctIndex: 0,
+    choices: ["The dogs bark at the mail truck.", "The dogs barks at the mail truck.", "The dog bark at the mail truck.", "The dog barking at the mail truck."],
+  },
+  {
+    id: "conv_05",
+    ec: "E03.D.1.1.7",
+    correctIndex: 3,
+    choices: ["heaviest", "more heavy", "heavy", "heavier"],
+  },
+  {
+    id: "conv_06",
+    ec: "E03.D.1.2.1",
+    correctIndex: 1,
+    choices: ["the moon over maple street", "The Moon Over Maple Street", "The moon over Maple Street", "The Moon Over Maple street"],
+  },
+  {
+    id: "conv_07",
+    ec: "E03.D.1.2.2",
+    correctIndex: 2,
+    choices: ["Mail the letter to 18 Pine Street Erie, Pennsylvania.", "Mail the letter to 18 Pine Street, Erie Pennsylvania.", "Mail the letter to 18 Pine Street, Erie, Pennsylvania.", "Mail the letter to, 18 Pine Street Erie Pennsylvania."],
+  },
+  {
+    id: "conv_08",
+    ec: "E03.D.1.2.3",
+    correctIndex: 3,
+    choices: ["Maria said, I found my missing shoes.", "Maria said, \"I found my missing shoes.", "\"Maria said,\" I found my missing shoes.", "Maria said, \"I found my missing shoes.\""],
+  },
+  {
+    id: "conv_09",
+    ec: "E03.D.1.2.5",
+    correctIndex: 0,
+    choices: ["The weather was sunny on Friday.", "The weathr was sunny on Friday.", "The weather was suny on Friday.", "The weathr was suny on Friday."],
+  },
+];
+assert.equal(staminaConventionItems.length, 9, "stamina conventions fixture must contain exactly 9 standalone MCQs");
+assert.deepEqual(
+  staminaConventionItems.map((item) => ({
+    id: item.itemId ?? item.id,
+    ec: item.eligibleContent,
+    correctIndex: item.correctIndex,
+    choices: item.answerChoicesJson,
+  })),
+  expectedStaminaConventions,
+  "stamina conventions MCQ text, option order, EC, and correctIndex must match the signed-off block",
+);
+const staminaConventionAnswerCounts = [0, 0, 0, 0];
+for (const item of staminaConventionItems) {
+  staminaConventionAnswerCounts[item.correctIndex] += 1;
+  assert.equal(item.passageId, null, `${item.itemId} must be standalone`);
+  assert.equal(item.interactionType, "MCQ", `${item.itemId} must be MCQ`);
+  assert.equal(item.itemType, "MCQ", `${item.itemId} must carry MCQ itemType`);
+  assert.equal(item.pointValue, 1, `${item.itemId} must be one point`);
+  assert.equal(item.reviewStatus, "PENDING", `${item.itemId} must stay fixture-pending`);
+  assert.equal(item.itemStatus, "candidate", `${item.itemId} must stay candidate-only`);
+  assert.equal(item.reportingCategory, "D", `${item.itemId} must be reporting category D`);
+  assert.equal(item.structuredChoicesJson.length, 4, `${item.itemId} must expose four structured choices`);
+  assert.deepEqual(item.structuredChoicesJson.map((choice: any) => choice.text), item.answerChoicesJson, `${item.itemId} structured choices must mirror answerChoicesJson`);
+  assert.equal(item.structuredChoicesJson.filter((choice: any) => choice.isCorrect).length, 1, `${item.itemId} must have exactly one correct structured choice`);
+  assert.equal(item.structuredChoicesJson[item.correctIndex].isCorrect, true, `${item.itemId} correctIndex must point to the correct choice`);
+  for (const [index, choice] of item.structuredChoicesJson.entries()) {
+    if (index === item.correctIndex) {
+      assert.equal(choice.distractorRole, null, `${item.itemId} correct choice must not carry a distractorRole`);
+    } else {
+      assert.equal(typeof choice.distractorRole, "string", `${item.itemId} wrong choice ${index} must carry distractorRole`);
+      assert.equal(String(choice.rationale ?? "").trim().length > 0, true, `${item.itemId} wrong choice ${index} must carry rationale`);
+    }
+  }
+  for (const [index, choice] of item.choices.entries()) {
+    assert.equal(choice.isCorrect, index === item.correctIndex, `${item.itemId} choices[] correctness must mirror correctIndex`);
+    if (index === item.correctIndex) {
+      assert.equal(choice.distractorRole, null, `${item.itemId} correct choices[] entry must not carry a distractorRole`);
+    } else {
+      assert.equal(typeof choice.distractorRole, "string", `${item.itemId} wrong choices[] entry ${index} must carry distractorRole`);
+      assert.equal(String(choice.rationale ?? "").trim().length > 0, true, `${item.itemId} wrong choices[] entry ${index} must carry rationale`);
+    }
+  }
+}
+assert.deepEqual(staminaConventionAnswerCounts, [3, 2, 2, 2], "stamina conventions answer positions must be A=3/B=2/C=2/D=2");
+assert.equal(Math.max(...staminaConventionAnswerCounts) / staminaConventionItems.length <= 0.4, true, "standalone conventions block must not be dominated by one answer position");
+assert.equal(buildMcqPassageSpecificityReport(staminaConventionItems, []).length, 0, "standalone conventions MCQs must be excluded from passage-specificity concreteness");
+for (const itemId of ["conv_06", "conv_07", "conv_08"]) {
+  assert.equal(evaluatePssaItemIntraChoiceDuplicate(staminaConventionItems.find((item) => (item.itemId ?? item.id) === itemId)), "PASS", `${itemId} must preserve case/punctuation distinctions in duplicate detection`);
+}
+for (const itemId of ["conv_01", "conv_02", "conv_03", "conv_04", "conv_05", "conv_09"]) {
+  assert.equal(evaluatePssaItemIntraChoiceDuplicate(staminaConventionItems.find((item) => (item.itemId ?? item.id) === itemId)), "PASS", `${itemId} must remain clean under the normal duplicate detector path`);
+}
+assert.equal(evaluatePssaItemIntraChoiceDuplicate({
+  interactionType: "MCQ",
+  eligibleContent: "E03.A-K.1.1.1",
+  answerChoicesJson: ["The Dog ran home.", "The Dog ran home.", "The cat slept.", "The bird sang."],
+}), "FAIL", "reading MCQ exact duplicate choices must still fail");
+assert.equal(evaluatePssaItemIntraChoiceDuplicate({
+  interactionType: "MCQ",
+  eligibleContent: "E03.A-K.1.1.1",
+  answerChoicesJson: ["The Dog ran home.", "the dog ran home.", "The cat slept.", "The bird sang."],
+}), "FAIL", "reading MCQ case-only duplicate choices must still fail");
+assert.equal(evaluatePssaItemIntraChoiceDuplicate({
+  interactionType: "MCQ",
+  eligibleContent: "E03.D.1.2.5",
+  answerChoicesJson: ["The Weather was sunny.", "The weather was sunny.", "The weathr was sunny.", "The wether was sunny."],
+}), "FAIL", "spelling conventions MCQ case-only duplicate choices must still fail");
+assert.equal(evaluatePssaItemIntraChoiceDuplicate({
+  interactionType: "MCQ",
+  eligibleContent: "E03.D.1.2.1",
+  answerChoicesJson: ["The Moon Over Maple Street", "The Moon Over Maple Street", "The moon over Maple Street", "The Moon Over Maple street"],
+}), "FAIL", "raw-mode capitalization MCQ byte-identical duplicate choices must still fail");
 
 function mcqFixture(id: string, correctIndex: number, choices: string[]) {
   return { id, itemType: "MCQ", correctIndex, answerChoicesJson: choices };
@@ -231,6 +366,86 @@ assert.equal(buildMcqPassageSpecificityReport([readingItem({
     ? { ...choice, text: "The quiet library display helped visitors compare several drawings.", evidenceLinks: [{ evidenceKind: "paragraph_synthesis", sectionId: "paragraph_02" }] }
     : choice),
 })], [passage]).some((row) => row.ruleId === "PSSA_MCQ_PASSAGE_SPECIFIC_CHOICES" && row.result === "FAIL"), true, "synthesis skip must be driven by correct-choice evidence only");
+
+const literalDetailFailureRows = buildMcqPassageSpecificityReport([readingItem({
+  id: "literal-detail-generic-choices",
+  answerChoicesJson: [
+    "The quiet library display helped visitors compare several drawings.",
+    "The bright kitchen timer helped cooks plan several lunches.",
+    "The small garden marker helped neighbors label several flowers.",
+    "The local music poster helped families choose several concerts.",
+  ],
+  structuredChoicesJson: null,
+  comprehensionKind: "literal_detail",
+})], [passage]);
+assert.deepEqual(
+  literalDetailFailureRows
+    .filter((row) => row.ruleId === "PSSA_MCQ_PASSAGE_SPECIFIC_CHOICES")
+    .map((row) => [row.result, row.severity, row.evidence, row.notes]),
+  [["FAIL", "BLOCKER", "concreteChoices=0/4", "Each choice needs at least two passage-specific content words, and at least three choices need concrete passage details."]],
+  "literal-detail generic-choice MCQs must still fail the byte-identical concreteness rule",
+);
+
+const inferenceWithoutRationaleRows = buildMcqPassageSpecificityReport([readingItem({
+  id: "inference-without-rationale",
+  answerChoicesJson: [
+    "The quiet library display helped visitors compare several drawings.",
+    "The bright kitchen timer helped cooks plan several lunches.",
+    "The small garden marker helped neighbors label several flowers.",
+    "The local music poster helped families choose several concerts.",
+  ],
+  structuredChoicesJson: null,
+  comprehensionKind: "inference",
+  comprehensionKindRationale: " ",
+})], [passage]);
+assert.equal(
+  inferenceWithoutRationaleRows.some((row) => row.ruleId === "PSSA_MCQ_COMPREHENSION_KIND_RATIONALE_REQUIRED" && row.result === "FAIL" && row.severity === "BLOCKER"),
+  true,
+  "inference/interpretation labels cannot skip without a non-empty rationale",
+);
+assert.equal(
+  inferenceWithoutRationaleRows.some((row) => row.ruleId === "PSSA_MCQ_PASSAGE_SPECIFIC_CHOICES" && row.result === "SKIP"),
+  false,
+  "missing rationale must prevent the inference/interpretation skip",
+);
+
+const mislabeledInferenceRows = buildMcqPassageSpecificityReport([readingItem({
+  id: "literal-mislabeled-inference-visible",
+  answerChoicesJson: [
+    "The quiet library display helped visitors compare several drawings.",
+    "The bright kitchen timer helped cooks plan several lunches.",
+    "The small garden marker helped neighbors label several flowers.",
+    "The local music poster helped families choose several concerts.",
+  ],
+  structuredChoicesJson: null,
+  comprehensionKind: "inference",
+  comprehensionKindRationale: "Reviewer claims this is inferential; visible skip row makes that judgment auditable.",
+})], [passage]);
+assert.deepEqual(
+  mislabeledInferenceRows
+    .filter((row) => row.ruleId === "PSSA_MCQ_PASSAGE_SPECIFIC_CHOICES")
+    .map((row) => [row.result, row.evidence]),
+  [["SKIP", "SKIP_INFERENCE_INTERPRETATION:inference"]],
+  "mislabeled inference items with rationale must be visibly skipped rather than silently clean",
+);
+assert.equal(
+  mislabeledInferenceRows.some((row) => row.ruleId === "PSSA_MCQ_CHOICE_EVIDENCE_LINKS_REQUIRED" && row.result === "FAIL"),
+  true,
+  "the visible inference skip must not bypass the other MCQ evidence blockers",
+);
+
+assert.equal(buildMcqPassageSpecificityReport([readingItem({
+  id: "synthesis-label-does-not-skip",
+  answerChoicesJson: [
+    "The quiet library display helped visitors compare several drawings.",
+    "The bright kitchen timer helped cooks plan several lunches.",
+    "The small garden marker helped neighbors label several flowers.",
+    "The local music poster helped families choose several concerts.",
+  ],
+  structuredChoicesJson: null,
+  comprehensionKind: "synthesis",
+  comprehensionKindRationale: "This label alone must not control the concreteness skip.",
+})], [passage]).some((row) => row.ruleId === "PSSA_MCQ_PASSAGE_SPECIFIC_CHOICES" && row.result === "FAIL"), true, "synthesis labels without synthesis evidence must run the normal concreteness gate");
 
 assert.equal(buildMcqPassageSpecificityReport([readingItem({
   id: "missing-evidence",
@@ -520,7 +735,11 @@ const syrupPassage = staminaFixture.passages[0];
 const syrupItems = staminaFixture.items;
 const syrupSpecificityRows = buildMcqPassageSpecificityReport(syrupItems, [syrupPassage]);
 const syrupSpecificityFailures = syrupSpecificityRows.filter((row) => row.result === "FAIL");
-assert.deepEqual(syrupSpecificityFailures, [], "stamina syrup fixture must pass existing MCQ specificity detectors");
+assert.deepEqual(
+  syrupSpecificityFailures.map((row) => [row.itemId, row.ruleId, row.evidence]),
+  [],
+  "syrup fixture must pass existing MCQ specificity detectors after the syrup_04 choice-B wording fix",
+);
 assert.deepEqual(
   syrupSpecificityRows
     .filter((row) => row.itemId === "pssa_stamina_item_g3_syrup_02" && row.ruleId === "PSSA_MCQ_PASSAGE_SPECIFIC_CHOICES")
@@ -584,15 +803,17 @@ assert.deepEqual(
 );
 assert.deepEqual(
   boatSpecificityRows
+    .filter((row) => row.itemId === "pssa_stamina_item_g3_boat_05" && row.ruleId === "PSSA_MCQ_PASSAGE_SPECIFIC_CHOICES")
+    .map((row) => [row.result, row.evidence]),
+  [["SKIP", "SKIP_INFERENCE_INTERPRETATION:inference"]],
+  "concrete literary inference MCQs must visibly skip choice-concreteness only with explicit comprehensionKind rationale",
+);
+assert.deepEqual(
+  boatSpecificityRows
     .filter((row) => row.itemId === "pssa_stamina_item_g3_boat_04" && row.ruleId === "PSSA_MCQ_PASSAGE_SPECIFIC_CHOICES")
     .map((row) => [row.result, row.evidence]),
   [["SKIP", "vocabulary-in-context item"]],
   "V-family figurative-language MCQs must remain scoped to vocab gates",
-);
-assert.equal(
-  boatSpecificityRows.some((row) => row.itemId === "pssa_stamina_item_g3_boat_05" && row.ruleId === "PSSA_MCQ_PASSAGE_SPECIFIC_CHOICES" && row.result === "FAIL"),
-  false,
-  "concrete literary detail MCQs must still run through passage-specificity rather than being skipped",
 );
 assert.deepEqual(boatSpecificityRows.filter((row) => row.result === "FAIL"), [], "boat literary fixture must pass existing MCQ specificity detectors");
 assert.equal(
@@ -808,14 +1029,524 @@ assert.equal(evaluatePssaSectionLookbackBalance({
     evidenceLinks: [{ sectionId: "waiting_for_the_right_weather", evidenceKind: "section_synthesis" }],
   }],
 }]), "FAIL", "released_length itemsets citing only one section must fail lookback balance");
+const rabbitFixture = JSON.parse(fs.readFileSync("exemplars/pssa_grade3_stamina_pilot/rabbit_drama_released_length.json", "utf8"));
+const rabbitPassage = rabbitFixture.passages[0];
+const rabbitItems = rabbitFixture.items;
+assert.equal(rabbitPassage.title, "Room for One More", "drama fixture must encode the signed-off Room for One More passage");
+assert.equal(rabbitPassage.wordCount >= 1000 && rabbitPassage.wordCount <= 1050, true, "signed-off drama fixture must be released-length, not the short substitute");
+assert.equal(rabbitPassage.text.includes("HEDGEHOG — slow, polite, and covered in prickles"), true, "signed-off drama cast must include Hedgehog");
+assert.equal(rabbitPassage.text.includes("SETTING: A hollow log at the edge of the woods."), true, "signed-off drama setting must be the hollow log in an autumn storm");
+assert.equal(/\bMOLE\b/.test(rabbitPassage.text), false, "wrong substitute cast member Mole must not appear");
+assert.equal(/snowy burrow|snow taps|stacked the carrots/i.test(rabbitPassage.text), false, "wrong snowy-burrow substitute markers must not appear");
+const rabbitSections = buildPssaStaminaSectionMap(rabbitPassage);
+assert.deepEqual(
+  rabbitSections.map((section) => section.sectionId),
+  ["front_matter", "scene_01", "scene_02", "scene_03"],
+  "drama scene map must be marker-derived with cast/setting front matter outside scenes",
+);
+assert.deepEqual(
+  rabbitSections.filter((section) => section.sectionId !== "front_matter").map((section) => section.sectionId),
+  ["scene_01", "scene_02", "scene_03"],
+  "drama lookback sections must be explicit scene markers only",
+);
+const rabbitLineMap = buildPssaDramaLineMap(rabbitPassage);
+assert.equal(rabbitLineMap.find((line) => line.sceneId === "scene_01" && line.lineIndex === 4)?.speaker, "SQUIRREL");
+assert.equal(rabbitLineMap.find((line) => line.sceneId === "scene_03" && line.lineIndex === 4)?.speaker, "RABBIT");
+assert.notEqual(
+  pssaDramaEvidenceKey({ evidenceKind: "spoken_line", sceneId: "scene_01", lineIndex: 4, speaker: "SQUIRREL" }),
+  pssaDramaEvidenceKey({ evidenceKind: "spoken_line", sceneId: "scene_03", lineIndex: 4, speaker: "RABBIT" }),
+  "scene-scoped line keys must not collide across real Scene 1 line 4 and Scene 3 line 4",
+);
+assert.equal(
+  pssaDramaEvidenceKey({ evidenceKind: "stage_direction", sceneId: "scene_03", lineIndex: 3 }),
+  "scene_03:3",
+  "stage directions use the same sceneId:lineIndex address space without speaker",
+);
+assert.equal(
+  rabbitItems.find((item: any) => item.id === "pssa_stamina_item_g3_rabbit_01").structuredChoicesJson[0].evidenceLinks.every((link: any) =>
+    (link.evidenceKind === "whole_play_synthesis" && !("quotedSpan" in link) && !("lineIndex" in link) && !("sceneId" in link))
+    || (link.evidenceKind === "scene_synthesis" && link.sceneId && !("quotedSpan" in link) && !("lineIndex" in link))
+  ),
+  true,
+  "drama theme synthesis uses whole_play_synthesis plus explicit scene_synthesis links without fabricated spans",
+);
+const rabbitSpecificityRows = buildMcqPassageSpecificityReport(rabbitItems, [rabbitPassage]);
+assert.deepEqual(
+  rabbitSpecificityRows
+    .filter((row) => row.itemId === "pssa_stamina_item_g3_rabbit_01" && row.ruleId === "PSSA_MCQ_PASSAGE_SPECIFIC_CHOICES")
+    .map((row) => [row.result, row.evidence]),
+  [["SKIP", "synthesis evidence item"]],
+  "drama theme MCQs skip concreteness only through correct-choice whole_play/scene synthesis evidence",
+);
+assert.deepEqual(
+  rabbitSpecificityRows
+    .filter((row) => row.itemId === "pssa_stamina_item_g3_rabbit_02" && row.ruleId === "PSSA_MCQ_PASSAGE_SPECIFIC_CHOICES")
+    .map((row) => [row.result, row.evidence]),
+  [["SKIP", "synthesis evidence item"]],
+  "drama character-change MCQs skip concreteness only through explicit correct-choice scene_synthesis evidence",
+);
+assert.deepEqual(
+  rabbitSpecificityRows
+    .filter((row) => row.itemId === "pssa_stamina_item_g3_rabbit_05" && row.ruleId === "PSSA_MCQ_PASSAGE_SPECIFIC_CHOICES")
+    .map((row) => [row.result, row.evidence]),
+  [["SKIP", "vocabulary-in-context item"]],
+  "drama V-family vocab items retain the anchored vocab skip",
+);
+assert.deepEqual(
+  rabbitSpecificityRows
+    .filter((row) => ["pssa_stamina_item_g3_rabbit_03", "pssa_stamina_item_g3_rabbit_04", "pssa_stamina_item_g3_rabbit_06"].includes(row.itemId) && row.ruleId === "PSSA_MCQ_PASSAGE_SPECIFIC_CHOICES")
+    .map((row) => [row.itemId, row.result, row.evidence]),
+  [
+    ["pssa_stamina_item_g3_rabbit_03", "SKIP", "SKIP_INFERENCE_INTERPRETATION:inference"],
+    ["pssa_stamina_item_g3_rabbit_04", "SKIP", "SKIP_INFERENCE_INTERPRETATION:interpretation"],
+    ["pssa_stamina_item_g3_rabbit_06", "SKIP", "SKIP_INFERENCE_INTERPRETATION:inference"],
+  ],
+  "drama inference/interpretation MCQs visibly skip choice-concreteness only with explicit comprehensionKind rationales",
+);
+assert.equal(
+  rabbitSpecificityRows.some((row) => row.itemId === "pssa_stamina_item_g3_rabbit_05" && row.ruleId === "PSSA_MCQ_EVIDENCE_SPAN_REUSED" && row.result === "FAIL"),
+  false,
+  "drama vocab distractors should not reuse one evidence span for every choice",
+);
+const rabbitStaminaRows = evaluatePssaStaminaGates(rabbitPassage, rabbitItems);
+assert.equal(rabbitStaminaRows.find((row) => row.gateId === "PSSA_DOMAIN_FACT_CHECK_REQUIRED")?.status, "SKIP", "drama fiction must not require fact-check notes unless explicitly flagged");
+assert.equal(rabbitStaminaRows.find((row) => row.gateId === "PSSA_TEXT_FEATURE_INTEGRITY")?.status, "PASS", "drama feature metadata must use cast_list/scene_marker/stage_direction records");
+assert.equal(rabbitStaminaRows.find((row) => row.gateId === "PSSA_TEXT_FEATURE_ITEM_LINK")?.status, "SKIP", "drama features do not require item linkage");
+assert.equal(rabbitStaminaRows.find((row) => row.gateId === "PSSA_PASSAGE_STAMINA_METADATA")?.status, "PASS", "drama released-length metadata requires genre, word count, band, and feature metadata");
+assert.equal(rabbitStaminaRows.find((row) => row.gateId === "PSSA_SECTION_LOOKBACK_BALANCE")?.status, "PASS", "drama lookback balance must be satisfied by explicit scene_synthesis/spoken/stage evidence across scenes");
+assert.deepEqual(rabbitStaminaRows.filter((row) => row.status === "FAIL"), [], `rabbit drama fixture must not fail stamina gates: ${JSON.stringify(rabbitStaminaRows)}`);
+assert.equal(evaluatePssaTextFeatureIntegrity({
+  ...rabbitPassage,
+  textFeaturesJson: [{ type: "dialogue", featureText: "RABBIT:" }],
+}), "FAIL", "dialogue is intentionally not a drama text feature type");
 assert.equal(evaluatePssaSectionLookbackBalance({
-  id: "drama-lookback-deferred",
-  text: "Scene one.\n\nScene two.",
-  staminaBand: "released_length",
-  genre: "drama",
-}, []), "SKIP", "drama lookback balance is explicitly deferred");
+  ...rabbitPassage,
+  id: "drama-whole-play-only",
+}, [{
+  id: "whole-play-only-item",
+  passageId: "drama-whole-play-only",
+  structuredChoicesJson: [{
+    text: "theme",
+    evidenceLinks: [{ evidenceKind: "whole_play_synthesis" }],
+  }],
+}]), "FAIL", "whole_play_synthesis alone must not satisfy scene lookback balance");
+
+const staminaCompletionSpecs = [
+  {
+    label: "maple",
+    passage: syrupPassage,
+    items: syrupItems,
+    ebsrId: "pssa_stamina_item_g3_syrup_ebsr_01",
+    saId: "pssa_stamina_item_g3_syrup_sa_01",
+    correctPartA: 2,
+    correctPartB: [0, 2],
+  },
+  {
+    label: "boat",
+    passage: boatPassage,
+    items: boatItems,
+    ebsrId: "pssa_stamina_item_g3_boat_ebsr_01",
+    saId: "pssa_stamina_item_g3_boat_sa_01",
+    correctPartA: 1,
+    correctPartB: [1, 3],
+  },
+  {
+    label: "rabbit",
+    passage: rabbitPassage,
+    items: rabbitItems,
+    ebsrId: "pssa_stamina_item_g3_rabbit_ebsr_01",
+    saId: "pssa_stamina_item_g3_rabbit_sa_01",
+    correctPartA: 0,
+    correctPartB: [0, 2],
+  },
+];
+
+for (const spec of staminaCompletionSpecs) {
+  const ebsr = spec.items.find((item: any) => (item.itemId ?? item.id) === spec.ebsrId);
+  assert(ebsr, `${spec.label} completion EBSR must exist`);
+  assert.equal(ebsr.interactionType, "EBSR");
+  assert.deepEqual(ebsr.correctResponseJson, { partA: { correctIndex: spec.correctPartA }, partB: { correctIndices: spec.correctPartB } }, `${spec.label} EBSR must use PR-C partAIndex/partBIndices scoring source shape`);
+  assert.equal(ebsr.responseSpecJson.partB.requiredSelectionCount, 2, `${spec.label} EBSR Part B requires two selections`);
+  assert.equal(ebsr.scoringJson.totalPoints, 2, `${spec.label} EBSR is two points`);
+  for (const choice of ebsr.partB.choices) {
+    assert.equal(spec.passage.text.includes(choice.quotedSpan), true, `${spec.label} EBSR Part B span must be verbatim: ${choice.quotedSpan}`);
+    for (const link of choice.evidenceLinks ?? []) {
+      assert.equal(spec.passage.text.includes(link.quotedSpan), true, `${spec.label} EBSR evidence link span must be verbatim: ${link.quotedSpan}`);
+    }
+  }
+  projectPssaStudentItem(ebsr);
+
+  const sa = spec.items.find((item: any) => (item.itemId ?? item.id) === spec.saId);
+  assert(sa, `${spec.label} completion SHORT_ANSWER must exist`);
+  assert.equal(sa.interactionType, "SHORT_ANSWER");
+  assert.equal(sa.scoringJson.scoreStatus, "pending_human_scoring", `${spec.label} SHORT_ANSWER must stay pending human scoring`);
+  assert.equal(sa.scoringJson.totalPoints, 3, `${spec.label} SHORT_ANSWER is three points`);
+  assert.equal(evaluatePssaShortAnswerBandsNonempty(sa), "PASS", `${spec.label} SHORT_ANSWER must have non-empty score bands`);
+  for (const support of sa.acceptableTextSupport ?? []) {
+    assert.equal(spec.passage.text.includes(support.quotedSpan), true, `${spec.label} SHORT_ANSWER support span must be verbatim: ${support.quotedSpan}`);
+  }
+  projectPssaStudentItem(sa);
+}
+
+const owlCompletionEbsr = owlItems.find((item: any) => (item.itemId ?? item.id) === "pssa_stamina_item_g3_owls_ebsr_01");
+assert(owlCompletionEbsr, "owl cross-text completion EBSR must exist");
+assert.equal(owlCompletionEbsr.interactionType, "EBSR");
+assert.equal(owlCompletionEbsr.isCrossText, true, "owl EBSR must be marked cross-text");
+assert.equal(owlCompletionEbsr.passageGroupId, owlGroup.id, "owl EBSR must point at the encoded paired group");
+assert.deepEqual(owlCompletionEbsr.requiredEvidenceSlotsJson, ["passage_1", "passage_2"], "owl EBSR must require one support from each passage slot");
+assert.deepEqual(owlCompletionEbsr.correctResponseJson, { partA: { correctIndex: 3 }, partB: { correctIndices: [0, 2] } }, "owl EBSR must use the expected scoring source shape");
+const owlPassagesBySlot = new Map(owlGroup.members.map((member) => [member.slot, member.passage]));
+for (const choice of owlCompletionEbsr.partB.choices) {
+  const link = choice.evidenceLinks?.[0];
+  assert(link?.passageSlot, `owl EBSR Part B span must carry passageSlot: ${choice.quotedSpan}`);
+  const linkedPassage = owlPassagesBySlot.get(link.passageSlot);
+  assert(linkedPassage, `owl EBSR passageSlot must exist in encoded group: ${link.passageSlot}`);
+  assert.equal(linkedPassage.text.includes(choice.quotedSpan), true, `owl EBSR Part B span must be verbatim in encoded ${link.passageSlot}: ${choice.quotedSpan}`);
+  assert.equal(linkedPassage.text.includes(link.quotedSpan), true, `owl EBSR evidence link span must be verbatim in encoded ${link.passageSlot}: ${link.quotedSpan}`);
+}
+assert.equal(JSON.stringify(owlCompletionEbsr).includes("Okafor"), false, "owl EBSR must not use stale Okafor draft wording");
+assert.equal(JSON.stringify(owlCompletionEbsr).includes("thousand mice"), false, "owl EBSR must not use stale thousand-mice draft wording");
+projectPssaStudentItem(owlCompletionEbsr);
+
+const staminaShortAnswers = [
+  { label: "maple", passage: syrupPassage, item: syrupItems.find((item: any) => (item.itemId ?? item.id) === "pssa_stamina_item_g3_syrup_sa_01"), expectedEc: "E03.B-K.1.1.3" },
+  { label: "boat", passage: boatPassage, item: boatItems.find((item: any) => (item.itemId ?? item.id) === "pssa_stamina_item_g3_boat_sa_01"), expectedEc: "E03.A-K.1.1.3" },
+  { label: "owl", passage: undefined, item: owlItems.find((item: any) => (item.itemId ?? item.id) === "pssa_stamina_item_g3_owls_06"), expectedEc: "E03.B-C.3.1.2" },
+  { label: "rabbit", passage: rabbitPassage, item: rabbitItems.find((item: any) => (item.itemId ?? item.id) === "pssa_stamina_item_g3_rabbit_sa_01"), expectedEc: "E03.A-K.1.1.3" },
+];
+for (const spec of staminaShortAnswers) {
+  assert(spec.item, `${spec.label} stamina SHORT_ANSWER must exist`);
+  assert.equal(spec.item.interactionType, "SHORT_ANSWER", `${spec.label} item must remain SHORT_ANSWER`);
+  assert.equal(spec.item.studentFacingPrompt, spec.item.stem, `${spec.label} SHORT_ANSWER must carry matching studentFacingPrompt and stem`);
+  assert.equal(String(spec.item.studentFacingPrompt ?? "").trim().length > 0, true, `${spec.label} SHORT_ANSWER prompt must be non-empty`);
+  assert.equal(spec.item.eligibleContent, spec.expectedEc, `${spec.label} SHORT_ANSWER EC must match the normalized metadata`);
+  assert.deepEqual(spec.item.scoreBandExamples.map((row: any) => row.band), [3, 2, 1, 0], `${spec.label} SHORT_ANSWER must carry foundation-style 3/2/1/0 scoreBandExamples`);
+  assert.equal(evaluatePssaShortAnswerBandsNonempty(spec.item), "PASS", `${spec.label} SHORT_ANSWER score bands must be non-empty`);
+  assert.equal(spec.item.scoringJson.scoreStatus, "pending_human_scoring", `${spec.label} SHORT_ANSWER must stay pending human scoring`);
+  assert.equal((projectPssaStudentItem(spec.item).responseSpec as { stem: string }).stem, spec.item.stem, `${spec.label} SHORT_ANSWER student DTO must read the non-empty stem`);
+}
+assert.equal(
+  buildItemEcSkillMatchReport([staminaShortAnswers[0].item], [syrupPassage], ecCatalog).some((row) => row.skillMatchResult === "FAIL"),
+  false,
+  "maple process SHORT_ANSWER retagged to E03.B-K.1.1.3 must pass EC-skill-match",
+);
+const staminaReviewerDraft = fs.readFileSync("reports/pssa_stamina_item_set_completion_reviewer_draft.md", "utf8");
+assert.equal(staminaReviewerDraft.includes("### pssa_stamina_item_g3_owls_06"), true, "reviewer draft must include the owl SHORT_ANSWER item");
+assert.equal(staminaReviewerDraft.includes("Prompt: Use details from both passages to explain why owls can be helpful hunters."), true, "reviewer draft must render the owl SHORT_ANSWER prompt");
+assert.equal(/\*\*\*\*/.test(staminaReviewerDraft), false, "reviewer draft must not contain blank **** prompt placeholders");
+for (const band of [3, 2, 1, 0]) {
+  assert.equal(staminaReviewerDraft.includes(`- ${band}:`), true, `reviewer draft must render score band ${band}`);
+}
+
+type BatteryStatus = "PASS" | "FAIL" | "SKIP";
+type BatteryRow = {
+  itemId: string;
+  interactionType: string;
+  gateId: string;
+  status: BatteryStatus;
+  detail: string;
+  enforced?: boolean;
+  reportOnly?: boolean;
+};
+
+function staminaItemId(item: any) {
+  return String(item.itemId ?? item.id ?? "");
+}
+
+function staminaInteractionType(item: any) {
+  return String(item.interactionType ?? item.itemType ?? "");
+}
+
+function staminaPassageIds(item: any) {
+  const ids = [
+    item.passageId,
+    ...(Array.isArray(item.passageIds) ? item.passageIds : []),
+    ...(Array.isArray(item.passageLinks) ? item.passageLinks.map((link: any) => link.passageId) : []),
+  ].filter(Boolean).map(String);
+  return [...new Set(ids)];
+}
+
+function reportRow(item: any, gateId: string, status: BatteryStatus, detail: string, options: { enforced?: boolean; reportOnly?: boolean } = {}): BatteryRow {
+  return {
+    itemId: staminaItemId(item),
+    interactionType: staminaInteractionType(item),
+    gateId,
+    status,
+    detail,
+    ...options,
+  };
+}
+
+function buildAnswerPositionRow(items: any[], label: string) {
+  const counts = [0, 0, 0, 0];
+  for (const item of items) if (typeof item.correctIndex === "number") counts[item.correctIndex] += 1;
+  const maxShare = Math.max(...counts) / Math.max(items.length, 1);
+  return {
+    label,
+    itemCount: items.length,
+    counts,
+    maxShare,
+    status: maxShare <= 0.4 ? "PASS" as const : "FAIL" as const,
+    detail: `A:${counts[0]} B:${counts[1]} C:${counts[2]} D:${counts[3]} maxShare=${maxShare.toFixed(4)}`,
+  };
+}
+
+function firstPassageFor(item: any, passagesById: Map<string, any>) {
+  return passagesById.get(staminaPassageIds(item)[0]);
+}
+
+function buildStaminaContentQualityBatteryReport() {
+  const passageGroups = [owlGroup];
+  const passages = [syrupPassage, boatPassage, rabbitPassage, ...owlGroup.members.map((member) => member.passage)];
+  const passagesById = new Map(passages.map((passage: any) => [passage.id, passage]));
+  const readingItems = [...syrupItems, ...boatItems, ...owlItems, ...rabbitItems];
+  const allItems = [...readingItems, ...staminaConventionItems];
+  const mcqItems = allItems.filter((item) => staminaInteractionType(item) === "MCQ");
+  const ebsrItems = allItems.filter((item) => staminaInteractionType(item) === "EBSR");
+  const shortAnswerItems = allItems.filter((item) => staminaInteractionType(item) === "SHORT_ANSWER");
+
+  assert.equal(allItems.length, 37, "stamina diagnostic battery must cover the current encoded 37-item packet");
+  assert.equal(mcqItems.length, 29, "stamina packet must include 20 reading MCQs plus 9 standalone conventions MCQs");
+  assert.equal(ebsrItems.length, 4, "stamina packet must include 4 EBSR items");
+  assert.equal(shortAnswerItems.length, 4, "stamina packet must include 4 SHORT_ANSWER items");
+
+  const rows: BatteryRow[] = [];
+  const overlap = evaluatePssaPassageMultipointEvidenceOverlap(readingItems, passages);
+  for (const item of allItems) {
+    const passage = firstPassageFor(item, passagesById);
+    rows.push(reportRow(item, "PSSA_ITEM_INTRA_CHOICE_DUPLICATE", evaluatePssaItemIntraChoiceDuplicate(item), "foundation evaluator"));
+    rows.push(reportRow(item, "PSSA_VOCAB_KEY_CONSTRUCT", evaluatePssaVocabKeyConstruct(item, passage), "foundation evaluator"));
+    rows.push(reportRow(item, "PSSA_SA_BANDS_NONEMPTY", evaluatePssaShortAnswerBandsNonempty(item), "foundation evaluator"));
+    rows.push(reportRow(item, "PSSA_ITEM_EC_GENRE_MATCH", evaluatePssaItemEcGenreMatch(item, passage), "foundation evaluator"));
+    rows.push(reportRow(item, "PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP", overlap[staminaItemId(item)] ?? "PASS", "foundation evaluator"));
+  }
+
+  const passageQualityRows = buildPssaPassageQualityReport(passages);
+  const passageSpecificityRows = buildMcqPassageSpecificityReport(readingItems as McqAuditInput[], passages);
+  const passageSpecificityRowsByItem = new Map<string, typeof passageSpecificityRows>();
+  for (const row of passageSpecificityRows) {
+    if (!passageSpecificityRowsByItem.has(row.itemId)) passageSpecificityRowsByItem.set(row.itemId, []);
+    passageSpecificityRowsByItem.get(row.itemId)?.push(row);
+  }
+  for (const item of mcqItems) {
+    const itemRows = passageSpecificityRowsByItem.get(staminaItemId(item)) ?? [];
+    if (itemRows.length) {
+      const failed = itemRows.some((row) => row.result === "FAIL" && row.severity === "BLOCKER");
+      rows.push(reportRow(item, "PSSA_MCQ_PASSAGE_SPECIFICITY", failed ? "FAIL" : "PASS", `${itemRows.length} detector rows; failures=${itemRows.filter((row) => row.result === "FAIL").length}`));
+    } else {
+      rows.push(reportRow(item, "PSSA_MCQ_PASSAGE_SPECIFICITY", "SKIP", "not passage-linked reading MCQ (standalone conventions or paired group variant)"));
+    }
+  }
+
+  const skillRows = buildItemEcSkillMatchReport(readingItems as McqAuditInput[], passages, ecCatalog);
+  const skillRowsByItem = new Map(skillRows.map((row) => [row.itemId, row]));
+  for (const item of mcqItems) {
+    const skill = skillRowsByItem.get(staminaItemId(item));
+    rows.push(reportRow(
+      item,
+      "PSSA_ITEM_EC_SKILL_MATCH",
+      skill ? (skill.skillMatchResult === "FAIL" ? "FAIL" : "PASS") : "SKIP",
+      skill ? `${skill.skillMatchResult}: ${skill.notes}` : "not passage-linked reading MCQ",
+    ));
+  }
+
+  const singleAnswerGroups = singleAnswerChoiceGroups(allItems, { includeEbsrPartA: true });
+  const singleAnswerById = new Map(singleAnswerGroups.map((group) => [String(group.itemId), group]));
+  const correctIsLongestRows = buildMcqCorrectIsLongestReport(singleAnswerGroups);
+  const correctIsLongestById = new Map(correctIsLongestRows.filter((row) => row.scope === "item").map((row) => [row.itemId, row]));
+  for (const group of singleAnswerGroups) {
+    const source = allItems.find((item) => staminaItemId(item) === group.originalItemId) ?? group;
+    const lengthRow = correctIsLongestById.get(String(group.itemId));
+    rows.push(reportRow(
+      source,
+      `PSSA_MCQ_CORRECT_IS_LONGEST${group.sourceInteractionType === "EBSR_PART_A" ? "_EBSR_PART_A_REPORT_ONLY" : ""}`,
+      lengthRow?.result ?? "FAIL",
+      lengthRow
+        ? `choiceGroup=${group.itemId}; correctWords=${lengthRow.correctWordLength}; maxDistractorWords=${lengthRow.longestDistractorWordLength}; gap=${lengthRow.wordLengthGap}; uniquelyLongest=${lengthRow.uniquelyLongest}`
+        : `choiceGroup=${group.itemId}; missing length row`,
+      group.sourceInteractionType === "EBSR_PART_A" ? { enforced: false, reportOnly: true } : {},
+    ));
+  }
+
+  const absoluteRows = buildMcqAbsoluteLanguageDistractorReport(singleAnswerGroups);
+  const absoluteFailuresById = new Set(absoluteRows.filter((row) => row.itemId !== "batch" && row.result === "FAIL").map((row) => row.itemId));
+  for (const group of singleAnswerGroups) {
+    const source = allItems.find((item) => staminaItemId(item) === group.originalItemId) ?? group;
+    rows.push(reportRow(
+      source,
+      `PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR${group.sourceInteractionType === "EBSR_PART_A" ? "_EBSR_PART_A_REPORT_ONLY" : ""}`,
+      absoluteFailuresById.has(String(group.itemId)) ? "FAIL" : "PASS",
+      `choiceGroup=${group.itemId}`,
+      group.sourceInteractionType === "EBSR_PART_A" ? { enforced: false, reportOnly: true } : {},
+    ));
+  }
+
+  const mcqPosition = buildAnswerPositionRow(singleAnswerGroups.filter((group) => group.sourceInteractionType === "MCQ"), "stamina MCQ");
+  const ebsrPartAPosition = buildAnswerPositionRow(singleAnswerGroups.filter((group) => group.sourceInteractionType === "EBSR_PART_A"), "stamina EBSR Part A report-only");
+  for (const item of mcqItems) rows.push(reportRow(item, "PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION", mcqPosition.status, mcqPosition.detail));
+  for (const item of ebsrItems) rows.push(reportRow(item, "PSSA_EBSR_PART_A_ANSWER_POSITION_DISTRIBUTION_REPORT_ONLY", ebsrPartAPosition.status, ebsrPartAPosition.detail, { enforced: false, reportOnly: true }));
+
+  for (const passage of [syrupPassage, boatPassage, rabbitPassage]) {
+    const passageItems = readingItems.filter((item) => staminaPassageIds(item).includes(passage.id));
+    for (const staminaRow of evaluatePssaStaminaGates(passage, passageItems)) {
+      const targetItem = allItems.find((item) => staminaItemId(item) === staminaRow.targetId);
+      if (targetItem) rows.push(reportRow(targetItem, staminaRow.gateId, staminaRow.status, staminaRow.detail));
+    }
+  }
+  for (const group of passageGroups) {
+    const pairedGroupRows = [
+      { gateId: "PSSA_PAIRED_GROUP_STAMINA_METADATA", targetId: group.id, status: evaluatePssaPairedGroupStaminaMetadata(group), detail: "paired group metadata" },
+      ...evaluatePssaPairedSectionLookbackBalance(group, owlItems),
+    ] as Array<{ gateId: string; targetId: string; status: BatteryStatus; detail: string }>;
+    for (const groupRow of pairedGroupRows) {
+      const targetItem = allItems.find((item) => staminaItemId(item) === groupRow.targetId);
+      if (targetItem) rows.push(reportRow(targetItem, groupRow.gateId, groupRow.status, groupRow.detail));
+    }
+    const pairedOverlap = evaluatePssaPairedMultipointEvidenceOverlap(owlItems);
+    for (const item of owlItems) {
+      if (pairedOverlap[staminaItemId(item)]) rows.push(reportRow(item, "PSSA_PAIRED_MULTIPOINT_EVIDENCE_OVERLAP", pairedOverlap[staminaItemId(item)], "paired passageSlot variant"));
+      if (["MCQ", "EBSR", "SHORT_ANSWER"].includes(staminaInteractionType(item))) rows.push(reportRow(item, "PSSA_REQUIRED_EVIDENCE_SLOTS", evaluatePssaRequiredEvidenceSlots(item, group), "paired passageSlot variant"));
+    }
+  }
+
+  const inferenceSkipRows = passageSpecificityRows
+    .filter((row) => row.ruleId === "PSSA_MCQ_PASSAGE_SPECIFIC_CHOICES" && row.result === "SKIP" && row.evidence.startsWith("SKIP_INFERENCE_INTERPRETATION"))
+    .map((row) => ({ itemId: row.itemId, evidence: row.evidence }));
+  assert.deepEqual(
+    inferenceSkipRows.map((row) => row.itemId).sort(),
+    [
+      "pssa_stamina_item_g3_boat_05",
+      "pssa_stamina_item_g3_rabbit_03",
+      "pssa_stamina_item_g3_rabbit_04",
+      "pssa_stamina_item_g3_rabbit_06",
+    ],
+    "#47 inference/interpretation skip set must be visible and limited to intended literary/drama items",
+  );
+  for (const itemId of inferenceSkipRows.map((row) => row.itemId)) {
+    const itemRows = passageSpecificityRowsByItem.get(itemId) ?? [];
+    assert.equal(itemRows.length > 0, true, `${itemId} must still enter the passage-specificity detector`);
+    assert.equal(
+      itemRows.some((row) => row.ruleId === "PSSA_MCQ_PASSAGE_SPECIFIC_CHOICES" && row.result === "SKIP"),
+      true,
+      `${itemId} must expose the scoped #47 SKIP row rather than disappearing from the detector`,
+    );
+    assert.equal(
+      itemRows.some((row) => row.result === "FAIL" && ["PSSA_MCQ_CHOICE_EVIDENCE_LINKS_REQUIRED", "PSSA_MCQ_DISTRACTOR_ROLE_REQUIRED", "PSSA_MCQ_SINGLE_DEFENSIBLE_ANSWER"].includes(row.ruleId)),
+      false,
+      `${itemId} must still be eligible for the other blocker gates; no hidden evidence/role/single-answer failure should be present`,
+    );
+  }
+
+  const foundationPilot = JSON.parse(fs.readFileSync("exemplars/pssa_grade3_pilot/pilot_backend.json", "utf8"));
+  const foundationEbsr = JSON.parse(fs.readFileSync("exemplars/pssa_grade3_ebsr/grade3_ebsr_backend.json", "utf8"));
+  const literaryTopup = JSON.parse(fs.readFileSync("exemplars/pssa_grade3_literary_topup/grade3_literary_topup_backend.json", "utf8"));
+  const foundationSingleAnswerGroups = singleAnswerChoiceGroups([
+    ...foundationPilot.items.filter((item: any) => item.itemType === "MCQ" && item.passageId && item.itemStatus !== "deprecated_superseded"),
+    ...foundationEbsr.items,
+    ...literaryTopup.items.filter((item: any) => ["MCQ", "EBSR"].includes(staminaInteractionType(item))),
+  ], { includeEbsrPartA: true });
+  const foundationPartALengthRows = buildMcqCorrectIsLongestReport(foundationSingleAnswerGroups)
+    .filter((row) => row.scope === "item" && String(row.itemId).includes("::partA"));
+
+  const failures = rows.filter((row) => row.status === "FAIL");
+  const enforceableFailures = rows.filter((row) => row.status === "FAIL" && row.enforced !== false);
+  const ebsrPartAInformationalRows = rows.filter((row) => row.reportOnly);
+  assert.equal(rows.length > allItems.length * 8, true, "stamina battery report must include a broad per-item gate matrix, not spot checks");
+  assert.deepEqual(enforceableFailures, [], "ENFORCED stamina battery must have zero rows where status is FAIL and enforced is not false");
+  assert.equal(ebsrPartAInformationalRows.length, 12, "EBSR Part A shortcut rows must stay report-only and mechanically excluded from enforcement");
+  assert.deepEqual(
+    correctIsLongestRows
+      .filter((row) => row.scope === "item" && row.result === "FAIL")
+      .map((row) => row.itemId)
+      .sort(),
+    [],
+    "Spec A wording/key redistribution must clear enforceable correct-is-longest blockers, including EBSR Part A report-only rows",
+  );
+  assert.equal(correctIsLongestRows.every((row) => row.scope === "batch" || (row.wordLengthGap !== "" && row.uniquelyLongest !== "")), true, "correct-is-longest report must expose word gap and uniquely-longest flag");
+
+  const reportLines = [
+    "# PSSA Stamina Content-Quality Battery Report",
+    "",
+    "Enforced mode: every row with status FAIL and enforced !== false fails test:pssa-content. EBSR Part A shortcut rows are report-only for this PR.",
+    "",
+    "## Functions Reused",
+    "",
+    "- PSSA_CONTENT_QUALITY_GATE_IDS evaluators: intra-choice duplicate, vocab key construct, SA bands nonempty, EC genre match, passage multipoint evidence overlap.",
+    "- buildMcqPassageSpecificityReport, buildItemEcSkillMatchReport, buildMcqCorrectIsLongestReport, buildMcqAbsoluteLanguageDistractorReport.",
+    "- buildPssaPassageQualityReport.",
+    "- evaluatePssaStaminaGates and paired passageSlot variants for released-length, drama, and paired fixtures.",
+    "- singleAnswerChoiceGroups report-only shortcut extractor for MCQ plus EBSR Part A.",
+    "",
+    "## Packet Counts",
+    "",
+    `- Items: ${allItems.length} total = ${mcqItems.length} MCQ (${mcqItems.length - staminaConventionItems.length} reading + ${staminaConventionItems.length} conventions) + ${ebsrItems.length} EBSR + ${shortAnswerItems.length} SHORT_ANSWER.`,
+    `- Passages: ${passages.length} encoded stamina passages across ${passageGroups.length} paired group.`,
+    "",
+    "## #47 Visible Skip Set",
+    "",
+    "| itemId | evidence |",
+    "| --- | --- |",
+    ...inferenceSkipRows.map((row) => `| ${row.itemId} | ${row.evidence} |`),
+    "",
+    "## Correct-Is-Longest Detail",
+    "",
+    "| itemId | source | result | correctWords | maxDistractorWords | gap | uniquelyLongest | notes |",
+    "| --- | --- | --- | ---: | ---: | ---: | --- | --- |",
+    ...correctIsLongestRows
+      .filter((row) => row.scope === "item")
+      .map((row) => {
+        const group = singleAnswerById.get(row.itemId);
+        return `| ${row.itemId} | ${group?.sourceInteractionType ?? "MCQ"} | ${row.result} | ${row.correctWordLength} | ${row.longestDistractorWordLength} | ${row.wordLengthGap} | ${row.uniquelyLongest} | ${row.notes} |`;
+      }),
+    "",
+    "## Foundation EBSR Part A Impact (Report-Only)",
+    "",
+    "| itemId | result | correctWords | maxDistractorWords | gap | uniquelyLongest |",
+    "| --- | --- | ---: | ---: | ---: | --- |",
+    ...foundationPartALengthRows.map((row) => `| ${row.itemId} | ${row.result} | ${row.correctWordLength} | ${row.longestDistractorWordLength} | ${row.wordLengthGap} | ${row.uniquelyLongest} |`),
+    "",
+    "## EBSR Part A Informational Rows (Not Enforced)",
+    "",
+    "| itemId | gateId | status | detail |",
+    "| --- | --- | --- | --- |",
+    ...ebsrPartAInformationalRows.map((row) => `| ${row.itemId} | ${row.gateId} | ${row.status} | ${row.detail.replace(/\|/g, "/")} |`),
+    "",
+    "## Enforceable FAIL List",
+    "",
+    "| itemId | interactionType | gateId | detail |",
+    "| --- | --- | --- | --- |",
+    ...enforceableFailures.map((row) => `| ${row.itemId} | ${row.interactionType} | ${row.gateId} | ${row.detail.replace(/\|/g, "/")} |`),
+    "",
+    "## Per-Item Gate Matrix",
+    "",
+    "| itemId | interactionType | gateId | status | enforced | detail |",
+    "| --- | --- | --- | --- | --- | --- |",
+    ...rows.map((row) => `| ${row.itemId} | ${row.interactionType} | ${row.gateId} | ${row.status} | ${row.enforced === false ? "false" : "true"} | ${row.detail.replace(/\|/g, "/")} |`),
+    "",
+    "## Passage Quality Rows",
+    "",
+    "| passageId | ruleId | result | severity | notes |",
+    "| --- | --- | --- | --- | --- |",
+    ...passageQualityRows.map((row) => `| ${row.passageId} | ${row.ruleId} | ${row.result} | ${row.severity} | ${row.notes.replace(/\|/g, "/")} |`),
+    "",
+    "## Passage Specificity Raw Rows",
+    "",
+    "| itemId | ruleId | result | severity | evidence | notes |",
+    "| --- | --- | --- | --- | --- | --- |",
+    ...passageSpecificityRows.map((row) => `| ${row.itemId} | ${row.ruleId} | ${row.result} | ${row.severity} | ${row.evidence.replace(/\|/g, "/")} | ${row.notes.replace(/\|/g, "/")} |`),
+    "",
+  ];
+  fs.writeFileSync("reports/pssa_stamina_content_quality_battery.md", `${reportLines.join("\n")}\n`);
+  return { rows, failures, enforceableFailures, ebsrPartAInformationalRows, passageQualityRows, passageSpecificityRows, correctIsLongestRows, foundationPartALengthRows };
+}
+
+const staminaBattery = buildStaminaContentQualityBatteryReport();
+assert.equal(staminaBattery.foundationPartALengthRows.length > 0, true, "EBSR Part A foundation impact must be reported without enforcing it in buildPlan");
+assert.deepEqual(staminaBattery.enforceableFailures, [], "test:pssa-content must enforce zero stamina battery failures");
+assert.equal(staminaBattery.ebsrPartAInformationalRows.every((row) => row.enforced === false && row.reportOnly), true, "EBSR Part A rows must be incapable of failing test:pssa-content in this PR");
 
 const grade3Plan = buildPlan(3);
+assert.equal(grade3Plan.hashStable, true, "stamina fixture must keep foundation import hashes stable");
 assert.deepEqual(grade3Plan.manifest.map((row) => [row.recordType, row.count, row.expectedCount]), [
   ["passage", 7, 7],
   ["item", 91, 91],
