@@ -3,7 +3,7 @@ import { wordMatchesPattern } from "../passageClassifier";
 import { withCommonPartMetadata, type GeneratedLessonPart, type LessonGeneratorContext } from "./types";
 
 export function generatePart6Encoding(ctx: LessonGeneratorContext): GeneratedLessonPart {
-  const content = phase3EntryLessonContentFor(ctx.dailyTarget.code);
+  const content = phase3EntryLessonContentFor(ctx.dailyTarget.code, ctx.presentationProfile);
   return withCommonPartMetadata(ctx, {
     partNumber: 6,
     partLabel: "Encoding and spelling",

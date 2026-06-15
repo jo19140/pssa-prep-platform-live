@@ -1,5 +1,6 @@
 import type { DailyTarget, Passage, PhasePosition } from "@prisma/client";
 import type { PassageAuditResult } from "../passageAudit";
+import type { PresentationProfile } from "../presentationProfile";
 
 export type GeneratedLessonPart = {
   partNumber: number;
@@ -20,6 +21,7 @@ export type GeneratedLessonPart = {
 
 export type LessonGeneratorContext = {
   phasePosition: Pick<PhasePosition, "id" | "phaseNumber" | "label">;
+  presentationProfile?: PresentationProfile;
   dailyTarget: Pick<DailyTarget, "id" | "code" | "kidVisibleLabel" | "tutorLabel" | "targetPatternsJson" | "allowedPatternCodes" | "blockedPatternCodes" | "exampleWords" | "exampleNonwords">;
   targetPattern: string;
   targetPatterns: string[];
