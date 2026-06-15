@@ -14,6 +14,8 @@ export type LessonPlayerPart = Pick<
 export type EnabledLessonPlayerData = {
   enabled: true;
   targetCode: string;
+  trainingCaptureEnabled: boolean;
+  studentUserId?: string;
   title: string;
   dailyTargetLabel: string;
   parts: LessonPlayerPart[];
@@ -27,7 +29,10 @@ export type DisabledLessonPlayerData = {
 
 export type LessonPlayerData = EnabledLessonPlayerData | DisabledLessonPlayerData;
 
-export async function buildLessonPlayerData(targetCode = "a_e"): Promise<LessonPlayerData> {
+export async function buildLessonPlayerData(
+  targetCode = "a_e",
+  options: { trainingCaptureEnabled?: boolean; studentUserId?: string } = {},
+): Promise<LessonPlayerData> {
   if (targetCode !== "a_e") {
     return {
       enabled: false,
@@ -105,6 +110,8 @@ export async function buildLessonPlayerData(targetCode = "a_e"): Promise<LessonP
   return {
     enabled: true,
     targetCode,
+    trainingCaptureEnabled: options.trainingCaptureEnabled === true,
+    studentUserId: options.studentUserId,
     title: `${content.mockPassageTitle} Lesson`,
     dailyTargetLabel: seed.kidVisibleLabel,
     parts: draft.parts.map((part) => ({

@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { requireUser } from "@/lib/authz";
 import { db } from "@/lib/db";
 import { canAccessStudent } from "@/lib/literacy/profile";
+import { getVoiceAudioObject } from "@/lib/voice/storage";
 
 export async function GET(_req: Request, { params }: { params: Promise<{ id: string }> }) {
   const auth = await requireUser();
@@ -26,15 +27,16 @@ export async function GET(_req: Request, { params }: { params: Promise<{ id: str
       data: { voiceSessionId: session.id, accessedById: auth.user!.id, accessPurpose: "VOICE_AUDIO_READ" },
     });
   }
-  if (/^https:\/\//.test(session.audioStorageKey)) {
-    const upstream = await fetch(session.audioStorageKey);
-    if (!upstream.ok || !upstream.body) return NextResponse.json({ error: "Audio fetch failed" }, { status: 502 });
-    return new Response(upstream.body, {
+  try {
+    const upstream = await getVoiceAudioObject(session.audioStorageKey, session.literacyProfile.studentUserId);
+    if (!upstream || upstream.statusCode !== 200 || !upstream.stream) return NextResponse.json({ error: "Audio fetch failed" }, { status: 502 });
+    return new Response(upstream.stream, {
       headers: {
-        "content-type": upstream.headers.get("content-type") || "audio/webm",
+        "content-type": upstream.blob.contentType || "audio/webm",
         "cache-control": "private, max-age=0, no-store",
       },
     });
+  } catch {
+    return NextResponse.json({ error: "Audio not available" }, { status: 404 });
   }
-  return NextResponse.json({ audioStorageKey: session.audioStorageKey, expiresInSeconds: 900 });
 }
