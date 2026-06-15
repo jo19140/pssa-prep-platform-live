@@ -59,6 +59,111 @@ assertGrade3MatchingGridDragDropContract();
 assertGrade3ConventionsContract();
 assertGrade3ShortAnswerContract();
 
+const staminaConventionsFixture = JSON.parse(fs.readFileSync("exemplars/pssa_grade3_stamina_pilot/conventions_mc_block.json", "utf8"));
+const staminaConventionItems = staminaConventionsFixture.items as any[];
+const expectedStaminaConventions = [
+  {
+    id: "conv_01",
+    ec: "E03.D.1.1.1",
+    correctIndex: 1,
+    choices: ["quiet", "quietly", "quieter", "quietness"],
+  },
+  {
+    id: "conv_02",
+    ec: "E03.D.1.1.2",
+    correctIndex: 0,
+    choices: ["The children carried three boxes.", "The childs carried three boxs.", "The children carried three boxs.", "The childs carried three boxes."],
+  },
+  {
+    id: "conv_03",
+    ec: "E03.D.1.1.5",
+    correctIndex: 2,
+    choices: ["Yesterday we visited the farm.", "We visit the farm every week.", "Tomorrow we will visit the farm.", "We are visiting the farm right now."],
+  },
+  {
+    id: "conv_04",
+    ec: "E03.D.1.1.6",
+    correctIndex: 0,
+    choices: ["The dogs bark at the mail truck.", "The dogs barks at the mail truck.", "The dog bark at the mail truck.", "The dog barking at the mail truck."],
+  },
+  {
+    id: "conv_05",
+    ec: "E03.D.1.1.7",
+    correctIndex: 3,
+    choices: ["heaviest", "more heavy", "heavy", "heavier"],
+  },
+  {
+    id: "conv_06",
+    ec: "E03.D.1.2.1",
+    correctIndex: 1,
+    choices: ["the moon over maple street", "The Moon Over Maple Street", "The moon over Maple Street", "The Moon Over Maple street"],
+  },
+  {
+    id: "conv_07",
+    ec: "E03.D.1.2.2",
+    correctIndex: 2,
+    choices: ["Mail the letter to 18 Pine Street Erie, Pennsylvania.", "Mail the letter to 18 Pine Street, Erie Pennsylvania.", "Mail the letter to 18 Pine Street, Erie, Pennsylvania.", "Mail the letter to, 18 Pine Street Erie Pennsylvania."],
+  },
+  {
+    id: "conv_08",
+    ec: "E03.D.1.2.3",
+    correctIndex: 3,
+    choices: ["Maria said, I found my missing shoes.", "Maria said, \"I found my missing shoes.", "\"Maria said,\" I found my missing shoes.", "Maria said, \"I found my missing shoes.\""],
+  },
+  {
+    id: "conv_09",
+    ec: "E03.D.1.2.5",
+    correctIndex: 0,
+    choices: ["The weather was sunny on Friday.", "The weathr was sunny on Friday.", "The weather was suny on Friday.", "The weathr was suny on Friday."],
+  },
+];
+assert.equal(staminaConventionItems.length, 9, "stamina conventions fixture must contain exactly 9 standalone MCQs");
+assert.deepEqual(
+  staminaConventionItems.map((item) => ({
+    id: item.itemId ?? item.id,
+    ec: item.eligibleContent,
+    correctIndex: item.correctIndex,
+    choices: item.answerChoicesJson,
+  })),
+  expectedStaminaConventions,
+  "stamina conventions MCQ text, option order, EC, and correctIndex must match the signed-off block",
+);
+const staminaConventionAnswerCounts = [0, 0, 0, 0];
+for (const item of staminaConventionItems) {
+  staminaConventionAnswerCounts[item.correctIndex] += 1;
+  assert.equal(item.passageId, null, `${item.itemId} must be standalone`);
+  assert.equal(item.interactionType, "MCQ", `${item.itemId} must be MCQ`);
+  assert.equal(item.itemType, "MCQ", `${item.itemId} must carry MCQ itemType`);
+  assert.equal(item.pointValue, 1, `${item.itemId} must be one point`);
+  assert.equal(item.reviewStatus, "PENDING", `${item.itemId} must stay fixture-pending`);
+  assert.equal(item.itemStatus, "candidate", `${item.itemId} must stay candidate-only`);
+  assert.equal(item.reportingCategory, "D", `${item.itemId} must be reporting category D`);
+  assert.equal(item.structuredChoicesJson.length, 4, `${item.itemId} must expose four structured choices`);
+  assert.deepEqual(item.structuredChoicesJson.map((choice: any) => choice.text), item.answerChoicesJson, `${item.itemId} structured choices must mirror answerChoicesJson`);
+  assert.equal(item.structuredChoicesJson.filter((choice: any) => choice.isCorrect).length, 1, `${item.itemId} must have exactly one correct structured choice`);
+  assert.equal(item.structuredChoicesJson[item.correctIndex].isCorrect, true, `${item.itemId} correctIndex must point to the correct choice`);
+  for (const [index, choice] of item.structuredChoicesJson.entries()) {
+    if (index === item.correctIndex) {
+      assert.equal(choice.distractorRole, null, `${item.itemId} correct choice must not carry a distractorRole`);
+    } else {
+      assert.equal(typeof choice.distractorRole, "string", `${item.itemId} wrong choice ${index} must carry distractorRole`);
+      assert.equal(String(choice.rationale ?? "").trim().length > 0, true, `${item.itemId} wrong choice ${index} must carry rationale`);
+    }
+  }
+  for (const [index, choice] of item.choices.entries()) {
+    assert.equal(choice.isCorrect, index === item.correctIndex, `${item.itemId} choices[] correctness must mirror correctIndex`);
+    if (index === item.correctIndex) {
+      assert.equal(choice.distractorRole, null, `${item.itemId} correct choices[] entry must not carry a distractorRole`);
+    } else {
+      assert.equal(typeof choice.distractorRole, "string", `${item.itemId} wrong choices[] entry ${index} must carry distractorRole`);
+      assert.equal(String(choice.rationale ?? "").trim().length > 0, true, `${item.itemId} wrong choices[] entry ${index} must carry rationale`);
+    }
+  }
+}
+assert.deepEqual(staminaConventionAnswerCounts, [3, 2, 2, 2], "stamina conventions answer positions must be A=3/B=2/C=2/D=2");
+assert.equal(Math.max(...staminaConventionAnswerCounts) / staminaConventionItems.length <= 0.4, true, "standalone conventions block must not be dominated by one answer position");
+assert.equal(buildMcqPassageSpecificityReport(staminaConventionItems, []).length, 0, "standalone conventions MCQs must be excluded from passage-specificity concreteness");
+
 function mcqFixture(id: string, correctIndex: number, choices: string[]) {
   return { id, itemType: "MCQ", correctIndex, answerChoicesJson: choices };
 }

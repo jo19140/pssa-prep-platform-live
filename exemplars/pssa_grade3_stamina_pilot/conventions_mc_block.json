@@ -1,0 +1,1196 @@
+{
+  "generatedAt": "2026-06-14T00:00:00.000Z",
+  "noDbWrite": true,
+  "productionImportReady": false,
+  "fixtureScope": "PSSA_STAMINA_DIAGNOSTIC_CONVENTIONS_MC_BLOCK",
+  "items": [
+    {
+      "id": "conv_01",
+      "itemId": "conv_01",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "MCQ",
+      "interactionType": "MCQ",
+      "interactionSubtype": "standalone_conventions",
+      "passageId": null,
+      "ecSkillFamily": "conventions",
+      "eligibleContent": "E03.D.1.1.1",
+      "assessmentAnchor": "E03.D.1",
+      "anchorDescriptor": "E03.D.1.1",
+      "reportingCategory": "D",
+      "pointValue": 1,
+      "targetConvention": "adverbs",
+      "targetSubskill": "word_function",
+      "skill": "conventions_adverbs",
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "approvalEligible": false,
+      "stem": "Which word best completes the sentence with an adverb that tells how? \"The rabbit moved ___ through the garden.\"",
+      "studentFacingPrompt": "Which word best completes the sentence with an adverb that tells how? \"The rabbit moved ___ through the garden.\"",
+      "answerChoicesJson": [
+        "quiet",
+        "quietly",
+        "quieter",
+        "quietness"
+      ],
+      "choices": [
+        {
+          "text": "quiet",
+          "isCorrect": false,
+          "errorPattern": "adjective_not_adverb",
+          "distractorRole": "adjective_not_adverb",
+          "rationale": "Quiet is an adjective; the sentence needs an adverb that tells how the rabbit moved."
+        },
+        {
+          "text": "quietly",
+          "isCorrect": true,
+          "errorPattern": null,
+          "distractorRole": null,
+          "rationale": "Quietly is an adverb that tells how the rabbit moved."
+        },
+        {
+          "text": "quieter",
+          "isCorrect": false,
+          "errorPattern": "comparative_adjective",
+          "distractorRole": "comparative_adjective",
+          "rationale": "Quieter compares two things; it does not tell how the rabbit moved."
+        },
+        {
+          "text": "quietness",
+          "isCorrect": false,
+          "errorPattern": "noun",
+          "distractorRole": "noun",
+          "rationale": "Quietness is a noun; it does not work as an adverb in the sentence."
+        }
+      ],
+      "structuredChoicesJson": [
+        {
+          "text": "quiet",
+          "isCorrect": false,
+          "rationale": "Quiet is an adjective; the sentence needs an adverb that tells how the rabbit moved.",
+          "distractorRole": "adjective_not_adverb"
+        },
+        {
+          "text": "quietly",
+          "isCorrect": true,
+          "rationale": "Quietly is an adverb that tells how the rabbit moved.",
+          "distractorRole": null
+        },
+        {
+          "text": "quieter",
+          "isCorrect": false,
+          "rationale": "Quieter compares two things; it does not tell how the rabbit moved.",
+          "distractorRole": "comparative_adjective"
+        },
+        {
+          "text": "quietness",
+          "isCorrect": false,
+          "rationale": "Quietness is a noun; it does not work as an adverb in the sentence.",
+          "distractorRole": "noun"
+        }
+      ],
+      "correctIndex": 1,
+      "correctAnswer": "quietly",
+      "distractorRationalesJson": [
+        "Quiet is an adjective; the sentence needs an adverb that tells how the rabbit moved.",
+        "Quietly is an adverb that tells how the rabbit moved.",
+        "Quieter compares two things; it does not tell how the rabbit moved.",
+        "Quietness is a noun; it does not work as an adverb in the sentence."
+      ],
+      "scoring": {
+        "totalPoints": 1,
+        "partialCreditRules": [
+          {
+            "points": 1,
+            "rule": "The single correct convention response is selected."
+          },
+          {
+            "points": 0,
+            "rule": "Any incorrect, ambiguous, missing, or extra response earns no credit."
+          }
+        ],
+        "scoringNotes": "Full credit requires the one defensible convention answer and no contradictory answer."
+      },
+      "studentPreviewJson": {
+        "prompt": "Which word best completes the sentence with an adverb that tells how? \"The rabbit moved ___ through the garden.\"",
+        "choices": [
+          "quiet",
+          "quietly",
+          "quieter",
+          "quietness"
+        ],
+        "leaksAnswer": false
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_STAMINA_CONVENTIONS_MC_BLOCK",
+        "noDbWrite": true
+      },
+      "provenanceJson": {
+        "fixtureOnly": true,
+        "containsAttributedQuotes": false
+      }
+    },
+    {
+      "id": "conv_02",
+      "itemId": "conv_02",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "MCQ",
+      "interactionType": "MCQ",
+      "interactionSubtype": "standalone_conventions",
+      "passageId": null,
+      "ecSkillFamily": "conventions",
+      "eligibleContent": "E03.D.1.1.2",
+      "assessmentAnchor": "E03.D.1",
+      "anchorDescriptor": "E03.D.1.1",
+      "reportingCategory": "D",
+      "pointValue": 1,
+      "targetConvention": "plural nouns",
+      "targetSubskill": "plural_nouns",
+      "skill": "conventions_plural_nouns",
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "approvalEligible": false,
+      "stem": "Which sentence uses the correct plural nouns?",
+      "studentFacingPrompt": "Which sentence uses the correct plural nouns?",
+      "answerChoicesJson": [
+        "The children carried three boxes.",
+        "The childs carried three boxs.",
+        "The children carried three boxs.",
+        "The childs carried three boxes."
+      ],
+      "choices": [
+        {
+          "text": "The children carried three boxes.",
+          "isCorrect": true,
+          "errorPattern": null,
+          "distractorRole": null,
+          "rationale": "Children and boxes are the correct plural noun forms."
+        },
+        {
+          "text": "The childs carried three boxs.",
+          "isCorrect": false,
+          "errorPattern": "both_plurals_wrong",
+          "distractorRole": "both_plurals_wrong",
+          "rationale": "Both childs and boxs are incorrect plural forms."
+        },
+        {
+          "text": "The children carried three boxs.",
+          "isCorrect": false,
+          "errorPattern": "box_plural_wrong",
+          "distractorRole": "box_plural_wrong",
+          "rationale": "Children is correct, but boxs should be boxes."
+        },
+        {
+          "text": "The childs carried three boxes.",
+          "isCorrect": false,
+          "errorPattern": "child_plural_wrong",
+          "distractorRole": "child_plural_wrong",
+          "rationale": "Boxes is correct, but childs should be children."
+        }
+      ],
+      "structuredChoicesJson": [
+        {
+          "text": "The children carried three boxes.",
+          "isCorrect": true,
+          "rationale": "Children and boxes are the correct plural noun forms.",
+          "distractorRole": null
+        },
+        {
+          "text": "The childs carried three boxs.",
+          "isCorrect": false,
+          "rationale": "Both childs and boxs are incorrect plural forms.",
+          "distractorRole": "both_plurals_wrong"
+        },
+        {
+          "text": "The children carried three boxs.",
+          "isCorrect": false,
+          "rationale": "Children is correct, but boxs should be boxes.",
+          "distractorRole": "box_plural_wrong"
+        },
+        {
+          "text": "The childs carried three boxes.",
+          "isCorrect": false,
+          "rationale": "Boxes is correct, but childs should be children.",
+          "distractorRole": "child_plural_wrong"
+        }
+      ],
+      "correctIndex": 0,
+      "correctAnswer": "The children carried three boxes.",
+      "distractorRationalesJson": [
+        "Children and boxes are the correct plural noun forms.",
+        "Both childs and boxs are incorrect plural forms.",
+        "Children is correct, but boxs should be boxes.",
+        "Boxes is correct, but childs should be children."
+      ],
+      "scoring": {
+        "totalPoints": 1,
+        "partialCreditRules": [
+          {
+            "points": 1,
+            "rule": "The single correct convention response is selected."
+          },
+          {
+            "points": 0,
+            "rule": "Any incorrect, ambiguous, missing, or extra response earns no credit."
+          }
+        ],
+        "scoringNotes": "Full credit requires the one defensible convention answer and no contradictory answer."
+      },
+      "studentPreviewJson": {
+        "prompt": "Which sentence uses the correct plural nouns?",
+        "choices": [
+          "The children carried three boxes.",
+          "The childs carried three boxs.",
+          "The children carried three boxs.",
+          "The childs carried three boxes."
+        ],
+        "leaksAnswer": false
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_STAMINA_CONVENTIONS_MC_BLOCK",
+        "noDbWrite": true
+      },
+      "provenanceJson": {
+        "fixtureOnly": true,
+        "containsAttributedQuotes": false
+      }
+    },
+    {
+      "id": "conv_03",
+      "itemId": "conv_03",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "MCQ",
+      "interactionType": "MCQ",
+      "interactionSubtype": "standalone_conventions",
+      "passageId": null,
+      "ecSkillFamily": "conventions",
+      "eligibleContent": "E03.D.1.1.5",
+      "assessmentAnchor": "E03.D.1",
+      "anchorDescriptor": "E03.D.1.1",
+      "reportingCategory": "D",
+      "pointValue": 1,
+      "targetConvention": "future verb tense",
+      "targetSubskill": "verb_tense",
+      "skill": "conventions_future_tense",
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "approvalEligible": false,
+      "stem": "Which sentence is written in the future tense?",
+      "studentFacingPrompt": "Which sentence is written in the future tense?",
+      "answerChoicesJson": [
+        "Yesterday we visited the farm.",
+        "We visit the farm every week.",
+        "Tomorrow we will visit the farm.",
+        "We are visiting the farm right now."
+      ],
+      "choices": [
+        {
+          "text": "Yesterday we visited the farm.",
+          "isCorrect": false,
+          "errorPattern": "past_tense",
+          "distractorRole": "past_tense",
+          "rationale": "Visited describes an action that already happened."
+        },
+        {
+          "text": "We visit the farm every week.",
+          "isCorrect": false,
+          "errorPattern": "present_tense",
+          "distractorRole": "present_tense",
+          "rationale": "Visit describes a present or repeated action."
+        },
+        {
+          "text": "Tomorrow we will visit the farm.",
+          "isCorrect": true,
+          "errorPattern": null,
+          "distractorRole": null,
+          "rationale": "Will visit shows the action will happen in the future."
+        },
+        {
+          "text": "We are visiting the farm right now.",
+          "isCorrect": false,
+          "errorPattern": "present_progressive",
+          "distractorRole": "present_progressive",
+          "rationale": "Are visiting describes an action happening now."
+        }
+      ],
+      "structuredChoicesJson": [
+        {
+          "text": "Yesterday we visited the farm.",
+          "isCorrect": false,
+          "rationale": "Visited describes an action that already happened.",
+          "distractorRole": "past_tense"
+        },
+        {
+          "text": "We visit the farm every week.",
+          "isCorrect": false,
+          "rationale": "Visit describes a present or repeated action.",
+          "distractorRole": "present_tense"
+        },
+        {
+          "text": "Tomorrow we will visit the farm.",
+          "isCorrect": true,
+          "rationale": "Will visit shows the action will happen in the future.",
+          "distractorRole": null
+        },
+        {
+          "text": "We are visiting the farm right now.",
+          "isCorrect": false,
+          "rationale": "Are visiting describes an action happening now.",
+          "distractorRole": "present_progressive"
+        }
+      ],
+      "correctIndex": 2,
+      "correctAnswer": "Tomorrow we will visit the farm.",
+      "distractorRationalesJson": [
+        "Visited describes an action that already happened.",
+        "Visit describes a present or repeated action.",
+        "Will visit shows the action will happen in the future.",
+        "Are visiting describes an action happening now."
+      ],
+      "scoring": {
+        "totalPoints": 1,
+        "partialCreditRules": [
+          {
+            "points": 1,
+            "rule": "The single correct convention response is selected."
+          },
+          {
+            "points": 0,
+            "rule": "Any incorrect, ambiguous, missing, or extra response earns no credit."
+          }
+        ],
+        "scoringNotes": "Full credit requires the one defensible convention answer and no contradictory answer."
+      },
+      "studentPreviewJson": {
+        "prompt": "Which sentence is written in the future tense?",
+        "choices": [
+          "Yesterday we visited the farm.",
+          "We visit the farm every week.",
+          "Tomorrow we will visit the farm.",
+          "We are visiting the farm right now."
+        ],
+        "leaksAnswer": false
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_STAMINA_CONVENTIONS_MC_BLOCK",
+        "noDbWrite": true
+      },
+      "provenanceJson": {
+        "fixtureOnly": true,
+        "containsAttributedQuotes": false
+      }
+    },
+    {
+      "id": "conv_04",
+      "itemId": "conv_04",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "MCQ",
+      "interactionType": "MCQ",
+      "interactionSubtype": "standalone_conventions",
+      "passageId": null,
+      "ecSkillFamily": "conventions",
+      "eligibleContent": "E03.D.1.1.6",
+      "assessmentAnchor": "E03.D.1",
+      "anchorDescriptor": "E03.D.1.1",
+      "reportingCategory": "D",
+      "pointValue": 1,
+      "targetConvention": "subject-verb agreement",
+      "targetSubskill": "subject_verb_agreement",
+      "skill": "conventions_subject_verb_agreement",
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "approvalEligible": false,
+      "stem": "Which sentence uses correct subject-verb agreement?",
+      "studentFacingPrompt": "Which sentence uses correct subject-verb agreement?",
+      "answerChoicesJson": [
+        "The dogs bark at the mail truck.",
+        "The dogs barks at the mail truck.",
+        "The dog bark at the mail truck.",
+        "The dog barking at the mail truck."
+      ],
+      "choices": [
+        {
+          "text": "The dogs bark at the mail truck.",
+          "isCorrect": true,
+          "errorPattern": null,
+          "distractorRole": null,
+          "rationale": "Dogs is plural, and bark agrees with the plural subject."
+        },
+        {
+          "text": "The dogs barks at the mail truck.",
+          "isCorrect": false,
+          "errorPattern": "plural_subject_singular_verb",
+          "distractorRole": "plural_subject_singular_verb",
+          "rationale": "Dogs is plural, so barks does not agree."
+        },
+        {
+          "text": "The dog bark at the mail truck.",
+          "isCorrect": false,
+          "errorPattern": "singular_subject_plural_verb",
+          "distractorRole": "singular_subject_plural_verb",
+          "rationale": "Dog is singular, so bark does not agree."
+        },
+        {
+          "text": "The dog barking at the mail truck.",
+          "isCorrect": false,
+          "errorPattern": "no_complete_verb",
+          "distractorRole": "no_complete_verb",
+          "rationale": "Barking does not make a complete verb in this sentence."
+        }
+      ],
+      "structuredChoicesJson": [
+        {
+          "text": "The dogs bark at the mail truck.",
+          "isCorrect": true,
+          "rationale": "Dogs is plural, and bark agrees with the plural subject.",
+          "distractorRole": null
+        },
+        {
+          "text": "The dogs barks at the mail truck.",
+          "isCorrect": false,
+          "rationale": "Dogs is plural, so barks does not agree.",
+          "distractorRole": "plural_subject_singular_verb"
+        },
+        {
+          "text": "The dog bark at the mail truck.",
+          "isCorrect": false,
+          "rationale": "Dog is singular, so bark does not agree.",
+          "distractorRole": "singular_subject_plural_verb"
+        },
+        {
+          "text": "The dog barking at the mail truck.",
+          "isCorrect": false,
+          "rationale": "Barking does not make a complete verb in this sentence.",
+          "distractorRole": "no_complete_verb"
+        }
+      ],
+      "correctIndex": 0,
+      "correctAnswer": "The dogs bark at the mail truck.",
+      "distractorRationalesJson": [
+        "Dogs is plural, and bark agrees with the plural subject.",
+        "Dogs is plural, so barks does not agree.",
+        "Dog is singular, so bark does not agree.",
+        "Barking does not make a complete verb in this sentence."
+      ],
+      "scoring": {
+        "totalPoints": 1,
+        "partialCreditRules": [
+          {
+            "points": 1,
+            "rule": "The single correct convention response is selected."
+          },
+          {
+            "points": 0,
+            "rule": "Any incorrect, ambiguous, missing, or extra response earns no credit."
+          }
+        ],
+        "scoringNotes": "Full credit requires the one defensible convention answer and no contradictory answer."
+      },
+      "studentPreviewJson": {
+        "prompt": "Which sentence uses correct subject-verb agreement?",
+        "choices": [
+          "The dogs bark at the mail truck.",
+          "The dogs barks at the mail truck.",
+          "The dog bark at the mail truck.",
+          "The dog barking at the mail truck."
+        ],
+        "leaksAnswer": false
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_STAMINA_CONVENTIONS_MC_BLOCK",
+        "noDbWrite": true
+      },
+      "provenanceJson": {
+        "fixtureOnly": true,
+        "containsAttributedQuotes": false
+      }
+    },
+    {
+      "id": "conv_05",
+      "itemId": "conv_05",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "MCQ",
+      "interactionType": "MCQ",
+      "interactionSubtype": "standalone_conventions",
+      "passageId": null,
+      "ecSkillFamily": "conventions",
+      "eligibleContent": "E03.D.1.1.7",
+      "assessmentAnchor": "E03.D.1",
+      "anchorDescriptor": "E03.D.1.1",
+      "reportingCategory": "D",
+      "pointValue": 1,
+      "targetConvention": "comparative adjectives",
+      "targetSubskill": "comparative_superlative",
+      "skill": "conventions_comparative_adjectives",
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "approvalEligible": false,
+      "stem": "Which word correctly compares two things? \"My backpack is ___ than yours.\"",
+      "studentFacingPrompt": "Which word correctly compares two things? \"My backpack is ___ than yours.\"",
+      "answerChoicesJson": [
+        "heaviest",
+        "more heavy",
+        "heavy",
+        "heavier"
+      ],
+      "choices": [
+        {
+          "text": "heaviest",
+          "isCorrect": false,
+          "errorPattern": "superlative_not_comparative",
+          "distractorRole": "superlative_not_comparative",
+          "rationale": "Heaviest compares three or more things, not two."
+        },
+        {
+          "text": "more heavy",
+          "isCorrect": false,
+          "errorPattern": "incorrect_comparative_form",
+          "distractorRole": "incorrect_comparative_form",
+          "rationale": "More heavy is not the expected comparative form for this sentence."
+        },
+        {
+          "text": "heavy",
+          "isCorrect": false,
+          "errorPattern": "base_form_no_comparison",
+          "distractorRole": "base_form_no_comparison",
+          "rationale": "Heavy does not compare the two backpacks."
+        },
+        {
+          "text": "heavier",
+          "isCorrect": true,
+          "errorPattern": null,
+          "distractorRole": null,
+          "rationale": "Heavier correctly compares two things."
+        }
+      ],
+      "structuredChoicesJson": [
+        {
+          "text": "heaviest",
+          "isCorrect": false,
+          "rationale": "Heaviest compares three or more things, not two.",
+          "distractorRole": "superlative_not_comparative"
+        },
+        {
+          "text": "more heavy",
+          "isCorrect": false,
+          "rationale": "More heavy is not the expected comparative form for this sentence.",
+          "distractorRole": "incorrect_comparative_form"
+        },
+        {
+          "text": "heavy",
+          "isCorrect": false,
+          "rationale": "Heavy does not compare the two backpacks.",
+          "distractorRole": "base_form_no_comparison"
+        },
+        {
+          "text": "heavier",
+          "isCorrect": true,
+          "rationale": "Heavier correctly compares two things.",
+          "distractorRole": null
+        }
+      ],
+      "correctIndex": 3,
+      "correctAnswer": "heavier",
+      "distractorRationalesJson": [
+        "Heaviest compares three or more things, not two.",
+        "More heavy is not the expected comparative form for this sentence.",
+        "Heavy does not compare the two backpacks.",
+        "Heavier correctly compares two things."
+      ],
+      "scoring": {
+        "totalPoints": 1,
+        "partialCreditRules": [
+          {
+            "points": 1,
+            "rule": "The single correct convention response is selected."
+          },
+          {
+            "points": 0,
+            "rule": "Any incorrect, ambiguous, missing, or extra response earns no credit."
+          }
+        ],
+        "scoringNotes": "Full credit requires the one defensible convention answer and no contradictory answer."
+      },
+      "studentPreviewJson": {
+        "prompt": "Which word correctly compares two things? \"My backpack is ___ than yours.\"",
+        "choices": [
+          "heaviest",
+          "more heavy",
+          "heavy",
+          "heavier"
+        ],
+        "leaksAnswer": false
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_STAMINA_CONVENTIONS_MC_BLOCK",
+        "noDbWrite": true
+      },
+      "provenanceJson": {
+        "fixtureOnly": true,
+        "containsAttributedQuotes": false
+      }
+    },
+    {
+      "id": "conv_06",
+      "itemId": "conv_06",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "MCQ",
+      "interactionType": "MCQ",
+      "interactionSubtype": "standalone_conventions",
+      "passageId": null,
+      "ecSkillFamily": "conventions",
+      "eligibleContent": "E03.D.1.2.1",
+      "assessmentAnchor": "E03.D.1",
+      "anchorDescriptor": "E03.D.1.2",
+      "reportingCategory": "D",
+      "pointValue": 1,
+      "targetConvention": "capitalization in titles",
+      "targetSubskill": "title_capitalization",
+      "skill": "conventions_title_capitalization",
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "approvalEligible": false,
+      "stem": "Which book title is capitalized correctly?",
+      "studentFacingPrompt": "Which book title is capitalized correctly?",
+      "answerChoicesJson": [
+        "the moon over maple street",
+        "The Moon Over Maple Street",
+        "The moon over Maple Street",
+        "The Moon Over Maple street"
+      ],
+      "choices": [
+        {
+          "text": "the moon over maple street",
+          "isCorrect": false,
+          "errorPattern": "no_capitalization",
+          "distractorRole": "no_capitalization",
+          "rationale": "Important words in the title are not capitalized."
+        },
+        {
+          "text": "The Moon Over Maple Street",
+          "isCorrect": true,
+          "errorPattern": null,
+          "distractorRole": null,
+          "rationale": "The important words in the title are capitalized."
+        },
+        {
+          "text": "The moon over Maple Street",
+          "isCorrect": false,
+          "errorPattern": "important_words_not_capitalized",
+          "distractorRole": "important_words_not_capitalized",
+          "rationale": "Moon should be capitalized as an important title word."
+        },
+        {
+          "text": "The Moon Over Maple street",
+          "isCorrect": false,
+          "errorPattern": "last_word_not_capitalized",
+          "distractorRole": "last_word_not_capitalized",
+          "rationale": "Street should be capitalized as the last word of the title."
+        }
+      ],
+      "structuredChoicesJson": [
+        {
+          "text": "the moon over maple street",
+          "isCorrect": false,
+          "rationale": "Important words in the title are not capitalized.",
+          "distractorRole": "no_capitalization"
+        },
+        {
+          "text": "The Moon Over Maple Street",
+          "isCorrect": true,
+          "rationale": "The important words in the title are capitalized.",
+          "distractorRole": null
+        },
+        {
+          "text": "The moon over Maple Street",
+          "isCorrect": false,
+          "rationale": "Moon should be capitalized as an important title word.",
+          "distractorRole": "important_words_not_capitalized"
+        },
+        {
+          "text": "The Moon Over Maple street",
+          "isCorrect": false,
+          "rationale": "Street should be capitalized as the last word of the title.",
+          "distractorRole": "last_word_not_capitalized"
+        }
+      ],
+      "correctIndex": 1,
+      "correctAnswer": "The Moon Over Maple Street",
+      "distractorRationalesJson": [
+        "Important words in the title are not capitalized.",
+        "The important words in the title are capitalized.",
+        "Moon should be capitalized as an important title word.",
+        "Street should be capitalized as the last word of the title."
+      ],
+      "scoring": {
+        "totalPoints": 1,
+        "partialCreditRules": [
+          {
+            "points": 1,
+            "rule": "The single correct convention response is selected."
+          },
+          {
+            "points": 0,
+            "rule": "Any incorrect, ambiguous, missing, or extra response earns no credit."
+          }
+        ],
+        "scoringNotes": "Full credit requires the one defensible convention answer and no contradictory answer."
+      },
+      "studentPreviewJson": {
+        "prompt": "Which book title is capitalized correctly?",
+        "choices": [
+          "the moon over maple street",
+          "The Moon Over Maple Street",
+          "The moon over Maple Street",
+          "The Moon Over Maple street"
+        ],
+        "leaksAnswer": false
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_STAMINA_CONVENTIONS_MC_BLOCK",
+        "noDbWrite": true
+      },
+      "provenanceJson": {
+        "fixtureOnly": true,
+        "containsAttributedQuotes": false
+      }
+    },
+    {
+      "id": "conv_07",
+      "itemId": "conv_07",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "MCQ",
+      "interactionType": "MCQ",
+      "interactionSubtype": "standalone_conventions",
+      "passageId": null,
+      "ecSkillFamily": "conventions",
+      "eligibleContent": "E03.D.1.2.2",
+      "assessmentAnchor": "E03.D.1",
+      "anchorDescriptor": "E03.D.1.2",
+      "reportingCategory": "D",
+      "pointValue": 1,
+      "targetConvention": "commas in addresses",
+      "targetSubskill": "commas_in_addresses",
+      "skill": "conventions_commas_in_addresses",
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "approvalEligible": false,
+      "stem": "Which sentence uses commas correctly in the address?",
+      "studentFacingPrompt": "Which sentence uses commas correctly in the address?",
+      "answerChoicesJson": [
+        "Mail the letter to 18 Pine Street Erie, Pennsylvania.",
+        "Mail the letter to 18 Pine Street, Erie Pennsylvania.",
+        "Mail the letter to 18 Pine Street, Erie, Pennsylvania.",
+        "Mail the letter to, 18 Pine Street Erie Pennsylvania."
+      ],
+      "choices": [
+        {
+          "text": "Mail the letter to 18 Pine Street Erie, Pennsylvania.",
+          "isCorrect": false,
+          "errorPattern": "missing_comma_after_street",
+          "distractorRole": "missing_comma_after_street",
+          "rationale": "A comma is needed after the street address before the city."
+        },
+        {
+          "text": "Mail the letter to 18 Pine Street, Erie Pennsylvania.",
+          "isCorrect": false,
+          "errorPattern": "missing_comma_after_city",
+          "distractorRole": "missing_comma_after_city",
+          "rationale": "A comma is needed after the city before the state."
+        },
+        {
+          "text": "Mail the letter to 18 Pine Street, Erie, Pennsylvania.",
+          "isCorrect": true,
+          "errorPattern": null,
+          "distractorRole": null,
+          "rationale": "The address uses commas after the street and city."
+        },
+        {
+          "text": "Mail the letter to, 18 Pine Street Erie Pennsylvania.",
+          "isCorrect": false,
+          "errorPattern": "misplaced_and_missing_commas",
+          "distractorRole": "misplaced_and_missing_commas",
+          "rationale": "The comma after to is misplaced, and needed address commas are missing."
+        }
+      ],
+      "structuredChoicesJson": [
+        {
+          "text": "Mail the letter to 18 Pine Street Erie, Pennsylvania.",
+          "isCorrect": false,
+          "rationale": "A comma is needed after the street address before the city.",
+          "distractorRole": "missing_comma_after_street"
+        },
+        {
+          "text": "Mail the letter to 18 Pine Street, Erie Pennsylvania.",
+          "isCorrect": false,
+          "rationale": "A comma is needed after the city before the state.",
+          "distractorRole": "missing_comma_after_city"
+        },
+        {
+          "text": "Mail the letter to 18 Pine Street, Erie, Pennsylvania.",
+          "isCorrect": true,
+          "rationale": "The address uses commas after the street and city.",
+          "distractorRole": null
+        },
+        {
+          "text": "Mail the letter to, 18 Pine Street Erie Pennsylvania.",
+          "isCorrect": false,
+          "rationale": "The comma after to is misplaced, and needed address commas are missing.",
+          "distractorRole": "misplaced_and_missing_commas"
+        }
+      ],
+      "correctIndex": 2,
+      "correctAnswer": "Mail the letter to 18 Pine Street, Erie, Pennsylvania.",
+      "distractorRationalesJson": [
+        "A comma is needed after the street address before the city.",
+        "A comma is needed after the city before the state.",
+        "The address uses commas after the street and city.",
+        "The comma after to is misplaced, and needed address commas are missing."
+      ],
+      "scoring": {
+        "totalPoints": 1,
+        "partialCreditRules": [
+          {
+            "points": 1,
+            "rule": "The single correct convention response is selected."
+          },
+          {
+            "points": 0,
+            "rule": "Any incorrect, ambiguous, missing, or extra response earns no credit."
+          }
+        ],
+        "scoringNotes": "Full credit requires the one defensible convention answer and no contradictory answer."
+      },
+      "studentPreviewJson": {
+        "prompt": "Which sentence uses commas correctly in the address?",
+        "choices": [
+          "Mail the letter to 18 Pine Street Erie, Pennsylvania.",
+          "Mail the letter to 18 Pine Street, Erie Pennsylvania.",
+          "Mail the letter to 18 Pine Street, Erie, Pennsylvania.",
+          "Mail the letter to, 18 Pine Street Erie Pennsylvania."
+        ],
+        "leaksAnswer": false
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_STAMINA_CONVENTIONS_MC_BLOCK",
+        "noDbWrite": true
+      },
+      "provenanceJson": {
+        "fixtureOnly": true,
+        "containsAttributedQuotes": false
+      }
+    },
+    {
+      "id": "conv_08",
+      "itemId": "conv_08",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "MCQ",
+      "interactionType": "MCQ",
+      "interactionSubtype": "standalone_conventions",
+      "passageId": null,
+      "ecSkillFamily": "conventions",
+      "eligibleContent": "E03.D.1.2.3",
+      "assessmentAnchor": "E03.D.1",
+      "anchorDescriptor": "E03.D.1.2",
+      "reportingCategory": "D",
+      "pointValue": 1,
+      "targetConvention": "quotation marks in dialogue",
+      "targetSubskill": "dialogue_punctuation",
+      "skill": "conventions_dialogue_punctuation",
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "approvalEligible": false,
+      "stem": "Which sentence uses quotation marks correctly?",
+      "studentFacingPrompt": "Which sentence uses quotation marks correctly?",
+      "answerChoicesJson": [
+        "Maria said, I found my missing shoes.",
+        "Maria said, \"I found my missing shoes.",
+        "\"Maria said,\" I found my missing shoes.",
+        "Maria said, \"I found my missing shoes.\""
+      ],
+      "choices": [
+        {
+          "text": "Maria said, I found my missing shoes.",
+          "isCorrect": false,
+          "errorPattern": "missing_quotation_marks",
+          "distractorRole": "missing_quotation_marks",
+          "rationale": "The spoken words need quotation marks."
+        },
+        {
+          "text": "Maria said, \"I found my missing shoes.",
+          "isCorrect": false,
+          "errorPattern": "missing_closing_mark",
+          "distractorRole": "missing_closing_mark",
+          "rationale": "The sentence has an opening quotation mark but no closing quotation mark."
+        },
+        {
+          "text": "\"Maria said,\" I found my missing shoes.",
+          "isCorrect": false,
+          "errorPattern": "marks_around_wrong_words",
+          "distractorRole": "marks_around_wrong_words",
+          "rationale": "The quotation marks are around the speaker tag instead of the spoken words."
+        },
+        {
+          "text": "Maria said, \"I found my missing shoes.\"",
+          "isCorrect": true,
+          "errorPattern": null,
+          "distractorRole": null,
+          "rationale": "The quotation marks correctly surround the words Maria says."
+        }
+      ],
+      "structuredChoicesJson": [
+        {
+          "text": "Maria said, I found my missing shoes.",
+          "isCorrect": false,
+          "rationale": "The spoken words need quotation marks.",
+          "distractorRole": "missing_quotation_marks"
+        },
+        {
+          "text": "Maria said, \"I found my missing shoes.",
+          "isCorrect": false,
+          "rationale": "The sentence has an opening quotation mark but no closing quotation mark.",
+          "distractorRole": "missing_closing_mark"
+        },
+        {
+          "text": "\"Maria said,\" I found my missing shoes.",
+          "isCorrect": false,
+          "rationale": "The quotation marks are around the speaker tag instead of the spoken words.",
+          "distractorRole": "marks_around_wrong_words"
+        },
+        {
+          "text": "Maria said, \"I found my missing shoes.\"",
+          "isCorrect": true,
+          "rationale": "The quotation marks correctly surround the words Maria says.",
+          "distractorRole": null
+        }
+      ],
+      "correctIndex": 3,
+      "correctAnswer": "Maria said, \"I found my missing shoes.\"",
+      "distractorRationalesJson": [
+        "The spoken words need quotation marks.",
+        "The sentence has an opening quotation mark but no closing quotation mark.",
+        "The quotation marks are around the speaker tag instead of the spoken words.",
+        "The quotation marks correctly surround the words Maria says."
+      ],
+      "scoring": {
+        "totalPoints": 1,
+        "partialCreditRules": [
+          {
+            "points": 1,
+            "rule": "The single correct convention response is selected."
+          },
+          {
+            "points": 0,
+            "rule": "Any incorrect, ambiguous, missing, or extra response earns no credit."
+          }
+        ],
+        "scoringNotes": "Full credit requires the one defensible convention answer and no contradictory answer."
+      },
+      "studentPreviewJson": {
+        "prompt": "Which sentence uses quotation marks correctly?",
+        "choices": [
+          "Maria said, I found my missing shoes.",
+          "Maria said, \"I found my missing shoes.",
+          "\"Maria said,\" I found my missing shoes.",
+          "Maria said, \"I found my missing shoes.\""
+        ],
+        "leaksAnswer": false
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_STAMINA_CONVENTIONS_MC_BLOCK",
+        "noDbWrite": true
+      },
+      "provenanceJson": {
+        "fixtureOnly": true,
+        "containsAttributedQuotes": false
+      }
+    },
+    {
+      "id": "conv_09",
+      "itemId": "conv_09",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "MCQ",
+      "interactionType": "MCQ",
+      "interactionSubtype": "standalone_conventions",
+      "passageId": null,
+      "ecSkillFamily": "conventions",
+      "eligibleContent": "E03.D.1.2.5",
+      "assessmentAnchor": "E03.D.1",
+      "anchorDescriptor": "E03.D.1.2",
+      "reportingCategory": "D",
+      "pointValue": 1,
+      "targetConvention": "spelling",
+      "targetSubskill": "spelling_in_context",
+      "skill": "conventions_spelling",
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "approvalEligible": false,
+      "stem": "Which sentence is spelled correctly?",
+      "studentFacingPrompt": "Which sentence is spelled correctly?",
+      "answerChoicesJson": [
+        "The weather was sunny on Friday.",
+        "The weathr was sunny on Friday.",
+        "The weather was suny on Friday.",
+        "The weathr was suny on Friday."
+      ],
+      "choices": [
+        {
+          "text": "The weather was sunny on Friday.",
+          "isCorrect": true,
+          "errorPattern": null,
+          "distractorRole": null,
+          "rationale": "Weather and sunny are both spelled correctly."
+        },
+        {
+          "text": "The weathr was sunny on Friday.",
+          "isCorrect": false,
+          "errorPattern": "one_word_misspelled",
+          "distractorRole": "one_word_misspelled",
+          "rationale": "Weathr is misspelled."
+        },
+        {
+          "text": "The weather was suny on Friday.",
+          "isCorrect": false,
+          "errorPattern": "one_word_misspelled",
+          "distractorRole": "one_word_misspelled",
+          "rationale": "Suny is misspelled."
+        },
+        {
+          "text": "The weathr was suny on Friday.",
+          "isCorrect": false,
+          "errorPattern": "two_words_misspelled",
+          "distractorRole": "two_words_misspelled",
+          "rationale": "Both weathr and suny are misspelled."
+        }
+      ],
+      "structuredChoicesJson": [
+        {
+          "text": "The weather was sunny on Friday.",
+          "isCorrect": true,
+          "rationale": "Weather and sunny are both spelled correctly.",
+          "distractorRole": null
+        },
+        {
+          "text": "The weathr was sunny on Friday.",
+          "isCorrect": false,
+          "rationale": "Weathr is misspelled.",
+          "distractorRole": "one_word_misspelled"
+        },
+        {
+          "text": "The weather was suny on Friday.",
+          "isCorrect": false,
+          "rationale": "Suny is misspelled.",
+          "distractorRole": "one_word_misspelled"
+        },
+        {
+          "text": "The weathr was suny on Friday.",
+          "isCorrect": false,
+          "rationale": "Both weathr and suny are misspelled.",
+          "distractorRole": "two_words_misspelled"
+        }
+      ],
+      "correctIndex": 0,
+      "correctAnswer": "The weather was sunny on Friday.",
+      "distractorRationalesJson": [
+        "Weather and sunny are both spelled correctly.",
+        "Weathr is misspelled.",
+        "Suny is misspelled.",
+        "Both weathr and suny are misspelled."
+      ],
+      "scoring": {
+        "totalPoints": 1,
+        "partialCreditRules": [
+          {
+            "points": 1,
+            "rule": "The single correct convention response is selected."
+          },
+          {
+            "points": 0,
+            "rule": "Any incorrect, ambiguous, missing, or extra response earns no credit."
+          }
+        ],
+        "scoringNotes": "Full credit requires the one defensible convention answer and no contradictory answer."
+      },
+      "studentPreviewJson": {
+        "prompt": "Which sentence is spelled correctly?",
+        "choices": [
+          "The weather was sunny on Friday.",
+          "The weathr was sunny on Friday.",
+          "The weather was suny on Friday.",
+          "The weathr was suny on Friday."
+        ],
+        "leaksAnswer": false
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_STAMINA_CONVENTIONS_MC_BLOCK",
+        "noDbWrite": true
+      },
+      "provenanceJson": {
+        "fixtureOnly": true,
+        "containsAttributedQuotes": false
+      }
+    }
+  ]
+}
