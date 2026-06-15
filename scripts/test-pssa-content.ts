@@ -8,6 +8,7 @@ import {
   buildPssaPassageQualityReport,
   hasBlockingPassageSpecificityFailure,
   hasBlockingPassageQualityFailure,
+  singleAnswerChoiceGroups,
   type McqAuditInput,
   type StructuredChoice,
 } from "./audit/pssa-audit-detectors";
@@ -1206,6 +1207,319 @@ assert.equal(/\*\*\*\*/.test(staminaReviewerDraft), false, "reviewer draft must 
 for (const band of [3, 2, 1, 0]) {
   assert.equal(staminaReviewerDraft.includes(`- ${band}:`), true, `reviewer draft must render score band ${band}`);
 }
+
+type BatteryStatus = "PASS" | "FAIL" | "SKIP";
+type BatteryRow = {
+  itemId: string;
+  interactionType: string;
+  gateId: string;
+  status: BatteryStatus;
+  detail: string;
+};
+
+function staminaItemId(item: any) {
+  return String(item.itemId ?? item.id ?? "");
+}
+
+function staminaInteractionType(item: any) {
+  return String(item.interactionType ?? item.itemType ?? "");
+}
+
+function staminaPassageIds(item: any) {
+  const ids = [
+    item.passageId,
+    ...(Array.isArray(item.passageIds) ? item.passageIds : []),
+    ...(Array.isArray(item.passageLinks) ? item.passageLinks.map((link: any) => link.passageId) : []),
+  ].filter(Boolean).map(String);
+  return [...new Set(ids)];
+}
+
+function reportRow(item: any, gateId: string, status: BatteryStatus, detail: string): BatteryRow {
+  return {
+    itemId: staminaItemId(item),
+    interactionType: staminaInteractionType(item),
+    gateId,
+    status,
+    detail,
+  };
+}
+
+function buildAnswerPositionRow(items: any[], label: string) {
+  const counts = [0, 0, 0, 0];
+  for (const item of items) if (typeof item.correctIndex === "number") counts[item.correctIndex] += 1;
+  const maxShare = Math.max(...counts) / Math.max(items.length, 1);
+  return {
+    label,
+    itemCount: items.length,
+    counts,
+    maxShare,
+    status: maxShare <= 0.4 ? "PASS" as const : "FAIL" as const,
+    detail: `A:${counts[0]} B:${counts[1]} C:${counts[2]} D:${counts[3]} maxShare=${maxShare.toFixed(4)}`,
+  };
+}
+
+function firstPassageFor(item: any, passagesById: Map<string, any>) {
+  return passagesById.get(staminaPassageIds(item)[0]);
+}
+
+function buildStaminaContentQualityBatteryReport() {
+  const passageGroups = [owlGroup];
+  const passages = [syrupPassage, boatPassage, rabbitPassage, ...owlGroup.members.map((member) => member.passage)];
+  const passagesById = new Map(passages.map((passage: any) => [passage.id, passage]));
+  const readingItems = [...syrupItems, ...boatItems, ...owlItems, ...rabbitItems];
+  const allItems = [...readingItems, ...staminaConventionItems];
+  const mcqItems = allItems.filter((item) => staminaInteractionType(item) === "MCQ");
+  const ebsrItems = allItems.filter((item) => staminaInteractionType(item) === "EBSR");
+  const shortAnswerItems = allItems.filter((item) => staminaInteractionType(item) === "SHORT_ANSWER");
+
+  assert.equal(allItems.length, 37, "stamina diagnostic battery must cover the current encoded 37-item packet");
+  assert.equal(mcqItems.length, 29, "stamina packet must include 20 reading MCQs plus 9 standalone conventions MCQs");
+  assert.equal(ebsrItems.length, 4, "stamina packet must include 4 EBSR items");
+  assert.equal(shortAnswerItems.length, 4, "stamina packet must include 4 SHORT_ANSWER items");
+
+  const rows: BatteryRow[] = [];
+  const overlap = evaluatePssaPassageMultipointEvidenceOverlap(readingItems, passages);
+  for (const item of allItems) {
+    const passage = firstPassageFor(item, passagesById);
+    rows.push(reportRow(item, "PSSA_ITEM_INTRA_CHOICE_DUPLICATE", evaluatePssaItemIntraChoiceDuplicate(item), "foundation evaluator"));
+    rows.push(reportRow(item, "PSSA_VOCAB_KEY_CONSTRUCT", evaluatePssaVocabKeyConstruct(item, passage), "foundation evaluator"));
+    rows.push(reportRow(item, "PSSA_SA_BANDS_NONEMPTY", evaluatePssaShortAnswerBandsNonempty(item), "foundation evaluator"));
+    rows.push(reportRow(item, "PSSA_ITEM_EC_GENRE_MATCH", evaluatePssaItemEcGenreMatch(item, passage), "foundation evaluator"));
+    rows.push(reportRow(item, "PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP", overlap[staminaItemId(item)] ?? "PASS", "foundation evaluator"));
+  }
+
+  const passageQualityRows = buildPssaPassageQualityReport(passages);
+  const passageSpecificityRows = buildMcqPassageSpecificityReport(readingItems as McqAuditInput[], passages);
+  const passageSpecificityRowsByItem = new Map<string, typeof passageSpecificityRows>();
+  for (const row of passageSpecificityRows) {
+    if (!passageSpecificityRowsByItem.has(row.itemId)) passageSpecificityRowsByItem.set(row.itemId, []);
+    passageSpecificityRowsByItem.get(row.itemId)?.push(row);
+  }
+  for (const item of mcqItems) {
+    const itemRows = passageSpecificityRowsByItem.get(staminaItemId(item)) ?? [];
+    if (itemRows.length) {
+      const failed = itemRows.some((row) => row.result === "FAIL" && row.severity === "BLOCKER");
+      rows.push(reportRow(item, "PSSA_MCQ_PASSAGE_SPECIFICITY", failed ? "FAIL" : "PASS", `${itemRows.length} detector rows; failures=${itemRows.filter((row) => row.result === "FAIL").length}`));
+    } else {
+      rows.push(reportRow(item, "PSSA_MCQ_PASSAGE_SPECIFICITY", "SKIP", "not passage-linked reading MCQ (standalone conventions or paired group variant)"));
+    }
+  }
+
+  const skillRows = buildItemEcSkillMatchReport(readingItems as McqAuditInput[], passages, ecCatalog);
+  const skillRowsByItem = new Map(skillRows.map((row) => [row.itemId, row]));
+  for (const item of mcqItems) {
+    const skill = skillRowsByItem.get(staminaItemId(item));
+    rows.push(reportRow(
+      item,
+      "PSSA_ITEM_EC_SKILL_MATCH",
+      skill ? (skill.skillMatchResult === "FAIL" ? "FAIL" : "PASS") : "SKIP",
+      skill ? `${skill.skillMatchResult}: ${skill.notes}` : "not passage-linked reading MCQ",
+    ));
+  }
+
+  const singleAnswerGroups = singleAnswerChoiceGroups(allItems, { includeEbsrPartA: true });
+  const singleAnswerById = new Map(singleAnswerGroups.map((group) => [String(group.itemId), group]));
+  const correctIsLongestRows = buildMcqCorrectIsLongestReport(singleAnswerGroups);
+  const correctIsLongestById = new Map(correctIsLongestRows.filter((row) => row.scope === "item").map((row) => [row.itemId, row]));
+  for (const group of singleAnswerGroups) {
+    const source = allItems.find((item) => staminaItemId(item) === group.originalItemId) ?? group;
+    const lengthRow = correctIsLongestById.get(String(group.itemId));
+    rows.push(reportRow(
+      source,
+      `PSSA_MCQ_CORRECT_IS_LONGEST${group.sourceInteractionType === "EBSR_PART_A" ? "_EBSR_PART_A_REPORT_ONLY" : ""}`,
+      lengthRow?.result ?? "FAIL",
+      lengthRow
+        ? `choiceGroup=${group.itemId}; correctWords=${lengthRow.correctWordLength}; maxDistractorWords=${lengthRow.longestDistractorWordLength}; gap=${lengthRow.wordLengthGap}; uniquelyLongest=${lengthRow.uniquelyLongest}`
+        : `choiceGroup=${group.itemId}; missing length row`,
+    ));
+  }
+
+  const absoluteRows = buildMcqAbsoluteLanguageDistractorReport(singleAnswerGroups);
+  const absoluteFailuresById = new Set(absoluteRows.filter((row) => row.itemId !== "batch" && row.result === "FAIL").map((row) => row.itemId));
+  for (const group of singleAnswerGroups) {
+    const source = allItems.find((item) => staminaItemId(item) === group.originalItemId) ?? group;
+    rows.push(reportRow(
+      source,
+      `PSSA_MCQ_ABSOLUTE_LANGUAGE_DISTRACTOR${group.sourceInteractionType === "EBSR_PART_A" ? "_EBSR_PART_A_REPORT_ONLY" : ""}`,
+      absoluteFailuresById.has(String(group.itemId)) ? "FAIL" : "PASS",
+      `choiceGroup=${group.itemId}`,
+    ));
+  }
+
+  const mcqPosition = buildAnswerPositionRow(singleAnswerGroups.filter((group) => group.sourceInteractionType === "MCQ"), "stamina MCQ");
+  const ebsrPartAPosition = buildAnswerPositionRow(singleAnswerGroups.filter((group) => group.sourceInteractionType === "EBSR_PART_A"), "stamina EBSR Part A report-only");
+  for (const item of mcqItems) rows.push(reportRow(item, "PSSA_MCQ_ANSWER_POSITION_DISTRIBUTION", mcqPosition.status, mcqPosition.detail));
+  for (const item of ebsrItems) rows.push(reportRow(item, "PSSA_EBSR_PART_A_ANSWER_POSITION_DISTRIBUTION_REPORT_ONLY", ebsrPartAPosition.status, ebsrPartAPosition.detail));
+
+  for (const passage of [syrupPassage, boatPassage, rabbitPassage]) {
+    const passageItems = readingItems.filter((item) => staminaPassageIds(item).includes(passage.id));
+    for (const staminaRow of evaluatePssaStaminaGates(passage, passageItems)) {
+      const targetItem = allItems.find((item) => staminaItemId(item) === staminaRow.targetId);
+      if (targetItem) rows.push(reportRow(targetItem, staminaRow.gateId, staminaRow.status, staminaRow.detail));
+    }
+  }
+  for (const group of passageGroups) {
+    const pairedGroupRows = [
+      { gateId: "PSSA_PAIRED_GROUP_STAMINA_METADATA", targetId: group.id, status: evaluatePssaPairedGroupStaminaMetadata(group), detail: "paired group metadata" },
+      ...evaluatePssaPairedSectionLookbackBalance(group, owlItems),
+    ] as Array<{ gateId: string; targetId: string; status: BatteryStatus; detail: string }>;
+    for (const groupRow of pairedGroupRows) {
+      const targetItem = allItems.find((item) => staminaItemId(item) === groupRow.targetId);
+      if (targetItem) rows.push(reportRow(targetItem, groupRow.gateId, groupRow.status, groupRow.detail));
+    }
+    const pairedOverlap = evaluatePssaPairedMultipointEvidenceOverlap(owlItems);
+    for (const item of owlItems) {
+      if (pairedOverlap[staminaItemId(item)]) rows.push(reportRow(item, "PSSA_PAIRED_MULTIPOINT_EVIDENCE_OVERLAP", pairedOverlap[staminaItemId(item)], "paired passageSlot variant"));
+      if (["MCQ", "EBSR", "SHORT_ANSWER"].includes(staminaInteractionType(item))) rows.push(reportRow(item, "PSSA_REQUIRED_EVIDENCE_SLOTS", evaluatePssaRequiredEvidenceSlots(item, group), "paired passageSlot variant"));
+    }
+  }
+
+  const inferenceSkipRows = passageSpecificityRows
+    .filter((row) => row.ruleId === "PSSA_MCQ_PASSAGE_SPECIFIC_CHOICES" && row.result === "SKIP" && row.evidence.startsWith("SKIP_INFERENCE_INTERPRETATION"))
+    .map((row) => ({ itemId: row.itemId, evidence: row.evidence }));
+  assert.deepEqual(
+    inferenceSkipRows.map((row) => row.itemId).sort(),
+    [
+      "pssa_stamina_item_g3_boat_05",
+      "pssa_stamina_item_g3_rabbit_03",
+      "pssa_stamina_item_g3_rabbit_04",
+      "pssa_stamina_item_g3_rabbit_06",
+    ],
+    "#47 inference/interpretation skip set must be visible and limited to intended literary/drama items",
+  );
+  for (const itemId of inferenceSkipRows.map((row) => row.itemId)) {
+    const itemRows = passageSpecificityRowsByItem.get(itemId) ?? [];
+    assert.equal(itemRows.length > 0, true, `${itemId} must still enter the passage-specificity detector`);
+    assert.equal(
+      itemRows.some((row) => row.ruleId === "PSSA_MCQ_PASSAGE_SPECIFIC_CHOICES" && row.result === "SKIP"),
+      true,
+      `${itemId} must expose the scoped #47 SKIP row rather than disappearing from the detector`,
+    );
+    assert.equal(
+      itemRows.some((row) => row.result === "FAIL" && ["PSSA_MCQ_CHOICE_EVIDENCE_LINKS_REQUIRED", "PSSA_MCQ_DISTRACTOR_ROLE_REQUIRED", "PSSA_MCQ_SINGLE_DEFENSIBLE_ANSWER"].includes(row.ruleId)),
+      false,
+      `${itemId} must still be eligible for the other blocker gates; no hidden evidence/role/single-answer failure should be present`,
+    );
+  }
+
+  const foundationPilot = JSON.parse(fs.readFileSync("exemplars/pssa_grade3_pilot/pilot_backend.json", "utf8"));
+  const foundationEbsr = JSON.parse(fs.readFileSync("exemplars/pssa_grade3_ebsr/grade3_ebsr_backend.json", "utf8"));
+  const literaryTopup = JSON.parse(fs.readFileSync("exemplars/pssa_grade3_literary_topup/grade3_literary_topup_backend.json", "utf8"));
+  const foundationSingleAnswerGroups = singleAnswerChoiceGroups([
+    ...foundationPilot.items.filter((item: any) => item.itemType === "MCQ" && item.passageId && item.itemStatus !== "deprecated_superseded"),
+    ...foundationEbsr.items,
+    ...literaryTopup.items.filter((item: any) => ["MCQ", "EBSR"].includes(staminaInteractionType(item))),
+  ], { includeEbsrPartA: true });
+  const foundationPartALengthRows = buildMcqCorrectIsLongestReport(foundationSingleAnswerGroups)
+    .filter((row) => row.scope === "item" && String(row.itemId).includes("::partA"));
+
+  const failures = rows.filter((row) => row.status === "FAIL");
+  assert.equal(rows.length > allItems.length * 8, true, "stamina battery report must include a broad per-item gate matrix, not spot checks");
+  assert.equal(failures.length > 0, true, "report mode must expose known current stamina failures before the content-fix PR");
+  assert.equal(
+    correctIsLongestRows.filter((row) => row.scope === "item" && row.result === "FAIL").length >= 9,
+    true,
+    "report mode must list the current correct-is-longest failures instead of editing content in this PR",
+  );
+  assert.deepEqual(
+    correctIsLongestRows
+      .filter((row) => row.scope === "item" && row.result === "FAIL")
+      .map((row) => row.itemId)
+      .sort(),
+    [
+      "pssa_stamina_item_g3_boat_01",
+      "pssa_stamina_item_g3_boat_04",
+      "pssa_stamina_item_g3_boat_05",
+      "pssa_stamina_item_g3_boat_ebsr_01::partA",
+      "pssa_stamina_item_g3_owls_01",
+      "pssa_stamina_item_g3_owls_03",
+      "pssa_stamina_item_g3_owls_04",
+      "pssa_stamina_item_g3_owls_ebsr_01::partA",
+      "pssa_stamina_item_g3_rabbit_01",
+      "pssa_stamina_item_g3_rabbit_02",
+      "pssa_stamina_item_g3_rabbit_04",
+      "pssa_stamina_item_g3_rabbit_05",
+      "pssa_stamina_item_g3_rabbit_06",
+      "pssa_stamina_item_g3_syrup_01",
+      "pssa_stamina_item_g3_syrup_03",
+      "pssa_stamina_item_g3_syrup_ebsr_01::partA",
+    ].sort(),
+    "report mode must pin the current stamina correct-is-longest findings, including EBSR Part A report-only rows",
+  );
+  assert.equal(correctIsLongestRows.every((row) => row.scope === "batch" || (row.wordLengthGap !== "" && row.uniquelyLongest !== "")), true, "correct-is-longest report must expose word gap and uniquely-longest flag");
+
+  const reportLines = [
+    "# PSSA Stamina Content-Quality Battery Report",
+    "",
+    "Report mode: this file lists PASS/FAIL/SKIP findings for the 37-item encoded stamina diagnostic packet. It does not enforce all-pass yet.",
+    "",
+    "## Functions Reused",
+    "",
+    "- PSSA_CONTENT_QUALITY_GATE_IDS evaluators: intra-choice duplicate, vocab key construct, SA bands nonempty, EC genre match, passage multipoint evidence overlap.",
+    "- buildMcqPassageSpecificityReport, buildItemEcSkillMatchReport, buildMcqCorrectIsLongestReport, buildMcqAbsoluteLanguageDistractorReport.",
+    "- buildPssaPassageQualityReport.",
+    "- evaluatePssaStaminaGates and paired passageSlot variants for released-length, drama, and paired fixtures.",
+    "- singleAnswerChoiceGroups report-only shortcut extractor for MCQ plus EBSR Part A.",
+    "",
+    "## Packet Counts",
+    "",
+    `- Items: ${allItems.length} total = ${mcqItems.length} MCQ (${mcqItems.length - staminaConventionItems.length} reading + ${staminaConventionItems.length} conventions) + ${ebsrItems.length} EBSR + ${shortAnswerItems.length} SHORT_ANSWER.`,
+    `- Passages: ${passages.length} encoded stamina passages across ${passageGroups.length} paired group.`,
+    "",
+    "## #47 Visible Skip Set",
+    "",
+    "| itemId | evidence |",
+    "| --- | --- |",
+    ...inferenceSkipRows.map((row) => `| ${row.itemId} | ${row.evidence} |`),
+    "",
+    "## Correct-Is-Longest Detail",
+    "",
+    "| itemId | source | result | correctWords | maxDistractorWords | gap | uniquelyLongest | notes |",
+    "| --- | --- | --- | ---: | ---: | ---: | --- | --- |",
+    ...correctIsLongestRows
+      .filter((row) => row.scope === "item")
+      .map((row) => {
+        const group = singleAnswerById.get(row.itemId);
+        return `| ${row.itemId} | ${group?.sourceInteractionType ?? "MCQ"} | ${row.result} | ${row.correctWordLength} | ${row.longestDistractorWordLength} | ${row.wordLengthGap} | ${row.uniquelyLongest} | ${row.notes} |`;
+      }),
+    "",
+    "## Foundation EBSR Part A Impact (Report-Only)",
+    "",
+    "| itemId | result | correctWords | maxDistractorWords | gap | uniquelyLongest |",
+    "| --- | --- | ---: | ---: | ---: | --- |",
+    ...foundationPartALengthRows.map((row) => `| ${row.itemId} | ${row.result} | ${row.correctWordLength} | ${row.longestDistractorWordLength} | ${row.wordLengthGap} | ${row.uniquelyLongest} |`),
+    "",
+    "## FAIL List",
+    "",
+    "| itemId | interactionType | gateId | detail |",
+    "| --- | --- | --- | --- |",
+    ...failures.map((row) => `| ${row.itemId} | ${row.interactionType} | ${row.gateId} | ${row.detail.replace(/\|/g, "/")} |`),
+    "",
+    "## Per-Item Gate Matrix",
+    "",
+    "| itemId | interactionType | gateId | status | detail |",
+    "| --- | --- | --- | --- | --- |",
+    ...rows.map((row) => `| ${row.itemId} | ${row.interactionType} | ${row.gateId} | ${row.status} | ${row.detail.replace(/\|/g, "/")} |`),
+    "",
+    "## Passage Quality Rows",
+    "",
+    "| passageId | ruleId | result | severity | notes |",
+    "| --- | --- | --- | --- | --- |",
+    ...passageQualityRows.map((row) => `| ${row.passageId} | ${row.ruleId} | ${row.result} | ${row.severity} | ${row.notes.replace(/\|/g, "/")} |`),
+    "",
+    "## Passage Specificity Raw Rows",
+    "",
+    "| itemId | ruleId | result | severity | evidence | notes |",
+    "| --- | --- | --- | --- | --- | --- |",
+    ...passageSpecificityRows.map((row) => `| ${row.itemId} | ${row.ruleId} | ${row.result} | ${row.severity} | ${row.evidence.replace(/\|/g, "/")} | ${row.notes.replace(/\|/g, "/")} |`),
+    "",
+  ];
+  fs.writeFileSync("reports/pssa_stamina_content_quality_battery.md", `${reportLines.join("\n")}\n`);
+  return { rows, failures, passageQualityRows, passageSpecificityRows, correctIsLongestRows, foundationPartALengthRows };
+}
+
+const staminaBattery = buildStaminaContentQualityBatteryReport();
+assert.equal(staminaBattery.foundationPartALengthRows.length > 0, true, "EBSR Part A foundation impact must be reported without enforcing it in buildPlan");
 
 const grade3Plan = buildPlan(3);
 assert.equal(grade3Plan.hashStable, true, "stamina fixture must keep foundation import hashes stable");

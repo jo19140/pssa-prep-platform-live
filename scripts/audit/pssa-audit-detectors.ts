@@ -123,6 +123,8 @@ export type McqCorrectIsLongestRow = {
   correctIndex: number | string;
   correctWordLength: number | string;
   longestDistractorWordLength: number | string;
+  wordLengthGap: number | string;
+  uniquelyLongest: boolean | string;
   correctCharLength: number | string;
   longestDistractorCharLength: number | string;
   severity: "INFO" | "WARNING" | "BLOCKER";
@@ -172,6 +174,52 @@ export type ItemEcSkillMatchRow = {
   notes: string;
 };
 
+export type SingleAnswerChoiceGroup = McqAuditInput & {
+  sourceInteractionType: "MCQ" | "EBSR_PART_A";
+  originalItemId: string;
+};
+
+export function singleAnswerChoiceGroups(items: any[], options: { includeEbsrPartA?: boolean } = {}): SingleAnswerChoiceGroup[] {
+  const includeEbsrPartA = options.includeEbsrPartA ?? true;
+  const groups: SingleAnswerChoiceGroup[] = [];
+  for (const item of items) {
+    const id = String(item.itemId ?? item.id ?? "");
+    const interactionType = String(item.interactionType ?? item.itemType ?? item.questionType ?? "").toUpperCase();
+    if (interactionType === "MCQ") {
+      groups.push({
+        ...item,
+        itemId: id,
+        itemType: "MCQ",
+        sourceInteractionType: "MCQ",
+        originalItemId: id,
+      });
+      continue;
+    }
+    if (includeEbsrPartA && interactionType === "EBSR") {
+      const partAChoices = item.partA?.choices?.map((choice: any) => typeof choice === "string" ? choice : choice.text)
+        ?? item.responseSpecJson?.partA?.choices?.map((choice: any) => typeof choice === "string" ? choice : choice.text)
+        ?? [];
+      const correctIndex = typeof item.partA?.correctIndex === "number"
+        ? item.partA.correctIndex
+        : typeof item.correctResponseJson?.partA?.correctIndex === "number"
+          ? item.correctResponseJson.partA.correctIndex
+          : null;
+      groups.push({
+        ...item,
+        itemId: `${id}::partA`,
+        itemType: "MCQ",
+        questionType: "MCQ",
+        correctIndex,
+        answerChoicesJson: partAChoices,
+        structuredChoicesJson: null,
+        sourceInteractionType: "EBSR_PART_A",
+        originalItemId: id,
+      });
+    }
+  }
+  return groups;
+}
+
 export function buildMcqCorrectIsLongestReport(items: McqAuditInput[], batchThreshold = 0.35): McqCorrectIsLongestRow[] {
   const mcqs = items.map(toMcq).filter((item) => item.correctIndex !== null && item.choices.length === 4);
   const rows: McqCorrectIsLongestRow[] = [];
@@ -196,6 +244,8 @@ export function buildMcqCorrectIsLongestReport(items: McqAuditInput[], batchThre
       correctIndex: item.correctIndex as number,
       correctWordLength: correct.words,
       longestDistractorWordLength: longestDistractorWords,
+      wordLengthGap: wordDelta,
+      uniquelyLongest: singleLongestWords || singleLongestChars,
       correctCharLength: correct.chars,
       longestDistractorCharLength: longestDistractorChars,
       severity: blocker ? "BLOCKER" : warning ? "WARNING" : "INFO",
@@ -218,6 +268,8 @@ export function buildMcqCorrectIsLongestReport(items: McqAuditInput[], batchThre
     correctIndex: "",
     correctWordLength: "",
     longestDistractorWordLength: "",
+    wordLengthGap: "",
+    uniquelyLongest: "",
     correctCharLength: "",
     longestDistractorCharLength: "",
     severity: correctLongestPct > batchThreshold ? "BLOCKER" : rows.some((row) => row.severity === "WARNING") ? "WARNING" : "INFO",
