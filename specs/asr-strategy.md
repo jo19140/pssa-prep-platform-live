@@ -42,6 +42,21 @@ Sý Learning's durable advantage is **owning the largest labeled corpus of child
 - **Storage** — student path is deliberately process-and-drop TODAY. Capture-everywhere needs the secure storage layer (encrypted, retention, deletion). **This principle ELEVATES the production consent + secure-storage track from "deferred" to a near-term priority.**
 - **Retention + cost** — capture broadly, but with a deliberate retention/sampling policy that prioritizes the gold (failures, uncertain reads, the labeled subset). Hoarding everything forever without a plan is cost + liability.
 
+## Harper as reading coach — the destination (vision, 2026-06-13)
+
+Harper **listens everywhere** (under consent), **encourages everywhere**, and **earns feedback on each aspect of reading only as the corpus proves she can do it without false-failing a kid** (the Yohanna rule). Listening is the *mechanism* that earns the coaching — every consented read trains the next capability; "listen now, coach later" is the path, not a compromise.
+
+**Three reasons to listen on every read-aloud surface** (warm-up, words, pseudowords, sentences, story), even where Harper does NOT grade:
+1. **Accountability / pacing (pure pedagogy)** — "read it *to Harper*" makes the kid actually read at a real pace; a tap-to-confirm button is gameable (kids rush/skip). A specialist's *presence* makes a child read carefully; Harper's listening replicates that. This benefit is independent of any data/AI value.
+2. **Encouragement** — warmth and presence.
+3. **Capture** — the flywheel training data.
+
+**Maps onto the built two-tier consent (`lib/voice/consent.ts`):**
+- **Tier-1** (service audio, default-ON, in-session, NO storage) → Harper *listens* for **pacing + encouragement** (light VAD that the kid actually spoke; no transcription, no storage). **Achievable BEFORE the storage layer** — the pedagogy doesn't wait on infrastructure.
+- **Tier-2** (training opt-in) + **secure storage** → *capture* the audio for the flywheel.
+
+**Feedback rolls out per-aspect along the autonomy frontier** (never grade an aspect until proven, never false-fail a kid): isolated decoding (LIVE — Part 3 retry/reteach) → connected-word accuracy (needs word-level alignment) → fluency/prosody (research-grade, harder) → comprehension (AI grader trained on teacher labels). This is the decoding autonomy-frontier extended to *all of reading*. "Feedback on every aspect" is the multi-year destination; the capture layer is the gateway to it.
+
 ## What we build (and the order)
 
 This is a **reading verifier**, not general dictation. The question is "did this child read *this known target* accurately enough?", not "what did this audio say?". Verifier output (not `transcript === target`, which is what failed):

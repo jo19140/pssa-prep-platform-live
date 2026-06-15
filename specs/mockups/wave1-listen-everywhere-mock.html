@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Wave 1 — Listen Everywhere (Part 1 + Silly Words) mock</title>
+<style>
+  :root{
+    --paper:#fffdf8; --edge:#ead9c2; --edge2:#efe1d2; --amber:#fcd34d; --amber-ink:#451a03;
+    --emerald-bg:#ecfdf5; --emerald-edge:#6ee7b7; --emerald-ink:#065f46;
+    --blue-bg:#eff6ff; --blue-edge:#bfdbfe; --blue-ink:#1e3a8a;
+    --violet-bg:#f5f3ff; --violet-edge:#ddd6fe; --violet-ink:#4c1d95;
+    --slate:#0f172a; --muted:#64748b;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:#f3ede3;color:var(--slate);font-family:ui-rounded,"Segoe UI",system-ui,sans-serif;padding:24px}
+  .wrap{max-width:760px;margin:0 auto}
+  h1{font-size:20px;margin:0 0 4px}
+  .sub{color:var(--muted);font-weight:700;margin:0 0 20px;font-size:13px}
+  .card{background:var(--paper);border:2px solid var(--edge);border-radius:24px;padding:20px;margin-bottom:22px}
+  .ptag{font-size:11px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+  .ptitle{font-size:22px;font-weight:900;margin:2px 0 2px}
+  .pnote{font-weight:800;color:#7c2d12;margin:0 0 16px;font-size:14px}
+  .silly .pnote{color:var(--violet-ink)}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  @media(max-width:520px){.grid{grid-template-columns:repeat(2,1fr)}}
+  .chip{position:relative;border:2px solid var(--edge);background:var(--paper);border-radius:22px;
+    padding:22px 8px;font-size:26px;font-weight:900;cursor:pointer;text-align:center;transition:.15s;color:var(--slate)}
+  .chip:hover{transform:translateY(-1px)}
+  .chip.listening{border-color:var(--blue-edge);background:var(--blue-bg);color:var(--blue-ink)}
+  .chip.retry{border-color:#fcd34d;background:#fffbeb;color:#92400e}
+  .chip.retry .state{color:#92400e}
+  .chip.done{border-color:var(--emerald-edge);background:var(--emerald-bg);color:var(--emerald-ink)}
+  .chip .state{display:block;font-size:11px;font-weight:900;letter-spacing:.04em;margin-top:6px;min-height:13px;text-transform:uppercase}
+  .chip.listening .state{color:var(--blue-ink)}
+  .chip.done .state{color:var(--emerald-ink)}
+  .chip.idle .state{color:var(--muted)}
+  .silly .chip.idle{border-color:var(--violet-edge)}
+  .harperbar{display:flex;align-items:center;gap:12px;margin:18px 0 6px;background:#fff;border:2px solid var(--edge2);border-radius:20px;padding:12px 16px}
+  .harperbar.listening{border-color:var(--blue-edge);background:var(--blue-bg)}
+  .dot{width:38px;height:38px;border-radius:50%;background:#fde68a;display:grid;place-items:center;font-size:20px;flex:0 0 auto}
+  .harperbar.listening .dot{background:#bfdbfe;animation:pulse 1s infinite}
+  @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.12)}}
+  .hmsg{font-weight:800;font-size:14px}
+  .gate{margin-top:14px;width:100%;border:none;border-radius:18px;background:var(--amber);color:var(--amber-ink);
+    font-size:17px;font-weight:900;padding:16px;cursor:pointer}
+  .gate:disabled{opacity:.45;cursor:not-allowed}
+  .legend{font-size:12px;color:var(--muted);font-weight:700;margin-top:6px}
+  .pill{display:inline-block;border-radius:999px;padding:2px 9px;font-size:11px;font-weight:900;margin-right:6px}
+  .pill.idle{background:#f1f5f9;color:#475569}.pill.listening{background:var(--blue-bg);color:var(--blue-ink)}
+  .pill.done{background:var(--emerald-bg);color:var(--emerald-ink)}
+  .keybox{background:#fff;border:1px dashed var(--edge);border-radius:14px;padding:12px 16px;font-size:13px;font-weight:700;color:#475569;margin-bottom:22px}
+  .keybox b{color:var(--slate)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Wave 1 — Listen Everywhere + Voice Verification</h1>
+  <p class="sub">Part 1 warm-up + Part 3 silly words → tap each word · kid reads · Harper <b>verifies she heard speech</b> · encourage · gate. Tier-1 (on-device, NO storage). Set the simulator, then tap words.</p>
+
+  <div class="keybox">
+    <b>The gate (voice verification):</b> tap a word → Harper listens → she only marks it ✓ if she <b>actually hears the kid read</b> (on-device voice-activity check; no transcription, no storage). Stay silent and the word will <b>not</b> advance — Harper gently re-prompts. <b>Continue</b> stays locked until every word is verified. Never scored. Silly words: Harper never says them first.
+    <div class="legend" style="margin-top:8px">
+      <span class="pill idle">tap to read</span> not started ·
+      <span class="pill listening">listening…</span> reading now ·
+      <span class="pill" style="background:#fef3c7;color:#92400e">↻ try again</span> heard nothing ·
+      <span class="pill done">✓ read</span> verified
+    </div>
+  </div>
+
+  <div class="keybox" style="border-style:solid;background:#fff">
+    <b>Simulator — pick what the mic "hears":</b>
+    <label style="margin-left:8px"><input type="radio" name="sim" value="reads" checked> 🔊 kid reads aloud → verifies</label>
+    <label style="margin-left:10px"><input type="radio" name="sim" value="silent"> 🤫 kid stays silent → gentle re-prompt</label>
+    <label style="margin-left:10px"><input type="radio" name="sim" value="nomic"> 🚫 no mic / denied → tap-confirm fallback</label>
+  </div>
+
+  <!-- PART 1 -->
+  <section class="card" data-part="warm">
+    <div class="ptag">Part 1 · Warm-up</div>
+    <div class="ptitle">Words you already know</div>
+    <p class="pnote">Read each word to Harper. She's just listening and cheering — no scores here.</p>
+    <div class="grid" id="warmGrid"></div>
+    <div class="harperbar" id="warmBar"><span class="dot">🦊</span><span class="hmsg" id="warmMsg">Tap a word and read it to me!</span></div>
+    <button class="gate" id="warmGate" disabled>Continue ▸ <span id="warmCount"></span></button>
+  </section>
+
+  <!-- PART 3 SILLY -->
+  <section class="card silly" data-part="silly">
+    <div class="ptag" style="color:var(--violet-ink)">Part 3 · Silly words</div>
+    <div class="ptitle">Now the silly words</div>
+    <p class="pnote">These aren't real words — sound them out and read each one to Harper. She listens, she doesn't say them for you, and she never scores silly words.</p>
+    <div class="grid" id="sillyGrid"></div>
+    <div class="harperbar" id="sillyBar"><span class="dot">🦊</span><span class="hmsg" id="sillyMsg">Sound out a silly word and read it to me!</span></div>
+    <button class="gate" id="sillyGate" disabled>Continue ▸ <span id="sillyCount"></span></button>
+  </section>
+</div>
+
+<script>
+const PARTS = {
+  warm:  { words:["make","cake","gate","name","late","game"], grid:"warmGrid", bar:"warmBar", msg:"warmMsg", gate:"warmGate", count:"warmCount",
+           listen:"I'm listening — read it to me.", done:["Nice reading!","Great job!","I heard that!","Lovely reading!"], idle:"Tap a word and read it to me!" },
+  silly: { words:["zake","mave","pight","flate","brin","nant"], grid:"sillyGrid", bar:"sillyBar", msg:"sillyMsg", gate:"sillyGate", count:"sillyCount",
+           listen:"I'm listening — sound it out and read it.", done:["Nice decoding!","You sounded it out!","Great try!","I heard you read it!"], idle:"Sound out a silly word and read it to me!" },
+};
+const state = {};
+for(const key in PARTS){
+  const p = PARTS[key]; state[key] = {};
+  const grid = document.getElementById(p.grid);
+  p.words.forEach(w=>{
+    state[key][w]="idle";
+    const b=document.createElement("button");
+    b.className="chip idle"; b.dataset.word=w;
+    b.innerHTML = `${w}<span class="state">tap to read</span>`;
+    b.onclick=()=>tap(key,w,b);
+    grid.appendChild(b);
+  });
+  refreshGate(key);
+}
+let busy=false;
+function simMode(){ return document.querySelector('input[name="sim"]:checked').value; }
+function tap(key,w,btn){
+  if(busy) return;
+  if(state[key][w]==="done") return;
+  const p=PARTS[key];
+  const mode=simMode();
+
+  // No-mic fallback: revert to tap-confirm so a kid is never trapped.
+  if(mode==="nomic"){
+    state[key][w]="done";
+    btn.className="chip done"; btn.querySelector(".state").textContent="✓ tapped (mic off)";
+    document.getElementById(p.msg).textContent="Mic's off — tap each word when you've read it.";
+    refreshGate(key); return;
+  }
+
+  busy=true;
+  state[key][w]="listening";
+  btn.className="chip listening"; btn.querySelector(".state").textContent="listening…";
+  const bar=document.getElementById(p.bar); bar.classList.add("listening");
+  document.getElementById(p.msg).textContent=p.listen;
+
+  setTimeout(()=>{
+    bar.classList.remove("listening");
+    busy=false;
+    if(mode==="reads"){
+      state[key][w]="done";
+      btn.className="chip done"; btn.querySelector(".state").textContent="✓ read";
+      document.getElementById(p.msg).textContent=p.done[Math.floor(Math.random()*p.done.length)];
+    } else { // silent → verification fails → gentle re-prompt, does NOT count
+      state[key][w]="retry";
+      btn.className="chip retry"; btn.querySelector(".state").textContent="↻ try again";
+      document.getElementById(p.msg).textContent="I didn't quite hear you — tap it and read it to me.";
+    }
+    refreshGate(key);
+  },1400);
+}
+function refreshGate(key){
+  const p=PARTS[key];
+  const total=p.words.length;
+  const done=p.words.filter(w=>state[key][w]==="done").length;
+  const gate=document.getElementById(p.gate);
+  document.getElementById(p.count).textContent=`(${done}/${total})`;
+  if(done<total){ gate.disabled=true; }
+  else { gate.disabled=false; document.getElementById(p.msg).textContent = key==="silly" ? "You read every silly word — awesome!" : "You read them all — let's go!"; }
+}
+</script>
+</body>
+</html>
