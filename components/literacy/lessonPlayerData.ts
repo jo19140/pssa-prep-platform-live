@@ -4,6 +4,7 @@ import { phase3EntryLessonContentFor } from "@/lib/content/phase3EntryLessonCont
 import { auditPassage } from "@/lib/literacy/passageAudit";
 import { canonicalPseudowordsForTargetPatterns, generateLessonDraft } from "@/lib/literacy/lessonGenerator";
 import { morphologyConfigFromTargetPatternsJson } from "@/lib/literacy/morphologyAnalyzer";
+import type { PresentationProfile } from "@/lib/literacy/presentationProfile";
 import type { GeneratedLessonPart, LessonGeneratorContext } from "@/lib/literacy/lessonParts/types";
 
 export type LessonPlayerPart = Pick<
@@ -15,6 +16,7 @@ export type EnabledLessonPlayerData = {
   enabled: true;
   targetCode: string;
   trainingCaptureEnabled: boolean;
+  presentationProfile: PresentationProfile;
   studentUserId?: string;
   title: string;
   dailyTargetLabel: string;
@@ -24,6 +26,7 @@ export type EnabledLessonPlayerData = {
 export type DisabledLessonPlayerData = {
   enabled: false;
   targetCode: string;
+  presentationProfile: PresentationProfile;
   disabledReason: string;
 };
 
@@ -31,19 +34,21 @@ export type LessonPlayerData = EnabledLessonPlayerData | DisabledLessonPlayerDat
 
 export async function buildLessonPlayerData(
   targetCode = "a_e",
-  options: { trainingCaptureEnabled?: boolean; studentUserId?: string } = {},
+  options: { trainingCaptureEnabled?: boolean; studentUserId?: string; presentationProfile?: PresentationProfile } = {},
 ): Promise<LessonPlayerData> {
+  const presentationProfile = options.presentationProfile ?? "BAND_K_3";
   if (targetCode !== "a_e") {
     return {
       enabled: false,
       targetCode,
+      presentationProfile,
       disabledReason: "Only the approved a_e lesson has kid-facing rule copy in this slice.",
     };
   }
 
   const seed = CONTENT_V3_DAILY_TARGETS.find((target) => target.code === targetCode);
   if (!seed) {
-    return { enabled: false, targetCode, disabledReason: "Lesson seed was not found." };
+    return { enabled: false, targetCode, presentationProfile, disabledReason: "Lesson seed was not found." };
   }
 
   const content = phase3EntryLessonContentFor(targetCode);
@@ -51,6 +56,7 @@ export async function buildLessonPlayerData(
     return {
       enabled: false,
       targetCode,
+      presentationProfile,
       disabledReason: "Kid-facing rule copy is required before this lesson can be shown.",
     };
   }
@@ -111,6 +117,7 @@ export async function buildLessonPlayerData(
     enabled: true,
     targetCode,
     trainingCaptureEnabled: options.trainingCaptureEnabled === true,
+    presentationProfile,
     studentUserId: options.studentUserId,
     title: `${content.mockPassageTitle} Lesson`,
     dailyTargetLabel: seed.kidVisibleLabel,

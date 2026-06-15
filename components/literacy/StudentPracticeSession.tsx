@@ -13,6 +13,7 @@ import {
   VOICE_ACTIVITY_MAX_LISTEN_MS,
   type VoiceActivityHandle,
 } from "@/lib/voice/voiceActivity";
+import type { PresentationProfile } from "@/lib/literacy/presentationProfile";
 import type { LessonPlayerData, LessonPlayerPart } from "./lessonPlayerData";
 
 const PART_META = [
@@ -56,7 +57,14 @@ type LessonPlayerEventInput = {
   immediateOutcome?: string;
 };
 
-export function StudentPracticeSession({ lesson }: { lesson: LessonPlayerData }) {
+export function StudentPracticeSession({
+  lesson,
+  presentationProfile = lesson.presentationProfile,
+}: {
+  lesson: LessonPlayerData;
+  presentationProfile?: PresentationProfile;
+}) {
+  void presentationProfile;
   if (lesson.enabled === false) return <DisabledPractice targetCode={lesson.targetCode} reason={lesson.disabledReason} />;
   return <GeneratedLessonPlayer lesson={lesson} />;
 }
