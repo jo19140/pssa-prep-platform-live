@@ -8,6 +8,12 @@ import { startAudioCapture, stopAudioCapture, type AudioCaptureState } from "@/l
 import { capturePseudowordClip } from "@/lib/voice/captureClient";
 import { startClipRecorder, type ClipRecorder } from "@/lib/voice/captureRecorder";
 import {
+  presentationCopyFor,
+  presentationThemeFor,
+  type PresentationCopy,
+  type PresentationTheme,
+} from "@/lib/literacy/presentationCopy";
+import {
   startVoiceActivity,
   stopVoiceActivity,
   VOICE_ACTIVITY_MAX_LISTEN_MS,
@@ -15,28 +21,6 @@ import {
 } from "@/lib/voice/voiceActivity";
 import type { PresentationProfile } from "@/lib/literacy/presentationProfile";
 import type { LessonPlayerData, LessonPlayerPart } from "./lessonPlayerData";
-
-const PART_META = [
-  { icon: "Fire", short: "Warm", mode: "listen for attempt", evidence: "heard speech / completion only" },
-  { icon: "Spark", short: "Rule", mode: "teaching", evidence: "no score" },
-  { icon: "Words", short: "Words", mode: "read and retry", evidence: "speech attempt" },
-  { icon: "Heart", short: "Power", mode: "listen and repeat", evidence: "not scored" },
-  { icon: "Read", short: "Sent.", mode: "listen and encourage", evidence: "completion only" },
-  { icon: "Spell", short: "Spell", mode: "spelling match", evidence: "typed/tile" },
-  { icon: "Story", short: "Story", mode: "listen and encourage", evidence: "completion only" },
-  { icon: "Talk", short: "Talk", mode: "open response", evidence: "no auto-grade" },
-];
-
-const KID_FACING_PART_TITLES: Record<number, string> = {
-  1: "Warm-up",
-  2: "New thing to learn",
-  3: "Read the words",
-  4: "Power words",
-  5: "Read sentences",
-  6: "Spell it",
-  7: "Read the story",
-  8: "Talk about it",
-};
 
 type CompletedState = Record<number, boolean>;
 type LessonPlayerEventType =
@@ -64,22 +48,31 @@ export function StudentPracticeSession({
   lesson: LessonPlayerData;
   presentationProfile?: PresentationProfile;
 }) {
-  void presentationProfile;
-  if (lesson.enabled === false) return <DisabledPractice targetCode={lesson.targetCode} reason={lesson.disabledReason} />;
-  return <GeneratedLessonPlayer lesson={lesson} />;
+  const copy = presentationCopyFor(presentationProfile);
+  const theme = presentationThemeFor(presentationProfile);
+  if (lesson.enabled === false) return <DisabledPractice targetCode={lesson.targetCode} reason={lesson.disabledReason} copy={copy} theme={theme} />;
+  return <GeneratedLessonPlayer lesson={lesson} copy={copy} theme={theme} />;
 }
 
-function GeneratedLessonPlayer({ lesson }: { lesson: LessonPlayerData & { enabled: true } }) {
+function GeneratedLessonPlayer({
+  lesson,
+  copy,
+  theme,
+}: {
+  lesson: LessonPlayerData & { enabled: true };
+  copy: PresentationCopy;
+  theme: PresentationTheme;
+}) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [completed, setCompleted] = useState<CompletedState>({});
   const [buddyState, setBuddyState] = useState<BuddyState>("idle");
-  const [speech, setSpeech] = useState(() => speechForPart(lesson.parts[0]));
+  const [speech, setSpeech] = useState(() => speechForPart(lesson.parts[0], copy));
   const [eventLines, setEventLines] = useState<string[]>([]);
   const [sessionId] = useState(() => `lesson-${Date.now()}-${Math.random().toString(36).slice(2)}`);
   const startedRef = useRef(false);
   const [, startTransition] = useTransition();
   const activePart = lesson.parts[activeIndex];
-  const meta = PART_META[activePart.partNumber - 1] ?? PART_META[0];
+  const meta = copy.partNav[activePart.partNumber - 1] ?? copy.partNav[0];
 
   useEffect(() => {
     if (startedRef.current) return;
@@ -94,8 +87,8 @@ function GeneratedLessonPlayer({ lesson }: { lesson: LessonPlayerData & { enable
   }, [lesson.targetCode, sessionId]);
 
   useEffect(() => {
-    setSpeech(speechForPart(activePart));
-  }, [activePart]);
+    setSpeech(speechForPart(activePart, copy));
+  }, [activePart, copy]);
 
   function emitLessonEvent(input: LessonPlayerEventInput) {
     startTransition(() => {
@@ -139,12 +132,12 @@ function GeneratedLessonPlayer({ lesson }: { lesson: LessonPlayerData & { enable
   }
 
   return (
-    <main className="min-h-screen bg-[#f6efe7] px-3 py-4 text-slate-900 md:px-5">
-      <div className="mx-auto grid max-w-7xl gap-4 lg:grid-cols-[104px_minmax(0,1fr)_292px]">
-        <aside className="rounded-[28px] border border-[#e8d9c7] bg-[#fffaf3]/90 p-3 shadow-xl lg:sticky lg:top-5 lg:h-[calc(100vh-2.5rem)]">
+    <main className={theme.layout.page}>
+      <div className={theme.layout.grid}>
+        <aside className={theme.shell.rail}>
           <div className="mb-3 grid place-items-center gap-2 text-center">
-            <div className="grid h-14 w-14 place-items-center rounded-2xl bg-amber-300 text-xl font-black">Rb</div>
-            <p className="text-xs font-black uppercase tracking-wide text-amber-900">Reading Buddy</p>
+            <div className={theme.shell.brandBadge}>{copy.shell.brandInitials}</div>
+            <p className={theme.shell.brandText}>{copy.shell.brandName}</p>
           </div>
           <div className="flex gap-2 overflow-x-auto lg:flex-col">
             {lesson.parts.map((part, index) => (
@@ -153,13 +146,13 @@ function GeneratedLessonPlayer({ lesson }: { lesson: LessonPlayerData & { enable
                 onClick={() => selectPart(index)}
                 className={`min-h-14 min-w-16 rounded-2xl border-2 px-2 py-2 text-center shadow-sm transition ${
                   index === activeIndex
-                    ? "border-amber-300 bg-amber-100 text-amber-950"
+                    ? theme.shell.navActive
                     : completed[part.partNumber]
-                      ? "border-emerald-200 bg-emerald-50 text-emerald-800"
-                      : "border-transparent bg-white text-slate-600"
+                      ? theme.shell.navComplete
+                      : theme.shell.navIdle
                 }`}
               >
-                <span className="block text-[10px] font-black uppercase">{PART_META[index]?.short}</span>
+                <span className="block text-[10px] font-black uppercase">{copy.partNav[index]?.short}</span>
                 <span className="block text-lg font-black">{part.partNumber}</span>
               </button>
             ))}
@@ -167,52 +160,54 @@ function GeneratedLessonPlayer({ lesson }: { lesson: LessonPlayerData & { enable
         </aside>
 
         <section className="min-w-0 space-y-4">
-          <div className="flex flex-col gap-3 rounded-[28px] border border-[#e8d9c7] bg-[#fffaf3]/90 p-4 shadow-xl md:flex-row md:items-center md:justify-between">
+          <div className={theme.shell.header}>
             <div>
-              <span className="inline-flex rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-xs font-black text-blue-900">
-                Target: {lesson.targetCode} · {lesson.dailyTargetLabel}
+              <span className={theme.shell.targetPill}>
+                {copy.shell.targetPrefix} {lesson.targetCode} · {lesson.dailyTargetLabel}
               </span>
               <h1 className="mt-2 text-2xl font-black tracking-tight md:text-3xl">{lesson.title}</h1>
-              <p className="mt-1 text-sm font-bold text-slate-500">Full 8-part structured literacy lesson · generated content-v3 data</p>
+              <p className="mt-1 text-sm font-bold text-slate-500">{copy.shell.subtitle}</p>
             </div>
             <div className="flex flex-wrap gap-2">
-              <button onClick={() => speak()} className="rounded-2xl border border-[#e8d9c7] bg-white px-4 py-3 text-sm font-black text-amber-950">
-                Replay Harper
+              <button onClick={() => speak()} className={theme.shell.secondaryButton}>
+                {copy.shell.replayHarper}
               </button>
-              <button onClick={() => completePart()} className="rounded-2xl bg-amber-300 px-4 py-3 text-sm font-black text-amber-950 shadow">
-                Done with this part
+              <button onClick={() => completePart()} className={theme.shell.primaryButton}>
+                {copy.shell.doneWithPart}
               </button>
             </div>
           </div>
 
-          <section className="grid min-h-[650px] overflow-hidden rounded-[28px] border border-[#e8d9c7] bg-[#fffaf3]/90 shadow-xl lg:grid-cols-[260px_minmax(0,1fr)]">
-            <div className="border-b border-[#e8d9c7] bg-[#fff2cf] p-5 text-center lg:border-b-0 lg:border-r">
+          <section className={theme.shell.lessonFrame}>
+            <div className={theme.shell.buddyPanel}>
               <div className="mx-auto mb-4 flex justify-center">
-                <BuddyCharacter state={buddyState} name="Harper" />
+                <BuddyCharacter state={buddyState} name={copy.buddy.name} stateLabels={copy.buddy.stateLabels} imageAlt={copy.buddy.imageAlt} />
               </div>
-              <div className="rounded-3xl border border-[#f1dfc8] bg-white p-4 text-left text-sm font-extrabold leading-relaxed text-[#4e3b2d]">
+              <div className={theme.shell.speechBubble}>
                 {speech}
               </div>
-              <div className="mt-4 rounded-3xl border border-dashed border-[#e6cda9] bg-white p-4 text-left text-xs font-black text-slate-600">
-                <div className="flex justify-between py-1"><span>Mode</span><span>{meta.mode}</span></div>
-                <div className="flex justify-between py-1"><span>Evidence</span><span>{meta.evidence}</span></div>
+              <div className={theme.shell.metaBox}>
+                <div className="flex justify-between py-1"><span>{copy.shell.modeLabel}</span><span>{meta.mode}</span></div>
+                <div className="flex justify-between py-1"><span>{copy.shell.evidenceLabel}</span><span>{meta.evidence}</span></div>
               </div>
             </div>
 
             <div className="flex min-w-0 flex-col p-5">
               <div className="mb-5 flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
                 <div>
-                  <h2 className="text-3xl font-black tracking-tight">{kidFacingPartTitle(activePart)}</h2>
-                  <p className="mt-1 text-sm font-bold text-slate-500">{partDescription(activePart)}</p>
+                  <h2 className="text-3xl font-black tracking-tight">{kidFacingPartTitle(activePart, copy)}</h2>
+                  <p className="mt-1 text-sm font-bold text-slate-500">{partDescription(activePart, copy)}</p>
                 </div>
                 <span className="w-fit rounded-full border border-violet-200 bg-violet-50 px-3 py-1 text-xs font-black text-violet-800">
                   Part {activePart.partNumber} · {meta.icon}
                 </span>
               </div>
 
-              <div className="flex flex-1 flex-col rounded-[26px] border border-[#efe1d2] bg-white p-5">
+              <div className={theme.shell.activitySurface}>
                 <PartRenderer
                   part={activePart}
+                  copy={copy}
+                  theme={theme}
                   onSpeak={speak}
                   onComplete={completePart}
                   onHarperMessage={setSpeech}
@@ -233,20 +228,22 @@ function GeneratedLessonPlayer({ lesson }: { lesson: LessonPlayerData & { enable
           </section>
         </section>
 
-        <aside className="hidden rounded-[28px] border border-[#e8d9c7] bg-[#fffaf3]/90 p-4 shadow-xl lg:sticky lg:top-5 lg:flex lg:h-[calc(100vh-2.5rem)] lg:flex-col lg:gap-4">
+        {theme.layout.showAdultEvidencePanel ? (
+        <aside className={theme.shell.adultPanel}>
           <div>
-            <h3 className="font-black">Adult controls</h3>
-            <p className="mt-1 text-sm font-bold text-slate-500">Support for a parent or tutor nearby.</p>
+            <h3 className="font-black">{copy.shell.adultControlsTitle}</h3>
+            <p className="mt-1 text-sm font-bold text-slate-500">{copy.shell.adultControlsDescription}</p>
           </div>
-          <div className="rounded-2xl border border-[#efe1d2] bg-white p-3 text-sm font-black">Harper retry only</div>
-          <div className="rounded-2xl border border-[#efe1d2] bg-white p-3 text-sm font-black">Assisted mode available later</div>
+          <div className="rounded-2xl border border-[#efe1d2] bg-white p-3 text-sm font-black">{copy.shell.adultRetryOnly}</div>
+          <div className="rounded-2xl border border-[#efe1d2] bg-white p-3 text-sm font-black">{copy.shell.assistedModeLater}</div>
           <div>
-            <h3 className="mb-2 font-black">Evidence preview</h3>
+            <h3 className="mb-2 font-black">{copy.shell.evidencePreviewTitle}</h3>
             <pre className="min-h-40 overflow-auto rounded-2xl bg-slate-900 p-3 text-[11px] leading-relaxed text-slate-100">
               {eventLines.join("\n")}
             </pre>
           </div>
         </aside>
+        ) : null}
       </div>
     </main>
   );
@@ -254,6 +251,8 @@ function GeneratedLessonPlayer({ lesson }: { lesson: LessonPlayerData & { enable
 
 function PartRenderer({
   part,
+  copy,
+  theme,
   onSpeak,
   onComplete,
   onHarperMessage,
@@ -264,6 +263,8 @@ function PartRenderer({
   lessonTargetCode,
 }: {
   part: LessonPlayerPart;
+  copy: PresentationCopy;
+  theme: PresentationTheme;
   onSpeak: (text: string) => Promise<void>;
   onComplete: (extra?: Record<string, unknown>) => void;
   onHarperMessage: (text: string) => void;
@@ -278,6 +279,7 @@ function PartRenderer({
       return (
         <WarmupPart
           part={part}
+          copy={copy}
           onComplete={onComplete}
           onHarperMessage={onHarperMessage}
           onBuddyState={onBuddyState}
@@ -285,11 +287,13 @@ function PartRenderer({
         />
       );
     case 2:
-      return <ConceptPart part={part} onSpeak={onSpeak} onComplete={onComplete} />;
+      return <ConceptPart part={part} copy={copy} theme={theme} onSpeak={onSpeak} onComplete={onComplete} />;
     case 3:
       return (
         <Part3LiveLoop
           part={part}
+          copy={copy}
+          theme={theme}
           onComplete={onComplete}
           onHarperMessage={onHarperMessage}
           onBuddyState={onBuddyState}
@@ -301,11 +305,13 @@ function PartRenderer({
         />
       );
     case 4:
-      return <PowerWordsPart part={part} onSpeak={onSpeak} onComplete={onComplete} />;
+      return <PowerWordsPart part={part} copy={copy} onSpeak={onSpeak} onComplete={onComplete} />;
     case 5:
       return (
         <SentenceReadingPart
           part={part}
+          copy={copy}
+          theme={theme}
           onComplete={onComplete}
           onHarperMessage={onHarperMessage}
           onBuddyState={onBuddyState}
@@ -313,11 +319,13 @@ function PartRenderer({
         />
       );
     case 6:
-      return <SpellingPart part={part} onSpeak={onSpeak} onComplete={onComplete} />;
+      return <SpellingPart part={part} copy={copy} onSpeak={onSpeak} onComplete={onComplete} />;
     case 7:
       return (
         <StoryReadingPart
           part={part}
+          copy={copy}
+          theme={theme}
           onComplete={onComplete}
           onHarperMessage={onHarperMessage}
           onBuddyState={onBuddyState}
@@ -325,20 +333,22 @@ function PartRenderer({
         />
       );
     case 8:
-      return <TalkPart part={part} onComplete={onComplete} />;
+      return <TalkPart part={part} copy={copy} onComplete={onComplete} />;
     default:
-      return <PlaceholderPart part={part} />;
+      return <PlaceholderPart part={part} copy={copy} theme={theme} />;
   }
 }
 
 function WarmupPart({
   part,
+  copy,
   onComplete,
   onHarperMessage,
   onBuddyState,
   onSpeak,
 }: {
   part: LessonPlayerPart;
+  copy: PresentationCopy;
   onComplete: (extra?: Record<string, unknown>) => void;
   onHarperMessage: (text: string) => void;
   onBuddyState: (state: BuddyState) => void;
@@ -349,11 +359,12 @@ function WarmupPart({
     <ListenForReadingAttempt
       surface="warmup"
       words={words}
-      intro="Tap each word and read it to Harper. Harper will listen for your voice."
-      prompt="I'm listening — read it to me."
-      encourage="Thanks — I heard you read that!"
-      completeLabel="I read the warm-up words"
-      completeDisabledLabel="Read each word to Harper first"
+      copy={copy}
+      intro={copy.listenAttempt.warmup.intro}
+      prompt={copy.listenAttempt.warmup.prompt}
+      encourage={copy.listenAttempt.warmup.encourage}
+      completeLabel={copy.listenAttempt.warmup.completeLabel}
+      completeDisabledLabel={copy.listenAttempt.warmup.completeDisabledLabel}
       onComplete={onComplete}
       onHarperMessage={onHarperMessage}
       onBuddyState={onBuddyState}
@@ -364,10 +375,14 @@ function WarmupPart({
 
 function ConceptPart({
   part,
+  copy,
+  theme,
   onSpeak,
   onComplete,
 }: {
   part: LessonPlayerPart;
+  copy: PresentationCopy;
+  theme: PresentationTheme;
   onSpeak: (text: string) => Promise<void>;
   onComplete: (extra?: Record<string, unknown>) => void;
 }) {
@@ -381,29 +396,31 @@ function ConceptPart({
       return {
         id: `${before}-${after}-${index}`,
         label: `${before} → ${after}`,
-        helper: index === 0 ? "Main pair" : "Practice pair",
+        helper: index === 0 ? copy.conceptDemo.mainPair : copy.conceptDemo.practicePair,
         utterance: `${before}. ${after}.`,
       };
     })
     .filter((item): item is TappableItem => Boolean(item));
   return (
     <div className="flex flex-1 flex-col gap-5">
-      <div className="rounded-3xl border-2 border-amber-300 bg-amber-50 p-5 text-xl font-black leading-relaxed">{statement}</div>
+      <div className={theme.cards.amberNotice}>{statement}</div>
       <div className="grid gap-3 md:grid-cols-[1fr_auto_1fr] md:items-center">
-        <DemoCard label="Before" word={stringValue(pairs[0]?.closed) || stringValue(pairs[0]?.base) || "cap"} />
-        <div className="text-center text-3xl font-black text-amber-700">to</div>
-        <DemoCard label="Silent e word" word={stringValue(pairs[0]?.target) || "cape"} />
+        <DemoCard label={copy.conceptDemo.beforeLabel} word={stringValue(pairs[0]?.closed) || stringValue(pairs[0]?.base) || "cap"} theme={theme} />
+        <div className="text-center text-3xl font-black text-amber-700">{copy.conceptDemo.arrowLabel}</div>
+        <DemoCard label={copy.conceptDemo.afterLabel} word={stringValue(pairs[0]?.target) || "cape"} theme={theme} />
       </div>
       <TappableItemPractice
         items={pairItems}
+        copy={copy}
+        theme={theme}
         onSpeak={onSpeak}
-        completeLabel="I practiced it"
-        completeDisabledLabel="Tap each pair first"
+        completeLabel={copy.conceptDemo.completeLabel}
+        completeDisabledLabel={copy.conceptDemo.completeDisabledLabel}
         onComplete={(heardCount) => onComplete({ listenedToRule: true, heardPairs: heardCount })}
       />
       <div className="flex flex-wrap gap-3">
         <button onClick={() => onSpeak(statement)} className="rounded-2xl border border-[#e8d9c7] bg-white px-5 py-4 font-black">
-          Listen again
+          {copy.conceptDemo.listenAgain}
         </button>
       </div>
     </div>
@@ -421,6 +438,8 @@ type Part3Status = "pending" | "correct" | "retry" | "reteach" | "assisted" | "u
 
 function Part3LiveLoop({
   part,
+  copy,
+  theme,
   onComplete,
   onHarperMessage,
   onBuddyState,
@@ -431,6 +450,8 @@ function Part3LiveLoop({
   lessonTargetCode,
 }: {
   part: LessonPlayerPart;
+  copy: PresentationCopy;
+  theme: PresentationTheme;
   onComplete: (extra?: Record<string, unknown>) => void;
   onHarperMessage: (text: string) => void;
   onBuddyState: (state: BuddyState) => void;
@@ -463,12 +484,12 @@ function Part3LiveLoop({
   const reteachTemplate =
     stringValue(part.contentJson.reteachPrompt) ||
     stringValue(part.kidVisibleCopy.reteachPrompt) ||
-    "Look carefully at the word. Try again: {word}.";
+    copy.part3.defaultReteachPrompt;
   const [currentIndex, setCurrentIndex] = useState(0);
   const [statuses, setStatuses] = useState<Record<string, Part3Status>>({});
   const [attempts, setAttempts] = useState<Record<string, number>>({});
   const [technicalFailures, setTechnicalFailures] = useState<Record<string, number>>({});
-  const [, setFeedback] = useState("Tap the highlighted word when you are ready. Harper will listen to one word at a time.");
+  const [, setFeedback] = useState(copy.part3.defaultFeedback);
   const [wordFeedback, setWordFeedback] = useState<Record<string, string>>({});
   const [recording, setRecording] = useState(false);
   const [thinking, setThinking] = useState(false);
@@ -506,9 +527,10 @@ function Part3LiveLoop({
     recordingStartInFlightRef.current = true;
     chunksRef.current = [];
     setShowFallback(false);
-    setFeedback(`Read ${currentWord.word}.`);
-    setChipFeedback(currentWord, "I'm listening. Tap this word again when you are done.");
-    onHarperMessage(`Read ${currentWord.word}.`);
+    const readMessage = formatCopy(copy.part3.readWord, { word: currentWord.word });
+    setFeedback(readMessage);
+    setChipFeedback(currentWord, copy.part3.listeningStop);
+    onHarperMessage(readMessage);
     onBuddyState("listening");
     try {
       captureRef.current = await startAudioCapture((chunk) => {
@@ -516,7 +538,7 @@ function Part3LiveLoop({
       });
       setRecording(true);
     } catch {
-      handleTechnicalFailure(currentWord, "I had trouble hearing that. Let's try once more.", "transcribe_error_retry");
+      handleTechnicalFailure(currentWord, copy.part3.technicalRetry, "transcribe_error_retry");
     } finally {
       recordingStartInFlightRef.current = false;
     }
@@ -537,7 +559,7 @@ function Part3LiveLoop({
     if (!blob.size) {
       requestInFlightRef.current = false;
       setThinking(false);
-      handleTechnicalFailure(currentWord, "I had trouble hearing that. Let's try once more.", "transcribe_error_retry");
+      handleTechnicalFailure(currentWord, copy.part3.technicalRetry, "transcribe_error_retry");
       return;
     }
 
@@ -557,9 +579,9 @@ function Part3LiveLoop({
         const retrySeconds = retryAfterSeconds(response.headers.get("Retry-After"));
         const retryUntil = Date.now() + retrySeconds * 1000;
         setRateLimitedUntil(retryUntil);
-        setFeedback("Let's take a quick pause. I'll be ready in a moment.");
-        setChipFeedback(currentWord, "Let's take a quick pause. Harper will be ready in a moment.");
-        onHarperMessage("Let's take a quick pause. I'll be ready in a moment.");
+        setFeedback(copy.part3.rateLimitHarper);
+        setChipFeedback(currentWord, copy.part3.rateLimitChip);
+        onHarperMessage(copy.part3.rateLimitHarper);
         onVoiceEvent({
           eventType: "VOICE_WORD_READ",
           partNumber: 3,
@@ -572,7 +594,7 @@ function Part3LiveLoop({
       }
 
       if (!response.ok) {
-        handleTechnicalFailure(currentWord, "I had trouble hearing that. Let's try once more.", "transcribe_error_retry", durationMs);
+        handleTechnicalFailure(currentWord, copy.part3.technicalRetry, "transcribe_error_retry", durationMs);
         return;
       }
 
@@ -585,7 +607,7 @@ function Part3LiveLoop({
       };
       const rawTranscript = stringValue(result.transcript);
       if (!rawTranscript.trim()) {
-        handleTechnicalFailure(currentWord, "I had trouble hearing that. Let's try once more.", "transcribe_error_retry", durationMs);
+        handleTechnicalFailure(currentWord, copy.part3.technicalRetry, "transcribe_error_retry", durationMs);
         return;
       }
 
@@ -596,7 +618,7 @@ function Part3LiveLoop({
         latencyMs: typeof result.latencyMs === "number" ? result.latencyMs : null,
       });
     } catch {
-      handleTechnicalFailure(currentWord, "I had trouble hearing that. Let's try once more.", "transcribe_error_retry");
+      handleTechnicalFailure(currentWord, copy.part3.technicalRetry, "transcribe_error_retry");
     } finally {
       requestInFlightRef.current = false;
       setThinking(false);
@@ -625,7 +647,7 @@ function Part3LiveLoop({
     };
 
     if (normalizedTranscript === normalizedTarget && !lowConfidence) {
-      const message = `Nice reading — that was ${entry.word}!`;
+      const message = formatCopy(copy.part3.correct, { word: entry.word });
       setStatuses((state) => ({ ...state, [entryKey(entry)]: "correct" }));
       setFeedback(message);
       setChipFeedback(entry, message);
@@ -643,7 +665,7 @@ function Part3LiveLoop({
     }
 
     if (attemptNumber <= 1 || lowConfidence) {
-      const message = "Read that one more time for me.";
+      const message = copy.part3.retryPrompt;
       setStatuses((state) => ({ ...state, [entryKey(entry)]: "retry" }));
       setFeedback(message);
       setChipFeedback(entry, message);
@@ -693,7 +715,7 @@ function Part3LiveLoop({
     rawTranscript: string,
     normalizedTranscript: string,
   ) {
-    const message = `Listen: ${entry.word}. Now you try.`;
+    const message = formatCopy(copy.part3.assisted, { word: entry.word });
     setStatuses((state) => ({ ...state, [entryKey(entry)]: "assisted" }));
     setFeedback(message);
     setChipFeedback(entry, message);
@@ -737,9 +759,9 @@ function Part3LiveLoop({
   function adultSupportAdvance() {
     if (!currentWord) return;
     setStatuses((state) => ({ ...state, [entryKey(currentWord)]: "unscored" }));
-    setFeedback("Thanks for reading with your adult. Let's keep going.");
-    setChipFeedback(currentWord, "Thanks for reading with your adult. Let's keep going.");
-    onHarperMessage("Thanks for reading with your adult. Let's keep going.");
+    setFeedback(copy.part3.adultSupportDone);
+    setChipFeedback(currentWord, copy.part3.adultSupportDone);
+    onHarperMessage(copy.part3.adultSupportDone);
     onVoiceEvent({
       eventType: "VOICE_WORD_READ",
       partNumber: 3,
@@ -758,8 +780,8 @@ function Part3LiveLoop({
   function confirmPseudowords(extra?: Record<string, unknown>) {
     setPseudowordsConfirmed(true);
     setPseudowordAttemptMeta(extra ?? null);
-    setFeedback("Nice work with the silly words.");
-    onHarperMessage("Nice work with the silly words.");
+    setFeedback(copy.listenAttempt.pseudoword.completeMessage);
+    onHarperMessage(copy.listenAttempt.pseudoword.completeMessage);
   }
 
   function setChipFeedback(entry: Part3WordEntry, message: string) {
@@ -767,11 +789,11 @@ function Part3LiveLoop({
   }
 
   function wordChipInstruction() {
-    if (recording) return "Harper is listening. Tap the word again when you are done.";
-    if (thinking) return "Harper is thinking about that word.";
-    if (isRateLimited) return "Harper is taking a quick pause before the next try.";
-    if (allRealWordsComplete) return "Nice word reading. Now try the silly words with your adult.";
-    return "Tap the highlighted word to read it to Harper.";
+    if (recording) return copy.part3.currentInstructionListening;
+    if (thinking) return copy.part3.currentInstructionThinking;
+    if (isRateLimited) return copy.part3.currentInstructionRateLimited;
+    if (allRealWordsComplete) return copy.part3.currentInstructionComplete;
+    return copy.part3.currentInstructionDefault;
   }
 
   function handleWordChipTap(entry: Part3WordEntry) {
@@ -788,7 +810,7 @@ function Part3LiveLoop({
 
   return (
     <div className="flex flex-1 flex-col gap-5">
-      <div className="rounded-3xl border-2 border-blue-100 bg-blue-50 p-4 text-base font-black leading-relaxed text-blue-950">
+      <div className={theme.cards.blueNotice}>
         {wordChipInstruction()}
       </div>
       <div className="grid gap-3">
@@ -796,10 +818,10 @@ function Part3LiveLoop({
           const role = stringValue(line.role);
           const words = stringArray(line.words);
           return (
-            <div key={`${line.lineNumber}-${role}`} className="rounded-3xl border-2 border-[#ead9c2] bg-[#fffdf8] p-4">
+            <div key={`${line.lineNumber}-${role}`} className={theme.cards.generatedCard}>
               <div className="mb-3 flex items-center justify-between">
                 <p className="text-xs font-black uppercase tracking-wide text-slate-500">
-                  Line {String(line.lineNumber)}
+                  {formatCopy(copy.part3.lineLabel, { lineNumber: String(line.lineNumber) })}
                 </p>
               </div>
               <div className="flex flex-wrap gap-2">
@@ -830,10 +852,10 @@ function Part3LiveLoop({
                       <span className="block">{word}</span>
                       {isCurrent ? (
                         <span className="mt-1 block text-xs font-black uppercase tracking-wide">
-                          {recording ? "tap when done" : thinking ? "checking" : "tap to read"}
+                          {recording ? copy.listenAttempt.tapToStop : thinking ? copy.part3.checkingStatus : copy.part3.tapToReadStatus}
                         </span>
                       ) : null}
-                      {processing ? <span className="mt-1 block text-xs font-black text-violet-700">Harper is listening</span> : null}
+                      {processing ? <span className="mt-1 block text-xs font-black text-violet-700">{copy.part3.processingStatus}</span> : null}
                       {chipFeedback ? <span className="mt-2 block max-w-[15rem] text-sm font-extrabold normal-case leading-snug">{chipFeedback}</span> : null}
                     </button>
                   );
@@ -845,32 +867,33 @@ function Part3LiveLoop({
       </div>
 
       {!allRealWordsComplete ? (
-        <div className="rounded-3xl border border-[#efe1d2] bg-[#fffdf8] p-4">
-          <p className="text-sm font-black uppercase tracking-wide text-slate-500">Current word</p>
-          <p className="mt-1 text-2xl font-black text-slate-700">Use the highlighted word chip above. The word is the read button.</p>
+        <div className={theme.cards.neutralCard}>
+          <p className="text-sm font-black uppercase tracking-wide text-slate-500">{copy.part3.currentWordLabel}</p>
+          <p className="mt-1 text-2xl font-black text-slate-700">{copy.part3.currentWordInstruction}</p>
           <div className="mt-4 flex flex-wrap gap-3">
             {showFallback ? (
               <button onClick={adultSupportAdvance} className="rounded-2xl border border-[#e8d9c7] bg-white px-5 py-4 font-black">
-                I read it with my adult
+                {copy.part3.adultSupportButton}
               </button>
             ) : null}
           </div>
         </div>
       ) : (
         <div className="rounded-3xl border-2 border-violet-100 bg-violet-50 p-5">
-          <h3 className="text-2xl font-black">Now the silly words</h3>
+          <h3 className="text-2xl font-black">{copy.listenAttempt.pseudoword.title}</h3>
           <p className="mt-2 font-bold text-violet-900">
-            Sound out each silly word and read it to Harper. Harper will listen for your try. She won't say silly words for you; they are just for trying.
+            {copy.listenAttempt.pseudoword.body}
           </p>
           <div className="mt-4 rounded-3xl bg-white p-4">
             <ListenForReadingAttempt
               surface="pseudoword"
               words={pseudowords}
-              intro="Sound out each silly word and read it to Harper. Harper will listen for your try."
-              prompt="I'm listening — sound it out for me."
-              encourage="Thanks — I heard your try!"
-              completeLabel="We read the silly words"
-              completeDisabledLabel="Read each silly word to Harper first"
+              copy={copy}
+              intro={copy.listenAttempt.pseudoword.intro}
+              prompt={copy.listenAttempt.pseudoword.prompt}
+              encourage={copy.listenAttempt.pseudoword.encourage}
+              completeLabel={copy.listenAttempt.pseudoword.completeLabel}
+              completeDisabledLabel={copy.listenAttempt.pseudoword.completeDisabledLabel}
               onComplete={confirmPseudowords}
               onHarperMessage={onHarperMessage}
               onBuddyState={onBuddyState}
@@ -886,14 +909,14 @@ function Part3LiveLoop({
 
       <div className="mt-auto flex items-center justify-between gap-3">
         <p className="text-sm font-black text-slate-500">
-          Real words complete: {completedRealCount}/{realEntries.length}
+          {formatCopy(copy.part3.realWordsCompleteLabel, { done: String(completedRealCount), total: String(realEntries.length) })}
         </p>
         <button
           onClick={() => onComplete({ realWordsComplete: completedRealCount, pseudowordsConfirmed, pseudowordAttemptMeta })}
           disabled={!allRealWordsComplete || !pseudowordsConfirmed}
           className="rounded-2xl bg-amber-300 px-5 py-4 font-black text-amber-950 disabled:cursor-not-allowed disabled:opacity-50"
         >
-          Done with word lines
+          {copy.part3.doneButton}
         </button>
       </div>
     </div>
@@ -902,16 +925,21 @@ function Part3LiveLoop({
 
 function PowerWordsPart({
   part,
+  copy,
   onSpeak,
   onComplete,
 }: {
   part: LessonPlayerPart;
+  copy: PresentationCopy;
   onSpeak: (text: string) => Promise<void>;
   onComplete: (extra?: Record<string, unknown>) => void;
 }) {
   const heartWords = stringArray(part.contentJson.heartWords);
   const vocabularyWords = arrayOfRecords(part.contentJson.vocabularyWords).map((entry) => stringValue(entry.word)).filter(Boolean);
-  const allWords = [...heartWords.map((word) => ({ word, kind: "Power word" })), ...vocabularyWords.map((word) => ({ word, kind: "Story word" }))];
+  const allWords = [
+    ...heartWords.map((word) => ({ word, kind: copy.powerWords.heartKind })),
+    ...vocabularyWords.map((word) => ({ word, kind: copy.powerWords.vocabularyKind })),
+  ];
   const wordItems = allWords.map(({ word, kind }) => ({
     id: `${kind}-${word}`,
     label: word,
@@ -922,9 +950,10 @@ function PowerWordsPart({
     <div className="flex flex-1 flex-col gap-5">
       <TappableItemPractice
         items={wordItems}
+        copy={copy}
         onSpeak={onSpeak}
-        completeLabel="I know these"
-        completeDisabledLabel="Tap each word first"
+        completeLabel={copy.powerWords.completeLabel}
+        completeDisabledLabel={copy.powerWords.completeDisabledLabel}
         onComplete={(heardCount) => onComplete({ heardWords: heardCount })}
       />
     </div>
@@ -940,12 +969,16 @@ type TappableItem = {
 
 function TappableItemPractice({
   items,
+  copy,
+  theme,
   onSpeak,
   completeLabel,
   completeDisabledLabel,
   onComplete,
 }: {
   items: TappableItem[];
+  copy: PresentationCopy;
+  theme?: PresentationTheme;
   onSpeak: (text: string) => Promise<void>;
   completeLabel: string;
   completeDisabledLabel: string;
@@ -973,19 +1006,19 @@ function TappableItemPractice({
           >
             <span className="block text-3xl font-black">{item.label}</span>
             <span className="mt-2 inline-block rounded-full bg-white px-2 py-1 text-xs font-black text-amber-800">
-              {heard[item.id] ? "Heard" : item.helper}
+              {heard[item.id] ? copy.tappablePractice.heardBadge : item.helper}
             </span>
           </button>
         ))}
       </div>
       <div className="mt-auto flex flex-wrap items-center gap-3">
         <span className="rounded-full border border-[#ead9c2] bg-white px-3 py-2 text-xs font-black text-slate-600">
-          Heard {heardCount}/{items.length}
+          {formatCopy(copy.tappablePractice.heardCounter, { done: String(heardCount), total: String(items.length) })}
         </span>
         <button
           onClick={() => onComplete(heardCount)}
           disabled={!allHeard}
-          className="rounded-2xl bg-amber-300 px-5 py-4 font-black text-amber-950 disabled:cursor-not-allowed disabled:opacity-50"
+          className={theme?.cards.primaryAction ?? "rounded-2xl bg-amber-300 px-5 py-4 font-black text-amber-950 disabled:cursor-not-allowed disabled:opacity-50"}
         >
           {allHeard ? completeLabel : completeDisabledLabel}
         </button>
@@ -1003,6 +1036,7 @@ type ListenAttemptStatus = "idle" | "listening" | "heard" | "tryAgain" | "fallba
 function ListenForReadingAttempt({
   surface,
   words,
+  copy,
   intro,
   prompt,
   encourage,
@@ -1019,6 +1053,7 @@ function ListenForReadingAttempt({
 }: {
   surface: "warmup" | "pseudoword";
   words: string[];
+  copy: PresentationCopy;
   intro: string;
   prompt: string;
   encourage: string;
@@ -1095,11 +1130,11 @@ function ListenForReadingAttempt({
         if (handle.heardSpeech()) void completeHeard(word);
       }, 100);
       timeoutRef.current = window.setTimeout(() => {
-        void markTryAgain(word, "I did not hear your voice yet. Try that one again.");
+        void markTryAgain(word, copy.listenAttempt.noVoiceTryAgain);
       }, VOICE_ACTIVITY_MAX_LISTEN_MS);
     } catch {
       setMicUnavailable(true);
-      showFallback(word, "I could not use the microphone. You can read it with your adult and tap confirm.");
+      showFallback(word, copy.listenAttempt.micUnavailable);
     } finally {
       startingRef.current = false;
     }
@@ -1110,7 +1145,7 @@ function ListenForReadingAttempt({
     if (handle?.heardSpeech()) {
       await completeHeard(word);
     } else {
-      await markTryAgain(word, "Try that one again so Harper can hear your voice.");
+      await markTryAgain(word, copy.listenAttempt.stopEarlyTryAgain);
     }
   }
 
@@ -1171,7 +1206,7 @@ function ListenForReadingAttempt({
     stopActiveListening();
     const nextAttempts = (attempts[word] ?? 0) + 1;
     if (nextAttempts >= 3) {
-      showFallback(word, "You can read it with your adult and tap confirm.");
+      showFallback(word, copy.listenAttempt.fallbackConfirm);
       return;
     }
     setStatuses((state) => ({ ...state, [word]: "tryAgain" }));
@@ -1192,7 +1227,7 @@ function ListenForReadingAttempt({
     stopActiveListening();
     setFallbackAccepted((state) => ({ ...state, [word]: true }));
     setStatuses((state) => ({ ...state, [word]: "heard" }));
-    setMessageByWord((state) => ({ ...state, [word]: "Thanks for reading it with your adult." }));
+    setMessageByWord((state) => ({ ...state, [word]: copy.listenAttempt.adultSupportThanks }));
   }
 
   function finish() {
@@ -1224,7 +1259,7 @@ function ListenForReadingAttempt({
       <div className="rounded-3xl border-2 border-blue-100 bg-blue-50 p-4 text-base font-black leading-relaxed text-blue-950">
         {intro}
         <span className="mt-2 block text-sm font-extrabold text-blue-800">
-          Heard {doneWords.length}/{words.length}
+          {formatCopy(copy.listenAttempt.heardCounter, { done: String(doneWords.length), total: String(words.length) })}
         </span>
       </div>
       <div className="grid grid-cols-2 gap-3 md:grid-cols-3">
@@ -1253,7 +1288,13 @@ function ListenForReadingAttempt({
               >
                 <span className="block">{word}</span>
                 <span className="mt-1 block text-xs font-black uppercase tracking-wide">
-                  {done ? "✓ heard" : listening ? "tap to stop" : status === "tryAgain" ? "try again" : "tap to read"}
+                  {done
+                    ? copy.listenAttempt.heardStatus
+                    : listening
+                      ? copy.listenAttempt.tapToStop
+                      : status === "tryAgain"
+                        ? copy.listenAttempt.tryAgain
+                        : copy.listenAttempt.tapToRead}
                 </span>
               </button>
               {messageByWord[word] ? <p className="mt-2 text-sm font-extrabold leading-snug">{messageByWord[word]}</p> : null}
@@ -1262,7 +1303,7 @@ function ListenForReadingAttempt({
                   onClick={() => acceptFallback(word)}
                   className="mt-3 w-full rounded-2xl border border-[#e8d9c7] bg-white px-3 py-2 text-sm font-black"
                 >
-                  I read it with my adult
+                  {copy.listenAttempt.adultSupport}
                 </button>
               ) : null}
             </div>
@@ -1286,12 +1327,16 @@ function cooldownAfterSpeech() {
 
 function SentenceReadingPart({
   part,
+  copy,
+  theme,
   onComplete,
   onHarperMessage,
   onBuddyState,
   onSpeak,
 }: {
   part: LessonPlayerPart;
+  copy: PresentationCopy;
+  theme: PresentationTheme;
   onComplete: (extra?: Record<string, unknown>) => void;
   onHarperMessage: (text: string) => void;
   onBuddyState: (state: BuddyState) => void;
@@ -1309,13 +1354,13 @@ function SentenceReadingPart({
     setReading(true);
     setFinished(false);
     onBuddyState("listening");
-    onHarperMessage("I'm listening. Read each sentence out loud when you are ready.");
+    onHarperMessage(copy.sentenceReading.harperListen);
   }
 
   async function finishReading() {
     setFinished(true);
     setReading(false);
-    const message = "I loved listening to you read those sentences!";
+    const message = copy.sentenceReading.harperEncourage;
     onHarperMessage(message);
     await onSpeak(message);
     onComplete({ listenAndEncourage: true, sentenceCount: sentences.length });
@@ -1326,24 +1371,26 @@ function SentenceReadingPart({
       <div className="grid gap-3">
         {sentences.map((sentence, index) => (
           <div key={`${sentence}-${index}`} className="rounded-3xl border-2 border-[#ead9c2] bg-[#fffdf8] p-5">
-            <p className="text-xs font-black uppercase tracking-wide text-slate-500">Sentence {index + 1}</p>
+            <p className="text-xs font-black uppercase tracking-wide text-slate-500">
+              {formatCopy(copy.sentenceReading.sentenceLabel, { index: String(index + 1) })}
+            </p>
             <p className="mt-2 text-2xl font-black leading-relaxed text-slate-950">{sentence}</p>
           </div>
         ))}
       </div>
       <div className={`rounded-3xl border-2 p-4 font-black ${reading ? "border-blue-200 bg-blue-50 text-blue-900" : "border-[#efe1d2] bg-white text-slate-700"}`}>
-        {reading ? "Harper is listening while you read. Tap done when you finish." : "Tap start when you are ready to read the sentences."}
+        {reading ? copy.sentenceReading.readingMessage : copy.sentenceReading.idleMessage}
       </div>
       <div className="mt-auto flex flex-wrap gap-3">
-        <button onClick={beginReading} className="rounded-2xl border border-[#e8d9c7] bg-white px-5 py-4 font-black">
-          Start reading
+        <button onClick={beginReading} className={theme.cards.secondaryAction}>
+          {copy.sentenceReading.startButton}
         </button>
         <button
           onClick={finishReading}
           disabled={!reading && !finished}
-          className="rounded-2xl bg-amber-300 px-5 py-4 font-black text-amber-950 disabled:cursor-not-allowed disabled:opacity-50"
+          className={theme.cards.primaryAction}
         >
-          Done reading
+          {copy.sentenceReading.doneButton}
         </button>
       </div>
     </div>
@@ -1352,18 +1399,22 @@ function SentenceReadingPart({
 
 function StoryReadingPart({
   part,
+  copy,
+  theme,
   onComplete,
   onHarperMessage,
   onBuddyState,
   onSpeak,
 }: {
   part: LessonPlayerPart;
+  copy: PresentationCopy;
+  theme: PresentationTheme;
   onComplete: (extra?: Record<string, unknown>) => void;
   onHarperMessage: (text: string) => void;
   onBuddyState: (state: BuddyState) => void;
   onSpeak: (text: string) => Promise<void>;
 }) {
-  const title = stringValue(part.kidVisibleCopy.title) || "Story";
+  const title = stringValue(part.kidVisibleCopy.title) || copy.storyReading.defaultTitle;
   const passage = stringValue(part.contentJson.passageText) || stringValue(part.kidVisibleCopy.passageText);
   const listenFirstAllowed = part.contentJson.listenFirstAllowed !== false;
   const readOnOwnAllowed = part.contentJson.readOnOwnAllowed !== false;
@@ -1378,10 +1429,10 @@ function StoryReadingPart({
     if (!listenFirstAllowed) return;
     setMode("listening-first");
     setFinished(false);
-    onHarperMessage("Listen first. Then you can read it on your own.");
+    onHarperMessage(copy.storyReading.listenFirstHarper);
     await onSpeak(passage);
     setMode("idle");
-    onHarperMessage("Now you can read the story on your own when you are ready.");
+    onHarperMessage(copy.storyReading.afterListenHarper);
   }
 
   function readOnOwn() {
@@ -1389,13 +1440,13 @@ function StoryReadingPart({
     setMode("reading");
     setFinished(false);
     onBuddyState("listening");
-    onHarperMessage("I'm listening. Read the story in your own voice.");
+    onHarperMessage(copy.storyReading.readOnOwnHarper);
   }
 
   async function finishReading() {
     setFinished(true);
     setMode("idle");
-    const message = "I loved listening to you read that!";
+    const message = copy.storyReading.finishEncourage;
     onHarperMessage(message);
     await onSpeak(message);
     onComplete({ listenAndEncourage: true, connectedTextMode: "read_on_own" });
@@ -1404,34 +1455,34 @@ function StoryReadingPart({
   return (
     <div className="flex flex-1 flex-col gap-5">
       <div className="rounded-3xl border-2 border-[#ead9c2] bg-[#fffdf8] p-5">
-        <p className="text-xs font-black uppercase tracking-wide text-slate-500">Story</p>
+        <p className="text-xs font-black uppercase tracking-wide text-slate-500">{copy.storyReading.storyLabel}</p>
         <h3 className="mt-2 text-3xl font-black">{title}</h3>
         <p className="mt-4 whitespace-pre-wrap text-xl font-extrabold leading-relaxed text-slate-950">{passage}</p>
       </div>
       <div className={`rounded-3xl border-2 p-4 font-black ${mode === "reading" ? "border-blue-200 bg-blue-50 text-blue-900" : "border-[#efe1d2] bg-white text-slate-700"}`}>
-        {mode === "reading" ? "Harper is listening while you read. Tap done when you finish." : "Choose listen first, or read the story on your own."}
+        {mode === "reading" ? copy.storyReading.readingMessage : copy.storyReading.idleMessage}
       </div>
       <div className="mt-auto flex flex-wrap gap-3">
         <button
           onClick={listenFirst}
           disabled={!listenFirstAllowed || mode === "listening-first"}
-          className="rounded-2xl border border-[#e8d9c7] bg-white px-5 py-4 font-black disabled:cursor-not-allowed disabled:opacity-50"
+          className={theme.cards.secondaryAction}
         >
-          {mode === "listening-first" ? "Listening..." : "Listen first"}
+          {mode === "listening-first" ? copy.storyReading.listeningButton : copy.storyReading.listenFirstButton}
         </button>
         <button
           onClick={readOnOwn}
           disabled={!readOnOwnAllowed}
-          className="rounded-2xl border border-[#e8d9c7] bg-white px-5 py-4 font-black disabled:cursor-not-allowed disabled:opacity-50"
+          className={theme.cards.secondaryAction}
         >
-          Read on my own
+          {copy.storyReading.readOnOwnButton}
         </button>
         <button
           onClick={finishReading}
           disabled={mode !== "reading" && !finished}
-          className="rounded-2xl bg-amber-300 px-5 py-4 font-black text-amber-950 disabled:cursor-not-allowed disabled:opacity-50"
+          className={theme.cards.primaryAction}
         >
-          Done reading
+          {copy.storyReading.doneButton}
         </button>
       </div>
     </div>
@@ -1440,10 +1491,12 @@ function StoryReadingPart({
 
 function SpellingPart({
   part,
+  copy,
   onSpeak,
   onComplete,
 }: {
   part: LessonPlayerPart;
+  copy: PresentationCopy;
   onSpeak: (text: string) => Promise<void>;
   onComplete: (extra?: Record<string, unknown>) => void;
 }) {
@@ -1468,16 +1521,16 @@ function SpellingPart({
   return (
     <div className="flex flex-1 flex-col gap-5">
       <div className="rounded-3xl border-2 border-blue-100 bg-blue-50 p-5 text-center">
-        <p className="font-black text-blue-900">Harper says</p>
+        <p className="font-black text-blue-900">{copy.spelling.harperSays}</p>
         <button onClick={() => onSpeak(target)} className="mt-2 rounded-2xl bg-white px-5 py-4 text-2xl font-black shadow-sm">
-          Listen to word {index + 1}
+          {formatCopy(copy.spelling.listenToWord, { index: String(index + 1) })}
         </button>
       </div>
       <input
         value={answer}
         onChange={(event) => setAnswer(event.target.value)}
         className="rounded-2xl border-2 border-blue-100 px-4 py-4 text-center text-3xl font-black outline-none focus:border-blue-300"
-        placeholder="type the word"
+        placeholder={copy.spelling.inputPlaceholder}
       />
       <div className="flex flex-wrap gap-2">
         {letters.map((letter, letterIndex) => (
@@ -1489,21 +1542,21 @@ function SpellingPart({
             {letter}
           </button>
         ))}
-        <button onClick={() => setAnswer("")} className="rounded-2xl border border-[#e8d9c7] bg-white px-4 py-3 font-black">Clear</button>
+        <button onClick={() => setAnswer("")} className="rounded-2xl border border-[#e8d9c7] bg-white px-4 py-3 font-black">{copy.spelling.clearButton}</button>
       </div>
       {answer ? (
         <div className={`rounded-2xl p-4 font-black ${isCorrect ? "bg-emerald-50 text-emerald-800" : "bg-amber-50 text-amber-900"}`}>
-          {isCorrect ? "That matches." : "Keep building the word you hear."}
+          {isCorrect ? copy.spelling.correctFeedback : copy.spelling.retryFeedback}
         </div>
       ) : null}
       <button onClick={check} className="mt-auto rounded-2xl bg-amber-300 px-5 py-4 font-black text-amber-950">
-        Check spelling
+        {copy.spelling.checkButton}
       </button>
     </div>
   );
 }
 
-function TalkPart({ part, onComplete }: { part: LessonPlayerPart; onComplete: (extra?: Record<string, unknown>) => void }) {
+function TalkPart({ part, copy, onComplete }: { part: LessonPlayerPart; copy: PresentationCopy; onComplete: (extra?: Record<string, unknown>) => void }) {
   const questions = arrayOfRecords(part.contentJson.questions);
   const [responses, setResponses] = useState<Record<number, string>>({});
   return (
@@ -1515,38 +1568,48 @@ function TalkPart({ part, onComplete }: { part: LessonPlayerPart; onComplete: (e
             value={responses[index] || ""}
             onChange={(event) => setResponses((state) => ({ ...state, [index]: event.target.value }))}
             className="mt-3 min-h-24 w-full rounded-2xl border-2 border-violet-100 bg-white p-3 text-base font-bold outline-none focus:border-violet-300"
-            placeholder="Type a quick note or tell your adult."
+            placeholder={copy.talk.placeholder}
           />
         </div>
       ))}
       <button onClick={() => onComplete({ responseCount: Object.values(responses).filter((value) => value.trim()).length })} className="mt-auto rounded-2xl bg-amber-300 px-5 py-4 font-black text-amber-950">
-        I talked about it
+        {copy.talk.completeLabel}
       </button>
     </div>
   );
 }
 
-function PlaceholderPart({ part }: { part: LessonPlayerPart }) {
-  const preview = placeholderPreview(part);
+function PlaceholderPart({ part, copy, theme }: { part: LessonPlayerPart; copy: PresentationCopy; theme: PresentationTheme }) {
+  const preview = placeholderPreview(part, copy);
   return (
     <div className="flex flex-1 flex-col justify-center gap-4 text-center">
-      <div className="mx-auto max-w-xl rounded-3xl border-2 border-dashed border-[#ead9c2] bg-[#fffdf8] p-6">
-        <p className="text-sm font-black uppercase tracking-wide text-slate-500">Coming in the next lesson-player slice</p>
-        <h3 className="mt-2 text-2xl font-black">{kidFacingPartTitle(part)}</h3>
+      <div className={theme.cards.dashedCard}>
+        <p className="text-sm font-black uppercase tracking-wide text-slate-500">{copy.placeholder.badge}</p>
+        <h3 className="mt-2 text-2xl font-black">{kidFacingPartTitle(part, copy)}</h3>
         <p className="mt-3 text-base font-bold text-slate-600">{preview}</p>
       </div>
     </div>
   );
 }
 
-function DisabledPractice({ targetCode, reason }: { targetCode: string; reason?: string }) {
+function DisabledPractice({
+  targetCode,
+  reason,
+  copy,
+  theme,
+}: {
+  targetCode: string;
+  reason?: string;
+  copy: PresentationCopy;
+  theme: PresentationTheme;
+}) {
   return (
-    <main className="min-h-screen bg-[#f6efe7] px-4 py-10">
+    <main className={theme.layout.page}>
       <section className="mx-auto max-w-3xl rounded-[28px] border border-[#e8d9c7] bg-[#fffaf3] p-8 shadow-xl">
-        <BuddyCharacter state="idle" name="Harper" />
-        <h1 className="mt-6 text-3xl font-black">This lesson is coming soon</h1>
+        <BuddyCharacter state="idle" name={copy.buddy.name} stateLabels={copy.buddy.stateLabels} imageAlt={copy.buddy.imageAlt} />
+        <h1 className="mt-6 text-3xl font-black">{copy.fallback.disabledTitle}</h1>
         <p className="mt-3 text-lg font-bold text-slate-600">
-          Harper has the first silent-e lesson ready. The {targetCode} lesson will turn on after its kid-facing rule copy is approved.
+          {formatCopy(copy.fallback.disabledMessage, { targetCode })}
         </p>
         {reason ? <p className="mt-4 rounded-2xl bg-white p-4 text-sm font-bold text-slate-500">{reason}</p> : null}
       </section>
@@ -1554,39 +1617,43 @@ function DisabledPractice({ targetCode, reason }: { targetCode: string; reason?:
   );
 }
 
-function DemoCard({ label, word }: { label: string; word: string }) {
+function DemoCard({ label, word, theme }: { label: string; word: string; theme: PresentationTheme }) {
   return (
-    <div className="rounded-3xl border-2 border-[#e7d6c1] bg-[#fffdf8] p-6 text-center">
+    <div className={theme.cards.demoCard}>
       <p className="text-xs font-black uppercase tracking-wide text-slate-500">{label}</p>
       <p className="mt-2 text-5xl font-black">{word}</p>
     </div>
   );
 }
 
-function speechForPart(part: LessonPlayerPart) {
-  if (part.partNumber === 2) return stringValue(part.contentJson.kidRuleStatement) || "Listen to the new thing with Harper.";
+function speechForPart(part: LessonPlayerPart, copy?: PresentationCopy) {
+  if (part.partNumber === 2) return stringValue(part.contentJson.kidRuleStatement) || copy?.fallback.part2Speech || "Listen to the new thing with Harper.";
   return stringValue(part.kidVisibleCopy.directions) || stringValue(part.kidVisibleCopy.title) || part.partLabel;
 }
 
-function kidFacingPartTitle(part: LessonPlayerPart) {
-  return KID_FACING_PART_TITLES[part.partNumber] || part.partLabel;
+function kidFacingPartTitle(part: LessonPlayerPart, copy: PresentationCopy) {
+  return copy.partTitles[part.partNumber] || part.partLabel;
 }
 
-function partDescription(part: LessonPlayerPart) {
-  if (part.partNumber === 3) return "Read the generated word lines with Harper.";
-  if (part.partNumber === 5) return "Read the generated sentences with Harper listening.";
-  if (part.partNumber === 7) return "Listen first or read the generated story on your own.";
-  return stringValue(part.contentJson.skillFocus).replace(/_/g, " ") || "Generated lesson activity.";
+function partDescription(part: LessonPlayerPart, copy: PresentationCopy) {
+  if (part.partNumber === 3) return copy.fallback.part3Description;
+  if (part.partNumber === 5) return copy.fallback.part5Description;
+  if (part.partNumber === 7) return copy.fallback.part7Description;
+  return stringValue(part.contentJson.skillFocus).replace(/_/g, " ") || copy.fallback.defaultDescription;
 }
 
-function placeholderPreview(part: LessonPlayerPart) {
+function placeholderPreview(part: LessonPlayerPart, copy: PresentationCopy) {
   if (part.partNumber === 3) {
     const lines = arrayOfRecords(part.contentJson.contrastiveLines);
     return lines.map((line) => stringArray(line.words).join(" ")).filter(Boolean).slice(0, 2).join(" / ");
   }
   if (part.partNumber === 5) return stringArray(part.contentJson.sentences).slice(0, 2).join(" ");
   if (part.partNumber === 7) return stringValue(part.contentJson.passageText).slice(0, 160);
-  return "This part is generated and will be wired in a later slice.";
+  return copy.placeholder.defaultPreview;
+}
+
+function formatCopy(template: string, values: Record<string, string>) {
+  return Object.entries(values).reduce((text, [key, value]) => text.replace(new RegExp(`\\{${key}\\}`, "g"), value), template);
 }
 
 function entryKey(entry: Part3WordEntry) {
