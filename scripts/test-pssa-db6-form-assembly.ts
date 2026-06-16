@@ -5,6 +5,7 @@ import {
   computePssaFormContentHash,
   decidePssaFormWrite,
   GRADE3_BLUEPRINT,
+  GRADE3_DIAGNOSTIC_BLUEPRINT,
   verifyPssaFormSnapshots,
   type PssaAssemblyItem,
   type PssaAssemblyPassage,
@@ -134,6 +135,44 @@ assert.equal(positive.items.filter((item) => item.slotType === "short_answer").l
 const rerun = assemble(validPool());
 assert.equal(rerun.contentHash, positive.contentHash, "same seed + pool is byte-stable");
 assert.deepEqual(rerun.items, positive.items, "same seed + pool preserves selection order");
+
+const diagnosticSectionTotals = GRADE3_DIAGNOSTIC_BLUEPRINT.sections.reduce(
+  (totals, section) => ({
+    conventions: totals.conventions + section.conventionsCount,
+    passages: totals.passages + section.readingPassages,
+    shortAnswers: totals.shortAnswers + section.shortAnswers,
+  }),
+  { conventions: 0, passages: 0, shortAnswers: 0 },
+);
+assert.equal(GRADE3_DIAGNOSTIC_BLUEPRINT.hasSections, true, "diagnostic blueprint is explicitly sectioned");
+assert.equal(GRADE3_DIAGNOSTIC_BLUEPRINT.untimed, true, "diagnostic estimatedMinutes must remain scheduling-only");
+assert.deepEqual(GRADE3_DIAGNOSTIC_BLUEPRINT.sections.map((section) => section.sectionIndex), [1, 2, 3], "diagnostic sections are ordered 1..3");
+assert.deepEqual(diagnosticSectionTotals, { conventions: 9, passages: 4, shortAnswers: 2 }, "diagnostic section targets must sum to form-level targets");
+assert.equal(diagnosticSectionTotals.conventions, GRADE3_DIAGNOSTIC_BLUEPRINT.conventionsOnePoint, "diagnostic conventions target sums to form target");
+assert.equal(diagnosticSectionTotals.passages, GRADE3_DIAGNOSTIC_BLUEPRINT.passages, "diagnostic passage target sums to form target");
+assert.equal(diagnosticSectionTotals.shortAnswers, GRADE3_DIAGNOSTIC_BLUEPRINT.shortAnswerItems, "diagnostic short-answer target sums to form target");
+assert.equal(GRADE3_DIAGNOSTIC_BLUEPRINT.shortAnswerItems, GRADE3_BLUEPRINT.shortAnswerItems, "diagnostic preserves two short-answer form target");
+assert.equal(GRADE3_DIAGNOSTIC_BLUEPRINT.shortAnswerPointsEach, GRADE3_BLUEPRINT.shortAnswerPointsEach, "diagnostic preserves short-answer point value");
+assert.equal(GRADE3_DIAGNOSTIC_BLUEPRINT.totalPoints, GRADE3_BLUEPRINT.totalPoints, "diagnostic preserves 45-point total");
+assert.deepEqual(GRADE3_DIAGNOSTIC_BLUEPRINT.categoryPointRanges, GRADE3_BLUEPRINT.categoryPointRanges, "diagnostic category ranges match foundation blueprint");
+assert.equal(GRADE3_DIAGNOSTIC_BLUEPRINT.maxCorrectPositionShare, GRADE3_BLUEPRINT.maxCorrectPositionShare, "diagnostic answer-position cap matches foundation blueprint");
+assert.equal((GRADE3_BLUEPRINT as any).hasSections, undefined, "foundation blueprint remains flat and unchanged");
+
+const flatCanonicalWithDbSectionColumns = {
+  ...(positive.canonical as any),
+  hasSections: false,
+  sections: [],
+  passages: (positive.canonical as any).passages.map((passage: any) => ({ ...passage, sectionIndex: null })),
+  items: (positive.canonical as any).items.map((item: any) => ({ ...item, sectionIndex: null })),
+};
+const flatCanonicalStripped = {
+  ...(positive.canonical as any),
+  passages: flatCanonicalWithDbSectionColumns.passages.map(({ sectionIndex: _sectionIndex, ...passage }: any) => passage),
+  items: flatCanonicalWithDbSectionColumns.items.map(({ sectionIndex: _sectionIndex, ...item }: any) => item),
+};
+delete (flatCanonicalStripped as any).hasSections;
+delete (flatCanonicalStripped as any).sections;
+assert.equal(computePssaFormContentHash(flatCanonicalStripped), positive.contentHash, "flat canonical hash ignores additive section DB columns when not present in canonical identity");
 
 const empty = assemble([]);
 assert.equal(empty.ok, false, "empty pool refuses");

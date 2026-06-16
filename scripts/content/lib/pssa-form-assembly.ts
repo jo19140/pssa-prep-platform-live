@@ -29,6 +29,36 @@ export const GRADE3_BLUEPRINT = {
   maxCorrectPositionShare: 0.4,
 } as const;
 
+export const GRADE3_DIAGNOSTIC_BLUEPRINT = {
+  blueprintVersion: "pde-ela-diagnostic-stamina-2025-g3-v1",
+  module: "PSSA",
+  subject: "ELA",
+  gradeLevel: 3,
+  totalPoints: 45,
+  passages: 4,
+  readingOnePointRange: { min: 19, max: 23 },
+  conventionsOnePoint: 9,
+  multipointItemsRange: { min: 3, max: 4 },
+  shortAnswerItems: 2,
+  shortAnswerPointsEach: 3,
+  categoryPointRanges: {
+    A: { min: 15, max: 21 },
+    B: { min: 15, max: 21 },
+    D: { min: 9, max: 9 },
+  },
+  maxReadingEcRepeats: 2,
+  maxCorrectPositionShare: 0.4,
+  hasSections: true,
+  sections: [
+    { sectionIndex: 1, sectionType: "conventions_reading", label: "Section 1", estimatedMinutes: 60, conventionsCount: 5, readingPassages: 1, shortAnswers: 1 },
+    { sectionIndex: 2, sectionType: "reading", label: "Section 2", estimatedMinutes: 35, conventionsCount: 0, readingPassages: 1, shortAnswers: 1 },
+    { sectionIndex: 3, sectionType: "conventions_reading", label: "Section 3", estimatedMinutes: 60, conventionsCount: 4, readingPassages: 2, shortAnswers: 0 },
+  ],
+  maxSectionsPerDay: 2,
+  untimed: true,
+  sourcePool: "stamina",
+} as const;
+
 export type PssaFormSlotType = "reading_1pt" | "conventions_1pt" | "multipoint" | "short_answer";
 export type PssaFormCategory = "A" | "B" | "D";
 export type GateStatus = "PASS" | "FAIL";

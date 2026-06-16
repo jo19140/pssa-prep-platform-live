@@ -817,6 +817,7 @@ model PssaForm {
   contentHash          String         @unique
   auditContractVersion String
   sourceScanVersion    String
+  hasSections          Boolean        @default(false)
   assembledAt          DateTime?
   assembledBy          String
   assemblyRunId        String
@@ -826,6 +827,7 @@ model PssaForm {
 
   passages PssaFormPassage[]
   items    PssaFormItem[]
+  sections PssaFormSection[]
   sessions PssaFormSession[]
 
   @@index([gradeLevel, formStatus])
@@ -833,11 +835,26 @@ model PssaForm {
   @@index([assemblyRunId])
 }
 
+model PssaFormSection {
+  id               String @id @default(cuid())
+  formId           String
+  sectionIndex     Int
+  sectionType      String
+  label            String
+  estimatedMinutes Int
+
+  form PssaForm @relation(fields: [formId], references: [id], onDelete: Cascade)
+
+  @@unique([formId, sectionIndex])
+  @@index([formId])
+}
+
 model PssaFormPassage {
   id                                 String   @id @default(cuid())
   formId                             String
   passageId                          String
   position                           Int
+  sectionIndex                       Int?
   approvedPassageContentHashSnapshot String
   createdAt                          DateTime @default(now())
 
@@ -857,6 +874,7 @@ model PssaFormItem {
   position                    Int
   pointValue                  Int
   slotType                    PssaFormSlotType
+  sectionIndex                Int?
   approvedContentHashSnapshot String
   passageIdSnapshot           String?
   createdAt                   DateTime         @default(now())
