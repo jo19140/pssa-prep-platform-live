@@ -46,7 +46,7 @@ export const GRADE3_DIAGNOSTIC_BLUEPRINT = {
     B: { min: 15, max: 21 },
     D: { min: 9, max: 9 },
   },
-  maxReadingEcRepeats: 2,
+  maxReadingEcRepeats: 3,
   maxCorrectPositionShare: 0.4,
   hasSections: true,
   sections: [
@@ -91,9 +91,18 @@ export type ClassifiedAssemblyItem = {
   approvedContentHashSnapshot: string;
 };
 
+export type SelectedSection = {
+  sectionIndex: number;
+  sectionType: string;
+  label: string;
+  estimatedMinutes: number;
+};
+
 export type SelectedPassage = {
   position: number;
   passageId: string;
+  sectionIndex?: number | null;
+  passageUnitId?: string;
   categoryPoints: { A: number; B: number; D: number };
   approvedPassageContentHashSnapshot: string;
 };
@@ -105,6 +114,8 @@ export type SelectedFormItem = {
   pointValue: number;
   category: PssaFormCategory;
   passageId: string | null;
+  sectionIndex?: number | null;
+  passageUnitId?: string | null;
   approvedContentHashSnapshot: string;
 };
 
@@ -128,6 +139,7 @@ export type AssemblyResult = {
   refusedReason: string | null;
   contentHash: string | null;
   canonical: Record<string, unknown> | null;
+  sections?: SelectedSection[];
   passages: SelectedPassage[];
   items: SelectedFormItem[];
   categoryPoints: { A: number; B: number; D: number };
@@ -259,25 +271,38 @@ function buildDeficits(classified: ClassifiedAssemblyItem[], allItems: PssaAssem
   ];
 }
 
-function buildCanonical(blueprintVersion: string, passages: SelectedPassage[], items: SelectedFormItem[]) {
+function buildCanonical(blueprintVersion: string, passages: SelectedPassage[], items: SelectedFormItem[], sections?: SelectedSection[]) {
   const categoryPoints = selectedCategoryPoints(items);
-  return {
+  const canonical: Record<string, unknown> = {
     blueprintVersion,
     gradeLevel: GRADE3_BLUEPRINT.gradeLevel,
     module: GRADE3_BLUEPRINT.module,
     subject: GRADE3_BLUEPRINT.subject,
     totalPoints: items.reduce((sum, item) => sum + item.pointValue, 0),
     categoryPoints,
-    passages: passages.map(({ position, passageId, approvedPassageContentHashSnapshot }) => ({ position, passageId, approvedPassageContentHashSnapshot })),
-    items: items.map(({ position, itemId, slotType, pointValue, passageId, approvedContentHashSnapshot }) => ({
+    passages: passages.map(({ position, passageId, sectionIndex, passageUnitId, approvedPassageContentHashSnapshot }) => ({
+      position,
+      passageId,
+      ...(sectionIndex ? { sectionIndex } : {}),
+      ...(passageUnitId ? { passageUnitId } : {}),
+      approvedPassageContentHashSnapshot,
+    })),
+    items: items.map(({ position, itemId, slotType, pointValue, passageId, sectionIndex, passageUnitId, approvedContentHashSnapshot }) => ({
       position,
       itemId,
       slotType,
       pointValue,
       passageId,
+      ...(sectionIndex ? { sectionIndex } : {}),
+      ...(passageUnitId ? { passageUnitId } : {}),
       approvedContentHashSnapshot,
     })),
   };
+  if (sections?.length) {
+    canonical.hasSections = true;
+    canonical.sections = sections.map(({ sectionIndex, sectionType, label, estimatedMinutes }) => ({ sectionIndex, sectionType, label, estimatedMinutes }));
+  }
+  return canonical;
 }
 
 export function computePssaFormContentHash(canonical: Record<string, unknown>) {
@@ -359,6 +384,217 @@ function validateSelectedForm(
   return { gates, categoryPoints, totalPoints, selectedItems };
 }
 
+const DIAGNOSTIC_SECTION_ITEM_IDS = [
+  [
+    "pssa_stamina_item_g3_syrup_01",
+    "pssa_stamina_item_g3_syrup_02",
+    "pssa_stamina_item_g3_syrup_03",
+    "pssa_stamina_item_g3_syrup_04",
+    "pssa_stamina_item_g3_syrup_dd_01",
+    "pssa_stamina_item_g3_syrup_sa_01",
+    "conv_01",
+    "conv_02",
+    "conv_03",
+    "conv_04",
+    "conv_05",
+  ],
+  [
+    "pssa_stamina_item_g3_boat_01",
+    "pssa_stamina_item_g3_boat_02",
+    "pssa_stamina_item_g3_boat_03",
+    "pssa_stamina_item_g3_boat_04",
+    "pssa_stamina_item_g3_boat_05",
+    "pssa_stamina_item_g3_boat_ebsr_01",
+    "pssa_stamina_item_g3_boat_mg_01",
+    "pssa_stamina_item_g3_boat_sa_01",
+  ],
+  [
+    "pssa_stamina_item_g3_owls_01",
+    "pssa_stamina_item_g3_owls_02",
+    "pssa_stamina_item_g3_owls_03",
+    "pssa_stamina_item_g3_owls_04",
+    "pssa_stamina_item_g3_owls_05",
+    "pssa_stamina_item_g3_owls_ebsr_01",
+    "pssa_stamina_item_g3_rabbit_01",
+    "pssa_stamina_item_g3_rabbit_02",
+    "pssa_stamina_item_g3_rabbit_03",
+    "pssa_stamina_item_g3_rabbit_04",
+    "pssa_stamina_item_g3_rabbit_05",
+    "pssa_stamina_item_g3_rabbit_06",
+    "conv_06",
+    "conv_07",
+    "conv_08",
+    "conv_09",
+  ],
+] as const;
+
+const DIAGNOSTIC_UNIT_SECTIONS = new Map([
+  ["pssa_stamina_psg_g3_syrup_v4", 1],
+  ["pssa_stamina_psg_g3_boat_literary", 2],
+  ["pssa_pg_g3_owls_paired_01", 3],
+  ["pssa_stamina_psg_g3_rabbit_drama", 3],
+]);
+
+type DiagnosticClassifiedItem = ClassifiedAssemblyItem & {
+  sectionIndex: number;
+  passageUnitId: string | null;
+  rawPassageIds: string[];
+};
+
+function passageGroupIdFor(item: PssaAssemblyItem) {
+  return String((item as any).passageGroupId ?? (item as any).passageGroup?.id ?? "");
+}
+
+function groupedPassageIds(item: PssaAssemblyItem) {
+  return ((item as any).passageGroup?.members ?? [])
+    .map((member: any) => member?.passage?.id)
+    .filter((id: unknown): id is string => typeof id === "string" && id.length > 0);
+}
+
+function sectionForConvention(itemId: string) {
+  if (/^conv_0[1-5]$/.test(itemId)) return 1;
+  if (/^conv_0[6-9]$/.test(itemId)) return 3;
+  return null;
+}
+
+function classifyDiagnosticAssemblyItem(item: PssaAssemblyItem): DiagnosticClassifiedItem | { error: string } {
+  const ecCategory = categoryFromEligibleContent(item.eligibleContent);
+  if (!ecCategory) return { error: `category_unresolved:${item.id}` };
+  const reportingCategory = categoryFromReportingCategory(item.reportingCategory);
+  if (reportingCategory && reportingCategory !== ecCategory) return { error: `category_mismatch:${item.id}:${ecCategory}_vs_${reportingCategory}` };
+  const pointValue = Number(item.pointValue ?? 0);
+  if (!Number.isInteger(pointValue) || pointValue <= 0) return { error: `invalid_point_value:${item.id}` };
+  const interactionType = String(item.interactionType ?? "");
+  const slotType: PssaFormSlotType = interactionType === "SHORT_ANSWER"
+    ? "short_answer"
+    : ecCategory === "D"
+      ? "conventions_1pt"
+      : pointValue > 1
+        ? "multipoint"
+        : "reading_1pt";
+  const directPassageId = primaryPassageId(item) ?? ((item as any).passageId ?? null);
+  const groupId = passageGroupIdFor(item);
+  const passageUnitId = slotType === "conventions_1pt" ? null : (groupId || directPassageId);
+  if (slotType === "conventions_1pt" && (pointValue !== 1 || passageUnitId)) return { error: `invalid_conventions_slot:${item.id}` };
+  if ((slotType === "reading_1pt" || slotType === "multipoint" || slotType === "short_answer") && !passageUnitId) return { error: `missing_primary_passage:${item.id}` };
+  if (groupId && !DIAGNOSTIC_UNIT_SECTIONS.has(groupId)) return { error: `missing_primary_passage:${item.id}` };
+  if (passageUnitId && !DIAGNOSTIC_UNIT_SECTIONS.has(passageUnitId)) return { error: `unknown_passage_unit:${item.id}:${passageUnitId}` };
+  if (slotType === "reading_1pt" && pointValue !== 1) return { error: `invalid_reading_point_value:${item.id}` };
+  if (slotType === "short_answer" && pointValue !== GRADE3_DIAGNOSTIC_BLUEPRINT.shortAnswerPointsEach) return { error: `invalid_short_answer_points:${item.id}` };
+  if (!item.approvedContentHash) return { error: `missing_approved_hash:${item.id}` };
+  const sectionIndex = passageUnitId ? DIAGNOSTIC_UNIT_SECTIONS.get(passageUnitId)! : sectionForConvention(item.id);
+  if (!sectionIndex) return { error: `section_unresolved:${item.id}` };
+  return {
+    item,
+    itemId: item.id,
+    category: ecCategory,
+    slotType,
+    pointValue,
+    primaryPassageId: slotType === "conventions_1pt" ? null : directPassageId,
+    passageUnitId,
+    rawPassageIds: groupId ? groupedPassageIds(item) : (directPassageId ? [directPassageId] : []),
+    sectionIndex,
+    approvedContentHashSnapshot: item.approvedContentHash,
+  };
+}
+
+function validateDiagnosticSelectedForm(input: {
+  selected: DiagnosticClassifiedItem[];
+  selectedPassages: SelectedPassage[];
+  sections: SelectedSection[];
+  liveReadyIds: Set<string>;
+}) {
+  const { selected, selectedPassages, sections, liveReadyIds } = input;
+  const gates: GateResult[] = [];
+  const itemIds = selected.map((row) => row.itemId);
+  const duplicateItems = itemIds.filter((id, index) => itemIds.indexOf(id) !== index);
+  const passageUnitIds = new Set(selected.filter((row) => row.passageUnitId).map((row) => row.passageUnitId!));
+  const passageIds = new Set(selectedPassages.map((passage) => passage.passageId));
+  const reading = selected.filter((row) => row.slotType === "reading_1pt");
+  const conventions = selected.filter((row) => row.slotType === "conventions_1pt");
+  const multipoint = selected.filter((row) => row.slotType === "multipoint");
+  const shortAnswer = selected.filter((row) => row.slotType === "short_answer");
+  const selectedItems: SelectedFormItem[] = selected.map((row, index) => ({
+    position: index + 1,
+    itemId: row.itemId,
+    slotType: row.slotType,
+    pointValue: row.pointValue,
+    category: row.category,
+    passageId: row.primaryPassageId,
+    sectionIndex: row.sectionIndex,
+    passageUnitId: row.passageUnitId,
+    approvedContentHashSnapshot: row.approvedContentHashSnapshot,
+  }));
+  const categoryPoints = selectedCategoryPoints(selectedItems);
+  const totalPoints = selectedItems.reduce((sum, item) => sum + item.pointValue, 0);
+  const correctPositions = selected
+    .filter((row) => row.item.interactionType === "MCQ")
+    .map((row) => correctPosition(row.item))
+    .filter((position): position is number => position !== null);
+  const positionCounts = new Map<number, number>();
+  for (const position of correctPositions) positionCounts.set(position, (positionCounts.get(position) ?? 0) + 1);
+  const answerDetail = [0, 1, 2, 3].map((index) => positionCounts.get(index) ?? 0);
+  const maxShare = correctPositions.length ? Math.max(...positionCounts.values()) / correctPositions.length : 0;
+  const multipointPatterns = new Set(multipoint.map((row) => stableStringify(row.item.correctResponseJson)));
+  const readingEcCounts = new Map<string, number>();
+  for (const row of reading) {
+    const ec = String(row.item.eligibleContent ?? "");
+    readingEcCounts.set(ec, (readingEcCounts.get(ec) ?? 0) + 1);
+  }
+  const overRepeatedEc = [...readingEcCounts].filter(([, count]) => count > GRADE3_DIAGNOSTIC_BLUEPRINT.maxReadingEcRepeats).map(([ec]) => ec);
+  const expectedTripleEc = new Map([["E03.A-K.1.1.3", 3], ["E03.B-K.1.1.1", 3]]);
+  const tripleEcOk = [...expectedTripleEc].every(([ec, count]) => readingEcCounts.get(ec) === count)
+    && [...readingEcCounts].every(([, count]) => count <= GRADE3_DIAGNOSTIC_BLUEPRINT.maxReadingEcRepeats);
+  const sectionTargets = new Map([
+    [1, { units: 1, reading: 4, conventions: 5, ebsr: 0, te: 1, shortAnswer: 1, items: 11, points: 15 }],
+    [2, { units: 1, reading: 5, conventions: 0, ebsr: 1, te: 1, shortAnswer: 1, items: 8, points: 13 }],
+    [3, { units: 2, reading: 11, conventions: 4, ebsr: 1, te: 0, shortAnswer: 0, items: 16, points: 17 }],
+  ]);
+  for (const [sectionIndex, target] of sectionTargets) {
+    const rows = selected.filter((row) => row.sectionIndex === sectionIndex);
+    const units = new Set(rows.map((row) => row.passageUnitId).filter(Boolean)).size;
+    const ebsr = rows.filter((row) => row.item.interactionType === "EBSR").length;
+    const te = rows.filter((row) => ["DRAG_DROP", "MATCHING_GRID"].includes(String(row.item.interactionType))).length;
+    const detail = `units=${units} reading=${rows.filter((row) => row.slotType === "reading_1pt").length} conventions=${rows.filter((row) => row.slotType === "conventions_1pt").length} ebsr=${ebsr} te=${te} sa=${rows.filter((row) => row.slotType === "short_answer").length} items=${rows.length} points=${rows.reduce((sum, row) => sum + row.pointValue, 0)}`;
+    const ok = units === target.units
+      && rows.filter((row) => row.slotType === "reading_1pt").length === target.reading
+      && rows.filter((row) => row.slotType === "conventions_1pt").length === target.conventions
+      && ebsr === target.ebsr
+      && te === target.te
+      && rows.filter((row) => row.slotType === "short_answer").length === target.shortAnswer
+      && rows.length === target.items
+      && rows.reduce((sum, row) => sum + row.pointValue, 0) === target.points;
+    addGate(gates, `section_${sectionIndex}_composition`, ok, detail);
+  }
+  const owlRows = selected.filter((row) => row.passageUnitId === "pssa_pg_g3_owls_paired_01");
+  const owlPassageRows = selectedPassages.filter((passage) => passage.passageUnitId === "pssa_pg_g3_owls_paired_01");
+
+  addGate(gates, "section_count", sections.length === 3, `${sections.length}`);
+  addGate(gates, "live_selector_membership", selected.every((row) => liveReadyIds.has(row.itemId)), "all selected items must be live selector results");
+  addGate(gates, "selected_item_readiness", selected.every((row) => computeStudentReadyBlockedReason(row.item) === "NONE"), "all selected items must recompute to NONE");
+  addGate(gates, "passage_count", passageUnitIds.size === GRADE3_DIAGNOSTIC_BLUEPRINT.passages, `${passageUnitIds.size}/4 passage units`);
+  addGate(gates, "passage_membership", selected.every((row) => row.slotType === "conventions_1pt" || row.rawPassageIds.every((id) => passageIds.has(id))), "all passage-based items use form passages");
+  addGate(gates, "passage_group_integrity", owlRows.every((row) => row.sectionIndex === 3) && owlPassageRows.length === 2 && owlPassageRows.every((row) => row.sectionIndex === 3), `owlItems=${owlRows.length}; owlPassages=${owlPassageRows.length}`);
+  addGate(gates, "no_duplicate_items", duplicateItems.length === 0, duplicateItems.join("|") || "none");
+  addGate(gates, "no_deprecated_or_retired", selected.every((row) => row.item.itemStatus === "pilot_ready" && !row.item.retiredAt && !row.item.deprecatedReason), "selector should make this structural");
+  addGate(gates, "reading_1pt_count", reading.length >= GRADE3_DIAGNOSTIC_BLUEPRINT.readingOnePointRange.min && reading.length <= GRADE3_DIAGNOSTIC_BLUEPRINT.readingOnePointRange.max, `${reading.length}`);
+  addGate(gates, "conventions_count", conventions.length === GRADE3_DIAGNOSTIC_BLUEPRINT.conventionsOnePoint, `${conventions.length}`);
+  addGate(gates, "multipoint_count", multipoint.length >= GRADE3_DIAGNOSTIC_BLUEPRINT.multipointItemsRange.min && multipoint.length <= GRADE3_DIAGNOSTIC_BLUEPRINT.multipointItemsRange.max, `${multipoint.length}`);
+  addGate(gates, "multipoint_point_variety", multipoint.some((row) => row.pointValue === 2) && multipoint.some((row) => row.pointValue === 3), multipoint.map((row) => `${row.itemId}:${row.pointValue}`).join("|"));
+  addGate(gates, "multipoint_pattern_variety", multipointPatterns.size >= Math.min(2, multipoint.length), `${multipointPatterns.size} unique patterns`);
+  addGate(gates, "ebsr_integrity", multipoint.filter((row) => row.item.interactionType === "EBSR").every((row) => Boolean((row.item.correctResponseJson as any)?.partA && (row.item.correctResponseJson as any)?.partB)), "selected EBSR items have Part A and Part B");
+  addGate(gates, "short_answer_count", shortAnswer.length === GRADE3_DIAGNOSTIC_BLUEPRINT.shortAnswerItems, `${shortAnswer.length}`);
+  addGate(gates, "short_answer_points", shortAnswer.every((row) => row.pointValue === GRADE3_DIAGNOSTIC_BLUEPRINT.shortAnswerPointsEach), shortAnswer.map((row) => `${row.itemId}:${row.pointValue}`).join("|"));
+  addGate(gates, "total_points", totalPoints === GRADE3_DIAGNOSTIC_BLUEPRINT.totalPoints, `${totalPoints}`);
+  addGate(gates, "category_A_points", categoryPoints.A >= 15 && categoryPoints.A <= 21, `${categoryPoints.A}`);
+  addGate(gates, "category_B_points", categoryPoints.B >= 15 && categoryPoints.B <= 21, `${categoryPoints.B}`);
+  addGate(gates, "category_D_points", categoryPoints.D === 9, `${categoryPoints.D}`);
+  addGate(gates, "answer_position_distribution", maxShare <= GRADE3_DIAGNOSTIC_BLUEPRINT.maxCorrectPositionShare && stableStringify(answerDetail) === stableStringify([8, 7, 7, 7]), `A=${answerDetail[0]} B=${answerDetail[1]} C=${answerDetail[2]} D=${answerDetail[3]} maxShare=${maxShare.toFixed(3)}`);
+  addGate(gates, "reading_ec_variety", overRepeatedEc.length === 0 && tripleEcOk, `triples=E03.A-K.1.1.3:${readingEcCounts.get("E03.A-K.1.1.3") ?? 0}|E03.B-K.1.1.1:${readingEcCounts.get("E03.B-K.1.1.1") ?? 0}; over=${overRepeatedEc.join("|") || "none"}`);
+
+  return { gates, categoryPoints, totalPoints, selectedItems, readingEcCounts };
+}
+
 function orderSelectedItems(seed: string, selected: ClassifiedAssemblyItem[], passageOrder: string[]) {
   const byPassage = passageOrder.flatMap((passageId) => {
     const block = selected.filter((row) => row.primaryPassageId === passageId && (row.slotType === "reading_1pt" || row.slotType === "multipoint"));
@@ -372,6 +608,113 @@ function orderSelectedItems(seed: string, selected: ClassifiedAssemblyItem[], pa
     ...deterministicSort(seed, selected.filter((row) => row.slotType === "conventions_1pt").map((row) => ({ ...row, id: row.itemId }))),
     ...deterministicSort(seed, selected.filter((row) => row.slotType === "short_answer").map((row) => ({ ...row, id: row.itemId }))),
   ];
+}
+
+function collectPassageMap(items: PssaAssemblyItem[]) {
+  const passageMap = new Map<string, PssaAssemblyPassage>();
+  for (const item of items) {
+    for (const link of item.passages ?? []) {
+      if (link.passage) passageMap.set(link.passage.id, link.passage as PssaAssemblyPassage);
+    }
+    for (const member of ((item as any).passageGroup?.members ?? [])) {
+      if (member?.passage) passageMap.set(member.passage.id, member.passage as PssaAssemblyPassage);
+    }
+  }
+  return passageMap;
+}
+
+export function assembleDiagnosticFormFromPool(input: {
+  seed: string;
+  blueprintVersion: string;
+  readyItems: PssaAssemblyItem[];
+  allItems?: PssaAssemblyItem[];
+}): AssemblyResult {
+  const gates: GateResult[] = [];
+  if (!input.seed) throw new Error("--seed is required.");
+  if (input.blueprintVersion !== GRADE3_DIAGNOSTIC_BLUEPRINT.blueprintVersion) throw new Error(`Unsupported blueprint: ${input.blueprintVersion}`);
+  if (GRADE3_DIAGNOSTIC_BLUEPRINT.sections.length !== 3) throw new Error("Diagnostic blueprint requires exactly 3 sections.");
+  const liveReadyIds = new Set(input.readyItems.map((item) => item.id));
+  const byId = new Map(input.readyItems.map((item) => [item.id, item]));
+  const selectedIds = DIAGNOSTIC_SECTION_ITEM_IDS.flat();
+  const missingIds = selectedIds.filter((id) => !byId.has(id));
+  addGate(gates, "pinned_selection_presence", missingIds.length === 0, missingIds.join("|") || "all pinned items present");
+  const passageMap = collectPassageMap(input.readyItems);
+  const sections = GRADE3_DIAGNOSTIC_BLUEPRINT.sections.map((section) => ({
+    sectionIndex: section.sectionIndex,
+    sectionType: section.sectionType,
+    label: section.label,
+    estimatedMinutes: section.estimatedMinutes,
+  }));
+  const deficits = buildDeficits(input.readyItems.flatMap((item) => {
+    const result = classifyAssemblyItem(item);
+    return "error" in result ? [] : [result];
+  }), input.allItems ?? input.readyItems);
+  if (missingIds.length) {
+    return { ok: false, refusedReason: `PINNED_ITEMS_MISSING:${missingIds.join("|")}`, contentHash: null, canonical: null, sections, passages: [], items: [], categoryPoints: { A: 0, B: 0, D: 0 }, totalPoints: 0, gates, deficits };
+  }
+
+  const classificationErrors: string[] = [];
+  const selected = selectedIds.flatMap((itemId) => {
+    const result = classifyDiagnosticAssemblyItem(byId.get(itemId)!);
+    if ("error" in result) {
+      classificationErrors.push(result.error);
+      return [];
+    }
+    return [result];
+  });
+  addGate(gates, "classification", classificationErrors.length === 0, classificationErrors.join("|") || "all pinned diagnostic items classified");
+  if (classificationErrors.length) {
+    return { ok: false, refusedReason: classificationErrors[0], contentHash: null, canonical: null, sections, passages: [], items: [], categoryPoints: { A: 0, B: 0, D: 0 }, totalPoints: 0, gates, deficits };
+  }
+
+  const sectionByItemId = new Map(DIAGNOSTIC_SECTION_ITEM_IDS.flatMap((ids, sectionIndex) => ids.map((id) => [id, sectionIndex + 1] as const)));
+  for (const row of selected) row.sectionIndex = sectionByItemId.get(row.itemId)!;
+  const selectedPassages: SelectedPassage[] = [
+    { position: 1, passageId: "pssa_stamina_psg_g3_syrup_v4", passageUnitId: "pssa_stamina_psg_g3_syrup_v4", sectionIndex: 1 },
+    { position: 2, passageId: "pssa_stamina_psg_g3_boat_literary", passageUnitId: "pssa_stamina_psg_g3_boat_literary", sectionIndex: 2 },
+    { position: 3, passageId: "pssa_stamina_psg_g3_owls_p1_night", passageUnitId: "pssa_pg_g3_owls_paired_01", sectionIndex: 3 },
+    { position: 4, passageId: "pssa_stamina_psg_g3_owls_p2_barn", passageUnitId: "pssa_pg_g3_owls_paired_01", sectionIndex: 3 },
+    { position: 5, passageId: "pssa_stamina_psg_g3_rabbit_drama", passageUnitId: "pssa_stamina_psg_g3_rabbit_drama", sectionIndex: 3 },
+  ].map((row) => ({
+    ...row,
+    categoryPoints: { A: 0, B: 0, D: 0 },
+    approvedPassageContentHashSnapshot: passageMap.get(row.passageId)?.approvedContentHash ?? "",
+  }));
+  const validation = validateDiagnosticSelectedForm({ selected, selectedPassages, sections, liveReadyIds });
+  for (const passage of selectedPassages) {
+    const passageItems = validation.selectedItems.filter((item) => item.passageUnitId === passage.passageUnitId);
+    passage.categoryPoints = selectedCategoryPoints(passageItems);
+  }
+  const allGates = [...gates, ...validation.gates];
+  if (allGates.some((gate) => gate.status === "FAIL")) {
+    return {
+      ok: false,
+      refusedReason: "BLUEPRINT_UNSATISFIED",
+      contentHash: null,
+      canonical: null,
+      sections,
+      passages: selectedPassages,
+      items: validation.selectedItems,
+      categoryPoints: validation.categoryPoints,
+      totalPoints: validation.totalPoints,
+      gates: allGates,
+      deficits,
+    };
+  }
+  const canonical = buildCanonical(input.blueprintVersion, selectedPassages, validation.selectedItems, sections);
+  return {
+    ok: true,
+    refusedReason: null,
+    contentHash: computePssaFormContentHash(canonical),
+    canonical,
+    sections,
+    passages: selectedPassages,
+    items: validation.selectedItems,
+    categoryPoints: validation.categoryPoints,
+    totalPoints: validation.totalPoints,
+    gates: allGates,
+    deficits,
+  };
 }
 
 export function assemblePssaFormFromPool(input: {
