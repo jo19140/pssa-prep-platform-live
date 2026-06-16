@@ -690,74 +690,74 @@
       "stem": "Which book title is capitalized correctly?",
       "studentFacingPrompt": "Which book title is capitalized correctly?",
       "answerChoicesJson": [
-        "the moon over maple street",
-        "The Moon Over Maple Street",
-        "The moon over Maple Street",
-        "The Moon Over Maple street"
+        "grandma's summer garden",
+        "Grandma's Summer Garden",
+        "Grandma's summer garden",
+        "Grandma's Summer garden"
       ],
       "choices": [
         {
-          "text": "the moon over maple street",
+          "text": "grandma's summer garden",
           "isCorrect": false,
           "errorPattern": "no_capitalization",
           "distractorRole": "no_capitalization",
-          "rationale": "Important words in the title are not capitalized."
+          "rationale": "No capitalization: the first word and important words in the title are not capitalized."
         },
         {
-          "text": "The Moon Over Maple Street",
+          "text": "Grandma's Summer Garden",
           "isCorrect": true,
           "errorPattern": null,
           "distractorRole": null,
-          "rationale": "The important words in the title are capitalized."
+          "rationale": "Correct."
         },
         {
-          "text": "The moon over Maple Street",
+          "text": "Grandma's summer garden",
           "isCorrect": false,
           "errorPattern": "important_words_not_capitalized",
           "distractorRole": "important_words_not_capitalized",
-          "rationale": "Moon should be capitalized as an important title word."
+          "rationale": "Summer should be capitalized as an important title word."
         },
         {
-          "text": "The Moon Over Maple street",
+          "text": "Grandma's Summer garden",
           "isCorrect": false,
           "errorPattern": "last_word_not_capitalized",
           "distractorRole": "last_word_not_capitalized",
-          "rationale": "Street should be capitalized as the last word of the title."
+          "rationale": "Garden should be capitalized as the last word of the title."
         }
       ],
       "structuredChoicesJson": [
         {
-          "text": "the moon over maple street",
+          "text": "grandma's summer garden",
           "isCorrect": false,
-          "rationale": "Important words in the title are not capitalized.",
+          "rationale": "No capitalization: the first word and important words in the title are not capitalized.",
           "distractorRole": "no_capitalization"
         },
         {
-          "text": "The Moon Over Maple Street",
+          "text": "Grandma's Summer Garden",
           "isCorrect": true,
-          "rationale": "The important words in the title are capitalized.",
+          "rationale": "Correct.",
           "distractorRole": null
         },
         {
-          "text": "The moon over Maple Street",
+          "text": "Grandma's summer garden",
           "isCorrect": false,
-          "rationale": "Moon should be capitalized as an important title word.",
+          "rationale": "Summer should be capitalized as an important title word.",
           "distractorRole": "important_words_not_capitalized"
         },
         {
-          "text": "The Moon Over Maple street",
+          "text": "Grandma's Summer garden",
           "isCorrect": false,
-          "rationale": "Street should be capitalized as the last word of the title.",
+          "rationale": "Garden should be capitalized as the last word of the title.",
           "distractorRole": "last_word_not_capitalized"
         }
       ],
       "correctIndex": 1,
-      "correctAnswer": "The Moon Over Maple Street",
+      "correctAnswer": "Grandma's Summer Garden",
       "distractorRationalesJson": [
-        "Important words in the title are not capitalized.",
-        "The important words in the title are capitalized.",
-        "Moon should be capitalized as an important title word.",
-        "Street should be capitalized as the last word of the title."
+        "No capitalization: the first word and important words in the title are not capitalized.",
+        "Correct.",
+        "Summer should be capitalized as an important title word.",
+        "Garden should be capitalized as the last word of the title."
       ],
       "scoring": {
         "totalPoints": 1,
@@ -776,10 +776,10 @@
       "studentPreviewJson": {
         "prompt": "Which book title is capitalized correctly?",
         "choices": [
-          "the moon over maple street",
-          "The Moon Over Maple Street",
-          "The moon over Maple Street",
-          "The Moon Over Maple street"
+          "grandma's summer garden",
+          "Grandma's Summer Garden",
+          "Grandma's summer garden",
+          "Grandma's Summer garden"
         ],
         "leaksAnswer": false
       },

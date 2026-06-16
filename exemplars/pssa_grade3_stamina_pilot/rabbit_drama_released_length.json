@@ -351,7 +351,7 @@
       "studentFacingPrompt": "Read this stage direction from Scene 3: [Then RABBIT turns and looks at the shivering mouse. Slowly, her frown begins to soften.] What does it show about Rabbit?",
       "answerChoicesJson": [
         "She is getting ready to leave the log.",
-        "She is falling asleep.",
+        "She is too tired to help the mouse.",
         "She is angry that the cold mouse is there.",
         "She starts to feel sorry for the mouse."
       ],
@@ -373,9 +373,9 @@
           "distractorRole": "unsupported_inference"
         },
         {
-          "text": "She is falling asleep.",
+          "text": "She is too tired to help the mouse.",
           "isCorrect": false,
-          "rationale": "A softening frown could be misread as tiredness, but the next line shows kindness.",
+          "rationale": "Unsupported inference: Rabbit wants room, but the play does not say she is too tired to help.",
           "evidenceLinks": [
             {
               "evidenceKind": "spoken_line",
@@ -510,27 +510,27 @@
       "gradeLevel": 3,
       "itemType": "MCQ",
       "interactionType": "MCQ",
-      "skill": "dialogue_action_inference",
-      "comprehensionKind": "inference",
-      "comprehensionKindRationale": "The item asks what motivates Rabbit's final decision by combining Mouse's condition, Rabbit's softening expression, and Rabbit's action.",
+      "skill": "scene_importance",
+      "comprehensionKind": "interpretation",
+      "comprehensionKindRationale": "The item asks why Scene 3 matters by interpreting Rabbit's change in the play.",
       "passageId": "pssa_stamina_psg_g3_rabbit_drama",
-      "eligibleContent": "E03.A-K.1.1.3",
-      "assessmentAnchor": "E03.A-K.1",
+      "eligibleContent": "E03.A-C.2.1.2",
+      "assessmentAnchor": "E03.A-C.2.1",
       "reportingCategory": "A",
       "dokLevel": 2,
-      "studentFacingPrompt": "What finally makes Rabbit decide to let the mouse into the middle of the log?",
+      "studentFacingPrompt": "Why is Scene 3 important to the play?",
       "answerChoicesJson": [
-        "Squirrel tells her she has to.",
-        "She sees how cold and scared the mouse is.",
-        "The rain finally stops and there is more room.",
-        "Hedgehog promises to leave."
+        "It shows that Rabbit wants the storm to get stronger.",
+        "It shows why Rabbit changes her mind about sharing the log.",
+        "It explains how Hedgehog and Mouse built their homes.",
+        "It tells why Squirrel leaves the log before morning."
       ],
       "correctIndex": 1,
       "structuredChoicesJson": [
         {
-          "text": "Squirrel tells her she has to.",
+          "text": "It shows that Rabbit wants the storm to get stronger.",
           "isCorrect": false,
-          "rationale": "Squirrel helps make room, but he does not order Rabbit to let Mouse stay.",
+          "rationale": "Opposite claim: Rabbit wants shelter from the storm, not a stronger storm.",
           "evidenceLinks": [
             {
               "evidenceKind": "spoken_line",
@@ -543,9 +543,9 @@
           "distractorRole": "unsupported_inference"
         },
         {
-          "text": "She sees how cold and scared the mouse is.",
+          "text": "It shows why Rabbit changes her mind about sharing the log.",
           "isCorrect": true,
-          "rationale": "Mouse says she is cold, and Rabbit's frown softens before she invites Mouse into the middle.",
+          "rationale": "Correct.",
           "evidenceLinks": [
             {
               "evidenceKind": "spoken_line",
@@ -571,9 +571,9 @@
           "distractorRole": null
         },
         {
-          "text": "The rain finally stops and there is more room.",
+          "text": "It explains how Hedgehog and Mouse built their homes.",
           "isCorrect": false,
-          "rationale": "The storm is still raging when Rabbit changes her mind.",
+          "rationale": "Unsupported inference: the scene does not explain how Hedgehog or Mouse built homes.",
           "evidenceLinks": [
             {
               "evidenceKind": "stage_direction",
@@ -585,9 +585,9 @@
           "distractorRole": "opposite_claim"
         },
         {
-          "text": "Hedgehog promises to leave.",
+          "text": "It tells why Squirrel leaves the log before morning.",
           "isCorrect": false,
-          "rationale": "Hedgehog does not promise to leave; he makes room safely.",
+          "rationale": "Unsupported inference: Squirrel does not leave the log before morning.",
           "evidenceLinks": [
             {
               "evidenceKind": "spoken_line",
@@ -695,15 +695,15 @@
             "rationale": "Does not best support Part A."
           },
           {
-            "text": "Come here, little one. Do not go out in that. Get into the middle, where it is warmest.",
-            "quotedSpan": "Come here, little one. Do not go out in that. Get into the middle, where it is warmest.",
+            "text": "Come here, little one. Do not go out in that.",
+            "quotedSpan": "Come here, little one. Do not go out in that.",
             "evidenceLinks": [
               {
                 "evidenceKind": "spoken_line",
                 "sceneId": "scene_03",
                 "lineIndex": 4,
                 "speaker": "RABBIT",
-                "quotedSpan": "Come here, little one. Do not go out in that. Get into the middle, where it is warmest."
+                "quotedSpan": "Come here, little one. Do not go out in that."
               }
             ],
             "evidenceRole": "supports_part_a",
@@ -760,7 +760,7 @@
               "text": "The rain is falling harder now, drumming on the log."
             },
             {
-              "text": "Come here, little one. Do not go out in that. Get into the middle, where it is warmest."
+              "text": "Come here, little one. Do not go out in that."
             },
             {
               "text": "SQUIRREL curls his big, bushy tail around the whole group like a blanket."
