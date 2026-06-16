@@ -30,7 +30,7 @@ assert(practicePage.includes("trainingCorpusOptedIn"), "practice page must deriv
 assert(targetPage.includes("trainingCorpusOptedIn"), "target page must derive capture flag server-side from consent");
 assert(player.includes("trainingCaptureEnabled === true && surface === \"pseudoword\""), "player must only construct recorder for opted-in pseudoword reads");
 assert(player.includes("startClipRecorder(handle.stream)"), "player must use the VAD stream for capture");
-assert(player.includes("clipPromise = clipRecorder.stop()"), "player must stop recorder only on VAD-confirmed heardSpeech path");
+assert(player.includes("blob = await clipRecorder.stop()"), "player must stop recorder only on VAD-confirmed heardSpeech path");
 assert(player.includes("capturePseudowordClip"), "player must fire best-effort capture after VAD confirmation");
 assert(!player.includes("VoiceSession"), "player must not write voice sessions directly");
 assert(!client.includes("/api/voice/transcribe"), "capture client must not call the transcribe route");
