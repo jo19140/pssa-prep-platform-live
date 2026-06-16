@@ -260,7 +260,7 @@
       "subject": "ELA",
       "itemType": "MCQ",
       "interactionType": "MCQ",
-      "skill": "text_feature_adaptation",
+      "skill": "vocabulary_in_context",
       "passageGroupId": "pssa_pg_g3_owls_paired_01",
       "isCrossText": null,
       "passageLinks": [
@@ -270,19 +270,19 @@
           "sortOrder": 0
         }
       ],
-      "eligibleContent": "E03.B-K.1.1.1",
+      "eligibleContent": "E03.B-V.4.1.1",
       "reportingCategory": "B",
-      "studentFacingPrompt": "How do an owl's facial feathers help it hunt?",
+      "studentFacingPrompt": "In Passage 1, what does prey mean?",
       "answerChoicesJson": [
-        "They guide sound toward the owl's ears.",
-        "They make the owl's eyes larger.",
-        "They let the owl chew stored grain.",
-        "They keep the owl warm in barns."
+        "animals that are hunted for food",
+        "leaves that cover the forest floor",
+        "feathers that grow on an owl's wings",
+        "sounds that move through the night air"
       ],
       "correctIndex": 0,
       "structuredChoicesJson": [
         {
-          "text": "They guide sound toward the owl's ears.",
+          "text": "animals that are hunted for food",
           "isCorrect": true,
           "evidenceLinks": [
             {
@@ -294,10 +294,11 @@
               "quotedSpan": "It guides sound toward the hidden ears."
             }
           ],
-          "distractorRole": null
+          "distractorRole": null,
+          "rationale": "Correct."
         },
         {
-          "text": "They make the owl's eyes larger.",
+          "text": "leaves that cover the forest floor",
           "isCorrect": false,
           "evidenceLinks": [
             {
@@ -309,10 +310,11 @@
               "quotedSpan": "Their bodies are built for the dark."
             }
           ],
-          "distractorRole": "unsupported_inference"
+          "distractorRole": "unsupported_inference",
+          "rationale": "Wrong section: leaves are part of the forest setting, not the meaning of prey."
         },
         {
-          "text": "They let the owl chew stored grain.",
+          "text": "feathers that grow on an owl's wings",
           "isCorrect": false,
           "evidenceLinks": [
             {
@@ -324,10 +326,11 @@
               "quotedSpan": "That matters to farmers because rodents can chew stored grain, damage fields, and carry disease."
             }
           ],
-          "distractorRole": "wrong_section"
+          "distractorRole": "wrong_section",
+          "rationale": "Plausible misreading: feathers help owls hunt, but prey means animals hunted for food."
         },
         {
-          "text": "They keep the owl warm in barns.",
+          "text": "sounds that move through the night air",
           "isCorrect": false,
           "evidenceLinks": [
             {
@@ -339,9 +342,12 @@
               "quotedSpan": "A nest box gives the owls a safe place to raise young when old barns or hollow trees are hard to find."
             }
           ],
-          "distractorRole": "wrong_section"
+          "distractorRole": "wrong_section",
+          "rationale": "Plausible misreading: sound helps the owl hunt, but prey means animals hunted for food."
         }
-      ]
+      ],
+      "assessmentAnchor": "E03.B-V.4",
+      "targetWordOrPhrase": "prey"
     },
     {
       "model": "PssaItem",
@@ -553,15 +559,15 @@
       "reportingCategory": "B",
       "studentFacingPrompt": "How do the two passages work together?",
       "answerChoicesJson": [
-        "The first tells how to build a nest box, and the second tells how to train an owl.",
-        "Both passages mainly explain why owls are dangerous to pets.",
-        "Both passages mainly describe how farmers store grain.",
-        "The first explains how owls hunt, and the second explains how that hunting can help farms."
+        "One explains how to build nest boxes, and the other tells how to train owls.",
+        "One explains why owls are pets, and the other explains why farms need pets.",
+        "Passage 1 tells a story about one owl; Passage 2 tells a story about one farmer.",
+        "Passage 1 explains how owls hunt; Passage 2 explains how that hunting can help farms."
       ],
       "correctIndex": 3,
       "structuredChoicesJson": [
         {
-          "text": "The first tells how to build a nest box, and the second tells how to train an owl.",
+          "text": "One explains how to build nest boxes, and the other tells how to train owls.",
           "isCorrect": false,
           "evidenceLinks": [
             {
@@ -573,10 +579,11 @@
               "quotedSpan": "Some farms put up nest boxes to invite barn owls to live nearby."
             }
           ],
-          "distractorRole": "wrong_section"
+          "distractorRole": "wrong_section",
+          "rationale": "Unsupported inference: neither passage explains how to train owls."
         },
         {
-          "text": "Both passages mainly explain why owls are dangerous to pets.",
+          "text": "One explains why owls are pets, and the other explains why farms need pets.",
           "isCorrect": false,
           "evidenceLinks": [
             {
@@ -588,10 +595,11 @@
               "quotedSpan": "If a poisoned mouse staggers into the open, an owl, hawk, fox, dog, or cat may eat it."
             }
           ],
-          "distractorRole": "wrong_emphasis"
+          "distractorRole": "wrong_emphasis",
+          "rationale": "Opposite claim: the passages do not describe owls as pets."
         },
         {
-          "text": "Both passages mainly describe how farmers store grain.",
+          "text": "Passage 1 tells a story about one owl; Passage 2 tells a story about one farmer.",
           "isCorrect": false,
           "evidenceLinks": [
             {
@@ -603,10 +611,11 @@
               "quotedSpan": "That matters to farmers because rodents can chew stored grain, damage fields, and carry disease."
             }
           ],
-          "distractorRole": "too_narrow"
+          "distractorRole": "too_narrow",
+          "rationale": "Wrong genre: both passages are informational, not stories about one owl or farmer."
         },
         {
-          "text": "The first explains how owls hunt, and the second explains how that hunting can help farms.",
+          "text": "Passage 1 explains how owls hunt; Passage 2 explains how that hunting can help farms.",
           "isCorrect": true,
           "evidenceLinks": [
             {
@@ -620,7 +629,8 @@
               "passageId": "pssa_stamina_psg_g3_owls_p2_barn"
             }
           ],
-          "distractorRole": null
+          "distractorRole": null,
+          "rationale": "Correct."
         }
       ]
     },
@@ -777,17 +787,17 @@
         "requiredSelectionCount": 2,
         "choices": [
           {
-            "text": "Passage 1: \"Because the feathers quiet the wingbeats, a mouse may not hear the owl coming until the owl is very close.\"",
-            "quotedSpan": "Because the feathers quiet the wingbeats, a mouse may not hear the owl coming until the owl is very close.",
+            "text": "Because the feathers quiet the wingbeats, a mouse may not hear the owl coming",
+            "quotedSpan": "Because the feathers quiet the wingbeats, a mouse may not hear the owl coming",
             "evidenceLinks": [
               {
                 "passageSlot": "passage_1",
                 "passageId": "pssa_stamina_psg_g3_owls_p1_night",
                 "paragraphIndex": 2,
                 "sentenceIndex": 3,
-                "quotedSpan": "Because the feathers quiet the wingbeats, a mouse may not hear the owl coming until the owl is very close.",
+                "quotedSpan": "Because the feathers quiet the wingbeats, a mouse may not hear the owl coming",
                 "startChar": 1136,
-                "endChar": 1242
+                "endChar": 1213
               }
             ],
             "evidenceRole": "supports_part_a",
@@ -795,7 +805,7 @@
             "rationale": "Supports Part A."
           },
           {
-            "text": "Passage 1: \"To look around, an owl turns its whole head instead.\"",
+            "text": "To look around, an owl turns its whole head instead.",
             "quotedSpan": "To look around, an owl turns its whole head instead.",
             "evidenceLinks": [
               {
@@ -813,17 +823,17 @@
             "rationale": "Does not best support Part A."
           },
           {
-            "text": "Passage 2: \"But an owl family can reduce the number of rodents without leaving poison in the field.\"",
-            "quotedSpan": "But an owl family can reduce the number of rodents without leaving poison in the field.",
+            "text": "can reduce the number of rodents without leaving poison in the field",
+            "quotedSpan": "can reduce the number of rodents without leaving poison in the field",
             "evidenceLinks": [
               {
                 "passageSlot": "passage_2",
                 "passageId": "pssa_stamina_psg_g3_owls_p2_barn",
                 "paragraphIndex": 2,
                 "sentenceIndex": 3,
-                "quotedSpan": "But an owl family can reduce the number of rodents without leaving poison in the field.",
-                "startChar": 1032,
-                "endChar": 1119
+                "quotedSpan": "can reduce the number of rodents without leaving poison in the field",
+                "startChar": 1050,
+                "endChar": 1118
               }
             ],
             "evidenceRole": "supports_part_a",
@@ -831,17 +841,17 @@
             "rationale": "Supports Part A."
           },
           {
-            "text": "Passage 2: \"A nest box gives the owls a safe place to raise young when old barns or hollow trees are hard to find.\"",
-            "quotedSpan": "A nest box gives the owls a safe place to raise young when old barns or hollow trees are hard to find.",
+            "text": "A nest box gives the owls a safe place to raise young",
+            "quotedSpan": "A nest box gives the owls a safe place to raise young",
             "evidenceLinks": [
               {
                 "passageSlot": "passage_2",
                 "passageId": "pssa_stamina_psg_g3_owls_p2_barn",
                 "paragraphIndex": 1,
                 "sentenceIndex": 1,
-                "quotedSpan": "A nest box gives the owls a safe place to raise young when old barns or hollow trees are hard to find.",
+                "quotedSpan": "A nest box gives the owls a safe place to raise young",
                 "startChar": 491,
-                "endChar": 593
+                "endChar": 544
               }
             ],
             "evidenceRole": "distractor",
@@ -877,16 +887,16 @@
           "instruction": "Choose two details, one from each passage, that best support the answer in Part A.",
           "choices": [
             {
-              "text": "Passage 1: \"Because the feathers quiet the wingbeats, a mouse may not hear the owl coming until the owl is very close.\""
+              "text": "Because the feathers quiet the wingbeats, a mouse may not hear the owl coming"
             },
             {
-              "text": "Passage 1: \"To look around, an owl turns its whole head instead.\""
+              "text": "To look around, an owl turns its whole head instead."
             },
             {
-              "text": "Passage 2: \"But an owl family can reduce the number of rodents without leaving poison in the field.\""
+              "text": "can reduce the number of rodents without leaving poison in the field"
             },
             {
-              "text": "Passage 2: \"A nest box gives the owls a safe place to raise young when old barns or hollow trees are hard to find.\""
+              "text": "A nest box gives the owls a safe place to raise young"
             }
           ],
           "requiredSelectionCount": 2

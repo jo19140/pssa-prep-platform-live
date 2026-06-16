@@ -97,7 +97,7 @@ const expectedStaminaConventions = [
     id: "conv_06",
     ec: "E03.D.1.2.1",
     correctIndex: 1,
-    choices: ["the moon over maple street", "The Moon Over Maple Street", "The moon over Maple Street", "The Moon Over Maple street"],
+    choices: ["grandma's summer garden", "Grandma's Summer Garden", "Grandma's summer garden", "Grandma's Summer garden"],
   },
   {
     id: "conv_07",
@@ -805,8 +805,8 @@ assert.deepEqual(
   boatSpecificityRows
     .filter((row) => row.itemId === "pssa_stamina_item_g3_boat_05" && row.ruleId === "PSSA_MCQ_PASSAGE_SPECIFIC_CHOICES")
     .map((row) => [row.result, row.evidence]),
-  [["SKIP", "SKIP_INFERENCE_INTERPRETATION:inference"]],
-  "concrete literary inference MCQs must visibly skip choice-concreteness only with explicit comprehensionKind rationale",
+  [["PASS", "all passage-specificity gates clear"]],
+  "boat_05 literal-detail revision must run and pass choice-concreteness instead of using the #47 skip",
 );
 assert.deepEqual(
   boatSpecificityRows
@@ -1099,7 +1099,7 @@ assert.deepEqual(
   [
     ["pssa_stamina_item_g3_rabbit_03", "SKIP", "SKIP_INFERENCE_INTERPRETATION:inference"],
     ["pssa_stamina_item_g3_rabbit_04", "SKIP", "SKIP_INFERENCE_INTERPRETATION:interpretation"],
-    ["pssa_stamina_item_g3_rabbit_06", "SKIP", "SKIP_INFERENCE_INTERPRETATION:inference"],
+    ["pssa_stamina_item_g3_rabbit_06", "SKIP", "SKIP_INFERENCE_INTERPRETATION:interpretation"],
   ],
   "drama inference/interpretation MCQs visibly skip choice-concreteness only with explicit comprehensionKind rationales",
 );
@@ -1415,7 +1415,6 @@ function buildStaminaContentQualityBatteryReport() {
   assert.deepEqual(
     inferenceSkipRows.map((row) => row.itemId).sort(),
     [
-      "pssa_stamina_item_g3_boat_05",
       "pssa_stamina_item_g3_rabbit_03",
       "pssa_stamina_item_g3_rabbit_04",
       "pssa_stamina_item_g3_rabbit_06",

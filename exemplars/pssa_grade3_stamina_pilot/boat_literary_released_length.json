@@ -92,15 +92,15 @@
       "approvalEligible": false,
       "studentFacingPrompt": "What is the most important lesson June learns in the story?",
       "answerChoicesJson": [
-        "A boat needs four milk jugs to float.",
-        "It is a good idea to collect the things that other people have thrown away.",
-        "Something built to last matters more than something that just looks good.",
-        "Younger sisters should help test boats before races."
+        "A boat needs milk jugs to float.",
+        "People should not throw away useful things.",
+        "Careful work matters more than fancy looks.",
+        "Younger sisters should test boats before a race."
       ],
       "correctIndex": 2,
       "structuredChoicesJson": [
         {
-          "text": "A boat needs four milk jugs to float.",
+          "text": "A boat needs milk jugs to float.",
           "isCorrect": false,
           "rationale": "Too narrow: this detail describes June's boat, not the story's lesson.",
           "evidenceLinks": [
@@ -115,9 +115,9 @@
           "distractorRole": "too_narrow"
         },
         {
-          "text": "It is a good idea to collect the things that other people have thrown away.",
+          "text": "People should not throw away useful things.",
           "isCorrect": false,
-          "rationale": "Too narrow: collecting junk is one action June takes, not the story's message.",
+          "rationale": "Too narrow: reusing useful things is one action June takes, not the story's message.",
           "evidenceLinks": [
             {
               "paragraphIndex": 3,
@@ -130,9 +130,9 @@
           "distractorRole": "too_narrow"
         },
         {
-          "text": "Something built to last matters more than something that just looks good.",
+          "text": "Careful work matters more than fancy looks.",
           "isCorrect": true,
-          "rationale": "Whole-story synthesis: June learns that careful building matters more than flashy looks.",
+          "rationale": "Correct.",
           "evidenceLinks": [
             {
               "evidenceKind": "paragraph_synthesis",
@@ -154,7 +154,7 @@
           "distractorRole": null
         },
         {
-          "text": "Younger sisters should help test boats before races.",
+          "text": "Younger sisters should test boats before a race.",
           "isCorrect": false,
           "rationale": "Unsupported inference: June tests the boat with a toy frog, not with her sister helping.",
           "evidenceLinks": [
@@ -500,8 +500,8 @@
       "itemType": "MCQ",
       "interactionType": "MCQ",
       "skill": "key_detail_cause",
-      "comprehensionKind": "inference",
-      "comprehensionKindRationale": "The item asks why June's boat survived by connecting her careful testing with the contrast against boats built mainly for appearance, rather than recalling one literal detail.",
+      "comprehensionKind": "literal_detail",
+      "comprehensionKindRationale": "The item asks for the directly stated detail that explains why June's boat survived rough water.",
       "passageId": "pssa_stamina_psg_g3_boat_literary",
       "eligibleContent": "E03.A-K.1.1.1",
       "assessmentAnchor": "E03.A-K.1",
@@ -514,19 +514,19 @@
       "reviewStatus": "PENDING",
       "itemStatus": "candidate",
       "approvalEligible": false,
-      "studentFacingPrompt": "Why was June's boat the only one left floating at the end?",
+      "studentFacingPrompt": "Which detail best explains why June's boat made it through the rough water?",
       "answerChoicesJson": [
-        "It was the fastest boat in the race.",
-        "It had a cloth sail that caught the wind.",
-        "She built hers to float, while the others were built mainly to look good.",
-        "The crowd lifted her boat out of the cold, rough water right at the very end."
+        "Mateo had won before with shark-shaped boats.",
+        "The boat drifted slowly along the creek bank.",
+        "June tested the boat many times to make sure it floated.",
+        "The crowd on the bank cheered for her slow milk-jug boat."
       ],
       "correctIndex": 2,
       "structuredChoicesJson": [
         {
-          "text": "It was the fastest boat in the race.",
+          "text": "Mateo had won before with shark-shaped boats.",
           "isCorrect": false,
-          "rationale": "Opposite claim: June says her boat was not fast.",
+          "rationale": "Wrong section: Mateo's past win does not explain why June's boat stayed afloat.",
           "evidenceLinks": [
             {
               "paragraphIndex": 15,
@@ -539,9 +539,9 @@
           "distractorRole": "opposite_claim"
         },
         {
-          "text": "It had a cloth sail that caught the wind.",
+          "text": "The boat drifted slowly along the creek bank.",
           "isCorrect": false,
-          "rationale": "Wrong section: that was the tall ship, which sank.",
+          "rationale": "Opposite emphasis: the boat was slow, but drifting slowly does not explain why it survived rough water.",
           "evidenceLinks": [
             {
               "paragraphIndex": 9,
@@ -554,9 +554,9 @@
           "distractorRole": "wrong_section"
         },
         {
-          "text": "She built hers to float, while the others were built mainly to look good.",
+          "text": "June tested the boat many times to make sure it floated.",
           "isCorrect": true,
-          "rationale": "June explains that she tested the boat for floating while others focused on looks.",
+          "rationale": "Correct.",
           "evidenceLinks": [
             {
               "paragraphIndex": 15,
@@ -569,9 +569,9 @@
           "distractorRole": null
         },
         {
-          "text": "The crowd lifted her boat out of the cold, rough water right at the very end.",
+          "text": "The crowd on the bank cheered for her slow milk-jug boat.",
           "isCorrect": false,
-          "rationale": "Unsupported inference: the crowd cheers, but nobody lifts the boat out of the water.",
+          "rationale": "Too broad: the crowd cheered after the boat kept going, but cheering did not make it survive.",
           "evidenceLinks": [
             {
               "paragraphIndex": 13,
@@ -699,15 +699,15 @@
             "rationale": "Does not best support Part A."
           },
           {
-            "text": "I won because it was the last one floating — because I had spent two weeks making sure it would not sink, while everyone else was busy making sure their boats would look amazing.",
-            "quotedSpan": "I won because it was the last one floating — because I had spent two weeks making sure it would not sink, while everyone else was busy making sure their boats would look amazing.",
+            "text": "I had spent two weeks making sure it would not sink",
+            "quotedSpan": "I had spent two weeks making sure it would not sink",
             "evidenceLinks": [
               {
                 "paragraphIndex": 15,
                 "sentenceIndex": 1,
-                "quotedSpan": "I won because it was the last one floating — because I had spent two weeks making sure it would not sink, while everyone else was busy making sure their boats would look amazing.",
-                "startChar": 3761,
-                "endChar": 3939
+                "quotedSpan": "I had spent two weeks making sure it would not sink",
+                "startChar": 3814,
+                "endChar": 3865
               }
             ],
             "evidenceRole": "supports_part_a",
@@ -752,7 +752,7 @@
               "text": "The dragon shot out ahead, fast and fierce."
             },
             {
-              "text": "I won because it was the last one floating — because I had spent two weeks making sure it would not sink, while everyone else was busy making sure their boats would look amazing."
+              "text": "I had spent two weeks making sure it would not sink"
             }
           ],
           "requiredSelectionCount": 2

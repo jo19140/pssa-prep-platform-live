@@ -310,24 +310,24 @@
       "itemStatus": "candidate",
       "approvalEligible": false,
       "targetWordOrPhrase": "scorch",
-      "studentFacingPrompt": "\"...syrup that boils a few minutes too long can scorch and turn bitter.\" What does scorch mean?",
+      "studentFacingPrompt": "What does scorch mean as it is used in the passage?",
       "answerChoicesJson": [
-        "to cool down and harden",
-        "to bubble over the edge of the pot",
+        "to cool",
+        "to spill",
         "to burn",
-        "to grow thick and golden"
+        "to thicken"
       ],
       "correctAnswer": "to burn",
       "correctIndex": 2,
       "distractorRationalesJson": [
         "Opposite claim: the context is boiling, not cooling.",
-        "Plausible misreading: the sentence mentions bubbling but does not say the syrup spills over.",
-        "The sentence explains that syrup can scorch and turn bitter if it boils too long.",
-        "Wrong emphasis: this describes syrup changing during boiling, not the meaning of scorch."
+        "Plausible misreading: the passage mentions liquid sap and syrup, but scorch means burn.",
+        "Correct.",
+        "Wrong emphasis: syrup thickens during boiling, but scorch means burn."
       ],
       "structuredChoicesJson": [
         {
-          "text": "to cool down and harden",
+          "text": "to cool",
           "isCorrect": false,
           "rationale": "Opposite claim: the context is boiling, not cooling.",
           "evidenceLinks": [
@@ -342,9 +342,9 @@
           "distractorRole": "opposite_claim"
         },
         {
-          "text": "to bubble over the edge of the pot",
+          "text": "to spill",
           "isCorrect": false,
-          "rationale": "Plausible misreading: the sentence mentions bubbling but does not say the syrup spills over.",
+          "rationale": "Plausible misreading: the passage mentions liquid sap and syrup, but scorch means burn.",
           "evidenceLinks": [
             {
               "paragraphIndex": 3,
@@ -359,7 +359,7 @@
         {
           "text": "to burn",
           "isCorrect": true,
-          "rationale": "The sentence explains that syrup can scorch and turn bitter if it boils too long.",
+          "rationale": "Correct.",
           "evidenceLinks": [
             {
               "paragraphIndex": 3,
@@ -372,9 +372,9 @@
           "distractorRole": null
         },
         {
-          "text": "to grow thick and golden",
+          "text": "to thicken",
           "isCorrect": false,
-          "rationale": "Wrong emphasis: this describes syrup changing during boiling, not the meaning of scorch.",
+          "rationale": "Wrong emphasis: syrup thickens during boiling, but scorch means burn.",
           "evidenceLinks": [
             {
               "paragraphIndex": 3,
@@ -647,15 +647,15 @@
         "requiredSelectionCount": 2,
         "choices": [
           {
-            "text": "The trees need a very particular pattern of weather: freezing nights followed by warmer days above freezing.",
-            "quotedSpan": "The trees need a very particular pattern of weather: freezing nights followed by warmer days above freezing.",
+            "text": "a very particular pattern of weather: freezing nights followed by warmer days above freezing",
+            "quotedSpan": "a very particular pattern of weather: freezing nights followed by warmer days above freezing",
             "evidenceLinks": [
               {
                 "paragraphIndex": 1,
                 "sentenceIndex": 2,
-                "quotedSpan": "The trees need a very particular pattern of weather: freezing nights followed by warmer days above freezing.",
-                "startChar": 771,
-                "endChar": 879
+                "quotedSpan": "a very particular pattern of weather: freezing nights followed by warmer days above freezing",
+                "startChar": 786,
+                "endChar": 878
               }
             ],
             "evidenceRole": "supports_part_a",
@@ -663,15 +663,15 @@
             "rationale": "Supports Part A."
           },
           {
-            "text": "A wide, older maple can hold more than one spile, but thin young trees are left alone so they can keep growing.",
-            "quotedSpan": "A wide, older maple can hold more than one spile, but thin young trees are left alone so they can keep growing.",
+            "text": "A bucket or a long plastic tube hangs below to catch the steady drips.",
+            "quotedSpan": "A bucket or a long plastic tube hangs below to catch the steady drips.",
             "evidenceLinks": [
               {
                 "paragraphIndex": 2,
                 "sentenceIndex": 7,
-                "quotedSpan": "A wide, older maple can hold more than one spile, but thin young trees are left alone so they can keep growing.",
-                "startChar": 1838,
-                "endChar": 1949
+                "quotedSpan": "A bucket or a long plastic tube hangs below to catch the steady drips.",
+                "startChar": 1464,
+                "endChar": 1534
               }
             ],
             "evidenceRole": "distractor",
@@ -679,15 +679,15 @@
             "rationale": "Does not best support Part A."
           },
           {
-            "text": "As the sap heats, the water in it turns into steam and floats away into the air.",
-            "quotedSpan": "As the sap heats, the water in it turns into steam and floats away into the air.",
+            "text": "the water in it turns into steam and floats away into the air",
+            "quotedSpan": "the water in it turns into steam and floats away into the air",
             "evidenceLinks": [
               {
                 "paragraphIndex": 3,
                 "sentenceIndex": 2,
-                "quotedSpan": "As the sap heats, the water in it turns into steam and floats away into the air.",
-                "startChar": 2098,
-                "endChar": 2178
+                "quotedSpan": "the water in it turns into steam and floats away into the air",
+                "startChar": 2116,
+                "endChar": 2177
               }
             ],
             "evidenceRole": "supports_part_a",
@@ -695,15 +695,15 @@
             "rationale": "Supports Part A."
           },
           {
-            "text": "The Alvarez family keeps some for their own pancakes and sells the rest at a spring farmers market.",
-            "quotedSpan": "The Alvarez family keeps some for their own pancakes and sells the rest at a spring farmers market.",
+            "text": "keeps some for their own pancakes and sells the rest at a spring farmers market",
+            "quotedSpan": "keeps some for their own pancakes and sells the rest at a spring farmers market",
             "evidenceLinks": [
               {
                 "paragraphIndex": 4,
                 "sentenceIndex": 1,
-                "quotedSpan": "The Alvarez family keeps some for their own pancakes and sells the rest at a spring farmers market.",
-                "startChar": 2851,
-                "endChar": 2950
+                "quotedSpan": "keeps some for their own pancakes and sells the rest at a spring farmers market",
+                "startChar": 2870,
+                "endChar": 2949
               }
             ],
             "evidenceRole": "distractor",
@@ -739,16 +739,16 @@
           "instruction": "Which two details best support the answer in Part A?",
           "choices": [
             {
-              "text": "The trees need a very particular pattern of weather: freezing nights followed by warmer days above freezing."
+              "text": "a very particular pattern of weather: freezing nights followed by warmer days above freezing"
             },
             {
-              "text": "A wide, older maple can hold more than one spile, but thin young trees are left alone so they can keep growing."
+              "text": "A bucket or a long plastic tube hangs below to catch the steady drips."
             },
             {
-              "text": "As the sap heats, the water in it turns into steam and floats away into the air."
+              "text": "the water in it turns into steam and floats away into the air"
             },
             {
-              "text": "The Alvarez family keeps some for their own pancakes and sells the rest at a spring farmers market."
+              "text": "keeps some for their own pancakes and sells the rest at a spring farmers market"
             }
           ],
           "requiredSelectionCount": 2
