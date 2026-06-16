@@ -793,8 +793,9 @@ const boatFixture = JSON.parse(fs.readFileSync("exemplars/pssa_grade3_stamina_pi
 const boatPassage = boatFixture.passages[0];
 const boatItems = boatFixture.items;
 const phase15NewTeItemIds = ["pssa_stamina_item_g3_syrup_dd_01", "pssa_stamina_item_g3_boat_mg_01"];
-const mainSyrupFixture = JSON.parse(execFileSync("git", ["show", "main:exemplars/pssa_grade3_stamina_pilot/syrup_released_length.json"], { encoding: "utf8" }));
-const mainBoatFixture = JSON.parse(execFileSync("git", ["show", "main:exemplars/pssa_grade3_stamina_pilot/boat_literary_released_length.json"], { encoding: "utf8" }));
+const phase15BaseRef = "17b7a9c";
+const mainSyrupFixture = JSON.parse(execFileSync("git", ["show", `${phase15BaseRef}:exemplars/pssa_grade3_stamina_pilot/syrup_released_length.json`], { encoding: "utf8" }));
+const mainBoatFixture = JSON.parse(execFileSync("git", ["show", `${phase15BaseRef}:exemplars/pssa_grade3_stamina_pilot/boat_literary_released_length.json`], { encoding: "utf8" }));
 assert.deepEqual(staminaFixture.passages, mainSyrupFixture.passages, "Phase 1.5 must not change the syrup passage text or metadata");
 assert.deepEqual(boatFixture.passages, mainBoatFixture.passages, "Phase 1.5 must not change the boat passage text or metadata");
 assert.deepEqual(
