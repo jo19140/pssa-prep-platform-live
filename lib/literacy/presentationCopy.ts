@@ -487,8 +487,8 @@ const COACH_COPY: PresentationCopy = {
     realWordsCompleteLabel: "Words complete: {done}/{total}",
   },
   powerWords: {
-    heartKind: "Power word",
-    vocabularyKind: "Story word",
+    heartKind: "High-utility word",
+    vocabularyKind: "Vocabulary word",
     completeLabel: "Words reviewed",
     completeDisabledLabel: "Tap each word first",
   },
@@ -517,7 +517,7 @@ const COACH_COPY: PresentationCopy = {
     idleMessage: "Choose listen first, or read the passage on your own.",
   },
   talk: {
-    placeholder: "Type a quick note or tell your tutor.",
+    placeholder: "Type a quick note or tell your support person.",
     completeLabel: "Reflection complete",
   },
   placeholder: {
