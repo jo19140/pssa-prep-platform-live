@@ -1,17 +1,21 @@
 "use client";
 
 import Image from "next/image";
+import { DEFAULT_BUDDY_STATE_LABELS, type BuddyStateLabelMap } from "@/lib/literacy/presentationCopy";
 
 export type BuddyState = "idle" | "listening" | "speaking" | "confused";
 
-const labels: Record<BuddyState, string> = {
-  idle: "Ready",
-  listening: "Listening",
-  speaking: "Speaking",
-  confused: "Trying another clue",
-};
-
-export function BuddyCharacter({ state = "idle", name = "Reading Buddy" }: { state?: BuddyState; name?: string }) {
+export function BuddyCharacter({
+  state = "idle",
+  name = "Reading Buddy",
+  stateLabels = DEFAULT_BUDDY_STATE_LABELS,
+  imageAlt = "Harper",
+}: {
+  state?: BuddyState;
+  name?: string;
+  stateLabels?: BuddyStateLabelMap;
+  imageAlt?: string;
+}) {
   const isActive = state === "listening" || state === "speaking";
   return (
     <div className="flex items-center gap-4">
@@ -22,7 +26,7 @@ export function BuddyCharacter({ state = "idle", name = "Reading Buddy" }: { sta
       >
         <Image
           src="/branding/harper-character-v1.png"
-          alt="Harper"
+          alt={imageAlt}
           fill
           sizes="96px"
           priority
@@ -31,7 +35,7 @@ export function BuddyCharacter({ state = "idle", name = "Reading Buddy" }: { sta
       </div>
       <div>
         <p className="text-sm font-semibold text-slate-500">{name}</p>
-        <p className="text-lg font-black text-slate-950">{labels[state]}</p>
+        <p className="text-lg font-black text-slate-950">{stateLabels[state]}</p>
       </div>
     </div>
   );
