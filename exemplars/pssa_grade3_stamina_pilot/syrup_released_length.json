@@ -958,6 +958,201 @@
         "authoredIn": "PSSA_STAMINA_ITEM_SET_COMPLETION",
         "autoScoringClaim": false
       }
+    },
+    {
+      "id": "pssa_stamina_item_g3_syrup_dd_01",
+      "itemId": "pssa_stamina_item_g3_syrup_dd_01",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "DRAG_DROP",
+      "interactionType": "DRAG_DROP",
+      "interactionSubtype": "order",
+      "passageId": "pssa_stamina_psg_g3_syrup_v4",
+      "passageTitle": "Sweet Work: How Sap Becomes Syrup",
+      "eligibleContent": "E03.B-K.1.1.3",
+      "assessmentAnchor": "E03.B-K",
+      "reportingCategory": "B",
+      "prompt": "Put the steps in order to show how the Alvarez family turns sap into syrup.",
+      "stem": "Put the steps in order to show how the Alvarez family turns sap into syrup.",
+      "instructionText": "Drag each step into the correct order.",
+      "tokens": [
+        {
+          "tokenId": "syrup_dd_t2",
+          "text": "The sap is boiled so the water turns to steam and floats away.",
+          "isDistractor": false,
+          "groundedInPassage": true,
+          "evidenceQuote": "As the sap heats, the water in it turns into steam and floats away into the air.",
+          "validTargetIds": [
+            "order_2"
+          ],
+          "rationale": "The passage explains that heating the sap makes water turn to steam, so this belongs second."
+        },
+        {
+          "tokenId": "syrup_dd_t3",
+          "text": "The finished syrup is poured through a filter and sealed in jars.",
+          "isDistractor": false,
+          "groundedInPassage": true,
+          "evidenceQuote": "it is poured through a filter to remove tiny bits of bark, then sealed into clean jars",
+          "validTargetIds": [
+            "order_3"
+          ],
+          "rationale": "The passage describes filtering and sealing after the syrup is ready, so this belongs third."
+        },
+        {
+          "tokenId": "syrup_dd_t1",
+          "text": "A bucket catches the sap as it drips from the tapped tree.",
+          "isDistractor": false,
+          "groundedInPassage": true,
+          "evidenceQuote": "A bucket or a long plastic tube hangs below to catch the steady drips.",
+          "validTargetIds": [
+            "order_1"
+          ],
+          "rationale": "The passage begins the process with sap dripping from the tapped tree, so this belongs first."
+        }
+      ],
+      "targets": [
+        {
+          "targetId": "order_1",
+          "label": "1",
+          "capacity": 1
+        },
+        {
+          "targetId": "order_2",
+          "label": "2",
+          "capacity": 1
+        },
+        {
+          "targetId": "order_3",
+          "label": "3",
+          "capacity": 1
+        }
+      ],
+      "correctAssignments": [
+        {
+          "tokenId": "syrup_dd_t1",
+          "targetId": "order_1"
+        },
+        {
+          "tokenId": "syrup_dd_t2",
+          "targetId": "order_2"
+        },
+        {
+          "tokenId": "syrup_dd_t3",
+          "targetId": "order_3"
+        }
+      ],
+      "useAllTokens": true,
+      "responseSpecJson": {
+        "prompt": "Put the steps in order to show how the Alvarez family turns sap into syrup.",
+        "instructionText": "Drag each step into the correct order.",
+        "tokens": [
+          {
+            "tokenId": "syrup_dd_t2",
+            "text": "The sap is boiled so the water turns to steam and floats away."
+          },
+          {
+            "tokenId": "syrup_dd_t3",
+            "text": "The finished syrup is poured through a filter and sealed in jars."
+          },
+          {
+            "tokenId": "syrup_dd_t1",
+            "text": "A bucket catches the sap as it drips from the tapped tree."
+          }
+        ],
+        "targets": [
+          {
+            "targetId": "order_1",
+            "label": "1",
+            "capacity": 1
+          },
+          {
+            "targetId": "order_2",
+            "label": "2",
+            "capacity": 1
+          },
+          {
+            "targetId": "order_3",
+            "label": "3",
+            "capacity": 1
+          }
+        ],
+        "useAllTokens": true
+      },
+      "correctResponseJson": {
+        "correctAssignments": [
+          {
+            "tokenId": "syrup_dd_t1",
+            "targetId": "order_1"
+          },
+          {
+            "tokenId": "syrup_dd_t2",
+            "targetId": "order_2"
+          },
+          {
+            "tokenId": "syrup_dd_t3",
+            "targetId": "order_3"
+          }
+        ]
+      },
+      "scoring": {
+        "totalPoints": 3,
+        "partialCreditRules": [
+          {
+            "points": 3,
+            "rule": "All required tokens placed in the supported order position."
+          },
+          {
+            "points": 2,
+            "rule": "Two required tokens placed correctly without exceeding target capacity."
+          },
+          {
+            "points": 1,
+            "rule": "One required token placed correctly without exceeding target capacity."
+          },
+          {
+            "points": 0,
+            "rule": "Wrong placement, unanswered required placement, or capacity exceeded."
+          }
+        ],
+        "scoringNotes": "Full credit requires every required token and no wrong target, presented-order shortcut, or capacity violation."
+      },
+      "scoringJson": {
+        "totalPoints": 3,
+        "partialCreditRules": [
+          {
+            "points": 3,
+            "rule": "All required tokens placed in the supported order position."
+          },
+          {
+            "points": 2,
+            "rule": "Two required tokens placed correctly without exceeding target capacity."
+          },
+          {
+            "points": 1,
+            "rule": "One required token placed correctly without exceeding target capacity."
+          },
+          {
+            "points": 0,
+            "rule": "Wrong placement, unanswered required placement, or capacity exceeded."
+          }
+        ],
+        "scoringNotes": "Full credit requires every required token and no wrong target, presented-order shortcut, or capacity violation."
+      },
+      "pointValue": 3,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "approvalEligible": false,
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "provenanceJson": {
+        "fixtureOnly": true,
+        "sourcePassageId": "pssa_stamina_psg_g3_syrup_v4",
+        "authoredIn": "PSSA_DIAGNOSTIC_PHASE_1_5_TE_ITEMS",
+        "autoScoringClaim": true
+      }
     }
   ]
 }

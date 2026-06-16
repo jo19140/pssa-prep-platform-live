@@ -12,7 +12,7 @@ Enforced mode: every row with status FAIL and enforced !== false fails test:pssa
 
 ## Packet Counts
 
-- Items: 37 total = 29 MCQ (20 reading + 9 conventions) + 4 EBSR + 4 SHORT_ANSWER.
+- Items: 39 total = 29 MCQ (20 reading + 9 conventions) + 4 EBSR + 4 SHORT_ANSWER + 2 TE.
 - Passages: 5 encoded stamina passages across 1 paired group.
 
 ## #47 Visible Skip Set
@@ -129,6 +129,11 @@ Enforced mode: every row with status FAIL and enforced !== false fails test:pssa
 | pssa_stamina_item_g3_syrup_sa_01 | SHORT_ANSWER | PSSA_SA_BANDS_NONEMPTY | PASS | true | foundation evaluator |
 | pssa_stamina_item_g3_syrup_sa_01 | SHORT_ANSWER | PSSA_ITEM_EC_GENRE_MATCH | PASS | true | foundation evaluator |
 | pssa_stamina_item_g3_syrup_sa_01 | SHORT_ANSWER | PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_syrup_dd_01 | DRAG_DROP | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_syrup_dd_01 | DRAG_DROP | PSSA_VOCAB_KEY_CONSTRUCT | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_syrup_dd_01 | DRAG_DROP | PSSA_SA_BANDS_NONEMPTY | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_syrup_dd_01 | DRAG_DROP | PSSA_ITEM_EC_GENRE_MATCH | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_syrup_dd_01 | DRAG_DROP | PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP | PASS | true | foundation evaluator |
 | pssa_stamina_item_g3_boat_01 | MCQ | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | PASS | true | foundation evaluator |
 | pssa_stamina_item_g3_boat_01 | MCQ | PSSA_VOCAB_KEY_CONSTRUCT | PASS | true | foundation evaluator |
 | pssa_stamina_item_g3_boat_01 | MCQ | PSSA_SA_BANDS_NONEMPTY | PASS | true | foundation evaluator |
@@ -164,6 +169,11 @@ Enforced mode: every row with status FAIL and enforced !== false fails test:pssa
 | pssa_stamina_item_g3_boat_sa_01 | SHORT_ANSWER | PSSA_SA_BANDS_NONEMPTY | PASS | true | foundation evaluator |
 | pssa_stamina_item_g3_boat_sa_01 | SHORT_ANSWER | PSSA_ITEM_EC_GENRE_MATCH | PASS | true | foundation evaluator |
 | pssa_stamina_item_g3_boat_sa_01 | SHORT_ANSWER | PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_boat_mg_01 | MATCHING_GRID | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_boat_mg_01 | MATCHING_GRID | PSSA_VOCAB_KEY_CONSTRUCT | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_boat_mg_01 | MATCHING_GRID | PSSA_SA_BANDS_NONEMPTY | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_boat_mg_01 | MATCHING_GRID | PSSA_ITEM_EC_GENRE_MATCH | PASS | true | foundation evaluator |
+| pssa_stamina_item_g3_boat_mg_01 | MATCHING_GRID | PSSA_PASSAGE_MULTIPOINT_EVIDENCE_OVERLAP | PASS | true | foundation evaluator |
 | pssa_stamina_item_g3_owls_01 | MCQ | PSSA_ITEM_INTRA_CHOICE_DUPLICATE | PASS | true | foundation evaluator |
 | pssa_stamina_item_g3_owls_01 | MCQ | PSSA_VOCAB_KEY_CONSTRUCT | PASS | true | foundation evaluator |
 | pssa_stamina_item_g3_owls_01 | MCQ | PSSA_SA_BANDS_NONEMPTY | PASS | true | foundation evaluator |
@@ -447,6 +457,7 @@ Enforced mode: every row with status FAIL and enforced !== false fails test:pssa
 | pssa_stamina_item_g3_syrup_04 | MCQ | PSSA_ITEM_FOOTNOTE_GIVEAWAY | PASS | true | vocab targets must not be visible footnote definitions |
 | pssa_stamina_item_g3_syrup_ebsr_01 | EBSR | PSSA_ITEM_FOOTNOTE_GIVEAWAY | PASS | true | vocab targets must not be visible footnote definitions |
 | pssa_stamina_item_g3_syrup_sa_01 | SHORT_ANSWER | PSSA_ITEM_FOOTNOTE_GIVEAWAY | PASS | true | vocab targets must not be visible footnote definitions |
+| pssa_stamina_item_g3_syrup_dd_01 | DRAG_DROP | PSSA_ITEM_FOOTNOTE_GIVEAWAY | PASS | true | vocab targets must not be visible footnote definitions |
 | pssa_stamina_item_g3_boat_01 | MCQ | PSSA_ITEM_FOOTNOTE_GIVEAWAY | PASS | true | vocab targets must not be visible footnote definitions |
 | pssa_stamina_item_g3_boat_02 | MCQ | PSSA_ITEM_FOOTNOTE_GIVEAWAY | PASS | true | vocab targets must not be visible footnote definitions |
 | pssa_stamina_item_g3_boat_03 | MCQ | PSSA_ITEM_FOOTNOTE_GIVEAWAY | PASS | true | vocab targets must not be visible footnote definitions |
@@ -454,6 +465,7 @@ Enforced mode: every row with status FAIL and enforced !== false fails test:pssa
 | pssa_stamina_item_g3_boat_05 | MCQ | PSSA_ITEM_FOOTNOTE_GIVEAWAY | PASS | true | vocab targets must not be visible footnote definitions |
 | pssa_stamina_item_g3_boat_ebsr_01 | EBSR | PSSA_ITEM_FOOTNOTE_GIVEAWAY | PASS | true | vocab targets must not be visible footnote definitions |
 | pssa_stamina_item_g3_boat_sa_01 | SHORT_ANSWER | PSSA_ITEM_FOOTNOTE_GIVEAWAY | PASS | true | vocab targets must not be visible footnote definitions |
+| pssa_stamina_item_g3_boat_mg_01 | MATCHING_GRID | PSSA_ITEM_FOOTNOTE_GIVEAWAY | PASS | true | vocab targets must not be visible footnote definitions |
 | pssa_stamina_item_g3_rabbit_01 | MCQ | PSSA_ITEM_FOOTNOTE_GIVEAWAY | PASS | true | vocab targets must not be visible footnote definitions |
 | pssa_stamina_item_g3_rabbit_02 | MCQ | PSSA_ITEM_FOOTNOTE_GIVEAWAY | PASS | true | vocab targets must not be visible footnote definitions |
 | pssa_stamina_item_g3_rabbit_03 | MCQ | PSSA_ITEM_FOOTNOTE_GIVEAWAY | PASS | true | vocab targets must not be visible footnote definitions |
