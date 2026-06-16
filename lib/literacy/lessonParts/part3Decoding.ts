@@ -4,7 +4,7 @@ import { detectPatternCandidates, validatePseudowordCandidate } from "../pseudow
 import { withCommonPartMetadata, type GeneratedLessonPart, type LessonGeneratorContext } from "./types";
 
 export function generatePart3Decoding(ctx: LessonGeneratorContext): GeneratedLessonPart {
-  const content = phase3EntryLessonContentFor(ctx.dailyTarget.code);
+  const content = phase3EntryLessonContentFor(ctx.dailyTarget.code, ctx.presentationProfile);
   const pseudowordValidation = ctx.pseudowords.map((word) => {
     const detectedPattern = selectPseudowordPattern(word, ctx.pseudowordPatterns);
     return detectedPattern

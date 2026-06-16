@@ -6,7 +6,7 @@ export function generatePart7ConnectedText(ctx: LessonGeneratorContext): Generat
     throw new Error("Part 7 requires an approved selected passage and fresh content audit.");
   }
   const audit = ctx.selectedPassageAudit;
-  const content = phase3EntryLessonContentFor(ctx.dailyTarget.code);
+  const content = phase3EntryLessonContentFor(ctx.dailyTarget.code, ctx.presentationProfile);
   return withCommonPartMetadata(ctx, {
     partNumber: 7,
     partLabel: "Connected-text reading",
