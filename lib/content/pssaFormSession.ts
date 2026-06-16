@@ -14,6 +14,9 @@ const ACTIVE_STATUS = "in_progress";
 const SUBMITTED_STATUS = "submitted";
 const INVALIDATED_STATUS = "invalidated_midflight";
 const ITEM_INTEGRITY_REASON = "item_integrity_failure";
+const SECTION_STATUSES = ["not_started", "in_progress", "review", "completed_locked"] as const;
+
+type SectionStatus = typeof SECTION_STATUSES[number];
 
 type LoadedSession = {
   id: string;
@@ -22,6 +25,8 @@ type LoadedSession = {
   formContentHashAtStart: string;
   status: string;
   currentPosition: number;
+  currentSectionIndex?: number | null;
+  sectionStatusesJson?: unknown;
   startedAt: Date | string;
   submittedAt?: Date | string | null;
   totalPoints?: number | null;
@@ -38,12 +43,23 @@ type LoadedForm = {
   contentHash: string;
   gradeLevel: number;
   subject: string;
+  hasSections?: boolean;
+  sections?: LoadedFormSection[];
   items: LoadedFormItem[];
   passages: Array<{
     passageId: string;
+    sectionIndex?: number | null;
     approvedPassageContentHashSnapshot: string;
     passage: any;
   }>;
+};
+
+type LoadedFormSection = {
+  id?: string;
+  sectionIndex: number;
+  sectionType: string;
+  label: string;
+  estimatedMinutes: number;
 };
 
 type LoadedFormItem = {
@@ -52,6 +68,7 @@ type LoadedFormItem = {
   itemId: string;
   position: number;
   pointValue: number;
+  sectionIndex?: number | null;
   approvedContentHashSnapshot: string;
   passageIdSnapshot: string | null;
   item: any;
@@ -127,6 +144,7 @@ export async function launchPssaFormSession(db: PssaDb, input: { auth: PssaRoute
   if (existing) throw new PssaSessionError(409, "active_session_exists", existing.id);
 
   try {
+    const sectionStatuses = initialSectionStatuses(form);
     const created = await db.pssaFormSession.create({
       data: {
         userId: input.userId,
@@ -134,9 +152,11 @@ export async function launchPssaFormSession(db: PssaDb, input: { auth: PssaRoute
         formContentHashAtStart: form.contentHash,
         status: ACTIVE_STATUS,
         currentPosition: 1,
+        currentSectionIndex: sectionStatuses[0]?.sectionIndex ?? 1,
+        sectionStatusesJson: json(sectionStatuses),
       },
     });
-    return { sessionId: created.id, formId: input.formId, status: ACTIVE_STATUS, currentPosition: 1 };
+    return { sessionId: created.id, formId: input.formId, status: ACTIVE_STATUS, currentPosition: 1, currentSectionIndex: created.currentSectionIndex ?? 1 };
   } catch (error) {
     if (isUniqueConstraint(error)) {
       const raced = await db.pssaFormSession.findFirst({
@@ -162,17 +182,23 @@ export async function getPssaSessionItem(db: PssaDb, input: { auth: PssaRouteUse
   assertInProgress(session);
   const formItem = formItemAt(session, input.position);
   await assertSessionDeliverable(db, session, { formItem });
+  assertSectionItemAccess(session, formItem, "read");
   const dto = projectPssaStudentItem({
     ...formItem.item,
     pointValue: formItem.pointValue,
   });
+  const sectionIndex = sectionIndexForItem(session, formItem);
   return {
     sessionId: session.id,
     formId: session.formId,
     position: formItem.position,
     currentPosition: session.currentPosition,
+    currentSectionIndex: currentSectionIndex(session),
+    sectionIndex,
     totalPositions: session.form.items.length,
     progress: progressDto(session),
+    sections: sectionsDto(session),
+    passages: passageDtosForItem(session, formItem),
     item: dto,
   };
 }
@@ -183,6 +209,7 @@ export async function answerPssaSessionItem(db: PssaDb, input: { auth: PssaRoute
   assertInProgress(session);
   const formItem = formItemAt(session, input.position);
   await assertSessionDeliverable(db, session, { formItem });
+  assertSectionItemAccess(session, formItem, "write");
 
   let scored: PssaScoreResult;
   try {
@@ -222,7 +249,7 @@ export async function answerPssaSessionItem(db: PssaDb, input: { auth: PssaRoute
   return {
     position: formItem.position,
     scoreStatus: scored.status,
-    isComplete: session.form.items.every((item) => answeredPositions.has(item.position)),
+    isComplete: sectionItems(session, sectionIndexForItem(session, formItem)).every((item) => answeredPositions.has(item.position)),
   };
 }
 
@@ -231,10 +258,11 @@ export async function submitPssaSession(db: PssaDb, input: { auth: PssaRouteUser
   assertOwner(session, input.auth);
   assertInProgress(session);
   await assertSessionDeliverable(db, session);
+  if (isSectionedSession(session) && !allSectionsCompleted(session)) throw new PssaSessionError(409, "sections_not_completed");
 
   const answeredPositions = new Set(session.responses.map((response) => response.positionSnapshot));
   const missing = session.form.items.filter((item) => !answeredPositions.has(item.position));
-  if (missing.length && !input.allowIncomplete) throw new PssaSessionError(409, "incomplete_session");
+  if (missing.length && !input.allowIncomplete && !isSectionedSession(session)) throw new PssaSessionError(409, "incomplete_session");
 
   let earnedPoints = 0;
   let pendingHumanPoints = 0;
@@ -258,6 +286,61 @@ export async function submitPssaSession(db: PssaDb, input: { auth: PssaRouteUser
   });
   const refreshed = await loadSession(db, input.sessionId);
   return sessionStateDto(refreshed);
+}
+
+export async function reviewPssaSessionSection(db: PssaDb, input: { auth: PssaRouteUser; sessionId: string; sectionIndex: number }) {
+  const session = await loadSession(db, input.sessionId);
+  assertOwner(session, input.auth);
+  assertInProgress(session);
+  await assertSessionDeliverable(db, session);
+  assertCurrentSection(session, input.sectionIndex);
+  const updated = setSectionStatus(session, input.sectionIndex, "review");
+  await db.pssaFormSession.update({
+    where: { id: session.id },
+    data: { sectionStatusesJson: json(updated) },
+  });
+  return sessionStateDto(await loadSession(db, input.sessionId));
+}
+
+export async function resumePssaSessionSection(db: PssaDb, input: { auth: PssaRouteUser; sessionId: string; sectionIndex: number }) {
+  const session = await loadSession(db, input.sessionId);
+  assertOwner(session, input.auth);
+  assertInProgress(session);
+  await assertSessionDeliverable(db, session);
+  assertCurrentSection(session, input.sectionIndex);
+  const updated = setSectionStatus(session, input.sectionIndex, "in_progress");
+  await db.pssaFormSession.update({
+    where: { id: session.id },
+    data: { sectionStatusesJson: json(updated) },
+  });
+  return sessionStateDto(await loadSession(db, input.sessionId));
+}
+
+export async function endPssaSessionSection(db: PssaDb, input: { auth: PssaRouteUser; sessionId: string; sectionIndex: number }) {
+  const session = await loadSession(db, input.sessionId);
+  assertOwner(session, input.auth);
+  assertInProgress(session);
+  await assertSessionDeliverable(db, session);
+  assertCurrentSection(session, input.sectionIndex);
+  const sections = sectionRows(session);
+  const next = sections.find((section) => section.sectionIndex > input.sectionIndex);
+  let statuses = setSectionStatus(session, input.sectionIndex, "completed_locked", new Date().toISOString());
+  let currentSection = input.sectionIndex;
+  let currentPosition = session.currentPosition;
+  if (next) {
+    statuses = statuses.map((row) => row.sectionIndex === next.sectionIndex ? { ...row, status: "in_progress" as SectionStatus } : row);
+    currentSection = next.sectionIndex;
+    currentPosition = sectionItems(session, next.sectionIndex)[0]?.position ?? currentPosition;
+  }
+  await db.pssaFormSession.update({
+    where: { id: session.id },
+    data: {
+      currentSectionIndex: currentSection,
+      currentPosition,
+      sectionStatusesJson: json(statuses),
+    },
+  });
+  return sessionStateDto(await loadSession(db, input.sessionId));
 }
 
 export async function assertSessionDeliverable(db: PssaDb, session: LoadedSession, options: { formItem?: LoadedFormItem } = {}) {
@@ -296,13 +379,20 @@ export function validateSubmitBody(value: unknown) {
   return { sessionId: String(body.sessionId), allowIncomplete: body.allowIncomplete === true };
 }
 
+export function validateSectionBody(value: unknown) {
+  const body = exactBody(value, ["sessionId", "sectionIndex", "action"]);
+  const action = String(body.action);
+  if (!["review", "resume", "end"].includes(action)) throw new PssaSessionError(400, "invalid_section_action");
+  return { sessionId: String(body.sessionId), sectionIndex: positiveInt(body.sectionIndex), action: action as "review" | "resume" | "end" };
+}
+
 export function pssaErrorResponse(error: unknown) {
   if (error instanceof PssaSessionError) return pssaRouteJson({ error: error.code, detail: error.detail }, { status: error.status });
   return pssaRouteJson({ error: "pssa_session_error" }, { status: 500 });
 }
 
 async function assertFormDeliverableForLaunch(db: PssaDb, form: LoadedForm) {
-  const session = { id: "launch", userId: "", formId: form.id, formContentHashAtStart: form.contentHash, status: ACTIVE_STATUS, currentPosition: 1, startedAt: new Date(), form, responses: [] };
+  const session = { id: "launch", userId: "", formId: form.id, formContentHashAtStart: form.contentHash, status: ACTIVE_STATUS, currentPosition: 1, currentSectionIndex: 1, sectionStatusesJson: initialSectionStatuses(form), startedAt: new Date(), form, responses: [] };
   const failures = await deliverabilityFailures(db, form, session.formContentHashAtStart);
   if (failures.length) throw new PssaSessionError(409, "form_not_deliverable", failures.join("|"));
 }
@@ -314,6 +404,7 @@ async function deliverabilityFailures(db: PssaDb, form: LoadedForm, contentHashA
   const liveReadyItems = await getStudentReadyPssaItems(db, { gradeLevel: form.gradeLevel, subject: form.subject }) as any[];
   const verification = verifyPssaFormSnapshots({ form, liveReadyItems });
   if (!verification.ok) failures.push(...verification.failures);
+  failures.push(...sectionDeliverabilityFailures(form));
   return failures;
 }
 
@@ -336,7 +427,8 @@ function sessionInclude() {
 
 function formInclude() {
   return {
-    items: { include: { item: { include: { batch: true, passages: { include: { passage: true }, orderBy: { sortOrder: "asc" } } } } }, orderBy: { position: "asc" } },
+    sections: { orderBy: { sectionIndex: "asc" } },
+    items: { include: { item: { include: { batch: true, passageGroup: { include: { members: { include: { passage: true }, orderBy: { position: "asc" } } } }, passages: { include: { passage: true }, orderBy: { sortOrder: "asc" } } } } }, orderBy: { position: "asc" } },
     passages: { include: { passage: true }, orderBy: { position: "asc" } },
   };
 }
@@ -358,6 +450,111 @@ function formItemAt(session: LoadedSession, position: number) {
   return formItem;
 }
 
+function isSectionedForm(form: LoadedForm) {
+  return Boolean(form.hasSections && form.sections?.length);
+}
+
+function isSectionedSession(session: LoadedSession) {
+  return isSectionedForm(session.form);
+}
+
+function sectionRows(session: LoadedSession): LoadedFormSection[] {
+  if (!isSectionedSession(session)) {
+    return [{ sectionIndex: 1, sectionType: "flat", label: "Section 1", estimatedMinutes: 0 }];
+  }
+  return [...(session.form.sections ?? [])].sort((a, b) => a.sectionIndex - b.sectionIndex);
+}
+
+function initialSectionStatuses(form: LoadedForm) {
+  const sections = isSectionedForm(form)
+    ? [...(form.sections ?? [])].sort((a, b) => a.sectionIndex - b.sectionIndex)
+    : [{ sectionIndex: 1 }];
+  return sections.map((section, index) => ({
+    sectionIndex: section.sectionIndex,
+    status: (index === 0 ? "in_progress" : "not_started") as SectionStatus,
+    completedAt: null as string | null,
+  }));
+}
+
+function normalizedSectionStatuses(session: LoadedSession) {
+  const raw = Array.isArray(session.sectionStatusesJson) ? session.sectionStatusesJson as any[] : [];
+  const bySection = new Map(raw.map((row) => [Number(row?.sectionIndex), row]));
+  return sectionRows(session).map((section, index) => {
+    const existing = bySection.get(section.sectionIndex);
+    const status = SECTION_STATUSES.includes(existing?.status) ? existing.status as SectionStatus : (index === 0 ? "in_progress" : "not_started");
+    return {
+      sectionIndex: section.sectionIndex,
+      status,
+      completedAt: typeof existing?.completedAt === "string" ? existing.completedAt : null,
+    };
+  });
+}
+
+function currentSectionIndex(session: LoadedSession) {
+  if (!isSectionedSession(session)) return 1;
+  const statuses = normalizedSectionStatuses(session);
+  const active = statuses.find((row) => row.status === "in_progress" || row.status === "review");
+  return Number(session.currentSectionIndex ?? active?.sectionIndex ?? statuses[0]?.sectionIndex ?? 1);
+}
+
+function sectionIndexForItem(session: LoadedSession, formItem: LoadedFormItem) {
+  if (!isSectionedSession(session)) return 1;
+  if (!Number.isInteger(formItem.sectionIndex) || Number(formItem.sectionIndex) < 1) throw new PssaSessionError(409, "missing_section_index", formItem.itemId);
+  return Number(formItem.sectionIndex);
+}
+
+function sectionItems(session: LoadedSession, sectionIndex: number) {
+  return session.form.items.filter((item) => sectionIndexForItem(session, item) === sectionIndex);
+}
+
+function assertCurrentSection(session: LoadedSession, sectionIndex: number) {
+  if (!isSectionedSession(session)) return;
+  const current = currentSectionIndex(session);
+  if (sectionIndex !== current) throw new PssaSessionError(403, "section_not_current", `current=${current}; requested=${sectionIndex}`);
+  const status = normalizedSectionStatuses(session).find((row) => row.sectionIndex === sectionIndex)?.status;
+  if (status === "completed_locked") throw new PssaSessionError(409, "section_locked");
+  if (!["in_progress", "review"].includes(String(status))) throw new PssaSessionError(403, "section_locked", String(status));
+}
+
+function assertSectionItemAccess(session: LoadedSession, formItem: LoadedFormItem, mode: "read" | "write") {
+  if (!isSectionedSession(session)) return;
+  const sectionIndex = sectionIndexForItem(session, formItem);
+  const status = normalizedSectionStatuses(session).find((row) => row.sectionIndex === sectionIndex)?.status;
+  if (status === "completed_locked") throw new PssaSessionError(409, "section_locked", formItem.itemId);
+  assertCurrentSection(session, sectionIndex);
+  if (mode === "write" && !["in_progress", "review"].includes(String(status))) throw new PssaSessionError(403, "section_locked", String(status));
+}
+
+function setSectionStatus(session: LoadedSession, sectionIndex: number, status: SectionStatus, completedAt: string | null = null) {
+  return normalizedSectionStatuses(session).map((row) => row.sectionIndex === sectionIndex ? { ...row, status, completedAt } : row);
+}
+
+function allSectionsCompleted(session: LoadedSession) {
+  return normalizedSectionStatuses(session).every((row) => row.status === "completed_locked");
+}
+
+function sectionDeliverabilityFailures(form: LoadedForm) {
+  if (!isSectionedForm(form)) return [];
+  const failures: string[] = [];
+  const sectionIndexes = new Set((form.sections ?? []).map((section) => section.sectionIndex));
+  if (!sectionIndexes.size) failures.push("section_metadata_missing");
+  for (const item of form.items) {
+    if (!Number.isInteger(item.sectionIndex) || !sectionIndexes.has(Number(item.sectionIndex))) failures.push(`item_section_missing:${item.itemId}`);
+  }
+  for (const passage of form.passages ?? []) {
+    if (!Number.isInteger(passage.sectionIndex) || !sectionIndexes.has(Number(passage.sectionIndex))) failures.push(`passage_section_missing:${passage.passageId}`);
+  }
+  const grouped = form.items.filter((item) => item.item?.passageGroupId);
+  const groupSections = new Map<string, Set<number>>();
+  for (const item of grouped) {
+    const groupId = String(item.item.passageGroupId);
+    if (!groupSections.has(groupId)) groupSections.set(groupId, new Set());
+    groupSections.get(groupId)!.add(Number(item.sectionIndex));
+  }
+  for (const [groupId, indexes] of groupSections) if (indexes.size > 1) failures.push(`passage_group_split:${groupId}`);
+  return failures;
+}
+
 async function invalidateSession(db: PssaDb, sessionId: string, reason: string) {
   await db.pssaFormSession.update({
     where: { id: sessionId },
@@ -369,8 +566,9 @@ function sessionStateDto(session: LoadedSession) {
   const responseByPosition = new Map(session.responses.map((response) => [response.positionSnapshot, response]));
   const positions = session.form.items.map((item) => {
     const response = responseByPosition.get(item.position);
-    if (!response) return { position: item.position, scoreStatus: session.status === SUBMITTED_STATUS ? "unanswered" : "unanswered" };
-    const base: Record<string, unknown> = { position: item.position, scoreStatus: response.scoreStatus };
+    const sectionIndex = sectionIndexForItem(session, item);
+    if (!response) return { position: item.position, sectionIndex, scoreStatus: session.status === SUBMITTED_STATUS ? "unanswered" : "unanswered" };
+    const base: Record<string, unknown> = { position: item.position, sectionIndex, scoreStatus: response.scoreStatus };
     if (session.status === SUBMITTED_STATUS) base.pointsEarned = response.pointsEarned;
     return base;
   });
@@ -379,6 +577,7 @@ function sessionStateDto(session: LoadedSession) {
     formId: session.formId,
     status: session.status,
     currentPosition: session.currentPosition,
+    currentSectionIndex: currentSectionIndex(session),
     totalPositions: session.form.items.length,
     startedAt: session.startedAt,
     submittedAt: session.submittedAt ?? null,
@@ -386,6 +585,7 @@ function sessionStateDto(session: LoadedSession) {
     totalPoints: session.status === SUBMITTED_STATUS ? session.totalPoints : undefined,
     earnedPoints: session.status === SUBMITTED_STATUS ? session.earnedPoints : undefined,
     pendingHumanPoints: session.status === SUBMITTED_STATUS ? session.pendingHumanPoints : undefined,
+    sections: sectionsDto(session),
     positions,
   };
 }
@@ -395,6 +595,50 @@ function progressDto(session: LoadedSession) {
     answered: new Set(session.responses.map((response) => response.positionSnapshot)).size,
     total: session.form.items.length,
   };
+}
+
+function sectionsDto(session: LoadedSession) {
+  const answered = new Set(session.responses.map((response) => response.positionSnapshot));
+  const statuses = new Map(normalizedSectionStatuses(session).map((row) => [row.sectionIndex, row]));
+  const current = currentSectionIndex(session);
+  return sectionRows(session).map((section) => {
+    const items = sectionItems(session, section.sectionIndex);
+    const status = statuses.get(section.sectionIndex)?.status ?? "not_started";
+    return {
+      sectionIndex: section.sectionIndex,
+      sectionType: section.sectionType,
+      label: section.label,
+      estimatedMinutes: section.estimatedMinutes,
+      status,
+      locked: status === "completed_locked" || section.sectionIndex > current,
+      current: section.sectionIndex === current,
+      answered: items.filter((item) => answered.has(item.position)).length,
+      total: items.length,
+      points: items.reduce((sum, item) => sum + item.pointValue, 0),
+      firstPosition: items[0]?.position ?? null,
+      lastPosition: items.at(-1)?.position ?? null,
+      completedAt: statuses.get(section.sectionIndex)?.completedAt ?? null,
+    };
+  });
+}
+
+function passageDtosForItem(session: LoadedSession, formItem: LoadedFormItem) {
+  const sectionIndex = sectionIndexForItem(session, formItem);
+  const groupedPassageIds = formItem.item?.passageGroup?.members?.map((member: any) => member.passageId).filter(Boolean) ?? [];
+  const passageIds = groupedPassageIds.length ? new Set(groupedPassageIds) : new Set([formItem.passageIdSnapshot].filter(Boolean));
+  return (session.form.passages ?? [])
+    .filter((row) => row.sectionIndex === sectionIndex && passageIds.has(row.passageId))
+    .map((row, index) => ({
+      passageId: row.passageId,
+      sectionIndex: row.sectionIndex ?? sectionIndex,
+      label: groupedPassageIds.length ? `Passage ${index + 1}` : undefined,
+      passage: {
+        id: row.passage.id,
+        title: row.passage.title,
+        text: row.passage.text,
+        passageType: row.passage.passageType,
+      },
+    }));
 }
 
 async function canTeacherLaunchForStudent(db: PssaDb, teacherUserId: string, studentUserId: string) {

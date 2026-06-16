@@ -5,13 +5,17 @@ import path from "node:path";
 import { PSSA_STUDENT_DTO_BANNED_KEYS, assertNoBannedKeys } from "@/lib/content/pssaStudentDto";
 import {
   answerPssaSessionItem,
+  endPssaSessionSection,
   getPssaSessionItem,
   getPssaSessionState,
   launchPssaFormSession,
   pssaRouteJson,
   requirePssaPostGuards,
+  resumePssaSessionSection,
+  reviewPssaSessionSection,
   submitPssaSession,
   validateAnswerBody,
+  validateSectionBody,
   type PssaRouteUser,
 } from "@/lib/content/pssaFormSession";
 import { AUDIT_CONTRACT_VERSION, SOURCE_SCAN_VERSION } from "./content/lib/pssa-import-plan";
@@ -90,19 +94,22 @@ const itemFixtures = [
   readyItem("sa_1", "SHORT_ANSWER", { stem: "Explain.", instructionText: "Use text.", requiredSupportCount: 1, requiresTextSupport: true }, {}, { totalPoints: 3 }, 3, passage),
 ];
 
-function makeForm(items = itemFixtures) {
+function makeForm(items = itemFixtures, sections?: Array<{ sectionIndex: number; sectionType: string; label: string; estimatedMinutes: number }>) {
   return {
     id: "form_1",
     formStatus: "assembled",
     contentHash: "form_hash",
     gradeLevel: 3,
     subject: "ELA",
+    hasSections: Boolean(sections?.length),
+    sections: sections?.map((section, index) => ({ id: `section_${index + 1}`, formId: "form_1", ...section })) ?? [],
     items: items.map((item, index) => ({
       id: `form_item_${index + 1}`,
       formId: "form_1",
       itemId: item.id,
       position: index + 1,
       pointValue: item.pointValue,
+      sectionIndex: sections?.[Math.min(index, sections.length - 1)]?.sectionIndex ?? null,
       approvedContentHashSnapshot: item.approvedContentHash,
       passageIdSnapshot: "passage_1",
       item,
@@ -111,9 +118,58 @@ function makeForm(items = itemFixtures) {
       id: "form_passage_1",
       passageId: "passage_1",
       position: 1,
+      sectionIndex: sections?.[0]?.sectionIndex ?? null,
       approvedPassageContentHashSnapshot: passage.approvedContentHash,
       passage,
     }],
+  };
+}
+
+function makeSectionedForm() {
+  const sections = [
+    { sectionIndex: 1, sectionType: "conventions_reading", label: "Section 1", estimatedMinutes: 60 },
+    { sectionIndex: 2, sectionType: "reading", label: "Section 2", estimatedMinutes: 35 },
+    { sectionIndex: 3, sectionType: "conventions_reading", label: "Section 3", estimatedMinutes: 60 },
+  ];
+  const owlPassage1 = readyPassage("owl_p1");
+  const owlPassage2 = readyPassage("owl_p2");
+  const rabbitPassage = readyPassage("rabbit_p1");
+  const owlGroup = {
+    id: "pssa_pg_g3_owls_paired_01",
+    members: [
+      { passageId: owlPassage1.id, passage: owlPassage1, position: 1, slot: "passage_1" },
+      { passageId: owlPassage2.id, passage: owlPassage2, position: 2, slot: "passage_2" },
+    ],
+  };
+  const s1 = readyItem("section_mcq_1", "MCQ", { prompt: "Pick A.", choices: [{ text: "A" }, { text: "B" }] }, { correctIndex: 0 }, { totalPoints: 1 }, 1, passage);
+  const s2 = readyItem("section_drag_1", "DRAG_DROP", { prompt: "Drag.", instructionText: "Move.", tokens: [{ tokenId: "t1", text: "Token" }], targets: [{ targetId: "target_1", label: "Target" }], useAllTokens: true }, { correctAssignments: [{ tokenId: "t1", targetId: "target_1" }] }, { totalPoints: 1 }, 1, passage);
+  const owl = {
+    ...readyItem("section_owl_ebsr_1", "EBSR", { partA: { prompt: "A?", choices: [{ text: "A" }, { text: "B" }] }, partB: { instruction: "B?", choices: [{ text: "E1" }, { text: "E2" }] } }, { partA: { correctIndex: 0 }, partB: { correctIndices: [0] } }, { totalPoints: 2, partAPoints: 1, partBPoints: 1, requirePartACorrectForFullCredit: true }, 2, owlPassage1),
+    passageGroupId: owlGroup.id,
+    passageGroup: owlGroup,
+  };
+  const rabbit = readyItem("section_rabbit_sa_1", "SHORT_ANSWER", { stem: "Explain.", instructionText: "Use text.", requiredSupportCount: 1, requiresTextSupport: true }, {}, { totalPoints: 3 }, 3, rabbitPassage);
+  const items = [s1, s2, owl, rabbit];
+  return {
+    ...makeForm(items, sections),
+    items: items.map((item, index) => ({
+      id: `form_item_${index + 1}`,
+      formId: "form_1",
+      itemId: item.id,
+      position: index + 1,
+      pointValue: item.pointValue,
+      sectionIndex: index === 0 ? 1 : index === 1 ? 2 : 3,
+      approvedContentHashSnapshot: item.approvedContentHash,
+      passageIdSnapshot: index === 2 ? owlPassage1.id : index === 3 ? rabbitPassage.id : passage.id,
+      item,
+    })),
+    passages: [
+      { id: "form_passage_1", passageId: passage.id, position: 1, sectionIndex: 1, approvedPassageContentHashSnapshot: passage.approvedContentHash, passage },
+      { id: "form_passage_2", passageId: passage.id, position: 2, sectionIndex: 2, approvedPassageContentHashSnapshot: passage.approvedContentHash, passage },
+      { id: "form_passage_3", passageId: owlPassage1.id, position: 3, sectionIndex: 3, approvedPassageContentHashSnapshot: owlPassage1.approvedContentHash, passage: owlPassage1 },
+      { id: "form_passage_4", passageId: owlPassage2.id, position: 4, sectionIndex: 3, approvedPassageContentHashSnapshot: owlPassage2.approvedContentHash, passage: owlPassage2 },
+      { id: "form_passage_5", passageId: rabbitPassage.id, position: 5, sectionIndex: 3, approvedPassageContentHashSnapshot: rabbitPassage.approvedContentHash, passage: rabbitPassage },
+    ],
   };
 }
 
@@ -295,6 +351,81 @@ async function testAnswerLifecycleAndSubmitMath() {
   assert.equal(incomplete.positions.find((row: any) => row.position === 2)?.scoreStatus, "unanswered");
 }
 
+async function testSectionGatedDelivery() {
+  const db = new FixtureDb();
+  db.form = makeSectionedForm();
+  const launch = await launchPssaFormSession(db, { auth: admin, userId: student.id, formId: "form_1" });
+  assert.equal(launch.currentSectionIndex, 1);
+  const start = await getPssaSessionState(db, { auth: student, sessionId: "session_1" });
+  assert.equal(start.currentSectionIndex, 1);
+  assert.deepEqual(start.sections.map((section: any) => [section.sectionIndex, section.status, section.locked, section.total]), [
+    [1, "in_progress", false, 1],
+    [2, "not_started", true, 1],
+    [3, "not_started", true, 2],
+  ]);
+
+  await assert.rejects(() => getPssaSessionItem(db, { auth: student, sessionId: "session_1", position: 2 }), /section_not_current/);
+  await assert.rejects(() => submitPssaSession(db, { auth: student, sessionId: "session_1", allowIncomplete: true }), /sections_not_completed/);
+
+  const s1Item = await getPssaSessionItem(db, { auth: student, sessionId: "session_1", position: 1 });
+  assert.equal(s1Item.sectionIndex, 1);
+  assertLeakFree(s1Item);
+  await answerPssaSessionItem(db, { auth: student, sessionId: "session_1", position: 1, responsePayload: { selectedIndex: 0 } });
+  const review = await reviewPssaSessionSection(db, { auth: student, sessionId: "session_1", sectionIndex: 1 });
+  assert.equal(review.sections[0].status, "review");
+  const resumed = await resumePssaSessionSection(db, { auth: student, sessionId: "session_1", sectionIndex: 1 });
+  assert.equal(resumed.sections[0].status, "in_progress");
+  const afterS1 = await endPssaSessionSection(db, { auth: student, sessionId: "session_1", sectionIndex: 1 });
+  assert.deepEqual(afterS1.sections.map((section: any) => [section.sectionIndex, section.status, section.locked]), [
+    [1, "completed_locked", true],
+    [2, "in_progress", false],
+    [3, "not_started", true],
+  ]);
+  await assert.rejects(() => answerPssaSessionItem(db, { auth: student, sessionId: "session_1", position: 1, responsePayload: { selectedIndex: 0 } }), /section_locked/);
+  await assert.rejects(() => getPssaSessionItem(db, { auth: student, sessionId: "session_1", position: 3 }), /section_not_current/);
+
+  const s2Item = await getPssaSessionItem(db, { auth: student, sessionId: "session_1", position: 2 });
+  assert.equal(s2Item.sectionIndex, 2);
+  await answerPssaSessionItem(db, { auth: student, sessionId: "session_1", position: 2, responsePayload: { assignments: { t1: "target_1" } } });
+  const resumedMidS2 = await getPssaSessionState(db, { auth: student, sessionId: "session_1" });
+  assert.equal(resumedMidS2.currentSectionIndex, 2);
+  assert.equal(resumedMidS2.sections[1].answered, 1);
+  await endPssaSessionSection(db, { auth: student, sessionId: "session_1", sectionIndex: 2 });
+
+  const owlItem = await getPssaSessionItem(db, { auth: student, sessionId: "session_1", position: 3 });
+  assert.equal(owlItem.sectionIndex, 3);
+  assert.equal(owlItem.passages.length, 2, "owl paired item must receive both member passages");
+  assert.equal(owlItem.passages.every((row: any) => row.sectionIndex === 3), true);
+  assertLeakFree(owlItem);
+  await answerPssaSessionItem(db, { auth: student, sessionId: "session_1", position: 3, responsePayload: { partAIndex: 0, partBIndices: [0] } });
+  const rabbitItem = await getPssaSessionItem(db, { auth: student, sessionId: "session_1", position: 4 });
+  assert.equal(rabbitItem.passages.length, 1, "rabbit item must receive only the rabbit passage");
+  await answerPssaSessionItem(db, { auth: student, sessionId: "session_1", position: 4, responsePayload: { shortResponse: "Because the text says so." } });
+  await assert.rejects(() => getPssaSessionItem(db, { auth: student, sessionId: "session_1", position: 99 }), /position_not_found/);
+  await endPssaSessionSection(db, { auth: student, sessionId: "session_1", sectionIndex: 3 });
+
+  const submitted = await submitPssaSession(db, { auth: student, sessionId: "session_1" });
+  assert.equal(submitted.status, "submitted");
+  assert.equal(submitted.totalPoints, 7);
+  assert.equal(submitted.pendingHumanPoints, 3);
+  assert.equal(submitted.sections.every((section: any) => section.status === "completed_locked"), true);
+
+  const malformed = new FixtureDb();
+  malformed.form = makeSectionedForm();
+  malformed.form.items[0].sectionIndex = null;
+  await assert.rejects(() => launchPssaFormSession(malformed, { auth: admin, userId: student.id, formId: "form_1" }), /form_not_deliverable/);
+
+  const split = new FixtureDb();
+  split.form = makeSectionedForm();
+  split.form.items[3].sectionIndex = 2;
+  (split.form.items[3].item as any).passageGroupId = (split.form.items[2].item as any).passageGroupId;
+  (split.form.items[3].item as any).passageGroup = (split.form.items[2].item as any).passageGroup;
+  await assert.rejects(
+    () => launchPssaFormSession(split, { auth: admin, userId: student.id, formId: "form_1" }),
+    (error: any) => error.code === "form_not_deliverable" && String(error.detail).includes("passage_group_split"),
+  );
+}
+
 function testPostAndCacheGuards() {
   const nonJson = requirePssaPostGuards(new Request("https://example.test/api/pssa/session/answer", { method: "POST", headers: { origin: "https://example.test", "content-type": "text/plain" } }));
   assert.equal(nonJson.ok, false);
@@ -306,6 +437,7 @@ function testPostAndCacheGuards() {
   const response = pssaRouteJson({ ok: true });
   assert.equal(response.headers.get("Cache-Control"), "no-store, private");
   assert.throws(() => validateAnswerBody({ sessionId: "s", position: 1, responsePayload: {}, itemId: "leak" }), /unexpected_field/);
+  assert.throws(() => validateSectionBody({ sessionId: "s", sectionIndex: 1, action: "skip" }), /invalid_section_action/);
 }
 
 function testScopeProof() {
@@ -320,8 +452,13 @@ function testScopeProof() {
   const changed = new Set(require("node:child_process").execSync("git diff --name-only", { encoding: "utf8" }).trim().split(/\n/).filter(Boolean));
   for (const file of forbidden) assert.equal(changed.has(file), false, `${file} must be untouched`);
   const schema = fs.readFileSync(path.join(process.cwd(), "prisma/schema.prisma"), "utf8");
-  const baseSchema = require("node:child_process").execSync("git show HEAD:prisma/schema.prisma", { encoding: "utf8" });
-  assert.equal(modelBlock(schema, "PssaFormSession"), modelBlock(baseSchema, "PssaFormSession"), "PssaFormSession model must be unchanged");
+  const baseSchema = require("node:child_process").execSync("git show origin/main:prisma/schema.prisma", { encoding: "utf8" });
+  const sessionDelta = modelBlock(schema, "PssaFormSession")
+    .split("\n")
+    .filter((line) => !modelBlock(baseSchema, "PssaFormSession").split("\n").includes(line))
+    .map((line) => line.trim())
+    .filter(Boolean);
+  assert.deepEqual(sessionDelta.sort(), ["currentSectionIndex    Int                   @default(1)", "sectionStatusesJson    Json?"].sort(), "PssaFormSession may only gain additive section-progress fields");
   assert.equal(modelBlock(schema, "PssaFormResponse"), modelBlock(baseSchema, "PssaFormResponse"), "PssaFormResponse model must be unchanged");
   assertNullableModelFields(schema, "PssaPassage", ["staminaBand", "genre", "textFeaturesJson", "domainVocabularyLoad", "factCheckNotesJson"]);
   assertNullableModelFields(schema, "PssaItem", ["targetWordOrPhrase", "testsApplicationNotDefinition"]);
@@ -338,6 +475,7 @@ function testScopeProof() {
     "app/api/pssa/session/item/route.ts",
     "app/api/pssa/session/answer/route.ts",
     "app/api/pssa/session/submit/route.ts",
+    "app/api/pssa/session/section/route.ts",
   ].map((file) => fs.readFileSync(path.join(process.cwd(), file), "utf8")).join("\n");
   assert.equal(newSources.includes("serverScoring"), false);
   for (const route of ["launch", "answer", "submit"]) {
@@ -375,6 +513,7 @@ async function main() {
   await testAuthzMatrix();
   await testValidityMatrix();
   await testAnswerLifecycleAndSubmitMath();
+  await testSectionGatedDelivery();
   testPostAndCacheGuards();
   testScopeProof();
   console.log("PSSA PR D-impl-2 delivery route tests passed.");

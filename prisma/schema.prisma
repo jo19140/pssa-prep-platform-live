@@ -897,6 +897,8 @@ model PssaFormSession {
   formContentHashAtStart String
   status                 PssaFormSessionStatus @default(in_progress)
   currentPosition        Int                   @default(1)
+  currentSectionIndex    Int                   @default(1)
+  sectionStatusesJson    Json?
   startedAt              DateTime              @default(now())
   submittedAt            DateTime?
   totalPoints            Int?
