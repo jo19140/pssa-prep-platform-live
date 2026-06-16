@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { execFileSync } from "node:child_process";
 import fs from "node:fs";
 import {
   buildMcqAbsoluteLanguageDistractorReport,
@@ -40,6 +41,7 @@ import {
   type PairedPassageGroupInput,
 } from "./content/lib/pssa-paired-passage-gates";
 import { projectPssaStudentItem } from "../lib/content/pssaStudentDto";
+import { scorePssaItem } from "../lib/content/pssaScoring";
 import {
   buildPssaDramaLineMap,
   buildPssaStaminaSectionMap,
@@ -790,6 +792,92 @@ assert.equal(
 const boatFixture = JSON.parse(fs.readFileSync("exemplars/pssa_grade3_stamina_pilot/boat_literary_released_length.json", "utf8"));
 const boatPassage = boatFixture.passages[0];
 const boatItems = boatFixture.items;
+const phase15NewTeItemIds = ["pssa_stamina_item_g3_syrup_dd_01", "pssa_stamina_item_g3_boat_mg_01"];
+const mainSyrupFixture = JSON.parse(execFileSync("git", ["show", "main:exemplars/pssa_grade3_stamina_pilot/syrup_released_length.json"], { encoding: "utf8" }));
+const mainBoatFixture = JSON.parse(execFileSync("git", ["show", "main:exemplars/pssa_grade3_stamina_pilot/boat_literary_released_length.json"], { encoding: "utf8" }));
+assert.deepEqual(staminaFixture.passages, mainSyrupFixture.passages, "Phase 1.5 must not change the syrup passage text or metadata");
+assert.deepEqual(boatFixture.passages, mainBoatFixture.passages, "Phase 1.5 must not change the boat passage text or metadata");
+assert.deepEqual(
+  syrupItems.filter((item: any) => !phase15NewTeItemIds.includes(staminaItemId(item))),
+  mainSyrupFixture.items,
+  "Phase 1.5 must leave the existing syrup items deep-equal to main",
+);
+assert.deepEqual(
+  boatItems.filter((item: any) => !phase15NewTeItemIds.includes(staminaItemId(item))),
+  mainBoatFixture.items,
+  "Phase 1.5 must leave the existing boat items deep-equal to main",
+);
+assert.equal(syrupItems.length, mainSyrupFixture.items.length + 1, "Phase 1.5 must append exactly one syrup TE item");
+assert.equal(boatItems.length, mainBoatFixture.items.length + 1, "Phase 1.5 must append exactly one boat TE item");
+const syrupDragDrop = syrupItems.find((item: any) => staminaItemId(item) === "pssa_stamina_item_g3_syrup_dd_01");
+const boatMatchingGrid = boatItems.find((item: any) => staminaItemId(item) === "pssa_stamina_item_g3_boat_mg_01");
+assert(syrupDragDrop, "Phase 1.5 syrup DRAG_DROP item must exist");
+assert(boatMatchingGrid, "Phase 1.5 boat MATCHING_GRID item must exist");
+assert.deepEqual(
+  [
+    [staminaItemId(syrupDragDrop), staminaInteractionType(syrupDragDrop), syrupDragDrop.scoringJson.totalPoints],
+    [staminaItemId(boatMatchingGrid), staminaInteractionType(boatMatchingGrid), boatMatchingGrid.scoringJson.totalPoints],
+  ],
+  [
+    ["pssa_stamina_item_g3_syrup_dd_01", "DRAG_DROP", 3],
+    ["pssa_stamina_item_g3_boat_mg_01", "MATCHING_GRID", 3],
+  ],
+  "Phase 1.5 must add exactly two 3-point TE items",
+);
+assert.deepEqual(
+  syrupDragDrop.tokens.map((token: any) => token.tokenId),
+  ["syrup_dd_t2", "syrup_dd_t3", "syrup_dd_t1"],
+  "syrup DRAG_DROP token presentation order must be scrambled relative to the correct order",
+);
+assert.deepEqual(
+  syrupDragDrop.correctAssignments.map((assignment: any) => `${assignment.tokenId}:${assignment.targetId}`),
+  ["syrup_dd_t1:order_1", "syrup_dd_t2:order_2", "syrup_dd_t3:order_3"],
+  "syrup DRAG_DROP correct assignments must encode the three-step process",
+);
+assert.equal(boatMatchingGrid.columns.length, 2, "boat MATCHING_GRID must use exactly two columns");
+assert.equal(boatMatchingGrid.bothColumnId, null, "boat MATCHING_GRID must not expose a Both column");
+assert.deepEqual(
+  boatMatchingGrid.correctCells.map((cell: any) => `${cell.rowId}:${cell.columnId}`),
+  ["boat_mg_r1:june_boat_lasted", "boat_mg_r2:june_boat_lasted", "boat_mg_r3:fancy_boat_failed"],
+  "boat MATCHING_GRID must preserve the intended 2-1 cause/effect split",
+);
+for (const token of syrupDragDrop.tokens) {
+  assert.equal(syrupPassage.text.includes(token.evidenceQuote), true, `${token.tokenId} evidenceQuote must be verbatim syrup passage text`);
+  assert.equal(token.groundedInPassage, true, `${token.tokenId} must be grounded in the syrup passage`);
+}
+for (const row of boatMatchingGrid.rows) {
+  assert.equal(boatPassage.text.includes(row.evidenceQuote), true, `${row.rowId} evidenceQuote must be verbatim boat passage text`);
+  assert.equal(row.groundedInPassageId, boatPassage.id, `${row.rowId} must be grounded in the boat passage`);
+}
+assert.equal(JSON.stringify(projectPssaStudentItem(syrupDragDrop)).includes("correctAssignments"), false, "student DRAG_DROP DTO must not leak correct assignments");
+assert.equal(JSON.stringify(projectPssaStudentItem(syrupDragDrop)).includes("evidenceQuote"), false, "student DRAG_DROP DTO must not leak evidence quotes");
+assert.equal(JSON.stringify(projectPssaStudentItem(boatMatchingGrid)).includes("correctCells"), false, "student MATCHING_GRID DTO must not leak correct cells");
+assert.equal(JSON.stringify(projectPssaStudentItem(boatMatchingGrid)).includes("evidenceQuote"), false, "student MATCHING_GRID DTO must not leak evidence quotes");
+function scorePoints(item: any, response: unknown) {
+  const result = scorePssaItem(item, response);
+  assert.equal(result.status, "scored", `${staminaItemId(item)} must be machine scored`);
+  return result.pointsEarned;
+}
+assert.deepEqual(
+  [
+    scorePoints(syrupDragDrop, { assignments: { syrup_dd_t1: "order_1", syrup_dd_t2: "order_2", syrup_dd_t3: "order_3" } }),
+    scorePoints(syrupDragDrop, { assignments: { syrup_dd_t1: "order_1", syrup_dd_t2: "order_2", syrup_dd_t3: "order_1" } }),
+    scorePoints(syrupDragDrop, { assignments: { syrup_dd_t1: "order_1", syrup_dd_t2: "order_1", syrup_dd_t3: "order_1" } }),
+    scorePoints(syrupDragDrop, { assignments: { syrup_dd_t1: "order_2", syrup_dd_t2: "order_3", syrup_dd_t3: "order_1" } }),
+  ],
+  [3, 2, 1, 0],
+  "existing DRAG_DROP scoring path must score the Phase 1.5 item 3/2/1/0 without engine changes",
+);
+assert.deepEqual(
+  [
+    scorePoints(boatMatchingGrid, { rowSelections: { boat_mg_r1: "june_boat_lasted", boat_mg_r2: "june_boat_lasted", boat_mg_r3: "fancy_boat_failed" } }),
+    scorePoints(boatMatchingGrid, { rowSelections: { boat_mg_r1: "june_boat_lasted", boat_mg_r2: "june_boat_lasted", boat_mg_r3: "june_boat_lasted" } }),
+    scorePoints(boatMatchingGrid, { rowSelections: { boat_mg_r1: "june_boat_lasted", boat_mg_r2: "fancy_boat_failed", boat_mg_r3: "june_boat_lasted" } }),
+    scorePoints(boatMatchingGrid, { rowSelections: { boat_mg_r1: "fancy_boat_failed", boat_mg_r2: "fancy_boat_failed", boat_mg_r3: "june_boat_lasted" } }),
+  ],
+  [3, 2, 1, 0],
+  "existing MATCHING_GRID scoring path must score the Phase 1.5 item 3/2/1/0 without engine changes",
+);
 const boatSectionIds = buildPssaStaminaSectionMap(boatPassage).map((section) => section.sectionId);
 assert.equal(boatSectionIds.length, 19, "literary released-length passages must use paragraph-based section maps");
 assert.deepEqual([boatSectionIds[0], boatSectionIds.at(-1)], ["paragraph_01", "paragraph_19"]);
@@ -1304,11 +1392,20 @@ function buildStaminaContentQualityBatteryReport() {
   const mcqItems = allItems.filter((item) => staminaInteractionType(item) === "MCQ");
   const ebsrItems = allItems.filter((item) => staminaInteractionType(item) === "EBSR");
   const shortAnswerItems = allItems.filter((item) => staminaInteractionType(item) === "SHORT_ANSWER");
+  const technologyEnhancedItems = allItems.filter((item) => ["DRAG_DROP", "MATCHING_GRID"].includes(staminaInteractionType(item)));
 
-  assert.equal(allItems.length, 37, "stamina diagnostic battery must cover the current encoded 37-item packet");
+  assert.equal(allItems.length, 39, "stamina diagnostic battery must cover the current encoded 39-item packet");
   assert.equal(mcqItems.length, 29, "stamina packet must include 20 reading MCQs plus 9 standalone conventions MCQs");
   assert.equal(ebsrItems.length, 4, "stamina packet must include 4 EBSR items");
   assert.equal(shortAnswerItems.length, 4, "stamina packet must include 4 SHORT_ANSWER items");
+  assert.deepEqual(
+    technologyEnhancedItems.map((item) => [staminaItemId(item), staminaInteractionType(item), item.scoringJson?.totalPoints ?? item.scoring?.totalPoints]).sort(),
+    [
+      ["pssa_stamina_item_g3_boat_mg_01", "MATCHING_GRID", 3],
+      ["pssa_stamina_item_g3_syrup_dd_01", "DRAG_DROP", 3],
+    ],
+    "stamina packet must include exactly the two Phase 1.5 3-point TE items",
+  );
 
   const rows: BatteryRow[] = [];
   const overlap = evaluatePssaPassageMultipointEvidenceOverlap(readingItems, passages);
@@ -1478,7 +1575,7 @@ function buildStaminaContentQualityBatteryReport() {
     "",
     "## Packet Counts",
     "",
-    `- Items: ${allItems.length} total = ${mcqItems.length} MCQ (${mcqItems.length - staminaConventionItems.length} reading + ${staminaConventionItems.length} conventions) + ${ebsrItems.length} EBSR + ${shortAnswerItems.length} SHORT_ANSWER.`,
+    `- Items: ${allItems.length} total = ${mcqItems.length} MCQ (${mcqItems.length - staminaConventionItems.length} reading + ${staminaConventionItems.length} conventions) + ${ebsrItems.length} EBSR + ${shortAnswerItems.length} SHORT_ANSWER + ${technologyEnhancedItems.length} TE.`,
     `- Passages: ${passages.length} encoded stamina passages across ${passageGroups.length} paired group.`,
     "",
     "## #47 Visible Skip Set",

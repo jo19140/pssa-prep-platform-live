@@ -962,6 +962,190 @@
         "authoredIn": "PSSA_STAMINA_ITEM_SET_COMPLETION",
         "autoScoringClaim": false
       }
+    },
+    {
+      "id": "pssa_stamina_item_g3_boat_mg_01",
+      "itemId": "pssa_stamina_item_g3_boat_mg_01",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "MATCHING_GRID",
+      "interactionType": "MATCHING_GRID",
+      "interactionSubtype": "within_text_category",
+      "passageId": "pssa_stamina_psg_g3_boat_literary",
+      "passageTitle": "The Boat That Wouldn't Quit",
+      "secondaryPassageId": null,
+      "secondaryPassageTitle": null,
+      "comparisonBasis": null,
+      "eligibleContent": "E03.A-K.1.1.1",
+      "assessmentAnchor": "E03.A-K",
+      "reportingCategory": "A",
+      "stem": "For each detail, choose what the detail helps explain.",
+      "instructionText": "Choose one column for each row.",
+      "rows": [
+        {
+          "rowId": "boat_mg_r1",
+          "label": "Four milk jugs held the boat up over the choppy water.",
+          "correctColumnId": "june_boat_lasted",
+          "groundedInPassageId": "pssa_stamina_psg_g3_boat_literary",
+          "evidenceQuote": "four milk jugs holding it up like four small, stubborn hands",
+          "rationale": "The milk jugs helped June's boat stay on top of the water.",
+          "plausibleWrongRationales": {
+            "fancy_boat_failed": "This detail explains the sturdy boat, not the fancy boat that sank."
+          }
+        },
+        {
+          "rowId": "boat_mg_r2",
+          "label": "June tested the boat eleven times to be sure it floated.",
+          "correctColumnId": "june_boat_lasted",
+          "groundedInPassageId": "pssa_stamina_psg_g3_boat_literary",
+          "evidenceQuote": "Eleven times I tested that boat, and eleven times it floated.",
+          "rationale": "The repeated tests show why June knew her boat would keep floating.",
+          "plausibleWrongRationales": {
+            "fancy_boat_failed": "This detail is about June's preparation, not the tall ship."
+          }
+        },
+        {
+          "rowId": "boat_mg_r3",
+          "label": "A sudden gust tipped the tall ship sideways, and its sail dragged it under.",
+          "correctColumnId": "fancy_boat_failed",
+          "groundedInPassageId": "pssa_stamina_psg_g3_boat_literary",
+          "evidenceQuote": "a sudden gust tipped it sideways, and its proud sail dragged it straight under",
+          "rationale": "The passage says the tall ship sank because wind tipped it and the sail pulled it under.",
+          "plausibleWrongRationales": {
+            "june_boat_lasted": "This detail explains the failure of a different boat, not June's boat."
+          }
+        }
+      ],
+      "columns": [
+        {
+          "columnId": "june_boat_lasted",
+          "label": "Why June's boat lasted"
+        },
+        {
+          "columnId": "fancy_boat_failed",
+          "label": "Why a fancy boat failed"
+        }
+      ],
+      "selectionRule": "one_per_row",
+      "bothColumnId": null,
+      "correctCells": [
+        {
+          "rowId": "boat_mg_r1",
+          "columnId": "june_boat_lasted"
+        },
+        {
+          "rowId": "boat_mg_r2",
+          "columnId": "june_boat_lasted"
+        },
+        {
+          "rowId": "boat_mg_r3",
+          "columnId": "fancy_boat_failed"
+        }
+      ],
+      "responseSpecJson": {
+        "stem": "For each detail, choose what the detail helps explain.",
+        "instructionText": "Choose one column for each row.",
+        "rows": [
+          {
+            "rowId": "boat_mg_r1",
+            "label": "Four milk jugs held the boat up over the choppy water."
+          },
+          {
+            "rowId": "boat_mg_r2",
+            "label": "June tested the boat eleven times to be sure it floated."
+          },
+          {
+            "rowId": "boat_mg_r3",
+            "label": "A sudden gust tipped the tall ship sideways, and its sail dragged it under."
+          }
+        ],
+        "columns": [
+          {
+            "columnId": "june_boat_lasted",
+            "label": "Why June's boat lasted"
+          },
+          {
+            "columnId": "fancy_boat_failed",
+            "label": "Why a fancy boat failed"
+          }
+        ],
+        "selectionRule": "one_per_row"
+      },
+      "correctResponseJson": {
+        "correctCells": [
+          {
+            "rowId": "boat_mg_r1",
+            "columnId": "june_boat_lasted"
+          },
+          {
+            "rowId": "boat_mg_r2",
+            "columnId": "june_boat_lasted"
+          },
+          {
+            "rowId": "boat_mg_r3",
+            "columnId": "fancy_boat_failed"
+          }
+        ]
+      },
+      "scoring": {
+        "totalPoints": 3,
+        "partialCreditRules": [
+          {
+            "points": 3,
+            "rule": "All three rows matched to the supported column."
+          },
+          {
+            "points": 2,
+            "rule": "Two rows matched to supported columns."
+          },
+          {
+            "points": 1,
+            "rule": "One row matched to a supported column."
+          },
+          {
+            "points": 0,
+            "rule": "No supported row matches, unanswered rows, or extra/multiple selections in a row."
+          }
+        ],
+        "scoringNotes": "Full credit requires every required row and no incorrect or unanswered row."
+      },
+      "scoringJson": {
+        "totalPoints": 3,
+        "partialCreditRules": [
+          {
+            "points": 3,
+            "rule": "All three rows matched to the supported column."
+          },
+          {
+            "points": 2,
+            "rule": "Two rows matched to supported columns."
+          },
+          {
+            "points": 1,
+            "rule": "One row matched to a supported column."
+          },
+          {
+            "points": 0,
+            "rule": "No supported row matches, unanswered rows, or extra/multiple selections in a row."
+          }
+        ],
+        "scoringNotes": "Full credit requires every required row and no incorrect or unanswered row."
+      },
+      "pointValue": 3,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "approvalEligible": false,
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "provenanceJson": {
+        "fixtureOnly": true,
+        "sourcePassageId": "pssa_stamina_psg_g3_boat_literary",
+        "authoredIn": "PSSA_DIAGNOSTIC_PHASE_1_5_TE_ITEMS",
+        "autoScoringClaim": true
+      }
     }
   ]
 }
