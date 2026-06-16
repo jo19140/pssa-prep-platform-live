@@ -2,7 +2,7 @@ import { phase3EntryLessonContentFor } from "@/lib/content/phase3EntryLessonCont
 import { withCommonPartMetadata, type GeneratedLessonPart, type LessonGeneratorContext } from "./types";
 
 export function generatePart8Comprehension(ctx: LessonGeneratorContext): GeneratedLessonPart {
-  const content = phase3EntryLessonContentFor(ctx.dailyTarget.code, ctx.presentationProfile);
+  const content = phase3EntryLessonContentFor(ctx.dailyTarget.code);
   return withCommonPartMetadata(ctx, {
     partNumber: 8,
     partLabel: "Comprehension and language extension",

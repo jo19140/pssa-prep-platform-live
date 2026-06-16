@@ -7,7 +7,6 @@ import { DECISION_TYPES } from "@/lib/decisions/decisionTypes";
 import { recordModelDecision, type ModelDecisionContext } from "@/lib/decisions/withModelDecisionLogging";
 import { auditPassage, patternCodesFromDailyTarget } from "./passageAudit";
 import { auditGeneratedLessonDraft, type GeneratedLessonDraft } from "./lessonAudit";
-import type { PresentationProfile } from "./presentationProfile";
 import { generatePart1Warmup } from "./lessonParts/part1Warmup";
 import { generatePart2Concept } from "./lessonParts/part2Concept";
 import { generatePart3Decoding } from "./lessonParts/part3Decoding";
@@ -66,11 +65,7 @@ export async function generateLessonsForTarget(options: LessonGenerationOptions)
   return { insertedLessonIds, failed };
 }
 
-export async function buildLessonGeneratorContext(
-  phasePositionId: string,
-  dailyTargetId: string,
-  presentationProfile?: PresentationProfile,
-): Promise<LessonGeneratorContext> {
+export async function buildLessonGeneratorContext(phasePositionId: string, dailyTargetId: string): Promise<LessonGeneratorContext> {
   const [phasePosition, dailyTarget] = await Promise.all([
     db.phasePosition.findUnique({ where: { id: phasePositionId } }),
     db.dailyTarget.findUnique({ where: { id: dailyTargetId } }),
@@ -78,7 +73,7 @@ export async function buildLessonGeneratorContext(
   if (!phasePosition) throw new Error(`PhasePosition not found: ${phasePositionId}`);
   if (!dailyTarget) throw new Error(`DailyTarget not found: ${dailyTargetId}`);
   if (dailyTarget.phasePositionId !== phasePosition.id) throw new Error("DailyTarget does not belong to phase position.");
-  const content = phase3EntryLessonContentFor(dailyTarget.code, presentationProfile);
+  const content = phase3EntryLessonContentFor(dailyTarget.code);
   const dbSelectedPassage = await selectApprovedPassageForLesson(phasePosition.id, dailyTarget.code);
   if (!dbSelectedPassage) {
     throw new Error(`No approved passage found for ${phasePosition.label} / ${dailyTarget.code}. Generate and approve a passage before lesson generation.`);
@@ -103,7 +98,6 @@ export async function buildLessonGeneratorContext(
   });
   return {
     phasePosition,
-    presentationProfile,
     dailyTarget,
     targetPattern: dailyTarget.code,
     targetPatterns,

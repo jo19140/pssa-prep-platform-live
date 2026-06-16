@@ -3,7 +3,7 @@ import { wordMatchesPattern } from "../passageClassifier";
 import { withCommonPartMetadata, type GeneratedLessonPart, type LessonGeneratorContext } from "./types";
 
 export function generatePart2Concept(ctx: LessonGeneratorContext): GeneratedLessonPart {
-  const content = phase3EntryLessonContentFor(ctx.dailyTarget.code, ctx.presentationProfile);
+  const content = phase3EntryLessonContentFor(ctx.dailyTarget.code);
   const demoMode = content.demoMode ?? "minimal_pairs";
   const demonstrationPairs = content.demonstrationPairs ?? [];
   const demonstrationExamples = content.demonstrationExamples ?? [];

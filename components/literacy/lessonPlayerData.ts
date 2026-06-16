@@ -1,9 +1,8 @@
 import type { DailyTargetSeed } from "@/lib/content/phase3EntrySeed";
 import { CONTENT_V3_DAILY_TARGETS, PHASE_3_ENTRY } from "@/lib/content/phase3EntrySeed";
 import { phase3EntryLessonContentFor } from "@/lib/content/phase3EntryLessonContent";
-import { auditPassage, type PassageAuditResult } from "@/lib/literacy/passageAudit";
+import { auditPassage } from "@/lib/literacy/passageAudit";
 import { canonicalPseudowordsForTargetPatterns, generateLessonDraft } from "@/lib/literacy/lessonGenerator";
-import type { GeneratedLessonDraft } from "@/lib/literacy/lessonAudit";
 import { morphologyConfigFromTargetPatternsJson } from "@/lib/literacy/morphologyAnalyzer";
 import type { PresentationProfile } from "@/lib/literacy/presentationProfile";
 import type { GeneratedLessonPart, LessonGeneratorContext } from "@/lib/literacy/lessonParts/types";
@@ -33,59 +32,32 @@ export type DisabledLessonPlayerData = {
 
 export type LessonPlayerData = EnabledLessonPlayerData | DisabledLessonPlayerData;
 
-type LessonPlayerBuildOptions = { trainingCaptureEnabled?: boolean; studentUserId?: string; presentationProfile?: PresentationProfile };
-
-export type LessonPlayerDraftBuild = {
-  playerData: LessonPlayerData;
-  draft: GeneratedLessonDraft | null;
-  selectedPassageAudit: PassageAuditResult | null;
-};
-
 export async function buildLessonPlayerData(
   targetCode = "a_e",
-  options: LessonPlayerBuildOptions = {},
+  options: { trainingCaptureEnabled?: boolean; studentUserId?: string; presentationProfile?: PresentationProfile } = {},
 ): Promise<LessonPlayerData> {
-  return (await buildLessonPlayerDraftData(targetCode, options)).playerData;
-}
-
-export async function buildLessonPlayerDraftData(
-  targetCode = "a_e",
-  options: LessonPlayerBuildOptions = {},
-): Promise<LessonPlayerDraftBuild> {
   const presentationProfile = options.presentationProfile ?? "BAND_K_3";
   if (targetCode !== "a_e") {
     return {
-      draft: null,
-      selectedPassageAudit: null,
-      playerData: {
-        enabled: false,
-        targetCode,
-        presentationProfile,
-        disabledReason: "Only the approved a_e lesson has kid-facing rule copy in this slice.",
-      },
+      enabled: false,
+      targetCode,
+      presentationProfile,
+      disabledReason: "Only the approved a_e lesson has kid-facing rule copy in this slice.",
     };
   }
 
   const seed = CONTENT_V3_DAILY_TARGETS.find((target) => target.code === targetCode);
   if (!seed) {
-    return {
-      draft: null,
-      selectedPassageAudit: null,
-      playerData: { enabled: false, targetCode, presentationProfile, disabledReason: "Lesson seed was not found." },
-    };
+    return { enabled: false, targetCode, presentationProfile, disabledReason: "Lesson seed was not found." };
   }
 
-  const content = phase3EntryLessonContentFor(targetCode, presentationProfile);
+  const content = phase3EntryLessonContentFor(targetCode);
   if (!content.kidRuleStatement || !content.reteachPrompt) {
     return {
-      draft: null,
-      selectedPassageAudit: null,
-      playerData: {
-        enabled: false,
-        targetCode,
-        presentationProfile,
-        disabledReason: "Kid-facing rule copy is required before this lesson can be shown.",
-      },
+      enabled: false,
+      targetCode,
+      presentationProfile,
+      disabledReason: "Kid-facing rule copy is required before this lesson can be shown.",
     };
   }
 
@@ -108,7 +80,6 @@ export async function buildLessonPlayerDraftData(
 
   const ctx: LessonGeneratorContext = {
     phasePosition,
-    presentationProfile,
     dailyTarget,
     targetPattern: seed.code,
     targetPatterns,
@@ -143,26 +114,22 @@ export async function buildLessonPlayerDraftData(
   });
 
   return {
-    draft,
-    selectedPassageAudit,
-    playerData: {
-      enabled: true,
-      targetCode,
-      trainingCaptureEnabled: options.trainingCaptureEnabled === true,
-      presentationProfile,
-      studentUserId: options.studentUserId,
-      title: `${content.mockPassageTitle} Lesson`,
-      dailyTargetLabel: seed.kidVisibleLabel,
-      parts: draft.parts.map((part) => ({
-        partNumber: part.partNumber,
-        partLabel: part.partLabel,
-        partType: part.partType,
-        kidVisibleCopy: part.kidVisibleCopy,
-        contentJson: part.contentJson,
-        studentDisplayMode: part.studentDisplayMode,
-        responseMode: part.responseMode,
-      })),
-    },
+    enabled: true,
+    targetCode,
+    trainingCaptureEnabled: options.trainingCaptureEnabled === true,
+    presentationProfile,
+    studentUserId: options.studentUserId,
+    title: `${content.mockPassageTitle} Lesson`,
+    dailyTargetLabel: seed.kidVisibleLabel,
+    parts: draft.parts.map((part) => ({
+      partNumber: part.partNumber,
+      partLabel: part.partLabel,
+      partType: part.partType,
+      kidVisibleCopy: part.kidVisibleCopy,
+      contentJson: part.contentJson,
+      studentDisplayMode: part.studentDisplayMode,
+      responseMode: part.responseMode,
+    })),
   };
 }
 
