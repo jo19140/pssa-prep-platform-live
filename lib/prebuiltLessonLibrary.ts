@@ -16,10 +16,12 @@ type PracticeQuestion = {
 type LessonSeed = {
   gradeLevel: number;
   standardCode: string;
+  standardCodes?: string[];
   standardLabel: string;
   skill: string;
   title: string;
   domain: string;
+  pssaBridgeTags?: string[];
   lessonExplanation: string;
   workedExample: string;
   guidedPractice: PracticeQuestion[];
@@ -488,6 +490,8 @@ function gradeThreeScopeSequenceLessons(): LessonSeed[] {
       skill: "Short and Long Vowel Patterns",
       domain: "Reading Foundations",
       standardDomain: "vocabulary",
+      standardCodes: ["CC.1.1.3.D"],
+      pssaBridgeTags: ["vocabulary", "phonics", "vowel_patterns", "foundational"],
       explanation: "Strong Grade 3 readers use vowel patterns to read unfamiliar words. Look for spelling clues like silent e, vowel teams, and closed syllables before choosing how a word should sound.",
       workedExample: "In the word made, the silent e helps the a say its long sound. In the word match, the vowel sound is short because the vowel is closed in by consonants.",
       task: "Which word has a long vowel sound?",
@@ -500,6 +504,8 @@ function gradeThreeScopeSequenceLessons(): LessonSeed[] {
       skill: "Multisyllable Word Parts",
       domain: "Reading Foundations",
       standardDomain: "vocabulary",
+      standardCodes: ["CC.1.1.3.D"],
+      pssaBridgeTags: ["vocabulary", "word_analysis", "multisyllable_words", "foundational"],
       explanation: "When a word has more than one syllable, break it into smaller parts. Read each part, then blend the parts back together.",
       workedExample: "The word helpful can be read as help + ful. The ending -ful means full of, so helpful means full of help or useful.",
       task: "Which division helps read the word carefully?",
@@ -512,6 +518,8 @@ function gradeThreeScopeSequenceLessons(): LessonSeed[] {
       skill: "Story Elements",
       domain: "Literary Text",
       standardDomain: "literature",
+      standardCodes: ["CC.1.3.3.C", "CC.1.3.3.A"],
+      pssaBridgeTags: ["key_ideas_evidence", "story_elements", "characters", "plot", "central_message"],
       explanation: "Story elements include characters, setting, problem, important events, and solution. Track these parts to understand how a story works.",
       workedExample: "If Maya forgets her lunch, asks for help, and solves the problem by sharing with a friend, the problem is forgetting lunch and the solution is sharing.",
       task: "Which detail best names the problem in a story?",
@@ -524,6 +532,8 @@ function gradeThreeScopeSequenceLessons(): LessonSeed[] {
       skill: "Character Traits and Actions",
       domain: "Literary Text",
       standardDomain: "literature",
+      standardCodes: ["CC.1.3.3.C"],
+      pssaBridgeTags: ["key_ideas_evidence", "character_traits", "character_actions", "sequence"],
       explanation: "A character trait describes what a character is like on the inside. Use actions, words, thoughts, and choices as evidence.",
       workedExample: "If a character keeps practicing after making mistakes, the character may be determined. The repeated practice is the evidence.",
       task: "Which evidence best supports the trait generous?",
@@ -536,6 +546,8 @@ function gradeThreeScopeSequenceLessons(): LessonSeed[] {
       skill: "Sequence of Events",
       domain: "Literary Text",
       standardDomain: "literature",
+      standardCodes: ["CC.1.3.3.C"],
+      pssaBridgeTags: ["key_ideas_evidence", "sequence", "events", "story_events"],
       explanation: "Sequence means the order in which events happen. Look for time words and cause-and-effect clues to follow the story.",
       workedExample: "First the class plants seeds, next they water them, and later sprouts appear. The order helps readers understand what caused the change.",
       task: "Which word often signals sequence?",
@@ -548,6 +560,8 @@ function gradeThreeScopeSequenceLessons(): LessonSeed[] {
       skill: "Text Features",
       domain: "Informational Text",
       standardDomain: "informational",
+      standardCodes: ["CC.1.2.3.E", "CC.1.2.3.G"],
+      pssaBridgeTags: ["craft_structure", "text_features", "graphics", "search_tools"],
       explanation: "Text features help readers find and understand information. Headings, captions, maps, diagrams, labels, and bold words all give clues.",
       workedExample: "A diagram of a plant with labels can show the parts of the plant faster than a paragraph alone.",
       task: "Which text feature would best help a reader find the topic of each section?",
@@ -560,6 +574,8 @@ function gradeThreeScopeSequenceLessons(): LessonSeed[] {
       skill: "Author's Purpose",
       domain: "Informational Text",
       standardDomain: "informational",
+      standardCodes: ["CC.1.2.3.D", "CC.1.2.3.H"],
+      pssaBridgeTags: ["craft_structure", "authors_purpose", "point_of_view", "authors_reasons"],
       explanation: "Author's purpose is why the author wrote the text. Common purposes are to inform, explain, persuade, or entertain.",
       workedExample: "A text that gives facts about how bees help flowers is written mostly to inform or explain.",
       task: "A passage gives steps for making a bird feeder. What is the author's main purpose?",
@@ -572,6 +588,8 @@ function gradeThreeScopeSequenceLessons(): LessonSeed[] {
       skill: "Compare and Contrast",
       domain: "Informational Text",
       standardDomain: "informational",
+      standardCodes: ["CC.1.2.3.I"],
+      pssaBridgeTags: ["craft_structure", "compare_contrast", "paired_text"],
       explanation: "Compare means tell how things are alike. Contrast means tell how things are different. Signal words like both, same, however, and unlike can help.",
       workedExample: "Frogs and toads both hatch from eggs, but frogs usually have smoother skin. That sentence compares and contrasts.",
       task: "Which phrase signals a contrast?",
@@ -584,6 +602,8 @@ function gradeThreeScopeSequenceLessons(): LessonSeed[] {
       skill: "Cause and Effect",
       domain: "Informational Text",
       standardDomain: "informational",
+      standardCodes: ["CC.1.2.3.C"],
+      pssaBridgeTags: ["key_ideas_evidence", "cause_effect", "connections", "sequence"],
       explanation: "A cause tells why something happened. An effect tells what happened. Ask, What happened? and Why did it happen?",
       workedExample: "Because the rain filled the barrel, the class had water for the garden. The rain is the cause, and having water is the effect.",
       task: "Which word often signals a cause?",
@@ -596,6 +616,8 @@ function gradeThreeScopeSequenceLessons(): LessonSeed[] {
       skill: "Poetry Lines and Stanzas",
       domain: "Literary Text",
       standardDomain: "literature",
+      standardCodes: ["CC.1.3.3.E"],
+      pssaBridgeTags: ["craft_structure", "poetry_structure", "stanzas", "text_parts"],
       explanation: "Poems are often written in lines and stanzas. A stanza is a group of lines, like a paragraph in a poem.",
       workedExample: "If a poem has four lines, a space, and four more lines, it has two stanzas.",
       task: "What is a stanza?",
@@ -608,6 +630,8 @@ function gradeThreeScopeSequenceLessons(): LessonSeed[] {
       skill: "Context Clues",
       domain: "Vocabulary",
       standardDomain: "vocabulary",
+      standardCodes: ["CC.1.2.3.F", "CC.1.3.3.F"],
+      pssaBridgeTags: ["vocabulary", "context_clues", "word_meaning", "literal_nonliteral"],
       explanation: "Context clues are words and sentences around an unfamiliar word that help you figure out its meaning.",
       workedExample: "The sentence 'The trail was narrow, so only one hiker could walk through at a time' shows that narrow means not wide.",
       task: "In 'The puppy was timid and hid behind the chair,' what does timid most likely mean?",
@@ -620,6 +644,8 @@ function gradeThreeScopeSequenceLessons(): LessonSeed[] {
       skill: "Prefixes and Suffixes",
       domain: "Vocabulary",
       standardDomain: "vocabulary",
+      standardCodes: ["CC.1.1.3.D", "CC.1.2.3.F"],
+      pssaBridgeTags: ["vocabulary", "prefixes_suffixes", "word_parts", "morphology"],
       explanation: "Prefixes come at the beginning of words. Suffixes come at the end. These word parts can change the meaning of a base word.",
       workedExample: "The prefix re- means again. Reread means read again.",
       task: "What does unhappy mean?",
@@ -632,6 +658,8 @@ function gradeThreeScopeSequenceLessons(): LessonSeed[] {
       skill: "Synonyms and Antonyms",
       domain: "Vocabulary",
       standardDomain: "vocabulary",
+      standardCodes: ["CC.1.2.3.F", "CC.1.3.3.F"],
+      pssaBridgeTags: ["vocabulary", "word_relationships", "synonyms_antonyms", "shades_of_meaning"],
       explanation: "Synonyms have similar meanings. Antonyms have opposite meanings. Use the sentence to choose the word relationship that fits.",
       workedExample: "Tiny and small are synonyms. Tiny and huge are antonyms.",
       task: "Which word is an antonym for ancient?",
@@ -644,6 +672,8 @@ function gradeThreeScopeSequenceLessons(): LessonSeed[] {
       skill: "Complete Sentences",
       domain: "Conventions of Standard English",
       standardDomain: "conventions",
+      standardCodes: ["CC.1.4.3.F"],
+      pssaBridgeTags: ["conventions", "sentence_formation", "complete_sentences"],
       explanation: "A complete sentence has a subject and a predicate and expresses a complete thought.",
       workedExample: "The class built a model is complete. Built a model is incomplete because it does not tell who did the action.",
       task: "Which choice is a complete sentence?",
@@ -656,6 +686,8 @@ function gradeThreeScopeSequenceLessons(): LessonSeed[] {
       skill: "Commas in a Series",
       domain: "Conventions of Standard English",
       standardDomain: "conventions",
+      standardCodes: ["CC.1.4.3.F"],
+      pssaBridgeTags: ["conventions", "commas", "punctuation", "series_commas"],
       explanation: "Use commas to separate three or more words or phrases in a series.",
       workedExample: "The class collected leaves, seeds, and twigs. The commas separate the items in the list.",
       task: "Which sentence uses commas correctly?",
@@ -668,6 +700,8 @@ function gradeThreeScopeSequenceLessons(): LessonSeed[] {
       skill: "Capitalization and Titles",
       domain: "Conventions of Standard English",
       standardDomain: "conventions",
+      standardCodes: ["CC.1.4.3.F"],
+      pssaBridgeTags: ["conventions", "capitalization", "titles"],
       explanation: "Capitalize names, places, the first word in a sentence, and important words in titles.",
       workedExample: "The title The Garden Journal capitalizes the important words in the title.",
       task: "Which title is capitalized correctly?",
@@ -680,6 +714,8 @@ function gradeThreeScopeSequenceLessons(): LessonSeed[] {
       skill: "Paragraph Organization",
       domain: "Writing Strategies",
       standardDomain: "tda",
+      standardCodes: ["CC.1.4.3.J"],
+      pssaBridgeTags: ["writing_tda", "paragraph_organization", "writing_structure", "writing"],
       explanation: "A clear paragraph has one main idea, details that stay on topic, and an ending sentence that closes the thought.",
       workedExample: "A paragraph about saving water should include details about water use, not a random detail about lunch.",
       task: "Which sentence best stays on topic in a paragraph about recycling?",
@@ -692,6 +728,8 @@ function gradeThreeScopeSequenceLessons(): LessonSeed[] {
       skill: "Opinion Reasons",
       domain: "Writing Strategies",
       standardDomain: "tda",
+      standardCodes: ["CC.1.4.3.G", "CC.1.4.3.I"],
+      pssaBridgeTags: ["writing_tda", "opinion_writing", "opinion_reasons", "writing"],
       explanation: "Opinion writing states what the writer thinks and gives reasons that support the opinion.",
       workedExample: "Opinion: The class should visit the nature center. Reason: Students can observe animals and plants they are studying.",
       task: "Which sentence gives a reason for an opinion?",
@@ -2126,6 +2164,8 @@ function scopeLesson({
   choices,
   correctAnswer,
   explanationDetail,
+  standardCodes,
+  pssaBridgeTags,
 }: {
   gradeLevel: number;
   skill: string;
@@ -2137,6 +2177,8 @@ function scopeLesson({
   choices: string[];
   correctAnswer: string;
   explanationDetail: string;
+  standardCodes?: string[];
+  pssaBridgeTags?: string[];
 }): LessonSeed {
   const standard = standardForSkill(gradeLevel, skill, standardDomain, domain);
   const standardCode = standard.code;
@@ -2155,10 +2197,12 @@ function scopeLesson({
   return {
     gradeLevel,
     standardCode,
+    standardCodes,
     standardLabel: standard.label,
     skill,
     title: `Grade ${gradeLevel} ${skill} Lesson`,
     domain,
+    pssaBridgeTags,
     lessonExplanation: explanation,
     workedExample,
     guidedPractice: [practice("guided"), practice("guided check")],
@@ -2310,7 +2354,9 @@ function sourcePayloadForSeed(seed: LessonSeed) {
     domain: seed.domain,
     gradeLevel: seed.gradeLevel,
     standardCode: seed.standardCode,
+    ...(seed.standardCodes ? { standardCodes: seed.standardCodes } : {}),
     skill: seed.skill,
+    ...(seed.pssaBridgeTags ? { pssaBridgeTags: seed.pssaBridgeTags } : {}),
     visualStandard: {
       version: 1,
       style: "rich-color-instructional",
