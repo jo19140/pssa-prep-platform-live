@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sý Learning — Dashboard concept (v2)</title>
+<style>
+  :root{
+    --ink:#0f172a; --muted:#64748b; --faint:#94a3b8; --line:#e6e8ef;
+    --bg:#f5f6fb; --card:#ffffff;
+    --violet:#5b21b6; --violet-deep:#2e1065; --orange:#ea580c; --navy:#0b2545;
+    --green:#059669; --greenbg:#ecfdf5;
+    --shadow:0 1px 2px rgba(15,23,42,.04),0 8px 24px rgba(15,23,42,.06);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.5;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+  .block{padding-bottom:64px}
+  svg{display:block}
+
+  /* demo-only nav (not part of product) */
+  .mocknav{background:#0b1220;color:#cbd5e1}
+  .mocknav .wrap{display:flex;align-items:center;gap:9px;padding:8px 24px;flex-wrap:wrap}
+  .mocknav .lbl{font-weight:700;letter-spacing:1px;color:#64748b;text-transform:uppercase;font-size:10px;margin-right:4px}
+  .mocknav button{border:1px solid #334155;background:transparent;color:#cbd5e1;font-weight:600;font-size:12px;padding:6px 12px;border-radius:8px;cursor:pointer}
+  .mocknav button.on{background:#fff;color:#0b1220;border-color:#fff}
+
+  .brand{background:linear-gradient(110deg,#1e1b4b 0%,#4c1d95 42%,#7c3aed 70%,#ea580c 130%);color:#fff;padding:20px 0;box-shadow:var(--shadow)}
+  .brand .wrap{display:flex;align-items:center;justify-content:space-between}
+  .logo .mark{font-size:28px;font-weight:800;letter-spacing:-.5px}
+  .logo .mark span{color:#fbbf24}
+  .logo .tag{font-size:10px;letter-spacing:3px;font-weight:600;opacity:.8;text-transform:uppercase;margin-top:2px}
+  .logout{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:#fff;font-weight:600;font-size:13px;padding:8px 14px;border-radius:10px;cursor:pointer}
+
+  /* product switcher (hybrid: arrows + clickable label) */
+  .prodswitch{background:#fff;border-bottom:1px solid var(--line);box-shadow:0 1px 2px rgba(15,23,42,.03)}
+  .prodswitch .wrap{display:flex;align-items:center;justify-content:center;gap:18px;padding:12px 24px}
+  .arw{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#fff;font-size:21px;color:var(--ink);cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;transition:.12s}
+  .arw:hover{background:#f1f5f9;border-color:#cbd5e1}
+  .pclick{display:flex;align-items:center;gap:12px;min-width:300px;justify-content:center;border:1px solid transparent;border-radius:12px;padding:6px 14px;cursor:pointer;transition:.12s}
+  .pclick:hover{border-color:var(--line);background:#fafbff}
+  .picon{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center}
+  .picon.state{background:#fff1e6}
+  .picon.reading{background:#f3eefe}
+  .pttl{font-size:16px;font-weight:800;letter-spacing:-.2px;display:flex;align-items:center;gap:7px}
+  .caret{color:var(--faint);font-size:12px}
+  .psub{font-size:12px;color:var(--muted);font-weight:600}
+
+  .track{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:26px;box-shadow:var(--shadow);margin-bottom:22px;position:relative;overflow:hidden;margin-top:22px}
+  .track::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px}
+  .track.learn::before{background:linear-gradient(#7c3aed,#4338ca)}
+  .track.test::before{background:linear-gradient(#f59e0b,#ea580c)}
+  .track-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:20px}
+  .kicker{display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;padding:5px 11px;border-radius:999px;margin-bottom:9px}
+  .learn .kicker{background:#f3eefe;color:var(--violet)}
+  .test .kicker{background:#fff1e6;color:var(--orange)}
+  .track-head h2{font-size:21px;letter-spacing:-.3px}
+  .track-head p{color:var(--muted);font-size:14px;margin-top:3px;max-width:600px}
+
+  .pill{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;padding:4px 9px;border-radius:999px}
+  .pill.on{background:var(--greenbg);color:var(--green)}
+  .dot{width:6px;height:6px;border-radius:50%;background:currentColor;display:inline-block}
+
+  .states{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:18px;align-items:center}
+  .statechip{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 14px;font-size:13px;font-weight:600;color:var(--muted)}
+  .statechip.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+  .statechip.active .flag{background:#fbbf24;color:var(--navy)}
+  .statechip .flag{font-size:10px;font-weight:800;background:#e2e8f0;color:#64748b;border-radius:5px;padding:2px 5px}
+
+  .examcard{border:1px solid #fcd9b6;border-radius:18px;padding:20px;background:linear-gradient(180deg,#fffdfb,#fff)}
+  .examcard .row1{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px}
+  .examcard h3{font-size:18px}
+  .examcard .sub{color:var(--muted);font-size:13px;margin-bottom:18px}
+  .benchmarks{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  .bm{border:1px solid var(--line);border-radius:14px;padding:14px;background:#fff}
+  .bm .when{font-size:11px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:var(--faint)}
+  .bm h4{font-size:15px;margin:3px 0 9px}
+  .bm.ready{border-color:#fdba74;box-shadow:0 0 0 3px #fff7ed}
+  .bm .status{font-size:12px;font-weight:600;color:var(--muted)}
+  .bm .gobtn{margin-top:11px;display:inline-block;background:var(--orange);color:#fff;font-weight:700;font-size:13px;padding:8px 14px;border-radius:10px;border:0;cursor:pointer}
+  .bm.locked{opacity:.62}
+  .bm.locked .lockpill{font-size:11px;font-weight:700;color:#94a3b8;background:#f1f5f9;padding:4px 9px;border-radius:999px;margin-top:11px;display:inline-block}
+
+  .seclabel{font-size:13px;font-weight:700;color:var(--muted);margin:22px 0 10px;letter-spacing:.2px}
+  .ptiles{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;max-width:560px}
+  .pt{border:1px solid var(--line);border-radius:15px;padding:16px;background:#fff;display:flex;gap:12px;align-items:flex-start}
+  .pt .bdg{width:34px;height:34px;border-radius:10px;background:#fff1e6;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .pt h4{font-size:14px}
+  .pt .meta{font-size:11.5px;color:var(--faint);font-weight:600;margin-top:4px}
+  .pt.focus{border-color:#fdba74;background:#fff8f1}
+  .pt.focus .meta{color:var(--orange)}
+
+  .rbhero{display:flex;gap:20px;align-items:center;border:1px solid #e7defb;border-radius:18px;padding:22px;background:linear-gradient(120deg,#f6f0ff,#fff)}
+  .rbhero .av{flex-shrink:0}
+  .rbhero h3{font-size:20px}
+  .rbhero .who{font-size:13px;color:var(--violet);font-weight:700;margin:2px 0 8px}
+  .rbhero p{font-size:13px;color:var(--muted);margin-bottom:12px}
+  .rbhero .gobtn{background:var(--violet);color:#fff;font-weight:700;font-size:13.5px;padding:10px 18px;border-radius:11px;border:0;cursor:pointer}
+  .rbstats{display:flex;gap:24px;margin-left:auto;text-align:center;flex-shrink:0}
+  .rbstats .n{font-size:24px;font-weight:800;color:var(--violet)}
+  .rbstats .l{font-size:11px;color:var(--muted);font-weight:600}
+
+  .hidden{display:none}
+  .trow{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:6px}
+  .stat{flex:1;min-width:140px;border:1px solid var(--line);border-radius:16px;padding:16px 18px;background:#fff}
+  .stat .n{font-size:26px;font-weight:800;letter-spacing:-.5px}
+  .stat .l{font-size:12.5px;color:var(--muted);font-weight:600;margin-top:2px}
+  .bandrow{display:flex;gap:9px;flex-wrap:wrap;margin:14px 0 4px}
+  .bandtag{font-size:12px;font-weight:700;padding:6px 12px;border-radius:999px}
+  .bandtag.s{background:var(--greenbg);color:var(--green)}
+  .bandtag.d{background:#fff7ed;color:#d97706}
+  .bandtag.n{background:#fef2f2;color:#dc2626}
+  .bandtag.x{background:#f1f5f9;color:#64748b}
+  .clusters{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:6px}
+  .cl{border:1px solid var(--line);border-radius:13px;padding:13px;background:#fff;text-align:center}
+  .cl .name{font-size:12px;font-weight:700;min-height:30px;display:flex;align-items:center;justify-content:center}
+  .bar{height:7px;border-radius:99px;background:#eef1f6;overflow:hidden;margin:8px 0 6px}
+  .bar i{display:block;height:100%;border-radius:99px}
+  .cl .pct{font-size:12px;font-weight:700}
+  .cl .qn{font-size:10.5px;color:var(--faint);font-weight:600;margin-top:1px}
+  .g .pct{color:var(--green)} .g .bar i{background:var(--green)}
+  .y .pct{color:#d97706} .y .bar i{background:#f59e0b}
+
+  .stable{border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-top:8px}
+  .sth,.str{display:grid;grid-template-columns:1.5fr .7fr 1.1fr 1.3fr 1.8fr;gap:10px;padding:11px 16px;align-items:center}
+  .sth{background:#f8fafc;font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--faint)}
+  .str{border-top:1px solid var(--line);font-size:13.5px}
+  .str .nm{font-weight:600}
+
+  .linkbtn{background:#fff;border:1px solid var(--line);border-radius:10px;font-weight:700;font-size:13px;padding:9px 15px;cursor:pointer;color:var(--violet)}
+  .vas{background:#fff;border:1px solid var(--line);border-radius:9px;font-weight:700;font-size:12.5px;padding:9px 14px;cursor:pointer;color:var(--navy)}
+  .roster{border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-top:8px}
+  .rr{display:flex;align-items:center;gap:12px;padding:12px 16px;border-top:1px solid var(--line);font-size:14px}
+  .rr:first-child{border-top:0}
+  .rr .nm{font-weight:600}
+  .rr .gr{color:var(--faint);font-size:12.5px}
+  .rr .tags{margin-left:auto;display:flex;gap:6px;align-items:center}
+  .tagchip{font-size:11px;font-weight:700;padding:3px 9px;border-radius:999px}
+  .tagchip.rb{background:#f3eefe;color:var(--violet)}
+  .tagchip.tp{background:#fff1e6;color:var(--orange)}
+  .tagchip.ok{background:var(--greenbg);color:var(--green)}
+  .tagchip.warn{background:#fff7ed;color:#9a3412}
+  .smallbtn{border:1px solid var(--line);background:#fff;color:var(--violet);font-weight:700;font-size:12px;padding:5px 11px;border-radius:8px;cursor:pointer}
+  .note{font-size:12.5px;color:var(--faint);margin-top:8px}
+
+  .lessons{border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  .lrow{display:flex;align-items:center;gap:12px;padding:13px 16px;border-top:1px solid var(--line)}
+  .lrow:first-child{border-top:0}
+  .lrow .lt{font-weight:600;font-size:14px}
+  .lskill{font-size:11px;font-weight:700;padding:3px 9px;border-radius:999px;background:#fff1e6;color:var(--orange)}
+  .lskill.rb{background:#f3eefe;color:var(--violet)}
+  .lrow .due{margin-left:auto;font-size:12.5px;color:var(--muted);font-weight:600}
+  .lrow .due.over{color:#dc2626}
+  .lrow .st{font-size:12.5px;font-weight:700}
+  .lrow .st.done{color:var(--green)}
+  .lrow .acts{margin-left:auto;display:flex;gap:7px}
+  .mini{background:var(--orange);color:#fff;border:0;font-weight:700;font-size:12.5px;padding:7px 13px;border-radius:9px;cursor:pointer}
+  .mini.rb{background:var(--violet)}
+  .ghost{background:#fff;border:1px solid var(--line);color:var(--muted);font-weight:700;font-size:12.5px;padding:7px 12px;border-radius:9px;cursor:pointer}
+  .searchrow{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px;align-items:center}
+  .search{flex:1;min-width:240px;display:flex;align-items:center;gap:9px;border:1px solid var(--line);border-radius:11px;padding:11px 14px;background:#fff;color:var(--faint);font-size:13.5px}
+  .fchip{font-size:12px;font-weight:600;border:1px solid var(--line);border-radius:999px;padding:7px 12px;color:var(--muted);background:#fff;cursor:pointer}
+  .fchip.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+  .ltable{border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-top:6px}
+  .lth,.ltr{display:grid;grid-template-columns:2.2fr 1fr 1fr 1fr;gap:10px;padding:11px 16px;align-items:center}
+  .lth{background:#f8fafc;font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--faint)}
+  .ltr{border-top:1px solid var(--line);font-size:13.5px}
+  .ltr .miss{font-weight:700;color:#dc2626}
+  .ltr .miss.zero{color:var(--green)}
+  .callout{display:flex;align-items:center;gap:11px;background:#fff7ed;border:1px solid #fed7aa;border-radius:12px;padding:13px 16px;margin-top:14px;font-size:13.5px;color:#9a3412;font-weight:600}
+  .callout .linkbtn{margin-left:auto}
+  .subtabs{display:flex;gap:6px;flex-wrap:wrap;background:#fff;border:1px solid var(--line);border-radius:14px;padding:6px;margin-bottom:20px;box-shadow:var(--shadow)}
+  .subtabs button{border:0;background:transparent;font-weight:700;font-size:13.5px;color:var(--muted);padding:10px 17px;border-radius:10px;cursor:pointer}
+  .subtabs button.on{background:var(--navy);color:#fff}
+  .subtabs button.dis{color:var(--faint);cursor:not-allowed}
+  .dashhdr{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:24px 0 12px}
+  .dashhdr h1{font-size:22px;font-weight:800;letter-spacing:-.4px}
+  @media(max-width:860px){.clusters{grid-template-columns:repeat(2,1fr)}.benchmarks{grid-template-columns:1fr}.rbhero{flex-wrap:wrap}.rbstats{margin-left:0}.sth,.str{grid-template-columns:1.4fr .8fr 1fr}.sth span:nth-child(4),.sth span:nth-child(5),.str span:nth-child(4),.str span:nth-child(5){display:none}}
+</style>
+</head>
+<body>
+
+<!-- DEMO-ONLY NAV (not part of the product) -->
+<div class="mocknav"><div class="wrap">
+  <span class="lbl">Mock preview · jump to</span>
+  <button id="mn-teacher" onclick="setPersona('teacher')">Teacher</button>
+  <button id="mn-student-tp" onclick="setPersona('student-tp')">Student · test-prep only</button>
+  <button id="mn-student-both" onclick="setPersona('student-both')">Student · has both products</button>
+</div></div>
+
+<div class="brand"><div class="wrap">
+  <div class="logo">
+    <div class="mark">S<span>ý</span> Learning</div>
+    <div class="tag">Together we learn</div>
+  </div>
+  <button class="logout">Log out</button>
+</div></div>
+
+<!-- PRODUCT SWITCHER — shown only when the user has more than one product -->
+<div class="prodswitch" id="prodswitch">
+  <div class="wrap">
+    <button class="arw" onclick="flipProduct()" aria-label="Previous product">‹</button>
+    <div class="pclick" onclick="flipProduct()" title="Open all your workspaces">
+      <span class="picon state" id="picon"></span>
+      <div>
+        <div class="pttl"><span id="pttl">State Track</span><span class="caret">▾</span></div>
+        <div class="psub" id="psub">Pennsylvania · PSSA · Grade 3 ELA</div>
+      </div>
+    </div>
+    <button class="arw" onclick="flipProduct()" aria-label="Next product">›</button>
+  </div>
+</div>
+
+<!-- ===================== TEACHER · STATE TRACK ===================== -->
+<div id="teacher-state" class="wrap block">
+  <div class="dashhdr">
+    <h1>Teacher Dashboard</h1>
+    <button class="vas" onclick="setPersona('student-both')">View as student</button>
+  </div>
+  <div class="subtabs">
+    <button data-t="roster" onclick="setTab('roster')">Classes</button>
+    <button data-t="lessons" onclick="setTab('lessons')">Lessons</button>
+    <button data-t="assignments" onclick="setTab('assignments')">Assignments</button>
+    <button data-t="readiness" class="on" onclick="setTab('readiness')">Reports</button>
+    <button class="dis" title="Score short-answer responses (used when there are constructed-response items to grade)">Grading</button>
+    <button class="dis">Resources</button>
+  </div>
+
+  <!-- REPORTS -->
+  <div id="tc-readiness" class="subview">
+    <section class="track test">
+      <div class="track-head">
+        <div>
+          <span class="kicker">State test prep · Grade 3 ELA</span>
+          <h2>Fall benchmark report — your class</h2>
+          <p>Scores are teacher-facing only; students never see a score. Bands are practice levels we define, not official PSSA labels.</p>
+        </div>
+      </div>
+      <div class="trow">
+        <div class="stat"><div class="n">18<span style="font-size:15px;color:var(--faint)">/24</span></div><div class="l">Benchmark completed</div></div>
+        <div class="stat"><div class="n">31<span style="font-size:15px;color:var(--faint)">/45</span></div><div class="l">Class median score</div></div>
+      </div>
+      <div class="bandrow">
+        <span class="bandtag s">7 Strong</span>
+        <span class="bandtag d">5 Developing</span>
+        <span class="bandtag n">6 Need support</span>
+        <span class="bandtag x">6 Not completed</span>
+      </div>
+      <div class="note">7 + 5 + 6 = 18 completed · 6 not yet completed = 24 assigned.</div>
+
+      <div class="seclabel">Class strengths by reading skill (grouped — each benchmark has only a few items per standard, so we report clusters for a reliable signal)</div>
+      <div class="clusters">
+        <div class="cl g"><div class="name">Key Ideas &amp; Details</div><div class="bar"><i style="width:78%"></i></div><div class="pct">78%</div><div class="qn">8 questions</div></div>
+        <div class="cl g"><div class="name">Craft &amp; Vocabulary</div><div class="bar"><i style="width:71%"></i></div><div class="pct">71%</div><div class="qn">7 questions</div></div>
+        <div class="cl y"><div class="name">Evidence &amp; Inference</div><div class="bar"><i style="width:54%"></i></div><div class="pct">54%</div><div class="qn">6 questions</div></div>
+        <div class="cl y"><div class="name">Text Structure</div><div class="bar"><i style="width:61%"></i></div><div class="pct">61%</div><div class="qn">5 questions</div></div>
+        <div class="cl g"><div class="name">Conventions</div><div class="bar"><i style="width:74%"></i></div><div class="pct">74%</div><div class="qn">9 questions</div></div>
+      </div>
+
+      <div class="seclabel">Students</div>
+      <div class="stable">
+        <div class="sth"><span>Student</span><span>Score</span><span>Band</span><span>Weakest cluster</span><span>Recommended next step</span></div>
+        <div class="str"><span class="nm">Ava Nguyen</span><span>38 / 45</span><span><span class="bandtag s">Strong</span></span><span>Text Structure</span><span>Light review + enrichment</span></div>
+        <div class="str"><span class="nm">Sofia Park</span><span>33 / 45</span><span><span class="bandtag s">Strong</span></span><span>Conventions</span><span>Maintain</span></div>
+        <div class="str"><span class="nm">Marcus Bell</span><span>29 / 45</span><span><span class="bandtag d">Developing</span></span><span>Evidence &amp; Inference</span><span>Assign inference lessons</span></div>
+        <div class="str"><span class="nm">Diego Ramos</span><span>22 / 45</span><span><span class="bandtag n">Need support</span></span><span>Evidence &amp; Inference</span><span>Small group + lessons</span></div>
+        <div class="str"><span class="nm">Jayla Carter</span><span>—</span><span><span class="bandtag x">Not completed</span></span><span>—</span><span>Nudge to finish benchmark</span></div>
+      </div>
+      <div class="note">4 students are weakest in <b>Evidence &amp; Inference</b> — a ready-made small group.</div>
+    </section>
+  </div>
+
+  <!-- LESSONS (browse + assign) -->
+  <div id="tc-lessons" class="subview hidden">
+    <section class="track test">
+      <div class="track-head">
+        <div>
+          <span class="kicker">Lessons · library</span>
+          <h2>Find &amp; assign lessons</h2>
+          <p>Browse the lesson library and assign with a due date. Track who's done it on the Assignments tab.</p>
+        </div>
+      </div>
+      <div class="searchrow">
+        <div class="search"><span id="si1"></span> Search lessons — “text evidence”, “main idea”, “commas”…</div>
+        <span class="fchip on">Grade 3</span>
+        <span class="fchip">Key Ideas</span>
+        <span class="fchip">Evidence &amp; Inference</span>
+        <span class="fchip">Vocabulary</span>
+        <span class="fchip">Conventions</span>
+      </div>
+      <div class="lessons">
+        <div class="lrow"><span class="lt">Finding Text Evidence</span><span class="lskill">Evidence &amp; Inference</span><span class="due">15 min</span><span class="acts"><button class="ghost">Preview</button><button class="mini">Assign</button></span></div>
+        <div class="lrow"><span class="lt">Author's Purpose</span><span class="lskill">Craft &amp; Structure</span><span class="due">12 min</span><span class="acts"><button class="ghost">Preview</button><button class="mini">Assign</button></span></div>
+        <div class="lrow"><span class="lt">Summarizing a Passage</span><span class="lskill">Key Ideas &amp; Details</span><span class="due">18 min</span><span class="acts"><button class="ghost">Preview</button><button class="mini">Assign</button></span></div>
+        <div class="lrow"><span class="lt">Context Clues for New Words</span><span class="lskill">Vocabulary</span><span class="due">10 min</span><span class="acts"><button class="ghost">Preview</button><button class="mini">Assign</button></span></div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ASSIGNMENTS (track) -->
+  <div id="tc-assignments" class="subview hidden">
+    <section class="track test">
+      <div class="track-head">
+        <div>
+          <span class="kicker">Assignments · track</span>
+          <h2>Who's done it &amp; who's behind</h2>
+          <p>Completion and due dates for everything you've assigned. Assign new work from the Lessons tab.</p>
+        </div>
+      </div>
+      <div class="ltable">
+        <div class="lth"><span>Assigned lesson</span><span>Due</span><span>Completed</span><span>Missing</span></div>
+        <div class="ltr"><span>Finding Text Evidence</span><span style="color:#dc2626;font-weight:600">Fri Oct 10</span><span>14 / 22</span><span class="miss">8 missing</span></div>
+        <div class="ltr"><span>Main Idea &amp; Key Details</span><span>Tue Oct 14</span><span>9 / 22</span><span class="miss">13 missing</span></div>
+        <div class="ltr"><span>Context Clues for New Words</span><span style="color:var(--green);font-weight:600">Closed</span><span>22 / 22</span><span class="miss zero">0 missing</span></div>
+      </div>
+      <div class="callout"><span id="wi1"></span> 8 students haven't started “Finding Text Evidence” — due Friday.<button class="linkbtn">See who &amp; remind →</button></div>
+    </section>
+  </div>
+
+  <!-- CLASSES (roster) -->
+  <div id="tc-roster" class="subview hidden">
+    <section class="track test">
+      <div class="track-head">
+        <div>
+          <span class="kicker">Classes &amp; provisioning</span>
+          <h2>Your class — who has which product</h2>
+          <p>Every student is on test prep. Reading Buddy is added only for students who need phonics support.</p>
+        </div>
+        <button class="linkbtn">Manage students →</button>
+      </div>
+      <div class="roster">
+        <div class="rr"><span class="nm">Marcus Bell</span><span class="gr">· Grade 3</span><span class="tags"><span class="tagchip tp">Test prep</span></span></div>
+        <div class="rr"><span class="nm">Ava Nguyen</span><span class="gr">· Grade 3</span><span class="tags"><span class="tagchip tp">Test prep</span><span class="tagchip rb">Reading Buddy</span></span></div>
+        <div class="rr"><span class="nm">Diego Ramos</span><span class="gr">· Grade 3</span><span class="tags"><span class="tagchip tp">Test prep</span></span></div>
+        <div class="rr"><span class="nm">Sofia Park</span><span class="gr">· Grade 3</span><span class="tags"><span class="tagchip tp">Test prep</span><span class="tagchip rb">Reading Buddy</span></span></div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<!-- ===================== TEACHER · NATIONAL READING BUDDY ===================== -->
+<div id="teacher-reading" class="wrap block hidden">
+  <div class="dashhdr">
+    <h1>Reading Buddy — Dashboard</h1>
+    <button class="vas" onclick="setPersona('student-both')">View as student</button>
+  </div>
+  <section class="track learn">
+    <div class="track-head">
+      <div>
+        <span class="kicker">Phonics intervention · caseload</span>
+        <h2>Students on the reading path</h2>
+        <p>Small-caseload view for tutors and interventionists — who's moving and who needs a check-in.</p>
+      </div>
+      <button class="linkbtn">Caseload report →</button>
+    </div>
+    <div class="trow">
+      <div class="stat"><div class="n">8</div><div class="l">On your caseload</div></div>
+      <div class="stat"><div class="n">5</div><div class="l">Moving steadily</div></div>
+      <div class="stat"><div class="n">2</div><div class="l">Need a check-in</div></div>
+      <div class="stat"><div class="n">1</div><div class="l">Not started</div></div>
+    </div>
+    <div class="seclabel">Caseload</div>
+    <div class="roster">
+      <div class="rr"><span class="nm">Ava Nguyen</span><span class="gr">· Grade 3 · Lesson 12 “ai” team</span><span class="tags"><span class="tagchip ok">On track</span></span></div>
+      <div class="rr"><span class="nm">Sofia Park</span><span class="gr">· Grade 3 · Lesson 9 “sh / ch”</span><span class="tags"><span class="tagchip ok">On track</span></span></div>
+      <div class="rr"><span class="nm">Liam Brooks</span><span class="gr">· Grade 2 · Lesson 7 · no progress in 4 days</span><span class="tags"><span class="tagchip warn">Needs check-in</span></span></div>
+      <div class="rr"><span class="nm">Noah Reed</span><span class="gr">· Grade 2 · not started</span><span class="tags"><button class="smallbtn">Send invite</button></span></div>
+    </div>
+    <div class="seclabel">Assign phonics lessons</div>
+    <div class="searchrow">
+      <div class="search"><span id="si2"></span> Search phonics lessons — vowel teams, digraphs, blends…</div>
+      <span class="fchip on">Phonics</span>
+      <span class="fchip">Vowel teams</span>
+      <span class="fchip">Digraphs</span>
+      <span class="fchip">Blends</span>
+    </div>
+    <div class="lessons">
+      <div class="lrow"><span class="lt">Vowel team: “ai” / “ay”</span><span class="lskill rb">Vowel teams</span><span class="due">10 min</span><span class="acts"><button class="ghost">Preview</button><button class="mini rb">Assign</button></span></div>
+      <div class="lrow"><span class="lt">Digraphs: “sh” &amp; “ch”</span><span class="lskill rb">Digraphs</span><span class="due">10 min</span><span class="acts"><button class="ghost">Preview</button><button class="mini rb">Assign</button></span></div>
+    </div>
+    <div class="note">Reading Buddy is national (works in any state) — the same dashboard regardless of state. Phonics lessons are separate from the test-prep lesson library.</div>
+  </section>
+</div>
+
+<!-- ===================== STUDENT · STATE TRACK ===================== -->
+<div id="student-state" class="wrap block hidden">
+  <section class="track test">
+    <div class="track-head">
+      <div>
+        <span class="kicker">State test prep · Grade 3</span>
+        <h2>Let's get ready for the PSSA</h2>
+        <p>Practice that mirrors your real state test, with three check-ins across the year to build test stamina.</p>
+      </div>
+    </div>
+    <div class="states"><span class="statechip active"><span class="flag">PA</span> Pennsylvania · PSSA</span></div>
+    <div class="examcard">
+      <div class="row1"><h3>PSSA — English Language Arts · Grade 3</h3><span class="pill on"><span class="dot"></span>Live</span></div>
+      <div class="sub">No scores shown to you — your teacher reviews the results and picks your next practice.</div>
+      <div class="benchmarks">
+        <div class="bm ready"><div class="when">Fall check-in</div><h4>Check-in 1</h4><div class="status">Ready to start · ~45 min</div><button class="gobtn">Start →</button></div>
+        <div class="bm locked"><div class="when">Winter check-in</div><h4>Check-in 2</h4><div class="status">Full test length</div><span class="lockpill">Opens in winter</span></div>
+        <div class="bm locked"><div class="when">Spring check-in</div><h4>Check-in 3</h4><div class="status">Full test length</div><span class="lockpill">Opens in spring</span></div>
+      </div>
+    </div>
+    <div class="seclabel">Your lessons — assigned by your teacher</div>
+    <div class="lessons">
+      <div class="lrow"><span class="lt">Finding Text Evidence</span><span class="lskill">Evidence &amp; Inference</span><span class="due over">Due Fri</span><button class="mini" style="margin-left:auto">Start →</button></div>
+      <div class="lrow"><span class="lt">Main Idea &amp; Key Details</span><span class="lskill">Key Ideas</span><span class="due">Due Oct 14</span><button class="mini" style="margin-left:auto">Start →</button></div>
+      <div class="lrow"><span class="lt">Context Clues for New Words</span><span class="lskill">Vocabulary</span><span class="st done" style="margin-left:auto">✓ Done</span></div>
+    </div>
+    <div class="seclabel">Your practice focus</div>
+    <div class="ptiles">
+      <div class="pt focus"><span class="bdg" id="pf1"></span><div><h4>Evidence &amp; Inference</h4><div class="meta">Your teacher set this as your focus</div></div></div>
+      <div class="pt"><span class="bdg" id="pf2"></span><div><h4>Key Ideas &amp; Details</h4><div class="meta">Recommended next</div></div></div>
+    </div>
+    <div class="note">No Reading Buddy for this student — daily work is assigned test-prep lessons plus a focused practice area, not phonics.</div>
+  </section>
+</div>
+
+<!-- ===================== STUDENT · NATIONAL READING BUDDY ===================== -->
+<div id="student-reading" class="wrap block hidden">
+  <section class="track learn">
+    <div class="track-head">
+      <div>
+        <span class="kicker">Reading support · phonics path</span>
+        <h2>Here's your reading time</h2>
+        <p>Practice with Harper — building the sounds and patterns that make reading click.</p>
+      </div>
+    </div>
+    <div class="rbhero">
+      <div class="av" id="harper"></div>
+      <div>
+        <h3>Reading Buddy</h3>
+        <div class="who">with Harper</div>
+        <p>Next up: <b>Lesson 12 — the “ai” team</b></p>
+        <button class="gobtn">Continue with Harper →</button>
+      </div>
+      <div class="rbstats">
+        <div><div class="n">9</div><div class="l">day streak</div></div>
+        <div><div class="n">23</div><div class="l">lessons done</div></div>
+      </div>
+    </div>
+    <div class="seclabel">Your phonics lessons</div>
+    <div class="lessons">
+      <div class="lrow"><span class="lt">Vowel team: “ai” / “ay”</span><span class="lskill rb">Vowel teams</span><span class="due over">Today</span><button class="mini rb" style="margin-left:auto">Start →</button></div>
+      <div class="lrow"><span class="lt">Digraphs: “sh” &amp; “ch”</span><span class="lskill rb">Digraphs</span><span class="due">Due Oct 13</span><button class="mini rb" style="margin-left:auto">Start →</button></div>
+    </div>
+  </section>
+</div>
+
+<script>
+  // ---- inline SVG icons (no emoji dependency) ----
+  var ICON={
+    target:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ea580c" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.6" fill="#ea580c" stroke="none"/></svg>',
+    book:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#5b21b6" stroke-width="2"><path d="M4 5a2 2 0 0 1 2-2h6v16H6a2 2 0 0 0-2 2z"/><path d="M20 5a2 2 0 0 0-2-2h-6v16h6a2 2 0 0 1 2 2z"/></svg>',
+    search:'<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="20.5" y1="20.5" x2="16.7" y2="16.7"/></svg>',
+    warn:'<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#ea580c" stroke-width="2"><path d="M12 3l9.5 17H2.5z"/><line x1="12" y1="9.5" x2="12" y2="14"/><circle cx="12" cy="17.3" r="0.7" fill="#ea580c" stroke="none"/></svg>',
+    spark:'<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#ea580c" stroke-width="2"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5L18 18M18 6l-2.5 2.5M8.5 15.5L6 18"/></svg>',
+    harper:'<svg width="74" height="74" viewBox="0 0 74 74"><circle cx="37" cy="39" r="24" fill="#ede9fe"/><path d="M16 26 L26 13 L31 28 Z" fill="#c4b5fd"/><path d="M58 26 L48 13 L43 28 Z" fill="#c4b5fd"/><circle cx="29" cy="38" r="3.4" fill="#5b21b6"/><circle cx="45" cy="38" r="3.4" fill="#5b21b6"/><circle cx="37" cy="44" r="2.4" fill="#a78bfa"/><path d="M30 49 Q37 55 44 49" stroke="#5b21b6" stroke-width="2.6" fill="none" stroke-linecap="round"/></svg>'
+  };
+  function ic(id,name){var e=document.getElementById(id);if(e)e.innerHTML=ICON[name];}
+  ['si1','si2'].forEach(function(i){ic(i,'search');});
+  ic('wi1','warn'); ic('pf1','spark'); ic('pf2','spark'); ic('harper','harper');
+
+  // ---- state ----
+  var PERSONA='teacher', ROLE='teacher', PROD='state', BOTH=true;
+  var PINFO={
+    state:{icon:'target',cls:'state',ttl:'State Track',sub:'Pennsylvania · PSSA · Grade 3 ELA'},
+    reading:{icon:'book',cls:'reading',ttl:'National Reading Buddy',sub:'Phonics · any state'}
+  };
+  function render(){
+    ['teacher-state','teacher-reading','student-state','student-reading'].forEach(function(id){
+      document.getElementById(id).classList.toggle('hidden', id!==(ROLE+'-'+PROD));
+    });
+    // product switcher only if enrolled in >1 product
+    document.getElementById('prodswitch').classList.toggle('hidden', !BOTH);
+    var p=PINFO[PROD];
+    var pi=document.getElementById('picon'); pi.className='picon '+p.cls; pi.innerHTML=ICON[p.icon];
+    document.getElementById('pttl').textContent=p.ttl;
+    document.getElementById('psub').textContent=p.sub;
+    ['teacher','student-tp','student-both'].forEach(function(k){
+      document.getElementById('mn-'+k).classList.toggle('on',k===PERSONA);
+    });
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  function setPersona(p){
+    PERSONA=p;
+    if(p==='teacher'){ROLE='teacher';BOTH=true;PROD='state';}
+    if(p==='student-tp'){ROLE='student';BOTH=false;PROD='state';}      // Marcus — no switcher
+    if(p==='student-both'){ROLE='student';BOTH=true;PROD='reading';}   // Ava — switcher shows
+    render();
+  }
+  function flipProduct(){ if(!BOTH) return; PROD=(PROD==='state'?'reading':'state'); render(); }
+  function setTab(t){
+    ['roster','lessons','assignments','readiness'].forEach(function(id){
+      var el=document.getElementById('tc-'+id); if(el) el.classList.toggle('hidden',id!==t);
+    });
+    document.querySelectorAll('.subtabs button').forEach(function(b){
+      b.classList.toggle('on',b.getAttribute('data-t')===t);
+    });
+  }
+  setPersona('teacher');
+</script>
+</body>
+</html>
