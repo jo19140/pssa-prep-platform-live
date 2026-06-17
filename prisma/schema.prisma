@@ -1241,6 +1241,7 @@ model StudentLessonProgress {
   exitTicketResponses  Json?
   masteryScore         Int?
   masteryStatus        String         @default("NOT_STARTED")
+  dueDate              DateTime?
   startedAt            DateTime?
   completedAt          DateTime?
   masteredAt           DateTime?
