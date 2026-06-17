@@ -8,6 +8,8 @@ const TOP_LEVEL_TAGS = new Set([
   "vocabulary",
   "conventions",
   "writing_tda",
+  "foundational_support",
+  "exclude_from_grade3_bridge",
 ]);
 
 const REPORT_CLUSTER_TAGS = new Set([
@@ -18,6 +20,42 @@ const REPORT_CLUSTER_TAGS = new Set([
 ]);
 
 const EXPECTED_GRADE3_METADATA = new Map([
+  ["Main Idea", {
+    standardCodes: ["CC.1.2.3.A"],
+    pssaBridgeTags: ["key_ideas_evidence", "main_idea", "key_details", "central_idea"],
+  }],
+  ["Inference", {
+    standardCodes: ["CC.1.2.3.B", "CC.1.3.3.B"],
+    pssaBridgeTags: ["key_ideas_evidence", "inference", "text_evidence", "prove_answer", "unsupported_inference"],
+  }],
+  ["Text Evidence", {
+    standardCodes: ["CC.1.2.3.B", "CC.1.3.3.B"],
+    pssaBridgeTags: ["key_ideas_evidence", "text_evidence", "cite_evidence", "prove_answer"],
+  }],
+  ["Theme", {
+    standardCodes: ["CC.1.3.3.A"],
+    pssaBridgeTags: ["key_ideas_evidence", "theme", "central_message", "lesson_moral", "key_details"],
+  }],
+  ["Point of View", {
+    standardCodes: ["CC.1.2.3.D", "CC.1.3.3.D"],
+    pssaBridgeTags: ["craft_structure", "point_of_view", "author_point_of_view", "narrator", "speaker"],
+  }],
+  ["Connotation and Figurative Language", {
+    standardCodes: ["CC.1.2.3.F", "CC.1.3.3.F"],
+    pssaBridgeTags: ["vocabulary", "figurative_language", "nonliteral_language", "word_meaning", "literal_nonliteral"],
+  }],
+  ["Pronoun Agreement and Shifts", {
+    standardCodes: ["CC.1.4.3.F"],
+    pssaBridgeTags: ["exclude_from_grade3_bridge", "pronoun_shift", "grammar"],
+  }],
+  ["Formal and Informal Style", {
+    standardCodes: ["CC.1.4.3.K"],
+    pssaBridgeTags: ["exclude_from_grade3_bridge", "style", "language_use"],
+  }],
+  ["TDA Evidence and Explanation", {
+    standardCodes: ["CC.1.4.3.S"],
+    pssaBridgeTags: ["writing_tda", "text_dependent_analysis", "text_evidence", "writing"],
+  }],
   ["Capitalization and Titles", {
     standardCodes: ["CC.1.4.3.F"],
     pssaBridgeTags: ["conventions", "capitalization", "titles"],
@@ -84,7 +122,7 @@ const EXPECTED_GRADE3_METADATA = new Map([
   }],
   ["Short and Long Vowel Patterns", {
     standardCodes: ["CC.1.1.3.D"],
-    pssaBridgeTags: ["vocabulary", "phonics", "vowel_patterns", "foundational"],
+    pssaBridgeTags: ["foundational_support", "vowel_patterns", "phonics"],
   }],
   ["Synonyms and Antonyms", {
     standardCodes: ["CC.1.2.3.F", "CC.1.3.3.F"],
@@ -92,24 +130,37 @@ const EXPECTED_GRADE3_METADATA = new Map([
   }],
 ]);
 
-const WRITING_SKILLS = new Set(["Opinion Reasons", "Paragraph Organization"]);
+const EXPECTED_TOP_LEVEL_COUNTS = new Map([
+  ["key_ideas_evidence", 8],
+  ["craft_structure", 5],
+  ["vocabulary", 5],
+  ["conventions", 3],
+  ["foundational_support", 1],
+  ["writing_tda", 3],
+  ["exclude_from_grade3_bridge", 2],
+]);
+
+const WRITING_SKILLS = new Set(["Opinion Reasons", "Paragraph Organization", "TDA Evidence and Explanation"]);
+const FOUNDATIONAL_SUPPORT_SKILLS = new Set(["Short and Long Vowel Patterns"]);
+const EXCLUDED_BRIDGE_SKILLS = new Set(["Pronoun Agreement and Shifts", "Formal and Informal Style"]);
 
 const seeds = buildPrebuiltLessonSeeds();
 const gradeThreeSeeds = seeds.filter((seed) => seed.gradeLevel === 3);
-const taggedGradeThreeSeeds = gradeThreeSeeds.filter(
-  (seed) => seed.standardCodes !== undefined || seed.pssaBridgeTags !== undefined,
-);
 
-assert.equal(taggedGradeThreeSeeds.length, 18, "exactly the 18 Grade 3 scope-sequence lessons should be tagged");
+assert.equal(gradeThreeSeeds.length, 27, "real Grade 3 lesson set must be 27");
 assert.deepEqual(
-  taggedGradeThreeSeeds.map((seed) => seed.skill).sort(),
+  gradeThreeSeeds.map((seed) => seed.skill).sort(),
   [...EXPECTED_GRADE3_METADATA.keys()].sort(),
-  "tagged Grade 3 lesson list must match the spec exactly",
+  "Grade 3 lesson list must match the spec exactly",
 );
 
-for (const seed of taggedGradeThreeSeeds) {
+const topLevelCounts = new Map<string, number>();
+let reportEligibleCount = 0;
+let excludedCount = 0;
+
+for (const seed of gradeThreeSeeds) {
   const expected = EXPECTED_GRADE3_METADATA.get(seed.skill);
-  assert.ok(expected, `unexpected tagged Grade 3 lesson: ${seed.skill}`);
+  assert.ok(expected, `unexpected Grade 3 lesson: ${seed.skill}`);
   assert.equal(typeof seed.standardCode, "string", `${seed.skill} must retain standardCode`);
   assert.ok(seed.standardCode.length > 0, `${seed.skill} must retain nonempty standardCode`);
   assert.deepEqual(seed.standardCodes, expected.standardCodes, `${seed.skill} standardCodes mismatch`);
@@ -120,26 +171,43 @@ for (const seed of taggedGradeThreeSeeds) {
   const topLevelIntersection = seed.pssaBridgeTags.filter((tag) => TOP_LEVEL_TAGS.has(tag));
   assert.equal(topLevelIntersection.length, 1, `${seed.skill} must have exactly one top-level bridge tag`);
   assert.equal(seed.pssaBridgeTags[0], topLevelIntersection[0], `${seed.skill} first tag must be the top-level bridge tag`);
+  topLevelCounts.set(topLevelIntersection[0], (topLevelCounts.get(topLevelIntersection[0]) ?? 0) + 1);
 
   const reportClusterIntersection = seed.pssaBridgeTags.filter((tag) => REPORT_CLUSTER_TAGS.has(tag));
-  if (WRITING_SKILLS.has(seed.skill)) {
-    assert.equal(topLevelIntersection[0], "writing_tda", `${seed.skill} must be tagged writing_tda`);
+  if (WRITING_SKILLS.has(seed.skill) || FOUNDATIONAL_SUPPORT_SKILLS.has(seed.skill) || EXCLUDED_BRIDGE_SKILLS.has(seed.skill)) {
+    excludedCount += 1;
     assert.equal(reportClusterIntersection.length, 0, `${seed.skill} must not carry report-cluster tags`);
   } else {
+    reportEligibleCount += 1;
     assert.equal(reportClusterIntersection.length, 1, `${seed.skill} must carry exactly one report-cluster tag`);
     assert.equal(reportClusterIntersection[0], topLevelIntersection[0], `${seed.skill} report-cluster tag must be top-level`);
   }
 }
 
-const untaggedNonTargetGradeThree = gradeThreeSeeds.filter((seed) => !EXPECTED_GRADE3_METADATA.has(seed.skill));
-assert.ok(untaggedNonTargetGradeThree.length > 0, "generic Grade 3 core lessons should remain outside this targeted metadata patch");
+assert.equal(reportEligibleCount, 21, "expected 21 report-eligible Grade 3 lessons");
+assert.equal(excludedCount, 6, "expected 6 in-library excluded Grade 3 lessons");
+for (const [tag, count] of EXPECTED_TOP_LEVEL_COUNTS) {
+  assert.equal(topLevelCounts.get(tag) ?? 0, count, `unexpected top-level count for ${tag}`);
+}
+
+const vowelPatterns = gradeThreeSeeds.find((seed) => seed.skill === "Short and Long Vowel Patterns");
+assert.deepEqual(vowelPatterns?.pssaBridgeTags, ["foundational_support", "vowel_patterns", "phonics"]);
+assert.equal(vowelPatterns?.pssaBridgeTags?.includes("vocabulary"), false, "Short and Long Vowel Patterns must no longer be a vocabulary bridge lesson");
+
+const connotation = gradeThreeSeeds.find((seed) => seed.skill === "Connotation and Figurative Language");
+assert.ok(connotation, "missing Connotation and Figurative Language lesson");
+assert.equal(connotation.pssaBridgeTags?.includes("connotation"), false, "Connotation bridge tags must not include connotation");
+
 assert.ok(
   seeds.some((seed) => seed.gradeLevel >= 4 && seed.pssaBridgeTags === undefined && seed.standardCodes === undefined),
   "grades 4-8 must not be required to carry PSSA bridge metadata",
 );
 
 console.log("Grade 3 PSSA lesson metadata coverage:");
-for (const seed of [...taggedGradeThreeSeeds].sort((a, b) => a.skill.localeCompare(b.skill))) {
-  console.log(`${seed.skill} | ${seed.standardCodes?.join(",")} | ${seed.pssaBridgeTags?.join(",")}`);
+for (const seed of [...gradeThreeSeeds].sort((a, b) => a.skill.localeCompare(b.skill))) {
+  const topTag = seed.pssaBridgeTags?.find((tag) => TOP_LEVEL_TAGS.has(tag));
+  console.log(`${seed.skill} | ${topTag} | ${seed.standardCodes?.join(",")} | ${seed.pssaBridgeTags?.join(",")}`);
 }
-console.log("Grade 3 tagged lessons: 18; top-level tags valid; writing_tda excluded from report clusters; standardCode retained.");
+console.log("Report-eligible lessons: 21; split key_ideas_evidence=8, craft_structure=5, vocabulary=5, conventions=3.");
+console.log("Excluded lessons: 6; split foundational_support=1, writing_tda=3, exclude_from_grade3_bridge=2.");
+console.log("Grade 3 lesson metadata audit passed: one top-level tag per lesson, excluded lessons carry no report-cluster tags, standardCode retained.");

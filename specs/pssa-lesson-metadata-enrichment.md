@@ -1,132 +1,85 @@
-Here's the complete WS3-D-pre-0 prompt with the three guardrails folded in. First save the spec to `specs/pssa-lesson-metadata-enrichment.md`, then paste this:
 
-```text
-Implement WS3-D-pre-0: enrich Grade 3 lesson metadata for PSSA assign-from-report.
-Single source of truth = specs/pssa-lesson-metadata-enrichment.md. Read it fully first.
-If the spec is missing, STOP and report. Do not invent it.
+Here's the complete amend prompt to paste. First re-save the updated spec to specs/pssa-lesson-metadata-enrichment.md, then paste:
 
-This is a metadata-only patch to the prebuilt lesson library:
-- NO lesson content changes
-- NO schema/migration changes
-- NO scoring/report/engine changes
-- NO UI changes
-- NO assignment action
-- NO bridge implementation yet
+text
+Amend WS3-D-pre-0: continue on the existing branch feat/pssa-lesson-metadata-enrichment.
+Updated source of truth = specs/pssa-lesson-metadata-enrichment.md (re-read it fully). If missing, STOP and report.
 
-BRANCH: feat/pssa-lesson-metadata-enrichment
+Still metadata-only: NO lesson content, NO schema/migration, NO scoring/report/engine, NO UI, NO bridge implementation.
 
-SCOPE:
-1. Update the LessonSeed type in lib/prebuiltLessonLibrary.ts:
-   - keep standardCode: string
-   - add optional standardCodes?: string[]
-   - add optional pssaBridgeTags?: string[]
-   If scopeLesson(...) has a SEPARATE input/options type from LessonSeed, add standardCodes?: string[] and pssaBridgeTags?: string[] there too. Keep it additive and local to lib/prebuiltLessonLibrary.ts. Do NOT use `as any` to bypass typing.
-2. Add standardCodes and pssaBridgeTags to the 18 Grade 3 lessons only.
-3. Add a small Grade-3 lesson-metadata audit test.
-4. Commit the spec at specs/pssa-lesson-metadata-enrichment.md.
+CHANGE 1 — expand the controlled top-level bridge tag union to 7:
+  "key_ideas_evidence" | "craft_structure" | "vocabulary" | "conventions" | "writing_tda" | "foundational_support" | "exclude_from_grade3_bridge"
+Only the first four are report-eligible clusters. The other three are in-library-but-excluded from the grade-3 PSSA report bridge.
 
-DO NOT TOUCH: lesson content, prisma schema, migrations, scoring/report/engine modules, UI, grades 4-8 lessons.
-
-CONTROLLED TOP-LEVEL TAGS:
-Every Grade 3 lesson must contain exactly ONE top-level bridge tag from:
-- key_ideas_evidence
-- craft_structure
-- vocabulary
-- conventions
-- writing_tda
-Only the first four (the locked WS3-B report clusters) are report-eligible for BOY reading/conventions Diagnostic Insights. writing_tda stays in the library but is excluded from PSSA reading/conventions report suggestions until a future writing/TDA report exists.
-
-GRADE 3 LESSON METADATA TO APPLY:
-Capitalization and Titles:
-  standardCodes = ["CC.1.4.3.F"]
-  pssaBridgeTags = ["conventions","capitalization","titles"]
-Commas in a Series:
-  standardCodes = ["CC.1.4.3.F"]
-  pssaBridgeTags = ["conventions","commas","punctuation","series_commas"]
-Complete Sentences:
-  standardCodes = ["CC.1.4.3.F"]
-  pssaBridgeTags = ["conventions","sentence_formation","complete_sentences"]
-Author's Purpose:
-  standardCodes = ["CC.1.2.3.D","CC.1.2.3.H"]
-  pssaBridgeTags = ["craft_structure","authors_purpose","point_of_view","authors_reasons"]
-Cause and Effect:
-  standardCodes = ["CC.1.2.3.C"]
-  pssaBridgeTags = ["key_ideas_evidence","cause_effect","connections","sequence"]
-Compare and Contrast:
-  standardCodes = ["CC.1.2.3.I"]
-  pssaBridgeTags = ["craft_structure","compare_contrast","paired_text"]
-Text Features:
-  standardCodes = ["CC.1.2.3.E","CC.1.2.3.G"]
-  pssaBridgeTags = ["craft_structure","text_features","graphics","search_tools"]
-Character Traits and Actions:
-  standardCodes = ["CC.1.3.3.C"]
-  pssaBridgeTags = ["key_ideas_evidence","character_traits","character_actions","sequence"]
-Poetry Lines and Stanzas:
-  standardCodes = ["CC.1.3.3.E"]
-  pssaBridgeTags = ["craft_structure","poetry_structure","stanzas","text_parts"]
-Sequence of Events:
-  standardCodes = ["CC.1.3.3.C"]
-  pssaBridgeTags = ["key_ideas_evidence","sequence","events","story_events"]
-Story Elements:
-  standardCodes = ["CC.1.3.3.C","CC.1.3.3.A"]
-  pssaBridgeTags = ["key_ideas_evidence","story_elements","characters","plot","central_message"]
-Opinion Reasons:
-  standardCodes = ["CC.1.4.3.G","CC.1.4.3.I"]
-  pssaBridgeTags = ["writing_tda","opinion_writing","opinion_reasons","writing"]
-Paragraph Organization:
-  standardCodes = ["CC.1.4.3.J"]
-  pssaBridgeTags = ["writing_tda","paragraph_organization","writing_structure","writing"]
-Context Clues:
-  standardCodes = ["CC.1.2.3.F","CC.1.3.3.F"]
-  pssaBridgeTags = ["vocabulary","context_clues","word_meaning","literal_nonliteral"]
-Multisyllable Word Parts:
-  standardCodes = ["CC.1.1.3.D"]
-  pssaBridgeTags = ["vocabulary","word_analysis","multisyllable_words","foundational"]
-Prefixes and Suffixes:
-  standardCodes = ["CC.1.1.3.D","CC.1.2.3.F"]
-  pssaBridgeTags = ["vocabulary","prefixes_suffixes","word_parts","morphology"]
+CHANGE 2 — RE-TAG one already-tagged Table-A lesson (it was tagged vocabulary in the prior commit; change it):
 Short and Long Vowel Patterns:
-  standardCodes = ["CC.1.1.3.D"]
-  pssaBridgeTags = ["vocabulary","phonics","vowel_patterns","foundational"]
-Synonyms and Antonyms:
-  standardCodes = ["CC.1.2.3.F","CC.1.3.3.F"]
-  pssaBridgeTags = ["vocabulary","word_relationships","synonyms_antonyms","shades_of_meaning"]
+  standardCodes=["CC.1.1.3.D"]
+  pssaBridgeTags=["foundational_support","vowel_patterns","phonics"]
 
-AUDIT / ACCEPTANCE (Grade 3 ONLY — do NOT require these fields on grades 4-8):
-1. All 18 Grade 3 lessons have standardCodes with at least one entry.
-2. All 18 Grade 3 lessons have pssaBridgeTags with at least one entry.
-3. Each Grade 3 lesson has EXACTLY ONE top-level bridge tag — verify by intersecting pssaBridgeTags with {key_ideas_evidence, craft_structure, vocabulary, conventions, writing_tda} and asserting the intersection size is exactly 1 (do NOT rely only on the first array element). Also assert the first tag IS that top-level tag.
-4. The two writing lessons (Opinion Reasons, Paragraph Organization) have top-level tag writing_tda and NONE of the four report-cluster tags.
-5. The 16 report-eligible Grade 3 lessons each carry exactly one of: key_ideas_evidence, craft_structure, vocabulary, conventions.
-6. No lesson content changed.
-7. Existing standardCode remains present for backward compatibility.
-8. No schema/migration/scoring/report/UI changes.
-9. Audit output deterministic.
-10. The real Grade 3 lesson list equals the 18 in the spec (else STOP).
+CHANGE 3 — add metadata to the 9 generated core grade-3 lessons. Match by EXACT skill string. Apply to the GRADE-3 instances only (a grade-3 skill->tags lookup applied when gradeLevel===3); do NOT touch grades 4-8; no `as any`. Note the TDA skill string is "TDA Evidence and Explanation", not "TDA".
+
+Main Idea:
+  standardCodes=["CC.1.2.3.A"]
+  pssaBridgeTags=["key_ideas_evidence","main_idea","key_details","central_idea"]
+Inference:
+  standardCodes=["CC.1.2.3.B","CC.1.3.3.B"]
+  pssaBridgeTags=["key_ideas_evidence","inference","text_evidence","prove_answer","unsupported_inference"]
+Text Evidence:
+  standardCodes=["CC.1.2.3.B","CC.1.3.3.B"]
+  pssaBridgeTags=["key_ideas_evidence","text_evidence","cite_evidence","prove_answer"]
+Theme:
+  standardCodes=["CC.1.3.3.A"]
+  pssaBridgeTags=["key_ideas_evidence","theme","central_message","lesson_moral","key_details"]
+Point of View:
+  standardCodes=["CC.1.2.3.D","CC.1.3.3.D"]
+  pssaBridgeTags=["craft_structure","point_of_view","author_point_of_view","narrator","speaker"]
+Connotation and Figurative Language:
+  standardCodes=["CC.1.2.3.F","CC.1.3.3.F"]
+  pssaBridgeTags=["vocabulary","figurative_language","nonliteral_language","word_meaning","literal_nonliteral"]
+Pronoun Agreement and Shifts:
+  standardCodes=["CC.1.4.3.F"]
+  pssaBridgeTags=["exclude_from_grade3_bridge","pronoun_shift","grammar"]
+Formal and Informal Style:
+  standardCodes=["CC.1.4.3.K"]
+  pssaBridgeTags=["exclude_from_grade3_bridge","style","language_use"]
+TDA Evidence and Explanation:
+  standardCodes=["CC.1.4.3.S"]
+  pssaBridgeTags=["writing_tda","text_dependent_analysis","text_evidence","writing"]
+
+CHANGE 4 — update the metadata audit to cover EVERY grade-3 lesson emitted by buildPrebuiltLessonSeeds() (27: literal scopeLesson + generated core) with the new 7-tag set.
+
+ACCEPTANCE:
+1. Every grade-3 lesson from buildPrebuiltLessonSeeds() (27) has standardCodes with >=1 entry and pssaBridgeTags with >=1 entry.
+2. Each grade-3 lesson has exactly ONE top-level tag: intersect pssaBridgeTags with the 7-tag set and assert size == 1; also assert the first tag is that top tag.
+3. Exactly 21 report-eligible lessons, each with one of: key_ideas_evidence (8), craft_structure (5), vocabulary (5), conventions (3).
+4. Exactly 6 excluded lessons carry a non-cluster top tag and NO cluster tag:
+   - foundational_support (1): Short and Long Vowel Patterns
+   - writing_tda (3): Opinion Reasons, Paragraph Organization, TDA Evidence and Explanation
+   - exclude_from_grade3_bridge (2): Pronoun Agreement and Shifts, Formal and Informal Style
+5. No lesson content changed; existing standardCode retained.
+6. Grades 4-8 NOT required to have the new fields; shared generators still work for all grades.
+7. No schema/migration/scoring/report/UI changes.
+8. The real grade-3 set from buildPrebuiltLessonSeeds() is 27 (else STOP).
 
 RUN:
 - npx tsc --noEmit
-- existing lesson/content tests if present
+- the metadata audit test
 - PSSA suite if relevant
 - confirm no schema/migration diff
 
-STOP and report if:
-- LessonSeed (or scopeLesson input) shape makes additive fields unsafe
-- any existing code assumes standardCodes/pssaBridgeTags cannot exist
-- adding these fields requires schema/migration changes
-- any lesson content would need to change
-- the real Grade 3 lesson list differs from the 18 listed
+STOP and report if: the real grade-3 lesson set differs from 27; a core skill string differs from the list above; tagging would require touching shared generators in a way that affects grades 4-8; any content/schema change appears necessary.
 
 STOP REPORT:
 - branch + commit SHA
-- files changed (confirm only lib/prebuiltLessonLibrary.ts + test + spec)
-- exact Grade 3 metadata coverage table (18 lessons)
-- proof each Grade 3 lesson has exactly one top-level bridge tag (by set intersection)
-- proof writing_tda lessons carry no report-cluster tag
-- proof standardCode retained
+- files changed (only lib/prebuiltLessonLibrary.ts + test + spec)
+- FULL 27-lesson coverage table (skill -> top tag -> standardCodes)
+- proof of the 21 report-eligible / 6 excluded split with exact counts (8/5/5/3 and 1/3/2)
+- proof Short and Long Vowel Patterns is re-tagged foundational_support (no longer vocabulary)
+- proof exactly one top-level tag per grade-3 lesson
+- proof the 6 excluded lessons carry no cluster tag
+- proof Connotation has no "connotation" tag
 - proof no lesson content changed
-- proof grades 4-8 not required to have the new fields
+- proof grades 4-8 untouched
 - tsc/test results; no schema/migration diff
-```
+When Codex returns the stop report, paste it here and I'll re-audit at source — the 21/6 split, the Vowel-Patterns re-tag, the two excluded conventions lessons carrying no cluster tag, Connotation clean, and grades 4–8 untouched.
 
-That's the whole paste. When Codex returns the stop report, paste it here and I'll audit at source — confirming only the library file + test changed, the additive fields landed safely (on `LessonSeed` and any `scopeLesson` input type, no `as any`), all 18 lessons carry exactly one top-level tag, the two writing lessons are walled off from the reading clusters, and `standardCode` is retained.

@@ -31,6 +31,50 @@ type LessonSeed = {
   retestRecommendation: string;
 };
 
+type LessonBridgeMetadata = {
+  standardCodes: string[];
+  pssaBridgeTags: string[];
+};
+
+const gradeThreeCoreLessonBridgeMetadata: Record<string, LessonBridgeMetadata> = {
+  "Main Idea": {
+    standardCodes: ["CC.1.2.3.A"],
+    pssaBridgeTags: ["key_ideas_evidence", "main_idea", "key_details", "central_idea"],
+  },
+  "Inference": {
+    standardCodes: ["CC.1.2.3.B", "CC.1.3.3.B"],
+    pssaBridgeTags: ["key_ideas_evidence", "inference", "text_evidence", "prove_answer", "unsupported_inference"],
+  },
+  "Text Evidence": {
+    standardCodes: ["CC.1.2.3.B", "CC.1.3.3.B"],
+    pssaBridgeTags: ["key_ideas_evidence", "text_evidence", "cite_evidence", "prove_answer"],
+  },
+  "Theme": {
+    standardCodes: ["CC.1.3.3.A"],
+    pssaBridgeTags: ["key_ideas_evidence", "theme", "central_message", "lesson_moral", "key_details"],
+  },
+  "Point of View": {
+    standardCodes: ["CC.1.2.3.D", "CC.1.3.3.D"],
+    pssaBridgeTags: ["craft_structure", "point_of_view", "author_point_of_view", "narrator", "speaker"],
+  },
+  "Connotation and Figurative Language": {
+    standardCodes: ["CC.1.2.3.F", "CC.1.3.3.F"],
+    pssaBridgeTags: ["vocabulary", "figurative_language", "nonliteral_language", "word_meaning", "literal_nonliteral"],
+  },
+  "Pronoun Agreement and Shifts": {
+    standardCodes: ["CC.1.4.3.F"],
+    pssaBridgeTags: ["exclude_from_grade3_bridge", "pronoun_shift", "grammar"],
+  },
+  "Formal and Informal Style": {
+    standardCodes: ["CC.1.4.3.K"],
+    pssaBridgeTags: ["exclude_from_grade3_bridge", "style", "language_use"],
+  },
+  "TDA Evidence and Explanation": {
+    standardCodes: ["CC.1.4.3.S"],
+    pssaBridgeTags: ["writing_tda", "text_dependent_analysis", "text_evidence", "writing"],
+  },
+};
+
 const LIBRARY_USER_EMAIL = "lesson-library-agent@pssa.local";
 const LIBRARY_ASSESSMENT_TITLE = "AI Prebuilt Lesson Library";
 
@@ -491,7 +535,7 @@ function gradeThreeScopeSequenceLessons(): LessonSeed[] {
       domain: "Reading Foundations",
       standardDomain: "vocabulary",
       standardCodes: ["CC.1.1.3.D"],
-      pssaBridgeTags: ["vocabulary", "phonics", "vowel_patterns", "foundational"],
+      pssaBridgeTags: ["foundational_support", "vowel_patterns", "phonics"],
       explanation: "Strong Grade 3 readers use vowel patterns to read unfamiliar words. Look for spelling clues like silent e, vowel teams, and closed syllables before choosing how a word should sound.",
       workedExample: "In the word made, the silent e helps the a say its long sound. In the word match, the vowel sound is short because the vowel is closed in by consonants.",
       task: "Which word has a long vowel sound?",
@@ -2218,15 +2262,18 @@ function readingLesson(gradeLevel: number, skill: string, standardDomain: "liter
   const standard = standardForSkill(gradeLevel, skill, standardDomain, domain);
   const standardCode = standard.code;
   const standardLabel = standard.label;
+  const bridgeMetadata = gradeLevel === 3 ? gradeThreeCoreLessonBridgeMetadata[skill] : undefined;
   const progression = getSkillProgression(skill, gradeLevel);
   const passage = samplePassage(gradeLevel, skill);
   return {
     gradeLevel,
     standardCode,
+    standardCodes: bridgeMetadata?.standardCodes,
     standardLabel,
     skill,
     title: `Grade ${gradeLevel} ${skill} Lesson`,
     domain,
+    pssaBridgeTags: bridgeMetadata?.pssaBridgeTags,
     lessonExplanation: explanationForSkill(skill, gradeLevel),
     workedExample: workedExampleForSkill(skill, gradeLevel),
     guidedPractice: [
@@ -2250,14 +2297,17 @@ function readingLesson(gradeLevel: number, skill: string, standardDomain: "liter
 function conventionsLesson(gradeLevel: number, skill: string): LessonSeed {
   const standard = standardForSkill(gradeLevel, skill, "conventions", "Conventions of Standard English");
   const standardCode = standard.code;
+  const bridgeMetadata = gradeLevel === 3 ? gradeThreeCoreLessonBridgeMetadata[skill] : undefined;
   const paragraph = conventionsParagraph(gradeLevel);
   return {
     gradeLevel,
     standardCode,
+    standardCodes: bridgeMetadata?.standardCodes,
     standardLabel: standard.label,
     skill,
     title: `Grade ${gradeLevel} ${skill} Lesson`,
     domain: "Conventions of Standard English",
+    pssaBridgeTags: bridgeMetadata?.pssaBridgeTags,
     lessonExplanation: `Conventions questions ask you to make writing clear and correct. Read the whole paragraph first, then check pronouns, verb tense, punctuation, and style in context.`,
     workedExample: `If a sentence says, "A writer should reread the draft because you may notice missing evidence," the pronoun shifts from "a writer" to "you." A better revision keeps the same person: "A writer should reread the draft because the writer may notice missing evidence."`,
     guidedPractice: [
@@ -2281,13 +2331,16 @@ function conventionsLesson(gradeLevel: number, skill: string): LessonSeed {
 function tdaLesson(gradeLevel: number): LessonSeed {
   const standard = standardForSkill(gradeLevel, "TDA Evidence and Explanation", "tda", "Text-Dependent Analysis");
   const standardCode = standard.code;
+  const bridgeMetadata = gradeLevel === 3 ? gradeThreeCoreLessonBridgeMetadata["TDA Evidence and Explanation"] : undefined;
   return {
     gradeLevel,
     standardCode,
+    standardCodes: bridgeMetadata?.standardCodes,
     standardLabel: standard.label,
     skill: "TDA Evidence and Explanation",
     title: `Grade ${gradeLevel} TDA Evidence and Explanation Lesson`,
     domain: "Text-Dependent Analysis",
+    pssaBridgeTags: bridgeMetadata?.pssaBridgeTags,
     lessonExplanation: `A strong TDA does not retell the passage. It answers the prompt with a clear claim, uses evidence from the text, and explains how the evidence proves the claim.`,
     workedExample: `Claim: The character learns to be more responsible. Evidence: The character returns to fix the mistake without being asked. Explanation: This detail matters because the character chooses responsibility even when no one is forcing the choice.`,
     guidedPractice: [
