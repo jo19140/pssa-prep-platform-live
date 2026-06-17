@@ -17,6 +17,29 @@ type LoadState =
   | { status: "ready"; report: ClassReport }
   | { status: "error"; message: string };
 
+type LessonSuggestionCandidate = {
+  lessonId: string;
+  title: string;
+  skill: string;
+};
+
+type SuggestionsState =
+  | { status: "idle" | "loading"; byGroupId: Record<string, LessonSuggestionCandidate[]> }
+  | { status: "ready"; byGroupId: Record<string, LessonSuggestionCandidate[]> }
+  | { status: "error"; byGroupId: Record<string, LessonSuggestionCandidate[]>; message: string };
+
+type AssignState = Record<string, {
+  status: "submitting" | "success" | "error";
+  message: string;
+}>;
+
+type AssignRequest = {
+  groupId: string;
+  lessonId: string;
+  dueDate: string;
+  studentProfileIds: string[];
+};
+
 export function TeacherPssaInsightsClient() {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -27,6 +50,8 @@ export function TeacherPssaInsightsClient() {
   const [formId, setFormId] = useState(searchParams.get("formId") ?? "");
   const [benchmarkSeason, setBenchmarkSeason] = useState(searchParams.get("benchmarkSeason") ?? "BOY");
   const [loadState, setLoadState] = useState<LoadState>({ status: "idle" });
+  const [suggestionsState, setSuggestionsState] = useState<SuggestionsState>({ status: "idle", byGroupId: {} });
+  const [assignState, setAssignState] = useState<AssignState>({});
 
   useEffect(() => {
     const nextClassId = searchParams.get("classRoomId") ?? "";
@@ -64,10 +89,13 @@ export function TeacherPssaInsightsClient() {
   useEffect(() => {
     if (!selectedClassId || !formId) {
       setLoadState({ status: "idle" });
+      setSuggestionsState({ status: "idle", byGroupId: {} });
       return;
     }
     const controller = new AbortController();
     setLoadState({ status: "loading" });
+    setSuggestionsState({ status: "loading", byGroupId: {} });
+    setAssignState({});
     const params = new URLSearchParams({ classRoomId: selectedClassId, formId, benchmarkSeason });
     fetch(`/api/teacher/pssa/class-report?${params.toString()}`, { cache: "no-store", signal: controller.signal })
       .then(async (response) => {
@@ -78,10 +106,28 @@ export function TeacherPssaInsightsClient() {
         }
         return response.json() as Promise<ClassReport>;
       })
-      .then((report) => setLoadState({ status: "ready", report }))
+      .then((report) => {
+        setLoadState({ status: "ready", report });
+        return fetch(`/api/teacher/pssa/lesson-suggestions?${params.toString()}`, { cache: "no-store", signal: controller.signal });
+      })
+      .then(async (response) => {
+        if (!response.ok) throw new Error("Lesson suggestions unavailable — refresh and try again.");
+        const payload = await response.json() as {
+          groups?: Array<{ groupId: string; candidates?: LessonSuggestionCandidate[] }>;
+        };
+        setSuggestionsState({ status: "ready", byGroupId: suggestionsByGroup(payload.groups ?? []) });
+      })
       .catch((error) => {
         if (controller.signal.aborted) return;
-        setLoadState({ status: "error", message: error instanceof Error ? error.message : "Diagnostic insights are not available right now." });
+        const message = error instanceof Error ? error.message : "Diagnostic insights are not available right now.";
+        setLoadState((current) => {
+          if (current.status === "ready") {
+            setSuggestionsState({ status: "error", byGroupId: {}, message: "Lesson suggestions unavailable — refresh and try again." });
+            return current;
+          }
+          setSuggestionsState({ status: "idle", byGroupId: {} });
+          return { status: "error", message };
+        });
       });
     return () => controller.abort();
   }, [selectedClassId, formId, benchmarkSeason]);
@@ -99,6 +145,61 @@ export function TeacherPssaInsightsClient() {
     else params.delete("formId");
     if (nextSeason) params.set("benchmarkSeason", nextSeason);
     router.replace(`/teacher/pssa/insights?${params.toString()}`, { scroll: false });
+  }
+
+  async function assignRecommendedLesson(request: AssignRequest) {
+    setAssignState((current) => ({
+      ...current,
+      [request.groupId]: { status: "submitting", message: "Assigning lesson..." },
+    }));
+    try {
+      const response = await fetch("/api/teacher/pssa/assign-recommended-lesson", {
+        method: "POST",
+        cache: "no-store",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          classRoomId: selectedClassId,
+          formId,
+          benchmarkSeason,
+          groupId: request.groupId,
+          lessonId: request.lessonId,
+          studentProfileIds: request.studentProfileIds,
+          dueDate: request.dueDate,
+        }),
+      });
+      if (!response.ok) {
+        const message = response.status === 409
+          ? "This report changed — refresh and try again."
+          : response.status === 403
+            ? "You do not have permission to assign this lesson."
+            : response.status === 400
+              ? "Check the lesson and due date, then try again."
+              : "Could not assign this lesson right now.";
+        throw new Error(message);
+      }
+      const payload = await response.json() as {
+        dueDate: string;
+        results?: Array<{ outcome: "created" | "updated" }>;
+      };
+      const results = payload.results ?? [];
+      const created = results.filter((row) => row.outcome === "created").length;
+      const updated = results.filter((row) => row.outcome === "updated").length;
+      setAssignState((current) => ({
+        ...current,
+        [request.groupId]: {
+          status: "success",
+          message: `Assigned to ${results.length} students — ${created} new, ${updated} updated, due ${payload.dueDate}.`,
+        },
+      }));
+    } catch (error) {
+      setAssignState((current) => ({
+        ...current,
+        [request.groupId]: {
+          status: "error",
+          message: error instanceof Error ? error.message : "Could not assign this lesson right now.",
+        },
+      }));
+    }
   }
 
   return (
@@ -159,10 +260,21 @@ export function TeacherPssaInsightsClient() {
       {selectedClassId && formId && loadState.status === "loading" ? <LoadingPanel /> : null}
       {selectedClassId && formId && loadState.status === "error" ? <StateCard tone="error" title="Unable to load insights" body={loadState.message} /> : null}
       {selectedClassId && formId && loadState.status === "ready" ? (
-        <TeacherPssaInsightsPanel report={loadState.report} className={selectedClass?.name ?? "Selected class"} />
+        <TeacherPssaInsightsPanel
+          report={loadState.report}
+          className={selectedClass?.name ?? "Selected class"}
+          lessonSuggestions={suggestionsState.byGroupId}
+          suggestionsUnavailable={suggestionsState.status === "error"}
+          assignState={assignState}
+          onAssign={assignRecommendedLesson}
+        />
       ) : null}
     </main>
   );
+}
+
+function suggestionsByGroup(groups: Array<{ groupId: string; candidates?: LessonSuggestionCandidate[] }>) {
+  return Object.fromEntries(groups.map((group) => [group.groupId, group.candidates ?? []]));
 }
 
 function LoadingPanel() {
