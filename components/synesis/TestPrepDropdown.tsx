@@ -43,7 +43,7 @@ export function TestPrepDropdown({ enrolledTestPrep = ["PSSA"] }: { enrolledTest
   return (
     <div className="relative flex items-stretch gap-1">
       {hasPssa ? (
-        <a href="/teacher" className={tabClasses} aria-label="Open Pennsylvania PSSA teacher dashboard">
+        <a href="/teacher/pssa/insights" className={tabClasses} aria-label="Open Pennsylvania PSSA Diagnostic Insights">
           {tabInner}
         </a>
       ) : (
