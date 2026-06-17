@@ -1,6 +1,45 @@
+"use client";
+
+import { useState } from "react";
 import type { ClassMisconceptionLabel, ClassReport } from "@/lib/content/pssaClassReport";
 
-export function TeacherPssaInsightsPanel({ report, className }: { report: ClassReport; className?: string }) {
+type LessonSuggestionCandidate = {
+  lessonId: string;
+  title: string;
+  skill: string;
+};
+
+type AssignState = Record<string, {
+  status: "submitting" | "success" | "error";
+  message: string;
+}>;
+
+type AssignRequest = {
+  groupId: string;
+  lessonId: string;
+  dueDate: string;
+  studentProfileIds: string[];
+};
+
+export function TeacherPssaInsightsPanel({
+  report,
+  className,
+  lessonSuggestions = {},
+  suggestionsUnavailable = false,
+  assignState = {},
+  onAssign,
+}: {
+  report: ClassReport;
+  className?: string;
+  lessonSuggestions?: Record<string, LessonSuggestionCandidate[]>;
+  suggestionsUnavailable?: boolean;
+  assignState?: AssignState;
+  onAssign?: (request: AssignRequest) => void | Promise<void>;
+}) {
+  const [openGroupId, setOpenGroupId] = useState<string | null>(null);
+  const [selectedLessonByGroup, setSelectedLessonByGroup] = useState<Record<string, string>>({});
+  const [dueDateByGroup, setDueDateByGroup] = useState<Record<string, string>>({});
+
   if (report.completedStudents === 0) {
     return (
       <section className="rounded-lg border border-orange-100 bg-white p-6 shadow-sm">
@@ -82,14 +121,82 @@ export function TeacherPssaInsightsPanel({ report, className }: { report: ClassR
                   <h3 className="text-base font-semibold text-slate-950">{group.label}</h3>
                   <p className="mt-1 text-xs text-slate-600">{group.studentIds.length} students · {group.cluster} · {formatRole(group.roleFamily)}</p>
                 </div>
-                <button
-                  type="button"
-                  aria-disabled="true"
-                  disabled
-                  className="rounded-md border border-orange-200 bg-white px-3 py-1.5 text-xs font-semibold text-orange-700 opacity-70"
-                >
-                  Assign — coming soon
-                </button>
+                {(() => {
+                  const candidates = lessonSuggestions[group.groupId] ?? [];
+                  const selectedLessonId = selectedLessonByGroup[group.groupId] ?? candidates[0]?.lessonId ?? "";
+                  const dueDate = dueDateByGroup[group.groupId] ?? "";
+                  const groupAssignState = assignState[group.groupId];
+                  const assignDisabled = suggestionsUnavailable || candidates.length === 0 || groupAssignState?.status === "submitting";
+                  return (
+                    <div className="min-w-[180px] text-right">
+                      <button
+                        type="button"
+                        disabled={assignDisabled}
+                        className="rounded-md border border-orange-200 bg-white px-3 py-1.5 text-xs font-semibold text-orange-700 disabled:cursor-not-allowed disabled:opacity-50"
+                        onClick={() => setOpenGroupId((current) => current === group.groupId ? null : group.groupId)}
+                      >
+                        {openGroupId === group.groupId ? "Close" : "Assign"}
+                      </button>
+                      {suggestionsUnavailable ? (
+                        <p className="mt-2 text-left text-xs font-medium text-orange-700">Lesson suggestions unavailable — refresh and try again.</p>
+                      ) : candidates[0] ? (
+                        <p className="mt-2 text-left text-xs text-slate-600">Recommended: <span className="font-semibold text-slate-800">{candidates[0].title}</span></p>
+                      ) : (
+                        <p className="mt-2 text-left text-xs text-slate-500">No eligible lesson yet</p>
+                      )}
+                      {openGroupId === group.groupId && candidates.length > 0 ? (
+                        <form
+                          className="mt-3 space-y-2 rounded-md border border-orange-100 bg-white p-3 text-left"
+                          onSubmit={(event) => {
+                            event.preventDefault();
+                            if (!selectedLessonId || !dueDate || !onAssign) return;
+                            void onAssign({
+                              groupId: group.groupId,
+                              lessonId: selectedLessonId,
+                              dueDate,
+                              studentProfileIds: group.studentIds,
+                            });
+                          }}
+                        >
+                          <label className="block text-xs font-semibold text-slate-700">
+                            Lesson
+                            <select
+                              className="mt-1 w-full rounded-md border border-slate-300 bg-white px-2 py-1.5 text-xs text-slate-900"
+                              value={selectedLessonId}
+                              onChange={(event) => setSelectedLessonByGroup((current) => ({ ...current, [group.groupId]: event.target.value }))}
+                            >
+                              {candidates.map((candidate) => (
+                                <option key={candidate.lessonId} value={candidate.lessonId}>{candidate.title}</option>
+                              ))}
+                            </select>
+                          </label>
+                          <label className="block text-xs font-semibold text-slate-700">
+                            Due date
+                            <input
+                              className="mt-1 w-full rounded-md border border-slate-300 px-2 py-1.5 text-xs text-slate-900"
+                              type="date"
+                              value={dueDate}
+                              required
+                              onChange={(event) => setDueDateByGroup((current) => ({ ...current, [group.groupId]: event.target.value }))}
+                            />
+                          </label>
+                          <button
+                            type="submit"
+                            disabled={!selectedLessonId || !dueDate || groupAssignState?.status === "submitting"}
+                            className="w-full rounded-md bg-orange-600 px-3 py-1.5 text-xs font-semibold text-white disabled:cursor-not-allowed disabled:opacity-60"
+                          >
+                            {groupAssignState?.status === "submitting" ? "Assigning..." : `Assign to ${group.studentIds.length} students`}
+                          </button>
+                        </form>
+                      ) : null}
+                      {groupAssignState ? (
+                        <p className={`mt-2 text-left text-xs font-medium ${groupAssignState.status === "error" ? "text-red-700" : groupAssignState.status === "success" ? "text-emerald-700" : "text-orange-700"}`}>
+                          {groupAssignState.message}
+                        </p>
+                      ) : null}
+                    </div>
+                  );
+                })()}
               </div>
               <p className="mt-3 text-sm text-slate-800">{group.recommendedAction}</p>
               {group.recommendedSkill ? <p className="mt-1 text-xs text-slate-500">Skill: {group.recommendedSkill}</p> : null}
