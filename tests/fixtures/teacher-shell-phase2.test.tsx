@@ -73,14 +73,14 @@ assert.match(teacherLiteracy, /activeProduct="reading_buddy"/, "/teacher/literac
 assert.match(teacherLiteracy, /<TeacherLiteracyMonitor/, "literacy monitor content must remain embedded");
 
 const teacherProducts = read("lib/teacher/loadCurrentTeacherProducts.ts");
-assert.match(teacherProducts, /getServerSession\(authOptions\)/, "teacher products must derive user from authenticated session");
-assert.match(teacherProducts, /resolveProducts\(user\)/, "teacher products must use shared entitlement resolver");
+assert.match(teacherProducts, /loadCurrentUserProducts\(\)/, "teacher products must delegate to the role-neutral authenticated product helper");
 assert.doesNotMatch(teacherProducts, /userId[:?]\s*string/, "teacher product helper must not accept a URL/client userId");
 
 const middleware = read("middleware.ts");
 assert.doesNotMatch(middleware, /pathname === "\/teacher" && role === "TEACHER"/, "middleware must not self-redirect /teacher");
 assert.match(middleware, /role === "TEACHER"\) response = NextResponse\.redirect\(new URL\("\/teacher"/, "dashboard teacher landing must go to /teacher");
-assert.match(middleware, /pathname === "\/student" && role === "STUDENT"/, "student landing must remain untouched");
+assert.doesNotMatch(middleware, /pathname === "\/student" && role === "STUDENT"/, "Phase 3 removes the generic student self-redirect");
+assert.match(middleware, /role === "STUDENT"\) response = NextResponse\.redirect\(new URL\("\/student"/, "dashboard student landing must go to /student");
 assert.match(middleware, /role === "PARENT"\) response = NextResponse\.redirect\(new URL\("\/parent"/, "parent landing must remain untouched");
 
 const layout = read("app/layout.tsx");
