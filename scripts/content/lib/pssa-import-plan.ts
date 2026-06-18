@@ -18,6 +18,7 @@ import { auditGrade3EbsrItems } from "../author-pssa-grade3-ebsr";
 import { auditGrade3MatchingGridDragDropItems } from "../author-pssa-grade3-matching-grid-drag-drop";
 import { auditGrade3ShortAnswerItems } from "../author-pssa-grade3-short-answer";
 import { auditGrade3TeiItems } from "../author-pssa-grade3-tei";
+import { buildPssaResponseSpec } from "../../../lib/content/pssaResponseSpec";
 
 export const CROSSWALK_PATH = path.resolve("data/pssa/anchor_ec_crosswalk.csv");
 export const SOURCE_VERSION_YEAR = 2014;
@@ -365,33 +366,6 @@ function sourceFileForTopupPassage(passage: any, manifest: PssaGradeImportManife
     : manifest.files.pilot;
 }
 
-function responseSpec(item: any) {
-  if (item.responseSpec) return item.responseSpec;
-  const interactionType = interactionTypeFor(item);
-  if (interactionType === "MCQ") return { prompt: item.studentFacingPrompt ?? item.stem, choices: item.answerChoicesJson ?? item.choices };
-  if (interactionType === "MULTI_SELECT") return { stem: item.stem, instructionText: item.instructionText, choices: item.choices, minSelections: item.minSelections, maxSelections: item.maxSelections, exactSelectionCount: item.exactSelectionCount };
-  if (interactionType === "HOT_TEXT") return {
-    prompt: item.prompt,
-    instructionText: item.instructionText,
-    selectableSpans: item.selectableSpans ?? item.selectableTokens?.map((token: any) => ({
-      spanId: token.tokenId,
-      text: token.text,
-      spanKind: "token",
-    })),
-  };
-  if (interactionType === "MATCHING_GRID") return { stem: item.stem, instructionText: item.instructionText, rows: item.rows, columns: item.columns, selectionRule: item.selectionRule };
-  if (interactionType === "DRAG_DROP") return {
-    prompt: item.prompt ?? item.baseSentenceWithSlots,
-    instructionText: item.instructionText,
-    tokens: item.tokens ?? item.draggableTokens?.map((token: any) => ({ tokenId: token.tokenId, text: token.text })),
-    targets: item.targets ?? item.slots?.map((slot: any) => ({ targetId: slot.slotId, label: slot.label ?? "" })),
-    useAllTokens: item.useAllTokens,
-  };
-  if (interactionType === "INLINE_DROPDOWN") return { stem: item.stem, baseTextWithBlanks: item.baseTextWithBlanks, blanks: item.blanks?.map((blank: any) => ({ ...blank, correctIndex: undefined, rationale: undefined })) };
-  if (interactionType === "SHORT_ANSWER") return { stem: item.stem, instructionText: item.instructionText, requiredSupportCount: item.requiredSupportCount, requiresTextSupport: item.requiresTextSupport };
-  return item;
-}
-
 function correctResponse(item: any) {
   if (item.correctResponse) return item.correctResponse;
   const interactionType = interactionTypeFor(item);
@@ -440,7 +414,7 @@ function buildWouldItem(item: any, sourceFile: string, gates: Record<string, Gat
     interactionType,
     interactionSubtype: item.interactionSubtype ?? "",
     eligibleContent: item.eligibleContent,
-    responseSpecJson: responseSpec(item),
+    responseSpecJson: buildPssaResponseSpec(item),
     correctResponseJson: correctResponse(item),
     scoringJson: scoringJson(item),
     pointValue: pointValue(item),
@@ -456,7 +430,7 @@ function buildWouldItem(item: any, sourceFile: string, gates: Record<string, Gat
       && (deprecated ? studentReadyBlockedReason === "DEPRECATED_SUPERSEDED" : studentReadyBlockedReason === "PENDING_REVIEW")
       ? "PASS"
       : "FAIL",
-    PSSA_IMPORT_RESPONSE_SHAPE_VALID: responseSpec(item) && correctResponse(item) ? "PASS" : "FAIL",
+    PSSA_IMPORT_RESPONSE_SHAPE_VALID: buildPssaResponseSpec(item) && correctResponse(item) ? "PASS" : "FAIL",
   } as Record<string, GateStatus>;
   const blockedReasons = Object.entries(allGates).filter(([, status]) => status === "FAIL").map(([gate]) => gate);
   return {

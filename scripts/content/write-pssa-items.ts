@@ -194,6 +194,7 @@ function passageCreateData(passage: WouldImportPassage, importRunId: string) {
 }
 
 function itemCreateData(item: WouldImportItem, eligibleContentRefId: string | null, importRunId: string) {
+  assertRoleBearingResponseSpecSafe(item);
   return {
     id: item.itemId,
     module: "PSSA" as const,
@@ -240,6 +241,24 @@ function itemCreateData(item: WouldImportItem, eligibleContentRefId: string | nu
     batchId: item.batchId || null,
     provenanceJson: json(item.provenanceJson),
   };
+}
+
+function assertRoleBearingResponseSpecSafe(item: WouldImportItem) {
+  if (item.gradeLevel !== 3 || item.interactionType !== "MCQ") return;
+  const spec = plainObject(item.responseSpecJson);
+  const structured = Array.isArray(spec.structuredChoicesJson) ? spec.structuredChoicesJson : null;
+  if (!structured) return;
+  const correct = plainObject(item.correctResponseJson).correctIndex;
+  if (!Number.isInteger(correct)) throw new Error(`PSSA_ROLE_SPEC_MISSING_CORRECT_INDEX:${item.itemId}`);
+  for (let index = 0; index < structured.length; index += 1) {
+    const role = plainObject(structured[index]).distractorRole;
+    if (index === correct && role) throw new Error(`PSSA_ROLE_SPEC_CORRECT_CHOICE_HAS_ROLE:${item.itemId}:${index}`);
+    if (index !== correct && typeof role !== "string") throw new Error(`PSSA_ROLE_SPEC_DISTRACTOR_MISSING_ROLE:${item.itemId}:${index}`);
+  }
+}
+
+function plainObject(value: unknown): Record<string, any> {
+  return value && typeof value === "object" && !Array.isArray(value) ? value as Record<string, any> : {};
 }
 
 function batchCreateData(batch: BatchRow, importRunId: string, sourceCorpusHash: string) {
