@@ -1,5 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 
+import { mapDistractor } from "../../lib/content/pssaInsightMapping";
 import { buildPssaResponseSpec } from "../../lib/content/pssaResponseSpec";
 import { buildPlan, stableStringify } from "./lib/pssa-import-plan";
 
@@ -25,6 +26,7 @@ const args = new Set(process.argv.slice(2));
 const apply = args.has("--apply");
 const verifyForm = args.has("--verify-form");
 const simulateBadMatch = args.has("--simulate-bad-match");
+const simulateUnmappedRole = args.has("--simulate-unmapped-role");
 
 async function main() {
   assertDevOnlyGuard();
@@ -35,14 +37,17 @@ async function main() {
     const summary = {
       mode: apply ? "apply" : verifyForm ? "verify-form" : "dry-run",
       sourceRoleBearingMcqCount: sourceById.size,
-      dbTargetCount: validation.rows.length + validation.mismatches.length,
+      dbTargetCount: validation.rows.length + validation.mismatches.length + validation.roleMappabilityErrors.length,
       updatesNeeded: validation.rows.filter((row) => row.needsUpdate).length,
+      updateItemIds: validation.rows.filter((row) => row.needsUpdate).map((row) => row.itemId),
       noops: validation.rows.filter((row) => !row.needsUpdate).length,
       missingDbItems: validation.missingDbItems,
       mismatches: validation.mismatches,
+      roleMappabilityErrors: validation.roleMappabilityErrors,
     };
     console.log(JSON.stringify({ backfillSummary: summary }, null, 2));
     if (validation.mismatches.length) throw new Error("ABORT_PSSA_DISTRACTORROLE_BACKFILL_VALIDATION_FAILED");
+    if (validation.roleMappabilityErrors.length) throw new Error("ABORT_PSSA_DISTRACTORROLE_UNMAPPED_ROLE");
     if (apply) {
       await db.$transaction(async (tx) => {
         for (const row of validation.rows.filter((candidate) => candidate.needsUpdate)) {
@@ -112,12 +117,23 @@ async function validateTargets(db: PrismaClient, sourceById: Map<string, SourceI
   const missingDbItems = [...sourceById.keys()].filter((id) => !dbById.has(id));
   const rows: ValidationRow[] = [];
   const mismatches: Array<{ itemId: string; reason: string; currentChoices?: string[]; expectedChoices?: string[] }> = [];
+  const roleMappabilityErrors: Array<{ itemId: string; role: string; message: string }> = [];
   let mismatchInjected = false;
+  let unmappedInjected = false;
   for (const [itemId, source] of sourceById) {
     const current = dbById.get(itemId);
     if (!current) continue;
+    const nextSpec = simulateUnmappedRole && !unmappedInjected
+      ? specWithInjectedUnmappedRole(source.responseSpecJson)
+      : source.responseSpecJson;
+    unmappedInjected = unmappedInjected || simulateUnmappedRole;
+    const unmapped = unmappedRoles(nextSpec);
+    if (unmapped.length) {
+      roleMappabilityErrors.push(...unmapped.map((error) => ({ itemId, ...error })));
+      continue;
+    }
     const currentChoices = choiceTexts((current.responseSpecJson as any)?.choices ?? (current.responseSpecJson as any)?.structuredChoicesJson);
-    const expectedChoices = choiceTexts((source.responseSpecJson as any)?.choices);
+    const expectedChoices = choiceTexts((nextSpec as any)?.choices);
     const expectedForValidation = injectMismatch && !mismatchInjected
       ? [`__deliberate_bad_match__${expectedChoices[0] ?? ""}`, ...expectedChoices.slice(1)]
       : expectedChoices;
@@ -133,13 +149,13 @@ async function validateTargets(db: PrismaClient, sourceById: Map<string, SourceI
     rows.push({
       itemId,
       currentSpec: current.responseSpecJson,
-      nextSpec: source.responseSpecJson,
+      nextSpec,
       currentChoices,
       expectedChoices,
-      needsUpdate: stableStringify(current.responseSpecJson) !== stableStringify(source.responseSpecJson),
+      needsUpdate: stableStringify(current.responseSpecJson) !== stableStringify(nextSpec),
     });
   }
-  return { rows, missingDbItems, mismatches };
+  return { rows, missingDbItems, mismatches, roleMappabilityErrors };
 }
 
 async function computeLiveFormCoverage(db: PrismaClient, sourceById: Map<string, SourceItem>) {
@@ -159,6 +175,7 @@ async function computeLiveFormCoverage(db: PrismaClient, sourceById: Map<string,
   let distractorsWithRoles = 0;
   let correctChoicesWithRoles = 0;
   const incompleteItems: string[] = [];
+  const registryUnmappedRoles: Array<{ itemId: string; role: string; message: string }> = [];
   for (const row of form.items) {
     if (!sourceById.has(row.itemId)) continue;
     const spec = row.item.responseSpecJson as any;
@@ -172,6 +189,11 @@ async function computeLiveFormCoverage(db: PrismaClient, sourceById: Map<string,
       if (index === correctIndex) {
         if (typeof choice?.distractorRole === "string" && choice.distractorRole.trim()) correctChoicesWithRoles += 1;
       } else if (typeof choice?.distractorRole === "string" && choice.distractorRole.trim()) {
+        try {
+          mapDistractor(choice.distractorRole);
+        } catch (error) {
+          registryUnmappedRoles.push({ itemId: row.itemId, role: choice.distractorRole, message: error instanceof Error ? error.message : String(error) });
+        }
         rowDistractorsWithRoles += 1;
       }
     }
@@ -190,10 +212,13 @@ async function computeLiveFormCoverage(db: PrismaClient, sourceById: Map<string,
     expectedDistractorCount,
     distractorsWithRoles,
     correctChoicesWithRoles,
+    registryMappableRoles: registryUnmappedRoles.length === 0,
+    registryUnmappedRoles,
     incompleteItems,
     ok: roleEligibleMcqCount === mcqsWithCompleteRoleCoverage
       && expectedDistractorCount === distractorsWithRoles
-      && correctChoicesWithRoles === 0,
+      && correctChoicesWithRoles === 0
+      && registryUnmappedRoles.length === 0,
   };
 }
 
@@ -211,6 +236,29 @@ function hasCompleteRoleCoverage(spec: any, correctResponseJson: any) {
 function choiceTexts(value: unknown): string[] {
   if (!Array.isArray(value)) return [];
   return value.map((choice) => typeof choice === "string" ? choice : String((choice as any)?.text ?? ""));
+}
+
+function unmappedRoles(spec: any) {
+  const structured = Array.isArray(spec?.structuredChoicesJson) ? spec.structuredChoicesJson : [];
+  const errors: Array<{ role: string; message: string }> = [];
+  for (const choice of structured) {
+    const role = choice?.distractorRole;
+    if (typeof role !== "string" || !role.trim()) continue;
+    try {
+      mapDistractor(role);
+    } catch (error) {
+      errors.push({ role, message: error instanceof Error ? error.message : String(error) });
+    }
+  }
+  return errors;
+}
+
+function specWithInjectedUnmappedRole(spec: any) {
+  const clone = structuredClone(spec);
+  const structured = Array.isArray(clone?.structuredChoicesJson) ? clone.structuredChoicesJson : [];
+  const target = structured.find((choice: any) => typeof choice?.distractorRole === "string" && choice.distractorRole.trim());
+  if (target) target.distractorRole = "__unmapped_role_for_abort_proof__";
+  return clone;
 }
 
 main().catch((error) => {
