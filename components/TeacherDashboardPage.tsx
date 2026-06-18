@@ -98,6 +98,7 @@ const elaStandards: Record<string, string[]> = {
   ],
 };
 
+const DASHBOARD_LOAD_ERROR = "Some dashboard data could not be loaded. Please try again.";
 
 export default function TeacherDashboardPage() {
   
@@ -277,22 +278,26 @@ export default function TeacherDashboardPage() {
     }
   }
 
-  useEffect(() => {
-    async function loadDashboard() {
-      try {
-        const res = await fetch("/api/teacher/dashboard");
-        if (!res.ok) throw new Error("Failed to load teacher dashboard");
-        const json = await res.json();
-        setData(json);
-        setSelectedClassRoomId(json.classes?.[0]?.id || "");
-        await loadReadingCoachAssignments();
-      } catch (err: any) {
-        setError(err.message || "Unknown error");
-      } finally {
-        setLoading(false);
+  async function loadDashboard() {
+    setLoading(true);
+    setError("");
+    try {
+      const res = await fetch("/api/teacher/dashboard");
+      const json = await readJson(res);
+      if (!res.ok) {
+        throw new Error(res.status === 500 ? DASHBOARD_LOAD_ERROR : json.error || "Failed to load teacher dashboard");
       }
+      setData(json);
+      setSelectedClassRoomId(json.classes?.[0]?.id || "");
+      await loadReadingCoachAssignments();
+    } catch (err: any) {
+      setError(err.message || "Unknown error");
+    } finally {
+      setLoading(false);
     }
+  }
 
+  useEffect(() => {
     loadDashboard();
   }, []);
 
@@ -344,7 +349,20 @@ export default function TeacherDashboardPage() {
   }
 
   if (error) {
-    return <div className="rounded-3xl bg-white p-6 shadow text-red-600">{error}</div>;
+    return (
+      <div className="rounded-3xl bg-white p-6 shadow">
+        <h1 className="text-xl font-bold text-slate-950">Teacher Dashboard</h1>
+        <p className="mt-3 text-sm font-semibold text-red-700">{error}</p>
+        <div className="mt-5 flex flex-wrap gap-3">
+          <button type="button" onClick={loadDashboard} className="rounded-xl bg-slate-900 px-4 py-2 text-sm font-semibold text-white">
+            Retry
+          </button>
+          <a href="/teacher?tab=reports" className="rounded-xl border border-slate-200 px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50">
+            Open Reports
+          </a>
+        </div>
+      </div>
+    );
   }
 
   return (
