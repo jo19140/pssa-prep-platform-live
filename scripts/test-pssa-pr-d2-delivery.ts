@@ -84,7 +84,11 @@ function readyItem(id: string, interactionType: string, responseSpecJson: any, c
 
 const passage = readyPassage("passage_1");
 const itemFixtures = [
-  readyItem("mcq_1", "MCQ", { prompt: "Pick A.", choices: [{ text: "A" }, { text: "B" }] }, { correctIndex: 0 }, { totalPoints: 1 }, 1, passage),
+  readyItem("mcq_1", "MCQ", {
+    prompt: "Pick A.",
+    choices: ["A", "B"],
+    structuredChoicesJson: [{ text: "A" }, { text: "B", distractorRole: "unsupported_inference" }],
+  }, { correctIndex: 0 }, { totalPoints: 1 }, 1, passage),
   readyItem("ebsr_1", "EBSR", { partA: { prompt: "A?", choices: [{ text: "A" }, { text: "B" }] }, partB: { instruction: "B?", choices: [{ text: "E1" }, { text: "E2" }] } }, { partA: { correctIndex: 0 }, partB: { correctIndices: [0] } }, { totalPoints: 2, partAPoints: 1, partBPoints: 1, requirePartACorrectForFullCredit: true }, 2, passage),
   readyItem("multi_1", "MULTI_SELECT", { stem: "Select.", instructionText: "Choose.", choices: [{ text: "A" }, { text: "B" }, { text: "C" }] }, { correctIndices: [0, 1] }, { totalPoints: 2 }, 2, passage),
   readyItem("hot_1", "HOT_TEXT", { prompt: "Select.", instructionText: "Tap.", selectableSpans: [{ spanId: "s1", text: "one" }, { spanId: "s2", text: "two" }] }, { correctSpanIds: ["s1"] }, { totalPoints: 1 }, 1, passage),
@@ -269,6 +273,8 @@ async function testLeakAndProjection() {
     const item = await getPssaSessionItem(db, { auth: student, sessionId, position });
     assertLeakFree(item);
   }
+  const mcq = await getPssaSessionItem(db, { auth: student, sessionId, position: 1 });
+  assert.deepEqual((mcq.item.responseSpec as any).choices, [{ text: "A" }, { text: "B" }], "route-level MCQ payload must expose display text only");
   const planted = structuredClone(itemFixtures[4]);
   planted.responseSpecJson.rows[0].correctColumnId = "secret";
   db.form = makeForm([planted]);
@@ -494,6 +500,28 @@ function testScopeProof() {
   assert(serviceSource.includes("getClientIp"));
 }
 
+function testStudentFacingPssaRouteSecurityProof() {
+  const routeFiles = [
+    "app/api/pssa/session/launch/route.ts",
+    "app/api/pssa/session/state/route.ts",
+    "app/api/pssa/session/item/route.ts",
+    "app/api/pssa/session/answer/route.ts",
+    "app/api/pssa/session/section/route.ts",
+    "app/api/pssa/session/submit/route.ts",
+  ];
+  const sources = Object.fromEntries(routeFiles.map((file) => [file, fs.readFileSync(path.join(process.cwd(), file), "utf8")]));
+  assert(sources["app/api/pssa/session/item/route.ts"].includes("getPssaSessionItem"), "student item route must delegate to the PSSA session service");
+  assert.equal(sources["app/api/pssa/session/item/route.ts"].includes("responseSpecJson"), false, "student item route must not read raw responseSpecJson");
+  for (const route of routeFiles.filter((file) => file !== "app/api/pssa/session/item/route.ts")) {
+    assert.equal(sources[route].includes("responseSpecJson"), false, `${route} must not expose raw responseSpecJson`);
+    assert.equal(sources[route].includes("pssaItem.find"), false, `${route} must not directly query raw PssaItem content`);
+  }
+  const serviceSource = fs.readFileSync(path.join(process.cwd(), "lib/content/pssaFormSession.ts"), "utf8");
+  assert(serviceSource.includes("projectPssaStudentItem"), "getPssaSessionItem must project PssaItem through the student DTO allowlist");
+  assert(serviceSource.includes("answerPssaSessionItem"), "answer route must return mutation state, not item content");
+  assert.equal(serviceSource.includes("lib/serverScoring"), false, "PSSA-native delivery must not import legacy serverScoring");
+}
+
 function modelBlock(schema: string, modelName: string) {
   const lines = schema.split("\n");
   const start = lines.findIndex((line) => line === `model ${modelName} {`);
@@ -518,6 +546,7 @@ async function main() {
   await testSectionGatedDelivery();
   testPostAndCacheGuards();
   testScopeProof();
+  testStudentFacingPssaRouteSecurityProof();
   console.log("PSSA PR D-impl-2 delivery route tests passed.");
 }
 
