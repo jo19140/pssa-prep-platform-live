@@ -2,7 +2,7 @@ import type { PrismaClient } from "@prisma/client";
 
 import { assembleClassReport, type ClassReportLoaderEntry, type LoadedSession } from "@/lib/content/pssaClassReportLoader";
 import type { ClassReport } from "@/lib/content/pssaClassReport";
-import type { PssaReportForm, PssaReportItem } from "@/lib/content/pssaStudentReport";
+import { normalizePssaReportForm } from "@/lib/content/pssaReportFormNormalizer";
 
 export type LoadedPssaClassReport = {
   report: ClassReport;
@@ -73,7 +73,7 @@ export async function loadPssaClassReportForTeacher(opts: {
     classRoom,
     form,
     report: assembleClassReport(entries, {
-      form: normalizeForm(form),
+      form: normalizePssaReportForm(form),
       benchmarkSeason,
       formId: form.id,
       formVersion: form.contentHash,
@@ -104,48 +104,6 @@ function groupSessionsByUserId(sessions: any[]): Map<string, LoadedSession[]> {
     grouped.set(session.userId, rows);
   }
   return grouped;
-}
-
-function normalizeForm(form: any): PssaReportForm {
-  return {
-    id: form.id,
-    formId: form.id,
-    formVersion: form.contentHash,
-    blueprintVersion: form.blueprintVersion,
-    contentHash: form.contentHash,
-    items: form.items.map(normalizeFormItem),
-  };
-}
-
-function normalizeFormItem(formItem: any): PssaReportItem {
-  const item = formItem.item;
-  return {
-    id: formItem.itemId,
-    itemId: formItem.itemId,
-    interactionType: String(item.interactionType),
-    itemType: item.itemType,
-    eligibleContent: item.eligibleContent,
-    reportingCategory: item.reportingCategory,
-    correctIndex: correctIndexOf(item.correctResponseJson),
-    structuredChoicesJson: choicesArray(item.responseSpecJson),
-    answerChoicesJson: choicesArray(item.responseSpecJson),
-    choices: choicesArray(item.responseSpecJson),
-  };
-}
-
-function choicesArray(responseSpecJson: unknown) {
-  const spec = plainObject(responseSpecJson);
-  const direct = spec.structuredChoicesJson ?? spec.choices ?? spec.answerChoicesJson;
-  return Array.isArray(direct) ? direct : [];
-}
-
-function correctIndexOf(correctResponseJson: unknown) {
-  const correct = plainObject(correctResponseJson);
-  return typeof correct.correctIndex === "number" && Number.isInteger(correct.correctIndex) ? correct.correctIndex : null;
-}
-
-function plainObject(value: unknown): Record<string, any> {
-  return value && typeof value === "object" && !Array.isArray(value) ? value as Record<string, any> : {};
 }
 
 function defaultBenchmarkSeason(form: any) {

@@ -31,6 +31,7 @@ export function toParentDashboardViewData(
       standardsGrowth: stateTrack?.standardsGrowth ?? [],
       sessionId: stateTrack?.sessionId ?? null,
       submittedAt: stateTrack?.submittedAt ?? null,
+      scoreStatus: stateTrack?.scoreStatus,
       products: child.entitlements,
       entitlements: child.entitlements,
       availability: child.availability,

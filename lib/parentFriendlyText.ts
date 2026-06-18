@@ -1,5 +1,12 @@
 export function parentFriendlyPerformanceLevel(band: string) {
   switch (band) {
+    case "Strong": return "Strong";
+    case "Developing": return "Growing";
+    case "Growing": return "Growing";
+    case "Needs support": return "Needs support";
+    case "Limited evidence": return "Limited evidence";
+    case "Incomplete": return "Incomplete";
+    case "Still being finalized": return "Still being finalized";
     case "Advanced": return "Working above grade-level expectations";
     case "Proficient": return "Meeting grade-level expectations";
     case "Basic": return "Getting closer to grade-level expectations";

@@ -3,6 +3,7 @@ import "server-only";
 import { db } from "@/lib/db";
 import { getFullLiteracyProfile } from "@/lib/literacy/profile";
 import { createParentDashboardLoader } from "@/lib/parent/parentDashboardLoaderCore";
+import { loadParentStateTrack } from "@/lib/parent/parentStateTrackFromDiagnostic";
 
 export type ParentDashboardStateTrackPayload = {
   studentId: string;
@@ -16,37 +17,8 @@ export type ParentDashboardStateTrackPayload = {
   standardsGrowth: unknown[];
   sessionId: string | null;
   submittedAt: Date | null;
+  scoreStatus?: "final" | "provisional";
 };
-
-async function loadStateTrackForChild({
-  studentUserId,
-  name,
-  grade,
-}: {
-  studentUserId: string;
-  name: string | null;
-  grade: number | null;
-}): Promise<ParentDashboardStateTrackPayload> {
-  const latest = await db.testSession.findFirst({
-    where: { userId: studentUserId, submittedAt: { not: null } },
-    include: { assessment: true, report: true },
-    orderBy: { submittedAt: "desc" },
-  });
-  const payload = (latest?.report?.summaryPayload as any) || {};
-  return {
-    studentId: studentUserId,
-    studentName: name?.trim() || "Student",
-    grade,
-    latestAssessment: latest?.assessment.title ?? null,
-    latestScore: latest?.report?.percentScore ?? null,
-    performanceBand: latest?.report?.performanceBand ?? null,
-    growth: payload.growth ?? null,
-    standardsMastery: payload.standardsMastery ?? [],
-    standardsGrowth: payload.standardsGrowth ?? [],
-    sessionId: latest?.id ?? null,
-    submittedAt: latest?.submittedAt ?? null,
-  };
-}
 
 export const loadParentDashboard = createParentDashboardLoader({
   async loadParentIdentity(userId) {
@@ -87,7 +59,9 @@ export const loadParentDashboard = createParentDashboardLoader({
     }));
   },
 
-  loadStateTrack: loadStateTrackForChild,
+  async loadStateTrack(child) {
+    return loadParentStateTrack(child.studentUserId);
+  },
 
   async loadReadingBuddy(child) {
     return getFullLiteracyProfile(child.studentUserId);
