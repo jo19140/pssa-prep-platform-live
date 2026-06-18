@@ -735,12 +735,14 @@
           "text": "The birds sings before sunrise.",
           "isCorrect": false,
           "errorPattern": "singular_verb_with_plural_subject",
+          "distractorRole": "singular_verb_with_plural_subject",
           "rationale": "Birds is plural, so sings does not agree."
         },
         {
           "text": "The bird sing before sunrise.",
           "isCorrect": false,
           "errorPattern": "plural_verb_with_singular_subject",
+          "distractorRole": "plural_verb_with_singular_subject",
           "rationale": "Bird is singular, so sing does not agree."
         },
         {
@@ -753,6 +755,7 @@
           "text": "The birds singing before sunrise.",
           "isCorrect": false,
           "errorPattern": "missing_finite_verb",
+          "distractorRole": "missing_finite_verb",
           "rationale": "The sentence needs a complete verb."
         }
       ],

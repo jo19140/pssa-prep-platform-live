@@ -1771,9 +1771,40 @@ for (const itemId of ["pssa_item_g3_reading_6", "pssa_item_g3_reading_7", "pssa_
   assert(item, `${itemId} must remain in the active foundation plan`);
   assert.deepEqual(item.blockedReasons, [], `${itemId} must still pass all import gates`);
 }
+const roleEligibleGrade3Mcqs = grade3Plan.activeItems.filter(isRoleEligibleGrade3Mcq);
+let completeRoleCoverageCount = 0;
+for (const item of roleEligibleGrade3Mcqs) {
+  const spec = item.responseSpecJson as any;
+  const choices = Array.isArray(spec?.choices) ? spec.choices : [];
+  const structured = Array.isArray(spec?.structuredChoicesJson) ? spec.structuredChoicesJson : [];
+  const correctIndex = (item.correctResponseJson as any)?.correctIndex;
+  assert(Number.isInteger(correctIndex), `${item.itemId} must have a single MCQ correctIndex`);
+  assert.equal(structured.length, choices.length, `${item.itemId} must include structuredChoicesJson for every MCQ choice`);
+  assert.deepEqual(structured.map((choice: any) => choice.text), choices, `${item.itemId} structuredChoicesJson text/order must mirror choices`);
+  let wrongChoicesWithRoles = 0;
+  for (const [index, choice] of structured.entries()) {
+    if (index === correctIndex) {
+      assert.equal(choice.distractorRole, undefined, `${item.itemId} correct choice must not carry distractorRole`);
+    } else {
+      assert.equal(typeof choice.distractorRole, "string", `${item.itemId} wrong choice ${index} must carry distractorRole`);
+      assert.notEqual(choice.distractorRole.trim(), "", `${item.itemId} wrong choice ${index} must carry a non-empty distractorRole`);
+      wrongChoicesWithRoles += 1;
+    }
+  }
+  assert.equal(wrongChoicesWithRoles, choices.length - 1, `${item.itemId} must have complete distractorRole coverage`);
+  completeRoleCoverageCount += 1;
+}
+assert.equal(completeRoleCoverageCount, roleEligibleGrade3Mcqs.length, "every role-eligible Grade 3 MCQ must have complete distractorRole coverage");
+console.log(`PSSA distractorRole corpus coverage: roleEligibleMcqCount=${roleEligibleGrade3Mcqs.length}, completeCoverage=${completeRoleCoverageCount}`);
 for (const gateId of PSSA_CONTENT_QUALITY_GATE_IDS) {
   const tally = grade3Plan.gateTallies.get(gateId);
   assert.equal(tally?.fail ?? 0, 0, `${gateId} must have zero failures across the Grade 3 import plan`);
 }
 
 console.log("PSSA content audit detector tests passed.");
+
+function isRoleEligibleGrade3Mcq(item: { interactionType: string; eligibleContent: string; reportingCategory: string }) {
+  if (item.interactionType !== "MCQ") return false;
+  if (item.reportingCategory === "D") return true;
+  return item.reportingCategory === "B" && /^E03\.B-[KCV]\./.test(item.eligibleContent);
+}
