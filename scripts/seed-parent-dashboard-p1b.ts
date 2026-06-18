@@ -4,7 +4,8 @@ import bcrypt from "bcryptjs";
 const PARENT_EMAIL = "parent.p1b@dev.local";
 const PARENT_PASSWORD = "ParentP1b!2026";
 const E2E_STUDENT_EMAILS = ["e2e.student1@dev.local", "e2e.student2@dev.local", "e2e.student3@dev.local"];
-const SINGLE_PRODUCT_EMAIL = "parent.p1b.reading-only.student@dev.local";
+const SINGLE_PRODUCT_EMAIL = "parent.p1b.math-soon.student@dev.local";
+const LEGACY_SINGLE_PRODUCT_EMAIL = "parent.p1b.reading-only.student@dev.local";
 
 const db = new PrismaClient();
 
@@ -40,6 +41,7 @@ async function main() {
     await tx.user.update({
       where: { id: bothProductStudent.id },
       data: {
+        name: "Ava Carter",
         enrolledTestPrep: unionEnumValues(bothProductStudent.enrolledTestPrep, ["PSSA"]),
         enrolledPrograms: unionEnumValues(bothProductStudent.enrolledPrograms, ["VENUS"]),
       },
@@ -48,6 +50,7 @@ async function main() {
 
     const syntheticStudent = await upsertSingleProductStudent(tx, passwordHash);
     await linkParent(tx, parentProfile.id, syntheticStudent.studentProfile.id);
+    await unlinkLegacySyntheticChild(tx, parentProfile.id);
 
     const combos = await tx.parentStudentLink.findMany({
       where: { parentProfileId: parentProfile.id },
@@ -58,7 +61,7 @@ async function main() {
     console.log(`Parent login: ${PARENT_EMAIL} / ${PARENT_PASSWORD}`);
     console.log("Parent URL: http://localhost:3000/parent");
     for (const link of combos) {
-      console.log(`${link.studentProfile.user.name}: enrolledPrograms=${link.studentProfile.user.enrolledPrograms.join(",") || "(none)"} enrolledTestPrep=${link.studentProfile.user.enrolledTestPrep.join(",") || "(none)"}`);
+      console.log(`${link.studentProfile.user.name}: ${displayProducts(link.studentProfile.user.enrolledPrograms, link.studentProfile.user.enrolledTestPrep).join(", ") || "No active products"}`);
     }
   });
 }
@@ -89,22 +92,22 @@ async function upsertSingleProductStudent(tx: PrismaTransaction, passwordHash: s
   const user = await tx.user.upsert({
     where: { email: SINGLE_PRODUCT_EMAIL },
     update: {
-      name: "Reading Buddy Only Demo",
+      name: "Marcus Rivera",
       role: "STUDENT",
       passwordHash,
       accountDeletedAt: null,
       emailVerifiedAt: new Date(),
-      enrolledPrograms: ["VENUS"],
-      enrolledTestPrep: [],
+      enrolledPrograms: ["MERCURY"],
+      enrolledTestPrep: ["PSSA"],
     },
     create: {
       email: SINGLE_PRODUCT_EMAIL,
-      name: "Reading Buddy Only Demo",
+      name: "Marcus Rivera",
       role: "STUDENT",
       passwordHash,
       emailVerifiedAt: new Date(),
-      enrolledPrograms: ["VENUS"],
-      enrolledTestPrep: [],
+      enrolledPrograms: ["MERCURY"],
+      enrolledTestPrep: ["PSSA"],
     },
   });
   const studentProfile = await tx.studentProfile.upsert({
@@ -113,6 +116,27 @@ async function upsertSingleProductStudent(tx: PrismaTransaction, passwordHash: s
     create: { userId: user.id, grade: 3, schoolName: "PSSA Dev E2E" },
   });
   return { user, studentProfile };
+}
+
+async function unlinkLegacySyntheticChild(tx: PrismaTransaction, parentProfileId: string) {
+  const legacy = await tx.user.findUnique({
+    where: { email: LEGACY_SINGLE_PRODUCT_EMAIL },
+    include: { studentProfile: true },
+  });
+  if (!legacy?.studentProfile) return;
+  await tx.parentStudentLink.deleteMany({
+    where: { parentProfileId, studentProfileId: legacy.studentProfile.id },
+  });
+}
+
+function displayProducts(enrolledPrograms: string[], enrolledTestPrep: string[]) {
+  const labels = [];
+  if (enrolledTestPrep.length) labels.push("State Track");
+  if (enrolledPrograms.includes("VENUS")) labels.push("Reading Buddy with Harper");
+  if (enrolledPrograms.includes("MERCURY")) labels.push("Math Buddy with Damien");
+  if (enrolledPrograms.includes("MARS")) labels.push("Science Buddy");
+  if (enrolledPrograms.includes("EARTH")) labels.push("History Buddy");
+  return labels;
 }
 
 type PrismaTransaction = Parameters<Parameters<PrismaClient["$transaction"]>[0]>[0];

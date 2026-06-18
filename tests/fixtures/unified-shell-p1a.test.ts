@@ -4,6 +4,7 @@ import path from "node:path";
 import {
   childHasReadingBuddy,
   childHasStateTrack,
+  normalizeActiveProduct,
   resolveParentProducts,
   resolveProducts,
 } from "../../lib/entitlements";
@@ -15,7 +16,11 @@ async function main() {
   assert.deepEqual(resolveProducts({ enrolledPrograms: [], enrolledTestPrep: [] }), []);
   assert.deepEqual(
     resolveProducts({ enrolledPrograms: ["VENUS", "MARS"], enrolledTestPrep: ["PSSA"] }).map((product) => product.id),
-    ["state_track", "reading_buddy"],
+    ["state_track", "reading_buddy", "science_buddy"],
+  );
+  assert.deepEqual(
+    resolveProducts({ enrolledPrograms: ["MERCURY", "MERCURY"], enrolledTestPrep: [] }),
+    [{ id: "math_buddy", label: "Math Buddy", mascot: "Damien", status: "coming_soon" }],
   );
   assert.deepEqual(
     resolveParentProducts([
@@ -23,7 +28,7 @@ async function main() {
       { enrolledPrograms: [], enrolledTestPrep: ["PSSA"] },
       { enrolledPrograms: ["MARS"], enrolledTestPrep: ["STAAR"] },
     ]).map((product) => product.id),
-    ["state_track", "reading_buddy"],
+    ["state_track", "reading_buddy", "science_buddy"],
   );
   assert.deepEqual(
     resolveParentProducts([
@@ -31,12 +36,18 @@ async function main() {
       { enrolledPrograms: ["VENUS"], enrolledTestPrep: [] },
       { enrolledPrograms: [], enrolledTestPrep: ["PSSA"] },
     ]).map((product) => product.id),
-    ["state_track", "reading_buddy"],
+    ["state_track", "reading_buddy", "science_buddy"],
   );
   assert.equal(childHasStateTrack({ enrolledTestPrep: ["PSSA"] }), true);
   assert.equal(childHasStateTrack({ enrolledTestPrep: [] }), false);
   assert.equal(childHasReadingBuddy({ enrolledPrograms: ["VENUS"] }), true);
+  assert.equal(childHasReadingBuddy({ enrolledPrograms: ["MERCURY"] }), false);
   assert.equal(childHasReadingBuddy({ enrolledPrograms: [] }), false);
+  const mixedProducts = resolveProducts({ enrolledPrograms: ["VENUS", "MERCURY"], enrolledTestPrep: ["PSSA"] });
+  assert.equal(normalizeActiveProduct("all", mixedProducts), "all");
+  assert.equal(normalizeActiveProduct("reading_buddy", mixedProducts), "reading_buddy");
+  assert.equal(normalizeActiveProduct("math_buddy", mixedProducts), "all");
+  assert.equal(normalizeActiveProduct("reading_buddy", [{ id: "math_buddy", label: "Math Buddy", mascot: "Damien", status: "coming_soon" }]), "all");
 
   const deniedLoader = createParentDashboardLoader({
     loadParentIdentity: async () => null,
@@ -58,6 +69,7 @@ async function main() {
         child("sp-a", "user-a", "amy", 3, [], ["PSSA"]),
         child("sp-b", "user-b-dupe", "Duplicate", 5, ["MARS"], ["STAAR"]),
         child("sp-c", "user-c", "Ben", null, ["VENUS"], []),
+        child("sp-d", "user-d", "Cal", 3, ["MERCURY"], []),
       ];
     },
     loadStateTrack: async (linkedChild) => {
@@ -73,12 +85,13 @@ async function main() {
   });
   const result = await loader("parent-user");
   assert.equal(result.status, "ok");
-  assert.deepEqual(result.products.map((product) => product.id), ["state_track", "reading_buddy"]);
-  assert.deepEqual(result.children.map((item) => item.studentId), ["sp-a", "sp-c", "sp-b"]);
+  assert.deepEqual(result.products.map((product) => product.id), ["state_track", "reading_buddy", "math_buddy"]);
+  assert.deepEqual(result.children.map((item) => item.studentId), ["sp-a", "sp-c", "sp-d", "sp-b"]);
   assert.deepEqual(calls.sort(), ["reading:sp-b", "reading:sp-c", "state:sp-a", "state:sp-b"]);
   assert.deepEqual(result.children[0].availability, { stateTrack: "unavailable", readingBuddy: "not_entitled" });
   assert.deepEqual(result.children[1].availability, { stateTrack: "not_entitled", readingBuddy: "unavailable" });
-  assert.deepEqual(result.children[2].availability, { stateTrack: "ok", readingBuddy: "ok" });
+  assert.deepEqual(result.children[2].availability, { stateTrack: "not_entitled", readingBuddy: "not_entitled" });
+  assert.deepEqual(result.children[3].availability, { stateTrack: "ok", readingBuddy: "ok" });
 
   const coreSource = fs.readFileSync(path.join(process.cwd(), "lib/parent/parentDashboardLoaderCore.ts"), "utf8");
   assert.equal(coreSource.includes("server-only"), false, "pure core must not import server-only");

@@ -1,11 +1,11 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import type { ActiveProduct } from "@/lib/entitlements";
+import type { ActiveProduct, Product } from "@/lib/entitlements";
+import { normalizeActiveProduct } from "@/lib/entitlements";
 import type { ParentDashboardViewChild, ParentDashboardViewData } from "@/lib/parent/parentDashboardViewModel";
 import { normalizeTipKey, parentHelpTipForKey } from "@/lib/content/parentHelpTips";
 import { parentFriendlyGrowth, parentFriendlyPerformanceLevel } from "@/lib/parentFriendlyText";
-import { normalizeActiveProduct } from "@/components/synesis/ProductSwitcher";
 
 export function ParentDashboardPage({
   initialData,
@@ -15,7 +15,7 @@ export function ParentDashboardPage({
   activeProduct?: string | null;
 }) {
   const [selectedStudentId, setSelectedStudentId] = useState<string | null>(null);
-  const normalizedActiveProduct = normalizeActiveProduct(activeProduct);
+  const normalizedActiveProduct = normalizeActiveProduct(activeProduct, initialData.products);
   const visibleChildren = useMemo(
     () => childrenForProduct(initialData.children, normalizedActiveProduct),
     [initialData.children, normalizedActiveProduct],
@@ -129,9 +129,10 @@ function HeroShell({ title, body, meta, chip }: { title: string; body: string; m
 
 function ProductCards({ child }: { child: ParentDashboardViewChild }) {
   return (
-    <section className="grid gap-4 md:grid-cols-2">
-      <Metric title="State Track" value={availabilityLabel(child.availability.stateTrack)} />
-      <Metric title="Reading Buddy" value={availabilityLabel(child.availability.readingBuddy)} />
+    <section className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      {child.entitlements.map((product) => (
+        <Metric key={product.id} title={productDisplayName(product)} value={productCardValue(child, product)} />
+      ))}
     </section>
   );
 }
@@ -279,7 +280,7 @@ function EmptyState({ message }: { message: string }) {
 
 function childrenForProduct(children: ParentDashboardViewChild[], activeProduct: ActiveProduct) {
   if (activeProduct === "all") return children;
-  return children.filter((child) => child.entitlements.some((product) => product.id === activeProduct));
+  return children.filter((child) => child.entitlements.some((product) => product.id === activeProduct && product.status === "live"));
 }
 
 function helpTips(child: ParentDashboardViewChild, activeProduct: ActiveProduct) {
@@ -353,6 +354,17 @@ function availabilityLabel(value: ParentDashboardViewChild["availability"]["stat
   if (value === "ok") return "Available";
   if (value === "unavailable") return "Temporarily unavailable";
   return "Not enrolled";
+}
+
+function productDisplayName(product: Product) {
+  return product.mascot ? `${product.label} with ${product.mascot}` : product.label;
+}
+
+function productCardValue(child: ParentDashboardViewChild, product: Product) {
+  if (product.status === "coming_soon") return "Coming soon";
+  if (product.id === "state_track") return availabilityLabel(child.availability.stateTrack);
+  if (product.id === "reading_buddy") return availabilityLabel(child.availability.readingBuddy);
+  return "Coming soon";
 }
 
 function growthMetric(growth: unknown) {

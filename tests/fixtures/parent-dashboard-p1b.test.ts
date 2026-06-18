@@ -17,6 +17,7 @@ assert.match(parentPage, /homeHref="\/parent"/, "parent logo should return to pa
 assert.match(parentPage, /<ProductSwitcher products=\{viewData\.products\} activeProduct=\{activeProduct\}/, "parent page must render ProductSwitcher in the shell");
 assert.match(parentPage, /loadParentDashboard\(String\(\(session\.user as any\)\.id\)\)/, "parent page must load only the signed-in parent");
 assert.match(parentPage, /JSON\.parse\(JSON\.stringify\(toParentDashboardViewData\(dashboard\)\)\)/, "parent page must pass JSON-safe data to the client");
+assert.match(parentPage, /normalizeActiveProduct\([\s\S]*viewData\.products\)/, "parent page must use shared active-product normalization against enrolled products");
 assert.match(parentPage, /export const dynamic = "force-dynamic"/, "parent page must use authenticated-page no-cache pattern");
 
 assert.match(dashboard, /initialData: ParentDashboardViewData/, "dashboard should receive server-loaded initial data");
@@ -37,6 +38,9 @@ assert.match(dashboard, /visibleChildren\.length > 1/, "dashboard must hide sele
 assert.match(dashboard, /Message teacher · Coming soon/, "message teacher action must be disabled coming-soon");
 assert.match(dashboard, /Email me this summary · Coming soon/, "email summary action must be disabled until contract supports unified data");
 assert.equal(/row\.performanceBand\}/.test(dashboard), false, "dashboard must not render raw State Track band values");
+assert.match(dashboard, /product\.status === "coming_soon"/, "dashboard must render coming-soon products honestly");
+assert.match(dashboard, /productDisplayName/, "dashboard must render buddy display names without program codes");
+assert.match(dashboard, /product\.id === activeProduct && product\.status === "live"/, "dashboard must not open coming-soon filtered sections");
 
 assert.match(route, /toParentDashboardViewData\(dashboard\)/, "API route and page must share the dashboard view adapter");
 assert.equal(/pathname === "\/parent" && role === "PARENT"/.test(middleware), false, "middleware must not redirect parent /parent away from itself");
@@ -48,5 +52,20 @@ assert.match(seed, /ALLOW_PSSA_PARENT_SEED/, "seed must have explicit allow guar
 assert.match(seed, /127\.0\.0\.1/, "seed must guard local DB host");
 assert.match(seed, /pssa_dev/, "seed must guard local DB name");
 assert.match(seed, /unionEnumValues/, "seed must use additive entitlement unions");
+assert.match(seed, /Ava Carter/, "seed must use neutral child names");
+assert.match(seed, /Marcus Rivera/, "seed must use neutral child names");
+assert.match(seed, /Reading Buddy with Harper/, "seed must print Reading Buddy display name");
+assert.match(seed, /Math Buddy with Damien/, "seed must print Math Buddy display name");
+assert.match(seed, /State Track/, "seed must print State Track display name");
+
+const entitlements = fs.readFileSync(path.join(root, "lib/entitlements.ts"), "utf8");
+const switcher = fs.readFileSync(path.join(root, "components/synesis/ProductSwitcher.tsx"), "utf8");
+const loaderCore = fs.readFileSync(path.join(root, "lib/parent/parentDashboardLoaderCore.ts"), "utf8");
+assert.match(entitlements, /as const satisfies Record<SynesisProgram, Product>/, "entitlements must use exhaustive as-const program map");
+assert.match(entitlements, /includes\("VENUS"\)/, "Reading Buddy helper must key specifically on VENUS");
+assert.match(entitlements, /requested\?\.status === "live"/, "active product normalization must require live status");
+assert.match(switcher, /aria-disabled="true"/, "coming-soon switcher items must be disabled");
+assert.match(switcher, /· Coming soon/, "coming-soon switcher items must be labeled");
+assert.match(loaderCore, /if \(readingBuddyEntitled\)/, "loader must only load Reading Buddy when childHasReadingBuddy is true");
 
 console.log("parent dashboard Phase 1b source checks passed");

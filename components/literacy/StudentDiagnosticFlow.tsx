@@ -27,7 +27,7 @@ export function StudentDiagnosticFlow({ voice = false }: { voice?: boolean }) {
       <div className="grid gap-6 lg:grid-cols-[1fr_280px]">
         <section className="space-y-6">
           <div>
-            <p className="text-sm font-bold uppercase tracking-wide text-amber-700">Reading Buddy on Venus</p>
+            <p className="text-sm font-bold uppercase tracking-wide text-amber-700">Reading Buddy with Harper</p>
             <h1 className="mt-2 text-3xl font-black text-slate-950">Standards-aligned diagnostic</h1>
             <p className="mt-2 max-w-2xl text-slate-600">A short baseline for striving readers. Passage, word, and comprehension content is marked as placeholder until the content pipeline supplies reviewed material.</p>
           </div>

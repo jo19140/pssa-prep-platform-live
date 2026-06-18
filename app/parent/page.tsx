@@ -4,7 +4,7 @@ import { authOptions } from "@/lib/auth";
 import { ParentDashboardPage } from "@/components/ParentDashboardPage";
 import { ProductSwitcher } from "@/components/synesis/ProductSwitcher";
 import { SynesisPageShell } from "@/components/synesis/SynesisPageShell";
-import { normalizeActiveProduct } from "@/components/synesis/ProductSwitcher";
+import { normalizeActiveProduct } from "@/lib/entitlements";
 import { loadParentDashboard } from "@/lib/parent/loadParentDashboard";
 import { toParentDashboardViewData } from "@/lib/parent/parentDashboardViewModel";
 
@@ -22,10 +22,10 @@ export default async function ParentPage({
   const dashboard = await loadParentDashboard(String((session.user as any).id));
   if (dashboard.status === "parent_not_found") redirect("/dashboard");
   const resolvedSearchParams = await searchParams;
+  const viewData = JSON.parse(JSON.stringify(toParentDashboardViewData(dashboard)));
   const activeProduct = normalizeActiveProduct(Array.isArray(resolvedSearchParams?.product)
     ? resolvedSearchParams?.product[0]
-    : resolvedSearchParams?.product);
-  const viewData = JSON.parse(JSON.stringify(toParentDashboardViewData(dashboard)));
+    : resolvedSearchParams?.product, viewData.products);
 
   return (
     <SynesisPageShell
