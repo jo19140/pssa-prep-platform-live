@@ -43,6 +43,12 @@ import {
 import { projectPssaStudentItem } from "../lib/content/pssaStudentDto";
 import { scorePssaItem } from "../lib/content/pssaScoring";
 import {
+  deriveStudentInsights,
+} from "../lib/content/pssaInsightMapping";
+import {
+  buildPssaResponseSpec,
+} from "../lib/content/pssaResponseSpec";
+import {
   buildPssaDramaLineMap,
   buildPssaStaminaSectionMap,
   evaluatePssaDomainFactCheckRequired,
@@ -61,6 +67,115 @@ assertGrade3TeiContract();
 assertGrade3MatchingGridDragDropContract();
 assertGrade3ConventionsContract();
 assertGrade3ShortAnswerContract();
+
+const roleBearingMcq = {
+  itemId: "role_mcq_01",
+  interactionType: "MCQ",
+  studentFacingPrompt: "Which detail best supports the idea?",
+  eligibleContent: "E03.B-K.1.1.1",
+  reportingCategory: "B",
+  correctIndex: 1,
+  answerChoicesJson: [
+    { text: "A nearby but unsupported detail.", distractorRole: "unsupported_inference" },
+    { text: "The exact detail that supports the idea.", distractorRole: null },
+    { text: "A detail from the wrong section.", distractorRole: "wrong_section" },
+    { text: "A reversed claim from the passage.", distractorRole: "opposite_claim" },
+  ],
+};
+const roleSpec = buildPssaResponseSpec(roleBearingMcq) as any;
+assert.deepEqual(
+  roleSpec.choices,
+  roleBearingMcq.answerChoicesJson.map((choice) => choice.text),
+  "role-bearing MCQ must preserve legacy choices string[] order",
+);
+assert.deepEqual(
+  roleSpec.structuredChoicesJson.map((choice: any) => choice.text),
+  roleSpec.choices,
+  "structuredChoicesJson text/order must exactly match choices",
+);
+assert.equal(roleSpec.structuredChoicesJson.length, roleSpec.choices.length, "structuredChoicesJson count must match choices count");
+for (const [index, choice] of roleSpec.structuredChoicesJson.entries()) {
+  if (index === roleBearingMcq.correctIndex) {
+    assert.equal(choice.distractorRole, undefined, "correct MCQ choice must not carry distractorRole");
+  } else {
+    assert.equal(typeof choice.distractorRole, "string", `distractor ${index} must carry a non-empty distractorRole`);
+    assert.notEqual(choice.distractorRole, "", `distractor ${index} must carry a non-empty distractorRole`);
+  }
+}
+assert.deepEqual(
+  buildPssaResponseSpec({
+    interactionType: "MCQ",
+    studentFacingPrompt: "Legacy prompt?",
+    choices: ["A", "B", "C", "D"],
+    correctIndex: 0,
+  }),
+  { prompt: "Legacy prompt?", choices: ["A", "B", "C", "D"] },
+  "legacy role-neutral MCQ must remain flat",
+);
+assert.deepEqual(
+  buildPssaResponseSpec({
+    itemType: "CONVENTIONS",
+    stem: "Which sentence is written correctly?",
+    answerChoicesJson: [
+      { text: "The birds sings.", distractorRole: "singular_subject_plural_verb" },
+      { text: "The birds sing.", distractorRole: null },
+      { text: "The bird sing.", distractorRole: "plural_subject_singular_verb" },
+      { text: "The birds singing.", distractorRole: "no_complete_verb" },
+    ],
+    correctIndex: 1,
+  }),
+  {
+    prompt: "Which sentence is written correctly?",
+    choices: ["The birds sings.", "The birds sing.", "The bird sing.", "The birds singing."],
+    structuredChoicesJson: [
+      { text: "The birds sings.", distractorRole: "singular_subject_plural_verb" },
+      { text: "The birds sing." },
+      { text: "The bird sing.", distractorRole: "plural_subject_singular_verb" },
+      { text: "The birds singing.", distractorRole: "no_complete_verb" },
+    ],
+  },
+  "conventions-as-MCQ must preserve roles without changing legacy choices",
+);
+const ebsrFixture = { interactionType: "EBSR", partA: { choices: [{ text: "A", distractorRole: null }] }, partB: { choices: [{ text: "B" }] } };
+assert.equal(buildPssaResponseSpec(ebsrFixture), ebsrFixture, "EBSR responseSpec must remain byte/identity unchanged by the shared builder");
+assert.deepEqual(
+  buildPssaResponseSpec({
+    interactionType: "SHORT_ANSWER",
+    stem: "Explain the answer.",
+    instructionText: "Use details.",
+    requiredSupportCount: 2,
+    requiresTextSupport: true,
+  }),
+  { stem: "Explain the answer.", instructionText: "Use details.", requiredSupportCount: 2, requiresTextSupport: true },
+  "short-answer responseSpec shape must remain unchanged",
+);
+const projectedRoleItem = projectPssaStudentItem({
+  interactionType: "MCQ",
+  interactionSubtype: "",
+  pointValue: 1,
+  responseSpecJson: roleSpec,
+});
+assert.deepEqual((projectedRoleItem.responseSpec as any).choices, roleSpec.choices.map((text: string) => ({ text })), "student DTO must expose MCQ choice text only");
+const insight = deriveStudentInsights(
+  {
+    benchmarkSeason: "BOY",
+    responses: [{ itemId: roleBearingMcq.itemId, selectedIndex: 0, isCorrect: false, scoreStatus: "scored" }],
+  },
+  {
+    id: "form-role-proof",
+    formId: "form-role-proof",
+    contentHash: "sha256:role-proof",
+    items: [{
+      itemId: roleBearingMcq.itemId,
+      interactionType: "MCQ",
+      eligibleContent: roleBearingMcq.eligibleContent,
+      correctIndex: roleBearingMcq.correctIndex,
+      structuredChoicesJson: roleSpec.structuredChoicesJson,
+      choices: roleSpec.choices,
+    }],
+  },
+);
+assert.equal(insight[0]?.roleFamily, "unsupported_inference", "wrong role-bearing MCQ response must produce a real insight roleFamily");
 
 const staminaConventionsFixture = JSON.parse(fs.readFileSync("exemplars/pssa_grade3_stamina_pilot/conventions_mc_block.json", "utf8"));
 const staminaConventionItems = staminaConventionsFixture.items as any[];

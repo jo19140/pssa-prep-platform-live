@@ -458,7 +458,9 @@ function testScopeProof() {
     .filter((line) => !modelBlock(baseSchema, "PssaFormSession").split("\n").includes(line))
     .map((line) => line.trim())
     .filter(Boolean);
-  assert.deepEqual(sessionDelta.sort(), ["currentSectionIndex    Int                   @default(1)", "sectionStatusesJson    Json?"].sort(), "PssaFormSession may only gain additive section-progress fields");
+  const allowedSessionDelta = ["currentSectionIndex    Int                   @default(1)", "sectionStatusesJson    Json?"];
+  assert.deepEqual(sessionDelta.filter((line) => !allowedSessionDelta.includes(line)), [], "PssaFormSession may only gain additive section-progress fields");
+  for (const field of allowedSessionDelta) assert.equal(modelBlock(schema, "PssaFormSession").includes(field), true, `PssaFormSession must retain ${field}`);
   assert.equal(modelBlock(schema, "PssaFormResponse"), modelBlock(baseSchema, "PssaFormResponse"), "PssaFormResponse model must be unchanged");
   assertNullableModelFields(schema, "PssaPassage", ["staminaBand", "genre", "textFeaturesJson", "domainVocabularyLoad", "factCheckNotesJson"]);
   assertNullableModelFields(schema, "PssaItem", ["targetWordOrPhrase", "testsApplicationNotDefinition"]);
