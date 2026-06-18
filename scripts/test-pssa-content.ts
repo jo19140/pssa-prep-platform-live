@@ -44,6 +44,8 @@ import { projectPssaStudentItem } from "../lib/content/pssaStudentDto";
 import { scorePssaItem } from "../lib/content/pssaScoring";
 import {
   deriveStudentInsights,
+  mapDistractor,
+  roleFamilyOf,
 } from "../lib/content/pssaInsightMapping";
 import {
   buildPssaResponseSpec,
@@ -1772,6 +1774,7 @@ for (const itemId of ["pssa_item_g3_reading_6", "pssa_item_g3_reading_7", "pssa_
   assert.deepEqual(item.blockedReasons, [], `${itemId} must still pass all import gates`);
 }
 const roleEligibleGrade3Mcqs = grade3Plan.activeItems.filter(isRoleEligibleGrade3Mcq);
+const sourceRoleBearingGrade3Mcqs = [...grade3Plan.activeItems, ...grade3Plan.deprecatedItems].filter(hasAnyDistractorRole);
 let completeRoleCoverageCount = 0;
 for (const item of roleEligibleGrade3Mcqs) {
   const spec = item.responseSpecJson as any;
@@ -1788,6 +1791,7 @@ for (const item of roleEligibleGrade3Mcqs) {
     } else {
       assert.equal(typeof choice.distractorRole, "string", `${item.itemId} wrong choice ${index} must carry distractorRole`);
       assert.notEqual(choice.distractorRole.trim(), "", `${item.itemId} wrong choice ${index} must carry a non-empty distractorRole`);
+      assert.equal(roleFamilyOf(choice.distractorRole).length > 0, true, `${item.itemId} wrong choice ${index} must carry a registry-mappable distractorRole`);
       wrongChoicesWithRoles += 1;
     }
   }
@@ -1796,6 +1800,20 @@ for (const item of roleEligibleGrade3Mcqs) {
 }
 assert.equal(completeRoleCoverageCount, roleEligibleGrade3Mcqs.length, "every role-eligible Grade 3 MCQ must have complete distractorRole coverage");
 console.log(`PSSA distractorRole corpus coverage: roleEligibleMcqCount=${roleEligibleGrade3Mcqs.length}, completeCoverage=${completeRoleCoverageCount}`);
+let registryMappedRoleCount = 0;
+for (const item of sourceRoleBearingGrade3Mcqs) {
+  const structured = (item.responseSpecJson as any).structuredChoicesJson;
+  for (const [index, choice] of structured.entries()) {
+    const role = choice?.distractorRole;
+    if (role == null) continue;
+    assert.equal(typeof role, "string", `${item.itemId} choice ${index} distractorRole must be a string`);
+    assert.notEqual(role.trim(), "", `${item.itemId} choice ${index} distractorRole must be non-empty`);
+    assert.equal(mapDistractor(role).role, role, `${item.itemId} choice ${index} distractorRole must be registry-mappable`);
+    registryMappedRoleCount += 1;
+  }
+}
+assert.equal(sourceRoleBearingGrade3Mcqs.length, 41, "all authored Grade 3 role-bearing MCQs must be covered by the global mappability assertion");
+console.log(`PSSA distractorRole registry coverage: sourceRoleBearingMcqCount=${sourceRoleBearingGrade3Mcqs.length}, mappedDistractorRoles=${registryMappedRoleCount}`);
 for (const gateId of PSSA_CONTENT_QUALITY_GATE_IDS) {
   const tally = grade3Plan.gateTallies.get(gateId);
   assert.equal(tally?.fail ?? 0, 0, `${gateId} must have zero failures across the Grade 3 import plan`);
@@ -1807,4 +1825,10 @@ function isRoleEligibleGrade3Mcq(item: { interactionType: string; eligibleConten
   if (item.interactionType !== "MCQ") return false;
   if (item.reportingCategory === "D") return true;
   return item.reportingCategory === "B" && /^E03\.B-[KCV]\./.test(item.eligibleContent);
+}
+
+function hasAnyDistractorRole(item: { interactionType: string; responseSpecJson: unknown }) {
+  if (item.interactionType !== "MCQ") return false;
+  const structured = (item.responseSpecJson as any)?.structuredChoicesJson;
+  return Array.isArray(structured) && structured.some((choice: any) => typeof choice?.distractorRole === "string" && choice.distractorRole.trim());
 }
