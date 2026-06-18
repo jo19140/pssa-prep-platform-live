@@ -8,9 +8,15 @@ import { SynesisHeader } from "@/components/synesis/SynesisHeader";
 export async function SynesisPageShell({
   children,
   roles,
+  variant = "legacy",
+  productNavigation,
+  homeHref = "/student/practice",
 }: {
   children: ReactNode;
   roles: string[];
+  variant?: "legacy" | "product";
+  productNavigation?: ReactNode;
+  homeHref?: string;
 }) {
   const session = await getServerSession(authOptions);
   if (!session?.user) redirect("/login");
@@ -29,6 +35,9 @@ export async function SynesisPageShell({
       <SynesisHeader
         enrolledPrograms={user?.enrolledPrograms}
         enrolledTestPrep={user?.enrolledTestPrep}
+        navigationMode={variant === "product" ? "product" : "legacy"}
+        productNavigation={variant === "product" ? productNavigation : undefined}
+        homeHref={homeHref}
       />
       {children}
     </div>
