@@ -70,12 +70,10 @@ export default async function middleware(req: Request & { nextUrl: URL; url: str
     response = NextResponse.redirect(new URL(role === "TEACHER" ? "/teacher" : "/login", req.url));
   } else if (pathname.startsWith("/parent") && role !== "PARENT" && role !== "ADMIN") {
     response = NextResponse.redirect(new URL("/login", req.url));
-  } else if (pathname === "/student" && role === "STUDENT") {
-    response = NextResponse.redirect(new URL("/student/practice", req.url));
   } else if (pathname === "/dashboard") {
     if (role === "ADMIN") response = NextResponse.redirect(new URL("/admin", req.url));
     else if (role === "TEACHER") response = NextResponse.redirect(new URL("/teacher", req.url));
-    else if (role === "STUDENT") response = NextResponse.redirect(new URL("/student/practice", req.url));
+    else if (role === "STUDENT") response = NextResponse.redirect(new URL("/student", req.url));
     else if (role === "PARENT") response = NextResponse.redirect(new URL("/parent", req.url));
     else response = NextResponse.redirect(new URL("/login", req.url));
   }
