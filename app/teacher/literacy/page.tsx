@@ -1,10 +1,12 @@
 import { getServerSession } from "next-auth";
 import { TeacherLiteracyMonitor } from "@/components/literacy/TeacherLiteracyMonitor";
 import { SynesisPageShell } from "@/components/synesis/SynesisPageShell";
+import { TeacherProductWorkspaceSwitcher } from "@/components/synesis/TeacherProductWorkspaceSwitcher";
 import { authOptions } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { getLatestCompletedDiagnosticSession } from "@/lib/literacy/diagnosticResultsData";
 import { toTutorPayload } from "@/lib/literacy/diagnosticResultsPayload";
+import { loadCurrentTeacherProducts } from "@/lib/teacher/loadCurrentTeacherProducts";
 import {
   createDailyTargetLabelResolver,
   deriveMTSSTierDisplay,
@@ -69,9 +71,16 @@ async function TeacherLiteracyData() {
   return <TeacherLiteracyMonitor students={rows} decisions={decisions} tierMix={tierMix} />;
 }
 
-export default function TeacherLiteracyPage() {
+export default async function TeacherLiteracyPage() {
+  const products = await loadCurrentTeacherProducts();
+
   return (
-    <SynesisPageShell roles={["TEACHER"]}>
+    <SynesisPageShell
+      roles={["TEACHER"]}
+      variant="product"
+      homeHref="/teacher"
+      productNavigation={<TeacherProductWorkspaceSwitcher products={products} activeProduct="reading_buddy" />}
+    >
       <TeacherLiteracyData />
     </SynesisPageShell>
   );

@@ -49,10 +49,12 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
     "/student/practice",
     "/student/speed-drill",
     "/teacher/literacy",
+    "/teacher/pssa",
+    "/teacher/tools",
     "/parent/literacy",
     "/parent/settings/voice",
     "/onboarding/listening",
-  ].some((prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`));
+  ].some((prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`)) || pathname === "/teacher";
   const isAuthSurface = [
     "/login",
     "/forgot-password",

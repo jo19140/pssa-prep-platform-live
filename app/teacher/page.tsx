@@ -1,11 +1,124 @@
-"use client";
+import Link from "next/link";
+import { Suspense } from "react";
+import { TeacherPssaInsightsClient } from "@/components/pssa/TeacherPssaInsightsClient";
+import { SynesisPageShell } from "@/components/synesis/SynesisPageShell";
+import { TeacherProductWorkspaceSwitcher } from "@/components/synesis/TeacherProductWorkspaceSwitcher";
+import { loadCurrentTeacherProducts } from "@/lib/teacher/loadCurrentTeacherProducts";
 
-import  TeacherDashboardPage  from "@/components/TeacherDashboardPage";
+const STATE_TRACK_TABS = ["classes", "lessons", "assignments", "reports", "grading"] as const;
+type StateTrackTab = typeof STATE_TRACK_TABS[number];
 
-export default function TeacherPage() {
+export default async function TeacherPage({
+  searchParams,
+}: {
+  searchParams?: Promise<Record<string, string | string[] | undefined>>;
+}) {
+  const products = await loadCurrentTeacherProducts();
+  const resolvedSearchParams = await searchParams;
+  const activeTab = normalizeStateTrackTab(firstValue(resolvedSearchParams?.tab));
+
   return (
-    <main className="p-6">
-      <TeacherDashboardPage />
-    </main>
+    <SynesisPageShell
+      roles={["TEACHER"]}
+      variant="product"
+      homeHref="/teacher"
+      productNavigation={<TeacherProductWorkspaceSwitcher products={products} activeProduct="state_track" />}
+    >
+      <main className="p-6">
+        <section className="mx-auto max-w-7xl space-y-5">
+          <div className="rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">State Track</p>
+            <h1 className="mt-1 text-3xl font-semibold text-slate-950">Teacher workspace</h1>
+            <p className="mt-2 max-w-2xl text-sm text-slate-600">
+              Review diagnostic reports, manage classes, and open existing State Track tools.
+            </p>
+          </div>
+
+          <nav aria-label="State Track sections" className="flex flex-wrap gap-2">
+            {STATE_TRACK_TABS.map((tab) => {
+              const label = tabLabel(tab);
+              if (tab === "grading") {
+                return (
+                  <span
+                    key={tab}
+                    aria-disabled="true"
+                    className="rounded-md border border-slate-200 bg-slate-50 px-3 py-2 text-sm font-semibold text-slate-400"
+                  >
+                    {label} · Coming soon
+                  </span>
+                );
+              }
+              const active = activeTab === tab;
+              return (
+                <Link
+                  key={tab}
+                  href={hrefForTab(resolvedSearchParams, tab)}
+                  aria-current={active ? "page" : undefined}
+                  className={`rounded-md border px-3 py-2 text-sm font-semibold transition ${
+                    active
+                      ? "border-slate-900 bg-slate-900 text-white"
+                      : "border-slate-200 bg-white text-slate-700 hover:border-slate-300 hover:bg-slate-50"
+                  }`}
+                >
+                  {label}
+                </Link>
+              );
+            })}
+          </nav>
+
+          {activeTab === "reports" ? (
+            <Suspense fallback={<div className="rounded-lg border border-slate-200 bg-white p-6 text-sm text-slate-600 shadow-sm">Loading diagnostic insights...</div>}>
+              <TeacherPssaInsightsClient />
+            </Suspense>
+          ) : (
+            <StateTrackPlaceholder tab={activeTab} />
+          )}
+        </section>
+      </main>
+    </SynesisPageShell>
   );
+}
+
+function StateTrackPlaceholder({ tab }: { tab: Exclude<StateTrackTab, "reports"> }) {
+  return (
+    <section className="rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
+      <h2 className="text-xl font-semibold text-slate-950">{tabLabel(tab)}</h2>
+      {tab === "grading" ? (
+        <p className="mt-2 text-sm text-slate-600">Grading will be added here once the State Track workspace expands.</p>
+      ) : (
+        <>
+          <p className="mt-2 text-sm text-slate-600">The existing State Track tools remain available while this workspace frame is filled in.</p>
+          <Link href="/teacher/tools" className="mt-4 inline-flex rounded-md border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:border-slate-300 hover:bg-slate-50">
+            Open existing State Track tools
+          </Link>
+        </>
+      )}
+    </section>
+  );
+}
+
+function normalizeStateTrackTab(raw: string | null | undefined): StateTrackTab {
+  return STATE_TRACK_TABS.includes(raw as StateTrackTab) ? raw as StateTrackTab : "reports";
+}
+
+function hrefForTab(searchParams: Record<string, string | string[] | undefined> | undefined, tab: StateTrackTab) {
+  const params = new URLSearchParams();
+  for (const [key, value] of Object.entries(searchParams ?? {})) {
+    if (key === "tab" || value == null) continue;
+    if (Array.isArray(value)) {
+      for (const item of value) params.append(key, item);
+    } else {
+      params.set(key, value);
+    }
+  }
+  params.set("tab", tab);
+  return `/teacher?${params.toString()}`;
+}
+
+function firstValue(value: string | string[] | undefined): string | undefined {
+  return Array.isArray(value) ? value[0] : value;
+}
+
+function tabLabel(tab: StateTrackTab) {
+  return tab.charAt(0).toUpperCase() + tab.slice(1);
 }
