@@ -93,7 +93,7 @@ function Hero({ child, activeProduct }: { child: ParentDashboardViewChild; activ
     return (
       <HeroShell
         title="State Track"
-        body={child.performanceBand ? parentFriendlyPerformanceLevel(child.performanceBand) : "Recent standards practice is ready to review."}
+        body={child.scoreStatus === "provisional" ? "Still being finalized" : child.performanceBand ? parentFriendlyPerformanceLevel(child.performanceBand) : "Recent standards practice is ready to review."}
         meta={child.latestAssessment ?? undefined}
         chip={stateTrackGrowthChip(child)}
       />
@@ -170,8 +170,8 @@ function StateTrackSection({ child }: { child: ParentDashboardViewChild }) {
   return (
     <section className="space-y-5">
       <div className="grid gap-4 md:grid-cols-4">
-        <Metric title="Latest Score" value={child.latestScore != null ? `${child.latestScore}%` : "N/A"} />
-        <Metric title="Performance Level" value={child.performanceBand ? parentFriendlyPerformanceLevel(child.performanceBand) : "N/A"} />
+        <Metric title="Latest Score" value={scoreMetric(child)} />
+        <Metric title="Performance Level" value={performanceMetric(child)} />
         <Metric title="Growth" value={growthMetric(child.growth)} />
         <Metric title="Latest Assessment" value={child.latestAssessment ?? "N/A"} />
       </div>
@@ -371,6 +371,16 @@ function growthMetric(growth: unknown) {
   const points = growthPoints(growth);
   if (points == null) return "N/A";
   return `${points >= 0 ? "+" : ""}${points}`;
+}
+
+function scoreMetric(child: ParentDashboardViewChild) {
+  if (child.latestScore == null) return "N/A";
+  return child.scoreStatus === "provisional" ? `${child.latestScore}% · Still being finalized` : `${child.latestScore}%`;
+}
+
+function performanceMetric(child: ParentDashboardViewChild) {
+  if (child.scoreStatus === "provisional") return "Still being finalized";
+  return child.performanceBand ? parentFriendlyPerformanceLevel(child.performanceBand) : "N/A";
 }
 
 function growthPoints(growth: unknown): number | null {

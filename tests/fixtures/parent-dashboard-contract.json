@@ -12,7 +12,7 @@
     "sessionId",
     "submittedAt"
   ],
-  "additiveChildFields": ["products", "entitlements", "availability", "readingBuddy"],
+  "additiveChildFields": ["products", "entitlements", "availability", "readingBuddy", "scoreStatus"],
   "topLevelFields": ["parent", "children", "products"],
   "headers": { "Cache-Control": "no-store" }
 }
