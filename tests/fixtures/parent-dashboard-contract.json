@@ -1,0 +1,18 @@
+{
+  "legacyChildFields": [
+    "studentId",
+    "studentName",
+    "grade",
+    "latestAssessment",
+    "latestScore",
+    "performanceBand",
+    "growth",
+    "standardsMastery",
+    "standardsGrowth",
+    "sessionId",
+    "submittedAt"
+  ],
+  "additiveChildFields": ["products", "entitlements", "availability", "readingBuddy"],
+  "topLevelFields": ["parent", "children", "products"],
+  "headers": { "Cache-Control": "no-store" }
+}

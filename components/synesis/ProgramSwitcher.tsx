@@ -1,10 +1,10 @@
 import type { SynesisProgram } from "@prisma/client";
 
-const programs: Array<{ code: SynesisProgram; label: string; planet: string; href: string; active?: boolean }> = [
-  { code: "VENUS", label: "Reading Buddy", planet: "Venus", href: "/student/practice", active: true },
-  { code: "MERCURY", label: "Math Buddy", planet: "Mercury", href: "#", active: false },
-  { code: "MARS", label: "Science Buddy", planet: "Mars", href: "#", active: false },
-  { code: "EARTH", label: "History Buddy", planet: "Earth", href: "#", active: false },
+const programs: Array<{ code: SynesisProgram; label: string; descriptor: string; href: string; active?: boolean }> = [
+  { code: "VENUS", label: "Reading Buddy", descriptor: "with Harper", href: "/student/practice", active: true },
+  { code: "MERCURY", label: "Math Buddy", descriptor: "with Damien · Coming soon", href: "#", active: false },
+  { code: "MARS", label: "Science Buddy", descriptor: "Coming soon", href: "#", active: false },
+  { code: "EARTH", label: "History Buddy", descriptor: "Coming soon", href: "#", active: false },
 ];
 
 export function ProgramSwitcher({ enrolledPrograms = ["VENUS"] }: { enrolledPrograms?: SynesisProgram[] }) {
@@ -24,7 +24,7 @@ export function ProgramSwitcher({ enrolledPrograms = ["VENUS"] }: { enrolledProg
             aria-disabled={!enabled}
           >
             <span className="block font-semibold">{program.label}</span>
-            <span className="text-xs">{program.planet}</span>
+            <span className="text-xs">{program.descriptor}</span>
           </a>
         );
       })}

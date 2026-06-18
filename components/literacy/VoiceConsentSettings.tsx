@@ -24,7 +24,7 @@ export function VoiceConsentSettings({ studentUserId, consent }: { studentUserId
   return (
     <main className="mx-auto max-w-4xl space-y-6 px-4 py-8">
       <div>
-        <p className="text-sm font-bold uppercase tracking-wide text-emerald-700">Reading Buddy on Venus</p>
+        <p className="text-sm font-bold uppercase tracking-wide text-emerald-700">Reading Buddy with Harper</p>
         <h1 className="mt-2 text-3xl font-black text-slate-950">Data settings</h1>
       </div>
       <VoiceConsentExplainerCard />

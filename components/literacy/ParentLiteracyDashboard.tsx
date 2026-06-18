@@ -6,7 +6,7 @@ export function ParentLiteracyDashboard({ profile }: { profile: any }) {
   return (
     <main className="mx-auto max-w-6xl space-y-6 px-4 py-8">
       <section className="rounded-md bg-emerald-700 p-6 text-white">
-        <p className="text-sm font-bold uppercase tracking-wide text-emerald-100">Reading Buddy on Venus</p>
+        <p className="text-sm font-bold uppercase tracking-wide text-emerald-100">Reading Buddy with Harper</p>
         <h1 className="mt-2 text-3xl font-black">{profile?.student?.name || "Your reader"} gained another month of reading this week.</h1>
         <p className="mt-2 text-emerald-50">A warm summary for parents, built from current literacy profile evidence.</p>
       </section>
