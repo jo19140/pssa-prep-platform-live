@@ -100,14 +100,16 @@ async function main() {
   assert.equal(/router\.push/.test(switcherSource), false, "product switcher must use Link instead of router.push");
 
   const routeSource = fs.readFileSync(path.join(process.cwd(), "app/api/parent/dashboard/route.ts"), "utf8");
+  const viewModelSource = fs.readFileSync(path.join(process.cwd(), "lib/parent/parentDashboardViewModel.ts"), "utf8");
   const contract = JSON.parse(fs.readFileSync(path.join(process.cwd(), "tests/fixtures/parent-dashboard-contract.json"), "utf8"));
   assert.match(routeSource, /loadParentDashboard\(/, "route must reuse parent dashboard loader");
   assert.match(routeSource, /Cache-Control": "no-store"/, "route must set no-store");
+  assert.match(routeSource, /toParentDashboardViewData\(dashboard\)/, "route must use the compatibility adapter");
   for (const field of contract.legacyChildFields) {
-    assert.match(routeSource, new RegExp(`${field}:`), `route adapter must preserve legacy child field ${field}`);
+    assert.match(viewModelSource, new RegExp(`${field}:`), `route adapter must preserve legacy child field ${field}`);
   }
   for (const field of contract.additiveChildFields) {
-    assert.match(routeSource, new RegExp(`${field}:`), `route adapter must add ${field}`);
+    assert.match(viewModelSource, new RegExp(`${field}:`), `route adapter must add ${field}`);
   }
 
   console.log("unified shell Phase 1a checks passed");
