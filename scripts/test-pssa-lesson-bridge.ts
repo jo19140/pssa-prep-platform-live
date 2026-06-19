@@ -96,7 +96,21 @@ function report(groups: SuggestedClassGroup[], opts: Partial<ClassReport> = {}):
       ...(row.recommendedSkill ? { recommendedSkill: row.recommendedSkill } : {}),
     })),
     suggestedGroups: groups,
+    additionalAnalyticsItems: emptyAnalyticsItems(),
     ...opts,
+  };
+}
+
+function emptyAnalyticsItems() {
+  return {
+    label: "Additional Analytics Items — did not affect the diagnostic score" as const,
+    studentCount: 3,
+    earnedPoints: 0,
+    possiblePoints: 0,
+    pendingHumanPoints: 0,
+    percent: null,
+    byItem: [],
+    byEc: [],
   };
 }
 

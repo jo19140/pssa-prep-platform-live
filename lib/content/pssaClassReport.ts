@@ -7,6 +7,7 @@ import {
   CLUSTER_ORDER,
   REPORT_VERSION,
   type PssaClusterSignal,
+  type PssaAdditionalAnalyticsItems,
   type PssaReportBand,
   type PssaReportCluster,
   type PssaStudentReport,
@@ -59,6 +60,10 @@ export type SuggestedClassGroup = {
   recommendedSkill?: string;
 };
 
+export type ClassAnalyticsItemsSummary = PssaAdditionalAnalyticsItems & {
+  studentCount: number;
+};
+
 export type ClassReport = {
   classReportVersion: typeof CLASS_REPORT_VERSION;
   reportVersion: typeof REPORT_VERSION;
@@ -77,6 +82,7 @@ export type ClassReport = {
   topClassInsight: string | null;
   misconceptionMap: ClassMisconceptionMapEntry[];
   suggestedGroups: SuggestedClassGroup[];
+  additionalAnalyticsItems: ClassAnalyticsItemsSummary;
 };
 
 type BuildClassReportOptions = {
@@ -113,6 +119,7 @@ export function buildClassReport(studentReports: StudentReportInput[], opts: Bui
   const suggestedGroups = buildSuggestedGroups(misconceptionMap, completed, contributions);
   const topPriorityCluster = chooseTopPriorityCluster(clusterResults);
   const topClassInsight = buildTopClassInsight(misconceptionMap);
+  const additionalAnalyticsItems = buildClassAnalyticsItems(completed);
 
   return {
     classReportVersion: CLASS_REPORT_VERSION,
@@ -132,6 +139,39 @@ export function buildClassReport(studentReports: StudentReportInput[], opts: Bui
     topClassInsight,
     misconceptionMap,
     suggestedGroups,
+    additionalAnalyticsItems,
+  };
+}
+
+function buildClassAnalyticsItems(inputs: StudentReportInput[]): ClassAnalyticsItemsSummary {
+  const studentBlocks = inputs.map((input) => input.report.additionalAnalyticsItems).filter(Boolean);
+  const byItem = studentBlocks.flatMap((block) => block.byItem);
+  const byEcMap = new Map<string, { earnedPoints: number; possiblePoints: number; pendingHumanPoints: number }>();
+  for (const block of studentBlocks) {
+    for (const row of block.byEc) {
+      const existing = byEcMap.get(row.eligibleContent) ?? { earnedPoints: 0, possiblePoints: 0, pendingHumanPoints: 0 };
+      existing.earnedPoints += row.earnedPoints;
+      existing.possiblePoints += row.possiblePoints;
+      existing.pendingHumanPoints += row.pendingHumanPoints;
+      byEcMap.set(row.eligibleContent, existing);
+    }
+  }
+  const earnedPoints = studentBlocks.reduce((sum, block) => sum + block.earnedPoints, 0);
+  const possiblePoints = studentBlocks.reduce((sum, block) => sum + block.possiblePoints, 0);
+  const pendingHumanPoints = studentBlocks.reduce((sum, block) => sum + block.pendingHumanPoints, 0);
+  return {
+    label: "Additional Analytics Items — did not affect the diagnostic score",
+    studentCount: inputs.length,
+    earnedPoints,
+    possiblePoints,
+    pendingHumanPoints,
+    percent: possiblePoints > 0 ? Math.round((earnedPoints / possiblePoints) * 1000) / 10 : null,
+    byItem,
+    byEc: [...byEcMap].map(([eligibleContent, row]) => ({
+      eligibleContent,
+      ...row,
+      percent: row.possiblePoints > 0 ? Math.round((row.earnedPoints / row.possiblePoints) * 1000) / 10 : null,
+    })).sort((a, b) => a.eligibleContent.localeCompare(b.eligibleContent)),
   };
 }
 

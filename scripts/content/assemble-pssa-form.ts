@@ -236,6 +236,7 @@ async function assemble(db: PrismaClient, args: Args) {
             position: item.position,
             pointValue: item.pointValue,
             slotType: item.slotType,
+            scoringBucket: item.scoringBucket ?? "operational",
             approvedContentHashSnapshot: item.approvedContentHashSnapshot,
             passageIdSnapshot: item.passageId,
           })),

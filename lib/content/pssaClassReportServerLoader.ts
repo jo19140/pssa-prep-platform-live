@@ -56,7 +56,7 @@ export async function loadPssaClassReportForTeacher(opts: {
   const sessions = userIds.length
     ? await opts.db.pssaFormSession.findMany({
       where: { formId: opts.formId, userId: { in: userIds } },
-      include: { responses: { orderBy: { positionSnapshot: "asc" } } },
+      include: { responses: { include: { formItem: { select: { scoringBucket: true } } }, orderBy: { positionSnapshot: "asc" } } },
     })
     : [];
   const sessionsByUserId = groupSessionsByUserId(sessions);
@@ -90,6 +90,9 @@ function groupSessionsByUserId(sessions: any[]): Map<string, LoadedSession[]> {
       earnedPoints: session.earnedPoints,
       totalPoints: session.totalPoints,
       pendingHumanPoints: session.pendingHumanPoints,
+      analyticsEarnedPoints: session.analyticsEarnedPoints,
+      analyticsTotalPoints: session.analyticsTotalPoints,
+      analyticsPendingHumanPoints: session.analyticsPendingHumanPoints,
       submittedAt: session.submittedAt,
       updatedAt: session.updatedAt,
       createdAt: session.createdAt,
@@ -99,6 +102,7 @@ function groupSessionsByUserId(sessions: any[]): Map<string, LoadedSession[]> {
         scoreStatus: response.scoreStatus,
         pointsEarned: response.pointsEarned,
         maxPoints: response.maxPoints,
+        scoringBucket: response.formItem?.scoringBucket ?? "operational",
       })),
     });
     grouped.set(session.userId, rows);

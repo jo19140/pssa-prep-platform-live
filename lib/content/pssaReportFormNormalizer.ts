@@ -9,6 +9,7 @@ export type NormalizablePssaForm = {
 
 export type NormalizablePssaFormItem = {
   itemId: string;
+  scoringBucket?: "operational" | "analytics_only" | string | null;
   item: {
     itemType?: string | null;
     interactionType?: string | null;
@@ -43,6 +44,7 @@ function normalizeFormItem(formItem: NormalizablePssaFormItem): PssaReportItem {
     structuredChoicesJson: choicesArray(item.responseSpecJson),
     answerChoicesJson: choicesArray(item.responseSpecJson),
     choices: choicesArray(item.responseSpecJson),
+    scoringBucket: formItem.scoringBucket ?? "operational",
   };
 }
 
