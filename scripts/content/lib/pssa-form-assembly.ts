@@ -61,6 +61,7 @@ export const GRADE3_DIAGNOSTIC_BLUEPRINT = {
 
 export type PssaFormSlotType = "reading_1pt" | "conventions_1pt" | "multipoint" | "short_answer";
 export type PssaFormCategory = "A" | "B" | "D";
+export type PssaScoringBucket = "operational" | "analytics_only";
 export type GateStatus = "PASS" | "FAIL";
 
 export type PssaAssemblyItem = PssaReadyItem & {
@@ -74,6 +75,7 @@ export type PssaAssemblyItem = PssaReadyItem & {
   interactionSubtype?: string | null;
   correctResponseJson?: unknown;
   pointValue?: number | null;
+  scoringBucket?: PssaScoringBucket | string | null;
 };
 
 export type PssaAssemblyPassage = PssaReadyPassage & {
@@ -88,6 +90,7 @@ export type ClassifiedAssemblyItem = {
   slotType: PssaFormSlotType;
   pointValue: number;
   primaryPassageId: string | null;
+  scoringBucket: PssaScoringBucket;
   approvedContentHashSnapshot: string;
 };
 
@@ -116,6 +119,7 @@ export type SelectedFormItem = {
   passageId: string | null;
   sectionIndex?: number | null;
   passageUnitId?: string | null;
+  scoringBucket?: PssaScoringBucket;
   approvedContentHashSnapshot: string;
 };
 
@@ -162,6 +166,10 @@ function deterministicSort<T extends { id?: string; itemId?: string; passageId?:
     const bId = b.id ?? b.itemId ?? b.passageId ?? "";
     return seededSortKey(seed, aId).localeCompare(seededSortKey(seed, bId)) || aId.localeCompare(bId);
   });
+}
+
+function scoringBucketOf(item: PssaAssemblyItem): PssaScoringBucket {
+  return item.scoringBucket === "analytics_only" ? "analytics_only" : "operational";
 }
 
 function combinations<T>(rows: T[], size: number): T[][] {
@@ -220,6 +228,7 @@ export function classifyAssemblyItem(item: PssaAssemblyItem): ClassifiedAssembly
     slotType,
     pointValue,
     primaryPassageId: slotType === "conventions_1pt" ? null : passageId,
+    scoringBucket: scoringBucketOf(item),
     approvedContentHashSnapshot: item.approvedContentHash,
   };
 }
@@ -287,7 +296,7 @@ function buildCanonical(blueprintVersion: string, passages: SelectedPassage[], i
       ...(passageUnitId ? { passageUnitId } : {}),
       approvedPassageContentHashSnapshot,
     })),
-    items: items.map(({ position, itemId, slotType, pointValue, passageId, sectionIndex, passageUnitId, approvedContentHashSnapshot }) => ({
+    items: items.map(({ position, itemId, slotType, pointValue, passageId, sectionIndex, passageUnitId, scoringBucket, approvedContentHashSnapshot }) => ({
       position,
       itemId,
       slotType,
@@ -295,6 +304,7 @@ function buildCanonical(blueprintVersion: string, passages: SelectedPassage[], i
       passageId,
       ...(sectionIndex ? { sectionIndex } : {}),
       ...(passageUnitId ? { passageUnitId } : {}),
+      ...(scoringBucket === "analytics_only" ? { scoringBucket } : {}),
       approvedContentHashSnapshot,
     })),
   };
@@ -342,6 +352,7 @@ function validateSelectedForm(
     pointValue: row.pointValue,
     category: row.category,
     passageId: row.primaryPassageId,
+    scoringBucket: row.scoringBucket,
     approvedContentHashSnapshot: row.approvedContentHashSnapshot,
   }));
   const categoryPoints = selectedCategoryPoints(selectedItems);
@@ -491,6 +502,7 @@ function classifyDiagnosticAssemblyItem(item: PssaAssemblyItem): DiagnosticClass
     slotType,
     pointValue,
     primaryPassageId: slotType === "conventions_1pt" ? null : directPassageId,
+    scoringBucket: scoringBucketOf(item),
     passageUnitId,
     rawPassageIds: groupId ? groupedPassageIds(item) : (directPassageId ? [directPassageId] : []),
     sectionIndex,
@@ -523,6 +535,7 @@ function validateDiagnosticSelectedForm(input: {
     passageId: row.primaryPassageId,
     sectionIndex: row.sectionIndex,
     passageUnitId: row.passageUnitId,
+    scoringBucket: row.scoringBucket,
     approvedContentHashSnapshot: row.approvedContentHashSnapshot,
   }));
   const categoryPoints = selectedCategoryPoints(selectedItems);

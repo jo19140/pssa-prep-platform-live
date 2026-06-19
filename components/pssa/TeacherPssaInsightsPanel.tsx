@@ -83,6 +83,33 @@ export function TeacherPssaInsightsPanel({
           {report.scoreStatusCounts.provisional} provisional awaiting hand-scoring.
         </p>
       ) : null}
+      {report.additionalAnalyticsItems.possiblePoints > 0 ? (
+        <div className="mt-5 rounded-md border border-slate-200 bg-slate-50 p-4">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <SectionLabel>{report.additionalAnalyticsItems.label}</SectionLabel>
+              <p className="mt-1 text-sm text-slate-600">
+                {report.additionalAnalyticsItems.earnedPoints}/{report.additionalAnalyticsItems.possiblePoints} points
+                {report.additionalAnalyticsItems.percent == null ? "" : ` · ${report.additionalAnalyticsItems.percent}%`}
+                {report.additionalAnalyticsItems.pendingHumanPoints ? ` · ${report.additionalAnalyticsItems.pendingHumanPoints} pending` : ""}
+              </p>
+            </div>
+            <span className="rounded-full bg-white px-3 py-1 text-xs font-semibold text-slate-600 ring-1 ring-slate-200">
+              Not included in diagnostic score
+            </span>
+          </div>
+          <div className="mt-3 grid gap-2 md:grid-cols-2">
+            {report.additionalAnalyticsItems.byEc.map((row) => (
+              <div key={row.eligibleContent} className="rounded-md border border-slate-200 bg-white px-3 py-2 text-sm">
+                <div className="font-semibold text-slate-900">{row.eligibleContent}</div>
+                <div className="mt-1 text-xs text-slate-500">
+                  {row.earnedPoints}/{row.possiblePoints} points{row.percent == null ? "" : ` · ${row.percent}%`}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      ) : null}
 
       <div className="mt-7">
         <SectionLabel>Skill clusters</SectionLabel>

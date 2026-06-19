@@ -15,6 +15,7 @@ export const PSSA_STUDENT_DTO_BANNED_KEYS = [
   "targetSkill",
   "answerKey",
   "scoringJson",
+  "scoringBucket",
   "correctResponseJson",
 ] as const;
 

@@ -14,6 +14,8 @@ import {
 } from "./content/lib/pssa-form-assembly";
 import { AUDIT_CONTRACT_VERSION, SOURCE_SCAN_VERSION } from "./content/lib/pssa-import-plan";
 
+const PRE_PHASE4A_BOY_DIAGNOSTIC_CONTENT_HASH = "sha256:d881fd075f48f5226724c104f71b80552c1fe316adc9456c11e80d9607f951d8";
+
 function passage(id: string): PssaAssemblyPassage {
   return {
     id,
@@ -443,6 +445,7 @@ assert.deepEqual([1, 2, 3].map((sectionIndex) => {
 }), [[11, 15], [8, 13], [16, 17]], "diagnostic section item/point totals must be 11/15, 8/13, 16/17");
 assert.equal(diagnostic.items.length, 35);
 assert.equal(diagnostic.totalPoints, 45);
+assert.equal(diagnostic.contentHash, PRE_PHASE4A_BOY_DIAGNOSTIC_CONTENT_HASH, "all-operational BOY diagnostic contentHash must stay byte-identical");
 assert.equal(new Set(diagnostic.items.map((item) => item.passageUnitId).filter(Boolean)).size, 4, "diagnostic must count the owl group as one of four passage units");
 assert.deepEqual([
   diagnostic.items.filter((item) => item.slotType === "reading_1pt").length,
@@ -483,6 +486,11 @@ const diagnosticRerun = assembleDiagnostic();
 assert.equal(diagnosticRerun.contentHash, diagnostic.contentHash, "diagnostic same seed must preserve content hash");
 assert.deepEqual(diagnosticRerun.canonical, diagnostic.canonical, "diagnostic same seed must preserve full canonical JSON");
 assert.notEqual(computePssaFormContentHash({ ...(diagnostic.canonical as any), sections: [...((diagnostic.canonical as any).sections)].reverse() }), diagnostic.contentHash, "section order participates in diagnostic contentHash");
+const diagnosticAnalyticsBucketFlip = {
+  ...(diagnostic.canonical as any),
+  items: (diagnostic.canonical as any).items.map((item: any, index: number) => index === 0 ? { ...item, scoringBucket: "analytics_only" } : item),
+};
+assert.notEqual(computePssaFormContentHash(diagnosticAnalyticsBucketFlip), diagnostic.contentHash, "changing only scoringBucket to analytics_only changes diagnostic contentHash");
 
 const missingTe = assembleDiagnostic(diagnosticPool().filter((item) => item.id !== "pssa_stamina_item_g3_boat_mg_01"));
 assert.equal(missingTe.ok, false, "missing pinned 3-point TE refuses");

@@ -32,6 +32,9 @@ type LoadedSession = {
   totalPoints?: number | null;
   earnedPoints?: number | null;
   pendingHumanPoints?: number | null;
+  analyticsTotalPoints?: number | null;
+  analyticsEarnedPoints?: number | null;
+  analyticsPendingHumanPoints?: number | null;
   invalidatedReason?: string | null;
   form: LoadedForm;
   responses: LoadedResponse[];
@@ -68,6 +71,7 @@ type LoadedFormItem = {
   itemId: string;
   position: number;
   pointValue: number;
+  scoringBucket?: "operational" | "analytics_only";
   sectionIndex?: number | null;
   approvedContentHashSnapshot: string;
   passageIdSnapshot: string | null;
@@ -96,6 +100,39 @@ export class PssaSessionError extends Error {
   ) {
     super(code);
   }
+}
+
+export function summarizePssaResponseBuckets(session: {
+  form: { items: Array<{ id: string; pointValue: number; scoringBucket?: "operational" | "analytics_only" | string | null }> };
+  responses: Array<{ formItemId: string; maxPoints: number; scoreStatus: string; pointsEarned: number | null }>;
+}) {
+  let earnedPoints = 0;
+  let pendingHumanPoints = 0;
+  let analyticsEarnedPoints = 0;
+  let analyticsPendingHumanPoints = 0;
+  for (const response of session.responses) {
+    const formItem = session.form.items.find((item) => item.id === response.formItemId);
+    if (!formItem) throw new PssaSessionError(409, "response_form_item_missing");
+    if (response.maxPoints !== formItem.pointValue) throw new PssaSessionError(409, "response_point_snapshot_mismatch");
+    const operational = scoringBucketOf(formItem) === "operational";
+    if (response.scoreStatus === "pending_human_scoring") {
+      if (operational) pendingHumanPoints += response.maxPoints;
+      else analyticsPendingHumanPoints += response.maxPoints;
+    } else if (response.scoreStatus === "scored") {
+      if (operational) earnedPoints += response.pointsEarned ?? 0;
+      else analyticsEarnedPoints += response.pointsEarned ?? 0;
+    }
+  }
+  const totalPoints = session.form.items.filter((item) => scoringBucketOf(item) === "operational").reduce((sum, item) => sum + item.pointValue, 0);
+  const analyticsTotalPoints = session.form.items.filter((item) => scoringBucketOf(item) === "analytics_only").reduce((sum, item) => sum + item.pointValue, 0);
+  return {
+    totalPoints,
+    earnedPoints,
+    pendingHumanPoints,
+    analyticsTotalPoints,
+    analyticsEarnedPoints,
+    analyticsPendingHumanPoints,
+  };
 }
 
 export function pssaRouteJson(body: unknown, init: ResponseInit = {}) {
@@ -264,24 +301,18 @@ export async function submitPssaSession(db: PssaDb, input: { auth: PssaRouteUser
   const missing = session.form.items.filter((item) => !answeredPositions.has(item.position));
   if (missing.length && !input.allowIncomplete && !isSectionedSession(session)) throw new PssaSessionError(409, "incomplete_session");
 
-  let earnedPoints = 0;
-  let pendingHumanPoints = 0;
-  for (const response of session.responses) {
-    const formItem = session.form.items.find((item) => item.id === response.formItemId);
-    if (!formItem) throw new PssaSessionError(409, "response_form_item_missing");
-    if (response.maxPoints !== formItem.pointValue) throw new PssaSessionError(409, "response_point_snapshot_mismatch");
-    if (response.scoreStatus === "pending_human_scoring") pendingHumanPoints += response.maxPoints;
-    else if (response.scoreStatus === "scored") earnedPoints += response.pointsEarned ?? 0;
-  }
-  const totalPoints = session.form.items.reduce((sum, item) => sum + item.pointValue, 0);
+  const summary = summarizePssaResponseBuckets(session);
   await db.pssaFormSession.update({
     where: { id: session.id },
     data: {
       status: SUBMITTED_STATUS,
       submittedAt: new Date(),
-      totalPoints,
-      earnedPoints,
-      pendingHumanPoints,
+      totalPoints: summary.totalPoints,
+      earnedPoints: summary.earnedPoints,
+      pendingHumanPoints: summary.pendingHumanPoints,
+      analyticsTotalPoints: summary.analyticsTotalPoints,
+      analyticsEarnedPoints: summary.analyticsEarnedPoints,
+      analyticsPendingHumanPoints: summary.analyticsPendingHumanPoints,
     },
   });
   const refreshed = await loadSession(db, input.sessionId);
@@ -585,9 +616,16 @@ function sessionStateDto(session: LoadedSession) {
     totalPoints: session.status === SUBMITTED_STATUS ? session.totalPoints : undefined,
     earnedPoints: session.status === SUBMITTED_STATUS ? session.earnedPoints : undefined,
     pendingHumanPoints: session.status === SUBMITTED_STATUS ? session.pendingHumanPoints : undefined,
+    analyticsTotalPoints: session.status === SUBMITTED_STATUS ? session.analyticsTotalPoints ?? 0 : undefined,
+    analyticsEarnedPoints: session.status === SUBMITTED_STATUS ? session.analyticsEarnedPoints ?? 0 : undefined,
+    analyticsPendingHumanPoints: session.status === SUBMITTED_STATUS ? session.analyticsPendingHumanPoints ?? 0 : undefined,
     sections: sectionsDto(session),
     positions,
   };
+}
+
+function scoringBucketOf(formItem: { scoringBucket?: "operational" | "analytics_only" | string | null }) {
+  return formItem.scoringBucket === "analytics_only" ? "analytics_only" : "operational";
 }
 
 function progressDto(session: LoadedSession) {

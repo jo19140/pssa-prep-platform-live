@@ -146,6 +146,11 @@ enum PssaFormSlotType {
   short_answer
 }
 
+enum PssaScoringBucket {
+  operational
+  analytics_only
+}
+
 enum PssaFormSessionStatus {
   in_progress
   submitted
@@ -874,6 +879,7 @@ model PssaFormItem {
   position                    Int
   pointValue                  Int
   slotType                    PssaFormSlotType
+  scoringBucket               PssaScoringBucket @default(operational)
   sectionIndex                Int?
   approvedContentHashSnapshot String
   passageIdSnapshot           String?
@@ -904,6 +910,9 @@ model PssaFormSession {
   totalPoints            Int?
   earnedPoints           Int?
   pendingHumanPoints     Int?
+  analyticsTotalPoints        Int?
+  analyticsEarnedPoints       Int?
+  analyticsPendingHumanPoints Int?
   invalidatedReason      String?               @db.Text
   createdAt              DateTime              @default(now())
   updatedAt              DateTime              @updatedAt

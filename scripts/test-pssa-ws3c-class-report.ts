@@ -183,6 +183,15 @@ function student(studentId: string, opts: {
       teacherMove: row.insight.teacherMove,
       evidenceItemIds: [row.itemId],
     })),
+    additionalAnalyticsItems: {
+      label: "Additional Analytics Items — did not affect the diagnostic score",
+      earnedPoints: 0,
+      possiblePoints: 0,
+      pendingHumanPoints: 0,
+      percent: null,
+      byItem: [],
+      byEc: [],
+    },
   };
   return { studentId, report };
 }

@@ -8,6 +8,7 @@ export type LoadedResponse = {
   scoreStatus: string;
   pointsEarned: number | null;
   maxPoints: number;
+  scoringBucket?: "operational" | "analytics_only" | string | null;
 };
 
 export type LoadedSession = {
@@ -15,6 +16,9 @@ export type LoadedSession = {
   earnedPoints: number | null;
   totalPoints: number | null;
   pendingHumanPoints: number | null;
+  analyticsEarnedPoints?: number | null;
+  analyticsTotalPoints?: number | null;
+  analyticsPendingHumanPoints?: number | null;
   submittedAt?: Date | string | null;
   updatedAt?: Date | string | null;
   createdAt?: Date | string | null;
@@ -64,13 +68,15 @@ export function mapLoadedResponse(response: LoadedResponse): PssaReportResponse 
     scoreStatus: response.scoreStatus,
     pointsEarned: response.pointsEarned,
     maxPoints: response.maxPoints,
+    ...(response.scoringBucket ? { scoringBucket: response.scoringBucket } : {}),
   };
 }
 
 function buildSubmittedReport(session: LoadedSession, opts: AssembleClassReportOptions) {
   const responses = session.responses.map(mapLoadedResponse);
   const attempt = { benchmarkSeason: opts.benchmarkSeason, completionStatus: "complete", responses };
-  const insights = deriveStudentInsights(attempt, opts.form);
+  const operationalResponses = responses.filter((response) => scoringBucketOfResponse(response) === "operational");
+  const insights = deriveStudentInsights({ ...attempt, responses: operationalResponses }, operationalForm(opts.form));
   return buildStudentReport(attempt, opts.form, {
     earnedPoints: session.earnedPoints,
     totalPoints: session.totalPoints,
@@ -90,6 +96,14 @@ function buildIncompleteReport(opts: AssembleClassReportOptions) {
     [],
     { benchmarkSeason: opts.benchmarkSeason, formVersion: opts.formVersion },
   );
+}
+
+function operationalForm(form: PssaReportForm): PssaReportForm {
+  return { ...form, items: (form.items ?? []).filter((item) => item.scoringBucket !== "analytics_only") };
+}
+
+function scoringBucketOfResponse(response: PssaReportResponse) {
+  return response.scoringBucket === "analytics_only" ? "analytics_only" : "operational";
 }
 
 function compareSessionsLatestFirst(a: LoadedSession, b: LoadedSession) {

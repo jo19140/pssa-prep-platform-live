@@ -4,7 +4,7 @@ import {
   type PssaStudentInsight,
 } from "@/lib/content/pssaInsightMapping";
 
-export const REPORT_VERSION = "pssa-ws3b-student-report-v1";
+export const REPORT_VERSION = "pssa-ws3b-student-report-v2";
 
 export const CLUSTER_ORDER = [
   "Key Ideas & Evidence",
@@ -29,6 +29,7 @@ export type PssaReportItem = {
   structuredChoicesJson?: unknown;
   answerChoicesJson?: unknown;
   choices?: unknown;
+  scoringBucket?: "operational" | "analytics_only" | string | null;
 };
 
 export type PssaReportForm = {
@@ -55,6 +56,7 @@ export type PssaReportResponse = {
   scoreStatus?: string | null;
   pointsEarned?: number | null;
   maxPoints?: number | null;
+  scoringBucket?: "operational" | "analytics_only" | string | null;
 };
 
 export type PssaReportScoring = {
@@ -87,6 +89,34 @@ export type PssaMissedReviewRow = {
   evidenceItemIds: string[];
 };
 
+export type PssaAnalyticsItemRow = {
+  itemId: string;
+  cluster: PssaReportCluster;
+  eligibleContent: string | null;
+  itemType: string;
+  pointsEarned: number | null;
+  maxPoints: number;
+  scoreStatus: string | null;
+};
+
+export type PssaAnalyticsEcRow = {
+  eligibleContent: string;
+  earnedPoints: number;
+  possiblePoints: number;
+  pendingHumanPoints: number;
+  percent: number | null;
+};
+
+export type PssaAdditionalAnalyticsItems = {
+  label: "Additional Analytics Items — did not affect the diagnostic score";
+  earnedPoints: number;
+  possiblePoints: number;
+  pendingHumanPoints: number;
+  percent: number | null;
+  byItem: PssaAnalyticsItemRow[];
+  byEc: PssaAnalyticsEcRow[];
+};
+
 export type PssaStudentReport = {
   reportVersion: typeof REPORT_VERSION;
   mappingVersion: typeof MAPPING_VERSION;
@@ -104,6 +134,7 @@ export type PssaStudentReport = {
   recommendedNextStep: string | null;
   likelyPatterns: PssaStudentInsight[];
   missedReview: PssaMissedReviewRow[];
+  additionalAnalyticsItems: PssaAdditionalAnalyticsItems;
 };
 
 export function clusterOf(item: PssaReportItem): PssaReportCluster {
@@ -133,17 +164,20 @@ export function buildStudentReport(
 ): PssaStudentReport {
   const items = form.items ?? [];
   const responses = new Map((attempt.responses ?? []).map((response) => [response.itemId, response]));
+  const operationalItems = items.filter(isOperationalItem);
+  const operationalResponses = new Map((attempt.responses ?? []).filter((response) => isOperationalResponse(response, items)).map((response) => [response.itemId, response]));
   const complete = attempt.completionStatus !== "incomplete";
   const pendingHumanScore = Number(scoring.pendingHumanPoints ?? 0) > 0;
   const scoreStatus: PssaReportScoreStatus = !complete ? "incomplete" : pendingHumanScore ? "provisional" : "final";
   const maxPoints = Number(scoring.maxOperationalPoints ?? scoring.totalPoints ?? 45);
-  const earnedPoints = typeof scoring.earnedPoints === "number" ? scoring.earnedPoints : sumEarnedPoints(attempt.responses ?? []);
+  const earnedPoints = typeof scoring.earnedPoints === "number" ? scoring.earnedPoints : sumEarnedPoints([...operationalResponses.values()]);
   const band = bandFor(earnedPoints, maxPoints, complete ? "complete" : "incomplete");
-  const clusterResults = buildClusterResults(items, responses);
+  const clusterResults = buildClusterResults(operationalItems, operationalResponses);
   const priorityCluster = complete ? chooseCluster(clusterResults, "priority") : null;
   const strongestCluster = complete ? chooseCluster(clusterResults, "strongest") : null;
-  const missedReview = buildMissedReview(items, responses);
+  const missedReview = buildMissedReview(operationalItems, operationalResponses);
   const likelyPatterns = insights.slice().sort(compareInsights);
+  const additionalAnalyticsItems = buildAdditionalAnalyticsItems(items, responses);
   const recommendedNextStep = complete
     ? recommendedNextStepFor(priorityCluster, likelyPatterns, missedReview, clusterResults)
     : null;
@@ -165,7 +199,49 @@ export function buildStudentReport(
     recommendedNextStep,
     likelyPatterns,
     missedReview,
+    additionalAnalyticsItems,
   };
+}
+
+function buildAdditionalAnalyticsItems(items: PssaReportItem[], responses: Map<string, PssaReportResponse>): PssaAdditionalAnalyticsItems {
+  const byItem = items.filter((item) => scoringBucketOfItem(item) === "analytics_only").map((item) => {
+    const response = responses.get(itemId(item));
+    return {
+      itemId: itemId(item),
+      cluster: clusterOf(item),
+      eligibleContent: item.eligibleContent ?? null,
+      itemType: String(item.interactionType ?? item.itemType ?? ""),
+      pointsEarned: response?.pointsEarned ?? null,
+      maxPoints: response?.maxPoints ?? 0,
+      scoreStatus: response?.scoreStatus ?? null,
+    };
+  });
+  const earnedPoints = byItem.reduce((sum, row) => sum + (typeof row.pointsEarned === "number" ? row.pointsEarned : 0), 0);
+  const possiblePoints = byItem.reduce((sum, row) => sum + row.maxPoints, 0);
+  const pendingHumanPoints = byItem.filter((row) => row.scoreStatus === "pending_human_scoring").reduce((sum, row) => sum + row.maxPoints, 0);
+  return {
+    label: "Additional Analytics Items — did not affect the diagnostic score",
+    earnedPoints,
+    possiblePoints,
+    pendingHumanPoints,
+    percent: possiblePoints > 0 ? Math.round((earnedPoints / possiblePoints) * 1000) / 10 : null,
+    byItem,
+    byEc: buildAnalyticsByEc(byItem),
+  };
+}
+
+function buildAnalyticsByEc(items: PssaAnalyticsItemRow[]): PssaAnalyticsEcRow[] {
+  const grouped = new Map<string, PssaAnalyticsEcRow>();
+  for (const item of items) {
+    const eligibleContent = item.eligibleContent ?? "unknown";
+    const row = grouped.get(eligibleContent) ?? { eligibleContent, earnedPoints: 0, possiblePoints: 0, pendingHumanPoints: 0, percent: null };
+    row.earnedPoints += typeof item.pointsEarned === "number" ? item.pointsEarned : 0;
+    row.possiblePoints += item.maxPoints;
+    if (item.scoreStatus === "pending_human_scoring") row.pendingHumanPoints += item.maxPoints;
+    row.percent = row.possiblePoints > 0 ? Math.round((row.earnedPoints / row.possiblePoints) * 1000) / 10 : null;
+    grouped.set(eligibleContent, row);
+  }
+  return [...grouped.values()].sort((a, b) => a.eligibleContent.localeCompare(b.eligibleContent));
 }
 
 function buildClusterResults(items: PssaReportItem[], responses: Map<string, PssaReportResponse>) {
@@ -274,6 +350,24 @@ function signalFor(percent: number): PssaClusterSignal {
 
 function sumEarnedPoints(responses: PssaReportResponse[]) {
   return responses.reduce((sum, response) => sum + (typeof response.pointsEarned === "number" ? response.pointsEarned : 0), 0);
+}
+
+function isOperationalItem(item: PssaReportItem) {
+  return scoringBucketOfItem(item) === "operational";
+}
+
+function isOperationalResponse(response: PssaReportResponse, items: PssaReportItem[]) {
+  if (response.scoringBucket) return scoringBucketOfResponse(response) === "operational";
+  const item = items.find((row) => itemId(row) === response.itemId);
+  return !item || isOperationalItem(item);
+}
+
+function scoringBucketOfItem(item: PssaReportItem) {
+  return item.scoringBucket === "analytics_only" ? "analytics_only" : "operational";
+}
+
+function scoringBucketOfResponse(response: PssaReportResponse) {
+  return response.scoringBucket === "analytics_only" ? "analytics_only" : "operational";
 }
 
 function itemId(item: PssaReportItem) {
