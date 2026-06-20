@@ -1,3 +1,10 @@
+import {
+  isPssaFigureFeature,
+  validatePssaFigureFeatureShared,
+  validateUniquePssaFigureFeatureIds,
+  type PssaFigureFeature,
+} from "../../../lib/content/pssaFigureFeature";
+
 export type StaminaGateStatus = "PASS" | "FAIL" | "SKIP";
 
 export const PSSA_STAMINA_GATE_IDS = [
@@ -24,7 +31,7 @@ export type StaminaTextFeature = {
   context_only?: boolean;
   mustUseInItem?: boolean;
   linkedByItemIds?: string[];
-};
+} | PssaFigureFeature;
 
 export type StaminaPassageInput = {
   id: string;
@@ -364,6 +371,15 @@ export function evaluatePssaTextFeatureIntegrity(passage: StaminaPassageInput, i
 
   for (const feature of features) {
     if (!feature.type) return "FAIL";
+    if (isPssaFigureFeature(feature)) {
+      try {
+        validateUniquePssaFigureFeatureIds(features);
+        validatePssaFigureFeatureShared(feature, buildPssaStaminaSectionMap(passage).map((section) => section.sectionId));
+      } catch {
+        return "FAIL";
+      }
+      continue;
+    }
     if (feature.type === "heading" && !headingLabels.includes(String(feature.label ?? "").trim())) return "FAIL";
     if (feature.type === "sidebar" && !passage.text.includes(String(feature.bodyText ?? "").trim())) return "FAIL";
     if (feature.type === "footnote" && !passage.text.includes(String(feature.bodyText ?? "").trim())) return "FAIL";

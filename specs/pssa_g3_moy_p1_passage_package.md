@@ -3,7 +3,7 @@
 **Working title:** A Map for a Day of Discovery
 **Category:** B — Informational · **Target length:** 670–700 words (planned ~685)
 **Setting:** fictional *Bright Ideas Children's Museum*
-**Status:** APPROVED — items gated on Phase 4A merging to `main`. (Persisted/finalized 2026-06-18.)
+**Status:** APPROVED — Phase 4A verified on `main` (merge `1023b1e`). Cleared for item authoring. (Finalized 2026-06-18.)
 **Gate:** P1 *items* are authored only after (a) this package is approved AND (b) Phase 4A is merged + verified on `main`. Phase 4A is currently on branch `codex/pssa-phase4a-analytics-scoring`, **not yet on `main`.**
 **Hosts:** assigned operational ECs (main idea/key details; sequence or cause-effect; text features/search tools; information from map + words; informational vocabulary) **and AO-5** — 3-pt analytics-only TE on `E03.B-C.3.1.3`.
 

@@ -1,0 +1,72 @@
+<svg viewBox="0 0 840 620" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system, Segoe UI, Roboto, sans-serif">
+  <title>Bright Ideas Children's Museum — Visitor Floor Map</title>
+  <desc>Level 2 upstairs: Art Studio and Dinosaur Dig, with a separate Elevator and Stairs. Level 1 ground floor: Entrance, Build Lab, Story Stage beside Build Lab, Family Rest Area, Quiet Corner separated from Build Lab, with a separate Elevator and Stairs. A green dashed accessible route runs through open corridors from the Entrance up via the Elevator to the Dinosaur Dig and never touches the stairs.</desc>
+  <rect x="0" y="0" width="840" height="620" fill="#ffffff"/>
+  <text x="420" y="32" text-anchor="middle" font-size="19" font-weight="700" fill="#161616">Bright Ideas Children's Museum — Visitor Floor Map</text>
+  <rect x="40" y="56" width="760" height="152" fill="#f5f3ee" stroke="#d8d2c4"/>
+  <text x="58" y="80" font-size="13" font-weight="700" fill="#6b6453">LEVEL 2 · Upstairs</text>
+  <rect x="70" y="92" width="180" height="96" fill="#ffffff" stroke="#c9c2b3"/>
+  <text x="160" y="134" text-anchor="middle" font-size="15" font-weight="700" fill="#222">Art Studio</text>
+  <text x="160" y="154" text-anchor="middle" font-size="11" fill="#666">draw &amp; paint</text>
+  <rect x="270" y="92" width="180" height="96" fill="#ffffff" stroke="#c9c2b3"/>
+  <text x="360" y="134" text-anchor="middle" font-size="15" font-weight="700" fill="#222">Dinosaur Dig</text>
+  <text x="360" y="154" text-anchor="middle" font-size="11" fill="#666">dig for bones</text>
+  <rect x="636" y="92" width="74" height="96" fill="#eef5ee" stroke="#2e7d32" stroke-width="1.5"/>
+  <polygon points="651,108 660,100 669,108" fill="#2e7d32"/>
+  <polygon points="651,118 660,126 669,118" fill="#2e7d32"/>
+  <text x="660" y="150" text-anchor="middle" font-size="11" font-weight="700" fill="#216a25">Elevator</text>
+  <rect x="724" y="92" width="74" height="96" fill="#ffffff" stroke="#c9c2b3"/>
+  <polyline points="745,140 745,128 757,128 757,116 769,116 769,104" fill="none" stroke="#555" stroke-width="2"/>
+  <text x="761" y="170" text-anchor="middle" font-size="11" font-weight="700" fill="#444">Stairs</text>
+  <rect x="40" y="250" width="760" height="172" fill="#f5f3ee" stroke="#d8d2c4"/>
+  <text x="58" y="274" font-size="13" font-weight="700" fill="#6b6453">LEVEL 1 · Ground Floor</text>
+  <rect x="70" y="286" width="92" height="92" fill="#fff8e8" stroke="#c9c2b3"/>
+  <polygon points="116,300 119,309 128,309 121,315 123,324 116,318 109,324 111,315 104,309 113,309" fill="#b8860b"/>
+  <text x="116" y="342" text-anchor="middle" font-size="12" font-weight="700" fill="#222">Entrance</text>
+  <text x="116" y="359" text-anchor="middle" font-size="10" fill="#666">You are here</text>
+  <rect x="174" y="286" width="92" height="92" fill="#ffffff" stroke="#c9c2b3"/>
+  <text x="220" y="330" text-anchor="middle" font-size="13" font-weight="700" fill="#222">Build Lab</text>
+  <text x="220" y="347" text-anchor="middle" font-size="10" fill="#666">blocks · loud</text>
+  <rect x="278" y="286" width="120" height="92" fill="#ffffff" stroke="#c9c2b3"/>
+  <rect x="326" y="300" width="24" height="16" fill="#ffffff" stroke="#3b6cb3" stroke-width="1.5"/>
+  <line x1="338" y1="300" x2="338" y2="316" stroke="#3b6cb3" stroke-width="1.5"/>
+  <text x="338" y="338" text-anchor="middle" font-size="12" font-weight="700" fill="#222">Story Stage</text>
+  <text x="338" y="356" text-anchor="middle" font-size="10" font-weight="600" fill="#444">11:00 · 1:00 · 3:00</text>
+  <rect x="410" y="286" width="96" height="92" fill="#ffffff" stroke="#c9c2b3"/>
+  <rect x="450" y="300" width="16" height="14" fill="#ffffff" stroke="#555" stroke-width="1.5"/>
+  <text x="458" y="311" text-anchor="middle" font-size="8" font-weight="700" fill="#555">WC</text>
+  <text x="458" y="338" text-anchor="middle" font-size="12" font-weight="700" fill="#222">Family</text>
+  <text x="458" y="354" text-anchor="middle" font-size="12" font-weight="700" fill="#222">Rest Area</text>
+  <rect x="540" y="286" width="92" height="92" fill="#ffffff" stroke="#c9c2b3"/>
+  <text x="586" y="330" text-anchor="middle" font-size="13" font-weight="700" fill="#222">Quiet Corner</text>
+  <text x="586" y="347" text-anchor="middle" font-size="10" fill="#666">read &amp; rest</text>
+  <rect x="636" y="286" width="74" height="92" fill="#eef5ee" stroke="#2e7d32" stroke-width="1.5"/>
+  <polygon points="651,304 660,296 669,304" fill="#2e7d32"/>
+  <polygon points="651,314 660,322 669,314" fill="#2e7d32"/>
+  <text x="660" y="346" text-anchor="middle" font-size="11" font-weight="700" fill="#216a25">Elevator</text>
+  <rect x="724" y="286" width="74" height="92" fill="#ffffff" stroke="#c9c2b3"/>
+  <polyline points="745,334 745,322 757,322 757,310 769,310 769,298" fill="none" stroke="#555" stroke-width="2"/>
+  <text x="761" y="362" text-anchor="middle" font-size="11" font-weight="700" fill="#444">Stairs</text>
+  <path d="M116,378 L116,405 L692,405 L692,134 L452,134" fill="none" stroke="#2e7d32" stroke-width="4" stroke-dasharray="9 7"/>
+  <circle cx="116" cy="378" r="4" fill="#2e7d32"/>
+  <polygon points="446,134 460,127 460,141" fill="#2e7d32"/>
+  <rect x="40" y="436" width="760" height="160" fill="#f5f3ee" stroke="#d8d2c4"/>
+  <text x="58" y="460" font-size="14" font-weight="700" fill="#161616">Map Key</text>
+  <polygon points="74,478 77,487 86,487 79,493 81,502 74,496 67,502 69,493 62,487 71,487" fill="#b8860b"/>
+  <text x="96" y="490" font-size="13" fill="#333">Entrance (You are here)</text>
+  <rect x="64" y="510" width="20" height="14" fill="#ffffff" stroke="#3b6cb3" stroke-width="1.5"/>
+  <line x1="74" y1="510" x2="74" y2="524" stroke="#3b6cb3" stroke-width="1.5"/>
+  <text x="96" y="521" font-size="13" fill="#333">Story Stage (show times)</text>
+  <rect x="66" y="540" width="18" height="16" fill="#eef5ee" stroke="#2e7d32"/>
+  <polygon points="71,548 75,544 79,548" fill="#2e7d32"/>
+  <text x="96" y="553" font-size="13" fill="#333">Elevator</text>
+  <polyline points="430,490 430,482 440,482 440,474 450,474" fill="none" stroke="#555" stroke-width="2"/>
+  <text x="466" y="490" font-size="13" fill="#333">Stairs</text>
+  <rect x="424" y="513" width="16" height="13" fill="#ffffff" stroke="#555" stroke-width="1.5"/>
+  <text x="432" y="523" text-anchor="middle" font-size="7" font-weight="700" fill="#555">WC</text>
+  <text x="466" y="521" font-size="13" fill="#333">Family Rest Area</text>
+  <line x1="420" y1="550" x2="456" y2="550" stroke="#2e7d32" stroke-width="4" stroke-dasharray="9 7"/>
+  <polygon points="456,550 446,545 446,555" fill="#2e7d32"/>
+  <text x="466" y="554" font-size="13" fill="#333">Accessible route (no stairs)</text>
+  <text x="58" y="584" font-size="12" fill="#555">Green route: Entrance → Elevator → Dinosaur Dig (never the stairs). Family Rest Area is on Level 1.</text>
+</svg>

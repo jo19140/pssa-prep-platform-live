@@ -8,9 +8,40 @@ import conventionsBackend from "@/exemplars/pssa_grade3_conventions/grade3_conve
 import teiBackend from "@/exemplars/pssa_grade3_tei/grade3_tei_backend.json";
 import ebsrBackend from "@/exemplars/pssa_grade3_ebsr/grade3_ebsr_backend.json";
 import shortAnswerBackend from "@/exemplars/pssa_grade3_short_answer/grade3_short_answer_backend.json";
+import { generatePssaFigureLongDescription } from "@/lib/content/pssaFigureFeature";
 
 export const dynamic = "force-dynamic";
 export const fetchCache = "force-no-store";
+
+const museumMapData = {
+  legend: [
+    { symbol: "Star", meaning: "Entrance" },
+    { symbol: "Book", meaning: "Story Stage" },
+    { symbol: "Green dashed line", meaning: "accessible route" },
+  ],
+  locations: [
+    { id: "entrance", label: "Entrance", level: "Level 1", notes: "Star symbol" },
+    { id: "build_lab", label: "Build Lab", level: "Level 1" },
+    { id: "story_stage", label: "Story Stage", level: "Level 1" },
+    { id: "quiet_corner", label: "Quiet Corner", level: "Level 1" },
+    { id: "level1_elevator", label: "Elevator", level: "Level 1" },
+    { id: "art_studio", label: "Art Studio", level: "Level 2" },
+    { id: "dinosaur_dig", label: "Dinosaur Dig", level: "Level 2" },
+    { id: "level2_elevator", label: "Elevator", level: "Level 2" },
+    { id: "family_rest_area", label: "Family Rest Area", level: "Level 2" },
+  ],
+  relationships: [
+    { id: "story_stage_build_lab", type: "adjacent_to" as const, from: "story_stage", to: "build_lab" },
+    { id: "art_studio_dinosaur_dig", type: "adjacent_to" as const, from: "art_studio", to: "dinosaur_dig" },
+    { id: "quiet_corner_build_lab", type: "separated_from" as const, from: "quiet_corner", to: "build_lab" },
+  ],
+  routes: [
+    { id: "accessible_route_dinosaur_dig", label: "Accessible route", from: "entrance", via: ["level1_elevator", "level2_elevator"], to: "dinosaur_dig" },
+  ],
+  annotations: [
+    { label: "Story Stage show times", value: "11:00 · 1:00 · 3:00" },
+  ],
+};
 
 export default async function AdminPssaPreviewPage() {
   const auth = await requireUser(["ADMIN"]);
@@ -52,6 +83,23 @@ export default async function AdminPssaPreviewPage() {
             <summary className="cursor-pointer text-sm font-bold text-slate-700">Projected INLINE_DROPDOWN DTO</summary>
             <pre className="mt-3 overflow-x-auto bg-slate-950 p-4 text-xs leading-5 text-emerald-100">{JSON.stringify(inlineDropdown, null, 2)}</pre>
           </details>
+        </section>
+
+        <section className="border border-slate-200 bg-white p-5">
+          <h2 className="text-lg font-black">Figure / Map Stimulus Preview</h2>
+          <figure className="mt-4 rounded border border-slate-300 bg-slate-50 p-3">
+            <img
+              src="/pssa/figures/g3_moy_p1_museum_map.svg"
+              alt="Floor map of the Bright Ideas Children's Museum with an accessible route to the Dinosaur Dig."
+              aria-describedby="museum-map-preview-description"
+              className="w-full rounded border border-slate-200 bg-white"
+            />
+            <figcaption className="mt-2 font-bold">Bright Ideas Children's Museum Floor Map</figcaption>
+            <details id="museum-map-preview-description" className="mt-3 rounded border border-slate-200 bg-white p-3">
+              <summary className="cursor-pointer font-bold text-slate-800">Text description</summary>
+              <p className="mt-3 whitespace-pre-wrap text-sm leading-6 text-slate-700">{generatePssaFigureLongDescription(museumMapData)}</p>
+            </details>
+          </figure>
         </section>
 
         <section className="border border-slate-200 bg-white p-5">

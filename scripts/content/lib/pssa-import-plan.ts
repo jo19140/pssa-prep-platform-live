@@ -18,6 +18,7 @@ import { auditGrade3EbsrItems } from "../author-pssa-grade3-ebsr";
 import { auditGrade3MatchingGridDragDropItems } from "../author-pssa-grade3-matching-grid-drag-drop";
 import { auditGrade3ShortAnswerItems } from "../author-pssa-grade3-short-answer";
 import { auditGrade3TeiItems } from "../author-pssa-grade3-tei";
+import { canonicalizePssaFigureHashFields } from "../../../lib/content/pssaFigureFeature";
 import { buildPssaResponseSpec } from "../../../lib/content/pssaResponseSpec";
 
 export const CROSSWALK_PATH = path.resolve("data/pssa/anchor_ec_crosswalk.csv");
@@ -308,6 +309,23 @@ function hashCanonical(value: unknown) {
   return `sha256:${crypto.createHash("sha256").update(stableStringify(value)).digest("hex")}`;
 }
 
+export function pssaPassageContentHashInput(passage: any) {
+  const figures = canonicalizePssaFigureHashFields(passage.textFeaturesJson);
+  return {
+    id: passage.id,
+    title: passage.title,
+    text: passage.text,
+    gradeLevel: passage.gradeLevel,
+    subject: passage.subject,
+    passageType: passage.passageType,
+    ...(figures ? { figures } : {}),
+  };
+}
+
+export function computePssaPassageContentHash(passage: any) {
+  return hashCanonical(pssaPassageContentHashInput(passage));
+}
+
 function sourceTypeFor(value: unknown): "internal_original" | "released_sampler" | "unknown" {
   return value === "internal_original" || value === "released_sampler" ? value : "unknown";
 }
@@ -587,7 +605,7 @@ function passageSentences(passage?: PssaPassageAuditInput) {
   const text = passage?.text ?? "";
   const rows: Array<{ id: string; text: string }> = [];
   for (const [paragraphIndex, paragraph] of text.split(/\n\n/).entries()) {
-    const matches = paragraph.match(/[^.!?]+[.!?]/g) ?? [];
+    const matches: string[] = paragraph.match(/[^.!?]+[.!?]/g) ?? [];
     matches.forEach((sentence, sentenceIndex) => rows.push({ id: `${paragraphIndex}:${sentenceIndex}`, text: sentence.trim() }));
   }
   return rows;
@@ -856,7 +874,7 @@ export function buildPlan(gradeLevel: number): ImportPlan {
     licenseStatus: licenseStatusFor(passage.licenseStatus),
     commercialUseAllowed: Boolean(passage.commercialUseAllowed ?? true),
     needsLegalReview: Boolean(passage.needsLegalReview ?? false),
-    contentHash: hashCanonical({ id: passage.id, title: passage.title, text: passage.text, gradeLevel: passage.gradeLevel, subject: passage.subject, passageType: passage.passageType }),
+    contentHash: computePssaPassageContentHash(passage),
     reviewStatus: "PENDING" as const,
     itemStatus: "candidate" as const,
     studentReadyBlockedReason: "PENDING_REVIEW" as const,
