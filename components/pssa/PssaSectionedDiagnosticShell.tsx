@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { DiagnosticSessionShell } from "@/components/literacy/diagnostic/DiagnosticSessionShell";
 
@@ -34,12 +34,30 @@ type PssaItemResponse = {
   position: number;
   sectionIndex: number;
   currentSectionIndex: number;
-  passages?: Array<{ passageId: string; label?: string; passage: { title?: string; text?: string; passageType?: string } }>;
+  passages?: Array<{ passageId: string; label?: string; passage: { title?: string; text?: string; passageType?: string; textFeaturesJson?: PssaStudentFigureFeature[] } }>;
   item: {
     interactionType: string;
     interactionSubtype: string;
     pointValue: number;
     responseSpec: any;
+  };
+};
+
+type PssaStudentFigureFeature = {
+  type: "figure";
+  figureKind: "map";
+  featureId: string;
+  title: string;
+  sectionId: string;
+  src: string;
+  altText: string;
+  longDescription: string;
+  structuredData: {
+    legend: Array<{ symbol: string; meaning: string }>;
+    locations: Array<{ id: string; label: string; level: string; notes?: string }>;
+    relationships: Array<{ id: string; type: "adjacent_to" | "separated_from"; from: string; to: string }>;
+    routes: Array<{ id: string; label: string; from: string; via: string[]; to: string }>;
+    annotations: Array<{ label: string; value: string }>;
   };
 };
 
@@ -256,7 +274,7 @@ function PssaItemPanel({ state, item, busy, onNavigate, onSubmit, onSubmitAttemp
           <article key={`${row.passageId}-${index}`} className="rounded border border-slate-200 bg-slate-50 p-4">
             <p className="text-xs font-bold uppercase tracking-wide text-slate-500">{row.label ?? "Passage"}</p>
             <h2 className="text-lg font-bold">{row.passage.title}</h2>
-            <p className="mt-3 whitespace-pre-wrap text-sm leading-7 text-slate-800">{row.passage.text}</p>
+            <PassageStimulus passage={row.passage} />
           </article>
         ))}
       </div>
@@ -278,6 +296,104 @@ function PssaItemPanel({ state, item, busy, onNavigate, onSubmit, onSubmitAttemp
       </div>
     </div>
   );
+}
+
+function PassageStimulus({ passage }: { passage: { text?: string; textFeaturesJson?: PssaStudentFigureFeature[] } }) {
+  const text = passage.text ?? "";
+  const features = passage.textFeaturesJson ?? [];
+  const sections = splitPassageSections(text);
+  const renderedFeatures = new Set<string>();
+  return (
+    <div className="mt-3 space-y-4 text-sm leading-7 text-slate-800">
+      {sections.map((section) => {
+        const sectionFigures = features.filter((feature) => feature.sectionId === section.sectionId);
+        sectionFigures.forEach((feature) => renderedFeatures.add(feature.featureId));
+        return (
+          <div key={`${section.sectionId}-${section.start}`}>
+            <p className="whitespace-pre-wrap">{section.text}</p>
+            {sectionFigures.map((feature) => <PssaFigureFeatureView key={feature.featureId} feature={feature} />)}
+          </div>
+        );
+      })}
+      {features.filter((feature) => !renderedFeatures.has(feature.featureId)).map((feature) => <PssaFigureFeatureView key={feature.featureId} feature={feature} />)}
+    </div>
+  );
+}
+
+function PssaFigureFeatureView({ feature }: { feature: PssaStudentFigureFeature }) {
+  const [expanded, setExpanded] = useState(false);
+  const triggerRef = useRef<HTMLButtonElement | null>(null);
+  const descriptionId = `pssa-figure-desc-${feature.featureId}`;
+  function closeExpanded() {
+    setExpanded(false);
+    window.setTimeout(() => triggerRef.current?.focus(), 0);
+  }
+  return (
+    <figure className="mt-4 rounded border border-slate-300 bg-white p-3">
+      <img src={feature.src} alt={feature.altText} aria-describedby={descriptionId} className="w-full rounded border border-slate-200 bg-white" />
+      <figcaption className="mt-2 font-bold text-slate-900">{feature.title}</figcaption>
+      <div className="mt-3 flex flex-wrap gap-2">
+        <button ref={triggerRef} type="button" onClick={() => setExpanded(true)} className="rounded border border-slate-400 px-3 py-2 text-sm font-bold text-slate-900">Enlarge map</button>
+      </div>
+      <details id={descriptionId} className="mt-3 rounded border border-slate-200 bg-slate-50 p-3">
+        <summary className="cursor-pointer font-bold text-slate-900">Text description</summary>
+        <AccessibleFigureDescription feature={feature} />
+      </details>
+      {expanded ? (
+        <div role="dialog" aria-modal="true" aria-label={feature.title} className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4">
+          <div className="max-h-[92vh] w-full max-w-5xl overflow-auto rounded bg-white p-4">
+            <div className="flex items-center justify-between gap-3">
+              <h3 className="text-lg font-bold text-slate-950">{feature.title}</h3>
+              <button type="button" onClick={closeExpanded} className="rounded bg-slate-950 px-3 py-2 text-sm font-bold text-white">Close</button>
+            </div>
+            <img src={feature.src} alt={feature.altText} aria-describedby={descriptionId} className="mt-4 w-full min-w-[720px] rounded border border-slate-300 bg-white" />
+          </div>
+        </div>
+      ) : null}
+    </figure>
+  );
+}
+
+function AccessibleFigureDescription({ feature }: { feature: PssaStudentFigureFeature }) {
+  const label = (id: string) => feature.structuredData.locations.find((row) => row.id === id)?.label ?? id;
+  return (
+    <div className="mt-3 space-y-3 text-sm leading-6 text-slate-800">
+      <p className="whitespace-pre-wrap">{feature.longDescription}</p>
+      <table className="w-full border-collapse text-left text-xs">
+        <tbody>
+          <tr><th className="border p-2">Legend</th><td className="border p-2">{feature.structuredData.legend.map((row) => `${row.symbol}: ${row.meaning}`).join("; ")}</td></tr>
+          <tr><th className="border p-2">Locations</th><td className="border p-2">{feature.structuredData.locations.map((row) => `${row.label} (${row.level}${row.notes ? `, ${row.notes}` : ""})`).join("; ")}</td></tr>
+          <tr><th className="border p-2">Relationships</th><td className="border p-2">{feature.structuredData.relationships.map((row) => `${label(row.from)} ${row.type.replace(/_/g, " ")} ${label(row.to)}`).join("; ")}</td></tr>
+          <tr><th className="border p-2">Routes</th><td className="border p-2">{feature.structuredData.routes.map((row) => `${row.label}: ${label(row.from)}${row.via.length ? ` via ${row.via.map(label).join(", ")}` : ""} to ${label(row.to)}`).join("; ")}</td></tr>
+          <tr><th className="border p-2">Annotations</th><td className="border p-2">{feature.structuredData.annotations.map((row) => `${row.label}: ${row.value}`).join("; ")}</td></tr>
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+function splitPassageSections(text: string) {
+  const matches = [...text.matchAll(/^###\s+(.+)$/gm)].map((match) => ({
+    label: match[1].trim(),
+    start: match.index ?? 0,
+    markerEnd: (match.index ?? 0) + match[0].length,
+  }));
+  if (!matches.length) return [{ sectionId: "section_0_intro", text, start: 0 }];
+  const rows: Array<{ sectionId: string; text: string; start: number }> = [];
+  if (matches[0].start > 0) rows.push({ sectionId: "section_0_intro", text: text.slice(0, matches[0].start).trim(), start: 0 });
+  matches.forEach((match, index) => {
+    const end = matches[index + 1]?.start ?? text.length;
+    rows.push({
+      sectionId: slugSectionId(match.label),
+      text: text.slice(match.start, end).trim(),
+      start: match.start,
+    });
+  });
+  return rows.filter((row) => row.text);
+}
+
+function slugSectionId(value: string) {
+  return value.toLowerCase().replace(/[^\p{L}\p{N}]+/gu, " ").trim().replace(/\s+/g, "_");
 }
 
 function ItemResponseForm({ item, busy, onSubmit }: { item: PssaItemResponse; busy: boolean; onSubmit: (payload: unknown) => void }) {

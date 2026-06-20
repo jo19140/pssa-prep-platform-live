@@ -1,6 +1,7 @@
 import { Prisma } from "@prisma/client";
 import { NextResponse } from "next/server";
 import { pssaNoStoreHeaders } from "@/lib/content/pssaItemReview";
+import { isPssaFigureFeature, projectPssaFigureFeatureForStudent } from "@/lib/content/pssaFigureFeature";
 import { projectPssaStudentItem } from "@/lib/content/pssaStudentDto";
 import { scorePssaItem, type PssaScoreResult } from "@/lib/content/pssaScoring";
 import { consumeRateLimit, getClientIp } from "@/lib/rateLimit";
@@ -675,8 +676,13 @@ function passageDtosForItem(session: LoadedSession, formItem: LoadedFormItem) {
         title: row.passage.title,
         text: row.passage.text,
         passageType: row.passage.passageType,
+        textFeaturesJson: safePassageTextFeatures(row.passage.textFeaturesJson),
       },
     }));
+}
+
+function safePassageTextFeatures(value: unknown) {
+  return Array.isArray(value) ? value.filter(isPssaFigureFeature).map(projectPssaFigureFeatureForStudent) : [];
 }
 
 async function canTeacherLaunchForStudent(db: PssaDb, teacherUserId: string, studentUserId: string) {
