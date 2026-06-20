@@ -41,7 +41,7 @@ EC: E03.B-K.1.1.1
       "text": "So families could find the green accessible route more quickly."
     },
     {
-      "text": "So quiet readers could rest away from loud exhibits."
+      "text": "So children would have to use the stairs before they could draw."
     }
   ]
 }
@@ -85,7 +85,7 @@ EC: E03.B-C.3.1.3
       "text": "The Quiet Corner is separated from the Build Lab."
     },
     {
-      "text": "The accessible route goes through the elevator."
+      "text": "The Quiet Corner is beside the Build Lab."
     }
   ]
 }

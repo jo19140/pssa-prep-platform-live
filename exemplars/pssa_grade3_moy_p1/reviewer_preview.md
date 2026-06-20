@@ -11,7 +11,7 @@ Points: 1
 - A (KEY): So children could dig for model bones and then draw the dinosaur they found. — Correct. Paragraph 3 explains this exact connection between the two exhibits.
 - B: So visitors would hear the Story Stage actors while they painted. — This uses the Story Stage, which is a different exhibit relationship.
 - C: So families could find the green accessible route more quickly. — The accessible route is important to the map, but it is not the reason these two exhibits are neighbors.
-- D: So quiet readers could rest away from loud exhibits. — This describes why the Quiet Corner is away from noise, not why Art Studio is beside Dinosaur Dig.
+- D: So children would have to use the stairs before they could draw. — The passage does not say the workers wanted children to use the stairs before drawing.
 
 ## pssa_item_g3_moy_p1_mcq_bc211
 
@@ -19,7 +19,7 @@ EC: E03.B-C.2.1.1
 Type: MCQ
 Points: 1
 
-- A: A museum map is useful only after visitors already know the building well. — The passage says the map helps families before they start walking.
+- A: A museum map is useful only after visitors already know the building well. — This reverses the passage's claim that the map helps families before they start walking.
 - B (KEY): A clear, carefully tested map is worth the work because it helps visitors move easily. — Correct. Paragraph 8 says a clear map is worth the extra work, and the ending shows how it makes the day smoother.
 - C: Museum workers should spend less time on maps and more time building exhibits. — The passage never says maps are less important than exhibits.
 - D: A map mostly matters because it makes the museum look more colorful. — The map may include symbols and colors, but the author's point is about helping visitors use the museum.
@@ -33,7 +33,7 @@ Points: 1
 - A: The Story Stage is beside the Build Lab. — This is a real map relationship, but it supports a different planning choice.
 - B: The Family Rest Area is on Level 1. — This map fact does not show that the Quiet Corner is away from noise.
 - C (KEY): The Quiet Corner is separated from the Build Lab. — Correct. The quoted sentence gives the reason, and the map relationship shows the separation.
-- D: The accessible route goes through the elevator. — This supports the route and accessibility detail, not the Quiet Corner decision.
+- D: The Quiet Corner is beside the Build Lab. — This reverses the map relationship; the map shows the Quiet Corner separated from the Build Lab.
 
 ## pssa_item_g3_moy_p1_mcq_bv411
 
@@ -55,7 +55,7 @@ Points: 1
 - A (KEY): It shows the Family Rest Area is on Level 1. — Correct. The map label places the Family Rest Area on Level 1.
 - B: Level 2 — This reverses the map's level label.
 - C: Beside the Dinosaur Dig — This uses a different Level 2 map area.
-- D: On the accessible route endpoint — The accessible route ends at Dinosaur Dig, not the Family Rest Area.
+- D: On the accessible route endpoint — This is a plausible misread of the route endpoint; the accessible route ends at Dinosaur Dig, not the Family Rest Area.
 
 ## pssa_item_g3_moy_p1_te_bk112
 

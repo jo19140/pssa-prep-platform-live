@@ -73,7 +73,7 @@ type MoyItem = {
   answerChoicesJson?: MoyChoice[];
   structuredChoicesJson?: MoyChoice[];
   correctIndex?: number;
-  rows?: Array<{ rowId: string; label: string }>;
+  rows?: Array<{ rowId: string; label: string; correctColumnId?: string; rationale?: string; plausibleWrongRationales?: Record<string, string> }>;
   columns?: Array<{ columnId: string; label: string }>;
   selectionRule?: string;
   tokens?: Array<{ tokenId: string; text: string; evidenceBinding: EvidenceBinding }>;
@@ -233,7 +233,7 @@ export function buildMoyP1Items(): MoyItem[] {
         ["So children could dig for model bones and then draw the dinosaur they found.", null, "Correct. Paragraph 3 explains this exact connection between the two exhibits.", "A child can dig for models of bones, then walk a few steps and draw the dinosaur they found."],
         ["So visitors would hear the Story Stage actors while they painted.", "wrong_section", "This uses the Story Stage, which is a different exhibit relationship.", "The Story Stage sits beside the Build Lab."],
         ["So families could find the green accessible route more quickly.", "wrong_emphasis", "The accessible route is important to the map, but it is not the reason these two exhibits are neighbors.", "They mark the elevator clearly because the green accessible route uses the elevator."],
-        ["So quiet readers could rest away from loud exhibits.", "wrong_section", "This describes why the Quiet Corner is away from noise, not why Art Studio is beside Dinosaur Dig.", "The Quiet Corner was placed far from the noise."],
+        ["So children would have to use the stairs before they could draw.", "unsupported_inference", "The passage does not say the workers wanted children to use the stairs before drawing.", "An elevator and a set of stairs connect them."],
       ],
     }),
     mcq({
@@ -244,7 +244,7 @@ export function buildMoyP1Items(): MoyItem[] {
       correctIndex: 1,
       evidenceBinding: { requiresFigure: false, requiresPassageText: true, evidenceKind: "passage_only" },
       choices: [
-        ["A museum map is useful only after visitors already know the building well.", "opposite_claim", "The passage says the map helps families before they start walking.", "The map helps families plan their day before they even start walking."],
+        ["A museum map is useful only after visitors already know the building well.", "opposite_claim", "This reverses the passage's claim that the map helps families before they start walking.", "The map helps families plan their day before they even start walking."],
         ["A clear, carefully tested map is worth the work because it helps visitors move easily.", null, "Correct. Paragraph 8 says a clear map is worth the extra work, and the ending shows how it makes the day smoother.", "A clear map is worth the extra work."],
         ["Museum workers should spend less time on maps and more time building exhibits.", "unsupported_inference", "The passage never says maps are less important than exhibits.", "The workers arranged them, drew the map, and built the legend."],
         ["A map mostly matters because it makes the museum look more colorful.", "plausible_misreading", "The map may include symbols and colors, but the author's point is about helping visitors use the museum.", "Good text features answer questions without making a reader search the whole page."],
@@ -266,7 +266,7 @@ export function buildMoyP1Items(): MoyItem[] {
         ["The Story Stage is beside the Build Lab.", "wrong_section", "This is a real map relationship, but it supports a different planning choice.", "story_stage_build_lab"],
         ["The Family Rest Area is on Level 1.", "wrong_emphasis", "This map fact does not show that the Quiet Corner is away from noise.", "family_rest_area"],
         ["The Quiet Corner is separated from the Build Lab.", null, "Correct. The quoted sentence gives the reason, and the map relationship shows the separation.", "quiet_corner_build_lab"],
-        ["The accessible route goes through the elevator.", "wrong_section", "This supports the route and accessibility detail, not the Quiet Corner decision.", "accessible_route_dinosaur_dig"],
+        ["The Quiet Corner is beside the Build Lab.", "opposite_claim", "This reverses the map relationship; the map shows the Quiet Corner separated from the Build Lab.", "quiet_corner_build_lab"],
       ],
     }),
     mcq({
@@ -294,7 +294,7 @@ export function buildMoyP1Items(): MoyItem[] {
         ["It shows the Family Rest Area is on Level 1.", null, "Correct. The map label places the Family Rest Area on Level 1.", "family_rest_area"],
         ["Level 2", "opposite_claim", "This reverses the map's level label.", "family_rest_area"],
         ["Beside the Dinosaur Dig", "wrong_section", "This uses a different Level 2 map area.", "dinosaur_dig"],
-        ["On the accessible route endpoint", "plausible_misreading", "The accessible route ends at Dinosaur Dig, not the Family Rest Area.", "accessible_route_dinosaur_dig"],
+        ["On the accessible route endpoint", "plausible_misreading", "This is a plausible misread of the route endpoint; the accessible route ends at Dinosaur Dig, not the Family Rest Area.", "accessible_route_dinosaur_dig"],
       ],
     }),
   ];
@@ -303,9 +303,36 @@ export function buildMoyP1Items(): MoyItem[] {
   matchingGrid.stem = "Match each detail to what it shows about the workers' planning.";
   matchingGrid.instructionText = "Choose the best planning idea for each detail.";
   matchingGrid.rows = [
-    { rowId: "row_build_lab", label: "The Build Lab was placed near the front, close to the entrance." },
-    { rowId: "row_art_dig", label: "The Art Studio sits next to the Dinosaur Dig." },
-    { rowId: "row_fix_map", label: "If visitors look confused, the workers change the map." },
+    {
+      rowId: "row_build_lab",
+      label: "The Build Lab was placed near the front, close to the entrance.",
+      correctColumnId: "noise_and_crowds",
+      rationale: "The passage says the Build Lab can get noisy and that workers placed it near the front, where big crowds can gather.",
+      plausibleWrongRationales: {
+        connected_activities: "This detail is about managing a loud exhibit near the entrance, not about pairing two related activities.",
+        test_and_revise: "This detail happens during exhibit placement, not during map testing or revision.",
+      },
+    },
+    {
+      rowId: "row_art_dig",
+      label: "The Art Studio sits next to the Dinosaur Dig.",
+      correctColumnId: "connected_activities",
+      rationale: "The passage explains that a child can dig for model bones and then draw the dinosaur, so the activities are connected.",
+      plausibleWrongRationales: {
+        noise_and_crowds: "This detail is about activity connection, not about managing noise or crowd flow.",
+        test_and_revise: "This detail describes exhibit placement, not the later map-testing process.",
+      },
+    },
+    {
+      rowId: "row_fix_map",
+      label: "If visitors look confused, the workers change the map.",
+      correctColumnId: "test_and_revise",
+      rationale: "The passage says workers watch families use the map and change confusing parts before printing many copies.",
+      plausibleWrongRationales: {
+        noise_and_crowds: "This detail is about revising the map after testing, not where loud or crowded exhibits should go.",
+        connected_activities: "This detail is about fixing a confusing map, not placing related exhibits beside each other.",
+      },
+    },
   ];
   matchingGrid.columns = [
     { columnId: "noise_and_crowds", label: "They plan for noise and crowds." },
@@ -313,11 +340,13 @@ export function buildMoyP1Items(): MoyItem[] {
     { columnId: "test_and_revise", label: "They test and revise before printing." },
   ];
   matchingGrid.selectionRule = "Select one planning idea for each detail.";
-  matchingGrid.correctResponseJson = { correctCells: [
+  const correctCells = [
     { rowId: "row_build_lab", columnId: "noise_and_crowds" },
     { rowId: "row_art_dig", columnId: "connected_activities" },
     { rowId: "row_fix_map", columnId: "test_and_revise" },
-  ] };
+  ];
+  matchingGrid.correctResponseJson = { correctCells };
+  (matchingGrid as any).correctCells = correctCells;
   matchingGrid.scoringJson = { totalPoints: 3 };
   matchingGrid.responseSpecJson = buildPssaResponseSpec(matchingGrid);
   items.push(matchingGrid);

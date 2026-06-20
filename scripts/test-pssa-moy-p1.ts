@@ -69,6 +69,38 @@ for (const item of items) {
   }
 }
 
+for (const item of items.filter((row: any) => row.interactionType === "MCQ")) {
+  const distractors = item.structuredChoicesJson.filter((choice: any, index: number) => index !== item.correctIndex);
+  const roles = distractors.map((choice: any) => choice.distractorRole);
+  assert.equal(distractors.length, 3, `${item.itemId} must have exactly 3 distractors`);
+  assert.equal(new Set(roles).size, 3, `${item.itemId} must have 3 distinct distractorRole values`);
+  for (const choice of distractors) {
+    assert.equal(typeof choice.distractorRole, "string", `${item.itemId} distractor must carry distractorRole`);
+    assert(mappingRegistry[choice.distractorRole as keyof typeof mappingRegistry], `${item.itemId} role must be registered: ${choice.distractorRole}`);
+    assert.equal(String(choice.rationale ?? "").trim().length > 20, true, `${item.itemId} distractor rationale must be nonblank and specific`);
+    if (choice.distractorRole === "wrong_section") assert(/different|section|relationship|exhibit|area|later|earlier/i.test(choice.rationale), `${item.itemId} wrong_section rationale must explain the misplaced section/detail`);
+    if (choice.distractorRole === "wrong_emphasis") assert(/not|does not|different|important/i.test(choice.rationale), `${item.itemId} wrong_emphasis rationale must explain the misplaced emphasis`);
+    if (choice.distractorRole === "unsupported_inference") assert(/does not say|never says|unsupported|passage does not/i.test(choice.rationale), `${item.itemId} unsupported_inference rationale must explain absent support`);
+    if (choice.distractorRole === "opposite_claim") assert(/reverse|reverses|opposite|not/i.test(choice.rationale), `${item.itemId} opposite_claim rationale must explain reversal`);
+    if (choice.distractorRole === "plausible_misreading") assert(/misread|describes|discusses|but/i.test(choice.rationale), `${item.itemId} plausible_misreading rationale must explain the plausible misread`);
+  }
+}
+
+const matchingGrid = byId.get("pssa_item_g3_moy_p1_te_bk112");
+for (const row of matchingGrid.rows) {
+  assert.equal(typeof row.rationale, "string", `${row.rowId} must carry a correct-placement rationale`);
+  assert.equal(row.rationale.trim().length > 20, true, `${row.rowId} rationale must be specific`);
+  assert.equal(typeof row.correctColumnId, "string", `${row.rowId} must carry canonical correctColumnId`);
+  assert.equal(matchingGrid.correctResponseJson.correctCells.some((cell: any) => cell.rowId === row.rowId && cell.columnId === row.correctColumnId), true, `${row.rowId} correctColumnId must match correctCells`);
+  const wrong = row.plausibleWrongRationales ?? {};
+  assert.equal(Object.keys(wrong).length > 0, true, `${row.rowId} must carry plausibleWrongRationales`);
+  for (const [columnId, rationale] of Object.entries(wrong)) {
+    assert.notEqual(columnId, row.correctColumnId, `${row.rowId} plausibleWrongRationales must only name wrong columns`);
+    assert.equal(matchingGrid.columns.some((column: any) => column.columnId === columnId), true, `${row.rowId} plausible wrong column must exist`);
+    assert.equal(String(rationale).trim().length > 20, true, `${row.rowId}/${columnId} wrong-placement rationale must be specific`);
+  }
+}
+
 function answerableWithFigureRemoved(item: any) {
   return item.evidenceBinding?.requiresFigure !== true;
 }

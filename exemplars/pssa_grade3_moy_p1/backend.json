@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-20T15:13:33.624Z",
+  "generatedAt": "2026-06-20T15:52:19.611Z",
   "noDbWrite": true,
   "productionImportReady": false,
   "passageCount": 1,
@@ -238,10 +238,10 @@
           "evidence": "They mark the elevator clearly because the green accessible route uses the elevator."
         },
         {
-          "text": "So quiet readers could rest away from loud exhibits.",
-          "distractorRole": "wrong_section",
-          "rationale": "This describes why the Quiet Corner is away from noise, not why Art Studio is beside Dinosaur Dig.",
-          "evidence": "The Quiet Corner was placed far from the noise."
+          "text": "So children would have to use the stairs before they could draw.",
+          "distractorRole": "unsupported_inference",
+          "rationale": "The passage does not say the workers wanted children to use the stairs before drawing.",
+          "evidence": "An elevator and a set of stairs connect them."
         }
       ],
       "structuredChoicesJson": [
@@ -269,10 +269,10 @@
           "evidence": "They mark the elevator clearly because the green accessible route uses the elevator."
         },
         {
-          "text": "So quiet readers could rest away from loud exhibits.",
-          "distractorRole": "wrong_section",
-          "rationale": "This describes why the Quiet Corner is away from noise, not why Art Studio is beside Dinosaur Dig.",
-          "evidence": "The Quiet Corner was placed far from the noise."
+          "text": "So children would have to use the stairs before they could draw.",
+          "distractorRole": "unsupported_inference",
+          "rationale": "The passage does not say the workers wanted children to use the stairs before drawing.",
+          "evidence": "An elevator and a set of stairs connect them."
         }
       ],
       "correctIndex": 0,
@@ -282,7 +282,7 @@
           "So children could dig for model bones and then draw the dinosaur they found.",
           "So visitors would hear the Story Stage actors while they painted.",
           "So families could find the green accessible route more quickly.",
-          "So quiet readers could rest away from loud exhibits."
+          "So children would have to use the stairs before they could draw."
         ],
         "structuredChoicesJson": [
           {
@@ -297,8 +297,8 @@
             "distractorRole": "wrong_emphasis"
           },
           {
-            "text": "So quiet readers could rest away from loud exhibits.",
-            "distractorRole": "wrong_section"
+            "text": "So children would have to use the stairs before they could draw.",
+            "distractorRole": "unsupported_inference"
           }
         ]
       }
@@ -351,7 +351,7 @@
         {
           "text": "A museum map is useful only after visitors already know the building well.",
           "distractorRole": "opposite_claim",
-          "rationale": "The passage says the map helps families before they start walking.",
+          "rationale": "This reverses the passage's claim that the map helps families before they start walking.",
           "evidence": "The map helps families plan their day before they even start walking."
         },
         {
@@ -382,7 +382,7 @@
         {
           "text": "A museum map is useful only after visitors already know the building well.",
           "distractorRole": "opposite_claim",
-          "rationale": "The passage says the map helps families before they start walking.",
+          "rationale": "This reverses the passage's claim that the map helps families before they start walking.",
           "evidence": "The map helps families plan their day before they even start walking."
         },
         {
@@ -508,10 +508,10 @@
           ]
         },
         {
-          "text": "The accessible route goes through the elevator.",
-          "distractorRole": "wrong_section",
-          "rationale": "This supports the route and accessibility detail, not the Quiet Corner decision.",
-          "evidence": "accessible_route_dinosaur_dig"
+          "text": "The Quiet Corner is beside the Build Lab.",
+          "distractorRole": "opposite_claim",
+          "rationale": "This reverses the map relationship; the map shows the Quiet Corner separated from the Build Lab.",
+          "evidence": "quiet_corner_build_lab"
         }
       ],
       "structuredChoicesJson": [
@@ -540,10 +540,10 @@
           ]
         },
         {
-          "text": "The accessible route goes through the elevator.",
-          "distractorRole": "wrong_section",
-          "rationale": "This supports the route and accessibility detail, not the Quiet Corner decision.",
-          "evidence": "accessible_route_dinosaur_dig"
+          "text": "The Quiet Corner is beside the Build Lab.",
+          "distractorRole": "opposite_claim",
+          "rationale": "This reverses the map relationship; the map shows the Quiet Corner separated from the Build Lab.",
+          "evidence": "quiet_corner_build_lab"
         }
       ],
       "correctIndex": 2,
@@ -553,7 +553,7 @@
           "The Story Stage is beside the Build Lab.",
           "The Family Rest Area is on Level 1.",
           "The Quiet Corner is separated from the Build Lab.",
-          "The accessible route goes through the elevator."
+          "The Quiet Corner is beside the Build Lab."
         ],
         "structuredChoicesJson": [
           {
@@ -568,8 +568,8 @@
             "text": "The Quiet Corner is separated from the Build Lab."
           },
           {
-            "text": "The accessible route goes through the elevator.",
-            "distractorRole": "wrong_section"
+            "text": "The Quiet Corner is beside the Build Lab.",
+            "distractorRole": "opposite_claim"
           }
         ]
       }
@@ -780,7 +780,7 @@
         {
           "text": "On the accessible route endpoint",
           "distractorRole": "plausible_misreading",
-          "rationale": "The accessible route ends at Dinosaur Dig, not the Family Rest Area.",
+          "rationale": "This is a plausible misread of the route endpoint; the accessible route ends at Dinosaur Dig, not the Family Rest Area.",
           "evidence": "accessible_route_dinosaur_dig"
         }
       ],
@@ -812,7 +812,7 @@
         {
           "text": "On the accessible route endpoint",
           "distractorRole": "plausible_misreading",
-          "rationale": "The accessible route ends at Dinosaur Dig, not the Family Rest Area.",
+          "rationale": "This is a plausible misread of the route endpoint; the accessible route ends at Dinosaur Dig, not the Family Rest Area.",
           "evidence": "accessible_route_dinosaur_dig"
         }
       ],
@@ -904,15 +904,33 @@
       "rows": [
         {
           "rowId": "row_build_lab",
-          "label": "The Build Lab was placed near the front, close to the entrance."
+          "label": "The Build Lab was placed near the front, close to the entrance.",
+          "correctColumnId": "noise_and_crowds",
+          "rationale": "The passage says the Build Lab can get noisy and that workers placed it near the front, where big crowds can gather.",
+          "plausibleWrongRationales": {
+            "connected_activities": "This detail is about managing a loud exhibit near the entrance, not about pairing two related activities.",
+            "test_and_revise": "This detail happens during exhibit placement, not during map testing or revision."
+          }
         },
         {
           "rowId": "row_art_dig",
-          "label": "The Art Studio sits next to the Dinosaur Dig."
+          "label": "The Art Studio sits next to the Dinosaur Dig.",
+          "correctColumnId": "connected_activities",
+          "rationale": "The passage explains that a child can dig for model bones and then draw the dinosaur, so the activities are connected.",
+          "plausibleWrongRationales": {
+            "noise_and_crowds": "This detail is about activity connection, not about managing noise or crowd flow.",
+            "test_and_revise": "This detail describes exhibit placement, not the later map-testing process."
+          }
         },
         {
           "rowId": "row_fix_map",
-          "label": "If visitors look confused, the workers change the map."
+          "label": "If visitors look confused, the workers change the map.",
+          "correctColumnId": "test_and_revise",
+          "rationale": "The passage says workers watch families use the map and change confusing parts before printing many copies.",
+          "plausibleWrongRationales": {
+            "noise_and_crowds": "This detail is about revising the map after testing, not where loud or crowded exhibits should go.",
+            "connected_activities": "This detail is about fixing a confusing map, not placing related exhibits beside each other."
+          }
         }
       ],
       "columns": [
@@ -930,21 +948,53 @@
         }
       ],
       "selectionRule": "Select one planning idea for each detail.",
+      "correctCells": [
+        {
+          "rowId": "row_build_lab",
+          "columnId": "noise_and_crowds"
+        },
+        {
+          "rowId": "row_art_dig",
+          "columnId": "connected_activities"
+        },
+        {
+          "rowId": "row_fix_map",
+          "columnId": "test_and_revise"
+        }
+      ],
       "responseSpecJson": {
         "stem": "Match each detail to what it shows about the workers' planning.",
         "instructionText": "Choose the best planning idea for each detail.",
         "rows": [
           {
             "rowId": "row_build_lab",
-            "label": "The Build Lab was placed near the front, close to the entrance."
+            "label": "The Build Lab was placed near the front, close to the entrance.",
+            "correctColumnId": "noise_and_crowds",
+            "rationale": "The passage says the Build Lab can get noisy and that workers placed it near the front, where big crowds can gather.",
+            "plausibleWrongRationales": {
+              "connected_activities": "This detail is about managing a loud exhibit near the entrance, not about pairing two related activities.",
+              "test_and_revise": "This detail happens during exhibit placement, not during map testing or revision."
+            }
           },
           {
             "rowId": "row_art_dig",
-            "label": "The Art Studio sits next to the Dinosaur Dig."
+            "label": "The Art Studio sits next to the Dinosaur Dig.",
+            "correctColumnId": "connected_activities",
+            "rationale": "The passage explains that a child can dig for model bones and then draw the dinosaur, so the activities are connected.",
+            "plausibleWrongRationales": {
+              "noise_and_crowds": "This detail is about activity connection, not about managing noise or crowd flow.",
+              "test_and_revise": "This detail describes exhibit placement, not the later map-testing process."
+            }
           },
           {
             "rowId": "row_fix_map",
-            "label": "If visitors look confused, the workers change the map."
+            "label": "If visitors look confused, the workers change the map.",
+            "correctColumnId": "test_and_revise",
+            "rationale": "The passage says workers watch families use the map and change confusing parts before printing many copies.",
+            "plausibleWrongRationales": {
+              "noise_and_crowds": "This detail is about revising the map after testing, not where loud or crowded exhibits should go.",
+              "connected_activities": "This detail is about fixing a confusing map, not placing related exhibits beside each other."
+            }
           }
         ],
         "columns": [
