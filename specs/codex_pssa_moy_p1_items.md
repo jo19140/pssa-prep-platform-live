@@ -3,7 +3,7 @@
 **Type:** content authoring (detector-first). **Owner:** Jonathan. **Date:** 2026-06-18.
 **Preconditions:** Phase 4A merged + verified on `main` (`1023b1e`; `PssaFormItem.scoringBucket` live). P1 passage/map package APPROVED: `specs/pssa_g3_moy_p1_passage_package.md`. Blueprint locked: `specs/pssa_g3_benchmark_blueprint_moy_eoy.md`.
 
-> **BLOCKED ON: the figure/map feature PR** (`specs/codex_pssa_figure_map_feature.md`) merged + verified on `main`. The platform's `textFeaturesJson` currently supports only `heading`/`sidebar` features — there is no visual-map type. P1's map-dependent items (3, 5, 8) genuinely require a renderable, accessible map, so **P1 item authoring does not start until the figure/map feature is live on `main`.** Do NOT represent the map with heading/sidebar hacks.
+> **UNBLOCKED — the figure/map feature is LIVE on `main`** (merge `e7992d2`; `specs/codex_pssa_figure_map_feature.md`). `type:"figure"` is supported and the museum map asset is committed at **`/pssa/figures/g3_moy_p1_museum_map.svg`** (`assetSha256: sha256:430318638b57236332e3c68a6f3620358a24cd912d35c2bef664c91d49811502`). The map is the merged figure feature — do NOT hack it into `heading`/`sidebar` features.
 
 ## 0. Scope & guardrails
 
@@ -39,7 +39,11 @@ From the approved package (do not rewrite the prose):
 
 - `title` = "A Map for a Day of Discovery"; `gradeLevel` 3; `subject` "ELA"; `passageType`/`genre` = informational.
 - `text` = the approved 687-word passage (verbatim from package §2). `wordCount` = 687.
-- `textFeaturesJson` = the functional floor map (package §3), encoded as the **`type:"figure"` text feature delivered by the figure/map feature PR** (`specs/codex_pssa_figure_map_feature.md`): the committed map asset + digest + `altText` + `longDescription` + `structuredData` (legend, locations/levels, route, show times). All map facts items 3/5/8 depend on (show times, Family Rest Area location, level headings, accessible route) live in this feature and its accessible equivalent. Do NOT hack the map into `heading`/`sidebar` features. (This is why authoring is blocked on that PR — see preconditions.)
+- `textFeaturesJson` = a single **`type:"figure"`** feature for the museum map (the merged figure feature). Pin it concretely:
+  - `assetPath: "/pssa/figures/g3_moy_p1_museum_map.svg"`; `assetSha256: "sha256:430318638b57236332e3c68a6f3620358a24cd912d35c2bef664c91d49811502"`.
+  - `structuredData` = the **already-validated museum map data** (legend; locations with **Family Rest Area on Level 1**; the three relationships Story Stage↔Build Lab adjacent, Art Studio↔Dinosaur Dig adjacent, Quiet Corner↔Build Lab separated; route `entrance → level1_elevator → level2_elevator → dinosaur_dig` excluding stairs; annotations show times `11:00 · 1:00 · 3:00`). **Source it from a shared CONTENT/AUTHORING module, NOT a test file and NOT generic runtime code.** `museumStructuredData()` currently lives in `scripts/test-pssa-figure-map-feature.ts`; **extract it to `scripts/content/lib/pssa-moy-p1-figure-data.ts`** (or a JSON fixture under `exemplars/pssa_grade3_moy_p1/`) that BOTH the figure test and the P1 author script import. Do NOT put MOY-specific museum data in generic `lib/content/` runtime code — the runtime passage just carries the resulting `textFeaturesJson`. Production authoring must NOT import from `scripts/test-*`. Re-point the figure test's import minimally; keep the data byte-identical so the merged digest/assertions still hold.
+  - `longDescription` = `generatePssaFigureLongDescription(structuredData)` (generated, validated equal). `altText` concise. `sectionId` = the passage section the map anchors after.
+  - Validate via the shared + Node figure validators already on `main`. Do NOT hack the map into `heading`/`sidebar` features.
 - `factCheckNotesJson` = package §4 (fully fictional museum; concepts accurate; no citation needed).
 - `staminaBand` = `released_length` — the **same existing value BOY uses**. Do NOT invent a new value/enum (e.g., not "MOY", not "full_seat"). Record the MOY benchmark identity in `provenanceJson` instead: `{ benchmarkSeason: "MOY", blueprintVersion: "pde-ela-diagnostic-stamina-2025-g3-moy-v1", unit: "P1" }`.
 - **Metadata — mirror the exact values the delivered stamina passages use** (do NOT invent): `sourceType="internal_original"`, `licenseStatus="cleared_internal_original"`, `commercialUseAllowed=true`, `needsLegalReview=false`, `reviewStatus=PENDING`, `itemStatus=candidate`. Copy `genre`/`domainVocabularyLoad` conventions from the same exemplars.
@@ -74,7 +78,7 @@ Item 8: three map+prose integrations (see §3.2)
 | 5 | **Operational map MCQ** | `E03.B-C.2.1.2` | MCQ | 1 | operational | **map**: use the map **key/label** to *locate* the **Family Rest Area**. Text-features/search-tools skill. (Show times are reserved for AO-5; Quiet Corner for item 3 — do not reuse.) |
 | 6 | Operational TE (3-pt) | `E03.B-K.1.1.2` | MATCHING_GRID | 3 | operational | prose: main idea + key details about the workers' planning |
 | 7 | Operational SA (3-pt) | `E03.B-K.1.1.3` | SHORT_ANSWER | 3 | operational | prose: sequence / cause-effect (arrange → make map → test → revise) |
-| 8 | **AO-5 (analytics-only) TE (3-pt)** | `E03.B-C.3.1.3` | **DRAG_DROP** | 3 | analytics_only* | **prose + map integration**, 3 assignments — drag each **paragraph number** (3, 5, 7) to the map feature it gives more info about; every row needs BOTH sources (exact rows in §3.2) |
+| 8 | **AO-5 (analytics-only) TE (3-pt)** | `E03.B-C.3.1.3` | **DRAG_DROP** | 3 | analytics_only* | **prose + map integration**, 3 assignments — drag each **verbatim passage sentence** to the map feature it supports (rows in §3.2); every row needs BOTH sources |
 
 Operational P1 total: 5 MCQ + 1 TE(3) + 1 SA(3) = 7 items / 11 operational points (matches blueprint S3 P1 slot). AO-5 adds 3 analytics points.
 
@@ -84,10 +88,10 @@ Operational P1 total: 5 MCQ + 1 TE(3) + 1 SA(3) = 7 items / 11 operational point
 
 **EC-label correctness (locked):** text-features/search-tools = `E03.B-C.2.1.2` (item 5); info-from-map+words = `E03.B-C.3.1.3` (items 3 and 8, on distinct evidence). Do not swap these.
 
-**Map / prose dependency (do not cross):**
-- **Item 5** (`B-C.2.1.2`) — pure **map** text-feature lookup: locate the Family Rest Area using the map **key/label**. Must fail if the map is removed.
-- **Items 3 and 8** (`B-C.3.1.3`) — require **BOTH** prose and map (integration). Each must fail if *either* the map is removed *or* the prose is ignored — they cannot be answered from one source alone.
-- **Items 1, 2, 4, 6, 7** — **prose-only**; must be answerable from the text and must NOT require the map.
+**Map / prose dependency (honest definition — these items embed the passage text *in the item*):**
+- **Item 5** (`B-C.2.1.2`) — **figure-only**: locate the Family Rest Area using the map key/label. Fails if the figure is removed.
+- **Items 3 and 8** (`B-C.3.1.3`) — **passage-derived text + figure integration.** Item 3 quotes the Quiet Corner sentence in its stem; AO-5's drag tokens are verbatim passage sentences. So each must fail if **the figure is removed** OR if **its quoted/drag-token text is removed** — but do **NOT** claim they fail merely because the full passage *body* is removed (the needed words are already in the item). They still validly test `B-C.3.1.3`: the student combines passage words with map information.
+- **Items 1, 2, 4, 6, 7** — **passage-only**: answerable from the passage text; remain answerable when the figure is removed.
 - Floor placement of Art Studio / Dinosaur Dig is stated in prose (package §8.1) → never used as map-only evidence. The truly map-only facts available are: show times, Family Rest Area location, symbol meanings, exact accessible-route path.
 
 ## 3.1 Pinned IDs & deterministic MCQ key-position plan
@@ -116,20 +120,20 @@ MCQ key positions (items 1–5): **A, B, C, D, A** → distribution A=2, B=1, C=
 - Do **NOT** phrase it as "Why did the author write this passage?" — that tests purpose, not POV, and would fail EC-skill-match for `B-C.2.1.1`.
 
 **AO-5 (`E03.B-C.3.1.3`, DRAG_DROP) — prompt & rows.**
-Prompt: *"Drag each statement from the passage to the map feature that best supports it."*
+Prompt: *"Drag each sentence from the passage to the map feature that best supports it."*
 
-Prompt: *"Read paragraphs 3, 5, and 7. Drag each paragraph number to the map feature that gives more information about that paragraph."*
+Drag tokens are **short verbatim passage excerpts** (paragraph numbers are ambiguous — paragraph 3 carries two adjacency relationships — and the player does not visibly number paragraphs):
 
-- **Paragraph 3** → Art Studio beside Dinosaur Dig
-- **Paragraph 5** → Level headings and the elevator route
-- **Paragraph 7** → Story Stage show times
+- *"The workers place each exhibit name on the floor map so visitors can see what is upstairs and what is on the ground floor."* → **Level 1 and Level 2 headings**
+- *"They mark the elevator clearly because the green accessible route uses the elevator, not the stairs."* → **Accessible route through the elevator**
+- *"The Story Stage sign lists show times..."* → **11:00 · 1:00 · 3:00**
 
-Using paragraph *numbers* (not reproduced claims) as the drag tokens forces the student to read each paragraph AND inspect the map — the row fails if either the passage or the map is removed. The three rows stay distinct from item 3 (paragraph 2 / Quiet Corner) and item 5 (Family Rest Area lookup). Distractor map-feature targets (e.g., Quiet Corner, the stairs, the Family Rest Area) each carry a registered `distractorRole` + rationale.
+Each row pairs a real passage sentence with a real map feature, so the row fails if either the passage or the map is removed. The three rows stay distinct from item 3 (Quiet Corner) and item 5 (Family Rest Area). Distractor map-feature targets (e.g., the stairs, Quiet Corner, Family Rest Area) each carry a registered `distractorRole` + rationale.
 
-**Item 3 (`E03.B-C.3.1.3`) — pinned stem (forces integration via paragraph reference).**
-- Stem: *"Read paragraph 2. Which detail from the map best supports the workers' decision described in that paragraph?"*
-- Correct idea: **the Quiet Corner is located far from the Build Lab.**
-- The stem references the paragraph rather than restating its claim, so the student must read **both** paragraph 2 (the decision) and the map (the supporting detail). It cannot be answered from prose or map alone.
+**Item 3 (`E03.B-C.3.1.3`) — pinned stem (narrowed to one sentence).**
+- Stem: *"Read this sentence from paragraph 2: 'The Quiet Corner, where families read and rest, was placed far from the noise.' Which detail from the map best supports this decision?"*
+- Correct idea: **the Quiet Corner is separated from the Build Lab.**
+- The stem quotes the specific sentence (paragraph 2 describes several decisions), so the student must read that decision AND inspect the map detail. It cannot be answered from prose or map alone.
 
 ## 4. Answer-choice & distractor quality (blueprint §6.2–6.3 — enforced)
 
@@ -154,28 +158,55 @@ After P1 (and later P3/P4) are authored, gated, and human-approved, the MOY form
 
 ```
 npx tsc --noEmit
+OPENAI_API_KEY=sk-build-dummy npm run build
 npx tsx scripts/test-pssa-content.ts              # detector stack incl. the new tranche
-npx tsx scripts/audit/pssa-item-type-contract.ts  # item-type contract (if run standalone)
+npx tsx scripts/test-pssa-figure-map-feature.ts   # figure unchanged + still valid (re-pointed import)
+npx tsx scripts/test-pssa-moy-p1.ts               # NEW — automates the dependency claims below
 npm run test:pssa-pr-c                             # scoring still green
+npm run test:pssa-pr-b                             # key-free renderers/DTO still green
 ```
-Plus: confirm every `distractorRole` used is a key in `mappingRegistry`; confirm the answer-position distribution is balanced. **Confirm source dependency exactly:**
 
-- **Item 5 is map-only:**
-  - fails if the map is removed
-  - does not require prose evidence beyond the student-facing directions
-- **Items 3 and 8 are map+prose integration:**
-  - fail if the map is removed
-  - fail if the relevant prose context is removed
-  - cannot be answered from either source alone
-- **Items 1, 2, 4, 6, and 7 are prose-only:**
-  - remain answerable if the map is removed
+**Create `scripts/test-pssa-moy-p1.ts`** that *automates* the source-dependency proof (do NOT leave it as a manual claim) via each item's authored evidence binding — NOT a new DB schema (STOP and report if a DB schema change would be required). Use the **honest** definition (items 3 & 8 embed their passage text in the item):
+
+- **Item 5 (figure-only):** fails if the **figure** is removed.
+- **Items 3 and 8 (passage-derived text + figure):** fail if the **figure** is removed; fail if the item's **quoted stem text / verbatim drag-token text** is removed; do **NOT** assert they fail merely because the full passage *body* is removed.
+- **Items 1, 2, 4, 6, 7 (passage-only):** remain answerable when the figure is removed.
+
+Plus: confirm every `distractorRole` used is a key in `mappingRegistry`; confirm the answer-position distribution is balanced; EC-skill-match all 8 (item 2 = POV, not purpose); student preview leak-free; reviewer preview has keys.
+
+## 7.1 Mechanical safeguards (run before the stop report)
+
+**Author run in canonical `noDbWrite` mode.** Execute the author script the way sibling scripts run (direct execution, file-only):
+
+```
+npx tsx scripts/content/author-pssa-moy-p1.ts
+```
+
+Confirm it writes **only** the required `exemplars/pssa_grade3_moy_p1/*` outputs and performs **no DB mutation** (no Prisma client import/usage; `backend.json` carries `noDbWrite: true` / `productionImportReady: false`, mirroring `author-pssa-grade3-short-answer.ts`).
+
+**Exact allowed-path scope guard (before commit):**
+
+```
+git diff --name-only origin/main...HEAD
+# MUST be limited to the allowed paths in §8. STOP on any BOY fixture, scoring, schema, registry, delivery, or unrelated file.
+git status --short
+# Only the two known WIP files may remain untracked.
+```
 
 ## 8. Acceptance criteria
 
 - 1 passage (687 words, map in `textFeaturesJson`) + 8 items, all `PENDING`/`candidate`, file-based, `noDbWrite`.
 - EC/type/points exactly per §3; EC labels correct (B-C.2.1.2 vs B-C.3.1.3); distinct primary evidence targets (per §3 rule); map/prose dependency holds per the three-way §7 gate.
 - All gates 0 FAIL / 0 unresolved WARN; every distractorRole is a registry key; positions balanced; source scan clean (original); EC-skill-match pass for all 8.
-- Scope clean: only the new author script + `exemplars/pssa_grade3_moy_p1/` + test wiring; zero changes to BOY/foundation content, scoring, registry, or schema.
+- Scope clean — **allowed tracked paths only:**
+  - `scripts/content/author-pssa-moy-p1.ts`
+  - `scripts/content/lib/pssa-moy-p1-figure-data.ts`
+  - `scripts/test-pssa-moy-p1.ts`
+  - `scripts/test-pssa-figure-map-feature.ts` (import re-point only)
+  - `scripts/test-pssa-content.ts` (tranche wiring only)
+  - `exemplars/pssa_grade3_moy_p1/*`
+  - `specs/codex_pssa_moy_p1_items.md`
+  - (plus the 2 known untracked WIP files stay untracked). Zero changes to BOY/foundation content, scoring, the registry, the figure module, or schema.
 - Student preview leak-free (no keys/rationales/distractorRoles/correct indices); reviewer preview has keys.
 
 ## 9. Process
