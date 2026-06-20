@@ -1,0 +1,1321 @@
+{
+  "generatedAt": "2026-06-20T15:52:19.611Z",
+  "noDbWrite": true,
+  "productionImportReady": false,
+  "passageCount": 1,
+  "itemCount": 8,
+  "passages": [
+    {
+      "id": "pssa_psg_g3_moy_p1_museum_map",
+      "title": "A Map for a Day of Discovery",
+      "gradeLevel": 3,
+      "subject": "ELA",
+      "passageType": "informational",
+      "genre": "informational_description",
+      "domainVocabularyLoad": "medium",
+      "wordCount": 687,
+      "text": "At the Bright Ideas Children's Museum, every day begins before the doors open. A team of museum workers walks through the halls to check that each exhibit is ready. An exhibit is a special area where visitors can touch, build, and learn. The workers want families to have a fun day, so they think carefully about where each exhibit should go.\n\nPlanning a museum is a little like planning a party. The workers ask many questions. Which exhibits are loud? Which ones are quiet? Where will big crowds gather? They learned that the Build Lab, where children stack blocks and ramps, can get noisy. So they placed it near the front, close to the entrance. The Quiet Corner, where families read and rest, was placed far from the noise. That way, visitors who want a calm space can find one. Every choice has a reason, and the reason is always the visitor.\n\nSome exhibits work well as neighbors. The Story Stage, where actors tell tales, sits beside the Build Lab because both invite children to imagine. Upstairs, the Art Studio sits next to the Dinosaur Dig. A child can dig for models of bones, then walk a few steps and draw the dinosaur they found. The workers plan these paths on purpose.\n\nOnce the exhibits have homes, the workers make a floor map. A floor map is a drawing that shows where everything is. But a map is only helpful if visitors can read it. So the team adds a legend. A legend is a small box that explains what the symbols on the map mean. A symbol is a tiny picture that stands for something real. On this map, a star shows the entrance. A small book shows the Story Stage. A green line shows the accessible route, a path that anyone can use, including visitors who use wheelchairs or strollers.\n\nThe museum has two levels. An elevator and a set of stairs connect them. The workers place each exhibit name on the floor map so visitors can see what is upstairs and what is on the ground floor. They mark the elevator clearly because the green accessible route uses the elevator, not the stairs.\n\nThe map helps families plan their day before they even start walking. Imagine a family that wants to see the Dinosaur Dig first. They look at the map and the legend. They see that the Dinosaur Dig is on the second level. They find the elevator symbol and follow the green route up. Without the map, they might wander and grow tired. With the map, they save time and energy for the fun. A good plan turns a big building into an easy adventure.\n\nWorkers also add a small sign near each exhibit. The Story Stage sign lists show times, so families know when the next tale begins. These signs, like the legend, are text features. Text features are parts of a page, such as labels, symbols, and lists, that help readers find information quickly. Good text features answer questions without making a reader search the whole page.\n\nAfter the map is finished, the team tests it. They ask a few families to use it and watch what happens. If visitors look confused, the workers change the map. Maybe a symbol is too small, or a label is missing. The team fixes these problems before printing hundreds of copies. When a test goes well, they keep that part of the map and move on to the next problem. They would rather fix a small problem now than confuse a thousand families later. A clear map is worth the extra work.\n\nWhen the doors finally open, the museum is ready. Children rush toward the Build Lab. Quiet readers head to the Quiet Corner. Families with strollers follow the green line to the elevator. None of this would feel so easy without the careful planning that happened first. The exhibits did not land in their spots by accident. The workers arranged them, drew the map, and built the legend so that every visitor, on every level, could have a smooth day of discovery.",
+      "textFeaturesJson": [
+        {
+          "type": "figure",
+          "figureKind": "map",
+          "featureId": "g3_moy_p1_museum_map",
+          "title": "Bright Ideas Children's Museum — Visitor Floor Map",
+          "sectionId": "section_0_intro",
+          "assetPath": "/pssa/figures/g3_moy_p1_museum_map.svg",
+          "assetSha256": "sha256:430318638b57236332e3c68a6f3620358a24cd912d35c2bef664c91d49811502",
+          "altText": "Floor map of the Bright Ideas Children's Museum with an accessible route to the Dinosaur Dig.",
+          "longDescription": "Legend:\n- Entrance: Entrance (You are here)\n- Story Stage: Story Stage (show times)\n- Accessible route: Accessible route (no stairs)\nLocations:\n- Level 1: Entrance (Star symbol); Build Lab (Blocks and ramps); Story Stage (Book symbol); Quiet Corner (Rest and read); Elevator; Stairs; Family Rest Area\n- Level 2: Art Studio (Draw and paint); Dinosaur Dig (Fossil area); Elevator (Accessible route); Stairs\nRelationships:\n- Story Stage adjacent to Build Lab.\n- Art Studio adjacent to Dinosaur Dig.\n- Quiet Corner separated from Build Lab.\nRoutes:\n- Accessible route: Entrance via Elevator, Elevator to Dinosaur Dig.\nAnnotations:\n- Story Stage: 11:00 · 1:00 · 3:00",
+          "structuredData": {
+            "legend": [
+              {
+                "symbol": "Entrance",
+                "meaning": "Entrance (You are here)"
+              },
+              {
+                "symbol": "Story Stage",
+                "meaning": "Story Stage (show times)"
+              },
+              {
+                "symbol": "Accessible route",
+                "meaning": "Accessible route (no stairs)"
+              }
+            ],
+            "locations": [
+              {
+                "id": "entrance",
+                "label": "Entrance",
+                "level": "Level 1",
+                "notes": "Star symbol"
+              },
+              {
+                "id": "build_lab",
+                "label": "Build Lab",
+                "level": "Level 1",
+                "notes": "Blocks and ramps"
+              },
+              {
+                "id": "story_stage",
+                "label": "Story Stage",
+                "level": "Level 1",
+                "notes": "Book symbol"
+              },
+              {
+                "id": "quiet_corner",
+                "label": "Quiet Corner",
+                "level": "Level 1",
+                "notes": "Rest and read"
+              },
+              {
+                "id": "level1_elevator",
+                "label": "Elevator",
+                "level": "Level 1"
+              },
+              {
+                "id": "level1_stairs",
+                "label": "Stairs",
+                "level": "Level 1"
+              },
+              {
+                "id": "art_studio",
+                "label": "Art Studio",
+                "level": "Level 2",
+                "notes": "Draw and paint"
+              },
+              {
+                "id": "dinosaur_dig",
+                "label": "Dinosaur Dig",
+                "level": "Level 2",
+                "notes": "Fossil area"
+              },
+              {
+                "id": "level2_elevator",
+                "label": "Elevator",
+                "level": "Level 2",
+                "notes": "Accessible route"
+              },
+              {
+                "id": "level2_stairs",
+                "label": "Stairs",
+                "level": "Level 2"
+              },
+              {
+                "id": "family_rest_area",
+                "label": "Family Rest Area",
+                "level": "Level 1"
+              }
+            ],
+            "relationships": [
+              {
+                "id": "story_stage_build_lab",
+                "type": "adjacent_to",
+                "from": "story_stage",
+                "to": "build_lab"
+              },
+              {
+                "id": "art_studio_dinosaur_dig",
+                "type": "adjacent_to",
+                "from": "art_studio",
+                "to": "dinosaur_dig"
+              },
+              {
+                "id": "quiet_corner_build_lab",
+                "type": "separated_from",
+                "from": "quiet_corner",
+                "to": "build_lab"
+              }
+            ],
+            "routes": [
+              {
+                "id": "accessible_route_dinosaur_dig",
+                "label": "Accessible route",
+                "from": "entrance",
+                "via": [
+                  "level1_elevator",
+                  "level2_elevator"
+                ],
+                "to": "dinosaur_dig"
+              }
+            ],
+            "annotations": [
+              {
+                "label": "Story Stage",
+                "value": "11:00 · 1:00 · 3:00"
+              }
+            ]
+          }
+        }
+      ],
+      "factCheckRequired": false,
+      "factCheckNotesJson": [
+        {
+          "claimId": "fictional_museum",
+          "claim": "Bright Ideas Children's Museum and its exhibits are fictional; informational map concepts are grade-appropriate and generic.",
+          "claimSupported": true
+        }
+      ],
+      "staminaBand": "released_length",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "provenanceJson": {
+        "benchmarkSeason": "MOY",
+        "blueprintVersion": "pde-ela-diagnostic-stamina-2025-g3-moy-v1",
+        "unit": "P1"
+      }
+    }
+  ],
+  "items": [
+    {
+      "id": "pssa_item_g3_moy_p1_mcq_bk111",
+      "itemId": "pssa_item_g3_moy_p1_mcq_bk111",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "MCQ",
+      "interactionType": "MCQ",
+      "interactionSubtype": "text_detail_support",
+      "passageId": "pssa_psg_g3_moy_p1_museum_map",
+      "passageTitle": "A Map for a Day of Discovery",
+      "eligibleContent": "E03.B-K.1.1.1",
+      "reportingCategory": "B",
+      "pointValue": 1,
+      "correctResponseJson": {
+        "correctIndex": 0
+      },
+      "scoringJson": {
+        "totalPoints": 1
+      },
+      "evidenceBinding": {
+        "requiresFigure": false,
+        "requiresPassageText": true,
+        "evidenceKind": "passage_only"
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "provenanceJson": {
+        "benchmarkSeason": "MOY",
+        "blueprintVersion": "pde-ela-diagnostic-stamina-2025-g3-moy-v1",
+        "unit": "P1"
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_MOY_P1_ITEMS",
+        "noDbWrite": true,
+        "productionImportReady": false
+      },
+      "studentFacingPrompt": "Why did the workers place the Art Studio beside the Dinosaur Dig?",
+      "stem": "Why did the workers place the Art Studio beside the Dinosaur Dig?",
+      "answerChoicesJson": [
+        {
+          "text": "So children could dig for model bones and then draw the dinosaur they found.",
+          "rationale": "Correct. Paragraph 3 explains this exact connection between the two exhibits.",
+          "evidence": "A child can dig for models of bones, then walk a few steps and draw the dinosaur they found.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "quotedSpan": "A child can dig for models of bones, then walk a few steps and draw the dinosaur they found."
+            }
+          ]
+        },
+        {
+          "text": "So visitors would hear the Story Stage actors while they painted.",
+          "distractorRole": "wrong_section",
+          "rationale": "This uses the Story Stage, which is a different exhibit relationship.",
+          "evidence": "The Story Stage sits beside the Build Lab."
+        },
+        {
+          "text": "So families could find the green accessible route more quickly.",
+          "distractorRole": "wrong_emphasis",
+          "rationale": "The accessible route is important to the map, but it is not the reason these two exhibits are neighbors.",
+          "evidence": "They mark the elevator clearly because the green accessible route uses the elevator."
+        },
+        {
+          "text": "So children would have to use the stairs before they could draw.",
+          "distractorRole": "unsupported_inference",
+          "rationale": "The passage does not say the workers wanted children to use the stairs before drawing.",
+          "evidence": "An elevator and a set of stairs connect them."
+        }
+      ],
+      "structuredChoicesJson": [
+        {
+          "text": "So children could dig for model bones and then draw the dinosaur they found.",
+          "rationale": "Correct. Paragraph 3 explains this exact connection between the two exhibits.",
+          "evidence": "A child can dig for models of bones, then walk a few steps and draw the dinosaur they found.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "quotedSpan": "A child can dig for models of bones, then walk a few steps and draw the dinosaur they found."
+            }
+          ]
+        },
+        {
+          "text": "So visitors would hear the Story Stage actors while they painted.",
+          "distractorRole": "wrong_section",
+          "rationale": "This uses the Story Stage, which is a different exhibit relationship.",
+          "evidence": "The Story Stage sits beside the Build Lab."
+        },
+        {
+          "text": "So families could find the green accessible route more quickly.",
+          "distractorRole": "wrong_emphasis",
+          "rationale": "The accessible route is important to the map, but it is not the reason these two exhibits are neighbors.",
+          "evidence": "They mark the elevator clearly because the green accessible route uses the elevator."
+        },
+        {
+          "text": "So children would have to use the stairs before they could draw.",
+          "distractorRole": "unsupported_inference",
+          "rationale": "The passage does not say the workers wanted children to use the stairs before drawing.",
+          "evidence": "An elevator and a set of stairs connect them."
+        }
+      ],
+      "correctIndex": 0,
+      "responseSpecJson": {
+        "prompt": "Why did the workers place the Art Studio beside the Dinosaur Dig?",
+        "choices": [
+          "So children could dig for model bones and then draw the dinosaur they found.",
+          "So visitors would hear the Story Stage actors while they painted.",
+          "So families could find the green accessible route more quickly.",
+          "So children would have to use the stairs before they could draw."
+        ],
+        "structuredChoicesJson": [
+          {
+            "text": "So children could dig for model bones and then draw the dinosaur they found."
+          },
+          {
+            "text": "So visitors would hear the Story Stage actors while they painted.",
+            "distractorRole": "wrong_section"
+          },
+          {
+            "text": "So families could find the green accessible route more quickly.",
+            "distractorRole": "wrong_emphasis"
+          },
+          {
+            "text": "So children would have to use the stairs before they could draw.",
+            "distractorRole": "unsupported_inference"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pssa_item_g3_moy_p1_mcq_bc211",
+      "itemId": "pssa_item_g3_moy_p1_mcq_bc211",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "MCQ",
+      "interactionType": "MCQ",
+      "interactionSubtype": "author_point_of_view",
+      "passageId": "pssa_psg_g3_moy_p1_museum_map",
+      "passageTitle": "A Map for a Day of Discovery",
+      "eligibleContent": "E03.B-C.2.1.1",
+      "reportingCategory": "B",
+      "pointValue": 1,
+      "correctResponseJson": {
+        "correctIndex": 1
+      },
+      "scoringJson": {
+        "totalPoints": 1
+      },
+      "evidenceBinding": {
+        "requiresFigure": false,
+        "requiresPassageText": true,
+        "evidenceKind": "passage_only"
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "provenanceJson": {
+        "benchmarkSeason": "MOY",
+        "blueprintVersion": "pde-ela-diagnostic-stamina-2025-g3-moy-v1",
+        "unit": "P1"
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_MOY_P1_ITEMS",
+        "noDbWrite": true,
+        "productionImportReady": false
+      },
+      "studentFacingPrompt": "Which statement best describes the author's point of view about a clear museum map?",
+      "stem": "Which statement best describes the author's point of view about a clear museum map?",
+      "answerChoicesJson": [
+        {
+          "text": "A museum map is useful only after visitors already know the building well.",
+          "distractorRole": "opposite_claim",
+          "rationale": "This reverses the passage's claim that the map helps families before they start walking.",
+          "evidence": "The map helps families plan their day before they even start walking."
+        },
+        {
+          "text": "A clear, carefully tested map is worth the work because it helps visitors move easily.",
+          "rationale": "Correct. Paragraph 8 says a clear map is worth the extra work, and the ending shows how it makes the day smoother.",
+          "evidence": "A clear map is worth the extra work.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "quotedSpan": "A clear map is worth the extra work."
+            }
+          ]
+        },
+        {
+          "text": "Museum workers should spend less time on maps and more time building exhibits.",
+          "distractorRole": "unsupported_inference",
+          "rationale": "The passage never says maps are less important than exhibits.",
+          "evidence": "The workers arranged them, drew the map, and built the legend."
+        },
+        {
+          "text": "A map mostly matters because it makes the museum look more colorful.",
+          "distractorRole": "plausible_misreading",
+          "rationale": "The map may include symbols and colors, but the author's point is about helping visitors use the museum.",
+          "evidence": "Good text features answer questions without making a reader search the whole page."
+        }
+      ],
+      "structuredChoicesJson": [
+        {
+          "text": "A museum map is useful only after visitors already know the building well.",
+          "distractorRole": "opposite_claim",
+          "rationale": "This reverses the passage's claim that the map helps families before they start walking.",
+          "evidence": "The map helps families plan their day before they even start walking."
+        },
+        {
+          "text": "A clear, carefully tested map is worth the work because it helps visitors move easily.",
+          "rationale": "Correct. Paragraph 8 says a clear map is worth the extra work, and the ending shows how it makes the day smoother.",
+          "evidence": "A clear map is worth the extra work.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "quotedSpan": "A clear map is worth the extra work."
+            }
+          ]
+        },
+        {
+          "text": "Museum workers should spend less time on maps and more time building exhibits.",
+          "distractorRole": "unsupported_inference",
+          "rationale": "The passage never says maps are less important than exhibits.",
+          "evidence": "The workers arranged them, drew the map, and built the legend."
+        },
+        {
+          "text": "A map mostly matters because it makes the museum look more colorful.",
+          "distractorRole": "plausible_misreading",
+          "rationale": "The map may include symbols and colors, but the author's point is about helping visitors use the museum.",
+          "evidence": "Good text features answer questions without making a reader search the whole page."
+        }
+      ],
+      "correctIndex": 1,
+      "responseSpecJson": {
+        "prompt": "Which statement best describes the author's point of view about a clear museum map?",
+        "choices": [
+          "A museum map is useful only after visitors already know the building well.",
+          "A clear, carefully tested map is worth the work because it helps visitors move easily.",
+          "Museum workers should spend less time on maps and more time building exhibits.",
+          "A map mostly matters because it makes the museum look more colorful."
+        ],
+        "structuredChoicesJson": [
+          {
+            "text": "A museum map is useful only after visitors already know the building well.",
+            "distractorRole": "opposite_claim"
+          },
+          {
+            "text": "A clear, carefully tested map is worth the work because it helps visitors move easily."
+          },
+          {
+            "text": "Museum workers should spend less time on maps and more time building exhibits.",
+            "distractorRole": "unsupported_inference"
+          },
+          {
+            "text": "A map mostly matters because it makes the museum look more colorful.",
+            "distractorRole": "plausible_misreading"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pssa_item_g3_moy_p1_mcq_bc313",
+      "itemId": "pssa_item_g3_moy_p1_mcq_bc313",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "MCQ",
+      "interactionType": "MCQ",
+      "interactionSubtype": "map_words_integration",
+      "passageId": "pssa_psg_g3_moy_p1_museum_map",
+      "passageTitle": "A Map for a Day of Discovery",
+      "eligibleContent": "E03.B-C.3.1.3",
+      "reportingCategory": "B",
+      "pointValue": 1,
+      "correctResponseJson": {
+        "correctIndex": 2
+      },
+      "scoringJson": {
+        "totalPoints": 1
+      },
+      "evidenceBinding": {
+        "requiresFigure": true,
+        "requiresPassageText": true,
+        "quotedText": "The Quiet Corner, where families read and rest, was placed far from the noise.",
+        "evidenceKind": "figure_and_quoted_text"
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "provenanceJson": {
+        "benchmarkSeason": "MOY",
+        "blueprintVersion": "pde-ela-diagnostic-stamina-2025-g3-moy-v1",
+        "unit": "P1"
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_MOY_P1_ITEMS",
+        "noDbWrite": true,
+        "productionImportReady": false
+      },
+      "studentFacingPrompt": "Read this sentence from paragraph 2: 'The Quiet Corner, where families read and rest, was placed far from the noise.' Which detail from the map best supports this decision?",
+      "stem": "Read this sentence from paragraph 2: 'The Quiet Corner, where families read and rest, was placed far from the noise.' Which detail from the map best supports this decision?",
+      "answerChoicesJson": [
+        {
+          "text": "The Story Stage is beside the Build Lab.",
+          "distractorRole": "wrong_section",
+          "rationale": "This is a real map relationship, but it supports a different planning choice.",
+          "evidence": "story_stage_build_lab"
+        },
+        {
+          "text": "The Family Rest Area is on Level 1.",
+          "distractorRole": "wrong_emphasis",
+          "rationale": "This map fact does not show that the Quiet Corner is away from noise.",
+          "evidence": "family_rest_area"
+        },
+        {
+          "text": "The Quiet Corner is separated from the Build Lab.",
+          "rationale": "Correct. The quoted sentence gives the reason, and the map relationship shows the separation.",
+          "evidence": "quiet_corner_build_lab",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "map_fact",
+              "figureFeatureId": "g3_moy_p1_museum_map",
+              "targetId": "quiet_corner_build_lab"
+            }
+          ]
+        },
+        {
+          "text": "The Quiet Corner is beside the Build Lab.",
+          "distractorRole": "opposite_claim",
+          "rationale": "This reverses the map relationship; the map shows the Quiet Corner separated from the Build Lab.",
+          "evidence": "quiet_corner_build_lab"
+        }
+      ],
+      "structuredChoicesJson": [
+        {
+          "text": "The Story Stage is beside the Build Lab.",
+          "distractorRole": "wrong_section",
+          "rationale": "This is a real map relationship, but it supports a different planning choice.",
+          "evidence": "story_stage_build_lab"
+        },
+        {
+          "text": "The Family Rest Area is on Level 1.",
+          "distractorRole": "wrong_emphasis",
+          "rationale": "This map fact does not show that the Quiet Corner is away from noise.",
+          "evidence": "family_rest_area"
+        },
+        {
+          "text": "The Quiet Corner is separated from the Build Lab.",
+          "rationale": "Correct. The quoted sentence gives the reason, and the map relationship shows the separation.",
+          "evidence": "quiet_corner_build_lab",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "map_fact",
+              "figureFeatureId": "g3_moy_p1_museum_map",
+              "targetId": "quiet_corner_build_lab"
+            }
+          ]
+        },
+        {
+          "text": "The Quiet Corner is beside the Build Lab.",
+          "distractorRole": "opposite_claim",
+          "rationale": "This reverses the map relationship; the map shows the Quiet Corner separated from the Build Lab.",
+          "evidence": "quiet_corner_build_lab"
+        }
+      ],
+      "correctIndex": 2,
+      "responseSpecJson": {
+        "prompt": "Read this sentence from paragraph 2: 'The Quiet Corner, where families read and rest, was placed far from the noise.' Which detail from the map best supports this decision?",
+        "choices": [
+          "The Story Stage is beside the Build Lab.",
+          "The Family Rest Area is on Level 1.",
+          "The Quiet Corner is separated from the Build Lab.",
+          "The Quiet Corner is beside the Build Lab."
+        ],
+        "structuredChoicesJson": [
+          {
+            "text": "The Story Stage is beside the Build Lab.",
+            "distractorRole": "wrong_section"
+          },
+          {
+            "text": "The Family Rest Area is on Level 1.",
+            "distractorRole": "wrong_emphasis"
+          },
+          {
+            "text": "The Quiet Corner is separated from the Build Lab."
+          },
+          {
+            "text": "The Quiet Corner is beside the Build Lab.",
+            "distractorRole": "opposite_claim"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pssa_item_g3_moy_p1_mcq_bv411",
+      "itemId": "pssa_item_g3_moy_p1_mcq_bv411",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "MCQ",
+      "interactionType": "MCQ",
+      "interactionSubtype": "context_vocabulary",
+      "passageId": "pssa_psg_g3_moy_p1_museum_map",
+      "passageTitle": "A Map for a Day of Discovery",
+      "eligibleContent": "E03.B-V.4.1.1",
+      "reportingCategory": "B",
+      "pointValue": 1,
+      "correctResponseJson": {
+        "correctIndex": 3
+      },
+      "scoringJson": {
+        "totalPoints": 1
+      },
+      "evidenceBinding": {
+        "requiresFigure": false,
+        "requiresPassageText": true,
+        "evidenceKind": "passage_only"
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "provenanceJson": {
+        "benchmarkSeason": "MOY",
+        "blueprintVersion": "pde-ela-diagnostic-stamina-2025-g3-moy-v1",
+        "unit": "P1"
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_MOY_P1_ITEMS",
+        "noDbWrite": true,
+        "productionImportReady": false
+      },
+      "studentFacingPrompt": "What does the word wander mean as it is used in paragraph 6?",
+      "stem": "What does the word wander mean as it is used in paragraph 6?",
+      "answerChoicesJson": [
+        {
+          "text": "to print many copies",
+          "distractorRole": "wrong_section",
+          "rationale": "Printing copies happens later and is not the meaning of wander.",
+          "evidence": "printing hundreds of copies"
+        },
+        {
+          "text": "to test a symbol carefully",
+          "distractorRole": "wrong_emphasis",
+          "rationale": "Testing is part of revising the map, not the meaning of wander.",
+          "evidence": "After the map is finished, the team tests it."
+        },
+        {
+          "text": "to draw an exhibit on a floor map",
+          "distractorRole": "plausible_misreading",
+          "rationale": "The passage discusses drawing maps, but wander describes what families might do without a map.",
+          "evidence": "Without the map, they might wander and grow tired."
+        },
+        {
+          "text": "to move around without a clear plan",
+          "rationale": "Correct. The contrast with following the green route shows that wander means moving without a clear plan.",
+          "evidence": "Without the map, they might wander and grow tired.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "quotedSpan": "Without the map, they might wander and grow tired."
+            }
+          ]
+        }
+      ],
+      "structuredChoicesJson": [
+        {
+          "text": "to print many copies",
+          "distractorRole": "wrong_section",
+          "rationale": "Printing copies happens later and is not the meaning of wander.",
+          "evidence": "printing hundreds of copies"
+        },
+        {
+          "text": "to test a symbol carefully",
+          "distractorRole": "wrong_emphasis",
+          "rationale": "Testing is part of revising the map, not the meaning of wander.",
+          "evidence": "After the map is finished, the team tests it."
+        },
+        {
+          "text": "to draw an exhibit on a floor map",
+          "distractorRole": "plausible_misreading",
+          "rationale": "The passage discusses drawing maps, but wander describes what families might do without a map.",
+          "evidence": "Without the map, they might wander and grow tired."
+        },
+        {
+          "text": "to move around without a clear plan",
+          "rationale": "Correct. The contrast with following the green route shows that wander means moving without a clear plan.",
+          "evidence": "Without the map, they might wander and grow tired.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "quotedSpan": "Without the map, they might wander and grow tired."
+            }
+          ]
+        }
+      ],
+      "correctIndex": 3,
+      "responseSpecJson": {
+        "prompt": "What does the word wander mean as it is used in paragraph 6?",
+        "choices": [
+          "to print many copies",
+          "to test a symbol carefully",
+          "to draw an exhibit on a floor map",
+          "to move around without a clear plan"
+        ],
+        "structuredChoicesJson": [
+          {
+            "text": "to print many copies",
+            "distractorRole": "wrong_section"
+          },
+          {
+            "text": "to test a symbol carefully",
+            "distractorRole": "wrong_emphasis"
+          },
+          {
+            "text": "to draw an exhibit on a floor map",
+            "distractorRole": "plausible_misreading"
+          },
+          {
+            "text": "to move around without a clear plan"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pssa_item_g3_moy_p1_mcq_bc212",
+      "itemId": "pssa_item_g3_moy_p1_mcq_bc212",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "MCQ",
+      "interactionType": "MCQ",
+      "interactionSubtype": "text_feature_locate",
+      "passageId": "pssa_psg_g3_moy_p1_museum_map",
+      "passageTitle": "A Map for a Day of Discovery",
+      "eligibleContent": "E03.B-C.2.1.2",
+      "reportingCategory": "B",
+      "pointValue": 1,
+      "correctResponseJson": {
+        "correctIndex": 0
+      },
+      "scoringJson": {
+        "totalPoints": 1
+      },
+      "evidenceBinding": {
+        "requiresFigure": true,
+        "requiresPassageText": false,
+        "evidenceKind": "figure_only"
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "provenanceJson": {
+        "benchmarkSeason": "MOY",
+        "blueprintVersion": "pde-ela-diagnostic-stamina-2025-g3-moy-v1",
+        "unit": "P1"
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_MOY_P1_ITEMS",
+        "noDbWrite": true,
+        "productionImportReady": false
+      },
+      "studentFacingPrompt": "How does the map label help a reader find the Family Rest Area?",
+      "stem": "How does the map label help a reader find the Family Rest Area?",
+      "answerChoicesJson": [
+        {
+          "text": "It shows the Family Rest Area is on Level 1.",
+          "rationale": "Correct. The map label places the Family Rest Area on Level 1.",
+          "evidence": "family_rest_area",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "map_fact",
+              "figureFeatureId": "g3_moy_p1_museum_map",
+              "targetId": "family_rest_area"
+            }
+          ]
+        },
+        {
+          "text": "Level 2",
+          "distractorRole": "opposite_claim",
+          "rationale": "This reverses the map's level label.",
+          "evidence": "family_rest_area"
+        },
+        {
+          "text": "Beside the Dinosaur Dig",
+          "distractorRole": "wrong_section",
+          "rationale": "This uses a different Level 2 map area.",
+          "evidence": "dinosaur_dig"
+        },
+        {
+          "text": "On the accessible route endpoint",
+          "distractorRole": "plausible_misreading",
+          "rationale": "This is a plausible misread of the route endpoint; the accessible route ends at Dinosaur Dig, not the Family Rest Area.",
+          "evidence": "accessible_route_dinosaur_dig"
+        }
+      ],
+      "structuredChoicesJson": [
+        {
+          "text": "It shows the Family Rest Area is on Level 1.",
+          "rationale": "Correct. The map label places the Family Rest Area on Level 1.",
+          "evidence": "family_rest_area",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "map_fact",
+              "figureFeatureId": "g3_moy_p1_museum_map",
+              "targetId": "family_rest_area"
+            }
+          ]
+        },
+        {
+          "text": "Level 2",
+          "distractorRole": "opposite_claim",
+          "rationale": "This reverses the map's level label.",
+          "evidence": "family_rest_area"
+        },
+        {
+          "text": "Beside the Dinosaur Dig",
+          "distractorRole": "wrong_section",
+          "rationale": "This uses a different Level 2 map area.",
+          "evidence": "dinosaur_dig"
+        },
+        {
+          "text": "On the accessible route endpoint",
+          "distractorRole": "plausible_misreading",
+          "rationale": "This is a plausible misread of the route endpoint; the accessible route ends at Dinosaur Dig, not the Family Rest Area.",
+          "evidence": "accessible_route_dinosaur_dig"
+        }
+      ],
+      "correctIndex": 0,
+      "responseSpecJson": {
+        "prompt": "How does the map label help a reader find the Family Rest Area?",
+        "choices": [
+          "It shows the Family Rest Area is on Level 1.",
+          "Level 2",
+          "Beside the Dinosaur Dig",
+          "On the accessible route endpoint"
+        ],
+        "structuredChoicesJson": [
+          {
+            "text": "It shows the Family Rest Area is on Level 1."
+          },
+          {
+            "text": "Level 2",
+            "distractorRole": "opposite_claim"
+          },
+          {
+            "text": "Beside the Dinosaur Dig",
+            "distractorRole": "wrong_section"
+          },
+          {
+            "text": "On the accessible route endpoint",
+            "distractorRole": "plausible_misreading"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pssa_item_g3_moy_p1_te_bk112",
+      "itemId": "pssa_item_g3_moy_p1_te_bk112",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "MATCHING_GRID",
+      "interactionType": "MATCHING_GRID",
+      "interactionSubtype": "main_idea_detail_grid",
+      "passageId": "pssa_psg_g3_moy_p1_museum_map",
+      "passageTitle": "A Map for a Day of Discovery",
+      "eligibleContent": "E03.B-K.1.1.2",
+      "reportingCategory": "B",
+      "pointValue": 3,
+      "correctResponseJson": {
+        "correctCells": [
+          {
+            "rowId": "row_build_lab",
+            "columnId": "noise_and_crowds"
+          },
+          {
+            "rowId": "row_art_dig",
+            "columnId": "connected_activities"
+          },
+          {
+            "rowId": "row_fix_map",
+            "columnId": "test_and_revise"
+          }
+        ]
+      },
+      "scoringJson": {
+        "totalPoints": 3
+      },
+      "evidenceBinding": {
+        "requiresFigure": false,
+        "requiresPassageText": true,
+        "evidenceKind": "passage_only"
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "provenanceJson": {
+        "benchmarkSeason": "MOY",
+        "blueprintVersion": "pde-ela-diagnostic-stamina-2025-g3-moy-v1",
+        "unit": "P1"
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_MOY_P1_ITEMS",
+        "noDbWrite": true,
+        "productionImportReady": false
+      },
+      "stem": "Match each detail to what it shows about the workers' planning.",
+      "instructionText": "Choose the best planning idea for each detail.",
+      "rows": [
+        {
+          "rowId": "row_build_lab",
+          "label": "The Build Lab was placed near the front, close to the entrance.",
+          "correctColumnId": "noise_and_crowds",
+          "rationale": "The passage says the Build Lab can get noisy and that workers placed it near the front, where big crowds can gather.",
+          "plausibleWrongRationales": {
+            "connected_activities": "This detail is about managing a loud exhibit near the entrance, not about pairing two related activities.",
+            "test_and_revise": "This detail happens during exhibit placement, not during map testing or revision."
+          }
+        },
+        {
+          "rowId": "row_art_dig",
+          "label": "The Art Studio sits next to the Dinosaur Dig.",
+          "correctColumnId": "connected_activities",
+          "rationale": "The passage explains that a child can dig for model bones and then draw the dinosaur, so the activities are connected.",
+          "plausibleWrongRationales": {
+            "noise_and_crowds": "This detail is about activity connection, not about managing noise or crowd flow.",
+            "test_and_revise": "This detail describes exhibit placement, not the later map-testing process."
+          }
+        },
+        {
+          "rowId": "row_fix_map",
+          "label": "If visitors look confused, the workers change the map.",
+          "correctColumnId": "test_and_revise",
+          "rationale": "The passage says workers watch families use the map and change confusing parts before printing many copies.",
+          "plausibleWrongRationales": {
+            "noise_and_crowds": "This detail is about revising the map after testing, not where loud or crowded exhibits should go.",
+            "connected_activities": "This detail is about fixing a confusing map, not placing related exhibits beside each other."
+          }
+        }
+      ],
+      "columns": [
+        {
+          "columnId": "noise_and_crowds",
+          "label": "They plan for noise and crowds."
+        },
+        {
+          "columnId": "connected_activities",
+          "label": "They place connected activities near each other."
+        },
+        {
+          "columnId": "test_and_revise",
+          "label": "They test and revise before printing."
+        }
+      ],
+      "selectionRule": "Select one planning idea for each detail.",
+      "correctCells": [
+        {
+          "rowId": "row_build_lab",
+          "columnId": "noise_and_crowds"
+        },
+        {
+          "rowId": "row_art_dig",
+          "columnId": "connected_activities"
+        },
+        {
+          "rowId": "row_fix_map",
+          "columnId": "test_and_revise"
+        }
+      ],
+      "responseSpecJson": {
+        "stem": "Match each detail to what it shows about the workers' planning.",
+        "instructionText": "Choose the best planning idea for each detail.",
+        "rows": [
+          {
+            "rowId": "row_build_lab",
+            "label": "The Build Lab was placed near the front, close to the entrance.",
+            "correctColumnId": "noise_and_crowds",
+            "rationale": "The passage says the Build Lab can get noisy and that workers placed it near the front, where big crowds can gather.",
+            "plausibleWrongRationales": {
+              "connected_activities": "This detail is about managing a loud exhibit near the entrance, not about pairing two related activities.",
+              "test_and_revise": "This detail happens during exhibit placement, not during map testing or revision."
+            }
+          },
+          {
+            "rowId": "row_art_dig",
+            "label": "The Art Studio sits next to the Dinosaur Dig.",
+            "correctColumnId": "connected_activities",
+            "rationale": "The passage explains that a child can dig for model bones and then draw the dinosaur, so the activities are connected.",
+            "plausibleWrongRationales": {
+              "noise_and_crowds": "This detail is about activity connection, not about managing noise or crowd flow.",
+              "test_and_revise": "This detail describes exhibit placement, not the later map-testing process."
+            }
+          },
+          {
+            "rowId": "row_fix_map",
+            "label": "If visitors look confused, the workers change the map.",
+            "correctColumnId": "test_and_revise",
+            "rationale": "The passage says workers watch families use the map and change confusing parts before printing many copies.",
+            "plausibleWrongRationales": {
+              "noise_and_crowds": "This detail is about revising the map after testing, not where loud or crowded exhibits should go.",
+              "connected_activities": "This detail is about fixing a confusing map, not placing related exhibits beside each other."
+            }
+          }
+        ],
+        "columns": [
+          {
+            "columnId": "noise_and_crowds",
+            "label": "They plan for noise and crowds."
+          },
+          {
+            "columnId": "connected_activities",
+            "label": "They place connected activities near each other."
+          },
+          {
+            "columnId": "test_and_revise",
+            "label": "They test and revise before printing."
+          }
+        ],
+        "selectionRule": "Select one planning idea for each detail."
+      }
+    },
+    {
+      "id": "pssa_item_g3_moy_p1_sa_bk113",
+      "itemId": "pssa_item_g3_moy_p1_sa_bk113",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "SHORT_ANSWER",
+      "interactionType": "SHORT_ANSWER",
+      "interactionSubtype": "sequence_cause_effect_short_answer",
+      "passageId": "pssa_psg_g3_moy_p1_museum_map",
+      "passageTitle": "A Map for a Day of Discovery",
+      "eligibleContent": "E03.B-K.1.1.3",
+      "reportingCategory": "B",
+      "pointValue": 3,
+      "correctResponseJson": {
+        "rubric": "human_scored"
+      },
+      "scoringJson": {
+        "totalPoints": 3,
+        "autoScoringClaim": false
+      },
+      "evidenceBinding": {
+        "requiresFigure": false,
+        "requiresPassageText": true,
+        "evidenceKind": "passage_only"
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "provenanceJson": {
+        "benchmarkSeason": "MOY",
+        "blueprintVersion": "pde-ela-diagnostic-stamina-2025-g3-moy-v1",
+        "unit": "P1"
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_MOY_P1_ITEMS",
+        "noDbWrite": true,
+        "productionImportReady": false,
+        "autoScoringClaim": false
+      },
+      "stem": "Explain how the museum workers make the map useful for visitors. Use two details from the passage to support your answer.",
+      "instructionText": "Write a short answer that explains the workers' process and supports it with two details from the passage.",
+      "requiredSupportCount": 2,
+      "requiresTextSupport": true,
+      "expectedAnswerCore": "The workers arrange exhibits, make a map with helpful features, test it with families, and revise it so visitors can move through the museum easily.",
+      "acceptableTextSupport": [
+        {
+          "supportId": "arrange_exhibits",
+          "quotedSpan": "The exhibits did not land in their spots by accident.",
+          "connectsToExpectedAnswer": "This supports that workers intentionally arrange the museum before visitors arrive."
+        },
+        {
+          "supportId": "make_map_legend",
+          "quotedSpan": "So the team adds a legend.",
+          "connectsToExpectedAnswer": "This supports that workers add map features to help visitors understand the map."
+        },
+        {
+          "supportId": "test_map",
+          "quotedSpan": "They ask a few families to use it and watch what happens.",
+          "connectsToExpectedAnswer": "This supports that workers test the map before printing copies."
+        },
+        {
+          "supportId": "revise_map",
+          "quotedSpan": "If visitors look confused, the workers change the map.",
+          "connectsToExpectedAnswer": "This supports that workers revise the map to make it clearer."
+        }
+      ],
+      "rubric": {
+        "points3": "Explains the sequence or cause-effect process and uses at least two accurate passage details, such as arranging exhibits, adding a legend, testing the map, and revising confusing parts.",
+        "points2": "Explains the process with one strong passage detail or two details with a partial connection.",
+        "points1": "Gives one relevant copied or loosely connected detail but does not explain the process clearly.",
+        "points0": "Gives an incorrect, unsupported, or off-topic response."
+      },
+      "scoreBandExamples": [
+        {
+          "band": 3,
+          "response": "The workers first arrange exhibits for visitors, then make and test the map. They add a legend so people understand symbols, and they ask families to use the map so they can fix confusing parts.",
+          "why": "Explains the process and uses two relevant details."
+        },
+        {
+          "band": 2,
+          "response": "The workers make the map better by adding a legend and watching families use it. This helps visitors, but the answer does not fully explain the whole sequence.",
+          "why": "Uses relevant details with partial sequence explanation."
+        },
+        {
+          "band": 1,
+          "response": "So the team adds a legend. If visitors look confused, the workers change the map.",
+          "why": "Mostly copied details with little explanation."
+        },
+        {
+          "band": 0,
+          "response": "The museum workers like dinosaurs best.",
+          "why": "Unsupported and does not answer the prompt."
+        }
+      ],
+      "responseSpecJson": {
+        "stem": "Explain how the museum workers make the map useful for visitors. Use two details from the passage to support your answer.",
+        "instructionText": "Write a short answer that explains the workers' process and supports it with two details from the passage.",
+        "requiredSupportCount": 2,
+        "requiresTextSupport": true
+      }
+    },
+    {
+      "id": "pssa_item_g3_moy_p1_ao5_dd_bc313",
+      "itemId": "pssa_item_g3_moy_p1_ao5_dd_bc313",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "DRAG_DROP",
+      "interactionType": "DRAG_DROP",
+      "interactionSubtype": "map_sentence_feature_match",
+      "passageId": "pssa_psg_g3_moy_p1_museum_map",
+      "passageTitle": "A Map for a Day of Discovery",
+      "eligibleContent": "E03.B-C.3.1.3",
+      "reportingCategory": "B",
+      "pointValue": 3,
+      "correctResponseJson": {
+        "correctAssignments": [
+          {
+            "tokenId": "token_levels",
+            "targetId": "target_levels"
+          },
+          {
+            "tokenId": "token_route",
+            "targetId": "target_route"
+          },
+          {
+            "tokenId": "token_show_times",
+            "targetId": "target_show_times"
+          }
+        ]
+      },
+      "scoringJson": {
+        "totalPoints": 3
+      },
+      "evidenceBinding": {
+        "requiresFigure": true,
+        "requiresPassageText": true,
+        "dragTokenTexts": [
+          "The workers place each exhibit name on the floor map so visitors can see what is upstairs and what is on the ground floor.",
+          "They mark the elevator clearly because the green accessible route uses the elevator, not the stairs.",
+          "The Story Stage sign lists show times..."
+        ],
+        "evidenceKind": "figure_and_drag_tokens"
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "provenanceJson": {
+        "benchmarkSeason": "MOY",
+        "blueprintVersion": "pde-ela-diagnostic-stamina-2025-g3-moy-v1",
+        "unit": "P1"
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_MOY_P1_ITEMS",
+        "noDbWrite": true,
+        "productionImportReady": false
+      },
+      "prompt": "Drag each sentence from the passage to the map feature that best supports it.",
+      "instructionText": "Use each sentence once.",
+      "tokens": [
+        {
+          "tokenId": "token_levels",
+          "text": "The workers place each exhibit name on the floor map so visitors can see what is upstairs and what is on the ground floor.",
+          "evidenceBinding": {
+            "requiresFigure": true,
+            "requiresPassageText": true,
+            "quotedText": "The workers place each exhibit name on the floor map so visitors can see what is upstairs and what is on the ground floor.",
+            "evidenceKind": "figure_and_quoted_text"
+          }
+        },
+        {
+          "tokenId": "token_route",
+          "text": "They mark the elevator clearly because the green accessible route uses the elevator, not the stairs.",
+          "evidenceBinding": {
+            "requiresFigure": true,
+            "requiresPassageText": true,
+            "quotedText": "They mark the elevator clearly because the green accessible route uses the elevator, not the stairs.",
+            "evidenceKind": "figure_and_quoted_text"
+          }
+        },
+        {
+          "tokenId": "token_show_times",
+          "text": "The Story Stage sign lists show times...",
+          "evidenceBinding": {
+            "requiresFigure": true,
+            "requiresPassageText": true,
+            "quotedText": "The Story Stage sign lists show times",
+            "evidenceKind": "figure_and_quoted_text"
+          }
+        }
+      ],
+      "targets": [
+        {
+          "targetId": "target_levels",
+          "label": "Level 1 and Level 2 headings"
+        },
+        {
+          "targetId": "target_route",
+          "label": "Accessible route through the elevator"
+        },
+        {
+          "targetId": "target_show_times",
+          "label": "11:00 · 1:00 · 3:00"
+        },
+        {
+          "targetId": "target_stairs",
+          "label": "Stairs",
+          "distractorRole": "opposite_claim",
+          "rationale": "The accessible route uses the elevator, not the stairs."
+        },
+        {
+          "targetId": "target_quiet_corner",
+          "label": "Quiet Corner",
+          "distractorRole": "wrong_section",
+          "rationale": "Quiet Corner belongs to the separation item, not these AO-5 rows."
+        },
+        {
+          "targetId": "target_family_rest",
+          "label": "Family Rest Area",
+          "distractorRole": "wrong_emphasis",
+          "rationale": "Family Rest Area is map-only for location, not a match for these sentences."
+        }
+      ],
+      "useAllTokens": true,
+      "responseSpecJson": {
+        "prompt": "Drag each sentence from the passage to the map feature that best supports it.",
+        "instructionText": "Use each sentence once.",
+        "tokens": [
+          {
+            "tokenId": "token_levels",
+            "text": "The workers place each exhibit name on the floor map so visitors can see what is upstairs and what is on the ground floor.",
+            "evidenceBinding": {
+              "requiresFigure": true,
+              "requiresPassageText": true,
+              "quotedText": "The workers place each exhibit name on the floor map so visitors can see what is upstairs and what is on the ground floor.",
+              "evidenceKind": "figure_and_quoted_text"
+            }
+          },
+          {
+            "tokenId": "token_route",
+            "text": "They mark the elevator clearly because the green accessible route uses the elevator, not the stairs.",
+            "evidenceBinding": {
+              "requiresFigure": true,
+              "requiresPassageText": true,
+              "quotedText": "They mark the elevator clearly because the green accessible route uses the elevator, not the stairs.",
+              "evidenceKind": "figure_and_quoted_text"
+            }
+          },
+          {
+            "tokenId": "token_show_times",
+            "text": "The Story Stage sign lists show times...",
+            "evidenceBinding": {
+              "requiresFigure": true,
+              "requiresPassageText": true,
+              "quotedText": "The Story Stage sign lists show times",
+              "evidenceKind": "figure_and_quoted_text"
+            }
+          }
+        ],
+        "targets": [
+          {
+            "targetId": "target_levels",
+            "label": "Level 1 and Level 2 headings"
+          },
+          {
+            "targetId": "target_route",
+            "label": "Accessible route through the elevator"
+          },
+          {
+            "targetId": "target_show_times",
+            "label": "11:00 · 1:00 · 3:00"
+          },
+          {
+            "targetId": "target_stairs",
+            "label": "Stairs",
+            "distractorRole": "opposite_claim",
+            "rationale": "The accessible route uses the elevator, not the stairs."
+          },
+          {
+            "targetId": "target_quiet_corner",
+            "label": "Quiet Corner",
+            "distractorRole": "wrong_section",
+            "rationale": "Quiet Corner belongs to the separation item, not these AO-5 rows."
+          },
+          {
+            "targetId": "target_family_rest",
+            "label": "Family Rest Area",
+            "distractorRole": "wrong_emphasis",
+            "rationale": "Family Rest Area is map-only for location, not a match for these sentences."
+          }
+        ],
+        "useAllTokens": true
+      }
+    }
+  ]
+}
