@@ -184,7 +184,7 @@ type · figureKind · featureId · title · sectionId · assetPath · assetSha25
 12. `structuredData` required + well-formed (**GENERIC — no museum facts**): missing legend/locations/**relationships**/routes/annotations → FAIL; a route endpoint OR a `relationships` `from`/`to` not referencing a known location → FAIL; duplicate `featureId` / `locations[].id` / `routes[].id` / `relationships[].id` → FAIL; missing/unknown `sectionId` → FAIL; internally inconsistent `structuredData` → FAIL.
 13. `longDescription` is **generated**: `longDescription === generateLongDescription(structuredData)`; a hand-edited `longDescription` differing from the generator output → FAIL.
 14. Removing the figure removes BOTH its visual render AND its accessible representation together (no orphan image, no orphan accessible text).
-15. The accessible representation contains all required museum-map facts **and relationships** (show times, Family Rest Area location, level headings, elevator-only route, adjacency/separation).
+15. The accessible representation contains all required museum-map facts **and relationships** (show times, **Family Rest Area on Level 1**, level headings, elevator-only route, adjacency/separation).
 16. Student DTO exposes a safe public `src` (not a filesystem path) and does NOT expose `assetSha256`.
 17. Enlarge/zoom, focus-return-after-close, and visual route geometry: use the existing UI test harness **if available**; otherwise record these as explicit **manual-review checks with screenshots** — do NOT claim they are automated if they are not.
 18. Hash sensitivity + stability: changing any figure hash-field changes the figure-bearing passage hash; **reordering `structuredData` object keys does NOT change it; reordering a meaningful array (routes/locations/relationships) DOES**; legacy passages' hashes unchanged.
@@ -207,7 +207,7 @@ These are **fixture-level** assertions about *this* map's `structuredData` + com
 - Story Stage `adjacent_to` Build Lab
 - Art Studio `adjacent_to` Dinosaur Dig
 - Quiet Corner `separated_from` Build Lab
-- Family Rest Area present
+- Family Rest Area present **on Level 1**
 - show times `11:00 · 1:00 · 3:00`
 - accessible route Entrance → Elevator → Dinosaur Dig
 - stairs **excluded** from the accessible route

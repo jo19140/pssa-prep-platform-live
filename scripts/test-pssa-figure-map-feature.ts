@@ -28,14 +28,14 @@ import {
 } from "./content/lib/pssa-stamina-gates";
 
 const ASSET_PATH = "/pssa/figures/g3_moy_p1_museum_map.svg";
-const ASSET_SHA256 = "sha256:19a6b96f3acffd602423c538fb83ba90cc4eeef909498d337a3d3fc96713b07b";
+const ASSET_SHA256 = "sha256:430318638b57236332e3c68a6f3620358a24cd912d35c2bef664c91d49811502";
 
 function museumStructuredData(): PssaFigureStructuredData {
   return {
     legend: [
-      { symbol: "Star", meaning: "Entrance" },
-      { symbol: "Book", meaning: "Story Stage" },
-      { symbol: "Green dashed line", meaning: "accessible route" },
+      { symbol: "Entrance", meaning: "Entrance (You are here)" },
+      { symbol: "Story Stage", meaning: "Story Stage (show times)" },
+      { symbol: "Accessible route", meaning: "Accessible route (no stairs)" },
     ],
     locations: [
       { id: "entrance", label: "Entrance", level: "Level 1", notes: "Star symbol" },
@@ -48,7 +48,7 @@ function museumStructuredData(): PssaFigureStructuredData {
       { id: "dinosaur_dig", label: "Dinosaur Dig", level: "Level 2", notes: "Fossil area" },
       { id: "level2_elevator", label: "Elevator", level: "Level 2", notes: "Accessible route" },
       { id: "level2_stairs", label: "Stairs", level: "Level 2" },
-      { id: "family_rest_area", label: "Family Rest Area", level: "Level 2" },
+      { id: "family_rest_area", label: "Family Rest Area", level: "Level 1" },
     ],
     relationships: [
       { id: "story_stage_build_lab", type: "adjacent_to", from: "story_stage", to: "build_lab" },
@@ -59,7 +59,7 @@ function museumStructuredData(): PssaFigureStructuredData {
       { id: "accessible_route_dinosaur_dig", label: "Accessible route", from: "entrance", via: ["level1_elevator", "level2_elevator"], to: "dinosaur_dig" },
     ],
     annotations: [
-      { label: "Story Stage show times", value: "11:00 · 1:00 · 3:00" },
+      { label: "Story Stage", value: "11:00 · 1:00 · 3:00" },
     ],
   };
 }
@@ -70,7 +70,7 @@ function museumFigure(overrides: Partial<PssaFigureFeature> = {}): PssaFigureFea
     type: "figure",
     figureKind: "map",
     featureId: "g3_moy_p1_museum_map",
-    title: "Bright Ideas Children's Museum Floor Map",
+    title: "Bright Ideas Children's Museum — Visitor Floor Map",
     sectionId: "floor_map",
     assetPath: ASSET_PATH,
     assetSha256: ASSET_SHA256,
@@ -162,6 +162,7 @@ assert.equal(figure.structuredData.relationships.some((row) => row.from === "sto
 assert.equal(figure.structuredData.relationships.some((row) => row.from === "art_studio" && row.to === "dinosaur_dig" && row.type === "adjacent_to"), true);
 assert.equal(figure.structuredData.relationships.some((row) => row.from === "quiet_corner" && row.to === "build_lab" && row.type === "separated_from"), true);
 assert.equal(figure.structuredData.locations.some((row) => row.id === "family_rest_area"), true);
+assert.equal(figure.structuredData.locations.find((row) => row.id === "family_rest_area")?.level, "Level 1", "Family Rest Area must be on Level 1 (approved package + figure contract)");
 assert.equal(figure.structuredData.annotations.some((row) => row.value === "11:00 · 1:00 · 3:00"), true);
 assert.deepEqual(figure.structuredData.routes[0], { id: "accessible_route_dinosaur_dig", label: "Accessible route", from: "entrance", via: ["level1_elevator", "level2_elevator"], to: "dinosaur_dig" });
 assert.equal(figure.structuredData.routes[0].via.includes("level1_stairs"), false, "stairs are excluded from accessible route");
