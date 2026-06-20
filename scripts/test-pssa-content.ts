@@ -19,6 +19,7 @@ import { assertGrade3TeiContract } from "./content/author-pssa-grade3-tei";
 import { assertGrade3MatchingGridDragDropContract } from "./content/author-pssa-grade3-matching-grid-drag-drop";
 import { assertGrade3ConventionsContract } from "./content/author-pssa-grade3-conventions";
 import { assertGrade3ShortAnswerContract } from "./content/author-pssa-grade3-short-answer";
+import { buildMoyP1Packet } from "./content/author-pssa-moy-p1";
 import {
   PSSA_CONTENT_QUALITY_GATE_IDS,
   buildPlan,
@@ -181,6 +182,9 @@ assert.equal(insight[0]?.roleFamily, "unsupported_inference", "wrong role-bearin
 
 const staminaConventionsFixture = JSON.parse(fs.readFileSync("exemplars/pssa_grade3_stamina_pilot/conventions_mc_block.json", "utf8"));
 const staminaConventionItems = staminaConventionsFixture.items as any[];
+const moyP1Packet = buildMoyP1Packet();
+const moyP1Items = moyP1Packet.items as any[];
+const moyP1Passage = moyP1Packet.passages[0] as any;
 const expectedStaminaConventions = [
   {
     id: "conv_01",
@@ -287,7 +291,38 @@ for (const itemId of ["conv_06", "conv_07", "conv_08"]) {
   assert.equal(evaluatePssaItemIntraChoiceDuplicate(staminaConventionItems.find((item) => (item.itemId ?? item.id) === itemId)), "PASS", `${itemId} must preserve case/punctuation distinctions in duplicate detection`);
 }
 for (const itemId of ["conv_01", "conv_02", "conv_03", "conv_04", "conv_05", "conv_09"]) {
-  assert.equal(evaluatePssaItemIntraChoiceDuplicate(staminaConventionItems.find((item) => (item.itemId ?? item.id) === itemId)), "PASS", `${itemId} must remain clean under the normal duplicate detector path`);
+assert.equal(evaluatePssaItemIntraChoiceDuplicate(staminaConventionItems.find((item) => (item.itemId ?? item.id) === itemId)), "PASS", `${itemId} must remain clean under the normal duplicate detector path`);
+}
+
+assert.equal(moyP1Packet.noDbWrite, true, "MOY P1 packet must be file-only noDbWrite");
+assert.equal(moyP1Packet.productionImportReady, false, "MOY P1 packet must not be production import ready");
+assert.equal(moyP1Packet.passages.length, 1, "MOY P1 tranche must contain exactly one passage");
+assert.equal(moyP1Items.length, 8, "MOY P1 tranche must contain exactly eight items");
+assert.equal(moyP1Passage.id, "pssa_psg_g3_moy_p1_museum_map", "MOY P1 passage id is pinned");
+assert.equal(moyP1Passage.wordCount, 687, "MOY P1 passage word count is pinned");
+assert.equal(moyP1Passage.staminaBand, "released_length", "MOY P1 must use existing staminaBand value");
+assert.deepEqual(
+  moyP1Items.map((item: any) => [item.itemId, item.eligibleContent, item.interactionType, item.pointValue]),
+  [
+    ["pssa_item_g3_moy_p1_mcq_bk111", "E03.B-K.1.1.1", "MCQ", 1],
+    ["pssa_item_g3_moy_p1_mcq_bc211", "E03.B-C.2.1.1", "MCQ", 1],
+    ["pssa_item_g3_moy_p1_mcq_bc313", "E03.B-C.3.1.3", "MCQ", 1],
+    ["pssa_item_g3_moy_p1_mcq_bv411", "E03.B-V.4.1.1", "MCQ", 1],
+    ["pssa_item_g3_moy_p1_mcq_bc212", "E03.B-C.2.1.2", "MCQ", 1],
+    ["pssa_item_g3_moy_p1_te_bk112", "E03.B-K.1.1.2", "MATCHING_GRID", 3],
+    ["pssa_item_g3_moy_p1_sa_bk113", "E03.B-K.1.1.3", "SHORT_ANSWER", 3],
+    ["pssa_item_g3_moy_p1_ao5_dd_bc313", "E03.B-C.3.1.3", "DRAG_DROP", 3],
+  ],
+  "MOY P1 EC/type/points table must match the locked spec",
+);
+assert.deepEqual(moyP1Items.filter((item: any) => item.interactionType === "MCQ").map((item: any) => item.correctIndex), [0, 1, 2, 3, 0], "MOY P1 MCQ key positions must be A/B/C/D/A");
+assert.equal(moyP1Passage.textFeaturesJson.filter((feature: any) => feature.type === "figure").length, 1, "MOY P1 passage must carry exactly one figure feature");
+assert.equal(moyP1Passage.textFeaturesJson[0].assetSha256, "sha256:430318638b57236332e3c68a6f3620358a24cd912d35c2bef664c91d49811502", "MOY P1 figure digest is pinned");
+for (const item of moyP1Items) {
+  assert.equal(item.reviewStatus, "PENDING", `${item.itemId} reviewStatus must be PENDING`);
+  assert.equal(item.itemStatus, "candidate", `${item.itemId} itemStatus must be candidate`);
+  assert.equal(item.scoringBucket, undefined, `${item.itemId} must not set scoringBucket in the bank`);
+  projectPssaStudentItem(item);
 }
 assert.equal(evaluatePssaItemIntraChoiceDuplicate({
   interactionType: "MCQ",
