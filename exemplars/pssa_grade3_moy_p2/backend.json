@@ -1,0 +1,1014 @@
+{
+  "generatedAt": "2026-06-21T04:53:37.754Z",
+  "noDbWrite": true,
+  "productionImportReady": false,
+  "passageCount": 1,
+  "itemCount": 7,
+  "passages": [
+    {
+      "id": "pssa_psg_g3_moy_p2_stubborn_dough",
+      "title": "The Stubborn Dough",
+      "gradeLevel": 3,
+      "subject": "ELA",
+      "passageType": "literary",
+      "genre": "literary_narrative",
+      "pov": "third_person",
+      "domainVocabularyLoad": "medium",
+      "wordCount": 884,
+      "text": "Nadia wanted to bake the best bread on the whole block.\n\nEvery summer, the families on Juniper Street held a block party, and everyone brought food to share. Nadia's grandmother, whom she called Abuela, always baked soft, golden bread that disappeared before the sun went down. This year, Abuela's hands ached too much to bake. So Nadia decided she would make the bread herself. She wanted to see the neighbors smile the way they smiled at Abuela's loaves.\n\n\"Are you sure?\" asked her little brother, Sam. He was seven, and he could not sit still for more than a minute.\n\n\"I am sure,\" Nadia said. \"How hard can it be?\"\n\nAbuela sat at the kitchen table and read the recipe out loud. Nadia poured flour, water, and yeast into a big bowl. Yeast is a tiny ingredient that helps bread puff up and grow. Then she began to knead. To knead means to push and fold the dough with your hands, over and over. The dough felt like a stubborn cloud that did not want to be shaped. Her hands grew sticky, and white flour dusted her nose and her shirt. Little by little, the lumpy mixture turned into a smooth, round ball.\n\n\"Now we wait,\" Abuela said. \"The dough must rest and rise. When bread rises, it slowly fills with air and gets bigger.\"\n\nNadia frowned. Waiting was the hardest part. \"How long?\" she asked.\n\n\"About an hour,\" said Abuela.\n\nAn hour felt like a year. Sam poked the dough with one finger. \"It's not doing anything,\" he complained.\n\n\"Leave it alone,\" Nadia said. But secretly, she agreed. The dough just sat there like a lazy lump. After only twenty minutes, Nadia could not wait any longer. Surely, she thought, the heat of the oven would do the rest of the work faster. She pushed the dough inside.\n\nWhen the timer rang, Nadia pulled out the pan, and her heart sank. The bread was flat and hard, like a stone. It had not grown at all; the little ball of dough had baked into a pale, heavy disk, no taller than a cookie. She tapped the top, and it made a dull, heavy thud.\n\n\"It's a rock,\" Sam said, and he laughed.\n\nNadia's eyes stung. She had rushed, and now her bread was ruined. \"I should give up,\" she said quietly. \"I am not Abuela.\"\n\nAbuela took Nadia's hand. \"You are not Abuela,\" she said gently. \"You are Nadia, and you are still learning. Bread does not like to be hurried. Neither do most good things. Let's try once more - and this time, we trust the dough.\"\n\nNadia took a deep breath and mixed a fresh batch. She kneaded until her arms were tired. Then came the hard part again: waiting. This time, Nadia did not poke the dough or peek under the towel. To keep herself busy, she set the table and swept the floor. She even taught Sam a clapping game so that he would leave the bowl alone. Still, Sam wanted to check every few minutes. \"Is it bigger yet? Is it bigger now?\" he asked. Each time, Nadia gently pulled him back. \"Give it time, Sam,\" she said - and she was surprised to hear Abuela's calm words coming out of her own mouth.\n\nWhen the hour finally ended, Nadia lifted the towel. The dough had doubled in size! It had puffed up like a soft pillow. \"It worked!\" she gasped.\n\nShe shaped the dough into a round loaf and slid it into the oven. Soon the whole house smelled like a warm hug. When the bread came out, it was golden and tall. She tapped the crust, and this time it gave a light, hollow sound - exactly the way Abuela's loaves always did.\n\nThat evening, Nadia carried her loaf to the block party. Her hands shook a little. What if the neighbors did not like it? She set the bread on the long table, between the salads and the sliced watermelon.\n\nA neighbor named Mr. Park took the first slice. He chewed slowly. Then he smiled. \"This is wonderful,\" he said. \"Soft inside, crisp outside - just like your grandmother's.\" Nadia let out the breath she had been holding, then cut slice after slice and passed them down the long table.\n\nSoon the whole loaf was gone, and people were asking Nadia for the recipe. One older neighbor said the bread reminded her of her own grandmother's kitchen, and Nadia felt a warm glow - the kind that comes from doing something hard and doing it well. Sam told everyone, \"My sister made that, and the first one was a rock!\" Nadia laughed instead of feeling embarrassed. The rock loaf was part of the story now.\n\nAbuela pulled her close. \"You learned the secret,\" she said.\n\n\"Patience,\" Nadia answered.\n\n\"Patience,\" Abuela agreed. \"And trying again.\"\n\nWalking home under the streetlights, Nadia thought about her two loaves. The first was hard and flat because she had hurried it. The second was soft and tall because she had waited. She smiled to herself in the dark and listened to the crickets.\n\nNext summer, Nadia decided, she would bake two loaves - one for the party, and one just for practice. And maybe, if he could learn to wait, she would even let Sam help.",
+      "textFeaturesJson": [],
+      "factCheckRequired": false,
+      "factCheckNotesJson": [
+        {
+          "claimId": "fictional_story",
+          "claim": "The characters, Juniper Street, and block party are fictional; bread-rising details are generic grade-appropriate story details.",
+          "claimSupported": true
+        }
+      ],
+      "staminaBand": "released_length",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "provenanceJson": {
+        "benchmarkSeason": "MOY",
+        "blueprintVersion": "pde-ela-diagnostic-stamina-2025-g3-moy-v1",
+        "unit": "P2"
+      }
+    }
+  ],
+  "items": [
+    {
+      "id": "pssa_item_g3_moy_p2_mcq_ak111",
+      "itemId": "pssa_item_g3_moy_p2_mcq_ak111",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "MCQ",
+      "interactionType": "MCQ",
+      "interactionSubtype": "explicit_evidence_cause",
+      "passageId": "pssa_psg_g3_moy_p2_stubborn_dough",
+      "passageTitle": "The Stubborn Dough",
+      "eligibleContent": "E03.A-K.1.1.1",
+      "reportingCategory": "A",
+      "pointValue": 1,
+      "correctResponseJson": {
+        "correctIndex": 1
+      },
+      "scoringJson": {
+        "totalPoints": 1
+      },
+      "evidenceBinding": {
+        "requiresFigure": false,
+        "requiresPassageText": true,
+        "evidenceKind": "passage_only",
+        "quotedText": "After only twenty minutes, Nadia could not wait any longer."
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "provenanceJson": {
+        "benchmarkSeason": "MOY",
+        "blueprintVersion": "pde-ela-diagnostic-stamina-2025-g3-moy-v1",
+        "unit": "P2"
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_MOY_P2_ITEMS",
+        "noDbWrite": true,
+        "productionImportReady": false
+      },
+      "studentFacingPrompt": "Why did Nadia's first loaf turn out flat and hard?",
+      "stem": "Why did Nadia's first loaf turn out flat and hard?",
+      "answerChoicesJson": [
+        {
+          "text": "The oven was too cool to bake bread correctly.",
+          "distractorRole": "unsupported_inference",
+          "rationale": "The passage does not say the oven was too cool; Nadia only thinks the oven will do the rest faster.",
+          "evidence": "Surely, she thought, the heat of the oven would do the rest of the work faster."
+        },
+        {
+          "text": "She baked the dough after only twenty minutes, before it had time to rise.",
+          "rationale": "Correct. The passage says Nadia waited only twenty minutes even though the dough needed about an hour to rest and rise.",
+          "evidence": "After only twenty minutes, Nadia could not wait any longer.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "quotedSpan": "After only twenty minutes, Nadia could not wait any longer."
+            }
+          ]
+        },
+        {
+          "text": "Sam poked the dough once, so it could not become bread.",
+          "distractorRole": "wrong_emphasis",
+          "rationale": "Sam's poking is a true nearby detail, but the passage emphasizes that Nadia rushed the dough into the oven too early.",
+          "evidence": "Sam poked the dough with one finger."
+        },
+        {
+          "text": "Nadia forgot to add yeast to the mixing bowl.",
+          "distractorRole": "opposite_claim",
+          "rationale": "This reverses the passage detail; Nadia did add yeast to the bowl before kneading.",
+          "evidence": "Nadia poured flour, water, and yeast into a big bowl."
+        }
+      ],
+      "structuredChoicesJson": [
+        {
+          "text": "The oven was too cool to bake bread correctly.",
+          "distractorRole": "unsupported_inference",
+          "rationale": "The passage does not say the oven was too cool; Nadia only thinks the oven will do the rest faster.",
+          "evidence": "Surely, she thought, the heat of the oven would do the rest of the work faster."
+        },
+        {
+          "text": "She baked the dough after only twenty minutes, before it had time to rise.",
+          "rationale": "Correct. The passage says Nadia waited only twenty minutes even though the dough needed about an hour to rest and rise.",
+          "evidence": "After only twenty minutes, Nadia could not wait any longer.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "quotedSpan": "After only twenty minutes, Nadia could not wait any longer."
+            }
+          ]
+        },
+        {
+          "text": "Sam poked the dough once, so it could not become bread.",
+          "distractorRole": "wrong_emphasis",
+          "rationale": "Sam's poking is a true nearby detail, but the passage emphasizes that Nadia rushed the dough into the oven too early.",
+          "evidence": "Sam poked the dough with one finger."
+        },
+        {
+          "text": "Nadia forgot to add yeast to the mixing bowl.",
+          "distractorRole": "opposite_claim",
+          "rationale": "This reverses the passage detail; Nadia did add yeast to the bowl before kneading.",
+          "evidence": "Nadia poured flour, water, and yeast into a big bowl."
+        }
+      ],
+      "correctIndex": 1,
+      "responseSpecJson": {
+        "prompt": "Why did Nadia's first loaf turn out flat and hard?",
+        "choices": [
+          "The oven was too cool to bake bread correctly.",
+          "She baked the dough after only twenty minutes, before it had time to rise.",
+          "Sam poked the dough once, so it could not become bread.",
+          "Nadia forgot to add yeast to the mixing bowl."
+        ],
+        "structuredChoicesJson": [
+          {
+            "text": "The oven was too cool to bake bread correctly.",
+            "distractorRole": "unsupported_inference"
+          },
+          {
+            "text": "She baked the dough after only twenty minutes, before it had time to rise."
+          },
+          {
+            "text": "Sam poked the dough once, so it could not become bread.",
+            "distractorRole": "wrong_emphasis"
+          },
+          {
+            "text": "Nadia forgot to add yeast to the mixing bowl.",
+            "distractorRole": "opposite_claim"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pssa_item_g3_moy_p2_mcq_ak112",
+      "itemId": "pssa_item_g3_moy_p2_mcq_ak112",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "MCQ",
+      "interactionType": "MCQ",
+      "interactionSubtype": "central_message_identify",
+      "passageId": "pssa_psg_g3_moy_p2_stubborn_dough",
+      "passageTitle": "The Stubborn Dough",
+      "eligibleContent": "E03.A-K.1.1.2",
+      "reportingCategory": "A",
+      "pointValue": 1,
+      "correctResponseJson": {
+        "correctIndex": 3
+      },
+      "scoringJson": {
+        "totalPoints": 1
+      },
+      "evidenceBinding": {
+        "requiresFigure": false,
+        "requiresPassageText": true,
+        "evidenceKind": "passage_only",
+        "task": "identify_message_only"
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "provenanceJson": {
+        "benchmarkSeason": "MOY",
+        "blueprintVersion": "pde-ela-diagnostic-stamina-2025-g3-moy-v1",
+        "unit": "P2"
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_MOY_P2_ITEMS",
+        "noDbWrite": true,
+        "productionImportReady": false
+      },
+      "studentFacingPrompt": "Which sentence best states the central message of the story?",
+      "stem": "Which sentence best states the central message of the story?",
+      "answerChoicesJson": [
+        {
+          "text": "Fresh bread tastes best when it is served at a party.",
+          "distractorRole": "too_narrow",
+          "rationale": "This focuses on one story detail instead of the larger lesson Nadia learns.",
+          "evidence": "That evening, Nadia carried her loaf to the block party."
+        },
+        {
+          "text": "People should avoid asking younger siblings for help.",
+          "distractorRole": "unsupported_inference",
+          "rationale": "The passage does not teach that younger siblings should be avoided; Sam is included and may help later.",
+          "evidence": "And maybe, if he could learn to wait, she would even let Sam help."
+        },
+        {
+          "text": "A person should hurry before a task becomes boring.",
+          "distractorRole": "opposite_claim",
+          "rationale": "This reverses the story's lesson because hurrying causes Nadia's first loaf to fail.",
+          "evidence": "The first was hard and flat because she had hurried it."
+        },
+        {
+          "text": "Patience and trying again can help someone succeed.",
+          "rationale": "Correct. Nadia succeeds after she tries again, waits, and trusts the dough.",
+          "evidence": "Patience. And trying again.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "quotedSpan": "Patience. And trying again."
+            }
+          ]
+        }
+      ],
+      "structuredChoicesJson": [
+        {
+          "text": "Fresh bread tastes best when it is served at a party.",
+          "distractorRole": "too_narrow",
+          "rationale": "This focuses on one story detail instead of the larger lesson Nadia learns.",
+          "evidence": "That evening, Nadia carried her loaf to the block party."
+        },
+        {
+          "text": "People should avoid asking younger siblings for help.",
+          "distractorRole": "unsupported_inference",
+          "rationale": "The passage does not teach that younger siblings should be avoided; Sam is included and may help later.",
+          "evidence": "And maybe, if he could learn to wait, she would even let Sam help."
+        },
+        {
+          "text": "A person should hurry before a task becomes boring.",
+          "distractorRole": "opposite_claim",
+          "rationale": "This reverses the story's lesson because hurrying causes Nadia's first loaf to fail.",
+          "evidence": "The first was hard and flat because she had hurried it."
+        },
+        {
+          "text": "Patience and trying again can help someone succeed.",
+          "rationale": "Correct. Nadia succeeds after she tries again, waits, and trusts the dough.",
+          "evidence": "Patience. And trying again.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "quotedSpan": "Patience. And trying again."
+            }
+          ]
+        }
+      ],
+      "correctIndex": 3,
+      "responseSpecJson": {
+        "prompt": "Which sentence best states the central message of the story?",
+        "choices": [
+          "Fresh bread tastes best when it is served at a party.",
+          "People should avoid asking younger siblings for help.",
+          "A person should hurry before a task becomes boring.",
+          "Patience and trying again can help someone succeed."
+        ],
+        "structuredChoicesJson": [
+          {
+            "text": "Fresh bread tastes best when it is served at a party.",
+            "distractorRole": "too_narrow"
+          },
+          {
+            "text": "People should avoid asking younger siblings for help.",
+            "distractorRole": "unsupported_inference"
+          },
+          {
+            "text": "A person should hurry before a task becomes boring.",
+            "distractorRole": "opposite_claim"
+          },
+          {
+            "text": "Patience and trying again can help someone succeed."
+          }
+        ]
+      }
+    },
+    {
+      "id": "pssa_item_g3_moy_p2_mcq_ac211",
+      "itemId": "pssa_item_g3_moy_p2_mcq_ac211",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "MCQ",
+      "interactionType": "MCQ",
+      "interactionSubtype": "literary_point_of_view",
+      "passageId": "pssa_psg_g3_moy_p2_stubborn_dough",
+      "passageTitle": "The Stubborn Dough",
+      "eligibleContent": "E03.A-C.2.1.1",
+      "reportingCategory": "A",
+      "pointValue": 1,
+      "correctResponseJson": {
+        "correctIndex": 0
+      },
+      "scoringJson": {
+        "totalPoints": 1
+      },
+      "evidenceBinding": {
+        "requiresFigure": false,
+        "requiresPassageText": true,
+        "evidenceKind": "passage_only"
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "provenanceJson": {
+        "benchmarkSeason": "MOY",
+        "blueprintVersion": "pde-ela-diagnostic-stamina-2025-g3-moy-v1",
+        "unit": "P2"
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_MOY_P2_ITEMS",
+        "noDbWrite": true,
+        "productionImportReady": false
+      },
+      "studentFacingPrompt": "Which statement best describes the point of view of the story?",
+      "stem": "Which statement best describes the point of view of the story?",
+      "answerChoicesJson": [
+        {
+          "text": "A narrator outside the story tells what Nadia does and feels.",
+          "rationale": "Correct. The narrator uses names such as Nadia and describes Nadia's feelings.",
+          "evidence": "Nadia's eyes stung.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "quotedSpan": "Nadia's eyes stung."
+            }
+          ]
+        },
+        {
+          "text": "Nadia tells the story using the words I and me.",
+          "distractorRole": "opposite_claim",
+          "rationale": "This is the opposite of the passage's narration; Nadia does not narrate in first person.",
+          "evidence": "Nadia wanted to bake the best bread on the whole block."
+        },
+        {
+          "text": "Sam tells only what happens to the dough.",
+          "distractorRole": "unsupported_inference",
+          "rationale": "The passage does not show Sam narrating the story or limiting the story to the dough.",
+          "evidence": "Sam poked the dough with one finger."
+        },
+        {
+          "text": "Abuela tells readers the recipe step by step.",
+          "distractorRole": "wrong_emphasis",
+          "rationale": "Abuela reads the recipe in the story, but she is not the narrator of the whole passage.",
+          "evidence": "Abuela sat at the kitchen table and read the recipe out loud."
+        }
+      ],
+      "structuredChoicesJson": [
+        {
+          "text": "A narrator outside the story tells what Nadia does and feels.",
+          "rationale": "Correct. The narrator uses names such as Nadia and describes Nadia's feelings.",
+          "evidence": "Nadia's eyes stung.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "quotedSpan": "Nadia's eyes stung."
+            }
+          ]
+        },
+        {
+          "text": "Nadia tells the story using the words I and me.",
+          "distractorRole": "opposite_claim",
+          "rationale": "This is the opposite of the passage's narration; Nadia does not narrate in first person.",
+          "evidence": "Nadia wanted to bake the best bread on the whole block."
+        },
+        {
+          "text": "Sam tells only what happens to the dough.",
+          "distractorRole": "unsupported_inference",
+          "rationale": "The passage does not show Sam narrating the story or limiting the story to the dough.",
+          "evidence": "Sam poked the dough with one finger."
+        },
+        {
+          "text": "Abuela tells readers the recipe step by step.",
+          "distractorRole": "wrong_emphasis",
+          "rationale": "Abuela reads the recipe in the story, but she is not the narrator of the whole passage.",
+          "evidence": "Abuela sat at the kitchen table and read the recipe out loud."
+        }
+      ],
+      "correctIndex": 0,
+      "responseSpecJson": {
+        "prompt": "Which statement best describes the point of view of the story?",
+        "choices": [
+          "A narrator outside the story tells what Nadia does and feels.",
+          "Nadia tells the story using the words I and me.",
+          "Sam tells only what happens to the dough.",
+          "Abuela tells readers the recipe step by step."
+        ],
+        "structuredChoicesJson": [
+          {
+            "text": "A narrator outside the story tells what Nadia does and feels."
+          },
+          {
+            "text": "Nadia tells the story using the words I and me.",
+            "distractorRole": "opposite_claim"
+          },
+          {
+            "text": "Sam tells only what happens to the dough.",
+            "distractorRole": "unsupported_inference"
+          },
+          {
+            "text": "Abuela tells readers the recipe step by step.",
+            "distractorRole": "wrong_emphasis"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pssa_item_g3_moy_p2_mcq_av411",
+      "itemId": "pssa_item_g3_moy_p2_mcq_av411",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "MCQ",
+      "interactionType": "MCQ",
+      "interactionSubtype": "context_vocabulary",
+      "passageId": "pssa_psg_g3_moy_p2_stubborn_dough",
+      "passageTitle": "The Stubborn Dough",
+      "eligibleContent": "E03.A-V.4.1.1",
+      "reportingCategory": "A",
+      "pointValue": 1,
+      "correctResponseJson": {
+        "correctIndex": 2
+      },
+      "scoringJson": {
+        "totalPoints": 1
+      },
+      "evidenceBinding": {
+        "requiresFigure": false,
+        "requiresPassageText": true,
+        "evidenceKind": "passage_only",
+        "targetWordOrPhrase": "dull",
+        "quotedText": "a dull, heavy thud"
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "provenanceJson": {
+        "benchmarkSeason": "MOY",
+        "blueprintVersion": "pde-ela-diagnostic-stamina-2025-g3-moy-v1",
+        "unit": "P2"
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_MOY_P2_ITEMS",
+        "noDbWrite": true,
+        "productionImportReady": false
+      },
+      "studentFacingPrompt": "What does the word \"dull\" mean in the phrase \"a dull, heavy thud\"?",
+      "stem": "What does the word \"dull\" mean in the phrase \"a dull, heavy thud\"?",
+      "answerChoicesJson": [
+        {
+          "text": "bright and shiny",
+          "distractorRole": "opposite_claim",
+          "rationale": "This is nearly the opposite of dull in this context, which describes a heavy sound.",
+          "evidence": "The bread was flat and hard, like a stone."
+        },
+        {
+          "text": "funny and surprising",
+          "distractorRole": "plausible_misreading",
+          "rationale": "The rock loaf may seem funny to Sam, but dull describes the sound the bread makes when tapped.",
+          "evidence": "It's a rock."
+        },
+        {
+          "text": "low, heavy, and not clear",
+          "rationale": "Correct. The words heavy thud show that dull describes a low, unclear sound.",
+          "evidence": "She tapped the top, and it made a dull, heavy thud.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "quotedSpan": "She tapped the top, and it made a dull, heavy thud."
+            }
+          ]
+        },
+        {
+          "text": "soft and sweet-smelling",
+          "distractorRole": "wrong_section",
+          "rationale": "This uses a later detail about the successful loaf, not the meaning of dull.",
+          "evidence": "Soon the whole house smelled like a warm hug."
+        }
+      ],
+      "structuredChoicesJson": [
+        {
+          "text": "bright and shiny",
+          "distractorRole": "opposite_claim",
+          "rationale": "This is nearly the opposite of dull in this context, which describes a heavy sound.",
+          "evidence": "The bread was flat and hard, like a stone."
+        },
+        {
+          "text": "funny and surprising",
+          "distractorRole": "plausible_misreading",
+          "rationale": "The rock loaf may seem funny to Sam, but dull describes the sound the bread makes when tapped.",
+          "evidence": "It's a rock."
+        },
+        {
+          "text": "low, heavy, and not clear",
+          "rationale": "Correct. The words heavy thud show that dull describes a low, unclear sound.",
+          "evidence": "She tapped the top, and it made a dull, heavy thud.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "quotedSpan": "She tapped the top, and it made a dull, heavy thud."
+            }
+          ]
+        },
+        {
+          "text": "soft and sweet-smelling",
+          "distractorRole": "wrong_section",
+          "rationale": "This uses a later detail about the successful loaf, not the meaning of dull.",
+          "evidence": "Soon the whole house smelled like a warm hug."
+        }
+      ],
+      "correctIndex": 2,
+      "responseSpecJson": {
+        "prompt": "What does the word \"dull\" mean in the phrase \"a dull, heavy thud\"?",
+        "choices": [
+          "bright and shiny",
+          "funny and surprising",
+          "low, heavy, and not clear",
+          "soft and sweet-smelling"
+        ],
+        "structuredChoicesJson": [
+          {
+            "text": "bright and shiny",
+            "distractorRole": "opposite_claim"
+          },
+          {
+            "text": "funny and surprising",
+            "distractorRole": "plausible_misreading"
+          },
+          {
+            "text": "low, heavy, and not clear"
+          },
+          {
+            "text": "soft and sweet-smelling",
+            "distractorRole": "wrong_section"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pssa_item_g3_moy_p2_mcq_av412",
+      "itemId": "pssa_item_g3_moy_p2_mcq_av412",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "MCQ",
+      "interactionType": "MCQ",
+      "interactionSubtype": "figurative_language",
+      "passageId": "pssa_psg_g3_moy_p2_stubborn_dough",
+      "passageTitle": "The Stubborn Dough",
+      "eligibleContent": "E03.A-V.4.1.2",
+      "reportingCategory": "A",
+      "pointValue": 1,
+      "correctResponseJson": {
+        "correctIndex": 1
+      },
+      "scoringJson": {
+        "totalPoints": 1
+      },
+      "evidenceBinding": {
+        "requiresFigure": false,
+        "requiresPassageText": true,
+        "evidenceKind": "passage_only",
+        "targetWordOrPhrase": "the whole house smelled like a warm hug",
+        "quotedText": "Soon the whole house smelled like a warm hug."
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "provenanceJson": {
+        "benchmarkSeason": "MOY",
+        "blueprintVersion": "pde-ela-diagnostic-stamina-2025-g3-moy-v1",
+        "unit": "P2"
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_MOY_P2_ITEMS",
+        "noDbWrite": true,
+        "productionImportReady": false
+      },
+      "studentFacingPrompt": "What does the phrase \"the whole house smelled like a warm hug\" suggest?",
+      "stem": "What does the phrase \"the whole house smelled like a warm hug\" suggest?",
+      "answerChoicesJson": [
+        {
+          "text": "The oven made the kitchen too hot.",
+          "distractorRole": "wrong_emphasis",
+          "rationale": "This focuses on warmth literally, but the phrase describes how pleasant and comforting the smell is.",
+          "evidence": "Soon the whole house smelled like a warm hug."
+        },
+        {
+          "text": "The bread smelled comforting and pleasant.",
+          "rationale": "Correct. A warm hug suggests comfort, so the smell is welcoming and good.",
+          "evidence": "Soon the whole house smelled like a warm hug.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "quotedSpan": "Soon the whole house smelled like a warm hug."
+            }
+          ]
+        },
+        {
+          "text": "Someone gave Nadia a hug in the kitchen.",
+          "distractorRole": "plausible_misreading",
+          "rationale": "This reads the comparison as a real action, but the phrase is figurative.",
+          "evidence": "Soon the whole house smelled like a warm hug."
+        },
+        {
+          "text": "The smell made everyone dislike the bread.",
+          "distractorRole": "opposite_claim",
+          "rationale": "This reverses the positive meaning of the phrase and the later praise for the bread.",
+          "evidence": "This is wonderful."
+        }
+      ],
+      "structuredChoicesJson": [
+        {
+          "text": "The oven made the kitchen too hot.",
+          "distractorRole": "wrong_emphasis",
+          "rationale": "This focuses on warmth literally, but the phrase describes how pleasant and comforting the smell is.",
+          "evidence": "Soon the whole house smelled like a warm hug."
+        },
+        {
+          "text": "The bread smelled comforting and pleasant.",
+          "rationale": "Correct. A warm hug suggests comfort, so the smell is welcoming and good.",
+          "evidence": "Soon the whole house smelled like a warm hug.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "quotedSpan": "Soon the whole house smelled like a warm hug."
+            }
+          ]
+        },
+        {
+          "text": "Someone gave Nadia a hug in the kitchen.",
+          "distractorRole": "plausible_misreading",
+          "rationale": "This reads the comparison as a real action, but the phrase is figurative.",
+          "evidence": "Soon the whole house smelled like a warm hug."
+        },
+        {
+          "text": "The smell made everyone dislike the bread.",
+          "distractorRole": "opposite_claim",
+          "rationale": "This reverses the positive meaning of the phrase and the later praise for the bread.",
+          "evidence": "This is wonderful."
+        }
+      ],
+      "correctIndex": 1,
+      "responseSpecJson": {
+        "prompt": "What does the phrase \"the whole house smelled like a warm hug\" suggest?",
+        "choices": [
+          "The oven made the kitchen too hot.",
+          "The bread smelled comforting and pleasant.",
+          "Someone gave Nadia a hug in the kitchen.",
+          "The smell made everyone dislike the bread."
+        ],
+        "structuredChoicesJson": [
+          {
+            "text": "The oven made the kitchen too hot.",
+            "distractorRole": "wrong_emphasis"
+          },
+          {
+            "text": "The bread smelled comforting and pleasant."
+          },
+          {
+            "text": "Someone gave Nadia a hug in the kitchen.",
+            "distractorRole": "plausible_misreading"
+          },
+          {
+            "text": "The smell made everyone dislike the bread.",
+            "distractorRole": "opposite_claim"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pssa_item_g3_moy_p2_te_ak113",
+      "itemId": "pssa_item_g3_moy_p2_te_ak113",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "MATCHING_GRID",
+      "interactionType": "MATCHING_GRID",
+      "interactionSubtype": "character_action_trait_grid",
+      "passageId": "pssa_psg_g3_moy_p2_stubborn_dough",
+      "passageTitle": "The Stubborn Dough",
+      "eligibleContent": "E03.A-K.1.1.3",
+      "reportingCategory": "A",
+      "pointValue": 3,
+      "correctResponseJson": {
+        "correctCells": [
+          {
+            "rowId": "row_nadia",
+            "columnId": "action_nadia_waits"
+          },
+          {
+            "rowId": "row_sam",
+            "columnId": "action_sam_checks"
+          },
+          {
+            "rowId": "row_abuela",
+            "columnId": "action_abuela_comforts"
+          }
+        ]
+      },
+      "scoringJson": {
+        "totalPoints": 3
+      },
+      "evidenceBinding": {
+        "requiresFigure": false,
+        "requiresPassageText": true,
+        "evidenceKind": "passage_only"
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "provenanceJson": {
+        "benchmarkSeason": "MOY",
+        "blueprintVersion": "pde-ela-diagnostic-stamina-2025-g3-moy-v1",
+        "unit": "P2"
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_MOY_P2_ITEMS",
+        "noDbWrite": true,
+        "productionImportReady": false
+      },
+      "stem": "For each character, choose the action that best shows the character's trait or motivation.",
+      "instructionText": "Match each character to the action that best shows what the character is like or wants.",
+      "rows": [
+        {
+          "rowId": "row_nadia",
+          "label": "Nadia",
+          "correctColumnId": "action_nadia_waits",
+          "rationale": "Nadia shows determination and growing patience when she mixes a fresh batch, waits, and helps Sam wait too.",
+          "plausibleWrongRationales": {
+            "action_sam_checks": "This action shows Sam's impatience, not Nadia's changed behavior after the first loaf fails.",
+            "action_abuela_comforts": "This action belongs to Abuela, who guides Nadia instead of baking the second loaf herself."
+          }
+        },
+        {
+          "rowId": "row_sam",
+          "label": "Sam",
+          "correctColumnId": "action_sam_checks",
+          "rationale": "Sam shows impatience and curiosity when he pokes the dough and keeps asking whether it is bigger.",
+          "plausibleWrongRationales": {
+            "action_nadia_waits": "This action shows Nadia learning patience, not Sam's repeated checking.",
+            "action_abuela_comforts": "This action shows Abuela's calm guidance, not Sam's impatience."
+          }
+        },
+        {
+          "rowId": "row_abuela",
+          "label": "Abuela",
+          "correctColumnId": "action_abuela_comforts",
+          "rationale": "Abuela shows patience and wisdom when she comforts Nadia and encourages her to try again slowly.",
+          "plausibleWrongRationales": {
+            "action_nadia_waits": "This action shows Nadia applying Abuela's advice, not Abuela giving the advice.",
+            "action_sam_checks": "This action shows Sam's impatience, not Abuela's patient guidance."
+          }
+        }
+      ],
+      "columns": [
+        {
+          "columnId": "action_nadia_waits",
+          "label": "Mixes a fresh batch and helps Sam wait."
+        },
+        {
+          "columnId": "action_sam_checks",
+          "label": "Pokes the dough and asks again and again whether it is bigger."
+        },
+        {
+          "columnId": "action_abuela_comforts",
+          "label": "Comforts Nadia and encourages her to try again patiently."
+        }
+      ],
+      "selectionRule": "Select one action for each character.",
+      "correctCells": [
+        {
+          "rowId": "row_nadia",
+          "columnId": "action_nadia_waits"
+        },
+        {
+          "rowId": "row_sam",
+          "columnId": "action_sam_checks"
+        },
+        {
+          "rowId": "row_abuela",
+          "columnId": "action_abuela_comforts"
+        }
+      ],
+      "responseSpecJson": {
+        "stem": "For each character, choose the action that best shows the character's trait or motivation.",
+        "instructionText": "Match each character to the action that best shows what the character is like or wants.",
+        "rows": [
+          {
+            "rowId": "row_nadia",
+            "label": "Nadia",
+            "correctColumnId": "action_nadia_waits",
+            "rationale": "Nadia shows determination and growing patience when she mixes a fresh batch, waits, and helps Sam wait too.",
+            "plausibleWrongRationales": {
+              "action_sam_checks": "This action shows Sam's impatience, not Nadia's changed behavior after the first loaf fails.",
+              "action_abuela_comforts": "This action belongs to Abuela, who guides Nadia instead of baking the second loaf herself."
+            }
+          },
+          {
+            "rowId": "row_sam",
+            "label": "Sam",
+            "correctColumnId": "action_sam_checks",
+            "rationale": "Sam shows impatience and curiosity when he pokes the dough and keeps asking whether it is bigger.",
+            "plausibleWrongRationales": {
+              "action_nadia_waits": "This action shows Nadia learning patience, not Sam's repeated checking.",
+              "action_abuela_comforts": "This action shows Abuela's calm guidance, not Sam's impatience."
+            }
+          },
+          {
+            "rowId": "row_abuela",
+            "label": "Abuela",
+            "correctColumnId": "action_abuela_comforts",
+            "rationale": "Abuela shows patience and wisdom when she comforts Nadia and encourages her to try again slowly.",
+            "plausibleWrongRationales": {
+              "action_nadia_waits": "This action shows Nadia applying Abuela's advice, not Abuela giving the advice.",
+              "action_sam_checks": "This action shows Sam's impatience, not Abuela's patient guidance."
+            }
+          }
+        ],
+        "columns": [
+          {
+            "columnId": "action_nadia_waits",
+            "label": "Mixes a fresh batch and helps Sam wait."
+          },
+          {
+            "columnId": "action_sam_checks",
+            "label": "Pokes the dough and asks again and again whether it is bigger."
+          },
+          {
+            "columnId": "action_abuela_comforts",
+            "label": "Comforts Nadia and encourages her to try again patiently."
+          }
+        ],
+        "selectionRule": "Select one action for each character."
+      }
+    },
+    {
+      "id": "pssa_item_g3_moy_p2_sa_ak112",
+      "itemId": "pssa_item_g3_moy_p2_sa_ak112",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "SHORT_ANSWER",
+      "interactionType": "SHORT_ANSWER",
+      "interactionSubtype": "central_message_development_short_answer",
+      "passageId": "pssa_psg_g3_moy_p2_stubborn_dough",
+      "passageTitle": "The Stubborn Dough",
+      "eligibleContent": "E03.A-K.1.1.2",
+      "reportingCategory": "A",
+      "pointValue": 3,
+      "correctResponseJson": {
+        "rubric": "human_scored"
+      },
+      "scoringJson": {
+        "totalPoints": 3,
+        "autoScoringClaim": false
+      },
+      "evidenceBinding": {
+        "requiresFigure": false,
+        "requiresPassageText": true,
+        "evidenceKind": "passage_only",
+        "task": "explain_message_development",
+        "requiredDetailCount": 2,
+        "requiresReasoningConnection": true,
+        "messageEvidenceThemes": [
+          "rushed_loaf",
+          "successful_loaf",
+          "changed_behavior"
+        ]
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "provenanceJson": {
+        "benchmarkSeason": "MOY",
+        "blueprintVersion": "pde-ela-diagnostic-stamina-2025-g3-moy-v1",
+        "unit": "P2"
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_MOY_P2_ITEMS",
+        "noDbWrite": true,
+        "productionImportReady": false,
+        "autoScoringClaim": false
+      },
+      "stem": "Explain how Nadia's actions and her two loaves help develop the message of the story. Use two details from the passage.",
+      "instructionText": "Write a short answer that explains the message and supports it with two details from the passage.",
+      "requiredSupportCount": 2,
+      "requiresTextSupport": true,
+      "expectedAnswerCore": "Nadia's rushed first loaf fails, but she changes her behavior, waits, tries again, and succeeds; the contrast develops the message that patience and trying again can lead to success.",
+      "acceptableTextSupport": [
+        {
+          "supportId": "rushed_loaf",
+          "quotedSpan": "After only twenty minutes, Nadia could not wait any longer.",
+          "connectsToExpectedAnswer": "This shows the rushed choice that leads to the failed first loaf."
+        },
+        {
+          "supportId": "rock_loaf",
+          "quotedSpan": "The bread was flat and hard, like a stone.",
+          "connectsToExpectedAnswer": "This shows the result of rushing and helps set up the contrast."
+        },
+        {
+          "supportId": "changed_behavior",
+          "quotedSpan": "This time, Nadia did not poke the dough or peek under the towel.",
+          "connectsToExpectedAnswer": "This shows Nadia changes by waiting and trusting the dough."
+        },
+        {
+          "supportId": "successful_loaf",
+          "quotedSpan": "When the bread came out, it was golden and tall.",
+          "connectsToExpectedAnswer": "This shows the successful result after Nadia waits and tries again."
+        },
+        {
+          "supportId": "reflection",
+          "quotedSpan": "The first was hard and flat because she had hurried it. The second was soft and tall because she had waited.",
+          "connectsToExpectedAnswer": "This directly connects the two loaves to the message about patience."
+        }
+      ],
+      "commonIncompletePatterns": [
+        "Names the message but gives only one detail.",
+        "Lists two loaf details without explaining how they show patience or trying again.",
+        "Copies Abuela's words without connecting them to Nadia's changed actions."
+      ],
+      "rubric": {
+        "points3": "Explains the message and connects at least two accurate passage details, including the rushed first loaf and the successful second loaf or Nadia's changed behavior, to the idea that patience and trying again lead to success.",
+        "points2": "Explains the message with one strong detail, or gives two accurate details with a partial connection to the message.",
+        "points1": "Names patience, trying again, or a relevant detail but gives little explanation of how the story develops the message.",
+        "points0": "Gives an incorrect, unsupported, copied-only, or off-topic response."
+      },
+      "scoreBandExamples": [
+        {
+          "band": 3,
+          "response": "Nadia's first loaf is flat and hard because she bakes it after only twenty minutes. Then she tries again, waits the full time, and the second loaf is golden and tall. These details show that patience and trying again help her succeed.",
+          "why": "Uses two details and explains how the contrast develops the message."
+        },
+        {
+          "band": 2,
+          "response": "The message is to be patient. Nadia waits the second time and the bread comes out better.",
+          "why": "Correct message and one strong detail, but the contrast and reasoning are partial."
+        },
+        {
+          "band": 1,
+          "response": "The bread was flat and hard, like a stone. Then it was golden.",
+          "why": "Relevant details are listed, but the response barely explains the message."
+        },
+        {
+          "band": 0,
+          "response": "The story is mostly about a block party and watermelon.",
+          "why": "Off-topic and does not explain the message."
+        }
+      ],
+      "responseSpecJson": {
+        "stem": "Explain how Nadia's actions and her two loaves help develop the message of the story. Use two details from the passage.",
+        "instructionText": "Write a short answer that explains the message and supports it with two details from the passage.",
+        "requiredSupportCount": 2,
+        "requiresTextSupport": true
+      }
+    }
+  ]
+}
