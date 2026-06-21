@@ -88,10 +88,7 @@ assert.match(archiveRoute, /status === "ARCHIVED"[\s\S]*ok: true/, "archive must
 assert.doesNotMatch(archiveRoute, /export async function DELETE/, "canonical assignment history must not expose delete");
 
 const classesRoute = read("app/api/teacher/classes/route.ts");
-assert.match(classesRoute, /export async function DELETE/, "class route keeps delete endpoint with history guard");
-assert.match(classesRoute, /learningAssignment\.count/, "class delete must precheck canonical grade history");
-assert.match(classesRoute, /class_has_grade_history[\s\S]*409/, "class delete must return class_has_grade_history");
-assert.match(classesRoute, /P2003[\s\S]*class_has_grade_history/, "class delete must translate racing FK failures");
+assert.doesNotMatch(classesRoute, /export async function DELETE/, "class route must not expose DELETE in PR2C");
 
 const legacyRoute = read("app/api/teacher/assignments/route.ts");
 assert.match(legacyRoute, /tx\.assessment\.create/, "legacy assignment route must remain legacy Assessment create path");

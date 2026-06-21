@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
-import { Prisma } from "@prisma/client";
 import { z } from "zod";
 import { authOptions } from "@/lib/auth";
 import { db } from "@/lib/db";
@@ -14,10 +13,6 @@ const createClassSchema = z.object({
 const updateClassCodeSchema = z.object({
   classRoomId: z.string().min(1).max(128),
   action: z.enum(["regenerate", "enable", "disable"]),
-});
-
-const deleteClassSchema = z.object({
-  classRoomId: z.string().min(1).max(128),
 });
 
 export async function GET() {
@@ -107,35 +102,6 @@ export async function PATCH(req: Request) {
     include: { enrollments: true, school: true },
   });
   return NextResponse.json({ classRoom: serializeClassRoom(updated) });
-}
-
-export async function DELETE(req: Request) {
-  const session = await getServerSession(authOptions);
-  if (!session?.user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  const role = (session.user as any).role;
-  if (role !== "TEACHER" && role !== "ADMIN") return NextResponse.json({ error: "Forbidden" }, { status: 403 });
-
-  const url = new URL(req.url);
-  const parsed = deleteClassSchema.safeParse({ classRoomId: url.searchParams.get("classRoomId") ?? "" });
-  if (!parsed.success) return NextResponse.json({ error: "Invalid request body", issues: parsed.error.flatten().fieldErrors }, { status: 400 });
-
-  const teacher = await db.teacherProfile.findUnique({ where: { userId: (session.user as any).id } });
-  if (!teacher) return NextResponse.json({ error: "Teacher profile not found" }, { status: 404 });
-  const classRoom = await db.classRoom.findFirst({ where: { id: parsed.data.classRoomId, teacherId: teacher.id } });
-  if (!classRoom) return NextResponse.json({ error: "Class not found." }, { status: 404 });
-
-  const gradeHistoryCount = await db.learningAssignment.count({ where: { classRoomId: classRoom.id } });
-  if (gradeHistoryCount > 0) return NextResponse.json({ error: "class_has_grade_history" }, { status: 409 });
-
-  try {
-    await db.classRoom.delete({ where: { id: classRoom.id } });
-  } catch (error) {
-    if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === "P2003") {
-      return NextResponse.json({ error: "class_has_grade_history" }, { status: 409 });
-    }
-    throw error;
-  }
-  return NextResponse.json({ ok: true });
 }
 
 function serializeClassRoom(classRoom: any) {
