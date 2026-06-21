@@ -8,6 +8,13 @@ type LibraryResponse = {
   lessons: TeacherLessonListItem[];
 };
 
+type AssignClassOption = {
+  id: string;
+  name: string;
+  grade: number;
+  students: Array<{ id: string; name: string }>;
+};
+
 const CATEGORY_ORDER: TeacherLessonCategory[] = [
   "key_ideas_evidence",
   "craft_structure",
@@ -25,6 +32,15 @@ export function TeacherLessonsTab() {
   const [skill, setSkill] = useState("all");
   const [search, setSearch] = useState("");
   const [previewLessonId, setPreviewLessonId] = useState<string | null>(null);
+  const [assignLesson, setAssignLesson] = useState<TeacherLessonListItem | null>(null);
+  const [classes, setClasses] = useState<AssignClassOption[]>([]);
+  const [classRoomId, setClassRoomId] = useState("");
+  const [recipientMode, setRecipientMode] = useState<"class" | "selected">("class");
+  const [selectedStudentIds, setSelectedStudentIds] = useState<string[]>([]);
+  const [dueDate, setDueDate] = useState("");
+  const [idempotencyKey, setIdempotencyKey] = useState(() => crypto.randomUUID());
+  const [assignStatus, setAssignStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [assignMessage, setAssignMessage] = useState("");
 
   const loadLessons = async (signal?: AbortSignal) => {
     setStatus("loading");
@@ -51,6 +67,32 @@ export function TeacherLessonsTab() {
     void loadLessons(controller.signal);
     return () => controller.abort();
   }, []);
+
+  useEffect(() => {
+    if (!assignLesson) return;
+    let active = true;
+    async function loadClasses() {
+      try {
+        const response = await fetch("/api/teacher/assignments/manual", { cache: "no-store" });
+        if (!response.ok) throw new Error("Classes could not be loaded.");
+        const data = await response.json();
+        if (!active) return;
+        const loaded = data.classes ?? [];
+        setClasses(loaded);
+        setClassRoomId((current) => current || loaded[0]?.id || "");
+      } catch {
+        if (active) {
+          setClasses([]);
+          setAssignStatus("error");
+          setAssignMessage("Classes could not be loaded.");
+        }
+      }
+    }
+    void loadClasses();
+    return () => {
+      active = false;
+    };
+  }, [assignLesson]);
 
   const gradeOptions = useMemo(
     () => Array.from(new Set(lessons.map((lesson) => lesson.gradeLevel))).sort((a, b) => a - b),
@@ -101,6 +143,43 @@ export function TeacherLessonsTab() {
       lessons: filteredLessons.filter((lesson) => lesson.category === category),
     })).filter((group) => group.lessons.length > 0);
   }, [filteredLessons]);
+
+  const selectedClass = classes.find((classRoom) => classRoom.id === classRoomId);
+
+  function updateMaterialEdit(next: () => void) {
+    next();
+    setAssignStatus("idle");
+    setAssignMessage("");
+    setIdempotencyKey(crypto.randomUUID());
+  }
+
+  async function submitAssignment() {
+    if (!assignLesson || !classRoomId || !dueDate) return;
+    setAssignStatus("submitting");
+    setAssignMessage("");
+    try {
+      const response = await fetch("/api/teacher/assignments/manual", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          lessonId: assignLesson.id,
+          classRoomId,
+          recipientMode,
+          studentProfileIds: recipientMode === "selected" ? selectedStudentIds : undefined,
+          dueDate,
+          idempotencyKey,
+        }),
+      });
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(data.error || "Assignment could not be created.");
+      setAssignStatus("success");
+      setAssignMessage(`Assigned to ${data.results?.length ?? 0} student${(data.results?.length ?? 0) === 1 ? "" : "s"}.`);
+      setIdempotencyKey(crypto.randomUUID());
+    } catch (caught) {
+      setAssignStatus("error");
+      setAssignMessage(caught instanceof Error ? caught.message : "Assignment could not be created.");
+    }
+  }
 
   if (status === "loading") {
     return (
@@ -239,13 +318,27 @@ export function TeacherLessonsTab() {
                       <dd>{lesson.domain || "State Track"}</dd>
                     </div>
                   </dl>
-                  <button
-                    type="button"
-                    onClick={() => setPreviewLessonId(lesson.id)}
-                    className="mt-4 rounded-md border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:border-slate-300 hover:bg-slate-50"
-                  >
-                    Preview
-                  </button>
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    <button
+                      type="button"
+                      onClick={() => setPreviewLessonId(lesson.id)}
+                      className="rounded-md border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:border-slate-300 hover:bg-slate-50"
+                    >
+                      Preview
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setAssignLesson(lesson);
+                        setAssignStatus("idle");
+                        setAssignMessage("");
+                        setIdempotencyKey(crypto.randomUUID());
+                      }}
+                      className="rounded-md bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-700"
+                    >
+                      Assign lesson
+                    </button>
+                  </div>
                 </article>
               ))}
             </div>
@@ -258,6 +351,95 @@ export function TeacherLessonsTab() {
         open={Boolean(previewLessonId)}
         onClose={() => setPreviewLessonId(null)}
       />
+      {assignLesson ? (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/50 p-4">
+          <div className="max-h-[90vh] w-full max-w-2xl overflow-auto rounded-lg bg-white p-6 shadow-2xl">
+            <div className="flex items-start justify-between gap-4">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-500">Assign lesson</p>
+                <h3 className="mt-1 text-xl font-semibold text-slate-950">{assignLesson.title}</h3>
+              </div>
+              <button type="button" onClick={() => setAssignLesson(null)} className="rounded-md border border-slate-200 px-3 py-2 text-sm font-semibold text-slate-700">Close</button>
+            </div>
+
+            <div className="mt-5 grid gap-4">
+              <label className="space-y-1 text-sm font-medium text-slate-700">
+                <span>Class</span>
+                <select
+                  value={classRoomId}
+                  onChange={(event) => updateMaterialEdit(() => {
+                    setClassRoomId(event.target.value);
+                    setSelectedStudentIds([]);
+                  })}
+                  className="w-full rounded-md border border-slate-200 px-3 py-2"
+                >
+                  {classes.map((classRoom) => (
+                    <option key={classRoom.id} value={classRoom.id}>{classRoom.name} · Grade {classRoom.grade}</option>
+                  ))}
+                </select>
+              </label>
+
+              <fieldset className="space-y-2">
+                <legend className="text-sm font-medium text-slate-700">Recipients</legend>
+                <label className="flex items-center gap-2 text-sm text-slate-700">
+                  <input type="radio" checked={recipientMode === "class"} onChange={() => updateMaterialEdit(() => setRecipientMode("class"))} />
+                  Whole class
+                </label>
+                <label className="flex items-center gap-2 text-sm text-slate-700">
+                  <input type="radio" checked={recipientMode === "selected"} onChange={() => updateMaterialEdit(() => setRecipientMode("selected"))} />
+                  Small group / individual
+                </label>
+              </fieldset>
+
+              {recipientMode === "selected" ? (
+                <div className="rounded-md border border-slate-200 p-3">
+                  <p className="text-sm font-medium text-slate-700">Students</p>
+                  <div className="mt-2 grid gap-2 sm:grid-cols-2">
+                    {(selectedClass?.students ?? []).map((student) => (
+                      <label key={student.id} className="flex items-center gap-2 text-sm text-slate-700">
+                        <input
+                          type="checkbox"
+                          checked={selectedStudentIds.includes(student.id)}
+                          onChange={(event) => updateMaterialEdit(() => {
+                            setSelectedStudentIds((current) => event.target.checked
+                              ? [...current, student.id]
+                              : current.filter((id) => id !== student.id));
+                          })}
+                        />
+                        {student.name}
+                      </label>
+                    ))}
+                  </div>
+                </div>
+              ) : null}
+
+              <label className="space-y-1 text-sm font-medium text-slate-700">
+                <span>Due date</span>
+                <input
+                  type="date"
+                  value={dueDate}
+                  onChange={(event) => updateMaterialEdit(() => setDueDate(event.target.value))}
+                  className="w-full rounded-md border border-slate-200 px-3 py-2"
+                />
+              </label>
+            </div>
+
+            {assignMessage ? <p className={`mt-4 text-sm ${assignStatus === "success" ? "text-emerald-700" : "text-rose-700"}`}>{assignMessage}</p> : null}
+
+            <div className="mt-6 flex justify-end gap-2">
+              <button type="button" onClick={() => setAssignLesson(null)} className="rounded-md border border-slate-200 px-4 py-2 text-sm font-semibold text-slate-700">Cancel</button>
+              <button
+                type="button"
+                disabled={assignStatus === "submitting" || !classRoomId || !dueDate || (recipientMode === "selected" && selectedStudentIds.length === 0)}
+                onClick={() => void submitAssignment()}
+                className="rounded-md bg-slate-900 px-4 py-2 text-sm font-semibold text-white disabled:cursor-not-allowed disabled:bg-slate-300"
+              >
+                {assignStatus === "submitting" ? "Assigning..." : "Assign lesson"}
+              </button>
+            </div>
+          </div>
+        </div>
+      ) : null}
     </section>
   );
 }

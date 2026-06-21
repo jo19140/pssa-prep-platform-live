@@ -3,6 +3,7 @@ import { Suspense } from "react";
 import { TeacherPssaInsightsClient } from "@/components/pssa/TeacherPssaInsightsClient";
 import { SynesisPageShell } from "@/components/synesis/SynesisPageShell";
 import { TeacherProductWorkspaceSwitcher } from "@/components/synesis/TeacherProductWorkspaceSwitcher";
+import { TeacherAssignmentsTab } from "@/components/teacher/TeacherAssignmentsTab";
 import { TeacherLessonsTab } from "@/components/teacher/TeacherLessonsTab";
 import { loadCurrentTeacherProducts } from "@/lib/teacher/loadCurrentTeacherProducts";
 
@@ -73,6 +74,8 @@ export default async function TeacherPage({
             </Suspense>
           ) : activeTab === "lessons" ? (
             <TeacherLessonsTab />
+          ) : activeTab === "assignments" ? (
+            <TeacherAssignmentsTab />
           ) : (
             <StateTrackPlaceholder tab={activeTab} />
           )}
