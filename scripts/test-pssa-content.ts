@@ -20,6 +20,7 @@ import { assertGrade3MatchingGridDragDropContract } from "./content/author-pssa-
 import { assertGrade3ConventionsContract } from "./content/author-pssa-grade3-conventions";
 import { assertGrade3ShortAnswerContract } from "./content/author-pssa-grade3-short-answer";
 import { buildMoyP1Packet } from "./content/author-pssa-moy-p1";
+import { buildMoyP2Packet } from "./content/author-pssa-moy-p2";
 import {
   PSSA_CONTENT_QUALITY_GATE_IDS,
   buildPlan,
@@ -185,6 +186,9 @@ const staminaConventionItems = staminaConventionsFixture.items as any[];
 const moyP1Packet = buildMoyP1Packet();
 const moyP1Items = moyP1Packet.items as any[];
 const moyP1Passage = moyP1Packet.passages[0] as any;
+const moyP2Packet = buildMoyP2Packet();
+const moyP2Items = moyP2Packet.items as any[];
+const moyP2Passage = moyP2Packet.passages[0] as any;
 const expectedStaminaConventions = [
   {
     id: "conv_01",
@@ -319,6 +323,34 @@ assert.deepEqual(moyP1Items.filter((item: any) => item.interactionType === "MCQ"
 assert.equal(moyP1Passage.textFeaturesJson.filter((feature: any) => feature.type === "figure").length, 1, "MOY P1 passage must carry exactly one figure feature");
 assert.equal(moyP1Passage.textFeaturesJson[0].assetSha256, "sha256:430318638b57236332e3c68a6f3620358a24cd912d35c2bef664c91d49811502", "MOY P1 figure digest is pinned");
 for (const item of moyP1Items) {
+  assert.equal(item.reviewStatus, "PENDING", `${item.itemId} reviewStatus must be PENDING`);
+  assert.equal(item.itemStatus, "candidate", `${item.itemId} itemStatus must be candidate`);
+  assert.equal(item.scoringBucket, undefined, `${item.itemId} must not set scoringBucket in the bank`);
+  projectPssaStudentItem(item);
+}
+assert.equal(moyP2Packet.noDbWrite, true, "MOY P2 packet must be file-only noDbWrite");
+assert.equal(moyP2Packet.productionImportReady, false, "MOY P2 packet must not be production import ready");
+assert.equal(moyP2Packet.passages.length, 1, "MOY P2 tranche must contain exactly one passage");
+assert.equal(moyP2Items.length, 7, "MOY P2 tranche must contain exactly seven items");
+assert.equal(moyP2Passage.id, "pssa_psg_g3_moy_p2_stubborn_dough", "MOY P2 passage id is pinned");
+assert.equal(moyP2Passage.wordCount, 884, "MOY P2 passage word count is pinned");
+assert.equal(moyP2Passage.staminaBand, "released_length", "MOY P2 must use existing staminaBand value");
+assert.equal((moyP2Passage.textFeaturesJson ?? []).filter((feature: any) => feature.type === "figure").length, 0, "MOY P2 passage must not carry a figure feature");
+assert.deepEqual(
+  moyP2Items.map((item: any) => [item.itemId, item.eligibleContent, item.interactionType, item.pointValue]),
+  [
+    ["pssa_item_g3_moy_p2_mcq_ak111", "E03.A-K.1.1.1", "MCQ", 1],
+    ["pssa_item_g3_moy_p2_mcq_ak112", "E03.A-K.1.1.2", "MCQ", 1],
+    ["pssa_item_g3_moy_p2_mcq_ac211", "E03.A-C.2.1.1", "MCQ", 1],
+    ["pssa_item_g3_moy_p2_mcq_av411", "E03.A-V.4.1.1", "MCQ", 1],
+    ["pssa_item_g3_moy_p2_mcq_av412", "E03.A-V.4.1.2", "MCQ", 1],
+    ["pssa_item_g3_moy_p2_te_ak113", "E03.A-K.1.1.3", "MATCHING_GRID", 3],
+    ["pssa_item_g3_moy_p2_sa_ak112", "E03.A-K.1.1.2", "SHORT_ANSWER", 3],
+  ],
+  "MOY P2 EC/type/points table must match the locked spec",
+);
+assert.deepEqual(moyP2Items.filter((item: any) => item.interactionType === "MCQ").map((item: any) => item.correctIndex), [1, 3, 0, 2, 1], "MOY P2 MCQ key positions must be B/D/A/C/B");
+for (const item of moyP2Items) {
   assert.equal(item.reviewStatus, "PENDING", `${item.itemId} reviewStatus must be PENDING`);
   assert.equal(item.itemStatus, "candidate", `${item.itemId} itemStatus must be candidate`);
   assert.equal(item.scoringBucket, undefined, `${item.itemId} must not set scoringBucket in the bank`);
