@@ -120,6 +120,7 @@ assert.deepEqual(normalizePssaReportForm(baseForm()), {
     structuredChoicesJson: ["A", "B", "C", "D"],
     answerChoicesJson: ["A", "B", "C", "D"],
     choices: ["A", "B", "C", "D"],
+    scoringBucket: "operational",
   })),
 }, "shared normalizer must preserve the prior WS2-R1 report form shape");
 
