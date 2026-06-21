@@ -120,6 +120,7 @@ export function StudentAssignmentListPage({
           assignments={detailAssignments}
           onClose={() => setDetailFilter(null)}
           onOpen={onOpen}
+          onOpenLearningPath={onOpenLearningPath}
         />
       ) : null}
 
@@ -149,7 +150,7 @@ export function StudentAssignmentListPage({
           <h3 className="text-xl font-bold text-slate-900">Baseline Diagnostic{studentGrade ? ` - Grade ${studentGrade}` : ""}</h3>
           <p className="text-sm text-slate-600">Start here to measure current reading, writing, and conventions skills for your current grade.</p>
         </div>
-        <AssignmentGroup assignments={baselineDiagnostics} emptyText="No baseline diagnostic has been assigned yet." onOpen={onOpen} />
+        <AssignmentGroup assignments={baselineDiagnostics} emptyText="No baseline diagnostic has been assigned yet." onOpen={onOpen} onOpenLearningPath={onOpenLearningPath} />
         {offGradeDiagnostics.length ? (
           <details className="mt-5 rounded-2xl border border-slate-200 bg-slate-50 p-4">
             <summary className="cursor-pointer text-sm font-bold text-slate-700">
@@ -173,7 +174,7 @@ export function StudentAssignmentListPage({
           <h3 className="text-xl font-bold text-slate-900">Teacher Assigned Lessons</h3>
           <p className="text-sm text-slate-600">Tests and practice assigned by your teacher appear here.</p>
         </div>
-        <AssignmentGroup assignments={teacherAssigned} emptyText="No teacher assigned lessons are available right now." onOpen={onOpen} />
+        <AssignmentGroup assignments={teacherAssigned} emptyText="No teacher assigned lessons are available right now." onOpen={onOpen} onOpenLearningPath={onOpenLearningPath} />
       </section>
 
       {(readingCoachAssignments || []).length ? (
@@ -216,11 +217,13 @@ function AssignmentDetailsModal({
   assignments,
   onClose,
   onOpen,
+  onOpenLearningPath,
 }: {
   title: string;
   assignments: any[];
   onClose: () => void;
   onOpen: (assignment: any) => void;
+  onOpenLearningPath?: () => void;
 }) {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/50 p-4">
@@ -260,16 +263,17 @@ function AssignmentDetailsModal({
                       <td className="px-3 py-3 text-slate-600">{formatDate(assignment.submittedAt)}</td>
                       <td className="px-3 py-3 text-slate-600">{formatDate(assignment.dueDate)}</td>
                       <td className="rounded-r-xl px-3 py-3 text-right">
-                        {assignment.assessmentId ? (
+                        {assignment.assessmentId || assignment.lessonId ? (
                           <button
                             type="button"
                             onClick={() => {
                               onClose();
-                              onOpen(assignment);
+                              if (assignment.lessonId && !assignment.assessmentId && onOpenLearningPath) onOpenLearningPath();
+                              else onOpen(assignment);
                             }}
                             className="rounded-lg bg-slate-900 px-3 py-2 text-xs font-bold text-white hover:bg-slate-700"
                           >
-                            {assignment.statusLabel === "Completed" ? "Report" : assignment.statusLabel === "In Progress" ? "Resume" : "Start"}
+                            {assignment.lessonId && !assignment.assessmentId ? "Open" : assignment.statusLabel === "Completed" ? "Report" : assignment.statusLabel === "In Progress" ? "Resume" : "Start"}
                           </button>
                         ) : null}
                       </td>
@@ -313,10 +317,12 @@ function AssignmentGroup({
   assignments,
   emptyText,
   onOpen,
+  onOpenLearningPath,
 }: {
   assignments: any[];
   emptyText: string;
   onOpen: (assignment: any) => void;
+  onOpenLearningPath?: () => void;
 }) {
   if (!assignments.length) {
     return <div className="mt-5 rounded-2xl border border-dashed border-slate-300 bg-slate-50 p-5 text-sm text-slate-600">{emptyText}</div>;
@@ -325,7 +331,7 @@ function AssignmentGroup({
   return (
     <div className="mt-5 space-y-4">
       {assignments.map((assignment) => (
-        <AssignmentCard key={assignment.assignmentId} assignment={assignment} onOpen={onOpen} />
+        <AssignmentCard key={assignment.assignmentId} assignment={assignment} onOpen={onOpen} onOpenLearningPath={onOpenLearningPath} />
       ))}
     </div>
   );
@@ -334,10 +340,12 @@ function AssignmentGroup({
 function AssignmentCard({
   assignment,
   onOpen,
+  onOpenLearningPath,
   compact = false,
 }: {
   assignment: any;
   onOpen: (assignment: any) => void;
+  onOpenLearningPath?: () => void;
   compact?: boolean;
 }) {
   const isCompleted = assignment.statusLabel === "Completed";
@@ -369,10 +377,13 @@ function AssignmentCard({
       </div>
 
       <button
-        onClick={() => onOpen(assignment)}
+        onClick={() => {
+          if (assignment.lessonId && !assignment.assessmentId && onOpenLearningPath) onOpenLearningPath();
+          else onOpen(assignment);
+        }}
         className="inline-flex items-center justify-center rounded-xl bg-slate-900 px-4 py-2 text-sm font-semibold text-white shadow transition hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-400"
       >
-        {buttonText}
+        {assignment.lessonId && !assignment.assessmentId ? "Open Lesson" : buttonText}
       </button>
     </div>
   );

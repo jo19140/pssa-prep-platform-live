@@ -5,6 +5,8 @@ import { z } from "zod";
 import { authOptions } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { scorePracticeResponses } from "@/lib/serverScoring";
+import { finalizeLessonAttempt } from "@/lib/assignments/finalizeLessonAttempt";
+import { syncRecipientFromProgress } from "@/lib/assignments/recipientSync";
 
 const progressSchema = z.object({
   lessonId: z.string().min(1),
@@ -40,32 +42,53 @@ export async function PATCH(req: Request) {
     : body.status === "MASTERED" ? "COMPLETED" : body.status;
   const now = new Date();
 
-  const progress = await db.studentLessonProgress.upsert({
-    where: { lessonId_userId: { lessonId: body.lessonId, userId: (session.user as any).id } },
-    update: {
-      status: nextStatus,
-      guidedResponses: body.guidedResponses === undefined ? undefined : body.guidedResponses as Prisma.InputJsonValue,
-      independentResponses: body.independentResponses === undefined ? undefined : body.independentResponses as Prisma.InputJsonValue,
-      exitTicketResponses: body.exitTicketResponses === undefined ? undefined : body.exitTicketResponses as Prisma.InputJsonValue,
-      masteryScore,
-      masteryStatus: nextStatus,
-      startedAt: nextStatus === "IN_PROGRESS" ? now : undefined,
-      completedAt: nextStatus === "COMPLETED" || nextStatus === "MASTERED" ? now : undefined,
-      masteredAt: nextStatus === "MASTERED" ? now : undefined,
-    },
-    create: {
-      lessonId: body.lessonId,
-      userId: (session.user as any).id,
-      status: nextStatus,
-      guidedResponses: body.guidedResponses === undefined ? undefined : body.guidedResponses as Prisma.InputJsonValue,
-      independentResponses: body.independentResponses === undefined ? undefined : body.independentResponses as Prisma.InputJsonValue,
-      exitTicketResponses: body.exitTicketResponses === undefined ? undefined : body.exitTicketResponses as Prisma.InputJsonValue,
-      masteryScore,
-      masteryStatus: nextStatus,
-      startedAt: nextStatus === "IN_PROGRESS" ? now : undefined,
-      completedAt: nextStatus === "COMPLETED" || nextStatus === "MASTERED" ? now : undefined,
-      masteredAt: nextStatus === "MASTERED" ? now : undefined,
-    },
+  const progress = await db.$transaction(async (tx) => {
+    const updatedProgress = await tx.studentLessonProgress.upsert({
+      where: { lessonId_userId: { lessonId: body.lessonId, userId: (session.user as any).id } },
+      update: {
+        status: nextStatus,
+        guidedResponses: body.guidedResponses === undefined ? undefined : body.guidedResponses as Prisma.InputJsonValue,
+        independentResponses: body.independentResponses === undefined ? undefined : body.independentResponses as Prisma.InputJsonValue,
+        exitTicketResponses: body.exitTicketResponses === undefined ? undefined : body.exitTicketResponses as Prisma.InputJsonValue,
+        masteryScore,
+        masteryStatus: nextStatus,
+        startedAt: nextStatus === "IN_PROGRESS" ? now : undefined,
+        completedAt: nextStatus === "COMPLETED" || nextStatus === "MASTERED" ? now : undefined,
+        masteredAt: nextStatus === "MASTERED" ? now : undefined,
+      },
+      create: {
+        lessonId: body.lessonId,
+        userId: (session.user as any).id,
+        status: nextStatus,
+        guidedResponses: body.guidedResponses === undefined ? undefined : body.guidedResponses as Prisma.InputJsonValue,
+        independentResponses: body.independentResponses === undefined ? undefined : body.independentResponses as Prisma.InputJsonValue,
+        exitTicketResponses: body.exitTicketResponses === undefined ? undefined : body.exitTicketResponses as Prisma.InputJsonValue,
+        masteryScore,
+        masteryStatus: nextStatus,
+        startedAt: nextStatus === "IN_PROGRESS" ? now : undefined,
+        completedAt: nextStatus === "COMPLETED" || nextStatus === "MASTERED" ? now : undefined,
+        masteredAt: nextStatus === "MASTERED" ? now : undefined,
+      },
+    });
+
+    const recipient = await syncRecipientFromProgress(tx, updatedProgress, now);
+    if (
+      recipient?.gradeRecord &&
+      masteryResult &&
+      (nextStatus === "COMPLETED" || nextStatus === "MASTERED")
+    ) {
+      await finalizeLessonAttempt(tx, {
+        recipient,
+        gradeRecord: recipient.gradeRecord,
+        progress: updatedProgress,
+        scoreResult: masteryResult,
+        masteryStatus: nextStatus,
+        responsePayload: masteryPayload,
+        now,
+      });
+    }
+
+    return updatedProgress;
   });
 
   return NextResponse.json({ progress });

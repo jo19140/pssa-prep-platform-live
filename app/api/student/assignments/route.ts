@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { applyStudentLessonReviewGate } from "@/lib/learningLessonPersistence";
+import { mergeCanonicalAndLegacyLessonAssignments } from "@/lib/assignments/studentAssignmentDto";
 
 export async function GET() {
   const session = await getServerSession(authOptions);
@@ -55,6 +56,41 @@ export async function GET() {
     },
     orderBy: { createdAt: "desc" },
   });
+  const canonicalLessonRecipients = await db.assignmentRecipient.findMany({
+    where: {
+      studentProfileId: student.id,
+      assignment: { assignmentType: "LESSON" },
+    },
+    select: {
+      id: true,
+      status: true,
+      createdAt: true,
+      startedAt: true,
+      submittedAt: true,
+      completedAt: true,
+      assignment: {
+        select: {
+          id: true,
+          title: true,
+          assignmentType: true,
+          gradeLevel: true,
+          dueDate: true,
+          lessonId: true,
+          createdAt: true,
+        },
+      },
+      gradeRecord: {
+        select: {
+          status: true,
+          pointsEarned: true,
+          pointsPossible: true,
+          finalizedAt: true,
+        },
+      },
+    },
+    orderBy: { createdAt: "desc" },
+  });
+  const lessonAssignments = mergeCanonicalAndLegacyLessonAssignments(canonicalLessonRecipients, assignedLessonProgress);
   const libraryLessons = assignedLessonProgress
     .map((progress) => progress.lesson)
     .filter((lesson) => lesson.learningPath.session.userId !== (session.user as any).id);
@@ -77,28 +113,31 @@ export async function GET() {
       : null;
   return NextResponse.json({
     studentGrade: student.grade,
-    assignments: assignments.map((a) => {
-      const existing = sessions.find((s) => s.assessmentId === a.assessmentId);
-      const statusLabel = existing?.submittedAt ? "Completed" : existing ? "In Progress" : "Not Started";
-      return {
-        assignmentId: a.id,
-        assessmentId: a.assessmentId,
-        title: a.assessment.title,
-        assignmentType: a.assignmentType,
-        gradeLevel: a.assessment.grade,
-        studentGrade: student.grade,
-        isCurrentGrade: a.assessment.grade === student.grade,
-        statusLabel,
-        assignedAt: a.createdAt,
-        dueDate: a.dueDate,
-        submittedAt: existing?.submittedAt ?? null,
-        scorePercent: existing?.scorePercent ?? null,
-        earnedPoints: existing?.earnedPoints ?? null,
-        totalPoints: existing?.totalPoints ?? null,
-        proficiencyBand: existing?.proficiencyBand ?? null,
-        sessionId: existing?.id ?? null,
-      };
-    }),
+    assignments: [
+      ...assignments.map((a) => {
+        const existing = sessions.find((s) => s.assessmentId === a.assessmentId);
+        const statusLabel = existing?.submittedAt ? "Completed" : existing ? "In Progress" : "Not Started";
+        return {
+          assignmentId: a.id,
+          assessmentId: a.assessmentId,
+          title: a.assessment.title,
+          assignmentType: a.assignmentType,
+          gradeLevel: a.assessment.grade,
+          studentGrade: student.grade,
+          isCurrentGrade: a.assessment.grade === student.grade,
+          statusLabel,
+          assignedAt: a.createdAt,
+          dueDate: a.dueDate,
+          submittedAt: existing?.submittedAt ?? null,
+          scorePercent: existing?.scorePercent ?? null,
+          earnedPoints: existing?.earnedPoints ?? null,
+          totalPoints: existing?.totalPoints ?? null,
+          proficiencyBand: existing?.proficiencyBand ?? null,
+          sessionId: existing?.id ?? null,
+        };
+      }),
+      ...lessonAssignments,
+    ],
     readingCoachAssignments: readingCoachAssignments.map((assignment) => ({
       assignmentId: assignment.id,
       title: assignment.title,
