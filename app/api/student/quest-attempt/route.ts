@@ -5,6 +5,7 @@ import { z } from "zod";
 import { authOptions } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { scoreArcadeResponses } from "@/lib/serverScoring";
+import { syncRecipientFromProgress } from "@/lib/assignments/recipientSync";
 
 const questAttemptSchema = z.object({
   lessonId: z.string().min(1),
@@ -32,22 +33,6 @@ export async function POST(req: Request) {
   const scored = responses.mode === "space-shooter" || responses.mode === "arcade-mini-game"
     ? scoreArcadeQuest(responses as { score: number; maxScore: number; shots?: unknown[]; answers?: unknown[]; gameType?: string })
     : scoreFindTheEvidenceQuest(responses);
-  const attempt = await db.learningQuestAttempt.create({
-    data: {
-      lessonId: body.lessonId,
-      userId: (session.user as any).id,
-      worldKey: worldKeyForSkill(lesson.skill),
-      questKey: responses.mode === "space-shooter" ? "space-shooter" : responses.mode === "arcade-mini-game" ? String(responses.gameType || "arcade-mini-game") : "find-the-evidence",
-      skill: lesson.skill,
-      standardCode: lesson.standardCode,
-      score: scored.score,
-      maxScore: scored.maxScore,
-      xpEarned: scored.xpEarned,
-      responses: responses as Prisma.InputJsonValue,
-      feedback: scored.feedback as Prisma.InputJsonValue,
-    },
-  });
-
   const existingProgress = await db.studentLessonProgress.findUnique({
     where: { lessonId_userId: { lessonId: body.lessonId, userId: (session.user as any).id } },
   });
@@ -57,18 +42,42 @@ export async function POST(req: Request) {
       ? "IN_PROGRESS"
       : undefined;
 
-  await db.studentLessonProgress.upsert({
-    where: { lessonId_userId: { lessonId: body.lessonId, userId: (session.user as any).id } },
-    update: {
-      status: nextStatus,
-      startedAt: existingProgress?.startedAt || new Date(),
-    },
-    create: {
-      lessonId: body.lessonId,
-      userId: (session.user as any).id,
-      status: "IN_PROGRESS",
-      startedAt: new Date(),
-    },
+  const attempt = await db.$transaction(async (tx) => {
+    const createdAttempt = await tx.learningQuestAttempt.create({
+      data: {
+        lessonId: body.lessonId,
+        userId: (session.user as any).id,
+        worldKey: worldKeyForSkill(lesson.skill),
+        questKey: responses.mode === "space-shooter" ? "space-shooter" : responses.mode === "arcade-mini-game" ? String(responses.gameType || "arcade-mini-game") : "find-the-evidence",
+        skill: lesson.skill,
+        standardCode: lesson.standardCode,
+        score: scored.score,
+        maxScore: scored.maxScore,
+        xpEarned: scored.xpEarned,
+        responses: responses as Prisma.InputJsonValue,
+        feedback: scored.feedback as Prisma.InputJsonValue,
+      },
+    });
+
+    const progress = await tx.studentLessonProgress.upsert({
+      where: { lessonId_userId: { lessonId: body.lessonId, userId: (session.user as any).id } },
+      update: {
+        status: nextStatus,
+        startedAt: existingProgress?.startedAt || new Date(),
+      },
+      create: {
+        lessonId: body.lessonId,
+        userId: (session.user as any).id,
+        status: "IN_PROGRESS",
+        startedAt: new Date(),
+      },
+    });
+
+    if (progress.status === "IN_PROGRESS") {
+      await syncRecipientFromProgress(tx, progress);
+    }
+
+    return createdAttempt;
   });
 
   return NextResponse.json({ attempt, feedback: scored.feedback });
