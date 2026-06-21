@@ -28,6 +28,45 @@ enum TestPrepModule {
   MCAS
 }
 
+enum RecipientStatus {
+  NOT_STARTED
+  IN_PROGRESS
+  SUBMITTED
+  COMPLETED
+}
+
+enum GradeStatus {
+  UNGRADED
+  PROVISIONAL
+  FINALIZED
+  NON_SCORABLE
+}
+
+enum ScoreSource {
+  AUTO
+  RUBRIC_AI_DRAFT
+  TEACHER_FINAL
+  MANUAL
+}
+
+enum AssignmentType {
+  LESSON
+  DIAGNOSTIC_WRITING
+  CUSTOM
+}
+
+enum AssignmentStatus {
+  DRAFT
+  ASSIGNED
+  CLOSED
+  ARCHIVED
+}
+
+enum AssignmentOrigin {
+  MANUAL
+  REPORT_RECOMMENDATION
+}
+
 enum LiteracyStrand {
   PHONEMIC_AWARENESS
   DECODING
@@ -222,6 +261,8 @@ model User {
   voiceConsent                 VoiceConsent?            @relation("StudentConsent")
   studentEvents                StudentEvent[]           @relation("StudentEvents")
   pssaFormSessions             PssaFormSession[]
+  assignedLearningAssignments  LearningAssignment[]     @relation("LearningAssignmentAssignedBy")
+  finalizedGradeRecords        GradeRecord[]            @relation("GradeRecordFinalizedBy")
 }
 
 model PendingStudentSignup {
@@ -340,17 +381,18 @@ model TeacherProfile {
 }
 
 model StudentProfile {
-  id          String              @id @default(cuid())
-  userId      String              @unique
-  schoolId    String?
-  grade       Int
-  schoolName  String
-  teacherId   String?
-  user        User                @relation(fields: [userId], references: [id], onDelete: Cascade)
-  school      School?             @relation(fields: [schoolId], references: [id], onDelete: SetNull)
-  teacher     TeacherProfile?     @relation("TeacherStudents", fields: [teacherId], references: [id])
-  enrollments Enrollment[]
-  parentLinks ParentStudentLink[]
+  id                   String                @id @default(cuid())
+  userId               String                @unique
+  schoolId             String?
+  grade                Int
+  schoolName           String
+  teacherId            String?
+  user                 User                  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  school               School?               @relation(fields: [schoolId], references: [id], onDelete: SetNull)
+  teacher              TeacherProfile?       @relation("TeacherStudents", fields: [teacherId], references: [id])
+  enrollments          Enrollment[]
+  parentLinks          ParentStudentLink[]
+  assignmentRecipients AssignmentRecipient[] @relation("StudentProfileRecipients")
 
   @@index([schoolId, grade])
 }
@@ -386,6 +428,7 @@ model ClassRoom {
   teacher                 TeacherProfile           @relation(fields: [teacherId], references: [id], onDelete: Cascade)
   enrollments             Enrollment[]
   assignments             Assignment[]
+  learningAssignments     LearningAssignment[]
   readingCoachAssignments ReadingCoachAssignment[]
   schedules               ReportSchedule[]
 
@@ -873,7 +916,7 @@ model PssaFormPassage {
 }
 
 model PssaFormItem {
-  id                          String           @id @default(cuid())
+  id                          String            @id @default(cuid())
   formId                      String
   itemId                      String
   position                    Int
@@ -883,7 +926,7 @@ model PssaFormItem {
   sectionIndex                Int?
   approvedContentHashSnapshot String
   passageIdSnapshot           String?
-  createdAt                   DateTime         @default(now())
+  createdAt                   DateTime          @default(now())
 
   form      PssaForm           @relation(fields: [formId], references: [id], onDelete: Cascade)
   item      PssaItem           @relation(fields: [itemId], references: [id], onDelete: Restrict)
@@ -897,25 +940,25 @@ model PssaFormItem {
 }
 
 model PssaFormSession {
-  id                     String                @id @default(cuid())
-  userId                 String
-  formId                 String
-  formContentHashAtStart String
-  status                 PssaFormSessionStatus @default(in_progress)
-  currentPosition        Int                   @default(1)
-  currentSectionIndex    Int                   @default(1)
-  sectionStatusesJson    Json?
-  startedAt              DateTime              @default(now())
-  submittedAt            DateTime?
-  totalPoints            Int?
-  earnedPoints           Int?
-  pendingHumanPoints     Int?
+  id                          String                @id @default(cuid())
+  userId                      String
+  formId                      String
+  formContentHashAtStart      String
+  status                      PssaFormSessionStatus @default(in_progress)
+  currentPosition             Int                   @default(1)
+  currentSectionIndex         Int                   @default(1)
+  sectionStatusesJson         Json?
+  startedAt                   DateTime              @default(now())
+  submittedAt                 DateTime?
+  totalPoints                 Int?
+  earnedPoints                Int?
+  pendingHumanPoints          Int?
   analyticsTotalPoints        Int?
   analyticsEarnedPoints       Int?
   analyticsPendingHumanPoints Int?
-  invalidatedReason      String?               @db.Text
-  createdAt              DateTime              @default(now())
-  updatedAt              DateTime              @updatedAt
+  invalidatedReason           String?               @db.Text
+  createdAt                   DateTime              @default(now())
+  updatedAt                   DateTime              @updatedAt
 
   user      User               @relation(fields: [userId], references: [id], onDelete: Cascade)
   form      PssaForm           @relation(fields: [formId], references: [id], onDelete: Restrict)
@@ -1144,6 +1187,7 @@ model LearningLesson {
   steps                LessonStep[]
   progress             StudentLessonProgress[]
   questAttempts        LearningQuestAttempt[]
+  learningAssignments  LearningAssignment[]    @relation("LearningLessonAssignments")
 }
 
 model LessonStep {
@@ -1261,6 +1305,102 @@ model StudentLessonProgress {
 
   @@unique([lessonId, userId])
   @@index([userId])
+}
+
+model LearningAssignment {
+  id                 String                @id @default(cuid())
+  title              String
+  assignmentType     AssignmentType        @default(LESSON)
+  origin             AssignmentOrigin
+  status             AssignmentStatus      @default(ASSIGNED)
+  classRoomId        String
+  assignedByUserId   String
+  gradeLevel         Int
+  standards          String[]
+  rubricId           String?
+  lessonId           String?
+  pssaFormId         String?
+  dueDate            DateTime?
+  audienceLabel      String?
+  originContextJson  Json?
+  reportFormId       String?
+  reportGroupId      String?
+  idempotencyKey     String
+  requestFingerprint String
+  originKey          String?
+  createdAt          DateTime              @default(now())
+  classRoom          ClassRoom             @relation(fields: [classRoomId], references: [id], onDelete: Restrict)
+  assignedBy         User                  @relation("LearningAssignmentAssignedBy", fields: [assignedByUserId], references: [id], onDelete: Restrict)
+  lesson             LearningLesson?       @relation("LearningLessonAssignments", fields: [lessonId], references: [id], onDelete: SetNull)
+  recipients         AssignmentRecipient[]
+
+  @@unique([assignedByUserId, idempotencyKey])
+  @@index([origin, originKey])
+  @@index([classRoomId, status])
+}
+
+model AssignmentRecipient {
+  id                   String             @id @default(cuid())
+  assignmentId         String
+  studentProfileId     String
+  status               RecipientStatus    @default(NOT_STARTED)
+  openLessonStudentKey String?            @unique
+  startedAt            DateTime?
+  submittedAt          DateTime?
+  completedAt          DateTime?
+  createdAt            DateTime           @default(now())
+  updatedAt            DateTime           @updatedAt
+  assignment           LearningAssignment @relation(fields: [assignmentId], references: [id], onDelete: Restrict)
+  studentProfile       StudentProfile     @relation("StudentProfileRecipients", fields: [studentProfileId], references: [id], onDelete: Restrict)
+  gradeRecord          GradeRecord?
+
+  @@unique([assignmentId, studentProfileId])
+}
+
+model GradeRecord {
+  id                     String              @id @default(cuid())
+  recipientId            String              @unique
+  status                 GradeStatus         @default(UNGRADED)
+  pointsEarned           Decimal?            @db.Decimal(10, 2)
+  pointsPossible         Decimal?            @db.Decimal(10, 2)
+  rubricId               String?
+  scoreSource            ScoreSource?
+  gradeLevelAtAssignment Int
+  selectedAttemptId      String?             @unique
+  finalizedAt            DateTime?
+  finalizedByUserId      String?
+  updatedAt              DateTime            @updatedAt
+  recipient              AssignmentRecipient @relation(fields: [recipientId], references: [id], onDelete: Restrict)
+  attempts               GradeAttempt[]      @relation("GradeRecordAttempts")
+  selectedAttempt        GradeAttempt?       @relation("GradeRecordSelectedAttempt", fields: [selectedAttemptId], references: [id], onDelete: Restrict)
+  finalizedBy            User?               @relation("GradeRecordFinalizedBy", fields: [finalizedByUserId], references: [id], onDelete: Restrict)
+
+  @@index([status])
+}
+
+model GradeAttempt {
+  id                    String          @id @default(cuid())
+  gradeRecordId         String
+  attemptNumber         Int
+  completionKey         String          @unique
+  snapshotVersion       String
+  submittedAt           DateTime?
+  completionState       RecipientStatus
+  pointsEarned          Decimal?        @db.Decimal(10, 2)
+  pointsPossible        Decimal?        @db.Decimal(10, 2)
+  rubricId              String?
+  rubricVersion         String?
+  scoringStatus         GradeStatus
+  responseSnapshotJson  Json?
+  scoringSnapshotJson   Json?
+  sourceProgressId      String?
+  pssaFormResponseId    String?
+  createdAt             DateTime        @default(now())
+  gradeRecord           GradeRecord     @relation("GradeRecordAttempts", fields: [gradeRecordId], references: [id], onDelete: Restrict)
+  selectedByGradeRecord GradeRecord?    @relation("GradeRecordSelectedAttempt")
+
+  @@unique([gradeRecordId, attemptNumber])
+  @@index([gradeRecordId])
 }
 
 model LearningQuestAttempt {

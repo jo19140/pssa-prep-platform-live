@@ -5,11 +5,16 @@ import { z } from "zod";
 import { authOptions } from "@/lib/auth";
 import { db } from "@/lib/db";
 import {
+  buildLessonAssignmentRequestFingerprint,
+  buildReportRecommendationIdempotencyKey,
+  createLessonAssignment,
+  LearningAssignmentServiceError,
+} from "@/lib/assignments/learningAssignmentService";
+import {
   assembleBridgeLessons,
   assertUniqueStudentProfileIds,
   isApprovedLearningLessonReviewStatus,
   parseSchoolDateUtcNoon,
-  planAssignmentOutcomes,
 } from "@/lib/content/pssaAssignRecommendedLesson";
 import { loadPssaClassReportForTeacher } from "@/lib/content/pssaClassReportServerLoader";
 import { suggestLessonsForReport } from "@/lib/content/pssaLessonBridge";
@@ -77,51 +82,56 @@ export async function POST(req: Request) {
     return json({ error: "stale_or_invalid_lesson_candidate" }, 409);
   }
 
-  const profileToUserId = new Map<string, string>();
-  for (const enrollment of loaded.classRoom.enrollments) {
-    if (body.studentProfileIds.includes(enrollment.studentProfile.id)) {
-      if (!enrollment.studentProfile.userId) return json({ error: `Missing linked user for studentProfileId ${enrollment.studentProfile.id}` }, 400);
-      profileToUserId.set(enrollment.studentProfile.id, enrollment.studentProfile.userId);
+  let assignmentResult;
+  try {
+    assignmentResult = await createLessonAssignment({
+      lessonId: body.lessonId,
+      classRoomId: body.classRoomId,
+      assignedByUserId: String((session.user as any).id),
+      studentProfileIds: body.studentProfileIds,
+      dueDate,
+      origin: "REPORT_RECOMMENDATION",
+      idempotencyKey: buildReportRecommendationIdempotencyKey({
+        classRoomId: body.classRoomId,
+        formId: body.formId,
+        benchmarkSeason: body.benchmarkSeason,
+        groupId: body.groupId,
+        lessonId: body.lessonId,
+        studentProfileIds: body.studentProfileIds,
+        dueDate,
+      }),
+      requestFingerprint: buildLessonAssignmentRequestFingerprint({
+        lessonId: body.lessonId,
+        studentProfileIds: body.studentProfileIds,
+        dueDate,
+      }),
+      originKey: `report:${body.formId}:${body.groupId}:${body.lessonId}`,
+      reportFormId: body.formId,
+      reportGroupId: body.groupId,
+      audienceLabel: `${group.label} · ${body.studentProfileIds.length} students`,
+      reportContext: {
+        groupLabel: group.label,
+        cluster: group.cluster,
+        roleFamily: group.roleFamily,
+        formId: body.formId,
+        groupId: body.groupId,
+        reportVersion: loaded.report.classReportVersion,
+        bridgeVersion: suggestions.bridgeVersion,
+      },
+    });
+  } catch (error) {
+    if (error instanceof LearningAssignmentServiceError) {
+      if (error.code === "missing_student_profile") return json({ error: "Missing linked user" }, 400);
+      return json({ error: error.code }, 409);
     }
+    throw error;
   }
-  const requestedUserIds = body.studentProfileIds.map((id) => profileToUserId.get(id)).filter((id): id is string => Boolean(id));
-  if (requestedUserIds.length !== body.studentProfileIds.length) return json({ error: "Missing linked user" }, 400);
-
-  const existingProgress = await db.studentLessonProgress.findMany({
-    where: { lessonId: body.lessonId, userId: { in: requestedUserIds } },
-    select: {
-      userId: true,
-      status: true,
-      guidedResponses: true,
-      independentResponses: true,
-      exitTicketResponses: true,
-      masteryScore: true,
-      masteryStatus: true,
-      completedAt: true,
-      masteredAt: true,
-    },
-  });
-  const outcomes = planAssignmentOutcomes({
-    requestedStudentProfileIds: body.studentProfileIds,
-    profileToUserId,
-    existingProgressByUserId: new Map(existingProgress.map((row) => [row.userId, row])),
-  });
-
-  await db.$transaction(async (tx) => {
-    for (const outcome of outcomes) {
-      await tx.studentLessonProgress.upsert({
-        where: { lessonId_userId: { lessonId: body.lessonId, userId: outcome.userId } },
-        update: { dueDate },
-        create: { lessonId: body.lessonId, userId: outcome.userId, dueDate },
-      });
-    }
-  });
 
   return json({
     ok: true,
     lessonId: body.lessonId,
     dueDate: body.dueDate,
-    results: outcomes.map(({ studentProfileId, outcome }) => ({ studentProfileId, outcome })),
+    results: assignmentResult.results.map(({ studentProfileId, outcome }) => ({ studentProfileId, outcome })),
   }, 200);
 }
 

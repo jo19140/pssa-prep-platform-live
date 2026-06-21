@@ -109,8 +109,11 @@ function testApprovalSemanticsAndSourceGuards() {
   assert.match(routeSource, /loadPssaClassReportForTeacher/, "assign route must use shared report loader");
   assert.match(routeSource, /studentProfileIds must be enrolled in class and in the suggested group/, "membership gate must be explicit");
   assert.match(routeSource, /stale_or_invalid_lesson_candidate/, "lesson gate must be explicit");
-  assert.match(routeSource, /update: \{ dueDate \}/, "idempotent update must update dueDate only");
-  assert.match(routeSource, /db\.\$transaction/, "writes must run in one transaction");
+  assert.match(routeSource, /createLessonAssignment/, "assign route must delegate writes to the canonical assignment service");
+  assert.match(routeSource, /origin: "REPORT_RECOMMENDATION"/, "assign route must stamp report recommendation origin");
+  assert.match(routeSource, /buildLessonAssignmentRequestFingerprint/, "assign route must compute request fingerprint");
+  assert.match(routeSource, /buildReportRecommendationIdempotencyKey/, "assign route must compute idempotency key");
+  assert.doesNotMatch(routeSource, /studentLessonProgress\.upsert|db\.\$transaction/, "assign route must not own assignment writes after PR2A");
 
   const loaderRoute = fs.readFileSync("app/api/teacher/pssa/class-report/route.ts", "utf8");
   assert.match(loaderRoute, /loadPssaClassReportForTeacher/, "class-report route must use shared loader");
