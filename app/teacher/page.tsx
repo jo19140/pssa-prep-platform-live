@@ -3,6 +3,7 @@ import { Suspense } from "react";
 import { TeacherPssaInsightsClient } from "@/components/pssa/TeacherPssaInsightsClient";
 import { SynesisPageShell } from "@/components/synesis/SynesisPageShell";
 import { TeacherProductWorkspaceSwitcher } from "@/components/synesis/TeacherProductWorkspaceSwitcher";
+import { TeacherLessonsTab } from "@/components/teacher/TeacherLessonsTab";
 import { loadCurrentTeacherProducts } from "@/lib/teacher/loadCurrentTeacherProducts";
 
 const STATE_TRACK_TABS = ["classes", "lessons", "assignments", "reports", "grading"] as const;
@@ -70,6 +71,8 @@ export default async function TeacherPage({
             <Suspense fallback={<div className="rounded-lg border border-slate-200 bg-white p-6 text-sm text-slate-600 shadow-sm">Loading diagnostic insights...</div>}>
               <TeacherPssaInsightsClient />
             </Suspense>
+          ) : activeTab === "lessons" ? (
+            <TeacherLessonsTab />
           ) : (
             <StateTrackPlaceholder tab={activeTab} />
           )}
