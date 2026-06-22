@@ -22,6 +22,7 @@ import { assertGrade3ShortAnswerContract } from "./content/author-pssa-grade3-sh
 import { buildMoyP1Packet } from "./content/author-pssa-moy-p1";
 import { buildMoyP2Packet } from "./content/author-pssa-moy-p2";
 import { buildMoyP3Packet } from "./content/author-pssa-moy-p3";
+import { buildMoyP4Packet } from "./content/author-pssa-moy-p4";
 import {
   PSSA_CONTENT_QUALITY_GATE_IDS,
   buildPlan,
@@ -194,6 +195,9 @@ const moyP3Packet = buildMoyP3Packet();
 const moyP3Items = moyP3Packet.items as any[];
 const moyP3Passages = moyP3Packet.passages as any[];
 const moyP3Group = moyP3Packet.passageGroups[0] as any;
+const moyP4Packet = buildMoyP4Packet();
+const moyP4Items = moyP4Packet.items as any[];
+const moyP4Passage = moyP4Packet.passages[0] as any;
 const expectedStaminaConventions = [
   {
     id: "conv_01",
@@ -394,6 +398,43 @@ for (const passage of moyP3Passages) {
   assert.equal(evaluatePssaDomainFactCheckRequired(passage), "PASS", `${passage.id} domain fact-check gate must pass`);
 }
 for (const item of moyP3Items) {
+  assert.equal(item.reviewStatus, "PENDING", `${item.itemId} reviewStatus must be PENDING`);
+  assert.equal(item.itemStatus, "candidate", `${item.itemId} itemStatus must be candidate`);
+  assert.equal(item.scoringBucket, undefined, `${item.itemId} must not set scoringBucket in the bank`);
+  projectPssaStudentItem(item);
+}
+assert.equal(moyP4Packet.noDbWrite, true, "MOY P4 packet must be file-only noDbWrite");
+assert.equal(moyP4Packet.productionImportReady, false, "MOY P4 packet must not be production import ready");
+assert.equal(moyP4Packet.passages.length, 1, "MOY P4 tranche must contain exactly one passage");
+assert.equal(moyP4Items.length, 7, "MOY P4 tranche must contain exactly seven items");
+assert.equal(moyP4Passage.id, "pssa_psg_g3_moy_p4_last_rehearsal", "MOY P4 passage id is pinned");
+assert.equal(moyP4Passage.wordCount, 1086, "MOY P4 passage word count is pinned");
+assert.equal(moyP4Passage.genre, "drama", "MOY P4 passage genre is drama");
+assert.equal(moyP4Passage.passageType, "literary", "MOY P4 passageType is literary");
+assert.equal(moyP4Passage.staminaBand, "released_length", "MOY P4 must use existing staminaBand value");
+assert.equal(moyP4Passage.factCheckRequired, false, "MOY P4 fictional drama must not require fact-checking");
+assert.equal(moyP4Passage.factCheckNotesJson, undefined, "MOY P4 must omit fact-check notes");
+assert.equal((moyP4Passage.textFeaturesJson ?? []).filter((feature: any) => feature.type === "figure").length, 0, "MOY P4 passage must not carry a figure feature");
+assert.deepEqual(
+  moyP4Items.map((item: any) => [item.itemId, item.eligibleContent, item.interactionType, item.pointValue]),
+  [
+    ["pssa_item_g3_moy_p4_mcq_ak111", "E03.A-K.1.1.1", "MCQ", 1],
+    ["pssa_item_g3_moy_p4_mcq_ak112", "E03.A-K.1.1.2", "MCQ", 1],
+    ["pssa_item_g3_moy_p4_mcq_ak113", "E03.A-K.1.1.3", "MCQ", 1],
+    ["pssa_item_g3_moy_p4_mcq_av411", "E03.A-V.4.1.1", "MCQ", 1],
+    ["pssa_item_g3_moy_p4_mcq_av412", "E03.A-V.4.1.2", "MCQ", 1],
+    ["pssa_item_g3_moy_p4_ebsr_ak113", "E03.A-K.1.1.3", "EBSR", 2],
+    ["pssa_item_g3_moy_p4_mcq_av412_ao2", "E03.A-V.4.1.2", "MCQ", 1],
+  ],
+  "MOY P4 EC/type/points table must match the locked spec",
+);
+assert.deepEqual(moyP4Items.filter((item: any) => item.interactionType === "MCQ").map((item: any) => item.correctIndex), [3, 0, 1, 2, 3, 0], "MOY P4 MCQ key positions must be D/A/B/C/D/A");
+for (const item of moyP4Items) {
+  assert.equal(item.passageId, "pssa_psg_g3_moy_p4_last_rehearsal", `${item.itemId} passageId must be P4`);
+  assert.equal(item.passageGroupId, undefined, `${item.itemId} must not set passageGroupId`);
+  assert.equal(item.passageLinks, undefined, `${item.itemId} must not set passageLinks`);
+  assert.equal(item.isCrossText, undefined, `${item.itemId} must not set isCrossText`);
+  assert.equal(item.requiredEvidenceSlotsJson, undefined, `${item.itemId} must not set requiredEvidenceSlotsJson`);
   assert.equal(item.reviewStatus, "PENDING", `${item.itemId} reviewStatus must be PENDING`);
   assert.equal(item.itemStatus, "candidate", `${item.itemId} itemStatus must be candidate`);
   assert.equal(item.scoringBucket, undefined, `${item.itemId} must not set scoringBucket in the bank`);
