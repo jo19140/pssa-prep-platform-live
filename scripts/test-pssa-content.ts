@@ -22,6 +22,7 @@ import { assertGrade3ShortAnswerContract } from "./content/author-pssa-grade3-sh
 import { buildMoyP1Packet } from "./content/author-pssa-moy-p1";
 import { buildMoyP2Packet } from "./content/author-pssa-moy-p2";
 import { buildMoyP3Packet } from "./content/author-pssa-moy-p3";
+import { buildMoyConventionsPacket } from "./content/author-pssa-moy-conventions";
 import {
   PSSA_CONTENT_QUALITY_GATE_IDS,
   buildPlan,
@@ -194,6 +195,8 @@ const moyP3Packet = buildMoyP3Packet();
 const moyP3Items = moyP3Packet.items as any[];
 const moyP3Passages = moyP3Packet.passages as any[];
 const moyP3Group = moyP3Packet.passageGroups[0] as any;
+const moyConventionsPacket = buildMoyConventionsPacket();
+const moyConventionsItems = moyConventionsPacket.items as any[];
 const expectedStaminaConventions = [
   {
     id: "conv_01",
@@ -397,6 +400,39 @@ for (const item of moyP3Items) {
   assert.equal(item.reviewStatus, "PENDING", `${item.itemId} reviewStatus must be PENDING`);
   assert.equal(item.itemStatus, "candidate", `${item.itemId} itemStatus must be candidate`);
   assert.equal(item.scoringBucket, undefined, `${item.itemId} must not set scoringBucket in the bank`);
+  projectPssaStudentItem(item);
+}
+assert.equal(moyConventionsPacket.noDbWrite, true, "MOY conventions packet must be file-only noDbWrite");
+assert.equal(moyConventionsPacket.productionImportReady, false, "MOY conventions packet must not be production import ready");
+assert.equal(moyConventionsItems.length, 9, "MOY conventions tranche must contain exactly nine items");
+assert.deepEqual(
+  moyConventionsItems.map((item: any) => [item.itemId, item.eligibleContent, item.interactionType, item.interactionSubtype, item.pointValue, item.blanks[0].correctIndex]),
+  [
+    ["pssa_item_g3_moy_conv_d111_word_function", "E03.D.1.1.1", "INLINE_DROPDOWN", "single_blank", 1, 1],
+    ["pssa_item_g3_moy_conv_d114_irregular_verb", "E03.D.1.1.4", "INLINE_DROPDOWN", "single_blank", 1, 3],
+    ["pssa_item_g3_moy_conv_d115_verb_tense", "E03.D.1.1.5", "INLINE_DROPDOWN", "single_blank", 1, 0],
+    ["pssa_item_g3_moy_conv_d116_agreement", "E03.D.1.1.6", "INLINE_DROPDOWN", "single_blank", 1, 2],
+    ["pssa_item_g3_moy_conv_d118_conjunctions", "E03.D.1.1.8", "INLINE_DROPDOWN", "single_blank", 1, 0],
+    ["pssa_item_g3_moy_conv_d121_title_caps", "E03.D.1.2.1", "INLINE_DROPDOWN", "single_blank", 1, 2],
+    ["pssa_item_g3_moy_conv_d123_dialogue", "E03.D.1.2.3", "INLINE_DROPDOWN", "single_blank", 1, 1],
+    ["pssa_item_g3_moy_conv_d125_spelling", "E03.D.1.2.5", "INLINE_DROPDOWN", "single_blank", 1, 3],
+    ["pssa_item_g3_moy_conv_d211_word_choice", "E03.D.2.1.1", "INLINE_DROPDOWN", "single_blank", 1, 0],
+  ],
+  "MOY conventions EC/type/key table must match the locked spec",
+);
+assert.equal(new Set(moyConventionsItems.map((item: any) => item.eligibleContent)).size, 9, "MOY conventions ECs must be distinct");
+const moyConventionsKeyCounts = [0, 0, 0, 0];
+for (const item of moyConventionsItems) moyConventionsKeyCounts[item.blanks[0].correctIndex] += 1;
+assert.deepEqual(moyConventionsKeyCounts, [3, 2, 2, 2], "MOY conventions key tally must be A3/B2/C2/D2");
+for (const item of moyConventionsItems) {
+  assert.equal(item.passageId, null, `${item.itemId} must be standalone`);
+  assert.equal(item.ecSkillFamily, "conventions", `${item.itemId} ecSkillFamily`);
+  assert.equal(item.reviewStatus, "PENDING", `${item.itemId} reviewStatus must be PENDING`);
+  assert.equal(item.itemStatus, "candidate", `${item.itemId} itemStatus must be candidate`);
+  assert.equal(item.scoringBucket, undefined, `${item.itemId} must not set scoringBucket in the bank`);
+  assert.equal(item.section, undefined, `${item.itemId} must not set section in the bank`);
+  assert.equal(item.blanks[0].options.length, 4, `${item.itemId} must have four options`);
+  for (const option of item.blanks[0].options) assert.equal(option.distractorRole, undefined, `${item.itemId} must not carry distractorRole`);
   projectPssaStudentItem(item);
 }
 assert.equal(evaluatePssaItemIntraChoiceDuplicate({
