@@ -1,0 +1,2082 @@
+{
+  "generatedAt": "2026-06-22T01:43:57.595Z",
+  "noDbWrite": true,
+  "productionImportReady": false,
+  "passageGroupCount": 1,
+  "passageCount": 2,
+  "itemCount": 9,
+  "passageGroups": [
+    {
+      "model": "PssaPassageGroup",
+      "id": "pssa_pg_g3_moy_p3_mail_paired",
+      "gradeLevel": 3,
+      "subject": "ELA",
+      "groupType": "paired_informational",
+      "genre": "paired_informational",
+      "staminaBand": "released_length",
+      "title": "Delivering the Mail",
+      "wordCount": 796,
+      "domainVocabularyLoad": "medium",
+      "textFeaturesJson": [
+        {
+          "type": "paired_member",
+          "slot": "passage_1",
+          "title": "How a Letter Travels"
+        },
+        {
+          "type": "paired_member",
+          "slot": "passage_2",
+          "title": "A Mail Carrier's Day"
+        }
+      ],
+      "contentHash": "sha256:1e66ea3463c6a0a3b18eb5cdcabb264bc2d7ff3fda575b7b3e2462156b7ccede",
+      "members": [
+        {
+          "passageId": "pssa_psg_g3_moy_p3_letter_travels",
+          "slot": "passage_1",
+          "position": 1,
+          "passageContentHashSnapshot": "sha256:eb598de65533c5cec998ac09b68278f139ec2ded2f1b52b4f7cf7033015ef2d6",
+          "passage": {
+            "id": "pssa_psg_g3_moy_p3_letter_travels",
+            "title": "How a Letter Travels",
+            "gradeLevel": 3,
+            "subject": "ELA",
+            "passageType": "informational",
+            "genre": "informational",
+            "domainVocabularyLoad": "medium",
+            "wordCount": 436,
+            "contentHash": "sha256:eb598de65533c5cec998ac09b68278f139ec2ded2f1b52b4f7cf7033015ef2d6",
+            "text": "Have you ever wondered what happens to a letter after you drop it in a mailbox? A single letter takes a long journey before it reaches the right home, and many workers and machines help it along the way.\n\nFirst, you write your letter, fold it into an envelope, and add a stamp. The stamp is like a ticket that pays for the trip. Then you drop the letter into a blue mailbox on the street, or you leave it in your own mailbox and raise the flag. A raised flag can show that outgoing mail is waiting. Writing the address neatly helps every machine and worker send the letter to the right place.\n\nSoon a mail carrier comes by and collects the waiting letters. The carrier brings them to a building called a sorting center. A sorting center is a large place where mail from many neighborhoods comes together at once. Inside, tall machines read the address and the ZIP code printed on each envelope. A ZIP code is a set of numbers that stands for a certain area of the country. The machines can sort thousands of letters in an hour — far faster than people could ever sort them by hand. A barcode may be printed near the bottom of the envelope. Sorting machines read the barcode to help send the letter toward the correct area. Workers watch over the machines and pull out any letter that is bent, torn, or hard to read, so every piece keeps moving toward its home.\n\nAfter they are sorted, the letters travel toward the city or town written on the address. Letters going a short distance ride in trucks. Letters headed far away may even fly across the country on an airplane. During this part of the trip, mail may move by road or air across the postal network before continuing toward its final destination. The letters ride in sturdy trays and bins that keep them standing upright and in the right order. At every step, each letter is grouped with other letters going to the same place. Grouping letters by destination helps keep the mail organized.\n\nWhen the letters reach the local post office, carriers sort them one more time — now by street and by house number. Finally, a carrier loads the mail and follows a route through the neighborhood, slipping each letter into the correct box.\n\nSo the next time a letter lands in your mailbox, remember the trip it took. It was collected, read by machines, carried across town, and delivered to your door, all because of a small stamp and a careful plan.",
+            "textFeaturesJson": [],
+            "factCheckRequired": true,
+            "factCheckNotesJson": [
+              {
+                "claimId": "t1-stamp-payment",
+                "claim": "A postage stamp is affixed to mail to prepay the cost of delivery.",
+                "sourceTitle": "Postage Stamps – The Basics",
+                "organization": "U.S. Postal Service",
+                "sourceUrl": "https://faq.usps.com/s/article/Postage-Stamps-The-Basics",
+                "claimSupported": true,
+                "dateAccessed": "2026-06-21"
+              },
+              {
+                "claimId": "t1-zip-code",
+                "claim": "A ZIP Code's digits identify a geographic area of the country, narrowing from region to local Post Office.",
+                "sourceTitle": "Introduction of the ZIP Code – U.S. Postal Facts",
+                "organization": "U.S. Postal Service",
+                "sourceUrl": "https://facts.usps.com/decoding-the-zip-code/",
+                "claimSupported": true,
+                "dateAccessed": "2026-06-21"
+              },
+              {
+                "claimId": "t1-sorting-machines",
+                "claim": "At modern processing centers mail is faced, cancelled, and sorted by automated machinery rather than by hand.",
+                "sourceTitle": "Mail Processing",
+                "organization": "Smithsonian National Postal Museum",
+                "sourceUrl": "https://postalmuseum.si.edu/exhibition/about-postal-operations/mail-processing",
+                "claimSupported": true,
+                "dateAccessed": "2026-06-21"
+              },
+              {
+                "claimId": "t1-air-surface-transport",
+                "claim": "Mail moves through the air and along roads in trucks (and over the sea) across the postal transportation network.",
+                "sourceTitle": "Core Processes – Systems at Work",
+                "organization": "Smithsonian National Postal Museum",
+                "sourceUrl": "https://postalmuseum.si.edu/exhibition/systems-at-work-about-the-exhibition/core-processes",
+                "claimSupported": true,
+                "dateAccessed": "2026-06-21"
+              },
+              {
+                "claimId": "t1-destination-grouping",
+                "claim": "ZIP+4 and added digits let mail be sorted by destination to a specific street, then to a residence or business (finer destination-based sorting).",
+                "sourceTitle": "Introduction of the ZIP Code – U.S. Postal Facts",
+                "organization": "U.S. Postal Service",
+                "sourceUrl": "https://facts.usps.com/decoding-the-zip-code/",
+                "claimSupported": true,
+                "dateAccessed": "2026-06-21"
+              }
+            ],
+            "sourceType": "internal_original",
+            "licenseStatus": "cleared_internal_original",
+            "commercialUseAllowed": true,
+            "needsLegalReview": false,
+            "reviewStatus": "PENDING",
+            "itemStatus": "candidate",
+            "provenanceJson": {
+              "benchmarkSeason": "MOY",
+              "blueprintVersion": "pde-ela-diagnostic-stamina-2025-g3-moy-v1",
+              "unit": "P3",
+              "passageSlot": "passage_1"
+            }
+          }
+        },
+        {
+          "passageId": "pssa_psg_g3_moy_p3_carrier_day",
+          "slot": "passage_2",
+          "position": 2,
+          "passageContentHashSnapshot": "sha256:84cc7be8138ded2279cb9c0fe28850fba4d35aa08e305836c76531016ebdb3c1",
+          "passage": {
+            "id": "pssa_psg_g3_moy_p3_carrier_day",
+            "title": "A Mail Carrier's Day",
+            "gradeLevel": 3,
+            "subject": "ELA",
+            "passageType": "informational",
+            "genre": "informational",
+            "domainVocabularyLoad": "medium",
+            "wordCount": 360,
+            "contentHash": "sha256:84cc7be8138ded2279cb9c0fe28850fba4d35aa08e305836c76531016ebdb3c1",
+            "text": "A mail carrier helps every letter finish its journey. But the job takes much more than walking down the street and dropping off mail. A good carrier uses special tools and follows a careful plan, rain or shine.\n\nThe day begins early at the post office. Before heading out, the carrier sorts the mail into the exact order of the route. A route is the planned path a carrier follows through a neighborhood. By putting the mail in order first, the carrier never has to stop and dig around for the next house's letters. Putting the mail in route order takes time, but it saves time later on the street. Over time, a carrier learns the neighborhood well and remembers which homes are easy to miss.\n\nOn walking routes, a carrier may use a strong shoulder bag called a satchel. It holds letters, magazines, and small packages. On some curbside routes, carriers use postal vehicles designed to make roadside mailboxes easier to reach.\n\nCarriers also carry a small scanner. When a package must be tracked or needs a signature, the carrier scans it. The scan records information about the package and updates its tracking record, so the family waiting for it can follow its trip. Some packages are too big for the satchel and ride in the truck until the carrier reaches the right address, where the carrier checks the label twice to be sure it goes to the correct home.\n\nMail carriers work in every kind of weather. They wear sturdy shoes for the long walks and bring water on hot days. They watch carefully for dogs, icy steps, and busy streets. In winter they knock the snow from their boots; in summer they wear hats to block the sun. A friendly wave from a neighbor, or a thank-you note tucked in a mailbox, can make a long day feel lighter. The work is not easy, yet carriers take real pride in bringing the mail to the right home, day after day.\n\nBecause of a carrier's patient work, a letter that began as one small envelope finally reaches the very person who has been waiting to read it.",
+            "textFeaturesJson": [],
+            "factCheckRequired": true,
+            "factCheckNotesJson": [
+              {
+                "claimId": "t2-route-order",
+                "claim": "A city carrier's route includes office duties such as casing mail before street delivery (office vs. street operations; ~80% of the day on the street).",
+                "sourceTitle": "City Delivery Operations – Nationwide Route Management",
+                "organization": "USPS Office of Inspector General",
+                "sourceUrl": "https://www.uspsoig.gov/reports/audit-reports/city-delivery-operations-nationwide-route-management",
+                "claimSupported": true,
+                "dateAccessed": "2026-06-21"
+              },
+              {
+                "claimId": "t2-satchel",
+                "claim": "Carriers carry mail in a letter-carrier satchel.",
+                "sourceTitle": "Letter Carrier Satchel",
+                "organization": "U.S. Postal Service",
+                "sourceUrl": "https://about.usps.com/who/profile/history/pdf/letter-carrier-satchel.pdf",
+                "claimSupported": true,
+                "dateAccessed": "2026-06-21"
+              },
+              {
+                "claimId": "t2-vehicle",
+                "claim": "City carriers deliver and collect mail on foot or by vehicle.",
+                "sourceTitle": "Top Jobs – USPS is Hiring",
+                "organization": "U.S. Postal Service",
+                "sourceUrl": "https://about.usps.com/careers/career-opportunities/top-jobs.htm",
+                "claimSupported": true,
+                "dateAccessed": "2026-06-21"
+              },
+              {
+                "claimId": "t2-scanner-tracking",
+                "claim": "Carriers use a handheld Mobile Delivery Device (MDD) to scan packages and transmit real-time tracking data.",
+                "sourceTitle": "Mobile Delivery Device Program",
+                "organization": "USPS Office of Inspector General",
+                "sourceUrl": "https://www.uspsoig.gov/reports/audit-reports/mobile-delivery-device-program",
+                "claimSupported": true,
+                "dateAccessed": "2026-06-21"
+              },
+              {
+                "claimId": "t2-all-weather",
+                "claim": "City carriers deliver under varying road and weather conditions (\"in all kinds of weather\").",
+                "sourceTitle": "Top Jobs – USPS is Hiring",
+                "organization": "U.S. Postal Service",
+                "sourceUrl": "https://about.usps.com/careers/career-opportunities/top-jobs.htm",
+                "claimSupported": true,
+                "dateAccessed": "2026-06-21"
+              }
+            ],
+            "sourceType": "internal_original",
+            "licenseStatus": "cleared_internal_original",
+            "commercialUseAllowed": true,
+            "needsLegalReview": false,
+            "reviewStatus": "PENDING",
+            "itemStatus": "candidate",
+            "provenanceJson": {
+              "benchmarkSeason": "MOY",
+              "blueprintVersion": "pde-ela-diagnostic-stamina-2025-g3-moy-v1",
+              "unit": "P3",
+              "passageSlot": "passage_2"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "passages": [
+    {
+      "id": "pssa_psg_g3_moy_p3_letter_travels",
+      "title": "How a Letter Travels",
+      "gradeLevel": 3,
+      "subject": "ELA",
+      "passageType": "informational",
+      "genre": "informational",
+      "domainVocabularyLoad": "medium",
+      "wordCount": 436,
+      "contentHash": "sha256:eb598de65533c5cec998ac09b68278f139ec2ded2f1b52b4f7cf7033015ef2d6",
+      "text": "Have you ever wondered what happens to a letter after you drop it in a mailbox? A single letter takes a long journey before it reaches the right home, and many workers and machines help it along the way.\n\nFirst, you write your letter, fold it into an envelope, and add a stamp. The stamp is like a ticket that pays for the trip. Then you drop the letter into a blue mailbox on the street, or you leave it in your own mailbox and raise the flag. A raised flag can show that outgoing mail is waiting. Writing the address neatly helps every machine and worker send the letter to the right place.\n\nSoon a mail carrier comes by and collects the waiting letters. The carrier brings them to a building called a sorting center. A sorting center is a large place where mail from many neighborhoods comes together at once. Inside, tall machines read the address and the ZIP code printed on each envelope. A ZIP code is a set of numbers that stands for a certain area of the country. The machines can sort thousands of letters in an hour — far faster than people could ever sort them by hand. A barcode may be printed near the bottom of the envelope. Sorting machines read the barcode to help send the letter toward the correct area. Workers watch over the machines and pull out any letter that is bent, torn, or hard to read, so every piece keeps moving toward its home.\n\nAfter they are sorted, the letters travel toward the city or town written on the address. Letters going a short distance ride in trucks. Letters headed far away may even fly across the country on an airplane. During this part of the trip, mail may move by road or air across the postal network before continuing toward its final destination. The letters ride in sturdy trays and bins that keep them standing upright and in the right order. At every step, each letter is grouped with other letters going to the same place. Grouping letters by destination helps keep the mail organized.\n\nWhen the letters reach the local post office, carriers sort them one more time — now by street and by house number. Finally, a carrier loads the mail and follows a route through the neighborhood, slipping each letter into the correct box.\n\nSo the next time a letter lands in your mailbox, remember the trip it took. It was collected, read by machines, carried across town, and delivered to your door, all because of a small stamp and a careful plan.",
+      "textFeaturesJson": [],
+      "factCheckRequired": true,
+      "factCheckNotesJson": [
+        {
+          "claimId": "t1-stamp-payment",
+          "claim": "A postage stamp is affixed to mail to prepay the cost of delivery.",
+          "sourceTitle": "Postage Stamps – The Basics",
+          "organization": "U.S. Postal Service",
+          "sourceUrl": "https://faq.usps.com/s/article/Postage-Stamps-The-Basics",
+          "claimSupported": true,
+          "dateAccessed": "2026-06-21"
+        },
+        {
+          "claimId": "t1-zip-code",
+          "claim": "A ZIP Code's digits identify a geographic area of the country, narrowing from region to local Post Office.",
+          "sourceTitle": "Introduction of the ZIP Code – U.S. Postal Facts",
+          "organization": "U.S. Postal Service",
+          "sourceUrl": "https://facts.usps.com/decoding-the-zip-code/",
+          "claimSupported": true,
+          "dateAccessed": "2026-06-21"
+        },
+        {
+          "claimId": "t1-sorting-machines",
+          "claim": "At modern processing centers mail is faced, cancelled, and sorted by automated machinery rather than by hand.",
+          "sourceTitle": "Mail Processing",
+          "organization": "Smithsonian National Postal Museum",
+          "sourceUrl": "https://postalmuseum.si.edu/exhibition/about-postal-operations/mail-processing",
+          "claimSupported": true,
+          "dateAccessed": "2026-06-21"
+        },
+        {
+          "claimId": "t1-air-surface-transport",
+          "claim": "Mail moves through the air and along roads in trucks (and over the sea) across the postal transportation network.",
+          "sourceTitle": "Core Processes – Systems at Work",
+          "organization": "Smithsonian National Postal Museum",
+          "sourceUrl": "https://postalmuseum.si.edu/exhibition/systems-at-work-about-the-exhibition/core-processes",
+          "claimSupported": true,
+          "dateAccessed": "2026-06-21"
+        },
+        {
+          "claimId": "t1-destination-grouping",
+          "claim": "ZIP+4 and added digits let mail be sorted by destination to a specific street, then to a residence or business (finer destination-based sorting).",
+          "sourceTitle": "Introduction of the ZIP Code – U.S. Postal Facts",
+          "organization": "U.S. Postal Service",
+          "sourceUrl": "https://facts.usps.com/decoding-the-zip-code/",
+          "claimSupported": true,
+          "dateAccessed": "2026-06-21"
+        }
+      ],
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "provenanceJson": {
+        "benchmarkSeason": "MOY",
+        "blueprintVersion": "pde-ela-diagnostic-stamina-2025-g3-moy-v1",
+        "unit": "P3",
+        "passageSlot": "passage_1"
+      }
+    },
+    {
+      "id": "pssa_psg_g3_moy_p3_carrier_day",
+      "title": "A Mail Carrier's Day",
+      "gradeLevel": 3,
+      "subject": "ELA",
+      "passageType": "informational",
+      "genre": "informational",
+      "domainVocabularyLoad": "medium",
+      "wordCount": 360,
+      "contentHash": "sha256:84cc7be8138ded2279cb9c0fe28850fba4d35aa08e305836c76531016ebdb3c1",
+      "text": "A mail carrier helps every letter finish its journey. But the job takes much more than walking down the street and dropping off mail. A good carrier uses special tools and follows a careful plan, rain or shine.\n\nThe day begins early at the post office. Before heading out, the carrier sorts the mail into the exact order of the route. A route is the planned path a carrier follows through a neighborhood. By putting the mail in order first, the carrier never has to stop and dig around for the next house's letters. Putting the mail in route order takes time, but it saves time later on the street. Over time, a carrier learns the neighborhood well and remembers which homes are easy to miss.\n\nOn walking routes, a carrier may use a strong shoulder bag called a satchel. It holds letters, magazines, and small packages. On some curbside routes, carriers use postal vehicles designed to make roadside mailboxes easier to reach.\n\nCarriers also carry a small scanner. When a package must be tracked or needs a signature, the carrier scans it. The scan records information about the package and updates its tracking record, so the family waiting for it can follow its trip. Some packages are too big for the satchel and ride in the truck until the carrier reaches the right address, where the carrier checks the label twice to be sure it goes to the correct home.\n\nMail carriers work in every kind of weather. They wear sturdy shoes for the long walks and bring water on hot days. They watch carefully for dogs, icy steps, and busy streets. In winter they knock the snow from their boots; in summer they wear hats to block the sun. A friendly wave from a neighbor, or a thank-you note tucked in a mailbox, can make a long day feel lighter. The work is not easy, yet carriers take real pride in bringing the mail to the right home, day after day.\n\nBecause of a carrier's patient work, a letter that began as one small envelope finally reaches the very person who has been waiting to read it.",
+      "textFeaturesJson": [],
+      "factCheckRequired": true,
+      "factCheckNotesJson": [
+        {
+          "claimId": "t2-route-order",
+          "claim": "A city carrier's route includes office duties such as casing mail before street delivery (office vs. street operations; ~80% of the day on the street).",
+          "sourceTitle": "City Delivery Operations – Nationwide Route Management",
+          "organization": "USPS Office of Inspector General",
+          "sourceUrl": "https://www.uspsoig.gov/reports/audit-reports/city-delivery-operations-nationwide-route-management",
+          "claimSupported": true,
+          "dateAccessed": "2026-06-21"
+        },
+        {
+          "claimId": "t2-satchel",
+          "claim": "Carriers carry mail in a letter-carrier satchel.",
+          "sourceTitle": "Letter Carrier Satchel",
+          "organization": "U.S. Postal Service",
+          "sourceUrl": "https://about.usps.com/who/profile/history/pdf/letter-carrier-satchel.pdf",
+          "claimSupported": true,
+          "dateAccessed": "2026-06-21"
+        },
+        {
+          "claimId": "t2-vehicle",
+          "claim": "City carriers deliver and collect mail on foot or by vehicle.",
+          "sourceTitle": "Top Jobs – USPS is Hiring",
+          "organization": "U.S. Postal Service",
+          "sourceUrl": "https://about.usps.com/careers/career-opportunities/top-jobs.htm",
+          "claimSupported": true,
+          "dateAccessed": "2026-06-21"
+        },
+        {
+          "claimId": "t2-scanner-tracking",
+          "claim": "Carriers use a handheld Mobile Delivery Device (MDD) to scan packages and transmit real-time tracking data.",
+          "sourceTitle": "Mobile Delivery Device Program",
+          "organization": "USPS Office of Inspector General",
+          "sourceUrl": "https://www.uspsoig.gov/reports/audit-reports/mobile-delivery-device-program",
+          "claimSupported": true,
+          "dateAccessed": "2026-06-21"
+        },
+        {
+          "claimId": "t2-all-weather",
+          "claim": "City carriers deliver under varying road and weather conditions (\"in all kinds of weather\").",
+          "sourceTitle": "Top Jobs – USPS is Hiring",
+          "organization": "U.S. Postal Service",
+          "sourceUrl": "https://about.usps.com/careers/career-opportunities/top-jobs.htm",
+          "claimSupported": true,
+          "dateAccessed": "2026-06-21"
+        }
+      ],
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "provenanceJson": {
+        "benchmarkSeason": "MOY",
+        "blueprintVersion": "pde-ela-diagnostic-stamina-2025-g3-moy-v1",
+        "unit": "P3",
+        "passageSlot": "passage_2"
+      }
+    }
+  ],
+  "items": [
+    {
+      "id": "pssa_item_g3_moy_p3_mcq_bk112_t1",
+      "itemId": "pssa_item_g3_moy_p3_mcq_bk112_t1",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "MCQ",
+      "interactionType": "MCQ",
+      "interactionSubtype": "text1_main_idea",
+      "passageId": "pssa_psg_g3_moy_p3_letter_travels",
+      "passageTitle": "How a Letter Travels",
+      "passageGroupId": "pssa_pg_g3_moy_p3_mail_paired",
+      "isCrossText": false,
+      "passageLinks": [
+        {
+          "passageId": "pssa_psg_g3_moy_p3_letter_travels",
+          "role": "primary",
+          "sortOrder": 0
+        }
+      ],
+      "eligibleContent": "E03.B-K.1.1.2",
+      "reportingCategory": "B",
+      "pointValue": 1,
+      "responseSpecJson": {
+        "prompt": "What is the best main idea of Text 1, \"How a Letter Travels\"?",
+        "choices": [
+          "ZIP codes are numbers that stand for areas of the country.",
+          "Mail carriers use special tools and work in every kind of weather.",
+          "A letter takes many organized steps and helpers to reach the right home.",
+          "Machines have replaced all the workers who help move letters."
+        ],
+        "structuredChoicesJson": [
+          {
+            "text": "ZIP codes are numbers that stand for areas of the country.",
+            "distractorRole": "too_narrow"
+          },
+          {
+            "text": "Mail carriers use special tools and work in every kind of weather.",
+            "distractorRole": "wrong_section"
+          },
+          {
+            "text": "A letter takes many organized steps and helpers to reach the right home."
+          },
+          {
+            "text": "Machines have replaced all the workers who help move letters.",
+            "distractorRole": "opposite_claim"
+          }
+        ]
+      },
+      "correctResponseJson": {
+        "correctIndex": 2
+      },
+      "scoringJson": {
+        "totalPoints": 1
+      },
+      "evidenceBinding": {
+        "evidenceKind": "whole_passage_synthesis",
+        "passageSlot": "passage_1"
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "provenanceJson": {
+        "benchmarkSeason": "MOY",
+        "blueprintVersion": "pde-ela-diagnostic-stamina-2025-g3-moy-v1",
+        "unit": "P3",
+        "passageSlot": "passage_1"
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_MOY_P3_ITEMS",
+        "noDbWrite": true,
+        "productionImportReady": false,
+        "intendedAssemblyBucket": "operational"
+      },
+      "studentFacingPrompt": "What is the best main idea of Text 1, \"How a Letter Travels\"?",
+      "stem": "What is the best main idea of Text 1, \"How a Letter Travels\"?",
+      "answerChoicesJson": [
+        {
+          "text": "ZIP codes are numbers that stand for areas of the country.",
+          "distractorRole": "too_narrow",
+          "misconceptionTag": "too_narrow",
+          "rationale": "This is a true detail, but it is too narrow to be the main idea of the whole text.",
+          "evidence": "A ZIP code is a set of numbers that stands for a certain area of the country.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_1",
+              "quotedSpan": "A ZIP code is a set of numbers that stands for a certain area of the country."
+            }
+          ]
+        },
+        {
+          "text": "Mail carriers use special tools and work in every kind of weather.",
+          "distractorRole": "wrong_section",
+          "misconceptionTag": "wrong_section",
+          "rationale": "This idea comes from Text 2, not the main idea of Text 1.",
+          "evidence": "Mail carriers work in every kind of weather.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_2",
+              "quotedSpan": "Mail carriers work in every kind of weather."
+            }
+          ]
+        },
+        {
+          "text": "A letter takes many organized steps and helpers to reach the right home.",
+          "rationale": "Correct. Text 1 follows a letter through collecting, sorting, transporting, and delivery.",
+          "evidence": "A single letter takes a long journey before it reaches the right home, and many workers and machines help it along the way.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_1",
+              "quotedSpan": "A single letter takes a long journey before it reaches the right home, and many workers and machines help it along the way."
+            }
+          ]
+        },
+        {
+          "text": "Machines have replaced all the workers who help move letters.",
+          "distractorRole": "opposite_claim",
+          "misconceptionTag": "opposite_claim",
+          "rationale": "This reverses the text's point because workers and machines both help the letter move.",
+          "evidence": "Workers watch over the machines and pull out any letter that is bent, torn, or hard to read, so every piece keeps moving toward its home.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_1",
+              "quotedSpan": "Workers watch over the machines and pull out any letter that is bent, torn, or hard to read, so every piece keeps moving toward its home."
+            }
+          ]
+        }
+      ],
+      "structuredChoicesJson": [
+        {
+          "text": "ZIP codes are numbers that stand for areas of the country.",
+          "distractorRole": "too_narrow",
+          "misconceptionTag": "too_narrow",
+          "rationale": "This is a true detail, but it is too narrow to be the main idea of the whole text.",
+          "evidence": "A ZIP code is a set of numbers that stands for a certain area of the country.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_1",
+              "quotedSpan": "A ZIP code is a set of numbers that stands for a certain area of the country."
+            }
+          ]
+        },
+        {
+          "text": "Mail carriers use special tools and work in every kind of weather.",
+          "distractorRole": "wrong_section",
+          "misconceptionTag": "wrong_section",
+          "rationale": "This idea comes from Text 2, not the main idea of Text 1.",
+          "evidence": "Mail carriers work in every kind of weather.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_2",
+              "quotedSpan": "Mail carriers work in every kind of weather."
+            }
+          ]
+        },
+        {
+          "text": "A letter takes many organized steps and helpers to reach the right home.",
+          "rationale": "Correct. Text 1 follows a letter through collecting, sorting, transporting, and delivery.",
+          "evidence": "A single letter takes a long journey before it reaches the right home, and many workers and machines help it along the way.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_1",
+              "quotedSpan": "A single letter takes a long journey before it reaches the right home, and many workers and machines help it along the way."
+            }
+          ]
+        },
+        {
+          "text": "Machines have replaced all the workers who help move letters.",
+          "distractorRole": "opposite_claim",
+          "misconceptionTag": "opposite_claim",
+          "rationale": "This reverses the text's point because workers and machines both help the letter move.",
+          "evidence": "Workers watch over the machines and pull out any letter that is bent, torn, or hard to read, so every piece keeps moving toward its home.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_1",
+              "quotedSpan": "Workers watch over the machines and pull out any letter that is bent, torn, or hard to read, so every piece keeps moving toward its home."
+            }
+          ]
+        }
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": "pssa_item_g3_moy_p3_mcq_bk112_t2",
+      "itemId": "pssa_item_g3_moy_p3_mcq_bk112_t2",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "MCQ",
+      "interactionType": "MCQ",
+      "interactionSubtype": "text2_main_idea",
+      "passageId": "pssa_psg_g3_moy_p3_carrier_day",
+      "passageTitle": "A Mail Carrier's Day",
+      "passageGroupId": "pssa_pg_g3_moy_p3_mail_paired",
+      "isCrossText": false,
+      "passageLinks": [
+        {
+          "passageId": "pssa_psg_g3_moy_p3_carrier_day",
+          "role": "primary",
+          "sortOrder": 1
+        }
+      ],
+      "eligibleContent": "E03.B-K.1.1.2",
+      "reportingCategory": "B",
+      "pointValue": 1,
+      "responseSpecJson": {
+        "prompt": "What is the best main idea of Text 2, \"A Mail Carrier's Day\"?",
+        "choices": [
+          "A mail carrier uses special tools and a careful plan to deliver mail in different conditions.",
+          "A satchel is a bag that holds letters, magazines, and small packages.",
+          "Machines sort thousands of letters an hour at a sorting center.",
+          "Carriers mostly enjoy waving to neighbors during the day."
+        ],
+        "structuredChoicesJson": [
+          {
+            "text": "A mail carrier uses special tools and a careful plan to deliver mail in different conditions."
+          },
+          {
+            "text": "A satchel is a bag that holds letters, magazines, and small packages.",
+            "distractorRole": "too_narrow"
+          },
+          {
+            "text": "Machines sort thousands of letters an hour at a sorting center.",
+            "distractorRole": "wrong_section"
+          },
+          {
+            "text": "Carriers mostly enjoy waving to neighbors during the day.",
+            "distractorRole": "wrong_emphasis"
+          }
+        ]
+      },
+      "correctResponseJson": {
+        "correctIndex": 0
+      },
+      "scoringJson": {
+        "totalPoints": 1
+      },
+      "evidenceBinding": {
+        "evidenceKind": "whole_passage_synthesis",
+        "passageSlot": "passage_2"
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "provenanceJson": {
+        "benchmarkSeason": "MOY",
+        "blueprintVersion": "pde-ela-diagnostic-stamina-2025-g3-moy-v1",
+        "unit": "P3",
+        "passageSlot": "passage_2"
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_MOY_P3_ITEMS",
+        "noDbWrite": true,
+        "productionImportReady": false,
+        "intendedAssemblyBucket": "operational"
+      },
+      "studentFacingPrompt": "What is the best main idea of Text 2, \"A Mail Carrier's Day\"?",
+      "stem": "What is the best main idea of Text 2, \"A Mail Carrier's Day\"?",
+      "answerChoicesJson": [
+        {
+          "text": "A mail carrier uses special tools and a careful plan to deliver mail in different conditions.",
+          "rationale": "Correct. Text 2 describes route order, tools, weather, and pride in the work.",
+          "evidence": "A good carrier uses special tools and follows a careful plan, rain or shine.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_2",
+              "quotedSpan": "A good carrier uses special tools and follows a careful plan, rain or shine."
+            }
+          ]
+        },
+        {
+          "text": "A satchel is a bag that holds letters, magazines, and small packages.",
+          "distractorRole": "too_narrow",
+          "misconceptionTag": "too_narrow",
+          "rationale": "This is one true detail about a tool, but it is not the main idea of Text 2.",
+          "evidence": "It holds letters, magazines, and small packages.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_2",
+              "quotedSpan": "It holds letters, magazines, and small packages."
+            }
+          ]
+        },
+        {
+          "text": "Machines sort thousands of letters an hour at a sorting center.",
+          "distractorRole": "wrong_section",
+          "misconceptionTag": "wrong_section",
+          "rationale": "This detail belongs to Text 1, not the main idea of Text 2.",
+          "evidence": "The machines can sort thousands of letters in an hour — far faster than people could ever sort them by hand.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_1",
+              "quotedSpan": "The machines can sort thousands of letters in an hour — far faster than people could ever sort them by hand."
+            }
+          ]
+        },
+        {
+          "text": "Carriers mostly enjoy waving to neighbors during the day.",
+          "distractorRole": "wrong_emphasis",
+          "misconceptionTag": "wrong_emphasis",
+          "rationale": "A friendly wave can help, but Text 2 focuses on careful work, tools, and conditions.",
+          "evidence": "A friendly wave from a neighbor, or a thank-you note tucked in a mailbox, can make a long day feel lighter.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_2",
+              "quotedSpan": "A friendly wave from a neighbor, or a thank-you note tucked in a mailbox, can make a long day feel lighter."
+            }
+          ]
+        }
+      ],
+      "structuredChoicesJson": [
+        {
+          "text": "A mail carrier uses special tools and a careful plan to deliver mail in different conditions.",
+          "rationale": "Correct. Text 2 describes route order, tools, weather, and pride in the work.",
+          "evidence": "A good carrier uses special tools and follows a careful plan, rain or shine.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_2",
+              "quotedSpan": "A good carrier uses special tools and follows a careful plan, rain or shine."
+            }
+          ]
+        },
+        {
+          "text": "A satchel is a bag that holds letters, magazines, and small packages.",
+          "distractorRole": "too_narrow",
+          "misconceptionTag": "too_narrow",
+          "rationale": "This is one true detail about a tool, but it is not the main idea of Text 2.",
+          "evidence": "It holds letters, magazines, and small packages.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_2",
+              "quotedSpan": "It holds letters, magazines, and small packages."
+            }
+          ]
+        },
+        {
+          "text": "Machines sort thousands of letters an hour at a sorting center.",
+          "distractorRole": "wrong_section",
+          "misconceptionTag": "wrong_section",
+          "rationale": "This detail belongs to Text 1, not the main idea of Text 2.",
+          "evidence": "The machines can sort thousands of letters in an hour — far faster than people could ever sort them by hand.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_1",
+              "quotedSpan": "The machines can sort thousands of letters in an hour — far faster than people could ever sort them by hand."
+            }
+          ]
+        },
+        {
+          "text": "Carriers mostly enjoy waving to neighbors during the day.",
+          "distractorRole": "wrong_emphasis",
+          "misconceptionTag": "wrong_emphasis",
+          "rationale": "A friendly wave can help, but Text 2 focuses on careful work, tools, and conditions.",
+          "evidence": "A friendly wave from a neighbor, or a thank-you note tucked in a mailbox, can make a long day feel lighter.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_2",
+              "quotedSpan": "A friendly wave from a neighbor, or a thank-you note tucked in a mailbox, can make a long day feel lighter."
+            }
+          ]
+        }
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": "pssa_item_g3_moy_p3_mcq_bk113_t1",
+      "itemId": "pssa_item_g3_moy_p3_mcq_bk113_t1",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "MCQ",
+      "interactionType": "MCQ",
+      "interactionSubtype": "text1_sequence_cause_effect",
+      "passageId": "pssa_psg_g3_moy_p3_letter_travels",
+      "passageTitle": "How a Letter Travels",
+      "passageGroupId": "pssa_pg_g3_moy_p3_mail_paired",
+      "isCrossText": false,
+      "passageLinks": [
+        {
+          "passageId": "pssa_psg_g3_moy_p3_letter_travels",
+          "role": "primary",
+          "sortOrder": 0
+        }
+      ],
+      "eligibleContent": "E03.B-K.1.1.3",
+      "reportingCategory": "B",
+      "pointValue": 1,
+      "responseSpecJson": {
+        "prompt": "According to Text 1, what happens to a letter right after a mail carrier collects it?",
+        "choices": [
+          "It flies across the country on an airplane first.",
+          "A carrier slips it into the correct box at a home.",
+          "The writer adds a stamp and writes the address neatly.",
+          "It is brought to a sorting center where machines read the address and ZIP code."
+        ],
+        "structuredChoicesJson": [
+          {
+            "text": "It flies across the country on an airplane first.",
+            "distractorRole": "wrong_section"
+          },
+          {
+            "text": "A carrier slips it into the correct box at a home.",
+            "distractorRole": "wrong_emphasis"
+          },
+          {
+            "text": "The writer adds a stamp and writes the address neatly.",
+            "distractorRole": "opposite_claim"
+          },
+          {
+            "text": "It is brought to a sorting center where machines read the address and ZIP code."
+          }
+        ]
+      },
+      "correctResponseJson": {
+        "correctIndex": 3
+      },
+      "scoringJson": {
+        "totalPoints": 1
+      },
+      "evidenceBinding": {
+        "evidenceKind": "quoted_span",
+        "passageSlot": "passage_1",
+        "quotedSpan": "The carrier brings them to a building called a sorting center."
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "provenanceJson": {
+        "benchmarkSeason": "MOY",
+        "blueprintVersion": "pde-ela-diagnostic-stamina-2025-g3-moy-v1",
+        "unit": "P3",
+        "passageSlot": "passage_1"
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_MOY_P3_ITEMS",
+        "noDbWrite": true,
+        "productionImportReady": false,
+        "intendedAssemblyBucket": "operational"
+      },
+      "studentFacingPrompt": "According to Text 1, what happens to a letter right after a mail carrier collects it?",
+      "stem": "According to Text 1, what happens to a letter right after a mail carrier collects it?",
+      "answerChoicesJson": [
+        {
+          "text": "It flies across the country on an airplane first.",
+          "distractorRole": "wrong_section",
+          "misconceptionTag": "wrong_section",
+          "rationale": "This uses a later section of the letter's journey, not what happens right after collection.",
+          "evidence": "Letters headed far away may even fly across the country on an airplane.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_1",
+              "quotedSpan": "Letters headed far away may even fly across the country on an airplane."
+            }
+          ]
+        },
+        {
+          "text": "A carrier slips it into the correct box at a home.",
+          "distractorRole": "wrong_emphasis",
+          "misconceptionTag": "wrong_emphasis",
+          "rationale": "This focuses on the final delivery detail, not the step that happens right after collection.",
+          "evidence": "Finally, a carrier loads the mail and follows a route through the neighborhood, slipping each letter into the correct box.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_1",
+              "quotedSpan": "Finally, a carrier loads the mail and follows a route through the neighborhood, slipping each letter into the correct box."
+            }
+          ]
+        },
+        {
+          "text": "The writer adds a stamp and writes the address neatly.",
+          "distractorRole": "opposite_claim",
+          "misconceptionTag": "opposite_claim",
+          "rationale": "This reverses the sequence because the stamp and address come before collection, not after.",
+          "evidence": "First, you write your letter, fold it into an envelope, and add a stamp.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_1",
+              "quotedSpan": "First, you write your letter, fold it into an envelope, and add a stamp."
+            }
+          ]
+        },
+        {
+          "text": "It is brought to a sorting center where machines read the address and ZIP code.",
+          "rationale": "Correct. After collection, the carrier brings letters to the sorting center.",
+          "evidence": "The carrier brings them to a building called a sorting center.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_1",
+              "quotedSpan": "The carrier brings them to a building called a sorting center."
+            }
+          ]
+        }
+      ],
+      "structuredChoicesJson": [
+        {
+          "text": "It flies across the country on an airplane first.",
+          "distractorRole": "wrong_section",
+          "misconceptionTag": "wrong_section",
+          "rationale": "This uses a later section of the letter's journey, not what happens right after collection.",
+          "evidence": "Letters headed far away may even fly across the country on an airplane.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_1",
+              "quotedSpan": "Letters headed far away may even fly across the country on an airplane."
+            }
+          ]
+        },
+        {
+          "text": "A carrier slips it into the correct box at a home.",
+          "distractorRole": "wrong_emphasis",
+          "misconceptionTag": "wrong_emphasis",
+          "rationale": "This focuses on the final delivery detail, not the step that happens right after collection.",
+          "evidence": "Finally, a carrier loads the mail and follows a route through the neighborhood, slipping each letter into the correct box.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_1",
+              "quotedSpan": "Finally, a carrier loads the mail and follows a route through the neighborhood, slipping each letter into the correct box."
+            }
+          ]
+        },
+        {
+          "text": "The writer adds a stamp and writes the address neatly.",
+          "distractorRole": "opposite_claim",
+          "misconceptionTag": "opposite_claim",
+          "rationale": "This reverses the sequence because the stamp and address come before collection, not after.",
+          "evidence": "First, you write your letter, fold it into an envelope, and add a stamp.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_1",
+              "quotedSpan": "First, you write your letter, fold it into an envelope, and add a stamp."
+            }
+          ]
+        },
+        {
+          "text": "It is brought to a sorting center where machines read the address and ZIP code.",
+          "rationale": "Correct. After collection, the carrier brings letters to the sorting center.",
+          "evidence": "The carrier brings them to a building called a sorting center.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_1",
+              "quotedSpan": "The carrier brings them to a building called a sorting center."
+            }
+          ]
+        }
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": "pssa_item_g3_moy_p3_mcq_bc311_t1",
+      "itemId": "pssa_item_g3_moy_p3_mcq_bc311_t1",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "MCQ",
+      "interactionType": "MCQ",
+      "interactionSubtype": "text1_logical_connection",
+      "passageId": "pssa_psg_g3_moy_p3_letter_travels",
+      "passageTitle": "How a Letter Travels",
+      "passageGroupId": "pssa_pg_g3_moy_p3_mail_paired",
+      "isCrossText": false,
+      "passageLinks": [
+        {
+          "passageId": "pssa_psg_g3_moy_p3_letter_travels",
+          "role": "primary",
+          "sortOrder": 0
+        }
+      ],
+      "eligibleContent": "E03.B-C.3.1.1",
+      "reportingCategory": "B",
+      "pointValue": 1,
+      "responseSpecJson": {
+        "prompt": "In Text 1, why is each letter grouped with other letters going to the same place?",
+        "choices": [
+          "So the barcode can be printed near the bottom of the envelope.",
+          "So the mail stays organized and reaches the correct area.",
+          "So the letter can fly across the country before it is sorted.",
+          "So the carrier can carry fewer tools on the route."
+        ],
+        "structuredChoicesJson": [
+          {
+            "text": "So the barcode can be printed near the bottom of the envelope.",
+            "distractorRole": "wrong_section"
+          },
+          {
+            "text": "So the mail stays organized and reaches the correct area."
+          },
+          {
+            "text": "So the letter can fly across the country before it is sorted.",
+            "distractorRole": "opposite_claim"
+          },
+          {
+            "text": "So the carrier can carry fewer tools on the route.",
+            "distractorRole": "wrong_emphasis"
+          }
+        ]
+      },
+      "correctResponseJson": {
+        "correctIndex": 1
+      },
+      "scoringJson": {
+        "totalPoints": 1
+      },
+      "evidenceBinding": {
+        "evidenceKind": "quoted_span",
+        "passageSlot": "passage_1",
+        "quotedSpan": "Grouping letters by destination helps keep the mail organized."
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "provenanceJson": {
+        "benchmarkSeason": "MOY",
+        "blueprintVersion": "pde-ela-diagnostic-stamina-2025-g3-moy-v1",
+        "unit": "P3",
+        "passageSlot": "passage_1"
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_MOY_P3_ITEMS",
+        "noDbWrite": true,
+        "productionImportReady": false,
+        "intendedAssemblyBucket": "operational"
+      },
+      "studentFacingPrompt": "In Text 1, why is each letter grouped with other letters going to the same place?",
+      "stem": "In Text 1, why is each letter grouped with other letters going to the same place?",
+      "answerChoicesJson": [
+        {
+          "text": "So the barcode can be printed near the bottom of the envelope.",
+          "distractorRole": "wrong_section",
+          "misconceptionTag": "wrong_section",
+          "rationale": "This uses a different sorting-machine detail; the question asks about destination grouping.",
+          "evidence": "A barcode may be printed near the bottom of the envelope.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_1",
+              "quotedSpan": "A barcode may be printed near the bottom of the envelope."
+            }
+          ]
+        },
+        {
+          "text": "So the mail stays organized and reaches the correct area.",
+          "rationale": "Correct. The next sentence explains that grouping by destination keeps mail organized.",
+          "evidence": "Grouping letters by destination helps keep the mail organized.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_1",
+              "quotedSpan": "Grouping letters by destination helps keep the mail organized."
+            }
+          ]
+        },
+        {
+          "text": "So the letter can fly across the country before it is sorted.",
+          "distractorRole": "opposite_claim",
+          "misconceptionTag": "opposite_claim",
+          "rationale": "This reverses the order because letters are sorted before long-distance transport.",
+          "evidence": "After they are sorted, the letters travel toward the city or town written on the address.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_1",
+              "quotedSpan": "After they are sorted, the letters travel toward the city or town written on the address."
+            }
+          ]
+        },
+        {
+          "text": "So the carrier can carry fewer tools on the route.",
+          "distractorRole": "wrong_emphasis",
+          "misconceptionTag": "wrong_emphasis",
+          "rationale": "Carrier tools are described in Text 2 and are not why Text 1 groups letters by destination.",
+          "evidence": "A mail carrier helps every letter finish its journey.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_2",
+              "quotedSpan": "A mail carrier helps every letter finish its journey."
+            }
+          ]
+        }
+      ],
+      "structuredChoicesJson": [
+        {
+          "text": "So the barcode can be printed near the bottom of the envelope.",
+          "distractorRole": "wrong_section",
+          "misconceptionTag": "wrong_section",
+          "rationale": "This uses a different sorting-machine detail; the question asks about destination grouping.",
+          "evidence": "A barcode may be printed near the bottom of the envelope.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_1",
+              "quotedSpan": "A barcode may be printed near the bottom of the envelope."
+            }
+          ]
+        },
+        {
+          "text": "So the mail stays organized and reaches the correct area.",
+          "rationale": "Correct. The next sentence explains that grouping by destination keeps mail organized.",
+          "evidence": "Grouping letters by destination helps keep the mail organized.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_1",
+              "quotedSpan": "Grouping letters by destination helps keep the mail organized."
+            }
+          ]
+        },
+        {
+          "text": "So the letter can fly across the country before it is sorted.",
+          "distractorRole": "opposite_claim",
+          "misconceptionTag": "opposite_claim",
+          "rationale": "This reverses the order because letters are sorted before long-distance transport.",
+          "evidence": "After they are sorted, the letters travel toward the city or town written on the address.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_1",
+              "quotedSpan": "After they are sorted, the letters travel toward the city or town written on the address."
+            }
+          ]
+        },
+        {
+          "text": "So the carrier can carry fewer tools on the route.",
+          "distractorRole": "wrong_emphasis",
+          "misconceptionTag": "wrong_emphasis",
+          "rationale": "Carrier tools are described in Text 2 and are not why Text 1 groups letters by destination.",
+          "evidence": "A mail carrier helps every letter finish its journey.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_2",
+              "quotedSpan": "A mail carrier helps every letter finish its journey."
+            }
+          ]
+        }
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "pssa_item_g3_moy_p3_mcq_bc312",
+      "itemId": "pssa_item_g3_moy_p3_mcq_bc312",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "MCQ",
+      "interactionType": "MCQ",
+      "interactionSubtype": "cross_text_difference_in_focus",
+      "passageId": null,
+      "passageTitle": "Delivering the Mail",
+      "passageGroupId": "pssa_pg_g3_moy_p3_mail_paired",
+      "isCrossText": true,
+      "requiredEvidenceSlotsJson": [
+        "passage_1",
+        "passage_2"
+      ],
+      "passageLinks": [
+        {
+          "passageId": "pssa_psg_g3_moy_p3_letter_travels",
+          "role": "primary",
+          "sortOrder": 0
+        },
+        {
+          "passageId": "pssa_psg_g3_moy_p3_carrier_day",
+          "role": "primary",
+          "sortOrder": 1
+        }
+      ],
+      "eligibleContent": "E03.B-C.3.1.2",
+      "reportingCategory": "B",
+      "pointValue": 1,
+      "responseSpecJson": {
+        "prompt": "How are the focuses of Text 1 and Text 2 different?",
+        "choices": [
+          "Text 1 focuses on a carrier's daily tools, while Text 2 focuses on the whole mail system.",
+          "Both texts are mainly about how sorting machines read ZIP codes.",
+          "Text 1 follows a letter through the mail system, while Text 2 focuses on a carrier's tools and daily work.",
+          "Both texts are mainly about why ZIP codes are printed on envelopes."
+        ],
+        "structuredChoicesJson": [
+          {
+            "text": "Text 1 focuses on a carrier's daily tools, while Text 2 focuses on the whole mail system.",
+            "distractorRole": "opposite_claim"
+          },
+          {
+            "text": "Both texts are mainly about how sorting machines read ZIP codes.",
+            "distractorRole": "too_narrow"
+          },
+          {
+            "text": "Text 1 follows a letter through the mail system, while Text 2 focuses on a carrier's tools and daily work."
+          },
+          {
+            "text": "Both texts are mainly about why ZIP codes are printed on envelopes.",
+            "distractorRole": "wrong_emphasis"
+          }
+        ]
+      },
+      "correctResponseJson": {
+        "correctIndex": 2
+      },
+      "scoringJson": {
+        "totalPoints": 1
+      },
+      "evidenceBinding": {
+        "evidenceKind": "whole_passage_synthesis",
+        "passageSlots": [
+          "passage_1",
+          "passage_2"
+        ]
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "provenanceJson": {
+        "benchmarkSeason": "MOY",
+        "blueprintVersion": "pde-ela-diagnostic-stamina-2025-g3-moy-v1",
+        "unit": "P3"
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_MOY_P3_ITEMS",
+        "noDbWrite": true,
+        "productionImportReady": false,
+        "intendedAssemblyBucket": "operational"
+      },
+      "studentFacingPrompt": "How are the focuses of Text 1 and Text 2 different?",
+      "stem": "How are the focuses of Text 1 and Text 2 different?",
+      "answerChoicesJson": [
+        {
+          "text": "Text 1 focuses on a carrier's daily tools, while Text 2 focuses on the whole mail system.",
+          "distractorRole": "opposite_claim",
+          "misconceptionTag": "opposite_claim",
+          "rationale": "This reverses the focus of the two texts.",
+          "evidence": "A good carrier uses special tools and follows a careful plan, rain or shine.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_2",
+              "quotedSpan": "A good carrier uses special tools and follows a careful plan, rain or shine."
+            }
+          ]
+        },
+        {
+          "text": "Both texts are mainly about how sorting machines read ZIP codes.",
+          "distractorRole": "too_narrow",
+          "misconceptionTag": "too_narrow",
+          "rationale": "This is one Text 1 detail and is too narrow for comparing both texts; Text 2 focuses on a carrier's work.",
+          "evidence": "Inside, tall machines read the address and the ZIP code printed on each envelope.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_1",
+              "quotedSpan": "Inside, tall machines read the address and the ZIP code printed on each envelope."
+            }
+          ]
+        },
+        {
+          "text": "Text 1 follows a letter through the mail system, while Text 2 focuses on a carrier's tools and daily work.",
+          "rationale": "Correct. Text 1 follows the system journey, and Text 2 describes the carrier's job.",
+          "evidence": "A mail carrier helps every letter finish its journey.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_2",
+              "quotedSpan": "A mail carrier helps every letter finish its journey."
+            }
+          ]
+        },
+        {
+          "text": "Both texts are mainly about why ZIP codes are printed on envelopes.",
+          "distractorRole": "wrong_emphasis",
+          "misconceptionTag": "wrong_emphasis",
+          "rationale": "ZIP codes are one detail from Text 1, not the focus of both texts.",
+          "evidence": "A ZIP code is a set of numbers that stands for a certain area of the country.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_1",
+              "quotedSpan": "A ZIP code is a set of numbers that stands for a certain area of the country."
+            }
+          ]
+        }
+      ],
+      "structuredChoicesJson": [
+        {
+          "text": "Text 1 focuses on a carrier's daily tools, while Text 2 focuses on the whole mail system.",
+          "distractorRole": "opposite_claim",
+          "misconceptionTag": "opposite_claim",
+          "rationale": "This reverses the focus of the two texts.",
+          "evidence": "A good carrier uses special tools and follows a careful plan, rain or shine.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_2",
+              "quotedSpan": "A good carrier uses special tools and follows a careful plan, rain or shine."
+            }
+          ]
+        },
+        {
+          "text": "Both texts are mainly about how sorting machines read ZIP codes.",
+          "distractorRole": "too_narrow",
+          "misconceptionTag": "too_narrow",
+          "rationale": "This is one Text 1 detail and is too narrow for comparing both texts; Text 2 focuses on a carrier's work.",
+          "evidence": "Inside, tall machines read the address and the ZIP code printed on each envelope.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_1",
+              "quotedSpan": "Inside, tall machines read the address and the ZIP code printed on each envelope."
+            }
+          ]
+        },
+        {
+          "text": "Text 1 follows a letter through the mail system, while Text 2 focuses on a carrier's tools and daily work.",
+          "rationale": "Correct. Text 1 follows the system journey, and Text 2 describes the carrier's job.",
+          "evidence": "A mail carrier helps every letter finish its journey.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_2",
+              "quotedSpan": "A mail carrier helps every letter finish its journey."
+            }
+          ]
+        },
+        {
+          "text": "Both texts are mainly about why ZIP codes are printed on envelopes.",
+          "distractorRole": "wrong_emphasis",
+          "misconceptionTag": "wrong_emphasis",
+          "rationale": "ZIP codes are one detail from Text 1, not the focus of both texts.",
+          "evidence": "A ZIP code is a set of numbers that stands for a certain area of the country.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_1",
+              "quotedSpan": "A ZIP code is a set of numbers that stands for a certain area of the country."
+            }
+          ]
+        }
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": "pssa_item_g3_moy_p3_ebsr_bc312",
+      "itemId": "pssa_item_g3_moy_p3_ebsr_bc312",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "EBSR",
+      "interactionType": "EBSR",
+      "interactionSubtype": "cross_text_shared_idea_ebsr",
+      "passageId": null,
+      "passageTitle": "Delivering the Mail",
+      "passageGroupId": "pssa_pg_g3_moy_p3_mail_paired",
+      "isCrossText": true,
+      "requiredEvidenceSlotsJson": [
+        "passage_1",
+        "passage_2"
+      ],
+      "passageLinks": [
+        {
+          "passageId": "pssa_psg_g3_moy_p3_letter_travels",
+          "role": "primary"
+        },
+        {
+          "passageId": "pssa_psg_g3_moy_p3_carrier_day",
+          "role": "primary"
+        }
+      ],
+      "eligibleContent": "E03.B-C.3.1.2",
+      "reportingCategory": "B",
+      "pointValue": 2,
+      "responseSpecJson": {
+        "partA": {
+          "prompt": "Which idea is shared by both texts?",
+          "choices": [
+            {
+              "text": "Sorting machines can move many letters quickly.",
+              "distractorRole": "wrong_section"
+            },
+            {
+              "text": "Careful organization helps mail reach the correct home."
+            },
+            {
+              "text": "The mail system works without planning.",
+              "distractorRole": "opposite_claim"
+            },
+            {
+              "text": "Both texts are mainly about stamps.",
+              "distractorRole": "too_narrow"
+            }
+          ],
+          "correctIndex": 1,
+          "evidenceBinding": {
+            "evidenceKind": "whole_passage_synthesis",
+            "passageSlots": [
+              "passage_1",
+              "passage_2"
+            ]
+          }
+        },
+        "partB": {
+          "instruction": "Choose two sentences — one from each passage — that best support the answer to Part A.",
+          "choices": [
+            {
+              "text": "When the letters reach the local post office, carriers sort them one more time — now by street and by house number.",
+              "passageSlot": "passage_1",
+              "isCorrect": true
+            },
+            {
+              "text": "The stamp is like a ticket that pays for the trip.",
+              "passageSlot": "passage_1",
+              "alignedPartAMisconception": "stamps"
+            },
+            {
+              "text": "A good carrier uses special tools and follows a careful plan, rain or shine.",
+              "passageSlot": "passage_2",
+              "isCorrect": true
+            },
+            {
+              "text": "On walking routes, a carrier may use a strong shoulder bag called a satchel.",
+              "passageSlot": "passage_2",
+              "alignedPartAMisconception": "single_tool_detail"
+            }
+          ],
+          "requiredSelectionCount": 2
+        }
+      },
+      "correctResponseJson": {
+        "partA": {
+          "correctIndex": 1
+        },
+        "partB": {
+          "correctIndices": [
+            0,
+            2
+          ]
+        }
+      },
+      "scoringJson": {
+        "totalPoints": 2,
+        "partAPoints": 1,
+        "partBPoints": 1,
+        "requirePartACorrectForFullCredit": true
+      },
+      "evidenceBinding": {
+        "evidenceKind": "whole_passage_synthesis",
+        "passageSlots": [
+          "passage_1",
+          "passage_2"
+        ]
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "provenanceJson": {
+        "benchmarkSeason": "MOY",
+        "blueprintVersion": "pde-ela-diagnostic-stamina-2025-g3-moy-v1",
+        "unit": "P3"
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_MOY_P3_ITEMS",
+        "noDbWrite": true,
+        "productionImportReady": false,
+        "intendedAssemblyBucket": "operational"
+      },
+      "partA": {
+        "prompt": "Which idea is shared by both texts?",
+        "correctIndex": 1,
+        "evidenceBinding": {
+          "evidenceKind": "whole_passage_synthesis",
+          "passageSlots": [
+            "passage_1",
+            "passage_2"
+          ]
+        },
+        "choices": [
+          {
+            "text": "Sorting machines can move many letters quickly.",
+            "distractorRole": "wrong_section",
+            "misconceptionTag": "wrong_section",
+            "rationale": "This is a Text 1 detail only, not an idea shared by both texts."
+          },
+          {
+            "text": "Careful organization helps mail reach the correct home.",
+            "rationale": "Correct. Text 1 and Text 2 both show organization helping mail reach the correct home."
+          },
+          {
+            "text": "The mail system works without planning.",
+            "distractorRole": "opposite_claim",
+            "misconceptionTag": "opposite_claim",
+            "rationale": "This reverses both texts, which emphasize planning and organization."
+          },
+          {
+            "text": "Both texts are mainly about stamps.",
+            "distractorRole": "too_narrow",
+            "misconceptionTag": "too_narrow",
+            "rationale": "Stamps are in Text 1, but they are not the shared idea of both texts."
+          }
+        ]
+      },
+      "partB": {
+        "instruction": "Choose two sentences — one from each passage — that best support the answer to Part A.",
+        "choices": [
+          {
+            "text": "When the letters reach the local post office, carriers sort them one more time — now by street and by house number.",
+            "passageSlot": "passage_1",
+            "isCorrect": true
+          },
+          {
+            "text": "The stamp is like a ticket that pays for the trip.",
+            "passageSlot": "passage_1",
+            "alignedPartAMisconception": "stamps"
+          },
+          {
+            "text": "A good carrier uses special tools and follows a careful plan, rain or shine.",
+            "passageSlot": "passage_2",
+            "isCorrect": true
+          },
+          {
+            "text": "On walking routes, a carrier may use a strong shoulder bag called a satchel.",
+            "passageSlot": "passage_2",
+            "alignedPartAMisconception": "single_tool_detail"
+          }
+        ],
+        "requiredSelectionCount": 2
+      }
+    },
+    {
+      "id": "pssa_item_g3_moy_p3_mcq_bv412_ao1",
+      "itemId": "pssa_item_g3_moy_p3_mcq_bv412_ao1",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "MCQ",
+      "interactionType": "MCQ",
+      "interactionSubtype": "word_relationship_stamp_ticket",
+      "passageId": "pssa_psg_g3_moy_p3_letter_travels",
+      "passageTitle": "How a Letter Travels",
+      "passageGroupId": "pssa_pg_g3_moy_p3_mail_paired",
+      "isCrossText": false,
+      "passageLinks": [
+        {
+          "passageId": "pssa_psg_g3_moy_p3_letter_travels",
+          "role": "primary",
+          "sortOrder": 0
+        }
+      ],
+      "eligibleContent": "E03.B-V.4.1.2",
+      "reportingCategory": "B",
+      "pointValue": 1,
+      "responseSpecJson": {
+        "prompt": "In Text 1, what does the comparison \"The stamp is like a ticket that pays for the trip\" mean?",
+        "choices": [
+          "A stamp is an actual paper ticket that a person tears.",
+          "A stamp shows the address where the letter should go.",
+          "A stamp makes the letter travel faster through machines.",
+          "A stamp is the payment that lets the letter be carried."
+        ],
+        "structuredChoicesJson": [
+          {
+            "text": "A stamp is an actual paper ticket that a person tears.",
+            "distractorRole": "plausible_misreading"
+          },
+          {
+            "text": "A stamp shows the address where the letter should go.",
+            "distractorRole": "wrong_section"
+          },
+          {
+            "text": "A stamp makes the letter travel faster through machines.",
+            "distractorRole": "unsupported_inference"
+          },
+          {
+            "text": "A stamp is the payment that lets the letter be carried."
+          }
+        ]
+      },
+      "correctResponseJson": {
+        "correctIndex": 3
+      },
+      "scoringJson": {
+        "totalPoints": 1
+      },
+      "evidenceBinding": {
+        "evidenceKind": "quoted_span",
+        "passageSlot": "passage_1",
+        "quotedSpan": "The stamp is like a ticket that pays for the trip."
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "provenanceJson": {
+        "benchmarkSeason": "MOY",
+        "blueprintVersion": "pde-ela-diagnostic-stamina-2025-g3-moy-v1",
+        "unit": "P3",
+        "passageSlot": "passage_1"
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_MOY_P3_ITEMS",
+        "noDbWrite": true,
+        "productionImportReady": false,
+        "intendedAssemblyBucket": "analytics_only"
+      },
+      "studentFacingPrompt": "In Text 1, what does the comparison \"The stamp is like a ticket that pays for the trip\" mean?",
+      "stem": "In Text 1, what does the comparison \"The stamp is like a ticket that pays for the trip\" mean?",
+      "answerChoicesJson": [
+        {
+          "text": "A stamp is an actual paper ticket that a person tears.",
+          "distractorRole": "plausible_misreading",
+          "misconceptionTag": "plausible_misreading",
+          "rationale": "This reads the comparison literally instead of as a way to explain the stamp's job.",
+          "evidence": "The stamp is like a ticket that pays for the trip.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_1",
+              "quotedSpan": "The stamp is like a ticket that pays for the trip."
+            }
+          ]
+        },
+        {
+          "text": "A stamp shows the address where the letter should go.",
+          "distractorRole": "wrong_section",
+          "misconceptionTag": "wrong_section",
+          "rationale": "This uses the address section of the passage; the stamp detail explains payment for delivery.",
+          "evidence": "Writing the address neatly helps every machine and worker send the letter to the right place.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_1",
+              "quotedSpan": "Writing the address neatly helps every machine and worker send the letter to the right place."
+            }
+          ]
+        },
+        {
+          "text": "A stamp makes the letter travel faster through machines.",
+          "distractorRole": "unsupported_inference",
+          "misconceptionTag": "unsupported_inference",
+          "rationale": "The text does not say a stamp controls speed or machine sorting.",
+          "evidence": "Inside, tall machines read the address and the ZIP code printed on each envelope.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_1",
+              "quotedSpan": "Inside, tall machines read the address and the ZIP code printed on each envelope."
+            }
+          ]
+        },
+        {
+          "text": "A stamp is the payment that lets the letter be carried.",
+          "rationale": "Correct. The comparison explains that the stamp pays for the letter's trip.",
+          "evidence": "The stamp is like a ticket that pays for the trip.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_1",
+              "quotedSpan": "The stamp is like a ticket that pays for the trip."
+            }
+          ]
+        }
+      ],
+      "structuredChoicesJson": [
+        {
+          "text": "A stamp is an actual paper ticket that a person tears.",
+          "distractorRole": "plausible_misreading",
+          "misconceptionTag": "plausible_misreading",
+          "rationale": "This reads the comparison literally instead of as a way to explain the stamp's job.",
+          "evidence": "The stamp is like a ticket that pays for the trip.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_1",
+              "quotedSpan": "The stamp is like a ticket that pays for the trip."
+            }
+          ]
+        },
+        {
+          "text": "A stamp shows the address where the letter should go.",
+          "distractorRole": "wrong_section",
+          "misconceptionTag": "wrong_section",
+          "rationale": "This uses the address section of the passage; the stamp detail explains payment for delivery.",
+          "evidence": "Writing the address neatly helps every machine and worker send the letter to the right place.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_1",
+              "quotedSpan": "Writing the address neatly helps every machine and worker send the letter to the right place."
+            }
+          ]
+        },
+        {
+          "text": "A stamp makes the letter travel faster through machines.",
+          "distractorRole": "unsupported_inference",
+          "misconceptionTag": "unsupported_inference",
+          "rationale": "The text does not say a stamp controls speed or machine sorting.",
+          "evidence": "Inside, tall machines read the address and the ZIP code printed on each envelope.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_1",
+              "quotedSpan": "Inside, tall machines read the address and the ZIP code printed on each envelope."
+            }
+          ]
+        },
+        {
+          "text": "A stamp is the payment that lets the letter be carried.",
+          "rationale": "Correct. The comparison explains that the stamp pays for the letter's trip.",
+          "evidence": "The stamp is like a ticket that pays for the trip.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_1",
+              "quotedSpan": "The stamp is like a ticket that pays for the trip."
+            }
+          ]
+        }
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": "pssa_item_g3_moy_p3_mcq_bc211_ao3",
+      "itemId": "pssa_item_g3_moy_p3_mcq_bc211_ao3",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "MCQ",
+      "interactionType": "MCQ",
+      "interactionSubtype": "text2_author_viewpoint",
+      "passageId": "pssa_psg_g3_moy_p3_carrier_day",
+      "passageTitle": "A Mail Carrier's Day",
+      "passageGroupId": "pssa_pg_g3_moy_p3_mail_paired",
+      "isCrossText": false,
+      "passageLinks": [
+        {
+          "passageId": "pssa_psg_g3_moy_p3_carrier_day",
+          "role": "primary",
+          "sortOrder": 1
+        }
+      ],
+      "eligibleContent": "E03.B-C.2.1.1",
+      "reportingCategory": "B",
+      "pointValue": 1,
+      "responseSpecJson": {
+        "prompt": "Which statement best describes the author's point of view about a mail carrier's job in Text 2?",
+        "choices": [
+          "The author thinks the job is easy because carriers follow the same route every day.",
+          "The author thinks the job is demanding but useful and important.",
+          "The author thinks the job is boring and unimportant.",
+          "The author mostly admires how sorting machines read ZIP codes."
+        ],
+        "structuredChoicesJson": [
+          {
+            "text": "The author thinks the job is easy because carriers follow the same route every day.",
+            "distractorRole": "opposite_claim"
+          },
+          {
+            "text": "The author thinks the job is demanding but useful and important."
+          },
+          {
+            "text": "The author thinks the job is boring and unimportant.",
+            "distractorRole": "unsupported_inference"
+          },
+          {
+            "text": "The author mostly admires how sorting machines read ZIP codes.",
+            "distractorRole": "wrong_section"
+          }
+        ]
+      },
+      "correctResponseJson": {
+        "correctIndex": 1
+      },
+      "scoringJson": {
+        "totalPoints": 1
+      },
+      "evidenceBinding": {
+        "evidenceKind": "quoted_span",
+        "passageSlot": "passage_2",
+        "quotedSpan": "The work is not easy, yet carriers take real pride in bringing the mail to the right home, day after day."
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "provenanceJson": {
+        "benchmarkSeason": "MOY",
+        "blueprintVersion": "pde-ela-diagnostic-stamina-2025-g3-moy-v1",
+        "unit": "P3",
+        "passageSlot": "passage_2"
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_MOY_P3_ITEMS",
+        "noDbWrite": true,
+        "productionImportReady": false,
+        "intendedAssemblyBucket": "analytics_only"
+      },
+      "studentFacingPrompt": "Which statement best describes the author's point of view about a mail carrier's job in Text 2?",
+      "stem": "Which statement best describes the author's point of view about a mail carrier's job in Text 2?",
+      "answerChoicesJson": [
+        {
+          "text": "The author thinks the job is easy because carriers follow the same route every day.",
+          "distractorRole": "opposite_claim",
+          "misconceptionTag": "opposite_claim",
+          "rationale": "This reverses the author's view that the work is not easy.",
+          "evidence": "The work is not easy, yet carriers take real pride in bringing the mail to the right home, day after day.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_2",
+              "quotedSpan": "The work is not easy, yet carriers take real pride in bringing the mail to the right home, day after day."
+            }
+          ]
+        },
+        {
+          "text": "The author thinks the job is demanding but useful and important.",
+          "rationale": "Correct. Text 2 describes hard conditions and pride in delivering mail.",
+          "evidence": "The work is not easy, yet carriers take real pride in bringing the mail to the right home, day after day.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_2",
+              "quotedSpan": "The work is not easy, yet carriers take real pride in bringing the mail to the right home, day after day."
+            }
+          ]
+        },
+        {
+          "text": "The author thinks the job is boring and unimportant.",
+          "distractorRole": "unsupported_inference",
+          "misconceptionTag": "unsupported_inference",
+          "rationale": "The passage never says the job is boring or unimportant; it shows pride in the work.",
+          "evidence": "A friendly wave from a neighbor, or a thank-you note tucked in a mailbox, can make a long day feel lighter.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_2",
+              "quotedSpan": "A friendly wave from a neighbor, or a thank-you note tucked in a mailbox, can make a long day feel lighter."
+            }
+          ]
+        },
+        {
+          "text": "The author mostly admires how sorting machines read ZIP codes.",
+          "distractorRole": "wrong_section",
+          "misconceptionTag": "wrong_section",
+          "rationale": "That viewpoint belongs to Text 1's system focus, not Text 2's carrier focus.",
+          "evidence": "Inside, tall machines read the address and the ZIP code printed on each envelope.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_1",
+              "quotedSpan": "Inside, tall machines read the address and the ZIP code printed on each envelope."
+            }
+          ]
+        }
+      ],
+      "structuredChoicesJson": [
+        {
+          "text": "The author thinks the job is easy because carriers follow the same route every day.",
+          "distractorRole": "opposite_claim",
+          "misconceptionTag": "opposite_claim",
+          "rationale": "This reverses the author's view that the work is not easy.",
+          "evidence": "The work is not easy, yet carriers take real pride in bringing the mail to the right home, day after day.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_2",
+              "quotedSpan": "The work is not easy, yet carriers take real pride in bringing the mail to the right home, day after day."
+            }
+          ]
+        },
+        {
+          "text": "The author thinks the job is demanding but useful and important.",
+          "rationale": "Correct. Text 2 describes hard conditions and pride in delivering mail.",
+          "evidence": "The work is not easy, yet carriers take real pride in bringing the mail to the right home, day after day.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_2",
+              "quotedSpan": "The work is not easy, yet carriers take real pride in bringing the mail to the right home, day after day."
+            }
+          ]
+        },
+        {
+          "text": "The author thinks the job is boring and unimportant.",
+          "distractorRole": "unsupported_inference",
+          "misconceptionTag": "unsupported_inference",
+          "rationale": "The passage never says the job is boring or unimportant; it shows pride in the work.",
+          "evidence": "A friendly wave from a neighbor, or a thank-you note tucked in a mailbox, can make a long day feel lighter.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_2",
+              "quotedSpan": "A friendly wave from a neighbor, or a thank-you note tucked in a mailbox, can make a long day feel lighter."
+            }
+          ]
+        },
+        {
+          "text": "The author mostly admires how sorting machines read ZIP codes.",
+          "distractorRole": "wrong_section",
+          "misconceptionTag": "wrong_section",
+          "rationale": "That viewpoint belongs to Text 1's system focus, not Text 2's carrier focus.",
+          "evidence": "Inside, tall machines read the address and the ZIP code printed on each envelope.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_1",
+              "quotedSpan": "Inside, tall machines read the address and the ZIP code printed on each envelope."
+            }
+          ]
+        }
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "pssa_item_g3_moy_p3_ebsr_bc311_ao4",
+      "itemId": "pssa_item_g3_moy_p3_ebsr_bc311_ao4",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "EBSR",
+      "interactionType": "EBSR",
+      "interactionSubtype": "text2_route_order_ebsr",
+      "passageId": "pssa_psg_g3_moy_p3_carrier_day",
+      "passageTitle": "A Mail Carrier's Day",
+      "passageGroupId": "pssa_pg_g3_moy_p3_mail_paired",
+      "isCrossText": false,
+      "passageLinks": [
+        {
+          "passageId": "pssa_psg_g3_moy_p3_carrier_day",
+          "role": "primary"
+        }
+      ],
+      "eligibleContent": "E03.B-C.3.1.1",
+      "reportingCategory": "B",
+      "pointValue": 2,
+      "responseSpecJson": {
+        "partA": {
+          "prompt": "According to Text 2, why does the carrier put the mail in route order before leaving?",
+          "choices": [
+            {
+              "text": "It saves time because the carrier does not have to dig for each house's letters later."
+            },
+            {
+              "text": "It makes the satchel lighter before the carrier starts walking.",
+              "distractorRole": "wrong_section"
+            },
+            {
+              "text": "It helps the carrier memorize every address in the neighborhood.",
+              "distractorRole": "unsupported_inference"
+            },
+            {
+              "text": "It causes the carrier to stop more often on the street.",
+              "distractorRole": "opposite_claim"
+            }
+          ],
+          "correctIndex": 0,
+          "evidenceBinding": {
+            "evidenceKind": "paragraph_synthesis",
+            "passageSlot": "passage_2"
+          }
+        },
+        "partB": {
+          "instruction": "Choose two sentences from \"A Mail Carrier's Day\" that best support the answer.",
+          "choices": [
+            {
+              "text": "A route is the planned path a carrier follows through a neighborhood.",
+              "passageSlot": "passage_2",
+              "alignedPartAMisconception": "definition_only"
+            },
+            {
+              "text": "By putting the mail in order first, the carrier never has to stop and dig around for the next house's letters.",
+              "passageSlot": "passage_2",
+              "isCorrect": true
+            },
+            {
+              "text": "Over time, a carrier learns the neighborhood well and remembers which homes are easy to miss.",
+              "passageSlot": "passage_2",
+              "alignedPartAMisconception": "memorize_addresses"
+            },
+            {
+              "text": "Putting the mail in route order takes time, but it saves time later on the street.",
+              "passageSlot": "passage_2",
+              "isCorrect": true
+            }
+          ],
+          "requiredSelectionCount": 2
+        }
+      },
+      "correctResponseJson": {
+        "partA": {
+          "correctIndex": 0
+        },
+        "partB": {
+          "correctIndices": [
+            1,
+            3
+          ]
+        }
+      },
+      "scoringJson": {
+        "totalPoints": 2,
+        "partAPoints": 1,
+        "partBPoints": 1,
+        "requirePartACorrectForFullCredit": true
+      },
+      "evidenceBinding": {
+        "evidenceKind": "paragraph_synthesis",
+        "passageSlot": "passage_2"
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "provenanceJson": {
+        "benchmarkSeason": "MOY",
+        "blueprintVersion": "pde-ela-diagnostic-stamina-2025-g3-moy-v1",
+        "unit": "P3",
+        "passageSlot": "passage_2"
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_MOY_P3_ITEMS",
+        "noDbWrite": true,
+        "productionImportReady": false,
+        "intendedAssemblyBucket": "analytics_only"
+      },
+      "partA": {
+        "prompt": "According to Text 2, why does the carrier put the mail in route order before leaving?",
+        "correctIndex": 0,
+        "evidenceBinding": {
+          "evidenceKind": "paragraph_synthesis",
+          "passageSlot": "passage_2"
+        },
+        "choices": [
+          {
+            "text": "It saves time because the carrier does not have to dig for each house's letters later.",
+            "rationale": "Correct. The paragraph explains that route order prevents stopping and digging and saves time."
+          },
+          {
+            "text": "It makes the satchel lighter before the carrier starts walking.",
+            "distractorRole": "wrong_section",
+            "misconceptionTag": "wrong_section",
+            "rationale": "This uses a tool detail but does not explain the route-order cause and effect."
+          },
+          {
+            "text": "It helps the carrier memorize every address in the neighborhood.",
+            "distractorRole": "unsupported_inference",
+            "misconceptionTag": "unsupported_inference",
+            "rationale": "The text says carriers learn the neighborhood, but it does not say route order is for memorizing every address."
+          },
+          {
+            "text": "It causes the carrier to stop more often on the street.",
+            "distractorRole": "opposite_claim",
+            "misconceptionTag": "opposite_claim",
+            "rationale": "This reverses the effect because route order saves time and prevents extra digging."
+          }
+        ]
+      },
+      "partB": {
+        "instruction": "Choose two sentences from \"A Mail Carrier's Day\" that best support the answer.",
+        "choices": [
+          {
+            "text": "A route is the planned path a carrier follows through a neighborhood.",
+            "passageSlot": "passage_2",
+            "alignedPartAMisconception": "definition_only"
+          },
+          {
+            "text": "By putting the mail in order first, the carrier never has to stop and dig around for the next house's letters.",
+            "passageSlot": "passage_2",
+            "isCorrect": true
+          },
+          {
+            "text": "Over time, a carrier learns the neighborhood well and remembers which homes are easy to miss.",
+            "passageSlot": "passage_2",
+            "alignedPartAMisconception": "memorize_addresses"
+          },
+          {
+            "text": "Putting the mail in route order takes time, but it saves time later on the street.",
+            "passageSlot": "passage_2",
+            "isCorrect": true
+          }
+        ],
+        "requiredSelectionCount": 2
+      }
+    }
+  ]
+}
