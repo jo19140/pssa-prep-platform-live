@@ -148,8 +148,8 @@ assert.match(teacherPage, /<TeacherPssaInsightsClient \/>/, "Reports path must k
 const lessonsTab = read("components/teacher/TeacherLessonsTab.tsx");
 assert.match(lessonsTab, /gradeOptions = useMemo/, "grades must be derived from visible approved data");
 assert.match(lessonsTab, /lesson\.gradeLevel/, "grade filter must use lesson data");
-assert.doesNotMatch(lessonsTab, /Assign/, "Lessons tab must not render Assign controls");
-assert.doesNotMatch(lessonsTab, /StudentLessonProgress|studentLessonProgress|method:\s*"POST"|method:\s*"PUT"|method:\s*"PATCH"|method:\s*"DELETE"/, "Lessons tab must not perform assignment writes");
+assert.match(lessonsTab, /Assign lesson/, "Lessons tab may render the PR2C Assign lesson control");
+assert.doesNotMatch(lessonsTab, /StudentLessonProgress|studentLessonProgress|method:\s*"PUT"|method:\s*"PATCH"|method:\s*"DELETE"/, "Lessons tab must not write student lesson progress or mutate PR1 routes directly");
 assert.match(lessonsTab, /Supplemental writing practice/, "Grade 3 writing group should be presented as supplemental writing practice");
 
 const previewDialog = read("components/teacher/TeacherLessonPreviewDialog.tsx");
