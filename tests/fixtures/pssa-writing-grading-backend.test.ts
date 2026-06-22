@@ -2,6 +2,8 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import {
   assertScoreRange,
+  gradePssaShortAnswer,
+  PSSA_SHORT_ANSWER_HEURISTIC_MODEL_ID,
   stableStringify,
   validateInstructionalProfile,
   writingJobKey,
@@ -41,6 +43,10 @@ assert.match(grading, /where:\s*\{\s*id: job\.evaluationId,\s*currentInputHash: 
 assert.match(grading, /gradePssaShortAnswer/, "short-answer dispatcher path must exist");
 assert.match(grading, /gradePssaTdaDraft/, "TDA dispatcher path must exist");
 assert.match(grading, /tda_anchor_set_unlicensed/, "existing TDA anchors must fail closed until licensed");
+assert.match(grading, /PSSA_WRITING_ALLOW_LOCAL_GRADER !== "1"[\s\S]*grader_unavailable/, "heuristic grader must require explicit local flag in every environment");
+assert.doesNotMatch(grading, /OPENAI_API_KEY \? "external-writing-grader"|local-deterministic-dev|model_unavailable/, "OPENAI_API_KEY must not enable or relabel the heuristic grader");
+assert.match(grading, /modelId: PSSA_SHORT_ANSWER_HEURISTIC_MODEL_ID/, "heuristic grader must identify itself honestly");
+assert.match(grading, /modelId: draft\.modelId/, "injected external grader model identity must be recorded from the grader result");
 assert.doesNotMatch(grading, /gradeRecord|learningAssignment/i, "#36-1 grading backend must not write gradebook tables");
 assert.doesNotMatch(grading, /status:\s*"FINALIZED"|status:\s*"NON_SCORABLE"/, "AI draft processing must never finalize");
 
@@ -77,6 +83,44 @@ assert.doesNotThrow(() => assertScoreRange(tdaInput, 1));
 assert.doesNotThrow(() => assertScoreRange(tdaInput, 4));
 assert.throws(() => assertScoreRange(tdaInput, 0), /score_out_of_range/);
 
+const envBackup = {
+  OPENAI_API_KEY: process.env.OPENAI_API_KEY,
+  PSSA_WRITING_ALLOW_LOCAL_GRADER: process.env.PSSA_WRITING_ALLOW_LOCAL_GRADER,
+};
+const gradeInput = {
+  responseId: "response-1",
+  gradeLevel: 3,
+  interactionType: "SHORT_ANSWER",
+  responseText: "The passage says the bell helped because the family could hear it.",
+  prompt: "Why did the bell help?",
+  passage: "The bell helped the family find the dog.",
+  rubricId: "item-1",
+  rubricVersion: "item-hash",
+  rubricJson: {},
+  promptKey: "pssa-g3-short-answer-draft-v1",
+  inputHash: "input-hash",
+  profileAreaIds: ["completeness", "accuracy", "text_support", "explanation_clarity"],
+} as const;
+async function checkGraderProvenance() {
+  try {
+    process.env.OPENAI_API_KEY = "sk-build-dummy";
+    delete process.env.PSSA_WRITING_ALLOW_LOCAL_GRADER;
+    const unavailable = await gradePssaShortAnswer(gradeInput);
+    assert.deepEqual(unavailable, { ok: false, failureReason: "grader_unavailable" }, "OPENAI_API_KEY alone must not enable heuristic grading");
+
+    delete process.env.OPENAI_API_KEY;
+    process.env.PSSA_WRITING_ALLOW_LOCAL_GRADER = "1";
+    const localDraft = await gradePssaShortAnswer(gradeInput);
+    assert.equal(localDraft.ok, true);
+    assert.equal(localDraft.modelId, PSSA_SHORT_ANSWER_HEURISTIC_MODEL_ID, "local heuristic must record its own modelId");
+  } finally {
+    if (envBackup.OPENAI_API_KEY === undefined) delete process.env.OPENAI_API_KEY;
+    else process.env.OPENAI_API_KEY = envBackup.OPENAI_API_KEY;
+    if (envBackup.PSSA_WRITING_ALLOW_LOCAL_GRADER === undefined) delete process.env.PSSA_WRITING_ALLOW_LOCAL_GRADER;
+    else process.env.PSSA_WRITING_ALLOW_LOCAL_GRADER = envBackup.PSSA_WRITING_ALLOW_LOCAL_GRADER;
+  }
+}
+
 const caseDto = buildDiagnosticGradingCase({
   classRoomId: "class-1",
   response: {
@@ -94,4 +138,9 @@ assert.equal(caseDto.aiDraft, null);
 assert.doesNotThrow(() => assertNoBannedGradingCaseKeys(caseDto));
 assert.throws(() => assertNoBannedGradingCaseKeys({ ...caseDto, responsePayloadJson: {} }), /banned key responsePayloadJson/);
 
-console.log("PSSA writing grading backend checks passed");
+checkGraderProvenance()
+  .then(() => console.log("PSSA writing grading backend checks passed"))
+  .catch((error) => {
+    console.error(error);
+    process.exitCode = 1;
+  });

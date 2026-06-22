@@ -4,6 +4,7 @@ import { Prisma, type PrismaClient } from "@prisma/client";
 export const PSSA_WRITING_SCORER_VERSION = "pssa-writing-draft-v1";
 export const PSSA_WRITING_SHORT_ANSWER_PROMPT_KEY = "pssa-g3-short-answer-draft-v1";
 export const PSSA_WRITING_TDA_PROMPT_KEY = "pssa-tda-draft-v1";
+export const PSSA_SHORT_ANSWER_HEURISTIC_MODEL_ID = "pssa-short-answer-heuristic-v1";
 
 const G3_PROFILE_AREAS = ["completeness", "accuracy", "text_support", "explanation_clarity"] as const;
 const TDA_PROFILE_AREAS = ["task_and_controlling_idea", "text_evidence", "analysis_and_explanation", "organization_and_cohesion", "language_and_conventions"] as const;
@@ -213,8 +214,8 @@ export async function gradePssaWritingResponse(input: PssaWritingGradeInput): Pr
 }
 
 export async function gradePssaShortAnswer(input: PssaWritingGradeInput): Promise<WritingDraftResult> {
-  if (process.env.NODE_ENV === "production" && !process.env.OPENAI_API_KEY && process.env.PSSA_WRITING_ALLOW_LOCAL_GRADER !== "1") {
-    return { ok: false, failureReason: "model_unavailable" };
+  if (process.env.PSSA_WRITING_ALLOW_LOCAL_GRADER !== "1") {
+    return { ok: false, failureReason: "grader_unavailable" };
   }
   const words = input.responseText.trim().split(/\s+/).filter(Boolean);
   if (!words.length) return { ok: false, failureReason: "blank_response" };
@@ -231,7 +232,7 @@ export async function gradePssaShortAnswer(input: PssaWritingGradeInput): Promis
       area("text_support", supportWords >= 1 ? "emerging" : "needs_support", "Text support language is limited or emerging.", excerpt(input.responseText), "Prompt for one detail from the passage."),
       area("explanation_clarity", words.length >= 16 ? "emerging" : "needs_support", "The explanation may need clearer reasoning.", undefined, "Have the student explain how the detail proves the answer."),
     ],
-    modelId: process.env.OPENAI_API_KEY ? "external-writing-grader" : "local-deterministic-dev",
+    modelId: PSSA_SHORT_ANSWER_HEURISTIC_MODEL_ID,
   };
 }
 
