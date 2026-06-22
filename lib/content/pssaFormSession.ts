@@ -4,6 +4,7 @@ import { pssaNoStoreHeaders } from "@/lib/content/pssaItemReview";
 import { isPssaFigureFeature, projectPssaFigureFeatureForStudent } from "@/lib/content/pssaFigureFeature";
 import { projectPssaStudentItem } from "@/lib/content/pssaStudentDto";
 import { scorePssaItem, type PssaScoreResult } from "@/lib/content/pssaScoring";
+import { preparePssaWritingEvaluationForResponse } from "@/lib/content/pssaWritingGrading";
 import { consumeRateLimit, getClientIp } from "@/lib/rateLimit";
 import { getStudentReadyPssaItems } from "@/scripts/content/lib/pssa-student-ready-selector";
 import { verifyPssaFormSnapshots } from "@/scripts/content/lib/pssa-form-assembly";
@@ -317,6 +318,7 @@ export async function submitPssaSession(db: PssaDb, input: { auth: PssaRouteUser
     },
   });
   const refreshed = await loadSession(db, input.sessionId);
+  await enqueueSubmittedWritingResponses(db, refreshed);
   return sessionStateDto(refreshed);
 }
 
@@ -455,6 +457,17 @@ function sessionInclude() {
     form: { include: formInclude() },
     responses: { include: { formItem: true }, orderBy: { positionSnapshot: "asc" } },
   };
+}
+
+async function enqueueSubmittedWritingResponses(db: PssaDb, session: LoadedSession) {
+  for (const response of session.responses) {
+    if (response.scoreStatus !== "pending_human_scoring") continue;
+    try {
+      await preparePssaWritingEvaluationForResponse(db, response.id);
+    } catch {
+      // Best effort only: grading reconciliation can recreate missing jobs.
+    }
+  }
 }
 
 function formInclude() {

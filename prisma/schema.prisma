@@ -202,6 +202,35 @@ enum PssaFormResponseScoreStatus {
   invalid_response
 }
 
+enum PssaWritingEvaluationStatus {
+  PENDING
+  DRAFTED
+  FAILED
+  FINALIZED
+  NON_SCORABLE
+}
+
+enum PssaWritingAttemptKind {
+  AI_DRAFT
+  TEACHER_FINAL
+  TEACHER_OVERRIDE
+}
+
+enum PssaWritingNonScorableReason {
+  BLANK
+  REFUSAL
+  OFF_TOPIC
+  COPIED
+  OTHER
+}
+
+enum PssaWritingGradingJobStatus {
+  PENDING
+  RUNNING
+  COMPLETED
+  FAILED
+}
+
 enum PssaPassageRole {
   primary
   secondary
@@ -244,25 +273,26 @@ model User {
   lessonProgress               StudentLessonProgress[]
   questAttempts                LearningQuestAttempt[]
   readingCoachAttempts         ReadingCoachAttempt[]
-  readingCoachAssignments      ReadingCoachAssignment[] @relation("ReadingCoachAssignedBy")
+  readingCoachAssignments      ReadingCoachAssignment[]       @relation("ReadingCoachAssignedBy")
   resourceLinks                ResourceLink[]
-  resourceSuggestions          ResourceSuggestion[]     @relation("ResourceSuggester")
-  reviewedResourceSuggestions  ResourceSuggestion[]     @relation("ResourceReviewer")
+  resourceSuggestions          ResourceSuggestion[]           @relation("ResourceSuggester")
+  reviewedResourceSuggestions  ResourceSuggestion[]           @relation("ResourceReviewer")
   tutorMemory                  TutorAgentMemory?
   tutorMessages                TutorAgentMessage[]
   passwordResetTokens          PasswordResetToken[]
   verificationTokens           VerificationToken[]
   lessonReviews                LessonReview[]
   parentalConsent              ParentalConsent?
-  dataSubjectRequests          DataSubjectRequest[]     @relation("DSRRequester")
-  processedDataSubjectRequests DataSubjectRequest[]     @relation("DSRProcessor")
+  dataSubjectRequests          DataSubjectRequest[]           @relation("DSRRequester")
+  processedDataSubjectRequests DataSubjectRequest[]           @relation("DSRProcessor")
   literacyProfile              LiteracyProfile?
   stateRequests                StateRequests[]
-  voiceConsent                 VoiceConsent?            @relation("StudentConsent")
-  studentEvents                StudentEvent[]           @relation("StudentEvents")
+  voiceConsent                 VoiceConsent?                  @relation("StudentConsent")
+  studentEvents                StudentEvent[]                 @relation("StudentEvents")
   pssaFormSessions             PssaFormSession[]
-  assignedLearningAssignments  LearningAssignment[]     @relation("LearningAssignmentAssignedBy")
-  finalizedGradeRecords        GradeRecord[]            @relation("GradeRecordFinalizedBy")
+  assignedLearningAssignments  LearningAssignment[]           @relation("LearningAssignmentAssignedBy")
+  finalizedGradeRecords        GradeRecord[]                  @relation("GradeRecordFinalizedBy")
+  reviewedWritingAttempts      PssaWritingEvaluationAttempt[] @relation("reviewedByUser")
 }
 
 model PendingStudentSignup {
@@ -982,15 +1012,98 @@ model PssaFormResponse {
   createdAt           DateTime                    @default(now())
   updatedAt           DateTime                    @updatedAt
 
-  session  PssaFormSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
-  formItem PssaFormItem    @relation(fields: [formItemId], references: [id], onDelete: Restrict)
-  item     PssaItem        @relation(fields: [itemId], references: [id], onDelete: Restrict)
+  session           PssaFormSession        @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  formItem          PssaFormItem           @relation(fields: [formItemId], references: [id], onDelete: Restrict)
+  item              PssaItem               @relation(fields: [itemId], references: [id], onDelete: Restrict)
+  writingEvaluation PssaWritingEvaluation?
 
   @@unique([sessionId, formItemId])
   @@unique([sessionId, positionSnapshot])
   @@index([sessionId])
   @@index([formItemId])
   @@index([itemId])
+}
+
+model PssaWritingEvaluation {
+  id                    String                      @id @default(cuid())
+  responseId            String                      @unique
+  responseHash          String
+  rubricId              String
+  rubricVersion         String
+  rubricContentHash     String
+  currentInputHash      String
+  promptHash            String
+  passageContentHash    String
+  anchorSetContentHash  String?
+  status                PssaWritingEvaluationStatus @default(PENDING)
+  failureReason         String?
+  currentDraftAttemptId String?                     @unique
+  currentFinalAttemptId String?                     @unique
+  createdAt             DateTime                    @default(now())
+  updatedAt             DateTime                    @updatedAt
+
+  response            PssaFormResponse               @relation(fields: [responseId], references: [id], onDelete: Cascade)
+  attempts            PssaWritingEvaluationAttempt[] @relation("writingEvaluationAttempts")
+  jobs                PssaWritingGradingJob[]
+  currentDraftAttempt PssaWritingEvaluationAttempt?  @relation("currentDraftAttempt", fields: [currentDraftAttemptId], references: [id], onDelete: SetNull)
+  currentFinalAttempt PssaWritingEvaluationAttempt?  @relation("currentFinalAttempt", fields: [currentFinalAttemptId], references: [id], onDelete: SetNull)
+
+  @@index([status, updatedAt])
+  @@index([currentInputHash])
+}
+
+model PssaWritingEvaluationAttempt {
+  id                       String                        @id @default(cuid())
+  evaluationId             String
+  attemptNumber            Int
+  kind                     PssaWritingAttemptKind
+  attemptIdempotencyKey    String                        @unique
+  inputHash                String
+  responseHash             String
+  score                    Int?
+  nonScorableReason        PssaWritingNonScorableReason?
+  rationale                String?                       @db.Text
+  instructionalProfileJson Json?
+  scorerVersion            String
+  promptKey                String
+  modelId                  String?
+  anchorSetVersion         String?
+  reviewedByUserId         String?
+  overrideReason           String?                       @db.Text
+  reviewedAt               DateTime?
+  createdAt                DateTime                      @default(now())
+
+  evaluation                PssaWritingEvaluation  @relation("writingEvaluationAttempts", fields: [evaluationId], references: [id], onDelete: Cascade)
+  currentDraftForEvaluation PssaWritingEvaluation? @relation("currentDraftAttempt")
+  currentFinalForEvaluation PssaWritingEvaluation? @relation("currentFinalAttempt")
+  reviewedByUser            User?                  @relation("reviewedByUser", fields: [reviewedByUserId], references: [id], onDelete: Restrict)
+
+  @@unique([evaluationId, attemptNumber])
+  @@index([evaluationId, kind, inputHash])
+  @@index([inputHash])
+  @@index([reviewedByUserId])
+}
+
+model PssaWritingGradingJob {
+  id           String                      @id @default(cuid())
+  evaluationId String
+  responseId   String
+  inputHash    String
+  jobKey       String                      @unique
+  status       PssaWritingGradingJobStatus @default(PENDING)
+  attempts     Int                         @default(0)
+  lastError    String?                     @db.Text
+  startedAt    DateTime?
+  completedAt  DateTime?
+  createdAt    DateTime                    @default(now())
+  updatedAt    DateTime                    @updatedAt
+
+  evaluation PssaWritingEvaluation @relation(fields: [evaluationId], references: [id], onDelete: Cascade)
+
+  @@index([status, createdAt])
+  @@index([evaluationId])
+  @@index([responseId])
+  @@index([inputHash])
 }
 
 model Assignment {
