@@ -218,6 +218,42 @@ const expectedK3Theme: PresentationTheme = {
   },
 };
 
+const expectedCoachTheme: PresentationTheme = {
+  layout: {
+    showAdultEvidencePanel: false,
+    page: "min-h-screen bg-slate-100 px-3 py-4 text-slate-900 md:px-5",
+    grid: "mx-auto grid max-w-7xl gap-4 lg:grid-cols-[104px_minmax(0,1fr)]",
+  },
+  shell: {
+    rail: "rounded-[28px] border border-slate-200 bg-white p-3 shadow-sm lg:sticky lg:top-5 lg:h-[calc(100vh-2.5rem)]",
+    brandBadge: "grid h-14 w-14 place-items-center rounded-2xl bg-indigo-600 text-xl font-black text-white",
+    brandText: "text-xs font-black uppercase tracking-wide text-indigo-700",
+    navActive: "border-indigo-300 bg-indigo-50 text-indigo-900",
+    navComplete: "border-emerald-300 bg-emerald-50 text-emerald-800",
+    navIdle: "border-slate-200 bg-white text-slate-600",
+    header: "flex flex-col gap-3 rounded-[28px] border border-slate-200 bg-white p-4 shadow-sm md:flex-row md:items-center md:justify-between",
+    targetPill: "inline-flex rounded-full border border-indigo-200 bg-indigo-50 px-3 py-1 text-xs font-black text-indigo-900",
+    secondaryButton: "rounded-2xl border border-slate-300 bg-white px-4 py-3 text-sm font-black text-slate-700",
+    primaryButton: "rounded-2xl bg-indigo-600 px-4 py-3 text-sm font-black text-white shadow",
+    lessonFrame: "grid min-h-[650px] overflow-hidden rounded-[28px] border border-slate-200 bg-white shadow-sm lg:grid-cols-[260px_minmax(0,1fr)]",
+    buddyPanel: "border-b border-slate-200 bg-slate-50 p-5 text-center lg:border-b-0 lg:border-r",
+    speechBubble: "rounded-3xl border border-slate-200 bg-slate-50 p-4 text-left text-sm font-extrabold leading-relaxed text-slate-800",
+    metaBox: "mt-4 rounded-3xl border border-dashed border-slate-300 bg-slate-50 p-4 text-left text-xs font-black text-slate-600",
+    activitySurface: "flex flex-1 flex-col rounded-[26px] border border-slate-200 bg-white p-5",
+    adultPanel: "hidden rounded-[28px] border border-[#e8d9c7] bg-[#fffaf3]/90 p-4 shadow-xl lg:sticky lg:top-5 lg:flex lg:h-[calc(100vh-2.5rem)] lg:flex-col lg:gap-4",
+  },
+  cards: {
+    blueNotice: "rounded-3xl border-2 border-indigo-200 bg-indigo-50 p-4 text-base font-black leading-relaxed text-indigo-900",
+    amberNotice: "rounded-3xl border-2 border-indigo-300 bg-indigo-50 p-5 text-xl font-black leading-relaxed text-slate-900",
+    demoCard: "rounded-3xl border-2 border-slate-200 bg-white p-6 text-center",
+    generatedCard: "rounded-3xl border-2 border-slate-200 bg-white p-4",
+    neutralCard: "rounded-3xl border border-slate-200 bg-white p-4",
+    dashedCard: "mx-auto max-w-xl rounded-3xl border-2 border-dashed border-slate-300 bg-white p-6",
+    primaryAction: "rounded-2xl bg-indigo-600 px-5 py-4 font-black text-white disabled:cursor-not-allowed disabled:opacity-50",
+    secondaryAction: "rounded-2xl border border-slate-300 bg-white px-5 py-4 font-black text-slate-700 disabled:cursor-not-allowed disabled:opacity-50",
+  },
+};
+
 function main() {
   assert.deepStrictEqual(presentationCopyFor("BAND_K_3"), expectedK3Copy, "BAND_K_3 copy must match the hardcoded K-3 snapshot");
   assert.deepStrictEqual(presentationCopyFor(undefined), expectedK3Copy, "undefined profile must resolve to K-3 copy");
@@ -228,6 +264,7 @@ function main() {
 
   const coachCopy = presentationCopyFor("BAND_7_8");
   const coachTheme = presentationThemeFor("BAND_7_8");
+  assert.deepStrictEqual(coachTheme, expectedCoachTheme, "BAND_7_8 theme must match the hardcoded Coach Mode snapshot");
   assert.notDeepStrictEqual(coachCopy, expectedK3Copy, "BAND_7_8 copy should differ from K-3");
   assert.notDeepStrictEqual(coachTheme, expectedK3Theme, "BAND_7_8 theme should differ from K-3");
   assert.equal(coachCopy.listenAttempt.pseudoword.title.includes("nonsense words"), true, "BAND_7_8 should say nonsense words");
