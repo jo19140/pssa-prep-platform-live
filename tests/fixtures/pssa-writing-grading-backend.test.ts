@@ -123,6 +123,7 @@ async function checkGraderProvenance() {
 
 const caseDto = buildDiagnosticGradingCase({
   classRoomId: "class-1",
+  concurrencyToken: "opaque-token",
   response: {
     id: "response-1",
     responsePayloadJson: { shortResponse: "The bell helped the family." },

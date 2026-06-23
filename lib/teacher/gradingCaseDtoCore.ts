@@ -6,6 +6,7 @@ export type GradingCase = {
   studentName: string;
   classRoomId: string;
   formId: string;
+  concurrencyToken: string;
   prompt: string;
   responseText: string;
   rubricId: string;
@@ -40,6 +41,7 @@ export function buildDiagnosticGradingCase(input: {
     } | null;
   };
   classRoomId: string;
+  concurrencyToken: string;
 }): GradingCase {
   const evaluation = input.response.writingEvaluation ?? null;
   const draft = evaluation?.currentDraftAttempt && evaluation.currentDraftAttempt.inputHash === evaluation.currentInputHash
@@ -52,6 +54,7 @@ export function buildDiagnosticGradingCase(input: {
     studentName: input.response.session.user.name,
     classRoomId: input.classRoomId,
     formId: input.response.session.formId,
+    concurrencyToken: input.concurrencyToken,
     prompt: promptText(input.response.formItem.item.responseSpecJson),
     responseText: responseText(input.response.responsePayloadJson),
     rubricId: input.response.formItem.item.id,

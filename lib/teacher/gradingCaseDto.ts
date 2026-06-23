@@ -1,6 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import { db } from "@/lib/db";
 import { assertNoBannedGradingCaseKeys, buildDiagnosticGradingCase, type GradingCase } from "@/lib/teacher/gradingCaseDtoCore";
+import { computeDiagnosticWritingConcurrencyToken } from "@/lib/teacher/diagnosticWritingFinalize";
 
 export async function loadDiagnosticGradingCasesForTeacher(
   userId: string,
@@ -27,12 +28,25 @@ export async function loadDiagnosticGradingCasesForTeacher(
     },
     include: {
       session: { include: { user: { select: { name: true } } } },
-      formItem: { include: { item: true } },
+      formItem: { include: { item: { include: { passages: { include: { passage: true }, orderBy: { sortOrder: "asc" } } } }, form: { include: { passages: { include: { passage: true } } } } } },
       writingEvaluation: { include: { currentDraftAttempt: true } },
     },
     orderBy: [{ session: { user: { name: "asc" } } }, { positionSnapshot: "asc" }],
   });
-  const cases = responses.map((response) => buildDiagnosticGradingCase({ response: response as any, classRoomId: input.classRoomId }));
+  const cases = [];
+  for (const response of responses) {
+    const caseId = `diagnostic:${response.id}`;
+    cases.push(buildDiagnosticGradingCase({
+      response: response as any,
+      classRoomId: input.classRoomId,
+      concurrencyToken: await computeDiagnosticWritingConcurrencyToken(database, {
+        caseId,
+        classRoomId: input.classRoomId,
+        formId: input.formId,
+        responseId: response.id,
+      }),
+    }));
+  }
   assertNoBannedGradingCaseKeys(cases);
   return { cases };
 }

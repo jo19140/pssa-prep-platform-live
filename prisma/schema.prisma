@@ -293,6 +293,7 @@ model User {
   assignedLearningAssignments  LearningAssignment[]           @relation("LearningAssignmentAssignedBy")
   finalizedGradeRecords        GradeRecord[]                  @relation("GradeRecordFinalizedBy")
   reviewedWritingAttempts      PssaWritingEvaluationAttempt[] @relation("reviewedByUser")
+  writingFinalizeReceipts      PssaWritingFinalizeReceipt[]
 }
 
 model PendingStudentSignup {
@@ -1007,6 +1008,7 @@ model PssaFormResponse {
   responsePayloadJson Json
   scoreStatus         PssaFormResponseScoreStatus
   pointsEarned        Int?
+  conditionCode       PssaWritingNonScorableReason?
   maxPoints           Int
   detail              String
   createdAt           DateTime                    @default(now())
@@ -1045,6 +1047,7 @@ model PssaWritingEvaluation {
   response            PssaFormResponse               @relation(fields: [responseId], references: [id], onDelete: Cascade)
   attempts            PssaWritingEvaluationAttempt[] @relation("writingEvaluationAttempts")
   jobs                PssaWritingGradingJob[]
+  finalizeReceipts    PssaWritingFinalizeReceipt[]
   currentDraftAttempt PssaWritingEvaluationAttempt?  @relation("currentDraftAttempt", fields: [currentDraftAttemptId], references: [id], onDelete: SetNull)
   currentFinalAttempt PssaWritingEvaluationAttempt?  @relation("currentFinalAttempt", fields: [currentFinalAttemptId], references: [id], onDelete: SetNull)
 
@@ -1076,6 +1079,7 @@ model PssaWritingEvaluationAttempt {
   evaluation                PssaWritingEvaluation  @relation("writingEvaluationAttempts", fields: [evaluationId], references: [id], onDelete: Cascade)
   currentDraftForEvaluation PssaWritingEvaluation? @relation("currentDraftAttempt")
   currentFinalForEvaluation PssaWritingEvaluation? @relation("currentFinalAttempt")
+  finalizeReceipts          PssaWritingFinalizeReceipt[]
   reviewedByUser            User?                  @relation("reviewedByUser", fields: [reviewedByUserId], references: [id], onDelete: Restrict)
 
   @@unique([evaluationId, attemptNumber])
@@ -1104,6 +1108,24 @@ model PssaWritingGradingJob {
   @@index([evaluationId])
   @@index([responseId])
   @@index([inputHash])
+}
+
+model PssaWritingFinalizeReceipt {
+  id              String   @id @default(cuid())
+  idempotencyKey  String   @unique
+  requestHash     String
+  evaluationId    String
+  teacherUserId   String
+  resultAttemptId String?
+  createdAt       DateTime @default(now())
+
+  evaluation    PssaWritingEvaluation         @relation(fields: [evaluationId], references: [id], onDelete: Cascade)
+  teacher       User                          @relation(fields: [teacherUserId], references: [id], onDelete: Restrict)
+  resultAttempt PssaWritingEvaluationAttempt? @relation(fields: [resultAttemptId], references: [id], onDelete: SetNull)
+
+  @@index([evaluationId])
+  @@index([teacherUserId])
+  @@index([resultAttemptId])
 }
 
 model Assignment {
