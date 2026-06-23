@@ -1,4 +1,4 @@
-export type PssaFigureStructuredData = {
+export type PssaFigureMapStructuredData = {
   legend: Array<{ symbol: string; meaning: string }>;
   locations: Array<{ id: string; label: string; level: string; notes?: string }>;
   relationships: Array<{ id: string; type: "adjacent_to" | "separated_from"; from: string; to: string }>;
@@ -6,9 +6,21 @@ export type PssaFigureStructuredData = {
   annotations: Array<{ label: string; value: string }>;
 };
 
-export type PssaFigureFeature = {
+export type PssaFigureStructuredData = PssaFigureMapStructuredData;
+
+export type PssaFigureProcessStage = {
+  order: number;
+  targetId: string;
+  label: string;
+  caption: string;
+};
+
+export type PssaFigureProcessStructuredData = {
+  stages: PssaFigureProcessStage[];
+};
+
+type PssaFigureFeatureBase = {
   type: "figure";
-  figureKind: "map";
   featureId: string;
   title: string;
   sectionId: string;
@@ -29,7 +41,22 @@ export type PssaFigureFeature = {
   linkedByItemIds?: string[];
 };
 
-export type PssaStudentFigureFeature = {
+export type PssaFigureMapFeature = PssaFigureFeatureBase & { figureKind: "map"; structuredData: PssaFigureMapStructuredData };
+export type PssaFigureProcessFeature = PssaFigureFeatureBase & { figureKind: "process"; structuredData: PssaFigureProcessStructuredData };
+type PssaFigureFeatureCompat = PssaFigureFeatureBase & {
+  figureKind: "map" | "process";
+  structuredData: PssaFigureMapStructuredData | PssaFigureProcessStructuredData;
+};
+
+export type PssaFigureFeature =
+  | PssaFigureMapFeature
+  | PssaFigureProcessFeature
+  | (PssaFigureFeatureBase & { figureKind: "map"; structuredData: PssaFigureMapStructuredData })
+  | (PssaFigureFeatureBase & { figureKind: "process"; structuredData: PssaFigureProcessStructuredData })
+  | PssaFigureFeatureCompat;
+
+export type PssaStudentFigureFeature =
+  | {
   type: "figure";
   figureKind: "map";
   featureId: string;
@@ -38,14 +65,31 @@ export type PssaStudentFigureFeature = {
   src: string;
   altText: string;
   longDescription: string;
-  structuredData: PssaFigureStructuredData;
-};
+      structuredData: PssaFigureMapStructuredData;
+    }
+  | {
+      type: "figure";
+      figureKind: "process";
+      featureId: string;
+      title: string;
+      sectionId: string;
+      src: string;
+      altText: string;
+      longDescription: string;
+      structuredData: PssaFigureProcessStructuredData;
+    };
 
 export function isPssaFigureFeature(value: unknown): value is PssaFigureFeature {
   return Boolean(value && typeof value === "object" && !Array.isArray(value) && (value as Record<string, unknown>).type === "figure");
 }
 
-export function generatePssaFigureLongDescription(data: PssaFigureStructuredData) {
+export function generatePssaFigureLongDescription(data: PssaFigureMapStructuredData | PssaFigureProcessStructuredData) {
+  if (isProcessStructuredData(data)) {
+    return [
+      `This diagram shows ${data.stages.length} steps in order.`,
+      ...data.stages.map((stage) => `Step ${stage.order}: ${stage.label}. ${stage.caption}`),
+    ].join(" ");
+  }
   const lines: string[] = [];
   lines.push("Legend:");
   for (const row of data.legend) lines.push(`- ${row.symbol}: ${row.meaning}`);
@@ -78,11 +122,12 @@ export function validatePssaFigureFeatureShared(feature: unknown, sectionIds: It
   requireNonEmpty(feature.title, "figure_title_missing");
   requireNonEmpty(feature.sectionId, "figure_section_id_missing");
   if (!sections.has(feature.sectionId)) throw new Error(`figure_section_unknown:${feature.sectionId}`);
-  if (feature.figureKind !== "map") throw new Error("figure_kind_unsupported");
   requireSafePublicFigurePath(feature.assetPath);
   if (!/^sha256:[0-9a-f]{64}$/.test(feature.assetSha256)) throw new Error("figure_asset_sha256_invalid");
   requireNonEmpty(feature.altText, "figure_alt_text_missing");
-  requireStructuredData(feature.structuredData);
+  if (feature.figureKind === "map") requireMapStructuredData(feature.structuredData as PssaFigureMapStructuredData);
+  else if (feature.figureKind === "process") requireProcessStructuredData(feature.structuredData as PssaFigureProcessStructuredData);
+  else throw new Error("figure_kind_unsupported");
   const generated = generatePssaFigureLongDescription(feature.structuredData);
   if (feature.longDescription !== generated) throw new Error("figure_long_description_mismatch");
   return true;
@@ -101,7 +146,7 @@ export function validateUniquePssaFigureFeatureIds(features: unknown[]) {
 export function projectPssaFigureFeatureForStudent(feature: PssaFigureFeature): PssaStudentFigureFeature {
   return {
     type: "figure",
-    figureKind: "map",
+    figureKind: feature.figureKind,
     featureId: feature.featureId,
     title: feature.title,
     sectionId: feature.sectionId,
@@ -109,7 +154,7 @@ export function projectPssaFigureFeatureForStudent(feature: PssaFigureFeature): 
     altText: feature.altText,
     longDescription: feature.longDescription,
     structuredData: cloneStructuredData(feature.structuredData),
-  };
+  } as PssaStudentFigureFeature;
 }
 
 export function pssaFigureHashInput(feature: PssaFigureFeature) {
@@ -139,7 +184,7 @@ export function requireSafePublicFigurePath(assetPath: string) {
   return true;
 }
 
-function requireStructuredData(data: PssaFigureStructuredData) {
+function requireMapStructuredData(data: PssaFigureMapStructuredData) {
   if (!data || typeof data !== "object" || Array.isArray(data)) throw new Error("figure_structured_data_missing");
   for (const key of ["legend", "locations", "relationships", "routes", "annotations"] as const) {
     if (!Array.isArray(data[key]) || !data[key].length) throw new Error(`figure_structured_data_${key}_missing`);
@@ -170,6 +215,26 @@ function requireStructuredData(data: PssaFigureStructuredData) {
   }
 }
 
+function requireProcessStructuredData(data: PssaFigureProcessStructuredData) {
+  if (!data || typeof data !== "object" || Array.isArray(data)) throw new Error("figure_structured_data_missing");
+  if (!Array.isArray(data.stages) || data.stages.length < 2) throw new Error("figure_structured_data_stages_missing");
+  const expectedOrders = data.stages.map((_, index) => index + 1);
+  const actualOrders = data.stages.map((stage) => stage?.order);
+  if (JSON.stringify(actualOrders) !== JSON.stringify(expectedOrders)) throw new Error("figure_process_stage_order_invalid");
+  const targetIds = new Set<string>();
+  for (const stage of data.stages) {
+    requireNonEmpty(stage.targetId, `figure_process_stage_target_id_missing:${stage.order}`);
+    if (targetIds.has(stage.targetId)) throw new Error(`figure_process_stage_target_id_duplicate:${stage.targetId}`);
+    targetIds.add(stage.targetId);
+    requireNonEmpty(stage.label, `figure_process_stage_label_missing:${stage.order}`);
+    requireNonEmpty(stage.caption, `figure_process_stage_caption_missing:${stage.order}`);
+  }
+}
+
+function isProcessStructuredData(data: PssaFigureMapStructuredData | PssaFigureProcessStructuredData): data is PssaFigureProcessStructuredData {
+  return Boolean(data && typeof data === "object" && !Array.isArray(data) && Array.isArray((data as PssaFigureProcessStructuredData).stages));
+}
+
 function uniqueIds(rows: Array<{ id: string }>, label: string) {
   const ids = new Set<string>();
   for (const row of rows) {
@@ -184,11 +249,18 @@ function requireNonEmpty(value: unknown, error: string) {
   if (typeof value !== "string" || !value.trim()) throw new Error(error);
 }
 
-function labelFor(data: PssaFigureStructuredData, id: string) {
+function labelFor(data: PssaFigureMapStructuredData, id: string) {
   return data.locations.find((row) => row.id === id)?.label ?? id;
 }
 
-function cloneStructuredData(data: PssaFigureStructuredData): PssaFigureStructuredData {
+function cloneStructuredData(data: PssaFigureMapStructuredData): PssaFigureMapStructuredData;
+function cloneStructuredData(data: PssaFigureProcessStructuredData): PssaFigureProcessStructuredData;
+function cloneStructuredData(data: PssaFigureMapStructuredData | PssaFigureProcessStructuredData): PssaFigureMapStructuredData | PssaFigureProcessStructuredData {
+  if (isProcessStructuredData(data)) {
+    return {
+      stages: data.stages.map((stage) => ({ ...stage })),
+    };
+  }
   return {
     legend: data.legend.map((row) => ({ ...row })),
     locations: data.locations.map((row) => ({ ...row })),

@@ -2,7 +2,7 @@ import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
 
-import { isPssaFigureFeature, requireSafePublicFigurePath, type PssaFigureFeature } from "../../../lib/content/pssaFigureFeature";
+import { isPssaFigureFeature, requireSafePublicFigurePath, type PssaFigureFeature, type PssaFigureMapStructuredData, type PssaFigureProcessStructuredData } from "../../../lib/content/pssaFigureFeature";
 
 const ALLOWED_ELEMENTS = new Set(["svg", "g", "rect", "line", "path", "polyline", "polygon", "circle", "text", "tspan", "title", "desc"]);
 const ALLOWED_ATTRIBUTES = new Set([
@@ -90,12 +90,14 @@ export function svgTextLabels(raw: string) {
 function assertSvgLabelsMatchStructuredData(raw: string, feature: PssaFigureFeature) {
   const labels = svgTextLabels(raw);
   const haystack = labels.join(" | ");
-  const required = [
-    feature.title,
-    ...feature.structuredData.legend.flatMap((row) => [row.symbol, row.meaning]),
-    ...feature.structuredData.locations.map((row) => row.label),
-    ...feature.structuredData.annotations.flatMap((row) => [row.label, row.value]),
-  ];
+  const required = feature.figureKind === "process"
+    ? [feature.title, ...(feature.structuredData as PssaFigureProcessStructuredData).stages.flatMap((stage) => [stage.label, stage.caption])]
+    : [
+        feature.title,
+        ...(feature.structuredData as PssaFigureMapStructuredData).legend.flatMap((row) => [row.symbol, row.meaning]),
+        ...(feature.structuredData as PssaFigureMapStructuredData).locations.map((row) => row.label),
+        ...(feature.structuredData as PssaFigureMapStructuredData).annotations.flatMap((row) => [row.label, row.value]),
+      ];
   for (const label of required) {
     if (label && !haystack.includes(label)) throw new Error(`figure_svg_label_missing:${label}`);
   }
