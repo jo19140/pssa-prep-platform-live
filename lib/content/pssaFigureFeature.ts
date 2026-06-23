@@ -43,28 +43,18 @@ type PssaFigureFeatureBase = {
 
 export type PssaFigureMapFeature = PssaFigureFeatureBase & { figureKind: "map"; structuredData: PssaFigureMapStructuredData };
 export type PssaFigureProcessFeature = PssaFigureFeatureBase & { figureKind: "process"; structuredData: PssaFigureProcessStructuredData };
-type PssaFigureFeatureCompat = PssaFigureFeatureBase & {
-  figureKind: "map" | "process";
-  structuredData: PssaFigureMapStructuredData | PssaFigureProcessStructuredData;
-};
-
-export type PssaFigureFeature =
-  | PssaFigureMapFeature
-  | PssaFigureProcessFeature
-  | (PssaFigureFeatureBase & { figureKind: "map"; structuredData: PssaFigureMapStructuredData })
-  | (PssaFigureFeatureBase & { figureKind: "process"; structuredData: PssaFigureProcessStructuredData })
-  | PssaFigureFeatureCompat;
+export type PssaFigureFeature = PssaFigureMapFeature | PssaFigureProcessFeature;
 
 export type PssaStudentFigureFeature =
   | {
-  type: "figure";
-  figureKind: "map";
-  featureId: string;
-  title: string;
-  sectionId: string;
-  src: string;
-  altText: string;
-  longDescription: string;
+      type: "figure";
+      figureKind: "map";
+      featureId: string;
+      title: string;
+      sectionId: string;
+      src: string;
+      altText: string;
+      longDescription: string;
       structuredData: PssaFigureMapStructuredData;
     }
   | {
@@ -125,8 +115,8 @@ export function validatePssaFigureFeatureShared(feature: unknown, sectionIds: It
   requireSafePublicFigurePath(feature.assetPath);
   if (!/^sha256:[0-9a-f]{64}$/.test(feature.assetSha256)) throw new Error("figure_asset_sha256_invalid");
   requireNonEmpty(feature.altText, "figure_alt_text_missing");
-  if (feature.figureKind === "map") requireMapStructuredData(feature.structuredData as PssaFigureMapStructuredData);
-  else if (feature.figureKind === "process") requireProcessStructuredData(feature.structuredData as PssaFigureProcessStructuredData);
+  if (feature.figureKind === "map") requireMapStructuredData(feature.structuredData);
+  else if (feature.figureKind === "process") requireProcessStructuredData(feature.structuredData);
   else throw new Error("figure_kind_unsupported");
   const generated = generatePssaFigureLongDescription(feature.structuredData);
   if (feature.longDescription !== generated) throw new Error("figure_long_description_mismatch");
@@ -144,17 +134,30 @@ export function validateUniquePssaFigureFeatureIds(features: unknown[]) {
 }
 
 export function projectPssaFigureFeatureForStudent(feature: PssaFigureFeature): PssaStudentFigureFeature {
+  if (feature.figureKind === "map") {
+    return {
+      type: "figure",
+      figureKind: "map",
+      featureId: feature.featureId,
+      title: feature.title,
+      sectionId: feature.sectionId,
+      src: feature.assetPath,
+      altText: feature.altText,
+      longDescription: feature.longDescription,
+      structuredData: cloneStructuredData(feature.structuredData),
+    };
+  }
   return {
     type: "figure",
-    figureKind: feature.figureKind,
+    figureKind: "process",
     featureId: feature.featureId,
     title: feature.title,
     sectionId: feature.sectionId,
     src: feature.assetPath,
     altText: feature.altText,
     longDescription: feature.longDescription,
-    structuredData: cloneStructuredData(feature.structuredData),
-  } as PssaStudentFigureFeature;
+    structuredData: cloneStructuredData(feature.structuredData as PssaFigureProcessStructuredData),
+  };
 }
 
 export function pssaFigureHashInput(feature: PssaFigureFeature) {

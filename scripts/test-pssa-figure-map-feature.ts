@@ -8,7 +8,7 @@ import {
   requireSafePublicFigurePath,
   validatePssaFigureFeatureShared,
   validateUniquePssaFigureFeatureIds,
-  type PssaFigureFeature,
+  type PssaFigureMapFeature,
   type PssaFigureStructuredData,
 } from "../lib/content/pssaFigureFeature";
 import { assertNoBannedKeys } from "../lib/content/pssaStudentDto";
@@ -35,7 +35,9 @@ import {
 const ASSET_PATH = PSSA_MOY_P1_FIGURE_ASSET_PATH;
 const ASSET_SHA256 = PSSA_MOY_P1_FIGURE_ASSET_SHA256;
 
-function museumFigure(overrides: Partial<PssaFigureFeature> = {}): PssaFigureFeature {
+function museumFigure(
+  overrides: Partial<PssaFigureMapFeature> = {},
+): PssaFigureMapFeature {
   const structuredData = overrides.structuredData ?? museumStructuredData();
   return {
     type: "figure",
@@ -159,7 +161,7 @@ for (const [field, changed] of [
   ["altText", { ...figure, altText: "Changed alt" }],
 ] as const) {
   if (field === "figureKind") continue;
-  assert.notEqual(computePssaPassageContentHash(passageWithFigure(changed as PssaFigureFeature)), baseHash, `${field} changes figure-bearing passage hash`);
+  assert.notEqual(computePssaPassageContentHash(passageWithFigure(changed as PssaFigureMapFeature)), baseHash, `${field} changes figure-bearing passage hash`);
 }
 const changedData = museumStructuredData();
 changedData.annotations[0] = { ...changedData.annotations[0], value: "12:00" };
