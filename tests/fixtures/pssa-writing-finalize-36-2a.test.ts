@@ -25,7 +25,7 @@ assert.match(route, /decisionSchema/, "route must validate discriminated SCORE/N
 
 assert.match(service, /Serializable/, "finalize transaction must use serializable isolation");
 assert.match(service, /FOR UPDATE/g, "finalize path must lock rows");
-assert.match(service, /preparePssaWritingEvaluationForResponse\(tx, input\.responseId\)/, "no-eval case must ensure/create evaluation through #36-1 path");
+assert.match(service, /preparePssaWritingEvaluationForResponse\(tx, input\.responseId,\s*\{\s*enqueue: false\s*\}\)/, "no-eval case must ensure/create evaluation through #36-1 path without enqueueing");
 assert.match(service, /resolveWritingSnapshot\(loaded\)/, "concurrency/input hash must reuse #36-1 snapshot resolver");
 assert.match(service, /buildWritingInputState\(loaded, snapshot\)/, "inputHash must reuse #36-1 builder");
 assert.match(service, /expectedConcurrencyToken !== actualToken[\s\S]*stale_grading_case/, "fresh stale token must 409");

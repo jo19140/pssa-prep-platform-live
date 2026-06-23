@@ -78,7 +78,7 @@ async function finalizeInTransaction(tx: Prisma.TransactionClient, input: Finali
   });
 
   if (!evaluation) {
-    const ensured = await preparePssaWritingEvaluationForResponse(tx, input.responseId);
+    const ensured = await preparePssaWritingEvaluationForResponse(tx, input.responseId, { enqueue: false });
     if (!ensured.evaluationId) throw new DiagnosticWritingFinalizeError(422, String(ensured.reason ?? "evaluation_unavailable"));
     evaluation = await tx.pssaWritingEvaluation.findUnique({
       where: { id: ensured.evaluationId },

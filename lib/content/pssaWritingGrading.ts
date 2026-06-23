@@ -83,7 +83,15 @@ type PassageRow = {
   needsLegalReview: boolean;
 };
 
-export async function preparePssaWritingEvaluationForResponse(database: Database, responseId: string) {
+export async function preparePssaWritingEvaluationForResponse(database: Database, responseId: string, opts: { enqueue?: boolean } = {}) {
+  const enqueue = opts.enqueue ?? true;
+  const existing = await database.pssaWritingEvaluation.findUnique({
+    where: { responseId },
+    select: { id: true, status: true },
+  });
+  if (existing && isTerminalWritingEvaluationStatus(existing.status)) {
+    return { enqueued: false, reason: "already_finalized", evaluationId: existing.id };
+  }
   const loaded = await loadWritingResponse(database, responseId);
   if (!loaded) return { enqueued: false, reason: "response_not_found" };
   if (!isEligibleWritingResponse(loaded)) return { enqueued: false, reason: "not_eligible" };
@@ -102,6 +110,7 @@ export async function preparePssaWritingEvaluationForResponse(database: Database
   }
 
   const evaluation = await upsertEvaluation(database, loaded, input, "PENDING");
+  if (!enqueue) return { enqueued: false, evaluationId: evaluation.id };
   const jobKey = writingJobKey(loaded.id, input.inputHash);
   const job = await database.pssaWritingGradingJob.upsert({
     where: { jobKey },
