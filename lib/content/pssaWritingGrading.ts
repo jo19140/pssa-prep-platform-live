@@ -131,19 +131,10 @@ export async function backfillPssaWritingGradingJobs(database: Database) {
   return { scanned: responses.length, results };
 }
 
-export async function processPssaWritingGradingJob(database: Database, jobId: string, grader: (input: PssaWritingGradeInput) => Promise<WritingDraftResult> = gradePssaWritingResponse) {
-  const job = await database.pssaWritingGradingJob.findUnique({
-    where: { id: jobId },
-    include: { evaluation: true },
-  });
-  if (!job) throw new Error("writing_grading_job_not_found");
-  if (job.status === "COMPLETED") return job;
-
-  await database.pssaWritingGradingJob.update({
-    where: { id: job.id },
-    data: { status: "RUNNING", startedAt: new Date(), attempts: { increment: 1 }, lastError: null },
-  });
-
+export async function processPssaWritingGradingJob(database: PrismaClient, jobId: string, grader: (input: PssaWritingGradeInput) => Promise<WritingDraftResult> = gradePssaWritingResponse) {
+  const claim = await claimWritingGradingJob(database, jobId);
+  if (claim.claimed === false) return claim.job;
+  const job = claim.job;
   try {
     const loaded = await loadWritingResponse(database, job.responseId);
     if (!loaded) throw new Error("response_not_found");
@@ -158,7 +149,7 @@ export async function processPssaWritingGradingJob(database: Database, jobId: st
     if (draft.ok === false) throw new Error(draft.failureReason);
     assertScoreRange(gradeInput, draft.score);
     const profile = validateInstructionalProfile(draft.instructionalProfile, gradeInput.responseText, gradeInput.profileAreaIds);
-    const attempt = await createOrReuseAiDraftAttempt(database, {
+    return commitWritingDraftResult(database, job, {
       evaluationId: job.evaluationId,
       inputHash: input.inputHash,
       responseHash: input.responseHash,
@@ -171,26 +162,97 @@ export async function processPssaWritingGradingJob(database: Database, jobId: st
       anchorSetVersion: draft.anchorSetVersion,
       nonScorableReason: draft.nonScorableReason,
     });
-    await database.pssaWritingEvaluation.updateMany({
-      where: { id: job.evaluationId, currentInputHash: input.inputHash },
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "writing_grading_failed";
+    await failWritingGradingJob(database, job, message);
+    throw error;
+  }
+}
+
+type ClaimedWritingJob = Prisma.PssaWritingGradingJobGetPayload<{ include: { evaluation: true } }>;
+
+async function claimWritingGradingJob(database: PrismaClient, jobId: string): Promise<{ claimed: true; job: ClaimedWritingJob } | { claimed: false; job: ClaimedWritingJob }> {
+  return database.$transaction(async (tx) => {
+    await tx.$queryRaw`SELECT id FROM "PssaWritingGradingJob" WHERE id = ${jobId} FOR UPDATE`;
+    const lockedJob = await tx.pssaWritingGradingJob.findUnique({
+      where: { id: jobId },
+      include: { evaluation: true },
+    });
+    if (!lockedJob) throw new Error("writing_grading_job_not_found");
+    await tx.$queryRaw`SELECT id FROM "PssaWritingEvaluation" WHERE id = ${lockedJob.evaluationId} FOR UPDATE`;
+    const job = await tx.pssaWritingGradingJob.findUnique({
+      where: { id: jobId },
+      include: { evaluation: true },
+    });
+    if (!job) throw new Error("writing_grading_job_not_found");
+    if (job.status === "COMPLETED" || isTerminalWritingEvaluationStatus(job.evaluation.status)) {
+      const completed = await tx.pssaWritingGradingJob.update({
+        where: { id: job.id },
+        data: { status: "COMPLETED", completedAt: new Date(), lastError: null },
+        include: { evaluation: true },
+      });
+      return { claimed: false, job: completed };
+    }
+    const claimed = await tx.pssaWritingGradingJob.update({
+      where: { id: job.id },
+      data: { status: "RUNNING", startedAt: new Date(), attempts: { increment: 1 }, lastError: null },
+      include: { evaluation: true },
+    });
+    return { claimed: true, job: claimed };
+  }, { isolationLevel: Prisma.TransactionIsolationLevel.Serializable });
+}
+
+async function commitWritingDraftResult(database: PrismaClient, job: ClaimedWritingJob, input: Parameters<typeof createOrReuseAiDraftAttempt>[1]) {
+  return database.$transaction(async (tx) => {
+    await tx.$queryRaw`SELECT id FROM "PssaWritingGradingJob" WHERE id = ${job.id} FOR UPDATE`;
+    await tx.$queryRaw`SELECT id FROM "PssaWritingEvaluation" WHERE id = ${job.evaluationId} FOR UPDATE`;
+    const evaluation = await tx.pssaWritingEvaluation.findUnique({
+      where: { id: job.evaluationId },
+      select: { status: true, currentInputHash: true },
+    });
+    if (!evaluation) throw new Error("writing_evaluation_not_found");
+    if (isTerminalWritingEvaluationStatus(evaluation.status)) {
+      return tx.pssaWritingGradingJob.update({
+        where: { id: job.id },
+        data: { status: "COMPLETED", completedAt: new Date(), lastError: null },
+      });
+    }
+    if (evaluation.currentInputHash !== input.inputHash) throw new Error("stale_evaluation_input");
+    const attempt = await createOrReuseAiDraftAttempt(tx, input);
+    await tx.pssaWritingEvaluation.updateMany({
+      where: { id: job.evaluationId, currentInputHash: input.inputHash, status: { notIn: ["FINALIZED", "NON_SCORABLE"] } },
       data: { currentDraftAttemptId: attempt.id, status: "DRAFTED", failureReason: null },
     });
-    return database.pssaWritingGradingJob.update({
+    return tx.pssaWritingGradingJob.update({
       where: { id: job.id },
       data: { status: "COMPLETED", completedAt: new Date(), lastError: null },
     });
-  } catch (error) {
-    const message = error instanceof Error ? error.message : "writing_grading_failed";
-    await database.pssaWritingEvaluation.updateMany({
-      where: { id: job.evaluationId, currentInputHash: job.inputHash },
-      data: { status: "FAILED", failureReason: message },
+  }, { isolationLevel: Prisma.TransactionIsolationLevel.Serializable });
+}
+
+async function failWritingGradingJob(database: PrismaClient, job: ClaimedWritingJob, message: string) {
+  return database.$transaction(async (tx) => {
+    await tx.$queryRaw`SELECT id FROM "PssaWritingGradingJob" WHERE id = ${job.id} FOR UPDATE`;
+    await tx.$queryRaw`SELECT id FROM "PssaWritingEvaluation" WHERE id = ${job.evaluationId} FOR UPDATE`;
+    const evaluation = await tx.pssaWritingEvaluation.findUnique({
+      where: { id: job.evaluationId },
+      select: { status: true, currentInputHash: true },
     });
-    await database.pssaWritingGradingJob.update({
+    if (evaluation && !isTerminalWritingEvaluationStatus(evaluation.status)) {
+      await tx.pssaWritingEvaluation.updateMany({
+        where: { id: job.evaluationId, currentInputHash: job.inputHash, status: { notIn: ["FINALIZED", "NON_SCORABLE"] } },
+        data: { status: "FAILED", failureReason: message },
+      });
+    }
+    return tx.pssaWritingGradingJob.update({
       where: { id: job.id },
       data: { status: "FAILED", lastError: message },
     });
-    throw error;
-  }
+  }, { isolationLevel: Prisma.TransactionIsolationLevel.Serializable });
+}
+
+function isTerminalWritingEvaluationStatus(status: string) {
+  return status === "FINALIZED" || status === "NON_SCORABLE";
 }
 
 export type PssaWritingGradeInput = {

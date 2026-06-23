@@ -39,7 +39,13 @@ assert.match(grading, /formPassage\.passage\.contentHash !== formPassage\.approv
 assert.match(grading, /license_not_cleared/, "passage/item license gate must exist");
 assert.match(grading, /pssa-writing:\$\{responseId\}:\$\{inputHash\}/, "jobKey must include responseId and inputHash");
 assert.match(grading, /attemptIdempotencyKey = `ai:\$\{input\.evaluationId\}:\$\{input\.inputHash\}`/, "AI attempt idempotency key must be evaluation+input");
-assert.match(grading, /where:\s*\{\s*id: job\.evaluationId,\s*currentInputHash: input\.inputHash\s*\}/, "draft pointer update must be stale-input guarded");
+assert.match(grading, /claimWritingGradingJob/, "worker must claim jobs through an atomic claim helper");
+assert.match(grading, /SELECT id FROM "PssaWritingGradingJob"[\s\S]*FOR UPDATE[\s\S]*SELECT id FROM "PssaWritingEvaluation"[\s\S]*FOR UPDATE/, "claim must lock both job and evaluation rows");
+assert.match(grading, /isTerminalWritingEvaluationStatus\(job\.evaluation\.status\)[\s\S]*status: "COMPLETED"[\s\S]*claimed: false/, "terminal eval at claim time must complete without RUNNING claim");
+assert.match(grading, /attempts:\s*\{\s*increment: 1\s*\}/, "attempt increment must occur only in the committed RUNNING claim");
+assert.match(grading, /const draft = await grader\(gradeInput\)/, "external grader call must happen after the claim transaction commits");
+assert.match(grading, /status:\s*\{\s*notIn:\s*\["FINALIZED", "NON_SCORABLE"\]\s*\}/, "in-flight worker result/failure must not clobber terminal evaluation");
+assert.match(grading, /where:\s*\{\s*id: job\.evaluationId,\s*currentInputHash: input\.inputHash,\s*status:\s*\{\s*notIn:/, "draft pointer update must be stale-input and terminal-status guarded");
 assert.match(grading, /gradePssaShortAnswer/, "short-answer dispatcher path must exist");
 assert.match(grading, /gradePssaTdaDraft/, "TDA dispatcher path must exist");
 assert.match(grading, /tda_anchor_set_unlicensed/, "existing TDA anchors must fail closed until licensed");
