@@ -263,6 +263,8 @@ export function TeacherPssaInsightsClient() {
         <TeacherPssaInsightsPanel
           report={loadState.report}
           className={selectedClass?.name ?? "Selected class"}
+          classRoomId={selectedClassId}
+          benchmarkSeason={benchmarkSeason}
           lessonSuggestions={suggestionsState.byGroupId}
           suggestionsUnavailable={suggestionsState.status === "error"}
           assignState={assignState}

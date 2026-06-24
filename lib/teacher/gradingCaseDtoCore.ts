@@ -1,4 +1,15 @@
+import { validateInstructionalProfile, type WritingProfileArea } from "@/lib/content/pssaWritingGrading";
+
 export type GradingCaseStatus = "PENDING" | "DRAFTED" | "FAILED" | "FINALIZED" | "NON_SCORABLE";
+
+export type GradingCaseResult = {
+  score: number | null;
+  nonScorableReason: string | null;
+  rationale: string | null;
+  instructionalProfile: WritingProfileArea[] | null;
+  gapToNextLevel: string | null;
+  reviewedAt: string | null;
+};
 
 export type GradingCase = {
   caseId: string;
@@ -15,9 +26,10 @@ export type GradingCase = {
   aiDraft: {
     score: number;
     rationale: string;
-    instructionalProfile: unknown;
+    instructionalProfile: WritingProfileArea[] | null;
+    gapToNextLevel: string | null;
   } | null;
-  finalScore: number | null;
+  officialResult: GradingCaseResult | null;
 };
 
 export function buildDiagnosticGradingCase(input: {
@@ -38,6 +50,14 @@ export function buildDiagnosticGradingCase(input: {
         rationale: string | null;
         instructionalProfileJson: unknown;
       } | null;
+      currentFinalAttempt?: {
+        inputHash: string;
+        score: number | null;
+        nonScorableReason: string | null;
+        rationale: string | null;
+        instructionalProfileJson: unknown;
+        reviewedAt: Date | string | null;
+      } | null;
     } | null;
   };
   classRoomId: string;
@@ -47,7 +67,14 @@ export function buildDiagnosticGradingCase(input: {
   const draft = evaluation?.currentDraftAttempt && evaluation.currentDraftAttempt.inputHash === evaluation.currentInputHash
     ? evaluation.currentDraftAttempt
     : null;
+  const final = evaluation?.currentFinalAttempt && evaluation.currentFinalAttempt.inputHash === evaluation.currentInputHash
+    ? evaluation.currentFinalAttempt
+    : null;
   const interactionType = input.response.formItem.item.interactionType;
+  const profileAreaIds = interactionType === "TDA"
+    ? ["task_and_controlling_idea", "text_evidence", "analysis_and_explanation", "organization_and_cohesion", "language_and_conventions"]
+    : ["completeness", "accuracy", "text_support", "explanation_clarity"];
+  const text = responseText(input.response.responsePayloadJson);
   return {
     caseId: `diagnostic:${input.response.id}`,
     source: "DIAGNOSTIC",
@@ -64,10 +91,20 @@ export function buildDiagnosticGradingCase(input: {
       ? {
           score: draft.score,
           rationale: draft.rationale ?? "",
-          instructionalProfile: draft.instructionalProfileJson ?? null,
+          instructionalProfile: normalizeInstructionalProfile(draft.instructionalProfileJson, text, profileAreaIds),
+          gapToNextLevel: null,
         }
       : null,
-    finalScore: null,
+    officialResult: final && (evaluation?.status === "FINALIZED" || evaluation?.status === "NON_SCORABLE")
+      ? {
+          score: final.score,
+          nonScorableReason: final.nonScorableReason,
+          rationale: final.rationale,
+          instructionalProfile: normalizeInstructionalProfile(final.instructionalProfileJson, text, profileAreaIds),
+          gapToNextLevel: null,
+          reviewedAt: final.reviewedAt ? new Date(final.reviewedAt).toISOString() : null,
+        }
+      : null,
   };
 }
 
@@ -78,7 +115,21 @@ export function assertNoBannedGradingCaseKeys(value: unknown) {
     "responsePayloadJson",
     "currentInputHash",
     "currentDraftAttemptId",
+    "currentFinalAttemptId",
+    "currentDraftAttempt",
+    "currentFinalAttempt",
+    "attemptId",
+    "attemptNumber",
     "attemptIdempotencyKey",
+    "inputHash",
+    "responseHash",
+    "reviewedByUserId",
+    "reviewedByUser",
+    "scorerVersion",
+    "promptKey",
+    "modelId",
+    "anchorSetVersion",
+    "overrideReason",
     "studentProfileId",
     "userId",
     "email",
@@ -111,4 +162,9 @@ function responseText(value: unknown) {
   if (!value || typeof value !== "object") return "";
   const row = value as Record<string, unknown>;
   return typeof row.shortResponse === "string" ? row.shortResponse : typeof row.essay === "string" ? row.essay : "";
+}
+
+function normalizeInstructionalProfile(value: unknown, responseTextValue: string, areaIds: string[]) {
+  if (value == null) return null;
+  return validateInstructionalProfile(value, responseTextValue, areaIds) as WritingProfileArea[];
 }

@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Grading — Writing (Sý Learning) · #36-2b LOCKED visual contract</title>
+<style>
+  :root{
+    --bg:#f1f5f9; --panel:#ffffff; --ink:#0f172a; --muted:#64748b; --line:#e2e8f0;
+    --indigo:#4f46e5; --indigo-soft:#eef2ff; --green:#15803d; --green-soft:#dcfce7;
+    --amber:#b45309; --amber-soft:#fef3c7; --red:#b91c1c; --red-soft:#fee2e2;
+    --slate-chip:#e2e8f0;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font:14px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink)}
+  .wrap{max-width:1180px;margin:0 auto;padding:20px}
+  .topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+  .brand{font-weight:700;letter-spacing:.2px}
+  .brand small{color:var(--muted);font-weight:500}
+  .tabs{display:flex;gap:6px;margin:14px 0 18px}
+  .tab{padding:7px 14px;border-radius:999px;background:#fff;border:1px solid var(--line);color:var(--muted);font-weight:600;font-size:13px}
+  .tab.active{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .ctx{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:14px;color:var(--muted);font-size:13px}
+  .ctx b{color:var(--ink)}
+  .pill{display:inline-block;padding:2px 9px;border-radius:999px;font-size:12px;font-weight:600}
+  .pill.draft{background:var(--amber-soft);color:var(--amber)}
+  .pill.pending{background:var(--slate-chip);color:#475569}
+  .pill.failed{background:var(--red-soft);color:var(--red)}
+  .pill.official{background:var(--green-soft);color:var(--green)}
+  .pill.ns{background:#ede9fe;color:#6d28d9}
+  .layout{display:grid;grid-template-columns:300px 1fr;gap:18px;align-items:start}
+  .panel{background:var(--panel);border:1px solid var(--line);border-radius:14px}
+  .queue-head{padding:14px 16px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between}
+  .queue-head h3{margin:0;font-size:14px}
+  .toggle{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:6px;cursor:pointer}
+  .toggle input{accent-color:var(--indigo)}
+  .qitem{padding:11px 16px;border-bottom:1px solid var(--line);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:8px}
+  .qitem:last-child{border-bottom:none}
+  .qitem.sel{background:var(--indigo-soft)}
+  .qitem .nm{font-weight:600}
+  .qitem .sub{font-size:12px;color:var(--muted)}
+  .qitem.resolved{opacity:.85}
+  .qfilterhint{padding:9px 16px;color:var(--muted);font-size:12px;background:#f8fafc;border-bottom:1px solid var(--line)}
+  .gv{padding:0;position:relative}
+  .gv-head{padding:16px 18px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+  .gv-head .who{font-size:16px;font-weight:700}
+  .gv-head .meta{color:var(--muted);font-size:13px;margin-top:2px}
+  .section{padding:16px 18px;border-bottom:1px solid var(--line)}
+  .label{font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+  .prompt{background:#f8fafc;border:1px solid var(--line);border-radius:10px;padding:12px 14px;color:#334155}
+  .response{background:#fff;border:1px dashed var(--line);border-radius:10px;padding:12px 14px;white-space:pre-wrap}
+  .scoremsg{font-size:13px;color:var(--muted);margin-top:8px}
+  /* accessible radio group */
+  .scorectl{display:flex;gap:8px;margin-top:6px}
+  .scoreopt{position:relative}
+  .scoreopt input{position:absolute;opacity:0;width:100%;height:100%;margin:0;cursor:pointer}
+  .scoreopt label{display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:58px;height:52px;border-radius:10px;border:1px solid var(--line);background:#fff;cursor:pointer}
+  .scoreopt label .num{font-weight:700;font-size:17px;line-height:1}
+  .scoreopt label .txt{font-size:10px;color:var(--muted);margin-top:2px}
+  .scoreopt input:checked + label{background:var(--indigo);border-color:var(--indigo);color:#fff}
+  .scoreopt input:checked + label .txt{color:#dbe1ff}
+  .scoreopt input:focus-visible + label{outline:3px solid #c7d2fe;outline-offset:2px}
+  .rationale{margin-top:12px;color:#334155}
+  .rationale .src{font-size:12px;color:var(--muted);margin-bottom:4px}
+  /* collapsible profile */
+  .profile-summary{display:flex;align-items:center;justify-content:space-between;gap:12px}
+  .profile-summary .sig-counts{font-size:13px;color:#334155;font-weight:600}
+  .profile-summary .sig-counts .dot{color:var(--muted);font-weight:400}
+  .expandbtn{font-size:12px;font-weight:600;color:var(--indigo);background:none;border:none;cursor:pointer;padding:4px 6px}
+  .profilenote{font-size:12px;color:var(--muted);font-style:italic;margin:8px 0 0}
+  .areas{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+  .area{border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+  .area .an{font-weight:600;font-size:13px;display:flex;justify-content:space-between;align-items:center;gap:8px}
+  .sig{font-size:11px;font-weight:700;padding:1px 8px;border-radius:999px}
+  .sig.clear{background:var(--green-soft);color:var(--green)}
+  .sig.emerging{background:var(--amber-soft);color:var(--amber)}
+  .sig.needs{background:#ffedd5;color:#9a3412}
+  .sig.limited{background:var(--slate-chip);color:#475569}
+  .area p{margin:6px 0 0;font-size:12.5px;color:#475569}
+  .gap{margin-top:12px;background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:10px 12px;font-size:13px;color:#854d0e}
+  .ns-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
+  .ns-chip{padding:6px 11px;border:1px solid var(--line);border-radius:999px;background:#fff;font-size:12.5px;color:#475569;cursor:pointer}
+  .ns-chip[aria-pressed="true"]{background:#ede9fe;border-color:#c4b5fd;color:#6d28d9;font-weight:600}
+  /* sticky footer */
+  .footer{position:sticky;bottom:0;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px;background:#f8fafc;border-top:1px solid var(--line);border-bottom-left-radius:14px;border-bottom-right-radius:14px}
+  .hint{font-size:12px;color:var(--muted)}
+  .btns{display:flex;gap:8px}
+  .btn{padding:9px 16px;border-radius:10px;font-weight:600;font-size:13px;border:1px solid var(--line);background:#fff;color:var(--ink);cursor:pointer}
+  .btn.primary{background:var(--indigo);border-color:var(--indigo);color:#fff}
+  .btn[disabled]{opacity:.5;cursor:not-allowed}
+  .official-banner{display:flex;align-items:center;gap:8px;background:var(--green-soft);color:var(--green);border:1px solid #bbf7d0;border-radius:10px;padding:9px 12px;font-size:13px;font-weight:600;margin-bottom:12px}
+  .statebar{display:flex;gap:6px;margin:0 0 14px;border:1px dashed #cbd5e1;border-radius:10px;padding:8px 10px;background:#fff}
+  .statebar .moktag{font-size:11px;font-weight:700;color:#b45309;background:var(--amber-soft);padding:2px 8px;border-radius:6px;align-self:center}
+  .statebar button{font-size:12px;padding:6px 12px;border-radius:8px;border:1px solid var(--line);background:#fff;color:var(--muted);cursor:pointer;font-weight:600}
+  .statebar button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .reason textarea{width:100%;border:1px solid var(--line);border-radius:10px;padding:9px 11px;font:inherit;resize:vertical;min-height:54px}
+  .muted{color:var(--muted)}
+  .note{font-size:12px;color:var(--muted);margin-top:18px;text-align:center}
+  .hidden{display:none !important}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar">
+    <div class="brand">Sý&nbsp;Learning <small>· Test Prep PA · Teacher</small></div>
+    <div class="muted" style="font-size:13px">Ms. Rivera</div>
+  </div>
+
+  <div class="tabs">
+    <div class="tab">Classes</div><div class="tab">Lessons</div><div class="tab">Assignments</div><div class="tab">Reports</div><div class="tab active">Grading</div>
+  </div>
+
+  <div class="ctx">
+    <span>Grading writing responses for</span>
+    <b>Class 3B</b><span>·</span><b>Grade 3 Benchmark — Beginning of Year</b>
+    <span class="muted">(arrived via Reports → Grade writing responses)</span>
+  </div>
+
+  <!-- MOCK-ONLY control; does NOT ship -->
+  <div class="statebar">
+    <span class="moktag">MOCK ONLY — does not ship</span>
+    <span class="hint" style="align-self:center;margin:0 2px">Preview state:</span>
+    <button class="on" data-state="drafted">AI draft ready</button>
+    <button data-state="pending">No AI draft (manual)</button>
+    <button data-state="failed">AI unavailable</button>
+    <button data-state="official">Finalized → override</button>
+  </div>
+
+  <div class="layout">
+    <!-- QUEUE -->
+    <div class="panel">
+      <div class="queue-head">
+        <h3>Writing queue</h3>
+        <label class="toggle"><input type="checkbox" id="showFinal" /> Show finalized</label>
+      </div>
+      <div class="qfilterhint" id="qhint">3 responses need grading</div>
+      <div id="queue">
+        <div class="qitem sel"><div><div class="nm">Aisha N.</div><div class="sub">Short Response · “A Map Under the Bench”</div></div><span class="pill draft">Draft</span></div>
+        <div class="qitem"><div><div class="nm">Marcus T.</div><div class="sub">Short Response · “A Map Under the Bench”</div></div><span class="pill pending">No draft</span></div>
+        <div class="qitem"><div><div class="nm">Priya R.</div><div class="sub">Short Response · “The Porch Bell”</div></div><span class="pill failed">AI unavailable</span></div>
+        <div class="qitem resolved finalrow hidden"><div><div class="nm">Diego M.</div><div class="sub">Short Response · “The Porch Bell”</div></div><span class="pill official">2 / 3</span></div>
+        <div class="qitem resolved finalrow hidden"><div><div class="nm">Leah K.</div><div class="sub">Short Response · “A Map Under the Bench”</div></div><span class="pill ns">Blank</span></div>
+      </div>
+    </div>
+
+    <!-- GRADING VIEW -->
+    <div class="panel gv">
+      <div class="gv-head">
+        <div>
+          <div class="who">Aisha N. <span class="muted" style="font-weight:500">· Class 3B</span></div>
+          <div class="meta">Short Response · Grade 3 scale 0–3 · <span id="statuschip" class="pill draft">Draft</span></div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="label">Prompt</div>
+        <div class="prompt">Use details from “A Map Under the Bench” to explain why Sam decided to follow the map. Support your answer with evidence from the text.</div>
+        <div class="label" style="margin-top:14px">Student response</div>
+        <div class="response">Sam followed the map because he was curious and wanted an adventure. The story says he "couldn't stop thinking about the X" and that his "feet were already moving" before he decided. That shows he really wanted to find out what was there.</div>
+      </div>
+
+      <!-- Rubric result -->
+      <div class="section">
+        <div id="officialBanner" class="official-banner hidden">✓ Official score recorded — this is on the student’s benchmark report.</div>
+        <div class="label" id="rubricLabel">Draft Rubric Result <span class="muted" style="text-transform:none;letter-spacing:0;font-weight:500">— AI suggestion, confirm or override</span></div>
+        <div class="scorectl" id="scorectl" role="radiogroup" aria-label="Rubric score, 0 to 3">
+          <span class="scoreopt"><input type="radio" name="score" id="s0" value="0"><label for="s0"><span class="num">0</span><span class="txt">No credit</span></label></span>
+          <span class="scoreopt"><input type="radio" name="score" id="s1" value="1"><label for="s1"><span class="num">1</span><span class="txt">Minimal</span></label></span>
+          <span class="scoreopt"><input type="radio" name="score" id="s2" value="2" checked><label for="s2"><span class="num">2</span><span class="txt">Partial</span></label></span>
+          <span class="scoreopt"><input type="radio" name="score" id="s3" value="3"><label for="s3"><span class="num">3</span><span class="txt">Full</span></label></span>
+        </div>
+        <div class="scoremsg" id="scoremsg"></div>
+        <div class="rationale" id="rationale">
+          <div class="src">Rubric rationale</div>
+          Gives a reason (curiosity/adventure) and uses two quoted details as support, but the explanation of how the evidence proves the reason is brief. Meets accuracy and text-support at a developing level — a 3 would tie each quote explicitly to the decision.
+        </div>
+      </div>
+
+      <!-- Instructional writing profile (collapsed by default) -->
+      <div class="section" id="profileSection">
+        <div class="label">Instructional Writing Profile</div>
+        <div class="profile-summary">
+          <div class="sig-counts">2 clear <span class="dot">·</span> 1 emerging <span class="dot">·</span> 1 needs support</div>
+          <button class="expandbtn" id="expandBtn" aria-expanded="false">Show evidence &amp; teaching moves ▾</button>
+        </div>
+        <div class="profilenote">Separate from the official score — it does not change it.</div>
+        <div class="gap" id="gap"><b>Gap to the next level:</b> connect each quoted detail to the reason — e.g., “‘feet already moving’ shows the pull was so strong he acted before deciding.”</div>
+        <div class="areas hidden" id="areas">
+          <div class="area"><div class="an">Completeness <span class="sig clear">Clear</span></div><p>Answers the question and stays on task.</p></div>
+          <div class="area"><div class="an">Accuracy <span class="sig clear">Clear</span></div><p>Quotes are pulled correctly from the passage.</p></div>
+          <div class="area"><div class="an">Text support <span class="sig emerging">Emerging</span></div><p>Two details cited; not yet tied tightly to the claim.</p></div>
+          <div class="area"><div class="an">Explanation clarity <span class="sig needs">Needs support</span></div><p>“That shows…” is general — name <em>what</em> it shows.</p></div>
+        </div>
+      </div>
+
+      <!-- Non-scorable -->
+      <div class="section">
+        <div class="label">Or mark non-scorable</div>
+        <div class="muted" style="font-size:12.5px;margin-bottom:6px">Use only for the student’s response itself — not technical problems. Records 0 points with a reason, no rubric score.</div>
+        <div class="ns-row" id="nsRow">
+          <button class="ns-chip" aria-pressed="false">Blank</button>
+          <button class="ns-chip" aria-pressed="false">Refusal</button>
+          <button class="ns-chip" aria-pressed="false">Off-topic</button>
+          <button class="ns-chip" aria-pressed="false">Copied</button>
+          <button class="ns-chip" aria-pressed="false">Other</button>
+        </div>
+        <div class="reason hidden" id="nsNote" style="margin-top:10px"><textarea placeholder="Required note for “Other”…"></textarea></div>
+      </div>
+
+      <!-- Override reason -->
+      <div class="section reason hidden" id="reasonSection">
+        <div class="label">Reason for changing the official score</div>
+        <textarea placeholder="Brief reason (required for an override)…"></textarea>
+      </div>
+
+      <div class="footer">
+        <div class="hint" id="footerHint">AI draft is a suggestion. Confirm to make it official, or pick a different score to override.</div>
+        <div class="btns" id="footerBtns">
+          <button class="btn" id="secBtn">Change score</button>
+          <button class="btn primary" id="primBtn">Confirm score 2</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="note">LOCKED #36-2b visual contract · the “Preview state” bar is mock-only and does not ship · no student sees this view · benchmark scores stay hidden from students.</div>
+</div>
+
+<script>
+  const $ = s => document.querySelector(s);
+  const showFinal = $('#showFinal'), finalRows = document.querySelectorAll('.finalrow'), qhint = $('#qhint');
+  showFinal.addEventListener('change', () => {
+    finalRows.forEach(r => r.classList.toggle('hidden', !showFinal.checked));
+    qhint.textContent = showFinal.checked ? '3 to grade · 2 finalized (reopen to override)' : '3 responses need grading';
+  });
+
+  // expand/collapse profile
+  const expandBtn = $('#expandBtn'), areas = $('#areas');
+  expandBtn.addEventListener('click', () => {
+    const open = areas.classList.toggle('hidden') === false;
+    expandBtn.setAttribute('aria-expanded', String(open));
+    expandBtn.innerHTML = open ? 'Hide evidence &amp; teaching moves ▴' : 'Show evidence &amp; teaching moves ▾';
+  });
+
+  // mutual exclusion: numeric clears non-scorable, and vice-versa
+  const scorectl = $('#scorectl'), nsRow = $('#nsRow'), nsNote = $('#nsNote');
+  function clearNonScorable(){ nsRow.querySelectorAll('.ns-chip').forEach(c=>c.setAttribute('aria-pressed','false')); nsNote.classList.add('hidden'); }
+  function clearNumeric(){ scorectl.querySelectorAll('input').forEach(i=>i.checked=false); }
+  scorectl.addEventListener('change', clearNonScorable);
+  nsRow.addEventListener('click', e=>{
+    const chip = e.target.closest('.ns-chip'); if(!chip) return;
+    const wasOn = chip.getAttribute('aria-pressed')==='true';
+    clearNonScorable();
+    if(!wasOn){ chip.setAttribute('aria-pressed','true'); clearNumeric(); if(chip.textContent.trim()==='Other') nsNote.classList.remove('hidden'); }
+  });
+
+  // preview states (mock-only)
+  const els = {
+    statuschip:()=>$('#statuschip'), rubricLabel:$('#rubricLabel'), scorectl, scoremsg:$('#scoremsg'),
+    rationale:$('#rationale'), profileSection:$('#profileSection'), officialBanner:$('#officialBanner'),
+    reasonSection:$('#reasonSection'), footerHint:$('#footerHint'), secBtn:$('#secBtn'), primBtn:$('#primBtn')
+  };
+  const states = {
+    drafted(){
+      els.statuschip().className='pill draft'; els.statuschip().textContent='Draft';
+      els.rubricLabel.innerHTML='Draft Rubric Result <span class="muted" style="text-transform:none;letter-spacing:0;font-weight:500">— AI suggestion, confirm or override</span>';
+      els.scoremsg.textContent=''; els.rationale.classList.remove('hidden'); els.profileSection.classList.remove('hidden');
+      els.officialBanner.classList.add('hidden'); els.reasonSection.classList.add('hidden');
+      els.footerHint.textContent='AI draft is a suggestion. Confirm to make it official, or pick a different score to override.';
+      els.secBtn.classList.remove('hidden'); els.secBtn.textContent='Change score';
+      els.primBtn.textContent='Confirm score 2'; els.primBtn.disabled=false;
+    },
+    pending(){
+      els.statuschip().className='pill pending'; els.statuschip().textContent='No draft';
+      els.rubricLabel.innerHTML='Rubric Result <span class="muted" style="text-transform:none;letter-spacing:0;font-weight:500">— score this response</span>';
+      els.scoremsg.textContent='No AI draft yet — score this response manually using the rubric.';
+      els.rationale.classList.add('hidden'); els.profileSection.classList.add('hidden');
+      els.officialBanner.classList.add('hidden'); els.reasonSection.classList.add('hidden');
+      clearNumeric();
+      els.footerHint.textContent='Pick a score 0–3, or mark non-scorable.';
+      els.secBtn.classList.add('hidden'); els.primBtn.textContent='Record score'; els.primBtn.disabled=true;
+    },
+    failed(){
+      els.statuschip().className='pill failed'; els.statuschip().textContent='AI unavailable';
+      els.rubricLabel.innerHTML='Rubric Result <span class="muted" style="text-transform:none;letter-spacing:0;font-weight:500">— score this response</span>';
+      els.scoremsg.innerHTML='<b>AI draft unavailable — score manually.</b> The automatic draft couldn’t be produced for this response. (No retry — scoring is yours.)';
+      els.rationale.classList.add('hidden'); els.profileSection.classList.add('hidden');
+      els.officialBanner.classList.add('hidden'); els.reasonSection.classList.add('hidden');
+      clearNumeric();
+      els.footerHint.textContent='Pick a score 0–3, or mark non-scorable.';
+      els.secBtn.classList.add('hidden'); els.primBtn.textContent='Record score'; els.primBtn.disabled=true;
+    },
+    official(){
+      els.statuschip().className='pill official'; els.statuschip().textContent='Official · 2 / 3';
+      els.officialBanner.classList.remove('hidden');
+      els.rubricLabel.innerHTML='Official Rubric Result';
+      els.scoremsg.textContent=''; els.rationale.classList.remove('hidden'); els.profileSection.classList.remove('hidden');
+      els.reasonSection.classList.remove('hidden');
+      els.footerHint.textContent='Changing a finalized score is recorded as an override with full history.';
+      els.secBtn.classList.add('hidden');
+      els.primBtn.textContent='Change official score'; els.primBtn.disabled=false;
+      // demo: choosing a new score flips the button to "Save override to N" and requires the reason
+      const onPick = ()=>{ const v=scorectl.querySelector('input:checked'); if(v && v.value!=='2'){ els.primBtn.textContent='Save override to '+v.value; } };
+      scorectl.addEventListener('change', onPick, { once:false });
+    }
+  };
+  document.querySelectorAll('.statebar button').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      document.querySelectorAll('.statebar button').forEach(b=>b.classList.remove('on'));
+      btn.classList.add('on'); clearNonScorable();
+      if(btn.dataset.state==='drafted'){ $('#s2').checked=true; }
+      states[btn.dataset.state]();
+    });
+  });
+</script>
+</body>
+</html>

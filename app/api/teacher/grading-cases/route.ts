@@ -6,6 +6,7 @@ import { loadDiagnosticGradingCasesForTeacher } from "@/lib/teacher/gradingCaseD
 const querySchema = z.object({
   classRoomId: z.string().trim().min(1).max(128),
   formId: z.string().trim().min(1).max(128),
+  statusScope: z.enum(["actionable", "all"]).default("actionable"),
 });
 
 export async function GET(req: Request) {
@@ -15,9 +16,10 @@ export async function GET(req: Request) {
   const parsed = querySchema.safeParse({
     classRoomId: url.searchParams.get("classRoomId") ?? "",
     formId: url.searchParams.get("formId") ?? "",
+    statusScope: url.searchParams.get("statusScope") ?? "actionable",
   });
   if (!parsed.success) return withNoStore(NextResponse.json({ error: "Invalid query", issues: parsed.error.flatten().fieldErrors }, { status: 400 }));
-  const query = parsed.data as { classRoomId: string; formId: string };
+  const query = parsed.data as { classRoomId: string; formId: string; statusScope: "actionable" | "all" };
   try {
     return withNoStore(NextResponse.json(await loadDiagnosticGradingCasesForTeacher(auth.user.id, query)));
   } catch (error) {

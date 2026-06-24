@@ -55,7 +55,8 @@ assert.match(teacherPage, /normalizeStateTrackTab/, "/teacher must normalize tab
 assert.match(teacherPage, /STATE_TRACK_TABS = \["classes", "lessons", "assignments", "reports", "grading"\]/, "/teacher must define the requested tab frame");
 assert.match(teacherPage, /hrefForTab\(resolvedSearchParams, tab\)/, "tab links must preserve search params while replacing tab");
 assert.match(teacherPage, /aria-current=\{active \? "page" : undefined\}/, "active tab must set aria-current");
-assert.match(teacherPage, /if \(tab === "grading"\)[\s\S]*aria-disabled="true"[\s\S]*Coming soon/, "Grading must be disabled");
+assert.doesNotMatch(teacherPage, /aria-disabled="true"[\s\S]*Coming soon/, "Grading is live after #36-2b and must not stay disabled");
+assert.match(teacherPage, /activeTab === "grading"[\s\S]*<TeacherGradingTab \/>/, "Grading tab must render the live grading component");
 assert.match(teacherPage, /<TeacherPssaInsightsClient \/>/, "Reports tab must embed existing insights client");
 assert.doesNotMatch(teacherPage, /assign-recommended-lesson|lesson-suggestions|class-report/, "/teacher page must not rewrite report/assign routes");
 

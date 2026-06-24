@@ -5,7 +5,7 @@ import { computeDiagnosticWritingConcurrencyToken } from "@/lib/teacher/diagnost
 
 export async function loadDiagnosticGradingCasesForTeacher(
   userId: string,
-  input: { classRoomId: string; formId: string },
+  input: { classRoomId: string; formId: string; statusScope?: "actionable" | "all" },
   database: PrismaClient = db,
 ): Promise<{ cases: GradingCase[] }> {
   const classRoom = await database.classRoom.findFirst({
@@ -16,9 +16,20 @@ export async function loadDiagnosticGradingCasesForTeacher(
   const enrolledUserIds = classRoom.enrollments.map((enrollment) => enrollment.studentProfile.userId);
   if (!enrolledUserIds.length) return { cases: [] };
 
+  const responseScope = input.statusScope === "all"
+    ? {
+        OR: [
+          { scoreStatus: "pending_human_scoring" as const },
+          {
+            scoreStatus: "scored" as const,
+            writingEvaluation: { status: { in: ["FINALIZED" as const, "NON_SCORABLE" as const] } },
+          },
+        ],
+      }
+    : { scoreStatus: "pending_human_scoring" as const };
   const responses = await database.pssaFormResponse.findMany({
     where: {
-      scoreStatus: "pending_human_scoring",
+      ...responseScope,
       session: {
         formId: input.formId,
         submittedAt: { not: null },
@@ -29,7 +40,7 @@ export async function loadDiagnosticGradingCasesForTeacher(
     include: {
       session: { include: { user: { select: { name: true } } } },
       formItem: { include: { item: { include: { passages: { include: { passage: true }, orderBy: { sortOrder: "asc" } } } }, form: { include: { passages: { include: { passage: true } } } } } },
-      writingEvaluation: { include: { currentDraftAttempt: true } },
+      writingEvaluation: { include: { currentDraftAttempt: true, currentFinalAttempt: true } },
     },
     orderBy: [{ session: { user: { name: "asc" } } }, { positionSnapshot: "asc" }],
   });

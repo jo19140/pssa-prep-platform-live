@@ -4,6 +4,7 @@ import { TeacherPssaInsightsClient } from "@/components/pssa/TeacherPssaInsights
 import { SynesisPageShell } from "@/components/synesis/SynesisPageShell";
 import { TeacherProductWorkspaceSwitcher } from "@/components/synesis/TeacherProductWorkspaceSwitcher";
 import { TeacherAssignmentsTab } from "@/components/teacher/TeacherAssignmentsTab";
+import { TeacherGradingTab } from "@/components/teacher/TeacherGradingTab";
 import { TeacherLessonsTab } from "@/components/teacher/TeacherLessonsTab";
 import { loadCurrentTeacherProducts } from "@/lib/teacher/loadCurrentTeacherProducts";
 
@@ -39,17 +40,6 @@ export default async function TeacherPage({
           <nav aria-label="State Track sections" className="flex flex-wrap gap-2">
             {STATE_TRACK_TABS.map((tab) => {
               const label = tabLabel(tab);
-              if (tab === "grading") {
-                return (
-                  <span
-                    key={tab}
-                    aria-disabled="true"
-                    className="rounded-md border border-slate-200 bg-slate-50 px-3 py-2 text-sm font-semibold text-slate-400"
-                  >
-                    {label} · Coming soon
-                  </span>
-                );
-              }
               const active = activeTab === tab;
               return (
                 <Link
@@ -76,6 +66,8 @@ export default async function TeacherPage({
             <TeacherLessonsTab />
           ) : activeTab === "assignments" ? (
             <TeacherAssignmentsTab />
+          ) : activeTab === "grading" ? (
+            <TeacherGradingTab />
           ) : (
             <StateTrackPlaceholder tab={activeTab} />
           )}
@@ -85,20 +77,14 @@ export default async function TeacherPage({
   );
 }
 
-function StateTrackPlaceholder({ tab }: { tab: Exclude<StateTrackTab, "reports"> }) {
+function StateTrackPlaceholder({ tab }: { tab: Exclude<StateTrackTab, "reports" | "grading"> }) {
   return (
     <section className="rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
       <h2 className="text-xl font-semibold text-slate-950">{tabLabel(tab)}</h2>
-      {tab === "grading" ? (
-        <p className="mt-2 text-sm text-slate-600">Grading will be added here once the State Track workspace expands.</p>
-      ) : (
-        <>
-          <p className="mt-2 text-sm text-slate-600">The existing State Track tools remain available while this workspace frame is filled in.</p>
-          <Link href="/teacher/tools" className="mt-4 inline-flex rounded-md border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:border-slate-300 hover:bg-slate-50">
-            Open existing State Track tools
-          </Link>
-        </>
-      )}
+      <p className="mt-2 text-sm text-slate-600">The existing State Track tools remain available while this workspace frame is filled in.</p>
+      <Link href="/teacher/tools" className="mt-4 inline-flex rounded-md border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:border-slate-300 hover:bg-slate-50">
+        Open existing State Track tools
+      </Link>
     </section>
   );
 }

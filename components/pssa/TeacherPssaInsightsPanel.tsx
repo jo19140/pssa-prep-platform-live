@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import type { ClassMisconceptionLabel, ClassReport } from "@/lib/content/pssaClassReport";
 
 type LessonSuggestionCandidate = {
@@ -24,6 +25,8 @@ type AssignRequest = {
 export function TeacherPssaInsightsPanel({
   report,
   className,
+  classRoomId,
+  benchmarkSeason,
   lessonSuggestions = {},
   suggestionsUnavailable = false,
   assignState = {},
@@ -31,6 +34,8 @@ export function TeacherPssaInsightsPanel({
 }: {
   report: ClassReport;
   className?: string;
+  classRoomId?: string;
+  benchmarkSeason?: string;
   lessonSuggestions?: Record<string, LessonSuggestionCandidate[]>;
   suggestionsUnavailable?: boolean;
   assignState?: AssignState;
@@ -79,9 +84,17 @@ export function TeacherPssaInsightsPanel({
         Readiness bands are Sý Learning practice levels, not official PSSA proficiency labels.
       </p>
       {report.scoreStatusCounts.provisional > 0 ? (
-        <p className="mt-2 text-xs font-medium text-orange-700">
-          {report.scoreStatusCounts.provisional} provisional awaiting hand-scoring.
-        </p>
+        <div className="mt-2 flex flex-wrap items-center gap-3 text-xs font-medium text-orange-700">
+          <span>{report.scoreStatusCounts.provisional} provisional awaiting hand-scoring.</span>
+          {classRoomId ? (
+            <Link
+              href={`/teacher?${gradingParams({ classRoomId, formId: report.formId, benchmarkSeason: benchmarkSeason ?? report.benchmarkSeason })}`}
+              className="font-semibold text-orange-800 underline underline-offset-2 hover:text-orange-950"
+            >
+              Grade writing responses -&gt;
+            </Link>
+          ) : null}
+        </div>
       ) : null}
       {report.additionalAnalyticsItems.possiblePoints > 0 ? (
         <div className="mt-5 rounded-md border border-slate-200 bg-slate-50 p-4">
@@ -235,6 +248,16 @@ export function TeacherPssaInsightsPanel({
       </div>
     </section>
   );
+}
+
+function gradingParams(input: { classRoomId: string; formId: string; benchmarkSeason?: string }) {
+  const params = new URLSearchParams({
+    tab: "grading",
+    classRoomId: input.classRoomId,
+    formId: input.formId,
+  });
+  if (input.benchmarkSeason) params.set("benchmarkSeason", input.benchmarkSeason);
+  return params.toString();
 }
 
 function Header({ report, className }: { report: ClassReport; className?: string }) {
