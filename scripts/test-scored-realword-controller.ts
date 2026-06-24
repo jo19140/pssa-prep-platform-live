@@ -4,11 +4,16 @@ import {
   entryKey,
   normalizeScoredRealWordTranscript,
   type ScoredRealWordControllerDeps,
+  type ScoredRealWordControllerOptions,
   type ScoredRealWordEntry,
   type ScoredRealWordEventInput,
   type ScoredRealWordResolvedOutcome,
   type ScoredRealWordState,
 } from "../lib/literacy/scoredRealWordController";
+import {
+  createScoredRealWordControllerLifecycle,
+  initialScoredRealWordState,
+} from "../components/literacy/useScoredRealWordController";
 
 const copy = {
   readWord: "Read {word}.",
@@ -113,22 +118,7 @@ function createHarness() {
     return { callback, delayMs };
   };
 
-  const controller = new ScoredRealWordController(
-    {
-      copy,
-      reteachTemplate: "The e at the end helps a say its name. Try again: {word}.",
-      onHarperMessage: (message) => harperMessages.push(message),
-      onBuddyState: (state) => buddyStates.push(state),
-      onSpeak: async (message) => {
-        spoken.push(message);
-        now += 250;
-      },
-      onVoiceEvent: (event) => events.push(event),
-      onWordResolved: (outcome) => resolved.push(outcome),
-      onBusyChange: (value) => busy.push(value),
-    },
-    deps,
-  );
+  const controller = new ScoredRealWordController(createOptions({ harperMessages, buddyStates, spoken, events, resolved, busy, advanceTime: (ms) => { now += ms; } }), deps);
   controller.subscribe((state) => stateSnapshots.push(cloneState(state)));
 
   async function read(entry: ScoredRealWordEntry, response: QueuedFetch, capture: "audio" | "empty" = "audio") {
@@ -142,6 +132,8 @@ function createHarness() {
 }
 
 async function main() {
+  assert.deepEqual(initialScoredRealWordState, new ScoredRealWordController(createNoopOptions(), createNoopDeps()).getSnapshot());
+
   assert.equal(normalizeScoredRealWordTranscript("  Cake!!!  "), "cake");
   assert.equal(normalizeScoredRealWordTranscript("CAKE     tape."), "cake tape");
 
@@ -281,7 +273,202 @@ async function main() {
     assert.equal(h.fetches.length, 0, "empty blob must not POST");
   }
 
+  await assertStrictModeLifecycle();
+  await assertLifecycleOptionUpdatesWithoutRecreation();
+  await assertLifecycleTwoTapCycle();
+
   console.log("scored real-word controller characterization passed");
+}
+
+function createOptions({
+  harperMessages = [],
+  buddyStates = [],
+  spoken = [],
+  events = [],
+  resolved = [],
+  busy = [],
+  advanceTime = () => undefined,
+}: {
+  harperMessages?: string[];
+  buddyStates?: string[];
+  spoken?: string[];
+  events?: ScoredRealWordEventInput[];
+  resolved?: ScoredRealWordResolvedOutcome[];
+  busy?: boolean[];
+  advanceTime?: (ms: number) => void;
+} = {}): ScoredRealWordControllerOptions {
+  return {
+    copy,
+    reteachTemplate: "The e at the end helps a say its name. Try again: {word}.",
+    onHarperMessage: (message) => harperMessages.push(message),
+    onBuddyState: (state) => buddyStates.push(state),
+    onSpeak: async (message) => {
+      spoken.push(message);
+      advanceTime(250);
+    },
+    onVoiceEvent: (event) => events.push(event),
+    onWordResolved: (outcome) => resolved.push(outcome),
+    onBusyChange: (value) => busy.push(value),
+  };
+}
+
+function createNoopOptions(): ScoredRealWordControllerOptions {
+  return createOptions();
+}
+
+function createNoopDeps(): ScoredRealWordControllerDeps {
+  return {
+    startAudioCapture: async () => ({ live: true }),
+    stopAudioCapture: () => undefined,
+    fetch: async () => fakeResponse(200, { transcript: "cake", confidenceProxy: 0.9 }),
+    now: () => 1_000,
+    setTimeout: () => ({}),
+    clearTimeout: () => undefined,
+    wait: async () => undefined,
+    createBlob: (parts, type) => new Blob(parts, { type }),
+    createFile: (blob) => blob,
+    createFormData: () => new FormData(),
+    createAbortController: () => ({ signal: { aborted: false }, abort: () => undefined }) as AbortController,
+  };
+}
+
+async function assertStrictModeLifecycle() {
+  const states: ScoredRealWordState[] = [];
+  const events: ScoredRealWordEventInput[] = [];
+  const controllers: ScoredRealWordController[] = [];
+  const starts: string[] = [];
+  let options = createOptions({ events });
+  const deps = createNoopDeps();
+  deps.startAudioCapture = async () => {
+    starts.push("start");
+    return { live: true };
+  };
+
+  const lifecycle = createScoredRealWordControllerLifecycle({
+    deps,
+    getOptions: () => options,
+    setState: (state) => states.push(cloneState(state)),
+    createController: (controllerOptions, controllerDeps) => {
+      const controller = new ScoredRealWordController(controllerOptions, controllerDeps);
+      controllers.push(controller);
+      return controller;
+    },
+  });
+
+  const cleanupA = lifecycle.setup();
+  const controllerA = lifecycle.getControllerForTests();
+  cleanupA();
+  const cleanupB = lifecycle.setup();
+  const controllerB = lifecycle.getControllerForTests();
+
+  assert.notEqual(controllerA, controllerB, "Strict Mode setup after cleanup must create a fresh controller");
+  await controllerA?.beginRecording(entryA, false);
+  assert.deepEqual(starts, [], "disposed first controller must ignore commands after cleanup");
+
+  options = createOptions({ events });
+  lifecycle.updateOptions();
+  await lifecycle.beginRecording(entryA, false);
+  assert.deepEqual(starts, ["start"], "commands must invoke the active second controller");
+  assert.equal(controllers.length, 2);
+
+  cleanupB();
+}
+
+async function assertLifecycleOptionUpdatesWithoutRecreation() {
+  const eventsA: ScoredRealWordEventInput[] = [];
+  const eventsB: ScoredRealWordEventInput[] = [];
+  const resolvedB: ScoredRealWordResolvedOutcome[] = [];
+  const chunks: Blob[] = [];
+  let fetchTranscript = "cap";
+  let latestTimeout: number | null = null;
+  let options = createOptions({ events: eventsA });
+  const deps = createNoopDeps();
+  deps.startAudioCapture = async (onChunk) => {
+    onChunk(chunks.shift() ?? new Blob(["sound"], { type: "audio/webm" }));
+    return { live: true };
+  };
+  deps.wait = async () => undefined;
+  deps.setTimeout = (_callback, delayMs) => {
+    latestTimeout = delayMs;
+    return {};
+  };
+  deps.fetch = async () => fakeResponse(200, { transcript: fetchTranscript, confidenceProxy: 0.9 });
+
+  const controllers: ScoredRealWordController[] = [];
+  const lifecycle = createScoredRealWordControllerLifecycle({
+    deps,
+    getOptions: () => options,
+    setState: () => undefined,
+    createController: (controllerOptions, controllerDeps) => {
+      const controller = new ScoredRealWordController(controllerOptions, controllerDeps);
+      controllers.push(controller);
+      return controller;
+    },
+  });
+
+  const cleanup = lifecycle.setup();
+  const identity = lifecycle.getControllerForTests();
+  chunks.push(new Blob(["sound"], { type: "audio/webm" }));
+  await lifecycle.beginRecording(entryA, false);
+  await lifecycle.stopAndScore(entryA);
+  assert.deepEqual(eventsA.map((event) => event.response?.scaffoldStep), ["retry_prompted"]);
+
+  options = createOptions({ events: eventsB, resolved: resolvedB });
+  lifecycle.updateOptions();
+  fetchTranscript = "cake";
+  chunks.push(new Blob(["sound"], { type: "audio/webm" }));
+  await lifecycle.beginRecording(entryA, false);
+  await lifecycle.stopAndScore(entryA);
+
+  assert.equal(lifecycle.getControllerForTests(), identity, "option updates must not recreate the controller");
+  assert.equal(controllers.length, 1);
+  assert.equal(latestTimeout, 20000);
+  assert.deepEqual(eventsA.map((event) => event.response?.scaffoldStep), ["retry_prompted"]);
+  assert.deepEqual(eventsB.map((event) => event.immediateOutcome), ["CORRECT"]);
+  assert.deepEqual(resolvedB.map((outcome) => outcome.attemptCount), [2], "attempts must survive option callback refresh");
+  cleanup();
+}
+
+async function assertLifecycleTwoTapCycle() {
+  const events: ScoredRealWordEventInput[] = [];
+  const resolved: ScoredRealWordResolvedOutcome[] = [];
+  const calls: string[] = [];
+  const fetches: Array<{ url: string; method: string; expectedText: unknown }> = [];
+  const deps = createNoopDeps();
+  deps.startAudioCapture = async (onChunk) => {
+    calls.push("start");
+    onChunk(new Blob(["sound"], { type: "audio/webm" }));
+    return { live: true };
+  };
+  deps.stopAudioCapture = () => {
+    calls.push("stop");
+  };
+  deps.wait = async () => undefined;
+  deps.fetch = async (url, init) => {
+    const form = init?.body as FormData;
+    fetches.push({ url: String(url), method: String(init?.method || ""), expectedText: form.get("expectedText") });
+    return fakeResponse(200, { transcript: "cake", confidenceProxy: 0.9 });
+  };
+
+  const lifecycle = createScoredRealWordControllerLifecycle({
+    deps,
+    getOptions: () => createOptions({ events, resolved }),
+    setState: () => undefined,
+  });
+  const cleanup = lifecycle.setup();
+
+  await lifecycle.beginRecording(entryA, false);
+  assert.deepEqual(calls, ["start"]);
+  assert.equal(fetches.length, 0);
+  assert.equal(events.length, 0);
+  assert.equal(resolved.length, 0);
+
+  await lifecycle.stopAndScore(entryA);
+  assert.deepEqual(calls, ["start", "stop"]);
+  assert.deepEqual(fetches, [{ url: "/api/voice/transcribe", method: "POST", expectedText: "cake" }]);
+  assert.deepEqual(events.map((event) => event.immediateOutcome), ["CORRECT"]);
+  assert.deepEqual(resolved.map((outcome) => outcome.status), ["correct"]);
+  cleanup();
 }
 
 function fakeResponse(status: number, body: Record<string, unknown>, retryAfter: string | null = null) {
