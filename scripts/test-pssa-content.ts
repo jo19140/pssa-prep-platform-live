@@ -24,6 +24,7 @@ import { buildMoyP2Packet } from "./content/author-pssa-moy-p2";
 import { buildMoyP3Packet } from "./content/author-pssa-moy-p3";
 import { buildMoyP4Packet } from "./content/author-pssa-moy-p4";
 import { buildMoyConventionsPacket } from "./content/author-pssa-moy-conventions";
+import { buildEoyP1Packet } from "./content/author-pssa-eoy-p1";
 import {
   PSSA_CONTENT_QUALITY_GATE_IDS,
   buildPlan,
@@ -201,6 +202,9 @@ const moyP4Items = moyP4Packet.items as any[];
 const moyP4Passage = moyP4Packet.passages[0] as any;
 const moyConventionsPacket = buildMoyConventionsPacket();
 const moyConventionsItems = moyConventionsPacket.items as any[];
+const eoyP1Packet = buildEoyP1Packet();
+const eoyP1Items = eoyP1Packet.items as any[];
+const eoyP1Passage = eoyP1Packet.passages[0] as any;
 const expectedStaminaConventions = [
   {
     id: "conv_01",
@@ -474,6 +478,47 @@ for (const item of moyConventionsItems) {
   assert.equal(item.section, undefined, `${item.itemId} must not set section in the bank`);
   assert.equal(item.blanks[0].options.length, 4, `${item.itemId} must have four options`);
   for (const option of item.blanks[0].options) assert.equal(option.distractorRole, undefined, `${item.itemId} must not carry distractorRole`);
+  projectPssaStudentItem(item);
+}
+assert.equal(eoyP1Packet.noDbWrite, true, "EOY P1 packet must be file-only noDbWrite");
+assert.equal(eoyP1Packet.productionImportReady, false, "EOY P1 packet must not be production import ready");
+assert.equal(eoyP1Packet.passages.length, 1, "EOY P1 must contain exactly one passage");
+assert.equal(eoyP1Items.length, 11, "EOY P1 must contain exactly eleven items");
+assert.equal(eoyP1Passage.id, "pssa_psg_g3_eoy_p1_crayons", "EOY P1 passage id must be pinned");
+assert.equal(eoyP1Passage.wordCount, 712, "EOY P1 passage word count must remain pinned");
+assert.equal(eoyP1Passage.staminaBand, "released_length", "EOY P1 passage stamina band must be released_length");
+assert.equal(eoyP1Passage.factCheckRequired, true, "EOY P1 passage must require fact check");
+assert.equal(evaluatePssaDomainFactCheckRequired(eoyP1Passage), "PASS", "EOY P1 fact-check gate must pass");
+assert.equal(eoyP1Passage.textFeaturesJson.filter((feature: any) => feature.type === "figure").length, 1, "EOY P1 must contain exactly one figure feature");
+assert.equal(eoyP1Passage.textFeaturesJson[0].figureKind, "process", "EOY P1 figure must be a process figure");
+assert.deepEqual(
+  eoyP1Items.map((item: any) => [item.itemId, item.eligibleContent, item.interactionType, item.pointValue]),
+  [
+    ["pssa_item_g3_eoy_p1_mcq_bk111", "E03.B-K.1.1.1", "MCQ", 1],
+    ["pssa_item_g3_eoy_p1_mcq_bc212", "E03.B-C.2.1.2", "MCQ", 1],
+    ["pssa_item_g3_eoy_p1_mcq_bc311", "E03.B-C.3.1.1", "MCQ", 1],
+    ["pssa_item_g3_eoy_p1_mcq_bv411", "E03.B-V.4.1.1", "MCQ", 1],
+    ["pssa_item_g3_eoy_p1_mcq_bc313", "E03.B-C.3.1.3", "MCQ", 1],
+    ["pssa_item_g3_eoy_p1_te_bk112", "E03.B-K.1.1.2", "MATCHING_GRID", 3],
+    ["pssa_item_g3_eoy_p1_sa_bk113", "E03.B-K.1.1.3", "SHORT_ANSWER", 3],
+    ["pssa_item_g3_eoy_p1_mcq_bc212_ao2", "E03.B-C.2.1.2", "MCQ", 1],
+    ["pssa_item_g3_eoy_p1_mcq_bv411_ao3", "E03.B-V.4.1.1", "MCQ", 1],
+    ["pssa_item_g3_eoy_p1_te_bc313_ao9", "E03.B-C.3.1.3", "MATCHING_GRID", 3],
+    ["pssa_item_g3_eoy_p1_te_bv411_ao10", "E03.B-V.4.1.1", "MATCHING_GRID", 3],
+  ],
+  "EOY P1 EC/type/points table must match the locked spec",
+);
+assert.deepEqual(eoyP1Items.filter((item: any) => item.interactionType === "MCQ").map((item: any) => item.correctIndex), [2, 0, 3, 1, 2, 0, 3], "EOY P1 MCQ key positions must be C/A/D/B/C/A/D");
+assert.equal(eoyP1Items.filter((item: any) => item.interactionType === "MATCHING_GRID").length, 3, "EOY P1 must contain three matching grids");
+for (const item of eoyP1Items) {
+  assert.equal(item.passageId, "pssa_psg_g3_eoy_p1_crayons", `${item.itemId} passageId must be EOY P1`);
+  assert.equal(item.passageGroupId, undefined, `${item.itemId} must not set passageGroupId`);
+  assert.equal(item.passageLinks, undefined, `${item.itemId} must not set passageLinks`);
+  assert.equal(item.isCrossText, undefined, `${item.itemId} must not set isCrossText`);
+  assert.equal(item.requiredEvidenceSlotsJson, undefined, `${item.itemId} must not set requiredEvidenceSlotsJson`);
+  assert.equal(item.reviewStatus, "PENDING", `${item.itemId} reviewStatus must be PENDING`);
+  assert.equal(item.itemStatus, "candidate", `${item.itemId} itemStatus must be candidate`);
+  assert.equal(item.scoringBucket, undefined, `${item.itemId} must not set scoringBucket in the bank`);
   projectPssaStudentItem(item);
 }
 assert.equal(evaluatePssaItemIntraChoiceDuplicate({

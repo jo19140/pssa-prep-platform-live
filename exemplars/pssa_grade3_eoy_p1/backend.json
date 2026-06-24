@@ -1,0 +1,1710 @@
+{
+  "generatedAt": "2026-06-24T12:05:25.393Z",
+  "noDbWrite": true,
+  "productionImportReady": false,
+  "passageCount": 1,
+  "itemCount": 11,
+  "passages": [
+    {
+      "id": "pssa_psg_g3_eoy_p1_crayons",
+      "title": "How Crayons Are Made",
+      "gradeLevel": 3,
+      "subject": "ELA",
+      "passageType": "informational",
+      "genre": "informational_description",
+      "domainVocabularyLoad": "medium",
+      "wordCount": 712,
+      "text": "Have you ever wondered how a crayon gets its bright color and smooth shape? Many factory-made crayons begin with paraffin wax and powdered pigment. At a factory, machines and workers turn these materials into the crayons you use. Crayons look simple, but making them takes care, heat, and a plan. The trip from wax to crayon happens in just a few steps, and each step has a job to do.\n\nMelting the Wax\n\nThe first step is getting the wax ready. Crayons are made mostly of paraffin wax. Workers heat or keep the wax warm in large metal tanks until it is a clear liquid. In some factories, the wax even arrives in liquid form and must stay warm so it does not harden. A solid turns into a liquid when it gets hot enough, the way an ice cube melts in the warm sun. The wax is kept hot so it stays liquid until it is needed. The wax must be fully melted before any color can be added. Once the wax is fully liquid, it is smooth and runny and ready to take on color.\n\nAdding the Color\n\nNext comes the color. A worker blends in powdered pigment, the material that gives each crayon its shade. Workers add a measured amount of pigment; the amount depends on the shade. Some colors need more pigment and some need less to come out just right. Red powder makes red crayons, and blue powder makes blue. Factories may use one pigment or blend several. The wax is mixed until the pigment spreads evenly, so that no part of the batch turns out lighter or darker than the rest. Getting the color even is important, because every crayon from one batch should look the same. A single factory can make dozens of different shades this way, from bright red to deep purple.\n\nFilling the Molds\n\nThe colored wax then flows into a mold. A mold is a flat metal tray full of crayon-shaped holes. The hot wax is poured carefully so that each hole fills all the way to the top. Cool water runs through pipes around the mold to help the wax harden quickly. As the liquid wax cools, it becomes solid again and keeps the shape of the mold. Because hundreds of holes are filled at the same time, hundreds of crayons can form all at once. The wax usually becomes solid in about four to seven minutes. Cooling the wax quickly lets the factory make many more crayons in a day.\n\nPushing Out and Checking\n\nWhen the crayons are firm, a machine gently pushes them up and out of the mold. Now the factory must make sure each crayon is good enough to sell. Inspectors examine the crayons for breaks, chips, and bubbles. A crayon may have bubbles if the color was not mixed all the way. Any crayon with these problems is pulled out of the line. The rejected crayons are not thrown away, though — they are melted down and recast in a brand-new batch. Because the bad crayons are removed at this step, every crayon that keeps moving forward is smooth and whole.\n\nWrapping and Packing\n\nThe last steps are wrapping and packing. A fast machine wraps a paper label around the middle of each crayon. The label prints the color's name, so you can find the shade you want. Many crayons get a double layer of paper, which makes them stronger so they do not snap as easily. After that, the finished crayons are sorted by color and dropped into boxes. Some boxes hold only a few colors, while others hold every color of the rainbow, with each crayon made the very same way. Once the boxes are full, they are closed up and stacked for shipping. From there, the boxes are sent out for distribution.\n\nSo the next time you open a fresh box, remember the journey each crayon took — from melted wax and color powder, to a pool of bright color, to the smooth stick in your hand. A lot of careful steps, and a few very hot machines, go into a tool small enough to fit in your pocket. Each crayon may be small, but many people and machines helped make it.",
+      "textFeaturesJson": [
+        {
+          "type": "figure",
+          "figureKind": "process",
+          "featureId": "eoy_p1_crayon_process",
+          "title": "How a Crayon Is Made",
+          "sectionId": "section_0_intro",
+          "assetPath": "/pssa/figures/g3_eoy_p1_crayon_process.svg",
+          "assetSha256": "sha256:4a8a1bd92330adf2c47fb719d7d4e47b56bb6bb1e475f57660c1996ebbb1588a",
+          "altText": "Diagram: the five steps of making a crayon, in order — melt the wax, add the color, fill the mold, push out and check, wrap and pack.",
+          "longDescription": "This diagram shows 5 steps in order. Step 1: Melt the wax. Paraffin wax is heated or kept warm until it is liquid. Step 2: Add the color. Powdered pigment is blended in to give the wax its color. Step 3: Fill the mold. The colored wax is poured into crayon-shaped holes and cooled. Step 4: Push out and check. Hardened crayons are pushed out; broken or chipped ones are removed. Step 5: Wrap and pack. Each crayon gets a paper label, then crayons are sorted and boxed.",
+          "structuredData": {
+            "stages": [
+              {
+                "order": 1,
+                "targetId": "stage_melt",
+                "label": "Melt the wax",
+                "caption": "Paraffin wax is heated or kept warm until it is liquid."
+              },
+              {
+                "order": 2,
+                "targetId": "stage_color",
+                "label": "Add the color",
+                "caption": "Powdered pigment is blended in to give the wax its color."
+              },
+              {
+                "order": 3,
+                "targetId": "stage_mold",
+                "label": "Fill the mold",
+                "caption": "The colored wax is poured into crayon-shaped holes and cooled."
+              },
+              {
+                "order": 4,
+                "targetId": "stage_check",
+                "label": "Push out and check",
+                "caption": "Hardened crayons are pushed out; broken or chipped ones are removed."
+              },
+              {
+                "order": 5,
+                "targetId": "stage_pack",
+                "label": "Wrap and pack",
+                "caption": "Each crayon gets a paper label, then crayons are sorted and boxed."
+              }
+            ]
+          }
+        }
+      ],
+      "factCheckRequired": true,
+      "factCheckNotesJson": [
+        {
+          "claimId": "t1-paraffin-pigment",
+          "claim": "Crayons are made primarily of paraffin wax and color pigment.",
+          "sourceTitle": "What is the Crayola Crayons manufacturing process and basic ingredients?",
+          "organization": "Crayola, LLC",
+          "sourceUrl": "https://www.crayola.com/faqs/what-is-the-crayola-crayons-manufacturing-process-and-basic-ingredients-faq",
+          "claimSupported": true,
+          "dateAccessed": "2026-06-23"
+        },
+        {
+          "claimId": "t1-melt-blend",
+          "claim": "The process melts paraffin wax and blends it with color pigments.",
+          "sourceTitle": "What is the Crayola Crayons manufacturing process and basic ingredients?",
+          "organization": "Crayola, LLC",
+          "sourceUrl": "https://www.crayola.com/faqs/what-is-the-crayola-crayons-manufacturing-process-and-basic-ingredients-faq",
+          "claimSupported": true,
+          "dateAccessed": "2026-06-23"
+        },
+        {
+          "claimId": "t1-premeasured-pigment",
+          "claim": "The wax is mixed with pre-measured amounts of color pigment; factories use individual pigments or mix several to make many colors.",
+          "sourceTitle": "Can you provide information about the science of Crayola Crayons?",
+          "organization": "Crayola, LLC",
+          "sourceUrl": "https://www.crayola.com/faqs/can-you-provide-information-about-the-science-of-crayola-crayons-faq",
+          "claimSupported": true,
+          "dateAccessed": "2026-06-23"
+        },
+        {
+          "claimId": "t1-mold-solidify",
+          "claim": "The mixture is poured into molds where it solidifies in about four to seven minutes.",
+          "sourceTitle": "What is the Crayola Crayons manufacturing process and basic ingredients?",
+          "organization": "Crayola, LLC",
+          "sourceUrl": "https://www.crayola.com/faqs/what-is-the-crayola-crayons-manufacturing-process-and-basic-ingredients-faq",
+          "claimSupported": true,
+          "dateAccessed": "2026-06-23"
+        },
+        {
+          "claimId": "t1-pigment-powder",
+          "claim": "Pigments are added in powdered form because paraffin will not mix with water.",
+          "sourceTitle": "How crayon is made",
+          "organization": "Advameg, Inc. (madehow.com)",
+          "sourceUrl": "https://www.madehow.com/Volume-2/Crayon.html",
+          "claimSupported": true,
+          "dateAccessed": "2026-06-23"
+        },
+        {
+          "claimId": "t1-paraffin-warm",
+          "claim": "Paraffin is delivered warm/liquid and kept warm so it does not harden before use.",
+          "sourceTitle": "How crayon is made",
+          "organization": "Advameg, Inc. (madehow.com)",
+          "sourceUrl": "https://www.madehow.com/Volume-2/Crayon.html",
+          "claimSupported": true,
+          "dateAccessed": "2026-06-23"
+        },
+        {
+          "claimId": "t1-inspect",
+          "claim": "After cooling, crayons are pushed from the molds and inspected for breaks, chips, and bubbles (bubbles form from incomplete mixing).",
+          "sourceTitle": "How crayon is made",
+          "organization": "Advameg, Inc. (madehow.com)",
+          "sourceUrl": "https://www.madehow.com/Volume-2/Crayon.html",
+          "claimSupported": true,
+          "dateAccessed": "2026-06-23"
+        },
+        {
+          "claimId": "t1-remelt",
+          "claim": "Rejected crayons are returned for remelting and recasting.",
+          "sourceTitle": "How crayon is made",
+          "organization": "Advameg, Inc. (madehow.com)",
+          "sourceUrl": "https://www.madehow.com/Volume-2/Crayon.html",
+          "claimSupported": true,
+          "dateAccessed": "2026-06-23"
+        },
+        {
+          "claimId": "t1-wrap-pack",
+          "claim": "Passing crayons are wrapped with paper labels (often a double wrap for strength), then filled into boxes for distribution.",
+          "sourceTitle": "How crayon is made",
+          "organization": "Advameg, Inc. (madehow.com)",
+          "sourceUrl": "https://www.madehow.com/Volume-2/Crayon.html",
+          "claimSupported": true,
+          "dateAccessed": "2026-06-23"
+        }
+      ],
+      "staminaBand": "released_length",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "provenanceJson": {
+        "benchmarkSeason": "EOY",
+        "blueprintVersion": "pde-ela-diagnostic-stamina-2025-g3-eoy-v1",
+        "unit": "P1"
+      }
+    }
+  ],
+  "items": [
+    {
+      "id": "pssa_item_g3_eoy_p1_mcq_bk111",
+      "itemId": "pssa_item_g3_eoy_p1_mcq_bk111",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "MCQ",
+      "interactionType": "MCQ",
+      "interactionSubtype": "explicit_text_detail",
+      "passageId": "pssa_psg_g3_eoy_p1_crayons",
+      "passageTitle": "How Crayons Are Made",
+      "eligibleContent": "E03.B-K.1.1.1",
+      "reportingCategory": "B",
+      "pointValue": 1,
+      "correctResponseJson": {
+        "correctIndex": 2
+      },
+      "scoringJson": {
+        "totalPoints": 1
+      },
+      "evidenceBinding": {
+        "requiresFigure": false,
+        "requiresPassageText": true,
+        "quotedText": "A worker blends in powdered pigment, the material that gives each crayon its shade.",
+        "evidenceKind": "passage_only"
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "provenanceJson": {
+        "benchmarkSeason": "EOY",
+        "blueprintVersion": "pde-ela-diagnostic-stamina-2025-g3-eoy-v1",
+        "unit": "P1"
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_EOY_P1_ITEMS",
+        "noDbWrite": true,
+        "productionImportReady": false
+      },
+      "studentFacingPrompt": "What material is blended in to give the wax its color?",
+      "stem": "What material is blended in to give the wax its color?",
+      "answerChoicesJson": [
+        {
+          "text": "paraffin wax",
+          "distractorRole": "wrong_section",
+          "rationale": "Paraffin is the wax base, but the passage says pigment gives the crayon its shade.",
+          "evidence": "Crayons are made mostly of paraffin wax."
+        },
+        {
+          "text": "cool water",
+          "distractorRole": "wrong_emphasis",
+          "rationale": "Cool water helps the wax harden in the mold; it does not give the wax color.",
+          "evidence": "Cool water runs through pipes around the mold."
+        },
+        {
+          "text": "powdered pigment",
+          "rationale": "Correct. The passage states that powdered pigment gives each crayon its shade.",
+          "evidence": "A worker blends in powdered pigment, the material that gives each crayon its shade.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "quotedSpan": "A worker blends in powdered pigment, the material that gives each crayon its shade."
+            }
+          ]
+        },
+        {
+          "text": "a paper label",
+          "distractorRole": "plausible_misreading",
+          "rationale": "The label names the color after the crayon is made; it does not color the wax.",
+          "evidence": "The label prints the color's name."
+        }
+      ],
+      "structuredChoicesJson": [
+        {
+          "text": "paraffin wax",
+          "distractorRole": "wrong_section",
+          "rationale": "Paraffin is the wax base, but the passage says pigment gives the crayon its shade.",
+          "evidence": "Crayons are made mostly of paraffin wax."
+        },
+        {
+          "text": "cool water",
+          "distractorRole": "wrong_emphasis",
+          "rationale": "Cool water helps the wax harden in the mold; it does not give the wax color.",
+          "evidence": "Cool water runs through pipes around the mold."
+        },
+        {
+          "text": "powdered pigment",
+          "rationale": "Correct. The passage states that powdered pigment gives each crayon its shade.",
+          "evidence": "A worker blends in powdered pigment, the material that gives each crayon its shade.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "quotedSpan": "A worker blends in powdered pigment, the material that gives each crayon its shade."
+            }
+          ]
+        },
+        {
+          "text": "a paper label",
+          "distractorRole": "plausible_misreading",
+          "rationale": "The label names the color after the crayon is made; it does not color the wax.",
+          "evidence": "The label prints the color's name."
+        }
+      ],
+      "correctIndex": 2,
+      "responseSpecJson": {
+        "prompt": "What material is blended in to give the wax its color?",
+        "choices": [
+          "paraffin wax",
+          "cool water",
+          "powdered pigment",
+          "a paper label"
+        ],
+        "structuredChoicesJson": [
+          {
+            "text": "paraffin wax",
+            "distractorRole": "wrong_section"
+          },
+          {
+            "text": "cool water",
+            "distractorRole": "wrong_emphasis"
+          },
+          {
+            "text": "powdered pigment"
+          },
+          {
+            "text": "a paper label",
+            "distractorRole": "plausible_misreading"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pssa_item_g3_eoy_p1_mcq_bc212",
+      "itemId": "pssa_item_g3_eoy_p1_mcq_bc212",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "MCQ",
+      "interactionType": "MCQ",
+      "interactionSubtype": "heading_locator",
+      "passageId": "pssa_psg_g3_eoy_p1_crayons",
+      "passageTitle": "How Crayons Are Made",
+      "eligibleContent": "E03.B-C.2.1.2",
+      "reportingCategory": "B",
+      "pointValue": 1,
+      "correctResponseJson": {
+        "correctIndex": 0
+      },
+      "scoringJson": {
+        "totalPoints": 1
+      },
+      "evidenceBinding": {
+        "requiresFigure": false,
+        "requiresPassageText": true,
+        "quotedText": "Adding the Color",
+        "evidenceKind": "passage_only"
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "provenanceJson": {
+        "benchmarkSeason": "EOY",
+        "blueprintVersion": "pde-ela-diagnostic-stamina-2025-g3-eoy-v1",
+        "unit": "P1"
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_EOY_P1_ITEMS",
+        "noDbWrite": true,
+        "productionImportReady": false
+      },
+      "studentFacingPrompt": "Which text feature would best help a reader find the step where pigment is added?",
+      "stem": "Which text feature would best help a reader find the step where pigment is added?",
+      "answerChoicesJson": [
+        {
+          "text": "the heading \"Adding the Color\"",
+          "rationale": "Correct. The heading names the section about adding pigment.",
+          "evidence": "Adding the Color",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "quotedSpan": "Adding the Color"
+            }
+          ]
+        },
+        {
+          "text": "the title \"How Crayons Are Made\"",
+          "distractorRole": "wrong_emphasis",
+          "rationale": "The title gives the topic of the whole passage, not the exact step where pigment is added.",
+          "evidence": "How Crayons Are Made"
+        },
+        {
+          "text": "the sentence about four to seven minutes",
+          "distractorRole": "wrong_section",
+          "rationale": "That sentence belongs to the mold-filling section, not the color section.",
+          "evidence": "The wax usually becomes solid in about four to seven minutes."
+        },
+        {
+          "text": "the closing paragraph about a fresh box",
+          "distractorRole": "unsupported_inference",
+          "rationale": "The closing paragraph summarizes the journey; it does not locate the color step.",
+          "evidence": "So the next time you open a fresh box"
+        }
+      ],
+      "structuredChoicesJson": [
+        {
+          "text": "the heading \"Adding the Color\"",
+          "rationale": "Correct. The heading names the section about adding pigment.",
+          "evidence": "Adding the Color",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "quotedSpan": "Adding the Color"
+            }
+          ]
+        },
+        {
+          "text": "the title \"How Crayons Are Made\"",
+          "distractorRole": "wrong_emphasis",
+          "rationale": "The title gives the topic of the whole passage, not the exact step where pigment is added.",
+          "evidence": "How Crayons Are Made"
+        },
+        {
+          "text": "the sentence about four to seven minutes",
+          "distractorRole": "wrong_section",
+          "rationale": "That sentence belongs to the mold-filling section, not the color section.",
+          "evidence": "The wax usually becomes solid in about four to seven minutes."
+        },
+        {
+          "text": "the closing paragraph about a fresh box",
+          "distractorRole": "unsupported_inference",
+          "rationale": "The closing paragraph summarizes the journey; it does not locate the color step.",
+          "evidence": "So the next time you open a fresh box"
+        }
+      ],
+      "correctIndex": 0,
+      "responseSpecJson": {
+        "prompt": "Which text feature would best help a reader find the step where pigment is added?",
+        "choices": [
+          "the heading \"Adding the Color\"",
+          "the title \"How Crayons Are Made\"",
+          "the sentence about four to seven minutes",
+          "the closing paragraph about a fresh box"
+        ],
+        "structuredChoicesJson": [
+          {
+            "text": "the heading \"Adding the Color\""
+          },
+          {
+            "text": "the title \"How Crayons Are Made\"",
+            "distractorRole": "wrong_emphasis"
+          },
+          {
+            "text": "the sentence about four to seven minutes",
+            "distractorRole": "wrong_section"
+          },
+          {
+            "text": "the closing paragraph about a fresh box",
+            "distractorRole": "unsupported_inference"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pssa_item_g3_eoy_p1_mcq_bc311",
+      "itemId": "pssa_item_g3_eoy_p1_mcq_bc311",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "MCQ",
+      "interactionType": "MCQ",
+      "interactionSubtype": "cause_effect",
+      "passageId": "pssa_psg_g3_eoy_p1_crayons",
+      "passageTitle": "How Crayons Are Made",
+      "eligibleContent": "E03.B-C.3.1.1",
+      "reportingCategory": "B",
+      "pointValue": 1,
+      "correctResponseJson": {
+        "correctIndex": 3
+      },
+      "scoringJson": {
+        "totalPoints": 1
+      },
+      "evidenceBinding": {
+        "requiresFigure": false,
+        "requiresPassageText": true,
+        "quotedText": "A crayon may have bubbles if the color was not mixed all the way.",
+        "evidenceKind": "passage_only"
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "provenanceJson": {
+        "benchmarkSeason": "EOY",
+        "blueprintVersion": "pde-ela-diagnostic-stamina-2025-g3-eoy-v1",
+        "unit": "P1"
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_EOY_P1_ITEMS",
+        "noDbWrite": true,
+        "productionImportReady": false
+      },
+      "studentFacingPrompt": "According to the passage, why may a crayon have bubbles?",
+      "stem": "According to the passage, why may a crayon have bubbles?",
+      "answerChoicesJson": [
+        {
+          "text": "because the paper label was wrapped twice",
+          "distractorRole": "wrong_section",
+          "rationale": "The double paper layer is about strength during wrapping, not bubbles.",
+          "evidence": "Many crayons get a double layer of paper."
+        },
+        {
+          "text": "because cool water runs through pipes",
+          "distractorRole": "opposite_claim",
+          "rationale": "Cool water helps crayons harden; the passage does not say it creates bubbles.",
+          "evidence": "Cool water runs through pipes around the mold to help the wax harden quickly."
+        },
+        {
+          "text": "because the wax was poured into crayon-shaped holes",
+          "distractorRole": "wrong_emphasis",
+          "rationale": "Pouring into molds shapes crayons, but the passage names incomplete mixing as the cause of bubbles.",
+          "evidence": "The hot wax is poured carefully."
+        },
+        {
+          "text": "because the color was not mixed all the way",
+          "rationale": "Correct. The passage directly connects incomplete mixing with bubbles.",
+          "evidence": "A crayon may have bubbles if the color was not mixed all the way.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "quotedSpan": "A crayon may have bubbles if the color was not mixed all the way."
+            }
+          ]
+        }
+      ],
+      "structuredChoicesJson": [
+        {
+          "text": "because the paper label was wrapped twice",
+          "distractorRole": "wrong_section",
+          "rationale": "The double paper layer is about strength during wrapping, not bubbles.",
+          "evidence": "Many crayons get a double layer of paper."
+        },
+        {
+          "text": "because cool water runs through pipes",
+          "distractorRole": "opposite_claim",
+          "rationale": "Cool water helps crayons harden; the passage does not say it creates bubbles.",
+          "evidence": "Cool water runs through pipes around the mold to help the wax harden quickly."
+        },
+        {
+          "text": "because the wax was poured into crayon-shaped holes",
+          "distractorRole": "wrong_emphasis",
+          "rationale": "Pouring into molds shapes crayons, but the passage names incomplete mixing as the cause of bubbles.",
+          "evidence": "The hot wax is poured carefully."
+        },
+        {
+          "text": "because the color was not mixed all the way",
+          "rationale": "Correct. The passage directly connects incomplete mixing with bubbles.",
+          "evidence": "A crayon may have bubbles if the color was not mixed all the way.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "quotedSpan": "A crayon may have bubbles if the color was not mixed all the way."
+            }
+          ]
+        }
+      ],
+      "correctIndex": 3,
+      "responseSpecJson": {
+        "prompt": "According to the passage, why may a crayon have bubbles?",
+        "choices": [
+          "because the paper label was wrapped twice",
+          "because cool water runs through pipes",
+          "because the wax was poured into crayon-shaped holes",
+          "because the color was not mixed all the way"
+        ],
+        "structuredChoicesJson": [
+          {
+            "text": "because the paper label was wrapped twice",
+            "distractorRole": "wrong_section"
+          },
+          {
+            "text": "because cool water runs through pipes",
+            "distractorRole": "opposite_claim"
+          },
+          {
+            "text": "because the wax was poured into crayon-shaped holes",
+            "distractorRole": "wrong_emphasis"
+          },
+          {
+            "text": "because the color was not mixed all the way"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pssa_item_g3_eoy_p1_mcq_bv411",
+      "itemId": "pssa_item_g3_eoy_p1_mcq_bv411",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "MCQ",
+      "interactionType": "MCQ",
+      "interactionSubtype": "context_vocabulary",
+      "passageId": "pssa_psg_g3_eoy_p1_crayons",
+      "passageTitle": "How Crayons Are Made",
+      "eligibleContent": "E03.B-V.4.1.1",
+      "reportingCategory": "B",
+      "pointValue": 1,
+      "correctResponseJson": {
+        "correctIndex": 1
+      },
+      "scoringJson": {
+        "totalPoints": 1
+      },
+      "evidenceBinding": {
+        "requiresFigure": false,
+        "requiresPassageText": true,
+        "quotedText": "must stay warm so it does not harden",
+        "evidenceKind": "passage_only"
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "provenanceJson": {
+        "benchmarkSeason": "EOY",
+        "blueprintVersion": "pde-ela-diagnostic-stamina-2025-g3-eoy-v1",
+        "unit": "P1"
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_EOY_P1_ITEMS",
+        "noDbWrite": true,
+        "productionImportReady": false
+      },
+      "studentFacingPrompt": "What does harden mean as it is used in the melting section?",
+      "stem": "What does harden mean as it is used in the melting section?",
+      "answerChoicesJson": [
+        {
+          "text": "to become colorful",
+          "distractorRole": "wrong_section",
+          "rationale": "Color is added later with pigment; harden describes what happens if wax is not kept warm.",
+          "evidence": "Next comes the color."
+        },
+        {
+          "text": "to become solid",
+          "rationale": "Correct. The wax must stay warm so it does not become solid before it is used.",
+          "evidence": "must stay warm so it does not harden",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "quotedSpan": "must stay warm so it does not harden"
+            }
+          ]
+        },
+        {
+          "text": "to move quickly",
+          "distractorRole": "unsupported_inference",
+          "rationale": "The passage does not use harden to mean moving quickly.",
+          "evidence": "The wax is kept hot so it stays liquid."
+        },
+        {
+          "text": "to be wrapped with paper",
+          "distractorRole": "plausible_misreading",
+          "rationale": "Wrapping happens after the crayon is made; harden is about the wax changing from liquid to solid.",
+          "evidence": "The last steps are wrapping and packing."
+        }
+      ],
+      "structuredChoicesJson": [
+        {
+          "text": "to become colorful",
+          "distractorRole": "wrong_section",
+          "rationale": "Color is added later with pigment; harden describes what happens if wax is not kept warm.",
+          "evidence": "Next comes the color."
+        },
+        {
+          "text": "to become solid",
+          "rationale": "Correct. The wax must stay warm so it does not become solid before it is used.",
+          "evidence": "must stay warm so it does not harden",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "quotedSpan": "must stay warm so it does not harden"
+            }
+          ]
+        },
+        {
+          "text": "to move quickly",
+          "distractorRole": "unsupported_inference",
+          "rationale": "The passage does not use harden to mean moving quickly.",
+          "evidence": "The wax is kept hot so it stays liquid."
+        },
+        {
+          "text": "to be wrapped with paper",
+          "distractorRole": "plausible_misreading",
+          "rationale": "Wrapping happens after the crayon is made; harden is about the wax changing from liquid to solid.",
+          "evidence": "The last steps are wrapping and packing."
+        }
+      ],
+      "correctIndex": 1,
+      "responseSpecJson": {
+        "prompt": "What does harden mean as it is used in the melting section?",
+        "choices": [
+          "to become colorful",
+          "to become solid",
+          "to move quickly",
+          "to be wrapped with paper"
+        ],
+        "structuredChoicesJson": [
+          {
+            "text": "to become colorful",
+            "distractorRole": "wrong_section"
+          },
+          {
+            "text": "to become solid"
+          },
+          {
+            "text": "to move quickly",
+            "distractorRole": "unsupported_inference"
+          },
+          {
+            "text": "to be wrapped with paper",
+            "distractorRole": "plausible_misreading"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pssa_item_g3_eoy_p1_mcq_bc313",
+      "itemId": "pssa_item_g3_eoy_p1_mcq_bc313",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "MCQ",
+      "interactionType": "MCQ",
+      "interactionSubtype": "process_diagram_integration",
+      "passageId": "pssa_psg_g3_eoy_p1_crayons",
+      "passageTitle": "How Crayons Are Made",
+      "eligibleContent": "E03.B-C.3.1.3",
+      "reportingCategory": "B",
+      "pointValue": 1,
+      "correctResponseJson": {
+        "correctIndex": 2
+      },
+      "scoringJson": {
+        "totalPoints": 1
+      },
+      "evidenceBinding": {
+        "requiresFigure": true,
+        "requiresPassageText": true,
+        "quotedText": "Many crayons get a double layer of paper, which makes them stronger so they do not snap as easily.",
+        "figureTargetId": "stage_pack",
+        "evidenceKind": "figure_and_quoted_text"
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "provenanceJson": {
+        "benchmarkSeason": "EOY",
+        "blueprintVersion": "pde-ela-diagnostic-stamina-2025-g3-eoy-v1",
+        "unit": "P1"
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_EOY_P1_ITEMS",
+        "noDbWrite": true,
+        "productionImportReady": false
+      },
+      "studentFacingPrompt": "The passage says a double layer of paper makes a crayon stronger. Which numbered diagram stage shows when that happens?",
+      "stem": "The passage says a double layer of paper makes a crayon stronger. Which numbered diagram stage shows when that happens?",
+      "answerChoicesJson": [
+        {
+          "text": "1 — Melt the wax",
+          "distractorRole": "wrong_section",
+          "rationale": "Stage 1 is about heating wax, not adding paper.",
+          "evidence": "stage_melt"
+        },
+        {
+          "text": "3 — Fill the mold",
+          "distractorRole": "wrong_emphasis",
+          "rationale": "Stage 3 shapes and cools the wax; it does not show wrapping.",
+          "evidence": "stage_mold"
+        },
+        {
+          "text": "5 — Wrap and pack",
+          "rationale": "Correct. The double-paper detail happens during the wrapping and packing stage.",
+          "evidence": "stage_pack",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "quotedSpan": "Many crayons get a double layer of paper, which makes them stronger so they do not snap as easily."
+            }
+          ]
+        },
+        {
+          "text": "4 — Push out and check",
+          "distractorRole": "plausible_misreading",
+          "rationale": "Stage 4 checks crayons for problems before wrapping, but the paper layer is added later.",
+          "evidence": "stage_check"
+        }
+      ],
+      "structuredChoicesJson": [
+        {
+          "text": "1 — Melt the wax",
+          "distractorRole": "wrong_section",
+          "rationale": "Stage 1 is about heating wax, not adding paper.",
+          "evidence": "stage_melt"
+        },
+        {
+          "text": "3 — Fill the mold",
+          "distractorRole": "wrong_emphasis",
+          "rationale": "Stage 3 shapes and cools the wax; it does not show wrapping.",
+          "evidence": "stage_mold"
+        },
+        {
+          "text": "5 — Wrap and pack",
+          "rationale": "Correct. The double-paper detail happens during the wrapping and packing stage.",
+          "evidence": "stage_pack",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "quotedSpan": "Many crayons get a double layer of paper, which makes them stronger so they do not snap as easily."
+            }
+          ]
+        },
+        {
+          "text": "4 — Push out and check",
+          "distractorRole": "plausible_misreading",
+          "rationale": "Stage 4 checks crayons for problems before wrapping, but the paper layer is added later.",
+          "evidence": "stage_check"
+        }
+      ],
+      "correctIndex": 2,
+      "responseSpecJson": {
+        "prompt": "The passage says a double layer of paper makes a crayon stronger. Which numbered diagram stage shows when that happens?",
+        "choices": [
+          "1 — Melt the wax",
+          "3 — Fill the mold",
+          "5 — Wrap and pack",
+          "4 — Push out and check"
+        ],
+        "structuredChoicesJson": [
+          {
+            "text": "1 — Melt the wax",
+            "distractorRole": "wrong_section"
+          },
+          {
+            "text": "3 — Fill the mold",
+            "distractorRole": "wrong_emphasis"
+          },
+          {
+            "text": "5 — Wrap and pack"
+          },
+          {
+            "text": "4 — Push out and check",
+            "distractorRole": "plausible_misreading"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pssa_item_g3_eoy_p1_te_bk112",
+      "itemId": "pssa_item_g3_eoy_p1_te_bk112",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "MATCHING_GRID",
+      "interactionType": "MATCHING_GRID",
+      "interactionSubtype": "main_idea_detail_grid",
+      "passageId": "pssa_psg_g3_eoy_p1_crayons",
+      "passageTitle": "How Crayons Are Made",
+      "eligibleContent": "E03.B-K.1.1.2",
+      "reportingCategory": "B",
+      "pointValue": 3,
+      "correctResponseJson": {
+        "correctCells": [
+          {
+            "rowId": "row_main",
+            "columnId": "main_idea"
+          },
+          {
+            "rowId": "row_tanks",
+            "columnId": "supporting_detail"
+          },
+          {
+            "rowId": "row_minutes",
+            "columnId": "supporting_detail"
+          }
+        ]
+      },
+      "scoringJson": {
+        "totalPoints": 3
+      },
+      "evidenceBinding": {
+        "requiresFigure": false,
+        "requiresPassageText": true,
+        "evidenceKind": "passage_only"
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "provenanceJson": {
+        "benchmarkSeason": "EOY",
+        "blueprintVersion": "pde-ela-diagnostic-stamina-2025-g3-eoy-v1",
+        "unit": "P1"
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_EOY_P1_ITEMS",
+        "noDbWrite": true,
+        "productionImportReady": false
+      },
+      "stem": "Classify each statement as the passage's main idea or a supporting detail.",
+      "instructionText": "Choose the best match for each row.",
+      "rows": [
+        {
+          "rowId": "row_main",
+          "label": "Crayons are made from wax and pigment in a few careful steps.",
+          "correctColumnId": "main_idea",
+          "rationale": "This statement tells what the whole passage is mostly about.",
+          "plausibleWrongRationales": {
+            "supporting_detail": "It is broader than one small detail; it covers the whole process."
+          }
+        },
+        {
+          "rowId": "row_tanks",
+          "label": "Workers heat the wax in large metal tanks until it is liquid.",
+          "correctColumnId": "supporting_detail",
+          "rationale": "This is one detail from the melting step that supports the main idea.",
+          "plausibleWrongRationales": {
+            "main_idea": "It describes only one step, not the whole passage."
+          }
+        },
+        {
+          "rowId": "row_minutes",
+          "label": "Crayons solidify in about four to seven minutes.",
+          "correctColumnId": "supporting_detail",
+          "rationale": "This is a specific detail about the mold step.",
+          "plausibleWrongRationales": {
+            "main_idea": "It is too narrow to be the main idea of the entire passage."
+          }
+        }
+      ],
+      "columns": [
+        {
+          "columnId": "main_idea",
+          "label": "Main idea"
+        },
+        {
+          "columnId": "supporting_detail",
+          "label": "Supporting detail"
+        }
+      ],
+      "selectionRule": "Select one column for each row.",
+      "correctCells": [
+        {
+          "rowId": "row_main",
+          "columnId": "main_idea"
+        },
+        {
+          "rowId": "row_tanks",
+          "columnId": "supporting_detail"
+        },
+        {
+          "rowId": "row_minutes",
+          "columnId": "supporting_detail"
+        }
+      ],
+      "responseSpecJson": {
+        "stem": "Classify each statement as the passage's main idea or a supporting detail.",
+        "instructionText": "Choose the best match for each row.",
+        "rows": [
+          {
+            "rowId": "row_main",
+            "label": "Crayons are made from wax and pigment in a few careful steps.",
+            "correctColumnId": "main_idea",
+            "rationale": "This statement tells what the whole passage is mostly about.",
+            "plausibleWrongRationales": {
+              "supporting_detail": "It is broader than one small detail; it covers the whole process."
+            }
+          },
+          {
+            "rowId": "row_tanks",
+            "label": "Workers heat the wax in large metal tanks until it is liquid.",
+            "correctColumnId": "supporting_detail",
+            "rationale": "This is one detail from the melting step that supports the main idea.",
+            "plausibleWrongRationales": {
+              "main_idea": "It describes only one step, not the whole passage."
+            }
+          },
+          {
+            "rowId": "row_minutes",
+            "label": "Crayons solidify in about four to seven minutes.",
+            "correctColumnId": "supporting_detail",
+            "rationale": "This is a specific detail about the mold step.",
+            "plausibleWrongRationales": {
+              "main_idea": "It is too narrow to be the main idea of the entire passage."
+            }
+          }
+        ],
+        "columns": [
+          {
+            "columnId": "main_idea",
+            "label": "Main idea"
+          },
+          {
+            "columnId": "supporting_detail",
+            "label": "Supporting detail"
+          }
+        ],
+        "selectionRule": "Select one column for each row."
+      }
+    },
+    {
+      "id": "pssa_item_g3_eoy_p1_sa_bk113",
+      "itemId": "pssa_item_g3_eoy_p1_sa_bk113",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "SHORT_ANSWER",
+      "interactionType": "SHORT_ANSWER",
+      "interactionSubtype": "sequence_process_short_answer",
+      "passageId": "pssa_psg_g3_eoy_p1_crayons",
+      "passageTitle": "How Crayons Are Made",
+      "eligibleContent": "E03.B-K.1.1.3",
+      "reportingCategory": "B",
+      "pointValue": 3,
+      "correctResponseJson": {
+        "rubric": "human_scored"
+      },
+      "scoringJson": {
+        "totalPoints": 3,
+        "autoScoringClaim": false
+      },
+      "evidenceBinding": {
+        "requiresFigure": false,
+        "requiresPassageText": true,
+        "evidenceKind": "passage_only"
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "provenanceJson": {
+        "benchmarkSeason": "EOY",
+        "blueprintVersion": "pde-ela-diagnostic-stamina-2025-g3-eoy-v1",
+        "unit": "P1"
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_EOY_P1_ITEMS",
+        "noDbWrite": true,
+        "productionImportReady": false,
+        "autoScoringClaim": false
+      },
+      "stem": "Explain how wax becomes a wrapped crayon. Use at least two details from the passage to support your answer.",
+      "instructionText": "Write a short answer that explains the ordered process and uses details from the passage.",
+      "requiredSupportCount": 2,
+      "requiresTextSupport": true,
+      "expectedAnswerCore": "Wax is melted, pigment is mixed in, colored wax is poured into molds and cooled, the crayons are checked, and then they are wrapped and boxed.",
+      "acceptableTextSupport": [
+        {
+          "supportId": "melt",
+          "quotedSpan": "The wax must be fully melted before any color can be added.",
+          "connectsToExpectedAnswer": "Shows the first step before coloring."
+        },
+        {
+          "supportId": "color",
+          "quotedSpan": "A worker blends in powdered pigment",
+          "connectsToExpectedAnswer": "Shows how the wax gets its color."
+        },
+        {
+          "supportId": "mold",
+          "quotedSpan": "The hot wax is poured carefully so that each hole fills all the way to the top.",
+          "connectsToExpectedAnswer": "Shows how the crayon shape is formed."
+        },
+        {
+          "supportId": "check",
+          "quotedSpan": "Inspectors examine the crayons for breaks, chips, and bubbles.",
+          "connectsToExpectedAnswer": "Shows the checking step before wrapping."
+        },
+        {
+          "supportId": "wrap",
+          "quotedSpan": "A fast machine wraps a paper label around the middle of each crayon.",
+          "connectsToExpectedAnswer": "Shows the final wrapping step."
+        }
+      ],
+      "commonIncompletePatterns": [
+        "Names only one step without explaining order.",
+        "Copies a sentence but does not explain how the process moves from wax to crayon.",
+        "Skips the checking or wrapping stage."
+      ],
+      "rubric": {
+        "points3": "Explains the ordered crayon-making process with at least two accurate passage details and clear reasoning about how the steps connect.",
+        "points2": "Explains part of the sequence with at least one accurate detail, or gives two details with limited explanation.",
+        "points1": "Gives one relevant detail or a vague sequence with little explanation.",
+        "points0": "Gives an incorrect, unsupported, or off-topic response."
+      },
+      "scoreBandExamples": [
+        {
+          "band": 3,
+          "response": "First the wax is melted, then pigment is mixed in so it has color. The liquid wax is poured into molds and cooled, then workers check it before a machine wraps the crayons and boxes them.",
+          "why": "Explains the sequence and uses multiple accurate details."
+        },
+        {
+          "band": 2,
+          "response": "The wax melts and gets color. Then it goes in molds and is wrapped.",
+          "why": "Mostly correct sequence but limited support and explanation."
+        },
+        {
+          "band": 1,
+          "response": "Crayons are made with wax and paper.",
+          "why": "Mentions relevant materials but does not explain the process."
+        },
+        {
+          "band": 0,
+          "response": "Crayons grow on trees.",
+          "why": "Unsupported and incorrect."
+        }
+      ],
+      "responseSpecJson": {
+        "stem": "Explain how wax becomes a wrapped crayon. Use at least two details from the passage to support your answer.",
+        "instructionText": "Write a short answer that explains the ordered process and uses details from the passage.",
+        "requiredSupportCount": 2,
+        "requiresTextSupport": true
+      }
+    },
+    {
+      "id": "pssa_item_g3_eoy_p1_mcq_bc212_ao2",
+      "itemId": "pssa_item_g3_eoy_p1_mcq_bc212_ao2",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "MCQ",
+      "interactionType": "MCQ",
+      "interactionSubtype": "diagram_as_organizer",
+      "passageId": "pssa_psg_g3_eoy_p1_crayons",
+      "passageTitle": "How Crayons Are Made",
+      "eligibleContent": "E03.B-C.2.1.2",
+      "reportingCategory": "B",
+      "pointValue": 1,
+      "correctResponseJson": {
+        "correctIndex": 0
+      },
+      "scoringJson": {
+        "totalPoints": 1
+      },
+      "evidenceBinding": {
+        "requiresFigure": true,
+        "requiresPassageText": true,
+        "evidenceKind": "figure_and_quoted_text"
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "provenanceJson": {
+        "benchmarkSeason": "EOY",
+        "blueprintVersion": "pde-ela-diagnostic-stamina-2025-g3-eoy-v1",
+        "unit": "P1"
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_EOY_P1_ITEMS",
+        "noDbWrite": true,
+        "productionImportReady": false
+      },
+      "studentFacingPrompt": "How does the process diagram help a reader understand the passage?",
+      "stem": "How does the process diagram help a reader understand the passage?",
+      "answerChoicesJson": [
+        {
+          "text": "It shows the five crayon-making steps in order at a glance.",
+          "rationale": "Correct. The diagram organizes the process from melting to wrapping.",
+          "evidence": "This diagram shows 5 steps in order."
+        },
+        {
+          "text": "It explains where the factory is located.",
+          "distractorRole": "unsupported_inference",
+          "rationale": "The diagram does not show the factory's location.",
+          "evidence": "How a Crayon Is Made"
+        },
+        {
+          "text": "It lists every crayon color made in a factory.",
+          "distractorRole": "wrong_emphasis",
+          "rationale": "The passage mentions many shades, but the diagram organizes steps, not colors.",
+          "evidence": "dozens of different shades"
+        },
+        {
+          "text": "It proves rejected crayons are thrown away.",
+          "distractorRole": "opposite_claim",
+          "rationale": "This reverses the passage, which says rejected crayons are melted down and recast.",
+          "evidence": "The rejected crayons are not thrown away"
+        }
+      ],
+      "structuredChoicesJson": [
+        {
+          "text": "It shows the five crayon-making steps in order at a glance.",
+          "rationale": "Correct. The diagram organizes the process from melting to wrapping.",
+          "evidence": "This diagram shows 5 steps in order."
+        },
+        {
+          "text": "It explains where the factory is located.",
+          "distractorRole": "unsupported_inference",
+          "rationale": "The diagram does not show the factory's location.",
+          "evidence": "How a Crayon Is Made"
+        },
+        {
+          "text": "It lists every crayon color made in a factory.",
+          "distractorRole": "wrong_emphasis",
+          "rationale": "The passage mentions many shades, but the diagram organizes steps, not colors.",
+          "evidence": "dozens of different shades"
+        },
+        {
+          "text": "It proves rejected crayons are thrown away.",
+          "distractorRole": "opposite_claim",
+          "rationale": "This reverses the passage, which says rejected crayons are melted down and recast.",
+          "evidence": "The rejected crayons are not thrown away"
+        }
+      ],
+      "correctIndex": 0,
+      "responseSpecJson": {
+        "prompt": "How does the process diagram help a reader understand the passage?",
+        "choices": [
+          "It shows the five crayon-making steps in order at a glance.",
+          "It explains where the factory is located.",
+          "It lists every crayon color made in a factory.",
+          "It proves rejected crayons are thrown away."
+        ],
+        "structuredChoicesJson": [
+          {
+            "text": "It shows the five crayon-making steps in order at a glance."
+          },
+          {
+            "text": "It explains where the factory is located.",
+            "distractorRole": "unsupported_inference"
+          },
+          {
+            "text": "It lists every crayon color made in a factory.",
+            "distractorRole": "wrong_emphasis"
+          },
+          {
+            "text": "It proves rejected crayons are thrown away.",
+            "distractorRole": "opposite_claim"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pssa_item_g3_eoy_p1_mcq_bv411_ao3",
+      "itemId": "pssa_item_g3_eoy_p1_mcq_bv411_ao3",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "MCQ",
+      "interactionType": "MCQ",
+      "interactionSubtype": "context_vocabulary",
+      "passageId": "pssa_psg_g3_eoy_p1_crayons",
+      "passageTitle": "How Crayons Are Made",
+      "eligibleContent": "E03.B-V.4.1.1",
+      "reportingCategory": "B",
+      "pointValue": 1,
+      "correctResponseJson": {
+        "correctIndex": 3
+      },
+      "scoringJson": {
+        "totalPoints": 1
+      },
+      "evidenceBinding": {
+        "requiresFigure": false,
+        "requiresPassageText": true,
+        "quotedText": "every crayon from one batch should look the same",
+        "evidenceKind": "passage_only"
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "provenanceJson": {
+        "benchmarkSeason": "EOY",
+        "blueprintVersion": "pde-ela-diagnostic-stamina-2025-g3-eoy-v1",
+        "unit": "P1"
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_EOY_P1_ITEMS",
+        "noDbWrite": true,
+        "productionImportReady": false
+      },
+      "studentFacingPrompt": "What does batch mean as it is used in the passage?",
+      "stem": "What does batch mean as it is used in the passage?",
+      "answerChoicesJson": [
+        {
+          "text": "a paper label around one crayon",
+          "distractorRole": "wrong_section",
+          "rationale": "A label is added during wrapping; batch describes a group made together.",
+          "evidence": "A fast machine wraps a paper label"
+        },
+        {
+          "text": "a hole in a metal mold",
+          "distractorRole": "plausible_misreading",
+          "rationale": "The passage discusses mold holes, but batch refers to the group of crayons made from one mixture.",
+          "evidence": "crayon-shaped holes"
+        },
+        {
+          "text": "a problem such as a chip or bubble",
+          "distractorRole": "wrong_emphasis",
+          "rationale": "Chips and bubbles are inspection problems, not the meaning of batch.",
+          "evidence": "breaks, chips, and bubbles"
+        },
+        {
+          "text": "one group of wax and crayons made at the same time",
+          "rationale": "Correct. The sentence says crayons from one batch should look the same, showing a batch is one made group.",
+          "evidence": "every crayon from one batch should look the same",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "quotedSpan": "every crayon from one batch should look the same"
+            }
+          ]
+        }
+      ],
+      "structuredChoicesJson": [
+        {
+          "text": "a paper label around one crayon",
+          "distractorRole": "wrong_section",
+          "rationale": "A label is added during wrapping; batch describes a group made together.",
+          "evidence": "A fast machine wraps a paper label"
+        },
+        {
+          "text": "a hole in a metal mold",
+          "distractorRole": "plausible_misreading",
+          "rationale": "The passage discusses mold holes, but batch refers to the group of crayons made from one mixture.",
+          "evidence": "crayon-shaped holes"
+        },
+        {
+          "text": "a problem such as a chip or bubble",
+          "distractorRole": "wrong_emphasis",
+          "rationale": "Chips and bubbles are inspection problems, not the meaning of batch.",
+          "evidence": "breaks, chips, and bubbles"
+        },
+        {
+          "text": "one group of wax and crayons made at the same time",
+          "rationale": "Correct. The sentence says crayons from one batch should look the same, showing a batch is one made group.",
+          "evidence": "every crayon from one batch should look the same",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "quotedSpan": "every crayon from one batch should look the same"
+            }
+          ]
+        }
+      ],
+      "correctIndex": 3,
+      "responseSpecJson": {
+        "prompt": "What does batch mean as it is used in the passage?",
+        "choices": [
+          "a paper label around one crayon",
+          "a hole in a metal mold",
+          "a problem such as a chip or bubble",
+          "one group of wax and crayons made at the same time"
+        ],
+        "structuredChoicesJson": [
+          {
+            "text": "a paper label around one crayon",
+            "distractorRole": "wrong_section"
+          },
+          {
+            "text": "a hole in a metal mold",
+            "distractorRole": "plausible_misreading"
+          },
+          {
+            "text": "a problem such as a chip or bubble",
+            "distractorRole": "wrong_emphasis"
+          },
+          {
+            "text": "one group of wax and crayons made at the same time"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pssa_item_g3_eoy_p1_te_bc313_ao9",
+      "itemId": "pssa_item_g3_eoy_p1_te_bc313_ao9",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "MATCHING_GRID",
+      "interactionType": "MATCHING_GRID",
+      "interactionSubtype": "stage_statement_grid",
+      "passageId": "pssa_psg_g3_eoy_p1_crayons",
+      "passageTitle": "How Crayons Are Made",
+      "eligibleContent": "E03.B-C.3.1.3",
+      "reportingCategory": "B",
+      "pointValue": 3,
+      "correctResponseJson": {
+        "correctCells": [
+          {
+            "rowId": "stage_melt",
+            "columnId": "wax_fully_melted"
+          },
+          {
+            "rowId": "stage_mold",
+            "columnId": "hundreds_form"
+          },
+          {
+            "rowId": "stage_pack",
+            "columnId": "rainbow_boxes"
+          }
+        ]
+      },
+      "scoringJson": {
+        "totalPoints": 3
+      },
+      "evidenceBinding": {
+        "requiresFigure": true,
+        "requiresPassageText": true,
+        "evidenceKind": "figure_and_quoted_text"
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "provenanceJson": {
+        "benchmarkSeason": "EOY",
+        "blueprintVersion": "pde-ela-diagnostic-stamina-2025-g3-eoy-v1",
+        "unit": "P1"
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_EOY_P1_ITEMS",
+        "noDbWrite": true,
+        "productionImportReady": false
+      },
+      "stem": "Match each diagram stage to the passage statement it supports.",
+      "instructionText": "Choose the best match for each row.",
+      "rows": [
+        {
+          "rowId": "stage_melt",
+          "label": "1 — Melt the wax",
+          "correctColumnId": "wax_fully_melted",
+          "rationale": "The melting stage is when the wax becomes liquid before color is added.",
+          "plausibleWrongRationales": {
+            "hundreds_form": "That statement belongs to the molding stage.",
+            "rainbow_boxes": "That statement belongs to wrapping and packing."
+          }
+        },
+        {
+          "rowId": "stage_mold",
+          "label": "3 — Fill the mold",
+          "correctColumnId": "hundreds_form",
+          "rationale": "The molding stage fills many holes so many crayons form at once.",
+          "plausibleWrongRationales": {
+            "wax_fully_melted": "That statement belongs before color is added.",
+            "rainbow_boxes": "That statement happens after wrapping and sorting."
+          }
+        },
+        {
+          "rowId": "stage_pack",
+          "label": "5 — Wrap and pack",
+          "correctColumnId": "rainbow_boxes",
+          "rationale": "The packing stage is when crayons are sorted and placed into boxes.",
+          "plausibleWrongRationales": {
+            "wax_fully_melted": "That statement belongs to the first stage.",
+            "hundreds_form": "That statement belongs to filling the mold."
+          }
+        }
+      ],
+      "columns": [
+        {
+          "columnId": "wax_fully_melted",
+          "label": "The wax must be fully melted before any color can be added."
+        },
+        {
+          "columnId": "hundreds_form",
+          "label": "Hundreds of crayons form at the same time."
+        },
+        {
+          "columnId": "rainbow_boxes",
+          "label": "Some boxes hold every color of the rainbow."
+        }
+      ],
+      "selectionRule": "Select one column for each row.",
+      "correctCells": [
+        {
+          "rowId": "stage_melt",
+          "columnId": "wax_fully_melted"
+        },
+        {
+          "rowId": "stage_mold",
+          "columnId": "hundreds_form"
+        },
+        {
+          "rowId": "stage_pack",
+          "columnId": "rainbow_boxes"
+        }
+      ],
+      "responseSpecJson": {
+        "stem": "Match each diagram stage to the passage statement it supports.",
+        "instructionText": "Choose the best match for each row.",
+        "rows": [
+          {
+            "rowId": "stage_melt",
+            "label": "1 — Melt the wax",
+            "correctColumnId": "wax_fully_melted",
+            "rationale": "The melting stage is when the wax becomes liquid before color is added.",
+            "plausibleWrongRationales": {
+              "hundreds_form": "That statement belongs to the molding stage.",
+              "rainbow_boxes": "That statement belongs to wrapping and packing."
+            }
+          },
+          {
+            "rowId": "stage_mold",
+            "label": "3 — Fill the mold",
+            "correctColumnId": "hundreds_form",
+            "rationale": "The molding stage fills many holes so many crayons form at once.",
+            "plausibleWrongRationales": {
+              "wax_fully_melted": "That statement belongs before color is added.",
+              "rainbow_boxes": "That statement happens after wrapping and sorting."
+            }
+          },
+          {
+            "rowId": "stage_pack",
+            "label": "5 — Wrap and pack",
+            "correctColumnId": "rainbow_boxes",
+            "rationale": "The packing stage is when crayons are sorted and placed into boxes.",
+            "plausibleWrongRationales": {
+              "wax_fully_melted": "That statement belongs to the first stage.",
+              "hundreds_form": "That statement belongs to filling the mold."
+            }
+          }
+        ],
+        "columns": [
+          {
+            "columnId": "wax_fully_melted",
+            "label": "The wax must be fully melted before any color can be added."
+          },
+          {
+            "columnId": "hundreds_form",
+            "label": "Hundreds of crayons form at the same time."
+          },
+          {
+            "columnId": "rainbow_boxes",
+            "label": "Some boxes hold every color of the rainbow."
+          }
+        ],
+        "selectionRule": "Select one column for each row."
+      }
+    },
+    {
+      "id": "pssa_item_g3_eoy_p1_te_bv411_ao10",
+      "itemId": "pssa_item_g3_eoy_p1_te_bv411_ao10",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "MATCHING_GRID",
+      "interactionType": "MATCHING_GRID",
+      "interactionSubtype": "vocabulary_meaning_grid",
+      "passageId": "pssa_psg_g3_eoy_p1_crayons",
+      "passageTitle": "How Crayons Are Made",
+      "eligibleContent": "E03.B-V.4.1.1",
+      "reportingCategory": "B",
+      "pointValue": 3,
+      "correctResponseJson": {
+        "correctCells": [
+          {
+            "rowId": "evenly",
+            "columnId": "same_all_through"
+          },
+          {
+            "rowId": "runny",
+            "columnId": "flows_easily"
+          },
+          {
+            "rowId": "recast",
+            "columnId": "melted_and_shaped_again"
+          }
+        ]
+      },
+      "scoringJson": {
+        "totalPoints": 3
+      },
+      "evidenceBinding": {
+        "requiresFigure": false,
+        "requiresPassageText": true,
+        "evidenceKind": "passage_only"
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "provenanceJson": {
+        "benchmarkSeason": "EOY",
+        "blueprintVersion": "pde-ela-diagnostic-stamina-2025-g3-eoy-v1",
+        "unit": "P1"
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_EOY_P1_ITEMS",
+        "noDbWrite": true,
+        "productionImportReady": false
+      },
+      "stem": "Match each word from the passage to its meaning.",
+      "instructionText": "Choose the best match for each row.",
+      "rows": [
+        {
+          "rowId": "evenly",
+          "label": "evenly",
+          "correctColumnId": "same_all_through",
+          "rationale": "The pigment spreads evenly when no part is lighter or darker.",
+          "plausibleWrongRationales": {
+            "flows_easily": "Runny, not evenly, describes flowing.",
+            "melted_and_shaped_again": "Recast, not evenly, means shaped again."
+          }
+        },
+        {
+          "rowId": "runny",
+          "label": "runny",
+          "correctColumnId": "flows_easily",
+          "rationale": "The liquid wax is smooth and runny when it is ready to flow.",
+          "plausibleWrongRationales": {
+            "same_all_through": "Evenly means the same throughout.",
+            "melted_and_shaped_again": "Recast means made again after melting."
+          }
+        },
+        {
+          "rowId": "recast",
+          "label": "recast",
+          "correctColumnId": "melted_and_shaped_again",
+          "rationale": "Rejected crayons are melted down and recast in a new batch.",
+          "plausibleWrongRationales": {
+            "same_all_through": "Evenly describes color mixing.",
+            "flows_easily": "Runny describes liquid wax."
+          }
+        }
+      ],
+      "columns": [
+        {
+          "columnId": "same_all_through",
+          "label": "in the same way throughout"
+        },
+        {
+          "columnId": "flows_easily",
+          "label": "thin enough to flow easily"
+        },
+        {
+          "columnId": "melted_and_shaped_again",
+          "label": "melted and shaped again"
+        }
+      ],
+      "selectionRule": "Select one column for each row.",
+      "correctCells": [
+        {
+          "rowId": "evenly",
+          "columnId": "same_all_through"
+        },
+        {
+          "rowId": "runny",
+          "columnId": "flows_easily"
+        },
+        {
+          "rowId": "recast",
+          "columnId": "melted_and_shaped_again"
+        }
+      ],
+      "responseSpecJson": {
+        "stem": "Match each word from the passage to its meaning.",
+        "instructionText": "Choose the best match for each row.",
+        "rows": [
+          {
+            "rowId": "evenly",
+            "label": "evenly",
+            "correctColumnId": "same_all_through",
+            "rationale": "The pigment spreads evenly when no part is lighter or darker.",
+            "plausibleWrongRationales": {
+              "flows_easily": "Runny, not evenly, describes flowing.",
+              "melted_and_shaped_again": "Recast, not evenly, means shaped again."
+            }
+          },
+          {
+            "rowId": "runny",
+            "label": "runny",
+            "correctColumnId": "flows_easily",
+            "rationale": "The liquid wax is smooth and runny when it is ready to flow.",
+            "plausibleWrongRationales": {
+              "same_all_through": "Evenly means the same throughout.",
+              "melted_and_shaped_again": "Recast means made again after melting."
+            }
+          },
+          {
+            "rowId": "recast",
+            "label": "recast",
+            "correctColumnId": "melted_and_shaped_again",
+            "rationale": "Rejected crayons are melted down and recast in a new batch.",
+            "plausibleWrongRationales": {
+              "same_all_through": "Evenly describes color mixing.",
+              "flows_easily": "Runny describes liquid wax."
+            }
+          }
+        ],
+        "columns": [
+          {
+            "columnId": "same_all_through",
+            "label": "in the same way throughout"
+          },
+          {
+            "columnId": "flows_easily",
+            "label": "thin enough to flow easily"
+          },
+          {
+            "columnId": "melted_and_shaped_again",
+            "label": "melted and shaped again"
+          }
+        ],
+        "selectionRule": "Select one column for each row."
+      }
+    }
+  ]
+}
