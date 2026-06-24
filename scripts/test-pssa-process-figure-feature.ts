@@ -8,7 +8,8 @@ import {
   projectPssaFigureFeatureForStudent,
   pssaFigureHashInput,
   validatePssaFigureFeatureShared,
-  type PssaFigureFeature,
+  type PssaFigureMapFeature,
+  type PssaFigureProcessFeature,
   type PssaFigureProcessStructuredData,
 } from "../lib/content/pssaFigureFeature";
 import {
@@ -27,7 +28,7 @@ const MAP_HASH_INPUT_JSON = "{\"type\":\"figure\",\"figureKind\":\"map\",\"featu
 
 const sections = ["section_0_intro", "process_steps"];
 
-function mapFeature(): PssaFigureFeature {
+function mapFeature(): PssaFigureMapFeature {
   const structuredData = museumStructuredData();
   return {
     type: "figure",
@@ -54,7 +55,10 @@ function processData(count: number): PssaFigureProcessStructuredData {
   };
 }
 
-function processFeature(data = processData(3), overrides: Partial<PssaFigureFeature> = {}): PssaFigureFeature {
+function processFeature(
+  data = processData(3),
+  overrides: Partial<PssaFigureProcessFeature> = {},
+): PssaFigureProcessFeature {
   return {
     type: "figure",
     figureKind: "process",
@@ -67,16 +71,20 @@ function processFeature(data = processData(3), overrides: Partial<PssaFigureFeat
     longDescription: generatePssaFigureLongDescription(data),
     structuredData: data,
     ...overrides,
-  } as PssaFigureFeature;
+  };
 }
 
 function sha256(text: string) {
   return `sha256:${crypto.createHash("sha256").update(text).digest("hex")}`;
 }
 
-function writeProcessSvg(feature: PssaFigureFeature, filename: string, omitted = "") {
+function writeProcessSvg(
+  feature: PssaFigureProcessFeature,
+  filename: string,
+  omitted = "",
+) {
   assert.equal(feature.figureKind, "process");
-  const data = feature.structuredData as PssaFigureProcessStructuredData;
+  const data = feature.structuredData;
   const labels = [feature.title, ...data.stages.flatMap((stage) => [stage.label, stage.caption])]
     .filter((label) => label !== omitted);
   const raw = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 200">${labels.map((label, index) => `<text x="10" y="${20 + index * 16}">${label}</text>`).join("")}</svg>`;
@@ -144,20 +152,20 @@ try {
   const complete = processFeature(processData(3));
   const completeSvg = writeProcessSvg(complete, "process_fixture.svg");
   tempFiles.push(completeSvg.filePath);
-  const completeWithDigest = { ...complete, assetPath: completeSvg.assetPath, assetSha256: completeSvg.assetSha256 } as PssaFigureFeature;
+  const completeWithDigest = { ...complete, assetPath: completeSvg.assetPath, assetSha256: completeSvg.assetSha256 };
   assert.equal(computePssaFigureAssetSha256(completeSvg.assetPath), completeSvg.assetSha256, "process SVG digest matches raw bytes");
   assert.equal(validatePssaFigureAssetNode(completeWithDigest).assetSha256, completeSvg.assetSha256, "process SVG labels/captions validate");
 
   const missingCaptionSvg = writeProcessSvg(complete, "process_fixture_missing_caption.svg", "Caption 2");
   tempFiles.push(missingCaptionSvg.filePath);
   assert.throws(
-    () => validatePssaFigureAssetNode({ ...complete, assetPath: missingCaptionSvg.assetPath, assetSha256: missingCaptionSvg.assetSha256 } as PssaFigureFeature),
+    () => validatePssaFigureAssetNode({ ...complete, assetPath: missingCaptionSvg.assetPath, assetSha256: missingCaptionSvg.assetSha256 }),
     /figure_svg_label_missing:Caption 2/,
   );
   const missingLabelSvg = writeProcessSvg(complete, "process_fixture_missing_label.svg", "Step 3");
   tempFiles.push(missingLabelSvg.filePath);
   assert.throws(
-    () => validatePssaFigureAssetNode({ ...complete, assetPath: missingLabelSvg.assetPath, assetSha256: missingLabelSvg.assetSha256 } as PssaFigureFeature),
+    () => validatePssaFigureAssetNode({ ...complete, assetPath: missingLabelSvg.assetPath, assetSha256: missingLabelSvg.assetSha256 }),
     /figure_svg_label_missing:Step 3/,
   );
 } finally {

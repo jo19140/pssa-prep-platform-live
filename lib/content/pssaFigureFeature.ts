@@ -28,7 +28,6 @@ type PssaFigureFeatureBase = {
   assetSha256: string;
   altText: string;
   longDescription: string;
-  structuredData: PssaFigureStructuredData;
   label?: string;
   bodyText?: string;
   featureText?: string;
@@ -156,7 +155,7 @@ export function projectPssaFigureFeatureForStudent(feature: PssaFigureFeature): 
     src: feature.assetPath,
     altText: feature.altText,
     longDescription: feature.longDescription,
-    structuredData: cloneStructuredData(feature.structuredData as PssaFigureProcessStructuredData),
+    structuredData: cloneStructuredData(feature.structuredData),
   };
 }
 
