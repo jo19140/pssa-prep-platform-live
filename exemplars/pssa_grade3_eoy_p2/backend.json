@@ -1,0 +1,1550 @@
+{
+  "generatedAt": "2026-06-24T17:29:40.967Z",
+  "noDbWrite": true,
+  "productionImportReady": false,
+  "passageCount": 1,
+  "itemCount": 8,
+  "passages": [
+    {
+      "id": "pssa_psg_g3_eoy_p2_broken_vase",
+      "title": "The Broken Vase",
+      "gradeLevel": 3,
+      "subject": "ELA",
+      "passageType": "literary",
+      "genre": "literary_narrative",
+      "pov": "third_person",
+      "domainVocabularyLoad": "medium",
+      "wordCount": 925,
+      "text": "Mateo was not supposed to play ball in the house. His grandmother told him so every week, in the same gentle voice. \"Feet are for running outside,\" she would say. \"Inside, we walk.\" But this Saturday it was raining hard, the living room was wide and empty, and the foam ball felt too harmless to cause any trouble.\n\nHe bounced it once against the wall. The sound was satisfying, so he bounced it again. On the third throw, his hand slipped, and the ball sailed higher than he meant it to. Mateo's eyes followed it as it curved toward the tall shelf by the window — the shelf where his grandmother kept the blue vase.\n\nThat vase was not an ordinary one. It was painted with small white birds, and his grandmother had carried it carefully from the house where she grew up, far across the ocean, when she was younger than Mateo was now. She dusted it every Sunday. She called it the one thing she could never replace.\n\nThe ball struck the vase with a soft thud. For half a second, nothing happened. Then the vase tipped, rolled off the shelf, and dropped to the wooden floor. It broke into three large pieces, and many tiny shards scattered across the boards like blue snow.\n\nMateo froze. His heart pounded, and his stomach tied in a knot. He looked toward the doorway, sure his grandmother would come running, but the kitchen was far away and the rain was loud, and no one came. The house stayed quiet. Only Mateo and the broken vase knew what had happened.\n\nA thought slipped into his head, quick and sneaky. He could clean it up himself. He could hide the pieces at the bottom of the trash, under the empty cereal box, and his grandmother might think the cat had knocked the vase down. The cat was always climbing where it should not. No one would ever know it was him.\n\nHe reached toward the largest piece — then stopped. Its edges were sharp, and his hand had begun to shake. Instead of picking it up, he pictured his grandmother on Sunday, reaching to dust the shelf and finding the empty spot bare. He pictured her searching the house for the vase, and wondering what happened, and never knowing the truth. Hiding the pieces would not bring the vase back. It would only put a secret between them — and a secret, he thought, was the one thing he could never sweep up. The knot in his stomach pulled tighter.\n\nMateo sat back on his heels and let out a slow breath. Then he stood and walked toward the kitchen. Each step felt heavy, as if his shoes were filled with sand. He found his grandmother by the window, quietly folding a stack of warm towels. She looked up and smiled, and for a moment Mateo almost lost his nerve.\n\n\"Abuela,\" he said, and his voice came out small. \"I broke the blue vase. I was bouncing my ball inside, even though you told me not to. It hit the shelf, and the vase fell.\"\n\nHis grandmother set the towels down. She was quiet for a long moment, and Mateo watched her face change — first surprise, then a deep, tired sadness. He looked down at his shoes, sure he had spoiled the whole rainy day.\n\nBut when she spoke, her voice was not angry. \"Thank you for coming to find me, Mateo,\" she said softly. She knelt down so they were eye to eye. \"I am very sad about the vase. It carried a little piece of my old home inside it.\" She was quiet again. \"But you did not let me wonder, and you did not blame the cat. I will remember that.\"\n\nMateo felt the knot in his stomach loosen, just a little. It did not disappear — he was still sorry, and the vase was still in pieces — but the heavy, sandy feeling began to lift from his shoes.\n\n\"Now,\" Abuela said, rising to her feet, \"the ball goes away for the rest of the day. Please put it in your room.\" Mateo nodded and did exactly that, setting the foam ball deep in his closet.\n\nWhen he came back, his grandmother had brought a broom and a dustpan. \"These pieces are sharp,\" she said. \"We clean them the safe way, and we do it together.\" She swept the tiny shards into the dustpan while Mateo held it steady, both of them careful to keep their fingers away from the jagged edges. The three big pieces she did not throw out. She wrapped them gently in an old cloth.\n\n\"What should we do with these?\" she asked, and she truly seemed to be asking him. Mateo thought hard. \"Maybe we could glue them,\" he said. \"Or… you always say a broken thing can become something new.\" For the first time since the kitchen, his grandmother smiled. \"We could press the pieces into a stepping stone for the garden,\" she said. \"A place to keep the little birds.\" Together they set the wrapped bundle on the shelf, in the empty spot, until they could decide for sure.\n\nThat night, Mateo lay in bed and remembered the long, sandy walk to the kitchen, and how much lighter his shoes had felt on the way back. The vase was still broken, and he was still sorry. But the house did not feel heavy anymore. And he decided that the next time the rain kept him inside, his feet would remember to walk.",
+      "textFeaturesJson": [
+        {
+          "type": "figurative_language",
+          "featureText": "his stomach tied in a knot",
+          "sectionId": "paragraph_05",
+          "mustUseInItem": true,
+          "linkedByItemIds": [
+            "pssa_item_g3_eoy_p2_mcq_av412"
+          ]
+        }
+      ],
+      "factCheckRequired": false,
+      "staminaBand": "released_length",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "provenanceJson": {
+        "benchmarkSeason": "EOY",
+        "blueprintVersion": "pde-ela-diagnostic-stamina-2025-g3-eoy-v1",
+        "unit": "P2"
+      }
+    }
+  ],
+  "items": [
+    {
+      "id": "pssa_item_g3_eoy_p2_mcq_ak111",
+      "itemId": "pssa_item_g3_eoy_p2_mcq_ak111",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "MCQ",
+      "interactionType": "MCQ",
+      "interactionSubtype": "explicit_detail_importance",
+      "passageId": "pssa_psg_g3_eoy_p2_broken_vase",
+      "passageTitle": "The Broken Vase",
+      "eligibleContent": "E03.A-K.1.1.1",
+      "reportingCategory": "A",
+      "pointValue": 1,
+      "correctResponseJson": {
+        "correctIndex": 0
+      },
+      "scoringJson": {
+        "totalPoints": 1
+      },
+      "evidenceBinding": {
+        "requiresFigure": false,
+        "requiresPassageText": true,
+        "evidenceKind": "passage_only",
+        "quotedText": "his grandmother had carried it carefully from the house where she grew up"
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "provenanceJson": {
+        "benchmarkSeason": "EOY",
+        "blueprintVersion": "pde-ela-diagnostic-stamina-2025-g3-eoy-v1",
+        "unit": "P2"
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_EOY_P2_ITEMS",
+        "noDbWrite": true,
+        "productionImportReady": false
+      },
+      "studentFacingPrompt": "Why was the blue vase important to Abuela?",
+      "stem": "Why was the blue vase important to Abuela?",
+      "answerChoicesJson": [
+        {
+          "text": "It came from the house where Abuela grew up.",
+          "isCorrect": true,
+          "distractorRole": null,
+          "rationale": "Correct. The passage explains that Abuela carried it from her childhood home across the ocean.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "quotedSpan": "his grandmother had carried it carefully from the house where she grew up",
+              "paragraphIndex": 2,
+              "sentenceIndex": 1,
+              "startChar": 696,
+              "endChar": 769
+            }
+          ]
+        },
+        {
+          "text": "It was the newest decoration in the living room.",
+          "isCorrect": false,
+          "distractorRole": "wrong_emphasis",
+          "rationale": "This focuses on the vase as a kept decoration, but the important detail is that it came from Abuela's old home.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "quotedSpan": "She dusted it every Sunday.",
+              "paragraphIndex": 2,
+              "sentenceIndex": 2,
+              "startChar": 834,
+              "endChar": 861
+            }
+          ]
+        },
+        {
+          "text": "It was where Abuela kept the foam ball.",
+          "isCorrect": false,
+          "distractorRole": "unsupported_inference",
+          "rationale": "The passage never says the vase held the ball; the ball is what hits the vase.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "quotedSpan": "the foam ball felt too harmless to cause any trouble",
+              "paragraphIndex": 0,
+              "sentenceIndex": 4,
+              "startChar": 261,
+              "endChar": 313
+            }
+          ]
+        },
+        {
+          "text": "It was easy for Abuela to replace.",
+          "isCorrect": false,
+          "distractorRole": "opposite_claim",
+          "rationale": "This is the opposite of Abuela's feeling because she calls it irreplaceable.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "quotedSpan": "She called it the one thing she could never replace.",
+              "paragraphIndex": 2,
+              "sentenceIndex": 3,
+              "startChar": 862,
+              "endChar": 914
+            }
+          ]
+        }
+      ],
+      "structuredChoicesJson": [
+        {
+          "text": "It came from the house where Abuela grew up.",
+          "isCorrect": true,
+          "distractorRole": null,
+          "rationale": "Correct. The passage explains that Abuela carried it from her childhood home across the ocean.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "quotedSpan": "his grandmother had carried it carefully from the house where she grew up",
+              "paragraphIndex": 2,
+              "sentenceIndex": 1,
+              "startChar": 696,
+              "endChar": 769
+            }
+          ]
+        },
+        {
+          "text": "It was the newest decoration in the living room.",
+          "isCorrect": false,
+          "distractorRole": "wrong_emphasis",
+          "rationale": "This focuses on the vase as a kept decoration, but the important detail is that it came from Abuela's old home.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "quotedSpan": "She dusted it every Sunday.",
+              "paragraphIndex": 2,
+              "sentenceIndex": 2,
+              "startChar": 834,
+              "endChar": 861
+            }
+          ]
+        },
+        {
+          "text": "It was where Abuela kept the foam ball.",
+          "isCorrect": false,
+          "distractorRole": "unsupported_inference",
+          "rationale": "The passage never says the vase held the ball; the ball is what hits the vase.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "quotedSpan": "the foam ball felt too harmless to cause any trouble",
+              "paragraphIndex": 0,
+              "sentenceIndex": 4,
+              "startChar": 261,
+              "endChar": 313
+            }
+          ]
+        },
+        {
+          "text": "It was easy for Abuela to replace.",
+          "isCorrect": false,
+          "distractorRole": "opposite_claim",
+          "rationale": "This is the opposite of Abuela's feeling because she calls it irreplaceable.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "quotedSpan": "She called it the one thing she could never replace.",
+              "paragraphIndex": 2,
+              "sentenceIndex": 3,
+              "startChar": 862,
+              "endChar": 914
+            }
+          ]
+        }
+      ],
+      "correctIndex": 0,
+      "responseSpecJson": {
+        "prompt": "Why was the blue vase important to Abuela?",
+        "choices": [
+          "It came from the house where Abuela grew up.",
+          "It was the newest decoration in the living room.",
+          "It was where Abuela kept the foam ball.",
+          "It was easy for Abuela to replace."
+        ],
+        "structuredChoicesJson": [
+          {
+            "text": "It came from the house where Abuela grew up."
+          },
+          {
+            "text": "It was the newest decoration in the living room.",
+            "distractorRole": "wrong_emphasis"
+          },
+          {
+            "text": "It was where Abuela kept the foam ball.",
+            "distractorRole": "unsupported_inference"
+          },
+          {
+            "text": "It was easy for Abuela to replace.",
+            "distractorRole": "opposite_claim"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pssa_item_g3_eoy_p2_mcq_ac211",
+      "itemId": "pssa_item_g3_eoy_p2_mcq_ac211",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "MCQ",
+      "interactionType": "MCQ",
+      "interactionSubtype": "literary_point_of_view",
+      "passageId": "pssa_psg_g3_eoy_p2_broken_vase",
+      "passageTitle": "The Broken Vase",
+      "eligibleContent": "E03.A-C.2.1.1",
+      "reportingCategory": "A",
+      "pointValue": 1,
+      "correctResponseJson": {
+        "correctIndex": 1
+      },
+      "scoringJson": {
+        "totalPoints": 1
+      },
+      "evidenceBinding": {
+        "requiresFigure": false,
+        "requiresPassageText": true,
+        "evidenceKind": "passage_only",
+        "quotedText": "Mateo was not supposed to play ball in the house."
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "provenanceJson": {
+        "benchmarkSeason": "EOY",
+        "blueprintVersion": "pde-ela-diagnostic-stamina-2025-g3-eoy-v1",
+        "unit": "P2"
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_EOY_P2_ITEMS",
+        "noDbWrite": true,
+        "productionImportReady": false
+      },
+      "studentFacingPrompt": "Which statement best describes the point of view of the story?",
+      "stem": "Which statement best describes the point of view of the story?",
+      "answerChoicesJson": [
+        {
+          "text": "Mateo tells what happened to Abuela's blue vase using I and me.",
+          "isCorrect": false,
+          "distractorRole": "opposite_claim",
+          "rationale": "The story is not told by Mateo in first person; it names him from outside the action.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "quotedSpan": "Mateo was not supposed to play ball in the house.",
+              "paragraphIndex": 0,
+              "sentenceIndex": 0,
+              "startChar": 0,
+              "endChar": 49
+            }
+          ]
+        },
+        {
+          "text": "A narrator outside the story tells what Mateo does and thinks.",
+          "isCorrect": true,
+          "distractorRole": null,
+          "rationale": "Correct. The narrator names Mateo and also reports his private thoughts.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "quotedSpan": "A thought slipped into his head, quick and sneaky.",
+              "paragraphIndex": 5,
+              "sentenceIndex": 0,
+              "startChar": 1457,
+              "endChar": 1507
+            }
+          ]
+        },
+        {
+          "text": "Abuela tells readers only what she sees in the kitchen.",
+          "isCorrect": false,
+          "distractorRole": "wrong_section",
+          "rationale": "Abuela appears in the kitchen, but she is not the narrator of the whole story.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "quotedSpan": "He found his grandmother by the window, quietly folding a stack of warm towels.",
+              "paragraphIndex": 7,
+              "sentenceIndex": 3,
+              "startChar": 2473,
+              "endChar": 2552
+            }
+          ]
+        },
+        {
+          "text": "The cat tells readers why the vase fell.",
+          "isCorrect": false,
+          "distractorRole": "unsupported_inference",
+          "rationale": "The cat is only part of Mateo's possible excuse and never narrates the story.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "quotedSpan": "his grandmother might think the cat had knocked the vase down.",
+              "paragraphIndex": 5,
+              "sentenceIndex": 2,
+              "startChar": 1623,
+              "endChar": 1685
+            }
+          ]
+        }
+      ],
+      "structuredChoicesJson": [
+        {
+          "text": "Mateo tells what happened to Abuela's blue vase using I and me.",
+          "isCorrect": false,
+          "distractorRole": "opposite_claim",
+          "rationale": "The story is not told by Mateo in first person; it names him from outside the action.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "quotedSpan": "Mateo was not supposed to play ball in the house.",
+              "paragraphIndex": 0,
+              "sentenceIndex": 0,
+              "startChar": 0,
+              "endChar": 49
+            }
+          ]
+        },
+        {
+          "text": "A narrator outside the story tells what Mateo does and thinks.",
+          "isCorrect": true,
+          "distractorRole": null,
+          "rationale": "Correct. The narrator names Mateo and also reports his private thoughts.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "quotedSpan": "A thought slipped into his head, quick and sneaky.",
+              "paragraphIndex": 5,
+              "sentenceIndex": 0,
+              "startChar": 1457,
+              "endChar": 1507
+            }
+          ]
+        },
+        {
+          "text": "Abuela tells readers only what she sees in the kitchen.",
+          "isCorrect": false,
+          "distractorRole": "wrong_section",
+          "rationale": "Abuela appears in the kitchen, but she is not the narrator of the whole story.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "quotedSpan": "He found his grandmother by the window, quietly folding a stack of warm towels.",
+              "paragraphIndex": 7,
+              "sentenceIndex": 3,
+              "startChar": 2473,
+              "endChar": 2552
+            }
+          ]
+        },
+        {
+          "text": "The cat tells readers why the vase fell.",
+          "isCorrect": false,
+          "distractorRole": "unsupported_inference",
+          "rationale": "The cat is only part of Mateo's possible excuse and never narrates the story.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "quotedSpan": "his grandmother might think the cat had knocked the vase down.",
+              "paragraphIndex": 5,
+              "sentenceIndex": 2,
+              "startChar": 1623,
+              "endChar": 1685
+            }
+          ]
+        }
+      ],
+      "correctIndex": 1,
+      "responseSpecJson": {
+        "prompt": "Which statement best describes the point of view of the story?",
+        "choices": [
+          "Mateo tells what happened to Abuela's blue vase using I and me.",
+          "A narrator outside the story tells what Mateo does and thinks.",
+          "Abuela tells readers only what she sees in the kitchen.",
+          "The cat tells readers why the vase fell."
+        ],
+        "structuredChoicesJson": [
+          {
+            "text": "Mateo tells what happened to Abuela's blue vase using I and me.",
+            "distractorRole": "opposite_claim"
+          },
+          {
+            "text": "A narrator outside the story tells what Mateo does and thinks."
+          },
+          {
+            "text": "Abuela tells readers only what she sees in the kitchen.",
+            "distractorRole": "wrong_section"
+          },
+          {
+            "text": "The cat tells readers why the vase fell.",
+            "distractorRole": "unsupported_inference"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pssa_item_g3_eoy_p2_mcq_av411",
+      "itemId": "pssa_item_g3_eoy_p2_mcq_av411",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "MCQ",
+      "interactionType": "MCQ",
+      "interactionSubtype": "context_vocabulary",
+      "passageId": "pssa_psg_g3_eoy_p2_broken_vase",
+      "passageTitle": "The Broken Vase",
+      "eligibleContent": "E03.A-V.4.1.1",
+      "reportingCategory": "A",
+      "pointValue": 1,
+      "correctResponseJson": {
+        "correctIndex": 2
+      },
+      "scoringJson": {
+        "totalPoints": 1
+      },
+      "evidenceBinding": {
+        "requiresFigure": false,
+        "requiresPassageText": true,
+        "evidenceKind": "passage_only",
+        "quotedText": "many tiny shards scattered across the boards like blue snow",
+        "targetWordOrPhrase": "shards"
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "provenanceJson": {
+        "benchmarkSeason": "EOY",
+        "blueprintVersion": "pde-ela-diagnostic-stamina-2025-g3-eoy-v1",
+        "unit": "P2"
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_EOY_P2_ITEMS",
+        "noDbWrite": true,
+        "productionImportReady": false
+      },
+      "studentFacingPrompt": "What does shards mean as it is used in the story?",
+      "stem": "What does shards mean as it is used in the story?",
+      "answerChoicesJson": [
+        {
+          "text": "soft cloths used to wrap a vase",
+          "isCorrect": false,
+          "distractorRole": "wrong_section",
+          "rationale": "This uses a later detail about wrapping the large pieces, not the meaning of shards.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "quotedSpan": "She wrapped them gently in an old cloth.",
+              "paragraphIndex": 13,
+              "sentenceIndex": 5,
+              "startChar": 4091,
+              "endChar": 4131
+            }
+          ]
+        },
+        {
+          "text": "painted birds on the outside of a vase",
+          "isCorrect": false,
+          "distractorRole": "wrong_emphasis",
+          "rationale": "The birds are a design on the vase, but shards describes pieces after it breaks.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "quotedSpan": "It was painted with small white birds",
+              "paragraphIndex": 2,
+              "sentenceIndex": 1,
+              "startChar": 653,
+              "endChar": 690
+            }
+          ]
+        },
+        {
+          "text": "small sharp broken pieces",
+          "isCorrect": true,
+          "distractorRole": null,
+          "rationale": "Correct. The vase breaks and the tiny pieces are sharp enough to require careful sweeping.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "quotedSpan": "many tiny shards scattered across the boards like blue snow",
+              "paragraphIndex": 3,
+              "sentenceIndex": 3,
+              "startChar": 1111,
+              "endChar": 1170
+            }
+          ]
+        },
+        {
+          "text": "heavy shoes filled with sand",
+          "isCorrect": false,
+          "distractorRole": "plausible_misreading",
+          "rationale": "This is another image from the story, but it describes Mateo's feelings, not broken pieces.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "quotedSpan": "as if his shoes were filled with sand",
+              "paragraphIndex": 7,
+              "sentenceIndex": 2,
+              "startChar": 2434,
+              "endChar": 2471
+            }
+          ]
+        }
+      ],
+      "structuredChoicesJson": [
+        {
+          "text": "soft cloths used to wrap a vase",
+          "isCorrect": false,
+          "distractorRole": "wrong_section",
+          "rationale": "This uses a later detail about wrapping the large pieces, not the meaning of shards.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "quotedSpan": "She wrapped them gently in an old cloth.",
+              "paragraphIndex": 13,
+              "sentenceIndex": 5,
+              "startChar": 4091,
+              "endChar": 4131
+            }
+          ]
+        },
+        {
+          "text": "painted birds on the outside of a vase",
+          "isCorrect": false,
+          "distractorRole": "wrong_emphasis",
+          "rationale": "The birds are a design on the vase, but shards describes pieces after it breaks.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "quotedSpan": "It was painted with small white birds",
+              "paragraphIndex": 2,
+              "sentenceIndex": 1,
+              "startChar": 653,
+              "endChar": 690
+            }
+          ]
+        },
+        {
+          "text": "small sharp broken pieces",
+          "isCorrect": true,
+          "distractorRole": null,
+          "rationale": "Correct. The vase breaks and the tiny pieces are sharp enough to require careful sweeping.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "quotedSpan": "many tiny shards scattered across the boards like blue snow",
+              "paragraphIndex": 3,
+              "sentenceIndex": 3,
+              "startChar": 1111,
+              "endChar": 1170
+            }
+          ]
+        },
+        {
+          "text": "heavy shoes filled with sand",
+          "isCorrect": false,
+          "distractorRole": "plausible_misreading",
+          "rationale": "This is another image from the story, but it describes Mateo's feelings, not broken pieces.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "quotedSpan": "as if his shoes were filled with sand",
+              "paragraphIndex": 7,
+              "sentenceIndex": 2,
+              "startChar": 2434,
+              "endChar": 2471
+            }
+          ]
+        }
+      ],
+      "correctIndex": 2,
+      "responseSpecJson": {
+        "prompt": "What does shards mean as it is used in the story?",
+        "choices": [
+          "soft cloths used to wrap a vase",
+          "painted birds on the outside of a vase",
+          "small sharp broken pieces",
+          "heavy shoes filled with sand"
+        ],
+        "structuredChoicesJson": [
+          {
+            "text": "soft cloths used to wrap a vase",
+            "distractorRole": "wrong_section"
+          },
+          {
+            "text": "painted birds on the outside of a vase",
+            "distractorRole": "wrong_emphasis"
+          },
+          {
+            "text": "small sharp broken pieces"
+          },
+          {
+            "text": "heavy shoes filled with sand",
+            "distractorRole": "plausible_misreading"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pssa_item_g3_eoy_p2_mcq_av412",
+      "itemId": "pssa_item_g3_eoy_p2_mcq_av412",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "MCQ",
+      "interactionType": "MCQ",
+      "interactionSubtype": "figurative_language",
+      "passageId": "pssa_psg_g3_eoy_p2_broken_vase",
+      "passageTitle": "The Broken Vase",
+      "eligibleContent": "E03.A-V.4.1.2",
+      "reportingCategory": "A",
+      "pointValue": 1,
+      "correctResponseJson": {
+        "correctIndex": 3
+      },
+      "scoringJson": {
+        "totalPoints": 1
+      },
+      "evidenceBinding": {
+        "requiresFigure": false,
+        "requiresPassageText": true,
+        "evidenceKind": "passage_only",
+        "quotedText": "His heart pounded, and his stomach tied in a knot.",
+        "targetWordOrPhrase": "his stomach tied in a knot"
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "provenanceJson": {
+        "benchmarkSeason": "EOY",
+        "blueprintVersion": "pde-ela-diagnostic-stamina-2025-g3-eoy-v1",
+        "unit": "P2"
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_EOY_P2_ITEMS",
+        "noDbWrite": true,
+        "productionImportReady": false
+      },
+      "studentFacingPrompt": "What does the phrase \"his stomach tied in a knot\" mean in the story?",
+      "stem": "What does the phrase \"his stomach tied in a knot\" mean in the story?",
+      "answerChoicesJson": [
+        {
+          "text": "Mateo had eaten too quickly.",
+          "isCorrect": false,
+          "distractorRole": "plausible_misreading",
+          "rationale": "This reads a body reaction too literally, but the story uses Mateo's body feelings to show worry.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "quotedSpan": "Mateo sat back on his heels and let out a slow breath.",
+              "paragraphIndex": 7,
+              "sentenceIndex": 0,
+              "startChar": 2312,
+              "endChar": 2366
+            }
+          ]
+        },
+        {
+          "text": "Mateo wanted to tie the vase pieces together.",
+          "isCorrect": false,
+          "distractorRole": "unsupported_inference",
+          "rationale": "The passage never says Mateo plans to tie the vase; he thinks about hiding the pieces.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "quotedSpan": "He could hide the pieces at the bottom of the trash",
+              "paragraphIndex": 5,
+              "sentenceIndex": 2,
+              "startChar": 1538,
+              "endChar": 1589
+            }
+          ]
+        },
+        {
+          "text": "Mateo felt proud of what had happened.",
+          "isCorrect": false,
+          "distractorRole": "opposite_claim",
+          "rationale": "This reverses the emotion in the passage, where Mateo is worried and tense.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "quotedSpan": "The knot in his stomach pulled tighter.",
+              "paragraphIndex": 6,
+              "sentenceIndex": 6,
+              "startChar": 2271,
+              "endChar": 2310
+            }
+          ]
+        },
+        {
+          "text": "Mateo felt worried and nervous.",
+          "isCorrect": true,
+          "distractorRole": null,
+          "rationale": "Correct. The knot image and his pounding heart show worry after the vase breaks.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "quotedSpan": "His heart pounded, and his stomach tied in a knot.",
+              "paragraphIndex": 4,
+              "sentenceIndex": 1,
+              "startChar": 1186,
+              "endChar": 1236
+            }
+          ]
+        }
+      ],
+      "structuredChoicesJson": [
+        {
+          "text": "Mateo had eaten too quickly.",
+          "isCorrect": false,
+          "distractorRole": "plausible_misreading",
+          "rationale": "This reads a body reaction too literally, but the story uses Mateo's body feelings to show worry.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "quotedSpan": "Mateo sat back on his heels and let out a slow breath.",
+              "paragraphIndex": 7,
+              "sentenceIndex": 0,
+              "startChar": 2312,
+              "endChar": 2366
+            }
+          ]
+        },
+        {
+          "text": "Mateo wanted to tie the vase pieces together.",
+          "isCorrect": false,
+          "distractorRole": "unsupported_inference",
+          "rationale": "The passage never says Mateo plans to tie the vase; he thinks about hiding the pieces.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "quotedSpan": "He could hide the pieces at the bottom of the trash",
+              "paragraphIndex": 5,
+              "sentenceIndex": 2,
+              "startChar": 1538,
+              "endChar": 1589
+            }
+          ]
+        },
+        {
+          "text": "Mateo felt proud of what had happened.",
+          "isCorrect": false,
+          "distractorRole": "opposite_claim",
+          "rationale": "This reverses the emotion in the passage, where Mateo is worried and tense.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "quotedSpan": "The knot in his stomach pulled tighter.",
+              "paragraphIndex": 6,
+              "sentenceIndex": 6,
+              "startChar": 2271,
+              "endChar": 2310
+            }
+          ]
+        },
+        {
+          "text": "Mateo felt worried and nervous.",
+          "isCorrect": true,
+          "distractorRole": null,
+          "rationale": "Correct. The knot image and his pounding heart show worry after the vase breaks.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "quotedSpan": "His heart pounded, and his stomach tied in a knot.",
+              "paragraphIndex": 4,
+              "sentenceIndex": 1,
+              "startChar": 1186,
+              "endChar": 1236
+            }
+          ]
+        }
+      ],
+      "correctIndex": 3,
+      "responseSpecJson": {
+        "prompt": "What does the phrase \"his stomach tied in a knot\" mean in the story?",
+        "choices": [
+          "Mateo had eaten too quickly.",
+          "Mateo wanted to tie the vase pieces together.",
+          "Mateo felt proud of what had happened.",
+          "Mateo felt worried and nervous."
+        ],
+        "structuredChoicesJson": [
+          {
+            "text": "Mateo had eaten too quickly.",
+            "distractorRole": "plausible_misreading"
+          },
+          {
+            "text": "Mateo wanted to tie the vase pieces together.",
+            "distractorRole": "unsupported_inference"
+          },
+          {
+            "text": "Mateo felt proud of what had happened.",
+            "distractorRole": "opposite_claim"
+          },
+          {
+            "text": "Mateo felt worried and nervous."
+          }
+        ]
+      }
+    },
+    {
+      "id": "pssa_item_g3_eoy_p2_mcq_ak112",
+      "itemId": "pssa_item_g3_eoy_p2_mcq_ak112",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "MCQ",
+      "interactionType": "MCQ",
+      "interactionSubtype": "central_message_inference",
+      "passageId": "pssa_psg_g3_eoy_p2_broken_vase",
+      "passageTitle": "The Broken Vase",
+      "eligibleContent": "E03.A-K.1.1.2",
+      "reportingCategory": "A",
+      "pointValue": 1,
+      "correctResponseJson": {
+        "correctIndex": 1
+      },
+      "scoringJson": {
+        "totalPoints": 1
+      },
+      "evidenceBinding": {
+        "requiresFigure": false,
+        "requiresPassageText": true,
+        "evidenceKind": "whole_passage_synthesis",
+        "task": "identify_message_only"
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "provenanceJson": {
+        "benchmarkSeason": "EOY",
+        "blueprintVersion": "pde-ela-diagnostic-stamina-2025-g3-eoy-v1",
+        "unit": "P2"
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_EOY_P2_ITEMS",
+        "noDbWrite": true,
+        "productionImportReady": false
+      },
+      "studentFacingPrompt": "Which sentence best states the lesson of the story?",
+      "stem": "Which sentence best states the lesson of the story?",
+      "answerChoicesJson": [
+        {
+          "text": "A person should keep fragile things on a lower shelf.",
+          "isCorrect": false,
+          "distractorRole": "too_narrow",
+          "rationale": "This focuses on one object instead of the larger lesson Mateo learns about honesty.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "quotedSpan": "the shelf where his grandmother kept the blue vase",
+              "paragraphIndex": 1,
+              "sentenceIndex": 3,
+              "startChar": 565,
+              "endChar": 615
+            }
+          ]
+        },
+        {
+          "text": "Telling the truth about a mistake is hard but important.",
+          "isCorrect": true,
+          "distractorRole": null,
+          "rationale": "Correct. The whole story shows Mateo choosing to confess and take responsibility.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "whole_passage_synthesis"
+            }
+          ]
+        },
+        {
+          "text": "A rainy day is the best time to practice ball skills indoors.",
+          "isCorrect": false,
+          "distractorRole": "wrong_emphasis",
+          "rationale": "This focuses on the rainy-day setup, but the lesson comes from Mateo's choice to tell the truth.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "quotedSpan": "this Saturday it was raining hard",
+              "paragraphIndex": 0,
+              "sentenceIndex": 4,
+              "startChar": 186,
+              "endChar": 219
+            }
+          ]
+        },
+        {
+          "text": "Broken things should always be thrown away at once.",
+          "isCorrect": false,
+          "distractorRole": "opposite_claim",
+          "rationale": "This reverses the ending because Abuela saves the large pieces for a new use.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "quotedSpan": "The three big pieces she did not throw out.",
+              "paragraphIndex": 13,
+              "sentenceIndex": 4,
+              "startChar": 4047,
+              "endChar": 4090
+            }
+          ]
+        }
+      ],
+      "structuredChoicesJson": [
+        {
+          "text": "A person should keep fragile things on a lower shelf.",
+          "isCorrect": false,
+          "distractorRole": "too_narrow",
+          "rationale": "This focuses on one object instead of the larger lesson Mateo learns about honesty.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "quotedSpan": "the shelf where his grandmother kept the blue vase",
+              "paragraphIndex": 1,
+              "sentenceIndex": 3,
+              "startChar": 565,
+              "endChar": 615
+            }
+          ]
+        },
+        {
+          "text": "Telling the truth about a mistake is hard but important.",
+          "isCorrect": true,
+          "distractorRole": null,
+          "rationale": "Correct. The whole story shows Mateo choosing to confess and take responsibility.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "whole_passage_synthesis"
+            }
+          ]
+        },
+        {
+          "text": "A rainy day is the best time to practice ball skills indoors.",
+          "isCorrect": false,
+          "distractorRole": "wrong_emphasis",
+          "rationale": "This focuses on the rainy-day setup, but the lesson comes from Mateo's choice to tell the truth.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "quotedSpan": "this Saturday it was raining hard",
+              "paragraphIndex": 0,
+              "sentenceIndex": 4,
+              "startChar": 186,
+              "endChar": 219
+            }
+          ]
+        },
+        {
+          "text": "Broken things should always be thrown away at once.",
+          "isCorrect": false,
+          "distractorRole": "opposite_claim",
+          "rationale": "This reverses the ending because Abuela saves the large pieces for a new use.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "quotedSpan": "The three big pieces she did not throw out.",
+              "paragraphIndex": 13,
+              "sentenceIndex": 4,
+              "startChar": 4047,
+              "endChar": 4090
+            }
+          ]
+        }
+      ],
+      "correctIndex": 1,
+      "comprehensionKind": "inference",
+      "comprehensionKindRationale": "The narrator never states the lesson directly; readers infer it from Mateo's confession, Abuela's response, and the repair afterward.",
+      "responseSpecJson": {
+        "prompt": "Which sentence best states the lesson of the story?",
+        "choices": [
+          "A person should keep fragile things on a lower shelf.",
+          "Telling the truth about a mistake is hard but important.",
+          "A rainy day is the best time to practice ball skills indoors.",
+          "Broken things should always be thrown away at once."
+        ],
+        "structuredChoicesJson": [
+          {
+            "text": "A person should keep fragile things on a lower shelf.",
+            "distractorRole": "too_narrow"
+          },
+          {
+            "text": "Telling the truth about a mistake is hard but important."
+          },
+          {
+            "text": "A rainy day is the best time to practice ball skills indoors.",
+            "distractorRole": "wrong_emphasis"
+          },
+          {
+            "text": "Broken things should always be thrown away at once.",
+            "distractorRole": "opposite_claim"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pssa_item_g3_eoy_p2_te_ak113",
+      "itemId": "pssa_item_g3_eoy_p2_te_ak113",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "MATCHING_GRID",
+      "interactionType": "MATCHING_GRID",
+      "interactionSubtype": "plot_role_action_grid",
+      "passageId": "pssa_psg_g3_eoy_p2_broken_vase",
+      "passageTitle": "The Broken Vase",
+      "eligibleContent": "E03.A-K.1.1.3",
+      "reportingCategory": "A",
+      "pointValue": 3,
+      "correctResponseJson": {
+        "correctCells": [
+          {
+            "rowId": "breaks_vase",
+            "columnId": "starts_problem"
+          },
+          {
+            "rowId": "stops_walks",
+            "columnId": "turning_point"
+          },
+          {
+            "rowId": "puts_ball_away",
+            "columnId": "consequence"
+          }
+        ]
+      },
+      "scoringJson": {
+        "totalPoints": 3
+      },
+      "evidenceBinding": {
+        "requiresFigure": false,
+        "requiresPassageText": true,
+        "evidenceKind": "passage_only"
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "provenanceJson": {
+        "benchmarkSeason": "EOY",
+        "blueprintVersion": "pde-ela-diagnostic-stamina-2025-g3-eoy-v1",
+        "unit": "P2"
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_EOY_P2_ITEMS",
+        "noDbWrite": true,
+        "productionImportReady": false
+      },
+      "stem": "Match each of Mateo's actions to its role in the plot.",
+      "instructionText": "Choose the plot role that best matches each action.",
+      "rows": [
+        {
+          "rowId": "breaks_vase",
+          "label": "Mateo plays ball indoors and breaks the vase.",
+          "correctColumnId": "starts_problem",
+          "rationale": "Breaking the vase creates the story's main problem and sets Mateo's choice in motion.",
+          "plausibleWrongRationales": {
+            "turning_point": "The turning point happens later, when Mateo stops and decides to go to the kitchen.",
+            "consequence": "The consequence comes after Mateo confesses, when the ball is put away."
+          }
+        },
+        {
+          "rowId": "stops_walks",
+          "label": "Mateo stops before touching the sharp piece and walks toward the kitchen.",
+          "correctColumnId": "turning_point",
+          "rationale": "This action marks Mateo's change from hiding the mistake toward telling Abuela the truth.",
+          "plausibleWrongRationales": {
+            "starts_problem": "The problem has already started when the vase breaks.",
+            "consequence": "The consequence is the later result of his choice, not this decision point."
+          }
+        },
+        {
+          "rowId": "puts_ball_away",
+          "label": "Mateo puts the ball away when Abuela tells him.",
+          "correctColumnId": "consequence",
+          "rationale": "Putting the ball away shows the consequence of breaking the rule about playing indoors.",
+          "plausibleWrongRationales": {
+            "starts_problem": "The broken vase starts the problem before this consequence happens.",
+            "turning_point": "Mateo's decision to confess is the turning point; putting away the ball follows Abuela's response."
+          }
+        }
+      ],
+      "columns": [
+        {
+          "columnId": "starts_problem",
+          "label": "Starts the problem"
+        },
+        {
+          "columnId": "turning_point",
+          "label": "Marks the turning point"
+        },
+        {
+          "columnId": "consequence",
+          "label": "Shows the consequence"
+        }
+      ],
+      "selectionRule": "Select one plot role for each action.",
+      "correctCells": [
+        {
+          "rowId": "breaks_vase",
+          "columnId": "starts_problem"
+        },
+        {
+          "rowId": "stops_walks",
+          "columnId": "turning_point"
+        },
+        {
+          "rowId": "puts_ball_away",
+          "columnId": "consequence"
+        }
+      ],
+      "responseSpecJson": {
+        "stem": "Match each of Mateo's actions to its role in the plot.",
+        "instructionText": "Choose the plot role that best matches each action.",
+        "rows": [
+          {
+            "rowId": "breaks_vase",
+            "label": "Mateo plays ball indoors and breaks the vase.",
+            "correctColumnId": "starts_problem",
+            "rationale": "Breaking the vase creates the story's main problem and sets Mateo's choice in motion.",
+            "plausibleWrongRationales": {
+              "turning_point": "The turning point happens later, when Mateo stops and decides to go to the kitchen.",
+              "consequence": "The consequence comes after Mateo confesses, when the ball is put away."
+            }
+          },
+          {
+            "rowId": "stops_walks",
+            "label": "Mateo stops before touching the sharp piece and walks toward the kitchen.",
+            "correctColumnId": "turning_point",
+            "rationale": "This action marks Mateo's change from hiding the mistake toward telling Abuela the truth.",
+            "plausibleWrongRationales": {
+              "starts_problem": "The problem has already started when the vase breaks.",
+              "consequence": "The consequence is the later result of his choice, not this decision point."
+            }
+          },
+          {
+            "rowId": "puts_ball_away",
+            "label": "Mateo puts the ball away when Abuela tells him.",
+            "correctColumnId": "consequence",
+            "rationale": "Putting the ball away shows the consequence of breaking the rule about playing indoors.",
+            "plausibleWrongRationales": {
+              "starts_problem": "The broken vase starts the problem before this consequence happens.",
+              "turning_point": "Mateo's decision to confess is the turning point; putting away the ball follows Abuela's response."
+            }
+          }
+        ],
+        "columns": [
+          {
+            "columnId": "starts_problem",
+            "label": "Starts the problem"
+          },
+          {
+            "columnId": "turning_point",
+            "label": "Marks the turning point"
+          },
+          {
+            "columnId": "consequence",
+            "label": "Shows the consequence"
+          }
+        ],
+        "selectionRule": "Select one plot role for each action."
+      }
+    },
+    {
+      "id": "pssa_item_g3_eoy_p2_sa_ak112",
+      "itemId": "pssa_item_g3_eoy_p2_sa_ak112",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "SHORT_ANSWER",
+      "interactionType": "SHORT_ANSWER",
+      "interactionSubtype": "theme_support_short_answer",
+      "passageId": "pssa_psg_g3_eoy_p2_broken_vase",
+      "passageTitle": "The Broken Vase",
+      "eligibleContent": "E03.A-K.1.1.2",
+      "reportingCategory": "A",
+      "pointValue": 3,
+      "correctResponseJson": {
+        "rubric": "human_scored"
+      },
+      "scoringJson": {
+        "totalPoints": 3,
+        "autoScoringClaim": false
+      },
+      "evidenceBinding": {
+        "requiresFigure": false,
+        "requiresPassageText": true,
+        "evidenceKind": "passage_only",
+        "task": "explain_message_development",
+        "requiredDetailCount": 2,
+        "requiresReasoningConnection": true
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "provenanceJson": {
+        "benchmarkSeason": "EOY",
+        "blueprintVersion": "pde-ela-diagnostic-stamina-2025-g3-eoy-v1",
+        "unit": "P2"
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_EOY_P2_ITEMS",
+        "noDbWrite": true,
+        "productionImportReady": false,
+        "autoScoringClaim": false
+      },
+      "stem": "What lesson does Mateo learn? Use two details from the story to support your answer.",
+      "instructionText": "Write a short answer that explains the lesson and supports it with two details from the story.",
+      "requiredSupportCount": 2,
+      "requiresTextSupport": true,
+      "expectedAnswerCore": "Mateo learns that telling the truth and taking responsibility matters even when a mistake is hard to admit.",
+      "acceptableTextSupport": [
+        {
+          "supportId": "reject_hide_plan",
+          "quotedSpan": "Hiding the pieces would not bring the vase back.",
+          "connectsToExpectedAnswer": "This shows Mateo rejects hiding the mistake."
+        },
+        {
+          "supportId": "safe_cleanup",
+          "quotedSpan": "We clean them the safe way, and we do it together.",
+          "connectsToExpectedAnswer": "This shows Mateo helps repair the situation after telling the truth."
+        },
+        {
+          "supportId": "new_use",
+          "quotedSpan": "We could press the pieces into a stepping stone for the garden",
+          "connectsToExpectedAnswer": "This shows they try to make something new from the mistake."
+        }
+      ],
+      "commonIncompletePatterns": [
+        "States the lesson but gives only one supporting detail.",
+        "Retells the broken vase event without explaining honesty or responsibility.",
+        "Uses Mateo's confession only, without adding distinct support from the repair or cleanup."
+      ],
+      "rubric": {
+        "points3": "Explains a valid lesson about honesty or responsibility and supports it with at least two accurate, distinct story details from the allowed support set.",
+        "points2": "Explains a valid lesson with one strong detail, or gives two details with only a partial connection to the lesson.",
+        "points1": "Names honesty, responsibility, or a relevant event but gives little explanation or support.",
+        "points0": "Gives an incorrect, unsupported, copied-only, or off-topic response."
+      },
+      "scoreBandExamples": [
+        {
+          "band": 3,
+          "response": "Mateo learns that it is better to tell the truth about a mistake. He thinks hiding the pieces will not bring the vase back, and later he helps Abuela clean the sharp pieces safely. Those details show he takes responsibility.",
+          "why": "Explains the lesson and connects two distinct details."
+        },
+        {
+          "band": 2,
+          "response": "The lesson is to be honest. Mateo tells Abuela and helps clean up.",
+          "why": "Correct lesson and relevant details, but the explanation is brief."
+        },
+        {
+          "band": 1,
+          "response": "Mateo broke the vase and felt bad.",
+          "why": "Relevant event, but little lesson or support."
+        },
+        {
+          "band": 0,
+          "response": "The story teaches that cats should stay off shelves.",
+          "why": "Incorrect lesson and unsupported by the story."
+        }
+      ],
+      "responseSpecJson": {
+        "stem": "What lesson does Mateo learn? Use two details from the story to support your answer.",
+        "instructionText": "Write a short answer that explains the lesson and supports it with two details from the story.",
+        "requiredSupportCount": 2,
+        "requiresTextSupport": true
+      }
+    },
+    {
+      "id": "pssa_item_g3_eoy_p2_mcq_ac211_ao5",
+      "itemId": "pssa_item_g3_eoy_p2_mcq_ac211_ao5",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "MCQ",
+      "interactionType": "MCQ",
+      "interactionSubtype": "third_person_limited_private_thought",
+      "passageId": "pssa_psg_g3_eoy_p2_broken_vase",
+      "passageTitle": "The Broken Vase",
+      "eligibleContent": "E03.A-C.2.1.1",
+      "reportingCategory": "A",
+      "pointValue": 1,
+      "correctResponseJson": {
+        "correctIndex": 2
+      },
+      "scoringJson": {
+        "totalPoints": 1
+      },
+      "evidenceBinding": {
+        "requiresFigure": false,
+        "requiresPassageText": true,
+        "evidenceKind": "passage_only",
+        "quotedText": "reaching to dust the shelf and finding the empty spot bare"
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "provenanceJson": {
+        "benchmarkSeason": "EOY",
+        "blueprintVersion": "pde-ela-diagnostic-stamina-2025-g3-eoy-v1",
+        "unit": "P2"
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_EOY_P2_ITEMS",
+        "noDbWrite": true,
+        "productionImportReady": false
+      },
+      "studentFacingPrompt": "What does the third-person limited point of view help the reader know?",
+      "stem": "What does the third-person limited point of view help the reader know?",
+      "answerChoicesJson": [
+        {
+          "text": "What Abuela plans to do with the vase pieces before Mateo tells her",
+          "isCorrect": false,
+          "distractorRole": "unsupported_inference",
+          "rationale": "The passage does not reveal Abuela's private plan before Mateo confesses.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "quotedSpan": "His grandmother set the towels down.",
+              "paragraphIndex": 9,
+              "sentenceIndex": 0,
+              "startChar": 2801,
+              "endChar": 2837
+            }
+          ]
+        },
+        {
+          "text": "What the cat thinks when Mateo imagines blaming it for the blue vase",
+          "isCorrect": false,
+          "distractorRole": "plausible_misreading",
+          "rationale": "This misreads Mateo's imagined excuse as access to the cat's thoughts, which the story never gives.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "quotedSpan": "the cat had knocked the vase down",
+              "paragraphIndex": 5,
+              "sentenceIndex": 2,
+              "startChar": 1651,
+              "endChar": 1684
+            }
+          ]
+        },
+        {
+          "text": "What Mateo privately imagines about Abuela finding the empty shelf",
+          "isCorrect": true,
+          "distractorRole": null,
+          "rationale": "Correct. The narrator lets readers know Mateo pictures the empty shelf even though Abuela cannot see that thought.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "quotedSpan": "reaching to dust the shelf and finding the empty spot bare",
+              "paragraphIndex": 6,
+              "sentenceIndex": 2,
+              "startChar": 1943,
+              "endChar": 2001
+            }
+          ]
+        },
+        {
+          "text": "What every person in the house thinks about the broken vase",
+          "isCorrect": false,
+          "distractorRole": "wrong_emphasis",
+          "rationale": "The narration mainly follows Mateo's thoughts, not every person's thoughts.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "quotedSpan": "Only Mateo and the broken vase knew what had happened.",
+              "paragraphIndex": 4,
+              "sentenceIndex": 4,
+              "startChar": 1401,
+              "endChar": 1455
+            }
+          ]
+        }
+      ],
+      "structuredChoicesJson": [
+        {
+          "text": "What Abuela plans to do with the vase pieces before Mateo tells her",
+          "isCorrect": false,
+          "distractorRole": "unsupported_inference",
+          "rationale": "The passage does not reveal Abuela's private plan before Mateo confesses.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "quotedSpan": "His grandmother set the towels down.",
+              "paragraphIndex": 9,
+              "sentenceIndex": 0,
+              "startChar": 2801,
+              "endChar": 2837
+            }
+          ]
+        },
+        {
+          "text": "What the cat thinks when Mateo imagines blaming it for the blue vase",
+          "isCorrect": false,
+          "distractorRole": "plausible_misreading",
+          "rationale": "This misreads Mateo's imagined excuse as access to the cat's thoughts, which the story never gives.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "quotedSpan": "the cat had knocked the vase down",
+              "paragraphIndex": 5,
+              "sentenceIndex": 2,
+              "startChar": 1651,
+              "endChar": 1684
+            }
+          ]
+        },
+        {
+          "text": "What Mateo privately imagines about Abuela finding the empty shelf",
+          "isCorrect": true,
+          "distractorRole": null,
+          "rationale": "Correct. The narrator lets readers know Mateo pictures the empty shelf even though Abuela cannot see that thought.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "quotedSpan": "reaching to dust the shelf and finding the empty spot bare",
+              "paragraphIndex": 6,
+              "sentenceIndex": 2,
+              "startChar": 1943,
+              "endChar": 2001
+            }
+          ]
+        },
+        {
+          "text": "What every person in the house thinks about the broken vase",
+          "isCorrect": false,
+          "distractorRole": "wrong_emphasis",
+          "rationale": "The narration mainly follows Mateo's thoughts, not every person's thoughts.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "quotedSpan": "Only Mateo and the broken vase knew what had happened.",
+              "paragraphIndex": 4,
+              "sentenceIndex": 4,
+              "startChar": 1401,
+              "endChar": 1455
+            }
+          ]
+        }
+      ],
+      "correctIndex": 2,
+      "responseSpecJson": {
+        "prompt": "What does the third-person limited point of view help the reader know?",
+        "choices": [
+          "What Abuela plans to do with the vase pieces before Mateo tells her",
+          "What the cat thinks when Mateo imagines blaming it for the blue vase",
+          "What Mateo privately imagines about Abuela finding the empty shelf",
+          "What every person in the house thinks about the broken vase"
+        ],
+        "structuredChoicesJson": [
+          {
+            "text": "What Abuela plans to do with the vase pieces before Mateo tells her",
+            "distractorRole": "unsupported_inference"
+          },
+          {
+            "text": "What the cat thinks when Mateo imagines blaming it for the blue vase",
+            "distractorRole": "plausible_misreading"
+          },
+          {
+            "text": "What Mateo privately imagines about Abuela finding the empty shelf"
+          },
+          {
+            "text": "What every person in the house thinks about the broken vase",
+            "distractorRole": "wrong_emphasis"
+          }
+        ]
+      }
+    }
+  ]
+}

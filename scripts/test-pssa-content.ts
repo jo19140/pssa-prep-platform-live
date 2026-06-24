@@ -25,6 +25,7 @@ import { buildMoyP3Packet } from "./content/author-pssa-moy-p3";
 import { buildMoyP4Packet } from "./content/author-pssa-moy-p4";
 import { buildMoyConventionsPacket } from "./content/author-pssa-moy-conventions";
 import { buildEoyP1Packet } from "./content/author-pssa-eoy-p1";
+import { buildEoyP2Packet } from "./content/author-pssa-eoy-p2";
 import {
   PSSA_CONTENT_QUALITY_GATE_IDS,
   buildPlan,
@@ -205,6 +206,9 @@ const moyConventionsItems = moyConventionsPacket.items as any[];
 const eoyP1Packet = buildEoyP1Packet();
 const eoyP1Items = eoyP1Packet.items as any[];
 const eoyP1Passage = eoyP1Packet.passages[0] as any;
+const eoyP2Packet = buildEoyP2Packet();
+const eoyP2Items = eoyP2Packet.items as any[];
+const eoyP2Passage = eoyP2Packet.passages[0] as any;
 const expectedStaminaConventions = [
   {
     id: "conv_01",
@@ -512,6 +516,56 @@ assert.deepEqual(eoyP1Items.filter((item: any) => item.interactionType === "MCQ"
 assert.equal(eoyP1Items.filter((item: any) => item.interactionType === "MATCHING_GRID").length, 3, "EOY P1 must contain three matching grids");
 for (const item of eoyP1Items) {
   assert.equal(item.passageId, "pssa_psg_g3_eoy_p1_crayons", `${item.itemId} passageId must be EOY P1`);
+  assert.equal(item.passageGroupId, undefined, `${item.itemId} must not set passageGroupId`);
+  assert.equal(item.passageLinks, undefined, `${item.itemId} must not set passageLinks`);
+  assert.equal(item.isCrossText, undefined, `${item.itemId} must not set isCrossText`);
+  assert.equal(item.requiredEvidenceSlotsJson, undefined, `${item.itemId} must not set requiredEvidenceSlotsJson`);
+  assert.equal(item.reviewStatus, "PENDING", `${item.itemId} reviewStatus must be PENDING`);
+  assert.equal(item.itemStatus, "candidate", `${item.itemId} itemStatus must be candidate`);
+  assert.equal(item.scoringBucket, undefined, `${item.itemId} must not set scoringBucket in the bank`);
+  projectPssaStudentItem(item);
+}
+assert.equal(eoyP2Packet.noDbWrite, true, "EOY P2 packet must be file-only noDbWrite");
+assert.equal(eoyP2Packet.productionImportReady, false, "EOY P2 packet must not be production import ready");
+assert.equal(eoyP2Packet.passages.length, 1, "EOY P2 must contain exactly one passage");
+assert.equal(eoyP2Items.length, 8, "EOY P2 must contain exactly eight items");
+assert.equal(eoyP2Passage.id, "pssa_psg_g3_eoy_p2_broken_vase", "EOY P2 passage id must be pinned");
+assert.equal(eoyP2Passage.wordCount, 925, "EOY P2 passage word count must remain pinned");
+assert.equal(eoyP2Passage.genre, "literary_narrative", "EOY P2 passage genre must be literary narrative");
+assert.equal(eoyP2Passage.pov, "third_person", "EOY P2 POV must be third_person");
+assert.equal(eoyP2Passage.staminaBand, "released_length", "EOY P2 passage stamina band must be released_length");
+assert.equal(eoyP2Passage.factCheckRequired, false, "EOY P2 must be original fiction with factCheckRequired false");
+assert.equal("factCheckNotesJson" in eoyP2Passage, false, "EOY P2 must not carry factCheckNotesJson");
+assert.equal(eoyP2Passage.textFeaturesJson.filter((feature: any) => feature.type === "figure").length, 0, "EOY P2 must not contain a figure feature");
+assert.deepEqual(eoyP2Passage.textFeaturesJson, [{
+  type: "figurative_language",
+  featureText: "his stomach tied in a knot",
+  sectionId: "paragraph_05",
+  mustUseInItem: true,
+  linkedByItemIds: ["pssa_item_g3_eoy_p2_mcq_av412"],
+}], "EOY P2 must carry exactly the pinned figurative-language feature");
+assert.deepEqual(
+  eoyP2Items.map((item: any) => [item.itemId, item.eligibleContent, item.interactionType, item.pointValue]),
+  [
+    ["pssa_item_g3_eoy_p2_mcq_ak111", "E03.A-K.1.1.1", "MCQ", 1],
+    ["pssa_item_g3_eoy_p2_mcq_ac211", "E03.A-C.2.1.1", "MCQ", 1],
+    ["pssa_item_g3_eoy_p2_mcq_av411", "E03.A-V.4.1.1", "MCQ", 1],
+    ["pssa_item_g3_eoy_p2_mcq_av412", "E03.A-V.4.1.2", "MCQ", 1],
+    ["pssa_item_g3_eoy_p2_mcq_ak112", "E03.A-K.1.1.2", "MCQ", 1],
+    ["pssa_item_g3_eoy_p2_te_ak113", "E03.A-K.1.1.3", "MATCHING_GRID", 3],
+    ["pssa_item_g3_eoy_p2_sa_ak112", "E03.A-K.1.1.2", "SHORT_ANSWER", 3],
+    ["pssa_item_g3_eoy_p2_mcq_ac211_ao5", "E03.A-C.2.1.1", "MCQ", 1],
+  ],
+  "EOY P2 EC/type/points table must match the locked spec",
+);
+assert.deepEqual(eoyP2Items.filter((item: any) => item.interactionType === "MCQ").map((item: any) => item.correctIndex), [0, 1, 2, 3, 1, 2], "EOY P2 MCQ key positions must be A/B/C/D/B/C");
+assert.equal(evaluatePssaPassageStaminaMetadata(eoyP2Passage), "PASS", "EOY P2 stamina metadata must pass");
+assert.equal(evaluatePssaTextFeatureIntegrity(eoyP2Passage, eoyP2Items), "PASS", "EOY P2 text feature integrity must pass");
+assert.equal(evaluatePssaTextFeatureItemLink(eoyP2Passage, eoyP2Items), "PASS", "EOY P2 text feature item link must pass");
+assert.equal(evaluatePssaSectionLookbackBalance(eoyP2Passage, eoyP2Items), "PASS", "EOY P2 section lookback must pass");
+assert.equal(evaluatePssaDomainFactCheckRequired(eoyP2Passage), "SKIP", "EOY P2 fact-check gate must skip");
+for (const item of eoyP2Items) {
+  assert.equal(item.passageId, "pssa_psg_g3_eoy_p2_broken_vase", `${item.itemId} passageId must be EOY P2`);
   assert.equal(item.passageGroupId, undefined, `${item.itemId} must not set passageGroupId`);
   assert.equal(item.passageLinks, undefined, `${item.itemId} must not set passageLinks`);
   assert.equal(item.isCrossText, undefined, `${item.itemId} must not set isCrossText`);
