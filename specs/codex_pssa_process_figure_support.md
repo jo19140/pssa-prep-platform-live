@@ -84,7 +84,6 @@ Generalize `assertSvgLabelsMatchStructuredData` (`pssa-figure-feature-node.ts`):
 lib/content/pssaFigureFeature.ts                        (generalize: types, validator, generator, projection, clone)
 scripts/content/lib/pssa-figure-feature-node.ts         (generalize: assertSvgLabelsMatchStructuredData)
 scripts/test-pssa-process-figure-feature.ts             (NEW — process happy-path + rejection battery)
-scripts/test-pssa-figure-map-feature.ts                 (type-annotation narrowing ONLY: helper + one cast → PssaFigureMapFeature, required by the true discriminated union; no runtime/assertion change)
 scripts/test-pssa-content.ts                            (test wiring only, if needed)
 specs/codex_pssa_process_figure_support.md
 ```

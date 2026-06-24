@@ -3,11 +3,12 @@
 **Type:** assembler PR (code, not content authoring). **Owner:** Jonathan. **Date:** 2026-06-22.
 
 ```
-BLOCKERS CLEARED on origin/main at ae09b0b.
-Nine conventions IDs resolved and verified by EC.
+BLOCKED ON:
+- MOY conventions merged and audited on origin/main
+- exact nine conventions item IDs confirmed from committed exemplars/pssa_grade3_moy_conventions/backend.json
 ```
 
-**Blockers cleared — assembler implementation proceeds per this committed spec.** Both content tranches (P4 + conventions) are merged on `origin/main` at `ae09b0b`; the nine conventions IDs are resolved and verified by EC.
+**Do NOT implement until both blockers clear.** This spec is for review/queuing now; authoring of the assembler waits for the conventions branch to land and its IDs to be audited.
 
 ## 0. Scope & guardrails
 
@@ -82,11 +83,11 @@ Word totals (committed): S1 = 1,086 · S2 = 884 + 796 = 1,680 · S3 = 687 · **T
 | `pssa_item_g3_moy_p4_mcq_av412` | MCQ | 1 | A-V.4.1.2 | operational |
 | `pssa_item_g3_moy_p4_mcq_av412_ao2` | MCQ | 1 | A-V.4.1.2 | **analytics_only** (AO-2) |
 | `pssa_item_g3_moy_p4_ebsr_ak113` | EBSR | 2 | A-K.1.1.3 | operational |
-| `pssa_item_g3_moy_conv_d111_word_function` | INLINE_DROPDOWN | 1 | D.1.1.1 | operational |
-| `pssa_item_g3_moy_conv_d114_irregular_verb` | INLINE_DROPDOWN | 1 | D.1.1.4 | operational |
-| `pssa_item_g3_moy_conv_d115_verb_tense` | INLINE_DROPDOWN | 1 | D.1.1.5 | operational |
-| `pssa_item_g3_moy_conv_d116_agreement` | INLINE_DROPDOWN | 1 | D.1.1.6 | operational |
-| `pssa_item_g3_moy_conv_d118_conjunctions` | INLINE_DROPDOWN | 1 | D.1.1.8 | operational |
+| `«conv id for E03.D.1.1.1»` | INLINE_DROPDOWN | 1 | D.1.1.1 | operational |
+| `«conv id for E03.D.1.1.4»` | INLINE_DROPDOWN | 1 | D.1.1.4 | operational |
+| `«conv id for E03.D.1.1.5»` | INLINE_DROPDOWN | 1 | D.1.1.5 | operational |
+| `«conv id for E03.D.1.1.6»` | INLINE_DROPDOWN | 1 | D.1.1.6 | operational |
+| `«conv id for E03.D.1.1.8»` | INLINE_DROPDOWN | 1 | D.1.1.8 | operational |
 
 **Section 2 (16 delivered) — P2 narrative + P3 paired informational + AO-1/3/4:**
 | ID | type | pts | EC | bucket |
@@ -121,10 +122,10 @@ Word totals (committed): S1 = 1,086 · S2 = 884 + 796 = 1,680 · S3 = 687 · **T
 | `pssa_item_g3_moy_p1_te_bk112` | MATCHING_GRID | 3 | B-K.1.1.2 | operational |
 | `pssa_item_g3_moy_p1_sa_bk113` | SHORT_ANSWER | 3 | B-K.1.1.3 | operational |
 | `pssa_item_g3_moy_p1_ao5_dd_bc313` | DRAG_DROP | 3 | B-C.3.1.3 | **analytics_only** (AO-5) |
-| `pssa_item_g3_moy_conv_d121_title_caps` | INLINE_DROPDOWN | 1 | D.1.2.1 | operational |
-| `pssa_item_g3_moy_conv_d123_dialogue` | INLINE_DROPDOWN | 1 | D.1.2.3 | operational |
-| `pssa_item_g3_moy_conv_d125_spelling` | INLINE_DROPDOWN | 1 | D.1.2.5 | operational |
-| `pssa_item_g3_moy_conv_d211_word_choice` | INLINE_DROPDOWN | 1 | D.2.1.1 | operational |
+| `«conv id for E03.D.1.2.1»` | INLINE_DROPDOWN | 1 | D.1.2.1 | operational |
+| `«conv id for E03.D.1.2.3»` | INLINE_DROPDOWN | 1 | D.1.2.3 | operational |
+| `«conv id for E03.D.1.2.5»` | INLINE_DROPDOWN | 1 | D.1.2.5 | operational |
+| `«conv id for E03.D.2.1.1»` | INLINE_DROPDOWN | 1 | D.2.1.1 | operational |
 
 **`scoringBucket = analytics_only` — exactly these 5 IDs (8 pts):** `pssa_item_g3_moy_p1_ao5_dd_bc313` (3) · `pssa_item_g3_moy_p3_mcq_bv412_ao1` (1) · `pssa_item_g3_moy_p3_mcq_bc211_ao3` (1) · `pssa_item_g3_moy_p3_ebsr_bc311_ao4` (2) · `pssa_item_g3_moy_p4_mcq_av412_ao2` (1). **`operational`:** every other item incl. all 9 conventions (35 items / 45 pts).
 
