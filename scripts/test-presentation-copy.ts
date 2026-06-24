@@ -143,6 +143,8 @@ const expectedK3Copy: PresentationCopy = {
     correctFeedback: "That matches.",
     retryFeedback: "Keep building the word you hear.",
     checkButton: "Check spelling",
+    nextButton: "Next word",
+    doneButton: "Done spelling",
   },
   storyReading: {
     storyLabel: "Story",
@@ -271,6 +273,8 @@ function main() {
   assert.equal(coachCopy.listenAttempt.pseudoword.title.includes("silly words"), false, "BAND_7_8 should not say silly words");
   assert.equal(coachCopy.buddy.name, "Harper", "Coach Mode must keep Harper's name");
   assert.equal(coachCopy.buddy.imageAlt, "Harper", "Coach Mode must keep Harper's alt text");
+  assert.equal(coachCopy.spelling.nextButton, "Next word", "Coach Mode spelling should keep the next-word label");
+  assert.equal(coachCopy.spelling.doneButton, "Finish spelling", "Coach Mode spelling should use the mature done label");
   assert.equal(coachTheme.layout.showAdultEvidencePanel, false, "Coach Mode must hide the adult/evidence panel");
 
   const studentPractice = readFileSync("components/literacy/StudentPracticeSession.tsx", "utf8");

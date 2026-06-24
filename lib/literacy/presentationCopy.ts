@@ -120,6 +120,8 @@ export type PresentationCopy = {
     correctFeedback: string;
     retryFeedback: string;
     checkButton: string;
+    nextButton: string;
+    doneButton: string;
   };
   storyReading: {
     storyLabel: string;
@@ -332,6 +334,8 @@ const K3_COPY: PresentationCopy = {
     correctFeedback: "That matches.",
     retryFeedback: "Keep building the word you hear.",
     checkButton: "Check spelling",
+    nextButton: "Next word",
+    doneButton: "Done spelling",
   },
   storyReading: {
     storyLabel: "Story",
@@ -506,6 +510,7 @@ const COACH_COPY: PresentationCopy = {
     inputPlaceholder: "type the word",
     correctFeedback: "That matches.",
     retryFeedback: "Keep building the word you hear.",
+    doneButton: "Finish spelling",
   },
   storyReading: {
     ...K3_COPY.storyReading,
