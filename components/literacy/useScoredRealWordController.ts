@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import {
   ScoredRealWordController,
   type ScoredRealWordCallbacks,
@@ -13,7 +13,7 @@ import { startAudioCapture, stopAudioCapture } from "@/lib/voice/audioCapture";
 
 type UseScoredRealWordControllerOptions = ScoredRealWordCallbacks & Omit<ScoredRealWordControllerOptions, keyof ScoredRealWordCallbacks>;
 
-const initialState: ScoredRealWordState = {
+export const initialScoredRealWordState: ScoredRealWordState = {
   statuses: {},
   attempts: {},
   technicalFailures: {},
@@ -26,10 +26,64 @@ const initialState: ScoredRealWordState = {
   showFallback: false,
 };
 
+type ScoredRealWordControllerLifecycleOptions = {
+  deps: ScoredRealWordControllerDeps;
+  getOptions: () => UseScoredRealWordControllerOptions;
+  setState: (state: ScoredRealWordState) => void;
+  createController?: (options: ScoredRealWordControllerOptions, deps: ScoredRealWordControllerDeps) => ScoredRealWordController;
+};
+
+export function createScoredRealWordControllerLifecycle({
+  deps,
+  getOptions,
+  setState,
+  createController = (options, controllerDeps) => new ScoredRealWordController(options, controllerDeps),
+}: ScoredRealWordControllerLifecycleOptions) {
+  let controller: ScoredRealWordController | null = null;
+
+  const activeController = () => {
+    const current = controller;
+    current?.updateOptions(getOptions());
+    return current;
+  };
+
+  return {
+    setup() {
+      const current = createController(getOptions(), deps);
+      controller = current;
+      setState(current.getSnapshot());
+      const unsubscribe = current.subscribe(setState);
+      return () => {
+        unsubscribe();
+        current.dispose();
+        if (controller === current) controller = null;
+      };
+    },
+    updateOptions() {
+      controller?.updateOptions(getOptions());
+    },
+    beginRecording(entry: ScoredRealWordEntry, readDisabled: boolean) {
+      return activeController()?.beginRecording(entry, readDisabled);
+    },
+    stopAndScore(entry: ScoredRealWordEntry) {
+      return activeController()?.stopAndScore(entry);
+    },
+    adultSupportAdvance(entry: ScoredRealWordEntry) {
+      return activeController()?.adultSupportAdvance(entry);
+    },
+    getControllerForTests() {
+      return controller;
+    },
+  };
+}
+
 export function useScoredRealWordController(options: UseScoredRealWordControllerOptions) {
-  const [state, setState] = useState<ScoredRealWordState>(initialState);
+  const [state, setState] = useState<ScoredRealWordState>(initialScoredRealWordState);
+  const latestOptionsRef = useRef(options);
   const depsRef = useRef<ScoredRealWordControllerDeps | null>(null);
-  const controllerRef = useRef<ScoredRealWordController | null>(null);
+  const lifecycleRef = useRef<ReturnType<typeof createScoredRealWordControllerLifecycle> | null>(null);
+
+  latestOptionsRef.current = options;
 
   if (!depsRef.current) {
     depsRef.current = {
@@ -47,29 +101,33 @@ export function useScoredRealWordController(options: UseScoredRealWordController
     };
   }
 
-  if (!controllerRef.current) {
-    controllerRef.current = new ScoredRealWordController(options, depsRef.current);
+  if (!lifecycleRef.current) {
+    lifecycleRef.current = createScoredRealWordControllerLifecycle({
+      deps: depsRef.current,
+      getOptions: () => latestOptionsRef.current,
+      setState,
+    });
   }
 
   useEffect(() => {
-    controllerRef.current!.updateOptions(options);
+    lifecycleRef.current?.updateOptions();
   }, [options]);
 
   useEffect(() => {
-    const controller = controllerRef.current!;
-    return controller.subscribe(setState);
+    return lifecycleRef.current!.setup();
   }, []);
 
-  useEffect(() => {
-    const controller = controllerRef.current!;
-    return () => controller.dispose();
-  }, []);
+  const beginRecording = useCallback(
+    (entry: ScoredRealWordEntry, readDisabled: boolean) => lifecycleRef.current?.beginRecording(entry, readDisabled),
+    [],
+  );
+  const stopAndScore = useCallback((entry: ScoredRealWordEntry) => lifecycleRef.current?.stopAndScore(entry), []);
+  const adultSupportAdvance = useCallback((entry: ScoredRealWordEntry) => lifecycleRef.current?.adultSupportAdvance(entry), []);
 
-  const controller = controllerRef.current;
   return {
     state,
-    beginRecording: (entry: ScoredRealWordEntry, readDisabled: boolean) => controller.beginRecording(entry, readDisabled),
-    stopAndScore: (entry: ScoredRealWordEntry) => controller.stopAndScore(entry),
-    adultSupportAdvance: (entry: ScoredRealWordEntry) => controller.adultSupportAdvance(entry),
+    beginRecording,
+    stopAndScore,
+    adultSupportAdvance,
   };
 }
