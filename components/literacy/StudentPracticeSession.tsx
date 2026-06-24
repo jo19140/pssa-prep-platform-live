@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState, useTransition } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState, useTransition } from "react";
 import { BuddyCharacter, type BuddyState } from "@/components/literacy/BuddyCharacter";
 import { useScoredRealWordController } from "@/components/literacy/useScoredRealWordController";
 import { getTtsProvider } from "@/lib/voice/tts";
@@ -8,6 +8,13 @@ import { recordLessonPlayerEvent } from "@/app/student/practice/actions";
 import { capturePseudowordClip } from "@/lib/voice/captureClient";
 import { startClipRecorder, type ClipRecorder } from "@/lib/voice/captureRecorder";
 import { entryKey as scoredEntryKey, type ScoredRealWordStatus } from "@/lib/literacy/scoredRealWordController";
+import {
+  createInitialSpellingFlowState,
+  spellingFeedbackKind,
+  spellingPrimaryActionKey,
+  transitionSpellingFlow,
+  type SpellingFlowAction,
+} from "@/lib/literacy/spellingFlow";
 import {
   presentationCopyFor,
   presentationThemeFor,
@@ -1251,34 +1258,32 @@ function SpellingPart({
   onComplete: (extra?: Record<string, unknown>) => void;
 }) {
   const words = stringArray(part.contentJson.dictatedWords);
-  const [index, setIndex] = useState(0);
-  const [answer, setAnswer] = useState("");
-  const [results, setResults] = useState<Record<string, boolean>>({});
-  const target = words[index] || "";
+  const [flowState, setFlowState] = useState(createInitialSpellingFlowState);
+  const flowStateRef = useRef(flowState);
+  const target = words[flowState.index] || "";
   const letters = useMemo(() => letterTiles(target), [target]);
-  const isCorrect = normalize(answer) === normalize(target);
+  const isLastWord = flowState.index >= words.length - 1;
+  const feedbackKind = spellingFeedbackKind(flowState);
+  const primaryActionKey = spellingPrimaryActionKey(flowState, isLastWord);
 
-  function check() {
-    setResults((state) => ({ ...state, [target]: isCorrect }));
-    if (index < words.length - 1) {
-      setIndex(index + 1);
-      setAnswer("");
-    } else {
-      onComplete({ spellingCorrect: Object.values({ ...results, [target]: isCorrect }).filter(Boolean).length, spellingTotal: words.length });
-    }
-  }
+  const dispatchFlow = useCallback((action: SpellingFlowAction) => {
+    const result = transitionSpellingFlow(flowStateRef.current, action, { words });
+    flowStateRef.current = result.state;
+    setFlowState(result.state);
+    if (result.completion) onComplete(result.completion);
+  }, [words, onComplete]);
 
   return (
     <div className="flex flex-1 flex-col gap-5">
       <div className="rounded-3xl border-2 border-blue-100 bg-blue-50 p-5 text-center">
         <p className="font-black text-blue-900">{copy.spelling.harperSays}</p>
         <button onClick={() => onSpeak(target)} className="mt-2 rounded-2xl bg-white px-5 py-4 text-2xl font-black shadow-sm">
-          {formatCopy(copy.spelling.listenToWord, { index: String(index + 1) })}
+          {formatCopy(copy.spelling.listenToWord, { index: String(flowState.index + 1) })}
         </button>
       </div>
       <input
-        value={answer}
-        onChange={(event) => setAnswer(event.target.value)}
+        value={flowState.answer}
+        onChange={(event) => dispatchFlow({ type: "set_answer", answer: event.target.value })}
         className="rounded-2xl border-2 border-blue-100 px-4 py-4 text-center text-3xl font-black outline-none focus:border-blue-300"
         placeholder={copy.spelling.inputPlaceholder}
       />
@@ -1286,21 +1291,21 @@ function SpellingPart({
         {letters.map((letter, letterIndex) => (
           <button
             key={`${letter}-${letterIndex}`}
-            onClick={() => setAnswer((value) => value + letter)}
+            onClick={() => dispatchFlow({ type: "append_letter", letter })}
             className="h-14 w-14 rounded-2xl border-2 border-amber-300 bg-amber-50 text-2xl font-black"
           >
             {letter}
           </button>
         ))}
-        <button onClick={() => setAnswer("")} className="rounded-2xl border border-[#e8d9c7] bg-white px-4 py-3 font-black">{copy.spelling.clearButton}</button>
+        <button onClick={() => dispatchFlow({ type: "clear" })} className="rounded-2xl border border-[#e8d9c7] bg-white px-4 py-3 font-black">{copy.spelling.clearButton}</button>
       </div>
-      {answer ? (
-        <div className={`rounded-2xl p-4 font-black ${isCorrect ? "bg-emerald-50 text-emerald-800" : "bg-amber-50 text-amber-900"}`}>
-          {isCorrect ? copy.spelling.correctFeedback : copy.spelling.retryFeedback}
+      {feedbackKind ? (
+        <div className={`rounded-2xl p-4 font-black ${feedbackKind === "correct" ? "bg-emerald-50 text-emerald-800" : "bg-amber-50 text-amber-900"}`}>
+          {feedbackKind === "correct" ? copy.spelling.correctFeedback : copy.spelling.retryFeedback}
         </div>
       ) : null}
-      <button onClick={check} className="mt-auto rounded-2xl bg-amber-300 px-5 py-4 font-black text-amber-950">
-        {copy.spelling.checkButton}
+      <button onClick={() => dispatchFlow({ type: "primary" })} className="mt-auto rounded-2xl bg-amber-300 px-5 py-4 font-black text-amber-950">
+        {copy.spelling[primaryActionKey]}
       </button>
     </div>
   );
@@ -1409,10 +1414,6 @@ function formatCopy(template: string, values: Record<string, string>) {
 function letterTiles(word: string) {
   const extras = ["m", "d", "r", "n"];
   return Array.from(new Set([...word.toLowerCase().replace(/[^a-z]/g, "").split(""), ...extras])).sort();
-}
-
-function normalize(value: string) {
-  return value.toLowerCase().trim().replace(/[^\w\s]/g, "").replace(/\s+/g, " ");
 }
 
 function stringValue(value: unknown) {
