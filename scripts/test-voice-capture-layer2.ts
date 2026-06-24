@@ -16,6 +16,7 @@ const route = read("app/api/voice/capture/pseudoword/route.ts");
 const storage = read("lib/voice/storage.ts");
 const recorder = read("lib/voice/captureRecorder.ts");
 const client = read("lib/voice/captureClient.ts");
+const coordinator = read("lib/voice/pseudowordCaptureCoordinator.ts");
 const voiceActivity = read("lib/voice/voiceActivity.ts");
 const practicePage = read("app/student/practice/page.tsx");
 const targetPage = read("app/student/practice/[target]/page.tsx");
@@ -31,7 +32,11 @@ assert(targetPage.includes("trainingCorpusOptedIn"), "target page must derive ca
 assert(player.includes("trainingCaptureEnabled === true && surface === \"pseudoword\""), "player must only construct recorder for opted-in pseudoword reads");
 assert(player.includes("startClipRecorder(handle.stream)"), "player must use the VAD stream for capture");
 assert(player.includes("blob = await clipRecorder.stop()"), "player must stop recorder only on VAD-confirmed heardSpeech path");
-assert(player.includes("capturePseudowordClip"), "player must fire best-effort capture after VAD confirmation");
+assert(player.includes("PseudowordCaptureCoordinator"), "player must own or accept a pseudoword capture coordinator");
+assert(player.includes("coordinator.enqueue"), "player must enqueue best-effort capture after VAD confirmation");
+assert(!player.includes("voiceSessionIdRef"), "player must not manage pseudoword capture session ids directly");
+assert(!player.includes("capturePseudowordClip"), "player must not call capturePseudowordClip directly");
+assert(coordinator.includes("capturePseudowordClip"), "coordinator must import the capture client as the default sender");
 assert(!player.includes("VoiceSession"), "player must not write voice sessions directly");
 assert(!client.includes("/api/voice/transcribe"), "capture client must not call the transcribe route");
 

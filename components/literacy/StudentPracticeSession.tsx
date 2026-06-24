@@ -5,8 +5,8 @@ import { BuddyCharacter, type BuddyState } from "@/components/literacy/BuddyChar
 import { useScoredRealWordController } from "@/components/literacy/useScoredRealWordController";
 import { getTtsProvider } from "@/lib/voice/tts";
 import { recordLessonPlayerEvent } from "@/app/student/practice/actions";
-import { capturePseudowordClip } from "@/lib/voice/captureClient";
 import { startClipRecorder, type ClipRecorder } from "@/lib/voice/captureRecorder";
+import { PseudowordCaptureCoordinator } from "@/lib/voice/pseudowordCaptureCoordinator";
 import { entryKey as scoredEntryKey, type ScoredRealWordStatus } from "@/lib/literacy/scoredRealWordController";
 import {
   createInitialSpellingFlowState,
@@ -807,6 +807,7 @@ function ListenForReadingAttempt({
   trainingCaptureEnabled = false,
   studentUserId,
   lessonTargetCode,
+  captureCoordinator,
 }: {
   surface: "warmup" | "pseudoword";
   words: string[];
@@ -824,6 +825,7 @@ function ListenForReadingAttempt({
   trainingCaptureEnabled?: boolean;
   studentUserId?: string;
   lessonTargetCode?: string;
+  captureCoordinator?: PseudowordCaptureCoordinator;
 }) {
   const [statuses, setStatuses] = useState<Record<string, ListenAttemptStatus>>({});
   const [attempts, setAttempts] = useState<Record<string, number>>({});
@@ -834,7 +836,7 @@ function ListenForReadingAttempt({
   const voiceActivityRef = useRef<VoiceActivityHandle | null>(null);
   const clipRecorderRef = useRef<ClipRecorder | null>(null);
   const listenStartedAtRef = useRef<number | null>(null);
-  const voiceSessionIdRef = useRef<string | null>(null);
+  const activeCoordinatorRef = useRef<PseudowordCaptureCoordinator | null>(null);
   const pollTimerRef = useRef<number | null>(null);
   const timeoutRef = useRef<number | null>(null);
   const startingRef = useRef(false);
@@ -845,6 +847,10 @@ function ListenForReadingAttempt({
   const allDone = words.length > 0 && doneWords.length === words.length;
   const fallbackWords = words.filter((word) => fallbackAccepted[word]);
   const vadConfirmedWords = words.filter((word) => statuses[word] === "heard" && !fallbackAccepted[word]);
+  if (!activeCoordinatorRef.current) {
+    activeCoordinatorRef.current = captureCoordinator ?? new PseudowordCaptureCoordinator();
+  }
+  const coordinator = activeCoordinatorRef.current;
 
   useEffect(() => {
     return () => {
@@ -932,16 +938,13 @@ function ListenForReadingAttempt({
     }
 
     if (blob && lessonTargetCode) {
-      void capturePseudowordClip({
+      coordinator.enqueue({
         blob,
-        voiceSessionId: voiceSessionIdRef.current,
         lessonTargetCode,
         expectedText: word,
         wordIndex: words.indexOf(word),
         speakerAgeBand: undefined,
         clipDurationMs,
-      }).then((result) => {
-        if (result?.voiceSessionId) voiceSessionIdRef.current = result.voiceSessionId;
       });
     }
     setStatuses((state) => ({ ...state, [word]: "heard" }));
