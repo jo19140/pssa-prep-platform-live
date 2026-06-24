@@ -63,7 +63,8 @@
     "seed:phase4-teams-cleanup": "tsx scripts/content/seed-phase4-teams-cleanup.ts",
     "seed:phase4-morphology": "tsx scripts/content/seed-phase4-morphology.ts",
     "seed:phase4-morphology-y-to-i": "tsx scripts/content/seed-phase4-morphology-y-to-i.ts",
-    "test:pseudoword-capture-coordinator": "tsx scripts/test-pseudoword-capture-coordinator.ts"
+    "test:pseudoword-capture-coordinator": "tsx scripts/test-pseudoword-capture-coordinator.ts",
+    "test:coach-demo-pair": "tsx scripts/test-coach-demo-pair.ts"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"
