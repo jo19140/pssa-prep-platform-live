@@ -16,7 +16,7 @@ export function SynesisAuthShell({
       <header className="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-6">
         <Link href="/login" className="flex items-center gap-3">
           <Image
-            src="/branding/sy-learning-logo-v6.png"
+            src="/branding/sy-learning-logo-v6-dark.png"
             alt="Sý Learning"
             width={210}
             height={56}

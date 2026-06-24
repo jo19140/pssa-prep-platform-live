@@ -13,7 +13,7 @@ export function AppChromeHeader() {
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3">
         <Link href="/" className="flex items-center gap-3">
           <Image
-            src="/branding/sy-learning-logo-v6.png"
+            src="/branding/sy-learning-logo-v6-dark.png"
             alt="Sý Learning"
             width={190}
             height={48}
