@@ -149,7 +149,7 @@ const skillStandardOverrides: Record<number, Record<string, { code: string; labe
     "Capitalization and Titles": { code: "CC.1.4.3.F", label: "Use capitalization and title conventions" },
     "Paragraph Organization": { code: "CC.1.4.3.C", label: "Develop writing with organization and details" },
     "Opinion Reasons": { code: "CC.1.4.3.G", label: "Support opinion writing with reasons" },
-    "TDA Evidence and Explanation": { code: "CC.1.4.3.S", label: "Use evidence and explanation in text-dependent writing" },
+    "TDA Evidence and Explanation": { code: "CC.1.4.3.S", label: "Use text evidence and explanation in a short written response" },
   },
   4: {
     "Main Idea": { code: "CC.1.2.4.A", label: "Determine main idea and explain key details" },
@@ -2332,6 +2332,26 @@ function tdaLesson(gradeLevel: number): LessonSeed {
   const standard = standardForSkill(gradeLevel, "TDA Evidence and Explanation", "tda", "Text-Dependent Analysis");
   const standardCode = standard.code;
   const bridgeMetadata = gradeLevel === 3 ? gradeThreeCoreLessonBridgeMetadata["TDA Evidence and Explanation"] : undefined;
+  if (gradeLevel === 3) {
+    const items = gradeThreeShortResponseItems();
+    return {
+      gradeLevel,
+      standardCode,
+      standardCodes: bridgeMetadata?.standardCodes,
+      standardLabel: standard.label,
+      skill: "TDA Evidence and Explanation",
+      title: "Text Evidence and Explanation in a Short Response",
+      domain: "Text-Dependent Analysis",
+      pssaBridgeTags: bridgeMetadata?.pssaBridgeTags,
+      lessonExplanation: "A short-response answer does not retell the whole passage. It answers the question with a clear idea, uses a detail from the text, and explains how that detail shows the answer is correct.",
+      workedExample: "Question: How does the character change in the story? Answer: The character learns to be more responsible. Detail from the text: The character goes back to fix the mistake without being asked. Explanation: This detail shows responsibility because the character chooses to make it right even when no one tells them to.",
+      guidedPractice: items.guidedPractice,
+      independentPractice: items.independentPractice,
+      exitTicket: items.exitTicket,
+      masteryCheck: items.masteryCheck,
+      retestRecommendation: "After this lesson, have students revise one short-response answer and explain how one detail from the text supports their answer.",
+    };
+  }
   return {
     gradeLevel,
     standardCode,
@@ -2359,6 +2379,167 @@ function tdaLesson(gradeLevel: number): LessonSeed {
     ],
     retestRecommendation: `After this lesson, have students revise one paragraph of a TDA and explain how one piece of evidence supports the claim.`,
   };
+}
+
+function gradeThreeShortResponseItems(): Pick<LessonSeed, "guidedPractice" | "independentPractice" | "exitTicket" | "masteryCheck"> {
+  return {
+    guidedPractice: [
+      shortResponseQuestion({
+        question: 'Answer: "Mia was determined." Detail: "She tried the puzzle three times." Which explanation best supports the answer?',
+        choices: [
+          "Trying three times shows determination because Mia kept working after mistakes.",
+          "Mia liked puzzles.",
+          "The puzzle had many pieces.",
+          "Mia is a girl in the story.",
+        ],
+        correctAnswer: "Trying three times shows determination because Mia kept working after mistakes.",
+        explanation: "A good explanation connects the detail to the answer with a reason.",
+        coachHint: "Ask: how does this detail show my answer is true?",
+      }),
+      shortResponseQuestion({
+        question: 'A writer answers, "The garden grew because students watered it." Which detail would best support the answer?',
+        choices: [
+          "The garden was near the playground.",
+          "Students carried water to the garden every morning.",
+          "The story happens in spring.",
+          "Some students liked the garden.",
+        ],
+        correctAnswer: "Students carried water to the garden every morning.",
+        explanation: "The best detail directly shows what made the garden grow.",
+        coachHint: "Pick the detail that matches the answer, not just any true sentence.",
+      }),
+      shortResponseQuestion({
+        question: "Which answer is a short response, not a retelling?",
+        choices: [
+          "First the boy woke up, then he ate, then he worked, then he finished.",
+          "This story is about a boy and a job.",
+          "The boy felt proud because he finished the hard job by himself.",
+          "The boy did many things in the story.",
+        ],
+        correctAnswer: "The boy felt proud because he finished the hard job by himself.",
+        explanation: "A short response makes a point and supports it; a retelling only lists events.",
+        coachHint: "Say your idea first, then back it up with one detail.",
+      }),
+      shortResponseQuestion({
+        question: "The question asks WHY the town built a new park. Which answer fits the question?",
+        choices: [
+          "The park has swings and a slide.",
+          "The park opened on a Saturday.",
+          "Many people came to the park.",
+          "The town built the park because kids had no safe place to play.",
+        ],
+        correctAnswer: "The town built the park because kids had no safe place to play.",
+        explanation: "Answer the exact question word — why — then support it with a detail.",
+        coachHint: "Reread the question word: why, how, or what, and answer that.",
+      }),
+    ],
+    independentPractice: [
+      shortResponseQuestion({
+        question: 'Finish the explanation: "The detail shows the dog was loyal ___."',
+        choices: [
+          "because the dog waited by the door every day for its owner.",
+          "and the dog was brown.",
+          "so the story ends.",
+          "but cats are different.",
+        ],
+        correctAnswer: "because the dog waited by the door every day for its owner.",
+        explanation: "A strong explanation connects the detail to the answer with a reason.",
+        coachHint: 'Use "because" to link the detail to your answer.',
+      }),
+      shortResponseQuestion({
+        question: "A student named a detail but did not explain it. What is missing from the short response?",
+        choices: [
+          "A longer copy of the passage.",
+          "A sentence explaining how the detail supports the answer.",
+          "A second question.",
+          "A title for the answer.",
+        ],
+        correctAnswer: "A sentence explaining how the detail supports the answer.",
+        explanation: "Naming a detail is not enough; the response must explain how it supports the answer.",
+        coachHint: 'After the detail, add "This shows... because...".',
+      }),
+      shortResponseQuestion({
+        question: "Which sentence states an observable detail rather than an opinion?",
+        choices: [
+          "The fox was the best animal in the story.",
+          "Everyone should like foxes.",
+          "The fox dug a den under the old oak tree.",
+          "The story was fun to read.",
+        ],
+        correctAnswer: "The fox dug a den under the old oak tree.",
+        explanation: "Text evidence is something you can observe in the passage, not how the reader feels.",
+        coachHint: "Pick the sentence you could point to in the passage.",
+      }),
+      shortResponseQuestion({
+        question: 'Answer: "The girl was brave." Which explanation best supports it?',
+        choices: [
+          "She has a dog.",
+          "The cave was dark.",
+          "She was brave in the story.",
+          "She entered the dark cave even though she was scared, which shows bravery because she acted despite her fear.",
+        ],
+        correctAnswer: "She entered the dark cave even though she was scared, which shows bravery because she acted despite her fear.",
+        explanation: "A good explanation gives the detail AND a reason that proves the answer.",
+        coachHint: 'Name the detail, then tell what it shows with "because".',
+      }),
+      shortResponseQuestion({
+        question: "A response copies three long sentences straight from the passage. What should the writer do instead?",
+        choices: [
+          "Use one short detail and explain how it supports the answer.",
+          "Copy a fourth long sentence.",
+          "Copy the whole paragraph.",
+          "Leave the answer blank.",
+        ],
+        correctAnswer: "Use one short detail and explain how it supports the answer.",
+        explanation: "A short response uses a small piece of evidence and explains it, not large copied chunks.",
+        coachHint: "Choose one detail, then explain it in your own words.",
+      }),
+    ],
+    exitTicket: [
+      shortResponseQuestion({
+        question: "Which checklist shows a complete short response?",
+        choices: [
+          "Write everything you remember from the story.",
+          "Answer the question, add a detail from the text, explain how the detail supports the answer.",
+          "Copy two long sentences from the passage.",
+          "Give your answer and stop.",
+        ],
+        correctAnswer: "Answer the question, add a detail from the text, explain how the detail supports the answer.",
+        explanation: "A complete short response has all three parts: answer, detail, explanation.",
+        coachHint: "Check for all three parts before you finish.",
+      }),
+    ],
+    masteryCheck: [
+      shortResponseQuestion({
+        question: 'Answer: "The mulch helped the garden." Detail: "The soil stayed damp longer." Which sentence best completes the explanation?',
+        choices: [
+          "The garden had many plants.",
+          "Mulch is made of wood chips.",
+          "This shows the mulch helped because it kept water in the soil.",
+          "The soil was brown.",
+        ],
+        correctAnswer: "This shows the mulch helped because it kept water in the soil.",
+        explanation: "A complete explanation ties the detail back to the answer with a reason.",
+        coachHint: 'Use "because" to connect the detail to the answer.',
+      }),
+      shortResponseQuestion({
+        question: 'Answer: "The mice worked together." Detail: "They each carried one seed to the nest." Which explanation best connects them?',
+        choices: [
+          "Mice are small animals.",
+          "The nest was warm.",
+          "Seeds come from plants.",
+          "Carrying one seed each shows teamwork because the job got done by sharing the work.",
+        ],
+        correctAnswer: "Carrying one seed each shows teamwork because the job got done by sharing the work.",
+        explanation: "The explanation must tie the detail back to the answer with a reason.",
+        coachHint: "Ask: how does this detail prove the answer?",
+      }),
+    ],
+  };
+}
+
+function shortResponseQuestion(question: PracticeQuestion): PracticeQuestion {
+  return question;
 }
 
 function standardForSkill(

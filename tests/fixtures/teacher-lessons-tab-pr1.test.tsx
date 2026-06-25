@@ -30,20 +30,20 @@ assert.deepEqual(
   },
   "Grade 3 top-level bridge counts must match the PR1 audit target",
 );
-assert.equal(audit.visibleMax, 23, "Grade 3 max visible library should be 21 core plus 2 writing lessons");
+assert.equal(audit.visibleMax, 24, "Grade 3 max visible library should be 21 core plus 3 writing lessons");
 
 const gradeThreeRows = gradeThreeSeeds.map(rowForSeed);
 const gradeThreeList = buildTeacherLessonLibraryList(gradeThreeRows, seeds);
-assert.equal(gradeThreeList.lessons.length, 23, "all approved Grade 3 rows should expose only the visible 23");
+assert.equal(gradeThreeList.lessons.length, 24, "all approved Grade 3 rows should expose the visible 24");
 assert.equal(
   gradeThreeList.lessons.filter((lesson) => lesson.category === "writing").length,
-  2,
-  "Grade 3 should expose only two supplemental writing lessons",
+  3,
+  "Grade 3 should expose three supplemental writing lessons",
 );
 assert.doesNotMatch(
   JSON.stringify(gradeThreeList.lessons),
   /TDA Evidence and Explanation/,
-  "hidden Grade 3 TDA lesson must not appear in list metadata",
+  "raw Grade 3 TDA join key must not appear in list metadata",
 );
 
 const firstLesson = gradeThreeList.lessons[0];
@@ -70,13 +70,23 @@ assert.ok(firstPreview.guidedPractice[0]?.choices.length, "preview must include 
 assert.ok(firstPreview.guidedPractice[0]?.correctAnswer, "preview must include teacher-visible answer key");
 assert.ok(firstPreview.guidedPractice[0]?.explanation, "preview must include teacher-visible explanation");
 
-const hiddenTdaRow = gradeThreeRows.find((row) => row.skill === "TDA Evidence and Explanation");
-assert.ok(hiddenTdaRow, "hidden Grade 3 TDA fixture row should exist");
-assert.equal(
-  buildTeacherLessonPreview(hiddenTdaRow.id, gradeThreeRows, seeds).preview,
-  null,
-  "direct preview of hidden Grade 3 TDA seed should 404 at the route layer",
-);
+const shortResponseRow = gradeThreeRows.find((row) => row.skill === "TDA Evidence and Explanation");
+assert.ok(shortResponseRow, "Grade 3 short-response fixture row should preserve the internal join key");
+const shortResponseListItem = gradeThreeList.lessons.find((lesson) => lesson.id === shortResponseRow.id);
+assert.ok(shortResponseListItem, "Grade 3 short-response writing lesson should be visible");
+assert.equal(shortResponseListItem.title, "Text Evidence and Explanation in a Short Response");
+assert.equal(shortResponseListItem.skill, "Text Evidence and Explanation", "teacher-facing DTO must map the raw key to a clean display skill");
+assert.equal(shortResponseListItem.categoryLabel, "Writing & Short Answer");
+const shortResponsePreview = buildTeacherLessonPreview(shortResponseRow.id, gradeThreeRows, seeds).preview;
+assert.ok(shortResponsePreview, "direct preview of corrected Grade 3 short-response seed should be visible");
+assert.equal(shortResponsePreview.skill, "Text Evidence and Explanation");
+assert.equal(shortResponsePreview.standardLabel, "Use text evidence and explanation in a short written response");
+assert.equal(shortResponsePreview.standardCodes[0], "CC.1.4.3.S");
+assert.equal(shortResponsePreview.teacherNote, "Grade 3 short-response practice; not an official TDA task.");
+assertNoTdaExceptTeacherNote(shortResponsePreview);
+assertBalancedAnswerPositions(shortResponsePreview);
+assertDistinctQuestions(shortResponsePreview);
+assertNoRepeatPadding(shortResponsePreview);
 
 const foundationalRow = gradeThreeRows.find((row) => row.skill === "Short and Long Vowel Patterns");
 assert.ok(foundationalRow, "foundational fixture row should exist");
@@ -111,6 +121,10 @@ const taggedGradeFourTda = {
 const gradeFourTdaList = buildTeacherLessonLibraryList([rowForSeed(taggedGradeFourTda)], [taggedGradeFourTda]);
 assert.equal(gradeFourTdaList.lessons.length, 1, "tagged Grade 4 TDA should not be hidden");
 assert.equal(gradeFourTdaList.lessons[0]?.categoryLabel, "Writing & TDA", "upper-grade TDA label should remain intact");
+assert.match(JSON.stringify(taggedGradeFourTda), /\bTDA\b/, "Grade 4 TDA lesson must still contain TDA language");
+const gradeEightTdaSeed = seeds.find((candidate) => candidate.gradeLevel === 8 && candidate.skill === "TDA Evidence and Explanation");
+assert.ok(gradeEightTdaSeed, "Grade 8 TDA seed should exist");
+assert.match(JSON.stringify(gradeEightTdaSeed), /\bTDA\b/, "Grade 8 TDA lesson must still contain TDA language");
 
 assert.throws(
   () => buildTeacherLessonLibraryList([rowForSeed(gradeThreeSeeds[0])], [gradeThreeSeeds[0], { ...gradeThreeSeeds[0] }]),
@@ -169,6 +183,42 @@ const newFiles = [
 assert.doesNotMatch(newFiles, /StudentLessonProgress|studentLessonProgress/, "PR1 files must not write student lesson progress");
 
 console.log("teacher Lessons tab PR1 checks passed");
+
+function assertNoTdaExceptTeacherNote(preview: NonNullable<ReturnType<typeof buildTeacherLessonPreview>["preview"]>) {
+  const allowed = "Grade 3 short-response practice; not an official TDA task.";
+  const sanitized = JSON.stringify(preview).replace(allowed, "");
+  assert.doesNotMatch(sanitized, /\bTDA\b/, "Grade 3 teacher-facing list/preview content must not render TDA outside the approved teacher note");
+  assert.doesNotMatch(sanitized, /TDA Evidence and Explanation/, "raw internal join key must never leak into Grade 3 teacher-facing DTO");
+}
+
+function assertBalancedAnswerPositions(preview: NonNullable<ReturnType<typeof buildTeacherLessonPreview>["preview"]>) {
+  const counts = { A: 0, B: 0, C: 0, D: 0 };
+  const questions = allQuestions(preview);
+  assert.equal(questions.length, 12, "Grade 3 short-response lesson should expose exactly 12 authored practice items");
+  for (const question of questions) {
+    const index = question.choices.indexOf(question.correctAnswer);
+    assert.ok(index >= 0, "correct answer must appear in choices");
+    counts[["A", "B", "C", "D"][index] as keyof typeof counts] += 1;
+  }
+  assert.deepEqual(counts, { A: 3, B: 3, C: 3, D: 3 }, "Grade 3 correct answer positions must be balanced");
+}
+
+function assertDistinctQuestions(preview: NonNullable<ReturnType<typeof buildTeacherLessonPreview>["preview"]>) {
+  const questions = allQuestions(preview).map((question) => question.question);
+  assert.equal(new Set(questions).size, questions.length, "Grade 3 short-response items must be distinct");
+}
+
+function assertNoRepeatPadding(preview: NonNullable<ReturnType<typeof buildTeacherLessonPreview>["preview"]>) {
+  assert.equal(preview.guidedPractice.length, 4, "guided practice should fill the minimum without padding repeats");
+  assert.equal(preview.independentPractice.length, 5, "independent practice should fill the minimum without padding repeats");
+  assert.equal(preview.exitTicket.length, 1, "exit ticket should remain one item");
+  assert.equal(preview.masteryCheck.length, 2, "grade 3 mastery should fill the minimum without padding repeats");
+  assert.doesNotMatch(JSON.stringify(allQuestions(preview)), /Guided 3:|Guided 4:|Independent 4:|Independent 5:/, "expanded repeat labels should not be generated for Grade 3 short-response items");
+}
+
+function allQuestions(preview: NonNullable<ReturnType<typeof buildTeacherLessonPreview>["preview"]>) {
+  return [...preview.guidedPractice, ...preview.independentPractice, ...preview.exitTicket, ...preview.masteryCheck];
+}
 
 function rowForSeed(seed: TeacherLessonSeedInput): TeacherLessonDbRowInput {
   return {

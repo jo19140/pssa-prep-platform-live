@@ -255,9 +255,6 @@ export function deriveLessonVisibility(seed: TeacherLessonSeedInput): LessonVisi
   if (topTag === FOUNDATIONAL_TAG) return { visible: false, reason: "foundational_support" };
   if (topTag === EXCLUDE_TAG) return { visible: false, reason: "exclude_from_grade3_bridge" };
   if (topTag === WRITING_TAG) {
-    if (seed.gradeLevel === 3 && isGradeThreeTdaSeed(seed)) {
-      return { visible: false, reason: "grade3_tda_hidden" };
-    }
     return {
       visible: true,
       placement: "writing",
@@ -284,7 +281,7 @@ function toListItem(
     id: row.id,
     title: row.title || seed.title,
     gradeLevel: row.gradeLevel,
-    skill: row.skill,
+    skill: displaySkillForTeacher(row, seed),
     domain: seed.domain || undefined,
     standardCodes: seed.standardCodes?.length ? [...seed.standardCodes] : [row.standardCode || seed.standardCode],
     placement: visibility.placement,
@@ -345,6 +342,10 @@ function singleTopLevelTag(seed: TeacherLessonSeedInput): GradeThreeAuditBucket 
 
 function isGradeThreeTdaSeed(seed: TeacherLessonSeedInput) {
   return seed.title === "Grade 3 TDA Evidence and Explanation Lesson" || seed.skill === "TDA Evidence and Explanation";
+}
+
+function displaySkillForTeacher(row: TeacherLessonDbRowInput, seed: TeacherLessonSeedInput) {
+  return seed.gradeLevel === 3 && isGradeThreeTdaSeed(seed) ? "Text Evidence and Explanation" : row.skill;
 }
 
 function compareListItems(a: TeacherLessonListItem, b: TeacherLessonListItem) {
