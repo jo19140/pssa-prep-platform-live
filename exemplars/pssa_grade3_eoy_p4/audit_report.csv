@@ -1,0 +1,8 @@
+"itemId","eligibleContent","interactionType","pointValue","reviewStatus","itemStatus","intendedAssemblyBucket","studentPreviewLeakFree"
+"pssa_item_g3_eoy_p4_mcq_ak111","E03.A-K.1.1.1","MCQ","1","PENDING","candidate","operational","PASS"
+"pssa_item_g3_eoy_p4_mcq_ak113","E03.A-K.1.1.3","MCQ","1","PENDING","candidate","operational","PASS"
+"pssa_item_g3_eoy_p4_mcq_av411","E03.A-V.4.1.1","MCQ","1","PENDING","candidate","operational","PASS"
+"pssa_item_g3_eoy_p4_mcq_av412","E03.A-V.4.1.2","MCQ","1","PENDING","candidate","operational","PASS"
+"pssa_item_g3_eoy_p4_mcq_ak112","E03.A-K.1.1.2","MCQ","1","PENDING","candidate","operational","PASS"
+"pssa_item_g3_eoy_p4_ebsr_ak113","E03.A-K.1.1.3","EBSR","2","PENDING","candidate","operational","PASS"
+"pssa_item_g3_eoy_p4_mcq_av412_ao6","E03.A-V.4.1.2","MCQ","1","PENDING","candidate","analytics_only","PASS"

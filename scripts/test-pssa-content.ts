@@ -27,6 +27,7 @@ import { buildMoyConventionsPacket } from "./content/author-pssa-moy-conventions
 import { buildEoyP1Packet } from "./content/author-pssa-eoy-p1";
 import { buildEoyP2Packet } from "./content/author-pssa-eoy-p2";
 import { buildEoyP3Packet } from "./content/author-pssa-eoy-p3";
+import { buildEoyP4Packet } from "./content/author-pssa-eoy-p4";
 import {
   PSSA_CONTENT_QUALITY_GATE_IDS,
   buildPlan,
@@ -214,6 +215,9 @@ const eoyP3Packet = buildEoyP3Packet();
 const eoyP3Items = eoyP3Packet.items as any[];
 const eoyP3Passages = eoyP3Packet.passages as any[];
 const eoyP3Group = eoyP3Packet.passageGroups[0] as any;
+const eoyP4Packet = buildEoyP4Packet();
+const eoyP4Items = eoyP4Packet.items as any[];
+const eoyP4Passage = eoyP4Packet.passages[0] as any;
 const expectedStaminaConventions = [
   {
     id: "conv_01",
@@ -618,6 +622,71 @@ for (const passage of eoyP3Passages) {
 }
 for (const item of eoyP3Items) {
   assert.equal(item.passageGroupId, "pssa_pg_g3_eoy_p3_school_paired", `${item.itemId} passageGroupId`);
+  assert.equal(item.scoringBucket, undefined, `${item.itemId} must not set scoringBucket in the bank`);
+  assert.equal(item.reviewStatus, "PENDING", `${item.itemId} reviewStatus must be PENDING`);
+  assert.equal(item.itemStatus, "candidate", `${item.itemId} itemStatus must be candidate`);
+  projectPssaStudentItem(item);
+}
+assert.equal(eoyP4Packet.noDbWrite, true, "EOY P4 packet must be file-only noDbWrite");
+assert.equal(eoyP4Packet.productionImportReady, false, "EOY P4 packet must not be production import ready");
+assert.equal(eoyP4Packet.passages.length, 1, "EOY P4 must contain exactly one drama passage");
+assert.equal(eoyP4Items.length, 7, "EOY P4 must contain exactly seven items");
+assert.equal(eoyP4Passage.id, "pssa_psg_g3_eoy_p4_borrowed_bike", "EOY P4 passage id must be pinned");
+assert.equal(eoyP4Passage.title, "The Borrowed Bike", "EOY P4 passage title must be pinned");
+assert.equal(eoyP4Passage.wordCount, 1137, "EOY P4 word count must be pinned");
+assert.equal(eoyP4Passage.genre, "drama", "EOY P4 genre must be drama");
+assert.equal(eoyP4Passage.passageType, "literary", "EOY P4 passageType must be literary");
+assert.equal(eoyP4Passage.staminaBand, "released_length", "EOY P4 stamina band must be released_length");
+assert.equal(eoyP4Passage.factCheckRequired, false, "EOY P4 fictional drama must not require fact-checking");
+assert.equal("factCheckNotesJson" in eoyP4Passage, false, "EOY P4 must omit factCheckNotesJson");
+assert.equal(eoyP4Passage.textFeaturesJson.filter((feature: any) => feature.type === "figure").length, 0, "EOY P4 must not contain a figure feature");
+assert.deepEqual(
+  eoyP4Passage.textFeaturesJson.map((feature: any) => [feature.type, feature.sectionId ?? "cast"]),
+  [
+    ["cast_list", "cast"],
+    ["scene_marker", "scene_01"],
+    ["scene_marker", "scene_02"],
+    ["scene_marker", "scene_03"],
+    ["scene_marker", "scene_04"],
+  ],
+  "EOY P4 drama feature set must match the locked package",
+);
+assert.deepEqual(
+  eoyP4Items.map((item: any) => [item.itemId, item.eligibleContent, item.interactionType, item.pointValue]),
+  [
+    ["pssa_item_g3_eoy_p4_mcq_ak111", "E03.A-K.1.1.1", "MCQ", 1],
+    ["pssa_item_g3_eoy_p4_mcq_ak113", "E03.A-K.1.1.3", "MCQ", 1],
+    ["pssa_item_g3_eoy_p4_mcq_av411", "E03.A-V.4.1.1", "MCQ", 1],
+    ["pssa_item_g3_eoy_p4_mcq_av412", "E03.A-V.4.1.2", "MCQ", 1],
+    ["pssa_item_g3_eoy_p4_mcq_ak112", "E03.A-K.1.1.2", "MCQ", 1],
+    ["pssa_item_g3_eoy_p4_ebsr_ak113", "E03.A-K.1.1.3", "EBSR", 2],
+    ["pssa_item_g3_eoy_p4_mcq_av412_ao6", "E03.A-V.4.1.2", "MCQ", 1],
+  ],
+  "EOY P4 EC/type/points table must match the locked spec",
+);
+assert.deepEqual(eoyP4Items.filter((item: any) => item.interactionType === "MCQ").map((item: any) => item.correctIndex), [2, 0, 3, 1, 2, 1], "EOY P4 MCQ keys must be C/A/D/B/C/B");
+assert.deepEqual(eoyP4Items.filter((item: any) => item.interactionType === "EBSR").map((item: any) => item.correctResponseJson.partA.correctIndex), [0], "EOY P4 EBSR Part A key must be A");
+assert.equal(evaluatePssaDomainFactCheckRequired(eoyP4Passage), "SKIP", "EOY P4 fact-check gate must skip");
+assert.equal(evaluatePssaPassageStaminaMetadata(eoyP4Passage), "PASS", "EOY P4 stamina metadata must pass");
+assert.equal(evaluatePssaTextFeatureIntegrity(eoyP4Passage, eoyP4Items), "PASS", "EOY P4 text feature integrity must pass");
+const eoyP4LineMap = buildPssaDramaLineMap(eoyP4Passage);
+assert.deepEqual([...new Set(eoyP4LineMap.filter((row) => row.evidenceKind === "spoken_line").map((row) => row.speaker))].sort(), ["MAYA", "MR ALVAREZ", "TYLER"].sort(), "EOY P4 speaker set must be exact");
+assert.deepEqual(
+  eoyP4LineMap.find((row) => row.text.includes("He swerved so fast that he scraped the whole side.")) && {
+    sceneId: eoyP4LineMap.find((row) => row.text.includes("He swerved so fast that he scraped the whole side."))?.sceneId,
+    lineIndex: eoyP4LineMap.find((row) => row.text.includes("He swerved so fast that he scraped the whole side."))?.lineIndex,
+    speaker: eoyP4LineMap.find((row) => row.text.includes("He swerved so fast that he scraped the whole side."))?.speaker,
+    evidenceKind: eoyP4LineMap.find((row) => row.text.includes("He swerved so fast that he scraped the whole side."))?.evidenceKind,
+  },
+  { sceneId: "scene_03", lineIndex: 5, speaker: "MR ALVAREZ", evidenceKind: "spoken_line" },
+  "EOY P4 swerved evidence must resolve to MR ALVAREZ scene_03 line 5",
+);
+for (const item of eoyP4Items) {
+  assert.equal(item.passageId, "pssa_psg_g3_eoy_p4_borrowed_bike", `${item.itemId} passageId must be EOY P4`);
+  assert.equal(item.passageGroupId, undefined, `${item.itemId} must not set passageGroupId`);
+  assert.equal(item.passageLinks, undefined, `${item.itemId} must not set passageLinks`);
+  assert.equal(item.isCrossText, undefined, `${item.itemId} must not set isCrossText`);
+  assert.equal(item.requiredEvidenceSlotsJson, undefined, `${item.itemId} must not set requiredEvidenceSlotsJson`);
   assert.equal(item.scoringBucket, undefined, `${item.itemId} must not set scoringBucket in the bank`);
   assert.equal(item.reviewStatus, "PENDING", `${item.itemId} reviewStatus must be PENDING`);
   assert.equal(item.itemStatus, "candidate", `${item.itemId} itemStatus must be candidate`);
