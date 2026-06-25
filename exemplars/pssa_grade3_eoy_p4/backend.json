@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-25T14:49:11.212Z",
+  "generatedAt": "2026-06-25T15:31:36.852Z",
   "noDbWrite": true,
   "productionImportReady": false,
   "passageCount": 1,
@@ -1328,7 +1328,15 @@
           "isCorrect": false,
           "distractorRole": "plausible_misreading",
           "rationale": "This reads the phrase literally, but Maya is describing how she made a decision.",
-          "evidenceLinks": []
+          "evidenceLinks": [
+            {
+              "evidenceKind": "spoken_line",
+              "quotedSpan": "I jumped to conclusions.",
+              "sceneId": "scene_04",
+              "lineIndex": 5,
+              "speaker": "MAYA"
+            }
+          ]
         },
         {
           "text": "She judged before she knew the facts.",
@@ -1382,7 +1390,15 @@
           "isCorrect": false,
           "distractorRole": "plausible_misreading",
           "rationale": "This reads the phrase literally, but Maya is describing how she made a decision.",
-          "evidenceLinks": []
+          "evidenceLinks": [
+            {
+              "evidenceKind": "spoken_line",
+              "quotedSpan": "I jumped to conclusions.",
+              "sceneId": "scene_04",
+              "lineIndex": 5,
+              "speaker": "MAYA"
+            }
+          ]
         },
         {
           "text": "She judged before she knew the facts.",

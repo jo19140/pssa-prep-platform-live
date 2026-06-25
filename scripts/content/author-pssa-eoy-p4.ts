@@ -370,7 +370,7 @@ export function buildEoyP4Items(): P4Item[] {
       evidenceBinding: { evidenceKind: "quoted_span", quotedSpan: jumped, targetWordOrPhrase: "jumped to conclusions" },
       intendedAssemblyBucket: "analytics_only",
       choices: [
-        { text: "She physically jumped away from the bicycle.", role: "plausible_misreading", rationale: "This reads the phrase literally, but Maya is describing how she made a decision.", evidenceLinks: [] },
+        { text: "She physically jumped away from the bicycle.", role: "plausible_misreading", rationale: "This reads the phrase literally, but Maya is describing how she made a decision.", evidenceLinks: [l(jumped, "spoken_line", "MAYA")] },
         { text: "She judged before she knew the facts.", role: null, rationale: "Correct. Maya says this after learning she judged Tyler without hearing him.", evidenceLinks: [l(jumped, "spoken_line", "MAYA")] },
         { text: "She listened carefully before she spoke.", role: "opposite_claim", rationale: "This reverses the phrase because she did not listen before accusing Tyler.", evidenceLinks: [l(listen, "spoken_line", "MAYA")] },
         { text: "She wanted to make the scratch into a racing stripe.", role: "wrong_section", rationale: "This uses a later repair idea, not the meaning of the figurative phrase.", evidenceLinks: [l("A racing stripe is kind of cool.", "spoken_line", "TYLER")] },

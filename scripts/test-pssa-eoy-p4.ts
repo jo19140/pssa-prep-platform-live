@@ -1,7 +1,12 @@
 import assert from "node:assert/strict";
 import fs from "node:fs";
 
-import { buildItemEcSkillMatchReport, singleAnswerChoiceGroups } from "./audit/pssa-audit-detectors";
+import {
+  buildItemEcSkillMatchReport,
+  buildMcqPassageSpecificityReport,
+  hasBlockingPassageSpecificityFailure,
+  singleAnswerChoiceGroups,
+} from "./audit/pssa-audit-detectors";
 import { buildEoyP4Items, buildEoyP4Packet, buildEoyP4Passage } from "./content/author-pssa-eoy-p4";
 import {
   buildPssaDramaLineMap,
@@ -161,11 +166,26 @@ assert.notEqual(byId.get("pssa_item_g3_eoy_p4_mcq_av412").evidenceBinding.quoted
 
 const ao6Span = "I jumped to conclusions.";
 let ao6UsageCount = 0;
+let nonAo6UsageCount = 0;
 for (const item of items) {
-  for (const choice of item.answerChoicesJson ?? []) for (const link of choice.evidenceLinks ?? []) if (link.quotedSpan === ao6Span) ao6UsageCount += 1;
-  for (const choice of item.partB?.choices ?? []) for (const link of choice.evidenceLinks ?? []) if (link.quotedSpan === ao6Span) ao6UsageCount += 1;
+  for (const choice of item.answerChoicesJson ?? []) for (const link of choice.evidenceLinks ?? []) if (link.quotedSpan === ao6Span) {
+    ao6UsageCount += 1;
+    if (item.itemId !== "pssa_item_g3_eoy_p4_mcq_av412_ao6") nonAo6UsageCount += 1;
+  }
+  for (const choice of item.partB?.choices ?? []) for (const link of choice.evidenceLinks ?? []) if (link.quotedSpan === ao6Span) {
+    ao6UsageCount += 1;
+    if (item.itemId !== "pssa_item_g3_eoy_p4_mcq_av412_ao6") nonAo6UsageCount += 1;
+  }
 }
-assert.equal(ao6UsageCount, 1, "AO-6 jumped-to-conclusions line must be reserved to AO-6 only");
+assert.equal(ao6UsageCount, 2, "AO-6 jumped-to-conclusions line must anchor the AO-6 key and literal-misread distractor");
+assert.equal(nonAo6UsageCount, 0, "AO-6 jumped-to-conclusions line must not be used by any other item");
+
+const p4Mcqs = items.filter((item: any) => item.interactionType === "MCQ");
+assert.equal(
+  hasBlockingPassageSpecificityFailure(buildMcqPassageSpecificityReport(p4Mcqs, [passage])),
+  false,
+  "EOY P4 MCQs must have no blocking passage-specificity failure",
+);
 
 const ebsr = byId.get("pssa_item_g3_eoy_p4_ebsr_ak113");
 assert.equal(ebsr.scoringJson.totalPoints, 2);
