@@ -26,6 +26,7 @@ import { buildMoyP4Packet } from "./content/author-pssa-moy-p4";
 import { buildMoyConventionsPacket } from "./content/author-pssa-moy-conventions";
 import { buildEoyP1Packet } from "./content/author-pssa-eoy-p1";
 import { buildEoyP2Packet } from "./content/author-pssa-eoy-p2";
+import { buildEoyP3Packet } from "./content/author-pssa-eoy-p3";
 import {
   PSSA_CONTENT_QUALITY_GATE_IDS,
   buildPlan,
@@ -209,6 +210,10 @@ const eoyP1Passage = eoyP1Packet.passages[0] as any;
 const eoyP2Packet = buildEoyP2Packet();
 const eoyP2Items = eoyP2Packet.items as any[];
 const eoyP2Passage = eoyP2Packet.passages[0] as any;
+const eoyP3Packet = buildEoyP3Packet();
+const eoyP3Items = eoyP3Packet.items as any[];
+const eoyP3Passages = eoyP3Packet.passages as any[];
+const eoyP3Group = eoyP3Packet.passageGroups[0] as any;
 const expectedStaminaConventions = [
   {
     id: "conv_01",
@@ -573,6 +578,49 @@ for (const item of eoyP2Items) {
   assert.equal(item.reviewStatus, "PENDING", `${item.itemId} reviewStatus must be PENDING`);
   assert.equal(item.itemStatus, "candidate", `${item.itemId} itemStatus must be candidate`);
   assert.equal(item.scoringBucket, undefined, `${item.itemId} must not set scoringBucket in the bank`);
+  projectPssaStudentItem(item);
+}
+assert.equal(eoyP3Packet.noDbWrite, true, "EOY P3 packet must be file-only noDbWrite");
+assert.equal(eoyP3Packet.productionImportReady, false, "EOY P3 packet must not be production import ready");
+assert.equal(eoyP3Packet.passageGroups.length, 1, "EOY P3 must contain exactly one paired group");
+assert.equal(eoyP3Packet.passages.length, 2, "EOY P3 must contain exactly two member passages");
+assert.equal(eoyP3Items.length, 10, "EOY P3 must contain exactly ten items");
+assert.equal(eoyP3Group.id, "pssa_pg_g3_eoy_p3_school_paired", "EOY P3 group id must be pinned");
+assert.equal(eoyP3Group.groupType, "paired_informational", "EOY P3 group type");
+assert.equal(eoyP3Group.genre, "paired_informational", "EOY P3 group genre");
+assert.equal(eoyP3Group.staminaBand, "released_length", "EOY P3 group stamina band");
+assert.equal(eoyP3Group.wordCount, 850, "EOY P3 group word count");
+assert.deepEqual(eoyP3Passages.map((passage: any) => [passage.id, passage.wordCount, passage.genre, passage.staminaBand, passage.factCheckNotesJson.length]), [
+  ["pssa_psg_g3_eoy_p3_school_long_ago", 425, "informational", undefined, 8],
+  ["pssa_psg_g3_eoy_p3_school_today", 425, "informational", undefined, 8],
+], "EOY P3 member passages must match the locked paired package");
+assert.deepEqual(
+  eoyP3Items.map((item: any) => [item.itemId, item.eligibleContent, item.interactionType, item.pointValue]),
+  [
+    ["pssa_item_g3_eoy_p3_mcq_bk112", "E03.B-K.1.1.2", "MCQ", 1],
+    ["pssa_item_g3_eoy_p3_mcq_bc211", "E03.B-C.2.1.1", "MCQ", 1],
+    ["pssa_item_g3_eoy_p3_mcq_bv412", "E03.B-V.4.1.2", "MCQ", 1],
+    ["pssa_item_g3_eoy_p3_mcq_bk113", "E03.B-K.1.1.3", "MCQ", 1],
+    ["pssa_item_g3_eoy_p3_mcq_bc312", "E03.B-C.3.1.2", "MCQ", 1],
+    ["pssa_item_g3_eoy_p3_ebsr_bc312", "E03.B-C.3.1.2", "EBSR", 2],
+    ["pssa_item_g3_eoy_p3_mcq_bc211_ao1", "E03.B-C.2.1.1", "MCQ", 1],
+    ["pssa_item_g3_eoy_p3_mcq_bv412_ao4", "E03.B-V.4.1.2", "MCQ", 1],
+    ["pssa_item_g3_eoy_p3_ebsr_bk111_ao7", "E03.B-K.1.1.1", "EBSR", 2],
+    ["pssa_item_g3_eoy_p3_ebsr_bc311_ao8", "E03.B-C.3.1.1", "EBSR", 2],
+  ],
+  "EOY P3 EC/type/points table must match the locked spec",
+);
+assert.deepEqual(eoyP3Items.filter((item: any) => item.interactionType === "MCQ").map((item: any) => item.correctIndex), [1, 3, 0, 2, 1, 0, 2], "EOY P3 MCQ key positions must be B/D/A/C/B/A/C");
+assert.deepEqual(eoyP3Items.filter((item: any) => item.interactionType === "EBSR").map((item: any) => item.correctResponseJson.partA.correctIndex), [1, 0, 2], "EOY P3 EBSR Part A keys must be B/A/C");
+for (const passage of eoyP3Passages) {
+  assert.equal(evaluatePssaDomainFactCheckRequired(passage), "PASS", `${passage.id} fact-check gate must pass`);
+  assert.equal(evaluatePssaPassageStaminaMetadata(passage), "SKIP", `${passage.id} member stamina metadata must skip`);
+}
+for (const item of eoyP3Items) {
+  assert.equal(item.passageGroupId, "pssa_pg_g3_eoy_p3_school_paired", `${item.itemId} passageGroupId`);
+  assert.equal(item.scoringBucket, undefined, `${item.itemId} must not set scoringBucket in the bank`);
+  assert.equal(item.reviewStatus, "PENDING", `${item.itemId} reviewStatus must be PENDING`);
+  assert.equal(item.itemStatus, "candidate", `${item.itemId} itemStatus must be candidate`);
   projectPssaStudentItem(item);
 }
 assert.equal(evaluatePssaItemIntraChoiceDuplicate({

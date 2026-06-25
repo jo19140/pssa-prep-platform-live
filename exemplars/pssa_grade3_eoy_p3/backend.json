@@ -1,0 +1,2585 @@
+{
+  "generatedAt": "2026-06-25T04:29:42.384Z",
+  "noDbWrite": true,
+  "productionImportReady": false,
+  "passageGroupCount": 1,
+  "passageCount": 2,
+  "itemCount": 10,
+  "passageGroups": [
+    {
+      "model": "PssaPassageGroup",
+      "id": "pssa_pg_g3_eoy_p3_school_paired",
+      "gradeLevel": 3,
+      "subject": "ELA",
+      "groupType": "paired_informational",
+      "genre": "paired_informational",
+      "staminaBand": "released_length",
+      "title": "Going to School: Then & Now",
+      "wordCount": 850,
+      "domainVocabularyLoad": "medium",
+      "textFeaturesJson": [
+        {
+          "type": "paired_member",
+          "slot": "passage_1",
+          "title": "School Long Ago"
+        },
+        {
+          "type": "paired_member",
+          "slot": "passage_2",
+          "title": "School Today"
+        }
+      ],
+      "contentHash": "sha256:88ded25bd5b0c6b48d342ceb759df8247278ce4cfb65b31a827344b30ae811db",
+      "members": [
+        {
+          "passageId": "pssa_psg_g3_eoy_p3_school_long_ago",
+          "slot": "passage_1",
+          "position": 1,
+          "passageContentHashSnapshot": "sha256:c2a93301c572cf393b04099a50fe7a4a6fcbf613beff59c4e1d84fdbfabe69f0",
+          "passage": {
+            "id": "pssa_psg_g3_eoy_p3_school_long_ago",
+            "title": "School Long Ago",
+            "gradeLevel": 3,
+            "subject": "ELA",
+            "passageType": "informational",
+            "genre": "informational",
+            "domainVocabularyLoad": "medium",
+            "wordCount": 425,
+            "contentHash": "sha256:c2a93301c572cf393b04099a50fe7a4a6fcbf613beff59c4e1d84fdbfabe69f0",
+            "text": "Long ago, going to school in the United States did not look the same everywhere. In the countryside, many rural children learned in a one-room schoolhouse. In these small country schools, children of several grades studied together in a single room, taught by just one teacher. In the growing cities, schools were already larger, and students worked in separate classrooms by grade. So even in the past, schools were not all the same, and a child's school depended a good deal on exactly where that child lived.\n\nA one-room school was a simple place with few supplies. Students today would be surprised at how little there was. There were fewer books and supplies for students to use, and instead of paper, pencils, and computers, a child in the early twentieth century probably had only a slate and a piece of chalk. A slate was a small board that a student could write on and then wipe clean to use again. When one lesson was finished, the student wiped the slate and started the next. Much of the learning happened by memorizing and reciting, repeating facts out loud until they were known well. Discipline in these schools could be rather strict.\n\nCountry schools also followed the seasons. In farm areas, the school year was often shorter than it is today, because young people were needed to work on the farm. These schools did not have a lunch program. Students carried their own food from home, often in a metal pail. This need for farm work, not just the calendar, often decided how long a school year would be.\n\nSchools like these did not stay the same forever. Over time, public schools grew more and more common across the country. States began to pass laws requiring children to attend, and by 1920 every state required children ages eight to fourteen to go to school for at least part of the year. Little by little, school attendance became expected for more children across the country.\n\nA one-room school had real limits. One teacher had to divide a single day among many ages and many levels, so each child received only a small share of the teacher's time. Yet these small schools did something powerful: they gathered children of several grades under one roof to learn together. Even with so little, these country schools existed for one purpose: to help children learn. For the families they served, the country schoolhouse was the heart of learning, a place where children of several grades learned side by side.",
+            "textFeaturesJson": [],
+            "factCheckRequired": true,
+            "factCheckNotesJson": [
+              {
+                "claimId": "t1-one-room-all-ages",
+                "claim": "In rural one-room schoolhouses, the grades studied together in a single room and were taught by one teacher.",
+                "sourceTitle": "Children's Lives at the Turn of the Twentieth Century",
+                "organization": "Library of Congress",
+                "sourceUrl": "https://www.loc.gov/classroom-materials/childrens-lives-at-the-turn-of-the-twentieth-century/",
+                "claimSupported": true,
+                "dateAccessed": "2026-06-24",
+                "passageSlot": "passage_1"
+              },
+              {
+                "claimId": "t1-cities-grade-separation",
+                "claim": "In urban areas, schools were larger and students worked in separate classrooms according to their grade level.",
+                "sourceTitle": "Children's Lives at the Turn of the Twentieth Century",
+                "organization": "Library of Congress",
+                "sourceUrl": "https://www.loc.gov/classroom-materials/childrens-lives-at-the-turn-of-the-twentieth-century/",
+                "claimSupported": true,
+                "dateAccessed": "2026-06-24",
+                "passageSlot": "passage_1"
+              },
+              {
+                "claimId": "t1-slate-chalk",
+                "claim": "Students in the early twentieth century probably had only a slate and chalk rather than paper and other modern school supplies.",
+                "sourceTitle": "Children's Lives at the Turn of the Twentieth Century",
+                "organization": "Library of Congress",
+                "sourceUrl": "https://www.loc.gov/classroom-materials/childrens-lives-at-the-turn-of-the-twentieth-century/",
+                "claimSupported": true,
+                "dateAccessed": "2026-06-24",
+                "passageSlot": "passage_1"
+              },
+              {
+                "claimId": "t1-rote-memorization",
+                "claim": "In early one-room schools, learning was frequently by rote memorization.",
+                "sourceTitle": "Children's Lives at the Turn of the Twentieth Century",
+                "organization": "Library of Congress",
+                "sourceUrl": "https://www.loc.gov/classroom-materials/childrens-lives-at-the-turn-of-the-twentieth-century/",
+                "claimSupported": true,
+                "dateAccessed": "2026-06-24",
+                "passageSlot": "passage_1"
+              },
+              {
+                "claimId": "t1-strict-discipline",
+                "claim": "Discipline in early one-room schools could be rather strict.",
+                "sourceTitle": "Children's Lives at the Turn of the Twentieth Century",
+                "organization": "Library of Congress",
+                "sourceUrl": "https://www.loc.gov/classroom-materials/childrens-lives-at-the-turn-of-the-twentieth-century/",
+                "claimSupported": true,
+                "dateAccessed": "2026-06-24",
+                "passageSlot": "passage_1"
+              },
+              {
+                "claimId": "t1-shorter-rural-year",
+                "claim": "In rural areas the school year was shorter because young people were needed to work on the farm.",
+                "sourceTitle": "Children's Lives at the Turn of the Twentieth Century",
+                "organization": "Library of Congress",
+                "sourceUrl": "https://www.loc.gov/classroom-materials/childrens-lives-at-the-turn-of-the-twentieth-century/",
+                "claimSupported": true,
+                "dateAccessed": "2026-06-24",
+                "passageSlot": "passage_1"
+              },
+              {
+                "claimId": "t1-lunch-pail",
+                "claim": "There was no school lunch program; students carried their lunch to school, often in a metal pail.",
+                "sourceTitle": "Children's Lives at the Turn of the Twentieth Century",
+                "organization": "Library of Congress",
+                "sourceUrl": "https://www.loc.gov/classroom-materials/childrens-lives-at-the-turn-of-the-twentieth-century/",
+                "claimSupported": true,
+                "dateAccessed": "2026-06-24",
+                "passageSlot": "passage_1"
+              },
+              {
+                "claimId": "t1-attendance-1920",
+                "claim": "By 1920 all states required students aged 8 to 14 to attend school for at least part of the year; public schools had grown more numerous and states began requiring attendance.",
+                "sourceTitle": "Children's Lives at the Turn of the Twentieth Century",
+                "organization": "Library of Congress",
+                "sourceUrl": "https://www.loc.gov/classroom-materials/childrens-lives-at-the-turn-of-the-twentieth-century/",
+                "claimSupported": true,
+                "dateAccessed": "2026-06-24",
+                "passageSlot": "passage_1"
+              }
+            ],
+            "sourceType": "internal_original",
+            "licenseStatus": "cleared_internal_original",
+            "commercialUseAllowed": true,
+            "needsLegalReview": false,
+            "reviewStatus": "PENDING",
+            "itemStatus": "candidate",
+            "provenanceJson": {
+              "benchmarkSeason": "EOY",
+              "blueprintVersion": "pde-ela-diagnostic-stamina-2025-g3-eoy-v1",
+              "unit": "P3",
+              "passageSlot": "passage_1"
+            }
+          }
+        },
+        {
+          "passageId": "pssa_psg_g3_eoy_p3_school_today",
+          "slot": "passage_2",
+          "position": 2,
+          "passageContentHashSnapshot": "sha256:892d40c104c119575e2f733a783caf0e0005d376e563d5d7b7c9fc4d21ccf0b4",
+          "passage": {
+            "id": "pssa_psg_g3_eoy_p3_school_today",
+            "title": "School Today",
+            "gradeLevel": 3,
+            "subject": "ELA",
+            "passageType": "informational",
+            "genre": "informational",
+            "domainVocabularyLoad": "medium",
+            "wordCount": 425,
+            "contentHash": "sha256:892d40c104c119575e2f733a783caf0e0005d376e563d5d7b7c9fc4d21ccf0b4",
+            "text": "Walk into a school today, and one of the biggest changes you will notice is the set of tools that students use to learn. Many of these tools did not exist at all when one-room schoolhouses were common.\n\nIn many schools now, each student has a computer or a tablet of their own. In some schools, students may even take a school computer home. Along with printed books, many schools use online textbooks that students can read on a screen. With tools like these, a student does not always have to wait for the whole class to move at the same speed. In a national survey of public schools, some schools reported that technology can help children learn at their own pace, moving ahead when a subject feels easy and slowing down when a subject feels hard. A student who already understands a lesson need not wait for the others, while a student who needs more time can keep working.\n\nFor many students, these tools can act like a window, opening a view to new things to learn. Some schools reported that technology helped students become more independent, taking charge of their own learning. Other schools said it helped students learn more actively, doing and trying instead of only listening. And some reported that it helped students work together with classmates on a shared task. In these ways, the right tools can give students more choices about how they learn.\n\nBut a computer is only a tool. The same report that describes these new devices is careful to remind readers that technology by itself does not make a better education. Screens and programs cannot teach all on their own. Teachers still plan the lessons, explain the hard ideas, and help each student who is stuck. The report even notes that teachers themselves need time and training to use new technology well, so that the tools truly help. A tablet in every hand is not enough if no one shows students how to use it to learn. Even the best new device cannot replace a caring, well-trained teacher.\n\nSo school today and school long ago are not the same. The slate and chalk of the old country schools have become a tablet and a screen, and a few shared books have become many lessons on a screen. Yet beneath all of the new tools, school exists so that children can learn and grow, the same goal the old country schoolhouse always had. The tools keep changing, but the reason for school stays the same.",
+            "textFeaturesJson": [],
+            "factCheckRequired": true,
+            "factCheckNotesJson": [
+              {
+                "claimId": "t2-device-per-student",
+                "claim": "Many public schools provide a computer for each student (45 percent one-per-student, plus 37 percent in some grades), and some let students take a school computer home (15 percent in all grades).",
+                "sourceTitle": "Use of Educational Technology for Instruction in Public Schools: 2019-20",
+                "organization": "National Center for Education Statistics, U.S. Department of Education",
+                "sourceUrl": "https://nces.ed.gov/pubs2021/2021017Summary.pdf",
+                "claimSupported": true,
+                "dateAccessed": "2026-06-24",
+                "passageSlot": "passage_2"
+              },
+              {
+                "claimId": "t2-online-textbooks",
+                "claim": "About half of public schools used interactive (online) textbooks for teaching and learning.",
+                "sourceTitle": "Use of Educational Technology for Instruction in Public Schools: 2019-20",
+                "organization": "National Center for Education Statistics, U.S. Department of Education",
+                "sourceUrl": "https://nces.ed.gov/pubs2021/2021017Summary.pdf",
+                "claimSupported": true,
+                "dateAccessed": "2026-06-24",
+                "passageSlot": "passage_2"
+              },
+              {
+                "claimId": "t2-learn-at-own-pace",
+                "claim": "Schools reported that classroom technology helped students learn at their own pace.",
+                "sourceTitle": "Use of Educational Technology for Instruction in Public Schools: 2019-20",
+                "organization": "National Center for Education Statistics, U.S. Department of Education",
+                "sourceUrl": "https://nces.ed.gov/pubs2021/2021017Summary.pdf",
+                "claimSupported": true,
+                "dateAccessed": "2026-06-24",
+                "passageSlot": "passage_2"
+              },
+              {
+                "claimId": "t2-independent",
+                "claim": "Schools reported that the way technology is used helped students be more independent and self-directed.",
+                "sourceTitle": "Use of Educational Technology for Instruction in Public Schools: 2019-20",
+                "organization": "National Center for Education Statistics, U.S. Department of Education",
+                "sourceUrl": "https://nces.ed.gov/pubs2021/2021017Summary.pdf",
+                "claimSupported": true,
+                "dateAccessed": "2026-06-24",
+                "passageSlot": "passage_2"
+              },
+              {
+                "claimId": "t2-active-learning",
+                "claim": "Schools reported that technology helped students learn more actively.",
+                "sourceTitle": "Use of Educational Technology for Instruction in Public Schools: 2019-20",
+                "organization": "National Center for Education Statistics, U.S. Department of Education",
+                "sourceUrl": "https://nces.ed.gov/pubs2021/2021017Summary.pdf",
+                "claimSupported": true,
+                "dateAccessed": "2026-06-24",
+                "passageSlot": "passage_2"
+              },
+              {
+                "claimId": "t2-collaborate",
+                "claim": "Schools reported that technology helped students learn collaboratively with peers.",
+                "sourceTitle": "Use of Educational Technology for Instruction in Public Schools: 2019-20",
+                "organization": "National Center for Education Statistics, U.S. Department of Education",
+                "sourceUrl": "https://nces.ed.gov/pubs2021/2021017Summary.pdf",
+                "claimSupported": true,
+                "dateAccessed": "2026-06-24",
+                "passageSlot": "passage_2"
+              },
+              {
+                "claimId": "t2-tech-not-enough",
+                "claim": "Technology alone does not guarantee a better education; schools and teachers play a central role in using technology to strengthen teaching and learning.",
+                "sourceTitle": "Use of Educational Technology for Instruction in Public Schools: 2019-20",
+                "organization": "National Center for Education Statistics, U.S. Department of Education",
+                "sourceUrl": "https://nces.ed.gov/pubs2021/2021017Summary.pdf",
+                "claimSupported": true,
+                "dateAccessed": "2026-06-24",
+                "passageSlot": "passage_2"
+              },
+              {
+                "claimId": "t2-teacher-training",
+                "claim": "Teachers need time, training, and support to use technology well for teaching and learning; lack of time and training are reported challenges.",
+                "sourceTitle": "Use of Educational Technology for Instruction in Public Schools: 2019-20",
+                "organization": "National Center for Education Statistics, U.S. Department of Education",
+                "sourceUrl": "https://nces.ed.gov/pubs2021/2021017Summary.pdf",
+                "claimSupported": true,
+                "dateAccessed": "2026-06-24",
+                "passageSlot": "passage_2"
+              }
+            ],
+            "sourceType": "internal_original",
+            "licenseStatus": "cleared_internal_original",
+            "commercialUseAllowed": true,
+            "needsLegalReview": false,
+            "reviewStatus": "PENDING",
+            "itemStatus": "candidate",
+            "provenanceJson": {
+              "benchmarkSeason": "EOY",
+              "blueprintVersion": "pde-ela-diagnostic-stamina-2025-g3-eoy-v1",
+              "unit": "P3",
+              "passageSlot": "passage_2"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "passages": [
+    {
+      "id": "pssa_psg_g3_eoy_p3_school_long_ago",
+      "title": "School Long Ago",
+      "gradeLevel": 3,
+      "subject": "ELA",
+      "passageType": "informational",
+      "genre": "informational",
+      "domainVocabularyLoad": "medium",
+      "wordCount": 425,
+      "contentHash": "sha256:c2a93301c572cf393b04099a50fe7a4a6fcbf613beff59c4e1d84fdbfabe69f0",
+      "text": "Long ago, going to school in the United States did not look the same everywhere. In the countryside, many rural children learned in a one-room schoolhouse. In these small country schools, children of several grades studied together in a single room, taught by just one teacher. In the growing cities, schools were already larger, and students worked in separate classrooms by grade. So even in the past, schools were not all the same, and a child's school depended a good deal on exactly where that child lived.\n\nA one-room school was a simple place with few supplies. Students today would be surprised at how little there was. There were fewer books and supplies for students to use, and instead of paper, pencils, and computers, a child in the early twentieth century probably had only a slate and a piece of chalk. A slate was a small board that a student could write on and then wipe clean to use again. When one lesson was finished, the student wiped the slate and started the next. Much of the learning happened by memorizing and reciting, repeating facts out loud until they were known well. Discipline in these schools could be rather strict.\n\nCountry schools also followed the seasons. In farm areas, the school year was often shorter than it is today, because young people were needed to work on the farm. These schools did not have a lunch program. Students carried their own food from home, often in a metal pail. This need for farm work, not just the calendar, often decided how long a school year would be.\n\nSchools like these did not stay the same forever. Over time, public schools grew more and more common across the country. States began to pass laws requiring children to attend, and by 1920 every state required children ages eight to fourteen to go to school for at least part of the year. Little by little, school attendance became expected for more children across the country.\n\nA one-room school had real limits. One teacher had to divide a single day among many ages and many levels, so each child received only a small share of the teacher's time. Yet these small schools did something powerful: they gathered children of several grades under one roof to learn together. Even with so little, these country schools existed for one purpose: to help children learn. For the families they served, the country schoolhouse was the heart of learning, a place where children of several grades learned side by side.",
+      "textFeaturesJson": [],
+      "factCheckRequired": true,
+      "factCheckNotesJson": [
+        {
+          "claimId": "t1-one-room-all-ages",
+          "claim": "In rural one-room schoolhouses, the grades studied together in a single room and were taught by one teacher.",
+          "sourceTitle": "Children's Lives at the Turn of the Twentieth Century",
+          "organization": "Library of Congress",
+          "sourceUrl": "https://www.loc.gov/classroom-materials/childrens-lives-at-the-turn-of-the-twentieth-century/",
+          "claimSupported": true,
+          "dateAccessed": "2026-06-24",
+          "passageSlot": "passage_1"
+        },
+        {
+          "claimId": "t1-cities-grade-separation",
+          "claim": "In urban areas, schools were larger and students worked in separate classrooms according to their grade level.",
+          "sourceTitle": "Children's Lives at the Turn of the Twentieth Century",
+          "organization": "Library of Congress",
+          "sourceUrl": "https://www.loc.gov/classroom-materials/childrens-lives-at-the-turn-of-the-twentieth-century/",
+          "claimSupported": true,
+          "dateAccessed": "2026-06-24",
+          "passageSlot": "passage_1"
+        },
+        {
+          "claimId": "t1-slate-chalk",
+          "claim": "Students in the early twentieth century probably had only a slate and chalk rather than paper and other modern school supplies.",
+          "sourceTitle": "Children's Lives at the Turn of the Twentieth Century",
+          "organization": "Library of Congress",
+          "sourceUrl": "https://www.loc.gov/classroom-materials/childrens-lives-at-the-turn-of-the-twentieth-century/",
+          "claimSupported": true,
+          "dateAccessed": "2026-06-24",
+          "passageSlot": "passage_1"
+        },
+        {
+          "claimId": "t1-rote-memorization",
+          "claim": "In early one-room schools, learning was frequently by rote memorization.",
+          "sourceTitle": "Children's Lives at the Turn of the Twentieth Century",
+          "organization": "Library of Congress",
+          "sourceUrl": "https://www.loc.gov/classroom-materials/childrens-lives-at-the-turn-of-the-twentieth-century/",
+          "claimSupported": true,
+          "dateAccessed": "2026-06-24",
+          "passageSlot": "passage_1"
+        },
+        {
+          "claimId": "t1-strict-discipline",
+          "claim": "Discipline in early one-room schools could be rather strict.",
+          "sourceTitle": "Children's Lives at the Turn of the Twentieth Century",
+          "organization": "Library of Congress",
+          "sourceUrl": "https://www.loc.gov/classroom-materials/childrens-lives-at-the-turn-of-the-twentieth-century/",
+          "claimSupported": true,
+          "dateAccessed": "2026-06-24",
+          "passageSlot": "passage_1"
+        },
+        {
+          "claimId": "t1-shorter-rural-year",
+          "claim": "In rural areas the school year was shorter because young people were needed to work on the farm.",
+          "sourceTitle": "Children's Lives at the Turn of the Twentieth Century",
+          "organization": "Library of Congress",
+          "sourceUrl": "https://www.loc.gov/classroom-materials/childrens-lives-at-the-turn-of-the-twentieth-century/",
+          "claimSupported": true,
+          "dateAccessed": "2026-06-24",
+          "passageSlot": "passage_1"
+        },
+        {
+          "claimId": "t1-lunch-pail",
+          "claim": "There was no school lunch program; students carried their lunch to school, often in a metal pail.",
+          "sourceTitle": "Children's Lives at the Turn of the Twentieth Century",
+          "organization": "Library of Congress",
+          "sourceUrl": "https://www.loc.gov/classroom-materials/childrens-lives-at-the-turn-of-the-twentieth-century/",
+          "claimSupported": true,
+          "dateAccessed": "2026-06-24",
+          "passageSlot": "passage_1"
+        },
+        {
+          "claimId": "t1-attendance-1920",
+          "claim": "By 1920 all states required students aged 8 to 14 to attend school for at least part of the year; public schools had grown more numerous and states began requiring attendance.",
+          "sourceTitle": "Children's Lives at the Turn of the Twentieth Century",
+          "organization": "Library of Congress",
+          "sourceUrl": "https://www.loc.gov/classroom-materials/childrens-lives-at-the-turn-of-the-twentieth-century/",
+          "claimSupported": true,
+          "dateAccessed": "2026-06-24",
+          "passageSlot": "passage_1"
+        }
+      ],
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "provenanceJson": {
+        "benchmarkSeason": "EOY",
+        "blueprintVersion": "pde-ela-diagnostic-stamina-2025-g3-eoy-v1",
+        "unit": "P3",
+        "passageSlot": "passage_1"
+      }
+    },
+    {
+      "id": "pssa_psg_g3_eoy_p3_school_today",
+      "title": "School Today",
+      "gradeLevel": 3,
+      "subject": "ELA",
+      "passageType": "informational",
+      "genre": "informational",
+      "domainVocabularyLoad": "medium",
+      "wordCount": 425,
+      "contentHash": "sha256:892d40c104c119575e2f733a783caf0e0005d376e563d5d7b7c9fc4d21ccf0b4",
+      "text": "Walk into a school today, and one of the biggest changes you will notice is the set of tools that students use to learn. Many of these tools did not exist at all when one-room schoolhouses were common.\n\nIn many schools now, each student has a computer or a tablet of their own. In some schools, students may even take a school computer home. Along with printed books, many schools use online textbooks that students can read on a screen. With tools like these, a student does not always have to wait for the whole class to move at the same speed. In a national survey of public schools, some schools reported that technology can help children learn at their own pace, moving ahead when a subject feels easy and slowing down when a subject feels hard. A student who already understands a lesson need not wait for the others, while a student who needs more time can keep working.\n\nFor many students, these tools can act like a window, opening a view to new things to learn. Some schools reported that technology helped students become more independent, taking charge of their own learning. Other schools said it helped students learn more actively, doing and trying instead of only listening. And some reported that it helped students work together with classmates on a shared task. In these ways, the right tools can give students more choices about how they learn.\n\nBut a computer is only a tool. The same report that describes these new devices is careful to remind readers that technology by itself does not make a better education. Screens and programs cannot teach all on their own. Teachers still plan the lessons, explain the hard ideas, and help each student who is stuck. The report even notes that teachers themselves need time and training to use new technology well, so that the tools truly help. A tablet in every hand is not enough if no one shows students how to use it to learn. Even the best new device cannot replace a caring, well-trained teacher.\n\nSo school today and school long ago are not the same. The slate and chalk of the old country schools have become a tablet and a screen, and a few shared books have become many lessons on a screen. Yet beneath all of the new tools, school exists so that children can learn and grow, the same goal the old country schoolhouse always had. The tools keep changing, but the reason for school stays the same.",
+      "textFeaturesJson": [],
+      "factCheckRequired": true,
+      "factCheckNotesJson": [
+        {
+          "claimId": "t2-device-per-student",
+          "claim": "Many public schools provide a computer for each student (45 percent one-per-student, plus 37 percent in some grades), and some let students take a school computer home (15 percent in all grades).",
+          "sourceTitle": "Use of Educational Technology for Instruction in Public Schools: 2019-20",
+          "organization": "National Center for Education Statistics, U.S. Department of Education",
+          "sourceUrl": "https://nces.ed.gov/pubs2021/2021017Summary.pdf",
+          "claimSupported": true,
+          "dateAccessed": "2026-06-24",
+          "passageSlot": "passage_2"
+        },
+        {
+          "claimId": "t2-online-textbooks",
+          "claim": "About half of public schools used interactive (online) textbooks for teaching and learning.",
+          "sourceTitle": "Use of Educational Technology for Instruction in Public Schools: 2019-20",
+          "organization": "National Center for Education Statistics, U.S. Department of Education",
+          "sourceUrl": "https://nces.ed.gov/pubs2021/2021017Summary.pdf",
+          "claimSupported": true,
+          "dateAccessed": "2026-06-24",
+          "passageSlot": "passage_2"
+        },
+        {
+          "claimId": "t2-learn-at-own-pace",
+          "claim": "Schools reported that classroom technology helped students learn at their own pace.",
+          "sourceTitle": "Use of Educational Technology for Instruction in Public Schools: 2019-20",
+          "organization": "National Center for Education Statistics, U.S. Department of Education",
+          "sourceUrl": "https://nces.ed.gov/pubs2021/2021017Summary.pdf",
+          "claimSupported": true,
+          "dateAccessed": "2026-06-24",
+          "passageSlot": "passage_2"
+        },
+        {
+          "claimId": "t2-independent",
+          "claim": "Schools reported that the way technology is used helped students be more independent and self-directed.",
+          "sourceTitle": "Use of Educational Technology for Instruction in Public Schools: 2019-20",
+          "organization": "National Center for Education Statistics, U.S. Department of Education",
+          "sourceUrl": "https://nces.ed.gov/pubs2021/2021017Summary.pdf",
+          "claimSupported": true,
+          "dateAccessed": "2026-06-24",
+          "passageSlot": "passage_2"
+        },
+        {
+          "claimId": "t2-active-learning",
+          "claim": "Schools reported that technology helped students learn more actively.",
+          "sourceTitle": "Use of Educational Technology for Instruction in Public Schools: 2019-20",
+          "organization": "National Center for Education Statistics, U.S. Department of Education",
+          "sourceUrl": "https://nces.ed.gov/pubs2021/2021017Summary.pdf",
+          "claimSupported": true,
+          "dateAccessed": "2026-06-24",
+          "passageSlot": "passage_2"
+        },
+        {
+          "claimId": "t2-collaborate",
+          "claim": "Schools reported that technology helped students learn collaboratively with peers.",
+          "sourceTitle": "Use of Educational Technology for Instruction in Public Schools: 2019-20",
+          "organization": "National Center for Education Statistics, U.S. Department of Education",
+          "sourceUrl": "https://nces.ed.gov/pubs2021/2021017Summary.pdf",
+          "claimSupported": true,
+          "dateAccessed": "2026-06-24",
+          "passageSlot": "passage_2"
+        },
+        {
+          "claimId": "t2-tech-not-enough",
+          "claim": "Technology alone does not guarantee a better education; schools and teachers play a central role in using technology to strengthen teaching and learning.",
+          "sourceTitle": "Use of Educational Technology for Instruction in Public Schools: 2019-20",
+          "organization": "National Center for Education Statistics, U.S. Department of Education",
+          "sourceUrl": "https://nces.ed.gov/pubs2021/2021017Summary.pdf",
+          "claimSupported": true,
+          "dateAccessed": "2026-06-24",
+          "passageSlot": "passage_2"
+        },
+        {
+          "claimId": "t2-teacher-training",
+          "claim": "Teachers need time, training, and support to use technology well for teaching and learning; lack of time and training are reported challenges.",
+          "sourceTitle": "Use of Educational Technology for Instruction in Public Schools: 2019-20",
+          "organization": "National Center for Education Statistics, U.S. Department of Education",
+          "sourceUrl": "https://nces.ed.gov/pubs2021/2021017Summary.pdf",
+          "claimSupported": true,
+          "dateAccessed": "2026-06-24",
+          "passageSlot": "passage_2"
+        }
+      ],
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "provenanceJson": {
+        "benchmarkSeason": "EOY",
+        "blueprintVersion": "pde-ela-diagnostic-stamina-2025-g3-eoy-v1",
+        "unit": "P3",
+        "passageSlot": "passage_2"
+      }
+    }
+  ],
+  "items": [
+    {
+      "id": "pssa_item_g3_eoy_p3_mcq_bk112",
+      "itemId": "pssa_item_g3_eoy_p3_mcq_bk112",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "MCQ",
+      "interactionType": "MCQ",
+      "interactionSubtype": "text1_main_idea",
+      "passageId": "pssa_psg_g3_eoy_p3_school_long_ago",
+      "passageTitle": "School Long Ago",
+      "passageGroupId": "pssa_pg_g3_eoy_p3_school_paired",
+      "isCrossText": false,
+      "passageLinks": [
+        {
+          "passageId": "pssa_psg_g3_eoy_p3_school_long_ago",
+          "role": "primary",
+          "sortOrder": 0
+        }
+      ],
+      "eligibleContent": "E03.B-K.1.1.2",
+      "reportingCategory": "B",
+      "pointValue": 1,
+      "responseSpecJson": {
+        "prompt": "What is the best main idea of Text 1, \"School Long Ago\"?",
+        "choices": [
+          "Children long ago learned only by using computers and online books.",
+          "Rural schools long ago often had one teacher, several grades, and few supplies, while public schooling became more common.",
+          "The most important idea is that farm work made the school year shorter.",
+          "City schools long ago were the only schools that served children."
+        ],
+        "structuredChoicesJson": [
+          {
+            "text": "Children long ago learned only by using computers and online books.",
+            "distractorRole": "opposite_claim"
+          },
+          {
+            "text": "Rural schools long ago often had one teacher, several grades, and few supplies, while public schooling became more common."
+          },
+          {
+            "text": "The most important idea is that farm work made the school year shorter.",
+            "distractorRole": "too_narrow"
+          },
+          {
+            "text": "City schools long ago were the only schools that served children.",
+            "distractorRole": "wrong_emphasis"
+          }
+        ]
+      },
+      "correctResponseJson": {
+        "correctIndex": 1
+      },
+      "scoringJson": {
+        "totalPoints": 1
+      },
+      "evidenceBinding": {
+        "evidenceKind": "whole_passage_synthesis",
+        "passageSlot": "passage_1"
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "provenanceJson": {
+        "benchmarkSeason": "EOY",
+        "blueprintVersion": "pde-ela-diagnostic-stamina-2025-g3-eoy-v1",
+        "unit": "P3",
+        "passageSlot": "passage_1"
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_EOY_P3_ITEMS",
+        "noDbWrite": true,
+        "productionImportReady": false,
+        "intendedAssemblyBucket": "operational"
+      },
+      "studentFacingPrompt": "What is the best main idea of Text 1, \"School Long Ago\"?",
+      "stem": "What is the best main idea of Text 1, \"School Long Ago\"?",
+      "answerChoicesJson": [
+        {
+          "text": "Children long ago learned only by using computers and online books.",
+          "isCorrect": false,
+          "distractorRole": "opposite_claim",
+          "rationale": "This reverses Text 1, which describes slates, chalk, and few supplies rather than computers.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_1",
+              "quotedSpan": "a child in the early twentieth century probably had only a slate and a piece of chalk",
+              "paragraphIndex": 1,
+              "sentenceIndex": 2,
+              "startChar": 731,
+              "endChar": 816
+            }
+          ]
+        },
+        {
+          "text": "Rural schools long ago often had one teacher, several grades, and few supplies, while public schooling became more common.",
+          "isCorrect": true,
+          "distractorRole": null,
+          "rationale": "Correct. This choice summarizes the whole informational text, including school conditions and the growth of attendance.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "whole_passage_synthesis",
+              "passageSlot": "passage_1"
+            }
+          ]
+        },
+        {
+          "text": "The most important idea is that farm work made the school year shorter.",
+          "isCorrect": false,
+          "distractorRole": "too_narrow",
+          "rationale": "This is one true detail, but it is too narrow to be the main idea of the whole passage.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_1",
+              "quotedSpan": "In farm areas, the school year was often shorter than it is today, because young people were needed to work on the farm.",
+              "paragraphIndex": 2,
+              "sentenceIndex": 1,
+              "startChar": 1195,
+              "endChar": 1315
+            }
+          ]
+        },
+        {
+          "text": "City schools long ago were the only schools that served children.",
+          "isCorrect": false,
+          "distractorRole": "wrong_emphasis",
+          "rationale": "This overemphasizes one contrast detail; Text 1 mostly explains rural one-room schools and their role.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_1",
+              "quotedSpan": "In the growing cities, schools were already larger, and students worked in separate classrooms by grade.",
+              "paragraphIndex": 0,
+              "sentenceIndex": 3,
+              "startChar": 278,
+              "endChar": 382
+            }
+          ]
+        }
+      ],
+      "structuredChoicesJson": [
+        {
+          "text": "Children long ago learned only by using computers and online books.",
+          "isCorrect": false,
+          "distractorRole": "opposite_claim",
+          "rationale": "This reverses Text 1, which describes slates, chalk, and few supplies rather than computers.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_1",
+              "quotedSpan": "a child in the early twentieth century probably had only a slate and a piece of chalk",
+              "paragraphIndex": 1,
+              "sentenceIndex": 2,
+              "startChar": 731,
+              "endChar": 816
+            }
+          ]
+        },
+        {
+          "text": "Rural schools long ago often had one teacher, several grades, and few supplies, while public schooling became more common.",
+          "isCorrect": true,
+          "distractorRole": null,
+          "rationale": "Correct. This choice summarizes the whole informational text, including school conditions and the growth of attendance.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "whole_passage_synthesis",
+              "passageSlot": "passage_1"
+            }
+          ]
+        },
+        {
+          "text": "The most important idea is that farm work made the school year shorter.",
+          "isCorrect": false,
+          "distractorRole": "too_narrow",
+          "rationale": "This is one true detail, but it is too narrow to be the main idea of the whole passage.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_1",
+              "quotedSpan": "In farm areas, the school year was often shorter than it is today, because young people were needed to work on the farm.",
+              "paragraphIndex": 2,
+              "sentenceIndex": 1,
+              "startChar": 1195,
+              "endChar": 1315
+            }
+          ]
+        },
+        {
+          "text": "City schools long ago were the only schools that served children.",
+          "isCorrect": false,
+          "distractorRole": "wrong_emphasis",
+          "rationale": "This overemphasizes one contrast detail; Text 1 mostly explains rural one-room schools and their role.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_1",
+              "quotedSpan": "In the growing cities, schools were already larger, and students worked in separate classrooms by grade.",
+              "paragraphIndex": 0,
+              "sentenceIndex": 3,
+              "startChar": 278,
+              "endChar": 382
+            }
+          ]
+        }
+      ],
+      "correctIndex": 1,
+      "comprehensionKind": "synthesis"
+    },
+    {
+      "id": "pssa_item_g3_eoy_p3_mcq_bc211",
+      "itemId": "pssa_item_g3_eoy_p3_mcq_bc211",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "MCQ",
+      "interactionType": "MCQ",
+      "interactionSubtype": "text1_author_viewpoint",
+      "passageId": "pssa_psg_g3_eoy_p3_school_long_ago",
+      "passageTitle": "School Long Ago",
+      "passageGroupId": "pssa_pg_g3_eoy_p3_school_paired",
+      "isCrossText": false,
+      "passageLinks": [
+        {
+          "passageId": "pssa_psg_g3_eoy_p3_school_long_ago",
+          "role": "primary",
+          "sortOrder": 0
+        }
+      ],
+      "eligibleContent": "E03.B-C.2.1.1",
+      "reportingCategory": "B",
+      "pointValue": 1,
+      "responseSpecJson": {
+        "prompt": "Which statement best describes the author's point of view about one-room schools in Text 1?",
+        "choices": [
+          "The author thinks one-room schools were perfect and had no limits.",
+          "The author thinks strict discipline was the only important feature of one-room schools.",
+          "The author thinks one-room schools gave every child plenty of teacher time.",
+          "The author presents one-room schools as limited but still valuable places where children learned together."
+        ],
+        "structuredChoicesJson": [
+          {
+            "text": "The author thinks one-room schools were perfect and had no limits.",
+            "distractorRole": "opposite_claim"
+          },
+          {
+            "text": "The author thinks strict discipline was the only important feature of one-room schools.",
+            "distractorRole": "too_narrow"
+          },
+          {
+            "text": "The author thinks one-room schools gave every child plenty of teacher time.",
+            "distractorRole": "unsupported_inference"
+          },
+          {
+            "text": "The author presents one-room schools as limited but still valuable places where children learned together."
+          }
+        ]
+      },
+      "correctResponseJson": {
+        "correctIndex": 3
+      },
+      "scoringJson": {
+        "totalPoints": 1
+      },
+      "evidenceBinding": {
+        "evidenceKind": "whole_passage_synthesis",
+        "passageSlot": "passage_1"
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "provenanceJson": {
+        "benchmarkSeason": "EOY",
+        "blueprintVersion": "pde-ela-diagnostic-stamina-2025-g3-eoy-v1",
+        "unit": "P3",
+        "passageSlot": "passage_1"
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_EOY_P3_ITEMS",
+        "noDbWrite": true,
+        "productionImportReady": false,
+        "intendedAssemblyBucket": "operational"
+      },
+      "studentFacingPrompt": "Which statement best describes the author's point of view about one-room schools in Text 1?",
+      "stem": "Which statement best describes the author's point of view about one-room schools in Text 1?",
+      "answerChoicesJson": [
+        {
+          "text": "The author thinks one-room schools were perfect and had no limits.",
+          "isCorrect": false,
+          "distractorRole": "opposite_claim",
+          "rationale": "This reverses the author's balanced view because the passage explicitly says the schools had real limits.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_1",
+              "quotedSpan": "A one-room school had real limits.",
+              "paragraphIndex": 4,
+              "sentenceIndex": 0,
+              "startChar": 1903,
+              "endChar": 1937
+            }
+          ]
+        },
+        {
+          "text": "The author thinks strict discipline was the only important feature of one-room schools.",
+          "isCorrect": false,
+          "distractorRole": "too_narrow",
+          "rationale": "This focuses on one detail and misses the broader view of limited but valuable schools.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_1",
+              "quotedSpan": "Discipline in these schools could be rather strict.",
+              "paragraphIndex": 1,
+              "sentenceIndex": 6,
+              "startChar": 1099,
+              "endChar": 1150
+            }
+          ]
+        },
+        {
+          "text": "The author thinks one-room schools gave every child plenty of teacher time.",
+          "isCorrect": false,
+          "distractorRole": "unsupported_inference",
+          "rationale": "The passage does not say every child received plenty of teacher time; it says each child received only a small share.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_1",
+              "quotedSpan": "One teacher had to divide a single day among many ages and many levels, so each child received only a small share of the teacher's time.",
+              "paragraphIndex": 4,
+              "sentenceIndex": 1,
+              "startChar": 1938,
+              "endChar": 2074
+            }
+          ]
+        },
+        {
+          "text": "The author presents one-room schools as limited but still valuable places where children learned together.",
+          "isCorrect": true,
+          "distractorRole": null,
+          "rationale": "Correct. The passage names real limits and then explains that the schools gathered children to learn.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "whole_passage_synthesis",
+              "passageSlot": "passage_1"
+            }
+          ]
+        }
+      ],
+      "structuredChoicesJson": [
+        {
+          "text": "The author thinks one-room schools were perfect and had no limits.",
+          "isCorrect": false,
+          "distractorRole": "opposite_claim",
+          "rationale": "This reverses the author's balanced view because the passage explicitly says the schools had real limits.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_1",
+              "quotedSpan": "A one-room school had real limits.",
+              "paragraphIndex": 4,
+              "sentenceIndex": 0,
+              "startChar": 1903,
+              "endChar": 1937
+            }
+          ]
+        },
+        {
+          "text": "The author thinks strict discipline was the only important feature of one-room schools.",
+          "isCorrect": false,
+          "distractorRole": "too_narrow",
+          "rationale": "This focuses on one detail and misses the broader view of limited but valuable schools.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_1",
+              "quotedSpan": "Discipline in these schools could be rather strict.",
+              "paragraphIndex": 1,
+              "sentenceIndex": 6,
+              "startChar": 1099,
+              "endChar": 1150
+            }
+          ]
+        },
+        {
+          "text": "The author thinks one-room schools gave every child plenty of teacher time.",
+          "isCorrect": false,
+          "distractorRole": "unsupported_inference",
+          "rationale": "The passage does not say every child received plenty of teacher time; it says each child received only a small share.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_1",
+              "quotedSpan": "One teacher had to divide a single day among many ages and many levels, so each child received only a small share of the teacher's time.",
+              "paragraphIndex": 4,
+              "sentenceIndex": 1,
+              "startChar": 1938,
+              "endChar": 2074
+            }
+          ]
+        },
+        {
+          "text": "The author presents one-room schools as limited but still valuable places where children learned together.",
+          "isCorrect": true,
+          "distractorRole": null,
+          "rationale": "Correct. The passage names real limits and then explains that the schools gathered children to learn.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "whole_passage_synthesis",
+              "passageSlot": "passage_1"
+            }
+          ]
+        }
+      ],
+      "correctIndex": 3,
+      "comprehensionKind": "interpretation",
+      "comprehensionKindRationale": "The item asks students to infer the author's evaluative stance across the whole passage, not retrieve one explicit sentence."
+    },
+    {
+      "id": "pssa_item_g3_eoy_p3_mcq_bv412",
+      "itemId": "pssa_item_g3_eoy_p3_mcq_bv412",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "MCQ",
+      "interactionType": "MCQ",
+      "interactionSubtype": "nonliteral_heart",
+      "passageId": "pssa_psg_g3_eoy_p3_school_long_ago",
+      "passageTitle": "School Long Ago",
+      "passageGroupId": "pssa_pg_g3_eoy_p3_school_paired",
+      "isCrossText": false,
+      "passageLinks": [
+        {
+          "passageId": "pssa_psg_g3_eoy_p3_school_long_ago",
+          "role": "primary",
+          "sortOrder": 0
+        }
+      ],
+      "eligibleContent": "E03.B-V.4.1.2",
+      "reportingCategory": "B",
+      "pointValue": 1,
+      "responseSpecJson": {
+        "prompt": "In Text 1, what does the author mean by saying the country schoolhouse was the \"heart\" of learning?",
+        "choices": [
+          "It was a central and important place for children to learn.",
+          "It was shaped like a real heart inside the building.",
+          "It was where students memorized and recited facts aloud.",
+          "It was less important because each child received little teacher time."
+        ],
+        "structuredChoicesJson": [
+          {
+            "text": "It was a central and important place for children to learn."
+          },
+          {
+            "text": "It was shaped like a real heart inside the building.",
+            "distractorRole": "plausible_misreading"
+          },
+          {
+            "text": "It was where students memorized and recited facts aloud.",
+            "distractorRole": "wrong_section"
+          },
+          {
+            "text": "It was less important because each child received little teacher time.",
+            "distractorRole": "opposite_claim"
+          }
+        ]
+      },
+      "correctResponseJson": {
+        "correctIndex": 0
+      },
+      "scoringJson": {
+        "totalPoints": 1
+      },
+      "evidenceBinding": {
+        "evidenceKind": "quoted_span",
+        "passageSlot": "passage_1",
+        "quotedSpan": "For the families they served, the country schoolhouse was the heart of learning, a place where children of several grades learned side by side."
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "provenanceJson": {
+        "benchmarkSeason": "EOY",
+        "blueprintVersion": "pde-ela-diagnostic-stamina-2025-g3-eoy-v1",
+        "unit": "P3",
+        "passageSlot": "passage_1"
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_EOY_P3_ITEMS",
+        "noDbWrite": true,
+        "productionImportReady": false,
+        "intendedAssemblyBucket": "operational"
+      },
+      "studentFacingPrompt": "In Text 1, what does the author mean by saying the country schoolhouse was the \"heart\" of learning?",
+      "stem": "In Text 1, what does the author mean by saying the country schoolhouse was the \"heart\" of learning?",
+      "answerChoicesJson": [
+        {
+          "text": "It was a central and important place for children to learn.",
+          "isCorrect": true,
+          "distractorRole": null,
+          "rationale": "Correct. The comparison shows the schoolhouse was central to learning for the families it served.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_1",
+              "quotedSpan": "For the families they served, the country schoolhouse was the heart of learning, a place where children of several grades learned side by side.",
+              "paragraphIndex": 4,
+              "sentenceIndex": 4,
+              "startChar": 2290,
+              "endChar": 2433
+            }
+          ]
+        },
+        {
+          "text": "It was shaped like a real heart inside the building.",
+          "isCorrect": false,
+          "distractorRole": "plausible_misreading",
+          "rationale": "This reads the nonliteral word heart as a literal body part or shape.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_1",
+              "quotedSpan": "For the families they served, the country schoolhouse was the heart of learning, a place where children of several grades learned side by side.",
+              "paragraphIndex": 4,
+              "sentenceIndex": 4,
+              "startChar": 2290,
+              "endChar": 2433
+            }
+          ]
+        },
+        {
+          "text": "It was where students memorized and recited facts aloud.",
+          "isCorrect": false,
+          "distractorRole": "wrong_section",
+          "rationale": "This uses a learning-method detail from another paragraph instead of explaining the word relationship.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_1",
+              "quotedSpan": "Much of the learning happened by memorizing and reciting, repeating facts out loud until they were known well.",
+              "paragraphIndex": 1,
+              "sentenceIndex": 5,
+              "startChar": 988,
+              "endChar": 1098
+            }
+          ]
+        },
+        {
+          "text": "It was less important because each child received little teacher time.",
+          "isCorrect": false,
+          "distractorRole": "opposite_claim",
+          "rationale": "This reverses the comparison; the sentence calls the schoolhouse central even though it had limits.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_1",
+              "quotedSpan": "A one-room school had real limits.",
+              "paragraphIndex": 4,
+              "sentenceIndex": 0,
+              "startChar": 1903,
+              "endChar": 1937
+            }
+          ]
+        }
+      ],
+      "structuredChoicesJson": [
+        {
+          "text": "It was a central and important place for children to learn.",
+          "isCorrect": true,
+          "distractorRole": null,
+          "rationale": "Correct. The comparison shows the schoolhouse was central to learning for the families it served.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_1",
+              "quotedSpan": "For the families they served, the country schoolhouse was the heart of learning, a place where children of several grades learned side by side.",
+              "paragraphIndex": 4,
+              "sentenceIndex": 4,
+              "startChar": 2290,
+              "endChar": 2433
+            }
+          ]
+        },
+        {
+          "text": "It was shaped like a real heart inside the building.",
+          "isCorrect": false,
+          "distractorRole": "plausible_misreading",
+          "rationale": "This reads the nonliteral word heart as a literal body part or shape.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_1",
+              "quotedSpan": "For the families they served, the country schoolhouse was the heart of learning, a place where children of several grades learned side by side.",
+              "paragraphIndex": 4,
+              "sentenceIndex": 4,
+              "startChar": 2290,
+              "endChar": 2433
+            }
+          ]
+        },
+        {
+          "text": "It was where students memorized and recited facts aloud.",
+          "isCorrect": false,
+          "distractorRole": "wrong_section",
+          "rationale": "This uses a learning-method detail from another paragraph instead of explaining the word relationship.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_1",
+              "quotedSpan": "Much of the learning happened by memorizing and reciting, repeating facts out loud until they were known well.",
+              "paragraphIndex": 1,
+              "sentenceIndex": 5,
+              "startChar": 988,
+              "endChar": 1098
+            }
+          ]
+        },
+        {
+          "text": "It was less important because each child received little teacher time.",
+          "isCorrect": false,
+          "distractorRole": "opposite_claim",
+          "rationale": "This reverses the comparison; the sentence calls the schoolhouse central even though it had limits.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_1",
+              "quotedSpan": "A one-room school had real limits.",
+              "paragraphIndex": 4,
+              "sentenceIndex": 0,
+              "startChar": 1903,
+              "endChar": 1937
+            }
+          ]
+        }
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": "pssa_item_g3_eoy_p3_mcq_bk113",
+      "itemId": "pssa_item_g3_eoy_p3_mcq_bk113",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "MCQ",
+      "interactionType": "MCQ",
+      "interactionSubtype": "historical_sequence",
+      "passageId": "pssa_psg_g3_eoy_p3_school_long_ago",
+      "passageTitle": "School Long Ago",
+      "passageGroupId": "pssa_pg_g3_eoy_p3_school_paired",
+      "isCrossText": false,
+      "passageLinks": [
+        {
+          "passageId": "pssa_psg_g3_eoy_p3_school_long_ago",
+          "role": "primary",
+          "sortOrder": 0
+        }
+      ],
+      "eligibleContent": "E03.B-K.1.1.3",
+      "reportingCategory": "B",
+      "pointValue": 1,
+      "responseSpecJson": {
+        "prompt": "Which sequence best matches Text 1?",
+        "choices": [
+          "Every state required school first, then public schools grew more common, then states began to pass laws.",
+          "Farm work made the school year shorter, and students used slates.",
+          "Public schools grew more common, states began requiring attendance, and by 1920 every state required ages eight to fourteen to attend at least part of the year.",
+          "The main sequence is that students memorized facts and recited them aloud."
+        ],
+        "structuredChoicesJson": [
+          {
+            "text": "Every state required school first, then public schools grew more common, then states began to pass laws.",
+            "distractorRole": "opposite_claim"
+          },
+          {
+            "text": "Farm work made the school year shorter, and students used slates.",
+            "distractorRole": "wrong_emphasis"
+          },
+          {
+            "text": "Public schools grew more common, states began requiring attendance, and by 1920 every state required ages eight to fourteen to attend at least part of the year."
+          },
+          {
+            "text": "The main sequence is that students memorized facts and recited them aloud.",
+            "distractorRole": "wrong_section"
+          }
+        ]
+      },
+      "correctResponseJson": {
+        "correctIndex": 2
+      },
+      "scoringJson": {
+        "totalPoints": 1
+      },
+      "evidenceBinding": {
+        "evidenceKind": "quoted_span",
+        "passageSlot": "passage_1",
+        "quotedSpan": "States began to pass laws requiring children to attend, and by 1920 every state required children ages eight to fourteen to go to school for at least part of the year."
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "provenanceJson": {
+        "benchmarkSeason": "EOY",
+        "blueprintVersion": "pde-ela-diagnostic-stamina-2025-g3-eoy-v1",
+        "unit": "P3",
+        "passageSlot": "passage_1"
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_EOY_P3_ITEMS",
+        "noDbWrite": true,
+        "productionImportReady": false,
+        "intendedAssemblyBucket": "operational"
+      },
+      "studentFacingPrompt": "Which sequence best matches Text 1?",
+      "stem": "Which sequence best matches Text 1?",
+      "answerChoicesJson": [
+        {
+          "text": "Every state required school first, then public schools grew more common, then states began to pass laws.",
+          "isCorrect": false,
+          "distractorRole": "opposite_claim",
+          "rationale": "This reverses the order of events described in the paragraph.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_1",
+              "quotedSpan": "States began to pass laws requiring children to attend, and by 1920 every state required children ages eight to fourteen to go to school for at least part of the year.",
+              "paragraphIndex": 3,
+              "sentenceIndex": 2,
+              "startChar": 1644,
+              "endChar": 1811
+            }
+          ]
+        },
+        {
+          "text": "Farm work made the school year shorter, and students used slates.",
+          "isCorrect": false,
+          "distractorRole": "wrong_emphasis",
+          "rationale": "This emphasizes scattered details from other sections instead of the historical sequence about school attendance.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_1",
+              "quotedSpan": "In farm areas, the school year was often shorter than it is today, because young people were needed to work on the farm.",
+              "paragraphIndex": 2,
+              "sentenceIndex": 1,
+              "startChar": 1195,
+              "endChar": 1315
+            }
+          ]
+        },
+        {
+          "text": "Public schools grew more common, states began requiring attendance, and by 1920 every state required ages eight to fourteen to attend at least part of the year.",
+          "isCorrect": true,
+          "distractorRole": null,
+          "rationale": "Correct. This follows the historical order in Text 1.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_1",
+              "quotedSpan": "States began to pass laws requiring children to attend, and by 1920 every state required children ages eight to fourteen to go to school for at least part of the year.",
+              "paragraphIndex": 3,
+              "sentenceIndex": 2,
+              "startChar": 1644,
+              "endChar": 1811
+            }
+          ]
+        },
+        {
+          "text": "The main sequence is that students memorized facts and recited them aloud.",
+          "isCorrect": false,
+          "distractorRole": "wrong_section",
+          "rationale": "This uses the learning-method section of Text 1, not the historical sequence about attendance laws.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_1",
+              "quotedSpan": "Much of the learning happened by memorizing and reciting, repeating facts out loud until they were known well.",
+              "paragraphIndex": 1,
+              "sentenceIndex": 5,
+              "startChar": 988,
+              "endChar": 1098
+            }
+          ]
+        }
+      ],
+      "structuredChoicesJson": [
+        {
+          "text": "Every state required school first, then public schools grew more common, then states began to pass laws.",
+          "isCorrect": false,
+          "distractorRole": "opposite_claim",
+          "rationale": "This reverses the order of events described in the paragraph.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_1",
+              "quotedSpan": "States began to pass laws requiring children to attend, and by 1920 every state required children ages eight to fourteen to go to school for at least part of the year.",
+              "paragraphIndex": 3,
+              "sentenceIndex": 2,
+              "startChar": 1644,
+              "endChar": 1811
+            }
+          ]
+        },
+        {
+          "text": "Farm work made the school year shorter, and students used slates.",
+          "isCorrect": false,
+          "distractorRole": "wrong_emphasis",
+          "rationale": "This emphasizes scattered details from other sections instead of the historical sequence about school attendance.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_1",
+              "quotedSpan": "In farm areas, the school year was often shorter than it is today, because young people were needed to work on the farm.",
+              "paragraphIndex": 2,
+              "sentenceIndex": 1,
+              "startChar": 1195,
+              "endChar": 1315
+            }
+          ]
+        },
+        {
+          "text": "Public schools grew more common, states began requiring attendance, and by 1920 every state required ages eight to fourteen to attend at least part of the year.",
+          "isCorrect": true,
+          "distractorRole": null,
+          "rationale": "Correct. This follows the historical order in Text 1.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_1",
+              "quotedSpan": "States began to pass laws requiring children to attend, and by 1920 every state required children ages eight to fourteen to go to school for at least part of the year.",
+              "paragraphIndex": 3,
+              "sentenceIndex": 2,
+              "startChar": 1644,
+              "endChar": 1811
+            }
+          ]
+        },
+        {
+          "text": "The main sequence is that students memorized facts and recited them aloud.",
+          "isCorrect": false,
+          "distractorRole": "wrong_section",
+          "rationale": "This uses the learning-method section of Text 1, not the historical sequence about attendance laws.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_1",
+              "quotedSpan": "Much of the learning happened by memorizing and reciting, repeating facts out loud until they were known well.",
+              "paragraphIndex": 1,
+              "sentenceIndex": 5,
+              "startChar": 988,
+              "endChar": 1098
+            }
+          ]
+        }
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": "pssa_item_g3_eoy_p3_mcq_bc312",
+      "itemId": "pssa_item_g3_eoy_p3_mcq_bc312",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "MCQ",
+      "interactionType": "MCQ",
+      "interactionSubtype": "cross_text_materials_difference",
+      "passageId": null,
+      "passageTitle": "Going to School: Then & Now",
+      "passageGroupId": "pssa_pg_g3_eoy_p3_school_paired",
+      "isCrossText": true,
+      "requiredEvidenceSlotsJson": [
+        "passage_1",
+        "passage_2"
+      ],
+      "passageLinks": [
+        {
+          "passageId": "pssa_psg_g3_eoy_p3_school_long_ago",
+          "role": "primary",
+          "sortOrder": 0
+        },
+        {
+          "passageId": "pssa_psg_g3_eoy_p3_school_today",
+          "role": "primary",
+          "sortOrder": 1
+        }
+      ],
+      "eligibleContent": "E03.B-C.3.1.2",
+      "reportingCategory": "B",
+      "pointValue": 1,
+      "responseSpecJson": {
+        "prompt": "Which difference between schools long ago and schools today is shown by the two texts?",
+        "choices": [
+          "Both texts say students mainly used online textbooks on screens.",
+          "Text 1 shows students using a slate and chalk, while Text 2 shows students using online textbooks on a screen.",
+          "Text 1 and Text 2 both focus only on farm schedules.",
+          "Text 2 says students today use slates and chalk instead of computers."
+        ],
+        "structuredChoicesJson": [
+          {
+            "text": "Both texts say students mainly used online textbooks on screens.",
+            "distractorRole": "opposite_claim"
+          },
+          {
+            "text": "Text 1 shows students using a slate and chalk, while Text 2 shows students using online textbooks on a screen."
+          },
+          {
+            "text": "Text 1 and Text 2 both focus only on farm schedules.",
+            "distractorRole": "wrong_emphasis"
+          },
+          {
+            "text": "Text 2 says students today use slates and chalk instead of computers.",
+            "distractorRole": "wrong_section"
+          }
+        ]
+      },
+      "correctResponseJson": {
+        "correctIndex": 1
+      },
+      "scoringJson": {
+        "totalPoints": 1
+      },
+      "evidenceBinding": {
+        "evidenceKind": "quoted_span",
+        "passageSlots": [
+          "passage_1",
+          "passage_2"
+        ],
+        "quotedSpan": "a child in the early twentieth century probably had only a slate and a piece of chalk / many schools use online textbooks that students can read on a screen"
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "provenanceJson": {
+        "benchmarkSeason": "EOY",
+        "blueprintVersion": "pde-ela-diagnostic-stamina-2025-g3-eoy-v1",
+        "unit": "P3"
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_EOY_P3_ITEMS",
+        "noDbWrite": true,
+        "productionImportReady": false,
+        "intendedAssemblyBucket": "operational"
+      },
+      "studentFacingPrompt": "Which difference between schools long ago and schools today is shown by the two texts?",
+      "stem": "Which difference between schools long ago and schools today is shown by the two texts?",
+      "answerChoicesJson": [
+        {
+          "text": "Both texts say students mainly used online textbooks on screens.",
+          "isCorrect": false,
+          "distractorRole": "opposite_claim",
+          "rationale": "This reverses Text 1, which says children probably used only a slate and chalk.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_1",
+              "quotedSpan": "a child in the early twentieth century probably had only a slate and a piece of chalk",
+              "paragraphIndex": 1,
+              "sentenceIndex": 2,
+              "startChar": 731,
+              "endChar": 816
+            }
+          ]
+        },
+        {
+          "text": "Text 1 shows students using a slate and chalk, while Text 2 shows students using online textbooks on a screen.",
+          "isCorrect": true,
+          "distractorRole": null,
+          "rationale": "Correct. The two details show a clear difference in learning materials across time.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_1",
+              "quotedSpan": "a child in the early twentieth century probably had only a slate and a piece of chalk",
+              "paragraphIndex": 1,
+              "sentenceIndex": 2,
+              "startChar": 731,
+              "endChar": 816
+            },
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_2",
+              "quotedSpan": "many schools use online textbooks that students can read on a screen",
+              "paragraphIndex": 1,
+              "sentenceIndex": 2,
+              "startChar": 368,
+              "endChar": 436
+            }
+          ]
+        },
+        {
+          "text": "Text 1 and Text 2 both focus only on farm schedules.",
+          "isCorrect": false,
+          "distractorRole": "wrong_emphasis",
+          "rationale": "Farm schedules are one Text 1 detail and are not the main comparison across both texts.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_1",
+              "quotedSpan": "In farm areas, the school year was often shorter than it is today, because young people were needed to work on the farm.",
+              "paragraphIndex": 2,
+              "sentenceIndex": 1,
+              "startChar": 1195,
+              "endChar": 1315
+            }
+          ]
+        },
+        {
+          "text": "Text 2 says students today use slates and chalk instead of computers.",
+          "isCorrect": false,
+          "distractorRole": "wrong_section",
+          "rationale": "This puts a Text 1 detail into Text 2, where modern tools are described.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_2",
+              "quotedSpan": "many schools use online textbooks that students can read on a screen",
+              "paragraphIndex": 1,
+              "sentenceIndex": 2,
+              "startChar": 368,
+              "endChar": 436
+            }
+          ]
+        }
+      ],
+      "structuredChoicesJson": [
+        {
+          "text": "Both texts say students mainly used online textbooks on screens.",
+          "isCorrect": false,
+          "distractorRole": "opposite_claim",
+          "rationale": "This reverses Text 1, which says children probably used only a slate and chalk.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_1",
+              "quotedSpan": "a child in the early twentieth century probably had only a slate and a piece of chalk",
+              "paragraphIndex": 1,
+              "sentenceIndex": 2,
+              "startChar": 731,
+              "endChar": 816
+            }
+          ]
+        },
+        {
+          "text": "Text 1 shows students using a slate and chalk, while Text 2 shows students using online textbooks on a screen.",
+          "isCorrect": true,
+          "distractorRole": null,
+          "rationale": "Correct. The two details show a clear difference in learning materials across time.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_1",
+              "quotedSpan": "a child in the early twentieth century probably had only a slate and a piece of chalk",
+              "paragraphIndex": 1,
+              "sentenceIndex": 2,
+              "startChar": 731,
+              "endChar": 816
+            },
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_2",
+              "quotedSpan": "many schools use online textbooks that students can read on a screen",
+              "paragraphIndex": 1,
+              "sentenceIndex": 2,
+              "startChar": 368,
+              "endChar": 436
+            }
+          ]
+        },
+        {
+          "text": "Text 1 and Text 2 both focus only on farm schedules.",
+          "isCorrect": false,
+          "distractorRole": "wrong_emphasis",
+          "rationale": "Farm schedules are one Text 1 detail and are not the main comparison across both texts.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_1",
+              "quotedSpan": "In farm areas, the school year was often shorter than it is today, because young people were needed to work on the farm.",
+              "paragraphIndex": 2,
+              "sentenceIndex": 1,
+              "startChar": 1195,
+              "endChar": 1315
+            }
+          ]
+        },
+        {
+          "text": "Text 2 says students today use slates and chalk instead of computers.",
+          "isCorrect": false,
+          "distractorRole": "wrong_section",
+          "rationale": "This puts a Text 1 detail into Text 2, where modern tools are described.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_2",
+              "quotedSpan": "many schools use online textbooks that students can read on a screen",
+              "paragraphIndex": 1,
+              "sentenceIndex": 2,
+              "startChar": 368,
+              "endChar": 436
+            }
+          ]
+        }
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "pssa_item_g3_eoy_p3_ebsr_bc312",
+      "itemId": "pssa_item_g3_eoy_p3_ebsr_bc312",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "EBSR",
+      "interactionType": "EBSR",
+      "interactionSubtype": "cross_text_shared_purpose",
+      "passageId": null,
+      "passageTitle": "Going to School: Then & Now",
+      "passageGroupId": "pssa_pg_g3_eoy_p3_school_paired",
+      "isCrossText": true,
+      "requiredEvidenceSlotsJson": [
+        "passage_1",
+        "passage_2"
+      ],
+      "passageLinks": [
+        {
+          "passageId": "pssa_psg_g3_eoy_p3_school_long_ago",
+          "role": "primary"
+        },
+        {
+          "passageId": "pssa_psg_g3_eoy_p3_school_today",
+          "role": "primary"
+        }
+      ],
+      "eligibleContent": "E03.B-C.3.1.2",
+      "reportingCategory": "B",
+      "pointValue": 2,
+      "responseSpecJson": {
+        "partA": {
+          "prompt": "What important purpose do both texts show that schools share?",
+          "choices": [
+            {
+              "text": "Both show that schools are mainly places for students to use technology.",
+              "distractorRole": "wrong_section"
+            },
+            {
+              "text": "Both show that schools exist to help children learn."
+            },
+            {
+              "text": "Both show that schools have no limits or challenges.",
+              "distractorRole": "opposite_claim"
+            },
+            {
+              "text": "Both show that lunch programs are the main reason for school.",
+              "distractorRole": "too_narrow"
+            }
+          ],
+          "correctIndex": 1,
+          "evidenceBinding": {
+            "evidenceKind": "whole_passage_synthesis",
+            "passageSlots": [
+              "passage_1",
+              "passage_2"
+            ]
+          }
+        },
+        "partB": {
+          "instruction": "Choose two excerpts, one from each text, that best support the answer to Part A.",
+          "choices": [
+            {
+              "text": "these country schools existed for one purpose: to help children learn",
+              "passageSlot": "passage_1",
+              "isCorrect": true
+            },
+            {
+              "text": "a child in the early twentieth century probably had only a slate and a piece of chalk",
+              "passageSlot": "passage_1",
+              "alignedPartAMisconception": "tools_not_purpose"
+            },
+            {
+              "text": "school exists so that children can learn and grow",
+              "passageSlot": "passage_2",
+              "isCorrect": true
+            },
+            {
+              "text": "many schools use online textbooks that students can read on a screen",
+              "passageSlot": "passage_2",
+              "alignedPartAMisconception": "tools_not_purpose"
+            }
+          ],
+          "requiredSelectionCount": 2
+        }
+      },
+      "correctResponseJson": {
+        "partA": {
+          "correctIndex": 1
+        },
+        "partB": {
+          "correctIndices": [
+            0,
+            2
+          ]
+        }
+      },
+      "scoringJson": {
+        "totalPoints": 2,
+        "partAPoints": 1,
+        "partBPoints": 1,
+        "requirePartACorrectForFullCredit": true
+      },
+      "evidenceBinding": {
+        "evidenceKind": "whole_passage_synthesis",
+        "passageSlots": [
+          "passage_1",
+          "passage_2"
+        ]
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "provenanceJson": {
+        "benchmarkSeason": "EOY",
+        "blueprintVersion": "pde-ela-diagnostic-stamina-2025-g3-eoy-v1",
+        "unit": "P3"
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_EOY_P3_ITEMS",
+        "noDbWrite": true,
+        "productionImportReady": false,
+        "intendedAssemblyBucket": "operational"
+      },
+      "partA": {
+        "prompt": "What important purpose do both texts show that schools share?",
+        "correctIndex": 1,
+        "evidenceBinding": {
+          "evidenceKind": "whole_passage_synthesis",
+          "passageSlots": [
+            "passage_1",
+            "passage_2"
+          ]
+        },
+        "choices": [
+          {
+            "text": "Both show that schools are mainly places for students to use technology.",
+            "distractorRole": "wrong_section",
+            "rationale": "This fits Text 2 more than Text 1 and does not name the shared purpose."
+          },
+          {
+            "text": "Both show that schools exist to help children learn.",
+            "distractorRole": null,
+            "rationale": "Correct. Each text includes a sentence about school helping children learn."
+          },
+          {
+            "text": "Both show that schools have no limits or challenges.",
+            "distractorRole": "opposite_claim",
+            "rationale": "This reverses both texts, which name limits in old schools and cautions about technology today."
+          },
+          {
+            "text": "Both show that lunch programs are the main reason for school.",
+            "distractorRole": "too_narrow",
+            "rationale": "This focuses on one Text 1 detail and is not shared by both texts."
+          }
+        ]
+      },
+      "partB": {
+        "instruction": "Choose two excerpts, one from each text, that best support the answer to Part A.",
+        "choices": [
+          {
+            "text": "these country schools existed for one purpose: to help children learn",
+            "passageSlot": "passage_1",
+            "isCorrect": true
+          },
+          {
+            "text": "a child in the early twentieth century probably had only a slate and a piece of chalk",
+            "passageSlot": "passage_1",
+            "alignedPartAMisconception": "tools_not_purpose"
+          },
+          {
+            "text": "school exists so that children can learn and grow",
+            "passageSlot": "passage_2",
+            "isCorrect": true
+          },
+          {
+            "text": "many schools use online textbooks that students can read on a screen",
+            "passageSlot": "passage_2",
+            "alignedPartAMisconception": "tools_not_purpose"
+          }
+        ],
+        "requiredSelectionCount": 2
+      }
+    },
+    {
+      "id": "pssa_item_g3_eoy_p3_mcq_bc211_ao1",
+      "itemId": "pssa_item_g3_eoy_p3_mcq_bc211_ao1",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "MCQ",
+      "interactionType": "MCQ",
+      "interactionSubtype": "text2_author_viewpoint",
+      "passageId": "pssa_psg_g3_eoy_p3_school_today",
+      "passageTitle": "School Today",
+      "passageGroupId": "pssa_pg_g3_eoy_p3_school_paired",
+      "isCrossText": false,
+      "passageLinks": [
+        {
+          "passageId": "pssa_psg_g3_eoy_p3_school_today",
+          "role": "primary",
+          "sortOrder": 1
+        }
+      ],
+      "eligibleContent": "E03.B-C.2.1.1",
+      "reportingCategory": "B",
+      "pointValue": 1,
+      "responseSpecJson": {
+        "prompt": "Which statement best describes the author's point of view about technology in Text 2?",
+        "choices": [
+          "Technology can help students learn in new ways, but teachers and training still matter.",
+          "Technology alone always creates a better education.",
+          "The author says every school lets each student keep a computer forever.",
+          "The author thinks the only benefit of technology is online textbooks."
+        ],
+        "structuredChoicesJson": [
+          {
+            "text": "Technology can help students learn in new ways, but teachers and training still matter."
+          },
+          {
+            "text": "Technology alone always creates a better education.",
+            "distractorRole": "opposite_claim"
+          },
+          {
+            "text": "The author says every school lets each student keep a computer forever.",
+            "distractorRole": "unsupported_inference"
+          },
+          {
+            "text": "The author thinks the only benefit of technology is online textbooks.",
+            "distractorRole": "too_narrow"
+          }
+        ]
+      },
+      "correctResponseJson": {
+        "correctIndex": 0
+      },
+      "scoringJson": {
+        "totalPoints": 1
+      },
+      "evidenceBinding": {
+        "evidenceKind": "whole_passage_synthesis",
+        "passageSlot": "passage_2"
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "provenanceJson": {
+        "benchmarkSeason": "EOY",
+        "blueprintVersion": "pde-ela-diagnostic-stamina-2025-g3-eoy-v1",
+        "unit": "P3",
+        "passageSlot": "passage_2"
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_EOY_P3_ITEMS",
+        "noDbWrite": true,
+        "productionImportReady": false,
+        "intendedAssemblyBucket": "analytics_only"
+      },
+      "studentFacingPrompt": "Which statement best describes the author's point of view about technology in Text 2?",
+      "stem": "Which statement best describes the author's point of view about technology in Text 2?",
+      "answerChoicesJson": [
+        {
+          "text": "Technology can help students learn in new ways, but teachers and training still matter.",
+          "isCorrect": true,
+          "distractorRole": null,
+          "rationale": "Correct. Text 2 balances benefits of tools with the point that teachers remain central.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "whole_passage_synthesis",
+              "passageSlot": "passage_2"
+            }
+          ]
+        },
+        {
+          "text": "Technology alone always creates a better education.",
+          "isCorrect": false,
+          "distractorRole": "opposite_claim",
+          "rationale": "This reverses the author's caution that technology alone does not make a better education.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_2",
+              "quotedSpan": "Even the best new device cannot replace a caring, well-trained teacher.",
+              "paragraphIndex": 3,
+              "sentenceIndex": 6,
+              "startChar": 1894,
+              "endChar": 1965
+            }
+          ]
+        },
+        {
+          "text": "The author says every school lets each student keep a computer forever.",
+          "isCorrect": false,
+          "distractorRole": "unsupported_inference",
+          "rationale": "The passage does not say students keep computers forever; it only says some schools let students take one home.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_2",
+              "quotedSpan": "In some schools, students may even take a school computer home.",
+              "paragraphIndex": 1,
+              "sentenceIndex": 1,
+              "startChar": 278,
+              "endChar": 341
+            }
+          ]
+        },
+        {
+          "text": "The author thinks the only benefit of technology is online textbooks.",
+          "isCorrect": false,
+          "distractorRole": "too_narrow",
+          "rationale": "This is too narrow because Text 2 names independent learning, active learning, and collaboration too.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_2",
+              "quotedSpan": "many schools use online textbooks that students can read on a screen",
+              "paragraphIndex": 1,
+              "sentenceIndex": 2,
+              "startChar": 368,
+              "endChar": 436
+            }
+          ]
+        }
+      ],
+      "structuredChoicesJson": [
+        {
+          "text": "Technology can help students learn in new ways, but teachers and training still matter.",
+          "isCorrect": true,
+          "distractorRole": null,
+          "rationale": "Correct. Text 2 balances benefits of tools with the point that teachers remain central.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "whole_passage_synthesis",
+              "passageSlot": "passage_2"
+            }
+          ]
+        },
+        {
+          "text": "Technology alone always creates a better education.",
+          "isCorrect": false,
+          "distractorRole": "opposite_claim",
+          "rationale": "This reverses the author's caution that technology alone does not make a better education.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_2",
+              "quotedSpan": "Even the best new device cannot replace a caring, well-trained teacher.",
+              "paragraphIndex": 3,
+              "sentenceIndex": 6,
+              "startChar": 1894,
+              "endChar": 1965
+            }
+          ]
+        },
+        {
+          "text": "The author says every school lets each student keep a computer forever.",
+          "isCorrect": false,
+          "distractorRole": "unsupported_inference",
+          "rationale": "The passage does not say students keep computers forever; it only says some schools let students take one home.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_2",
+              "quotedSpan": "In some schools, students may even take a school computer home.",
+              "paragraphIndex": 1,
+              "sentenceIndex": 1,
+              "startChar": 278,
+              "endChar": 341
+            }
+          ]
+        },
+        {
+          "text": "The author thinks the only benefit of technology is online textbooks.",
+          "isCorrect": false,
+          "distractorRole": "too_narrow",
+          "rationale": "This is too narrow because Text 2 names independent learning, active learning, and collaboration too.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_2",
+              "quotedSpan": "many schools use online textbooks that students can read on a screen",
+              "paragraphIndex": 1,
+              "sentenceIndex": 2,
+              "startChar": 368,
+              "endChar": 436
+            }
+          ]
+        }
+      ],
+      "correctIndex": 0,
+      "comprehensionKind": "interpretation",
+      "comprehensionKindRationale": "The item asks for the author's stance across the whole text: technology helps, but teachers remain central."
+    },
+    {
+      "id": "pssa_item_g3_eoy_p3_mcq_bv412_ao4",
+      "itemId": "pssa_item_g3_eoy_p3_mcq_bv412_ao4",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "MCQ",
+      "interactionType": "MCQ",
+      "interactionSubtype": "nonliteral_window",
+      "passageId": "pssa_psg_g3_eoy_p3_school_today",
+      "passageTitle": "School Today",
+      "passageGroupId": "pssa_pg_g3_eoy_p3_school_paired",
+      "isCrossText": false,
+      "passageLinks": [
+        {
+          "passageId": "pssa_psg_g3_eoy_p3_school_today",
+          "role": "primary",
+          "sortOrder": 1
+        }
+      ],
+      "eligibleContent": "E03.B-V.4.1.2",
+      "reportingCategory": "B",
+      "pointValue": 1,
+      "responseSpecJson": {
+        "prompt": "In Text 2, what does the author mean when saying tools can act like a \"window\"?",
+        "choices": [
+          "The tools are made of glass and open in a wall.",
+          "The tools replace teachers completely.",
+          "The tools can help students see and reach new things to learn.",
+          "The tools only help students carry books home."
+        ],
+        "structuredChoicesJson": [
+          {
+            "text": "The tools are made of glass and open in a wall.",
+            "distractorRole": "plausible_misreading"
+          },
+          {
+            "text": "The tools replace teachers completely.",
+            "distractorRole": "opposite_claim"
+          },
+          {
+            "text": "The tools can help students see and reach new things to learn."
+          },
+          {
+            "text": "The tools only help students carry books home.",
+            "distractorRole": "wrong_emphasis"
+          }
+        ]
+      },
+      "correctResponseJson": {
+        "correctIndex": 2
+      },
+      "scoringJson": {
+        "totalPoints": 1
+      },
+      "evidenceBinding": {
+        "evidenceKind": "quoted_span",
+        "passageSlot": "passage_2",
+        "quotedSpan": "For many students, these tools can act like a window, opening a view to new things to learn."
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "provenanceJson": {
+        "benchmarkSeason": "EOY",
+        "blueprintVersion": "pde-ela-diagnostic-stamina-2025-g3-eoy-v1",
+        "unit": "P3",
+        "passageSlot": "passage_2"
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_EOY_P3_ITEMS",
+        "noDbWrite": true,
+        "productionImportReady": false,
+        "intendedAssemblyBucket": "analytics_only"
+      },
+      "studentFacingPrompt": "In Text 2, what does the author mean when saying tools can act like a \"window\"?",
+      "stem": "In Text 2, what does the author mean when saying tools can act like a \"window\"?",
+      "answerChoicesJson": [
+        {
+          "text": "The tools are made of glass and open in a wall.",
+          "isCorrect": false,
+          "distractorRole": "plausible_misreading",
+          "rationale": "This reads window literally instead of as a comparison about learning.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_2",
+              "quotedSpan": "For many students, these tools can act like a window, opening a view to new things to learn.",
+              "paragraphIndex": 2,
+              "sentenceIndex": 0,
+              "startChar": 879,
+              "endChar": 971
+            }
+          ]
+        },
+        {
+          "text": "The tools replace teachers completely.",
+          "isCorrect": false,
+          "distractorRole": "opposite_claim",
+          "rationale": "This reverses the author's point that devices cannot replace caring, well-trained teachers.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_2",
+              "quotedSpan": "Even the best new device cannot replace a caring, well-trained teacher.",
+              "paragraphIndex": 3,
+              "sentenceIndex": 6,
+              "startChar": 1894,
+              "endChar": 1965
+            }
+          ]
+        },
+        {
+          "text": "The tools can help students see and reach new things to learn.",
+          "isCorrect": true,
+          "distractorRole": null,
+          "rationale": "Correct. The comparison says technology can open a view to new learning.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_2",
+              "quotedSpan": "For many students, these tools can act like a window, opening a view to new things to learn.",
+              "paragraphIndex": 2,
+              "sentenceIndex": 0,
+              "startChar": 879,
+              "endChar": 971
+            }
+          ]
+        },
+        {
+          "text": "The tools only help students carry books home.",
+          "isCorrect": false,
+          "distractorRole": "wrong_emphasis",
+          "rationale": "This overemphasizes one device detail and misses the nonliteral meaning of window.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_2",
+              "quotedSpan": "In some schools, students may even take a school computer home.",
+              "paragraphIndex": 1,
+              "sentenceIndex": 1,
+              "startChar": 278,
+              "endChar": 341
+            }
+          ]
+        }
+      ],
+      "structuredChoicesJson": [
+        {
+          "text": "The tools are made of glass and open in a wall.",
+          "isCorrect": false,
+          "distractorRole": "plausible_misreading",
+          "rationale": "This reads window literally instead of as a comparison about learning.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_2",
+              "quotedSpan": "For many students, these tools can act like a window, opening a view to new things to learn.",
+              "paragraphIndex": 2,
+              "sentenceIndex": 0,
+              "startChar": 879,
+              "endChar": 971
+            }
+          ]
+        },
+        {
+          "text": "The tools replace teachers completely.",
+          "isCorrect": false,
+          "distractorRole": "opposite_claim",
+          "rationale": "This reverses the author's point that devices cannot replace caring, well-trained teachers.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_2",
+              "quotedSpan": "Even the best new device cannot replace a caring, well-trained teacher.",
+              "paragraphIndex": 3,
+              "sentenceIndex": 6,
+              "startChar": 1894,
+              "endChar": 1965
+            }
+          ]
+        },
+        {
+          "text": "The tools can help students see and reach new things to learn.",
+          "isCorrect": true,
+          "distractorRole": null,
+          "rationale": "Correct. The comparison says technology can open a view to new learning.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_2",
+              "quotedSpan": "For many students, these tools can act like a window, opening a view to new things to learn.",
+              "paragraphIndex": 2,
+              "sentenceIndex": 0,
+              "startChar": 879,
+              "endChar": 971
+            }
+          ]
+        },
+        {
+          "text": "The tools only help students carry books home.",
+          "isCorrect": false,
+          "distractorRole": "wrong_emphasis",
+          "rationale": "This overemphasizes one device detail and misses the nonliteral meaning of window.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "quoted_span",
+              "passageSlot": "passage_2",
+              "quotedSpan": "In some schools, students may even take a school computer home.",
+              "paragraphIndex": 1,
+              "sentenceIndex": 1,
+              "startChar": 278,
+              "endChar": 341
+            }
+          ]
+        }
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": "pssa_item_g3_eoy_p3_ebsr_bk111_ao7",
+      "itemId": "pssa_item_g3_eoy_p3_ebsr_bk111_ao7",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "EBSR",
+      "interactionType": "EBSR",
+      "interactionSubtype": "text1_explicit_lunch",
+      "passageId": "pssa_psg_g3_eoy_p3_school_long_ago",
+      "passageTitle": "School Long Ago",
+      "passageGroupId": "pssa_pg_g3_eoy_p3_school_paired",
+      "isCrossText": false,
+      "passageLinks": [
+        {
+          "passageId": "pssa_psg_g3_eoy_p3_school_long_ago",
+          "role": "primary"
+        }
+      ],
+      "eligibleContent": "E03.B-K.1.1.1",
+      "reportingCategory": "B",
+      "pointValue": 2,
+      "responseSpecJson": {
+        "partA": {
+          "prompt": "What does Text 1 say about lunch at the country schools?",
+          "choices": [
+            {
+              "text": "The schools had no lunch program, so children brought food from home."
+            },
+            {
+              "text": "The schools served lunch to every student each day.",
+              "distractorRole": "opposite_claim"
+            },
+            {
+              "text": "The schools used online lunch menus on tablets.",
+              "distractorRole": "wrong_section"
+            },
+            {
+              "text": "The schools closed because students forgot lunch pails.",
+              "distractorRole": "unsupported_inference"
+            }
+          ],
+          "correctIndex": 0,
+          "evidenceBinding": {
+            "evidenceKind": "quoted_span",
+            "passageSlot": "passage_1",
+            "quotedSpan": "These schools did not have a lunch program."
+          }
+        },
+        "partB": {
+          "instruction": "Choose two sentences from Text 1 that best support the answer.",
+          "choices": [
+            {
+              "text": "These schools did not have a lunch program.",
+              "passageSlot": "passage_1",
+              "isCorrect": true
+            },
+            {
+              "text": "Students carried their own food from home, often in a metal pail.",
+              "passageSlot": "passage_1",
+              "isCorrect": true
+            },
+            {
+              "text": "A slate was a small board that a student could write on and then wipe clean to use again.",
+              "passageSlot": "passage_1",
+              "alignedPartAMisconception": "school_supplies"
+            },
+            {
+              "text": "Much of the learning happened by memorizing and reciting, repeating facts out loud until they were known well.",
+              "passageSlot": "passage_1",
+              "alignedPartAMisconception": "rote_learning"
+            }
+          ],
+          "requiredSelectionCount": 2
+        }
+      },
+      "correctResponseJson": {
+        "partA": {
+          "correctIndex": 0
+        },
+        "partB": {
+          "correctIndices": [
+            0,
+            1
+          ]
+        }
+      },
+      "scoringJson": {
+        "totalPoints": 2,
+        "partAPoints": 1,
+        "partBPoints": 1,
+        "requirePartACorrectForFullCredit": true
+      },
+      "evidenceBinding": {
+        "evidenceKind": "quoted_span",
+        "passageSlot": "passage_1",
+        "quotedSpan": "These schools did not have a lunch program."
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "provenanceJson": {
+        "benchmarkSeason": "EOY",
+        "blueprintVersion": "pde-ela-diagnostic-stamina-2025-g3-eoy-v1",
+        "unit": "P3",
+        "passageSlot": "passage_1"
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_EOY_P3_ITEMS",
+        "noDbWrite": true,
+        "productionImportReady": false,
+        "intendedAssemblyBucket": "analytics_only"
+      },
+      "partA": {
+        "prompt": "What does Text 1 say about lunch at the country schools?",
+        "correctIndex": 0,
+        "evidenceBinding": {
+          "evidenceKind": "quoted_span",
+          "passageSlot": "passage_1",
+          "quotedSpan": "These schools did not have a lunch program."
+        },
+        "choices": [
+          {
+            "text": "The schools had no lunch program, so children brought food from home.",
+            "distractorRole": null,
+            "rationale": "Correct. Text 1 gives both details directly."
+          },
+          {
+            "text": "The schools served lunch to every student each day.",
+            "distractorRole": "opposite_claim",
+            "rationale": "This reverses the sentence saying the schools did not have a lunch program."
+          },
+          {
+            "text": "The schools used online lunch menus on tablets.",
+            "distractorRole": "wrong_section",
+            "rationale": "This borrows modern technology from Text 2 and is not in Text 1."
+          },
+          {
+            "text": "The schools closed because students forgot lunch pails.",
+            "distractorRole": "unsupported_inference",
+            "rationale": "The text never says schools closed for this reason."
+          }
+        ]
+      },
+      "partB": {
+        "instruction": "Choose two sentences from Text 1 that best support the answer.",
+        "choices": [
+          {
+            "text": "These schools did not have a lunch program.",
+            "passageSlot": "passage_1",
+            "isCorrect": true
+          },
+          {
+            "text": "Students carried their own food from home, often in a metal pail.",
+            "passageSlot": "passage_1",
+            "isCorrect": true
+          },
+          {
+            "text": "A slate was a small board that a student could write on and then wipe clean to use again.",
+            "passageSlot": "passage_1",
+            "alignedPartAMisconception": "school_supplies"
+          },
+          {
+            "text": "Much of the learning happened by memorizing and reciting, repeating facts out loud until they were known well.",
+            "passageSlot": "passage_1",
+            "alignedPartAMisconception": "rote_learning"
+          }
+        ],
+        "requiredSelectionCount": 2
+      }
+    },
+    {
+      "id": "pssa_item_g3_eoy_p3_ebsr_bc311_ao8",
+      "itemId": "pssa_item_g3_eoy_p3_ebsr_bc311_ao8",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "EBSR",
+      "interactionType": "EBSR",
+      "interactionSubtype": "text2_devices_own_pace",
+      "passageId": "pssa_psg_g3_eoy_p3_school_today",
+      "passageTitle": "School Today",
+      "passageGroupId": "pssa_pg_g3_eoy_p3_school_paired",
+      "isCrossText": false,
+      "passageLinks": [
+        {
+          "passageId": "pssa_psg_g3_eoy_p3_school_today",
+          "role": "primary"
+        }
+      ],
+      "eligibleContent": "E03.B-C.3.1.1",
+      "reportingCategory": "B",
+      "pointValue": 2,
+      "responseSpecJson": {
+        "partA": {
+          "prompt": "Why can students today often learn at their own pace?",
+          "choices": [
+            {
+              "text": "Because students today always work without teachers.",
+              "distractorRole": "opposite_claim"
+            },
+            {
+              "text": "Because students long ago had slates and chalk.",
+              "distractorRole": "wrong_section"
+            },
+            {
+              "text": "Because many students can use their own devices, which can help them move ahead or slow down."
+            },
+            {
+              "text": "Because online textbooks are the only tool schools use.",
+              "distractorRole": "wrong_emphasis"
+            }
+          ],
+          "correctIndex": 2,
+          "evidenceBinding": {
+            "evidenceKind": "quoted_span",
+            "passageSlot": "passage_2",
+            "quotedSpan": "technology can help children learn at their own pace"
+          }
+        },
+        "partB": {
+          "instruction": "Choose two excerpts from Text 2 that best support the answer.",
+          "choices": [
+            {
+              "text": "each student has a computer or a tablet of their own",
+              "passageSlot": "passage_2",
+              "isCorrect": true
+            },
+            {
+              "text": "For many students, these tools can act like a window, opening a view to new things to learn.",
+              "passageSlot": "passage_2",
+              "alignedPartAMisconception": "figurative_tools"
+            },
+            {
+              "text": "technology can help children learn at their own pace",
+              "passageSlot": "passage_2",
+              "isCorrect": true
+            },
+            {
+              "text": "Teachers still plan the lessons, explain the hard ideas, and help each student who is stuck.",
+              "passageSlot": "passage_2",
+              "alignedPartAMisconception": "teacher_role"
+            }
+          ],
+          "requiredSelectionCount": 2
+        }
+      },
+      "correctResponseJson": {
+        "partA": {
+          "correctIndex": 2
+        },
+        "partB": {
+          "correctIndices": [
+            0,
+            2
+          ]
+        }
+      },
+      "scoringJson": {
+        "totalPoints": 2,
+        "partAPoints": 1,
+        "partBPoints": 1,
+        "requirePartACorrectForFullCredit": true
+      },
+      "evidenceBinding": {
+        "evidenceKind": "quoted_span",
+        "passageSlot": "passage_2",
+        "quotedSpan": "technology can help children learn at their own pace"
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "provenanceJson": {
+        "benchmarkSeason": "EOY",
+        "blueprintVersion": "pde-ela-diagnostic-stamina-2025-g3-eoy-v1",
+        "unit": "P3",
+        "passageSlot": "passage_2"
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_EOY_P3_ITEMS",
+        "noDbWrite": true,
+        "productionImportReady": false,
+        "intendedAssemblyBucket": "analytics_only"
+      },
+      "partA": {
+        "prompt": "Why can students today often learn at their own pace?",
+        "correctIndex": 2,
+        "evidenceBinding": {
+          "evidenceKind": "quoted_span",
+          "passageSlot": "passage_2",
+          "quotedSpan": "technology can help children learn at their own pace"
+        },
+        "choices": [
+          {
+            "text": "Because students today always work without teachers.",
+            "distractorRole": "opposite_claim",
+            "rationale": "This reverses the text, which says teachers still plan lessons and help students."
+          },
+          {
+            "text": "Because students long ago had slates and chalk.",
+            "distractorRole": "wrong_section",
+            "rationale": "This uses a Text 1 detail instead of the cause-and-effect relation in Text 2."
+          },
+          {
+            "text": "Because many students can use their own devices, which can help them move ahead or slow down.",
+            "distractorRole": null,
+            "rationale": "Correct. The passage connects devices and technology with learning at a student's own pace."
+          },
+          {
+            "text": "Because online textbooks are the only tool schools use.",
+            "distractorRole": "wrong_emphasis",
+            "rationale": "This focuses too much on one tool and ignores the broader device-and-pace explanation."
+          }
+        ]
+      },
+      "partB": {
+        "instruction": "Choose two excerpts from Text 2 that best support the answer.",
+        "choices": [
+          {
+            "text": "each student has a computer or a tablet of their own",
+            "passageSlot": "passage_2",
+            "isCorrect": true
+          },
+          {
+            "text": "For many students, these tools can act like a window, opening a view to new things to learn.",
+            "passageSlot": "passage_2",
+            "alignedPartAMisconception": "figurative_tools"
+          },
+          {
+            "text": "technology can help children learn at their own pace",
+            "passageSlot": "passage_2",
+            "isCorrect": true
+          },
+          {
+            "text": "Teachers still plan the lessons, explain the hard ideas, and help each student who is stuck.",
+            "passageSlot": "passage_2",
+            "alignedPartAMisconception": "teacher_role"
+          }
+        ],
+        "requiredSelectionCount": 2
+      }
+    }
+  ]
+}
