@@ -89,6 +89,36 @@ export const GRADE3_MOY_DIAGNOSTIC_BLUEPRINT = {
   sourcePool: "moy",
 } as const;
 
+export const GRADE3_EOY_DIAGNOSTIC_BLUEPRINT = {
+  blueprintVersion: "pde-ela-diagnostic-stamina-2025-g3-eoy-v1",
+  module: "PSSA",
+  subject: "ELA",
+  gradeLevel: 3,
+  deliveredItems: 45,
+  operational: { items: 35, points: 45 },
+  analyticsOnly: { items: 10, points: 16 },
+  deliveredPossiblePoints: 61,
+  passageUnits: 4,
+  rawPassages: 5,
+  totalPoints: 45,
+  conventionsOnePoint: 9,
+  shortAnswerItems: 2,
+  shortAnswerPointsEach: 3,
+  operationalAnswerPositionEligibleItems: 29,
+  operationalAnswerPositionDistribution: [7, 8, 8, 6],
+  maxCorrectPositionShare: 0.4,
+  maxOperationalReadingMcqEcRepeats: 2,
+  maxDeliveredReadingMcqEcRepeats: 3,
+  hasSections: true,
+  sections: [
+    { sectionIndex: 1, sectionType: "conventions_reading", label: "Section 1", estimatedMinutes: 60, conventionsCount: 5, readingPassages: 1, shortAnswers: 0, delivered: 12, operationalItems: 11, operationalPoints: 12, analyticsItems: 1, analyticsPoints: 1 },
+    { sectionIndex: 2, sectionType: "reading", label: "Section 2", estimatedMinutes: 80, conventionsCount: 0, readingPassages: 2, shortAnswers: 1, delivered: 18, operationalItems: 13, operationalPoints: 18, analyticsItems: 5, analyticsPoints: 7 },
+    { sectionIndex: 3, sectionType: "conventions_reading", label: "Section 3", estimatedMinutes: 60, conventionsCount: 4, readingPassages: 1, shortAnswers: 1, delivered: 15, operationalItems: 11, operationalPoints: 15, analyticsItems: 4, analyticsPoints: 8 },
+  ],
+  untimed: true,
+  sourcePool: "eoy",
+} as const;
+
 export type PssaFormSlotType = "reading_1pt" | "conventions_1pt" | "multipoint" | "short_answer";
 export type PssaFormCategory = "A" | "B" | "D";
 export type PssaScoringBucket = "operational" | "analytics_only";
@@ -550,6 +580,88 @@ const MOY_PASSAGE_ROWS = [
   { position: 5, passageId: "pssa_psg_g3_moy_p1_museum_map", passageUnitId: "pssa_psg_g3_moy_p1_museum_map", sectionIndex: 3 },
 ] as const;
 
+export const EOY_DIAGNOSTIC_SECTION_ITEM_IDS = [
+  [
+    "pssa_item_g3_eoy_p4_mcq_ak111",
+    "pssa_item_g3_eoy_p4_mcq_ak113",
+    "pssa_item_g3_eoy_p4_mcq_av411",
+    "pssa_item_g3_eoy_p4_mcq_av412",
+    "pssa_item_g3_eoy_p4_mcq_ak112",
+    "pssa_item_g3_eoy_p4_ebsr_ak113",
+    "pssa_item_g3_eoy_p4_mcq_av412_ao6",
+    "pssa_item_g3_eoy_conv_d112_plurals",
+    "pssa_item_g3_eoy_conv_d113_abstract_noun",
+    "pssa_item_g3_eoy_conv_d116_pronoun_agreement",
+    "pssa_item_g3_eoy_conv_d117_comparative",
+    "pssa_item_g3_eoy_conv_d119_sentence_formation",
+  ],
+  [
+    "pssa_item_g3_eoy_p2_mcq_ak111",
+    "pssa_item_g3_eoy_p2_mcq_ac211",
+    "pssa_item_g3_eoy_p2_mcq_av411",
+    "pssa_item_g3_eoy_p2_mcq_av412",
+    "pssa_item_g3_eoy_p2_mcq_ak112",
+    "pssa_item_g3_eoy_p2_te_ak113",
+    "pssa_item_g3_eoy_p2_sa_ak112",
+    "pssa_item_g3_eoy_p2_mcq_ac211_ao5",
+    "pssa_item_g3_eoy_p3_mcq_bk112",
+    "pssa_item_g3_eoy_p3_mcq_bc211",
+    "pssa_item_g3_eoy_p3_mcq_bv412",
+    "pssa_item_g3_eoy_p3_mcq_bk113",
+    "pssa_item_g3_eoy_p3_mcq_bc312",
+    "pssa_item_g3_eoy_p3_ebsr_bc312",
+    "pssa_item_g3_eoy_p3_mcq_bc211_ao1",
+    "pssa_item_g3_eoy_p3_mcq_bv412_ao4",
+    "pssa_item_g3_eoy_p3_ebsr_bk111_ao7",
+    "pssa_item_g3_eoy_p3_ebsr_bc311_ao8",
+  ],
+  [
+    "pssa_item_g3_eoy_p1_mcq_bk111",
+    "pssa_item_g3_eoy_p1_mcq_bc212",
+    "pssa_item_g3_eoy_p1_mcq_bc311",
+    "pssa_item_g3_eoy_p1_mcq_bv411",
+    "pssa_item_g3_eoy_p1_mcq_bc313",
+    "pssa_item_g3_eoy_p1_te_bk112",
+    "pssa_item_g3_eoy_p1_sa_bk113",
+    "pssa_item_g3_eoy_p1_mcq_bc212_ao2",
+    "pssa_item_g3_eoy_p1_mcq_bv411_ao3",
+    "pssa_item_g3_eoy_p1_te_bc313_ao9",
+    "pssa_item_g3_eoy_p1_te_bv411_ao10",
+    "pssa_item_g3_eoy_conv_d122_address_commas",
+    "pssa_item_g3_eoy_conv_d123_dialogue",
+    "pssa_item_g3_eoy_conv_d124_possessives",
+    "pssa_item_g3_eoy_conv_d126_spelling",
+  ],
+] as const;
+
+export const EOY_ANALYTICS_ITEM_IDS = new Set([
+  "pssa_item_g3_eoy_p4_mcq_av412_ao6",
+  "pssa_item_g3_eoy_p2_mcq_ac211_ao5",
+  "pssa_item_g3_eoy_p3_mcq_bc211_ao1",
+  "pssa_item_g3_eoy_p3_mcq_bv412_ao4",
+  "pssa_item_g3_eoy_p3_ebsr_bk111_ao7",
+  "pssa_item_g3_eoy_p3_ebsr_bc311_ao8",
+  "pssa_item_g3_eoy_p1_mcq_bc212_ao2",
+  "pssa_item_g3_eoy_p1_mcq_bv411_ao3",
+  "pssa_item_g3_eoy_p1_te_bc313_ao9",
+  "pssa_item_g3_eoy_p1_te_bv411_ao10",
+]);
+
+export const EOY_UNIT_SECTIONS = new Map([
+  ["pssa_psg_g3_eoy_p4_borrowed_bike", 1],
+  ["pssa_psg_g3_eoy_p2_broken_vase", 2],
+  ["pssa_pg_g3_eoy_p3_school_paired", 2],
+  ["pssa_psg_g3_eoy_p1_crayons", 3],
+]);
+
+export const EOY_PASSAGE_ROWS = [
+  { position: 1, passageId: "pssa_psg_g3_eoy_p4_borrowed_bike", passageUnitId: "pssa_psg_g3_eoy_p4_borrowed_bike", sectionIndex: 1 },
+  { position: 2, passageId: "pssa_psg_g3_eoy_p2_broken_vase", passageUnitId: "pssa_psg_g3_eoy_p2_broken_vase", sectionIndex: 2 },
+  { position: 3, passageId: "pssa_psg_g3_eoy_p3_school_long_ago", passageUnitId: "pssa_pg_g3_eoy_p3_school_paired", sectionIndex: 2 },
+  { position: 4, passageId: "pssa_psg_g3_eoy_p3_school_today", passageUnitId: "pssa_pg_g3_eoy_p3_school_paired", sectionIndex: 2 },
+  { position: 5, passageId: "pssa_psg_g3_eoy_p1_crayons", passageUnitId: "pssa_psg_g3_eoy_p1_crayons", sectionIndex: 3 },
+] as const;
+
 type DiagnosticClassifiedItem = ClassifiedAssemblyItem & {
   sectionIndex: number;
   passageUnitId: string | null;
@@ -907,6 +1019,166 @@ function validateMoySelectedForm(input: {
   return { gates, categoryPoints, totalPoints, selectedItems };
 }
 
+function sectionForEoyConvention(itemId: string) {
+  for (const [sectionIndex, ids] of EOY_DIAGNOSTIC_SECTION_ITEM_IDS.entries()) {
+    if ((ids as readonly string[]).includes(itemId)) return sectionIndex + 1;
+  }
+  return null;
+}
+
+export function expectedEoyBucket(itemId: string): PssaScoringBucket {
+  return EOY_ANALYTICS_ITEM_IDS.has(itemId) ? "analytics_only" : "operational";
+}
+
+export function eoyBucketFor(item: PssaAssemblyItem): PssaScoringBucket | { error: string } {
+  const expected = expectedEoyBucket(item.id);
+  if (!Object.prototype.hasOwnProperty.call(item, "scoringBucket") || item.scoringBucket === undefined) return expected;
+  if (item.scoringBucket === "operational" || item.scoringBucket === "analytics_only") return item.scoringBucket;
+  return { error: `missing_or_invalid_scoring_bucket:${item.id}` };
+}
+
+export function classifyEoyAssemblyItem(item: PssaAssemblyItem): DiagnosticClassifiedItem | { error: string } {
+  const ecCategory = categoryFromEligibleContent(item.eligibleContent);
+  if (!ecCategory) return { error: `category_unresolved:${item.id}` };
+  const reportingCategory = categoryFromReportingCategory(item.reportingCategory);
+  if (reportingCategory && reportingCategory !== ecCategory) return { error: `category_mismatch:${item.id}:${ecCategory}_vs_${reportingCategory}` };
+  const pointValue = Number(item.pointValue ?? 0);
+  if (!Number.isInteger(pointValue) || pointValue <= 0) return { error: `invalid_point_value:${item.id}` };
+  const interactionType = String(item.interactionType ?? "");
+  const slotType: PssaFormSlotType = interactionType === "SHORT_ANSWER"
+    ? "short_answer"
+    : ecCategory === "D"
+      ? "conventions_1pt"
+      : pointValue > 1
+        ? "multipoint"
+        : "reading_1pt";
+  const directPassageId = primaryPassageId(item) ?? ((item as any).passageId ?? null);
+  const groupId = passageGroupIdFor(item);
+  const passageUnitId = slotType === "conventions_1pt" ? null : (groupId || directPassageId);
+  if (slotType === "conventions_1pt" && (pointValue !== 1 || passageUnitId)) return { error: `invalid_conventions_slot:${item.id}` };
+  if ((slotType === "reading_1pt" || slotType === "multipoint" || slotType === "short_answer") && !passageUnitId) return { error: `missing_primary_passage:${item.id}` };
+  if (groupId && !EOY_UNIT_SECTIONS.has(groupId)) return { error: `missing_primary_passage:${item.id}` };
+  if (passageUnitId && !EOY_UNIT_SECTIONS.has(passageUnitId)) return { error: `unknown_passage_unit:${item.id}:${passageUnitId}` };
+  if (slotType === "reading_1pt" && pointValue !== 1) return { error: `invalid_reading_point_value:${item.id}` };
+  if (slotType === "short_answer" && pointValue !== GRADE3_EOY_DIAGNOSTIC_BLUEPRINT.shortAnswerPointsEach) return { error: `invalid_short_answer_points:${item.id}` };
+  if (!item.approvedContentHash) return { error: `missing_approved_hash:${item.id}` };
+  const bucket = eoyBucketFor(item);
+  if (typeof bucket !== "string") return bucket;
+  const sectionIndex = passageUnitId ? EOY_UNIT_SECTIONS.get(passageUnitId)! : sectionForEoyConvention(item.id);
+  if (!sectionIndex) return { error: `section_unresolved:${item.id}` };
+  return {
+    item,
+    itemId: item.id,
+    category: ecCategory,
+    slotType,
+    pointValue,
+    primaryPassageId: slotType === "conventions_1pt" ? null : directPassageId,
+    scoringBucket: bucket,
+    passageUnitId,
+    rawPassageIds: groupId ? groupedPassageIds(item) : (directPassageId ? [directPassageId] : []),
+    sectionIndex,
+    approvedContentHashSnapshot: item.approvedContentHash,
+  };
+}
+
+export function validateEoySelectedForm(input: {
+  selected: DiagnosticClassifiedItem[];
+  selectedPassages: SelectedPassage[];
+  sections: SelectedSection[];
+  liveReadyIds: Set<string>;
+}) {
+  const { selected, selectedPassages, sections, liveReadyIds } = input;
+  const gates: GateResult[] = [];
+  const itemIds = selected.map((row) => row.itemId);
+  const duplicateItems = itemIds.filter((id, index) => itemIds.indexOf(id) !== index);
+  const selectedItems: SelectedFormItem[] = selected.map((row, index) => ({
+    position: index + 1,
+    itemId: row.itemId,
+    slotType: row.slotType,
+    pointValue: row.pointValue,
+    category: row.category,
+    passageId: row.primaryPassageId,
+    sectionIndex: row.sectionIndex,
+    passageUnitId: row.passageUnitId,
+    scoringBucket: row.scoringBucket,
+    approvedContentHashSnapshot: row.approvedContentHashSnapshot,
+  }));
+  const operational = selected.filter((row) => row.scoringBucket === "operational");
+  const analytics = selected.filter((row) => row.scoringBucket === "analytics_only");
+  const operationalItems = selectedItems.filter((item) => item.scoringBucket !== "analytics_only");
+  const categoryPoints = selectedCategoryPoints(operationalItems);
+  const totalPoints = operational.reduce((sum, row) => sum + row.pointValue, 0);
+  const analyticsPoints = analytics.reduce((sum, row) => sum + row.pointValue, 0);
+  const deliveredPoints = selected.reduce((sum, row) => sum + row.pointValue, 0);
+  const passageUnitIds = new Set(selected.filter((row) => row.passageUnitId).map((row) => row.passageUnitId!));
+  const passageIds = new Set(selectedPassages.map((passage) => passage.passageId));
+  const analyticsIds = new Set(analytics.map((row) => row.itemId));
+  const expectedAnalytics = [...EOY_ANALYTICS_ITEM_IDS].sort();
+  const expectedBucketsOk = selected.every((row) => row.scoringBucket === expectedEoyBucket(row.itemId));
+  const deliveredTypeTotals = typeTotals(selected);
+  const operationalTypeTotals = typeTotals(operational);
+  const analyticsTypeTotals = typeTotals(analytics);
+  const positionRows = operational.filter((row) => row.item.interactionType === "MCQ" || row.item.interactionType === "INLINE_DROPDOWN");
+  const correctPositions = positionRows.map((row) => correctPosition(row.item)).filter((position): position is number => position !== null);
+  const positionCounts = new Map<number, number>();
+  for (const position of correctPositions) positionCounts.set(position, (positionCounts.get(position) ?? 0) + 1);
+  const answerDetail = [0, 1, 2, 3].map((index) => positionCounts.get(index) ?? 0);
+  const maxShare = correctPositions.length ? Math.max(...positionCounts.values()) / correctPositions.length : 0;
+  const operationalEcCounts = countsByEc(operational);
+  const deliveredEcCounts = countsByEc(selected);
+  const operationalTriples = [...operationalEcCounts].filter(([, count]) => count === 3).map(([ec]) => ec).sort();
+  const deliveredTriples = [...deliveredEcCounts].filter(([, count]) => count === 3).map(([ec]) => ec).sort();
+  const operationalReadingMcqEcCounts = countsByEc(operational.filter((row) => row.item.interactionType === "MCQ" && row.category !== "D"));
+  const deliveredReadingMcqEcCounts = countsByEc(selected.filter((row) => row.item.interactionType === "MCQ" && row.category !== "D"));
+  const maxOperationalReadingMcqRepeat = Math.max(0, ...operationalReadingMcqEcCounts.values());
+  const maxDeliveredReadingMcqRepeat = Math.max(0, ...deliveredReadingMcqEcCounts.values());
+  const p3Rows = selected.filter((row) => row.passageUnitId === "pssa_pg_g3_eoy_p3_school_paired");
+  const p3Passages = selectedPassages.filter((passage) => passage.passageUnitId === "pssa_pg_g3_eoy_p3_school_paired");
+  const readinessFailures = selected
+    .map((row) => ({ row, reason: computeStudentReadyBlockedReason(row.item) }))
+    .filter(({ reason }) => reason !== "NONE")
+    .map(({ row, reason }) => `${row.itemId}:${reason}`);
+  const conventionSectionByEc = new Map(operational.filter((row) => row.slotType === "conventions_1pt").map((row) => [String(row.item.eligibleContent), row.sectionIndex]));
+  const expectedS1Conventions = ["E03.D.1.1.2", "E03.D.1.1.3", "E03.D.1.1.6", "E03.D.1.1.7", "E03.D.1.1.9"];
+  const expectedS3Conventions = ["E03.D.1.2.2", "E03.D.1.2.3", "E03.D.1.2.4", "E03.D.1.2.6"];
+
+  addGate(gates, "section_count", sections.length === 3, `${sections.length}`);
+  addGate(gates, "live_selector_membership", selected.every((row) => liveReadyIds.has(row.itemId)), "all selected items must be live selector results");
+  addGate(gates, "selected_item_readiness", readinessFailures.length === 0, readinessFailures.join("|") || "all selected items must recompute to NONE");
+  addGate(gates, "delivered_count", selected.length === GRADE3_EOY_DIAGNOSTIC_BLUEPRINT.deliveredItems, `${selected.length}`);
+  addGate(gates, "delivered_points", deliveredPoints === GRADE3_EOY_DIAGNOSTIC_BLUEPRINT.deliveredPossiblePoints, `${deliveredPoints}`);
+  addGate(gates, "operational_total", operational.length === GRADE3_EOY_DIAGNOSTIC_BLUEPRINT.operational.items && totalPoints === GRADE3_EOY_DIAGNOSTIC_BLUEPRINT.operational.points, `${operational.length}/${totalPoints}`);
+  addGate(gates, "analytics_total", analytics.length === GRADE3_EOY_DIAGNOSTIC_BLUEPRINT.analyticsOnly.items && analyticsPoints === GRADE3_EOY_DIAGNOSTIC_BLUEPRINT.analyticsOnly.points, `${analytics.length}/${analyticsPoints}`);
+  addGate(gates, "analytics_id_set", stableStringify([...analyticsIds].sort()) === stableStringify(expectedAnalytics), [...analyticsIds].sort().join("|"));
+  addGate(gates, "scoring_bucket_assignment", expectedBucketsOk, selected.filter((row) => row.scoringBucket !== expectedEoyBucket(row.itemId)).map((row) => `${row.itemId}:${row.scoringBucket}->${expectedEoyBucket(row.itemId)}`).join("|") || "pinned buckets");
+  addGate(gates, "passage_count", passageUnitIds.size === GRADE3_EOY_DIAGNOSTIC_BLUEPRINT.passageUnits && selectedPassages.length === GRADE3_EOY_DIAGNOSTIC_BLUEPRINT.rawPassages, `${passageUnitIds.size} units/${selectedPassages.length} rows`);
+  addGate(gates, "passage_membership", selected.every((row) => row.slotType === "conventions_1pt" || row.rawPassageIds.every((id) => passageIds.has(id))), "all passage-based items use form passages");
+  addGate(gates, "p3_group_integrity", p3Rows.length === 10 && p3Rows.every((row) => row.sectionIndex === 2) && p3Passages.length === 2 && p3Passages.every((row) => row.sectionIndex === 2), `p3Items=${p3Rows.length}; p3Passages=${p3Passages.length}`);
+  addGate(gates, "no_duplicate_items", duplicateItems.length === 0, duplicateItems.join("|") || "none");
+  addGate(gates, "no_deprecated_or_retired", selected.every((row) => row.item.itemStatus === "pilot_ready" && !row.item.retiredAt && !row.item.deprecatedReason), "selector should make this structural");
+  addGate(gates, "delivered_type_totals", typeTotalsMatch(deliveredTypeTotals, { readingMcq: 26, conventions: 9, ebsr: 4, te: 4, shortAnswer: 2 }), stableStringify(deliveredTypeTotals));
+  addGate(gates, "operational_type_totals", typeTotalsMatch(operationalTypeTotals, { readingMcq: 20, conventions: 9, ebsr: 2, te: 2, shortAnswer: 2 }), stableStringify(operationalTypeTotals));
+  addGate(gates, "analytics_type_totals", typeTotalsMatch(analyticsTypeTotals, { readingMcq: 6, conventions: 0, ebsr: 2, te: 2, shortAnswer: 0 }), stableStringify(analyticsTypeTotals));
+  addGate(gates, "answer_position_distribution", correctPositions.length === GRADE3_EOY_DIAGNOSTIC_BLUEPRINT.operationalAnswerPositionEligibleItems && stableStringify(answerDetail) === stableStringify(GRADE3_EOY_DIAGNOSTIC_BLUEPRINT.operationalAnswerPositionDistribution) && maxShare <= GRADE3_EOY_DIAGNOSTIC_BLUEPRINT.maxCorrectPositionShare, `eligible=${correctPositions.length} A=${answerDetail[0]} B=${answerDetail[1]} C=${answerDetail[2]} D=${answerDetail[3]} maxShare=${maxShare.toFixed(3)}`);
+  addGate(gates, "operational_ec_caps", stableStringify(operationalTriples) === stableStringify(["E03.A-K.1.1.2", "E03.A-K.1.1.3"]) && Math.max(...operationalEcCounts.values()) === 3 && maxOperationalReadingMcqRepeat <= GRADE3_EOY_DIAGNOSTIC_BLUEPRINT.maxOperationalReadingMcqEcRepeats, `triples=${operationalTriples.join("|")}; opReadingMcqMax=${maxOperationalReadingMcqRepeat}; ${ecCountDetail(operationalEcCounts)}`);
+  addGate(gates, "delivered_ec_caps", stableStringify(deliveredTriples) === stableStringify(["E03.A-K.1.1.2", "E03.A-K.1.1.3", "E03.A-V.4.1.2", "E03.B-V.4.1.1"]) && maxDeliveredReadingMcqRepeat <= GRADE3_EOY_DIAGNOSTIC_BLUEPRINT.maxDeliveredReadingMcqEcRepeats, `triples=${deliveredTriples.join("|")}; maxReadingMcq=${maxDeliveredReadingMcqRepeat}; ${ecCountDetail(deliveredEcCounts)}`);
+  addGate(gates, "conventions_by_ec_section", expectedS1Conventions.every((ec) => conventionSectionByEc.get(ec) === 1) && expectedS3Conventions.every((ec) => conventionSectionByEc.get(ec) === 3), `S1=${expectedS1Conventions.map((ec) => `${ec}:${conventionSectionByEc.get(ec)}`).join("|")} S3=${expectedS3Conventions.map((ec) => `${ec}:${conventionSectionByEc.get(ec)}`).join("|")}`);
+  for (const section of GRADE3_EOY_DIAGNOSTIC_BLUEPRINT.sections) {
+    const rows = selected.filter((row) => row.sectionIndex === section.sectionIndex);
+    const opRows = rows.filter((row) => row.scoringBucket === "operational");
+    const analyticsRows = rows.filter((row) => row.scoringBucket === "analytics_only");
+    const detail = `delivered=${rows.length} op=${opRows.length}/${opRows.reduce((sum, row) => sum + row.pointValue, 0)} analytics=${analyticsRows.length}/${analyticsRows.reduce((sum, row) => sum + row.pointValue, 0)}`;
+    const ok = rows.length === section.delivered
+      && opRows.length === section.operationalItems
+      && opRows.reduce((sum, row) => sum + row.pointValue, 0) === section.operationalPoints
+      && analyticsRows.length === section.analyticsItems
+      && analyticsRows.reduce((sum, row) => sum + row.pointValue, 0) === section.analyticsPoints;
+    addGate(gates, `section_${section.sectionIndex}_composition`, ok, detail);
+  }
+
+  return { gates, categoryPoints, totalPoints, selectedItems };
+}
+
 function orderSelectedItems(seed: string, selected: ClassifiedAssemblyItem[], passageOrder: string[]) {
   const byPassage = passageOrder.flatMap((passageId) => {
     const block = selected.filter((row) => row.primaryPassageId === passageId && (row.slotType === "reading_1pt" || row.slotType === "multipoint"));
@@ -936,6 +1208,11 @@ function collectPassageMap(items: PssaAssemblyItem[]) {
 }
 
 type MoyAssemblyOverrides = {
+  sectionItemIds?: readonly (readonly string[])[];
+  passageRows?: readonly { position: number; passageId: string; passageUnitId: string; sectionIndex: number }[];
+};
+
+type EoyAssemblyOverrides = {
   sectionItemIds?: readonly (readonly string[])[];
   passageRows?: readonly { position: number; passageId: string; passageUnitId: string; sectionIndex: number }[];
 };
@@ -1036,6 +1313,102 @@ export function assembleMoyDiagnosticFormFromPoolForTest(input: {
   return assembleMoyDiagnosticFormFromPool(input, overrides);
 }
 
+function assembleEoyDiagnosticFormFromPool(input: {
+  seed: string;
+  blueprintVersion: string;
+  readyItems: PssaAssemblyItem[];
+  allItems?: PssaAssemblyItem[];
+}, overrides: EoyAssemblyOverrides = {}): AssemblyResult {
+  const gates: GateResult[] = [];
+  if (!input.seed) throw new Error("--seed is required.");
+  if (GRADE3_EOY_DIAGNOSTIC_BLUEPRINT.sections.length !== 3) throw new Error("EOY diagnostic blueprint requires exactly 3 sections.");
+  const liveReadyIds = new Set(input.readyItems.map((item) => item.id));
+  const byId = new Map(input.readyItems.map((item) => [item.id, item]));
+  const sectionItemIds = overrides.sectionItemIds ?? EOY_DIAGNOSTIC_SECTION_ITEM_IDS;
+  const selectedIds = sectionItemIds.flatMap((ids) => [...ids]);
+  const missingIds = selectedIds.filter((id) => !byId.has(id));
+  addGate(gates, "pinned_selection_presence", missingIds.length === 0, missingIds.join("|") || "all pinned EOY items present");
+  const deficits = buildDeficits(input.readyItems.flatMap((item) => {
+    const result = classifyAssemblyItem(item);
+    return "error" in result ? [] : [result];
+  }), input.allItems ?? input.readyItems);
+  const sections = GRADE3_EOY_DIAGNOSTIC_BLUEPRINT.sections.map((section) => ({
+    sectionIndex: section.sectionIndex,
+    sectionType: section.sectionType,
+    label: section.label,
+    estimatedMinutes: section.estimatedMinutes,
+  }));
+  if (missingIds.length) {
+    return { ok: false, refusedReason: `PINNED_ITEMS_MISSING:${missingIds.join("|")}`, contentHash: null, canonical: null, sections, passages: [], items: [], categoryPoints: { A: 0, B: 0, D: 0 }, totalPoints: 0, gates, deficits };
+  }
+
+  const classificationErrors: string[] = [];
+  const sectionByItemId = new Map(sectionItemIds.flatMap((ids, sectionIndex) => [...ids].map((id) => [id, sectionIndex + 1] as const)));
+  const selected = selectedIds.flatMap((itemId) => {
+    const result = classifyEoyAssemblyItem(byId.get(itemId)!);
+    if ("error" in result) {
+      classificationErrors.push(result.error);
+      return [];
+    }
+    return [{ ...result, sectionIndex: sectionByItemId.get(itemId)! }];
+  });
+  addGate(gates, "classification", classificationErrors.length === 0, classificationErrors.join("|") || "all pinned EOY items classified");
+  if (classificationErrors.length) {
+    return { ok: false, refusedReason: classificationErrors[0], contentHash: null, canonical: null, sections, passages: [], items: [], categoryPoints: { A: 0, B: 0, D: 0 }, totalPoints: 0, gates, deficits };
+  }
+
+  const passageMap = collectPassageMap(input.readyItems);
+  const selectedPassages: SelectedPassage[] = (overrides.passageRows ?? EOY_PASSAGE_ROWS).map((row) => ({
+    ...row,
+    categoryPoints: { A: 0, B: 0, D: 0 },
+    approvedPassageContentHashSnapshot: passageMap.get(row.passageId)?.approvedContentHash ?? "",
+  }));
+  const validation = validateEoySelectedForm({ selected, selectedPassages, sections, liveReadyIds });
+  for (const passage of selectedPassages) {
+    const passageItems = validation.selectedItems.filter((item) => item.passageUnitId === passage.passageUnitId && item.scoringBucket !== "analytics_only");
+    passage.categoryPoints = selectedCategoryPoints(passageItems);
+  }
+  const allGates = [...gates, ...validation.gates];
+  if (allGates.some((gate) => gate.status === "FAIL")) {
+    return {
+      ok: false,
+      refusedReason: "BLUEPRINT_UNSATISFIED",
+      contentHash: null,
+      canonical: null,
+      sections,
+      passages: selectedPassages,
+      items: validation.selectedItems,
+      categoryPoints: validation.categoryPoints,
+      totalPoints: validation.totalPoints,
+      gates: allGates,
+      deficits,
+    };
+  }
+  const canonical = buildCanonical(input.blueprintVersion, selectedPassages, validation.selectedItems, sections);
+  return {
+    ok: true,
+    refusedReason: null,
+    contentHash: computePssaFormContentHash(canonical),
+    canonical,
+    sections,
+    passages: selectedPassages,
+    items: validation.selectedItems,
+    categoryPoints: validation.categoryPoints,
+    totalPoints: validation.totalPoints,
+    gates: allGates,
+    deficits,
+  };
+}
+
+export function assembleEoyDiagnosticFormFromPoolForTest(input: {
+  seed: string;
+  blueprintVersion: string;
+  readyItems: PssaAssemblyItem[];
+  allItems?: PssaAssemblyItem[];
+}, overrides: EoyAssemblyOverrides = {}) {
+  return assembleEoyDiagnosticFormFromPool(input, overrides);
+}
+
 export function assembleDiagnosticFormFromPool(input: {
   seed: string;
   blueprintVersion: string;
@@ -1045,6 +1418,7 @@ export function assembleDiagnosticFormFromPool(input: {
   const gates: GateResult[] = [];
   if (!input.seed) throw new Error("--seed is required.");
   if (input.blueprintVersion === GRADE3_MOY_DIAGNOSTIC_BLUEPRINT.blueprintVersion) return assembleMoyDiagnosticFormFromPool(input);
+  if (input.blueprintVersion === GRADE3_EOY_DIAGNOSTIC_BLUEPRINT.blueprintVersion) return assembleEoyDiagnosticFormFromPool(input);
   if (input.blueprintVersion !== GRADE3_DIAGNOSTIC_BLUEPRINT.blueprintVersion) throw new Error(`Unsupported blueprint: ${input.blueprintVersion}`);
   if (GRADE3_DIAGNOSTIC_BLUEPRINT.sections.length !== 3) throw new Error("Diagnostic blueprint requires exactly 3 sections.");
   const liveReadyIds = new Set(input.readyItems.map((item) => item.id));
