@@ -28,6 +28,7 @@ import { buildEoyP1Packet } from "./content/author-pssa-eoy-p1";
 import { buildEoyP2Packet } from "./content/author-pssa-eoy-p2";
 import { buildEoyP3Packet } from "./content/author-pssa-eoy-p3";
 import { buildEoyP4Packet } from "./content/author-pssa-eoy-p4";
+import { buildEoyConventionsPacket } from "./content/author-pssa-eoy-conventions";
 import {
   PSSA_CONTENT_QUALITY_GATE_IDS,
   buildPlan,
@@ -218,6 +219,8 @@ const eoyP3Group = eoyP3Packet.passageGroups[0] as any;
 const eoyP4Packet = buildEoyP4Packet();
 const eoyP4Items = eoyP4Packet.items as any[];
 const eoyP4Passage = eoyP4Packet.passages[0] as any;
+const eoyConventionsPacket = buildEoyConventionsPacket();
+const eoyConventionsItems = eoyConventionsPacket.items as any[];
 const expectedStaminaConventions = [
   {
     id: "conv_01",
@@ -690,6 +693,39 @@ for (const item of eoyP4Items) {
   assert.equal(item.scoringBucket, undefined, `${item.itemId} must not set scoringBucket in the bank`);
   assert.equal(item.reviewStatus, "PENDING", `${item.itemId} reviewStatus must be PENDING`);
   assert.equal(item.itemStatus, "candidate", `${item.itemId} itemStatus must be candidate`);
+  projectPssaStudentItem(item);
+}
+assert.equal(eoyConventionsPacket.noDbWrite, true, "EOY conventions packet must be file-only noDbWrite");
+assert.equal(eoyConventionsPacket.productionImportReady, false, "EOY conventions packet must not be production import ready");
+assert.equal(eoyConventionsItems.length, 9, "EOY conventions tranche must contain exactly nine items");
+assert.deepEqual(
+  eoyConventionsItems.map((item: any) => [item.itemId, item.eligibleContent, item.interactionType, item.interactionSubtype, item.pointValue, item.blanks[0].correctIndex]),
+  [
+    ["pssa_item_g3_eoy_conv_d112_plurals", "E03.D.1.1.2", "INLINE_DROPDOWN", "single_blank", 1, 0],
+    ["pssa_item_g3_eoy_conv_d113_abstract_noun", "E03.D.1.1.3", "INLINE_DROPDOWN", "single_blank", 1, 1],
+    ["pssa_item_g3_eoy_conv_d116_pronoun_agreement", "E03.D.1.1.6", "INLINE_DROPDOWN", "single_blank", 1, 0],
+    ["pssa_item_g3_eoy_conv_d117_comparative", "E03.D.1.1.7", "INLINE_DROPDOWN", "single_blank", 1, 2],
+    ["pssa_item_g3_eoy_conv_d119_sentence_formation", "E03.D.1.1.9", "INLINE_DROPDOWN", "single_blank", 1, 0],
+    ["pssa_item_g3_eoy_conv_d122_address_commas", "E03.D.1.2.2", "INLINE_DROPDOWN", "single_blank", 1, 3],
+    ["pssa_item_g3_eoy_conv_d123_dialogue", "E03.D.1.2.3", "INLINE_DROPDOWN", "single_blank", 1, 1],
+    ["pssa_item_g3_eoy_conv_d124_possessives", "E03.D.1.2.4", "INLINE_DROPDOWN", "single_blank", 1, 2],
+    ["pssa_item_g3_eoy_conv_d126_spelling", "E03.D.1.2.6", "INLINE_DROPDOWN", "single_blank", 1, 3],
+  ],
+  "EOY conventions EC/type/key table must match the locked spec",
+);
+assert.equal(new Set(eoyConventionsItems.map((item: any) => item.eligibleContent)).size, 9, "EOY conventions ECs must be distinct");
+const eoyConventionsKeyCounts = [0, 0, 0, 0];
+for (const item of eoyConventionsItems) eoyConventionsKeyCounts[item.blanks[0].correctIndex] += 1;
+assert.deepEqual(eoyConventionsKeyCounts, [3, 2, 2, 2], "EOY conventions key tally must be A3/B2/C2/D2");
+for (const item of eoyConventionsItems) {
+  assert.equal(item.passageId, null, `${item.itemId} must be standalone`);
+  assert.equal(item.ecSkillFamily, "conventions", `${item.itemId} ecSkillFamily`);
+  assert.equal(item.reviewStatus, "PENDING", `${item.itemId} reviewStatus must be PENDING`);
+  assert.equal(item.itemStatus, "candidate", `${item.itemId} itemStatus must be candidate`);
+  assert.equal(item.scoringBucket, undefined, `${item.itemId} must not set scoringBucket in the bank`);
+  assert.equal(item.section, undefined, `${item.itemId} must not set section in the bank`);
+  assert.equal(item.blanks[0].options.length, 4, `${item.itemId} must have four options`);
+  for (const option of item.blanks[0].options) assert.equal(option.distractorRole, undefined, `${item.itemId} must not carry distractorRole`);
   projectPssaStudentItem(item);
 }
 assert.equal(evaluatePssaItemIntraChoiceDuplicate({

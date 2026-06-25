@@ -1,0 +1,1169 @@
+{
+  "generatedAt": "2026-06-25T20:56:28.432Z",
+  "noDbWrite": true,
+  "productionImportReady": false,
+  "itemCount": 9,
+  "items": [
+    {
+      "id": "pssa_item_g3_eoy_conv_d112_plurals",
+      "itemId": "pssa_item_g3_eoy_conv_d112_plurals",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "INLINE_DROPDOWN",
+      "interactionType": "INLINE_DROPDOWN",
+      "interactionSubtype": "single_blank",
+      "passageId": null,
+      "ecSkillFamily": "conventions",
+      "eligibleContent": "E03.D.1.1.2",
+      "reportingCategory": "D",
+      "pointValue": 1,
+      "targetConvention": "regular and irregular plural nouns",
+      "targetSubskill": "irregular_plural_nouns",
+      "stem": "Choose the plural noun that correctly completes the sentence.",
+      "instructionText": "Choose the option that correctly completes the sentence.",
+      "baseTextWithBlanks": "The farmer counted six ___ beside the pond.",
+      "blanks": [
+        {
+          "blankId": "pssa_item_g3_eoy_conv_d112_plurals_blank",
+          "position": 23,
+          "options": [
+            {
+              "text": "geese",
+              "errorPattern": null,
+              "rationale": "Geese is the correct irregular plural form of goose."
+            },
+            {
+              "text": "gooses",
+              "errorPattern": "regular_s_added_to_irregular_noun",
+              "rationale": "Gooses incorrectly adds regular -s to an irregular noun."
+            },
+            {
+              "text": "goose",
+              "errorPattern": "singular_used_where_plural_needed",
+              "rationale": "Goose is singular, but the sentence names six animals."
+            },
+            {
+              "text": "geeses",
+              "errorPattern": "extra_s_on_irregular_plural",
+              "rationale": "Geeses adds an extra ending to the already-plural word geese."
+            }
+          ],
+          "correctIndex": 0,
+          "targetSkill": "irregular plural nouns",
+          "targetWordOrPhrase": "geese",
+          "rationale": "Geese is the correct irregular plural form of goose."
+        }
+      ],
+      "correctResponseJson": {
+        "blanks": [
+          {
+            "blankId": "pssa_item_g3_eoy_conv_d112_plurals_blank",
+            "correctIndex": 0
+          }
+        ]
+      },
+      "scoringJson": {
+        "totalPoints": 1
+      },
+      "scoring": {
+        "totalPoints": 1,
+        "partialCreditRules": [
+          {
+            "points": 1,
+            "rule": "The single correct convention response is selected."
+          },
+          {
+            "points": 0,
+            "rule": "Any incorrect, ambiguous, missing, or extra response earns no credit."
+          }
+        ],
+        "scoringNotes": "Full credit requires the one defensible convention answer and no contradictory answer."
+      },
+      "responseSpecJson": {
+        "stem": "Choose the plural noun that correctly completes the sentence.",
+        "baseTextWithBlanks": "The farmer counted six ___ beside the pond.",
+        "blanks": [
+          {
+            "blankId": "pssa_item_g3_eoy_conv_d112_plurals_blank",
+            "position": 23,
+            "options": [
+              {
+                "text": "geese",
+                "errorPattern": null,
+                "rationale": "Geese is the correct irregular plural form of goose."
+              },
+              {
+                "text": "gooses",
+                "errorPattern": "regular_s_added_to_irregular_noun",
+                "rationale": "Gooses incorrectly adds regular -s to an irregular noun."
+              },
+              {
+                "text": "goose",
+                "errorPattern": "singular_used_where_plural_needed",
+                "rationale": "Goose is singular, but the sentence names six animals."
+              },
+              {
+                "text": "geeses",
+                "errorPattern": "extra_s_on_irregular_plural",
+                "rationale": "Geeses adds an extra ending to the already-plural word geese."
+              }
+            ],
+            "targetSkill": "irregular plural nouns",
+            "targetWordOrPhrase": "geese"
+          }
+        ]
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "approvalEligible": false,
+      "provenanceJson": {
+        "benchmarkSeason": "EOY",
+        "blueprintVersion": "pde-ela-diagnostic-stamina-2025-g3-eoy-v1",
+        "unit": "conventions"
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_EOY_CONVENTIONS_ITEMS",
+        "noDbWrite": true,
+        "productionImportReady": false
+      }
+    },
+    {
+      "id": "pssa_item_g3_eoy_conv_d113_abstract_noun",
+      "itemId": "pssa_item_g3_eoy_conv_d113_abstract_noun",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "INLINE_DROPDOWN",
+      "interactionType": "INLINE_DROPDOWN",
+      "interactionSubtype": "single_blank",
+      "passageId": null,
+      "ecSkillFamily": "conventions",
+      "eligibleContent": "E03.D.1.1.3",
+      "reportingCategory": "D",
+      "pointValue": 1,
+      "targetConvention": "abstract nouns",
+      "targetSubskill": "abstract_nouns",
+      "stem": "Choose the noun that correctly completes the sentence.",
+      "instructionText": "Choose the option that correctly completes the sentence.",
+      "baseTextWithBlanks": "The children showed great ___ when they shared their snacks.",
+      "blanks": [
+        {
+          "blankId": "pssa_item_g3_eoy_conv_d113_abstract_noun_blank",
+          "position": 26,
+          "options": [
+            {
+              "text": "kind",
+              "errorPattern": "adjective_used_where_abstract_noun_needed",
+              "rationale": "Kind is an adjective, but the sentence needs a noun that names the quality."
+            },
+            {
+              "text": "kindness",
+              "errorPattern": null,
+              "rationale": "Kindness is an abstract noun that names the quality the children showed."
+            },
+            {
+              "text": "kindly",
+              "errorPattern": "adverb_used_where_abstract_noun_needed",
+              "rationale": "Kindly is an adverb, not the noun needed after showed great."
+            },
+            {
+              "text": "kinder",
+              "errorPattern": "comparative_used_where_abstract_noun_needed",
+              "rationale": "Kinder compares qualities, but it is not the noun form needed here."
+            }
+          ],
+          "correctIndex": 1,
+          "targetSkill": "abstract noun",
+          "targetWordOrPhrase": "kindness",
+          "rationale": "Kindness is an abstract noun that names the quality the children showed."
+        }
+      ],
+      "correctResponseJson": {
+        "blanks": [
+          {
+            "blankId": "pssa_item_g3_eoy_conv_d113_abstract_noun_blank",
+            "correctIndex": 1
+          }
+        ]
+      },
+      "scoringJson": {
+        "totalPoints": 1
+      },
+      "scoring": {
+        "totalPoints": 1,
+        "partialCreditRules": [
+          {
+            "points": 1,
+            "rule": "The single correct convention response is selected."
+          },
+          {
+            "points": 0,
+            "rule": "Any incorrect, ambiguous, missing, or extra response earns no credit."
+          }
+        ],
+        "scoringNotes": "Full credit requires the one defensible convention answer and no contradictory answer."
+      },
+      "responseSpecJson": {
+        "stem": "Choose the noun that correctly completes the sentence.",
+        "baseTextWithBlanks": "The children showed great ___ when they shared their snacks.",
+        "blanks": [
+          {
+            "blankId": "pssa_item_g3_eoy_conv_d113_abstract_noun_blank",
+            "position": 26,
+            "options": [
+              {
+                "text": "kind",
+                "errorPattern": "adjective_used_where_abstract_noun_needed",
+                "rationale": "Kind is an adjective, but the sentence needs a noun that names the quality."
+              },
+              {
+                "text": "kindness",
+                "errorPattern": null,
+                "rationale": "Kindness is an abstract noun that names the quality the children showed."
+              },
+              {
+                "text": "kindly",
+                "errorPattern": "adverb_used_where_abstract_noun_needed",
+                "rationale": "Kindly is an adverb, not the noun needed after showed great."
+              },
+              {
+                "text": "kinder",
+                "errorPattern": "comparative_used_where_abstract_noun_needed",
+                "rationale": "Kinder compares qualities, but it is not the noun form needed here."
+              }
+            ],
+            "targetSkill": "abstract noun",
+            "targetWordOrPhrase": "kindness"
+          }
+        ]
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "approvalEligible": false,
+      "provenanceJson": {
+        "benchmarkSeason": "EOY",
+        "blueprintVersion": "pde-ela-diagnostic-stamina-2025-g3-eoy-v1",
+        "unit": "conventions"
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_EOY_CONVENTIONS_ITEMS",
+        "noDbWrite": true,
+        "productionImportReady": false
+      }
+    },
+    {
+      "id": "pssa_item_g3_eoy_conv_d116_pronoun_agreement",
+      "itemId": "pssa_item_g3_eoy_conv_d116_pronoun_agreement",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "INLINE_DROPDOWN",
+      "interactionType": "INLINE_DROPDOWN",
+      "interactionSubtype": "single_blank",
+      "passageId": null,
+      "ecSkillFamily": "conventions",
+      "eligibleContent": "E03.D.1.1.6",
+      "reportingCategory": "D",
+      "pointValue": 1,
+      "targetConvention": "pronoun-antecedent agreement",
+      "targetSubskill": "pronoun_antecedent_agreement",
+      "stem": "Choose the pronoun that correctly completes the sentence.",
+      "instructionText": "Choose the option that correctly completes the sentence.",
+      "baseTextWithBlanks": "The two hikers packed ___ own water bottles.",
+      "blanks": [
+        {
+          "blankId": "pssa_item_g3_eoy_conv_d116_pronoun_agreement_blank",
+          "position": 22,
+          "options": [
+            {
+              "text": "their",
+              "errorPattern": null,
+              "rationale": "Their is a possessive pronoun that agrees with the plural antecedent two hikers."
+            },
+            {
+              "text": "his",
+              "errorPattern": "singular_pronoun_with_plural_antecedent",
+              "rationale": "His is singular, but two hikers is plural."
+            },
+            {
+              "text": "they",
+              "errorPattern": "subject_pronoun_used_where_possessive_needed",
+              "rationale": "They is a subject pronoun, but the sentence needs a possessive before own."
+            },
+            {
+              "text": "our",
+              "errorPattern": "first_person_pronoun_mismatch",
+              "rationale": "Our does not match the third-person antecedent two hikers."
+            }
+          ],
+          "correctIndex": 0,
+          "targetSkill": "pronoun-antecedent agreement",
+          "targetWordOrPhrase": "their",
+          "rationale": "Their is a possessive pronoun that agrees with the plural antecedent two hikers."
+        }
+      ],
+      "correctResponseJson": {
+        "blanks": [
+          {
+            "blankId": "pssa_item_g3_eoy_conv_d116_pronoun_agreement_blank",
+            "correctIndex": 0
+          }
+        ]
+      },
+      "scoringJson": {
+        "totalPoints": 1
+      },
+      "scoring": {
+        "totalPoints": 1,
+        "partialCreditRules": [
+          {
+            "points": 1,
+            "rule": "The single correct convention response is selected."
+          },
+          {
+            "points": 0,
+            "rule": "Any incorrect, ambiguous, missing, or extra response earns no credit."
+          }
+        ],
+        "scoringNotes": "Full credit requires the one defensible convention answer and no contradictory answer."
+      },
+      "responseSpecJson": {
+        "stem": "Choose the pronoun that correctly completes the sentence.",
+        "baseTextWithBlanks": "The two hikers packed ___ own water bottles.",
+        "blanks": [
+          {
+            "blankId": "pssa_item_g3_eoy_conv_d116_pronoun_agreement_blank",
+            "position": 22,
+            "options": [
+              {
+                "text": "their",
+                "errorPattern": null,
+                "rationale": "Their is a possessive pronoun that agrees with the plural antecedent two hikers."
+              },
+              {
+                "text": "his",
+                "errorPattern": "singular_pronoun_with_plural_antecedent",
+                "rationale": "His is singular, but two hikers is plural."
+              },
+              {
+                "text": "they",
+                "errorPattern": "subject_pronoun_used_where_possessive_needed",
+                "rationale": "They is a subject pronoun, but the sentence needs a possessive before own."
+              },
+              {
+                "text": "our",
+                "errorPattern": "first_person_pronoun_mismatch",
+                "rationale": "Our does not match the third-person antecedent two hikers."
+              }
+            ],
+            "targetSkill": "pronoun-antecedent agreement",
+            "targetWordOrPhrase": "their"
+          }
+        ]
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "approvalEligible": false,
+      "provenanceJson": {
+        "benchmarkSeason": "EOY",
+        "blueprintVersion": "pde-ela-diagnostic-stamina-2025-g3-eoy-v1",
+        "unit": "conventions"
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_EOY_CONVENTIONS_ITEMS",
+        "noDbWrite": true,
+        "productionImportReady": false
+      }
+    },
+    {
+      "id": "pssa_item_g3_eoy_conv_d117_comparative",
+      "itemId": "pssa_item_g3_eoy_conv_d117_comparative",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "INLINE_DROPDOWN",
+      "interactionType": "INLINE_DROPDOWN",
+      "interactionSubtype": "single_blank",
+      "passageId": null,
+      "ecSkillFamily": "conventions",
+      "eligibleContent": "E03.D.1.1.7",
+      "reportingCategory": "D",
+      "pointValue": 1,
+      "targetConvention": "comparative and superlative adjectives",
+      "targetSubskill": "comparative_superlative",
+      "stem": "Choose the adjective that correctly completes the sentence.",
+      "instructionText": "Choose the option that correctly completes the sentence.",
+      "baseTextWithBlanks": "Of the three kittens, the gray one is the ___.",
+      "blanks": [
+        {
+          "blankId": "pssa_item_g3_eoy_conv_d117_comparative_blank",
+          "position": 42,
+          "options": [
+            {
+              "text": "smaller",
+              "errorPattern": "comparative_used_for_three_or_more",
+              "rationale": "Smaller compares two things, but the sentence compares three kittens."
+            },
+            {
+              "text": "more small",
+              "errorPattern": "more_used_with_short_adjective",
+              "rationale": "More small is not the standard comparative or superlative form for the short adjective small."
+            },
+            {
+              "text": "smallest",
+              "errorPattern": null,
+              "rationale": "Smallest is the superlative form used when comparing three or more."
+            },
+            {
+              "text": "most small",
+              "errorPattern": "most_used_with_short_adjective",
+              "rationale": "Most small is not the standard superlative form for the short adjective small."
+            }
+          ],
+          "correctIndex": 2,
+          "targetSkill": "superlative adjective",
+          "targetWordOrPhrase": "smallest",
+          "rationale": "Smallest is the superlative form used when comparing three or more."
+        }
+      ],
+      "correctResponseJson": {
+        "blanks": [
+          {
+            "blankId": "pssa_item_g3_eoy_conv_d117_comparative_blank",
+            "correctIndex": 2
+          }
+        ]
+      },
+      "scoringJson": {
+        "totalPoints": 1
+      },
+      "scoring": {
+        "totalPoints": 1,
+        "partialCreditRules": [
+          {
+            "points": 1,
+            "rule": "The single correct convention response is selected."
+          },
+          {
+            "points": 0,
+            "rule": "Any incorrect, ambiguous, missing, or extra response earns no credit."
+          }
+        ],
+        "scoringNotes": "Full credit requires the one defensible convention answer and no contradictory answer."
+      },
+      "responseSpecJson": {
+        "stem": "Choose the adjective that correctly completes the sentence.",
+        "baseTextWithBlanks": "Of the three kittens, the gray one is the ___.",
+        "blanks": [
+          {
+            "blankId": "pssa_item_g3_eoy_conv_d117_comparative_blank",
+            "position": 42,
+            "options": [
+              {
+                "text": "smaller",
+                "errorPattern": "comparative_used_for_three_or_more",
+                "rationale": "Smaller compares two things, but the sentence compares three kittens."
+              },
+              {
+                "text": "more small",
+                "errorPattern": "more_used_with_short_adjective",
+                "rationale": "More small is not the standard comparative or superlative form for the short adjective small."
+              },
+              {
+                "text": "smallest",
+                "errorPattern": null,
+                "rationale": "Smallest is the superlative form used when comparing three or more."
+              },
+              {
+                "text": "most small",
+                "errorPattern": "most_used_with_short_adjective",
+                "rationale": "Most small is not the standard superlative form for the short adjective small."
+              }
+            ],
+            "targetSkill": "superlative adjective",
+            "targetWordOrPhrase": "smallest"
+          }
+        ]
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "approvalEligible": false,
+      "provenanceJson": {
+        "benchmarkSeason": "EOY",
+        "blueprintVersion": "pde-ela-diagnostic-stamina-2025-g3-eoy-v1",
+        "unit": "conventions"
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_EOY_CONVENTIONS_ITEMS",
+        "noDbWrite": true,
+        "productionImportReady": false
+      }
+    },
+    {
+      "id": "pssa_item_g3_eoy_conv_d119_sentence_formation",
+      "itemId": "pssa_item_g3_eoy_conv_d119_sentence_formation",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "INLINE_DROPDOWN",
+      "interactionType": "INLINE_DROPDOWN",
+      "interactionSubtype": "single_blank",
+      "passageId": null,
+      "ecSkillFamily": "conventions",
+      "eligibleContent": "E03.D.1.1.9",
+      "reportingCategory": "D",
+      "pointValue": 1,
+      "targetConvention": "produce compound and complex sentences",
+      "targetSubskill": "sentence_formation",
+      "stem": "Choose the words that correctly complete the sentence.",
+      "instructionText": "Choose the option that correctly completes the sentence.",
+      "baseTextWithBlanks": "The sky grew dark, ___",
+      "blanks": [
+        {
+          "blankId": "pssa_item_g3_eoy_conv_d119_sentence_formation_blank",
+          "position": 19,
+          "options": [
+            {
+              "text": "and the wind began to blow.",
+              "errorPattern": null,
+              "rationale": "The conjunction and joins two complete ideas with the comma already in place."
+            },
+            {
+              "text": "the wind began to blow.",
+              "errorPattern": "comma_splice_without_conjunction",
+              "rationale": "This joins two complete sentences with only a comma."
+            },
+            {
+              "text": "and the wind blowing hard.",
+              "errorPattern": "fragment_without_complete_verb",
+              "rationale": "Blowing has no helping verb, so the second part is not a complete idea."
+            },
+            {
+              "text": "and the wind blew hard the trees bent.",
+              "errorPattern": "run_on_two_complete_ideas",
+              "rationale": "This adds another complete idea without punctuation to separate it."
+            }
+          ],
+          "correctIndex": 0,
+          "targetSkill": "compound sentence formation",
+          "targetWordOrPhrase": "and the wind began to blow.",
+          "rationale": "The conjunction and joins two complete ideas with the comma already in place."
+        }
+      ],
+      "correctResponseJson": {
+        "blanks": [
+          {
+            "blankId": "pssa_item_g3_eoy_conv_d119_sentence_formation_blank",
+            "correctIndex": 0
+          }
+        ]
+      },
+      "scoringJson": {
+        "totalPoints": 1
+      },
+      "scoring": {
+        "totalPoints": 1,
+        "partialCreditRules": [
+          {
+            "points": 1,
+            "rule": "The single correct convention response is selected."
+          },
+          {
+            "points": 0,
+            "rule": "Any incorrect, ambiguous, missing, or extra response earns no credit."
+          }
+        ],
+        "scoringNotes": "Full credit requires the one defensible convention answer and no contradictory answer."
+      },
+      "responseSpecJson": {
+        "stem": "Choose the words that correctly complete the sentence.",
+        "baseTextWithBlanks": "The sky grew dark, ___",
+        "blanks": [
+          {
+            "blankId": "pssa_item_g3_eoy_conv_d119_sentence_formation_blank",
+            "position": 19,
+            "options": [
+              {
+                "text": "and the wind began to blow.",
+                "errorPattern": null,
+                "rationale": "The conjunction and joins two complete ideas with the comma already in place."
+              },
+              {
+                "text": "the wind began to blow.",
+                "errorPattern": "comma_splice_without_conjunction",
+                "rationale": "This joins two complete sentences with only a comma."
+              },
+              {
+                "text": "and the wind blowing hard.",
+                "errorPattern": "fragment_without_complete_verb",
+                "rationale": "Blowing has no helping verb, so the second part is not a complete idea."
+              },
+              {
+                "text": "and the wind blew hard the trees bent.",
+                "errorPattern": "run_on_two_complete_ideas",
+                "rationale": "This adds another complete idea without punctuation to separate it."
+              }
+            ],
+            "targetSkill": "compound sentence formation",
+            "targetWordOrPhrase": "and the wind began to blow."
+          }
+        ]
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "approvalEligible": false,
+      "provenanceJson": {
+        "benchmarkSeason": "EOY",
+        "blueprintVersion": "pde-ela-diagnostic-stamina-2025-g3-eoy-v1",
+        "unit": "conventions"
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_EOY_CONVENTIONS_ITEMS",
+        "noDbWrite": true,
+        "productionImportReady": false
+      }
+    },
+    {
+      "id": "pssa_item_g3_eoy_conv_d122_address_commas",
+      "itemId": "pssa_item_g3_eoy_conv_d122_address_commas",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "INLINE_DROPDOWN",
+      "interactionType": "INLINE_DROPDOWN",
+      "interactionSubtype": "single_blank",
+      "passageId": null,
+      "ecSkillFamily": "conventions",
+      "eligibleContent": "E03.D.1.2.2",
+      "reportingCategory": "D",
+      "pointValue": 1,
+      "targetConvention": "commas in addresses",
+      "targetSubskill": "commas_in_addresses",
+      "stem": "Choose the words and punctuation that correctly complete the sentence.",
+      "instructionText": "Choose the option that correctly completes the sentence.",
+      "baseTextWithBlanks": "My aunt's new house is in ___.",
+      "blanks": [
+        {
+          "blankId": "pssa_item_g3_eoy_conv_d122_address_commas_blank",
+          "position": 26,
+          "options": [
+            {
+              "text": "Tampa Florida",
+              "errorPattern": "missing_comma_between_city_and_state",
+              "rationale": "A comma is needed between the city and state."
+            },
+            {
+              "text": "Tampa Florida,",
+              "errorPattern": "comma_after_state_instead_of_between",
+              "rationale": "This places a comma after the state but still misses the comma between city and state."
+            },
+            {
+              "text": "Tampa, Florida,",
+              "errorPattern": "extra_comma_after_state_at_sentence_end",
+              "rationale": "The comma between city and state is correct, but no extra comma is needed before the sentence period."
+            },
+            {
+              "text": "Tampa, Florida",
+              "errorPattern": null,
+              "rationale": "A comma correctly separates the city Tampa from the state Florida."
+            }
+          ],
+          "correctIndex": 3,
+          "targetSkill": "commas in city-state addresses",
+          "targetWordOrPhrase": "Tampa, Florida",
+          "rationale": "A comma correctly separates the city Tampa from the state Florida."
+        }
+      ],
+      "correctResponseJson": {
+        "blanks": [
+          {
+            "blankId": "pssa_item_g3_eoy_conv_d122_address_commas_blank",
+            "correctIndex": 3
+          }
+        ]
+      },
+      "scoringJson": {
+        "totalPoints": 1
+      },
+      "scoring": {
+        "totalPoints": 1,
+        "partialCreditRules": [
+          {
+            "points": 1,
+            "rule": "The single correct convention response is selected."
+          },
+          {
+            "points": 0,
+            "rule": "Any incorrect, ambiguous, missing, or extra response earns no credit."
+          }
+        ],
+        "scoringNotes": "Full credit requires the one defensible convention answer and no contradictory answer."
+      },
+      "responseSpecJson": {
+        "stem": "Choose the words and punctuation that correctly complete the sentence.",
+        "baseTextWithBlanks": "My aunt's new house is in ___.",
+        "blanks": [
+          {
+            "blankId": "pssa_item_g3_eoy_conv_d122_address_commas_blank",
+            "position": 26,
+            "options": [
+              {
+                "text": "Tampa Florida",
+                "errorPattern": "missing_comma_between_city_and_state",
+                "rationale": "A comma is needed between the city and state."
+              },
+              {
+                "text": "Tampa Florida,",
+                "errorPattern": "comma_after_state_instead_of_between",
+                "rationale": "This places a comma after the state but still misses the comma between city and state."
+              },
+              {
+                "text": "Tampa, Florida,",
+                "errorPattern": "extra_comma_after_state_at_sentence_end",
+                "rationale": "The comma between city and state is correct, but no extra comma is needed before the sentence period."
+              },
+              {
+                "text": "Tampa, Florida",
+                "errorPattern": null,
+                "rationale": "A comma correctly separates the city Tampa from the state Florida."
+              }
+            ],
+            "targetSkill": "commas in city-state addresses",
+            "targetWordOrPhrase": "Tampa, Florida"
+          }
+        ]
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "approvalEligible": false,
+      "provenanceJson": {
+        "benchmarkSeason": "EOY",
+        "blueprintVersion": "pde-ela-diagnostic-stamina-2025-g3-eoy-v1",
+        "unit": "conventions"
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_EOY_CONVENTIONS_ITEMS",
+        "noDbWrite": true,
+        "productionImportReady": false
+      }
+    },
+    {
+      "id": "pssa_item_g3_eoy_conv_d123_dialogue",
+      "itemId": "pssa_item_g3_eoy_conv_d123_dialogue",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "INLINE_DROPDOWN",
+      "interactionType": "INLINE_DROPDOWN",
+      "interactionSubtype": "single_blank",
+      "passageId": null,
+      "ecSkillFamily": "conventions",
+      "eligibleContent": "E03.D.1.2.3",
+      "reportingCategory": "D",
+      "pointValue": 1,
+      "targetConvention": "quotation marks and commas in dialogue",
+      "targetSubskill": "dialogue_punctuation",
+      "stem": "Choose the words and punctuation that correctly complete the dialogue.",
+      "instructionText": "Choose the option that correctly completes the sentence.",
+      "baseTextWithBlanks": "Lily smiled and said, ___",
+      "blanks": [
+        {
+          "blankId": "pssa_item_g3_eoy_conv_d123_dialogue_blank",
+          "position": 22,
+          "options": [
+            {
+              "text": "Let's go to the park.",
+              "errorPattern": "missing_quotation_marks",
+              "rationale": "The spoken words need quotation marks."
+            },
+            {
+              "text": "\"Let's go to the park.\"",
+              "errorPattern": null,
+              "rationale": "The spoken words are capitalized and the period is inside the quotation marks."
+            },
+            {
+              "text": "\"let's go to the park.\"",
+              "errorPattern": "quotation_starts_with_lowercase_word",
+              "rationale": "The first word of the quotation should be capitalized."
+            },
+            {
+              "text": "\"Let's go to the park\".",
+              "errorPattern": "period_outside_closing_quotation_mark",
+              "rationale": "The period should be inside the closing quotation mark."
+            }
+          ],
+          "correctIndex": 1,
+          "targetSkill": "tag-first dialogue punctuation",
+          "targetWordOrPhrase": "\"Let's go to the park.\"",
+          "rationale": "The spoken words are capitalized and the period is inside the quotation marks."
+        }
+      ],
+      "correctResponseJson": {
+        "blanks": [
+          {
+            "blankId": "pssa_item_g3_eoy_conv_d123_dialogue_blank",
+            "correctIndex": 1
+          }
+        ]
+      },
+      "scoringJson": {
+        "totalPoints": 1
+      },
+      "scoring": {
+        "totalPoints": 1,
+        "partialCreditRules": [
+          {
+            "points": 1,
+            "rule": "The single correct convention response is selected."
+          },
+          {
+            "points": 0,
+            "rule": "Any incorrect, ambiguous, missing, or extra response earns no credit."
+          }
+        ],
+        "scoringNotes": "Full credit requires the one defensible convention answer and no contradictory answer."
+      },
+      "responseSpecJson": {
+        "stem": "Choose the words and punctuation that correctly complete the dialogue.",
+        "baseTextWithBlanks": "Lily smiled and said, ___",
+        "blanks": [
+          {
+            "blankId": "pssa_item_g3_eoy_conv_d123_dialogue_blank",
+            "position": 22,
+            "options": [
+              {
+                "text": "Let's go to the park.",
+                "errorPattern": "missing_quotation_marks",
+                "rationale": "The spoken words need quotation marks."
+              },
+              {
+                "text": "\"Let's go to the park.\"",
+                "errorPattern": null,
+                "rationale": "The spoken words are capitalized and the period is inside the quotation marks."
+              },
+              {
+                "text": "\"let's go to the park.\"",
+                "errorPattern": "quotation_starts_with_lowercase_word",
+                "rationale": "The first word of the quotation should be capitalized."
+              },
+              {
+                "text": "\"Let's go to the park\".",
+                "errorPattern": "period_outside_closing_quotation_mark",
+                "rationale": "The period should be inside the closing quotation mark."
+              }
+            ],
+            "targetSkill": "tag-first dialogue punctuation",
+            "targetWordOrPhrase": "\"Let's go to the park.\""
+          }
+        ]
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "approvalEligible": false,
+      "provenanceJson": {
+        "benchmarkSeason": "EOY",
+        "blueprintVersion": "pde-ela-diagnostic-stamina-2025-g3-eoy-v1",
+        "unit": "conventions"
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_EOY_CONVENTIONS_ITEMS",
+        "noDbWrite": true,
+        "productionImportReady": false
+      }
+    },
+    {
+      "id": "pssa_item_g3_eoy_conv_d124_possessives",
+      "itemId": "pssa_item_g3_eoy_conv_d124_possessives",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "INLINE_DROPDOWN",
+      "interactionType": "INLINE_DROPDOWN",
+      "interactionSubtype": "single_blank",
+      "passageId": null,
+      "ecSkillFamily": "conventions",
+      "eligibleContent": "E03.D.1.2.4",
+      "reportingCategory": "D",
+      "pointValue": 1,
+      "targetConvention": "form and use possessives",
+      "targetSubskill": "possessives",
+      "stem": "Choose the possessive noun that correctly completes the sentence.",
+      "instructionText": "Choose the option that correctly completes the sentence.",
+      "baseTextWithBlanks": "All three ___ kites were tangled in the tree.",
+      "blanks": [
+        {
+          "blankId": "pssa_item_g3_eoy_conv_d124_possessives_blank",
+          "position": 10,
+          "options": [
+            {
+              "text": "girls",
+              "errorPattern": "plural_without_apostrophe",
+              "rationale": "Girls is plural but does not show ownership."
+            },
+            {
+              "text": "girl's",
+              "errorPattern": "singular_possessive_for_plural_owners",
+              "rationale": "Girl's shows one owner, but all three girls own the kites."
+            },
+            {
+              "text": "girls'",
+              "errorPattern": null,
+              "rationale": "Girls' is the plural possessive form for more than one girl."
+            },
+            {
+              "text": "girls's",
+              "errorPattern": "extra_s_after_plural_possessive",
+              "rationale": "Girls's incorrectly adds another s after the plural possessive."
+            }
+          ],
+          "correctIndex": 2,
+          "targetSkill": "plural possessive nouns",
+          "targetWordOrPhrase": "girls'",
+          "rationale": "Girls' is the plural possessive form for more than one girl."
+        }
+      ],
+      "correctResponseJson": {
+        "blanks": [
+          {
+            "blankId": "pssa_item_g3_eoy_conv_d124_possessives_blank",
+            "correctIndex": 2
+          }
+        ]
+      },
+      "scoringJson": {
+        "totalPoints": 1
+      },
+      "scoring": {
+        "totalPoints": 1,
+        "partialCreditRules": [
+          {
+            "points": 1,
+            "rule": "The single correct convention response is selected."
+          },
+          {
+            "points": 0,
+            "rule": "Any incorrect, ambiguous, missing, or extra response earns no credit."
+          }
+        ],
+        "scoringNotes": "Full credit requires the one defensible convention answer and no contradictory answer."
+      },
+      "responseSpecJson": {
+        "stem": "Choose the possessive noun that correctly completes the sentence.",
+        "baseTextWithBlanks": "All three ___ kites were tangled in the tree.",
+        "blanks": [
+          {
+            "blankId": "pssa_item_g3_eoy_conv_d124_possessives_blank",
+            "position": 10,
+            "options": [
+              {
+                "text": "girls",
+                "errorPattern": "plural_without_apostrophe",
+                "rationale": "Girls is plural but does not show ownership."
+              },
+              {
+                "text": "girl's",
+                "errorPattern": "singular_possessive_for_plural_owners",
+                "rationale": "Girl's shows one owner, but all three girls own the kites."
+              },
+              {
+                "text": "girls'",
+                "errorPattern": null,
+                "rationale": "Girls' is the plural possessive form for more than one girl."
+              },
+              {
+                "text": "girls's",
+                "errorPattern": "extra_s_after_plural_possessive",
+                "rationale": "Girls's incorrectly adds another s after the plural possessive."
+              }
+            ],
+            "targetSkill": "plural possessive nouns",
+            "targetWordOrPhrase": "girls'"
+          }
+        ]
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "approvalEligible": false,
+      "provenanceJson": {
+        "benchmarkSeason": "EOY",
+        "blueprintVersion": "pde-ela-diagnostic-stamina-2025-g3-eoy-v1",
+        "unit": "conventions"
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_EOY_CONVENTIONS_ITEMS",
+        "noDbWrite": true,
+        "productionImportReady": false
+      }
+    },
+    {
+      "id": "pssa_item_g3_eoy_conv_d126_spelling",
+      "itemId": "pssa_item_g3_eoy_conv_d126_spelling",
+      "model": "PssaItem",
+      "module": "PSSA",
+      "subject": "ELA",
+      "gradeLevel": 3,
+      "itemType": "INLINE_DROPDOWN",
+      "interactionType": "INLINE_DROPDOWN",
+      "interactionSubtype": "single_blank",
+      "passageId": null,
+      "ecSkillFamily": "conventions",
+      "eligibleContent": "E03.D.1.2.6",
+      "reportingCategory": "D",
+      "pointValue": 1,
+      "targetConvention": "spelling patterns and generalizations",
+      "targetSubskill": "spelling_ending_rules",
+      "stem": "Choose the correctly spelled word.",
+      "instructionText": "Choose the option that correctly completes the sentence.",
+      "baseTextWithBlanks": "The children were ___ across the open field.",
+      "blanks": [
+        {
+          "blankId": "pssa_item_g3_eoy_conv_d126_spelling_blank",
+          "position": 18,
+          "options": [
+            {
+              "text": "runing",
+              "errorPattern": "final_consonant_not_doubled_before_ing",
+              "rationale": "Running needs a doubled n before adding -ing."
+            },
+            {
+              "text": "runnning",
+              "errorPattern": "consonant_doubled_too_many_times",
+              "rationale": "Runnning has too many n letters."
+            },
+            {
+              "text": "runnig",
+              "errorPattern": "letters_dropped_from_ing_ending",
+              "rationale": "Runnig drops a letter from the -ing ending."
+            },
+            {
+              "text": "running",
+              "errorPattern": null,
+              "rationale": "Running correctly doubles the final consonant before -ing."
+            }
+          ],
+          "correctIndex": 3,
+          "targetSkill": "doubling final consonant before -ing",
+          "targetWordOrPhrase": "running",
+          "rationale": "Running correctly doubles the final consonant before -ing."
+        }
+      ],
+      "correctResponseJson": {
+        "blanks": [
+          {
+            "blankId": "pssa_item_g3_eoy_conv_d126_spelling_blank",
+            "correctIndex": 3
+          }
+        ]
+      },
+      "scoringJson": {
+        "totalPoints": 1
+      },
+      "scoring": {
+        "totalPoints": 1,
+        "partialCreditRules": [
+          {
+            "points": 1,
+            "rule": "The single correct convention response is selected."
+          },
+          {
+            "points": 0,
+            "rule": "Any incorrect, ambiguous, missing, or extra response earns no credit."
+          }
+        ],
+        "scoringNotes": "Full credit requires the one defensible convention answer and no contradictory answer."
+      },
+      "responseSpecJson": {
+        "stem": "Choose the correctly spelled word.",
+        "baseTextWithBlanks": "The children were ___ across the open field.",
+        "blanks": [
+          {
+            "blankId": "pssa_item_g3_eoy_conv_d126_spelling_blank",
+            "position": 18,
+            "options": [
+              {
+                "text": "runing",
+                "errorPattern": "final_consonant_not_doubled_before_ing",
+                "rationale": "Running needs a doubled n before adding -ing."
+              },
+              {
+                "text": "runnning",
+                "errorPattern": "consonant_doubled_too_many_times",
+                "rationale": "Runnning has too many n letters."
+              },
+              {
+                "text": "runnig",
+                "errorPattern": "letters_dropped_from_ing_ending",
+                "rationale": "Runnig drops a letter from the -ing ending."
+              },
+              {
+                "text": "running",
+                "errorPattern": null,
+                "rationale": "Running correctly doubles the final consonant before -ing."
+              }
+            ],
+            "targetSkill": "doubling final consonant before -ing",
+            "targetWordOrPhrase": "running"
+          }
+        ]
+      },
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "approvalEligible": false,
+      "provenanceJson": {
+        "benchmarkSeason": "EOY",
+        "blueprintVersion": "pde-ela-diagnostic-stamina-2025-g3-eoy-v1",
+        "unit": "conventions"
+      },
+      "auditMetadata": {
+        "authoredIn": "PSSA_EOY_CONVENTIONS_ITEMS",
+        "noDbWrite": true,
+        "productionImportReady": false
+      }
+    }
+  ]
+}
