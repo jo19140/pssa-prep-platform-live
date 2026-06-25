@@ -64,6 +64,7 @@ export function buildDiagnosticGradingCase(input: {
   concurrencyToken: string;
 }): GradingCase {
   const evaluation = input.response.writingEvaluation ?? null;
+  const isResolved = evaluation?.status === "FINALIZED" || evaluation?.status === "NON_SCORABLE";
   const draft = evaluation?.currentDraftAttempt && evaluation.currentDraftAttempt.inputHash === evaluation.currentInputHash
     ? evaluation.currentDraftAttempt
     : null;
@@ -87,7 +88,7 @@ export function buildDiagnosticGradingCase(input: {
     rubricId: input.response.formItem.item.id,
     scale: interactionType === "TDA" ? { min: 1, max: 4 } : { min: 0, max: input.response.maxPoints },
     status: evaluation?.status ?? "PENDING",
-    aiDraft: draft && draft.score != null
+    aiDraft: !isResolved && draft && draft.score != null
       ? {
           score: draft.score,
           rationale: draft.rationale ?? "",

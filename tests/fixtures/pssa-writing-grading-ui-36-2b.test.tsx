@@ -51,6 +51,7 @@ assert.match(gradingTab, /No AI draft yet — score manually/, "PENDING must not
 assert.match(gradingTab, /AI draft unavailable — score manually/, "FAILED must not fabricate a score");
 assert.doesNotMatch(gradingTab, /Re-run|Preview state|MOCK ONLY/, "preview bar and re-run action must not ship");
 assert.match(gradingTab, /expectedConcurrencyToken: selectedCase\.concurrencyToken/, "submit must use server DTO concurrency token");
+assert.match(gradingTab, /const baseScore = isResolved \? selectedCase\.officialResult\?\.score : selectedCase\.aiDraft\?\.score/, "resolved submit fallback must prefer official result");
 assert.match(gradingTab, /crypto\.randomUUID\(\)/, "submit must use client UUID idempotency key");
 assert.match(gradingTab, /idempotency_key_reuse[\s\S]*Review it and submit again/, "409 reuse must map to friendly copy");
 assert.match(gradingTab, /stale_grading_case[\s\S]*This response changed since you opened it — reloading/, "409 stale must refetch with friendly copy");
@@ -125,7 +126,7 @@ const finalized = buildDiagnosticGradingCase({
 assert.equal(finalized.officialResult?.score, 3);
 assert.equal(finalized.officialResult?.rationale, "Teacher official rationale.");
 assert.equal(finalized.officialResult?.gapToNextLevel, null);
-assert.equal(finalized.aiDraft?.rationale, "Old AI rationale must not be official.");
+assert.equal(finalized.aiDraft, null, "resolved DTO suppresses stale AI draft");
 assert.doesNotThrow(() => assertNoBannedGradingCaseKeys(finalized));
 assert.throws(() => assertNoBannedGradingCaseKeys({ officialResult: { reviewedByUserId: "secret" } }), /banned key reviewedByUserId/);
 

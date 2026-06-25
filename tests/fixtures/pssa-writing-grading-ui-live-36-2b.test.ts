@@ -1,6 +1,12 @@
 import assert from "node:assert/strict";
 import crypto from "node:crypto";
 import { PrismaClient } from "@prisma/client";
+import {
+  preparePssaWritingEvaluationForResponse,
+  processPssaWritingGradingJob,
+  type PssaWritingGradeInput,
+  type WritingDraftResult,
+} from "../../lib/content/pssaWritingGrading";
 import { computeDiagnosticWritingConcurrencyToken, finalizeDiagnosticWritingCase } from "../../lib/teacher/diagnosticWritingFinalize";
 import { loadDiagnosticGradingCasesForTeacher } from "../../lib/teacher/gradingCaseDto";
 
@@ -16,22 +22,49 @@ async function main() {
     assert.equal(actionableBefore.cases.length, 1, "pending writing response must be actionable");
     assert.equal(actionableBefore.cases[0]?.officialResult, null, "pending case has no official result");
 
+    const draft = await createAiDraft(row);
+    const drafted = await loadDiagnosticGradingCasesForTeacher(row.teacherUserId, { classRoomId: row.classRoomId, formId: row.formId, statusScope: "all" }, db);
+    assert.equal(drafted.cases.length, 1, "all scope includes drafted response");
+    assert.equal(drafted.cases[0]?.status, "DRAFTED");
+    assert.equal(drafted.cases[0]?.aiDraft?.score, 1, "DRAFTED case exposes AI draft");
+    assert.equal(drafted.cases[0]?.aiDraft?.rationale, "Draft fixture rationale.");
+    assert.equal(drafted.cases[0]?.officialResult, null, "DRAFTED case has no official result");
+
     const first = await finalize(row, { kind: "SCORE", score: 2 }, uuid("first"), { teacherNote: "Teacher final rationale." });
     assert.equal(first.status, "finalized");
     const actionableAfter = await loadDiagnosticGradingCasesForTeacher(row.teacherUserId, { classRoomId: row.classRoomId, formId: row.formId }, db);
     assert.equal(actionableAfter.cases.length, 0, "default actionable scope excludes finalized responses");
     const allAfter = await loadDiagnosticGradingCasesForTeacher(row.teacherUserId, { classRoomId: row.classRoomId, formId: row.formId, statusScope: "all" }, db);
     assert.equal(allAfter.cases.length, 1, "all scope includes finalized responses");
+    assert.equal(allAfter.cases[0]?.status, "FINALIZED");
     assert.equal(allAfter.cases[0]?.officialResult?.score, 2);
     assert.equal(allAfter.cases[0]?.officialResult?.rationale, "Teacher final rationale.");
+    assert.ok(allAfter.cases[0]?.officialResult?.reviewedAt, "finalized official result includes reviewedAt");
     assert.equal(allAfter.cases[0]?.officialResult?.gapToNextLevel, null);
-    assert.equal(allAfter.cases[0]?.aiDraft, null);
+    assert.equal(allAfter.cases[0]?.aiDraft, null, "resolved DTO suppresses stale AI draft");
 
     const override = await finalize(row, { kind: "SCORE", score: 3 }, uuid("override"), { overrideReason: "Rubric review.", teacherNote: "Teacher override rationale." });
     assert.equal(override.status, "overridden");
     const allAfterOverride = await loadDiagnosticGradingCasesForTeacher(row.teacherUserId, { classRoomId: row.classRoomId, formId: row.formId, statusScope: "all" }, db);
     assert.equal(allAfterOverride.cases[0]?.officialResult?.score, 3);
     assert.equal(allAfterOverride.cases[0]?.officialResult?.rationale, "Teacher override rationale.");
+    assert.equal(allAfterOverride.cases[0]?.aiDraft, null, "overridden DTO still suppresses stale AI draft");
+
+    const attempts = await db.pssaWritingEvaluationAttempt.findMany({
+      where: { evaluationId: draft.evaluationId },
+      orderBy: { attemptNumber: "asc" },
+      select: { id: true, kind: true, score: true, rationale: true },
+    });
+    assert.deepEqual(
+      attempts.map((attempt) => attempt.kind),
+      ["AI_DRAFT", "TEACHER_FINAL", "TEACHER_OVERRIDE"],
+      "AI_DRAFT history is preserved while teacher attempts are appended",
+    );
+    assert.equal(attempts[0]?.id, draft.attemptId, "original AI_DRAFT attempt row survives");
+    assert.equal(attempts[0]?.score, 1);
+    assert.equal(attempts[0]?.rationale, "Draft fixture rationale.");
+    assert.equal(attempts[1]?.score, 2, "first changed decision is TEACHER_FINAL");
+    assert.equal(attempts[2]?.score, 3, "second changed decision is TEACHER_OVERRIDE");
 
     const otherTeacher = await db.user.create({ data: { email: `${prefix}_other_teacher@example.com`, name: "36-2b Other Teacher", role: "TEACHER" } });
     ids.push(otherTeacher.id);
@@ -59,6 +92,54 @@ async function finalize(row: ResponseSeed, decision: any, idempotencyKey: string
     overrideReason: opts.overrideReason,
     idempotencyKey,
   }, db);
+}
+
+async function createAiDraft(row: ResponseSeed) {
+  const prepared = await preparePssaWritingEvaluationForResponse(db, row.responseId);
+  assert.equal(prepared.enqueued, true, "prepare should enqueue a writing grading job");
+  assert.ok(prepared.evaluationId, "prepare should return evaluation id");
+  assert.ok(prepared.jobId, "prepare should return job id");
+  await processPssaWritingGradingJob(db, prepared.jobId, async (input: PssaWritingGradeInput): Promise<WritingDraftResult> => ({
+    ok: true,
+    score: 1,
+    rationale: "Draft fixture rationale.",
+    instructionalProfile: [
+      {
+        areaId: "completeness",
+        signal: "emerging",
+        observation: "The response answers the question but needs more development.",
+        responseExcerpt: input.responseText,
+        teachingMove: "Ask for one more complete sentence.",
+      },
+      {
+        areaId: "accuracy",
+        signal: "clear",
+        observation: "The response matches the passage detail.",
+        teachingMove: "Have the student point to the matching text.",
+      },
+      {
+        areaId: "text_support",
+        signal: "emerging",
+        observation: "The response includes a passage detail.",
+        responseExcerpt: "The bell helped because the family could hear it.",
+        teachingMove: "Prompt for a quoted or paraphrased detail.",
+      },
+      {
+        areaId: "explanation_clarity",
+        signal: "needs_support",
+        observation: "The explanation can connect the detail more clearly.",
+        teachingMove: "Ask how hearing the bell helped solve the problem.",
+      },
+    ],
+    modelId: "fixture-writing-grader-v1",
+  }));
+  const evaluation = await db.pssaWritingEvaluation.findUnique({
+    where: { id: prepared.evaluationId },
+    select: { id: true, status: true, currentDraftAttemptId: true },
+  });
+  assert.equal(evaluation?.status, "DRAFTED", "job should produce a drafted evaluation");
+  assert.ok(evaluation.currentDraftAttemptId, "job should set current draft attempt");
+  return { evaluationId: evaluation.id, attemptId: evaluation.currentDraftAttemptId };
 }
 
 async function token(row: ResponseSeed) {

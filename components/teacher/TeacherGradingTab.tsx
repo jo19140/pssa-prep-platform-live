@@ -171,7 +171,8 @@ export function TeacherGradingTab() {
     if (!selectedCase) return;
     const idempotencyKey = retryKeyRef.current ?? crypto.randomUUID();
     retryKeyRef.current = idempotencyKey;
-    const score = selectedScore ?? selectedCase.aiDraft?.score ?? selectedCase.officialResult?.score ?? null;
+    const baseScore = isResolved ? selectedCase.officialResult?.score : selectedCase.aiDraft?.score;
+    const score = selectedScore ?? baseScore ?? null;
     const decision = selectedNonScorable
       ? { kind: "NON_SCORABLE" as const, reason: selectedNonScorable }
       : score != null
