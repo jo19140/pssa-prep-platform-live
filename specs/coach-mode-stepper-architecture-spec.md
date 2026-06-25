@@ -25,19 +25,22 @@ Interactions keep **identical observable behavior** (ASR/transcribe/retry/reteac
 Every task already renders its own completion control (`TappableItemPractice`, `SentenceReadingPart` Done, `StoryReadingPart` Done, `SpellingPart` Check, `TalkPart`, `ListenForReadingAttempt`). In the **first stepper release**: task-local completion controls stay unchanged; **shell Next is navigation-only**, enabled after the task fires `onComplete`. (Two sequential actions — complete, then Next — is acceptable v1.) Replacing/hiding task Done/Check so a single pinned Continue does both = new imperative completion API → **deferred** interaction-polish PR. Otherwise PR-0 silently expands to every component.
 
 ## The pure step model
-`buildCoachLessonSteps(lesson): CoachLessonStep[]` (`lib/literacy/coachLessonSteps.ts`) — a discriminated union, pure from `lesson` (parts sorted by `partNumber` or assert pre-ordered):
+**For PR-A, `specs/coach-mode-pr-a-coach-lesson-step-model-spec.md` supersedes this shorthand.** Net changes there: source order is **required and never sorted** (exact 8-part contract + hardcoded `EXPECTED_PART_TYPES`); `real_word` uses **`lineWordIndex` + `realWordIndex`** (not one `wordIndex`); every step carries `partLocalIndex`/`partLocalTotal` **and** `taskLocalIndex`/`taskLocalTotal`; strict fail-loud private parsers (no lenient coercion).
+
+`buildCoachLessonSteps(lesson: EnabledLessonPlayerData): CoachLessonStep[]` (`lib/literacy/coachLessonSteps.ts`) — a discriminated union, pure from `lesson`, **parts required in exact source order 1..8 (never sorted)**:
 ```ts
 type CoachLessonStep =
-  | { kind: "warmup_word"; id; payload: { word; sourceIndex } }
-  | { kind: "rule"; id; payload: { statement } }
-  | { kind: "demo_pair"; id; payload: { before; after; pairIndex } }
-  | { kind: "real_word"; id; payload: { word; lineNumber; role; wordIndex } }
-  | { kind: "nonsense_word"; id; payload: { word; wordIndex } }
-  | { kind: "power_word"; id; payload: { word; group: "heart"|"vocab"; index } }
-  | { kind: "sentence"; id; payload: { text; index } }
-  | { kind: "spell_word"; id; payload: { word; index } }
-  | { kind: "passage"; id; payload: { title; text; listenFirstAllowed; readOnOwnAllowed } }
-  | { kind: "reflect"; id; payload: { question; questionType; index } };
+  | { kind: "warmup_word"; ...; payload: { word; sourceIndex } }
+  | { kind: "rule"; ...; payload: { statement } }
+  | { kind: "demo_pair"; ...; payload: { before; after; pairIndex } }
+  | { kind: "real_word"; ...; payload: { word; lineNumber; role; lineWordIndex; realWordIndex } }
+  | { kind: "nonsense_word"; ...; payload: { word; wordIndex } }
+  | { kind: "power_word"; ...; payload: { word; group: "heart"|"vocab"; index } }
+  | { kind: "sentence"; ...; payload: { text; index } }
+  | { kind: "spell_word"; ...; payload: { word; index } }
+  | { kind: "passage"; ...; payload: { title; text; listenFirstAllowed; readOnOwnAllowed } }
+  | { kind: "reflect"; ...; payload: { question; questionType; index } };
+// every step also carries: id, partNumber, partLocalIndex, partLocalTotal, taskLocalIndex, taskLocalTotal
 ```
 - **No `complete` step.** After the final `reflect` completes → emit Part-8 completion + `LESSON_COMPLETED` once → enter a **shell-owned summary state** (the done screen is shell UI, not a lesson step). Avoids an artificial 9th task / unclear Part-8 telemetry.
 - Part-3 order via stable roles: `target_real_words`, `contrastive_target_vs_review`, `cumulative_review` (real), then `target_pseudowords` (nonsense).
