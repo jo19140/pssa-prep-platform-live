@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState, useTransition } from "react";
 import { BuddyCharacter, type BuddyState } from "@/components/literacy/BuddyCharacter";
+import { LessonStepper } from "@/components/literacy/LessonStepper";
 import { TappableItemPractice } from "@/components/literacy/TappableItemPractice";
 import { useScoredRealWordController } from "@/components/literacy/useScoredRealWordController";
 import { getTtsProvider } from "@/lib/voice/tts";
@@ -9,6 +10,7 @@ import { recordLessonPlayerEvent } from "@/app/student/practice/actions";
 import { startClipRecorder, type ClipRecorder } from "@/lib/voice/captureRecorder";
 import { PseudowordCaptureCoordinator } from "@/lib/voice/pseudowordCaptureCoordinator";
 import { formatCopy } from "@/lib/literacy/formatCopy";
+import { lessonPlayerModeFor } from "@/lib/literacy/lessonPlayerMode";
 import type { TappableItem } from "@/lib/literacy/tappableItem";
 import { entryKey as scoredEntryKey, type ScoredRealWordStatus } from "@/lib/literacy/scoredRealWordController";
 import {
@@ -62,6 +64,7 @@ export function StudentPracticeSession({
   const copy = presentationCopyFor(presentationProfile);
   const theme = presentationThemeFor(presentationProfile);
   if (lesson.enabled === false) return <DisabledPractice targetCode={lesson.targetCode} reason={lesson.disabledReason} copy={copy} theme={theme} />;
+  if (lessonPlayerModeFor(presentationProfile) === "stepper") return <LessonStepper lesson={lesson} />;
   return <GeneratedLessonPlayer lesson={lesson} copy={copy} theme={theme} />;
 }
 
