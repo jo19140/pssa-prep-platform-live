@@ -1,0 +1,168 @@
+itemId,dokLevel,eligibleContent,reportingCategory,benchmark
+pssa_item_g3_eoy_conv_d112_plurals,1,E03.D.1.1.2,Conventions,EOY
+pssa_item_g3_eoy_conv_d113_abstract_noun,1,E03.D.1.1.3,Conventions,EOY
+pssa_item_g3_eoy_conv_d116_pronoun_agreement,1,E03.D.1.1.6,Conventions,EOY
+pssa_item_g3_eoy_conv_d117_comparative,1,E03.D.1.1.7,Conventions,EOY
+pssa_item_g3_eoy_conv_d119_sentence_formation,1,E03.D.1.1.9,Conventions,EOY
+pssa_item_g3_eoy_conv_d122_address_commas,1,E03.D.1.2.2,Conventions,EOY
+pssa_item_g3_eoy_conv_d123_dialogue,1,E03.D.1.2.3,Conventions,EOY
+pssa_item_g3_eoy_conv_d124_possessives,1,E03.D.1.2.4,Conventions,EOY
+pssa_item_g3_eoy_conv_d126_spelling,1,E03.D.1.2.6,Conventions,EOY
+pssa_item_g3_eoy_p1_mcq_bk111,1,E03.B-K.1.1.1,Key Ideas & Details,EOY
+pssa_item_g3_eoy_p1_mcq_bc212,2,E03.B-C.2.1.2,Craft & Structure,EOY
+pssa_item_g3_eoy_p1_mcq_bc311,2,E03.B-C.3.1.1,Integration of Knowledge & Ideas,EOY
+pssa_item_g3_eoy_p1_mcq_bv411,2,E03.B-V.4.1.1,Vocabulary,EOY
+pssa_item_g3_eoy_p1_mcq_bc313,2,E03.B-C.3.1.3,Integration of Knowledge & Ideas,EOY
+pssa_item_g3_eoy_p1_te_bk112,2,E03.B-K.1.1.2,Key Ideas & Details,EOY
+pssa_item_g3_eoy_p1_sa_bk113,2,E03.B-K.1.1.3,Key Ideas & Details,EOY
+pssa_item_g3_eoy_p1_mcq_bc212_ao2,2,E03.B-C.2.1.2,Craft & Structure,EOY
+pssa_item_g3_eoy_p1_mcq_bv411_ao3,2,E03.B-V.4.1.1,Vocabulary,EOY
+pssa_item_g3_eoy_p1_te_bc313_ao9,2,E03.B-C.3.1.3,Integration of Knowledge & Ideas,EOY
+pssa_item_g3_eoy_p1_te_bv411_ao10,2,E03.B-V.4.1.1,Vocabulary,EOY
+pssa_item_g3_eoy_p2_mcq_ak111,1,E03.A-K.1.1.1,Key Ideas & Details,EOY
+pssa_item_g3_eoy_p2_mcq_ac211,2,E03.A-C.2.1.1,Craft & Structure,EOY
+pssa_item_g3_eoy_p2_mcq_av411,2,E03.A-V.4.1.1,Vocabulary,EOY
+pssa_item_g3_eoy_p2_mcq_av412,2,E03.A-V.4.1.2,Vocabulary,EOY
+pssa_item_g3_eoy_p2_mcq_ak112,3,E03.A-K.1.1.2,Key Ideas & Details,EOY
+pssa_item_g3_eoy_p2_te_ak113,2,E03.A-K.1.1.3,Key Ideas & Details,EOY
+pssa_item_g3_eoy_p2_sa_ak112,3,E03.A-K.1.1.2,Key Ideas & Details,EOY
+pssa_item_g3_eoy_p2_mcq_ac211_ao5,2,E03.A-C.2.1.1,Craft & Structure,EOY
+pssa_item_g3_eoy_p3_mcq_bk112,2,E03.B-K.1.1.2,Key Ideas & Details,EOY
+pssa_item_g3_eoy_p3_mcq_bc211,2,E03.B-C.2.1.1,Craft & Structure,EOY
+pssa_item_g3_eoy_p3_mcq_bv412,2,E03.B-V.4.1.2,Vocabulary,EOY
+pssa_item_g3_eoy_p3_mcq_bk113,2,E03.B-K.1.1.3,Key Ideas & Details,EOY
+pssa_item_g3_eoy_p3_mcq_bc312,2,E03.B-C.3.1.2,Integration of Knowledge & Ideas,EOY
+pssa_item_g3_eoy_p3_ebsr_bc312,3,E03.B-C.3.1.2,Integration of Knowledge & Ideas,EOY
+pssa_item_g3_eoy_p3_mcq_bc211_ao1,2,E03.B-C.2.1.1,Craft & Structure,EOY
+pssa_item_g3_eoy_p3_mcq_bv412_ao4,2,E03.B-V.4.1.2,Vocabulary,EOY
+pssa_item_g3_eoy_p3_ebsr_bk111_ao7,2,E03.B-K.1.1.1,Key Ideas & Details,EOY
+pssa_item_g3_eoy_p3_ebsr_bc311_ao8,2,E03.B-C.3.1.1,Integration of Knowledge & Ideas,EOY
+pssa_item_g3_eoy_p4_mcq_ak111,1,E03.A-K.1.1.1,Key Ideas & Details,EOY
+pssa_item_g3_eoy_p4_mcq_ak113,2,E03.A-K.1.1.3,Key Ideas & Details,EOY
+pssa_item_g3_eoy_p4_mcq_av411,2,E03.A-V.4.1.1,Vocabulary,EOY
+pssa_item_g3_eoy_p4_mcq_av412,2,E03.A-V.4.1.2,Vocabulary,EOY
+pssa_item_g3_eoy_p4_mcq_ak112,3,E03.A-K.1.1.2,Key Ideas & Details,EOY
+pssa_item_g3_eoy_p4_ebsr_ak113,3,E03.A-K.1.1.3,Key Ideas & Details,EOY
+pssa_item_g3_eoy_p4_mcq_av412_ao6,2,E03.A-V.4.1.2,Vocabulary,EOY
+pssa_item_g3_moy_conv_d111_word_function,1,E03.D.1.1.1,Conventions,MOY
+pssa_item_g3_moy_conv_d114_irregular_verb,1,E03.D.1.1.4,Conventions,MOY
+pssa_item_g3_moy_conv_d115_verb_tense,1,E03.D.1.1.5,Conventions,MOY
+pssa_item_g3_moy_conv_d116_agreement,1,E03.D.1.1.6,Conventions,MOY
+pssa_item_g3_moy_conv_d118_conjunctions,1,E03.D.1.1.8,Conventions,MOY
+pssa_item_g3_moy_conv_d121_title_caps,1,E03.D.1.2.1,Conventions,MOY
+pssa_item_g3_moy_conv_d123_dialogue,1,E03.D.1.2.3,Conventions,MOY
+pssa_item_g3_moy_conv_d125_spelling,1,E03.D.1.2.5,Conventions,MOY
+pssa_item_g3_moy_conv_d211_word_choice,1,E03.D.2.1.1,Conventions,MOY
+pssa_item_g3_moy_p1_mcq_bk111,1,E03.B-K.1.1.1,Key Ideas & Details,MOY
+pssa_item_g3_moy_p1_mcq_bc211,2,E03.B-C.2.1.1,Craft & Structure,MOY
+pssa_item_g3_moy_p1_mcq_bc313,2,E03.B-C.3.1.3,Integration of Knowledge & Ideas,MOY
+pssa_item_g3_moy_p1_mcq_bv411,2,E03.B-V.4.1.1,Vocabulary,MOY
+pssa_item_g3_moy_p1_mcq_bc212,2,E03.B-C.2.1.2,Craft & Structure,MOY
+pssa_item_g3_moy_p1_te_bk112,2,E03.B-K.1.1.2,Key Ideas & Details,MOY
+pssa_item_g3_moy_p1_sa_bk113,2,E03.B-K.1.1.3,Key Ideas & Details,MOY
+pssa_item_g3_moy_p1_ao5_dd_bc313,2,E03.B-C.3.1.3,Integration of Knowledge & Ideas,MOY
+pssa_item_g3_moy_p2_mcq_ak111,1,E03.A-K.1.1.1,Key Ideas & Details,MOY
+pssa_item_g3_moy_p2_mcq_ak112,3,E03.A-K.1.1.2,Key Ideas & Details,MOY
+pssa_item_g3_moy_p2_mcq_ac211,2,E03.A-C.2.1.1,Craft & Structure,MOY
+pssa_item_g3_moy_p2_mcq_av411,2,E03.A-V.4.1.1,Vocabulary,MOY
+pssa_item_g3_moy_p2_mcq_av412,2,E03.A-V.4.1.2,Vocabulary,MOY
+pssa_item_g3_moy_p2_te_ak113,2,E03.A-K.1.1.3,Key Ideas & Details,MOY
+pssa_item_g3_moy_p2_sa_ak112,3,E03.A-K.1.1.2,Key Ideas & Details,MOY
+pssa_item_g3_moy_p3_mcq_bk112_t1,2,E03.B-K.1.1.2,Key Ideas & Details,MOY
+pssa_item_g3_moy_p3_mcq_bk112_t2,2,E03.B-K.1.1.2,Key Ideas & Details,MOY
+pssa_item_g3_moy_p3_mcq_bk113_t1,2,E03.B-K.1.1.3,Key Ideas & Details,MOY
+pssa_item_g3_moy_p3_mcq_bc311_t1,2,E03.B-C.3.1.1,Integration of Knowledge & Ideas,MOY
+pssa_item_g3_moy_p3_mcq_bc312,2,E03.B-C.3.1.2,Integration of Knowledge & Ideas,MOY
+pssa_item_g3_moy_p3_ebsr_bc312,3,E03.B-C.3.1.2,Integration of Knowledge & Ideas,MOY
+pssa_item_g3_moy_p3_mcq_bv412_ao1,2,E03.B-V.4.1.2,Vocabulary,MOY
+pssa_item_g3_moy_p3_mcq_bc211_ao3,2,E03.B-C.2.1.1,Craft & Structure,MOY
+pssa_item_g3_moy_p3_ebsr_bc311_ao4,2,E03.B-C.3.1.1,Integration of Knowledge & Ideas,MOY
+pssa_item_g3_moy_p4_mcq_ak111,1,E03.A-K.1.1.1,Key Ideas & Details,MOY
+pssa_item_g3_moy_p4_mcq_ak112,3,E03.A-K.1.1.2,Key Ideas & Details,MOY
+pssa_item_g3_moy_p4_mcq_ak113,2,E03.A-K.1.1.3,Key Ideas & Details,MOY
+pssa_item_g3_moy_p4_mcq_av411,2,E03.A-V.4.1.1,Vocabulary,MOY
+pssa_item_g3_moy_p4_mcq_av412,2,E03.A-V.4.1.2,Vocabulary,MOY
+pssa_item_g3_moy_p4_ebsr_ak113,3,E03.A-K.1.1.3,Key Ideas & Details,MOY
+pssa_item_g3_moy_p4_mcq_av412_ao2,2,E03.A-V.4.1.2,Vocabulary,MOY
+pssa_conv_g3_dropdown_plural_01,1,E03.D.1.1.2,Conventions,BOY/Foundation
+pssa_conv_g3_dropdown_verbtense_01,1,E03.D.1.1.5,Conventions,BOY/Foundation
+pssa_conv_g3_dropdown_compare_01,1,E03.D.1.1.7,Conventions,BOY/Foundation
+pssa_conv_g3_dropdown_titles_01,1,E03.D.1.2.1,Conventions,BOY/Foundation
+pssa_conv_g3_hottext_spelling_01,1,E03.D.1.2.5,Conventions,BOY/Foundation
+pssa_conv_g3_hottext_function_01,1,E03.D.1.1.1,Conventions,BOY/Foundation
+pssa_conv_g3_drag_address_01,1,E03.D.1.2.2,Conventions,BOY/Foundation
+pssa_conv_g3_drag_dialogue_01,1,E03.D.1.2.3,Conventions,BOY/Foundation
+pssa_conv_g3_mcq_agreement_01,1,E03.D.1.1.6,Conventions,BOY/Foundation
+pssa_ebsr_g3_creek_01,2,E03.B-K.1.1.2,Key Ideas & Details,BOY/Foundation
+pssa_ebsr_g3_map_01,2,E03.B-K.1.1.2,Key Ideas & Details,BOY/Foundation
+pssa_ebsr_g3_lunch_01,2,E03.B-K.1.1.3,Key Ideas & Details,BOY/Foundation
+pssa_ebsr_g3_mural_01,3,E03.A-K.1.1.2,Key Ideas & Details,BOY/Foundation
+pssa_ebsr_g3_cart_01,2,E03.B-K.1.1.3,Key Ideas & Details,BOY/Foundation
+pssa_item_g3_lantern_01,2,E03.A-K.1.1.1,Key Ideas & Details,BOY/Foundation
+pssa_item_g3_lantern_02,3,E03.A-K.1.1.2,Key Ideas & Details,BOY/Foundation
+pssa_item_g3_lantern_03,2,E03.A-K.1.1.3,Key Ideas & Details,BOY/Foundation
+pssa_item_g3_lantern_04,2,E03.A-C.2.1.1,Craft & Structure,BOY/Foundation
+pssa_item_g3_lantern_05,2,E03.A-V.4.1.1,Vocabulary,BOY/Foundation
+pssa_item_g3_lantern_06,2,E03.A-V.4.1.2,Vocabulary,BOY/Foundation
+pssa_item_g3_bell_01,2,E03.A-K.1.1.1,Key Ideas & Details,BOY/Foundation
+pssa_item_g3_bell_02,3,E03.A-K.1.1.2,Key Ideas & Details,BOY/Foundation
+pssa_item_g3_bell_03,2,E03.A-K.1.1.3,Key Ideas & Details,BOY/Foundation
+pssa_item_g3_bell_04,2,E03.A-C.2.1.1,Craft & Structure,BOY/Foundation
+pssa_item_g3_bell_05,2,E03.A-V.4.1.1,Vocabulary,BOY/Foundation
+pssa_item_g3_bell_06,2,E03.A-V.4.1.2,Vocabulary,BOY/Foundation
+pssa_ebsr_g3_lantern_01,3,E03.A-K.1.1.2,Key Ideas & Details,BOY/Foundation
+pssa_ebsr_g3_bell_01,3,E03.A-K.1.1.2,Key Ideas & Details,BOY/Foundation
+pssa_ms_g3_lantern_01,3,E03.A-K.1.1.2,Key Ideas & Details,BOY/Foundation
+pssa_ms_g3_bell_01,3,E03.A-K.1.1.2,Key Ideas & Details,BOY/Foundation
+pssa_ht_g3_lantern_01,3,E03.A-K.1.1.2,Key Ideas & Details,BOY/Foundation
+pssa_ht_g3_bell_01,3,E03.A-K.1.1.2,Key Ideas & Details,BOY/Foundation
+pssa_mg_g3_lantern_01,3,E03.A-K.1.1.2,Key Ideas & Details,BOY/Foundation
+pssa_mg_g3_bell_01,3,E03.A-K.1.1.2,Key Ideas & Details,BOY/Foundation
+pssa_dd_g3_lantern_01,2,E03.A-K.1.1.2,Key Ideas & Details,BOY/Foundation
+pssa_dd_g3_bell_01,2,E03.A-K.1.1.2,Key Ideas & Details,BOY/Foundation
+pssa_sa_g3_lantern_message_01,3,E03.A-K.1.1.3,Key Ideas & Details,BOY/Foundation
+pssa_sa_g3_bell_character_01,3,E03.A-K.1.1.3,Key Ideas & Details,BOY/Foundation
+pssa_sa_g3_creek_main_idea_01,2,E03.B-K.1.1.2,Key Ideas & Details,BOY/Foundation
+pssa_sa_g3_map_evidence_01,2,E03.B-C.3.1.3,Integration of Knowledge & Ideas,BOY/Foundation
+pssa_sa_g3_lunch_sequence_01,2,E03.B-K.1.1.3,Key Ideas & Details,BOY/Foundation
+pssa_sa_g3_mural_character_01,3,E03.A-K.1.1.3,Key Ideas & Details,BOY/Foundation
+pssa_sa_g3_cart_connection_01,2,E03.B-C.3.1.1,Integration of Knowledge & Ideas,BOY/Foundation
+pssa_stamina_item_g3_boat_01,3,E03.A-K.1.1.2,Key Ideas & Details,BOY/Foundation
+pssa_stamina_item_g3_boat_02,2,E03.A-K.1.1.3,Key Ideas & Details,BOY/Foundation
+pssa_stamina_item_g3_boat_03,2,E03.A-C.2.1.1,Craft & Structure,BOY/Foundation
+pssa_stamina_item_g3_boat_04,2,E03.A-V.4.1.2,Vocabulary,BOY/Foundation
+pssa_stamina_item_g3_boat_05,2,E03.A-K.1.1.1,Key Ideas & Details,BOY/Foundation
+pssa_stamina_item_g3_boat_ebsr_01,3,E03.A-K.1.1.2,Key Ideas & Details,BOY/Foundation
+pssa_stamina_item_g3_boat_sa_01,3,E03.A-K.1.1.3,Key Ideas & Details,BOY/Foundation
+pssa_stamina_item_g3_boat_mg_01,2,E03.A-K.1.1.1,Key Ideas & Details,BOY/Foundation
+conv_01,1,E03.D.1.1.1,Conventions,BOY/Foundation
+conv_02,1,E03.D.1.1.2,Conventions,BOY/Foundation
+conv_03,1,E03.D.1.1.5,Conventions,BOY/Foundation
+conv_04,1,E03.D.1.1.6,Conventions,BOY/Foundation
+conv_05,1,E03.D.1.1.7,Conventions,BOY/Foundation
+conv_06,1,E03.D.1.2.1,Conventions,BOY/Foundation
+conv_07,1,E03.D.1.2.2,Conventions,BOY/Foundation
+conv_08,1,E03.D.1.2.3,Conventions,BOY/Foundation
+conv_09,1,E03.D.1.2.5,Conventions,BOY/Foundation
+pssa_stamina_item_g3_owls_01,2,E03.B-K.1.1.1,Key Ideas & Details,BOY/Foundation
+pssa_stamina_item_g3_owls_02,2,E03.B-V.4.1.1,Vocabulary,BOY/Foundation
+pssa_stamina_item_g3_owls_03,1,E03.B-K.1.1.1,Key Ideas & Details,BOY/Foundation
+pssa_stamina_item_g3_owls_04,1,E03.B-K.1.1.1,Key Ideas & Details,BOY/Foundation
+pssa_stamina_item_g3_owls_05,2,E03.B-C.3.1.1,Integration of Knowledge & Ideas,BOY/Foundation
+pssa_stamina_item_g3_owls_06,3,E03.B-C.3.1.2,Integration of Knowledge & Ideas,BOY/Foundation
+pssa_stamina_item_g3_owls_ebsr_01,2,E03.B-C.3.1.1,Integration of Knowledge & Ideas,BOY/Foundation
+pssa_stamina_item_g3_rabbit_01,3,E03.A-K.1.1.2,Key Ideas & Details,BOY/Foundation
+pssa_stamina_item_g3_rabbit_02,2,E03.A-K.1.1.3,Key Ideas & Details,BOY/Foundation
+pssa_stamina_item_g3_rabbit_03,1,E03.A-K.1.1.1,Key Ideas & Details,BOY/Foundation
+pssa_stamina_item_g3_rabbit_04,2,E03.A-K.1.1.3,Key Ideas & Details,BOY/Foundation
+pssa_stamina_item_g3_rabbit_05,2,E03.A-V.4.1.1,Vocabulary,BOY/Foundation
+pssa_stamina_item_g3_rabbit_06,2,E03.A-C.2.1.2,Craft & Structure,BOY/Foundation
+pssa_stamina_item_g3_rabbit_ebsr_01,3,E03.A-K.1.1.3,Key Ideas & Details,BOY/Foundation
+pssa_stamina_item_g3_rabbit_sa_01,3,E03.A-K.1.1.3,Key Ideas & Details,BOY/Foundation
+pssa_stamina_item_g3_syrup_01,2,E03.B-K.1.1.2,Key Ideas & Details,BOY/Foundation
+pssa_stamina_item_g3_syrup_02,2,E03.B-V.4.1.1,Vocabulary,BOY/Foundation
+pssa_stamina_item_g3_syrup_03,2,E03.B-K.1.1.3,Key Ideas & Details,BOY/Foundation
+pssa_stamina_item_g3_syrup_04,2,E03.B-C.2.1.2,Craft & Structure,BOY/Foundation
+pssa_stamina_item_g3_syrup_ebsr_01,2,E03.B-K.1.1.2,Key Ideas & Details,BOY/Foundation
+pssa_stamina_item_g3_syrup_sa_01,2,E03.B-K.1.1.3,Key Ideas & Details,BOY/Foundation
+pssa_stamina_item_g3_syrup_dd_01,2,E03.B-K.1.1.3,Key Ideas & Details,BOY/Foundation
