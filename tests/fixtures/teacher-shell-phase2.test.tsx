@@ -65,7 +65,7 @@ assert.match(insightsPage, /params\.set\("tab", "reports"\)/, "legacy insights r
 assert.match(insightsPage, /redirect\(`\/teacher\?\$\{params\.toString\(\)\}`\)/, "legacy insights redirect must preserve query params");
 
 const teacherTools = read("app/teacher/tools/page.tsx");
-assert.match(teacherTools, /<TeacherDashboardPage \/>/, "/teacher/tools must render the legacy dashboard component unchanged");
+assert.match(teacherTools, /<TeacherDashboardPage \/>/, "/teacher/tools must render the teacher tools component");
 assert.match(teacherTools, /activeProduct="state_track"/, "/teacher/tools must live under State Track workspace");
 
 const teacherLiteracy = read("app/teacher/literacy/page.tsx");
