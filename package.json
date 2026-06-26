@@ -65,7 +65,11 @@
     "seed:phase4-morphology-y-to-i": "tsx scripts/content/seed-phase4-morphology-y-to-i.ts",
     "test:pseudoword-capture-coordinator": "tsx scripts/test-pseudoword-capture-coordinator.ts",
     "test:coach-demo-pair": "tsx scripts/test-coach-demo-pair.ts",
-    "test:coach-lesson-steps": "tsx scripts/test-coach-lesson-steps.ts"
+    "test:coach-lesson-steps": "tsx scripts/test-coach-lesson-steps.ts",
+    "test:lesson-player-mode": "tsx scripts/test-lesson-player-mode.ts",
+    "test:coach-stepper-state": "tsx scripts/test-coach-stepper-state.ts",
+    "test:aggregate-coach-part-outcome": "tsx scripts/test-aggregate-coach-part-outcome.ts",
+    "test:coach-stepper-copy": "tsx scripts/test-coach-stepper-copy.ts"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"
