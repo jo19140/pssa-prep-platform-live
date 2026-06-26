@@ -464,15 +464,22 @@ function testScopeProof() {
     .filter((line) => !modelBlock(baseSchema, "PssaFormSession").split("\n").includes(line))
     .map((line) => line.trim())
     .filter(Boolean);
+  const normWs = (s: string) => s.replace(/\s+/g, " ").trim();
   const allowedSessionDelta = [
-    "currentSectionIndex    Int                   @default(1)",
-    "sectionStatusesJson    Json?",
-    "analyticsTotalPoints        Int?",
-    "analyticsEarnedPoints       Int?",
+    "currentSectionIndex Int @default(1)",
+    "sectionStatusesJson Json?",
+    "analyticsTotalPoints Int?",
+    "analyticsEarnedPoints Int?",
     "analyticsPendingHumanPoints Int?",
   ];
-  assert.deepEqual(sessionDelta.filter((line) => !allowedSessionDelta.includes(line)), [], "PssaFormSession may only gain additive section-progress/analytics fields");
-  for (const field of allowedSessionDelta) assert.equal(modelBlock(schema, "PssaFormSession").includes(field), true, `PssaFormSession must retain ${field}`);
+  const allowedNorm = allowedSessionDelta.map(normWs);
+  assert.deepEqual(
+    sessionDelta.map(normWs).filter((line) => !allowedNorm.includes(line)),
+    [],
+    "PssaFormSession may only gain additive section-progress/analytics fields",
+  );
+  const sessionLinesNorm = modelBlock(schema, "PssaFormSession").split("\n").map(normWs);
+  for (const field of allowedSessionDelta) assert.equal(sessionLinesNorm.includes(normWs(field)), true, `PssaFormSession must retain ${field}`);
   assert.equal(modelBlock(schema, "PssaFormResponse"), modelBlock(baseSchema, "PssaFormResponse"), "PssaFormResponse model must be unchanged");
   assertNullableModelFields(schema, "PssaPassage", ["staminaBand", "genre", "textFeaturesJson", "domainVocabularyLoad", "factCheckNotesJson"]);
   assertNullableModelFields(schema, "PssaItem", ["targetWordOrPhrase", "testsApplicationNotDefinition"]);
