@@ -3,6 +3,7 @@ import {
   mapDistractor,
   type PssaStudentInsight,
 } from "@/lib/content/pssaInsightMapping";
+import { dokLevelFor, type PssaDokLevel } from "@/lib/content/pssaDokCrosswalk";
 
 export const REPORT_VERSION = "pssa-ws3b-student-report-v2";
 
@@ -21,6 +22,7 @@ export type PssaClusterSignal = "strong" | "developing" | "needs_support" | "lim
 export type PssaReportItem = {
   itemId?: string;
   id?: string;
+  dokLevel?: PssaDokLevel | null;
   eligibleContent?: string | null;
   reportingCategory?: string | null;
   interactionType?: string | null;
@@ -91,6 +93,7 @@ export type PssaMissedReviewRow = {
 
 export type PssaAnalyticsItemRow = {
   itemId: string;
+  dokLevel: PssaDokLevel | null;
   cluster: PssaReportCluster;
   eligibleContent: string | null;
   itemType: string;
@@ -115,6 +118,29 @@ export type PssaAdditionalAnalyticsItems = {
   percent: number | null;
   byItem: PssaAnalyticsItemRow[];
   byEc: PssaAnalyticsEcRow[];
+  analyticsByDok?: PssaAnalyticsDokRow[];
+};
+
+export type PssaDokSummaryRow = {
+  dok: PssaDokLevel;
+  itemCount: number;
+  operationalPoints: number;
+  earnedPoints: number;
+  pendingHumanPoints: number;
+};
+
+export type PssaAnalyticsDokRow = {
+  dok: PssaDokLevel;
+  itemCount: number;
+};
+
+export type PssaDokCategoryRow = {
+  dok: PssaDokLevel;
+  reportingCategory: string;
+  itemCount: number;
+  operationalPoints: number;
+  earnedPoints: number;
+  pendingHumanPoints: number;
 };
 
 export type PssaStudentReport = {
@@ -134,6 +160,8 @@ export type PssaStudentReport = {
   recommendedNextStep: string | null;
   likelyPatterns: PssaStudentInsight[];
   missedReview: PssaMissedReviewRow[];
+  byDok?: PssaDokSummaryRow[];
+  byDokCategory?: PssaDokCategoryRow[];
   additionalAnalyticsItems: PssaAdditionalAnalyticsItems;
 };
 
@@ -177,6 +205,8 @@ export function buildStudentReport(
   const strongestCluster = complete ? chooseCluster(clusterResults, "strongest") : null;
   const missedReview = buildMissedReview(operationalItems, operationalResponses);
   const likelyPatterns = insights.slice().sort(compareInsights);
+  const byDok = buildByDok(operationalItems, operationalResponses);
+  const byDokCategory = buildByDokCategory(operationalItems, operationalResponses);
   const additionalAnalyticsItems = buildAdditionalAnalyticsItems(items, responses);
   const recommendedNextStep = complete
     ? recommendedNextStepFor(priorityCluster, likelyPatterns, missedReview, clusterResults)
@@ -199,6 +229,8 @@ export function buildStudentReport(
     recommendedNextStep,
     likelyPatterns,
     missedReview,
+    byDok,
+    byDokCategory,
     additionalAnalyticsItems,
   };
 }
@@ -208,6 +240,7 @@ function buildAdditionalAnalyticsItems(items: PssaReportItem[], responses: Map<s
     const response = responses.get(itemId(item));
     return {
       itemId: itemId(item),
+      dokLevel: itemDokLevel(item),
       cluster: clusterOf(item),
       eligibleContent: item.eligibleContent ?? null,
       itemType: String(item.interactionType ?? item.itemType ?? ""),
@@ -227,7 +260,58 @@ function buildAdditionalAnalyticsItems(items: PssaReportItem[], responses: Map<s
     percent: possiblePoints > 0 ? Math.round((earnedPoints / possiblePoints) * 1000) / 10 : null,
     byItem,
     byEc: buildAnalyticsByEc(byItem),
+    analyticsByDok: buildAnalyticsByDok(byItem),
   };
+}
+
+function buildByDok(items: PssaReportItem[], responses: Map<string, PssaReportResponse>): PssaDokSummaryRow[] {
+  const grouped = new Map<PssaDokLevel, PssaDokSummaryRow>();
+  for (const item of items) {
+    const dok = itemDokLevel(item);
+    if (!dok) continue;
+    const response = responses.get(itemId(item));
+    const row = grouped.get(dok) ?? { dok, itemCount: 0, operationalPoints: 0, earnedPoints: 0, pendingHumanPoints: 0 };
+    row.itemCount += 1;
+    row.operationalPoints += response?.maxPoints ?? 0;
+    row.earnedPoints += typeof response?.pointsEarned === "number" ? response.pointsEarned : 0;
+    if (response?.scoreStatus === "pending_human_scoring") row.pendingHumanPoints += response.maxPoints ?? 0;
+    grouped.set(dok, row);
+  }
+  return [1, 2, 3].map((dok) => grouped.get(dok as PssaDokLevel) ?? {
+    dok: dok as PssaDokLevel,
+    itemCount: 0,
+    operationalPoints: 0,
+    earnedPoints: 0,
+    pendingHumanPoints: 0,
+  });
+}
+
+function buildByDokCategory(items: PssaReportItem[], responses: Map<string, PssaReportResponse>): PssaDokCategoryRow[] {
+  const grouped = new Map<string, PssaDokCategoryRow>();
+  for (const item of items) {
+    const dok = itemDokLevel(item);
+    if (!dok) continue;
+    const reportingCategory = String(item.reportingCategory ?? "unknown");
+    const key = `${dok}:${reportingCategory}`;
+    const response = responses.get(itemId(item));
+    const row = grouped.get(key) ?? {
+      dok,
+      reportingCategory,
+      itemCount: 0,
+      operationalPoints: 0,
+      earnedPoints: 0,
+      pendingHumanPoints: 0,
+    };
+    row.itemCount += 1;
+    row.operationalPoints += response?.maxPoints ?? 0;
+    row.earnedPoints += typeof response?.pointsEarned === "number" ? response.pointsEarned : 0;
+    if (response?.scoreStatus === "pending_human_scoring") row.pendingHumanPoints += response.maxPoints ?? 0;
+    grouped.set(key, row);
+  }
+  return [...grouped.values()].sort((a, b) => {
+    if (a.dok !== b.dok) return a.dok - b.dok;
+    return a.reportingCategory.localeCompare(b.reportingCategory);
+  });
 }
 
 function buildAnalyticsByEc(items: PssaAnalyticsItemRow[]): PssaAnalyticsEcRow[] {
@@ -242,6 +326,18 @@ function buildAnalyticsByEc(items: PssaAnalyticsItemRow[]): PssaAnalyticsEcRow[]
     grouped.set(eligibleContent, row);
   }
   return [...grouped.values()].sort((a, b) => a.eligibleContent.localeCompare(b.eligibleContent));
+}
+
+function buildAnalyticsByDok(items: PssaAnalyticsItemRow[]): PssaAnalyticsDokRow[] {
+  const grouped = new Map<PssaDokLevel, number>();
+  for (const item of items) {
+    if (!item.dokLevel) continue;
+    grouped.set(item.dokLevel, (grouped.get(item.dokLevel) ?? 0) + 1);
+  }
+  return [1, 2, 3].map((dok) => ({
+    dok: dok as PssaDokLevel,
+    itemCount: grouped.get(dok as PssaDokLevel) ?? 0,
+  }));
 }
 
 function buildClusterResults(items: PssaReportItem[], responses: Map<string, PssaReportResponse>) {
@@ -372,6 +468,10 @@ function scoringBucketOfResponse(response: PssaReportResponse) {
 
 function itemId(item: PssaReportItem) {
   return String(item.itemId ?? item.id ?? "");
+}
+
+function itemDokLevel(item: PssaReportItem) {
+  return item.dokLevel ?? dokLevelFor(itemId(item));
 }
 
 function selectedIndexOf(response: PssaReportResponse) {

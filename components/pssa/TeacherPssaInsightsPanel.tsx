@@ -125,6 +125,52 @@ export function TeacherPssaInsightsPanel({
       ) : null}
 
       <div className="mt-7">
+        <SectionLabel>Depth of Knowledge</SectionLabel>
+        <div className="mt-3 grid gap-3 md:grid-cols-3">
+          {(report.byDok ?? []).map((row) => (
+            <article key={row.dok} className="rounded-md border border-slate-200 bg-white p-4">
+              <div className="text-sm font-semibold text-slate-950">{formatDok(row.dok)}</div>
+              <div className="mt-2 text-2xl font-semibold text-slate-900">
+                {row.earnedPoints}/{row.operationalPoints}
+              </div>
+              <p className="mt-1 text-xs text-slate-500">
+                {row.itemCount} operational items{row.pendingHumanPoints ? ` · ${row.pendingHumanPoints} pending` : ""}
+              </p>
+            </article>
+          ))}
+        </div>
+        {(report.byDokCategory ?? []).length ? (
+          <div className="mt-3 overflow-hidden rounded-md border border-slate-200">
+            <table className="min-w-full divide-y divide-slate-200 text-sm">
+              <thead className="bg-slate-50 text-xs font-semibold uppercase tracking-wide text-slate-500">
+                <tr>
+                  <th className="px-3 py-2 text-left">DOK</th>
+                  <th className="px-3 py-2 text-left">Category</th>
+                  <th className="px-3 py-2 text-right">Items</th>
+                  <th className="px-3 py-2 text-right">Operational points</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-100 bg-white">
+                {(report.byDokCategory ?? []).map((row) => (
+                  <tr key={`${row.dok}:${row.reportingCategory}`}>
+                    <td className="px-3 py-2 font-medium text-slate-900">{formatDok(row.dok)}</td>
+                    <td className="px-3 py-2 text-slate-700">{row.reportingCategory}</td>
+                    <td className="px-3 py-2 text-right text-slate-700">{row.itemCount}</td>
+                    <td className="px-3 py-2 text-right text-slate-700">{row.earnedPoints}/{row.operationalPoints}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        ) : null}
+        {report.additionalAnalyticsItems.analyticsByDok?.some((row) => row.itemCount > 0) ? (
+          <p className="mt-2 text-xs text-slate-500">
+            Analytics-only item counts: {report.additionalAnalyticsItems.analyticsByDok.map((row) => `${formatDok(row.dok)} ${row.itemCount}`).join(" · ")}. These counts do not affect diagnostic score totals.
+          </p>
+        ) : null}
+      </div>
+
+      <div className="mt-7">
         <SectionLabel>Skill clusters</SectionLabel>
         <div className="mt-3 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
           {report.clusterResults.map((cluster) => <ClusterBar key={cluster.cluster} cluster={cluster} />)}
@@ -351,4 +397,8 @@ function signalLabel(signal: string) {
 
 function formatRole(role: string) {
   return role.replace(/_/g, " ");
+}
+
+function formatDok(dok: number) {
+  return `DOK ${dok}`;
 }

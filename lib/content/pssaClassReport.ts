@@ -8,6 +8,9 @@ import {
   REPORT_VERSION,
   type PssaClusterSignal,
   type PssaAdditionalAnalyticsItems,
+  type PssaAnalyticsDokRow,
+  type PssaDokCategoryRow,
+  type PssaDokSummaryRow,
   type PssaReportBand,
   type PssaReportCluster,
   type PssaStudentReport,
@@ -64,6 +67,10 @@ export type ClassAnalyticsItemsSummary = PssaAdditionalAnalyticsItems & {
   studentCount: number;
 };
 
+export type ClassDokSummaryRow = PssaDokSummaryRow;
+
+export type ClassDokCategoryRow = PssaDokCategoryRow;
+
 export type ClassReport = {
   classReportVersion: typeof CLASS_REPORT_VERSION;
   reportVersion: typeof REPORT_VERSION;
@@ -82,6 +89,8 @@ export type ClassReport = {
   topClassInsight: string | null;
   misconceptionMap: ClassMisconceptionMapEntry[];
   suggestedGroups: SuggestedClassGroup[];
+  byDok?: ClassDokSummaryRow[];
+  byDokCategory?: ClassDokCategoryRow[];
   additionalAnalyticsItems: ClassAnalyticsItemsSummary;
 };
 
@@ -119,6 +128,8 @@ export function buildClassReport(studentReports: StudentReportInput[], opts: Bui
   const suggestedGroups = buildSuggestedGroups(misconceptionMap, completed, contributions);
   const topPriorityCluster = chooseTopPriorityCluster(clusterResults);
   const topClassInsight = buildTopClassInsight(misconceptionMap);
+  const byDok = buildClassByDok(completed);
+  const byDokCategory = buildClassByDokCategory(completed);
   const additionalAnalyticsItems = buildClassAnalyticsItems(completed);
 
   return {
@@ -139,6 +150,8 @@ export function buildClassReport(studentReports: StudentReportInput[], opts: Bui
     topClassInsight,
     misconceptionMap,
     suggestedGroups,
+    byDok,
+    byDokCategory,
     additionalAnalyticsItems,
   };
 }
@@ -146,6 +159,7 @@ export function buildClassReport(studentReports: StudentReportInput[], opts: Bui
 function buildClassAnalyticsItems(inputs: StudentReportInput[]): ClassAnalyticsItemsSummary {
   const studentBlocks = inputs.map((input) => input.report.additionalAnalyticsItems).filter(Boolean);
   const byItem = studentBlocks.flatMap((block) => block.byItem);
+  const analyticsByDok = buildClassAnalyticsByDok(studentBlocks);
   const byEcMap = new Map<string, { earnedPoints: number; possiblePoints: number; pendingHumanPoints: number }>();
   for (const block of studentBlocks) {
     for (const row of block.byEc) {
@@ -172,7 +186,74 @@ function buildClassAnalyticsItems(inputs: StudentReportInput[]): ClassAnalyticsI
       ...row,
       percent: row.possiblePoints > 0 ? Math.round((row.earnedPoints / row.possiblePoints) * 1000) / 10 : null,
     })).sort((a, b) => a.eligibleContent.localeCompare(b.eligibleContent)),
+    analyticsByDok,
   };
+}
+
+function buildClassByDok(inputs: StudentReportInput[]): ClassDokSummaryRow[] {
+  const grouped = new Map<number, ClassDokSummaryRow>();
+  for (const input of inputs) {
+    for (const row of input.report.byDok ?? []) {
+      const existing = grouped.get(row.dok) ?? {
+        dok: row.dok,
+        itemCount: 0,
+        operationalPoints: 0,
+        earnedPoints: 0,
+        pendingHumanPoints: 0,
+      };
+      existing.itemCount += row.itemCount;
+      existing.operationalPoints += row.operationalPoints;
+      existing.earnedPoints += row.earnedPoints;
+      existing.pendingHumanPoints += row.pendingHumanPoints;
+      grouped.set(row.dok, existing);
+    }
+  }
+  return [1, 2, 3].map((dok) => grouped.get(dok) ?? {
+    dok: dok as ClassDokSummaryRow["dok"],
+    itemCount: 0,
+    operationalPoints: 0,
+    earnedPoints: 0,
+    pendingHumanPoints: 0,
+  });
+}
+
+function buildClassByDokCategory(inputs: StudentReportInput[]): ClassDokCategoryRow[] {
+  const grouped = new Map<string, ClassDokCategoryRow>();
+  for (const input of inputs) {
+    for (const row of input.report.byDokCategory ?? []) {
+      const key = `${row.dok}:${row.reportingCategory}`;
+      const existing = grouped.get(key) ?? {
+        dok: row.dok,
+        reportingCategory: row.reportingCategory,
+        itemCount: 0,
+        operationalPoints: 0,
+        earnedPoints: 0,
+        pendingHumanPoints: 0,
+      };
+      existing.itemCount += row.itemCount;
+      existing.operationalPoints += row.operationalPoints;
+      existing.earnedPoints += row.earnedPoints;
+      existing.pendingHumanPoints += row.pendingHumanPoints;
+      grouped.set(key, existing);
+    }
+  }
+  return [...grouped.values()].sort((a, b) => {
+    if (a.dok !== b.dok) return a.dok - b.dok;
+    return a.reportingCategory.localeCompare(b.reportingCategory);
+  });
+}
+
+function buildClassAnalyticsByDok(blocks: PssaAdditionalAnalyticsItems[]): PssaAnalyticsDokRow[] {
+  const grouped = new Map<number, number>();
+  for (const block of blocks) {
+    for (const row of block.analyticsByDok ?? []) {
+      grouped.set(row.dok, (grouped.get(row.dok) ?? 0) + row.itemCount);
+    }
+  }
+  return [1, 2, 3].map((dok) => ({
+    dok: dok as PssaAnalyticsDokRow["dok"],
+    itemCount: grouped.get(dok) ?? 0,
+  }));
 }
 
 function buildPatternContributions(inputs: StudentReportInput[]): PatternContribution[] {
