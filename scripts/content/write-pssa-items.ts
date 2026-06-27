@@ -6,11 +6,12 @@ import {
   AUDIT_CONTRACT_VERSION,
   SOURCE_SCAN_VERSION,
   SOURCE_VERSION_YEAR,
-  buildPlan,
+  buildPlanForBenchmark,
   stableStringify,
   tallyGate,
   type BatchRow,
   type ImportPlan,
+  type PssaImportBenchmark,
   type WouldImportItem,
   type WouldImportPassage,
 } from "./lib/pssa-import-plan";
@@ -21,6 +22,7 @@ type Args = {
   write: boolean;
   env: string | null;
   grade: number | null;
+  benchmark: PssaImportBenchmark;
   allowProduction: boolean;
 };
 
@@ -49,8 +51,8 @@ function emptyCounts(): MutationCounts {
   return { inserts: 0, updates: 0, deletes: 0, noops: 0, drift: 0 };
 }
 
-function parseArgs(argv: string[]): Args {
-  const args: Args = { write: false, env: null, grade: null, allowProduction: false };
+export function parseArgs(argv: string[]): Args {
+  const args: Args = { write: false, env: null, grade: null, benchmark: "foundation", allowProduction: false };
   for (let i = 0; i < argv.length; i += 1) {
     const arg = argv[i];
     if (arg === "--write") args.write = true;
@@ -62,11 +64,20 @@ function parseArgs(argv: string[]): Args {
       args.grade = Number(argv[i + 1]);
       i += 1;
     } else if (arg.startsWith("--grade=")) args.grade = Number(arg.slice("--grade=".length));
+    else if (arg === "--benchmark") {
+      const value = argv[i + 1];
+      if (value !== "foundation" && value !== "eoy") throw new Error(`Unsupported --benchmark: ${value}. Expected foundation or eoy.`);
+      args.benchmark = value;
+      i += 1;
+    } else if (arg.startsWith("--benchmark=")) {
+      const value = arg.slice("--benchmark=".length);
+      if (value !== "foundation" && value !== "eoy") throw new Error(`Unsupported --benchmark: ${value}. Expected foundation or eoy.`);
+      args.benchmark = value;
+    }
     else if (arg === "--allow-production") args.allowProduction = true;
     else throw new Error(`Unknown argument: ${arg}`);
   }
-  if (!args.write) throw new Error("DB-4 writer requires --write.");
-  if (args.env !== "dev") throw new Error("--write requires explicit --env dev.");
+  if (args.write && args.env !== "dev") throw new Error("--write requires explicit --env dev.");
   if (!Number.isInteger(args.grade)) throw new Error("--grade is required.");
   const envValues = [process.env.NODE_ENV, process.env.APP_ENV, args.env].filter(Boolean).map((value) => value!.toLowerCase());
   const looksProduction = envValues.some((value) => value.includes("prod") || value === "production");
@@ -95,9 +106,9 @@ function writeCsv(filePath: string, rows: Record<string, unknown>[], columns: st
   fs.writeFileSync(filePath, `${lines.join("\n")}\n`);
 }
 
-function buildStablePlan(gradeLevel: number) {
-  const first = buildPlan(gradeLevel);
-  const second = buildPlan(gradeLevel);
+export function buildStablePlan(gradeLevel: number, benchmark: PssaImportBenchmark = "foundation") {
+  const first = buildPlanForBenchmark({ grade: gradeLevel, benchmark });
+  const second = buildPlanForBenchmark({ grade: gradeLevel, benchmark });
   const firstHashes = [...first.passages.map((row) => row.contentHash), ...first.activeItems.map((row) => row.contentHash), ...first.deprecatedItems.map((row) => row.contentHash)].sort();
   const secondHashes = [...second.passages.map((row) => row.contentHash), ...second.activeItems.map((row) => row.contentHash), ...second.deprecatedItems.map((row) => row.contentHash)].sort();
   first.hashStable = stableStringify(firstHashes) === stableStringify(secondHashes);
@@ -227,6 +238,10 @@ function itemCreateData(item: WouldImportItem, eligibleContentRefId: string | nu
     approvedAt: null,
     reviewedBy: null,
     studentPreviewJson: json(item.studentPreviewJson),
+    passageGroupId: item.passageGroupId,
+    isCrossText: item.isCrossText,
+    requiredEvidenceSlotsJson: item.requiredEvidenceSlotsJson === null ? Prisma.JsonNull : json(item.requiredEvidenceSlotsJson),
+    crossTextSupportRuleJson: item.crossTextSupportRuleJson === null ? Prisma.JsonNull : json(item.crossTextSupportRuleJson),
     responseSpecVersion: item.responseSpecVersion,
     auditContractVersion: item.auditContractVersion,
     sourceScanVersion: item.sourceScanVersion,
@@ -291,6 +306,8 @@ function assertGovernanceRow(id: string, row: { reviewStatus: string; itemStatus
 async function persistPlan(db: PrismaClient, plan: ImportPlan, dbTarget: string, refs: Map<string, string>, crosswalkCount: number, crosswalkJoinCount: number): Promise<WriteResult> {
   const mutations: Record<string, MutationCounts> = {
     PssaPassage: emptyCounts(),
+    PssaPassageGroup: emptyCounts(),
+    PssaPassageGroupMember: emptyCounts(),
     PssaItemBatch: emptyCounts(),
     PssaItem: emptyCounts(),
     PssaItemPassageLink: emptyCounts(),
@@ -322,6 +339,54 @@ async function persistPlan(db: PrismaClient, plan: ImportPlan, dbTarget: string,
         if (existing.contentHash !== passage.contentHash) throw new Error(`DB-4 drift refused: passage ${passage.passageId} contentHash differs.`);
         assertGovernanceRow(passage.passageId, existing);
         mutations.PssaPassage.noops += 1;
+      }
+    }
+
+    for (const group of plan.passageGroups) {
+      const existing = await tx.pssaPassageGroup.findUnique({ where: { id: group.groupId } });
+      const desired = {
+        id: group.groupId,
+        gradeLevel: group.gradeLevel,
+        subject: group.subject,
+        groupType: group.groupType,
+        genre: group.genre,
+        staminaBand: group.staminaBand,
+        title: group.title,
+        wordCount: group.wordCount,
+        domainVocabularyLoad: group.domainVocabularyLoad,
+        textFeaturesJson: json(group.textFeaturesJson ?? []),
+        contentHash: group.contentHash,
+      };
+      if (!existing) {
+        await tx.pssaPassageGroup.create({ data: desired });
+        mutations.PssaPassageGroup.inserts += 1;
+      } else {
+        if (existing.contentHash !== group.contentHash) throw new Error(`DB-4 drift refused: passage group ${group.groupId} contentHash differs.`);
+        mutations.PssaPassageGroup.noops += 1;
+      }
+      for (const member of group.members) {
+        const existingMember = await tx.pssaPassageGroupMember.findUnique({ where: { groupId_passageId: { groupId: group.groupId, passageId: member.passageId } } });
+        if (!existingMember) {
+          await tx.pssaPassageGroupMember.create({
+            data: {
+              groupId: group.groupId,
+              passageId: member.passageId,
+              slot: member.slot,
+              position: member.position,
+              passageContentHashSnapshot: member.passageContentHashSnapshot,
+            },
+          });
+          mutations.PssaPassageGroupMember.inserts += 1;
+        } else {
+          if (
+            existingMember.slot !== member.slot ||
+            existingMember.position !== member.position ||
+            existingMember.passageContentHashSnapshot !== member.passageContentHashSnapshot
+          ) {
+            throw new Error(`DB-4 drift refused: passage group member ${group.groupId}/${member.passageId} differs.`);
+          }
+          mutations.PssaPassageGroupMember.noops += 1;
+        }
       }
     }
 
@@ -509,8 +574,15 @@ function writeReports(plan: ImportPlan, result: WriteResult) {
 
 async function main() {
   const args = parseArgs(process.argv.slice(2));
-  const plan = buildStablePlan(args.grade!);
+  const plan = buildStablePlan(args.grade!, args.benchmark);
   assertPreWritePlan(plan);
+  if (!args.write) {
+    console.log("PSSA DB-4 dry run complete.");
+    console.log(`Benchmark=${args.benchmark}`);
+    console.log(`Passages=${plan.passages.length}, active=${plan.activeItems.length}, deprecated=${plan.deprecatedItems.length}, supersessions=${plan.supersessions.length}, batches=${plan.batches.length}`);
+    console.log(`Gate failures=${totalGateFailures(plan)}, sourceScanFailures=${plan.sourceScanFailures}, hashStable=${plan.hashStable}`);
+    return;
+  }
   assertDatabaseUrlPresent();
   const db = new PrismaClient();
   try {
@@ -527,7 +599,9 @@ async function main() {
   }
 }
 
-main().catch((error) => {
-  console.error(error instanceof Error ? error.message : error);
-  process.exit(1);
-});
+if (require.main === module) {
+  main().catch((error) => {
+    console.error(error instanceof Error ? error.message : error);
+    process.exit(1);
+  });
+}

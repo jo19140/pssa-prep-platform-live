@@ -27,14 +27,15 @@ export const AUDIT_CONTRACT_VERSION = "pssa-db3-import-v1";
 export const SOURCE_SCAN_VERSION = "pssa-source-scan-v1";
 
 type PssaGradeImportFiles = {
-  pilot: string;
-  ebsr: string;
-  tei: string;
-  matchingGridDragDrop: string;
-  conventions: string;
-  shortAnswer: string;
+  pilot?: string;
+  ebsr?: string;
+  tei?: string;
+  matchingGridDragDrop?: string;
+  conventions?: string;
+  shortAnswer?: string;
   literaryTopup?: string;
-  deprecation: string;
+  deprecation?: string;
+  eoyBackends?: string[];
 };
 
 export type PssaGradeImportManifest = {
@@ -44,15 +45,15 @@ export type PssaGradeImportManifest = {
   batchIds: {
     readingMcq: string;
     ebsr: string;
-    multiSelect: string;
-    hotText: string;
+    multiSelect?: string;
+    hotText?: string;
     matchingGrid: string;
-    dragDrop: string;
+    dragDrop?: string;
     conventions: string;
     shortAnswerPool: string;
   };
   conventionItemIdPrefix: string;
-  audits: {
+  audits?: {
     ebsr: (items: any[], passages?: PssaPassageAuditInput[]) => any;
     tei: (multiSelect: any[], hotText: any[], passages?: PssaPassageAuditInput[]) => any;
     matchingGridDragDrop: (mg: any[], dd: any[], passages?: PssaPassageAuditInput[]) => any;
@@ -98,6 +99,35 @@ export const PSSA_GRADE_IMPORT_MANIFESTS: Record<number, PssaGradeImportManifest
   3: GRADE3_IMPORT_MANIFEST,
 };
 
+export const GRADE3_EOY_IMPORT_MANIFEST: PssaGradeImportManifest = {
+  gradeLevel: 3,
+  files: {
+    eoyBackends: [
+      "exemplars/pssa_grade3_eoy_p1/backend.json",
+      "exemplars/pssa_grade3_eoy_p2/backend.json",
+      "exemplars/pssa_grade3_eoy_p3/backend.json",
+      "exemplars/pssa_grade3_eoy_p4/backend.json",
+      "exemplars/pssa_grade3_eoy_conventions/backend.json",
+    ],
+  },
+  expectedCounts: { passages: 5, activeItems: 45, deprecatedItems: 0, supersessions: 0, batches: 5 },
+  batchIds: {
+    readingMcq: "reading_mcq_grade3_eoy",
+    ebsr: "ebsr_grade3_eoy",
+    matchingGrid: "matching_grid_grade3_eoy",
+    conventions: "conventions_grade3_eoy",
+    shortAnswerPool: "short_answer_grade3_eoy",
+  },
+  conventionItemIdPrefix: "pssa_item_g3_eoy_conv_",
+};
+
+export type PssaImportBenchmark = "foundation" | "eoy";
+
+export const PSSA_BENCHMARK_IMPORT_MANIFESTS: Record<PssaImportBenchmark, Record<number, PssaGradeImportManifest>> = {
+  foundation: PSSA_GRADE_IMPORT_MANIFESTS,
+  eoy: { 3: GRADE3_EOY_IMPORT_MANIFEST },
+};
+
 export const FILES = GRADE3_IMPORT_MANIFEST.files;
 
 export const EXPECTED_BATCHES = [
@@ -117,6 +147,16 @@ export function lookupPssaGradeImportManifest(gradeLevel: number): PssaGradeImpo
   if (manifest.gradeLevel !== gradeLevel) throw new Error(`PSSA import manifest registry mismatch for grade ${gradeLevel}.`);
   const batchIds = Object.values(manifest.batchIds);
   if (new Set(batchIds).size !== batchIds.length) throw new Error(`PSSA import manifest has duplicate batch ids for grade ${gradeLevel}.`);
+  return manifest;
+}
+
+export function lookupPssaBenchmarkImportManifest(gradeLevel: number, benchmark: PssaImportBenchmark): PssaGradeImportManifest {
+  if (benchmark === "foundation") return lookupPssaGradeImportManifest(gradeLevel);
+  const manifest = PSSA_BENCHMARK_IMPORT_MANIFESTS[benchmark]?.[gradeLevel];
+  if (!manifest) throw new Error(`No PSSA ${benchmark} import manifest registered for grade ${gradeLevel}.`);
+  if (manifest.gradeLevel !== gradeLevel) throw new Error(`PSSA ${benchmark} import manifest registry mismatch for grade ${gradeLevel}.`);
+  const batchIds = Object.values(manifest.batchIds).filter(Boolean);
+  if (new Set(batchIds).size !== batchIds.length) throw new Error(`PSSA ${benchmark} import manifest has duplicate batch ids for grade ${gradeLevel}.`);
   return manifest;
 }
 
@@ -177,6 +217,10 @@ export type WouldImportItem = {
   approvalEligible: false;
   alignmentStatus: "ALIGNED" | "NEEDS_CROSSWALK";
   batchId: string;
+  passageGroupId: string | null;
+  isCrossText: boolean | null;
+  requiredEvidenceSlotsJson: unknown;
+  crossTextSupportRuleJson: unknown;
   responseSpecJson: unknown;
   correctResponseJson: unknown;
   scoringJson: unknown;
@@ -193,6 +237,26 @@ export type WouldImportItem = {
   gates: Record<string, GateStatus>;
   finalImportEligibility: ImportStatus;
   blockedReasons: string[];
+};
+
+export type WouldImportPassageGroup = {
+  groupId: string;
+  gradeLevel: number;
+  subject: string;
+  groupType: string;
+  genre: string;
+  staminaBand: string;
+  title: string;
+  wordCount: number;
+  domainVocabularyLoad: string | null;
+  textFeaturesJson: unknown;
+  contentHash: string;
+  members: Array<{
+    passageId: string;
+    slot: string;
+    position: number;
+    passageContentHashSnapshot: string;
+  }>;
 };
 
 export type WouldImportPassage = {
@@ -220,6 +284,7 @@ export type WouldImportPassage = {
 export type ImportPlan = {
   gradeLevel: number;
   passages: WouldImportPassage[];
+  passageGroups: WouldImportPassageGroup[];
   activeItems: WouldImportItem[];
   deprecatedItems: WouldImportItem[];
   supersessions: Array<{ oldItemId: string; newItemId: string; reason: string }>;
@@ -292,6 +357,7 @@ function loadEcCatalog() {
 }
 
 function loadDeprecationRows(manifest: PssaGradeImportManifest) {
+  if (!manifest.files.deprecation) return [];
   const rows = parseCsv(fs.readFileSync(manifest.files.deprecation, "utf8"));
   const header = rows[0];
   return rows.slice(1).map((row) => Object.fromEntries(header.map((column, index) => [column, row[index]])));
@@ -352,6 +418,7 @@ function passageIdsFor(item: any) {
   const ids = [
     item.passageId,
     ...(Array.isArray(item.passageIds) ? item.passageIds : []),
+    ...(Array.isArray(item.passageLinks) ? item.passageLinks.map((link: any) => link.passageId) : []),
     item.sourcePassageId,
   ].filter(Boolean).map(String);
   return Array.from(new Set(ids));
@@ -361,13 +428,13 @@ function batchIdFor(item: any, manifest: PssaGradeImportManifest, deprecated = f
   if (deprecated) return "";
   switch (interactionTypeFor(item)) {
     case "EBSR": return manifest.batchIds.ebsr;
-    case "MULTI_SELECT": return manifest.batchIds.multiSelect;
-    case "HOT_TEXT": return item.itemId?.startsWith(manifest.conventionItemIdPrefix) ? manifest.batchIds.conventions : manifest.batchIds.hotText;
+    case "MULTI_SELECT": return manifest.batchIds.multiSelect ?? "";
+    case "HOT_TEXT": return item.itemId?.startsWith(manifest.conventionItemIdPrefix) ? manifest.batchIds.conventions : (manifest.batchIds.hotText ?? "");
     case "MATCHING_GRID": return manifest.batchIds.matchingGrid;
-    case "DRAG_DROP": return item.itemId?.startsWith(manifest.conventionItemIdPrefix) ? manifest.batchIds.conventions : manifest.batchIds.dragDrop;
+    case "DRAG_DROP": return item.itemId?.startsWith(manifest.conventionItemIdPrefix) ? manifest.batchIds.conventions : (manifest.batchIds.dragDrop ?? "");
     case "INLINE_DROPDOWN": return manifest.batchIds.conventions;
     case "SHORT_ANSWER": return manifest.batchIds.shortAnswerPool;
-    case "MCQ": return item.passageId ? manifest.batchIds.readingMcq : manifest.batchIds.conventions;
+    case "MCQ": return passageIdsFor(item).length ? manifest.batchIds.readingMcq : manifest.batchIds.conventions;
     default: return "";
   }
 }
@@ -381,10 +448,11 @@ function sourceFileForTopupItem(item: any, fallback: string, manifest: PssaGrade
 function sourceFileForTopupPassage(passage: any, manifest: PssaGradeImportManifest) {
   return passage.auditMetadata?.authoredIn === "PSSA_PR_4P_GRADE3_LITERARY_TOPUP" && manifest.files.literaryTopup
     ? manifest.files.literaryTopup
-    : manifest.files.pilot;
+    : manifest.files.pilot!;
 }
 
 function correctResponse(item: any) {
+  if (item.correctResponseJson) return item.correctResponseJson;
   if (item.correctResponse) return item.correctResponse;
   const interactionType = interactionTypeFor(item);
   if (interactionType === "MCQ") return { correctIndex: item.correctIndex };
@@ -398,7 +466,7 @@ function correctResponse(item: any) {
 }
 
 function scoringJson(item: any) {
-  const base = item.scoring ?? item.scoringRubricJson ?? item.rubric ?? { totalPoints: pointValue(item) };
+  const base = item.scoringJson ?? item.scoring ?? item.scoringRubricJson ?? item.rubric ?? { totalPoints: pointValue(item) };
   return interactionTypeFor(item) === "SHORT_ANSWER"
     ? { ...base, scoreBandExamples: item.scoreBandExamples ?? [] }
     : base;
@@ -481,6 +549,10 @@ function buildWouldItem(item: any, sourceFile: string, gates: Record<string, Gat
     approvalEligible: false,
     alignmentStatus: resolved ? "ALIGNED" : "NEEDS_CROSSWALK",
     batchId: batchIdFor(item, manifest, deprecated),
+    passageGroupId: typeof item.passageGroupId === "string" && item.passageGroupId ? item.passageGroupId : null,
+    isCrossText: typeof item.isCrossText === "boolean" ? item.isCrossText : null,
+    requiredEvidenceSlotsJson: item.requiredEvidenceSlotsJson ?? null,
+    crossTextSupportRuleJson: item.crossTextSupportRuleJson ?? null,
     responseSpecJson: content.responseSpecJson,
     correctResponseJson: content.correctResponseJson,
     scoringJson: content.scoringJson,
@@ -732,6 +804,12 @@ function contentQualityGatesFor(gates: Map<string, Record<string, GateStatus>>, 
   return gates.get(itemId(item)) ?? defaultContentQualityGates();
 }
 
+function eoyContentQualityGatesFor(gates: Map<string, Record<string, GateStatus>>, item: any) {
+  const result: Record<string, GateStatus> = { ...contentQualityGatesFor(gates, item) };
+  if (interactionTypeFor(item) !== "MCQ") delete result.PSSA_VOCAB_KEY_CONSTRUCT;
+  return result;
+}
+
 function buildMcqPositionBatch(items: any[], manifest: PssaGradeImportManifest): BatchRow {
   const counts = [0, 0, 0, 0];
   for (const item of items) if (typeof item.correctIndex === "number") counts[item.correctIndex] += 1;
@@ -750,12 +828,12 @@ export function buildPlan(gradeLevel: number): ImportPlan {
   const manifestConfig = lookupPssaGradeImportManifest(gradeLevel);
   const crosswalkKeys = loadCrosswalkKeys();
   const ecCatalog = loadEcCatalog();
-  const pilot = readJson<any>(manifestConfig.files.pilot);
-  const ebsr = readJson<any>(manifestConfig.files.ebsr);
-  const tei = readJson<any>(manifestConfig.files.tei);
-  const mgdd = readJson<any>(manifestConfig.files.matchingGridDragDrop);
-  const conventions = readJson<any>(manifestConfig.files.conventions);
-  const shortAnswer = readJson<any>(manifestConfig.files.shortAnswer);
+  const pilot = readJson<any>(manifestConfig.files.pilot!);
+  const ebsr = readJson<any>(manifestConfig.files.ebsr!);
+  const tei = readJson<any>(manifestConfig.files.tei!);
+  const mgdd = readJson<any>(manifestConfig.files.matchingGridDragDrop!);
+  const conventions = readJson<any>(manifestConfig.files.conventions!);
+  const shortAnswer = readJson<any>(manifestConfig.files.shortAnswer!);
   const literaryTopup = manifestConfig.files.literaryTopup ? readJson<any>(manifestConfig.files.literaryTopup) : { passages: [], items: [] };
   const deprecationRows = loadDeprecationRows(manifestConfig);
   const deprecationByOld = new Map(deprecationRows.map((row) => [row.oldItemId, row]));
@@ -796,6 +874,7 @@ export function buildPlan(gradeLevel: number): ImportPlan {
   const mcqAbsoluteFailed = new Set(mcqAbsolute.filter((row) => row.itemId !== "batch" && row.result === "FAIL").map((row) => row.itemId));
   const mcqPositionBatch = buildMcqPositionBatch(activeReadingMcq, manifestConfig);
 
+  if (!manifestConfig.audits) throw new Error(`PSSA foundation import manifest is missing audits for grade ${gradeLevel}.`);
   const ebsrAudit = manifestConfig.audits.ebsr(ebsrItems as any, passages);
   const teiAudit = manifestConfig.audits.tei(multiSelectItems as any, hotTextItems as any, passages);
   const mgddAudit = manifestConfig.audits.matchingGridDragDrop(matchingGridItems as any, dragDropItems as any, passages);
@@ -807,7 +886,7 @@ export function buildPlan(gradeLevel: number): ImportPlan {
   const deprecatedItems: WouldImportItem[] = [];
 
   for (const item of activeReadingMcq) {
-    activeItems.push(buildWouldItem(item, sourceFileForTopupItem(item, manifestConfig.files.pilot, manifestConfig), {
+    activeItems.push(buildWouldItem(item, sourceFileForTopupItem(item, manifestConfig.files.pilot!, manifestConfig), {
       PSSA_MCQ_PASSAGE_SPECIFICITY: mcqSpecificityFailed.has(itemId(item)) ? "FAIL" : "PASS",
       PSSA_ITEM_EC_SKILL_MATCH: mcqSkillFailed.has(itemId(item)) ? "FAIL" : "PASS",
       PSSA_MCQ_CORRECT_IS_LONGEST: mcqLengthFailed.has(itemId(item)) ? "FAIL" : "PASS",
@@ -817,20 +896,20 @@ export function buildPlan(gradeLevel: number): ImportPlan {
     }, crosswalkKeys, manifestConfig));
   }
 
-  for (const item of ebsrItems) activeItems.push(buildWouldItem(item, sourceFileForTopupItem(item, manifestConfig.files.ebsr, manifestConfig), { PSSA_EBSR_FAMILY_AND_BATCH: finalFromRows(ebsrAudit.rows, "finalEbsrResult")[item.itemId] ?? "FAIL", ...contentQualityGatesFor(contentQualityGates, item) }, crosswalkKeys, manifestConfig));
-  for (const item of multiSelectItems) activeItems.push(buildWouldItem(item, sourceFileForTopupItem(item, manifestConfig.files.tei, manifestConfig), { PSSA_MULTI_SELECT_FAMILY_AND_BATCH: finalFromRows(teiAudit.multiSelectRows)[item.itemId] ?? "FAIL", ...contentQualityGatesFor(contentQualityGates, item) }, crosswalkKeys, manifestConfig));
-  for (const item of hotTextItems) activeItems.push(buildWouldItem(item, sourceFileForTopupItem(item, manifestConfig.files.tei, manifestConfig), { PSSA_HOT_TEXT_FAMILY_AND_BATCH: finalFromRows(teiAudit.hotTextRows)[item.itemId] ?? "FAIL", ...contentQualityGatesFor(contentQualityGates, item) }, crosswalkKeys, manifestConfig));
-  for (const item of matchingGridItems) activeItems.push(buildWouldItem(item, sourceFileForTopupItem(item, manifestConfig.files.matchingGridDragDrop, manifestConfig), { PSSA_MATCHING_GRID_FAMILY_AND_BATCH: finalFromRows(mgddAudit.matchingGridRows)[item.itemId] ?? "FAIL", ...contentQualityGatesFor(contentQualityGates, item) }, crosswalkKeys, manifestConfig));
-  for (const item of dragDropItems) activeItems.push(buildWouldItem(item, sourceFileForTopupItem(item, manifestConfig.files.matchingGridDragDrop, manifestConfig), { PSSA_DRAG_DROP_FAMILY_AND_BATCH: finalFromRows(mgddAudit.dragDropRows)[item.itemId] ?? "FAIL", ...contentQualityGatesFor(contentQualityGates, item) }, crosswalkKeys, manifestConfig));
-  for (const item of conventions.items) activeItems.push(buildWouldItem(item, manifestConfig.files.conventions, { PSSA_CONVENTIONS_FAMILY_AND_BATCH: finalFromRows(conventionsAudit.rows)[item.itemId] ?? "FAIL", ...contentQualityGatesFor(contentQualityGates, item) }, crosswalkKeys, manifestConfig));
-  for (const item of shortAnswerItems) activeItems.push(buildWouldItem(item, sourceFileForTopupItem(item, manifestConfig.files.shortAnswer, manifestConfig), { PSSA_SHORT_ANSWER_FAMILY: finalFromRows(shortAnswerAudit.rows)[item.itemId] ?? "FAIL", ...contentQualityGatesFor(contentQualityGates, item) }, crosswalkKeys, manifestConfig));
+  for (const item of ebsrItems) activeItems.push(buildWouldItem(item, sourceFileForTopupItem(item, manifestConfig.files.ebsr!, manifestConfig), { PSSA_EBSR_FAMILY_AND_BATCH: finalFromRows(ebsrAudit.rows, "finalEbsrResult")[item.itemId] ?? "FAIL", ...contentQualityGatesFor(contentQualityGates, item) }, crosswalkKeys, manifestConfig));
+  for (const item of multiSelectItems) activeItems.push(buildWouldItem(item, sourceFileForTopupItem(item, manifestConfig.files.tei!, manifestConfig), { PSSA_MULTI_SELECT_FAMILY_AND_BATCH: finalFromRows(teiAudit.multiSelectRows)[item.itemId] ?? "FAIL", ...contentQualityGatesFor(contentQualityGates, item) }, crosswalkKeys, manifestConfig));
+  for (const item of hotTextItems) activeItems.push(buildWouldItem(item, sourceFileForTopupItem(item, manifestConfig.files.tei!, manifestConfig), { PSSA_HOT_TEXT_FAMILY_AND_BATCH: finalFromRows(teiAudit.hotTextRows)[item.itemId] ?? "FAIL", ...contentQualityGatesFor(contentQualityGates, item) }, crosswalkKeys, manifestConfig));
+  for (const item of matchingGridItems) activeItems.push(buildWouldItem(item, sourceFileForTopupItem(item, manifestConfig.files.matchingGridDragDrop!, manifestConfig), { PSSA_MATCHING_GRID_FAMILY_AND_BATCH: finalFromRows(mgddAudit.matchingGridRows)[item.itemId] ?? "FAIL", ...contentQualityGatesFor(contentQualityGates, item) }, crosswalkKeys, manifestConfig));
+  for (const item of dragDropItems) activeItems.push(buildWouldItem(item, sourceFileForTopupItem(item, manifestConfig.files.matchingGridDragDrop!, manifestConfig), { PSSA_DRAG_DROP_FAMILY_AND_BATCH: finalFromRows(mgddAudit.dragDropRows)[item.itemId] ?? "FAIL", ...contentQualityGatesFor(contentQualityGates, item) }, crosswalkKeys, manifestConfig));
+  for (const item of conventions.items) activeItems.push(buildWouldItem(item, manifestConfig.files.conventions!, { PSSA_CONVENTIONS_FAMILY_AND_BATCH: finalFromRows(conventionsAudit.rows)[item.itemId] ?? "FAIL", ...contentQualityGatesFor(contentQualityGates, item) }, crosswalkKeys, manifestConfig));
+  for (const item of shortAnswerItems) activeItems.push(buildWouldItem(item, sourceFileForTopupItem(item, manifestConfig.files.shortAnswer!, manifestConfig), { PSSA_SHORT_ANSWER_FAMILY: finalFromRows(shortAnswerAudit.rows)[item.itemId] ?? "FAIL", ...contentQualityGatesFor(contentQualityGates, item) }, crosswalkKeys, manifestConfig));
 
   const activeIds = new Set(activeItems.map((item) => item.itemId));
   for (const item of deprecatedMcq) {
     const dep = deprecationByOld.get(itemId(item));
     const supersededIds = dep?.supersededByItemIds?.split("|").filter(Boolean) ?? [];
     const deprecationValid = dep && supersededIds.length > 0 && supersededIds.every((id: string) => activeIds.has(id));
-    deprecatedItems.push(buildWouldItem(item, manifestConfig.files.pilot, {
+    deprecatedItems.push(buildWouldItem(item, manifestConfig.files.pilot!, {
       PSSA_IMPORT_DEPRECATION_VALID: deprecationValid ? "PASS" : "FAIL",
       ...contentQualityGatesFor(contentQualityGates, item),
     }, crosswalkKeys, manifestConfig, true, dep));
@@ -853,8 +932,8 @@ export function buildPlan(gradeLevel: number): ImportPlan {
   const manifest: ManifestRow[] = [
     { sourceFile: "all passage files", recordType: "passage", count: passages.length, expectedCount: manifestConfig.expectedCounts.passages, match: passages.length === manifestConfig.expectedCounts.passages },
     { sourceFile: "all active item files", recordType: "item", count: activeItems.length, expectedCount: manifestConfig.expectedCounts.activeItems, match: activeItems.length === manifestConfig.expectedCounts.activeItems },
-    { sourceFile: manifestConfig.files.pilot, recordType: "deprecated", count: deprecatedItems.length, expectedCount: manifestConfig.expectedCounts.deprecatedItems, match: deprecatedItems.length === manifestConfig.expectedCounts.deprecatedItems },
-    { sourceFile: manifestConfig.files.deprecation, recordType: "supersession", count: deprecationRows.length, expectedCount: manifestConfig.expectedCounts.supersessions, match: deprecationRows.length === manifestConfig.expectedCounts.supersessions },
+    { sourceFile: manifestConfig.files.pilot!, recordType: "deprecated", count: deprecatedItems.length, expectedCount: manifestConfig.expectedCounts.deprecatedItems, match: deprecatedItems.length === manifestConfig.expectedCounts.deprecatedItems },
+    { sourceFile: manifestConfig.files.deprecation!, recordType: "supersession", count: deprecationRows.length, expectedCount: manifestConfig.expectedCounts.supersessions, match: deprecationRows.length === manifestConfig.expectedCounts.supersessions },
     { sourceFile: "derived import batches", recordType: "batch", count: batches.length, expectedCount: manifestConfig.expectedCounts.batches, match: batches.length === manifestConfig.expectedCounts.batches },
   ];
   if (manifest.some((row) => !row.match)) tallyGate(gateTallies, "PSSA_IMPORT_MANIFEST_VALID", "FAIL");
@@ -885,7 +964,7 @@ export function buildPlan(gradeLevel: number): ImportPlan {
     },
   }));
 
-  const plan = { gradeLevel: manifestConfig.gradeLevel, passages: passageImports, activeItems, deprecatedItems, supersessions: deprecationRows.map((row) => ({ oldItemId: row.oldItemId, newItemId: row.supersededByItemIds, reason: row.deprecatedReason })), batches, manifest, manifestConfig, gateTallies, sourceScanFailures: 0, hashStable: true };
+  const plan = { gradeLevel: manifestConfig.gradeLevel, passages: passageImports, passageGroups: [], activeItems, deprecatedItems, supersessions: deprecationRows.map((row) => ({ oldItemId: row.oldItemId, newItemId: row.supersededByItemIds, reason: row.deprecatedReason })), batches, manifest, manifestConfig, gateTallies, sourceScanFailures: 0, hashStable: true };
   plan.sourceScanFailures = [
     ...ebsrAudit.sourceMatches,
     ...teiAudit.sourceMatches,
@@ -895,4 +974,264 @@ export function buildPlan(gradeLevel: number): ImportPlan {
   ].filter((match: any) => match.result === "FAIL").length;
   tallyGate(gateTallies, "PSSA_IMPORT_SOURCE_COMPLIANCE", plan.sourceScanFailures === 0 ? "PASS" : "FAIL");
   return plan;
+}
+
+function loadEoySources(manifestConfig: PssaGradeImportManifest) {
+  const files = manifestConfig.files.eoyBackends ?? [];
+  if (!files.length) throw new Error("EOY import manifest is missing backend files.");
+  const records = files.map((sourceFile) => ({ sourceFile, data: readJson<any>(sourceFile) }));
+  const itemSourceFiles = new Map<string, string>();
+  const passageSourceFiles = new Map<string, string>();
+  for (const { sourceFile, data } of records) {
+    for (const item of data.items ?? []) itemSourceFiles.set(itemId(item), sourceFile);
+    for (const passage of data.passages ?? []) passageSourceFiles.set(String(passage.id), sourceFile);
+  }
+  return {
+    files,
+    passages: records.flatMap(({ data }) => data.passages ?? []) as PssaPassageAuditInput[],
+    passageGroups: records.flatMap(({ data }) => data.passageGroups ?? []),
+    items: records.flatMap(({ data }) => data.items ?? []),
+    itemSourceFiles,
+    passageSourceFiles,
+  };
+}
+
+function eoySourceFileFor(id: string, sourceFiles: Map<string, string>, type: "item" | "passage") {
+  const sourceFile = sourceFiles.get(id);
+  if (!sourceFile) throw new Error(`EOY import source file not found for ${type} ${id}.`);
+  return sourceFile;
+}
+
+function eoyPassageGroups(rawGroups: any[]): WouldImportPassageGroup[] {
+  return rawGroups.map((group) => ({
+    groupId: String(group.id),
+    gradeLevel: Number(group.gradeLevel ?? 3),
+    subject: String(group.subject ?? "ELA"),
+    groupType: String(group.groupType ?? ""),
+    genre: String(group.genre ?? ""),
+    staminaBand: String(group.staminaBand ?? ""),
+    title: String(group.title ?? ""),
+    wordCount: Number(group.wordCount ?? 0),
+    domainVocabularyLoad: group.domainVocabularyLoad ?? null,
+    textFeaturesJson: group.textFeaturesJson ?? null,
+    contentHash: String(group.contentHash ?? hashCanonical({
+      id: group.id,
+      title: group.title,
+      groupType: group.groupType,
+      genre: group.genre,
+      memberPassageIds: (group.members ?? []).map((member: any) => member.passageId),
+    })),
+    members: (group.members ?? []).map((member: any) => ({
+      passageId: String(member.passageId),
+      slot: String(member.slot),
+      position: Number(member.position),
+      passageContentHashSnapshot: String(member.passageContentHashSnapshot),
+    })),
+  }));
+}
+
+function objectValue(value: unknown): Record<string, any> {
+  return value && typeof value === "object" && !Array.isArray(value) ? value as Record<string, any> : {};
+}
+
+function hasCleanEoyLicenseAndProvenance(item: any) {
+  return sourceTypeFor(item.sourceType) === "internal_original"
+    && licenseStatusFor(item.licenseStatus) === "cleared"
+    && Boolean(item.commercialUseAllowed) === true
+    && Boolean(item.needsLegalReview) === false
+    && objectValue(item.provenanceJson).benchmarkSeason === "EOY";
+}
+
+function inRange(index: unknown, length: number) {
+  return Number.isInteger(index) && Number(index) >= 0 && Number(index) < length;
+}
+
+function eoyRequiredFieldsPresent(item: any) {
+  return Boolean(itemId(item))
+    && Boolean(item.eligibleContent)
+    && Boolean(interactionTypeFor(item))
+    && item.responseSpecJson !== undefined
+    && item.correctResponseJson !== undefined
+    && item.scoringJson !== undefined
+    && typeof objectValue(item.scoringJson).totalPoints === "number"
+    && item.sourceType !== undefined
+    && item.licenseStatus !== undefined
+    && item.commercialUseAllowed !== undefined
+    && item.needsLegalReview !== undefined
+    && item.provenanceJson !== undefined;
+}
+
+function responseSpecChoices(item: any) {
+  const spec = objectValue(item.responseSpecJson);
+  const choices = Array.isArray(spec.choices) ? spec.choices : (Array.isArray(item.choices) ? item.choices : []);
+  return choices;
+}
+
+function validateEoyCorrectResponse(item: any) {
+  const type = interactionTypeFor(item);
+  const correct = objectValue(item.correctResponseJson);
+  if (type === "MCQ") return inRange(correct.correctIndex, responseSpecChoices(item).length || (item.answerChoicesJson ?? []).length);
+  if (type === "EBSR") {
+    const partAChoices = item.partA?.choices ?? objectValue(objectValue(item.responseSpecJson).partA).choices ?? [];
+    const partBChoices = item.partB?.choices ?? objectValue(objectValue(item.responseSpecJson).partB).choices ?? [];
+    const partA = objectValue(correct.partA);
+    const partB = objectValue(correct.partB);
+    return inRange(partA.correctIndex, partAChoices.length)
+      && Array.isArray(partB.correctIndices)
+      && partB.correctIndices.length > 0
+      && partB.correctIndices.every((index: unknown) => inRange(index, partBChoices.length));
+  }
+  if (type === "MATCHING_GRID") {
+    const spec = objectValue(item.responseSpecJson);
+    const rows = new Set((spec.rows ?? item.rows ?? []).map((row: any) => row.rowId));
+    const columns = new Set((spec.columns ?? item.columns ?? []).map((column: any) => column.columnId));
+    return Array.isArray(correct.correctCells)
+      && correct.correctCells.length > 0
+      && correct.correctCells.every((cell: any) => rows.has(cell.rowId) && columns.has(cell.columnId));
+  }
+  if (type === "INLINE_DROPDOWN") {
+    const spec = objectValue(item.responseSpecJson);
+    const blanks = Array.isArray(spec.blanks) ? spec.blanks : (Array.isArray(item.blanks) ? item.blanks : []);
+    return blanks.length > 0 && blanks.every((blank: any) => {
+      const sourceBlank = (item.blanks ?? []).find((row: any) => row.blankId === blank.blankId) ?? blank;
+      const correctIndex = objectValue(correct.blanks?.find?.((row: any) => row.blankId === blank.blankId) ?? {}).correctIndex ?? sourceBlank.correctIndex;
+      const options = blank.options ?? sourceBlank.options ?? [];
+      return inRange(correctIndex, options.length);
+    });
+  }
+  if (type === "SHORT_ANSWER") {
+    const scoring = objectValue(item.scoringJson);
+    return Array.isArray(item.scoreBandExamples)
+      && item.scoreBandExamples.length >= 4
+      && (Boolean(scoring.rubric) || Boolean(scoring.scoreBands) || Boolean(item.scoringRubricJson) || Boolean(item.rubric));
+  }
+  return false;
+}
+
+export function buildEoyImportEligibilityGates(item: any): Record<string, GateStatus> {
+  const scoring = objectValue(item.scoringJson);
+  return {
+    PSSA_EOY_IMPORT_REQUIRED_FIELDS: eoyRequiredFieldsPresent(item) ? "PASS" : "FAIL",
+    PSSA_EOY_IMPORT_CORRECT_RESPONSE_VALID: validateEoyCorrectResponse(item) ? "PASS" : "FAIL",
+    PSSA_EOY_IMPORT_POINT_VALUE_MATCH: pointValue(item) === scoring.totalPoints ? "PASS" : "FAIL",
+    PSSA_EOY_IMPORT_LICENSE_PROVENANCE: hasCleanEoyLicenseAndProvenance(item) ? "PASS" : "FAIL",
+    PSSA_EOY_IMPORT_NON_DEPRECATED: item.itemStatus === "deprecated_superseded" || item.deprecatedReason || item.retiredAt ? "FAIL" : "PASS",
+  };
+}
+
+export function buildEoyPlan(): ImportPlan {
+  const manifestConfig = lookupPssaBenchmarkImportManifest(3, "eoy");
+  const crosswalkKeys = loadCrosswalkKeys();
+  const source = loadEoySources(manifestConfig);
+  const passages = source.passages;
+  const allItems = source.items;
+  const passageGroups = eoyPassageGroups(source.passageGroups);
+  const byType = (type: string) => allItems.filter((item: any) => interactionTypeFor(item) === type);
+  const activeReadingMcq = byType("MCQ");
+  const ebsrItems = byType("EBSR");
+  const matchingGridItems = byType("MATCHING_GRID");
+  const shortAnswerItems = byType("SHORT_ANSWER");
+  const conventionsItems = byType("INLINE_DROPDOWN");
+  const expectedTypeCounts = { MCQ: 26, INLINE_DROPDOWN: 9, MATCHING_GRID: 4, EBSR: 4, SHORT_ANSWER: 2 };
+  const actualTypeCounts = Object.fromEntries(allItems.reduce((map: Map<string, number>, item: any) => {
+    const type = interactionTypeFor(item);
+    map.set(type, (map.get(type) ?? 0) + 1);
+    return map;
+  }, new Map<string, number>()));
+  const typeCountsPass = Object.entries(expectedTypeCounts).every(([type, count]) => actualTypeCounts[type] === count)
+    && allItems.length === manifestConfig.expectedCounts.activeItems;
+  const contentQualityGates = buildContentQualityGateMap(allItems, passages);
+  const passageQuality = buildPssaPassageQualityReport(passages);
+  const mcqPositionBatch = buildMcqPositionBatch(activeReadingMcq, manifestConfig);
+
+  const gateTallies = new Map<string, { pass: number; fail: number }>();
+  const activeItems: WouldImportItem[] = [];
+  for (const item of allItems) {
+    const sourceFile = eoySourceFileFor(itemId(item), source.itemSourceFiles, "item");
+    activeItems.push(buildWouldItem(item, sourceFile, {
+      PSSA_EOY_IMPORT_TYPE_COUNTS: typeCountsPass ? "PASS" : "FAIL",
+      ...buildEoyImportEligibilityGates(item),
+      ...eoyContentQualityGatesFor(contentQualityGates, item),
+    }, crosswalkKeys, manifestConfig));
+  }
+  const deprecatedItems: WouldImportItem[] = [];
+  for (const item of activeItems) addItemTallies(gateTallies, item);
+  tallyGate(gateTallies, "PSSA_IMPORT_MANIFEST_VALID", "PASS");
+  tallyGate(gateTallies, "PSSA_PASSAGE_QUALITY", hasBlockingPassageQualityFailure(passageQuality) ? "FAIL" : "PASS");
+
+  const streamBatch = (batchId: string, streamType: string, itemCount: number): BatchRow => ({
+    batchId,
+    streamType,
+    gradeLevel: manifestConfig.gradeLevel,
+    batchGate: "PSSA_EOY_IMPORT_SCHEMA_AWARE_ELIGIBILITY",
+    batchResult: activeItems.filter((item) => item.batchId === batchId).every((item) => item.finalImportEligibility === "eligible") ? "PASS" : "FAIL",
+    itemCount,
+  });
+  const batches: BatchRow[] = [
+    { ...mcqPositionBatch, batchGate: "PSSA_EOY_IMPORT_SCHEMA_AWARE_ELIGIBILITY", batchResult: streamBatch(manifestConfig.batchIds.readingMcq, "MCQ", activeReadingMcq.length).batchResult },
+    streamBatch(manifestConfig.batchIds.ebsr, "EBSR", ebsrItems.length),
+    streamBatch(manifestConfig.batchIds.matchingGrid, "MATCHING_GRID", matchingGridItems.length),
+    streamBatch(manifestConfig.batchIds.conventions, "CONVENTIONS", conventionsItems.length),
+    streamBatch(manifestConfig.batchIds.shortAnswerPool, "SHORT_ANSWER", shortAnswerItems.length),
+  ];
+
+  const manifest: ManifestRow[] = [
+    { sourceFile: "all EOY passage files", recordType: "passage", count: passages.length, expectedCount: manifestConfig.expectedCounts.passages, match: passages.length === manifestConfig.expectedCounts.passages },
+    { sourceFile: "all EOY item files", recordType: "item", count: activeItems.length, expectedCount: manifestConfig.expectedCounts.activeItems, match: activeItems.length === manifestConfig.expectedCounts.activeItems },
+    { sourceFile: "EOY has no deprecated item file", recordType: "deprecated", count: deprecatedItems.length, expectedCount: manifestConfig.expectedCounts.deprecatedItems, match: deprecatedItems.length === manifestConfig.expectedCounts.deprecatedItems },
+    { sourceFile: "EOY has no supersession file", recordType: "supersession", count: 0, expectedCount: manifestConfig.expectedCounts.supersessions, match: manifestConfig.expectedCounts.supersessions === 0 },
+    { sourceFile: "derived EOY import batches", recordType: "batch", count: batches.length, expectedCount: manifestConfig.expectedCounts.batches, match: batches.length === manifestConfig.expectedCounts.batches },
+  ];
+  if (manifest.some((row) => !row.match)) tallyGate(gateTallies, "PSSA_IMPORT_MANIFEST_VALID", "FAIL");
+
+  const passageImports = passages.map((passage: any) => ({
+    passageId: passage.id,
+    sourceFile: eoySourceFileFor(String(passage.id), source.passageSourceFiles, "passage"),
+    title: passage.title,
+    gradeLevel: passage.gradeLevel ?? manifestConfig.gradeLevel,
+    subject: passage.subject ?? "ELA",
+    passageType: passage.passageType ?? "unknown",
+    text: passage.text,
+    wordCount: passage.wordCount ?? String(passage.text ?? "").split(/\s+/).filter(Boolean).length,
+    sourceType: sourceTypeFor(passage.sourceType),
+    sourceName: passage.sourceName ?? null,
+    sourceCitation: passage.sourceCitation ?? null,
+    licenseStatus: licenseStatusFor(passage.licenseStatus),
+    commercialUseAllowed: Boolean(passage.commercialUseAllowed ?? true),
+    needsLegalReview: Boolean(passage.needsLegalReview ?? false),
+    contentHash: computePssaPassageContentHash(passage),
+    reviewStatus: "PENDING" as const,
+    itemStatus: "candidate" as const,
+    studentReadyBlockedReason: "PENDING_REVIEW" as const,
+    provenanceJson: {
+      sourceFile: eoySourceFileFor(String(passage.id), source.passageSourceFiles, "passage"),
+      sourcePassageId: passage.id,
+      importedBy: "pssa-db4-writer",
+    },
+  }));
+
+  return {
+    gradeLevel: manifestConfig.gradeLevel,
+    passages: passageImports,
+    passageGroups,
+    activeItems,
+    deprecatedItems,
+    supersessions: [],
+    batches,
+    manifest,
+    manifestConfig,
+    gateTallies,
+    sourceScanFailures: 0,
+    hashStable: true,
+  };
+}
+
+export function buildPlanForBenchmark(input: { grade: number; benchmark?: PssaImportBenchmark }): ImportPlan {
+  const benchmark = input.benchmark ?? "foundation";
+  if (benchmark === "foundation") return buildPlan(input.grade);
+  if (benchmark === "eoy") {
+    if (input.grade !== 3) throw new Error(`No PSSA eoy import manifest registered for grade ${input.grade}.`);
+    return buildEoyPlan();
+  }
+  throw new Error(`Unsupported PSSA import benchmark: ${benchmark}`);
 }
