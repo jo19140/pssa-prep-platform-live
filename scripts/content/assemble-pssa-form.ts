@@ -6,6 +6,8 @@ import {
   assemblePssaFormFromPool,
   decidePssaFormWrite,
   GRADE3_BLUEPRINT,
+  GRADE3_EOY_DIAGNOSTIC_BLUEPRINT,
+  GRADE3_MOY_DIAGNOSTIC_BLUEPRINT,
   verifyPssaFormSnapshots,
   type AssemblyResult,
   type DeficitRow,
@@ -28,7 +30,17 @@ type Args = {
   assembledBy: string;
 };
 
-function parseArgs(argv: string[]): Args {
+export function resolveAllowedGrade3BlueprintVersion(blueprint: string): string {
+  const allowed: readonly string[] = [
+    GRADE3_BLUEPRINT.blueprintVersion,
+    GRADE3_MOY_DIAGNOSTIC_BLUEPRINT.blueprintVersion,
+    GRADE3_EOY_DIAGNOSTIC_BLUEPRINT.blueprintVersion,
+  ];
+  if (allowed.includes(blueprint)) return blueprint;
+  throw new Error(`--blueprint must be one of: ${allowed.join(", ")}.`);
+}
+
+export function parseArgs(argv: string[]): Args {
   const args: Args = {
     env: null,
     grade: null,
@@ -65,7 +77,7 @@ function parseArgs(argv: string[]): Args {
     else throw new Error(`Unknown argument: ${arg}`);
   }
   if (args.grade !== GRADE3_BLUEPRINT.gradeLevel) throw new Error("--grade must be 3 for DB-6.");
-  if (args.blueprint !== GRADE3_BLUEPRINT.blueprintVersion) throw new Error(`--blueprint must be ${GRADE3_BLUEPRINT.blueprintVersion}.`);
+  args.blueprint = resolveAllowedGrade3BlueprintVersion(args.blueprint ?? "");
   if (!args.verify && !args.seed) throw new Error("--seed is required for assembly.");
   if (args.verify && args.write) throw new Error("--verify is its own write path; do not combine with --write.");
   if ((args.write || args.verify) && args.env !== "dev") throw new Error("--write/--verify requires explicit --env dev.");
@@ -293,7 +305,9 @@ async function main() {
   }
 }
 
-main().catch((error) => {
-  console.error(error instanceof Error ? error.message : error);
-  process.exit(1);
-});
+if (require.main === module) {
+  main().catch((error) => {
+    console.error(error instanceof Error ? error.message : error);
+    process.exit(1);
+  });
+}
