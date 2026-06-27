@@ -3,6 +3,7 @@ import fs from "node:fs";
 
 import { launchPssaFormSession } from "../lib/content/pssaFormSession";
 import {
+  assembleGrade3FormFromPool,
   parseArgs as parseAssembleArgs,
   resolveAllowedGrade3BlueprintVersion,
 } from "./content/assemble-pssa-form";
@@ -248,6 +249,19 @@ const boy = assembleDiagnosticFormFromPool({
 assert.equal(boy.ok, true, boy.gates.map((gate) => `${gate.gate}:${gate.status}:${gate.detail}`).join("\n"));
 assert.equal(boy.contentHash, PRE_PHASE4A_BOY_DIAGNOSTIC_CONTENT_HASH, "BOY diagnostic contentHash must stay byte-identical");
 assert.equal(GRADE3_DIAGNOSTIC_BLUEPRINT.blueprintVersion, "pde-ela-diagnostic-stamina-2025-g3-v1", "BOY diagnostic blueprint version must remain unchanged");
+
+for (const blueprint of [
+  GRADE3_MOY_DIAGNOSTIC_BLUEPRINT.blueprintVersion,
+  GRADE3_EOY_DIAGNOSTIC_BLUEPRINT.blueprintVersion,
+]) {
+  const routed = assembleGrade3FormFromPool({
+    seed: "diagnostic-routing-proof",
+    blueprintVersion: blueprint,
+    readyItems: diagnosticPool(),
+    allItems: diagnosticPool(),
+  });
+  assert.equal(typeof routed.ok, "boolean", `${blueprint} must route through diagnostic assembly instead of throwing`);
+}
 
 assert.throws(() => assertDemoSeedAllowed({ env: "prod", databaseUrl: "postgresql://localhost:5433/pssa_dev" }), /--env dev/);
 assert.throws(() => assertDemoSeedAllowed({ env: "dev", databaseUrl: "postgresql://prod.example.com/app" }), /production-like/);

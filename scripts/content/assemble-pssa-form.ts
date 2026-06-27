@@ -3,6 +3,7 @@ import fs from "node:fs";
 import path from "node:path";
 
 import {
+  assembleDiagnosticFormFromPool,
   assemblePssaFormFromPool,
   decidePssaFormWrite,
   GRADE3_BLUEPRINT,
@@ -38,6 +39,13 @@ export function resolveAllowedGrade3BlueprintVersion(blueprint: string): string 
   ];
   if (allowed.includes(blueprint)) return blueprint;
   throw new Error(`--blueprint must be one of: ${allowed.join(", ")}.`);
+}
+
+export function assembleGrade3FormFromPool(input: Parameters<typeof assemblePssaFormFromPool>[0]) {
+  if (input.blueprintVersion === GRADE3_BLUEPRINT.blueprintVersion) {
+    return assemblePssaFormFromPool(input);
+  }
+  return assembleDiagnosticFormFromPool(input);
 }
 
 export function parseArgs(argv: string[]): Args {
@@ -182,13 +190,13 @@ async function assemble(db: PrismaClient, args: Args) {
     getStudentReadyPssaItems(db, { gradeLevel: GRADE3_BLUEPRINT.gradeLevel, subject: GRADE3_BLUEPRINT.subject }) as any,
     loadAllGrade3Items(db),
   ]);
-  const result = assemblePssaFormFromPool({
+  const result = assembleGrade3FormFromPool({
     seed: args.seed!,
     blueprintVersion: args.blueprint!,
     readyItems,
     allItems,
   });
-  const proof = assemblePssaFormFromPool({
+  const proof = assembleGrade3FormFromPool({
     seed: args.seed!,
     blueprintVersion: args.blueprint!,
     readyItems,
