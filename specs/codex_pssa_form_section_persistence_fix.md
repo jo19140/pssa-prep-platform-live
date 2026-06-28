@@ -9,7 +9,7 @@
 - Schema already supports it: `PssaForm.hasSections`, `model PssaFormSection {sectionIndex, sectionType, label, estimatedMinutes, @@unique([formId, sectionIndex])}`, `PssaFormPassage.sectionIndex Int?`, `PssaFormItem.sectionIndex Int?`.
 
 ## 1. Scope & guardrails
-- Change confined to `scripts/content/assemble-pssa-form.ts` + a test + this spec. Do NOT modify schema, the assembler library, scoring, the importer, delivery, the seed script, or content.
+- Change confined to `scripts/content/assemble-pssa-form.ts`, a **test-fixture repair** in `scripts/test-pssa-eoy-form-assembly.ts` (§2.1), the new test, and this spec. Do NOT modify schema, the assembler library, scoring, the importer, delivery, the student-ready selector, the seed script, or content.
 - **Foundation `--write` must stay byte-identical:** no sections when the result has none; `hasSections` stays false; no `PssaFormSection` rows; item/passage `sectionIndex` stay null; selection/contentHash unchanged. Regression: `test:pssa-db6`.
 - Clean worktree off the current `origin/main` tip. Preserve `codex/teacher-lessons-tab-pr1`. Guard+symlink+trap `node_modules`. Never `git add -A`. STOP on any schema need.
 
@@ -23,6 +23,11 @@ In the `pssaForm.create` data (and via a small **pure exported helper** `buildPs
 - Change nothing else in the write path (buckets, hashes, ordering unchanged).
 
 Foundation: `result.sections` is undefined → `hasSections=false`, no `sections` key, item/passage `sectionIndex` null → identical to today.
+
+## 2.1 Deliverable B — stale-fixture repair (`scripts/test-pssa-eoy-form-assembly.ts`)
+This existing test is **already red on `origin/main`**: the merged cross-text readiness fix now requires a cross-text item's persisted **passage links** to cover its passage-group members, but the test's fixture helper builds items from `raw.passageId` (null for the P3 cross-text MCQ/EBSR) and never carries `raw.passageLinks`, so those 2 items fail readiness (`selected_item_readiness:FAIL ... PENDING_REVIEW`). The real imported DB items DO have these links (the read-only sweep confirmed 45/45 ready), so this is a **fixture-shape gap, not a logic regression**.
+- In the fixture's ready-item builder, when an item has `raw.passageLinks`, populate the ready item's `passages` from those links (resolve each `passageLink.passageId` to the fixture passage, mirroring the real `PssaItemPassageLink` shape: `{ passageId, passage }`), in addition to / instead of the single `raw.passageId` path. This makes the cross-text P3 items carry both passage links so they pass the readiness coverage check exactly as the real DB rows do.
+- Do NOT weaken any assertion or change the assembler; this is purely making the fixture faithful to the imported shape.
 
 ## 3. Validation (`scripts/test-pssa-form-section-persistence.ts`, new)
 Assert against `buildPssaFormCreateData(...)` (DB-free):
@@ -44,6 +49,7 @@ echo "all section-persistence fix gates passed"
 ## 5. Acceptance criteria — allowed tracked paths only
 ```
 scripts/content/assemble-pssa-form.ts            (section persistence + buildPssaFormCreateData helper)
+scripts/test-pssa-eoy-form-assembly.ts           (stale-fixture repair only: carry passageLinks → ready passages)
 scripts/test-pssa-form-section-persistence.ts    (new)
 specs/codex_pssa_form_section_persistence_fix.md
 ```
