@@ -24,10 +24,14 @@ In the `pssaForm.create` data (and via a small **pure exported helper** `buildPs
 
 Foundation: `result.sections` is undefined → `hasSections=false`, no `sections` key, item/passage `sectionIndex` null → identical to today.
 
-## 2.1 Deliverable B — stale-fixture repair (`scripts/test-pssa-eoy-form-assembly.ts`)
-This existing test is **already red on `origin/main`**: the merged cross-text readiness fix now requires a cross-text item's persisted **passage links** to cover its passage-group members, but the test's fixture helper builds items from `raw.passageId` (null for the P3 cross-text MCQ/EBSR) and never carries `raw.passageLinks`, so those 2 items fail readiness (`selected_item_readiness:FAIL ... PENDING_REVIEW`). The real imported DB items DO have these links (the read-only sweep confirmed 45/45 ready), so this is a **fixture-shape gap, not a logic regression**.
-- In the fixture's ready-item builder, when an item has `raw.passageLinks`, populate the ready item's `passages` from those links (resolve each `passageLink.passageId` to the fixture passage, mirroring the real `PssaItemPassageLink` shape: `{ passageId, passage }`), in addition to / instead of the single `raw.passageId` path. This makes the cross-text P3 items carry both passage links so they pass the readiness coverage check exactly as the real DB rows do.
-- Do NOT weaken any assertion or change the assembler; this is purely making the fixture faithful to the imported shape.
+## 2.1 Deliverable B — stale paired-item fixture repair (ALL tests broken by the readiness tightening)
+Multiple existing tests are **already red on `origin/main`**: the merged cross-text readiness fix now requires a cross-text item's persisted **passage links** to cover its passage-group members, but several fixture helpers build items from `raw.passageId` (null for cross-text P3 items) and never carry `raw.passageLinks`, so those items fail readiness (`selected_item_readiness:FAIL ... PENDING_REVIEW`). The real imported DB items DO have these links (the read-only sweep confirmed 45/45 ready), so this is a **fixture-shape gap, not a logic regression**. The selector and assembler are correct — only the fixtures are stale.
+
+**First enumerate the full set:** run the entire PSSA test suite on the branch and identify EVERY test that fails solely because a paired/cross-text fixture item lacks `passages` links (readiness recompute ≠ NONE). Known so far: `test-pssa-eoy-form-assembly` (already repaired), `test-pssa-go-live`; likely also `test-pssa-eoy-e2e-release`, `test-pssa-moy-form-assembly`, `test-pssa-dok-crosswalk`. Confirm by running them; do not guess.
+
+**Apply the identical, mechanical repair to each affected fixture helper:** when an item has `raw.passageLinks`, populate the ready item's `passages` from those links — resolve each `passageLink.passageId` to the fixture passage and emit `{ passageId, passage }` entries (mirroring the real `PssaItemPassageLink` shape), so cross-text items carry their passage links and pass readiness exactly as the real DB rows do.
+- Do NOT weaken any assertion, change the assembler, the selector, or any product code. Purely make the fixtures faithful to the imported shape.
+- **Report the exact list of test files repaired.** Every repaired file must contain ONLY this fixture-shape change.
 
 ## 3. Validation (`scripts/test-pssa-form-section-persistence.ts`, new)
 Assert against `buildPssaFormCreateData(...)` (DB-free):
@@ -43,16 +47,20 @@ OPENAI_API_KEY=sk-build-dummy npm run build
 ./node_modules/.bin/tsx scripts/test-pssa-eoy-form-assembly.ts
 ./node_modules/.bin/tsx scripts/test-pssa-go-live.ts
 npm run test:pssa-db6        # foundation form write/assembly byte-identical
-echo "all section-persistence fix gates passed"
+# FULL PSSA suite must be green (confirms no remaining stale-fixture casualties from the readiness tightening):
+for t in scripts/test-pssa-*.ts; do echo "== $t =="; ./node_modules/.bin/tsx "$t" || exit 1; done
+echo "all section-persistence fix gates + full PSSA suite passed"
 ```
 
 ## 5. Acceptance criteria — allowed tracked paths only
 ```
 scripts/content/assemble-pssa-form.ts            (section persistence + buildPssaFormCreateData helper)
-scripts/test-pssa-eoy-form-assembly.ts           (stale-fixture repair only: carry passageLinks → ready passages)
 scripts/test-pssa-form-section-persistence.ts    (new)
 specs/codex_pssa_form_section_persistence_fix.md
+scripts/test-pssa-*.ts                           (stale paired-item fixture repair ONLY: carry passageLinks → ready passages;
+                                                  exactly the tests red from this gap — enumerate and list them in the report)
 ```
+The only allowed change to any `scripts/test-pssa-*.ts` file is the `passageLinks → passages` fixture-shape repair (§2.1). No assertion, logic, assembler, selector, or product-code changes. Report the exact list of repaired test files.
 Anything else (schema, assembler lib, scoring, importer, delivery, content) → STOP and report. Never stage `scripts/seed-pssa-diagnostic-insights-e2e.ts` or `wip-dashboards-session-review.md`. Never `git add -A`.
 
 ## 6. Process
