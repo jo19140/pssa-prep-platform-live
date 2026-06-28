@@ -4,6 +4,7 @@ import { TeacherPssaInsightsClient } from "@/components/pssa/TeacherPssaInsights
 import { SynesisPageShell } from "@/components/synesis/SynesisPageShell";
 import { TeacherProductWorkspaceSwitcher } from "@/components/synesis/TeacherProductWorkspaceSwitcher";
 import { TeacherAssignmentsTab } from "@/components/teacher/TeacherAssignmentsTab";
+import { TeacherClassesTab } from "@/components/teacher/TeacherClassesTab";
 import { TeacherGradingTab } from "@/components/teacher/TeacherGradingTab";
 import { TeacherLessonsTab } from "@/components/teacher/TeacherLessonsTab";
 import { loadCurrentTeacherProducts } from "@/lib/teacher/loadCurrentTeacherProducts";
@@ -58,7 +59,11 @@ export default async function TeacherPage({
             })}
           </nav>
 
-          {activeTab === "reports" ? (
+          {activeTab === "classes" ? (
+            <Suspense fallback={<div className="rounded-lg border border-slate-200 bg-white p-6 text-sm text-slate-600 shadow-sm">Loading classes...</div>}>
+              <TeacherClassesTab />
+            </Suspense>
+          ) : activeTab === "reports" ? (
             <Suspense fallback={<div className="rounded-lg border border-slate-200 bg-white p-6 text-sm text-slate-600 shadow-sm">Loading diagnostic insights...</div>}>
               <TeacherPssaInsightsClient />
             </Suspense>
@@ -68,24 +73,10 @@ export default async function TeacherPage({
             <TeacherAssignmentsTab />
           ) : activeTab === "grading" ? (
             <TeacherGradingTab />
-          ) : (
-            <StateTrackPlaceholder tab={activeTab} />
-          )}
+          ) : null}
         </section>
       </main>
     </SynesisPageShell>
-  );
-}
-
-function StateTrackPlaceholder({ tab }: { tab: Exclude<StateTrackTab, "reports" | "grading"> }) {
-  return (
-    <section className="rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
-      <h2 className="text-xl font-semibold text-slate-950">{tabLabel(tab)}</h2>
-      <p className="mt-2 text-sm text-slate-600">The existing State Track tools remain available while this workspace frame is filled in.</p>
-      <Link href="/teacher/tools" className="mt-4 inline-flex rounded-md border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:border-slate-300 hover:bg-slate-50">
-        Open existing State Track tools
-      </Link>
-    </section>
   );
 }
 

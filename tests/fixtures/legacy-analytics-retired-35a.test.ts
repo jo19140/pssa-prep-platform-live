@@ -40,18 +40,40 @@ const teacherTools = read("components/TeacherDashboardPage.tsx");
 assert.match(teacherTools, /fetch\("\/api\/teacher\/classes"/, "teacher tools must load classes from /api/teacher/classes");
 assert.doesNotMatch(teacherTools, /\/api\/teacher\/dashboard|\/api\/ai\/generate-test|\/api\/teacher\/test-design-agent|\/api\/teacher\/diagnostic/, "teacher tools must not call retired routes");
 assert.doesNotMatch(teacherTools, /TeacherLearningPathPanel|TeacherTdaScoringPanel|Test Design Agent|createDiagnosticAssessment|generateTest|MetricCard|ScoreSourcesPanel|TeacherActionOverview|TeacherLaunchPad/, "legacy dashboard-only UI must be removed");
-assert.match(teacherTools, /TeacherClassesPanel/, "classes utility must remain");
-assert.match(teacherTools, /function TeacherImportStudentsPanel/, "import utility must remain");
+assert.doesNotMatch(teacherTools, /TeacherClassesPanel|TeacherImportStudentsPanel|Student Import|Import Students From Google Classroom/, "classes/import tabs must move out of legacy teacher tools");
 assert.match(teacherTools, /function ReadingCoachToolsPanel/, "reading-coach utility must remain");
 assert.equal(fs.existsSync(path.join(root, "components/TeacherResourcesPanel.tsx")), true, "resource suggestion component must be preserved for #35B");
 assert.match(teacherTools, /Resources is moving to the new workspace/, "resources tab must render migration placeholder");
 assert.doesNotMatch(teacherTools, /Showing \{resources\.length\} approved resources|0 resources/, "resources tab must not render broken empty resource list");
-assert.match(teacherTools, /type TeacherToolsTab = "classes" \| "import" \| "resources" \| "readingCoach"/, "tab type must include exactly the four kept tools");
-assert.match(teacherTools, /const teacherToolsTabs[\s\S]*id: "classes"[\s\S]*id: "import"[\s\S]*id: "resources"[\s\S]*id: "readingCoach"/, "visible tab set must be classes/import/resources/readingCoach");
-for (const tab of ["classes", "import", "resources", "readingCoach"]) {
+assert.match(teacherTools, /type TeacherToolsTab = "resources" \| "readingCoach"/, "legacy tools tab type must be trimmed to resources/readingCoach");
+assert.match(teacherTools, /const teacherToolsTabs[\s\S]*id: "readingCoach"[\s\S]*id: "resources"/, "visible legacy tab set must be readingCoach/resources");
+assert.doesNotMatch(teacherTools, /id: "classes"|id: "import"|raw === "classes"|raw === "import"/, "legacy classes/import tabs must be removed");
+for (const tab of ["resources", "readingCoach"]) {
   assert.match(teacherTools, new RegExp(`raw === "${tab}"`), `deep link ?tab=${tab} must normalize to that tab`);
 }
-assert.match(teacherTools, /: "classes"/, "unknown tabs must default to classes");
+assert.match(teacherTools, /: "readingCoach"/, "unknown tabs must default to readingCoach");
+
+const importPanel = read("components/TeacherImportStudentsPanel.tsx");
+assert.match(importPanel, /export function TeacherImportStudentsPanel/, "import utility must live in its own component");
+assert.match(importPanel, /fetch\("\/api\/teacher\/classes"[\s\S]*cache: "no-store"/, "import panel must self-fetch classes");
+assert.match(importPanel, /Refresh classes/, "import panel must expose a class refresh path");
+for (const endpoint of [
+  "/api/teacher/google-classroom/status",
+  "/api/teacher/google-classroom/courses",
+  "/api/teacher/google-classroom/import",
+  "/api/teacher/google-classroom/connect",
+]) {
+  assert.match(importPanel, new RegExp(escapeRegExp(endpoint)), `import panel must keep ${endpoint}`);
+}
+const importPanelEndpoints = [...importPanel.matchAll(/["'](\/api\/teacher\/[^"']+)["']/g)].map((match) => match[1]);
+for (const endpoint of importPanelEndpoints) {
+  assert.match(endpoint, /^\/api\/teacher\/(?:classes|google-classroom\/(?:status|courses|import|connect))$/, `import panel must not call unexpected endpoint ${endpoint}`);
+}
+
+const classesTab = read("components/teacher/TeacherClassesTab.tsx");
+assert.match(classesTab, /TeacherClassesPanel/, "State Track classes tab must render class management");
+assert.match(classesTab, /TeacherImportStudentsPanel/, "State Track classes tab must render import utility");
+assert.match(classesTab, /href="\/teacher\/tools\?tab=readingCoach"/, "State Track classes tab must keep temporary link to Teacher Tools");
 
 const adminPage = read("app/admin/page.tsx");
 assert.match(adminPage, /getServerSession\(authOptions\)/, "admin index must check the session");
@@ -79,11 +101,15 @@ for (const group of ["PSSA Review", "Content Review", "Data Flywheel", "Voice", 
 assert.doesNotMatch(adminPage, /AdminDashboardPage|\/api\/admin\/dashboard|generate-test/, "admin index must not use legacy dashboard/generator");
 
 const teacherToolsPage = read("app/teacher/tools/page.tsx");
+assert.match(teacherToolsPage, /redirect\("\/teacher\?tab=classes"\)/, "/teacher/tools classes/import deep links must redirect to State Track classes");
+assert.match(teacherToolsPage, /activeTab === "classes" \|\| activeTab === "import"/, "/teacher/tools must redirect both removed tabs server-side");
 assert.match(teacherToolsPage, /<TeacherDashboardPage \/>/, "/teacher/tools must stay live");
 const layout = read("app/layout.tsx");
 assert.match(layout, /"\/teacher\/tools"/, "app layout allowlist must keep /teacher/tools");
 const teacherPage = read("app/teacher/page.tsx");
-assert.match(teacherPage, /href="\/teacher\/tools"/, "modern teacher page must keep link to tools");
+assert.match(teacherPage, /TeacherClassesTab/, "modern teacher page must render the real classes tab");
+assert.match(teacherPage, /activeTab === "classes"[\s\S]*<TeacherClassesTab \/>/, "modern teacher classes tab must use the classes/import wrapper");
+assert.doesNotMatch(teacherPage, /StateTrackPlaceholder|Open existing State Track tools/, "modern classes tab must not render the old placeholder");
 
 const middleware = read("middleware.ts");
 assert.match(middleware, /pathname\.startsWith\("\/admin"\) && role !== "ADMIN"/, "middleware must keep /admin ADMIN gate");

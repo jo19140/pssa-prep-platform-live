@@ -1,10 +1,21 @@
+import { redirect } from "next/navigation";
 import TeacherDashboardPage from "@/components/TeacherDashboardPage";
 import { SynesisPageShell } from "@/components/synesis/SynesisPageShell";
 import { TeacherProductWorkspaceSwitcher } from "@/components/synesis/TeacherProductWorkspaceSwitcher";
 import { loadCurrentTeacherProducts } from "@/lib/teacher/loadCurrentTeacherProducts";
 
-export default async function TeacherToolsPage() {
+export default async function TeacherToolsPage({
+  searchParams,
+}: {
+  searchParams?: Promise<Record<string, string | string[] | undefined>>;
+}) {
   const products = await loadCurrentTeacherProducts();
+  const resolvedSearchParams = await searchParams;
+  const activeTab = firstValue(resolvedSearchParams?.tab);
+
+  if (activeTab === "classes" || activeTab === "import") {
+    redirect("/teacher?tab=classes");
+  }
 
   return (
     <SynesisPageShell
@@ -18,4 +29,8 @@ export default async function TeacherToolsPage() {
       </main>
     </SynesisPageShell>
   );
+}
+
+function firstValue(value: string | string[] | undefined) {
+  return Array.isArray(value) ? value[0] : value;
 }
