@@ -2,9 +2,12 @@ import { Prisma, type PrismaClient } from "@prisma/client";
 import { db } from "@/lib/db";
 import {
   AUDIT_CONTRACT_VERSION,
+  GRADE3_EOY_IMPORT_MANIFEST,
   SOURCE_SCAN_VERSION,
   buildPlan,
+  buildPlanForBenchmark,
   stableStringify,
+  type PssaImportBenchmark,
 } from "@/scripts/content/lib/pssa-import-plan";
 import {
   computeStudentReadyBlockedReason,
@@ -103,9 +106,15 @@ export type PssaItemReviewDto = {
   reviewer: Record<string, unknown>;
 };
 
-export function currentPlanSourceCorpusHash(gradeLevel: number) {
-  const plan = buildPlan(gradeLevel);
+export function currentPlanSourceCorpusHash(gradeLevel: number, benchmark: PssaImportBenchmark = "foundation") {
+  const plan = benchmark === "foundation" ? buildPlan(gradeLevel) : buildPlanForBenchmark({ grade: gradeLevel, benchmark });
   return stableStringify([...plan.passages.map((row) => row.contentHash), ...plan.activeItems.map((row) => row.contentHash), ...plan.deprecatedItems.map((row) => row.contentHash)].sort());
+}
+
+export function benchmarkForBatchId(batchId: string | null | undefined): PssaImportBenchmark {
+  if (!batchId) return "foundation";
+  const eoyBatchIds = new Set(Object.values(GRADE3_EOY_IMPORT_MANIFEST.batchIds).filter(Boolean));
+  return eoyBatchIds.has(batchId) ? "eoy" : "foundation";
 }
 
 export function classifyPssaItemForReview(
@@ -281,7 +290,8 @@ export async function pssaBatchDriftDetail(client: PrismaClient, args: { target:
   if (batch.auditContractVersion !== AUDIT_CONTRACT_VERSION) return "batch_audit_contract_version_stale";
   if (batch.sourceScanVersion !== SOURCE_SCAN_VERSION) return "batch_source_scan_version_stale";
   if (batch.batchAuditResult !== "PASS") return "batch_audit_result_not_PASS";
-  const currentHash = currentPlanSourceCorpusHash(batch.gradeLevel);
+  const benchmark = benchmarkForBatchId(args.batchId);
+  const currentHash = currentPlanSourceCorpusHash(batch.gradeLevel, benchmark);
   if (!batch.sourceCorpusHash) return "batch_source_corpus_hash_missing";
   if (batch.sourceCorpusHash !== currentHash) return "batch_source_corpus_hash_drift";
   return null;
