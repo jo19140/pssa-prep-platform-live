@@ -39,6 +39,13 @@ Making a paired-item fixture faithful can change a **pinned canonical contentHas
 - This is NOT weakening — the assertion still pins an exact hash; only the pinned value is corrected to the real-DB-faithful shape.
 - **For each updated pin, REPORT: old hash, new hash, the test, and proof the delta is solely the paired-item passage-link shape** (e.g. the only canonical difference is the affected items' primaryPassageId). If a hash changes for ANY reason other than this passage-link shape correction, **STOP and report** — do not update the pin.
 
+### 2.1b Authorized behavioral test-expectation update (`scripts/test-pssa-db5-1-review-ui.ts`)
+This is a **separate, explicitly-reported** change — NOT a fixture-shape repair. One assertion there asserts pre-fix behavior: a cross-text item whose authored `evidenceLinks` cover only one required slot must `PENDING_REVIEW`. The merged readiness fix intentionally moved the selector to **persisted structural coverage** (group members + slots + ready passages + item→passage links); authoring-time evidence links are not persisted to real DB rows, so the gate cannot and should not depend on them. The item in that case is structurally complete (both required slots, both member passages ready, item linked to both) → it is correctly `NONE`.
+- Revise that single assertion so a **structurally complete** cross-text item (required slots `["passage_1","passage_2"]`, ready members for both, item linked to both member passages) returns `"NONE"`, with a comment noting evidence-slot coverage is now an authoring-time concern and is not persisted.
+- **Keep the fail-closed negatives** (each must still block): required slot not in member slots; blank member slot; member passage not student-ready; item not linked to a required member passage; required slots present with no group. Add any missing one so the structural contract stays guarded.
+- Do NOT change selector logic or any product code for this update.
+- **REPORT: the exact assertion changed, old→new expectation, and an explicit statement that no selector/product logic changed for this test update.**
+
 ## 3. Validation (`scripts/test-pssa-form-section-persistence.ts`, new)
 Assert against `buildPssaFormCreateData(...)` (DB-free):
 - **EOY** (build the real EOY result via the fixture EOY pool used in `test-pssa-eoy-form-assembly`, or a representative result): `hasSections === true`; exactly **3** section rows with `sectionIndex 1/2/3`, `estimatedMinutes [60,80,60]`; per-item `sectionIndex` split **12/18/15**; every delivered item `sectionIndex` non-null; the P3 paired unit items all in section 2; analytics buckets unchanged (35 operational / 10 analytics_only).
