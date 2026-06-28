@@ -49,9 +49,14 @@ export function TeacherLiteracyMonitor({
           <h1 className="text-3xl font-black text-slate-950">Literacy monitor</h1>
           <p className="mt-2 text-slate-600">Small-caseload view for tutors and interventionists.</p>
         </div>
-        <Link href="/teacher/literacy/caseload-report" className="rounded-md border border-emerald-200 bg-white px-4 py-2 text-sm font-black text-emerald-800 hover:border-emerald-400">
-          Caseload report ↗
-        </Link>
+        <div className="flex flex-wrap gap-2">
+          <Link href="/teacher/literacy/reading-coach" className="rounded-md border border-emerald-200 bg-emerald-700 px-4 py-2 text-sm font-black text-white hover:bg-emerald-800">
+            Assign Reading Coach practice
+          </Link>
+          <Link href="/teacher/literacy/caseload-report" className="rounded-md border border-emerald-200 bg-white px-4 py-2 text-sm font-black text-emerald-800 hover:border-emerald-400">
+            Caseload report ↗
+          </Link>
+        </div>
       </div>
       <div className="mt-6 grid gap-6 lg:grid-cols-[1fr_380px]">
         <section className="space-y-3">

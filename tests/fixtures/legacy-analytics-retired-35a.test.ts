@@ -37,21 +37,38 @@ for (const token of [
 }
 
 const teacherTools = read("components/TeacherDashboardPage.tsx");
-assert.match(teacherTools, /fetch\("\/api\/teacher\/classes"/, "teacher tools must load classes from /api/teacher/classes");
+assert.doesNotMatch(teacherTools, /fetch\(|\/api\/teacher\/classes|\/api\/teacher\/learning-lessons|\/api\/teacher\/reading-coach/, "teacher tools must not fetch classes, lessons, or reading-coach data");
 assert.doesNotMatch(teacherTools, /\/api\/teacher\/dashboard|\/api\/ai\/generate-test|\/api\/teacher\/test-design-agent|\/api\/teacher\/diagnostic/, "teacher tools must not call retired routes");
 assert.doesNotMatch(teacherTools, /TeacherLearningPathPanel|TeacherTdaScoringPanel|Test Design Agent|createDiagnosticAssessment|generateTest|MetricCard|ScoreSourcesPanel|TeacherActionOverview|TeacherLaunchPad/, "legacy dashboard-only UI must be removed");
 assert.doesNotMatch(teacherTools, /TeacherClassesPanel|TeacherImportStudentsPanel|Student Import|Import Students From Google Classroom/, "classes/import tabs must move out of legacy teacher tools");
-assert.match(teacherTools, /function ReadingCoachToolsPanel/, "reading-coach utility must remain");
+assert.doesNotMatch(teacherTools, /ReadingCoachToolsPanel|readingCoachAssignments|readingCoachForm|assignReadingCoach|loadReadingCoachAssignments|readingCoachMessage|assigningReadingCoach|Reading Coach|Read-Aloud Practice/, "reading-coach utility must move out of legacy teacher tools");
 assert.equal(fs.existsSync(path.join(root, "components/TeacherResourcesPanel.tsx")), true, "resource suggestion component must be preserved for #35B");
 assert.match(teacherTools, /Resources is moving to the new workspace/, "resources tab must render migration placeholder");
 assert.doesNotMatch(teacherTools, /Showing \{resources\.length\} approved resources|0 resources/, "resources tab must not render broken empty resource list");
-assert.match(teacherTools, /type TeacherToolsTab = "resources" \| "readingCoach"/, "legacy tools tab type must be trimmed to resources/readingCoach");
-assert.match(teacherTools, /const teacherToolsTabs[\s\S]*id: "readingCoach"[\s\S]*id: "resources"/, "visible legacy tab set must be readingCoach/resources");
-assert.doesNotMatch(teacherTools, /id: "classes"|id: "import"|raw === "classes"|raw === "import"/, "legacy classes/import tabs must be removed");
-for (const tab of ["resources", "readingCoach"]) {
-  assert.match(teacherTools, new RegExp(`raw === "${tab}"`), `deep link ?tab=${tab} must normalize to that tab`);
+assert.doesNotMatch(teacherTools, /TeacherToolsTab|teacherToolsTabs|raw === "classes"|raw === "import"|raw === "readingCoach"|raw === "resources"|useState|useEffect/, "legacy tools tab state must be removed");
+assert.match(teacherTools, />Resources</, "visible legacy hub must be resources only");
+
+const readingCoachPanel = read("components/literacy/TeacherReadingCoachPanel.tsx");
+assert.match(readingCoachPanel, /export function TeacherReadingCoachPanel/, "reading-coach utility must live in its Reading Buddy component");
+assert.match(readingCoachPanel, /title: "Reading Coach Fluency Practice"/, "reading-coach form title default must be preserved");
+assert.match(readingCoachPanel, /gradeLevel: "6"/, "reading-coach grade default must be preserved");
+assert.match(readingCoachPanel, /expectedText: "Maya stood at the front of the room/, "reading-coach passage default must be preserved");
+assert.match(readingCoachPanel, /fetch\("\/api\/teacher\/reading-coach"[\s\S]*cache: "no-store"/, "reading-coach panel must keep GET contract");
+assert.match(readingCoachPanel, /fetch\("\/api\/teacher\/reading-coach"[\s\S]*method: "POST"/, "reading-coach panel must keep POST contract");
+const readingCoachPanelEndpoints = [...readingCoachPanel.matchAll(/["'](\/api\/teacher\/[^"']+)["']/g)].map((match) => match[1]);
+for (const endpoint of readingCoachPanelEndpoints) {
+  assert.equal(endpoint, "/api/teacher/reading-coach", `reading-coach panel must not call unexpected endpoint ${endpoint}`);
 }
-assert.match(teacherTools, /: "readingCoach"/, "unknown tabs must default to readingCoach");
+
+const readingCoachPage = read("app/teacher/literacy/reading-coach/page.tsx");
+assert.match(readingCoachPage, /TeacherReadingCoachPanel/, "reading-coach sub-route must render the extracted panel");
+assert.match(readingCoachPage, /SynesisPageShell[\s\S]*variant="product"[\s\S]*homeHref="\/teacher"/, "reading-coach sub-route must mirror the main literacy product shell");
+assert.match(readingCoachPage, /activeProduct="reading_buddy"/, "reading-coach sub-route must live under Reading Buddy");
+assert.match(readingCoachPage, /href="\/teacher\/literacy"/, "reading-coach sub-route must link back to the literacy monitor");
+assert.match(readingCoachPage, /Reading Coach — assign read-aloud practice/, "reading-coach sub-route must render the approved title");
+
+const literacyMonitor = read("components/literacy/TeacherLiteracyMonitor.tsx");
+assert.match(literacyMonitor, /href="\/teacher\/literacy\/reading-coach"/, "literacy monitor must link to Reading Coach practice");
 
 const importPanel = read("components/TeacherImportStudentsPanel.tsx");
 assert.match(importPanel, /export function TeacherImportStudentsPanel/, "import utility must live in its own component");
@@ -73,7 +90,8 @@ for (const endpoint of importPanelEndpoints) {
 const classesTab = read("components/teacher/TeacherClassesTab.tsx");
 assert.match(classesTab, /TeacherClassesPanel/, "State Track classes tab must render class management");
 assert.match(classesTab, /TeacherImportStudentsPanel/, "State Track classes tab must render import utility");
-assert.match(classesTab, /href="\/teacher\/tools\?tab=readingCoach"/, "State Track classes tab must keep temporary link to Teacher Tools");
+assert.match(classesTab, /href="\/teacher\/tools"/, "State Track classes tab must keep temporary link to Teacher Tools");
+assert.doesNotMatch(classesTab, /tab=readingCoach/, "State Track classes tab must not link to the removed readingCoach tools tab");
 
 const adminPage = read("app/admin/page.tsx");
 assert.match(adminPage, /getServerSession\(authOptions\)/, "admin index must check the session");
@@ -103,6 +121,7 @@ assert.doesNotMatch(adminPage, /AdminDashboardPage|\/api\/admin\/dashboard|gener
 const teacherToolsPage = read("app/teacher/tools/page.tsx");
 assert.match(teacherToolsPage, /redirect\("\/teacher\?tab=classes"\)/, "/teacher/tools classes/import deep links must redirect to State Track classes");
 assert.match(teacherToolsPage, /activeTab === "classes" \|\| activeTab === "import"/, "/teacher/tools must redirect both removed tabs server-side");
+assert.match(teacherToolsPage, /activeTab === "readingCoach"[\s\S]*redirect\("\/teacher\/literacy\/reading-coach"\)/, "/teacher/tools readingCoach deep link must redirect to Reading Buddy");
 assert.match(teacherToolsPage, /<TeacherDashboardPage \/>/, "/teacher/tools must stay live");
 const layout = read("app/layout.tsx");
 assert.match(layout, /"\/teacher\/tools"/, "app layout allowlist must keep /teacher/tools");

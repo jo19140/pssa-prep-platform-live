@@ -16,6 +16,9 @@ export default async function TeacherToolsPage({
   if (activeTab === "classes" || activeTab === "import") {
     redirect("/teacher?tab=classes");
   }
+  if (activeTab === "readingCoach") {
+    redirect("/teacher/literacy/reading-coach");
+  }
 
   return (
     <SynesisPageShell
