@@ -52,11 +52,12 @@ const teacherPage = read("app/teacher/page.tsx");
 assert.match(teacherPage, /<SynesisPageShell[\s\S]*variant="product"[\s\S]*homeHref="\/teacher"/, "/teacher must use product shell");
 assert.match(teacherPage, /TeacherProductWorkspaceSwitcher products=\{products\} activeProduct="state_track"/, "/teacher must use teacher route switcher");
 assert.match(teacherPage, /normalizeStateTrackTab/, "/teacher must normalize tabs");
-assert.match(teacherPage, /STATE_TRACK_TABS = \["classes", "lessons", "assignments", "reports", "grading"\]/, "/teacher must define the requested tab frame");
+assert.match(teacherPage, /STATE_TRACK_TABS = \["classes", "lessons", "assignments", "reports", "grading", "resources"\]/, "/teacher must define the requested tab frame");
 assert.match(teacherPage, /hrefForTab\(resolvedSearchParams, tab\)/, "tab links must preserve search params while replacing tab");
 assert.match(teacherPage, /aria-current=\{active \? "page" : undefined\}/, "active tab must set aria-current");
 assert.doesNotMatch(teacherPage, /aria-disabled="true"[\s\S]*Coming soon/, "Grading is live after #36-2b and must not stay disabled");
 assert.match(teacherPage, /activeTab === "grading"[\s\S]*<TeacherGradingTab \/>/, "Grading tab must render the live grading component");
+assert.match(teacherPage, /activeTab === "resources"[\s\S]*<TeacherResourcesPanel \/>/, "Resources tab must render the live resources component");
 assert.match(teacherPage, /<TeacherPssaInsightsClient \/>/, "Reports tab must embed existing insights client");
 assert.doesNotMatch(teacherPage, /assign-recommended-lesson|lesson-suggestions|class-report/, "/teacher page must not rewrite report/assign routes");
 
@@ -65,8 +66,8 @@ assert.match(insightsPage, /params\.set\("tab", "reports"\)/, "legacy insights r
 assert.match(insightsPage, /redirect\(`\/teacher\?\$\{params\.toString\(\)\}`\)/, "legacy insights redirect must preserve query params");
 
 const teacherTools = read("app/teacher/tools/page.tsx");
-assert.match(teacherTools, /<TeacherDashboardPage \/>/, "/teacher/tools must render the teacher tools component");
-assert.match(teacherTools, /activeProduct="state_track"/, "/teacher/tools must live under State Track workspace");
+assert.match(teacherTools, /redirect\("\/teacher\?tab=resources"\)/, "/teacher/tools must redirect to State Track resources");
+assert.doesNotMatch(teacherTools, /<TeacherDashboardPage \/>|activeProduct="state_track"|SynesisPageShell/, "/teacher/tools must no longer render its own shell");
 
 const teacherLiteracy = read("app/teacher/literacy/page.tsx");
 assert.match(teacherLiteracy, /variant="product"/, "/teacher/literacy must use product shell");

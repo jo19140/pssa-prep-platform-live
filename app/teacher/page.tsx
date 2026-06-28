@@ -7,9 +7,10 @@ import { TeacherAssignmentsTab } from "@/components/teacher/TeacherAssignmentsTa
 import { TeacherClassesTab } from "@/components/teacher/TeacherClassesTab";
 import { TeacherGradingTab } from "@/components/teacher/TeacherGradingTab";
 import { TeacherLessonsTab } from "@/components/teacher/TeacherLessonsTab";
+import { TeacherResourcesPanel } from "@/components/TeacherResourcesPanel";
 import { loadCurrentTeacherProducts } from "@/lib/teacher/loadCurrentTeacherProducts";
 
-const STATE_TRACK_TABS = ["classes", "lessons", "assignments", "reports", "grading"] as const;
+const STATE_TRACK_TABS = ["classes", "lessons", "assignments", "reports", "grading", "resources"] as const;
 type StateTrackTab = typeof STATE_TRACK_TABS[number];
 
 export default async function TeacherPage({
@@ -73,6 +74,10 @@ export default async function TeacherPage({
             <TeacherAssignmentsTab />
           ) : activeTab === "grading" ? (
             <TeacherGradingTab />
+          ) : activeTab === "resources" ? (
+            <Suspense fallback={<div className="rounded-lg border border-slate-200 bg-white p-6 text-sm text-slate-600 shadow-sm">Loading resources...</div>}>
+              <TeacherResourcesPanel />
+            </Suspense>
           ) : null}
         </section>
       </main>

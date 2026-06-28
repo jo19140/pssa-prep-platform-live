@@ -1,15 +1,10 @@
 import { redirect } from "next/navigation";
-import TeacherDashboardPage from "@/components/TeacherDashboardPage";
-import { SynesisPageShell } from "@/components/synesis/SynesisPageShell";
-import { TeacherProductWorkspaceSwitcher } from "@/components/synesis/TeacherProductWorkspaceSwitcher";
-import { loadCurrentTeacherProducts } from "@/lib/teacher/loadCurrentTeacherProducts";
 
 export default async function TeacherToolsPage({
   searchParams,
 }: {
   searchParams?: Promise<Record<string, string | string[] | undefined>>;
 }) {
-  const products = await loadCurrentTeacherProducts();
   const resolvedSearchParams = await searchParams;
   const activeTab = firstValue(resolvedSearchParams?.tab);
 
@@ -19,19 +14,7 @@ export default async function TeacherToolsPage({
   if (activeTab === "readingCoach") {
     redirect("/teacher/literacy/reading-coach");
   }
-
-  return (
-    <SynesisPageShell
-      roles={["TEACHER"]}
-      variant="product"
-      homeHref="/teacher"
-      productNavigation={<TeacherProductWorkspaceSwitcher products={products} activeProduct="state_track" />}
-    >
-      <main className="p-6">
-        <TeacherDashboardPage />
-      </main>
-    </SynesisPageShell>
-  );
+  redirect("/teacher?tab=resources");
 }
 
 function firstValue(value: string | string[] | undefined) {

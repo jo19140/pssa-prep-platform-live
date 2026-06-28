@@ -24,7 +24,7 @@ export function TeacherResourcesPanel() {
 
   async function loadData() {
     setLoading(true);
-    const res = await fetch("/api/teacher/learning-lessons");
+    const res = await fetch("/api/teacher/resources", { cache: "no-store" });
     const json = await res.json().catch(() => ({}));
     if (res.ok) setData(json);
     setLoading(false);
@@ -76,7 +76,9 @@ export function TeacherResourcesPanel() {
           <p className="text-sm font-bold uppercase tracking-wide text-indigo-700">Resource Library</p>
           <h2 className="text-xl font-black text-slate-950">Curated Videos and Practice Supports</h2>
           <p className="mt-1 text-sm text-slate-600">
-            Showing {resources.length} approved resources. Your class grades appear first when matching resources exist.
+            {resources.length
+              ? `Showing ${resources.length} approved resources. Your class grades appear first when matching resources exist.`
+              : "No resources yet — suggest one for admin review."}
           </p>
         </div>
         <button type="button" onClick={() => setModalOpen(true)} className="rounded-xl bg-slate-900 px-4 py-2 text-sm font-bold text-white">
@@ -118,6 +120,11 @@ export function TeacherResourcesPanel() {
             {resource.description ? <p className="mt-1 text-sm text-slate-600">{resource.description}</p> : null}
           </article>
         ))}
+        {!resources.length ? (
+          <div className="rounded-2xl border border-dashed border-slate-300 bg-slate-50 p-5 text-sm text-slate-600">
+            No approved resources match this filter yet. Use Suggest a Resource to send one for admin review.
+          </div>
+        ) : null}
       </div>
 
       {modalOpen ? (
