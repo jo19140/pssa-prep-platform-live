@@ -2,9 +2,9 @@ import type { CoachLessonStep } from "./coachLessonSteps";
 
 export type StepOutcome =
   | { kind: "acknowledged" }
-  | { kind: "read_marked" }
+  | { kind: "read_marked"; mode?: "read_on_own" }
   | { kind: "heard_marked" }
-  | { kind: "checked_marked" }
+  | { kind: "checked_marked"; correct: boolean }
   | { kind: "answered_marked"; text?: string };
 
 export type CoachStepperState = {

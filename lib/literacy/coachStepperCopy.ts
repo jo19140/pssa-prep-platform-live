@@ -44,6 +44,33 @@ export const COACH_STEPPER_COPY = {
     completedLabel: "Completed",
     readOnlyLabel: "Review",
   },
+  demoPair: {
+    beforeHelper: "Before",
+    afterHelper: "After silent e",
+  },
+  powerWord: {
+    heartHelper: "High-utility word",
+    vocabHelper: "Vocabulary word",
+  },
+  spelling: {
+    hearButton: "Hear word",
+    checkButton: "Check",
+    doneButton: "Done",
+    nextButton: "Next word",
+    clearButton: "Clear",
+    correctFeedback: "That matches.",
+    retryFeedback: "Keep building the word you hear.",
+  },
+  passage: {
+    listenFirstButton: "Listen first",
+    listeningButton: "Listening…",
+    readOnOwnButton: "Read on my own",
+    doneReadingButton: "Done reading",
+  },
+  reflect: {
+    placeholder: "Type a quick note.",
+    markAnswered: "Mark answered",
+  },
 } as const;
 
 export function coachStepperCopy() {

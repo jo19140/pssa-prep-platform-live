@@ -11,8 +11,9 @@ async function main() {
   const outcomeFor = (kind: string): StepOutcome => {
     if (kind === "rule") return { kind: "acknowledged" };
     if (kind === "demo_pair" || kind === "power_word") return { kind: "heard_marked" };
-    if (kind === "spell_word") return { kind: "checked_marked" };
+    if (kind === "spell_word") return { kind: "checked_marked", correct: true };
     if (kind === "reflect") return { kind: "answered_marked", text: "ok" };
+    if (kind === "passage") return { kind: "read_marked", mode: "read_on_own" };
     return { kind: "read_marked" };
   };
   const outcomes: CoachStepOutcomeRecord[] = steps.map((step) => ({ step, outcome: outcomeFor(step.kind) }));
@@ -31,9 +32,10 @@ async function main() {
   });
   assert.deepStrictEqual(aggregateCoachPartOutcome(4, outcomes), { heardWords: 11 });
   assert.deepStrictEqual(aggregateCoachPartOutcome(5, outcomes), { listenAndEncourage: true, sentenceCount: 6 });
-  assert.deepStrictEqual(aggregateCoachPartOutcome(6, outcomes), { spellingCorrect: 0, spellingTotal: 6 });
-  assert.deepStrictEqual(aggregateCoachPartOutcome(7, outcomes), { listenAndEncourage: true, connectedTextMode: "ASSISTED_OR_INDEPENDENT" });
+  assert.deepStrictEqual(aggregateCoachPartOutcome(6, outcomes), { spellingCorrect: 6, spellingTotal: 6 });
+  assert.deepStrictEqual(aggregateCoachPartOutcome(7, outcomes), { listenAndEncourage: true, connectedTextMode: "read_on_own" });
   assert.deepStrictEqual(aggregateCoachPartOutcome(8, outcomes), { responseCount: 4 });
+  assert.equal(JSON.stringify(aggregateCoachPartOutcome(8, outcomes)).includes("ok"), false, "reflect text must not enter aggregate telemetry");
   assert.throws(() => aggregateCoachPartOutcome(9, outcomes), /Unsupported coach partNumber/);
 
   console.log("Aggregate coach part outcome tests passed.");
