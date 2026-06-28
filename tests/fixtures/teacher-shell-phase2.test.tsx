@@ -87,7 +87,7 @@ assert.match(middleware, /role === "PARENT"\) response = NextResponse\.redirect\
 
 const layout = read("app/layout.tsx");
 assert.match(layout, /pathname === "\/teacher"/, "root layout must include exact /teacher shell route");
-assert.match(layout, /"\/teacher\/tools"/, "root layout must include teacher tools shell route");
+assert.doesNotMatch(layout, /"\/teacher\/tools"/, "root layout must not include redirect-only teacher tools route");
 assert.doesNotMatch(layout, /"\/teacher",/, "root layout must not treat every /teacher/* route as shell-owned");
 
 console.log("teacher shell Phase 2 checks passed");

@@ -48,7 +48,6 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
     "/student/speed-drill",
     "/teacher/literacy",
     "/teacher/pssa",
-    "/teacher/tools",
     "/parent/literacy",
     "/parent/settings/voice",
     "/onboarding/listening",

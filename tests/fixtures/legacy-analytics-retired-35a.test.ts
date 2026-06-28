@@ -36,16 +36,9 @@ for (const token of [
   assert.doesNotMatch(source, new RegExp(escapeRegExp(token)), `${token} must be unreferenced in live source`);
 }
 
-const teacherTools = read("components/TeacherDashboardPage.tsx");
-assert.doesNotMatch(teacherTools, /fetch\(|\/api\/teacher\/classes|\/api\/teacher\/learning-lessons|\/api\/teacher\/reading-coach/, "teacher tools must not fetch classes, lessons, or reading-coach data");
-assert.doesNotMatch(teacherTools, /\/api\/teacher\/dashboard|\/api\/ai\/generate-test|\/api\/teacher\/test-design-agent|\/api\/teacher\/diagnostic/, "teacher tools must not call retired routes");
-assert.doesNotMatch(teacherTools, /TeacherLearningPathPanel|TeacherTdaScoringPanel|Test Design Agent|createDiagnosticAssessment|generateTest|MetricCard|ScoreSourcesPanel|TeacherActionOverview|TeacherLaunchPad/, "legacy dashboard-only UI must be removed");
-assert.doesNotMatch(teacherTools, /TeacherClassesPanel|TeacherImportStudentsPanel|Student Import|Import Students From Google Classroom/, "classes/import tabs must move out of legacy teacher tools");
-assert.doesNotMatch(teacherTools, /ReadingCoachToolsPanel|readingCoachAssignments|readingCoachForm|assignReadingCoach|loadReadingCoachAssignments|readingCoachMessage|assigningReadingCoach|Reading Coach|Read-Aloud Practice/, "reading-coach utility must move out of legacy teacher tools");
+assert.equal(fs.existsSync(path.join(root, "components/TeacherDashboardPage.tsx")), false, "TeacherDashboardPage must be retired");
+assert.doesNotMatch(source, /TeacherDashboardPage/, "TeacherDashboardPage must be unreferenced in live source");
 assert.equal(fs.existsSync(path.join(root, "components/TeacherResourcesPanel.tsx")), true, "resource suggestion component must be preserved for #35D");
-assert.match(teacherTools, /Resources is moving to the new workspace/, "resources tab must render migration placeholder");
-assert.doesNotMatch(teacherTools, /TeacherToolsTab|teacherToolsTabs|raw === "classes"|raw === "import"|raw === "readingCoach"|raw === "resources"|useState|useEffect/, "legacy tools tab state must be removed");
-assert.match(teacherTools, />Resources</, "visible legacy hub must be resources only");
 
 const resourcesPanel = read("components/TeacherResourcesPanel.tsx");
 assert.match(resourcesPanel, /fetch\("\/api\/teacher\/resources", \{ cache: "no-store" \}\)/, "resources panel must fetch rebuilt resources route");
@@ -129,7 +122,7 @@ assert.match(teacherToolsPage, /activeTab === "readingCoach"[\s\S]*redirect\("\/
 assert.match(teacherToolsPage, /redirect\("\/teacher\?tab=resources"\)/, "/teacher/tools resources/no-tab deep links must redirect to State Track resources");
 assert.doesNotMatch(teacherToolsPage, /TeacherDashboardPage|SynesisPageShell|TeacherProductWorkspaceSwitcher/, "/teacher/tools must be redirect-only");
 const layout = read("app/layout.tsx");
-assert.match(layout, /"\/teacher\/tools"/, "app layout allowlist must keep /teacher/tools");
+assert.doesNotMatch(layout, /"\/teacher\/tools"/, "app layout allowlist must not include the redirect-only tools route");
 const teacherPage = read("app/teacher/page.tsx");
 assert.match(teacherPage, /TeacherClassesTab/, "modern teacher page must render the real classes tab");
 assert.match(teacherPage, /activeTab === "classes"[\s\S]*<TeacherClassesTab \/>/, "modern teacher classes tab must use the classes/import wrapper");
