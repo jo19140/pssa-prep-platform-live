@@ -33,6 +33,12 @@ Multiple existing tests are **already red on `origin/main`**: the merged cross-t
 - Do NOT weaken any assertion, change the assembler, the selector, or any product code. Purely make the fixtures faithful to the imported shape.
 - **Report the exact list of test files repaired.** Every repaired file must contain ONLY this fixture-shape change.
 
+### 2.1a Authorized consequence: stale contentHash pins
+Making a paired-item fixture faithful can change a **pinned canonical contentHash**, because `primaryPassageId(item)` reads the passage **links first** (`links.find(role==="primary") ?? links[0]`, fallback `item.passageId`). For paired items with `passageId:null` + `passageLinks` (e.g. the BOY-diagnostic owls items, and the EOY/MOY P3 items), the old linkless fixture yielded a **null** primary passage in the canonical; the faithful fixture yields the real linked passage — matching the real imported DB rows. So a pin like `PRE_PHASE4A_BOY_DIAGNOSTIC_CONTENT_HASH` in `test-pssa-go-live.ts` was computed from an **unfaithful** fixture.
+- You MAY update such a pin to the faithful value, **only when** the new hash is fully explained by paired items' `primaryPassageId` changing null→real (the passage-link shape) and **nothing else** changes. Add a one-line comment at the pin: `// fixture-shape correction: faithful PssaItemPassageLink shape (was computed from linkless paired fixture)`.
+- This is NOT weakening — the assertion still pins an exact hash; only the pinned value is corrected to the real-DB-faithful shape.
+- **For each updated pin, REPORT: old hash, new hash, the test, and proof the delta is solely the paired-item passage-link shape** (e.g. the only canonical difference is the affected items' primaryPassageId). If a hash changes for ANY reason other than this passage-link shape correction, **STOP and report** — do not update the pin.
+
 ## 3. Validation (`scripts/test-pssa-form-section-persistence.ts`, new)
 Assert against `buildPssaFormCreateData(...)` (DB-free):
 - **EOY** (build the real EOY result via the fixture EOY pool used in `test-pssa-eoy-form-assembly`, or a representative result): `hasSections === true`; exactly **3** section rows with `sectionIndex 1/2/3`, `estimatedMinutes [60,80,60]`; per-item `sectionIndex` split **12/18/15**; every delivered item `sectionIndex` non-null; the P3 paired unit items all in section 2; analytics buckets unchanged (35 operational / 10 analytics_only).
