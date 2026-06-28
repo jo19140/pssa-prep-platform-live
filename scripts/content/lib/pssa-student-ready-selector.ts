@@ -55,8 +55,8 @@ export type PssaReadyItem = PssaReadyContent & {
   acceptableTextSupport?: unknown;
   acceptableSupportEvidenceLinks?: Array<Record<string, unknown>>;
   scoreBandExamples?: unknown;
-  passages?: Array<{ passage?: PssaReadyPassage | null }>;
-  passageGroup?: { members?: Array<{ passage?: PssaReadyPassage | null; slot?: string | null }> } | null;
+  passages?: Array<{ passageId?: string | null; passage?: PssaReadyPassage | null }>;
+  passageGroup?: { members?: Array<{ passageId?: string | null; passage?: PssaReadyPassage | null; slot?: string | null }> } | null;
 };
 
 export type StudentReadyExplanation = {
@@ -143,15 +143,25 @@ export function explainPssaItemStudentReadiness(item: PssaReadyItem): StudentRea
 function pairedRequiredEvidenceSlotsCovered(item: PssaReadyItem) {
   const required = requiredEvidenceSlots(item);
   if (!required.length) return !item.isCrossText;
-  const memberSlots = new Set((item.passageGroup?.members ?? []).map((member) => String(member.slot ?? "")).filter(Boolean));
-  if (required.some((slot) => !memberSlots.has(slot))) return false;
-  const covered = new Set<string>();
-  for (const link of pairedEvidenceLinks(item)) {
-    const slot = String(link.passageSlot ?? "");
-    if (!slot || !memberSlots.has(slot)) return false;
-    covered.add(slot);
+  const members = item.passageGroup?.members ?? [];
+  if (!members.length) return false;
+  if (members.some((member) => !String(member.slot ?? "").trim())) return false;
+
+  const linkedPassageIds = new Set(
+    (item.passages ?? [])
+      .map((link) => String(link.passage?.id ?? link.passageId ?? ""))
+      .filter(Boolean),
+  );
+
+  for (const slot of required) {
+    const member = members.find((row) => String(row.slot) === slot);
+    if (!member?.passage) return false;
+    if (explainPssaPassageStudentReadiness(member.passage).reason !== "NONE") return false;
+    const memberPassageId = String(member.passage.id ?? member.passageId ?? "");
+    if (!memberPassageId || !linkedPassageIds.has(memberPassageId)) return false;
   }
-  return required.every((slot) => covered.has(slot));
+
+  return true;
 }
 
 function requiredEvidenceSlots(item: PssaReadyItem) {
@@ -159,30 +169,6 @@ function requiredEvidenceSlots(item: PssaReadyItem) {
   const rule = objectSource(item.crossTextSupportRuleJson);
   const fromRule = Array.isArray(rule.requiredPassageSlots) ? rule.requiredPassageSlots.map(String) : [];
   return Array.from(new Set([...direct, ...fromRule]));
-}
-
-function pairedEvidenceLinks(item: PssaReadyItem): Array<Record<string, unknown>> {
-  if (String(item.interactionType ?? "").toUpperCase() === "MCQ") {
-    return item.structuredChoicesJson?.find((choice) => choice.isCorrect)?.evidenceLinks ?? [];
-  }
-  return [
-    ...(item.acceptableSupportEvidenceLinks ?? []),
-    ...collectEvidenceLinks(item.crossTextSupportRuleJson),
-    ...collectEvidenceLinks(item.acceptableTextSupport),
-    ...collectEvidenceLinks(item.scoreBandExamples),
-  ];
-}
-
-function collectEvidenceLinks(value: unknown, out: Array<Record<string, unknown>> = []) {
-  if (!value || typeof value !== "object") return out;
-  if (Array.isArray(value)) {
-    for (const entry of value) collectEvidenceLinks(entry, out);
-    return out;
-  }
-  const row = value as Record<string, unknown>;
-  if ("passageSlot" in row || "evidenceKind" in row || "quotedSpan" in row || "sectionId" in row) out.push(row);
-  for (const nested of Object.values(row)) collectEvidenceLinks(nested, out);
-  return out;
 }
 
 function hasMachineScorableResponseDomain(interactionType: string | null | undefined, responseSpecJson: unknown) {
