@@ -14,7 +14,9 @@ import {
 } from "./content/lib/pssa-form-assembly";
 import { AUDIT_CONTRACT_VERSION, SOURCE_SCAN_VERSION } from "./content/lib/pssa-import-plan";
 
-const PRE_PHASE4A_BOY_DIAGNOSTIC_CONTENT_HASH = "sha256:d881fd075f48f5226724c104f71b80552c1fe316adc9456c11e80d9607f951d8";
+// Fixture-shape correction: paired items now carry their real PssaItemPassageLink rows.
+// The previous pin was computed from a linkless paired-item fixture.
+const PRE_PHASE4A_BOY_DIAGNOSTIC_CONTENT_HASH = "sha256:2741a7cb5d1dd3a77cf9a48deb7b5310cfd1289cf3805c3502ee6ed49b252e21";
 
 function passage(id: string): PssaAssemblyPassage {
   return {
@@ -375,7 +377,14 @@ function readyItemFromFixture(raw: any, passageMap: Map<string, PssaAssemblyPass
       sourceCorpusHash: "hash-stamina-corpus",
       batchAuditResult: "PASS",
     },
-    passages: passageId ? [{ passage: passageMap.get(passageId), role: "primary", sortOrder: 0 } as any] : [],
+    passages: Array.isArray(raw.passageLinks)
+      ? raw.passageLinks.map((link: any) => ({
+          passageId: link.passageId,
+          passage: passageMap.get(link.passageId),
+          role: link.role ?? "primary",
+          sortOrder: link.sortOrder ?? 0,
+        } as any))
+      : passageId ? [{ passageId, passage: passageMap.get(passageId), role: "primary", sortOrder: 0 } as any] : [],
     passageGroupId: groupId,
     passageGroup: group,
   };

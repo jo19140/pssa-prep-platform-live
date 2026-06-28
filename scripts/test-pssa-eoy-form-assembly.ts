@@ -52,6 +52,16 @@ function readyItem(raw: any, passageMap: Map<string, PssaAssemblyPassage>, group
   const hash = raw.contentHash ?? `hash-${id}`;
   const passageId = raw.passageId ?? null;
   const group = raw.passageGroupId ? groupById.get(raw.passageGroupId) : null;
+  const passageLinks = Array.isArray(raw.passageLinks)
+    ? raw.passageLinks.map((link: any) => ({
+        passageId: link.passageId,
+        passage: passageMap.get(link.passageId),
+        role: link.role ?? "primary",
+        sortOrder: link.sortOrder ?? 0,
+      }))
+    : passageId
+      ? [{ passageId, passage: passageMap.get(passageId), role: "primary", sortOrder: 0 } as any]
+      : [];
   const structuredChoicesJson = raw.interactionType === "MCQ" && Array.isArray(raw.structuredChoicesJson)
     ? raw.structuredChoicesJson.map((choice: any, index: number) => {
       const bindingLinks = raw.evidenceBinding?.passageSlots?.map((passageSlot: string) => ({
@@ -102,7 +112,7 @@ function readyItem(raw: any, passageMap: Map<string, PssaAssemblyPassage>, group
       sourceCorpusHash: "hash-eoy-corpus",
       batchAuditResult: "PASS",
     },
-    passages: passageId ? [{ passage: passageMap.get(passageId), role: "primary", sortOrder: 0 } as any] : [],
+    passages: passageLinks,
     passageGroupId: raw.passageGroupId,
     passageGroup: group,
     structuredChoicesJson,

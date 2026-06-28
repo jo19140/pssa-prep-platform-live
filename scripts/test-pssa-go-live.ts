@@ -23,7 +23,8 @@ import {
 } from "./content/lib/pssa-form-assembly";
 import { AUDIT_CONTRACT_VERSION, SOURCE_SCAN_VERSION } from "./content/lib/pssa-import-plan";
 
-const PRE_PHASE4A_BOY_DIAGNOSTIC_CONTENT_HASH = "sha256:d881fd075f48f5226724c104f71b80552c1fe316adc9456c11e80d9607f951d8";
+// fixture-shape correction: faithful PssaItemPassageLink shape (was computed from linkless paired fixture)
+const PRE_PHASE4A_BOY_DIAGNOSTIC_CONTENT_HASH = "sha256:2741a7cb5d1dd3a77cf9a48deb7b5310cfd1289cf3805c3502ee6ed49b252e21";
 
 for (const blueprint of [
   GRADE3_BLUEPRINT.blueprintVersion,
@@ -171,6 +172,16 @@ function readyItemFromFixture(raw: any, passageMap: Map<string, PssaAssemblyPass
   const passageId = raw.passageId ?? null;
   const groupId = raw.passageGroupId ?? null;
   const group = groupId ? groupById.get(groupId) : null;
+  const passageLinks = Array.isArray(raw.passageLinks)
+    ? raw.passageLinks.map((link: any) => ({
+        passageId: link.passageId,
+        passage: passageMap.get(link.passageId),
+        role: link.role ?? "primary",
+        sortOrder: link.sortOrder ?? 0,
+      }))
+    : passageId
+      ? [{ passageId, passage: passageMap.get(passageId), role: "primary", sortOrder: 0 } as any]
+      : [];
   return {
     ...raw,
     id,
@@ -204,7 +215,7 @@ function readyItemFromFixture(raw: any, passageMap: Map<string, PssaAssemblyPass
       sourceCorpusHash: "hash-stamina-corpus",
       batchAuditResult: "PASS",
     },
-    passages: passageId ? [{ passage: passageMap.get(passageId), role: "primary", sortOrder: 0 } as any] : [],
+    passages: passageLinks,
     passageGroupId: groupId,
     passageGroup: group,
   };

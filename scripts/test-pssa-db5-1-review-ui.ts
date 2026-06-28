@@ -172,6 +172,9 @@ assert.equal(
   "PENDING_REVIEW",
   "cross-text paired-set item must be blocked until all directly linked/member passages are approved",
 );
+// Evidence-link slot coverage is an authoring-time check: those links are not
+// persisted to DB-backed review rows. Readiness now verifies the persisted
+// passage-group/member/link structure instead.
 assert.equal(
   (itemToQueueDto({
     ...pairedReadyItem,
@@ -181,8 +184,20 @@ assert.equal(
     passages: [{ passage: readyPassage("p1") }, { passage: readyPassage("p2") }],
     passageGroup: { members: [{ slot: "passage_1", passage: readyPassage("p1") }, { slot: "passage_2", passage: readyPassage("p2") }] },
   }).reviewer.gateResults as any).computedBlockedReason,
+  "NONE",
+  "cross-text paired-set item is ready when requiredEvidenceSlots are structurally covered",
+);
+assert.equal(
+  (itemToQueueDto({
+    ...pairedReadyItem,
+    isCrossText: true,
+    requiredEvidenceSlotsJson: ["passage_1", "passage_2"],
+    structuredChoicesJson: [{ isCorrect: true, evidenceLinks: [{ passageSlot: "passage_1" }, { passageSlot: "passage_2" }] }],
+    passages: [{ passage: readyPassage("p1") }],
+    passageGroup: { members: [{ slot: "passage_1", passage: readyPassage("p1") }, { slot: "passage_2", passage: readyPassage("p2") }] },
+  }).reviewer.gateResults as any).computedBlockedReason,
   "PENDING_REVIEW",
-  "cross-text paired-set item must fail when requiredEvidenceSlots are not covered",
+  "cross-text paired-set item must fail when a required member passage is not linked",
 );
 assert.equal(
   computedBlockedReason({

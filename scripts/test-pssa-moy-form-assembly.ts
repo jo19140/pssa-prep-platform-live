@@ -108,7 +108,14 @@ function readyItem(raw: any, passageMap: Map<string, PssaAssemblyPassage>, group
       sourceCorpusHash: "hash-moy-corpus",
       batchAuditResult: "PASS",
     },
-    passages: passageId ? [{ passage: passageMap.get(passageId), role: "primary", sortOrder: 0 } as any] : [],
+    passages: Array.isArray(raw.passageLinks)
+      ? raw.passageLinks.map((link: any) => ({
+          passageId: link.passageId,
+          passage: passageMap.get(link.passageId),
+          role: link.role ?? "primary",
+          sortOrder: link.sortOrder ?? 0,
+        } as any))
+      : passageId ? [{ passageId, passage: passageMap.get(passageId), role: "primary", sortOrder: 0 } as any] : [],
     passageGroupId: raw.passageGroupId,
     passageGroup: group,
     structuredChoicesJson,

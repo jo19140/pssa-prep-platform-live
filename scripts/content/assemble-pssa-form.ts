@@ -48,6 +48,63 @@ export function assembleGrade3FormFromPool(input: Parameters<typeof assemblePssa
   return assembleDiagnosticFormFromPool(input);
 }
 
+export function buildPssaFormCreateData(
+  result: AssemblyResult,
+  args: { blueprint: string | null; seed: string | null; assembledBy: string },
+  assemblyRunId: string,
+) {
+  const hasSections = (result.sections?.length ?? 0) > 0;
+  return {
+    module: GRADE3_BLUEPRINT.module,
+    subject: GRADE3_BLUEPRINT.subject,
+    gradeLevel: GRADE3_BLUEPRINT.gradeLevel,
+    blueprintVersion: args.blueprint!,
+    seed: args.seed!,
+    formStatus: "assembled",
+    totalPoints: result.totalPoints,
+    categoryPointsJson: result.categoryPoints,
+    contentHash: result.contentHash!,
+    auditContractVersion: AUDIT_CONTRACT_VERSION,
+    sourceScanVersion: SOURCE_SCAN_VERSION,
+    hasSections,
+    assembledAt: new Date(),
+    assembledBy: args.assembledBy,
+    assemblyRunId,
+    ...(hasSections
+      ? {
+          sections: {
+            create: result.sections!.map((section) => ({
+              sectionIndex: section.sectionIndex,
+              sectionType: section.sectionType,
+              label: section.label,
+              estimatedMinutes: section.estimatedMinutes,
+            })),
+          },
+        }
+      : {}),
+    passages: {
+      create: result.passages.map((passage) => ({
+        passageId: passage.passageId,
+        position: passage.position,
+        sectionIndex: passage.sectionIndex ?? null,
+        approvedPassageContentHashSnapshot: passage.approvedPassageContentHashSnapshot,
+      })),
+    },
+    items: {
+      create: result.items.map((item) => ({
+        itemId: item.itemId,
+        position: item.position,
+        pointValue: item.pointValue,
+        slotType: item.slotType,
+        scoringBucket: item.scoringBucket ?? "operational",
+        sectionIndex: item.sectionIndex ?? null,
+        approvedContentHashSnapshot: item.approvedContentHashSnapshot,
+        passageIdSnapshot: item.passageId,
+      })),
+    },
+  };
+}
+
 export function parseArgs(argv: string[]): Args {
   const args: Args = {
     env: null,
@@ -228,44 +285,14 @@ async function assemble(db: PrismaClient, args: Args) {
   await db.$transaction(async (tx) => {
     const txAny = tx as any;
     const created = await txAny.pssaForm.create({
-      data: {
-        module: GRADE3_BLUEPRINT.module,
-        subject: GRADE3_BLUEPRINT.subject,
-        gradeLevel: GRADE3_BLUEPRINT.gradeLevel,
-        blueprintVersion: args.blueprint!,
-        seed: args.seed!,
-        formStatus: "assembled",
-        totalPoints: result.totalPoints,
-        categoryPointsJson: result.categoryPoints,
-        contentHash: result.contentHash!,
-        auditContractVersion: AUDIT_CONTRACT_VERSION,
-        sourceScanVersion: SOURCE_SCAN_VERSION,
-        assembledAt: new Date(),
-        assembledBy: args.assembledBy,
-        assemblyRunId,
-        passages: {
-          create: result.passages.map((passage) => ({
-            passageId: passage.passageId,
-            position: passage.position,
-            approvedPassageContentHashSnapshot: passage.approvedPassageContentHashSnapshot,
-          })),
-        },
-        items: {
-          create: result.items.map((item) => ({
-            itemId: item.itemId,
-            position: item.position,
-            pointValue: item.pointValue,
-            slotType: item.slotType,
-            scoringBucket: item.scoringBucket ?? "operational",
-            approvedContentHashSnapshot: item.approvedContentHashSnapshot,
-            passageIdSnapshot: item.passageId,
-          })),
-        },
-      },
-      include: { items: true, passages: true },
+      data: buildPssaFormCreateData(result, args, assemblyRunId),
+      include: { items: true, passages: true, sections: true },
     });
     if (created.items.length !== result.items.length || created.passages.length !== result.passages.length) {
       throw new Error("DB-6 post-write assertion failed: inserted row counts do not match selection.");
+    }
+    if ((result.sections?.length ?? 0) > 0 && created.sections.length !== result.sections!.length) {
+      throw new Error("DB-6 post-write assertion failed: inserted section row count does not match selection.");
     }
   });
   writeAssemblyReports(result, args, "write");
