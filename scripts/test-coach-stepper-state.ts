@@ -73,7 +73,7 @@ async function main() {
 
 function outcomeForKind(kind: string): StepOutcome {
   if (kind === "demo_pair" || kind === "power_word") return { kind: "heard_marked" };
-  if (kind === "spell_word") return { kind: "checked_marked" };
+  if (kind === "spell_word") return { kind: "checked_marked", correct: true };
   if (kind === "reflect") return { kind: "answered_marked" };
   return { kind: "read_marked" };
 }

@@ -7,9 +7,9 @@ export type CoachStepOutcomeRecord = {
 };
 
 /**
- * PR-B generic-card outcomes are engagement/acknowledgement placeholders, NOT reading evidence.
- * Empty vadConfirmedWords/pseudowordAttemptMeta and spellingCorrect: 0 are placeholders:
- * 0 means "not measured," not "all wrong." Do not use PR-B telemetry to evaluate reading.
+ * PR-C1 records real engagement for Parts 2/4/8, real spelling correctness for Part 6,
+ * and read-on-own engagement for Part 7. Parts 1/3/5 remain PR-B placeholders until C2:
+ * empty vadConfirmedWords/pseudowordAttemptMeta mean "not measured," not "all wrong."
  */
 export function aggregateCoachPartOutcome(partNumber: number, outcomes: CoachStepOutcomeRecord[]): Record<string, unknown> {
   const partOutcomes = outcomes.filter((entry) => entry.step.partNumber === partNumber);
@@ -45,14 +45,14 @@ export function aggregateCoachPartOutcome(partNumber: number, outcomes: CoachSte
       };
     case 6:
       return {
-        spellingCorrect: 0,
+        spellingCorrect: partOutcomes.filter((entry) => entry.step.kind === "spell_word" && entry.outcome.kind === "checked_marked" && entry.outcome.correct).length,
         spellingTotal: partOutcomes.filter((entry) => entry.step.kind === "spell_word").length,
       };
     case 7: {
-      const passage = partOutcomes.find((entry) => entry.step.kind === "passage")?.step;
+      const passage = partOutcomes.find((entry) => entry.step.kind === "passage" && entry.outcome.kind === "read_marked");
       return {
         listenAndEncourage: true,
-        connectedTextMode: passage?.kind === "passage" && passage.payload.listenFirstAllowed ? "ASSISTED_OR_INDEPENDENT" : "INDEPENDENT",
+        connectedTextMode: passage?.outcome.kind === "read_marked" ? passage.outcome.mode : undefined,
       };
     }
     case 8:

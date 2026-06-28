@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import {
+  buildSpellingLetterTiles,
   createInitialSpellingFlowState,
   normalizeSpellingAnswer,
   spellingFeedbackKind,
@@ -16,6 +17,9 @@ function main() {
   assert.equal(normalizeSpellingAnswer("  cake  "), "cake");
   assert.equal(normalizeSpellingAnswer("cake!!!"), "cake");
   assert.equal(normalizeSpellingAnswer("cake     tape"), "cake tape");
+  assert.deepEqual(buildSpellingLetterTiles("cape"), ["a", "c", "d", "e", "m", "n", "p", "r"]);
+  assert.deepEqual(buildSpellingLetterTiles("ca-pe!!"), ["a", "c", "d", "e", "m", "n", "p", "r"]);
+  assert.deepEqual(buildSpellingLetterTiles("mama"), ["a", "d", "m", "n", "r"]);
 
   const context = { words: ["cake", "made"] };
   let state = createInitialSpellingFlowState();

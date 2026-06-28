@@ -35,6 +35,11 @@ export function normalizeSpellingAnswer(value: string) {
   return value.toLowerCase().trim().replace(/[^\w\s]/g, "").replace(/\s+/g, " ");
 }
 
+export function buildSpellingLetterTiles(word: string) {
+  const extras = ["m", "d", "r", "n"];
+  return Array.from(new Set([...word.toLowerCase().replace(/[^a-z]/g, "").split(""), ...extras])).sort();
+}
+
 export function transitionSpellingFlow(
   state: SpellingFlowState,
   action: SpellingFlowAction,
