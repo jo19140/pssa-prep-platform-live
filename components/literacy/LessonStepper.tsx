@@ -1,13 +1,16 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState, useTransition } from "react";
+import type { MutableRefObject, ReactNode } from "react";
 import { BuddyCharacter, type BuddyState } from "@/components/literacy/BuddyCharacter";
 import { TappableItemPractice } from "@/components/literacy/TappableItemPractice";
+import { useScoredRealWordController } from "@/components/literacy/useScoredRealWordController";
 import { recordLessonPlayerEvent } from "@/app/student/practice/actions";
 import { aggregateCoachPartOutcome, type CoachStepOutcomeRecord } from "@/lib/literacy/aggregateCoachPartOutcome";
 import { buildCoachLessonSteps, type CoachLessonStep } from "@/lib/literacy/coachLessonSteps";
 import { coachStepperCopy } from "@/lib/literacy/coachStepperCopy";
 import {
+  completeStepById,
   completeCurrentStep,
   createInitialCoachStepperState,
   currentStepStatus,
@@ -31,6 +34,7 @@ import {
   type SpellingFlowState,
 } from "@/lib/literacy/spellingFlow";
 import { buildDemoPairItems, type TappableItem } from "@/lib/literacy/tappableItem";
+import { entryKey as scoredEntryKey, type ScoredRealWordEntry, type ScoredRealWordEventInput, type ScoredRealWordResolvedOutcome, type ScoredRealWordState } from "@/lib/literacy/scoredRealWordController";
 import { getTtsProvider } from "@/lib/voice/tts";
 import type { EnabledLessonPlayerData } from "./lessonPlayerData";
 
@@ -144,8 +148,22 @@ export function LessonStepper({ lesson }: { lesson: EnabledLessonPlayerData }) {
   const status = currentStepStatus(state, steps);
   const currentDone = state.completedStepIds.has(currentStep.id);
   const progress = (currentStep.partLocalIndex + (currentDone ? 1 : 0)) / currentStep.partLocalTotal;
+  const realWordBlockKey = realWordBlockKeyFor(lesson.targetCode, steps);
 
   return (
+    <RealWordControllerProvider
+      key={realWordBlockKey}
+      lesson={lesson}
+      presentationCopy={presentationCopy}
+      steps={steps}
+      stateRef={stateRef}
+      updateState={updateState}
+      sessionId={sessionId}
+      targetCode={lesson.targetCode}
+      onBuddyState={setBuddyState}
+      onSpeak={speak}
+    >
+      {({ controllerState, voiceBusy, harperMessage, beginRecording, stopAndScore, adultSupportAdvance }) => (
     <main className={theme.layout.page}>
       <div className="mx-auto grid max-w-7xl gap-4 lg:grid-cols-[320px_minmax(0,1fr)]">
         <aside className="rounded-[32px] border border-[#d9d3c7] bg-[#fbfaf7] p-4 shadow-sm lg:sticky lg:top-5 lg:h-[calc(100vh-2.5rem)]">
@@ -187,6 +205,12 @@ export function LessonStepper({ lesson }: { lesson: EnabledLessonPlayerData }) {
               reviewMode={reviewMode}
               outcome={state.outcomesByStepId[currentStep.id]}
               ttsBusy={ttsBusy}
+              voiceBusy={voiceBusy}
+              harperMessage={harperMessage}
+              controllerState={controllerState}
+              onBeginRealWordRecording={beginRecording}
+              onStopAndScoreRealWord={stopAndScore}
+              onAdultSupportAdvance={adultSupportAdvance}
               onSpeak={speak}
               onComplete={complete}
             />
@@ -196,7 +220,7 @@ export function LessonStepper({ lesson }: { lesson: EnabledLessonPlayerData }) {
             <button
               type="button"
               onClick={back}
-              disabled={state.currentStepIndex === 0 || ttsBusy}
+              disabled={state.currentStepIndex === 0 || ttsBusy || voiceBusy}
               className="rounded-2xl border border-slate-300 bg-white px-5 py-3 font-black text-slate-700 disabled:cursor-not-allowed disabled:opacity-40"
             >
               {copy.actions.back}
@@ -204,7 +228,7 @@ export function LessonStepper({ lesson }: { lesson: EnabledLessonPlayerData }) {
             <button
               type="button"
               onClick={next}
-              disabled={!nextEnabled || ttsBusy}
+              disabled={!nextEnabled || ttsBusy || voiceBusy}
               className="rounded-2xl bg-indigo-600 px-6 py-3 font-black text-white shadow-sm disabled:cursor-not-allowed disabled:opacity-40"
             >
               {copy.actions.next}
@@ -213,6 +237,8 @@ export function LessonStepper({ lesson }: { lesson: EnabledLessonPlayerData }) {
         </section>
       </div>
     </main>
+      )}
+    </RealWordControllerProvider>
   );
 }
 
@@ -225,6 +251,12 @@ function StepCard({
   reviewMode,
   outcome,
   ttsBusy,
+  voiceBusy,
+  harperMessage,
+  controllerState,
+  onBeginRealWordRecording,
+  onStopAndScoreRealWord,
+  onAdultSupportAdvance,
   onSpeak,
   onComplete,
 }: {
@@ -236,6 +268,12 @@ function StepCard({
   reviewMode: boolean;
   outcome: StepOutcome | undefined;
   ttsBusy: boolean;
+  voiceBusy: boolean;
+  harperMessage: string;
+  controllerState: ScoredRealWordState;
+  onBeginRealWordRecording: (entry: ScoredRealWordEntry, stepId: string, readDisabled: boolean) => void;
+  onStopAndScoreRealWord: (entry: ScoredRealWordEntry, stepId: string) => void;
+  onAdultSupportAdvance: (entry: ScoredRealWordEntry) => void;
   onSpeak: (text: string) => Promise<void>;
   onComplete: (outcome: StepOutcome) => void;
 }) {
@@ -251,6 +289,12 @@ function StepCard({
       reviewMode={reviewMode}
       outcome={outcome}
       ttsBusy={ttsBusy}
+      voiceBusy={voiceBusy}
+      harperMessage={harperMessage}
+      controllerState={controllerState}
+      onBeginRealWordRecording={onBeginRealWordRecording}
+      onStopAndScoreRealWord={onStopAndScoreRealWord}
+      onAdultSupportAdvance={onAdultSupportAdvance}
       disabled={disabled}
       onSpeak={onSpeak}
       onComplete={onComplete}
@@ -274,7 +318,7 @@ function StepCard({
 }
 
 function usesSpecializedCard(kind: CoachLessonStep["kind"]) {
-  return kind === "demo_pair" || kind === "power_word" || kind === "spell_word" || kind === "passage" || kind === "reflect";
+  return kind === "demo_pair" || kind === "real_word" || kind === "power_word" || kind === "spell_word" || kind === "passage" || kind === "reflect";
 }
 
 function C1CardContent({
@@ -286,6 +330,12 @@ function C1CardContent({
   reviewMode,
   outcome,
   ttsBusy,
+  voiceBusy,
+  harperMessage,
+  controllerState,
+  onBeginRealWordRecording,
+  onStopAndScoreRealWord,
+  onAdultSupportAdvance,
   disabled,
   onSpeak,
   onComplete,
@@ -298,6 +348,12 @@ function C1CardContent({
   reviewMode: boolean;
   outcome: StepOutcome | undefined;
   ttsBusy: boolean;
+  voiceBusy: boolean;
+  harperMessage: string;
+  controllerState: ScoredRealWordState;
+  onBeginRealWordRecording: (entry: ScoredRealWordEntry, stepId: string, readDisabled: boolean) => void;
+  onStopAndScoreRealWord: (entry: ScoredRealWordEntry, stepId: string) => void;
+  onAdultSupportAdvance: (entry: ScoredRealWordEntry) => void;
   disabled: boolean;
   onSpeak: (text: string) => Promise<void>;
   onComplete: (outcome: StepOutcome) => void;
@@ -305,6 +361,23 @@ function C1CardContent({
   switch (step.kind) {
     case "demo_pair":
       return <DemoPairCard step={step} copy={copy} presentationCopy={presentationCopy} theme={theme} disabled={disabled || ttsBusy} onSpeak={onSpeak} onComplete={onComplete} />;
+    case "real_word":
+      return (
+        <RealWordCard
+          step={step}
+          copy={presentationCopy}
+          completed={completed}
+          reviewMode={reviewMode}
+          outcome={outcome}
+          ttsBusy={ttsBusy}
+          voiceBusy={voiceBusy}
+          harperMessage={harperMessage}
+          controllerState={controllerState}
+          onBeginRecording={onBeginRealWordRecording}
+          onStopAndScore={onStopAndScoreRealWord}
+          onAdultSupportAdvance={onAdultSupportAdvance}
+        />
+      );
     case "power_word":
       return <PowerWordCard step={step} copy={copy} presentationCopy={presentationCopy} disabled={disabled || ttsBusy} onSpeak={onSpeak} onComplete={onComplete} />;
     case "spell_word":
@@ -316,6 +389,256 @@ function C1CardContent({
     default:
       return <CardContent step={step} copy={copy} />;
   }
+}
+
+function realWordBlockKeyFor(targetCode: string, steps: CoachLessonStep[]) {
+  return `${targetCode}:${steps
+    .filter((step) => step.kind === "real_word")
+    .map((step) => step.id)
+    .join("|")}`;
+}
+
+function realWordReteachTemplate(lesson: EnabledLessonPlayerData, copy: PresentationCopy) {
+  const part3 = lesson.parts.find((part) => part.partNumber === 3);
+  if (!part3) throw new Error("LessonStepper real-word controller requires Part 3");
+  return nonEmptyString(part3.contentJson.reteachPrompt) || nonEmptyString(part3.kidVisibleCopy.reteachPrompt) || copy.part3.defaultReteachPrompt;
+}
+
+function nonEmptyString(value: unknown) {
+  return typeof value === "string" && value.trim().length > 0 ? value : "";
+}
+
+function realWordEntryForStep(step: Extract<CoachLessonStep, { kind: "real_word" }>): ScoredRealWordEntry {
+  return {
+    word: step.payload.word,
+    lineNumber: step.payload.lineNumber,
+    lineRole: step.payload.role,
+    index: step.payload.realWordIndex,
+  };
+}
+
+type RealWordControllerRenderProps = {
+  controllerState: ScoredRealWordState;
+  voiceBusy: boolean;
+  harperMessage: string;
+  beginRecording: (entry: ScoredRealWordEntry, stepId: string, readDisabled: boolean) => void;
+  stopAndScore: (entry: ScoredRealWordEntry, stepId: string) => void;
+  adultSupportAdvance: (entry: ScoredRealWordEntry) => void;
+};
+
+function RealWordControllerProvider({
+  lesson,
+  presentationCopy,
+  steps,
+  stateRef,
+  updateState,
+  sessionId,
+  targetCode,
+  onBuddyState,
+  onSpeak,
+  children,
+}: {
+  lesson: EnabledLessonPlayerData;
+  presentationCopy: PresentationCopy;
+  steps: CoachLessonStep[];
+  stateRef: MutableRefObject<CoachStepperState>;
+  updateState: (state: CoachStepperState) => void;
+  sessionId: string;
+  targetCode: string;
+  onBuddyState: (state: BuddyState) => void;
+  onSpeak: (text: string) => Promise<void>;
+  children: (props: RealWordControllerRenderProps) => ReactNode;
+}) {
+  const [harperMessage, setHarperMessage] = useState("");
+  const [voiceBusy, setVoiceBusy] = useState(false);
+  const stepsRef = useRef(steps);
+  const stateRefRef = useRef(stateRef);
+  const updateStateRef = useRef(updateState);
+  const sessionIdRef = useRef(sessionId);
+  const targetCodeRef = useRef(targetCode);
+  const entryStepIdRef = useRef<Record<string, string>>({});
+
+  useEffect(() => {
+    stepsRef.current = steps;
+    stateRefRef.current = stateRef;
+    updateStateRef.current = updateState;
+    sessionIdRef.current = sessionId;
+    targetCodeRef.current = targetCode;
+  });
+
+  const controller = useScoredRealWordController({
+    copy: {
+      readWord: presentationCopy.part3.readWord,
+      listeningStop: presentationCopy.part3.listeningStop,
+      technicalRetry: presentationCopy.part3.technicalRetry,
+      rateLimitHarper: presentationCopy.part3.rateLimitHarper,
+      rateLimitChip: presentationCopy.part3.rateLimitChip,
+      correct: presentationCopy.part3.correct,
+      retryPrompt: presentationCopy.part3.retryPrompt,
+      assisted: presentationCopy.part3.assisted,
+      adultSupportDone: presentationCopy.part3.adultSupportDone,
+    },
+    reteachTemplate: realWordReteachTemplate(lesson, presentationCopy),
+    onHarperMessage: setHarperMessage,
+    onBuddyState,
+    onSpeak,
+    onBusyChange: setVoiceBusy,
+    onVoiceEvent: (input: ScoredRealWordEventInput) => {
+      void recordLessonPlayerEvent({
+        ...input,
+        partNumber: 3,
+        sessionId: sessionIdRef.current,
+        targetCode: targetCodeRef.current,
+      });
+    },
+    onWordResolved: (outcome) => {
+      const mappedStepId = entryStepIdRef.current[outcome.wordId];
+      if (!mappedStepId) return;
+      const latestSteps = stepsRef.current;
+      const step = latestSteps.find((candidate) => candidate.id === mappedStepId);
+      if (!step || step.kind !== "real_word") return;
+      const latestState = stateRefRef.current.current;
+      if (latestState.completedStepIds.has(mappedStepId)) return;
+      updateStateRef.current(
+        completeStepById(latestState, latestSteps, mappedStepId, {
+          kind: "read_scored",
+          status: outcome.status,
+          attemptCount: outcome.attemptCount,
+          wordId: outcome.wordId,
+          assisted: outcome.assisted,
+          unscored: outcome.unscored,
+        }),
+      );
+    },
+  });
+
+  function beginRecording(entry: ScoredRealWordEntry, stepId: string, readDisabled: boolean) {
+    entryStepIdRef.current[scoredEntryKey(entry)] = stepId;
+    void controller.beginRecording(entry, readDisabled);
+  }
+
+  function stopAndScore(entry: ScoredRealWordEntry, stepId: string) {
+    entryStepIdRef.current[scoredEntryKey(entry)] = stepId;
+    void controller.stopAndScore(entry);
+  }
+
+  return (
+    <>
+      {children({
+        controllerState: controller.state,
+        voiceBusy,
+        harperMessage,
+        beginRecording,
+        stopAndScore,
+        adultSupportAdvance: controller.adultSupportAdvance,
+      })}
+      <span className="sr-only" aria-live="polite">
+        {harperMessage}
+      </span>
+    </>
+  );
+}
+
+function RealWordCard({
+  step,
+  copy,
+  completed,
+  reviewMode,
+  outcome,
+  ttsBusy,
+  voiceBusy,
+  harperMessage,
+  controllerState,
+  onBeginRecording,
+  onStopAndScore,
+  onAdultSupportAdvance,
+}: {
+  step: Extract<CoachLessonStep, { kind: "real_word" }>;
+  copy: PresentationCopy;
+  completed: boolean;
+  reviewMode: boolean;
+  outcome: StepOutcome | undefined;
+  ttsBusy: boolean;
+  voiceBusy: boolean;
+  harperMessage: string;
+  controllerState: ScoredRealWordState;
+  onBeginRecording: (entry: ScoredRealWordEntry, stepId: string, readDisabled: boolean) => void;
+  onStopAndScore: (entry: ScoredRealWordEntry, stepId: string) => void;
+  onAdultSupportAdvance: (entry: ScoredRealWordEntry) => void;
+}) {
+  const entry = realWordEntryForStep(step);
+  const entryKey = scoredEntryKey(entry);
+  const status = controllerState.statuses[entryKey];
+  const storedStatus = outcome?.kind === "read_scored" ? outcome.status : undefined;
+  const displayStatus = storedStatus ?? status;
+  const feedback = controllerState.wordFeedback[entryKey];
+  const recording = controllerState.recording;
+  const thinking = controllerState.thinking;
+  const requestInFlight = controllerState.requestInFlight;
+  const isRateLimited = controllerState.rateLimitedUntil !== null && Date.now() < controllerState.rateLimitedUntil;
+  const readDisabledForController =
+    thinking ||
+    controllerState.recordingStartInFlight ||
+    requestInFlight ||
+    isRateLimited ||
+    ttsBusy ||
+    voiceBusy ||
+    reviewMode ||
+    completed;
+  const terminal = completed || displayStatus === "correct" || displayStatus === "assisted" || displayStatus === "unscored";
+  const chipDisabled = terminal || (!recording && readDisabledForController);
+  const processing = recording || thinking || requestInFlight;
+
+  function handleTap() {
+    if (recording) {
+      if (thinking || requestInFlight) return;
+      onStopAndScore(entry, step.id);
+      return;
+    }
+    onBeginRecording(entry, step.id, readDisabledForController);
+  }
+
+  function instruction() {
+    if (recording) return copy.part3.currentInstructionListening;
+    if (thinking) return copy.part3.currentInstructionThinking;
+    if (isRateLimited) return copy.part3.currentInstructionRateLimited;
+    if (terminal) return copy.part3.currentInstructionComplete;
+    return copy.part3.currentInstructionDefault;
+  }
+
+  return (
+    <div className="mx-auto w-full max-w-xl">
+      <div className="rounded-3xl border border-indigo-100 bg-indigo-50 p-4 text-center text-sm font-black text-indigo-900">
+        {harperMessage || instruction()}
+      </div>
+      <button
+        type="button"
+        onClick={handleTap}
+        disabled={chipDisabled}
+        className={`mt-6 w-full rounded-[2rem] border-2 px-6 py-8 text-center text-6xl font-black tracking-tight transition ${
+          displayStatus === "correct"
+            ? "border-emerald-300 bg-emerald-50 text-emerald-800"
+            : displayStatus === "retry" || displayStatus === "reteach"
+              ? "border-amber-300 bg-amber-50 text-amber-900"
+              : displayStatus === "assisted" || displayStatus === "unscored"
+                ? "border-blue-200 bg-blue-50 text-blue-800"
+                : "border-violet-300 bg-violet-50 text-violet-900"
+        } disabled:cursor-not-allowed disabled:opacity-70`}
+      >
+        <span className="block">{step.payload.word}</span>
+        <span className="mt-3 block text-sm font-black uppercase tracking-wide">
+          {recording ? copy.listenAttempt.tapToStop : thinking ? copy.part3.checkingStatus : terminal ? copy.part3.doneButton : copy.part3.tapToReadStatus}
+        </span>
+        {processing ? <span className="mt-2 block text-sm font-black text-violet-700">{copy.part3.processingStatus}</span> : null}
+        {feedback ? <span className="mt-4 block text-base font-extrabold normal-case leading-snug">{feedback}</span> : null}
+      </button>
+      {controllerState.showFallback && !terminal ? (
+        <button type="button" onClick={() => onAdultSupportAdvance(entry)} className={`${secondaryButtonClass} mt-5`}>
+          {copy.part3.adultSupportButton}
+        </button>
+      ) : null}
+    </div>
+  );
 }
 
 function DemoPairCard({

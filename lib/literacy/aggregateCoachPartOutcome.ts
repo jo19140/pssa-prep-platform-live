@@ -7,8 +7,8 @@ export type CoachStepOutcomeRecord = {
 };
 
 /**
- * PR-C1 records real engagement for Parts 2/4/8, real spelling correctness for Part 6,
- * and read-on-own engagement for Part 7. Parts 1/3/5 remain PR-B placeholders until C2:
+ * PR-C2a records real ASR evidence for Part 3 real words. Parts 1, 3 pseudowords,
+ * and 5 remain placeholders until C2b/C3:
  * empty vadConfirmedWords/pseudowordAttemptMeta mean "not measured," not "all wrong."
  */
 export function aggregateCoachPartOutcome(partNumber: number, outcomes: CoachStepOutcomeRecord[]): Record<string, unknown> {
@@ -28,7 +28,7 @@ export function aggregateCoachPartOutcome(partNumber: number, outcomes: CoachSte
       };
     case 3:
       return {
-        realWordsComplete: partOutcomes.filter((entry) => entry.step.kind === "real_word").every((entry) => entry.outcome.kind === "read_marked"),
+        realWordsComplete: partOutcomes.filter((entry) => entry.step.kind === "real_word").every((entry) => entry.outcome.kind === "read_scored"),
         pseudowordsConfirmed: partOutcomes
           .filter((entry) => entry.step.kind === "nonsense_word")
           .every((entry) => entry.outcome.kind === "read_marked"),

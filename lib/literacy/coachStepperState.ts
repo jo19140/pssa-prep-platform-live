@@ -3,6 +3,7 @@ import type { CoachLessonStep } from "./coachLessonSteps";
 export type StepOutcome =
   | { kind: "acknowledged" }
   | { kind: "read_marked"; mode?: "read_on_own" }
+  | { kind: "read_scored"; status: "correct" | "assisted" | "unscored"; attemptCount: number; wordId: string; assisted: boolean; unscored?: boolean }
   | { kind: "heard_marked" }
   | { kind: "checked_marked"; correct: boolean }
   | { kind: "answered_marked"; text?: string };
@@ -35,6 +36,17 @@ export function completeCurrentStep(
     return { ...completedState, currentStepIndex: steps.length };
   }
   return completedState;
+}
+
+export function completeStepById(
+  state: CoachStepperState,
+  steps: CoachLessonStep[],
+  stepId: string,
+  outcome: StepOutcome,
+): CoachStepperState {
+  const step = steps.find((candidate) => candidate.id === stepId);
+  if (!step || state.completedStepIds.has(stepId)) return cloneState(state);
+  return recordCompletion(state, steps, step, outcome);
 }
 
 export function goNext(state: CoachStepperState, steps: CoachLessonStep[]): CoachStepperState {
