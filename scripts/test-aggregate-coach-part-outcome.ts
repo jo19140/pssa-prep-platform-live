@@ -11,6 +11,16 @@ async function main() {
   const outcomeFor = (kind: string): StepOutcome => {
     if (kind === "rule") return { kind: "acknowledged" };
     if (kind === "demo_pair" || kind === "power_word") return { kind: "heard_marked" };
+    if (kind === "real_word") {
+      return {
+        kind: "read_scored",
+        status: "correct",
+        attemptCount: 1,
+        wordId: "test-word",
+        assisted: false,
+        unscored: false,
+      };
+    }
     if (kind === "spell_word") return { kind: "checked_marked", correct: true };
     if (kind === "reflect") return { kind: "answered_marked", text: "ok" };
     if (kind === "passage") return { kind: "read_marked", mode: "read_on_own" };
@@ -27,6 +37,14 @@ async function main() {
   assert.deepStrictEqual(aggregateCoachPartOutcome(2, outcomes), { listenedToRule: true, heardPairs: 5 });
   assert.deepStrictEqual(aggregateCoachPartOutcome(3, outcomes), {
     realWordsComplete: true,
+    pseudowordsConfirmed: true,
+    pseudowordAttemptMeta: [],
+  });
+  const placeholderRealWordOutcomes = outcomes.map((entry) =>
+    entry.step.kind === "real_word" ? { ...entry, outcome: { kind: "read_marked" } satisfies StepOutcome } : entry,
+  );
+  assert.deepStrictEqual(aggregateCoachPartOutcome(3, placeholderRealWordOutcomes), {
+    realWordsComplete: false,
     pseudowordsConfirmed: true,
     pseudowordAttemptMeta: [],
   });
