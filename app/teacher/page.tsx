@@ -35,7 +35,7 @@ export default async function TeacherPage({
             <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">State Track</p>
             <h1 className="mt-1 text-3xl font-semibold text-slate-950">Teacher workspace</h1>
             <p className="mt-2 max-w-2xl text-sm text-slate-600">
-              Review diagnostic reports, manage classes, and open existing State Track tools.
+              Review diagnostic reports and manage your classes, lessons, assignments, grading, and resources.
             </p>
           </div>
 
