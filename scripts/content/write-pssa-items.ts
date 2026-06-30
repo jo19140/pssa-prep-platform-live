@@ -66,12 +66,12 @@ export function parseArgs(argv: string[]): Args {
     } else if (arg.startsWith("--grade=")) args.grade = Number(arg.slice("--grade=".length));
     else if (arg === "--benchmark") {
       const value = argv[i + 1];
-      if (value !== "foundation" && value !== "eoy") throw new Error(`Unsupported --benchmark: ${value}. Expected foundation or eoy.`);
+      if (value !== "foundation" && value !== "eoy" && value !== "moy") throw new Error(`Unsupported --benchmark: ${value}. Expected foundation or eoy. Also supported: moy.`);
       args.benchmark = value;
       i += 1;
     } else if (arg.startsWith("--benchmark=")) {
       const value = arg.slice("--benchmark=".length);
-      if (value !== "foundation" && value !== "eoy") throw new Error(`Unsupported --benchmark: ${value}. Expected foundation or eoy.`);
+      if (value !== "foundation" && value !== "eoy" && value !== "moy") throw new Error(`Unsupported --benchmark: ${value}. Expected foundation or eoy. Also supported: moy.`);
       args.benchmark = value;
     }
     else if (arg === "--allow-production") args.allowProduction = true;

@@ -3,6 +3,7 @@ import { db } from "@/lib/db";
 import {
   AUDIT_CONTRACT_VERSION,
   GRADE3_EOY_IMPORT_MANIFEST,
+  GRADE3_MOY_IMPORT_MANIFEST,
   SOURCE_SCAN_VERSION,
   buildPlan,
   buildPlanForBenchmark,
@@ -114,7 +115,9 @@ export function currentPlanSourceCorpusHash(gradeLevel: number, benchmark: PssaI
 export function benchmarkForBatchId(batchId: string | null | undefined): PssaImportBenchmark {
   if (!batchId) return "foundation";
   const eoyBatchIds = new Set(Object.values(GRADE3_EOY_IMPORT_MANIFEST.batchIds).filter(Boolean));
-  return eoyBatchIds.has(batchId) ? "eoy" : "foundation";
+  if (eoyBatchIds.has(batchId)) return "eoy";
+  const moyBatchIds = new Set(Object.values(GRADE3_MOY_IMPORT_MANIFEST.batchIds).filter(Boolean));
+  return moyBatchIds.has(batchId) ? "moy" : "foundation";
 }
 
 export function classifyPssaItemForReview(

@@ -36,6 +36,7 @@ type PssaGradeImportFiles = {
   literaryTopup?: string;
   deprecation?: string;
   eoyBackends?: string[];
+  moyBackends?: string[];
 };
 
 export type PssaGradeImportManifest = {
@@ -52,6 +53,7 @@ export type PssaGradeImportManifest = {
     conventions: string;
     shortAnswerPool: string;
   };
+  expectedTypeCounts?: Record<string, number>;
   conventionItemIdPrefix: string;
   audits?: {
     ebsr: (items: any[], passages?: PssaPassageAuditInput[]) => any;
@@ -111,6 +113,7 @@ export const GRADE3_EOY_IMPORT_MANIFEST: PssaGradeImportManifest = {
     ],
   },
   expectedCounts: { passages: 5, activeItems: 45, deprecatedItems: 0, supersessions: 0, batches: 5 },
+  expectedTypeCounts: { MCQ: 26, INLINE_DROPDOWN: 9, MATCHING_GRID: 4, EBSR: 4, SHORT_ANSWER: 2 },
   batchIds: {
     readingMcq: "reading_mcq_grade3_eoy",
     ebsr: "ebsr_grade3_eoy",
@@ -121,11 +124,36 @@ export const GRADE3_EOY_IMPORT_MANIFEST: PssaGradeImportManifest = {
   conventionItemIdPrefix: "pssa_item_g3_eoy_conv_",
 };
 
-export type PssaImportBenchmark = "foundation" | "eoy";
+export const GRADE3_MOY_IMPORT_MANIFEST: PssaGradeImportManifest = {
+  gradeLevel: 3,
+  files: {
+    moyBackends: [
+      "exemplars/pssa_grade3_moy_p1/backend.json",
+      "exemplars/pssa_grade3_moy_p2/backend.json",
+      "exemplars/pssa_grade3_moy_p3/backend.json",
+      "exemplars/pssa_grade3_moy_p4/backend.json",
+      "exemplars/pssa_grade3_moy_conventions/backend.json",
+    ],
+  },
+  expectedCounts: { passages: 5, activeItems: 40, deprecatedItems: 0, supersessions: 0, batches: 6 },
+  expectedTypeCounts: { MCQ: 23, INLINE_DROPDOWN: 9, EBSR: 3, MATCHING_GRID: 2, SHORT_ANSWER: 2, DRAG_DROP: 1 },
+  batchIds: {
+    readingMcq: "reading_mcq_grade3_moy",
+    ebsr: "ebsr_grade3_moy",
+    matchingGrid: "matching_grid_grade3_moy",
+    dragDrop: "drag_drop_grade3_moy",
+    conventions: "conventions_grade3_moy",
+    shortAnswerPool: "short_answer_grade3_moy",
+  },
+  conventionItemIdPrefix: "pssa_item_g3_moy_conv_",
+};
+
+export type PssaImportBenchmark = "foundation" | "eoy" | "moy";
 
 export const PSSA_BENCHMARK_IMPORT_MANIFESTS: Record<PssaImportBenchmark, Record<number, PssaGradeImportManifest>> = {
   foundation: PSSA_GRADE_IMPORT_MANIFESTS,
   eoy: { 3: GRADE3_EOY_IMPORT_MANIFEST },
+  moy: { 3: GRADE3_MOY_IMPORT_MANIFEST },
 };
 
 export const FILES = GRADE3_IMPORT_MANIFEST.files;
@@ -654,6 +682,7 @@ const VOCAB_STOP_WORDS = new Set([
 function vocabTargetWord(item: any) {
   const prompt = String(item.studentFacingPrompt ?? item.stem ?? item.prompt ?? "");
   return prompt.match(/"([^"]+)"/)?.[1]
+    ?? prompt.match(/\bword\s+([A-Za-z'-]+)\s+mean\b/i)?.[1]
     ?? prompt.match(/\bwhat does\s+([A-Za-z'-]+)\s+mean\b/i)?.[1]
     ?? prompt.match(/\bmeaning of\s+([A-Za-z'-]+)/i)?.[1]
     ?? "";
@@ -976,9 +1005,9 @@ export function buildPlan(gradeLevel: number): ImportPlan {
   return plan;
 }
 
-function loadEoySources(manifestConfig: PssaGradeImportManifest) {
-  const files = manifestConfig.files.eoyBackends ?? [];
-  if (!files.length) throw new Error("EOY import manifest is missing backend files.");
+function loadBenchmarkSources(manifestConfig: PssaGradeImportManifest, benchmark: Exclude<PssaImportBenchmark, "foundation">) {
+  const files = manifestConfig.files.eoyBackends ?? manifestConfig.files.moyBackends ?? [];
+  if (!files.length) throw new Error(`${benchmark.toUpperCase()} import manifest is missing backend files.`);
   const records = files.map((sourceFile) => ({ sourceFile, data: readJson<any>(sourceFile) }));
   const itemSourceFiles = new Map<string, string>();
   const passageSourceFiles = new Map<string, string>();
@@ -996,13 +1025,13 @@ function loadEoySources(manifestConfig: PssaGradeImportManifest) {
   };
 }
 
-function eoySourceFileFor(id: string, sourceFiles: Map<string, string>, type: "item" | "passage") {
+function benchmarkSourceFileFor(id: string, sourceFiles: Map<string, string>, type: "item" | "passage", benchmark: Exclude<PssaImportBenchmark, "foundation">) {
   const sourceFile = sourceFiles.get(id);
-  if (!sourceFile) throw new Error(`EOY import source file not found for ${type} ${id}.`);
+  if (!sourceFile) throw new Error(`${benchmark.toUpperCase()} import source file not found for ${type} ${id}.`);
   return sourceFile;
 }
 
-function eoyPassageGroups(rawGroups: any[]): WouldImportPassageGroup[] {
+function benchmarkPassageGroups(rawGroups: any[]): WouldImportPassageGroup[] {
   return rawGroups.map((group) => ({
     groupId: String(group.id),
     gradeLevel: Number(group.gradeLevel ?? 3),
@@ -1034,19 +1063,19 @@ function objectValue(value: unknown): Record<string, any> {
   return value && typeof value === "object" && !Array.isArray(value) ? value as Record<string, any> : {};
 }
 
-function hasCleanEoyLicenseAndProvenance(item: any) {
+function hasCleanBenchmarkLicenseAndProvenance(item: any, benchmark: Exclude<PssaImportBenchmark, "foundation">) {
   return sourceTypeFor(item.sourceType) === "internal_original"
     && licenseStatusFor(item.licenseStatus) === "cleared"
     && Boolean(item.commercialUseAllowed) === true
     && Boolean(item.needsLegalReview) === false
-    && objectValue(item.provenanceJson).benchmarkSeason === "EOY";
+    && objectValue(item.provenanceJson).benchmarkSeason === benchmark.toUpperCase();
 }
 
 function inRange(index: unknown, length: number) {
   return Number.isInteger(index) && Number(index) >= 0 && Number(index) < length;
 }
 
-function eoyRequiredFieldsPresent(item: any) {
+function benchmarkRequiredFieldsPresent(item: any) {
   return Boolean(itemId(item))
     && Boolean(item.eligibleContent)
     && Boolean(interactionTypeFor(item))
@@ -1067,7 +1096,7 @@ function responseSpecChoices(item: any) {
   return choices;
 }
 
-function validateEoyCorrectResponse(item: any) {
+function validateBenchmarkCorrectResponse(item: any) {
   const type = interactionTypeFor(item);
   const correct = objectValue(item.correctResponseJson);
   if (type === "MCQ") return inRange(correct.correctIndex, responseSpecChoices(item).length || (item.answerChoicesJson ?? []).length);
@@ -1089,6 +1118,14 @@ function validateEoyCorrectResponse(item: any) {
       && correct.correctCells.length > 0
       && correct.correctCells.every((cell: any) => rows.has(cell.rowId) && columns.has(cell.columnId));
   }
+  if (type === "DRAG_DROP") {
+    const spec = objectValue(item.responseSpecJson);
+    const tokens = new Set((spec.tokens ?? item.tokens ?? []).map((token: any) => token.tokenId));
+    const targets = new Set((spec.targets ?? item.targets ?? []).map((target: any) => target.targetId));
+    return Array.isArray(correct.correctAssignments)
+      && correct.correctAssignments.length > 0
+      && correct.correctAssignments.every((assignment: any) => tokens.has(assignment.tokenId) && targets.has(assignment.targetId));
+  }
   if (type === "INLINE_DROPDOWN") {
     const spec = objectValue(item.responseSpecJson);
     const blanks = Array.isArray(spec.blanks) ? spec.blanks : (Array.isArray(item.blanks) ? item.blanks : []);
@@ -1109,30 +1146,36 @@ function validateEoyCorrectResponse(item: any) {
 }
 
 export function buildEoyImportEligibilityGates(item: any): Record<string, GateStatus> {
+  return buildBenchmarkImportEligibilityGates(item, "eoy");
+}
+
+export function buildBenchmarkImportEligibilityGates(item: any, benchmark: Exclude<PssaImportBenchmark, "foundation">): Record<string, GateStatus> {
   const scoring = objectValue(item.scoringJson);
+  const prefix = `PSSA_${benchmark.toUpperCase()}_IMPORT`;
   return {
-    PSSA_EOY_IMPORT_REQUIRED_FIELDS: eoyRequiredFieldsPresent(item) ? "PASS" : "FAIL",
-    PSSA_EOY_IMPORT_CORRECT_RESPONSE_VALID: validateEoyCorrectResponse(item) ? "PASS" : "FAIL",
-    PSSA_EOY_IMPORT_POINT_VALUE_MATCH: pointValue(item) === scoring.totalPoints ? "PASS" : "FAIL",
-    PSSA_EOY_IMPORT_LICENSE_PROVENANCE: hasCleanEoyLicenseAndProvenance(item) ? "PASS" : "FAIL",
-    PSSA_EOY_IMPORT_NON_DEPRECATED: item.itemStatus === "deprecated_superseded" || item.deprecatedReason || item.retiredAt ? "FAIL" : "PASS",
+    [`${prefix}_REQUIRED_FIELDS`]: benchmarkRequiredFieldsPresent(item) ? "PASS" : "FAIL",
+    [`${prefix}_CORRECT_RESPONSE_VALID`]: validateBenchmarkCorrectResponse(item) ? "PASS" : "FAIL",
+    [`${prefix}_POINT_VALUE_MATCH`]: pointValue(item) === scoring.totalPoints ? "PASS" : "FAIL",
+    [`${prefix}_LICENSE_PROVENANCE`]: hasCleanBenchmarkLicenseAndProvenance(item, benchmark) ? "PASS" : "FAIL",
+    [`${prefix}_NON_DEPRECATED`]: item.itemStatus === "deprecated_superseded" || item.deprecatedReason || item.retiredAt ? "FAIL" : "PASS",
   };
 }
 
-export function buildEoyPlan(): ImportPlan {
-  const manifestConfig = lookupPssaBenchmarkImportManifest(3, "eoy");
+function buildDiagnosticBenchmarkPlan(benchmark: Exclude<PssaImportBenchmark, "foundation">): ImportPlan {
+  const manifestConfig = lookupPssaBenchmarkImportManifest(3, benchmark);
   const crosswalkKeys = loadCrosswalkKeys();
-  const source = loadEoySources(manifestConfig);
+  const source = loadBenchmarkSources(manifestConfig, benchmark);
   const passages = source.passages;
   const allItems = source.items;
-  const passageGroups = eoyPassageGroups(source.passageGroups);
+  const passageGroups = benchmarkPassageGroups(source.passageGroups);
   const byType = (type: string) => allItems.filter((item: any) => interactionTypeFor(item) === type);
   const activeReadingMcq = byType("MCQ");
   const ebsrItems = byType("EBSR");
   const matchingGridItems = byType("MATCHING_GRID");
+  const dragDropItems = byType("DRAG_DROP");
   const shortAnswerItems = byType("SHORT_ANSWER");
   const conventionsItems = byType("INLINE_DROPDOWN");
-  const expectedTypeCounts = { MCQ: 26, INLINE_DROPDOWN: 9, MATCHING_GRID: 4, EBSR: 4, SHORT_ANSWER: 2 };
+  const expectedTypeCounts = manifestConfig.expectedTypeCounts ?? {};
   const actualTypeCounts = Object.fromEntries(allItems.reduce((map: Map<string, number>, item: any) => {
     const type = interactionTypeFor(item);
     map.set(type, (map.get(type) ?? 0) + 1);
@@ -1147,10 +1190,10 @@ export function buildEoyPlan(): ImportPlan {
   const gateTallies = new Map<string, { pass: number; fail: number }>();
   const activeItems: WouldImportItem[] = [];
   for (const item of allItems) {
-    const sourceFile = eoySourceFileFor(itemId(item), source.itemSourceFiles, "item");
+    const sourceFile = benchmarkSourceFileFor(itemId(item), source.itemSourceFiles, "item", benchmark);
     activeItems.push(buildWouldItem(item, sourceFile, {
-      PSSA_EOY_IMPORT_TYPE_COUNTS: typeCountsPass ? "PASS" : "FAIL",
-      ...buildEoyImportEligibilityGates(item),
+      [`PSSA_${benchmark.toUpperCase()}_IMPORT_TYPE_COUNTS`]: typeCountsPass ? "PASS" : "FAIL",
+      ...buildBenchmarkImportEligibilityGates(item, benchmark),
       ...eoyContentQualityGatesFor(contentQualityGates, item),
     }, crosswalkKeys, manifestConfig));
   }
@@ -1163,30 +1206,31 @@ export function buildEoyPlan(): ImportPlan {
     batchId,
     streamType,
     gradeLevel: manifestConfig.gradeLevel,
-    batchGate: "PSSA_EOY_IMPORT_SCHEMA_AWARE_ELIGIBILITY",
+    batchGate: `PSSA_${benchmark.toUpperCase()}_IMPORT_SCHEMA_AWARE_ELIGIBILITY`,
     batchResult: activeItems.filter((item) => item.batchId === batchId).every((item) => item.finalImportEligibility === "eligible") ? "PASS" : "FAIL",
     itemCount,
   });
   const batches: BatchRow[] = [
-    { ...mcqPositionBatch, batchGate: "PSSA_EOY_IMPORT_SCHEMA_AWARE_ELIGIBILITY", batchResult: streamBatch(manifestConfig.batchIds.readingMcq, "MCQ", activeReadingMcq.length).batchResult },
+    { ...mcqPositionBatch, batchGate: `PSSA_${benchmark.toUpperCase()}_IMPORT_SCHEMA_AWARE_ELIGIBILITY`, batchResult: streamBatch(manifestConfig.batchIds.readingMcq, "MCQ", activeReadingMcq.length).batchResult },
     streamBatch(manifestConfig.batchIds.ebsr, "EBSR", ebsrItems.length),
     streamBatch(manifestConfig.batchIds.matchingGrid, "MATCHING_GRID", matchingGridItems.length),
+    ...(manifestConfig.batchIds.dragDrop ? [streamBatch(manifestConfig.batchIds.dragDrop, "DRAG_DROP", dragDropItems.length)] : []),
     streamBatch(manifestConfig.batchIds.conventions, "CONVENTIONS", conventionsItems.length),
     streamBatch(manifestConfig.batchIds.shortAnswerPool, "SHORT_ANSWER", shortAnswerItems.length),
   ];
 
   const manifest: ManifestRow[] = [
-    { sourceFile: "all EOY passage files", recordType: "passage", count: passages.length, expectedCount: manifestConfig.expectedCounts.passages, match: passages.length === manifestConfig.expectedCounts.passages },
-    { sourceFile: "all EOY item files", recordType: "item", count: activeItems.length, expectedCount: manifestConfig.expectedCounts.activeItems, match: activeItems.length === manifestConfig.expectedCounts.activeItems },
-    { sourceFile: "EOY has no deprecated item file", recordType: "deprecated", count: deprecatedItems.length, expectedCount: manifestConfig.expectedCounts.deprecatedItems, match: deprecatedItems.length === manifestConfig.expectedCounts.deprecatedItems },
-    { sourceFile: "EOY has no supersession file", recordType: "supersession", count: 0, expectedCount: manifestConfig.expectedCounts.supersessions, match: manifestConfig.expectedCounts.supersessions === 0 },
-    { sourceFile: "derived EOY import batches", recordType: "batch", count: batches.length, expectedCount: manifestConfig.expectedCounts.batches, match: batches.length === manifestConfig.expectedCounts.batches },
+    { sourceFile: `all ${benchmark.toUpperCase()} passage files`, recordType: "passage", count: passages.length, expectedCount: manifestConfig.expectedCounts.passages, match: passages.length === manifestConfig.expectedCounts.passages },
+    { sourceFile: `all ${benchmark.toUpperCase()} item files`, recordType: "item", count: activeItems.length, expectedCount: manifestConfig.expectedCounts.activeItems, match: activeItems.length === manifestConfig.expectedCounts.activeItems },
+    { sourceFile: `${benchmark.toUpperCase()} has no deprecated item file`, recordType: "deprecated", count: deprecatedItems.length, expectedCount: manifestConfig.expectedCounts.deprecatedItems, match: deprecatedItems.length === manifestConfig.expectedCounts.deprecatedItems },
+    { sourceFile: `${benchmark.toUpperCase()} has no supersession file`, recordType: "supersession", count: 0, expectedCount: manifestConfig.expectedCounts.supersessions, match: manifestConfig.expectedCounts.supersessions === 0 },
+    { sourceFile: `derived ${benchmark.toUpperCase()} import batches`, recordType: "batch", count: batches.length, expectedCount: manifestConfig.expectedCounts.batches, match: batches.length === manifestConfig.expectedCounts.batches },
   ];
   if (manifest.some((row) => !row.match)) tallyGate(gateTallies, "PSSA_IMPORT_MANIFEST_VALID", "FAIL");
 
   const passageImports = passages.map((passage: any) => ({
     passageId: passage.id,
-    sourceFile: eoySourceFileFor(String(passage.id), source.passageSourceFiles, "passage"),
+    sourceFile: benchmarkSourceFileFor(String(passage.id), source.passageSourceFiles, "passage", benchmark),
     title: passage.title,
     gradeLevel: passage.gradeLevel ?? manifestConfig.gradeLevel,
     subject: passage.subject ?? "ELA",
@@ -1204,7 +1248,7 @@ export function buildEoyPlan(): ImportPlan {
     itemStatus: "candidate" as const,
     studentReadyBlockedReason: "PENDING_REVIEW" as const,
     provenanceJson: {
-      sourceFile: eoySourceFileFor(String(passage.id), source.passageSourceFiles, "passage"),
+      sourceFile: benchmarkSourceFileFor(String(passage.id), source.passageSourceFiles, "passage", benchmark),
       sourcePassageId: passage.id,
       importedBy: "pssa-db4-writer",
     },
@@ -1226,12 +1270,24 @@ export function buildEoyPlan(): ImportPlan {
   };
 }
 
+export function buildEoyPlan(): ImportPlan {
+  return buildDiagnosticBenchmarkPlan("eoy");
+}
+
+export function buildMoyPlan(): ImportPlan {
+  return buildDiagnosticBenchmarkPlan("moy");
+}
+
 export function buildPlanForBenchmark(input: { grade: number; benchmark?: PssaImportBenchmark }): ImportPlan {
   const benchmark = input.benchmark ?? "foundation";
   if (benchmark === "foundation") return buildPlan(input.grade);
   if (benchmark === "eoy") {
     if (input.grade !== 3) throw new Error(`No PSSA eoy import manifest registered for grade ${input.grade}.`);
     return buildEoyPlan();
+  }
+  if (benchmark === "moy") {
+    if (input.grade !== 3) throw new Error(`No PSSA moy import manifest registered for grade ${input.grade}.`);
+    return buildMoyPlan();
   }
   throw new Error(`Unsupported PSSA import benchmark: ${benchmark}`);
 }
