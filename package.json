@@ -12,6 +12,7 @@
     "test:voice-flywheel": "tsx scripts/test-voice-data-flywheel.ts",
     "test:voice-tts": "tsx lib/voice/providers/openai-tts.equality.test.ts",
     "test:voice-capture-layer2": "tsx scripts/test-voice-capture-layer2.ts",
+    "test:vad-listen-controller": "tsx scripts/test-vad-listen-controller.ts",
     "seed:p4a-voice-smoke": "tsx scripts/seed-reading-buddy-p4a-voice-smoke.ts",
     "test:p4a-voice-smoke": "tsx scripts/test-reading-buddy-p4-voice-smoke.ts",
     "test:presentation-copy": "tsx scripts/test-presentation-copy.ts",
