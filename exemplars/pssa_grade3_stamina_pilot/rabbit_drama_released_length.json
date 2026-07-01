@@ -6,7 +6,6 @@
   "reviewStatus": "PENDING",
   "itemStatus": "candidate",
   "writesDatabaseRows": false,
-  "fixtureOnly": true,
   "passages": [
     {
       "model": "PssaPassage",
@@ -157,7 +156,46 @@
           "distractorRole": "opposite_claim"
         }
       ],
-      "pointValue": 1
+      "pointValue": 1,
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "provenanceJson": {
+        "benchmarkSeason": "BOY"
+      },
+      "sourcePassageId": "pssa_stamina_psg_g3_rabbit_drama",
+      "scoringJson": {
+        "totalPoints": 1
+      },
+      "responseSpecJson": {
+        "prompt": "What is the most important lesson Rabbit learns in the play?",
+        "choices": [
+          "Sharing what you have can leave you with more.",
+          "A hollow log is a good place to hide from rain.",
+          "Hedgehogs should be careful with their prickles.",
+          "It is best to keep your home to yourself."
+        ],
+        "structuredChoicesJson": [
+          {
+            "text": "Sharing what you have can leave you with more."
+          },
+          {
+            "text": "A hollow log is a good place to hide from rain.",
+            "distractorRole": "too_narrow"
+          },
+          {
+            "text": "Hedgehogs should be careful with their prickles.",
+            "distractorRole": "too_narrow"
+          },
+          {
+            "text": "It is best to keep your home to yourself.",
+            "distractorRole": "opposite_claim"
+          }
+        ]
+      }
     },
     {
       "model": "PssaItem",
@@ -235,7 +273,46 @@
           "distractorRole": "unsupported_inference"
         }
       ],
-      "pointValue": 1
+      "pointValue": 1,
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "provenanceJson": {
+        "benchmarkSeason": "BOY"
+      },
+      "sourcePassageId": "pssa_stamina_psg_g3_rabbit_drama",
+      "scoringJson": {
+        "totalPoints": 1
+      },
+      "responseSpecJson": {
+        "prompt": "How do Rabbit's feelings change from the beginning of the play to the end?",
+        "choices": [
+          "She is very afraid at first, but slowly becomes brave by the very end.",
+          "She does not want to share at first, but is glad by the end.",
+          "She is friendly at first, but becomes angry by the end.",
+          "She stays sleepy for most of the play and hardly changes."
+        ],
+        "structuredChoicesJson": [
+          {
+            "text": "She is very afraid at first, but slowly becomes brave by the very end.",
+            "distractorRole": "wrong_emphasis"
+          },
+          {
+            "text": "She does not want to share at first, but is glad by the end."
+          },
+          {
+            "text": "She is friendly at first, but becomes angry by the end.",
+            "distractorRole": "opposite_claim"
+          },
+          {
+            "text": "She stays sleepy for most of the play and hardly changes.",
+            "distractorRole": "unsupported_inference"
+          }
+        ]
+      }
     },
     {
       "model": "PssaItem",
@@ -330,7 +407,46 @@
           "distractorRole": "wrong_section"
         }
       ],
-      "pointValue": 1
+      "pointValue": 1,
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "provenanceJson": {
+        "benchmarkSeason": "BOY"
+      },
+      "sourcePassageId": "pssa_stamina_psg_g3_rabbit_drama",
+      "scoringJson": {
+        "totalPoints": 1
+      },
+      "responseSpecJson": {
+        "prompt": "Why do Hedgehog and Mouse come to Rabbit's log?",
+        "choices": [
+          "They want to play a game with Rabbit.",
+          "Rabbit invited them to a party.",
+          "The storm has flooded their own homes.",
+          "They are looking for food to eat."
+        ],
+        "structuredChoicesJson": [
+          {
+            "text": "They want to play a game with Rabbit.",
+            "distractorRole": "unsupported_inference"
+          },
+          {
+            "text": "Rabbit invited them to a party.",
+            "distractorRole": "opposite_claim"
+          },
+          {
+            "text": "The storm has flooded their own homes."
+          },
+          {
+            "text": "They are looking for food to eat.",
+            "distractorRole": "wrong_section"
+          }
+        ]
+      }
     },
     {
       "model": "PssaItem",
@@ -416,7 +532,46 @@
           "distractorRole": null
         }
       ],
-      "pointValue": 1
+      "pointValue": 1,
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "provenanceJson": {
+        "benchmarkSeason": "BOY"
+      },
+      "sourcePassageId": "pssa_stamina_psg_g3_rabbit_drama",
+      "scoringJson": {
+        "totalPoints": 1
+      },
+      "responseSpecJson": {
+        "prompt": "Read this stage direction from Scene 3: [Then RABBIT turns and looks at the shivering mouse. Slowly, her frown begins to soften.] What does it show about Rabbit?",
+        "choices": [
+          "She is getting ready to leave the log.",
+          "She is too tired to help the mouse.",
+          "She is angry that the cold mouse is there.",
+          "She starts to feel sorry for the mouse."
+        ],
+        "structuredChoicesJson": [
+          {
+            "text": "She is getting ready to leave the log.",
+            "distractorRole": "unsupported_inference"
+          },
+          {
+            "text": "She is too tired to help the mouse.",
+            "distractorRole": "plausible_misreading"
+          },
+          {
+            "text": "She is angry that the cold mouse is there.",
+            "distractorRole": "opposite_claim"
+          },
+          {
+            "text": "She starts to feel sorry for the mouse."
+          }
+        ]
+      }
     },
     {
       "model": "PssaItem",
@@ -500,7 +655,46 @@
         }
       ],
       "testsApplicationNotDefinition": true,
-      "pointValue": 1
+      "pointValue": 1,
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "provenanceJson": {
+        "benchmarkSeason": "BOY"
+      },
+      "sourcePassageId": "pssa_stamina_psg_g3_rabbit_drama",
+      "scoringJson": {
+        "totalPoints": 1
+      },
+      "responseSpecJson": {
+        "prompt": "In Scene 2, the animals \"shuffle and bump in the dark.\" What does shuffle mean here?",
+        "choices": [
+          "to walk with small steps",
+          "to jump high into the air",
+          "to fall fast asleep",
+          "to shout very loudly"
+        ],
+        "structuredChoicesJson": [
+          {
+            "text": "to walk with small steps"
+          },
+          {
+            "text": "to jump high into the air",
+            "distractorRole": "opposite_claim"
+          },
+          {
+            "text": "to fall fast asleep",
+            "distractorRole": "plausible_misreading"
+          },
+          {
+            "text": "to shout very loudly",
+            "distractorRole": "wrong_emphasis"
+          }
+        ]
+      }
     },
     {
       "model": "PssaItem",
@@ -510,70 +704,27 @@
       "gradeLevel": 3,
       "itemType": "MCQ",
       "interactionType": "MCQ",
-      "skill": "scene_importance",
-      "comprehensionKind": "interpretation",
-      "comprehensionKindRationale": "The item asks why Scene 3 matters by interpreting Rabbit's change in the play.",
+      "skill": "theme_central_message",
+      "comprehensionKind": "synthesis",
+      "comprehensionKindRationale": "The item asks students to identify the central lesson shown by the turning point in Scene 3.",
       "passageId": "pssa_stamina_psg_g3_rabbit_drama",
-      "eligibleContent": "E03.A-C.2.1.2",
-      "assessmentAnchor": "E03.A-C.2.1",
+      "eligibleContent": "E03.A-K.1.1.2",
+      "assessmentAnchor": "E03.A-K.1",
       "reportingCategory": "A",
       "dokLevel": 2,
-      "studentFacingPrompt": "Why is Scene 3 important to the play?",
+      "studentFacingPrompt": "What lesson is best shown by what happens in Scene 3?",
       "answerChoicesJson": [
-        "It shows that Rabbit wants the storm to get stronger.",
-        "It shows why Rabbit changes her mind about sharing the log.",
-        "It explains how Hedgehog and Mouse built their homes.",
-        "It tells why Squirrel leaves the log before morning."
+        "A strong storm can ruin the homes that small animals build.",
+        "Sharing what you have can make things better for everyone.",
+        "It is best to keep your home to yourself so it stays just right.",
+        "An animal with prickles should face toward the wall."
       ],
       "correctIndex": 1,
       "structuredChoicesJson": [
         {
-          "text": "It shows that Rabbit wants the storm to get stronger.",
+          "text": "A strong storm can ruin the homes that small animals build.",
           "isCorrect": false,
-          "rationale": "Opposite claim: Rabbit wants shelter from the storm, not a stronger storm.",
-          "evidenceLinks": [
-            {
-              "evidenceKind": "spoken_line",
-              "sceneId": "scene_02",
-              "lineIndex": 5,
-              "speaker": "SQUIRREL",
-              "quotedSpan": "We can at least try."
-            }
-          ],
-          "distractorRole": "unsupported_inference"
-        },
-        {
-          "text": "It shows why Rabbit changes her mind about sharing the log.",
-          "isCorrect": true,
-          "rationale": "Correct.",
-          "evidenceLinks": [
-            {
-              "evidenceKind": "spoken_line",
-              "sceneId": "scene_03",
-              "lineIndex": 2,
-              "speaker": "MOUSE",
-              "quotedSpan": "I am so cold. My paws have gone numb."
-            },
-            {
-              "evidenceKind": "stage_direction",
-              "sceneId": "scene_03",
-              "lineIndex": 3,
-              "quotedSpan": "[For a long moment, no one speaks. Then RABBIT turns and looks at the shivering mouse. Slowly, her frown begins to soften.]"
-            },
-            {
-              "evidenceKind": "spoken_line",
-              "sceneId": "scene_03",
-              "lineIndex": 4,
-              "speaker": "RABBIT",
-              "quotedSpan": "Come here, little one. Do not go out in that. Get into the middle, where it is warmest."
-            }
-          ],
-          "distractorRole": null
-        },
-        {
-          "text": "It explains how Hedgehog and Mouse built their homes.",
-          "isCorrect": false,
-          "rationale": "Unsupported inference: the scene does not explain how Hedgehog or Mouse built homes.",
+          "rationale": "This focuses on the storm, but Scene 3 mainly shows the lesson Rabbit learns about sharing.",
           "evidenceLinks": [
             {
               "evidenceKind": "stage_direction",
@@ -582,12 +733,49 @@
               "quotedSpan": "[A loud CRACK of thunder splits the air. The wind screams, and rain pours down in heavy sheets. All four animals go still, listening to the storm. MOUSE freezes in the doorway, too frightened to step outside.]"
             }
           ],
+          "distractorRole": "wrong_emphasis"
+        },
+        {
+          "text": "Sharing what you have can make things better for everyone.",
+          "isCorrect": true,
+          "rationale": "Correct: in Scene 3, Rabbit learns that sharing the log helps everyone stay safe and warm.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "spoken_line",
+              "sceneId": "scene_03",
+              "lineIndex": 4,
+              "speaker": "RABBIT",
+              "quotedSpan": "Come here, little one. Do not go out in that. Get into the middle, where it is warmest."
+            },
+            {
+              "evidenceKind": "spoken_line",
+              "sceneId": "scene_03",
+              "lineIndex": 11,
+              "speaker": "RABBIT",
+              "quotedSpan": "I was so sure that sharing my log would leave me with less. Instead I have a warm tail wrapped around me, a wall of prickles to block the wind, and three good friends I did not have this morning."
+            }
+          ],
+          "distractorRole": null
+        },
+        {
+          "text": "It is best to keep your home to yourself so it stays just right.",
+          "isCorrect": false,
+          "rationale": "This is the opposite of the lesson Rabbit learns by the end of Scene 3.",
+          "evidenceLinks": [
+            {
+              "evidenceKind": "spoken_line",
+              "sceneId": "scene_01",
+              "lineIndex": 4,
+              "speaker": "RABBIT",
+              "quotedSpan": "My log? Squirrel, this log is exactly the right size for one rabbit."
+            }
+          ],
           "distractorRole": "opposite_claim"
         },
         {
-          "text": "It tells why Squirrel leaves the log before morning.",
+          "text": "An animal with prickles should face toward the wall.",
           "isCorrect": false,
-          "rationale": "Unsupported inference: Squirrel does not leave the log before morning.",
+          "rationale": "This is one helpful action in Scene 3, but it is too narrow to state the lesson of the play.",
           "evidenceLinks": [
             {
               "evidenceKind": "spoken_line",
@@ -597,10 +785,49 @@
               "quotedSpan": "And my back can face the door and block the cold wind from coming in."
             }
           ],
-          "distractorRole": "unsupported_inference"
+          "distractorRole": "too_narrow"
         }
       ],
-      "pointValue": 1
+      "pointValue": 1,
+      "sourceType": "internal_original",
+      "licenseStatus": "cleared_internal_original",
+      "commercialUseAllowed": true,
+      "needsLegalReview": false,
+      "reviewStatus": "PENDING",
+      "itemStatus": "candidate",
+      "provenanceJson": {
+        "benchmarkSeason": "BOY"
+      },
+      "sourcePassageId": "pssa_stamina_psg_g3_rabbit_drama",
+      "scoringJson": {
+        "totalPoints": 1
+      },
+      "responseSpecJson": {
+        "prompt": "What lesson is best shown by what happens in Scene 3?",
+        "choices": [
+          "A strong storm can ruin the homes that small animals build.",
+          "Sharing what you have can make things better for everyone.",
+          "It is best to keep your home to yourself so it stays just right.",
+          "An animal with prickles should face toward the wall."
+        ],
+        "structuredChoicesJson": [
+          {
+            "text": "A strong storm can ruin the homes that small animals build.",
+            "distractorRole": "wrong_emphasis"
+          },
+          {
+            "text": "Sharing what you have can make things better for everyone."
+          },
+          {
+            "text": "It is best to keep your home to yourself so it stays just right.",
+            "distractorRole": "opposite_claim"
+          },
+          {
+            "text": "An animal with prickles should face toward the wall.",
+            "distractorRole": "too_narrow"
+          }
+        ]
+      }
     },
     {
       "id": "pssa_stamina_item_g3_rabbit_ebsr_01",
@@ -818,10 +1045,12 @@
         ]
       },
       "provenanceJson": {
-        "fixtureOnly": true,
         "sourcePassageId": "pssa_stamina_psg_g3_rabbit_drama",
-        "authoredIn": "PSSA_STAMINA_ITEM_SET_COMPLETION"
-      }
+        "authoredIn": "PSSA_STAMINA_ITEM_SET_COMPLETION",
+        "benchmarkSeason": "BOY"
+      },
+      "needsLegalReview": false,
+      "sourcePassageId": "pssa_stamina_psg_g3_rabbit_drama"
     },
     {
       "id": "pssa_stamina_item_g3_rabbit_sa_01",
@@ -1038,11 +1267,15 @@
       "licenseStatus": "cleared_internal_original",
       "commercialUseAllowed": true,
       "provenanceJson": {
-        "fixtureOnly": true,
         "sourcePassageId": "pssa_stamina_psg_g3_rabbit_drama",
         "authoredIn": "PSSA_STAMINA_ITEM_SET_COMPLETION",
-        "autoScoringClaim": false
-      }
+        "autoScoringClaim": false,
+        "benchmarkSeason": "BOY"
+      },
+      "needsLegalReview": false,
+      "sourcePassageId": "pssa_stamina_psg_g3_rabbit_drama",
+      "pointValue": 3
     }
-  ]
+  ],
+  "productionImportReady": true
 }

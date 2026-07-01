@@ -37,6 +37,7 @@ type PssaGradeImportFiles = {
   deprecation?: string;
   eoyBackends?: string[];
   moyBackends?: string[];
+  boyBackends?: string[];
 };
 
 export type PssaGradeImportManifest = {
@@ -148,12 +149,37 @@ export const GRADE3_MOY_IMPORT_MANIFEST: PssaGradeImportManifest = {
   conventionItemIdPrefix: "pssa_item_g3_moy_conv_",
 };
 
-export type PssaImportBenchmark = "foundation" | "eoy" | "moy";
+export const GRADE3_BOY_IMPORT_MANIFEST: PssaGradeImportManifest = {
+  gradeLevel: 3,
+  files: {
+    boyBackends: [
+      "exemplars/pssa_grade3_stamina_pilot/syrup_released_length.json",
+      "exemplars/pssa_grade3_stamina_pilot/boat_literary_released_length.json",
+      "exemplars/pssa_grade3_stamina_pilot/owls_paired_released_length.json",
+      "exemplars/pssa_grade3_stamina_pilot/rabbit_drama_released_length.json",
+      "exemplars/pssa_grade3_stamina_pilot/conventions_mc_block.json",
+    ],
+  },
+  expectedCounts: { passages: 5, activeItems: 39, deprecatedItems: 0, supersessions: 0, batches: 6 },
+  expectedTypeCounts: { MCQ: 29, EBSR: 4, SHORT_ANSWER: 4, MATCHING_GRID: 1, DRAG_DROP: 1 },
+  batchIds: {
+    readingMcq: "reading_mcq_grade3_boy",
+    ebsr: "ebsr_grade3_boy",
+    matchingGrid: "matching_grid_grade3_boy",
+    dragDrop: "drag_drop_grade3_boy",
+    conventions: "conventions_grade3_boy",
+    shortAnswerPool: "short_answer_grade3_boy",
+  },
+  conventionItemIdPrefix: "conv_",
+};
+
+export type PssaImportBenchmark = "foundation" | "eoy" | "moy" | "boy";
 
 export const PSSA_BENCHMARK_IMPORT_MANIFESTS: Record<PssaImportBenchmark, Record<number, PssaGradeImportManifest>> = {
   foundation: PSSA_GRADE_IMPORT_MANIFESTS,
   eoy: { 3: GRADE3_EOY_IMPORT_MANIFEST },
   moy: { 3: GRADE3_MOY_IMPORT_MANIFEST },
+  boy: { 3: GRADE3_BOY_IMPORT_MANIFEST },
 };
 
 export const FILES = GRADE3_IMPORT_MANIFEST.files;
@@ -1006,18 +1032,29 @@ export function buildPlan(gradeLevel: number): ImportPlan {
 }
 
 function loadBenchmarkSources(manifestConfig: PssaGradeImportManifest, benchmark: Exclude<PssaImportBenchmark, "foundation">) {
-  const files = manifestConfig.files.eoyBackends ?? manifestConfig.files.moyBackends ?? [];
+  const files = manifestConfig.files.eoyBackends ?? manifestConfig.files.moyBackends ?? manifestConfig.files.boyBackends ?? [];
   if (!files.length) throw new Error(`${benchmark.toUpperCase()} import manifest is missing backend files.`);
   const records = files.map((sourceFile) => ({ sourceFile, data: readJson<any>(sourceFile) }));
   const itemSourceFiles = new Map<string, string>();
   const passageSourceFiles = new Map<string, string>();
+  const passagesById = new Map<string, PssaPassageAuditInput>();
   for (const { sourceFile, data } of records) {
     for (const item of data.items ?? []) itemSourceFiles.set(itemId(item), sourceFile);
-    for (const passage of data.passages ?? []) passageSourceFiles.set(String(passage.id), sourceFile);
+    for (const passage of data.passages ?? []) {
+      passageSourceFiles.set(String(passage.id), sourceFile);
+      passagesById.set(String(passage.id), passage);
+    }
+    for (const group of data.passageGroups ?? []) {
+      for (const member of group.members ?? []) {
+        if (!member.passage?.id) continue;
+        passageSourceFiles.set(String(member.passage.id), sourceFile);
+        passagesById.set(String(member.passage.id), member.passage);
+      }
+    }
   }
   return {
     files,
-    passages: records.flatMap(({ data }) => data.passages ?? []) as PssaPassageAuditInput[],
+    passages: [...passagesById.values()],
     passageGroups: records.flatMap(({ data }) => data.passageGroups ?? []),
     items: records.flatMap(({ data }) => data.items ?? []),
     itemSourceFiles,
@@ -1064,11 +1101,12 @@ function objectValue(value: unknown): Record<string, any> {
 }
 
 function hasCleanBenchmarkLicenseAndProvenance(item: any, benchmark: Exclude<PssaImportBenchmark, "foundation">) {
+  const provenance = objectValue(item.provenanceJson);
   return sourceTypeFor(item.sourceType) === "internal_original"
     && licenseStatusFor(item.licenseStatus) === "cleared"
     && Boolean(item.commercialUseAllowed) === true
     && Boolean(item.needsLegalReview) === false
-    && objectValue(item.provenanceJson).benchmarkSeason === benchmark.toUpperCase();
+    && provenance.benchmarkSeason === benchmark.toUpperCase();
 }
 
 function inRange(index: unknown, length: number) {
@@ -1080,7 +1118,7 @@ function benchmarkRequiredFieldsPresent(item: any) {
     && Boolean(item.eligibleContent)
     && Boolean(interactionTypeFor(item))
     && item.responseSpecJson !== undefined
-    && item.correctResponseJson !== undefined
+    && correctResponse(item) !== undefined
     && item.scoringJson !== undefined
     && typeof objectValue(item.scoringJson).totalPoints === "number"
     && item.sourceType !== undefined
@@ -1092,13 +1130,12 @@ function benchmarkRequiredFieldsPresent(item: any) {
 
 function responseSpecChoices(item: any) {
   const spec = objectValue(item.responseSpecJson);
-  const choices = Array.isArray(spec.choices) ? spec.choices : (Array.isArray(item.choices) ? item.choices : []);
-  return choices;
+  return Array.isArray(spec.choices) ? spec.choices : [];
 }
 
 function validateBenchmarkCorrectResponse(item: any) {
   const type = interactionTypeFor(item);
-  const correct = objectValue(item.correctResponseJson);
+  const correct = objectValue(correctResponse(item));
   if (type === "MCQ") return inRange(correct.correctIndex, responseSpecChoices(item).length || (item.answerChoicesJson ?? []).length);
   if (type === "EBSR") {
     const partAChoices = item.partA?.choices ?? objectValue(objectValue(item.responseSpecJson).partA).choices ?? [];
@@ -1138,9 +1175,21 @@ function validateBenchmarkCorrectResponse(item: any) {
   }
   if (type === "SHORT_ANSWER") {
     const scoring = objectValue(item.scoringJson);
-    return Array.isArray(item.scoreBandExamples)
+    const support = correct.acceptableTextSupport;
+    const staminaShape = typeof correct.expectedAnswerCore === "string"
+      && correct.expectedAnswerCore.trim().length > 0
+      && Array.isArray(support)
+      && support.length > 0
+      && support.every((entry: any) => {
+        const row = objectValue(entry);
+        return typeof row.supportId === "string"
+          && row.supportId.trim().length > 0
+          && (typeof row.quotedSpan === "string" || typeof row.detail === "string");
+      });
+    const rubricShape = Array.isArray(item.scoreBandExamples)
       && item.scoreBandExamples.length >= 4
       && (Boolean(scoring.rubric) || Boolean(scoring.scoreBands) || Boolean(item.scoringRubricJson) || Boolean(item.rubric));
+    return rubricShape || staminaShape;
   }
   return false;
 }
@@ -1155,7 +1204,7 @@ export function buildBenchmarkImportEligibilityGates(item: any, benchmark: Exclu
   return {
     [`${prefix}_REQUIRED_FIELDS`]: benchmarkRequiredFieldsPresent(item) ? "PASS" : "FAIL",
     [`${prefix}_CORRECT_RESPONSE_VALID`]: validateBenchmarkCorrectResponse(item) ? "PASS" : "FAIL",
-    [`${prefix}_POINT_VALUE_MATCH`]: pointValue(item) === scoring.totalPoints ? "PASS" : "FAIL",
+    [`${prefix}_POINT_VALUE_MATCH`]: pointValue(item) === Number(objectValue(item.scoringJson).totalPoints) ? "PASS" : "FAIL",
     [`${prefix}_LICENSE_PROVENANCE`]: hasCleanBenchmarkLicenseAndProvenance(item, benchmark) ? "PASS" : "FAIL",
     [`${prefix}_NON_DEPRECATED`]: item.itemStatus === "deprecated_superseded" || item.deprecatedReason || item.retiredAt ? "FAIL" : "PASS",
   };
@@ -1169,12 +1218,15 @@ function buildDiagnosticBenchmarkPlan(benchmark: Exclude<PssaImportBenchmark, "f
   const allItems = source.items;
   const passageGroups = benchmarkPassageGroups(source.passageGroups);
   const byType = (type: string) => allItems.filter((item: any) => interactionTypeFor(item) === type);
-  const activeReadingMcq = byType("MCQ");
+  const activeReadingMcq = byType("MCQ").filter((item: any) => passageIdsFor(item).length > 0);
+  const conventionsItems = [
+    ...byType("INLINE_DROPDOWN"),
+    ...byType("MCQ").filter((item: any) => passageIdsFor(item).length === 0),
+  ];
   const ebsrItems = byType("EBSR");
   const matchingGridItems = byType("MATCHING_GRID");
   const dragDropItems = byType("DRAG_DROP");
   const shortAnswerItems = byType("SHORT_ANSWER");
-  const conventionsItems = byType("INLINE_DROPDOWN");
   const expectedTypeCounts = manifestConfig.expectedTypeCounts ?? {};
   const actualTypeCounts = Object.fromEntries(allItems.reduce((map: Map<string, number>, item: any) => {
     const type = interactionTypeFor(item);
@@ -1278,6 +1330,10 @@ export function buildMoyPlan(): ImportPlan {
   return buildDiagnosticBenchmarkPlan("moy");
 }
 
+export function buildBoyPlan(): ImportPlan {
+  return buildDiagnosticBenchmarkPlan("boy");
+}
+
 export function buildPlanForBenchmark(input: { grade: number; benchmark?: PssaImportBenchmark }): ImportPlan {
   const benchmark = input.benchmark ?? "foundation";
   if (benchmark === "foundation") return buildPlan(input.grade);
@@ -1288,6 +1344,10 @@ export function buildPlanForBenchmark(input: { grade: number; benchmark?: PssaIm
   if (benchmark === "moy") {
     if (input.grade !== 3) throw new Error(`No PSSA moy import manifest registered for grade ${input.grade}.`);
     return buildMoyPlan();
+  }
+  if (benchmark === "boy") {
+    if (input.grade !== 3) throw new Error(`No PSSA boy import manifest registered for grade ${input.grade}.`);
+    return buildBoyPlan();
   }
   throw new Error(`Unsupported PSSA import benchmark: ${benchmark}`);
 }

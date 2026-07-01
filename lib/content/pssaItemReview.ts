@@ -2,6 +2,7 @@ import { Prisma, type PrismaClient } from "@prisma/client";
 import { db } from "@/lib/db";
 import {
   AUDIT_CONTRACT_VERSION,
+  GRADE3_BOY_IMPORT_MANIFEST,
   GRADE3_EOY_IMPORT_MANIFEST,
   GRADE3_MOY_IMPORT_MANIFEST,
   SOURCE_SCAN_VERSION,
@@ -117,7 +118,9 @@ export function benchmarkForBatchId(batchId: string | null | undefined): PssaImp
   const eoyBatchIds = new Set(Object.values(GRADE3_EOY_IMPORT_MANIFEST.batchIds).filter(Boolean));
   if (eoyBatchIds.has(batchId)) return "eoy";
   const moyBatchIds = new Set(Object.values(GRADE3_MOY_IMPORT_MANIFEST.batchIds).filter(Boolean));
-  return moyBatchIds.has(batchId) ? "moy" : "foundation";
+  if (moyBatchIds.has(batchId)) return "moy";
+  const boyBatchIds = new Set(Object.values(GRADE3_BOY_IMPORT_MANIFEST.batchIds).filter(Boolean));
+  return boyBatchIds.has(batchId) ? "boy" : "foundation";
 }
 
 export function classifyPssaItemForReview(

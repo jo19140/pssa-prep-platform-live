@@ -6,7 +6,6 @@
   "reviewStatus": "PENDING",
   "itemStatus": "candidate",
   "writesDatabaseRows": false,
-  "fixtureOnly": true,
   "passages": [
     {
       "model": "PssaPassage",
@@ -285,7 +284,38 @@
       ],
       "provenanceJson": {
         "sourcePassageId": "pssa_stamina_psg_g3_syrup_v4",
-        "fixtureOnly": true
+        "benchmarkSeason": "BOY"
+      },
+      "sourcePassageId": "pssa_stamina_psg_g3_syrup_v4",
+      "pointValue": 1,
+      "scoringJson": {
+        "totalPoints": 1
+      },
+      "responseSpecJson": {
+        "prompt": "What is the passage mostly about?",
+        "choices": [
+          "The maples grow tiny green buds when the season ends.",
+          "Making syrup needs right weather, careful tapping, and boiling.",
+          "The Alvarez family sells syrup at a spring farmers market.",
+          "Maple syrup is healthier than corn syrup."
+        ],
+        "structuredChoicesJson": [
+          {
+            "text": "The maples grow tiny green buds when the season ends.",
+            "distractorRole": "too_narrow"
+          },
+          {
+            "text": "Making syrup needs right weather, careful tapping, and boiling."
+          },
+          {
+            "text": "The Alvarez family sells syrup at a spring farmers market.",
+            "distractorRole": "too_narrow"
+          },
+          {
+            "text": "Maple syrup is healthier than corn syrup.",
+            "distractorRole": "unsupported_inference"
+          }
+        ]
       }
     },
     {
@@ -389,7 +419,38 @@
       ],
       "provenanceJson": {
         "sourcePassageId": "pssa_stamina_psg_g3_syrup_v4",
-        "fixtureOnly": true
+        "benchmarkSeason": "BOY"
+      },
+      "sourcePassageId": "pssa_stamina_psg_g3_syrup_v4",
+      "pointValue": 1,
+      "scoringJson": {
+        "totalPoints": 1
+      },
+      "responseSpecJson": {
+        "prompt": "What does scorch mean as it is used in the passage?",
+        "choices": [
+          "to cool",
+          "to spill",
+          "to burn",
+          "to thicken"
+        ],
+        "structuredChoicesJson": [
+          {
+            "text": "to cool",
+            "distractorRole": "opposite_claim"
+          },
+          {
+            "text": "to spill",
+            "distractorRole": "plausible_misreading"
+          },
+          {
+            "text": "to burn"
+          },
+          {
+            "text": "to thicken",
+            "distractorRole": "wrong_emphasis"
+          }
+        ]
       }
     },
     {
@@ -485,7 +546,38 @@
       ],
       "provenanceJson": {
         "sourcePassageId": "pssa_stamina_psg_g3_syrup_v4",
-        "fixtureOnly": true
+        "benchmarkSeason": "BOY"
+      },
+      "sourcePassageId": "pssa_stamina_psg_g3_syrup_v4",
+      "pointValue": 1,
+      "scoringJson": {
+        "totalPoints": 1
+      },
+      "responseSpecJson": {
+        "prompt": "Why does sap flow best when the nights are freezing and the days are warm?",
+        "choices": [
+          "The warm days make the maples grow new buds.",
+          "The cold nights make the sap taste sweeter than daytime sap.",
+          "The changing weather fills the buckets with rain.",
+          "Freezing nights and warm days build pressure that helps sap flow."
+        ],
+        "structuredChoicesJson": [
+          {
+            "text": "The warm days make the maples grow new buds.",
+            "distractorRole": "wrong_section"
+          },
+          {
+            "text": "The cold nights make the sap taste sweeter than daytime sap.",
+            "distractorRole": "unsupported_inference"
+          },
+          {
+            "text": "The changing weather fills the buckets with rain.",
+            "distractorRole": "unsupported_inference"
+          },
+          {
+            "text": "Freezing nights and warm days build pressure that helps sap flow."
+          }
+        ]
       }
     },
     {
@@ -582,7 +674,38 @@
       ],
       "provenanceJson": {
         "sourcePassageId": "pssa_stamina_psg_g3_syrup_v4",
-        "fixtureOnly": true
+        "benchmarkSeason": "BOY"
+      },
+      "sourcePassageId": "pssa_stamina_psg_g3_syrup_v4",
+      "pointValue": 1,
+      "scoringJson": {
+        "totalPoints": 1
+      },
+      "responseSpecJson": {
+        "prompt": "How does the \"Did You Know?\" box add to the passage?",
+        "choices": [
+          "It shows that a sugar maple can live for many generations.",
+          "It explains how the syrup is poured through a filter into jars.",
+          "It tells why thin young trees are left alone.",
+          "It proves that syrup is healthier than corn syrup."
+        ],
+        "structuredChoicesJson": [
+          {
+            "text": "It shows that a sugar maple can live for many generations."
+          },
+          {
+            "text": "It explains how the syrup is poured through a filter into jars.",
+            "distractorRole": "wrong_section"
+          },
+          {
+            "text": "It tells why thin young trees are left alone.",
+            "distractorRole": "wrong_section"
+          },
+          {
+            "text": "It proves that syrup is healthier than corn syrup.",
+            "distractorRole": "unsupported_inference"
+          }
+        ]
       }
     },
     {
@@ -803,10 +926,12 @@
         ]
       },
       "provenanceJson": {
-        "fixtureOnly": true,
         "sourcePassageId": "pssa_stamina_psg_g3_syrup_v4",
-        "authoredIn": "PSSA_STAMINA_ITEM_SET_COMPLETION"
-      }
+        "authoredIn": "PSSA_STAMINA_ITEM_SET_COMPLETION",
+        "benchmarkSeason": "BOY"
+      },
+      "needsLegalReview": false,
+      "sourcePassageId": "pssa_stamina_psg_g3_syrup_v4"
     },
     {
       "id": "pssa_stamina_item_g3_syrup_sa_01",
@@ -953,11 +1078,14 @@
       "licenseStatus": "cleared_internal_original",
       "commercialUseAllowed": true,
       "provenanceJson": {
-        "fixtureOnly": true,
         "sourcePassageId": "pssa_stamina_psg_g3_syrup_v4",
         "authoredIn": "PSSA_STAMINA_ITEM_SET_COMPLETION",
-        "autoScoringClaim": false
-      }
+        "autoScoringClaim": false,
+        "benchmarkSeason": "BOY"
+      },
+      "needsLegalReview": false,
+      "sourcePassageId": "pssa_stamina_psg_g3_syrup_v4",
+      "pointValue": 3
     },
     {
       "id": "pssa_stamina_item_g3_syrup_dd_01",
@@ -1148,11 +1276,14 @@
       "licenseStatus": "cleared_internal_original",
       "commercialUseAllowed": true,
       "provenanceJson": {
-        "fixtureOnly": true,
         "sourcePassageId": "pssa_stamina_psg_g3_syrup_v4",
         "authoredIn": "PSSA_DIAGNOSTIC_PHASE_1_5_TE_ITEMS",
-        "autoScoringClaim": true
-      }
+        "autoScoringClaim": true,
+        "benchmarkSeason": "BOY"
+      },
+      "needsLegalReview": false,
+      "sourcePassageId": "pssa_stamina_psg_g3_syrup_v4"
     }
-  ]
+  ],
+  "productionImportReady": true
 }

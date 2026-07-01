@@ -6,7 +6,6 @@
   "reviewStatus": "PENDING",
   "itemStatus": "candidate",
   "writesDatabaseRows": false,
-  "fixtureOnly": true,
   "passages": [
     {
       "model": "PssaPassage",
@@ -171,7 +170,38 @@
       ],
       "provenanceJson": {
         "sourcePassageId": "pssa_stamina_psg_g3_boat_literary",
-        "fixtureOnly": true
+        "benchmarkSeason": "BOY"
+      },
+      "sourcePassageId": "pssa_stamina_psg_g3_boat_literary",
+      "pointValue": 1,
+      "scoringJson": {
+        "totalPoints": 1
+      },
+      "responseSpecJson": {
+        "prompt": "What is the most important lesson June learns in the story?",
+        "choices": [
+          "A boat needs milk jugs to float.",
+          "People should not throw away useful things.",
+          "Careful work matters more than fancy looks.",
+          "Younger sisters should test boats before a race."
+        ],
+        "structuredChoicesJson": [
+          {
+            "text": "A boat needs milk jugs to float.",
+            "distractorRole": "too_narrow"
+          },
+          {
+            "text": "People should not throw away useful things.",
+            "distractorRole": "too_narrow"
+          },
+          {
+            "text": "Careful work matters more than fancy looks."
+          },
+          {
+            "text": "Younger sisters should test boats before a race.",
+            "distractorRole": "unsupported_inference"
+          }
+        ]
       }
     },
     {
@@ -288,7 +318,38 @@
       ],
       "provenanceJson": {
         "sourcePassageId": "pssa_stamina_psg_g3_boat_literary",
-        "fixtureOnly": true
+        "benchmarkSeason": "BOY"
+      },
+      "sourcePassageId": "pssa_stamina_psg_g3_boat_literary",
+      "pointValue": 1,
+      "scoringJson": {
+        "totalPoints": 1
+      },
+      "responseSpecJson": {
+        "prompt": "How do June's feelings about her boat change from the beginning to the end of the story?",
+        "choices": [
+          "She is proud of the milk-jug sandwich at first, but ashamed after the race.",
+          "She stays bored as the slow sandwich bumps along the creek.",
+          "She is afraid near the bridge, but forgets the boat after Mateo lifts it.",
+          "She is embarrassed by it at first, but proud of it by the end."
+        ],
+        "structuredChoicesJson": [
+          {
+            "text": "She is proud of the milk-jug sandwich at first, but ashamed after the race.",
+            "distractorRole": "opposite_claim"
+          },
+          {
+            "text": "She stays bored as the slow sandwich bumps along the creek.",
+            "distractorRole": "unsupported_inference"
+          },
+          {
+            "text": "She is afraid near the bridge, but forgets the boat after Mateo lifts it.",
+            "distractorRole": "wrong_emphasis"
+          },
+          {
+            "text": "She is embarrassed by it at first, but proud of it by the end."
+          }
+        ]
       }
     },
     {
@@ -391,7 +452,38 @@
       ],
       "provenanceJson": {
         "sourcePassageId": "pssa_stamina_psg_g3_boat_literary",
-        "fixtureOnly": true
+        "benchmarkSeason": "BOY"
+      },
+      "sourcePassageId": "pssa_stamina_psg_g3_boat_literary",
+      "pointValue": 1,
+      "scoringJson": {
+        "totalPoints": 1
+      },
+      "responseSpecJson": {
+        "prompt": "From whose point of view is the story told?",
+        "choices": [
+          "June, who built the milk-jug boat.",
+          "Mateo, June's older brother.",
+          "Someone watching from the creek bank.",
+          "The person who built the tall ship."
+        ],
+        "structuredChoicesJson": [
+          {
+            "text": "June, who built the milk-jug boat."
+          },
+          {
+            "text": "Mateo, June's older brother.",
+            "distractorRole": "plausible_misreading"
+          },
+          {
+            "text": "Someone watching from the creek bank.",
+            "distractorRole": "unsupported_inference"
+          },
+          {
+            "text": "The person who built the tall ship.",
+            "distractorRole": "wrong_section"
+          }
+        ]
       }
     },
     {
@@ -488,7 +580,38 @@
       ],
       "provenanceJson": {
         "sourcePassageId": "pssa_stamina_psg_g3_boat_literary",
-        "fixtureOnly": true
+        "benchmarkSeason": "BOY"
+      },
+      "sourcePassageId": "pssa_stamina_psg_g3_boat_literary",
+      "pointValue": 1,
+      "scoringJson": {
+        "totalPoints": 1
+      },
+      "responseSpecJson": {
+        "prompt": "What does the phrase \"four small, stubborn hands\" suggest about the milk jugs?",
+        "choices": [
+          "The boat had real little hands that could grab the water.",
+          "They kept the boat floating and would not let it sink.",
+          "The jugs made the boat move quickly.",
+          "The boat was shaped like a person."
+        ],
+        "structuredChoicesJson": [
+          {
+            "text": "The boat had real little hands that could grab the water.",
+            "distractorRole": "plausible_misreading"
+          },
+          {
+            "text": "They kept the boat floating and would not let it sink."
+          },
+          {
+            "text": "The jugs made the boat move quickly.",
+            "distractorRole": "unsupported_inference"
+          },
+          {
+            "text": "The boat was shaped like a person.",
+            "distractorRole": "plausible_misreading"
+          }
+        ]
       }
     },
     {
@@ -586,7 +709,38 @@
       ],
       "provenanceJson": {
         "sourcePassageId": "pssa_stamina_psg_g3_boat_literary",
-        "fixtureOnly": true
+        "benchmarkSeason": "BOY"
+      },
+      "sourcePassageId": "pssa_stamina_psg_g3_boat_literary",
+      "pointValue": 1,
+      "scoringJson": {
+        "totalPoints": 1
+      },
+      "responseSpecJson": {
+        "prompt": "Which detail best explains why June's boat made it through the rough water?",
+        "choices": [
+          "Mateo had won before with shark-shaped boats.",
+          "The boat drifted slowly along the creek bank.",
+          "June tested the boat many times to make sure it floated.",
+          "The crowd on the bank cheered for her slow milk-jug boat."
+        ],
+        "structuredChoicesJson": [
+          {
+            "text": "Mateo had won before with shark-shaped boats.",
+            "distractorRole": "opposite_claim"
+          },
+          {
+            "text": "The boat drifted slowly along the creek bank.",
+            "distractorRole": "wrong_section"
+          },
+          {
+            "text": "June tested the boat many times to make sure it floated."
+          },
+          {
+            "text": "The crowd on the bank cheered for her slow milk-jug boat.",
+            "distractorRole": "unsupported_inference"
+          }
+        ]
       }
     },
     {
@@ -807,10 +961,12 @@
         ]
       },
       "provenanceJson": {
-        "fixtureOnly": true,
         "sourcePassageId": "pssa_stamina_psg_g3_boat_literary",
-        "authoredIn": "PSSA_STAMINA_ITEM_SET_COMPLETION"
-      }
+        "authoredIn": "PSSA_STAMINA_ITEM_SET_COMPLETION",
+        "benchmarkSeason": "BOY"
+      },
+      "needsLegalReview": false,
+      "sourcePassageId": "pssa_stamina_psg_g3_boat_literary"
     },
     {
       "id": "pssa_stamina_item_g3_boat_sa_01",
@@ -957,11 +1113,14 @@
       "licenseStatus": "cleared_internal_original",
       "commercialUseAllowed": true,
       "provenanceJson": {
-        "fixtureOnly": true,
         "sourcePassageId": "pssa_stamina_psg_g3_boat_literary",
         "authoredIn": "PSSA_STAMINA_ITEM_SET_COMPLETION",
-        "autoScoringClaim": false
-      }
+        "autoScoringClaim": false,
+        "benchmarkSeason": "BOY"
+      },
+      "needsLegalReview": false,
+      "sourcePassageId": "pssa_stamina_psg_g3_boat_literary",
+      "pointValue": 3
     },
     {
       "id": "pssa_stamina_item_g3_boat_mg_01",
@@ -1141,11 +1300,14 @@
       "licenseStatus": "cleared_internal_original",
       "commercialUseAllowed": true,
       "provenanceJson": {
-        "fixtureOnly": true,
         "sourcePassageId": "pssa_stamina_psg_g3_boat_literary",
         "authoredIn": "PSSA_DIAGNOSTIC_PHASE_1_5_TE_ITEMS",
-        "autoScoringClaim": true
-      }
+        "autoScoringClaim": true,
+        "benchmarkSeason": "BOY"
+      },
+      "needsLegalReview": false,
+      "sourcePassageId": "pssa_stamina_psg_g3_boat_literary"
     }
-  ]
+  ],
+  "productionImportReady": true
 }

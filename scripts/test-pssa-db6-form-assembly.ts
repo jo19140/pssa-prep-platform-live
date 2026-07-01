@@ -470,7 +470,7 @@ for (const item of diagnosticPool().filter((row) => diagnostic.items.some((selec
 assert.equal(Math.max(...diagnosticReadingEcCounts.values()), 3, "no selected reading-MCQ EC may exceed the diagnostic cap of 3");
 assert.equal(diagnosticReadingEcCounts.get("E03.A-K.1.1.3"), 3, "approved diagnostic exception includes E03.A-K.1.1.3 at 3");
 assert.equal(diagnosticReadingEcCounts.get("E03.B-K.1.1.1"), 3, "approved diagnostic exception includes E03.B-K.1.1.1 at 3");
-assert.deepEqual([...diagnosticReadingEcCounts].filter(([, count]) => count === 3).map(([ec]) => ec).sort(), ["E03.A-K.1.1.3", "E03.B-K.1.1.1"], "only the approved two ECs repeat three times");
+assert.deepEqual([...diagnosticReadingEcCounts].filter(([, count]) => count === 3).map(([ec]) => ec).sort(), ["E03.A-K.1.1.2", "E03.A-K.1.1.3", "E03.B-K.1.1.1"], "the approved three ECs repeat three times");
 assert.deepEqual(
   diagnostic.items.filter((item) => item.slotType === "multipoint").map((item) => item.itemId).sort(),
   ["pssa_stamina_item_g3_boat_ebsr_01", "pssa_stamina_item_g3_boat_mg_01", "pssa_stamina_item_g3_owls_ebsr_01", "pssa_stamina_item_g3_syrup_dd_01"].sort(),

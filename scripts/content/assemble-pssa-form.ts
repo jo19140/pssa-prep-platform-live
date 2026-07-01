@@ -7,6 +7,7 @@ import {
   assemblePssaFormFromPool,
   decidePssaFormWrite,
   GRADE3_BLUEPRINT,
+  GRADE3_DIAGNOSTIC_BLUEPRINT,
   GRADE3_EOY_DIAGNOSTIC_BLUEPRINT,
   GRADE3_MOY_DIAGNOSTIC_BLUEPRINT,
   verifyPssaFormSnapshots,
@@ -34,6 +35,7 @@ type Args = {
 export function resolveAllowedGrade3BlueprintVersion(blueprint: string): string {
   const allowed: readonly string[] = [
     GRADE3_BLUEPRINT.blueprintVersion,
+    GRADE3_DIAGNOSTIC_BLUEPRINT.blueprintVersion,
     GRADE3_MOY_DIAGNOSTIC_BLUEPRINT.blueprintVersion,
     GRADE3_EOY_DIAGNOSTIC_BLUEPRINT.blueprintVersion,
   ];

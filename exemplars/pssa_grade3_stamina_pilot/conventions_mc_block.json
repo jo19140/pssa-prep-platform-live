@@ -1,7 +1,6 @@
 {
   "generatedAt": "2026-06-14T00:00:00.000Z",
-  "noDbWrite": true,
-  "productionImportReady": false,
+  "productionImportReady": true,
   "fixtureScope": "PSSA_STAMINA_DIAGNOSTIC_CONVENTIONS_MC_BLOCK",
   "items": [
     {
@@ -128,12 +127,40 @@
         "leaksAnswer": false
       },
       "auditMetadata": {
-        "authoredIn": "PSSA_STAMINA_CONVENTIONS_MC_BLOCK",
-        "noDbWrite": true
+        "authoredIn": "PSSA_STAMINA_CONVENTIONS_MC_BLOCK"
       },
       "provenanceJson": {
-        "fixtureOnly": true,
-        "containsAttributedQuotes": false
+        "containsAttributedQuotes": false,
+        "benchmarkSeason": "BOY"
+      },
+      "scoringJson": {
+        "totalPoints": 1
+      },
+      "responseSpecJson": {
+        "prompt": "Which word best completes the sentence with an adverb that tells how? \"The rabbit moved ___ through the garden.\"",
+        "choices": [
+          "quiet",
+          "quietly",
+          "quieter",
+          "quietness"
+        ],
+        "structuredChoicesJson": [
+          {
+            "text": "quiet",
+            "distractorRole": "adjective_not_adverb"
+          },
+          {
+            "text": "quietly"
+          },
+          {
+            "text": "quieter",
+            "distractorRole": "comparative_adjective"
+          },
+          {
+            "text": "quietness",
+            "distractorRole": "noun"
+          }
+        ]
       }
     },
     {
@@ -260,12 +287,40 @@
         "leaksAnswer": false
       },
       "auditMetadata": {
-        "authoredIn": "PSSA_STAMINA_CONVENTIONS_MC_BLOCK",
-        "noDbWrite": true
+        "authoredIn": "PSSA_STAMINA_CONVENTIONS_MC_BLOCK"
       },
       "provenanceJson": {
-        "fixtureOnly": true,
-        "containsAttributedQuotes": false
+        "containsAttributedQuotes": false,
+        "benchmarkSeason": "BOY"
+      },
+      "scoringJson": {
+        "totalPoints": 1
+      },
+      "responseSpecJson": {
+        "prompt": "Which sentence uses the correct plural nouns?",
+        "choices": [
+          "The children carried three boxes.",
+          "The childs carried three boxs.",
+          "The children carried three boxs.",
+          "The childs carried three boxes."
+        ],
+        "structuredChoicesJson": [
+          {
+            "text": "The children carried three boxes."
+          },
+          {
+            "text": "The childs carried three boxs.",
+            "distractorRole": "both_plurals_wrong"
+          },
+          {
+            "text": "The children carried three boxs.",
+            "distractorRole": "box_plural_wrong"
+          },
+          {
+            "text": "The childs carried three boxes.",
+            "distractorRole": "child_plural_wrong"
+          }
+        ]
       }
     },
     {
@@ -388,12 +443,40 @@
         "leaksAnswer": false
       },
       "auditMetadata": {
-        "authoredIn": "PSSA_STAMINA_CONVENTIONS_MC_BLOCK",
-        "noDbWrite": true
+        "authoredIn": "PSSA_STAMINA_CONVENTIONS_MC_BLOCK"
       },
       "provenanceJson": {
-        "fixtureOnly": true,
-        "containsAttributedQuotes": false
+        "containsAttributedQuotes": false,
+        "benchmarkSeason": "BOY"
+      },
+      "scoringJson": {
+        "totalPoints": 1
+      },
+      "responseSpecJson": {
+        "prompt": "Which sentence is written in the future tense?",
+        "choices": [
+          "Yesterday we visited the farm.",
+          "We visit the farm each week.",
+          "Tomorrow we will visit the farm.",
+          "We are visiting the farm right now."
+        ],
+        "structuredChoicesJson": [
+          {
+            "text": "Yesterday we visited the farm.",
+            "distractorRole": "past_tense"
+          },
+          {
+            "text": "We visit the farm each week.",
+            "distractorRole": "present_tense"
+          },
+          {
+            "text": "Tomorrow we will visit the farm."
+          },
+          {
+            "text": "We are visiting the farm right now.",
+            "distractorRole": "present_progressive"
+          }
+        ]
       }
     },
     {
@@ -520,12 +603,40 @@
         "leaksAnswer": false
       },
       "auditMetadata": {
-        "authoredIn": "PSSA_STAMINA_CONVENTIONS_MC_BLOCK",
-        "noDbWrite": true
+        "authoredIn": "PSSA_STAMINA_CONVENTIONS_MC_BLOCK"
       },
       "provenanceJson": {
-        "fixtureOnly": true,
-        "containsAttributedQuotes": false
+        "containsAttributedQuotes": false,
+        "benchmarkSeason": "BOY"
+      },
+      "scoringJson": {
+        "totalPoints": 1
+      },
+      "responseSpecJson": {
+        "prompt": "Which sentence uses correct subject-verb agreement?",
+        "choices": [
+          "The dogs bark at the mail truck.",
+          "The dogs barks at the mail truck.",
+          "The dog bark at the mail truck.",
+          "The dog barking at the mail truck."
+        ],
+        "structuredChoicesJson": [
+          {
+            "text": "The dogs bark at the mail truck."
+          },
+          {
+            "text": "The dogs barks at the mail truck.",
+            "distractorRole": "plural_subject_singular_verb"
+          },
+          {
+            "text": "The dog bark at the mail truck.",
+            "distractorRole": "singular_subject_plural_verb"
+          },
+          {
+            "text": "The dog barking at the mail truck.",
+            "distractorRole": "no_complete_verb"
+          }
+        ]
       }
     },
     {
@@ -652,12 +763,40 @@
         "leaksAnswer": false
       },
       "auditMetadata": {
-        "authoredIn": "PSSA_STAMINA_CONVENTIONS_MC_BLOCK",
-        "noDbWrite": true
+        "authoredIn": "PSSA_STAMINA_CONVENTIONS_MC_BLOCK"
       },
       "provenanceJson": {
-        "fixtureOnly": true,
-        "containsAttributedQuotes": false
+        "containsAttributedQuotes": false,
+        "benchmarkSeason": "BOY"
+      },
+      "scoringJson": {
+        "totalPoints": 1
+      },
+      "responseSpecJson": {
+        "prompt": "Which word correctly compares two things? \"My backpack is ___ than yours.\"",
+        "choices": [
+          "heaviest",
+          "more heavy",
+          "heavy",
+          "heavier"
+        ],
+        "structuredChoicesJson": [
+          {
+            "text": "heaviest",
+            "distractorRole": "superlative_not_comparative"
+          },
+          {
+            "text": "more heavy",
+            "distractorRole": "incorrect_comparative_form"
+          },
+          {
+            "text": "heavy",
+            "distractorRole": "base_form_no_comparison"
+          },
+          {
+            "text": "heavier"
+          }
+        ]
       }
     },
     {
@@ -784,12 +923,40 @@
         "leaksAnswer": false
       },
       "auditMetadata": {
-        "authoredIn": "PSSA_STAMINA_CONVENTIONS_MC_BLOCK",
-        "noDbWrite": true
+        "authoredIn": "PSSA_STAMINA_CONVENTIONS_MC_BLOCK"
       },
       "provenanceJson": {
-        "fixtureOnly": true,
-        "containsAttributedQuotes": false
+        "containsAttributedQuotes": false,
+        "benchmarkSeason": "BOY"
+      },
+      "scoringJson": {
+        "totalPoints": 1
+      },
+      "responseSpecJson": {
+        "prompt": "Which book title is capitalized correctly?",
+        "choices": [
+          "grandma's summer garden",
+          "Grandma's Summer Garden",
+          "Grandma's summer garden",
+          "Grandma's Summer garden"
+        ],
+        "structuredChoicesJson": [
+          {
+            "text": "grandma's summer garden",
+            "distractorRole": "no_capitalization"
+          },
+          {
+            "text": "Grandma's Summer Garden"
+          },
+          {
+            "text": "Grandma's summer garden",
+            "distractorRole": "important_words_not_capitalized"
+          },
+          {
+            "text": "Grandma's Summer garden",
+            "distractorRole": "last_word_not_capitalized"
+          }
+        ]
       }
     },
     {
@@ -916,12 +1083,40 @@
         "leaksAnswer": false
       },
       "auditMetadata": {
-        "authoredIn": "PSSA_STAMINA_CONVENTIONS_MC_BLOCK",
-        "noDbWrite": true
+        "authoredIn": "PSSA_STAMINA_CONVENTIONS_MC_BLOCK"
       },
       "provenanceJson": {
-        "fixtureOnly": true,
-        "containsAttributedQuotes": false
+        "containsAttributedQuotes": false,
+        "benchmarkSeason": "BOY"
+      },
+      "scoringJson": {
+        "totalPoints": 1
+      },
+      "responseSpecJson": {
+        "prompt": "Which sentence uses commas correctly in the address?",
+        "choices": [
+          "Mail the letter to 18 Pine Street Erie, Pennsylvania.",
+          "Mail the letter to 18 Pine Street, Erie Pennsylvania.",
+          "Mail the letter to 18 Pine Street, Erie, Pennsylvania.",
+          "Mail the letter to, 18 Pine Street Erie Pennsylvania."
+        ],
+        "structuredChoicesJson": [
+          {
+            "text": "Mail the letter to 18 Pine Street Erie, Pennsylvania.",
+            "distractorRole": "missing_comma_after_street"
+          },
+          {
+            "text": "Mail the letter to 18 Pine Street, Erie Pennsylvania.",
+            "distractorRole": "missing_comma_after_city"
+          },
+          {
+            "text": "Mail the letter to 18 Pine Street, Erie, Pennsylvania."
+          },
+          {
+            "text": "Mail the letter to, 18 Pine Street Erie Pennsylvania.",
+            "distractorRole": "misplaced_and_missing_commas"
+          }
+        ]
       }
     },
     {
@@ -1048,12 +1243,40 @@
         "leaksAnswer": false
       },
       "auditMetadata": {
-        "authoredIn": "PSSA_STAMINA_CONVENTIONS_MC_BLOCK",
-        "noDbWrite": true
+        "authoredIn": "PSSA_STAMINA_CONVENTIONS_MC_BLOCK"
       },
       "provenanceJson": {
-        "fixtureOnly": true,
-        "containsAttributedQuotes": false
+        "containsAttributedQuotes": false,
+        "benchmarkSeason": "BOY"
+      },
+      "scoringJson": {
+        "totalPoints": 1
+      },
+      "responseSpecJson": {
+        "prompt": "Which sentence uses quotation marks correctly?",
+        "choices": [
+          "Maria said, I found my missing shoes.",
+          "Maria said, \"I found my missing shoes.",
+          "\"Maria said,\" I found my missing shoes.",
+          "Maria said, \"I found my missing shoes.\""
+        ],
+        "structuredChoicesJson": [
+          {
+            "text": "Maria said, I found my missing shoes.",
+            "distractorRole": "missing_quotation_marks"
+          },
+          {
+            "text": "Maria said, \"I found my missing shoes.",
+            "distractorRole": "missing_closing_mark"
+          },
+          {
+            "text": "\"Maria said,\" I found my missing shoes.",
+            "distractorRole": "marks_around_wrong_words"
+          },
+          {
+            "text": "Maria said, \"I found my missing shoes.\""
+          }
+        ]
       }
     },
     {
@@ -1180,12 +1403,40 @@
         "leaksAnswer": false
       },
       "auditMetadata": {
-        "authoredIn": "PSSA_STAMINA_CONVENTIONS_MC_BLOCK",
-        "noDbWrite": true
+        "authoredIn": "PSSA_STAMINA_CONVENTIONS_MC_BLOCK"
       },
       "provenanceJson": {
-        "fixtureOnly": true,
-        "containsAttributedQuotes": false
+        "containsAttributedQuotes": false,
+        "benchmarkSeason": "BOY"
+      },
+      "scoringJson": {
+        "totalPoints": 1
+      },
+      "responseSpecJson": {
+        "prompt": "Which sentence is spelled correctly?",
+        "choices": [
+          "The weather was sunny on Friday.",
+          "The weathr was sunny on Friday.",
+          "The weather was suny on Friday.",
+          "The weathr was suny on Friday."
+        ],
+        "structuredChoicesJson": [
+          {
+            "text": "The weather was sunny on Friday."
+          },
+          {
+            "text": "The weathr was sunny on Friday.",
+            "distractorRole": "one_word_misspelled"
+          },
+          {
+            "text": "The weather was suny on Friday.",
+            "distractorRole": "one_word_misspelled"
+          },
+          {
+            "text": "The weathr was suny on Friday.",
+            "distractorRole": "two_words_misspelled"
+          }
+        ]
       }
     }
   ]
