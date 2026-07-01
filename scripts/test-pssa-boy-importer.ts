@@ -190,7 +190,7 @@ function readJson(file: string) {
 }
 
 function readOriginJson(file: string) {
-  return JSON.parse(execFileSync("git", ["show", `origin/main:${file}`], { encoding: "utf8" }));
+  return JSON.parse(execFileSync("git", ["show", `b760e34eed8bfc92d481e6e6d94c77c82177436d:${file}`], { encoding: "utf8" }));
 }
 
 function allBoyItems() {

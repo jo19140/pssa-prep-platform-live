@@ -458,7 +458,7 @@ function testScopeProof() {
   const changed = new Set(require("node:child_process").execSync("git diff --name-only", { encoding: "utf8" }).trim().split(/\n/).filter(Boolean));
   for (const file of forbidden) assert.equal(changed.has(file), false, `${file} must be untouched`);
   const schema = fs.readFileSync(path.join(process.cwd(), "prisma/schema.prisma"), "utf8");
-  const baseSchema = require("node:child_process").execSync("git show origin/main:prisma/schema.prisma", { encoding: "utf8" });
+  const baseSchema = require("node:child_process").execSync("git show b760e34eed8bfc92d481e6e6d94c77c82177436d:prisma/schema.prisma", { encoding: "utf8" });
   const sessionDelta = modelBlock(schema, "PssaFormSession")
     .split("\n")
     .filter((line) => !modelBlock(baseSchema, "PssaFormSession").split("\n").includes(line))
