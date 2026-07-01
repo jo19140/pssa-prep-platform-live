@@ -12,6 +12,7 @@ function assert(condition: unknown, message: string) {
 }
 
 const player = read("components/literacy/StudentPracticeSession.tsx");
+const vadController = read("lib/voice/vadListenController.ts");
 const route = read("app/api/voice/capture/pseudoword/route.ts");
 const storage = read("lib/voice/storage.ts");
 const recorder = read("lib/voice/captureRecorder.ts");
@@ -29,11 +30,17 @@ assert(client.includes("catch"), "capture client must be best-effort and swallow
 
 assert(practicePage.includes("trainingCorpusOptedIn"), "practice page must derive capture flag server-side from consent");
 assert(targetPage.includes("trainingCorpusOptedIn"), "target page must derive capture flag server-side from consent");
-assert(player.includes("trainingCaptureEnabled === true && surface === \"pseudoword\""), "player must only construct recorder for opted-in pseudoword reads");
-assert(player.includes("startClipRecorder(handle.stream)"), "player must use the VAD stream for capture");
-assert(player.includes("blob = await clipRecorder.stop()"), "player must stop recorder only on VAD-confirmed heardSpeech path");
-assert(player.includes("PseudowordCaptureCoordinator"), "player must own or accept a pseudoword capture coordinator");
-assert(player.includes("coordinator.enqueue"), "player must enqueue best-effort capture after VAD confirmation");
+assert(vadController.includes("captureEnabled === true && this.options.surface === \"pseudoword\""), "controller must only construct recorder for opted-in pseudoword reads");
+assert(vadController.includes("this.deps.startClipRecorder(handle.stream)"), "controller must use the VAD stream for capture");
+assert(vadController.includes("blob = await clipRecorder.stop()"), "controller must stop recorder only on VAD-confirmed heardSpeech path");
+assert(vadController.includes("new PseudowordCaptureCoordinator()"), "controller deps must preserve default one-coordinator ownership");
+assert(vadController.includes("this.coordinator.enqueue"), "controller must enqueue best-effort capture after VAD confirmation");
+assert(player.includes("useVadListenController"), "player must consume the extracted VAD listen controller");
+assert(player.includes("trainingCaptureEnabled={trainingCaptureEnabled === true}"), "player must pass training capture flag into the hook path");
+assert(player.includes('surface="pseudoword"'), "player must pass pseudoword surface into the hook path");
+assert(player.includes("lessonTargetCode={lessonTargetCode}") && player.includes("lessonTargetCode,"), "player must pass lesson target into the hook path");
+assert(!player.includes("startClipRecorder(handle.stream)"), "player must not directly construct the recorder after extraction");
+assert(!player.includes("coordinator.enqueue"), "player must not directly enqueue capture after extraction");
 assert(!player.includes("voiceSessionIdRef"), "player must not manage pseudoword capture session ids directly");
 assert(!player.includes("capturePseudowordClip"), "player must not call capturePseudowordClip directly");
 assert(coordinator.includes("capturePseudowordClip"), "coordinator must import the capture client as the default sender");

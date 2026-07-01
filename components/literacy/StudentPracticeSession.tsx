@@ -5,14 +5,14 @@ import { BuddyCharacter, type BuddyState } from "@/components/literacy/BuddyChar
 import { LessonStepper } from "@/components/literacy/LessonStepper";
 import { TappableItemPractice } from "@/components/literacy/TappableItemPractice";
 import { useScoredRealWordController } from "@/components/literacy/useScoredRealWordController";
+import { useVadListenController } from "@/components/literacy/useVadListenController";
 import { getTtsProvider } from "@/lib/voice/tts";
 import { recordLessonPlayerEvent } from "@/app/student/practice/actions";
-import { startClipRecorder, type ClipRecorder } from "@/lib/voice/captureRecorder";
-import { PseudowordCaptureCoordinator } from "@/lib/voice/pseudowordCaptureCoordinator";
 import { formatCopy } from "@/lib/literacy/formatCopy";
 import { lessonPlayerModeFor } from "@/lib/literacy/lessonPlayerMode";
 import type { TappableItem } from "@/lib/literacy/tappableItem";
 import { entryKey as scoredEntryKey, type ScoredRealWordStatus } from "@/lib/literacy/scoredRealWordController";
+import type { VadListenControllerOptions } from "@/lib/voice/vadListenController";
 import {
   createInitialSpellingFlowState,
   spellingFeedbackKind,
@@ -26,12 +26,6 @@ import {
   type PresentationCopy,
   type PresentationTheme,
 } from "@/lib/literacy/presentationCopy";
-import {
-  startVoiceActivity,
-  stopVoiceActivity,
-  VOICE_ACTIVITY_MAX_LISTEN_MS,
-  type VoiceActivityHandle,
-} from "@/lib/voice/voiceActivity";
 import type { PresentationProfile } from "@/lib/literacy/presentationProfile";
 import type { LessonPlayerData, LessonPlayerPart } from "./lessonPlayerData";
 
@@ -723,8 +717,6 @@ function PowerWordsPart({
   );
 }
 
-type ListenAttemptStatus = "idle" | "listening" | "heard" | "tryAgain" | "fallback";
-
 /**
  * Gates on hearing a speech attempt, not correctness. Local VAD cannot tell which word
  * was read, whether it was accurate, or who spoke; it only confirms audible speech.
@@ -764,170 +756,29 @@ function ListenForReadingAttempt({
   trainingCaptureEnabled?: boolean;
   studentUserId?: string;
   lessonTargetCode?: string;
-  captureCoordinator?: PseudowordCaptureCoordinator;
+  captureCoordinator?: VadListenControllerOptions["captureCoordinator"];
 }) {
-  const [statuses, setStatuses] = useState<Record<string, ListenAttemptStatus>>({});
-  const [attempts, setAttempts] = useState<Record<string, number>>({});
-  const [messageByWord, setMessageByWord] = useState<Record<string, string>>({});
-  const [fallbackAccepted, setFallbackAccepted] = useState<Record<string, boolean>>({});
-  const [micUnavailable, setMicUnavailable] = useState(false);
-  const activeWordRef = useRef<string | null>(null);
-  const voiceActivityRef = useRef<VoiceActivityHandle | null>(null);
-  const clipRecorderRef = useRef<ClipRecorder | null>(null);
-  const listenStartedAtRef = useRef<number | null>(null);
-  const activeCoordinatorRef = useRef<PseudowordCaptureCoordinator | null>(null);
-  const pollTimerRef = useRef<number | null>(null);
-  const timeoutRef = useRef<number | null>(null);
-  const startingRef = useRef(false);
-  const speakPromiseRef = useRef<Promise<void> | null>(null);
-  const completingRef = useRef(false);
-
+  const {
+    state: { statuses, attempts, messageByWord, fallbackAccepted, micUnavailable, activeWord },
+    handleWordTap,
+    acceptFallback,
+  } = useVadListenController({
+    surface,
+    copy,
+    prompt,
+    encourage,
+    captureEnabled: trainingCaptureEnabled === true,
+    lessonTargetCode,
+    captureCoordinator,
+    speakEncouragement,
+    onHarperMessage,
+    onBuddyState,
+    onSpeak,
+  });
   const doneWords = words.filter((word) => statuses[word] === "heard" || fallbackAccepted[word]);
   const allDone = words.length > 0 && doneWords.length === words.length;
   const fallbackWords = words.filter((word) => fallbackAccepted[word]);
   const vadConfirmedWords = words.filter((word) => statuses[word] === "heard" && !fallbackAccepted[word]);
-  if (!activeCoordinatorRef.current) {
-    activeCoordinatorRef.current = captureCoordinator ?? new PseudowordCaptureCoordinator();
-  }
-  const coordinator = activeCoordinatorRef.current;
-
-  useEffect(() => {
-    return () => {
-      stopActiveListening();
-      speakPromiseRef.current = null;
-      completingRef.current = false;
-      onBuddyState("idle");
-    };
-  }, [onBuddyState]);
-
-  async function handleWordTap(word: string) {
-    if (completingRef.current) return;
-    if (startingRef.current) return;
-    if (fallbackAccepted[word] || statuses[word] === "heard") return;
-    if (activeWordRef.current === word && voiceActivityRef.current) {
-      await stopEarly(word);
-      return;
-    }
-    if (voiceActivityRef.current) return;
-    startingRef.current = true;
-    if (speakPromiseRef.current) {
-      await speakPromiseRef.current.catch(() => undefined);
-      speakPromiseRef.current = null;
-    }
-    await cooldownAfterSpeech();
-    onHarperMessage(prompt);
-    onBuddyState("listening");
-    setStatuses((state) => ({ ...state, [word]: "listening" }));
-    setMessageByWord((state) => ({ ...state, [word]: prompt }));
-    setAttempts((state) => ({ ...state, [word]: (state[word] ?? 0) + 1 }));
-    activeWordRef.current = word;
-    try {
-      const handle = await startVoiceActivity();
-      voiceActivityRef.current = handle;
-      listenStartedAtRef.current = Date.now();
-      if (trainingCaptureEnabled === true && surface === "pseudoword") {
-        clipRecorderRef.current = startClipRecorder(handle.stream);
-      }
-      pollTimerRef.current = window.setInterval(() => {
-        if (handle.heardSpeech()) void completeHeard(word);
-      }, 100);
-      timeoutRef.current = window.setTimeout(() => {
-        void markTryAgain(word, copy.listenAttempt.noVoiceTryAgain);
-      }, VOICE_ACTIVITY_MAX_LISTEN_MS);
-    } catch {
-      setMicUnavailable(true);
-      showFallback(word, copy.listenAttempt.micUnavailable);
-    } finally {
-      startingRef.current = false;
-    }
-  }
-
-  async function stopEarly(word: string) {
-    const handle = voiceActivityRef.current;
-    if (handle?.heardSpeech()) {
-      await completeHeard(word);
-    } else {
-      await markTryAgain(word, copy.listenAttempt.stopEarlyTryAgain);
-    }
-  }
-
-  async function completeHeard(word: string) {
-    if (completingRef.current) return;
-    completingRef.current = true;
-    const clipDurationMs = listenStartedAtRef.current ? Date.now() - listenStartedAtRef.current : 0;
-    let blob: Blob | null = null;
-    try {
-      if (pollTimerRef.current) window.clearInterval(pollTimerRef.current);
-      if (timeoutRef.current) window.clearTimeout(timeoutRef.current);
-      pollTimerRef.current = null;
-      timeoutRef.current = null;
-
-      const clipRecorder = clipRecorderRef.current;
-      clipRecorderRef.current = null;
-      if (trainingCaptureEnabled === true && surface === "pseudoword" && clipRecorder) {
-        try {
-          blob = await clipRecorder.stop();
-        } catch {
-          blob = null;
-        }
-      }
-      stopActiveListening();
-    } finally {
-      completingRef.current = false;
-    }
-
-    if (blob && lessonTargetCode) {
-      coordinator.enqueue({
-        blob,
-        lessonTargetCode,
-        expectedText: word,
-        wordIndex: words.indexOf(word),
-        speakerAgeBand: undefined,
-        clipDurationMs,
-      });
-    }
-    setStatuses((state) => ({ ...state, [word]: "heard" }));
-    setMessageByWord((state) => ({ ...state, [word]: encourage }));
-    onHarperMessage(encourage);
-    onBuddyState("idle");
-    if (speakEncouragement) {
-      const promise = onSpeak(encourage)
-        .catch(() => undefined)
-        .finally(() => {
-          if (speakPromiseRef.current === promise) speakPromiseRef.current = null;
-        });
-      speakPromiseRef.current = promise;
-      await promise;
-    }
-  }
-
-  async function markTryAgain(word: string, text: string) {
-    stopActiveListening();
-    const nextAttempts = (attempts[word] ?? 0) + 1;
-    if (nextAttempts >= 3) {
-      showFallback(word, copy.listenAttempt.fallbackConfirm);
-      return;
-    }
-    setStatuses((state) => ({ ...state, [word]: "tryAgain" }));
-    setMessageByWord((state) => ({ ...state, [word]: text }));
-    onHarperMessage(text);
-    onBuddyState("idle");
-  }
-
-  function showFallback(word: string, text: string) {
-    stopActiveListening();
-    setStatuses((state) => ({ ...state, [word]: "fallback" }));
-    setMessageByWord((state) => ({ ...state, [word]: text }));
-    onHarperMessage(text);
-    onBuddyState("idle");
-  }
-
-  function acceptFallback(word: string) {
-    stopActiveListening();
-    setFallbackAccepted((state) => ({ ...state, [word]: true }));
-    setStatuses((state) => ({ ...state, [word]: "heard" }));
-    setMessageByWord((state) => ({ ...state, [word]: copy.listenAttempt.adultSupportThanks }));
-  }
 
   function finish() {
     onComplete({
@@ -936,21 +787,6 @@ function ListenForReadingAttempt({
       fallbackWords: fallbackWords.length,
       totalWords: words.length,
     });
-  }
-
-  function stopActiveListening() {
-    if (clipRecorderRef.current) {
-      void clipRecorderRef.current.stop();
-      clipRecorderRef.current = null;
-    }
-    listenStartedAtRef.current = null;
-    if (pollTimerRef.current) window.clearInterval(pollTimerRef.current);
-    if (timeoutRef.current) window.clearTimeout(timeoutRef.current);
-    pollTimerRef.current = null;
-    timeoutRef.current = null;
-    stopVoiceActivity(voiceActivityRef.current);
-    voiceActivityRef.current = null;
-    activeWordRef.current = null;
   }
 
   return (
@@ -981,8 +817,8 @@ function ListenForReadingAttempt({
               }`}
             >
               <button
-                onClick={() => handleWordTap(word)}
-                disabled={done || Boolean(activeWordRef.current && activeWordRef.current !== word)}
+                onClick={() => void handleWordTap(word, { wordIndex: words.indexOf(word) })}
+                disabled={done || Boolean(activeWord && activeWord !== word)}
                 className="w-full rounded-2xl bg-white/70 px-4 py-4 text-center text-3xl font-black disabled:cursor-not-allowed disabled:opacity-60"
               >
                 <span className="block">{word}</span>
@@ -999,7 +835,7 @@ function ListenForReadingAttempt({
               {messageByWord[word] ? <p className="mt-2 text-sm font-extrabold leading-snug">{messageByWord[word]}</p> : null}
               {fallbackVisible && !done ? (
                 <button
-                  onClick={() => acceptFallback(word)}
+                  onClick={() => void acceptFallback(word)}
                   className="mt-3 w-full rounded-2xl border border-[#e8d9c7] bg-white px-3 py-2 text-sm font-black"
                 >
                   {copy.listenAttempt.adultSupport}
@@ -1018,10 +854,6 @@ function ListenForReadingAttempt({
       </button>
     </div>
   );
-}
-
-function cooldownAfterSpeech() {
-  return new Promise((resolve) => window.setTimeout(resolve, 250));
 }
 
 function SentenceReadingPart({
