@@ -1352,7 +1352,7 @@ const phase15NewTeItemIds = ["pssa_stamina_item_g3_syrup_dd_01", "pssa_stamina_i
 const phase15BaseRef = "17b7a9c";
 const mainSyrupFixture = JSON.parse(execFileSync("git", ["show", `${phase15BaseRef}:exemplars/pssa_grade3_stamina_pilot/syrup_released_length.json`], { encoding: "utf8" }));
 const mainBoatFixture = JSON.parse(execFileSync("git", ["show", `${phase15BaseRef}:exemplars/pssa_grade3_stamina_pilot/boat_literary_released_length.json`], { encoding: "utf8" }));
-function normalizeStaminaPromotionForLegacyFreeze(item: any, baseline: any) {
+function normalizeStaminaPromotionForLegacyFreeze(item: any, baseline: any, options: { allowBoatJuneEvidenceShift?: boolean } = {}) {
   const normalized = JSON.parse(JSON.stringify(item));
   for (const key of ["pointValue", "responseSpecJson", "scoringJson", "sourcePassageId", "needsLegalReview"]) {
     if (!(key in baseline)) delete normalized[key];
@@ -1363,10 +1363,39 @@ function normalizeStaminaPromotionForLegacyFreeze(item: any, baseline: any) {
       normalized.provenanceJson.fixtureOnly = true;
     }
   }
+  if (options.allowBoatJuneEvidenceShift) normalizeBoatJuneEvidenceShift(normalized);
+  return normalized;
+}
+function normalizeBoatJuneEvidenceShift(value: any) {
+  if (!value || typeof value !== "object") return;
+  if (Array.isArray(value)) {
+    for (const entry of value) normalizeBoatJuneEvidenceShift(entry);
+    return;
+  }
+  if (value.quotedSpan === "So when I, June Reyes, signed up for this year's race, people smiled at me the way you smile at a puppy trying to climb a tall set of stairs.") {
+    value.quotedSpan = "So when I signed up for this year's race, people smiled at me the way you smile at a puppy trying to climb a tall set of stairs.";
+  }
+  for (const key of ["startChar", "endChar"]) {
+    if (typeof value[key] === "number" && value[key] > 205) value[key] -= 13;
+  }
+  for (const child of Object.values(value)) normalizeBoatJuneEvidenceShift(child);
+}
+function normalizeBoatJuneHotfixForLegacyFreeze(passage: any, baseline: any) {
+  const normalized = JSON.parse(JSON.stringify(passage));
+  const expectedText = String(baseline.text).replace(
+    "So when I signed up for this year's race,",
+    "So when I, June Reyes, signed up for this year's race,",
+  );
+  assert.equal(normalized.text, expectedText, "BOY boat June hotfix must be the only authorized passage text change");
+  normalized.text = baseline.text;
   return normalized;
 }
 assert.deepEqual(staminaFixture.passages, mainSyrupFixture.passages, "Phase 1.5 must not change the syrup passage text or metadata");
-assert.deepEqual(boatFixture.passages, mainBoatFixture.passages, "Phase 1.5 must not change the boat passage text or metadata");
+assert.deepEqual(
+  boatFixture.passages.map((passage: any, index: number) => normalizeBoatJuneHotfixForLegacyFreeze(passage, mainBoatFixture.passages[index])),
+  mainBoatFixture.passages,
+  "Phase 1.5 must not change the boat passage metadata or text beyond the authorized June clause",
+);
 assert.deepEqual(
   syrupItems
     .filter((item: any) => !phase15NewTeItemIds.includes(staminaItemId(item)))
@@ -1377,7 +1406,7 @@ assert.deepEqual(
 assert.deepEqual(
   boatItems
     .filter((item: any) => !phase15NewTeItemIds.includes(staminaItemId(item)))
-    .map((item: any, index: number) => normalizeStaminaPromotionForLegacyFreeze(item, mainBoatFixture.items[index])),
+    .map((item: any, index: number) => normalizeStaminaPromotionForLegacyFreeze(item, mainBoatFixture.items[index], { allowBoatJuneEvidenceShift: true })),
   mainBoatFixture.items,
   "Phase 1.5 must leave existing boat item content fields frozen while allowing authorized BOY promotion metadata/structure",
 );

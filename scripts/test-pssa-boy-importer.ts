@@ -281,6 +281,35 @@ function comparableContent(item: any) {
   };
 }
 
+function normalizeJuneClause(text: string) {
+  return text.replace(
+    "So when I, June Reyes, signed up for this year's race,",
+    "So when I signed up for this year's race,",
+  );
+}
+
+function normalizeBoatJuneEvidenceShift(value: any) {
+  if (!value || typeof value !== "object") return;
+  if (Array.isArray(value)) {
+    for (const entry of value) normalizeBoatJuneEvidenceShift(entry);
+    return;
+  }
+  if (value.quotedSpan === "So when I, June Reyes, signed up for this year's race, people smiled at me the way you smile at a puppy trying to climb a tall set of stairs.") {
+    value.quotedSpan = "So when I signed up for this year's race, people smiled at me the way you smile at a puppy trying to climb a tall set of stairs.";
+  }
+  for (const key of ["startChar", "endChar"]) {
+    if (typeof value[key] === "number" && value[key] > 205) value[key] -= 13;
+  }
+  for (const child of Object.values(value)) normalizeBoatJuneEvidenceShift(child);
+}
+
+function comparableContentWithAuthorizedJuneShift(item: any) {
+  const comparable = comparableContent(item);
+  const normalized = structuredClone(comparable);
+  normalizeBoatJuneEvidenceShift(normalized);
+  return normalized;
+}
+
 function assertNoContentDrift() {
   for (const file of BOY_BACKEND_FILES) {
     const before = readOriginJson(file);
@@ -295,7 +324,12 @@ function assertNoContentDrift() {
     ];
     const afterPassageById = new Map(afterPassages.map((passage: any) => [passage.id, passage]));
     for (const passage of beforePassages) {
-      assert.equal(afterPassageById.get(passage.id)?.text, passage.text, `${passage.id} passage text must not drift`);
+      const afterText = afterPassageById.get(passage.id)?.text;
+      if (passage.id === "pssa_stamina_psg_g3_boat_literary") {
+        assert.equal(normalizeJuneClause(afterText), passage.text, `${passage.id} passage text may only add the authorized June Reyes clause`);
+      } else {
+        assert.equal(afterText, passage.text, `${passage.id} passage text must not drift`);
+      }
     }
 
     const afterItemById = new Map((after.items ?? []).map((item: any) => [item.id, item]));
@@ -323,7 +357,10 @@ function assertNoContentDrift() {
         }, "rabbit_06 must change only by the authorized full item revision");
       } else {
         assert.equal(afterItem.eligibleContent, beforeItem.eligibleContent, `${beforeItem.id} EC must not drift`);
-        assert.deepEqual(comparableContent(afterItem), comparableContent(beforeItem), `${beforeItem.id} stem/choices/key content must not drift`);
+        const afterComparable = file.endsWith("boat_literary_released_length.json")
+          ? comparableContentWithAuthorizedJuneShift(afterItem)
+          : comparableContent(afterItem);
+        assert.deepEqual(afterComparable, comparableContent(beforeItem), `${beforeItem.id} stem/choices/key content must not drift`);
       }
       if (beforeItem.id === "pssa_stamina_item_g3_owls_06") {
         assert.equal(typeof afterItem.correctResponseJson?.expectedAnswerCore, "string");

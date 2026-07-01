@@ -179,6 +179,100 @@ export type SingleAnswerChoiceGroup = McqAuditInput & {
   originalItemId: string;
 };
 
+export type CorrectLongestSingleSelectSet = {
+  itemId?: string;
+  sourceInteractionType?: "MCQ" | "EBSR_PART_A";
+  choices: Array<{ text: string; correct: boolean }>;
+};
+
+export type CorrectLongestMidPRow = {
+  scope: string;
+  n: number;
+  k: number;
+  strictPct: number;
+  exactTail: number;
+  midP: number;
+  alpha: number;
+  scopeMinN: number;
+  block: boolean;
+};
+
+export function collectSingleSelectSets(
+  items: any[],
+  options: { kinds?: Array<"MCQ" | "EBSR_PART_A"> } = {},
+): CorrectLongestSingleSelectSet[] {
+  const kinds = new Set(options.kinds ?? ["MCQ", "EBSR_PART_A"]);
+  const sets: CorrectLongestSingleSelectSet[] = [];
+  for (const item of items) {
+    const itemId = String(item.itemId ?? item.id ?? "");
+    const interactionType = String(item.interactionType ?? item.itemType ?? item.questionType ?? "").toUpperCase();
+    if (interactionType === "MCQ" && kinds.has("MCQ")) {
+      const rawChoices = item.answerChoicesJson ?? item.structuredChoicesJson ?? item.choices ?? [];
+      const choices = rawChoices.map((choice: any) => typeof choice === "string" ? choice : String(choice?.text ?? ""));
+      const correctIndex = typeof item.correctResponseJson?.correctIndex === "number"
+        ? item.correctResponseJson.correctIndex
+        : typeof item.correctIndex === "number"
+          ? item.correctIndex
+          : null;
+      if (choices.length && correctIndex !== null && correctIndex >= 0 && correctIndex < choices.length) {
+        sets.push({
+          itemId,
+          sourceInteractionType: "MCQ",
+          choices: choices.map((text: string, index: number) => ({ text, correct: index === correctIndex })),
+        });
+      }
+      continue;
+    }
+    if (interactionType === "EBSR" && kinds.has("EBSR_PART_A")) {
+      const rawChoices = item.responseSpecJson?.partA?.choices ?? item.partA?.choices ?? [];
+      const choices = rawChoices.map((choice: any) => typeof choice === "string" ? choice : String(choice?.text ?? ""));
+      const correctIndex = typeof item.correctResponseJson?.partA?.correctIndex === "number"
+        ? item.correctResponseJson.partA.correctIndex
+        : typeof item.partA?.correctIndex === "number"
+          ? item.partA.correctIndex
+          : null;
+      if (choices.length && correctIndex !== null && correctIndex >= 0 && correctIndex < choices.length) {
+        sets.push({
+          itemId: `${itemId}::partA`,
+          sourceInteractionType: "EBSR_PART_A",
+          choices: choices.map((text: string, index: number) => ({ text, correct: index === correctIndex })),
+        });
+      }
+    }
+  }
+  return sets;
+}
+
+export function evaluateCorrectLongestMidP(
+  sets: CorrectLongestSingleSelectSet[],
+  options: { scope: string; scopeMinN: number; p0?: number; alpha?: number },
+): CorrectLongestMidPRow {
+  const p0 = options.p0 ?? 0.25;
+  const alpha = options.alpha ?? 0.05;
+  const trials = sets.filter((set) => set.choices.filter((choice) => choice.correct).length === 1 && set.choices.length > 1);
+  const n = trials.length;
+  const k = trials.filter((set) => {
+    const correct = set.choices.find((choice) => choice.correct)!;
+    const correctLen = correct.text.trim().length;
+    const maxDistractorLen = Math.max(...set.choices.filter((choice) => !choice.correct).map((choice) => choice.text.trim().length));
+    return correctLen > maxDistractorLen;
+  }).length;
+  const exactTail = binomialUpperTail(n, k, p0);
+  const pointMass = binomialPmf(n, k, p0);
+  const midP = Math.max(0, exactTail - 0.5 * pointMass);
+  return {
+    scope: options.scope,
+    n,
+    k,
+    strictPct: n ? k / n : 0,
+    exactTail,
+    midP,
+    alpha,
+    scopeMinN: options.scopeMinN,
+    block: n >= options.scopeMinN && midP < alpha,
+  };
+}
+
 export function singleAnswerChoiceGroups(items: any[], options: { includeEbsrPartA?: boolean } = {}): SingleAnswerChoiceGroup[] {
   const includeEbsrPartA = options.includeEbsrPartA ?? true;
   const groups: SingleAnswerChoiceGroup[] = [];
@@ -1184,6 +1278,29 @@ function passageConcreteAndGenericTerms(text: string) {
 
 function flatSentences(text: string) {
   return splitPassageSentences(text).flat();
+}
+
+function binomialUpperTail(n: number, k: number, p: number) {
+  if (n <= 0) return 1;
+  if (k <= 0) return 1;
+  if (k > n) return 0;
+  let sum = 0;
+  for (let x = k; x <= n; x += 1) sum += binomialPmf(n, x, p);
+  return Math.min(1, Math.max(0, sum));
+}
+
+function binomialPmf(n: number, k: number, p: number) {
+  if (k < 0 || k > n) return 0;
+  if (p <= 0) return k === 0 ? 1 : 0;
+  if (p >= 1) return k === n ? 1 : 0;
+  return Math.exp(logChoose(n, k) + k * Math.log(p) + (n - k) * Math.log1p(-p));
+}
+
+function logChoose(n: number, k: number) {
+  const kk = Math.min(k, n - k);
+  let total = 0;
+  for (let i = 1; i <= kk; i += 1) total += Math.log(n - kk + i) - Math.log(i);
+  return total;
 }
 
 const passageGenericProcessWords = new Set([
