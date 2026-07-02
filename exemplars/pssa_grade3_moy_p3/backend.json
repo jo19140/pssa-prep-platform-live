@@ -437,7 +437,7 @@
           ]
         },
         {
-          "text": "Mail carriers use special tools and work in every kind of weather.",
+          "text": "Mail carriers use special tools and work outdoors in cold, hot, and rainy weather.",
           "distractorRole": "wrong_section",
           "misconceptionTag": "wrong_section",
           "rationale": "This idea comes from Text 2, not the main idea of Text 1.",
@@ -463,7 +463,7 @@
           ]
         },
         {
-          "text": "Machines have replaced all the workers who help move letters.",
+          "text": "Machines have quietly replaced the human workers who used to help move the letters.",
           "distractorRole": "opposite_claim",
           "misconceptionTag": "opposite_claim",
           "rationale": "This reverses the text's point because workers and machines both help the letter move.",
@@ -493,7 +493,7 @@
           ]
         },
         {
-          "text": "Mail carriers use special tools and work in every kind of weather.",
+          "text": "Mail carriers use special tools and work outdoors in cold, hot, and rainy weather.",
           "distractorRole": "wrong_section",
           "misconceptionTag": "wrong_section",
           "rationale": "This idea comes from Text 2, not the main idea of Text 1.",
@@ -519,7 +519,7 @@
           ]
         },
         {
-          "text": "Machines have replaced all the workers who help move letters.",
+          "text": "Machines have quietly replaced the human workers who used to help move the letters.",
           "distractorRole": "opposite_claim",
           "misconceptionTag": "opposite_claim",
           "rationale": "This reverses the text's point because workers and machines both help the letter move.",
@@ -1212,7 +1212,7 @@
       "stem": "How are the focuses of Text 1 and Text 2 different?",
       "answerChoicesJson": [
         {
-          "text": "Text 1 focuses on a carrier's daily tools, while Text 2 focuses on the whole mail system.",
+          "text": "Text 1 focuses on a carrier's daily tools and satchel, while Text 2 follows a letter through the mail system.",
           "distractorRole": "opposite_claim",
           "misconceptionTag": "opposite_claim",
           "rationale": "This reverses the focus of the two texts.",
@@ -1268,7 +1268,7 @@
       ],
       "structuredChoicesJson": [
         {
-          "text": "Text 1 focuses on a carrier's daily tools, while Text 2 focuses on the whole mail system.",
+          "text": "Text 1 focuses on a carrier's daily tools and satchel, while Text 2 follows a letter through the mail system.",
           "distractorRole": "opposite_claim",
           "misconceptionTag": "opposite_claim",
           "rationale": "This reverses the focus of the two texts.",
@@ -1360,14 +1360,14 @@
           "prompt": "Which idea is shared by both texts?",
           "choices": [
             {
-              "text": "Sorting machines can move many letters quickly.",
+              "text": "Sorting machines at the center can move many letters very quickly.",
               "distractorRole": "wrong_section"
             },
             {
               "text": "Careful organization helps mail reach the correct home."
             },
             {
-              "text": "The mail system works without planning.",
+              "text": "The mail system works without a careful plan or organized order.",
               "distractorRole": "opposite_claim"
             },
             {
@@ -1464,7 +1464,7 @@
         },
         "choices": [
           {
-            "text": "Sorting machines can move many letters quickly.",
+            "text": "Sorting machines at the center can move many letters very quickly.",
             "distractorRole": "wrong_section",
             "misconceptionTag": "wrong_section",
             "rationale": "This is a Text 1 detail only, not an idea shared by both texts."
@@ -1474,7 +1474,7 @@
             "rationale": "Correct. Text 1 and Text 2 both show organization helping mail reach the correct home."
           },
           {
-            "text": "The mail system works without planning.",
+            "text": "The mail system works without a careful plan or organized order.",
             "distractorRole": "opposite_claim",
             "misconceptionTag": "opposite_claim",
             "rationale": "This reverses both texts, which emphasize planning and organization."
@@ -1597,7 +1597,7 @@
       "stem": "In Text 1, what does the comparison \"The stamp is like a ticket that pays for the trip\" mean?",
       "answerChoicesJson": [
         {
-          "text": "A stamp is an actual paper ticket that a person tears.",
+          "text": "A stamp is a real paper ticket that a person tears off and keeps.",
           "distractorRole": "plausible_misreading",
           "misconceptionTag": "plausible_misreading",
           "rationale": "This reads the comparison literally instead of as a way to explain the stamp's job.",
@@ -1611,7 +1611,7 @@
           ]
         },
         {
-          "text": "A stamp shows the address where the letter should go.",
+          "text": "A stamp shows the address for the letter.",
           "distractorRole": "wrong_section",
           "misconceptionTag": "wrong_section",
           "rationale": "This uses the address section of the passage; the stamp detail explains payment for delivery.",
@@ -1625,7 +1625,7 @@
           ]
         },
         {
-          "text": "A stamp makes the letter travel faster through machines.",
+          "text": "A stamp makes the letter travel faster.",
           "distractorRole": "unsupported_inference",
           "misconceptionTag": "unsupported_inference",
           "rationale": "The text does not say a stamp controls speed or machine sorting.",
@@ -1653,7 +1653,7 @@
       ],
       "structuredChoicesJson": [
         {
-          "text": "A stamp is an actual paper ticket that a person tears.",
+          "text": "A stamp is a real paper ticket that a person tears off and keeps.",
           "distractorRole": "plausible_misreading",
           "misconceptionTag": "plausible_misreading",
           "rationale": "This reads the comparison literally instead of as a way to explain the stamp's job.",
@@ -1667,7 +1667,7 @@
           ]
         },
         {
-          "text": "A stamp shows the address where the letter should go.",
+          "text": "A stamp shows the address for the letter.",
           "distractorRole": "wrong_section",
           "misconceptionTag": "wrong_section",
           "rationale": "This uses the address section of the passage; the stamp detail explains payment for delivery.",
@@ -1681,7 +1681,7 @@
           ]
         },
         {
-          "text": "A stamp makes the letter travel faster through machines.",
+          "text": "A stamp makes the letter travel faster.",
           "distractorRole": "unsupported_inference",
           "misconceptionTag": "unsupported_inference",
           "rationale": "The text does not say a stamp controls speed or machine sorting.",
@@ -1832,7 +1832,7 @@
           ]
         },
         {
-          "text": "The author mostly admires how sorting machines read ZIP codes.",
+          "text": "The author mostly admires how the sorting machines quickly read the ZIP codes.",
           "distractorRole": "wrong_section",
           "misconceptionTag": "wrong_section",
           "rationale": "That viewpoint belongs to Text 1's system focus, not Text 2's carrier focus.",
@@ -1888,7 +1888,7 @@
           ]
         },
         {
-          "text": "The author mostly admires how sorting machines read ZIP codes.",
+          "text": "The author mostly admires how the sorting machines quickly read the ZIP codes.",
           "distractorRole": "wrong_section",
           "misconceptionTag": "wrong_section",
           "rationale": "That viewpoint belongs to Text 1's system focus, not Text 2's carrier focus.",
@@ -1939,7 +1939,7 @@
               "distractorRole": "wrong_section"
             },
             {
-              "text": "It helps the carrier memorize every address in the neighborhood.",
+              "text": "It helps the carrier slowly memorize many house addresses across the neighborhood over time.",
               "distractorRole": "unsupported_inference"
             },
             {
@@ -2038,7 +2038,7 @@
             "rationale": "This uses a tool detail but does not explain the route-order cause and effect."
           },
           {
-            "text": "It helps the carrier memorize every address in the neighborhood.",
+            "text": "It helps the carrier slowly memorize many house addresses across the neighborhood over time.",
             "distractorRole": "unsupported_inference",
             "misconceptionTag": "unsupported_inference",
             "rationale": "The text says carriers learn the neighborhood, but it does not say route order is for memorizing every address."

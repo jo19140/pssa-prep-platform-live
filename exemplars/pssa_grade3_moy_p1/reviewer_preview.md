@@ -9,7 +9,7 @@ Type: MCQ
 Points: 1
 
 - A (KEY): So children could dig for model bones and then draw the dinosaur they found. — Correct. Paragraph 3 explains this exact connection between the two exhibits.
-- B: So visitors would hear the Story Stage actors while they painted. — This uses the Story Stage, which is a different exhibit relationship.
+- B: So young visitors could hear the Story Stage actors performing while they painted pictures. — This uses the Story Stage, which is a different exhibit relationship.
 - C: So families could find the green accessible route more quickly. — The accessible route is important to the map, but it is not the reason these two exhibits are neighbors.
 - D: So children would have to use the stairs before they could draw. — The passage does not say the workers wanted children to use the stairs before drawing.
 
@@ -30,10 +30,10 @@ EC: E03.B-C.3.1.3
 Type: MCQ
 Points: 1
 
-- A: The Story Stage is beside the Build Lab. — This is a real map relationship, but it supports a different planning choice.
-- B: The Family Rest Area is on Level 1. — This map fact does not show that the Quiet Corner is away from noise.
+- A: The Story Stage is located right beside the busy Build Lab area. — This is a real map relationship, but it supports a different planning choice.
+- B: The Family Rest Area is found on Level 1 of the museum map. — This map fact does not show that the Quiet Corner is away from noise.
 - C (KEY): The Quiet Corner is separated from the Build Lab. — Correct. The quoted sentence gives the reason, and the map relationship shows the separation.
-- D: The Quiet Corner is beside the Build Lab. — This reverses the map relationship; the map shows the Quiet Corner separated from the Build Lab.
+- D: On the map, the Quiet Corner is placed beside the Build Lab. — This reverses the map relationship; the map shows the Quiet Corner separated from the Build Lab.
 
 ## pssa_item_g3_moy_p1_mcq_bv411
 
@@ -41,9 +41,9 @@ EC: E03.B-V.4.1.1
 Type: MCQ
 Points: 1
 
-- A: to print many copies — Printing copies happens later and is not the meaning of wander.
-- B: to test a symbol carefully — Testing is part of revising the map, not the meaning of wander.
-- C: to draw an exhibit on a floor map — The passage discusses drawing maps, but wander describes what families might do without a map.
+- A: to print out many extra copies — Printing copies happens later and is not the meaning of wander.
+- B: to test a chosen symbol very carefully — Testing is part of revising the map, not the meaning of wander.
+- C: to draw a new exhibit onto the floor map — The passage discusses drawing maps, but wander describes what families might do without a map.
 - D (KEY): to move around without a clear plan — Correct. The contrast with following the green route shows that wander means moving without a clear plan.
 
 ## pssa_item_g3_moy_p1_mcq_bc212
@@ -53,9 +53,9 @@ Type: MCQ
 Points: 1
 
 - A (KEY): It shows the Family Rest Area is on Level 1. — Correct. The map label places the Family Rest Area on Level 1.
-- B: Level 2 — This reverses the map's level label.
-- C: Beside the Dinosaur Dig — This uses a different Level 2 map area.
-- D: On the accessible route endpoint — This is a plausible misread of the route endpoint; the accessible route ends at Dinosaur Dig, not the Family Rest Area.
+- B: It shows the Family Rest Area is on Level 2. — This reverses the map's level label.
+- C: It shows the area is right beside the Dinosaur Dig exhibit. — This uses a different Level 2 map area.
+- D: It shows the area sits at the end of the accessible route. — This is a plausible misread of the route endpoint; the accessible route ends at Dinosaur Dig, not the Family Rest Area.
 
 ## pssa_item_g3_moy_p1_te_bk112
 

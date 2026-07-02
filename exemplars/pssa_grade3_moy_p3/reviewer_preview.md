@@ -109,9 +109,9 @@ Type: MCQ
 Points: 1
 
 - A: ZIP codes are numbers that stand for areas of the country. — This is a true detail, but it is too narrow to be the main idea of the whole text.
-- B: Mail carriers use special tools and work in every kind of weather. — This idea comes from Text 2, not the main idea of Text 1.
+- B: Mail carriers use special tools and work outdoors in cold, hot, and rainy weather. — This idea comes from Text 2, not the main idea of Text 1.
 - C (KEY): A letter takes many organized steps and helpers to reach the right home. — Correct. Text 1 follows a letter through collecting, sorting, transporting, and delivery.
-- D: Machines have replaced all the workers who help move letters. — This reverses the text's point because workers and machines both help the letter move.
+- D: Machines have quietly replaced the human workers who used to help move the letters. — This reverses the text's point because workers and machines both help the letter move.
 
 ## pssa_item_g3_moy_p3_mcq_bk112_t2
 
@@ -152,7 +152,7 @@ EC: E03.B-C.3.1.2
 Type: MCQ
 Points: 1
 
-- A: Text 1 focuses on a carrier's daily tools, while Text 2 focuses on the whole mail system. — This reverses the focus of the two texts.
+- A: Text 1 focuses on a carrier's daily tools and satchel, while Text 2 follows a letter through the mail system. — This reverses the focus of the two texts.
 - B: Both texts are mainly about how sorting machines read ZIP codes. — This is one Text 1 detail and is too narrow for comparing both texts; Text 2 focuses on a carrier's work.
 - C (KEY): Text 1 follows a letter through the mail system, while Text 2 focuses on a carrier's tools and daily work. — Correct. Text 1 follows the system journey, and Text 2 describes the carrier's job.
 - D: Both texts are mainly about why ZIP codes are printed on envelopes. — ZIP codes are one detail from Text 1, not the focus of both texts.
@@ -164,10 +164,15 @@ Type: EBSR
 Points: 2
 
 Part A:
-- A: Sorting machines can move many letters quickly. — This is a Text 1 detail only, not an idea shared by both texts.
-- B (KEY): Careful organization helps mail reach the correct home. — Correct. Text 1 and Text 2 both show organization helping mail reach the correct home.
-- C: The mail system works without planning. — This reverses both texts, which emphasize planning and organization.
-- D: Both texts are mainly about stamps. — Stamps are in Text 1, but they are not the shared idea of both texts.
+- A: Sorting machines at the center can move many letters very quickly.
+- B (KEY): Careful organization helps mail reach the correct home.
+- C: The mail system works without a careful plan or organized order.
+- D: Both texts are mainly about stamps.
+Part B:
+- 0 (KEY): When the letters reach the local post office, carriers sort them one more time — now by street and by house number.
+- 1: The stamp is like a ticket that pays for the trip.
+- 2 (KEY): A good carrier uses special tools and follows a careful plan, rain or shine.
+- 3: On walking routes, a carrier may use a strong shoulder bag called a satchel.
 Part B key:
 {
   "partA": {
@@ -187,9 +192,9 @@ EC: E03.B-V.4.1.2
 Type: MCQ
 Points: 1
 
-- A: A stamp is an actual paper ticket that a person tears. — This reads the comparison literally instead of as a way to explain the stamp's job.
-- B: A stamp shows the address where the letter should go. — This uses the address section of the passage; the stamp detail explains payment for delivery.
-- C: A stamp makes the letter travel faster through machines. — The text does not say a stamp controls speed or machine sorting.
+- A: A stamp is a real paper ticket that a person tears off and keeps. — This reads the comparison literally instead of as a way to explain the stamp's job.
+- B: A stamp shows the address for the letter. — This uses the address section of the passage; the stamp detail explains payment for delivery.
+- C: A stamp makes the letter travel faster. — The text does not say a stamp controls speed or machine sorting.
 - D (KEY): A stamp is the payment that lets the letter be carried. — Correct. The comparison explains that the stamp pays for the letter's trip.
 
 ## pssa_item_g3_moy_p3_mcq_bc211_ao3
@@ -201,7 +206,7 @@ Points: 1
 - A: The author thinks the job is easy because carriers follow the same route every day. — This reverses the author's view that the work is not easy.
 - B (KEY): The author thinks the job is demanding but useful and important. — Correct. Text 2 describes hard conditions and pride in delivering mail.
 - C: The author thinks the job is boring and unimportant. — The passage never says the job is boring or unimportant; it shows pride in the work.
-- D: The author mostly admires how sorting machines read ZIP codes. — That viewpoint belongs to Text 1's system focus, not Text 2's carrier focus.
+- D: The author mostly admires how the sorting machines quickly read the ZIP codes. — That viewpoint belongs to Text 1's system focus, not Text 2's carrier focus.
 
 ## pssa_item_g3_moy_p3_ebsr_bc311_ao4
 
@@ -210,10 +215,15 @@ Type: EBSR
 Points: 2
 
 Part A:
-- A (KEY): It saves time because the carrier does not have to dig for each house's letters later. — Correct. The paragraph explains that route order prevents stopping and digging and saves time.
-- B: It makes the satchel lighter before the carrier starts walking. — This uses a tool detail but does not explain the route-order cause and effect.
-- C: It helps the carrier memorize every address in the neighborhood. — The text says carriers learn the neighborhood, but it does not say route order is for memorizing every address.
-- D: It causes the carrier to stop more often on the street. — This reverses the effect because route order saves time and prevents extra digging.
+- A (KEY): It saves time because the carrier does not have to dig for each house's letters later.
+- B: It makes the satchel lighter before the carrier starts walking.
+- C: It helps the carrier slowly memorize many house addresses across the neighborhood over time.
+- D: It causes the carrier to stop more often on the street.
+Part B:
+- 0: A route is the planned path a carrier follows through a neighborhood.
+- 1 (KEY): By putting the mail in order first, the carrier never has to stop and dig around for the next house's letters.
+- 2: Over time, a carrier learns the neighborhood well and remembers which homes are easy to miss.
+- 3 (KEY): Putting the mail in route order takes time, but it saves time later on the street.
 Part B key:
 {
   "partA": {

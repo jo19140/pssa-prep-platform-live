@@ -84,18 +84,18 @@ assert.deepEqual([byScope.get("BOY reading")?.k, byScope.get("BOY reading")?.n],
 assert.equal(byScope.get("BOY reading")?.block, false, "BOY reading must stay block-clean");
 assertApprox(byScope.get("BOY reading")!.midP, 0.485, 0.001, "BOY reading mid-p");
 
-assert.deepEqual([byScope.get("MOY reading")?.k, byScope.get("MOY reading")?.n], [20, 26], "MOY reading strict-longest state");
-assert.equal(byScope.get("MOY reading")?.block, true, "MOY reading remains tracked debt");
-assertApprox(byScope.get("MOY reading")!.midP, 2.2e-8, 0.2e-8, "MOY reading mid-p");
+assert.deepEqual([byScope.get("MOY reading")?.k, byScope.get("MOY reading")?.n], [5, 26], "MOY reading strict-longest state after tranche-1 remediation");
+assert.equal(byScope.get("MOY reading")?.block, false, "MOY reading must be block-clean after tranche-1 remediation");
+assertApprox(byScope.get("MOY reading")!.midP, 0.73925, 0.00001, "MOY reading mid-p after tranche-1 remediation");
 
 assert.deepEqual([byScope.get("EOY reading")?.k, byScope.get("EOY reading")?.n], [12, 30], "EOY reading strict-longest state");
 assert.equal(byScope.get("EOY reading")?.block, true, "EOY reading remains tracked debt");
 assertApprox(byScope.get("EOY reading")!.exactTail, 0.0507, 0.0001, "EOY exact upper tail");
 assertApprox(byScope.get("EOY reading")!.midP, 0.0361, 0.0001, "EOY reading mid-p");
 
-assert.deepEqual([byScope.get("EBSR Part A pooled")?.k, byScope.get("EBSR Part A pooled")?.n], [8, 11], "EBSR pooled strict-longest state");
-assert.equal(byScope.get("EBSR Part A pooled")?.block, true, "EBSR Part A remains tracked debt");
-assertApprox(byScope.get("EBSR Part A pooled")!.midP, 0.000657, 0.000001, "EBSR Part A pooled mid-p");
+assert.deepEqual([byScope.get("EBSR Part A pooled")?.k, byScope.get("EBSR Part A pooled")?.n], [5, 11], "EBSR pooled strict-longest state after MOY Part A remediation");
+assert.equal(byScope.get("EBSR Part A pooled")?.block, false, "EBSR Part A pooled scope must be block-clean after MOY Part A remediation");
+assertApprox(byScope.get("EBSR Part A pooled")!.midP, 0.074477, 0.000001, "EBSR Part A pooled mid-p after MOY Part A remediation");
 
 console.log("scope | n | strict-longest count | strict-longest rate | exact upper-tail p | upper mid-p | alpha | scopeMinN | block | tracked-debt");
 for (const row of rows) console.log(reportLine(row, row.block));

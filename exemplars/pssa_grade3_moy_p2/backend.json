@@ -104,7 +104,7 @@
           ]
         },
         {
-          "text": "Sam poked the dough once, so it could not become bread.",
+          "text": "Sam poked the dough once and said it was not doing anything, so it could not become bread.",
           "distractorRole": "wrong_emphasis",
           "rationale": "Sam's poking is a true nearby detail, but the passage emphasizes that Nadia rushed the dough into the oven too early.",
           "evidence": "Sam poked the dough with one finger."
@@ -135,7 +135,7 @@
           ]
         },
         {
-          "text": "Sam poked the dough once, so it could not become bread.",
+          "text": "Sam poked the dough once and said it was not doing anything, so it could not become bread.",
           "distractorRole": "wrong_emphasis",
           "rationale": "Sam's poking is a true nearby detail, but the passage emphasizes that Nadia rushed the dough into the oven too early.",
           "evidence": "Sam poked the dough with one finger."
@@ -367,13 +367,13 @@
           ]
         },
         {
-          "text": "Nadia tells the story using the words I and me.",
+          "text": "Nadia herself tells the story using first-person words such as I and me.",
           "distractorRole": "opposite_claim",
           "rationale": "This is the opposite of the passage's narration; Nadia does not narrate in first person.",
           "evidence": "Nadia wanted to bake the best bread on the whole block."
         },
         {
-          "text": "Sam tells only what happens to the dough.",
+          "text": "Sam tells the story about the dough as it rises and bakes in the kitchen.",
           "distractorRole": "unsupported_inference",
           "rationale": "The passage does not show Sam narrating the story or limiting the story to the dough.",
           "evidence": "Sam poked the dough with one finger."
@@ -398,13 +398,13 @@
           ]
         },
         {
-          "text": "Nadia tells the story using the words I and me.",
+          "text": "Nadia herself tells the story using first-person words such as I and me.",
           "distractorRole": "opposite_claim",
           "rationale": "This is the opposite of the passage's narration; Nadia does not narrate in first person.",
           "evidence": "Nadia wanted to bake the best bread on the whole block."
         },
         {
-          "text": "Sam tells only what happens to the dough.",
+          "text": "Sam tells the story about the dough as it rises and bakes in the kitchen.",
           "distractorRole": "unsupported_inference",
           "rationale": "The passage does not show Sam narrating the story or limiting the story to the dough.",
           "evidence": "Sam poked the dough with one finger."
@@ -498,13 +498,13 @@
           "evidence": "The bread was flat and hard, like a stone."
         },
         {
-          "text": "funny and surprising",
+          "text": "funny, silly, and surprising",
           "distractorRole": "plausible_misreading",
           "rationale": "The rock loaf may seem funny to Sam, but dull describes the sound the bread makes when tapped.",
           "evidence": "It's a rock."
         },
         {
-          "text": "low, heavy, and not clear",
+          "text": "low, muffled, and heavy",
           "rationale": "Correct. The words heavy thud show that dull describes a low, unclear sound.",
           "evidence": "She tapped the top, and it made a dull, heavy thud.",
           "evidenceLinks": [
@@ -515,7 +515,7 @@
           ]
         },
         {
-          "text": "soft and sweet-smelling",
+          "text": "soft, gentle, and sweet-smelling",
           "distractorRole": "wrong_section",
           "rationale": "This uses a later detail about the successful loaf, not the meaning of dull.",
           "evidence": "Soon the whole house smelled like a warm hug."
@@ -529,13 +529,13 @@
           "evidence": "The bread was flat and hard, like a stone."
         },
         {
-          "text": "funny and surprising",
+          "text": "funny, silly, and surprising",
           "distractorRole": "plausible_misreading",
           "rationale": "The rock loaf may seem funny to Sam, but dull describes the sound the bread makes when tapped.",
           "evidence": "It's a rock."
         },
         {
-          "text": "low, heavy, and not clear",
+          "text": "low, muffled, and heavy",
           "rationale": "Correct. The words heavy thud show that dull describes a low, unclear sound.",
           "evidence": "She tapped the top, and it made a dull, heavy thud.",
           "evidenceLinks": [
@@ -546,7 +546,7 @@
           ]
         },
         {
-          "text": "soft and sweet-smelling",
+          "text": "soft, gentle, and sweet-smelling",
           "distractorRole": "wrong_section",
           "rationale": "This uses a later detail about the successful loaf, not the meaning of dull.",
           "evidence": "Soon the whole house smelled like a warm hug."
@@ -628,7 +628,7 @@
       "stem": "What does the phrase \"the whole house smelled like a warm hug\" suggest?",
       "answerChoicesJson": [
         {
-          "text": "The oven made the kitchen too hot.",
+          "text": "The oven made the kitchen too warm.",
           "distractorRole": "wrong_emphasis",
           "rationale": "This focuses on warmth literally, but the phrase describes how pleasant and comforting the smell is.",
           "evidence": "Soon the whole house smelled like a warm hug."
@@ -651,7 +651,7 @@
           "evidence": "Soon the whole house smelled like a warm hug."
         },
         {
-          "text": "The smell made everyone dislike the bread.",
+          "text": "The smell made the bread taste bad.",
           "distractorRole": "opposite_claim",
           "rationale": "This reverses the positive meaning of the phrase and the later praise for the bread.",
           "evidence": "This is wonderful."
@@ -659,7 +659,7 @@
       ],
       "structuredChoicesJson": [
         {
-          "text": "The oven made the kitchen too hot.",
+          "text": "The oven made the kitchen too warm.",
           "distractorRole": "wrong_emphasis",
           "rationale": "This focuses on warmth literally, but the phrase describes how pleasant and comforting the smell is.",
           "evidence": "Soon the whole house smelled like a warm hug."
@@ -682,7 +682,7 @@
           "evidence": "Soon the whole house smelled like a warm hug."
         },
         {
-          "text": "The smell made everyone dislike the bread.",
+          "text": "The smell made the bread taste bad.",
           "distractorRole": "opposite_claim",
           "rationale": "This reverses the positive meaning of the phrase and the later praise for the bread.",
           "evidence": "This is wonderful."

@@ -226,7 +226,7 @@
           ]
         },
         {
-          "text": "So visitors would hear the Story Stage actors while they painted.",
+          "text": "So young visitors could hear the Story Stage actors performing while they painted pictures.",
           "distractorRole": "wrong_section",
           "rationale": "This uses the Story Stage, which is a different exhibit relationship.",
           "evidence": "The Story Stage sits beside the Build Lab."
@@ -257,7 +257,7 @@
           ]
         },
         {
-          "text": "So visitors would hear the Story Stage actors while they painted.",
+          "text": "So young visitors could hear the Story Stage actors performing while they painted pictures.",
           "distractorRole": "wrong_section",
           "rationale": "This uses the Story Stage, which is a different exhibit relationship.",
           "evidence": "The Story Stage sits beside the Build Lab."
@@ -484,13 +484,13 @@
       "stem": "Read this sentence from paragraph 2: 'The Quiet Corner, where families read and rest, was placed far from the noise.' Which detail from the map best supports this decision?",
       "answerChoicesJson": [
         {
-          "text": "The Story Stage is beside the Build Lab.",
+          "text": "The Story Stage is located right beside the busy Build Lab area.",
           "distractorRole": "wrong_section",
           "rationale": "This is a real map relationship, but it supports a different planning choice.",
           "evidence": "story_stage_build_lab"
         },
         {
-          "text": "The Family Rest Area is on Level 1.",
+          "text": "The Family Rest Area is found on Level 1 of the museum map.",
           "distractorRole": "wrong_emphasis",
           "rationale": "This map fact does not show that the Quiet Corner is away from noise.",
           "evidence": "family_rest_area"
@@ -508,7 +508,7 @@
           ]
         },
         {
-          "text": "The Quiet Corner is beside the Build Lab.",
+          "text": "On the map, the Quiet Corner is placed beside the Build Lab.",
           "distractorRole": "opposite_claim",
           "rationale": "This reverses the map relationship; the map shows the Quiet Corner separated from the Build Lab.",
           "evidence": "quiet_corner_build_lab"
@@ -516,13 +516,13 @@
       ],
       "structuredChoicesJson": [
         {
-          "text": "The Story Stage is beside the Build Lab.",
+          "text": "The Story Stage is located right beside the busy Build Lab area.",
           "distractorRole": "wrong_section",
           "rationale": "This is a real map relationship, but it supports a different planning choice.",
           "evidence": "story_stage_build_lab"
         },
         {
-          "text": "The Family Rest Area is on Level 1.",
+          "text": "The Family Rest Area is found on Level 1 of the museum map.",
           "distractorRole": "wrong_emphasis",
           "rationale": "This map fact does not show that the Quiet Corner is away from noise.",
           "evidence": "family_rest_area"
@@ -540,7 +540,7 @@
           ]
         },
         {
-          "text": "The Quiet Corner is beside the Build Lab.",
+          "text": "On the map, the Quiet Corner is placed beside the Build Lab.",
           "distractorRole": "opposite_claim",
           "rationale": "This reverses the map relationship; the map shows the Quiet Corner separated from the Build Lab.",
           "evidence": "quiet_corner_build_lab"
@@ -620,19 +620,19 @@
       "stem": "What does the word wander mean as it is used in paragraph 6?",
       "answerChoicesJson": [
         {
-          "text": "to print many copies",
+          "text": "to print out many extra copies",
           "distractorRole": "wrong_section",
           "rationale": "Printing copies happens later and is not the meaning of wander.",
           "evidence": "printing hundreds of copies"
         },
         {
-          "text": "to test a symbol carefully",
+          "text": "to test a chosen symbol very carefully",
           "distractorRole": "wrong_emphasis",
           "rationale": "Testing is part of revising the map, not the meaning of wander.",
           "evidence": "After the map is finished, the team tests it."
         },
         {
-          "text": "to draw an exhibit on a floor map",
+          "text": "to draw a new exhibit onto the floor map",
           "distractorRole": "plausible_misreading",
           "rationale": "The passage discusses drawing maps, but wander describes what families might do without a map.",
           "evidence": "Without the map, they might wander and grow tired."
@@ -651,19 +651,19 @@
       ],
       "structuredChoicesJson": [
         {
-          "text": "to print many copies",
+          "text": "to print out many extra copies",
           "distractorRole": "wrong_section",
           "rationale": "Printing copies happens later and is not the meaning of wander.",
           "evidence": "printing hundreds of copies"
         },
         {
-          "text": "to test a symbol carefully",
+          "text": "to test a chosen symbol very carefully",
           "distractorRole": "wrong_emphasis",
           "rationale": "Testing is part of revising the map, not the meaning of wander.",
           "evidence": "After the map is finished, the team tests it."
         },
         {
-          "text": "to draw an exhibit on a floor map",
+          "text": "to draw a new exhibit onto the floor map",
           "distractorRole": "plausible_misreading",
           "rationale": "The passage discusses drawing maps, but wander describes what families might do without a map.",
           "evidence": "Without the map, they might wander and grow tired."
@@ -766,19 +766,19 @@
           ]
         },
         {
-          "text": "Level 2",
+          "text": "It shows the Family Rest Area is on Level 2.",
           "distractorRole": "opposite_claim",
           "rationale": "This reverses the map's level label.",
           "evidence": "family_rest_area"
         },
         {
-          "text": "Beside the Dinosaur Dig",
+          "text": "It shows the area is right beside the Dinosaur Dig exhibit.",
           "distractorRole": "wrong_section",
           "rationale": "This uses a different Level 2 map area.",
           "evidence": "dinosaur_dig"
         },
         {
-          "text": "On the accessible route endpoint",
+          "text": "It shows the area sits at the end of the accessible route.",
           "distractorRole": "plausible_misreading",
           "rationale": "This is a plausible misread of the route endpoint; the accessible route ends at Dinosaur Dig, not the Family Rest Area.",
           "evidence": "accessible_route_dinosaur_dig"
@@ -798,19 +798,19 @@
           ]
         },
         {
-          "text": "Level 2",
+          "text": "It shows the Family Rest Area is on Level 2.",
           "distractorRole": "opposite_claim",
           "rationale": "This reverses the map's level label.",
           "evidence": "family_rest_area"
         },
         {
-          "text": "Beside the Dinosaur Dig",
+          "text": "It shows the area is right beside the Dinosaur Dig exhibit.",
           "distractorRole": "wrong_section",
           "rationale": "This uses a different Level 2 map area.",
           "evidence": "dinosaur_dig"
         },
         {
-          "text": "On the accessible route endpoint",
+          "text": "It shows the area sits at the end of the accessible route.",
           "distractorRole": "plausible_misreading",
           "rationale": "This is a plausible misread of the route endpoint; the accessible route ends at Dinosaur Dig, not the Family Rest Area.",
           "evidence": "accessible_route_dinosaur_dig"

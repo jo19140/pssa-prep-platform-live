@@ -103,7 +103,7 @@
       "stem": "What happens to the castle backdrop in Scene 1?",
       "answerChoicesJson": [
         {
-          "text": "Marcus knocks the castle over while climbing down the ladder.",
+          "text": "Marcus bumps the painted castle while climbing down from the ladder after finishing his work.",
           "distractorRole": "unsupported_inference",
           "misconceptionTag": "unsupported_inference",
           "rationale": "The passage does not say Marcus knocks it over; he has already climbed down before the gust.",
@@ -130,7 +130,7 @@
           ]
         },
         {
-          "text": "Someone steps through the painted gate by mistake.",
+          "text": "Someone in the cast steps right through the painted castle gate by mistake.",
           "distractorRole": "plausible_misreading",
           "misconceptionTag": "plausible_misreading",
           "rationale": "This treats Priya's compliment about the gate as a real action, but nobody walks through it.",
@@ -157,7 +157,7 @@
       ],
       "structuredChoicesJson": [
         {
-          "text": "Marcus knocks the castle over while climbing down the ladder.",
+          "text": "Marcus bumps the painted castle while climbing down from the ladder after finishing his work.",
           "distractorRole": "unsupported_inference",
           "misconceptionTag": "unsupported_inference",
           "rationale": "The passage does not say Marcus knocks it over; he has already climbed down before the gust.",
@@ -184,7 +184,7 @@
           ]
         },
         {
-          "text": "Someone steps through the painted gate by mistake.",
+          "text": "Someone in the cast steps right through the painted castle gate by mistake.",
           "distractorRole": "plausible_misreading",
           "misconceptionTag": "plausible_misreading",
           "rationale": "This treats Priya's compliment about the gate as a real action, but nobody walks through it.",
@@ -321,7 +321,7 @@
           ]
         },
         {
-          "text": "It is best to follow the original plan no matter what happens.",
+          "text": "It is best to follow the very first plan from start to finish, even when problems come up.",
           "distractorRole": "wrong_emphasis",
           "misconceptionTag": "wrong_emphasis",
           "rationale": "This focuses on Marcus's first reaction, but the play shows success after the students adapt.",
@@ -376,7 +376,7 @@
           ]
         },
         {
-          "text": "It is best to follow the original plan no matter what happens.",
+          "text": "It is best to follow the very first plan from start to finish, even when problems come up.",
           "distractorRole": "wrong_emphasis",
           "misconceptionTag": "wrong_emphasis",
           "rationale": "This focuses on Marcus's first reaction, but the play shows success after the students adapt.",
@@ -646,7 +646,7 @@
       "stem": "What does the word \"frantically\" mean in the stage direction \"pacing frantically back and forth\"?",
       "answerChoicesJson": [
         {
-          "text": "slowly and calmly",
+          "text": "in a slow, calm, and gentle way with no rush",
           "distractorRole": "opposite_claim",
           "misconceptionTag": "opposite_claim",
           "rationale": "This is the opposite of Jada's worried pacing before the show.",
@@ -660,7 +660,7 @@
           ]
         },
         {
-          "text": "quietly and secretly",
+          "text": "in a quiet, secret way",
           "distractorRole": "wrong_emphasis",
           "misconceptionTag": "wrong_emphasis",
           "rationale": "This focuses on quietness, but Jada is openly worried and pacing.",
@@ -685,7 +685,7 @@
           ]
         },
         {
-          "text": "angrily and meanly",
+          "text": "in an angry, mean way",
           "distractorRole": "plausible_misreading",
           "misconceptionTag": "plausible_misreading",
           "rationale": "This is a plausible misread of Jada's upset feeling, but the context shows worry more than anger toward someone.",
@@ -701,7 +701,7 @@
       ],
       "structuredChoicesJson": [
         {
-          "text": "slowly and calmly",
+          "text": "in a slow, calm, and gentle way with no rush",
           "distractorRole": "opposite_claim",
           "misconceptionTag": "opposite_claim",
           "rationale": "This is the opposite of Jada's worried pacing before the show.",
@@ -715,7 +715,7 @@
           ]
         },
         {
-          "text": "quietly and secretly",
+          "text": "in a quiet, secret way",
           "distractorRole": "wrong_emphasis",
           "misconceptionTag": "wrong_emphasis",
           "rationale": "This focuses on quietness, but Jada is openly worried and pacing.",
@@ -740,7 +740,7 @@
           ]
         },
         {
-          "text": "angrily and meanly",
+          "text": "in an angry, mean way",
           "distractorRole": "plausible_misreading",
           "misconceptionTag": "plausible_misreading",
           "rationale": "This is a plausible misread of Jada's upset feeling, but the context shows worry more than anger toward someone.",
@@ -843,7 +843,7 @@
           ]
         },
         {
-          "text": "She is very hungry before rehearsal.",
+          "text": "She feels very hungry before the rehearsal starts.",
           "distractorRole": "wrong_section",
           "misconceptionTag": "wrong_section",
           "rationale": "This uses the stomach word from the phrase, but the section is about worry before the show.",
@@ -898,7 +898,7 @@
           ]
         },
         {
-          "text": "She is very hungry before rehearsal.",
+          "text": "She feels very hungry before the rehearsal starts.",
           "distractorRole": "wrong_section",
           "misconceptionTag": "wrong_section",
           "rationale": "This uses the stomach word from the phrase, but the section is about worry before the show.",
@@ -997,7 +997,7 @@
               "text": "Priya proposes a simpler design, and Marcus agrees to listen and try it."
             },
             {
-              "text": "The students cancel the show before the audience arrives.",
+              "text": "The students decide to call off the play before the audience arrives that night.",
               "distractorRole": "opposite_claim"
             },
             {
@@ -1074,7 +1074,7 @@
             "rationale": "Correct. Priya suggests a new design, and Marcus changes from resisting to listening."
           },
           {
-            "text": "The students cancel the show before the audience arrives.",
+            "text": "The students decide to call off the play before the audience arrives that night.",
             "distractorRole": "opposite_claim",
             "misconceptionTag": "opposite_claim",
             "rationale": "This reverses the play because they keep working instead of canceling."
@@ -1209,7 +1209,7 @@
           ]
         },
         {
-          "text": "They should return to the first row of seats.",
+          "text": "They should walk back to the very first row of theater seats.",
           "distractorRole": "wrong_section",
           "misconceptionTag": "wrong_section",
           "rationale": "This uses a different detail about the audience location, not the meaning of the idiom.",
@@ -1265,7 +1265,7 @@
           ]
         },
         {
-          "text": "They should return to the first row of seats.",
+          "text": "They should walk back to the very first row of theater seats.",
           "distractorRole": "wrong_section",
           "misconceptionTag": "wrong_section",
           "rationale": "This uses a different detail about the audience location, not the meaning of the idiom.",
